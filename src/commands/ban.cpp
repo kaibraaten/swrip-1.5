@@ -23,7 +23,7 @@ void do_ban( Character *ch, char *argument )
       SendToPager( "---- ---- ------------------------ ---------------\r\n", ch );
       bnum = 1;
       
-      for(const Ban *ban : BanRepos->Entities())
+      for(auto ban : BanRepos->Entities())
         {
           PagerPrintf(ch, "[%2d] (%2d) %-24s %s\r\n", bnum,
                       ban->Level, ban->BanTime.c_str(), ban->Site.c_str());
@@ -37,11 +37,11 @@ void do_ban( Character *ch, char *argument )
      number in the site ip.                               -- Altrag */
   if ( IsNumber(arg) )
     {
-      Ban *pban = nullptr;
+      std::shared_ptr<Ban> pban;
       bool found = false;
       bnum = 1;
 
-      for(Ban *b : BanRepos->Entities())
+      for(auto b : BanRepos->Entities())
         {
           if ( bnum == atoi(arg) )
             {
@@ -107,7 +107,7 @@ void do_ban( Character *ch, char *argument )
           return;
         }
 
-      SaveBans();
+      BanRepos->Save();
       return;
     }
 
@@ -125,12 +125,12 @@ void do_ban( Character *ch, char *argument )
       return;
     }
 
-  Ban *pban = new Ban();
-  AddBan(pban);
+  std::shared_ptr<Ban> pban = std::make_shared<Ban>();
+  BanRepos->Add(pban);
   pban->Site = arg;
   pban->Level = LEVEL_AVATAR;
   sprintf(buf, "%24.24s", ctime(&current_time));
   pban->BanTime = buf;
-  SaveBans();
+  BanRepos->Save();
   SendToCharacter( "Ban created. Mortals banned from site.\r\n", ch );
 }

@@ -13,16 +13,15 @@ void do_allow( Character *ch, char *argument )
       return;
     }
 
-  Ban *ban = BanRepos->Find([arg](const auto &b)
+  auto ban = BanRepos->Find([arg](const auto &b)
                             {
                               return StrCmp(arg, b->Site) == 0;
                             });
 
   if (ban != nullptr)
     {
-      RemoveBan(ban);
-      delete ban;
-      SaveBans();
+      BanRepos->Remove(ban);
+      BanRepos->Save();
       SendToCharacter( "Site no longer banned.\r\n", ch );
       return;
     }

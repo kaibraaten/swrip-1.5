@@ -743,12 +743,12 @@ static void NewDescriptor( socket_t new_desc )
 
   dnew->Remote.Hostname = CopyString( (char *)( from ? from->h_name : buf) );
 
-  const Ban *pban = BanRepos->Find([dnew](const auto &b)
-                                   {
-                                     return (StringPrefix(b->Site, dnew->Remote.Hostname) == 0
-                                             || StringSuffix(b->Site , dnew->Remote.Hostname) == 0)
-                                     &&  b->Level >= LEVEL_IMPLEMENTOR;
-                                   });
+  auto pban = BanRepos->Find([dnew](const auto &b)
+                             {
+                               return (StringPrefix(b->Site, dnew->Remote.Hostname) == 0
+                                       || StringSuffix(b->Site , dnew->Remote.Hostname) == 0)
+                               &&  b->Level >= LEVEL_IMPLEMENTOR;
+                             });
 
   if(pban != nullptr)
     {

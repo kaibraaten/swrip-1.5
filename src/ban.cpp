@@ -5,7 +5,7 @@
 
 BanRepository *BanRepos = NULL;
 
-static void PushBan(const Ban *ban, lua_State *L)
+static void PushBan(std::shared_ptr<Ban> ban, lua_State *L)
 {
   static int idx = 0;
 
@@ -22,7 +22,7 @@ static void PushBan(const Ban *ban, lua_State *L)
 static void PushBans( lua_State *L, const void *ud )
 {
   lua_newtable( L );
-  const std::list<Ban*> bans = BanRepos->Entities();
+  const std::list<std::shared_ptr<Ban>>& bans = BanRepos->Entities();
 
   for_each(bans.begin(), bans.end(),
            [&L](const auto ban) { PushBan(ban, L); });
@@ -41,7 +41,7 @@ static int L_BanEntry( lua_State *L )
   lua_getfield( L, idx, "Level" );
   
   int elementsToPop = lua_gettop( L ) - topAtStart;
-  Ban *ban = new Ban();
+  std::shared_ptr<Ban> ban = std::make_shared<Ban>();
   
   if( !lua_isnil( L, ++idx ) )
     {
@@ -59,18 +59,8 @@ static int L_BanEntry( lua_State *L )
     }
   
   lua_pop( L, elementsToPop );
-  AddBan(ban);
+  BanRepos->Add(ban);
   return 0;
-}
-
-void LoadBans(void)
-{
-  BanRepos->Load();
-}
-
-void SaveBans(void)
-{
-  BanRepos->Save();
 }
 
 void BanRepository::Load()
@@ -92,14 +82,4 @@ BanRepository *NewBanRepository(void)
 {
   BanRepository *repo = new BanRepository();
   return repo;
-}
-
-void AddBan(Ban *ban)
-{
-  BanRepos->Add(ban);
-}
-
-void RemoveBan(Ban *ban)
-{
-  BanRepos->Remove(ban);
 }

@@ -94,7 +94,7 @@ void do_test( Character *ch, char *argument )
    if( !StrCmp( argument, "savebans" ) )
      {
        Echo( ch, "Saving bans...\r\n" );
-       SaveBans();
+       BanRepos->Save();
        return;
      }
 
