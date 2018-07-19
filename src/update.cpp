@@ -1152,10 +1152,7 @@ static void MobileUpdate( void )
 
 static void TaxUpdate( void )
 {
-  const Planet *planet = NULL;
-  const Descriptor *d = NULL;
-
-  for ( planet = FirstPlanet; planet; planet = planet->Next )
+  for(const Planet *planet : Planets->Entities())
     {
       Clan *clan = planet->GovernedBy;
 
@@ -1180,11 +1177,11 @@ static void TaxUpdate( void )
               Clans->Save(clan);
             }
 
-          SavePlanet( planet );
+          Planets->Save(planet);
         }
     }
 
-  for ( d = FirstDescriptor; d; d = d->Next )
+  for ( const Descriptor *d = FirstDescriptor; d; d = d->Next )
     {
       if ( d && d->Character && d->Character->PCData && d->ConnectionState == CON_PLAYING ) /* Interest */
 	{

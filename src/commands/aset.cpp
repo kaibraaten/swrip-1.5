@@ -65,7 +65,7 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "planet" ) )
     {
-      Planet *planet = GetPlanet(argument);
+      Planet *planet = Planets->Find(std::string(argument));
 
       if (planet)
         {
@@ -77,7 +77,7 @@ void do_aset( Character *ch, char *argument )
 
           tarea->Planet = planet;
 	  LINK(tarea, planet->FirstArea, planet->LastArea, NextOnPlanet, PreviousOnPlanet);
-          SavePlanet(planet);
+          Planets->Save(planet);
         }
       return;
     }

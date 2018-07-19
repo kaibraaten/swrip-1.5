@@ -11,14 +11,13 @@ void do_clans( Character *ch, char *argument )
       int pCount = 0;
       int support = 0;
       long revenue = 0;
-      const Planet *planet = nullptr;
 
       if ( clan->Type == CLAN_GUILD )
         {
           continue;
         }
 
-      for ( planet = FirstPlanet ; planet ; planet = planet->Next )
+      for(const Planet *planet : Planets->Entities())
         {
           if ( clan == planet->GovernedBy )
             {

@@ -8,9 +8,12 @@ static bool ShowEntry( const Planet *planet, const Character *ch );
 
 void do_planets( Character *ch, char *argument )
 {
-  ForEach( Planet, FirstPlanet, Next, ShowEntry, ch );
+  for(const Planet *planet : Planets->Entities())
+    {
+      ShowEntry(planet, ch);
+    }
 
-  if ( !FirstPlanet )
+  if (Planets->Count() == 0)
     {
       SetCharacterColor( AT_BLOOD, ch);
       SendToCharacter( "There are no planets currently formed.\r\n", ch );

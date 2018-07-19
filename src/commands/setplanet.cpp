@@ -8,7 +8,7 @@ void do_setplanet( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Planet *planet;
+  Planet *planet = nullptr;
 
   if ( IsNpc( ch ) )
     {
@@ -28,7 +28,7 @@ void do_setplanet( Character *ch, char *argument )
       return;
     }
 
-  planet = GetPlanet( arg1 );
+  planet = Planets->Find(std::string(arg1));
 
   if ( !planet )
     {
@@ -38,7 +38,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      if( GetPlanet( argument ) )
+      if( Planets->Find(std::string(argument)) != nullptr)
 	{
 	  Echo( ch, "There's already another planet with that name.\r\n" );
 	  return;
@@ -48,7 +48,7 @@ void do_setplanet( Character *ch, char *argument )
       FreeMemory( planet->Name );
       planet->Name = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SavePlanet( planet );
+      Planets->Save(planet);
       return;
     }
 
@@ -60,7 +60,7 @@ void do_setplanet( Character *ch, char *argument )
         {
           planet->GovernedBy = clan;
           SendToCharacter( "Done.\r\n", ch );
-          SavePlanet( planet );
+          Planets->Save(planet);
         }
       else
         {
@@ -80,7 +80,7 @@ void do_setplanet( Character *ch, char *argument )
 	    {
               spaceobject->Planet = planet;
               SendToCharacter( "Done.\r\n", ch );
-              SavePlanet(planet);
+              Planets->Save(planet);
             }
           else
             {
@@ -95,7 +95,7 @@ void do_setplanet( Character *ch, char *argument )
     {
       planet->BaseValue = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SavePlanet( planet );
+      Planets->Save(planet);
       return;
     }
 
@@ -124,7 +124,7 @@ void do_setplanet( Character *ch, char *argument )
         }
 
       SendToCharacter( "Done.\r\n", ch );
-      SavePlanet( planet );
+      Planets->Save(planet);
       return;
     }
 

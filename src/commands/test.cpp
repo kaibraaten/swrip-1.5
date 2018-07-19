@@ -59,7 +59,7 @@ void do_test( Character *ch, char *argument )
    if( !StrCmp( argument, "saveplanets" ) )
     {
       Echo( ch, "Saving planets...\r\n" );
-      ForEach( Planet, FirstPlanet, Next, NewSavePlanet, 0 );
+      Planets->Save();
       return;
     }
 

@@ -16,9 +16,8 @@ static bool CheckIfProtectingPlanet(Ship *ship, void *userData);
 
 void do_capture( Character *ch , char *argument )
 {
-  Clan *clan;
-  Planet *planet;
-  Planet *cPlanet;
+  Clan *clan = nullptr;
+  Planet *planet = nullptr;
   float support = 0.0;
   int pCount = 0;
   char buf[MAX_STRING_LENGTH];
@@ -82,12 +81,14 @@ void do_capture( Character *ch , char *argument )
       return;
     }
 
-  for ( cPlanet = FirstPlanet ; cPlanet ; cPlanet = cPlanet->Next )
-    if ( clan == cPlanet->GovernedBy )
-      {
-        pCount++;
-        support += cPlanet->PopularSupport;
-      }
+  for( const Planet *cPlanet : Planets->Entities())
+    {
+      if ( clan == cPlanet->GovernedBy )
+        {
+          pCount++;
+          support += cPlanet->PopularSupport;
+        }
+    }
 
   if ( support < 0 )
     {
@@ -101,7 +102,7 @@ void do_capture( Character *ch , char *argument )
   sprintf( buf , "%s has claimed the planet %s!", clan->Name, planet->Name );
   EchoToAll( AT_RED , buf , 0 );
 
-  SavePlanet( planet );
+  Planets->Save(planet);
 }
 
 static bool CheckIfProtectingPlanet(Ship *ship, void *userData)
