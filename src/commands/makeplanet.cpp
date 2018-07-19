@@ -3,7 +3,7 @@
 
 void do_makeplanet( Character *ch, char *argument )
 {
-  Planet *planet;
+  Planet *planet = nullptr;
 
   if ( IsNullOrEmpty( argument ) )
     {
@@ -11,18 +11,13 @@ void do_makeplanet( Character *ch, char *argument )
       return;
     }
 
-  if( GetPlanet( argument ) )
+  if(Planets->Find(std::string(argument)) != nullptr)
     {
       Echo( ch, "&RThere's already another planet with that name.&d\r\n" );
       return;
     }
 
   AllocateMemory( planet, Planet, 1 );
-  LINK( planet, FirstPlanet, LastPlanet, Next, Previous );
-  planet->GovernedBy = NULL;
-  planet->Spaceobject = NULL ;
-  planet->FirstArea = NULL;
-  planet->LastArea = NULL;
+  Planets->Add(planet);
   planet->Name          = CopyString( argument );
-  planet->Flags               = 0;
 }

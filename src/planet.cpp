@@ -29,23 +29,7 @@
 #include "planet.hpp"
 #include "area.hpp"
 
-Planet * FirstPlanet = NULL;
-Planet * LastPlanet = NULL;
-
-Planet *GetPlanet( const char *name )
-{
-  Planet *planet;
-
-  for ( planet = FirstPlanet; planet; planet = planet->Next )
-    {
-      if ( !StrCmp( name, planet->Name ) )
-        {
-          return planet;
-        }
-    }
-
-  return NULL;
-}
+PlanetRepository *Planets = nullptr;
 
 static void LoadPlanetAreas( lua_State *L, Planet *planet )
 {
@@ -121,20 +105,14 @@ static int L_PlanetEntry( lua_State *L )
 
   planet->Flags = LuaLoadFlags( L, "Flags" );
   LoadPlanetAreas( L, planet );
-  
-  LINK( planet, FirstPlanet, LastPlanet, Next, Previous );
+
+  Planets->Add(planet);
   return 0;
 }
 
 static void LoadPlanet( const char *filePath, void *userData )
 {
   LuaLoadDataFile( filePath, L_PlanetEntry, "PlanetEntry" );
-}
-
-void LoadPlanets( void )
-{
-  ForEachLuaFileInDir( PLANET_DIR, LoadPlanet, NULL );
-  LogPrintf(" Done planets " );
 }
 
 long GetTaxes( const Planet *planet )
@@ -193,11 +171,6 @@ static void PushPlanet( lua_State *L, const void *userData )
   lua_setglobal( L, "planet" );
 }
 
-void SavePlanet( const Planet *planet )
-{
-  NewSavePlanet( planet, 0 );
-}
-
 const char *GetPlanetFilename( const Planet *planet )
 {
   static char fullPath[MAX_STRING_LENGTH];
@@ -205,9 +178,31 @@ const char *GetPlanetFilename( const Planet *planet )
   return fullPath;
 }
 
-bool NewSavePlanet( const Planet *planet, int dummy )
+PlanetRepository *NewPlanetRepository()
+{
+  return new PlanetRepository();
+}
+
+///////////////////////////////////////////////////////////////
+void PlanetRepository::Save() const
+{
+  for(const Planet *planet : Entities())
+    {
+      Save(planet);
+    }
+}
+
+void PlanetRepository::Save(const Planet *planet) const
 {
   LuaSaveDataFile( GetPlanetFilename( planet ), PushPlanet, "planet", planet );
+}
 
-  return true;
+void PlanetRepository::Load()
+{
+  ForEachLuaFileInDir( PLANET_DIR, LoadPlanet, NULL );
+}
+
+Planet *PlanetRepository::Find(const std::string &name) const
+{
+  return Find([name](const auto &planet){ return StrCmp(name, planet->Name) == 0; });
 }

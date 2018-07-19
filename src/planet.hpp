@@ -1,12 +1,12 @@
 #ifndef _SWRIP_PLANET_HPP_
 #define _SWRIP_PLANET_HPP_
 
+#include <string>
+#include <utility/repository.hpp>
 #include "types.hpp"
 
 struct Planet
 {
-  Planet *Next;
-  Planet *Previous;
   struct Spaceobject *Spaceobject;
   Area *FirstArea;
   Area *LastArea;
@@ -18,14 +18,22 @@ struct Planet
   float PopularSupport;
 };
 
-extern Planet *FirstPlanet;
-extern Planet *LastPlanet;
-
-Planet *GetPlanet( const char *name );
-void LoadPlanets( void );
-void SavePlanet( const Planet *planet );
-bool NewSavePlanet( const Planet *planet, int );
 long GetTaxes( const Planet *planet );
 const char *GetPlanetFilename( const Planet *planet );
+
+class PlanetRepository : public Ceris::Repository<Planet*>
+{
+public:
+  using Ceris::Repository<Planet*>::Find;
+
+  virtual void Load() override;
+  virtual void Save() const override;
+
+  virtual void Save(const Planet *planet) const;
+  Planet *Find(const std::string &name) const;
+};
+
+extern PlanetRepository *Planets;
+PlanetRepository *NewPlanetRepository();
 
 #endif

@@ -671,7 +671,7 @@ void BootDatabase( bool fCopyOver )
   Bounties->Load();
 
   LogPrintf( "Loading planets" );
-  LoadPlanets();
+  Planets->Load();
 
   LogPrintf( "Loading shuttles" );
   LoadShuttles();
@@ -2493,4 +2493,5 @@ void AllocateRepositories(void)
   Bounties = NewBountyRepository();
   Clans = NewClanRepository();
   CommandRepository = NewCommandRepository();
+  Planets = NewPlanetRepository();
 }

@@ -19,9 +19,9 @@ void do_showplanet( Character *ch, char *argument )
       return;
     }
 
-  planet = GetPlanet( argument );
+  planet = Planets->Find(std::string(argument));
 
-  if ( !planet )
+  if ( planet == nullptr )
     {
       SendToCharacter( "No such planet.\r\n", ch );
       return;
