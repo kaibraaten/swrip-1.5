@@ -66,7 +66,7 @@ void do_test( Character *ch, char *argument )
    if( !StrCmp( argument, "saveboards" ) )
     {
       Echo( ch, "Saving boards...\r\n" );
-      SaveBoards();
+      BoardRepos->Save();
       return;
     }
 

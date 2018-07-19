@@ -650,7 +650,7 @@ void BootDatabase( bool fCopyOver )
   LoadBuildList();
 
   LogPrintf( "Loading boards" );
-  LoadBoards();
+  BoardRepos->Load();
 
   LogPrintf( "Loading clans" );
   ClanRepos->Load();
@@ -2489,7 +2489,7 @@ void AllocateRepositories(void)
   HelpFileRepos = NewHelpFileRepository();
   BadNameRepos = NewBadNameRepository();
   BanRepos = NewBanRepository();
-  BoardRepository = NewBoardRepository();
+  BoardRepos = NewBoardRepository();
   BountyRepository = NewBountyRepository();
   ClanRepos = NewClanRepository();
   CommandRepository = NewCommandRepository();

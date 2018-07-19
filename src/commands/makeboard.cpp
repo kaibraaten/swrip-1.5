@@ -19,5 +19,5 @@ void do_makeboard( Character *ch, char *argument )
   
   SmashTilde( argument );
   board = AllocateBoard(argument);
-  AddBoard(board);
+  BoardRepos->Add(board);
 }
