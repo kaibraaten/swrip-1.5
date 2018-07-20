@@ -32,26 +32,31 @@
 
 Alias *FindAlias( const Character *ch, const char *original_argument )
 {
-  Alias *pal;
   char alias_name[MAX_INPUT_LENGTH];
   char argument[MAX_INPUT_LENGTH];
 
   if (!ch || !ch->PCData)
-    return(NULL);
+    {
+      return nullptr;
+    }
 
   strcpy(argument, original_argument);
   OneArgument(argument, alias_name);
 
-  for (pal=ch->PCData->FirstAlias; pal; pal = pal->Next)
-    if ( !StringPrefix(alias_name, pal->Name) )
-      return(pal);
+  for(Alias *alias : ch->PCData->Aliases)
+    {
+      if(StringPrefix(alias_name, alias->Name) == 0)
+        {
+          return alias;
+        }
+    }
 
-  return NULL;
+  return nullptr;
 }
 
 Alias *AllocateAlias( const char *name, const char *command )
 {
-  Alias *alias = NULL;
+  Alias *alias = nullptr;
   AllocateMemory( alias, Alias, 1 );
   alias->Name = CopyString( name );
   alias->Command = CopyString( command );
@@ -76,32 +81,40 @@ void FreeAlias( Alias *alias )
 
 void FreeAliases( Character *ch )
 {
-  Alias *pal, *next_pal;
-
   if (!ch || !ch->PCData)
-    return;
-
-  for( pal = ch->PCData->FirstAlias ; pal ; pal = next_pal )
     {
-      next_pal = pal->Next;
-      FreeAlias( pal );
+      return;
     }
+
+  for(Alias *alias : ch->PCData->Aliases)
+    {
+      FreeAlias(alias);
+    }
+
+  ch->PCData->Aliases.clear();
 }
 
 bool CheckAlias( Character *ch, char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Alias *alias;
   bool nullarg = true;
 
   if ( !IsNullOrEmpty( argument ) )
-    nullarg = false;
+    {
+      nullarg = false;
+    }
 
-  if ( (alias=FindAlias(ch,command)) == NULL )
-    return false;
+  const Alias *alias = FindAlias(ch, command);
+
+  if(alias == nullptr)
+    {
+      return false;
+    }
 
   if ( IsNullOrEmpty( alias->Command ) )
-    return false;
+    {
+      return false;
+    }
 
   sprintf(arg, "%s", alias->Command);
 
@@ -128,11 +141,10 @@ bool CheckAlias( Character *ch, char *command, char *argument )
 
 void AddAlias( Character *ch, Alias *alias )
 {
-  LINK(alias, ch->PCData->FirstAlias, ch->PCData->LastAlias, Next, Previous);
-
+  ch->PCData->Aliases.push_back(alias);
 }
 
 void UnlinkAlias( Character *ch, Alias *alias )
 {
-  UNLINK(alias, ch->PCData->FirstAlias, ch->PCData->LastAlias, Next, Previous);
+  ch->PCData->Aliases.remove(alias);
 }

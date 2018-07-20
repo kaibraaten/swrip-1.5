@@ -29,12 +29,8 @@
 
 #include "types.hpp"
 
-typedef struct Alias Alias;
-
 struct Alias
 {
-  Alias *Next;
-  Alias *Previous;
   char *Name;
   char *Command;
 };

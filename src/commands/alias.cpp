@@ -5,53 +5,68 @@
 
 void do_alias( Character *ch, char *argument )
 {
-  Alias *pal = NULL;
   char arg[MAX_INPUT_LENGTH];
 
-  if (!ch || !ch->PCData)
-    return;
+  if(IsNpc(ch))
+    {
+      return;
+    }
 
   argument = OneArgument(argument, arg);
 
-  if ( !*arg )
+  if (IsNullOrEmpty(arg))
     {
-      if (!ch->PCData->FirstAlias)
+      if (ch->PCData->Aliases.empty())
         {
           SendToCharacter("You have no aliases defined!\r\n", ch);
           return;
         }
+
       PagerPrintf( ch, "%-20s What it does\r\n", "Alias" );
-      for (pal=ch->PCData->FirstAlias;pal;pal=pal->Next)
-        PagerPrintf( ch, "%-20s %s\r\n",
-                      pal->Name, pal->Command );
+
+      for(const Alias *alias : ch->PCData->Aliases)
+        {
+          PagerPrintf( ch, "%-20s %s\r\n",
+                       alias->Name, alias->Command );
+        }
+
       return;
     }
 
-  if ( !*argument)
+  if (IsNullOrEmpty(argument))
     {
-      if ( (pal = FindAlias(ch, arg)) != NULL )
+      Alias *alias = FindAlias(ch, arg);
+
+      if (alias != nullptr)
         {
-	  UnlinkAlias( ch, pal );
-	  FreeAlias( pal );
+	  UnlinkAlias( ch, alias );
+	  FreeAlias( alias );
           SendToCharacter("Deleted Alias.\r\n", ch);
         }
       else
-        SendToCharacter("That alias does not exist.\r\n", ch);
+        {
+          SendToCharacter("That alias does not exist.\r\n", ch);
+        }
+
       return;
     }
+  
+  Alias *alias = FindAlias(ch, arg);
 
-  if ( (pal=FindAlias(ch, arg)) == NULL )
+  if (alias == nullptr)
     {
-      pal = AllocateAlias( arg, argument );
-      AddAlias( ch, pal );
+      alias = AllocateAlias( arg, argument );
+      AddAlias( ch, alias );
       SendToCharacter("Created Alias.\r\n", ch);
     }
   else
     {
-      if (pal->Command)
-        FreeMemory(pal->Command);
+      if (alias->Command != nullptr)
+        {
+          FreeMemory(alias->Command);
+        }
 
-      pal->Command  = CopyString(argument);
+      alias->Command  = CopyString(argument);
       SendToCharacter("Modified Alias.\r\n", ch);
     }
 }
