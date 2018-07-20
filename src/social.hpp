@@ -2,12 +2,13 @@
 #define _SWRIP_SOCIAL_HPP_
 
 #include <array>
+#include <string>
+#include <utility/repository.hpp>
 #include "types.hpp"
 #include "constants.hpp"
 
 struct Social
 {
-  Social *Next;
   char *Name;
   char *CharNoArg;
   char *OthersNoArg;
@@ -18,14 +19,26 @@ struct Social
   char *OthersAuto;
 };
 
-extern std::array<Social*, MAX_SOCIAL> SocialTable;
-
 void FreeSocial( Social *social );
-void UnlinkSocial( Social *social );
-void AddSocial( Social *social );
-Social *GetSocial( const char *command );
-void LoadSocials( void );
-void SaveSocials( void );
 bool CheckSocial( Character *ch, const char *command, char *argument );
+
+struct CompareSocial
+{
+  bool operator()(const Social *lhs, const Social *rhs) const
+  {
+    return StrCmp(lhs->Name, rhs->Name) < 0;
+  }
+};
+
+class SocialRepository : public Ceris::Repository<Social*, CompareSocial>
+{
+public:
+  virtual void Save() const override;
+  virtual void Load() override;
+  virtual Social *FindByName(const std::string &name) const;
+};
+
+extern SocialRepository *Socials;
+SocialRepository *NewSocialRepository();
 
 #endif

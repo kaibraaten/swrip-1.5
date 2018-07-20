@@ -11,7 +11,7 @@ void do_makeplanet( Character *ch, char *argument )
       return;
     }
 
-  if(Planets->Find(std::string(argument)) != nullptr)
+  if(Planets->FindByName(argument) != nullptr)
     {
       Echo( ch, "&RThere's already another planet with that name.&d\r\n" );
       return;

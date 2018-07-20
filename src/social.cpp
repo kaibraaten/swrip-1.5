@@ -6,7 +6,7 @@
 
 #define SOCIAL_DATA_FILE     DATA_DIR "socials.lua"
 
-std::array<Social*, MAX_SOCIAL> SocialTable;
+SocialRepository *Socials = nullptr;
 
 static void PushSocialTable( lua_State *L, const void *userData );
 static void PushSocial( lua_State *L, const Social *social );
@@ -41,138 +41,13 @@ void FreeSocial( Social *social )
   FreeMemory( social );
 }
 
-void UnlinkSocial( Social *social )
-{
-  Social *tmp, *tmp_next;
-  int hash;
-
-  if ( !social )
-    {
-      Bug( "Unlink_social: NULL social", 0 );
-      return;
-    }
-
-  if ( social->Name[0] < 'a' || social->Name[0] > 'z' )
-    hash = 0;
-  else
-    hash = (social->Name[0] - 'a') + 1;
-
-  if ( social == (tmp=SocialTable[hash]) )
-    {
-      SocialTable[hash] = tmp->Next;
-      return;
-    }
-  for ( ; tmp; tmp = tmp_next )
-    {
-      tmp_next = tmp->Next;
-      if ( social == tmp_next )
-        {
-          tmp->Next = tmp_next->Next;
-          return;
-        }
-    }
-}
-
-void AddSocial( Social *social )
-{
-  int hash, x;
-  Social *tmp, *prev;
-
-  if ( !social )
-    {
-      Bug( "Add_social: NULL social" );
-      return;
-    }
-
-  if ( !social->Name )
-    {
-      Bug( "Add_social: NULL social->Name" );
-      return;
-    }
-
-  if ( !social->CharNoArg )
-    {
-      Bug( "Add_social: NULL social->CharNoArg" );
-      return;
-    }
-
-  /* make sure the name is all lowercase */
-  for ( x = 0; social->Name[x] != '\0'; x++ )
-    social->Name[x] = CharToLowercase(social->Name[x]);
-
-  if ( social->Name[0] < 'a' || social->Name[0] > 'z' )
-    hash = 0;
-  else
-    hash = (social->Name[0] - 'a') + 1;
-
-  if ( (prev = tmp = SocialTable[hash]) == NULL )
-    {
-      social->Next = SocialTable[hash];
-      SocialTable[hash] = social;
-      return;
-    }
-
-  for ( ; tmp; tmp = tmp->Next )
-    {
-      if ( (x=StrCmp(social->Name, tmp->Name)) == 0 )
-        {
-          Bug( "Add_social: trying to add duplicate name to bucket %d", hash );
-          FreeSocial( social );
-          return;
-        }
-      else
-        if ( x < 0 )
-          {
-            if ( tmp == SocialTable[hash] )
-              {
-                social->Next = SocialTable[hash];
-                SocialTable[hash] = social;
-                return;
-              }
-            prev->Next = social;
-            social->Next = tmp;
-            return;
-          }
-      prev = tmp;
-    }
-
-  /* add to end */
-  prev->Next = social;
-  social->Next = NULL;
-}
-
-Social *GetSocial( const char *command )
-{
-  Social *social = NULL;
-  int hash = 0;
-
-  if ( command[0] < 'a' || command[0] > 'z' )
-    {
-      hash = 0;
-    }
-  else
-    {
-      hash = (command[0] - 'a') + 1;
-    }
-
-  for ( social = SocialTable[hash]; social; social = social->Next )
-    {
-      if ( !StringPrefix( command, social->Name ) )
-        {
-          return social;
-        }
-    }
-
-  return NULL;
-}
-
 bool CheckSocial( Character *ch, const char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
-  Social *social = NULL;
+  Social *social = Socials->FindByName(command);
 
-  if ( !( social = GetSocial( command ) ) )
+  if (social == nullptr)
     {
       return false;
     }
@@ -315,31 +190,19 @@ static void PushSocial( lua_State *L, const Social *social )
 
 static void PushSocialTable( lua_State *L, const void *userData )
 {
-  int hash = 0;
   lua_newtable( L );
 
-  for( hash = 0; hash < 27; ++hash )
+  for(const Social *social : Socials->Entities())
     {
-      const Social *social = NULL;
+      if ( IsNullOrEmpty( social->Name ) )
+        {
+          continue;
+        }
 
-      for( social = SocialTable[hash]; social; social = social->Next )
-	{
-	  if ( IsNullOrEmpty( social->Name ) )
-            {
-              Bug( "SaveSocials: blank social in hash bucket %d", hash );
-              continue;
-            }
-
-	  PushSocial( L, social );
-	}
+      PushSocial( L, social );
     }
 
   lua_setglobal( L, "socials" );
-}
-
-void SaveSocials( void )
-{
-  LuaSaveDataFile( SOCIAL_DATA_FILE, PushSocialTable, "socials", NULL );
 }
 
 static int L_SocialEntry( lua_State *L )
@@ -445,13 +308,36 @@ static int L_SocialEntry( lua_State *L )
     }
   else
     {
-      AddSocial( social );
+      Socials->Add(social);
     }
 
   return 0;
 }
 
-void LoadSocials( void )
+SocialRepository *NewSocialRepository()
+{
+  return new SocialRepository();
+}
+
+/////////////////////////////////////////////////
+void SocialRepository::Load()
 {
   LuaLoadDataFile( SOCIAL_DATA_FILE, L_SocialEntry, "SocialEntry" );
+}
+
+void SocialRepository::Save() const
+{
+  LuaSaveDataFile( SOCIAL_DATA_FILE, PushSocialTable, "socials", NULL );
+}
+
+Social *SocialRepository::FindByName(const std::string &name) const
+{
+  Social *social = Find([name](const auto &s){ return StrCmp(name, s->Name) == 0; });
+
+  if(social == nullptr)
+    {
+      social = Find([name](const auto &s){ return StringPrefix(name, s->Name) == 0; });
+    }
+
+  return social;
 }

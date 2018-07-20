@@ -299,7 +299,7 @@ static int L_SpaceobjectEntry( lua_State *L )
   if( !lua_isnil( L, ++idx ) )
     {
       std::string planetName = lua_tostring( L, idx );
-      spaceobj->Planet = Planets->Find( planetName );
+      spaceobj->Planet = Planets->FindByName( planetName );
 
       if( !spaceobj->Planet )
 	{

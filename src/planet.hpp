@@ -24,13 +24,11 @@ const char *GetPlanetFilename( const Planet *planet );
 class PlanetRepository : public Ceris::Repository<Planet*>
 {
 public:
-  using Ceris::Repository<Planet*>::Find;
-
   virtual void Load() override;
   virtual void Save() const override;
 
   virtual void Save(const Planet *planet) const;
-  Planet *Find(const std::string &name) const;
+  Planet *FindByName(const std::string &name) const;
 };
 
 extern PlanetRepository *Planets;
