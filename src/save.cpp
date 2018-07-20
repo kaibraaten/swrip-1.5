@@ -378,7 +378,6 @@ void SaveClone( Character *ch )
 static void WriteCharacter( const Character *ch, FILE *fp )
 {
   const Affect *paf = NULL;
-  const Alias *pal = NULL;
   int sn = 0;
   int drug = 0;
   const Skill *skill = NULL;
@@ -577,14 +576,14 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "Pagerlen     %d\n",       ch->PCData->PagerLength    );
 	}
 
-      for ( pal = ch->PCData->FirstAlias; pal; pal = pal->Next )
+      for(const Alias *alias : ch->PCData->Aliases)
         {
-          if ( !pal->Name || !pal->Command || !*pal->Name || !*pal->Command )
+          if(IsNullOrEmpty(alias->Name) || IsNullOrEmpty(alias->Command))
 	    {
 	      continue;
 	    }
 
-          fprintf( fp, "Alias        %s~ %s~\n", pal->Name, pal->Command );
+          fprintf( fp, "Alias        %s~ %s~\n", alias->Name, alias->Command );
         }
 
       fprintf( fp, "Addiction   ");

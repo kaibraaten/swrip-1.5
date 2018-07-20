@@ -85,8 +85,7 @@ public:
   char *BettedOn = NULL;
   int BetAmount = 0;
 
-  Alias *FirstAlias = NULL;
-  Alias *LastAlias = NULL;
+  std::list<Alias*> Aliases;
 
   Character *Pet = NULL;
   char *Target = NULL;
