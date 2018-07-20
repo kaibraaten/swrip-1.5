@@ -35,12 +35,12 @@ void do_sedit( Character *ch, char *argument )
 
   if ( GetTrustLevel(ch) > LEVEL_CREATOR && !StrCmp( arg1, "save" ) )
     {
-      SaveSocials();
+      Socials->Save();
       SendToCharacter( "Saved.\r\n", ch );
       return;
     }
 
-  social = GetSocial( arg1 );
+  social = Socials->FindByName( arg1 );
 
   if ( !StrCmp( arg2, "create" ) )
     {
@@ -54,7 +54,7 @@ void do_sedit( Character *ch, char *argument )
       social->Name = CopyString( arg1 );
       sprintf( arg2, "You %s.", arg1 );
       social->CharNoArg = CopyString( arg2 );
-      AddSocial( social );
+      Socials->Add(social);
       SendToCharacter( "Social added.\r\n", ch );
       return;
     }
@@ -82,7 +82,7 @@ void do_sedit( Character *ch, char *argument )
 
   if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( arg2, "delete" ) )
     {
-      UnlinkSocial( social );
+      Socials->Remove(social);
       FreeSocial( social );
       SendToCharacter( "Deleted.\r\n", ch );
       return;
@@ -190,7 +190,7 @@ void do_sedit( Character *ch, char *argument )
 
       if ( arg1[0] != social->Name[0] )
         {
-          UnlinkSocial( social );
+          Socials->Remove(social);
           relocate = true;
         }
 
@@ -200,7 +200,9 @@ void do_sedit( Character *ch, char *argument )
       social->Name = CopyString( arg1 );
 
       if ( relocate )
-        AddSocial( social );
+        {
+          Socials->Add(social);
+        }
 
       SendToCharacter( "Done.\r\n", ch );
       return;

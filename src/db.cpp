@@ -349,7 +349,7 @@ void BootDatabase( bool fCopyOver )
   LoadCommands();
 
   LogPrintf("Loading socials");
-  LoadSocials();
+  Socials->Load();
 
   LogPrintf("Loading skill table");
   LoadSkills();
@@ -2495,4 +2495,5 @@ void AllocateRepositories(void)
   CommandRepository = NewCommandRepository();
   Planets = NewPlanetRepository();
   Spaceobjects = NewSpaceobjectRepository();
+  Socials = NewSocialRepository();
 }

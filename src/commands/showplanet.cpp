@@ -5,8 +5,6 @@
 
 void do_showplanet( Character *ch, char *argument )
 {
-  const Planet *planet = NULL;
-
   if ( IsNpc( ch ) )
     {
       SendToCharacter( "Huh?\r\n", ch );
@@ -19,7 +17,7 @@ void do_showplanet( Character *ch, char *argument )
       return;
     }
 
-  planet = Planets->Find(std::string(argument));
+  const Planet *planet = Planets->FindByName(argument);
 
   if ( planet == nullptr )
     {

@@ -65,7 +65,7 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "planet" ) )
     {
-      Planet *planet = Planets->Find(std::string(argument));
+      Planet *planet = Planets->FindByName(argument);
 
       if (planet)
         {

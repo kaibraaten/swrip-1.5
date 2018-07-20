@@ -8,7 +8,6 @@ void do_setplanet( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Planet *planet = nullptr;
 
   if ( IsNpc( ch ) )
     {
@@ -28,7 +27,7 @@ void do_setplanet( Character *ch, char *argument )
       return;
     }
 
-  planet = Planets->Find(std::string(arg1));
+  Planet *planet = Planets->FindByName(arg1);
 
   if ( !planet )
     {
@@ -38,7 +37,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      if( Planets->Find(std::string(argument)) != nullptr)
+      if( Planets->FindByName(argument) != nullptr)
 	{
 	  Echo( ch, "There's already another planet with that name.\r\n" );
 	  return;

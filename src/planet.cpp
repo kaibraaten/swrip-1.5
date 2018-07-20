@@ -202,7 +202,7 @@ void PlanetRepository::Load()
   ForEachLuaFileInDir( PLANET_DIR, LoadPlanet, NULL );
 }
 
-Planet *PlanetRepository::Find(const std::string &name) const
+Planet *PlanetRepository::FindByName(const std::string &name) const
 {
   return Find([name](const auto &planet){ return StrCmp(name, planet->Name) == 0; });
 }

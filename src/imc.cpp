@@ -7396,7 +7396,7 @@ static const char *imc_GetSocial( Character * ch, const char *sname, const char 
      lcSocName[i] = tolower( (int) sname[i]);
    }
 
-   if( ( social = GetSocial( lcSocName ) ) == NULL )
+   if( ( social = Socials->FindByName( lcSocName ) ) == NULL )
    {
       imc_printf( ch, "~YSocial ~W%s~Y does not exist on this mud.\r\n", sname );
       return socname;
