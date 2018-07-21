@@ -73,7 +73,7 @@ void do_test( Character *ch, char *argument )
    if( !StrCmp( argument, "saveshuttles" ) )
     {
       Echo( ch, "Saving shuttles...\r\n" );
-      ForEach( Shuttle, FirstShuttle, Next, SaveShuttle, 0 );
+      Shuttles->Save();
       return;
     }
 

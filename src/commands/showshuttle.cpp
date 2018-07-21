@@ -5,11 +5,11 @@ void do_showshuttle (Character * ch, char * argument)
 {
   ShuttleStop * stop = NULL;
   int count = 0;
-  Shuttle * shuttle = GetShuttle(argument);
+  Shuttle * shuttle = Shuttles->FindByName(argument);
 
   if ( !shuttle )
     {
-      if ( FirstShuttle == NULL )
+      if (Shuttles->Count() == 0)
         {
           SetCharacterColor( AT_RED, ch );
           SendToCharacter("There are no shuttles currently formed.\r\n", ch);
@@ -20,11 +20,14 @@ void do_showshuttle (Character * ch, char * argument)
       SendToCharacter("No such shuttle.\r\nValid shuttles:\r\n", ch);
       SetCharacterColor( AT_SHIP, ch );
 
-      for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
-        Echo(ch, "Shuttle Name: %s - %s\r\n", shuttle->Name,
-                  shuttle->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
-                  shuttle->Type == SHUTTLE_SPACE ? "Space" :
-                  shuttle->Type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
+      for(const Shuttle *s : Shuttles->Entities())
+        {
+          Echo(ch, "Shuttle Name: %s - %s\r\n", s->Name,
+               s->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
+               s->Type == SHUTTLE_SPACE ? "Space" :
+               s->Type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
+        }
+
       return;
     }
 

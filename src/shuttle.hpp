@@ -23,6 +23,8 @@
 #ifndef _SWRIP_SHUTTLE_HPP_
 #define _SWRIP_SHUTTLE_HPP_
 
+#include <string>
+#include <utility/repository.hpp>
 #include "types.hpp"
 
 #define SHUTTLE_DIR     DATA_DIR "shuttles/"
@@ -57,9 +59,6 @@ typedef int ShuttleClass;
 
 struct Shuttle
 {
-  Shuttle* Previous;
-  Shuttle* Next;
-
   Shuttle* NextInRoom;
   Shuttle* PreviousInRoom;
 
@@ -100,22 +99,15 @@ struct Shuttle
 #define MIL MAX_INPUT_LENGTH
 #endif
 
-/* Used for double linked list */
-extern Shuttle *FirstShuttle;
-extern Shuttle *LastShuttle;
-
 /* Function prototypes */
 
-void ShuttleUpdate(void);
-Shuttle *GetShuttle( const char *argument );
-bool SaveShuttle( const Shuttle *shuttle, char dummy );
-Shuttle *MakeShuttle( const char *name );
+void ShuttleUpdate();
+Shuttle *NewShuttle(const std::string &name);
 bool ExtractShuttle( Shuttle *shuttle );
 bool InsertShuttle( Shuttle *shuttle, Room *room );
-void LoadShuttles(void);
-void DestroyShuttle( Shuttle *shuttle );
+void PermanentlyDestroyShuttle( Shuttle *shuttle );
 void ShowShuttlesToCharacter( const Shuttle *shuttle, Character *ch );
-Shuttle *GetShuttleInRoom( const Room *room, const char *name );
+Shuttle *GetShuttleInRoom( const Room *room, const std::string &name );
 Shuttle *GetShuttleFromEntrance( vnum_t vnum );
 ShuttleStop *AllocateShuttleStop( void );
 const char *GetShuttleFilename( const Shuttle *shuttle );
@@ -123,5 +115,18 @@ const char *GetShuttleFilename( const Shuttle *shuttle );
 DECLARE_CMD_FUN( do_showshuttle );
 DECLARE_CMD_FUN( do_makeshuttle );
 DECLARE_CMD_FUN( do_setshuttle  );
+
+class ShuttleRepository : public Ceris::Repository<Shuttle*>
+{
+public:
+  virtual void Load() override;
+  virtual void Save() const override;
+  virtual void Save(const Shuttle *shuttle) const;
+
+  Shuttle *FindByName(const std::string &name) const;
+};
+
+extern ShuttleRepository *Shuttles;
+ShuttleRepository *NewShuttleRepository();
 
 #endif

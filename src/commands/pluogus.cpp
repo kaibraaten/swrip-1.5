@@ -6,7 +6,7 @@ static void output_shuttle(Character * ch, Shuttle * shuttle);
 
 void do_pluogus( Character *ch, char *argument )
 {
-  Shuttle * shuttle = NULL;
+  Shuttle *shuttle = nullptr;
 
   if ( !HasComlink( ch ) )
     {
@@ -14,13 +14,17 @@ void do_pluogus( Character *ch, char *argument )
       return;
     }
 
-  if ((shuttle = GetShuttle("Serin Pluogus")) != NULL)
+  shuttle = Shuttles->FindByName("Serin Pluogus");
+
+  if (shuttle != nullptr)
     {
       output_shuttle(ch, shuttle);
       SendToCharacter("\r\n", ch);
     }
 
-  if ((shuttle = GetShuttle("Serin Tocca")) != NULL)
+  shuttle = Shuttles->FindByName("Serin Tocca");
+
+  if (shuttle != nullptr)
     {
       output_shuttle(ch, shuttle);
       SendToCharacter("\r\n", ch);

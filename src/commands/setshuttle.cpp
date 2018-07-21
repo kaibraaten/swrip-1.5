@@ -9,7 +9,6 @@
 
 void do_setshuttle(Character * ch, char * argument)
 {
-  Shuttle *shuttle = NULL;
   char arg1[MIL];
   char arg2[MIL];
   int value = 0;
@@ -34,20 +33,20 @@ void do_setshuttle(Character * ch, char * argument)
       return;
     }
 
-  shuttle = GetShuttle(arg1);
+  Shuttle *shuttle = Shuttles->FindByName(arg1);
 
-  if ( !shuttle )
+  if (shuttle == nullptr)
     {
       SetCharacterColor( AT_RED, ch );
       SendToCharacter("No such shuttle.\r\nValid shuttles:\r\n", ch);
       SetCharacterColor( AT_YELLOW, ch );
 
-      for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
+      for(const Shuttle *s : Shuttles->Entities())
 	{
-	  Echo(ch, "Shuttle Name: %s - %s\r\n", shuttle->Name,
-		    shuttle->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
-		    shuttle->Type == SHUTTLE_SPACE ? "Space" :
-		    shuttle->Type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
+	  Echo(ch, "Shuttle Name: %s - %s\r\n", s->Name,
+		    s->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
+		    s->Type == SHUTTLE_SPACE ? "Space" :
+		    s->Type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
 	}
 
       return;
@@ -93,7 +92,7 @@ void do_setshuttle(Character * ch, char * argument)
     }
   else if (!StrCmp(arg2, "name"))
     {
-      if( GetShuttle( argument ) )
+      if(Shuttles->FindByName( argument ) != nullptr)
 	{
 	  Echo( ch, "There's already another shuttle with that name.\r\n" );
 	  return;
@@ -130,13 +129,13 @@ void do_setshuttle(Character * ch, char * argument)
     }
   else if (!StrCmp(arg2, "remove"))
     {
-      DestroyShuttle(shuttle);
+      PermanentlyDestroyShuttle(shuttle);
       SendToCharacter("Shuttle Removed.\r\n", ch);
       return;
     }
   else if (!StrCmp(arg2, "stop"))
     {
-      ShuttleStop * stop = NULL;
+      ShuttleStop * stop = nullptr;
       argument = OneArgument(argument, arg1);
 
       if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( argument ))
@@ -236,6 +235,6 @@ void do_setshuttle(Character * ch, char * argument)
       return;
     }
 
-  SaveShuttle(shuttle, 0);
+  Shuttles->Save(shuttle);
   SendToCharacter("Ok.\r\n", ch);
 }
