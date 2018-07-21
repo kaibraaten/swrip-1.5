@@ -674,7 +674,7 @@ void BootDatabase( bool fCopyOver )
   Planets->Load();
 
   LogPrintf( "Loading shuttles" );
-  LoadShuttles();
+  Shuttles->Load();
 
   LogPrintf( "Loading Hall of Fame" );
   LoadHallOfFame();
@@ -2496,4 +2496,5 @@ void AllocateRepositories(void)
   Planets = NewPlanetRepository();
   Spaceobjects = NewSpaceobjectRepository();
   Socials = NewSocialRepository();
+  Shuttles = NewShuttleRepository();
 }

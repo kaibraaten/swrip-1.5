@@ -34,12 +34,11 @@
 #include "ship.hpp"
 #include "script.hpp"
 
-Shuttle *FirstShuttle = NULL;
-Shuttle *LastShuttle = NULL;
+ShuttleRepository *Shuttles = nullptr;
 
 ShuttleStop *AllocateShuttleStop( void )
 {
-  ShuttleStop *stop = NULL;
+  ShuttleStop *stop = nullptr;
 
   AllocateMemory( stop, ShuttleStop, 1);
   stop->RoomVnum = INVALID_VNUM;
@@ -62,46 +61,15 @@ static Shuttle *AllocateShuttle( void )
   return shuttle;
 }
 
-Shuttle *MakeShuttle( const char *name )
+Shuttle *NewShuttle(const std::string &name)
 {
   Shuttle *shuttle   = AllocateShuttle();
   shuttle->Name      = CopyString( name );
 
-  if (SaveShuttle( shuttle, 0 ))
-    {
-      LINK( shuttle, FirstShuttle, LastShuttle, Next, Previous );
-    }
-  else
-    {
-      FreeMemory(shuttle->Name);
-      FreeMemory(shuttle);
-      shuttle = NULL;
-    }
+  Shuttles->Add(shuttle);
+  Shuttles->Save(shuttle);
 
   return shuttle;
-}
-
-Shuttle *GetShuttle(const char *name)
-{
-  Shuttle *shuttle = NULL;
-
-  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
-    {
-      if ( !StrCmp( name, shuttle->Name ) )
-	{
-	  return shuttle;
-	}
-    }
-
-  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
-    {
-      if ( NiftyIsNamePrefix( name, shuttle->Name ) )
-	{
-	  return shuttle;
-	}
-    }
-
-  return NULL;
 }
 
 static void PushStop( lua_State *L, const ShuttleStop *stop, const int idx )
@@ -175,18 +143,11 @@ const char *GetShuttleFilename( const Shuttle *shuttle )
   return fullPath;
 }
 
-bool SaveShuttle( const Shuttle * shuttle, char dummy )
-{
-  LuaSaveDataFile( GetShuttleFilename( shuttle ), PushShuttle, "shuttle", shuttle );
-  return true;
-}
-
 void ShuttleUpdate( void )
 {
   char buf[MSL];
-  Shuttle *shuttle = NULL;
 
-  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
+  for(Shuttle *shuttle : Shuttles->Entities())
     {
       /* No Stops? Make sure we ignore */
       if (shuttle->FirstStop == NULL)
@@ -570,7 +531,7 @@ static int L_ShuttleEntry( lua_State *L )
   LoadRooms( L, shuttle );
   LoadStops( L, shuttle );
 
-  LINK( shuttle, FirstShuttle, LastShuttle, Next, Previous );
+  Shuttles->Add(shuttle);
 
   if (shuttle->Rooms.Entrance == INVALID_VNUM)
     {
@@ -611,14 +572,6 @@ static void ExecuteShuttleFile( const char *filePath, void *userData )
   LuaLoadDataFile( filePath, L_ShuttleEntry, "ShuttleEntry" );
 }
 
-/*
- * Load in all the ship files.
- */
-void LoadShuttles( void )
-{
-  ForEachLuaFileInDir( SHUTTLE_DIR, ExecuteShuttleFile, NULL );
-}
-
 static void FreeShuttle( Shuttle *shuttle )
 {
   ShuttleStop *stop = NULL;
@@ -644,20 +597,20 @@ static void FreeShuttle( Shuttle *shuttle )
   FreeMemory(shuttle);
 }
 
-void DestroyShuttle(Shuttle *shuttle)
+void PermanentlyDestroyShuttle(Shuttle *shuttle)
 {
   char buf[MAX_STRING_LENGTH];
-  UNLINK( shuttle, FirstShuttle, LastShuttle, Next, Previous );
+  Shuttles->Remove(shuttle);
   sprintf(buf, "%s/%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ) );
   unlink(buf);
   FreeShuttle( shuttle );
 }
 
-Shuttle *GetShuttleInRoom( const Room *room, const char *name )
+Shuttle *GetShuttleInRoom( const Room *room, const std::string &name )
 {
-  Shuttle *shuttle = NULL;
+  Shuttle *shuttle = nullptr;
 
-  if ( !room )
+  if (room == nullptr)
     {
       return NULL;
     }
@@ -678,20 +631,55 @@ Shuttle *GetShuttleInRoom( const Room *room, const char *name )
 	}
     }
 
-  return NULL;
+  return nullptr;
 }
 
 Shuttle *GetShuttleFromEntrance( vnum_t vnum )
 {
-  Shuttle *shuttle = NULL;
+  return Shuttles->Find([vnum](const auto &s)
+                        {
+                          return s->Rooms.Entrance == vnum;
+                        });
+}
 
-  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
+////////////////////////////////////////////////////////////
+ShuttleRepository *NewShuttleRepository()
+{
+  return new ShuttleRepository();
+}
+
+Shuttle *ShuttleRepository::FindByName(const std::string &name) const
+{
+  Shuttle *shuttle = Find([name](const auto &s)
+                          {
+                            return StrCmp(name, s->Name) == 0;
+                          });
+
+  if(shuttle == nullptr)
     {
-      if ( vnum == shuttle->Rooms.Entrance )
-	{
-	  return shuttle;
-	}
+      shuttle = Find([name](const auto &s)
+                     {
+                       return NiftyIsNamePrefix(name, s->Name);
+                     });
     }
 
-  return NULL;
+  return shuttle;
+}
+
+void ShuttleRepository::Save(const Shuttle *shuttle) const
+{
+  LuaSaveDataFile( GetShuttleFilename( shuttle ), PushShuttle, "shuttle", shuttle );
+}
+
+void ShuttleRepository::Save() const
+{
+  for(const Shuttle *shuttle : Shuttles->Entities())
+    {
+      Save(shuttle);
+    }
+}
+
+void ShuttleRepository::Load()
+{
+  ForEachLuaFileInDir( SHUTTLE_DIR, ExecuteShuttleFile, NULL );
 }
