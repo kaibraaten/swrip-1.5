@@ -1,4 +1,7 @@
 BINARY = swrip
+LIB_EXT = so
+LIBNAME = libswrip.$(LIB_EXT)
+
 WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wredundant-decls -Wshadow -Wno-unused-parameter -Wno-char-subscripts -Wno-write-strings -Wno-long-long -Wextra -Wno-implicit-fallthrough
 
 #Comment out the next line if your system doesn't have dlsym functionality.
@@ -18,8 +21,8 @@ endif
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 LIBDIR = libs
-CXXFLAGS = -std=c++14 -g3 -MMD -I. -Ilibs -I$(LIBDIR)/utility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
-LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility $(LUA_LIBS)
+CXXFLAGS = -std=c++14 -fPIC -g3 -MMD -I. -Ilibs -I$(LIBDIR)/utility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
+LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility $(LUA_LIBS) -L. -lswrip -Wl,-rpath,./src
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
 #SOLARIS = 1
@@ -46,6 +49,8 @@ SPELLDIR = spells
 SPECDIR = special
 
 ODIR = obj
+_BINOBJ = main.o
+
 _OBJ =  act_comm.o \
 	act_info.o \
 	act_move.o \
@@ -667,18 +672,23 @@ _OBJ =  act_comm.o \
 	$(SPELLDIR)/weaken.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
+BINOBJ = $(patsubst %,$(ODIR)/%,$(_BINOBJ))
 
 ifdef IMC
 OBJ += $(ODIR)/imc.o
 CXXFLAGS += -DSWRIP_USE_IMC
 endif
 
-all:		libraries $(BINARY)
+all:		libraries $(LIBNAME) $(BINARY)
 
 libraries:
 		$(MAKE) -C $(LIBDIR)/utility
 
-$(BINARY):	$(OBJ)
+$(LIBNAME):	$(OBJ)
+		@echo "Linking" $(LIBNAME)
+		@$(CXX) -shared -Wl,-soname,$(LIBNAME) -o $(LIBNAME) $^
+
+$(BINARY):	$(LIBNAME) $(BINOBJ)
 		@echo "Linking" $(BINARY)
 		@$(CXX) -o $@ $^ $(LDFLAGS)
 		@mv $(BINARY) ..
@@ -695,4 +705,4 @@ $(ODIR)/%.o:	%.cpp
 -include $(ODIR)/$(SPECDIR)/*.d
 
 clean:
-		-rm -f ../$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d $(ODIR)/$(MPDIR)/*.o $(ODIR)/$(MPDIR)/*.d $(ODIR)/$(SPELLDIR)/*.o $(ODIR)/$(SPELLDIR)/*.d ../core.* $(ODIR)/$(SPECDIR)/*.o $(ODIR)/$(SPECDIR)/*.d
+		-rm -f ../$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d $(ODIR)/$(MPDIR)/*.o $(ODIR)/$(MPDIR)/*.d $(ODIR)/$(SPELLDIR)/*.o $(ODIR)/$(SPELLDIR)/*.d ../core.* $(ODIR)/$(SPECDIR)/*.o $(ODIR)/$(SPECDIR)/*.d *.so *.a

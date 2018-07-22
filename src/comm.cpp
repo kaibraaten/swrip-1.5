@@ -108,7 +108,7 @@ static void ExecuteOnExit( void )
   OsCleanup();
 }
 
-int main( int argc, char **argv )
+int SwripMain(int argc, char *argv[])
 {
   struct timeval now_time;
   bool fCopyOver = false;

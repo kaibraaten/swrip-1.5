@@ -1,5 +1,5 @@
 ODIR = obj
-_OBJ = bet.o event.o file_io.o linkedlist.o misc.o os_posix.o \
+_OBJ = bet.o datadom.o event.o file_io.o linkedlist.o misc.o os_posix.o \
 	oldrepository.o repositorybase.o sha256.o string_handling.o \
 	time_fun.o vector3.o
 OBJ  = $(patsubst %,$(ODIR)/%,$(_OBJ))
@@ -8,7 +8,7 @@ OBJ  = $(patsubst %,$(ODIR)/%,$(_OBJ))
 #USE_DLSYM = -DSWRIP_USE_DLSYM
 
 WFLAGS = -Wall -Wshadow -Wformat-security -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Werror -Wwrite-strings -Wextra -Wno-char-subscripts
-CXXFLAGS = -g3 -MMD $(GCC_MARCH) $(WFLAGS) -I. -I.. $(USE_DLSYM) -std=c++14
+CXXFLAGS = -g3 -MMD $(GCC_MARCH) $(WFLAGS) -I. -I.. $(USE_DLSYM) -std=c++14 -DLUA_C89_NUMBERS
 
 #If not Cygwin environment
 ifneq ($(shell echo $$OSTYPE),cygwin)
