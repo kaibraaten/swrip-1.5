@@ -21,6 +21,7 @@ endif
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 LIBDIR = libs
+TESTDIR = test
 CXXFLAGS = -std=c++14 -fPIC -g3 -MMD -I. -Ilibs -I$(LIBDIR)/utility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
 LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility $(LUA_LIBS) -L. -lswrip -Wl,-rpath,./src
 
@@ -679,10 +680,13 @@ OBJ += $(ODIR)/imc.o
 CXXFLAGS += -DSWRIP_USE_IMC
 endif
 
-all:		libraries $(LIBNAME) $(BINARY)
+all:		libraries $(LIBNAME) $(BINARY) tests
 
 libraries:
 		$(MAKE) -C $(LIBDIR)/utility
+
+tests:		$(BINARY)
+		$(MAKE) -C $(TESTDIR)
 
 $(LIBNAME):	$(OBJ)
 		@echo "Linking" $(LIBNAME)

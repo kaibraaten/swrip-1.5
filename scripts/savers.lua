@@ -105,4 +105,8 @@ function savers.savehalloffame(halloffame, filename)
    multisave(halloffame, filename, "-- Hall of Fame\n", "\nHallOfFameEntry")
 end
 
+function savers.savefoo(foo, filename)
+   singlesave(foo, filename, "-- \n", "\nFooEntry")
+end
+
 return savers
