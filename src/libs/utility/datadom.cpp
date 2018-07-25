@@ -20,12 +20,26 @@ namespace DataDOM
 
     }
 
+    Impl(lua_State *L, int idx)
+      : _luaState(L),
+        _index(idx)
+    {
+
+    }
+
     lua_State *_luaState;
     std::string _name;
+    int _index = INVALID_INDEX;
   };
 
   Data::Data(lua_State *L, const std::string &name)
     : _pImpl(std::make_unique<Impl>(L, name))
+  {
+
+  }
+
+  Data::Data(lua_State *L, int idx)
+    : _pImpl(std::make_unique<Impl>(L, idx))
   {
 
   }
@@ -45,6 +59,11 @@ namespace DataDOM
     return _pImpl->_name;
   }
 
+  int Data::Index() const
+  {
+    return _pImpl->_index;
+  }
+  
   ////////////////////////////////////////////////////////////////
   // Field
 
@@ -248,6 +267,13 @@ namespace DataDOM
 
   }
 
+  Table::Table(lua_State *L, int idx)
+    : Data(L, idx),
+      _pImpl(std::make_unique<Impl>())
+  {
+
+  }
+
   Table::~Table()
   {
     for(Data *data : _pImpl->Children)
@@ -263,7 +289,15 @@ namespace DataDOM
 
   void Table::Push() const
   {
-    lua_pushstring(LuaState(), Name().c_str());
+    if(Index() != INVALID_INDEX)
+      {
+        lua_pushinteger(LuaState(), Index());
+      }
+    else
+      {
+        lua_pushstring(LuaState(), Name().c_str());
+      }
+
     lua_newtable(LuaState());
 
     for(Data *data : _pImpl->Children)

@@ -8,6 +8,8 @@
 
 namespace DataDOM
 {
+  constexpr int INVALID_INDEX = -1;
+
   class Data
   {
   public:
@@ -17,7 +19,9 @@ namespace DataDOM
 
   protected:
     Data(lua_State *L, const std::string &name);
+    Data(lua_State *L, int idx);
     std::string Name() const;
+    int Index() const;
     lua_State *LuaState() const;
 
     struct Impl;
@@ -108,6 +112,7 @@ namespace DataDOM
   {
   public:
     Table(lua_State *L, const std::string &name);
+    Table(lua_State *L, int idx);
     virtual ~Table();
     void Add(Data *data);
     virtual void Push() const override;
