@@ -116,20 +116,20 @@ TEST_F(DataDOMTests, TargetFieldCanBeModified)
 TEST_F(DataDOMTests, PushData)
 {
   DataDOM::LuaDocument doc(L, "foo", "foo.lua");
-  doc.Add(new DataDOM::StringField(L, "SomeStringField", MyFoo->SomeStringField));
-  doc.Add(new DataDOM::IntegerField(L, "SomeIntegerField", MyFoo->SomeIntegerField));
-  doc.Add(new DataDOM::DoubleField(L, "SomeDoubleField", MyFoo->SomeDoubleField));
-  doc.Add(new DataDOM::BooleanField(L, "SomeBooleanField", MyFoo->SomeBooleanField));
-  doc.Add(new DataDOM::Flags(L, "Flags", MyFoo->Flags, FlagNameArray));
+  doc.AddString("SomeStringField", MyFoo->SomeStringField);
+  doc.AddInteger("SomeIntegerField", MyFoo->SomeIntegerField);
+  doc.AddDouble("SomeDoubleField", MyFoo->SomeDoubleField);
+  doc.AddBoolean("SomeBooleanField", MyFoo->SomeBooleanField);
+  doc.AddFlags("Flags", MyFoo->Flags, FlagNameArray);
 
-  DataDOM::Table *subObjects = new DataDOM::Table(L, "SubObjects");
+  DataDOM::Table *subObjects = doc.CreateTable("SubObjects");
   int counter = 0;
 
   for(ContainedByFoo &contained : MyFoo->SubObjects)
     {
-      DataDOM::Table *oneObject = new DataDOM::Table(L, counter++);
-      oneObject->Add(new DataDOM::IntegerField(L, "SomeData", contained.SomeData));
-      oneObject->Add(new DataDOM::IntegerField(L, "MoreData", contained.MoreData));
+      DataDOM::Table *oneObject = doc.CreateTable(counter++);
+      oneObject->AddInteger("SomeData", contained.SomeData);
+      oneObject->AddInteger("MoreData", contained.MoreData);
 
       subObjects->Add(oneObject);
     }

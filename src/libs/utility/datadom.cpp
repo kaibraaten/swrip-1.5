@@ -139,6 +139,44 @@ namespace DataDOM
     _pImpl->_targetField = lua_tostring(LuaState(), idx);
   }
 
+  /////////////////////////////////////////////////////////////////
+  // CStringField
+  struct CStringField::Impl
+  {
+    Impl(const char *&targetField)
+      : _targetField(targetField)
+    {
+
+    }
+
+    const char *&_targetField;
+  };
+
+  CStringField::CStringField(lua_State *L,
+                             const std::string &name,
+                             const char *&targetField)
+    : PrimitiveField(L, name),
+      _pImpl(std::make_unique<Impl>(targetField))
+  {
+
+  }
+
+  CStringField::~CStringField()
+  {
+
+  }
+
+  void CStringField::Push() const
+  {
+    lua_pushstring(LuaState(), _pImpl->_targetField);
+    lua_setfield(LuaState(), -2, Name().c_str());
+  }
+
+  void CStringField::AssignFromLuaToField(int idx)
+  {
+    _pImpl->_targetField = CopyString(lua_tostring(LuaState(), idx));
+  }
+
   ///////////////////////////////////////////////////
   // IntegerField
   struct IntegerField::Impl
@@ -257,18 +295,18 @@ namespace DataDOM
   // Table
   struct Table::Impl
   {
-    std::list<Data*> Children;
+
   };
 
   Table::Table(lua_State *L, const std::string &name)
-    : Data(L, name),
+    : Container(L, name),
       _pImpl(std::make_unique<Impl>())
   {
 
   }
 
   Table::Table(lua_State *L, int idx)
-    : Data(L, idx),
+    : Container(L, idx),
       _pImpl(std::make_unique<Impl>())
   {
 
@@ -276,15 +314,7 @@ namespace DataDOM
 
   Table::~Table()
   {
-    for(Data *data : _pImpl->Children)
-      {
-        delete data;
-      }
-  }
 
-  void Table::Add(Data *data)
-  {
-    _pImpl->Children.push_back(data);
   }
 
   void Table::Push() const
@@ -300,7 +330,7 @@ namespace DataDOM
 
     lua_newtable(LuaState());
 
-    for(Data *data : _pImpl->Children)
+    for(Data *data : Children())
       {
         data->Push();
       }
@@ -392,26 +422,18 @@ namespace DataDOM
     lua_State *LuaState = nullptr;
     std::string LuaName;
     std::string Filename;
-    std::list<Data*> Children;
   };
 
   LuaDocument::LuaDocument(lua_State *L, const std::string &luaName, const std::string &filename)
-    : _pImpl(std::make_unique<Impl>(L, luaName, filename))
+    : Container(L, luaName),
+      _pImpl(std::make_unique<Impl>(L, luaName, filename))
   {
 
   }
 
   LuaDocument::~LuaDocument()
   {
-    for(Data *data : _pImpl->Children)
-      {
-        delete data;
-      }
-  }
 
-  void LuaDocument::Add(Data *data)
-  {
-    _pImpl->Children.push_back(data);
   }
 
   void LuaDocument::Save() const
@@ -420,7 +442,7 @@ namespace DataDOM
     lua_pushinteger(_pImpl->LuaState, 1);
     lua_newtable(_pImpl->LuaState);
 
-    for(Data *data : _pImpl->Children)
+    for(Data *data : Children())
       {
         data->Push();
       }
@@ -456,9 +478,97 @@ namespace DataDOM
 
   void LuaDocument::Load()
   {
-    for(Data *data : _pImpl->Children)
+    for(Data *data : Children())
       {
         data->Get();
       }
+  }
+
+  Table *LuaDocument::CreateTable(const std::string &name) const
+  {
+    return new Table(_pImpl->LuaState, name);
+  }
+
+  Table *LuaDocument::CreateTable(int idx) const
+  {
+    return new Table(_pImpl->LuaState, idx);
+  }
+
+  ////////////////////////////////////////////////////////////
+  // Container
+  struct Container::Impl
+  {
+    std::list<Data*> _children;
+  };
+
+  Container::Container(lua_State *L, const std::string &name)
+    : Data(L, name),
+      _pImpl(std::make_unique<Impl>())
+  {
+
+  }
+
+  Container::Container(lua_State *L, int idx)
+    : Data(L, idx),
+      _pImpl(std::make_unique<Impl>())
+  {
+
+  }
+
+  Container::~Container()
+  {
+    for(Data *data : _pImpl->_children)
+      {
+        delete data;
+      }
+  }
+
+  void Container::Add(Data *data)
+  {
+    _pImpl->_children.push_back(data);
+  }
+
+  void Container::AddString(const std::string &name, std::string &targetField)
+  {
+    Add(new StringField(LuaState(), name, targetField));
+  }
+
+  void Container::AddCString(const std::string &name, const char *&targetField)
+  {
+    Add(new CStringField(LuaState(), name, targetField));
+  }
+
+  void Container::AddInteger(const std::string &name, int &targetField)
+  {
+    Add(new IntegerField(LuaState(), name, targetField));
+  }
+
+  void Container::AddBoolean(const std::string &name, bool &targetField)
+  {
+    Add(new BooleanField(LuaState(), name, targetField));
+  }
+
+  void Container::AddDouble(const std::string &name, double &targetField)
+  {
+    Add(new DoubleField(LuaState(), name, targetField));
+  }
+
+  void Container::AddFlags(const std::string &name,
+                           unsigned long &flags,
+                           const std::array<const char * const, MAX_BIT> &nameArray)
+  {
+    Add(new Flags(LuaState(), name, flags, nameArray));
+  }
+
+  void Container::AddFlags(const std::string &name,
+                           unsigned long &flags,
+                           const char * const * nameArray)
+  {
+    Add(new Flags(LuaState(), name, flags, nameArray));
+  }
+
+  const std::list<Data*> &Container::Children() const
+  {
+    return _pImpl->_children;
   }
 } // namespace DataDOM
