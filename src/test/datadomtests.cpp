@@ -1,3 +1,4 @@
+#include <array>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <utility/datadom.hpp>
@@ -39,6 +40,7 @@ public:
   int SomeIntegerField = 0;
   double SomeDoubleField = 0.0;
   bool SomeBooleanField = false;
+  unsigned long Flags = 0;
 };
 
 class DataDOMTests : public ::testing::Test
@@ -69,6 +71,7 @@ protected:
 
   //private:
   lua_State *L = nullptr;
+  const std::array<const char * const, 32> FlagNameArray = { "Flag0", "Flag1", "Flag2", "Flag3", "Flag4", "Flag5", "Flag6", "Flag7", "Flag8", "Flag9", "Flag10", "Flag11", "Flag12", "Flag13", "Flag14", "Flag15", "Flag16", "Flag17", "Flag18", "Flag19", "Flag20", "Flag21", "Flag22", "Flag23", "Flag24", "Flag25", "Flag26", "Flag27", "Flag28", "Flag29", "Flag30", "Flag31" };
 };
 
 TEST_F(DataDOMTests, CreatingFieldObjectCompiles)
@@ -99,13 +102,20 @@ TEST_F(DataDOMTests, PushData)
     SomeStringField: "My foo",
     SomeIntegerField: 123,
     SomeDoubleField: 3.14,
-    SomeBooleanField: true
+    SomeBooleanField: true,
+      Flags: 1 << 0 | 1 << 13
   };
+
+  //myFoo.Flags = 0;
+
+  //SetBit(myFoo.Flags, BV00);
+  //SetBit(myFoo.Flags, BV13);
 
   DataDOM::LuaDocument doc(L, "foo", "foo.lua");
   doc.Add(new DataDOM::StringField(L, "SomeStringField", myFoo.SomeStringField));
   doc.Add(new DataDOM::IntegerField(L, "SomeIntegerField", myFoo.SomeIntegerField));
   doc.Add(new DataDOM::DoubleField(L, "SomeDoubleField", myFoo.SomeDoubleField));
   doc.Add(new DataDOM::BooleanField(L, "SomeBooleanField", myFoo.SomeBooleanField));
+  doc.Add(new DataDOM::Flags(L, "Flags", myFoo.Flags, FlagNameArray));
   doc.Save();
 }

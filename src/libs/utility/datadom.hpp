@@ -108,8 +108,28 @@ namespace DataDOM
   {
   public:
     Table(lua_State *L, const std::string &name);
-    ~Table();
+    virtual ~Table();
     void Add(Data *data);
+    virtual void Push() const override;
+    virtual void Get() override;
+
+  private:
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
+
+  static constexpr size_t MAX_BIT = 32;
+
+  class Flags : public Data
+  {
+  public:
+    Flags(lua_State *L, const std::string &name,
+          unsigned long &flags,
+          const std::array<const char * const, MAX_BIT> &nameArray);
+    Flags(lua_State *L, const std::string &name,
+          unsigned long &flags,
+          const char * const * nameArray);
+    virtual ~Flags();
     virtual void Push() const override;
     virtual void Get() override;
 
