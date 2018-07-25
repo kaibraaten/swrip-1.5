@@ -8,7 +8,8 @@
 
 namespace DataDOM
 {
-  constexpr int INVALID_INDEX = -1;
+  static constexpr int INVALID_INDEX = -1;
+  static constexpr size_t MAX_BIT = 32;
 
   class Data
   {
@@ -49,6 +50,22 @@ namespace DataDOM
   public:
     StringField(lua_State *L, const std::string &name, std::string &targetField);
     ~StringField();
+
+    virtual void Push() const override;
+
+  protected:
+    virtual void AssignFromLuaToField(int idx) override;
+
+  private:
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
+
+  class CStringField : public PrimitiveField
+  {
+  public:
+    CStringField(lua_State *L, const std::string &name, const char *&targetField);
+    ~CStringField();
 
     virtual void Push() const override;
 
@@ -108,13 +125,40 @@ namespace DataDOM
     std::unique_ptr<Impl> _pImpl;
   };
 
-  class Table : public Data
+  class Container : public Data
+  {
+  public:
+    virtual ~Container();
+
+    void Add(Data *data);
+    void AddString(const std::string &name, std::string &targetField);
+    void AddCString(const std::string &name, const char *&targetField);
+    void AddInteger(const std::string &name, int &targetField);
+    void AddBoolean(const std::string &name, bool &targetField);
+    void AddDouble(const std::string &name, double &targetField);
+    void AddFlags(const std::string &name,
+                  unsigned long &flags,
+                  const std::array<const char * const, MAX_BIT> &nameArray);
+    void AddFlags(const std::string &name,
+                  unsigned long &flags,
+                  const char * const * nameArray);
+
+  protected:
+    Container(lua_State *L, const std::string &name);
+    Container(lua_State *L, int idx);
+    const std::list<Data*> &Children() const;
+
+  private:
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
+
+  class Table : public Container
   {
   public:
     Table(lua_State *L, const std::string &name);
     Table(lua_State *L, int idx);
     virtual ~Table();
-    void Add(Data *data);
     virtual void Push() const override;
     virtual void Get() override;
 
@@ -122,8 +166,6 @@ namespace DataDOM
     struct Impl;
     std::unique_ptr<Impl> _pImpl;
   };
-
-  static constexpr size_t MAX_BIT = 32;
 
   class Flags : public Data
   {
@@ -143,16 +185,20 @@ namespace DataDOM
     std::unique_ptr<Impl> _pImpl;
   };
 
-  class LuaDocument
+  class LuaDocument : public Container
   {
   public:
     LuaDocument(lua_State *L, const std::string &luaName, const std::string &filename);
     ~LuaDocument();
     void Save() const;
     void Load();
-    void Add(Data *data);
+    Table *CreateTable(const std::string &name) const;
+    Table *CreateTable(int idx) const;
 
   private:
+    void Push() const {}
+    void Get() {}
+
     struct Impl;
     std::unique_ptr<Impl> _pImpl;
   };
