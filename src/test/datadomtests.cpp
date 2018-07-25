@@ -33,6 +33,13 @@ protected:
   }
 };
 
+class ContainedByFoo
+{
+public:
+  int SomeData = 0;
+  int MoreData = 0;
+};
+
 class Foo
 {
 public:
@@ -41,6 +48,7 @@ public:
   double SomeDoubleField = 0.0;
   bool SomeBooleanField = false;
   unsigned long Flags = 0;
+  std::list<ContainedByFoo> SubObjects;
 };
 
 class DataDOMTests : public ::testing::Test
@@ -56,6 +64,16 @@ protected:
     lua_pushstring( L, path );
     lua_setfield( L, -2, "path" );
     lua_pop( L, 1 );
+
+    MyFoo = new Foo
+      {
+      SomeStringField: "My foo",
+      SomeIntegerField: 123,
+      SomeDoubleField: 3.14,
+      SomeBooleanField: true,
+      Flags: 1 << 0 | 1 << 13,
+      SubObjects: { {1, 2}, {2, 3}, {3, 4}, {4, 5} }
+      };
   }
 
   void TearDown() override
@@ -69,8 +87,8 @@ protected:
     */
   }
 
-  //private:
   lua_State *L = nullptr;
+  Foo *MyFoo;
   const std::array<const char * const, 32> FlagNameArray = { "Flag0", "Flag1", "Flag2", "Flag3", "Flag4", "Flag5", "Flag6", "Flag7", "Flag8", "Flag9", "Flag10", "Flag11", "Flag12", "Flag13", "Flag14", "Flag15", "Flag16", "Flag17", "Flag18", "Flag19", "Flag20", "Flag21", "Flag22", "Flag23", "Flag24", "Flag25", "Flag26", "Flag27", "Flag28", "Flag29", "Flag30", "Flag31" };
 };
 
@@ -97,25 +115,26 @@ TEST_F(DataDOMTests, TargetFieldCanBeModified)
 
 TEST_F(DataDOMTests, PushData)
 {
-  Foo myFoo
-  {
-    SomeStringField: "My foo",
-    SomeIntegerField: 123,
-    SomeDoubleField: 3.14,
-    SomeBooleanField: true,
-      Flags: 1 << 0 | 1 << 13
-  };
-
-  //myFoo.Flags = 0;
-
-  //SetBit(myFoo.Flags, BV00);
-  //SetBit(myFoo.Flags, BV13);
-
   DataDOM::LuaDocument doc(L, "foo", "foo.lua");
-  doc.Add(new DataDOM::StringField(L, "SomeStringField", myFoo.SomeStringField));
-  doc.Add(new DataDOM::IntegerField(L, "SomeIntegerField", myFoo.SomeIntegerField));
-  doc.Add(new DataDOM::DoubleField(L, "SomeDoubleField", myFoo.SomeDoubleField));
-  doc.Add(new DataDOM::BooleanField(L, "SomeBooleanField", myFoo.SomeBooleanField));
-  doc.Add(new DataDOM::Flags(L, "Flags", myFoo.Flags, FlagNameArray));
+  doc.Add(new DataDOM::StringField(L, "SomeStringField", MyFoo->SomeStringField));
+  doc.Add(new DataDOM::IntegerField(L, "SomeIntegerField", MyFoo->SomeIntegerField));
+  doc.Add(new DataDOM::DoubleField(L, "SomeDoubleField", MyFoo->SomeDoubleField));
+  doc.Add(new DataDOM::BooleanField(L, "SomeBooleanField", MyFoo->SomeBooleanField));
+  doc.Add(new DataDOM::Flags(L, "Flags", MyFoo->Flags, FlagNameArray));
+
+  DataDOM::Table *subObjects = new DataDOM::Table(L, "SubObjects");
+  int counter = 0;
+
+  for(ContainedByFoo &contained : MyFoo->SubObjects)
+    {
+      DataDOM::Table *oneObject = new DataDOM::Table(L, counter++);
+      oneObject->Add(new DataDOM::IntegerField(L, "SomeData", contained.SomeData));
+      oneObject->Add(new DataDOM::IntegerField(L, "MoreData", contained.MoreData));
+
+      subObjects->Add(oneObject);
+    }
+
+  doc.Add(subObjects);
+
   doc.Save();
 }
