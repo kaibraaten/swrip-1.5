@@ -1,5 +1,7 @@
+#include <iostream>
 #include <list>
 #include <cassert>
+#include "utility.hpp"
 #include "datadom.hpp"
 
 extern "C" void Bug( const char *str, ... );
@@ -278,6 +280,70 @@ namespace DataDOM
   }
 
   ////////////////////////////////////////////////////////
+  // Flags
+  struct Flags::Impl
+  {
+    Impl(unsigned long &flags, const char * const * nameArray)
+      : Flags(flags),
+        NameArray(nameArray)
+    {
+
+    }
+
+    unsigned long &Flags;
+    const char * const * NameArray;
+  };
+
+
+  Flags::Flags(lua_State *L, const std::string &name,
+               unsigned long &flags,
+               const std::array<const char * const, MAX_BIT> &nameArray)
+    : Data(L, name),
+      _pImpl(std::make_unique<Impl>(flags, nameArray.data()))
+  {
+
+  }
+
+  Flags::Flags(lua_State *L, const std::string &name,
+               unsigned long &flags,
+               const char * const nameArray[])
+    : Data(L, name),
+      _pImpl(std::make_unique<Impl>(flags, nameArray))
+  {
+
+  }
+
+  Flags::~Flags()
+  {
+
+  }
+
+  void Flags::Push() const
+  {
+    lua_pushstring(LuaState(), Name().c_str());
+    lua_newtable(LuaState());
+
+    for(size_t bit = 0; bit < MAX_BIT; ++bit)
+      {
+        unsigned long mask = 1 << bit;
+
+        if(IsBitSet(_pImpl->Flags, mask))
+          {
+            lua_pushinteger(LuaState(), bit);
+            lua_pushstring(LuaState(), _pImpl->NameArray[bit]);
+            lua_settable(LuaState(), -3);
+          }
+      }
+
+    lua_settable(LuaState(), -3);
+  }
+
+  void Flags::Get()
+  {
+
+  }
+
+  ////////////////////////////////////////////////////////
   // LuaDocument
   struct LuaDocument::Impl
   {
@@ -327,9 +393,6 @@ namespace DataDOM
 
     lua_setglobal(_pImpl->LuaState, _pImpl->LuaName.c_str());
 
-    //
-    //char buffer[MAX_STRING_LENGTH];
-    //sprintf( buffer, "%ssavers.lua", SCRIPT_DIR );
     int error = luaL_dofile(_pImpl->LuaState, "savers.lua");
 
     if(error != 0)
