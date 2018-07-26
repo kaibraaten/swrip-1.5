@@ -144,8 +144,8 @@ namespace DataDOM
   // CStringField
   struct CStringField::Impl
   {
-    Impl(const char * const &targetField)
-      : _targetField(const_cast<const char *&>(targetField))
+    Impl(const char *&targetField)
+      : _targetField(targetField)
     {
 
     }
@@ -155,7 +155,7 @@ namespace DataDOM
 
   CStringField::CStringField(lua_State *L,
                              const std::string &name,
-                             const char * const &targetField)
+                             const char *&targetField)
     : PrimitiveField(L, name),
       _pImpl(std::make_unique<Impl>(targetField))
   {
@@ -536,7 +536,7 @@ namespace DataDOM
     Add(new StringField(LuaState(), name, targetField));
   }
 
-  void Container::AddCString(const std::string &name, const char * const &targetField)
+  void Container::AddCString(const std::string &name, const char *&targetField)
   {
     Add(new CStringField(LuaState(), name, targetField));
   }
