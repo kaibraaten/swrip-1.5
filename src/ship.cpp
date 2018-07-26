@@ -36,6 +36,7 @@
 #include "script.hpp"
 #include "pcdata.hpp"
 #include <utility/repositorybase.hpp>
+#include <utility/datadom.hpp>
 
 ShipRepository *Ships = nullptr;
 
@@ -3864,14 +3865,36 @@ Ship::Ship()
     }
 }
 
-void ShipRepository::Save(const Ship *ship) const
+void ShipRepository::Save(const Ship *constship) const
 {
+  Ship *ship = const_cast<Ship*>(constship);
+
   if( ship->Class == SHIP_DEBRIS )
     {
       return;
     }
 
-  LuaSaveDataFile( GetShipFilename( ship ), PushShip, "ship", ship );
+  lua_State *L = CreateLuaState();
+  DataDOM::LuaDocument doc(L, "ship", GetShipFilename(ship));
+
+  doc.AddCString("Name", ship->Name);
+  doc.AddCString("PersonalName", ship->PersonalName);
+  doc.AddCString("Owner", ship->Owner);
+  doc.AddCString("Pilot", ship->Pilot);
+  doc.AddCString("CoPilot", ship->CoPilot);
+  doc.AddCString("Class", ShipClasses[ship->Class]);
+  doc.AddInteger("Shipyard", ship->Shipyard);
+  doc.AddInteger("Location", ship->Location);
+  doc.AddInteger("LastDock", ship->LastDock);
+  doc.AddCString("Type", ShipTypes[ship->Type]);
+  doc.AddInteger("State", ship->State);
+  doc.AddBoolean("Alarm", ship->Alarm);
+  doc.AddInteger("DockingPorts", ship->DockingPorts);
+  doc.AddBoolean("Guard", ship->Guard);
+  doc.AddCString("Home", ship->Home);
+
+  doc.Save();
+  lua_close(L);
 }
 
 void ShipRepository::Save() const

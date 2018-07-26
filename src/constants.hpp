@@ -68,7 +68,8 @@
 #define BV30  (1 << 30)
 #define BV31  (1 << 31)
 /* 32 USED! DO NOT ADD MORE! SB */
-#define MAX_BIT 32
+//#define MAX_BIT 32
+static constexpr size_t MAX_BIT = 32;
 
 #define MAX_LAYERS       8      /* maximum clothing layers */
 #define MAX_NEST       100      /* maximum container nesting */

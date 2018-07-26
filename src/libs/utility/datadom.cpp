@@ -5,6 +5,7 @@
 #include "datadom.hpp"
 
 extern "C" void Bug( const char *str, ... );
+#define SCRIPT_DIR      "./scripts/"
 
 namespace DataDOM
 {
@@ -143,8 +144,8 @@ namespace DataDOM
   // CStringField
   struct CStringField::Impl
   {
-    Impl(const char *&targetField)
-      : _targetField(targetField)
+    Impl(const char * const &targetField)
+      : _targetField(const_cast<const char *&>(targetField))
     {
 
     }
@@ -154,7 +155,7 @@ namespace DataDOM
 
   CStringField::CStringField(lua_State *L,
                              const std::string &name,
-                             const char *&targetField)
+                             const char * const &targetField)
     : PrimitiveField(L, name),
       _pImpl(std::make_unique<Impl>(targetField))
   {
@@ -449,7 +450,9 @@ namespace DataDOM
 
     lua_setglobal(_pImpl->LuaState, _pImpl->LuaName.c_str());
 
-    int error = luaL_dofile(_pImpl->LuaState, "savers.lua");
+    char saverScript[MAX_STRING_LENGTH];
+    sprintf(saverScript, "%ssavers.lua", SCRIPT_DIR);
+    int error = luaL_dofile(_pImpl->LuaState, saverScript);
 
     if(error != 0)
       {
@@ -533,7 +536,7 @@ namespace DataDOM
     Add(new StringField(LuaState(), name, targetField));
   }
 
-  void Container::AddCString(const std::string &name, const char *&targetField)
+  void Container::AddCString(const std::string &name, const char * const &targetField)
   {
     Add(new CStringField(LuaState(), name, targetField));
   }

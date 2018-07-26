@@ -961,7 +961,7 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
                               argument = OneArgument( argument, arg4 );
                               value = GetTrapFlag( arg4 );
 
-                              if ( value >= 0 || value < MAX_BIT )
+                              if ( value >= 0 || value < (int)MAX_BIT )
 				{
 				  SetBit( extra, 1 << value );
 				}

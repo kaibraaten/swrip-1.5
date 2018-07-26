@@ -25,6 +25,7 @@ namespace DataDOM
     int Index() const;
     lua_State *LuaState() const;
 
+  private:
     struct Impl;
     std::unique_ptr<Impl> _pImpl;
   };
@@ -64,7 +65,7 @@ namespace DataDOM
   class CStringField : public PrimitiveField
   {
   public:
-    CStringField(lua_State *L, const std::string &name, const char *&targetField);
+    CStringField(lua_State *L, const std::string &name, const char * const &targetField);
     ~CStringField();
 
     virtual void Push() const override;
@@ -132,7 +133,7 @@ namespace DataDOM
 
     void Add(Data *data);
     void AddString(const std::string &name, std::string &targetField);
-    void AddCString(const std::string &name, const char *&targetField);
+    void AddCString(const std::string &name, const char *const &targetField);
     void AddInteger(const std::string &name, int &targetField);
     void AddBoolean(const std::string &name, bool &targetField);
     void AddDouble(const std::string &name, double &targetField);
