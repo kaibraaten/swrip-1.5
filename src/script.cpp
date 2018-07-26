@@ -129,11 +129,10 @@ void LuaPushFlags( lua_State *L, unsigned long flags,
 {
   if( flags )
     {
-      size_t bit = 0;
       lua_pushstring( L, key );
       lua_newtable( L );
 
-      for( bit = 0; bit < MAX_BIT; ++bit )
+      for(size_t bit = 0; bit < MAX_BIT; ++bit)
         {
           unsigned int mask = 1 << bit;
 
@@ -268,9 +267,7 @@ static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int 
 
   if( affect->AffectedBy )
     {
-      int x = 0;
-
-      for( x = 0; x < MAX_BIT; ++x )
+      for(size_t x = 0; x < MAX_BIT; ++x )
 	{
 	  if( IsBitSet( affect->AffectedBy, 1 << x ) )
 	    {
