@@ -65,7 +65,7 @@ namespace DataDOM
   class CStringField : public PrimitiveField
   {
   public:
-    CStringField(lua_State *L, const std::string &name, const char * const &targetField);
+    CStringField(lua_State *L, const std::string &name, const char *&targetField);
     ~CStringField();
 
     virtual void Push() const override;
@@ -133,7 +133,7 @@ namespace DataDOM
 
     void Add(Data *data);
     void AddString(const std::string &name, std::string &targetField);
-    void AddCString(const std::string &name, const char *const &targetField);
+    void AddCString(const std::string &name, const char *&targetField);
     void AddInteger(const std::string &name, int &targetField);
     void AddBoolean(const std::string &name, bool &targetField);
     void AddDouble(const std::string &name, double &targetField);
