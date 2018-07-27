@@ -1131,7 +1131,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetAffectFlag( arg3 );
 
-          if ( value < 0 || value >= MAX_BIT )
+          if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->AffectedBy, 1 << value );
@@ -1278,7 +1278,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
 	  
-          if ( value < 0 || value >= MAX_BIT )
+          if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->Resistant, 1 << value );
@@ -1310,7 +1310,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
 
-          if ( value < 0 || value >= MAX_BIT )
+          if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->Immune, 1 << value );
@@ -1373,7 +1373,7 @@ void do_mset( Character *ch, char *argument )
         {
           argument = OneArgument( argument, arg3 );
           value = GetBodyPartFlag( arg3 );
-          if ( value < 0 || value >= MAX_BIT )
+          if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->BodyParts, 1 << value );
@@ -1407,7 +1407,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetAttackFlag( arg3 );
 	  
-          if ( value < 0 || value >= MAX_BIT )
+          if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->AttackFlags, 1 << value );
@@ -1439,7 +1439,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetDefenseFlag( arg3 );
 	  
-          if ( value < 0 || value >= MAX_BIT )
+          if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->DefenseFlags, 1 << value );

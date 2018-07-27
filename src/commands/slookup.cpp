@@ -154,16 +154,16 @@ void do_slookup( Character *ch, char *arg )
 
 	  if ( aff->AffectedBy )
 	    {
-	      int x;
-
 	      strcat( buf, " applies" );
 
-	      for ( x = 0; x < MAX_BIT; x++ )
-		if ( IsBitSet(aff->AffectedBy, 1 << x) )
-		  {
-		    strcat( buf, " " );
-		    strcat( buf, AffectFlags[x] );
-		  }
+	      for ( size_t x = 0; x < MAX_BIT; x++ )
+                {
+                  if ( IsBitSet(aff->AffectedBy, 1 << x) )
+                    {
+                      strcat( buf, " " );
+                      strcat( buf, AffectFlags[x] );
+                    }
+                }
 	    }
 
 	  if ( !IsNullOrEmpty( aff->Duration ) )

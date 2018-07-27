@@ -7,7 +7,6 @@ bool spec_police_jail( Character *ch )
   Room *jail = NULL;
   Character *victim = NULL;
   Character *v_next = NULL;
-  int vip = 0;
   char buf[MAX_STRING_LENGTH];
 
   if ( !IsAwake(ch) || ch->Fighting )
@@ -22,7 +21,7 @@ bool spec_police_jail( Character *ch )
         continue;
       if ( NumberBits ( 1 ) == 0 )
         continue;
-      for ( vip = 0 ; vip < MAX_BIT ; vip++ )
+      for (size_t vip = 0 ; vip < MAX_BIT ; vip++ )
         if ( IsBitSet ( ch->VipFlags , 1 << vip ) &&  IsBitSet( victim->PCData->WantedFlags , 1 << vip) )
           {
             sprintf( buf , "Hey you're wanted on %s!", WantedFlags[vip] );

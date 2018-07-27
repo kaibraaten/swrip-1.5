@@ -14,12 +14,12 @@ struct FakeStringField : public DataDOM::PrimitiveField
 
   }
 
-  void Push() const override
+  void Write() const override
   {
 
   }
 
-  void Get() override
+  void Read() override
   {
     TargetField = "FOO123";
   }
@@ -107,7 +107,7 @@ TEST_F(DataDOMTests, TargetFieldCanBeModified)
   std::shared_ptr<DataDOM::Data> data = std::make_shared<FakeStringField>(L, "SomeStringField", myFoo.SomeStringField);
 
   // Act
-  data->Get();
+  data->Read();
 
   // Assert
   EXPECT_EQ("FOO123", myFoo.SomeStringField);
@@ -115,26 +115,22 @@ TEST_F(DataDOMTests, TargetFieldCanBeModified)
 
 TEST_F(DataDOMTests, PushData)
 {
-  DataDOM::LuaDocument doc(L, "foo", "foo.lua");
+  DataDOM::ReadWriteDocument doc(L, "foo", "foo.lua");
   doc.AddString("SomeStringField", MyFoo->SomeStringField);
   doc.AddInteger("SomeIntegerField", MyFoo->SomeIntegerField);
   doc.AddDouble("SomeDoubleField", MyFoo->SomeDoubleField);
   doc.AddBoolean("SomeBooleanField", MyFoo->SomeBooleanField);
   doc.AddFlags("Flags", MyFoo->Flags, FlagNameArray);
 
-  DataDOM::Table *subObjects = doc.CreateTable("SubObjects");
+  DataDOM::Table *subObjects = doc.AddTable("SubObjects");
   int counter = 0;
 
   for(ContainedByFoo &contained : MyFoo->SubObjects)
     {
-      DataDOM::Table *oneObject = doc.CreateTable(counter++);
+      DataDOM::Table *oneObject = subObjects->AddTable(counter++);
       oneObject->AddInteger("SomeData", contained.SomeData);
       oneObject->AddInteger("MoreData", contained.MoreData);
-
-      subObjects->Add(oneObject);
     }
 
-  doc.Add(subObjects);
-
-  doc.Save();
+  doc.Write();
 }
