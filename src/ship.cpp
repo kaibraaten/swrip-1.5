@@ -3865,15 +3865,16 @@ Ship::Ship()
     }
 }
 
-void ShipRepository::Save(const Ship *constship) const
+void ShipRepository::Save(const Ship *ship) const
 {
-  Ship *ship = const_cast<Ship*>(constship);
-
   if( ship->Class == SHIP_DEBRIS )
     {
       return;
     }
 
+  LuaSaveDataFile(GetShipFilename(ship), PushShip, "ship", ship);
+
+#if 0
   lua_State *L = CreateLuaState();
   DataDOM::LuaDocument doc(L, "ship", GetShipFilename(ship));
 
@@ -3895,6 +3896,7 @@ void ShipRepository::Save(const Ship *constship) const
 
   doc.Save();
   lua_close(L);
+#endif
 }
 
 void ShipRepository::Save() const

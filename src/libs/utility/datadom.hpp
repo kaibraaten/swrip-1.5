@@ -15,8 +15,8 @@ namespace DataDOM
   {
   public:
     virtual ~Data();
-    virtual void Push() const = 0;
-    virtual void Get() = 0;
+    virtual void Write() const = 0;
+    virtual void Read() = 0;
 
   protected:
     Data(lua_State *L, const std::string &name);
@@ -34,8 +34,8 @@ namespace DataDOM
   {
   public:
     virtual ~PrimitiveField();
-    virtual void Push() const = 0;
-    virtual void Get() override;
+    virtual void Write() const = 0;
+    virtual void Read() override;
 
   protected:
     PrimitiveField(lua_State *L, const std::string &name);
@@ -52,7 +52,7 @@ namespace DataDOM
     StringField(lua_State *L, const std::string &name, std::string &targetField);
     ~StringField();
 
-    virtual void Push() const override;
+    virtual void Write() const override;
 
   protected:
     virtual void AssignFromLuaToField(int idx) override;
@@ -65,10 +65,10 @@ namespace DataDOM
   class CStringField : public PrimitiveField
   {
   public:
-    CStringField(lua_State *L, const std::string &name, const char *&targetField);
+    CStringField(lua_State *L, const std::string &name, char *&targetField);
     ~CStringField();
 
-    virtual void Push() const override;
+    virtual void Write() const override;
 
   protected:
     virtual void AssignFromLuaToField(int idx) override;
@@ -84,7 +84,7 @@ namespace DataDOM
     IntegerField(lua_State *L, const std::string &name, int &targetField);
     ~IntegerField();
 
-    virtual void Push() const override;
+    virtual void Write() const override;
 
   protected:
     virtual void AssignFromLuaToField(int idx) override;
@@ -100,7 +100,7 @@ namespace DataDOM
     BooleanField(lua_State *L, const std::string &name, bool &targetField);
     ~BooleanField();
 
-    virtual void Push() const override;
+    virtual void Write() const override;
 
   protected:
     virtual void AssignFromLuaToField(int idx) override;
@@ -116,7 +116,7 @@ namespace DataDOM
     DoubleField(lua_State *L, const std::string &name, double &targetField);
     ~DoubleField();
 
-    virtual void Push() const override;
+    virtual void Write() const override;
 
   protected:
     virtual void AssignFromLuaToField(int idx) override;
@@ -126,14 +126,15 @@ namespace DataDOM
     std::unique_ptr<Impl> _pImpl;
   };
 
+  class Table;
+
   class Container : public Data
   {
   public:
     virtual ~Container();
 
-    void Add(Data *data);
     void AddString(const std::string &name, std::string &targetField);
-    void AddCString(const std::string &name, const char *&targetField);
+    void AddCString(const std::string &name, char *&targetField);
     void AddInteger(const std::string &name, int &targetField);
     void AddBoolean(const std::string &name, bool &targetField);
     void AddDouble(const std::string &name, double &targetField);
@@ -143,6 +144,8 @@ namespace DataDOM
     void AddFlags(const std::string &name,
                   unsigned long &flags,
                   const char * const * nameArray);
+    Table *AddTable(const std::string &name) const;
+    Table *AddTable(int idx) const;
 
   protected:
     Container(lua_State *L, const std::string &name);
@@ -160,8 +163,8 @@ namespace DataDOM
     Table(lua_State *L, const std::string &name);
     Table(lua_State *L, int idx);
     virtual ~Table();
-    virtual void Push() const override;
-    virtual void Get() override;
+    virtual void Write() const override;
+    virtual void Read() override;
 
   private:
     struct Impl;
@@ -178,28 +181,193 @@ namespace DataDOM
           unsigned long &flags,
           const char * const * nameArray);
     virtual ~Flags();
-    virtual void Push() const override;
-    virtual void Get() override;
+    virtual void Write() const override;
+    virtual void Read() override;
 
   private:
     struct Impl;
     std::unique_ptr<Impl> _pImpl;
   };
 
-  class LuaDocument : public Container
+  class ReadWriteDocument : public Container
   {
   public:
-    LuaDocument(lua_State *L, const std::string &luaName, const std::string &filename);
-    ~LuaDocument();
-    void Save() const;
-    void Load();
-    Table *CreateTable(const std::string &name) const;
-    Table *CreateTable(int idx) const;
+    ReadWriteDocument(lua_State *L, const std::string &luaName, const std::string &filename);
+    ~ReadWriteDocument();
+    virtual void Write() const override;
+    virtual void Read() override;
 
   private:
-    void Push() const {}
-    void Get() {}
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
 
+  /////////////////////////////////////////////////////////////////////
+  // WriteOnly
+  
+  class WriteOnlyData
+  {
+  public:
+    virtual ~WriteOnlyData();
+    virtual void Write() const = 0;
+
+  protected:
+    WriteOnlyData(lua_State *L, const std::string &name);
+    WriteOnlyData(lua_State *L, int idx);
+    std::string Name() const;
+    int Index() const;
+    lua_State *LuaState() const;
+
+  private:
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
+
+  class WriteOnlyPrimitiveField : public WriteOnlyData
+  {
+  public:
+    virtual ~WriteOnlyPrimitiveField();
+    virtual void Write() const = 0;
+
+  protected:
+    WriteOnlyPrimitiveField(lua_State *L, const std::string &name);
+
+  private:
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
+
+  class WriteOnlyStringField : public WriteOnlyPrimitiveField
+  {
+  public:
+    WriteOnlyStringField(lua_State *L, const std::string &name,
+                         const std::string &targetField);
+    ~WriteOnlyStringField();
+    virtual void Write() const override;
+
+  private:
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
+
+  class WriteOnlyCStringField : public WriteOnlyPrimitiveField
+  {
+  public:
+    WriteOnlyCStringField(lua_State *L, const std::string &name, const char *targetField);
+    ~WriteOnlyCStringField();
+    virtual void Write() const override;
+
+  private:
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
+
+  class WriteOnlyIntegerField : public WriteOnlyPrimitiveField
+  {
+  public:
+    WriteOnlyIntegerField(lua_State *L, const std::string &name, int targetField);
+    ~WriteOnlyIntegerField();
+    virtual void Write() const override;
+
+  private:
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
+
+  class WriteOnlyBooleanField : public WriteOnlyPrimitiveField
+  {
+  public:
+    WriteOnlyBooleanField(lua_State *L, const std::string &name,
+                          bool targetField);
+    ~WriteOnlyBooleanField();
+    virtual void Write() const override;
+
+  private:
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
+
+  class WriteOnlyDoubleField : public WriteOnlyPrimitiveField
+  {
+  public:
+    WriteOnlyDoubleField(lua_State *L, const std::string &name, double targetField);
+    ~WriteOnlyDoubleField();
+    virtual void Write() const override;
+
+  private:
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
+
+  class WriteOnlyTable;
+
+  class WriteOnlyContainer : public WriteOnlyData
+  {
+  public:
+    virtual ~WriteOnlyContainer();
+
+    void AddString(const std::string &name, const std::string &targetField);
+    void AddCString(const std::string &name, const char *targetField);
+    void AddInteger(const std::string &name, int targetField);
+    void AddBoolean(const std::string &name, bool targetField);
+    void AddDouble(const std::string &name, double targetField);
+    void AddFlags(const std::string &name,
+                  unsigned long flags,
+                  const std::array<const char * const, MAX_BIT> &nameArray);
+    void AddFlags(const std::string &name,
+                  unsigned long flags,
+                  const char * const * nameArray);
+    WriteOnlyTable *AddTable(const std::string &name) const;
+    WriteOnlyTable *AddTable(int idx) const;
+
+  protected:
+    WriteOnlyContainer(lua_State *L, const std::string &name);
+    WriteOnlyContainer(lua_State *L, int idx);
+    const std::list<WriteOnlyData*> &Children() const;
+
+  private:
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
+
+  class WriteOnlyTable : public WriteOnlyContainer
+  {
+  public:
+    WriteOnlyTable(lua_State *L, const std::string &name);
+    WriteOnlyTable(lua_State *L, int idx);
+    virtual ~WriteOnlyTable();
+    virtual void Write() const override;
+
+  private:
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
+
+  class WriteOnlyFlags : public WriteOnlyData
+  {
+  public:
+    WriteOnlyFlags(lua_State *L, const std::string &name,
+                   unsigned long flags,
+                   const std::array<const char * const, MAX_BIT> &nameArray);
+    WriteOnlyFlags(lua_State *L, const std::string &name,
+                   unsigned long flags,
+                   const char * const * nameArray);
+    virtual ~WriteOnlyFlags();
+    virtual void Write() const override;
+
+  private:
+    struct Impl;
+    std::unique_ptr<Impl> _pImpl;
+  };
+
+  class WriteOnlyDocument : public WriteOnlyContainer
+  {
+  public:
+    WriteOnlyDocument(lua_State *L, const std::string &luaName, const std::string &filename);
+    ~WriteOnlyDocument();
+    virtual void Write() const override;
+
+  private:
     struct Impl;
     std::unique_ptr<Impl> _pImpl;
   };

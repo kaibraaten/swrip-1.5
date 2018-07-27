@@ -364,7 +364,7 @@ void do_oset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetWearFlag( arg3 );
 
-	  if ( value < 0 || value >= MAX_BIT )
+	  if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( obj->WearFlags, 1 << value );

@@ -434,11 +434,11 @@ void do_redit( Character *ch, char *argument )
           sprintf( buf, "Flags for exit direction: %d  Keywords: %s  Key: %ld\r\n[ ",
                    xit->Direction, xit->Keyword, xit->Key );
 
-          for ( value = 0; value <= MAX_BIT; value++ )
+          for (size_t bit = 0; bit <= MAX_BIT; ++bit)
             {
-              if ( IsBitSet( xit->Flags, 1 << value ) )
+              if (IsBitSet(xit->Flags, 1 << bit))
                 {
-                  strcat( buf, ExitFlags[value] );
+                  strcat( buf, ExitFlags[bit] );
                   strcat( buf, " " );
 		}
             }
@@ -453,7 +453,7 @@ void do_redit( Character *ch, char *argument )
           argument = OneArgument( argument, arg2 );
           value = GetExitFlag( arg2 );
 
-          if ( value < 0 || value > MAX_BIT )
+          if (value < 0)
             Echo( ch, "Unknown flag: %s\r\n", arg2 );
           else
             ToggleBit( xit->Flags, 1 << value );

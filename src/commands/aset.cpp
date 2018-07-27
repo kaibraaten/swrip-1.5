@@ -238,7 +238,7 @@ void do_aset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetAreaFlag( arg3 );
 	  
-          if ( value < 0 || value > MAX_BIT )
+          if ( value < 0 || static_cast<size_t>(value) > MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             {
