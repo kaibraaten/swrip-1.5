@@ -192,7 +192,7 @@ namespace DataDOM
   class ReadWriteDocument : public Container
   {
   public:
-    ReadWriteDocument(lua_State *L, const std::string &luaName, const std::string &filename);
+    ReadWriteDocument(const std::string &luaName, const std::string &filename);
     ~ReadWriteDocument();
     virtual void Write() const override;
     virtual void Read() override;
@@ -363,7 +363,7 @@ namespace DataDOM
   class WriteOnlyDocument : public WriteOnlyContainer
   {
   public:
-    WriteOnlyDocument(lua_State *L, const std::string &luaName, const std::string &filename);
+    WriteOnlyDocument(const std::string &luaName, const std::string &filename);
     ~WriteOnlyDocument();
     virtual void Write() const override;
 
@@ -371,6 +371,16 @@ namespace DataDOM
     struct Impl;
     std::unique_ptr<Impl> _pImpl;
   };
+
+  void AddCurrentAndMax(WriteOnlyContainer *container, const char *key,
+                        long current, long max);
+
+  template<typename T>
+  void AddCurrentAndMax(WriteOnlyContainer *container, const char *key,
+                        const T &structure)
+  {
+    AddCurrentAndMax(container, key, structure.Current, structure.Max);
+  }
 }
 
 #endif

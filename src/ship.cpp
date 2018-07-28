@@ -2150,6 +2150,7 @@ long GetRentalPrice(const Ship *ship)
   return GetShipValue(ship) / 100;
 }
 
+#if 0
 static void PushInstruments( lua_State *L, const Ship *ship )
 {
   lua_pushstring( L, "Instruments" );
@@ -2318,6 +2319,7 @@ static void PushShip( lua_State *L, const void *userData )
   
   lua_setglobal( L, "ship" );
 }
+#endif
 
 const char *GetShipFilename( const Ship *ship )
 {
@@ -3865,6 +3867,144 @@ Ship::Ship()
     }
 }
 
+static void AddBasicData(DataDOM::WriteOnlyContainer *container, const Ship *ship)
+{
+  container->AddCString("Name", ship->Name);
+  container->AddCString("PersonalName", ship->PersonalName);
+  container->AddCString("Owner", ship->Owner);
+  container->AddCString("Pilot", ship->Pilot);
+  container->AddCString("CoPilot", ship->CoPilot);
+  container->AddCString("Class", ShipClasses[ship->Class]);
+  container->AddInteger("Shipyard", ship->Shipyard);
+  container->AddInteger("Location", ship->Location);
+  container->AddInteger("LastDock", ship->LastDock);
+  container->AddCString("Type", ShipTypes[ship->Type]);
+  container->AddInteger("State", ship->State);
+  container->AddBoolean("Alarm", ship->Alarm);
+  container->AddInteger("DockingPorts", ship->DockingPorts);
+  container->AddBoolean("Guard", ship->Guard);
+  container->AddCString("Home", ship->Home);
+}
+
+static void AddPosition(DataDOM::WriteOnlyContainer *container, const Ship *ship)
+{
+  auto positionTable = container->AddTable("Position");
+  positionTable->AddDouble("X", ship->Position.x);
+  positionTable->AddDouble("Y", ship->Position.y);
+  positionTable->AddDouble("Z", ship->Position.z);
+}
+
+static void AddInstruments(DataDOM::WriteOnlyContainer *container, const Ship *ship)
+{
+  auto instruments = container->AddTable("Instruments");
+  instruments->AddInteger("AstroArray", ship->Instruments.AstroArray);
+  instruments->AddInteger("Comm", ship->Instruments.Comm);
+  instruments->AddInteger("Sensor", ship->Instruments.Sensor);
+}
+
+static void AddThrusters(DataDOM::WriteOnlyContainer *container, const Ship *ship)
+{
+  auto thrusters = container->AddTable("Thrusters");
+  thrusters->AddInteger("Maneuver", ship->Thrusters.Maneuver);
+  DataDOM::AddCurrentAndMax(thrusters, "Speed", ship->Thrusters.Speed);
+  DataDOM::AddCurrentAndMax(thrusters, "Energy", ship->Thrusters.Energy);
+}
+
+static void AddHyperdrive(DataDOM::WriteOnlyContainer *container, const Ship *ship)
+{
+  auto hyperdrive = container->AddTable("Hyperdrive");
+  hyperdrive->AddInteger("Speed", ship->Hyperdrive.Speed);
+}
+
+static void AddTube(DataDOM::WriteOnlyContainer *container, const Ship *ship)
+{
+  auto tube = container->AddTable("Tube");
+  tube->AddInteger("State", ship->WeaponSystems.Tube.State);
+  DataDOM::AddCurrentAndMax(tube, "Missiles", ship->WeaponSystems.Tube.Missiles);
+  DataDOM::AddCurrentAndMax(tube, "Torpedoes", ship->WeaponSystems.Tube.Torpedoes);
+  DataDOM::AddCurrentAndMax(tube, "Rockets",  ship->WeaponSystems.Tube.Rockets);
+}
+
+static void AddLaser(DataDOM::WriteOnlyContainer *container, const Ship *ship)
+{
+  auto laser = container->AddTable("Laser");
+  laser->AddInteger("Count", ship->WeaponSystems.Laser.Count);
+  laser->AddInteger("State", ship->WeaponSystems.Laser.State);
+}
+
+static void AddIonCannon(DataDOM::WriteOnlyContainer *container, const Ship *ship)
+{
+  auto ionCannon = container->AddTable("IonCannon");
+  ionCannon->AddInteger("Count", ship->WeaponSystems.IonCannon.Count);
+  ionCannon->AddInteger("State", ship->WeaponSystems.IonCannon.State);
+}
+
+static void AddTractorBeam(DataDOM::WriteOnlyContainer *container, const Ship *ship)
+{
+  auto tractorBeam = container->AddTable("TractorBeam");
+  tractorBeam->AddInteger("Strength", ship->WeaponSystems.TractorBeam.Strength);
+  tractorBeam->AddInteger("State", ship->WeaponSystems.TractorBeam.State);
+}
+
+static void AddTurrets(DataDOM::WriteOnlyContainer *container, const Ship *ship)
+{
+  auto turrets = container->AddTable("Turrets");
+
+  for(size_t i = 0; i < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++i)
+    {
+      const Turret *physicalTurret = ship->WeaponSystems.Turrets[i];
+      auto oneTurret = turrets->AddTable(i);
+      oneTurret->AddInteger("RoomVnum", GetTurretRoom(physicalTurret));
+      oneTurret->AddInteger("State", IsTurretDamaged(physicalTurret) ? LASER_DAMAGED : LASER_READY);
+    }
+}
+
+static void AddWeaponSystems(DataDOM::WriteOnlyContainer *container, const Ship *ship)
+{
+  auto ws = container->AddTable("WeaponSystems");
+  AddTube(ws, ship);
+  AddLaser(ws, ship);
+  AddIonCannon(ws, ship);
+  AddTractorBeam(ws, ship);
+  AddTurrets(ws, ship);
+}
+
+static void AddDefenses(DataDOM::WriteOnlyContainer *container, const Ship *ship)
+{
+  auto defenses = container->AddTable("Defenses");
+  DataDOM::AddCurrentAndMax(defenses, "Hull", ship->Defenses.Hull);
+  DataDOM::AddCurrentAndMax(defenses, "Shield", ship->Defenses.Shield);
+  DataDOM::AddCurrentAndMax(defenses, "Chaff", ship->Defenses.Chaff);
+}
+
+static void AddRooms(DataDOM::WriteOnlyContainer *container, const Ship *ship)
+{
+  auto table = container->AddTable("Rooms");
+  const auto &rooms = ship->Rooms;
+  table->AddInteger("First", rooms.First);
+  table->AddInteger("Last", rooms.Last);
+  table->AddInteger("Cockpit", rooms.Cockpit);
+  table->AddInteger("Entrance", rooms.Entrance);
+  table->AddInteger("Hangar", rooms.Hangar);
+  table->AddInteger("Engine", rooms.Engine);
+  table->AddInteger("Navseat", rooms.Navseat);
+  table->AddInteger("Pilotseat", rooms.Pilotseat);
+  table->AddInteger("Coseat", rooms.Coseat);
+  table->AddInteger("Gunseat", rooms.Gunseat);
+}
+
+static void AddShipToDocument(DataDOM::WriteOnlyContainer *doc, const Ship *ship)
+{
+  AddBasicData(doc, ship);
+  AddPosition(doc, ship);
+  AddInstruments(doc, ship);
+  AddThrusters(doc, ship);
+  AddHyperdrive(doc, ship);
+  AddWeaponSystems(doc, ship);
+  AddDefenses(doc, ship);
+  AddRooms(doc, ship);
+}
+
 void ShipRepository::Save(const Ship *ship) const
 {
   if( ship->Class == SHIP_DEBRIS )
@@ -3872,31 +4012,9 @@ void ShipRepository::Save(const Ship *ship) const
       return;
     }
 
-  LuaSaveDataFile(GetShipFilename(ship), PushShip, "ship", ship);
-
-#if 0
-  lua_State *L = CreateLuaState();
-  DataDOM::LuaDocument doc(L, "ship", GetShipFilename(ship));
-
-  doc.AddCString("Name", ship->Name);
-  doc.AddCString("PersonalName", ship->PersonalName);
-  doc.AddCString("Owner", ship->Owner);
-  doc.AddCString("Pilot", ship->Pilot);
-  doc.AddCString("CoPilot", ship->CoPilot);
-  doc.AddCString("Class", ShipClasses[ship->Class]);
-  doc.AddInteger("Shipyard", ship->Shipyard);
-  doc.AddInteger("Location", ship->Location);
-  doc.AddInteger("LastDock", ship->LastDock);
-  doc.AddCString("Type", ShipTypes[ship->Type]);
-  doc.AddInteger("State", ship->State);
-  doc.AddBoolean("Alarm", ship->Alarm);
-  doc.AddInteger("DockingPorts", ship->DockingPorts);
-  doc.AddBoolean("Guard", ship->Guard);
-  doc.AddCString("Home", ship->Home);
-
-  doc.Save();
-  lua_close(L);
-#endif
+  DataDOM::WriteOnlyDocument doc("ship", GetShipFilename(ship));
+  AddShipToDocument(&doc, ship);
+  doc.Write();
 }
 
 void ShipRepository::Save() const
