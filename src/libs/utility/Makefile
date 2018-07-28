@@ -8,7 +8,7 @@ OBJ  = $(patsubst %,$(ODIR)/%,$(_OBJ))
 #USE_DLSYM = -DSWRIP_USE_DLSYM
 
 WFLAGS = -Wall -Wshadow -Wformat-security -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Werror -Wwrite-strings -Wextra -Wno-char-subscripts
-CXXFLAGS = -g3 -MMD $(GCC_MARCH) $(WFLAGS) -I. -I.. $(USE_DLSYM) -std=c++14 -DLUA_C89_NUMBERS
+CXXFLAGS = -g3 -MMD $(GCC_MARCH) $(WFLAGS) -I. -I.. $(USE_DLSYM) -std=c++14
 
 #If not Cygwin environment
 ifneq ($(shell echo $$OSTYPE),cygwin)

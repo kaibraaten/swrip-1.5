@@ -9,6 +9,24 @@ extern "C" void Bug( const char *str, ... );
 
 namespace DataDOM
 {
+  static void SetLuaPath( lua_State *L )
+  {
+    char path[MAX_STRING_LENGTH];
+    sprintf( path, "%s?.lua;;", SCRIPT_DIR );
+    lua_getglobal( L, "package" );
+    lua_pushstring( L, path );
+    lua_setfield( L, -2, "path" );
+    lua_pop( L, 1 );
+  }
+
+  static lua_State *CreateLuaState( void )
+  {
+    lua_State *L = luaL_newstate();
+    luaL_openlibs( L );
+    SetLuaPath( L );
+
+    return L;
+  }
 
   //////////////////////////////////////////////////////////
   // Data
@@ -420,14 +438,19 @@ namespace DataDOM
 
     }
 
+    ~Impl()
+    {
+      lua_close(LuaState);
+    }
+
     lua_State *LuaState = nullptr;
     std::string LuaName;
     std::string Filename;
   };
 
-  ReadWriteDocument::ReadWriteDocument(lua_State *L, const std::string &luaName, const std::string &filename)
-    : Container(L, luaName),
-      _pImpl(std::make_unique<Impl>(L, luaName, filename))
+  ReadWriteDocument::ReadWriteDocument(const std::string &luaName, const std::string &filename)
+    : Container(CreateLuaState(), luaName),
+      _pImpl(std::make_unique<Impl>(LuaState(), luaName, filename))
   {
 
   }
@@ -475,8 +498,6 @@ namespace DataDOM
                 __FILE__, __FUNCTION__, __LINE__, lua_tostring(_pImpl->LuaState, -1));
           }
       }
-
-    lua_close(_pImpl->LuaState);
   }
 
   void ReadWriteDocument::Read()
@@ -936,14 +957,19 @@ namespace DataDOM
 
     }
 
+    ~Impl()
+    {
+      lua_close(LuaState);
+    }
+
     lua_State *LuaState = nullptr;
     std::string LuaName;
     std::string Filename;
   };
 
-  WriteOnlyDocument::WriteOnlyDocument(lua_State *L, const std::string &luaName, const std::string &filename)
-    : WriteOnlyContainer(L, luaName),
-      _pImpl(std::make_unique<Impl>(L, luaName, filename))
+  WriteOnlyDocument::WriteOnlyDocument(const std::string &luaName, const std::string &filename)
+    : WriteOnlyContainer(CreateLuaState(), luaName),
+      _pImpl(std::make_unique<Impl>(LuaState(), luaName, filename))
   {
 
   }
@@ -991,8 +1017,6 @@ namespace DataDOM
                 __FILE__, __FUNCTION__, __LINE__, lua_tostring(_pImpl->LuaState, -1));
           }
       }
-
-    lua_close(_pImpl->LuaState);
   }
 
   ////////////////////////////////////////////////////////////
@@ -1085,6 +1109,16 @@ namespace DataDOM
   const std::list<WriteOnlyData*> &WriteOnlyContainer::Children() const
   {
     return _pImpl->_children;
+  }
+
+  /////////////////////////////////////////////////////////
+
+  void AddCurrentAndMax(DataDOM::WriteOnlyContainer *container, const char *key,
+                        long current, long max)
+  {
+    auto table = container->AddTable(key);
+    table->AddInteger("Current", current);
+    table->AddInteger("Max", max);
   }
 
 } // namespace DataDOM
