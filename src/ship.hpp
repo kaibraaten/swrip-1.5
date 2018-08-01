@@ -53,16 +53,16 @@ public:
   ShipType Type = SHIP_CIVILIAN;
   ShipState State = SHIP_LANDED;
   bool Alarm = false;
-  short DockingPorts = 0;
+  int DockingPorts = 0;
   bool Guard = false;
   int Flags = 0;
   char *Home = nullptr;
   
   struct
   {
-    short Comm = 0;
-    short Sensor = 0;
-    short AstroArray = 0;
+    int Comm = 0;
+    int Sensor = 0;
+    int AstroArray = 0;
   } Instruments;
   
   struct
@@ -74,12 +74,12 @@ public:
       int Max = 0;
     } Speed, Energy;
 
-    short Maneuver = 0;
+    int Maneuver = 0;
   } Thrusters;
 
   struct
   {
-    short Speed = 0;
+    int Speed = 0;
   } Hyperdrive;
   
   struct
@@ -97,14 +97,14 @@ public:
     
     struct
     {
-      short Count = 0;
-      short State = LASER_READY;
+      int Count = 0;
+      int State = LASER_READY;
     } Laser, IonCannon;
 
     struct
     {
-      short Strength = 0;
-      short State = LASER_READY;
+      int Strength = 0;
+      int State = LASER_READY;
       Ship *Tractoring = nullptr; /* Not persisted */
     } TractorBeam;
     
@@ -143,8 +143,8 @@ public:
   char *LandingDestination = nullptr;
   int Hyperdistance = 0;
   int OriginalHyperdistance = 0;
-  short Docking = SHIP_READY;
-  short DockingState = 0;
+  int Docking = SHIP_READY;
+  int DockingState = 0;
   bool BayOpen = false;
   bool HatchOpen = false;
   bool AutoRecharge = false;

@@ -1,5 +1,5 @@
 ODIR = obj
-_OBJ = bet.o datadom.o event.o file_io.o linkedlist.o misc.o os_posix.o \
+_OBJ = bet.o event.o file_io.o linkedlist.o misc.o os_posix.o \
 	oldrepository.o repositorybase.o sha256.o string_handling.o \
 	time_fun.o vector3.o
 OBJ  = $(patsubst %,$(ODIR)/%,$(_OBJ))

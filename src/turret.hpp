@@ -26,6 +26,8 @@
 #include "types.hpp"
 #include "script.hpp"
 
+class Turret;
+
 Turret *AllocateTurret( Ship *owner );
 void FreeTurret( Turret *turret );
 Turret *CopyTurret( const Turret *old_turret, Ship *owner_of_new_turret );
