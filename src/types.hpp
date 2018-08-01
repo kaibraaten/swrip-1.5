@@ -60,7 +60,7 @@ struct Planet;
 struct Storeroom;
 struct Spaceobject;
 class Ship;
-struct Turret;
+class Turret;
 struct Missile;
 struct Tourney;
 struct mob_prog_data;

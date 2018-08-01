@@ -25,18 +25,18 @@
 #include "constants.hpp"
 #include "ship.hpp"
 
-struct Turret
+class Turret
 {
-  vnum_t RoomVnum;
-  int WeaponState;
-  Ship *Target;
-  Ship *Owner;
+public:
+  vnum_t RoomVnum = INVALID_VNUM;
+  int WeaponState = LASER_READY;
+  Ship *Target = nullptr;
+  Ship *Owner = nullptr;
 };
 
 Turret *AllocateTurret( Ship *owner )
 {
-  Turret *turret = NULL;
-  AllocateMemory( turret, Turret, 1 );
+  Turret *turret = new Turret();
   turret->Owner = owner;
   ResetTurret( turret );
 
@@ -62,7 +62,7 @@ bool IsTurretInstalled( const Turret *turret )
 
 void FreeTurret( Turret *turret )
 {
-  FreeMemory( turret );
+  delete turret;
 }
 
 void ResetTurret( Turret *turret )

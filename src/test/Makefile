@@ -1,11 +1,11 @@
 BINARY = test
 WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wredundant-decls -Wshadow -Wno-unused-parameter -Wno-char-subscripts -Wno-write-strings -Wno-long-long -Wextra -Wno-implicit-fallthrough
 
-CXXFLAGS = -std=c++14 -g3 -MMD -I. -I.. -I../libs  $(WFLAGS) 
+CXXFLAGS = -std=c++14 -g3 -MMD -I. -I.. -I../libs  $(WFLAGS)
 LDFLAGS = -L.. -L../libs/utility -Wl,-rpath,.. -Wl,-rpath,../libs/utility -lm -lz -lgtest -lutility -lswrip -llua -ldl
 
 ODIR = obj
-_OBJ = main.o datadomtests.o
+_OBJ = main.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
