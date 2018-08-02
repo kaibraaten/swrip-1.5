@@ -219,9 +219,9 @@ void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData);
 class ShipRepository : public Ceris::Repository<Ship*>
 {
 public:
-  virtual void Save(const Ship *entity) const;
-  virtual void Save() const override;
-  virtual void Load() override;
+  virtual void Save(const Ship *entity) const = 0;
+  virtual void Save() const = 0;
+  virtual void Load() = 0;
 };
 
 extern ShipRepository *Ships;

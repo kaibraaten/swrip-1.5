@@ -161,16 +161,6 @@ static int L_HelpEntry( lua_State *L )
   return 0;
 }
 
-void HelpFileRepository::Load()
-{
-  LuaLoadDataFile( HELP_DATA_FILE, L_HelpEntry, "HelpEntry" );
-}
-
-void HelpFileRepository::Save() const
-{
-  LuaSaveDataFile( HELP_DATA_FILE, PushHelps, "helps", NULL );
-}
-
 static void PushHelps( lua_State *L, const void *userData )
 {
   lua_newtable( L );
@@ -292,7 +282,25 @@ void SetHelpFileTextNoAlloc( HelpFile *help, char *text )
   help->Text = text;
 }
 
+/////////////////////////////////////////////////////////
+class LuaHelpFileRepository : public HelpFileRepository
+{
+public:
+  void Load() override;
+  void Save() const override;
+};
+
+void LuaHelpFileRepository::Load()
+{
+  LuaLoadDataFile( HELP_DATA_FILE, L_HelpEntry, "HelpEntry" );
+}
+
+void LuaHelpFileRepository::Save() const
+{
+  LuaSaveDataFile( HELP_DATA_FILE, PushHelps, "helps", NULL );
+}
+
 HelpFileRepository *NewHelpFileRepository()
 {
-  return new HelpFileRepository();
+  return new LuaHelpFileRepository();
 }

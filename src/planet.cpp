@@ -178,13 +178,17 @@ const char *GetPlanetFilename( const Planet *planet )
   return fullPath;
 }
 
-PlanetRepository *NewPlanetRepository()
-{
-  return new PlanetRepository();
-}
-
 ///////////////////////////////////////////////////////////////
-void PlanetRepository::Save() const
+class LuaPlanetRepository : public PlanetRepository
+{
+public:
+  void Load() override;
+  void Save() const override;
+  void Save(const Planet *planet) const override;
+  Planet *FindByName(const std::string &name) const override;
+};
+
+void LuaPlanetRepository::Save() const
 {
   for(const Planet *planet : Entities())
     {
@@ -192,17 +196,22 @@ void PlanetRepository::Save() const
     }
 }
 
-void PlanetRepository::Save(const Planet *planet) const
+void LuaPlanetRepository::Save(const Planet *planet) const
 {
   LuaSaveDataFile( GetPlanetFilename( planet ), PushPlanet, "planet", planet );
 }
 
-void PlanetRepository::Load()
+void LuaPlanetRepository::Load()
 {
   ForEachLuaFileInDir( PLANET_DIR, LoadPlanet, NULL );
 }
 
-Planet *PlanetRepository::FindByName(const std::string &name) const
+Planet *LuaPlanetRepository::FindByName(const std::string &name) const
 {
   return Find([name](const auto &planet){ return StrCmp(name, planet->Name) == 0; });
+}
+
+PlanetRepository *NewPlanetRepository()
+{
+  return new LuaPlanetRepository();
 }

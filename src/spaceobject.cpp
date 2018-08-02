@@ -406,19 +406,22 @@ LandingSite *GetLandingSiteFromLocationName( const Spaceobject *spaceobj, const 
 }
 
 //////////////////////////////////
-SpaceobjectRepository *NewSpaceobjectRepository()
+class LuaSpaceobjectRepository : public SpaceobjectRepository
 {
-  return new SpaceobjectRepository();
-}
+public:
+  void Load() override;
+  void Save() const override;
+  void Save(const Spaceobject *spaceobject) const override;
+};
 
-void SpaceobjectRepository::Load()
+void LuaSpaceobjectRepository::Load()
 {
   LogPrintf( "Loading spaceobjects..." );
   ForEachLuaFileInDir( SPACE_DIR, ExecuteSpaceobjectFile, (void*)"SpaceobjectEntry" );
   LogPrintf(" Done spaceobjects " );
 }
 
-void SpaceobjectRepository::Save() const
+void LuaSpaceobjectRepository::Save() const
 {
   for(const Spaceobject *spaceobject : Spaceobjects->Entities())
     {
@@ -426,8 +429,13 @@ void SpaceobjectRepository::Save() const
     }
 }
 
-void SpaceobjectRepository::Save(const Spaceobject *spaceobject) const
+void LuaSpaceobjectRepository::Save(const Spaceobject *spaceobject) const
 {
   LuaSaveDataFile( GetSpaceobjectFilename( spaceobject ),
                    PushSpaceobject, "spaceobject", spaceobject );
+}
+
+SpaceobjectRepository *NewSpaceobjectRepository()
+{
+  return new LuaSpaceobjectRepository();
 }

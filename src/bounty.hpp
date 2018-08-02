@@ -21,8 +21,8 @@ bool IsBountyOn( const Character *victim );
 class BountyRepository : public Ceris::Repository<Bounty*>
 {
 public:
-  virtual void Load() override;
-  virtual void Save() const override;
+  virtual void Load() = 0;
+  virtual void Save() const = 0;
 };
 
 extern BountyRepository *Bounties;

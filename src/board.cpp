@@ -1444,11 +1444,6 @@ Board *GetBoard( const char *name )
   return Boards->Find([name](const auto &board){ return StrCmp(board->Name, name) == 0; });
 }
 
-BoardRepository *NewBoardRepository()
-{
-  return new BoardRepository();
-}
-
 Board *AllocateBoard(const char *name)
 {
   Board *board = new Board();
@@ -1496,12 +1491,21 @@ void AddNote(Board *board, Note *note)
   board->Notes.push_back(note);
 }
 
-void BoardRepository::Load()
+///////////////////////////////////////
+class LuaBoardRepository : public BoardRepository
+{
+public:
+  void Load() override;
+  void Save() const override;
+  void Save(const Board *board) const override;
+};
+
+void LuaBoardRepository::Load()
 {
   ForEachLuaFileInDir( BOARD_DIR, ExecuteBoardFile, NULL );
 }
 
-void BoardRepository::Save() const
+void LuaBoardRepository::Save() const
 {
   for(const Board *board : Boards->Entities())
     {
@@ -1509,7 +1513,13 @@ void BoardRepository::Save() const
     }
 }
 
-void BoardRepository::Save(const Board *board) const
+void LuaBoardRepository::Save(const Board *board) const
 {
   LuaSaveDataFile( GetBoardFilename( board ), PushBoard, "board", board );
+}
+
+////////////////////////////////////
+BoardRepository *NewBoardRepository()
+{
+  return new LuaBoardRepository();
 }

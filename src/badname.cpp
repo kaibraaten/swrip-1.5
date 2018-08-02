@@ -79,19 +79,26 @@ static int L_BadNameEntry( lua_State *L )
   return 0;
 }
 
-BadNameRepository *NewBadNameRepository()
-{
-  return new BadNameRepository();
-}
-
 /////////////////////////////////////////////
 
-void BadNameRepository::Load()
+class LuaBadNameRepository : public BadNameRepository
+{
+public:
+  void Load() override;
+  void Save() const override;
+};
+
+void LuaBadNameRepository::Load()
 {
   LuaLoadDataFile( BADNAME_FILE, L_BadNameEntry, "BadNameEntry" );
 }
 
-void BadNameRepository::Save() const
+void LuaBadNameRepository::Save() const
 {
   LuaSaveDataFile( BADNAME_FILE, PushBadNames, "badnames", NULL );
+}
+
+BadNameRepository *NewBadNameRepository()
+{
+  return new LuaBadNameRepository();
 }

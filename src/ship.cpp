@@ -68,6 +68,14 @@ static bool ShipHasState( const Ship *ship, ShipState state )
   return ship->State == state;
 }
 
+Ship::Ship()
+{
+  for( size_t turretNum = 0; turretNum < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turretNum )
+    {
+      WeaponSystems.Turrets[turretNum] = AllocateTurret( this );
+    }
+}
+
 bool IsShipInHyperspace( const Ship *ship )
 {
   return ShipHasState( ship, SHIP_HYPERSPACE );
@@ -3850,20 +3858,15 @@ void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData)
  ShipRepository
  **********************************************/
 
-ShipRepository *NewShipRepository()
+class LuaShipRepository : public ShipRepository
 {
-  return new ShipRepository();
-}
+public:
+  void Save(const Ship *entity) const override;
+  void Save() const override;
+  void Load() override;
+};
 
-Ship::Ship()
-{
-  for( size_t turretNum = 0; turretNum < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turretNum )
-    {
-      WeaponSystems.Turrets[turretNum] = AllocateTurret( this );
-    }
-}
-
-void ShipRepository::Save(const Ship *ship) const
+void LuaShipRepository::Save(const Ship *ship) const
 {
   if( ship->Class == SHIP_DEBRIS )
     {
@@ -3873,7 +3876,7 @@ void ShipRepository::Save(const Ship *ship) const
   LuaSaveDataFile( GetShipFilename( ship ), PushShip, "ship", ship );
 }
 
-void ShipRepository::Save() const
+void LuaShipRepository::Save() const
 {
   for(Ship *ship : Entities())
     {
@@ -3881,7 +3884,12 @@ void ShipRepository::Save() const
     }
 }
 
-void ShipRepository::Load()
+void LuaShipRepository::Load()
 {
   ForEachLuaFileInDir( SHIP_DIR, ExecuteShipFile, NULL );
+}
+
+ShipRepository *NewShipRepository()
+{
+  return new LuaShipRepository();
 }

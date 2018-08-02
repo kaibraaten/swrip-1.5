@@ -119,11 +119,11 @@ DECLARE_CMD_FUN( do_setshuttle  );
 class ShuttleRepository : public Ceris::Repository<Shuttle*>
 {
 public:
-  virtual void Load() override;
-  virtual void Save() const override;
-  virtual void Save(const Shuttle *shuttle) const;
+  virtual void Load() = 0;
+  virtual void Save() const = 0;
+  virtual void Save(const Shuttle *shuttle) const = 0;
 
-  Shuttle *FindByName(const std::string &name) const;
+  virtual Shuttle *FindByName(const std::string &name) const = 0;
 };
 
 extern ShuttleRepository *Shuttles;

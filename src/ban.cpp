@@ -63,23 +63,31 @@ static int L_BanEntry( lua_State *L )
   return 0;
 }
 
-void BanRepository::Load()
+//////////////////////////////////////////////////////
+class LuaBanRepository : public BanRepository
+{
+public:
+  bool Contains(const std::string&) const override;
+  void Load() override;
+  void Save() const override;
+};
+
+void LuaBanRepository::Load()
 {
   LuaLoadDataFile( BAN_LIST, L_BanEntry, "BanEntry" );
 }
 
-void BanRepository::Save() const
+void LuaBanRepository::Save() const
 {
   LuaSaveDataFile( BAN_LIST, PushBans, "bans", NULL );
 }
 
-bool BanRepository::Contains(const std::string &arg) const
+bool LuaBanRepository::Contains(const std::string &arg) const
 {
   return Find([arg](const auto &ban) { return StrCmp(ban->Site, arg) == 0; }) != nullptr;
 }
 
 BanRepository *NewBanRepository()
 {
-  BanRepository *repo = new BanRepository();
-  return repo;
+  return new LuaBanRepository();
 }

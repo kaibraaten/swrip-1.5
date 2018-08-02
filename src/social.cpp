@@ -314,23 +314,26 @@ static int L_SocialEntry( lua_State *L )
   return 0;
 }
 
-SocialRepository *NewSocialRepository()
-{
-  return new SocialRepository();
-}
-
 /////////////////////////////////////////////////
-void SocialRepository::Load()
+class LuaSocialRepository : public SocialRepository
+{
+public:
+  void Save() const override;
+  void Load() override;
+  Social *FindByName(const std::string &name) const override;
+};
+
+void LuaSocialRepository::Load()
 {
   LuaLoadDataFile( SOCIAL_DATA_FILE, L_SocialEntry, "SocialEntry" );
 }
 
-void SocialRepository::Save() const
+void LuaSocialRepository::Save() const
 {
   LuaSaveDataFile( SOCIAL_DATA_FILE, PushSocialTable, "socials", NULL );
 }
 
-Social *SocialRepository::FindByName(const std::string &name) const
+Social *LuaSocialRepository::FindByName(const std::string &name) const
 {
   Social *social = Find([name](const auto &s){ return StrCmp(name, s->Name) == 0; });
 
@@ -340,4 +343,9 @@ Social *SocialRepository::FindByName(const std::string &name) const
     }
 
   return social;
+}
+
+SocialRepository *NewSocialRepository()
+{
+  return new LuaSocialRepository();
 }
