@@ -218,17 +218,25 @@ void ClaimBounty( Character *ch, const Character *victim )
   RemoveBounty(bounty);
 }
 
-BountyRepository *NewBountyRepository()
+/////////////////////////////////////////////////////
+class LuaBountyRepository : public BountyRepository
 {
-  return new BountyRepository();
-}
+public:
+  void Load() override;
+  void Save() const override;
+};
 
-void BountyRepository::Save() const
+void LuaBountyRepository::Save() const
 {
   LuaSaveDataFile( BOUNTY_LIST, PushBounties, "bounties", NULL );
 }
 
-void BountyRepository::Load()
+void LuaBountyRepository::Load()
 {
   LuaLoadDataFile( BOUNTY_LIST, L_BountyEntry, "BountyEntry" );
+}
+
+BountyRepository *NewBountyRepository()
+{
+  return new LuaBountyRepository();
 }

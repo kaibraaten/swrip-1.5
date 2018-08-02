@@ -51,9 +51,9 @@ void AddNote(Board *board, Note *note);
 class BoardRepository : public Ceris::Repository<Board*>
 {
 public:
-  virtual void Load() override;
-  virtual void Save() const override;
-  virtual void Save(const Board *board) const;
+  virtual void Load() = 0;
+  virtual void Save() const = 0;
+  virtual void Save(const Board *board) const = 0;
 };
 
 BoardRepository *NewBoardRepository();

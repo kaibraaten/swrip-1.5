@@ -1,17 +1,14 @@
 -- Coruscant
--- Last saved Thursday 02-Aug-2018 11:42:41
+-- Last saved Thursday 02-Aug-2018 19:18:08
 
 PlanetEntry
 {
-   PopulationSupport = 0, 
-   Name = "Coruscant", 
    Spaceobject = "Coruscant", 
+   BaseValue = 0, 
    Flags = 
    {
       [0] = "NoCapture", 
    }, 
-   GovernedBy = "The Empire", 
-   BaseValue = 0, 
    Areas = 
    {
       [1] = "monument_plaza.are", 
@@ -21,4 +18,7 @@ PlanetEntry
       [5] = "coruscant_streets.are", 
       [6] = "grand_towers.are", 
    }, 
+   Name = "Coruscant", 
+   PopulationSupport = 0, 
+   GovernedBy = "The Empire", 
 }

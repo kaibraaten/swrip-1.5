@@ -8,9 +8,9 @@
 class ClanRepository : public Ceris::Repository<Clan*>
 {
 public:
-  virtual void Load() override;
-  virtual void Save() const override;
-  virtual void Save(const Clan*) const;// override;
+  virtual void Load() = 0;
+  virtual void Save() const = 0;
+  virtual void Save(const Clan*) const = 0;
 };
 
 class Clan

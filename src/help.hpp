@@ -54,8 +54,8 @@ struct CompareHelpFile
 class HelpFileRepository : public Ceris::Repository<HelpFile*, CompareHelpFile>
 {
 public:
-  virtual void Load() override;
-  virtual void Save() const override;
+  virtual void Load() = 0;
+  virtual void Save() const = 0;
 };
 
 extern HelpFileRepository *HelpFiles;

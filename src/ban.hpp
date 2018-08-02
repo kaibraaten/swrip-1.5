@@ -16,9 +16,9 @@ struct Ban
 class BanRepository : public Ceris::Repository<std::shared_ptr<Ban>>
 {
 public:
-  bool Contains(const std::string&) const;
-  virtual void Load() override;
-  virtual void Save() const override;
+  virtual bool Contains(const std::string&) const = 0;
+  virtual void Load() = 0;
+  virtual void Save() const = 0;
 };
 
 extern BanRepository *Bans;

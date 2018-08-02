@@ -38,9 +38,9 @@ LandingSite *GetLandingSiteFromLocationName( const Spaceobject *spaceobj, const 
 class SpaceobjectRepository : public Ceris::Repository<Spaceobject*>
 {
 public:
-  virtual void Load() override;
-  virtual void Save() const override;
-  virtual void Save(const Spaceobject *spaceobject) const;
+  virtual void Load() = 0;
+  virtual void Save() const = 0;
+  virtual void Save(const Spaceobject *spaceobject) const = 0;
 };
 
 extern SpaceobjectRepository *Spaceobjects;

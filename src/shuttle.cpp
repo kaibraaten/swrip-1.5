@@ -643,12 +643,16 @@ Shuttle *GetShuttleFromEntrance( vnum_t vnum )
 }
 
 ////////////////////////////////////////////////////////////
-ShuttleRepository *NewShuttleRepository()
+class LuaShuttleRepository : public ShuttleRepository
 {
-  return new ShuttleRepository();
-}
+public:
+  void Load() override;
+  void Save() const override;
+  void Save(const Shuttle *shuttle) const override;
+  Shuttle *FindByName(const std::string &name) const override;
+};
 
-Shuttle *ShuttleRepository::FindByName(const std::string &name) const
+Shuttle *LuaShuttleRepository::FindByName(const std::string &name) const
 {
   Shuttle *shuttle = Find([name](const auto &s)
                           {
@@ -666,12 +670,12 @@ Shuttle *ShuttleRepository::FindByName(const std::string &name) const
   return shuttle;
 }
 
-void ShuttleRepository::Save(const Shuttle *shuttle) const
+void LuaShuttleRepository::Save(const Shuttle *shuttle) const
 {
   LuaSaveDataFile( GetShuttleFilename( shuttle ), PushShuttle, "shuttle", shuttle );
 }
 
-void ShuttleRepository::Save() const
+void LuaShuttleRepository::Save() const
 {
   for(const Shuttle *shuttle : Shuttles->Entities())
     {
@@ -679,7 +683,12 @@ void ShuttleRepository::Save() const
     }
 }
 
-void ShuttleRepository::Load()
+void LuaShuttleRepository::Load()
 {
   ForEachLuaFileInDir( SHUTTLE_DIR, ExecuteShuttleFile, NULL );
+}
+
+ShuttleRepository *NewShuttleRepository()
+{
+  return new LuaShuttleRepository();
 }

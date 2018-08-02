@@ -832,13 +832,16 @@ bool IsBountyHuntersGuild(const char *clanName)
     || !StrCmp(clanName, "the assassins guild");
 }
 
-ClanRepository *NewClanRepository()
+/////////////////////////////////////////////////////
+class LuaClanRepository : public ClanRepository
 {
-  ClanRepository *repo = new ClanRepository();
-  return repo;
-}
+public:
+  void Load() override;
+  void Save() const override;
+  void Save(const Clan*) const override;
+};
 
-void ClanRepository::Load()
+void LuaClanRepository::Load()
 {
   ForEachLuaFileInDir( CLAN_DIR, ExecuteClanFile, NULL );
 
@@ -848,7 +851,7 @@ void ClanRepository::Load()
     }
 }
 
-void ClanRepository::Save() const
+void LuaClanRepository::Save() const
 {
   for(const Clan *clan : Entities())
     {
@@ -856,8 +859,12 @@ void ClanRepository::Save() const
     }
 }
 
-void ClanRepository::Save(const Clan *clan) const
+void LuaClanRepository::Save(const Clan *clan) const
 {
   LuaSaveDataFile( GetClanFilename( clan ), PushClan, "clan", clan );
 }
 
+ClanRepository *NewClanRepository()
+{
+  return new LuaClanRepository();
+}

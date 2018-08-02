@@ -33,9 +33,9 @@ struct CompareSocial
 class SocialRepository : public Ceris::Repository<Social*, CompareSocial>
 {
 public:
-  virtual void Save() const override;
-  virtual void Load() override;
-  virtual Social *FindByName(const std::string &name) const;
+  virtual void Save() const = 0;
+  virtual void Load() = 0;
+  virtual Social *FindByName(const std::string &name) const = 0;
 };
 
 extern SocialRepository *Socials;
