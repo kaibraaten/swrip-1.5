@@ -1,98 +1,50 @@
 -- Sorosuub System Hopper
--- Last saved Saturday 28-Jul-2018 18:37:03
+-- Last saved Thursday 02-Aug-2018 11:43:24
 
 ShipEntry
 {
-   Home = "CoruSun", 
-   CoPilot = "", 
    Rooms = 
    {
-      Engine = 0, 
-      Pilotseat = 32160, 
-      Entrance = 32160, 
-      Gunseat = 32160, 
+      Navseat = 32160, 
       Last = 32160, 
       Coseat = 32160, 
-      Hangar = 0, 
-      Navseat = 32160, 
+      Engine = 0, 
+      Entrance = 32160, 
+      Gunseat = 32160, 
       First = 32160, 
+      Pilotseat = 32160, 
+      Hangar = 0, 
       Cockpit = 32160, 
    }, 
-   Shipyard = 203, 
-   Pilot = "", 
-   Alarm = false, 
-   Name = "Sorosuub System Hopper", 
-   LastDock = 203, 
-   Instruments = 
-   {
-      Sensor = 0, 
-      Comm = 0, 
-      AstroArray = 0, 
-   }, 
-   PersonalName = "6035", 
-   DockingPorts = 0, 
-   State = 0, 
+   Home = "CoruSun", 
    Guard = false, 
-   Position = 
-   {
-      Y = -175007, 
-      Z = 23278, 
-      X = -1748, 
-   }, 
-   Defenses = 
-   {
-      Shield = 
-      {
-         Current = 0, 
-         Max = 10, 
-      }, 
-      Chaff = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
-      Hull = 
-      {
-         Current = 100, 
-         Max = 100, 
-      }, 
-   }, 
+   LastDock = 203, 
+   Pilot = "", 
+   Shipyard = 203, 
+   Description = "", 
    Location = 203, 
+   Name = "Sorosuub System Hopper", 
+   Owner = "public", 
    WeaponSystems = 
    {
-      Laser = 
-      {
-         Count = 0, 
-         State = 0, 
-      }, 
-      IonCannon = 
-      {
-         Count = 0, 
-         State = 0, 
-      }, 
-      TractorBeam = 
-      {
-         State = 1, 
-         Strength = 0, 
-      }, 
       Tube = 
       {
-         Rockets = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
          Missiles = 
          {
             Current = 0, 
             Max = 0, 
          }, 
+         Rockets = 
+         {
+            Current = 0, 
+            Max = 0, 
+         }, 
          State = 0, 
+         Torpedoes = 
+         {
+            Current = 0, 
+            Max = 0, 
+         }, 
       }, 
       Turrets = 
       {
@@ -147,26 +99,75 @@ ShipEntry
             RoomVnum = 0, 
          }, 
       }, 
+      IonCannon = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      Laser = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         State = 1, 
+         Strength = 0, 
+      }, 
    }, 
+   Class = "Starfighter", 
    Type = "Civilian", 
+   Defenses = 
+   {
+      Shield = 
+      {
+         Current = 0, 
+         Max = 10, 
+      }, 
+      Hull = 
+      {
+         Current = 100, 
+         Max = 100, 
+      }, 
+      Chaff = 
+      {
+         Current = 0, 
+         Max = 0, 
+      }, 
+   }, 
+   CoPilot = "", 
+   PersonalName = "6035", 
    Thrusters = 
    {
-      Energy = 
-      {
-         Current = 2000, 
-         Max = 2000, 
-      }, 
-      Maneuver = 35, 
       Speed = 
       {
          Current = 0, 
          Max = 65, 
       }, 
+      Maneuver = 35, 
+      Energy = 
+      {
+         Current = 2000, 
+         Max = 2000, 
+      }, 
    }, 
+   State = 0, 
+   Instruments = 
+   {
+      Comm = 0, 
+      Sensor = 0, 
+      AstroArray = 0, 
+   }, 
+   Position = 
+   {
+      Z = 23278, 
+      Y = -175007, 
+      X = -1748, 
+   }, 
+   DockingPorts = 0, 
+   Alarm = false, 
    Hyperdrive = 
    {
       Speed = 100, 
    }, 
-   Owner = "public", 
-   Class = "Starfighter", 
 }

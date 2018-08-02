@@ -2,35 +2,38 @@
 #define _SWRIP_BOARD_HPP_
 
 #include <utility/repository.hpp>
+#include <list>
 #include "types.hpp"
+#include "constants.hpp"
 
 struct Note
 {
-  char *Sender;
-  char *Date;
-  char *ToList;
-  char *Subject;
-  bool Voting;
-  char *YesVotes;
-  char *NoVotes;
-  char *Abstentions;
-  char *Text;
+  char *Sender = nullptr;
+  char *Date = nullptr;
+  char *ToList = nullptr;
+  char *Subject = nullptr;
+  bool Voting = false;
+  char *YesVotes = nullptr;
+  char *NoVotes = nullptr;
+  char *Abstentions = nullptr;
+  char *Text = nullptr;
 };
 
-struct Board
+class Board
 {
-  char *Name;             /* Filename to save notes to       */
-  char *ReadGroup;            /* Can restrict a board to a       */
-  char *PostGroup;            /* council, clan, guild etc        */
-  char *ExtraReaders;         /* Can give read rights to players */
-  char *ExtraRemovers;        /* Can give remove rights to players */
-  vnum_t BoardObject;             /* Vnum of board object            */
-  short MinReadLevel;        /* Minimum level to read a note    */
-  short MinPostLevel;        /* Minimum level to post a note    */
-  short MinRemoveLevel;      /* Minimum level to remove a note  */
-  short MaxPosts;             /* Maximum amount of notes allowed */
-  int Type;                  /* Normal board or mail board? */
-  List *Notes;
+public:
+  char *Name = nullptr;             /* Filename to save notes to       */
+  char *ReadGroup = nullptr;            /* Can restrict a board to a       */
+  char *PostGroup = nullptr;            /* council, clan, guild etc        */
+  char *ExtraReaders = nullptr;         /* Can give read rights to players */
+  char *ExtraRemovers = nullptr;        /* Can give remove rights to players */
+  vnum_t BoardObject = INVALID_VNUM;             /* Vnum of board object            */
+  short MinReadLevel = 0;        /* Minimum level to read a note    */
+  short MinPostLevel = 0;        /* Minimum level to post a note    */
+  short MinRemoveLevel = 0;      /* Minimum level to remove a note  */
+  short MaxPosts = 0;             /* Maximum amount of notes allowed */
+  int Type = BOARD_NOTE;                  /* Normal board or mail board? */
+  std::list<Note*> Notes;
 };
 
 Board *AllocateBoard(const char *name);
