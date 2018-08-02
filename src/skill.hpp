@@ -1,6 +1,7 @@
 #ifndef _SWRIP_SKILL_HPP_
 #define _SWRIP_SKILL_HPP_
 
+#include <string>
 #include <array>
 #include "types.hpp"
 #include "constants.hpp"
@@ -274,7 +275,7 @@ int BSearchSkillExact( const char *name, int first, int top );
 int ChBSearchSkill( const Character *ch, const char *name, int first, int top );
 Skill *GetSkill( int sn );
 
-SkillType GetSkillType( const char *skilltype );
+SkillType GetSkillType(const std::string &skilltype);
 void LoadSkills( void );
 void SaveSkills( void );
 void SortSkillTable( void );

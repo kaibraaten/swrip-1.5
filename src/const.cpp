@@ -1375,7 +1375,7 @@ const std::array<const char * const, MAX_ABILITY> AbilityName =
     "diplomacy", "leadership", "force", "commando"
   };
 
-int GetAbility( const char *type )
+int GetAbility(const std::string &type)
 {
   return GetInArray( type, AbilityName.data(), AbilityName.size(), StrCmp );
 }
@@ -1703,7 +1703,7 @@ const std::array<const char * const, MAX_SPACEOBJECT_TYPE> SpaceobjectTypeName =
     "sun", "planet", "_space_moveobj", "_space_obj"
   };
 
-SpaceobjectType GetSpaceobjectType( const char *type )
+SpaceobjectType GetSpaceobjectType(const std::string &type)
 {
   return (SpaceobjectType)GetInArray( type, SpaceobjectTypeName.data(),
                                       SpaceobjectTypeName.size(), StringPrefix );
@@ -1714,8 +1714,10 @@ const std::array<const char * const, SKILLTYPE_MAX> SkillTypeName =
     "unknown", "Force Power", "Skill", "Weapon", "Tongue", "Herb"
   };
 
-SkillType GetSkillType( const char *skilltype )
+SkillType GetSkillType(const std::string &origSkilltypeArg)
 {
+  std::string skilltype(origSkilltypeArg);
+
   if( !StrCmp( skilltype, "Spell" ) )
     {
       skilltype = "Force Power";
@@ -1759,7 +1761,7 @@ DirectionType GetReverseDirection( DirectionType dir )
   return ReverseDirection[dir];
 }
 
-DirectionType GetDirection( const char *txt )
+DirectionType GetDirection(const std::string &txt)
 {
   DirectionType edir = DIR_INVALID;
   char c1 = 0, c2 = 0;
@@ -1797,7 +1799,7 @@ DirectionType GetDirection( const char *txt )
   if ( !StrCmp( txt, GetDirectionName( DIR_SOMEWHERE ) ) )
     return DIR_SOMEWHERE;
 
-  if( strlen( txt ) > 2 )
+  if( txt.size() > 2 )
     {
       return DIR_INVALID;
     }
@@ -1962,7 +1964,7 @@ const char * const SectorNames[SECT_MAX][2] =
     { "Underground",    "underground" }  /* SECT_UNDERGROUND  */
   };
 
-SectorType GetSectorType( const char *type )
+SectorType GetSectorType(const std::string &type)
 {
   SectorType sector = SECT_INSIDE;
 
@@ -3173,168 +3175,168 @@ const char *GetSpellTargetName( size_t type )
   return SpellTargetName[type];
 }
 
-int GetSpellSave( const char *name )
+int GetSpellSave(const std::string &name)
 {
   return GetInArray( name, SpellSaveName.data(), SpellSaveName.size(), StrCmp );
 }
 
-SkillTargetType GetSpellTarget( const char *name )
+SkillTargetType GetSpellTarget(const std::string &name)
 {
   return (SkillTargetType)GetInArray( name, SpellTargetName.data(),
                                       SpellTargetName.size(), StrCmp );
 }
 
-int GetSpellFlag( const char *name )
+int GetSpellFlag(const std::string &name)
 {
   return GetInArray( name, SpellFlag, StrCmp );
 }
 
-int GetSpellDamage( const char *name )
+int GetSpellDamage(const std::string &name)
 {
   return GetInArray( name, SpellDamage,
 		     sizeof( SpellDamage ) / sizeof( SpellDamage[0] ),
 		     StrCmp );
 }
 
-int GetSpellAction( const char *name )
+int GetSpellAction(const std::string &name)
 {
   return GetInArray( name, SpellAction,
 		     sizeof( SpellAction ) / sizeof( SpellAction[0] ),
 		     StrCmp );
 }
 
-int GetSpellPower( const char *name )
+int GetSpellPower(const std::string &name)
 {
   return GetInArray( name, SpellPower,
 		     sizeof( SpellPower ) / sizeof( SpellPower[0] ),
 		     StrCmp );
 }
 
-int GetSpellClass( const char *name )
+int GetSpellClass(const std::string &name)
 {
   return GetInArray( name, SpellClass,
 		     sizeof( SpellClass ) / sizeof( SpellClass[0] ),
 		     StrCmp );
 }
 
-ItemTypes GetObjectType( const char *type )
+ItemTypes GetObjectType(const std::string &type)
 {
   return (ItemTypes)GetInArray( type, ObjectTypes.data(),
                                 ObjectTypes.size(),
 				StrCmp );
 }
 
-int GetAffectFlag( const char *flag )
+int GetAffectFlag(const std::string &flag)
 {
   return GetInArray( flag, AffectFlags, StrCmp );
 }
 
-int GetTrapFlag( const char *flag )
+int GetTrapFlag(const std::string &flag)
 {
   return GetInArray( flag, TrapFlags, StrCmp );
 }
 
-int GetAffectType( const char *type )
+int GetAffectType(const std::string &type)
 {
   return GetInArray( type, AffectTypes.data(), AffectTypes.size(), StrCmp );
 }
 
-int GetNpcRace( const char *type )
+int GetNpcRace(const std::string &type)
 {
   return GetInArray( type, NpcRace.data(), NpcRace.size(), StrCmp );
 }
 
-int GetWearLocation( const char *type )
+int GetWearLocation(const std::string &type)
 {
   return GetInArray( type, WearLocations.data(), WearLocations.size(), StrCmp);
 }
 
-int GetExitFlag( const char *flag )
+int GetExitFlag(const std::string &flag)
 {
   return GetInArray( flag, ExitFlags, StrCmp );
 }
 
-int GetRoomFlag( const char *flag )
+int GetRoomFlag(const std::string &flag)
 {
   return GetInArray( flag, RoomFlags, StrCmp );
 }
 
-int GetMudProgFlag( const char *flag )
+int GetMudProgFlag(const std::string &flag)
 {
   return GetInArray( flag, mprog_flags, StrCmp );
 }
 
-int GetObjectFlag( const char *flag )
+int GetObjectFlag(const std::string &flag)
 {
   return GetInArray( flag, ObjectFlags, StrCmp );
 }
 
-int GetAreaFlag( const char *flag )
+int GetAreaFlag(const std::string &flag)
 {
   return GetInArray( flag, AreaFlags, StrCmp );
 }
 
-int GetWearFlag( const char *flag )
+int GetWearFlag(const std::string &flag)
 {
   return GetInArray( flag, WearFlags, StrCmp );
 }
 
-int GetMobFlag( const char *flag )
+int GetMobFlag(const std::string &flag)
 {
   return GetInArray( flag, MobFlags, StrCmp );
 }
 
-int GetVipFlag( const char *flag )
+int GetVipFlag(const std::string &flag)
 {
   return GetInArray( flag, WantedFlags, StrCmp );
 }
 
-int GetPlanetFlag( const char *flag )
+int GetPlanetFlag(const std::string &flag)
 {
   return GetInArray( flag, PlanetFlags, StrCmp );
 }
 
-int GetWantedFlag( const char *flag )
+int GetWantedFlag(const std::string &flag)
 {
   return GetInArray( flag, WantedFlags, StrCmp );
 }
 
-int GetPcFlag( const char *flag )
+int GetPcFlag(const std::string &flag)
 {
   return GetInArray( flag, PcFlags, StrCmp );
 }
 
-int GetPlayerFlag( const char *flag )
+int GetPlayerFlag(const std::string &flag)
 {
   return GetInArray( flag, PlayerFlags, StrCmp );
 }
 
-int GetResistanceFlag( const char *flag )
+int GetResistanceFlag(const std::string &flag)
 {
   return GetInArray( flag, RisFlags, StrCmp );
 }
 
-int GetTrapTriggerFlag( const char *flag )
+int GetTrapTriggerFlag(const std::string &flag)
 {
   return GetInArray( flag, TriggerFlags, StrCmp );
 }
 
-int GetBodyPartFlag( const char *flag )
+int GetBodyPartFlag(const std::string &flag)
 {
   return GetInArray( flag, PartFlags, StrCmp );
 }
 
-int GetAttackFlag( const char *flag )
+int GetAttackFlag(const std::string &flag)
 {
   return GetInArray( flag, AttackFlags, StrCmp );
 }
 
-int GetDefenseFlag( const char *flag )
+int GetDefenseFlag(const std::string &flag)
 {
   return GetInArray( flag, DefenseFlags, StrCmp );
 }
 
-int GetLanguage( const char *flag )
+int GetLanguage(const std::string &flag)
 {
   int x = 0;
 
@@ -3345,28 +3347,28 @@ int GetLanguage( const char *flag )
   return LANG_UNKNOWN;
 }
 
-int GetSpiceType( const char *type )
+int GetSpiceType(const std::string &type)
 {
   return GetInArray( type, SpiceTable,
 		     sizeof( SpiceTable ) / sizeof( SpiceTable[0] ),
 		     StrCmp );
 }
 
-int GetWeaponType( const char *type )
+int GetWeaponType(const std::string &type)
 {
   return GetInArray( type, WeaponTable,
 		     sizeof( WeaponTable ) / sizeof( WeaponTable[0] ),
 		     StrCmp );
 }
 
-int GetCrystalType( const char *type )
+int GetCrystalType(const std::string &type)
 {
   return GetInArray( type, CrystalTable,
 		     sizeof( CrystalTable ) / sizeof( CrystalTable[0] ),
 		     StrCmp );
 }
 
-int GetAttackType( const char *type )
+int GetAttackType(const std::string &type)
 {
   return GetInArray( type, AttackTable,
 		     sizeof( AttackTable ) / sizeof( AttackTable[0] ),
@@ -3409,7 +3411,7 @@ const std::array<const char * const, MAX_BIT> SaveFlags =
     "_31"
   };
 
-int GetSaveFlag( const char *flag )
+int GetSaveFlag(const std::string &flag)
 {
   return GetInArray( flag, SaveFlags, StrCmp );
 }
@@ -3430,7 +3432,7 @@ const std::array<const char * const, MAX_POSITION> PositionName =
     "dragged"
   };
 
-PositionType GetPosition( const char *posName )
+PositionType GetPosition(const std::string &posName)
 {
   return (PositionType) GetInArray( posName, PositionName.data(), PositionName.size(), StrCmp );
 }
@@ -3446,7 +3448,7 @@ const std::array<const char * const, MAX_LOG> CmdLogName =
     "all"
   };
 
-int GetCmdLog( const char *logName )
+int GetCmdLog(const std::string &logName)
 {
   return GetInArray( logName, CmdLogName.data(), CmdLogName.size(), StrCmp );
 }
@@ -3467,7 +3469,7 @@ const std::array<const char * const, MAX_SHIP_CLASS> ShipClasses =
     "Debris"
   };
 
-ShipClass GetShipClass( const char *name )
+ShipClass GetShipClass(const std::string &name)
 {
   return (ShipClass)GetInArray( name, ShipClasses.data(), ShipClasses.size(), StrCmp );
 }
@@ -3480,7 +3482,7 @@ const std::array<const char * const, MAX_SHIP_TYPE> ShipTypes =
     "Mob"
   };
 
-ShipType GetShipType( const char *name )
+ShipType GetShipType(const std::string &name)
 {
   return (ShipType)GetInArray( name, ShipTypes.data(), ShipTypes.size(), StrCmp );
 }
@@ -3521,7 +3523,7 @@ const std::array<const char * const, MAX_BIT> ShipFlags =
     "_31"
   };
 
-int GetShipFlag( const char *flag )
+int GetShipFlag(const std::string &flag)
 {
   return GetInArray( flag, ShipFlags, StrCmp );
 }

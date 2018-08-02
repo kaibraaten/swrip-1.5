@@ -1087,7 +1087,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
   if ( !StrCmp(arg, "bit") )
     {
-      int (*flfunc)(const char *type);
+      int (*flfunc)(const std::string &type);
       int flags = 0;
       char option[MAX_INPUT_LENGTH];
       char *parg;

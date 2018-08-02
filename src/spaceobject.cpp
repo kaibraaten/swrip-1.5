@@ -416,9 +416,7 @@ public:
 
 void LuaSpaceobjectRepository::Load()
 {
-  LogPrintf( "Loading spaceobjects..." );
   ForEachLuaFileInDir( SPACE_DIR, ExecuteSpaceobjectFile, (void*)"SpaceobjectEntry" );
-  LogPrintf(" Done spaceobjects " );
 }
 
 void LuaSpaceobjectRepository::Save() const
