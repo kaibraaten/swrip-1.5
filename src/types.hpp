@@ -44,7 +44,7 @@ struct ExtraDescription;
 struct HelpFile;
 struct ProtoMobile;
 struct Note;
-struct Board;
+class Board;
 struct Object;
 struct ProtoObject;
 class PCData;

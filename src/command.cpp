@@ -69,7 +69,7 @@ void RemoveCommand( Command *command )
 }
 
 /*
- * Add a command to the command.hppash table                      -Thoric
+ * Add a command to the command hash table                      -Thoric
  */
 void AddCommand( Command *command )
 {

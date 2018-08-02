@@ -41,7 +41,7 @@ void do_examine( Character *ch, char *argument )
     {
       if ( (board = GetBoardFromObject( obj )) != NULL )
         {
-          size_t numberOfPosts = ListSize(board->Notes);
+          size_t numberOfPosts = board->Notes.size();
 
           if (numberOfPosts > 0)
             {
