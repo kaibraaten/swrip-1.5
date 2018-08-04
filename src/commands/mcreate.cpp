@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_mcreate( Character *ch, char *argument )
 {
@@ -73,7 +74,7 @@ void do_mcreate( Character *ch, char *argument )
   if ( !pMobIndex )
     {
       SendToCharacter( "Error.\r\n", ch );
-      LogPrintf( "do_mcreate: MakeMobile failed." );
+      Log->Bug( "do_mcreate: MakeMobile failed." );
       return;
     }
 

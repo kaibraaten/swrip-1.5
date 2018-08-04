@@ -1,27 +1,28 @@
 #include "shop.hpp"
 #include "mud.hpp"
 #include "character.hpp"
+#include "log.hpp"
 
 void do_placevendor (Character *ch, char *argument)
 {
   char strsave[MAX_INPUT_LENGTH];
   struct stat fst;
-  Character *vendor;
-  ProtoMobile *temp;
-  Object *obj;
+  Character *vendor = nullptr;
+  ProtoMobile *temp = nullptr;
+  Object *obj = nullptr;
   char vnum1[MAX_INPUT_LENGTH];
-  char buf [MAX_INPUT_LENGTH];
+  char buf[MAX_INPUT_LENGTH];
 
-  if (  FindKeeperQ (ch, false) )
+  if ( FindKeeperQ(ch, false) )
     {
       SendToCharacter ("A vendor is already here!\r\n",ch);
       return;
     }
 
   if ( IsNpc(ch) )
-    return;
-
-
+    {
+      return;
+    }
 
   /* better way to do this? what if they have another object called deed?*/
   if ( ( obj = GetCarriedObject( ch, "deed" ) ) == NULL )
@@ -54,7 +55,7 @@ void do_placevendor (Character *ch, char *argument)
 
   if ( (temp = GetProtoMobile (MOB_VNUM_VENDOR) ) == NULL )
     {
-      LogPrintf("do_placevendor: no vendor vnum");
+      Log->Bug("do_placevendor: no vendor vnum");
       return;
     }
 

@@ -308,7 +308,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
   char backup[MAX_STRING_LENGTH];
 
   sprintf( buf, "Saving %s...", tarea->Filename );
-  LogStringPlus( buf, LOG_NORMAL, LEVEL_GREATER );
+  Log->LogStringPlus( buf, LOG_NORMAL, LEVEL_GREATER );
 
   sprintf( buf, "%s%s", AREA_DIR, filename );
   sprintf( backup, "%s%s.bak", AREA_DIR, filename );

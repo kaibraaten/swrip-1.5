@@ -5,6 +5,8 @@
 #include "constants.hpp"
 #include "logger.hpp"
 #include "log.hpp"
+#include "character.hpp"
+#include "mud.hpp"
 
 extern FILE *fpArea;
 extern char strArea[];
@@ -15,9 +17,9 @@ class FileSystemLogger : public Logger
 {
 public:
   void Bug(const char *str, ...) override;
-  void BootLog(const char *str, ...) override;
+  void Boot(const char *str, ...) override;
   void LogStringPlus( const char *str, short log_type, short level ) override;
-  void LogPrintf( const char *fmt, ... ) override;
+  void Info( const char *fmt, ... ) override;
 };
 
 /*
@@ -53,7 +55,7 @@ void FileSystemLogger::Bug( const char *str, ... )
         }
 
       sprintf( buf, "[*****] FILE: %s LINE: %d", strArea, iLine );
-      LogPrintf( buf );
+      Log->Info( buf );
 
       if ( stat( SHUTDOWN_FILE, &fst ) != -1 )  /* file exists */
         {
@@ -72,7 +74,7 @@ void FileSystemLogger::Bug( const char *str, ... )
   vsprintf( buf + strlen(buf), str, param );
   va_end(param);
 
-  LogPrintf( buf );
+  Log->Info( buf );
 
   if ( ( fp = fopen( BUG_FILE, "a" ) ) != NULL )
     {
@@ -81,19 +83,107 @@ void FileSystemLogger::Bug( const char *str, ... )
     }
 }
 
-void FileSystemLogger::BootLog(const char *str, ...)
+void FileSystemLogger::Boot(const char *str, ...)
 {
+  char buf[MAX_STRING_LENGTH];
+  FILE *fp;
+  va_list param;
 
+  strcpy( buf, "[*****] BOOT: " );
+  va_start(param, str);
+  vsprintf( buf+strlen(buf), str, param );
+  va_end(param);
+  Log->Info( buf );
+
+  if ( ( fp = fopen( BOOTLOG_FILE, "a" ) ) != NULL )
+    {
+      fprintf( fp, "%s\n", buf );
+      fclose( fp );
+    }
 }
 
 void FileSystemLogger::LogStringPlus( const char *str, short log_type, short level )
 {
+  char *strtime = ctime( &current_time );
+  int offset = 0;
+  bool lognone = false;
+  char buf[MAX_STRING_LENGTH];
 
+  strtime[strlen(strtime)-1] = '\0';
+  fprintf( stderr, "%s :: %s\n", strtime, str );
+
+  if( strncmp( str, "Log ", 4 ) == 0 )
+    {
+      offset = 4;
+    }
+  else
+    {
+      offset = 0;
+    }
+
+  sprintf( buf, "%s&R&w", str + offset );
+
+  switch( log_type )
+    {
+    case LOG_BUILD:
+      ToChannel( buf, CHANNEL_BUILD, "Build", level );
+      break;
+
+    case LOG_COMM:
+      ToChannel( buf, CHANNEL_COMM, "Comm", level );
+      break;
+
+    case LOG_ALL:
+      break;
+
+    default:
+      /* ToChannel( str + offset, CHANNEL_LOG, "Log", level ); */
+      lognone = true;
+      break;
+    }
+
+  if (lognone)
+    {
+      Descriptor *d = NULL;
+
+      for ( d = FirstDescriptor; d; d = d->Next )
+        {
+          Character *och = d->Original ? d->Original : d->Character;
+          Character *vch = d->Character;
+
+          if ( !och || !vch )
+            {
+              continue;
+            }
+
+          if ( ( vch->TopLevel < SysData.LevelOfLogChannel )
+               || ( vch->TopLevel < level ) )
+            {
+              continue;
+            }
+
+          if ( d->ConnectionState == CON_PLAYING
+               && !IsBitSet(och->Deaf, CHANNEL_LOG)
+               && vch->TopLevel >= level )
+            {
+              SetCharacterColor( AT_LOG, vch );
+              SendToCharacter( "Log: ", vch );
+              SendToCharacter( str + offset, vch );
+              SendToCharacter( "&R&w\r\n", vch );
+            }
+        }
+    }
 }
 
-void FileSystemLogger::LogPrintf( const char *fmt, ... )
+void FileSystemLogger::Info( const char *fmt, ... )
 {
+  char buf[MAX_STRING_LENGTH * 2];
+  va_list args;
+  va_start( args, fmt );
+  vsprintf( buf, fmt, args );
+  va_end( args );
 
+  LogStringPlus( buf, LOG_NORMAL, LEVEL_LOG );
 }
 
 Logger *NewLogger()

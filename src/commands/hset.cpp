@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "help.hpp"
+#include "log.hpp"
 
 void do_hset( Character *ch, char *argument )
 {
@@ -21,7 +22,7 @@ void do_hset( Character *ch, char *argument )
 
   if ( !StrCmp( arg1, "save" ) )
     {
-      LogStringPlus( "Saving help files.", LOG_NORMAL, LEVEL_GREATER );
+      Log->LogStringPlus( "Saving help files.", LOG_NORMAL, LEVEL_GREATER );
       HelpFiles->Save();
       SendToCharacter( "Saved.\r\n", ch );
       return;

@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "command.hpp"
+#include "log.hpp"
 
 void do_restrict( Character *ch, char *argument )
 {
@@ -62,7 +63,7 @@ void do_restrict( Character *ch, char *argument )
 
       cmd->Level = level;
       Echo( ch, "You restrict %s to level %d\r\n", cmd->Name, level );
-      LogPrintf("%s restricting %s to level %d", ch->Name, cmd->Name, level );
+      Log->Info("%s restricting %s to level %d", ch->Name, cmd->Name, level );
     }
   else
     {

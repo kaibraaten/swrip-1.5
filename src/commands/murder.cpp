@@ -1,11 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "log.hpp"
 
 void do_murder( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  char  logbuf[MAX_STRING_LENGTH];
+  Character *victim = nullptr;
 
   OneArgument( argument, arg );
 
@@ -29,8 +29,7 @@ void do_murder( Character *ch, char *argument )
 
   if ( IsBitSet(victim->Flags, PLR_AFK))
     {
-      sprintf( logbuf , "%s just attacked %s with an afk flag on!." , ch->Name, victim->Name );
-      LogPrintf( logbuf );
+      Log->Info("%s just attacked %s with an afk flag on!." , ch->Name, victim->Name );
     }
 
   if ( IsSafe( ch, victim ) )

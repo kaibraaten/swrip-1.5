@@ -21,6 +21,7 @@
  ****************************************************************************/
 
 #include <cstring>
+#include <cassert>
 #include "character.hpp"
 #include "mud.hpp"
 #include "editor.hpp"
@@ -1403,7 +1404,9 @@ void AddReinforcements( Character *ch )
       return;
     }
 
-  LogPrintf( "%s just posted a guard on %ld!", ch->Name, ch->InRoom ? ch->InRoom->Vnum : 0 );
+  assert(ch->InRoom != nullptr);
+
+  Log->Info( "%s just posted a guard on %ld!", ch->Name, ch->InRoom->Vnum );
 
   if ( ch->BackupMob == MOB_VNUM_STORMTROOPER ||
        ch->BackupMob == MOB_VNUM_NR_TROOPER   ||

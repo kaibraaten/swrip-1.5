@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_quit( Character *ch, char *argument )
 {
@@ -112,5 +113,5 @@ void do_quit( Character *ch, char *argument )
     for ( y = 0; y < MAX_LAYERS; y++ )
       save_equipment[x][y] = NULL;
 
-  LogStringPlus( log_buf, LOG_COMM, level );
+  Log->LogStringPlus( log_buf, LOG_COMM, level );
 }

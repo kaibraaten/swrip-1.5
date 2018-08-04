@@ -37,6 +37,7 @@
 #include "mud.hpp"
 #include "arena.hpp"
 #include "script.hpp"
+#include "log.hpp"
 
 Arena arena;
 
@@ -238,7 +239,7 @@ static void FindGameWinner(void)
               Echo(i, "You have been awarded %d credits for winning the arena\r\n",
 			(arena.ArenaPot/2));
 
-              LogPrintf( "%s awarded %d credits for winning arena", i->Name,
+              Log->Info( "%s awarded %d credits for winning arena", i->Name,
 			 (arena.ArenaPot/2));
 
               AllocateMemory(fame_node, struct HallOfFameElement, 1);

@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "log.hpp"
 
 extern char *spell_target_name;
 
@@ -67,7 +68,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
   if ( !IsNpc( victim ) )
     {
       sprintf( log_buf, "%s has cast sleep on %s.", ch->Name, victim->Name );
-      LogStringPlus( log_buf, LOG_NORMAL, ch->TopLevel );
+      Log->LogStringPlus( log_buf, LOG_NORMAL, ch->TopLevel );
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", umax( LEVEL_IMMORTAL, ch->TopLevel ) );
     }
 

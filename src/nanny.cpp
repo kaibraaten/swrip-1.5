@@ -191,8 +191,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   if ( !d->Character )
     {
-      sprintf( log_buf, "Bad player file %s@%s.", argument, d->Remote.Hostname );
-      LogPrintf( log_buf );
+      Log->Bug("Bad player file %s@%s.", argument, d->Remote.Hostname );
       WriteToBuffer( d, "Your playerfile is corrupt...Please notify mail@mymud.com\r\n", 0 );
       CloseDescriptor( d, false );
       return;
@@ -217,7 +216,7 @@ static void NannyGetName( Descriptor *d, char *argument )
   if ( IsBitSet(ch->Flags, PLR_DENY) )
     {
       sprintf( log_buf, "Denying access to %s@%s.", argument, d->Remote.Hostname );
-      LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
+      Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
 
       if (d->NewState != 0)
 	{
@@ -345,11 +344,11 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
   if ( ch->TopLevel < LEVEL_CREATOR )
     {
       /*ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );*/
-      LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
+      Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
     }
   else
     {
-      LogStringPlus( log_buf, LOG_COMM, ch->TopLevel );
+      Log->LogStringPlus( log_buf, LOG_COMM, ch->TopLevel );
     }
 
   WriteToBuffer( d, "Press enter...\r\n", 0 );
@@ -1089,7 +1088,7 @@ static void FinalizeCharacter( Descriptor *d )
   
   sprintf( log_buf, "%s@%s new %s.", ch->Name, d->Remote.Hostname,
            RaceTable[ch->Race].Name);
-  LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
+  Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
   WriteToBuffer( d, "Press [ENTER] ", 0 );
   WriteToBuffer( d, "Press enter...\r\n", 0 );

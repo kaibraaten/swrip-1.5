@@ -118,7 +118,7 @@ void do_sabotage(Character *ch, char *argument )
   Act( AT_PLAIN, "$n finishes the work.", ch,
        NULL, argument , TO_ROOM );
 
-  LogPrintf("%s has sabotaged %s!", ch->Name, ship->Name );
+  Log->Info("%s has sabotaged %s!", ch->Name, ship->Name );
 
   LearnFromSuccess( ch, gsn_sabotage );
 }

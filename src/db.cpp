@@ -312,12 +312,12 @@ void BootDatabase( bool fCopyOver )
   short wear, x;
 
   unlink( BOOTLOG_FILE );
-  BootLog( "---------------------[ Boot Log ]--------------------" );
+  Log->Boot( "---------------------[ Boot Log ]--------------------" );
 
-  LogPrintf("Allocating repositories");
+  Log->Boot("Allocating repositories");
   AllocateRepositories();
 
-  LogPrintf( "Loading SysData.configuration..." );
+  Log->Boot( "Loading SysData.configuration..." );
 
   /* default values */
   SysData.ReadAllMail             = LEVEL_CREATOR;
@@ -347,13 +347,13 @@ void BootDatabase( bool fCopyOver )
 
   LoadSystemData();
 
-  LogPrintf( "Loading commands" );
+  Log->Boot( "Loading commands" );
   LoadCommands();
 
-  LogPrintf("Loading socials");
+  Log->Boot("Loading socials");
   Socials->Load();
 
-  LogPrintf("Loading skill table");
+  Log->Boot("Loading skill table");
   LoadSkills();
   SortSkillTable();
 
@@ -371,10 +371,10 @@ void BootDatabase( bool fCopyOver )
 	gsn_first_tongue = x;
     }
 
-  LogPrintf("Loading herb table");
+  Log->Boot("Loading herb table");
   LoadHerbs();
 
-  LogPrintf("Making wizlist");
+  Log->Boot("Making wizlist");
   MakeWizlist();
 
   fBootDb             = true;
@@ -399,7 +399,7 @@ void BootDatabase( bool fCopyOver )
   /*
    * Init random number generator.
    */
-  LogPrintf("Initializing random number generator");
+  Log->Boot("Initializing random number generator");
   InitMM();
   srand( time(0) );
 
@@ -409,7 +409,7 @@ void BootDatabase( bool fCopyOver )
   {
     long lhour = 0, lday = 0, lmonth = 0;
 
-    LogPrintf("Setting time and weather");
+    Log->Boot("Setting time and weather");
 
     lhour               = (current_time - 650336715) / (PULSE_TICK / PULSE_PER_SECOND);
     time_info.Hour      = lhour  % 24;
@@ -453,7 +453,7 @@ void BootDatabase( bool fCopyOver )
    * Assign gsn's for skills which need them.
    */
   {
-    LogPrintf("Assigning gsn's");
+    Log->Boot("Assigning gsn's");
     ASSIGN_GSN( gsn_cloak, "cloak" );
     ASSIGN_GSN( gsn_cutdoor, "cutdoor" );
     ASSIGN_GSN( gsn_bind, "bind" );
@@ -599,7 +599,7 @@ void BootDatabase( bool fCopyOver )
   {
     FILE *fpList;
 
-    LogPrintf("Reading in area files...");
+    Log->Boot("Reading in area files...");
 
     if ( ( fpList = fopen( AREA_DIR AREA_LIST, "r" ) ) == NULL )
       {
@@ -633,68 +633,68 @@ void BootDatabase( bool fCopyOver )
    * Reset all areas once.
    * Load up the notes file.
    */
-  LogPrintf( "Fixing exits" );
+  Log->Boot( "Fixing exits" );
   FixExits();
 
   fBootDb     = false;
 
-  LogPrintf( "Initializing economy" );
+  Log->Boot( "Initializing economy" );
   InitializeEconomy();
 
   /*loads vendors on each reboot -Legonas*/
-  LogPrintf( "Reading in Vendors" );
+  Log->Boot( "Reading in Vendors" );
   LoadVendors();
 
-  LogPrintf( "Reading in Storerooms" );
+  Log->Boot( "Reading in Storerooms" );
   LoadStorerooms();
 
-  LogPrintf( "Loading buildlist" );
+  Log->Boot( "Loading buildlist" );
   LoadBuildList();
 
-  LogPrintf( "Loading boards" );
+  Log->Boot( "Loading boards" );
   Boards->Load();
 
-  LogPrintf( "Loading clans" );
+  Log->Boot( "Loading clans" );
   Clans->Load();
 
-  LogPrintf( "Loading bans" );
+  Log->Boot( "Loading bans" );
   Bans->Load();
 
-  LogPrintf( "Loading corpses" );
+  Log->Boot( "Loading corpses" );
   LoadCorpses();
 
-  LogPrintf( "Loading spaceobjects" );
+  Log->Boot( "Loading spaceobjects" );
   Spaceobjects->Load();
 
-  LogPrintf( "Loading ships" );
+  Log->Boot( "Loading ships" );
   Ships->Load();
 
-  LogPrintf( "Loading bounties" );
+  Log->Boot( "Loading bounties" );
   Bounties->Load();
 
-  LogPrintf( "Loading planets" );
+  Log->Boot( "Loading planets" );
   Planets->Load();
 
-  LogPrintf( "Loading shuttles" );
+  Log->Boot( "Loading shuttles" );
   Shuttles->Load();
 
-  LogPrintf( "Loading Hall of Fame" );
+  Log->Boot( "Loading Hall of Fame" );
   LoadHallOfFame();
 
-  LogPrintf( "Loading badnames" );
+  Log->Boot( "Loading badnames" );
   BadNames->Load();
   
-  LogPrintf( "Loading help files" );
+  Log->Boot( "Loading help files" );
   HelpFiles->Load();
 
-  LogPrintf( "Resetting areas" );
+  Log->Boot( "Resetting areas" );
   AreaUpdate();
 
   MOBtrigger = true;
 
   if( fCopyOver )
     {
-      LogPrintf( "Running RecoverFromCopyover." );
+      Log->Boot( "Running RecoverFromCopyover." );
       RecoverFromCopyover();
     }
 }
@@ -766,10 +766,10 @@ static void FixExits( void )
                 {
                   if ( fBootDb )
                     {
-                      BootLog( "%s: room %ld, exit %s leads to bad vnum (%ld)",
-                               __FUNCTION__, 
-                               pRoomIndex->Vnum, GetDirectionName(pexit->Direction),
-                               pexit->Vnum );
+                      Log->Boot( "%s: room %ld, exit %s leads to bad vnum (%ld)",
+                                 __FUNCTION__, 
+                                 pRoomIndex->Vnum, GetDirectionName(pexit->Direction),
+                                 pexit->Vnum );
                     }
 
                   Log->Bug( "Deleting %s exit in room %ld",
@@ -1311,28 +1311,6 @@ Room *GetRoom( vnum_t vnum )
 }
 
 /*
- * Add a string to the boot-up log                              -Thoric
- */
-void BootLog( const char *str, ... )
-{
-  char buf[MAX_STRING_LENGTH];
-  FILE *fp;
-  va_list param;
-
-  strcpy( buf, "[*****] BOOT: " );
-  va_start(param, str);
-  vsprintf( buf+strlen(buf), str, param );
-  va_end(param);
-  LogPrintf( buf );
-
-  if ( ( fp = fopen( BOOTLOG_FILE, "a" ) ) != NULL )
-    {
-      fprintf( fp, "%s\n", buf );
-      fclose( fp );
-    }
-}
-
-/*
  * Dump a text file to a player, a line at a time               -Thoric
  */
 void ShowFile( const Character *ch, const char *filename )
@@ -1363,82 +1341,6 @@ void ShowFile( const Character *ch, const char *filename )
           SendToPager( (const char*) buf, ch );
           num = 0;
         }
-    }
-}
-
-/*
- * Writes a string to the log, extended version                 -Thoric
- */
-void LogStringPlus( const char *str, short log_type, short level )
-{
-  char *strtime = ctime( &current_time );
-  int offset = 0;
-  bool lognone = false;
-  char buf[MAX_STRING_LENGTH];
-
-  strtime[strlen(strtime)-1] = '\0';
-  fprintf( stderr, "%s :: %s\n", strtime, str );
-
-  if( strncmp( str, "Log ", 4 ) == 0 )
-    {
-      offset = 4;
-    }
-  else
-    {
-      offset = 0;
-    }
-
-  sprintf( buf, "%s&R&w", str + offset );
-
-  switch( log_type )
-    {
-    case LOG_BUILD:
-      ToChannel( buf, CHANNEL_BUILD, "Build", level );
-      break;
-
-    case LOG_COMM:
-      ToChannel( buf, CHANNEL_COMM, "Comm", level );
-      break;
-
-    case LOG_ALL:
-      break;
-
-    default:
-      /* ToChannel( str + offset, CHANNEL_LOG, "Log", level ); */
-      lognone = true;
-      break;
-    }
-
-  if (lognone)
-    {
-      Descriptor *d = NULL;
-
-      for ( d = FirstDescriptor; d; d = d->Next )
-	{
-	  Character *och = d->Original ? d->Original : d->Character;
-	  Character *vch = d->Character;
-
-	  if ( !och || !vch )
-	    {
-	      continue;
-	    }
-
-	  if ( ( vch->TopLevel < SysData.LevelOfLogChannel )
-	       || ( vch->TopLevel < level ) )
-	    {
-	      continue;
-	    }
-
-	  if ( d->ConnectionState == CON_PLAYING
-	       && !IsBitSet(och->Deaf, CHANNEL_LOG)
-	       && vch->TopLevel >= level )
-	    {
-	      SetCharacterColor( AT_LOG, vch );
-	      SendToCharacter( "Log: ", vch );
-	      SendToCharacter( str + offset, vch );
-	      SendToCharacter( "&R&w\r\n", vch );
-	    }
-	}
     }
 }
 
@@ -1481,7 +1383,7 @@ static void AddToWizList( const char *name, int level )
   Wizard *wiz, *tmp;
 
 #ifdef DEBUG
-  LogPrintf( "Adding to wizlist..." );
+  Log->Info( "Adding to wizlist..." );
 #endif
 
   AllocateMemory( wiz, Wizard, 1 );
@@ -2008,7 +1910,7 @@ static void LoadBuildList( void )
               continue;
             }
 
-          LogPrintf( buf );
+          Log->Info( buf );
           badfile = false;
           rlow=rhi=olow=ohi=mlow=mhi=0;
 
@@ -2391,18 +2293,6 @@ void AppendFile( const Character *ch, const char *file, const char *str )
 	       ch->InRoom ? ch->InRoom->Vnum : 0, ch->Name, str );
       fclose( fp );
     }
-}
-
-/* From Erwin */
-void LogPrintf( const char *fmt, ... )
-{
-  char buf[MAX_STRING_LENGTH * 2];
-  va_list args;
-  va_start( args, fmt );
-  vsprintf( buf, fmt, args );
-  va_end( args );
-
-  LogStringPlus( buf, LOG_NORMAL, LEVEL_LOG );
 }
 
 void AllocateRepositories(void)

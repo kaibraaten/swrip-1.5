@@ -279,7 +279,7 @@ void ViolenceUpdate( void )
         {
           sprintf( buf, "ViolenceUpdate: %s fighting %s in a SAFE room.",
                    ch->Name, victim->Name );
-          LogPrintf( buf );
+          Log->Info( buf );
           StopFighting( ch, true );
         }
       else
@@ -1671,7 +1671,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
                    victim->Name,
                    (IsNpc(ch) ? ch->ShortDescr : ch->Name),
                    victim->InRoom->Vnum );
-          LogPrintf( log_buf );
+          Log->Info( log_buf );
           ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
 
         }

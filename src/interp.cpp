@@ -401,7 +401,7 @@ void Interpret( Character *ch, char *argument )
 	  loglvl = LOG_ALL;
 	}
 
-      LogStringPlus( log_buf, loglvl, ch->TopLevel );
+      Log->LogStringPlus( log_buf, loglvl, ch->TopLevel );
     }
 
   if ( ch->Desc && ch->Desc->SnoopBy )
@@ -524,7 +524,7 @@ void Interpret( Character *ch, char *argument )
               ch->InRoom ? ch->InRoom->Vnum : 0,
               (int) (time_used.tv_sec),
 	      (int) (time_used.tv_usec) );
-      LogStringPlus(log_buf, LOG_NORMAL, GetTrustLevel(ch));
+      Log->LogStringPlus(log_buf, LOG_NORMAL, GetTrustLevel(ch));
     }
 }
 

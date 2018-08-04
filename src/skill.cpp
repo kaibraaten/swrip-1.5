@@ -615,7 +615,7 @@ int SkillNumberFromSlot( int slot )
  */
 void SortSkillTable( void )
 {
-  LogPrintf( "Sorting skill table..." );
+  Log->Info( "Sorting skill table..." );
   qsort( &SkillTable[1], TopSN-1, sizeof( Skill * ),
          (int(*)(const void *, const void *)) CompareSkills );
 }

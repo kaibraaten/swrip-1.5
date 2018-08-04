@@ -68,7 +68,7 @@ void do_copyover( Character * ch, char *argument )
   if( !fp )
   {
     SendToCharacter( "Copyover file not writeable, aborted.\r\n", ch );
-    LogPrintf( "Could not write to copyover file: %s", COPYOVER_FILE );
+    Log->Bug( "Could not write to copyover file: %s", COPYOVER_FILE );
     perror( "do_copyover:fopen" );
     return;
   }
@@ -182,14 +182,14 @@ void RecoverFromCopyover( void )
   bool fOld = false;
   int use_mccp = 0;
 
-  LogPrintf( "Copyover recovery initiated" );
+  Log->Info( "Copyover recovery initiated" );
 
   fp = fopen( COPYOVER_FILE, "r" );
 
   if( !fp )
   {
     perror( "RecoverFromCopyover:fopen" );
-    LogPrintf( "Copyover file not found. Exitting.\r\n" );
+    Log->Bug( "Copyover file not found. Exitting.\r\n" );
     exit( 1 );
   }
 
