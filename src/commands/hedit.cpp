@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "editor.hpp"
 #include "help.hpp"
+#include "log.hpp"
 
 /*
  * Help editor                                                  -Thoric
@@ -26,7 +27,7 @@ void do_hedit( Character *ch, char *argument )
 
       if ( !pHelp )
         {
-          Bug( "hedit: sub_help_edit: NULL ch->dest_buf", 0 );
+          Log->Bug( "hedit: sub_help_edit: NULL ch->dest_buf");
           StopEditing( ch );
           return;
         }

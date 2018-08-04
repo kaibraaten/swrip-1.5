@@ -58,6 +58,7 @@
 #include "character.hpp"
 #include "board.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 static void RemoveComment( Character *ch, Character *victim, Note *pnote );
 
@@ -65,7 +66,7 @@ static void RemoveComment( Character *ch, Character *victim, Note *pnote )
 {
   if ( IsNpc( victim ) )
     {
-      Bug( "comment remove: NPC", 0 );
+      Log->Bug( "comment remove: NPC", 0 );
       return;
     }
 
@@ -102,7 +103,7 @@ void do_comment( Character *ch, char *argument )
 
   if ( !ch->Desc )
     {
-      Bug( "do_comment: no descriptor", 0 );
+      Log->Bug( "do_comment: no descriptor", 0 );
       return;
     }
 
@@ -122,13 +123,13 @@ void do_comment( Character *ch, char *argument )
 
       if ( !ch->PCData->Note )
         {
-          Bug( "do_comment: note got lost?", 0 );
+          Log->Bug( "do_comment: note got lost?", 0 );
           SendToCharacter( "Your note got lost!\r\n", ch );
           StopEditing(ch);
           return;
         }
       if ( ch->dest_buf != ch->PCData->Note )
-        Bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote", 0 );
+        Log->Bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote", 0 );
       FreeMemory( ch->PCData->Note->Text );
       ch->PCData->Note->Text = CopyBuffer( ch );
       StopEditing( ch );
@@ -525,36 +526,36 @@ void ReadComment( Character *ch, FILE *fp )
 
       AllocateMemory( pnote, Note, 1 );
 
-      if ( StrCmp( ReadWord( fp ), "sender" ) )
+      if ( StrCmp( ReadWord( fp, Log ), "sender" ) )
         break;
 
-      pnote->Sender     = ReadStringToTilde( fp );
+      pnote->Sender     = ReadStringToTilde( fp, Log );
 
-      if ( StrCmp( ReadWord( fp ), "date" ) )
+      if ( StrCmp( ReadWord( fp, Log ), "date" ) )
         break;
 
-      pnote->Date       = ReadStringToTilde( fp );
+      pnote->Date       = ReadStringToTilde( fp, Log );
 
-      if ( StrCmp( ReadWord( fp ), "to" ) )
+      if ( StrCmp( ReadWord( fp, Log ), "to" ) )
         break;
 
-      pnote->ToList    = ReadStringToTilde( fp );
+      pnote->ToList    = ReadStringToTilde( fp, Log );
 
-      if ( StrCmp( ReadWord( fp ), "subject" ) )
+      if ( StrCmp( ReadWord( fp, Log ), "subject" ) )
         break;
 
-      pnote->Subject    = ReadStringToTilde( fp );
+      pnote->Subject    = ReadStringToTilde( fp, Log );
 
-      if ( StrCmp( ReadWord( fp ), "text" ) )
+      if ( StrCmp( ReadWord( fp, Log ), "text" ) )
         break;
 
-      pnote->Text       = ReadStringToTilde( fp );
+      pnote->Text       = ReadStringToTilde( fp, Log );
 
       AddToList(ch->PCData->Comments, pnote);
       return;
     }
 
-  Bug( "%s: bad key word. strap in!", __FUNCTION__ );
+  Log->Bug( "%s: bad key word. strap in!", __FUNCTION__ );
 }
 
 /*

@@ -34,10 +34,12 @@
 
 #include <cctype>
 #include <cstring>
+#include <cassert>
 #include "mud.hpp"
 #include "shop.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 #define COST_EQUATION  (int) (cost*CostEquation( obj ))
 
@@ -376,11 +378,11 @@ Character *ReadVendor( FILE *fp )
   Character *mob = NULL;
   const char *word = NULL;
 
-  word = feof( fp ) ? "END" : ReadWord( fp );
+  word = feof( fp ) ? "END" : ReadWord( fp, Log );
 
   if ( !StrCmp(word, "Vnum") )
     {
-      vnum_t vnum = ReadInt( fp );
+      vnum_t vnum = ReadInt( fp, Log );
 
       mob = CreateMobile( GetProtoMobile(vnum));
 
@@ -388,7 +390,7 @@ Character *ReadVendor( FILE *fp )
         {
           for ( ; ; )
             {
-              word = feof( fp ) ? "END" : ReadWord( fp );
+              word = feof( fp ) ? "END" : ReadWord( fp, Log );
 
               if ( !StrCmp( word, "END" ) )
 		{
@@ -396,7 +398,7 @@ Character *ReadVendor( FILE *fp )
 		}
             }
 
-          Bug("Fread_mobile: No index data for vnum %d", vnum );
+          Log->Bug("Fread_mobile: No index data for vnum %d", vnum );
           return NULL;
         }
     }
@@ -404,7 +406,7 @@ Character *ReadVendor( FILE *fp )
     {
       for ( ; ; )
         {
-          word = feof( fp ) ? "END" : ReadWord( fp );
+          word = feof( fp ) ? "END" : ReadWord( fp, Log );
 
           if ( !StrCmp( word, "END" ) )
 	    {
@@ -412,7 +414,7 @@ Character *ReadVendor( FILE *fp )
 	    }
         }
 
-      Bug("Fread_vendor: Vnum not found", 0 );
+      Log->Bug("Fread_vendor: Vnum not found");
       return NULL;
     }
 
@@ -422,13 +424,13 @@ Character *ReadVendor( FILE *fp )
       vnum_t inroom = 0;
       Room *pRoomIndex = NULL;
 
-      word = feof( fp ) ? "END" : ReadWord( fp );
+      word = feof( fp ) ? "END" : ReadWord( fp, Log );
 
       switch ( CharToUppercase(word[0]) )
 	{
 	case '*':
 	  fMatch = true;
-	  ReadToEndOfLine( fp );
+	  ReadToEndOfLine( fp, Log );
 	  break;
 
 	case '#':
@@ -439,7 +441,7 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'D':
-	  KEY( "Description", mob->Description, ReadStringToTilde(fp));
+	  KEY( "Description", mob->Description, ReadStringToTilde(fp, Log));
 	  break;
 
 	case 'E':
@@ -491,15 +493,15 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'F':
-	  KEY( "Flags", mob->Flags, ReadInt(fp));
+	  KEY( "Flags", mob->Flags, ReadInt(fp, Log));
 	  break;
 
 	case 'G':
-	  KEY("Gold", mob->Gold, ReadInt(fp));
+	  KEY("Gold", mob->Gold, ReadInt(fp, Log));
 	  break;
 
 	case 'H':
-	  KEY("Home", inroom, ReadInt(fp) );
+	  KEY("Home", inroom, ReadInt(fp, Log) );
 	  break;
 
 	case 'L':
@@ -509,22 +511,21 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'O':
-	  KEY ("Owner", mob->Owner, ReadStringToTilde (fp) );
+	  KEY ("Owner", mob->Owner, ReadStringToTilde(fp, Log) );
 	  break;
 
 	case 'P':
-	  KEY( "Position", mob->Position, (PositionType)ReadInt( fp ) );
+	  KEY( "Position", mob->Position, (PositionType)ReadInt( fp, Log ) );
 	  break;
 
 	case 'S':
-	  KEY( "Short", mob->ShortDescr, ReadStringToTilde(fp));
+	  KEY( "Short", mob->ShortDescr, ReadStringToTilde(fp, Log));
 	  break;
 	}
 
       if ( !fMatch )
 	{
-	  Bug( "Fread_mobile: no match." );
-	  Bug( word );
+	  Log->Bug( "Fread_mobile: no match: %s", word );
 	}
     }
 
@@ -533,24 +534,19 @@ Character *ReadVendor( FILE *fp )
 
 void SaveVendor( Character *ch )
 {
+  assert(ch != nullptr);
+
   char strsave[MAX_INPUT_LENGTH];
   FILE *fp = NULL;
 
-  if ( !ch )
-    {
-      Bug( "Save_char_obj: null ch!", 0 );
-      return;
-    }
-
   DeEquipCharacter( ch );
-
 
   sprintf( strsave, "%s%s",VENDOR_DIR, Capitalize( ch->Owner ) );
 
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
     {
       perror( strsave );
-      Bug( "Save_vendor: fopen" );
+      Log->Bug( "Save_vendor: fopen");
     }
   else
     {
@@ -573,7 +569,7 @@ void SaveVendor( Character *ch )
       if (ferr)
         {
           perror(strsave);
-          Bug("Error writing temp file for %s -- not copying", strsave);
+          Log->Bug("Error writing temp file for %s -- not copying", strsave);
         }
     }
 

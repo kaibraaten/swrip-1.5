@@ -2,8 +2,9 @@
 #include "clan.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
-static bool IsGuildNameAcceptable( const char *name );
+static bool IsGuildNameAcceptable( const std::string &name );
 
 void do_makeguild( Character *ch, char *argument )
 {
@@ -52,9 +53,9 @@ void do_makeguild( Character *ch, char *argument )
   if( !mainClan )
     {
       Echo( ch, "&RSomething when wrong. Contact the administration.&d\r\n" );
-      Bug( "%d: Main clan %s does not exist.", __FUNCTION__,
-	   !StrCmp( faction, "imperial" ) ? BADGUY_CLAN
-	   : !StrCmp( faction, "rebel" ) ? GOODGUY_CLAN : INDEPENDENT_CLAN );
+      Log->Bug( "%d: Main clan %s does not exist.", __FUNCTION__,
+                !StrCmp( faction, "imperial" ) ? BADGUY_CLAN
+                : !StrCmp( faction, "rebel" ) ? GOODGUY_CLAN : INDEPENDENT_CLAN );
       return;
     }
 
@@ -95,10 +96,10 @@ void do_makeguild( Character *ch, char *argument )
   Echo( ch, "See HELP GUILD to get started.&d\r\n" );
 }
 
-static bool IsGuildNameAcceptable( const char *name )
+static bool IsGuildNameAcceptable( const std::string &name )
 {
-  bool nameIsAvailable = GetClan(name) == NULL;
+  bool nameIsAvailable = GetClan(name.c_str()) == nullptr;
 
   return nameIsAvailable
-    && StringInfix( "Jedi Order", name );
+    && StringInfix( "Jedi Order", name ) != 0;
 }

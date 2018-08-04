@@ -1,6 +1,7 @@
-#include <ctype.h>
+#include <cctype>
 #include "mud.hpp"
 #include "character.hpp"
+#include "log.hpp"
 
 void do_loadup( Character *ch, char *argument )
 {
@@ -23,11 +24,10 @@ void do_loadup( Character *ch, char *argument )
 
   sprintf( fname, "%s%c/%s", PLAYER_DIR, tolower(name[0]),
            Capitalize( name ) );
+
   if ( stat( fname, &fst ) != -1 )
     {
       AllocateMemory( d, Descriptor, 1 );
-      d->Next = NULL;
-      d->Previous = NULL;
       d->ConnectionState = CON_GET_NAME;
       d->OutSize = 2000;
       AllocateMemory( d->OutBuffer, char, d->OutSize );
@@ -63,30 +63,30 @@ void do_loadup( Character *ch, char *argument )
                   char letter;
                   const char *word;
 
-                  letter = ReadChar( fph );
+                  letter = ReadChar( fph, Log );
                   if ( letter == '*' )
                     {
-                      ReadToEndOfLine( fph );
+                      ReadToEndOfLine( fph, Log );
                       continue;
                     }
 
                   if ( letter != '#' )
                     {
-                      Bug( "Load_plr_home: # not found.", 0 );
-                      Bug( d->Character->Name, 0 );
+                      Log->Bug( "Load_plr_home: # not found." );
+                      Log->Bug( "%s", d->Character->Name );
                       break;
                     }
 
-                  word = ReadWord( fph );
+                  word = ReadWord( fph, Log );
                   if ( !StrCmp( word, "OBJECT" ) )     /* Objects      */
-                    ReadObject  ( supermob, fph, OS_CARRY );
+                    ReadObject( supermob, fph, OS_CARRY );
                   else
                     if ( !StrCmp( word, "END"    ) )   /* Done         */
                       break;
                     else
 		      {
-                        Bug( "Load_plr_home: bad section.", 0 );
-                        Bug( d->Character->Name, 0 );
+                        Log->Bug( "Load_plr_home: bad section." );
+                        Log->Bug( "%s", d->Character->Name );
                         break;
                       }
                 }
@@ -106,7 +106,6 @@ void do_loadup( Character *ch, char *argument )
             }
         }
 
-
       if ( GetTrustLevel(d->Character) >= GetTrustLevel( ch ) )
         {
           do_say( d->Character, "Do *NOT* disturb me again!" );
@@ -115,6 +114,7 @@ void do_loadup( Character *ch, char *argument )
           do_quit( d->Character, "" );
           return;
         }
+
       d->Character->Desc        = NULL;
       d->Character->ReTran    = old_room_vnum;
       d->Character              = NULL;

@@ -1,6 +1,6 @@
 #define _DEFAULT_SOURCE
 #define _BSD_SOURCE
-
+#include <iostream>
 #include <cstdio>
 #include <cstdlib>
 #include <cmath>
@@ -10,17 +10,8 @@
 #include <dos/exall.h>
 #endif
 #include "utility.hpp"
+#include "logger.hpp"
 
-/*
- * Uni-directional dependencies. Fix that.
- */
-#ifdef __cplusplus
-extern "C" {
-#endif
-  void Bug( const char *str, ... );
-#ifdef __cplusplus
-}
-#endif
 /*
  * Added lots of EOF checks, as most of the file crashes are based on them.
  * If an area file encounters EOF, the fread_* functions will shutdown the
@@ -37,7 +28,7 @@ extern bool fBootDb;
 /*
  * Read a letter from a file.
  */
-char ReadChar( FILE *fp )
+char ReadChar( FILE *fp, Logger *log )
 {
   char c = '\0';
 
@@ -45,7 +36,8 @@ char ReadChar( FILE *fp )
   {
     if ( feof(fp) )
     {
-      Bug("ReadChar: EOF encountered on read.\r\n");
+      log->Bug("ReadChar: EOF encountered on read.\r\n");
+
       if ( fBootDb )
 	exit( EXIT_FAILURE );
 
@@ -62,7 +54,7 @@ char ReadChar( FILE *fp )
 /*
  * Read a float number from a file. Turn the result into a float value.
  */
-float ReadFloat( FILE *fp )
+float ReadFloat( FILE *fp, Logger *log )
 {
   float number = 0.0;
   bool sign = false, decimal = false;
@@ -73,12 +65,13 @@ float ReadFloat( FILE *fp )
   {
     if( feof( fp ) )
     {
-      Bug( "%s: EOF encountered on read.", __FUNCTION__ );
+      log->Bug( "%s: EOF encountered on read.", __FUNCTION__ );
 
       if( fBootDb )
       {
 	exit( EXIT_FAILURE );
       }
+
       return 0;
     }
     c = fgetc( fp );
@@ -95,7 +88,7 @@ float ReadFloat( FILE *fp )
 
   if( !isdigit( (int) c ) )
   {
-    Bug( "%s: bad format. (%c)", __FUNCTION__, c );
+    log->Bug( "%s: bad format. (%c)", __FUNCTION__, c );
 
     if( fBootDb )
       exit( EXIT_FAILURE );
@@ -114,7 +107,7 @@ float ReadFloat( FILE *fp )
 
       if( feof( fp ) )
       {
-	Bug( "%s: EOF encountered on read.", __FUNCTION__ );
+        log->Bug( "%s: EOF encountered on read.", __FUNCTION__ );
 
 	if( fBootDb )
 	  exit( EXIT_FAILURE );
@@ -138,13 +131,13 @@ float ReadFloat( FILE *fp )
 
   if( c == '|' )
     {
-      number += ReadFloat( fp );
+      number += ReadFloat( fp, log );
     }
   else if( c != ' ' )
     {
       if( ungetc( c, fp ) == EOF )
 	{
-	  Bug("ReadFloat: EOF encountered on ungetc.\r\n");
+	  log->Bug("ReadFloat: EOF encountered on ungetc.\r\n");
 
 	  if ( fBootDb )
 	    exit( EXIT_FAILURE );
@@ -157,7 +150,7 @@ float ReadFloat( FILE *fp )
 /*
  * Read a number from a file.
  */
-int ReadInt( FILE *fp )
+int ReadInt( FILE *fp, Logger *log )
 {
   int number = 0;
   bool sign = false;
@@ -167,7 +160,7 @@ int ReadInt( FILE *fp )
   {
     if ( feof(fp) )
     {
-      Bug("ReadInt: EOF encountered on read.\r\n");
+      log->Bug("ReadInt: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       return 0;
@@ -188,7 +181,7 @@ int ReadInt( FILE *fp )
 
   if ( !isdigit((int) c) )
   {
-    Bug( "ReadInt: bad format. (%c)", c );
+    log->Bug( "ReadInt: bad format. (%c)", c );
 
     if ( fBootDb )
       exit( EXIT_FAILURE );
@@ -200,7 +193,7 @@ int ReadInt( FILE *fp )
   {
     if ( feof(fp) )
     {
-      Bug("ReadInt: EOF encountered on read.\r\n");
+      log->Bug("ReadInt: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       return number;
@@ -213,12 +206,14 @@ int ReadInt( FILE *fp )
     number = 0 - number;
 
   if ( c == '|' )
-    number += ReadInt( fp );
+    {
+      number += ReadInt( fp, log );
+    }
   else if ( c != ' ' )
     {
       if( ungetc( c, fp ) == EOF )
         {
-          Bug("ReadInt: EOF encountered on ungetc.\r\n");
+          log->Bug("ReadInt: EOF encountered on ungetc.\r\n");
 
           if ( fBootDb )
             exit( EXIT_FAILURE );
@@ -231,7 +226,7 @@ int ReadInt( FILE *fp )
 /*
  * Read a string from file fp
  */
-char *ReadStringToTilde( FILE *fp )
+char *ReadStringToTilde( FILE *fp, Logger *log )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
   char *plast = buf;
@@ -246,7 +241,7 @@ char *ReadStringToTilde( FILE *fp )
   {
     if ( feof(fp) )
     {
-      Bug("ReadStringToTilde: EOF encountered on read.\r\n");
+      log->Bug("ReadStringToTilde: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       return CopyString("");
@@ -262,7 +257,7 @@ char *ReadStringToTilde( FILE *fp )
   {
     if ( ln >= (MAX_STRING_LENGTH - 1) )
     {
-      Bug( "ReadStringToTilde: string too long" );
+      log->Bug( "ReadStringToTilde: string too long" );
       *plast = '\0';
       return CopyString( buf );
     }
@@ -273,10 +268,12 @@ char *ReadStringToTilde( FILE *fp )
 	break;
 
       case EOF:
-	Bug( "ReadStringToTilde: EOF" );
-	if ( fBootDb )
+        log->Bug( "ReadStringToTilde: EOF" );
+	
+        if ( fBootDb )
 	  exit( EXIT_FAILURE );
-	*plast = '\0';
+	
+        *plast = '\0';
 	return CopyString(buf);
 	break;
 
@@ -298,7 +295,7 @@ char *ReadStringToTilde( FILE *fp )
 /*
  * Read to end of line (for comments).
  */
-void ReadToEndOfLine( FILE *fp )
+void ReadToEndOfLine( FILE *fp, Logger *log )
 {
   char c = 0;
 
@@ -306,7 +303,7 @@ void ReadToEndOfLine( FILE *fp )
   {
     if ( feof(fp) )
     {
-      Bug("ReadToEndOfLine: EOF encountered on read.\r\n");
+      log->Bug("ReadToEndOfLine: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       return;
@@ -323,7 +320,7 @@ void ReadToEndOfLine( FILE *fp )
 
   if( ungetc( c, fp ) == EOF )
     {
-      Bug("ReadToEndOfLine: EOF encountered on ungetc.\r\n");
+      log->Bug("ReadToEndOfLine: EOF encountered on ungetc.\r\n");
 
       if ( fBootDb )
 	exit( EXIT_FAILURE );
@@ -333,7 +330,7 @@ void ReadToEndOfLine( FILE *fp )
 /*
  * Read to end of line into static buffer                       -Thoric
  */
-char *ReadLine( FILE *fp )
+char *ReadLine( FILE *fp, Logger *log )
 {
   static char line[MAX_STRING_LENGTH];
   char *pline = line;
@@ -350,7 +347,7 @@ char *ReadLine( FILE *fp )
   {
     if ( feof(fp) )
     {
-      Bug("ReadLine: EOF encountered on read.\r\n");
+      log->Bug("ReadLine: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       strcpy(line, "");
@@ -362,7 +359,7 @@ char *ReadLine( FILE *fp )
 
   if( ungetc( c, fp ) == EOF )
     {
-      Bug("ReadLine: EOF encountered on ungetc.\r\n");
+      log->Bug("ReadLine: EOF encountered on ungetc.\r\n");
 
       if ( fBootDb )
 	exit( EXIT_FAILURE );
@@ -372,7 +369,7 @@ char *ReadLine( FILE *fp )
   {
     if ( feof(fp) )
     {
-      Bug("ReadLine: EOF encountered on read.\r\n");
+      log->Bug("ReadLine: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       *pline = '\0';
@@ -382,7 +379,7 @@ char *ReadLine( FILE *fp )
     *pline++ = c; ln++;
     if ( ln >= (MAX_STRING_LENGTH - 1) )
     {
-      Bug( "ReadLine: line too long" );
+      log->Bug( "ReadLine: line too long" );
       break;
     }
   }
@@ -396,7 +393,7 @@ char *ReadLine( FILE *fp )
 
   if( ungetc( c, fp ) == EOF )
     {
-      Bug("%s: EOF encountered on ungetc.\r\n", __FUNCTION__);
+      log->Bug("%s: EOF encountered on ungetc.\r\n", __FUNCTION__);
 
       if ( fBootDb )
 	exit( EXIT_FAILURE );
@@ -409,7 +406,7 @@ char *ReadLine( FILE *fp )
 /*
  * Read one word (into static buffer).
  */
-char *ReadWord( FILE *fp )
+char *ReadWord( FILE *fp, Logger *log )
 {
   static char word[MAX_INPUT_LENGTH];
   char *pword = NULL;
@@ -419,7 +416,7 @@ char *ReadWord( FILE *fp )
   {
     if ( feof(fp) )
     {
-      Bug("ReadWord: EOF encountered on read.\r\n");
+      log->Bug("ReadWord: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       word[0] = '\0';
@@ -444,7 +441,7 @@ char *ReadWord( FILE *fp )
   {
     if ( feof(fp) )
     {
-      Bug("ReadWord: EOF encountered on read.\r\n");
+      log->Bug("ReadWord: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       *pword = '\0';
@@ -457,7 +454,7 @@ char *ReadWord( FILE *fp )
 	{
 	  if( ungetc( *pword, fp ) == EOF )
 	    {
-	      Bug("%s: EOF encountered on ungetc.\r\n", __FUNCTION__);
+	      log->Bug("%s: EOF encountered on ungetc.\r\n", __FUNCTION__);
 
 	      if ( fBootDb )
 		exit( EXIT_FAILURE );
@@ -469,7 +466,7 @@ char *ReadWord( FILE *fp )
     }
   }
 
-  Bug( "ReadWord: word too long" );
+  log->Bug( "ReadWord: word too long" );
   exit( EXIT_FAILURE );
   return NULL;
 }
@@ -547,7 +544,7 @@ void ForEachLuaFileInDir( const char *pathToDir,
   if( !( dp = opendir( pathToDir ) ) )
     {
       perror( pathToDir );
-      Bug( "%s: Could not open %s dir!", __FUNCTION__, pathToDir );
+      std::cerr << __FUNCTION__ << ": Could not open " << pathToDir << " dir!";
       exit( 1 );
     }
 
@@ -575,7 +572,7 @@ void ForEachLuaFileInDir( const char *pathToDir,
 #endif
 }
 
-const char *ConvertToLuaFilename( const char *name )
+const char *ConvertToLuaFilename( const std::string &name )
 {
   size_t n = 0;
   static char buf[MAX_STRING_LENGTH];

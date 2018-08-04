@@ -1,19 +1,12 @@
 #include "os.hpp"
 #include <ctime>
+#include <cassert>
 
 #ifndef _WIN32
 #include <sys/time.h>
 #endif
 
 #include "utility.hpp"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-void Bug( const char *str, ... );
-#ifdef __cplusplus
-}
-#endif
 
 struct tm *UpdateTime( struct tm *old_time )
 {
@@ -35,12 +28,7 @@ void SubtractTimes(struct timeval *etime, struct timeval *start_time)
 
 void StartTimer(struct timeval *start_time)
 {
-  if ( !start_time )
-  {
-    Bug( "Start_timer: NULL start_time.", 0 );
-    return;
-  }
-
+  assert(start_time != nullptr);
   gettimeofday(start_time, NULL);
 }
 
@@ -53,7 +41,7 @@ time_t StopTimer(struct timeval *start_time)
 
   if ( !start_time || (!start_time->tv_sec && !start_time->tv_usec) )
   {
-    Bug( "End_timer: bad start_time.", 0 );
+    assert(false);
     return 0;
   }
 

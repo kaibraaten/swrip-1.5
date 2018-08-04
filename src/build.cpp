@@ -29,6 +29,7 @@
 #include "shop.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 bool CanModifyRoom( const Character *ch, const Room *room )
 {
@@ -315,7 +316,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
 
   if ( ( fpout = fopen( buf, "w" ) ) == NULL )
     {
-      Bug( "%s: fopen", __FUNCTION__ );
+      Log->Bug( "%s: fopen", __FUNCTION__ );
       perror( filename );
       return;
     }
@@ -720,7 +721,7 @@ void WriteAreaList( void )
 
   if ( !fpout )
     {
-      Bug( "%s: FATAL: cannot open area.lst for writing!\r\n", __FUNCTION__ );
+      Log->Bug( "%s: FATAL: cannot open area.lst for writing!\r\n", __FUNCTION__ );
       return;
     }
 

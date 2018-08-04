@@ -1,3 +1,4 @@
+#include <cassert>
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
@@ -46,17 +47,13 @@ void do_rassign( Character *ch, char *argument )
 
   victim->PCData->Build.VnumRanges.Room.First = r_lo;
   victim->PCData->Build.VnumRanges.Room.Last = r_hi;
-  AssignAreaTo( victim );
+  AssignAreaTo( victim );        /* Put back by Thoric on 02/07/96 */
   SendToCharacter( "Done.\r\n", ch );
   Echo( victim, "%s has assigned you the room range %d - %d.\r\n",
              ch->Name, r_lo, r_hi );
   AssignAreaTo( victim );
 
-  if ( !victim->PCData->Build.Area )
-    {
-      Bug( "rassign: AssignAreaTo failed", 0 );
-      return;
-    }
+  assert(victim->PCData->Build.Area != nullptr);
 
   if (r_lo == 0)
     {

@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "editor.hpp"
+#include "log.hpp"
 
 void do_opedit( Character *ch, char *argument )
 {
@@ -32,7 +33,7 @@ void do_opedit( Character *ch, char *argument )
       if ( !ch->dest_buf )
         {
           SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
-          Bug( "do_opedit: sub_oprog_edit: NULL ch->dest_buf", 0 );
+          Log->Bug( "do_opedit: sub_oprog_edit: NULL ch->dest_buf" );
           ch->SubState = SUB_NONE;
           return;
         }

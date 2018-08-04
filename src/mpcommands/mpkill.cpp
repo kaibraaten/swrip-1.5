@@ -1,3 +1,4 @@
+#include <cassert>
 #include "character.hpp"
 #include "mud.hpp"
 
@@ -5,14 +6,10 @@
 
 void do_mpkill( Character *ch, char *argument )
 {
-  char      arg[ MAX_INPUT_LENGTH ];
-  Character *victim;
+  char arg[MAX_INPUT_LENGTH];
+  Character *victim = nullptr;
 
-  if (!ch )
-    {
-      Bug( "Nonexistent ch in do_mpkill!", 0 );
-      return;
-    }
+  assert(ch != nullptr);
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;

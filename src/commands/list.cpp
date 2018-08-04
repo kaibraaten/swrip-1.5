@@ -1,25 +1,24 @@
 #include "character.hpp"
 #include "shop.hpp"
 #include "mud.hpp"
+#include "log.hpp"
 
 void do_list( Character *ch, char *argument )
 {
   if ( IsBitSet(ch->InRoom->Flags, ROOM_PET_SHOP) )
     {
-      Room *pRoomIndexNext;
-      Character *pet;
-      bool found;
+      const Room *pRoomIndexNext = GetRoom( ch->InRoom->Vnum + 1 );
 
-      pRoomIndexNext = GetRoom( ch->InRoom->Vnum + 1 );
       if ( !pRoomIndexNext )
         {
-          Bug( "Do_list: bad pet shop at vnum %d.", ch->InRoom->Vnum );
+          Log->Bug( "Do_list: bad pet shop at vnum %d.", ch->InRoom->Vnum );
           SendToCharacter( "You can't do that here.\r\n", ch );
           return;
         }
 
-      found = false;
-      for ( pet = pRoomIndexNext->FirstPerson; pet; pet = pet->NextInRoom )
+      bool found = false;
+
+      for ( const Character *pet = pRoomIndexNext->FirstPerson; pet; pet = pet->NextInRoom )
         {
           if ( IsBitSet(pet->Flags, ACT_PET) && IsNpc(pet) )
             {
@@ -34,8 +33,12 @@ void do_list( Character *ch, char *argument )
                          pet->ShortDescr );
             }
         }
+
       if ( !found )
-        SendToCharacter( "Sorry, we're out of pets right now.\r\n", ch );
+        {
+          SendToCharacter( "Sorry, we're out of pets right now.\r\n", ch );
+        }
+
       return;
     }
   else

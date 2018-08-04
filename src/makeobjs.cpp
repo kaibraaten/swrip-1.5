@@ -23,6 +23,7 @@
 #include <cstdio>
 #include <cstring>
 #include <ctime>
+#include <cassert>
 #include "mud.hpp"
 #include "character.hpp"
 #include "area.hpp"
@@ -244,14 +245,10 @@ void MakeBloodstain( Character *ch )
  */
 Object *CreateMoney( int amount )
 {
+  assert(amount > 0);
+
   char buf[MAX_STRING_LENGTH];
   Object *obj = NULL;
-
-  if ( amount <= 0 )
-    {
-      Bug( "Create_money: zero or negative money %d.", amount );
-      amount = 1;
-    }
 
   if ( amount == 1 )
     {

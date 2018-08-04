@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 extern char *spell_target_name;
 extern int pAbort;
@@ -174,7 +175,7 @@ void do_cast( Character *ch, char *argument )
           if ( (skill=GetSkill(sn)) == NULL )
             {
               SendToCharacter( "Something went wrong...\r\n", ch );
-              Bug( "do_cast: SUB_TIMER_DO_ABORT: bad sn %d", sn );
+              Log->Bug( "do_cast: SUB_TIMER_DO_ABORT: bad sn %d", sn );
               return;
             }
           mana = IsNpc(ch) ? 0 : skill->Mana;
@@ -191,13 +192,13 @@ void do_cast( Character *ch, char *argument )
       if ( (skill=GetSkill(sn)) == NULL )
         {
           SendToCharacter( "Something went wrong...\r\n", ch );
-          Bug( "do_cast: substate 1: bad sn %d", sn );
+          Log->Bug( "do_cast: substate 1: bad sn %d", sn );
           return;
         }
       if ( !ch->dest_buf || !IS_VALID_SN(sn) || skill->Type != SKILL_SPELL )
         {
           SendToCharacter( "Something negates the powers of the force.\r\n", ch );
-          Bug( "do_cast: ch->dest_buf NULL or bad sn (%d)", sn );
+          Log->Bug( "do_cast: ch->dest_buf NULL or bad sn (%d)", sn );
           return;
         }
       mana = IsNpc(ch) ? 0 : skill->Mana;

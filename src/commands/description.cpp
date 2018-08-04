@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "editor.hpp"
+#include "log.hpp"
 
 void do_description( Character *ch, char *argument )
 {
@@ -12,14 +13,14 @@ void do_description( Character *ch, char *argument )
 
   if ( !ch->Desc )
     {
-      Bug( "do_description: no descriptor", 0 );
+      Log->Bug( "do_description: no descriptor", 0 );
       return;
     }
 
   switch( ch->SubState )
     {
     default:
-      Bug( "do_description: illegal substate", 0 );
+      Log->Bug( "do_description: illegal substate", 0 );
       return;
 
     case SUB_RESTRICTED:

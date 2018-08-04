@@ -4,8 +4,7 @@
 void do_disconnect( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Descriptor *d;
-  Character *victim;
+  Character *victim = nullptr;
 
   OneArgument( argument, arg );
 
@@ -33,16 +32,6 @@ void do_disconnect( Character *ch, char *argument )
       return;
     }
 
-  for ( d = FirstDescriptor; d; d = d->Next )
-    {
-      if ( d == victim->Desc )
-        {
-          CloseDescriptor( d, false );
-          SendToCharacter( "Ok.\r\n", ch );
-	  return;
-        }
-    }
-
-  Bug( "Do_disconnect: *** desc not found ***.", 0 );
-  SendToCharacter( "Descriptor not found!\r\n", ch );
+  CloseDescriptor( victim->Desc, false );
+  SendToCharacter( "Ok.\r\n", ch );
 }

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "log.hpp"
 
 /*
  * Generic spell affect                                         -Thoric
@@ -18,7 +19,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
 
   if ( !skill->Affects )
     {
-      Bug( "spell_affect has no affects sn %d", sn );
+      Log->Bug( "spell_affect has no affects sn %d", sn );
       return rNONE;
     }
   if ( SPELL_FLAG(skill, SF_GROUPSPELL) )
@@ -99,7 +100,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
   
   if ( !victim )
     {
-      Bug( "spell_affect: could not find victim: sn %d", sn );
+      Log->Bug( "spell_affect: could not find victim: sn %d", sn );
       FailedCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }

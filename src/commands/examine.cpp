@@ -6,21 +6,9 @@ void do_examine( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  Object *obj;
-  Board *board;
-  short dam;
-
-  if ( !argument )
-    {
-      Bug( "do_examine: null argument.", 0);
-      return;
-    }
-
-  if ( !ch )
-    {
-      Bug( "do_examine: null ch.", 0);
-      return;
-    }
+  Object *obj = nullptr;
+  Board *board = nullptr;
+  short dam = 0;
 
   OneArgument( argument, arg );
 

@@ -20,13 +20,14 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <time.h>
-#include <stdio.h>
-#include <string.h>
+#include <ctime>
+#include <cstdio>
+#include <cstring>
 #include <strings.h>
-#include <ctype.h>
+#include <cctype>
 #include "mud.hpp"
 #include "skill.hpp"
+#include "log.hpp"
 
 SpellFun *GetSpellFunction( const char *name )
 {
@@ -36,7 +37,7 @@ SpellFun *GetSpellFunction( const char *name )
 
   if( !fun_handle )
     {
-      Bug( "Could not find symbol '%s': %s", name, GetLastError() );
+      Log->Bug( "Could not find symbol '%s': %s", name, GetLastError() );
       return spell_notfound;
     }
 #elif defined(AMIGA)
@@ -46,7 +47,7 @@ SpellFun *GetSpellFunction( const char *name )
 
   if( !fun_handle )
     {
-      Bug( "Could not find symbol '%s': %s", name, dlerror() );
+      Log->Bug( "Could not find symbol '%s': %s", name, dlerror() );
       return spell_notfound;
     }
 #endif
@@ -62,7 +63,7 @@ CmdFun *GetSkillFunction( const char *name )
 
   if( !fun_handle )
     {
-      Bug( "Could not find symbol '%s': %s", name, GetLastError() );
+      Log->Bug( "Could not find symbol '%s': %s", name, GetLastError() );
       return skill_notfound;
     }
 #elif defined(AMIGA)
@@ -72,7 +73,7 @@ CmdFun *GetSkillFunction( const char *name )
 
   if( !fun_handle )
     {
-      Bug( "Could not find symbol '%s': %s", name, dlerror() );
+      Log->Bug( "Could not find symbol '%s': %s", name, dlerror() );
       return skill_notfound;
     }
 #endif

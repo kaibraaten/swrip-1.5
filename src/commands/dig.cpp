@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_dig( Character *ch, char *argument )
 {
@@ -81,7 +82,7 @@ void do_dig( Character *ch, char *argument )
         {
           SendToCharacter( "Your digging was interrupted!\r\n", ch );
 	  Act( AT_PLAIN, "$n's digging was interrupted!", ch, NULL, NULL, TO_ROOM );
-          Bug( "do_dig: dest_buf NULL", 0 );
+          Log->Bug( "do_dig: dest_buf NULL" );
           return;
         }
       strcpy( arg, (const char*)ch->dest_buf );

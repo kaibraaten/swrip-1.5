@@ -76,6 +76,7 @@ _OBJ =  act_comm.o \
 	db.o \
 	editor.o \
 	fight.o \
+	fslogger.o \
 	grub.o \
 	handler.o \
 	help.o \

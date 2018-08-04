@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "log.hpp"
 
 /*
  * Fill a container
@@ -346,9 +347,10 @@ void do_fill( Character *ch, char *argument )
   switch( source->ItemType )
     {
     default:
-      Bug( "do_fill: got bad item type: %d", source->ItemType );
+      Log->Bug( "do_fill: got bad item type: %d", source->ItemType );
       SendToCharacter( "Something went wrong...\r\n", ch );
       return;
+
     case ITEM_FOUNTAIN:
       if ( obj->Value[1] != 0 && obj->Value[2] != 0 )
         {

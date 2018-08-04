@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "mud.hpp"
 #include "script.hpp"
+#include "log.hpp"
 
 lua_State *LuaMasterState;
 
@@ -73,7 +74,7 @@ void LuaLoadDataFile( const char *filename,
 
   if( error )
     {
-      Bug( "Cannot run file: %s", lua_tostring(L, -1) );
+      Log->Bug( "Cannot run file: %s", lua_tostring(L, -1) );
       return;
     }
 
@@ -95,8 +96,8 @@ void LuaSaveDataFile( const char *filename,
 
   if( error )
     {
-      Bug( "%s:%s():%d: Cannot run file: %s\n",
-           __FILE__, __FUNCTION__, __LINE__, lua_tostring( L, -1 ) );
+      Log->Bug( "%s:%s():%d: Cannot run file: %s\n",
+                __FILE__, __FUNCTION__, __LINE__, lua_tostring( L, -1 ) );
     }
   else
     {
@@ -109,8 +110,8 @@ void LuaSaveDataFile( const char *filename,
 
       if( error )
 	{
-	  Bug( "%s:%s():%d: Cannot run file: %s\n",
-	       __FILE__, __FUNCTION__, __LINE__, lua_tostring(L, -1) );
+	  Log->Bug( "%s:%s():%d: Cannot run file: %s\n",
+                    __FILE__, __FUNCTION__, __LINE__, lua_tostring(L, -1) );
 	}
     }
 

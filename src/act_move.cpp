@@ -26,6 +26,7 @@
 #include "skill.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 Room *vroom_hash[64];
 
@@ -146,7 +147,7 @@ Exit *GetExit( const Room *room, DirectionType dir )
 
   if ( !room )
     {
-      Bug( "Get_exit: NULL room" );
+      Log->Bug( "Get_exit: NULL room" );
       return NULL;
     }
 
@@ -170,7 +171,7 @@ Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum )
 
   if ( !room )
     {
-      Bug( "Get_exit: NULL room" );
+      Log->Bug( "Get_exit: NULL room" );
       return NULL;
     }
 
@@ -195,7 +196,7 @@ Exit *GetExitNumber( const Room *room, short count )
 
   if ( !room )
     {
-      Bug( "Get_exit: NULL room", 0 );
+      Log->Bug( "Get_exit: NULL room", 0 );
       return NULL;
     }
 
@@ -222,7 +223,7 @@ bool CharacterFallIfNoFloor( Character *ch, int fall )
     {
       if ( fall > 80 )
         {
-          Bug( "Falling (in a loop?) more than 80 rooms: vnum %d", ch->InRoom->Vnum );
+          Log->Bug( "Falling (in a loop?) more than 80 rooms: vnum %d", ch->InRoom->Vnum );
           CharacterFromRoom( ch );
           CharacterToRoom( ch, GetRoom( WhereHome(ch) ) );
           fall = 0;
@@ -1156,7 +1157,7 @@ void Teleport( Character *ch, vnum_t room, int flags )
 
   if ( !pRoomIndex )
     {
-      Bug( "%s: bad room vnum %d", __FUNCTION__, room );
+      Log->Bug( "%s: bad room vnum %d", __FUNCTION__, room );
       return;
     }
 

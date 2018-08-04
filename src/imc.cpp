@@ -52,6 +52,7 @@
 #include "character.hpp"
 #include "social.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 #include <ctime>
 
@@ -526,16 +527,14 @@ static void imclog( const char *format, ... )
 /* Generic bug logging function which will route the message to the appropriate function that handles bug logs */
 static void imcbug( const char *format, ... )
 {
-   char buf[LGST], buf2[LGST];
-   va_list ap;
+  char buf[LGST];
+  va_list ap;
 
-   va_start( ap, format );
-   vsprintf( buf, format, ap );
-   va_end( ap );
+  va_start( ap, format );
+  vsprintf( buf, format, ap );
+  va_end( ap );
 
-   sprintf( buf2, " IMC: %s", buf );
-
-   Bug( "%s", buf2 );
+  Log->Bug(" IMC: %s", buf);
 }
 
 /*
@@ -3564,17 +3563,17 @@ bool ImcLoadCharacter( Character * ch, FILE * fp, const char *word )
    switch ( word[0] )
    {
       case 'I':
-         KEY( "IMCPerm", IMCPERM( ch ), ReadInt( fp ) );
+         KEY( "IMCPerm", IMCPERM( ch ), ReadInt( fp, Log ) );
          KEY( "IMCEmail", IMC_EMAIL( ch ), imcReadLine( fp ) );
          KEY( "IMCAIM", IMC_AIM( ch ), imcReadLine( fp ) );
-         KEY( "IMCICQ", IMC_ICQ( ch ), ReadInt( fp ) );
+         KEY( "IMCICQ", IMC_ICQ( ch ), ReadInt( fp, Log ) );
          KEY( "IMCYahoo", IMC_YAHOO( ch ), imcReadLine( fp ) );
          KEY( "IMCMSN", IMC_MSN( ch ), imcReadLine( fp ) );
          KEY( "IMCHomepage", IMC_HOMEPAGE( ch ), imcReadLine( fp ) );
          KEY( "IMCComment", IMC_COMMENT( ch ), imcReadLine( fp ) );
          if( !strcasecmp( word, "IMCFlags" ) )
          {
-            IMCFLAG( ch ) = ReadInt( fp );
+            IMCFLAG( ch ) = ReadInt( fp, Log );
             imc_char_login( ch );
             fMatch = true;
             break;
@@ -3830,14 +3829,14 @@ static void imc_readchannel( IMC_CHANNEL * channel, FILE * fp )
 
    for( ;; )
    {
-      word = feof( fp ) ? "End" : ReadWord( fp );
+      word = feof( fp ) ? "End" : ReadWord( fp, Log );
       fMatch = false;
 
       switch ( word[0] )
       {
          case '*':
             fMatch = true;
-            ReadToEndOfLine( fp );
+            ReadToEndOfLine( fp, Log );
             break;
 
          case 'C':
@@ -3846,7 +3845,7 @@ static void imc_readchannel( IMC_CHANNEL * channel, FILE * fp )
             KEY( "ChanRegF", channel->regformat, imcReadLine( fp ) );
             KEY( "ChanEmoF", channel->emoteformat, imcReadLine( fp ) );
             KEY( "ChanSocF", channel->socformat, imcReadLine( fp ) );
-            KEY( "ChanLevel", channel->level, ReadInt( fp ) );
+            KEY( "ChanLevel", channel->level, ReadInt( fp, Log ) );
             break;
 
          case 'E':
@@ -3902,10 +3901,10 @@ static void imc_loadchannels( void )
       char letter;
       char *word;
 
-      letter = ReadChar( fp );
+      letter = ReadChar( fp, Log );
       if( letter == '*' )
       {
-         ReadToEndOfLine( fp );
+         ReadToEndOfLine( fp, Log );
          continue;
       }
 
@@ -3915,7 +3914,7 @@ static void imc_loadchannels( void )
          break;
       }
 
-      word = ReadWord( fp );
+      word = ReadWord( fp, Log );
       if( !strcasecmp( word, "IMCCHAN" ) )
       {
          int x;
@@ -3978,7 +3977,8 @@ static void imc_readbans( void )
       return;
    }
 
-   word = ReadWord( inf );
+   word = ReadWord( inf, Log );
+
    if( strcasecmp( word, "#IGNORES" ) )
    {
       imcbug( "%s", "imc_readbans: Corrupt file" );
@@ -3988,8 +3988,9 @@ static void imc_readbans( void )
 
    while( !feof( inf ) && !ferror( inf ) )
    {
-      strncpy( temp, ReadWord( inf ), SMST );
-      if( !strcasecmp( temp, "#END" ) )
+     strncpy( temp, ReadWord( inf, Log ), SMST );
+     
+     if( !strcasecmp( temp, "#END" ) )
       {
          IMCFCLOSE( inf );
          return;
@@ -4014,14 +4015,14 @@ static void imc_readcolor( IMC_COLOR * color, FILE * fp )
 
    for( ;; )
    {
-      word = feof( fp ) ? "End" : ReadWord( fp );
+      word = feof( fp ) ? "End" : ReadWord( fp, Log );
       fMatch = false;
 
       switch ( word[0] )
       {
          case '*':
             fMatch = true;
-            ReadToEndOfLine( fp );
+            ReadToEndOfLine( fp, Log );
             break;
 
          case 'E':
@@ -4066,10 +4067,10 @@ static void imc_load_color_table( void )
       char letter;
       char *word;
 
-      letter = ReadChar( fp );
+      letter = ReadChar( fp, Log );
       if( letter == '*' )
       {
-         ReadToEndOfLine( fp );
+         ReadToEndOfLine( fp, Log );
          continue;
       }
 
@@ -4079,7 +4080,7 @@ static void imc_load_color_table( void )
          break;
       }
 
-      word = ReadWord( fp );
+      word = ReadWord( fp, Log );
       if( !strcasecmp( word, "COLOR" ) )
       {
          IMCCREATE( color, IMC_COLOR, 1 );
@@ -4130,14 +4131,14 @@ static void imc_readhelp( IMC_HelpFile * help, FILE * fp )
 
    for( ;; )
    {
-      word = feof( fp ) ? "End" : ReadWord( fp );
+      word = feof( fp ) ? "End" : ReadWord( fp, Log );
       fMatch = false;
 
       switch ( word[0] )
       {
          case '*':
             fMatch = true;
-            ReadToEndOfLine( fp );
+            ReadToEndOfLine( fp, Log );
             break;
 
          case 'E':
@@ -4152,7 +4153,7 @@ static void imc_readhelp( IMC_HelpFile * help, FILE * fp )
          case 'P':
             if( !strcasecmp( word, "Perm" ) )
             {
-               word = ReadWord( fp );
+               word = ReadWord( fp, Log );
                permvalue = get_imcpermvalue( word );
 
                if( permvalue < 0 || permvalue > IMCPERM_IMP )
@@ -4207,10 +4208,10 @@ static void imc_LoadHelpFiles( void )
       char letter;
       char *word;
 
-      letter = ReadChar( fp );
+      letter = ReadChar( fp, Log );
       if( letter == '*' )
       {
-         ReadToEndOfLine( fp );
+         ReadToEndOfLine( fp, Log );
          continue;
       }
 
@@ -4220,7 +4221,7 @@ static void imc_LoadHelpFiles( void )
          break;
       }
 
-      word = ReadWord( fp );
+      word = ReadWord( fp, Log );
       if( !strcasecmp( word, "HELP" ) )
       {
          IMCCREATE( help, IMC_HelpFile, 1 );
@@ -4278,14 +4279,14 @@ static void imc_readcommand( IMC_CMD_DATA * cmd, FILE * fp )
 
    for( ;; )
    {
-      word = feof( fp ) ? "End" : ReadWord( fp );
+      word = feof( fp ) ? "End" : ReadWord( fp, Log );
       fMatch = false;
 
       switch ( word[0] )
       {
          case '*':
             fMatch = true;
-            ReadToEndOfLine( fp );
+            ReadToEndOfLine( fp, Log );
             break;
 
          case 'E':
@@ -4305,10 +4306,10 @@ static void imc_readcommand( IMC_CMD_DATA * cmd, FILE * fp )
             break;
 
          case 'C':
-            KEY( "Connected", cmd->connected, ReadInt( fp ) );
+            KEY( "Connected", cmd->connected, ReadInt( fp, Log ) );
             if( !strcasecmp( word, "Code" ) )
             {
-               word = ReadWord( fp );
+               word = ReadWord( fp, Log );
                cmd->function = imc_function( word );
                if( cmd->function == NULL )
                   imcbug( "imc_readcommand: Command %s loaded with invalid function. Set to NULL.", cmd->Name );
@@ -4324,7 +4325,7 @@ static void imc_readcommand( IMC_CMD_DATA * cmd, FILE * fp )
          case 'P':
             if( !strcasecmp( word, "Perm" ) )
             {
-               word = ReadWord( fp );
+               word = ReadWord( fp, Log );
                permvalue = get_imcpermvalue( word );
 
                if( permvalue < 0 || permvalue > IMCPERM_IMP )
@@ -4364,10 +4365,10 @@ static bool imc_LoadCommands( void )
       char letter;
       char *word;
 
-      letter = ReadChar( fp );
+      letter = ReadChar( fp, Log );
       if( letter == '*' )
       {
-         ReadToEndOfLine( fp );
+         ReadToEndOfLine( fp, Log );
          continue;
       }
 
@@ -4377,7 +4378,7 @@ static bool imc_LoadCommands( void )
          break;
       }
 
-      word = ReadWord( fp );
+      word = ReadWord( fp, Log );
       if( !strcasecmp( word, "COMMAND" ) )
       {
          IMCCREATE( cmd, IMC_CMD_DATA, 1 );
@@ -4404,14 +4405,14 @@ static void imc_readucache( IMCUCACHE_DATA * user, FILE * fp )
 
    for( ;; )
    {
-      word = feof( fp ) ? "End" : ReadWord( fp );
+      word = feof( fp ) ? "End" : ReadWord( fp, Log );
       fMatch = false;
 
       switch ( word[0] )
       {
          case '*':
             fMatch = true;
-            ReadToEndOfLine( fp );
+            ReadToEndOfLine( fp, Log );
             break;
 
          case 'N':
@@ -4419,11 +4420,11 @@ static void imc_readucache( IMCUCACHE_DATA * user, FILE * fp )
             break;
 
          case 'S':
-            KEY( "Sex", user->gender, ReadInt( fp ) );
+            KEY( "Sex", user->gender, ReadInt( fp, Log ) );
             break;
 
          case 'T':
-            KEY( "Time", user->time, ReadInt( fp ) );
+            KEY( "Time", user->time, ReadInt( fp, Log ) );
             break;
 
          case 'E':
@@ -4454,10 +4455,10 @@ static void imc_load_ucache( void )
       char letter;
       char *word;
 
-      letter = ReadChar( fp );
+      letter = ReadChar( fp, Log );
       if( letter == '*' )
       {
-         ReadToEndOfLine( fp );
+         ReadToEndOfLine( fp, Log );
          continue;
       }
 
@@ -4467,7 +4468,7 @@ static void imc_load_ucache( void )
          break;
       }
 
-      word = ReadWord( fp );
+      word = ReadWord( fp, Log );
       if( !strcasecmp( word, "UCACHE" ) )
       {
          IMCCREATE( user, IMCUCACHE_DATA, 1 );
@@ -4541,19 +4542,19 @@ static void imcfread_config_file( FILE * fin )
 
    for( ;; )
    {
-      word = feof( fin ) ? "end" : ReadWord( fin );
+     word = feof( fin ) ? "end" : ReadWord( fin, Log );
       fMatch = false;
 
       switch ( word[0] )
       {
          case '#':
             fMatch = true;
-            ReadToEndOfLine( fin );
+            ReadToEndOfLine( fin, Log );
             break;
 
          case 'A':
-            KEY( "Autoconnect", this_imcmud->autoconnect, ReadInt( fin ) );
-            KEY( "AdminLevel", this_imcmud->adminlevel, ReadInt( fin ) );
+           KEY( "Autoconnect", this_imcmud->autoconnect, ReadInt( fin, Log ) );
+           KEY( "AdminLevel", this_imcmud->adminlevel, ReadInt( fin, Log ) );
             break;
 
          case 'C':
@@ -4579,10 +4580,10 @@ static void imcfread_config_file( FILE * fin )
             break;
 
          case 'I':
-            KEY( "Implevel", this_imcmud->implevel, ReadInt( fin ) );
+           KEY( "Implevel", this_imcmud->implevel, ReadInt( fin, Log ) );
             KEY( "InfoName", this_imcmud->fullname, imcReadLine( fin ) );
             KEY( "InfoHost", this_imcmud->ihost, imcReadLine( fin ) );
-            KEY( "InfoPort", this_imcmud->iport, ReadInt( fin ) );
+            KEY( "InfoPort", this_imcmud->iport, ReadInt( fin, Log ) );
             KEY( "InfoEmail", this_imcmud->email, imcReadLine( fin ) );
             KEY( "InfoWWW", this_imcmud->www, imcReadLine( fin ) );
             KEY( "InfoBase", this_imcmud->base, imcReadLine( fin ) );
@@ -4594,21 +4595,21 @@ static void imcfread_config_file( FILE * fin )
             break;
 
          case 'M':
-            KEY( "MinImmLevel", this_imcmud->immlevel, ReadInt( fin ) );
-            KEY( "MinPlayerLevel", this_imcmud->minlevel, ReadInt( fin ) );
+           KEY( "MinImmLevel", this_imcmud->immlevel, ReadInt( fin, Log ) );
+           KEY( "MinPlayerLevel", this_imcmud->minlevel, ReadInt( fin, Log ) );
             break;
 
          case 'R':
             KEY( "RouterAddr", this_imcmud->rhost, imcReadLine( fin ) );
-            KEY( "RouterPort", this_imcmud->rport, ReadInt( fin ) );
+            KEY( "RouterPort", this_imcmud->rport, ReadInt( fin, Log ) );
             break;
 
          case 'S':
             KEY( "ServerPwd", this_imcmud->serverpw, imcReadLine( fin ) );
             KEY( "ServerAddr", this_imcmud->rhost, imcReadLine( fin ) );
-            KEY( "ServerPort", this_imcmud->rport, ReadInt( fin ) );
-            KEY( "SHA256", this_imcmud->sha256, ReadInt( fin ) );
-            KEY( "SHA256Pwd", this_imcmud->sha256pass, ReadInt( fin ) );
+            KEY( "ServerPort", this_imcmud->rport, ReadInt( fin, Log ) );
+            KEY( "SHA256", this_imcmud->sha256, ReadInt( fin, Log ) );
+            KEY( "SHA256Pwd", this_imcmud->sha256pass, ReadInt( fin, Log ) );
             break;
       }
       if( !fMatch )
@@ -4639,11 +4640,11 @@ static bool imc_read_config( socket_t desc )
       char letter;
       char *word;
 
-      letter = ReadChar( fin );
+      letter = ReadChar( fin, Log );
 
       if( letter == '#' )
       {
-         ReadToEndOfLine( fin );
+        ReadToEndOfLine( fin, Log );
          continue;
       }
 
@@ -4653,7 +4654,8 @@ static bool imc_read_config( socket_t desc )
          break;
       }
 
-      word = ReadWord( fin );
+      word = ReadWord( fin, Log );
+
       if( !strcasecmp( word, "IMCCONFIG" ) && this_imcmud == NULL )
       {
          IMCCREATE( this_imcmud, SiteInfo, 1 );
@@ -4806,7 +4808,7 @@ static void imc_load_who_template( void )
 
    do
    {
-      word = ReadWord( fp );
+      word = ReadWord( fp, Log );
       hbuf[0] = '\0';
       num = 0;
 

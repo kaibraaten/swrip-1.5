@@ -21,9 +21,10 @@
  ****************************************************************************/
 
 #include <sys/types.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
+#include <cstdio>
+#include <cstring>
+#include <ctime>
+#include <cassert>
 #include "track.hpp"
 #include "mud.hpp"
 #include "character.hpp"
@@ -146,14 +147,11 @@ static void CleanRoom_queue(void)
 
 int FindFirstStep(Room *src, Room *target, int maxdist )
 {
+  assert(src != nullptr);
+  assert(target != nullptr);
+
   DirectionType curr_dir = DIR_INVALID;
   int count = 0;
-
-  if ( !src || !target )
-    {
-      Bug("Illegal value passed to FindFirstStep (track.c)", 0 );
-      return BFS_ERROR;
-    }
 
   if (src == target)
     {
@@ -220,26 +218,12 @@ int FindFirstStep(Room *src, Room *target, int maxdist )
 
 void FoundPrey( Character *ch, Character *victim )
 {
+  assert(victim != nullptr);
+  assert(ch != nullptr);
+  assert(victim->InRoom != nullptr);
+
   char buf[MAX_STRING_LENGTH];
   char victname[MAX_STRING_LENGTH];
-
-  if (victim == NULL)
-    {
-      Bug("Found_prey: null victim");
-      return;
-    }
-
-  if (ch == NULL)
-    {
-      Bug("Found_prey: null ch");
-      return;
-    }
-
-  if ( victim->InRoom == NULL )
-    {
-      Bug( "Found_prey: null victim->in_room" );
-      return;
-    }
 
   sprintf( victname, "%s", IsNpc( victim ) ? victim->ShortDescr : victim->Name );
 
@@ -434,13 +418,8 @@ void HuntVictim( Character *ch )
 
       if ( !ch->HHF.Hunting )
         {
-          if ( !ch->InRoom )
-            {
-              Bug( "Hunt_victim: no ch->in_room! Mob #%ld, name: %s. Placing mob in limbo.",
-		   ch->Prototype->Vnum, ch->Name );
-              CharacterToRoom( ch, GetRoom( ROOM_VNUM_LIMBO ) );
-              return;
-            }
+          assert(ch->InRoom != nullptr);
+
           do_say( ch, "Damn! Lost my prey!" );
           return;
         }

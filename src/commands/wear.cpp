@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit);
 static bool can_layer( const Character *ch, const Object *obj, short wear_loc );
@@ -245,9 +246,11 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
   switch ( 1 << bit )
     {
     default:
-      Bug( "wear_obj: uknown/unused item_wear bit %d", bit );
+      Log->Bug( "wear_obj: uknown/unused item_wear bit %d", bit );
+
       if ( fReplace )
         SendToCharacter( "You can't wear, wield, or hold that.\r\n", ch );
+
       return;
 
     case ITEM_WEAR_FINGER:
@@ -292,7 +295,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           return;
         }
 
-      Bug( "Wear_obj: no free finger.", 0 );
+      Log->Bug( "Wear_obj: no free finger." );
       SendToCharacter( "You already wear something on both fingers.\r\n", ch );
       return;
 
@@ -337,7 +340,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           return;
         }
 
-      Bug( "Wear_obj: no free neck.", 0 );
+      Log->Bug( "Wear_obj: no free neck." );
       SendToCharacter( "You already wear two neck items.\r\n", ch );
       return;
 
@@ -618,7 +621,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           return;
         }
 
-      Bug( "Wear_obj: no free wrist.", 0 );
+      Log->Bug( "Wear_obj: no free wrist." );
       SendToCharacter( "You already wear two wrist items.\r\n", ch );
       return;
 

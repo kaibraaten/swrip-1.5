@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <cassert>
 #include <cstring>
 #include <utility/event.hpp>
 #include "mud.hpp"
@@ -27,6 +28,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 struct CraftRecipe
 {
@@ -77,29 +79,14 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
 
 void do_craftingengine( Character *ch, char *argument )
 {
-  CraftingSession *session = NULL;
-
-  if( IsNpc( ch ) )
-    {
-      Bug( "%s:%d %s(): IsNpc(\"%s\") == true",
-           __FILE__, __LINE__, __FUNCTION__, ch->Name );
-      return;
-    }
-
-  session = ch->PCData->CraftingSession;
-
-  if( !session )
-    {
-      Bug( "%s:%d %s(): %s->PCData->CraftingSession == NULL",
-	   __FILE__, __LINE__, __FUNCTION__, ch->Name );
-      return;
-    }
+  assert(!IsNpc(ch));
+  CraftingSession *session = ch->PCData->CraftingSession;
+  assert(session != nullptr);
+  assert(ch->SubState == SUB_PAUSE || ch->SubState == SUB_TIMER_DO_ABORT);
 
   switch( ch->SubState )
     {
     default:
-      Bug( "%s:%d %s(): %s invalid substate %d",
-	   __FILE__, __LINE__, __FUNCTION__, ch->Name, ch->SubState );
       break;
 
     case SUB_PAUSE:
@@ -230,12 +217,14 @@ CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, 
 
   if( !GetSkill( recipe->Skill ) )
     {
-      Bug( "%s:%d %s(): Bad Skill %d", __FILE__, __LINE__, __FUNCTION__, recipe->Skill );
+      Log->Bug( "%s:%d %s(): Bad Skill %d",
+                __FILE__, __LINE__, __FUNCTION__, recipe->Skill );
     }
 
   if( !GetProtoObject( recipe->Prototype ) )
     {
-      Bug( "%s:%d %s(): Bad ProtoObject %d", __FILE__, __LINE__, __FUNCTION__, recipe->Prototype );
+      Log->Bug( "%s:%d %s(): Bad ProtoObject %d",
+                __FILE__, __LINE__, __FUNCTION__, recipe->Prototype );
     }
 
   return recipe;

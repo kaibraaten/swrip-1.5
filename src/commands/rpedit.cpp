@@ -1,6 +1,7 @@
 #include "editor.hpp"
 #include "character.hpp"
 #include "mud.hpp"
+#include "log.hpp"
 
 void do_rpedit( Character *ch, char *argument )
 {
@@ -30,7 +31,7 @@ void do_rpedit( Character *ch, char *argument )
       if ( !ch->dest_buf )
 	{
           SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
-          Bug( "%s: SUB_MPROG_EDIT: NULL ch->dest_buf", __FUNCTION__ );
+          Log->Bug( "%s: SUB_MPROG_EDIT: NULL ch->dest_buf", __FUNCTION__ );
           ch->SubState = SUB_NONE;
           return;
         }

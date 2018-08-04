@@ -19,7 +19,8 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <string.h>
+#include <cstring>
+#include <cassert>
 #include "mud.hpp"
 #include "skill.hpp"
 
@@ -1687,14 +1688,9 @@ size_t GetAttackTableSize( void )
   return sizeof( AttackTable ) / sizeof( AttackTable[0] );
 }
 
-const char *GetAttackType_name( size_t type )
+const char *GetAttackTypeName( size_t type )
 {
-  if(type >= GetAttackTableSize() )
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, type);
-      return NULL;
-    }
-
+  assert(type < GetAttackTableSize());
   return AttackTable[type];
 }
 
@@ -1741,23 +1737,13 @@ const DirectionType ReverseDirection[] =
 
 const char *GetDirectionName( DirectionType dir )
 {
-  if( dir > DIR_SOMEWHERE )
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, dir);
-      return NULL;
-    }
-
+  assert(dir <= DIR_SOMEWHERE);
   return DirectionName[dir];
 }
 
 DirectionType GetReverseDirection( DirectionType dir )
 {
-  if( dir > DIR_SOMEWHERE )
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, dir);
-      return DIR_SOMEWHERE;
-    }
-
+  assert(dir <= DIR_SOMEWHERE);
   return ReverseDirection[dir];
 }
 
@@ -2487,12 +2473,7 @@ size_t GetWeaponTableSize( void )
 
 const char *GetWeaponTypeName( size_t type )
 {
-  if( type >= GetWeaponTableSize() )
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, type);
-      return NULL;
-    }
-
+  assert(type < GetWeaponTableSize());
   return WeaponTable[type];
 }
 
@@ -2508,12 +2489,7 @@ size_t GetSpiceTableSize(void)
 
 const char *GetSpiceTypeName( size_t type )
 {
-  if( type >= GetSpiceTableSize() )
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, type);
-      return NULL;
-    }
-
+  assert(type < GetSpiceTableSize());
   return SpiceTable[type];
 }
 
@@ -2992,12 +2968,7 @@ size_t GetCrystalTableSize( void )
 
 const char *GetCrystalTypeName( size_t type )
 {
-  if( type >= GetCrystalTableSize() )
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, type);
-      return NULL;
-    }
-
+  assert(type <= GetCrystalTableSize());
   return CrystalTable[type];
 }
 
@@ -3065,12 +3036,7 @@ const std::array<const char * const, SAVETYPE_MAX> SpellSaveName =
 
 const char *GetSpellSavesName( size_t type )
 {
-  if( type >= SpellSaveName.size() )
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, type);
-      return NULL;
-    }
-
+  assert(type < SpellSaveName.size());
   return SpellSaveName[type];
 }
 
@@ -3086,12 +3052,7 @@ size_t GetSpellDamageSize( void )
 
 const char *GetSpellDamageName( size_t type )
 {
-  if( type >= GetSpellDamageSize() )
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, type);
-      return NULL;
-    }
-
+  assert(type < GetSpellDamageSize());
   return SpellDamage[type];
 }
 
@@ -3108,12 +3069,7 @@ size_t GetSpellActionSize( void )
 
 const char *GetSpellActionName( size_t type )
 {
-  if( type >= GetSpellActionSize() )
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, type);
-      return NULL;
-    }
-
+  assert(type < GetSpellActionSize());
   return SpellAction[type];
 }
 
@@ -3129,12 +3085,7 @@ size_t GetSpellPowerSize( void )
 
 const char *GetSpellPowerName( size_t type )
 {
-  if( type >= GetSpellPowerSize() )
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, type);
-      return NULL;
-    }
-
+  assert(type < GetSpellPowerSize());
   return SpellPower[type];
 }
 
@@ -3150,12 +3101,7 @@ size_t GetSpellClassSize( void )
 
 const char *GetSpellClassName( size_t type )
 {
-  if( type >= GetSpellClassSize() )
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, type);
-      return NULL;
-    }
-
+  assert(type < GetSpellClassSize());
   return SpellClass[type];
 }
 
@@ -3166,12 +3112,7 @@ const std::array<const char * const, SKILLTARGETTYPE_MAX> SpellTargetName =
 
 const char *GetSpellTargetName( size_t type )
 {
-  if( type >= SpellTargetName.size() )
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, type);
-      return NULL;
-    }
-
+  assert(type < SpellTargetName.size());
   return SpellTargetName[type];
 }
 

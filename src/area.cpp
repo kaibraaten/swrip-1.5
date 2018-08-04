@@ -7,6 +7,7 @@
 #include "skill.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];
@@ -52,7 +53,7 @@ void LoadAreaFile( Area *tarea, const char *filename )
 
   if ( !fBootDb && !tarea )
     {
-      Bug( "%s: null area!", __FUNCTION__ );
+      Log->Bug( "%s: null area!", __FUNCTION__ );
       return;
     }
 
@@ -60,8 +61,8 @@ void LoadAreaFile( Area *tarea, const char *filename )
 
   if ( ( fpArea = fopen( buf, "r" ) ) == NULL )
     {
-      Bug( "%s: error loading file (can't open)", __FUNCTION__ );
-      Bug( filename );
+      Log->Bug( "%s: error loading file (can't open)", __FUNCTION__ );
+      Log->Bug( filename );
       return;
     }
 
@@ -69,14 +70,14 @@ void LoadAreaFile( Area *tarea, const char *filename )
     {
       const char *word;
 
-      if ( ReadChar( fpArea ) != '#' )
+      if ( ReadChar( fpArea, Log ) != '#' )
         {
-          Bug( tarea->Filename );
-          Bug( "%s: # not found.", __FUNCTION__ );
+          Log->Bug( tarea->Filename );
+          Log->Bug( "%s: # not found.", __FUNCTION__ );
           exit( 1 );
         }
 
-      word = ReadWord( fpArea );
+      word = ReadWord( fpArea, Log );
 
       if ( word[0] == '$'               )
         {
@@ -92,7 +93,7 @@ void LoadAreaFile( Area *tarea, const char *filename )
           else
             {
               FreeMemory( tarea->Name );
-              tarea->Name = ReadStringToTilde( fpArea );
+              tarea->Name = ReadStringToTilde( fpArea, Log );
             }
         }
       else if ( !StrCmp( word, "AUTHOR"   ) ) LoadAuthor  (tarea, fpArea);
@@ -112,8 +113,8 @@ void LoadAreaFile( Area *tarea, const char *filename )
       else if ( !StrCmp( word, "SPECIALS" ) ) LoadSpecials(tarea, fpArea);
       else
         {
-          Bug( tarea->Filename );
-          Bug( "%s: bad section name.", __FUNCTION__ );
+          Log->Bug( tarea->Filename );
+          Log->Bug( "%s: bad section name.", __FUNCTION__ );
 
 	  if ( fBootDb )
             {
@@ -206,7 +207,7 @@ void SortArea( Area *pArea, bool proto )
 
   if ( !pArea )
     {
-      Bug( "%s: NULL pArea", __FUNCTION__ );
+      Log->Bug( "%s: NULL pArea", __FUNCTION__ );
       return;
     }
 
@@ -272,7 +273,7 @@ static void LoadArea( FILE *fp )
   Area *pArea;
 
   AllocateMemory( pArea, Area, 1 );
-  pArea->Name           = ReadStringToTilde( fp );
+  pArea->Name           = ReadStringToTilde( fp, Log );
   pArea->Author       = CopyString( "unknown" );
   pArea->Filename       = CopyString( strArea );
   pArea->Age            = 15;
@@ -287,7 +288,7 @@ static void LoadAuthor( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
-      Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
+      Log->Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
 
       if ( fBootDb )
         {
@@ -303,14 +304,14 @@ static void LoadAuthor( Area *tarea, FILE *fp )
   if ( tarea->Author )
     FreeMemory( tarea->Author );
 
-   tarea->Author = ReadStringToTilde( fp );
+  tarea->Author = ReadStringToTilde( fp, Log );
 }
 
 static void LoadEconomy( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
-      Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
+      Log->Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
 
       if ( fBootDb )
         {
@@ -323,15 +324,15 @@ static void LoadEconomy( Area *tarea, FILE *fp )
         }
     }
 
-  tarea->HighEconomy   = ReadInt( fp );
-  tarea->LowEconomy    = ReadInt( fp );
+  tarea->HighEconomy   = ReadInt( fp, Log );
+  tarea->LowEconomy    = ReadInt( fp, Log );
 }
 
 static void LoadResetMessage( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
-      Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
+      Log->Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
 
       if ( fBootDb )
         {
@@ -347,7 +348,7 @@ static void LoadResetMessage( Area *tarea, FILE *fp )
   if ( tarea->ResetMessage )
     FreeMemory( tarea->ResetMessage );
 
-  tarea->ResetMessage = ReadStringToTilde( fp );
+  tarea->ResetMessage = ReadStringToTilde( fp, Log );
 }
 
 static void LoadFlags( Area *tarea, FILE *fp )
@@ -357,7 +358,7 @@ static void LoadFlags( Area *tarea, FILE *fp )
 
   if ( !tarea )
     {
-      Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
+      Log->Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
 
       if ( fBootDb )
         {
@@ -370,7 +371,7 @@ static void LoadFlags( Area *tarea, FILE *fp )
         }
     }
 
-  ln = ReadLine( fp );
+  ln = ReadLine( fp, Log );
   sscanf( ln, "%d %d", &x1, &x2 );
   tarea->Flags = x1;
   tarea->ResetFrequency = x2;
@@ -387,7 +388,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
 
   if ( !tarea )
     {
-      Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
+      Log->Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
 
       if ( fBootDb )
         {
@@ -407,11 +408,11 @@ static void LoadMobiles( Area *tarea, FILE *fp )
       int iHash = 0;
       bool oldmob = false;
       bool tmpBootDb = false;
-      char letter = ReadChar( fp );
+      char letter = ReadChar( fp, Log );
 
       if ( letter != '#' )
         {
-          Bug( "%s: # not found.", __FUNCTION__ );
+          Log->Bug( "%s: # not found.", __FUNCTION__ );
 
           if ( fBootDb )
             {
@@ -424,7 +425,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
             }
         }
 
-      vnum = ReadInt( fp );
+      vnum = ReadInt( fp, Log );
 
       if ( vnum == INVALID_VNUM )
         break;
@@ -436,7 +437,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
         {
           if ( tmpBootDb )
             {
-              Bug( "%s: vnum %ld duplicated.", __FUNCTION__, vnum );
+              Log->Bug( "%s: vnum %ld duplicated.", __FUNCTION__, vnum );
               ShutdownMud( "duplicate vnum" );
               exit( 1 );
             }
@@ -467,47 +468,47 @@ static void LoadMobiles( Area *tarea, FILE *fp )
             tarea->VnumRanges.Mob.Last    = vnum;
         }
 
-      pMobIndex->Name     = ReadStringToTilde( fp );
-      pMobIndex->ShortDescr     = ReadStringToTilde( fp );
-      pMobIndex->LongDescr      = ReadStringToTilde( fp );
-      pMobIndex->Description     = ReadStringToTilde( fp );
+      pMobIndex->Name     = ReadStringToTilde( fp, Log );
+      pMobIndex->ShortDescr     = ReadStringToTilde( fp, Log );
+      pMobIndex->LongDescr      = ReadStringToTilde( fp, Log );
+      pMobIndex->Description     = ReadStringToTilde( fp, Log );
 
       pMobIndex->LongDescr[0]   = CharToUppercase(pMobIndex->LongDescr[0]);
       pMobIndex->Description[0]  = CharToUppercase(pMobIndex->Description[0]);
 
-      pMobIndex->Flags           = ReadInt( fp ) | ACT_NPC;
-      pMobIndex->AffectedBy     = ReadInt( fp );
+      pMobIndex->Flags           = ReadInt( fp, Log ) | ACT_NPC;
+      pMobIndex->AffectedBy     = ReadInt( fp, Log );
       pMobIndex->Shop           = NULL;
       pMobIndex->RepairShop           = NULL;
-      pMobIndex->Alignment       = ReadInt( fp );
-      letter                     = ReadChar( fp );
-      pMobIndex->Level           = ReadInt( fp );
+      pMobIndex->Alignment       = ReadInt( fp, Log );
+      letter                     = ReadChar( fp, Log );
+      pMobIndex->Level           = ReadInt( fp, Log );
 
-      pMobIndex->MobThac0        = ReadInt( fp );
-      pMobIndex->ArmorClass      = ReadInt( fp );
-      pMobIndex->HitNoDice       = ReadInt( fp );
-      /* 'd'            */         ReadChar( fp );
-      pMobIndex->HitSizeDice     = ReadInt( fp );
-      /* '+'            */         ReadChar( fp );
-      pMobIndex->HitPlus         = ReadInt( fp );
-      pMobIndex->DamNoDice       = ReadInt( fp );
-      /* 'd'            */         ReadChar( fp );
-      pMobIndex->DamSizeDice     = ReadInt( fp );
-      /* '+'            */         ReadChar( fp );
-      pMobIndex->DamPlus         = ReadInt( fp );
-      pMobIndex->Gold            = ReadInt( fp );
-      pMobIndex->exp             = ReadInt( fp );
-      pMobIndex->Position        = (PositionType)ReadInt( fp );
-      pMobIndex->DefaultPosition = (PositionType)ReadInt( fp );
+      pMobIndex->MobThac0        = ReadInt( fp, Log );
+      pMobIndex->ArmorClass      = ReadInt( fp, Log );
+      pMobIndex->HitNoDice       = ReadInt( fp, Log );
+      /* 'd'            */         ReadChar( fp, Log );
+      pMobIndex->HitSizeDice     = ReadInt( fp, Log );
+      /* '+'            */         ReadChar( fp, Log );
+      pMobIndex->HitPlus         = ReadInt( fp, Log );
+      pMobIndex->DamNoDice       = ReadInt( fp, Log );
+      /* 'd'            */         ReadChar( fp, Log );
+      pMobIndex->DamSizeDice     = ReadInt( fp, Log );
+      /* '+'            */         ReadChar( fp, Log );
+      pMobIndex->DamPlus         = ReadInt( fp, Log );
+      pMobIndex->Gold            = ReadInt( fp, Log );
+      pMobIndex->exp             = ReadInt( fp, Log );
+      pMobIndex->Position        = (PositionType)ReadInt( fp, Log );
+      pMobIndex->DefaultPosition = (PositionType)ReadInt( fp, Log );
 
       /*
        * Back to meaningful values.
        */
-      pMobIndex->Sex             = (SexType) ReadInt( fp );
+      pMobIndex->Sex             = (SexType) ReadInt( fp, Log );
 
       if ( letter != 'S' && letter != 'C' && letter != 'Z' )
         {
-          Bug( "%s: vnum %d: letter '%c' not Z, S or C.", __FUNCTION__, vnum,
+          Log->Bug( "%s: vnum %d: letter '%c' not Z, S or C.", __FUNCTION__, vnum,
                letter );
           ShutdownMud( "bad mob data" );
           exit( 1 );
@@ -515,20 +516,20 @@ static void LoadMobiles( Area *tarea, FILE *fp )
 
       if ( letter == 'C' || letter == 'Z' )
 	{
-          pMobIndex->Stats.PermStr       = ReadInt( fp );
-          pMobIndex->Stats.PermInt       = ReadInt( fp );
-          pMobIndex->Stats.PermWis       = ReadInt( fp );
-          pMobIndex->Stats.PermDex       = ReadInt( fp );
-          pMobIndex->Stats.PermCon       = ReadInt( fp );
-          pMobIndex->Stats.PermCha       = ReadInt( fp );
-          pMobIndex->Stats.PermLck       = ReadInt( fp );
-          pMobIndex->Saving.PoisonDeath  = ReadInt( fp );
-          pMobIndex->Saving.Wand         = ReadInt( fp );
-          pMobIndex->Saving.ParaPetri    = ReadInt( fp );
-          pMobIndex->Saving.Breath       = ReadInt( fp );
-          pMobIndex->Saving.SpellStaff   = ReadInt( fp );
+          pMobIndex->Stats.PermStr       = ReadInt( fp, Log );
+          pMobIndex->Stats.PermInt       = ReadInt( fp, Log );
+          pMobIndex->Stats.PermWis       = ReadInt( fp, Log );
+          pMobIndex->Stats.PermDex       = ReadInt( fp, Log );
+          pMobIndex->Stats.PermCon       = ReadInt( fp, Log );
+          pMobIndex->Stats.PermCha       = ReadInt( fp, Log );
+          pMobIndex->Stats.PermLck       = ReadInt( fp, Log );
+          pMobIndex->Saving.PoisonDeath  = ReadInt( fp, Log );
+          pMobIndex->Saving.Wand         = ReadInt( fp, Log );
+          pMobIndex->Saving.ParaPetri    = ReadInt( fp, Log );
+          pMobIndex->Saving.Breath       = ReadInt( fp, Log );
+          pMobIndex->Saving.SpellStaff   = ReadInt( fp, Log );
 
-          ln = ReadLine( fp );
+          ln = ReadLine( fp, Log );
           x1=x2=x3=x4=x5=x6=x7=0;
           sscanf( ln, "%d %d %d %d %d %d %d",
                   &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
@@ -546,7 +547,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
           if ( !pMobIndex->Speaking )
             pMobIndex->Speaking = RaceTable[pMobIndex->Race].Language;
 
-          ln = ReadLine( fp );
+          ln = ReadLine( fp, Log );
           x1=x2=x3=x4=x5=x6=x7=x8=0;
           sscanf( ln, "%d %d %d %d %d %d %d %d",
 		  &x1, &x2, &x3, &x4, &x5, &x6, &x7, &x8 );
@@ -581,14 +582,14 @@ static void LoadMobiles( Area *tarea, FILE *fp )
 
       if ( letter == 'Z' ) /*  STar Wars Reality Complex Mob  */
         {
-          ln = ReadLine( fp );
+          ln = ReadLine( fp, Log );
           x1 = x2 = x3 = x4 = x5 = x6 = x7 = x8 = 0;
           sscanf( ln, "%d %d %d %d %d %d %d %d",
 		  &x1, &x2, &x3, &x4, &x5,  &x6,  &x7,  &x8);
           pMobIndex->VipFlags = x1;
         }
 
-      letter = ReadChar( fp );
+      letter = ReadChar( fp, Log );
 
       if ( letter == '>' )
         {
@@ -614,7 +615,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
-      Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
+      Log->Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
 
       if ( fBootDb )
         {
@@ -637,11 +638,11 @@ static void LoadObjects( Area *tarea, FILE *fp )
       int iHash = 0;
       bool tmpBootDb = false;
       bool oldobj = false;
-      char letter = ReadChar( fp );
+      char letter = ReadChar( fp, Log );
 
       if ( letter != '#' )
 	{
-          Bug( "%s: # not found.", __FUNCTION__ );
+          Log->Bug( "%s: # not found.", __FUNCTION__ );
 
           if ( fBootDb )
             {
@@ -654,7 +655,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
             }
         }
 
-      vnum = ReadInt( fp );
+      vnum = ReadInt( fp, Log );
 
       if ( vnum == INVALID_VNUM )
         break;
@@ -666,7 +667,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
         {
           if ( tmpBootDb )
             {
-              Bug( "%s: vnum %ld duplicated.", __FUNCTION__, vnum );
+              Log->Bug( "%s: vnum %ld duplicated.", __FUNCTION__, vnum );
               ShutdownMud( "duplicate vnum" );
               exit( 1 );
             }
@@ -698,16 +699,16 @@ static void LoadObjects( Area *tarea, FILE *fp )
             tarea->VnumRanges.Object.Last = vnum;
         }
 
-      pObjIndex->Name         = ReadStringToTilde( fp );
-      pObjIndex->ShortDescr  = ReadStringToTilde( fp );
-      pObjIndex->Description  = ReadStringToTilde( fp );
-      pObjIndex->ActionDescription  = ReadStringToTilde( fp );
+      pObjIndex->Name         = ReadStringToTilde( fp, Log );
+      pObjIndex->ShortDescr  = ReadStringToTilde( fp, Log );
+      pObjIndex->Description  = ReadStringToTilde( fp, Log );
+      pObjIndex->ActionDescription  = ReadStringToTilde( fp, Log );
 
       /* Commented out by Narn, Apr/96 to allow item short descs like
          Bonecrusher and Oblivion */
       pObjIndex->Description[0] = CharToUppercase(pObjIndex->Description[0]);
 
-      ln = ReadLine( fp );
+      ln = ReadLine( fp, Log );
       x1=x2=x3=x4=0;
       sscanf( ln, "%d %d %d %d",
 	       &x1, &x2, &x3, &x4 );
@@ -716,7 +717,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
       pObjIndex->WearFlags             = x3;
       pObjIndex->Layers         = x4;
 
-      ln = ReadLine( fp );
+      ln = ReadLine( fp, Log );
       x1=x2=x3=x4=x5=x6=0;
       sscanf( ln, "%d %d %d %d %d %d",
               &x1, &x2, &x3, &x4, &x5, &x6 );
@@ -726,14 +727,14 @@ static void LoadObjects( Area *tarea, FILE *fp )
       pObjIndex->Value[3]               = x4;
       pObjIndex->Value[4]               = x5;
       pObjIndex->Value[5]               = x6;
-      pObjIndex->Weight         = ReadInt( fp );
+      pObjIndex->Weight         = ReadInt( fp, Log );
       pObjIndex->Weight = umax( 1, pObjIndex->Weight );
-      pObjIndex->Cost                   = ReadInt( fp );
-      pObjIndex->Rent                   = ReadInt( fp ); /* unused */
+      pObjIndex->Cost                   = ReadInt( fp, Log );
+      pObjIndex->Rent                   = ReadInt( fp, Log ); /* unused */
 
       for ( ; ; )
         {
-          letter = ReadChar( fp );
+          letter = ReadChar( fp, Log );
 
           if ( letter == 'A' )
             {
@@ -742,14 +743,14 @@ static void LoadObjects( Area *tarea, FILE *fp )
               AllocateMemory( paf, Affect, 1 );
               paf->Type         = -1;
               paf->Duration             = -1;
-              paf->Location             = ReadInt( fp );
+              paf->Location             = ReadInt( fp, Log );
               if ( paf->Location == APPLY_WEAPONSPELL
                    ||   paf->Location == APPLY_WEARSPELL
 		   ||   paf->Location == APPLY_REMOVESPELL
                    ||   paf->Location == APPLY_STRIPSN )
-                paf->Modifier           = SkillNumberFromSlot( ReadInt(fp) );
+                paf->Modifier           = SkillNumberFromSlot( ReadInt(fp, Log) );
               else
-                paf->Modifier           = ReadInt( fp );
+                paf->Modifier           = ReadInt( fp, Log );
               paf->AffectedBy           = 0;
               LINK( paf, pObjIndex->FirstAffect, pObjIndex->LastAffect,
                     Next, Previous );
@@ -761,8 +762,8 @@ static void LoadObjects( Area *tarea, FILE *fp )
               ExtraDescription *ed;
 
               AllocateMemory( ed, ExtraDescription, 1 );
-              ed->Keyword               = ReadStringToTilde( fp );
-              ed->Description           = ReadStringToTilde( fp );
+              ed->Keyword               = ReadStringToTilde( fp, Log );
+              ed->Description           = ReadStringToTilde( fp, Log );
               LINK( ed, pObjIndex->FirstExtraDescription, pObjIndex->LastExtraDescription,
                     Next, Previous );
               top_ed++;
@@ -822,7 +823,7 @@ static void LoadResets( Area *tarea, FILE *fp )
 
   if ( !tarea )
     {
-      Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
+      Log->Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
 
       if ( fBootDb )
         {
@@ -839,7 +840,7 @@ static void LoadResets( Area *tarea, FILE *fp )
         {
           Reset *rtmp;
 
-          Bug( "%s: WARNING: resets already exist for this area.", __FUNCTION__ );
+          Log->Bug( "%s: WARNING: resets already exist for this area.", __FUNCTION__ );
 
           for ( rtmp = tarea->FirstReset; rtmp; rtmp = rtmp->Next )
             ++count;
@@ -861,20 +862,20 @@ static void LoadResets( Area *tarea, FILE *fp )
       char letter;
       int extra, arg1, arg2, arg3;
 
-      if ( ( letter = ReadChar( fp ) ) == 'S' )
+      if ( ( letter = ReadChar( fp, Log ) ) == 'S' )
         break;
 
       if ( letter == '*' )
         {
-          ReadToEndOfLine( fp );
+          ReadToEndOfLine( fp, Log );
           continue;
         }
 
-      extra     = ReadInt( fp );
-      arg1      = ReadInt( fp );
-      arg2      = ReadInt( fp );
-      arg3      = (letter == 'G' || letter == 'R') ? 0 : ReadInt( fp );
-      ReadToEndOfLine( fp );
+      extra     = ReadInt( fp, Log );
+      arg1      = ReadInt( fp, Log );
+      arg2      = ReadInt( fp, Log );
+      arg3      = (letter == 'G' || letter == 'R') ? 0 : ReadInt( fp, Log );
+      ReadToEndOfLine( fp, Log );
 
       ++count;
 
@@ -892,7 +893,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
 
   if ( !tarea )
     {
-      Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
+      Log->Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
       ShutdownMud( "No #AREA" );
       exit( 1 );
     }
@@ -905,11 +906,11 @@ static void LoadRooms( Area *tarea, FILE *fp )
       bool tmpBootDb = false;
       bool oldroom = false;
       int x1, x2, x3, x4, x5, x6;
-      char letter = ReadChar( fp );
+      char letter = ReadChar( fp, Log );
 
       if ( letter != '#' )
         {
-          Bug( "%s: # not found.", __FUNCTION__ );
+          Log->Bug( "%s: # not found.", __FUNCTION__ );
 
           if ( fBootDb )
             {
@@ -922,7 +923,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
             }
         }
 
-      vnum = ReadInt( fp );
+      vnum = ReadInt( fp, Log );
 
       if ( vnum == INVALID_VNUM )
         break;
@@ -934,7 +935,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
         {
           if ( tmpBootDb )
             {
-              Bug( "%s: vnum %ld duplicated.", __FUNCTION__, vnum );
+              Log->Bug( "%s: vnum %ld duplicated.", __FUNCTION__, vnum );
               ShutdownMud( "duplicate vnum" );
               exit( 1 );
             }
@@ -967,11 +968,11 @@ static void LoadRooms( Area *tarea, FILE *fp )
             tarea->VnumRanges.Room.Last = vnum;
         }
 
-      pRoomIndex->Name         = ReadStringToTilde( fp );
-      pRoomIndex->Description  = ReadStringToTilde( fp );
+      pRoomIndex->Name         = ReadStringToTilde( fp, Log );
+      pRoomIndex->Description  = ReadStringToTilde( fp, Log );
 
-      /* Area number                      ReadInt( fp ); */
-      ln = ReadLine( fp );
+      /* Area number                      ReadInt( fp, Log ); */
+      ln = ReadLine( fp, Log );
       x1=x2=x3=x4=x5=x6=0;
       sscanf( ln, "%d %d %d %d %d %d",
               &x1, &x2, &x3, &x4, &x5, &x6 );
@@ -984,14 +985,14 @@ static void LoadRooms( Area *tarea, FILE *fp )
 
       if (pRoomIndex->Sector <= SECT_INVALID || pRoomIndex->Sector >= SECT_MAX)
         {
-          Bug( "%s: vnum %ld has bad sector_type %d.", __FUNCTION__, vnum,
+          Log->Bug( "%s: vnum %ld has bad sector_type %d.", __FUNCTION__, vnum,
 	        pRoomIndex->Sector);
           pRoomIndex->Sector = SECT_CITY;
         }
 
       for ( ; ; )
         {
-          letter = ReadChar( fp );
+          letter = ReadChar( fp, Log );
 
           if ( letter == 'S' )
             break;
@@ -1001,11 +1002,11 @@ static void LoadRooms( Area *tarea, FILE *fp )
               Exit *pexit;
               int locks;
 
-              door = (DirectionType) ReadInt( fp );
+              door = (DirectionType) ReadInt( fp, Log );
 
               if ( door < DIR_NORTH || door > DIR_SOMEWHERE )
                 {
-                  Bug( "%s: vnum %d has bad door number %d.", __FUNCTION__, vnum,
+                  Log->Bug( "%s: vnum %d has bad door number %d.", __FUNCTION__, vnum,
                        door );
 
                   if ( fBootDb )
@@ -1014,10 +1015,10 @@ static void LoadRooms( Area *tarea, FILE *fp )
               else
                 {
                   pexit = MakeExit( pRoomIndex, NULL, door );
-                  pexit->Description    = ReadStringToTilde( fp );
-                  pexit->Keyword        = ReadStringToTilde( fp );
+                  pexit->Description    = ReadStringToTilde( fp, Log );
+                  pexit->Keyword        = ReadStringToTilde( fp, Log );
                   pexit->Flags      = 0;
-                  ln = ReadLine( fp );
+                  ln = ReadLine( fp, Log );
                   x1=x2=x3=x4=0;
                   sscanf( ln, "%d %d %d %d",
 			  &x1, &x2, &x3, &x4 );
@@ -1049,8 +1050,8 @@ static void LoadRooms( Area *tarea, FILE *fp )
               ExtraDescription *ed;
 
               AllocateMemory( ed, ExtraDescription, 1 );
-              ed->Keyword               = ReadStringToTilde( fp );
-              ed->Description           = ReadStringToTilde( fp );
+              ed->Keyword               = ReadStringToTilde( fp, Log );
+              ed->Description           = ReadStringToTilde( fp, Log );
               LINK( ed, pRoomIndex->FirstExtraDescription, pRoomIndex->LastExtraDescription,
                     Next, Previous );
               top_ed++;
@@ -1062,7 +1063,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
             }
           else
             {
-              Bug( "%s: vnum %d has flag '%c' not 'DES'.", __FUNCTION__, vnum,
+              Log->Bug( "%s: vnum %d has flag '%c' not 'DES'.", __FUNCTION__, vnum,
                    letter );
               ShutdownMud( "Room flag not DES" );
               exit( 1 );
@@ -1088,21 +1089,21 @@ static void LoadShops( Area *tarea, FILE *fp )
       Shop *pShop = NULL;
 
       AllocateMemory( pShop, Shop, 1 );
-      pShop->Keeper             = ReadInt( fp );
+      pShop->Keeper             = ReadInt( fp, Log );
 
       if ( pShop->Keeper == INVALID_VNUM )
         break;
 
       for ( iTrade = 0; iTrade < MAX_TRADE; iTrade++ )
-        pShop->BuyType[iTrade] = (ItemTypes)ReadInt( fp );
+        pShop->BuyType[iTrade] = (ItemTypes)ReadInt( fp, Log );
 
-      pShop->ProfitBuy = ReadInt( fp );
-      pShop->ProfitSell        = ReadInt( fp );
+      pShop->ProfitBuy = ReadInt( fp, Log );
+      pShop->ProfitSell        = ReadInt( fp, Log );
        pShop->ProfitBuy = urange( pShop->ProfitSell + 5, pShop->ProfitBuy, 1000 );
       pShop->ProfitSell        = urange( 0, pShop->ProfitSell, pShop->ProfitBuy - 5 );
-      pShop->BusinessHours.Open  = ReadInt( fp );
-      pShop->BusinessHours.Close = ReadInt( fp );
-      ReadToEndOfLine( fp );
+      pShop->BusinessHours.Open  = ReadInt( fp, Log );
+      pShop->BusinessHours.Close = ReadInt( fp, Log );
+      ReadToEndOfLine( fp, Log );
       pMobIndex         = GetProtoMobile( pShop->Keeper );
       pMobIndex->Shop  = pShop;
 
@@ -1130,19 +1131,19 @@ static void LoadRepairs( Area *tarea, FILE *fp )
       RepairShop *rShop = NULL;
 
       AllocateMemory( rShop, RepairShop, 1 );
-      rShop->Keeper             = ReadInt( fp );
+      rShop->Keeper             = ReadInt( fp, Log );
 
       if ( rShop->Keeper == INVALID_VNUM )
 	 break;
 
       for ( iFix = 0; iFix < MAX_FIX; iFix++ )
-        rShop->FixType[iFix] = (ItemTypes)ReadInt( fp );
+        rShop->FixType[iFix] = (ItemTypes)ReadInt( fp, Log );
 
-      rShop->ProfitFix = ReadInt( fp );
-      rShop->ShopType  = ReadInt( fp );
-      rShop->BusinessHours.Open  = ReadInt( fp );
-      rShop->BusinessHours.Close = ReadInt( fp );
-      ReadToEndOfLine( fp );
+      rShop->ProfitFix = ReadInt( fp, Log );
+      rShop->ShopType  = ReadInt( fp, Log );
+      rShop->BusinessHours.Open  = ReadInt( fp, Log );
+      rShop->BusinessHours.Close = ReadInt( fp, Log );
+      ReadToEndOfLine( fp, Log );
       pMobIndex         = GetProtoMobile( rShop->Keeper );
       pMobIndex->RepairShop  = rShop;
 
@@ -1168,10 +1169,10 @@ static void LoadSpecials( Area *tarea, FILE *fp )
       ProtoMobile *pMobIndex;
       char letter;
 
-      switch ( letter = ReadChar( fp ) )
+      switch ( letter = ReadChar( fp, Log ) )
         {
         default:
-          Bug( "%s: letter '%c' not *MS.", __FUNCTION__, letter );
+          Log->Bug( "%s: letter '%c' not *MS.", __FUNCTION__, letter );
           exit( 1 );
 
         case 'S':
@@ -1181,25 +1182,25 @@ static void LoadSpecials( Area *tarea, FILE *fp )
           break;
 
         case 'M':
-          pMobIndex = GetProtoMobile( ReadInt ( fp ) );
+          pMobIndex = GetProtoMobile( ReadInt( fp, Log ) );
 
           if ( !pMobIndex->spec_fun )
             {
-              pMobIndex->spec_fun = SpecialLookup( ReadWord   ( fp ) );
+              pMobIndex->spec_fun = SpecialLookup( ReadWord( fp, Log ) );
 
               if ( pMobIndex->spec_fun == 0 )
                 {
-                  Bug( "%s: 'M': vnum %d.", __FUNCTION__, pMobIndex->Vnum );
+                  Log->Bug( "%s: 'M': vnum %d.", __FUNCTION__, pMobIndex->Vnum );
                   exit( 1 );
                 }
             }
           else if ( !pMobIndex->spec_2 )
             {
-              pMobIndex->spec_2 = SpecialLookup( ReadWord( fp ) );
+              pMobIndex->spec_2 = SpecialLookup( ReadWord( fp, Log ) );
 
               if ( pMobIndex->spec_2 == 0 )
                 {
-                  Bug( "%s: 'M': vnum %ld.", __FUNCTION__, pMobIndex->Vnum );
+                  Log->Bug( "%s: 'M': vnum %ld.", __FUNCTION__, pMobIndex->Vnum );
                   exit( 1 );
                 }
             }
@@ -1207,7 +1208,7 @@ static void LoadSpecials( Area *tarea, FILE *fp )
 	   break;
         }
 
-      ReadToEndOfLine( fp );
+      ReadToEndOfLine( fp, Log );
     }
 }
 
@@ -1218,7 +1219,7 @@ static void LoadRanges( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
-      Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
+      Log->Bug( "%s: no #AREA seen yet.", __FUNCTION__ );
       ShutdownMud( "No #AREA" );
       exit( 1 );
     }
@@ -1226,7 +1227,7 @@ static void LoadRanges( Area *tarea, FILE *fp )
   for ( ; ; )
     {
       int x1, x2, x3, x4;
-      const char *ln = ReadLine( fp );
+      const char *ln = ReadLine( fp, Log );
 
       if (ln[0] == '$')
         break;
@@ -1251,25 +1252,25 @@ static void LoadMudProgs( Area *tarea, FILE *fp )
   int             value;
 
   for ( ; ; )
-    switch ( letter = ReadChar( fp ) )
+    switch ( letter = ReadChar( fp, Log ) )
       {
       default:
-        Bug( "%s: bad command '%c'.", __FUNCTION__, letter);
+        Log->Bug( "%s: bad command '%c'.", __FUNCTION__, letter);
         exit(1);
         break;
       case 'S':
       case 's':
-        ReadToEndOfLine( fp );
+        ReadToEndOfLine( fp, Log );
         return;
       case '*':
-        ReadToEndOfLine( fp );
+        ReadToEndOfLine( fp, Log );
 	 break;
       case 'M':
       case 'm':
-        value = ReadInt( fp );
+        value = ReadInt( fp, Log );
         if ( ( iMob = GetProtoMobile( value ) ) == NULL )
           {
-            Bug( "%s: vnum %d doesnt exist", __FUNCTION__, value );
+            Log->Bug( "%s: vnum %d doesnt exist", __FUNCTION__, value );
             exit( 1 );
           }
 
@@ -1284,9 +1285,9 @@ static void LoadMudProgs( Area *tarea, FILE *fp )
           original->Next = working;
         else
           iMob->mprog.mudprogs = working;
-        working = MobProgReadFile( ReadWord( fp ), working, iMob );
+        working = MobProgReadFile( ReadWord( fp, Log ), working, iMob );
         working->Next = NULL;
-        ReadToEndOfLine( fp );
+        ReadToEndOfLine( fp, Log );
         break;
       }
 
@@ -1352,43 +1353,43 @@ static MPROG_DATA *MobProgReadFile( const char *f, MPROG_DATA *mprg, ProtoMobile
   progfile = fopen( MUDProgfile, "r" );
   if ( !progfile )
     {
-      Bug( "Mob: %d couldn't open mudprog file", pMobIndex->Vnum );
+      Log->Bug( "Mob: %d couldn't open mudprog file", pMobIndex->Vnum );
       exit( 1 );
     }
 
   mprg2 = mprg;
-  switch ( letter = ReadChar( progfile ) )
+  switch ( letter = ReadChar( progfile, Log ) )
     {
     case '>':
       break;
     case '|':
-      Bug( "empty mudprog file." );
+      Log->Bug( "empty mudprog file." );
       exit( 1 );
       break;
     default:
-      Bug( "in mudprog file syntax error." );
+      Log->Bug( "in mudprog file syntax error." );
       exit( 1 );
       break;
     }
 
   while ( !done )
     {
-      mprg2->type = MudProgNameToType( ReadWord( progfile ) );
+      mprg2->type = MudProgNameToType( ReadWord( progfile, Log ) );
       switch ( mprg2->type )
         {
         case ERROR_PROG:
-          Bug( "mudprog file type error" );
+          Log->Bug( "mudprog file type error" );
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          Bug( "mprog file contains a call to file." );
+          Log->Bug( "mprog file contains a call to file." );
           exit( 1 );
           break;
         default:
           pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = ReadStringToTilde( progfile );
-          mprg2->comlist       = ReadStringToTilde( progfile );
-          switch ( letter = ReadChar( progfile ) )
+          mprg2->arglist       = ReadStringToTilde( progfile, Log );
+          mprg2->comlist       = ReadStringToTilde( progfile, Log );
+          switch ( letter = ReadChar( progfile, Log ) )
             {
             case '>':
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
@@ -1399,7 +1400,7 @@ static MPROG_DATA *MobProgReadFile( const char *f, MPROG_DATA *mprg, ProtoMobile
               done = true;
               break;
 	       default:
-              Bug( "in mudprog file syntax error." );
+              Log->Bug( "in mudprog file syntax error." );
               exit( 1 );
               break;
             }
@@ -1419,9 +1420,9 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
   char        letter;
   bool        done = false;
 
-  if ( ( letter = ReadChar( fp ) ) != '>' )
+  if ( ( letter = ReadChar( fp, Log ) ) != '>' )
     {
-      Bug( "%s: vnum %d MUDPROG char", __FUNCTION__, pMobIndex->Vnum );
+      Log->Bug( "%s: vnum %d MUDPROG char", __FUNCTION__, pMobIndex->Vnum );
       exit( 1 );
     }
   AllocateMemory( mprg, MPROG_DATA, 1 );
@@ -1429,17 +1430,17 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
 
   while ( !done )
     {
-      mprg->type = MudProgNameToType( ReadWord( fp ) );
+      mprg->type = MudProgNameToType( ReadWord( fp, Log ) );
       switch ( mprg->type )
         {
         case ERROR_PROG:
-	  Bug( "%s: vnum %d MUDPROG type.", __FUNCTION__, pMobIndex->Vnum );
+	  Log->Bug( "%s: vnum %d MUDPROG type.", __FUNCTION__, pMobIndex->Vnum );
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = MobProgReadFile( ReadStringToTilde( fp ), mprg,pMobIndex );
-          ReadToEndOfLine( fp );
-          switch ( letter = ReadChar( fp ) )
+          mprg = MobProgReadFile( ReadStringToTilde( fp, Log ), mprg,pMobIndex );
+          ReadToEndOfLine( fp, Log );
+          switch ( letter = ReadChar( fp, Log ) )
             {
             case '>':
               AllocateMemory( mprg->Next, MPROG_DATA, 1 );
@@ -1447,22 +1448,22 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
               break;
             case '|':
               mprg->Next = NULL;
-              ReadToEndOfLine( fp );
+              ReadToEndOfLine( fp, Log );
               done = true;
               break;
             default:
-              Bug( "%s: vnum %d bad MUDPROG.", __FUNCTION__, pMobIndex->Vnum );
+              Log->Bug( "%s: vnum %d bad MUDPROG.", __FUNCTION__, pMobIndex->Vnum );
               exit( 1 );
               break;
             }
           break;
         default:
           pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = ReadStringToTilde( fp );
-          ReadToEndOfLine( fp );
-          mprg->comlist        = ReadStringToTilde( fp );
-          ReadToEndOfLine( fp );
-          switch ( letter = ReadChar( fp ) )
+          mprg->arglist        = ReadStringToTilde( fp, Log );
+          ReadToEndOfLine( fp, Log );
+          mprg->comlist        = ReadStringToTilde( fp, Log );
+          ReadToEndOfLine( fp, Log );
+          switch ( letter = ReadChar( fp, Log ) )
             {
             case '>':
               AllocateMemory( mprg->Next, MPROG_DATA, 1 );
@@ -1470,11 +1471,11 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
               break;
 	      case '|':
               mprg->Next = NULL;
-              ReadToEndOfLine( fp );
+              ReadToEndOfLine( fp, Log );
               done = true;
               break;
             default:
-              Bug( "%s: vnum %d bad MUDPROG.", __FUNCTION__, pMobIndex->Vnum );
+              Log->Bug( "%s: vnum %d bad MUDPROG.", __FUNCTION__, pMobIndex->Vnum );
               exit( 1 );
               break;
             }
@@ -1511,43 +1512,43 @@ static MPROG_DATA *ObjProgReadFile( const char *f, MPROG_DATA *mprg, ProtoObject
   progfile = fopen( MUDProgfile, "r" );
   if ( !progfile )
     {
-      Bug( "Obj: %d couldnt open mudprog file", pObjIndex->Vnum );
+      Log->Bug( "Obj: %d couldnt open mudprog file", pObjIndex->Vnum );
       exit( 1 );
     }
 
   mprg2 = mprg;
-  switch ( letter = ReadChar( progfile ) )
+  switch ( letter = ReadChar( progfile, Log ) )
     {
     case '>':
       break;
     case '|':
-      Bug( "empty objprog file." );
+      Log->Bug( "empty objprog file." );
       exit( 1 );
       break;
     default:
-      Bug( "in objprog file syntax error." );
+      Log->Bug( "in objprog file syntax error." );
       exit( 1 );
       break;
     }
 
   while ( !done )
     {
-      mprg2->type = MudProgNameToType( ReadWord( progfile ) );
+      mprg2->type = MudProgNameToType( ReadWord( progfile, Log ) );
       switch ( mprg2->type )
         {
         case ERROR_PROG:
-          Bug( "objprog file type error" );
+          Log->Bug( "objprog file type error" );
           exit( 1 );
 	   break;
         case IN_FILE_PROG:
-          Bug( "objprog file contains a call to file." );
+          Log->Bug( "objprog file contains a call to file." );
           exit( 1 );
           break;
         default:
           pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = ReadStringToTilde( progfile );
-          mprg2->comlist       = ReadStringToTilde( progfile );
-          switch ( letter = ReadChar( progfile ) )
+          mprg2->arglist       = ReadStringToTilde( progfile, Log );
+          mprg2->comlist       = ReadStringToTilde( progfile, Log );
+          switch ( letter = ReadChar( progfile, Log ) )
             {
             case '>':
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
@@ -1558,7 +1559,7 @@ static MPROG_DATA *ObjProgReadFile( const char *f, MPROG_DATA *mprg, ProtoObject
               done = true;
               break;
             default:
-              Bug( "in objprog file syntax error." );
+              Log->Bug( "in objprog file syntax error." );
               exit( 1 );
               break;
             }
@@ -1580,25 +1581,25 @@ static void LoadObjProgs( Area *tarea, FILE *fp )
   int             value;
 
   for ( ; ; )
-    switch ( letter = ReadChar( fp ) )
+    switch ( letter = ReadChar( fp, Log ) )
       {
       default:
-        Bug( "%s: bad command '%c'.", __FUNCTION__, letter);
+        Log->Bug( "%s: bad command '%c'.", __FUNCTION__, letter);
         exit(1);
         break;
       case 'S':
       case 's':
-        ReadToEndOfLine( fp );
+        ReadToEndOfLine( fp, Log );
 	return;
       case '*':
-        ReadToEndOfLine( fp );
+        ReadToEndOfLine( fp, Log );
         break;
       case 'M':
       case 'm':
-        value = ReadInt( fp );
+        value = ReadInt( fp, Log );
         if ( ( iObj = GetProtoObject( value ) ) == NULL )
           {
-            Bug( "%s: vnum %d doesnt exist", __FUNCTION__, value );
+            Log->Bug( "%s: vnum %d doesnt exist", __FUNCTION__, value );
             exit( 1 );
           }
 
@@ -1613,9 +1614,9 @@ static void LoadObjProgs( Area *tarea, FILE *fp )
           original->Next = working;
         else
           iObj->mprog.mudprogs = working;
-        working = ObjProgReadFile( ReadWord( fp ), working, iObj );
+        working = ObjProgReadFile( ReadWord( fp, Log ), working, iObj );
         working->Next = NULL;
-        ReadToEndOfLine( fp );
+        ReadToEndOfLine( fp, Log );
         break;
       }
 
@@ -1631,9 +1632,9 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
   char        letter;
   bool        done = false;
 
-  if ( ( letter = ReadChar( fp ) ) != '>' )
+  if ( ( letter = ReadChar( fp, Log ) ) != '>' )
     {
-      Bug( "%s: vnum %d OBJPROG char", __FUNCTION__, pObjIndex->Vnum );
+      Log->Bug( "%s: vnum %d OBJPROG char", __FUNCTION__, pObjIndex->Vnum );
       exit( 1 );
     }
   AllocateMemory( mprg, MPROG_DATA, 1 );
@@ -1641,17 +1642,17 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
 
   while ( !done )
     {
-      mprg->type = MudProgNameToType( ReadWord( fp ) );
+      mprg->type = MudProgNameToType( ReadWord( fp, Log ) );
       switch ( mprg->type )
         {
         case ERROR_PROG:
-          Bug( "%s: vnum %d OBJPROG type.", __FUNCTION__, pObjIndex->Vnum );
+          Log->Bug( "%s: vnum %d OBJPROG type.", __FUNCTION__, pObjIndex->Vnum );
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = ObjProgReadFile( ReadStringToTilde( fp ), mprg,pObjIndex );
-          ReadToEndOfLine( fp );
-          switch ( letter = ReadChar( fp ) )
+          mprg = ObjProgReadFile( ReadStringToTilde( fp, Log ), mprg,pObjIndex );
+          ReadToEndOfLine( fp, Log );
+          switch ( letter = ReadChar( fp, Log ) )
             {
             case '>':
               AllocateMemory( mprg->Next, MPROG_DATA, 1 );
@@ -1659,22 +1660,22 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
               break;
             case '|':
 	       mprg->Next = NULL;
-              ReadToEndOfLine( fp );
+              ReadToEndOfLine( fp, Log );
               done = true;
               break;
             default:
-              Bug( "%s: vnum %d bad OBJPROG.", __FUNCTION__, pObjIndex->Vnum );
+              Log->Bug( "%s: vnum %d bad OBJPROG.", __FUNCTION__, pObjIndex->Vnum );
               exit( 1 );
               break;
             }
           break;
         default:
           pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = ReadStringToTilde( fp );
-          ReadToEndOfLine( fp );
-          mprg->comlist        = ReadStringToTilde( fp );
-          ReadToEndOfLine( fp );
-          switch ( letter = ReadChar( fp ) )
+          mprg->arglist        = ReadStringToTilde( fp, Log );
+          ReadToEndOfLine( fp, Log );
+          mprg->comlist        = ReadStringToTilde( fp, Log );
+          ReadToEndOfLine( fp, Log );
+          switch ( letter = ReadChar( fp, Log ) )
             {
             case '>':
               AllocateMemory( mprg->Next, MPROG_DATA, 1 );
@@ -1682,11 +1683,11 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
               break;
             case '|':
               mprg->Next = NULL;
-              ReadToEndOfLine( fp );
+              ReadToEndOfLine( fp, Log );
               done = true;
               break;
             default:
-              Bug( "%s: vnum %d bad OBJPROG.", __FUNCTION__, pObjIndex->Vnum );
+              Log->Bug( "%s: vnum %d bad OBJPROG.", __FUNCTION__, pObjIndex->Vnum );
               exit( 1 );
               break;
             }
@@ -1718,43 +1719,43 @@ static MPROG_DATA *RoomProgReadFile( const char *f, MPROG_DATA *mprg, Room *Room
   progfile = fopen( MUDProgfile, "r" );
   if ( !progfile )
     {
-      Bug( "Room: %d couldnt open roomprog file", RoomIndex->Vnum );
+      Log->Bug( "Room: %d couldnt open roomprog file", RoomIndex->Vnum );
       exit( 1 );
     }
 
   mprg2 = mprg;
-  switch ( letter = ReadChar( progfile ) )
+  switch ( letter = ReadChar( progfile, Log ) )
     {
     case '>':
        break;
     case '|':
-      Bug( "empty roomprog file." );
+      Log->Bug( "empty roomprog file." );
       exit( 1 );
       break;
     default:
-      Bug( "in roomprog file syntax error." );
+      Log->Bug( "in roomprog file syntax error." );
       exit( 1 );
       break;
     }
 
   while ( !done )
     {
-      mprg2->type = MudProgNameToType( ReadWord( progfile ) );
+      mprg2->type = MudProgNameToType( ReadWord( progfile, Log ) );
       switch ( mprg2->type )
         {
         case ERROR_PROG:
-          Bug( "roomprog file type error" );
+          Log->Bug( "roomprog file type error" );
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          Bug( "roomprog file contains a call to file." );
+          Log->Bug( "roomprog file contains a call to file." );
           exit( 1 );
           break;
         default:
           RoomIndex->mprog.progtypes = RoomIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = ReadStringToTilde( progfile );
-          mprg2->comlist       = ReadStringToTilde( progfile );
-          switch ( letter = ReadChar( progfile ) )
+          mprg2->arglist       = ReadStringToTilde( progfile, Log );
+          mprg2->comlist       = ReadStringToTilde( progfile, Log );
+          switch ( letter = ReadChar( progfile, Log ) )
             {
             case '>':
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
@@ -1765,7 +1766,7 @@ static MPROG_DATA *RoomProgReadFile( const char *f, MPROG_DATA *mprg, Room *Room
               done = true;
               break;
             default:
-              Bug( "in roomprog file syntax error." );
+              Log->Bug( "in roomprog file syntax error." );
               exit( 1 );
               break;
             }
@@ -1785,9 +1786,9 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
   char        letter;
   bool        done = false;
 
-  if ( ( letter = ReadChar( fp ) ) != '>' )
+  if ( ( letter = ReadChar( fp, Log ) ) != '>' )
     {
-      Bug( "%s: vnum %d ROOMPROG char", __FUNCTION__, pRoomIndex->Vnum );
+      Log->Bug( "%s: vnum %d ROOMPROG char", __FUNCTION__, pRoomIndex->Vnum );
       exit( 1 );
     }
   AllocateMemory( mprg, MPROG_DATA, 1 );
@@ -1795,17 +1796,17 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
 
   while ( !done )
     {
-      mprg->type = MudProgNameToType( ReadWord( fp ) );
+      mprg->type = MudProgNameToType( ReadWord( fp, Log ) );
       switch ( mprg->type )
         {
         case ERROR_PROG:
-          Bug( "%s: vnum %d ROOMPROG type.", __FUNCTION__, pRoomIndex->Vnum );
+          Log->Bug( "%s: vnum %d ROOMPROG type.", __FUNCTION__, pRoomIndex->Vnum );
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = RoomProgReadFile( ReadStringToTilde( fp ), mprg,pRoomIndex );
-          ReadToEndOfLine( fp );
-          switch ( letter = ReadChar( fp ) )
+          mprg = RoomProgReadFile( ReadStringToTilde( fp, Log ), mprg,pRoomIndex );
+          ReadToEndOfLine( fp, Log );
+          switch ( letter = ReadChar( fp, Log ) )
             {
             case '>':
               AllocateMemory( mprg->Next, MPROG_DATA, 1 );
@@ -1813,22 +1814,23 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
               break;
             case '|':
               mprg->Next = NULL;
-              ReadToEndOfLine( fp );
+              ReadToEndOfLine( fp, Log );
               done = true;
               break;
             default:
-              Bug( "%s: vnum %d bad ROOMPROG.", __FUNCTION__, pRoomIndex->Vnum );
+              Log->Bug( "%s: vnum %d bad ROOMPROG.", __FUNCTION__, pRoomIndex->Vnum );
               exit( 1 );
               break;
             }
           break;
         default:
           pRoomIndex->mprog.progtypes = pRoomIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = ReadStringToTilde( fp );
-          ReadToEndOfLine( fp );
-          mprg->comlist        = ReadStringToTilde( fp );
-          ReadToEndOfLine( fp );
-          switch ( letter = ReadChar( fp ) )
+          mprg->arglist        = ReadStringToTilde( fp, Log );
+          ReadToEndOfLine( fp, Log );
+          mprg->comlist        = ReadStringToTilde( fp, Log );
+          ReadToEndOfLine( fp, Log );
+
+          switch ( letter = ReadChar( fp, Log ) )
             {
             case '>':
 	      AllocateMemory( mprg->Next, MPROG_DATA, 1 );
@@ -1836,11 +1838,11 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
               break;
             case '|':
               mprg->Next = NULL;
-              ReadToEndOfLine( fp );
+              ReadToEndOfLine( fp, Log );
               done = true;
               break;
             default:
-              Bug( "%s: vnum %d bad ROOMPROG.", __FUNCTION__, pRoomIndex->Vnum );
+              Log->Bug( "%s: vnum %d bad ROOMPROG.", __FUNCTION__, pRoomIndex->Vnum );
               exit( 1 );
               break;
             }
@@ -2013,7 +2015,7 @@ void CloseArea( Area *pArea )
 
           if ( rid->FirstPerson )
             {
-              Bug( "CloseArea: room with people #%d", rid->Vnum );
+              Log->Bug( "CloseArea: room with people #%d", rid->Vnum );
 
               for ( ech = rid->FirstPerson; ech; ech = ech_next )
                 {
@@ -2031,7 +2033,7 @@ void CloseArea( Area *pArea )
 
           if ( rid->FirstContent )
             {
-              Bug( "CloseArea: room with contents #%d", rid->Vnum );
+              Log->Bug( "CloseArea: room with contents #%d", rid->Vnum );
 
               for ( eobj = rid->FirstContent; eobj; eobj = eobj_next )
                 {
@@ -2074,7 +2076,7 @@ void CloseArea( Area *pArea )
                   break;
 
               if ( !trid )
-                Bug( "Close_area: rid not in hash list %d", rid->Vnum );
+                Log->Bug( "Close_area: rid not in hash list %d", rid->Vnum );
               else
                 trid->Next = rid->Next;
             }
@@ -2122,7 +2124,7 @@ void CloseArea( Area *pArea )
                 if ( tmid->Next == mid )
                   break;
               if ( !tmid )
-                Bug( "Close_area: mid not in hash list %s", mid->Vnum );
+                Log->Bug( "Close_area: mid not in hash list %s", mid->Vnum );
               else
                 tmid->Next = mid->Next;
             }
@@ -2172,7 +2174,7 @@ void CloseArea( Area *pArea )
                 if ( toid->Next == oid )
                   break;
               if ( !toid )
-                Bug( "Close_area: oid not in hash list %s", oid->Vnum );
+                Log->Bug( "Close_area: oid not in hash list %s", oid->Vnum );
               else
                 toid->Next = oid->Next;
             }

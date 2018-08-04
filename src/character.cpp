@@ -28,111 +28,11 @@
 #include "craft.hpp"
 #include "clan.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 static bool FindComlink( const Object *element, const Object **comlink );
 
 Character::Character()
-/*
-  : Next(NULL),
-    Previous(NULL),
-    NextInRoom(NULL),
-    PreviousInRoom(NULL),
-    Master(NULL),
-    Leader(NULL),
-    Fighting(NULL),
-    Reply(NULL),
-    Switched(NULL),
-    Mount(NULL),
-    spec_fun(NULL),
-    spec_2(NULL),
-    Prototype(NULL),
-    Desc(NULL),
-    FirstAffect(NULL),
-    LastAffect(NULL),
-    FirstCarrying(NULL),
-    LastCarrying(NULL),
-    InRoom(NULL),
-    WasInRoom(NULL),
-    WasSentinel(NULL),
-    PlayerHome(NULL),
-    PCData(NULL),
-    LastCommand(NULL),
-    PreviousCommand(NULL),
-  dest_buf(NULL),
-  dest_buf_2(NULL),
-  spare_ptr(NULL),
-  tempnum(0),
-  Editor(NULL),
-  FirstTimer(NULL),
-  LastTimer(NULL),
-  Name(NULL),
-  ShortDescr(NULL),
-  LongDescr(NULL),
-  Description(NULL),
-  NumFighting(0),
-  SubState(SUB_NONE),
-  Sex(0),
-  Race(0),
-  TopLevel(0),
-  Trust(0),
-  IdleTimer(0),
-  Wait(0),
-  Hit(500),
-  MaxHit(500),
-  Mana(0),
-  MaxMana(0),
-  Move(1000),
-  MaxMove(1000),
-  NumberOfAttacks(0),
-  Gold(0),
-  Flags(0),
-  AffectedBy(0),
-  CarryWeight(0),
-  CarryNumber(0),
-  BodyParts(0),
-  Resistant(0),
-  Immune(0),
-  Susceptible(0),
-  AttackFlags(0),
-  DefenseFlags(0),
-  Speaks(LANG_COMMON),
-  Speaking(LANG_COMMON),
-  Alignment(0),
-  BareNumDie(1),
-  BareSizeDie(4),
-  MobThac0(0),
-  HitRoll(0),
-  DamRoll(0),
-  HitPlus(0),
-  DamPlus(0),
-  Position(0),
-  DefaultPosition(POS_STANDING),
-  Height(72),
-  Weight(180),
-  ArmorClass(100),
-  Wimpy(0),
-  Deaf(0),
-  MentalState(0),
-  EmotionalState(0),
-  ReTran(INVALID_VNUM),
-  ReGoto(INVALID_VNUM),
-  MobInvis(0),
-  VipFlags(0),
-  BackupWait(0),
-  BackupMob(0),
-  WasStunned(0),
-  MobClan(CopyString("")),
-  BuzzedHome(NULL),
-  BuzzedFromRoom(NULL),
-  Challenged(NULL),
-  BettedOn(NULL),
-  BetAmount(0),
-  Owner(NULL),
-  Home(NULL),
-  CmdRecurse(0),
-  On(NULL),
-  Pet(NULL)
-*/
 {
   Ability.Level.fill(0);
   Ability.Experience.fill(0);
@@ -171,13 +71,13 @@ void SetAbilityXP( Character *ch, short ability, long xp )
 {
   if ( ability >= MAX_ABILITY || ability < 0 )
     {
-      Bug("%s: ability out of range: %d", __FUNCTION__, ability );
+      Log->Bug("%s: ability out of range: %d", __FUNCTION__, ability );
       return;
     }
 
   if( xp < 0 )
     {
-      Bug( "%s: negative value %d invalid", __FUNCTION__, xp );
+      Log->Bug( "%s: negative value %d invalid", __FUNCTION__, xp );
       return;
     }
 
@@ -422,7 +322,7 @@ void SetAbilityLevel( Character *ch, short ability, int newlevel )
     }
   else
     {
-      Bug("%s: level out of range: %d", __FUNCTION__, newlevel);
+      Log->Bug("%s: level out of range: %d", __FUNCTION__, newlevel);
     }
 }
 
@@ -478,7 +378,7 @@ void EquipCharacter( Character *ch, Object *obj, WearLocation iWear )
   if ( (otmp=GetEquipmentOnCharacter( ch, iWear )) != NULL
        &&   (!otmp->Prototype->Layers || !obj->Prototype->Layers) )
     {
-      Bug( "%s: already equipped (%d).", __FUNCTION__, iWear );
+      Log->Bug( "%s: already equipped (%d).", __FUNCTION__, iWear );
       return;
     }
 
@@ -532,7 +432,7 @@ void UnequipCharacter( Character *ch, Object *obj )
 
   if ( obj->WearLoc == WEAR_NONE )
     {
-      Bug( "%s: already unequipped.", __FUNCTION__ );
+      Log->Bug( "%s: already unequipped.", __FUNCTION__ );
       return;
     }
 
@@ -612,7 +512,7 @@ Object *GetWornObject( const Character *ch, const char *argument )
 
   if ( !ch )
     {
-      Bug( "%s: null ch", __FUNCTION__ );
+      Log->Bug( "%s: null ch", __FUNCTION__ );
     }
 
   number = NumberArgument( argument, arg );
@@ -1354,12 +1254,12 @@ void FreeCharacter( Character *ch )
 
   if ( !ch )
     {
-      Bug( "%s: null ch!", __FUNCTION__ );
+      Log->Bug( "%s: null ch!", __FUNCTION__ );
       return;
     }
 
   if ( ch->Desc )
-    Bug( "%s: char still has descriptor.", __FUNCTION__ );
+    Log->Bug( "%s: char still has descriptor.", __FUNCTION__ );
 
   while ( (obj = ch->LastCarrying) != NULL )
     ExtractObject( obj );
@@ -1479,7 +1379,7 @@ void SetCharacterTitle( Character *ch, const char *title )
 
   if ( IsNpc(ch) )
     {
-      Bug( "Set_title: NPC.", 0 );
+      Log->Bug( "Set_title: NPC.", 0 );
       return;
     }
 

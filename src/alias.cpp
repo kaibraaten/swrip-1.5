@@ -56,8 +56,7 @@ Alias *FindAlias( const Character *ch, const char *original_argument )
 
 Alias *AllocateAlias( const char *name, const char *command )
 {
-  Alias *alias = nullptr;
-  AllocateMemory( alias, Alias, 1 );
+  Alias *alias = new Alias();
   alias->Name = CopyString( name );
   alias->Command = CopyString( command );
 
@@ -76,7 +75,7 @@ void FreeAlias( Alias *alias )
       FreeMemory( alias->Command );
     }
 
-  FreeMemory( alias );
+  delete alias;
 }
 
 void FreeAliases( Character *ch )

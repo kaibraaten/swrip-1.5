@@ -19,12 +19,13 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <string.h>
-#include <time.h>
+#include <cstring>
+#include <ctime>
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
 #include "badname.hpp"
+#include "log.hpp"
 
 /*
  * Function to handle the state changing of a triggerobject (lever)  -Thoric
@@ -118,8 +119,8 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
       if ( ( room = GetRoom( obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
         {
-          Bug( "PullOrPush: obj points to invalid room %d",
-	       obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
+          Log->Bug( "PullOrPush: obj points to invalid room %d",
+                    obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
           return;
         }
 
@@ -149,8 +150,8 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
       if ( ( room = GetRoom( obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
         {
-          Bug( "PullOrPush: obj points to invalid room %d",
-	       obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
+          Log->Bug( "PullOrPush: obj points to invalid room %d",
+                    obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
           return;
         }
 
@@ -179,8 +180,8 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
       if ( !room )
         {
-          Bug( "PullOrPush: obj points to invalid room %d",
-	       obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
+          Log->Bug( "PullOrPush: obj points to invalid room %d",
+                    obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
           return;
         }
 
@@ -216,7 +217,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 	}
       else
 	{
-	  Bug( "PullOrPush: door: no direction flag set.", 0 );
+	  Log->Bug( "PullOrPush: door: no direction flag set.", 0 );
 	  return;
 	}
 
@@ -226,8 +227,8 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
         {
           if ( !IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_PASSAGE ) )
             {
-              Bug( "PullOrPush: obj points to non-exit %d",
-		   obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
+              Log->Bug( "PullOrPush: obj points to non-exit %d",
+                        obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
               return;
             }
 
@@ -235,8 +236,8 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
           if ( !to_room )
             {
-              Bug( "PullOrPush: dest points to invalid room %d",
-		   obj->Value[OVAL_BUTTON_2] );
+              Log->Bug( "PullOrPush: dest points to invalid room %d",
+                        obj->Value[OVAL_BUTTON_2] );
               return;
             }
 

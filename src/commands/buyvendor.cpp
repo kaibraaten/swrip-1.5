@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "shop.hpp"
 #include "mud.hpp"
+#include "log.hpp"
 
 void do_buyvendor (Character *ch, char *argument)
 {
@@ -53,7 +54,7 @@ void do_buyvendor (Character *ch, char *argument)
 
   if ( (GetProtoObject (OBJ_VNUM_DEED) ) == NULL )
     {
-      Bug("BUYVENDOR: Deed is missing!");
+      Log->Bug("BUYVENDOR: Deed is missing!");
       return;
     }
 

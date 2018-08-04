@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "log.hpp"
 
 void do_zap( Character *ch, char *argument )
 {
@@ -55,7 +56,7 @@ void do_zap( Character *ch, char *argument )
 
   SetWaitState( ch, 1 * PULSE_VIOLENCE );
 
-  if ( wand->Value[2] > 0 )
+  if ( wand->Value[OVAL_WAND_CHARGES] > 0 )
     {
       if ( victim )
         {
@@ -74,15 +75,17 @@ void do_zap( Character *ch, char *argument )
             }
         }
 
-      retcode = CastSpellWithObject( wand->Value[3], wand->Value[0], ch, victim, obj );
+      retcode = CastSpellWithObject( wand->Value[OVAL_WAND_SPELL],
+                                     wand->Value[OVAL_WAND_LEVEL], ch, victim, obj );
+
       if ( retcode == rCHAR_DIED || retcode == rBOTH_DIED )
         {
-          Bug( "do_zap: char died", 0 );
+          Log->Bug( "do_zap: char died" );
           return;
         }
     }
 
-  if ( --wand->Value[2] <= 0 )
+  if ( --wand->Value[OVAL_WAND_CHARGES] <= 0 )
     {
       Act( AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, TO_ROOM );
       Act( AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, TO_CHAR );

@@ -4,11 +4,11 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_sabotage(Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  char buf[MAX_INPUT_LENGTH];
   int the_chance = 0, change = 0;
   Ship *ship = NULL;
 
@@ -118,8 +118,7 @@ void do_sabotage(Character *ch, char *argument )
   Act( AT_PLAIN, "$n finishes the work.", ch,
        NULL, argument , TO_ROOM );
 
-  sprintf(buf, "%s has sabotaged %s!", ch->Name, ship->Name );
-  Bug(buf, 0);
+  LogPrintf("%s has sabotaged %s!", ch->Name, ship->Name );
 
   LearnFromSuccess( ch, gsn_sabotage );
 }

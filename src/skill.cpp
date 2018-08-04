@@ -7,6 +7,7 @@
 #include "character.hpp"
 #include "script.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 int TopSN = 0;
 int TopHerb = 0;
@@ -109,7 +110,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
       switch ( SkillTable[sn]->Target )
         {
         default:
-          Bug( "Check_skill: bad target for sn %d.", sn );
+          Log->Bug( "Check_skill: bad target for sn %d.", sn );
           SendToCharacter( "Something went wrong...\r\n", ch );
           return true;
 
@@ -602,7 +603,7 @@ int SkillNumberFromSlot( int slot )
 
   if ( fBootDb )
     {
-      Bug( "%s: bad slot %d.", __FUNCTION__, slot );
+      Log->Bug( "%s: bad slot %d.", __FUNCTION__, slot );
       abort();
     }
 
@@ -999,7 +1000,7 @@ static void LoadSuccessMessages( lua_State *L, Skill *skill )
     }
   else
     {
-      Bug( "%s: Couldn't get Success messages", __FUNCTION__ );
+      Log->Bug( "%s: Couldn't get Success messages", __FUNCTION__ );
     }
 
   lua_pop( L, 1 );
@@ -1168,7 +1169,7 @@ static int L_SkillEntry( lua_State *L )
     {
       if ( TopSN >= MAX_SKILL )
 	{
-	  Bug( "%s: more skills than MAX_SKILL %d", __FUNCTION__, MAX_SKILL );
+	  Log->Bug( "%s: more skills than MAX_SKILL %d", __FUNCTION__, MAX_SKILL );
 	  abort();
 	}
 
@@ -1209,7 +1210,7 @@ static Skill *LoadSkillOrHerb( lua_State *L )
     }
   else
     {
-      Bug( "%s: Found skill without name", __FUNCTION__ );
+      Log->Bug( "%s: Found skill without name", __FUNCTION__ );
       return NULL;
     }
 
@@ -1239,7 +1240,7 @@ static Skill *LoadSkillOrHerb( lua_State *L )
 
       if( skill->Type < SKILL_UNKNOWN || skill->Type > SKILL_HERB )
 	{
-	  Bug( "%s: Invalid skill type: %d", __FUNCTION__, skill->Type );
+	  Log->Bug( "%s: Invalid skill type: %d", __FUNCTION__, skill->Type );
 	  skill->Type = SKILL_UNKNOWN;
 	}
     }
@@ -1264,7 +1265,7 @@ static Skill *LoadSkillOrHerb( lua_State *L )
 	}
       else
 	{
-	  Bug( "%s: unknown skill/spell code %s", __FUNCTION__, funName );
+	  Log->Bug( "%s: unknown skill/spell code %s", __FUNCTION__, funName );
 	  skill->FunctionName = CopyString( "" );
 	}
     }
@@ -1347,7 +1348,7 @@ static int L_HerbEntry( lua_State *L )
     {
       if ( TopHerb >= MAX_HERB )
         {
-          Bug( "%s: more herbs than MAX_HERB %d", __FUNCTION__, MAX_HERB );
+          Log->Bug( "%s: more herbs than MAX_HERB %d", __FUNCTION__, MAX_HERB );
           abort();
         }
 

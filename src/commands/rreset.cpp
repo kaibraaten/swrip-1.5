@@ -1,6 +1,7 @@
 #include "reset.hpp"
 #include "mud.hpp"
 #include "character.hpp"
+#include "log.hpp"
 
 void do_rreset( Character *ch, char *argument )
 {
@@ -13,7 +14,7 @@ void do_rreset( Character *ch, char *argument )
       if ( !pRoom )
         {
           SendToCharacter( "Your room pointer got lost. Reset mode off.\r\n", ch);
-          Bug("do_rreset: %s's dest_buf points to invalid room", ch->Name);
+          Log->Bug("do_rreset: %s's dest_buf points to invalid room", ch->Name);
         }
 
       ch->SubState = SUB_NONE;

@@ -39,6 +39,7 @@
 #include "clan.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 /* Defines by Narn for new mudprog parsing, used as
    return values from mprog_do_command. */
@@ -3281,12 +3282,12 @@ void ProgBug( const char *str, const Character *mob )
       /* It's supermob.  In MudProgSetSupermob and RoomProgSetSupermob, the description
          was set to indicate the object or room, so we just need to show
          the description in the bug message. */
-      Bug( "%s, %s.", str,
-	   mob->Description == NULL ? "(unknown)" : mob->Description );
+      Log->Bug( "%s, %s.", str,
+                mob->Description == NULL ? "(unknown)" : mob->Description );
     }
   else
     {
-      Bug( "%s, Mob #%ld.", str, mob->Prototype->Vnum );
+      Log->Bug( "%s, Mob #%ld.", str, mob->Prototype->Vnum );
     }
 }
 

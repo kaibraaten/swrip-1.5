@@ -1,18 +1,15 @@
+#include <cassert>
 #include "mud.hpp"
 #include "character.hpp"
 
 /* Prints the argument to all the rooms around the mobile */
 void do_mpasound( Character *ch, char *argument )
 {
-  Room *was_in_room;
-  Exit *pexit;
-  int mobflags;
+  Room *was_in_room = nullptr;
+  Exit *pexit = nullptr;
+  int mobflags = 0;
 
-  if (!ch )
-    {
-      Bug("Nonexistent ch in do_mpasound!",0);
-      return;
-    }
+  assert(ch != nullptr);
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;

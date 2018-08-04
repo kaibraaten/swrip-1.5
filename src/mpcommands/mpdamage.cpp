@@ -1,3 +1,4 @@
+#include <cassert>
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
@@ -22,6 +23,7 @@ void do_mp_damage( Character *ch, char *argument )
       SendToCharacter( "Huh?\r\n", ch );
       return;
     }
+
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
@@ -87,16 +89,8 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
   bool npcvict;
   Object *damobj;
 
-  if ( !ch )
-    {
-      Bug( "Damage: null ch!", 0 );
-      return rERROR;
-    }
-  if ( !victim )
-    {
-      ProgBug( "Damage: null victim!", ch );
-      return rVICT_DIED;
-    }
+  assert(ch != nullptr);
+  assert(victim != nullptr);
 
   if ( victim->Position == POS_DEAD )
     {

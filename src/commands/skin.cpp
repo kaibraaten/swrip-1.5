@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "log.hpp"
 
 void do_skin( Character *ch, char *argument)
 {
@@ -53,7 +54,7 @@ void do_skin( Character *ch, char *argument)
 
   if ( GetProtoObject( OBJ_VNUM_SKIN ) == NULL )
     {
-      Bug( "Vnum %d (OBJ_VNUM_SKIN) not found for do_skin!", OBJ_VNUM_SKIN);
+      Log->Bug( "Vnum %d (OBJ_VNUM_SKIN) not found for do_skin!", OBJ_VNUM_SKIN);
       return;
     }
 

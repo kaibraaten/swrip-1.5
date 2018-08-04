@@ -1,3 +1,4 @@
+#include <cassert>
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
@@ -57,11 +58,7 @@ void do_vassign( Character *ch, char *argument )
              ch->Name, r_lo, r_hi );
   AssignAreaTo( victim );        /* Put back by Thoric on 02/07/96 */
 
-  if ( !victim->PCData->Build.Area )
-    {
-      Bug( "rassign: AssignAreaTo failed", 0 );
-      return;
-    }
+  assert(victim->PCData->Build.Area != nullptr);
 
   if (r_lo == 0)                                /* Scryn 8/12/95 */
     {
