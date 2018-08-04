@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 static bool is_legal_kill(Character *ch, Character *vch);
 
@@ -12,7 +13,6 @@ void do_hitall( Character *ch, char *argument )
   short nvict = 0;
   short nhit = 0;
   short percent = 0;
-  char logbuf[MAX_STRING_LENGTH];
 
   if ( IsBitSet(ch->InRoom->Flags, ROOM_SAFE) )
     {
@@ -41,8 +41,7 @@ void do_hitall( Character *ch, char *argument )
 
       if ( IsBitSet(vch->Flags, PLR_AFK))
         {
-          sprintf( logbuf , "%s just attacked %s with HITALL with an afk flag on!." , ch->Name, vch->Name );
-          LogPrintf( logbuf );
+          Log->Info("%s just attacked %s with HITALL with an afk flag on!.", ch->Name, vch->Name);
         }
 
       if ( Chance(ch, percent) )

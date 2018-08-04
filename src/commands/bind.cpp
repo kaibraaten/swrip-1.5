@@ -2,13 +2,13 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 static bool aff_paralysis( Character *ch, Character *victim );
 
 void do_bind ( Character *ch , char *argument )
 {
-  Character *victim;
-  char logbuf[MAX_STRING_LENGTH];
+  Character *victim = nullptr;
 
   if ( IsNullOrEmpty( argument ) )
     {
@@ -30,8 +30,7 @@ void do_bind ( Character *ch , char *argument )
 
   if ( IsBitSet(victim->Flags, PLR_AFK))
     {
-      sprintf( logbuf , "%s just bound %s with an afk flag on!." , ch->Name, victim->Name );
-      LogPrintf( logbuf );
+      Log->Info( "%s just bound %s with an afk flag on!." , ch->Name, victim->Name );
     }
 
   if ( IsSafe( ch, victim ) )

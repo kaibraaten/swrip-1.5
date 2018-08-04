@@ -235,14 +235,14 @@ int SwripMain(int argc, char *argv[])
    */
   sprintf(log_buf,"PID: %d",getpid());
   bootup = true;
-  LogPrintf(log_buf);
+  Log->Info(log_buf);
 #ifdef SWRIP_USE_IMC
-  LogPrintf( "Starting IMC2" );
+  Log->Info( "Starting IMC2" );
   ImcStartup( false, imcsocket, fCopyOver );
 #endif
-  LogPrintf("Booting Database");
+  Log->Info("Booting Database");
   BootDatabase(fCopyOver);
-  LogPrintf("Initializing socket");
+  Log->Info("Initializing socket");
 
   if( !fCopyOver )
     {
@@ -250,7 +250,7 @@ int SwripMain(int argc, char *argv[])
     }
 
   sprintf( log_buf, "SWRiP 1.5 ready on port %d.", SysData.Port );
-  LogPrintf( log_buf );
+  Log->Info( log_buf );
   bootup = false;
   GameLoop();
   closesocket( control );
@@ -260,7 +260,7 @@ int SwripMain(int argc, char *argv[])
   /*
    * That's all, folks.
    */
-  LogPrintf( "Normal termination of game." );
+  Log->Info( "Normal termination of game." );
   exit( 0 );
   return 0;
 }
@@ -342,13 +342,13 @@ static void CaughtAlarm( int dummy )
     {
       FD_CLR( newdesc, &in_set );
       FD_CLR( newdesc, &out_set );
-      LogPrintf( "clearing newdesc" );
+      Log->Info( "clearing newdesc" );
     }
 
   GameLoop();
   closesocket( control );
 
-  LogPrintf( "Normal termination of game." );
+  Log->Info( "Normal termination of game." );
   exit( 0 );
 }
 
@@ -358,7 +358,7 @@ static bool CheckBadSocket( socket_t desc )
     {
       FD_CLR( desc, &in_set );
       FD_CLR( desc, &out_set );
-      LogPrintf( "Bad FD caught and disposed." );
+      Log->Info( "Bad FD caught and disposed." );
       return true;
     }
 
@@ -731,7 +731,7 @@ static void NewDescriptor( socket_t new_desc )
 #endif
   sprintf( log_buf, "Sock.sinaddr:  %s, port %hd.",
            buf, dnew->Remote.Port );
-  LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
+  Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
 
   dnew->Remote.HostIP = CopyString( buf );
 
@@ -802,7 +802,7 @@ static void NewDescriptor( socket_t new_desc )
       SysData.TimeOfMaxPlayersEver = CopyString(buf);
       SysData.MaxPlayersEver = SysData.MaxPlayersThisBoot;
       sprintf( log_buf, "Broke all-time maximum player record: %d", SysData.MaxPlayersEver );
-      LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
+      Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
       SaveSystemData( SysData );
     }
@@ -914,7 +914,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
   if ( dclose->Character )
     {
       sprintf( log_buf, "Closing link to %s.", ch->Name );
-      LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
+      Log->LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
 
       if ( dclose->ConnectionState == CON_PLAYING
            ||   dclose->ConnectionState == CON_EDITING )
@@ -958,7 +958,7 @@ static bool ReadFromDescriptor( Descriptor *d )
   if ( iStart >= sizeof(d->InBuffer) - 10 )
     {
       sprintf( log_buf, "%s input overflow!", d->Remote.Hostname );
-      LogPrintf( log_buf );
+      Log->Info( log_buf );
       WriteToDescriptor( d->Socket,
                            "\r\n*** PUT A LID ON IT!!! ***\r\n", 0 );
       return false;
@@ -976,7 +976,7 @@ static bool ReadFromDescriptor( Descriptor *d )
 
       if ( nRead == 0 )
         {
-          LogStringPlus( "EOF encountered on read.", LOG_COMM, SysData.LevelOfLogChannel );
+          Log->LogStringPlus( "EOF encountered on read.", LOG_COMM, SysData.LevelOfLogChannel );
           return false;
         }
 
@@ -988,7 +988,7 @@ static bool ReadFromDescriptor( Descriptor *d )
             }
           else
             {
-              LogStringPlus( strerror( GETERROR ), LOG_COMM, SysData.LevelOfLogChannel );
+              Log->LogStringPlus( strerror( GETERROR ), LOG_COMM, SysData.LevelOfLogChannel );
               return false;
             }
         }
@@ -1281,10 +1281,8 @@ bool WriteToDescriptor( socket_t desc, char *txt, int length )
 	if( ( nWrite = send( desc, txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR)
 #endif
         {
-          char logbuf[MAX_STRING_LENGTH];
-          sprintf(logbuf, "Write_to_descriptor: error on socket %d: %s",
-		  desc, strerror( GETERROR ) );
-          LogPrintf(logbuf);
+          Log->Bug("Write_to_descriptor: error on socket %d: %s",
+                   desc, strerror( GETERROR ) );
           perror( "Write_to_descriptor" );
           return false;
         }
@@ -1336,7 +1334,7 @@ bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
               SendToCharacter( "Reconnecting.\r\n", ch );
               Act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
               sprintf( log_buf, "%s@%s reconnected.", ch->Name, d->Remote.Hostname );
-              LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
+              Log->LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
               d->ConnectionState = CON_PLAYING;
             }
           return true;
@@ -1370,7 +1368,7 @@ bool CheckMultiplaying( Descriptor *d, const char *name )
 
           WriteToBuffer( d, "Sorry multi-playing is not allowed ... have you other character quit first.\r\n", 0 );
           sprintf( log_buf, "%s attempting to multiplay with %s.", dold->Original ? dold->Original->Name : dold->Character->Name , d->Character->Name );
-          LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
+          Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
           d->Character = NULL;
           FreeCharacter( d->Character );
           return true;
@@ -1401,7 +1399,7 @@ unsigned char CheckPlaying( Descriptor *d, const char *name, bool kick )
             {
               WriteToBuffer( d, "Already connected - try again.\r\n", 0 );
               sprintf( log_buf, "%s already connected.", ch->Name );
-              LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
+              Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
               return BERR;
             }
           if ( !kick )
@@ -1423,7 +1421,7 @@ unsigned char CheckPlaying( Descriptor *d, const char *name, bool kick )
                ch, NULL, NULL, TO_ROOM );
           sprintf( log_buf, "%s@%s reconnected, kicking off old link.",
                    ch->Name, d->Remote.Hostname );
-          LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
+          Log->LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
 
           d->ConnectionState = cstate;
           return true;

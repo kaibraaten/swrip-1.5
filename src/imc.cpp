@@ -512,16 +512,14 @@ WHO_TEMPLATE *whot;
 /* Generic log function which will route the log messages to the appropriate system logging function */
 static void imclog( const char *format, ... )
 {
-   char buf[LGST], buf2[LGST];
+  char buf[LGST];
    va_list ap;
 
    va_start( ap, format );
    vsprintf( buf, format, ap );
    va_end( ap );
 
-   sprintf( buf2, "IMC: %s", buf );
-
-   LogPrintf( buf2 );
+   Log->Info("IMC: %s", buf );
 }
 
 /* Generic bug logging function which will route the message to the appropriate function that handles bug logs */

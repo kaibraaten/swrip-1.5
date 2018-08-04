@@ -445,7 +445,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
             {
               pMobIndex = GetProtoMobile( vnum );
               sprintf( buf, "Cleaning mobile: %ld", vnum );
-	      LogStringPlus( buf, LOG_BUILD, SysData.LevelOfLogChannel );
+	      Log->LogStringPlus( buf, LOG_BUILD, SysData.LevelOfLogChannel );
               CleanMobile( pMobIndex );
               oldmob = true;
             }
@@ -675,7 +675,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
             {
               pObjIndex = GetProtoObject( vnum );
               sprintf( buf, "Cleaning object: %ld", vnum );
-              LogStringPlus( buf, LOG_BUILD, SysData.LevelOfLogChannel );
+              Log->LogStringPlus( buf, LOG_BUILD, SysData.LevelOfLogChannel );
 	       CleanObject( pObjIndex );
               oldobj = true;
             }
@@ -852,7 +852,7 @@ static void LoadResets( Area *tarea, FILE *fp )
            */
           char buf[MAX_STRING_LENGTH];
           sprintf( buf, "Cleaning resets: %s", tarea->Name );
-          LogStringPlus( buf, LOG_BUILD, SysData.LevelOfLogChannel );
+          Log->LogStringPlus( buf, LOG_BUILD, SysData.LevelOfLogChannel );
           CleanResets( tarea );
         }
     }
@@ -944,7 +944,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
               char buf[MAX_STRING_LENGTH];
               pRoomIndex = GetRoom( vnum );
               sprintf( buf, "Cleaning room: %ld", vnum );
-              LogStringPlus( buf, LOG_BUILD, SysData.LevelOfLogChannel );
+              Log->LogStringPlus( buf, LOG_BUILD, SysData.LevelOfLogChannel );
               CleanRoom( pRoomIndex );
               oldroom = true;
             }
@@ -2233,7 +2233,7 @@ void AssignAreaTo( Character *ch )
       if ( !tarea )
         {
           sprintf( buf, "Creating area entry for %s", ch->Name );
-          LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
+          Log->LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
           AllocateMemory( tarea, Area, 1 );
           LINK( tarea, FirstBuild, LastBuild, Next, Previous );
           sprintf( buf, "{PROTO} %s's area in progress", ch->Name );
@@ -2247,7 +2247,7 @@ void AssignAreaTo( Character *ch )
       else
         {
           sprintf( buf, "Updating area entry for %s", ch->Name );
-          LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
+          Log->LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
         }
       tarea->VnumRanges.Room.First = ch->PCData->Build.VnumRanges.Room.First;
       tarea->VnumRanges.Object.First = ch->PCData->Build.VnumRanges.Object.First;

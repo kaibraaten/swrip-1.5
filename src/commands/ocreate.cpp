@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_ocreate( Character *ch, char *argument )
 {
@@ -78,7 +79,7 @@ void do_ocreate( Character *ch, char *argument )
   if ( !pObjIndex )
     {
       SendToCharacter( "Error.\r\n", ch );
-      LogPrintf( "do_ocreate: MakeObject failed." );
+      Log->Bug( "do_ocreate: MakeObject failed." );
       return;
     }
 

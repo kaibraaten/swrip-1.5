@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_pricevendor (Character *ch, char *argument)
 {
@@ -10,7 +11,6 @@ void do_pricevendor (Character *ch, char *argument)
   Character *ch1 = NULL;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  char logbuf[MAX_INPUT_LENGTH];
   Object *obj = NULL;
   struct tm *tms = NULL;
 
@@ -19,7 +19,7 @@ void do_pricevendor (Character *ch, char *argument)
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter("usage:> pricevendor <item> <cost>\r\n",ch);
+      SendToCharacter("Syntax: pricevendor <item> <cost>\r\n",ch);
       return;
     }
 
@@ -36,6 +36,7 @@ void do_pricevendor (Character *ch, char *argument)
       SendToCharacter ("This isnt your vendor!\r\n",ch);
       return;
     }
+
   if ( StrCmp( ch1->Name, vendor->Owner ) )
     {
       SendToCharacter ("Trying to steal huh?\r\n",ch);
@@ -45,14 +46,13 @@ void do_pricevendor (Character *ch, char *argument)
       ch->PCData->HelledBy = CopyString("VendorCheat");
       Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
       CharacterFromRoom(ch);
-      CharacterToRoom(ch, GetRoom(6));
+      CharacterToRoom(ch, GetRoom(ROOM_VNUM_HELL));
       Act(AT_MAGIC, "$n appears in a could of hellish light.", ch, NULL, ch, TO_NOTVICT);
       do_look(ch, "auto");
       Echo(ch, "The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for 24 Hours.\r\n");
       SaveCharacter(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
-      sprintf( logbuf , "%s just tried to abuse the vendor bug!" , ch->Name);
-      LogPrintf( logbuf );
+      Log->Info("%s just tried to abuse the vendor bug!" , ch->Name);
       return;
     }
 

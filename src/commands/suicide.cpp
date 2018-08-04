@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_suicide( Character *ch, char *argument )
 {
@@ -21,7 +22,7 @@ void do_suicide( Character *ch, char *argument )
   if ( StrCmp( EncodeString( argument ), ch->PCData->Password ) )
     {
       SendToCharacter( "Sorry wrong password.\r\n", ch );
-      LogPrintf( "%s attempting to commit suicide... WRONG PASSWORD!" , ch->Name );
+      Log->Info( "%s attempting to commit suicide... WRONG PASSWORD!" , ch->Name );
       return;
     }
 
@@ -35,7 +36,7 @@ void do_suicide( Character *ch, char *argument )
 
   Act( AT_BLOOD, "With a sad determination and trembling hands you slit your own throat!",  ch, NULL, NULL, TO_CHAR    );
   Act( AT_BLOOD, "Cold shivers run down your spine as you watch $n slit $s own throat!",  ch, NULL, NULL, TO_ROOM );
-  LogPrintf( "%s just committed suicide." , ch->Name );
+  Log->Info( "%s just committed suicide.", ch->Name );
 
   SetCurrentGlobalCharacter(ch);
   RawKill( ch, ch );

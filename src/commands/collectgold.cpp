@@ -3,14 +3,13 @@
 #include "shop.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_collectgold (Character *ch, char *argument)
 {
   Character *vendor = NULL;
   Character *ch1 = NULL;
   long gold = 0;
-  char buf [MAX_INPUT_LENGTH];
-  char logbuf [MAX_INPUT_LENGTH];
   char name[MAX_INPUT_LENGTH];
   struct tm *tms = NULL;
 
@@ -47,17 +46,14 @@ void do_collectgold (Character *ch, char *argument)
       Echo(ch, "The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for 24 Hours.\r\n");
       SaveCharacter(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
-      sprintf( logbuf , "%s just tried to abuse the vendor bug!" , ch->Name);
-      LogPrintf( logbuf );
+      Log->Info( "%s just tried to abuse the vendor bug!" , ch->Name);
       return;
     }
 
 
-  if ( !(ch == ch1) )
+  if ( ch != ch1 )
     {
-      sprintf (buf, "collectgold: %s and ch1 = %s\r\n", name, ch1->Name);
-      LogPrintf(buf);
-
+      Log->Info("collectgold: %s and ch1 = %s\r\n", name, ch1->Name);
       SendToCharacter ("This isnt your vendor!\r\n",ch);
       return;
     }

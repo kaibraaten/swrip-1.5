@@ -1,6 +1,7 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
+#include "log.hpp"
 
 void do_order( Character *ch, char *argument )
 {
@@ -75,8 +76,7 @@ void do_order( Character *ch, char *argument )
 
   if ( found )
     {
-      sprintf( log_buf, "%s: order %s.", ch->Name, argbuf );
-      LogStringPlus( log_buf, LOG_NORMAL, ch->TopLevel );
+      Log->Info("%s: order %s.", ch->Name, argbuf );
       SendToCharacter( "Ok.\r\n", ch );
       SetWaitState( ch, 12 );
     }

@@ -2,11 +2,11 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_kick( Character *ch, char *argument )
 {
   Character *victim = NULL;
-  char logbuf[MAX_STRING_LENGTH];
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
@@ -22,10 +22,8 @@ void do_kick( Character *ch, char *argument )
 
   if ( IsBitSet(victim->Flags, PLR_AFK))
     {
-      sprintf( logbuf , "%s just attacked %s with an afk flag on!." , ch->Name, victim->Name );
-      LogPrintf( logbuf );
+      Log->Info("%s just attacked %s with an afk flag on!." , ch->Name, victim->Name );
     }
-
 
   SetWaitState( ch, SkillTable[gsn_kick]->Beats );
 

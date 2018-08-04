@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "log.hpp"
 
 static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt );
 
@@ -235,7 +236,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
                    victim->Name,
                    (IsNpc(ch) ? ch->ShortDescr : ch->Name),
 		   victim->InRoom->Vnum );
-          LogPrintf( log_buf );
+          Log->Info( log_buf );
           ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
 
 

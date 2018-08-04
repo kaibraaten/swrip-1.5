@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "log.hpp"
 
 ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
 {
@@ -60,7 +61,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
     SendToCharacter( "Ok.\r\n", ch );
 
   sprintf( buf, "%s has charmed %s.", ch->Name, victim->Name);
-  LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
+  Log->LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
 
   return rNONE;
 }

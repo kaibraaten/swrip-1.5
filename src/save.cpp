@@ -1091,7 +1091,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
           sprintf( buf, "%s player data for: %s (%dK)",
                    preload ? "Preloading" : "Loading", ch->Name,
                    (int) fst.st_size/1024 );
-          LogStringPlus( buf, LOG_COMM, LEVEL_GREATER );
+          Log->LogStringPlus( buf, LOG_COMM, LEVEL_GREATER );
         }
     }
   /* else no player file */

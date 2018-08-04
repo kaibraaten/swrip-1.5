@@ -3661,7 +3661,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 
       if( ch )
 	{
-	  LogPrintf( "%s(%s) was just destroyed by %s.",
+	  Log->Info( "%s(%s) was just destroyed by %s.",
 		      ship->Name, ship->PersonalName, ch->Name );
 
 	  xp =  ( GetRequiredXpForLevel( GetAbilityLevel( ch, PILOTING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, PILOTING_ABILITY ) ) );
@@ -3671,7 +3671,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 	}
       else
 	{
-	  LogPrintf( "%s(%s) was just destroyed by %s.",
+	  Log->Info( "%s(%s) was just destroyed by %s.",
 		      ship->Name, ship->PersonalName, (assaulter ? assaulter->PersonalName : "a collision" ) );
 	}
 
@@ -3774,12 +3774,12 @@ void DestroyShip( Ship *ship, Character *killer )
 
       if ( killer )
         {
-	  LogPrintf( "%s(%s) was just destroyed by %s.",
+	  Log->Info( "%s(%s) was just destroyed by %s.",
 		      lship->Name, lship->PersonalName, killer->Name );
         }
       else
         {
-	  LogPrintf( "%s(%s) was just destroyed by a mob ship.",
+	  Log->Info( "%s(%s) was just destroyed by a mob ship.",
 		      lship->Name, lship->PersonalName );
         }
 

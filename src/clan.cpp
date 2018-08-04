@@ -74,7 +74,7 @@ static void LoadClanStoreroom( const Clan *clan )
   if ( clan->Storeroom == INVALID_VNUM
        || (storeroom = GetRoom( clan->Storeroom )) == NULL )
     {
-      LogPrintf( "Storeroom not found." );
+      Log->Bug( "Storeroom for clan %s not found.", clan->Name );
       return;
     }
 
@@ -84,7 +84,7 @@ static void LoadClanStoreroom( const Clan *clan )
     {
       int iNest = 0;
 
-      LogPrintf( "Loading clan storage room" );
+      Log->Info( "Loading clan storage room" );
       RoomProgSetSupermob(storeroom);
 
       for ( iNest = 0; iNest < MAX_NEST; iNest++ )
@@ -134,7 +134,7 @@ static void LoadClanStoreroom( const Clan *clan )
     }
   else
     {
-      LogPrintf( "Cannot open clan vault" );
+      Log->Bug( "Cannot open clan vault for %s", clan->Name );
     }
 }
 #endif
@@ -684,7 +684,7 @@ static int L_ClanEntry( lua_State *L )
     {
       clan = AllocateClan();
       clan->Name = CopyString( lua_tostring( L, idx ) );
-      LogPrintf( "Loading %s", clan->Name );
+      Log->Info( "Loading %s", clan->Name );
     }
   else
     {
