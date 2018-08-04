@@ -35,6 +35,7 @@
 #include "area.hpp"
 #include "script.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 ShipRepository *Ships = nullptr;
 
@@ -1165,9 +1166,9 @@ void EchoToShip( int color, const Ship *ship, const char *argument )
 	}
       else
 	{
-	  Bug( "%s:%d %s(): Ship '%s (%s)' has invalid room vnum %d",
-	       __FILE__, __LINE__, __FUNCTION__,
-	       ship->Name, ship->PersonalName, roomVnum );
+	  Log->Bug( "%s:%d %s(): Ship '%s (%s)' has invalid room vnum %d",
+                    __FILE__, __LINE__, __FUNCTION__,
+                    ship->Name, ship->PersonalName, roomVnum );
 	}
     }
 }

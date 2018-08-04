@@ -36,6 +36,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 #ifdef _WIN32
 #include <process.h>
@@ -139,7 +140,7 @@ void do_copyover( Character * ch, char *argument )
 
   if( error_code == -1 )
   {
-    Bug( "Copyover failure, executable could not be run." );
+    Log->Bug( "Copyover failure, executable could not be run." );
     fprintf( stdout, "Failed to run %s\n", "swrip" );
     Echo( ch, "Copyover FAILED!\r\n" );
   }
@@ -208,7 +209,7 @@ void RecoverFromCopyover( void )
 
     if( desc == INVALID_SOCKET )
     {
-      Bug( "ObtainSocket returned error." );
+      Log->Bug( "ObtainSocket returned error." );
       continue;
     }
 #endif
@@ -221,7 +222,7 @@ void RecoverFromCopyover( void )
     /* Write something, and check if it goes error-free */
     if( !WriteToDescriptor( d->Socket, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )
     {
-      Bug("RecoverFromCopyover: couldn't write to socket %d", desc);
+      Log->Bug("RecoverFromCopyover: couldn't write to socket %d", desc);
       FreeDescriptor(d);
       continue;
     }

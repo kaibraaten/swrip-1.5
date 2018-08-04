@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_reset( Character *ch, char *argument )
 {
@@ -21,14 +22,16 @@ void do_reset( Character *ch, char *argument )
           for ( tmp = FirstBuild; tmp; tmp = tmp->Next )
 	    if ( tmp == pArea )
               break;
+
           if ( !tmp )
             for ( tmp = FirstArea; tmp; tmp = tmp->Next )
               if ( tmp == pArea )
                 break;
+
           if ( !tmp )
             {
               SendToCharacter("Your area pointer got lost. Reset mode off.\r\n", ch);
-              Bug("do_reset: %s's dest_buf points to invalid area", ch->Name);
+              Log->Bug("do_reset: %s's dest_buf points to invalid area", ch->Name);
               ch->SubState = SUB_NONE;
               FreeMemory(ch->dest_buf);
               return;

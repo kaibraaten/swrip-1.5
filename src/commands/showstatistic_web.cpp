@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_showstatistic_web( Character *ch, char *argument )
 {
@@ -13,7 +14,10 @@ void do_showstatistic_web( Character *ch, char *argument )
   whoout = fopen( WEBWHO_FILE, "w" );
 
   if( !whoout )
-    Bug( "fopen: WEBWHO won't open" );
+    {
+      Log->Bug( "fopen: WEBWHO won't open" );
+      return;
+    }
 
   race = GetRaceFromName( argument );
   if ( race < 0 )

@@ -9,6 +9,7 @@
 #include "spaceobject.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 struct UserData
 {
@@ -97,7 +98,7 @@ void do_look( Character *ch, char *argument )
     }
   else if ( door != DIR_INVALID )
     {
-      Bug("%s:%s:%d: door != DIR_INVALID", __FUNCTION__, __FILE__, __LINE__);
+      Log->Bug("%s:%s:%d: door != DIR_INVALID", __FUNCTION__, __FILE__, __LINE__);
       SendToCharacter( "Nothing special there.\r\n", ch );
       return;
     }

@@ -4,6 +4,7 @@
 #include "editor.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_oset( Character *ch, char *argument )
 {
@@ -40,7 +41,7 @@ void do_oset( Character *ch, char *argument )
       if ( !ch->dest_buf )
         {
 	  SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
-          Bug( "do_oset: sub_obj_extra: NULL ch->dest_buf", 0 );
+          Log->Bug( "do_oset: sub_obj_extra: NULL ch->dest_buf" );
           ch->SubState = SUB_NONE;
           return;
         }
@@ -63,7 +64,7 @@ void do_oset( Character *ch, char *argument )
       if ( !ch->dest_buf )
         {
           SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
-          Bug( "do_oset: sub_obj_long: NULL ch->dest_buf", 0 );
+          Log->Bug( "do_oset: sub_obj_long: NULL ch->dest_buf" );
           ch->SubState = SUB_NONE;
           return;
         }

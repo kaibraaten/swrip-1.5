@@ -29,6 +29,7 @@
 #include "script.hpp"
 #include "board.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 /* Defines for voting on notes. -- Narn */
 #define VOTE_NONE 0
@@ -481,13 +482,13 @@ static void RemoveNote( Board *board, Note *pnote )
 {
   if ( !board )
     {
-      Bug( "note remove: null board", 0 );
+      Log->Bug( "note remove: null board", 0 );
       return;
     }
 
   if ( !pnote )
     {
-      Bug( "note remove: null pnote", 0 );
+      Log->Bug( "note remove: null pnote", 0 );
       return;
     }
 
@@ -532,7 +533,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
   if ( !ch->Desc )
     {
-      Bug( "%s: no descriptor", __FUNCTION__ );
+      Log->Bug( "%s: no descriptor", __FUNCTION__ );
       return;
     }
 
@@ -545,7 +546,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->ItemType != ITEM_PAPER )
         {
-          Bug("%s: player not holding paper", __FUNCTION__);
+          Log->Bug("%s: player not holding paper", __FUNCTION__);
           StopEditing( ch );
           return;
         }
@@ -1392,7 +1393,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                 }
               else
                 {
-                  Bug("OperateOnNote(): Invalid value for take: %d", take);
+                  Log->Bug("OperateOnNote(): Invalid value for take: %d", take);
                   abort();
                 }
             }

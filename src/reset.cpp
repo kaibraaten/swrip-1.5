@@ -33,11 +33,13 @@
 #include <array>
 #include <cstring>
 #include <cctype>
+#include <cassert>
 #include "reset.hpp"
 #include "mud.hpp"
 #include "character.hpp"
 #include "planet.hpp"
 #include "area.hpp"
+#include "log.hpp"
 
 static bool IsRoomReset( const Reset *pReset, const Room *aRoom, const Area *pArea );
 static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 );
@@ -1456,6 +1458,8 @@ static int GenerateItemLevel( const Area *pArea, const ProtoObject *pObjIndex )
  */
 void ResetArea( Area *pArea )
 {
+  assert(pArea != nullptr);
+
   Reset *pReset = NULL;
   Reset *next_reset = NULL;
   Character *mob = NULL;
@@ -1470,12 +1474,6 @@ void ResetArea( Area *pArea )
   int level = 0;
   int *plc = 0;
 
-  if ( !pArea )
-    {
-      Bug( "%s: NULL pArea", __FUNCTION__ );
-      return;
-    }
-
   if ( !pArea->FirstReset )
     {
       return;
@@ -1488,13 +1486,13 @@ void ResetArea( Area *pArea )
       switch( pReset->Command )
         {
         default:
-          Bug( "%s: %s: bad command %c.", pArea->Filename, __FUNCTION__, pReset->Command );
+          Log->Bug( "%s: %s: bad command %c.", pArea->Filename, __FUNCTION__, pReset->Command );
           break;
 
         case 'M':
           if ( !(pMobIndex = GetProtoMobile(pReset->Arg1)) )
             {
-              Bug( "%s: %s: 'M': bad mob vnum %d.", pArea->Filename, __FUNCTION__, pReset->Arg1 );
+              Log->Bug( "%s: %s: 'M': bad mob vnum %d.", pArea->Filename, __FUNCTION__, pReset->Arg1 );
 
               if( !bootup )
                 {
@@ -1507,7 +1505,7 @@ void ResetArea( Area *pArea )
 
           if ( !(pRoomIndex = GetRoom(pReset->Arg3)) )
             {
-              Bug( "%s: %s: 'M': bad room vnum %d.", pArea->Filename, __FUNCTION__, pReset->Arg3 );
+              Log->Bug( "%s: %s: 'M': bad room vnum %d.", pArea->Filename, __FUNCTION__, pReset->Arg3 );
 
               if( !bootup )
                 {
@@ -1555,7 +1553,7 @@ void ResetArea( Area *pArea )
         case 'E':
           if ( !(pObjIndex = GetProtoObject(pReset->Arg1)) )
             {
-              Bug( "%s: %s: 'E' or 'G': bad obj vnum %d.",
+              Log->Bug( "%s: %s: 'E' or 'G': bad obj vnum %d.",
 		   pArea->Filename, __FUNCTION__, pReset->Arg1 );
 
               if( !bootup )
@@ -1598,7 +1596,7 @@ void ResetArea( Area *pArea )
         case 'O':
           if ( !(pObjIndex = GetProtoObject(pReset->Arg1)) )
             {
-              Bug( "%s: %s: 'O': bad obj vnum %d.",
+              Log->Bug( "%s: %s: 'O': bad obj vnum %d.",
 		   pArea->Filename, __FUNCTION__, pReset->Arg1 );
 
               if( !bootup )
@@ -1612,7 +1610,7 @@ void ResetArea( Area *pArea )
 
           if ( !(pRoomIndex = GetRoom(pReset->Arg3)) )
             {
-              Bug( "%s: %s: 'O': bad room vnum %d.",
+              Log->Bug( "%s: %s: 'O': bad room vnum %d.",
 		   pArea->Filename, __FUNCTION__, pReset->Arg3 );
 
               if( !bootup )
@@ -1641,7 +1639,7 @@ void ResetArea( Area *pArea )
         case 'P':
           if ( !(pObjIndex = GetProtoObject(pReset->Arg1)) )
             {
-              Bug( "%s: %s: 'P': bad obj vnum %d.",
+              Log->Bug( "%s: %s: 'P': bad obj vnum %d.",
 		   pArea->Filename, __FUNCTION__, pReset->Arg1 );
 
               if( !bootup )
@@ -1657,7 +1655,7 @@ void ResetArea( Area *pArea )
             {
               if ( !(pObjToIndex = GetProtoObject(pReset->Arg3)) )
                 {
-                  Bug( "%s: %s: 'P': bad objto vnum %d.",
+                  Log->Bug( "%s: %s: 'P': bad objto vnum %d.",
 		       pArea->Filename, __FUNCTION__, pReset->Arg3 );
 
                   if( !bootup )
@@ -1693,7 +1691,7 @@ void ResetArea( Area *pArea )
 		{
 		  if ( !(to_obj = to_obj->LastContent) )
 		    {
-		      Bug( "%s: %s: 'P': Invalid nesting obj %d.",
+		      Log->Bug( "%s: %s: 'P': Invalid nesting obj %d.",
 			   pArea->Filename, __FUNCTION__, pReset->Arg1 );
 		      iNest = -1;
 		      break;
@@ -1721,7 +1719,7 @@ void ResetArea( Area *pArea )
                 {
                   if ( !(pObjToIndex = GetProtoObject(pReset->Arg3)) )
                     {
-                      Bug( "%s: %s: 'T': bad objto vnum %d.",
+                      Log->Bug( "%s: %s: 'T': bad objto vnum %d.",
 			   pArea->Filename, __FUNCTION__, pReset->Arg3 );
                       if( !bootup )
                         {
@@ -1758,7 +1756,7 @@ void ResetArea( Area *pArea )
             {
               if ( !(pRoomIndex = GetRoom(pReset->Arg3)) )
                 {
-                  Bug( "%s: %s: 'T': bad room %d.",
+                  Log->Bug( "%s: %s: 'T': bad room %d.",
 		       pArea->Filename, __FUNCTION__, pReset->Arg3 );
 
                   if( !bootup )
@@ -1788,7 +1786,7 @@ void ResetArea( Area *pArea )
             {
               if ( !(pObjToIndex = GetProtoObject(pReset->Arg1)) )
                 {
-                  Bug( "%s: %s: 'H': bad objto vnum %d.",
+                  Log->Bug( "%s: %s: 'H': bad objto vnum %d.",
 		       pArea->Filename, __FUNCTION__, pReset->Arg1 );
 
                   if( !bootup )
@@ -1831,7 +1829,7 @@ void ResetArea( Area *pArea )
 
                 if ( !(pRoomIndex = GetRoom(pReset->Arg1)) )
                   {
-                    Bug( "%s: %s: 'B': door: bad room vnum %d.",
+                    Log->Bug( "%s: %s: 'B': door: bad room vnum %d.",
 			 pArea->Filename, __FUNCTION__, pReset->Arg1 );
 
                     if( !bootup )
@@ -1858,7 +1856,7 @@ void ResetArea( Area *pArea )
             case BIT_RESET_ROOM:
               if ( !(pRoomIndex = GetRoom(pReset->Arg1)) )
                 {
-                  Bug( "%s: %s: 'B': room: bad room vnum %d.",
+                  Log->Bug( "%s: %s: 'B': room: bad room vnum %d.",
 		       pArea->Filename, __FUNCTION__, pReset->Arg1 );
 
                   if( !bootup )
@@ -1878,7 +1876,7 @@ void ResetArea( Area *pArea )
                 {
                   if ( !(pObjToIndex = GetProtoObject(pReset->Arg1)) )
                     {
-                      Bug( "%s: %s: 'B': object: bad objto vnum %d.",
+                      Log->Bug( "%s: %s: 'B': object: bad objto vnum %d.",
 			   pArea->Filename, __FUNCTION__, pReset->Arg1 );
                       if( !bootup )
                         {
@@ -1919,7 +1917,7 @@ void ResetArea( Area *pArea )
               break;
 
             default:
-              Bug( "%s: %s: 'B': bad options %d.",
+              Log->Bug( "%s: %s: 'B': bad options %d.",
 		   pArea->Filename, __FUNCTION__, pReset->Arg2 );
               continue;
             }
@@ -1942,7 +1940,7 @@ void ResetArea( Area *pArea )
         case 'D':
           if ( !(pRoomIndex = GetRoom(pReset->Arg1)) )
             {
-              Bug( "%s: %s: 'D': bad room vnum %d.",
+              Log->Bug( "%s: %s: 'D': bad room vnum %d.",
 		   pArea->Filename, __FUNCTION__, pReset->Arg1 );
 
               if( !bootup )
@@ -1991,7 +1989,7 @@ void ResetArea( Area *pArea )
         case 'R':
           if ( !(pRoomIndex = GetRoom(pReset->Arg1)) )
             {
-              Bug( "%s: %s: 'R': bad room vnum %d.",
+              Log->Bug( "%s: %s: 'R': bad room vnum %d.",
 		   pArea->Filename, __FUNCTION__, pReset->Arg1 );
 
               if( !bootup )
@@ -2417,16 +2415,10 @@ Reset *MakeReset( char letter, int extra, int arg1, int arg2, int arg3 )
  */
 Reset *AddReset( Area *tarea, char letter, int extra, int arg1, int arg2, int arg3 )
 {
-  Reset *pReset = NULL;
-
-  if ( !tarea )
-    {
-      Bug( "%s: NULL area!", __FUNCTION__ );
-      return NULL;
-    }
+  assert(tarea != nullptr);
 
   letter = CharToUppercase(letter);
-  pReset = MakeReset( letter, extra, arg1, arg2, arg3 );
+  Reset *pReset = MakeReset( letter, extra, arg1, arg2, arg3 );
 
   switch( letter )
     {
@@ -2465,18 +2457,12 @@ Reset *AddReset( Area *tarea, char letter, int extra, int arg1, int arg2, int ar
  */
 Reset *PlaceReset( Area *tarea, char letter, int extra, int arg1, int arg2, int arg3 )
 {
-  Reset *pReset = NULL;
+  assert(tarea != nullptr);
   Reset *tmp = NULL;
   Reset *tmp2 = NULL;
 
-  if ( !tarea )
-    {
-      Bug( "%s: NULL area!", __FUNCTION__ );
-      return NULL;
-    }
-
   letter = CharToUppercase(letter);
-  pReset = MakeReset( letter, extra, arg1, arg2, arg3 );
+  Reset *pReset = MakeReset( letter, extra, arg1, arg2, arg3 );
 
   if ( letter == 'M' )
     {
@@ -2488,7 +2474,7 @@ Reset *PlaceReset( Area *tarea, char letter, int extra, int arg1, int arg2, int 
       switch( letter )
         {
         default:
-          Bug( "%s: Bad reset type %c", __FUNCTION__, letter );
+          Log->Bug( "%s: Bad reset type %c", __FUNCTION__, letter );
           return NULL;
 
         case 'D':

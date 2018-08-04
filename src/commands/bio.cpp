@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "editor.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_bio( Character *ch, char *argument )
 {
@@ -11,16 +12,10 @@ void do_bio( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->Desc )
-    {
-      Bug( "do_bio: no descriptor", 0 );
-      return;
-    }
-
   switch( ch->SubState )
     {
     default:
-      Bug( "do_bio: illegal substate", 0 );
+      Log->Bug("do_bio: illegal substate");
       return;
 
     case SUB_RESTRICTED:

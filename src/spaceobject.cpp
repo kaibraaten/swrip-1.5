@@ -27,6 +27,7 @@
 #include "script.hpp"
 #include "ship.hpp"
 #include "planet.hpp"
+#include "log.hpp"
 
 SpaceobjectRepository *Spaceobjects = nullptr;
 
@@ -291,7 +292,7 @@ static int L_SpaceobjectEntry( lua_State *L )
     }
   else
     {
-      Bug( "%s: Name not found.", __FUNCTION__ );
+      Log->Bug( "%s: Name not found.", __FUNCTION__ );
       lua_pop( L, topAfterGets - topAtStart );
       return 0;
     }
@@ -303,7 +304,7 @@ static int L_SpaceobjectEntry( lua_State *L )
 
       if( !spaceobj->Planet )
 	{
-	  Bug( "%s: Unknown planet name '%s' for spaceobject %s.",
+	  Log->Bug( "%s: Unknown planet name '%s' for spaceobject %s.",
 	       __FUNCTION__, planetName, spaceobj->Name );
 	}
     }
@@ -318,7 +319,7 @@ static int L_SpaceobjectEntry( lua_State *L )
 	}
       else
 	{
-	  Bug( "%s: SpaceobjectType out of range: %d", __FUNCTION__, type );
+	  Log->Bug( "%s: SpaceobjectType out of range: %d", __FUNCTION__, type );
 	}
     }
 
@@ -332,7 +333,7 @@ static int L_SpaceobjectEntry( lua_State *L )
 	}
       else
 	{
-	  Bug( "%s: Invalid speed %d", __FUNCTION__, speed );
+	  Log->Bug( "%s: Invalid speed %d", __FUNCTION__, speed );
 	}
     }
 
@@ -346,7 +347,7 @@ static int L_SpaceobjectEntry( lua_State *L )
         }
       else
         {
-          Bug( "%s: Invalid speed %d", __FUNCTION__, gravity );
+          Log->Bug( "%s: Invalid speed %d", __FUNCTION__, gravity );
         }
     }
 

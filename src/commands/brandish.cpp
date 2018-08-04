@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_brandish( Character *ch, char *argument )
 {
@@ -23,17 +24,17 @@ void do_brandish( Character *ch, char *argument )
       return;
     }
 
-  if ( ( sn = staff->Value[3] ) < 0
+  if ( ( sn = staff->Value[OVAL_STAFF_SPELL] ) < 0
        || sn >= TopSN
        || SkillTable[sn]->SpellFunction == NULL )
     {
-      Bug( "Do_brandish: bad sn %d.", sn );
+      Log->Bug( "Do_brandish: bad sn %d.", sn );
       return;
     }
 
   SetWaitState( ch, 2 * PULSE_VIOLENCE );
 
-  if ( staff->Value[2] > 0 )
+  if ( staff->Value[OVAL_STAFF_CHARGES] > 0 )
     {
       if ( !ObjProgUseTrigger( ch, staff, NULL, NULL, NULL ) )
         {
@@ -50,7 +51,7 @@ void do_brandish( Character *ch, char *argument )
             switch ( SkillTable[sn]->Target )
               {
               default:
-                Bug( "Do_brandish: bad target for sn %d.", sn );
+                Log->Bug( "Do_brandish: bad target for sn %d.", sn );
                 return;
 
               case TAR_IGNORE:
@@ -74,19 +75,22 @@ void do_brandish( Character *ch, char *argument )
                 break;
               }
 
-          retcode = CastSpellWithObject( staff->Value[3], staff->Value[0], ch, vch, NULL );
+          retcode = CastSpellWithObject( staff->Value[OVAL_STAFF_SPELL],
+                                         staff->Value[OVAL_STAFF_LEVEL], ch, vch, NULL );
+
           if ( retcode == rCHAR_DIED || retcode == rBOTH_DIED )
             {
-              Bug( "do_brandish: char died", 0 );
+              Log->Bug( "do_brandish: char died", 0 );
               return;
             }
         }
     }
 
-  if ( --staff->Value[2] <= 0 )
+  if ( --staff->Value[OVAL_STAFF_CHARGES] <= 0 )
     {
       Act( AT_MAGIC, "$p blazes bright and vanishes from $n's hands!", ch, staff, NULL, TO_ROOM );
       Act( AT_MAGIC, "$p blazes bright and is gone!", ch, staff, NULL, TO_CHAR );
+
       if ( staff->Serial == cur_obj )
         global_objcode = rOBJ_USED;
 

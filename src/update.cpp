@@ -40,6 +40,7 @@
 #include "planet.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 /*
  * Local functions.
@@ -736,7 +737,7 @@ void GainCondition( Character *ch, int iCond, int value )
           break;
 
         default:
-          Bug( "Gain_condition: invalid condition type %d", iCond );
+          Log->Bug( "Gain_condition: invalid condition type %d", iCond );
           retcode = rNONE;
           break;
         }
@@ -848,24 +849,7 @@ static void MobileUpdate( void )
   for ( ch = LastCharacter; ch; ch = gch_prev )
     {
       SetCurrentGlobalCharacter( ch );
-
-      if ( ch == FirstCharacter && ch->Previous )
-        {
-          Bug( "%s: FirstCharacter->Previous != NULL... fixed", __FUNCTION__ );
-          ch->Previous = NULL;
-        }
-
       gch_prev = ch->Previous;
-
-      if ( gch_prev && gch_prev->Next != ch )
-        {
-          Bug( "FATAL: %s: %s->Previous->Next doesn't point to ch.",
-	       __FUNCTION__, ch->Name );
-          Bug( "Short-cutting here" );
-          gch_prev = NULL;
-          ch->Previous = NULL;
-          do_shout( ch, "Thoric says, 'Prepare for the worst!'" );
-        }
 
       if ( !IsNpc(ch) )
         {
@@ -981,7 +965,7 @@ static void MobileUpdate( void )
 
       if ( ch != cur_char )
         {
-          Bug( "%s: ch != cur_char after spec_fun", __FUNCTION__ );
+          Log->Bug( "%s: ch != cur_char after spec_fun", __FUNCTION__ );
           continue;
         }
 
@@ -1303,7 +1287,7 @@ static void WeatherUpdate( void )
   switch ( weather_info.Sky )
     {
     default:
-      Bug( "%s: bad sky %d.", __FUNCTION__, weather_info.Sky );
+      Log->Bug( "%s: bad sky %d.", __FUNCTION__, weather_info.Sky );
       weather_info.Sky = SKY_CLOUDLESS;
       break;
 
@@ -1390,20 +1374,8 @@ static void CharacterUpdate( void )
       Character *ch_save = NULL;
       short save_count = 0;
 
-      if ( ch == FirstCharacter && ch->Previous )
-        {
-          Bug( "%s: FirstCharacter->Previous != NULL... fixed", __FUNCTION__ );
-          ch->Previous = NULL;
-        }
-
       gch_prev = ch->Previous;
       SetCurrentGlobalCharacter( ch );
-
-      if ( gch_prev && gch_prev->Next != ch )
-        {
-          Bug( "%s: ch->Previous->Next != ch", __FUNCTION__ );
-          return;
-        }
 
       /*
        *  Do a room_prog rand check right off the bat
@@ -1798,19 +1770,7 @@ static void ObjectUpdate( void )
       Character *rch = NULL;
       const char *message = NULL;
 
-      if ( obj == FirstObject && obj->Previous )
-        {
-          Bug( "%s: FirstObject->Previous != NULL... fixed", __FUNCTION__ );
-          obj->Previous = NULL;
-        }
-
       gobj_prev = obj->Previous;
-
-      if ( gobj_prev && gobj_prev->Next != obj )
-        {
-          Bug( "%s: obj->Previous->Next != obj", __FUNCTION__ );
-          return;
-        }
 
       SetCurrentGlobalObject( obj );
 
@@ -2368,7 +2328,7 @@ static void AggroUpdate( void )
 
           if ( !victim )
             {
-              Bug( "%s: null victim.", __FUNCTION__ );
+              Log->Bug( "%s: null victim.", __FUNCTION__ );
               continue;
             }
 
@@ -2750,18 +2710,18 @@ void RemovePortal( Object *portal )
 
   if ( !found )
     {
-      Bug( "RemovePortal: portal not found in room %ld!", fromRoom->Vnum );
+      Log->Bug( "RemovePortal: portal not found in room %ld!", fromRoom->Vnum );
       return;
     }
 
   if ( pexit->Direction != DIR_PORTAL )
     {
-      Bug( "RemovePortal: exit in dir %d != DIR_PORTAL", pexit->Direction );
+      Log->Bug( "RemovePortal: exit in dir %d != DIR_PORTAL", pexit->Direction );
     }
 
   if ( ( toRoom = pexit->ToRoom ) == NULL )
     {
-      Bug( "RemovePortal: toRoom is NULL", 0 );
+      Log->Bug( "RemovePortal: toRoom is NULL", 0 );
     }
 
   ExtractExit( fromRoom, pexit );
@@ -2894,7 +2854,7 @@ static void AuctionUpdate( void )
     case 3 : /* SOLD! */
       if (!auction->Buyer && auction->Bet)
         {
-          Bug( "Auction code reached SOLD, with NULL buyer, but %d gold bid", auction->Bet );
+          Log->Bug( "Auction code reached SOLD, with NULL buyer, but %d gold bid", auction->Bet );
           auction->Bet = 0;
         }
 

@@ -19,10 +19,11 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <time.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdarg.h>
+#include <cassert>
+#include <ctime>
+#include <cstring>
+#include <cctype>
+#include <cstdarg>
 #include "mud.hpp"
 #include "arena.hpp"
 #include "ship.hpp"
@@ -45,6 +46,7 @@
 #include "area.hpp"
 #include "badname.hpp"
 #include "ban.hpp"
+#include "log.hpp"
 
 /*
  * Globals.
@@ -607,7 +609,7 @@ void BootDatabase( bool fCopyOver )
 
     for ( ; ; )
       {
-        strcpy( strArea, ReadWord( fpList ) );
+        strcpy( strArea, ReadWord( fpList, Log ) );
 
         if ( strArea[0] == '$' )
           break;
@@ -745,17 +747,13 @@ static void InitializeEconomy( void )
  */
 static void FixExits( void )
 {
-  int iHash;
-
-  for ( iHash = 0; iHash < MAX_KEY_HASH; iHash++ )
+  for ( int iHash = 0; iHash < MAX_KEY_HASH; iHash++ )
     {
-      Room *pRoomIndex;
-
-      for ( pRoomIndex  = RoomIndexHash[iHash];
+      for ( Room *pRoomIndex  = RoomIndexHash[iHash];
             pRoomIndex;
             pRoomIndex  = pRoomIndex->Next )
         {
-	  Exit *pexit, *pexit_next;
+	  Exit *pexit = nullptr, *pexit_next = nullptr;
           bool fexit = false;
 
           for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit_next )
@@ -767,36 +765,38 @@ static void FixExits( void )
                    ||  (pexit->ToRoom=GetRoom(pexit->Vnum)) == NULL )
                 {
                   if ( fBootDb )
-                    BootLog( "%s: room %ld, exit %s leads to bad vnum (%ld)",
-			     __FUNCTION__, 
-			     pRoomIndex->Vnum, GetDirectionName(pexit->Direction),
-			     pexit->Vnum );
+                    {
+                      BootLog( "%s: room %ld, exit %s leads to bad vnum (%ld)",
+                               __FUNCTION__, 
+                               pRoomIndex->Vnum, GetDirectionName(pexit->Direction),
+                               pexit->Vnum );
+                    }
 
-                  Bug( "Deleting %s exit in room %ld",
-		       GetDirectionName(pexit->Direction), pRoomIndex->Vnum );
+                  Log->Bug( "Deleting %s exit in room %ld",
+                            GetDirectionName(pexit->Direction), pRoomIndex->Vnum );
                   ExtractExit( pRoomIndex, pexit );
                 }
               else
-                fexit = true;
+                {
+                  fexit = true;
+                }
             }
 
           if ( !fexit )
-            SetBit( pRoomIndex->Flags, ROOM_NO_MOB );
+            {
+              SetBit( pRoomIndex->Flags, ROOM_NO_MOB );
+            }
         }
     }
 
   /* Set all the rexit pointers         -Thoric */
-  for ( iHash = 0; iHash < MAX_KEY_HASH; iHash++ )
+  for ( int iHash = 0; iHash < MAX_KEY_HASH; iHash++ )
     {
-      Room *pRoomIndex;
-
-      for ( pRoomIndex  = RoomIndexHash[iHash];
+      for ( Room *pRoomIndex  = RoomIndexHash[iHash];
             pRoomIndex;
             pRoomIndex  = pRoomIndex->Next )
         {
-	  Exit *pexit;
-
-          for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->Next )
+          for ( Exit *pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->Next )
             {
               if ( pexit->ToRoom && !pexit->ReverseExit )
                 {
@@ -841,11 +841,8 @@ static void SortExits( Room *room )
     {
       exits[nexits++] = pexit;
 
-      if ( nexits > MAX_REXITS )
-        {
-          Bug( "%s: more than %d exits in room... fatal", __FUNCTION__, nexits );
-          return;
-        }
+      // Check that there are no more exits than allowed.
+      assert(nexits <= MAX_REXITS);
     }
 
   qsort( &exits[0], nexits, sizeof( Exit * ),
@@ -913,11 +910,7 @@ void RandomizeExits( Room *room, short maxdir )
  */
 Character *AllocateMobile( ProtoMobile *pMobIndex )
 {
-  if ( !pMobIndex )
-    {
-      Bug( "%s: NULL pMobIndex.", __FUNCTION__ );
-      exit( 1 );
-    }
+  assert(pMobIndex != nullptr);
 
   Character *mob = new Character();
   mob->Prototype               = pMobIndex;
@@ -931,11 +924,10 @@ Character *AllocateMobile( ProtoMobile *pMobIndex )
   mob->mprog.mpscriptpos              = 0;
   mob->TopLevel                = NumberFuzzy( pMobIndex->Level );
 
-  {
-    int ability;
-    for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
+  for(int ability = 0 ; ability < MAX_ABILITY ; ability++)
+    {
       SetAbilityLevel( mob, ability, mob->TopLevel );
-  }
+    }
 
   mob->Flags              = pMobIndex->Flags;
   mob->AffectedBy         = pMobIndex->AffectedBy;
@@ -1023,14 +1015,8 @@ Character *CreateMobile( ProtoMobile *proto )
  */
 Object *AllocateObject( ProtoObject *pObjIndex, int level )
 {
+  assert(pObjIndex != nullptr);
   Object *obj = NULL;
-  int oval = 0;
-
-  if ( !pObjIndex )
-    {
-      Bug( "%s: NULL pObjIndex.", __FUNCTION__ );
-      exit( 1 );
-    }
 
   AllocateMemory( obj, Object, 1 );
 
@@ -1051,7 +1037,7 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
   obj->Flags      = pObjIndex->Flags;
   obj->WearFlags       = pObjIndex->WearFlags;
 
-  for( oval = 0; oval < MAX_OVAL; ++oval )
+  for( int oval = 0; oval < MAX_OVAL; ++oval )
     {
       obj->Value[oval] = pObjIndex->Value[oval];
     }
@@ -1065,8 +1051,8 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
   switch ( obj->ItemType )
     {
     default:
-      Bug( "%s: vnum %d bad type.", __FUNCTION__, pObjIndex->Vnum );
-      Bug( "------------------------>     ", obj->ItemType );
+      Log->Bug( "%s: vnum %d bad type.", __FUNCTION__, pObjIndex->Vnum );
+      Log->Bug( "------------------------>     ", obj->ItemType );
       break;
 
 
@@ -1261,19 +1247,23 @@ char *GetExtraDescription( const char *name, ExtraDescription *ed )
  */
 ProtoMobile *GetProtoMobile( vnum_t vnum )
 {
+  assert(vnum > 0);
   ProtoMobile *pMobIndex;
-
-  if ( vnum < 0 )
-    vnum = 0;
 
   for ( pMobIndex  = MobIndexHash[vnum % MAX_KEY_HASH];
         pMobIndex;
         pMobIndex  = pMobIndex->Next )
-    if ( pMobIndex->Vnum == vnum )
-      return pMobIndex;
+    {
+      if ( pMobIndex->Vnum == vnum )
+        {
+          return pMobIndex;
+        }
+    }
 
   if ( fBootDb )
-    Bug( "%s: bad vnum %d.", __FUNCTION__, vnum );
+    {
+      Log->Bug( "%s: bad vnum %d.", __FUNCTION__, vnum );
+    }
 
   return NULL;
 }
@@ -1284,10 +1274,8 @@ ProtoMobile *GetProtoMobile( vnum_t vnum )
  */
 ProtoObject *GetProtoObject( vnum_t vnum )
 {
+  assert(vnum > 0);
   ProtoObject *pObjIndex;
-
-  if ( vnum < 0 )
-    vnum = 0;
 
   for ( pObjIndex  = ObjectIndexHash[vnum % MAX_KEY_HASH];
         pObjIndex;
@@ -1296,7 +1284,7 @@ ProtoObject *GetProtoObject( vnum_t vnum )
       return pObjIndex;
 
   if ( fBootDb )
-    Bug( "%s: bad vnum %d.", __FUNCTION__, vnum );
+    Log->Bug( "%s: bad vnum %d.", __FUNCTION__, vnum );
 
   return NULL;
 }
@@ -1307,10 +1295,8 @@ ProtoObject *GetProtoObject( vnum_t vnum )
  */
 Room *GetRoom( vnum_t vnum )
 {
+  assert(vnum > 0);
   Room *pRoomIndex;
-
-  if ( vnum < 0 )
-    vnum = 0;
 
   for ( pRoomIndex  = RoomIndexHash[vnum % MAX_KEY_HASH];
         pRoomIndex;
@@ -1319,73 +1305,9 @@ Room *GetRoom( vnum_t vnum )
       return pRoomIndex;
 
   if ( fBootDb )
-    Bug( "%s: bad vnum %d.", __FUNCTION__, vnum );
+    Log->Bug( "%s: bad vnum %d.", __FUNCTION__, vnum );
 
   return NULL;
-}
-
-/*
- * Reports a bug.
- */
-void Bug( const char *str, ... )
-{
-  char buf[MAX_STRING_LENGTH];
-  FILE *fp = NULL;
-  struct stat fst;
-
-  if ( fpArea != NULL )
-    {
-      int iLine = 0;
-      int iChar = 0;
-
-      if ( fpArea == stdin )
-        {
-          iLine = 0;
-        }
-      else
-        {
-          iChar = ftell( fpArea );
-          fseek( fpArea, 0, 0 );
-
-          for ( iLine = 0; ftell( fpArea ) < iChar; iLine++ )
-            {
-              while ( getc( fpArea ) != '\n' )
-                ;
-            }
-
-          fseek( fpArea, iChar, 0 );
-        }
-
-      sprintf( buf, "[*****] FILE: %s LINE: %d", strArea, iLine );
-      LogPrintf( buf );
-
-      if ( stat( SHUTDOWN_FILE, &fst ) != -1 )  /* file exists */
-        {
-          if ( ( fp = fopen( SHUTDOWN_FILE, "a" ) ) != NULL )
-            {
-              fprintf( fp, "[*****] %s\n", buf );
-              fclose( fp );
-            }
-        }
-    }
-
-  strcpy( buf, "[*****] BUG: " );
-
-  {
-    va_list param;
-
-    va_start(param, str);
-    vsprintf( buf + strlen(buf), str, param );
-    va_end(param);
-  }
-
-  LogPrintf( buf );
-
-  if ( ( fp = fopen( BUG_FILE, "a" ) ) != NULL )
-    {
-      fprintf( fp, "%s\n", buf );
-      fclose( fp );
-    }
 }
 
 /*
@@ -1626,13 +1548,13 @@ void MakeWizlist( void )
 
           if ( gfp )
             {
-              word = feof( gfp ) ? "End" : ReadWord( gfp );
-              ilevel = ReadInt( gfp );
-              ReadToEndOfLine( gfp );
-              word = feof( gfp ) ? "End" : ReadWord( gfp );
+              word = feof( gfp ) ? "End" : ReadWord( gfp, Log );
+              ilevel = ReadInt( gfp, Log );
+              ReadToEndOfLine( gfp, Log );
+              word = feof( gfp ) ? "End" : ReadWord( gfp, Log );
 
               if ( !StrCmp( word, "Pcflags" ) )
-                iflags = ReadInt( gfp );
+                iflags = ReadInt( gfp, Log );
               else
                 iflags = 0;
 
@@ -1747,7 +1669,7 @@ bool DeleteRoom( Room *room )
 
   if( !tmp )
     {
-      Bug( "%s: room not found", __FUNCTION__ );
+      Log->Bug( "%s: room not found", __FUNCTION__ );
       return false;
     }
 
@@ -2081,7 +2003,7 @@ static void LoadBuildList( void )
 
           if ( !(fp = fopen( buf, "r" )) )
             {
-              Bug( "%s: invalid file", __FUNCTION__ );
+              Log->Bug( "%s: invalid file", __FUNCTION__ );
               dentry = readdir(dp);
               continue;
             }
@@ -2126,13 +2048,13 @@ static void LoadBuildList( void )
 
               if ( !(fp = fopen( buf, "r" )) )
                 {
-                  Bug( "%s: cannot open area file for read", __FUNCTION__ );
+                  Log->Bug( "%s: cannot open area file for read", __FUNCTION__ );
                   dentry = readdir(dp);
                   continue;
                 }
 #if !defined(READ_AREA)  /* Dont always want to read stuff.. dunno.. shrug */
 
-              strcpy( word, ReadWord( fp ) );
+              strcpy( word, ReadWord( fp, Log ) );
 
               if ( word[0] != '#' || StrCmp( &word[1], "AREA" ) )
                 {
@@ -2148,7 +2070,7 @@ static void LoadBuildList( void )
               pArea->Author = CopyString( dentry->d_name );
               pArea->Filename = CopyString( buf );
 #if !defined(READ_AREA)
-              pArea->Name = ReadStringToTilde( fp );
+              pArea->Name = ReadStringToTilde( fp, Log );
 #else
               sprintf( buf, "{PROTO} %s's area in progress", dentry->d_name );
               pArea->Name = CopyString( buf );

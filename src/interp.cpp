@@ -28,12 +28,14 @@
 #include <cstring>
 #include <strings.h>
 #include <cctype>
+#include <cassert>
 #include "character.hpp"
 #include "mud.hpp"
 #include "command.hpp"
 #include "social.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 /*
  * Log-all switch.
@@ -224,6 +226,8 @@ static bool _CheckTrustAndBestowments(const Command *cmd, const struct CommandFi
 
 void Interpret( Character *ch, char *argument )
 {
+  assert(ch != nullptr);
+
   char command[MAX_INPUT_LENGTH];
   char logline[MAX_INPUT_LENGTH];
   char logname[MAX_INPUT_LENGTH];
@@ -234,44 +238,31 @@ void Interpret( Character *ch, char *argument )
   struct timeval time_used;
   long tmptime = 0;
 
-  if ( !ch )
-    {
-      Bug( "Interpret: null ch!", 0 );
-      return;
-    }
-
   if ( ch->SubState == SUB_REPEATCMD )
     {
       CmdFun *fun = ch->LastCommand;
 
-      if ( fun == NULL )
+      assert(fun != nullptr);
+
+      const List *commands = GetEntities(CommandRepository);
+      cmd = (Command*) FindIfInList(commands, (Predicate*) _CommandFunctionEquals, (const void*)fun);
+      found = cmd != NULL;
+
+      if ( !found )
         {
-          ch->SubState = SUB_NONE;
-          Bug( "Interpret: SUB_REPEATCMD with NULL last_cmd" );
+          Log->Bug( "Interpret: SUB_REPEATCMD: last_cmd invalid" );
           return;
         }
-      else
-        {
-          const List *commands = GetEntities(CommandRepository);
-          cmd = (Command*) FindIfInList(commands, (Predicate*) _CommandFunctionEquals, (const void*)fun);
-          found = cmd != NULL;
 
-          if ( !found )
-            {
-              Bug( "Interpret: SUB_REPEATCMD: last_cmd invalid" );
-              return;
-            }
-
-          sprintf( logline, "(%s) %s", cmd->Name, argument );
-        }
+      sprintf( logline, "(%s) %s", cmd->Name, argument );
     }
 
   if ( !cmd )
     {
       /* Changed the order of these ifchecks to prevent crashing. */
-      if ( !argument || !StrCmp(argument,"") )
+      if (IsNullOrEmpty(argument))
         {
-          Bug( "Interpret: null argument!", 0 );
+          Log->Bug( "Interpret: null argument!", 0 );
           return;
         }
 

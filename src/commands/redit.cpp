@@ -5,6 +5,7 @@
 #include "reset.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_redit( Character *ch, char *argument )
 {
@@ -36,7 +37,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( !location )
         {
-          Bug( "redit: sub_room_desc: NULL ch->dest_buf", 0 );
+          Log->Bug( "redit: sub_room_desc: NULL ch->dest_buf" );
           location = ch->InRoom;
         }
 
@@ -51,7 +52,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( !ed )
         {
-          Bug( "redit: sub_room_extra: NULL ch->dest_buf", 0 );
+          Log->Bug( "redit: sub_room_extra: NULL ch->dest_buf" );
           StopEditing( ch );
           return;
         }

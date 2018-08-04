@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_detrap( Character *ch, char *argument )
 {
@@ -74,7 +75,7 @@ void do_detrap( Character *ch, char *argument )
       if ( !ch->dest_buf )
         {
           SendToCharacter( "Your detrapping was interrupted!\r\n", ch );
-          Bug( "do_detrap: ch->dest_buf NULL!", 0 );
+          Log->Bug( "do_detrap: ch->dest_buf NULL!" );
           return;
         }
       strcpy( arg, (const char*)ch->dest_buf );

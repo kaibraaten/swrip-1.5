@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "editor.hpp"
+#include "log.hpp"
 
 /*
  * Mobprogram editing - cumbersome                              -Thoric
@@ -35,7 +36,7 @@ void do_mpedit( Character *ch, char *argument )
       if ( !ch->dest_buf )
         {
           SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
-          Bug( "%s: SUB_MPROG_EDIT: NULL ch->dest_buf", __FUNCTION__ );
+          Log->Bug( "%s: SUB_MPROG_EDIT: NULL ch->dest_buf", __FUNCTION__ );
           ch->SubState = SUB_NONE;
           return;
         }

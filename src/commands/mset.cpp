@@ -5,6 +5,7 @@
 #include "clan.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_mset( Character *ch, char *argument )
 {
@@ -40,8 +41,8 @@ void do_mset( Character *ch, char *argument )
     case SUB_MOB_DESC:
       if ( !ch->dest_buf )
         {
-          SendToCharacter( "Fatal error: report to Darrik.\r\n", ch );
-          Bug( "do_mset: sub_mob_desc: NULL ch->dest_buf", 0 );
+          SendToCharacter( "Fatal error: report to the administration.\r\n", ch );
+          Log->Bug( "do_mset: sub_mob_desc: NULL ch->dest_buf" );
           ch->SubState = SUB_NONE;
           return;
         }

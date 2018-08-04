@@ -28,6 +28,7 @@
 #include "clan.hpp"
 #include "script.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 #if 0
 #define MAX_NEST 100
@@ -104,7 +105,7 @@ static void LoadClanStoreroom( const Clan *clan )
 
 	  if ( letter != '#' )
 	    {
-	      Bug( "%s: # not found (%s)", __FUNCTION__, clan->Name );
+	      Log->Bug( "%s: # not found (%s)", __FUNCTION__, clan->Name );
 	      break;
 	    }
 
@@ -120,7 +121,7 @@ static void LoadClanStoreroom( const Clan *clan )
 	    }
 	  else
 	    {
-	      Bug( "%s: bad section (%s)", __FUNCTION__, clan->Name );
+	      Log->Bug( "%s: bad section (%s)", __FUNCTION__, clan->Name );
 	      break;
 	    }
 	}
@@ -360,13 +361,13 @@ void SaveClanStoreroom( Character *ch, const Clan *clan )
 
   if ( !clan )
     {
-      Bug( "%s: Null clan pointer!", __FUNCTION__ );
+      Log->Bug( "%s: Null clan pointer!", __FUNCTION__ );
       return;
     }
 
   if ( !ch )
     {
-      Bug("%s: Null ch pointer!", __FUNCTION__ );
+      Log->Bug("%s: Null ch pointer!", __FUNCTION__ );
       return;
     }
 
@@ -374,7 +375,7 @@ void SaveClanStoreroom( Character *ch, const Clan *clan )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      Bug( "%s: fopen", __FUNCTION__ );
+      Log->Bug( "%s: fopen", __FUNCTION__ );
       perror( filename );
     }
   else
@@ -687,7 +688,7 @@ static int L_ClanEntry( lua_State *L )
     }
   else
     {
-      Bug( "%s: Found clan without name!", __FUNCTION__ );
+      Log->Bug( "%s: Found clan without name!", __FUNCTION__ );
       lua_pop( L, topAfterGets - topAtStart );
       return 0;
     }

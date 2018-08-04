@@ -55,13 +55,6 @@ void do_goto( Character *ch, char *argument )
         }
 
       location = MakeRoom( vnum );
-
-      if ( !location )
-        {
-          Bug( "Goto: MakeRoom failed", 0 );
-          return;
-        }
-
       location->Area = ch->PCData->Build.Area;
       SetCharacterColor( AT_WHITE, ch );
       SendToCharacter( "Waving your hand, you form order from swirling chaos,\r\nand step into a new reality...\r\n", ch );

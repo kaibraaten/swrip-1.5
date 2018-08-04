@@ -9,6 +9,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <cstdarg>
+#include <cassert>
 
 #include "utility.hpp"
 #include "sha256.hpp"
@@ -17,8 +18,6 @@
 
 typedef int (*STRING_COMPARATOR)(const std::string&, const std::string&);
 typedef char* (*STRING_TOKENIZER)( char*, char* );
-
-extern "C" void Bug( const char *str, ... );
 
 static std::string GetNextChunk( std::string &str, const char c );
 static int IsName2(const std::string&, const std::string&);
@@ -305,11 +304,7 @@ const char *AOrAn( const char *str )
 {
   static char temp[MAX_STRING_LENGTH];
 
-  if ( !str )
-    {
-      Bug( "Aoran(): NULL str" );
-      return "";
-    }
+  assert(str != nullptr);
 
   if ( isavowel(str[0])
        || ( strlen(str) > 1 && tolower((int)str[0]) == 'y'

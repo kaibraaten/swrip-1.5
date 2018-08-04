@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_buy( Character *ch, char *argument )
 {
@@ -20,9 +21,9 @@ void do_buy( Character *ch, char *argument )
   if ( IsBitSet(ch->InRoom->Flags, ROOM_PET_SHOP) )
     {
       char buf[MAX_STRING_LENGTH];
-      Character *pet;
-      Room *pRoomIndexNext;
-      Room *in_room;
+      Character *pet = nullptr;
+      Room *pRoomIndexNext = nullptr;
+      Room *in_room = nullptr;
 
       if ( IsNpc(ch) )
         return;
@@ -31,7 +32,7 @@ void do_buy( Character *ch, char *argument )
 
       if ( !pRoomIndexNext )
         {
-          Bug( "Do_buy: bad pet shop at vnum %d.", ch->InRoom->Vnum );
+          Log->Bug( "Do_buy: bad pet shop at vnum %d.", ch->InRoom->Vnum );
           SendToCharacter( "Sorry, you can't buy that here.\r\n", ch );
           return;
         }

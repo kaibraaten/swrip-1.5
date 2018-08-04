@@ -20,6 +20,7 @@
  ****************************************************************************/
 
 #include <cstring>
+#include <cassert>
 #include "character.hpp"
 #include "mud.hpp"
 #include "track.hpp"
@@ -27,6 +28,7 @@
 #include "reset.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 extern Character *gch_prev;
 extern Object *gobj_prev;
@@ -297,7 +299,7 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
   switch ( paf->Location % REVERSE_APPLY )
     {
     default:
-      Bug( "%s: unknown location %d.", __FUNCTION__, paf->Location );
+      Log->Bug( "%s: unknown location %d.", __FUNCTION__, paf->Location );
       return;
 
     case APPLY_NONE:
@@ -466,7 +468,7 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
 	}
       else
 	{
-	  Bug( "%s: APPLY_STRIPSN invalid sn %d", __FUNCTION__, mod );
+	  Log->Bug( "%s: APPLY_STRIPSN invalid sn %d", __FUNCTION__, mod );
 	}
       break;
 
@@ -623,19 +625,10 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
  */
 void AffectToCharacter( Character *ch, Affect *paf )
 {
+  assert(ch != nullptr);
+  assert(paf != nullptr);
+
   Affect *paf_new;
-
-  if ( !ch )
-    {
-      Bug( "%s: NULL ch!", __FUNCTION__ );
-      return;
-    }
-
-  if ( !paf )
-    {
-      Bug( "%s: NULL paf!", __FUNCTION__ );
-      return;
-    }
 
   AllocateMemory( paf_new, Affect, 1 );
   LINK( paf_new, ch->FirstAffect, ch->LastAffect, Next, Previous );
@@ -655,7 +648,7 @@ void RemoveAffect( Character *ch, Affect *paf )
 {
   if ( !ch->FirstAffect )
     {
-      Bug( "%s: no affect.", __FUNCTION__ );
+      Log->Bug( "%s: no affect.", __FUNCTION__ );
       return;
     }
 
@@ -719,22 +712,15 @@ void JoinAffect( Character *ch, Affect *paf )
  */
 void CharacterFromRoom( Character *ch )
 {
-  Object *obj;
+  assert(ch != nullptr);
+  assert(ch->InRoom != nullptr);
 
-  if ( !ch )
-    {
-      Bug( "Char_from_room: NULL char." );
-      return;
-    }
-
-  if ( !ch->InRoom )
-    {
-      Bug( "Char_from_room: NULL room: %s", ch->Name );
-      return;
-    }
+  Object *obj = nullptr;
 
   if ( !IsNpc(ch) )
-    --ch->InRoom->Area->NumberOfPlayers;
+    {
+      --ch->InRoom->Area->NumberOfPlayers;
+    }
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
        && obj->ItemType == ITEM_LIGHT
@@ -760,21 +746,9 @@ void CharacterFromRoom( Character *ch )
  */
 void CharacterToRoom( Character *ch, Room *pRoomIndex )
 {
-  Object *obj;
-
-  if ( !ch )
-    {
-      Bug( "Char_to_room: NULL ch!" );
-      return;
-    }
-  if ( !pRoomIndex )
-    {
-      Bug( "Char_to_room: %s -> NULL room!  Putting char in limbo (%ld)",
-	   ch->Name, ROOM_VNUM_LIMBO );
-      /* This used to just return, but there was a problem with crashing
-         and I saw no reason not to just put the char in limbo. -Narn */
-      pRoomIndex = GetRoom( ROOM_VNUM_LIMBO );
-    }
+  assert(ch != nullptr);
+  assert(pRoomIndex != nullptr);
+  Object *obj = nullptr;
 
   ch->InRoom           = pRoomIndex;
   LINK( ch, pRoomIndex->FirstPerson, pRoomIndex->LastPerson,
@@ -893,13 +867,8 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
  */
 void ObjectFromCharacter( Object *obj )
 {
-  Character *ch;
-
-  if ( ( ch = obj->CarriedBy ) == NULL )
-    {
-      Bug( "Obj_from_char: null ch." );
-      return;
-    }
+  Character *ch = obj->CarriedBy;
+  assert(ch != nullptr);
 
   if ( obj->WearLoc != WEAR_NONE )
     UnequipCharacter( ch, obj );
@@ -1027,13 +996,8 @@ int falling = 0;
 
 void ObjectFromRoom( Object *obj )
 {
-  Room *in_room;
-
-  if ( ( in_room = obj->InRoom ) == NULL )
-    {
-      Bug( "ObjectFromRoom: NULL." );
-      return;
-    }
+  Room *in_room = obj->InRoom;
+  assert(in_room != nullptr);
 
   UNLINK( obj, in_room->FirstContent, in_room->LastContent,
           NextContent, PreviousContent );
@@ -1097,7 +1061,8 @@ Object *ObjectToObject( Object *obj, Object *obj_to )
 
   if ( obj == obj_to )
     {
-      Bug( "Obj_to_obj: trying to put object inside itself: vnum %ld", obj->Prototype->Vnum );
+      Log->Bug( "Obj_to_obj: trying to put object inside itself: vnum %ld",
+                obj->Prototype->Vnum );
       return obj;
     }
   /* Big carry_weight bug fix here by Thoric */
@@ -1128,13 +1093,8 @@ Object *ObjectToObject( Object *obj, Object *obj_to )
  */
 void ObjectFromObject( Object *obj )
 {
-  Object *obj_from;
-
-  if ( ( obj_from = obj->InObject ) == NULL )
-    {
-      Bug( "Obj_from_obj: null obj_from." );
-      return;
-    }
+  Object *obj_from = obj->InObject;
+  assert(obj_from != nullptr);
 
   UNLINK( obj, obj_from->FirstContent, obj_from->LastContent,
           NextContent, PreviousContent );
@@ -1156,17 +1116,12 @@ void ObjectFromObject( Object *obj )
  */
 void ExtractObject( Object *obj )
 {
+  assert(obj != nullptr);
   Object *obj_content;
-
-  if ( !obj )
-    {
-      Bug( "ExtractObject: !obj" );
-      return;
-    }
 
   if ( IsObjectExtracted(obj) )
     {
-      Bug( "ExtractObject: obj %d already extracted!", obj->Prototype->Vnum );
+      Log->Bug( "ExtractObject: obj %d already extracted!", obj->Prototype->Vnum );
       return;
     }
 
@@ -1236,33 +1191,17 @@ void ExtractObject( Object *obj )
  */
 void ExtractCharacter( Character *ch, bool fPull )
 {
-  Character *wch;
-  Object *obj;
-  char buf[MAX_STRING_LENGTH];
-  Room *location;
+  assert(ch != nullptr);
+  assert(ch->InRoom != nullptr);
+  assert(ch != supermob);
 
-  if ( !ch )
-    {
-      Bug( "Extract_char: NULL ch.", 0 );
-      return;           /* who removed this line? */
-    }
-
-  if ( !ch->InRoom )
-    {
-      Bug( "Extract_char: NULL room.", 0 );
-      return;
-    }
-
-  if ( ch == supermob )
-    {
-      Bug( "Extract_char: ch == supermob!", 0 );
-      return;
-    }
+  Character *wch = nullptr;
+  Object *obj = nullptr;
+  Room *location = nullptr;
 
   if ( CharacterDiedRecently(ch) )
     {
-      sprintf( buf, "ExtractCharacter: %s already died!", ch->Name );
-      Bug( buf, 0 );
+      Log->Bug("ExtractCharacter: %s already died!", ch->Name );
       return;
     }
 
@@ -1352,16 +1291,13 @@ void ExtractCharacter( Character *ch, bool fPull )
 
   UNLINK( ch, FirstCharacter, LastCharacter, Next, Previous );
 
-  if ( ch->Desc )
+  if (ch->Desc != nullptr)
     {
-      if ( ch->Desc->Character != ch )
-        Bug( "Extract_char: char's descriptor points to another char", 0 );
-      else
-        {
-          ch->Desc->Character = NULL;
-          CloseDescriptor( ch->Desc, false );
-          ch->Desc = NULL;
-        }
+      assert(ch->Desc->Character == ch);
+
+      ch->Desc->Character = NULL;
+      CloseDescriptor( ch->Desc, false );
+      ch->Desc = NULL;
     }
 }
 
@@ -1753,11 +1689,7 @@ int GetObjectWeight( const Object *obj )
  */
 bool IsRoomDark( const Room *pRoomIndex )
 {
-  if ( !pRoomIndex )
-    {
-      Bug( "IsRoomDark: NULL pRoomIndex" );
-      return true;
-    }
+  assert(pRoomIndex != nullptr);
 
   if ( pRoomIndex->Light > 0 )
     return false;
@@ -1781,30 +1713,18 @@ bool IsRoomDark( const Room *pRoomIndex )
  */
 bool IsRoomPrivate( const Character *ch, const Room *pRoomIndex )
 {
-  Character *rch;
-  int count;
-
-  if ( !ch )
-    {
-      Bug( "IsRoomPrivate: NULL ch" );
-      return false;
-    }
-
-  if ( !pRoomIndex )
-    {
-      Bug( "IsRoomPrivate: NULL pRoomIndex" );
-      return false;
-    }
+  assert(ch != nullptr);
+  assert(pRoomIndex != nullptr);
 
   if ( IsBitSet(pRoomIndex->Flags, ROOM_PLR_HOME) && ch->PlayerHome != pRoomIndex)
     return true;
 
-  count = 0;
+  int count = 0;
 
-  for ( rch = pRoomIndex->FirstPerson; rch; rch = rch->NextInRoom )
+  for (const Character *rch = pRoomIndex->FirstPerson; rch; rch = rch->NextInRoom )
     count++;
 
-  if ( IsBitSet(pRoomIndex->Flags, ROOM_PRIVATE)  && count >= 2 )
+  if ( IsBitSet(pRoomIndex->Flags, ROOM_PRIVATE) && count >= 2 )
     return true;
 
   return false;
@@ -1815,9 +1735,9 @@ bool IsRoomPrivate( const Character *ch, const Room *pRoomIndex )
  */
 const char *GetItemTypeName( const Object *obj )
 {
-  if ( obj->ItemType < 1 || obj->ItemType > MAX_ITEM_TYPE )
+  if ( obj->ItemType <= ITEM_NONE || obj->ItemType > MAX_ITEM_TYPE )
     {
-      Bug( "%s: unknown type %d.", __FUNCTION__, obj->ItemType );
+      Log->Bug( "%s: unknown type %d.", __FUNCTION__, obj->ItemType );
       return "(unknown)";
     }
 
@@ -1900,7 +1820,7 @@ const char *GetAffectLocationName( int location )
     case APPLY_SNIPE:           return "snipe";
     }
 
-  Bug( "%s: unknown location %d.", __FUNCTION__, location );
+  Log->Bug( "%s: unknown location %d.", __FUNCTION__, location );
   return "(unknown)";
 }
 
@@ -2257,17 +2177,12 @@ void CleanMobile( ProtoMobile *mob )
  */
 void ShowAffectToCharacter( const Character *ch, const Affect *paf )
 {
-  char buf[MAX_STRING_LENGTH];
-  int x;
-
-  if ( !paf )
-    {
-      Bug( "ShowAffectToCharacter: NULL paf" );
-      return;
-    }
+  assert(paf != nullptr);
 
   if ( paf->Location != APPLY_NONE && paf->Modifier != 0 )
     {
+      char buf[MAX_STRING_LENGTH];
+
       switch( paf->Location )
         {
         default:
@@ -2277,12 +2192,16 @@ void ShowAffectToCharacter( const Character *ch, const Affect *paf )
         case APPLY_AFFECT:
           sprintf( buf, "Affects %s by",
                    GetAffectLocationName( paf->Location ) );
-          for ( x = 0; x < 32 ; x++ )
-            if ( IsBitSet( paf->Modifier, 1 << x ) )
-              {
-                strcat( buf, " " );
-                strcat( buf, AffectFlags[x] );
-              }
+
+          for ( size_t x = 0; x < MAX_BIT ; x++ )
+            {
+              if ( IsBitSet( paf->Modifier, 1 << x ) )
+                {
+                  strcat( buf, " " );
+                  strcat( buf, AffectFlags[x] );
+                }
+            }
+
           strcat( buf, "\r\n" );
           break;
         case APPLY_WEAPONSPELL:
@@ -2297,15 +2216,20 @@ void ShowAffectToCharacter( const Character *ch, const Affect *paf )
         case APPLY_SUSCEPTIBLE:
           sprintf( buf, "Affects %s by",
                    GetAffectLocationName( paf->Location ) );
-          for ( x = 0; x < 32 ; x++ )
-            if ( IsBitSet( paf->Modifier, 1 << x ) )
-              {
-                strcat( buf, " " );
-                strcat( buf, RisFlags[x] );
-              }
+          
+          for (size_t x = 0; x < MAX_BIT; x++ )
+            {
+              if ( IsBitSet( paf->Modifier, 1 << x ) )
+                {
+                  strcat( buf, " " );
+                  strcat( buf, RisFlags[x] );
+                }
+            }
+
           strcat( buf, "\r\n" );
           break;
         }
+
       SendToCharacter( buf, ch );
     }
 }
@@ -2403,21 +2327,19 @@ bool CharacterDiedRecently( const Character *ch )
  */
 void QueueExtractedCharacter( Character *ch, bool extract )
 {
+  assert(ch != nullptr);
   ExtractedCharacter *ccd;
 
-  if ( !ch )
-    {
-      Bug( "queue_extracted char: ch = NULL", 0 );
-      return;
-    }
   AllocateMemory( ccd, ExtractedCharacter, 1 );
   ccd->Character                       = ch;
   ccd->InRoom                     = ch->InRoom;
   ccd->Extract          = extract;
+
   if ( ch == cur_char )
     ccd->RetCode                = global_retcode;
   else
     ccd->RetCode                = rCHAR_DIED;
+
   ccd->Next                     = extracted_char_queue;
   extracted_char_queue  = ccd;
   cur_qchars++;
@@ -2490,11 +2412,8 @@ short GetTimer( const Character *ch, short type )
 
 void ExtractTimer( Character *ch, Timer *timer )
 {
-  if ( !timer )
-    {
-      Bug( "ExtractTimer: NULL timer", 0 );
-      return;
-    }
+  assert(ch != nullptr);
+  assert(timer != nullptr);
 
   UNLINK( timer, ch->FirstTimer, ch->LastTimer, Next, Previous );
   FreeMemory( timer );
@@ -2541,13 +2460,7 @@ bool InHardRange( const Character *ch, const Area *tarea )
  */
 bool Chance( const Character *ch, short percent )
 {
-  short ms = 0;
-
-  if ( !ch )
-    {
-      Bug( "%s: null ch!", __FUNCTION__ );
-      return false;
-    }
+  assert(ch != nullptr);
 
   /* Mental state bonus/penalty:  Your mental state is a ranged value with
    * zero (0) being at a perfect mental state (bonus of 10).
@@ -2556,7 +2469,7 @@ bool Chance( const Character *ch, short percent )
    * In most circumstances you'd do best at a perfectly balanced state.
    */
 
-  ms = 10 - abs(ch->MentalState);
+  short ms = 10 - abs(ch->MentalState);
 
   if ( (GetRandomPercent() - GetCurrentLuck(ch) + 13 - ms) <= percent )
     return true;
@@ -2728,15 +2641,12 @@ void SeparateOneObjectFromGroup( Object *obj )
  */
 bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
 {
-  Object *otmp, *otmp_next;
+  assert(obj != nullptr);
+
+  Object *otmp = nullptr, *otmp_next = nullptr;
   Character *ch = obj->CarriedBy;
   bool movedsome = false;
 
-  if ( !obj )
-    {
-      Bug( "%s: NULL obj", __FUNCTION__ );
-      return false;
-    }
   if ( destobj || (!destroom && !ch && (destobj = obj->InObject) != NULL) )
     {
       for ( otmp = obj->FirstContent; otmp; otmp = otmp_next )
@@ -2756,6 +2666,7 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
         }
       return movedsome;
     }
+
   if ( destroom || (!ch && (destroom = obj->InRoom) != NULL) )
     {
       for ( otmp = obj->FirstContent; otmp; otmp = otmp_next )
@@ -2781,6 +2692,7 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
         }
       return movedsome;
     }
+
   if ( ch )
     {
       for ( otmp = obj->FirstContent; otmp; otmp = otmp_next )
@@ -2792,8 +2704,9 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
         }
       return movedsome;
     }
-  Bug( "EmptyObjectContents: could not determine a destination for vnum %ld",
-       obj->Prototype->Vnum );
+
+  Log->Bug( "EmptyObjectContents: could not determine a destination for vnum %ld",
+            obj->Prototype->Vnum );
   return false;
 }
 

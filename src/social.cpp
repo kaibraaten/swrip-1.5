@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "script.hpp"
+#include "log.hpp"
 
 #define SOCIAL_DATA_FILE     DATA_DIR "socials.lua"
 
@@ -298,12 +299,12 @@ static int L_SocialEntry( lua_State *L )
 
   if ( IsNullOrEmpty( social->Name ) )
     {
-      Bug( "%s: Name not found", __FUNCTION__ );
+      Log->Bug( "%s: Name not found", __FUNCTION__ );
       FreeSocial( social );
     }
   else if ( IsNullOrEmpty( social->CharNoArg ) )
     {
-      Bug( "%s: CharNoArg not found", __FUNCTION__ );
+      Log->Bug( "%s: CharNoArg not found", __FUNCTION__ );
       FreeSocial( social );
     }
   else

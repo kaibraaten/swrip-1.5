@@ -10,6 +10,7 @@
 #include <utility/linkedlist.hpp>
 #include <utility/oldrepository.hpp>
 #include <utility/event.hpp>
+#include <utility/logger.hpp>
 
 /*
  * String and memory management parameters.
@@ -59,15 +60,9 @@ do                                                              \
 #define FreeMemory(point)                                          \
 do                                                              \
   {                                                               \
- if (!(point))                                                 \
-   {                                                             \
- Bug( "Freeing null pointer" ); \
- fprintf( stderr, "DISPOSEing NULL in %s, line %d\n", __FILE__, __LINE__\
-	  ); \
-   }                                                             \
- else free(point);                                             \
- point = NULL;                                                 \
- } while(0)
+    free(point);                                                  \
+    point = NULL;                                                 \
+  } while(0)
 
 #if defined(KEY)
 #undef KEY
@@ -178,17 +173,17 @@ bool IsNullOrEmpty( const char *str );
 const char *IntToString( int num );
 
 /* file_io.c */
-char ReadChar( FILE *fp );
-float ReadFloat( FILE *fp );
-int ReadInt( FILE *fp );
-char *ReadStringToTilde( FILE *fp );
-void ReadToEndOfLine( FILE *fp );
-char *ReadWord( FILE *fp );
-char *ReadLine( FILE *fp );
+char ReadChar( FILE *fp, Logger *log );
+float ReadFloat( FILE *fp, Logger *log );
+int ReadInt( FILE *fp, Logger *log );
+char *ReadStringToTilde( FILE *fp, Logger *log );
+void ReadToEndOfLine( FILE *fp, Logger *log);
+char *ReadWord( FILE *fp, Logger *log );
+char *ReadLine( FILE *fp, Logger *log );
 void ForEachLuaFileInDir( const char *pathToDir,
 			  void (*doOnFile)(const char*, void *ud),
 			  void *userData );
-const char *ConvertToLuaFilename( const char *name );
+const char *ConvertToLuaFilename( const std::string &name );
 
 /* Random number stuff */
 void InitMM( void );

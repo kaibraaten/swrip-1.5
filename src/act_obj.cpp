@@ -22,6 +22,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "clan.hpp"
+#include "log.hpp"
 
 /*
  * how resistant an object is to damage                         -Thoric
@@ -140,7 +141,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
 
   if (fall_count > 30)
     {
-      Bug( "object falling in loop more than 30 times", 0 );
+      Log->Bug( "object falling in loop more than 30 times", 0 );
       ExtractObject(obj);
       fall_count = 0;
       return;
@@ -161,7 +162,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
 
       if (obj->InRoom == to_room)
         {
-          Bug( "Object falling into same room, room %ld", to_room->Vnum);
+          Log->Bug( "Object falling into same room, room %ld", to_room->Vnum);
           ExtractObject( obj );
           return;
         }

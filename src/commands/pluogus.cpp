@@ -63,19 +63,12 @@ static void output_shuttle(Character * ch, Shuttle * shuttle)
 
   itt = 0;
 
-  while (1)
+  while(true)
     {
       itt++;
       /* No stops i guess */
       if (stop == NULL)
 	break;
-
-      /* WTF BUT IT CRASHES */
-      if (shuttle == NULL)
-        {
-          Bug("SHUTTLE IS NULLLLLL", 0);
-          return;
-        }
 
       if (itt > 4)
 	break;

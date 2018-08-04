@@ -29,6 +29,7 @@
 #include <cctype>
 #include <ctime>
 #include <cstdarg>
+#include "log.hpp"
 #include "mud.hpp"
 #include "character.hpp"
 #include "editor.hpp"
@@ -117,6 +118,9 @@ int SwripMain(int argc, char *argv[])
 #endif
 
   memset( &SysData, 0, sizeof( SysData ) );
+
+  Log = NewLogger();
+
   /*
    * Memory debugging if needed.
    */
@@ -330,7 +334,7 @@ socket_t InitializeSocket( short port )
 static void CaughtAlarm( int dummy )
 {
   char buf[MAX_STRING_LENGTH];
-  Bug( "ALARM CLOCK!" );
+  Log->Bug( "ALARM CLOCK!" );
   strcpy( buf, "Alas, the hideous mandalorian entity known only as 'Lag' rises once more!\r\n" );
   EchoToAll( AT_IMMORT, buf, ECHOTAR_ALL );
 
@@ -403,7 +407,7 @@ static void AcceptNewSocket( socket_t ctrl )
 
   if ( FD_ISSET( ctrl, &exc_set ) )
     {
-      Bug( "Exception raise on controlling descriptor %d", ctrl );
+      Log->Bug( "Exception raise on controlling descriptor %d", ctrl );
       FD_CLR( ctrl, &in_set );
       FD_CLR( ctrl, &out_set );
     }
@@ -441,7 +445,7 @@ static void GameLoop( void )
         {
           if ( d == d->Next )
             {
-              Bug( "descriptor_loop: loop found & fixed" );
+              Log->Bug( "descriptor_loop: loop found & fixed" );
               d->Next = NULL;
             }
           d_next = d->Next;
@@ -766,7 +770,7 @@ static void NewDescriptor( socket_t new_desc )
     {
       Descriptor *d;
 
-      Bug( "New_descriptor: last_desc is NULL, but first_desc is not! ...fixing" );
+      Log->Bug( "New_descriptor: last_desc is NULL, but first_desc is not! ...fixing" );
 
       for ( d = FirstDescriptor; d; d = d->Next )
         if ( !d->Next )
@@ -846,7 +850,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
         do_return(ch, "");
       else
         {
-          Bug( "Close_socket: dclose->Original without character %s",
+          Log->Bug( "Close_socket: dclose->Original without character %s",
                (dclose->Original->Name ? dclose->Original->Name : "unknown") );
           dclose->Character = dclose->Original;
           dclose->Original = NULL;
@@ -859,7 +863,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
   if ( !dclose->Previous && dclose != FirstDescriptor )
     {
       Descriptor *dp, *dn;
-      Bug( "Close_socket: %s desc:%p != first_desc:%p and desc->prev = NULL!",
+      Log->Bug( "Close_socket: %s desc:%p != first_desc:%p and desc->prev = NULL!",
            ch ? ch->Name : d->Remote.Hostname, dclose, FirstDescriptor );
       dp = NULL;
       for ( d = FirstDescriptor; d; d = dn )
@@ -867,7 +871,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
           dn = d->Next;
           if ( d == dclose )
             {
-              Bug( "Close_socket: %s desc:%p found, prev should be:%p, fixing.",
+              Log->Bug( "Close_socket: %s desc:%p found, prev should be:%p, fixing.",
                    ch ? ch->Name : d->Remote.Hostname, dclose, dp );
               dclose->Previous = dp;
               break;
@@ -876,7 +880,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
         }
       if ( !dclose->Previous )
         {
-          Bug( "Close_socket: %s desc:%p could not be found!.",
+          Log->Bug( "Close_socket: %s desc:%p could not be found!.",
                ch ? ch->Name : dclose->Remote.Hostname, dclose );
           DoNotUnlink = true;
         }
@@ -884,7 +888,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
   if ( !dclose->Next && dclose != LastDescriptor )
     {
       Descriptor *dp, *dn;
-      Bug( "Close_socket: %s desc:%p != last_desc:%p and desc->Next = NULL!",
+      Log->Bug( "Close_socket: %s desc:%p != last_desc:%p and desc->Next = NULL!",
            ch ? ch->Name : d->Remote.Hostname, dclose, LastDescriptor );
       dn = NULL;
       for ( d = LastDescriptor; d; d = dp )
@@ -892,7 +896,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
           dp = d->Previous;
           if ( d == dclose )
             {
-              Bug( "Close_socket: %s desc:%p found, next should be:%p, fixing.",
+              Log->Bug( "Close_socket: %s desc:%p found, next should be:%p, fixing.",
                    ch ? ch->Name : d->Remote.Hostname, dclose, dn );
               dclose->Next = dn;
               break;
@@ -901,7 +905,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
         }
       if ( !dclose->Next )
         {
-          Bug( "Close_socket: %s desc:%p could not be found!.",
+          Log->Bug( "Close_socket: %s desc:%p could not be found!.",
                ch ? ch->Name : dclose->Remote.Hostname, dclose );
           DoNotUnlink = true;
         }
@@ -1200,7 +1204,7 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
 {
   if ( !d )
     {
-      Bug( "Write_to_buffer: NULL descriptor" );
+      Log->Bug( "Write_to_buffer: NULL descriptor" );
       return;
     }
 
@@ -1236,7 +1240,7 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
           /* empty buffer */
           d->OutTop = 0;
           CloseDescriptor(d, true);
-          Bug("Buffer overflow. Closing (%s).", d->Character ? d->Character->Name : "???" );
+          Log->Bug("Buffer overflow. Closing (%s).", d->Character ? d->Character->Name : "???" );
           return;
         }
       d->OutSize *= 2;
@@ -1455,7 +1459,7 @@ void SendToCharacter( const char *txt, const Character *ch )
 
   if ( !ch )
     {
-      Bug( "Send_to_char: NULL *ch" );
+      Log->Bug( "Send_to_char: NULL *ch" );
       return;
     }
   if ( !txt || !ch->Desc )
@@ -1513,7 +1517,7 @@ void WriteToPager( Descriptor *d, const char *txt, size_t length )
     {
       if ( d->Pager.PageSize > SHRT_MAX )
         {
-          Bug( "Pager overflow. Ignoring.\r\n" );
+          Log->Bug( "Pager overflow. Ignoring.\r\n" );
           d->Pager.PageTop = 0;
           d->Pager.PagePoint = NULL;
           FreeMemory(d->Pager.PageBuffer);
@@ -1539,7 +1543,7 @@ void SendToPager( const char *txt, const Character *ch )
 
   if ( !ch )
     {
-      Bug( "Send_to_pager_color: NULL *ch" );
+      Log->Bug( "Send_to_pager_color: NULL *ch" );
       return;
     }
 
@@ -1690,15 +1694,15 @@ static char *ActString(const char *format, Character *to, Character *ch,
       ++str;
       if ( !arg2 && *str >= 'A' && *str <= 'Z' )
         {
-          Bug( "%s: missing arg2 for code %c:", __FUNCTION__, *str );
-          Bug( format );
+          Log->Bug( "%s: missing arg2 for code %c:", __FUNCTION__, *str );
+          Log->Bug( format );
           i = " <@@@> ";
         }
       else
         {
           switch ( *str )
             {
-            default:  Bug( "%s: bad code %c.", __FUNCTION__, *str );
+            default:  Log->Bug( "%s: bad code %c.", __FUNCTION__, *str );
               i = " <@@@> ";                                            break;
             case 't': i = (char *) arg1;                                        break;
             case 'T': i = (char *) arg2;                                        break;
@@ -1706,7 +1710,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
             case 'N': i = (to ? PERS(vch, to) : NAME(vch));                     break;
             case 'e': if (ch->Sex > 2 || ch->Sex < 0)
                 {
-                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
+                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
                       ch->Sex);
                   i = "it";
                 }
@@ -1715,7 +1719,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
               break;
             case 'E': if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL )
                 {
-                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
+                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
                       vch->Sex);
                   i = "it";
                 }
@@ -1724,7 +1728,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
               break;
             case 'm': if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
                 {
-                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
+                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
                       ch->Sex);
                   i = "it";
                 }
@@ -1733,7 +1737,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
               break;
             case 'M': if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
                 {
-                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
+                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
                       vch->Sex);
                   i = "it";
                 }
@@ -1742,7 +1746,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
               break;
             case 's': if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
                 {
-                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
+                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
                       ch->Sex);
                   i = "its";
                 }
@@ -1751,7 +1755,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
               break;
             case 'S': if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
                 {
-                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
+                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
                       vch->Sex);
                   i = "its";
                 }
@@ -1807,7 +1811,7 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
 
   if ( !ch )
     {
-      Bug( "Act: null ch. (%s)", format );
+      Log->Bug( "Act: null ch. (%s)", format );
       return;
     }
 
@@ -1828,14 +1832,14 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
     {
       if ( !vch )
         {
-          Bug( "Act: null vch with TO_VICT." );
-          Bug( "%s (%s)", ch->Name, format );
+          Log->Bug( "Act: null vch with TO_VICT." );
+          Log->Bug( "%s (%s)", ch->Name, format );
           return;
         }
       if ( !vch->InRoom )
         {
-          Bug( "Act: vch in NULL room!" );
-          Bug( "%s -> %s (%s)", ch->Name, vch->Name, format );
+          Log->Bug( "Act: vch in NULL room!" );
+          Log->Bug( "%s -> %s (%s)", ch->Name, vch->Name, format );
           return;
         }
       to = vch;
@@ -1936,7 +1940,7 @@ static void DisplayPrompt( Descriptor *d )
 
   if ( !ch )
     {
-      Bug( "%s: NULL ch", __FUNCTION__ );
+      Log->Bug( "%s: NULL ch", __FUNCTION__ );
       return;
     }
 
@@ -1982,7 +1986,7 @@ static void DisplayPrompt( Descriptor *d )
       switch(*(prompt-1))
         {
         default:
-          Bug( "Display_prompt: bad command char '%c'.", *(prompt-1) );
+          Log->Bug( "Display_prompt: bad command char '%c'.", *(prompt-1) );
           break;
 
         case '&':
@@ -2119,7 +2123,7 @@ static int MakeColorSequence(const char *col, char *buf, Descriptor *d)
     }
   else if ( *ctype != '&' && *ctype != '^' )
     {
-      Bug("%s: command '%c' not '&' or '^'.", __FUNCTION__, *ctype);
+      Log->Bug("%s: command '%c' not '&' or '^'.", __FUNCTION__, *ctype);
       ln = -1;
     }
   else if ( *col == *ctype )
@@ -2139,7 +2143,7 @@ static int MakeColorSequence(const char *col, char *buf, Descriptor *d)
       switch(*ctype)
         {
         default:
-          Bug( "%s: bad command char '%c'.", __FUNCTION__, *ctype );
+          Log->Bug( "%s: bad command char '%c'.", __FUNCTION__, *ctype );
           ln = -1;
           break;
 

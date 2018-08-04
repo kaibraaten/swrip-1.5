@@ -25,6 +25,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "script.hpp"
+#include "log.hpp"
 
 #define HELP_DATA_FILE DATA_DIR "help.lua"
 
@@ -237,8 +238,8 @@ void SetHelpFileLevel( HelpFile *help, short level )
     }
   else
     {
-      Bug( "%s:%s:%d: Argument level = %d is out of range.",
-	   __FUNCTION__, __FILE__, __LINE__, level );
+      Log->Bug( "%s:%s:%d: Argument level = %d is out of range.",
+                __FUNCTION__, __FILE__, __LINE__, level );
     }
 }
 

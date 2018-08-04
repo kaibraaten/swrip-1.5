@@ -31,8 +31,8 @@
 
 struct Alias
 {
-  char *Name;
-  char *Command;
+  char *Name = nullptr;
+  char *Command = nullptr;
 };
 
 DECLARE_CMD_FUN( do_alias );

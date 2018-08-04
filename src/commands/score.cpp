@@ -5,8 +5,9 @@
 #include "skill.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
-static char *tiny_GetAffectLocationName(int location);
+static char *TinyGetAffectLocationName(int location);
 
 void do_score(Character * ch, char *argument)
 {
@@ -301,13 +302,13 @@ void do_score(Character * ch, char *argument)
                 if (paf->Modifier > 999)
 		  Echo(ch, "&c[&C%-15.15s&c; &C%7.7s;%5d rds&c]    ",
                             Capitalize(sktmp->Name),
-                            tiny_GetAffectLocationName(paf->Location),
+                            TinyGetAffectLocationName(paf->Location),
                             paf->Duration);
                 else
                   Echo(ch, "&c[&C%-11.11s&c;&C%+-3.3d %7.7s&c;&C%5d rds&c]    ",
                             Capitalize(sktmp->Name),
                             paf->Modifier,
-                            tiny_GetAffectLocationName(paf->Location),
+                            TinyGetAffectLocationName(paf->Location),
                             paf->Duration);
               if (i == 0)
                 i = 1;
@@ -319,7 +320,7 @@ void do_score(Character * ch, char *argument)
   SendToCharacter("\r\n", ch);
 }
 
-static char *tiny_GetAffectLocationName(int location)
+static char *TinyGetAffectLocationName(int location)
 {
   switch (location) {
   case APPLY_NONE:              return "NIL";
@@ -391,6 +392,6 @@ static char *tiny_GetAffectLocationName(int location)
   case APPLY_SNIPE:             return " SNIPE ";
   }
 
-  Bug("Affect_location_name: unknown location %d.", location);
+  Log->Bug("Affect_location_name: unknown location %d.", location);
   return "(?)";
 }

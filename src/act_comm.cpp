@@ -27,6 +27,7 @@
 #include "clan.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 char *DrunkSpeech( const char *argument, Character *ch )
 {
@@ -49,7 +50,7 @@ char *DrunkSpeech( const char *argument, Character *ch )
 
   if ( !argument )
     {
-      Bug( "%s: NULL argument", __FUNCTION__ );
+      Log->Bug( "%s: NULL argument", __FUNCTION__ );
       return "";
     }
 
@@ -556,7 +557,7 @@ void StartFollowing( Character *ch, Character *master )
 {
   if ( ch->Master )
     {
-      Bug( "%s: non-null master.", __FUNCTION__ );
+      Log->Bug( "%s: non-null master.", __FUNCTION__ );
       return;
     }
 
@@ -580,7 +581,7 @@ void StopFollowing( Character *ch )
 {
   if ( !ch->Master )
     {
-      Bug( "%s: null master.", __FUNCTION__ );
+      Log->Bug( "%s: null master.", __FUNCTION__ );
       return;
     }
 
@@ -743,7 +744,7 @@ bool CharacterCanLearnLanguage( const Character *ch, int language )
 
             if ( ( sn = LookupSkill( LanguageNames[lang] ) ) < 0 )
               {
-                Bug( "Can_learn_lang: valid language without sn: %d", lang );
+                Log->Bug( "Can_learn_lang: valid language without sn: %d", lang );
                 continue;
               }
 

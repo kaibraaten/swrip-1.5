@@ -27,12 +27,14 @@
 #endif
 
 #include <unistd.h>
-#include <stdio.h>
-#include <ctype.h>
+#include <cstdio>
+#include <cctype>
+#include <cassert>
 #include "mud.hpp"
 #include "shuttle.hpp"
 #include "ship.hpp"
 #include "script.hpp"
+#include "log.hpp"
 
 ShuttleRepository *Shuttles = nullptr;
 
@@ -242,7 +244,7 @@ void ShuttleUpdate( void )
 		}
               else
 		{
-		  Bug("Shuttle '%s' is an unknown type", shuttle->Name);
+		  Log->Bug("Shuttle '%s' is an unknown type", shuttle->Name);
 		}
             }
           else if (shuttle->State == SHUTTLE_STATE_HYPERSPACE_LAUNCH)
@@ -327,8 +329,8 @@ void ShuttleUpdate( void )
             }
           else
             {
-              Bug("Shuttle '%s' has invalid state of %d",
-                  shuttle->Name, shuttle->State);
+              Log->Bug("Shuttle '%s' has invalid state of %d",
+                       shuttle->Name, shuttle->State);
               continue;
             }
         }
@@ -368,11 +370,8 @@ bool ExtractShuttle( Shuttle * shuttle )
 
 bool InsertShuttle( Shuttle *shuttle, Room *room )
 {
-  if (room == NULL)
-    {
-      Bug("Insert_shuttle: %s Room: %ld", shuttle->Name, room->Vnum);
-      return false;
-    }
+  assert(shuttle != nullptr);
+  assert(room != nullptr);
 
   if (shuttle->InRoom)
     {

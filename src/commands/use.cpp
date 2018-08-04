@@ -1,14 +1,15 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "log.hpp"
 
 void do_use( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char argd[MAX_INPUT_LENGTH];
-  Character *victim;
-  Object *device;
-  Object *obj;
-  ch_ret retcode;
+  Character *victim = nullptr;
+  Object *device = nullptr;
+  Object *obj = nullptr;
+  ch_ret retcode = rNONE;
 
   argument = OneArgument( argument, argd );
   argument = OneArgument( argument, arg );
@@ -41,7 +42,7 @@ void do_use( Character *ch, char *argument )
       return;
     }
 
-  if ( device->Value[2] <= 0 )
+  if ( device->Value[OVAL_DEVICE_CHARGES] <= 0 )
     {
       SendToCharacter( "It has no more charge left.", ch);
       return;
@@ -73,9 +74,10 @@ void do_use( Character *ch, char *argument )
 
   SetWaitState( ch, 1 * PULSE_VIOLENCE );
 
-  if ( device->Value[2] > 0 )
+  if ( device->Value[OVAL_DEVICE_CHARGES] > 0 )
     {
-      device->Value[2]--;
+      device->Value[OVAL_DEVICE_CHARGES]--;
+
       if ( victim )
         {
           if ( !ObjProgUseTrigger( ch, device, victim, NULL, NULL ) )
@@ -93,10 +95,12 @@ void do_use( Character *ch, char *argument )
             }
         }
 
-      retcode = CastSpellWithObject( device->Value[3], device->Value[0], ch, victim, obj );
+      retcode = CastSpellWithObject( device->Value[OVAL_DEVICE_SPELL],
+                                     device->Value[OVAL_DEVICE_LEVEL], ch, victim, obj );
+
       if ( retcode == rCHAR_DIED || retcode == rBOTH_DIED )
         {
-          Bug( "do_use: char died", 0 );
+          Log->Bug( "do_use: char died" );
           return;
         }
     }

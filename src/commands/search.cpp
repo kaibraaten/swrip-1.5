@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_search( Character *ch, char *argument )
 {
@@ -59,7 +60,7 @@ void do_search( Character *ch, char *argument )
       if ( !ch->dest_buf )
         {
           SendToCharacter( "Your search was interrupted!\r\n", ch );
-          Bug( "do_search: dest_buf NULL", 0 );
+          Log->Bug( "do_search: dest_buf NULL" );
           return;
         }
       strcpy( arg, (const char*)ch->dest_buf );

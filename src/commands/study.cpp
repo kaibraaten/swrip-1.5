@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 /* Allows PCs to learn spells embedded in object. Should prove interesting. - Samson 8-9-98 */
 void do_study( Character *ch, char *argument ) /* study by Absalom */
@@ -48,7 +49,7 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
 
       if ( sn < 0 || sn >= MAX_SKILL )
         {
-          Bug( "Do_study: bad sn %d.", sn );
+          Log->Bug( "Do_study: bad sn %d.", sn );
           return;
         }
       SetWaitState( ch, SkillTable[gsn_study]->Beats );

@@ -30,13 +30,15 @@
  *  If you modify this code and use/distribute modified versions
  *  you must give credit to the original author(s).
  */
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <stdarg.h>
+
+#include <cstdio>
+#include <cstring>
+#include <cctype>
+#include <cstdarg>
 #include "mud.hpp"
 #include "editor.hpp"
 #include "character.hpp"
+#include "log.hpp"
 
 /****************************************************************************
  * Data types and other definitions
@@ -344,13 +346,13 @@ static void StartEditingNoLimit( Character *ch, char *old_text, short max_total 
 {
   if ( !ch->Desc )
     {
-      Bug( "Fatal: StartEditing: no desc", 0 );
+      Log->Bug( "Fatal: StartEditing: no desc" );
       return;
     }
 
   if ( ch->SubState == SUB_RESTRICTED )
     {
-      Bug( "NOT GOOD: StartEditing: ch->SubState == SUB_RESTRICTED", 0 );
+      Log->Bug( "NOT GOOD: StartEditing: ch->SubState == SUB_RESTRICTED" );
     }
 
   SetCharacterColor( AT_GREEN, ch );
@@ -375,13 +377,13 @@ char *CopyBuffer( Character *ch )
 
   if ( !ch )
     {
-      Bug( "CopyBuffer: null ch", 0 );
+      Log->Bug( "CopyBuffer: null ch", 0 );
       return CopyString( "" );
     }
 
   if ( !ch->Editor )
     {
-      Bug( "CopyBuffer: null editor", 0 );
+      Log->Bug( "CopyBuffer: null editor", 0 );
       return CopyString( "" );
     }
 
@@ -401,7 +403,7 @@ void StopEditing( Character *ch )
 
   if ( !ch->Desc )
     {
-      Bug( "Fatal: StopEditing: no desc" );
+      Log->Bug( "Fatal: StopEditing: no desc" );
       return;
     }
 
@@ -429,14 +431,14 @@ void EditBuffer( Character *ch, char *argument )
   if ( d->ConnectionState != CON_EDITING )
     {
       SendToCharacter( "You can't do that!\r\n", ch );
-      Bug( "Edit_buffer: d->ConnectionState != CON_EDITING" );
+      Log->Bug( "Edit_buffer: d->ConnectionState != CON_EDITING" );
       return;
     }
 
   if ( ch->SubState <= SUB_PAUSE )
     {
       SendToCharacter( "You can't do that!\r\n", ch );
-      Bug( "Edit_buffer: illegal ch->SubState (%d)", ch->SubState );
+      Log->Bug( "Edit_buffer: illegal ch->SubState (%d)", ch->SubState );
       d->ConnectionState = CON_PLAYING;
       return;
     }
@@ -444,7 +446,7 @@ void EditBuffer( Character *ch, char *argument )
   if ( !ch->Editor )
     {
       SendToCharacter( "You can't do that!\r\n", ch );
-      Bug( "Edit_buffer: null editor" );
+      Log->Bug( "Edit_buffer: null editor" );
       d->ConnectionState = CON_PLAYING;
       return;
     }

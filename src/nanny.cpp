@@ -32,6 +32,7 @@
 #include "board.hpp"
 #include "ban.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 typedef void NannyFun( Descriptor *d, char *argument );
 
@@ -73,7 +74,7 @@ void Nanny( Descriptor *d, char *argument )
   switch ( d->ConnectionState )
     {
     default:
-      Bug( "Nanny: bad d->ConnectionState %d.", d->ConnectionState );
+      Log->Bug( "Nanny: bad d->ConnectionState %d.", d->ConnectionState );
       CloseDescriptor( d, true );
       return;
 
@@ -696,13 +697,13 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
       if ( LanguageArray[iLang] == LANG_UNKNOWN )
 	{
-	  Bug( "Nanny: invalid racial language." );
+	  Log->Bug( "Nanny: invalid racial language." );
 	}
       else
 	{
 	  if ( (iLang = LookupSkill( LanguageNames[iLang] )) < 0 )
 	    {
-	      Bug( "Nanny: cannot find racial language." );
+	      Log->Bug( "Nanny: cannot find racial language." );
 	    }
 	  else
 	    {
@@ -863,22 +864,22 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	      char letter;
 	      char *word;
 
-	      letter = ReadChar( fph );
+	      letter = ReadChar( fph, Log );
 
 	      if ( letter == '*' )
 		{
-		  ReadToEndOfLine( fph );
+		  ReadToEndOfLine( fph, Log );
 		  continue;
 		}
 
 	      if ( letter != '#' )
 		{
-		  Bug( "Load_plr_home: # not found.", 0 );
-		  Bug( ch->Name, 0 );
+		  Log->Bug( "Load_plr_home: # not found.", 0 );
+		  Log->Bug( ch->Name, 0 );
 		  break;
 		}
 
-	      word = ReadWord( fph );
+	      word = ReadWord( fph, Log );
 
 	      if ( !StrCmp( word, "OBJECT" ) )     /* Objects      */
 		{
@@ -891,8 +892,8 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 		  }
 		else
 		  {
-		    Bug( "Load_plr_home: bad section.", 0 );
-		    Bug( ch->Name, 0 );
+		    Log->Bug( "Load_plr_home: bad section.", 0 );
+		    Log->Bug( ch->Name, 0 );
 		    break;
 		  }
 	    }

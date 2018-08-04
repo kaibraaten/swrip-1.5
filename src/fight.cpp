@@ -32,6 +32,7 @@
 #include "planet.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 extern char lastplayercmd[MAX_INPUT_LENGTH];
 extern Character *gch_prev;
@@ -1195,12 +1196,12 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
 
   if ( !ch )
     {
-      Bug( "%s: null ch!", __FUNCTION__ );
+      Log->Bug( "%s: null ch!", __FUNCTION__ );
       return rERROR;
     }
   if ( !victim )
     {
-      Bug( "%s: null victim!", __FUNCTION__ );
+      Log->Bug( "%s: null victim!", __FUNCTION__ );
       return rVICT_DIED;
     }
 
@@ -1833,7 +1834,7 @@ static void ApplyWantedFlags( Character *ch, const Character *victim )
     {
       if ( !ch->Master )
         {
-          Bug( "%s: %s bad AFF_CHARM",
+          Log->Bug( "%s: %s bad AFF_CHARM",
                __FUNCTION__, IsNpc(ch) ? ch->ShortDescr : ch->Name );
           StripAffect( ch, gsn_charm_person );
           RemoveBit( ch->AffectedBy, AFF_CHARM );
@@ -1867,7 +1868,7 @@ static void UpdateKillStats( Character *ch, Character *victim )
     {
       if ( !ch->Master )
         {
-          Bug( "%s: %s bad AFF_CHARM",
+          Log->Bug( "%s: %s bad AFF_CHARM",
                __FUNCTION__, IsNpc(ch) ? ch->ShortDescr : ch->Name );
           StripAffect( ch, gsn_charm_person );
           RemoveBit( ch->AffectedBy, AFF_CHARM );
@@ -1918,7 +1919,7 @@ void UpdatePosition( Character *victim )
 {
   if ( !victim )
     {
-      Bug( "%s: null victim", __FUNCTION__ );
+      Log->Bug( "%s: null victim", __FUNCTION__ );
       return;
     }
 
@@ -1994,7 +1995,7 @@ void StartFighting( Character *ch, Character *victim )
 
   if ( ch->Fighting )
     {
-      Bug( "%s: %s -> %s (already fighting %s)",
+      Log->Bug( "%s: %s -> %s (already fighting %s)",
 	   __FUNCTION__, ch->Name, victim->Name, ch->Fighting->Who->Name );
       return;
     }
@@ -2033,7 +2034,7 @@ Character *GetFightingOpponent( const Character *ch )
 {
   if ( !ch )
     {
-      Bug( "%s: null ch", __FUNCTION__ );
+      Log->Bug( "%s: null ch", __FUNCTION__ );
       return NULL;
     }
 
@@ -2047,7 +2048,7 @@ void FreeFight( Character *ch )
 {
   if ( !ch )
     {
-      Bug( "Free_fight: null ch!" );
+      Log->Bug( "Free_fight: null ch!" );
       return;
     }
 
@@ -2128,7 +2129,7 @@ void RawKill( Character *killer, Character *victim )
 
   if ( !victim )
     {
-      Bug( "RawKill: null victim!" );
+      Log->Bug( "RawKill: null victim!" );
       return;
     }
 
@@ -2422,7 +2423,7 @@ static void GainGroupXP( Character *ch, Character *victim )
 
   if ( members == 0 )
     {
-      Bug( "%s: zero members.", __FUNCTION__ );
+      Log->Bug( "%s: zero members.", __FUNCTION__ );
       members = 1;
     }
 
@@ -2667,13 +2668,13 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
     {
       if ( dt < TYPE_HIT + (int) GetAttackTableSize() )
 	{
-	  attack = GetAttackType_name( dt - TYPE_HIT );
+	  attack = GetAttackTypeName( dt - TYPE_HIT );
 	}
       else
 	{
-	  Bug( "%s: bad dt %d.", __FUNCTION__, dt );
+	  Log->Bug( "%s: bad dt %d.", __FUNCTION__, dt );
 	  dt  = TYPE_HIT;
-	  attack = GetAttackType_name( 0 );
+	  attack = GetAttackTypeName( 0 );
 	}
 
       sprintf( buf1, "$n's poisoned %s %s $N%c", attack, vp, punct );
@@ -2734,13 +2735,13 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
       else if ( dt >= TYPE_HIT
 		&& dt < TYPE_HIT + (int) GetAttackTableSize() )
 	{
-	  attack = GetAttackType_name( dt - TYPE_HIT );
+	  attack = GetAttackTypeName( dt - TYPE_HIT );
 	}
       else
 	{
-	  Bug( "%s: bad dt %d.", __FUNCTION__, dt );
+	  Log->Bug( "%s: bad dt %d.", __FUNCTION__, dt );
 	  dt  = TYPE_HIT;
-	  attack = GetAttackType_name( 0 );
+	  attack = GetAttackTypeName( 0 );
 	}
 
       sprintf( buf1, "$n's %s %s $N%c",  attack, vp, punct );

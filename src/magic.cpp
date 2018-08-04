@@ -19,12 +19,13 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <ctype.h>
-#include <string.h>
+#include <cctype>
+#include <cstring>
 #include <strings.h>
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "log.hpp"
 
 int pAbort = 0;
 
@@ -103,7 +104,7 @@ bool IsImmuneToDamageType( const Character *ch, short damtype )
       break;
 
     default:
-      Bug("magic.c:IsImmuneToDamageType(): Reached default case, which is invalid.");
+      Log->Bug("magic.cpp:IsImmuneToDamageType(): Reached default case, which is invalid.");
       abort();
       break;
     }
@@ -639,7 +640,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
   switch ( skill->Target )
     {
     default:
-      Bug( "%s: bad target for sn %d.", __FUNCTION__, sn );
+      Log->Bug( "%s: bad target for sn %d.", __FUNCTION__, sn );
       return &pAbort;
 
     case TAR_IGNORE:
@@ -765,7 +766,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
 
   if ( !skill || !skill->SpellFunction )
     {
-      Bug( "%s: bad sn %d.", __FUNCTION__, sn );
+      Log->Bug( "%s: bad sn %d.", __FUNCTION__, sn );
       return rERROR;
     }
 
@@ -826,7 +827,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
   switch ( skill->Target )
     {
     default:
-      Bug( "%s: bad target for sn %d.", __FUNCTION__, sn );
+      Log->Bug( "%s: bad target for sn %d.", __FUNCTION__, sn );
       return rERROR;
 
     case TAR_IGNORE:

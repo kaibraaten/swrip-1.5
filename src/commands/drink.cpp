@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "log.hpp"
 
 void do_drink( Character *ch, char *argument )
 {
@@ -87,7 +88,7 @@ void do_drink( Character *ch, char *argument )
 
       if ( ( liquid = obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] ) >= LIQ_MAX )
         {
-          Bug( "Do_drink: bad liquid number %d.", liquid );
+          Log->Bug( "Do_drink: bad liquid number %d.", liquid );
           liquid = obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] = LIQ_WATER;
         }
 
