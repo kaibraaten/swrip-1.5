@@ -5,7 +5,7 @@ CXXFLAGS = -std=c++14 -g3 -MMD -I. -I.. -I../libs  $(WFLAGS)
 LDFLAGS = -L.. -L../libs/utility -Wl,-rpath,.. -Wl,-rpath,../libs/utility -lm -lz -lgtest -lutility -lswrip -llua -ldl
 
 ODIR = obj
-_OBJ = main.o
+_OBJ = main.o arraydatatests.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
