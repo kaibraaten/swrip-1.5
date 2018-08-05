@@ -9,9 +9,9 @@
  */
 void do_sset( Character *ch, char *argument )
 {
-  char arg1 [MAX_INPUT_LENGTH];
-  char arg2 [MAX_INPUT_LENGTH];
-  Character *victim = NULL;
+  char arg1[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH / 2];
+  Character *victim = nullptr;
   int value = 0;
   int sn = 0;
   bool fAll = false;

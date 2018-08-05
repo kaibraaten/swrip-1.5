@@ -223,7 +223,7 @@ void FoundPrey( Character *ch, Character *victim )
   assert(victim->InRoom != nullptr);
 
   char buf[MAX_STRING_LENGTH];
-  char victname[MAX_STRING_LENGTH];
+  char victname[1024];
 
   sprintf( victname, "%s", IsNpc( victim ) ? victim->ShortDescr : victim->Name );
 

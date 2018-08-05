@@ -1699,7 +1699,7 @@ static void imc_send_tell( const char *from, const char *to, const char *txt, in
 PFUN( imc_recv_tell )
 {
    Character *vic;
-   char txt[LGST], isreply[SMST], buf[LGST];
+   char txt[SMST], isreply[SMST], buf[LGST];
    int reply;
 
    imc_getData( txt, "text", packet );
@@ -1801,7 +1801,7 @@ PFUN( imc_recv_emote )
 
 static void update_imchistory( IMC_CHANNEL * channel, const char *message )
 {
-   char msg[LGST], buf[LGST];
+   char msg[SMST], buf[LGST];
    struct tm *local;
    int x;
 
@@ -2058,9 +2058,9 @@ static const char *get_local_chanwho( IMC_CHANNEL * c )
     * Send no response to a broadcast request if nobody is listening. 
     */
    if( count == 0 )
-      strncat( buf, "Nobody\r\n", IMC_BUFF_SIZE );
+     strncat( buf, "Nobody\r\n", sizeof(buf) / 2);
    else
-      strncat( buf, "\r\n", IMC_BUFF_SIZE );
+     strncat( buf, "\r\n", sizeof(buf) - 10);
    return buf;
 }
 
@@ -2223,7 +2223,7 @@ static char *multiline_center( char *splitme )
          strncpy( arg, imccenterline( arg, 78 ), SMST );
       }
       strncat( newline, arg, LGST - 1);
-      strncat( newline, "\n", LGST );
+      strncat( newline, "\n", LGST - 1);
    }
    return newline;
 }
@@ -2265,7 +2265,7 @@ static char *process_plrline( char *plrrank, char *plrflags, char *plrname, char
    strncpy( pline, imcstrrep( pline, "<%charflags%>", plrflags ), LGST );
    strncpy( pline, imcstrrep( pline, "<%charname%>", plrname ), LGST );
    strncpy( pline, imcstrrep( pline, "<%chartitle%>", plrtitle ), LGST );
-   strncat( pline, "\n", LGST );
+   strncat( pline, "\n", LGST - 1);
 
    return pline;
 }
@@ -2279,7 +2279,7 @@ static char *process_immline( char *plrrank, char *plrflags, char *plrname, char
    strncpy( pline, imcstrrep( pline, "<%charflags%>", plrflags ), LGST );
    strncpy( pline, imcstrrep( pline, "<%charname%>", plrname ), LGST );
    strncpy( pline, imcstrrep( pline, "<%chartitle%>", plrtitle ), LGST );
-   strncat( pline, "\n", LGST );
+   strncat( pline, "\n", LGST - 1 );
 
    return pline;
 }
@@ -5744,7 +5744,7 @@ IMC_CMD( imclisten )
 
 IMC_CMD( imctell )
 {
-   char buf[LGST], buf1[LGST];
+   char buf[SMST], buf1[LGST];
 
    if( IsBitSet( IMCFLAG( ch ), IMC_DENYTELL ) )
    {
@@ -6906,7 +6906,7 @@ IMC_CMD( imcremoteadmin )
 {
    REMOTEINFO *r;
    char server[SMST], cmd[SMST], to[SMST];
-   char pwd[LGST];
+   char pwd[SMST];
    IMC_PACKET *p;
 
    argument = imcOneArgument( argument, server );
@@ -6961,8 +6961,9 @@ IMC_CMD( imchelp )
 
    if( IsNullOrEmpty( argument ) )
    {
-      strncpy( buf, "~gHelp is available for the following commands:\r\n", LGST );
-      strncat( buf, "~G---------------------------------------------\r\n", LGST );
+      strncpy( buf, "~gHelp is available for the following commands:\r\n", LGST - 1);
+      strncat( buf, "~G---------------------------------------------\r\n", LGST - 1);
+
       for( perm = IMCPERM_MORT; perm <= IMCPERM( ch ); perm++ )
       {
          col = 0;
@@ -6974,10 +6975,10 @@ IMC_CMD( imchelp )
 
             sprintf( buf + strlen( buf ), "%-15s", help->Name );
             if( ++col % 6 == 0 )
-               strncat( buf, "\r\n", LGST );
+               strncat( buf, "\r\n", LGST - 1);
          }
          if( col % 6 != 0 )
-            strncat( buf, "\r\n", LGST );
+            strncat( buf, "\r\n", LGST - 1);
       }
       imc_to_pager( buf, ch );
       return;
@@ -7218,10 +7219,10 @@ IMC_CMD( imccedit )
          {
             sprintf( buf + strlen( buf ), "%s ", alias->Name );
             if( ++col % 10 == 0 )
-               strncat( buf, "\r\n", LGST );
+               strncat( buf, "\r\n", LGST - 1);
          }
          if( col % 10 != 0 )
-            strncat( buf, "\r\n", LGST );
+            strncat( buf, "\r\n", LGST - 1);
          imc_to_char( buf, ch );
       }
       return;
@@ -7360,8 +7361,9 @@ IMC_CMD( imc_other )
    IMC_CMD_DATA *cmd;
    int col, perm;
 
-   strncpy( buf, "~gThe following commands are available:\r\n", LGST );
-   strncat( buf, "~G-------------------------------------\r\n\r\n", LGST );
+   strncpy( buf, "~gThe following commands are available:\r\n", LGST - 1);
+   strncat( buf, "~G-------------------------------------\r\n\r\n", LGST - 1);
+
    for( perm = IMCPERM_MORT; perm <= IMCPERM( ch ); perm++ )
    {
       col = 0;
@@ -7373,10 +7375,10 @@ IMC_CMD( imc_other )
 
          sprintf( buf + strlen( buf ), "%-15s", cmd->Name );
          if( ++col % 6 == 0 )
-            strncat( buf, "\r\n", LGST );
+            strncat( buf, "\r\n", LGST - 1);
       }
       if( col % 6 != 0 )
-         strncat( buf, "\r\n", LGST );
+         strncat( buf, "\r\n", LGST - 1);
    }
    imc_to_pager( buf, ch );
    imc_to_pager( "\r\n~gFor information about a specific command, see ~Wimchelp <command>~g.\r\n", ch );

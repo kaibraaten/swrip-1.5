@@ -345,8 +345,9 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 	  break;
 
         default:
-          sprintf(rval, "Bad argument '%c' to '%s'", cvar[0], chck);
-          ProgBug(rval, mob);
+          char message[MAX_STRING_LENGTH];
+          sprintf(message, "Bad argument '%c' to '%s'", cvar[0], chck);
+          ProgBug(message, mob);
           return BERR;
         }
 

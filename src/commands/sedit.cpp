@@ -8,7 +8,7 @@
 void do_sedit( Character *ch, char *argument )
 {
   Social *social;
-  char arg1[MAX_INPUT_LENGTH];
+  char arg1[MAX_INPUT_LENGTH - 10];
   char arg2[MAX_INPUT_LENGTH];
 
   SmashTilde( argument );

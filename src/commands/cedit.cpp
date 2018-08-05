@@ -8,16 +8,16 @@
 void do_cedit( Character *ch, char *argument )
 {
   Command *command;
-  char arg1[MAX_INPUT_LENGTH];
+  char commandName[1024];
   char arg2[MAX_INPUT_LENGTH];
 
   SmashTilde( argument );
-  argument = OneArgument( argument, arg1 );
+  argument = OneArgument( argument, commandName );
   argument = OneArgument( argument, arg2 );
 
   SetCharacterColor( AT_IMMORT, ch );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( IsNullOrEmpty( commandName ) )
     {
       SendToCharacter( "Syntax: cedit save\r\n", ch );
       if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM )
@@ -33,14 +33,14 @@ void do_cedit( Character *ch, char *argument )
       return;
     }
 
-  if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( arg1, "save" ) )
+  if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( commandName, "save" ) )
     {
       SaveCommands();
       SendToCharacter( "Saved.\r\n", ch );
       return;
     }
 
-  command = GetCommand( arg1 );
+  command = GetCommand( commandName );
 
   if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM && !StrCmp( arg2, "create" ) )
     {
@@ -51,13 +51,13 @@ void do_cedit( Character *ch, char *argument )
         }
 
       command = AllocateCommand();
-      command->Name = CopyString( arg1 );
+      command->Name = CopyString( commandName );
       command->Level = GetTrustLevel(ch);
 
       if ( *argument )
         OneArgument(argument, arg2);
       else
-        sprintf( arg2, "do_%s", arg1 );
+        sprintf( arg2, "do_%s", ToLower(commandName).c_str() );
 
       command->Function = GetSkillFunction( arg2 );
       AddCommand( command );
@@ -215,9 +215,9 @@ void do_cedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      OneArgument( argument, arg1 );
+      OneArgument( argument, commandName );
 
-      if ( IsNullOrEmpty( arg1 ) )
+      if ( IsNullOrEmpty( commandName ) )
         {
           SendToCharacter( "Cannot clear name field!\r\n", ch );
           return;
@@ -226,7 +226,7 @@ void do_cedit( Character *ch, char *argument )
       if ( command->Name != NULL )
         FreeMemory( command->Name );
 
-      command->Name = CopyString( arg1 );
+      command->Name = CopyString( commandName );
 
       SendToCharacter( "Done.\r\n", ch );
       return;

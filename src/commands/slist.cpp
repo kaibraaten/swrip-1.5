@@ -7,7 +7,7 @@ void do_slist( Character *ch, char *argument )
 {
   int sn = 0, i = 0;
   char skn[MAX_INPUT_LENGTH];
-  char skn2[MAX_INPUT_LENGTH];
+  char skn2[MAX_INPUT_LENGTH / 2];
   int lowlev = 1, hilev = 150;
   int col = 0;
   int ability = 0;

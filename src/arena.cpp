@@ -27,12 +27,13 @@
  * Bugs fixed made for Star Wars: Rise in Power by Ulysses and Darrik Vequir
  */
 
+#include <sstream>
 #include <sys/types.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+#include <cctype>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <ctime>
 #include "character.hpp"
 #include "mud.hpp"
 #include "arena.hpp"
@@ -74,27 +75,36 @@ void StartArena(void)
         }
       else
         {
+          std::ostringstream outbuf1;
+          std::ostringstream outbuf2;
+          
           if(arena.TimeToStart >1)
             {
               sprintf(buf1, "&WThe Killing Fields are open to levels &R%d &Wthru &R%d\r\n",
                       arena.MinLevel, arena.MaxLevel);
-              sprintf(buf1, "%s%d &Whours to start\r\n", buf1, arena.TimeToStart);
-              sprintf(buf2,"The killing fields are open.\r\n");
-              sprintf(buf2,"%s&R%d &Whour to start\r\n",buf2,arena.TimeToStart);
+              outbuf1 << buf1;
+              sprintf(buf1, "%d &Whours to start\r\n", arena.TimeToStart);
+              outbuf1 << buf1;
+              
+              outbuf2 << "The killing fields are open.\r\n";
+              sprintf(buf2,"&R%d &Whour to start\r\n", arena.TimeToStart);
+              outbuf2 << buf2;
             }
           else
             {
               sprintf(buf1, "&WThe Killing Fields are open to levels &R%d &Wthru &R%d\r\n",
                       arena.MinLevel, arena.MaxLevel);
-              sprintf(buf1, "%s1 &Whour to start\r\n", buf1);
-              sprintf(buf2,"The killing fields are open.\r\n");
-              sprintf(buf2,"%s&R1 &Whour to start\r\n",buf2);
+              outbuf1 << buf1 << "1 &Whour to start\r\n";
+
+              outbuf2 << "The killing fields are open.\r\n"
+                      << "&R1 &Whour to start\r\n";
             }
 
-          sprintf(buf1, "%sType &Rarena &Wto enter.\r\n", buf1);
-          ToChannel(buf1,CHANNEL_ARENA,"&RArena&W",arena.MinLevel);
-          sprintf(buf2,"%sPlace your bets!!!\r\n",buf2);
-          ToChannel(buf2,CHANNEL_ARENA,"&RArena&W",5);
+          outbuf1 << "Type &Rarena &Wto enter.\r\n";
+          ToChannel(outbuf1.str().c_str(),CHANNEL_ARENA,"&RArena&W",arena.MinLevel);
+
+          outbuf2 << "Place your bets!!!\r\n";
+          ToChannel(outbuf2.str().c_str(), CHANNEL_ARENA,"&RArena&W",5);
           arena.TimeToStart--;
         }
     }
@@ -267,13 +277,11 @@ static void FindGameWinner(void)
 
 static void ShowJackpot(void)
 {
-  char buf1[MAX_INPUT_LENGTH];
-
-  sprintf(buf1, "\r\nLets get ready to RUMBLE!!!!!!!!\r\n");
-  sprintf(buf1, "%sThe jack pot for this arena is %d credits\r\n",
-          buf1, arena.ArenaPot);
-  sprintf(buf1, "%s%d credits have been bet on this arena.\r\n",buf1, arena.BetPot);
-  ToChannel(buf1,CHANNEL_ARENA,"&RArena&W",5);
+  std::ostringstream buf;
+  buf << "\r\nLets get ready to RUMBLE!!!!!!!!\r\n"
+      << "The jack pot for this arena is " << arena.ArenaPot << " credits\r\n"
+      << arena.BetPot << " credits have been bet on this arena.\r\n";
+  ToChannel(buf.str().c_str(),CHANNEL_ARENA,"&RArena&W",5);
 }
 
 static void SilentEnd(void)

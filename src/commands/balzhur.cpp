@@ -64,10 +64,11 @@ void do_balzhur( Character *ch, char *argument )
   victim->Mana     = victim->MaxMana;
   victim->Move     = victim->MaxMove;
 
+  char victimImmortalFilename[1024];
+  
+  sprintf( victimImmortalFilename, "%s%s", GOD_DIR, Capitalize(victim->Name) );
 
-  sprintf( buf, "%s%s", GOD_DIR, Capitalize(victim->Name) );
-
-  if ( !remove( buf ) )
+  if ( !remove( victimImmortalFilename ) )
     {
       SendToCharacter( "Player's immortal data destroyed.\r\n", ch );
     }
@@ -75,7 +76,7 @@ void do_balzhur( Character *ch, char *argument )
     {
       Echo( ch, "Unknown error #%d - %s (immortal data).  Report to Thoric\r\n",
                  errno, strerror( errno ) );
-      sprintf( buf2, "%s balzhuring %s", ch->Name, buf );
+      sprintf( buf2, "%s balzhuring %s", ch->Name, victimImmortalFilename );
       perror( buf2 );
     }
 
