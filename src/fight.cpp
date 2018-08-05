@@ -2329,7 +2329,8 @@ void RawKill( Character *killer, Character *victim )
 	{
 	  Echo( killer, "Unknown error #%d - %s (immortal data). Report to the administration\r\n",
 		errno, strerror( errno ) );
-	  sprintf( buf2, "%s slaying %s", killer->Name, buf );
+          sprintf( buf2, "%s slaying ", killer->Name);
+          strcpy(buf2, buf);
 	  perror( buf2 );
 	}
 
@@ -2751,7 +2752,9 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
 
   if ( GetAbilityLevel( ch, COMBAT_ABILITY ) >= 50 )
     {
-      sprintf( buf2, "%s You do %d points of damage.", buf2, dam);
+      char damageAmountMsg[100];
+      sprintf( damageAmountMsg, "You do %d points of damage.", dam);
+      strcat(buf2, damageAmountMsg);
     }
 
   Act( AT_ACTION, buf1, ch, NULL, victim, TO_NOTVICT );

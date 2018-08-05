@@ -490,7 +490,7 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
 {
   Spaceobject *spaceobj = NULL;
   char buf[MAX_STRING_LENGTH];
-  char buf2[MAX_STRING_LENGTH];
+  char landingSiteName[1024];
   bool found = false;
   Ship *target = NULL;
 
@@ -514,7 +514,7 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
 	{
 	  if ( !StringPrefix(arg, spaceobj->LandingSites[siteNum].LocationName) )
 	    {
-	      strcpy( buf2, spaceobj->LandingSites[siteNum].LocationName);
+	      strcpy( landingSiteName, spaceobj->LandingSites[siteNum].LocationName);
 	      break;
 	    }
 	}
@@ -525,7 +525,7 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
   if ( target && target != ship && target->BayOpen
        && ( ship->Class != MIDSIZE_SHIP || target->Class != MIDSIZE_SHIP ) )
     {
-      strcpy( buf2, target->Name);
+      strcpy( landingSiteName, target->Name);
     }
 
   if ( !found && !target )
@@ -534,9 +534,9 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
       return;
     }
 
-  sprintf( buf, "Approaching %s.", buf2 );
+  sprintf( buf, "Approaching %s.", landingSiteName );
   EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Pilotseat), buf);
-  sprintf( buf, "%s begins its approach to %s.", ship->Name, buf2 );
+  sprintf( buf, "%s begins its approach to %s.", ship->Name, landingSiteName );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }
 

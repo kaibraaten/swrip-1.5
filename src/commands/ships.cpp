@@ -91,7 +91,7 @@ static bool ShowIfPilotable(Ship *ship, void *userData)
 
   bool owned = false, set = false;
   char pilottype[MAX_STRING_LENGTH] = { '\0' };
-  char pilottype2[MAX_STRING_LENGTH] = { '\0' };
+  char pilottype2[MAX_STRING_LENGTH / 2] = { '\0' };
   char buf[MAX_STRING_LENGTH];
 
   if ( StrCmp(ship->Owner, ch->Name) )

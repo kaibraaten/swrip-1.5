@@ -5,100 +5,97 @@
 #include "character.hpp"
 #include "area.hpp"
 
+static void CloseDescriptorIfHalfwayLoggedIn(const std::string &name);
+static void ExtractVictim(Character *victim);
+static Character *GetVictimInWorld(const std::string &name);
+
 void do_destroy( Character *ch, char *argument )
 {
-  Character *victim;
-  char buf[MAX_STRING_LENGTH];
-  char buf2[MAX_STRING_LENGTH];
-  char arg[MAX_INPUT_LENGTH];
+  char victimName[100];
 
-  OneArgument( argument, arg );
+  OneArgument( argument, victimName );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( IsNullOrEmpty( victimName ) )
     {
       SendToCharacter( "Destroy what player file?\r\n", ch );
       return;
     }
 
-  for ( victim = FirstCharacter; victim; victim = victim->Next )
-    if ( !IsNpc(victim) && !StrCmp(victim->Name, arg) )
-      break;
-
+  Character *victim = GetVictimInWorld(victimName);
+    
   if ( !victim )
     {
-      Descriptor *d;
-
-      /* Make sure they aren't halfway logged in. */
-      for ( d = FirstDescriptor; d; d = d->Next )
-        if ( (victim = d->Character) && !IsNpc(victim) &&
-	     !StrCmp(victim->Name, arg) )
-          break;
-
-      if ( d )
-	{
-	  CloseDescriptor( d, true );
-	}
+      CloseDescriptorIfHalfwayLoggedIn(victimName);
     }
   else
     {
-      int x = 0, y = 0;
-
-      quitting_char = victim;
-      SaveCharacter( victim );
-      saving_char = NULL;
-      ExtractCharacter( victim, true );
-      for ( x = 0; x < MAX_WEAR; x++ )
-        for ( y = 0; y < MAX_LAYERS; y++ )
-          save_equipment[x][y] = NULL;
+      ExtractVictim(victim);
     }
 
-  sprintf( buf, "%s%c/%s", PLAYER_DIR, tolower(arg[0]),
-           Capitalize( arg ) );
-  sprintf( buf2, "%s%c/%s", BACKUP_DIR, tolower(arg[0]),
-           Capitalize( arg ) );
+  char oldPath[256];
+  char backupPath[256];
+  
+  sprintf( oldPath, "%s%c/%s", PLAYER_DIR, tolower(victimName[0]),
+           Capitalize( victimName ) );
+  sprintf( backupPath, "%s%c/%s", BACKUP_DIR, tolower(victimName[0]),
+           Capitalize( victimName ) );
 
-  if ( !rename( buf, buf2 ) )
+  if ( rename( oldPath, backupPath ) == 0 )
     {
-      Area *pArea;
-
+      Area *pArea = nullptr;
+      char godDataPath[256];
+      
       SetCharacterColor( AT_RED, ch );
       SendToCharacter( "Player destroyed.  Pfile saved in backup directory.\r\n", ch );
-      sprintf( buf, "%s%s", GOD_DIR, Capitalize(arg) );
+      sprintf( godDataPath, "%s%s", GOD_DIR, Capitalize(victimName) );
 
-      if ( !remove( buf ) )
-        SendToCharacter( "Player's immortal data destroyed.\r\n", ch );
+      if ( remove( godDataPath ) == 0 )
+        {
+          SendToCharacter( "Player's immortal data destroyed.\r\n", ch );
+        }
       else if ( errno != ENOENT )
         {
           Echo( ch, "Unknown error #%d - %s (immortal data).  Report to Thoric.\r\n",
                      errno, strerror( errno ) );
-          sprintf( buf2, "%s destroying %s", ch->Name, buf );
-          perror( buf2 );
+          char errorMessage[1024];
+          sprintf( errorMessage, "%s destroying %s", ch->Name, godDataPath );
+          perror( errorMessage );
         }
 
-      sprintf( buf2, "%s.are", Capitalize(arg) );
+      char areaName[100];
+      sprintf( areaName, "%s.are", Capitalize(victimName) );
 
       for ( pArea = FirstBuild; pArea; pArea = pArea->Next )
-        if ( !StrCmp( pArea->Filename, buf2 ) )
-          {
-            sprintf( buf, "%s%s", BUILD_DIR, buf2 );
+        {
+          if ( !StrCmp( pArea->Filename, areaName ) )
+            {
+              char areaPath[256];
+              sprintf( areaPath, "%s%s", BUILD_DIR, areaName );
 
-	    if ( IsBitSet( pArea->Status, AREA_LOADED ) )
-	      FoldArea( pArea, buf, false );
+              if ( IsBitSet( pArea->Status, AREA_LOADED ) )
+                {
+                  FoldArea( pArea, areaName, false );
+                }
+              
+              CloseArea( pArea );
+              char areaBackupPath[512];
+              sprintf( areaBackupPath, "%s.bak", areaPath );
+              SetCharacterColor( AT_RED, ch ); /* Log message changes colors */
 
-	    CloseArea( pArea );
-            sprintf( buf2, "%s.bak", buf );
-            SetCharacterColor( AT_RED, ch ); /* Log message changes colors */
-
-	    if ( !rename( buf, buf2 ) )
-              SendToCharacter( "Player's area data destroyed.  Area saved as backup.\r\n", ch );
-            else if ( errno != ENOENT )
-              {
-                Echo( ch, "Unknown error #%d - %s (area data).  Report to Thoric.\r\n",
-                           errno, strerror( errno ) );
-                sprintf( buf2, "%s destroying %s", ch->Name, buf );
-                perror( buf2 );
-              }
-          }
+              if ( !rename( areaPath, areaBackupPath ) )
+                {
+                  SendToCharacter( "Player's area data destroyed.  Area saved as backup.\r\n", ch );
+                }
+              else if ( errno != ENOENT )
+                {
+                  Echo( ch, "Unknown error #%d - %s (area data).  Report to Thoric.\r\n",
+                        errno, strerror( errno ) );
+                  char errorMessage[1024];
+                  sprintf( errorMessage, "%s destroying %s", ch->Name, areaPath );
+                  perror(errorMessage);
+                }
+            }
+        }
     }
   else if ( errno == ENOENT )
     {
@@ -110,7 +107,58 @@ void do_destroy( Character *ch, char *argument )
       SetCharacterColor( AT_WHITE, ch );
       Echo( ch, "Unknown error #%d - %s.  Report to Thoric.\r\n",
                  errno, strerror( errno ) );
-      sprintf( buf, "%s destroying %s", ch->Name, arg );
-      perror( buf );
+      char errorMessage[1024];
+      sprintf( errorMessage, "%s destroying %s", ch->Name, victimName );
+      perror( errorMessage );
     }
+}
+
+static void CloseDescriptorIfHalfwayLoggedIn(const std::string &name)
+{
+  Descriptor *d = nullptr;
+
+  /* Make sure they aren't halfway logged in. */
+  for ( d = FirstDescriptor; d; d = d->Next )
+    {
+      const Character *victim = d->Character;
+      
+      if ( victim != nullptr && !IsNpc(victim) && !StrCmp(victim->Name, name) )
+        {
+          break;
+        }
+    }
+
+  if ( d != nullptr )
+    {
+      CloseDescriptor( d, true );
+    }
+}
+
+static void ExtractVictim(Character *victim)
+{
+  quitting_char = victim;
+  SaveCharacter( victim );
+  saving_char = NULL;
+  ExtractCharacter( victim, true );
+
+  for ( int x = 0; x < MAX_WEAR; x++ )
+    {
+      for ( int y = 0; y < MAX_LAYERS; y++ )
+        {
+          save_equipment[x][y] = NULL;
+        }
+    }
+}
+
+static Character *GetVictimInWorld(const std::string &name)
+{
+  for ( Character *victim = FirstCharacter; victim; victim = victim->Next )
+    {
+      if ( !IsNpc(victim) && !StrCmp(victim->Name, name) )
+        {
+          return victim;
+        }
+    }
+
+  return nullptr;
 }

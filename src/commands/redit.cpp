@@ -612,7 +612,7 @@ void do_redit( Character *ch, char *argument )
   if ( !StrCmp( arg, "bexit" ) )
     {
       Exit *this_exit = NULL, *rxit = NULL;
-      char tmpcmd[MAX_INPUT_LENGTH];
+      char tmpcmd[MAX_STRING_LENGTH];
       Room *tmploc = NULL;
       vnum_t vnum = INVALID_VNUM;
       int exnum = 0;

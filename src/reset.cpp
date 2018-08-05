@@ -2710,9 +2710,9 @@ Reset *PlaceReset( Area *tarea, char letter, int extra, int arg1, int arg2, int 
 char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
 {
   static char buf[MAX_STRING_LENGTH];
-  char mobname[MAX_STRING_LENGTH];
-  char roomname[MAX_STRING_LENGTH];
-  char objname[MAX_STRING_LENGTH];
+  char mobname[1024];
+  char roomname[1024];
+  char objname[1024];
   static Room *room = NULL;
   static ProtoObject *obj = NULL, *obj2 = NULL;
   static ProtoMobile *mob = NULL;

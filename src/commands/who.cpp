@@ -26,10 +26,10 @@
 void do_who( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
-  char clan_name[MAX_INPUT_LENGTH];
-  char invis_str[MAX_INPUT_LENGTH];
-  char char_name[MAX_INPUT_LENGTH];
-  char extra_title[MAX_STRING_LENGTH];
+  char clan_name[MAX_INPUT_LENGTH / 2];
+  char invis_str[MAX_INPUT_LENGTH / 2];
+  char char_name[MAX_INPUT_LENGTH / 2];
+  char extra_title[MAX_STRING_LENGTH / 2];
   char race_text[MAX_INPUT_LENGTH];
   Descriptor *d = NULL;
   int iRace = 0;

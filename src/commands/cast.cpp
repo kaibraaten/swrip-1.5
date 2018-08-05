@@ -14,8 +14,8 @@ extern int pAbort;
 void do_cast( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  static char staticbuf[MAX_INPUT_LENGTH];
+  char targetName[1024];
+  static char staticbuf[MAX_INPUT_LENGTH + 1];
   Character *victim = nullptr;
   Object *obj = nullptr;
   void *vo = nullptr;
@@ -44,7 +44,7 @@ void do_cast( Character *ch, char *argument )
         }
 
       spell_target_name = OneArgument( argument, arg1 );
-      OneArgument( spell_target_name, arg2 );
+      OneArgument( spell_target_name, targetName );
 
       if ( IsNullOrEmpty( arg1 ) )
         {
@@ -138,7 +138,7 @@ void do_cast( Character *ch, char *argument )
       /*
        * Locate targets.
        */
-      vo = LocateSpellTargets( ch, arg2, sn, &victim, &obj );
+      vo = LocateSpellTargets( ch, targetName, sn, &victim, &obj );
       if ( vo == &pAbort )
         return;
 
@@ -164,7 +164,7 @@ void do_cast( Character *ch, char *argument )
       Act( AT_MAGIC, "You begin to feel the force in yourself and those around you...",
 	   ch, NULL, NULL, TO_CHAR );
       Act( AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, TO_ROOM );
-      sprintf( staticbuf, "%s %s", arg2, spell_target_name );
+      sprintf( staticbuf, "%s %s", targetName, spell_target_name );
       ch->dest_buf = CopyString( staticbuf );
       ch->tempnum = sn;
       return;
@@ -203,7 +203,7 @@ void do_cast( Character *ch, char *argument )
         }
       mana = IsNpc(ch) ? 0 : skill->Mana;
       strcpy( staticbuf, (const char*)ch->dest_buf );
-      spell_target_name = OneArgument(staticbuf, arg2);
+      spell_target_name = OneArgument(staticbuf, targetName);
       FreeMemory( ch->dest_buf );
       ch->SubState = SUB_NONE;
 
@@ -243,7 +243,7 @@ void do_cast( Character *ch, char *argument )
                   }
               dont_wait = true;
               SendToCharacter( "You concentrate all the energy into a burst of force!\r\n", ch );
-              vo = LocateSpellTargets( ch, arg2, sn, &victim, &obj );
+              vo = LocateSpellTargets( ch, targetName, sn, &victim, &obj );
               if ( vo == &pAbort )
                 return;
             }
