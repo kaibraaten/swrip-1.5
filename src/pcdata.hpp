@@ -11,7 +11,8 @@ class PCData
 {
 public:
   PCData();
-
+  ~PCData();
+  
   char *Password = NULL;
 
   struct
