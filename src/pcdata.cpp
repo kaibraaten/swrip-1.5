@@ -15,3 +15,11 @@ PCData::PCData()
   Addiction.fill(0);
   DrugLevel.fill(0);
 }
+
+PCData::~PCData()
+{
+  for(Alias *alias : Aliases)
+    {
+      FreeAlias(alias);
+    }
+}

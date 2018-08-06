@@ -25,7 +25,9 @@
  http://dotd.mudservices.com  dotd@dotd.mudservices.com
  ******************************************************/
 
+#include <algorithm>
 #include <cstring>
+#include <cassert>
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
@@ -80,7 +82,9 @@ void FreeAlias( Alias *alias )
 
 void FreeAliases( Character *ch )
 {
-  if (!ch || !ch->PCData)
+  assert(ch != nullptr);
+  
+  if (IsNpc(ch))
     {
       return;
     }
@@ -140,10 +144,30 @@ bool CheckAlias( Character *ch, char *command, char *argument )
 
 void AddAlias( Character *ch, Alias *alias )
 {
-  ch->PCData->Aliases.push_back(alias);
+  if(IsNpc(ch))
+    {
+      return;
+    }
+  
+  std::list<Alias*>::const_iterator i = find_if(ch->PCData->Aliases.begin(),
+                                                ch->PCData->Aliases.end(),
+                                                [alias](auto a)
+                                                {
+                                                  return StrCmp(alias->Name, a->Name) == 0;
+                                                });
+
+  if(i == ch->PCData->Aliases.end())
+    {
+      ch->PCData->Aliases.push_back(alias);
+    }
 }
 
 void UnlinkAlias( Character *ch, Alias *alias )
 {
+  if(IsNpc(ch))
+    {
+      return;
+    }
+  
   ch->PCData->Aliases.remove(alias);
 }
