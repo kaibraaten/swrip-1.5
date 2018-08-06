@@ -445,10 +445,7 @@ void Interpret( Character *ch, char *argument )
       if ( !CheckSkill( ch, command, argument )
            && !CheckAlias( ch, command, argument )
            && !CheckSocial( ch, command, argument )
-#ifdef SWRIP_USE_IMC
-	   && !ImcCommandHook( ch, command, argument )
-#endif
-	   )
+	   && !ImcCommandHook( ch, command, argument ))
         {
           Exit *pexit = NULL;
 

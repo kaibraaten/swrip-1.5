@@ -41,8 +41,6 @@
 #endif /* !__sun__ */
 #if defined(__FreeBSD__) || defined(__NetBSD__)
 #include <sys/endian.h>
-#elif defined(AMIGA) || defined(__MORPHOS__)
-/* do nothing; just to prevent endian.h from being included */
 #else
 #ifndef __sun__
 #include <endian.h>

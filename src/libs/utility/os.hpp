@@ -28,8 +28,6 @@
 
 #if defined(_WIN32)
 #include <utility/os_win32.hpp>
-#elif defined (AMIGA) || defined (__MORPHOS__) || defined (_AMIGA)
-#include <utility/os_amiga.hpp>
 #else
 #include <utility/os_posix.hpp>
 #endif

@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "pcdata.hpp"
+#include "playerrepository.hpp"
 
 static Character *get_waiting_desc( const Character *ch, const char *name );
 
@@ -9,8 +10,6 @@ void do_authorize( Character *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  Character *victim = nullptr;
-  Descriptor *d = nullptr;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
@@ -21,16 +20,23 @@ void do_authorize( Character *ch, char *argument )
       SendToCharacter( "Pending authorizations:\r\n", ch );
       SendToCharacter( " Chosen Character Name\r\n", ch );
       SendToCharacter( "---------------------------------------------\r\n", ch );
-      for ( d = FirstDescriptor; d; d = d->Next )
-        if ( (victim = d->Character) != NULL && IsWaitingForAuth(victim) )
-          Echo( ch, " %s@%s new %s...\r\n",
-                     victim->Name,
-                     victim->Desc->Remote.Hostname,
-                     RaceTable[victim->Race].Name );
+
+      for(const Character *unauthed : PlayerCharacters->Entities())
+        {
+          if(IsWaitingForAuth(unauthed))
+            {
+              Echo( ch, " %s@%s new %s...\r\n",
+                    unauthed->Name,
+                    unauthed->Desc->Remote.Hostname,
+                    RaceTable[unauthed->Race].Name );
+            }
+        }
+      
       return;
     }
 
-  victim = get_waiting_desc( ch, arg1 );
+  Character *victim = get_waiting_desc( ch, arg1 );
+
   if ( victim == NULL )
     return;
 
@@ -89,27 +95,23 @@ void do_authorize( Character *ch, char *argument )
  */
 static Character *get_waiting_desc( const Character *ch, const char *name )
 {
-  Descriptor *d = nullptr;
   Character *ret_char = nullptr;
-  static unsigned int number_of_hits = 0;
+  unsigned int number_of_hits = 0;
 
-  number_of_hits = 0;
-
-  for ( d = FirstDescriptor; d; d = d->Next )
+  for(Character *victim : PlayerCharacters->Entities())
     {
-      if ( d->Character && (!StringPrefix( name, d->Character->Name )) &&
-           IsWaitingForAuth(d->Character) )
+      if(IsWaitingForAuth(victim) && !StringPrefix(name, victim->Name))
         {
           if ( ++number_of_hits > 1 )
             {
               Echo( ch, "%s does not uniquely identify a char.\r\n", name );
-              return NULL;
+              return nullptr;
             }
-
-          ret_char = d->Character;       /* return current char on exit */
         }
-    }
 
+      ret_char = victim;
+    }
+  
   if ( number_of_hits==1 )
     {
       return ret_char;
@@ -117,6 +119,6 @@ static Character *get_waiting_desc( const Character *ch, const char *name )
   else
     {
       SendToCharacter( "No one like that waiting for authorization.\r\n", ch );
-      return NULL;
+      return nullptr;
     }
 }

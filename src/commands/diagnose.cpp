@@ -4,6 +4,7 @@
 #include "mud.hpp"
 #include "grub.hpp"
 #include "character.hpp"
+#include "playerrepository.hpp"
 
 static int diag_int_comp(const void *i, const void *j);
 static void diagnose_help (Character *ch);
@@ -119,53 +120,59 @@ void do_diagnose( Character *ch, char *argument )
     return;
   }
 
-  if (!StrCmp(arg1, "mm")) {
-    Descriptor *d;
-    Character *victim;
+  if (!StrCmp(arg1, "mm"))
+    {
+      Character *victim;
 
-    if ( !*arg2 )
+      if ( !*arg2 )
+        return;
+
+      if ( GetTrustLevel(ch) < LEVEL_SUB_IMPLEM )
+        return;
+
+      if ( ( victim = GetCharacterAnywhere( ch, arg2 ) ) == NULL )
+        {
+          SendToCharacter( "Not here.\r\n", ch );
+          return;
+      }
+
+      if ( !victim->Desc )
+        {
+          SendToCharacter( "No descriptor.\r\n", ch );
+          return;
+        }
+
+      if ( victim == ch )
+        {
+          SendToCharacter( "Cancelling.\r\n", ch );
+
+          for(Character *snoopedCharacter : PlayerCharacters->Entities())
+            {
+              if(snoopedCharacter->Desc->SnoopBy == ch->Desc)
+                {
+                  snoopedCharacter->Desc->SnoopBy = nullptr;
+                }
+            }
+        
+          return;
+        }
+
+      if ( victim->Desc->SnoopBy )
+        {
+          SendToCharacter( "Busy.\r\n", ch );
+          return;
+        }
+
+      if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
+        {
+          SendToCharacter( "Busy.\r\n", ch );
+          return;
+        }
+
+      victim->Desc->SnoopBy = ch->Desc;
+      SendToCharacter( "Ok.\r\n", ch );
       return;
-
-    if ( GetTrustLevel(ch) < LEVEL_SUB_IMPLEM )
-      return;
-
-    if ( ( victim = GetCharacterAnywhere( ch, arg2 ) ) == NULL )
-      {
-        SendToCharacter( "Not here.\r\n", ch );
-        return;
-      }
-
-    if ( !victim->Desc )
-      {
-        SendToCharacter( "No descriptor.\r\n", ch );
-	return;
-      }
-
-    if ( victim == ch )
-      {
-        SendToCharacter( "Cancelling.\r\n", ch );
-        for ( d = FirstDescriptor; d; d = d->Next )
-          if ( d->SnoopBy == ch->Desc )
-            d->SnoopBy = NULL;
-        return;
-      }
-
-    if ( victim->Desc->SnoopBy )
-      {
-        SendToCharacter( "Busy.\r\n", ch );
-        return;
-      }
-
-    if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
-      {
-        SendToCharacter( "Busy.\r\n", ch );
-        return;
-      }
-
-    victim->Desc->SnoopBy = ch->Desc;
-    SendToCharacter( "Ok.\r\n", ch );
-    return;
-  }
+    }
 
   if (!StrCmp(arg1, "zero"))
     {

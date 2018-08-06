@@ -181,7 +181,7 @@ void do_pick( Character *ch, char *argument )
               if ( d->ConnectionState == CON_EDITING )
                 continue;
 
-              Echo(victim,"&R[alarm] Attempt to pick %s.\r\n",ship->Name);
+              Echo(victim,"&R[Alarm] Attempt to pick %s.\r\n",ship->Name);
             }
           return;
         }

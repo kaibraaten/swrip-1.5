@@ -198,7 +198,7 @@ static void NannyGetName( Descriptor *d, char *argument )
     }
 
   ch = d->Character;
-
+  
   auto pban = Bans->Find([d, ch](const auto &b)
                          {
                            return (StringPrefix(b->Site, d->Remote.Hostname) == 0

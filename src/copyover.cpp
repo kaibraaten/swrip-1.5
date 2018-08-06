@@ -37,7 +37,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
-
+#include "playerrepository.hpp"
 #ifdef _WIN32
 #include <process.h>
 #endif
@@ -50,20 +50,9 @@ void do_copyover( Character * ch, char *argument )
   Descriptor *d, *d_next;
   char buf[100];
   FILE *fp = fopen( COPYOVER_FILE, "w" );
-
-#if defined(AMIGA) || defined(__MORPHOS__)
-  long error_code = 0;
-  static long sockID = 0;
-  socket_t coded_control = 0;
-#else
   char buf2[100];
-#endif
   char buf3[100];
   char filename[256];
-
-  /*
-    Shuttle * tshuttle;
-  */
 
   if( !fp )
   {
@@ -72,12 +61,6 @@ void do_copyover( Character * ch, char *argument )
     perror( "do_copyover:fopen" );
     return;
   }
-
-#ifdef AMIGA
-  coded_control = ReleaseCopyOfSocket( control, UNIQUE_ID );
-#elif defined(__MORPHOS__)
-  coded_control = ReleaseCopyOfSocket( control, ++sockID );
-#endif
 
   sprintf( buf, "%s", "\r\nA Blinding Flash of light starts heading towards you, before you can think it engulfs you!\r\n" );
 
@@ -95,27 +78,9 @@ void do_copyover( Character * ch, char *argument )
     }
     else
     {
-#if defined(AMIGA) || defined(__MORPHOS__)
-      socket_t cur_desc = INVALID_SOCKET;
-
-#ifdef __MORPHOS__
-      ++sockID;
-#else
-      sockID = UNIQUE_ID;
-#endif
-      cur_desc = ReleaseCopyOfSocket( d->Socket, sockID );
-
-      if( cur_desc == SOCKET_ERROR )
-      {
-	fprintf( stdout, "ReleaseCopyOfSocket() failed.\n" );
-	fclose( fp );
-	exit( 1 );
-      }
-#else
       socket_t cur_desc = d->Socket;
-#endif
 
-      fprintf( fp, "%d %d %s %s %s\n", cur_desc, 0, /*d->mccp ? 1 : 0,*/
+      fprintf( fp, "%d %d %s %s %s\n", cur_desc, 0,
 	       och->Name, d->Remote.HostIP, d->Remote.Hostname );
       SaveCharacter( och );
       WriteToDescriptor( d->Socket, buf, 0 );
@@ -125,31 +90,9 @@ void do_copyover( Character * ch, char *argument )
   fprintf( fp, "-1\n" );
   fclose( fp );
 
-#ifdef SWRIP_USE_IMC
   ImcCopyover();
   sprintf( buf3, "%d", ImcGetSocket( this_imcmud ) );
-#else
-  sprintf( buf3, "%d", -1 );
-#endif
 
-#if defined(AMIGA) || defined(__MORPHOS__)
-  sprintf( buf, "run >NIL: %s %d copyover %d %s",
-	   "swrip", SysData.Port, coded_control, buf3 );
-
-  error_code = System( (CONST_STRPTR) buf, NULL );
-
-  if( error_code == -1 )
-  {
-    Log->Bug( "Copyover failure, executable could not be run." );
-    fprintf( stdout, "Failed to run %s\n", "swrip" );
-    Echo( ch, "Copyover FAILED!\r\n" );
-  }
-  else
-  {
-    exit( 0 );
-  }
-
-#else
   /* exec - descriptors are inherited */
   sprintf( buf, "%d", SysData.Port );
   sprintf( buf2, "%d", control );
@@ -159,7 +102,7 @@ void do_copyover( Character * ch, char *argument )
 #else
   sprintf(filename, "%s", "./swrip");
 #define _execl execl
-#endif
+
   _execl( filename, filename,
 	 buf, "copyover", buf2, buf3, NULL );
 
@@ -204,16 +147,6 @@ void RecoverFromCopyover( void )
 	break;
       }
 
-#if defined(AMIGA) || defined(__MORPHOS__)
-    desc = ObtainSocket( desc, PF_INET, SOCK_STREAM, IPPROTO_TCP );
-
-    if( desc == INVALID_SOCKET )
-    {
-      Log->Bug( "ObtainSocket returned error." );
-      continue;
-    }
-#endif
-
     AllocateMemory( d, Descriptor, 1 );
     InitializeDescriptor( d, desc ); /* set up various stuff */
     d->Remote.Hostname = CopyString( host );
@@ -252,8 +185,8 @@ void RecoverFromCopyover( void )
 	d->Character->InRoom = GetRoom( ROOM_VNUM_SCHOOL );
 
       /* Insert in the char_list */
-      LINK( d->Character, FirstCharacter, LastCharacter, Next, Previous );
-
+      AddCharacter(d->Character);
+      
       CharacterToRoom( d->Character, d->Character->InRoom );
       do_look( d->Character, argument );
 
