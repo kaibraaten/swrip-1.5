@@ -3,6 +3,7 @@
 #include "reset.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "playerrepository.hpp"
 
 /*
  * A complicated to use command as it currently exists.         -Thoric
@@ -10,11 +11,10 @@
  */
 void do_installarea( Character *ch, char *argument )
 {
-  Area     *tarea;
-  char  arg[MAX_INPUT_LENGTH];
-  char  buf[MAX_STRING_LENGTH];
-  int           num;
-  Descriptor *d;
+  Area *tarea = nullptr;
+  char arg[MAX_INPUT_LENGTH];
+  char buf[MAX_STRING_LENGTH];
+  int num = 0;
 
   argument = OneArgument( argument, arg );
   if ( IsNullOrEmpty( arg ) )
@@ -44,22 +44,22 @@ void do_installarea( Character *ch, char *argument )
           LINK( tarea, FirstArea, LastArea, Next, Previous );
 
           /* Fix up author if online */
-          for ( d = FirstDescriptor; d; d = d->Next )
-            if ( d->Character
-                 &&   d->Character->PCData
-                 &&   d->Character->PCData->Build.Area == tarea )
-              {
-                /* remove area from author */
-                d->Character->PCData->Build.Area = NULL;
-                /* clear out author vnums  */
-                d->Character->PCData->Build.VnumRanges.Room.First = 0;
-                d->Character->PCData->Build.VnumRanges.Room.Last = 0;
-                d->Character->PCData->Build.VnumRanges.Object.First = 0;
-                d->Character->PCData->Build.VnumRanges.Object.Last = 0;
-                d->Character->PCData->Build.VnumRanges.Mob.First = 0;
-                d->Character->PCData->Build.VnumRanges.Mob.Last = 0;
-              }
-
+          for(Character *author : PlayerCharacters->Entities())
+            {
+              if(author->PCData->Build.Area == tarea)
+                {
+                  /* remove area from author */
+                  author->PCData->Build.Area = nullptr;
+                  /* clear out author vnums  */
+                  author->PCData->Build.VnumRanges.Room.First = INVALID_VNUM;
+                  author->PCData->Build.VnumRanges.Room.Last = INVALID_VNUM;
+                  author->PCData->Build.VnumRanges.Object.First = INVALID_VNUM;
+                  author->PCData->Build.VnumRanges.Object.Last = INVALID_VNUM;
+                  author->PCData->Build.VnumRanges.Mob.First = INVALID_VNUM;
+                  author->PCData->Build.VnumRanges.Mob.Last = INVALID_VNUM;
+                }
+            }
+          
           top_area++;
           SendToCharacter( "Writing area.lst...\r\n", ch );
           WriteAreaList();

@@ -3415,11 +3415,7 @@ void ImcLoop( void )
 
    null_time.tv_sec = null_time.tv_usec = 0;
 
-#ifdef AMIGA
-   if( WaitSelect( this_imcmud->Desc + 1, &in_set, &out_set, NULL, &null_time, 0 ) == SOCKET_ERROR )
-#else
    if( select( this_imcmud->Desc + 1, &in_set, &out_set, NULL, &null_time ) == SOCKET_ERROR )
-#endif
    {
       perror( "ImcLoop: select: poll" );
       ImcShutdown( true );
@@ -4878,7 +4874,7 @@ static socket_t ipv4_connect( void )
    memset( &sa, 0, sizeof( sa ) );
    sa.sin_family = AF_INET;
 
-#if !defined(WIN32) && !defined(AMIGA) && !defined(__MORPHOS__)
+#if !defined(WIN32)
    /*
     * warning: this blocks. It would be better to farm the query out to
     * * another process, but that is difficult to do without lots of changes

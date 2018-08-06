@@ -1,6 +1,7 @@
 #include "help.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "playerrepository.hpp"
 
 void do_memory( Character *ch, char *argument )
 {
@@ -15,7 +16,8 @@ void do_memory( Character *ch, char *argument )
   Echo( ch, "Rooms   %5d    VRooms  %5d\r\n", top_room,   top_vroom   );
   Echo( ch, "Shops   %5d    RepShps %5d\r\n", top_shop,   top_repair );
   Echo( ch, "CurOq's %5d    CurCq's %5d\r\n", cur_qobjs,  cur_qchars );
-  Echo( ch, "Players %5d    Maxplrs %5d\r\n", num_descriptors, SysData.MaxPlayersThisBoot );
+  Echo( ch, "Players %5d    Maxplrs %5d\r\n", PlayerCharacters->Count(),
+        SysData.MaxPlayersThisBoot );
   Echo( ch, "MaxEver %5d    Topsn   %5d (%d)\r\n", SysData.MaxPlayersEver, TopSN, MAX_SKILL );
   Echo( ch, "MaxEver time recorded at:   %s\r\n", SysData.TimeOfMaxPlayersEver );
 

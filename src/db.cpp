@@ -47,6 +47,7 @@
 #include "badname.hpp"
 #include "ban.hpp"
 #include "log.hpp"
+#include "playerrepository.hpp"
 
 /*
  * Globals.
@@ -705,6 +706,11 @@ void BootDatabase( bool fCopyOver )
 void AddCharacter( Character *ch )
 {
   LINK( ch, FirstCharacter, LastCharacter, Next, Previous );
+
+  if(!IsNpc(ch))
+    {
+      PlayerCharacters->Add(ch);
+    }
 }
 
 /*
@@ -1422,19 +1428,16 @@ static void AddToWizList( const char *name, int level )
  */
 void MakeWizlist( void )
 {
-#ifdef AMIGA
-#warning "Don't forget to implement this!"
-#else
-  DIR *dp;
+  DIR *dp = nullptr;
   struct dirent *dentry;
-  FILE *gfp;
-  const char *word;
-  int ilevel, iflags;
-  Wizard *wiz, *wiznext;
+  FILE *gfp = nullptr;
+  const char *word = nullptr;
+  int ilevel = 0, iflags = 0;
+  Wizard *wiz = nullptr, *wiznext = nullptr;
   char buf[MAX_STRING_LENGTH];
 
-  first_wiz = NULL;
-  last_wiz  = NULL;
+  first_wiz = nullptr;
+  last_wiz  = nullptr;
 
   dp = opendir( GOD_DIR );
 
@@ -1549,7 +1552,6 @@ void MakeWizlist( void )
     }
   first_wiz = NULL;
   last_wiz = NULL;
-#endif
 }
 
 /*************************************************************/
@@ -1879,9 +1881,6 @@ Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
  * them out of the area files. -- Altrag */
 static void LoadBuildList( void )
 {
-#ifdef AMIGA
-#warning "Don't forget to implement this!"
-#else
   DIR *dp;
   struct dirent *dentry;
   FILE *fp;
@@ -1954,7 +1953,6 @@ static void LoadBuildList( void )
                   dentry = readdir(dp);
                   continue;
                 }
-#if !defined(READ_AREA)  /* Dont always want to read stuff.. dunno.. shrug */
 
               strcpy( word, ReadWord( fp, Log ) );
 
@@ -1966,17 +1964,16 @@ static void LoadBuildList( void )
                   dentry = readdir(dp);
                   continue;
                 }
-#endif
+
               AllocateMemory( pArea, Area, 1 );
               sprintf( buf, "%s.are", dentry->d_name );
               pArea->Author = CopyString( dentry->d_name );
               pArea->Filename = CopyString( buf );
-#if !defined(READ_AREA)
               pArea->Name = ReadStringToTilde( fp, Log );
-#else
+
               sprintf( buf, "{PROTO} %s's area in progress", dentry->d_name );
               pArea->Name = CopyString( buf );
-#endif
+
               fclose( fp );
               pArea->VnumRanges.Room.First = rlow; pArea->VnumRanges.Room.Last = rhi;
               pArea->VnumRanges.Mob.First = mlow; pArea->VnumRanges.Mob.Last = mhi;
@@ -1993,10 +1990,11 @@ static void LoadBuildList( void )
               SortArea( pArea, true );
             }
         }
+
       dentry = readdir(dp);
     }
+
   closedir(dp);
-#endif
 }
 
 /*
@@ -2309,4 +2307,5 @@ void AllocateRepositories(void)
   Spaceobjects = NewSpaceobjectRepository();
   Socials = NewSocialRepository();
   Shuttles = NewShuttleRepository();
+  PlayerCharacters = NewPlayerRepository();
 }

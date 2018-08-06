@@ -7,9 +7,6 @@ WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wredundan
 #Comment out the next line if your system doesn't have dlsym functionality.
 USE_DLSYM = -DSWRIP_USE_DLSYM
 
-#IMC2 - Comment out to dsable IMC2 support
-IMC = 1
-
 ifeq ($(shell echo $$LUA_COMPAT),5.1)
 LUA_CFLAGS = -I/usr/include/lua-5.1
 LUA_LIBS = -llua-5.1 -lm -ldl
@@ -80,6 +77,7 @@ _OBJ =  act_comm.o \
 	grub.o \
 	handler.o \
 	help.o \
+	imc.o \
 	interp.o \
 	magic.o \
 	makeobjs.o \
@@ -90,6 +88,7 @@ _OBJ =  act_comm.o \
 	nanny.o \
 	pcdata.o \
 	planet.o \
+	playerrepository.o \
 	reset.o \
 	save.o \
 	script.o \
@@ -675,11 +674,6 @@ _OBJ =  act_comm.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 BINOBJ = $(patsubst %,$(ODIR)/%,$(_BINOBJ))
-
-ifdef IMC
-OBJ += $(ODIR)/imc.o
-CXXFLAGS += -DSWRIP_USE_IMC
-endif
 
 all:		libraries $(LIBNAME) $(BINARY) tests
 

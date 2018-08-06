@@ -5,10 +5,7 @@
 #include <list>
 #include "types.hpp"
 #include "constants.hpp"
-
-#ifdef SWRIP_USE_IMC
 #include "imc.hpp"
-#endif
 
 class PCData
 {
@@ -96,9 +93,7 @@ public:
   time_t Logon = 0;
   time_t SaveTime = 0;
   struct CraftingSession *CraftingSession = NULL;
-#ifdef SWRIP_USE_IMC
   IMC_CHARDATA *imcchardata = NULL;
-#endif
 };
 
 #endif

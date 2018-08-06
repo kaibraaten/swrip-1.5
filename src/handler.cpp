@@ -29,6 +29,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "playerrepository.hpp"
 
 extern Character *gch_prev;
 extern Object *gobj_prev;
@@ -1298,6 +1299,8 @@ void ExtractCharacter( Character *ch, bool fPull )
       ch->Desc->Character = NULL;
       CloseDescriptor( ch->Desc, false );
       ch->Desc = NULL;
+
+      PlayerCharacters->Remove(ch);
     }
 }
 

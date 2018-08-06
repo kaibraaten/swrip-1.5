@@ -763,9 +763,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
                                         killed.Vnum,
                                         killed.Count ); });
 
-#ifdef SWRIP_USE_IMC
   ImcSaveCharacter( ch, fp );
-#endif
 
   fprintf( fp, "End\n\n" );
 }
@@ -1045,18 +1043,16 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
 bool LoadCharacter( Descriptor *d, const char *name, bool preload )
 {
   char strsave[MAX_INPUT_LENGTH];
-  Character *ch = NULL;
   FILE *fp = NULL;
   bool found = false;
   struct stat fst;
-  int i = 0, x = 0;
   char buf[MAX_INPUT_LENGTH];
 
-  ch = new Character();
+  Character *ch = new Character();
 
-  for ( x = 0; x < MAX_WEAR; x++ )
+  for ( int x = 0; x < MAX_WEAR; x++ )
     {
-      for ( i = 0; i < MAX_LAYERS; i++ )
+      for ( int i = 0; i < MAX_LAYERS; i++ )
 	{
 	  save_equipment[x][i] = NULL;
 	}
@@ -1065,15 +1061,13 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
   loading_char = ch;
 
   ch->PCData = new PCData();
-  d->Character                = ch;
-  ch->Desc                            = d;
-  ch->Name                            = CopyString( name );
-  ch->Flags                             = PLR_BLANK | PLR_COMBINE | PLR_PROMPT;
-  ch->MentalState                    = -10;
+  d->Character = ch;
+  ch->Desc = d;
+  ch->Name = CopyString( name );
+  ch->Flags = PLR_BLANK | PLR_COMBINE | PLR_PROMPT;
+  ch->MentalState = -10;
 
-#ifdef SWRIP_USE_IMC
   ImcInitializeCharacter( ch );
-#endif
 
   sprintf( strsave, "%s%c/%s", PLAYER_DIR, tolower(name[0]),
            Capitalize( name ) );
@@ -1098,9 +1092,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
 
   if ( ( fp = fopen( strsave, "r" ) ) != NULL )
     {
-      int iNest = 0;
-
-      for ( iNest = 0; iNest < MAX_NEST; iNest++ )
+      for ( int iNest = 0; iNest < MAX_NEST; iNest++ )
 	{
 	  rgObjNest[iNest] = NULL;
 	}
@@ -1219,9 +1211,9 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
 
       if ( file_ver > 1 )
         {
-          for ( i = 0; i < MAX_WEAR; i++ )
+          for ( int i = 0; i < MAX_WEAR; i++ )
 	    {
-	      for ( x = 0; x < MAX_LAYERS; x++ )
+	      for ( int x = 0; x < MAX_LAYERS; x++ )
 		{
 		  if ( save_equipment[i][x] )
 		    {
@@ -1589,12 +1581,11 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           KEY( "IllegalPK",     ch->PCData->IllegalPk, ReadInt( fp, Log ) );
           KEY( "Immune",        ch->Immune,             ReadInt( fp, Log ) );
 
-#ifdef SWRIP_USE_IMC
 	  if( ( fMatch = ImcLoadCharacter( ch, fp, word ) ) )
 	    {
 	      break;
 	    }
-#endif
+
           break;
         case 'J':
           KEY( "Jailvnum",    ch->PCData->JailVnum,          ReadInt( fp, Log ) );
@@ -2450,9 +2441,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
 void SetAlarm( long seconds )
 {
-#ifndef AMIGA
   alarm( seconds );
-#endif
 }
 
 void WriteCorpses( const Character *ch, const char *name )
@@ -2514,9 +2503,6 @@ void WriteCorpses( const Character *ch, const char *name )
 
 void LoadCorpses( void )
 {
-#ifdef AMIGA
-#warning "Don't forget to implement this!"
-#else
   DIR *dp = NULL;
   struct dirent *de = NULL;
 
@@ -2588,14 +2574,10 @@ void LoadCorpses( void )
   strcpy(strArea, "$");
   closedir(dp);
   falling = 0;
-#endif
 }
 
 void LoadStorerooms( void )
 {
-#ifdef AMIGA
-#warning "Don't forget to implement this!"
-#else
   DIR *dp = NULL;
   struct dirent *de = NULL;
   char buf[MAX_INPUT_LENGTH];
@@ -2708,7 +2690,6 @@ void LoadStorerooms( void )
   strcpy(strArea, "$");
   closedir(dp);
   falling = 0;
-#endif
 }
 
 void SaveStoreroom( const Room *room )
@@ -2730,9 +2711,7 @@ void SaveStoreroom( const Room *room )
     }
   else
     {
-#ifndef AMIGA
       fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);
-#endif
       contents = room->LastContent;
 
       if (contents)
@@ -2747,9 +2726,6 @@ void SaveStoreroom( const Room *room )
 
 void LoadVendors( void )
 {
-#ifdef AMIGA
-#warning "Don't forget to implement this!"
-#else
   DIR *dp = NULL;
   Character *mob = NULL;
   struct dirent *de = NULL;
@@ -2817,7 +2793,6 @@ void LoadVendors( void )
   strcpy(strArea, "$");
   closedir(dp);
   falling = 0;
-#endif
 }
 
 /*

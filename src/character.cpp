@@ -1319,9 +1319,7 @@ void FreeCharacter( Character *ch )
         }
 
       FreeAliases( ch );
-#ifdef SWRIP_USE_IMC
       ImcFreeCharacter( ch );
-#endif
     }
 
   for ( mpact = ch->mprog.mpact; mpact; mpact = mpact_next )

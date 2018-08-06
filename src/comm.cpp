@@ -113,9 +113,7 @@ int SwripMain(int argc, char *argv[])
 {
   struct timeval now_time;
   bool fCopyOver = false;
-#ifdef SWRIP_USE_IMC
   socket_t imcsocket = INVALID_SOCKET;
-#endif
 
   memset( &SysData, 0, sizeof( SysData ) );
 
@@ -212,17 +210,8 @@ int SwripMain(int argc, char *argv[])
       if( argv[2] && argv[2][0] )
         {
           fCopyOver = true;
-#if defined(AMIGA) || defined(__MORPHOS__)
-          control = ObtainSocket( atoi( argv[3] ), PF_INET, SOCK_STREAM, IPPROTO_TCP );
-#ifdef SWRIP_USE_IMC
-          imcsocket = ObtainSocket( atoi( argv[4] ), PF_INET, SOCK_STREAM, IPPROTO_TCP );
-#endif /* imc */
-#else
           control = atoi( argv[3] );
-#ifdef SWRIP_USE_IMC
           imcsocket = atoi( argv[4] );
-#endif /* imc */
-#endif
         }
       else
         {
@@ -236,12 +225,13 @@ int SwripMain(int argc, char *argv[])
   sprintf(log_buf,"PID: %d",getpid());
   bootup = true;
   Log->Info(log_buf);
-#ifdef SWRIP_USE_IMC
+
   Log->Info( "Starting IMC2" );
   ImcStartup( false, imcsocket, fCopyOver );
-#endif
+
   Log->Info("Booting Database");
   BootDatabase(fCopyOver);
+
   Log->Info("Initializing socket");
 
   if( !fCopyOver )
@@ -254,9 +244,8 @@ int SwripMain(int argc, char *argv[])
   bootup = false;
   GameLoop();
   closesocket( control );
-#ifdef SWRIP_USE_IMC
   ImcShutdown( false );
-#endif
+
   /*
    * That's all, folks.
    */
@@ -392,12 +381,7 @@ static void AcceptNewSocket( socket_t ctrl )
         break;
     }
 
-#if defined(AMIGA) || defined(__MORPHOS__)
-  result =
-    WaitSelect( maxdesc + 1, &in_set, &out_set, &exc_set, &null_time, 0 );
-#else
   result = select( maxdesc + 1, &in_set, &out_set, &exc_set, &null_time );
-#endif
 
   if( result == SOCKET_ERROR )
     {
@@ -424,10 +408,8 @@ static void GameLoop( void )
   char cmdline[MAX_INPUT_LENGTH];
   Descriptor *d = NULL;
 
-#ifndef AMIGA
   signal( SIGPIPE, SIG_IGN );
   signal( SIGALRM, CaughtAlarm );
-#endif
 
   gettimeofday( &last_time, NULL );
   current_time = (time_t) last_time.tv_sec;
@@ -562,9 +544,7 @@ static void GameLoop( void )
        */
       UpdateHandler();
 
-#ifdef SWRIP_USE_IMC
       ImcLoop();
-#endif
 
       /*
        * Output.
@@ -640,9 +620,7 @@ static void GameLoop( void )
             stall_time.tv_usec = usecDelta;
             stall_time.tv_sec  = secDelta;
 
-#if defined(AMIGA) || defined(__MORPHOS__)
-	    result = WaitSelect( 0, 0, 0, 0, &stall_time, 0 );
-#elif defined(_WIN32)
+#if defined(_WIN32)
 	    result = select( 0, NULL, NULL, &dummy_set, &stall_time );
 #else
 	    result = select( 0, NULL, NULL, NULL, &stall_time );
@@ -724,11 +702,7 @@ static void NewDescriptor( socket_t new_desc )
   InitializeDescriptor(dnew, desc);
   dnew->Remote.Port = ntohs( sock.sin_port );
 
-#if defined(AMIGA) || defined(__MORPHOS__)
-  strcpy( buf, Inet_NtoA( *( ( unsigned long * ) &sock.sin_addr ) ) );
-#else
   strcpy( buf, inet_ntoa( sock.sin_addr ) );
-#endif
   sprintf( log_buf, "Sock.sinaddr:  %s, port %hd.",
            buf, dnew->Remote.Port );
   Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
@@ -966,13 +940,8 @@ static bool ReadFromDescriptor( Descriptor *d )
 
   for ( ; ; )
     {
-#if defined(AMIGA) || defined(__MORPHOS__)
-      ssize_t nRead = recv( d->Socket, ( UBYTE * ) d->InBuffer + iStart,
-                            sizeof( d->InBuffer ) - 10 - iStart, 0 );
-#else
       ssize_t nRead = recv( d->Socket, d->InBuffer + iStart,
                             sizeof( d->InBuffer ) - 10 - iStart, 0 );
-#endif
 
       if ( nRead == 0 )
         {
@@ -1275,11 +1244,7 @@ bool WriteToDescriptor( socket_t desc, char *txt, int length )
     {
       nBlock = umin( length - iStart, 4096 );
 
-#if defined(AMIGA) || defined(__MORPHOS__)
-      if( ( nWrite = send( desc, (char*) txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR )
-#else
-	if( ( nWrite = send( desc, txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR)
-#endif
+      if( ( nWrite = send( desc, txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR)
         {
           Log->Bug("Write_to_descriptor: error on socket %d: %s",
                    desc, strerror( GETERROR ) );

@@ -283,11 +283,7 @@ std::string ToUpper( std::string str )
 /*
  * Returns true or false if a letter is a vowel                 -Thoric
  */
-#if defined(AMIGA) || defined(__MORPHOS__)
-static bool isavowel( unsigned letter )
-#else
-  static bool isavowel( char letter )
-#endif
+static bool isavowel( char letter )
 {
   char c = tolower( (int)letter );
 

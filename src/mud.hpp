@@ -44,9 +44,7 @@ extern "C" {
 }
 #endif
 
-#ifndef __MORPHOS__
-#include <cmath> /* built-in */
-#endif
+#include <cmath>
 
 #include "types.hpp"
 #include "alias.hpp"

@@ -40,8 +40,6 @@ SpellFun *GetSpellFunction( const char *name )
       Log->Bug( "Could not find symbol '%s': %s", name, GetLastError() );
       return spell_notfound;
     }
-#elif defined(AMIGA)
-
 #else
   fun_handle = (SpellFun*)(long)dlsym( SysData.DlHandle, name );
 
@@ -66,8 +64,6 @@ CmdFun *GetSkillFunction( const char *name )
       Log->Bug( "Could not find symbol '%s': %s", name, GetLastError() );
       return skill_notfound;
     }
-#elif defined(AMIGA)
-
 #else
   fun_handle = (CmdFun*)(long)dlsym( SysData.DlHandle, name );
 
