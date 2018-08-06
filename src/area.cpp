@@ -234,20 +234,29 @@ void SortArea( Area *pArea, bool proto )
       found = true;
     }
   else
-    for ( area = first_sort; area; area = area->NextSort )
-      if ( pArea->VnumRanges.Room.First < area->VnumRanges.Room.First )
+    {
+      for ( area = first_sort; area; area = area->NextSort )
         {
-          if ( !area->PreviousSort )
-            first_sort  = pArea;
-          else
-            area->PreviousSort->NextSort = pArea;
-          pArea->PreviousSort = area->PreviousSort;
-          pArea->NextSort = area;
-          area->PreviousSort  = pArea;
-          found = true;
-          break;
+          if ( pArea->VnumRanges.Room.First < area->VnumRanges.Room.First )
+            {
+              if ( !area->PreviousSort )
+                {
+                  first_sort  = pArea;
+                }
+              else
+                {
+                  area->PreviousSort->NextSort = pArea;
+                }
+              
+              pArea->PreviousSort = area->PreviousSort;
+              pArea->NextSort = area;
+              area->PreviousSort  = pArea;
+              found = true;
+              break;
+            }
         }
-
+    }
+  
   if ( !found )
     {
       pArea->PreviousSort     = last_sort;
@@ -2207,30 +2216,37 @@ void FreeArea( Area *are )
 
 void AssignAreaTo( Character *ch )
 {
-  char buf[MAX_STRING_LENGTH];
-  char buf2[MAX_STRING_LENGTH];
-  char taf[1024];
-  Area *tarea, *tmp;
-  bool created = false;
-
   if ( IsNpc( ch ) )
-    return;
-  if ( GetTrustLevel( ch ) >= LEVEL_AVATAR
-       &&   ch->PCData->Build.VnumRanges.Room.First
-       &&   ch->PCData->Build.VnumRanges.Room.Last )
     {
-      tarea = ch->PCData->Build.Area;
+      return;
+    }
+  
+  if ( GetTrustLevel( ch ) >= LEVEL_AVATAR
+       && ch->PCData->Build.VnumRanges.Room.First != INVALID_VNUM
+       && ch->PCData->Build.VnumRanges.Room.Last != INVALID_VNUM)
+    {
+      char buf[MAX_STRING_LENGTH];
+      char buf2[MAX_STRING_LENGTH];
+      char taf[1024];
+      Area *tmp = nullptr;
+      bool created = false;
+      Area *tarea = ch->PCData->Build.Area;
+
       sprintf( taf, "%s.are", Capitalize( ch->Name ) );
-      if ( !tarea )
+
+      if ( tarea == nullptr )
         {
           for ( tmp = FirstBuild; tmp; tmp = tmp->Next )
-            if ( !StrCmp( taf, tmp->Filename ) )
-              {
-                tarea = tmp;
-                break;
-              }
+            {
+              if ( !StrCmp( taf, tmp->Filename ) )
+                {
+                  tarea = tmp;
+                  break;
+                }
+            }
         }
-      if ( !tarea )
+
+      if ( tarea == nullptr )
         {
           sprintf( buf, "Creating area entry for %s", ch->Name );
           Log->LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
@@ -2249,6 +2265,7 @@ void AssignAreaTo( Character *ch )
           sprintf( buf, "Updating area entry for %s", ch->Name );
           Log->LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
         }
+
       tarea->VnumRanges.Room.First = ch->PCData->Build.VnumRanges.Room.First;
       tarea->VnumRanges.Object.First = ch->PCData->Build.VnumRanges.Object.First;
       tarea->VnumRanges.Mob.First = ch->PCData->Build.VnumRanges.Mob.First;
@@ -2258,7 +2275,9 @@ void AssignAreaTo( Character *ch )
       ch->PCData->Build.Area  = tarea;
 
       if ( created )
-        SortArea( tarea, true );
+        {
+          SortArea( tarea, true );
+        }
     }
 }
 
