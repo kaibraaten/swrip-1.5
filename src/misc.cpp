@@ -43,8 +43,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
   switch( obj->ItemType )
     {
     default:
-      sprintf( buf, "You can't %s that!\r\n", pull ? "pull" : "push" );
-      SendToCharacter( buf, ch );
+      ch->Echo( "You can't %s that!\r\n", pull ? "pull" : "push" );
       return;
       break;
 
@@ -53,8 +52,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
     case ITEM_PULLCHAIN:
       if ( (!pull && isup) || (pull && !isup) )
         {
-          sprintf( buf, "It is already %s.\r\n", isup ? "up" : "down" );
-          SendToCharacter( buf, ch );
+          ch->Echo( "It is already %s.\r\n", isup ? "up" : "down" );
           return;
         }
       break;
@@ -62,8 +60,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
     case ITEM_BUTTON:
       if ( (!pull && isup) || (pull & !isup) )
         {
-          sprintf( buf, "It is already %s.\r\n", isup ? "in" : "out" );
-          SendToCharacter( buf, ch );
+          ch->Echo( "It is already %s.\r\n", isup ? "in" : "out" );
           return;
         }
       break;
@@ -164,8 +161,8 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
       for ( rch = room->FirstPerson; rch; rch = rch->NextInRoom )
         {
-          SendToCharacter( "You hear a loud rumbling sound.\r\n", rch );
-          SendToCharacter( "Something seems different...\r\n", rch );
+          rch->Echo( "You hear a loud rumbling sound.\r\n" );
+          rch->Echo( "Something seems different...\r\n" );
         }
     }
 
@@ -483,3 +480,4 @@ const char *FormatDate( const time_t *date )
 
   return buffer;
 }
+

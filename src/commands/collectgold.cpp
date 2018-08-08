@@ -4,6 +4,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "character.hpp"
 
 void do_collectgold (Character *ch, char *argument)
 {
@@ -20,7 +21,7 @@ void do_collectgold (Character *ch, char *argument)
 
   if (vendor->Owner == NULL)
     {
-      SendToCharacter("thats not a vendor!\r\n",ch);
+      ch->Echo("That's not a vendor!\r\n");
       return;
     }
 
@@ -28,25 +29,26 @@ void do_collectgold (Character *ch, char *argument)
 
   if ( (ch1 = GetCharacterInRoom(ch, vendor->Owner)) == NULL )
     {
-      SendToCharacter ("Trying to steal, huh?\r\n",ch);
+      ch->Echo("Trying to steal, huh?\r\n");
       return;
     }
+
   if ( StrCmp( ch1->Name, vendor->Owner ) )
     {
-      SendToCharacter ("Trying to steal, huh?\r\n",ch);
+      ch->Echo("Trying to steal, huh?\r\n");
       tms = localtime(&current_time);
       tms->tm_hour += 24;
       ch->PCData->ReleaseDate = mktime(tms);
       ch->PCData->HelledBy = CopyString("VendorCheat");
       Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
       CharacterFromRoom(ch);
-      CharacterToRoom(ch, GetRoom(6));
-      Act(AT_MAGIC, "$n appears in a could of hellish light.", ch, NULL, ch, TO_NOTVICT);
+      CharacterToRoom(ch, GetRoom(ROOM_VNUM_HELL));
+      Act(AT_MAGIC, "$n appears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
       do_look(ch, "auto");
-      Echo(ch, "The immortals are not pleased with your actions.\r\n"
-                "You shall remain in hell for 24 Hours.\r\n");
+      ch->Echo("The immortals are not pleased with your actions.\r\n"
+               "You shall remain in hell for 24 Hours.\r\n");
       SaveCharacter(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
-      Log->Info( "%s just tried to abuse the vendor bug!" , ch->Name);
+      Log->Info( "%s just tried to abuse the vendor bug!", ch->Name);
       return;
     }
 
@@ -54,23 +56,26 @@ void do_collectgold (Character *ch, char *argument)
   if ( ch != ch1 )
     {
       Log->Info("collectgold: %s and ch1 = %s\r\n", name, ch1->Name);
-      SendToCharacter ("This isnt your vendor!\r\n",ch);
+      ch->Echo("This isn't your vendor!\r\n");
       return;
     }
 
   if ( ch->Fighting)
     {
-      SendToCharacter ("Not while you fightZ!\r\n",ch);
+      ch->Echo("Not while you're fighting!\r\n",ch);
       return;
     }
 
   gold = vendor->Gold;
   gold -= (gold * VENDOR_FEE);
+
   if( vendor->InRoom && vendor->InRoom->Area )
     BoostEconomy( vendor->InRoom->Area, vendor->Gold);
+
   vendor->Gold = 0;
   ch->Gold += gold;
 
-  SendToCharacter("&GYour vendor gladly hands over his earnings minus a small fee of course..\r\n",ch);
+  ch->Echo("&GYour vendor gladly hands over his earnings minus a small fee of course.\r\n");
   Act( AT_ACTION, "$n hands over some money.\r\n", vendor, NULL, NULL, TO_ROOM );
 }
+

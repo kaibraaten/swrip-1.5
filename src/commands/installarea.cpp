@@ -19,7 +19,7 @@ void do_installarea( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Syntax: installarea <filename> [Area title]\r\n", ch );
+      ch->Echo("Syntax: installarea <filename> [Area title]\r\n");
       return;
     }
 
@@ -34,7 +34,7 @@ void do_installarea( Character *ch, char *argument )
             }
 
 	  /* Fold area with install flag -- auto-removes prototype flags */
-          SendToCharacter( "Saving and installing file...\r\n", ch );
+          ch->Echo("Saving and installing file...\r\n");
           FoldArea( tarea, tarea->Filename, true );
 
           /* Remove from prototype area list */
@@ -61,21 +61,23 @@ void do_installarea( Character *ch, char *argument )
             }
           
           top_area++;
-          SendToCharacter( "Writing area.lst...\r\n", ch );
+          ch->Echo("Writing area.lst...\r\n");
           WriteAreaList();
-          SendToCharacter( "Resetting new area.\r\n", ch );
+          ch->Echo("Resetting new area.\r\n");
           num = tarea->NumberOfPlayers;
           tarea->NumberOfPlayers = 0;
           ResetArea( tarea );
           tarea->NumberOfPlayers = num;
-          SendToCharacter( "Renaming author's building file.\r\n", ch );
+          ch->Echo("Renaming author's building file.\r\n");
           sprintf( buf, "%s%s.installed", BUILD_DIR, tarea->Filename );
           sprintf( arg, "%s%s", BUILD_DIR, tarea->Filename );
           rename( arg, buf );
-          SendToCharacter( "Done.\r\n", ch );
+          ch->Echo("Done.\r\n");
           return;
         }
     }
 
-  SendToCharacter( "No such area exists.\r\n", ch );
+  ch->Echo("No such area exists.\r\n");
 }
+
+

@@ -9,7 +9,7 @@ void do_ansi( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "ANSI ON or OFF?\r\n", ch );
+      ch->Echo( "ANSI ON or OFF?\r\n" );
       return;
     }
 
@@ -17,14 +17,15 @@ void do_ansi( Character *ch, char *argument )
     {
       SetBit(ch->Flags, PLR_ANSI);
       SetCharacterColor( AT_WHITE + AT_BLINK, ch);
-      SendToCharacter( "ANSI ON!!!\r\n", ch);
+      ch->Echo( "ANSI ON!!!\r\n" );
       return;
     }
 
   if ( !StrCmp(arg,"off") )
     {
       RemoveBit(ch->Flags, PLR_ANSI);
-      SendToCharacter( "Okay... ANSI support is now off\r\n", ch );
+      ch->Echo( "Okay... ANSI support is now off\r\n" );
       return;
     }
 }
+

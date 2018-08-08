@@ -18,7 +18,7 @@ void do_give( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "Give what to whom?\r\n", ch );
+      ch->Echo( "Give what to whom?\r\n" );
       return;
     }
 
@@ -34,7 +34,7 @@ void do_give( Character *ch, char *argument )
       if ( amount <= 0
            || ( StrCmp( arg2, "credits" ) && StrCmp( arg2, "credit" ) ) )
         {
-          SendToCharacter( "Sorry, you can't do that.\r\n", ch );
+          ch->Echo( "Sorry, you can't do that.\r\n" );
           return;
         }
 
@@ -45,19 +45,19 @@ void do_give( Character *ch, char *argument )
       
       if ( IsNullOrEmpty( arg2 ) )
         {
-	  SendToCharacter( "Give what to whom?\r\n", ch );
+	  ch->Echo( "Give what to whom?\r\n" );
           return;
         }
 
       if ( ( victim = GetCharacterInRoom( ch, arg2 ) ) == NULL )
         {
-          SendToCharacter( "They aren't here.\r\n", ch );
+          ch->Echo( "They aren't here.\r\n" );
           return;
         }
 
       if ( ch->Gold < amount )
         {
-          SendToCharacter( "Very generous of you, but you haven't got that many credits.\r\n", ch );
+          ch->Echo( "Very generous of you, but you haven't got that many credits.\r\n" );
           return;
         }
 
@@ -70,7 +70,7 @@ void do_give( Character *ch, char *argument )
       Act( AT_ACTION, buf, ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n gives $N some credits.",  ch, NULL, victim, TO_NOTVICT );
       Act( AT_ACTION, "You give $N some credits.",  ch, NULL, victim, TO_CHAR    );
-      SendToCharacter( "OK.\r\n", ch );
+      ch->Echo( "OK.\r\n");
       MobProgBribeTrigger( victim, ch, amount );
 
       if ( IsBitSet( SysData.SaveFlags, SV_GIVE ) && !CharacterDiedRecently(ch) )
@@ -84,25 +84,25 @@ void do_give( Character *ch, char *argument )
 
   if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "You do not have that item.\r\n", ch );
+      ch->Echo( "You do not have that item.\r\n" );
       return;
     }
 
   if ( obj->WearLoc != WEAR_NONE )
     {
-      SendToCharacter( "You must remove it first.\r\n", ch );
+      ch->Echo( "You must remove it first.\r\n" );
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg2 ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
   if ( !CanDropObject( ch, obj ) )
     {
-      SendToCharacter( "You can't let go of it.\r\n", ch );
+      ch->Echo( "You can't let go of it.\r\n" );
       return;
     }
 
@@ -129,7 +129,7 @@ void do_give( Character *ch, char *argument )
 
       if ( victim->Owner && StrCmp( ch->Name, victim->Owner ) )
         {
-          SendToCharacter ("This isnt your vendor!\r\n",ch);
+          ch->Echo("This isnt your vendor!\r\n");
           return;
         }
     }
@@ -154,3 +154,4 @@ void do_give( Character *ch, char *argument )
   if ( IsBitSet( SysData.SaveFlags, SV_RECEIVE ) && !CharacterDiedRecently(victim) )
     SaveCharacter(victim);
 }
+

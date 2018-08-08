@@ -14,7 +14,7 @@ void do_transfer( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Transfer whom (and where)?\r\n", ch );
+      ch->Echo("Transfer whom (and where)?\r\n");
       return;
     }
 
@@ -48,32 +48,32 @@ void do_transfer( Character *ch, char *argument )
     {
       if ( ( location = FindLocation( ch, arg2 ) ) == NULL )
         {
-          SendToCharacter( "No such location.\r\n", ch );
+          ch->Echo("No such location.\r\n");
           return;
         }
 
       if ( IsRoomPrivate( ch, location ) )
         {
-          SendToCharacter( "That room is private right now.\r\n", ch );
+          ch->Echo("That room is private right now.\r\n");
           return;
         }
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if (!IsAuthed(victim))
     {
-      SendToCharacter( "They are not authorized yet!\r\n", ch);
+      ch->Echo("They are not authorized yet!\r\n");
       return;
     }
 
   if ( !victim->InRoom )
     {
-      SendToCharacter( "They are in limbo.\r\n", ch );
+      ch->Echo("They are in limbo.\r\n");
       return;
     }
 
@@ -90,11 +90,12 @@ void do_transfer( Character *ch, char *argument )
     Act( AT_IMMORT, "$n has transferred you.", ch, NULL, victim, TO_VICT );
 
   do_look( victim, "auto" );
-  SendToCharacter( "Ok.\r\n", ch );
+  ch->Echo("Ok.\r\n");
 
   if (!IsImmortal(victim) && !IsNpc(victim)
       && !InHardRange( victim, location->Area ) )
     {
-      SendToCharacter("Warning: the player's level is not within the area's level range.\r\n", ch);
+      ch->Echo("Warning: the player's level is not within the area's level range.\r\n");
     }
 }
+

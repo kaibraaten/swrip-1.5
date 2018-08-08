@@ -11,142 +11,125 @@ void do_channels( Character *ch, char *argument )
     {
       if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_SILENCE) )
         {
-          SendToCharacter( "You are silenced.\r\n", ch );
+          ch->Echo( "You are silenced.\r\n" );
           return;
         }
 
-      SendToCharacter( "Channels:", ch );
+      ch->Echo( "Channels:" );
 
       if ( GetTrustLevel( ch ) > 2 && IsAuthed( ch ) )
         {
-          SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_AUCTION)
-                        ? " +AUCTION"
-                        : " -auction",
-                        ch );
+          ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_AUCTION)
+                    ? " +AUCTION"
+                    : " -auction");
         }
 
-      SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_CHAT)
-                    ? " +CHAT"
-                    : " -chat",
-                    ch );
+      ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_CHAT)
+                ? " +CHAT"
+                : " -chat");
 
-      SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_OOC)
-                    ? " +OOC"
-                    : " -ooc",
-                    ch );
+      ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_OOC)
+                ? " +OOC"
+                : " -ooc");
 
       if ( IsClanned( ch ) )
 	{
-          SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_CLAN)
-                        ? " +CLAN"
-                        : " -clan",
-                        ch );
+          ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_CLAN)
+                    ? " +CLAN"
+                    : " -clan");
         }
 
-      SendToCharacter( !IsBitSet( ch->Deaf, CHANNEL_TELLS )
-                    ? " +TELLS"
-                    : " -tells",
-                    ch );
+      ch->Echo( "%s", !IsBitSet( ch->Deaf, CHANNEL_TELLS )
+                ? " +TELLS"
+                : " -tells");
 
-      SendToCharacter( !IsBitSet( ch->Deaf, CHANNEL_WARTALK )
-                    ? " +WARTALK"
-                    : " -wartalk",
-                    ch );
+      ch->Echo( "%s", !IsBitSet( ch->Deaf, CHANNEL_WARTALK )
+                ? " +WARTALK"
+                : " -wartalk");
 
       if ( IsAvatar(ch) )
         {
-          SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_AVTALK)
-                        ? " +AVATAR"
-                        : " -avatar",
-                        ch );
+          ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_AVTALK)
+                    ? " +AVATAR"
+                    : " -avatar");
         }
 
       if ( IsImmortal(ch) )
         {
-          SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_IMMTALK)
-                        ? " +IMMTALK"
-                        : " -immtalk",
-                        ch );
+          ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_IMMTALK)
+                    ? " +IMMTALK"
+                    : " -immtalk");
 
-          SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_PRAY)
-                        ? " +PRAY"
-                        : " -pray",
-                        ch );
+          ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_PRAY)
+                    ? " +PRAY"
+                    : " -pray");
         }
 
-      SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_MUSIC)
-? " +MUSIC"
-                    : " -music",
-                    ch );
+      ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_MUSIC)
+                ? " +MUSIC"
+                : " -music");
 
-      SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_ASK)
-                    ? " +ASK"
-                    : " -ask",
-                    ch );
+      ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_ASK)
+                ? " +ASK"
+                : " -ask");
 
-      SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_SHOUT)
-                    ? " +SHOUT"
-                    : " -shout",
-                    ch );
+      ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_SHOUT)
+                ? " +SHOUT"
+                : " -shout");
 
-      SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_YELL)
-                    ? " +YELL"
-                    : " -yell",
-                    ch );
+      ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_YELL)
+                ? " +YELL"
+                : " -yell");
 
-      SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_ARENA)
-                    ? " +ARENA"
-                    : " -arena",
-                    ch );
+      ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_ARENA)
+                ? " +ARENA"
+                : " -arena");
 
       if ( IsImmortal(ch) )
         {
-          SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_MONITOR)
-                        ? " +MONITOR"
-                        : " -monitor",
-                        ch );
+          ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_MONITOR)
+                    ? " +MONITOR"
+                    : " -monitor");
         }
 
-      SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_NEWBIE)
-                    ? " +NEWBIE"
-                    : " -newbie",
-                    ch );
+      ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_NEWBIE)
+                ? " +NEWBIE"
+                : " -newbie");
 
       if ( GetTrustLevel(ch) >= SysData.LevelOfLogChannel )
         {
-          SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_LOG)
-                        ? " +LOG"
-                        : " -log",
-                        ch );
+          ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_LOG)
+                    ? " +LOG"
+                    : " -log");
 
-          SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_BUILD)
-? " +BUILD"
-                        : " -build",
-                        ch );
+          ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_BUILD)
+                    ? " +BUILD"
+                    : " -build");
 
-          SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_COMM)
-                        ? " +COMM"
-                        : " -comm",
-                        ch );
+          ch->Echo( "%s", !IsBitSet(ch->Deaf, CHANNEL_COMM)
+                    ? " +COMM"
+                    : " -comm");
         }
-      SendToCharacter( ".\r\n", ch );
+
+      ch->Echo( ".\r\n" );
     }
   else
     {
-      bool fClear;
-      bool ClearAll;
-      int bit;
-
-      bit=0;
-      ClearAll = false;
+      bool fClear = false;
+      bool ClearAll = false;
+      int bit = 0;
 
       if ( arg[0] == '+' )
-	fClear = true;
+        {
+          fClear = true;
+        }
       else if ( arg[0] == '-' )
-	fClear = false;
+        {
+          fClear = false;
+        }
       else
         {
-          SendToCharacter( "Channels -channel or +channel?\r\n", ch );
+          ch->Echo( "Channels -channel or +channel?\r\n" );
           return;
         }
 
@@ -196,7 +179,7 @@ void do_channels( Character *ch, char *argument )
 	ClearAll = true;
       else
         {
-          SendToCharacter( "Set or clear which channel?\r\n", ch );
+          ch->Echo( "Set or clear which channel?\r\n" );
           return;
         }
 
@@ -244,6 +227,7 @@ void do_channels( Character *ch, char *argument )
           SetBit(ch->Deaf, bit);
         }
 
-      SendToCharacter( "Ok.\r\n", ch );
+      ch->Echo( "Ok.\r\n" );
     }
 }
+

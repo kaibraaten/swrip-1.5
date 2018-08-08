@@ -7,31 +7,34 @@ void do_stand( Character *ch, char *argument )
     {
     case POS_SLEEPING:
       if ( IsAffectedBy(ch, AFF_SLEEP) )
-        { SendToCharacter( "You can't seem to wake up!\r\n", ch ); return; }
-
-      SendToCharacter( "You wake and climb quickly to your feet.\r\n", ch );
+        {
+          ch->Echo("You can't seem to wake up!\r\n");
+          return;
+        }
+      
+      ch->Echo("You wake and climb quickly to your feet.\r\n");
       Act( AT_ACTION, "$n arises from $s slumber.", ch, NULL, NULL, TO_ROOM );
       ch->Position = POS_STANDING;
       break;
 
     case POS_RESTING:
-      SendToCharacter( "You gather yourself and stand up.\r\n", ch );
+      ch->Echo("You gather yourself and stand up.\r\n");
       Act( AT_ACTION, "$n rises from $s rest.", ch, NULL, NULL, TO_ROOM );
       ch->Position = POS_STANDING;
       break;
 
     case POS_SITTING:
-      SendToCharacter( "You move quickly to your feet.\r\n", ch );
+      ch->Echo("You move quickly to your feet.\r\n");
       Act( AT_ACTION, "$n rises up.", ch, NULL, NULL, TO_ROOM );
       ch->Position = POS_STANDING;
       break;
 
     case POS_STANDING:
-      SendToCharacter( "You are already standing.\r\n", ch );
+      ch->Echo("You are already standing.\r\n");
       break;
 
     case POS_FIGHTING:
-      SendToCharacter( "You are already fighting!\r\n", ch );
+      ch->Echo("You are already fighting!\r\n");
       break;
 
     default:
@@ -40,3 +43,4 @@ void do_stand( Character *ch, char *argument )
 
   ch->On = NULL;
 }
+

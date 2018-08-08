@@ -20,7 +20,7 @@ void do_mstat( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Mstat whom?\r\n", ch );
+      ch->Echo("Mstat whom?\r\n");
       return;
     }
 
@@ -29,34 +29,34 @@ void do_mstat( Character *ch, char *argument )
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( ( ( GetTrustLevel( ch ) < LEVEL_GREATER ) && !IsNpc(victim) ) || ( ( GetTrustLevel( ch ) < GetTrustLevel( victim ) ) && !IsNpc(victim) ) )
     {
       SetCharacterColor( AT_IMMORT, ch );
-      SendToCharacter( "Their godly glow prevents you from getting a good look.\r\n", ch );
+      ch->Echo("Their godly glow prevents you from getting a good look.\r\n");
       return;
     }
 
-  Echo( ch, "Name: %s     Organization: %s\r\n",
+  ch->Echo("Name: %s     Organization: %s\r\n",
              victim->Name,
              ( IsNpc( victim ) || !victim->PCData->ClanInfo.Clan ) ? "(none)"
              : victim->PCData->ClanInfo.Clan->Name );
 
   if( GetTrustLevel(ch) >= LEVEL_GREATER && !IsNpc(victim) && victim->Desc )
-    Echo( ch, "Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
+    ch->Echo("Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
 	  victim->Desc->Remote.Hostname, victim->Desc->Socket,
 	  victim->Trust, !IsNullOrEmpty( victim->PCData->AuthedBy )
 	  ? victim->PCData->AuthedBy : "(unknown)" );
 
   if ( !IsNpc(victim) && victim->PCData->ReleaseDate != 0 )
-    Echo(ch, "Helled until %24.24s by %s.\r\n",
+    ch->Echo("Helled until %24.24s by %s.\r\n",
               ctime(&victim->PCData->ReleaseDate),
               victim->PCData->HelledBy);
 
-  Echo( ch, "Vnum: %d   Sex: %s   Room: %d   Count: %d  Killed: %d\r\n",
+  ch->Echo("Vnum: %d   Sex: %s   Room: %d   Count: %d  Killed: %d\r\n",
              IsNpc(victim) ? victim->Prototype->Vnum : 0,
              victim->Sex == SEX_MALE    ? "male"   :
              victim->Sex == SEX_FEMALE  ? "female" : "neutral",
@@ -66,7 +66,7 @@ void do_mstat( Character *ch, char *argument )
              : victim->PCData->MDeaths + victim->PCData->PDeaths
              );
 
-  Echo( ch, "Str: %d  Int: %d  Wis: %d  Dex: %d  Con: %d  Cha: %d  Lck: %d  Frc: %d\r\n",
+  ch->Echo("Str: %d  Int: %d  Wis: %d  Dex: %d  Con: %d  Cha: %d  Lck: %d  Frc: %d\r\n",
              GetCurrentStrength(victim),
              GetCurrentIntelligence(victim),
              GetCurrentWisdom(victim),
@@ -76,7 +76,7 @@ void do_mstat( Character *ch, char *argument )
              GetCurrentLuck(victim),
              GetCurrentForce(victim) );
 
-  Echo( ch, "Hps: %d/%d  Force: %d/%d   Move: %d/%d\r\n",
+  ch->Echo("Hps: %d/%d  Force: %d/%d   Move: %d/%d\r\n",
 	victim->Hit,         victim->MaxHit,
 	victim->Mana,        victim->MaxMana,
 	victim->Move,        victim->MaxMove );
@@ -86,36 +86,35 @@ void do_mstat( Character *ch, char *argument )
       int ability;
 
       for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-        Echo( ch, "%-15s   Level: %-3d   Max: %-3d   Exp: %-10ld   Next: %-10ld\r\n",
+        ch->Echo("%-15s   Level: %-3d   Max: %-3d   Exp: %-10ld   Next: %-10ld\r\n",
                    AbilityName[ability], GetAbilityLevel( victim, ability ), GetMaxAbilityLevel(victim, ability),
 		   GetAbilityXP( victim, ability ),
 		   GetRequiredXpForLevel( GetAbilityLevel( victim, ability ) + 1 ) );
     }
 
-  Echo( ch, "Top Level: %d     Race: %d  Align: %d  AC: %d  Gold: %d\r\n",
+  ch->Echo("Top Level: %d     Race: %d  Align: %d  AC: %d  Gold: %d\r\n",
 	victim->TopLevel,  victim->Race,   victim->Alignment,
 	GetArmorClass(victim),      victim->Gold );
 
   if (  victim->Race  < MAX_NPC_RACE  && victim->Race  >= 0 )
-    Echo( ch, "Race: %s\r\n",
+    ch->Echo("Race: %s\r\n",
                NpcRace[victim->Race] );
 
-  Echo( ch, "Hitroll: %d   Damroll: %d   Position: %d   Wimpy: %d \r\n",
+  ch->Echo("Hitroll: %d   Damroll: %d   Position: %d   Wimpy: %d \r\n",
              GetHitRoll(victim), GetDamageRoll(victim),
              victim->Position,    victim->Wimpy );
-  Echo( ch, "Fighting: %s    Master: %s    Leader: %s\r\n",
+  ch->Echo("Fighting: %s    Master: %s    Leader: %s\r\n",
              victim->Fighting ? victim->Fighting->Who->Name : "(none)",
              victim->Master      ? victim->Master->Name   : "(none)",
              victim->Leader      ? victim->Leader->Name   : "(none)" );
 
   if ( !IsNpc(victim) )
-    Echo( ch,
-               "Thirst: %d   Full: %d   Drunk: %d\r\n",
-               victim->PCData->Condition[COND_THIRST],
-               victim->PCData->Condition[COND_FULL],
-               victim->PCData->Condition[COND_DRUNK] );
+    ch->Echo("Thirst: %d   Full: %d   Drunk: %d\r\n",
+             victim->PCData->Condition[COND_THIRST],
+             victim->PCData->Condition[COND_FULL],
+             victim->PCData->Condition[COND_DRUNK] );
   else
-    Echo( ch, "Hit dice: %dd%d+%d.  Damage dice: %dd%d+%d.\r\n",
+    ch->Echo("Hit dice: %dd%d+%d.  Damage dice: %dd%d+%d.\r\n",
                victim->Prototype->HitNoDice,
                victim->Prototype->HitSizeDice,
                victim->Prototype->HitPlus,
@@ -123,41 +122,41 @@ void do_mstat( Character *ch, char *argument )
                victim->Prototype->DamSizeDice,
                victim->Prototype->DamPlus );
 
-  Echo( ch, "MentalState: %d   EmotionalState: %d\r\n",
+  ch->Echo("MentalState: %d   EmotionalState: %d\r\n",
         victim->MentalState, victim->EmotionalState );
-  Echo( ch, "Saving throws: %d %d %d %d %d.\r\n",
+  ch->Echo("Saving throws: %d %d %d %d %d.\r\n",
         victim->Saving.PoisonDeath,
         victim->Saving.Wand,
         victim->Saving.ParaPetri,
         victim->Saving.Breath,
         victim->Saving.SpellStaff  );
-  Echo( ch, "Carry figures: items (%d/%d)  weight (%d/%d)   Numattacks: %d\r\n",
+  ch->Echo("Carry figures: items (%d/%d)  weight (%d/%d)   Numattacks: %d\r\n",
         victim->CarryNumber, GetCarryCapacityNumber(victim),
         victim->CarryWeight, GetCarryCapacityWeight(victim), victim->NumberOfAttacks );
 
   if ( IsNpc( victim ) )
     {
-      Echo( ch, "Mob flags: %s\r\n", FlagString(victim->Flags, MobFlags).c_str() );
-      Echo( ch, "VIP flags: %s\r\n", FlagString(victim->VipFlags, WantedFlags).c_str() );
+      ch->Echo("Mob flags: %s\r\n", FlagString(victim->Flags, MobFlags).c_str() );
+      ch->Echo("VIP flags: %s\r\n", FlagString(victim->VipFlags, WantedFlags).c_str() );
     }
   else
     {
-      Echo( ch, "Years: %d   Seconds Played: %d   Idle Timer: %d\r\n",
+      ch->Echo("Years: %d   Seconds Played: %d   Idle Timer: %d\r\n",
 	    GetAge( victim ), (int) victim->PCData->Played, victim->IdleTimer );
 
-      Echo( ch, "Player flags: %s\r\n",
+      ch->Echo("Player flags: %s\r\n",
             FlagString(victim->Flags, PlayerFlags).c_str() );
-      Echo( ch, "Pcflags: %s\r\n",
+      ch->Echo("Pcflags: %s\r\n",
             FlagString(victim->PCData->Flags, PcFlags).c_str() );
-      Echo( ch, "Wanted flags: %s\r\n",
+      ch->Echo("Wanted flags: %s\r\n",
             FlagString(victim->PCData->WantedFlags, WantedFlags).c_str() );
     }
 
-  Echo( ch, "Affected by: %s\r\n",
+  ch->Echo("Affected by: %s\r\n",
         FlagString( victim->AffectedBy, AffectFlags ).c_str() );
-  Echo( ch, "Speaks: %d   Speaking: %d\r\n",
+  ch->Echo("Speaks: %d   Speaking: %d\r\n",
              victim->Speaks, victim->Speaking );
-  SendToCharacter( "Languages: ", ch );
+  ch->Echo("Languages: ");
 
   for ( x = 0; LanguageArray[x] != LANG_UNKNOWN; x++ )
     {
@@ -170,64 +169,64 @@ void do_mstat( Character *ch, char *argument )
 	      SetCharacterColor( AT_RED, ch );
 	    }
 
-        SendToCharacter( LanguageNames[x], ch );
-        SendToCharacter( " ", ch );
+        ch->Echo(LanguageNames[x]);
+        ch->Echo(" ");
         SetCharacterColor( AT_PLAIN, ch );
       }
     else if ( IsBitSet(LanguageArray[x], victim->Speaking)
 	      || (IsNpc(victim) && !victim->Speaking) )
       {
 	SetCharacterColor( AT_PINK, ch );
-	SendToCharacter( LanguageNames[x], ch );
-	SendToCharacter( " ", ch );
+ ch->Echo(LanguageNames[x]);
+ ch->Echo(" ");
 	SetCharacterColor( AT_PLAIN, ch );
       }
     }
 
-  SendToCharacter( "\r\n", ch );
+  ch->Echo("\r\n");
 
   if ( victim->PCData && !IsNullOrEmpty( victim->PCData->Bestowments ) )
     {
-      Echo( ch, "Bestowments: %s\r\n", victim->PCData->Bestowments );
+      ch->Echo("Bestowments: %s\r\n", victim->PCData->Bestowments );
     }
 
-  Echo( ch, "Short description: %s\r\nLong  description: %s",
+  ch->Echo("Short description: %s\r\nLong  description: %s",
 	victim->ShortDescr,
 	!IsNullOrEmpty( victim->LongDescr ) ? victim->LongDescr : "(none)\r\n" );
 
   if ( IsNpc(victim) && ( victim->spec_fun || victim->spec_2 ) )
     {
-      Echo( ch, "Mobile has spec fun: %s %s\r\n",
+      ch->Echo("Mobile has spec fun: %s %s\r\n",
 	    LookupSpecial( victim->spec_fun ),
 	    victim->spec_2 ? LookupSpecial( victim->spec_2 ) : "" );
     }
 
-  Echo( ch, "Body Parts : %s\r\n",
+  ch->Echo("Body Parts : %s\r\n",
         FlagString(victim->BodyParts, PartFlags).c_str() );
-  Echo( ch, "Resistant  : %s\r\n",
+  ch->Echo("Resistant  : %s\r\n",
         FlagString(victim->Resistant, RisFlags).c_str() );
-  Echo( ch, "Immune     : %s\r\n",
+  ch->Echo("Immune     : %s\r\n",
         FlagString(victim->Immune, RisFlags).c_str() );
-  Echo( ch, "Susceptible: %s\r\n",
+  ch->Echo("Susceptible: %s\r\n",
         FlagString(victim->Susceptible, RisFlags).c_str() );
-  Echo( ch, "Attacks    : %s\r\n",
+  ch->Echo("Attacks    : %s\r\n",
         FlagString(victim->AttackFlags, AttackFlags).c_str() );
-  Echo( ch, "Defenses   : %s\r\n",
+  ch->Echo("Defenses   : %s\r\n",
         FlagString(victim->DefenseFlags, DefenseFlags).c_str() );
 
   for ( paf = victim->FirstAffect; paf; paf = paf->Next )
     {
       if ( (skill=GetSkill(paf->Type)) != NULL )
 	{
-	  Echo( ch,
-                "%s: '%s' modifies %s by %d for %d rounds with bits %s.\r\n",
-                SkillTypeName[skill->Type],
-                skill->Name,
-                GetAffectLocationName( paf->Location ),
-                paf->Modifier,
-                paf->Duration,
-                FlagString( paf->AffectedBy, AffectFlags ).c_str()
-                );
+          ch->Echo("%s: '%s' modifies %s by %d for %d rounds with bits %s.\r\n",
+                   SkillTypeName[skill->Type],
+                   skill->Name,
+                   GetAffectLocationName( paf->Location ),
+                   paf->Modifier,
+                   paf->Duration,
+                   FlagString( paf->AffectedBy, AffectFlags ).c_str()
+                   );
 	}
     }
 }
+

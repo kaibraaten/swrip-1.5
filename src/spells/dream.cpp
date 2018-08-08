@@ -12,29 +12,30 @@ ch_ret spell_dream( int sn, int level, Character *ch, void *vo )
   SetCharacterColor(AT_MAGIC, ch);
   if ( !(victim = GetCharacterAnywhere(ch, arg)) )
     {
-      SendToCharacter("They aren't here.\r\n", ch);
+      ch->Echo("They aren't here.\r\n");
       return rSPELL_FAILED;
     }
   if ( victim->Position != POS_SLEEPING )
     {
-      SendToCharacter("They aren't asleep.\r\n", ch);
+      ch->Echo("They aren't asleep.\r\n");
       return rSPELL_FAILED;
     }
   if ( victim->Race == RACE_DROID )
     {
-      SendToCharacter("Machines do not dream.\r\n", ch);
+      ch->Echo("Machines do not dream.\r\n");
       return rSPELL_FAILED;
     }
 
   if ( !spell_target_name )
     {
-      SendToCharacter("What do you want them to dream about?\r\n", ch );
+      ch->Echo("What do you want them to dream about?\r\n");
       return rSPELL_FAILED;
     }
 
   SetCharacterColor(AT_TELL, victim);
-  Echo(victim, "You have dreams about %s telling you '%s'.\r\n",
-            PERS(ch, victim), spell_target_name);
-  SendToCharacter("Ok.\r\n", ch);
+  victim->Echo("You have dreams about %s telling you '%s'.\r\n",
+               PERS(ch, victim), spell_target_name);
+  ch->Echo("Ok.\r\n");
   return rNONE;
 }
+

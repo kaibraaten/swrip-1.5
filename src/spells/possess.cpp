@@ -13,37 +13,37 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
 
   if (ch->Desc->Original)
     {
-      SendToCharacter("You are not in your original state.\r\n", ch);
+      ch->Echo("You are not in your original state.\r\n");
       return rSPELL_FAILED;
     }
 
   if ( (victim = GetCharacterInRoom( ch, spell_target_name ) ) == NULL)
     {
-      SendToCharacter("They aren't here!\r\n", ch);
+      ch->Echo("They aren't here!\r\n");
       return rSPELL_FAILED;
     }
 
   if (victim == ch)
     {
-      SendToCharacter("You can't possess yourself!\r\n", ch);
+      ch->Echo("You can't possess yourself!\r\n");
       return rSPELL_FAILED;
     }
 
   if (!IsNpc(victim))
     {
-      SendToCharacter("You can't possess another player!\r\n", ch);
+      ch->Echo("You can't possess another player!\r\n");
       return rSPELL_FAILED;
     }
 
   if ( victim->Race == RACE_DROID )
     {
-      SendToCharacter("The brain of a machine confuses you.\r\n", ch);
+      ch->Echo("The brain of a machine confuses you.\r\n");
       return rSPELL_FAILED;
     }
 
   if (victim->Desc)
     {
-      Echo(ch, "%s is already possessed.\r\n", victim->ShortDescr);
+      ch->Echo("%s is already possessed.\r\n", victim->ShortDescr);
       return rSPELL_FAILED;
     }
 
@@ -62,7 +62,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  SendToCharacter("You feel the hatred grow within you as you twist your victims mind!\r\n", ch);
+  ch->Echo("You feel the hatred grow within you as you twist your victims mind!\r\n");
   ch->Alignment = ch->Alignment - 50;
   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
   ApplySithPenalty( ch );
@@ -81,7 +81,8 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   victim->Desc        = ch->Desc;
   ch->Desc            = NULL;
   ch->Switched        = victim;
-  SendToCharacter( buf, victim );
+  victim->Echo(buf);
 
   return rNONE;
 }
+

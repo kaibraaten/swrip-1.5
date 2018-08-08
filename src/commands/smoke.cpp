@@ -12,7 +12,7 @@ void do_smoke( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Smoke what?\r\n", ch );
+      ch->Echo("Smoke what?\r\n");
       return;
     }
 
@@ -21,7 +21,7 @@ void do_smoke( Character *ch, char *argument )
 
   if ( (pipe_obj = GetCarriedObject( ch, arg )) == NULL )
     {
-      SendToCharacter( "You aren't carrying that.\r\n", ch );
+      ch->Echo("You aren't carrying that.\r\n");
       return;
     }
   if ( pipe_obj->ItemType != ITEM_PIPE )
@@ -72,3 +72,4 @@ void do_smoke( Character *ch, char *argument )
         }
     }
 }
+

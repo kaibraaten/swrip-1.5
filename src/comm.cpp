@@ -79,7 +79,6 @@ static bool FlushBuffer( Descriptor *d, bool fPrompt );
 static void ReadFromBuffer( Descriptor *d );
 static void StopIdling( Character *ch );
 static void DisplayPrompt( Descriptor *d );
-static int MakeColorSequence( const char *col, char *buf, Descriptor *d );
 static void SetPagerInput( Descriptor *d, char *argument );
 static bool PagerOutput( Descriptor *d );
 static void GameLoop( void );
@@ -1296,7 +1295,7 @@ bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
               d->Character = ch;
               ch->Desc   = d;
               ch->IdleTimer  = 0;
-              SendToCharacter( "Reconnecting.\r\n", ch );
+              ch->Echo( "Reconnecting.\r\n" );
               Act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
               sprintf( log_buf, "%s@%s reconnected.", ch->Name, d->Remote.Hostname );
               Log->LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
@@ -1378,10 +1377,12 @@ unsigned char CheckPlaying( Descriptor *d, const char *name, bool kick )
           d->Character = ch;
           ch->Desc       = d;
           ch->IdleTimer      = 0;
+
           if ( ch->Switched )
             do_return( ch->Switched, "" );
+
           ch->Switched = NULL;
-          SendToCharacter( "Reconnecting.\r\n", ch );
+          ch->Echo( "Reconnecting.\r\n" );
           Act( AT_ACTION, "$n has reconnected, kicking off old link.",
                ch, NULL, NULL, TO_ROOM );
           sprintf( log_buf, "%s@%s reconnected, kicking off old link.",
@@ -1412,145 +1413,6 @@ static void StopIdling( Character *ch )
   Act( AT_ACTION, "$n has returned from the void.", ch, NULL, NULL, TO_ROOM );
 }
 
-void SendToCharacter( const char *txt, const Character *ch )
-{
-  Descriptor *d;
-  const char *colstr;
-  const char *prevstr = txt;
-  char colbuf[20];
-  int ln;
-
-  if ( !ch )
-    {
-      Log->Bug( "Send_to_char: NULL *ch" );
-      return;
-    }
-  if ( !txt || !ch->Desc )
-    return;
-  d = ch->Desc;
-
-  while ( d && ((colstr = strpbrk(prevstr, "&^")) != NULL ))
-    {
-      if (colstr > prevstr)
-        WriteToBuffer(d, prevstr, (colstr-prevstr));
-      ln = MakeColorSequence(colstr, colbuf, d);
-      if ( ln < 0 )
-        {
-          prevstr = colstr+1;
-          break;
-        }
-      else if ( ln > 0 )
-        WriteToBuffer(d, colbuf, ln);
-      prevstr = colstr+2;
-    }
-  if ( *prevstr )
-    WriteToBuffer(d, prevstr, 0);
-  return;
-}
-
-void WriteToPager( Descriptor *d, const char *txt, size_t length )
-{
-  if ( length <= 0 )
-    length = strlen(txt);
-
-  if ( length == 0 )
-    return;
-
-  if ( !d->Pager.PageBuffer )
-    {
-      d->Pager.PageSize = MAX_STRING_LENGTH;
-      AllocateMemory( d->Pager.PageBuffer, char, d->Pager.PageSize );
-    }
-
-  if ( !d->Pager.PagePoint )
-    {
-      d->Pager.PagePoint = d->Pager.PageBuffer;
-      d->Pager.PageTop = 0;
-      d->Pager.PageCommand = '\0';
-    }
-
-  if ( d->Pager.PageTop == 0 && !d->fCommand )
-    {
-      d->Pager.PageBuffer[0] = '\n';
-      d->Pager.PageBuffer[1] = '\r';
-      d->Pager.PageTop = 2;
-    }
-
-  while ( d->Pager.PageTop + length >= d->Pager.PageSize )
-    {
-      if ( d->Pager.PageSize > SHRT_MAX )
-        {
-          Log->Bug( "Pager overflow. Ignoring.\r\n" );
-          d->Pager.PageTop = 0;
-          d->Pager.PagePoint = NULL;
-          FreeMemory(d->Pager.PageBuffer);
-          d->Pager.PageSize = MAX_STRING_LENGTH;
-          return;
-        }
-
-      d->Pager.PageSize *= 2;
-      ReAllocateMemory(d->Pager.PageBuffer, char, d->Pager.PageSize);
-    }
-
-  strncpy(d->Pager.PageBuffer + d->Pager.PageTop, txt, length);
-  d->Pager.PageTop += length;
-  d->Pager.PageBuffer[d->Pager.PageTop] = '\0';
-}
-
-void SendToPager( const char *txt, const Character *ch )
-{
-  Descriptor *d;
-  const char *colstr;
-  const char *prevstr = txt;
-  char colbuf[20];
-
-  if ( !ch )
-    {
-      Log->Bug( "Send_to_pager_color: NULL *ch" );
-      return;
-    }
-
-  if ( !txt || !ch->Desc )
-    return;
-
-  d = ch->Desc;
-  ch = d->Original ? d->Original : d->Character;
-
-  if ( IsNpc(ch) || !IsBitSet(ch->PCData->Flags, PCFLAG_PAGERON) )
-    {
-      SendToCharacter(txt, d->Character);
-      return;
-    }
-
-  while ( (colstr = strpbrk(prevstr, "&^")) != NULL )
-    {
-      int ln = 0;
-
-      if ( colstr > prevstr )
-        WriteToPager(d, prevstr, (colstr-prevstr));
-
-      ln = MakeColorSequence(colstr, colbuf, d);
-
-      if ( ln < 0 )
-        {
-          prevstr = colstr+1;
-          break;
-        }
-      else if ( ln > 0 )
-	{
-	  WriteToPager(d, colbuf, ln);
-	}
-
-      prevstr = colstr+2;
-    }
-
-  if ( *prevstr )
-    {
-      WriteToPager(d, prevstr, 0);
-    }
-}
-
-
 void SetCharacterColor( short AType, const Character *ch )
 {
   char buf[16];
@@ -1575,55 +1437,6 @@ void SetCharacterColor( short AType, const Character *ch )
 
       WriteToBuffer( ch->Desc, buf, strlen(buf) );
     }
-}
-
-void SetPagerColor( short AType, const Character *ch )
-{
-  char buf[16];
-  const Character *och;
-
-  if ( !ch || !ch->Desc )
-    return;
-
-  och = (ch->Desc->Original ? ch->Desc->Original : ch);
-
-  if ( !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI) )
-    {
-      if ( AType == 7 )
-        strcpy( buf, "\033[m" );
-      else
-        sprintf(buf, "\033[0;%d;%s%dm", (AType & 8) == 8,
-                (AType > 15 ? "5;" : ""), (AType & 7)+30);
-      SendToPager( buf, ch );
-      ch->Desc->Pager.PageColor = AType;
-    }
-  return;
-}
-
-
-/* source: EOD, by John Booth <???> */
-void Echo(const Character *ch, const char *fmt, ...)
-{
-  char buf[MAX_STRING_LENGTH*2];        /* better safe than sorry */
-  va_list args;
-
-  va_start(args, fmt);
-  vsprintf(buf, fmt, args);
-  va_end(args);
-
-  SendToCharacter(buf, ch);
-}
-
-void PagerPrintf(const Character *ch, const char *fmt, ...)
-{
-  char buf[MAX_STRING_LENGTH*2];
-  va_list args;
-
-  va_start(args, fmt);
-  vsprintf(buf, fmt, args);
-  va_end(args);
-
-  SendToPager(buf, ch);
 }
 
 /*
@@ -1855,8 +1668,9 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
       if (to && to->Desc)
         {
           SetCharacterColor(AType, to);
-          SendToCharacter( txt, to );
+          to->Echo(txt);
         }
+      
       if (MOBtrigger)
         {
           /* Note: use original string, not string with ANSI. -- Alty */
@@ -2070,7 +1884,7 @@ static void DisplayPrompt( Descriptor *d )
   return;
 }
 
-static int MakeColorSequence(const char *col, char *buf, Descriptor *d)
+int MakeColorSequence(const char *col, char *buf, Descriptor *d)
 {
   int ln = 0;
   const char *ctype = col;
@@ -2317,3 +2131,4 @@ static bool PagerOutput( Descriptor *d )
 
   return ret;
 }
+

@@ -14,7 +14,7 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
 
   if ( IsNullOrEmpty( spell_target_name ) )
     {
-      SendToCharacter( "Remove trap on what?\r\n", ch );
+      ch->Echo("Remove trap on what?\r\n");
       return rSPELL_FAILED;
     }
 
@@ -22,7 +22,7 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
 
   if ( !ch->InRoom->FirstContent )
     {
-      SendToCharacter( "You can't find that here.\r\n", ch );
+      ch->Echo("You can't find that here.\r\n");
       return rNONE;
     }
 
@@ -35,7 +35,7 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
 
   if ( !found )
     {
-      SendToCharacter( "You can't find that here.\r\n", ch );
+      ch->Echo("You can't find that here.\r\n");
       return rSPELL_FAILED;
     }
 
@@ -48,7 +48,7 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
 
   if ( Chance(ch, 70 + GetCurrentWisdom(ch)) )
     {
-      SendToCharacter( "Ooops!\r\n", ch );
+      ch->Echo("Ooops!\r\n");
       retcode = SpringTrap(ch, trap);
       if ( retcode == rNONE )
         retcode = rSPELL_FAILED;
@@ -60,3 +60,4 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
   SuccessfulCasting( skill, ch, NULL, NULL );
   return rNONE;
 }
+

@@ -8,13 +8,13 @@ void do_recho( Character *ch, char *argument )
 
   if ( IsBitSet(ch->Flags, PLR_NO_EMOTE) )
     {
-      SendToCharacter( "You are noemoted and can not recho.\r\n", ch );
+      ch->Echo("You are noemoted and can not recho.\r\n");
       return;
     }
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Recho what?\r\n", ch );
+      ch->Echo("Recho what?\r\n");
       return;
     }
 
@@ -29,7 +29,7 @@ void do_recho( Character *ch, char *argument )
        || !StrCmp( arg, "Blodkai" )
        || !StrCmp( arg, "Damian" ) )
     {
-      Echo( ch, "I don't think %s would like that!\r\n", arg );
+      ch->Echo("I don't think %s would like that!\r\n", arg );
       return;
     }
 
@@ -43,3 +43,4 @@ void do_recho( Character *ch, char *argument )
       EchoToRoom ( AT_IMMORT, ch->InRoom, argument );
     }
 }
+

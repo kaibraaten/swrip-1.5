@@ -55,32 +55,32 @@ bool CheckPosition( const Character *ch, PositionType position )
       switch( ch->Position )
         {
         case POS_DEAD:
-          SendToCharacter( "A little difficult to do when you are DEAD...\r\n", ch );
+          ch->Echo( "A little difficult to do when you are DEAD...\r\n" );
           break;
 
         case POS_MORTAL:
         case POS_INCAP:
-          SendToCharacter( "You are hurt far too bad for that.\r\n", ch );
+          ch->Echo( "You are hurt far too bad for that.\r\n" );
           break;
 
         case POS_STUNNED:
-          SendToCharacter( "You are too stunned to do that.\r\n", ch );
+          ch->Echo( "You are too stunned to do that.\r\n" );
           break;
 
         case POS_SLEEPING:
-          SendToCharacter( "In your dreams, or what?\r\n", ch );
+          ch->Echo( "In your dreams, or what?\r\n" );
           break;
 
         case POS_RESTING:
-          SendToCharacter( "Nah... You feel too relaxed...\r\n", ch);
+          ch->Echo( "Nah... You feel too relaxed...\r\n" );
           break;
 
         case POS_SITTING:
-          SendToCharacter( "You can't do that sitting down.\r\n", ch);
+          ch->Echo( "You can't do that sitting down.\r\n" );
           break;
 
         case POS_FIGHTING:
-          SendToCharacter( "No way! You are still fighting!\r\n", ch);
+          ch->Echo( "No way! You are still fighting!\r\n" );
           break;
 
 	default:
@@ -131,7 +131,7 @@ static char *ParseTarget( const Character *ch, char *oldstring )
 
               if (count > MAX_INPUT_LENGTH)
                 {
-                  Echo( ch, "Target substitution too long; not processed.\r\n" );
+                  ch->Echo( "Target substitution too long; not processed.\r\n" );
 		  FreeMemory( i );
                   return oldstring;
                 }
@@ -286,7 +286,7 @@ void Interpret( Character *ch, char *argument )
        */
       if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_FREEZE) )
         {
-          SendToCharacter( "You're totally frozen!\r\n", ch );
+          ch->Echo( "You're totally frozen!\r\n" );
           return;
         }
 
@@ -463,7 +463,7 @@ void Interpret( Character *ch, char *argument )
 		    }
                   else
 		    {
-		      SendToCharacter( "You cannot do that here.\r\n", ch );
+		      ch->Echo( "You cannot do that here.\r\n" );
 		    }
 
                   return;
@@ -473,7 +473,7 @@ void Interpret( Character *ch, char *argument )
               return;
             }
 
-          SendToCharacter( "Huh?\r\n", ch );
+          ch->Echo( "Huh?\r\n" );
         }
 
       return;
@@ -492,7 +492,7 @@ void Interpret( Character *ch, char *argument )
   if ( !StrCmp(cmd->Name, "flee")
        && IsAffectedBy(ch, AFF_BERSERK) )
     {
-      SendToCharacter( "You aren't thinking very clearly...\r\n", ch);
+      ch->Echo( "You aren't thinking very clearly...\r\n" );
       return;
     }
 
@@ -538,10 +538,10 @@ void SendTimer(struct timerset *vtime, Character *ch)
   ntime.tv_sec  = vtime->TotalTime.tv_sec / vtime->NumberOfTimesUsed;
   carry = (vtime->TotalTime.tv_sec % vtime->NumberOfTimesUsed) * 1000000;
   ntime.tv_usec = (vtime->TotalTime.tv_usec + carry) / vtime->NumberOfTimesUsed;
-  Echo(ch, "Has been used %d times this boot.\r\n", vtime->NumberOfTimesUsed);
-  Echo(ch, "Time (in secs): min %d.%0.6d; avg: %d.%0.6d; max %d.%0.6d"
-            "\r\n", vtime->MinTime.tv_sec, vtime->MinTime.tv_usec, ntime.tv_sec,
-            ntime.tv_usec, vtime->MaxTime.tv_sec, vtime->MaxTime.tv_usec);
+  ch->Echo("Has been used %d times this boot.\r\n", vtime->NumberOfTimesUsed);
+  ch->Echo("Time (in secs): min %d.%0.6d; avg: %d.%0.6d; max %d.%0.6d\r\n",
+           vtime->MinTime.tv_sec, vtime->MinTime.tv_usec, ntime.tv_sec,
+           ntime.tv_usec, vtime->MaxTime.tv_sec, vtime->MaxTime.tv_usec);
 }
 
 void UpdateNumberOfTimesUsed(struct timeval *time_used, struct timerset *userec)
@@ -571,3 +571,4 @@ void UpdateNumberOfTimesUsed(struct timeval *time_used, struct timerset *userec)
       userec->TotalTime.tv_usec -= 1000000;
     }
 }
+

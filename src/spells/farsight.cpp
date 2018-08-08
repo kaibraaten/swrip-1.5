@@ -49,3 +49,4 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
   CharacterToRoom( ch, original );
   return rNONE;
 }
+

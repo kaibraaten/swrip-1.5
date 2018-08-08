@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "board.hpp"
+#include "character.hpp"
 
 void do_bset( Character *ch, char *argument )
 {
@@ -14,10 +15,10 @@ void do_bset( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "Usage: bset <board name> <field> value\r\n", ch );
-      SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( "  vnum read post remove maxpost name type\r\n", ch );
-      SendToCharacter( "  read_group post_group extra_readers extra_removers\r\n", ch );
+      ch->Echo( "Usage: bset <board name> <field> value\r\n" );
+      ch->Echo( "\r\nField being one of:\r\n" );
+      ch->Echo( "  vnum read post remove maxpost name type\r\n" );
+      ch->Echo( "  read_group post_group extra_readers extra_removers\r\n" );
       return;
     }
 
@@ -27,7 +28,7 @@ void do_bset( Character *ch, char *argument )
 
   if( !board )
     {
-      SendToCharacter( "Board not found.\r\n", ch );
+      ch->Echo( "Board not found.\r\n" );
       return;
     }
 
@@ -35,13 +36,13 @@ void do_bset( Character *ch, char *argument )
     {
       if ( !GetProtoObject(value) )
         {
-          SendToCharacter( "No such object.\r\n", ch );
+          ch->Echo( "No such object.\r\n" );
           return;
         }
 
       board->BoardObject = value;
       Boards->Save(board);
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -49,13 +50,13 @@ void do_bset( Character *ch, char *argument )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
-          SendToCharacter( "Value out of range.\r\n", ch );
+          ch->Echo( "Value out of range.\r\n" );
           return;
         }
 
       board->MinReadLevel = value;
       Boards->Save(board);
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -63,7 +64,7 @@ void do_bset( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "No group specified.\r\n", ch );
+          ch->Echo( "No group specified.\r\n" );
           return;
         }
 
@@ -75,7 +76,7 @@ void do_bset( Character *ch, char *argument )
         board->ReadGroup = CopyString( argument );
 
       Boards->Save(board);
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -83,7 +84,7 @@ void do_bset( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "No group specified.\r\n", ch );
+          ch->Echo( "No group specified.\r\n" );
           return;
         }
 
@@ -95,7 +96,7 @@ void do_bset( Character *ch, char *argument )
         board->PostGroup = CopyString( argument );
 
       Boards->Save(board);
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -103,7 +104,7 @@ void do_bset( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "No names specified.\r\n", ch );
+          ch->Echo( "No names specified.\r\n" );
           return;
         }
 
@@ -119,7 +120,7 @@ void do_bset( Character *ch, char *argument )
       FreeMemory( board->ExtraRemovers );
       board->ExtraRemovers = CopyString( buf );
       Boards->Save(board);
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -127,7 +128,7 @@ void do_bset( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "No names specified.\r\n", ch );
+          ch->Echo( "No names specified.\r\n" );
           return;
         }
 
@@ -143,7 +144,7 @@ void do_bset( Character *ch, char *argument )
       FreeMemory( board->ExtraReaders );
       board->ExtraReaders = CopyString( buf );
       Boards->Save(board);
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -151,13 +152,13 @@ void do_bset( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "No name specified.\r\n", ch );
+          ch->Echo( "No name specified.\r\n" );
           return;
         }
 
       if( GetBoard( argument ) )
 	{
-	  Echo( ch, "There's already another board with that name.\r\n" );
+	  ch->Echo( "There's already another board with that name.\r\n" );
 	  return;
 	}
       
@@ -165,7 +166,7 @@ void do_bset( Character *ch, char *argument )
       FreeMemory( board->Name );
       board->Name = CopyString( argument );
       Boards->Save(board);
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -173,13 +174,13 @@ void do_bset( Character *ch, char *argument )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
-          SendToCharacter( "Value out of range.\r\n", ch );
+          ch->Echo( "Value out of range.\r\n" );
           return;
         }
 
       board->MinPostLevel = value;
       Boards->Save(board);
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -187,13 +188,13 @@ void do_bset( Character *ch, char *argument )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
-          SendToCharacter( "Value out of range.\r\n", ch );
+          ch->Echo( "Value out of range.\r\n" );
           return;
         }
 
       board->MinRemoveLevel = value;
       Boards->Save(board);
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -201,28 +202,29 @@ void do_bset( Character *ch, char *argument )
     {
       if ( value < 1 || value > 1000 )
         {
-          SendToCharacter( "Value out of range.\r\n", ch );
+          ch->Echo( "Value out of range.\r\n" );
           return;
         }
 
       board->MaxPosts = value;
       Boards->Save(board);
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
   if ( !StrCmp( arg2, "type" ) )
     {
       if ( value < 0 || value > 1 )
         {
-          SendToCharacter( "Value out of range.\r\n", ch );
+          ch->Echo( "Value out of range.\r\n" );
           return;
         }
 
       board->Type = value;
       Boards->Save(board);
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
   do_bset( ch, "" );
 }
+

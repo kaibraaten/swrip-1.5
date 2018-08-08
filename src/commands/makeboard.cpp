@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "board.hpp"
+#include "character.hpp"
 
 void do_makeboard( Character *ch, char *argument )
 {
@@ -7,13 +8,13 @@ void do_makeboard( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: makeboard <name>\r\n", ch );
+      ch->Echo("Usage: makeboard <name>\r\n");
       return;
     }
 
   if( GetBoard( argument ) )
     {
-      Echo( ch, "&RThere is already another board with that name.&d\r\n" );
+      ch->Echo("&RThere is already another board with that name.&d\r\n" );
       return;
     }
   
@@ -21,3 +22,5 @@ void do_makeboard( Character *ch, char *argument )
   board = AllocateBoard(argument);
   Boards->Add(board);
 }
+
+

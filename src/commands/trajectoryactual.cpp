@@ -16,61 +16,61 @@ void do_trajectory_actual( Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   if ( ship->Class > SHIP_PLATFORM )
     {
-      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
+      ch->Echo("&RThis isn't a spacecraft!\r\n");
       return;
     }
 
   if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYour not in the pilots seat.\r\n",ch);
+      ch->Echo("&RYour not in the pilots seat.\r\n");
       return;
     }
 
   if ( IsShipAutoflying(ship))
     {
-      SendToCharacter("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
+      ch->Echo("&RYou'll have to turn off the ships autopilot first.\r\n");
       return;
     }
 
   if (IsShipDisabled( ship ))
     {
-      SendToCharacter("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
+      ch->Echo("&RThe ships drive is disabled. Unable to manuever.\r\n");
       return;
     }
 
   if  ( ship->Class == SHIP_PLATFORM )
     {
-      SendToCharacter( "&RPlatforms can't turn!\r\n" , ch );
+      ch->Echo("&RPlatforms can't turn!\r\n" );
       return;
     }
 
   if ( IsShipInHyperspace( ship ) )
     {
-      SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
+      ch->Echo("&RYou can only do that in realspace!\r\n");
       return;
     }
 
   if (ship->State == SHIP_DOCKED)
     {
-      SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
+      ch->Echo("&RYou can't do that until after you've launched!\r\n");
       return;
     }
 
   if (ship->State != SHIP_READY)
     {
-      SendToCharacter("&RPlease wait until the ship.hppas finished its current manouver.\r\n",ch);
+      ch->Echo("&RPlease wait until the ship.hppas finished its current manouver.\r\n");
       return;
     }
 
   if ( ship->Thrusters.Energy.Current < ( ship->Thrusters.Speed.Current / 10 ) )
     {
-      SendToCharacter("&RTheres not enough fuel!\r\n",ch);
+      ch->Echo("&RTheres not enough fuel!\r\n");
       return;
     }
 
@@ -90,7 +90,7 @@ void do_trajectory_actual( Character *ch, char *argument )
 
   if ( GetRandomPercent() > the_chance )
     {
-      SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
+      ch->Echo("&RYou fail to work the controls properly.\r\n");
 
       if ( ship->Class == FIGHTER_SHIP )
         LearnFromFailure( ch, gsn_starfighters );
@@ -113,7 +113,7 @@ void do_trajectory_actual( Character *ch, char *argument )
        && argvec.y == ship->Position.y
        && argvec.z == ship->Position.z )
     {
-      Echo( ch , "The ship is already at %.0f %.0f %.0f!",
+      ch ->Echo("The ship is already at %.0f %.0f %.0f!",
                  argvec.x, argvec.y, argvec.z );
       return;
     }
@@ -124,7 +124,7 @@ void do_trajectory_actual( Character *ch, char *argument )
   SetShipCourse( ship, &argvec );
   ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
 
-  Echo( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n",
+  ch ->Echo("&GNew course set, approaching %.0f %.0f %.0f.\r\n",
 	argvec.x, argvec.y, argvec.z );
   Act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
 
@@ -148,3 +148,4 @@ void do_trajectory_actual( Character *ch, char *argument )
   if ( ship->Class == CAPITAL_SHIP )
     LearnFromSuccess( ch, gsn_capitalships );
 }
+

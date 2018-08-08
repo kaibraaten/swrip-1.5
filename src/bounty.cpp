@@ -126,10 +126,10 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
   bounty->Reward = bounty->Reward + amount;
   Bounties->Save();
 
-  Echo(victim, "&RSomeone has added %ld credits to the bounty on you!\r\n", amount);
+  victim->Echo("&RSomeone has added %ld credits to the bounty on you!\r\n", amount);
   sprintf( buf, "&R%s has added %ld credits to the bounty on %s.\r\n",
            ch->Name, amount, victim->Name );
-  Echo(ch, buf);
+  ch->Echo(buf);
 
   for (echoTo = LastCharacter; echoTo; echoTo = echoTo->Previous)
     {
@@ -137,7 +137,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
           || IsImmortal(echoTo))
          && echoTo != ch)
 	{
-	  Echo(echoTo, buf);
+	  echoTo->Echo(buf);
 	}
     }
 }
@@ -188,12 +188,12 @@ void ClaimBounty( Character *ch, const Character *victim )
           xp = urange(1, ComputeXP(ch, victim) , ( GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) ) ) );
           GainXP( ch, HUNTING_ABILITY, xp );
           SetCharacterColor( AT_BLOOD, ch );
-          Echo( ch, "You receive %ld hunting experience for executing a wanted killer.\r\n", xp );
+          ch->Echo( "You receive %ld hunting experience for executing a wanted killer.\r\n", xp );
         }
       else if ( !IsNpc(ch) )
         {
           SetBit(ch->Flags, PLR_KILLER );
-          Echo( ch, "You are now wanted for the murder of %s.\r\n", victim->Name );
+          ch->Echo( "You are now wanted for the murder of %s.\r\n", victim->Name );
         }
 
       return;
@@ -205,10 +205,11 @@ void ClaimBounty( Character *ch, const Character *victim )
   GainXP( ch, HUNTING_ABILITY, xp );
 
   SetCharacterColor( AT_BLOOD, ch );
-  Echo( ch, "You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n", xp, bounty->Reward, bounty->Target );
+  ch->Echo( "You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n",
+            xp, bounty->Reward, bounty->Target );
 
   sprintf( buf, "The disintegration bounty on %s has been claimed!",victim->Name );
-  EchoToAll ( AT_RED , buf, 0 );
+  EchoToAll( AT_RED , buf, 0 );
 
   if ( !IsBitSet(victim->Flags , PLR_KILLER ) )
     {
@@ -240,3 +241,4 @@ BountyRepository *NewBountyRepository()
 {
   return new LuaBountyRepository();
 }
+

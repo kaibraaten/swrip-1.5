@@ -17,7 +17,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
   if ( victim->AffectedBy && ch == victim )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      SendToCharacter( "You pass your hands around your body...\r\n", ch );
+      ch->Echo("You pass your hands around your body...\r\n");
       while ( victim->FirstAffect )
         RemoveAffect( victim, victim->FirstAffect );
       victim->AffectedBy = RaceTable[victim->Race].Affected;
@@ -34,7 +34,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
 
   if ( !IsNpc(victim) )
     {
-      SendToCharacter( "You can't do that... yet.\r\n", ch );
+      ch->Echo("You can't do that... yet.\r\n");
       return rSPELL_FAILED;
     }
 
@@ -57,3 +57,4 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
 
   return rNONE;
 }
+

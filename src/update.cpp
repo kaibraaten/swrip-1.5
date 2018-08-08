@@ -345,7 +345,7 @@ void GainXP( Character *ch, short ability, long gain )
   if (!IsAuthed(ch)
       && GetAbilityXP( ch, ability ) >= GetRequiredXpForLevel(GetAbilityLevel(ch, ability ) + 1))
     {
-      SendToCharacter("You can not ascend to a higher level until you are authorized.\r\n", ch);
+      ch->Echo("You can not ascend to a higher level until you are authorized.\r\n");
       SetAbilityXP( ch, ability, GetRequiredXpForLevel( GetAbilityLevel(ch, ability) + 1 ) - 1);
       return;
     }
@@ -365,8 +365,8 @@ void GainXP( Character *ch, short ability, long gain )
       new_level = current_level + 1;
       SetAbilityLevel( ch, ability, new_level );
 
-      Echo( ch, "You have now obtained %s level %d!\r\n",
-	    AbilityName[ability], GetAbilityLevel( ch, ability ) );
+      ch->Echo( "You have now obtained %s level %d!\r\n",
+                AbilityName[ability], GetAbilityLevel( ch, ability ) );
       AdvanceLevel( ch , ability);
     }
 
@@ -640,24 +640,24 @@ static void GainAddiction( Character *ch )
 
       if ( ch->PCData->Addiction[drug] > ch->PCData->DrugLevel[drug]+200 )
         {
-          Echo ( ch, "You feel like you are going to die. You NEED %s\r\n.",
-		      GetSpiceTypeName(drug) );
+          ch->Echo( "You feel like you are going to die. You NEED %s\r\n.",
+                    GetSpiceTypeName(drug) );
           WorsenMentalState( ch, 2 );
           InflictDamage(ch, ch, 5, TYPE_UNDEFINED);
         }
       else if ( ch->PCData->Addiction[drug] > ch->PCData->DrugLevel[drug]+100 )
         {
-          Echo ( ch, "You need some %s.\r\n", GetSpiceTypeName(drug) );
+          ch->Echo( "You need some %s.\r\n", GetSpiceTypeName(drug) );
           WorsenMentalState( ch, 2 );
         }
       else if ( ch->PCData->Addiction[drug] > ch->PCData->DrugLevel[drug]+50 )
         {
-          Echo ( ch, "You really crave some %s.\r\n", GetSpiceTypeName(drug) );
+          ch->Echo( "You really crave some %s.\r\n", GetSpiceTypeName(drug) );
           WorsenMentalState( ch, 1 );
         }
       else if ( ch->PCData->Addiction[drug] > ch->PCData->DrugLevel[drug]+25 )
         {
-          Echo ( ch, "Some more %s would feel quite nice.\r\n", GetSpiceTypeName(drug) );
+          ch->Echo( "Some more %s would feel quite nice.\r\n", GetSpiceTypeName(drug) );
         }
       else if ( ch->PCData->Addiction[drug] < ch->PCData->DrugLevel[drug]-50 )
         {
@@ -710,7 +710,7 @@ void GainCondition( Character *ch, int iCond, int value )
           if ( ch->TopLevel <= LEVEL_AVATAR )
             {
               SetCharacterColor( AT_HUNGRY, ch );
-              SendToCharacter( "You are STARVING!\r\n",  ch );
+              ch->Echo( "You are STARVING!\r\n" );
               WorsenMentalState( ch, 1 );
               retcode = InflictDamage(ch, ch, 5, TYPE_UNDEFINED);
             }
@@ -720,7 +720,7 @@ void GainCondition( Character *ch, int iCond, int value )
           if ( ch->TopLevel <= LEVEL_AVATAR )
             {
               SetCharacterColor( AT_THIRSTY, ch );
-              SendToCharacter( "You are DYING of THIRST!\r\n", ch );
+              ch->Echo( "You are DYING of THIRST!\r\n" );
               WorsenMentalState( ch, 2 );
               retcode = InflictDamage(ch, ch, 5, TYPE_UNDEFINED);
             }
@@ -730,7 +730,7 @@ void GainCondition( Character *ch, int iCond, int value )
           if ( condition != 0 )
 	    {
 	      SetCharacterColor( AT_SOBER, ch );
-	      SendToCharacter( "You are sober.\r\n", ch );
+	      ch->Echo( "You are sober.\r\n" );
 	    }
 
           retcode = rNONE;
@@ -756,7 +756,7 @@ void GainCondition( Character *ch, int iCond, int value )
           if ( ch->TopLevel <= LEVEL_AVATAR )
             {
               SetCharacterColor( AT_HUNGRY, ch );
-              SendToCharacter( "You are really hungry.\r\n",  ch );
+              ch->Echo( "You are really hungry.\r\n" );
 
               if ( NumberBits(1) == 0 )
 		{
@@ -769,7 +769,7 @@ void GainCondition( Character *ch, int iCond, int value )
           if ( ch->TopLevel <= LEVEL_AVATAR  )
             {
               SetCharacterColor( AT_THIRSTY, ch );
-              SendToCharacter( "You are really thirsty.\r\n", ch );
+              ch->Echo( "You are really thirsty.\r\n" );
               WorsenMentalState( ch, 1 );
             }
           break;
@@ -778,7 +778,7 @@ void GainCondition( Character *ch, int iCond, int value )
           if ( condition != 0 )
 	    {
 	      SetCharacterColor( AT_SOBER, ch );
-	      SendToCharacter( "You are feeling a little less light headed.\r\n", ch );
+	      ch->Echo( "You are feeling a little less light headed.\r\n" );
 	    }
           break;
         }
@@ -793,7 +793,7 @@ void GainCondition( Character *ch, int iCond, int value )
           if ( ch->TopLevel <= LEVEL_AVATAR )
             {
               SetCharacterColor( AT_HUNGRY, ch );
-              SendToCharacter( "You are hungry.\r\n",  ch );
+              ch->Echo( "You are hungry.\r\n" );
             }
 
           break;
@@ -802,7 +802,7 @@ void GainCondition( Character *ch, int iCond, int value )
           if ( ch->TopLevel <= LEVEL_AVATAR )
             {
               SetCharacterColor( AT_THIRSTY, ch );
-              SendToCharacter( "You are thirsty.\r\n", ch );
+              ch->Echo( "You are thirsty.\r\n" );
             }
 
           break;
@@ -817,7 +817,7 @@ void GainCondition( Character *ch, int iCond, int value )
           if ( ch->TopLevel <= LEVEL_AVATAR )
             {
               SetCharacterColor( AT_HUNGRY, ch );
-              SendToCharacter( "You are a mite peckish.\r\n",  ch );
+              ch->Echo( "You are a mite peckish.\r\n" );
             }
           break;
 
@@ -825,10 +825,9 @@ void GainCondition( Character *ch, int iCond, int value )
           if ( ch->TopLevel <= LEVEL_AVATAR )
             {
               SetCharacterColor( AT_THIRSTY, ch );
-              SendToCharacter( "You could use a sip of something refreshing.\r\n", ch );
+              ch->Echo( "You could use a sip of something refreshing.\r\n" );
             }
           break;
-
         }
     }
 }
@@ -1593,43 +1592,46 @@ static void CharacterUpdate( void )
 	      switch( (ch->MentalState+5) / 10 )
 		{
 		case 3:
-		  SendToCharacter( "You feel feverish.\r\n", ch );
+		  ch->Echo( "You feel feverish.\r\n" );
 		  Act( AT_ACTION, "$n looks kind of out of it.", ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 4:
-		  SendToCharacter( "You do not feel well at all.\r\n", ch );
+		  ch->Echo( "You do not feel well at all.\r\n" );
 		  Act( AT_ACTION, "$n doesn't look too good.", ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 5:
-		  SendToCharacter( "You need help!\r\n", ch );
+		  ch->Echo( "You need help!\r\n" );
 		  Act( AT_ACTION, "$n looks like $e could use your help.", ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 6:
-		  SendToCharacter( "Seekest thou a cleric.\r\n", ch );
-		  Act( AT_ACTION, "Someone should fetch a healer for $n.", ch, NULL, NULL, TO_ROOM );
+		  ch->Echo( "Seekest thou a cleric.\r\n" );
+		  Act( AT_ACTION, "Someone should fetch a healer for $n.",
+                       ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 7:
-		  SendToCharacter( "You feel reality slipping away...\r\n", ch );
-		  Act( AT_ACTION, "$n doesn't appear to be aware of what's going on.", ch, NULL, NULL, TO_ROOM );
+		  ch->Echo( "You feel reality slipping away...\r\n" );
+		  Act( AT_ACTION, "$n doesn't appear to be aware of what's going on.",
+                       ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 8:
-		  SendToCharacter( "You begin to understand... everything.\r\n", ch );
+		  ch->Echo( "You begin to understand... everything.\r\n" );
 		  Act( AT_ACTION, "$n starts ranting like a madman!", ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 9:
-		  SendToCharacter( "You are ONE with the universe.\r\n", ch );
+		  ch->Echo( "You are ONE with the universe.\r\n" );
 		  Act( AT_ACTION, "$n is ranting on about 'the answer', 'ONE' and other mumbo-jumbo...", ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 10:
-		  SendToCharacter( "You feel the end is near.\r\n", ch );
-		  Act( AT_ACTION, "$n is muttering and ranting in tongues...", ch, NULL, NULL, TO_ROOM );
+		  ch->Echo( "You feel the end is near.\r\n" );
+		  Act( AT_ACTION, "$n is muttering and ranting in tongues...",
+                       ch, NULL, NULL, TO_ROOM );
 		  break;
 		}
 	    }
@@ -1648,7 +1650,7 @@ static void CharacterUpdate( void )
 		      }
                     else
 		      {
-			SendToCharacter( "You're barely conscious.\r\n", ch );
+			ch->Echo( "You're barely conscious.\r\n" );
 		      }
                   }
                 break;
@@ -1664,7 +1666,7 @@ static void CharacterUpdate( void )
 		      }
                     else
 		      {
-			SendToCharacter( "You can barely keep your eyes open.\r\n", ch );
+			ch->Echo( "You can barely keep your eyes open.\r\n" );
 		      }
                   }
                 break;
@@ -1679,7 +1681,7 @@ static void CharacterUpdate( void )
 		      }
                     else
 		      {
-			SendToCharacter( "You're extremely drowsy.\r\n", ch );
+			ch->Echo( "You're extremely drowsy.\r\n" );
 		      }
                   }
                 break;
@@ -1687,35 +1689,35 @@ static void CharacterUpdate( void )
               case 7:
                 if ( ch->Position > POS_RESTING )
 		  {
-		    SendToCharacter( "You feel very unmotivated.\r\n", ch );
+		    ch->Echo( "You feel very unmotivated.\r\n" );
 		  }
                 break;
 
               case 6:
                 if ( ch->Position > POS_RESTING )
 		  {
-		    SendToCharacter( "You feel sedated.\r\n", ch );
+		    ch->Echo( "You feel sedated.\r\n" );
 		  }
 		break;
 
               case 5:
                 if ( ch->Position > POS_RESTING )
 		  {
-		    SendToCharacter( "You feel sleepy.\r\n", ch );
+		    ch->Echo( "You feel sleepy.\r\n" );
 		  }
                 break;
 
               case 4:
                 if ( ch->Position > POS_RESTING )
 		  {
-		    SendToCharacter( "You feel tired.\r\n", ch );
+		    ch->Echo( "You feel tired.\r\n" );
 		  }
                 break;
 
               case 3:
                 if ( ch->Position > POS_RESTING )
 		  {
-		    SendToCharacter( "You could use a rest.\r\n", ch );
+		    ch->Echo( "You could use a rest.\r\n" );
 		  }
                 break;
               }
@@ -2150,7 +2152,7 @@ static void CharacterCheck( void )
               RemoveBit( ch->Mount->Flags, ACT_MOUNTED );
               ch->Mount = NULL;
               ch->Position = POS_STANDING;
-              SendToCharacter( "No longer upon your mount, you fall to the ground...\r\nOUCH!\r\n", ch );
+              ch->Echo( "No longer upon your mount, you fall to the ground...\r\nOUCH!\r\n" );
             }
 
           if ( ( ch->InRoom && ch->InRoom->Sector == SECT_UNDERWATER )
@@ -2170,7 +2172,7 @@ static void CharacterCheck( void )
 
                       if ( NumberBits(3) == 0 )
 			{
-			  SendToCharacter( "You cough and choke as you try to breathe water!\r\n", ch );
+			  ch->Echo( "You cough and choke as you try to breathe water!\r\n" );
 			}
 
                       InflictDamage( ch, ch, dam, TYPE_UNDEFINED );
@@ -2212,7 +2214,7 @@ static void CharacterCheck( void )
 
                           if ( NumberBits(3) == 0 )
 			    {
-			      SendToCharacter( "Struggling with exhaustion, you choke on a mouthful of water.\r\n", ch );
+			      ch->Echo( "Struggling with exhaustion, you choke on a mouthful of water.\r\n" );
 			    }
 
                           InflictDamage( ch, ch, dam, TYPE_UNDEFINED );
@@ -2525,7 +2527,7 @@ static void SufferHalucinations( Character *ch )
 	  break;
         }
 
-      SendToCharacter( t, ch );
+      ch->Echo(t);
     }
 }
 
@@ -2581,7 +2583,7 @@ void UpdateHandler( void )
   if ( timechar )
     {
       SetCharacterColor(AT_PLAIN, timechar);
-      SendToCharacter( "Starting update timer.\r\n", timechar );
+      timechar->Echo( "Starting update timer.\r\n" );
       gettimeofday(&start_time, NULL);
     }
 
@@ -2683,10 +2685,10 @@ void UpdateHandler( void )
     {
       gettimeofday(&etime, NULL);
       SetCharacterColor(AT_PLAIN, timechar);
-      SendToCharacter( "Update timing complete.\r\n", timechar );
+      timechar->Echo( "Update timing complete.\r\n" );
       SubtractTimes(&etime, &start_time);
-      Echo( timechar, "Timing took %d.%06d seconds.\r\n",
-                 etime.tv_sec, etime.tv_usec );
+      timechar->Echo( "Timing took %d.%06d seconds.\r\n",
+                      etime.tv_sec, etime.tv_usec );
       timechar = NULL;
     }
 }
@@ -2791,7 +2793,7 @@ void RebootCheck( time_t reset )
           if ( auction->Buyer && auction->Buyer != auction->Seller )
             {
               auction->Buyer->Gold += auction->Bet;
-              SendToCharacter("Your money has been returned.\r\n", auction->Buyer);
+              auction->Buyer->Echo("Your money has been returned.\r\n");
             }
         }
 
@@ -2888,9 +2890,8 @@ static void AuctionUpdate( void )
           tax = (int)auction->Bet * 0.1;
           BoostEconomy( auction->Seller->InRoom->Area, tax );
           auction->Seller->Gold += pay; /* give him the money, tax 10 % */
-          sprintf(buf, "The auctioneer pays you %d gold, charging an auction fee of %d.\r\n",
-		  pay, tax);
-          SendToCharacter(buf, auction->Seller);
+          auction->Buyer->Echo( "The auctioneer pays you %d gold, charging an auction fee of %d.\r\n",
+                                pay, tax);
           auction->Item = NULL; /* reset item */
 
           if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
@@ -2928,8 +2929,7 @@ static void AuctionUpdate( void )
 
           tax = (int)auction->Item->Cost * 0.05;
           BoostEconomy( auction->Seller->InRoom->Area, tax );
-          sprintf(buf, "The auctioneer charges you an auction fee of %d.\r\n", tax );
-          SendToCharacter(buf, auction->Seller);
+          auction->Seller->Echo( "The auctioneer charges you an auction fee of %d.\r\n", tax );
 
           if ((auction->Seller->Gold - tax) < 0)
 	    {
@@ -2949,3 +2949,4 @@ static void AuctionUpdate( void )
       auction->Item = NULL;
     }
 }
+

@@ -14,19 +14,19 @@ void do_sellhome (Character *ch, char *argument)
 
   if ( ch->PlayerHome == NULL )
     {
-      SendToCharacter("&RYou don't own a home.\r\n",ch);
+      ch->Echo("&RYou don't own a home.\r\n");
       return;
     }
 
   if ( (room = ch->InRoom) != ch->PlayerHome )
     {
-      SendToCharacter("&RYou need to be inside your home to sell it.\r\n",ch);
+      ch->Echo("&RYou need to be inside your home to sell it.\r\n");
       return;
     }
 
   if ( IsBitSet(ch->Flags,PLR_HOME_RESIDENT) )
     {
-      SendToCharacter("&RYou are not the owner of this home.\r\n",ch);
+      ch->Echo("&RYou are not the owner of this home.\r\n");
       return;
     }
 
@@ -38,5 +38,6 @@ void do_sellhome (Character *ch, char *argument)
   FoldArea(room->Area,room->Area->Filename,false);
   ch->PlayerHome = NULL;
   do_save(ch,"");
-  Echo(ch,"You sell your home. You receive %d credits.\r\n",sellHomeCreditReturn);
+  ch->Echo("You sell your home. You receive %d credits.\r\n",sellHomeCreditReturn);
 }
+

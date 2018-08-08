@@ -1,6 +1,7 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "board.hpp"
+#include "character.hpp"
 
 void do_examine( Character *ch, char *argument )
 {
@@ -14,7 +15,7 @@ void do_examine( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Examine what?\r\n", ch );
+      ch->Echo( "Examine what?\r\n" );
       return;
     }
 
@@ -29,16 +30,16 @@ void do_examine( Character *ch, char *argument )
     {
       if ( (board = GetBoardFromObject( obj )) != NULL )
         {
-          size_t numberOfPosts = board->Notes.size();
+          const size_t numberOfPosts = board->Notes.size();
 
           if (numberOfPosts > 0)
             {
-              Echo( ch, "There are about %d notes posted here.Type 'note list' to list them.\r\n",
-                    numberOfPosts );
+              ch->Echo( "There are about %d notes posted here.Type 'note list' to list them.\r\n",
+                        numberOfPosts );
             }
           else
             {
-              SendToCharacter( "There aren't any notes posted here.\r\n", ch );
+              ch->Echo( "There aren't any notes posted here.\r\n" );
             }
         }
 
@@ -81,7 +82,7 @@ void do_examine( Character *ch, char *argument )
 	    strcat( buf, "broken.");
 
 	  strcat( buf, "\r\n" );
-          SendToCharacter( buf, ch );
+          ch->Echo("%s", buf);
           break;
 
         case ITEM_WEAPON:
@@ -116,31 +117,33 @@ void do_examine( Character *ch, char *argument )
 	    strcat( buf, "broken.");
 
           strcat( buf, "\r\n" );
-          SendToCharacter( buf, ch );
+          ch->Echo("%s", buf);
 
           if (obj->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER )
             {
               if (obj->BlasterSetting == BLASTER_FULL)
-                Echo( ch, "It is set on FULL power.\r\n");
+                ch->Echo( "It is set on FULL power.\r\n");
               else if (obj->BlasterSetting == BLASTER_HIGH)
-                Echo( ch, "It is set on HIGH power.\r\n");
+                ch->Echo( "It is set on HIGH power.\r\n");
               else if (obj->BlasterSetting == BLASTER_NORMAL)
-                Echo( ch, "It is set on NORMAL power.\r\n");
+                ch->Echo( "It is set on NORMAL power.\r\n");
               else if (obj->BlasterSetting == BLASTER_HALF)
-                Echo( ch, "It is set on HALF power.\r\n");
+                ch->Echo( "It is set on HALF power.\r\n");
               else if (obj->BlasterSetting == BLASTER_LOW)
-                Echo( ch, "It is set on LOW power.\r\n");
+                ch->Echo( "It is set on LOW power.\r\n");
               else if (obj->BlasterSetting == BLASTER_STUN)
-                Echo( ch, "It is set on STUN.\r\n");
+                ch->Echo( "It is set on STUN.\r\n");
 
-	      Echo( ch, "It has from %d to %d shots remaining.\r\n",
-		    obj->Value[OVAL_WEAPON_CHARGE]/5 , obj->Value[OVAL_WEAPON_CHARGE] );
+	      ch->Echo( "It has from %d to %d shots remaining.\r\n",
+                        obj->Value[OVAL_WEAPON_CHARGE]/5,
+                        obj->Value[OVAL_WEAPON_CHARGE] );
             }
           else if ( ( obj->Value[OVAL_WEAPON_TYPE] == WEAPON_LIGHTSABER ||
 		      obj->Value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE ||
 		      obj->Value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE ) )
             {
-              Echo( ch, "It has %d/%d units of charge remaining.\r\n", obj->Value[OVAL_WEAPON_CHARGE] , obj->Value[OVAL_WEAPON_MAX_CHARGE] );
+              ch->Echo( "It has %d/%d units of charge remaining.\r\n",
+                        obj->Value[OVAL_WEAPON_CHARGE] , obj->Value[OVAL_WEAPON_MAX_CHARGE] );
             }
           break;
 
@@ -176,55 +179,62 @@ void do_examine( Character *ch, char *argument )
 	    strcat( buf, "is crawling with maggots.");
 
           strcat( buf, "\r\n" );
-          SendToCharacter( buf, ch );
+          ch->Echo("%s", buf);
           break;
 
         case ITEM_SWITCH:
         case ITEM_LEVER:
         case ITEM_PULLCHAIN:
           if ( IsBitSet( obj->Value[OVAL_SWITCH_TRIGFLAGS], TRIG_UP ) )
-            SendToCharacter( "You notice that it is in the up position.\r\n", ch );
+            ch->Echo( "You notice that it is in the up position.\r\n" );
           else
-            SendToCharacter( "You notice that it is in the down position.\r\n", ch );
+            ch->Echo( "You notice that it is in the down position.\r\n" );
           break;
 
         case ITEM_BUTTON:
           if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP ) )
-            SendToCharacter( "You notice that it is depressed.\r\n", ch );
+            ch->Echo( "You notice that it is depressed.\r\n" );
           else
-            SendToCharacter( "You notice that it is not depressed.\r\n", ch );
+            ch->Echo( "You notice that it is not depressed.\r\n" );
           break;
 
         case ITEM_CORPSE_PC:
         case ITEM_CORPSE_NPC:
           {
             short timerfrac = obj->Timer;
+
             if ( obj->ItemType == ITEM_CORPSE_PC )
               timerfrac = (int)obj->Timer / 8 + 1;
 
 	    switch (timerfrac)
               {
               default:
-                SendToCharacter( "This corpse has recently been slain.\r\n", ch );
+                ch->Echo( "This corpse has recently been slain.\r\n" );
                 break;
+
               case 4:
-                SendToCharacter( "This corpse was slain a little while ago.\r\n", ch );
+                ch->Echo( "This corpse was slain a little while ago.\r\n" );
                 break;
+
               case 3:
-                SendToCharacter( "A foul smell rises from the corpse, and it is covered in flies.\r\n", ch );
+                ch->Echo( "A foul smell rises from the corpse, and it is covered in flies.\r\n" );
                 break;
+                
               case 2:
-                SendToCharacter( "A writhing mass of maggots and decay, you can barely go near this corpse.\r\n", ch );
+                ch->Echo( "A writhing mass of maggots and decay, you can barely go near this corpse.\r\n" );
                 break;
+
               case 1:
               case 0:
-                SendToCharacter( "Little more than bones, there isn't much left of this corpse.\r\n", ch );
+                ch->Echo( "Little more than bones, there isn't much left of this corpse.\r\n" );
                 break;
               }
           }
+
           if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
             break;
-          SendToCharacter( "When you look inside, you see:\r\n", ch );
+
+          ch->Echo( "When you look inside, you see:\r\n" );
           sprintf( buf, "in %s noprog", arg );
           do_look( ch, buf );
           break;
@@ -236,20 +246,24 @@ void do_examine( Character *ch, char *argument )
             switch (timerfrac)
               {
               default:
-                SendToCharacter( "These remains are still smoking.\r\n", ch );
+                ch->Echo( "These remains are still smoking.\r\n" );
                 break;
+
               case 4:
-                SendToCharacter( "The parts of this droid have cooled down completely.\r\n", ch );
+                ch->Echo( "The parts of this droid have cooled down completely.\r\n" );
                 break;
+
               case 3:
-                SendToCharacter( "The broken droid components are beginning to rust.\r\n", ch );
+                ch->Echo( "The broken droid components are beginning to rust.\r\n" );
                 break;
+
               case 2:
-                SendToCharacter( "The pieces are completely covered in rust.\r\n", ch );
+                ch->Echo( "The pieces are completely covered in rust.\r\n" );
                 break;
-	      case 1:
+
+              case 1:
               case 0:
-                SendToCharacter( "All that remains of it is a pile of crumbling rust.\r\n", ch );
+                ch->Echo( "All that remains of it is a pile of crumbling rust.\r\n" );
                 break;
               }
           }
@@ -259,15 +273,18 @@ void do_examine( Character *ch, char *argument )
             break;
 
         case ITEM_DRINK_CON:
-          SendToCharacter( "When you look inside, you see:\r\n", ch );
+          ch->Echo( "When you look inside, you see:\r\n" );
           sprintf( buf, "in %s noprog", arg );
           do_look( ch, buf );
+          break;
         }
+
       if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
         {
           sprintf( buf, "under %s noprog", arg );
           do_look( ch, buf );
         }
+
       ObjProgExamineTrigger( ch, obj );
 
       if( CharacterDiedRecently(ch) || IsObjectExtracted(obj) )
@@ -276,3 +293,4 @@ void do_examine( Character *ch, char *argument )
       CheckObjectForTrap( ch, obj, TRAP_EXAMINE );
     }
 }
+

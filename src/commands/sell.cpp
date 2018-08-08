@@ -15,7 +15,7 @@ void do_sell( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Sell what?\r\n", ch );
+      ch->Echo("Sell what?\r\n");
       return;
     }
 
@@ -32,7 +32,7 @@ void do_sell( Character *ch, char *argument )
 
   if ( !CanDropObject( ch, obj ) )
     {
-      SendToCharacter( "You can't let go of it!\r\n", ch );
+      ch->Echo("You can't let go of it!\r\n");
       return;
     }
 
@@ -81,7 +81,7 @@ void do_sell( Character *ch, char *argument )
       long ch_exp;
 
       ch_exp = umin( obj->Cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  ) / 10  );
-      Echo( ch, "You receive %ld smuggling experience for unloading your contraband.\r\n " , ch_exp );
+      ch->Echo("You receive %ld smuggling experience for unloading your contraband.\r\n " , ch_exp );
       GainXP( ch, SMUGGLING_ABILITY, ch_exp );
 
       if ( obj->ItemType == ITEM_SPICE || obj->ItemType == ITEM_RAWSPICE )
@@ -103,3 +103,4 @@ void do_sell( Character *ch, char *argument )
 
   return;
 }
+

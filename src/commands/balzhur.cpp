@@ -10,43 +10,43 @@ void do_balzhur( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
 
   argument = OneArgument( argument, arg );
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Who is deserving of such a fate?\r\n", ch );
+      ch->Echo( "Who is deserving of such a fate?\r\n" );
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't playing.\r\n", ch);
+      ch->Echo( "They aren't playing.\r\n" );
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPC's.\r\n", ch );
+      ch->Echo( "Not on NPC's.\r\n" );
       return;
     }
 
   if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      SendToCharacter( "I wouldn't even think of that if I were you...\r\n", ch );
+      ch->Echo( "I wouldn't even think of that if I were you...\r\n" );
       return;
     }
 
   SetCharacterColor( AT_WHITE, ch );
-  SendToCharacter( "You summon the demon Balzhur to wreak your wrath!\r\n", ch );
-  SendToCharacter( "Balzhur sneers at you evilly, then vanishes in a puff of smoke.\r\n", ch );
+  ch->Echo( "You summon the demon Balzhur to wreak your wrath!\r\n" );
+  ch->Echo( "Balzhur sneers at you evilly, then vanishes in a puff of smoke.\r\n" );
   SetCharacterColor( AT_IMMORT, victim );
-  SendToCharacter( "You hear an ungodly sound in the distance that makes your blood run cold!\r\n", victim );
+  victim->Echo( "You hear an ungodly sound in the distance that makes your blood run cold!\r\n" );
   sprintf( buf, "Balzhur screams, 'You are MINE %s!!!'", victim->Name );
   EchoToAll( AT_IMMORT, buf, ECHOTAR_ALL );
-  victim->TopLevel =1;
-  victim->Trust  = 0;
+  victim->TopLevel = 1;
+  victim->Trust = 0;
 
   for (int ability = 0 ; ability < MAX_ABILITY ; ability++ )
     {
@@ -70,12 +70,12 @@ void do_balzhur( Character *ch, char *argument )
 
   if ( !remove( victimImmortalFilename ) )
     {
-      SendToCharacter( "Player's immortal data destroyed.\r\n", ch );
+      ch->Echo( "Player's immortal data destroyed.\r\n" );
     }
   else if ( errno != ENOENT )
     {
-      Echo( ch, "Unknown error #%d - %s (immortal data).  Report to Thoric\r\n",
-                 errno, strerror( errno ) );
+      ch->Echo( "Unknown error #%d - %s (immortal data).  Report to Thoric\r\n",
+                errno, strerror( errno ) );
       sprintf( buf2, "%s balzhuring %s", ch->Name, victimImmortalFilename );
       perror( buf2 );
     }
@@ -84,10 +84,11 @@ void do_balzhur( Character *ch, char *argument )
   MakeWizlist();
   do_help(victim, "M_BALZHUR_" );
   SetCharacterColor( AT_WHITE, victim );
-  SendToCharacter( "You awake after a long period of time...\r\n", victim );
+  victim->Echo( "You awake after a long period of time...\r\n" );
 
   while ( victim->FirstCarrying )
     {
       ExtractObject( victim->FirstCarrying );
     }
 }
+

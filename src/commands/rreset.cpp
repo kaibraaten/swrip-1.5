@@ -13,7 +13,7 @@ void do_rreset( Character *ch, char *argument )
 
       if ( !pRoom )
         {
-          SendToCharacter( "Your room pointer got lost. Reset mode off.\r\n", ch);
+          ch->Echo("Your room pointer got lost. Reset mode off.\r\n");
           Log->Bug("do_rreset: %s's dest_buf points to invalid room", ch->Name);
         }
 
@@ -31,3 +31,4 @@ void do_rreset( Character *ch, char *argument )
 
   EditReset(ch, argument, pRoom->Area, pRoom);
 }
+

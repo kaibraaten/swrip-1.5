@@ -12,21 +12,22 @@ void do_pardon( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1) || IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "Syntax: pardon <character> <planet>.\r\n", ch );
+      ch->Echo("Syntax: pardon <character> <planet>.\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPC's.\r\n", ch );
+      ch->Echo("Not on NPC's.\r\n");
       return;
     }
 
-  SendToCharacter( "Syntax: pardon <character> <planet>.... But it doesn't work .... Tell Durga to hurry up and finish it :p\r\n", ch );
+  ch->Echo("Syntax: pardon <character> <planet>.... But it doesn't work .... Tell Durga to hurry up and finish it :p\r\n");
 }
+

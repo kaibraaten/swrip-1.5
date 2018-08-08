@@ -5,7 +5,7 @@ void do_save( Character *ch, char *argument )
 {
   if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_POLYMORPHED))
     {
-      SendToCharacter("You can't save while polymorphed.\r\n", ch);
+      ch->Echo("You can't save while polymorphed.\r\n");
       return;
     }
 
@@ -23,7 +23,7 @@ void do_save( Character *ch, char *argument )
 
   if ( !IsAuthed(ch) )
     {
-      SendToCharacter("You can't save until after you've graduated from the academy.\r\n", ch);
+      ch->Echo("You can't save until after you've graduated from the academy.\r\n");
       return;
     }
 
@@ -34,5 +34,6 @@ void do_save( Character *ch, char *argument )
     SaveStoreroom( ch->InRoom );
 
   saving_char = NULL;
-  SendToCharacter( "Ok.\r\n", ch );
+  ch->Echo("Ok.\r\n");
 }
+

@@ -13,7 +13,7 @@ void do_empower( Character *ch , char *argument )
 
   if ( IsNpc( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo( "Huh?\r\n" );
       return;
     }
 
@@ -25,7 +25,7 @@ void do_empower( Character *ch , char *argument )
     ;
   else
     {
-      SendToCharacter( "You clan.hppasn't seen fit to bestow that ability to you!\r\n", ch );
+      ch->Echo( "You clan hasn't seen fit to bestow that ability to you!\r\n" );
       return;
     }
 
@@ -34,31 +34,31 @@ void do_empower( Character *ch , char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Empower whom to do what?\r\n", ch );
+      ch->Echo( "Empower whom to do what?\r\n" );
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "That player is not here.\r\n", ch);
+      ch->Echo( "That player is not here.\r\n" );
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPC's.\r\n", ch );
+      ch->Echo( "Not on NPC's.\r\n" );
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "Nice try.\r\n", ch );
+      ch->Echo( "Nice try.\r\n" );
       return;
     }
 
   if ( victim->PCData->ClanInfo.Clan != ch->PCData->ClanInfo.Clan )
     {
-      SendToCharacter( "This player does not belong to your clan!\r\n", ch );
+      ch->Echo( "This player does not belong to your clan!\r\n", ch );
       return;
     }
 
@@ -67,28 +67,26 @@ void do_empower( Character *ch , char *argument )
 
   if ( IsNullOrEmpty( arg2 ) || !StrCmp( arg2, "list" ) )
     {
-      Echo( ch, "Current bestowed commands on %s: %s.\r\n",
-                 victim->Name, victim->PCData->Bestowments );
-      Echo( ch, "Current salary on %s: %d.\r\n",
-                 victim->Name, victim->PCData->ClanInfo.Salary );
-
+      ch->Echo( "Current bestowed commands on %s: %s.\r\n",
+                victim->Name, victim->PCData->Bestowments );
+      ch->Echo( "Current salary on %s: %d.\r\n",
+                victim->Name, victim->PCData->ClanInfo.Salary );
       return;
     }
 
   if ( (victim->PCData && victim->PCData->Bestowments
         &&    IsName(arg2, victim->PCData->Bestowments)) )
     {
-      SendToCharacter( "That player already has that power.\r\n", ch );
+      ch->Echo( "That player already has that power.\r\n" );
       return;
     }
-
 
   if ( !StrCmp( arg2, "none" ) )
     {
       FreeMemory( victim->PCData->Bestowments );
       victim->PCData->Bestowments = CopyString("");
-      Echo( ch, "Bestowments removed from %s.\r\n", victim->Name );
-      Echo( victim, "%s has removed your bestowed clan abilities.\r\n", ch->Name );
+      ch->Echo( "Bestowments removed from %s.\r\n", victim->Name );
+      victim->Echo( "%s has removed your bestowed clan abilities.\r\n", ch->Name );
       return;
     }
   else if ( !StrCmp( arg2, "pilot" ) )
@@ -96,75 +94,76 @@ void do_empower( Character *ch , char *argument )
       sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
       FreeMemory( victim->PCData->Bestowments );
       victim->PCData->Bestowments = CopyString( buf );
-      Echo( victim, "%s has given you permission to fly clan ships.\r\n",
-                 ch->Name );
-      SendToCharacter( "Ok, they now have the ability to fly clan ships.\r\n", ch );
+      victim->Echo( "%s has given you permission to fly clan ships.\r\n",
+                    ch->Name );
+      ch->Echo( "Ok, they now have the ability to fly clan ships.\r\n" );
     }
   else if ( !StrCmp( arg2, "withdraw" ) )
     {
       sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
       FreeMemory( victim->PCData->Bestowments );
       victim->PCData->Bestowments = CopyString( buf );
-      Echo( victim, "%s has given you permission to withdraw clan funds.\r\n",
-                 ch->Name );
-      SendToCharacter( "Ok, they now have the ablitity to withdraw clan funds.\r\n", ch );
+      victim->Echo( "%s has given you permission to withdraw clan funds.\r\n",
+                    ch->Name );
+      ch->Echo( "Ok, they now have the ablitity to withdraw clan funds.\r\n" );
     }
   else if ( !StrCmp( arg2, "clanbuyship" ) )
     {
       sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
       FreeMemory( victim->PCData->Bestowments );
       victim->PCData->Bestowments = CopyString( buf );
-      Echo( victim, "%s has given you permission to buy clan ships.\r\n",
-                 ch->Name );
-      SendToCharacter( "Ok, they now have the ablitity to use clanbuyship.\r\n", ch );
+      victim->Echo( "%s has given you permission to buy clan ships.\r\n",
+                    ch->Name );
+      ch->Echo( "Ok, they now have the ablitity to use clanbuyship.\r\n" );
     }
   else if ( !StrCmp( arg2, "induct" ) )
     {
       sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
       FreeMemory( victim->PCData->Bestowments );
       victim->PCData->Bestowments = CopyString( buf );
-      Echo( victim, "%s has given you permission to induct new members.\r\n",
-                 ch->Name );
-      SendToCharacter( "Ok, they now have the ablitity to induct new members.\r\n", ch );
+      victim->Echo( "%s has given you permission to induct new members.\r\n",
+                    ch->Name );
+      ch->Echo( "Ok, they now have the ablitity to induct new members.\r\n" );
     }
   else if ( !StrCmp( arg2, "empower" ) )
     {
       sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
       FreeMemory( victim->PCData->Bestowments );
       victim->PCData->Bestowments = CopyString( buf );
-      Echo( victim, "%s has given you permission to empower members.\r\n",
-                 ch->Name );
-      SendToCharacter( "Ok, they now have the ablitity to empower members.\r\n", ch );
+      victim->Echo( "%s has given you permission to empower members.\r\n",
+                    ch->Name );
+      ch->Echo( "Ok, they now have the ablitity to empower members.\r\n" );
     }
   else if ( !StrCmp( arg2, "salary" ) )
     {
       sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
       FreeMemory( victim->PCData->Bestowments );
       victim->PCData->Bestowments = CopyString( buf );
-      Echo( victim, "%s has given you permission to assign salaries.\r\n",
-                 ch->Name );
-      SendToCharacter( "Ok, they now have the ablitity to assign salaries.\r\n", ch );
+      victim->Echo( "%s has given you permission to assign salaries.\r\n",
+                    ch->Name );
+      ch->Echo( "Ok, they now have the ablitity to assign salaries.\r\n" );
     }
   else if ( !StrCmp( arg2, "roster" ) )
     {
       sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
       FreeMemory( victim->PCData->Bestowments );
       victim->PCData->Bestowments = CopyString( buf );
-      Echo( victim, "%s has given you permission to access the roster.\r\n",
-                 ch->Name );
-      SendToCharacter( "Ok, they now have the ablitity to access the roster.\r\n", ch );
+      victim->Echo( "%s has given you permission to access the roster.\r\n",
+                    ch->Name );
+      ch->Echo( "Ok, they now have the ablitity to access the roster.\r\n" );
     }
   else
     {
-      SendToCharacter( "Currently you may empower members with only the following:\r\n", ch );
-      SendToCharacter( "\r\npilot:       ability to fly clan ships\r\n", ch );
-      SendToCharacter(     "withdraw:    ability to withdraw clan funds\r\n", ch );
-      SendToCharacter(     "clanbuyship: ability to buy clan ships\r\n", ch );
-      SendToCharacter(     "induct:      ability to induct new members\r\n", ch );
-      SendToCharacter(     "salary:      ability to assign salaries\r\n", ch );
-      SendToCharacter(     "roster:      ability to see the full clan roster\r\n", ch );
-      SendToCharacter(     "none:        removes bestowed abilities\r\n", ch );
+      ch->Echo( "Currently you may empower members with only the following:\r\n" );
+      ch->Echo( "\r\npilot:       ability to fly clan ships\r\n" );
+      ch->Echo(     "withdraw:    ability to withdraw clan funds\r\n" );
+      ch->Echo(     "clanbuyship: ability to buy clan ships\r\n" );
+      ch->Echo(     "induct:      ability to induct new members\r\n" );
+      ch->Echo(     "salary:      ability to assign salaries\r\n" );
+      ch->Echo(     "roster:      ability to see the full clan roster\r\n" );
+      ch->Echo(     "none:        removes bestowed abilities\r\n" );
     }
 
   SaveCharacter( victim );      /* clan gets saved when pfile is saved */
 }
+

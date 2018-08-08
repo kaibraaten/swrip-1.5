@@ -1,6 +1,7 @@
 #include "ship.hpp"
 #include "mud.hpp"
 #include "turret.hpp"
+#include "character.hpp"
 
 void do_makeship( Character *ch, char *argument )
 {
@@ -11,13 +12,13 @@ void do_makeship( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) || IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Usage: makeship <ship name> <personalname>\r\n", ch );
+      ch->Echo("Usage: makeship <ship name> <personalname>\r\n");
       return;
     }
 
   if( !ShipNameAndPersonalnameComboIsUnique( arg, argument ) )
     {
-      Echo( ch, "&RThere's already another ship with that combination of name and personalname.&d\r\n" );
+      ch->Echo("&RThere's already another ship with that combination of name and personalname.&d\r\n" );
       return;
     }
   
@@ -35,3 +36,4 @@ void do_makeship( Character *ch, char *argument )
 
   Ships->Save(ship);
 }
+

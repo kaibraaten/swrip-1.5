@@ -7,13 +7,13 @@ void do_showplanet( Character *ch, char *argument )
 {
   if ( IsNpc( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: showplanet <planet>\r\n", ch );
+      ch->Echo("Usage: showplanet <planet>\r\n");
       return;
     }
 
@@ -21,11 +21,12 @@ void do_showplanet( Character *ch, char *argument )
 
   if ( planet == nullptr )
     {
-      SendToCharacter( "No such planet.\r\n", ch );
+      ch->Echo("No such planet.\r\n");
       return;
     }
 
-  Echo( ch, "%s\r\nStarsystem: %s\r\n",
+  ch->Echo("%s\r\nStarsystem: %s\r\n",
 	planet->Name,
 	planet->Spaceobject ? planet->Spaceobject->Name : "None");
 }
+

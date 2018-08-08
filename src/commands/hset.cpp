@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "help.hpp"
 #include "log.hpp"
+#include "character.hpp"
 
 void do_hset( Character *ch, char *argument )
 {
@@ -13,10 +14,10 @@ void do_hset( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Syntax: hset <field> [value] [help page]\r\n",     ch );
-      SendToCharacter( "\r\n",                                             ch );
-      SendToCharacter( "Field being one of:\r\n",                  ch );
-      SendToCharacter( "  level keyword remove save\r\n",          ch );
+      ch->Echo("Syntax: hset <field> [value] [help page]\r\n");
+      ch->Echo("\r\n");
+      ch->Echo("Field being one of:\r\n");
+      ch->Echo("  level keyword remove save\r\n");
       return;
     }
 
@@ -24,7 +25,7 @@ void do_hset( Character *ch, char *argument )
     {
       Log->LogStringPlus( "Saving help files.", LOG_NORMAL, LEVEL_GREATER );
       HelpFiles->Save();
-      SendToCharacter( "Saved.\r\n", ch );
+      ch->Echo("Saved.\r\n");
       return;
     }
 
@@ -37,7 +38,7 @@ void do_hset( Character *ch, char *argument )
 
   if ( !pHelp )
     {
-      SendToCharacter( "Cannot find help on that subject.\r\n", ch );
+      ch->Echo("Cannot find help on that subject.\r\n");
       return;
     }
 
@@ -45,23 +46,25 @@ void do_hset( Character *ch, char *argument )
     {
       HelpFiles->Remove(pHelp);
       FreeHelpFile( pHelp );
-      SendToCharacter( "Removed.\r\n", ch );
+      ch->Echo("Removed.\r\n");
       return;
     }
 
   if ( !StrCmp( arg1, "level" ) )
     {
       SetHelpFileLevel( pHelp, atoi( arg2 ) );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
   if ( !StrCmp( arg1, "keyword" ) )
     {
       SetHelpFileKeyword( pHelp, arg2 );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
   do_hset( ch, "" );
 }
+
+

@@ -9,7 +9,7 @@ void do_wizhelp( Character *ch, char *argument )
   const List *commands = GetEntities(CommandRepository);
   ListIterator *iterator = AllocateListIterator(commands);
 
-  SetPagerColor( AT_PLAIN, ch );
+  SetCharacterColor( AT_PLAIN, ch );
 
   while(ListHasMoreElements(iterator))
     {
@@ -18,11 +18,11 @@ void do_wizhelp( Character *ch, char *argument )
 
       if ( cmd->Level >= LEVEL_AVATAR && cmd->Level <= GetTrustLevel( ch ) )
         {
-          PagerPrintf( ch, "%-12s", cmd->Name );
+          ch->Echo("%-12s", cmd->Name );
 
           if ( ++column % NUM_COLUMNS == 0 )
             {
-              SendToPager( "\r\n", ch );
+              ch->Echo("\r\n");
             }
 	}
     }
@@ -31,6 +31,7 @@ void do_wizhelp( Character *ch, char *argument )
 
   if ( column % NUM_COLUMNS != 0 )
     {
-      SendToPager( "\r\n", ch );
+      ch->Echo("\r\n");
     }
 }
+

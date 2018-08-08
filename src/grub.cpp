@@ -77,3 +77,4 @@ bool go_eval_num (long lval, int op, long rval)
     default: return false;
     }
 }
+

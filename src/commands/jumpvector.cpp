@@ -19,13 +19,13 @@ void do_jumpvector( Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit, turret or engineroom of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit, turret or engineroom of a ship to do that!\r\n");
       return;
     }
 
   if ( !ship->Spaceobject )
     {
-      SendToCharacter("&RYou have to be in realspace to do that!\r\n", ch);
+      ch->Echo("&RYou have to be in realspace to do that!\r\n");
       return;
     }
 
@@ -33,24 +33,24 @@ void do_jumpvector( Character *ch, char *argument )
 
   if ( !target )
     {
-      SendToCharacter( "No such ship.\r\n", ch );
+      ch->Echo("No such ship.\r\n");
       return;
     }
 
   if ( target == ship )
     {
-      SendToCharacter( "You can figure out where you are going on your own.\r\n", ch );
+      ch->Echo("You can figure out where you are going on your own.\r\n");
       return;
     }
 
   if (!ship_was_in_range( ship, target ))
     {
-      SendToCharacter( "No log for that ship.\r\n", ch);
+      ch->Echo("No log for that ship.\r\n");
       return;
     }
   if (target->State == SHIP_LANDED)
     {
-      SendToCharacter( "No log for that ship.\r\n", ch);
+      ch->Echo("No log for that ship.\r\n");
       return;
     }
 
@@ -58,7 +58,7 @@ void do_jumpvector( Character *ch, char *argument )
     : (int)  (ch->PCData->Learned[gsn_jumpvector]) ;
   if ( GetRandomPercent() > the_chance )
     {
-      SendToCharacter("&RYou cant figure out the course vectors correctly.\r\n",ch);
+      ch->Echo("&RYou cant figure out the course vectors correctly.\r\n");
       LearnFromFailure( ch, gsn_shipsystems );
       return;
     }
@@ -69,7 +69,7 @@ void do_jumpvector( Character *ch, char *argument )
       projected.y = (target->Position.y - target->OriginPosition.y)*randnum;
       projected.z = (target->Position.z - target->OriginPosition.z)*randnum;
 
-      SendToCharacter("After some deliberation, you figure out its projected course.\r\n", ch);
+      ch->Echo("After some deliberation, you figure out its projected course.\r\n");
       sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
               target->Name, projected.x, projected.y, projected.z );
       EchoToCockpit( AT_BLOOD, ship , buf );
@@ -81,7 +81,7 @@ void do_jumpvector( Character *ch, char *argument )
   projected.y = (target->HyperPosition.y - target->OriginPosition.y) * randnum;
   projected.z = (target->HyperPosition.z - target->OriginPosition.z) * randnum;
 
-  SendToCharacter("After some deliberation, you figure out its projected course.\r\n", ch);
+  ch->Echo("After some deliberation, you figure out its projected course.\r\n");
   sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
           target->Name, projected.x, projected.y, projected.z  );
   EchoToCockpit( AT_BLOOD, ship , buf );
@@ -93,3 +93,5 @@ static bool ship_was_in_range( Ship *ship, Ship *target )
   return target && ship && target != ship
     && GetShipDistanceToShip( ship, target ) < 100*(ship->Instruments.Sensor+10)*((target->Class == SHIP_DEBRIS ? 2 : target->Class)+3);
 }
+
+

@@ -74,7 +74,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
   if ( IsNpc(ch)
        && (IsAffectedBy( ch, AFF_CHARM ) || IsAffectedBy( ch, AFF_POSSESS )) )
     {
-      SendToCharacter( "For some reason, you seem unable to perform that...\r\n", ch );
+      ch->Echo( "For some reason, you seem unable to perform that...\r\n" );
       Act( AT_GREY,"$n looks around.", ch, NULL, NULL, TO_ROOM );
       return true;
     }
@@ -86,7 +86,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
 
       if ( !IsNpc(ch) && ch->Mana < mana )
 	{
-          SendToCharacter( "You need to rest before using the Force any more.\r\n", ch );
+          ch->Echo( "You need to rest before using the Force any more.\r\n" );
           return true;
         }
     }
@@ -111,7 +111,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
         {
         default:
           Log->Bug( "Check_skill: bad target for sn %d.", sn );
-          SendToCharacter( "Something went wrong...\r\n", ch );
+          ch->Echo( "Something went wrong...\r\n" );
           return true;
 
         case TAR_IGNORE:
@@ -134,13 +134,13 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
           if ( IsNullOrEmpty( argument )
                && (victim=GetFightingOpponent(ch)) == NULL )
             {
-              Echo( ch, "%s who?\r\n", Capitalize( SkillTable[sn]->Name ) );
+              ch->Echo( "%s who?\r\n", Capitalize( SkillTable[sn]->Name ) );
               return true;
             }
           else if ( !IsNullOrEmpty( argument )
 		    && (victim=GetCharacterInRoom(ch, argument)) == NULL )
             {
-              SendToCharacter( "They aren't here.\r\n", ch );
+              ch->Echo( "They aren't here.\r\n" );
               return true;
             }
 
@@ -156,7 +156,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
           if ( !IsNullOrEmpty( argument )
                &&  (victim=GetCharacterInRoom(ch, argument)) == NULL )
             {
-	      SendToCharacter( "They aren't here.\r\n", ch );
+	      ch->Echo( "They aren't here.\r\n" );
               return true;
             }
 
@@ -175,7 +175,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
         case TAR_OBJ_INV:
           if ( (obj=GetCarriedObject(ch, argument)) == NULL )
             {
-              SendToCharacter( "You can't find that.\r\n", ch );
+              ch->Echo( "You can't find that.\r\n" );
               return true;
             }
 
@@ -336,8 +336,8 @@ void LearnFromSuccess( Character *ch, int sn )
 	{
           gain = 50 * sklvl;
           SetCharacterColor( AT_WHITE, ch );
-          Echo( ch, "You are now an adept of %s! You gain %d bonus experience!\r\n",
-		SkillTable[sn]->Name, gain );
+          ch->Echo( "You are now an adept of %s! You gain %d bonus experience!\r\n",
+                    SkillTable[sn]->Name, gain );
         }
       else
         {
@@ -346,7 +346,7 @@ void LearnFromSuccess( Character *ch, int sn )
           if ( !ch->Fighting && sn != gsn_hide && sn != gsn_sneak )
             {
               SetCharacterColor( AT_WHITE, ch );
-              Echo( ch, "You gain %d experience points from your success!\r\n", gain );
+              ch->Echo( "You gain %d experience points from your success!\r\n", gain );
             }
         }
 
@@ -1390,3 +1390,4 @@ void LoadHerbs( void )
 {
   LuaLoadDataFile( HERB_DATA_FILE, L_HerbEntry, "HerbEntry" );
 }
+

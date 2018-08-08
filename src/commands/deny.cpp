@@ -4,36 +4,37 @@
 void do_deny( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
 
   OneArgument( argument, arg );
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Deny whom?\r\n", ch );
+      ch->Echo( "Deny whom?\r\n" );
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPC's.\r\n", ch );
+      ch->Echo( "Not on NPC's.\r\n" );
       return;
     }
 
   if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      SendToCharacter( "You failed.\r\n", ch );
+      ch->Echo( "You failed.\r\n" );
       return;
     }
 
   SetBit(victim->Flags, PLR_DENY);
-  SendToCharacter( "You are denied access!\r\n", victim );
-  SendToCharacter( "OK.\r\n", ch );
+  victim->Echo( "You are denied access!\r\n" );
+  ch->Echo( "OK.\r\n" );
   do_quit( victim, "" );
 }
+

@@ -22,26 +22,26 @@ void do_speeders( Character *ch, char *argument )
 
   if ( !IsNpc(ch) )
     {
-      SendToPager( "&YThe following are owned by you or by your organization:\r\n", ch );
-      SendToPager( "\r\n&WVehicle                            Owner\r\n",ch);
+      ch->Echo("&YThe following are owned by you or by your organization:\r\n");
+      ch->Echo("\r\n&WVehicle                            Owner\r\n");
 
       ForEachShip(ShowIfPilotable, &data);
 
       if ( data.count == 0 )
         {
-          SendToPager( "There are no land or air vehicles owned by you.\r\n", ch );
+          ch->Echo("There are no land or air vehicles owned by you.\r\n");
         }
     }
 
-  SendToPager( "&Y\r\nThe following vehicles are parked here:\r\n", ch );
-  SendToPager( "\r\n&WVehicle                            Owner          Cost/Rent\r\n", ch );
+  ch->Echo("&Y\r\nThe following vehicles are parked here:\r\n");
+  ch->Echo("\r\n&WVehicle                            Owner          Cost/Rent\r\n");
 
   data.count = 0;
   ForEachShip(ShowIfInRoom, &data);
 
   if ( data.count == 0 )
     {
-      SendToPager( "There are no sea, air or land vehicles here.\r\n", ch );
+      ch->Echo("There are no sea, air or land vehicles here.\r\n");
     }
 }
 
@@ -72,19 +72,19 @@ static bool ShowIfPilotable(Ship *ship, void *userData)
     }
   else if (ship->Type == SHIP_REBEL)
     {
-      SetPagerColor( AT_BLOOD, ch );
+      SetCharacterColor( AT_BLOOD, ch );
     }
   else if (ship->Type == SHIP_IMPERIAL)
     {
-      SetPagerColor( AT_DGREEN, ch );
+      SetCharacterColor( AT_DGREEN, ch );
     }
   else
     {
-      SetPagerColor( AT_BLUE, ch );
+      SetCharacterColor( AT_BLUE, ch );
     }
 
   sprintf( buf, "%s(%s)", ship->Name, ship->PersonalName );
-  PagerPrintf( ch, "%-35s%-15s ", buf, ship->Owner );
+  ch->Echo("%-35s%-15s ", buf, ship->Owner );
 
   data->count++;
   return true;
@@ -102,24 +102,25 @@ static bool ShowIfInRoom(Ship *ship, void *userData)
   if (ship->Type == MOB_SHIP)
     return true;
   else if (ship->Type == SHIP_REBEL)
-    SetPagerColor( AT_BLOOD, ch );
+    SetCharacterColor( AT_BLOOD, ch );
   else if (ship->Type == SHIP_IMPERIAL)
-    SetPagerColor( AT_DGREEN, ch );
+    SetCharacterColor( AT_DGREEN, ch );
   else
-    SetPagerColor( AT_BLUE, ch );
+    SetCharacterColor( AT_BLUE, ch );
 
   sprintf( buf, "%s(%s)", ship->Name, ship->PersonalName );
-  PagerPrintf( ch, "%-35s%-15s ", buf, ship->Owner );
+  ch->Echo("%-35s%-15s ", buf, ship->Owner );
 
   if ( !StrCmp(ship->Owner, "Public") )
     {
-      PagerPrintf( ch, "%ld to rent.\r\n", GetRentalPrice(ship));
+      ch->Echo("%ld to rent.\r\n", GetRentalPrice(ship));
     }
   else if ( StrCmp(ship->Owner, "") )
-    PagerPrintf( ch, "%s", "\r\n" );
+    ch->Echo("%s", "\r\n" );
   else
-    PagerPrintf( ch, "%ld to buy.\r\n", GetShipValue(ship) );
+    ch->Echo("%ld to buy.\r\n", GetShipValue(ship) );
 
   data->count++;
   return true;
 }
+

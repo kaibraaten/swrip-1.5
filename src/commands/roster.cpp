@@ -9,7 +9,7 @@ void do_roster( Character *ch, char *argument )
 
   if( IsNpc( ch ) || !IsClanned( ch ) )
     {
-      Echo( ch, "Huh?\r\n" );
+      ch->Echo("Huh?\r\n" );
       return;
     }
 
@@ -21,9 +21,10 @@ void do_roster( Character *ch, char *argument )
       && (!ch->PCData->Bestowments
 	  || !IsName("roster", ch->PCData->Bestowments)) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
   ShowClanMembers( ch, clan->Name, argument );
 }
+

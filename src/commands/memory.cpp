@@ -2,31 +2,32 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "playerrepository.hpp"
+#include "character.hpp"
 
 void do_memory( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
 
   argument = OneArgument( argument, arg );
-  Echo( ch, "Affects %5d    Areas   %5d\r\n",  top_affect, top_area   );
-  Echo( ch, "ExtDes  %5d    Exits   %5d\r\n", top_ed,       top_exit   );
-  Echo( ch, "Helps   %5d    Resets  %5d\r\n", HelpFiles->Count(), top_reset  );
-  Echo( ch, "IdxMobs %5d    Mobs    %5d\r\n", top_mob_index, nummobsloaded );
-  Echo( ch, "IdxObjs %5d    Objs    %5d (%d)\r\n", top_obj_index, numobjsloaded, physicalobjects );
-  Echo( ch, "Rooms   %5d    VRooms  %5d\r\n", top_room,   top_vroom   );
-  Echo( ch, "Shops   %5d    RepShps %5d\r\n", top_shop,   top_repair );
-  Echo( ch, "CurOq's %5d    CurCq's %5d\r\n", cur_qobjs,  cur_qchars );
-  Echo( ch, "Players %5d    Maxplrs %5d\r\n", PlayerCharacters->Count(),
+  ch->Echo("Affects %5d    Areas   %5d\r\n",  top_affect, top_area   );
+  ch->Echo("ExtDes  %5d    Exits   %5d\r\n", top_ed,       top_exit   );
+  ch->Echo("Helps   %5d    Resets  %5d\r\n", HelpFiles->Count(), top_reset  );
+  ch->Echo("IdxMobs %5d    Mobs    %5d\r\n", top_mob_index, nummobsloaded );
+  ch->Echo("IdxObjs %5d    Objs    %5d (%d)\r\n", top_obj_index, numobjsloaded, physicalobjects );
+  ch->Echo("Rooms   %5d    VRooms  %5d\r\n", top_room,   top_vroom   );
+  ch->Echo("Shops   %5d    RepShps %5d\r\n", top_shop,   top_repair );
+  ch->Echo("CurOq's %5d    CurCq's %5d\r\n", cur_qobjs,  cur_qchars );
+  ch->Echo("Players %5d    Maxplrs %5d\r\n", PlayerCharacters->Count(),
         SysData.MaxPlayersThisBoot );
-  Echo( ch, "MaxEver %5d    Topsn   %5d (%d)\r\n", SysData.MaxPlayersEver, TopSN, MAX_SKILL );
-  Echo( ch, "MaxEver time recorded at:   %s\r\n", SysData.TimeOfMaxPlayersEver );
+  ch->Echo("MaxEver %5d    Topsn   %5d (%d)\r\n", SysData.MaxPlayersEver, TopSN, MAX_SKILL );
+  ch->Echo("MaxEver time recorded at:   %s\r\n", SysData.TimeOfMaxPlayersEver );
 
   if ( !StrCmp( arg, "check" ) )
     {
 #ifdef HASHSTR
-      SendToCharacter( check_hash(argument), ch );
+      ch->Echo(check_hash(argument));
 #else
-      SendToCharacter( "Hash strings not enabled.\r\n", ch );
+      ch->Echo("Hash strings not enabled.\r\n");
 #endif
       return;
     }
@@ -36,7 +37,7 @@ void do_memory( Character *ch, char *argument )
 #ifdef HASHSTR
       show_high_hash( atoi(argument) );
 #else
-      SendToCharacter( "Hash strings not enabled.\r\n", ch );
+      ch->Echo("Hash strings not enabled.\r\n");
 #endif
       return;
     }
@@ -51,12 +52,13 @@ void do_memory( Character *ch, char *argument )
       else
 	hash = -1;
 
-      Echo( ch, "Hash statistics:\r\n%s", hash_stats() );
+      ch->Echo("Hash statistics:\r\n%s", hash_stats() );
 
       if ( hash != -1 )
         hash_dump( hash );
 #else
-      SendToCharacter( "Hash strings not enabled.\r\n", ch );
+      ch->Echo("Hash strings not enabled.\r\n");
 #endif
     }
 }
+

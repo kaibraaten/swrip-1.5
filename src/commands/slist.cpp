@@ -18,9 +18,9 @@ void do_slist( Character *ch, char *argument )
       return;
     }
 
-  SetPagerColor( AT_CYAN, ch );
-  SendToPager("SKILL LIST\r\n",ch);
-  SendToPager("------------------\r\n",ch);
+  SetCharacterColor( AT_CYAN, ch );
+  ch->Echo("SKILL LIST\r\n");
+  ch->Echo("------------------\r\n");
 
   for ( ability = -1 ; ability < MAX_ABILITY ; ability++ )
     {
@@ -49,8 +49,8 @@ void do_slist( Character *ch, char *argument )
           sprintf(skn, "\r\n\t\t\t** General Skills **\r\n" );
         }
 
-      SetPagerColor( AT_CYAN, ch );
-      SendToPager(skn,ch);
+      SetCharacterColor( AT_CYAN, ch );
+      ch->Echo(skn);
 
       for (i=lowlev; i <= hilev; i++)
         {
@@ -76,13 +76,13 @@ void do_slist( Character *ch, char *argument )
 
               if( i == skill->Level )
                 {
-                  SetPagerColor( AT_LBLUE, ch );
-                  PagerPrintf(ch, "(%3d) %-18.18s  ",
+                  SetCharacterColor( AT_LBLUE, ch );
+                  ch->Echo("(%3d) %-18.18s  ",
                                i,  Capitalize( skill->Name ) );
 
                   if ( ++col == 3 )
                     {
-                      PagerPrintf(ch, "\r\n");
+                      ch->Echo("\r\n");
                       col = 0;
                     }
                 }
@@ -91,8 +91,9 @@ void do_slist( Character *ch, char *argument )
 
       if ( col != 0 )
 	{
-          PagerPrintf(ch, "\r\n");
+          ch->Echo("\r\n");
           col = 0;
         }
     }
 }
+

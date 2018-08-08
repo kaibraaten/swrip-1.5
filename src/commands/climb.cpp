@@ -11,12 +11,12 @@ void do_climb( Character *ch, char *argument )
 	{
 	  if ( IsBitSet( pexit->Flags, EX_xCLIMB ) )
 	    {
-	      MoveCharacter( ch, pexit, 0 );
+	      MoveCharacter( ch, pexit );
 	      return;
 	    }
 	}
       
-      SendToCharacter( "You cannot climb here.\r\n", ch );
+      ch->Echo( "You cannot climb here.\r\n" );
       return;
     }
 
@@ -24,9 +24,10 @@ void do_climb( Character *ch, char *argument )
 
   if ( pexit && IsBitSet( pexit->Flags, EX_xCLIMB ) )
     {
-      MoveCharacter( ch, pexit, 0 );
+      MoveCharacter( ch, pexit );
       return;
     }
 
-  SendToCharacter( "You cannot climb there.\r\n", ch );
+  ch->Echo( "You cannot climb there.\r\n" );
 }
+

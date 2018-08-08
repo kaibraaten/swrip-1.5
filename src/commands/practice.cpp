@@ -17,7 +17,7 @@ void do_practice( Character *ch, char *argument )
       SkillType lasttype = SKILL_SPELL;
       short cnt = 0;
 
-      SetPagerColor( AT_MAGIC, ch );
+      SetCharacterColor( AT_MAGIC, ch );
 
       for ( sn = 0; sn < TopSN; sn++ )
         {
@@ -41,20 +41,18 @@ void do_practice( Character *ch, char *argument )
           if ( !StrCmp(skill->Name, "reserved") && IsImmortal(ch) )
             {
               if ( col % 3 != 0 )
-                SendToPager( "&r\r\n", ch );
+                ch->Echo("&r\r\n");
 
-	      SendToPager(
-                            "&R--------------------------------[Spells]---------------------------------\r\n&r", ch);
+              ch->Echo("&R--------------------------------[Spells]---------------------------------\r\n&r");
               col = 0;
             }
 
           if ( skill->Type != lasttype )
             {
               if ( col % 3 != 0 )
-		SendToPager( "\r\n&r", ch );
+  ch->Echo("\r\n&r");
 
-              PagerPrintf( ch,
-                            "&R--------------------------------%ss---------------------------------\r\n&r",
+              ch->Echo("&R--------------------------------%ss---------------------------------\r\n&r",
                             SkillTypeName[skill->Type]);
               col = cnt = 0;
             }
@@ -76,20 +74,20 @@ void do_practice( Character *ch, char *argument )
 
           if ( ch->PCData->Learned[sn] >= 100 )
             {
-              PagerPrintf( ch, "&R%18s %3d%%  &r",
+              ch->Echo("&R%18s %3d%%  &r",
                             Capitalize(skill->Name),
 			    ch->PCData->Learned[sn] );
             }
           else
-            PagerPrintf( ch, "&r%18s %3d%%  ",
+            ch->Echo("&r%18s %3d%%  ",
                           Capitalize(skill->Name),
 			  ch->PCData->Learned[sn] );
           if ( ++col % 3 == 0 )
-            SendToPager( "\r\n&r", ch );
+            ch->Echo("\r\n&r");
         }
 
       if ( col % 3 != 0 )
-        SendToPager( "\r\n&r", ch );
+        ch->Echo("\r\n&r");
     }
   else
     {
@@ -100,7 +98,7 @@ void do_practice( Character *ch, char *argument )
 
       if ( !IsAwake(ch) )
         {
-          SendToCharacter( "In your dreams, or what?\r\n", ch );
+          ch->Echo("In your dreams, or what?\r\n");
           return;
         }
 
@@ -110,7 +108,7 @@ void do_practice( Character *ch, char *argument )
 
       if ( !mob )
         {
-          SendToCharacter( "You can't do that here.\r\n", ch );
+          ch->Echo("You can't do that here.\r\n");
           return;
         }
 
@@ -207,3 +205,4 @@ void do_practice( Character *ch, char *argument )
         }
     }
 }
+

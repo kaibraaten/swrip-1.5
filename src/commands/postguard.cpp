@@ -21,33 +21,33 @@ void do_postguard( Character *ch, char *argument )
     default:
       if ( ch->BackupWait )
         {
-          SendToCharacter( "&RYou already have backup coming.\r\n", ch );
+          ch->Echo("&RYou already have backup coming.\r\n");
           return;
         }
 
       if ( !IsClanned( ch ) )
         {
-          SendToCharacter( "&RYou need to be a member of an organization before you can call for a guard.\r\n", ch );
+          ch->Echo("&RYou need to be a member of an organization before you can call for a guard.\r\n");
           return;
         }
 
       if ( ch->Gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 30 )
         {
-          Echo( ch, "&RYou dont have enough credits.\r\n", ch );
+          ch->Echo("&RYou dont have enough credits.\r\n", ch );
           return;
         }
 
       the_chance = (int) (ch->PCData->Learned[gsn_postguard]);
       if ( GetRandomPercent() < the_chance )
         {
-	  SendToCharacter( "&GYou begin making the call for reinforcements.\r\n", ch);
+   ch->Echo("&GYou begin making the call for reinforcements.\r\n");
           Act( AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
                NULL, argument , TO_ROOM );
           AddTimerToCharacter( ch , TIMER_CMD_FUN , 1 , do_postguard , SUB_PAUSE );
           ch->dest_buf = CopyString(arg);
           return;
         }
-      SendToCharacter("&RYou call for a guard but nobody answers.\r\n",ch);
+      ch->Echo("&RYou call for a guard but nobody answers.\r\n");
       LearnFromFailure( ch, gsn_postguard );
       return;
 
@@ -61,16 +61,16 @@ void do_postguard( Character *ch, char *argument )
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
       ch->SubState = SUB_NONE;
-      SendToCharacter("&RYou are interupted before you can finish your call.\r\n", ch);
+      ch->Echo("&RYou are interupted before you can finish your call.\r\n");
       return;
     }
 
   ch->SubState = SUB_NONE;
 
-  SendToCharacter( "&GYour guard is on the way.\r\n", ch);
+  ch->Echo("&GYour guard is on the way.\r\n");
 
   credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 30;
-  Echo( ch, "It cost you %d credits.\r\n", credits);
+  ch->Echo("It cost you %d credits.\r\n", credits);
   ch->Gold -= umin( credits , ch->Gold );
 
   LearnFromSuccess( ch, gsn_postguard );
@@ -86,3 +86,4 @@ void do_postguard( Character *ch, char *argument )
 
   ch->BackupWait = 1;
 }
+

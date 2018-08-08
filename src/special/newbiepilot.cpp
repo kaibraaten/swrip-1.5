@@ -39,3 +39,4 @@ bool spec_newbie_pilot( Character *ch )
 
   return false;
 }
+

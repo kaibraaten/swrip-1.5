@@ -20,14 +20,14 @@ void do_tell( Character *ch, char *argument )
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_SILENCE ) )
     {
-      SendToCharacter( "You can't do that here.\r\n", ch );
+      ch->Echo("You can't do that here.\r\n");
       return;
     }
 
   if (!IsNpc(ch)
       && ( IsBitSet(ch->Flags, PLR_SILENCE) || IsBitSet(ch->Flags, PLR_NO_TELL) ) )
     {
-      SendToCharacter( "You can't do that.\r\n", ch );
+      ch->Echo("You can't do that.\r\n");
       return;
     }
 
@@ -35,7 +35,7 @@ void do_tell( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Tell whom what?\r\n", ch );
+      ch->Echo("Tell whom what?\r\n");
       return;
     }
 
@@ -43,14 +43,14 @@ void do_tell( Character *ch, char *argument )
        || ( IsNpc(victim) && victim->InRoom != ch->InRoom )
        || (IsAuthed(ch) && !IsAuthed(victim) && !IsImmortal(ch) ) )
     {
-      Echo( ch, "%s can't hear you.\r\n",
+      ch->Echo("%s can't hear you.\r\n",
 	    Capitalize( victim != NULL ? HeSheIt( victim ) : "they" ) );
       return;
     }
 
   if ( ch == victim )
     {
-      SendToCharacter( "You have a nice little chat with yourself.\r\n", ch );
+      ch->Echo("You have a nice little chat with yourself.\r\n");
       return;
     }
 
@@ -65,13 +65,13 @@ void do_tell( Character *ch, char *argument )
 
       if ( !ch_comlink )
         {
-          SendToCharacter( "You need a comlink to do that!\r\n", ch);
+          ch->Echo("You need a comlink to do that!\r\n");
           return;
         }
 
       if ( !victim_comlink )
         {
-	  Echo( ch, "%s doesn't seem to have a comlink!\r\n",
+   ch->Echo("%s doesn't seem to have a comlink!\r\n",
                 Capitalize( HeSheIt( victim ) ) );
           return;
         }
@@ -79,7 +79,7 @@ void do_tell( Character *ch, char *argument )
 
   if (!IsAuthed(ch) && IsAuthed(victim) && !IsImmortal(victim) )
     {
-      Echo( ch, "%s can't hear you because you are not authorized.\r\n",
+      ch->Echo("%s can't hear you because you are not authorized.\r\n",
 	    Capitalize( HeSheIt( victim ) ) );
       return;
     }
@@ -89,7 +89,7 @@ void do_tell( Character *ch, char *argument )
        && !IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
        && !IsAffectedBy(victim->Switched, AFF_POSSESS) )
     {
-      SendToCharacter( "That player is switched.\r\n", ch );
+      ch->Echo("That player is switched.\r\n");
       return;
     }
   else if ( !IsNpc( victim ) && ( victim->Switched )
@@ -100,7 +100,7 @@ void do_tell( Character *ch, char *argument )
     }
   else if ( !IsNpc( victim ) && ( !victim->Desc ) )
     {
-      SendToCharacter( "That player is link-dead.\r\n", ch );
+      ch->Echo("That player is link-dead.\r\n");
       return;
     }
 
@@ -113,7 +113,7 @@ void do_tell( Character *ch, char *argument )
 
   if ( !IsNpc (victim) && ( IsBitSet (victim->Flags, PLR_SILENCE ) ) )
     {
-      Echo( ch, "That player is silenced. %s will receive your message but can not respond.\r\n",
+      ch->Echo("That player is silenced. %s will receive your message but can not respond.\r\n",
 	    Capitalize( HeSheIt( victim ) ) );
     }
 
@@ -134,7 +134,7 @@ void do_tell( Character *ch, char *argument )
 
   if ( !IsNpc (victim) && ( IsBitSet (victim->Flags, PLR_AFK ) ) )
     {
-      Echo( ch, "That player is afk so %s may not respond.\r\n",
+      ch->Echo("That player is afk so %s may not respond.\r\n",
 	    Capitalize( HeSheIt( victim ) ) );
     }
 
@@ -199,3 +199,4 @@ void do_tell( Character *ch, char *argument )
 
   MobProgSpeechTrigger( argument, ch );
 }
+

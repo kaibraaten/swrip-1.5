@@ -17,7 +17,7 @@ void do_bribe( Character *ch , char *argument )
 
   if ( !IsClanned( ch ) || !ch->InRoom->Area->Planet )
     {
-      SendToCharacter( "What would be the point of that.\r\n", ch );
+      ch->Echo( "What would be the point of that.\r\n" );
       return;
     }
 
@@ -25,13 +25,13 @@ void do_bribe( Character *ch , char *argument )
 
   if ( ch->Mount )
     {
-      SendToCharacter( "You can't do that while mounted.\r\n", ch );
+      ch->Echo( "You can't do that while mounted.\r\n" );
       return;
     }
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Bribe who how much?\r\n", ch );
+      ch->Echo( "Bribe who how much?\r\n" );
       return;
     }
 
@@ -39,69 +39,69 @@ void do_bribe( Character *ch , char *argument )
 
   if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "That's pointless.\r\n", ch );
+      ch->Echo( "That's pointless.\r\n" );
       return;
     }
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      SendToCharacter( "This isn't a good place to do that.\r\n", ch );
+      ch->Echo( "This isn't a good place to do that.\r\n" );
       return;
     }
 
   if ( amount <= 0 )
     {
-      SendToCharacter( "A little bit more money would be a good plan.\r\n", ch );
+      ch->Echo( "A little bit more money would be a good plan.\r\n" );
       return;
     }
 
   if ( ch->Gold < amount )
     {
-      SendToCharacter( "Try getting that amount first.\r\n" , ch );
+      ch->Echo( "Try getting that amount first.\r\n" );
       return;
     }
 
   if ( ch->Position == POS_FIGHTING )
     {
-      SendToCharacter( "Interesting combat technique.\r\n" , ch );
+      ch->Echo( "Interesting combat technique.\r\n" );
       return;
     }
 
   if ( victim->Position == POS_FIGHTING )
     {
-      SendToCharacter( "They're a little busy right now.\r\n" , ch );
+      ch->Echo( "They're a little busy right now.\r\n" );
       return;
     }
 
   if ( ch->Position <= POS_SLEEPING )
     {
-      SendToCharacter( "In your dreams or what?\r\n" , ch );
+      ch->Echo( "In your dreams or what?\r\n" );
       return;
     }
 
   if ( victim->Position <= POS_SLEEPING )
     {
-      SendToCharacter( "You might want to wake them first...\r\n" , ch );
+      ch->Echo( "You might want to wake them first...\r\n" );
       return;
     }
 
   if ( victim->VipFlags == 0 )
     {
-      SendToCharacter( "Diplomacy would be wasted on them.\r\n" , ch );
+      ch->Echo( "Diplomacy would be wasted on them.\r\n" );
       return;
     }
 
   ch->Gold -= amount;
   victim->Gold += amount;
 
-  Echo( ch, "You give them a small gift on behalf of %s.\r\n", ch->PCData->ClanInfo.Clan->Name );
+  ch->Echo( "You give them a small gift on behalf of %s.\r\n", ch->PCData->ClanInfo.Clan->Name );
   Act( AT_ACTION, "$n offers you a small bribe.\r\n", ch, NULL, victim, TO_VICT    );
   Act( AT_ACTION, "$n gives $N some money.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
@@ -122,12 +122,12 @@ void do_bribe( Character *ch , char *argument )
   if ( clan == planet->GovernedBy )
     {
       planet->PopularSupport += urange( 0.1 , amount/1000 , 2 );
-      SendToCharacter( "Popular support for your organization increases slightly.\r\n", ch );
+      ch->Echo( "Popular support for your organization increases slightly.\r\n" );
 
       amount = umin( amount, ( GetRequiredXpForLevel(GetAbilityLevel( ch, DIPLOMACY_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ) ) );
 
       GainXP( ch, DIPLOMACY_ABILITY, amount );
-      Echo( ch, "You gain %d diplomacy experience.\r\n", amount );
+      ch->Echo( "You gain %d diplomacy experience.\r\n", amount );
 
       LearnFromSuccess( ch, gsn_bribe );
     }
@@ -135,3 +135,4 @@ void do_bribe( Character *ch , char *argument )
   if ( planet->PopularSupport > 100 )
     planet->PopularSupport = 100;
 }
+

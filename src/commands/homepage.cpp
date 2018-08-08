@@ -15,7 +15,7 @@ void do_homepage( Character *ch, char *argument )
       if ( !ch->PCData->HomePage )
         ch->PCData->HomePage = CopyString( "" );
 
-      Echo( ch, "Your homepage is: %s\r\n",
+      ch->Echo("Your homepage is: %s\r\n",
                  ShowTilde( ch->PCData->HomePage ) );
       return;
     }
@@ -25,7 +25,7 @@ void do_homepage( Character *ch, char *argument )
       if ( ch->PCData->HomePage )
         FreeMemory(ch->PCData->HomePage);
       ch->PCData->HomePage = CopyString("");
-      SendToCharacter( "Homepage cleared.\r\n", ch );
+      ch->Echo("Homepage cleared.\r\n");
       return;
     }
 
@@ -43,5 +43,7 @@ void do_homepage( Character *ch, char *argument )
     FreeMemory(ch->PCData->HomePage);
 
   ch->PCData->HomePage = CopyString(buf);
-  SendToCharacter( "Homepage set.\r\n", ch );
+  ch->Echo("Homepage set.\r\n");
 }
+
+

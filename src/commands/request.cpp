@@ -18,31 +18,31 @@ void do_request(Character *ch, char *argument)
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   if ( ship->Class > SHIP_PLATFORM )
     {
-      SendToCharacter("&RThis isn't a spacecraft!",ch);
+      ch->Echo("&RThis isn't a spacecraft!");
       return;
     }
 
   if ( !ship->Spaceobject )
     {
-      SendToCharacter("&RYou can't do that until you've finished launching!\r\n",ch);
+      ch->Echo("&RYou can't do that until you've finished launching!\r\n");
       return;
     }
 
   if ( IsShipInHyperspace( ship ) )
     {
-      SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
+      ch->Echo("&RYou can only do that in realspace!\r\n");
       return;
     }
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter("&RRequest the opening of the baydoors of what ship?\r\n",ch);
+      ch->Echo("&RRequest the opening of the baydoors of what ship?\r\n");
       return;
     }
 
@@ -50,58 +50,59 @@ void do_request(Character *ch, char *argument)
 
   if ( eShip == NULL )
     {
-      SendToCharacter("&RThat ship isn't here!\r\n",ch);
+      ch->Echo("&RThat ship isn't here!\r\n");
       return;
     }
 
   if ( eShip == ship )
     {
-      SendToCharacter("&RIf you have bay doors, why not open them yourself?\r\n",ch);
+      ch->Echo("&RIf you have bay doors, why not open them yourself?\r\n");
       return;
     }
 
   if ( eShip->Rooms.Hangar == INVALID_VNUM )
     {
-      SendToCharacter("&RThat ship.hppas no hangar!",ch);
+      ch->Echo("&RThat ship.hppas no hangar!");
       return;
     }
 
   if ( !IsShipAutoflying(eShip) )
     {
-      SendToCharacter("&RThe other ship needs to have its autopilot turned on.\r\n",ch);
+      ch->Echo("&RThe other ship needs to have its autopilot turned on.\r\n");
       return;
     }
 
   if( GetShipDistanceToShip(eShip, ship) > 100*((ship->Instruments.Comm)+(eShip->Instruments.Comm)+20))
     {
-      SendToCharacter("&RThat ship is out of the range of your comm system.\r\n&w", ch);
+      ch->Echo("&RThat ship is out of the range of your comm system.\r\n&w");
       return;
     }
 
   if( GetShipDistanceToShip(eShip, ship) > 100*(ship->Instruments.Sensor+10)*((eShip->Class)+1))
     {
-      SendToCharacter("&RThat ship is too far away to remotely open bay doors.\r\n",ch);
+      ch->Echo("&RThat ship is too far away to remotely open bay doors.\r\n");
       return;
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->Learned[gsn_fake_signal]);
   if ( (eShip->Class == SHIP_PLATFORM ? 1 : (GetRandomPercent() >= the_chance)) && !CheckPilot(ch,eShip) )
     {
-      SendToCharacter("&RHey! That's not your ship!",ch);
+      ch->Echo("&RHey! That's not your ship!");
       return;
     }
 
   if ( eShip->BayOpen == true )
     {
-      SendToCharacter("&RThat ship's bay doors are already open!\r\n",ch);
+      ch->Echo("&RThat ship's bay doors are already open!\r\n");
       return;
     }
   if ( the_chance && !CheckPilot(ch, eShip) )
     LearnFromSuccess(ch, gsn_fake_signal);
 
-  SendToCharacter("&RYou open the bay doors of the remote ship.",ch);
+  ch->Echo("&RYou open the bay doors of the remote ship.");
   Act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
   eShip->BayOpen = true;
   sprintf( buf ,"%s's bay doors open." , eShip->Name );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }
+

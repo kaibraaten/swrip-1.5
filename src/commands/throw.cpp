@@ -25,7 +25,7 @@ void do_throw( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Usage: throw <object> [direction] [target]\r\n", ch );
+      ch->Echo("Usage: throw <object> [direction] [target]\r\n");
       return;
     }
 
@@ -52,7 +52,7 @@ void do_throw( Character *ch, char *argument )
 
   if ( !obj || !NiftyIsNamePrefix( arg, obj->Name ) )
     {
-      Echo( ch, "You don't seem to be holding or wielding %s.\r\n", arg );
+      ch->Echo("You don't seem to be holding or wielding %s.\r\n", arg );
       return;
     }
 
@@ -77,7 +77,7 @@ void do_throw( Character *ch, char *argument )
     {
       sprintf( buf, "$n throws %s at the floor." , obj->ShortDescr );
       Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
-      Echo( ch, "You throw %s at the floor.\r\n", obj->ShortDescr );
+      ch->Echo("You throw %s at the floor.\r\n", obj->ShortDescr );
 
       victim = NULL;
     }
@@ -85,13 +85,13 @@ void do_throw( Character *ch, char *argument )
     {
       if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
 	{
-          SendToCharacter( "Are you expecting to throw it through a wall!?\r\n", ch );
+          ch->Echo("Are you expecting to throw it through a wall!?\r\n");
           return;
         }
 
       if ( IsBitSet( pexit->Flags, EX_CLOSED ) )
         {
-          SendToCharacter( "Are you expecting to throw it  through a door!?\r\n", ch );
+          ch->Echo("Are you expecting to throw it  through a door!?\r\n");
           return;
         }
 
@@ -154,7 +154,7 @@ void do_throw( Character *ch, char *argument )
 
           if ( !IsNpc( victim ) && IsBitSet( ch->Flags, PLR_NICE ) )
             {
-              SendToCharacter( "You feel too nice to do that!\r\n", ch );
+              ch->Echo("You feel too nice to do that!\r\n");
               return;
             }
 
@@ -165,7 +165,7 @@ void do_throw( Character *ch, char *argument )
           if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
             {
               SetCharacterColor( AT_MAGIC, ch );
-              SendToCharacter( "You'll have to do that elswhere.\r\n", ch );
+              ch->Echo("You'll have to do that elswhere.\r\n");
               return;
             }
 
@@ -189,7 +189,7 @@ void do_throw( Character *ch, char *argument )
         }
       else
         {
-          Echo( ch, "You throw %s %s.\r\n", obj->ShortDescr , GetDirectionName(GetDirection( arg2 ) ) );
+          ch->Echo("You throw %s %s.\r\n", obj->ShortDescr , GetDirectionName(GetDirection( arg2 ) ) );
           sprintf( buf, "%s is thrown from the %s." , obj->ShortDescr , GetDirectionName(dir) );
           Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
 
@@ -208,14 +208,14 @@ void do_throw( Character *ch, char *argument )
 
       if ( !IsNpc( victim ) && IsBitSet( ch->Flags, PLR_NICE ) )
         {
-          SendToCharacter( "You feel too nice to do that!\r\n", ch );
+          ch->Echo("You feel too nice to do that!\r\n");
           return;
         }
 
     }
   else
     {
-      Echo( ch, "They don't seem to be here!\r\n");
+      ch->Echo("They don't seem to be here!\r\n");
       return;
     }
 
@@ -273,3 +273,4 @@ void do_throw( Character *ch, char *argument )
 	}
     }
 }
+

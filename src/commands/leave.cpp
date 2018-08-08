@@ -30,3 +30,4 @@ void do_leave( Character *ch, char *argument )
 
   do_leaveship( ch, "" );
 }
+

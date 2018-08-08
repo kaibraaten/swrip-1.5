@@ -293,3 +293,4 @@ char *GetObjectShortDescription( const Object *obj )
 
   return obj->ShortDescr;
 }
+

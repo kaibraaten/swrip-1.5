@@ -17,103 +17,109 @@ void do_dock(Character *ch, char *argument)
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   if ( ship->Class > SHIP_PLATFORM )
     {
-      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
+      ch->Echo("&RThis isn't a spacecraft!\r\n");
       return;
     }
-
 
   if (! ship->Spaceobject )
     {
-      SendToCharacter("&RYou can't do that until you've finished launching!\r\n",ch);
+      ch->Echo("&RYou can't do that until you've finished launching!\r\n");
       return;
     }
 
-  if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
+  if ( (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou aren't in the pilots seat.\r\n",ch);
+      ch->Echo("&RYou aren't in the pilots seat.\r\n");
       return;
     }
 
   if ( (ship->Autopilot || ship->Type == MOB_SHIP)  )
     {
-      SendToCharacter("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
+      ch->Echo("&RYou'll have to turn off the ships autopilot first.\r\n");
       return;
     }
 
-  if  ( ship->Class == SHIP_PLATFORM )
+  if ( ship->Class == SHIP_PLATFORM )
     {
-      SendToCharacter( "&RPlatforms can't move!\r\n" , ch );
+      ch->Echo( "&RPlatforms can't move!\r\n" );
       return;
     }
 
   if ( IsShipInHyperspace( ship ) )
     {
-      SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
+      ch->Echo("&RYou can only do that in realspace!\r\n");
       return;
     }
 
   if (IsShipDisabled( ship ))
     {
-      SendToCharacter("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
+      ch->Echo("&RThe ships drive is disabled. Unable to manuever.\r\n");
       return;
     }
+
   if (ship->DockingState == SHIP_DISABLED)
     {
-      SendToCharacter("&RYour docking port is damaged. Get it repaired!\r\n",ch);
+      ch->Echo("&RYour docking port is damaged. Get it repaired!\r\n");
       return;
     }
 
   if (ship->Docking == SHIP_DOCKED)
     {
-      SendToCharacter("&RTry undocking first!\r\n",ch);
+      ch->Echo("&RTry undocking first!\r\n");
       return;
     }
+
   if (!CanDock(ship))
     {
-      SendToCharacter("&RTry undocking first!\r\n",ch);
+      ch->Echo("&RTry undocking first!\r\n");
       return;
     }
+
   if (ship->State == SHIP_LANDED)
     {
-      SendToCharacter("&RYou are already docked!\r\n",ch);
+      ch->Echo("&RYou are already docked!\r\n");
       return;
     }
+
   if (ship->State == SHIP_TRACTORED && ship->TractoredBy && ship->TractoredBy->Class >= ship->Class )
     {
-      SendToCharacter("&RYou can not move in a tractorbeam!\r\n",ch);
+      ch->Echo("&RYou can not move in a tractorbeam!\r\n");
       return;
     }
+
   if (ship->WeaponSystems.TractorBeam.Tractoring )
     {
-      SendToCharacter("&RThe ship structure can not tolerate stresses from both tractorbeam and docking port simultaneously.\r\n",ch);
+      ch->Echo("&RThe ship structure can not tolerate stresses from both tractorbeam and docking port simultaneously.\r\n");
       return;
     }
+
   if (ship->State != SHIP_READY)
     {
-      SendToCharacter("&RPlease wait until the ship.hppas finished its current maneuver.\r\n",ch);
+      ch->Echo("&RPlease wait until the ship.hppas finished its current maneuver.\r\n");
       return;
     }
 
   if ( ship->Thrusters.Speed.Current < 1 )
     {
-      SendToCharacter("&RYou need to speed up a little first!\r\n",ch);
+      ch->Echo("&RYou need to speed up a little first!\r\n");
       return;
     }
+
   if ( ship->Thrusters.Speed.Current > 120 )
     {
-      SendToCharacter("&RYou need to slow down first!\r\n",ch);
+      ch->Echo("&RYou need to slow down first!\r\n");
       return;
     }
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter("&RDock where?\r\n",ch);
+      ch->Echo("&RDock where?\r\n");
       return;
     }
 
@@ -121,42 +127,44 @@ void do_dock(Character *ch, char *argument)
 
   if (  eShip == NULL )
     {
-      SendToCharacter("&RThat ship isn't here!\r\n",ch);
+      ch->Echo("&RThat ship isn't here!\r\n");
       return;
     }
+
   if (  eShip == ship )
     {
-      SendToCharacter("&RYou can't dock with your own ship!\r\n",ch);
+      ch->Echo("&RYou can't dock with your own ship!\r\n");
       return;
     }
+  
   if( ship->Class > eShip->Class )
     {
-      SendToCharacter("&RYou can not dock with a ship smaller than yours. Have them dock to you.\r\n",ch);
+      ch->Echo("&RYou can not dock with a ship smaller than yours. Have them dock to you.\r\n");
       return;
     }
 
   if (!CanDock(eShip))
     {
-      SendToCharacter("&RYou can not seem to find an open docking port.\r\n",ch);
+      ch->Echo("&RYou can not seem to find an open docking port.\r\n");
       return;
     }
 
 
   if ( eShip->Thrusters.Speed.Current >0 )
     {
-      SendToCharacter("&RThey need to be at a dead halt for the docking maneuver to begin.\r\n",ch);
+      ch->Echo("&RThey need to be at a dead halt for the docking maneuver to begin.\r\n");
       return;
     }
 
   if ( IsShipAutoflying(eShip)  )
     {
-      SendToCharacter("&RThe other ship needs to turn their autopilot off.\r\n",ch);
+      ch->Echo("&RThe other ship needs to turn their autopilot off.\r\n");
       return;
     }
 
   if ( GetShipDistanceToShip(ship, eShip) > 100 )
     {
-      SendToCharacter("&RYou aren't close enough to dock. Get a little closer first then try again.\r\n",ch);
+      ch->Echo("&RYou aren't close enough to dock. Get a little closer first then try again.\r\n");
       return;
     }
 
@@ -174,27 +182,33 @@ void do_dock(Character *ch, char *argument)
 
   if ( GetRandomPercent() > the_chance )
     {
-      SendToCharacter("&RYou can't figure out which lever to use.\r\n",ch);
+      ch->Echo("&RYou can't figure out which lever to use.\r\n");
+
       if ( ship->Class == FIGHTER_SHIP )
         {
           LearnFromFailure( ch, gsn_starfighters );
           LearnFromFailure( ch, gsn_shipdocking);
 	}
+
       if ( ship->Class == MIDSIZE_SHIP )
         {
           LearnFromFailure( ch, gsn_midships );
           LearnFromFailure( ch, gsn_shipdocking);
         }
+
       if ( ship->Class == CAPITAL_SHIP )
         {
           LearnFromFailure( ch, gsn_capitalships );
           LearnFromFailure( ch, gsn_shipdocking);
         }
+
       return;
     }
+  
   EchoToShip( AT_YELLOW , ship , "The ship slowly begins its docking maneuvers.");
   EchoToShip( AT_YELLOW , eShip , "The ship slowly begins its docking maneuvers.");
   ship->Docked = eShip;
   ship->Docking= SHIP_DOCK;
   ship->Ch = ch;
 }
+

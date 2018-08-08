@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "planet.hpp"
+#include "character.hpp"
 
 void do_makeplanet( Character *ch, char *argument )
 {
@@ -7,13 +8,13 @@ void do_makeplanet( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: makeplanet <planet name>\r\n", ch );
+      ch->Echo("Usage: makeplanet <planet name>\r\n");
       return;
     }
 
   if(Planets->FindByName(argument) != nullptr)
     {
-      Echo( ch, "&RThere's already another planet with that name.&d\r\n" );
+      ch->Echo("&RThere's already another planet with that name.&d\r\n" );
       return;
     }
 
@@ -21,3 +22,4 @@ void do_makeplanet( Character *ch, char *argument )
   Planets->Add(planet);
   planet->Name          = CopyString( argument );
 }
+

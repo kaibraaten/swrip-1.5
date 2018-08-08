@@ -12,7 +12,7 @@ void do_board( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Board what?\r\n", ch );
+      ch->Echo( "Board what?\r\n" );
       return;
     }
 
@@ -27,31 +27,31 @@ void do_board( Character *ch, char *argument )
 
       if ( ( toroom = GetRoom( ship->Rooms.Entrance ) ) == NULL )
         {
-          SendToCharacter("That ship.hppas no entrance!\r\n", ch);
+          ch->Echo("That ship.hppas no entrance!\r\n");
           return;
         }
 
       if ( !ship->HatchOpen )
         {
-          SendToCharacter( "&RThe hatch is closed!\r\n", ch);
+          ch->Echo( "&RThe hatch is closed!\r\n");
 	  return;
         }
 
       if ( ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2 )
         {
-          SendToCharacter("&rThat ship.hppas already started launching!\r\n",ch);
+          ch->Echo("&rThat ship.hppas already started launching!\r\n");
           return;
         }
 
       name = ship->Name;
-
     }
   else if ( ( shuttle = GetShuttleInRoom( ch->InRoom , argument ) ) != NULL )
     {
       name = shuttle->Name;
+
       if ( ( toroom = GetRoom( shuttle->Rooms.Entrance ) ) == NULL )
         {
-          SendToCharacter("That ship.hppas no entrance!\r\n", ch);
+          ch->Echo("That ship has no entrance!\r\n");
           return;
         }
     }
@@ -60,22 +60,16 @@ void do_board( Character *ch, char *argument )
       Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
       return;
     }
-  if ( toroom == NULL )
-    {
-      SendToCharacter ("Error", ch);
-      return;
-    }
 
   if ( toroom->Tunnel > 0 )
     {
-      Character *ctmp;
       int count = 0;
 
-      for ( ctmp = toroom->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
+      for ( const Character *ctmp = toroom->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
         {
           if ( ++count >= toroom->Tunnel )
             {
-              SendToCharacter( "There is no room for you in there.\r\n", ch );
+              ch->Echo( "There is no room for you in there.\r\n" );
               return;
             }
         }
@@ -88,3 +82,4 @@ void do_board( Character *ch, char *argument )
   Act( AT_PLAIN, "$n enters the ship.", ch, NULL, NULL , TO_ROOM );
   do_look( ch , "auto" );
 }
+

@@ -16,13 +16,13 @@ void do_leaveship( Character *ch, char *argument )
     {
       if  ( ship->Class == SHIP_PLATFORM )
         {
-          SendToCharacter( "You can't do that here.\r\n" , ch );
+          ch->Echo("You can't do that here.\r\n" );
           return;
         }
 
       if ( ship->LastDock != ship->Location )
         {
-          SendToCharacter("&rMaybe you should wait until the ship lands.\r\n",ch);
+          ch->Echo("&rMaybe you should wait until the ship lands.\r\n");
           return;
         }
 
@@ -30,19 +30,19 @@ void do_leaveship( Character *ch, char *argument )
 	   && ship->State != SHIP_DOCKED
 	   && !IsShipDisabled( ship ) )
         {
-          SendToCharacter("&rPlease wait till the ship is properly docked.\r\n",ch);
+          ch->Echo("&rPlease wait till the ship is properly docked.\r\n");
           return;
         }
 
       if ( !ship->HatchOpen )
         {
-          SendToCharacter("&RYou need to open the hatch first" , ch );
+          ch->Echo("&RYou need to open the hatch first" );
           return;
         }
 
       if ( ( toroom = GetRoom( ship->Location ) ) == NULL )
 	{
-          SendToCharacter ( "The exit doesn't seem to be working properly.\r\n", ch );
+          ch->Echo("The exit doesn't seem to be working properly.\r\n");
           return;
         }
     }
@@ -50,13 +50,13 @@ void do_leaveship( Character *ch, char *argument )
     {
       if ( !shuttle->InRoom || ( toroom = GetRoom( shuttle->InRoom->Vnum ) ) == NULL )
         {
-          SendToCharacter ( "The ship.hppasn't landed yet. Do you want to kill yourself?\r\n", ch );
+          ch->Echo("The ship.hppasn't landed yet. Do you want to kill yourself?\r\n");
           return;
         }
     }
   else
     {
-      SendToCharacter( "I see no exit here.\r\n" , ch );
+      ch->Echo("I see no exit here.\r\n" );
       return;
     }
 
@@ -67,3 +67,5 @@ void do_leaveship( Character *ch, char *argument )
   Act( AT_PLAIN, "$n steps out of a ship.", ch, NULL, NULL , TO_ROOM );
   do_look( ch , "auto" );
 }
+
+

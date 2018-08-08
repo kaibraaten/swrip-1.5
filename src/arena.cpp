@@ -153,7 +153,7 @@ static void StartGame(void)
 
 	  if (i->InRoom && IsBitSet(i->InRoom->Flags, ROOM_ARENA))
 	    {
-	      SendToCharacter("\r\nThe floor falls out from below, dropping you in the arena.\r\n", i);
+	      i->Echo("\r\nThe floor falls out from below, dropping you in the arena.\r\n");
 	      CharacterFromRoom(i);
 	      CharacterToRoom(i, GetRoom( ARENA_START));
 	      do_look(i,"auto");
@@ -245,12 +245,12 @@ static void FindGameWinner(void)
                   ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
                 }
 
-              i->Gold += arena.ArenaPot/2;
-              Echo(i, "You have been awarded %d credits for winning the arena\r\n",
-			(arena.ArenaPot/2));
+              i->Gold += arena.ArenaPot / 2;
+              i->Echo( "You have been awarded %d credits for winning the arena\r\n",
+                       arena.ArenaPot / 2);
 
               Log->Info( "%s awarded %d credits for winning arena", i->Name,
-			 (arena.ArenaPot/2));
+			 arena.ArenaPot / 2);
 
               AllocateMemory(fame_node, struct HallOfFameElement, 1);
               strncpy(fame_node->Name, i->Name, MAX_INPUT_LENGTH);
@@ -459,7 +459,7 @@ static void FindBetWinners(Character *winner)
 
 	  if ((!IsNpc(wch)) && (GET_BET_AMT(wch) > 0) && (GET_BETTED_ON(wch) == winner))
 	    {
-	      Echo(wch, "You have won %d credits on your bet.\r\n",
+	      wch->Echo("You have won %d credits on your bet.\r\n",
 			(GET_BET_AMT(wch))*2);
 	      wch->Gold += GET_BET_AMT(wch)*2;
 	      GET_BETTED_ON(wch) = NULL;
@@ -489,3 +489,4 @@ static void ResetBets(void)
         }
     }
 }
+

@@ -57,3 +57,4 @@ bool spec_guardian( Character *ch )
 
   return false;
 }
+

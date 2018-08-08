@@ -76,3 +76,4 @@ CmdFun *GetSkillFunction( const char *name )
 
   return fun_handle;
 }
+

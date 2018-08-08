@@ -5,24 +5,24 @@ void do_compare( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Object *obj1;
-  Object *obj2;
-  int value1;
-  int value2;
-  char *msg;
+  Object *obj1 = nullptr;
+  Object *obj2 = nullptr;
+  int value1 = 0;
+  int value2 = 0;
+  const char *msg = nullptr;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Compare what to what?\r\n", ch );
+      ch->Echo( "Compare what to what?\r\n" );
       return;
     }
 
   if ( ( obj1 = GetCarriedObject( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "You do not have that item.\r\n", ch );
+      ch->Echo( "You do not have that item.\r\n" );
       return;
     }
 
@@ -39,7 +39,7 @@ void do_compare( Character *ch, char *argument )
 
       if ( !obj2 )
         {
-          SendToCharacter( "You aren't wearing anything comparable.\r\n", ch );
+          ch->Echo( "You aren't wearing anything comparable.\r\n" );
           return;
         }
     }
@@ -47,18 +47,14 @@ void do_compare( Character *ch, char *argument )
     {
       if ( ( obj2 = GetCarriedObject( ch, arg2 ) ) == NULL )
         {
-          SendToCharacter( "You do not have that item.\r\n", ch );
+          ch->Echo( "You do not have that item.\r\n" );
           return;
         }
     }
 
-  msg           = NULL;
-  value1        = 0;
-  value2        = 0;
-
   if ( obj1 == obj2 )
     {
-      msg = "You compare $p to itself.  It looks about the same.";
+      msg = "You compare $p to itself. It looks about the same.";
     }
   else if ( obj1->ItemType != obj2->ItemType )
     {
@@ -94,3 +90,4 @@ void do_compare( Character *ch, char *argument )
 
   Act( AT_PLAIN, msg, ch, obj1, obj2, TO_CHAR );
 }
+

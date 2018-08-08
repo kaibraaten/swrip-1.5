@@ -12,7 +12,7 @@ void do_mine( Character *ch, char *argument )
 
   if ( ch->PCData->Learned[gsn_mine] <= 0 )
     {
-      Echo( ch, "You have no idea how to do that.\r\n" );
+      ch->Echo("You have no idea how to do that.\r\n" );
       return;
     }
 
@@ -20,7 +20,7 @@ void do_mine( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "And what will you mine the room with?\r\n", ch );
+      ch->Echo("And what will you mine the room with?\r\n");
       return;
     }
 
@@ -39,7 +39,7 @@ void do_mine( Character *ch, char *argument )
 
   if ( !obj )
     {
-      SendToCharacter( "You don't see on here.\r\n", ch );
+      ch->Echo("You don't see on here.\r\n");
       return;
     }
 
@@ -61,17 +61,17 @@ void do_mine( Character *ch, char *argument )
     {
     case SECT_CITY:
     case SECT_INSIDE:
-      SendToCharacter( "The floor is too hard to dig through.\r\n", ch );
+      ch->Echo("The floor is too hard to dig through.\r\n");
       return;
 
     case SECT_WATER_SWIM:
     case SECT_WATER_NOSWIM:
     case SECT_UNDERWATER:
-      SendToCharacter( "You cannot bury a mine in the water.\r\n", ch );
+      ch->Echo("You cannot bury a mine in the water.\r\n");
       return;
 
     case SECT_AIR:
-      SendToCharacter( "What?  Bury a mine in the air?!\r\n", ch );
+      ch->Echo("What?  Bury a mine in the air?!\r\n");
       return;
 
     default:
@@ -81,7 +81,7 @@ void do_mine( Character *ch, char *argument )
   if ( obj->Weight > (umax(5, (GetCarryCapacityWeight(ch) / 10)))
        &&  !shovel )
     {
-      SendToCharacter( "You'd need a shovel to bury something that big.\r\n", ch );
+      ch->Echo("You'd need a shovel to bury something that big.\r\n");
       return;
     }
 
@@ -89,7 +89,7 @@ void do_mine( Character *ch, char *argument )
   move = urange( 2, move, 1000 );
   if ( move > ch->Move )
     {
-      SendToCharacter( "You don't have the energy to bury something of that size.\r\n", ch );
+      ch->Echo("You don't have the energy to bury something of that size.\r\n");
       return;
     }
   ch->Move -= move;
@@ -100,8 +100,9 @@ void do_mine( Character *ch, char *argument )
   FreeMemory( obj->ArmedBy );
   obj->ArmedBy = CopyString ( ch->Name );
 
-  Echo( ch, "You arm and bury %s.\r\n", obj->ShortDescr );
+  ch->Echo("You arm and bury %s.\r\n", obj->ShortDescr );
   Act( AT_PLAIN, "$n arms and buries $p.", ch, obj, NULL, TO_ROOM );
 
   LearnFromSuccess( ch, gsn_mine );
 }
+

@@ -15,7 +15,7 @@ void do_disguise( Character *ch, char *argument )
 
   if ( IsBitSet( ch->PCData->Flags, PCFLAG_NOTITLE ))
     {
-      SendToCharacter( "You try but the Force resists you.\r\n", ch );
+      ch->Echo( "You try but the Force resists you.\r\n" );
       return;
     }
 
@@ -26,7 +26,7 @@ void do_disguise( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Change your title to what?\r\n", ch );
+      ch->Echo( "Change your title to what?\r\n" );
       return;
     }
 
@@ -34,7 +34,7 @@ void do_disguise( Character *ch, char *argument )
 
   if ( GetRandomPercent() > the_chance )
     {
-      SendToCharacter( "You try to disguise yourself but fail.\r\n", ch );
+      ch->Echo( "You try to disguise yourself but fail.\r\n" );
       return;
     }
 
@@ -44,5 +44,6 @@ void do_disguise( Character *ch, char *argument )
   SmashTilde( argument );
   SetCharacterTitle( ch, argument );
   LearnFromSuccess( ch, gsn );
-  SendToCharacter( "Ok.\r\n", ch );
+  ch->Echo( "Ok.\r\n" );
 }
+

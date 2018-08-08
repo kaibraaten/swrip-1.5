@@ -11,7 +11,7 @@ void do_transship(Character *ch, char *argument)
 
   if ( IsNpc( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -22,7 +22,7 @@ void do_transship(Character *ch, char *argument)
 
   if ( !ship )
     {
-      SendToCharacter( "No such ship.\r\n", ch );
+      ch->Echo("No such ship.\r\n");
       return;
     }
 
@@ -30,7 +30,7 @@ void do_transship(Character *ch, char *argument)
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "Usage: TransferShip <ship> <vnum>\r\n", ch );
+      ch->Echo("Usage: TransferShip <ship> <vnum>\r\n");
       return;
     }
 
@@ -41,7 +41,7 @@ void do_transship(Character *ch, char *argument)
 
   if ( ship->Class == SHIP_PLATFORM && ship->Type != MOB_SHIP )
     {
-      SendToCharacter( "Only nonmob midship/starfighters", ch );
+      ch->Echo("Only nonmob midship/starfighters");
       return;
     }
 
@@ -59,5 +59,6 @@ void do_transship(Character *ch, char *argument)
     }
 
   Ships->Save(ship);
-  SendToCharacter( "Ship Transfered.\r\n", ch );
+  ch->Echo("Ship Transfered.\r\n");
 }
+

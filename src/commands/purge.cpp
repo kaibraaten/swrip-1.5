@@ -34,7 +34,7 @@ void do_purge( Character *ch, char *argument )
         }
 
       Act( AT_IMMORT, "$n purges the room!", ch, NULL, NULL, TO_ROOM);
-      SendToCharacter( "Ok.\r\n", ch );
+      ch->Echo("Ok.\r\n");
       return;
     }
 
@@ -50,7 +50,7 @@ void do_purge( Character *ch, char *argument )
       if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL
            &&   ( obj = GetObjectAnywhere( ch, arg ) ) == NULL )  /* no get_obj_room */
         {
-          SendToCharacter( "They aren't here.\r\n", ch );
+          ch->Echo("They aren't here.\r\n");
           return;
         }
     }
@@ -68,22 +68,23 @@ void do_purge( Character *ch, char *argument )
 
   if ( !IsNpc(victim) )
     {
-      SendToCharacter( "Not on PC's.\r\n", ch );
+      ch->Echo("Not on PC's.\r\n");
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "You cannot purge yourself!\r\n", ch );
+      ch->Echo("You cannot purge yourself!\r\n");
       return;
     }
 
   if (IsBitSet(victim->Flags, ACT_POLYMORPHED))
     {
-      SendToCharacter("You cannot purge a polymorphed player.\r\n", ch);
+      ch->Echo("You cannot purge a polymorphed player.\r\n");
       return;
     }
 
   Act( AT_IMMORT, "$n purges $N.", ch, NULL, victim, TO_NOTVICT );
   ExtractCharacter( victim, true );
 }
+

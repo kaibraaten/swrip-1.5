@@ -18,11 +18,11 @@ void do_aset( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "Usage: aset <area filename> <field> <value>\r\n", ch );
-      SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( "  low_room hi_room low_obj hi_obj low_mob hi_mob\r\n", ch );
-      SendToCharacter( "  name filename low_soft hi_soft low_hard hi_hard\r\n", ch );
-      SendToCharacter( "  author resetmsg resetfreq flags planet\r\n", ch );
+      ch->Echo( "Usage: aset <area filename> <field> <value>\r\n" );
+      ch->Echo( "\r\nField being one of:\r\n" );
+      ch->Echo( "  low_room hi_room low_obj hi_obj low_mob hi_mob\r\n" );
+      ch->Echo( "  name filename low_soft hi_soft low_hard hi_hard\r\n" );
+      ch->Echo( "  author resetmsg resetfreq flags planet\r\n" );
       return;
     }
 
@@ -51,7 +51,7 @@ void do_aset( Character *ch, char *argument )
 
   if ( !found )
     {
-      SendToCharacter( "Area not found.\r\n", ch );
+      ch->Echo( "Area not found.\r\n" );
       return;
     }
 
@@ -59,7 +59,7 @@ void do_aset( Character *ch, char *argument )
     {
       FreeMemory( tarea->Name );
       tarea->Name = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -88,63 +88,63 @@ void do_aset( Character *ch, char *argument )
       tarea->Filename = CopyString( argument );
       WriteAreaList();
       FoldArea( tarea, tarea->Filename, true );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
   if ( !StrCmp( arg2, "low_economy" ) )
     {
       tarea->LowEconomy = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
   if ( !StrCmp( arg2, "high_economy" ) )
     {
       tarea->HighEconomy = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
   if ( !StrCmp( arg2, "low_room" ) )
     {
       tarea->VnumRanges.Room.First = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
   if ( !StrCmp( arg2, "hi_room" ) )
     {
       tarea->VnumRanges.Room.Last = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
   if ( !StrCmp( arg2, "low_obj" ) )
     {
       tarea->VnumRanges.Object.First = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
   if ( !StrCmp( arg2, "hi_obj" ) )
     {
       tarea->VnumRanges.Object.Last = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
   if ( !StrCmp( arg2, "low_mob" ) )
     {
       tarea->VnumRanges.Mob.First = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
   if ( !StrCmp( arg2, "hi_mob" ) )
     {
       tarea->VnumRanges.Mob.Last = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -152,12 +152,12 @@ void do_aset( Character *ch, char *argument )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
-          SendToCharacter( "That is not an acceptable value.\r\n", ch);
+          ch->Echo( "That is not an acceptable value.\r\n" );
           return;
         }
 
       tarea->LevelRanges.Soft.Low = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -165,12 +165,12 @@ void do_aset( Character *ch, char *argument )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
-          SendToCharacter( "That is not an acceptable value.\r\n", ch);
+          ch->Echo( "That is not an acceptable value.\r\n" );
 	  return;
         }
 
       tarea->LevelRanges.Soft.High = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -178,12 +178,12 @@ void do_aset( Character *ch, char *argument )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
-          SendToCharacter( "That is not an acceptable value.\r\n", ch);
+          ch->Echo( "That is not an acceptable value.\r\n" );
           return;
         }
 
       tarea->LevelRanges.Hard.Low = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -191,12 +191,12 @@ void do_aset( Character *ch, char *argument )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
-          SendToCharacter( "That is not an acceptable value.\r\n", ch);
+          ch->Echo( "That is not an acceptable value.\r\n" );
           return;
         }
 
       tarea->LevelRanges.Hard.High = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -204,7 +204,7 @@ void do_aset( Character *ch, char *argument )
     {
       FreeMemory( tarea->Author );
       tarea->Author = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -212,16 +212,18 @@ void do_aset( Character *ch, char *argument )
     {
       if ( tarea->ResetMessage )
         FreeMemory( tarea->ResetMessage );
+
       if ( StrCmp( argument, "clear" ) )
         tarea->ResetMessage = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
+
+      ch->Echo( "Done.\r\n" );
       return;
     } /* Rennard */
 
   if ( !StrCmp( arg2, "resetfreq" ) )
     {
       tarea->ResetFrequency = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -229,7 +231,7 @@ void do_aset( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "Usage: aset <filename> flags <flag> [flag]...\r\n", ch );
+          ch->Echo( "Usage: aset <filename> flags <flag> [flag]...\r\n" );
           return;
         }
       
@@ -239,7 +241,9 @@ void do_aset( Character *ch, char *argument )
           value = GetAreaFlag( arg3 );
 	  
           if ( value < 0 || static_cast<size_t>(value) > MAX_BIT )
-            Echo( ch, "Unknown flag: %s\r\n", arg3 );
+            {
+              ch->Echo( "Unknown flag: %s\r\n", arg3 );
+            }
           else
             {
               if ( IsBitSet( tarea->Flags, 1 << value ) )
@@ -248,8 +252,10 @@ void do_aset( Character *ch, char *argument )
                 SetBit( tarea->Flags, 1 << value );
             }
         }
+
       return;
     }
 
   do_aset( ch, "" );
 }
+

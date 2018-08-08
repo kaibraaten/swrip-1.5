@@ -12,25 +12,25 @@ void do_gouge( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
+      ch->Echo( "You can't concentrate enough for that.\r\n" );
       return;
     }
 
   if ( !IsNpc(ch) && !ch->PCData->Learned[gsn_gouge] )
     {
-      SendToCharacter("You do not yet know of this skill.\r\n", ch );
+      ch->Echo("You do not yet know of this skill.\r\n" );
       return;
     }
 
   if ( ch->Mount )
     {
-      SendToCharacter( "You can't get close enough while mounted.\r\n", ch );
+      ch->Echo( "You can't get close enough while mounted.\r\n" );
       return;
     }
 
   if ( ( victim = GetFightingOpponent( ch ) ) == NULL )
     {
-      SendToCharacter( "You aren't fighting anyone.\r\n", ch );
+      ch->Echo( "You aren't fighting anyone.\r\n" );
       return;
     }
 
@@ -77,3 +77,4 @@ void do_gouge( Character *ch, char *argument )
       LearnFromFailure( ch, gsn_gouge );
     }
 }
+

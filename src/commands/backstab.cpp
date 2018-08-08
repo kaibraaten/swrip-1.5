@@ -6,13 +6,13 @@
 void do_backstab( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  Object *obj;
-  int percent;
+  Character *victim = nullptr;
+  Object *obj = nullptr;
+  int percent = 0;
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      SendToCharacter( "You can't do that right now.\r\n", ch );
+      ch->Echo( "You can't do that right now.\r\n" );
       return;
     }
 
@@ -20,25 +20,25 @@ void do_backstab( Character *ch, char *argument )
 
   if ( ch->Mount )
     {
-      SendToCharacter( "You can't get close enough while mounted.\r\n", ch );
+      ch->Echo( "You can't get close enough while mounted.\r\n" );
       return;
     }
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Backstab whom?\r\n", ch );
+      ch->Echo( "Backstab whom?\r\n" );
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "How can you sneak up on yourself?\r\n", ch );
+      ch->Echo( "How can you sneak up on yourself?\r\n" );
       return;
     }
 
@@ -50,13 +50,13 @@ void do_backstab( Character *ch, char *argument )
        ||   ( obj->Value[OVAL_WEAPON_TYPE] != WEAPON_VIBRO_BLADE
 	      && obj->Value[OVAL_WEAPON_TYPE] != WEAPON_FORCE_PIKE ) )
     {
-      SendToCharacter( "You need to wield a stabbing weapon.\r\n", ch );
+      ch->Echo( "You need to wield a stabbing weapon.\r\n" );
       return;
     }
 
   if ( victim->Fighting )
     {
-      SendToCharacter( "You can't backstab someone who is in combat.\r\n", ch );
+      ch->Echo( "You can't backstab someone who is in combat.\r\n" );
       return;
     }
 
@@ -89,3 +89,4 @@ void do_backstab( Character *ch, char *argument )
       global_retcode = InflictDamage( ch, victim, 0, gsn_backstab );
     }
 }
+

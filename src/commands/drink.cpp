@@ -11,6 +11,7 @@ void do_drink( Character *ch, char *argument )
   int liquid = 0;
 
   argument = OneArgument( argument, arg );
+
   /* munch optional words */
   if ( !StrCmp( arg, "from" ) && !IsNullOrEmpty( argument ) )
     argument = OneArgument( argument, arg );
@@ -24,17 +25,14 @@ void do_drink( Character *ch, char *argument )
 
       if ( !obj )
         {
-          SendToCharacter( "Drink what?\r\n", ch );
+          ch->Echo( "Drink what?\r\n" );
           return;
         }
     }
-  else
+  else if ( ( obj = GetObjectHere( ch, arg ) ) == NULL )
     {
-      if ( ( obj = GetObjectHere( ch, arg ) ) == NULL )
-        {
-          SendToCharacter( "You can't find it.\r\n", ch );
-          return;
-        }
+      ch->Echo( "You can't find it.\r\n" );
+      return;
     }
 
   if ( obj->Count > 1 && obj->ItemType != ITEM_FOUNTAIN )
@@ -42,7 +40,7 @@ void do_drink( Character *ch, char *argument )
 
   if ( !IsNpc(ch) && ch->PCData->Condition[COND_DRUNK] > 40 )
     {
-      SendToCharacter( "You fail to reach your mouth.  *Hic*\r\n", ch );
+      ch->Echo( "You fail to reach your mouth.  *Hic*\r\n" );
       return;
     }
 
@@ -65,14 +63,14 @@ void do_drink( Character *ch, char *argument )
       if ( obj->CarriedBy == ch )
         do_quaff( ch, obj->Name );
       else
-        SendToCharacter( "You're not carrying that.\r\n", ch );
+        ch->Echo( "You're not carrying that.\r\n" );
       break;
 
     case ITEM_FOUNTAIN:
       if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           Act( AT_ACTION, "$n drinks from the fountain.", ch, NULL, NULL, TO_ROOM );
-	  SendToCharacter( "You take a long thirst quenching drink.\r\n", ch );
+	  ch->Echo( "You take a long thirst quenching drink.\r\n" );
         }
 
       if ( !IsNpc(ch) )
@@ -82,7 +80,7 @@ void do_drink( Character *ch, char *argument )
     case ITEM_DRINK_CON:
       if ( obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] <= 0 )
         {
-          SendToCharacter( "It is already empty.\r\n", ch );
+          ch->Echo( "It is already empty.\r\n" );
           return;
         }
 
@@ -110,25 +108,25 @@ void do_drink( Character *ch, char *argument )
       if ( !IsNpc(ch) )
         {
           if ( ch->PCData->Condition[COND_DRUNK]  > 24 )
-            SendToCharacter( "You feel quite sloshed.\r\n", ch );
+            ch->Echo( "You feel quite sloshed.\r\n" );
           else if ( ch->PCData->Condition[COND_DRUNK]  > 18 )
-	    SendToCharacter( "You feel very drunk.\r\n", ch );
+	    ch->Echo( "You feel very drunk.\r\n" );
 	  else if ( ch->PCData->Condition[COND_DRUNK]  > 12 )
-	    SendToCharacter( "You feel drunk.\r\n", ch );
+	    ch->Echo( "You feel drunk.\r\n" );
 	  else if ( ch->PCData->Condition[COND_DRUNK]  > 8 )
-	    SendToCharacter( "You feel a little drunk.\r\n", ch );
+	    ch->Echo( "You feel a little drunk.\r\n" );
 	  else if ( ch->PCData->Condition[COND_DRUNK]  > 5 )
-	    SendToCharacter( "You feel light headed.\r\n", ch );
+	    ch->Echo( "You feel light headed.\r\n" );
 
           if ( ch->PCData->Condition[COND_FULL]   > 40 )
-            SendToCharacter( "You are full.\r\n", ch );
+            ch->Echo( "You are full.\r\n" );
 
           if ( ch->PCData->Condition[COND_THIRST] > 40 )
-            SendToCharacter( "You feel bloated.\r\n", ch );
+            ch->Echo( "You feel bloated.\r\n" );
           else if ( ch->PCData->Condition[COND_THIRST] > 36 )
-	    SendToCharacter( "Your stomach is sloshing around.\r\n", ch );
+	    ch->Echo( "Your stomach is sloshing around.\r\n" );
 	  else if ( ch->PCData->Condition[COND_THIRST] > 30 )
-	    SendToCharacter( "You do not feel thirsty.\r\n", ch );
+	    ch->Echo( "You do not feel thirsty.\r\n" );
         }
 
       if ( obj->Value[OVAL_DRINK_CON_POISON_STRENGTH] > 0 )
@@ -153,4 +151,5 @@ void do_drink( Character *ch, char *argument )
 
   SetWaitState(ch, PULSE_PER_SECOND );
 }
+
 

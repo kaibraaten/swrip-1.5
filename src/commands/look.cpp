@@ -83,8 +83,8 @@ void do_look( Character *ch, char *argument )
 
   if ( pdesc )
     {
-      SendToCharacter( "\r\n", ch );
-      SendToCharacter( pdesc, ch );
+      ch->Echo("\r\n");
+      ch->Echo(pdesc);
       return;
     }
 
@@ -99,7 +99,7 @@ void do_look( Character *ch, char *argument )
   else if ( door != DIR_INVALID )
     {
       Log->Bug("%s:%s:%d: door != DIR_INVALID", __FUNCTION__, __FILE__, __LINE__);
-      SendToCharacter( "Nothing special there.\r\n", ch );
+      ch->Echo("Nothing special there.\r\n");
       return;
     }
 
@@ -121,7 +121,7 @@ void do_look( Character *ch, char *argument )
             {
               if ( (cnt += obj->Count) < number )
                 continue;
-              SendToCharacter( pdesc, ch );
+              ch->Echo(pdesc);
               if ( doexaprog ) ObjProgExamineTrigger( ch, obj );
               return;
             }
@@ -130,7 +130,7 @@ void do_look( Character *ch, char *argument )
             {
               if ( (cnt += obj->Count) < number )
 		continue;
-              SendToCharacter( pdesc, ch );
+              ch->Echo(pdesc);
               if ( doexaprog ) ObjProgExamineTrigger( ch, obj );
               return;
             }
@@ -143,9 +143,9 @@ void do_look( Character *ch, char *argument )
               if ( !pdesc )
                 pdesc = GetExtraDescription( obj->Name, obj->FirstExtraDescription );
               if ( !pdesc )
-                SendToCharacter( "You see nothing special.\r\n", ch );
+                ch->Echo("You see nothing special.\r\n");
               else
-                SendToCharacter( pdesc, ch );
+                ch->Echo(pdesc);
 
               if ( doexaprog )
 		{
@@ -166,7 +166,7 @@ void do_look( Character *ch, char *argument )
               if ( (cnt += obj->Count) < number )
                 continue;
 
-              SendToCharacter( pdesc, ch );
+              ch->Echo(pdesc);
 
               if ( doexaprog )
 		ObjProgExamineTrigger( ch, obj );
@@ -178,7 +178,7 @@ void do_look( Character *ch, char *argument )
             {
               if ( (cnt += obj->Count) < number )
                 continue;
-              SendToCharacter( pdesc, ch );
+              ch->Echo(pdesc);
 
               if ( doexaprog )
 		ObjProgExamineTrigger( ch, obj );
@@ -194,16 +194,16 @@ void do_look( Character *ch, char *argument )
               if ( !pdesc )
                 pdesc = GetExtraDescription( obj->Name, obj->FirstExtraDescription );
               if ( !pdesc )
-                SendToCharacter( "You see nothing special.\r\n", ch );
+                ch->Echo("You see nothing special.\r\n");
               else
-                SendToCharacter( pdesc, ch );
+                ch->Echo(pdesc);
               if ( doexaprog ) ObjProgExamineTrigger( ch, obj );
               return;
             }
         }
     }
 
-  SendToCharacter( "You do not see that here.\r\n", ch );
+  ch->Echo("You do not see that here.\r\n");
 }
 
 static void show_char_to_char_0( Character *victim, Character *ch )
@@ -253,7 +253,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
   if ( victim->Position == victim->DefaultPosition && !IsNullOrEmpty( victim->LongDescr ) )
     {
       strcat( buf, victim->LongDescr );
-      SendToCharacter( buf, ch );
+      ch->Echo(buf);
       show_visible_affects_to_char( victim, ch );
       return;
     }
@@ -468,7 +468,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
 
   strcat( buf, "\r\n" );
   buf[0] = CharToUppercase(buf[0]);
-  SendToCharacter( buf, ch );
+  ch->Echo(buf);
   show_visible_affects_to_char( victim, ch );
 }
 
@@ -484,11 +484,11 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       Act( AT_ACTION, "$n looks at $N.",  ch, NULL, victim, TO_NOTVICT );
     }
 
-  Echo( ch, "%s is a %s %s\r\n", victim->Name, get_sex( victim ), NpcRace[victim->Race] );
+  ch->Echo("%s is a %s %s\r\n", victim->Name, get_sex( victim ), NpcRace[victim->Race] );
 
   if ( !IsNullOrEmpty( victim->Description ) )
     {
-      SendToCharacter( victim->Description, ch );
+      ch->Echo(victim->Description);
     }
   else
     {
@@ -511,21 +511,21 @@ static void show_char_to_char_1( Character *victim, Character *ch )
             {
               if ( !found )
                 {
-                  SendToCharacter( "\r\n", ch );
+                  ch->Echo("\r\n");
 		  Act( AT_PLAIN, "$N is using:", ch, NULL, victim, TO_CHAR );
                   found = true;
                 }
-              SendToCharacter( WhereName[iWear], ch );
-              SendToCharacter( FormatObjectToCharacter( obj, ch, true ), ch );
-              SendToCharacter( "\r\n", ch );
+              ch->Echo(WhereName[iWear]);
+              ch->Echo(FormatObjectToCharacter( obj, ch, true ));
+              ch->Echo("\r\n");
             }
         }
     }
   else
     {
-      SendToCharacter( WhereName[WEAR_OVER], ch );
-      SendToCharacter( FormatObjectToCharacter( obj, ch, true ), ch );
-      SendToCharacter( "\r\n", ch );
+      ch->Echo(WhereName[WEAR_OVER]);
+      ch->Echo(FormatObjectToCharacter( obj, ch, true ));
+      ch->Echo("\r\n");
     }
 
   if ( IsNpc(ch) || victim == ch )
@@ -533,7 +533,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
 
   if ( GetRandomPercent() < ch->PCData->Learned[gsn_peek] )
     {
-      SendToCharacter( "\r\nYou peek at the inventory:\r\n", ch );
+      ch->Echo("\r\nYou peek at the inventory:\r\n");
       ShowObjectListToCharacter( victim->FirstCarrying, ch, true, true );
       LearnFromSuccess( ch, gsn_peek );
     }
@@ -549,13 +549,13 @@ static void show_ships_to_char( Ship *ship, Character *ch )
 
   for ( rship = ship; rship; rship = nship )
     {
-      Echo( ch , "&C%-35s     ", rship->Name );
+      ch ->Echo("&C%-35s     ", rship->Name );
       if ( ( nship = rship->NextInRoom ) !=NULL )
         {
-          Echo( ch , "%-35s", nship->Name );
+          ch ->Echo("%-35s", nship->Name );
           nship = nship->NextInRoom;
         }
-      Echo( ch, "\r\n&w");
+      ch->Echo("\r\n&w");
     }
 }
 
@@ -575,13 +575,13 @@ void show_char_to_char( Character *list, Character *ch )
       else if ( rch->Race == RACE_DEFEL )
         {
           SetCharacterColor( AT_BLOOD, ch );
-          SendToCharacter( "You see a pair of red eyes staring back at you.\r\n", ch );
+          ch->Echo("You see a pair of red eyes staring back at you.\r\n");
         }
       else if ( IsRoomDark( ch->InRoom )
                 &&        IsAffectedBy(rch, AFF_INFRARED ) )
         {
           SetCharacterColor( AT_BLOOD, ch );
-          SendToCharacter( "The red form of a living creature is here.\r\n", ch );
+          ch->Echo("The red form of a living creature is here.\r\n");
         }
     }
 }
@@ -593,7 +593,7 @@ static void show_visible_affects_to_char( Character *victim, Character *ch )
   if ( IsAffectedBy(victim, AFF_CHARM)       )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      Echo( ch, "%s looks ahead free of expression.\r\n",
+      ch->Echo("%s looks ahead free of expression.\r\n",
                  IsNpc( victim ) ? Capitalize(victim->ShortDescr) : (victim->Name) );
     }
   if ( !IsNpc(victim) && !victim->Desc
@@ -627,7 +627,7 @@ static void look_under( Character *ch, const char *what, bool doexaprog )
 
   if ( IsNullOrEmpty( what ) )
     {
-      SendToCharacter( "Look beneath what?\r\n", ch );
+      ch->Echo("Look beneath what?\r\n");
       return;
     }
 
@@ -635,13 +635,13 @@ static void look_under( Character *ch, const char *what, bool doexaprog )
 
   if ( !obj )
     {
-      SendToCharacter( "You do not see that here.\r\n", ch );
+      ch->Echo("You do not see that here.\r\n");
       return;
     }
 
   if ( ch->CarryWeight + obj->Weight > GetCarryCapacityWeight( ch ) )
     {
-      SendToCharacter( "It's too heavy for you to look under.\r\n", ch );
+      ch->Echo("It's too heavy for you to look under.\r\n");
       return;
     }
 
@@ -657,7 +657,7 @@ static void look_under( Character *ch, const char *what, bool doexaprog )
     }
   else
     {
-      SendToCharacter( "Nothing.\r\n", ch );
+      ch->Echo("Nothing.\r\n");
     }
 
   if ( doexaprog )
@@ -675,21 +675,21 @@ static bool requirements_are_met( Character *ch )
 
   if ( ch->Position < POS_SLEEPING )
     {
-      Echo( ch, "You can't see anything but stars!\r\n" );
+      ch->Echo("You can't see anything but stars!\r\n" );
 
       return false;
     }
 
   if ( ch->Position == POS_SLEEPING )
     {
-      Echo( ch, "You can't see anything, you're sleeping!\r\n" );
+      ch->Echo("You can't see anything, you're sleeping!\r\n" );
 
       return false;
     }
 
   if ( IsBlind( ch ) )
     {
-      Echo( ch, "You can't see a thing!\r\n" );
+      ch->Echo("You can't see a thing!\r\n" );
       return false;
     }
 
@@ -699,7 +699,7 @@ static bool requirements_are_met( Character *ch )
        && IsRoomDark( ch->InRoom ) )
     {
       SetCharacterColor( AT_DGREY, ch );
-      SendToCharacter( "It is pitch black...\r\n", ch );
+      ch->Echo("It is pitch black...\r\n");
       show_char_to_char( ch->InRoom->FirstPerson, ch );
 
       return false;
@@ -716,7 +716,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 
   if ( IsNullOrEmpty( what ) )
     {
-      SendToCharacter( "Look in what?\r\n", ch );
+      ch->Echo("Look in what?\r\n");
       return;
     }
 
@@ -724,20 +724,20 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 
   if ( !obj )
     {
-      SendToCharacter( "You do not see that here.\r\n", ch );
+      ch->Echo("You do not see that here.\r\n");
       return;
     }
 
   switch ( obj->ItemType )
     {
     default:
-      SendToCharacter( "That is not a container.\r\n", ch );
+      ch->Echo("That is not a container.\r\n");
       break;
 
     case ITEM_DRINK_CON:
       if ( obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] <= 0 )
 	{
-	  SendToCharacter( "It is empty.\r\n", ch );
+   ch->Echo("It is empty.\r\n");
 
 	  if ( doexaprog )
 	    {
@@ -747,7 +747,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 	  break;
 	}
 
-      Echo( ch, "It's %s full of a %s liquid.\r\n",
+      ch->Echo("It's %s full of a %s liquid.\r\n",
 	    obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < obj->Value[OVAL_DRINK_CON_CAPACITY] / 4
 	    ? "less than" :
 	    obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 3 * obj->Value[OVAL_DRINK_CON_CAPACITY] / 4
@@ -773,7 +773,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 		   && GetTrustLevel(ch) < SysData.LevelToOverridePrivateFlag )
 		{
 		  SetCharacterColor( AT_WHITE, ch );
-		  SendToCharacter( "That room is private buster!\r\n", ch );
+    ch->Echo("That room is private buster!\r\n");
 		  return;
 		}
 
@@ -787,7 +787,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 	    }
 	}
 
-      SendToCharacter( "You see a swirling chaos...\r\n", ch );
+      ch->Echo("You see a swirling chaos...\r\n");
       break;
 
     case ITEM_CONTAINER:
@@ -796,7 +796,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
     case ITEM_DROID_CORPSE:
       if ( IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
 	{
-	  SendToCharacter( "It is closed.\r\n", ch );
+   ch->Echo("It is closed.\r\n");
 	  break;
 	}
 
@@ -825,7 +825,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	  if ( IsBitSet(pexit->Flags, EX_SECRET)
 	       && door != DIR_INVALID )
 	    {
-	      SendToCharacter( "Nothing special there.\r\n", ch );
+       ch->Echo("Nothing special there.\r\n");
 	    }
 	  else
 	    {
@@ -844,11 +844,11 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 
   if ( !IsNullOrEmpty( pexit->Description ) )
     {
-      SendToCharacter( pexit->Description, ch );
+      ch->Echo(pexit->Description);
     }
   else
     {
-      SendToCharacter( "Nothing special there.\r\n", ch );
+      ch->Echo("Nothing special there.\r\n");
     }
 
   /*
@@ -865,7 +865,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	   && GetTrustLevel( ch ) < LEVEL_IMMORTAL )
 	{
 	  SetCharacterColor( AT_MAGIC, ch );
-	  SendToCharacter( "You attempt to scry...\r\n", ch );
+   ch->Echo("You attempt to scry...\r\n");
 
 	  if (!IsNpc(ch) )
 	    {
@@ -873,7 +873,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 
 	      if( GetRandomPercent() > percent )
 		{
-		  SendToCharacter( "You fail.\r\n", ch );
+    ch->Echo("You fail.\r\n");
 		  return;
 		}
 	    }
@@ -883,7 +883,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	   && GetTrustLevel(ch) < SysData.LevelToOverridePrivateFlag )
 	{
 	  SetCharacterColor( AT_WHITE, ch );
-	  SendToCharacter( "That room is private buster!\r\n", ch );
+   ch->Echo("That room is private buster!\r\n");
 	  return;
 	}
 
@@ -920,27 +920,27 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 static void show_no_arg( Character *ch, bool is_auto )
 {
   SetCharacterColor( AT_RMNAME, ch);
-  SendToCharacter( ch->InRoom->Name, ch);
-  SendToCharacter(" ", ch);
+  ch->Echo(ch->InRoom->Name);
+  ch->Echo(" ");
 
   if ( !ch->Desc->Original )
     {
       if ((GetTrustLevel(ch) >= LEVEL_IMMORTAL) && (IsBitSet(ch->PCData->Flags, PCFLAG_ROOM)))
 	{
 	  SetCharacterColor(AT_PURPLE, ch);
-	  Echo(ch, "{%d:%s}", ch->InRoom->Vnum, ch->InRoom->Area->Filename);
+          ch->Echo("{%d:%s}", ch->InRoom->Vnum, ch->InRoom->Area->Filename);
 
 	  SetCharacterColor(AT_CYAN, ch);
-	  Echo( ch, "[%s]", FlagString(ch->InRoom->Flags, RoomFlags ).c_str() );
+          ch->Echo("[%s]", FlagString(ch->InRoom->Flags, RoomFlags ).c_str() );
 	}
     }
 
-  SendToCharacter( "\r\n", ch );
+  ch->Echo("\r\n");
   SetCharacterColor( AT_RMDESC, ch );
 
   if ( !IsNpc(ch) && !IsBitSet(ch->Flags, PLR_BRIEF ) )
     {
-      SendToCharacter( ch->InRoom->Description, ch );
+      ch->Echo(ch->InRoom->Description);
     }
 
   if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_AUTOEXIT) )
@@ -967,7 +967,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 static void LookThroughShipWindow(Character *ch, const Ship *ship)
 {
   SetCharacterColor(  AT_WHITE, ch );
-  Echo( ch , "\r\nThrough the transparisteel windows you see:\r\n" );
+  ch ->Echo("\r\nThrough the transparisteel windows you see:\r\n" );
 
   if ( ship->Location || ship->State == SHIP_LANDED )
     {
@@ -977,7 +977,7 @@ static void LookThroughShipWindow(Character *ch, const Ship *ship)
         {
           Room *original = ch->InRoom;
 
-          Echo( ch, "\r\n" );
+          ch->Echo("\r\n" );
           CharacterFromRoom( ch );
           CharacterToRoom( ch, to_room );
           do_glance( ch, "" );
@@ -986,7 +986,7 @@ static void LookThroughShipWindow(Character *ch, const Ship *ship)
         }
       else
         {
-          Echo( ch, "no room?\r\n" );
+          ch->Echo("no room?\r\n" );
         }
     }
   else if (ship->Spaceobject )
@@ -999,13 +999,13 @@ static void LookThroughShipWindow(Character *ch, const Ship *ship)
                && spaceobject->Name
                && StrCmp(spaceobject->Name,"") )
             {
-              Echo(ch, "%s\r\n", spaceobject->Name);
+              ch->Echo("%s\r\n", spaceobject->Name);
             }
         }
       
       struct UserData data { ch: ch, ship: ship };
       ForEachShip(ShowShipIfInVincinity, &data);
-      Echo(ch,"\r\n");
+      ch->Echo("\r\n");
     }
 }
 
@@ -1019,7 +1019,7 @@ static bool ShowShipIfInVincinity(Ship *target, void *userData)
     {
       if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->Class == SHIP_DEBRIS ? 2 : target->Class ) + 1 ) )
         {
-          Echo(ch, "%s    %.0f %.0f %.0f\r\n",
+          ch->Echo("%s    %.0f %.0f %.0f\r\n",
                target->Name,
                (target->Position.x - ship->Position.x),
                (target->Position.y - ship->Position.y),
@@ -1029,28 +1029,28 @@ static bool ShowShipIfInVincinity(Ship *target, void *userData)
         {
           if ( target->Class == FIGHTER_SHIP )
             {
-              Echo(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
+              ch->Echo("A small metallic mass    %.0f %.0f %.0f\r\n",
                    (target->Position.x - ship->Position.x),
                    (target->Position.y - ship->Position.y),
                    (target->Position.z - ship->Position.z));
             }
           else if ( target->Class == MIDSIZE_SHIP )
             {
-              Echo(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
+              ch->Echo("A goodsize metallic mass    %.0f %.0f %.0f\r\n",
                    (target->Position.x - ship->Position.x),
                    (target->Position.y - ship->Position.y),
                    (target->Position.z - ship->Position.z));
             }
           else if ( target->Class == SHIP_DEBRIS )
             {
-              Echo(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
+              ch->Echo("scattered metallic reflections    %.0f %.0f %.0f\r\n",
                    (target->Position.x - ship->Position.x),
                    (target->Position.y - ship->Position.y),
                    (target->Position.z - ship->Position.z));
             }
           else if ( target->Class >= CAPITAL_SHIP )
             {
-              Echo(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
+              ch->Echo("A huge metallic mass    %.0f %.0f %.0f\r\n",
                    (target->Position.x - ship->Position.x),
                    (target->Position.y - ship->Position.y),
                    (target->Position.z - ship->Position.z));
@@ -1064,3 +1064,5 @@ static bool ShowShipIfInVincinity(Ship *target, void *userData)
 
   return true;
 }
+
+

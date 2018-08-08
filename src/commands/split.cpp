@@ -18,7 +18,7 @@ void do_split( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Split how much?\r\n", ch );
+      ch->Echo("Split how much?\r\n");
       return;
     }
 
@@ -26,19 +26,19 @@ void do_split( Character *ch, char *argument )
 
   if ( amount < 0 )
     {
-      SendToCharacter( "Your group wouldn't like that.\r\n", ch );
+      ch->Echo("Your group wouldn't like that.\r\n");
       return;
     }
 
   if ( amount == 0 )
     {
-      SendToCharacter( "You hand out zero credits, but no one notices.\r\n", ch );
+      ch->Echo("You hand out zero credits, but no one notices.\r\n");
       return;
     }
 
   if ( ch->Gold < amount )
     {
-      SendToCharacter( "You don't have that many credits.\r\n", ch );
+      ch->Echo("You don't have that many credits.\r\n");
       return;
     }
 
@@ -58,7 +58,7 @@ void do_split( Character *ch, char *argument )
 
   if ( members < 2 )
     {
-      SendToCharacter( "Just keep it all.\r\n", ch );
+      ch->Echo("Just keep it all.\r\n");
       return;
     }
 
@@ -67,7 +67,7 @@ void do_split( Character *ch, char *argument )
 
   if ( share == 0 )
     {
-      SendToCharacter( "Don't even bother, cheapskate.\r\n", ch );
+      ch->Echo("Don't even bother, cheapskate.\r\n");
       return;
     }
 
@@ -75,9 +75,8 @@ void do_split( Character *ch, char *argument )
   ch->Gold += share + extra;
 
   SetCharacterColor( AT_GOLD, ch );
-  Echo( ch,
-             "You split %d credits. Your share is %d credits.\r\n",
-             amount, share + extra );
+  ch->Echo("You split %d credits. Your share is %d credits.\r\n",
+           amount, share + extra );
 
   sprintf( buf, "$n splits %d credits. Your share is %d credits.",
            amount, share );
@@ -91,3 +90,4 @@ void do_split( Character *ch, char *argument )
         }
     }
 }
+

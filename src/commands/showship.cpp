@@ -10,13 +10,13 @@ void do_showship( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: showship <ship>\r\n", ch );
+      ch->Echo("Usage: showship <ship>\r\n");
       return;
     }
 
@@ -24,42 +24,42 @@ void do_showship( Character *ch, char *argument )
 
   if ( !ship )
     {
-      SendToCharacter( "No such ship.\r\n", ch );
+      ch->Echo("No such ship.\r\n");
       return;
     }
 
   SetCharacterColor( AT_YELLOW, ch );
-  Echo( ch, "%s %s : %s (%s)\r\n",
+  ch->Echo("%s %s : %s (%s)\r\n",
 	ShipTypes[ship->Type], ShipClasses[ship->Class],
 	ship->Name,
 	ship->PersonalName );
-  Echo( ch, "Home: %s   Description: %s\r\nOwner: %s   Pilot: %s   Copilot: %s\r\n",
+  ch->Echo("Home: %s   Description: %s\r\nOwner: %s   Pilot: %s   Copilot: %s\r\n",
              ship->Home,  ship->Description,
              ship->Owner, ship->Pilot,  ship->CoPilot );
-  Echo( ch, "Current Jump Destination: %s  Jump Point: %s\r\n", (ship->CurrentJump ? ship->CurrentJump->Name : "(null)"), (ship->LastSystem ? ship->LastSystem->Name : "(null)" ));
-  Echo( ch, "Firstroom: %d   Lastroom: %d",
+  ch->Echo("Current Jump Destination: %s  Jump Point: %s\r\n", (ship->CurrentJump ? ship->CurrentJump->Name : "(null)"), (ship->LastSystem ? ship->LastSystem->Name : "(null)" ));
+  ch->Echo("Firstroom: %d   Lastroom: %d",
              ship->Rooms.First,
              ship->Rooms.Last);
-  Echo( ch, "Cockpit: %d   Entrance: %d   Hangar: %d   Engineroom: %d\r\n",
+  ch->Echo("Cockpit: %d   Entrance: %d   Hangar: %d   Engineroom: %d\r\n",
              ship->Rooms.Cockpit,
              ship->Rooms.Entrance,
              ship->Rooms.Hangar,
              ship->Rooms.Engine);
-  Echo( ch, "Pilotseat: %d   Coseat: %d   Navseat: %d  Gunseat: %d\r\n",
+  ch->Echo("Pilotseat: %d   Coseat: %d   Navseat: %d  Gunseat: %d\r\n",
              ship->Rooms.Pilotseat,
              ship->Rooms.Coseat,
              ship->Rooms.Navseat,
              ship->Rooms.Gunseat);
-  Echo( ch, "Location: %d   Lastdoc: %d   Shipyard: %d\r\n",
+  ch->Echo("Location: %d   Lastdoc: %d   Shipyard: %d\r\n",
              ship->Location,
              ship->LastDock,
              ship->Shipyard);
-  Echo( ch, "Tractor Beam: %d   Comm: %d   Sensor: %d   Astro Array: %d\r\n",
+  ch->Echo("Tractor Beam: %d   Comm: %d   Sensor: %d   Astro Array: %d\r\n",
              ship->WeaponSystems.TractorBeam.Strength,
              ship->Instruments.Comm,
              ship->Instruments.Sensor,
              ship->Instruments.AstroArray);
-  Echo( ch, "Lasers: %d  Ions: %d   Laser Condition: %s\r\n",
+  ch->Echo("Lasers: %d  Ions: %d   Laser Condition: %s\r\n",
 	ship->WeaponSystems.Laser.Count, ship->WeaponSystems.IonCannon.Count,
 	ship->WeaponSystems.Laser.State == LASER_DAMAGED ? "Damaged" : "Good");
 
@@ -71,14 +71,14 @@ void do_showship( Character *ch, char *argument )
 
       if ( IsTurretInstalled( turret ) )
 	{
-	  Echo( ch, "Turret %s: %d  Condition: %s\r\n",
+   ch->Echo("Turret %s: %d  Condition: %s\r\n",
 		     literal_number[turret_num],
 		     GetTurretRoom( turret ),
 		     IsTurretDamaged( turret ) ? "Damaged" : "Good");
 	}
     }
 
-  Echo( ch, "Missiles: %d/%d  Torpedos: %d/%d  Rockets: %d/%d  Condition: %s\r\n",
+  ch->Echo("Missiles: %d/%d  Torpedos: %d/%d  Rockets: %d/%d  Condition: %s\r\n",
 	ship->WeaponSystems.Tube.Missiles.Current,
 	ship->WeaponSystems.Tube.Missiles.Max,
 	ship->WeaponSystems.Tube.Torpedoes.Current,
@@ -86,35 +86,36 @@ void do_showship( Character *ch, char *argument )
 	ship->WeaponSystems.Tube.Rockets.Current,
 	ship->WeaponSystems.Tube.Rockets.Max,
 	ship->WeaponSystems.Tube.State == MISSILE_DAMAGED ? "Damaged" : "Good");
-  Echo( ch, "Hull: %d/%d  Ship Condition: %s\r\n",
+  ch->Echo("Hull: %d/%d  Ship Condition: %s\r\n",
              ship->Defenses.Hull.Current,
              ship->Defenses.Hull.Max,
              IsShipDisabled( ship ) ? "Disabled" : "Running");
 
-  Echo( ch, "Shields: %d/%d   Energy(fuel): %d/%d   Chaff: %d/%d\r\n",
+  ch->Echo("Shields: %d/%d   Energy(fuel): %d/%d   Chaff: %d/%d\r\n",
 	ship->Defenses.Shield.Current,
 	ship->Defenses.Shield.Max,
 	ship->Thrusters.Energy.Current,
 	ship->Thrusters.Energy.Max,
 	ship->Defenses.Chaff.Current, ship->Defenses.Chaff.Max );
-  Echo( ch, "Current Coordinates: %.0f %.0f %.0f\r\n",
+  ch->Echo("Current Coordinates: %.0f %.0f %.0f\r\n",
              ship->Position.x, ship->Position.y, ship->Position.z );
-  Echo( ch, "Current Heading: %.0f %.0f %.0f\r\n",
+  ch->Echo("Current Heading: %.0f %.0f %.0f\r\n",
              ship->Heading.x, ship->Heading.y, ship->Heading.z );
-  Echo( ch, "Speed: %d/%d   Hyperspeed: %d   Manueverability: %d\r\n",
+  ch->Echo("Speed: %d/%d   Hyperspeed: %d   Manueverability: %d\r\n",
 	ship->Thrusters.Speed.Current, ship->Thrusters.Speed.Max,
 	ship->Hyperdrive.Speed, ship->Thrusters.Maneuver );
-  Echo( ch, "Docked: ");
+  ch->Echo("Docked: ");
 
   if ((ship->Docked) != NULL)
     {
-      Echo( ch, "with %s",ship->Docked->Name);
+      ch->Echo("with %s",ship->Docked->Name);
     }
   else
     {
-      Echo( ch, "NO");
+      ch->Echo("NO");
     }
 
-  Echo(ch, "  Docking Ports: %d", ship->DockingPorts );
-  Echo(ch, "  Alarm: %s   ", ship->Alarm ? "Yes" : "No" );
+  ch->Echo("  Docking Ports: %d", ship->DockingPorts );
+  ch->Echo("  Alarm: %s   ", ship->Alarm ? "Yes" : "No" );
 }
+

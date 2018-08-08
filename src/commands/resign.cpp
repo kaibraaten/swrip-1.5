@@ -11,13 +11,13 @@ void do_resign( Character *ch, char *argument )
 
   if ( IsNpc(ch) )
     {
-      SendToCharacter( "You can't do that.\r\n", ch );
+      ch->Echo("You can't do that.\r\n");
       return;
     }
 
   if ( !IsClanned( ch ) )
     {
-      SendToCharacter( "You have to join an organization before you can quit it.\r\n", ch );
+      ch->Echo("You have to join an organization before you can quit it.\r\n");
       return;
     }
 
@@ -25,7 +25,7 @@ void do_resign( Character *ch, char *argument )
 
   if ( !StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Leader ) )
     {
-      Echo( ch, "You can't resign from %s ... you are the leader!\r\n", clan->Name );
+      ch->Echo("You can't resign from %s ... you are the leader!\r\n", clan->Name );
       return;
     }
 
@@ -54,9 +54,10 @@ void do_resign( Character *ch, char *argument )
 
   xp_to_lose = umax( GetAbilityXP( ch, DIPLOMACY_ABILITY ) - GetRequiredXpForLevel( GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ), 0 );
   xp_actually_lost = LoseXP( ch, DIPLOMACY_ABILITY, xp_to_lose );
-  Echo( ch, "You lose %ld diplomacy experience.\r\n", xp_actually_lost );
+  ch->Echo("You lose %ld diplomacy experience.\r\n", xp_actually_lost );
 
   FreeMemory( ch->PCData->Bestowments );
   ch->PCData->Bestowments = CopyString("");
   SaveCharacter( ch );
 }
+

@@ -17,7 +17,7 @@ void do_reload( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter("&RYou need to specify a target!\r\n",ch);
+      ch->Echo("&RYou need to specify a target!\r\n");
       return;
     }
 
@@ -48,24 +48,24 @@ void do_reload( Character *ch, char *argument )
     {
       if ( ch->PCData->ClanInfo.Clan->Funds < price )
         {
-          Echo(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n",
+          ch->Echo("&R%s doesn't have enough funds to prepare this ship for launch.\r\n",
 		    ch->PCData->ClanInfo.Clan->Name );
           return;
         }
 
       ch->PCData->ClanInfo.Clan->Funds -= price;
-      Echo(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->PCData->ClanInfo.Clan->Name, price );
+      ch->Echo("&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->PCData->ClanInfo.Clan->Name, price );
     }
   else if ( StrCmp( ship->Owner , "Public" ) )
     {
       if ( ch->Gold < price )
         {
-          Echo(ch, "&RYou don't have enough funds to prepare this ship for launch.\r\n");
+          ch->Echo("&RYou don't have enough funds to prepare this ship for launch.\r\n");
           return;
         }
 
       ch->Gold -= price;
-      Echo(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
+      ch->Echo("&GYou pay %ld credits to ready the ship for launch.\r\n", price );
     }
 
   ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
@@ -85,3 +85,4 @@ void do_reload( Character *ch, char *argument )
 
   ship->State = SHIP_LANDED;
 }
+

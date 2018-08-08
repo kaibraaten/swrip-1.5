@@ -12,9 +12,9 @@ void do_fill( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   Object *obj = nullptr;
   Object *source = nullptr;
-  ItemTypes    dest_item, src_item1, src_item2, src_item3, src_item4;
-  int       diff = 0;
-  bool      all = false;
+  ItemTypes dest_item = ITEM_NONE, src_item1 = ITEM_NONE, src_item2 = ITEM_NONE, src_item3 = ITEM_NONE, src_item4 = ITEM_NONE;
+  int diff = 0;
+  bool all = false;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
@@ -26,7 +26,7 @@ void do_fill( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Fill what?\r\n", ch );
+      ch->Echo( "Fill what?\r\n" );
       return;
     }
 
@@ -35,18 +35,19 @@ void do_fill( Character *ch, char *argument )
 
   if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "You do not have that item.\r\n", ch );
+      ch->Echo( "You do not have that item.\r\n" );
       return;
     }
   else
     dest_item = obj->ItemType;
 
   src_item1 = src_item2 = src_item3 = src_item4 = (ItemTypes)-1;
+
   switch( dest_item )
     {
     default:
       Act( AT_ACTION, "$n tries to fill $p... (Don't ask me how)", ch, obj, NULL, TO_ROOM );
-      SendToCharacter( "You cannot fill that.\r\n", ch );
+      ch->Echo( "You cannot fill that.\r\n" );
       return;
 
       /* place all fillable item types.here */
@@ -83,7 +84,7 @@ void do_fill( Character *ch, char *argument )
       if ( GetObjectWeight( obj ) / obj->Count
            >= obj->Value[OVAL_CONTAINER_CAPACITY] )
         {
-          SendToCharacter( "It's already full as it can be.\r\n", ch );
+          ch->Echo( "It's already full as it can be.\r\n" );
           return;
         }
     }
@@ -93,7 +94,7 @@ void do_fill( Character *ch, char *argument )
 
       if ( diff < 1 || obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] >= obj->Value[OVAL_DRINK_CON_CAPACITY] )
         {
-          SendToCharacter( "It's already full as it can be.\r\n", ch );
+          ch->Echo( "It's already full as it can be.\r\n" );
           return;
         }
     }
@@ -101,7 +102,7 @@ void do_fill( Character *ch, char *argument )
   if ( dest_item == ITEM_PIPE
        && IsBitSet( obj->Value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH ) )
     {
-      SendToCharacter( "It's full of ashes, and needs to be emptied first.\r\n", ch );
+      ch->Echo( "It's full of ashes, and needs to be emptied first.\r\n" );
       return;
     }
 
@@ -122,9 +123,10 @@ void do_fill( Character *ch, char *argument )
           {
             if ( ( source = GetCarriedObject( ch, arg2 ) ) == NULL )
               {
-                SendToCharacter( "You don't have that item.\r\n", ch );
+                ch->Echo( "You don't have that item.\r\n" );
                 return;
               }
+            
             if ( source->ItemType != src_item1 && source->ItemType != src_item2
                  &&   source->ItemType != src_item3 &&   source->ItemType != src_item4  )
               {
@@ -132,21 +134,20 @@ void do_fill( Character *ch, char *argument )
                 return;
               }
           }
-        else
+        else if ( ( source =  GetObjectHere( ch, arg2 ) ) == NULL )
           {
-	    if ( ( source =  GetObjectHere( ch, arg2 ) ) == NULL )
-              {
-                SendToCharacter( "You cannot find that item.\r\n", ch );
-                return;
-              }
+            ch->Echo( "You cannot find that item.\r\n" );
+            return;
           }
     }
   else
-    source = NULL;
-
+    {
+      source = NULL;
+    }
+  
   if ( !source && dest_item == ITEM_PIPE )
     {
-      SendToCharacter( "Fill it with what?\r\n", ch );
+      ch->Echo( "Fill it with what?\r\n" );
       return;
     }
 
@@ -198,22 +199,27 @@ void do_fill( Character *ch, char *argument )
           switch( src_item1 )
             {
             default:
-              SendToCharacter( "There is nothing appropriate here!\r\n", ch );
+              ch->Echo( "There is nothing appropriate here!\r\n" );
               return;
+              
             case ITEM_FOUNTAIN:
-              SendToCharacter( "There is no fountain or pool here!\r\n", ch );
+              ch->Echo( "There is no fountain or pool here!\r\n" );
               return;
+
             case ITEM_BLOOD:
-              SendToCharacter( "There is no blood pool here!\r\n", ch );
+              ch->Echo( "There is no blood pool here!\r\n" );
               return;
+
             case ITEM_HERB_CON:
-              SendToCharacter( "There are no herbs here!\r\n", ch );
+              ch->Echo( "There are no herbs here!\r\n" );
               return;
+
             case ITEM_HERB:
-              SendToCharacter( "You cannot find any smoking herbs.\r\n", ch );
+              ch->Echo( "You cannot find any smoking herbs.\r\n" );
               return;
             }
         }
+
       if (dest_item == ITEM_CONTAINER)
         {
           Act( AT_ACTION, "You fill $p.", ch, obj, NULL, TO_CHAR );
@@ -224,15 +230,15 @@ void do_fill( Character *ch, char *argument )
 
   if (dest_item == ITEM_CONTAINER)
     {
-      Object *otmp, *otmp_next;
+      Object *otmp = nullptr, *otmp_next = nullptr;
       char name[MAX_INPUT_LENGTH];
-      Character *gch;
-      char *pd;
+      Character *gch = nullptr;
+      char *pd = nullptr;
       bool found = false;
 
       if ( source == obj )
         {
-          SendToCharacter( "You can't fill something with itself!\r\n", ch );
+          ch->Echo( "You can't fill something with itself!\r\n" );
           return;
         }
 
@@ -246,7 +252,7 @@ void do_fill( Character *ch, char *argument )
                ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->Count)
                > obj->Value[OVAL_CONTAINER_CAPACITY] )
             {
-              SendToCharacter( "You can't do that.\r\n", ch );
+              ch->Echo( "You can't do that.\r\n" );
               return;
             }
           SeparateOneObjectFromGroup( obj );
@@ -255,13 +261,15 @@ void do_fill( Character *ch, char *argument )
           ObjectFromRoom(source);
           ObjectToObject(source, obj);
           break;
+
         case ITEM_MONEY:
-          SendToCharacter( "You can't do that... yet.\r\n", ch );
+          ch->Echo( "You can't do that... yet.\r\n" );
           break;
+
         case ITEM_CORPSE_PC:
           if ( IsNpc(ch) )
             {
-              SendToCharacter( "You can't do that.\r\n", ch );
+              ch->Echo( "You can't do that.\r\n" );
               return;
             }
 
@@ -287,7 +295,7 @@ void do_fill( Character *ch, char *argument )
                 }
               if ( !fGroup )
                 {
-                  SendToCharacter( "That's someone else's corpse.\r\n", ch );
+                  ch->Echo( "That's someone else's corpse.\r\n" );
                   return;
                 }
             }
@@ -303,10 +311,12 @@ void do_fill( Character *ch, char *argument )
         case ITEM_CORPSE_NPC:
           if ( (otmp=source->FirstContent) == NULL )
             {
-              SendToCharacter( "It's empty.\r\n", ch );
+              ch->Echo( "It's empty.\r\n" );
               return;
             }
+
           SeparateOneObjectFromGroup( obj );
+
           for ( ; otmp; otmp = otmp_next )
             {
               otmp_next = otmp->NextContent;
@@ -329,7 +339,10 @@ void do_fill( Character *ch, char *argument )
               Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
             }
           else
-            SendToCharacter( "There is nothing appropriate in there.\r\n", ch );
+            {
+              ch->Echo( "There is nothing appropriate in there.\r\n" );
+            }
+          
           break;
         }
       return;
@@ -337,91 +350,116 @@ void do_fill( Character *ch, char *argument )
 
   if ( source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 1 )
     {
-      SendToCharacter( "There's none left!\r\n", ch );
+      ch->Echo( "There's none left!\r\n" );
       return;
     }
+
   if ( source->Count > 1 && source->ItemType != ITEM_FOUNTAIN )
     SeparateOneObjectFromGroup( source );
+
   SeparateOneObjectFromGroup( obj );
 
   switch( source->ItemType )
     {
     default:
       Log->Bug( "do_fill: got bad item type: %d", source->ItemType );
-      SendToCharacter( "Something went wrong...\r\n", ch );
+      ch->Echo( "Something went wrong...\r\n" );
       return;
 
     case ITEM_FOUNTAIN:
-      if ( obj->Value[1] != 0 && obj->Value[2] != 0 )
+      if ( obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] != 0
+           && obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] != 0 )
         {
-          SendToCharacter( "There is already another liquid in it.\r\n", ch );
+          ch->Echo( "There is already another liquid in it.\r\n" );
           return;
         }
-      obj->Value[2] = 0;
-      obj->Value[1] = obj->Value[0];
+
+      obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] = 0;
+      obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] = obj->Value[OVAL_DRINK_CON_CAPACITY];
       Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
       return;
+
     case ITEM_BLOOD:
-      if ( obj->Value[1] != 0 && obj->Value[2] != 13 )
+      if ( obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] != 0
+           && obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] != 13 )
         {
-          SendToCharacter( "There is already another liquid in it.\r\n", ch );
+          ch->Echo( "There is already another liquid in it.\r\n" );
           return;
         }
-      obj->Value[2] = 13;
-      if ( source->Value[1] < diff )
-        diff = source->Value[1];
-      obj->Value[1] += diff;
+
+      obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] = 13;
+
+      if ( source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < diff )
+        diff = source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT];
+
+      obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] += diff;
       Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
-      if ( (source->Value[1] -= diff) < 1 )
+
+      if ( (source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] -= diff) < 1 )
         {
           ExtractObject( source );
           MakeBloodstain( ch );
         }
       return;
+
     case ITEM_HERB:
       if ( obj->Value[1] != 0 && obj->Value[2] != source->Value[2] )
         {
-          SendToCharacter( "There is already another type of herb in it.\r\n", ch );
+          ch->Echo( "There is already another type of herb in it.\r\n" );
           return;
         }
+
       obj->Value[2] = source->Value[2];
+
       if ( source->Value[1] < diff )
         diff = source->Value[1];
+
       obj->Value[1] += diff;
       Act( AT_ACTION, "You fill $p with $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p with $P.", ch, obj, source, TO_ROOM );
+
       if ( (source->Value[1] -= diff) < 1 )
         ExtractObject( source );
       return;
+
     case ITEM_HERB_CON:
       if ( obj->Value[1] != 0 && obj->Value[2] != source->Value[2] )
         {
-          SendToCharacter( "There is already another type of herb in it.\r\n", ch );
+          ch->Echo( "There is already another type of herb in it.\r\n" );
           return;
         }
+
       obj->Value[2] = source->Value[2];
+
       if ( source->Value[1] < diff )
         diff = source->Value[1];
+
       obj->Value[1] += diff;
       source->Value[1] -= diff;
       Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
       return;
+
     case ITEM_DRINK_CON:
-      if ( obj->Value[1] != 0 && obj->Value[2] != source->Value[2] )
+      if ( obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] != 0
+           && obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] != source->Value[OVAL_DRINK_CON_LIQUID_TYPE] )
         {
-          SendToCharacter( "There is already another liquid in it.\r\n", ch );
+          ch->Echo( "There is already another liquid in it.\r\n" );
           return;
         }
-      obj->Value[2] = source->Value[2];
-      if ( source->Value[1] < diff )
-        diff = source->Value[1];
-      obj->Value[1] += diff;
-      source->Value[1] -= diff;
+
+      obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] = source->Value[OVAL_DRINK_CON_LIQUID_TYPE];
+
+      if ( source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < diff )
+        diff = source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT];
+
+      obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] += diff;
+      source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] -= diff;
       Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
       return;
     }
 }
+

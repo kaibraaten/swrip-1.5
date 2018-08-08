@@ -16,7 +16,7 @@ void do_teach( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Teach who, what?\r\n", ch );
+      ch->Echo("Teach who, what?\r\n");
       return;
     }
   else
@@ -26,19 +26,19 @@ void do_teach( Character *ch, char *argument )
 
       if ( !IsAwake(ch) )
         {
-          SendToCharacter( "In your dreams, or what?\r\n", ch );
+          ch->Echo("In your dreams, or what?\r\n");
           return;
         }
 
       if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
         {
-          SendToCharacter( "They don't seem to be here...\r\n", ch );
+          ch->Echo("They don't seem to be here...\r\n");
           return;
         }
 
       if (IsNpc(victim))
         {
-	  SendToCharacter( "You can't teach that to them!\r\n", ch );
+   ch->Echo("You can't teach that to them!\r\n");
           return;
         }
 
@@ -96,3 +96,4 @@ void do_teach( Character *ch, char *argument )
         }
     }
 }
+

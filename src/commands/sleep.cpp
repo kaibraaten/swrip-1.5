@@ -8,7 +8,7 @@ void do_sleep( Character *ch, char *argument )
   switch ( ch->Position )
     {
     case POS_SLEEPING:
-      SendToCharacter( "You are already sleeping.\r\n", ch );
+      ch->Echo("You are already sleeping.\r\n");
       break;
 
     case POS_RESTING:
@@ -16,7 +16,7 @@ void do_sleep( Character *ch, char *argument )
     case POS_STANDING:
       if ( IsNullOrEmpty( argument ) && ch->On == NULL)
         {
-          SendToCharacter( "You go to sleep.\r\n", ch );
+          ch->Echo("You go to sleep.\r\n");
           Act(AT_ACTION, "$n goes to sleep.", ch, NULL, NULL, TO_ROOM );
           ch->Position = POS_SLEEPING;
         }
@@ -29,13 +29,13 @@ void do_sleep( Character *ch, char *argument )
 
           if (obj == NULL)
             {
-              SendToCharacter("You don't see that here.\r\n",ch);
+              ch->Echo("You don't see that here.\r\n");
               return;
             }
           if (obj->ItemType != ITEM_FURNITURE
               ||  (!obj->Value[OVAL_FURNITURE_PREPOSITION]))
             {
-	      SendToCharacter("You can't sleep on that!\r\n",ch);
+       ch->Echo("You can't sleep on that!\r\n");
               return;
             }
 
@@ -69,7 +69,7 @@ void do_sleep( Character *ch, char *argument )
       break;
 
     case POS_FIGHTING:
-      SendToCharacter( "You are busy fighting!\r\n", ch );
+      ch->Echo("You are busy fighting!\r\n");
       break;
 
     default:
@@ -78,3 +78,4 @@ void do_sleep( Character *ch, char *argument )
 
   RoomProgSleepTrigger( ch );
 }
+

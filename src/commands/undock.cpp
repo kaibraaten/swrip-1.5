@@ -17,50 +17,50 @@ void do_undock(Character *ch, char *argument)
 
   if ( ( ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   if ( ship->Class > SHIP_PLATFORM )
     {
-      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
+      ch->Echo("&RThis isn't a spacecraft!\r\n");
       return;
     }
 
   if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou aren't in the pilots seat.\r\n",ch);
+      ch->Echo("&RYou aren't in the pilots seat.\r\n");
       return;
     }
 
   if ( (ship->Autopilot || ship->Type == MOB_SHIP)  )
     {
-      SendToCharacter("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
+      ch->Echo("&RYou'll have to turn off the ships autopilot first.\r\n");
       return;
     }
 
   if  ( ship->Class == SHIP_PLATFORM )
     {
-      SendToCharacter( "&RPlatforms can't move!\r\n" , ch );
+      ch->Echo("&RPlatforms can't move!\r\n" );
       return;
     }
 
   if ( IsShipInHyperspace( ship ) )
     {
-      SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
+      ch->Echo("&RYou can only do that in realspace!\r\n");
       return;
     }
 
   if ( ship->Docked && ship->TractoredBy
        && ship->Docked != ship->TractoredBy )
     {
-      SendToCharacter("&RYou can not do that in a tractor beam!\r\n",ch);
+      ch->Echo("&RYou can not do that in a tractor beam!\r\n");
       return;
     }
 
   if (ship->Docked == NULL && ship->Docking == SHIP_READY)
     {
-      SendToCharacter("&RYou aren't docked!\r\n",ch);
+      ch->Echo("&RYou aren't docked!\r\n");
       return;
     }
 
@@ -80,7 +80,7 @@ void do_undock(Character *ch, char *argument)
 
   if ( GetRandomPercent() > the_chance )
     {
-      SendToCharacter("&RYou can't figure out which lever to use.\r\n",ch);
+      ch->Echo("&RYou can't figure out which lever to use.\r\n");
 
       if ( ship->Class == FIGHTER_SHIP )
         {
@@ -145,3 +145,4 @@ void do_undock(Character *ch, char *argument)
       LearnFromSuccess( ch, gsn_shipdocking);
     }
 }
+

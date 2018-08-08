@@ -1,6 +1,8 @@
 #include "mud.hpp"
+#include "character.hpp"
 
 void do_sla( Character *ch, char *argument )
 {
-  SendToCharacter( "If you want to SLAY, spell it out.\r\n", ch );
+  ch->Echo("If you want to SLAY, spell it out.\r\n");
 }
+

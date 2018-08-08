@@ -35,6 +35,7 @@
 #include "ship.hpp"
 #include "script.hpp"
 #include "log.hpp"
+#include "character.hpp"
 
 ShuttleRepository *Shuttles = nullptr;
 
@@ -342,16 +343,16 @@ void ShowShuttlesToCharacter( const Shuttle *shuttle, Character *ch )
   while (shuttle)
     {
       SetCharacterColor( AT_SHIP, ch );
-      Echo( ch , "%-35s", shuttle->Name );
+      ch->Echo( "%-35s", shuttle->Name );
 
       if ( shuttle->NextInRoom )
 	{
 	  shuttle = shuttle->NextInRoom;
-	  Echo( ch , "%-35s", shuttle->Name );
+	  ch->Echo( "%-35s", shuttle->Name );
 	}
 
       shuttle = shuttle->NextInRoom;
-      SendToCharacter("\r\n&w", ch);
+      ch->Echo("\r\n&w");
     }
 }
 
@@ -691,3 +692,4 @@ ShuttleRepository *NewShuttleRepository()
 {
   return new LuaShuttleRepository();
 }
+

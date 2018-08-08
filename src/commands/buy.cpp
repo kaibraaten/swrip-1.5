@@ -14,7 +14,7 @@ void do_buy( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Buy what?\r\n", ch );
+      ch->Echo( "Buy what?\r\n" );
       return;
     }
 
@@ -33,7 +33,7 @@ void do_buy( Character *ch, char *argument )
       if ( !pRoomIndexNext )
         {
           Log->Bug( "Do_buy: bad pet shop at vnum %d.", ch->InRoom->Vnum );
-          SendToCharacter( "Sorry, you can't buy that here.\r\n", ch );
+          ch->Echo( "Sorry, you can't buy that here.\r\n" );
           return;
         }
 
@@ -44,25 +44,25 @@ void do_buy( Character *ch, char *argument )
 
       if ( pet == NULL || !IsNpc( pet ) || !IsBitSet(pet->Flags, ACT_PET) )
         {
-          SendToCharacter( "Sorry, you can't buy that here.\r\n", ch );
+          ch->Echo( "Sorry, you can't buy that here.\r\n" );
           return;
         }
 
       if ( IsBitSet(ch->Flags, PLR_BOUGHT_PET) )
         {
-          SendToCharacter( "You already bought one pet this level.\r\n", ch );
+          ch->Echo( "You already bought one pet this level.\r\n" );
           return;
         }
 
       if ( ch->Gold < 10 * pet->TopLevel * pet->TopLevel )
         {
-          SendToCharacter( "You can't afford it.\r\n", ch );
+          ch->Echo( "You can't afford it.\r\n" );
           return;
         }
 
       if ( ch->TopLevel < pet->TopLevel )
         {
-          SendToCharacter( "You're not ready for this pet.\r\n", ch );
+          ch->Echo( "You're not ready for this pet.\r\n" );
           return;
         }
 
@@ -93,7 +93,7 @@ void do_buy( Character *ch, char *argument )
 
       CharacterToRoom( pet, ch->InRoom );
       StartFollowing( pet, ch );
-      SendToCharacter( "Enjoy your pet.\r\n", ch );
+      ch->Echo( "Enjoy your pet.\r\n" );
       Act( AT_ACTION, "$n bought $N as a pet.", ch, NULL, pet, TO_ROOM );
       return;
     }
@@ -154,10 +154,9 @@ void do_buy( Character *ch, char *argument )
 
       if ( !obj )
         {
-          SendToCharacter( "Buy what?\r\n", ch );
+          ch->Echo( "Buy what?\r\n" );
           return;
         }
-
 
       cost = ( GetObjectCost( ch, keeper, obj, true ) * noi );
 
@@ -201,14 +200,14 @@ void do_buy( Character *ch, char *argument )
 
       if ( ch->CarryNumber + GetObjectCount( obj ) > GetCarryCapacityNumber( ch ) )
         {
-          SendToCharacter( "You can't carry that many items.\r\n", ch );
+          ch->Echo( "You can't carry that many items.\r\n" );
           return;
         }
 
       if ( ch->CarryWeight + ( GetObjectWeight( obj ) * noi )
            + (noi > 1 ? 2 : 0) > GetCarryCapacityWeight( ch ) )
         {
-          SendToCharacter( "You can't carry that much weight.\r\n", ch );
+          ch->Echo( "You can't carry that much weight.\r\n" );
           return;
         }
 
@@ -299,3 +298,4 @@ void do_buy( Character *ch, char *argument )
       return;
     }
 }
+

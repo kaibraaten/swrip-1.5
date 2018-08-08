@@ -4,12 +4,11 @@
 
 void do_flee( Character *ch, char *argument )
 {
-  Room *was_in;
-  Room *now_in;
-  char buf[MAX_STRING_LENGTH];
-  int attempt;
-  DirectionType door;
-  Exit *pexit;
+  Room *was_in = nullptr;
+  Room *now_in = nullptr;
+  int attempt = 0;
+  DirectionType door = DIR_INVALID;
+  Exit *pexit = nullptr;
 
   if ( !GetFightingOpponent( ch ) )
     {
@@ -20,13 +19,14 @@ void do_flee( Character *ch, char *argument )
           else
             ch->Position = POS_STANDING;
         }
-      SendToCharacter( "You aren't fighting anyone.\r\n", ch );
+      
+      ch->Echo( "You aren't fighting anyone.\r\n" );
       return;
     }
 
   if ( ch->Move <= 0 )
     {
-      SendToCharacter( "You're too exhausted to flee from combat!\r\n", ch );
+      ch->Echo( "You're too exhausted to flee from combat!\r\n" );
       return;
     }
 
@@ -80,13 +80,12 @@ void do_flee( Character *ch, char *argument )
       Act( AT_FLEE, "$n runs for cover!", ch, NULL, NULL, TO_ROOM );
       ch->InRoom = now_in;
       Act( AT_FLEE, "$n glances around for signs of pursuit.", ch, NULL, NULL, TO_ROOM );
-      sprintf(buf, "You run for cover!");
-      SendToCharacter( buf, ch );
+      ch->Echo( "You run for cover!" );
 
       StopFighting( ch, true );
       return;
     }
 
-  sprintf(buf, "You attempt to run for cover!");
-  SendToCharacter( buf, ch );
+  ch->Echo("You attempt to run for cover!");
 }
+

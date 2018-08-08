@@ -2,6 +2,7 @@
 #include "badname.hpp"
 #include "mud.hpp"
 #include "pcdata.hpp"
+#include "character.hpp"
 
 void do_badname( Character *ch, char *argument )
 {
@@ -14,22 +15,22 @@ void do_badname( Character *ch, char *argument )
 
       for(const BadName *badname : BadNames->Entities())
         {
-          Echo( ch, "%-19s", badname->Name.c_str() );
+          ch->Echo( "%-19s", badname->Name.c_str() );
 
           if( ++currentColumn % numberOfColumns == 0 )
             {
-              Echo( ch, "\r\n" );
+              ch->Echo( "\r\n" );
             }
         }
 
       if( currentColumn % numberOfColumns != 0 )
         {
-          Echo( ch, "\r\n" );
+          ch->Echo( "\r\n" );
         }
 
       if( currentColumn == 0)
         {
-          Echo( ch, "No badnames registered.\r\n" );
+          ch->Echo( "No badnames registered.\r\n" );
         }
 
       return;
@@ -39,9 +40,9 @@ void do_badname( Character *ch, char *argument )
   
   if( IsNullOrEmpty( argument ) || IsNullOrEmpty( command ) )
     {
-      Echo( ch, "Usage: badname <command> <name>\r\n" );
-      Echo( ch, "Commands:\r\n" );
-      Echo( ch, "\tadd remove list\r\n" );
+      ch->Echo( "Usage: badname <command> <name>\r\n" );
+      ch->Echo( "Commands:\r\n" );
+      ch->Echo( "\tadd remove list\r\n" );
       return;
     }
 
@@ -49,13 +50,13 @@ void do_badname( Character *ch, char *argument )
     {
       if( IsBadName( argument ) )
 	{
-	  SendToCharacter("That name is already in the badname list.\r\n",ch);
+	  ch->Echo("That name is already in the badname list.\r\n");
 	}
       else
 	{
 	  AddBadName( argument );
           BadNames->Save();
-	  SendToCharacter("Name successfully added to the badname list.\r\n",ch);
+	  ch->Echo("Name successfully added to the badname list.\r\n");
 	}
 
       return;
@@ -64,15 +65,16 @@ void do_badname( Character *ch, char *argument )
     {
       if( !IsBadName( argument ) )
         {
-          SendToCharacter("That name isn't in the badname list.\r\n",ch);
+          ch->Echo("That name isn't in the badname list.\r\n");
         }
       else
         {
           RemoveBadName( argument );
           BadNames->Save();
-          SendToCharacter("Name successfully removed from the badname list.\r\n",ch);
+          ch->Echo("Name successfully removed from the badname list.\r\n");
         }
 
       return;
     }
 }
+

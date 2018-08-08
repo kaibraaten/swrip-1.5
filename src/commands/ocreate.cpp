@@ -15,7 +15,7 @@ void do_ocreate( Character *ch, char *argument )
 
   if ( IsNpc(ch) )
     {
-      SendToCharacter( "Mobiles cannot create.\r\n", ch );
+      ch->Echo("Mobiles cannot create.\r\n");
       return;
     }
 
@@ -25,13 +25,13 @@ void do_ocreate( Character *ch, char *argument )
 
   if ( vnum == INVALID_VNUM || IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: ocreate <vnum> [copy vnum] <item name>\r\n", ch );
+      ch->Echo("Usage: ocreate <vnum> [copy vnum] <item name>\r\n");
       return;
     }
 
   if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
     {
-      SendToCharacter( "Bad number.\r\n", ch );
+      ch->Echo("Bad number.\r\n");
       return;
     }
 
@@ -46,7 +46,7 @@ void do_ocreate( Character *ch, char *argument )
 
   if ( GetProtoObject( vnum ) )
     {
-      SendToCharacter( "An object with that number already exists.\r\n", ch );
+      ch->Echo("An object with that number already exists.\r\n");
       return;
     }
 
@@ -59,26 +59,26 @@ void do_ocreate( Character *ch, char *argument )
 
       if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
-          SendToCharacter( "You must have an assigned area to create objects.\r\n", ch );
+          ch->Echo("You must have an assigned area to create objects.\r\n");
           return;
         }
 
       if ( vnum < pArea->VnumRanges.Object.First
            ||   vnum > pArea->VnumRanges.Object.Last )
         {
-          SendToCharacter( "That number is not in your allocated range.\r\n", ch );
+          ch->Echo("That number is not in your allocated range.\r\n");
           return;
         }
     }
 
   if( cvnum == vnum )
-    SendToCharacter( "The vnums must be different!\r\n", ch );
+    ch->Echo("The vnums must be different!\r\n");
 
   pObjIndex = MakeObject( vnum, cvnum, argument );
 
   if ( !pObjIndex )
     {
-      SendToCharacter( "Error.\r\n", ch );
+      ch->Echo("Error.\r\n");
       Log->Bug( "do_ocreate: MakeObject failed." );
       return;
     }
@@ -90,3 +90,4 @@ void do_ocreate( Character *ch, char *argument )
   Act( AT_IMMORT, "You make some ancient arcane gestures, and open your hands to reveal $p!",
        ch, obj, NULL, TO_CHAR );
 }
+

@@ -14,8 +14,7 @@ void do_instazone( Character *ch, char *argument )
   if ( IsNpc(ch) || GetTrustLevel(ch) < LEVEL_CREATOR || !ch->PCData ||
        !ch->PCData->Build.Area )
     {
-      SendToCharacter( "You don't have an assigned area to create resets for.\r\n",
-                    ch );
+      ch->Echo("You don't have an assigned area to create resets for.\r\n");
       return;
     }
   if ( !StrCmp(argument, "nodoors") )
@@ -31,5 +30,7 @@ void do_instazone( Character *ch, char *argument )
         continue;
       InstallRoom( pArea, pRoom, dodoors );
     }
-  SendToCharacter( "Area resets installed.\r\n", ch );
+  ch->Echo("Area resets installed.\r\n");
 }
+
+

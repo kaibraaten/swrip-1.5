@@ -9,16 +9,17 @@ void do_dnd( Character *ch, char *argument )
       if ( IsBitSet(ch->PCData->Flags, PCFLAG_DND) )
 	{
 	  RemoveBit(ch->PCData->Flags, PCFLAG_DND);
-	  SendToCharacter( "Your 'do not disturb' flag is now off.\r\n", ch );
+	  ch->Echo( "Your 'do not disturb' flag is now off.\r\n" );
 	}
       else
 	{
 	  SetBit(ch->PCData->Flags, PCFLAG_DND);
-	  SendToCharacter( "Your 'do not disturb' flag is now on.\r\n", ch );
+	  ch->Echo( "Your 'do not disturb' flag is now on.\r\n" );
 	}
     }
   else
     {
-      SendToCharacter( "huh?\r\n", ch );
+      ch->Echo( "Huh?\r\n" );
     }
 }
+

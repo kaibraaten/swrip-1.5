@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "area.hpp"
+#include "character.hpp"
 
 /*
  * Dangerous command.  Can be used to install an area that was either:
@@ -16,7 +17,7 @@ void do_unfoldarea( Character *ch, char *argument )
 {
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Unfold what?\r\n", ch );
+      ch->Echo("Unfold what?\r\n");
       return;
     }
 
@@ -24,3 +25,4 @@ void do_unfoldarea( Character *ch, char *argument )
   LoadAreaFile( LastArea, argument );
   fBootDb = false;
 }
+

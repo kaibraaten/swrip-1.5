@@ -9,27 +9,27 @@ void do_renameship( Character *ch, char *argument )
   Clan *clan;
   if ( (ship = GetShipFromCockpit( ch->InRoom->Vnum ) ) == NULL)
     {
-      SendToCharacter( "You must be in the cockpit of a ship to do that!\r\n", ch);
+      ch->Echo("You must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   if( ( (clan = GetClan(ship->Owner)) == NULL ) || StrCmp( clan->Leadership.Leader, ch->Name ) )
     if( StrCmp( ship->Owner, ch->Name ) )
       {
-        SendToCharacter( "&RImperial Database: &WYou do not own this ship.\r\n", ch);
+        ch->Echo("&RImperial Database: &WYou do not own this ship.\r\n");
         return;
       }
 
   if( GetShipAnywhere( argument ) != NULL )
     {
-      SendToCharacter( "&RImperial Database: &WA ship already exists of that name.\r\n", ch);
+      ch->Echo("&RImperial Database: &WA ship already exists of that name.\r\n");
       return;
     }
 
 
   if( ch->Gold < 50000 )
     {
-      SendToCharacter( "&RImperial Database: &WYou do not have enough credits for this request.\r\n", ch);
+      ch->Echo("&RImperial Database: &WYou do not have enough credits for this request.\r\n");
       return;
     }
 
@@ -37,5 +37,6 @@ void do_renameship( Character *ch, char *argument )
   FreeMemory( ship->PersonalName );
   ship->PersonalName            = CopyString( argument );
   Ships->Save(ship);
-  SendToCharacter( "&RImperial Database: &WTransaction Complete. Name changed.", ch );
+  ch->Echo("&RImperial Database: &WTransaction Complete. Name changed.");
 }
+

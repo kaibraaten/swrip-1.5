@@ -56,7 +56,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( IsNullOrEmpty( args->CommandArguments ) )
     {
-      Echo( ch, "&RUsage: Makegrenade <name>\r\n&w" );
+      ch->Echo("&RUsage: Makegrenade <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
@@ -130,3 +130,5 @@ static void FreeUserData( struct UserData *ud )
 
   FreeMemory( ud );
 }
+
+

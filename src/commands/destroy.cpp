@@ -1,6 +1,6 @@
-#include <string.h>
-#include <ctype.h>
-#include <errno.h>
+#include <cstring>
+#include <cctype>
+#include <cerrno>
 #include "mud.hpp"
 #include "character.hpp"
 #include "area.hpp"
@@ -17,7 +17,7 @@ void do_destroy( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( victimName ) )
     {
-      SendToCharacter( "Destroy what player file?\r\n", ch );
+      ch->Echo( "Destroy what player file?\r\n" );
       return;
     }
 
@@ -46,17 +46,17 @@ void do_destroy( Character *ch, char *argument )
       char godDataPath[256];
       
       SetCharacterColor( AT_RED, ch );
-      SendToCharacter( "Player destroyed.  Pfile saved in backup directory.\r\n", ch );
+      ch->Echo( "Player destroyed. Pfile saved in backup directory.\r\n", ch );
       sprintf( godDataPath, "%s%s", GOD_DIR, Capitalize(victimName) );
 
       if ( remove( godDataPath ) == 0 )
         {
-          SendToCharacter( "Player's immortal data destroyed.\r\n", ch );
+          ch->Echo( "Player's immortal data destroyed.\r\n" );
         }
       else if ( errno != ENOENT )
         {
-          Echo( ch, "Unknown error #%d - %s (immortal data).  Report to Thoric.\r\n",
-                     errno, strerror( errno ) );
+          ch->Echo( "Unknown error #%d - %s (immortal data).  Report to Thoric.\r\n",
+                    errno, strerror( errno ) );
           char errorMessage[1024];
           sprintf( errorMessage, "%s destroying %s", ch->Name, godDataPath );
           perror( errorMessage );
@@ -84,12 +84,12 @@ void do_destroy( Character *ch, char *argument )
 
               if ( !rename( areaPath, areaBackupPath ) )
                 {
-                  SendToCharacter( "Player's area data destroyed.  Area saved as backup.\r\n", ch );
+                  ch->Echo( "Player's area data destroyed. Area saved as backup.\r\n" );
                 }
               else if ( errno != ENOENT )
                 {
-                  Echo( ch, "Unknown error #%d - %s (area data).  Report to Thoric.\r\n",
-                        errno, strerror( errno ) );
+                  ch->Echo( "Unknown error #%d - %s (area data).  Report to Thoric.\r\n",
+                            errno, strerror( errno ) );
                   char errorMessage[1024];
                   sprintf( errorMessage, "%s destroying %s", ch->Name, areaPath );
                   perror(errorMessage);
@@ -100,13 +100,13 @@ void do_destroy( Character *ch, char *argument )
   else if ( errno == ENOENT )
     {
       SetCharacterColor( AT_PLAIN, ch );
-      SendToCharacter( "Player does not exist.\r\n", ch );
+      ch->Echo( "Player does not exist.\r\n" );
     }
   else
     {
       SetCharacterColor( AT_WHITE, ch );
-      Echo( ch, "Unknown error #%d - %s.  Report to Thoric.\r\n",
-                 errno, strerror( errno ) );
+      ch->Echo( "Unknown error #%d - %s.  Report to Thoric.\r\n",
+                errno, strerror( errno ) );
       char errorMessage[1024];
       sprintf( errorMessage, "%s destroying %s", ch->Name, victimName );
       perror( errorMessage );
@@ -162,3 +162,4 @@ static Character *GetVictimInWorld(const std::string &name)
 
   return nullptr;
 }
+

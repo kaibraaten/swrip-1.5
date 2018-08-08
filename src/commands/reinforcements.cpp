@@ -22,33 +22,33 @@ void do_reinforcements( Character *ch, char *argument )
     default:
       if ( ch->BackupWait )
         {
-          SendToCharacter( "&RYour reinforcements are already on the way.\r\n", ch );
+          ch->Echo("&RYour reinforcements are already on the way.\r\n");
           return;
         }
 
       if ( !IsClanned( ch ) )
         {
-          SendToCharacter( "&RYou need to be a member of an organization before you can call for reinforcements.\r\n", ch );
+          ch->Echo("&RYou need to be a member of an organization before you can call for reinforcements.\r\n");
           return;
         }
 
       if ( ch->Gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 50 )
         {
-          Echo( ch, "&RYou dont have enough credits to send for reinforcements.\r\n" );
+          ch->Echo("&RYou dont have enough credits to send for reinforcements.\r\n" );
           return;
         }
 
       the_chance = (int) (ch->PCData->Learned[gsn_reinforcements]);
       if ( GetRandomPercent() < the_chance )
         {
-          SendToCharacter( "&GYou begin making the call for reinforcements.\r\n", ch);
+          ch->Echo("&GYou begin making the call for reinforcements.\r\n");
           Act( AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
                NULL, argument , TO_ROOM );
 	  AddTimerToCharacter( ch , TIMER_CMD_FUN , 1 , do_reinforcements , SUB_PAUSE );
           ch->dest_buf = CopyString(arg);
           return;
         }
-      SendToCharacter("&RYou call for reinforcements but nobody answers.\r\n",ch);
+      ch->Echo("&RYou call for reinforcements but nobody answers.\r\n");
       LearnFromFailure( ch, gsn_reinforcements );
       return;
 
@@ -62,15 +62,15 @@ void do_reinforcements( Character *ch, char *argument )
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
       ch->SubState = SUB_NONE;
-      SendToCharacter("&RYou are interupted before you can finish your call.\r\n", ch);
+      ch->Echo("&RYou are interupted before you can finish your call.\r\n");
       return;
     }
 
   ch->SubState = SUB_NONE;
 
-  SendToCharacter( "&GYour reinforcements are on the way.\r\n", ch);
+  ch->Echo("&GYour reinforcements are on the way.\r\n");
   credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 50;
-  Echo( ch, "It cost you %d credits.\r\n", credits);
+  ch->Echo("It cost you %d credits.\r\n", credits);
   ch->Gold -= umin( credits , ch->Gold );
 
   LearnFromSuccess( ch, gsn_reinforcements );
@@ -86,3 +86,4 @@ void do_reinforcements( Character *ch, char *argument )
 
   ch->BackupWait = GetRandomNumberFromRange(1,2);
 }
+

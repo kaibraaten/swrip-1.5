@@ -6,29 +6,30 @@
  */
 void do_fquit( Character *ch, char *argument )
 {
-  Character *victim;
+  Character *victim = nullptr;
   char arg1[MAX_INPUT_LENGTH];
   argument = OneArgument( argument, arg1 );
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Force whom to quit?\r\n", ch );
+      ch->Echo( "Force whom to quit?\r\n" );
       return;
     }
 
   if ( !( victim = GetCharacterAnywhere( ch, arg1 ) ) )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
   if ( victim->TopLevel != 1 )
     {
-      SendToCharacter( "They are not level one!\r\n", ch );
+      ch->Echo( "They are not level one!\r\n" );
       return;
     }
 
-  SendToCharacter( "The MUD administrators force you to quit\r\n", victim );
-  do_quit (victim, "");
-  SendToCharacter( "Ok.\r\n", ch );
+  victim->Echo( "The MUD administrators force you to quit\r\n" );
+  do_quit(victim, "");
+  ch->Echo( "Ok.\r\n" );
 }
+

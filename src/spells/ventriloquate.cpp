@@ -22,9 +22,10 @@ ch_ret spell_ventriloquate( int sn, int level, Character *ch, void *vo )
       if ( !IsName( speaker, vch->Name ) )
 	{
 	  SetCharacterColor( AT_SAY, vch );
-	  SendToCharacter( SaveVsSpellStaff( level, vch ) ? buf2 : buf1, vch );
+   vch->Echo(SaveVsSpellStaff( level, vch ) ? buf2 : buf1);
 	}
     }
 
   return rNONE;
 }
+

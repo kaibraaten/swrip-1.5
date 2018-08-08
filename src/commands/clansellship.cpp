@@ -12,25 +12,25 @@ void do_clansellship(Character *ch, char *argument )
 
   if ( IsNpc(ch) )
     {
-      SendToCharacter( "&ROnly players can do that!\r\n" ,ch );
+      ch->Echo( "&ROnly players can do that!\r\n" );
       return;
     }
 
   if ( !IsClanned( ch ) )
     {
-      SendToCharacter( "&RYou aren't a member of any organizations!\r\n" ,ch );
+      ch->Echo( "&RYou aren't a member of any organizations!\r\n" );
       return;
     }
 
   clan = ch->PCData->ClanInfo.Clan;
 
   if ( ( ch->PCData->Bestowments
-         &&    IsName("clanbuyship", ch->PCData->Bestowments))
-       ||   !StrCmp( ch->Name, clan->Leadership.Leader  ))
+         && IsName("clanbuyship", ch->PCData->Bestowments))
+       || !StrCmp( ch->Name, clan->Leadership.Leader  ))
     ;
   else
     {
-      SendToCharacter( "&RYour organization hasn't seen fit to bestow you with that ability.\r\n" ,ch );
+      ch->Echo( "&RYour organization hasn't seen fit to bestow you with that ability.\r\n" );
       return;
     }
 
@@ -49,20 +49,20 @@ void do_clansellship(Character *ch, char *argument )
 
   if ( !StrCmp( ship->Owner , "" )  || ship->Type == MOB_SHIP )
     {
-      SendToCharacter( "&RThat ship is not owned!\r\n" ,ch );
+      ch->Echo( "&RThat ship is not owned!\r\n" );
       return;
     }
 
   if ( StrCmp( ship->Owner, clan->Name ) )
     {
-      SendToCharacter( "&RThat isn't your ship!" ,ch );
+      ch->Echo( "&RThat isn't your ship!" );
       return;
     }
 
   price = GetShipValue( ship );
 
   clan->Funds += ( price - price/10 );
-  Echo(ch, "&GYour clan receives %ld credits from selling your ship.\r\n" , price - price/10 );
+  ch->Echo("&GYour clan receives %ld credits from selling your ship.\r\n" , price - price/10 );
 
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );
@@ -74,3 +74,4 @@ void do_clansellship(Character *ch, char *argument )
   Ships->Save(ship);
   Clans->Save(clan);
 }
+

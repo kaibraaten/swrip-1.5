@@ -10,7 +10,7 @@ void do_pluogus( Character *ch, char *argument )
 
   if ( !HasComlink( ch ) )
     {
-      SendToCharacter( "You need a comlink to do that!\r\n", ch);
+      ch->Echo("You need a comlink to do that!\r\n");
       return;
     }
 
@@ -19,7 +19,7 @@ void do_pluogus( Character *ch, char *argument )
   if (shuttle != nullptr)
     {
       output_shuttle(ch, shuttle);
-      SendToCharacter("\r\n", ch);
+      ch->Echo("\r\n");
     }
 
   shuttle = Shuttles->FindByName("Serin Tocca");
@@ -27,7 +27,7 @@ void do_pluogus( Character *ch, char *argument )
   if (shuttle != nullptr)
     {
       output_shuttle(ch, shuttle);
-      SendToCharacter("\r\n", ch);
+      ch->Echo("\r\n");
     }
 }
 
@@ -46,17 +46,17 @@ static void output_shuttle(Character * ch, Shuttle * shuttle)
     return;
 
   SetCharacterColor(AT_SHIP, ch);
-  Echo(ch, "%s Schedule Information:\r\n", shuttle->Name );
+  ch->Echo("%s Schedule Information:\r\n", shuttle->Name );
 
   stop = shuttle->CurrentStop;
   /* current port */
   if ( shuttle->State == SHUTTLE_STATE_LANDING || shuttle->State == SHUTTLE_STATE_LANDED )
     {
-      Echo( ch, "Currently docked at %s.\r\n", shuttle->CurrentStop->Name );
+      ch->Echo("Currently docked at %s.\r\n", shuttle->CurrentStop->Name );
       stop = stop->Next;
     }
 
-  SendToCharacter( "Next stops: ", ch);
+  ch->Echo("Next stops: ");
   /* Safety Check */
   if ( stop == NULL)
     stop = shuttle->FirstStop;
@@ -74,12 +74,13 @@ static void output_shuttle(Character * ch, Shuttle * shuttle)
 	break;
 
       if ( stop->Name )
-        Echo( ch, "%s  ", stop->Name );
+        ch->Echo("%s  ", stop->Name );
       else
-        SendToCharacter("(unnamed)  ", ch);
+        ch->Echo("(unnamed)  ");
 
       if ( (stop = stop->Next) == NULL)
         stop = shuttle->FirstStop;
     }
-  SendToCharacter( "\r\n", ch );
+  ch->Echo("\r\n");
 }
+

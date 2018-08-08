@@ -11,7 +11,7 @@ void do_savearea( Character *ch, char *argument )
   if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_AVATAR || !ch->PCData
        ||  ( IsNullOrEmpty( argument ) && !ch->PCData->Build.Area) )
     {
-      SendToCharacter( "You don't have an assigned area to save.\r\n", ch );
+      ch->Echo("You don't have an assigned area to save.\r\n");
       return;
     }
 
@@ -25,7 +25,7 @@ void do_savearea( Character *ch, char *argument )
 
       if ( GetTrustLevel( ch ) < LEVEL_GREATER )
         {
-          SendToCharacter( "You can only save your own area.\r\n", ch );
+          ch->Echo("You can only save your own area.\r\n");
           return;
         }
 
@@ -40,25 +40,26 @@ void do_savearea( Character *ch, char *argument )
 
       if ( !found )
         {
-          SendToCharacter( "Area not found.\r\n", ch );
+          ch->Echo("Area not found.\r\n");
           return;
         }
     }
 
   if ( !tarea )
     {
-      SendToCharacter( "No area to save.\r\n", ch );
+      ch->Echo("No area to save.\r\n");
       return;
     }
 
   /* Ensure not wiping out their area with save before load - Scryn 8/11 */
   if ( !IsBitSet(tarea->Status, AREA_LOADED ) )
     {
-      SendToCharacter( "Your area is not loaded!\r\n", ch );
+      ch->Echo("Your area is not loaded!\r\n");
       return;
     }
 
   sprintf( filename, "%s%s", BUILD_DIR, tarea->Filename );
   FoldArea( tarea, filename, false );
-  SendToCharacter( "Done.\r\n", ch );
+  ch->Echo("Done.\r\n");
 }
+

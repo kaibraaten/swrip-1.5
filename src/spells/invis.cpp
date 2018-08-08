@@ -62,6 +62,8 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
           return rNONE;
         }
     }
-  Echo(ch, "You can't find %s!\r\n", spell_target_name);
+
+  ch->Echo("You can't find %s!\r\n", spell_target_name);
   return rSPELL_FAILED;
 }
+

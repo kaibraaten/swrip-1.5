@@ -51,3 +51,4 @@ ch_ret spell_create_obj( int sn, int level, Character *ch, void *vo )
     ObjectToRoom( obj, ch->InRoom );
   return rNONE;
 }
+

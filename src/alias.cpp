@@ -125,7 +125,7 @@ bool CheckAlias( Character *ch, char *command, char *argument )
     {
       if (ch->CmdRecurse != -1)
         {
-          SendToCharacter("Unable to further process command, recurses too much.\r\n", ch);
+          ch->Echo("Unable to further process command, recurses too much.\r\n");
           ch->CmdRecurse = -1;
         }
 
@@ -171,3 +171,4 @@ void UnlinkAlias( Character *ch, Alias *alias )
   
   ch->PCData->Aliases.remove(alias);
 }
+

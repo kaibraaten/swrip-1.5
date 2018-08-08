@@ -1,5 +1,6 @@
 #include "command.hpp"
 #include "mud.hpp"
+#include "character.hpp"
 
 void do_cmdtable( Character *ch, char *argument )
 {
@@ -7,8 +8,8 @@ void do_cmdtable( Character *ch, char *argument )
   ListIterator *iterator = AllocateListIterator(commands);
   int column = 0;
 
-  SetPagerColor( AT_PLAIN, ch );
-  SendToPager("Commands and Number of Uses This Run\r\n", ch);
+  SetCharacterColor( AT_PLAIN, ch );
+  ch->Echo("Commands and Number of Uses This Run\r\n");
 
   while(ListHasMoreElements(iterator))
     {
@@ -16,17 +17,18 @@ void do_cmdtable( Character *ch, char *argument )
       MoveToNextListElement(iterator);
       ++column;
 
-      PagerPrintf(ch, "%-6.6s %4d", command->Name, command->UseRec->NumberOfTimesUsed);
+      ch->Echo("%-6.6s %4d", command->Name, command->UseRec->NumberOfTimesUsed);
 
       if (column % 4 != 0)
         {
-          PagerPrintf(ch, "\t");
+          ch->Echo("\t");
         }
       else
         {
-          PagerPrintf(ch, "\r\n");
+          ch->Echo("\r\n");
         }
     }
 
   FreeListIterator(iterator);
 }
+

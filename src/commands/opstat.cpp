@@ -1,4 +1,5 @@
 #include "mud.hpp"
+#include "character.hpp"
 
 /* Opstat - Scryn 8/12*/
 void do_opstat( Character *ch, char *argument )
@@ -11,31 +12,32 @@ void do_opstat( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "OProg stat what?\r\n", ch );
+      ch->Echo("OProg stat what?\r\n");
       return;
     }
 
   if ( ( obj = GetObjectAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "You cannot find that.\r\n", ch );
+      ch->Echo("You cannot find that.\r\n");
       return;
     }
 
   if ( !( obj->Prototype->mprog.progtypes ) )
     {
-      SendToCharacter( "That object has no programs set.\r\n", ch);
+      ch->Echo("That object has no programs set.\r\n");
       return;
     }
 
-  Echo( ch, "Name: %s.  Vnum: %d.\r\n",
+  ch->Echo("Name: %s.  Vnum: %d.\r\n",
              obj->Name, obj->Prototype->Vnum );
 
-  Echo( ch, "Short description: %s.\r\n",
+  ch->Echo("Short description: %s.\r\n",
              obj->ShortDescr );
 
   for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
-    Echo( ch, ">%s %s\r\n%s\r\n",
+    ch->Echo(">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),
                mprg->arglist,
                mprg->comlist );
 }
+

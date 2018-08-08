@@ -45,10 +45,10 @@ void do_for(Character *ch, char *argument)
 {
   char range[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  bool fGods = false, fMortals = false, fMobs = false, fEverywhere = false, found;
-  Room *room, *old_room;
-  Character *p, *p_prev;  /* p_next to p_prev -- TRI */
-  int i;
+  bool fGods = false, fMortals = false, fMobs = false, fEverywhere = false, found = false;
+  Room *room = nullptr, *old_room = nullptr;
+  Character *p = nullptr, *p_prev = nullptr;
+  int i = 0;
 
   argument = OneArgument (argument, range);
 
@@ -60,10 +60,9 @@ void do_for(Character *ch, char *argument)
 
   if (!StringPrefix("quit", argument))
     {
-      SendToCharacter ("Are you trying to crash the MUD or something?\r\n",ch);
+      ch->Echo("Are you trying to crash the MUD or something?\r\n");
       return;
     }
-
 
   if (!StrCmp (range, "all"))
     {
@@ -84,7 +83,7 @@ void do_for(Character *ch, char *argument)
   /* do not allow # to make it easier */
   if (fEverywhere && strchr (argument, '#'))
     {
-      SendToCharacter ("Cannot use FOR EVERYWHERE with the # thingie.\r\n",ch);
+      ch->Echo("Cannot use FOR EVERYWHERE with the # thingie.\r\n");
       return;
     }
 
@@ -220,3 +219,4 @@ static const char *name_expand(Character *ch)
   sprintf (outbuf, "%d.%s", count, name);
   return outbuf;
 }
+

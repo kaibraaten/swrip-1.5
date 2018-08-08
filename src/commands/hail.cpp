@@ -7,15 +7,15 @@
 
 void do_hail( Character *ch , char *argument )
 {
-  int vnum;
+  vnum_t vnum = INVALID_VNUM;
   long gold = 1;
   bool steal = false;
-  Room *room;
+  Room *room = nullptr;
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  Ship *ship;
-  Ship *target = NULL;
+  Ship *ship = nullptr;
+  Ship *target = nullptr;
 
   argument = OneArgument( argument, arg );
   strcpy ( arg2, argument);
@@ -25,19 +25,19 @@ void do_hail( Character *ch , char *argument )
       if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
 
         {
-          SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+          ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
           return;
         }
 
       if ( IsNullOrEmpty( arg2 ) )
         {
-          SendToCharacter( "&RUsage: hail <ship> <message>\r\n&w", ch);
+          ch->Echo( "&RUsage: hail <ship> <message>\r\n&w");
           return;
         }
 
       if ( !ship->Spaceobject )
         {
-          SendToCharacter( "&RYou need to launch first!\r\n&w", ch);
+          ch->Echo( "&RYou need to launch first!\r\n&w");
           return;
         }
 
@@ -47,19 +47,20 @@ void do_hail( Character *ch , char *argument )
       if (  target == NULL )
 
         {
-          SendToCharacter("&RThat ship isn't here!\r\n",ch);
+          ch->Echo("&RThat ship isn't here!\r\n");
           return;
         }
+
       if (  target == ship )
         {
-          SendToCharacter("&RWhy don't you just say it?\r\n",ch);
+          ch->Echo("&RWhy don't you just say it?\r\n");
           return;
         }
 
       if ( GetShipDistanceToShip( target, ship ) > 100*(ship->Instruments.Sensor + 10)*((target->Class)+1 )
            && GetShipDistanceToShip( target, ship ) > 100*((ship->Instruments.Comm)+(target->Instruments.Comm)+20 ) )
         {
-          SendToCharacter("&RThat ship is out of the range of your comm system.\r\n&w", ch);
+          ch->Echo("&RThat ship is out of the range of your comm system.\r\n&w");
           return;
         }
 
@@ -87,32 +88,31 @@ void do_hail( Character *ch , char *argument )
 
   if ( ch->Position < POS_FIGHTING )
     {
-      SendToCharacter( "You might want to stop fighting first!\r\n", ch );
+      ch->Echo( "You might want to stop fighting first!\r\n" );
       return;
     }
 
   if ( ch->Position < POS_STANDING )
     {
-      SendToCharacter( "You might want to stand up first!\r\n", ch );
+      ch->Echo( "You might want to stand up first!\r\n" );
       return;
     }
 
   if ( IsBitSet( ch->InRoom->Flags , ROOM_INDOORS ) )
     {
-      SendToCharacter( "You'll have to go outside to do that!\r\n", ch );
+      ch->Echo( "You'll have to go outside to do that!\r\n" );
       return;
     }
 
   if ( ch->InRoom->Sector != SECT_CITY )
     {
-      SendToCharacter( "There does not seem to be any speeders out here.\r\n", ch );
+      ch->Echo( "There does not seem to be any speeders out here.\r\n" );
       return;
     }
 
-
   if ( IsBitSet( ch->InRoom->Flags , ROOM_SPACECRAFT ) )
     {
-      SendToCharacter( "You can't do that on spacecraft!\r\n", ch );
+      ch->Echo( "You can't do that on spacecraft!\r\n" );
       return;
     }
 
@@ -124,7 +124,7 @@ void do_hail( Character *ch , char *argument )
 
   if ( ch->Gold < gold )
     {
-      SendToCharacter( "You don't have enough credits!\r\n", ch );
+      ch->Echo( "You don't have enough credits!\r\n" );
       return;
     }
 
@@ -148,11 +148,12 @@ void do_hail( Character *ch , char *argument )
 
   if ( room == NULL )
     {
-      SendToCharacter( "There doesn't seem to be any taxis nearby!\r\n", ch );
+      ch->Echo( "There doesn't seem to be any taxis nearby!\r\n" );
       return;
     }
 
   ch->Gold -= umax( gold, 0);
+
   if( ch->InRoom && ch->InRoom->Area )
     BoostEconomy( ch->InRoom->Area, gold );
 
@@ -161,19 +162,22 @@ void do_hail( Character *ch , char *argument )
   CharacterFromRoom( ch );
   CharacterToRoom( ch, room );
 
-  Echo( ch, "A speederbike picks you up and drives you to a safe location.\r\nYou pay the driver %d credits.\r\n", gold );
+  ch->Echo( "A speederbike picks you up and drives you to a safe location.\r\nYou pay the driver %d credits.\r\n", gold );
 
   Act( AT_ACTION, "$n $T", ch, NULL, "arrives on a speederbike, gets off and pays the driver before it leaves.",  TO_ROOM );
 
   if( steal )
     {
-      SendToCharacter( "You realize after the taxi drives off that you are missing a good amount of your credits! Thief!\r\n", ch );
+      ch->Echo( "You realize after the taxi drives off that you are missing a good amount of your credits! Thief!\r\n" );
       gold = ch->Gold/10;
       ch->Gold -= gold;
+      
       if( ch->InRoom && ch->InRoom->Area )
         BoostEconomy( ch->InRoom->Area, gold );
+
       return;
     }
 
   do_look( ch, "auto" );
 }
+

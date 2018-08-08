@@ -15,63 +15,64 @@ void do_hijack( Character *ch, char *argument )
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   if ( ship->Class > SHIP_PLATFORM )
     {
-      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
+      ch->Echo("&RThis isn't a spacecraft!\r\n");
       return;
     }
 
   if ( (ship = GetShipFromPilotSeat(ch->InRoom->Vnum)) == NULL )
     {
-      SendToCharacter("&RYou don't seem to be in the pilot seat!\r\n",ch);
+      ch->Echo("&RYou don't seem to be in the pilot seat!\r\n");
       return;
     }
 
   if ( CheckPilot( ch , ship ) )
     {
-      SendToCharacter("&RWhat would be the point of that!\r\n",ch);
+      ch->Echo("&RWhat would be the point of that?\r\n");
       return;
     }
 
   if ( ship->Type == MOB_SHIP && GetTrustLevel(ch) < LEVEL_CREATOR )
     {
-      SendToCharacter("&RThis ship isn't pilotable by mortals at this point in time...\r\n",ch);
+      ch->Echo("&RThis ship isn't pilotable by mortals at this point in time...\r\n");
       return;
     }
 
   if  ( ship->Class == SHIP_PLATFORM )
     {
-      SendToCharacter( "You can't do that here.\r\n" , ch );
+      ch->Echo( "You can't do that here.\r\n" );
       return;
     }
 
   if ( ship->LastDock != ship->Location )
     {
-      SendToCharacter("&rYou don't seem to be docked right now.\r\n",ch);
+      ch->Echo("&rYou don't seem to be docked right now.\r\n");
       return;
     }
 
   if ( ship->State != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
-      SendToCharacter("The ship is not docked right now.\r\n",ch);
+      ch->Echo("The ship is not docked right now.\r\n");
       return;
     }
 
   if ( IsShipDisabled( ship ) )
     {
-      SendToCharacter("The ship's drive is disabled .\r\n",ch);
+      ch->Echo("The ship's drive is disabled .\r\n");
       return;
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel
     : (int)  (ch->PCData->Learned[gsn_hijack]) ;
+
   if ( GetRandomPercent() > the_chance )
     {
-      SendToCharacter("You fail to figure out the correct launch code.\r\n",ch);
+      ch->Echo("You fail to figure out the correct launch code.\r\n");
       LearnFromFailure( ch, gsn_hijack );
       return;
     }
@@ -96,7 +97,7 @@ void do_hijack( Character *ch, char *argument )
           EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Entrance) , "The hatch slides shut." );
         }
       SetCharacterColor( AT_GREEN, ch );
-      SendToCharacter( "Launch sequence initiated.\r\n", ch);
+      ch->Echo( "Launch sequence initiated.\r\n" );
       Act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
            NULL, argument , TO_ROOM );
       EchoToShip( AT_YELLOW , ship , "The ship.hppums as it lifts off the ground.");
@@ -120,10 +121,11 @@ void do_hijack( Character *ch, char *argument )
 
         {
           p_prev = p->Previous;  /* TRI */
+
           if (!IsNpc(p) && GetTrustLevel(p) >= LEVEL_GREATER)
             {
               sprintf( buf2, "%s(%s)", ship->Name, ship->PersonalName );
-              Echo(p, "&R[Alarm] %s has been hijacked by %s!\r\n", buf2, ch->Name);
+              p->Echo( "&R[Alarm] %s has been hijacked by %s!\r\n", buf2, ch->Name);
             }
         }
 
@@ -147,14 +149,14 @@ void do_hijack( Character *ch, char *argument )
           if ( !IsAwake(victim) || IsBitSet(victim->InRoom->Flags,ROOM_SILENCE) )
             continue;
 
-          Echo(victim,"&R[Alarm] %s has been hijacked!\r\n",ship->Name);
+          victim->Echo("&R[Alarm] %s has been hijacked!\r\n", ship->Name);
         }
 
       return;
     }
 
   SetCharacterColor( AT_RED, ch );
-  SendToCharacter("You fail to work the controls properly!\r\n",ch);
+  ch->Echo("You fail to work the controls properly!\r\n");
 
   if ( ship->Class == FIGHTER_SHIP )
     LearnFromFailure( ch, gsn_starfighters );
@@ -165,3 +167,4 @@ void do_hijack( Character *ch, char *argument )
   if ( ship->Class == CAPITAL_SHIP )
     LearnFromFailure( ch, gsn_capitalships );
 }
+

@@ -39,3 +39,4 @@ bool spec_police_attack( Character *ch )
 
   return false;
 }
+

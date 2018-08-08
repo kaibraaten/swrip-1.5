@@ -14,28 +14,28 @@ void do_appoint( Character *ch , char *argument )
 
   if ( !IsClanned( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo( "Huh?\r\n" );
       return;
     }
 
-  if (  StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Leader  )  )
+  if ( StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Leader  )  )
     {
-      SendToCharacter( "Only your leader can do that!\r\n", ch );
+      ch->Echo( "Only your leader can do that!\r\n" );
       return;
     }
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: appoint <name> < first | second >\r\n", ch );
+      ch->Echo( "Usage: appoint <name> < first | second >\r\n" );
       return;
     }
 
-  if ( !StrCmp( argument , "first" )  )
+  if ( !StrCmp( argument, "first" )  )
     {
       if ( ch->PCData->ClanInfo.Clan->Leadership.Number1
 	   && StrCmp( ch->PCData->ClanInfo.Clan->Leadership.Number1 , "" ) )
         {
-          SendToCharacter( "You already have someone in that position... demote them first.\r\n", ch);
+          ch->Echo( "You already have someone in that position... demote them first.\r\n" );
           return;
         }
 
@@ -47,7 +47,7 @@ void do_appoint( Character *ch , char *argument )
       if ( ch->PCData->ClanInfo.Clan->Leadership.Number2
 	   && StrCmp( ch->PCData->ClanInfo.Clan->Leadership.Number2 , "" ))
         {
-          SendToCharacter( "You already have someone in that position... demote them first.\r\n", ch);
+          ch->Echo( "You already have someone in that position... demote them first.\r\n" );
           return;
         }
 
@@ -55,7 +55,10 @@ void do_appoint( Character *ch , char *argument )
       ch->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( arg );
     }
   else
-    do_appoint( ch , "" );
-
+    {
+      do_appoint( ch , "" );
+    }
+  
   Clans->Save( ch->PCData->ClanInfo.Clan );
 }
+

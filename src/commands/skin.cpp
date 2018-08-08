@@ -14,31 +14,31 @@ void do_skin( Character *ch, char *argument)
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Whose corpse do you wish to skin?\r\n", ch );
+      ch->Echo("Whose corpse do you wish to skin?\r\n");
       return;
     }
 
   if ( (corpse = GetObjectHere(ch, argument)) == NULL )
     {
-      SendToCharacter( "You cannot find that here.\r\n", ch );
+      ch->Echo("You cannot find that here.\r\n");
       return;
     }
 
   if ( (obj = GetEquipmentOnCharacter(ch, WEAR_WIELD)) == NULL )
     {
-      SendToCharacter( "You have no weapon with which to perform this deed.\r\n", ch );
+      ch->Echo("You have no weapon with which to perform this deed.\r\n");
       return;
     }
 
   if ( corpse->ItemType != ITEM_CORPSE_PC )
     {
-      SendToCharacter( "You can only skin bodies.\r\n", ch);
+      ch->Echo("You can only skin bodies.\r\n");
       return;
     }
 
   if ( corpse->Value[OVAL_CORPSE_SKINNED] == 1 )
     {
-      SendToCharacter( "This corpse has already been skinned.\r\n", ch );
+      ch->Echo("This corpse has already been skinned.\r\n");
       return;
     }
 
@@ -48,7 +48,7 @@ void do_skin( Character *ch, char *argument)
        && obj->Value[OVAL_CORPSE_3] != 3
        && obj->Value[OVAL_CORPSE_3] != 11 )
     {
-      SendToCharacter( "There is nothing you can do with this corpse.\r\n", ch );
+      ch->Echo("There is nothing you can do with this corpse.\r\n");
       return;
     }
 
@@ -87,3 +87,4 @@ void do_skin( Character *ch, char *argument)
 
   ObjectToCharacter( skin, ch );
 }
+

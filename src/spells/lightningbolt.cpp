@@ -18,7 +18,7 @@ ch_ret spell_lightning_bolt( int sn, int level, Character *ch, void *vo )
 
   int dam;
 
-  SendToCharacter("You feel the hatred grow within you!\r\n", ch);
+  ch->Echo("You feel the hatred grow within you!\r\n");
   ch->Alignment = ch->Alignment - 100;
   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
   ApplySithPenalty( ch );
@@ -32,3 +32,4 @@ ch_ret spell_lightning_bolt( int sn, int level, Character *ch, void *vo )
     dam -= (int) (dam / 4);
   return InflictDamage( ch, victim, dam, sn );
 }
+

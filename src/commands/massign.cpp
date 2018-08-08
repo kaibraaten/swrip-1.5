@@ -18,32 +18,33 @@ void do_massign( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || m_lo < 0 || m_hi < 0 )
     {
-      SendToCharacter( "Syntax: massign <who> <low> <high>\r\n", ch );
+      ch->Echo("Syntax: massign <who> <low> <high>\r\n");
       return;
     }
 
   if ( (victim = GetCharacterAnywhere( ch, arg1 )) == NULL )
     {
-      SendToCharacter( "They don't seem to be around.\r\n", ch );
+      ch->Echo("They don't seem to be around.\r\n");
       return;
     }
 
   if ( IsNpc( victim ) || GetTrustLevel( victim ) < LEVEL_CREATOR )
     {
-      SendToCharacter( "They wouldn't know what to do with a monster range.\r\n", ch );
+      ch->Echo("They wouldn't know what to do with a monster range.\r\n");
       return;
     }
 
   if ( m_lo > m_hi )
     {
-      SendToCharacter( "Unacceptable monster range.\r\n", ch );
+      ch->Echo("Unacceptable monster range.\r\n");
       return;
     }
 
   victim->PCData->Build.VnumRanges.Mob.First = m_lo;
   victim->PCData->Build.VnumRanges.Mob.Last = m_hi;
   AssignAreaTo( victim );
-  SendToCharacter( "Done.\r\n", ch );
-  Echo( victim, "%s has assigned you the monster vnum range %d - %d.\r\n",
+  ch->Echo("Done.\r\n");
+  victim->Echo("%s has assigned you the monster vnum range %d - %d.\r\n",
              ch->Name, m_lo, m_hi );
 }
+

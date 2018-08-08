@@ -55,23 +55,23 @@ bool CheckSocial( Character *ch, const char *command, char *argument )
 
   if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_NO_EMOTE) )
     {
-      SendToCharacter( "You are anti-social!\r\n", ch );
+      ch->Echo( "You are anti-social!\r\n" );
       return true;
     }
 
   switch ( ch->Position )
     {
     case POS_DEAD:
-      SendToCharacter( "Lie still; you are DEAD.\r\n", ch );
+      ch->Echo( "Lie still; you are DEAD.\r\n" );
       return true;
 
     case POS_INCAP:
     case POS_MORTAL:
-      SendToCharacter( "You are hurt far too bad for that.\r\n", ch );
+      ch->Echo( "You are hurt far too bad for that.\r\n" );
       return true;
 
     case POS_STUNNED:
-      SendToCharacter( "You are too stunned to do that.\r\n", ch );
+      ch->Echo( "You are too stunned to do that.\r\n" );
       return true;
 
     case POS_SLEEPING:
@@ -84,7 +84,7 @@ bool CheckSocial( Character *ch, const char *command, char *argument )
           break;
         }
 
-      SendToCharacter( "In your dreams, or what?\r\n", ch );
+      ch->Echo( "In your dreams, or what?\r\n" );
       return true;
 
     default:
@@ -100,7 +100,7 @@ bool CheckSocial( Character *ch, const char *command, char *argument )
     }
   else if ( !( victim = GetCharacterInRoom( ch, arg ) ) )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
     }
   else if ( victim == ch )
     {
@@ -350,3 +350,4 @@ SocialRepository *NewSocialRepository()
 {
   return new LuaSocialRepository();
 }
+

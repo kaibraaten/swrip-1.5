@@ -305,3 +305,4 @@ HelpFileRepository *NewHelpFileRepository()
 {
   return new LuaHelpFileRepository();
 }
+

@@ -24,8 +24,9 @@ ch_ret spell_weaken( int sn, int level, Character *ch, void *vo )
   af.AffectedBy = 0;
   AffectToCharacter( victim, &af );
   SetCharacterColor( AT_MAGIC, victim );
-  SendToCharacter( "You feel weaker.\r\n", victim );
+  victim->Echo("You feel weaker.\r\n");
   if ( ch != victim )
-    SendToCharacter( "Ok.\r\n", ch );
+    ch->Echo("Ok.\r\n");
   return rNONE;
 }
+

@@ -23,7 +23,7 @@ void do_mp_open_passage( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) || ( ch->Desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -91,3 +91,4 @@ void do_mp_open_passage( Character *ch, char *argument )
   pexit->Key                    = -1;
   pexit->Flags              = EX_PASSAGE;
 }
+

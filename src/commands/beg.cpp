@@ -5,25 +5,26 @@
 
 void do_beg( Character *ch, char *argument )
 {
-  char buf  [MAX_STRING_LENGTH];
-  char arg1 [MAX_INPUT_LENGTH];
-  Character *victim;
-  int percent, xp;
-  int amount;
+  char buf[MAX_STRING_LENGTH];
+  char arg1[MAX_INPUT_LENGTH];
+  Character *victim = nullptr;
+  int percent = 0, xp = 0;
+  int amount = 0;
 
-  if ( IsNpc (ch) ) return;
+  if ( IsNpc (ch) )
+    return;
 
   argument = OneArgument( argument, arg1 );
 
   if ( ch->Mount )
     {
-      SendToCharacter( "You can't do that while mounted.\r\n", ch );
+      ch->Echo( "You can't do that while mounted.\r\n" );
       return;
     }
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Beg for money from whom?\r\n", ch );
+      ch->Echo( "Beg for money from whom?\r\n" );
       return;
     }
 
@@ -32,50 +33,50 @@ void do_beg( Character *ch, char *argument )
 
   if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "That's pointless.\r\n", ch );
+      ch->Echo( "That's pointless.\r\n" );
       return;
     }
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      SendToCharacter( "This isn't a good place to do that.\r\n", ch );
+      ch->Echo( "This isn't a good place to do that.\r\n" );
       return;
     }
 
   if ( ch->Position == POS_FIGHTING )
     {
-      SendToCharacter( "Interesting combat technique.\r\n" , ch );
+      ch->Echo( "Interesting combat technique.\r\n" );
       return;
     }
 
   if ( victim->Position == POS_FIGHTING )
     {
-      SendToCharacter( "They're a little busy right now.\r\n" , ch );
+      ch->Echo( "They're a little busy right now.\r\n" );
       return;
     }
 
   if ( ch->Position <= POS_SLEEPING )
     {
-      SendToCharacter( "In your dreams or what?\r\n" , ch );
+      ch->Echo( "In your dreams or what?\r\n" );
       return;
     }
 
   if ( victim->Position <= POS_SLEEPING )
     {
-      SendToCharacter( "You might want to wake them first...\r\n" , ch );
+      ch->Echo( "You might want to wake them first...\r\n" );
       return;
     }
 
   if ( !IsNpc( victim ) )
     {
-      SendToCharacter( "You beg them for money.\r\n", ch );
+      ch->Echo( "You beg them for money.\r\n" );
       Act( AT_ACTION, "$n begs you to give $s some change.\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n begs $N for change.\r\n",  ch, NULL, victim, TO_NOTVICT );
       return;
@@ -89,7 +90,7 @@ void do_beg( Character *ch, char *argument )
       /*
        * Failure.
        */
-      SendToCharacter( "You beg them for money but don't get any!\r\n", ch );
+      ch->Echo( "You beg them for money but don't get any!\r\n" );
       Act( AT_ACTION, "$n is really getting on your nerves with all this begging!\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n begs $N for money.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
@@ -120,12 +121,13 @@ void do_beg( Character *ch, char *argument )
 
   ch->Gold     += amount;
   victim->Gold -= amount;
-  Echo( ch, "%s gives you %d credits.\r\n", victim->ShortDescr , amount );
+  ch->Echo( "%s gives you %d credits.\r\n", victim->ShortDescr , amount );
   LearnFromSuccess( ch, gsn_beg );
   xp = umin( amount*10 , ( GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  )  );
   xp = umin( xp , ComputeXP( ch, victim ) );
   GainXP( ch, SMUGGLING_ABILITY, xp );
-  Echo( ch, "&WYou gain %ld smuggling experience points!\r\n", xp );
+  ch->Echo( "&WYou gain %ld smuggling experience points!\r\n", xp );
   Act( AT_ACTION, "$N gives $n some money.\r\n",  ch, NULL, victim, TO_NOTVICT );
   Act( AT_ACTION, "You give $n some money.\r\n", ch, NULL, victim, TO_VICT    );
 }
+

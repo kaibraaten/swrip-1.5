@@ -19,7 +19,7 @@ void do_pricevendor (Character *ch, char *argument)
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter("Syntax: pricevendor <item> <cost>\r\n",ch);
+      ch->Echo("Syntax: pricevendor <item> <cost>\r\n");
       return;
     }
 
@@ -33,13 +33,13 @@ void do_pricevendor (Character *ch, char *argument)
 
   if ( (ch1 = GetCharacterInRoom(ch, vendor->Owner)) == NULL )
     {
-      SendToCharacter ("This isnt your vendor!\r\n",ch);
+      ch->Echo("This isnt your vendor!\r\n");
       return;
     }
 
   if ( StrCmp( ch1->Name, vendor->Owner ) )
     {
-      SendToCharacter ("Trying to steal huh?\r\n",ch);
+      ch->Echo("Trying to steal huh?\r\n");
       tms = localtime(&current_time);
       tms->tm_hour += 24;
       ch->PCData->ReleaseDate = mktime(tms);
@@ -49,7 +49,7 @@ void do_pricevendor (Character *ch, char *argument)
       CharacterToRoom(ch, GetRoom(ROOM_VNUM_HELL));
       Act(AT_MAGIC, "$n appears in a could of hellish light.", ch, NULL, ch, TO_NOTVICT);
       do_look(ch, "auto");
-      Echo(ch, "The immortals are not pleased with your actions.\r\n"
+      ch->Echo("The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for 24 Hours.\r\n");
       SaveCharacter(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
       Log->Info("%s just tried to abuse the vendor bug!" , ch->Name);
@@ -58,19 +58,21 @@ void do_pricevendor (Character *ch, char *argument)
 
   if ( ch->Fighting)
     {
-      SendToCharacter ("Not while you fightZ!\r\n",ch);
+      ch->Echo("Not while you fightZ!\r\n");
       return;
     }
 
   if ( (obj  = GetCarriedObject( vendor, arg1 )) != NULL)
     {
       obj->Cost = atoi (arg2);
-      SendToCharacter("The price has been changed\r\n",ch);
+      ch->Echo("The price has been changed\r\n");
       SaveVendor(vendor);
       return;
     }
 
 
-  SendToCharacter("He doesnt have that item!\r\n",ch);
+  ch->Echo("He doesnt have that item!\r\n");
   SaveVendor(vendor);
 }
+
+

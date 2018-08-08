@@ -13,25 +13,25 @@ void do_newbieset( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Syntax: newbieset <char>.\r\n", ch );
+      ch->Echo("Syntax: newbieset <char>.\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "That player is not here.\r\n", ch);
+      ch->Echo("That player is not here.\r\n");
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPC's.\r\n", ch );
+      ch->Echo("Not on NPC's.\r\n");
       return;
     }
 
   if ( ( victim->TopLevel < 1 ) || ( victim->TopLevel > 5 ) )
     {
-      SendToCharacter( "Level of victim must be 1 to 5.\r\n", ch );
+      ch->Echo("Level of victim must be 1 to 5.\r\n");
       return;
     }
 
@@ -42,5 +42,6 @@ void do_newbieset( Character *ch, char *argument )
   ObjectToCharacter(obj, victim);
 
   Act( AT_IMMORT, "$n has equipped you with a newbieset.", ch, NULL, victim, TO_VICT);
-  Echo( ch, "You have re-equipped %s.\r\n", victim->Name );
+  ch->Echo("You have re-equipped %s.\r\n", victim->Name );
 }
+

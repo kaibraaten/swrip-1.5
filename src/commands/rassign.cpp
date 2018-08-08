@@ -20,25 +20,25 @@ void do_rassign( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || r_lo < 0 || r_hi < 0 )
     {
-      SendToCharacter( "Syntax: assign <who> <low> <high>\r\n", ch );
+      ch->Echo("Syntax: assign <who> <low> <high>\r\n");
       return;
     }
 
   if ( (victim = GetCharacterAnywhere( ch, arg1 )) == NULL )
     {
-      SendToCharacter( "They don't seem to be around.\r\n", ch );
+      ch->Echo("They don't seem to be around.\r\n");
       return;
     }
 
   if ( IsNpc( victim ) || GetTrustLevel( victim ) < LEVEL_AVATAR )
     {
-      SendToCharacter( "They wouldn't know what to do with a room range.\r\n", ch );
+      ch->Echo("They wouldn't know what to do with a room range.\r\n");
       return;
     }
 
   if ( r_lo > r_hi )
     {
-      SendToCharacter( "Unacceptable room range.\r\n", ch );
+      ch->Echo("Unacceptable room range.\r\n");
       return;
     }
 
@@ -48,8 +48,8 @@ void do_rassign( Character *ch, char *argument )
   victim->PCData->Build.VnumRanges.Room.First = r_lo;
   victim->PCData->Build.VnumRanges.Room.Last = r_hi;
   AssignAreaTo( victim );        /* Put back by Thoric on 02/07/96 */
-  SendToCharacter( "Done.\r\n", ch );
-  Echo( victim, "%s has assigned you the room range %d - %d.\r\n",
+  ch->Echo("Done.\r\n");
+  victim->Echo("%s has assigned you the room range %d - %d.\r\n",
              ch->Name, r_lo, r_hi );
   AssignAreaTo( victim );
 
@@ -66,3 +66,4 @@ void do_rassign( Character *ch, char *argument )
       RemoveBit( victim->PCData->Build.Area->Status, AREA_DELETED );
     }
 }
+

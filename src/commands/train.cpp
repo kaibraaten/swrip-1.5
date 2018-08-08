@@ -5,7 +5,7 @@
 void do_train( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *mob;
+  Character *mob = nullptr;
   bool tfound = false;
   bool successful = false;
 
@@ -17,17 +17,16 @@ void do_train( Character *ch, char *argument )
   switch( ch->SubState )
     {
     default:
-
       if ( IsNullOrEmpty( arg ) )
         {
-          SendToCharacter( "Train what?\r\n", ch );
-          SendToCharacter( "\r\nChoices: strength, intelligence, wisdom, dexterity, constitution or charisma\r\n", ch );
+          ch->Echo("Train what?\r\n");
+          ch->Echo("\r\nChoices: strength, intelligence, wisdom, dexterity, constitution or charisma\r\n");
           return;
         }
 
       if ( !IsAwake(ch) )
 	{
-          SendToCharacter( "In your dreams, or what?\r\n", ch );
+          ch->Echo("In your dreams, or what?\r\n");
           return;
         }
 
@@ -40,7 +39,7 @@ void do_train( Character *ch, char *argument )
 
       if ( (!mob) || (!tfound) )
         {
-          SendToCharacter( "You can't do that here.\r\n", ch );
+          ch->Echo("You can't do that here.\r\n");
           return;
         }
 
@@ -63,7 +62,7 @@ void do_train( Character *ch, char *argument )
                    mob, NULL, ch, TO_VICT );
               return;
             }
-          SendToCharacter("&GYou begin your weight training.\r\n", ch);
+          ch->Echo("&GYou begin your weight training.\r\n");
         }
       if ( !StrCmp( arg, "dex" ) || !StrCmp( arg, "dexterity" ) )
         {
@@ -73,7 +72,7 @@ void do_train( Character *ch, char *argument )
                    mob, NULL, ch, TO_VICT );
 	      return;
             }
-          SendToCharacter("&GYou begin to work at some challenging tests of coordination.\r\n", ch);
+          ch->Echo("&GYou begin to work at some challenging tests of coordination.\r\n");
         }
       if ( !StrCmp( arg, "int" ) || !StrCmp( arg, "intelligence" ) )
         {
@@ -83,7 +82,7 @@ void do_train( Character *ch, char *argument )
                    mob, NULL, ch, TO_VICT );
               return;
             }
-          SendToCharacter("&GYou begin your studies.\r\n", ch);
+          ch->Echo("&GYou begin your studies.\r\n");
         }
       if ( !StrCmp( arg, "wis" ) || !StrCmp( arg, "wisdom" ) )
         {
@@ -93,7 +92,7 @@ void do_train( Character *ch, char *argument )
                    mob, NULL, ch, TO_VICT );
               return;
             }
-          SendToCharacter("&GYou begin contemplating several ancient texts in an effort to gain wisdom.\r\n", ch);
+          ch->Echo("&GYou begin contemplating several ancient texts in an effort to gain wisdom.\r\n");
         }
       if ( !StrCmp( arg, "con" ) || !StrCmp( arg, "constitution" ) )
         {
@@ -103,7 +102,7 @@ void do_train( Character *ch, char *argument )
                    mob, NULL, ch, TO_VICT );
               return;
             }
-          SendToCharacter("&GYou begin your endurance training.\r\n", ch);
+          ch->Echo("&GYou begin your endurance training.\r\n");
         }
       if ( !StrCmp( arg, "cha" ) || !StrCmp( arg, "charisma" ) )
         {
@@ -113,7 +112,7 @@ void do_train( Character *ch, char *argument )
                    mob, NULL, ch, TO_VICT );
               return;
             }
-          SendToCharacter("&GYou begin lessons in maners and ettiquite.\r\n", ch);
+          ch->Echo("&GYou begin lessons in maners and ettiquite.\r\n");
         }
       AddTimerToCharacter( ch , TIMER_CMD_FUN , 10 , do_train , SUB_PAUSE );
       ch->dest_buf = CopyString(arg);
@@ -129,7 +128,7 @@ void do_train( Character *ch, char *argument )
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
       ch->SubState = SUB_NONE;
-      SendToCharacter("&RYou fail to complete your training.\r\n", ch);
+      ch->Echo("&RYou fail to complete your training.\r\n");
       return;
     }
 
@@ -144,10 +143,10 @@ void do_train( Character *ch, char *argument )
     {
       if ( !successful )
         {
-          SendToCharacter("&RYou feel that you have wasted alot of energy for nothing...\r\n", ch);
+          ch->Echo("&RYou feel that you have wasted alot of energy for nothing...\r\n");
           return;
         }
-      SendToCharacter("&GAfter much of excercise you feel a little stronger.\r\n", ch);
+      ch->Echo("&GAfter much of excercise you feel a little stronger.\r\n");
       ch->Stats.PermStr++;
       return;
     }
@@ -156,10 +155,10 @@ void do_train( Character *ch, char *argument )
     {
       if ( !successful )
         {
-          SendToCharacter("&RAfter all that training you still feel like a clutz...\r\n", ch);
+          ch->Echo("&RAfter all that training you still feel like a clutz...\r\n");
           return;
         }
-      SendToCharacter("&GAfter working hard at many challenging tasks you feel a bit more coordinated.\r\n", ch);
+      ch->Echo("&GAfter working hard at many challenging tasks you feel a bit more coordinated.\r\n");
       ch->Stats.PermDex++;
       return;
     }
@@ -168,10 +167,10 @@ void do_train( Character *ch, char *argument )
     {
       if ( !successful )
         {
-          SendToCharacter("&RHitting the books leaves you only with sore eyes...\r\n", ch);
+          ch->Echo("&RHitting the books leaves you only with sore eyes...\r\n");
           return;
         }
-      SendToCharacter("&GAfter much study you feel alot more knowledgeable.\r\n", ch);
+      ch->Echo("&GAfter much study you feel alot more knowledgeable.\r\n");
       ch->Stats.PermInt++;
       return;
     }
@@ -180,11 +179,11 @@ void do_train( Character *ch, char *argument )
     {
       if ( !successful )
         {
-          SendToCharacter("&RStudying the ancient texts has left you more confused than wise...\r\n", ch);
+          ch->Echo("&RStudying the ancient texts has left you more confused than wise...\r\n");
           return;
         }
-      SendToCharacter("&GAfter contemplating several seemingly meaningless events you suddenly \r\nreceive a flash of insight into the workings of the uni\
-verse.\r\n", ch);
+
+      ch->Echo("&GAfter contemplating several seemingly meaningless events you suddenly \r\nreceive a flash of insight into the workings of the universe.\r\n");
       ch->Stats.PermWis++;
       return;
     }
@@ -193,10 +192,10 @@ verse.\r\n", ch);
     {
       if ( !successful )
         {
-          SendToCharacter("&RYou spend long a long arobics session ecersising very hard but finish \r\nfeeling only tired and out of breath....\r\n", ch);
+          ch->Echo("&RYou spend long a long arobics session ecersising very hard but finish \r\nfeeling only tired and out of breath....\r\n");
           return;
         }
-      SendToCharacter("&GAfter a long tiring excersise session you feel much healthier than before.\r\n", ch);
+      ch->Echo("&GAfter a long tiring excersise session you feel much healthier than before.\r\n");
       ch->Stats.PermCon++;
       return;
     }
@@ -206,13 +205,14 @@ verse.\r\n", ch);
     {
       if ( !successful )
         {
-	  SendToCharacter("&RYou finish your self improvement session feeling a little depressed.\r\n", ch);
+   ch->Echo("&RYou finish your self improvement session feeling a little depressed.\r\n");
           return;
         }
-      SendToCharacter("&GYou spend some time focusing on how to improve your personality and feel \r\nmuch better about yourself and the ways others see y\
-ou.\r\n", ch);
+      
+      ch->Echo("&GYou spend some time focusing on how to improve your personality and feel \r\nmuch better about yourself and the ways others see you.\r\n");
       ch->Stats.PermCha++;
       return;
     }
 }
+
 

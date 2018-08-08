@@ -52,7 +52,7 @@ void do_info(Character *ch, char *argument )
 
   if ( target == NULL )
     {
-      SendToCharacter("&RI don't see that here.\r\nTry the radar, or type info by itself for info on this ship.\r\n",ch);
+      ch->Echo("&RI don't see that here.\r\nTry the radar, or type info by itself for info on this ship.\r\n");
       return;
     }
 
@@ -61,30 +61,32 @@ void do_info(Character *ch, char *argument )
 
   if( GetShipDistanceToShip( ship, target ) > 500 + ship->Instruments.Sensor * 2 )
     {
-      SendToCharacter("&RThat ship is to far away to scan.\r\n",ch);
+      ch->Echo("&RThat ship is to far away to scan.\r\n");
       return;
     }
 
-  Echo( ch, "&Y%s %s : %s (%s)\r\n&B",
+  ch->Echo("&Y%s %s : %s (%s)\r\n&B",
 	ShipTypes[target->Type],
 	ShipClasses[target->Class],
 	target->Name,
 	target->PersonalName );
-  Echo( ch, "Description: %s\r\nOwner: %s",
+  ch->Echo("Description: %s\r\nOwner: %s",
 	target->Description,
 	target->Owner );
   if( fromafar == false )
-    Echo( ch, "   Pilot: %s   Copilot: %s", target->Pilot,  target->CoPilot );
+    ch->Echo("   Pilot: %s   Copilot: %s", target->Pilot,  target->CoPilot );
 
-  Echo( ch, "\r\nLaser cannons: %d  Ion cannons: %d\r\n",
+  ch->Echo("\r\nLaser cannons: %d  Ion cannons: %d\r\n",
 	target->WeaponSystems.Laser.Count,
 	target->WeaponSystems.IonCannon.Count );
-  Echo( ch, "Max Hull: %d  ", target->Defenses.Hull.Max );
-  Echo( ch, "Max Shields: %d   Max Energy(fuel): %d\r\n",
+  ch->Echo("Max Hull: %d  ", target->Defenses.Hull.Max );
+  ch->Echo("Max Shields: %d   Max Energy(fuel): %d\r\n",
              target->Defenses.Shield.Max, target->Thrusters.Energy.Max );
-  Echo( ch, "Maximum Speed: %d   Hyperspeed: %d  Value: %d\r\n",
+  ch->Echo("Maximum Speed: %d   Hyperspeed: %d  Value: %d\r\n",
              target->Thrusters.Speed.Max, target->Hyperdrive.Speed, GetShipValue( target ));
 
   Act( AT_PLAIN, "$n checks various gages and displays on the control panel.",
        ch, NULL, argument , TO_ROOM );
 }
+
+

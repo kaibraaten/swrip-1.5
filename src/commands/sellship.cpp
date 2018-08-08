@@ -16,14 +16,14 @@ void do_sellship(Character *ch, char *argument )
 
   if ( StrCmp( ship->Owner , ch->Name ) )
     {
-      SendToCharacter( "&RThat isn't your ship!" ,ch );
+      ch->Echo("&RThat isn't your ship!" );
       return;
     }
 
   price = GetShipValue( ship );
 
   ch->Gold += ( price - price/10 );
-  Echo(ch, "&GYou receive %ld credits from selling your ship.\r\n" , price - price/10 );
+  ch->Echo("&GYou receive %ld credits from selling your ship.\r\n" , price - price/10 );
 
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );
@@ -34,3 +34,4 @@ void do_sellship(Character *ch, char *argument )
   ship->CoPilot = CopyString( "" );
   Ships->Save(ship);
 }
+

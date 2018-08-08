@@ -19,7 +19,7 @@ void do_sabotage(Character *ch, char *argument )
     default:
       if (  (ship = GetShipFromEngine(ch->InRoom->Vnum))  == NULL )
         {
-          SendToCharacter("&RYou must be in the engine room of a ship to do that!\r\n",ch);
+          ch->Echo("&RYou must be in the engine room of a ship to do that!\r\n");
           return;
         }
 
@@ -27,8 +27,8 @@ void do_sabotage(Character *ch, char *argument )
            StrCmp( argument , "launcher" ) && StrCmp( argument , "laser" ) &&
            StrCmp( argument , "docking" ) && StrCmp( argument , "tractor" ) )
         {
-          SendToCharacter("&RYou need to specify something to sabotage:\r\n",ch);
-          SendToCharacter("&rTry: hull, drive, launcher, laser, docking, or tractor.\r\n",ch);
+          ch->Echo("&RYou need to specify something to sabotage:\r\n");
+          ch->Echo("&rTry: hull, drive, launcher, laser, docking, or tractor.\r\n");
           return;
         }
 
@@ -36,7 +36,7 @@ void do_sabotage(Character *ch, char *argument )
         : (int) (ch->PCData->Learned[gsn_sabotage]);
       if ( GetRandomPercent() < the_chance )
         {
-          SendToCharacter( "&GYou begin your work.\r\n", ch);
+          ch->Echo("&GYou begin your work.\r\n");
           Act( AT_PLAIN, "$n begins working on the ship's $T.", ch,
                NULL, argument , TO_ROOM );
           if ( !StrCmp(arg,"hull") )
@@ -46,7 +46,7 @@ void do_sabotage(Character *ch, char *argument )
           ch->dest_buf = CopyString(arg);
 	  return;
         }
-      SendToCharacter("&RYou fail to figure out where to start.\r\n",ch);
+      ch->Echo("&RYou fail to figure out where to start.\r\n");
       LearnFromFailure( ch, gsn_sabotage );
       return;
 
@@ -62,7 +62,7 @@ void do_sabotage(Character *ch, char *argument )
       ch->SubState = SUB_NONE;
       if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
         return;
-      SendToCharacter("&RYou are distracted and fail to finish your work.\r\n", ch);
+      ch->Echo("&RYou are distracted and fail to finish your work.\r\n");
       return;
     }
 
@@ -79,7 +79,7 @@ void do_sabotage(Character *ch, char *argument )
                        GetRandomNumberFromRange( (int) ( ch->PCData->Learned[gsn_sabotage] / 2 ) , (int) (ch->PCData->Learned[gsn_sabotage]) ),
                        ( ship->Defenses.Hull.Current ) );
       ship->Defenses.Hull.Current -= change;
-      Echo( ch, "&GSabotage complete.. Hull strength decreased by %d points.\r\n", change );
+      ch->Echo("&GSabotage complete.. Hull strength decreased by %d points.\r\n", change );
     }
 
   if ( !StrCmp(arg,"drive") )
@@ -87,32 +87,32 @@ void do_sabotage(Character *ch, char *argument )
       if (ship->Location == ship->LastDock)
         ship->State = SHIP_DISABLED;
       else if ( IsShipInHyperspace( ship ) )
-        SendToCharacter("You realize after working that it would be a bad idea to do this while in hyperspace.\r\n", ch);
+        ch->Echo("You realize after working that it would be a bad idea to do this while in hyperspace.\r\n");
       else
 	ship->State = SHIP_DISABLED;
-      SendToCharacter("&GShips drive damaged.\r\n", ch);
+      ch->Echo("&GShips drive damaged.\r\n");
     }
 
   if ( !StrCmp(arg,"docking") )
     {
       ship->DockingState = SHIP_DISABLED;
-      SendToCharacter("&GDocking bay sabotaged.\r\n", ch);
+      ch->Echo("&GDocking bay sabotaged.\r\n");
     }
   if ( !StrCmp(arg,"tractor") )
     {
       ship->WeaponSystems.TractorBeam.State = SHIP_DISABLED;
-      SendToCharacter("&GTractorbeam sabotaged.\r\n", ch);
+      ch->Echo("&GTractorbeam sabotaged.\r\n");
     }
   if ( !StrCmp(arg,"launcher") )
     {
       ship->WeaponSystems.Tube.State = MISSILE_DAMAGED;
-      SendToCharacter("&GMissile launcher sabotaged.\r\n", ch);
+      ch->Echo("&GMissile launcher sabotaged.\r\n");
     }
 
   if ( !StrCmp(arg,"laser") )
     {
       ship->WeaponSystems.Laser.State = LASER_DAMAGED;
-      SendToCharacter("&GMain laser sabotaged.\r\n", ch);
+      ch->Echo("&GMain laser sabotaged.\r\n");
     }
 
   Act( AT_PLAIN, "$n finishes the work.", ch,
@@ -122,3 +122,4 @@ void do_sabotage(Character *ch, char *argument )
 
   LearnFromSuccess( ch, gsn_sabotage );
 }
+

@@ -11,7 +11,7 @@ void do_induct( Character *ch, char *argument )
 
   if ( IsNpc( ch ) || !IsClanned( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -27,7 +27,7 @@ void do_induct( Character *ch, char *argument )
     }
   else
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -35,19 +35,19 @@ void do_induct( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Induct whom?\r\n", ch );
+      ch->Echo("Induct whom?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "That player is not here.\r\n", ch);
+      ch->Echo("That player is not here.\r\n");
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPCs.\r\n", ch );
+      ch->Echo("Not on NPCs.\r\n");
       return;
     }
 
@@ -59,11 +59,11 @@ void do_induct( Character *ch, char *argument )
         {
           if ( victimClan == clan )
             {
-              SendToCharacter( "This player already belongs to your guild!\r\n", ch );
+              ch->Echo("This player already belongs to your guild!\r\n");
             }
 	  else
             {
-              SendToCharacter( "This player already belongs to an organization!\r\n", ch );
+              ch->Echo("This player already belongs to an organization!\r\n");
             }
 
           return;
@@ -72,11 +72,11 @@ void do_induct( Character *ch, char *argument )
         {
           if ( victimClan == clan )
             {
-              SendToCharacter( "This player already belongs to your organization!\r\n", ch );
+              ch->Echo("This player already belongs to your organization!\r\n");
             }
           else
             {
-              SendToCharacter( "This player already belongs to an organization!\r\n", ch );
+              ch->Echo("This player already belongs to an organization!\r\n");
             }
 
           return;
@@ -93,3 +93,5 @@ void do_induct( Character *ch, char *argument )
   Act( AT_MAGIC, "$n inducts you into $t", ch, clan->Name, victim, TO_VICT );
   SaveCharacter( victim );
 }
+
+

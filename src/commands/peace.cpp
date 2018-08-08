@@ -20,5 +20,6 @@ void do_peace( Character *ch, char *argument )
       StopFearing( rch );
     }
 
-  SendToCharacter( "Ok.\r\n", ch );
+  ch->Echo("Ok.\r\n");
 }
+

@@ -8,13 +8,13 @@ void do_accept(Character *ch, char *argument)
 
   if ( CharactersInArena() > 0 )
     {
-      SendToCharacter("Please wait until the current arena is closed before you accept.\r\n",ch);
+      ch->Echo("Please wait until the current arena is closed before you accept.\r\n");
       return;
     }
 
   if ( !ch->Challenged )
     {
-      SendToCharacter("You have not been challenged!\r\n",ch);
+      ch->Echo("You have not been challenged!\r\n");
       return;
     }
   else
@@ -26,12 +26,12 @@ void do_accept(Character *ch, char *argument)
 
       if ( dch->InRoom == ch->InRoom )
         {
-          SendToCharacter("You must be in a different room as your challenger.\r\n",ch);
+          ch->Echo("You must be in a different room as your challenger.\r\n");
         }
 
       if ( dch->InRoom == ch->InRoom )
         {
-          SendToCharacter("You must be in a different room as your challenger.\r\n",ch);
+          ch->Echo("You must be in a different room as your challenger.\r\n");
           return;
         }
 
@@ -56,3 +56,4 @@ void do_accept(Character *ch, char *argument)
       return;
     }
 }
+

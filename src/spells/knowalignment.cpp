@@ -34,3 +34,4 @@ ch_ret spell_know_alignment( int sn, int level, Character *ch, void *vo )
   Act( AT_MAGIC, msg, ch, NULL, victim, TO_CHAR );
   return rNONE;
 }
+

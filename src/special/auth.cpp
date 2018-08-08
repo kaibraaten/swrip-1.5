@@ -27,7 +27,7 @@ bool spec_auth( Character *ch )
             {
               obj = CreateObject( pObjIndex, 1 );
               obj = ObjectToCharacter( obj, victim );
-              SendToCharacter( "&cThe schoolmaster gives you a diploma, and shakes your hand.\r\n&w",victim);
+              victim->Echo("&cThe schoolmaster gives you a diploma, and shakes your hand.\r\n&w");
             }
         }
 
@@ -49,3 +49,4 @@ bool spec_auth( Character *ch )
 
   return false;
 }
+

@@ -10,7 +10,7 @@ void do_light( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Light what?\r\n", ch );
+      ch->Echo("Light what?\r\n");
       return;
     }
 
@@ -19,13 +19,13 @@ void do_light( Character *ch, char *argument )
 
   if ( (pipe_obj = GetCarriedObject( ch, arg )) == NULL )
     {
-      SendToCharacter( "You aren't carrying that.\r\n", ch );
+      ch->Echo("You aren't carrying that.\r\n");
       return;
     }
 
   if ( pipe_obj->ItemType != ITEM_PIPE )
     {
-      SendToCharacter( "You can't light that.\r\n", ch );
+      ch->Echo("You can't light that.\r\n");
       return;
     }
 
@@ -43,5 +43,7 @@ void do_light( Character *ch, char *argument )
       return;
     }
   
-  SendToCharacter( "It's already lit.\r\n", ch );
+  ch->Echo("It's already lit.\r\n");
 }
+
+

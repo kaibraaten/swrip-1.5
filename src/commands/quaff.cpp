@@ -9,7 +9,7 @@ void do_quaff( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) || !StrCmp(argument, "") )
     {
-      SendToCharacter( "Quaff what?\r\n", ch );
+      ch->Echo("Quaff what?\r\n");
       return;
     }
 
@@ -35,7 +35,7 @@ void do_quaff( Character *ch, char *argument )
        && ( ch->PCData->Condition[COND_FULL] >= 48
             ||   ch->PCData->Condition[COND_THIRST] >= 48 ) )
     {
-      SendToCharacter( "Your stomach cannot contain any more.\r\n", ch );
+      ch->Echo("Your stomach cannot contain any more.\r\n");
       return;
     }
 
@@ -77,3 +77,4 @@ void do_quaff( Character *ch, char *argument )
 
   ExtractObject( obj );
 }
+

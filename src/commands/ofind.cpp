@@ -1,4 +1,5 @@
 #include "mud.hpp"
+#include "character.hpp"
 
 void do_ofind( Character *ch, char *argument )
 {
@@ -12,11 +13,11 @@ void do_ofind( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Ofind what?\r\n", ch );
+      ch->Echo("Ofind what?\r\n");
       return;
     }
 
-  SetPagerColor( AT_PLAIN, ch );
+  SetCharacterColor( AT_PLAIN, ch );
   fAll  = !StrCmp( arg, "all" );
   nMatch        = 0;
 
@@ -27,12 +28,13 @@ void do_ofind( Character *ch, char *argument )
       if ( fAll || NiftyIsName( arg, pObjIndex->Name ) )
         {
           nMatch++;
-          PagerPrintf( ch, "[%5d] %s\r\n",
+          ch->Echo("[%5d] %s\r\n",
                         pObjIndex->Vnum, Capitalize( pObjIndex->ShortDescr ) );
         }
 
   if ( nMatch )
-    PagerPrintf( ch, "Number of matches: %d\n", nMatch );
+    ch->Echo("Number of matches: %d\n", nMatch );
   else
-    SendToCharacter( "Nothing like that in hell, earth, or heaven.\r\n", ch );
+    ch->Echo("Nothing like that in hell, earth, or heaven.\r\n");
 }
+

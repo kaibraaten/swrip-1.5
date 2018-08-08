@@ -12,40 +12,41 @@ void do_notitle( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Notitle whom?\r\n", ch );
+      ch->Echo("Notitle whom?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPC's.\r\n", ch );
+      ch->Echo("Not on NPC's.\r\n");
       return;
     }
 
   if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      SendToCharacter( "You failed.\r\n", ch );
+      ch->Echo("You failed.\r\n");
       return;
     }
 
   if ( IsBitSet(victim->PCData->Flags, PCFLAG_NOTITLE) )
     {
       RemoveBit(victim->PCData->Flags, PCFLAG_NOTITLE);
-      SendToCharacter( "You can set your own title again.\r\n", victim );
-      SendToCharacter( "NOTITLE removed.\r\n", ch );
+      victim->Echo("You can set your own title again.\r\n");
+      ch->Echo("NOTITLE removed.\r\n");
     }
   else
     {
       SetBit(victim->PCData->Flags, PCFLAG_NOTITLE);
       sprintf( buf, "%s", victim->Name );
       SetCharacterTitle( victim, buf );
-      SendToCharacter( "You can't set your own title!\r\n", victim );
-      SendToCharacter( "NOTITLE set.\r\n", ch );
+      victim->Echo("You can't set your own title!\r\n");
+      ch->Echo("NOTITLE set.\r\n");
     }
 }
+

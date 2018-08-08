@@ -7,28 +7,33 @@ static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 void do_drop( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Object *obj;
-  Object *obj_next;
-  bool found;
-  int number;
+  Object *obj = nullptr;
+  Object *obj_next = nullptr;
+  bool found = false;
+  int number = 0;
 
   argument = OneArgument( argument, arg );
+
   if ( IsNumber(arg) )
     {
       number = atoi(arg);
+
       if ( number < 1 )
         {
-          SendToCharacter( "That was easy...\r\n", ch );
+          ch->Echo( "That was easy...\r\n" );
           return;
         }
+
       argument = OneArgument( argument, arg );
     }
   else
-    number = 0;
-
+    {
+      number = 0;
+    }
+  
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Drop what?\r\n", ch );
+      ch->Echo( "Drop what?\r\n" );
       return;
     }
 
@@ -36,24 +41,23 @@ void do_drop( Character *ch, char *argument )
     return;
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_NODROP )
-       ||   ( !IsNpc(ch) && IsBitSet( ch->Flags, PLR_LITTERBUG )) )
+       || ( !IsNpc(ch) && IsBitSet( ch->Flags, PLR_LITTERBUG )) )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      SendToCharacter( "A magical force stops you!\r\n", ch );
+      ch->Echo( "A magical force stops you!\r\n" );
       SetCharacterColor( AT_TELL, ch );
-      SendToCharacter( "Someone tells you, 'No littering here!'\r\n", ch );
+      ch->Echo( "Someone tells you, 'No littering here!'\r\n" );
       return;
     }
 
   if ( number > 0 )
     {
       /* 'drop NNNN coins' */
-
       if ( !StrCmp( arg, "credits" ) || !StrCmp( arg, "credit" ) )
         {
           if ( ch->Gold < number )
             {
-              SendToCharacter( "You haven't got that many credits.\r\n", ch );
+              ch->Echo( "You haven't got that many credits.\r\n" );
               return;
             }
 
@@ -79,7 +83,8 @@ void do_drop( Character *ch, char *argument )
 
           Act( AT_ACTION, "$n drops some credits.", ch, NULL, NULL, TO_ROOM );
           ObjectToRoom( CreateMoney( number ), ch->InRoom );
-          SendToCharacter( "OK.\r\n", ch );
+          ch->Echo( "OK.\r\n" );
+
           if ( IsBitSet( SysData.SaveFlags, SV_DROP ) )
             {
               SaveCharacter( ch );
@@ -98,13 +103,13 @@ void do_drop( Character *ch, char *argument )
       /* 'drop obj' */
       if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
         {
-          SendToCharacter( "You do not have that item.\r\n", ch );
+          ch->Echo( "You do not have that item.\r\n" );
           return;
         }
 
       if ( !CanDropObject( ch, obj ) )
         {
-          SendToCharacter( "You can't let go of it.\r\n", ch );
+          ch->Echo( "You can't let go of it.\r\n" );
           return;
         }
 
@@ -142,28 +147,33 @@ void do_drop( Character *ch, char *argument )
         chk = arg;
       else
         chk = &arg[4];
+
       /* 'drop all' or 'drop all.obj' */
       if ( IsBitSet( ch->InRoom->Flags, ROOM_NODROPALL ) )
         {
-          SendToCharacter( "You can't seem to do that here...\r\n", ch );
+          ch->Echo( "You can't seem to do that here...\r\n" );
           return;
         }
+
       found = false;
+
       for ( obj = ch->FirstCarrying; obj; obj = obj_next )
         {
           obj_next = obj->NextContent;
 
           if ( (fAll || NiftyIsName( chk, obj->Name ) )
-               &&   CanSeeObject( ch, obj )
-               &&   obj->WearLoc == WEAR_NONE
-               &&   CanDropObject( ch, obj ) )
+               && CanSeeObject( ch, obj )
+               && obj->WearLoc == WEAR_NONE
+               && CanDropObject( ch, obj ) )
             {
               found = true;
+
               if ( obj->Prototype->mprog.progtypes & DROP_PROG && obj->Count > 1 )
                 {
                   ++cnt;
                   SeparateOneObjectFromGroup( obj );
                   ObjectFromCharacter( obj );
+
                   if ( !obj_next )
                     obj_next = ch->FirstCarrying;
                 }
@@ -171,15 +181,19 @@ void do_drop( Character *ch, char *argument )
                 {
                   if ( number && (cnt + obj->Count) > number )
                     SplitGroupedObject( obj, number - cnt );
+
                   cnt += obj->Count;
                   ObjectFromCharacter( obj );
                 }
+
               Act( AT_ACTION, "$n drops $p.", ch, obj, NULL, TO_ROOM );
               Act( AT_ACTION, "You drop $p.", ch, obj, NULL, TO_CHAR );
               obj = ObjectToRoom( obj, ch->InRoom );
               ObjProgDropTrigger( ch, obj );            /* mudprogs */
+
               if ( CharacterDiedRecently(ch) )
                 return;
+
               if ( number && cnt >= number )
                 break;
 	    }
@@ -220,3 +234,4 @@ static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch)
       SaveClanStoreroom(ch, clan);
     }
 }
+

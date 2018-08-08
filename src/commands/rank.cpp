@@ -9,8 +9,8 @@ void do_rank( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: rank <string>.\r\n", ch );
-      SendToCharacter( "   or: rank none.\r\n", ch );
+      ch->Echo("Usage: rank <string>.\r\n");
+      ch->Echo("   or: rank none.\r\n");
       return;
     }
 
@@ -22,5 +22,6 @@ void do_rank( Character *ch, char *argument )
   else
     ch->PCData->Rank = CopyString( argument );
 
-  SendToCharacter( "Ok.\r\n", ch );
+  ch->Echo("Ok.\r\n");
 }
+

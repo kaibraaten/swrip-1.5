@@ -10,13 +10,13 @@ void do_disconnect( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Disconnect whom?\r\n", ch );
+      ch->Echo( "Disconnect whom?\r\n" );
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
@@ -28,10 +28,11 @@ void do_disconnect( Character *ch, char *argument )
 
   if ( GetTrustLevel(ch) <= GetTrustLevel( victim ) )
     {
-      SendToCharacter( "They might not like that...\r\n", ch );
+      ch->Echo( "They might not like that...\r\n" );
       return;
     }
 
   CloseDescriptor( victim->Desc, false );
-  SendToCharacter( "Ok.\r\n", ch );
+  ch->Echo( "Ok.\r\n" );
 }
+

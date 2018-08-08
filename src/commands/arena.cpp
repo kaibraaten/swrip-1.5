@@ -8,34 +8,32 @@ void do_arena(Character *ch, char *argument)
 
   if (IsNpc(ch))
     {
-      SendToCharacter("Mobs cant play in the arena.\r\n",ch);
+      ch->Echo("Mobs cant play in the arena.\r\n");
       return;
     }
 
   if(!arena.InStartArena)
     {
-      SendToCharacter("The killing fields are closed right now.\r\n", ch);
+      ch->Echo("The killing fields are closed right now.\r\n");
       return;
     }
 
   if(ch->TopLevel < arena.MinLevel)
     {
-      sprintf(buf, "Sorry but you must be at least level %d to enter this arena.\r\n",
-	      arena.MinLevel);
-      SendToCharacter(buf, ch);
+      ch->Echo("Sorry but you must be at least level %d to enter this arena.\r\n",
+               arena.MinLevel);
       return;
     }
 
   if( ch->TopLevel > arena.MaxLevel)
     {
-      SendToCharacter("This arena is for lower level characters.\r\n", ch);
+      ch->Echo("This arena is for lower level characters.\r\n");
       return;
     }
 
   if(IsBitSet(ch->InRoom->Flags, ROOM_ARENA))
     {
-      SendToCharacter("You are in the arena already\r\n",ch);
-      return;
+      ch->Echo("You are in the arena already\r\n");
     }
   else
     {
@@ -44,14 +42,14 @@ void do_arena(Character *ch, char *argument)
       CharacterFromRoom(ch);
       CharacterToRoom(ch, GetRoom(PREP_START));
       Act(AT_WHITE,"$n is dropped from the sky.", ch, NULL, NULL, TO_ROOM);
-      SendToCharacter("You have been taken to the killing fields\r\n",ch);
+      ch->Echo("You have been taken to the killing fields\r\n");
       do_look(ch, "auto");
       sprintf(buf, "%s has joined the blood bath.", ch->Name);
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
-      SendToCharacter(buf, ch);
+      ch->Echo( "%s", buf );
       ch->Hit = ch->MaxHit;
       ch->Mana = ch->MaxMana;
       ch->Move = ch->MaxMove;
-      return;
     }
 }
+

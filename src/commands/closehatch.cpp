@@ -4,7 +4,7 @@
 
 void do_closehatch(Character *ch, char *argument )
 {
-  Ship *ship;
+  Ship *ship = nullptr;
   char buf[MAX_STRING_LENGTH];
 
   if ( IsNullOrEmpty( argument ) || !StrCmp(argument,"hatch") )
@@ -13,22 +13,21 @@ void do_closehatch(Character *ch, char *argument )
 
       if( ship == NULL)
         {
-          SendToCharacter( "&RClose what?\r\n", ch );
+          ch->Echo( "&RClose what?\r\n" );
           return;
         }
       else
         {
-
-          if  ( ship->Class == SHIP_PLATFORM )
+          if ( ship->Class == SHIP_PLATFORM )
             {
-              SendToCharacter( "&RTry one of the docking bays!\r\n" , ch );
+              ch->Echo( "&RTry one of the docking bays!\r\n" );
               return;
             }
 
 	  if ( ship->HatchOpen)
             {
               ship->HatchOpen = false;
-	      SendToCharacter("&GYou close the hatch.\r\n",ch);
+	      ch->Echo("&GYou close the hatch.\r\n");
               Act( AT_PLAIN, "$n closes the hatch.", ch, NULL, argument, TO_ROOM );
               sprintf( buf , "The hatch on %s closes." , ship->Name);
               EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
@@ -36,7 +35,7 @@ void do_closehatch(Character *ch, char *argument )
             }
           else
             {
-              SendToCharacter("&RIt's already closed.\r\n",ch);
+              ch->Echo("&RIt's already closed.\r\n");
               return;
             }
         }
@@ -52,7 +51,7 @@ void do_closehatch(Character *ch, char *argument )
 
   if ( ship->State != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
-      SendToCharacter( "&RThat ship.hppas already started to launch",ch);
+      ch->Echo( "&RThat ship.hppas already started to launch" );
       return;
     }
   else
@@ -67,8 +66,9 @@ void do_closehatch(Character *ch, char *argument )
         }
       else
         {
-          SendToCharacter("&RIts already closed.\r\n",ch);
+          ch->Echo("&RIts already closed.\r\n");
 	  return;
         }
     }
 }
+

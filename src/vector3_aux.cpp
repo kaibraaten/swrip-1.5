@@ -237,3 +237,4 @@ static bool IsShipFacing( const Ship * const ship,
 
   return facing;
 }
+

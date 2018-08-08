@@ -73,3 +73,4 @@ bool spec_police( Character *ch )
 
   return false;
 }
+

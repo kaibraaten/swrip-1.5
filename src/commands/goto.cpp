@@ -17,7 +17,7 @@ void do_goto( Character *ch, char *argument )
   
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Goto where?\r\n", ch );
+      ch->Echo( "Goto where?\r\n" );
       return;
     }
 
@@ -27,29 +27,29 @@ void do_goto( Character *ch, char *argument )
       
       if ( vnum < 0 || GetRoom( vnum ) )
         {
-          SendToCharacter( "You cannot find that...\r\n", ch );
+          ch->Echo( "You cannot find that...\r\n" );
           return;
 	}
 
       if ( vnum < 1 || IsNpc(ch) || !ch->PCData->Build.Area )
         {
-          SendToCharacter( "No such location.\r\n", ch );
+          ch->Echo( "No such location.\r\n" );
           return;
         }
 
       if ( GetTrustLevel( ch ) < SysData.LevelToModifyProto &&
            !( ch->PCData->Bestowments && IsName( "intergoto", ch->PCData->Bestowments) ))
-
         {
           if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
             {
-              SendToCharacter( "You must have an assigned area to create rooms.\r\n", ch );
+              ch->Echo( "You must have an assigned area to create rooms.\r\n" );
               return;
             }
+
           if ( vnum < pArea->VnumRanges.Room.First
                ||   vnum > pArea->VnumRanges.Room.Last  )
             {
-              SendToCharacter( "That room is not within your assigned range.\r\n", ch );
+              ch->Echo( "That room is not within your assigned range.\r\n" );
               return;
             }
         }
@@ -57,12 +57,12 @@ void do_goto( Character *ch, char *argument )
       location = MakeRoom( vnum );
       location->Area = ch->PCData->Build.Area;
       SetCharacterColor( AT_WHITE, ch );
-      SendToCharacter( "Waving your hand, you form order from swirling chaos,\r\nand step into a new reality...\r\n", ch );
+      ch->Echo( "Waving your hand, you form order from swirling chaos,\r\nand step into a new reality...\r\n" );
     }
 
   if ( IsRoomPrivate(ch, location ) )
     {
-      SendToCharacter( "Overriding private flag!\r\n", ch );
+      ch->Echo( "Overriding private flag!\r\n" );
     }
 
   if ( GetTrustLevel( ch ) < LEVEL_GREATER &&
@@ -72,14 +72,14 @@ void do_goto( Character *ch, char *argument )
 
       if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
-          SendToCharacter( "You must have an assigned area to goto.\r\n", ch );
+          ch->Echo( "You must have an assigned area to goto.\r\n" );
           return;
         }
 
       if ( vnum < pArea->VnumRanges.Room.First
            ||  vnum > pArea->VnumRanges.Room.Last )
         {
-          SendToCharacter( "That room is not within your assigned range.\r\n", ch );
+          ch->Echo( "That room is not within your assigned range.\r\n" );
           return;
         }
 
@@ -87,7 +87,7 @@ void do_goto( Character *ch, char *argument )
 	     || ch->InRoom->Vnum > pArea->VnumRanges.Room.Last )
 	   && !IsBitSet(ch->InRoom->Flags , ROOM_HOTEL) )
         {
-          SendToCharacter( "Builders can only use goto from a hotel or in their zone.\r\n", ch );
+          ch->Echo( "Builders can only use goto from a hotel or in their zone.\r\n" );
           return;
         }
     }
@@ -141,3 +141,4 @@ void do_goto( Character *ch, char *argument )
         }
     }
 }
+

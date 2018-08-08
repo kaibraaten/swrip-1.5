@@ -10,7 +10,7 @@ void do_pull( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Pull what?\r\n", ch );
+      ch->Echo("Pull what?\r\n");
       return;
     }
 
@@ -25,3 +25,4 @@ void do_pull( Character *ch, char *argument )
 
   PullOrPush( ch, obj, true );
 }
+

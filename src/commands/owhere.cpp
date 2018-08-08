@@ -18,7 +18,7 @@ void do_owhere( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      PagerPrintf( ch, "Owhere what?\r\n" );
+      ch->Echo("Owhere what?\r\n" );
       return;
     }
 
@@ -38,7 +38,7 @@ void do_owhere( Character *ch, char *argument )
 	}
 
       if ( !found )
-	SendToPager( heading, ch );       /* print report heading */
+        ch->Echo(heading);
 
       found = true;
       outer_obj = obj;
@@ -67,7 +67,7 @@ void do_owhere( Character *ch, char *argument )
             }
 
           sprintf(buf+strlen(buf), "&R&w\r\n");
-          SendToPager(buf, ch);
+          ch->Echo(buf);
         }
       else if ( outer_obj->InRoom )
         {
@@ -85,12 +85,12 @@ void do_owhere( Character *ch, char *argument )
             }
 
           sprintf(buf+strlen(buf), "&R&w\r\n");
-          SendToPager(buf, ch);
+          ch->Echo(buf);
         }
     }
 
   if ( !found )
-    PagerPrintf(ch, "None found.\r\n");
+    ch->Echo("None found.\r\n");
 }
 
 static void trunc1(char *s, size_t len)
@@ -98,3 +98,4 @@ static void trunc1(char *s, size_t len)
   if ( strlen(s) > len )
     s[len] = '\0';
 }
+

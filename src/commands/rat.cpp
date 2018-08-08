@@ -16,7 +16,7 @@ void do_rat( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Syntax: rat <start> <end> <command>\r\n", ch );
+      ch->Echo("Syntax: rat <start> <end> <command>\r\n");
       return;
     }
 
@@ -24,13 +24,13 @@ void do_rat( Character *ch, char *argument )
 
   if ( Start < MIN_VNUM || End < Start || Start > End || Start == End || End > MAX_VNUM )
     {
-      SendToCharacter( "Invalid range.\r\n", ch );
+      ch->Echo("Invalid range.\r\n");
       return;
     }
 
   if ( !StrCmp( argument, "quit" ) )
     {
-      SendToCharacter( "I don't think so!\r\n", ch );
+      ch->Echo("I don't think so!\r\n");
       return;
     }
 
@@ -48,5 +48,6 @@ void do_rat( Character *ch, char *argument )
 
   CharacterFromRoom( ch );
   CharacterToRoom( ch, original );
-  SendToCharacter( "Done.\r\n", ch );
+  ch->Echo("Done.\r\n");
 }
+

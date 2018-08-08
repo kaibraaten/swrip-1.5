@@ -4,21 +4,21 @@
 void do_consider( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  char *msg;
-  int diff;
+  const Character *victim = nullptr;
+  const char *msg = nullptr;
+  int diff = 0;
 
   OneArgument( argument, arg );
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Consider killing whom?\r\n", ch );
+      ch->Echo( "Consider killing whom?\r\n" );
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They're not here.\r\n", ch );
+      ch->Echo( "They're not here.\r\n" );
       return;
     }
 
@@ -48,3 +48,4 @@ void do_consider( Character *ch, char *argument )
 
   Act( AT_CONSIDER, msg, ch, NULL, victim, TO_CHAR );
 }
+

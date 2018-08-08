@@ -35,7 +35,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 
         case AFF_POISON:
 	  af.Type = gsn_poison;
-	  SendToCharacter("You feel the hatred grow within you!\r\n", ch);
+   ch->Echo("You feel the hatred grow within you!\r\n");
           ch->Alignment = ch->Alignment - 100;
           ch->Alignment = urange( -1000, ch->Alignment, 1000 );
           ApplySithPenalty( ch );
@@ -119,7 +119,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
             case APPLY_HIT:
               if ( ch != victim && victim->Hit < victim->MaxHit && af.Modifier > 0 && victim->Race != RACE_DROID)
                 {
-                  SendToCharacter("The noble Jedi use their powers to help others!\r\n", ch);
+                  ch->Echo("The noble Jedi use their powers to help others!\r\n");
                   ch->Alignment = ch->Alignment +20 ;
                   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
                   ApplyJediBonus(ch);
@@ -142,7 +142,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 
               if ( ch != victim && victim->Race != RACE_DROID)
                 {
-                  SendToCharacter("The noble Jedi use their powers to help others!\r\n", ch);
+                  ch->Echo("The noble Jedi use their powers to help others!\r\n");
                   ch->Alignment = ch->Alignment +25 ;
                   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
 		  ApplyJediBonus(ch);
@@ -175,3 +175,4 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
   UpdatePosition( victim );
   return retcode;
 }
+

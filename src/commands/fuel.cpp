@@ -17,13 +17,13 @@ void do_fuel(Character *ch, char *argument )
   if ((fuelSource = GetShipFromHangar(ch->InRoom->Vnum)) == NULL
       && (fuelSource = GetShipFromEntrance(ch->InRoom->Vnum)) == NULL)
     {
-      SendToCharacter("&RYou must be in the hangar or the entrance of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the hangar or the entrance of a ship to do that!\r\n");
       return;
     }
 
   if( IsNullOrEmpty( arg1 ) || !IsNumber(arg1) )
     {
-      SendToCharacter( "Syntax: Fuel <amount> <ship>", ch);
+      ch->Echo( "Syntax: Fuel <amount> <ship>");
       return;
     }
 
@@ -34,7 +34,7 @@ void do_fuel(Character *ch, char *argument )
 
   if( fuelTarget == NULL )
     {
-      SendToCharacter( "Ship not docked. Fuel what ship?", ch );
+      ch->Echo( "Ship not docked. Fuel what ship?" );
       return;
     }
 
@@ -42,13 +42,13 @@ void do_fuel(Character *ch, char *argument )
 
   if(fuelSource->Thrusters.Energy.Current <= amount)
     {
-      SendToCharacter( "&RError: Ordered energy over current stock. Sending everything but 1 unit.&w\r\n", ch );
+      ch->Echo("&RError: Ordered energy over current stock. Sending everything but 1 unit.&w\r\n");
       amount = fuelSource->Thrusters.Energy.Current - 1;
     }
 
   if(fuelTarget->Thrusters.Energy.Max < fuelTarget->Thrusters.Energy.Current + amount)
     {
-      SendToCharacter( "&rError: Ordered energy over target capacity. Filling tanks.\r\n", ch );
+      ch->Echo( "&rError: Ordered energy over target capacity. Filling tanks.\r\n" );
       amount = fuelTarget->Thrusters.Energy.Max - fuelTarget->Thrusters.Energy.Current;
     }
 
@@ -61,10 +61,10 @@ void do_fuel(Character *ch, char *argument )
 
   sprintf( buf, "&YFuel order filled: &O%s: %d\r\n", fuelTarget->Name, amount );
   EchoToCockpit( AT_YELLOW, fuelSource, buf );
-  SendToCharacter( buf, ch );
+  ch->Echo("%s", buf);
   sprintf( buf, "&YFuel remaining: %d\r\n", fuelSource->Thrusters.Energy.Current );
   EchoToCockpit( AT_YELLOW, fuelSource, buf );
-  SendToCharacter( buf, ch );
+  ch->Echo("%s", buf);
 }
 
 struct UserData
@@ -105,3 +105,4 @@ static Ship *GetFuelTarget(const Ship *fuelSource)
 
   return fuelTarget;
 }
+

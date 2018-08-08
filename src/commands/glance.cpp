@@ -9,26 +9,26 @@
 void do_glance( Character *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
 
   if ( !ch->Desc )
     return;
 
   if ( ch->Position < POS_SLEEPING )
     {
-      SendToCharacter( "You can't see anything but stars!\r\n", ch );
+      ch->Echo( "You can't see anything but stars!\r\n" );
       return;
     }
 
   if ( ch->Position == POS_SLEEPING )
     {
-      SendToCharacter( "You can't see anything, you're sleeping!\r\n", ch );
+      ch->Echo( "You can't see anything, you're sleeping!\r\n" );
       return;
     }
 
   if ( IsBlind( ch ) )
     {
-      Echo( ch, "You can't see a thing!\r\n" );
+      ch->Echo( "You can't see a thing!\r\n" );
       return;
     }
 
@@ -45,7 +45,7 @@ void do_glance( Character *ch, char *argument )
 
   if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "They're not here.", ch );
+      ch->Echo( "They're not here." );
       return;
     }
   else
@@ -60,3 +60,4 @@ void do_glance( Character *ch, char *argument )
       return;
     }
 }
+

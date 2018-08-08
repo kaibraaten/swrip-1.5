@@ -22,7 +22,7 @@ void do_languages( Character *ch, char *argument )
 
       if ( IsNullOrEmpty( arg2 ) )
         {
-          SendToCharacter( "Learn which language?\r\n", ch );
+          ch->Echo("Learn which language?\r\n");
           return;
         }
 
@@ -36,19 +36,19 @@ void do_languages( Character *ch, char *argument )
 
       if ( LanguageArray[lang] == LANG_UNKNOWN )
         {
-          SendToCharacter( "That is not a language.\r\n", ch );
+          ch->Echo("That is not a language.\r\n");
           return;
         }
 
       if ( !IsValidLanguage( LanguageArray[lang] ) )
         {
-          Echo( ch, "You may not learn that language.\r\n" );
+          ch->Echo("You may not learn that language.\r\n" );
           return;
         }
       
       if ( ( sn = LookupSkill( LanguageNames[lang] ) ) < 0 )
         {
-          SendToCharacter( "That is not a language.\r\n", ch );
+          ch->Echo("That is not a language.\r\n");
 	  return;
         }
       
@@ -69,13 +69,13 @@ void do_languages( Character *ch, char *argument )
 
       if ( !sch )
         {
-          SendToCharacter( "There is no one who can teach that language here.\r\n", ch );
+          ch->Echo("There is no one who can teach that language here.\r\n");
           return;
         }
 
       if ( ch->Gold < 25 )
         {
-          SendToCharacter( "Language lessons cost 25 credits... you don't have enough.\r\n", ch );
+          ch->Echo("Language lessons cost 25 credits... you don't have enough.\r\n");
           return;
         }
       ch->Gold -= 25;
@@ -114,13 +114,15 @@ void do_languages( Character *ch, char *argument )
         SetCharacterColor( AT_SAY, ch );
 
       if ( ( sn = LookupSkill( LanguageNames[lang] ) ) < 0 )
-        SendToCharacter( "(  0) ", ch );
+        ch->Echo("(  0) ");
       else
-        Echo( ch , "(%3d) ", ch->PCData->Learned[sn] );
+        ch ->Echo("(%3d) ", ch->PCData->Learned[sn] );
 
-      SendToCharacter( LanguageNames[lang], ch );
-      SendToCharacter( "\r\n", ch );
+      ch->Echo(LanguageNames[lang]);
+      ch->Echo("\r\n");
     }
 
-  SendToCharacter( "\r\n", ch );
+  ch->Echo("\r\n");
 }
+
+

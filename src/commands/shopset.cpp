@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "shop.hpp"
+#include "character.hpp"
 
 void do_shopset( Character *ch, char *argument )
 {
@@ -15,9 +16,9 @@ void do_shopset( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "Usage: shopset <mob vnum> <field> value\r\n", ch );
-      SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( "  buy0 buy1 buy2 buy3 buy4 buy sell open close keeper\r\n", ch );
+      ch->Echo("Usage: shopset <mob vnum> <field> value\r\n");
+      ch->Echo("\r\nField being one of:\r\n");
+      ch->Echo("  buy0 buy1 buy2 buy3 buy4 buy sell open close keeper\r\n");
       return;
     }
 
@@ -25,7 +26,7 @@ void do_shopset( Character *ch, char *argument )
 
   if ( (mob = GetProtoMobile(vnum)) == NULL )
     {
-      SendToCharacter( "Mobile not found.\r\n", ch );
+      ch->Echo("Mobile not found.\r\n");
       return;
     }
 
@@ -34,7 +35,7 @@ void do_shopset( Character *ch, char *argument )
 
   if ( !mob->Shop )
     {
-      SendToCharacter( "This mobile doesn't keep a shop.\r\n", ch );
+      ch->Echo("This mobile doesn't keep a shop.\r\n");
       return;
     }
 
@@ -48,12 +49,12 @@ void do_shopset( Character *ch, char *argument )
 
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
-          SendToCharacter( "Invalid item type!\r\n", ch );
+          ch->Echo("Invalid item type!\r\n");
           return;
         }
 
       shop->BuyType[0] = (ItemTypes)value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -64,12 +65,12 @@ void do_shopset( Character *ch, char *argument )
 
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
-          SendToCharacter( "Invalid item type!\r\n", ch );
+          ch->Echo("Invalid item type!\r\n");
           return;
         }
 
       shop->BuyType[1] = (ItemTypes)value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -80,12 +81,12 @@ void do_shopset( Character *ch, char *argument )
 
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
-          SendToCharacter( "Invalid item type!\r\n", ch );
+          ch->Echo("Invalid item type!\r\n");
           return;
         }
 
       shop->BuyType[2] = (ItemTypes)value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -96,12 +97,12 @@ void do_shopset( Character *ch, char *argument )
 
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
-          SendToCharacter( "Invalid item type!\r\n", ch );
+          ch->Echo("Invalid item type!\r\n");
           return;
         }
 
       shop->BuyType[3] = (ItemTypes)value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -112,12 +113,12 @@ void do_shopset( Character *ch, char *argument )
 
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
-          SendToCharacter( "Invalid item type!\r\n", ch );
+          ch->Echo("Invalid item type!\r\n");
           return;
         }
 
       shop->BuyType[4] = (ItemTypes)value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -125,12 +126,12 @@ void do_shopset( Character *ch, char *argument )
     {
       if ( value <= ( shop->ProfitSell + 5) || value > 1000 )
         {
-          SendToCharacter( "Out of range.\r\n", ch );
+          ch->Echo("Out of range.\r\n");
           return;
         }
 
       shop->ProfitBuy = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -138,12 +139,12 @@ void do_shopset( Character *ch, char *argument )
     {
       if ( value < 0 || value >= (shop->ProfitBuy - 5) )
         {
-          SendToCharacter( "Out of range.\r\n", ch );
+          ch->Echo("Out of range.\r\n");
           return;
         }
 
       shop->ProfitSell = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -151,12 +152,12 @@ void do_shopset( Character *ch, char *argument )
     {
       if ( value < 0 || value > 23 )
         {
-          SendToCharacter( "Out of range.\r\n", ch );
+          ch->Echo("Out of range.\r\n");
           return;
         }
 
       shop->BusinessHours.Open = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -164,12 +165,12 @@ void do_shopset( Character *ch, char *argument )
     {
       if ( value < 0 || value > 23 )
         {
-          SendToCharacter( "Out of range.\r\n", ch );
+          ch->Echo("Out of range.\r\n");
           return;
         }
 
       shop->BusinessHours.Close = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -177,7 +178,7 @@ void do_shopset( Character *ch, char *argument )
     {
       if ( (mob2 = GetProtoMobile(vnum)) == NULL )
         {
-          SendToCharacter( "Mobile not found.\r\n", ch );
+          ch->Echo("Mobile not found.\r\n");
           return;
         }
 
@@ -186,16 +187,17 @@ void do_shopset( Character *ch, char *argument )
 
       if ( mob2->Shop )
         {
-          SendToCharacter( "That mobile already has a shop.\r\n", ch );
+          ch->Echo("That mobile already has a shop.\r\n");
           return;
         }
 
       mob->Shop  = NULL;
       mob2->Shop = shop;
       shop->Keeper = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
   do_shopset( ch, "" );
 }
+

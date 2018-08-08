@@ -1621,28 +1621,29 @@ Object *FindObject( Character *ch, const char *orig_argument, bool carryonly )
     {
       if ( carryonly && ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
         {
-          SendToCharacter( "You do not have that item.\r\n", ch );
+          ch->Echo( "You do not have that item.\r\n" );
           return NULL;
         }
-      else
-        if ( !carryonly && ( obj = GetObjectHere( ch, arg1 ) ) == NULL )
-          {
-            Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg1, TO_CHAR );
-            return NULL;
-          }
+      else if ( !carryonly && ( obj = GetObjectHere( ch, arg1 ) ) == NULL )
+        {
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg1, TO_CHAR );
+          return NULL;
+        }
+      
       return obj;
     }
   else
     {
-      Object *container;
+      Object *container = nullptr;
 
       if ( carryonly
            && ( container = GetCarriedObject( ch, arg2 ) ) == NULL
            && ( container = GetWornObject( ch, arg2 ) ) == NULL )
         {
-          SendToCharacter( "You do not have that item.\r\n", ch );
+          ch->Echo( "You do not have that item.\r\n" );
           return NULL;
         }
+      
       if ( !carryonly && ( container = GetObjectHere( ch, arg2 ) ) == NULL )
         {
           Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
@@ -2233,7 +2234,7 @@ void ShowAffectToCharacter( const Character *ch, const Affect *paf )
           break;
         }
 
-      SendToCharacter( buf, ch );
+      ch->Echo("%s", buf);
     }
 }
 
@@ -2791,3 +2792,4 @@ void EconomizeMobileGold( Character *mob )
   if ( mob->Gold )
     LowerEconomy( tarea, mob->Gold );
 }
+

@@ -5,26 +5,25 @@
 
 void do_bash( Character *ch, char *argument )
 {
-  Character *victim;
-  int bash_chance;
+  Character *victim = nullptr;
+  int bash_chance = 0;
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
+      ch->Echo( "You can't concentrate enough for that.\r\n" );
       return;
     }
 
   if ( !IsNpc(ch)
-       &&  ch->PCData->Learned[gsn_bash] <= 0  )
+       && ch->PCData->Learned[gsn_bash] <= 0 )
     {
-      SendToCharacter(
-                   "Your mind races as you realize you have no idea how to do that.\r\n", ch );
+      ch->Echo( "Your mind races as you realize you have no idea how to do that.\r\n" );
       return;
     }
 
   if ( ( victim = GetFightingOpponent( ch ) ) == NULL )
     {
-      SendToCharacter( "You aren't fighting anyone.\r\n", ch );
+      ch->Echo( "You aren't fighting anyone.\r\n" );
       return;
     }
 
@@ -55,3 +54,4 @@ void do_bash( Character *ch, char *argument )
       global_retcode = InflictDamage( ch, victim, 0, gsn_bash );
     }
 }
+

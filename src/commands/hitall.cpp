@@ -16,13 +16,13 @@ void do_hitall( Character *ch, char *argument )
 
   if ( IsBitSet(ch->InRoom->Flags, ROOM_SAFE) )
     {
-      SendToCharacter( "You cannot do that here.\r\n", ch);
+      ch->Echo("You cannot do that here.\r\n");
       return;
     }
 
   if ( !ch->InRoom->FirstPerson )
     {
-      SendToCharacter( "There's no one here!\r\n", ch );
+      ch->Echo("There's no one here!\r\n");
       return;
     }
 
@@ -58,7 +58,7 @@ void do_hitall( Character *ch, char *argument )
     }
   if ( !nvict )
     {
-      SendToCharacter( "There's no one here!\r\n", ch );
+      ch->Echo("There's no one here!\r\n");
       return;
     }
   ch->Move = umax(0, ch->Move - nvict * 3 + nhit);
@@ -77,3 +77,5 @@ static bool is_legal_kill(Character *ch, Character *vch)
     return false;
   return true;
 }
+
+

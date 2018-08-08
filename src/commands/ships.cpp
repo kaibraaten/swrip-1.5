@@ -21,26 +21,26 @@ void do_ships( Character *ch, char *argument )
 
   if ( !IsNpc(ch) )
     {
-      SendToPager( "&YThe following ships you have pilot access to:\r\n", ch );
-      SendToPager( "\r\n&WShip                                                   Owner\r\n",ch);
+      ch->Echo("&YThe following ships you have pilot access to:\r\n");
+      ch->Echo("\r\n&WShip                                                   Owner\r\n");
 
       ForEachShip(ShowIfPilotable, &data);
 
       if ( data.count == 0 )
         {
-          SendToPager( "There are no ships owned by you.\r\n", ch );
+          ch->Echo("There are no ships owned by you.\r\n");
         }
     }
 
-  SendToPager( "&Y\r\nThe following ships are docked here:\r\n", ch );
-  SendToPager( "\r\n&WShip                               Owner          Cost/Rent\r\n", ch );
+  ch->Echo("&Y\r\nThe following ships are docked here:\r\n");
+  ch->Echo("\r\n&WShip                               Owner          Cost/Rent\r\n");
 
   data.count = 0;
   ForEachShip(ShowIfInRoom, &data);
 
   if ( data.count == 0 )
     {
-      SendToPager( "There are no ships docked here.\r\n", ch );
+      ch->Echo("There are no ships docked here.\r\n");
     }
 }
 
@@ -56,29 +56,29 @@ static bool ShowIfInRoom(Ship *ship, void *userData)
   if (ship->Type == MOB_SHIP)
     return true;
   else if (ship->Type == SHIP_REBEL)
-    SetPagerColor( AT_BLOOD, ch );
+    SetCharacterColor( AT_BLOOD, ch );
   else if (ship->Type == SHIP_IMPERIAL)
-    SetPagerColor( AT_DGREEN, ch );
+    SetCharacterColor( AT_DGREEN, ch );
   else
-    SetPagerColor( AT_BLUE, ch );
+    SetCharacterColor( AT_BLUE, ch );
 
   sprintf( buf, "%s (%s)", ship->Name, ship->PersonalName );
-  PagerPrintf( ch, "%-35s %-15s", buf, ship->Owner );
+  ch->Echo("%-35s %-15s", buf, ship->Owner );
 
   if (ship->Type == MOB_SHIP || ship->Class == SHIP_PLATFORM )
     {
-      PagerPrintf( ch, "\r\n");
+      ch->Echo("\r\n");
       return true;
     }
 
   if ( !StrCmp(ship->Owner, "Public") )
     {
-      PagerPrintf( ch, "%ld to rent.\r\n", GetRentalPrice(ship));
+      ch->Echo("%ld to rent.\r\n", GetRentalPrice(ship));
     }
   else if ( StrCmp(ship->Owner, "") )
-    PagerPrintf( ch, "%s", "\r\n" );
+    ch->Echo("%s", "\r\n" );
   else
-    PagerPrintf( ch, "%ld to buy.\r\n", GetShipValue(ship) );
+    ch->Echo("%ld to buy.\r\n", GetShipValue(ship) );
 
   data->count++;
   return true;
@@ -108,11 +108,11 @@ static bool ShowIfPilotable(Ship *ship, void *userData)
   if (ship->Type == MOB_SHIP)
     return true;
   else if (ship->Type == SHIP_REBEL)
-    SetPagerColor( AT_BLOOD, ch );
+    SetCharacterColor( AT_BLOOD, ch );
   else if (ship->Type == SHIP_IMPERIAL)
-    SetPagerColor( AT_DGREEN, ch );
+    SetCharacterColor( AT_DGREEN, ch );
   else
-    SetPagerColor( AT_BLUE, ch );
+    SetCharacterColor( AT_BLUE, ch );
 
   if( !StrCmp(ship->Owner, ch->Name ) )
     {
@@ -147,12 +147,13 @@ static bool ShowIfPilotable(Ship *ship, void *userData)
   sprintf( buf, "%s (%s)", ship->Name, ship->PersonalName );
 
   if  ( ship->InRoom )
-    PagerPrintf( ch, "%-35s (%s) \n&R&W- %-24s&R&w \r\n",
+    ch->Echo("%-35s (%s) \n&R&W- %-24s&R&w \r\n",
                  buf, ship->InRoom->Name, pilottype );
   else
-    PagerPrintf( ch, "%-35s (%.0f %.0f %.0f) \r\n&R&W- %-35s&R&w\r\n",
+    ch->Echo("%-35s (%.0f %.0f %.0f) \r\n&R&W- %-35s&R&w\r\n",
                  buf, ship->Position.x, ship->Position.y, ship->Position.z, pilottype );
 
   data->count++;
   return true;
 }
+

@@ -11,20 +11,20 @@ void do_where( Character *ch, char *argument )
 
   if (GetTrustLevel(ch) < LEVEL_IMMORTAL)
     {
-      SendToCharacter( "If only life were really that simple...\r\n" , ch);
+      ch->Echo("If only life were really that simple...\r\n" );
       return;
     }
 
   OneArgument( argument, arg );
 
-  SetPagerColor( AT_PERSON, ch );
+  SetCharacterColor( AT_PERSON, ch );
 
   if ( IsNullOrEmpty( arg ) )
     {
       if (GetTrustLevel(ch) >= LEVEL_IMMORTAL)
-        SendToPager( "Players logged in:\r\n", ch );
+        ch->Echo("Players logged in:\r\n");
       else
-        PagerPrintf( ch, "Players near you in %s:\r\n", ch->InRoom->Area->Name );
+        ch->Echo("Players near you in %s:\r\n", ch->InRoom->Area->Name );
 
       found = false;
 
@@ -38,12 +38,12 @@ void do_where( Character *ch, char *argument )
              &&   CanSeeCharacter( ch, victim ) )
           {
             found = true;
-            PagerPrintf( ch, "%-28s %s\r\n",
+            ch->Echo("%-28s %s\r\n",
                           victim->Name, victim->InRoom->Name );
           }
 
       if ( !found )
-        SendToCharacter( "None\r\n", ch );
+        ch->Echo("None\r\n");
     }
   else
     {
@@ -57,7 +57,7 @@ void do_where( Character *ch, char *argument )
              && IsName( arg, victim->Name ) )
           {
             found = true;
-            PagerPrintf( ch, "%-28s %s\r\n",
+            ch->Echo("%-28s %s\r\n",
                           PERS(victim, ch), victim->InRoom->Name );
             break;
           }
@@ -65,3 +65,4 @@ void do_where( Character *ch, char *argument )
         Act( AT_PLAIN, "You didn't find any $T.", ch, NULL, arg, TO_CHAR );
     }
 }
+

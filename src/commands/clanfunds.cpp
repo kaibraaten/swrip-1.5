@@ -7,7 +7,7 @@ void do_clanfunds( Character *ch, char *argument )
 {
   if ( !IsClanned( ch ) )
     {
-      SendToCharacter("You don't seem to belong to an organization.\r\n",ch);
+      ch->Echo("You don't seem to belong to an organization.\r\n");
       return;
     }
 
@@ -15,7 +15,7 @@ void do_clanfunds( Character *ch, char *argument )
     {
       if (!ch->InRoom || !IsBitSet(ch->InRoom->Flags, ROOM_BANK) )
         {
-          SendToCharacter( "You must be in a bank or have a comlink to do that!\r\n", ch );
+          ch->Echo( "You must be in a bank or have a comlink to do that!\r\n" );
           return;
         }
     }
@@ -24,9 +24,10 @@ void do_clanfunds( Character *ch, char *argument )
 
   if ( clan->Funds == 0 )
     {
-      Echo(ch,"%s has no funds at its disposal.",clan->Name);
+      ch->Echo("%s has no funds at its disposal.",clan->Name);
       return;
     }
 
-  Echo(ch,"%s has %ld credits at its disposal.\r\n",clan->Name, clan->Funds);
+  ch->Echo("%s has %ld credits at its disposal.\r\n",clan->Name, clan->Funds);
 }
+

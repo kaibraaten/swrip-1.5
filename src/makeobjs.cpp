@@ -265,3 +265,4 @@ Object *CreateMoney( int amount )
 
   return obj;
 }
+

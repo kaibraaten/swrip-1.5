@@ -5,14 +5,14 @@
 
 void do_first_aid( Character *ch, char *argument )
 {
-  Object   *medpac = NULL;
-  Character  *victim = NULL;
-  int         heal = 0;
-  char        buf[MAX_STRING_LENGTH];
+  Object *medpac = NULL;
+  Character *victim = NULL;
+  int heal = 0;
+  char buf[MAX_STRING_LENGTH];
 
   if ( ch->Position == POS_FIGHTING )
     {
-      SendToCharacter( "You can't do that while fighting!\r\n",ch );
+      ch->Echo( "You can't do that while fighting!\r\n" );
       return;
     }
 
@@ -20,13 +20,13 @@ void do_first_aid( Character *ch, char *argument )
 
   if ( !medpac || medpac->ItemType != ITEM_MEDPAC )
     {
-      SendToCharacter( "You need to be holding a medpac.\r\n",ch );
+      ch->Echo( "You need to be holding a medpac.\r\n" );
       return;
     }
 
   if ( medpac->Value[OVAL_MEDPAC_DOSES] <= 0 )
     {
-      SendToCharacter( "Your medpac seems to be empty.\r\n",ch );
+      ch->Echo( "Your medpac seems to be empty.\r\n" );
       return;
     }
 
@@ -37,7 +37,7 @@ void do_first_aid( Character *ch, char *argument )
 
   if ( !victim )
     {
-      Echo( ch, "I don't see any %s here...\r\n" , argument );
+      ch->Echo( "I don't see any %s here...\r\n" , argument );
       return;
     }
 
@@ -45,14 +45,14 @@ void do_first_aid( Character *ch, char *argument )
 
   if ( heal > ch->PCData->Learned[gsn_first_aid]*2 )
     {
-      Echo( ch, "You fail in your attempt at first aid.\r\n");
+      ch->Echo( "You fail in your attempt at first aid.\r\n");
       LearnFromFailure( ch , gsn_first_aid );
       return;
     }
 
   if ( victim == ch )
     {
-      Echo( ch, "You tend to your wounds.\r\n");
+      ch->Echo( "You tend to your wounds.\r\n");
       sprintf( buf , "$n uses %s to help.hppeal $s wounds." , medpac->ShortDescr );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_ROOM );
     }
@@ -71,3 +71,4 @@ void do_first_aid( Character *ch, char *argument )
 
   LearnFromSuccess( ch , gsn_first_aid );
 }
+

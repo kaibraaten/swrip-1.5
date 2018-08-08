@@ -91,3 +91,4 @@ BanRepository *NewBanRepository()
 {
   return new LuaBanRepository();
 }
+

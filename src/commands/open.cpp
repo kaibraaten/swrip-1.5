@@ -22,19 +22,19 @@ void do_open( Character *ch, char *argument )
 
       if ( !IsBitSet(pexit->Flags, EX_ISDOOR) )
         {
-	  SendToCharacter( "You can't do that.\r\n", ch );
+   ch->Echo("You can't do that.\r\n");
 	  return;
 	}
 
       if ( !IsBitSet(pexit->Flags, EX_CLOSED) )
         {
-	  SendToCharacter( "It's already open.\r\n", ch );
+   ch->Echo("It's already open.\r\n");
 	  return;
 	}
 
       if (  IsBitSet(pexit->Flags, EX_LOCKED) )
         {
-	  SendToCharacter( "It's locked.\r\n", ch );
+   ch->Echo("It's locked.\r\n");
 	  return;
 	}
 
@@ -84,28 +84,28 @@ void do_open( Character *ch, char *argument )
 
             }
 
-          Echo( ch, "%s isn't a container.\r\n",
+          ch->Echo("%s isn't a container.\r\n",
 		     Capitalize( obj->ShortDescr ) );
           return;
         }
 
       if ( !IsBitSet(obj->Value[1], CONT_CLOSED) )
         {
-	  Echo( ch, "%s is already open.\r\n",
+   ch->Echo("%s is already open.\r\n",
 		     Capitalize( obj->ShortDescr ) );
           return;
         }
 
       if ( !IsBitSet(obj->Value[1], CONT_CLOSEABLE) )
         {
-          Echo( ch, "%s cannot be opened or closed.\r\n",
+          ch->Echo("%s cannot be opened or closed.\r\n",
 		     Capitalize( obj->ShortDescr ) );
           return;
         }
 
       if ( IsBitSet(obj->Value[1], CONT_LOCKED) )
         {
-          Echo( ch, "%s is locked.\r\n", Capitalize( obj->ShortDescr ) );
+          ch->Echo("%s is locked.\r\n", Capitalize( obj->ShortDescr ) );
           return;
         }
 
@@ -124,3 +124,4 @@ void do_open( Character *ch, char *argument )
 
   do_openhatch( ch , arg );
 }
+

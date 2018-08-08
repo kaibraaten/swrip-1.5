@@ -1,4 +1,4 @@
-#include <time.h>
+#include <ctime>
 #include "mud.hpp"
 #include "character.hpp"
 #include "ban.hpp"
@@ -14,19 +14,19 @@ void do_ban( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  SetPagerColor( AT_PLAIN, ch );
+  SetCharacterColor( AT_PLAIN, ch );
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToPager( "Banned sites:\r\n", ch );
-      SendToPager( "[ #] (Lv) Time                     Site\r\n", ch );
-      SendToPager( "---- ---- ------------------------ ---------------\r\n", ch );
+      ch->Echo( "Banned sites:\r\n" );
+      ch->Echo( "[ #] (Lv) Time                     Site\r\n" );
+      ch->Echo( "---- ---- ------------------------ ---------------\r\n" );
       bnum = 1;
       
       for(auto ban : Bans->Entities())
         {
-          PagerPrintf(ch, "[%2d] (%2d) %-24s %s\r\n", bnum,
-                      ban->Level, ban->BanTime.c_str(), ban->Site.c_str());
+          ch->Echo( "[%2d] (%2d) %-24s %s\r\n", bnum,
+                    ban->Level, ban->BanTime.c_str(), ban->Site.c_str());
           ++bnum;
         }
 
@@ -79,27 +79,27 @@ void do_ban( Character *ch, char *argument )
 
           if ( atoi(arg) < 1 || atoi(arg) > LEVEL_IMPLEMENTOR )
             {
-              Echo(ch, "Level range: 1 - %d.\r\n", LEVEL_IMPLEMENTOR);
+              ch->Echo("Level range: 1 - %d.\r\n", LEVEL_IMPLEMENTOR);
               return;
             }
 
 	  pban->Level = atoi(arg);
-          SendToCharacter( "Ban level set.\r\n", ch );
+          ch->Echo( "Ban level set.\r\n" );
         }
       else if ( !StrCmp(arg, "newban") )
         {
           pban->Level = 1;
-          SendToCharacter( "New characters banned.\r\n", ch );
+          ch->Echo( "New characters banned.\r\n" );
         }
       else if ( !StrCmp(arg, "mortal") )
         {
           pban->Level = LEVEL_AVATAR;
-          SendToCharacter( "All mortals banned.\r\n", ch );
+          ch->Echo( "All mortals banned.\r\n" );
         }
       else if ( !StrCmp(arg, "total") )
         {
           pban->Level = LEVEL_IMPLEMENTOR;
-          SendToCharacter( "Everyone banned.\r\n", ch );
+          ch->Echo( "Everyone banned.\r\n" );
         }
       else
         {
@@ -113,15 +113,14 @@ void do_ban( Character *ch, char *argument )
 
   if ( !StrCmp(arg, "help") )
     {
-      SendToCharacter( "Syntax: ban <site address>\r\n", ch );
-      SendToCharacter( "Syntax: ban <ban number> <level <lev>|newban|mortal|total>\r\n", ch );
+      ch->Echo( "Syntax: ban <site address>\r\n" );
+      ch->Echo( "Syntax: ban <ban number> <level <lev>|newban|mortal|total>\r\n" );
       return;
     }
-
   
   if (Bans->Contains(arg))
     {
-      SendToCharacter( "That site is already banned!\r\n", ch );
+      ch->Echo( "That site is already banned!\r\n" );
       return;
     }
 
@@ -132,5 +131,6 @@ void do_ban( Character *ch, char *argument )
   sprintf(buf, "%24.24s", ctime(&current_time));
   pban->BanTime = buf;
   Bans->Save();
-  SendToCharacter( "Ban created. Mortals banned from site.\r\n", ch );
+  ch->Echo( "Ban created. Mortals banned from site.\r\n" );
 }
+

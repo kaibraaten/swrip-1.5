@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "shop.hpp"
+#include "character.hpp"
 
 void do_repairset( Character *ch, char *argument )
 {
@@ -15,9 +16,9 @@ void do_repairset( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "Usage: repairset <mob vnum> <field> value\r\n", ch );
-      SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( "  fix0 fix1 fix2 profit type open close keeper\r\n", ch );
+      ch->Echo("Usage: repairset <mob vnum> <field> value\r\n");
+      ch->Echo("\r\nField being one of:\r\n");
+      ch->Echo("  fix0 fix1 fix2 profit type open close keeper\r\n");
       return;
     }
 
@@ -25,7 +26,7 @@ void do_repairset( Character *ch, char *argument )
 
   if ( (mob = GetProtoMobile(vnum)) == NULL )
     {
-      SendToCharacter( "Mobile not found.\r\n", ch );
+      ch->Echo("Mobile not found.\r\n");
       return;
     }
 
@@ -34,7 +35,7 @@ void do_repairset( Character *ch, char *argument )
 
   if ( !mob->RepairShop )
     {
-      SendToCharacter( "This mobile doesn't keep a repair shop.\r\n", ch );
+      ch->Echo("This mobile doesn't keep a repair shop.\r\n");
       return;
     }
 
@@ -48,12 +49,12 @@ void do_repairset( Character *ch, char *argument )
 
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
-          SendToCharacter( "Invalid item type!\r\n", ch );
+          ch->Echo("Invalid item type!\r\n");
           return;
         }
 
       repair->FixType[0] = (ItemTypes)value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -64,12 +65,12 @@ void do_repairset( Character *ch, char *argument )
 
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
-          SendToCharacter( "Invalid item type!\r\n", ch );
+          ch->Echo("Invalid item type!\r\n");
           return;
         }
 
       repair->FixType[1] = (ItemTypes)value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -80,12 +81,12 @@ void do_repairset( Character *ch, char *argument )
 
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
-          SendToCharacter( "Invalid item type!\r\n", ch );
+          ch->Echo("Invalid item type!\r\n");
           return;
         }
 
       repair->FixType[2] = (ItemTypes)value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -93,12 +94,12 @@ void do_repairset( Character *ch, char *argument )
     {
       if ( value < 1 || value > 1000 )
         {
-	  SendToCharacter( "Out of range.\r\n", ch );
+   ch->Echo("Out of range.\r\n");
           return;
         }
 
       repair->ProfitFix = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -106,12 +107,12 @@ void do_repairset( Character *ch, char *argument )
     {
       if ( value < 1 || value > 2 )
         {
-          SendToCharacter( "Out of range.\r\n", ch );
+          ch->Echo("Out of range.\r\n");
           return;
         }
 
       repair->ShopType = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -119,12 +120,12 @@ void do_repairset( Character *ch, char *argument )
     {
       if ( value < 0 || value > 23 )
         {
-          SendToCharacter( "Out of range.\r\n", ch );
+          ch->Echo("Out of range.\r\n");
           return;
         }
 
       repair->BusinessHours.Open = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -132,12 +133,12 @@ void do_repairset( Character *ch, char *argument )
     {
       if ( value < 0 || value > 23 )
         {
-          SendToCharacter( "Out of range.\r\n", ch );
+          ch->Echo("Out of range.\r\n");
           return;
         }
 
       repair->BusinessHours.Close = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -145,7 +146,7 @@ void do_repairset( Character *ch, char *argument )
     {
       if ( (mob2 = GetProtoMobile(vnum)) == NULL )
         {
-          SendToCharacter( "Mobile not found.\r\n", ch );
+          ch->Echo("Mobile not found.\r\n");
           return;
         }
 
@@ -154,16 +155,17 @@ void do_repairset( Character *ch, char *argument )
 
       if ( mob2->RepairShop )
         {
-          SendToCharacter( "That mobile already has a repair shop.\r\n", ch );
+          ch->Echo("That mobile already has a repair shop.\r\n");
           return;
         }
 
       mob->RepairShop  = NULL;
       mob2->RepairShop = repair;
       repair->Keeper = value;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
   do_repairset( ch, "" );
 }
+

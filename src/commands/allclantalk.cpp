@@ -5,15 +5,16 @@ void do_allclantalk( Character *ch, char *argument )
 {
   if (!IsAuthed(ch))
     {
-      SendToCharacter("Huh?\r\n", ch);
+      ch->Echo("Huh?\r\n");
       return;
     }
 
   if ( !IsClanned( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo( "Huh?\r\n" );
       return;
     }
 
   TalkChannel( ch, argument, CHANNEL_ALLCLAN, "allclantalk" );
 }
+

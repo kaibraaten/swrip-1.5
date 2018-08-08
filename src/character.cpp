@@ -47,6 +47,58 @@ Character::~Character()
     }
 }
 
+void Character::Echo(const char *fmt, ...) const
+{
+  if(IsNpc(this))
+    {
+      return;
+    }
+  
+  char txt[MAX_STRING_LENGTH*2];        /* better safe than sorry */
+  va_list args;
+
+  va_start(args, fmt);
+  vsprintf(txt, fmt, args);
+  va_end(args);
+
+  if(IsNullOrEmpty(txt))
+    {
+      return;
+    }
+  
+  Descriptor *d = Desc;
+  const char *colstr = nullptr;
+  const char *prevstr = txt;
+  
+  while ( d && ((colstr = strpbrk(prevstr, "&^")) != NULL ))
+    {
+      if (colstr > prevstr)
+        {
+          WriteToBuffer(d, prevstr, (colstr - prevstr));
+        }
+
+      char colbuf[20];
+      int ln = MakeColorSequence(colstr, colbuf, d);
+
+      if ( ln < 0 )
+        {
+          prevstr = colstr+1;
+          break;
+        }
+      else if ( ln > 0 )
+        {
+          WriteToBuffer(d, colbuf, ln);
+        }
+      
+      prevstr = colstr+2;
+    }
+
+  if ( *prevstr )
+    {
+      WriteToBuffer(d, prevstr, 0);
+    }
+}
+
 bool IsWizVis( const Character *ch, const Character *victim )
 {
   if ( !IsNpc(victim)
@@ -688,7 +740,7 @@ bool HasMentalStateToFindObject( const Character *ch )
         }
     }
 
-  Echo( ch, t );
+  ch->Echo( t );
   return true;
 }
 
@@ -1342,8 +1394,8 @@ void ApplyJediBonus( Character *ch )
   if ( GetRandomPercent() == 1 )
     {
       ch->MaxMana++;
-      Echo( ch, "&YYou are wise in your use of the force.\r\n" );
-      Echo( ch, "You feel a little stronger in your wisdom.&w\r\n" );
+      ch->Echo( "&YYou are wise in your use of the force.\r\n" );
+      ch->Echo( "You feel a little stronger in your wisdom.&w\r\n" );
     }
 }
 
@@ -1359,7 +1411,7 @@ void ApplySithPenalty( Character *ch )
         }
 
       ch->Hit--;
-      Echo( ch, "&zYour body grows weaker as your strength in the dark side grows.&w\r\n" );
+      ch->Echo( "&zYour body grows weaker as your strength in the dark side grows.&w\r\n" );
     }
 }
 
@@ -1414,7 +1466,6 @@ void AddReinforcements( Character *ch )
        ch->BackupMob == MOB_VNUM_MERC_FORCES       )
     {
       Character *mob[3];
-      int mob_cnt = 0;
 
       if ( ch->BackupMob == MOB_VNUM_IMP_FORCES ||
            ch->BackupMob == MOB_VNUM_NR_FORCES   ||
@@ -1423,9 +1474,9 @@ void AddReinforcements( Character *ch )
           multiplier = 2;
         }
 
-      SendToCharacter( "Your reinforcements have arrived.\r\n", ch );
+      ch->Echo( "Your reinforcements have arrived.\r\n" );
 
-      for ( mob_cnt = 0 ; mob_cnt < 3 ; mob_cnt++ )
+      for ( int mob_cnt = 0 ; mob_cnt < 3 ; mob_cnt++ )
         {
           int ability = 0;
 
@@ -1489,7 +1540,7 @@ void AddReinforcements( Character *ch )
         }
 
       Act( AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM );
-      SendToCharacter( "Your guard has arrived.\r\n", ch );
+      ch->Echo( "Your guard has arrived.\r\n" );
       mob->TopLevel = multiplier * GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 2;
 
       for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
@@ -1560,3 +1611,4 @@ unsigned int GetKillTrackCount(const Character *ch)
 {
   return urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
 }
+

@@ -5,10 +5,9 @@
 
 void do_buyvendor (Character *ch, char *argument)
 {
-  Character *keeper;
-  Object *deed;
+  Character *keeper = nullptr;
+  Object *deed = nullptr;
   char buf[MAX_STRING_LENGTH];
-  char buf1[MAX_STRING_LENGTH];
   char strsave[MAX_INPUT_LENGTH];
   struct stat fst;
 
@@ -25,30 +24,28 @@ void do_buyvendor (Character *ch, char *argument)
 
   if ( stat( strsave, &fst ) != -1 )
     {
-      SendToCharacter( "You already have a shop!\r\n", ch);
-      SendToCharacter( "If you want to buy one anyway, type buyvendor yes.\r\n", ch);
-      SendToCharacter( "Your old one will be deleted.\r\n", ch);
+      ch->Echo( "You already have a shop!\r\n");
+      ch->Echo( "If you want to buy one anyway, type buyvendor yes.\r\n");
+      ch->Echo( "Your old one will be deleted.\r\n");
       return;
     }
 
 
-  if (  (keeper = FindKeeperQ( ch, false ) )  == NULL  )
+  if ( (keeper = FindKeeperQ( ch, false ) ) == NULL )
     {
-      SendToCharacter ("There is no one to buy that from!\r\n", ch);
+      ch->Echo("There is no one to buy that from!\r\n");
       return;
     }
 
   if ( ch->Gold < COST_BUY_VENDOR )
     {
-      sprintf(buf1, "%s says, You are too poor!\r\n", keeper->Name);
-      SendToCharacter (buf1, ch);
+      ch->Echo( "%s says, You are too poor!\r\n", keeper->Name);
       return;
     }
 
   if ( (ch->TopLevel) < LEVEL_BUY_VENDOR )
     {
-      sprintf (buf1, "you must be at least %d level.\r\n", LEVEL_BUY_VENDOR);
-      SendToCharacter (buf1, ch);
+      ch->Echo( "you must be at least %d level.\r\n", LEVEL_BUY_VENDOR);
       return;
     }
 
@@ -60,6 +57,7 @@ void do_buyvendor (Character *ch, char *argument)
 
   deed = CreateObject ( GetProtoObject(OBJ_VNUM_DEED), 0);
   ObjectToCharacter (deed, ch);
-  SendToCharacter("&bVery well, you may have a contract for a vendor.\r\n", ch);
+  ch->Echo("&bVery well, you may have a contract for a vendor.\r\n");
   ch->Gold = ch->Gold - COST_BUY_VENDOR;
 }
+

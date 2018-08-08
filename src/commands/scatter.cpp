@@ -12,25 +12,25 @@ void do_scatter( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Scatter whom?\r\n", ch );
+      ch->Echo("Scatter whom?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "It's called teleport. Try it.\r\n", ch );
+      ch->Echo("It's called teleport. Try it.\r\n");
       return;
     }
 
   if ( !IsNpc(victim) && GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      SendToCharacter( "You haven't the power to succeed against them.\r\n", ch );
+      ch->Echo("You haven't the power to succeed against them.\r\n");
       return;
     }
 
@@ -61,3 +61,4 @@ void do_scatter( Character *ch, char *argument )
   Act( AT_MAGIC, "$n staggers forth from a sudden gust of wind, and collapses.", victim, NULL, NULL, TO_ROOM );
   do_look( victim, "auto" );
 }
+

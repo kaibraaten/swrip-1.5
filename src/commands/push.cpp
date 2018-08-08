@@ -9,7 +9,7 @@ void do_push( Character *ch, char *argument )
   OneArgument( argument, arg );
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Push what?\r\n", ch );
+      ch->Echo("Push what?\r\n");
       return;
     }
 
@@ -24,3 +24,4 @@ void do_push( Character *ch, char *argument )
 
   PullOrPush( ch, obj, false );
 }
+

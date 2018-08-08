@@ -13,34 +13,35 @@ void do_trust( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1) || IsNullOrEmpty( arg2 ) || !IsNumber( arg2 ) )
     {
-      SendToCharacter( "Syntax: trust <char> <level>.\r\n", ch );
+      ch->Echo("Syntax: trust <char> <level>.\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "That player is not here.\r\n", ch);
+      ch->Echo("That player is not here.\r\n");
       return;
     }
 
   if ( ( level = atoi( arg2 ) ) < 0 || level > MAX_LEVEL )
     {
-      SendToCharacter( "Level must be 0 (reset) or 1 to 60.\r\n", ch );
+      ch->Echo("Level must be 0 (reset) or 1 to 60.\r\n");
       return;
     }
 
   if ( level > GetTrustLevel( ch ) )
     {
-      SendToCharacter( "Limited to your own trust.\r\n", ch );
+      ch->Echo("Limited to your own trust.\r\n");
       return;
     }
 
   if ( ch->TopLevel < LEVEL_IMPLEMENTOR && GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      SendToCharacter( "You can't do that.\r\n", ch );
+      ch->Echo("You can't do that.\r\n");
       return;
     }
 
   victim->Trust = level;
-  SendToCharacter( "Ok.\r\n", ch );
+  ch->Echo("Ok.\r\n");
 }
+

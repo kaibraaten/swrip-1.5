@@ -14,19 +14,19 @@ void do_zap( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) && !ch->Fighting )
     {
-      SendToCharacter( "Zap whom or what?\r\n", ch );
+      ch->Echo("Zap whom or what?\r\n");
       return;
     }
 
   if ( ( wand = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL )
     {
-      SendToCharacter( "You hold nothing in your hand.\r\n", ch );
+      ch->Echo("You hold nothing in your hand.\r\n");
       return;
     }
 
   if ( wand->ItemType != ITEM_WAND )
     {
-      SendToCharacter( "You can zap only with a wand.\r\n", ch );
+      ch->Echo("You can zap only with a wand.\r\n");
       return;
     }
 
@@ -40,7 +40,7 @@ void do_zap( Character *ch, char *argument )
         }
       else
         {
-          SendToCharacter( "Zap whom or what?\r\n", ch );
+          ch->Echo("Zap whom or what?\r\n");
           return;
 	}
     }
@@ -49,7 +49,7 @@ void do_zap( Character *ch, char *argument )
       if ( ( victim = GetCharacterInRoom ( ch, arg ) ) == NULL
            && ( obj = GetObjectHere  ( ch, arg ) ) == NULL )
         {
-          SendToCharacter( "You can't find it.\r\n", ch );
+          ch->Echo("You can't find it.\r\n");
           return;
         }
     }
@@ -94,3 +94,4 @@ void do_zap( Character *ch, char *argument )
       ExtractObject( wand );
     }
 }
+

@@ -10,44 +10,43 @@ void do_mount( Character *ch, char *argument )
   if ( !IsNpc(ch)
        &&   ch->PCData->Learned[gsn_mount] <= 0  )
     {
-      SendToCharacter(
-                   "I don't think that would be a good idea...\r\n", ch );
+      ch->Echo("I don't think that would be a good idea...\r\n");
       return;
     }
 
   if ( ch->Mount )
     {
-      SendToCharacter( "You're already mounted!\r\n", ch );
+      ch->Echo("You're already mounted!\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, argument ) ) == NULL )
     {
-      SendToCharacter( "You can't find that here.\r\n", ch );
+      ch->Echo("You can't find that here.\r\n");
       return;
     }
 
   if ( !IsNpc(victim) || !IsBitSet(victim->Flags, ACT_MOUNTABLE ) )
     {
-      SendToCharacter( "You can't mount that!\r\n", ch );
+      ch->Echo("You can't mount that!\r\n");
       return;
     }
 
   if ( IsBitSet(victim->Flags, ACT_MOUNTED ) )
     {
-      SendToCharacter( "That mount already has a rider.\r\n", ch );
+      ch->Echo("That mount already has a rider.\r\n");
       return;
     }
 
   if ( victim->Position < POS_STANDING )
     {
-      SendToCharacter( "Your mount must be standing.\r\n", ch );
+      ch->Echo("Your mount must be standing.\r\n");
       return;
     }
 
   if ( victim->Position == POS_FIGHTING || victim->Fighting )
     {
-      SendToCharacter( "Your mount is moving around too much.\r\n", ch );
+      ch->Echo("Your mount is moving around too much.\r\n");
       return;
     }
 
@@ -70,3 +69,4 @@ void do_mount( Character *ch, char *argument )
       LearnFromFailure( ch, gsn_mount );
     }
 }
+

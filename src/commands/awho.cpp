@@ -5,14 +5,14 @@
 
 void do_awho(Character *ch, char *argument)
 {
-  Character *tch;
+  Character *tch = nullptr;
   std::ostringstream output;
   char buf[MAX_INPUT_LENGTH];
-  int num=CharactersInArena();
+  int num = CharactersInArena();
 
-  if(num==0)
+  if(num == 0)
     {
-      SendToCharacter("There is noone in the arena right now.\r\n", ch);
+      ch->Echo("There is noone in the arena right now.\r\n");
       return;
     }
 
@@ -31,12 +31,15 @@ void do_awho(Character *ch, char *argument)
   
   output << "%s&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B"
          << "%s-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B\r\n";
-  SendToCharacter(output.str().c_str(), ch);
+  ch->Echo( "%s", output.str().c_str() );
 
   for ( tch = FirstCharacter; tch; tch = tch->Next )
-    if (tch->InRoom && IsBitSet(tch->InRoom->Flags, ROOM_ARENA)
-        && (tch->TopLevel < LEVEL_IMMORTAL))
-      {
-        Echo(tch, "&W%s\r\n", tch->Name);
-      }
+    {
+      if (tch->InRoom && IsBitSet(tch->InRoom->Flags, ROOM_ARENA)
+          && (tch->TopLevel < LEVEL_IMMORTAL))
+        {
+          tch->Echo( "&W%s\r\n", tch->Name);
+        }
+    }
 }
+

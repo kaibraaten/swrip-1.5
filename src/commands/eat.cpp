@@ -11,7 +11,7 @@ void do_eat( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Eat what?\r\n", ch );
+      ch->Echo( "Eat what?\r\n" );
       return;
     }
 
@@ -33,7 +33,7 @@ void do_eat( Character *ch, char *argument )
 
       if ( !IsNpc(ch) && ch->PCData->Condition[COND_FULL] > 40 )
         {
-          SendToCharacter( "You are too full to eat more.\r\n", ch );
+          ch->Echo( "You are too full to eat more.\r\n" );
           return;
         }
     }
@@ -74,9 +74,9 @@ void do_eat( Character *ch, char *argument )
           GainCondition( ch, COND_FULL, (obj->Value[OVAL_FOOD_SATISFACTION] * foodcond) / 10 );
 
           if ( condition <= 1 && ch->PCData->Condition[COND_FULL] > 1 )
-            SendToCharacter( "You are no longer hungry.\r\n", ch );
+            ch->Echo( "You are no longer hungry.\r\n" );
           else if ( ch->PCData->Condition[COND_FULL] > 40 )
-            SendToCharacter( "You are full.\r\n", ch );
+            ch->Echo( "You are full.\r\n" );
         }
 
       if (  obj->Value[OVAL_FOOD_POISON] != 0
@@ -115,9 +115,9 @@ void do_eat( Character *ch, char *argument )
           GainCondition( ch, COND_FULL, obj->Value[4] );
 
 	  if ( condition <= 1 && ch->PCData->Condition[COND_FULL] > 1 )
-            SendToCharacter( "You are no longer hungry.\r\n", ch );
+            ch->Echo( "You are no longer hungry.\r\n" );
           else if ( ch->PCData->Condition[COND_FULL] > 40 )
-            SendToCharacter( "You are full.\r\n", ch );
+            ch->Echo( "You are full.\r\n" );
         }
 
       retcode = CastSpellWithObject( obj->Value[OVAL_PILL_SPELL1], obj->Value[OVAL_PILL_LEVEL], ch, ch, NULL );
@@ -139,3 +139,4 @@ void do_eat( Character *ch, char *argument )
 
   ExtractObject( obj );
 }
+

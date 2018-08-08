@@ -16,5 +16,6 @@ void do_visible( Character *ch, char *argument )
   if ( !HasPermanentSneak(ch) ) /* Noghri has perm sneak */
     RemoveBit( ch->AffectedBy, AFF_SNEAK );
 
-  SendToCharacter( "Ok.\r\n", ch );
+  ch->Echo("Ok.\r\n");
 }
+

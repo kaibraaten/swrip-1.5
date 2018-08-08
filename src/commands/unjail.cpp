@@ -11,47 +11,48 @@ void do_unjail ( Character *ch , char *argument )
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "That's pointless.\r\n", ch );
+      ch->Echo("That's pointless.\r\n");
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "That would be a waste of time.\r\n", ch );
+      ch->Echo("That would be a waste of time.\r\n");
       return;
     }
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      SendToCharacter( "This isn't a good place to do that.\r\n", ch );
+      ch->Echo("This isn't a good place to do that.\r\n");
       return;
     }
 
   if ( ch->Position == POS_FIGHTING )
     {
-      SendToCharacter( "Interesting combat technique.\r\n" , ch );
+      ch->Echo("Interesting combat technique.\r\n" );
       return;
     }
 
   if ( ch->Position <= POS_SLEEPING )
     {
-      SendToCharacter( "In your dreams or what?\r\n" , ch );
+      ch->Echo("In your dreams or what?\r\n" );
       return;
     }
 
   if ( victim->InRoom->Vnum == ROOM_VNUM_HELL)
     {
-      SendToCharacter( "Only an immortal can unhell someone.\r\n", ch );
+      ch->Echo("Only an immortal can unhell someone.\r\n");
       return;
     }
-  SendToCharacter( "Jail restrictions released.\r\n", ch );
+  ch->Echo("Jail restrictions released.\r\n");
   victim->PCData->JailVnum = 0;
   victim->PCData->ReleaseDate = 0;
 }
+

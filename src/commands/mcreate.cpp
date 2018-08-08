@@ -14,7 +14,7 @@ void do_mcreate( Character *ch, char *argument )
 
   if ( IsNpc(ch) )
     {
-      SendToCharacter( "Mobiles cannot create.\r\n", ch );
+      ch->Echo("Mobiles cannot create.\r\n");
       return;
     }
 
@@ -24,13 +24,13 @@ void do_mcreate( Character *ch, char *argument )
 
   if ( vnum == -1 || IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: mcreate <vnum> [cvnum] <mobile name>\r\n", ch );
+      ch->Echo("Usage: mcreate <vnum> [cvnum] <mobile name>\r\n");
       return;
     }
 
   if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
     {
-      SendToCharacter( "Bad number.\r\n", ch );
+      ch->Echo("Bad number.\r\n");
       return;
     }
 
@@ -45,7 +45,7 @@ void do_mcreate( Character *ch, char *argument )
 
   if ( GetProtoMobile( vnum ) )
     {
-      SendToCharacter( "A mobile with that number already exists.\r\n", ch );
+      ch->Echo("A mobile with that number already exists.\r\n");
       return;
     }
 
@@ -58,13 +58,13 @@ void do_mcreate( Character *ch, char *argument )
 
       if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
-          SendToCharacter( "You must have an assigned area to create mobiles.\r\n", ch );
+          ch->Echo("You must have an assigned area to create mobiles.\r\n");
           return;
         }
       if ( vnum < pArea->VnumRanges.Mob.First
            ||   vnum > pArea->VnumRanges.Mob.Last )
         {
-          SendToCharacter( "That number is not in your allocated range.\r\n", ch );
+          ch->Echo("That number is not in your allocated range.\r\n");
           return;
         }
     }
@@ -73,7 +73,7 @@ void do_mcreate( Character *ch, char *argument )
 
   if ( !pMobIndex )
     {
-      SendToCharacter( "Error.\r\n", ch );
+      ch->Echo("Error.\r\n");
       Log->Bug( "do_mcreate: MakeMobile failed." );
       return;
     }
@@ -85,3 +85,4 @@ void do_mcreate( Character *ch, char *argument )
   Act( AT_IMMORT, "You wave your arms about, and $N appears at your command!",
        ch, NULL, mob, TO_CHAR );
 }
+

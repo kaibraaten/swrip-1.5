@@ -9,6 +9,7 @@ void do_bamfout( Character *ch, char *argument )
       SmashTilde( argument );
       FreeMemory( ch->PCData->BamfOut );
       ch->PCData->BamfOut = CopyString( argument );
-      SendToCharacter( "Ok.\r\n", ch );
+      ch->Echo( "Ok.\r\n" );
     }
 }
+

@@ -5,22 +5,22 @@
 
 void do_cutdoor( Character *ch, char *argument )
 {
-  Character *gch;
-  Exit *pexit;
-  char       arg [ MAX_INPUT_LENGTH ];
-  Object *wield;
+  Character *gch = nullptr;
+  Exit *pexit = nullptr;
+  char arg[MAX_INPUT_LENGTH];
+  const Object *wield = nullptr;
 
   if ( ( wield = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL
        || wield->Value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER )
     {
-      SendToCharacter( "You need a lightsaber for that!\r\n", ch );
+      ch->Echo( "You need a lightsaber for that!\r\n" );
       return;
     }
 
   if ( !IsNpc( ch )
        && ( ch->PCData->Learned[gsn_lightsabers] <= 0 || ch->PCData->Learned[gsn_cutdoor] <= 0 ))
     {
-      SendToCharacter( "You can not use it well enough to cut a door open.\r\n", ch );
+      ch->Echo( "You can not use it well enough to cut a door open.\r\n" );
       return;
     }
 
@@ -28,26 +28,26 @@ void do_cutdoor( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Cut what?\r\n", ch );
+      ch->Echo( "Cut what?\r\n" );
       return;
     }
 
   if ( ch->Fighting )
     {
-      SendToCharacter( "You can't break off your fight.\r\n", ch );
+      ch->Echo( "You can't break off your fight.\r\n" );
       return;
     }
 
   if ( ( pexit = FindDoor( ch, arg, false ) ) != NULL )
     {
-      Room *to_room;
-      Exit       *pexit_rev;
-      int              the_chance;
-      char          *keyword;
+      const Room *to_room = nullptr;
+      Exit *pexit_rev = nullptr;
+      int the_chance = 0;
+      const char *keyword = nullptr;
 
       if ( !IsBitSet( pexit->Flags, EX_CLOSED ) )
         {
-          SendToCharacter( "It is already open.\r\n", ch );
+          ch->Echo( "It is already open.\r\n" );
           return;
         }
 
@@ -133,3 +133,4 @@ void do_cutdoor( Character *ch, char *argument )
 	}
     }
 }
+

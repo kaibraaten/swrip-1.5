@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "clan.hpp"
+#include "character.hpp"
 
 void do_makeclan( Character *ch, char *argument )
 {
@@ -8,13 +9,13 @@ void do_makeclan( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: makeclan <clan name>\r\n", ch );
+      ch->Echo("Usage: makeclan <clan name>\r\n");
       return;
     }
 
   if( GetClan( argument ) )
     {
-      Echo( ch, "&RThere's already another clan with that name.&d\r\n" );
+      ch->Echo("&RThere's already another clan with that name.&d\r\n" );
       return;
     }
 
@@ -34,3 +35,5 @@ void do_makeclan( Character *ch, char *argument )
 
   Clans->Save( clan );
 }
+
+

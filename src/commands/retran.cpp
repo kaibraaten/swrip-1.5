@@ -11,16 +11,17 @@ void do_retran( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter("Retransfer whom?\r\n", ch );
+      ch->Echo("Retransfer whom?\r\n");
       return;
     }
 
   if ( !(victim = GetCharacterAnywhere(ch, arg)) )
     {
-      SendToCharacter("They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   sprintf(buf, "'%s' %ld", victim->Name, victim->ReTran);
   do_transfer(ch, buf);
 }
+

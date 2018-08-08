@@ -60,3 +60,4 @@ bool spec_jedi( Character *ch )
 
   return false;
 }
+

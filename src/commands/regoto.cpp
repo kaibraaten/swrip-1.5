@@ -8,3 +8,4 @@ void do_regoto( Character *ch, char *argument )
   sprintf(buf, "%ld", ch->ReGoto);
   do_goto(ch, buf);
 }
+

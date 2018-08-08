@@ -18,7 +18,7 @@ ch_ret spell_cure_blindness( int sn, int level, Character *ch, void *vo )
 
   if ( ch != victim )
     {
-      SendToCharacter("The noble Jedi use their powers to help others!\r\n", ch);
+      ch->Echo("The noble Jedi use their powers to help others!\r\n");
       ch->Alignment = ch->Alignment +25 ;
       ch->Alignment = urange( -1000, ch->Alignment, 1000 );
       ApplyJediBonus(ch);
@@ -26,10 +26,11 @@ ch_ret spell_cure_blindness( int sn, int level, Character *ch, void *vo )
 
   StripAffect( victim, gsn_blindness );
   SetCharacterColor( AT_MAGIC, victim);
-  SendToCharacter( "Your vision returns!\r\n", victim );
+  victim->Echo("Your vision returns!\r\n");
 
   if ( ch != victim )
-    SendToCharacter( "Ok.\r\n", ch );
+    ch->Echo("Ok.\r\n");
 
   return rNONE;
 }
+

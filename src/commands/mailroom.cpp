@@ -33,13 +33,13 @@ void do_mailroom(Character *ch, char *argument)
 
       if ( !board )
         {
-          SendToCharacter( "There is no mail facility here.\r\n", ch );
+          ch->Echo("There is no mail facility here.\r\n");
           return;
         }
 
       if (board->Type != BOARD_MAIL)
         {
-          SendToCharacter("You can only use mail commands in a post office.\r\n", ch);
+          ch->Echo("You can only use mail commands in a post office.\r\n");
           return;
         }
       else
@@ -49,3 +49,5 @@ void do_mailroom(Character *ch, char *argument)
         }
     }
 }
+
+

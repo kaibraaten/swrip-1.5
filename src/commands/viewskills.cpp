@@ -15,13 +15,13 @@ void do_viewskills( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "&zSyntax: skills <player>.\r\n", ch );
+      ch->Echo("&zSyntax: skills <player>.\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter("No such person in the game.\r\n", ch );
+      ch->Echo("No such person in the game.\r\n");
       return;
     }
 
@@ -40,10 +40,11 @@ void do_viewskills( Character *ch, char *argument )
 
           sprintf( buf, "%20s %3d%% ", SkillTable[sn]->Name,
                    victim->PCData->Learned[sn]);
-          SendToCharacter( buf, ch );
+          ch->Echo(buf);
 
           if ( ++col % 3 == 0 )
-            SendToCharacter( "\r\n", ch );
+            ch->Echo("\r\n");
         }
     }
 }
+

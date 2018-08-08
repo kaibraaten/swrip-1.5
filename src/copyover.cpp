@@ -56,7 +56,7 @@ void do_copyover( Character * ch, char *argument )
 
   if( !fp )
   {
-    SendToCharacter( "Copyover file not writeable, aborted.\r\n", ch );
+    ch->Echo( "Copyover file not writeable, aborted.\r\n" );
     Log->Bug( "Could not write to copyover file: %s", COPYOVER_FILE );
     perror( "do_copyover:fopen" );
     return;
@@ -108,8 +108,8 @@ void do_copyover( Character * ch, char *argument )
 
   /* Failed - sucessful exec will not return */
   perror( "do_copyover: execl" );
-  SendToCharacter( "Copyover FAILED!\r\n", ch );
-  Echo(ch, "%s\r\n", strerror(errno));
+  ch->Echo( "Copyover FAILED!\r\n" );
+  ch->Echo( "%s\r\n", strerror(errno));
 #endif
 }
 
@@ -203,3 +203,4 @@ void RecoverFromCopyover( void )
 
   fclose( fp );
 }
+

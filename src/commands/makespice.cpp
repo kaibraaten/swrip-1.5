@@ -60,7 +60,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( IsNullOrEmpty( args->CommandArguments ) )
     {
-      Echo( ch, "&RUsage: Makespice <name>\r\n&w" );
+      ch->Echo("&RUsage: Makespice <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
@@ -111,7 +111,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   spice->Value[OVAL_SPICE_TYPE] = ud->SpiceType;
   spice->Value[OVAL_SPICE_GRADE] = ud->SpiceGrade;
 
-  SendToCharacter( "&GYou finish your work.\r\n", ch);
+  ch->Echo("&GYou finish your work.\r\n");
   Act( AT_PLAIN, "$n finishes $s work.", ch, NULL, NULL, TO_ROOM );
 
   spice->Cost  = 500;
@@ -140,3 +140,4 @@ static void FreeUserData( struct UserData *ud )
 
   FreeMemory( ud );
 }
+

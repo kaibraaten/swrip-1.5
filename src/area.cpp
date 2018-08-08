@@ -1913,7 +1913,7 @@ void AreaUpdate( void )
                    &&   pch->InRoom->Area == pArea )
                 {
                   SetCharacterColor( AT_RESET, pch );
-                  SendToCharacter( buf, pch );
+                  pch->Echo( buf );
                 }
             }
         }
@@ -2295,3 +2295,4 @@ void CleanResets( Area *tarea )
   tarea->FirstReset    = NULL;
   tarea->LastReset     = NULL;
 }
+

@@ -10,24 +10,25 @@ void do_bounties( Character *ch, char *argument )
        && (!IsClanned( ch )
            || !IsBountyHuntersGuild(ch->PCData->ClanInfo.Clan->Name)))
     {
-      SendToCharacter( "\r\nOnly hunters can access that information!\r\n", ch );
+      ch->Echo( "\r\nOnly bounty hunters can access that information!\r\n" );
       return;
     }
 
   SetCharacterColor( AT_WHITE, ch );
-  SendToCharacter( "\r\nBounty                      Reward          Poster\r\n", ch );
+  ch->Echo( "\r\nBounty                      Reward          Poster\r\n" );
 
   if( Bounties->Count() > 0)
     {
       for(const Bounty *bounty : Bounties->Entities())
         {
           SetCharacterColor( AT_RED, ch );
-          Echo( ch, "%-26s   %-14ld %-20s\r\n", bounty->Target, bounty->Reward, bounty->Poster );
+          ch->Echo( "%-26s   %-14ld %-20s\r\n", bounty->Target, bounty->Reward, bounty->Poster );
         }
     }
   else
     {
       SetCharacterColor( AT_GREY, ch );
-      SendToCharacter( "There are no bounties set at this time.\r\n", ch );
+      ch->Echo( "There are no bounties set at this time.\r\n" );
     }
 }
+

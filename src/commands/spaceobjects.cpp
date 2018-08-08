@@ -14,12 +14,12 @@ void do_spaceobjects( Character *ch, char *argument )
         continue;
 
       if ( !(spaceobject->IsSimulator && (!IsGreater(ch))) )
-        Echo( ch, "%s\r\n", spaceobject->Name );
+        ch->Echo("%s\r\n", spaceobject->Name );
 
       count++;
     }
 
-  Echo( ch, "\r\n" );
+  ch->Echo("\r\n" );
   SetCharacterColor( AT_NOTE, ch );
 
   for(const Spaceobject *spaceobject : Spaceobjects->Entities())
@@ -28,14 +28,15 @@ void do_spaceobjects( Character *ch, char *argument )
 	continue;
 
       if ( !(spaceobject->IsSimulator && (!IsGreater(ch))) )
-        Echo( ch, "%s\r\n", spaceobject->Name );
+        ch->Echo("%s\r\n", spaceobject->Name );
 
       count++;
     }
 
   if ( !count )
     {
-      SendToCharacter( "There are no spaceobjects currently formed.\r\n", ch );
+      ch->Echo("There are no spaceobjects currently formed.\r\n");
       return;
     }
 }
+

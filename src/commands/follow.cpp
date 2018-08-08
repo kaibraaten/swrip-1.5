@@ -4,19 +4,19 @@
 void do_follow( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
 
   OneArgument( argument, arg );
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Follow whom?\r\n", ch );
+      ch->Echo( "Follow whom?\r\n" );
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
@@ -30,16 +30,17 @@ void do_follow( Character *ch, char *argument )
     {
       if ( !ch->Master )
         {
-          SendToCharacter( "You already follow yourself.\r\n", ch );
+          ch->Echo( "You already follow yourself.\r\n" );
           return;
         }
+
       StopFollowing( ch );
       return;
     }
 
   if ( IsFollowingInCircle( ch, victim ) )
     {
-      SendToCharacter( "Following in loops is not allowed... sorry.\r\n", ch );
+      ch->Echo( "Following in loops is not allowed... sorry.\r\n" );
       return;
     }
 
@@ -48,3 +49,4 @@ void do_follow( Character *ch, char *argument )
 
   StartFollowing( ch, victim );
 }
+

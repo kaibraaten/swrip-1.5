@@ -11,13 +11,13 @@ void do_emote( Character *ch, char *argument )
 
   if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_NO_EMOTE) )
     {
-      SendToCharacter( "You can't show your emotions.\r\n", ch );
+      ch->Echo( "You can't show your emotions.\r\n" );
       return;
     }
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Emote what?\r\n", ch );
+      ch->Echo( "Emote what?\r\n" );
       return;
     }
 
@@ -53,3 +53,4 @@ void do_emote( Character *ch, char *argument )
       AppendToFile( LOG_FILE, buf );
     }
 }
+
