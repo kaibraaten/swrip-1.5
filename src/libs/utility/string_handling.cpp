@@ -138,11 +138,12 @@ void HideTilde( char *str )
   ReplaceChar( str, '~', HIDDEN_TILDE );
 }
 
-char *ShowTilde( const char *str )
+char *ShowTilde( const std::string &arg)
 {
   static char buf[MAX_STRING_LENGTH];
   char *bufptr = buf;
-
+  const char *str = arg.c_str();
+  
   for ( ; *str != '\0'; str++, bufptr++ )
     {
       if ( *str == HIDDEN_TILDE )
@@ -448,16 +449,20 @@ char *OneArgument2( char *argument, char *arg_first )
 /*
  * Remove carriage returns from a line
  */
-char *StripCarriageReturn( const char *str )
+char *StripCarriageReturn( const std::string &arg)
 {
   static char newstr[MAX_STRING_LENGTH];
   int i = 0, j = 0;
-
-  for ( i=j=0; str[i] != '\0'; i++ )
-    if ( str[i] != '\r' )
-      {
-        newstr[j++] = str[i];
-      }
+  const char *str = arg.c_str();
+  
+  for ( i = j = 0; str[i] != '\0'; i++ )
+    {
+      if ( str[i] != '\r' )
+        {
+          newstr[j++] = str[i];
+        }
+    }
+  
   newstr[j] = '\0';
   return newstr;
 }
@@ -579,9 +584,9 @@ char *WordWrap( char *txt, unsigned short wrap )
   return bufp;
 }
 
-char *EncodeString( const char *str )
+char *EncodeString( const std::string &str )
 {
-  return sha256_crypt( str );
+  return sha256_crypt( str.c_str() );
 }
 
 char *CatSprintf(char *dest, const char *fmt, ...)
@@ -669,8 +674,10 @@ static const char *str_str( const char *astr, const char *bstr )
  * Counts the number of times a target string occurs in a source string.
  * case insensitive -- Gorog
  */
-int CountStringOccurances(const char *psource, const char *ptarget)
+int CountStringOccurances(const std::string &source, const std::string &target)
 {
+  const char *psource = source.c_str();
+  const char *ptarget = target.c_str();
   const char *ptemp = psource;
   int count=0;
 

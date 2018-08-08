@@ -60,17 +60,16 @@ void LuaSetfieldBoolean( lua_State *L, const std::string &key, bool value )
   lua_setfield( L, -2, key.c_str() );
 }
 
-void LuaLoadDataFile( const char *filename,
+void LuaLoadDataFile( const std::string &filename,
                       int (*callback)( lua_State *L ),
-                      const char *callbackFunctionName )
+                      const std::string &callbackFunctionName )
 {
   lua_State *L = CreateLuaState();
-  int error;
 
   lua_pushcfunction( L, callback );
-  lua_setglobal( L, callbackFunctionName );
+  lua_setglobal( L, callbackFunctionName.c_str() );
 
-  error = luaL_loadfile( L, filename ) || lua_pcall( L, 0, 0, 0 );
+  int error = luaL_loadfile( L, filename.c_str() ) || lua_pcall( L, 0, 0, 0 );
 
   if( error )
     {
@@ -81,18 +80,17 @@ void LuaLoadDataFile( const char *filename,
   lua_close( L );
 }
 
-void LuaSaveDataFile( const char *filename,
+void LuaSaveDataFile( const std::string &filename,
                       void (*pushData)( lua_State *L, const void* ),
-                      const char *data, const void *userData )
+                      const std::string &data, const void *userData )
 {
-  int error;
   lua_State *L = CreateLuaState();
   char buffer[MAX_STRING_LENGTH];
 
   pushData( L, userData );
 
   sprintf( buffer, "%ssavers.lua", SCRIPT_DIR );
-  error = luaL_dofile( L, buffer );
+  int error = luaL_dofile( L, buffer );
 
   if( error )
     {
@@ -101,10 +99,10 @@ void LuaSaveDataFile( const char *filename,
     }
   else
     {
-      sprintf( buffer, "save%s", data );
+      sprintf( buffer, "save%s", data.c_str() );
       lua_getfield( L, -1, buffer );
-      lua_getglobal( L, data );
-      lua_pushstring( L, filename );
+      lua_getglobal( L, data.c_str() );
+      lua_pushstring( L, filename.c_str() );
 
       error = lua_pcall( L, 2, 0, 0 );
 
@@ -120,17 +118,17 @@ void LuaSaveDataFile( const char *filename,
 
 void LuaPushFlags(lua_State *L, unsigned long flags,
                   const std::array<const char * const, MAX_BIT> &nameArray,
-                  const char *key)
+                  const std::string &key)
 {
   LuaPushFlags(L, flags, nameArray.data(), key);
 }
 
 void LuaPushFlags( lua_State *L, unsigned long flags,
-		   const char * const nameArray[], const char *key )
+		   const char * const nameArray[], const std::string &key )
 {
   if( flags )
     {
-      lua_pushstring( L, key );
+      lua_pushstring( L, key.c_str() );
       lua_newtable( L );
 
       for(size_t bit = 0; bit < MAX_BIT; ++bit)
@@ -149,11 +147,11 @@ void LuaPushFlags( lua_State *L, unsigned long flags,
     }
 }
 
-unsigned int LuaLoadFlags( lua_State *L, const char *key )
+unsigned int LuaLoadFlags( lua_State *L, const std::string &key )
 {
   unsigned int flags = 0;
   int idx = lua_gettop( L );
-  lua_getfield( L, idx, key );
+  lua_getfield( L, idx, key.c_str() );
 
   if( !lua_isnil( L, ++idx ) )
     {
@@ -299,9 +297,9 @@ void LuaPushSmaugAffects( lua_State *L, const SmaugAffect *affectList )
     }
 }
 
-void LuaPushVector3( lua_State *L, const Vector3 *v, const char *key )
+void LuaPushVector3( lua_State *L, const Vector3 *v, const std::string &key )
 {
-  lua_pushstring( L, key );
+  lua_pushstring( L, key.c_str() );
   lua_newtable( L );
 
   LuaSetfieldNumber( L, "X", v->x );
@@ -311,10 +309,10 @@ void LuaPushVector3( lua_State *L, const Vector3 *v, const char *key )
   lua_settable( L, -3 );
 }
 
-void LuaLoadVector3( lua_State *L, Vector3 *vec, const char *key )
+void LuaLoadVector3( lua_State *L, Vector3 *vec, const std::string &key )
 {
   int idx = lua_gettop( L );
-  lua_getfield( L, idx, key );
+  lua_getfield( L, idx, key.c_str() );
 
   if( !lua_isnil( L, ++idx ) )
     {
@@ -344,9 +342,9 @@ void LuaLoadVector3( lua_State *L, Vector3 *vec, const char *key )
   lua_pop( L, 1 );
 }
 
-void LuaPushCurrentAndMax( lua_State *L, const char *key, int current, int mx )
+void LuaPushCurrentAndMax( lua_State *L, const std::string &key, int current, int mx )
 {
-  lua_pushstring( L, key );
+  lua_pushstring( L, key.c_str() );
   lua_newtable( L );
 
   LuaSetfieldNumber( L, "Current", current );
@@ -355,10 +353,10 @@ void LuaPushCurrentAndMax( lua_State *L, const char *key, int current, int mx )
   lua_settable( L, -3 );
 }
 
-void LuaLoadCurrentAndMax( lua_State *L, const char *key, int *current, int *mx )
+void LuaLoadCurrentAndMax( lua_State *L, const std::string &key, int *current, int *mx )
 {
   int idx = lua_gettop( L );
-  lua_getfield( L, idx, key );
+  lua_getfield( L, idx, key.c_str() );
 
   if( !lua_isnil( L, ++idx ) )
     {

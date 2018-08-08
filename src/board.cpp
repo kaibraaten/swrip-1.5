@@ -366,7 +366,7 @@ static int L_BoardEntry( lua_State *L )
   return 0;
 }
 
-static void ExecuteBoardFile( const char *filePath, void *userData )
+static void ExecuteBoardFile( const std::string &filePath, void *userData )
 {
   LuaLoadDataFile( filePath, L_BoardEntry, "BoardEntry" );
 }
