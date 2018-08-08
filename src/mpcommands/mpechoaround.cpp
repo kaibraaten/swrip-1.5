@@ -15,7 +15,7 @@ void do_mpechoaround( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -46,3 +46,4 @@ void do_mpechoaround( Character *ch, char *argument )
 
   ch->Flags = mobflags;
 }
+

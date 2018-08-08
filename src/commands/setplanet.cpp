@@ -11,7 +11,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -20,10 +20,10 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Usage: setplanet <planet> <field> [value]\r\n", ch );
-      SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( " base_value flags\r\n", ch );
-      SendToCharacter( " name spaceobject governed_by\r\n", ch );
+      ch->Echo("Usage: setplanet <planet> <field> [value]\r\n");
+      ch->Echo("\r\nField being one of:\r\n");
+      ch->Echo(" base_value flags\r\n");
+      ch->Echo(" name spaceobject governed_by\r\n");
       return;
     }
 
@@ -31,7 +31,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !planet )
     {
-      SendToCharacter( "No such planet.\r\n", ch );
+      ch->Echo("No such planet.\r\n");
       return;
     }
 
@@ -39,14 +39,14 @@ void do_setplanet( Character *ch, char *argument )
     {
       if( Planets->FindByName(argument) != nullptr)
 	{
-	  Echo( ch, "There's already another planet with that name.\r\n" );
+   ch->Echo("There's already another planet with that name.\r\n" );
 	  return;
 	}
       
       unlink( GetPlanetFilename( planet ) );
       FreeMemory( planet->Name );
       planet->Name = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Planets->Save(planet);
       return;
     }
@@ -58,12 +58,12 @@ void do_setplanet( Character *ch, char *argument )
       if ( clan )
         {
           planet->GovernedBy = clan;
-          SendToCharacter( "Done.\r\n", ch );
+          ch->Echo("Done.\r\n");
           Planets->Save(planet);
         }
       else
         {
-          SendToCharacter( "No such clan.\r\n", ch );
+          ch->Echo("No such clan.\r\n");
         }
 
       return;
@@ -78,12 +78,12 @@ void do_setplanet( Character *ch, char *argument )
           if (spaceobject != NULL)
 	    {
               spaceobject->Planet = planet;
-              SendToCharacter( "Done.\r\n", ch );
+              ch->Echo("Done.\r\n");
               Planets->Save(planet);
             }
           else
             {
-              SendToCharacter( "No such spaceobject.\r\n", ch );
+              ch->Echo("No such spaceobject.\r\n");
             }
         }
 
@@ -93,7 +93,7 @@ void do_setplanet( Character *ch, char *argument )
   if ( !StrCmp( arg2, "base_value" ) )
     {
       planet->BaseValue = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Planets->Save(planet);
       return;
     }
@@ -106,7 +106,7 @@ void do_setplanet( Character *ch, char *argument )
 
       if ( IsNullOrEmpty( farg ) )
         {
-          SendToCharacter( "Possible flags: nocapture\r\n", ch );
+          ch->Echo("Possible flags: nocapture\r\n");
           return;
         }
 
@@ -118,14 +118,15 @@ void do_setplanet( Character *ch, char *argument )
             }
           else
             {
-              Echo( ch , "No such flag: %s\r\n" , farg );
+              ch ->Echo("No such flag: %s\r\n" , farg );
             }
         }
 
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Planets->Save(planet);
       return;
     }
 
   do_setplanet( ch, "" );
 }
+

@@ -19,7 +19,7 @@ void do_use( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argd ) )
     {
-      SendToCharacter( "Use what?\r\n", ch );
+      ch->Echo("Use what?\r\n");
       return;
     }
 
@@ -38,13 +38,13 @@ void do_use( Character *ch, char *argument )
 
   if ( device->ItemType != ITEM_DEVICE )
     {
-      SendToCharacter( "You can't figure out what it is your supposed to do with it.\r\n", ch );
+      ch->Echo("You can't figure out what it is your supposed to do with it.\r\n");
       return;
     }
 
   if ( device->Value[OVAL_DEVICE_CHARGES] <= 0 )
     {
-      SendToCharacter( "It has no more charge left.", ch);
+      ch->Echo("It has no more charge left.");
       return;
     }
 
@@ -58,7 +58,7 @@ void do_use( Character *ch, char *argument )
         }
       else
         {
-          SendToCharacter( "Use on whom or what?\r\n", ch );
+          ch->Echo("Use on whom or what?\r\n");
           return;
         }
     }
@@ -67,7 +67,7 @@ void do_use( Character *ch, char *argument )
       if ( ( victim = GetCharacterInRoom ( ch, arg ) ) == NULL
            &&   ( obj    = GetObjectHere  ( ch, arg ) ) == NULL )
         {
-          SendToCharacter( "You can't find your target.\r\n", ch );
+          ch->Echo("You can't find your target.\r\n");
           return;
         }
     }
@@ -105,3 +105,4 @@ void do_use( Character *ch, char *argument )
         }
     }
 }
+

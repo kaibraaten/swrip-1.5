@@ -14,21 +14,21 @@ void do_recall( Character *ch, char *argument )
 
       if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
-          SendToCharacter( "Only builders can recall.\r\n", ch );
+          ch->Echo("Only builders can recall.\r\n");
           return;
         }
 
       if  ( ch->InRoom->Vnum < pArea->VnumRanges.Room.First
             || ch->InRoom->Vnum > pArea->VnumRanges.Room.Last )
         {
-          SendToCharacter( "You can only recall from your assigned area.\r\n", ch );
+          ch->Echo("You can only recall from your assigned area.\r\n");
           return;
 	}
     }
 
   if ( !location )
     {
-      SendToCharacter( "You are completely lost.\r\n", ch );
+      ch->Echo("You are completely lost.\r\n");
       return;
     }
 
@@ -37,13 +37,13 @@ void do_recall( Character *ch, char *argument )
 
   /*    if ( IsBitSet(ch->InRoom->Flags, ROOM_NO_RECALL) )
         {
-        SendToCharacter( "For some strange reason... nothing happens.\r\n", ch );
+        ch->Echo("For some strange reason... nothing happens.\r\n");
         return;
         }*/
 
   if ( IsBitSet(ch->AffectedBy, AFF_CURSE) )
     {
-      SendToCharacter("You are cursed and cannot recall!\r\n", ch );
+      ch->Echo("You are cursed and cannot recall!\r\n");
       return;
     }
 
@@ -53,11 +53,11 @@ void do_recall( Character *ch, char *argument )
       if ( NumberBits( 1 ) == 0 || ( !IsNpc( opponent ) && NumberBits( 3 ) > 1 ) )
         {
           SetWaitState( ch, 4 );
-          Echo( ch, "You failed!\r\n" );
+          ch->Echo("You failed!\r\n" );
           return;
         }
 
-      Echo( ch, "You recall from combat!\r\n" );
+      ch->Echo("You recall from combat!\r\n" );
       StopFighting( ch, true );
     }
 
@@ -72,3 +72,4 @@ void do_recall( Character *ch, char *argument )
   Act( AT_ACTION, "$n appears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM );
   do_look( ch, "auto" );
 }
+

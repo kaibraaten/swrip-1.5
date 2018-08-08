@@ -16,7 +16,7 @@ void do_whois( Character *ch, char *argument)
 
   if( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter("You must input the name of a player online.\r\n", ch);
+      ch->Echo("You must input the name of a player online.\r\n");
       return;
     }
 
@@ -25,13 +25,13 @@ void do_whois( Character *ch, char *argument)
 
   if( ( ( victim = GetCharacterAnywhere(ch, buf) ) == NULL ))
     {
-      SendToCharacter("No such player online.\r\n", ch);
+      ch->Echo("No such player online.\r\n");
       return;
     }
 
   if(IsNpc(victim))
     {
-      SendToCharacter("That's not a player!\r\n", ch);
+      ch->Echo("That's not a player!\r\n");
       return;
     }
 
@@ -39,22 +39,22 @@ void do_whois( Character *ch, char *argument)
       && victim->PCData->WhoCloak
       && ch->TopLevel < LEVEL_IMMORTAL )
     {
-      SendToCharacter("No such player online.\r\n", ch);
+      ch->Echo("No such player online.\r\n");
       return;
     }
 
   if (IsGreater(ch))
     {
-      Echo(ch, "%s is a %s %s",
+      ch->Echo("%s is a %s %s",
                 victim->Name,
                 victim->Sex == SEX_MALE ? "male" :
                 victim->Sex == SEX_FEMALE ? "female" : "neutral",
                 NpcRace[victim->Race]);
-      Echo(ch, " in room %d.\r\n",
+      ch->Echo(" in room %d.\r\n",
                 victim->InRoom->Vnum);
     }
   else
-    Echo(ch, "%s.\r\n", victim->Name );
+    ch->Echo("%s.\r\n", victim->Name );
 
   if ( IsClanned( victim )
        && ( ( IsClanned( ch )
@@ -62,48 +62,48 @@ void do_whois( Character *ch, char *argument)
 	    || IsImmortal( ch ) ) )
     {
       if ( victim->PCData->ClanInfo.Clan->Type == CLAN_GUILD )
-        SendToCharacter( ", and belongs to the guild ", ch );
+        ch->Echo(", and belongs to the guild ");
       else
-        SendToCharacter( ", and belongs to organization ", ch );
-      SendToCharacter( victim->PCData->ClanInfo.Clan->Name, ch );
+        ch->Echo(", and belongs to organization ");
+      ch->Echo(victim->PCData->ClanInfo.Clan->Name);
     }
-  SendToCharacter( ".\r\n", ch );
+  ch->Echo(".\r\n");
 
   if( !IsNullOrEmpty( victim->PCData->HomePage ) )
-    Echo(ch, "%s's homepage can be found at %s.\r\n",
+    ch->Echo("%s's homepage can be found at %s.\r\n",
               victim->Name,
               victim->PCData->HomePage);
 
   if( !IsNullOrEmpty( victim->PCData->Bio ) )
-    Echo(ch, "%s's personal bio:\r\n%s",
+    ch->Echo("%s's personal bio:\r\n%s",
               victim->Name,
               victim->PCData->Bio);
 
   if( GetTrustLevel( ch ) >= LEVEL_GREATER )
     {
-      SendToCharacter("----------------------------------------------------\r\n", ch);
+      ch->Echo("----------------------------------------------------\r\n");
 
-      SendToCharacter("Info for immortals:\r\n", ch);
+      ch->Echo("Info for immortals:\r\n");
 
       if ( !IsNullOrEmpty( victim->PCData->AuthedBy ) )
-        Echo(ch, "%s was authorized by %s.\r\n",
+        ch->Echo("%s was authorized by %s.\r\n",
                   victim->Name, victim->PCData->AuthedBy);
 
-      Echo(ch, "%s has killed %d mobiles, and been killed by a mobile %d times.\r\n",
+      ch->Echo("%s has killed %d mobiles, and been killed by a mobile %d times.\r\n",
                 victim->Name, victim->PCData->MKills, victim->PCData->MDeaths );
       if ( victim->PCData->PKills || victim->PCData->PDeaths )
-        Echo(ch, "%s has killed %d players, and been killed by a player %d times.\r\n",
+        ch->Echo("%s has killed %d players, and been killed by a player %d times.\r\n",
                   victim->Name, victim->PCData->PKills, victim->PCData->PDeaths );
       if ( victim->PCData->IllegalPk )
-        Echo(ch, "%s has committed %d illegal player kills.\r\n",
+        ch->Echo("%s has committed %d illegal player kills.\r\n",
                   victim->Name, victim->PCData->IllegalPk );
 
-      Echo(ch, "%s is %shelled at the moment.\r\n",
+      ch->Echo("%s is %shelled at the moment.\r\n",
                 victim->Name,
                 (victim->PCData->ReleaseDate == 0) ? "not " : "");
 
       if(victim->PCData->ReleaseDate != 0)
-        Echo(ch, "%s was helled by %s, and will be released on %24.24s.\r\n",
+        ch->Echo("%s was helled by %s, and will be released on %24.24s.\r\n",
                   victim->Sex == SEX_MALE ? "He" :
                   victim->Sex == SEX_FEMALE ? "She" : "It",
                   victim->PCData->HelledBy,
@@ -126,7 +126,7 @@ void do_whois( Character *ch, char *argument)
           if(IsBitSet(victim->Flags, PLR_NO_TELL) )
             strcat(buf2, " notell");
           strcat(buf2, ".\r\n");
-          SendToCharacter(buf2, ch);
+          ch->Echo(buf2);
         }
 
       if ( victim->Desc && !IsNullOrEmpty( victim->Desc->Remote.Hostname ) )
@@ -139,13 +139,14 @@ void do_whois( Character *ch, char *argument)
             }
 
 	  strcat (buf2, "\r\n");
-          SendToCharacter(buf2, ch);
+          ch->Echo(buf2);
         }
 
       if (GetTrustLevel(ch) >= LEVEL_GREATER && GetTrustLevel(ch) >= GetTrustLevel( victim ) && victim->PCData )
         {
           sprintf (buf2, "Email: %s\r\n" , victim->PCData->Email );
-          SendToCharacter(buf2, ch);
+          ch->Echo(buf2);
         }
     }
 }
+

@@ -213,3 +213,4 @@ OldRepository *NewCommandRepository()
 {
   return (OldRepository*) NewRepository(_LoadCommands, _SaveCommands);
 }
+

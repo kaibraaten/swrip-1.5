@@ -13,14 +13,13 @@ void do_torture( Character *ch, char *argument )
   if ( !IsNpc(ch)
        &&  ch->PCData->Learned[gsn_torture] <= 0  )
     {
-      SendToCharacter(
-                   "Your mind races as you realize you have no idea how to do that.\r\n", ch );
+      ch->Echo("Your mind races as you realize you have no idea how to do that.\r\n" );
       return;
     }
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      SendToCharacter( "You can't do that right now.\r\n", ch );
+      ch->Echo("You can't do that right now.\r\n");
       return;
     }
 
@@ -28,31 +27,31 @@ void do_torture( Character *ch, char *argument )
 
   if ( ch->Mount )
     {
-      SendToCharacter( "You can't get close enough while mounted.\r\n", ch );
+      ch->Echo("You can't get close enough while mounted.\r\n");
       return;
     }
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Torture whom?\r\n", ch );
+      ch->Echo("Torture whom?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "Are you masacistic or what...\r\n", ch );
+      ch->Echo("Are you masacistic or what...\r\n");
       return;
     }
 
   if ( !IsAwake(victim) )
     {
-      SendToCharacter( "You need to wake them first.\r\n", ch );
+      ch->Echo("You need to wake them first.\r\n");
       return;
     }
 
@@ -61,7 +60,7 @@ void do_torture( Character *ch, char *argument )
 
   if ( victim->Fighting )
     {
-      SendToCharacter( "You can't torture someone whos in combat.\r\n", ch );
+      ch->Echo("You can't torture someone whos in combat.\r\n");
       return;
     }
 
@@ -99,8 +98,8 @@ void do_torture( Character *ch, char *argument )
       victim->Hit -= dam;
       victim->MaxHit -= dam;
 
-      Echo( victim, "You lose %d permanent hit points." ,dam);
-      Echo( ch, "They lose %d permanent hit points." , dam);
+      victim->Echo("You lose %d permanent hit points." ,dam);
+      ch->Echo("They lose %d permanent hit points." , dam);
     }
   else
     {
@@ -111,3 +110,4 @@ void do_torture( Character *ch, char *argument )
       global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
     }
 }
+

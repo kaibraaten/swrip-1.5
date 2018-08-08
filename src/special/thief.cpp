@@ -44,3 +44,4 @@ bool spec_thief( Character *ch )
 
   return false;
 }
+

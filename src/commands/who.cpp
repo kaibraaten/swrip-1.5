@@ -97,13 +97,13 @@ void do_who( Character *ch, char *argument )
                 case 1: iLevelLower = atoi( arg ); break;
                 case 2: iLevelUpper = atoi( arg ); break;
                 default:
-                  SendToCharacter( "Only two level numbers allowed.\r\n", ch );
+                  ch->Echo("Only two level numbers allowed.\r\n");
                   return;
                 }
             }
           else
             {
-              SendToCharacter( "This can only be used by immortals.\r\n", ch );
+              ch->Echo("This can only be used by immortals.\r\n");
               return;
             }
         }
@@ -114,33 +114,34 @@ void do_who( Character *ch, char *argument )
             {
               if (!ch->PCData->WhoCloak)
                 {
-                  SendToCharacter( "Who Cloaking is on.\r\n", ch );
+                  ch->Echo("Who Cloaking is on.\r\n");
                   ch->PCData->WhoCloak = true;
                   return;
                 }
               else
                 {
-                  SendToCharacter( "Who Cloaking is already on.\r\n", ch);
+                  ch->Echo("Who Cloaking is already on.\r\n");
                   return;
 		}
             }
           if ( !StrCmp( arg, "off" ) && ch->PCData )
             {
               if (ch->PCData->WhoCloak)
-                { SendToCharacter( "Who Cloaking is off.\r\n", ch );
+                {
+                  ch->Echo("Who Cloaking is off.\r\n");
                   ch->PCData->WhoCloak = false;
                   return;
                 }
               else
                 {
-                  SendToCharacter( "Who Cloaking is already off.\r\n", ch);
+                  ch->Echo("Who Cloaking is already off.\r\n");
                   return;
                 }
             }
 
           if ( strlen(arg) < 3 )
             {
-              SendToCharacter( "Be a little more specific please.\r\n", ch );
+              ch->Echo("Be a little more specific please.\r\n");
               return;
             }
 
@@ -169,7 +170,7 @@ void do_who( Character *ch, char *argument )
                         }
                       else
                         {
-			  SendToCharacter("&ROnly immortal's can do that to another clan!&w\r\n", ch);
+     ch->Echo("&ROnly immortal's can do that to another clan!&w\r\n");
                           return;
                         }
                     }
@@ -187,7 +188,7 @@ void do_who( Character *ch, char *argument )
                         fRaceRestrict = true;
                       if ( iRace == MAX_RACE && fClanMatch == false )
                         {
-                          SendToCharacter( "Only immortals can do that.\r\n", ch );
+                          ch->Echo("Only immortals can do that.\r\n");
                           return;
                         }
                     }
@@ -201,7 +202,7 @@ void do_who( Character *ch, char *argument )
   nMatch = 0;
 
   if ( ch && !NullCh)
-    SetPagerColor( AT_GREEN, ch );
+    SetCharacterColor( AT_GREEN, ch );
   else
     {
       if ( fShowHomepage )
@@ -365,7 +366,7 @@ void do_who( Character *ch, char *argument )
       if ( NullCh )
         fprintf( whoout,"\r\n----------------------------------[ New Citizens ]----------------------------\r\n\r\n" );
       else
-        SendToPager( "\r\n&G----------------------------------[ New Citizens ]----------------------------&W\r\n\r\n", ch );
+        ch->Echo("\r\n&G----------------------------------[ New Citizens ]----------------------------&W\r\n\r\n");
     }
 
   for ( cur_who = first_newbie; cur_who; cur_who = next_who )
@@ -373,7 +374,7 @@ void do_who( Character *ch, char *argument )
       if ( NullCh )
         fprintf( whoout, "%s", cur_who->Text );
       else
-        SendToPager( cur_who->Text, ch );
+        ch->Echo(cur_who->Text);
       next_who = cur_who->Next;
       FreeMemory( cur_who->Text );
       FreeMemory( cur_who );
@@ -385,7 +386,7 @@ void do_who( Character *ch, char *argument )
       if ( NullCh )
         fprintf( whoout,"\r\n--------------------------------[ Galactic Citizens ]-------------------------\r\n\r\n" );
       else
-        SendToPager( "\r\n&G--------------------------------[ Galactic Citizens ]-------------------------&W\r\n\r\n", ch );
+        ch->Echo("\r\n&G--------------------------------[ Galactic Citizens ]-------------------------&W\r\n\r\n");
     }
 
   for ( cur_who = first_mortal; cur_who; cur_who = next_who )
@@ -393,7 +394,7 @@ void do_who( Character *ch, char *argument )
       if ( NullCh )
         fprintf( whoout, "%s", cur_who->Text );
       else
-        SendToPager( cur_who->Text, ch );
+        ch->Echo(cur_who->Text);
 
       next_who = cur_who->Next;
       FreeMemory( cur_who->Text );
@@ -405,7 +406,7 @@ void do_who( Character *ch, char *argument )
       if ( NullCh )
         fprintf( whoout, "\r\n-------------------------------[ Omnipresent Beings ]-------------------------\r\n\r\n" );
       else
-        SendToPager(  "\r\n&G-------------------------------[ Omnipresent Beings ]--------------------------&W\r\n\r\n", ch );
+        ch->Echo("\r\n&G-------------------------------[ Omnipresent Beings ]--------------------------&W\r\n\r\n");
     }
 
   for ( cur_who = first_imm; cur_who; cur_who = next_who )
@@ -413,7 +414,7 @@ void do_who( Character *ch, char *argument )
       if ( NullCh )
         fprintf( whoout, "%s", cur_who->Text );
       else
-        SendToPager( cur_who->Text, ch );
+        ch->Echo(cur_who->Text);
       next_who = cur_who->Next;
       FreeMemory( cur_who->Text );
       FreeMemory( cur_who );
@@ -428,5 +429,6 @@ void do_who( Character *ch, char *argument )
     }
 
   SetCharacterColor( AT_YELLOW, ch );
-  Echo( ch, "%d player%s.\r\n", nMatch, nMatch == 1 ? "" : "s" );
+  ch->Echo("%d player%s.\r\n", nMatch, nMatch == 1 ? "" : "s" );
 }
+

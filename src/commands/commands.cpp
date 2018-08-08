@@ -27,7 +27,7 @@ void do_commands( Character *ch, char *argument )
   const List *commands = GetEntities(CommandRepository);
   const int NumColumns = 6;
 
-  SetPagerColor( AT_PLAIN, ch );
+  SetCharacterColor( AT_PLAIN, ch );
 
   if ( IsNullOrEmpty( argument ) )
     {
@@ -44,18 +44,18 @@ void do_commands( Character *ch, char *argument )
                && IsWithinTrustLevel(command, ch)
                && !IsMudProgCommand(command))
             {
-              PagerPrintf( ch, "%-12s", command->Name );
+              ch->Echo( "%-12s", command->Name );
 
               if ( col % NumColumns == 0 )
                 {
-                  SendToPager( "\r\n", ch );
+                  ch->Echo( "\r\n" );
                 }
             }
 	}
 
       if ( col % NumColumns != 0 )
         {
-          SendToPager( "\r\n", ch );
+          ch->Echo( "\r\n" );
         }
 
       FreeListIterator(iterator);
@@ -77,26 +77,27 @@ void do_commands( Character *ch, char *argument )
                && NameBeginsWith(command, argument)
                && !IsMudProgCommand(command))
             {
-              PagerPrintf( ch, "%-12s", command->Name );
+              ch->Echo( "%-12s", command->Name );
               found = true;
 
               if ( col % NumColumns == 0 )
                 {
-                  SendToPager( "\r\n", ch );
+                  ch->Echo( "\r\n" );
                 }
             }
         }
 
       if ( col % NumColumns != 0 )
         {
-          SendToPager( "\r\n", ch );
+          ch->Echo( "\r\n" );
         }
 
       if ( !found )
         {
-          Echo( ch, "No command found under %s.\r\n", argument);
+          ch->Echo( "No command found under %s.\r\n", argument);
         }
 
       FreeListIterator(iterator);
     }
 }
+

@@ -34,10 +34,11 @@ ch_ret spell_blindness( int sn, int level, Character *ch, void *vo )
   af.AffectedBy = AFF_BLIND;
   AffectToCharacter( victim, &af );
   SetCharacterColor( AT_MAGIC, victim );
-  SendToCharacter( "You are blinded!\r\n", victim );
+  victim->Echo("You are blinded!\r\n");
 
   if ( ch != victim )
-    SendToCharacter( "Ok.\r\n", ch );
+    ch->Echo("Ok.\r\n");
 
   return rNONE;
 }
+

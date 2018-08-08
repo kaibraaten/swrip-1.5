@@ -10,43 +10,42 @@ void do_bestowarea( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  Character *victim;
-  int  arg_len;
+  Character *victim = nullptr;
+  int arg_len = 0;
 
   argument = OneArgument( argument, arg );
 
   if ( GetTrustLevel (ch) < LEVEL_SUB_IMPLEM )
     {
-      SendToCharacter( "Sorry...\r\n", ch );
+      ch->Echo( "Sorry...\r\n" );
       return;
     }
 
   if ( !*arg )
     {
-      SendToCharacter(
-                   "Syntax:\r\n"
-                   "bestowarea <victim> <filename>.are\r\n"
-                   "bestowarea <victim> none             removes bestowed areas\r\n"
-                   "bestowarea <victim> list             lists bestowed areas\r\n"
-                   "bestowarea <victim>                  lists bestowed areas\r\n", ch);
+      ch->Echo( "Syntax:\r\n"
+                "bestowarea <victim> <filename>.are\r\n"
+                "bestowarea <victim> none             removes bestowed areas\r\n"
+                "bestowarea <victim> list             lists bestowed areas\r\n"
+                "bestowarea <victim>                  lists bestowed areas\r\n" );
       return;
     }
 
   if ( !(victim = GetCharacterAnywhere( ch, arg )) )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
   if ( IsNpc( victim ) )
     {
-      SendToCharacter( "You can't give special abilities to a mob!\r\n", ch );
+      ch->Echo( "You can't give special abilities to a mob!\r\n" );
       return;
     }
 
   if ( GetTrustLevel(victim) < LEVEL_IMMORTAL )
     {
-      SendToCharacter( "They aren't an immortal.\r\n", ch );
+      ch->Echo( "They aren't an immortal.\r\n" );
       return;
     }
 
@@ -56,7 +55,7 @@ void do_bestowarea( Character *ch, char *argument )
   if ( !*argument || !StrCmp (argument, "list") )
     {
       extract_area_names (victim->PCData->Bestowments, buf);
-      Echo( ch, "Bestowed areas: %s\r\n", buf);
+      ch->Echo( "Bestowed areas: %s\r\n", buf);
       return;
     }
 
@@ -65,26 +64,27 @@ void do_bestowarea( Character *ch, char *argument )
       remove_area_names (victim->PCData->Bestowments, buf);
       FreeMemory( victim->PCData->Bestowments );
       victim->PCData->Bestowments = CopyString( buf );
-      SendToCharacter( "Done.\r\n", ch);
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
   arg_len = strlen(argument);
+
   if ( arg_len < 5
        || argument[arg_len-4] != '.' || argument[arg_len-3] != 'a'
        || argument[arg_len-2] != 'r' || argument[arg_len-1] != 'e' )
     {
-      SendToCharacter( "You can only bestow an area name\r\n", ch );
-      SendToCharacter( "E.G. bestow joe sam.are\r\n", ch );
+      ch->Echo( "You can only bestow an area name\r\n" );
+      ch->Echo( "E.G. bestow joe sam.are\r\n" );
       return;
     }
 
   sprintf( buf, "%s %s", victim->PCData->Bestowments, argument );
   FreeMemory( victim->PCData->Bestowments );
   victim->PCData->Bestowments = CopyString( buf );
-  Echo( victim, "%s has bestowed on you the area: %s\r\n",
-             ch->Name, argument );
-  SendToCharacter( "Done.\r\n", ch );
+  victim->Echo( "%s has bestowed on you the area: %s\r\n",
+                ch->Name, argument );
+  ch->Echo( "Done.\r\n" );
 }
 
 /*
@@ -138,3 +138,4 @@ static void remove_area_names (char *inp, char *out)
         }
     }
 }
+

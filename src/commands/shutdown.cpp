@@ -10,7 +10,7 @@ void do_shutdown( Character *ch, char *argument )
 
   if ( StrCmp( argument, "mud now" ) && StrCmp(argument, "nosave") )
     {
-      SendToCharacter( "Syntax: 'shutdown mud now' or 'shutdown nosave'\r\n", ch );
+      ch->Echo("Syntax: 'shutdown mud now' or 'shutdown nosave'\r\n");
       return;
     }
 
@@ -34,3 +34,4 @@ void do_shutdown( Character *ch, char *argument )
 
   mud_down = true;
 }
+

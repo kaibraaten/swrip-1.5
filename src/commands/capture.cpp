@@ -25,15 +25,15 @@ void do_capture( Character *ch , char *argument )
   if ( !ch->InRoom || !ch->InRoom->Area)
     return;
 
-  if ( IsNpc(ch) || !ch->PCData )
+  if ( IsNpc(ch) )
     {
-      SendToCharacter ( "huh?\r\n" , ch );
+      ch->Echo( "Huh?\r\n" );
       return;
     }
 
   if ( !IsClanned( ch ) )
     {
-      SendToCharacter ( "You need to be a member of an organization to do that!\r\n" , ch );
+      ch->Echo( "You need to be a member of an organization to do that!\r\n" );
       return;
     }
 
@@ -44,13 +44,13 @@ void do_capture( Character *ch , char *argument )
 
   if ( ( planet = ch->InRoom->Area->Planet ) == NULL )
     {
-      SendToCharacter ( "You must be on a planet to capture it.\r\n" , ch );
+      ch->Echo( "You must be on a planet to capture it.\r\n" );
       return;
     }
 
   if ( clan == planet->GovernedBy )
     {
-      SendToCharacter ( "Your organization already controls this planet.\r\n" , ch );
+      ch->Echo( "Your organization already controls this planet.\r\n" );
       return;
     }
 
@@ -64,20 +64,20 @@ void do_capture( Character *ch , char *argument )
 
       if ( data.PlanetIsProtected )
         {
-          SendToCharacter ( "A planet cannot be captured while protected by orbiting spacecraft.\r\n" , ch );
+          ch->Echo( "A planet cannot be captured while protected by orbiting spacecraft.\r\n" );
           return;
         }
     }
 
   if ( IsBitSet( planet->Flags, PLANET_NOCAPTURE ) )
     {
-      SendToCharacter ( "This planet cannot be captured.\r\n" , ch);
+      ch->Echo( "This planet cannot be captured.\r\n" );
       return;
     }
 
   if ( planet->PopularSupport > 0 )
     {
-      SendToCharacter ( "The population is not in favour of changing leaders right now.\r\n" , ch );
+      ch->Echo( "The population is not in favour of changing leaders right now.\r\n" );
       return;
     }
 
@@ -92,7 +92,7 @@ void do_capture( Character *ch , char *argument )
 
   if ( support < 0 )
     {
-      SendToCharacter ( "There is not enough popular support for your organization!\r\nTry improving loyalty on the planets that you already control.\r\n" , ch );
+      ch->Echo( "There is not enough popular support for your organization!\r\nTry improving loyalty on the planets that you already control.\r\n" );
       return;
     }
 
@@ -135,3 +135,4 @@ static bool CheckIfProtectingPlanet(Ship *ship, void *userData)
 
   return true;
 }
+

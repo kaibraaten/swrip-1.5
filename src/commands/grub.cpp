@@ -2,6 +2,7 @@
 #include <string.h>
 #include "mud.hpp"
 #include "grub.hpp"
+#include "character.hpp"
 
 static struct operand_struct gr_op[MAX_NUM_OPS];
 static struct field_struct gr_fd[GR_NUM_FIELDS];
@@ -39,26 +40,33 @@ void do_grub (Character *ch, char *argument)
 
   gr_init();                                /* initialize data structures   */
   argument = OneArgument (argument, arg1);
+
   if ( !*arg1 )
     {
-      Echo(ch, "Syntax <max results> [keywords] [operands].\r\n");
+      ch->Echo("Syntax <max results> [keywords] [operands].\r\n");
       return;
     }
+
   if ( isdigit(*arg1) )        /* first argument is number of display lines */
-    dis_num = atoi( arg1 );
+    {
+      dis_num = atoi( arg1 );
+    }
   else
     {
-      Echo(ch, "You did not specify the number of display lines.\r\n");
+      ch->Echo("You did not specify the number of display lines.\r\n");
       return;
     }
 
   argument = OneArgument (argument, arg1);
+
   while ( *arg1 )
     {                                           /* build the operand table */
       if ( !gr_parse_operand (ch, arg1, &or_sw, &op_num) )
         return;
+
       argument = OneArgument (argument, arg1);
     }
+
   /*display_operand_table (op_num);*/
   gr_read( ch, op_num, or_sw, dis_num );      /* read the input file     */
 }
@@ -233,16 +241,20 @@ static bool gr_parse_operator (Character *ch, const char *pch, int *op_num)
       }
 
   if ( gr_op[*op_num].op < 0 )
-    {Echo(ch, "Invalid operator: %s\r\n", pch); return false;}
+    {
+      ch->Echo("Invalid operator: %s\r\n", pch);
+      return false;
+    }
 
   if ( gr_op[*op_num].op==EQ || gr_op[*op_num].op==LT
        || gr_op[*op_num].op==GT )
     pch++;
-  else pch+=2;                               /* advance to operand value */
+  else
+    pch+=2;                               /* advance to operand value */
 
   if ( IsNullOrEmpty( pch ) )
     {
-      Echo(ch, "Value is missing from operand.\r\n");
+      ch->Echo("Value is missing from operand.\r\n");
       return false;
     }
 
@@ -254,10 +266,15 @@ static bool gr_parse_operator (Character *ch, const char *pch, int *op_num)
   else
     {
       if ( strlen(pch) > MAX_FIELD_LENGTH )
-        {Echo(ch, "Char string is too long:%s\r\n", pch); return false;}
+        {
+          ch->Echo("Char string is too long:%s\r\n", pch);
+          return false;
+        }
+
       gr_op[*op_num].num  = false;
       strcpy (gr_op[*op_num].sval, pch);  /* store str operand value in table */
     }
+  
   (*op_num)++;                         /* operand now stored in table      */
   return true;
 }
@@ -281,7 +298,8 @@ static bool gr_parse_operand (Character *ch, const char *arg, bool *or_sw, int *
           return false;
         return true;
       }
-  Echo(ch, "Sorry. Invalid field name: %s\r\n", arg);
+  
+  ch->Echo("Sorry. Invalid field name: %s\r\n", arg);
   return false;
 }
 
@@ -324,26 +342,29 @@ static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num)
           tot_match++;
           if ( !title_sw && dis_num > 0 )     /* print title if applicable */
             {
-              Echo(ch,
-                        "\r\n%-12s %-2s %1s %-2s %1s %3s %3s %5s %11s %-15s %-6s %s\r\n",
-                        "Name", "Lv", "S", "R", "C", "Cln", "Cou", "Room", "Gold",
-                        "Site", "Last", "Pk");
+              ch->Echo("\r\n%-12s %-2s %1s %-2s %1s %3s %3s %5s %11s %-15s %-6s %s\r\n",
+                       "Name", "Lv", "S", "R", "C", "Cln", "Cou", "Room", "Gold",
+                       "Site", "Last", "Pk");
               title_sw = true;
             }
           if ( tot_match <= dis_num )         /* print record if applicable */
-            Echo(ch,
-                      "%-12s %2hd %c %2s %c %3s %3s %5hd %11ld %-15s %6lu %c\r\n",
-                      r.name, r.level, sex_map[(unsigned char) r.sex],
-                      race_map[(unsigned char) r.race],
-                      class_map[(unsigned char) r.pclass],
-                      clan_map[(unsigned char) r.clan],
-                      council_map[(unsigned char) r.council],
-                      r.room, r.gold, r.site, r.last, r.pkill);
+            ch->Echo("%-12s %2hd %c %2s %c %3s %3s %5hd %11ld %-15s %6lu %c\r\n",
+                     r.name, r.level, sex_map[(unsigned char) r.sex],
+                     race_map[(unsigned char) r.race],
+                     class_map[(unsigned char) r.pclass],
+                     clan_map[(unsigned char) r.clan],
+                     council_map[(unsigned char) r.council],
+                     r.room, r.gold, r.site, r.last, r.pkill);
         }
+
       fread( &r, sizeof(r), 1, fp);
     }
+
   fclose (fp);
+
   if (tot_match == 0 )
-    Echo(ch, "Zero matches were found.\r\n");
-  else Echo(ch, "%5d matches in total\r\n", tot_match);
+    ch->Echo("Zero matches were found.\r\n");
+  else
+    ch->Echo("%5d matches in total\r\n", tot_match);
 }
+

@@ -23,7 +23,7 @@ void do_redit( Character *ch, char *argument )
 
   if ( !ch->Desc )
     {
-      SendToCharacter( "You have no descriptor.\r\n", ch );
+      ch->Echo("You have no descriptor.\r\n");
       return;
     }
 
@@ -79,7 +79,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( !StrCmp( arg, "done" ) || !StrCmp( arg, "off" ) )
         {
-          SendToCharacter( "Redit mode off.\r\n", ch );
+          ch->Echo("Redit mode off.\r\n");
 
 	  if ( ch->PCData && ch->PCData->SubPrompt )
             FreeMemory( ch->PCData->SubPrompt );
@@ -92,16 +92,16 @@ void do_redit( Character *ch, char *argument )
   if ( IsNullOrEmpty( arg ) || !StrCmp( arg, "?" ) )
     {
       if ( ch->SubState == SUB_REPEATCMD )
-        SendToCharacter( "Syntax: <field> value\r\n",                      ch );
+        ch->Echo("Syntax: <field> value\r\n");
       else
-        SendToCharacter( "Syntax: redit <field> value\r\n",                ch );
+        ch->Echo("Syntax: redit <field> value\r\n");
 
-      SendToCharacter( "\r\n",                                             ch );
-      SendToCharacter( "Field being one of:\r\n",                  ch );
-      SendToCharacter( "  name desc ed rmed\r\n",                  ch );
-      SendToCharacter( "  exit bexit exdesc exflags exname exkey\r\n",     ch );
-      SendToCharacter( "  flags sector teledelay televnum tunnel\r\n",     ch );
-      SendToCharacter( "  rlist exdistance\r\n",                           ch );
+      ch->Echo("\r\n");
+      ch->Echo("Field being one of:\r\n");
+      ch->Echo("  name desc ed rmed\r\n");
+      ch->Echo("  exit bexit exdesc exflags exname exkey\r\n");
+      ch->Echo("  flags sector teledelay televnum tunnel\r\n");
+      ch->Echo("  rlist exdistance\r\n");
       return;
     }
 
@@ -112,8 +112,8 @@ void do_redit( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "Set the room name. A very brief single line room description.\r\n", ch );
-          SendToCharacter( "Usage: redit name <Room summary>\r\n", ch );
+          ch->Echo("Set the room name. A very brief single line room description.\r\n");
+          ch->Echo("Usage: redit name <Room summary>\r\n");
           return;
         }
 
@@ -141,13 +141,13 @@ void do_redit( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "Set the maximum characters allowed in the room at one time. (0 = unlimited).\r\n", ch );
-          SendToCharacter( "Usage: redit tunnel <value>\r\n", ch );
+          ch->Echo("Set the maximum characters allowed in the room at one time. (0 = unlimited).\r\n");
+          ch->Echo("Usage: redit tunnel <value>\r\n");
           return;
         }
 
       location->Tunnel = urange( 0, atoi(argument), 1000 );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -155,8 +155,8 @@ void do_redit( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "Create an extra description.\r\n", ch );
-          SendToCharacter( "You must supply keyword(s).\r\n", ch );
+          ch->Echo("Create an extra description.\r\n");
+          ch->Echo("You must supply keyword(s).\r\n");
           return;
         }
 
@@ -180,15 +180,15 @@ void do_redit( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "Remove an extra description.\r\n", ch );
-          SendToCharacter( "You must supply keyword(s).\r\n", ch );
+          ch->Echo("Remove an extra description.\r\n");
+          ch->Echo("You must supply keyword(s).\r\n");
           return;
         }
 
       if ( DelRExtra( location, argument ) )
-        SendToCharacter( "Deleted.\r\n", ch );
+        ch->Echo("Deleted.\r\n");
       else
-        SendToCharacter( "Not found.\r\n", ch );
+        ch->Echo("Not found.\r\n");
 
       return;
     }
@@ -201,7 +201,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( !tarea->FirstReset )
         {
-          SendToCharacter( "This area.hppas no resets to list.\r\n", ch );
+          ch->Echo("This area.hppas no resets to list.\r\n");
           return;
         }
 
@@ -213,7 +213,7 @@ void do_redit( Character *ch, char *argument )
           if ( (bptr = SPrintReset( ch, pReset, num, true )) == NULL )
             continue;
 
-          SendToCharacter( bptr, ch );
+          ch->Echo(bptr);
         }
 
       return;
@@ -223,14 +223,14 @@ void do_redit( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "Toggle the room flags.\r\n", ch );
-	  SendToCharacter( "Usage: redit flags <flag> [flag]...\r\n", ch );
-          SendToCharacter( "\r\nPossible Flags: \r\n", ch );
-          SendToCharacter( "dark, nomob, indoors, nomagic, bank,\r\n", ch );
-          SendToCharacter( "private, safe, petshop, norecall, donation, nodropall, silence,\r\n", ch);
-          SendToCharacter( "logspeach, nodrop, clanstoreroom, plr_home, empty_home, teleport\r\n",ch);
-          SendToCharacter( "nofloor, prototype, refinery, factory, recruit\r\n", ch );
-          SendToCharacter( "spacecraft, auction, no_drive, can_land, can_fly, hotel\r\n", ch );
+          ch->Echo("Toggle the room flags.\r\n");
+   ch->Echo("Usage: redit flags <flag> [flag]...\r\n");
+          ch->Echo("\r\nPossible Flags: \r\n");
+          ch->Echo("dark, nomob, indoors, nomagic, bank,\r\n");
+          ch->Echo("private, safe, petshop, norecall, donation, nodropall, silence,\r\n");
+          ch->Echo("logspeach, nodrop, clanstoreroom, plr_home, empty_home, teleport\r\n");
+          ch->Echo("nofloor, prototype, refinery, factory, recruit\r\n");
+          ch->Echo("spacecraft, auction, no_drive, can_land, can_fly, hotel\r\n");
           return;
         }
 
@@ -240,9 +240,9 @@ void do_redit( Character *ch, char *argument )
           value = GetRoomFlag( arg2 );
 
           if ( value < 0 || value > 31 )
-            Echo( ch, "Unknown flag: %s\r\n", arg2 );
+            ch->Echo("Unknown flag: %s\r\n", arg2 );
           else if ( 1 << value == ROOM_PLR_HOME && GetTrustLevel(ch) < LEVEL_IMPLEMENTOR )
-            SendToCharacter( "If you want to build a player home use the 'empty_home' flag instead.\r\n", ch );
+            ch->Echo("If you want to build a player home use the 'empty_home' flag instead.\r\n");
           else
             {
               ToggleBit( location->Flags, 1 << value );
@@ -256,13 +256,13 @@ void do_redit( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "Set the delay of the teleport. (0 = off).\r\n", ch );
-          SendToCharacter( "Usage: redit teledelay <value>\r\n", ch );
+          ch->Echo("Set the delay of the teleport. (0 = off).\r\n");
+          ch->Echo("Usage: redit teledelay <value>\r\n");
           return;
         }
 
       location->TeleDelay = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -272,8 +272,8 @@ void do_redit( Character *ch, char *argument )
 
       if ( IsNullOrEmpty( argument ) )
         {
-	  SendToCharacter( "Set the vnum of the room to teleport to.\r\n", ch );
-          SendToCharacter( "Usage: redit televnum <vnum>\r\n", ch );
+   ch->Echo("Set the vnum of the room to teleport to.\r\n");
+          ch->Echo("Usage: redit televnum <vnum>\r\n");
           return;
 
         }
@@ -282,12 +282,12 @@ void do_redit( Character *ch, char *argument )
 
       if( !GetRoom( televnum ) )
 	{
-	  Echo( ch, "&R%ld is not a valid room vnum.\r\n" );
+   ch->Echo("&R%ld is not a valid room vnum.\r\n" );
 	}
       else
 	{
 	  location->TeleVnum = televnum;
-	  SendToCharacter( "Done.\r\n", ch );
+   ch->Echo("Done.\r\n");
 	}
 
       return;
@@ -298,13 +298,13 @@ void do_redit( Character *ch, char *argument )
       if ( IsNullOrEmpty( argument ) )
         {
 	  SectorType sector = SECT_INSIDE;
-          SendToCharacter( "Set the sector type.\r\n", ch );
-          SendToCharacter( "Usage: redit sector <value>\r\n", ch );
-          SendToCharacter( "\r\nSector Values:\r\n", ch );
+          ch->Echo("Set the sector type.\r\n");
+          ch->Echo("Usage: redit sector <value>\r\n");
+          ch->Echo("\r\nSector Values:\r\n");
 
 	  for( sector = SECT_INSIDE; sector < SECT_MAX; sector = (SectorType)(sector + 1) )
 	    {
-	      Echo( ch, "  %s\r\n", SectorNames[sector][1] );
+       ch->Echo("  %s\r\n", SectorNames[sector][1] );
 	    }
 
           return;
@@ -315,11 +315,11 @@ void do_redit( Character *ch, char *argument )
       if ( location->Sector == SECT_INVALID )
         {
           location->Sector = SECT_CITY;
-          SendToCharacter( "Out of range\r\n.", ch );
+          ch->Echo("Out of range\r\n.");
         }
       else
 	{
-	  SendToCharacter( "Done.\r\n", ch );
+   ch->Echo("Done.\r\n");
 	}
 
       return;
@@ -334,7 +334,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( IsNullOrEmpty( arg2 ) || IsNullOrEmpty( arg3 ) )
         {
-          SendToCharacter( "Usage: redit exkey <dir> <key vnum>\r\n", ch );
+          ch->Echo("Usage: redit exkey <dir> <key vnum>\r\n");
           return;
         }
 
@@ -353,12 +353,12 @@ void do_redit( Character *ch, char *argument )
 
       if ( !xit )
         {
-          SendToCharacter( "No exit in that direction.  Use 'redit exit ...' first.\r\n", ch );
+          ch->Echo("No exit in that direction.  Use 'redit exit ...' first.\r\n");
           return;
         }
 
       xit->Key = keyvnum;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -368,8 +368,8 @@ void do_redit( Character *ch, char *argument )
 
       if ( IsNullOrEmpty( arg2 ) )
         {
-          SendToCharacter( "Change or clear exit keywords.\r\n", ch );
-          SendToCharacter( "Usage: redit exname <dir> [keywords]\r\n", ch );
+          ch->Echo("Change or clear exit keywords.\r\n");
+          ch->Echo("Usage: redit exname <dir> [keywords]\r\n");
           return;
         }
 
@@ -386,13 +386,13 @@ void do_redit( Character *ch, char *argument )
 
       if ( !xit )
         {
-          SendToCharacter( "No exit in that direction.  Use 'redit exit ...' first.\r\n", ch );
+          ch->Echo("No exit in that direction.  Use 'redit exit ...' first.\r\n");
           return;
         }
 
       FreeMemory( xit->Keyword );
       xit->Keyword = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -400,13 +400,12 @@ void do_redit( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "Toggle or display exit flags.\r\n", ch );
-          SendToCharacter( "Usage: redit exflags <dir> <flag> [flag]...\r\n", ch );
-          SendToCharacter( "\r\nExit flags:\r\n", ch );
-          SendToCharacter( "isdoor, closed, locked, can_look, searchable, can_leave, can_climb,\r\n",
-			ch );
-          SendToCharacter( "nopassdoor, secret, pickproof, fly, climb, dig, window, auto, can_enter\r\n", ch );
-          SendToCharacter( "hidden, no_mob, bashproof, bashed\r\n", ch );
+          ch->Echo("Toggle or display exit flags.\r\n");
+          ch->Echo("Usage: redit exflags <dir> <flag> [flag]...\r\n");
+          ch->Echo("\r\nExit flags:\r\n");
+          ch->Echo( "isdoor, closed, locked, can_look, searchable, can_leave, can_climb,\r\n");
+          ch->Echo("nopassdoor, secret, pickproof, fly, climb, dig, window, auto, can_enter\r\n");
+          ch->Echo("hidden, no_mob, bashproof, bashed\r\n");
 
           return;
         }
@@ -426,7 +425,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( !xit )
         {
-          SendToCharacter( "No exit in that direction.  Use 'redit exit ...' first.\r\n", ch );
+          ch->Echo("No exit in that direction.  Use 'redit exit ...' first.\r\n");
           return;
         }
 
@@ -445,7 +444,7 @@ void do_redit( Character *ch, char *argument )
             }
 
           strcat( buf, "]\r\n" );
-          SendToCharacter( buf, ch );
+          ch->Echo(buf);
           return;
         }
 
@@ -455,7 +454,7 @@ void do_redit( Character *ch, char *argument )
           value = GetExitFlag( arg2 );
 
           if (value < 0)
-            Echo( ch, "Unknown flag: %s\r\n", arg2 );
+            ch->Echo("Unknown flag: %s\r\n", arg2 );
           else
             ToggleBit( xit->Flags, 1 << value );
         }
@@ -473,8 +472,8 @@ void do_redit( Character *ch, char *argument )
 
       if ( IsNullOrEmpty( arg2 ) )
         {
-          SendToCharacter( "Create, change or remove an exit.\r\n", ch );
-          SendToCharacter( "Usage: redit exit <dir> [room] [flags] [key] [keywords]\r\n", ch );
+          ch->Echo("Create, change or remove an exit.\r\n");
+          ch->Echo("Usage: redit exit <dir> [room] [flags] [key] [keywords]\r\n");
           return;
         }
 
@@ -513,29 +512,29 @@ void do_redit( Character *ch, char *argument )
           if ( xit )
             {
               ExtractExit(location, xit);
-              SendToCharacter( "Exit removed.\r\n", ch );
+              ch->Echo("Exit removed.\r\n");
               return;
             }
 
-          SendToCharacter( "No exit in that direction.\r\n", ch );
+          ch->Echo("No exit in that direction.\r\n");
           return;
         }
 
       if ( evnum < 1 || evnum > MAX_VNUM )
         {
-          SendToCharacter( "Invalid room number.\r\n", ch );
+          ch->Echo("Invalid room number.\r\n");
           return;
         }
 
       if ( (tmp = GetRoom( evnum )) == NULL )
         {
-          SendToCharacter( "Non-existant room.\r\n", ch );
+          ch->Echo("Non-existant room.\r\n");
           return;
         }
 
       if ( GetTrustLevel(ch) <= LEVEL_IMMORTAL && tmp->Area != location->Area )
         {
-          SendToCharacter( "You can't make an exit to that room.\r\n", ch );
+          ch->Echo("You can't make an exit to that room.\r\n");
           return;
         }
 
@@ -543,13 +542,13 @@ void do_redit( Character *ch, char *argument )
         {
           if ( numnotdir )
             {
-              SendToCharacter( "Cannot add an exit by number, sorry.\r\n", ch );
+              ch->Echo("Cannot add an exit by number, sorry.\r\n");
               return;
             }
 
           if ( addexit && xit && GetExitTo(location, edir, tmp->Vnum) )
             {
-              SendToCharacter( "There is already an exit in that direction leading to that location.\r\n", ch );
+              ch->Echo("There is already an exit in that direction leading to that location.\r\n");
               return;
             }
 
@@ -601,7 +600,7 @@ void do_redit( Character *ch, char *argument )
             }
         }
 
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -624,8 +623,8 @@ void do_redit( Character *ch, char *argument )
 
       if ( IsNullOrEmpty( arg2 ) )
         {
-          SendToCharacter( "Create, change or remove a two-way exit.\r\n", ch );
-          SendToCharacter( "Usage: redit bexit <dir> [room] [flags] [key] [keywords]\r\n", ch );
+          ch->Echo("Create, change or remove a two-way exit.\r\n");
+          ch->Echo("Usage: redit bexit <dir> [room] [flags] [key] [keywords]\r\n");
           return;
         }
 
@@ -710,8 +709,8 @@ void do_redit( Character *ch, char *argument )
 
       if ( IsNullOrEmpty( arg2 ) )
         {
-	  SendToCharacter( "Set the distance (in rooms) between this room, and the destination room.\r\n", ch );
-          SendToCharacter( "Usage: redit exdistance <dir> [distance]\r\n", ch );
+   ch->Echo("Set the distance (in rooms) between this room, and the destination room.\r\n");
+          ch->Echo("Usage: redit exdistance <dir> [distance]\r\n");
           return;
         }
 
@@ -729,10 +728,10 @@ void do_redit( Character *ch, char *argument )
       if ( xit )
         {
           xit->Distance = urange( 1, atoi(argument), 50 );
-          SendToCharacter( "Done.\r\n", ch );
+          ch->Echo("Done.\r\n");
           return;
         }
-      SendToCharacter( "No exit in that direction.  Use 'redit exit ...' first.\r\n", ch );
+      ch->Echo("No exit in that direction.  Use 'redit exit ...' first.\r\n");
       return;
     }
 
@@ -742,8 +741,8 @@ void do_redit( Character *ch, char *argument )
 
       if ( IsNullOrEmpty( arg2 ) )
         {
-          SendToCharacter( "Create or clear a description for an exit.\r\n", ch );
-          SendToCharacter( "Usage: redit exdesc <dir> [description]\r\n", ch );
+          ch->Echo("Create or clear a description for an exit.\r\n");
+          ch->Echo("Usage: redit exdesc <dir> [description]\r\n");
           return;
         }
 
@@ -772,11 +771,11 @@ void do_redit( Character *ch, char *argument )
               xit->Description = CopyString( buf );
             }
 
-          SendToCharacter( "Done.\r\n", ch );
+          ch->Echo("Done.\r\n");
           return;
         }
 
-      SendToCharacter( "No exit in that direction.  Use 'redit exit ...' first.\r\n", ch );
+      ch->Echo("No exit in that direction.  Use 'redit exit ...' first.\r\n");
       return;
     }
 
@@ -795,3 +794,4 @@ void do_redit( Character *ch, char *argument )
       do_redit( ch, "" );
     }
 }
+

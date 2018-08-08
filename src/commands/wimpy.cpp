@@ -15,16 +15,17 @@ void do_wimpy( Character *ch, char *argument )
 
   if ( wimpy < 0 )
     {
-      SendToCharacter( "Your courage exceeds your wisdom.\r\n", ch );
+      ch->Echo("Your courage exceeds your wisdom.\r\n");
       return;
     }
 
   if ( wimpy > ch->MaxHit )
     {
-      SendToCharacter( "Such cowardice ill becomes you.\r\n", ch );
+      ch->Echo("Such cowardice ill becomes you.\r\n");
       return;
     }
 
   ch->Wimpy = wimpy;
-  Echo( ch, "Wimpy set to %d hit points.\r\n", wimpy );
+  ch->Echo("Wimpy set to %d hit points.\r\n", wimpy );
 }
+

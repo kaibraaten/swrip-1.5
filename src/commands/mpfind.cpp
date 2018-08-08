@@ -1,4 +1,5 @@
 #include "mud.hpp"
+#include "character.hpp"
 
 static void mpfind_help (Character *ch);
 
@@ -65,10 +66,10 @@ void do_mpfind( Character *ch, char *argument )   /* Gorog */
             tot_vnum += CountStringOccurances(pProg->comlist, argument);
           tot_hits += tot_vnum;
           if ( tot_vnum && ++disp_cou <= disp_limit)
-            PagerPrintf( ch, "%5d %5d %5d\r\n", disp_cou, i, tot_vnum);
+            ch->Echo("%5d %5d %5d\r\n", disp_cou, i, tot_vnum);
         }
     }
-  PagerPrintf( ch, "Total: %10d\r\n", tot_hits);
+  ch->Echo("Total: %10d\r\n", tot_hits);
 }
 
 /*
@@ -76,24 +77,25 @@ void do_mpfind( Character *ch, char *argument )   /* Gorog */
  */
 static void mpfind_help (Character *ch)
 {
-  SendToCharacter( "Syntax:\r\n", ch);
-  SendToCharacter( "mpfind n lo_vnum hi_vnum text \r\n"
-                "   Search mob vnums between lo_vnum and hi_vnum \r\n"
-                "   for mob progs that contain an occurrence of text. \r\n"
-                "   Display a maxiumu of n lines.\r\n\r\n", ch );
-  SendToCharacter( "mpfind n mud text \r\n"
-                "   Search all the mobs in the mud for\r\n"
-                "   mob progs that contain an occurrence of text. \r\n"
-                "   Display a maxiumu of n lines.\r\n\r\n", ch );
+  ch->Echo("Syntax:\r\n");
+  ch->Echo( "mpfind n lo_vnum hi_vnum text \r\n"
+            "   Search mob vnums between lo_vnum and hi_vnum \r\n"
+            "   for mob progs that contain an occurrence of text. \r\n"
+            "   Display a maxiumu of n lines.\r\n\r\n");
+  ch->Echo( "mpfind n mud text \r\n"
+            "   Search all the mobs in the mud for\r\n"
+            "   mob progs that contain an occurrence of text. \r\n"
+            "   Display a maximum of n lines.\r\n\r\n");
 
-  SendToCharacter( "Example:\r\n", ch);
-  SendToCharacter( "mpfind 20 901 969 if isnpc \r\n"
-                "   Search all mob progs in Olympus (vnums 901 thru 969)\r\n"
-                "   and display all mobs that contain the text \"if isnpc\".\r\n"
-                "   Display a maximum of 20 lines.\r\n\r\n", ch );
-  SendToCharacter( "Example:\r\n", ch);
-  SendToCharacter( "mpfind 100 mud mpslay \r\n"
-                "   Search all mob progs in the entire mud\r\n"
-                "   and display all mobs that contain the text \"mpslay\".\r\n"
-                "   Display a maximum of 100 lines.\r\n\r\n", ch );
+  ch->Echo("Example:\r\n");
+  ch->Echo( "mpfind 20 901 969 if isnpc \r\n"
+            "   Search all mob progs in Olympus (vnums 901 thru 969)\r\n"
+            "   and display all mobs that contain the text \"if isnpc\".\r\n"
+            "   Display a maximum of 20 lines.\r\n\r\n" );
+  ch->Echo("Example:\r\n");
+  ch->Echo( "mpfind 100 mud mpslay \r\n"
+            "   Search all mob progs in the entire mud\r\n"
+            "   and display all mobs that contain the text \"mpslay\".\r\n"
+            "   Display a maximum of 100 lines.\r\n\r\n" );
 }
+

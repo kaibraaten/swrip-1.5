@@ -61,3 +61,4 @@ bool spec_police_jail( Character *ch )
 
   return false;
 }
+

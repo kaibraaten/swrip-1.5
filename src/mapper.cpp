@@ -260,37 +260,37 @@ static void ShowMapToCharacter( const Character *ch, const char *text )
   /* Deal with any leftover text */
 
   /* Act can also be used here, as can SendToCharacter if desired */
-  SendToPager( buf, ch );
+  ch->Echo("%s", buf);
 }
 
 /* Clear, generate and display the map */
 void DrawMap( const Character *ch, const char *desc )
 {
-  int x, y;
+  int x = 0, y = 0;
   static char buf[MAX_STRING_LENGTH];
   Object *device = NULL;
 
   if ( ( device = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL )
     {
-      SendToCharacter( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
+      ch->Echo( "You must have a scanner to draw a map of the surrounding area.\r\n" );
       return;
     }
 
   if ( device->ItemType != ITEM_DEVICE )
     {
-      SendToCharacter( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
+      ch->Echo( "You must have a scanner to draw a map of the surrounding area.\r\n" );
       return;
     }
 
   if (device->Value[OVAL_DEVICE_SPELL] != 52 )
     {
-      SendToCharacter( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
+      ch->Echo( "You must have a scanner to draw a map of the surrounding area.\r\n" );
       return;
     }
 
   if ( device->Value[OVAL_DEVICE_CHARGES] <= 0 )
     {
-      SendToCharacter( "Your scanner has no more charge left.", ch);
+      ch->Echo( "Your scanner has no more charge left." );
       return;
     }
 
@@ -320,3 +320,4 @@ void DrawMap( const Character *ch, const char *desc )
   /* Send the map */
   ShowMapToCharacter( ch, buf );
 }
+

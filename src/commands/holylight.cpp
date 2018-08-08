@@ -9,11 +9,13 @@ void do_holylight( Character *ch, char *argument )
   if ( IsBitSet(ch->Flags, PLR_HOLYLIGHT) )
     {
       RemoveBit(ch->Flags, PLR_HOLYLIGHT);
-      SendToCharacter( "Holy light mode off.\r\n", ch );
+      ch->Echo("Holy light mode off.\r\n");
     }
   else
     {
       SetBit(ch->Flags, PLR_HOLYLIGHT);
-      SendToCharacter( "Holy light mode on.\r\n", ch );
+      ch->Echo("Holy light mode on.\r\n");
     }
 }
+
+

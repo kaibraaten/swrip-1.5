@@ -20,26 +20,26 @@ void do_shiptrack( Character *ch, char *argument)
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   if ( ship->Class > SHIP_PLATFORM )
     {
-      SendToCharacter("&RThis isn't a spacecraft!",ch);
+      ch->Echo("&RThis isn't a spacecraft!");
       return;
     }
 
   if ( !ship->Spaceobject )
     {
-      SendToCharacter("&RYou can only do that in space!\r\n",ch);
+      ch->Echo("&RYou can only do that in space!\r\n");
       return;
     }
 
   if( !StrCmp( arg, "dist" ) )
     {
       ship->tcount = atoi(arg1);
-      SendToCharacter("&RJump distance set!\r\n",ch);
+      ch->Echo("&RJump distance set!\r\n");
       return;
     }
 
@@ -49,13 +49,13 @@ void do_shiptrack( Character *ch, char *argument)
 
       if ( IsShipInHyperspace( ship ) )
         {
-          SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
+          ch->Echo("&RYou can only do that in realspace!\r\n");
           return;
         }
 
       if( !IsNumber(arg1) || !IsNumber(arg2) || !IsNumber(arg3) )
         {
-          SendToCharacter( "Syntax: shiptrack set <X Heading> <Y Heading> <Z Heading>.\r\n", ch);
+          ch->Echo("Syntax: shiptrack set <X Heading> <Y Heading> <Z Heading>.\r\n");
           return;
         }
 
@@ -116,16 +116,17 @@ void do_shiptrack( Character *ch, char *argument)
       ship->Hyperdistance = GetDistanceBetweenVectors( &ship->Position, &ship->Jump ) / 50;
       ship->OriginalHyperdistance = ship->Hyperdistance;
 
-      SendToCharacter( "Course laid in. Beginning tracking program.\r\n", ch);
+      ch->Echo("Course laid in. Beginning tracking program.\r\n");
       return;
     }
 
   if( !StrCmp( arg, "stop" ) || !StrCmp( arg, "halt" ))
     {
       ship->Tracking = false;
-      SendToCharacter( "Tracking program cancelled.\r\n", ch);
+      ch->Echo("Tracking program cancelled.\r\n");
 
       if( IsShipInHyperspace( ship ) )
         do_hyperspace( ch, "off" );
     }
 }
+

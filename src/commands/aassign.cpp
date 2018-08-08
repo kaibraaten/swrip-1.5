@@ -6,14 +6,14 @@
 void do_aassign( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  Area *tarea, *tmp;
+  Area *tarea = nullptr, *tmp = nullptr;
 
   if ( IsNpc( ch ) )
     return;
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Syntax: aassign <filename.are>\r\n", ch );
+      ch->Echo( "Syntax: aassign <filename.are>\r\n" );
       return;
     }
 
@@ -25,14 +25,14 @@ void do_aassign( Character *ch, char *argument )
       AssignAreaTo( ch );
 
       if ( !ch->PCData->Build.Area )
-        SendToCharacter( "Area pointer cleared.\r\n", ch );
+        ch->Echo( "Area pointer cleared.\r\n" );
       else
-        SendToCharacter( "Originally assigned area restored.\r\n", ch );
+        ch->Echo( "Originally assigned area restored.\r\n" );
+
       return;
     }
 
   sprintf( buf, "%s", argument );
-  tarea = NULL;
 
   if ( GetTrustLevel(ch) >= LEVEL_GREATER
        ||  (IsName( buf, ch->PCData->Bestowments )
@@ -57,7 +57,7 @@ void do_aassign( Character *ch, char *argument )
             }
           else
             {
-              SendToCharacter( "You do not have permission to use that area.\r\n", ch );
+              ch->Echo( "You do not have permission to use that area.\r\n" );
               return;
             }
         }
@@ -70,11 +70,14 @@ void do_aassign( Character *ch, char *argument )
   if ( !tarea )
     {
       if ( GetTrustLevel(ch) >= SysData.LevelToModifyProto )
-        SendToCharacter( "No such area. Use 'zones'.\r\n", ch );
+        ch->Echo( "No such area. Use 'zones'.\r\n" );
       else
-        SendToCharacter( "No such area. Use 'newzones'.\r\n", ch );
+        ch->Echo( "No such area. Use 'newzones'.\r\n" );
+
       return;
     }
+  
   ch->PCData->Build.Area = tarea;
-  Echo( ch, "Assigning you: %s\r\n", tarea->Name );
+  ch->Echo( "Assigning you: %s\r\n", tarea->Name );
 }
+

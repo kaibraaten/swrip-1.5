@@ -18,13 +18,13 @@ void do_order( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Order whom to do what?\r\n", ch );
+      ch->Echo("Order whom to do what?\r\n");
       return;
     }
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     {
-      SendToCharacter( "You feel like taking, not giving, orders.\r\n", ch );
+      ch->Echo("You feel like taking, not giving, orders.\r\n");
       return;
     }
 
@@ -36,26 +36,26 @@ void do_order( Character *ch, char *argument )
     {
       if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
         {
-          SendToCharacter( "They aren't here.\r\n", ch );
+          ch->Echo("They aren't here.\r\n");
           return;
         }
 
       if ( victim == ch )
         {
-          SendToCharacter( "Aye aye, right away!\r\n", ch );
+          ch->Echo("Aye aye, right away!\r\n");
           return;
         }
 
       if ( !IsAffectedBy(victim, AFF_CHARM) || victim->Master != ch )
         {
-          SendToCharacter( "Do it yourself!\r\n", ch );
+          ch->Echo("Do it yourself!\r\n");
           return;
         }
     }
 
   if ( !StringPrefix("mp",argument) )
     {
-      SendToCharacter( "But that's cheating!\r\n", ch );
+      ch->Echo("But that's cheating!\r\n");
       return;
     }
 
@@ -77,11 +77,12 @@ void do_order( Character *ch, char *argument )
   if ( found )
     {
       Log->Info("%s: order %s.", ch->Name, argbuf );
-      SendToCharacter( "Ok.\r\n", ch );
+      ch->Echo("Ok.\r\n");
       SetWaitState( ch, 12 );
     }
   else
     {
-      SendToCharacter( "You have no followers here.\r\n", ch );
+      ch->Echo("You have no followers here.\r\n");
     }
 }
+

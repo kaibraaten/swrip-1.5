@@ -11,19 +11,19 @@ void do_murder( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Murder whom?\r\n", ch );
+      ch->Echo("Murder whom?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "Suicide is a mortal sin.\r\n", ch );
+      ch->Echo("Suicide is a mortal sin.\r\n");
       return;
     }
 
@@ -46,13 +46,13 @@ void do_murder( Character *ch, char *argument )
 
   if ( ch->Position == POS_FIGHTING )
     {
-      SendToCharacter( "You do the best you can!\r\n", ch );
+      ch->Echo("You do the best you can!\r\n");
       return;
     }
 
   if ( !IsNpc( victim ) && IsBitSet( ch->Flags, PLR_NICE ) )
     {
-      SendToCharacter( "You feel too nice to do that!\r\n", ch );
+      ch->Echo("You feel too nice to do that!\r\n");
       return;
     }
 
@@ -62,3 +62,4 @@ void do_murder( Character *ch, char *argument )
   SetWaitState( ch, 1 * PULSE_VIOLENCE );
   HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
 }
+

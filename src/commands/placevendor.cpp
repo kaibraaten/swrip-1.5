@@ -15,7 +15,7 @@ void do_placevendor (Character *ch, char *argument)
 
   if ( FindKeeperQ(ch, false) )
     {
-      SendToCharacter ("A vendor is already here!\r\n",ch);
+      ch->Echo("A vendor is already here!\r\n");;
       return;
     }
 
@@ -27,19 +27,19 @@ void do_placevendor (Character *ch, char *argument)
   /* better way to do this? what if they have another object called deed?*/
   if ( ( obj = GetCarriedObject( ch, "deed" ) ) == NULL )
     {
-      SendToCharacter( "You do not have a deed!.\r\n", ch );
+      ch->Echo("You do not have a deed!.\r\n");
       return;
     }
 
   if (obj->Prototype->Vnum != OBJ_VNUM_DEED)
     {
-      SendToCharacter( "You do not have a deed!.\r\n", ch );
+      ch->Echo("You do not have a deed!.\r\n");
       return;
     }
 
   if (!IsBitSet(ch->InRoom->Flags, ROOM_PLR_SHOP) )
     {
-      SendToCharacter( "You need to find a free shop.\r\n", ch);
+      ch->Echo("You need to find a free shop.\r\n");
       return;
     }
 
@@ -47,7 +47,7 @@ void do_placevendor (Character *ch, char *argument)
 
   if ( stat( strsave, &fst ) != -1 )
     {
-      SendToCharacter( "You already have a shop!\r\n", ch);
+      ch->Echo("You already have a shop!\r\n");
       return;
     }
 
@@ -81,3 +81,4 @@ void do_placevendor (Character *ch, char *argument)
   do_makeshop (vendor, vnum1 ); /*makes the vendor a shop.. there has to be a
                                   better way to do it but hell if i know what it is!*/
 }
+

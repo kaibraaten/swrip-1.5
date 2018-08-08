@@ -12,28 +12,27 @@ void do_stun( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
+      ch->Echo("You can't concentrate enough for that.\r\n");
       return;
     }
 
   if ( !IsNpc(ch)
        &&  ch->PCData->Learned[gsn_stun] <= 0  )
     {
-      SendToCharacter(
-                   "Your mind races as you realize you have no idea how to do that.\r\n", ch );
+      ch->Echo("Your mind races as you realize you have no idea how to do that.\r\n");
       return;
     }
 
   if ( ( victim = GetFightingOpponent( ch ) ) == NULL )
     {
-      SendToCharacter( "You aren't fighting anyone.\r\n", ch );
+      ch->Echo("You aren't fighting anyone.\r\n");
       return;
     }
 
   if ( ch->Move < 16 )
     {
       SetCharacterColor( AT_SKILL, ch );
-      SendToCharacter( "You are far too tired to do that.\r\n", ch );
+      ch->Echo("You are far too tired to do that.\r\n");
       return;           /* missing return fixed March 11/96 */
     }
 
@@ -89,3 +88,4 @@ void do_stun( Character *ch, char *argument )
       Act( AT_SKILL, "$n charges screaming at $N, but keeps going right on past.", ch, NULL, victim, TO_NOTVICT );
     }
 }
+

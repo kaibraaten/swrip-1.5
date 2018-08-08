@@ -16,13 +16,13 @@ void do_wake( Character *ch, char *argument )
 
   if ( !IsAwake(ch) )
     {
-      SendToCharacter( "You are asleep yourself!\r\n", ch );
+      ch->Echo("You are asleep yourself!\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
@@ -43,3 +43,4 @@ void do_wake( Character *ch, char *argument )
   victim->Position = POS_STANDING;
   Act( AT_ACTION, "$n wakes you.", ch, NULL, victim, TO_VICT );
 }
+

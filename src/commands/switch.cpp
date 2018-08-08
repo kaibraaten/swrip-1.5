@@ -10,7 +10,7 @@ void do_switch( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Switch into whom?\r\n", ch );
+      ch->Echo("Switch into whom?\r\n");
       return;
     }
 
@@ -19,31 +19,31 @@ void do_switch( Character *ch, char *argument )
 
   if ( ch->Desc->Original )
     {
-      SendToCharacter( "You are already switched.\r\n", ch );
+      ch->Echo("You are already switched.\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "Ok.\r\n", ch );
+      ch->Echo("Ok.\r\n");
       return;
     }
 
   if ( victim->Desc )
     {
-      SendToCharacter( "Character in use.\r\n", ch );
+      ch->Echo("Character in use.\r\n");
       return;
     }
 
   if ( !IsNpc(victim) && GetTrustLevel(ch) < LEVEL_GREATER )
     {
-      SendToCharacter( "You cannot switch into a player!\r\n", ch );
+      ch->Echo("You cannot switch into a player!\r\n");
       return;
     }
 
@@ -52,5 +52,6 @@ void do_switch( Character *ch, char *argument )
   victim->Desc        = ch->Desc;
   ch->Desc            = NULL;
   ch->Switched  = victim;
-  SendToCharacter( "Ok.\r\n", victim );
+  victim->Echo("Ok.\r\n");
 }
+

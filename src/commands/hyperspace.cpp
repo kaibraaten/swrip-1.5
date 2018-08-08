@@ -18,87 +18,87 @@ void do_hyperspace(Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   if ( ship->Class > SHIP_PLATFORM )
     {
-      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
+      ch->Echo("&RThis isn't a spacecraft!\r\n");
       return;
     }
 
 
   if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou aren't in the pilots seat.\r\n",ch);
+      ch->Echo("&RYou aren't in the pilots seat.\r\n");
       return;
     }
 
   if ( IsShipAutoflying(ship)  )
     {
-      SendToCharacter("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
+      ch->Echo("&RYou'll have to turn off the ships autopilot first.\r\n");
       return;
     }
 
   if  ( ship->Class == SHIP_PLATFORM )
     {
-      SendToCharacter( "&RPlatforms can't move!\r\n" , ch );
+      ch->Echo("&RPlatforms can't move!\r\n" );
       return;
     }
 
   if (ship->Hyperdrive.Speed == 0)
     {
-      SendToCharacter("&RThis ship is not equipped with a hyperdrive!\r\n",ch);
+      ch->Echo("&RThis ship is not equipped with a hyperdrive!\r\n");
       return;
     }
 
   if( IsNullOrEmpty( argument ) && IsShipInHyperspace( ship ) )
     {
-      SendToCharacter("&RYou are already travelling lightspeed!\r\n",ch);
+      ch->Echo("&RYou are already travelling lightspeed!\r\n");
       return;
     }
 
     if ( !IsNullOrEmpty( argument ) && !StrCmp( argument, "off" )
        && !IsShipInHyperspace( ship ) )
     {
-      SendToCharacter("&RHyperdrive not active.\r\n",ch);
+      ch->Echo("&RHyperdrive not active.\r\n");
       return;
     }
 
   if (IsShipDisabled( ship ))
     {
-      SendToCharacter("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
+      ch->Echo("&RThe ships drive is disabled. Unable to manuever.\r\n");
       return;
     }
 
   if (ship->State == SHIP_LANDED)
     {
-      SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
+      ch->Echo("&RYou can't do that until after you've launched!\r\n");
       return;
     }
 
   if (ship->Docking != SHIP_READY )
     {
-      SendToCharacter("&RYou can't do that while docked to another ship!\r\n",ch);
+      ch->Echo("&RYou can't do that while docked to another ship!\r\n");
       return;
     }
 
   if (ship->TractoredBy || ship->WeaponSystems.TractorBeam.Tractoring )
     {
-      SendToCharacter("&RYou can not move in a tractorbeam!\r\n",ch);
+      ch->Echo("&RYou can not move in a tractorbeam!\r\n");
       return;
     }
 
   if (ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->Class > ship->Class )
     {
-      SendToCharacter("&RYou can not enter hyperspace with your tractor beam locked on.\r\n",ch);
+      ch->Echo("&RYou can not enter hyperspace with your tractor beam locked on.\r\n");
       return;
     }
 
   if (ship->State != SHIP_READY && !IsShipInHyperspace( ship ) )
     {
-      SendToCharacter("&RPlease wait until the ship.hppas finished its current manouver.\r\n",ch);
+      ch->Echo("&RPlease wait until the ship.hppas finished its current manouver.\r\n");
       return;
     }
 
@@ -152,19 +152,19 @@ void do_hyperspace(Character *ch, char *argument )
 
   if (!ship->CurrentJump)
     {
-      SendToCharacter("&RYou need to calculate your jump first!\r\n",ch);
+      ch->Echo("&RYou need to calculate your jump first!\r\n");
       return;
     }
 
   if ( ship->Thrusters.Energy.Current < 100)
     {
-      SendToCharacter("&RTheres not enough fuel!\r\n",ch);
+      ch->Echo("&RTheres not enough fuel!\r\n");
       return;
     }
 
   if ( ship->Thrusters.Speed.Current <= 0 )
     {
-      SendToCharacter("&RYou need to speed up a little first!\r\n",ch);
+      ch->Echo("&RYou need to speed up a little first!\r\n");
       return;
     }
 
@@ -172,8 +172,8 @@ void do_hyperspace(Character *ch, char *argument )
     {
       if( GetShipDistanceToSpaceobject( ship,  spaceobj ) < 100 + ( spaceobj->Gravity * 5 ) )
         {
-          Echo(ch, "&RYou are too close to %s to make the jump to lightspeed.\r\n",
-               spaceobj->Name );
+          ch->Echo("&RYou are too close to %s to make the jump to lightspeed.\r\n",
+                   spaceobj->Name );
           return;
         }
     }
@@ -194,7 +194,7 @@ void do_hyperspace(Character *ch, char *argument )
 
   if ( GetRandomPercent() > the_chance )
     {
-      SendToCharacter("&RYou can't figure out which lever to use.\r\n",ch);
+      ch->Echo("&RYou can't figure out which lever to use.\r\n");
       if ( ship->Class == FIGHTER_SHIP )
         LearnFromFailure( ch, gsn_starfighters );
       if ( ship->Class == MIDSIZE_SHIP )
@@ -210,7 +210,7 @@ void do_hyperspace(Character *ch, char *argument )
   ShipFromSpaceobject( ship , ship->Spaceobject );
   ship->State = SHIP_HYPERSPACE;
 
-  SendToCharacter( "&GYou push forward the hyperspeed lever.\r\n", ch);
+  ch->Echo("&GYou push forward the hyperspeed lever.\r\n");
   Act( AT_PLAIN, "$n pushes a lever forward on the control panel.", ch,
        NULL, argument , TO_ROOM );
   EchoToShip( AT_YELLOW , ship , "The ship lurches slightly as it makes the jump to lightspeed." );
@@ -261,3 +261,5 @@ static bool LeaveHyperspaceIfDocked(Ship *dockedShip, void *userData)
 
   return true;
 }
+
+

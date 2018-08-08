@@ -116,9 +116,9 @@ static void AfterDelay( CraftingSession *session )
 
   if ( GetRandomPercent() > the_chance * 2  || !hasMaterials )
     {
-      Echo( ch, "&RYou hold up your newly created %s.\r\n", itemType );
-      Echo( ch, "&RIt suddenly dawns upon you that you have created the most useless\r\n" );
-      Echo( ch, "&R%s you've ever seen. You quickly hide your mistake...&w\r\n", itemType);
+      ch->Echo( "&RYou hold up your newly created %s.\r\n", itemType );
+      ch->Echo( "&RIt suddenly dawns upon you that you have created the most useless\r\n" );
+      ch->Echo( "&R%s you've ever seen. You quickly hide your mistake...&w\r\n", itemType);
       LearnFromFailure( ch, recipe->Skill );
       FreeCraftingSession( session );
       return;
@@ -149,7 +149,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
   long xpgain = 0;
   Skill *skill = GetSkill( data->Recipe->Skill );
 
-  Echo( ch, "&GYou finish your work and hold up your newly created %s.&w\r\n", itemType);
+  ch->Echo( "&GYou finish your work and hold up your newly created %s.&w\r\n", itemType);
   sprintf( actBuf, "$n finishes making $s new %s.", itemType );
   Act( AT_PLAIN, actBuf, ch, NULL, NULL, TO_ROOM );
 
@@ -157,7 +157,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
                  GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild ) + 1)
                  - GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild ) ) );
   GainXP(ch, skill->Guild, xpgain );
-  Echo( ch , "You gain %d %s experience.", xpgain, AbilityName[skill->Guild] );
+  ch->Echo( "You gain %d %s experience.", xpgain, AbilityName[skill->Guild] );
 
   LearnFromSuccess( ch, data->Recipe->Skill );
 
@@ -171,14 +171,14 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
   if( IsBitSet( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_WORKSHOP )
       && !IsBitSet( ch->InRoom->Flags, ROOM_FACTORY ) )
     {
-      Echo( ch, "&RYou need to be in a factory or workshop to do that.\r\n" );
+      ch->Echo( "&RYou need to be in a factory or workshop to do that.\r\n" );
       args->AbortSession = true;
     }
 
   if( IsBitSet( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_REFINERY )
       && !IsBitSet( ch->InRoom->Flags, ROOM_REFINERY ) )
     {
-      Echo( ch, "&RYou need to be in a refinery to do that.\r\n" );
+      ch->Echo( "&RYou need to be in a refinery to do that.\r\n" );
       args->AbortSession = true;
     }
 }
@@ -191,7 +191,7 @@ static void AbortSession( CraftingSession *session )
   ch->SubState = SUB_NONE;
   abortEventArgs.CraftingSession = session;
 
-  Echo( ch, "&RYou are interrupted and fail to finish your work.&w\r\n");
+  ch->Echo( "&RYou are interrupted and fail to finish your work.&w\r\n");
 
   RaiseEvent( session->OnAbort, &abortEventArgs );
 
@@ -326,7 +326,7 @@ static bool CheckSkillLevel( const CraftingSession *session )
 
   if( GetRandomPercent() >= the_chance )
     {
-      Echo( ch, "&RYou can't figure out what to do.\r\n" );
+      ch->Echo( "&RYou can't figure out what to do.\r\n" );
       LearnFromFailure( ch, session->Recipe->Skill );
       return false;
     }
@@ -370,8 +370,8 @@ void StartCrafting( CraftingSession *session )
 
   obj = GetProtoObject( session->Recipe->Prototype );
 
-  Echo( ch, "&GYou begin the long process of creating %s.\r\n",
-	     AOrAn( GetItemTypeNameExtended( obj->ItemType, obj->Value[OVAL_WEAPON_TYPE] ) ) );
+  ch->Echo( "&GYou begin the long process of creating %s.\r\n",
+            AOrAn( GetItemTypeNameExtended( obj->ItemType, obj->Value[OVAL_WEAPON_TYPE] ) ) );
 
   Act( AT_PLAIN, "$n takes $s tools and some material and begins to work.",
        ch, NULL, NULL, TO_ROOM );
@@ -427,9 +427,9 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
 	  strcpy( itemTypeName, GetItemTypeNameExtended( material->Material.ItemType, 0 ) );
 	  ReplaceChar( itemTypeName, '_', ' ' );
 	  foundAll = false;
-	  Echo( ch, "&RYou need %s to complete the %s.\r\n",
-		     AOrAn( itemTypeName ),
-		     GetItemTypeNameExtended( proto->ItemType, proto->Value[OVAL_WEAPON_TYPE] ) );
+	  ch->Echo( "&RYou need %s to complete the %s.\r\n",
+                    AOrAn( itemTypeName ),
+                    GetItemTypeNameExtended( proto->ItemType, proto->Value[OVAL_WEAPON_TYPE] ) );
 	}
 
       ++material;
@@ -510,4 +510,5 @@ void AddAbortCraftingHandler( CraftingSession *session, void *userData,
 {
   AddEventHandler( session->OnAbort, userData, (EventHandler)handler );
 }
+
 

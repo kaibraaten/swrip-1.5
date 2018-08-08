@@ -15,7 +15,7 @@ void do_setshuttle(Character * ch, char * argument)
 
   if ( IsNpc( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -24,12 +24,12 @@ void do_setshuttle(Character * ch, char * argument)
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: setshuttle <shuttle name> <field> <value>\r\n", ch);
-      SendToCharacter( "Fields:\r\n\tfirstroom, lastroom, entrance, delay\r\n", ch);
-      SendToCharacter( "\tname, type, stop, remove shuttle\r\n", ch);\
-      SendToCharacter("\tsetshuttle <shuttle> stop <add>\r\n",ch);
-      SendToCharacter("\tsetshuttle <shuttle> stop <stop #> name <value>\r\n",ch);
-      SendToCharacter("\tsetshuttle <shuttle> stop <stop #> room <value>\r\n",ch);
+      ch->Echo("Usage: setshuttle <shuttle name> <field> <value>\r\n");
+      ch->Echo("Fields:\r\n\tfirstroom, lastroom, entrance, delay\r\n");
+      ch->Echo("\tname, type, stop, remove shuttle\r\n");
+      ch->Echo("\tsetshuttle <shuttle> stop <add>\r\n");
+      ch->Echo("\tsetshuttle <shuttle> stop <stop #> name <value>\r\n");
+      ch->Echo("\tsetshuttle <shuttle> stop <stop #> room <value>\r\n");
       return;
     }
 
@@ -38,12 +38,12 @@ void do_setshuttle(Character * ch, char * argument)
   if (shuttle == nullptr)
     {
       SetCharacterColor( AT_RED, ch );
-      SendToCharacter("No such shuttle.\r\nValid shuttles:\r\n", ch);
+      ch->Echo("No such shuttle.\r\nValid shuttles:\r\n");
       SetCharacterColor( AT_YELLOW, ch );
 
       for(const Shuttle *s : Shuttles->Entities())
 	{
-	  Echo(ch, "Shuttle Name: %s - %s\r\n", s->Name,
+          ch->Echo("Shuttle Name: %s - %s\r\n", s->Name,
 		    s->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
 		    s->Type == SHUTTLE_SPACE ? "Space" :
 		    s->Type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
@@ -58,7 +58,7 @@ void do_setshuttle(Character * ch, char * argument)
     {
       if (value > shuttle->Rooms.Last)
         {
-          SendToCharacter("Uh.. First room should be less than last room.\r\n", ch);
+          ch->Echo("Uh.. First room should be less than last room.\r\n");
           return;
         }
 
@@ -68,7 +68,7 @@ void do_setshuttle(Character * ch, char * argument)
     {
       if (value < shuttle->Rooms.First)
         {
-          SendToCharacter("Uh.. First room should be less than last room.\r\n", ch);
+          ch->Echo("Uh.. First room should be less than last room.\r\n");
           return;
         }
 
@@ -79,7 +79,7 @@ void do_setshuttle(Character * ch, char * argument)
       if (value > shuttle->Rooms.Last
           || value < shuttle->Rooms.First )
         {
-          SendToCharacter("Not within valid range.\r\n", ch);
+          ch->Echo("Not within valid range.\r\n");
           return;
         }
 
@@ -94,7 +94,7 @@ void do_setshuttle(Character * ch, char * argument)
     {
       if(Shuttles->FindByName( argument ) != nullptr)
 	{
-	  Echo( ch, "There's already another shuttle with that name.\r\n" );
+   ch->Echo("There's already another shuttle with that name.\r\n" );
 	  return;
 	}
       
@@ -123,14 +123,14 @@ void do_setshuttle(Character * ch, char * argument)
 	}
       else
         {
-          SendToCharacter("Types are: turbocar, space, hyperspace.\r\n", ch);
+          ch->Echo("Types are: turbocar, space, hyperspace.\r\n");
           return;
         }
     }
   else if (!StrCmp(arg2, "remove"))
     {
       PermanentlyDestroyShuttle(shuttle);
-      SendToCharacter("Shuttle Removed.\r\n", ch);
+      ch->Echo("Shuttle Removed.\r\n");
       return;
     }
   else if (!StrCmp(arg2, "stop"))
@@ -140,10 +140,10 @@ void do_setshuttle(Character * ch, char * argument)
 
       if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( argument ))
         {
-          SendToCharacter("Usage: \r\n",ch);
-          SendToCharacter("\tsetshuttle <shuttle> stop <add>\r\n",ch);
-          SendToCharacter("\tsetshuttle <shuttle> stop <stop #> name <value>\r\n",ch);
-          SendToCharacter("\tsetshuttle <shuttle> stop <stop #> room <value>\r\n",ch);
+          ch->Echo("Usage: \r\n");
+          ch->Echo("\tsetshuttle <shuttle> stop <add>\r\n");
+          ch->Echo("\tsetshuttle <shuttle> stop <stop #> name <value>\r\n");
+          ch->Echo("\tsetshuttle <shuttle> stop <stop #> room <value>\r\n");
           return;
         }
 
@@ -171,7 +171,7 @@ void do_setshuttle(Character * ch, char * argument)
 
 	  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( argument ) )
 	    {
-	      SendToCharacter("Invalid Param.\r\n", ch);
+       ch->Echo("Invalid Param.\r\n");
 	      return;
 	    }
 
@@ -189,7 +189,7 @@ void do_setshuttle(Character * ch, char * argument)
 
 	  if ( stop == NULL)
 	    {
-	      SendToCharacter("Invalid Stop\r\n", ch);
+       ch->Echo("Invalid Stop\r\n");
 	      return;
 	    }
 
@@ -219,22 +219,23 @@ void do_setshuttle(Character * ch, char * argument)
 		}
 
 	      FreeMemory(stop);
-	      SendToCharacter("Stop removed.\r\n", ch);
+       ch->Echo("Stop removed.\r\n");
 	      return;
 	    }
 	  else
 	    {
-	      SendToCharacter("Invalid Option.\r\n", ch);
+       ch->Echo("Invalid Option.\r\n");
 	      return;
 	    }
 	}
     }
   else
     {
-      SendToCharacter("Unknown field", ch);
+      ch->Echo("Unknown field");
       return;
     }
 
   Shuttles->Save(shuttle);
-  SendToCharacter("Ok.\r\n", ch);
+  ch->Echo("Ok.\r\n");
 }
+

@@ -12,26 +12,26 @@ void do_slay( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Slay whom?\r\n", ch );
+      ch->Echo("Slay whom?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( ch == victim )
     {
-      SendToCharacter( "Suicide is a mortal sin.\r\n", ch );
+      ch->Echo("Suicide is a mortal sin.\r\n");
       return;
     }
 
   if ( !IsNpc(victim)
        && ( GetTrustLevel( victim ) == 103 || GetTrustLevel( ch ) < 103) )
     {
-      SendToCharacter( "You failed.\r\n", ch );
+      ch->Echo("You failed.\r\n");
       return;
     }
 
@@ -78,3 +78,4 @@ void do_slay( Character *ch, char *argument )
   SetCurrentGlobalCharacter(victim);
   RawKill( ch, victim );
 }
+

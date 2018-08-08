@@ -11,7 +11,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 
   if ( IsNullOrEmpty( spell_target_name ) )
     {
-      SendToCharacter( "What should the spell be cast upon?\r\n", ch );
+      ch->Echo("What should the spell be cast upon?\r\n");
       return rSPELL_FAILED;
     }
 
@@ -25,7 +25,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
       RemoveBit(obj->Flags, ITEM_INVIS);
       Act( AT_MAGIC, "$p becomes visible again.", ch, obj, NULL, TO_CHAR );
 
-      SendToCharacter( "Ok.\r\n", ch );
+      ch->Echo("Ok.\r\n");
       return rNONE;
     }
   else
@@ -38,7 +38,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
         {
           if(!CanSeeCharacter(ch, victim))
             {
-              Echo(ch, "You don't see %s!\r\n", spell_target_name);
+              ch->Echo("You don't see %s!\r\n", spell_target_name);
 	      return rSPELL_FAILED;
             }
 
@@ -47,7 +47,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 
           if(!IsAffectedBy(victim, AFF_INVISIBLE))
             {
-              SendToCharacter("They are not invisible!\r\n", ch);
+              ch->Echo("They are not invisible!\r\n");
               return rSPELL_FAILED;
             }
 
@@ -83,11 +83,12 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
           StripAffect ( victim, gsn_invis                        );
           StripAffect ( victim, gsn_mass_invis                   );
           RemoveBit   ( victim->AffectedBy, AFF_INVISIBLE       );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
 	  return rNONE;
         }
 
-      Echo(ch, "You can't find %s!\r\n", spell_target_name);
+      ch->Echo("You can't find %s!\r\n", spell_target_name);
       return rSPELL_FAILED;
     }
 }
+

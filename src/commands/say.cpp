@@ -9,13 +9,13 @@ void do_say( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Say what?\r\n", ch );
+      ch->Echo("Say what?\r\n");
       return;
     }
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_SILENCE ) )
     {
-      SendToCharacter( "You can't do that here.\r\n", ch );
+      ch->Echo("You can't do that here.\r\n");
       return;
     }
 
@@ -62,3 +62,4 @@ void do_say( Character *ch, char *argument )
 
   RoomProgSpeechTrigger( argument, ch );
 }
+

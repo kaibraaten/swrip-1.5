@@ -9,7 +9,7 @@ void do_mpinvis( Character *ch, char *argument )
 
   if ( !IsNpc(ch))
     {
-      SendToCharacter( "Huh?\r\n", ch);
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -34,7 +34,7 @@ void do_mpinvis( Character *ch, char *argument )
 	}
 
       ch->MobInvis = level;
-      Echo( ch, "Mobinvis level set to %d.\r\n", level );
+      ch->Echo("Mobinvis level set to %d.\r\n", level );
       return;
     }
 
@@ -45,12 +45,13 @@ void do_mpinvis( Character *ch, char *argument )
     {
       RemoveBit(ch->Flags, ACT_MOBINVIS);
       Act(AT_IMMORT, "$n slowly fades into existence.", ch, NULL, NULL,TO_ROOM );
-      SendToCharacter( "You slowly fade back into existence.\r\n", ch );
+      ch->Echo("You slowly fade back into existence.\r\n");
     }
   else
     {
       SetBit(ch->Flags, ACT_MOBINVIS);
       Act( AT_IMMORT, "$n slowly fades into thin air.", ch, NULL, NULL, TO_ROOM );
-      SendToCharacter( "You slowly vanish into thin air.\r\n", ch );
+      ch->Echo("You slowly vanish into thin air.\r\n");
     }
 }
+

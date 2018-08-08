@@ -44,14 +44,14 @@ bool CanModifyRoom( const Character *ch, const Room *room )
 
   if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
     {
-      SendToCharacter( "You must have an assigned area to modify this room.\r\n", ch );
+      ch->Echo( "You must have an assigned area to modify this room.\r\n" );
       return false;
     }
 
   if ( vnum >= pArea->VnumRanges.Room.First && vnum <= pArea->VnumRanges.Room.Last )
     return true;
 
-  SendToCharacter( "That room is not in your allocated range.\r\n", ch );
+  ch->Echo( "That room is not in your allocated range.\r\n" );
   return false;
 }
 
@@ -68,14 +68,14 @@ bool CanModifyObject( const Character *ch, const Object *obj )
 
   if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
     {
-      SendToCharacter( "You must have an assigned area to modify this object.\r\n", ch );
+      ch->Echo( "You must have an assigned area to modify this object.\r\n" );
       return false;
     }
 
   if ( vnum >= pArea->VnumRanges.Object.First && vnum <= pArea->VnumRanges.Object.Last )
     return true;
 
-  SendToCharacter( "That object is not in your allocated range.\r\n", ch );
+  ch->Echo( "That object is not in your allocated range.\r\n" );
   return false;
 }
 
@@ -98,7 +98,7 @@ bool CanModifyCharacter( const Character *ch, const Character *mob )
 	}
       else
 	{
-	  SendToCharacter( "You can't do that.\r\n", ch );
+	  ch->Echo( "You can't do that.\r\n" );
 	}
 
       return false;
@@ -118,7 +118,7 @@ bool CanModifyCharacter( const Character *ch, const Character *mob )
 
   if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
     {
-      SendToCharacter( "You must have an assigned area to modify this mobile.\r\n", ch );
+      ch->Echo( "You must have an assigned area to modify this mobile.\r\n" );
       return false;
     }
 
@@ -127,7 +127,7 @@ bool CanModifyCharacter( const Character *ch, const Character *mob )
       return true;
     }
 
-  SendToCharacter( "That mobile is not in your allocated range.\r\n", ch );
+  ch->Echo( "That mobile is not in your allocated range.\r\n" );
   return false;
 }
 
@@ -148,7 +148,7 @@ bool CanMedit( const Character *ch, const ProtoMobile *mob )
 
   if ( !ch->PCData || !( pArea = ch->PCData->Build.Area ) )
     {
-      SendToCharacter( "You must have an assigned area to modify this mobile.\r\n", ch );
+      ch->Echo( "You must have an assigned area to modify this mobile.\r\n" );
       return false;
     }
 
@@ -158,7 +158,7 @@ bool CanMedit( const Character *ch, const ProtoMobile *mob )
       return true;
     }
 
-  SendToCharacter( "That mobile is not in your allocated range.\r\n", ch );
+  ch->Echo( "That mobile is not in your allocated range.\r\n" );
   return false;
 }
 
@@ -777,7 +777,7 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
   
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Reset commands: mob obj give equip door rand trap hide.\r\n", ch );
+      ch->Echo( "Reset commands: mob obj give equip door rand trap hide.\r\n" );
       return NULL;
     }
 
@@ -785,219 +785,253 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
     {
       if ( !IsNullOrEmpty( arg2 ) && !GetProtoObject(val1) )
         {
-          SendToCharacter( "Reset: HIDE: no such object\r\n", ch );
+          ch->Echo( "Reset: HIDE: no such object\r\n" );
           return NULL;
         }
       else
-        val1 = 0;
+        {
+          val1 = 0;
+        }
+      
       extra = 1;
       val2 = 0;
       val3 = 0;
       letter = 'H';
     }
-  else
-    if ( IsNullOrEmpty( arg2 ) )
-      {
-        SendToCharacter( "Reset: not enough arguments.\r\n", ch );
-        return NULL;
-      }
-    else
-      if ( val1 < MIN_VNUM || val1 > MAX_VNUM )
+  else if ( IsNullOrEmpty( arg2 ) )
+    {
+      ch->Echo( "Reset: not enough arguments.\r\n" );
+      return NULL;
+    }
+  else if ( val1 < MIN_VNUM || val1 > MAX_VNUM )
+    {
+      ch->Echo( "Reset: value out of range. Must be between %ld and %s.\r\n",
+                MIN_VNUM, PunctuateNumber( MAX_VNUM, NULL ) );
+      return NULL;
+    }
+  else if ( !StrCmp( arg1, "mob" ) )
+    {
+      if ( !GetProtoMobile(val1) )
         {
-          Echo( ch, "Reset: value out of range. Must be between %ld and %s.\r\n",
-		MIN_VNUM, PunctuateNumber( MAX_VNUM, NULL ) );
+          ch->Echo( "Reset: MOB: no such mobile\r\n" );
           return NULL;
         }
-      else
-        if ( !StrCmp( arg1, "mob" ) )
-          {
-            if ( !GetProtoMobile(val1) )
-              {
-                SendToCharacter( "Reset: MOB: no such mobile\r\n", ch );
-                return NULL;
-              }
-            if ( !GetRoom(val2) )
-              {
-                SendToCharacter( "Reset: MOB: no such room\r\n", ch );
-                return NULL;
-              }
-            if ( val3 < 1 )
-              val3 = 1;
-            letter = 'M';
-          }
-        else
-          if ( !StrCmp( arg1, "obj" ) )
+      
+      if ( !GetRoom(val2) )
+        {
+          ch->Echo( "Reset: MOB: no such room\r\n" );
+          return NULL;
+        }
+      
+      if ( val3 < 1 )
+        {
+          val3 = 1;
+        }
+      
+      letter = 'M';
+    }
+  else if ( !StrCmp( arg1, "obj" ) )
+    {
+      if ( !GetProtoObject(val1) )
+        {
+          ch->Echo( "Reset: OBJ: no such object\r\n" );
+          return NULL;
+        }
+      
+      if ( !GetRoom(val2) )
+        {
+          ch->Echo( "Reset: OBJ: no such room\r\n" );
+          return NULL;
+        }
+
+      if ( val3 < 1 )
+        {
+          val3 = 1;
+        }
+      
+      letter = 'O';
+    }
+  else if ( !StrCmp( arg1, "give" ) )
+    {
+      if ( !GetProtoObject(val1) )
+        {
+          ch->Echo( "Reset: GIVE: no such object\r\n" );
+          return NULL;
+        }
+
+      if ( val2 < 1 )
+        {
+          val2 = 1;
+        }
+      
+      val3 = val2;
+      val2 = 0;
+      extra = 1;
+      letter = 'G';
+    }
+  else if ( !StrCmp( arg1, "equip" ) )
+    {
+      if ( !GetProtoObject(val1) )
+        {
+          ch->Echo( "Reset: EQUIP: no such object\r\n" );
+          return NULL;
+        }
+      
+      if ( !IsNumber(arg3) )
+        {
+          val2 = GetWearLocation(arg3);
+        }
+      
+      if ( val2 < 0 || val2 >= MAX_WEAR )
+        {
+          ch->Echo( "Reset: EQUIP: invalid wear location\r\n" );
+          return NULL;
+        }
+      
+      if ( val3 < 1 )
+        {
+          val3 = 1;
+        }
+      
+      extra  = 1;
+      letter = 'E';
+    }
+  else if ( !StrCmp( arg1, "put" ) )
+    {
+      if ( !GetProtoObject(val1) )
+        {
+          ch->Echo( "Reset: PUT: no such object\r\n" );
+          return NULL;
+        }
+      
+      if ( val2 > 0 && !GetProtoObject(val2) )
+        {
+          ch->Echo( "Reset: PUT: no such container\r\n" );
+          return NULL;
+        }
+      
+      extra = umax(val3, 0);
+      argument = OneArgument(argument, arg4);
+      val3 = (IsNumber(argument) ? atoi(arg4) : 0);
+
+      if ( val3 < 0 )
+        {
+          val3 = 0;
+        }
+
+      letter = 'P';
+    }
+  else if ( !StrCmp( arg1, "door" ) )
+    {
+      if ( (room = GetRoom(val1)) == NULL )
+        {
+          ch->Echo( "Reset: DOOR: no such room\r\n" );
+          return NULL;
+        }
+      
+      if ( val2 < 0 || val2 > 9 )
+        {
+          ch->Echo( "Reset: DOOR: invalid exit\r\n" );
+          return NULL;
+        }
+      
+      if ( (pexit = GetExit(room, (DirectionType)val2)) == NULL
+           ||   !IsBitSet( pexit->Flags, EX_ISDOOR ) )
+        {
+          ch->Echo( "Reset: DOOR: no such door\r\n" );
+          return NULL;
+        }
+      
+      if ( val3 < 0 || val3 > 2 )
+        {
+          ch->Echo( "Reset: DOOR: invalid door state (0 = open, 1 = close, 2 = lock)\r\n" );
+          return NULL;
+        }
+      
+      letter = 'D';
+      value = val3;
+      val3  = val2;
+      val2  = value;
+    }
+  else if ( !StrCmp( arg1, "rand" ) )
+    {
+      if ( !GetRoom(val1) )
+        {
+          ch->Echo( "Reset: RAND: no such room\r\n" );
+          return NULL;
+        }
+
+      if ( val2 < 0 || val2 > 9 )
+        {
+          ch->Echo( "Reset: RAND: invalid max exit\r\n" );
+          return NULL;
+        }
+
+      val3 = val2;
+      val2 = 0;
+      letter = 'R';
+    }
+  else if ( !StrCmp( arg1, "trap" ) )
+    {
+      if ( val2 < 1 || val2 > MAX_TRAPTYPE )
+        {
+          ch->Echo( "Reset: TRAP: invalid trap type\r\n" );
+          return NULL;
+        }
+
+      if ( val3 < 0 || val3 > 10000 )
+        {
+          ch->Echo( "Reset: TRAP: invalid trap charges\r\n" );
+          return NULL;
+        }
+
+      while ( !IsNullOrEmpty( argument ) )
+        {
+          argument = OneArgument( argument, arg4 );
+          value = GetTrapFlag( arg4 );
+
+          if ( value >= 0 || value < (int)MAX_BIT )
             {
-              if ( !GetProtoObject(val1) )
-                {
-                  SendToCharacter( "Reset: OBJ: no such object\r\n", ch );
-                  return NULL;
-                }
-              if ( !GetRoom(val2) )
-                {
-                  SendToCharacter( "Reset: OBJ: no such room\r\n", ch );
-                  return NULL;
-                }
-              if ( val3 < 1 )
-                val3 = 1;
-              letter = 'O';
+              SetBit( extra, 1 << value );
             }
           else
-            if ( !StrCmp( arg1, "give" ) )
-              {
-                if ( !GetProtoObject(val1) )
-                  {
-                    SendToCharacter( "Reset: GIVE: no such object\r\n", ch );
-                    return NULL;
-                  }
-                if ( val2 < 1 )
-                  val2 = 1;
-                val3 = val2;
-                val2 = 0;
-                extra = 1;
-                letter = 'G';
-              }
-            else
-              if ( !StrCmp( arg1, "equip" ) )
-                {
-                  if ( !GetProtoObject(val1) )
-                    {
-                      SendToCharacter( "Reset: EQUIP: no such object\r\n", ch );
-                      return NULL;
-                    }
-                  if ( !IsNumber(arg3) )
-                    val2 = GetWearLocation(arg3);
-                  if ( val2 < 0 || val2 >= MAX_WEAR )
-                    {
-                      SendToCharacter( "Reset: EQUIP: invalid wear location\r\n", ch );
-                      return NULL;
-                    }
-                  if ( val3 < 1 )
-                    val3 = 1;
-                  extra  = 1;
-                  letter = 'E';
-                }
-              else
-                if ( !StrCmp( arg1, "put" ) )
-                  {
-                    if ( !GetProtoObject(val1) )
-                      {
-                        SendToCharacter( "Reset: PUT: no such object\r\n", ch );
-                        return NULL;
-                      }
-                    if ( val2 > 0 && !GetProtoObject(val2) )
-                      {
-                        SendToCharacter( "Reset: PUT: no such container\r\n", ch );
-                        return NULL;
-                      }
-                    extra = umax(val3, 0);
-                    argument = OneArgument(argument, arg4);
-                    val3 = (IsNumber(argument) ? atoi(arg4) : 0);
-                    if ( val3 < 0 )
-                      val3 = 0;
-                    letter = 'P';
-                  }
-                else
-                  if ( !StrCmp( arg1, "door" ) )
-                    {
-                      if ( (room = GetRoom(val1)) == NULL )
-                        {
-                          SendToCharacter( "Reset: DOOR: no such room\r\n", ch );
-                          return NULL;
-                        }
-                      if ( val2 < 0 || val2 > 9 )
-                        {
-                          SendToCharacter( "Reset: DOOR: invalid exit\r\n", ch );
-                          return NULL;
-                        }
-                      if ( (pexit = GetExit(room, (DirectionType)val2)) == NULL
-                           ||   !IsBitSet( pexit->Flags, EX_ISDOOR ) )
-                        {
-                          SendToCharacter( "Reset: DOOR: no such door\r\n", ch );
-                          return NULL;
-                        }
-                      if ( val3 < 0 || val3 > 2 )
-                        {
-                          SendToCharacter( "Reset: DOOR: invalid door state (0 = open, 1 = close, 2 = lock)\r\n", ch );
-                          return NULL;
-                        }
-                      letter = 'D';
-                      value = val3;
-                      val3  = val2;
-                      val2  = value;
-                    }
-                  else
-                    if ( !StrCmp( arg1, "rand" ) )
-                      {
-                        if ( !GetRoom(val1) )
-                          {
-                            SendToCharacter( "Reset: RAND: no such room\r\n", ch );
-                            return NULL;
-                          }
-                        if ( val2 < 0 || val2 > 9 )
-                          {
-                            SendToCharacter( "Reset: RAND: invalid max exit\r\n", ch );
-                            return NULL;
-                          }
-                        val3 = val2;
-                        val2 = 0;
-                        letter = 'R';
-                      }
-                    else
-                      if ( !StrCmp( arg1, "trap" ) )
-                        {
-                          if ( val2 < 1 || val2 > MAX_TRAPTYPE )
-                            {
-                              SendToCharacter( "Reset: TRAP: invalid trap type\r\n", ch );
-                              return NULL;
-                            }
-                          if ( val3 < 0 || val3 > 10000 )
-                            {
-                              SendToCharacter( "Reset: TRAP: invalid trap charges\r\n", ch );
-                              return NULL;
-                            }
+            {
+              ch->Echo( "Reset: TRAP: bad flag\r\n" );
+              return NULL;
+            }
+        }
 
-                          while ( !IsNullOrEmpty( argument ) )
-                            {
-                              argument = OneArgument( argument, arg4 );
-                              value = GetTrapFlag( arg4 );
+      if ( IsBitSet(extra, TRAP_ROOM) && IsBitSet(extra, TRAP_OBJ) )
+        {
+          ch->Echo( "Reset: TRAP: Must specify room OR object, not both!\r\n" );
+          return NULL;
+        }
 
-                              if ( value >= 0 || value < (int)MAX_BIT )
-				{
-				  SetBit( extra, 1 << value );
-				}
-                              else
-                                {
-                                  SendToCharacter( "Reset: TRAP: bad flag\r\n", ch );
-                                  return NULL;
-                                }
-                            }
-                          if ( IsBitSet(extra, TRAP_ROOM) && IsBitSet(extra, TRAP_OBJ) )
-                            {
-                              SendToCharacter( "Reset: TRAP: Must specify room OR object, not both!\r\n", ch );
-                              return NULL;
-                            }
-                          if ( IsBitSet(extra, TRAP_ROOM) && !GetRoom(val1) )
-                            {
-                              SendToCharacter( "Reset: TRAP: no such room\r\n", ch );
-                              return NULL;
-                            }
-                          if ( IsBitSet(extra, TRAP_OBJ)  && val1>0 && !GetProtoObject(val1) )
-                            {
-                              SendToCharacter( "Reset: TRAP: no such object\r\n", ch );
-                              return NULL;
-                            }
-                          if (!IsBitSet(extra, TRAP_ROOM) && !IsBitSet(extra, TRAP_OBJ) )
-                            {
-                              SendToCharacter( "Reset: TRAP: Must specify ROOM or OBJECT\r\n", ch );
-                              return NULL;
-                            }
-                          /* fix order */
-                          value = val1;
-                          val1  = val2;
-                          val2  = value;
-                          letter = 'T';
-                        }
+      if ( IsBitSet(extra, TRAP_ROOM) && !GetRoom(val1) )
+        {
+          ch->Echo( "Reset: TRAP: no such room\r\n" );
+          return NULL;
+        }
+
+      if ( IsBitSet(extra, TRAP_OBJ)  && val1 > 0 && !GetProtoObject(val1) )
+        {
+          ch->Echo( "Reset: TRAP: no such object\r\n" );
+          return NULL;
+        }
+
+      if (!IsBitSet(extra, TRAP_ROOM) && !IsBitSet(extra, TRAP_OBJ) )
+        {
+          ch->Echo( "Reset: TRAP: Must specify ROOM or OBJECT\r\n" );
+          return NULL;
+        }
+
+      /* fix order */
+      value = val1;
+      val1  = val2;
+      val2  = value;
+      letter = 'T';
+    }
+  
   if ( letter == '*' )
     return NULL;
   else
@@ -1058,3 +1092,4 @@ void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
   StartEditing( ch, mprg->comlist );
   SetEditorDescription( ch, "ROOMPROG script" );
 }
+

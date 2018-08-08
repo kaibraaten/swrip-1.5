@@ -10,13 +10,13 @@ void do_users( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
 
   OneArgument (argument, arg);
-  SetPagerColor( AT_PLAIN, ch );
+  SetCharacterColor( AT_PLAIN, ch );
   sprintf(buf,
           "Desc|Con|Idle| Port | Player@HostIP                 ");
   strcat(buf, "\r\n");
   strcat(buf, "----+---+----+------+-------------------------------");
   strcat(buf, "\r\n");
-  SendToPager(buf, ch);
+  ch->Echo(buf);
 
   for ( d = FirstDescriptor; d; d = d->Next )
     {
@@ -41,7 +41,7 @@ void do_users( Character *ch, char *argument )
                 sprintf( buf + strlen( buf ), " (%s)", d->Remote.Hostname  );
 
 	      strcat(buf, "\r\n");
-              SendToPager( buf, ch );
+              ch->Echo(buf);
             }
         }
       else
@@ -52,23 +52,21 @@ void do_users( Character *ch, char *argument )
                       ||   ( d->Character && !StringPrefix( arg, d->Character->Name ) ) ) )
             {
               count++;
-              PagerPrintf( ch,
-			   " %3d| %2d|%4d|%6d| %-12s@%-16s ",
-			   d->Socket,
-			   d->ConnectionState,
-			   d->Idle / 4,
-			   d->Remote.Port,
-			   d->Original  ? d->Original->Name  :
-			   d->Character ? d->Character->Name : "(none)",
-			   d->Remote.Hostname
-			   );
-              buf[0] = '\0';
+              ch->Echo(" %3d| %2d|%4d|%6d| %-12s@%-16s ",
+                       d->Socket,
+                       d->ConnectionState,
+                       d->Idle / 4,
+                       d->Remote.Port,
+                       d->Original  ? d->Original->Name  :
+                       d->Character ? d->Character->Name : "(none)",
+                       d->Remote.Hostname
+                       );
 
-              strcat(buf, "\r\n");
-              SendToPager( buf, ch );
+              ch->Echo("\r\n");
             }
         }
     }
 
-  PagerPrintf( ch, "%d user%s.\r\n", count, count == 1 ? "" : "s" );
+  ch->Echo("%d user%s.\r\n", count, count == 1 ? "" : "s" );
 }
+

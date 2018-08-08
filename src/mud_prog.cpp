@@ -3550,3 +3550,4 @@ Character *GetCharacterInRoomMudProg( Character *ch, char *argument )
 
   return NULL;
 }
+

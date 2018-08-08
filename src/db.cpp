@@ -1344,7 +1344,7 @@ void ShowFile( const Character *ch, const char *filename )
           buf[num++] = '\n';
           buf[num++] = '\r';
           buf[num  ] = '\0';
-          SendToPager( (const char*) buf, ch );
+          ch->Echo( buf );
           num = 0;
         }
     }
@@ -2009,7 +2009,7 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
   int count = 0;
   int loaded = 0;
 
-  SetPagerColor( AT_PLAIN, ch );
+  SetCharacterColor( AT_PLAIN, ch );
 
   if ( proto )
     first_sort = FirstBSort;
@@ -2032,17 +2032,17 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
       else if ( !shownl )
           continue;
 
-      PagerPrintf(ch, "%-22s| Rooms: %10d - %-10d"
-                   " Objs: %10d - %-10d Mobs: %10d - %-10d%s\r\n",
-                   (pArea->Filename ? pArea->Filename : "(invalid)"),
-                   pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
-                   pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,
-                   pArea->VnumRanges.Mob.First, pArea->VnumRanges.Mob.Last,
-                   IsBitSet(pArea->Status, AREA_LOADED) ? loadst : notloadst );
+      ch->Echo( "%-22s| Rooms: %10d - %-10d"
+                " Objs: %10d - %-10d Mobs: %10d - %-10d%s\r\n",
+                (pArea->Filename ? pArea->Filename : "(invalid)"),
+                pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
+                pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,
+                pArea->VnumRanges.Mob.First, pArea->VnumRanges.Mob.Last,
+                IsBitSet(pArea->Status, AREA_LOADED) ? loadst : notloadst );
       count++;
     }
 
-  PagerPrintf( ch, "Areas listed: %d  Loaded: %d\r\n", count, loaded );
+  ch->Echo( "Areas listed: %d  Loaded: %d\r\n", count, loaded );
 }
 
 /*
@@ -2283,7 +2283,7 @@ void AppendFile( const Character *ch, const char *file, const char *str )
 
   if ( ( fp = fopen( file, "a" ) ) == NULL )
     {
-      SendToCharacter( "Could not open the file!\n\r", ch );
+      ch->Echo( "Could not open the file!\n\r" );
     }
   else
     {
@@ -2309,3 +2309,4 @@ void AllocateRepositories(void)
   Shuttles = NewShuttleRepository();
   PlayerCharacters = NewPlayerRepository();
 }
+

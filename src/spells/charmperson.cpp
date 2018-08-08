@@ -13,7 +13,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
 
   if ( victim == ch )
     {
-      SendToCharacter( "You like yourself even better!\r\n", ch );
+      ch->Echo("You like yourself even better!\r\n");
       return rSPELL_FAILED;
     }
 
@@ -26,8 +26,8 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
 
   if ( (!IsNpc( victim ) && !IsNpc( ch )) || ch->Race == RACE_DROID )
     {
-      SendToCharacter( "I don't think so...\r\n", ch );
-      SendToCharacter( "You feel as if someone tried to enter your mind but failed..\r\n", victim );
+      ch->Echo("I don't think so...\r\n");
+      victim->Echo("You feel as if someone tried to enter your mind but failed..\r\n");
       return rSPELL_FAILED;
     }
 
@@ -58,10 +58,11 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
   Act( AT_MAGIC, "$N's eyes glaze over...", ch, NULL, victim, TO_ROOM );
 
   if ( ch != victim )
-    SendToCharacter( "Ok.\r\n", ch );
+    ch->Echo("Ok.\r\n");
 
   sprintf( buf, "%s has charmed %s.", ch->Name, victim->Name);
   Log->LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
 
   return rNONE;
 }
+

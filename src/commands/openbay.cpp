@@ -10,7 +10,7 @@ void do_openbay( Character *ch, char *argument )
   if ( GetShipFromPilotSeat(ch->InRoom->Vnum) == NULL
        && GetShipFromHangar(ch->InRoom->Vnum) == NULL )
     {
-      SendToCharacter("&RYou aren't in the pilots chair or hangar of a ship!\r\n",ch);
+      ch->Echo("&RYou aren't in the pilots chair or hangar of a ship!\r\n");
       return;
     }
 
@@ -21,13 +21,13 @@ void do_openbay( Character *ch, char *argument )
 
   if ( ship->Rooms.Hangar == INVALID_VNUM )
     {
-      SendToCharacter("&RThis ship.hppas no hangar!\r\n",ch);
+      ch->Echo("&RThis ship.hppas no hangar!\r\n");
       return;
     }
 
   if ( ship->BayOpen )
     {
-      SendToCharacter("Bay doors are already open!",ch);
+      ch->Echo("Bay doors are already open!");
       return;
     }
 
@@ -36,7 +36,8 @@ void do_openbay( Character *ch, char *argument )
   ship->BayOpen = true;
 
   EchoToCockpit( AT_YELLOW , ship, "Bay Doors Open");
-  SendToCharacter("You open the bay doors", ch);
+  ch->Echo("You open the bay doors");
   sprintf( buf ,"%s's bay doors open." , ship->Name );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }
+

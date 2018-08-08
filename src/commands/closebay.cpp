@@ -4,12 +4,13 @@
 
 void do_closebay( Character *ch, char *argument )
 {
-  Ship *ship;
+  Ship *ship = nullptr;
   char buf[MAX_STRING_LENGTH];
+
   if ( GetShipFromPilotSeat(ch->InRoom->Vnum) == NULL
        && GetShipFromHangar(ch->InRoom->Vnum) == NULL )
     {
-      SendToCharacter("&RYou aren't in the pilots chair or hangar of a ship!\r\n",ch);
+      ch->Echo("&RYou aren't in the pilots chair or hangar of a ship!\r\n");
       return;
     }
 
@@ -20,13 +21,13 @@ void do_closebay( Character *ch, char *argument )
 
   if ( ship->Rooms.Hangar == INVALID_VNUM )
     {
-      SendToCharacter("&RThis ship.hppas no hangar!\r\n",ch);
+      ch->Echo("&RThis ship.hppas no hangar!\r\n");
       return;
     }
 
   if (ship->BayOpen == false)
     {
-      SendToCharacter("Bay doors are already closed!", ch);
+      ch->Echo("Bay doors are already closed!");
       return;
     }
 
@@ -35,7 +36,8 @@ void do_closebay( Character *ch, char *argument )
   ship->BayOpen = false;
 
   EchoToCockpit( AT_YELLOW , ship, "Bay Doors close");
-  SendToCharacter("You close the bay doors.", ch);
+  ch->Echo("You close the bay doors.");
   sprintf( buf ,"%s's bay doors close." , ship->Name );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }
+

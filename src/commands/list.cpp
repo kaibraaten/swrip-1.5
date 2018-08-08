@@ -12,7 +12,7 @@ void do_list( Character *ch, char *argument )
       if ( !pRoomIndexNext )
         {
           Log->Bug( "Do_list: bad pet shop at vnum %d.", ch->InRoom->Vnum );
-          SendToCharacter( "You can't do that here.\r\n", ch );
+          ch->Echo("You can't do that here.\r\n");
           return;
         }
 
@@ -25,9 +25,9 @@ void do_list( Character *ch, char *argument )
               if ( !found )
                 {
                   found = true;
-                  SendToCharacter( "Pets for sale:\r\n", ch );
+                  ch->Echo("Pets for sale:\r\n");
                 }
-	      Echo( ch, "[%2d] %8d - %s\r\n",
+       ch->Echo("[%2d] %8d - %s\r\n",
                          pet->TopLevel,
                          10 * pet->TopLevel * pet->TopLevel,
                          pet->ShortDescr );
@@ -36,7 +36,7 @@ void do_list( Character *ch, char *argument )
 
       if ( !found )
         {
-          SendToCharacter( "Sorry, we're out of pets right now.\r\n", ch );
+          ch->Echo("Sorry, we're out of pets right now.\r\n");
         }
 
       return;
@@ -70,9 +70,9 @@ void do_list( Character *ch, char *argument )
                   if ( !found )
                     {
                       found = true;
-                      SendToCharacter( "[Price] {ref} Item\r\n", ch );
+                      ch->Echo("[Price] {ref} Item\r\n");
                     }
-                  Echo( ch, "[%5d] {%3d} %s%s.\r\n",
+                  ch->Echo("[%5d] {%3d} %s%s.\r\n",
                              cost, oref, Capitalize( obj->ShortDescr ),
                              IsBitSet(obj->Flags, ITEM_HUTT_SIZE) ? " (hutt size)" :
                              ( IsBitSet(obj->Flags, ITEM_LARGE_SIZE) ? " (large)" :
@@ -86,11 +86,13 @@ void do_list( Character *ch, char *argument )
       if ( !found )
         {
           if ( IsNullOrEmpty( arg ) )
-            SendToCharacter( "You can't buy anything here.\r\n", ch );
+            ch->Echo("You can't buy anything here.\r\n");
           else
-            SendToCharacter( "You can't buy that here.\r\n", ch );
+            ch->Echo("You can't buy that here.\r\n");
         }
       
       return;
     }
 }
+
+

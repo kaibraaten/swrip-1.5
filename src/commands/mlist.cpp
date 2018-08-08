@@ -16,7 +16,7 @@ void do_mlist( Character *ch, char *argument )
   if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_CREATOR || !ch->PCData
        ||  ( !ch->PCData->Build.Area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
     {
-      SendToCharacter( "You don't have an assigned area.\r\n", ch );
+      ch->Echo("You don't have an assigned area.\r\n");
       return;
     }
 
@@ -39,7 +39,7 @@ void do_mlist( Character *ch, char *argument )
       if ( ( lrange < tarea->VnumRanges.Mob.First || trange > tarea->VnumRanges.Mob.Last )
            && GetTrustLevel( ch ) < LEVEL_GREATER )
         {
-          SendToCharacter("That is out of your vnum range.\r\n", ch);
+          ch->Echo("That is out of your vnum range.\r\n");
           return;
         }
     }
@@ -53,8 +53,9 @@ void do_mlist( Character *ch, char *argument )
     {
       if ( (mob = GetProtoMobile( vnum )) == NULL )
         continue;
-      PagerPrintf( ch, "%5d) %-20s '%s'\r\n", vnum,
+      ch->Echo("%5d) %-20s '%s'\r\n", vnum,
                     mob->Name,
                     mob->ShortDescr );
     }
 }
+

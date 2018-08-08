@@ -167,9 +167,7 @@ void FileSystemLogger::LogStringPlus( const char *str, short log_type, short lev
                && vch->TopLevel >= level )
             {
               SetCharacterColor( AT_LOG, vch );
-              SendToCharacter( "Log: ", vch );
-              SendToCharacter( str + offset, vch );
-              SendToCharacter( "&R&w\r\n", vch );
+              vch->Echo("Log: %s&R&w\r\n", str + offset);
             }
         }
     }
@@ -190,3 +188,4 @@ Logger *NewLogger()
 {
   return new FileSystemLogger();
 }
+

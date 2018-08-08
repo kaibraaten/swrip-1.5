@@ -6,12 +6,12 @@
 void do_aid( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  int percent;
+  Character *victim = nullptr;
+  int percent = 0;
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
+      ch->Echo( "You can't concentrate enough for that.\r\n" );
       return;
     }
 
@@ -19,25 +19,25 @@ void do_aid( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Aid whom?\r\n", ch );
+      ch->Echo( "Aid whom?\r\n" );
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
   if ( ch->Mount )
     {
-      SendToCharacter( "You can't do that while mounted.\r\n", ch );
+      ch->Echo( "You can't do that while mounted.\r\n" );
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "Aid yourself?\r\n", ch );
+      ch->Echo( "Aid yourself?\r\n" );
       return;
     }
 
@@ -63,7 +63,7 @@ void do_aid( Character *ch, char *argument )
 
   if ( !IsNpc(ch) && percent > ch->PCData->Learned[gsn_aid] )
     {
-      SendToCharacter( "You fail.\r\n", ch );
+      ch->Echo( "You fail.\r\n" );
       LearnFromFailure( ch, gsn_aid );
       return;
     }
@@ -81,3 +81,4 @@ void do_aid( Character *ch, char *argument )
   UpdatePosition( victim );
   Act( AT_SKILL, "$n aids you!", ch, NULL, victim, TO_VICT    );
 }
+

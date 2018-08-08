@@ -23,3 +23,4 @@ void do_newzones( Character *ch, char *argument )
 
   ShowVnums( ch, low, high, true, false, "", " X" );
 }
+

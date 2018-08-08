@@ -12,13 +12,13 @@ void do_takedrug( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) || !StrCmp(argument, "") )
     {
-      SendToCharacter( "Use what?\r\n", ch );
+      ch->Echo("Use what?\r\n");
       return;
     }
 
   if( IsDroid(ch) )
     {
-      SendToCharacter( "That would have no affect on you.\r\n", ch );
+      ch->Echo("That would have no affect on you.\r\n");
       return;
     }
 
@@ -27,7 +27,7 @@ void do_takedrug( Character *ch, char *argument )
 
   if ( obj->ItemType == ITEM_DEVICE )
     {
-      SendToCharacter( "Try holding it first.\r\n", ch );
+      ch->Echo("Try holding it first.\r\n");
       return;
     }
 
@@ -181,3 +181,4 @@ void do_takedrug( Character *ch, char *argument )
 
   ExtractObject( obj );
 }
+

@@ -38,14 +38,13 @@ static int ParseDiceExpression(const Character *ch, int level, const char *expr)
 
 ch_ret spell_null( int sn, int level, Character *ch, void *vo )
 {
-  SendToCharacter( "That's not a spell!\r\n", ch );
-  return rNONE;
+  return spell_notfound(sn, level, ch, vo);
 }
 
 /* don't remove, may look redundant, but is important */
 ch_ret spell_notfound( int sn, int level, Character *ch, void *vo )
 {
-  SendToCharacter( "That's not a spell!\r\n", ch );
+  ch->Echo( "That's not a Force power!\r\n" );
   return rNONE;
 }
 
@@ -651,7 +650,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
         {
           if ( !( *victim = GetFightingOpponent( ch ) ) )
             {
-              SendToCharacter( "Cast the spell on whom?\r\n", ch );
+              ch->Echo( "Cast the spell on whom?\r\n" );
               return &pAbort;
             }
         }
@@ -659,7 +658,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
         {
           if ( !( *victim = GetCharacterInRoom( ch, arg ) ) )
             {
-              SendToCharacter( "They aren't here.\r\n", ch );
+              ch->Echo( "They aren't here.\r\n" );
               return &pAbort;
             }
         }
@@ -671,7 +670,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
 
       if ( ch == *victim )
         {
-          SendToCharacter( "Cast this on yourself? Okay...\r\n", ch );
+          ch->Echo( "Cast this on yourself? Okay...\r\n" );
         }
 
       if ( !IsNpc(ch) )
@@ -680,20 +679,20 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
             {
               if ( GetTimer( ch, TIMER_PKILLED ) > 0 )
                 {
-                  SendToCharacter( "You have been killed in the last 5 minutes.\r\n", ch);
+                  ch->Echo( "You have been killed in the last 5 minutes.\r\n" );
                   return &pAbort;
                 }
 
               if ( GetTimer( *victim, TIMER_PKILLED ) > 0 )
                 {
-                  SendToCharacter( "This player has been killed in the last 5 minutes.\r\n", ch );
+                  ch->Echo( "This player has been killed in the last 5 minutes.\r\n" );
                   return &pAbort;
                 }
             }
 
           if ( IsAffectedBy(ch, AFF_CHARM) && ch->Master == *victim )
             {
-              SendToCharacter( "You can't do that on your own follower.\r\n", ch );
+              ch->Echo( "You can't do that on your own follower.\r\n" );
               return &pAbort;
             }
         }
@@ -710,7 +709,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
         {
           if ( !( *victim = GetCharacterInRoom( ch, arg ) ) )
             {
-              SendToCharacter( "They aren't here.\r\n", ch );
+              ch->Echo( "They aren't here.\r\n" );
               return &pAbort;
             }
         }
@@ -721,7 +720,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
     case TAR_CHAR_SELF:
       if ( !IsNullOrEmpty( arg ) && !NiftyIsName( arg, ch->Name ) )
         {
-          SendToCharacter( "You cannot cast this spell on another.\r\n", ch );
+          ch->Echo( "You cannot cast this spell on another.\r\n" );
           return &pAbort;
         }
 
@@ -731,13 +730,13 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
     case TAR_OBJ_INV:
       if ( IsNullOrEmpty( arg ) )
         {
-          SendToCharacter( "What should the spell be cast upon?\r\n", ch );
+          ch->Echo( "What should the spell be cast upon?\r\n" );
           return &pAbort;
         }
 
       if ( ( *obj = GetCarriedObject( ch, arg ) ) == NULL )
         {
-          SendToCharacter( "You are not carrying that.\r\n", ch );
+          ch->Echo( "You are not carrying that.\r\n" );
           return &pAbort;
         }
 
@@ -773,7 +772,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
   if ( IsBitSet( ch->InRoom->Flags, ROOM_NO_MAGIC ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      SendToCharacter( "Nothing seems to happen...\r\n", ch );
+      ch->Echo( "Nothing seems to happen...\r\n" );
       return rNONE;
     }
 
@@ -853,7 +852,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
 
           if ( !victim || !IsNpc(victim) )
             {
-              SendToCharacter( "You can't do that.\r\n", ch );
+              ch->Echo( "You can't do that.\r\n" );
               return rNONE;
             }
         }
@@ -896,7 +895,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
     case TAR_OBJ_INV:
       if ( !obj )
         {
-          SendToCharacter( "You can't do that.\r\n", ch );
+          ch->Echo( "You can't do that.\r\n" );
           return rNONE;
         }
 
@@ -1004,3 +1003,4 @@ int FindSpell( const Character *ch, const char *name, bool know )
       return ChBSearchSkill( ch, name, gsn_first_spell, gsn_first_skill-1 );
     }
 }
+

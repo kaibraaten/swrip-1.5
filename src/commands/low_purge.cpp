@@ -11,14 +11,14 @@ void do_low_purge( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ))
     {
-      SendToCharacter( "Purge what?\r\n", ch );
+      ch->Echo("Purge what?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL
        && ( obj = GetObjectHere ( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "You can't find that here.\r\n", ch );
+      ch->Echo("You can't find that here.\r\n");
       return;
     }
 
@@ -33,13 +33,13 @@ void do_low_purge( Character *ch, char *argument )
 
   if ( !IsNpc(victim) )
     {
-      SendToCharacter( "Not on PC's.\r\n", ch );
+      ch->Echo("Not on PC's.\r\n");
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "You cannot purge yourself!\r\n", ch );
+      ch->Echo("You cannot purge yourself!\r\n");
       return;
     }
 
@@ -48,3 +48,5 @@ void do_low_purge( Character *ch, char *argument )
        ch, NULL, victim, TO_CHAR );
   ExtractCharacter( victim, true );
 }
+
+

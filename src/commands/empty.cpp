@@ -3,7 +3,7 @@
 
 void do_empty( Character *ch, char *argument )
 {
-  Object *obj;
+  Object *obj = nullptr;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 
@@ -15,7 +15,7 @@ void do_empty( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Empty what?\r\n", ch );
+      ch->Echo( "Empty what?\r\n" );
       return;
     }
   
@@ -24,7 +24,7 @@ void do_empty( Character *ch, char *argument )
 
   if ( (obj = GetCarriedObject( ch, arg1 )) == NULL )
     {
-      SendToCharacter( "You aren't carrying that.\r\n", ch );
+      ch->Echo( "You aren't carrying that.\r\n" );
       return;
     }
 
@@ -37,59 +37,70 @@ void do_empty( Character *ch, char *argument )
       Act( AT_ACTION, "You shake $p in an attempt to empty it...", ch, obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n begins to shake $p in an attempt to empty it...", ch, obj, NULL, TO_ROOM );
       return;
+
     case ITEM_PIPE:
       Act( AT_ACTION, "You gently tap $p and empty it out.", ch, obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n gently taps $p and empties it out.", ch, obj, NULL, TO_ROOM );
-      RemoveBit( obj->Value[3], PIPE_FULLOFASH );
-      RemoveBit( obj->Value[3], PIPE_LIT );
-      obj->Value[1] = 0;
+      RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH );
+      RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT );
+      obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] = 0;
       return;
+
     case ITEM_DRINK_CON:
-      if ( obj->Value[1] < 1 )
+      if ( obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 1 )
         {
-          SendToCharacter( "It's already empty.\r\n", ch );
+          ch->Echo( "It's already empty.\r\n" );
           return;
         }
+
       Act( AT_ACTION, "You empty $p.", ch, obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n empties $p.", ch, obj, NULL, TO_ROOM );
-      obj->Value[1] = 0;
+      obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] = 0;
       return;
+
     case ITEM_CONTAINER:
-      if ( IsBitSet(obj->Value[1], CONT_CLOSED) )
+      if ( IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->Name, TO_CHAR );
           return;
         }
+
       if ( !obj->FirstContent )
         {
-          SendToCharacter( "It's already empty.\r\n", ch );
+          ch->Echo( "It's already empty.\r\n" );
           return;
         }
+
       if ( IsNullOrEmpty( arg2 ) )
         {
           if ( IsBitSet( ch->InRoom->Flags, ROOM_NODROP )
                || ( !IsNpc(ch) &&  IsBitSet( ch->Flags, PLR_LITTERBUG ) ) )
             {
               SetCharacterColor( AT_MAGIC, ch );
-              SendToCharacter( "A magical force stops you!\r\n", ch );
+              ch->Echo( "A magical force stops you!\r\n" );
               SetCharacterColor( AT_TELL, ch );
-	      SendToCharacter( "Someone tells you, 'No littering here!'\r\n", ch );
+	      ch->Echo( "Someone tells you, 'No littering here!'\r\n" );
               return;
             }
+
           if ( IsBitSet( ch->InRoom->Flags, ROOM_NODROPALL ) )
             {
-              SendToCharacter( "You can't seem to do that here...\r\n", ch );
+              ch->Echo( "You can't seem to do that here...\r\n" );
               return;
             }
+
           if ( EmptyObjectContents( obj, NULL, ch->InRoom ) )
             {
               Act( AT_ACTION, "You empty $p.", ch, obj, NULL, TO_CHAR );
               Act( AT_ACTION, "$n empties $p.", ch, obj, NULL, TO_ROOM );
+
               if ( IsBitSet( SysData.SaveFlags, SV_DROP ) )
                 SaveCharacter( ch );
             }
           else
-            SendToCharacter( "Hmmm... didn't work.\r\n", ch );
+            {
+              ch->Echo( "Hmmm... didn't work.\r\n" );
+            }
         }
       else
         {
@@ -97,36 +108,46 @@ void do_empty( Character *ch, char *argument )
 
           if ( !dest )
             {
-              SendToCharacter( "You can't find it.\r\n", ch );
+              ch->Echo( "You can't find it.\r\n" );
               return;
             }
+
           if ( dest == obj )
             {
-              SendToCharacter( "You can't empty something into itself!\r\n", ch );
+              ch->Echo( "You can't empty something into itself!\r\n" );
               return;
             }
+
           if ( dest->ItemType != ITEM_CONTAINER )
             {
-              SendToCharacter( "That's not a container!\r\n", ch );
+              ch->Echo( "That's not a container!\r\n" );
               return;
             }
-          if ( IsBitSet(dest->Value[1], CONT_CLOSED) )
+
+          if ( IsBitSet(dest->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
             {
               Act( AT_PLAIN, "The $d is closed.", ch, NULL, dest->Name, TO_CHAR );
               return;
             }
+
           SeparateOneObjectFromGroup( dest );
+
           if ( EmptyObjectContents( obj, dest, NULL ) )
             {
 	      Act( AT_ACTION, "You empty $p into $P.", ch, obj, dest, TO_CHAR );
               Act( AT_ACTION, "$n empties $p into $P.", ch, obj, dest, TO_ROOM );
+
               if ( !dest->CarriedBy
                    &&    IsBitSet( SysData.SaveFlags, SV_PUT ) )
                 SaveCharacter( ch );
             }
           else
-            Act( AT_ACTION, "$P is too full.", ch, obj, dest, TO_CHAR );
+            {
+              Act( AT_ACTION, "$P is too full.", ch, obj, dest, TO_CHAR );
+            }
         }
+      
       return;
     }
 }
+

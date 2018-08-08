@@ -10,38 +10,39 @@ void do_notell( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Notell whom?", ch );
+      ch->Echo("Notell whom?");
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPC's.\r\n", ch );
+      ch->Echo("Not on NPC's.\r\n");
       return;
     }
 
   if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      SendToCharacter( "You failed.\r\n", ch );
+      ch->Echo("You failed.\r\n");
       return;
     }
 
   if ( IsBitSet(victim->Flags, PLR_NO_TELL) )
     {
       RemoveBit(victim->Flags, PLR_NO_TELL);
-      SendToCharacter( "You can tell again.\r\n", victim );
-      SendToCharacter( "NO_TELL removed.\r\n", ch );
+      victim->Echo("You can tell again.\r\n");
+      ch->Echo("NO_TELL removed.\r\n");
     }
   else
     {
       SetBit(victim->Flags, PLR_NO_TELL);
-      SendToCharacter( "You can't tell!\r\n", victim );
-      SendToCharacter( "NO_TELL set.\r\n", ch );
+      victim->Echo("You can't tell!\r\n");
+      ch->Echo("NO_TELL set.\r\n");
     }
 }
+

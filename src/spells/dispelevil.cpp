@@ -36,3 +36,4 @@ ch_ret spell_dispel_evil( int sn, int level, Character *ch, void *vo )
 
   return InflictDamage( ch, victim, dam, sn );
 }
+

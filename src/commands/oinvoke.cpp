@@ -17,7 +17,7 @@ void do_oinvoke( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Syntax: oinvoke <vnum> <level>.\r\n", ch );
+      ch->Echo("Syntax: oinvoke <vnum> <level>.\r\n");
       return;
     }
 
@@ -29,14 +29,14 @@ void do_oinvoke( Character *ch, char *argument )
     {
       if ( !IsNumber( arg2 ) )
         {
-          SendToCharacter( "Syntax: oinvoke <vnum> <level>.\r\n", ch );
+          ch->Echo("Syntax: oinvoke <vnum> <level>.\r\n");
           return;
         }
       level = atoi( arg2 );
 
       if ( level < 0 || level > GetTrustLevel( ch ) )
 	{
-          SendToCharacter( "Limited to your trust level.\r\n", ch );
+          ch->Echo("Limited to your trust level.\r\n");
           return;
         }
     }
@@ -60,7 +60,7 @@ void do_oinvoke( Character *ch, char *argument )
             }
       if ( vnum == -1 )
         {
-          SendToCharacter( "No such object exists.\r\n", ch );
+          ch->Echo("No such object exists.\r\n");
           return;
         }
     }
@@ -73,26 +73,26 @@ void do_oinvoke( Character *ch, char *argument )
 
       if ( IsNpc(ch) )
         {
-          SendToCharacter( "Huh?\r\n", ch );
+          ch->Echo("Huh?\r\n");
           return;
         }
 
       if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
-          SendToCharacter( "You must have an assigned area to invoke this object.\r\n", ch );
+          ch->Echo("You must have an assigned area to invoke this object.\r\n");
 	  return;
         }
       if ( vnum < pArea->VnumRanges.Object.First
            &&   vnum > pArea->VnumRanges.Object.Last )
         {
-          SendToCharacter( "That number is not in your allocated range.\r\n", ch );
+          ch->Echo("That number is not in your allocated range.\r\n");
           return;
         }
     }
 
   if ( ( pObjIndex = GetProtoObject( vnum ) ) == NULL )
     {
-      SendToCharacter( "No object has that vnum.\r\n", ch );
+      ch->Echo("No object has that vnum.\r\n");
       return;
     }
 
@@ -108,5 +108,6 @@ void do_oinvoke( Character *ch, char *argument )
       Act( AT_IMMORT, "$n has created $p!", ch, obj, NULL, TO_ROOM );
     }
 
-  SendToCharacter( "Ok.\r\n", ch );
+  ch->Echo("Ok.\r\n");
 }
+

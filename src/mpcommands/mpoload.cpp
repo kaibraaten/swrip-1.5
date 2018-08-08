@@ -15,7 +15,7 @@ void do_mpoload( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -73,3 +73,4 @@ void do_mpoload( Character *ch, char *argument )
   else
     ObjectToRoom( obj, ch->InRoom );
 }
+

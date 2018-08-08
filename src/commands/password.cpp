@@ -59,21 +59,20 @@ void do_password( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "Syntax: password <old> <new>.\r\n", ch );
+      ch->Echo("Syntax: password <old> <new>.\r\n");
       return;
     }
 
   if ( StrCmp( EncodeString( arg1 ), ch->PCData->Password ) )
     {
       SetWaitState( ch, 40 );
-      SendToCharacter( "Wrong password.  Wait 10 seconds.\r\n", ch );
+      ch->Echo("Wrong password.  Wait 10 seconds.\r\n");
       return;
     }
 
   if ( strlen(arg2) < 5 )
     {
-      SendToCharacter(
-                   "New password must be at least five characters long.\r\n", ch );
+      ch->Echo("New password must be at least five characters long.\r\n" );
       return;
     }
 
@@ -86,8 +85,7 @@ void do_password( Character *ch, char *argument )
     {
       if ( *p == '~' )
         {
-          SendToCharacter(
-                       "New password not acceptable, try again.\r\n", ch );
+          ch->Echo("New password not acceptable, try again.\r\n" );
           return;
         }
     }
@@ -98,5 +96,6 @@ void do_password( Character *ch, char *argument )
   if ( IsBitSet(SysData.SaveFlags, SV_PASSCHG) )
     SaveCharacter( ch );
 
-  SendToCharacter( "Ok.\r\n", ch );
+  ch->Echo("Ok.\r\n");
 }
+

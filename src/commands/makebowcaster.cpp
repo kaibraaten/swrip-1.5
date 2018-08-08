@@ -67,7 +67,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( IsNullOrEmpty( args->CommandArguments ) )
     {
-      Echo( ch, "&RUsage: Makebowcaster <name>\r\n&w" );
+      ch->Echo("&RUsage: Makebowcaster <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
@@ -81,7 +81,7 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
 
   if( ch->Race != RACE_WOOKIEE && !IsImmortal( ch ) )
     {
-      Echo( ch, "&ROnly wookiees have the knowledge to craft bowcasters.\r\n&w" );
+      ch->Echo("&ROnly wookiees have the knowledge to craft bowcasters.\r\n&w" );
       args->AbortSession = true;
     }
 }
@@ -180,3 +180,5 @@ static void FreeUserData( struct UserData *ud )
 
   FreeMemory( ud );
 }
+
+

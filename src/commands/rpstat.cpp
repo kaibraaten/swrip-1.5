@@ -8,16 +8,17 @@ void do_rpstat( Character *ch, char *argument )
 
   if ( !( ch->InRoom->mprog.progtypes ) )
     {
-      SendToCharacter( "This room has no programs set.\r\n", ch);
+      ch->Echo("This room has no programs set.\r\n");
       return;
     }
 
-  Echo( ch, "Name: %s.  Vnum: %d.\r\n",
+  ch->Echo("Name: %s.  Vnum: %d.\r\n",
              ch->InRoom->Name, ch->InRoom->Vnum );
 
   for ( mprg = ch->InRoom->mprog.mudprogs; mprg; mprg = mprg->Next )
-    Echo( ch, ">%s %s\r\n%s\r\n",
+    ch->Echo(">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),
                mprg->arglist,
                mprg->comlist );
 }
+

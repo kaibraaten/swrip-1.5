@@ -19,15 +19,16 @@ void do_cedit( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( commandName ) )
     {
-      SendToCharacter( "Syntax: cedit save\r\n", ch );
+      ch->Echo( "Syntax: cedit save\r\n" );
+
       if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM )
         {
-          SendToCharacter( "Syntax: cedit <command> create [code]\r\n", ch );
-          SendToCharacter( "Syntax: cedit <command> delete\r\n", ch );
-          SendToCharacter( "Syntax: cedit <command> show\r\n", ch );
-          SendToCharacter( "Syntax: cedit <command> [field]\r\n", ch );
-          SendToCharacter( "\r\nField being one of:\r\n", ch );
-          SendToCharacter( "  level position log code\r\n", ch );
+          ch->Echo( "Syntax: cedit <command> create [code]\r\n" );
+          ch->Echo( "Syntax: cedit <command> delete\r\n" );
+          ch->Echo( "Syntax: cedit <command> show\r\n" );
+          ch->Echo( "Syntax: cedit <command> [field]\r\n" );
+          ch->Echo( "\r\nField being one of:\r\n" );
+          ch->Echo( "  level position log code\r\n" );
         }
 
       return;
@@ -36,7 +37,7 @@ void do_cedit( Character *ch, char *argument )
   if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( commandName, "save" ) )
     {
       SaveCommands();
-      SendToCharacter( "Saved.\r\n", ch );
+      ch->Echo( "Saved.\r\n" );
       return;
     }
 
@@ -46,7 +47,7 @@ void do_cedit( Character *ch, char *argument )
     {
       if ( command )
         {
-          SendToCharacter( "That command already exists!\r\n", ch );
+          ch->Echo( "That command already exists!\r\n" );
           return;
         }
 
@@ -61,11 +62,11 @@ void do_cedit( Character *ch, char *argument )
 
       command->Function = GetSkillFunction( arg2 );
       AddCommand( command );
-      SendToCharacter( "Command added.\r\n", ch );
+      ch->Echo( "Command added.\r\n" );
 
       if ( command->Function == skill_notfound )
         {
-          Echo( ch, "Code %s not found.  Set to no code.\r\n", arg2 );
+          ch->Echo( "Code %s not found. Set to no code.\r\n", arg2 );
           command->FunctionName = CopyString( "" );
         }
       else
@@ -78,22 +79,21 @@ void do_cedit( Character *ch, char *argument )
 
   if ( !command )
     {
-      SendToCharacter( "Command not found.\r\n", ch );
+      ch->Echo( "Command not found.\r\n" );
       return;
     }
-  else
-    if ( command->Level > GetTrustLevel(ch) )
-      {
-        SendToCharacter( "You cannot touch this command.\r\n", ch );
-        return;
-      }
+  else if ( command->Level > GetTrustLevel(ch) )
+    {
+      ch->Echo( "You cannot touch this command.\r\n" );
+      return;
+    }
 
   if ( IsNullOrEmpty(arg2) || !StrCmp( arg2, "show" ) )
     {
-      Echo( ch, "Command:  %s\r\nLevel:    %d\r\nPosition: %s\r\nLog:      %s\r\nCode:     %s\r\n",
-	    command->Name, command->Level,
-	    PositionName[command->Position], CmdLogName[command->Log],
-	    command->FunctionName);
+      ch->Echo( "Command:  %s\r\nLevel:    %d\r\nPosition: %s\r\nLog:      %s\r\nCode:     %s\r\n",
+                command->Name, command->Level,
+                PositionName[command->Position], CmdLogName[command->Log],
+                command->FunctionName);
 
       if ( command->UseRec->NumberOfTimesUsed )
         SendTimer(command->UseRec, ch);
@@ -111,7 +111,7 @@ void do_cedit( Character *ch, char *argument )
     {
       RemoveCommand( command );
       FreeCommand( command );
-      SendToCharacter( "Deleted.\r\n", ch );
+      ch->Echo( "Deleted.\r\n" );
       return;
     }
 
@@ -121,14 +121,14 @@ void do_cedit( Character *ch, char *argument )
 
       if ( StringPrefix( "do_", argument ) || fun == skill_notfound )
         {
-	  SendToCharacter( "Code not found.\r\n", ch );
+	  ch->Echo( "Code not found.\r\n" );
           return;
         }
 
       command->Function = fun;
       FreeMemory( command->FunctionName );
       command->FunctionName = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -138,12 +138,12 @@ void do_cedit( Character *ch, char *argument )
 
       if ( level < 0 || level > GetTrustLevel(ch) )
         {
-          SendToCharacter( "Level out of range.\r\n", ch );
+          ch->Echo( "Level out of range.\r\n" );
           return;
         }
 
       command->Level = level;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -154,11 +154,11 @@ void do_cedit( Character *ch, char *argument )
       if( IsNullOrEmpty( argument ) )
 	{
 	  int i = 0;
-	  Echo( ch, "Supply a log type from the following list:\r\n" );
+	  ch->Echo( "Supply a log type from the following list:\r\n" );
 
 	  for( i = 0; i < MAX_LOG; ++i )
 	    {
-	      Echo( ch, "  %s\r\n", CmdLogName[i] );
+	      ch->Echo( "  %s\r\n", CmdLogName[i] );
 	    }
 
 	  return;
@@ -168,15 +168,15 @@ void do_cedit( Character *ch, char *argument )
 
       if ( log_type < 0 )
         {
-          Echo( ch, "Unknown log type.\r\n" );
+          ch->Echo( "Unknown log type.\r\n" );
           return;
         }
 
-      Echo( ch, "Log type for %s changed from %s",
-	    command->Name, CmdLogName[command->Log] );
+      ch->Echo( "Log type for %s changed from %s",
+                command->Name, CmdLogName[command->Log] );
       command->Log = log_type;
-      Echo( ch, " to %s.\r\n", CmdLogName[command->Log] );
-      Echo( ch, "Done.\r\n" );
+      ch->Echo( " to %s.\r\n", CmdLogName[command->Log] );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -186,12 +186,11 @@ void do_cedit( Character *ch, char *argument )
 
       if( IsNullOrEmpty( argument ) )
         {
-          int i = 0;
-          Echo( ch, "Supply a position from the following list:\r\n" );
+          ch->Echo( "Supply a position from the following list:\r\n" );
 
-          for( i = 0; i < MAX_POSITION; ++i )
+          for( int i = 0; i < MAX_POSITION; ++i )
             {
-              Echo( ch, "  %s\r\n", PositionName[i] );
+              ch->Echo( "  %s\r\n", PositionName[i] );
             }
 
           return;
@@ -201,15 +200,15 @@ void do_cedit( Character *ch, char *argument )
 
       if ( position < 0 )
         {
-          Echo( ch, "Unknown position.\r\n" );
+          ch->Echo( "Unknown position.\r\n" );
           return;
         }
 
-      Echo( ch, "Minimum position for %s changed from %s",
-            command->Name, PositionName[command->Position] );
+      ch->Echo( "Minimum position for %s changed from %s",
+                command->Name, PositionName[command->Position] );
       command->Position = position;
-      Echo( ch, " to %s.\r\n", PositionName[command->Position] );
-      Echo( ch, "Done.\r\n" );
+      ch->Echo( " to %s.\r\n", PositionName[command->Position] );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -219,7 +218,7 @@ void do_cedit( Character *ch, char *argument )
 
       if ( IsNullOrEmpty( commandName ) )
         {
-          SendToCharacter( "Cannot clear name field!\r\n", ch );
+          ch->Echo( "Cannot clear name field!\r\n" );
           return;
         }
 
@@ -228,10 +227,11 @@ void do_cedit( Character *ch, char *argument )
 
       command->Name = CopyString( commandName );
 
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
   /* display usage message */
   do_cedit( ch, "" );
 }
+

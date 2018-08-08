@@ -30,8 +30,10 @@ class Character
 {
 public:
   Character();
-  ~Character();
+  virtual ~Character();
 
+  virtual void Echo(const char *fmt, ...) const;
+  
   Character *Next = NULL;
   Character *Previous = NULL;
   Character *NextInRoom = NULL;

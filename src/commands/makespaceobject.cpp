@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "spaceobject.hpp"
+#include "character.hpp"
 
 void do_makespaceobject( Character *ch, char *argument )
 {
@@ -9,13 +10,13 @@ void do_makespaceobject( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ))
     {
-      SendToCharacter( "Usage: makespaceobject <spaceobject name>\r\n", ch );
+      ch->Echo("Usage: makespaceobject <spaceobject name>\r\n");
       return;
     }
 
   if( GetSpaceobject( argument ) )
     {
-      Echo( ch, "&RThere's already another spaceobject with that name.&d\r\n" );
+      ch->Echo("&RThere's already another spaceobject with that name.&d\r\n" );
       return;
     }
   
@@ -32,3 +33,4 @@ void do_makespaceobject( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
   Spaceobjects->Save(spaceobject);
 }
+

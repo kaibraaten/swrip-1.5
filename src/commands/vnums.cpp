@@ -23,3 +23,4 @@ void do_vnums( Character *ch, char *argument )
 
   ShowVnums( ch, low, high, true, true, " *", "" );
 }
+

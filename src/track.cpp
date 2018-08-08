@@ -610,3 +610,4 @@ static bool MobSnipe( Character *ch, Character *victim )
 
   return false;
 }
+

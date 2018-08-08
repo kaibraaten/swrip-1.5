@@ -22,14 +22,14 @@ void do_rstat( Character *ch, char *argument )
 
       if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
-          SendToCharacter( "You must have an assigned area to goto.\r\n", ch );
+          ch->Echo("You must have an assigned area to goto.\r\n");
           return;
         }
 
       if ( ch->InRoom->Vnum < pArea->VnumRanges.Room.First
            ||  ch->InRoom->Vnum > pArea->VnumRanges.Room.Last )
         {
-          SendToCharacter( "You can only rstat within your assigned range.\r\n", ch );
+          ch->Echo("You can only rstat within your assigned range.\r\n");
           return;
 	}
     }
@@ -38,24 +38,23 @@ void do_rstat( Character *ch, char *argument )
     {
       location = ch->InRoom;
 
-      Echo( ch, "Exits for room '%s.' vnum %d\r\n",
+      ch->Echo("Exits for room '%s.' vnum %d\r\n",
                  location->Name,
                  location->Vnum );
 
       for ( cnt = 0, pexit = location->FirstExit; pexit; pexit = pexit->Next )
-        Echo( ch,
-	      "%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum: %d  Distance: %d\r\n",
-	      ++cnt,
-	      dir_text[pexit->Direction],
-	      pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
-	      pexit->Key,
-	      pexit->Flags,
-	      pexit->Keyword,
-	      !IsNullOrEmpty( pexit->Description )
-	      ? pexit->Description : "(none).\r\n",
-	      pexit->ReverseExit ? pexit->ReverseExit->Vnum : 0,
-	      pexit->ReverseVnum,
-	      pexit->Distance );
+        ch->Echo("%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum: %d  Distance: %d\r\n",
+                 ++cnt,
+                 dir_text[pexit->Direction],
+                 pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
+                 pexit->Key,
+                 pexit->Flags,
+                 pexit->Keyword,
+                 !IsNullOrEmpty( pexit->Description )
+                 ? pexit->Description : "(none).\r\n",
+                 pexit->ReverseExit ? pexit->ReverseExit->Vnum : 0,
+                 pexit->ReverseVnum,
+                 pexit->Distance );
       return;
     }
 
@@ -63,7 +62,7 @@ void do_rstat( Character *ch, char *argument )
 
   if ( !location )
     {
-      SendToCharacter( "No such location.\r\n", ch );
+      ch->Echo("No such location.\r\n");
       return;
     }
 
@@ -71,82 +70,81 @@ void do_rstat( Character *ch, char *argument )
     {
       if ( GetTrustLevel( ch ) < LEVEL_GREATER )
         {
-          SendToCharacter( "That room is private right now.\r\n", ch );
+          ch->Echo("That room is private right now.\r\n");
           return;
         }
       else
 	{
-          SendToCharacter( "Overriding private flag!\r\n", ch );
+          ch->Echo("Overriding private flag!\r\n");
         }
     }
 
-  Echo( ch, "Name: %s.\r\nArea: %s  Filename: %s.\r\n",
+  ch->Echo("Name: %s.\r\nArea: %s  Filename: %s.\r\n",
              location->Name,
              location->Area ? location->Area->Name : "None????",
              location->Area ? location->Area->Filename : "None????" );
 
-  Echo( ch,
-             "Vnum: %d.  Sector: %s.  Light: %d.  TeleDelay: %d.  TeleVnum: %d  Tunnel: %d.\r\n",
-             location->Vnum,
-             SectorNames[location->Sector][0],
-             location->Light,
-             location->TeleDelay,
-             location->TeleVnum,
-             location->Tunnel );
+  ch->Echo("Vnum: %d.  Sector: %s.  Light: %d.  TeleDelay: %d.  TeleVnum: %d  Tunnel: %d.\r\n",
+           location->Vnum,
+           SectorNames[location->Sector][0],
+           location->Light,
+           location->TeleDelay,
+           location->TeleVnum,
+           location->Tunnel );
 
-  Echo( ch, "Room flags: %s\r\n",
+  ch->Echo("Room flags: %s\r\n",
         FlagString(location->Flags, RoomFlags).c_str() );
-  Echo( ch, "Description:\r\n%s", location->Description );
+  ch->Echo("Description:\r\n%s", location->Description );
 
   if ( location->FirstExtraDescription )
     {
       ExtraDescription *ed = NULL;
 
-      SendToCharacter( "Extra description keywords: '", ch );
+      ch->Echo("Extra description keywords: '");
 
       for ( ed = location->FirstExtraDescription; ed; ed = ed->Next )
         {
-          SendToCharacter( ed->Keyword, ch );
+          ch->Echo(ed->Keyword);
 
           if ( ed->Next )
-            SendToCharacter( " ", ch );
+            ch->Echo(" ");
         }
 
-      SendToCharacter( "'.\r\n", ch );
+      ch->Echo("'.\r\n");
     }
 
-  SendToCharacter( "Characters:", ch );
+  ch->Echo("Characters:");
 
   for ( rch = location->FirstPerson; rch; rch = rch->NextInRoom )
     {
       if ( CanSeeCharacter( ch, rch ) )
         {
-          SendToCharacter( " ", ch );
+          ch->Echo(" ");
           OneArgument( rch->Name, buf );
-	  SendToCharacter( buf, ch );
+   ch->Echo(buf);
         }
     }
 
-  SendToCharacter( ".\r\nObjects:   ", ch );
+  ch->Echo(".\r\nObjects:   ");
 
   for ( obj = location->FirstContent; obj; obj = obj->NextContent )
     {
-      SendToCharacter( " ", ch );
+      ch->Echo(" ");
       OneArgument( obj->Name, buf );
-      SendToCharacter( buf, ch );
+      ch->Echo(buf);
     }
-  SendToCharacter( ".\r\n", ch );
+  ch->Echo(".\r\n");
 
   if ( location->FirstExit )
-    SendToCharacter( "------------------- EXITS -------------------\r\n", ch );
+    ch->Echo("------------------- EXITS -------------------\r\n");
 
   for ( cnt = 0, pexit = location->FirstExit; pexit; pexit = pexit->Next )
-    Echo( ch,
-	  "%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
-	  ++cnt,
-	  dir_text[pexit->Direction],
-	  pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
-	  pexit->Key,
-	  pexit->Flags,
-	  !IsNullOrEmpty( pexit->Keyword ) ? pexit->Keyword : "(none)" );
+    ch->Echo("%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
+             ++cnt,
+             dir_text[pexit->Direction],
+             pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
+             pexit->Key,
+             pexit->Flags,
+             !IsNullOrEmpty( pexit->Keyword ) ? pexit->Keyword : "(none)" );
 }
+

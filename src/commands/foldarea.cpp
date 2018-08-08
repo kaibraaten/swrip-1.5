@@ -14,7 +14,7 @@ void do_foldarea( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Usage: foldarea <filename> [remproto]\r\n", ch );
+      ch->Echo( "Usage: foldarea <filename> [remproto]\r\n" );
       return;
     }
 
@@ -40,10 +40,11 @@ void do_foldarea( Character *ch, char *argument )
 
   if( found )
     {
-      Echo( ch, "Done.\r\n" );
+      ch->Echo( "Done.\r\n" );
     }
   else
     {
-      Echo( ch, "No such area exists.\r\n" );
+      ch->Echo( "No such area exists.\r\n" );
     }
 }
+

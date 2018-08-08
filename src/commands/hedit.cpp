@@ -13,7 +13,6 @@ void do_hedit( Character *ch, char *argument )
 
   if ( !ch->Desc )
     {
-      SendToCharacter( "You have no descriptor.\r\n", ch );
       return;
     }
 
@@ -51,3 +50,4 @@ void do_hedit( Character *ch, char *argument )
   StartEditing( ch, GetHelpFileText( pHelp ) );
   SetEditorDescription( ch, "Help file: %s", GetHelpFileKeyword( pHelp ) );
 }
+

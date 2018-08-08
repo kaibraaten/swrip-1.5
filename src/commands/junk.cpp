@@ -13,7 +13,7 @@ void do_junk( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) || !StrCmp( arg, ch->Name ) )
     {
-      SendToCharacter( "Junk what?", ch );
+      ch->Echo("Junk what?");
       return;
     }
 
@@ -24,7 +24,7 @@ void do_junk( Character *ch, char *argument )
 
   if ( !obj )
     {
-      SendToCharacter( "You can't find it.\r\n", ch );
+      ch->Echo("You can't find it.\r\n");
       return;
     }
 
@@ -57,3 +57,5 @@ void do_junk( Character *ch, char *argument )
 
   ExtractObject( obj );
 }
+
+

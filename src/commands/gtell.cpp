@@ -3,17 +3,17 @@
 
 void do_gtell( Character *ch, char *argument )
 {
-  Character *gch;
+  Character *gch = nullptr;
 
   if ( IsNullOrEmpty( argument) )
     {
-      SendToCharacter( "Tell your group what?\r\n", ch );
+      ch->Echo( "Tell your group what?\r\n" );
       return;
     }
 
   if ( IsBitSet( ch->Flags, PLR_NO_TELL ) )
     {
-      SendToCharacter( "Your message didn't get through!\r\n", ch );
+      ch->Echo( "Your message didn't get through!\r\n" );
       return;
     }
 
@@ -30,9 +30,10 @@ void do_gtell( Character *ch, char *argument )
              still garble though. -- Altrag */
           if ( CharacterKnowsLanguage( gch, ch->Speaking, gch )
                ||  (IsNpc(ch) && !ch->Speaking) )
-            Echo( gch, "%s tells the group '%s'.\r\n", ch->Name, argument );
+            gch->Echo( "%s tells the group '%s'.\r\n", ch->Name, argument );
           else
-            Echo( gch, "%s tells the group '%s'.\r\n", ch->Name, Scramble(argument, ch->Speaking) );
+            gch->Echo( "%s tells the group '%s'.\r\n", ch->Name, Scramble(argument, ch->Speaking) );
         }
     }
 }
+

@@ -9,19 +9,19 @@ void do_suicide( Character *ch, char *argument )
 
   if ( IsNpc(ch) || !ch->PCData )
     {
-      SendToCharacter( "Yeah right!\r\n", ch );
+      ch->Echo("Yeah right!\r\n");
       return;
     }
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "&RIf you really want to delete this character type suicide and your password.\r\n", ch );
+      ch->Echo("&RIf you really want to delete this character type suicide and your password.\r\n");
       return;
     }
 
   if ( StrCmp( EncodeString( argument ), ch->PCData->Password ) )
     {
-      SendToCharacter( "Sorry wrong password.\r\n", ch );
+      ch->Echo("Sorry wrong password.\r\n");
       Log->Info( "%s attempting to commit suicide... WRONG PASSWORD!" , ch->Name );
       return;
     }
@@ -30,7 +30,7 @@ void do_suicide( Character *ch, char *argument )
 
        ||   ( obj->Value[3] != WEAPON_VIBRO_BLADE ) )
     {
-      SendToCharacter( "You need to wield a blade to slit your throat!.\r\n", ch );
+      ch->Echo("You need to wield a blade to slit your throat!.\r\n");
       return;
     }
 
@@ -41,3 +41,4 @@ void do_suicide( Character *ch, char *argument )
   SetCurrentGlobalCharacter(ch);
   RawKill( ch, ch );
 }
+

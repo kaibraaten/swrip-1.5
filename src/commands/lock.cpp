@@ -11,7 +11,7 @@ void do_lock( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Lock what?\r\n", ch );
+      ch->Echo("Lock what?\r\n");
       return;
     }
 
@@ -19,38 +19,38 @@ void do_lock( Character *ch, char *argument )
     {
       if ( !IsBitSet(pexit->Flags, EX_ISDOOR) )
         {
-	  SendToCharacter( "You can't do that.\r\n", ch );
+   ch->Echo("You can't do that.\r\n");
 	  return;
 	}
 
       if ( !IsBitSet(pexit->Flags, EX_CLOSED) )
         {
-	  SendToCharacter( "It's not closed.\r\n", ch );
+   ch->Echo("It's not closed.\r\n");
 	  return;
 	}
 
       if ( pexit->Key < 0 )
         {
-	  SendToCharacter( "It can't be locked.\r\n", ch );
+   ch->Echo("It can't be locked.\r\n");
 	  return;
 	}
 
       if ( !HasKey( ch, pexit->Key) )
         {
-	  SendToCharacter( "You lack the key.\r\n", ch );
+   ch->Echo("You lack the key.\r\n");
 	  return;
 	}
 
       if ( IsBitSet(pexit->Flags, EX_LOCKED) )
         {
-	  SendToCharacter( "It's already locked.\r\n", ch );
+   ch->Echo("It's already locked.\r\n");
 	  return;
 	}
 
       if ( !IsBitSet(pexit->Flags, EX_SECRET)
            || ( !IsNullOrEmpty( pexit->Keyword ) && NiftyIsName( arg, pexit->Keyword )) )
         {
-          SendToCharacter( "*Click*\r\n", ch );
+          ch->Echo("*Click*\r\n");
 	  Act( AT_ACTION, "$n locks the $d.",
 	       ch, NULL, pexit->Keyword, TO_ROOM );
           SetBExitFlag( pexit, EX_LOCKED );
@@ -63,39 +63,41 @@ void do_lock( Character *ch, char *argument )
       /* 'lock object' */
       if ( obj->ItemType != ITEM_CONTAINER )
         {
-	  SendToCharacter( "That's not a container.\r\n", ch );
+   ch->Echo("That's not a container.\r\n");
 	  return;
 	}
 
       if ( !IsBitSet(obj->Value[1], CONT_CLOSED) )
         {
-	  SendToCharacter( "It's not closed.\r\n", ch );
+   ch->Echo("It's not closed.\r\n");
 	  return;
 	}
 
       if ( obj->Value[2] < 0 )
         {
-	  SendToCharacter( "It can't be locked.\r\n", ch );
+   ch->Echo("It can't be locked.\r\n");
 	  return;
 	}
 
       if ( !HasKey( ch, obj->Value[2] ) )
         {
-	  SendToCharacter( "You lack the key.\r\n", ch );
+   ch->Echo("You lack the key.\r\n");
 	  return;
 	}
 
       if ( IsBitSet(obj->Value[1], CONT_LOCKED) )
         {
-	  SendToCharacter( "It's already locked.\r\n", ch );
+   ch->Echo("It's already locked.\r\n");
 	  return;
 	}
 
       SetBit(obj->Value[1], CONT_LOCKED);
-      SendToCharacter( "*Click*\r\n", ch );
+      ch->Echo("*Click*\r\n");
       Act( AT_ACTION, "$n locks $p.", ch, obj, NULL, TO_ROOM );
       return;
     }
 
-  Echo( ch, "You see no %s here.\r\n", arg );
+  ch->Echo("You see no %s here.\r\n", arg );
 }
+
+

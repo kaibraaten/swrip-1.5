@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include <time.h>
 #include "mud.hpp"
+#include "character.hpp"
 
 /*
  * Based on last time modified, show when a player was last on  -Thoric
@@ -17,7 +18,7 @@ void do_last( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Usage: last <playername>\r\n", ch );
+      ch->Echo("Usage: last <playername>\r\n");
       return;
     }
 
@@ -26,10 +27,12 @@ void do_last( Character *ch, char *argument )
 
   if ( stat( buf, &fst ) != -1 )
     {
-      Echo( ch, "%s was last on: %s\r", name, ctime( &fst.st_mtime ) );
+      ch->Echo("%s was last on: %s\r", name, ctime( &fst.st_mtime ) );
     }
   else
     {
-      Echo( ch, "%s was not found.\r\n", name );
+      ch->Echo("%s was not found.\r\n", name );
     }
 }
+
+

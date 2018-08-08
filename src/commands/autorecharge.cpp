@@ -6,33 +6,34 @@
 
 void do_autorecharge(Character *ch, char *argument )
 {
-  int the_chance;
-  Ship *ship;
-  int recharge;
+  int the_chance = 0;
+  Ship *ship = nullptr;
+  int recharge = 0;
 
-  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
+  if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
-  if (  (ship = GetShipFromCoSeat(ch->InRoom->Vnum))  == NULL )
+  if ( (ship = GetShipFromCoSeat(ch->InRoom->Vnum)) == NULL )
     {
-      SendToCharacter("&RYou must be in the co-pilots seat!\r\n",ch);
+      ch->Echo("&RYou must be in the co-pilots seat!\r\n");
       return;
     }
 
-  if ( IsShipAutoflying(ship)  )
+  if ( IsShipAutoflying(ship) )
     {
-      SendToCharacter("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
+      ch->Echo("&RYou'll have to turn off the ships autopilot first.\r\n");
       return;
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel
     : (int)  (ch->PCData->Learned[gsn_shipsystems]) ;
+
   if ( GetRandomPercent() > the_chance )
     {
-      SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
+      ch->Echo("&RYou fail to work the controls properly.\r\n");
       LearnFromFailure( ch, gsn_shipsystems );
       return;
     }
@@ -43,20 +44,20 @@ void do_autorecharge(Character *ch, char *argument )
   if ( !StrCmp(argument,"on" ) )
     {
       ship->AutoRecharge=true;
-      SendToCharacter( "&GYou power up the shields.\r\n", ch);
+      ch->Echo( "&GYou power up the shields.\r\n" );
       EchoToCockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON.");
     }
   else if ( !StrCmp(argument,"off" ) )
     {
       ship->AutoRecharge=false;
-      SendToCharacter( "&GYou shutdown the shields.\r\n", ch);
+      ch->Echo( "&GYou shutdown the shields.\r\n" );
       EchoToCockpit( AT_YELLOW , ship , "Shields OFF. Shield strength set to 0. Autorecharge OFF.");
       ship->Defenses.Shield.Current = 0;
     }
   else if ( !StrCmp(argument,"idle" ) )
     {
       ship->AutoRecharge=false;
-      SendToCharacter( "&GYou let the shields idle.\r\n", ch);
+      ch->Echo( "&GYou let the shields idle.\r\n" );
       EchoToCockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
     }
   else
@@ -64,13 +65,13 @@ void do_autorecharge(Character *ch, char *argument )
       if (ship->AutoRecharge == true)
         {
           ship->AutoRecharge=false;
-          SendToCharacter( "&GYou toggle the shields.\r\n", ch);
+          ch->Echo( "&GYou toggle the shields.\r\n" );
           EchoToCockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
         }
       else
         {
-          ship->AutoRecharge=true;
-          SendToCharacter( "&GYou toggle the shields.\r\n", ch);
+          ship->AutoRecharge = true;
+          ch->Echo( "&GYou toggle the shields.\r\n" );
           EchoToCockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON");
         }
     }
@@ -85,3 +86,4 @@ void do_autorecharge(Character *ch, char *argument )
 
   LearnFromSuccess( ch, gsn_shipsystems );
 }
+

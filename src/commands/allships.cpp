@@ -56,8 +56,8 @@ void do_allships( Character *ch, char *argument )
       data.checkowner = true;
     }
   
-  SendToPager( "&Y\r\nThe following ships are currently formed:\r\n", ch );
-  SendToPager( "\r\n&WShip                               Owner&d\r\n", ch );
+  ch->Echo( "&Y\r\nThe following ships are currently formed:\r\n" );
+  ch->Echo( "\r\n&WShip                               Owner&d\r\n" );
 
   if ( IsImmortal( ch ) && !data.unowned && !data.checkowner && data.type < 0)
     {
@@ -71,7 +71,7 @@ void do_allships( Character *ch, char *argument )
 
   if ( data.count == 0 )
     {
-      SendToPager( "There are no ships currently formed.\r\n", ch );
+      ch->Echo( "There are no ships currently formed.\r\n" );
       return;
     }
 }
@@ -108,37 +108,37 @@ static bool ShowShipVerbose(Ship *ship, void *userData)
     }
   else if (ship->Type == SHIP_REBEL)
     {
-      SetPagerColor( AT_BLOOD, data->ch );
+      SetCharacterColor( AT_BLOOD, data->ch );
     }
   else if (ship->Type == SHIP_IMPERIAL)
     {
-      SetPagerColor( AT_DGREEN, data->ch );
+      SetCharacterColor( AT_DGREEN, data->ch );
     }
   else
     {
-      SetPagerColor( AT_BLUE, data->ch );
+      SetCharacterColor( AT_BLUE, data->ch );
     }
 	
   sprintf( buf, "%-10s(%-10s)", ship->Name, ship->PersonalName );
-  PagerPrintf( data->ch, "&w%-35s %-15s\r\n", buf, ship->Owner );
+  data->ch->Echo( "&w%-35s %-15s\r\n", buf, ship->Owner );
 
   if (ship->Type == MOB_SHIP || ship->Class == SHIP_PLATFORM )
     {
-      PagerPrintf( data->ch, "\r\n");
+      data->ch->Echo("\r\n");
       return true;
     }
 
   if ( !StrCmp(ship->Owner, "Public") )
     {
-      PagerPrintf( data->ch, "%ld to rent.\r\n", GetRentalPrice(ship));
+      data->ch->Echo( "%ld to rent.\r\n", GetRentalPrice(ship));
     }
   else if ( !IsNullOrEmpty( ship->Owner ) )
     {
-      PagerPrintf( data->ch, "%s", "\r\n" );
+      data->ch->Echo( "\r\n" );
     }
   else
     {
-      PagerPrintf( data->ch, "&W%-10s%ld to buy.&R&w\r\n", "", GetShipValue(ship) );
+      data->ch->Echo( "&W%-10s%ld to buy.&R&w\r\n", "", GetShipValue(ship) );
     }
 
   data->count++;
@@ -153,8 +153,9 @@ static bool ShowShipTerse(Ship *ship, void *userData)
   if (ship->Type == MOB_SHIP && ship->Class != SHIP_DEBRIS )
     {
       sprintf( buf, "%s(%s)", ship->Name, ship->PersonalName );
-      PagerPrintf( ch, "&w%-35s %-10s\r\n", buf, ship->Owner );
+      ch->Echo( "&w%-35s %-10s\r\n", buf, ship->Owner );
     }
 
   return true;
 }
+

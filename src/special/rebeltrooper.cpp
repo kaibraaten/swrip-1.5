@@ -34,3 +34,4 @@ bool spec_rebel_trooper( Character *ch )
 
   return false;
 }
+

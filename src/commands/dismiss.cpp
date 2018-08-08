@@ -10,13 +10,13 @@ void do_dismiss( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Dismiss whom?\r\n", ch );
+      ch->Echo( "Dismiss whom?\r\n" );
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
@@ -33,6 +33,7 @@ void do_dismiss( Character *ch, char *argument )
     }
   else
     {
-      SendToCharacter( "You cannot dismiss them.\r\n", ch );
+      ch->Echo( "You cannot dismiss them.\r\n" );
     }
 }
+

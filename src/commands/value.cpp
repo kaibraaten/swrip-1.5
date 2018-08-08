@@ -11,7 +11,7 @@ void do_value( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Value what?\r\n", ch );
+      ch->Echo("Value what?\r\n");
       return;
     }
 
@@ -28,7 +28,7 @@ void do_value( Character *ch, char *argument )
 
   if ( !CanDropObject( ch, obj ) )
     {
-      SendToCharacter( "You can't let go of it!\r\n", ch );
+      ch->Echo("You can't let go of it!\r\n");
       return;
     }
 
@@ -42,3 +42,4 @@ void do_value( Character *ch, char *argument )
   Act( AT_TELL, buf, keeper, obj, ch, TO_VICT );
   ch->Reply = keeper;
 }
+

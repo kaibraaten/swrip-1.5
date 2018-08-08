@@ -1,4 +1,5 @@
 #include "mud.hpp"
+#include "character.hpp"
 
 void do_timecmd( Character *ch, char *argument )
 {
@@ -8,36 +9,37 @@ void do_timecmd( Character *ch, char *argument )
   extern Character *timechar;
   char arg[MAX_INPUT_LENGTH];
 
-  SendToCharacter("Timing\r\n",ch);
+  ch->Echo("Timing\r\n");
   if ( timing )
     return;
   OneArgument(argument, arg);
   if ( !*arg )
     {
-      SendToCharacter( "No command to time.\r\n", ch );
+      ch->Echo("No command to time.\r\n");
       return;
     }
   if ( !StrCmp(arg, "update") )
     {
       if ( timechar )
-        SendToCharacter( "Another person is already timing updates.\r\n", ch );
+        ch->Echo("Another person is already timing updates.\r\n");
       else
         {
           timechar = ch;
-	  SendToCharacter( "Setting up to record next update loop.\r\n", ch );
+   ch->Echo("Setting up to record next update loop.\r\n");
         }
       return;
     }
   SetCharacterColor(AT_PLAIN, ch);
-  SendToCharacter( "Starting timer.\r\n", ch );
+  ch->Echo("Starting timer.\r\n");
   timing = true;
   gettimeofday(&start_time, NULL);
   Interpret(ch, argument);
   gettimeofday(&etime, NULL);
   timing = false;
   SetCharacterColor(AT_PLAIN, ch);
-  SendToCharacter( "Timing complete.\r\n", ch );
+  ch->Echo("Timing complete.\r\n");
   SubtractTimes(&etime, &start_time);
-  Echo( ch, "Timing took %d.%06d seconds.\r\n",
+  ch->Echo("Timing took %d.%06d seconds.\r\n",
              etime.tv_sec, etime.tv_usec );
 }
+

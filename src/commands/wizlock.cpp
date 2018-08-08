@@ -1,4 +1,5 @@
 #include "mud.hpp"
+#include "character.hpp"
 
 void do_wizlock( Character *ch, char *argument )
 {
@@ -6,7 +7,8 @@ void do_wizlock( Character *ch, char *argument )
   wizlock = !wizlock;
 
   if ( wizlock )
-    SendToCharacter( "Game wizlocked.\r\n", ch );
+    ch->Echo("Game wizlocked.\r\n");
   else
-    SendToCharacter( "Game un-wizlocked.\r\n", ch );
+    ch->Echo("Game un-wizlocked.\r\n");
 }
+

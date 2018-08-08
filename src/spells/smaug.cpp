@@ -94,3 +94,4 @@ ch_ret spell_smaug( int sn, int level, Character *ch, void *vo )
     }
   return rNONE;
 }
+

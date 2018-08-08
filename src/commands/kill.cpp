@@ -10,25 +10,25 @@ void do_kill( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Kill whom?\r\n", ch );
+      ch->Echo("Kill whom?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( !IsNpc(victim) )
     {
-      SendToCharacter( "You must MURDER a player.\r\n", ch );
+      ch->Echo("You must MURDER a player.\r\n");
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "You hit yourself.  Ouch!\r\n", ch );
+      ch->Echo("You hit yourself.  Ouch!\r\n");
       HitMultipleTimes( ch, ch, TYPE_UNDEFINED );
       return;
     }
@@ -44,7 +44,7 @@ void do_kill( Character *ch, char *argument )
 
   if ( ch->Position == POS_FIGHTING )
     {
-      SendToCharacter( "You do the best you can!\r\n", ch );
+      ch->Echo("You do the best you can!\r\n");
       return;
     }
 
@@ -54,3 +54,5 @@ void do_kill( Character *ch, char *argument )
   SetWaitState( ch, 1 * PULSE_VIOLENCE );
   HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
 }
+
+

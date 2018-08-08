@@ -589,28 +589,28 @@ static void NannyPressEnter( Descriptor *d, char *argument )
 
   if ( IsBitSet(ch->Flags, PLR_ANSI) )
     {
-      SendToPager( "\033[2J", ch );
+      ch->Echo( "\033[2J" );
     }
   else
     {
-      SendToPager( "\014", ch );
+      ch->Echo( "\014" );
     }
 
   if ( IsImmortal(ch) )
     {
-      SendToPager( "&WImmortal Message of the Day&w\r\n", ch );
+      ch->Echo( "&WImmortal Message of the Day&w\r\n" );
       do_help( ch, "imotd" );
     }
 
   if ( ch->TopLevel > 0 )
     {
-      SendToPager( "\r\n&WMessage of the Day&w\r\n", ch );
+      ch->Echo( "\r\n&WMessage of the Day&w\r\n" );
       do_help( ch, "motd" );
     }
 
   if ( ch->TopLevel >= 100)
     {
-      SendToPager( "\r\n&WAvatar Message of the Day&w\r\n", ch );
+      ch->Echo( "\r\n&WAvatar Message of the Day&w\r\n" );
       do_help( ch, "amotd" );
     }
 
@@ -619,7 +619,7 @@ static void NannyPressEnter( Descriptor *d, char *argument )
       do_help( ch, "nmotd" );
     }
 
-  SendToPager( "\r\n&WPress [ENTER] &Y", ch );
+  ch->Echo( "\r\n&WPress [ENTER] &Y" );
   d->ConnectionState = CON_READ_MOTD;
 }
 
@@ -1101,3 +1101,4 @@ static void FinalizeCharacter( Descriptor *d )
   ch->TopLevel = 0;
   ch->Position = POS_STANDING;
 }
+

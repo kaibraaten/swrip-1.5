@@ -18,7 +18,7 @@ void do_mptransfer( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
   argument = OneArgument( argument, arg1 );
@@ -99,3 +99,4 @@ void do_mptransfer( Character *ch, char *argument )
   CharacterFromRoom( victim );
   CharacterToRoom( victim, location );
 }
+

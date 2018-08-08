@@ -13,7 +13,7 @@ void do_group( Character *ch, char *argument )
       Character *gch = NULL;
 
       SetCharacterColor( AT_GREEN, ch );
-      Echo( ch, "%s's group:\r\n", PERS(ch, ch) );
+      ch->Echo( "%s's group:\r\n", PERS(ch, ch) );
 
       for ( gch = FirstCharacter; gch; gch = gch->Next )
         {
@@ -22,29 +22,28 @@ void do_group( Character *ch, char *argument )
               SetCharacterColor( AT_DGREEN, ch );
 
               if (IsAffectedBy(gch, AFF_POSSESS))
-                Echo( ch,
-                           "[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
-                           gch->TopLevel,
-                           IsNpc(gch) ? "Mob" : RaceTable[gch->Race].Name,
-                           Capitalize( PERS(gch, ch) ),
-			   "????",
-                           "????",
-                           "????",
-                           "????",
-                           "?????"    );
+                ch->Echo( "[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
+                          gch->TopLevel,
+                          IsNpc(gch) ? "Mob" : RaceTable[gch->Race].Name,
+                          Capitalize( PERS(gch, ch) ),
+                          "????",
+                          "????",
+                          "????",
+                          "????",
+                          "?????"    );
 
               else
-                Echo( ch,
-                           "[%2d %s] %-16s %4d/%4d hp %4d/%4d mv\r\n",
-                           gch->TopLevel,
-                           IsNpc(gch) ? "Mob" : RaceTable[gch->Race].Name,
-                           Capitalize( PERS(gch, ch) ),
-                           gch->Hit,
-                           gch->MaxHit,
-                           gch->Move,
-                           gch->MaxMove   );
+                ch->Echo( "[%2d %s] %-16s %4d/%4d hp %4d/%4d mv\r\n",
+                          gch->TopLevel,
+                          IsNpc(gch) ? "Mob" : RaceTable[gch->Race].Name,
+                          Capitalize( PERS(gch, ch) ),
+                          gch->Hit,
+                          gch->MaxHit,
+                          gch->Move,
+                          gch->MaxMove );
             }
         }
+
       return;
     }
 
@@ -55,7 +54,7 @@ void do_group( Character *ch, char *argument )
 
       if ( ch->Leader || ch->Master )
         {
-          SendToCharacter( "You cannot disband a group if you're following someone.\r\n", ch );
+          ch->Echo( "You cannot disband a group if you're following someone.\r\n" );
           return;
         }
 
@@ -67,14 +66,14 @@ void do_group( Character *ch, char *argument )
               gch->Leader = NULL;
               gch->Master = NULL;
               count++;
-              SendToCharacter( "Your group is disbanded.\r\n", gch );
+              ch->Echo( "Your group is disbanded.\r\n" );
             }
         }
 
       if ( count == 0 )
-	SendToCharacter( "You have no group members to disband.\r\n", ch );
+	ch->Echo( "You have no group members to disband.\r\n" );
       else
-        SendToCharacter( "You disband your group.\r\n", ch );
+        ch->Echo( "You disband your group.\r\n" );
 
       return;
     }
@@ -101,12 +100,12 @@ void do_group( Character *ch, char *argument )
 
       if ( count == 0 )
 	{
-	  SendToCharacter( "You have no eligible group members.\r\n", ch );
+	  ch->Echo( "You have no eligible group members.\r\n" );
 	}
       else
         {
           Act( AT_ACTION, "$n groups $s followers.", ch, NULL, NULL, TO_ROOM );
-          SendToCharacter( "You group your followers.\r\n", ch );
+          ch->Echo( "You group your followers.\r\n" );
         }
 
       return;
@@ -114,13 +113,13 @@ void do_group( Character *ch, char *argument )
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
   if ( ch->Master || ( ch->Leader && ch->Leader != ch ) )
     {
-      SendToCharacter( "But you are following someone else!\r\n", ch );
+      ch->Echo( "But you are following someone else!\r\n" );
       return;
     }
 
@@ -147,3 +146,4 @@ void do_group( Character *ch, char *argument )
   Act( AT_ACTION, "You join $n's group.", ch, NULL, victim, TO_VICT );
   Act( AT_ACTION, "$N joins your group.", ch, NULL, victim, TO_CHAR );
 }
+

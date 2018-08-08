@@ -18,16 +18,15 @@ void do_alias( Character *ch, char *argument )
     {
       if (ch->PCData->Aliases.empty())
         {
-          SendToCharacter("You have no aliases defined!\r\n", ch);
+          ch->Echo("You have no aliases defined!\r\n");
           return;
         }
 
-      PagerPrintf( ch, "%-20s What it does\r\n", "Alias" );
+      ch->Echo( "%-20s What it does\r\n", "Alias" );
 
       for(const Alias *alias : ch->PCData->Aliases)
         {
-          PagerPrintf( ch, "%-20s %s\r\n",
-                       alias->Name, alias->Command );
+          ch->Echo( "%-20s %s\r\n", alias->Name, alias->Command );
         }
 
       return;
@@ -41,11 +40,11 @@ void do_alias( Character *ch, char *argument )
         {
 	  UnlinkAlias( ch, alias );
 	  FreeAlias( alias );
-          SendToCharacter("Deleted Alias.\r\n", ch);
+          ch->Echo("Deleted Alias.\r\n");
         }
       else
         {
-          SendToCharacter("That alias does not exist.\r\n", ch);
+          ch->Echo("That alias does not exist.\r\n");
         }
 
       return;
@@ -57,7 +56,7 @@ void do_alias( Character *ch, char *argument )
     {
       alias = AllocateAlias( arg, argument );
       AddAlias( ch, alias );
-      SendToCharacter("Created Alias.\r\n", ch);
+      ch->Echo("Created Alias.\r\n");
     }
   else
     {
@@ -67,6 +66,7 @@ void do_alias( Character *ch, char *argument )
         }
 
       alias->Command  = CopyString(argument);
-      SendToCharacter("Modified Alias.\r\n", ch);
+      ch->Echo("Modified Alias.\r\n");
     }
 }
+

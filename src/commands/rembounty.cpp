@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "bounty.hpp"
+#include "character.hpp"
 
 void do_rembounty( Character *ch, char *argument )
 {
@@ -8,10 +9,11 @@ void do_rembounty( Character *ch, char *argument )
   if ( bounty != NULL )
     {
       RemoveBounty(bounty);
-      Echo( ch, "Done.\r\n" );
+      ch->Echo("Done.\r\n" );
     }
   else
     {
-      Echo( ch, "No such bounty.\r\n" );
+      ch->Echo("No such bounty.\r\n" );
     }
 }
+

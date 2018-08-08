@@ -10,42 +10,44 @@ void do_immortalize( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Syntax: immortalize <char>\r\n", ch );
+      ch->Echo("Syntax: immortalize <char>\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "That player is not here.\r\n", ch);
+      ch->Echo("That player is not here.\r\n");
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPC's.\r\n", ch );
+      ch->Echo("Not on NPC's.\r\n");
       return;
     }
 
   if ( victim->TopLevel != LEVEL_AVATAR )
     {
-      SendToCharacter( "This player is not worthy of immortality yet.\r\n", ch );
+      ch->Echo("This player is not worthy of immortality yet.\r\n");
       return;
     }
 
-  SendToCharacter( "Immortalizing a player...\r\n", ch );
+  ch->Echo("Immortalizing a player...\r\n");
   SetCharacterColor( AT_IMMORT, victim );
   Act( AT_IMMORT, "$n begins to chant softly... then raises $s arms to the sky...",
        ch, NULL, NULL, TO_ROOM );
   SetCharacterColor( AT_WHITE, victim );
-  SendToCharacter( "You suddenly feel very strange...\r\n\r\n", victim );
+  victim->Echo("You suddenly feel very strange...\r\n\r\n");
   SetCharacterColor( AT_LBLUE, victim );
 
   do_help(victim, "M_GODLVL1_" );
   SetCharacterColor( AT_WHITE, victim );
-  SendToCharacter( "You awake... all your possessions are gone.\r\n", victim );
+  victim->Echo("You awake... all your possessions are gone.\r\n");
   while ( victim->FirstCarrying )
     ExtractObject( victim->FirstCarrying );
 
   victim->TopLevel = LEVEL_IMMORTAL;
   victim->Trust = 0;
 }
+
+

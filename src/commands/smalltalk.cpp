@@ -17,70 +17,70 @@ void do_smalltalk( Character *ch , char *argument )
 
   if ( IsNpc(ch) )
     {
-      SendToCharacter( "What would be the point of that.\r\n", ch );
+      ch->Echo("What would be the point of that.\r\n");
     }
 
   argument = OneArgument( argument, arg1 );
 
   if ( ch->Mount )
     {
-      SendToCharacter( "You can't do that while mounted.\r\n", ch );
+      ch->Echo("You can't do that while mounted.\r\n");
       return;
     }
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Create smalltalk with whom?\r\n", ch );
+      ch->Echo("Create smalltalk with whom?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "That's pointless.\r\n", ch );
+      ch->Echo("That's pointless.\r\n");
       return;
     }
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      SendToCharacter( "This isn't a good place to do that.\r\n", ch );
+      ch->Echo("This isn't a good place to do that.\r\n");
       return;
     }
 
   if ( ch->Position == POS_FIGHTING )
     {
-      SendToCharacter( "Interesting combat technique.\r\n" , ch );
+      ch->Echo("Interesting combat technique.\r\n" );
       return;
     }
 
   if ( victim->Position == POS_FIGHTING )
     {
-      SendToCharacter( "They're a little busy right now.\r\n" , ch );
+      ch->Echo("They're a little busy right now.\r\n" );
       return;
     }
 
 
   if ( !IsNpc(victim) || victim->VipFlags == 0 )
     {
-      SendToCharacter( "Diplomacy would be wasted on them.\r\n" , ch );
+      ch->Echo("Diplomacy would be wasted on them.\r\n" );
       return;
     }
 
   if ( ch->Position <= POS_SLEEPING )
     {
-      SendToCharacter( "In your dreams or what?\r\n" , ch );
+      ch->Echo("In your dreams or what?\r\n" );
       return;
     }
 
   if ( victim->Position <= POS_SLEEPING )
     {
-      SendToCharacter( "You might want to wake them first...\r\n" , ch );
+      ch->Echo("You might want to wake them first...\r\n" );
       return;
     }
 
@@ -91,7 +91,7 @@ void do_smalltalk( Character *ch , char *argument )
       /*
        * Failure.
        */
-      SendToCharacter( "You attempt to make smalltalk with them.. but are ignored.\r\n", ch );
+      ch->Echo("You attempt to make smalltalk with them.. but are ignored.\r\n");
       Act( AT_ACTION, "$n is really getting on your nerves with all this chatter!\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n asks $N about the weather but is ignored.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
@@ -105,7 +105,7 @@ void do_smalltalk( Character *ch , char *argument )
       return;
     }
 
-  SendToCharacter( "You strike up a short conversation with them.\r\n", ch );
+  ch->Echo("You strike up a short conversation with them.\r\n");
   Act( AT_ACTION, "$n smiles at you and says, 'hello'.\r\n", ch, NULL, victim, TO_VICT    );
   Act( AT_ACTION, "$n chats briefly with $N.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
@@ -121,13 +121,14 @@ void do_smalltalk( Character *ch , char *argument )
     return;
 
   planet->PopularSupport += 0.2;
-  SendToCharacter( "Popular support for your organization increases slightly.\r\n", ch );
+  ch->Echo("Popular support for your organization increases slightly.\r\n");
 
   GainXP(ch, DIPLOMACY_ABILITY, victim->TopLevel * 10 );
-  Echo( ch , "You gain %d diplomacy experience.\r\n", victim->TopLevel*10 );
+  ch ->Echo("You gain %d diplomacy experience.\r\n", victim->TopLevel*10 );
 
   LearnFromSuccess( ch, gsn_smalltalk );
 
   if ( planet->PopularSupport > 100 )
     planet->PopularSupport = 100;
 }
+

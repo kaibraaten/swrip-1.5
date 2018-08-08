@@ -11,7 +11,7 @@ void do_outcast( Character *ch, char *argument )
 
   if ( IsNpc( ch ) || !IsClanned( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -27,7 +27,7 @@ void do_outcast( Character *ch, char *argument )
     }
   else
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -35,31 +35,31 @@ void do_outcast( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Outcast whom?\r\n", ch );
+      ch->Echo("Outcast whom?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "That player is not here.\r\n", ch);
+      ch->Echo("That player is not here.\r\n");
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPC's.\r\n", ch );
+      ch->Echo("Not on NPC's.\r\n");
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "Kick yourself out of your own clan?\r\n", ch );
+      ch->Echo("Kick yourself out of your own clan?\r\n");
       return;
     }
 
   if ( victim->PCData->ClanInfo.Clan != clan )
     {
-      SendToCharacter( "This player does not belong to your clan!\r\n", ch );
+      ch->Echo("This player does not belong to your clan!\r\n");
       return;
     }
 
@@ -96,3 +96,4 @@ void do_outcast( Character *ch, char *argument )
 
   SaveCharacter( victim );      /* clan gets saved when pfile is saved */
 }
+

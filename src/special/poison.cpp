@@ -18,3 +18,4 @@ bool spec_poison( Character *ch )
 
   return true;
 }
+

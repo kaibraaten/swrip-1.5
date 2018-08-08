@@ -10,13 +10,13 @@ void do_kick( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
+      ch->Echo("You can't concentrate enough for that.\r\n");
       return;
     }
 
   if ( ( victim = GetFightingOpponent( ch ) ) == NULL )
     {
-      SendToCharacter( "You aren't fighting anyone.\r\n", ch );
+      ch->Echo("You aren't fighting anyone.\r\n");
       return;
     }
 
@@ -38,3 +38,5 @@ void do_kick( Character *ch, char *argument )
       global_retcode = InflictDamage( ch, victim, 0, gsn_kick );
     }
 }
+
+

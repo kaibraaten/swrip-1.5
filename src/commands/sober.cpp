@@ -17,19 +17,20 @@ void do_sober( Character *ch, char *argument )
 
   if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( IsNpc( victim ) )
     {
-      SendToCharacter( "Not on mobs.\r\n", ch );
+      ch->Echo("Not on mobs.\r\n");
       return;
     }
 
   if ( victim->PCData )
     victim->PCData->Condition[COND_DRUNK] = 0;
 
-  SendToCharacter( "Ok.\r\n", ch );
-  SendToCharacter( "You feel sober again.\r\n", victim );
+  ch->Echo("Ok.\r\n");
+  victim->Echo("You feel sober again.\r\n");
 }
+

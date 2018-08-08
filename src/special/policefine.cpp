@@ -38,3 +38,4 @@ bool spec_police_fine( Character *ch )
 
   return false;
 }
+

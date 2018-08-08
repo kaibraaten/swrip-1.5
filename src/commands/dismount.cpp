@@ -9,11 +9,12 @@ void do_dismount( Character *ch, char *argument )
 
   if ( (victim = ch->Mount) == NULL )
     {
-      SendToCharacter( "You're not mounted.\r\n", ch );
+      ch->Echo( "You're not mounted.\r\n" );
       return;
     }
 
   SetWaitState( ch, SkillTable[gsn_mount]->Beats );
+
   if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_mount] )
     {
       Act( AT_SKILL, "You dismount $N.", ch, NULL, victim, TO_CHAR );
@@ -36,3 +37,4 @@ void do_dismount( Character *ch, char *argument )
       global_retcode = InflictDamage( ch, ch, 1, TYPE_UNDEFINED );
     }
 }
+

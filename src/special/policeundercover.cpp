@@ -37,3 +37,4 @@ bool spec_police_undercover( Character *ch )
 
   return false;
 }
+

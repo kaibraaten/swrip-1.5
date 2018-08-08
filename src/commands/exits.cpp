@@ -5,27 +5,26 @@
 void do_exits( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
-  Exit *pexit;
-  bool found;
+  bool found = false;
   bool fAuto = !StrCmp( argument, "auto" );
 
   SetCharacterColor( AT_EXITS, ch );
 
   if ( IsBlind( ch ) )
     {
-      Echo( ch, "You can't see a thing!\r\n" );
+      ch->Echo( "You can't see a thing!\r\n" );
       return;
     }
 
   strcpy( buf, fAuto ? "Exits:" : "Obvious exits:\r\n" );
 
-  found = false;
-  for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->Next )
+  for ( const Exit *pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->Next )
     {
       if ( pexit->ToRoom
            &&  !IsBitSet(pexit->Flags, EX_HIDDEN) )
         {
           found = true;
+
           if ( !fAuto )
             {
               if ( IsBitSet(pexit->Flags, EX_CLOSED) )
@@ -66,5 +65,6 @@ void do_exits( Character *ch, char *argument )
   else if ( fAuto )
     strcat( buf, ".\r\n" );
 
-  SendToCharacter( buf, ch );
+  ch->Echo("%s", buf);
 }
+

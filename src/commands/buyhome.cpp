@@ -4,8 +4,6 @@
 
 void do_buyhome( Character *ch, char *argument )
 {
-  Room *room = NULL;
-  Area *pArea = NULL;
   const int houseCost = 100000;
   
   if ( !ch->InRoom )
@@ -16,37 +14,37 @@ void do_buyhome( Character *ch, char *argument )
 
   if ( ch->PlayerHome != NULL )
     {
-      SendToCharacter( "&RYou already have a home!\r\n&w", ch);
+      ch->Echo( "&RYou already have a home!\r\n&w" );
       return;
     }
 
-  room = ch->InRoom;
+  Room *room = ch->InRoom;
 
-  for ( pArea = FirstBSort; pArea; pArea = pArea->NextSort )
+  for ( const Area *pArea = FirstBSort; pArea; pArea = pArea->NextSort )
     {
       if ( room->Area == pArea )
         {
-          SendToCharacter( "&RThis area isn't installed yet!\r\n&w", ch);
+          ch->Echo( "&RThis area isn't installed yet!\r\n&w" );
 	  return;
         }
     }
 
-  if ( !IsBitSet( room->Flags , ROOM_EMPTY_HOME ) )
+  if ( !IsBitSet( room->Flags, ROOM_EMPTY_HOME ) )
     {
-      SendToCharacter( "&RThis room isn't for sale!\r\n&w", ch);
+      ch->Echo( "&RThis room isn't for sale!\r\n&w" );
       return;
     }
 
   if ( ch->Gold < houseCost )
     {
-      Echo( ch, "&RThis room costs %d credits you don't have enough!\r\n&w", houseCost);
+      ch->Echo( "&RThis room costs %d credits you don't have enough!\r\n&w" );
       return;
     }
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Set the room name. A very brief single line room description.\r\n", ch );
-      SendToCharacter( "Usage: Buyhome <Room Name>\r\n", ch );
+      ch->Echo( "Set the room name. A very brief single line room description.\r\n" );
+      ch->Echo( "Usage: Buyhome <Room Name>\r\n" );
       return;
     }
 
@@ -63,3 +61,4 @@ void do_buyhome( Character *ch, char *argument )
   ch->PlayerHome = room;
   do_save( ch , "" );
 }
+

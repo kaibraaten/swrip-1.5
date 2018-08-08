@@ -381,3 +381,4 @@ void LuaLoadCurrentAndMax( lua_State *L, const char *key, int *current, int *mx 
 
   lua_pop( L, 1 );
 }
+

@@ -8,13 +8,13 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 {
   char buf[MAX_INPUT_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  Ship *ship, *eShip;
+  Ship *ship = nullptr, *eShip = nullptr;
 
   strcpy( arg, argument );
 
   if (  (ship = GetShipFromCoSeat(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be in the copilot's seat of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the copilot's seat of a ship to do that!\r\n");
       return;
     }
 
@@ -23,7 +23,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       if ( ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy != ship )
         ship->WeaponSystems.TractorBeam.Tractoring = NULL;
 
-      SendToCharacter("&RYour tractor beam is not trained on a ship.\r\n",ch);
+      ch->Echo("&RYour tractor beam is not trained on a ship.\r\n");
       return;
     }
 
@@ -48,7 +48,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 	       || ship->WeaponSystems.TractorBeam.Tractoring->State == SHIP_LAND ) )
         strcat( buf, "Hangar Approach.\r\n" );
 
-      Echo(ch, "&RCurrent tractor beam settings: %s\r\n", buf);
+      ch->Echo("&RCurrent tractor beam settings: %s\r\n", buf);
       return;
     }
 
@@ -98,13 +98,13 @@ void do_adjusttractorbeam(Character *ch, char *argument )
     {
       if ( GetShipDistanceToShip(ship, eShip) > 100 )
 	{
-          SendToCharacter("&RYou aren't close enough to dock target.\r\n",ch);
+          ch->Echo("&RYou aren't close enough to dock target.\r\n");
           return;
         }
 
       if ( !CanDock( eShip ) || !CanDock( ship ) )
         {
-          SendToCharacter("&RYou have no empty docking port.\r\n",ch);
+          ch->Echo("&RYou have no empty docking port.\r\n");
           return;
         }
 
@@ -118,25 +118,25 @@ void do_adjusttractorbeam(Character *ch, char *argument )
     {
       if ( GetShipDistanceToShip(ship, eShip) > 100 )
         {
-          SendToCharacter("&RYou aren't close enough to the target to pull it into your hangar.\r\n",ch);
+          ch->Echo("&RYou aren't close enough to the target to pull it into your hangar.\r\n");
           return;
         }
 
       if ( !ship->Rooms.Hangar )
         {
-          SendToCharacter("&RYou have no hangar!\r\n",ch);
+          ch->Echo("&RYou have no hangar!\r\n");
           return;
         }
 
       if( !ship->BayOpen )
         {
-          SendToCharacter("&RThe bay is not open.\r\n",ch);
+          ch->Echo("&RThe bay is not open.\r\n");
           return;
         }
 
       if( ship->Class < eShip->Class || eShip->Class == SHIP_PLATFORM || eShip->Class == CAPITAL_SHIP )
         {
-          SendToCharacter("&RThat ship can not land in your bay.\r\n",ch);
+          ch->Echo("&RThat ship can not land in your bay.\r\n");
           return;
         }
 
@@ -150,15 +150,16 @@ void do_adjusttractorbeam(Character *ch, char *argument )
     {
       if ( GetShipDistanceToShip(ship, eShip) > 100 )
         {
-          SendToCharacter("&RYou aren't close enough to the target to pull it off its position.\r\n",ch);
+          ch->Echo("&RYou aren't close enough to the target to pull it off its position.\r\n");
           return;
         }
 
       if ( !eShip->Docked )
         {
-          SendToCharacter("&RYour target is not docked.\r\n",ch);
+          ch->Echo("&RYour target is not docked.\r\n");
           return;
         }
+
       EchoToCockpit( AT_YELLOW, ship, "Tractor beam set to undock target.\r\n" );
       eShip->State = SHIP_TRACTORED;
       eShip->Docked->WeaponSystems.TractorBeam.State = SHIP_DISABLED;
@@ -170,3 +171,4 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       return;
     }
 }
+

@@ -12,7 +12,7 @@ void do_circle( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
+      ch->Echo( "You can't concentrate enough for that.\r\n" );
       return;
     }
 
@@ -20,25 +20,25 @@ void do_circle( Character *ch, char *argument )
 
   if ( ch->Mount )
     {
-      SendToCharacter( "You can't circle while mounted.\r\n", ch );
+      ch->Echo( "You can't circle while mounted.\r\n" );
       return;
     }
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Circle around whom?\r\n", ch );
+      ch->Echo( "Circle around whom?\r\n" );
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "How can you sneak up on yourself?\r\n", ch );
+      ch->Echo( "How can you sneak up on yourself?\r\n" );
       return;
     }
 
@@ -49,19 +49,19 @@ void do_circle( Character *ch, char *argument )
        || ( obj->Value[OVAL_WEAPON_TYPE] != WEAPON_FORCE_PIKE
 	    && obj->Value[OVAL_WEAPON_TYPE] != WEAPON_VIBRO_BLADE ) )
     {
-      SendToCharacter( "You need to wield a piercing or stabbing weapon.\r\n", ch );
+      ch->Echo( "You need to wield a piercing or stabbing weapon.\r\n" );
       return;
     }
 
   if ( !ch->Fighting )
     {
-      SendToCharacter( "You can't circle when you aren't fighting.\r\n", ch);
+      ch->Echo( "You can't circle when you aren't fighting.\r\n" );
       return;
     }
 
   if ( !victim->Fighting )
     {
-      SendToCharacter( "You can't circle around a person who is not fighting.\r\n", ch );
+      ch->Echo( "You can't circle around a person who is not fighting.\r\n" );
       return;
     }
 
@@ -89,3 +89,4 @@ void do_circle( Character *ch, char *argument )
       global_retcode = InflictDamage( ch, victim, 0, gsn_circle );
     }
 }
+

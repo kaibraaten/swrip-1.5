@@ -10,7 +10,7 @@ void do_remove( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Remove what?\r\n", ch );
+      ch->Echo("Remove what?\r\n");
       return;
     }
 
@@ -31,7 +31,7 @@ void do_remove( Character *ch, char *argument )
 
   if ( ( obj = GetWornObject( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "You are not using that item.\r\n", ch );
+      ch->Echo("You are not using that item.\r\n");
       return;
     }
 
@@ -44,3 +44,4 @@ void do_remove( Character *ch, char *argument )
 
   RemoveObject( ch, obj->WearLoc, true );
 }
+

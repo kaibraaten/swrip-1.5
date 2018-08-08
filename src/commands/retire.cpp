@@ -11,45 +11,46 @@ void do_retire( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Retire whom?\r\n", ch );
+      ch->Echo("Retire whom?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPC's.\r\n", ch );
+      ch->Echo("Not on NPC's.\r\n");
       return;
     }
 
   if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      SendToCharacter( "You failed.\r\n", ch );
+      ch->Echo("You failed.\r\n");
       return;
     }
 
   if ( victim->TopLevel < LEVEL_CREATOR )
     {
-      SendToCharacter( "The minimum level for retirement is savior.\r\n", ch );
+      ch->Echo("The minimum level for retirement is savior.\r\n");
       return;
     }
 
   if ( IsRetiredImmortal( victim ) )
     {
       RemoveBit( victim->PCData->Flags, PCFLAG_RETIRED );
-      Echo( ch, "%s returns from retirement.\r\n", victim->Name );
-      Echo( victim, "%s brings you back from retirement.\r\n", ch->Name );
+      ch->Echo("%s returns from retirement.\r\n", victim->Name );
+      victim->Echo("%s brings you back from retirement.\r\n", ch->Name );
     }
   else
     {
       SetBit( victim->PCData->Flags, PCFLAG_RETIRED );
-      Echo( ch, "%s is now a retired immortal.\r\n", victim->Name );
-      Echo( victim, "Courtesy of %s, you are now a retired immortal.\r\n",
+      ch->Echo("%s is now a retired immortal.\r\n", victim->Name );
+      victim->Echo("Courtesy of %s, you are now a retired immortal.\r\n",
 		 ch->Name );
     }
 }
+

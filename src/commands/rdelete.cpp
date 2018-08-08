@@ -11,14 +11,14 @@ void do_rdelete( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Delete which room?\r\n", ch );
+      ch->Echo("Delete which room?\r\n");
       return;
     }
 
   /* Find the room. */
   if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "No such location.\r\n", ch );
+      ch->Echo("No such location.\r\n");
       return;
     }
 
@@ -27,14 +27,14 @@ void do_rdelete( Character *ch, char *argument )
        && ( location->Vnum < ch->PCData->Build.VnumRanges.Room.First
 	    || location->Vnum > ch->PCData->Build.VnumRanges.Room.Last ) )
     {
-      SendToCharacter( "That room is not in your assigned range.\r\n", ch );
+      ch->Echo("That room is not in your assigned range.\r\n");
       return;
     }
 
   /* We could go to the trouble of clearing out the room, but why? */
   if ( location->FirstPerson || location->FirstContent )
     {
-      SendToCharacter( "The room must be empty first.\r\n", ch );
+      ch->Echo("The room must be empty first.\r\n");
       return;
     }
 
@@ -44,5 +44,6 @@ void do_rdelete( Character *ch, char *argument )
      variable. */
   DeleteRoom( location );
 
-  SendToCharacter( "Room deleted.\r\n", ch );
+  ch->Echo("Room deleted.\r\n");
 }
+

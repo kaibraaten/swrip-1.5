@@ -14,31 +14,31 @@ void do_clone( Character *ch, char *argument )
   char oldbestowments[MAX_STRING_LENGTH] = { '\0' };
   int experience[MAX_ABILITY];
   int skill_level[MAX_ABILITY];
-  int flags = 0, ability = 0;
+  int flags = 0;
   short frc = 0, change = 0, change2 = 0, frc_level = 0, low_frc = 0, mana = 0;
   Room *home = NULL;
 
   if ( IsNpc(ch) )
     {
-      Echo( ch, "Yeah right!\r\n" );
+      ch->Echo( "Yeah right!\r\n" );
       return;
     }
 
   if ( ch->InRoom->Vnum != ROOM_VNUM_CLONING_PAY_COUNTER )
     {
-      Echo( ch, "You can't do that here!\r\n" );
+      ch->Echo( "You can't do that here!\r\n" );
       return;
     }
 
   if ( ch->PCData->Clones >= 3 && SysData.PermaDeath )
     {
-      Echo( ch, "The medical droids tell you your genetical material is too far degraded.\r\n");
+      ch->Echo( "The medical droids tell you your genetical material is too far degraded.\r\n");
       return;
     }
 
   if ( ch->Gold < ch->TopLevel * 200 && SysData.PermaDeath )
     {
-      Echo( ch, "You don't have enough credits... You need %d.\r\n" , ch->TopLevel*200 );
+      ch->Echo( "You don't have enough credits... You need %d.\r\n" , ch->TopLevel * 200 );
       return;
     }
   else
@@ -46,10 +46,10 @@ void do_clone( Character *ch, char *argument )
       if( SysData.PermaDeath )
 	{
 	  ch->Gold -= ch->TopLevel*200;
-	  Echo( ch, "You pay %d credits for cloning.\r\n" , ch->TopLevel*200 );
+	  ch->Echo( "You pay %d credits for cloning.\r\n" , ch->TopLevel*200 );
 	}
       
-      Echo( ch, "You are escorted into a small room.\r\n\r\n" );
+      ch->Echo( "You are escorted into a small room.\r\n\r\n" );
     }
 
   if( SysData.PermaDeath )
@@ -138,9 +138,9 @@ void do_clone( Character *ch, char *argument )
 
       if( ch->PCData->Clones == 2 )
 	{
-	  Echo( ch, "The medical droids tell you your genetical material has degraded significantly.\r\n");
+	  ch->Echo( "The medical droids tell you your genetical material has degraded significantly.\r\n");
 
-	  for(ability = 0; ability < MAX_ABILITY; ability++)
+	  for(int ability = 0; ability < MAX_ABILITY; ability++)
 	    {
 	      experience[ability] = GetAbilityXP( ch, ability );
 	      skill_level[ability] = GetAbilityLevel( ch, ability );
@@ -166,11 +166,13 @@ void do_clone( Character *ch, char *argument )
 	  FreeMemory( ch->PCData->ClanInfo.ClanName );
 	  ch->PCData->ClanInfo.ClanName = CopyString( clanname );
 	  FreeMemory( ch->PCData->Bestowments );
-	  ch->PCData->Bestowments = CopyString( clanname );
+	  ch->PCData->Bestowments = CopyString( bestowments );
 	}
       else
-	SaveClone( ch );
-
+        {
+          SaveClone( ch );
+        }
+      
       ch->Stats.PermFrc = frc;
 
       SetAbilityLevel( ch, FORCE_ABILITY, frc_level );
@@ -179,7 +181,7 @@ void do_clone( Character *ch, char *argument )
 
       if( ch->PCData->Clones == 2 )
 	{
-	  for(ability = 0; ability < MAX_ABILITY; ability++)
+	  for(int ability = 0; ability < MAX_ABILITY; ability++)
 	    {
 	      SetAbilityXP( ch, ability, experience[ability] );
 	      SetAbilityLevel( ch, ability, skill_level[ability] );
@@ -199,7 +201,8 @@ void do_clone( Character *ch, char *argument )
   CharacterToRoom( ch, GetRoom( ROOM_VNUM_CLONING_CLINIC ) );
   do_look( ch , "" );
 
-  Echo( ch, "\r\n&WA small tissue sample is taken from your arm.\r\n" );
-  Echo( ch, "&ROuch!\r\n\r\n" );
-  Echo( ch, "&WYou have been succesfully cloned.\r\n" );
+  ch->Echo( "\r\n&WA small tissue sample is taken from your arm.\r\n" );
+  ch->Echo( "&ROuch!\r\n\r\n" );
+  ch->Echo( "&WYou have been succesfully cloned.\r\n" );
 }
+

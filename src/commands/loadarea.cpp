@@ -13,7 +13,7 @@ void do_loadarea( Character *ch, char *argument )
   if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_AVATAR || !ch->PCData
        || ( !IsNullOrEmpty( argument ) && !ch->PCData->Build.Area) )
     {
-      SendToCharacter( "You don't have an assigned area to load.\r\n", ch );
+      ch->Echo("You don't have an assigned area to load.\r\n");
       return;
     }
 
@@ -37,41 +37,43 @@ void do_loadarea( Character *ch, char *argument )
       if ( IsNpc(ch) || ( GetTrustLevel(ch) < LEVEL_GREATER
                            &&   tarea && !IsName( tarea->Filename, ch->PCData->Bestowments ) ) )
         {
-          SendToCharacter( "You can only load areas you have permission for.\r\n", ch );
+          ch->Echo("You can only load areas you have permission for.\r\n");
           return;
         }
 
       if ( !found )
         {
-          SendToCharacter( "Area not found.\r\n", ch );
+          ch->Echo("Area not found.\r\n");
           return;
         }
     }
 
   if ( !tarea )
     {
-      SendToCharacter( "No area to load.\r\n", ch );
+      ch->Echo("No area to load.\r\n");
       return;
     }
 
   /* Stops char from loading when already loaded - Scryn 8/11 */
   if ( IsBitSet ( tarea->Status, AREA_LOADED) )
     {
-      SendToCharacter( "Your area is already loaded.\r\n", ch );
+      ch->Echo("Your area is already loaded.\r\n");
       return;
     }
   sprintf( filename, "%s%s", BUILD_DIR, tarea->Filename );
-  SendToCharacter( "Loading...\r\n", ch );
+  ch->Echo("Loading...\r\n");
   LoadAreaFile( tarea, filename );
-  SendToCharacter( "Linking exits...\r\n", ch );
+  ch->Echo("Linking exits...\r\n");
   FixAreaExits( tarea );
   if ( tarea->FirstReset )
     {
       tmp = tarea->NumberOfPlayers;
       tarea->NumberOfPlayers = 0;
-      SendToCharacter( "Resetting area...\r\n", ch );
+      ch->Echo("Resetting area...\r\n");
       ResetArea( tarea );
       tarea->NumberOfPlayers = tmp;
     }
-  SendToCharacter( "Done.\r\n", ch );
+  ch->Echo("Done.\r\n");
 }
+
+

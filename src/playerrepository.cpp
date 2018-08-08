@@ -46,3 +46,4 @@ PlayerRepository *NewPlayerRepository()
 {
   return new InMemoryPlayerRepository();
 }
+

@@ -11,7 +11,6 @@ void do_calculate_diff(Character *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
-  char buf[MAX_INPUT_LENGTH];
   int the_chance = 0, distance = 0;
   Ship *ship = nullptr;
   bool found = false;
@@ -22,59 +21,64 @@ void do_calculate_diff(Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   if ( ship->Class > SHIP_PLATFORM )
     {
-      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
+      ch->Echo("&RThis isn't a spacecraft!\r\n");
       return;
     }
 
   if (  (ship = GetShipFromNavSeat(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be at a nav computer to calculate jumps.\r\n",ch);
+      ch->Echo("&RYou must be at a nav computer to calculate jumps.\r\n");
       return;
     }
 
   if ( IsShipAutoflying(ship)  )
     {
-      SendToCharacter("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
+      ch->Echo("&RYou'll have to turn off the ships autopilot first....\r\n");
       return;
     }
 
   if  ( ship->Class == SHIP_PLATFORM )
     {
-      SendToCharacter( "&RAnd what exactly are you going to calculate...?\r\n" , ch );
+      ch->Echo( "&RAnd what exactly are you going to calculate...?\r\n" );
       return;
     }
+
   if (ship->Hyperdrive.Speed == 0)
     {
-      SendToCharacter("&RThis ship is not equipped with a hyperdrive!\r\n",ch);
+      ch->Echo("&RThis ship is not equipped with a hyperdrive!\r\n");
       return;
     }
+
   if (ship->State == SHIP_LANDED)
     {
-      SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
+      ch->Echo("&RYou can't do that until after you've launched!\r\n");
       return;
     }
+
   if (ship->Spaceobject == NULL)
     {
-      SendToCharacter("&RYou can only do that in realspace.\r\n",ch);
+      ch->Echo("&RYou can only do that in realspace.\r\n");
       return;
     }
   
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter("&WFormat: Calculate <spaceobject> <entry x> <entry y> <entry z>\r\n&wPossible destinations:\r\n",ch);
+      ch->Echo("&WFormat: Calculate <spaceobject> <entry x> <entry y> <entry z>\r\n&wPossible destinations:\r\n");
       return;
     }
+
   the_chance = IsNpc(ch) ? ch->TopLevel
     : (int)  (ch->PCData->Learned[gsn_navigation]) ;
+
   if ( GetRandomPercent() > the_chance )
     {
-      SendToCharacter("&RYou cant seem to figure the charts out today.\r\n",ch);
+      ch->Echo("&RYou cant seem to figure the charts out today.\r\n");
       LearnFromFailure( ch, gsn_navigation );
       return;
     }
@@ -88,7 +92,7 @@ void do_calculate_diff(Character *ch, char *argument )
     }
   else
     {
-      SendToCharacter("&WFormat: Calculate x y z&R&w\r\n",ch);
+      ch->Echo("&WFormat: Calculate x y z&R&w\r\n");
       return;
     }
 
@@ -96,7 +100,7 @@ void do_calculate_diff(Character *ch, char *argument )
 
   if ( !found )
     {
-      SendToCharacter( "&RYou can't seem to find that spacial object on your charts.\r\n", ch);
+      ch->Echo( "&RYou can't seem to find that spacial object on your charts.\r\n");
       ship->CurrentJump = NULL;
       return;
     }
@@ -147,8 +151,7 @@ void do_calculate_diff(Character *ch, char *argument )
 
   ship->OriginalHyperdistance = ship->Hyperdistance;
 
-  sprintf(buf, "&GHyperspace course set. Estimated distance: %d\r\nReady for the jump to lightspeed.\r\n", ship->Hyperdistance );
-  SendToCharacter( buf, ch);
+  ch->Echo("&GHyperspace course set. Estimated distance: %d\r\nReady for the jump to lightspeed.\r\n", ship->Hyperdistance );
   EchoToDockedShip( AT_YELLOW , ship, "The docking port link shows a new course being calculated." );
 
   Act( AT_PLAIN, "$n does some calculations using the ships computer.", ch,
@@ -158,3 +161,4 @@ void do_calculate_diff(Character *ch, char *argument )
 
   SetWaitState( ch , 2*PULSE_VIOLENCE );
 }
+

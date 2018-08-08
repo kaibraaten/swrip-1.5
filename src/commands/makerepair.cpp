@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "shop.hpp"
+#include "character.hpp"
 
 void do_makerepair( Character *ch, char *argument )
 {
@@ -9,7 +10,7 @@ void do_makerepair( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: makerepair <mobvnum>\r\n", ch );
+      ch->Echo("Usage: makerepair <mobvnum>\r\n");
       return;
     }
 
@@ -17,7 +18,7 @@ void do_makerepair( Character *ch, char *argument )
 
   if ( (mob = GetProtoMobile(vnum)) == NULL )
     {
-      SendToCharacter( "Mobile not found.\r\n", ch );
+      ch->Echo("Mobile not found.\r\n");
       return;
     }
 
@@ -26,7 +27,7 @@ void do_makerepair( Character *ch, char *argument )
 
   if ( mob->RepairShop )
     {
-      SendToCharacter( "This mobile already has a repair shop.\r\n", ch );
+      ch->Echo("This mobile already has a repair shop.\r\n");
       return;
     }
 
@@ -39,5 +40,6 @@ void do_makerepair( Character *ch, char *argument )
   repair->BusinessHours.Open     = 0;
   repair->BusinessHours.Close    = 23;
   mob->RepairShop            = repair;
-  SendToCharacter( "Done.\r\n", ch );
+  ch->Echo("Done.\r\n");
 }
+

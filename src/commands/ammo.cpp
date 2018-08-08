@@ -3,68 +3,69 @@
 
 void do_ammo( Character *ch, char *argument )
 {
-  Object *wield;
-  Object *obj;
+  Object *ammo = nullptr;
   bool checkammo = false;
-  int charge =0;
+  int charge = 0;
+  Object *wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
 
-  obj = NULL;
-  wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
-  if (wield)
+  if (wield != nullptr)
     {
-      obj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
-      if (!obj)
-        obj = GetEquipmentOnCharacter( ch, WEAR_HOLD );
+      ammo = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
+
+      if (ammo == nullptr)
+        ammo = GetEquipmentOnCharacter( ch, WEAR_HOLD );
     }
   else
     {
       wield = GetEquipmentOnCharacter( ch, WEAR_HOLD );
-      obj = NULL;
+      ammo = NULL;
     }
 
-  if (!wield || wield->ItemType != ITEM_WEAPON )
+  if (wield == nullptr || wield->ItemType != ITEM_WEAPON )
     {
-      SendToCharacter( "&RYou don't seem to be holding a weapon.\r\n&w", ch);
+      ch->Echo( "&RYou don't seem to be holding a weapon.\r\n&w" );
       return;
     }
 
-  if ( wield->Value[3] == WEAPON_BLASTER )
+  if ( wield->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER )
     {
 
-      if ( obj && obj->ItemType != ITEM_AMMO )
+      if ( ammo != nullptr && ammo->ItemType != ITEM_AMMO )
         {
-          SendToCharacter( "&RYour hands are too full to reload your blaster.\r\n&w", ch);
+          ch->Echo( "&RYour hands are too full to reload your blaster.\r\n&w" );
           return;
         }
 
-      if (obj)
+      if (ammo != nullptr)
         {
-          if ( obj->Value[0] > wield->Value[5] )
+          if ( ammo->Value[OVAL_AMMO_CHARGE] > wield->Value[OVAL_WEAPON_MAX_CHARGE] )
             {
-              SendToCharacter( "That cartridge is too big for your blaster.", ch);
+              ch->Echo( "That cartridge is too big for your blaster." );
               return;
             }
-          UnequipCharacter( ch, obj );
+
+          UnequipCharacter( ch, ammo );
           checkammo = true;
-          charge = obj->Value[0];
-          SeparateOneObjectFromGroup( obj );
-          ExtractObject( obj );
+          charge = ammo->Value[OVAL_AMMO_CHARGE];
+          SeparateOneObjectFromGroup( ammo );
+          ExtractObject( ammo );
         }
       else
         {
-          for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
+          for ( ammo = ch->LastCarrying; ammo; ammo = ammo->PreviousContent )
             {
-              if ( obj->ItemType == ITEM_AMMO)
+              if ( ammo->ItemType == ITEM_AMMO)
                 {
-                  if ( obj->Value[0] > wield->Value[5] )
+                  if ( wield->Value[OVAL_WEAPON_MAX_CHARGE] < ammo->Value[OVAL_AMMO_CHARGE] )
                     {
-                      SendToCharacter( "That cartridge is too big for your blaster.", ch);
+                      ch->Echo( "That cartridge is too big for your blaster." );
                       continue;
                     }
+
                   checkammo = true;
-                  charge = obj->Value[0];
-                  SeparateOneObjectFromGroup( obj );
-                  ExtractObject( obj );
+                  charge = ammo->Value[OVAL_AMMO_CHARGE];
+                  SeparateOneObjectFromGroup( ammo );
+                  ExtractObject( ammo );
                   break;
                 }
             }
@@ -72,51 +73,51 @@ void do_ammo( Character *ch, char *argument )
 
       if (!checkammo)
         {
-          SendToCharacter( "&RYou don't seem to have any ammo to reload your blaster with.\r\n&w", ch);
+          ch->Echo( "&RYou don't seem to have any ammo to reload your blaster with.\r\n&w" );
           return;
         }
 
-      Echo( ch, "You replace your ammunition cartridge.\r\nYour blaster is charged with %d shots at high power to %d shots on low.\r\n", charge / 5, charge );
+      ch->Echo( "You replace your ammunition cartridge.\r\nYour blaster is charged with %d shots at high power to %d shots on low.\r\n", charge / 5, charge );
       Act( AT_PLAIN, "$n replaces the ammunition cell in $p.", ch, wield, NULL, TO_ROOM );
-
     }
-  else  if ( wield->Value[3] == WEAPON_BOWCASTER )
+  else if ( wield->Value[OVAL_WEAPON_TYPE] == WEAPON_BOWCASTER )
     {
-
-      if ( obj && obj->ItemType != ITEM_BOLT )
+      if ( ammo != nullptr && ammo->ItemType != ITEM_BOLT )
         {
-          SendToCharacter( "&RYour hands are too full to reload your bowcaster.\r\n&w", ch);
+          ch->Echo( "&RYour hands are too full to reload your bowcaster.\r\n&w" );
           return;
         }
 
-      if (obj)
+      if (ammo != nullptr)
         {
-          if ( obj->Value[0] > wield->Value[5] )
+          if ( ammo->Value[OVAL_AMMO_CHARGE] > wield->Value[OVAL_WEAPON_MAX_CHARGE] )
             {
-              SendToCharacter( "That cartridge is too big for your bowcaster.", ch);
+              ch->Echo( "That cartridge is too big for your bowcaster." );
               return;
             }
-          UnequipCharacter( ch, obj );
+
+          UnequipCharacter( ch, ammo );
           checkammo = true;
-          charge = obj->Value[0];
-          SeparateOneObjectFromGroup( obj );
-          ExtractObject( obj );
+          charge = ammo->Value[OVAL_AMMO_CHARGE];
+          SeparateOneObjectFromGroup( ammo );
+          ExtractObject( ammo );
         }
       else
         {
-          for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
+          for ( ammo = ch->LastCarrying; ammo; ammo = ammo->PreviousContent )
             {
-              if ( obj->ItemType == ITEM_BOLT)
+              if ( ammo->ItemType == ITEM_BOLT)
                 {
-                  if ( obj->Value[0] > wield->Value[5] )
+                  if ( ammo->Value[OVAL_AMMO_CHARGE] > wield->Value[OVAL_WEAPON_MAX_CHARGE] )
                     {
-                      SendToCharacter( "That cartridge is too big for your bowcaster.", ch);
+                      ch->Echo( "That cartridge is too big for your bowcaster." );
                       continue;
                     }
+
                   checkammo = true;
-		  charge = obj->Value[0];
-                  SeparateOneObjectFromGroup( obj );
-                  ExtractObject( obj );
+		  charge = ammo->Value[OVAL_AMMO_CHARGE];
+                  SeparateOneObjectFromGroup( ammo );
+                  ExtractObject( ammo );
                   break;
                 }
             }
@@ -124,41 +125,40 @@ void do_ammo( Character *ch, char *argument )
 
       if (!checkammo)
         {
-          SendToCharacter( "&RYou don't seem to have any quarrels to reload your bowcaster with.\r\n&w", ch);
+          ch->Echo( "&RYou don't seem to have any quarrels to reload your bowcaster with.\r\n&w" );
           return;
         }
 
-      Echo( ch, "You replace your quarrel pack.\r\nYour bowcaster is charged with %d energy bolts.\r\n", charge );
+      ch->Echo( "You replace your quarrel pack.\r\nYour bowcaster is charged with %d energy bolts.\r\n", charge );
       Act( AT_PLAIN, "$n replaces the quarrels in $p.", ch, wield, NULL, TO_ROOM );
-
     }
   else
     {
 
-      if ( obj && obj->ItemType != ITEM_BATTERY )
+      if ( ammo && ammo->ItemType != ITEM_BATTERY )
         {
-          SendToCharacter( "&RYour hands are too full to replace the power cell.\r\n&w", ch);
+          ch->Echo( "&RYour hands are too full to replace the power cell.\r\n&w" );
           return;
         }
 
-      if (obj)
+      if (ammo != nullptr)
         {
-          UnequipCharacter( ch, obj );
+          UnequipCharacter( ch, ammo );
           checkammo = true;
-          charge = obj->Value[0];
-          SeparateOneObjectFromGroup( obj );
-          ExtractObject( obj );
+          charge = ammo->Value[OVAL_AMMO_CHARGE];
+          SeparateOneObjectFromGroup( ammo );
+          ExtractObject( ammo );
         }
       else
         {
-          for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
+          for ( ammo = ch->LastCarrying; ammo; ammo = ammo->PreviousContent )
             {
-              if ( obj->ItemType == ITEM_BATTERY)
+              if ( ammo->ItemType == ITEM_BATTERY)
                 {
                   checkammo = true;
-                  charge = obj->Value[0];
-                  SeparateOneObjectFromGroup( obj );
-                  ExtractObject( obj );
+                  charge = ammo->Value[OVAL_AMMO_CHARGE];
+                  SeparateOneObjectFromGroup( ammo );
+                  ExtractObject( ammo );
 		  break;
                 }
             }
@@ -166,32 +166,33 @@ void do_ammo( Character *ch, char *argument )
 
       if (!checkammo)
         {
-          SendToCharacter( "&RYou don't seem to have a power cell.\r\n&w", ch);
+          ch->Echo( "&RYou don't seem to have a power cell.\r\n&w" );
           return;
         }
 
-      if (wield->Value[3] == WEAPON_LIGHTSABER )
+      if (wield->Value[OVAL_WEAPON_TYPE] == WEAPON_LIGHTSABER )
         {
-          Echo( ch, "You replace your power cell.\r\nYour lightsaber is charged to %d/%d units.\r\n", charge, charge );
+          ch->Echo( "You replace your power cell.\r\nYour lightsaber is charged to %d/%d units.\r\n", charge, charge );
           Act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
           Act( AT_PLAIN, "$p ignites with a bright glow.", ch, wield, NULL, TO_ROOM );
         }
-      else if (wield->Value[3] == WEAPON_VIBRO_BLADE )
+      else if (wield->Value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE )
         {
-          Echo( ch, "You replace your power cell.\r\nYour vibro-blade is charged to %d/%d units.\r\n", charge, charge );
+          ch->Echo( "You replace your power cell.\r\nYour vibro-blade is charged to %d/%d units.\r\n", charge, charge );
           Act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
         }
-      else if (wield->Value[3] == WEAPON_FORCE_PIKE )
+      else if (wield->Value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE )
         {
-          Echo( ch, "You replace your power cell.\r\nYour force-pike is charged to %d/%d units.\r\n", charge, charge );
+          ch->Echo( "You replace your power cell.\r\nYour force-pike is charged to %d/%d units.\r\n", charge, charge );
           Act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
         }
       else
         {
-          Echo( ch, "You feel very foolish.\r\n" );
+          ch->Echo( "You feel very foolish.\r\n" );
           Act( AT_PLAIN, "$n tries to jam a power cell into $p.", ch, wield, NULL, TO_ROOM );
         }
     }
 
-  wield->Value[4] = charge;
+  wield->Value[OVAL_WEAPON_CHARGE] = charge;
 }
+

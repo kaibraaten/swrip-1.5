@@ -16,7 +16,7 @@ void do_mp_restore( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) || ( ch->Desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
   argument = OneArgument( argument, arg1 );
@@ -24,21 +24,21 @@ void do_mp_restore( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "mprestore whom?\r\n", ch );
+      ch->Echo("mprestore whom?\r\n");
       ProgBug( "Mprestore: invalid argument1", ch );
       return;
     }
 
   if ( IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "mprestore how many hps?\r\n", ch );
+      ch->Echo("mprestore how many hps?\r\n");
       ProgBug( "Mprestore: invalid argument2", ch );
       return;
     }
 
   if ( ( victim = GetCharacterInRoomMudProg( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "Victim must be in room.\r\n", ch );
+      ch->Echo("Victim must be in room.\r\n");
       ProgBug( "Mprestore: victim not in room", ch );
       return;
     }
@@ -47,10 +47,11 @@ void do_mp_restore( Character *ch, char *argument )
 
   if( hp < 0 || hp > 32000 )
     {
-      SendToCharacter( "Mprestore how much?\r\n", ch );
+      ch->Echo("Mprestore how much?\r\n");
       ProgBug( "Mprestore: invalid (nonexistent?) argument", ch );
       return;
     }
   hp += victim->Hit;
   victim->Hit = (hp > SHRT_MAX || hp < 0 || hp > victim->MaxHit) ? victim->MaxHit : hp;
 }
+

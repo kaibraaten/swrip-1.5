@@ -18,28 +18,29 @@ void do_oassign( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || o_lo < 0 || o_hi < 0 )
     {
-      SendToCharacter( "Syntax: oassign <who> <low> <high>\r\n", ch );
+      ch->Echo("Syntax: oassign <who> <low> <high>\r\n");
       return;
     }
   if ( (victim = GetCharacterAnywhere( ch, arg1 )) == NULL )
     {
-      SendToCharacter( "They don't seem to be around.\r\n", ch );
+      ch->Echo("They don't seem to be around.\r\n");
       return;
     }
   if ( IsNpc( victim ) || GetTrustLevel( victim ) < LEVEL_CREATOR )
     {
-      SendToCharacter( "They wouldn't know what to do with an object range.\r\n", ch );
+      ch->Echo("They wouldn't know what to do with an object range.\r\n");
       return;
     }
   if ( o_lo > o_hi )
     {
-      SendToCharacter( "Unacceptable object range.\r\n", ch );
+      ch->Echo("Unacceptable object range.\r\n");
       return;
     }
   victim->PCData->Build.VnumRanges.Object.First = o_lo;
   victim->PCData->Build.VnumRanges.Object.Last = o_hi;
   AssignAreaTo( victim );
-  SendToCharacter( "Done.\r\n", ch );
-  Echo( victim, "%s has assigned you the object vnum range %d - %d.\r\n",
+  ch->Echo("Done.\r\n");
+  victim->Echo("%s has assigned you the object vnum range %d - %d.\r\n",
              ch->Name, o_lo, o_hi );
 }
+

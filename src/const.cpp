@@ -3468,3 +3468,4 @@ int GetShipFlag(const std::string &flag)
 {
   return GetInArray( flag, ShipFlags, StrCmp );
 }
+

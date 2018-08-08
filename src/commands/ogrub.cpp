@@ -43,14 +43,14 @@ static bool go_read_names( Character *ch, Object *po, GO_STRUCT *r, bool np_sw,
   a = (GO_STRUCT  *) calloc( umin(dis_num, MAX_DISPLAY_LINES), sizeof *a);
   if (!a)
   {
-  PagerPrintf(ch, "Sorry. There is currently insufficient memory avail"
+  ch->Echo("Sorry. There is currently insufficient memory avail"
   " to service your request. Try later or speak to a coder.\r\n");
   return false;
   }
   p = (GO_STRUCT **) calloc( umin(dis_num, MAX_DISPLAY_LINES), sizeof *p);
   if (!p)
   {
-  PagerPrintf(ch, "Sorry. There is currently insufficient memory avail"
+  ch->Echo("Sorry. There is currently insufficient memory avail"
   " to service your request. Try later or speak to a coder.\r\n");
   return false;
   }
@@ -79,19 +79,19 @@ void do_ogrub (Character *ch, char *argument)
 
   if ( !*arg1 )
     {
-      PagerPrintf(ch, "Syntax: ogrub <num of lines> <sort order> [keywords] [operands].\r\n");
+      ch->Echo("Syntax: ogrub <num of lines> <sort order> [keywords] [operands].\r\n");
       return;
     }
   if ( isdigit(*arg1) )        /* first arg is number of display lines   */
     dis_num = atoi(arg1);
   else
     {
-      PagerPrintf(ch, "You did not specify the number of display lines.\r\n");
+      ch->Echo("You did not specify the number of display lines.\r\n");
       return;
     }
   if ( dis_num > MAX_DISPLAY_LINES )
     {
-      PagerPrintf(ch, "Sorry. You have requested more than %d display "
+      ch->Echo("Sorry. You have requested more than %d display "
                    "lines.\r\n", MAX_DISPLAY_LINES);
       return;
     }
@@ -101,7 +101,7 @@ void do_ogrub (Character *ch, char *argument)
     {
       if ( op_num >= MAX_NUM_OPS )
         {
-          PagerPrintf(ch, "Sorry. You have entered more than %d operands.\r\n",
+          ch->Echo("Sorry. You have entered more than %d operands.\r\n",
                        MAX_NUM_OPS, MAX_NUM_OPS );
           return;
         }
@@ -112,7 +112,7 @@ void do_ogrub (Character *ch, char *argument)
     }
   if (op_num <= 0)
     {
-      PagerPrintf(ch, "Sorry. You did not include any valid operands.\r\n");
+      ch->Echo("Sorry. You did not include any valid operands.\r\n");
       return;
     }
   if ( do_sw )
@@ -163,16 +163,15 @@ static void display_operand_table (Character *ch, int op_num)
   int cou;
   char opn[7][3] = {"eq", "ne", "su", "ge", "gt", "le", "lt"};
 
-  PagerPrintf (ch, "OPERAND TABLE\r\n");
+  ch->Echo("OPERAND TABLE\r\n");
   for(cou=0; cou < op_num; cou++)
     if ( go_op[cou].num)
-      PagerPrintf (ch,
-                    "%2d %-7s %2s %10ld\r\n", cou+1, go_fd[go_op[cou].field].nam,
+      ch->Echo("%2d %-7s %2s %10ld\r\n", cou+1, go_fd[go_op[cou].field].nam,
                     opn[go_op[cou].op], go_op[cou].nval);
     else
-      PagerPrintf (ch, "%2d %-7s %2s %s\r\n",
-                    cou+1, go_fd[go_op[cou].field].nam,
-                    opn[go_op[cou].op], go_op[cou].sval);
+      ch->Echo("%2d %-7s %2s %s\r\n",
+               cou+1, go_fd[go_op[cou].field].nam,
+               opn[go_op[cou].op], go_op[cou].sval);
 }
 
 /*
@@ -198,13 +197,13 @@ static bool go_parse_operand (Character *ch, const char *arg, int *op_num, int *
 
       if ( IsNullOrEmpty( pch ) )
         {
-          PagerPrintf(ch, "Sorry. Missing sort field: %s\r\n", arg);
+          ch->Echo("Sorry. Missing sort field: %s\r\n", arg);
           return false;
         }
 
       if ( (*sor_ind = go_fnam_to_num(pch)) == -1 )
         {
-          PagerPrintf(ch, "Sorry. Invalid sort field: %s\r\n", arg);
+          ch->Echo("Sorry. Invalid sort field: %s\r\n", arg);
           return false;
         }
       return true;
@@ -220,7 +219,7 @@ static bool go_parse_operand (Character *ch, const char *arg, int *op_num, int *
           return false;
         return true;
       }
-  PagerPrintf(ch, "Sorry. Invalid field name: %s\r\n", arg);
+  ch->Echo("Sorry. Invalid field name: %s\r\n", arg);
   return false;
 }
 
@@ -257,7 +256,7 @@ static bool go_parse_operator (Character *ch, const char *pch, int *op_num)
 
   if ( go_op[*op_num].op < 0 )
     {
-      PagerPrintf(ch, "Invalid operator: %s\r\n", pch);
+      ch->Echo("Invalid operator: %s\r\n", pch);
       return false;
     }
 
@@ -269,7 +268,7 @@ static bool go_parse_operator (Character *ch, const char *pch, int *op_num)
 
   if ( IsNullOrEmpty( pch ) )
     {
-      PagerPrintf(ch, "Value is missing from operand.\r\n");
+      ch->Echo("Value is missing from operand.\r\n");
       return false;
     }
 
@@ -291,7 +290,7 @@ static bool go_parse_operator (Character *ch, const char *pch, int *op_num)
 
       if ( strlen(pch) > MAX_FIELD_LENGTH )
         {
-          PagerPrintf(ch, "Char string is too long:%s\r\n", pch);
+          ch->Echo("Char string is too long:%s\r\n", pch);
           return false;
         }
       strcpy ( go_op[*op_num].sval, pch );      /* store str value in table */
@@ -567,17 +566,15 @@ static void go_display( Character *ch, int dis_num, int tot_match, bool d2_sw,
   if ( tot_match > 0 && dis_num > 0 )          /* print title if app  */
     {
       if ( !d2_sw )
-        PagerPrintf(ch,
-                     "\r\n%-12s%3s %5s %2s %-12s %2s %2s %2s %2s %2s %3s %3s %3s "
-                     "%11s\r\n",
-                     "Character", "Cou", "OVnum", "Lv", "OName", "Ty", "We",
-                     "Av", "Hr", "Dr", "Hp", "Mp", "AC", "S D C W I L");
+        ch->Echo("\r\n%-12s%3s %5s %2s %-12s %2s %2s %2s %2s %2s %3s %3s %3s "
+                 "%11s\r\n",
+                 "Character", "Cou", "OVnum", "Lv", "OName", "Ty", "We",
+                 "Av", "Hr", "Dr", "Hp", "Mp", "AC", "S D C W I L");
       else
-        PagerPrintf(ch,
-                     "\r\n%-12s%3s %5s %2s %-12s %2s %2s %2s %2s %2s %3s %3s %2s "
-		     "%2s %2s %2s %2s\r\n",
-                     "Character", "Cou", "OVnum", "Lv", "OName", "Ty", "We",
-                     "Av", "Hr", "Dr", "Hp", "Mp", "S0", "S1", "S2", "S3", "S4");
+        ch->Echo("\r\n%-12s%3s %5s %2s %-12s %2s %2s %2s %2s %2s %3s %3s %2s "
+                 "%2s %2s %2s %2s\r\n",
+                 "Character", "Cou", "OVnum", "Lv", "OName", "Ty", "We",
+                 "Av", "Hr", "Dr", "Hp", "Mp", "S0", "S1", "S2", "S3", "S4");
     }
   lim = umin(tot_match, dis_num);
 
@@ -589,30 +586,28 @@ static void go_display( Character *ch, int dis_num, int tot_match, bool d2_sw,
       strncpy( pri_oname, r.s[ONAME], MAX_NAME_LENGTH - 1);
       pri_oname[ MAX_NAME_LENGTH - 1] = '\0';
       if ( !d2_sw )
-        PagerPrintf(ch,
-                     "%-12s%3d %5d%3d %-12s %2s %2s%3d%3d%3d%4d%4d%4d"
-                     "%2d%2d%2d%2d%2d%2d\r\n",
-                     pri_cname, r.n[OCOUNT], r.n[OVNUM], r.n[OLEVEL],
-                     pri_oname, go_otype_to_disp( r.n[OTYPE] ),
-                     owear_to_disp( r.n[OWEAR] ),
-                     r.n[OAVG], r.n[OHR], r.n[ODR],
-                     r.n[OHP], r.n[OMP], r.n[OAC], r.n[OSTR], r.n[ODEX],
-                     r.n[OCON], r.n[OWIS], r.n[OINT], r.n[OLUCK]);
+        ch->Echo("%-12s%3d %5d%3d %-12s %2s %2s%3d%3d%3d%4d%4d%4d"
+                 "%2d%2d%2d%2d%2d%2d\r\n",
+                 pri_cname, r.n[OCOUNT], r.n[OVNUM], r.n[OLEVEL],
+                 pri_oname, go_otype_to_disp( r.n[OTYPE] ),
+                 owear_to_disp( r.n[OWEAR] ),
+                 r.n[OAVG], r.n[OHR], r.n[ODR],
+                 r.n[OHP], r.n[OMP], r.n[OAC], r.n[OSTR], r.n[ODEX],
+                 r.n[OCON], r.n[OWIS], r.n[OINT], r.n[OLUCK]);
       else
-        PagerPrintf(ch,
-                     "%-12s%3d %5d%3d %-12s %2s %2s%3d%3d%3d%4d%4d%3d"
-                     "%3d%3d%3d%3d\r\n",
-                     pri_cname, r.n[OCOUNT], r.n[OVNUM], r.n[OLEVEL],
-                     pri_oname, go_otype_to_disp( r.n[OTYPE] ),
-                     owear_to_disp( r.n[OWEAR] ),
-                     r.n[OAVG], r.n[OHR], r.n[ODR],
-                     r.n[OHP], r.n[OMP], r.n[OSAV0], r.n[OSAV1], r.n[OSAV2],
-                     r.n[OSAV3], r.n[OSAV4]);
+        ch->Echo("%-12s%3d %5d%3d %-12s %2s %2s%3d%3d%3d%4d%4d%3d"
+                 "%3d%3d%3d%3d\r\n",
+                 pri_cname, r.n[OCOUNT], r.n[OVNUM], r.n[OLEVEL],
+                 pri_oname, go_otype_to_disp( r.n[OTYPE] ),
+                 owear_to_disp( r.n[OWEAR] ),
+                 r.n[OAVG], r.n[OHR], r.n[ODR],
+                 r.n[OHP], r.n[OMP], r.n[OSAV0], r.n[OSAV1], r.n[OSAV2],
+                 r.n[OSAV3], r.n[OSAV4]);
     }
   if (tot_match == 0 )
-    PagerPrintf(ch, "Zero matches were found.\r\n");
-  else PagerPrintf(ch,
-                    "%5d matches in total.\r\n", tot_match);
+    ch->Echo("Zero matches were found.\r\n");
+  else
+    ch->Echo("%5d matches in total.\r\n", tot_match);
 }
 
 static const char *go_otype_to_disp (int arg)
@@ -707,3 +702,4 @@ static bool go_read_names( Character *ch, Object *po, GO_STRUCT *r, bool np_sw,
     }
   return true;
 }
+

@@ -11,3 +11,4 @@ void do_mp_slay( Character *ch, char *argument )
       do_slay( ch, argument );
     }
 }
+

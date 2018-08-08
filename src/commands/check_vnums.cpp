@@ -1,29 +1,25 @@
 #include <string.h>
 #include "mud.hpp"
 #include "area.hpp"
+#include "character.hpp"
 
 /* Check to make sure range of vnums is free - Scryn 2/27/96 */
 void do_check_vnums( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
-  Area *pArea;
+  Area *pArea = nullptr;
   char arg1[MAX_STRING_LENGTH];
   char arg2[MAX_STRING_LENGTH];
-  bool room, mob, obj, all, area_conflict;
-  int low_range, high_range;
-
-  room = false;
-  mob  = false;
-  obj  = false;
-  all  = false;
+  bool room = false, mob = false, obj = false, all = false, area_conflict = false;
+  int low_range = 0, high_range = 0;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter("Please specify room, mob, object, or all as your first argument.\r\n", ch);
+      ch->Echo("Please specify room, mob, object, or all as your first argument.\r\n");
       return;
     }
 
@@ -40,19 +36,19 @@ void do_check_vnums( Character *ch, char *argument )
     all = true;
   else
     {
-      SendToCharacter("Please specify room, mob, or object as your first argument.\r\n", ch);
+      ch->Echo("Please specify room, mob, or object as your first argument.\r\n");
       return;
     }
 
   if( IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter("Please specify the low end of the range to be searched.\r\n", ch);
+      ch->Echo("Please specify the low end of the range to be searched.\r\n");
       return;
     }
 
   if( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter("Please specify the high end of the range to be searched.\r\n", ch);
+      ch->Echo("Please specify the high end of the range to be searched.\r\n");
       return;
     }
 
@@ -61,19 +57,19 @@ void do_check_vnums( Character *ch, char *argument )
 
   if (low_range < MIN_VNUM || low_range > MAX_VNUM )
     {
-      SendToCharacter("Invalid argument for bottom of range.\r\n", ch);
+      ch->Echo("Invalid argument for bottom of range.\r\n");
       return;
     }
 
   if (high_range < MIN_VNUM || high_range > MAX_VNUM )
     {
-      SendToCharacter("Invalid argument for top of range.\r\n", ch);
+      ch->Echo("Invalid argument for top of range.\r\n");
       return;
     }
 
   if (high_range < low_range)
     {
-      SendToCharacter("Bottom of range must be below top of range.\r\n", ch);
+      ch->Echo("Bottom of range must be below top of range.\r\n");
       return;
     }
 
@@ -147,8 +143,8 @@ void do_check_vnums( Character *ch, char *argument )
 
       if (area_conflict)
         {
-          sprintf(buf, "Conflict:%-15s| ",
-                  (pArea->Filename ? pArea->Filename : "(invalid)"));
+          ch->Echo("Conflict:%-15s| ",
+                   (pArea->Filename ? pArea->Filename : "(invalid)"));
           if(room)
             sprintf( buf2, "Rooms: %5ld - %-5ld\r\n", pArea->VnumRanges.Room.First,
                      pArea->VnumRanges.Room.Last);
@@ -159,11 +155,10 @@ void do_check_vnums( Character *ch, char *argument )
             sprintf( buf2, "Objects: %5ld - %-5ld\r\n", pArea->VnumRanges.Object.First,
                      pArea->VnumRanges.Object.Last);
 
-          strcat( buf, buf2 );
-          SendToCharacter(buf, ch);
+          ch->Echo("%s", buf2);
         }
-
     }
+  
   for ( pArea = FirstBSort; pArea; pArea = pArea->NextSort )
     {
       area_conflict = false;
@@ -234,8 +229,8 @@ void do_check_vnums( Character *ch, char *argument )
             sprintf( buf2, "Objects: %5ld - %-5ld\r\n", pArea->VnumRanges.Object.First,
                      pArea->VnumRanges.Object.Last);
 
-          strcat( buf, buf2 );
-          SendToCharacter(buf, ch);
+          ch->Echo("%s", buf2);
         }
     }
 }
+

@@ -14,7 +14,7 @@ void do_minvoke( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Syntax: minvoke <vnum>.\r\n", ch );
+      ch->Echo("Syntax: minvoke <vnum>.\r\n");
       return;
     }
 
@@ -37,7 +37,7 @@ void do_minvoke( Character *ch, char *argument )
 	    }
       if ( vnum == -1 )
         {
-          SendToCharacter( "No such mobile exists.\r\n", ch );
+          ch->Echo("No such mobile exists.\r\n");
           return;
         }
     }
@@ -50,31 +50,32 @@ void do_minvoke( Character *ch, char *argument )
 
       if ( IsNpc(ch) )
         {
-          SendToCharacter( "Huh?\r\n", ch );
+          ch->Echo("Huh?\r\n");
           return;
         }
 
       if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
-          SendToCharacter( "You must have an assigned area to invoke this mobile.\r\n", ch );
+          ch->Echo("You must have an assigned area to invoke this mobile.\r\n");
           return;
         }
       if ( vnum < pArea->VnumRanges.Mob.First
            &&   vnum > pArea->VnumRanges.Mob.Last )
         {
-          SendToCharacter( "That number is not in your allocated range.\r\n", ch );
+          ch->Echo("That number is not in your allocated range.\r\n");
           return;
         }
     }
 
   if ( ( pMobIndex = GetProtoMobile( vnum ) ) == NULL )
     {
-      SendToCharacter( "No mobile has that vnum.\r\n", ch );
+      ch->Echo("No mobile has that vnum.\r\n");
       return;
     }
 
   victim = CreateMobile( pMobIndex );
   CharacterToRoom( victim, ch->InRoom );
   Act( AT_IMMORT, "$n has created $N!", ch, NULL, victim, TO_ROOM );
-  SendToCharacter( "Ok.\r\n", ch );
+  ch->Echo("Ok.\r\n");
 }
+

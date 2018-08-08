@@ -23,7 +23,7 @@ void do_put( Character *ch, char *argument )
 
       if ( number < 1 )
         {
-          SendToCharacter( "That was easy...\r\n", ch );
+          ch->Echo("That was easy...\r\n");
           return;
         }
 
@@ -38,7 +38,7 @@ void do_put( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "Put what in what?\r\n", ch );
+      ch->Echo("Put what in what?\r\n");
       return;
     }
 
@@ -47,7 +47,7 @@ void do_put( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "all" ) || !StringPrefix( "all.", arg2 ) )
     {
-      SendToCharacter( "You can't do that.\r\n", ch );
+      ch->Echo("You can't do that.\r\n");
       return;
     }
 
@@ -64,7 +64,7 @@ void do_put( Character *ch, char *argument )
     {
       if ( ch->CarryWeight + container->Weight > GetCarryCapacityWeight( ch ) )
         {
-          SendToCharacter( "It's too heavy for you to lift.\r\n", ch );
+          ch->Echo("It's too heavy for you to lift.\r\n");
           return;
         }
     }
@@ -72,7 +72,7 @@ void do_put( Character *ch, char *argument )
     {
       if ( container->ItemType != ITEM_CONTAINER )
         {
-          SendToCharacter( "That's not a container.\r\n", ch );
+          ch->Echo("That's not a container.\r\n");
           return;
         }
 
@@ -88,19 +88,19 @@ void do_put( Character *ch, char *argument )
       /* 'put obj container' */
       if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
         {
-          SendToCharacter( "You do not have that item.\r\n", ch );
+          ch->Echo("You do not have that item.\r\n");
           return;
 	}
 
       if ( obj == container )
         {
-          SendToCharacter( "You can't fold it into itself.\r\n", ch );
+          ch->Echo("You can't fold it into itself.\r\n");
           return;
         }
 
       if ( !CanDropObject( ch, obj ) )
         {
-          SendToCharacter( "You can't let go of it.\r\n", ch );
+          ch->Echo("You can't let go of it.\r\n");
           return;
         }
 
@@ -109,7 +109,7 @@ void do_put( Character *ch, char *argument )
             > ((GetObjectWeight( container ) / container->Count)
                -   container->Weight)) )
         {
-          SendToCharacter( "It won't fit under there.\r\n", ch );
+          ch->Echo("It won't fit under there.\r\n");
           return;
         }
 
@@ -117,7 +117,7 @@ void do_put( Character *ch, char *argument )
            + (GetObjectWeight( container ) / container->Count)
            >  container->Value[OVAL_CONTAINER_CAPACITY] )
         {
-          SendToCharacter( "It won't fit.\r\n", ch );
+          ch->Echo("It won't fit.\r\n");
           return;
         }
 
@@ -244,3 +244,4 @@ static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch)
       SaveClanStoreroom(ch, clan);
     }
 }
+

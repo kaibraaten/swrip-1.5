@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "shuttle.hpp"
+#include "character.hpp"
 
 void do_makeshuttle (Character * ch, char * argument)
 {
@@ -7,20 +8,21 @@ void do_makeshuttle (Character * ch, char * argument)
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: makeshuttle <shuttle name>\r\n", ch );
+      ch->Echo("Usage: makeshuttle <shuttle name>\r\n");
       return;
     }
 
   if( Shuttles->FindByName( argument ) )
     {
-      Echo( ch, "&RThere's already another shuttle with that name.\r\n" );
+      ch->Echo("&RThere's already another shuttle with that name.\r\n" );
       return;
     }
   
   shuttle = NewShuttle(argument);
 
   if (shuttle)
-    Echo( ch, "&GShuttle created.&d\r\n" );
+    ch->Echo("&GShuttle created.&d\r\n" );
   else
-    Echo( ch, "&GShuttle failed to create.&d\r\n" );
+    ch->Echo("&GShuttle failed to create.&d\r\n" );
 }
+

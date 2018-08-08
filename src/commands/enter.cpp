@@ -16,7 +16,7 @@ void do_enter( Character *ch, char *argument )
 	    }
 	}
 
-      SendToCharacter( "You cannot find an entrance here.\r\n", ch );
+      ch->Echo( "You cannot find an entrance here.\r\n" );
       return;
     }
 
@@ -30,3 +30,4 @@ void do_enter( Character *ch, char *argument )
 
   do_board(ch,argument);
 }
+

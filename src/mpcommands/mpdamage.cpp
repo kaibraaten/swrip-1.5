@@ -21,7 +21,7 @@ void do_mp_damage( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) || ( ch->Desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -30,28 +30,28 @@ void do_mp_damage( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "mpdamage whom?\r\n", ch );
+      ch->Echo("mpdamage whom?\r\n");
       ProgBug( "Mpdamage: invalid argument1", ch );
       return;
     }
 
   if ( IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "mpdamage inflict how many hps?\r\n", ch );
+      ch->Echo("mpdamage inflict how many hps?\r\n");
       ProgBug( "Mpdamage: invalid argument2", ch );
       return;
     }
 
   if ( ( victim = GetCharacterInRoomMudProg( ch, arg1 ) ) == NULL )
     {
-      SendToCharacter( "Victim must be in room.\r\n", ch );
+      ch->Echo("Victim must be in room.\r\n");
       ProgBug( "Mpdamage: victim not in room", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "You can't mpdamage yourself.\r\n", ch );
+      ch->Echo("You can't mpdamage yourself.\r\n");
       ProgBug( "Mpdamage: trying to damage self", ch );
       return;
     }
@@ -60,7 +60,7 @@ void do_mp_damage( Character *ch, char *argument )
 
   if( dam < 0 || dam > SHRT_MAX )
     {
-      SendToCharacter( "Mpdamage how much?\r\n", ch );
+      ch->Echo("Mpdamage how much?\r\n");
       ProgBug( "Mpdamage: invalid (nonexistent?) argument", ch );
       return;
     }
@@ -290,3 +290,4 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
 
   return rNONE;
 }
+

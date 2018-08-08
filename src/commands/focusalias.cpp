@@ -7,14 +7,14 @@ static void set_target( Character *ch, const char *target );
 
 void do_focusalias( Character *ch, char *argument)
 {
-  char arg[MAX_INPUT_LENGTH], buf[MAX_STRING_LENGTH];
+  char arg[MAX_INPUT_LENGTH];
 
   SmashTilde(argument);
   OneArgument( argument, arg );
 
   if ( IsNpc(ch) )
     {
-      SendToCharacter("Alias focuses are for players!\r\n", ch);
+      ch->Echo("Alias focuses are for players!\r\n");
       return;
     }
 
@@ -23,20 +23,17 @@ void do_focusalias( Character *ch, char *argument)
 
       if ( !IsNullOrEmpty( ch->PCData->Target ) )
         {
-          sprintf( buf, "Your current alias focus is : %s\r\n", ch->PCData->Target);
-          SendToCharacter(buf,ch);
+          ch->Echo( "Your current alias focus is : %s\r\n", ch->PCData->Target);
           return;
         }
 
-      SendToCharacter("You have no current alias focus.\r\n",ch);
+      ch->Echo("You have no current alias focus.\r\n");
       return;
-
     }
   else
     {
       set_target( ch, arg );
-      sprintf( buf, "Your new alias focus is : %s\r\n", ch->PCData->Target);
-      SendToCharacter( buf, ch );
+      ch->Echo( "Your new alias focus is : %s\r\n", ch->PCData->Target);
       return;
     }
 }
@@ -52,3 +49,4 @@ static void set_target( Character *ch, const char *target )
 
   ch->PCData->Target = CopyString( buf );
 }
+

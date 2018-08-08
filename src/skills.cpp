@@ -37,7 +37,7 @@
  */
 void skill_notfound( Character *ch, char *argument )
 {
-  Echo( ch, "Huh?\r\n" );
+  ch->Echo( "Huh?\r\n" );
 }
 
 /*
@@ -286,3 +286,4 @@ bool CheckGrip( Character *ch, Character *victim )
   LearnFromSuccess( victim, gsn_grip );
   return true;
 }
+

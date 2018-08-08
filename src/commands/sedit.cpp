@@ -19,24 +19,24 @@ void do_sedit( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Syntax: sedit <social> [field]\r\n", ch );
-      SendToCharacter( "Syntax: sedit <social> create\r\n", ch );
+      ch->Echo("Syntax: sedit <social> [field]\r\n");
+      ch->Echo("Syntax: sedit <social> create\r\n");
 
       if ( GetTrustLevel(ch) > LEVEL_GREATER )
-        SendToCharacter( "Syntax: sedit <social> delete\r\n", ch );
+        ch->Echo("Syntax: sedit <social> delete\r\n");
 
       if ( GetTrustLevel(ch) > LEVEL_CREATOR )
-        SendToCharacter( "Syntax: sedit <save>\r\n", ch );
+        ch->Echo("Syntax: sedit <save>\r\n");
 
-      SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( "  cnoarg onoarg cfound ofound vfound cauto oauto\r\n", ch );
+      ch->Echo("\r\nField being one of:\r\n");
+      ch->Echo("  cnoarg onoarg cfound ofound vfound cauto oauto\r\n");
       return;
     }
 
   if ( GetTrustLevel(ch) > LEVEL_CREATOR && !StrCmp( arg1, "save" ) )
     {
       Socials->Save();
-      SendToCharacter( "Saved.\r\n", ch );
+      ch->Echo("Saved.\r\n");
       return;
     }
 
@@ -46,7 +46,7 @@ void do_sedit( Character *ch, char *argument )
     {
       if ( social )
         {
-          SendToCharacter( "That social already exists!\r\n", ch );
+          ch->Echo("That social already exists!\r\n");
           return;
         }
 
@@ -55,25 +55,25 @@ void do_sedit( Character *ch, char *argument )
       sprintf( arg2, "You %s.", arg1 );
       social->CharNoArg = CopyString( arg2 );
       Socials->Add(social);
-      SendToCharacter( "Social added.\r\n", ch );
+      ch->Echo("Social added.\r\n");
       return;
     }
 
   if ( !social )
     {
-      SendToCharacter( "Social not found.\r\n", ch );
+      ch->Echo("Social not found.\r\n");
       return;
     }
 
   if ( IsNullOrEmpty( arg2 ) || !StrCmp( arg2, "show" ) )
     {
-      Echo( ch, "Social: %s\r\n\r\nCNoArg: %s\r\n",
+      ch->Echo("Social: %s\r\n\r\nCNoArg: %s\r\n",
 	    social->Name,  social->CharNoArg );
-      Echo( ch, "ONoArg: %s\r\nCFound: %s\r\nOFound: %s\r\n",
+      ch->Echo("ONoArg: %s\r\nCFound: %s\r\nOFound: %s\r\n",
 	    social->OthersNoArg ? social->OthersNoArg : "(not set)",
 	    social->CharFound   ? social->CharFound   : "(not set)",
 	    social->OthersFound ? social->OthersFound : "(not set)" );
-      Echo( ch, "VFound: %s\r\nCAuto : %s\r\nOAuto : %s\r\n",
+      ch->Echo("VFound: %s\r\nCAuto : %s\r\nOAuto : %s\r\n",
 	    social->VictimFound ? social->VictimFound : "(not set)",
 	    social->CharAuto    ? social->CharAuto    : "(not set)",
 	    social->OthersAuto  ? social->OthersAuto  : "(not set)" );
@@ -84,7 +84,7 @@ void do_sedit( Character *ch, char *argument )
     {
       Socials->Remove(social);
       FreeSocial( social );
-      SendToCharacter( "Deleted.\r\n", ch );
+      ch->Echo("Deleted.\r\n");
       return;
     }
 
@@ -92,7 +92,7 @@ void do_sedit( Character *ch, char *argument )
     {
       if ( IsNullOrEmpty( argument ) || !StrCmp( argument, "clear" ) )
         {
-          SendToCharacter( "You cannot clear this field. It must have a message.\r\n", ch );
+          ch->Echo("You cannot clear this field. It must have a message.\r\n");
           return;
         }
 
@@ -100,7 +100,7 @@ void do_sedit( Character *ch, char *argument )
         FreeMemory( social->CharNoArg );
 
       social->CharNoArg = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -112,7 +112,7 @@ void do_sedit( Character *ch, char *argument )
       if ( !IsNullOrEmpty( argument ) && StrCmp( argument, "clear" ) )
         social->OthersNoArg = CopyString( argument );
 
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -124,7 +124,7 @@ void do_sedit( Character *ch, char *argument )
       if ( !IsNullOrEmpty( argument ) && StrCmp( argument, "clear" ) )
         social->CharFound = CopyString( argument );
 
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -136,7 +136,7 @@ void do_sedit( Character *ch, char *argument )
       if ( !IsNullOrEmpty( argument ) && StrCmp( argument, "clear" ) )
         social->OthersFound = CopyString( argument );
 
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -148,7 +148,7 @@ void do_sedit( Character *ch, char *argument )
       if ( !IsNullOrEmpty( argument ) && StrCmp( argument, "clear" ) )
         social->VictimFound = CopyString( argument );
 
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -160,7 +160,7 @@ void do_sedit( Character *ch, char *argument )
       if ( !IsNullOrEmpty( argument ) && StrCmp( argument, "clear" ) )
         social->CharAuto = CopyString( argument );
 
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -172,7 +172,7 @@ void do_sedit( Character *ch, char *argument )
       if ( !IsNullOrEmpty( argument ) && StrCmp( argument, "clear" ) )
         social->OthersAuto = CopyString( argument );
 
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -184,7 +184,7 @@ void do_sedit( Character *ch, char *argument )
 
       if ( IsNullOrEmpty( arg1 ) )
         {
-	  SendToCharacter( "Cannot clear name field!\r\n", ch );
+   ch->Echo("Cannot clear name field!\r\n");
           return;
         }
 
@@ -204,10 +204,11 @@ void do_sedit( Character *ch, char *argument )
           Socials->Add(social);
         }
 
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
   /* display usage message */
   do_sedit( ch, "" );
 }
+

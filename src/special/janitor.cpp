@@ -30,3 +30,4 @@ bool spec_janitor( Character *ch )
 
   return false;
 }
+

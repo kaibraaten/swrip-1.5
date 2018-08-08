@@ -14,7 +14,7 @@ void do_track( Character *ch, char *argument )
 
   if ( !IsNpc(ch) && !ch->PCData->Learned[gsn_track] )
     {
-      SendToCharacter("You do not know of this skill yet.\r\n", ch );
+      ch->Echo("You do not know of this skill yet.\r\n");
       return;
     }
 
@@ -22,7 +22,7 @@ void do_track( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter("Whom are you trying to track?\r\n", ch);
+      ch->Echo("Whom are you trying to track?\r\n");
       return;
     }
 
@@ -30,7 +30,7 @@ void do_track( Character *ch, char *argument )
 
   if( !( vict = GetCharacterAnywhere( ch, arg ) ) )
     {
-      SendToCharacter("You can't sense a trail from here.\r\n", ch);
+      ch->Echo("You can't sense a trail from here.\r\n");
       return;
     }
 
@@ -44,23 +44,24 @@ void do_track( Character *ch, char *argument )
   switch(dir)
     {
     case BFS_ERROR:
-      SendToCharacter("Hmm... something seems to be wrong.\r\n", ch);
+      ch->Echo("Hmm... something seems to be wrong.\r\n");
       break;
 
     case BFS_ALREADY_THERE:
-      SendToCharacter("You're already in the same room!\r\n", ch);
+      ch->Echo("You're already in the same room!\r\n");
       break;
 
     case BFS_NO_PATH:
       sprintf(buf, "You can't sense a trail from here.\r\n" );
-      SendToCharacter(buf, ch);
+      ch->Echo(buf);
       LearnFromFailure( ch, gsn_track );
       break;
 
     default:
-      Echo(ch, "You sense a trail %s from here...\r\n",
-	   GetDirectionName((DirectionType)dir));
+      ch->Echo("You sense a trail %s from here...\r\n",
+               GetDirectionName((DirectionType)dir));
       LearnFromSuccess( ch, gsn_track );
       break;
     }
 }
+

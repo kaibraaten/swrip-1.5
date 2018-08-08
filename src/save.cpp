@@ -1078,7 +1078,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
         {
           sprintf( strsave, "%s%c/%s", BACKUP_DIR, tolower(name[0]),
                    Capitalize( name ) );
-          SendToCharacter( "Restoring your backup player file...", ch );
+          ch->Echo( "Restoring your backup player file..." );
         }
       else
         {
@@ -1428,7 +1428,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                    && !IsNullOrEmpty( ch->PCData->ClanInfo.ClanName )
                    && ( ch->PCData->ClanInfo.Clan = GetClan( ch->PCData->ClanInfo.ClanName )) == NULL )
                 {
-                  Echo( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->PCData->ClanInfo.ClanName );
+                  ch->Echo( "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->PCData->ClanInfo.ClanName );
                   FreeMemory( ch->PCData->ClanInfo.ClanName );
                   RemoveClanMember(ch);
                   ch->PCData->ClanInfo.ClanName = CopyString( "" );
@@ -1516,8 +1516,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                    && !IsNullOrEmpty( ch->PCData->ClanInfo.ClanName )
                    && ( ch->PCData->ClanInfo.Clan = GetClan( ch->PCData->ClanInfo.ClanName )) == NULL )
                 {
-                  Echo( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
-                           ch->PCData->ClanInfo.ClanName );
+                  ch->Echo( "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
+                            ch->PCData->ClanInfo.ClanName );
                   FreeMemory( ch->PCData->ClanInfo.ClanName );
                   ch->PCData->ClanInfo.ClanName = CopyString( "" );
                 }
@@ -1756,7 +1756,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
             {
               if ( !preload )
                 {
-                  Echo( ch, "Last connected from: %s\r\n", ReadWord( fp, Log ) );
+                  ch->Echo( "Last connected from: %s\r\n", ReadWord( fp, Log ) );
                 }
               else
 		{
@@ -2976,3 +2976,4 @@ static Character *ReadMobile( FILE *fp )
 
   return NULL;
 }
+

@@ -7,7 +7,7 @@ void do_rest( Character *ch, char *argument )
 
   if (ch->Position == POS_FIGHTING)
     {
-      SendToCharacter("You are already fighting!\r\n",ch);
+      ch->Echo("You are already fighting!\r\n");
       return;
     }
 
@@ -18,7 +18,7 @@ void do_rest( Character *ch, char *argument )
 
       if (obj == NULL)
         {
-          SendToCharacter("You don't see that here.\r\n",ch);
+          ch->Echo("You don't see that here.\r\n");
           return;
         }
     }
@@ -32,7 +32,7 @@ void do_rest( Character *ch, char *argument )
       if (obj->ItemType != ITEM_FURNITURE
           ||  (!obj->Value[OVAL_FURNITURE_PREPOSITION]))
         {
-          SendToCharacter("You can't rest on that.\r\n",ch);
+          ch->Echo("You can't rest on that.\r\n");
           return;
         }
 
@@ -51,13 +51,13 @@ void do_rest( Character *ch, char *argument )
     case POS_SLEEPING:
       if (IsAffectedBy(ch,AFF_SLEEP))
         {
-          SendToCharacter("You can't wake up!\r\n",ch);
+          ch->Echo("You can't wake up!\r\n");
           return;
         }
 
       if (obj == NULL)
         {
-          SendToCharacter( "You wake up and start resting.\r\n", ch );
+          ch->Echo("You wake up and start resting.\r\n");
           Act(AT_ACTION, "$n wakes up and starts resting.",
 	       ch, NULL, NULL, TO_ROOM);
         }
@@ -80,13 +80,13 @@ void do_rest( Character *ch, char *argument )
       break;
 
     case POS_RESTING:
-      SendToCharacter( "You are already resting.\r\n", ch );
+      ch->Echo("You are already resting.\r\n");
       break;
 
     case POS_STANDING:
       if (obj == NULL)
         {
-	  SendToCharacter( "You rest.\r\n", ch );
+   ch->Echo("You rest.\r\n");
           Act( AT_ACTION, "$n sits down and rests.", ch, NULL, NULL, TO_ROOM );
         }
       else if (obj->Value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
@@ -110,7 +110,7 @@ void do_rest( Character *ch, char *argument )
     case POS_SITTING:
       if (obj == NULL)
         {
-          SendToCharacter("You rest.\r\n",ch);
+          ch->Echo("You rest.\r\n");
           Act(AT_ACTION, "$n rests.",ch,NULL,NULL,TO_ROOM);
         }
       else if (obj->Value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
@@ -132,7 +132,7 @@ void do_rest( Character *ch, char *argument )
       break;
 
     case POS_MOUNTED:
-      SendToCharacter( "You'd better dismount first.\r\n", ch );
+      ch->Echo("You'd better dismount first.\r\n");
       return;
 
     default:
@@ -141,3 +141,4 @@ void do_rest( Character *ch, char *argument )
 
   RoomProgRestTrigger( ch );
 }
+

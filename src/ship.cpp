@@ -429,8 +429,8 @@ static void LandShip( Ship *ship, const char *arg )
       xp =  (GetRequiredXpForLevel( GetAbilityLevel(ch, PILOTING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel(ch, PILOTING_ABILITY)));
       xp = umin( GetShipValue( ship ) , xp );
       GainXP( ch, PILOTING_ABILITY, xp );
-      Echo( ch, "&WYou gain %ld points of flight experience!\r\n",
-		 umin( GetShipValue( ship ) , xp ) );
+      ch->Echo( "&WYou gain %ld points of flight experience!\r\n",
+                umin( GetShipValue( ship ) , xp ) );
       ship->Ch = NULL;
     }
 
@@ -886,11 +886,11 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
     {
       if ( drunk )
 	{
-	  SendToCharacter( "You drive into a wall in your drunken state.\r\n", ch );
+	  ch->Echo( "You drive into a wall in your drunken state.\r\n" );
 	}
       else
 	{
-	  SendToCharacter( "Alas, you cannot go that way.\r\n", ch );
+	  ch->Echo( "Alas, you cannot go that way.\r\n" );
 	}
 
       return rNONE;
@@ -901,7 +901,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   if ( IsBitSet( pexit->Flags, EX_WINDOW )
        && !IsBitSet( pexit->Flags, EX_ISDOOR ) )
     {
-      SendToCharacter( "Alas, you cannot go that way.\r\n", ch );
+      ch->Echo( "Alas, you cannot go that way.\r\n" );
       return rNONE;
     }
 
@@ -941,11 +941,11 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
         {
           if ( drunk )
 	    {
-	      SendToCharacter( "You hit a wall in your drunken state.\r\n", ch );
+	      ch->Echo( "You hit a wall in your drunken state.\r\n" );
 	    }
           else
 	    {
-	      SendToCharacter( "Alas, you cannot go that way.\r\n", ch );
+	      ch->Echo( "Alas, you cannot go that way.\r\n" );
 	    }
         }
 
@@ -954,7 +954,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( IsRoomPrivate( ch, to_room ) )
     {
-      SendToCharacter( "That room is private right now.\r\n", ch );
+      ch->Echo( "That room is private right now.\r\n" );
       return rNONE;
     }
 
@@ -969,19 +969,19 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
           switch( to_room->Area->LevelRanges.Hard.Low - ch->TopLevel )
             {
             case 1:
-              SendToCharacter( "A voice in your mind says, 'You are nearly ready to go that way...'", ch );
+              ch->Echo( "A voice in your mind says, 'You are nearly ready to go that way...'" );
               break;
 
             case 2:
-              SendToCharacter( "A voice in your mind says, 'Soon you shall be ready to travel down this path... soon.'", ch );
+              ch->Echo( "A voice in your mind says, 'Soon you shall be ready to travel down this path... soon.'" );
               break;
 
             case 3:
-              SendToCharacter( "A voice in your mind says, 'You are not ready to go down that path... yet.'.\r\n", ch);
+              ch->Echo( "A voice in your mind says, 'You are not ready to go down that path... yet.'.\r\n" );
               break;
 
 	    default:
-              SendToCharacter( "A voice in your mind says, 'You are not ready to go down that path.'.\r\n", ch);
+              ch->Echo( "A voice in your mind says, 'You are not ready to go down that path.'.\r\n");
             }
 
           return rNONE;
@@ -989,7 +989,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
       else if ( ch->TopLevel > to_room->Area->LevelRanges.Hard.High )
 	{
 	  SetCharacterColor( AT_TELL, ch );
-	  SendToCharacter( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
+	  ch->Echo( "A voice in your mind says, 'There is nothing more for you down that path.'" );
 	  return rNONE;
 	}
     }
@@ -1000,13 +1000,13 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
            || IsBitSet( to_room->Flags, ROOM_SPACECRAFT )
            || to_room->Sector == SECT_INSIDE )
         {
-          SendToCharacter( "You can't drive indoors!\r\n", ch );
+          ch->Echo( "You can't drive indoors!\r\n" );
           return rNONE;
         }
 
       if ( IsBitSet( to_room->Flags, ROOM_NO_DRIVING ) )
         {
-          SendToCharacter( "You can't take a vehicle through there!\r\n", ch );
+          ch->Echo( "You can't take a vehicle through there!\r\n" );
           return rNONE;
         }
 
@@ -1016,7 +1016,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
         {
           if ( ship->Class > CLOUD_CAR )
             {
-              SendToCharacter( "You'd need to fly to go there.\r\n", ch );
+              ch->Echo( "You'd need to fly to go there.\r\n" );
               return rNONE;
             }
         }
@@ -1029,17 +1029,16 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
         {
           if ( ship->Class != OCEAN_SHIP )
             {
-              SendToCharacter( "You'd need a boat to go there.\r\n", ch );
+              ch->Echo( "You'd need a boat to go there.\r\n" );
               return rNONE;
             }
-
         }
 
       if ( IsBitSet( pexit->Flags, EX_CLIMB ) )
         {
           if ( ship->Class < CLOUD_CAR )
             {
-              SendToCharacter( "You need to fly or climb to get up there.\r\n", ch );
+              ch->Echo( "You need to fly or climb to get up there.\r\n" );
               return rNONE;
             }
         }
@@ -1054,7 +1053,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 	{
 	  if ( ++count >= to_room->Tunnel )
 	    {
-	      SendToCharacter( "There is no room for you in there.\r\n", ch );
+	      ch->Echo( "There is no room for you in there.\r\n" );
 	      return rNONE;
 	    }
 	}
@@ -1084,7 +1083,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( GetRandomPercent() > the_chance )
     {
-      SendToCharacter("&RYou can't figure out which switch it is.\r\n",ch);
+      ch->Echo("&RYou can't figure out which switch it is.\r\n");
       LearnFromFailure( ch, gsn_speeders );
       return retcode;
     }
@@ -3667,7 +3666,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 	  xp =  ( GetRequiredXpForLevel( GetAbilityLevel( ch, PILOTING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, PILOTING_ABILITY ) ) );
 	  xp = umin( GetShipValue( ship ) , xp );
 	  GainXP( ch, PILOTING_ABILITY, xp);
-	  Echo( ch, "&WYou gain %ld piloting experience!\r\n", xp );
+	  ch->Echo( "&WYou gain %ld piloting experience!\r\n", xp );
 	}
       else
 	{
@@ -3816,22 +3815,22 @@ bool RentShip( Character *ch, const Ship *ship )
 
   if ( ch->Gold < price )
     {
-      Echo(ch, "&RRenting this ship costs %ld. You don't have enough credits!\r\n" , price );
+      ch->Echo( "&RRenting this ship costs %ld. You don't have enough credits!\r\n", price );
       return false;
     }
 
   ch->Gold -= price;
-  Echo(ch, "&GYou pay %ld credits to rent the ship.\r\n" , price );
+  ch->Echo( "&GYou pay %ld credits to rent the ship.\r\n", price );
   return true;
 }
 
 bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *personalname )
 {
   const Ship *existingShip = Ships->Find([name, personalname](const auto &ship)
-                                             {
-                                               return StrCmp(ship->Name, name) == 0
-                                               && StrCmp(ship->PersonalName, personalname) == 0;
-                                             });
+                                         {
+                                           return StrCmp(ship->Name, name) == 0
+                                             && StrCmp(ship->PersonalName, personalname) == 0;
+                                         });
   bool nameIsUnique = false;
 
   if(existingShip == nullptr)
@@ -3894,3 +3893,4 @@ ShipRepository *NewShipRepository()
 {
   return new LuaShipRepository();
 }
+

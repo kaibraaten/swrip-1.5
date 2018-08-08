@@ -102,3 +102,4 @@ BadNameRepository *NewBadNameRepository()
 {
   return new LuaBadNameRepository();
 }
+

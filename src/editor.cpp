@@ -356,8 +356,8 @@ static void StartEditingNoLimit( Character *ch, char *old_text, short max_total 
     }
 
   SetCharacterColor( AT_GREEN, ch );
-  Echo( ch, "Begin entering your text now (/? = help /s = save /c = clear /l = list)\r\n" );
-  Echo( ch, "-----------------------------------------------------------------------\r\n" );
+  ch->Echo( "Begin entering your text now (/? = help /s = save /c = clear /l = list)\r\n" );
+  ch->Echo( "-----------------------------------------------------------------------\r\n" );
 
   if ( ch->Editor )
     {
@@ -368,7 +368,7 @@ static void StartEditingNoLimit( Character *ch, char *old_text, short max_total 
   ch->Editor->Description = CopyString( "Unknown buffer" );
   ch->Desc->ConnectionState = CON_EDITING;
 
-  SendToCharacter( "> ", ch );
+  ch->Echo( "> " );
 }
 
 char *CopyBuffer( Character *ch )
@@ -396,7 +396,7 @@ void StopEditing( Character *ch )
   SetCharacterColor( AT_PLAIN, ch );
   DiscardEditData( ch->Editor );
   ch->Editor = NULL;
-  SendToCharacter( "Done.\r\n", ch );
+  ch->Echo( "Done.\r\n" );
   ch->dest_buf  = NULL;
   ch->spare_ptr = NULL;
   ch->SubState  = SUB_NONE;
@@ -424,20 +424,20 @@ void EditBuffer( Character *ch, char *argument )
 
   if ( d == NULL )
     {
-      SendToCharacter( "You have no descriptor.\r\n", ch );
+      ch->Echo( "You have no descriptor.\r\n" );
       return;
     }
 
   if ( d->ConnectionState != CON_EDITING )
     {
-      SendToCharacter( "You can't do that!\r\n", ch );
+      ch->Echo( "You can't do that!\r\n" );
       Log->Bug( "Edit_buffer: d->ConnectionState != CON_EDITING" );
       return;
     }
 
   if ( ch->SubState <= SUB_PAUSE )
     {
-      SendToCharacter( "You can't do that!\r\n", ch );
+      ch->Echo( "You can't do that!\r\n" );
       Log->Bug( "Edit_buffer: illegal ch->SubState (%d)", ch->SubState );
       d->ConnectionState = CON_PLAYING;
       return;
@@ -445,7 +445,7 @@ void EditBuffer( Character *ch, char *argument )
 
   if ( !ch->Editor )
     {
-      SendToCharacter( "You can't do that!\r\n", ch );
+      ch->Echo( "You can't do that!\r\n" );
       Log->Bug( "Edit_buffer: null editor" );
       d->ConnectionState = CON_PLAYING;
       return;
@@ -507,13 +507,13 @@ void EditBuffer( Character *ch, char *argument )
 	  break;
 
 	default:
-	  SendToCharacter( "Uh? Type '/?' to see the list of valid editor commands.\r\n", ch );
+	  ch->Echo( "Uh? Type '/?' to see the list of valid editor commands.\r\n" );
 	  break;
 	}
 
       if( editor_command != 'a' && editor_command != 's' )
 	{
-	  SendToCharacter( "> ", ch );
+	  ch->Echo( "> " );
 	}
 
       return;
@@ -547,7 +547,7 @@ void EditBuffer( Character *ch, char *argument )
 
   if( TOTAL_BUFFER_SIZE(edd) + linelen+2 >= edd->MaxSize )
     {
-      SendToCharacter( "Buffer full.\r\n", ch );
+      ch->Echo( "Buffer full.\r\n" );
       EditorSave( ch, edd, "");
     }
   else
@@ -570,10 +570,10 @@ void EditBuffer( Character *ch, char *argument )
         }
       else
 	{
-	  SendToCharacter( "(Continued)\r\n", ch );
+	  ch->Echo( "(Continued)\r\n" );
 	}
 
-      SendToCharacter( "> ", ch );
+      ch->Echo( "> " );
     }
 }
 
@@ -594,13 +594,12 @@ static void EditorPrintInfo( Character *ch, Editor *edd, char *argument )
       eline = eline->next;
     }
 
-  Echo( ch,
-	"Currently editing: %s\r\n"
-	"Total lines: %4d   On line:  %4d\r\n"
-	"Buffer size: %4d   Max size: %4d\r\n",
-	edd->Description ? edd->Description : "(Null description)",
-	edd->LineCount, i,
-	TOTAL_BUFFER_SIZE(edd), edd->MaxSize );
+  ch->Echo( "Currently editing: %s\r\n"
+            "Total lines: %4d   On line:  %4d\r\n"
+            "Buffer size: %4d   Max size: %4d\r\n",
+            edd->Description ? edd->Description : "(Null description)",
+            edd->LineCount, i,
+            TOTAL_BUFFER_SIZE(edd), edd->MaxSize );
 }
 
 static void EditorHelp( Character *ch, Editor *edd, char *argument )
@@ -663,11 +662,11 @@ static void EditorHelp( Character *ch, Editor *edd, char *argument )
 
   if( arg[i] == NULL )
     {
-      SendToCharacter( "No editor help about that.\r\n", ch );
+      ch->Echo( "No editor help about that.\r\n" );
     }
   else
     {
-      SendToCharacter( editor_help_text[i], ch );
+      ch->Echo( "%s", editor_help_text[i] );
     }
 }
 
@@ -679,7 +678,7 @@ static void EditorClearBuffer( Character *ch, Editor *edd, char *argument )
   DiscardEditData( edd );
   ch->Editor = StringToEditData( "", max_size );
   ch->Editor->Description = desc;
-  SendToCharacter( "Buffer cleared.\r\n", ch );
+  ch->Echo( "Buffer cleared.\r\n" );
 }
 
 static void EditorSearchAndReplace( Character *ch, Editor *edd, char *argument )
@@ -695,13 +694,13 @@ static void EditorSearchAndReplace( Character *ch, Editor *edd, char *argument )
 
   if ( IsNullOrEmpty( word_src ) || IsNullOrEmpty( word_dst ) )
     {
-      SendToCharacter( "Need word to replace, and replacement.\r\n", ch );
+      ch->Echo( "Need word to replace, and replacement.\r\n" );
       return;
     }
 
   if ( strcmp( word_src, word_dst ) == 0 )
     {
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo( "Done.\r\n" );
       return;
     }
 
@@ -735,17 +734,17 @@ static void EditorSearchAndReplace( Character *ch, Editor *edd, char *argument )
 
   if( TOTAL_BUFFER_SIZE( cloned_edd ) >= cloned_edd->MaxSize )
     {
-      SendToCharacter( "As a result of this operation, the buffer would grow\r\n"
-                    "larger than its maximum allowed size. Operation has been\r\n"
-                    "cancelled.\r\n", ch );
+      ch->Echo( "As a result of this operation, the buffer would grow\r\n"
+                "larger than its maximum allowed size. Operation has been\r\n"
+                "cancelled.\r\n" );
       DiscardEditData( cloned_edd );
     }
   else
     {
-      Echo( ch, "Replacing all occurrences of '%s' with '%s'...\r\n", word_src, word_dst );
+      ch->Echo( "Replacing all occurrences of '%s' with '%s'...\r\n", word_src, word_dst );
       DiscardEditData( edd );
       ch->Editor = cloned_edd;
-      Echo( ch, "Found and replaced %d occurrence(s).\r\n", repl_count );
+      ch->Echo( "Found and replaced %d occurrence(s).\r\n", repl_count );
     }
 }
 
@@ -756,7 +755,7 @@ static void EditorInsertLine( Character *ch, Editor *edd, char *argument )
 
   if( IsNullOrEmpty( argument ) || !IsNumber(argument) )
     {
-      SendToCharacter( "Must supply the line number.\r\n", ch );
+      ch->Echo( "Must supply the line number.\r\n" );
       return;
     }
 
@@ -764,7 +763,7 @@ static void EditorInsertLine( Character *ch, Editor *edd, char *argument )
 
   if( lineindex < 1 || lineindex > edd->LineCount )
     {
-      Echo( ch, "Line number is out of range (1-%d).\r\n", edd->LineCount );
+      ch->Echo( "Line number is out of range (1-%d).\r\n", edd->LineCount );
       return;
     }
 
@@ -792,7 +791,7 @@ static void EditorInsertLine( Character *ch, Editor *edd, char *argument )
 
   edd->LineCount++;
 
-  Echo( ch, "Inserted line at %d.\r\n", lineindex );
+  ch->Echo( "Inserted line at %d.\r\n", lineindex );
 }
 
 static void EditorDeleteLine( Character *ch, Editor *edd, char *argument )
@@ -803,7 +802,7 @@ static void EditorDeleteLine( Character *ch, Editor *edd, char *argument )
 
   if( IsNullOrEmpty( argument ) || !IsNumber(argument) )
     {
-      SendToCharacter( "Must supply the line number.\r\n", ch );
+      ch->Echo( "Must supply the line number.\r\n" );
       return;
     }
 
@@ -811,7 +810,7 @@ static void EditorDeleteLine( Character *ch, Editor *edd, char *argument )
 
   if( lineindex < 1 || lineindex > edd->LineCount )
     {
-      Echo( ch, "Line number is out of range (1-%d).\r\n", edd->LineCount );
+      ch->Echo( "Line number is out of range (1-%d).\r\n", edd->LineCount );
       return;
     }
 
@@ -824,11 +823,11 @@ static void EditorDeleteLine( Character *ch, Editor *edd, char *argument )
               edd->first_line->Line[0] = '\0';
               edd->first_line->LineUsed = 0;
               edd->TextSize = 0;
-              SendToCharacter( "Deleted line 1.\r\n", ch );
+              ch->Echo( "Deleted line 1.\r\n" );
             }
           else
 	    {
-	      SendToCharacter( "The buffer is empty.\r\n", ch );
+	      ch->Echo( "The buffer is empty.\r\n" );
 	    }
 
           return;
@@ -873,7 +872,7 @@ static void EditorDeleteLine( Character *ch, Editor *edd, char *argument )
   FreeMemory(del_line->Line);
   FreeMemory(del_line);
 
-  Echo( ch, "Deleted line %d.\r\n", lineindex);
+  ch->Echo( "Deleted line %d.\r\n", lineindex);
 }
 
 static void EditorGotoLine( Character *ch, Editor *edd, char *argument )
@@ -883,7 +882,7 @@ static void EditorGotoLine( Character *ch, Editor *edd, char *argument )
 
   if( IsNullOrEmpty( argument ) || !IsNumber(argument) )
     {
-      SendToCharacter( "Must supply the line number.\r\n", ch );
+      ch->Echo( "Must supply the line number.\r\n" );
       return;
     }
 
@@ -891,7 +890,7 @@ static void EditorGotoLine( Character *ch, Editor *edd, char *argument )
 
   if( lineindex < 1 || lineindex > edd->LineCount )
     {
-      Echo( ch, "Line number is out of range (1-%d).\r\n", edd->LineCount );
+      ch->Echo( "Line number is out of range (1-%d).\r\n", edd->LineCount );
       return;
     }
 
@@ -904,7 +903,7 @@ static void EditorGotoLine( Character *ch, Editor *edd, char *argument )
       num++;
     }
 
-  Echo( ch, "On line %d.\r\n", lineindex);
+  ch->Echo( "On line %d.\r\n", lineindex);
 }
 
 static void EditorList( Character *ch, Editor *edd, char *argument )
@@ -937,29 +936,29 @@ static void EditorList( Character *ch, Editor *edd, char *argument )
       to = edd->LineCount;
     }
 
-  SendToPager( "------------------\r\n", ch );
+  ch->Echo( "------------------\r\n" );
   eline = edd->first_line;
 
   while( eline )
     {
       if( line_num >= from && line_num <= to )
 	{
-	  PagerPrintf( ch, "%2d>%c%s\r\n",
-		       line_num,
-		       eline == edd->OnLine ? '*' : ' ',
-		       eline->Line );
+	  ch->Echo( "%2d>%c%s\r\n",
+                    line_num,
+                    eline == edd->OnLine ? '*' : ' ',
+                    eline->Line );
 	}
 
       eline = eline->next;
       line_num++;
     }
 
-  SendToPager( "------------------\r\n", ch );
+  ch->Echo( "------------------\r\n" );
 }
 
 static void EditorAbort( Character *ch, Editor *edd, char *argument )
 {
-  SendToCharacter( "\r\nAborting... ", ch );
+  ch->Echo( "\r\nAborting... " );
   StopEditing( ch );
 }
 
@@ -977,11 +976,11 @@ static void EditorEscapedCommand( Character *ch, Editor *edd, char *argument )
       ch->LastCommand = last_cmd;
 
       SetCharacterColor( AT_GREEN, ch );
-      SendToCharacter( "\r\n", ch );
+      ch->Echo( "\r\n" );
     }
   else
     {
-      SendToCharacter( "You can't use '/!'.\r\n", ch );
+      ch->Echo( "You can't use '/!'.\r\n" );
     }
 }
 
@@ -1130,4 +1129,5 @@ static char *FinerOneArgument( char *argument, char *arg_first )
 
   return argument;
 }
+
 

@@ -11,13 +11,13 @@ void do_rempilot(Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   if  ( ship->Class == SHIP_PLATFORM )
     {
-      SendToCharacter( "&RYou can't do that here.\r\n" , ch );
+      ch->Echo("&RYou can't do that here.\r\n" );
       return;
     }
   the_chance = GetRandomPercent();
@@ -25,14 +25,14 @@ void do_rempilot(Character *ch, char *argument )
     {
       if ( !CheckPilot( ch , ship ) )
         {
-          SendToCharacter( "&RThat isn't your ship!" ,ch );
+          ch->Echo("&RThat isn't your ship!" );
           return;
         }
     }
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "&RRemove which pilot?\r\n" ,ch );
+      ch->Echo("&RRemove which pilot?\r\n" );
       return;
     }
 
@@ -43,7 +43,7 @@ void do_rempilot(Character *ch, char *argument )
     {
       FreeMemory( ship->Pilot );
       ship->Pilot = CopyString( "" );
-      SendToCharacter( "Pilot Removed.\r\n", ch );
+      ch->Echo("Pilot Removed.\r\n");
       Ships->Save(ship);
       return;
     }
@@ -52,10 +52,11 @@ void do_rempilot(Character *ch, char *argument )
     {
       FreeMemory( ship->CoPilot );
       ship->CoPilot = CopyString( "" );
-      SendToCharacter( "Copilot Removed.\r\n", ch );
+      ch->Echo("Copilot Removed.\r\n");
       Ships->Save(ship);
       return;
     }
 
-  SendToCharacter( "&RThat person isn't listed as one of the ships pilots.\r\n" ,ch );
+  ch->Echo("&RThat person isn't listed as one of the ships pilots.\r\n" );
 }
+

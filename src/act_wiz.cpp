@@ -19,9 +19,10 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <ctype.h>
-#include <string.h>
-#include <time.h>
+#include <cassert>
+#include <cctype>
+#include <cstring>
+#include <ctime>
 #include "character.hpp"
 #include "mud.hpp"
 #include "reset.hpp"
@@ -54,9 +55,10 @@ void EchoToAll( short AT_COLOR, const char *argument, short tar )
             continue;
           else if ( tar == ECHOTAR_IMM && !IsImmortal(d->Character) )
             continue;
+          
           SetCharacterColor( AT_COLOR, d->Character );
-          SendToCharacter( argument, d->Character );
-          SendToCharacter( "\r\n",   d->Character );
+          d->Character->Echo( argument );
+          d->Character->Echo( "\r\n" );
         }
     }
 }
@@ -73,19 +75,16 @@ void EchoToRoomNoNewline( int ecolor, const Room *room, const char *argument )
 
 void RealEchoToRoom( short color, const Room *room, const char *text, bool sendNewline )
 {
-  const Character *vic = NULL;
+  assert(room != nullptr);
 
-  if ( room == NULL )
-    return;
-
-  for ( vic = room->FirstPerson; vic; vic = vic->NextInRoom )
+  for ( const Character *vic = room->FirstPerson; vic; vic = vic->NextInRoom )
     {
       SetCharacterColor( color, vic );
-      Echo( vic, text );
+      vic->Echo( text );
 
       if( sendNewline )
 	{
-	  Echo( vic, "\r\n" );
+	  vic->Echo( "\r\n" );
 	}
     }
 }
@@ -111,3 +110,4 @@ void GenerateRebootString(void)
 {
   sprintf(reboot_time, "%s", asctime(new_boot_time));
 }
+

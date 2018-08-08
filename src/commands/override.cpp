@@ -17,31 +17,31 @@ void do_override(Character *ch, char *argument)
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   if ( ship->Class > SHIP_PLATFORM )
     {
-      SendToCharacter("&RThis isn't a spacecraft!",ch);
+      ch->Echo("&RThis isn't a spacecraft!");
       return;
     }
 
   if ( !ship->Spaceobject )
     {
-      SendToCharacter("&RYou can't do that until you've finished launching!\r\n",ch);
+      ch->Echo("&RYou can't do that until you've finished launching!\r\n");
       return;
     }
 
   if ( IsShipInHyperspace( ship ) )
     {
-      SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
+      ch->Echo("&RYou can only do that in realspace!\r\n");
       return;
     }
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter("&ROverride the controls of what ship?\r\n", ch);
+      ch->Echo("&ROverride the controls of what ship?\r\n");
       return;
     }
 
@@ -49,25 +49,25 @@ void do_override(Character *ch, char *argument)
 
   if ( eShip == NULL )
     {
-      SendToCharacter("&RThat ship isn't here!\r\n",ch);
+      ch->Echo("&RThat ship isn't here!\r\n");
       return;
     }
 
   if ( eShip == ship )
     {
-      SendToCharacter("&RYou are in the cockpit, just hit the controls!\r\n", ch);
+      ch->Echo("&RYou are in the cockpit, just hit the controls!\r\n");
       return;
     }
 
   if( GetShipDistanceToShip(eShip, ship) > 100*((ship->Instruments.Comm)+(eShip->Instruments.Comm)+20))
     {
-      SendToCharacter("&RThat ship is out of the range of your comm system.\r\n&w", ch);
+      ch->Echo("&RThat ship is out of the range of your comm system.\r\n&w");
       return;
     }
 
   if ( !CheckPilot(ch,eShip) )
     {
-      SendToCharacter("&RHey! That's not your ship!",ch);
+      ch->Echo("&RHey! That's not your ship!");
       return;
     }
 
@@ -76,7 +76,7 @@ void do_override(Character *ch, char *argument)
       if( eShip->Defenses.Shield.Current == 0 )
         {
           eShip->AutoRecharge = true;
-          SendToCharacter( "&GShields on. Confirmed.\r\n", ch);
+          ch->Echo("&GShields on. Confirmed.\r\n");
           EchoToCockpit( AT_YELLOW , eShip , "Shields ON. Autorecharge ON.");
           return;
         }
@@ -84,14 +84,14 @@ void do_override(Character *ch, char *argument)
         {
           eShip->Defenses.Shield.Current = 0;
           eShip->AutoRecharge = false;
-          SendToCharacter("Shields down. Confirmed", ch);
+          ch->Echo("Shields down. Confirmed");
           return;
         }
     }
   if ( !StrCmp( arg2, "closebay" ) )
     {
       eShip->BayOpen=false;
-      SendToCharacter( "&GBays Close. Confirmed.\r\n", ch);
+      ch->Echo("&GBays Close. Confirmed.\r\n");
       EchoToCockpit( AT_YELLOW , eShip , "Bays Open");
       sprintf( buf ,"%s's bay doors close." , eShip->Name );
       EchoToNearbyShips( AT_YELLOW, eShip, buf , NULL );
@@ -101,7 +101,7 @@ void do_override(Character *ch, char *argument)
   if ( !StrCmp( arg2, "stop" ) )
     {
       eShip->Thrusters.Speed.Current = 0;
-      SendToCharacter( "&GBreaking Thrusters. Confirmed.\r\n", ch);
+      ch->Echo("&GBreaking Thrusters. Confirmed.\r\n");
       EchoToCockpit( AT_GREY , eShip , "Breaking thrusters fire and the ship stops");
       sprintf( buf ,"%s decelerates." , eShip->Name );
       EchoToNearbyShips( AT_GREY, eShip, buf , NULL );
@@ -113,14 +113,14 @@ void do_override(Character *ch, char *argument)
       if ( ship->Autopilot )
         {
           eShip->Autopilot=false;
-          SendToCharacter( "&GYou toggle the autopilot.\r\n", ch);
+          ch->Echo("&GYou toggle the autopilot.\r\n");
           EchoToCockpit( AT_YELLOW , eShip , "Autopilot OFF.");
           return;
         }
       else if ( !ship->Autopilot )
         {
           eShip->Autopilot=true;
-          SendToCharacter( "&GYou toggle the autopilot.\r\n", ch);
+          ch->Echo("&GYou toggle the autopilot.\r\n");
           EchoToCockpit( AT_YELLOW , eShip , "Autopilot ON.");
           return;
         }
@@ -128,7 +128,7 @@ void do_override(Character *ch, char *argument)
 
   if ( !StrCmp( arg2, "openbay" ) )
     {
-      SendToCharacter("&RYou open the bay doors of the remote ship.",ch);
+      ch->Echo("&RYou open the bay doors of the remote ship.");
       Act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
       eShip->BayOpen = true;
       sprintf( buf ,"%s's bay doors open." , eShip->Name );
@@ -136,6 +136,7 @@ void do_override(Character *ch, char *argument)
       return;
     }
 
-  SendToCharacter("Choices: shields - Toggle shields   autopilot - Toggle autopilot\r\n", ch);
-  SendToCharacter("         openbay   closebay  stop  \r\n", ch);
+  ch->Echo("Choices: shields - Toggle shields   autopilot - Toggle autopilot\r\n");
+  ch->Echo("         openbay   closebay  stop  \r\n");
 }
+

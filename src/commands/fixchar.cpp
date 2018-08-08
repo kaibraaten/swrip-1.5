@@ -4,13 +4,13 @@
 void do_fixchar( Character *ch, char *argument )
 {
   char name[MAX_STRING_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
 
   OneArgument( argument, name );
 
   if ( IsNullOrEmpty( name ) )
     {
-      SendToCharacter( "Usage: fixchar <playername>\r\n", ch );
+      ch->Echo( "Usage: fixchar <playername>\r\n" );
       return;
     }
 
@@ -18,10 +18,11 @@ void do_fixchar( Character *ch, char *argument )
 
   if ( !victim )
     {
-      SendToCharacter( "They're not here.\r\n", ch );
+      ch->Echo( "They're not here.\r\n" );
       return;
     }
 
   FixCharacterStats( victim );
-  SendToCharacter( "Done.\r\n", ch );
+  ch->Echo( "Done.\r\n" );
 }
+

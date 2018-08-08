@@ -12,7 +12,7 @@ void do_reboot( Character *ch, char *argument )
        &&   StrCmp( argument, "nosave" )
        &&   StrCmp( argument, "and sort skill table" ) )
     {
-      SendToCharacter( "Syntax: 'reboot mud now' or 'reboot nosave'\r\n", ch );
+      ch->Echo("Syntax: 'reboot mud now' or 'reboot nosave'\r\n");
       return;
     }
 
@@ -37,3 +37,4 @@ void do_reboot( Character *ch, char *argument )
   Ships->Save();
   mud_down = true;
 }
+

@@ -10,7 +10,7 @@ void do_log( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Log whom?\r\n", ch );
+      ch->Echo("Log whom?\r\n");
       return;
     }
 
@@ -19,25 +19,25 @@ void do_log( Character *ch, char *argument )
       if ( fLogAll )
         {
           fLogAll = false;
-          SendToCharacter( "Log ALL off.\r\n", ch );
+          ch->Echo("Log ALL off.\r\n");
         }
       else
         {
           fLogAll = true;
-          SendToCharacter( "Log ALL on.\r\n", ch );
+          ch->Echo("Log ALL on.\r\n");
         }
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPC's.\r\n", ch );
+      ch->Echo("Not on NPC's.\r\n");
       return;
     }
 
@@ -47,11 +47,13 @@ void do_log( Character *ch, char *argument )
   if ( IsBitSet(victim->Flags, PLR_LOG) )
     {
       RemoveBit(victim->Flags, PLR_LOG);
-      SendToCharacter( "LOG removed.\r\n", ch );
+      ch->Echo("LOG removed.\r\n");
     }
   else
     {
       SetBit(victim->Flags, PLR_LOG);
-      SendToCharacter( "LOG set.\r\n", ch );
+      ch->Echo("LOG set.\r\n");
     }
 }
+
+

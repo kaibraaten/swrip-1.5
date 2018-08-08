@@ -197,16 +197,14 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
   assert(clan != NULL);
   assert(members_list != NULL);
 
-  PagerPrintf( ch, "\r\nMembers of %s\r\n", clan->Name );
-  PagerPrintf( ch,
-	       "------------------------------------------------------------------------------\r\n" );
-  PagerPrintf( ch, "Leader: %s\r\n", clan->Leadership.Leader );
-  PagerPrintf( ch, "Number1: %s\r\n", clan->Leadership.Number1 );
-  PagerPrintf( ch, "Number2: %s\r\n", clan->Leadership.Number2 );
-  PagerPrintf( ch, "Spacecraft: %d  Vehicles: %d\r\n", clan->Spacecraft, clan->Vehicles );
-  PagerPrintf( ch,
-	       "------------------------------------------------------------------------------\r\n" );
-  PagerPrintf( ch, "Lvl  Name            Class                 Kills    Deaths              Joined\r\n\r\n" );
+  ch->Echo( "\r\nMembers of %s\r\n", clan->Name );
+  ch->Echo( "------------------------------------------------------------------------------\r\n" );
+  ch->Echo( "Leader: %s\r\n", clan->Leadership.Leader );
+  ch->Echo( "Number1: %s\r\n", clan->Leadership.Number1 );
+  ch->Echo( "Number2: %s\r\n", clan->Leadership.Number2 );
+  ch->Echo( "Spacecraft: %d  Vehicles: %d\r\n", clan->Spacecraft, clan->Vehicles );
+  ch->Echo( "------------------------------------------------------------------------------\r\n" );
+  ch->Echo( "Lvl  Name            Class                 Kills    Deaths              Joined\r\n\r\n" );
 
   if( !IsNullOrEmpty( format ) )
     {
@@ -242,13 +240,13 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
           for(const ClanMember *member : sortedList)
             {
               members++;
-              PagerPrintf( ch, "%3d  %-15s %-17s %9d %9d %19s\r\n",
-                           member->Level,
-                           Capitalize(member->Name ),
-                           AbilityName[member->Ability],
-                           member->Kills,
-                           member->Deaths,
-                           FormatDate( &member->Since ) );
+              ch->Echo( "%3d  %-15s %-17s %9d %9d %19s\r\n",
+                        member->Level,
+                        Capitalize(member->Name ),
+                        AbilityName[member->Ability],
+                        member->Kills,
+                        member->Deaths,
+                        FormatDate( &member->Since ) );
 	    }
         }
       else
@@ -260,13 +258,13 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
               if( !StringPrefix( format, member->Name ) )
                 {
                   members++;
-                  PagerPrintf( ch, "%3d  %-15s %-17s %9d %9d %19s\r\n",
-                               member->Level,
-                               Capitalize(member->Name ),
-                               AbilityName[member->Ability],
-                               member->Kills,
-                               member->Deaths,
-                               FormatDate( &member->Since ) );
+                  ch->Echo( "%3d  %-15s %-17s %9d %9d %19s\r\n",
+                            member->Level,
+                            Capitalize(member->Name ),
+                            AbilityName[member->Ability],
+                            member->Kills,
+                            member->Deaths,
+                            FormatDate( &member->Since ) );
                 }
             }
         }
@@ -278,19 +276,19 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
       for( member = members_list->FirstMember; member; member = member->Next )
 	{
 	  members++;
-	  PagerPrintf( ch, "%3d  %-15s %-17s %9d %9d %19s\r\n",
-		       member->Level,
-		       Capitalize(member->Name),
-		       AbilityName[member->Ability],
-		       member->Kills,
-		       member->Deaths,
-		       FormatDate( &member->Since ) );
+	  ch->Echo( "%3d  %-15s %-17s %9d %9d %19s\r\n",
+                    member->Level,
+                    Capitalize(member->Name),
+                    AbilityName[member->Ability],
+                    member->Kills,
+                    member->Deaths,
+                    FormatDate( &member->Since ) );
 	}
     }
 
-  PagerPrintf( ch, "------------------------------------------------------------------------------\r\n" );
-  PagerPrintf( ch, "Total Members: %d\r\n", members );
-  PagerPrintf( ch, "------------------------------------------------------------------------------\r\n" );
+  ch->Echo( "------------------------------------------------------------------------------\r\n" );
+  ch->Echo( "Total Members: %d\r\n", members );
+  ch->Echo( "------------------------------------------------------------------------------\r\n" );
 }
 
 void RemoveClanMember( const Character *ch )
@@ -869,3 +867,4 @@ ClanRepository *NewClanRepository()
 {
   return new LuaClanRepository();
 }
+

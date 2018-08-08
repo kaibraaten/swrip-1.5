@@ -17,19 +17,19 @@ void do_shove( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Shove whom?\r\n", ch);
+      ch->Echo("Shove whom?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch);
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if (victim == ch)
     {
-      SendToCharacter("You shove yourself around, to no avail.\r\n", ch);
+      ch->Echo("You shove yourself around, to no avail.\r\n");
       return;
     }
 
@@ -41,7 +41,7 @@ void do_shove( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "Shove them in which direction?\r\n", ch);
+      ch->Echo("Shove them in which direction?\r\n");
       return;
     }
 
@@ -50,7 +50,7 @@ void do_shove( Character *ch, char *argument )
   if ( IsBitSet(victim->InRoom->Flags, ROOM_SAFE)
        &&  GetTimer(victim, TIMER_SHOVEDRAG) <= 0)
     {
-      SendToCharacter("That character cannot be shoved right now.\r\n", ch);
+      ch->Echo("That character cannot be shoved right now.\r\n");
       return;
     }
 
@@ -65,7 +65,7 @@ void do_shove( Character *ch, char *argument )
 
           if ( IsNullOrEmpty( argument ) )
             {
-              SendToCharacter( "Shove them into what?\r\n", ch );
+              ch->Echo("Shove them into what?\r\n");
               return;
             }
 
@@ -90,7 +90,7 @@ void do_shove( Character *ch, char *argument )
             {
               if ( !ship->HatchOpen )
                 {
-                  SendToCharacter( "&RThe hatch is closed!\r\n", ch);
+                  ch->Echo("&RThe hatch is closed!\r\n");
                   return;
                 }
 
@@ -103,7 +103,7 @@ void do_shove( Character *ch, char *argument )
 		    {
 		      if ( count+2 >= to_room->Tunnel )
 			{
-			  SendToCharacter( "There is no room for you both in there.\r\n", ch );
+     ch->Echo("There is no room for you both in there.\r\n");
 			  return;
 			}
 		    }
@@ -112,7 +112,7 @@ void do_shove( Character *ch, char *argument )
               if ( ship->State == SHIP_LAUNCH
 		   || ship->State == SHIP_LAUNCH_2 )
 		{
-                  SendToCharacter("&rThat ship.hppas already started launching!\r\n",ch);
+                  ch->Echo("&rThat ship.hppas already started launching!\r\n");
                   return;
                 }
 
@@ -140,7 +140,7 @@ void do_shove( Character *ch, char *argument )
             }
           else
             {
-              SendToCharacter("That ship.hppas no entrance!\r\n", ch);
+              ch->Echo("That ship.hppas no entrance!\r\n");
               return;
             }
         }
@@ -153,7 +153,7 @@ void do_shove( Character *ch, char *argument )
 
           if ( !ship )
             {
-              SendToCharacter( "I see no exit here.\r\n" , ch );
+              ch->Echo("I see no exit here.\r\n" );
               return;
             }
 
@@ -165,19 +165,19 @@ void do_shove( Character *ch, char *argument )
 
           if ( ship->LastDock != ship->Location )
             {
-              SendToCharacter("&rMaybe you should wait until the ship lands.\r\n",ch);
+              ch->Echo("&rMaybe you should wait until the ship lands.\r\n");
               return;
             }
 
           if ( ship->State != SHIP_LANDED && !IsShipDisabled( ship ) )
             {
-              SendToCharacter("&rPlease wait till the ship is properly docked.\r\n",ch);
+              ch->Echo("&rPlease wait till the ship is properly docked.\r\n");
               return;
             }
 
           if ( ! ship->HatchOpen )
             {
-              SendToCharacter("&RYou need to open the hatch first" , ch );
+              ch->Echo("&RYou need to open the hatch first" );
               return;
             }
 
@@ -194,14 +194,14 @@ void do_shove( Character *ch, char *argument )
                   for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
                     if ( count+2 >= to_room->Tunnel )
                       {
-                        SendToCharacter( "There is no room for you both in there.\r\n", ch );
+                        ch->Echo("There is no room for you both in there.\r\n");
                         return;
                       }
                 }
 
               if ( ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2 )
                 {
-                  SendToCharacter("&rThat ship.hppas already started launching!\r\n",ch);
+                  ch->Echo("&rThat ship.hppas already started launching!\r\n");
                   return;
                 }
 
@@ -229,7 +229,7 @@ void do_shove( Character *ch, char *argument )
             }
           else
             {
-              SendToCharacter("That ship.hppas no entrance!\r\n", ch);
+              ch->Echo("That ship.hppas no entrance!\r\n");
               return;
             }
         }
@@ -245,21 +245,21 @@ void do_shove( Character *ch, char *argument )
 
   if ( nogo )
     {
-      SendToCharacter( "There's no exit in that direction.\r\n", ch );
+      ch->Echo("There's no exit in that direction.\r\n");
       victim->Position = POS_STANDING;
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter("You can only shove player characters.\r\n", ch);
+      ch->Echo("You can only shove player characters.\r\n");
       return;
     }
 
   if (ch->InRoom->Area != pexit->ToRoom->Area
       &&  !InHardRange( victim, pexit->ToRoom->Area ) )
     {
-      SendToCharacter("That character cannot enter that area.\r\n", ch);
+      ch->Echo("That character cannot enter that area.\r\n");
       victim->Position = POS_STANDING;
       return;
     }
@@ -270,7 +270,7 @@ void do_shove( Character *ch, char *argument )
 
   if (shove_chance < GetRandomPercent())
     {
-      SendToCharacter("You failed.\r\n", ch);
+      ch->Echo("You failed.\r\n");
       victim->Position = POS_STANDING;
       return;
     }
@@ -292,3 +292,4 @@ void do_shove( Character *ch, char *argument )
       AddTimerToCharacter( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_PAUSE );
     }
 }
+

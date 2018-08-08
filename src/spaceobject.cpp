@@ -438,3 +438,4 @@ SpaceobjectRepository *NewSpaceobjectRepository()
 {
   return new LuaSpaceobjectRepository();
 }
+

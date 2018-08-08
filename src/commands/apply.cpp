@@ -6,12 +6,12 @@
  */
 void do_apply( Character *ch, char *argument )
 {
-  Object *obj;
-  ch_ret retcode;
+  Object *obj = nullptr;
+  ch_ret retcode = rNONE;
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Apply what?\r\n", ch );
+      ch->Echo( "Apply what?\r\n" );
       return;
     }
 
@@ -20,7 +20,7 @@ void do_apply( Character *ch, char *argument )
 
   if ( ( obj = GetCarriedObject( ch, argument ) ) == NULL )
     {
-      SendToCharacter( "You do not have that.\r\n", ch );
+      ch->Echo( "You do not have that.\r\n" );
       return;
     }
 
@@ -57,3 +57,4 @@ void do_apply( Character *ch, char *argument )
   if ( !IsObjectExtracted(obj) && obj->Value[1] <= 0 )
     ExtractObject( obj );
 }
+

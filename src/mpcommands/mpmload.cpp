@@ -16,7 +16,7 @@ void do_mpmload( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -37,3 +37,4 @@ void do_mpmload( Character *ch, char *argument )
   victim = CreateMobile( pMobIndex );
   CharacterToRoom( victim, ch->InRoom );
 }
+

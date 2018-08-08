@@ -10,7 +10,7 @@ void do_clan_withdraw( Character *ch, char *argument )
 
   if ( !IsClanned( ch ) )
     {
-      Echo( ch, "You don't seem to belong to an organization to withdraw funds from...\r\n" );
+      ch->Echo( "You don't seem to belong to an organization to withdraw funds from...\r\n" );
       return;
     }
 
@@ -22,7 +22,7 @@ void do_clan_withdraw( Character *ch, char *argument )
     }
   else
     {
-      SendToCharacter( "&RYour organization hasn't seen fit to bestow you with that ability." ,ch );
+      ch->Echo( "&RYour organization hasn't seen fit to bestow you with that ability." );
       return;
     }
 
@@ -30,7 +30,7 @@ void do_clan_withdraw( Character *ch, char *argument )
     {
       if (!ch->InRoom || !IsBitSet(ch->InRoom->Flags, ROOM_BANK) )
         {
-          SendToCharacter( "You must be in a bank or have a comlink to do that!\r\n", ch );
+          ch->Echo( "You must be in a bank or have a comlink to do that!\r\n" );
           return;
         }
     }
@@ -38,27 +38,28 @@ void do_clan_withdraw( Character *ch, char *argument )
   clan = ch->PCData->ClanInfo.Clan;
   amount = atoi( argument );
 
-  if ( !amount )
+  if ( amount == 0 )
     {
-      SendToCharacter( "How much would you like to withdraw?\r\n", ch );
+      ch->Echo( "How much would you like to withdraw?\r\n" );
       return;
     }
 
-  if ( amount > clan->Funds )
+  if ( clan->Funds < amount )
     {
-      Echo( ch,  "%s doesn't have that much!\r\n", clan->Name );
+      ch->Echo( "%s doesn't have that much!\r\n", clan->Name );
       return;
     }
 
   if ( amount < 0 )
     {
-      Echo( ch,  "Nice try...\r\n" );
+      ch->Echo( "Nice try...\r\n" );
       return;
     }
 
-  Echo( ch,  "You withdraw %ld credits from %s's funds.\r\n", amount, clan->Name );
+  ch->Echo( "You withdraw %ld credits from %s's funds.\r\n", amount, clan->Name );
 
   clan->Funds -= amount;
   ch->Gold += amount;
   SaveCharacter( ch );
 }
+

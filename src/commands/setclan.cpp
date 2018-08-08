@@ -19,7 +19,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -28,14 +28,14 @@ void do_setclan( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: setclan <clan> <field> <leader|number1|number2> <player>\r\n", ch );
-      SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( " leader number1 number2 addguild enlist1 jail\r\n", ch );
-      SendToCharacter( " enlist2 board storage funds\r\n", ch );
+      ch->Echo("Usage: setclan <clan> <field> <leader|number1|number2> <player>\r\n");
+      ch->Echo("\r\nField being one of:\r\n");
+      ch->Echo(" leader number1 number2 addguild enlist1 jail\r\n");
+      ch->Echo(" enlist2 board storage funds\r\n");
 
       if ( GetTrustLevel( ch ) >= LEVEL_SUB_IMPLEM )
         {
-          SendToCharacter( " name desc\r\n", ch );
+          ch->Echo(" name desc\r\n");
         }
 
       return;
@@ -45,14 +45,14 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !clan )
     {
-      SendToCharacter( "No such clan.\r\n", ch );
+      ch->Echo("No such clan.\r\n");
       return;
     }
 
   if ( !StrCmp( arg2, "enlistroom1" ) )
     {
       clan->EnlistRoom1 = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
     }
@@ -60,7 +60,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "enlistroom2" ) )
     {
       clan->EnlistRoom2 = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
     }
@@ -69,7 +69,7 @@ void do_setclan( Character *ch, char *argument )
     {
       FreeMemory( clan->Leadership.Leader );
       clan->Leadership.Leader = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
     }
@@ -80,19 +80,19 @@ void do_setclan( Character *ch, char *argument )
 
       if ( !guild )
         {
-          SendToCharacter( "Guild does't exist.\r\n", ch );
+          ch->Echo("Guild does't exist.\r\n");
           return;
         }
 
       if ( guild->Type == CLAN_GUILD || guild->MainClan )
         {
-          SendToCharacter( "Guild is already part of another faction.\r\n", ch );
+          ch->Echo("Guild is already part of another faction.\r\n");
           return;
         }
 
       if (!guild->Subclans.empty())
         {
-          SendToCharacter( "Guild has guilds of its own that need removing first.\r\n", ch );
+          ch->Echo("Guild has guilds of its own that need removing first.\r\n");
           return;
         }
 
@@ -107,7 +107,7 @@ void do_setclan( Character *ch, char *argument )
     {
       FreeMemory( clan->Leadership.Number1 );
       clan->Leadership.Number1 = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
     }
@@ -116,7 +116,7 @@ void do_setclan( Character *ch, char *argument )
     {
       FreeMemory( clan->Leadership.Number2 );
       clan->Leadership.Number2 = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
     }
@@ -124,7 +124,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "board" ) )
     {
       clan->Board = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
     }
@@ -132,7 +132,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "funds" ) )
     {
       clan->Funds = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
     }
@@ -140,7 +140,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "storage" ) )
     {
       clan->Storeroom = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
     }
@@ -148,7 +148,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "jail" ) )
     {
       clan->Jail = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
     }
@@ -170,7 +170,7 @@ void do_setclan( Character *ch, char *argument )
 
       if( GetClan( argument ) )
 	{
-	  Echo( ch, "There's already another guild with that name." );
+   ch->Echo("There's already another guild with that name." );
 	  return;
 	}
 
@@ -185,7 +185,7 @@ void do_setclan( Character *ch, char *argument )
       FreeMemory( memberList->Name );
       memberList->Name = CopyString( clan->Name );
 
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
     }
@@ -194,7 +194,7 @@ void do_setclan( Character *ch, char *argument )
     {
       FreeMemory( clan->Description );
       clan->Description = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
     }
@@ -214,3 +214,4 @@ static bool UpdateOwnerName(Ship *ship, void *userData)
 
   return true;
 }
+

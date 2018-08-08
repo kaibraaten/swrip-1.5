@@ -6,25 +6,25 @@
 
 static bool aff_paralysis( Character *ch, Character *victim );
 
-void do_bind ( Character *ch , char *argument )
+void do_bind( Character *ch , char *argument )
 {
   Character *victim = nullptr;
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Bind whom?\r\n", ch );
+      ch->Echo( "Bind whom?\r\n" );
       return;
     }
 
   if ( ( victim = GetCharacterInRoom( ch, argument ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "Suicide is a mortal sin.\r\n", ch );
+      ch->Echo( "Suicide is a mortal sin.\r\n" );
       return;
     }
 
@@ -47,7 +47,7 @@ void do_bind ( Character *ch , char *argument )
 
   if ( ch->Position == POS_FIGHTING )
     {
-      SendToCharacter( "You are a little busy!\r\n", ch );
+      ch->Echo( "You are a little busy!\r\n" );
       return;
     }
 
@@ -57,7 +57,7 @@ void do_bind ( Character *ch , char *argument )
 
   if ( IsNpc(victim) || GetRandomPercent() > ch->PCData->Learned[gsn_bind] )
     {
-      SendToCharacter( "You fail.\r\n", ch );
+      ch->Echo( "You fail.\r\n" );
       return;
     }
 
@@ -95,3 +95,4 @@ static bool aff_paralysis( Character *ch, Character *victim )
 
   return true;
 }
+

@@ -10,41 +10,42 @@ void do_demote( Character *ch , char *argument )
 
   if ( !IsClanned( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo( "Huh?\r\n" );
       return;
     }
 
   if ( StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Leader  )  )
     {
-      SendToCharacter( "Only your leader can do that!\r\n", ch );
+      ch->Echo( "Only your leader can do that!\r\n" );
       return;
     }
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Demote who?\r\n", ch );
+      ch->Echo( "Demote who?\r\n" );
       return;
     }
 
   if ( !StrCmp( argument , ch->PCData->ClanInfo.Clan->Leadership.Number1 )  )
     {
-      SendToCharacter( "Player Demoted!", ch );
+      ch->Echo( "Player demoted!" );
 
       FreeMemory( ch->PCData->ClanInfo.Clan->Leadership.Number1 );
       ch->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
     }
   else if ( !StrCmp( argument , ch->PCData->ClanInfo.Clan->Leadership.Number2 )  )
     {
-      SendToCharacter( "Player Demoted!", ch );
+      ch->Echo( "Player Demoted!" );
 
       FreeMemory( ch->PCData->ClanInfo.Clan->Leadership.Number2 );
       ch->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
     }
   else
     {
-      SendToCharacter( "They seem to have been demoted already.\r\n", ch );
+      ch->Echo( "They seem to have been demoted already.\r\n" );
       return;
     }
 
   Clans->Save( ch->PCData->ClanInfo.Clan );
 }
+

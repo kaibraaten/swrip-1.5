@@ -85,7 +85,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( IsNullOrEmpty( argument ) || IsNullOrEmpty( sex ) || IsNullOrEmpty( race ) )
     {
-      Echo( ch, "&RUsage: Makedisguise <sex> <race> <name>\r\n&w" );
+      ch->Echo("&RUsage: Makedisguise <sex> <race> <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
@@ -94,7 +94,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if( ud->Sex < 0 )
     {
-      Echo( ch, "Sex must be male, female or neutral.&w\r\n" );
+      ch->Echo("Sex must be male, female or neutral.&w\r\n" );
       args->AbortSession = true;
       return;
     }
@@ -103,7 +103,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if( ud->Race < 0 )
     {
-      Echo( ch, "&R'%s' is not a valid race.&w\r\n", race );
+      ch->Echo("&R'%s' is not a valid race.&w\r\n", race );
       args->AbortSession = true;
       return;
     }
@@ -160,3 +160,5 @@ static void FreeUserData( struct UserData *ud )
 
   FreeMemory( ud );
 }
+
+

@@ -12,25 +12,25 @@ void do_bestow( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Bestow whom with what?\r\n", ch );
+      ch->Echo( "Bestow whom with what?\r\n" );
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo( "They aren't here.\r\n" );
       return;
     }
 
   if ( IsNpc( victim ) )
     {
-      SendToCharacter( "You can't give special abilities to a mob!\r\n", ch );
+      ch->Echo( "You can't give special abilities to a mob!\r\n" );
       return;
     }
 
   if ( GetTrustLevel( victim ) > GetTrustLevel( ch ) )
     {
-      SendToCharacter( "You aren't powerful enough...\r\n", ch );
+      ch->Echo( "You aren't powerful enough...\r\n" );
       return;
     }
 
@@ -39,8 +39,8 @@ void do_bestow( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) || !StrCmp( argument, "list" ) )
     {
-      Echo( ch, "Current bestowed commands on %s: %s.\r\n",
-                 victim->Name, victim->PCData->Bestowments );
+      ch->Echo( "Current bestowed commands on %s: %s.\r\n",
+                victim->Name, victim->PCData->Bestowments );
       return;
     }
 
@@ -48,15 +48,16 @@ void do_bestow( Character *ch, char *argument )
     {
       FreeMemory( victim->PCData->Bestowments );
       victim->PCData->Bestowments = CopyString("");
-      Echo( ch, "Bestowments removed from %s.\r\n", victim->Name );
-      Echo( victim, "%s has removed your bestowed commands.\r\n", ch->Name );
+      ch->Echo( "Bestowments removed from %s.\r\n", victim->Name );
+      victim->Echo( "%s has removed your bestowed commands.\r\n", ch->Name );
       return;
     }
 
   sprintf( buf, "%s %s", victim->PCData->Bestowments, argument );
   FreeMemory( victim->PCData->Bestowments );
   victim->PCData->Bestowments = CopyString( buf );
-  Echo( victim, "%s has bestowed on you the command(s): %s\r\n",
-             ch->Name, argument );
-  SendToCharacter( "Done.\r\n", ch );
+  victim->Echo( "%s has bestowed on you the command(s): %s\r\n",
+                ch->Name, argument );
+  ch->Echo( "Done.\r\n" );
 }
+

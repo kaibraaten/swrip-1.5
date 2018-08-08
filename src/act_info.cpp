@@ -238,8 +238,9 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
       if ( fShowNothing )
         {
           if ( IsNpc(ch) || IsBitSet(ch->Flags, PLR_COMBINE) )
-            SendToCharacter( "     ", ch );
-          SendToCharacter( "Nothing.\r\n", ch );
+            ch->Echo( "     " );
+          
+          ch->Echo( "Nothing.\r\n" );
         }
       return;
     }
@@ -273,8 +274,9 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
       if ( fShowNothing )
         {
           if ( IsNpc(ch) || IsBitSet(ch->Flags, PLR_COMBINE) )
-            SendToCharacter( "     ", ch );
-          SendToCharacter( "Nothing.\r\n", ch );
+            ch->Echo( "     " );
+
+          ch->Echo( "Nothing.\r\n" );
         }
       return;
     }
@@ -391,17 +393,17 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
 
       if ( fShowNothing )
 	{
-	  SendToCharacter( "     ", ch );
+	  ch->Echo( "     " );
 	}
 
-      SendToCharacter( prgpstrShow[iShow], ch );
+      ch->Echo( prgpstrShow[iShow] );
 
       if ( prgnShow[iShow] != 1 )
 	{
-	  Echo( ch, " (%d)", prgnShow[iShow] );
+	  ch->Echo( " (%d)", prgnShow[iShow] );
 	}
 
-      SendToCharacter( "\r\n", ch );
+      ch->Echo( "\r\n" );
       FreeMemory( prgpstrShow[iShow] );
     }
 
@@ -409,10 +411,10 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
     {
       if ( IsNpc(ch) || IsBitSet(ch->Flags, PLR_COMBINE) )
 	{
-	  SendToCharacter( "     ", ch );
+	  ch->Echo( "     " );
 	}
 
-      SendToCharacter( "Nothing.\r\n", ch );
+      ch->Echo( "Nothing.\r\n" );
     }
 
   /*
@@ -469,6 +471,8 @@ void ShowCharacterCondition( const Character *ch, const Character *victim )
       else                       strcat( buf, " is DYING.\r\n"              );
 
     }
+  
   buf[0] = CharToUppercase(buf[0]);
-  SendToCharacter( buf, ch );
+  ch->Echo( buf );
 }
+

@@ -22,36 +22,36 @@ void do_score(Character * ch, char *argument)
 
   SetCharacterColor(AT_SCORE, ch);
 
-  Echo(ch, "\r\n&CScore for %s.\r\n", ch->PCData->Title);
+  ch->Echo("\r\n&CScore for %s.\r\n", ch->PCData->Title);
   SetCharacterColor(AT_SCORE, ch);
 
   if ( GetTrustLevel( ch ) != ch->TopLevel )
-    Echo( ch, "&cYou are trusted at level &C%d.\r\n", GetTrustLevel( ch ) );
+    ch->Echo("&cYou are trusted at level &C%d.\r\n", GetTrustLevel( ch ) );
 
-  SendToCharacter("&C----------------------------------------------------------------------------\r\n", ch);
+  ch->Echo("&C----------------------------------------------------------------------------\r\n");
 
-  Echo(ch,   "&cRace: %-17.10s                &cLog In:  &C%s\r",
+  ch->Echo("&cRace: %-17.10s                &cLog In:  &C%s\r",
             Capitalize(GetCharacterRace(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->PCData->Logon)) ) );
 
-  Echo(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
+  ch->Echo("&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
             GetHitRoll(ch), GetDamageRoll(ch), GetArmorClass(ch),
             (ch->PCData && ch->PCData->SaveTime) ? ctime(&(ch->PCData->SaveTime)) : "no\n" );
 
-  Echo(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
+  ch->Echo("&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
             ch->Alignment, ch->Wimpy  , ctime(&current_time) );
 
   if ( IsJedi( ch ) || IsImmortal(ch) )
-    Echo(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
+    ch->Echo("&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
               ch->Hit, ch->MaxHit, ch->Move, ch->MaxMove, ch->Mana, ch->MaxMana );
   else
-    Echo(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d\r\n",
+    ch->Echo("&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d\r\n",
               ch->Hit, ch->MaxHit, ch->Move, ch->MaxMove);
 
-  Echo(ch, "&cStr: &C%2d  &cDex: &C%2d  &cCon: &C%2d  &cInt: &C%2d  &cWis: &C%2d  &cCha: &C%2d  &cLck: &C??  &cFrc: &C??\r\n",
+  ch->Echo("&cStr: &C%2d  &cDex: &C%2d  &cCon: &C%2d  &cInt: &C%2d  &cWis: &C%2d  &cCha: &C%2d  &cLck: &C??  &cFrc: &C??\r\n",
             GetCurrentStrength(ch), GetCurrentDexterity(ch),GetCurrentConstitution(ch),GetCurrentIntelligence(ch),GetCurrentWisdom(ch),GetCurrentCharisma(ch));
 
 
-  SendToCharacter("&C----------------------------------------------------------------------------\r\n", ch);
+  ch->Echo("&C----------------------------------------------------------------------------\r\n");
 
   {
     int ability;
@@ -71,7 +71,7 @@ void do_score(Character * ch, char *argument)
 		sprintf(maxbuf, "%d", GetMaxAbilityLevel(ch, ability));
 	      }
 
-	    Echo( ch, "&c%-15s   &CLevel: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
+     ch->Echo("&c%-15s   &CLevel: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
 		       Capitalize(AbilityName[ability]),
 		       GetAbilityLevel( ch, ability ), maxbuf,
 		       GetAbilityXP( ch, ability ),
@@ -79,23 +79,23 @@ void do_score(Character * ch, char *argument)
 	  }
 	else
 	  {
-	    Echo( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
+     ch->Echo("&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
 		       Capitalize(AbilityName[ability]), GetAbilityLevel( ch, ability ), GetAbilityXP( ch, ability ) );
 	  }
       }
   }
 
-  SendToCharacter("&C----------------------------------------------------------------------------\r\n", ch);
+  ch->Echo("&C----------------------------------------------------------------------------\r\n");
 
 
 
-  Echo(ch, "&cCREDITS: &C%-10d   &cBANK: &C%-10d    &cPkills: &C%-5.5d   &cMkills: &C%-5.5d\r\n",
+  ch->Echo("&cCREDITS: &C%-10d   &cBANK: &C%-10d    &cPkills: &C%-5.5d   &cMkills: &C%-5.5d\r\n",
             ch->Gold, ch->PCData->Bank, ch->PCData->PKills, ch->PCData->MKills);
 
-  Echo(ch, "&cWeight: &C%5.5d &c(&Cmax %7.7d&c)    Items: &C%5.5d &c(&Cmax %5.5d&c)\r\n",
+  ch->Echo("&cWeight: &C%5.5d &c(&Cmax %7.7d&c)    Items: &C%5.5d &c(&Cmax %5.5d&c)\r\n",
             ch->CarryWeight, GetCarryCapacityWeight(ch) , ch->CarryNumber, GetCarryCapacityNumber(ch));
 
-  Echo(ch, "&cPager: &C(%c) %3d   &cAutoExit(&C%c&c)  AutoLoot(&C%c&c)  Autosac(&C%c&c)\r\n",
+  ch->Echo("&cPager: &C(%c) %3d   &cAutoExit(&C%c&c)  AutoLoot(&C%c&c)  Autosac(&C%c&c)\r\n",
             IsBitSet(ch->PCData->Flags, PCFLAG_PAGERON) ? 'X' : ' ',
             ch->PCData->PagerLength, IsBitSet(ch->Flags, PLR_AUTOEXIT) ? 'X' : ' ',
             IsBitSet(ch->Flags, PLR_AUTOLOOT) ? 'X' : ' ', IsBitSet(ch->Flags, PLR_AUTOSAC) ? 'X' : ' ');
@@ -146,52 +146,52 @@ void do_score(Character * ch, char *argument)
       break;
     }
 
-  SendToCharacter( buf, ch );
+  ch->Echo(buf);
 
   if (!IsNpc(ch) && ch->PCData->Condition[COND_DRUNK] > 10)
-    SendToCharacter("&CYou are drunk.\r\n", ch);
+    ch->Echo("&CYou are drunk.\r\n");
   if (!IsNpc(ch) && ch->PCData->Condition[COND_THIRST] == 0)
-    SendToCharacter("&CYou are in danger of dehydrating.\r\n", ch);
+    ch->Echo("&CYou are in danger of dehydrating.\r\n");
   if (!IsNpc(ch) && ch->PCData->Condition[COND_FULL] == 0)
-    SendToCharacter("&CYou are starving to death.\r\n", ch);
+    ch->Echo("&CYou are starving to death.\r\n");
   if ( ch->Position != POS_SLEEPING )
     switch( ch->MentalState / 10 )
       {
-      default:   SendToCharacter( "&CYou're completely messed up!\r\n", ch );      break;
-      case -10:  SendToCharacter( "&CYou're barely conscious.\r\n", ch );  break;
-      case  -9:  SendToCharacter( "&CYou can barely keep your eyes open.\r\n", ch );       break;
-      case  -8:  SendToCharacter( "&CYou're extremely drowsy.\r\n", ch );  break;
-      case  -7:  SendToCharacter( "&CYou feel very unmotivated.\r\n", ch );        break;
-      case  -6:  SendToCharacter( "&CYou feel sedated.\r\n", ch );         break;
-      case  -5:  SendToCharacter( "&CYou feel sleepy.\r\n", ch );          break;
-      case  -4:  SendToCharacter( "&CYou feel tired.\r\n", ch );           break;
-      case  -3:  SendToCharacter( "&CYou could use a rest.\r\n", ch );             break;
-      case  -2:  SendToCharacter( "&CYou feel a little under the weather.\r\n", ch );      break;
-      case  -1:  SendToCharacter( "&CYou feel fine.\r\n", ch );            break;
-      case   0:  SendToCharacter( "&CYou feel great.\r\n", ch );           break;
-      case   1:  SendToCharacter( "&CYou feel energetic.\r\n", ch );       break;
-      case   2:  SendToCharacter( "&CYour mind is racing.\r\n", ch );      break;
-      case   3:  SendToCharacter( "&CYou can't think straight.\r\n", ch ); break;
-      case   4:  SendToCharacter( "&CYour mind is going 100 miles an hour.\r\n", ch );     break;
-      case   5:  SendToCharacter( "&CYou're high as a kite.\r\n", ch );    break;
-      case   6:  SendToCharacter( "&CYour mind and body are slipping apart.\r\n", ch );    break;
-      case   7:  SendToCharacter( "&CReality is slipping away.\r\n", ch ); break;
-      case   8:  SendToCharacter( "&CYou have no idea what is real, and what is not.\r\n", ch );   break;
-      case   9:  SendToCharacter( "&CYou feel immortal.\r\n", ch );        break;
-      case  10:  SendToCharacter( "&CYou are a Supreme Entity.\r\n", ch ); break;
+      default:   ch->Echo( "&CYou're completely messed up!\r\n" );      break;
+      case -10:  ch->Echo( "&CYou're barely conscious.\r\n" );  break;
+      case  -9:  ch->Echo( "&CYou can barely keep your eyes open.\r\n" );       break;
+      case  -8:  ch->Echo( "&CYou're extremely drowsy.\r\n" );  break;
+      case  -7:  ch->Echo( "&CYou feel very unmotivated.\r\n" );        break;
+      case  -6:  ch->Echo( "&CYou feel sedated.\r\n" );         break;
+      case  -5:  ch->Echo( "&CYou feel sleepy.\r\n" );          break;
+      case  -4:  ch->Echo( "&CYou feel tired.\r\n" );           break;
+      case  -3:  ch->Echo( "&CYou could use a rest.\r\n" );             break;
+      case  -2:  ch->Echo( "&CYou feel a little under the weather.\r\n" );      break;
+      case  -1:  ch->Echo( "&CYou feel fine.\r\n" );            break;
+      case   0:  ch->Echo( "&CYou feel great.\r\n" );           break;
+      case   1:  ch->Echo( "&CYou feel energetic.\r\n" );       break;
+      case   2:  ch->Echo( "&CYour mind is racing.\r\n" );      break;
+      case   3:  ch->Echo( "&CYou can't think straight.\r\n" ); break;
+      case   4:  ch->Echo( "&CYour mind is going 100 miles an hour.\r\n" );     break;
+      case   5:  ch->Echo( "&CYou're high as a kite.\r\n" );    break;
+      case   6:  ch->Echo( "&CYour mind and body are slipping apart.\r\n" );    break;
+      case   7:  ch->Echo( "&CReality is slipping away.\r\n" ); break;
+      case   8:  ch->Echo( "&CYou have no idea what is real, and what is not.\r\n" );   break;
+      case   9:  ch->Echo( "&CYou feel immortal.\r\n" );        break;
+      case  10:  ch->Echo( "&CYou are a Supreme Entity.\r\n" ); break;
       }
   else
     if ( ch->MentalState >45 )
-      SendToCharacter( "&CYour sleep is filled with strange and vivid dreams.\r\n", ch );
+      ch->Echo("&CYour sleep is filled with strange and vivid dreams.\r\n");
     else
       if ( ch->MentalState >25 )
-        SendToCharacter( "&CYour sleep is uneasy.\r\n", ch );
+        ch->Echo("&CYour sleep is uneasy.\r\n");
       else
         if ( ch->MentalState <-35 )
-          SendToCharacter( "&CYou are deep in a much needed sleep.\r\n", ch );
+          ch->Echo("&CYou are deep in a much needed sleep.\r\n");
         else
           if ( ch->MentalState <-25 )
-            SendToCharacter( "&CYou are in deep slumber.\r\n", ch );
+            ch->Echo("&CYou are in deep slumber.\r\n");
 
   if ( !IsNpc(ch) )
     {
@@ -199,21 +199,21 @@ void do_score(Character * ch, char *argument)
 	{
           sprintf( buf,
                    "&cYour current alias focus is : &C%s.\r\n", ch->PCData->Target);
-          SendToCharacter( buf, ch );
+          ch->Echo(buf);
         }
       else
-        SendToCharacter( "&cYou have no current target.\r\n", ch);
+        ch->Echo("&cYou have no current target.\r\n");
     }
 
-  SendToCharacter("&cSPICE Level/Addiction: &C", ch );
+  ch->Echo("&cSPICE Level/Addiction: &C");
   for ( drug = 0; drug <= 9; drug++ )
     if ( ch->PCData->DrugLevel[drug] > 0 || ch->PCData->DrugLevel[drug] > 0 )
       {
-        Echo( ch, "%s&c(&C%d&c/&C%d&c) ", GetSpiceTypeName(drug),
+        ch->Echo("%s&c(&C%d&c/&C%d&c) ", GetSpiceTypeName(drug),
                    ch->PCData->DrugLevel[drug],
                    ch->PCData->Addiction[drug] );
       }
-  SendToCharacter("\r\n&cLanguages: &c", ch );
+  ch->Echo("\r\n&cLanguages: &c");
   for ( iLang = 0; LanguageArray[iLang] != LANG_UNKNOWN; iLang++ )
     if ( CharacterKnowsLanguage( ch, LanguageArray[iLang], ch )
          ||  (IsNpc(ch) && ch->Speaks == 0) )
@@ -222,50 +222,50 @@ void do_score(Character * ch, char *argument)
              ||  (IsNpc(ch) && !ch->Speaking) )
           SetCharacterColor( AT_RED, ch );
 	
-        SendToCharacter( LanguageNames[iLang], ch );
-        SendToCharacter( " ", ch );
+        ch->Echo(LanguageNames[iLang]);
+        ch->Echo(" ");
         SetCharacterColor( AT_SCORE, ch );
       }
 
-  SendToCharacter( "\r\n", ch );
-  Echo( ch, "&cWANTED ON: &C%s\r\n",
+  ch->Echo("\r\n");
+  ch->Echo("&cWANTED ON: &C%s\r\n",
         FlagString(ch->PCData->WantedFlags, WantedFlags).c_str() );
 
   if ( !IsNullOrEmpty( ch->PCData->Bestowments ) )
-    Echo( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",
+    ch->Echo("&cYou are bestowed with the command(s): &C%s.\r\n",
                ch->PCData->Bestowments );
 
   if ( IsClanned( ch ) )
     {
       Clan *clan = ch->PCData->ClanInfo.Clan;
 
-      SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
-      Echo(ch, "&cORGANIZATION: &C%-35s &cSALARY: &C%-10d    &cPkills/Deaths: &C%3.3d&c/&C%3.3d",
+      ch->Echo("&C----------------------------------------------------------------------------\r\n");
+      ch->Echo("&cORGANIZATION: &C%-35s &cSALARY: &C%-10d    &cPkills/Deaths: &C%3.3d&c/&C%3.3d",
 	   clan->Name, ch->PCData->ClanInfo.Salary, clan->PlayerKills, clan->PlayerDeaths) ;
-      SendToCharacter( "\r\n", ch );
+      ch->Echo("\r\n");
     }
 
   if (IsImmortal(ch))
     {
-      SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
+      ch->Echo("&C----------------------------------------------------------------------------\r\n");
 
-      Echo(ch, "&cIMMORTAL DATA:  Wizinvis [&C%s&c]  Wizlevel (&C%d&c)\r\n",
+      ch->Echo("&cIMMORTAL DATA:  Wizinvis [&C%s&c]  Wizlevel (&C%d&c)\r\n",
                 IsBitSet(ch->Flags, PLR_WIZINVIS) ? "X" : " ", ch->PCData->WizInvis );
 
-      Echo(ch, "&cBamfin:  &C%s\r\n", !IsNullOrEmpty( ch->PCData->BamfIn )
+      ch->Echo("&cBamfin:  &C%s\r\n", !IsNullOrEmpty( ch->PCData->BamfIn )
                 ? ch->PCData->BamfIn : "%s appears in a swirling mist.", ch->Name);
-      Echo(ch, "&cBamfout: &C%s\r\n", !IsNullOrEmpty( ch->PCData->BamfOut )
+      ch->Echo("&cBamfout: &C%s\r\n", !IsNullOrEmpty( ch->PCData->BamfOut )
                 ? ch->PCData->BamfOut : "%s leaves in a swirling mist.", ch->Name);
 
 
       /* Area Loaded info - Scryn 8/11*/
       if (ch->PCData->Build.Area)
         {
-          Echo(ch, "&cVnums:   Room (&C%-5.5d &c- &C%-5.5d&c)   Object (&C%-5.5d &c- &C%-5.5d&c)   Mob (&C%-5.5d &c- &C%-5.5d&c)\r\n",
+          ch->Echo("&cVnums:   Room (&C%-5.5d &c- &C%-5.5d&c)   Object (&C%-5.5d &c- &C%-5.5d&c)   Mob (&C%-5.5d &c- &C%-5.5d&c)\r\n",
                     ch->PCData->Build.Area->VnumRanges.Room.First, ch->PCData->Build.Area->VnumRanges.Room.Last,
                     ch->PCData->Build.Area->VnumRanges.Object.First, ch->PCData->Build.Area->VnumRanges.Object.Last,
                     ch->PCData->Build.Area->VnumRanges.Mob.First, ch->PCData->Build.Area->VnumRanges.Mob.Last);
-          Echo(ch, "&cArea Loaded [&C%s&c]\r\n", (IsBitSet (ch->PCData->Build.Area->Status, AREA_LOADED)) ? "yes" : "no");
+          ch->Echo("&cArea Loaded [&C%s&c]\r\n", (IsBitSet (ch->PCData->Build.Area->Status, AREA_LOADED)) ? "yes" : "no");
         }
     }
 
@@ -275,8 +275,8 @@ void do_score(Character * ch, char *argument)
       const Skill *sktmp = NULL;
       const Affect *paf = NULL;
 
-      SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
-      SendToCharacter("&cAFFECT DATA:                            &C", ch);
+      ch->Echo("&C----------------------------------------------------------------------------\r\n");
+      ch->Echo("&cAFFECT DATA:                            &C");
       for (paf = ch->FirstAffect; paf; paf = paf->Next)
         {
           if ( (sktmp=GetSkill(paf->Type)) == NULL )
@@ -284,28 +284,28 @@ void do_score(Character * ch, char *argument)
 
           if (ch->TopLevel < 20)
             {
-              Echo(ch, "&c[&C%-34.34s&c]    ", Capitalize(sktmp->Name));
+              ch->Echo("&c[&C%-34.34s&c]    ", Capitalize(sktmp->Name));
 
               if (i == 0)
                 i = 2;
 
               if ((++i % 3) == 0)
-                SendToCharacter("\r\n", ch);
+                ch->Echo("\r\n");
             }
           else
             {
               if (paf->Modifier == 0)
-                Echo(ch, "&c[&C%-24.24s&c;&C%5d rds&c]    ",
+                ch->Echo("&c[&C%-24.24s&c;&C%5d rds&c]    ",
                           Capitalize(sktmp->Name),
                           paf->Duration);
               else
                 if (paf->Modifier > 999)
-		  Echo(ch, "&c[&C%-15.15s&c; &C%7.7s;%5d rds&c]    ",
+                  ch->Echo("&c[&C%-15.15s&c; &C%7.7s;%5d rds&c]    ",
                             Capitalize(sktmp->Name),
                             TinyGetAffectLocationName(paf->Location),
                             paf->Duration);
                 else
-                  Echo(ch, "&c[&C%-11.11s&c;&C%+-3.3d %7.7s&c;&C%5d rds&c]    ",
+                  ch->Echo("&c[&C%-11.11s&c;&C%+-3.3d %7.7s&c;&C%5d rds&c]    ",
                             Capitalize(sktmp->Name),
                             paf->Modifier,
                             TinyGetAffectLocationName(paf->Location),
@@ -313,11 +313,11 @@ void do_score(Character * ch, char *argument)
               if (i == 0)
                 i = 1;
               if ((++i % 2) == 0)
-                SendToCharacter("\r\n", ch);
+                ch->Echo("\r\n");
             }
         }
     }
-  SendToCharacter("\r\n", ch);
+  ch->Echo("\r\n");
 }
 
 static char *TinyGetAffectLocationName(int location)
@@ -395,3 +395,4 @@ static char *TinyGetAffectLocationName(int location)
   Log->Bug("Affect_location_name: unknown location %d.", location);
   return "(?)";
 }
+

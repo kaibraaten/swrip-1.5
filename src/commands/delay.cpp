@@ -13,25 +13,25 @@ void do_delay( Character *ch, char *argument )
 
   if ( !*arg )
     {
-      SendToCharacter( "Syntax:  delay <victim> <# of rounds>\r\n", ch );
+      ch->Echo( "Syntax:  delay <victim> <# of rounds>\r\n" );
       return;
     }
 
   if ( !( victim = GetCharacterAnywhere( ch, arg ) ) )
     {
-      SendToCharacter( "No such character online.\r\n", ch );
+      ch->Echo( "No such character online.\r\n" );
       return;
     }
 
   if ( IsNpc( victim ) )
     {
-      SendToCharacter( "Mobiles are unaffected by lag.\r\n", ch );
+      ch->Echo( "Mobiles are unaffected by lag.\r\n" );
       return;
     }
 
   if ( !IsNpc(victim) && GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      SendToCharacter( "You haven't the power to succeed against them.\r\n", ch );
+      ch->Echo( "You haven't the power to succeed against them.\r\n" );
       return;
     }
 
@@ -39,13 +39,13 @@ void do_delay( Character *ch, char *argument )
 
   if ( !*arg )
     {
-      SendToCharacter( "For how long do you wish to delay them?\r\n", ch );
+      ch->Echo( "For how long do you wish to delay them?\r\n" );
       return;
     }
 
   if ( !StrCmp( arg, "none" ) )
     {
-      SendToCharacter( "All character delay removed.\r\n", ch );
+      ch->Echo( "All character delay removed.\r\n" );
       victim->Wait = 0;
       return;
     }
@@ -54,16 +54,17 @@ void do_delay( Character *ch, char *argument )
   
   if ( delay < 1 )
     {
-      SendToCharacter( "Pointless. Try a positive number.\r\n", ch );
+      ch->Echo( "Pointless. Try a positive number.\r\n" );
       return;
     }
 
   if ( delay > 999 )
     {
-      SendToCharacter( "You cruel bastard. Just kill them.\r\n", ch );
+      ch->Echo( "You cruel bastard. Just kill them.\r\n" );
       return;
     }
 
   SetWaitState( victim, delay * PULSE_VIOLENCE );
-  Echo( ch, "You've delayed %s for %d rounds.\r\n", victim->Name, delay );
+  ch->Echo( "You've delayed %s for %d rounds.\r\n", victim->Name, delay );
 }
+

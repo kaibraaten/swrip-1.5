@@ -30,3 +30,4 @@ bool spec_fido( Character *ch )
 
   return false;
 }
+

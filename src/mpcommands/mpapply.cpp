@@ -9,7 +9,7 @@ void do_mpapply( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -27,7 +27,7 @@ void do_mpapply( Character *ch, char *argument )
 
   if ( !victim->Desc )
     {
-      SendToCharacter( "Not on linkdeads.\r\n", ch );
+      ch->Echo("Not on linkdeads.\r\n");
       return;
     }
 
@@ -44,3 +44,4 @@ void do_mpapply( Character *ch, char *argument )
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
   victim->PCData->AuthState = 1;
 }
+

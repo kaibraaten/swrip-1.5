@@ -6,16 +6,17 @@ void do_unfocusalias(Character *ch, char *argument)
 {
   if ( IsNpc(ch) )
     {
-      SendToCharacter("Only players can have alias focuses!\r\n", ch);
+      ch->Echo("Only players can have alias focuses!\r\n");
       return;
     }
 
   if ( IsNullOrEmpty( ch->PCData->Target ) )
     {
-      SendToCharacter("Your alias focus is not defined at the moment.\r\n", ch);
+      ch->Echo("Your alias focus is not defined at the moment.\r\n");
       return;
     }
 
-  SendToCharacter("You remove your current alias focus.\r\n", ch);
+  ch->Echo("You remove your current alias focus.\r\n");
   ch->PCData->Target = CopyString("");
 }
+

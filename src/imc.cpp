@@ -265,7 +265,9 @@ typedef void PACKET_FUN( IMC_PACKET * q, const char *packet );
 static void imclog( const char *format, ... );
 static void imcbug( const char *format, ... );
 static void imc_printf( Character * ch, const char *fmt, ... );
+#if 0
 static void imcPagerPrintf( Character * ch, const char *fmt, ... );
+#endif
 static const char *imc_funcname( IMC_FUN * func );
 static IMC_FUN *imc_function( const char *func );
 static const char *imc_send_social( Character * ch, const char *argument, int telloption );
@@ -701,6 +703,7 @@ static const char *color_mtoi( const char *txt )
       return "";
 
    strncpy( tbuf, txt, LGST );
+
    for( color = first_imc_color; color; color = color->next )
       strncpy( tbuf, imcstrrep( tbuf, color->mudtag, color->imctag ), LGST );
 
@@ -710,10 +713,7 @@ static const char *color_mtoi( const char *txt )
 /* Generic SendToCharacter type function to send to the proper code for each codebase */
 static void imc_to_char( const char *txt, Character * ch )
 {
-   char buf[LGST * 2];
-
-   sprintf( buf, "%s\033[0m", color_itom( txt, ch ) );
-   SendToCharacter( buf, ch );
+   ch->Echo( "%s\033[0m", color_itom( txt, ch ) );
 }
 
 /* Modified version of Smaug's Echo_color function */
@@ -732,12 +732,10 @@ static void imc_printf( Character * ch, const char *fmt, ... )
 /* Generic SendToPager type function to send to the proper code for each codebase */
 static void imc_to_pager( const char *txt, Character * ch )
 {
-   char buf[LGST * 2];
-
-   sprintf( buf, "%s\033[0m", color_itom( txt, ch ) );
-   SendToPager( buf, ch );
+  imc_to_char(txt, ch);
 }
 
+#if 0
 /* Generic PagerPrintf type function */
 static void imcPagerPrintf( Character * ch, const char *fmt, ... )
 {
@@ -750,7 +748,7 @@ static void imcPagerPrintf( Character * ch, const char *fmt, ... )
 
    imc_to_pager( buf, ch );
 }
-
+#endif
 /********************************
  * Low level utility functions. *
  ********************************/
@@ -6173,13 +6171,13 @@ IMC_CMD( imclist )
       return;
    }
 
-   imcPagerPrintf( ch, "~WActive muds on %s:~!\r\n", this_imcmud->network );
-   imcPagerPrintf( ch, "~c%-15.15s ~B%-40.40s~! ~g%-15.15s ~G%s", "Name", "IMC2 Version", "Network", "Server" );
+      ch->Echo("~WActive muds on %s:~!\r\n", this_imcmud->network );
+      ch->Echo("~c%-15.15s ~B%-40.40s~! ~g%-15.15s ~G%s", "Name", "IMC2 Version", "Network", "Server" );
 
    /*
     * Put local mud on the list, why was this not done? It's a mud isn't it? 
     */
-   imcPagerPrintf( ch, "\r\n\r\n~c%-15.15s ~B%-40.40s ~g%-15.15s ~G%s",
+      ch->Echo("\r\n\r\n~c%-15.15s ~B%-40.40s ~g%-15.15s ~G%s",
                     this_imcmud->localname, this_imcmud->versionid, this_imcmud->network, this_imcmud->servername );
 
    for( p = first_rinfo; p; p = p->next, count++ )
@@ -6208,11 +6206,11 @@ IMC_CMD( imclist )
          else
             strncpy( serverpath, p->path, LGST );
       }
-      imcPagerPrintf( ch, "\r\n~%c%-15.15s ~B%-40.40s ~g%-15.15s ~G%s",
+         ch->Echo("\r\n~%c%-15.15s ~B%-40.40s ~g%-15.15s ~G%s",
                        p->expired ? 'R' : 'c', p->Name, p->version, netname, serverpath );
    }
-   imcPagerPrintf( ch, "\r\n~WRed mud names indicate connections that are down." );
-   imcPagerPrintf( ch, "\r\n~W%d muds on %s found.\r\n", count, this_imcmud->network );
+      ch->Echo("\r\n~WRed mud names indicate connections that are down." );
+      ch->Echo("\r\n~W%d muds on %s found.\r\n", count, this_imcmud->network );
 }
 
 IMC_CMD( imcconnect )
@@ -7043,10 +7041,10 @@ IMC_CMD( imc_show_ucache_contents )
    imc_to_pager( "--------------------------------------------------------------------------\r\n", ch );
    for( user = first_imcucache; user; user = user->next )
    {
-      imcPagerPrintf( ch, "%-30s %d\r\n", user->Name, user->gender );
+         ch->Echo("%-30s %d\r\n", user->Name, user->gender );
       users++;
    }
-   imcPagerPrintf( ch, "%d users being cached.\r\n", users );
+      ch->Echo("%d users being cached.\r\n", users );
 }
 
 IMC_CMD( imccedit )
@@ -7996,3 +7994,4 @@ socket_t ImcGetSocket( SiteInfo *site )
 {
   return site ? site->Desc : INVALID_SOCKET;
 }
+

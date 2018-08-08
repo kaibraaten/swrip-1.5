@@ -21,91 +21,91 @@ void do_land( Character *ch, char *argument )
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   if ( ship->Class > SHIP_PLATFORM )
     {
-      SendToCharacter( "&RThis isn't a spacecraft!\r\n", ch );
+      ch->Echo("&RThis isn't a spacecraft!\r\n");
       return;
     }
 
   if ( ( ship = GetShipFromPilotSeat( ch->InRoom->Vnum ) ) == NULL )
     {
-      SendToCharacter("&RYou need to be in the pilot seat!\r\n",ch);
+      ch->Echo("&RYou need to be in the pilot seat!\r\n");
       return;
     }
 
   if ( IsShipAutoflying(ship) )
     {
-      SendToCharacter("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
+      ch->Echo("&RYou'll have to turn off the ships autopilot first.\r\n");
       return;
     }
 
   if  ( ship->Class == SHIP_PLATFORM )
     {
-      SendToCharacter( "&RYou can't land platforms\r\n" , ch );
+      ch->Echo("&RYou can't land platforms\r\n" );
       return;
     }
 
   if (ship->Class == CAPITAL_SHIP)
     {
-      SendToCharacter("&RCapital ships are to big to land. You'll have to take a shuttle.\r\n",ch);
+      ch->Echo("&RCapital ships are to big to land. You'll have to take a shuttle.\r\n");
       return;
     }
   if (IsShipDisabled( ship ))
     {
-      SendToCharacter("&RThe ships drive is disabled. Unable to land.\r\n",ch);
+      ch->Echo("&RThe ships drive is disabled. Unable to land.\r\n");
       return;
     }
   if (ship->State == SHIP_LANDED)
     {
       if ( ship->Docked == NULL )
         {
-          SendToCharacter("&RThe ship is already docked!\r\n",ch);
+          ch->Echo("&RThe ship is already docked!\r\n");
           return;
         }
     }
   if (ship->Docking != SHIP_READY)
     {
-      SendToCharacter("&RYou can't do that while docked to another ship!\r\n",ch);
+      ch->Echo("&RYou can't do that while docked to another ship!\r\n");
       return;
     }
 
   if ( IsShipInHyperspace( ship ) )
     {
-      SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
+      ch->Echo("&RYou can only do that in realspace!\r\n");
       return;
     }
 
   if ( ship->TractoredBy && ship->TractoredBy->Class > ship->Class )
     {
-      SendToCharacter("&RYou can not move in a tractorbeam!\r\n",ch);
+      ch->Echo("&RYou can not move in a tractorbeam!\r\n");
       return;
     }
   if (ship->WeaponSystems.TractorBeam.Tractoring
       && ship->WeaponSystems.TractorBeam.Tractoring->Class > ship->Class )
     {
-      SendToCharacter("&RYou can not move while a tractorbeam is locked on to such a large mass.\r\n",ch);
+      ch->Echo("&RYou can not move while a tractorbeam is locked on to such a large mass.\r\n");
       return;
     }
   if (ship->State != SHIP_READY)
     {
-      SendToCharacter("&RPlease wait until the ship.hppas finished its current manouver.\r\n",ch);
+      ch->Echo("&RPlease wait until the ship.hppas finished its current manouver.\r\n");
       return;
     }
 
   if ( ship->Thrusters.Energy.Current < (25 + 25 * ((int)ship->Class) ) )
     {
-      SendToCharacter("&RTheres not enough fuel!\r\n",ch);
+      ch->Echo("&RTheres not enough fuel!\r\n");
       return;
     }
 
   if ( IsNullOrEmpty( argument ) )
     {
       SetCharacterColor(  AT_CYAN, ch );
-      Echo(ch, "%s" , "Land where?\r\n\r\nChoices: ");
+      ch->Echo("%s" , "Land where?\r\n\r\nChoices: ");
 
       for(std::list<Spaceobject*>::const_iterator i = Spaceobjects->Entities().cbegin();
           i != Spaceobjects->Entities().cend(); ++i)
@@ -122,7 +122,7 @@ void do_land( Character *ch, char *argument )
 
 		  if ( site->Dock && !site->IsSecret )
 		    {
-		      Echo(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
+                      ch->Echo("%s (%s)  %.0f %.0f %.0f\r\n         " ,
 			   site->LocationName,
 			   spaceobj->Name,
 			   spaceobj->Position.x,
@@ -133,8 +133,8 @@ void do_land( Character *ch, char *argument )
             }
         }
 
-      Echo(ch, "\r\nYour Coordinates: %.0f %.0f %.0f\r\n" ,
-	   ship->Position.x , ship->Position.y, ship->Position.z);
+      ch->Echo("\r\nYour Coordinates: %.0f %.0f %.0f\r\n" ,
+               ship->Position.x , ship->Position.y, ship->Position.z);
       return;
     }
 
@@ -157,37 +157,37 @@ void do_land( Character *ch, char *argument )
 
       if ( target == NULL )
         {
-          SendToCharacter("&RI don't see that here. Type land by itself for a list\r\n",ch);
+          ch->Echo("&RI don't see that here. Type land by itself for a list\r\n");
           return;
         }
 
       if ( target == ship )
         {
-          SendToCharacter("&RYou can't land your ship inside itself!\r\n",ch);
+          ch->Echo("&RYou can't land your ship inside itself!\r\n");
           return;
         }
 
       if ( ! target->Rooms.Hangar )
         {
-          SendToCharacter("&RThat ship.hppas no hangar for you to land in!\r\n",ch);
+          ch->Echo("&RThat ship.hppas no hangar for you to land in!\r\n");
           return;
         }
 
       if ( ship->Class == MIDSIZE_SHIP && target->Class == MIDSIZE_SHIP )
 	{
-          SendToCharacter("&RThat ship is not big enough for your ship to land in!\r\n",ch);
+          ch->Echo("&RThat ship is not big enough for your ship to land in!\r\n");
           return;
         }
 
       if ( ! target->BayOpen )
         {
-          SendToCharacter("&RTheir hangar is closed. You'll have to ask them to open it for you\r\n",ch);
+          ch->Echo("&RTheir hangar is closed. You'll have to ask them to open it for you\r\n");
           return;
         }
 
       if( GetShipDistanceToShip( ship, target ) > 200 )
         {
-          SendToCharacter("&RThat ship is too far away! You'll have to fly a litlle closer.\r\n",ch);
+          ch->Echo("&RThat ship is too far away! You'll have to fly a litlle closer.\r\n");
           return;
         }
     }
@@ -197,7 +197,7 @@ void do_land( Character *ch, char *argument )
 
       if( GetShipDistanceToSpaceobject( ship, spaceobj ) > 500 )
         {
-          SendToCharacter("&RThat platform is too far away! You'll have to fly a little closer.\r\n",ch);
+          ch->Echo("&RThat platform is too far away! You'll have to fly a little closer.\r\n");
           return;
         }
     }
@@ -213,7 +213,7 @@ void do_land( Character *ch, char *argument )
   if ( GetRandomPercent() < the_chance )
     {
       SetCharacterColor( AT_GREEN, ch );
-      SendToCharacter( "Landing sequence initiated.\r\n", ch);
+      ch->Echo("Landing sequence initiated.\r\n");
       Act( AT_PLAIN, "$n begins the landing sequence.", ch,
            NULL, argument , TO_ROOM );
       sprintf( buf ,"%s begins its landing sequence." , ship->Name );
@@ -238,10 +238,12 @@ void do_land( Character *ch, char *argument )
       return;
     }
 
-  SendToCharacter("You fail to work the controls properly.\r\n",ch);
+  ch->Echo("You fail to work the controls properly.\r\n");
 
   if ( ship->Class == FIGHTER_SHIP )
     LearnFromFailure( ch, gsn_starfighters );
   else
     LearnFromFailure( ch, gsn_midships );
 }
+
+

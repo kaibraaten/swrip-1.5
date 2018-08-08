@@ -3,9 +3,7 @@
 
 void do_buzz (Character *ch, char *arg)
 {
-  DirectionType exit_dir;
-  Room *home;
-  Exit *exitdat;
+  DirectionType exit_dir = DIR_INVALID;
 
   if ( !StrCmp( arg, "n"  ) || !StrCmp( arg, "north"     ) )
     exit_dir = DIR_NORTH;
@@ -29,35 +27,36 @@ void do_buzz (Character *ch, char *arg)
     exit_dir = DIR_SOUTHWEST;
   else
     {
-      SendToCharacter("&RBuzz the home in what direction?\r\n",ch);
+      ch->Echo("&RBuzz the home in what direction?\r\n");
       return;
     }
 
-  exitdat = GetExit(ch->InRoom, exit_dir);
+  Exit *exitdat = GetExit(ch->InRoom, exit_dir);
 
   if ( exitdat == NULL )
     {
-      SendToCharacter("&RYou can't do that.\r\n",ch);
+      ch->Echo("&RYou can't do that.\r\n");
       return;
     }
 
-  home = exitdat->ToRoom;
+  Room *home = exitdat->ToRoom;
 
   if ( IsBitSet(home->Flags,ROOM_EMPTY_HOME) )
     {
-      SendToCharacter("&RThat home isn't owned by anyone.\r\n",ch);
+      ch->Echo("&RThat home isn't owned by anyone.\r\n");
       return;
     }
 
   if ( !IsBitSet(home->Flags,ROOM_PLR_HOME) )
     {
-      SendToCharacter("&RThat isn't a home.\r\n",ch);
+      ch->Echo("&RThat isn't a home.\r\n");
       return;
     }
 
   ch->BuzzedFromRoom = ch->InRoom;
 
   EchoToRoom(AT_WHITE,home,"The door buzzer sounds.\r\n");
-  SendToCharacter("You press the door buzzer.\r\n",ch);
-  Act(AT_ACTION,"$n presses a door buzzer.",ch,NULL,NULL,TO_ROOM);
+  ch->Echo("You press the door buzzer.\r\n");
+  Act(AT_ACTION,"$n presses a door buzzer.", ch, NULL, NULL, TO_ROOM);
 }
+

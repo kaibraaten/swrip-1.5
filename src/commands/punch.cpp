@@ -10,15 +10,14 @@ void do_punch( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
+      ch->Echo("You can't concentrate enough for that.\r\n");
       return;
     }
 
   if ( !IsNpc(ch)
        &&   ch->PCData->Learned[gsn_punch] <= 0 )
     {
-      SendToCharacter(
-                   "Your mind races as you realize you have no idea how to do that.\r\n", ch );
+      ch->Echo("Your mind races as you realize you have no idea how to do that.\r\n");
       return;
     }
 
@@ -29,25 +28,25 @@ void do_punch( Character *ch, char *argument )
 
       if ( IsNullOrEmpty( arg ) )
         {
-          SendToCharacter( "Punch whom?\r\n", ch );
+          ch->Echo("Punch whom?\r\n");
           return;
         }
 
       if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
         {
-          SendToCharacter( "They aren't here.\r\n", ch );
+          ch->Echo("They aren't here.\r\n");
           return;
         }
 
       if ( !IsNpc(victim) )
         {
-          SendToCharacter( "You must MURDER a player.\r\n", ch );
+          ch->Echo("You must MURDER a player.\r\n");
           return;
         }
 
       if ( victim == ch )
         {
-          SendToCharacter( "You punch yourself.  Ouch!\r\n", ch );
+          ch->Echo("You punch yourself.  Ouch!\r\n");
           HitMultipleTimes( ch, ch, TYPE_UNDEFINED );
 	  return;
         }
@@ -78,3 +77,4 @@ void do_punch( Character *ch, char *argument )
       global_retcode = InflictDamage( ch, victim, 0, gsn_punch );
     }
 }
+

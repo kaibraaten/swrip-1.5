@@ -15,7 +15,7 @@ void do_repair( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Repair what?\r\n", ch );
+      ch->Echo("Repair what?\r\n");
       return;
     }
 
@@ -71,7 +71,7 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
   int cost;
 
   if ( !CanDropObject( ch, obj ) )
-    Echo( ch, "You can't let go of %s.\r\n", obj->Name );
+    ch->Echo("You can't let go of %s.\r\n", obj->Name );
   else if ( ( cost = GetRepairCost( keeper, obj ) ) < 0 )
     {
       if (cost != -2)
@@ -114,7 +114,7 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
       switch ( obj->ItemType )
         {
         default:
-          SendToCharacter( "For some reason, you think you got ripped off...\r\n", ch);
+          ch->Echo("For some reason, you think you got ripped off...\r\n");
           break;
         case ITEM_ARMOR:
           obj->Value[0] = obj->Value[1];
@@ -130,3 +130,4 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
       ObjProgRepairTrigger( ch, obj );
     }
 }
+

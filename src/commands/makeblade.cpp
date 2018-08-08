@@ -53,7 +53,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( IsNullOrEmpty( args->CommandArguments ) )
     {
-      Echo( ch, "&RUsage: Makeblade <name>\r\n&w" );
+      ch->Echo("&RUsage: Makeblade <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
@@ -175,3 +175,5 @@ static void FreeUserData( struct UserData *ud )
 
   FreeMemory( ud );
 }
+
+

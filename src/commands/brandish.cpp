@@ -14,13 +14,13 @@ void do_brandish( Character *ch, char *argument )
 
   if ( ( staff = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL )
     {
-      SendToCharacter( "You hold nothing in your hand.\r\n", ch );
+      ch->Echo( "You hold nothing in your hand.\r\n" );
       return;
     }
 
   if ( staff->ItemType != ITEM_STAFF )
     {
-      SendToCharacter( "You can brandish only with a staff.\r\n", ch );
+      ch->Echo( "You can brandish only with a staff.\r\n" );
       return;
     }
 
@@ -97,3 +97,4 @@ void do_brandish( Character *ch, char *argument )
       ExtractObject( staff );
     }
 }
+

@@ -35,14 +35,14 @@ void do_hlist( Character *ch, char *argument )
       max = maxlimit;
     }
 
-  SetPagerColor( AT_GREEN, ch );
-  PagerPrintf( ch, "Help Topics in level range %d to %d:\r\n\r\n", min, max );
+  SetCharacterColor( AT_GREEN, ch );
+  ch->Echo("Help Topics in level range %d to %d:\r\n\r\n", min, max );
 
   for(const HelpFile *help : HelpFiles->Entities())
     {
       if ( GetHelpFileLevel( help ) >= min && GetHelpFileLevel( help ) <= max )
 	{
-	  PagerPrintf( ch, "  %3d %s\r\n",
+   ch->Echo("  %3d %s\r\n",
 		       GetHelpFileLevel( help ), GetHelpFileKeyword( help ) );
 	  ++pagesFound;
 	}
@@ -50,10 +50,12 @@ void do_hlist( Character *ch, char *argument )
 
   if ( pagesFound > 0 )
     {
-      PagerPrintf( ch, "\r\n%d pages found.\r\n", pagesFound );
+      ch->Echo("\r\n%d pages found.\r\n", pagesFound );
     }
   else
     {
-      SendToCharacter( "None found.\r\n", ch );
+      ch->Echo("None found.\r\n");
     }
 }
+
+

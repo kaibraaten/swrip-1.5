@@ -9,17 +9,17 @@ void do_return( Character *ch, char *argument )
 
   if ( !ch->Desc->Original )
     {
-      SendToCharacter( "You aren't switched.\r\n", ch );
+      ch->Echo("You aren't switched.\r\n");
       return;
     }
 
   if (IsBitSet(ch->Flags, ACT_POLYMORPHED))
     {
-      SendToCharacter("Use revert to return from a polymorphed mob.\r\n", ch);
+      ch->Echo("Use revert to return from a polymorphed mob.\r\n");
       return;
     }
 
-  SendToCharacter( "You return to your original body.\r\n", ch );
+  ch->Echo("You return to your original body.\r\n");
 
   if ( IsNpc( ch ) && IsAffectedBy( ch, AFF_POSSESS ) )
     {
@@ -33,3 +33,4 @@ void do_return( Character *ch, char *argument )
   ch->Desc->Character->Switched = NULL;
   ch->Desc                  = NULL;
 }
+

@@ -252,8 +252,7 @@ void ViolenceUpdate( void )
                     if ( paf->Type > 0 && skill && !IsNullOrEmpty( skill->Messages.WearOff ))
                       {
                         SetCharacterColor( AT_WEAROFF, ch );
-                        SendToCharacter( skill->Messages.WearOff, ch );
-                        SendToCharacter( "\r\n", ch );
+                        ch->Echo( "%s\r\n", skill->Messages.WearOff );
                       }
                   }
 
@@ -1524,13 +1523,13 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
     case POS_MORTAL:
       Act( AT_DYING, "$n is mortally wounded, and will die soon, if not aided.",
            victim, NULL, NULL, TO_ROOM );
-      SendToCharacter( "&RYou are mortally wounded, and will die soon, if not aided.",victim);
+      victim->Echo("&RYou are mortally wounded, and will die soon, if not aided.");
       break;
 
     case POS_INCAP:
       Act( AT_DYING, "$n is incapacitated and will slowly die, if not aided.",
            victim, NULL, NULL, TO_ROOM );
-      SendToCharacter( "&RYou are incapacitated and will slowly die, if not aided.",victim);
+      victim->Echo("&RYou are incapacitated and will slowly die, if not aided.");
       break;
 
     case POS_STUNNED:
@@ -1538,7 +1537,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         {
           Act( AT_ACTION, "$n is stunned, but will probably recover.",
                victim, NULL, NULL, TO_ROOM );
-          SendToCharacter( "&RYou are stunned, but will probably recover.",victim);
+          victim->Echo("&RYou are stunned, but will probably recover.");
         }
       break;
 
@@ -1563,7 +1562,8 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         Act( AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, TO_ROOM );
       else
         Act( AT_DEAD, "$n is DEAD!", victim, 0, 0, TO_ROOM );
-      SendToCharacter( "&WYou have been KILLED!\r\n", victim);
+
+      victim->Echo("&WYou have been KILLED!\r\n");
       break;
 
     default:
@@ -1652,7 +1652,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
           long xp_to_lose = umax( ( GetAbilityXP( victim, COMBAT_ABILITY ) - GetRequiredXpForLevel( GetAbilityLevel( ch, COMBAT_ABILITY ) ) ), 0 );
 	  long xp_actually_lost = LoseXP( victim, COMBAT_ABILITY, xp_to_lose );
 
-          Echo( victim, "You lose %ld experience.\r\n", xp_actually_lost );
+          victim->Echo( "You lose %ld experience.\r\n", xp_actually_lost );
         }
 
       AddTimerToCharacter( victim, TIMER_RECENTFIGHT, 100, NULL, SUB_NONE );
@@ -1799,7 +1799,7 @@ bool IsSafe( const Character *ch, const Character *victim )
   if ( IsBitSet( victim->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      SendToCharacter( "You'll have to do that elsewhere.\r\n", ch );
+      ch->Echo( "You'll have to do that elsewhere.\r\n" );
       return true;
     }
 
@@ -1856,7 +1856,7 @@ static void ApplyWantedFlags( Character *ch, const Character *victim )
 	  if ( IsBitSet(victim->VipFlags, 1 << x ) )
 	    {
 	      SetBit(ch->PCData->WantedFlags, 1 << x );
-	      Echo( ch, "&YYou are now wanted on %s.&w\r\n", WantedFlags[x] );
+	      ch->Echo( "&YYou are now wanted on %s.&w\r\n", WantedFlags[x] );
 	    }
 	}
     }
@@ -2006,7 +2006,7 @@ void StartFighting( Character *ch, Character *victim )
   /* Limit attackers -Thoric */
   if ( victim->NumFighting > MAX_NUMBER_OF_FIGHTERS )
     {
-      SendToCharacter( "There are too many people fighting for you to join in.\r\n", ch );
+      ch->Echo( "There are too many people fighting for you to join in.\r\n" );
       return;
     }
 
@@ -2025,7 +2025,7 @@ void StartFighting( Character *ch, Character *victim )
 
   if ( victim->Switched && IsAffectedBy(victim->Switched, AFF_POSSESS) )
     {
-      SendToCharacter( "You are disturbed!\r\n", victim->Switched );
+      victim->Switched->Echo( "You are disturbed!\r\n" );
       do_return( victim->Switched, "" );
     }
 }
@@ -2072,8 +2072,7 @@ void FreeFight( Character *ch )
     {
       StripAffect(ch, gsn_berserk);
       SetCharacterColor(AT_WEAROFF, ch);
-      SendToCharacter(SkillTable[gsn_berserk]->Messages.WearOff, ch);
-      SendToCharacter("\r\n", ch);
+      ch->Echo("%s\r\n", SkillTable[gsn_berserk]->Messages.WearOff);
     }
 }
 
@@ -2323,11 +2322,11 @@ void RawKill( Character *killer, Character *victim )
 
       if ( !remove( buf ) )
 	{
-	  SendToCharacter( "Player's immortal data destroyed.\r\n", killer );
+	  killer->Echo( "Player's immortal data destroyed.\r\n" );
 	}
       else if ( errno != ENOENT )
 	{
-	  Echo( killer, "Unknown error #%d - %s (immortal data). Report to the administration\r\n",
+	  killer->Echo( "Unknown error #%d - %s (immortal data). Report to the administration\r\n",
 		errno, strerror( errno ) );
           sprintf( buf2, "%s slaying ", killer->Name);
           strcpy(buf2, buf);
@@ -2405,7 +2404,6 @@ static int CountGroupMembersInRoom( const Character *ch )
 
 static void GainGroupXP( Character *ch, Character *victim )
 {
-  char buf[MAX_STRING_LENGTH];
   Character *gch = NULL;
   const Character *lch = NULL;
   long xp = 0;
@@ -2445,13 +2443,11 @@ static void GainGroupXP( Character *ch, Character *victim )
            && !StrCmp ( gch->PCData->ClanInfo.Clan->Name , victim->MobClan ) )
         {
           xp = 0;
-          sprintf( buf, "You receive no experience for killing your organizations resources.\r\n");
-          SendToCharacter( buf, gch );
+          gch->Echo("You receive no experience for killing your organizations resources.\r\n");
         }
       else
         {
-          sprintf( buf, "You receive %ld combat experience.\r\n", xp );
-          SendToCharacter( buf, gch );
+          gch->Echo( "You receive %ld combat experience.\r\n", xp );
         }
 
       GainXP( gch, COMBAT_ABILITY, xp );
@@ -2459,8 +2455,7 @@ static void GainGroupXP( Character *ch, Character *victim )
       if ( lch == gch && members > 1 )
         {
           xp = urange( members, xp*members, (GetRequiredXpForLevel( GetAbilityLevel( gch, LEADERSHIP_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( gch, LEADERSHIP_ABILITY ) ) / 10) );
-          sprintf( buf, "You get %ld leadership experience for leading your group to victory.\r\n", xp );
-          SendToCharacter( buf, gch );
+          gch->Echo("You get %ld leadership experience for leading your group to victory.\r\n",xp);
           GainXP( gch, LEADERSHIP_ABILITY, xp );
         }
 
@@ -2827,3 +2822,4 @@ static bool SprintForCover( Character *ch )
 
   return false;
 }
+

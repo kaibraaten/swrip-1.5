@@ -4,34 +4,36 @@
 
 void do_autopilot(Character *ch, char *argument )
 {
-  Ship *ship;
+  Ship *ship = GetShipFromCockpit(ch->InRoom->Vnum);
 
-  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
+  if ( ship == nullptr )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
-  if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
+  if ( (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be in the pilots seat!\r\n",ch);
+      ch->Echo("&RYou must be in the pilots seat!\r\n");
       return;
     }
 
-  if ( ! CheckPilot(ch,ship) )
+  if ( !CheckPilot(ch,ship) )
     {
-      SendToCharacter("&RHey! Thats not your ship!\r\n",ch);
+      ch->Echo("&RHey! Thats not your ship!\r\n");
       return;
     }
 
   if ( ship->State == SHIP_DOCKED )
     {
-      if(ship->Docked == NULL || ( ship->Docked->Class > MIDSIZE_SHIP && ship->Class > MIDSIZE_SHIP ))
+      if(ship->Docked == NULL
+         || ( ship->Docked->Class > MIDSIZE_SHIP && ship->Class > MIDSIZE_SHIP ))
         {
-          SendToCharacter("&RNot until after you've launched!\r\n",ch);
+          ch->Echo("&RNot until after you've launched!\r\n");
           return;
         }
-      SendToCharacter("&RNot while you are docked!\r\n",ch);
+
+      ch->Echo("&RNot while you are docked!\r\n");
       return;
     }
 
@@ -48,19 +50,21 @@ void do_autopilot(Character *ch, char *argument )
        || !StrCmp(argument,"off") )
     {
       ship->Autopilot=false;
-      SendToCharacter( "&GYou toggle the autopilot.\r\n", ch);
+      ch->Echo( "&GYou toggle the autopilot.\r\n" );
       EchoToCockpit( AT_YELLOW , ship , "Autopilot OFF.");
     }
   else
     {
       if( ship->State == SHIP_LANDED )
         {
-          SendToCharacter("&RNot while you are docked!\r\n",ch);
+          ch->Echo("&RNot while you are docked!\r\n");
           return;
         }
+
       ship->Autopilot=true;
       ship->AutoRecharge = true;
-      SendToCharacter( "&GYou toggle the autopilot.\r\n", ch);
+      ch->Echo( "&GYou toggle the autopilot.\r\n" );
       EchoToCockpit( AT_YELLOW , ship , "Autopilot ON.");
     }
 }
+

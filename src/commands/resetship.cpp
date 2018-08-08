@@ -2,6 +2,7 @@
 #include "ship.hpp"
 #include "vector3_aux.hpp"
 #include "spaceobject.hpp"
+#include "character.hpp"
 
 void do_resetship( Character *ch, char *argument )
 {
@@ -9,7 +10,7 @@ void do_resetship( Character *ch, char *argument )
 
   if (ship == NULL)
     {
-      SendToCharacter("&RNo such ship!",ch);
+      ch->Echo("&RNo such ship!");
       return;
     }
 
@@ -33,3 +34,4 @@ void do_resetship( Character *ch, char *argument )
       ship->Defenses.Shield.Current = ship->Defenses.Shield.Max;
     }
 }
+

@@ -40,3 +40,4 @@ bool spec_stormtrooper( Character *ch )
 
   return false;
 }
+

@@ -4,19 +4,19 @@
 void do_echo( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  short color;
-  int target;
-  char *parg;
+  short color = AT_PLAIN;
+  int target = 0;
+  char *parg = nullptr;
 
   if ( IsBitSet(ch->Flags, PLR_NO_EMOTE) )
     {
-      SendToCharacter( "You are noemoted and can not echo.\r\n", ch );
+      ch->Echo( "You are noemoted and can not echo.\r\n" );
       return;
     }
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Echo what?\r\n", ch );
+      ch->Echo( "Echo what?\r\n" );
       return;
     }
 
@@ -53,9 +53,10 @@ void do_echo( Character *ch, char *argument )
   if ( !StrCmp( arg, "Merth" )
        || !StrCmp( arg, "Durga" ))
     {
-      Echo( ch, "I don't think %s would like that!\r\n", arg );
+      ch->Echo( "I don't think %s would like that!\r\n", arg );
       return;
     }
 
   EchoToAll ( color, argument, target );
 }
+

@@ -57,3 +57,4 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
   AffectToCharacter( mob, &af );
   return rNONE;
 }
+

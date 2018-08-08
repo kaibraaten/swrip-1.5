@@ -9,17 +9,17 @@ void do_sneak( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
+      ch->Echo("You can't concentrate enough for that.\r\n");
       return;
     }
 
   if ( ch->Mount )
     {
-      SendToCharacter( "You can't do that while mounted.\r\n", ch );
+      ch->Echo("You can't do that while mounted.\r\n");
       return;
     }
 
-  SendToCharacter( "You attempt to move silently.\r\n", ch );
+  ch->Echo("You attempt to move silently.\r\n");
   StripAffect( ch, gsn_sneak );
 
   if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_sneak] )
@@ -35,3 +35,4 @@ void do_sneak( Character *ch, char *argument )
   else
     LearnFromFailure( ch, gsn_sneak );
 }
+

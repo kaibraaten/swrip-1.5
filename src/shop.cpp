@@ -79,7 +79,7 @@ Character *FindKeeperQ( const Character *ch, bool message )
     {
       if ( message )
 	{
-	  SendToCharacter( "You can't do that here.\r\n", ch );
+	  ch->Echo( "You can't do that here.\r\n" );
 	}
 
       return NULL;
@@ -142,7 +142,7 @@ Character *FindFixer( const Character *ch )
 
   if ( !rShop )
     {
-      SendToCharacter( "You can't do that here.\r\n", ch );
+      ch->Echo( "You can't do that here.\r\n" );
       return NULL;
     }
 
@@ -575,3 +575,4 @@ void SaveVendor( Character *ch )
 
   ReEquipCharacter( ch );
 }
+

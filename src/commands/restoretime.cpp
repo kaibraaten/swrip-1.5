@@ -9,14 +9,14 @@ void do_restoretime( Character *ch, char *argument )
 
   if ( !last_restore_all_time )
     {
-      Echo( ch, "There has been no restore all since reboot\r\n");
+      ch->Echo("There has been no restore all since reboot\r\n");
     }
   else
     {
       time_passed = current_time - last_restore_all_time;
       hour = (int) ( time_passed / 3600 );
       minute = (int) ( ( time_passed - ( hour * 3600 ) ) / 60 );
-      Echo( ch, "The  last restore all was %d hours and %d minutes ago.\r\n",
+      ch->Echo("The  last restore all was %d hours and %d minutes ago.\r\n",
                  hour, minute );
     }
 
@@ -25,13 +25,14 @@ void do_restoretime( Character *ch, char *argument )
 
   if ( !ch->PCData->RestoreTime )
     {
-      SendToCharacter( "You have never done a restore all.\r\n", ch );
+      ch->Echo("You have never done a restore all.\r\n");
       return;
     }
 
   time_passed = current_time - ch->PCData->RestoreTime;
   hour = (int) ( time_passed / 3600 );
   minute = (int) ( ( time_passed - ( hour * 3600 ) ) / 60 );
-  Echo( ch, "Your last restore all was %d hours and %d minutes ago.\r\n",
+  ch->Echo("Your last restore all was %d hours and %d minutes ago.\r\n",
              hour, minute );
 }
+

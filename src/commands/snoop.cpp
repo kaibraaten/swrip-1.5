@@ -12,25 +12,25 @@ void do_snoop( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Snoop whom?\r\n", ch );
+      ch->Echo("Snoop whom?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( !victim->Desc )
     {
-      SendToCharacter( "No descriptor to snoop.\r\n", ch );
+      ch->Echo("No descriptor to snoop.\r\n");
       return;
     }
 
   if ( victim == ch )
     {
-      SendToCharacter( "Cancelling all snoops.\r\n", ch );
+      ch->Echo("Cancelling all snoops.\r\n");
       for ( d = FirstDescriptor; d; d = d->Next )
         if ( d->SnoopBy == ch->Desc )
 	  d->SnoopBy = NULL;
@@ -39,7 +39,7 @@ void do_snoop( Character *ch, char *argument )
 
   if ( victim->Desc->SnoopBy )
     {
-      SendToCharacter( "Busy already.\r\n", ch );
+      ch->Echo("Busy already.\r\n");
       return;
     }
 
@@ -50,7 +50,7 @@ void do_snoop( Character *ch, char *argument )
   if ( GetTrustLevel( victim ) >= GetTrustLevel( ch )
        ||  (victim->PCData && victim->PCData->MinSnoop > GetTrustLevel( ch )) )
     {
-      SendToCharacter( "Busy already.\r\n", ch );
+      ch->Echo("Busy already.\r\n");
       return;
     }
 
@@ -59,7 +59,7 @@ void do_snoop( Character *ch, char *argument )
       for ( d = ch->Desc->SnoopBy; d; d = d->SnoopBy )
         if ( d->Character == victim || d->Original == victim )
           {
-            SendToCharacter( "No snoop loops.\r\n", ch );
+            ch->Echo("No snoop loops.\r\n");
             return;
           }
     }
@@ -69,5 +69,6 @@ void do_snoop( Character *ch, char *argument )
       WriteToDescriptor( victim->Desc->descriptor, "\r\nYou feel like someone is watching your every move...\r\n", 0 );
   */
   victim->Desc->SnoopBy = ch->Desc;
-  SendToCharacter( "Ok.\r\n", ch );
+  ch->Echo("Ok.\r\n");
 }
+

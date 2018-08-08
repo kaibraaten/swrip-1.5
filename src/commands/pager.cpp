@@ -22,7 +22,7 @@ void do_pager( Character *ch, char *argument )
 
   if ( !IsNumber(arg) )
     {
-      SendToCharacter( "Set page pausing to how many lines?\r\n", ch );
+      ch->Echo("Set page pausing to how many lines?\r\n");
       return;
     }
 
@@ -31,5 +31,6 @@ void do_pager( Character *ch, char *argument )
   if ( ch->PCData->PagerLength < 5 )
     ch->PCData->PagerLength = 5;
 
-  Echo( ch, "Page pausing set to %d lines.\r\n", ch->PCData->PagerLength );
+  ch->Echo("Page pausing set to %d lines.\r\n", ch->PCData->PagerLength );
 }
+

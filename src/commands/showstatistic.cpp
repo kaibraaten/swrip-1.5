@@ -36,13 +36,13 @@ void do_showstatistic( Character *ch, char *argument )
 
   if( !race && pclass < 0 )
     {
-      SendToCharacter( "No such race or class.\r\n", ch );
+      ch->Echo("No such race or class.\r\n");
       return;
     }
 
   if ( raceIndex == RACE_GOD )
     {
-      SendToCharacter("Gods are indefeasible...\r\n",ch);
+      ch->Echo("Gods are indefeasible...\r\n");
       return;
     }
 
@@ -77,11 +77,11 @@ void do_showstatistic( Character *ch, char *argument )
 
   if( chk_race )
     {
-      PagerPrintf( ch, "&R%s Statistics\r\n", race->Name );
-      PagerPrintf( ch, "&cStr: &C%d  &cWis: &C%d  &cInt: &C%d  &cDex: &C%d  &cCon: &C%d  &cCha: &C%d\r\n",
+      ch->Echo("&R%s Statistics\r\n", race->Name );
+      ch->Echo("&cStr: &C%d  &cWis: &C%d  &cInt: &C%d  &cDex: &C%d  &cCon: &C%d  &cCha: &C%d\r\n",
                raceCh->Stats.PermStr, raceCh->Stats.PermWis, raceCh->Stats.PermInt,
                raceCh->Stats.PermDex, raceCh->Stats.PermCon, raceCh->Stats.PermCha );
-      PagerPrintf( ch, "                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );
+      ch->Echo("                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );
 
       for( iC = 0; iC < MAX_ABILITY; iC++ )
         {
@@ -109,15 +109,15 @@ void do_showstatistic( Character *ch, char *argument )
               strcat( buf, buf2 );
             }
 
-          SendToPager( buf, ch );
+          ch->Echo(buf);
         }
     }
   else
     {
       sprintf( buf, "&R%s Statistics\r\n", Capitalize(AbilityName[pclass]));
-      SendToPager( buf, ch );
+      ch->Echo(buf);
 
-      PagerPrintf( ch, "                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );
+      ch->Echo("                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );
 
       for( iR = 0; iR < MAX_RACE; iR++ )
         {
@@ -140,9 +140,10 @@ void do_showstatistic( Character *ch, char *argument )
               strcat( buf, buf2 );
             }
 
-          SendToPager( buf, ch );
+          ch->Echo(buf);
         }
     }
 
   delete raceCh;
 }
+

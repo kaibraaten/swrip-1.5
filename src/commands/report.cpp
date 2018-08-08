@@ -7,11 +7,11 @@ void do_report( Character *ch, char *argument )
 
   if ( IsAffectedBy(ch, AFF_POSSESS) )
     {
-      SendToCharacter("You can't do that in your current state of mind!\r\n", ch);
+      ch->Echo("You can't do that in your current state of mind!\r\n");
       return;
     }
 
-  Echo( ch, "You report: %d/%d hp %d/%d mv.\r\n",
+  ch->Echo("You report: %d/%d hp %d/%d mv.\r\n",
              ch->Hit,  ch->MaxHit,
              ch->Move, ch->MaxMove   );
 
@@ -21,3 +21,4 @@ void do_report( Character *ch, char *argument )
 
   Act( AT_REPORT, buf, ch, NULL, NULL, TO_ROOM );
 }
+

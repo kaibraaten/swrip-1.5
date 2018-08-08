@@ -21,14 +21,14 @@ void do_help( Character *ch, char *argument )
 
   if ( !pHelp )
     {
-      PagerPrintf( ch, "&C&wNo help on \'%s\' found.\r\n", argument );
+      ch->Echo( "&C&wNo help on \'%s\' found.\r\n", argument );
       similar_help_files(ch, argument);
       return;
     }
 
   if ( GetHelpFileLevel( pHelp ) >= 0 && StrCmp( argument, "imotd" ) )
     {
-      PagerPrintf( ch, "%s\r\n", GetHelpFileKeyword( pHelp ) );
+      ch->Echo( "%s\r\n", GetHelpFileKeyword( pHelp ) );
     }
 
   help_text = GetHelpFileText( pHelp );
@@ -41,7 +41,7 @@ void do_help( Character *ch, char *argument )
       ++help_text;
     }
 
-  SendToPager( help_text, ch );
+  ch->Echo( "%s", help_text );
 }
 
 static short str_similarity( const char *astr, const char *bstr )
@@ -70,7 +70,7 @@ static void similar_help_files(Character *ch, char *argument)
   short level = 0;
   bool single = false;
 
-  PagerPrintf( ch, "&C&BSimilar Help Files:\r\n" );
+  ch->Echo( "&C&BSimilar Help Files:\r\n" );
 
   for(const HelpFile *pHelp : HelpFiles->Entities())
     {
@@ -100,7 +100,7 @@ static void similar_help_files(Character *ch, char *argument)
 
   if (level == 0)
     {
-      PagerPrintf( ch, "&C&GNo similar help files.\r\n" );
+      ch->Echo( "&C&GNo similar help files.\r\n" );
       return;
     }
 
@@ -118,14 +118,15 @@ static void similar_help_files(Character *ch, char *argument)
             {
               if (single)
                 {
-                  PagerPrintf( ch, "&C&GOpening only similar helpfile.&C\r\n" );
+                  ch->Echo( "&C&GOpening only similar helpfile.&C\r\n" );
                   do_help( ch, buf);
                   return;
                 }
 
-              PagerPrintf(ch, "&C&G   %s\r\n", GetHelpFileKeyword( pHelp ) );
+              ch->Echo( "&C&G   %s\r\n", GetHelpFileKeyword( pHelp ) );
               break;
             }
         }
     }
 }
+

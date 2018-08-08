@@ -16,13 +16,13 @@ void do_scan( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Scan in a direction...\r\n", ch );
+      ch->Echo("Scan in a direction...\r\n");
       return;
     }
 
   if ( ( dir = GetDirection( argument ) ) == -1 )
     {
-      Echo( ch, "Scan in WHAT direction?\r\n" );
+      ch->Echo("Scan in WHAT direction?\r\n" );
       return;
     }
 
@@ -79,8 +79,8 @@ void do_scan( Character *ch, char *argument )
       CharacterFromRoom( ch );
       CharacterToRoom( ch, to_room );
       SetCharacterColor( AT_RMNAME, ch );
-      SendToCharacter( ch->InRoom->Name, ch );
-      SendToCharacter( "\r\n", ch );
+      ch->Echo(ch->InRoom->Name);
+      ch->Echo("\r\n");
       ShowObjectListToCharacter( ch->InRoom->FirstContent, ch, false, false );
       show_char_to_char( ch->InRoom->FirstPerson, ch );
 
@@ -137,3 +137,4 @@ void do_scan( Character *ch, char *argument )
   CharacterToRoom( ch, was_in_room );
   LearnFromSuccess( ch, gsn_scan );
 }
+

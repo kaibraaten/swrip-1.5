@@ -12,13 +12,13 @@ void do_at( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "At where what?\r\n", ch );
+      ch->Echo( "At where what?\r\n" );
       return;
     }
 
   if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "No such location.\r\n", ch );
+      ch->Echo( "No such location.\r\n" );
       return;
     }
 
@@ -26,14 +26,14 @@ void do_at( Character *ch, char *argument )
     {
       if ( IsRoomPrivate( ch, location ) )
         {
-          SendToCharacter( "That room is private right now.\r\n", ch );
+          ch->Echo( "That room is private right now.\r\n" );
           return;
         }
     }
 
   if ( IsRoomPrivate( ch, location ) )
     {
-      SendToCharacter( "Overriding private flag!\r\n", ch );
+      ch->Echo( "Overriding private flag!\r\n" );
     }
 
   original = ch->InRoom;
@@ -55,3 +55,4 @@ void do_at( Character *ch, char *argument )
         }
     }
 }
+

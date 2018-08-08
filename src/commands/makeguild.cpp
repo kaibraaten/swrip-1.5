@@ -16,19 +16,19 @@ void do_makeguild( Character *ch, char *argument )
   
   if ( IsNullOrEmpty( faction ) || IsNullOrEmpty( argument ) )
     {
-      Echo( ch, "Usage: startguild <imperial|rebel|independent> <guild name>\r\n" );
+      ch->Echo("Usage: startguild <imperial|rebel|independent> <guild name>\r\n" );
       return;
     }
 
   if( IsClanned( ch ) )
     {
-      Echo( ch, "&RYou're already in a guild.&d\r\n" );
+      ch->Echo("&RYou're already in a guild.&d\r\n" );
       return;
     }
 
   if( !IsGuildNameAcceptable( argument ) )
     {
-      Echo( ch, "&RThat name is not accepted.&d\r\n" );
+      ch->Echo("&RThat name is not accepted.&d\r\n" );
       return;
     }
   
@@ -46,13 +46,13 @@ void do_makeguild( Character *ch, char *argument )
     }
   else
     {
-      Echo( ch, "&RChoose faction for your guild: Imperial, Rebel or Independent.&d\r\n" );
+      ch->Echo("&RChoose faction for your guild: Imperial, Rebel or Independent.&d\r\n" );
       return;
     }
 
   if( !mainClan )
     {
-      Echo( ch, "&RSomething when wrong. Contact the administration.&d\r\n" );
+      ch->Echo("&RSomething when wrong. Contact the administration.&d\r\n" );
       Log->Bug( "%d: Main clan %s does not exist.", __FUNCTION__,
                 !StrCmp( faction, "imperial" ) ? BADGUY_CLAN
                 : !StrCmp( faction, "rebel" ) ? GOODGUY_CLAN : INDEPENDENT_CLAN );
@@ -61,7 +61,7 @@ void do_makeguild( Character *ch, char *argument )
 
   if( ch->Gold < GUILD_PRICE )
     {
-      Echo( ch, "&RStarting a guild costs %d credits. You don't have the funds.&d\r\n",
+      ch->Echo("&RStarting a guild costs %d credits. You don't have the funds.&d\r\n",
 	    GUILD_PRICE );
       return;
     }
@@ -91,9 +91,9 @@ void do_makeguild( Character *ch, char *argument )
   ch->PCData->ClanInfo.ClanName = CopyString( guild->Name );
   UpdateClanMember( ch );
 
-  Echo( ch, "&GCongratulations, your new guild %s has been successfully created!\r\n",
+  ch->Echo("&GCongratulations, your new guild %s has been successfully created!\r\n",
 	guild->Name );
-  Echo( ch, "See HELP GUILD to get started.&d\r\n" );
+  ch->Echo("See HELP GUILD to get started.&d\r\n" );
 }
 
 static bool IsGuildNameAcceptable( const std::string &name )
@@ -103,3 +103,5 @@ static bool IsGuildNameAcceptable( const std::string &name )
   return nameIsAvailable
     && StringInfix( "Jedi Order", name ) != 0;
 }
+
+

@@ -13,19 +13,19 @@ void do_reply( Character *ch, char *argument )
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_SILENCE ) )
     {
-      SendToCharacter( "You can't do that here.\r\n", ch );
+      ch->Echo("You can't do that here.\r\n");
       return;
     }
 
   if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_SILENCE) )
     {
-      SendToCharacter( "Your message didn't get through.\r\n", ch );
+      ch->Echo("Your message didn't get through.\r\n");
       return;
     }
 
   if ( ( victim = ch->Reply ) == NULL )
     {
-      SendToCharacter( "They can't hear you.\r\n", ch );
+      ch->Echo("They can't hear you.\r\n");
       return;
     }
 
@@ -40,13 +40,13 @@ void do_reply( Character *ch, char *argument )
 
       if ( !ch_comlink )
         {
-          SendToCharacter( "You need a comlink to do that!\r\n", ch);
+          ch->Echo("You need a comlink to do that!\r\n");
           return;
         }
 
       if ( !victim_comlink )
         {
-          Echo( ch, "%s doesn't seem to have a comlink!\r\n",
+          ch->Echo("%s doesn't seem to have a comlink!\r\n",
 		Capitalize( HeSheIt( victim ) ) );
           return;
         }
@@ -55,12 +55,12 @@ void do_reply( Character *ch, char *argument )
   if ( !IsNpc( victim ) && ( victim->Switched )
        && CanSeeCharacter( ch, victim ) && ( GetTrustLevel( ch ) > LEVEL_AVATAR ) )
     {
-      SendToCharacter( "That player is switched.\r\n", ch );
+      ch->Echo("That player is switched.\r\n");
       return;
     }
   else if ( !IsNpc( victim ) && ( !victim->Desc ) )
     {
-      SendToCharacter( "That player is link-dead.\r\n", ch );
+      ch->Echo("That player is link-dead.\r\n");
       return;
     }
 
@@ -80,7 +80,7 @@ void do_reply( Character *ch, char *argument )
 
   if ( !IsNpc (victim) && ( IsBitSet (victim->Flags, PLR_AFK ) ) )
     {
-      Echo( ch, "That player is afk so %s may not respond.\r\n",
+      ch->Echo("That player is afk so %s may not respond.\r\n",
 	    Capitalize( HeSheIt( victim ) ) );
     }
 
@@ -141,3 +141,4 @@ void do_reply( Character *ch, char *argument )
 	}
     }
 }
+

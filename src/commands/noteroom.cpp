@@ -33,13 +33,13 @@ void do_noteroom( Character *ch, char *argument )
 
       if ( !board )
         {
-          SendToCharacter( "There is no bulletin board.hppere to look at.\r\n", ch );
+          ch->Echo("There is no bulletin board.hppere to look at.\r\n");
           return;
         }
 
       if (board->Type != BOARD_NOTE)
         {
-          SendToCharacter("You can only use note commands on a message terminal.\r\n", ch);
+          ch->Echo("You can only use note commands on a message terminal.\r\n");
           return;
         }
       else
@@ -49,3 +49,4 @@ void do_noteroom( Character *ch, char *argument )
         }
     }
 }
+

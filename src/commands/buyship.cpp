@@ -11,7 +11,7 @@ void do_buyship(Character *ch, char *argument )
 
   if ( IsNpc(ch) )
     {
-      SendToCharacter( "&ROnly players can do that!\r\n" ,ch );
+      ch->Echo( "&ROnly players can do that!\r\n" );
       return;
     }
 
@@ -30,7 +30,7 @@ void do_buyship(Character *ch, char *argument )
 
   if ( StrCmp( ship->Owner , "" )  || ship->Type == MOB_SHIP )
     {
-      SendToCharacter( "&RThat ship isn't for sale!" ,ch );
+      ch->Echo( "&RThat ship isn't for sale!" );
       return;
     }
 
@@ -43,7 +43,7 @@ void do_buyship(Character *ch, char *argument )
 	       || !ch->PCData->ClanInfo.Clan->MainClan
 	       || StrCmp( ch->PCData->ClanInfo.Clan->MainClan->Name, BADGUY_CLAN ) )
             {
-              Echo( ch, "&RThat ship may only be purchased by %s!\r\n", BADGUY_CLAN );
+              ch->Echo( "&RThat ship may only be purchased by %s!\r\n", BADGUY_CLAN );
               return;
             }
         }
@@ -57,7 +57,7 @@ void do_buyship(Character *ch, char *argument )
 	       || !ch->PCData->ClanInfo.Clan->MainClan
 	       || StrCmp( ch->PCData->ClanInfo.Clan->MainClan->Name , GOODGUY_CLAN ) )
             {
-              Echo( ch, "&RThat ship may only be purchased by %s!\r\n", GOODGUY_CLAN );
+              ch->Echo( "&RThat ship may only be purchased by %s!\r\n", GOODGUY_CLAN );
               return;
             }
         }
@@ -67,12 +67,12 @@ void do_buyship(Character *ch, char *argument )
 
   if ( ch->Gold < price )
     {
-      Echo(ch, "&RThis ship costs %ld. You don't have enough credits!\r\n" , price );
+      ch->Echo("&RThis ship costs %ld. You don't have enough credits!\r\n", price );
       return;
     }
 
   ch->Gold -= price;
-  Echo(ch, "&GYou pay %ld credits to purchace the ship.\r\n" , price );
+  ch->Echo( "&GYou pay %ld credits to purchace the ship.\r\n" , price );
 
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );
@@ -81,3 +81,4 @@ void do_buyship(Character *ch, char *argument )
   ship->Owner = CopyString( ch->Name );
   Ships->Save(ship);
 }
+

@@ -16,36 +16,36 @@ void do_affected ( Character *ch, char *argument )
   if ( !StrCmp( arg, "by" ) )
     {
       SetCharacterColor( AT_BLUE, ch );
-      SendToCharacter( "\r\nImbued with:\r\n", ch );
+      ch->Echo( "\r\nImbued with:\r\n" );
       SetCharacterColor( AT_SCORE, ch );
-      Echo( ch, "%s\r\n", FlagString( ch->AffectedBy, AffectFlags ).c_str() );
+      ch->Echo( "%s\r\n", FlagString( ch->AffectedBy, AffectFlags ).c_str() );
 
       if ( ch->TopLevel >= 20 )
         {
-          SendToCharacter( "\r\n", ch );
+          ch->Echo( "\r\n" );
 
           if ( ch->Resistant > 0 )
             {
               SetCharacterColor ( AT_BLUE, ch );
-              SendToCharacter( "Resistances:  ", ch );
+              ch->Echo( "Resistances:  " );
               SetCharacterColor( AT_SCORE, ch );
-              Echo( ch, "%s\r\n", FlagString(ch->Resistant, RisFlags).c_str() );
+              ch->Echo( "%s\r\n", FlagString(ch->Resistant, RisFlags).c_str() );
             }
 
           if ( ch->Immune > 0 )
             {
               SetCharacterColor( AT_BLUE, ch );
-              SendToCharacter( "Immunities:   ", ch);
+              ch->Echo( "Immunities:   " );
 	      SetCharacterColor( AT_SCORE, ch );
-              Echo( ch, "%s\r\n", FlagString(ch->Immune, RisFlags).c_str() );
+              ch->Echo( "%s\r\n", FlagString(ch->Immune, RisFlags).c_str() );
             }
 
           if ( ch->Susceptible > 0 )
             {
               SetCharacterColor( AT_BLUE, ch );
-              SendToCharacter( "Suscepts:     ", ch );
+              ch->Echo( "Suscepts:     " );
               SetCharacterColor( AT_SCORE, ch );
-              Echo( ch, "%s\r\n", FlagString(ch->Susceptible, RisFlags).c_str() );
+              ch->Echo( "%s\r\n", FlagString(ch->Susceptible, RisFlags).c_str() );
             }
         }
 
@@ -55,18 +55,18 @@ void do_affected ( Character *ch, char *argument )
   if ( !ch->FirstAffect )
     {
       SetCharacterColor( AT_SCORE, ch );
-      SendToCharacter( "\r\nNo cantrip or skill affects you.\r\n", ch );
+      ch->Echo( "\r\nNo cantrip or skill affects you.\r\n" );
     }
   else
     {
-      SendToCharacter( "\r\n", ch );
+      ch->Echo( "\r\n" );
 
       for (paf = ch->FirstAffect; paf; paf = paf->Next)
 	{
 	  if ( (skill=GetSkill(paf->Type)) != NULL )
 	    {
 	      SetCharacterColor( AT_BLUE, ch );
-	      SendToCharacter( "Affected:  ", ch );
+	      ch->Echo( "Affected:  " );
 	      SetCharacterColor( AT_SCORE, ch );
 
 	      if ( ch->TopLevel >= 20 )
@@ -81,11 +81,12 @@ void do_affected ( Character *ch, char *argument )
 		      SetCharacterColor( AT_WHITE + AT_BLINK, ch );
 		    }
 
-		  Echo( ch, "(%5d)   ", paf->Duration );
+		  ch->Echo( "(%5d)   ", paf->Duration );
 		}
 
-	      Echo( ch, "%s\r\n", skill->Name );
+	      ch->Echo( "%s\r\n", skill->Name );
 	    }
 	}
     }
 }
+

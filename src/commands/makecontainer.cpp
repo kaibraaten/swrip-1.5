@@ -85,7 +85,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( IsNullOrEmpty( itemName ) )
     {
-      SendToCharacter( "&RUsage: Makecontainer <body|about|take|hold> <name>\r\n&w", ch);
+      ch->Echo("&RUsage: Makecontainer <body|about|take|hold> <name>\r\n&w");
       eventArgs->AbortSession = true;
       return;
     }
@@ -94,7 +94,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if( ud->WearLocation == -1 )
     {
-      Echo( ch, "&R'%s' is not a wear location.&w\r\n", wearLoc );
+      ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc );
       eventArgs->AbortSession = true;
       return;
     }
@@ -105,7 +105,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( !CanUseWearLocation( ud->WearLocation ) )
     {
-      Echo( ch, "&RYou cannot make a container for that body part.\r\n&w" );
+      ch->Echo("&RYou cannot make a container for that body part.\r\n&w" );
       eventArgs->AbortSession = true;
       return;
     }
@@ -142,3 +142,5 @@ static bool CanUseWearLocation( int wearLocation )
     || wearLocation == ITEM_HOLD
     || wearLocation == ITEM_TAKE;
 }
+
+

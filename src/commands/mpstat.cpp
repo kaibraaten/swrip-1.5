@@ -15,49 +15,49 @@ void do_mpstat( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "MProg stat whom?\r\n", ch );
+      ch->Echo("MProg stat whom?\r\n");
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( !IsNpc( victim ) )
     {
-      SendToCharacter( "Only Mobiles can have MobPrograms!\r\n", ch);
+      ch->Echo("Only Mobiles can have MobPrograms!\r\n");
       return;
     }
 
   if ( !( victim->Prototype->mprog.progtypes ) )
     {
-      SendToCharacter( "That Mobile has no Programs set.\r\n", ch);
+      ch->Echo("That Mobile has no Programs set.\r\n");
       return;
     }
 
-  Echo( ch, "Name: %s.  Vnum: %d.\r\n",
+  ch->Echo("Name: %s.  Vnum: %d.\r\n",
              victim->Name, victim->Prototype->Vnum );
 
-  Echo( ch, "Short description: %s.\r\nLong  description: %s",
+  ch->Echo("Short description: %s.\r\nLong  description: %s",
 	victim->ShortDescr,
 	!IsNullOrEmpty( victim->LongDescr )
 	? victim->LongDescr : "(none).\r\n" );
 
-  Echo( ch, "Hp: %d/%d.  Mana: %d/%d.  Move: %d/%d. \r\n",
+  ch->Echo("Hp: %d/%d.  Mana: %d/%d.  Move: %d/%d. \r\n",
              victim->Hit,         victim->MaxHit,
              victim->Mana,        victim->MaxMana,
              victim->Move,        victim->MaxMove );
 
-  Echo( ch,
-             "Lv: %d.  Align: %d.  AC: %d.  Credits: %d.\r\n",
-             victim->TopLevel,        victim->Alignment,
-             GetArmorClass( victim ),    victim->Gold);
+  ch->Echo("Lv: %d.  Align: %d.  AC: %d.  Credits: %d.\r\n",
+           victim->TopLevel,        victim->Alignment,
+           GetArmorClass( victim ),    victim->Gold);
 
   for ( mprg = victim->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
-    Echo( ch, ">%s %s\r\n%s\r\n",
+    ch->Echo(">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),
                mprg->arglist,
                mprg->comlist );
 }
+

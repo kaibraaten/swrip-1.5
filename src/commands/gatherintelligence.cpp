@@ -16,7 +16,7 @@ void do_gather_intelligence( Character *ch , char *argument )
 
   if( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter("You must input a name.\r\n", ch);
+      ch->Echo("You must input a name.\r\n");
       return;
     }
 
@@ -27,13 +27,13 @@ void do_gather_intelligence( Character *ch , char *argument )
 
   if( ( ( victim = GetCharacterAnywhere(ch, buf) ) == NULL ))
     {
-      SendToCharacter("You fail to gather information on that individual.\r\n", ch);
+      ch->Echo("You fail to gather information on that individual.\r\n");
       return;
     }
 
   if(IsNpc(victim))
     {
-      SendToCharacter("This person has not made much of a name for himself!\r\n", ch);
+      ch->Echo("This person has not made much of a name for himself!\r\n");
       return;
     }
 
@@ -44,7 +44,7 @@ void do_gather_intelligence( Character *ch , char *argument )
 
       if ( ch == victim )
         {
-          SendToCharacter( "I am sure you know enough about yourself right now", ch );
+          ch->Echo( "I am sure you know enough about yourself right now" );
           return;
         }
 
@@ -56,32 +56,29 @@ void do_gather_intelligence( Character *ch , char *argument )
         {
           if ( ( planet = victim->InRoom->Area->Planet ) == NULL )
             {
-              sprintf( buf, "Information has been recieved that %s is travelling.", victim->Name );
-              SendToCharacter(buf, ch);
-              return;
+              ch->Echo( "Information has been received that %s is travelling.", victim->Name );
             }
           else
             {
-              sprintf( buf, "Information has been recieved that %s is on %s.", victim->Name, planet->Name );
-              SendToCharacter(buf, ch);
-              return;
+              ch->Echo( "Information has been received that %s is on %s.",
+                        victim->Name, planet->Name );
             }
+
           return;
         }
+
       if ( the_chance < 30 )
         {
           if ( IsClanned( victim ) )
             {
-              sprintf( buf, "%s seems to be involved with %s.", victim->Name, victim->PCData->ClanInfo.Clan->Name );
-              SendToCharacter( buf, ch );
-              return;
+              ch->Echo( "%s seems to be involved with %s.",
+                        victim->Name, victim->PCData->ClanInfo.Clan->Name );
             }
           else
             {
-              sprintf( buf, "%s does not seem to be involved with any organization.", victim->Name );
-              SendToCharacter( buf, ch );
-              return;
+              ch->Echo( "%s does not seem to be involved with any organization.", victim->Name );
             }
+
           return;
         }
 
@@ -89,28 +86,22 @@ void do_gather_intelligence( Character *ch , char *argument )
         {
           if ( victim->Hit < ((victim->MaxHit)/4) )
             {
-              sprintf( buf, "Hospital records show that %s has had a very serious injury and has not fully recovered.", victim->Name );
-              SendToCharacter( buf, ch);
-              return;
+              ch->Echo( "Hospital records show that %s has had a very serious injury and has not fully recovered.", victim->Name );
             }
-          if ( victim->Hit < ((victim->MaxHit)/2) )
+          else if ( victim->Hit < ((victim->MaxHit)/2) )
             {
-              sprintf( buf, "Hospital records show that %s has had a serious injury and has begun to recover.", victim->Name );
-              SendToCharacter( buf, ch);
-              return;
+              ch->Echo( "Hospital records show that %s has had a serious injury and has begun to recover.", victim->Name );
             }
-          if ( victim->Hit < ((victim->MaxHit)) )
+          else if ( victim->Hit < ((victim->MaxHit)) )
             {
-              sprintf( buf, "Hospital records show that %s has had a minor injury recently.", victim->Name );
-              SendToCharacter( buf, ch);
-              return;
+              ch->Echo( "Hospital records show that %s has had a minor injury recently.",
+                        victim->Name );
             }
-          if ( victim->Hit == victim->MaxHit )
+          else if ( victim->Hit == victim->MaxHit )
             {
-              sprintf( buf, "There has been no recently medical history for %s", victim->Name );
-              SendToCharacter( buf, ch);
-              return;
+              ch->Echo( "There has been no recently medical history for %s", victim->Name );
             }
+
           return;
         }
 
@@ -153,10 +144,12 @@ void do_gather_intelligence( Character *ch , char *argument )
             case COMMANDO_ABILITY:
               sprintf( buf, "%s has not centered training on anything, but seems to mix smuggling with piloting abilities.", victim->Name );
               break;
+
             default:
               break;
             }
-          SendToCharacter( buf, ch );
+
+          ch->Echo("%s", buf);
           return;
         }
 
@@ -174,16 +167,17 @@ void do_gather_intelligence( Character *ch , char *argument )
           else
             sprintf( buf, "%s appears to have centered his attention on the mundane", victim->Name );
 
-	  SendToCharacter( buf, ch );
+          ch->Echo("%s", buf);
           return;
         }
 
-      SendToCharacter ( "You fail to gather information on that individual.", ch );
+      ch->Echo("You fail to gather information on that individual.");
       return;
     }
   else
     {
-      SendToCharacter ( "You fail to gather information on that individual.", ch );
+      ch->Echo( "You fail to gather information on that individual." );
       return;
     }
 }
+

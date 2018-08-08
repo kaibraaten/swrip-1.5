@@ -13,7 +13,7 @@ ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
   int dam;
   ch_ret retcode;
 
-  SendToCharacter("You feel the hatred grow within you!\r\n", ch);
+  ch->Echo("You feel the hatred grow within you!\r\n");
   ch->Alignment = ch->Alignment - 100;
   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
   ApplySithPenalty( ch );
@@ -43,3 +43,4 @@ ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
 
   return retcode;
 }
+

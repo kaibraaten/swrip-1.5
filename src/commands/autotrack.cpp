@@ -6,55 +6,57 @@
 
 void do_autotrack( Character *ch, char *argument )
 {
-  Ship *ship;
-  int the_chance;
+  Ship *ship = nullptr;
+  int the_chance = 0;
 
-  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
+  if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   if ( ship->Class > SHIP_PLATFORM )
     {
-      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
+      ch->Echo("&RThis isn't a spacecraft!\r\n");
       return;
     }
-
 
   if ( ship->Class == SHIP_PLATFORM )
     {
-      SendToCharacter("&RPlatforms don't have autotracking systems!\r\n",ch);
-      return;
-    }
-  if ( ship->Class == CAPITAL_SHIP )
-    {
-      SendToCharacter("&RThis ship is too big for autotracking!\r\n",ch);
-      return;
-    }
-  if ( ship->Docked != NULL )
-    {
-      SendToCharacter("&RYou can not autotrack while docked!\r\n",ch);
+      ch->Echo("&RPlatforms don't have autotracking systems!\r\n");
       return;
     }
 
-  if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
+  if ( ship->Class == CAPITAL_SHIP )
     {
-      SendToCharacter("&RYou aren't in the pilots chair!\r\n",ch);
+      ch->Echo("&RThis ship is too big for autotracking!\r\n");
+      return;
+    }
+
+  if ( ship->Docked != NULL )
+    {
+      ch->Echo("&RYou can not autotrack while docked!\r\n");
+      return;
+    }
+
+  if ( (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
+    {
+      ch->Echo("&RYou aren't in the pilots chair!\r\n");
       return;
     }
 
   if ( IsShipAutoflying(ship)  )
     {
-      SendToCharacter("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
+      ch->Echo("&RYou'll have to turn off the ships autopilot first....\r\n");
       return;
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel
     : (int)  (ch->PCData->Learned[gsn_shipsystems]) ;
+
   if ( GetRandomPercent() > the_chance )
     {
-      SendToCharacter("&RYour not sure which switch to flip.\r\n",ch);
+      ch->Echo("&RYour not sure which switch to flip.\r\n");
       LearnFromFailure( ch, gsn_shipsystems );
       return;
     }
@@ -75,3 +77,4 @@ void do_autotrack( Character *ch, char *argument )
 
   LearnFromSuccess( ch, gsn_shipsystems );
 }
+

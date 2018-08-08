@@ -14,16 +14,16 @@ void do_vsearch( Character *ch, char *argument )
 
   if( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Syntax: vsearch <vnum>.\r\n", ch );
+      ch->Echo("Syntax: vsearch <vnum>.\r\n");
       return;
     }
 
-  SetPagerColor( AT_PLAIN, ch );
+  SetCharacterColor( AT_PLAIN, ch );
   argi = atoi(arg);
 
   if (argi < MIN_VNUM && argi > MAX_VNUM)
     {
-      SendToCharacter( "Vnum out of range.\r\n", ch);
+      ch->Echo("Vnum out of range.\r\n");
       return;
     }
 
@@ -38,12 +38,12 @@ void do_vsearch( Character *ch, char *argument )
             in_obj = in_obj->InObject );
 
       if ( in_obj->CarriedBy != NULL )
-	PagerPrintf( ch, "[%2d] Level %d %s carried by %s.\r\n",
+ ch->Echo("[%2d] Level %d %s carried by %s.\r\n",
                       obj_counter,
                       obj->Level, GetObjectShortDescription(obj),
                       PERS( in_obj->CarriedBy, ch ) );
       else
-        PagerPrintf( ch, "[%2d] [%-5d] %s in %s.\r\n", obj_counter,
+        ch->Echo("[%2d] [%-5d] %s in %s.\r\n", obj_counter,
                       ( ( in_obj->InRoom ) ? in_obj->InRoom->Vnum : 0 ),
                       GetObjectShortDescription(obj), ( in_obj->InRoom == NULL ) ?
                       "somewhere" : in_obj->InRoom->Name );
@@ -52,5 +52,6 @@ void do_vsearch( Character *ch, char *argument )
     }
 
   if ( !found )
-    SendToCharacter( "Nothing like that in hell, earth, or heaven.\r\n" , ch );
+    ch->Echo("Nothing like that in hell, earth, or heaven.\r\n" );
 }
+

@@ -12,7 +12,7 @@ void do_name( Character *ch, char *argument )
 
   if ( IsAuthed(ch) || ch->PCData->AuthState != 2)
     {
-      SendToCharacter("Huh?\r\n", ch);
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -20,13 +20,13 @@ void do_name( Character *ch, char *argument )
 
   if (!IsNameAcceptable(argument))
     {
-      SendToCharacter("Illegal name, try another.\r\n", ch);
+      ch->Echo("Illegal name, try another.\r\n");
       return;
     }
 
   if (!StrCmp(ch->Name, argument))
     {
-      SendToCharacter("That's already your name!\r\n", ch);
+      ch->Echo("That's already your name!\r\n");
       return;
     }
 
@@ -38,7 +38,7 @@ void do_name( Character *ch, char *argument )
 
   if ( tmp )
     {
-      SendToCharacter("That name is already taken.  Please choose another.\r\n", ch);
+      ch->Echo("That name is already taken.  Please choose another.\r\n");
       return;
     }
 
@@ -46,7 +46,7 @@ void do_name( Character *ch, char *argument )
            Capitalize( argument ) );
   if ( stat( fname, &fst ) != -1 )
     {
-      SendToCharacter("That name is already taken. Please choose another.\r\n", ch);
+      ch->Echo("That name is already taken. Please choose another.\r\n");
       return;
     }
 
@@ -56,6 +56,7 @@ void do_name( Character *ch, char *argument )
            RaceTable[ch->Race].Name );
   SetCharacterTitle( ch, buf );
 
-  SendToCharacter("Your name has been changed. Please apply again.\r\n", ch);
+  ch->Echo("Your name has been changed. Please apply again.\r\n");
   ch->PCData->AuthState = 1;
 }
+

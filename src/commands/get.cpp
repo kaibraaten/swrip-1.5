@@ -25,13 +25,13 @@ void do_get( Character *ch, char *argument )
 
       if ( number < 1 )
         {
-          SendToCharacter( "That was easy...\r\n", ch );
+          ch->Echo( "That was easy...\r\n" );
           return;
         }
 
       if ( (ch->CarryNumber + number) > GetCarryCapacityNumber(ch) )
         {
-          SendToCharacter( "You can't carry that many.\r\n", ch );
+          ch->Echo( "You can't carry that many.\r\n" );
           return;
         }
 
@@ -53,7 +53,7 @@ void do_get( Character *ch, char *argument )
   /* Get type. */
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Get what?\r\n", ch );
+      ch->Echo( "Get what?\r\n" );
       return;
     }
 
@@ -79,7 +79,7 @@ void do_get( Character *ch, char *argument )
 
           if ( !foundowner )
             {
-              SendToCharacter( "You can not do that here.\r\n", ch );
+              ch->Echo( "You can not do that here.\r\n" );
               return;
             }
         }
@@ -173,7 +173,7 @@ void do_get( Character *ch, char *argument )
           if ( !found )
             {
               if ( fAll )
-                SendToCharacter( "I see nothing here.\r\n", ch );
+                ch->Echo( "I see nothing here.\r\n" );
               else
                 Act( AT_PLAIN, "I see no $T here.", ch, NULL, chk, TO_CHAR );
             }
@@ -194,7 +194,7 @@ void do_get( Character *ch, char *argument )
       /* 'get ... container' */
       if ( !StrCmp( arg2, "all" ) || !StringPrefix( "all.", arg2 ) )
         {
-          SendToCharacter( "You can't do that.\r\n", ch );
+          ch->Echo( "You can't do that.\r\n" );
           return;
         }
 
@@ -209,13 +209,13 @@ void do_get( Character *ch, char *argument )
         default:
           if ( !IS_OBJ_STAT( container, ITEM_COVERING ) )
 	    {
-              SendToCharacter( "That's not a container.\r\n", ch );
+              ch->Echo( "That's not a container.\r\n" );
               return;
             }
 
           if ( ch->CarryWeight + container->Weight > GetCarryCapacityWeight( ch ) )
             {
-              SendToCharacter( "It's too heavy for you to lift.\r\n", ch );
+              ch->Echo( "It's too heavy for you to lift.\r\n" );
               return;
             }
 
@@ -348,14 +348,14 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   if ( !CAN_WEAR(obj, ITEM_TAKE)
        && (ch->TopLevel < SysData.LevelToGetObjectsWithoutTakeFlag )  )
     {
-      SendToCharacter( "You can't take that.\r\n", ch );
+      ch->Echo( "You can't take that.\r\n" );
       return;
     }
 
   if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE )
        &&  !CharacterCanTakePrototype( ch ) )
     {
-      SendToCharacter( "A godly force prevents you from getting close to it.\r\n", ch );
+      ch->Echo( "A godly force prevents you from getting close to it.\r\n" );
       return;
     }
 
@@ -434,3 +434,4 @@ static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch)
       SaveClanStoreroom(ch, clan);
     }
 }
+

@@ -10,36 +10,37 @@ void do_silence( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Silence whom?", ch );
+      ch->Echo("Silence whom?");
       return;
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
-      SendToCharacter( "They aren't here.\r\n", ch );
+      ch->Echo("They aren't here.\r\n");
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPC's.\r\n", ch );
+      ch->Echo("Not on NPC's.\r\n");
       return;
     }
 
   if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      SendToCharacter( "You failed.\r\n", ch );
+      ch->Echo("You failed.\r\n");
       return;
     }
 
   if ( IsBitSet(victim->Flags, PLR_SILENCE) )
     {
-      SendToCharacter( "Player already silenced, use unsilence to remove.\r\n", ch );
+      ch->Echo("Player already silenced, use unsilence to remove.\r\n");
     }
   else
     {
       SetBit(victim->Flags, PLR_SILENCE);
-      SendToCharacter( "You can't use channels!\r\n", victim );
-      SendToCharacter( "SILENCE set.\r\n", ch );
+      victim->Echo("You can't use channels!\r\n");
+      ch->Echo("SILENCE set.\r\n");
     }
 }
+

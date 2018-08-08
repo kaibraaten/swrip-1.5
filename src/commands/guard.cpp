@@ -9,21 +9,21 @@ void do_guard( Character *ch, char *argument )
   int the_chance = 0;
   Ship *ship = NULL;
 
-  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
+  if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
-  if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
+  if ( (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be in the pilots seat!\r\n",ch);
+      ch->Echo("&RYou must be in the pilots seat!\r\n");
       return;
     }
 
   if ( ship->Class != CAPITAL_SHIP  && ship->Class != SHIP_PLATFORM )
     {
-      SendToCharacter("&ROnly capital-class vessels and platforms have this feature.\r\n",ch);
+      ch->Echo("&ROnly capital-class vessels and platforms have this feature.\r\n");
       return;
     }
 
@@ -31,7 +31,7 @@ void do_guard( Character *ch, char *argument )
     : (int)  (ch->PCData->Learned[gsn_shipsystems]) ;
   if ( GetRandomPercent() > the_chance )
     {
-      SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
+      ch->Echo("&RYou fail to work the controls properly.\r\n");
       LearnFromFailure( ch, gsn_shipsystems );
       return;
     }
@@ -42,14 +42,14 @@ void do_guard( Character *ch, char *argument )
   if ( !StrCmp(argument,"on" ) )
     {
       ship->Guard = true;
-      SendToCharacter( "&GYou activate the guard system.\r\n", ch);
+      ch->Echo( "&GYou activate the guard system.\r\n" );
       EchoToCockpit( AT_YELLOW , ship , "Guard System: ACTIVATED.");
       ship->Thrusters.Speed.Current = 0;
     }
   else if ( !StrCmp(argument,"off" ) )
     {
       ship->Guard = false;
-      SendToCharacter( "&GYou shutdown the guard system.\r\n", ch);
+      ch->Echo( "&GYou shutdown the guard system.\r\n" );
       EchoToCockpit( AT_YELLOW , ship , "Guard System: DEACTIVATED.");
     }
   else
@@ -57,13 +57,13 @@ void do_guard( Character *ch, char *argument )
       if (ship->Guard == true)
         {
           ship->Guard = false;
-          SendToCharacter( "&GYou shutdown the guard system.\r\n", ch);
+          ch->Echo( "&GYou shutdown the guard system.\r\n" );
           EchoToCockpit( AT_YELLOW , ship , "Guard System: DEACTIVATED.");
         }
       else
         {
           ship->Guard = true;
-          SendToCharacter( "&GYou activate the guard system.\r\n", ch);
+          ch->Echo( "&GYou activate the guard system.\r\n" );
           EchoToCockpit( AT_YELLOW , ship , "Guard System: ACTIVATED.");
           ship->Thrusters.Speed.Current = 0;
         }
@@ -71,3 +71,4 @@ void do_guard( Character *ch, char *argument )
 
   LearnFromSuccess( ch, gsn_shipsystems );
 }
+

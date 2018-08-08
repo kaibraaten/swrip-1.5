@@ -1,24 +1,27 @@
 #include "mud.hpp"
 #include "social.hpp"
+#include "character.hpp"
 
 void do_socials( Character *ch, char *argument )
 {
+  const int NUMBER_OF_COLUMNS = 6;
   int col = 0;
 
-  SetPagerColor( AT_PLAIN, ch );
+  SetCharacterColor( AT_PLAIN, ch );
 
   for(const Social *social : Socials->Entities())
     {
-      PagerPrintf( ch, "%-12s", social->Name );
+      ch->Echo("%-12s", social->Name );
       
-      if ( ++col % 6 == 0 )
+      if ( ++col % NUMBER_OF_COLUMNS == 0 )
         {
-          SendToPager( "\r\n", ch );
+          ch->Echo("\r\n");
         }
     }
 
-  if ( col % 6 != 0 )
+  if ( col % NUMBER_OF_COLUMNS != 0 )
     {
-      SendToPager( "\r\n", ch );
+      ch->Echo("\r\n");
     }
 }
+

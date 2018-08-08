@@ -20,16 +20,16 @@ static void diag_visit_obj( Character *ch, Object *obj );
 void do_diagnose( Character *ch, char *argument )
 {
 #define   DIAG_MAX_SIZE  1000
-  ProtoObject *pObj;
-  ProtoObject **freq;                        /* dynamic array of pointers */
-  char arg1 [MAX_INPUT_LENGTH];
-  char arg2 [MAX_INPUT_LENGTH];
-  char arg3 [MAX_INPUT_LENGTH];
-  char arg4 [MAX_INPUT_LENGTH];
-  char arg5 [MAX_INPUT_LENGTH];
-  char arg6 [MAX_INPUT_LENGTH];
-  int   num = 20;                               /* display lines requested */
-  int   cou;
+  ProtoObject *pObj = nullptr;
+  ProtoObject **freq = nullptr;                        /* dynamic array of pointers */
+  char arg1[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH];
+  char arg3[MAX_INPUT_LENGTH];
+  char arg4[MAX_INPUT_LENGTH];
+  char arg5[MAX_INPUT_LENGTH];
+  char arg6[MAX_INPUT_LENGTH];
+  int num = 20;                               /* display lines requested */
+  int cou = 0;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
@@ -38,39 +38,42 @@ void do_diagnose( Character *ch, char *argument )
   argument = OneArgument( argument, arg5 );
   argument = OneArgument( argument, arg6 );
 
-  if (!*arg1) {                                 /* empty arg gets help screen */
-    diagnose_help(ch);
-    return;
-  }
+  if (!*arg1)
+    {
+      diagnose_help(ch);
+      return;
+    }
 
   if ( !StrCmp(arg1, "time") )
     {
       struct tm *t = localtime(&current_time);
 
-      PagerPrintf( ch, "mon=%d day=%d hh=%d mm=%d\r\n",
-                    t->tm_mon+1, t->tm_mday, t->tm_hour, t->tm_min);
+      ch->Echo( "mon=%d day=%d hh=%d mm=%d\r\n",
+                t->tm_mon+1, t->tm_mday, t->tm_hour, t->tm_min);
       return;
     }
 
   if (!StrCmp(arg1, "rf"))
     {
 #define DIAG_RF_MAX_SIZE 5000
-      Room *pRoom;
-      int match, lo, hi, hit_cou, vnum[DIAG_RF_MAX_SIZE];
+      Room *pRoom = nullptr;
+      int match = 0, hit_cou = 0, vnum[DIAG_RF_MAX_SIZE];
 
       if (!*arg2)                                   /* empty arg gets help scrn */
         {
           diagnose_help(ch);
           return;
         }
-      else match = atoi (arg2);
+      else
+        {
+          match = atoi (arg2);
+        }
+      
+      int lo = (*arg3) ? atoi (arg3) : 0;
+      int hi = (*arg4) ? atoi (arg4) : MAX_VNUM;
 
-      hit_cou = 0;                                 /* number of vnums found */
-      lo = (*arg3) ? atoi (arg3) : 0;
-      hi = (*arg4) ? atoi (arg4) : MAX_VNUM;
-
-      Echo (ch, "\r\nRoom Vnums\r\n");
-
+      ch->Echo("\r\nRoom Vnums\r\n");
+      
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
         {
           if ( RoomIndexHash[cou] )
@@ -90,7 +93,7 @@ void do_diagnose( Character *ch, char *argument )
       qsort(vnum, hit_cou, sizeof(int), diag_int_comp);      /* sort vnums    */
 
       for (cou=0; cou<hit_cou; cou++)
-        Echo (ch, "%5d %6d\r\n", cou+1, vnum[cou]);   /* display vnums */
+        ch->Echo("%5d %6d\r\n", cou+1, vnum[cou]);   /* display vnums */
 
       return;
     }
@@ -113,9 +116,12 @@ void do_diagnose( Character *ch, char *argument )
              pObj; pObj=pObj->Next)
           diag_ins (pObj, num, freq, ch);    /* insert pointer into list */
     }
-    Echo (ch, "\r\nObject Frequencies\r\n");  /* send results to char */
+    
+    ch->Echo("\r\nObject Frequencies\r\n");  /* send results to char */
+
     for (cou = 0; cou < num && freq[cou]; cou++)
-      Echo(ch, "%3d%8d%8d\r\n", cou+1,freq[cou]->Vnum,freq[cou]->Count);
+      ch->Echo("%3d%8d%8d\r\n", cou+1,freq[cou]->Vnum,freq[cou]->Count);
+
     FreeMemory(freq);
     return;
   }
@@ -132,19 +138,19 @@ void do_diagnose( Character *ch, char *argument )
 
       if ( ( victim = GetCharacterAnywhere( ch, arg2 ) ) == NULL )
         {
-          SendToCharacter( "Not here.\r\n", ch );
+          ch->Echo( "Not here.\r\n" );
           return;
       }
 
       if ( !victim->Desc )
         {
-          SendToCharacter( "No descriptor.\r\n", ch );
+          ch->Echo( "No descriptor.\r\n" );
           return;
         }
 
       if ( victim == ch )
         {
-          SendToCharacter( "Cancelling.\r\n", ch );
+          ch->Echo( "Cancelling.\r\n" );
 
           for(Character *snoopedCharacter : PlayerCharacters->Entities())
             {
@@ -159,18 +165,18 @@ void do_diagnose( Character *ch, char *argument )
 
       if ( victim->Desc->SnoopBy )
         {
-          SendToCharacter( "Busy.\r\n", ch );
+          ch->Echo( "Busy.\r\n" );
           return;
         }
 
       if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
         {
-          SendToCharacter( "Busy.\r\n", ch );
+          ch->Echo( "Busy.\r\n" );
           return;
         }
 
       victim->Desc->SnoopBy = ch->Desc;
-      SendToCharacter( "Ok.\r\n", ch );
+      ch->Echo( "Ok.\r\n" );
       return;
     }
 
@@ -188,23 +194,30 @@ void do_diagnose( Character *ch, char *argument )
       for (cou = 0; cou < MAX_KEY_HASH; cou++)     /* loop thru ObjectIndexHash */
         if ( ObjectIndexHash[cou] )
           for (pObj=ObjectIndexHash[cou]; pObj; pObj=pObj->Next)
-            if (pObj->Weight == 0) {
-              zero_obj_ind++;
-	      zero_obj += pObj->Count;
-              if (zero_obj_ind <= ZERO_MAX) {
-                vnums[zero_obj_ind - 1] = pObj->Vnum;
-                count[zero_obj_ind - 1] = pObj->Count;
+            if (pObj->Weight == 0)
+              {
+                zero_obj_ind++;
+                zero_obj += pObj->Count;
+
+                if (zero_obj_ind <= ZERO_MAX)
+                  {
+                    vnums[zero_obj_ind - 1] = pObj->Vnum;
+                    count[zero_obj_ind - 1] = pObj->Count;
+                  }
               }
-            }
-      if (zero_num > 0) {
-        zero_sort (vnums, count, 0, zero_obj_ind - 1);
-        zero_num = umin (zero_num, ZERO_MAX);
-        zero_num = umin (zero_num, zero_obj_ind);
-        for (cou=0; cou<zero_num; cou++)
-          Echo (ch, "%6d %6d %6d\r\n",
+
+      if (zero_num > 0)
+        {
+          zero_sort (vnums, count, 0, zero_obj_ind - 1);
+          zero_num = umin (zero_num, ZERO_MAX);
+          zero_num = umin (zero_num, zero_obj_ind);
+
+          for (cou=0; cou<zero_num; cou++)
+            ch->Echo("%6d %6d %6d\r\n",
                      cou+1, vnums[cou], count[cou]);
-      }
-      Echo (ch, "%6d %6d\r\n", zero_obj_ind, zero_obj);
+        }
+      
+      ch->Echo("%6d %6d\r\n", zero_obj_ind, zero_obj);
       return;
     }
 
@@ -221,11 +234,11 @@ void do_diagnose( Character *ch, char *argument )
       int            i=0;
       char           buf[MAX_STRING_LENGTH];
 
-      Echo(ch, "CHAR name=%s \r\n", ch->Name);
+      ch->Echo("CHAR name=%s \r\n", ch->Name);
       strcpy(buf, ch->FirstCarrying ? ch->FirstCarrying->Name : "NULL");
-      Echo(ch, "   first_carry=%s\r\n", buf);
+      ch->Echo("   first_carry=%s\r\n", buf);
       strcpy(buf, ch->LastCarrying ? ch->LastCarrying->Name : "NULL");
-      Echo(ch, "   last_carry=%s\r\n", buf);
+      ch->Echo("   last_carry=%s\r\n", buf);
 
       /*
         for (pa=ch->FirstAffect; pa; pa=pa->Next)
@@ -238,39 +251,44 @@ void do_diagnose( Character *ch, char *argument )
 	{
           i++;
           pt=NULL;
-          if ( !po->CarriedBy && !po->InObject ) continue;
+
+          if ( !po->CarriedBy && !po->InObject )
+            continue;
+
           if ( !po->CarriedBy )
             {
               pt = po;
               while( pt->InObject )           /* could be in a container on ground */
                 pt=pt->InObject;
             }
+
           if ( ch==po->CarriedBy || (pt && ch==pt->CarriedBy) )
             {
-              Echo(ch, "\r\n%d OBJ name=%s \r\n", i, po->Name);
+              ch->Echo("\r\n%d OBJ name=%s \r\n", i, po->Name);
               strcpy(buf, po->NextContent ? po->NextContent->Name : "NULL");
-              Echo(ch, "   NextContent=%s\r\n", buf);
+              ch->Echo("   NextContent=%s\r\n", buf);
               strcpy(buf, po->PreviousContent ? po->PreviousContent->Name : "NULL");
-              Echo(ch, "   PreviousContent=%s\r\n", buf);
+              ch->Echo("   PreviousContent=%s\r\n", buf);
               strcpy(buf, po->FirstContent ? po->FirstContent->Name : "NULL");
-              Echo(ch, "   FirstContent=%s\r\n", buf);
+              ch->Echo("   FirstContent=%s\r\n", buf);
               strcpy(buf, po->LastContent ? po->LastContent->Name : "NULL");
-              Echo(ch, "   LastContent=%s\r\n", buf);
+              ch->Echo("   LastContent=%s\r\n", buf);
             }
         }
+      
       return;
     }
 
   if (!StrCmp(arg1, "mrc"))
     {
-      ProtoMobile *pm;
-      short race_num, dis_num, vnum1, vnum2, dis_cou = 0;
+      ProtoMobile *pm = nullptr;
+      short race_num = 0, dis_num = 0, vnum1 = 0, vnum2 = 0, dis_cou = 0;
 
       if ( !*arg2 || !*arg3 || !*arg4 || !*arg5
-           ||  !isdigit(*arg2) || !isdigit(*arg3) || !isdigit(*arg4)
-           ||  !isdigit(*arg5))
+           || !isdigit(*arg2) || !isdigit(*arg3) || !isdigit(*arg4)
+           || !isdigit(*arg5))
         {
-          SendToCharacter( "Sorry. Invalid format.\r\n\r\n", ch);
+          ch->Echo( "Sorry. Invalid format.\r\n\r\n" );
           diagnose_help(ch);
           return;
         }
@@ -278,7 +296,7 @@ void do_diagnose( Character *ch, char *argument )
       race_num     = atoi (arg3);
       vnum1    = atoi (arg4);
       vnum2    = atoi (arg5);
-      SendToCharacter("\r\n", ch);
+      ch->Echo("\r\n");
 
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
         {
@@ -287,7 +305,7 @@ void do_diagnose( Character *ch, char *argument )
               {
                 if ( pm->Vnum >= vnum1 && pm->Vnum <= vnum2
                      &&   pm->Race == race_num && dis_cou++ < dis_num )
-                  PagerPrintf( ch, "%5d %s\r\n", pm->Vnum, pm->Name );
+                  ch->Echo( "%5d %s\r\n", pm->Vnum, pm->Name );
               }
         }
       return;
@@ -310,19 +328,19 @@ static int diag_int_comp(const void *i, const void *j)
  */
 static void diagnose_help (Character *ch)
 {
-  SendToCharacter( "Syntax:\r\n", ch);
-  SendToCharacter( "diagnose of n  -  object frequency top n objects\r\n", ch );
-  SendToCharacter( "diagnose zero  -  count objects with zero weight\r\n", ch );
-  SendToCharacter( "diagnose zero n - list n objects with zero weight\r\n", ch );
-  SendToCharacter( "diagnose rf n lo hi - room flag search.\r\n"
-                "   list room vnums between lo and hi that match n.\r\n", ch );
-  SendToCharacter( "   e.g. diagnose rf 6 901 969 - list all rooms in Olympus\r\n"
-                "      that are nomob and deathtraps.\r\n", ch );
-  SendToCharacter( "   e.g. diagnose rf 2 - list all deathtraps.\r\n", ch );
-  SendToCharacter( "diagnose mrc num racevnum1 vnum2 - mobs/race/class\r\n"
-                "   display all mobs of a particular race/class combo.\r\n"
-                "   e.g. diagnose mrc 50 0 3 7500 7534 - show 50 human warriors "
-                " in Edo.\r\n", ch);
+  ch->Echo( "Syntax:\r\n" );
+  ch->Echo( "diagnose of n  -  object frequency top n objects\r\n" );
+  ch->Echo( "diagnose zero  -  count objects with zero weight\r\n" );
+  ch->Echo( "diagnose zero n - list n objects with zero weight\r\n" );
+  ch->Echo( "diagnose rf n lo hi - room flag search.\r\n"
+            "   list room vnums between lo and hi that match n.\r\n" );
+  ch->Echo( "   e.g. diagnose rf 6 901 969 - list all rooms in Olympus\r\n"
+            "      that are nomob and deathtraps.\r\n" );
+  ch->Echo( "   e.g. diagnose rf 2 - list all deathtraps.\r\n" );
+  ch->Echo( "diagnose mrc num racevnum1 vnum2 - mobs/race/class\r\n"
+            "   display all mobs of a particular race/class combo.\r\n"
+            "   e.g. diagnose mrc 50 0 3 7500 7534 - show 50 human warriors "
+            " in Edo.\r\n");
 }
 
 /*
@@ -372,7 +390,7 @@ static void zero_sort( int *vnums, int *count, int left, int right )
 
 static void diag_visit_obj( Character *ch, Object *obj )
 {
-  PagerPrintf(ch, "***obj=%s\r\n", obj->Name );
+  ch->Echo( "***obj=%s\r\n", obj->Name );
 
   if ( obj->FirstContent )
     {
@@ -386,3 +404,4 @@ static void diag_visit_obj( Character *ch, Object *obj )
     else
       return;
 }
+

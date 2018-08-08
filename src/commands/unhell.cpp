@@ -11,7 +11,7 @@ void do_unhell( Character *ch, char *argument )
   argument = OneArgument(argument, arg);
   if ( !*arg )
     {
-      SendToCharacter( "Unhell whom..?\r\n", ch );
+      ch->Echo("Unhell whom..?\r\n");
       return;
     }
   location = ch->InRoom;
@@ -20,7 +20,7 @@ void do_unhell( Character *ch, char *argument )
   ch->InRoom = location;            /* The case of unhell self, etc. */
   if ( !victim || IsNpc(victim) || victim->InRoom->Vnum != ROOM_VNUM_HELL )
     {
-      SendToCharacter( "No one like that is in hell.\r\n", ch );
+      ch->Echo("No one like that is in hell.\r\n");
       return;
     }
   location = GetRoom( WhereHome(victim) );
@@ -30,15 +30,15 @@ void do_unhell( Character *ch, char *argument )
   Act( AT_MAGIC, "$n disappears in a cloud of godly light.", victim, NULL, ch, TO_NOTVICT );
   CharacterFromRoom(victim);
   CharacterToRoom(victim, location);
-  SendToCharacter( "The gods have smiled on you and released you from hell early!\r\n", victim );
+  victim->Echo("The gods have smiled on you and released you from hell early!\r\n");
   do_look(victim, "auto");
-  SendToCharacter( "They have been released.\r\n", ch );
+  ch->Echo("They have been released.\r\n");
 
   if ( victim->PCData->HelledBy )
     {
       if( StrCmp(ch->Name, victim->PCData->HelledBy) )
-        Echo(ch, "(You should probably write a note to %s, explaining the early release.)\r\n",
-                  victim->PCData->HelledBy);
+        ch->Echo("(You should probably write a note to %s, explaining the early release.)\r\n",
+                 victim->PCData->HelledBy);
       FreeMemory(victim->PCData->HelledBy);
       victim->PCData->HelledBy = NULL;
     }
@@ -48,3 +48,4 @@ void do_unhell( Character *ch, char *argument )
   victim->PCData->ReleaseDate = 0;
   SaveCharacter(victim);
 }
+

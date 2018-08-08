@@ -1,13 +1,14 @@
-#include <time.h>
+#include <ctime>
 #include "mud.hpp"
+#include "character.hpp"
 
-char * const day_name[] =
+static const char * const day_name[] =
   {
     "Palpatine", "Controversy", "Protest", "Order", "Destruction",
     "Rebellion", "Strife"
   };
 
-char * const month_name[] =
+static const char * const month_name[] =
   {
     "Winter", "The Rise of the Old Republic", "Peace", "Naboo's Struggle",
     "The Senator's Election", "the Spring", "The Rise of the New Order", "Trust", "Betrayal",
@@ -19,7 +20,7 @@ void do_time( Character *ch, char *argument )
 {
   extern char str_boot_time[];
   extern char reboot_time[];
-  char *suf;
+  const char *suf;
   int day = time_info.Day + 1;
 
   if ( day > 4 && day <  20 )
@@ -34,20 +35,18 @@ void do_time( Character *ch, char *argument )
     suf = "th";
 
   SetCharacterColor( AT_YELLOW, ch );
-  SetCharacterColor( AT_YELLOW, ch );
-  Echo( ch,
-             "It is %d o'clock %s, Day of %s, %d%s the Month of %s.\r\n"
-             "The mud started up at:    %s\r"
-             "The system time (E.S.T.): %s\r"
-             "Next Reboot is set for:   %s\r",
+  ch->Echo("It is %d o'clock %s, Day of %s, %d%s the Month of %s.\r\n"
+           "The mud started up at:    %s\r"
+           "The system time (E.S.T.): %s\r"
+           "Next Reboot is set for:   %s\r",
 
-             (time_info.Hour % 12 == 0) ? 12 : time_info.Hour % 12,
-             time_info.Hour >= 12 ? "pm" : "am",
-             day_name[day % 7],
-             day, suf,
-             month_name[time_info.Month],
-             str_boot_time,
-             (char *) ctime( &current_time ),
-             reboot_time
-             );
+           (time_info.Hour % 12 == 0) ? 12 : time_info.Hour % 12,
+           time_info.Hour >= 12 ? "pm" : "am",
+           day_name[day % 7],
+           day, suf,
+           month_name[time_info.Month],
+           str_boot_time,
+           (char *) ctime( &current_time ),
+           reboot_time
+           );
 }

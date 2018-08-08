@@ -20,25 +20,25 @@ void do_vassign( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || r_lo < 0 || r_hi < 0 )
     {
-      SendToCharacter( "Syntax: vassign <who> <low> <high>\r\n", ch );
+      ch->Echo("Syntax: vassign <who> <low> <high>\r\n");
       return;
     }
 
   if ( (victim = GetCharacterAnywhere( ch, arg1 )) == NULL )
     {
-      SendToCharacter( "They don't seem to be around.\r\n", ch );
+      ch->Echo("They don't seem to be around.\r\n");
       return;
     }
 
   if ( IsNpc( victim ) || GetTrustLevel( victim ) < LEVEL_CREATOR )
     {
-      SendToCharacter( "They wouldn't know what to do with a vnum range.\r\n", ch );
+      ch->Echo("They wouldn't know what to do with a vnum range.\r\n");
       return;
     }
 
   if ( r_lo > r_hi )
     {
-      SendToCharacter( "Unacceptable room range.\r\n", ch );
+      ch->Echo("Unacceptable room range.\r\n");
       return;
     }
 
@@ -53,8 +53,8 @@ void do_vassign( Character *ch, char *argument )
   victim->PCData->Build.VnumRanges.Mob.Last = r_hi;
 
   AssignAreaTo( victim );
-  SendToCharacter( "Done.\r\n", ch );
-  Echo( victim, "%s has assigned you the vnum range %d - %d.\r\n",
+  ch->Echo("Done.\r\n");
+  victim->Echo("%s has assigned you the vnum range %d - %d.\r\n",
              ch->Name, r_lo, r_hi );
   AssignAreaTo( victim );        /* Put back by Thoric on 02/07/96 */
 
@@ -71,3 +71,4 @@ void do_vassign( Character *ch, char *argument )
       RemoveBit( victim->PCData->Build.Area->Status, AREA_DELETED );
     }
 }
+

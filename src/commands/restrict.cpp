@@ -17,7 +17,7 @@ void do_restrict( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Restrict which command?\r\n", ch );
+      ch->Echo("Restrict which command?\r\n");
       return;
     }
 
@@ -62,11 +62,12 @@ void do_restrict( Character *ch, char *argument )
         }
 
       cmd->Level = level;
-      Echo( ch, "You restrict %s to level %d\r\n", cmd->Name, level );
+      ch->Echo("You restrict %s to level %d\r\n", cmd->Name, level );
       Log->Info("%s restricting %s to level %d", ch->Name, cmd->Name, level );
     }
   else
     {
-      SendToCharacter( "You may not restrict that command.\r\n", ch );
+      ch->Echo("You may not restrict that command.\r\n");
     }
 }
+

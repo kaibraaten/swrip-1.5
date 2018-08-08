@@ -13,13 +13,13 @@ void do_rpedit( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      SendToCharacter( "Mob's can't rpedit\r\n", ch );
+      ch->Echo("Mob's can't rpedit\r\n");
       return;
     }
 
   if ( !ch->Desc )
     {
-      SendToCharacter( "You have no descriptor\r\n", ch );
+      ch->Echo("You have no descriptor\r\n");
       return;
     }
 
@@ -30,7 +30,7 @@ void do_rpedit( Character *ch, char *argument )
     case SUB_MPROG_EDIT:
       if ( !ch->dest_buf )
 	{
-          SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
+          ch->Echo("Fatal error: report to Thoric.\r\n");
           Log->Bug( "%s: SUB_MPROG_EDIT: NULL ch->dest_buf", __FUNCTION__ );
           ch->SubState = SUB_NONE;
           return;
@@ -54,15 +54,15 @@ void do_rpedit( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      SendToCharacter( "Syntax: rpedit <command> [number] <program> <value>\r\n", ch );
-      SendToCharacter( "\r\n",                                             ch );
-      SendToCharacter( "Command being one of:\r\n",                        ch );
-      SendToCharacter( "  add delete insert edit list\r\n",                ch );
-      SendToCharacter( "Program being one of:\r\n",                        ch );
-      SendToCharacter( "  act speech rand sleep rest rfight enter\r\n",  ch );
-      SendToCharacter( "  leave death\r\n",                              ch );
-      SendToCharacter( "\r\n",                                             ch );
-      SendToCharacter( "You should be standing in room you wish to edit.\r\n",ch);
+      ch->Echo("Syntax: rpedit <command> [number] <program> <value>\r\n");
+      ch->Echo("\r\n");
+      ch->Echo("Command being one of:\r\n");
+      ch->Echo("  add delete insert edit list\r\n");
+      ch->Echo("Program being one of:\r\n");
+      ch->Echo("  act speech rand sleep rest rfight enter\r\n");
+      ch->Echo("  leave death\r\n");
+      ch->Echo("\r\n");
+      ch->Echo("You should be standing in room you wish to edit.\r\n");
       return;
     }
 
@@ -78,11 +78,11 @@ void do_rpedit( Character *ch, char *argument )
       cnt = 0;
       if ( !mprog )
         {
-          SendToCharacter( "This room has no room programs.\r\n", ch );
+          ch->Echo("This room has no room programs.\r\n");
           return;
         }
       for ( mprg = mprog; mprg; mprg = mprg->Next )
-        Echo( ch, "%d>%s %s\r\n%s\r\n",
+        ch->Echo("%d>%s %s\r\n%s\r\n",
                    ++cnt,
                    MobProgTypeToName( mprg->type ),
                    mprg->arglist,
@@ -94,7 +94,7 @@ void do_rpedit( Character *ch, char *argument )
     {
       if ( !mprog )
         {
-          SendToCharacter( "This room has no room programs.\r\n", ch );
+          ch->Echo("This room has no room programs.\r\n");
           return;
         }
 
@@ -106,7 +106,7 @@ void do_rpedit( Character *ch, char *argument )
 
 	  if ( mptype == -1 )
             {
-              SendToCharacter( "Unknown program type.\r\n", ch );
+              ch->Echo("Unknown program type.\r\n");
               return;
             }
         }
@@ -115,7 +115,7 @@ void do_rpedit( Character *ch, char *argument )
 
       if ( value < 1 )
         {
-          SendToCharacter( "Program not found.\r\n", ch );
+          ch->Echo("Program not found.\r\n");
           return;
         }
       cnt = 0;
@@ -130,7 +130,7 @@ void do_rpedit( Character *ch, char *argument )
               return;
             }
         }
-      SendToCharacter( "Program not found.\r\n", ch );
+      ch->Echo("Program not found.\r\n");
       return;
     }
 
@@ -141,13 +141,13 @@ void do_rpedit( Character *ch, char *argument )
 
       if ( !mprog )
         {
-          SendToCharacter( "That room has no room programs.\r\n", ch );
+          ch->Echo("That room has no room programs.\r\n");
           return;
         }
       argument = OneArgument( argument, arg3 );
       if ( value < 1 )
         {
-          SendToCharacter( "Program not found.\r\n", ch );
+          ch->Echo("Program not found.\r\n");
           return;
         }
       cnt = 0; found = false;
@@ -162,7 +162,7 @@ void do_rpedit( Character *ch, char *argument )
         }
       if ( !found )
         {
-          SendToCharacter( "Program not found.\r\n", ch );
+          ch->Echo("Program not found.\r\n");
           return;
         }
       cnt = num = 0;
@@ -189,7 +189,7 @@ void do_rpedit( Character *ch, char *argument )
       FreeMemory( mprg_next );
       if ( num <= 1 )
         RemoveBit( ch->InRoom->mprog.progtypes, mptype );
-      SendToCharacter( "Program removed.\r\n", ch );
+      ch->Echo("Program removed.\r\n");
       return;
     }
 
@@ -197,19 +197,19 @@ void do_rpedit( Character *ch, char *argument )
     {
       if ( !mprog )
         {
-          SendToCharacter( "That room has no room programs.\r\n", ch );
+          ch->Echo("That room has no room programs.\r\n");
           return;
         }
       argument = OneArgument( argument, arg3 );
       mptype = GetMudProgFlag( arg2 );
       if ( mptype == -1 )
         {
-          SendToCharacter( "Unknown program type.\r\n", ch );
+          ch->Echo("Unknown program type.\r\n");
           return;
         }
       if ( value < 1 )
         {
-          SendToCharacter( "Program not found.\r\n", ch );
+          ch->Echo("Program not found.\r\n");
           return;
         }
       if ( value == 1 )
@@ -234,7 +234,7 @@ void do_rpedit( Character *ch, char *argument )
               return;
             }
         }
-      SendToCharacter( "Program not found.\r\n", ch );
+      ch->Echo("Program not found.\r\n");
       return;
     }
 
@@ -243,7 +243,7 @@ void do_rpedit( Character *ch, char *argument )
       mptype = GetMudProgFlag( arg2 );
       if ( mptype == -1 )
         {
-          SendToCharacter( "Unknown program type.\r\n", ch );
+          ch->Echo("Unknown program type.\r\n");
           return;
         }
       if ( mprog )
@@ -261,3 +261,4 @@ void do_rpedit( Character *ch, char *argument )
 
   do_rpedit( ch, "" );
 }
+

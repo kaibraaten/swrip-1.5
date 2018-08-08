@@ -21,27 +21,27 @@ void do_sset( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Syntax: sset <victim> <skill> <value>\r\n",        ch );
-      SendToCharacter( "or:     sset <victim> all     <value>\r\n",        ch );
+      ch->Echo("Syntax: sset <victim> <skill> <value>\r\n");
+      ch->Echo("or:     sset <victim> all     <value>\r\n");
       if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM )
         {
-          SendToCharacter( "or:     sset save skill table\r\n",            ch );
-          SendToCharacter( "or:     sset save herb table\r\n",             ch );
-          SendToCharacter( "or:     sset create skill 'new skill'\r\n",    ch );
-          SendToCharacter( "or:     sset create herb 'new herb'\r\n",      ch );
+          ch->Echo("or:     sset save skill table\r\n");
+          ch->Echo("or:     sset save herb table\r\n");
+          ch->Echo("or:     sset create skill 'new skill'\r\n");
+          ch->Echo("or:     sset create herb 'new herb'\r\n");
         }
       if ( GetTrustLevel(ch) > LEVEL_GREATER )
 	{
-          SendToCharacter( "or:     sset <sn>     <field> <value>\r\n",    ch );
-          SendToCharacter( "\r\nField being one of:\r\n",                  ch );
-          SendToCharacter( "  name code target minpos slot mana beats dammsg wearoff guild minlevel\r\n", ch );
-          SendToCharacter( "  type damtype acttype classtype powertype flag dice value difficulty affect\r\n", ch );
-          SendToCharacter( "  rmaffect level adept hit miss die imm (char/vict/room)\r\n", ch );
-          SendToCharacter( "  teachers\r\n",                    ch );
-          SendToCharacter( "Affect having the fields: <location> <modfifier> [duration] [bitvector]\r\n", ch );
-          SendToCharacter( "(See AFFECTTYPES for location, and AFFECTED_BY for bitvector)\r\n", ch );
+          ch->Echo("or:     sset <sn>     <field> <value>\r\n");
+          ch->Echo("\r\nField being one of:\r\n");
+          ch->Echo("  name code target minpos slot mana beats dammsg wearoff guild minlevel\r\n");
+          ch->Echo("  type damtype acttype classtype powertype flag dice value difficulty affect\r\n");
+          ch->Echo("  rmaffect level adept hit miss die imm (char/vict/room)\r\n");
+          ch->Echo("  teachers\r\n");
+          ch->Echo("Affect having the fields: <location> <modfifier> [duration] [bitvector]\r\n");
+          ch->Echo("(See AFFECTTYPES for location, and AFFECTED_BY for bitvector)\r\n");
         }
-      SendToCharacter( "Skill being any skill or spell.\r\n",              ch );
+      ch->Echo("Skill being any skill or spell.\r\n");
       return;
     }
 
@@ -51,13 +51,13 @@ void do_sset( Character *ch, char *argument )
     {
       if ( !StrCmp( arg2, "skill" ) )
         {
-          SendToCharacter( "Saving skill table...\r\n", ch );
+          ch->Echo("Saving skill table...\r\n");
           SaveSkills();
           return;
         }
       if ( !StrCmp( arg2, "herb" ) )
         {
-          SendToCharacter( "Saving herb table...\r\n", ch );
+          ch->Echo("Saving herb table...\r\n");
           SaveHerbs();
           return;
         }
@@ -74,7 +74,7 @@ void do_sset( Character *ch, char *argument )
           type = SKILL_HERB;
           if ( TopHerb >= MAX_HERB )
             {
-              Echo( ch, "The current top herb is %d, which is the maximum.  "
+              ch->Echo("The current top herb is %d, which is the maximum.  "
                          "To add more herbs,\r\nMAX_HERB will have to be "
 			 "raised in mud.hpp, and the mud recompiled.\r\n",
                          TopSN );
@@ -84,7 +84,7 @@ void do_sset( Character *ch, char *argument )
       else
         if ( TopSN >= MAX_SKILL )
           {
-            Echo( ch, "The current top sn is %d, which is the maximum.  "
+            ch->Echo("The current top sn is %d, which is the maximum.  "
                        "To add more skills,\r\nMAX_SKILL will have to be "
                        "raised in mud.hpp, and the mud recompiled.\r\n",
                        TopSN );
@@ -113,7 +113,7 @@ void do_sset( Character *ch, char *argument )
       skill->Messages.WearOff = CopyString( "" );
       skill->SpellFunction = spell_smaug;
       skill->Type = type;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       return;
     }
 
@@ -131,7 +131,7 @@ void do_sset( Character *ch, char *argument )
         {
           if ( sn >= TopHerb )
             {
-              SendToCharacter( "Herb number out of range.\r\n", ch );
+              ch->Echo("Herb number out of range.\r\n");
               return;
             }
           skill = HerbTable[sn];
@@ -140,7 +140,7 @@ void do_sset( Character *ch, char *argument )
         {
           if ( (skill=GetSkill(sn)) == NULL )
             {
-              SendToCharacter( "Skill number out of range.\r\n", ch );
+              ch->Echo("Skill number out of range.\r\n");
               return;
             }
           sn %= 1000;
@@ -149,19 +149,19 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "difficulty" ) )
         {
           skill->Difficulty = atoi( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
       if ( !StrCmp( arg2, "participants" ) )
         {
           skill->Participants = atoi( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
       if ( !StrCmp( arg2, "alignment" ) )
         {
           skill->Alignment = atoi( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
       if ( !StrCmp( arg2, "damtype" ) )
@@ -169,11 +169,11 @@ void do_sset( Character *ch, char *argument )
           int x = GetSpellDamage( argument );
 
 	  if ( x == -1 )
-            SendToCharacter( "Not a spell damage type.\r\n", ch );
+            ch->Echo("Not a spell damage type.\r\n");
           else
             {
               SET_SDAM( skill, x );
-              SendToCharacter( "Ok.\r\n", ch );
+              ch->Echo("Ok.\r\n");
             }
           return;
         }
@@ -182,11 +182,11 @@ void do_sset( Character *ch, char *argument )
           int x = GetSpellAction( argument );
 
           if ( x == -1 )
-            SendToCharacter( "Not a spell action type.\r\n", ch );
+            ch->Echo("Not a spell action type.\r\n");
           else
             {
               SET_SACT( skill, x );
-              SendToCharacter( "Ok.\r\n", ch );
+              ch->Echo("Ok.\r\n");
             }
           return;
         }
@@ -195,11 +195,11 @@ void do_sset( Character *ch, char *argument )
           int x = GetSpellClass( argument );
 
           if ( x == -1 )
-            SendToCharacter( "Not a spell class type.\r\n", ch );
+            ch->Echo("Not a spell class type.\r\n");
           else
             {
               SET_SCLA( skill, x );
-              SendToCharacter( "Ok.\r\n", ch );
+              ch->Echo("Ok.\r\n");
             }
           return;
         }
@@ -208,11 +208,11 @@ void do_sset( Character *ch, char *argument )
           int x = GetSpellPower( argument );
 
           if ( x == -1 )
-            SendToCharacter( "Not a spell power type.\r\n", ch );
+            ch->Echo("Not a spell power type.\r\n");
           else
             {
               SET_SPOW( skill, x );
-	      SendToCharacter( "Ok.\r\n", ch );
+       ch->Echo("Ok.\r\n");
             }
           return;
         }
@@ -221,11 +221,11 @@ void do_sset( Character *ch, char *argument )
           int x = GetSpellFlag( argument );
 
           if ( x == -1 )
-            SendToCharacter( "Not a spell flag.\r\n", ch );
+            ch->Echo("Not a spell flag.\r\n");
           else
             {
               ToggleBit( skill->Flags, 1 << x );
-              SendToCharacter( "Ok.\r\n", ch );
+              ch->Echo("Ok.\r\n");
             }
           return;
         }
@@ -234,11 +234,11 @@ void do_sset( Character *ch, char *argument )
           int x = GetSpellSave( argument );
 
           if ( x == -1 )
-            SendToCharacter( "Not a saving type.\r\n", ch );
+            ch->Echo("Not a saving type.\r\n");
           else
             {
               skill->Saves = x;
-              SendToCharacter( "Ok.\r\n", ch );
+              ch->Echo("Ok.\r\n");
             }
           return;
         }
@@ -266,11 +266,11 @@ void do_sset( Character *ch, char *argument )
             }
           else
             {
-              SendToCharacter( "Not a spell or skill.\r\n", ch );
+              ch->Echo("Not a spell or skill.\r\n");
               return;
             }
 
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -279,60 +279,60 @@ void do_sset( Character *ch, char *argument )
           SkillTargetType x = GetSpellTarget( argument );
 
           if ( (int)x == -1 )
-            SendToCharacter( "Not a valid target type.\r\n", ch );
+            ch->Echo("Not a valid target type.\r\n");
           else
             {
               skill->Target = x;
-              SendToCharacter( "Ok.\r\n", ch );
+              ch->Echo("Ok.\r\n");
             }
           return;
         }
       if ( !StrCmp( arg2, "minpos" ) )
         {
           skill->Position = (PositionType)urange( POS_DEAD, atoi( argument ), POS_DRAG );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
       if ( !StrCmp( arg2, "minlevel" ) )
         {
           skill->Level = urange( 1, atoi( argument ), MAX_ABILITY_LEVEL );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
       if ( !StrCmp( arg2, "slot" ) )
         {
           skill->Slot = urange( 0, atoi( argument ), SHRT_MAX );
-	  SendToCharacter( "Ok.\r\n", ch );
+   ch->Echo("Ok.\r\n");
           return;
         }
       if ( !StrCmp( arg2, "mana" ) )
         {
           skill->Mana = urange( 0, atoi( argument ), 2000 );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
       if ( !StrCmp( arg2, "beats" ) )
         {
           skill->Beats = urange( 0, atoi( argument ), 120 );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
       if ( !StrCmp( arg2, "guild" ) )
         {
           skill->Guild = atoi( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
       if ( !StrCmp( arg2, "value" ) )
         {
           skill->Value = atoi( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
       if ( !StrCmp( arg2, "type" ) )
         {
           skill->Type = GetSkillType( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
       if ( !StrCmp( arg2, "rmaffect" ) )
@@ -344,7 +344,7 @@ void do_sset( Character *ch, char *argument )
 
           if ( !aff )
             {
-              SendToCharacter( "This spell has no special affects to remove.\r\n", ch );
+              ch->Echo("This spell has no special affects to remove.\r\n");
               return;
             }
 	  if ( num == 1 )
@@ -353,7 +353,7 @@ void do_sset( Character *ch, char *argument )
               FreeMemory( aff->Duration );
               FreeMemory( aff->Modifier );
               FreeMemory( aff );
-              SendToCharacter( "Removed.\r\n", ch );
+              ch->Echo("Removed.\r\n");
               return;
             }
           for ( ; aff; aff = aff->Next )
@@ -364,11 +364,11 @@ void do_sset( Character *ch, char *argument )
                   FreeMemory( aff_next->Duration );
                   FreeMemory( aff_next->Modifier );
                   FreeMemory( aff_next );
-                  SendToCharacter( "Removed.\r\n", ch );
+                  ch->Echo("Removed.\r\n");
                   return;
                 }
             }
-          SendToCharacter( "Not found.\r\n", ch );
+          ch->Echo("Not found.\r\n");
           return;
         }
       /*
@@ -395,7 +395,7 @@ void do_sset( Character *ch, char *argument )
           if ( (loc % REVERSE_APPLY) < 0
 	       ||   (loc % REVERSE_APPLY) >= MAX_APPLY_TYPE )
             {
-              SendToCharacter( "Unknown affect location.  See AFFECTTYPES.\r\n", ch );
+              ch->Echo("Unknown affect location.  See AFFECTTYPES.\r\n");
               return;
             }
 
@@ -406,7 +406,7 @@ void do_sset( Character *ch, char *argument )
               argument = OneArgument( argument, bitvector );
 
               if ( (tmpbit=GetAffectFlag( bitvector )) == -1 )
-                Echo( ch, "Unknown bitvector: %s.  See AFFECTED_BY\r\n", bitvector );
+                ch->Echo("Unknown bitvector: %s.  See AFFECTED_BY\r\n", bitvector );
               else
                 bit |= (1 << tmpbit);
             }
@@ -425,14 +425,14 @@ void do_sset( Character *ch, char *argument )
           aff->AffectedBy = bit;
           aff->Next = skill->Affects;
           skill->Affects = aff;
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "level" ) )
         {
           skill->Level = urange( 1, atoi( argument ), MAX_ABILITY_LEVEL );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -440,7 +440,7 @@ void do_sset( Character *ch, char *argument )
         {
           FreeMemory(skill->Name);
           skill->Name = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -451,7 +451,7 @@ void do_sset( Character *ch, char *argument )
             skill->Messages.NounDamage = CopyString( "" );
           else
             skill->Messages.NounDamage = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -460,7 +460,7 @@ void do_sset( Character *ch, char *argument )
           FreeMemory(skill->Messages.WearOff);
           if ( StrCmp( argument, "clear" ) )
             skill->Messages.WearOff = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -470,7 +470,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Messages.Success.ToCaster);
           if ( StrCmp( argument, "clear" ) )
             skill->Messages.Success.ToCaster = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -480,7 +480,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Messages.Success.ToVictim);
           if ( StrCmp( argument, "clear" ) )
             skill->Messages.Success.ToVictim = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -490,7 +490,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Messages.Success.ToRoom);
           if ( StrCmp( argument, "clear" ) )
             skill->Messages.Success.ToRoom = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -500,7 +500,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Messages.Failure.ToCaster);
           if ( StrCmp( argument, "clear" ) )
             skill->Messages.Failure.ToCaster = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -510,7 +510,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Messages.Failure.ToVictim);
           if ( StrCmp( argument, "clear" ) )
             skill->Messages.Failure.ToVictim = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -520,7 +520,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Messages.Failure.ToRoom);
           if ( StrCmp( argument, "clear" ) )
             skill->Messages.Failure.ToRoom = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -530,7 +530,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Messages.VictimDeath.ToCaster);
           if ( StrCmp( argument, "clear" ) )
             skill->Messages.VictimDeath.ToCaster = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -540,7 +540,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Messages.VictimDeath.ToVictim);
           if ( StrCmp( argument, "clear" ) )
             skill->Messages.VictimDeath.ToVictim = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -550,7 +550,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Messages.VictimDeath.ToRoom);
           if ( StrCmp( argument, "clear" ) )
             skill->Messages.VictimDeath.ToRoom = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -560,7 +560,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Messages.VictimImmune.ToCaster);
           if ( StrCmp( argument, "clear" ) )
             skill->Messages.VictimImmune.ToCaster = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -570,7 +570,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Messages.VictimImmune.ToVictim);
           if ( StrCmp( argument, "clear" ) )
             skill->Messages.VictimImmune.ToVictim = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -580,7 +580,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Messages.VictimImmune.ToRoom);
           if ( StrCmp( argument, "clear" ) )
             skill->Messages.VictimImmune.ToRoom = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -590,7 +590,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Dice);
           if ( StrCmp( argument, "clear" ) )
             skill->Dice = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -600,7 +600,7 @@ void do_sset( Character *ch, char *argument )
             FreeMemory(skill->Teachers);
           if ( StrCmp( argument, "clear" ) )
             skill->Teachers = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
+          ch->Echo("Ok.\r\n");
           return;
         }
 
@@ -616,22 +616,22 @@ void do_sset( Character *ch, char *argument )
           do_sset(ch, arg1);
         }
       else
-        SendToCharacter( "They aren't here.\r\n", ch );
+        ch->Echo("They aren't here.\r\n");
       return;
 
-      SendToCharacter( "Only on NPC's.\r\n", ch );
+      ch->Echo("Only on NPC's.\r\n");
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      SendToCharacter( "Not on NPC's.\r\n", ch );
+      ch->Echo("Not on NPC's.\r\n");
       return;
     }
 
   if ( GetTrustLevel(ch) < SysData.LevelToMsetPlayers && victim != ch)
     {
-      SendToCharacter( "You can't do that.\r\n", ch );
+      ch->Echo("You can't do that.\r\n");
       return;
     }
 
@@ -639,7 +639,7 @@ void do_sset( Character *ch, char *argument )
   sn   = 0;
   if ( !fAll && ( sn = LookupSkill( arg2 ) ) < 0 )
     {
-      SendToCharacter( "No such skill or spell.\r\n", ch );
+      ch->Echo("No such skill or spell.\r\n");
       return;
     }
 
@@ -648,14 +648,14 @@ void do_sset( Character *ch, char *argument )
    */
   if ( !IsNumber( argument ) )
     {
-      SendToCharacter( "Value must be numeric.\r\n", ch );
+      ch->Echo("Value must be numeric.\r\n");
       return;
     }
 
   value = atoi( argument );
   if ( value < 0 || value > 100 )
     {
-      SendToCharacter( "Value range is 0 to 100.\r\n", ch );
+      ch->Echo("Value range is 0 to 100.\r\n");
       return;
     }
 
@@ -677,3 +677,4 @@ void do_sset( Character *ch, char *argument )
       victim->PCData->Learned[sn] = value;
     }
 }
+

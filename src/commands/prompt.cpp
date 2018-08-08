@@ -9,7 +9,7 @@ void do_prompt( Character *ch, char *argument )
 
   if ( IsNpc(ch) )
     {
-      SendToCharacter( "NPC's can't change their prompt..\r\n", ch );
+      ch->Echo("NPC's can't change their prompt..\r\n");
       return;
     }
 
@@ -18,7 +18,7 @@ void do_prompt( Character *ch, char *argument )
 
   if ( !*arg )
     {
-      SendToCharacter( "Set prompt to what? (try help prompt)\r\n", ch );
+      ch->Echo("Set prompt to what? (try help prompt)\r\n");
       return;
     }
 
@@ -35,5 +35,6 @@ void do_prompt( Character *ch, char *argument )
   else
     ch->PCData->Prompt = CopyString(argument);
 
-  SendToCharacter( "Ok.\r\n", ch );
+  ch->Echo("Ok.\r\n");
 }
+

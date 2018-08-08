@@ -17,31 +17,34 @@ void do_fire(Character *ch, char *argument )
 
   if (  (ship = GetShipFromTurret(ch->InRoom->Vnum))  == NULL )
     {
-      SendToCharacter("&RYou must be in the gunners chair or turret of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the gunners chair or turret of a ship to do that!\r\n");
       return;
     }
+
   if ( ship->Rooms.Gunseat != ch->InRoom->Vnum )
     is_turret = true;
 
   if ( IsShipInHyperspace( ship ) && ship->Class <= SHIP_PLATFORM )
     {
-      SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
+      ch->Echo("&RYou can only do that in realspace!\r\n");
       return;
     }
+
   if (ship->Spaceobject == NULL && ship->Class <= SHIP_PLATFORM)
     {
-      SendToCharacter("&RYou can't do that until after you've finished launching!\r\n",ch);
+      ch->Echo("&RYou can't do that until after you've finished launching!\r\n",ch);
       return;
     }
+
   if ( ship->Thrusters.Energy.Current < 5 )
     {
-      SendToCharacter("&RTheres not enough energy left to fire!\r\n",ch);
+      ch->Echo("&RTheres not enough energy left to fire!\r\n");
       return;
     }
 
   if ( IsShipAutoflying(ship) && !is_turret )
     {
-      SendToCharacter("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
+      ch->Echo("&RYou'll have to turn off the ships autopilot first.\r\n");
       return;
     }
 
@@ -58,19 +61,19 @@ void do_fire(Character *ch, char *argument )
 
       if (ship->WeaponSystems.Laser.State == LASER_DAMAGED)
         {
-          SendToCharacter("&RThe ships main laser is damaged.\r\n",ch);
+          ch->Echo("&RThe ships main laser is damaged.\r\n");
           return;
         }
       
       if (ship->WeaponSystems.Laser.State >= ship->WeaponSystems.Laser.Count )
         {
-          SendToCharacter("&RThe lasers are still recharging.\r\n",ch);
+          ch->Echo("&RThe lasers are still recharging.\r\n");
           return;
         }
 
       if (ship->WeaponSystems.Target == NULL )
         {
-          SendToCharacter("&RYou need to choose a target first.\r\n",ch);
+          ch->Echo("&RYou need to choose a target first.\r\n");
           return;
         }
 
@@ -78,14 +81,14 @@ void do_fire(Character *ch, char *argument )
 
       if (ship->Class <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target ) )
         {
-          SendToCharacter("&RYour target seems to have left.\r\n",ch);
+          ch->Echo("&RYour target seems to have left.\r\n");
           ship->WeaponSystems.Target = NULL;
           return;
         }
 
       if (ship->Class > SHIP_PLATFORM && ship->WeaponSystems.Target->InRoom != ship->InRoom)
         {
-          SendToCharacter("&RYour target seems to have left.\r\n",ch);
+          ch->Echo("&RYour target seems to have left.\r\n");
           ship->WeaponSystems.Target = NULL;
           return;
         }
@@ -94,7 +97,7 @@ void do_fire(Character *ch, char *argument )
         {
           if( GetShipDistanceToShip( ship, target ) > 1000 )
             {
-              SendToCharacter("&RThat ship is out of laser range.\r\n",ch);
+              ch->Echo("&RThat ship is out of laser range.\r\n");
               return;
 	    }
         }
@@ -102,7 +105,7 @@ void do_fire(Character *ch, char *argument )
       if ( ship->Class < CAPITAL_SHIP
            && !IsShipFacingShip( ship, target ) )
         {
-          SendToCharacter("&RThe main laser can only fire forward. You'll need to turn your ship!\r\n",ch);
+          ch->Echo("&RThe main laser can only fire forward. You'll need to turn your ship!\r\n");
           return;
         }
 
@@ -173,44 +176,52 @@ void do_fire(Character *ch, char *argument )
 
       if (ship->WeaponSystems.Laser.State == LASER_DAMAGED)
         {
-          SendToCharacter("&RThe ships main weapons are damaged.\r\n",ch);
+          ch->Echo("&RThe ships main weapons are damaged.\r\n");
           return;
         }
+
       if (ship->WeaponSystems.IonCannon.Count <= 0)
         {
-          SendToCharacter("&RYou have no ion cannons to fire.\r\n", ch);
+          ch->Echo("&RYou have no ion cannons to fire.\r\n");
           return;
         }
+
       if (ship->WeaponSystems.IonCannon.State >= ship->WeaponSystems.IonCannon.Count )
         {
-          SendToCharacter("&RThe ion cannons are still recharging.\r\n",ch);
+          ch->Echo("&RThe ion cannons are still recharging.\r\n");
           return;
         }
+
       if (ship->WeaponSystems.Target == NULL )
         {
-          SendToCharacter("&RYou need to choose a target first.\r\n",ch);
+          ch->Echo("&RYou need to choose a target first.\r\n");
           return;
         }
+
       target = ship->WeaponSystems.Target;
+
       if (ship->Class <= SHIP_PLATFORM && !IsShipInCombatRange(ship, target) )
         {
-          SendToCharacter("&RYour target seems to have left.\r\n",ch);
+          ch->Echo("&RYour target seems to have left.\r\n");
           ship->WeaponSystems.Target = NULL;
           return;
         }
+
       if (ship->Class <= SHIP_PLATFORM)
         {
           if( GetShipDistanceToShip( ship, target ) > 1000 )
             {
-              SendToCharacter("&RThat ship is out of ion range.\r\n",ch);
+              ch->Echo("&RThat ship is out of ion range.\r\n");
               return;
             }
         }
+
       if ( ship->Class < CAPITAL_SHIP && !IsShipFacingShip( ship, target ) )
         {
-          SendToCharacter("&RThe main ion cannon can only fire forward. You'll need to turn your ship!\r\n",ch);
+          ch->Echo("&RThe main ion cannon can only fire forward. You'll need to turn your ship!\r\n");
           return;
         }
+
       ship->WeaponSystems.IonCannon.State++;
 
       the_chance += target->Class - ship->Class;
@@ -277,22 +288,25 @@ void do_fire(Character *ch, char *argument )
     {
       if (ship->WeaponSystems.Tube.State == MISSILE_DAMAGED)
 	{
-          SendToCharacter("&RThe ships missile launchers are damaged.\r\n",ch);
+          ch->Echo("&RThe ships missile launchers are damaged.\r\n");
           return;
         }
+
       if (ship->WeaponSystems.Tube.Missiles.Current <= 0)
         {
-          SendToCharacter("&RYou have no missiles to fire!\r\n",ch);
+          ch->Echo("&RYou have no missiles to fire!\r\n");
           return;
         }
+
       if (ship->WeaponSystems.Tube.State != MISSILE_READY )
         {
-          SendToCharacter("&RThe missiles are still reloading.\r\n",ch);
+          ch->Echo("&RThe missiles are still reloading.\r\n");
           return;
         }
+
       if (ship->WeaponSystems.Target == NULL )
         {
-          SendToCharacter("&RYou need to choose a target first.\r\n",ch);
+          ch->Echo("&RYou need to choose a target first.\r\n");
           return;
         }
       
@@ -300,22 +314,24 @@ void do_fire(Character *ch, char *argument )
 
       if (ship->Class <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target) )
         {
-          SendToCharacter("&RYour target seems to have left.\r\n",ch);
+          ch->Echo("&RYour target seems to have left.\r\n");
           ship->WeaponSystems.Target = NULL;
           return;
         }
+
       if(ship->Class <= SHIP_PLATFORM)
         {
           if( GetShipDistanceToShip( ship, target ) > 1000 )
             {
-              SendToCharacter("&RThat ship is out of missile range.\r\n",ch);
+              ch->Echo("&RThat ship is out of missile range.\r\n");
               return;
             }
         }
+
       if ( ship->Class < CAPITAL_SHIP
            && !IsShipFacingShip( ship, target ) )
         {
-          SendToCharacter("&RMissiles can only fire in a forward. You'll need to turn your ship!\r\n",ch);
+          ch->Echo("&RMissiles can only fire in a forward direction. You'll need to turn your ship!\r\n");
           return;
         }
 
@@ -333,9 +349,10 @@ void do_fire(Character *ch, char *argument )
 
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
+
       if ( GetRandomPercent() > the_chance )
         {
-          SendToCharacter( "&RYou fail to lock onto your target!", ch );
+          ch->Echo( "&RYou fail to lock onto your target!" );
           ship->WeaponSystems.Tube.State = MISSILE_RELOAD_2;
           return;
         }
@@ -378,43 +395,49 @@ void do_fire(Character *ch, char *argument )
     {
       if (ship->WeaponSystems.Tube.State == MISSILE_DAMAGED)
         {
-          SendToCharacter("&RThe ship's missile launchers are damaged.\r\n",ch);
+          ch->Echo("&RThe ship's missile launchers are damaged.\r\n");
           return;
         }
+
       if (ship->WeaponSystems.Tube.Torpedoes.Current <= 0)
         {
-          SendToCharacter("&RYou have no torpedos to fire!\r\n",ch);
+          ch->Echo("&RYou have no torpedos to fire!\r\n");
           return;
         }
+
       if (ship->WeaponSystems.Tube.State != MISSILE_READY )
         {
-          SendToCharacter("&RThe torpedos are still reloading.\r\n",ch);
+          ch->Echo("&RThe torpedos are still reloading.\r\n");
           return;
         }
+
       if (ship->WeaponSystems.Target == NULL )
         {
-          SendToCharacter("&RYou need to choose a target first.\r\n",ch);
+          ch->Echo("&RYou need to choose a target first.\r\n");
           return;
         }
+
       target = ship->WeaponSystems.Target;
+
       if (ship->Class <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target) )
         {
-          SendToCharacter("&RYour target seems to have left.\r\n",ch);
+          ch->Echo("&RYour target seems to have left.\r\n");
           ship->WeaponSystems.Target = NULL;
           return;
         }
+
       if(ship->Class <= SHIP_PLATFORM)
         {
           if( GetShipDistanceToShip( ship, target ) > 1000 )
             {
-              SendToCharacter("&RThat ship is out of torpedo range.\r\n",ch);
+              ch->Echo("&RThat ship is out of torpedo range.\r\n");
               return;
             }
         }
       if ( ship->Class < CAPITAL_SHIP
            && !IsShipFacingShip( ship, target ) )
         {
-          SendToCharacter("&RTorpedos can only fire in a forward direction. You'll need to turn your ship!\r\n",ch);
+          ch->Echo("&RTorpedos can only fire in a forward direction. You'll need to turn your ship!\r\n");
 	  return;
         }
 
@@ -432,16 +455,19 @@ void do_fire(Character *ch, char *argument )
 
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
+
       if ( GetRandomPercent() > the_chance )
         {
-          SendToCharacter( "&RYou fail to lock onto your target!", ch );
+          ch->Echo( "&RYou fail to lock onto your target!" );
           ship->WeaponSystems.Tube.State = MISSILE_RELOAD_2;
           return;
         }
+
       if( ship->Class <= SHIP_PLATFORM)
         NewMissile( ship , target , ch , PROTON_TORPEDO );
       else
         DamageShip( target, 200, 300, ch, NULL);
+
       ship->WeaponSystems.Tube.Torpedoes.Current-- ;
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
@@ -476,43 +502,50 @@ void do_fire(Character *ch, char *argument )
     {
       if (ship->WeaponSystems.Tube.State == MISSILE_DAMAGED)
         {
-          SendToCharacter("&RThe ships missile launchers are damaged.\r\n",ch);
+          ch->Echo("&RThe ships missile launchers are damaged.\r\n");
           return;
         }
+
       if (ship->WeaponSystems.Tube.Rockets.Current <= 0)
         {
-          SendToCharacter("&RYou have no rockets to fire!\r\n",ch);
+          ch->Echo("&RYou have no rockets to fire!\r\n");
           return;
         }
+
       if (ship->WeaponSystems.Tube.State != MISSILE_READY )
         {
-          SendToCharacter("&RThe missiles are still reloading.\r\n",ch);
+          ch->Echo("&RThe missiles are still reloading.\r\n");
           return;
         }
+
       if (ship->WeaponSystems.Target == NULL )
         {
-          SendToCharacter("&RYou need to choose a target first.\r\n",ch);
+          ch->Echo("&RYou need to choose a target first.\r\n");
           return;
         }
+
       target = ship->WeaponSystems.Target;
+
       if (ship->Class <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target) )
         {
-          SendToCharacter("&RYour target seems to have left.\r\n",ch);
+          ch->Echo("&RYour target seems to have left.\r\n");
           ship->WeaponSystems.Target = NULL;
           return;
         }
+
       if (ship->Class <= SHIP_PLATFORM)
         {
           if( GetShipDistanceToShip( ship, target ) > 800 )
             {
-	      SendToCharacter("&RThat ship is out of rocket range.\r\n",ch);
+	      ch->Echo("&RThat ship is out of rocket range.\r\n");
               return;
             }
         }
+
       if ( ship->Class < CAPITAL_SHIP
            && !IsShipFacingShip( ship, target ) )
         {
-          SendToCharacter("&RRockets can only fire forward. You'll need to turn your ship!\r\n",ch);
+          ch->Echo("&RRockets can only fire forward. You'll need to turn your ship!\r\n");
           return;
         }
 
@@ -530,12 +563,14 @@ void do_fire(Character *ch, char *argument )
 
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
+
       if ( GetRandomPercent() > the_chance )
         {
-          SendToCharacter( "&RYou fail to lock onto your target!", ch );
+          ch->Echo( "&RYou fail to lock onto your target!" );
           ship->WeaponSystems.Tube.State = MISSILE_RELOAD_2;
           return;
         }
+      
       if( ship->Class <= SHIP_PLATFORM)
         NewMissile( ship , target , ch , HEAVY_ROCKET );
       else
@@ -578,19 +613,19 @@ void do_fire(Character *ch, char *argument )
 	{
 	  if ( IsTurretDamaged( turret ) )
 	    {
-	      SendToCharacter("&RThe ships turret is damaged.\r\n",ch);
+	      ch->Echo("&RThe ships turret is damaged.\r\n");
 	      return;
 	    }
 
 	  if ( IsTurretRecharging( turret ) )
 	    {
-	      SendToCharacter("&RThe turbolaser is recharging.\r\n",ch);
+	      ch->Echo("&RThe turbolaser is recharging.\r\n");
 	      return;
 	    }
 
 	  if ( !TurretHasTarget( turret ) )
 	    {
-	      SendToCharacter("&RYou need to choose a target first.\r\n",ch);
+	      ch->Echo("&RYou need to choose a target first.\r\n");
 	      return;
 	    }
 
@@ -598,7 +633,7 @@ void do_fire(Character *ch, char *argument )
 
 	  if (ship->Class <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target) )
 	    {
-	      SendToCharacter("&RYour target seems to have left.\r\n",ch);
+	      ch->Echo("&RYour target seems to have left.\r\n");
 	      ClearTurretTarget( turret );
 	      return;
 	    }
@@ -607,7 +642,7 @@ void do_fire(Character *ch, char *argument )
 	    {
 	      if( GetShipDistanceToShip( ship, target ) > 1000 )
 		{
-		  SendToCharacter("&RThat ship is out of laser range.\r\n",ch);
+		  ch->Echo("&RThat ship is out of laser range.\r\n");
 		  return;
 		}
 	    }
@@ -682,5 +717,6 @@ void do_fire(Character *ch, char *argument )
 	}
     }
 
-  SendToCharacter( "&RYou can't fire that!\r\n" , ch);
+  ch->Echo( "&RYou can't fire that!\r\n" );
 }
+

@@ -1,11 +1,12 @@
 #include "mud.hpp"
 #include "clan.hpp"
+#include "character.hpp"
 
 void do_members( Character *ch, char *argument )
 {
   if( IsNullOrEmpty( argument ) )
     {
-      Echo( ch, "Usage: members <clan name>\r\n" );
+      ch->Echo("Usage: members <clan name>\r\n" );
       return;
     }
 
@@ -23,10 +24,11 @@ void do_members( Character *ch, char *argument )
 
   if( !GetMemberList( GetClan( argument ) ) )
     {
-      Echo( ch, "&RNo such member list.\r\n" );
+      ch->Echo("&RNo such member list.\r\n" );
     }
   else
     {
       ShowClanMembers( ch, argument, NULL );
     }
 }
+

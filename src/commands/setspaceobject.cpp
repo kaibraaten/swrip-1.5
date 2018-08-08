@@ -11,7 +11,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      SendToCharacter( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 
@@ -20,11 +20,11 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "Usage: setspaceobject <spaceobject> <field> <values>\r\n", ch );
-      SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( "name type simulator\r\n", ch );
-      Echo( ch, "xpos ypos zpos gravity secret%d-%d\r\n", 0, MAX_LANDINGSITE - 1 );
-      Echo( ch, "location%d-%d dock%d-%d\r\n", 0, MAX_LANDINGSITE - 1, 0, MAX_LANDINGSITE -1 );
+      ch->Echo("Usage: setspaceobject <spaceobject> <field> <values>\r\n");
+      ch->Echo("\r\nField being one of:\r\n");
+      ch->Echo("name type simulator\r\n");
+      ch->Echo("xpos ypos zpos gravity secret%d-%d\r\n", 0, MAX_LANDINGSITE - 1 );
+      ch->Echo("location%d-%d dock%d-%d\r\n", 0, MAX_LANDINGSITE - 1, 0, MAX_LANDINGSITE -1 );
       return;
     }
 
@@ -32,7 +32,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !spaceobject )
     {
-      SendToCharacter( "No such spaceobject.\r\n", ch );
+      ch->Echo("No such spaceobject.\r\n");
       return;
     }
 
@@ -49,7 +49,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
       if( !StrCmp( option, arg2 ) )
 	{
-	  Echo( ch, "Range is %s%d to %s%d.\r\n",
+   ch->Echo("Range is %s%d to %s%d.\r\n",
 		option, 0, option, MAX_LANDINGSITE - 1 );
 	  return;
 	}
@@ -60,14 +60,14 @@ void do_setspaceobject( Character *ch, char *argument )
 
 	  if( siteNum >= MAX_LANDINGSITE )
 	    {
-	      Echo( ch, "Range is %s%d to %s%d.\r\n",
+       ch->Echo("Range is %s%d to %s%d.\r\n",
 		    option, 0, option, MAX_LANDINGSITE - 1 );
 	    }
 	  else
 	    {
 	      LandingSite *site = &spaceobject->LandingSites[siteNum];
 	      site->IsSecret = !site->IsSecret;
-	      SendToCharacter( "Done.\r\n", ch );
+       ch->Echo("Done.\r\n");
 	      Spaceobjects->Save(spaceobject);
 	    }
 
@@ -81,7 +81,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
       if( !StrCmp( option, arg2 ) )
         {
-          Echo( ch, "Range is %s%d to %s%d.\r\n",
+          ch->Echo("Range is %s%d to %s%d.\r\n",
                 option, 0, option, MAX_LANDINGSITE - 1 );
           return;
         }
@@ -92,7 +92,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
           if( siteNum >= MAX_LANDINGSITE )
             {
-              Echo( ch, "Range is %s%d to %s%d.\r\n",
+              ch->Echo("Range is %s%d to %s%d.\r\n",
                     option, 0, option, MAX_LANDINGSITE - 1 );
             }
           else
@@ -102,12 +102,12 @@ void do_setspaceobject( Character *ch, char *argument )
 
 	      if( !GetRoom( vnum ) && vnum != INVALID_VNUM )
 		{
-		  Echo( ch, "&RVnum %d doesn't exist.&d\r\n", vnum );
+    ch->Echo("&RVnum %d doesn't exist.&d\r\n", vnum );
 		  return;
 		}
 
               site->Dock = vnum;
-              SendToCharacter( "Done.\r\n", ch );
+              ch->Echo("Done.\r\n");
               Spaceobjects->Save(spaceobject);
             }
 
@@ -121,7 +121,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
       if( !StrCmp( option, arg2 ) )
         {
-          Echo( ch, "Range is %s%d to %s%d.\r\n",
+          ch->Echo("Range is %s%d to %s%d.\r\n",
                 option, 0, option, MAX_LANDINGSITE - 1 );
           return;
         }
@@ -132,7 +132,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
           if( siteNum >= MAX_LANDINGSITE )
             {
-              Echo( ch, "Range is %s%d to %s%d.\r\n",
+              ch->Echo("Range is %s%d to %s%d.\r\n",
                     option, 0, option, MAX_LANDINGSITE - 1 );
             }
           else
@@ -140,7 +140,7 @@ void do_setspaceobject( Character *ch, char *argument )
               LandingSite *site = &spaceobject->LandingSites[siteNum];
 	      FreeMemory( site->LocationName );
 	      site->LocationName = CopyString( argument );
-              SendToCharacter( "Done.\r\n", ch );
+              ch->Echo("Done.\r\n");
               Spaceobjects->Save(spaceobject);
             }
 
@@ -163,19 +163,19 @@ void do_setspaceobject( Character *ch, char *argument )
 
       if( sotype < SPACE_SUN || (size_t) sotype >= SpaceobjectTypeName.size() )
         {
-          Echo(ch, "Invalid type. Possible values:\r\n");
+          ch->Echo("Invalid type. Possible values:\r\n");
 
           for(const char * const name : SpaceobjectTypeName)
             {
-              Echo(ch, " %s", name);
+              ch->Echo(" %s", name);
             }
 
-          Echo(ch, "\r\n");
+          ch->Echo("\r\n");
           return;
         }
 
       spaceobject->Type = sotype;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
     }
@@ -183,7 +183,7 @@ void do_setspaceobject( Character *ch, char *argument )
   if ( !StrCmp( arg2, "xpos" ) )
     {
       spaceobject->Position.x = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
     }
@@ -191,7 +191,7 @@ void do_setspaceobject( Character *ch, char *argument )
   if ( !StrCmp( arg2, "ypos" ) )
     {
       spaceobject->Position.y = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
     }
@@ -199,7 +199,7 @@ void do_setspaceobject( Character *ch, char *argument )
   if ( !StrCmp( arg2, "zpos" ) )
     {
       spaceobject->Position.z = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
     }
@@ -207,7 +207,7 @@ void do_setspaceobject( Character *ch, char *argument )
   if ( !StrCmp( arg2, "gravity" ) )
     {
       spaceobject->Gravity = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
     }
@@ -215,7 +215,7 @@ void do_setspaceobject( Character *ch, char *argument )
   if ( !StrCmp( arg2, "hx" ) )
     {
       spaceobject->Heading.x = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
     }
@@ -223,7 +223,7 @@ void do_setspaceobject( Character *ch, char *argument )
   if ( !StrCmp( arg2, "hy" ) )
     {
       spaceobject->Heading.y = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
     }
@@ -231,7 +231,7 @@ void do_setspaceobject( Character *ch, char *argument )
   if ( !StrCmp( arg2, "hz" ) )
     {
       spaceobject->Heading.z = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
     }
@@ -242,12 +242,12 @@ void do_setspaceobject( Character *ch, char *argument )
 
       if( speed < 0 )
 	{
-	  Echo( ch, "&RSpeed must be zero or more.&d\r\n" );
+   ch->Echo("&RSpeed must be zero or more.&d\r\n" );
 	  return;
 	}
 
       spaceobject->Speed = speed;
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
     }
@@ -256,7 +256,7 @@ void do_setspaceobject( Character *ch, char *argument )
     {
       if( GetSpaceobject( argument ) )
 	{
-	  Echo( ch, "&RThere's already another spaceobject with that name.&d\r\n" );
+   ch->Echo("&RThere's already another spaceobject with that name.&d\r\n" );
 	  return;
 	}
 
@@ -264,10 +264,11 @@ void do_setspaceobject( Character *ch, char *argument )
 
       FreeMemory( spaceobject->Name );
       spaceobject->Name = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
+      ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
     }
 
   do_setspaceobject( ch, "" );
 }
+

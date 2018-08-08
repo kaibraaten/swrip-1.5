@@ -1,6 +1,7 @@
 #include "turret.hpp"
 #include "ship.hpp"
 #include "mud.hpp"
+#include "character.hpp"
 
 void do_copyship( Character *ch, char *argument )
 {
@@ -14,7 +15,7 @@ void do_copyship( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: copyship <oldshipname> <filename> <newshipname>\r\n", ch );
+      ch->Echo( "Usage: copyship <oldshipname> <filename> <newshipname>\r\n" );
       return;
     }
 
@@ -22,7 +23,7 @@ void do_copyship( Character *ch, char *argument )
 
   if (!old)
     {
-      SendToCharacter( "Thats not a ship!\r\n", ch );
+      ch->Echo( "That's not a ship!\r\n" );
       return;
     }
 
@@ -47,3 +48,4 @@ void do_copyship( Character *ch, char *argument )
 
   Ships->Save(ship);
 }
+

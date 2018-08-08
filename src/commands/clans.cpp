@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "planet.hpp"
+#include "character.hpp"
 
 void do_clans( Character *ch, char *argument )
 {
@@ -32,43 +33,43 @@ void do_clans( Character *ch, char *argument )
           support /= pCount;
         }
 
-      Echo( ch, "--------------------------------------------------------------------------------\r\n");
-      Echo( ch, "&z&WOrganization: &Y%-20s    ", clan->Name);
-      Echo( ch, "&WPlanets: &O%-4d &z&WAvg Pop Support: ",pCount);
+      ch->Echo( "--------------------------------------------------------------------------------\r\n");
+      ch->Echo( "&z&WOrganization: &Y%-20s    ", clan->Name);
+      ch->Echo( "&WPlanets: &O%-4d &z&WAvg Pop Support: ",pCount);
 
-      if (support <50)
+      if (support < 50)
         {
-          Echo( ch, "&R");
+          ch->Echo( "&R" );
         }
       else
         {
-          Echo( ch, "&O");
+          ch->Echo( "&O" );
         }
 
-      Echo( ch,"%-3d&W\r\nRevenue: &O%-29ld",support,revenue);
-      Echo(ch, "&W\r\n");
+      ch->Echo( "%-3d&W\r\nRevenue: &O%-29ld&W\r\n",support,revenue);
 
       if (clan->Subclans.size() > 0)
         {
-          Echo( ch, "  &z&wGuilds               Leader\r\n");
+          ch->Echo( "  &z&wGuilds               Leader\r\n");
 
           for(const Clan *guild : clan->Subclans)
             {
-              Echo( ch, "  &O%-20s %-10s\r\n",
-		    guild->Name, guild->Leadership.Leader );
+              ch->Echo( "  &O%-20s %-10s\r\n",
+                        guild->Name, guild->Leadership.Leader );
             }
         }
 
       count++;
     }
 
-  Echo( ch, "--------------------------------------------------------------------------------\r\n");
+  ch->Echo( "--------------------------------------------------------------------------------\r\n");
 
   if ( !count )
     {
       SetCharacterColor( AT_BLOOD, ch);
-      SendToCharacter( "There are no organizations currently formed.\r\n", ch );
+      ch->Echo( "There are no organizations currently formed.\r\n" );
     }
 
-  SetCharacterColor( AT_WHITE, ch );
+  SetCharacterColor( AT_GREY, ch );
 }
+

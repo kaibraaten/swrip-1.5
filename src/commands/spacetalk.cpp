@@ -8,9 +8,10 @@ void do_spacetalk( Character *ch, char *argument )
 
   if ( !ship )
     {
-      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;
     }
 
   TalkChannel( ch, argument, CHANNEL_SPACE, "spacetalk" );
 }
+
