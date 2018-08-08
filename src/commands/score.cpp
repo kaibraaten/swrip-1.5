@@ -95,10 +95,9 @@ void do_score(Character * ch, char *argument)
   ch->Echo("&cWeight: &C%5.5d &c(&Cmax %7.7d&c)    Items: &C%5.5d &c(&Cmax %5.5d&c)\r\n",
             ch->CarryWeight, GetCarryCapacityWeight(ch) , ch->CarryNumber, GetCarryCapacityNumber(ch));
 
-  ch->Echo("&cPager: &C(%c) %3d   &cAutoExit(&C%c&c)  AutoLoot(&C%c&c)  Autosac(&C%c&c)\r\n",
-            IsBitSet(ch->PCData->Flags, PCFLAG_PAGERON) ? 'X' : ' ',
-            ch->PCData->PagerLength, IsBitSet(ch->Flags, PLR_AUTOEXIT) ? 'X' : ' ',
-            IsBitSet(ch->Flags, PLR_AUTOLOOT) ? 'X' : ' ', IsBitSet(ch->Flags, PLR_AUTOSAC) ? 'X' : ' ');
+  ch->Echo("&cAutoExit(&C%c&c)  AutoLoot(&C%c&c)  Autosac(&C%c&c)\r\n",
+           IsBitSet(ch->Flags, PLR_AUTOEXIT) ? 'X' : ' ',
+           IsBitSet(ch->Flags, PLR_AUTOLOOT) ? 'X' : ' ', IsBitSet(ch->Flags, PLR_AUTOSAC) ? 'X' : ' ');
 
   switch (ch->Position)
     {

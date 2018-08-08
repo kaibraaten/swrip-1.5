@@ -564,11 +564,6 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "Prompt       %s~\n",      ch->PCData->Prompt      );
 	}
 
-      if ( ch->PCData->PagerLength != 24 )
-	{
-	  fprintf( fp, "Pagerlen     %d\n",       ch->PCData->PagerLength    );
-	}
-
       for(const Alias *alias : ch->PCData->Aliases)
         {
           if(IsNullOrEmpty(alias->Name) || IsNullOrEmpty(alias->Command))
@@ -1665,7 +1660,6 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'P':
-          KEY( "Pagerlen",      ch->PCData->PagerLength,   ReadInt( fp, Log ) );
           KEY( "Password",      ch->PCData->Password,        ReadStringToTilde( fp, Log ) );
           KEY( "PDeaths",       ch->PCData->PDeaths,    ReadInt( fp, Log ) );
           KEY( "PKills",        ch->PCData->PKills,     ReadInt( fp, Log ) );

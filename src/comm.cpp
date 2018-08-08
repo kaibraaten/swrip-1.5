@@ -79,8 +79,6 @@ static bool FlushBuffer( Descriptor *d, bool fPrompt );
 static void ReadFromBuffer( Descriptor *d );
 static void StopIdling( Character *ch );
 static void DisplayPrompt( Descriptor *d );
-static void SetPagerInput( Descriptor *d, char *argument );
-static bool PagerOutput( Descriptor *d );
 static void GameLoop( void );
 static void NewDescriptor( socket_t new_desc );
 static bool ReadFromDescriptor( Descriptor *d );
@@ -514,26 +512,24 @@ static void GameLoop( void )
                       if ( d->Character )
                         SetCurrentGlobalCharacter( d->Character );
 
-                      if ( d->Pager.PagePoint )
-                        SetPagerInput(d, cmdline);
-                      else
-                        switch( d->ConnectionState )
-                          {
-                          default:
-                            Nanny( d, cmdline );
-                            break;
+                      switch( d->ConnectionState )
+                        {
+                        default:
+                          Nanny( d, cmdline );
+                          break;
 
-                          case CON_PLAYING:
-                            d->Character->CmdRecurse = 0;
-                            Interpret( d->Character, cmdline );
-                            break;
+                        case CON_PLAYING:
+                          d->Character->CmdRecurse = 0;
+                          Interpret( d->Character, cmdline );
+                          break;
 
-                          case CON_EDITING:
-                            EditBuffer( d->Character, cmdline );
-                            break;
-                          }
+                        case CON_EDITING:
+                          EditBuffer( d->Character, cmdline );
+                          break;
+                        }
                     }
                 }
+          
           if ( d == LastDescriptor )
             break;
         }
@@ -555,19 +551,7 @@ static void GameLoop( void )
           if ( ( d->fCommand || d->OutTop > 0 )
                &&   FD_ISSET(d->Socket, &out_set) )
             {
-              if ( d->Pager.PagePoint )
-                {
-                  if ( !PagerOutput(d) )
-                    {
-                      if ( d->Character
-                           && ( d->ConnectionState == CON_PLAYING
-                                ||   d->ConnectionState == CON_EDITING ) )
-                        SaveCharacter( d->Character );
-                      d->OutTop = 0;
-                      CloseDescriptor(d, false);
-                    }
-                }
-              else if ( !FlushBuffer( d, true ) )
+              if ( !FlushBuffer( d, true ) )
                 {
                   if ( d->Character
                        && ( d->ConnectionState == CON_PLAYING
@@ -788,9 +772,6 @@ void FreeDescriptor( Descriptor *d )
   closesocket( d->Socket );
   FreeMemory( d->Remote.Hostname );
   FreeMemory( d->OutBuffer );
-
-  if ( d->Pager.PageBuffer )
-    FreeMemory( d->Pager.PageBuffer );
 
   FreeMemory( d );
   --num_descriptors;
@@ -2017,118 +1998,3 @@ int MakeColorSequence(const char *col, char *buf, Descriptor *d)
 
   return ln;
 }
-
-static void SetPagerInput( Descriptor *d, char *argument )
-{
-  while ( isspace(*argument) )
-    argument++;
-
-  d->Pager.PageCommand = *argument;
-}
-
-static bool PagerOutput( Descriptor *d )
-{
-  register char *last;
-  Character *ch;
-  int pclines;
-  register int lines;
-  bool ret;
-
-  if ( !d || !d->Pager.PagePoint || d->Pager.PageCommand == -1 )
-    return true;
-
-  ch = d->Original ? d->Original : d->Character;
-  pclines = umax(ch->PCData->PagerLength, 5) - 1;
-
-  switch(CharToLowercase(d->Pager.PageCommand))
-    {
-    default:
-      lines = 0;
-      break;
-
-    case 'b':
-      lines = -1-(pclines*2);
-      break;
-
-    case 'r':
-      lines = -1-pclines;
-      break;
-
-    case 'q':
-      d->Pager.PageTop = 0;
-      d->Pager.PagePoint = NULL;
-      FlushBuffer(d, true);
-      FreeMemory(d->Pager.PageBuffer);
-      d->Pager.PageSize = MAX_STRING_LENGTH;
-      return true;
-    }
-
-  while ( lines < 0 && d->Pager.PagePoint >= d->Pager.PageBuffer )
-    if ( *(--d->Pager.PagePoint) == '\n' )
-      ++lines;
-
-  if ( *d->Pager.PagePoint == '\n' && *(++d->Pager.PagePoint) == '\r' )
-    ++d->Pager.PagePoint;
-
-  if ( d->Pager.PagePoint < d->Pager.PageBuffer )
-    d->Pager.PagePoint = d->Pager.PageBuffer;
-
-  for ( lines = 0, last = d->Pager.PagePoint; lines < pclines; ++last )
-    {
-      if ( !*last )
-	break;
-      else if ( *last == '\n' )
-	++lines;
-    }
-
-  if ( *last == '\r' )
-    ++last;
-
-  if ( last != d->Pager.PagePoint )
-    {
-      if ( !WriteToDescriptor(d->Socket, d->Pager.PagePoint,
-                                (last-d->Pager.PagePoint)) )
-        return false;
-
-      d->Pager.PagePoint = last;
-    }
-
-  while ( isspace(*last) )
-    ++last;
-
-  if ( !*last )
-    {
-      d->Pager.PageTop = 0;
-      d->Pager.PagePoint = NULL;
-      FlushBuffer(d, true);
-      FreeMemory(d->Pager.PageBuffer);
-      d->Pager.PageSize = MAX_STRING_LENGTH;
-      return true;
-    }
-
-  d->Pager.PageCommand = -1;
-
-  if ( IsBitSet( ch->Flags, PLR_ANSI ) )
-    if ( WriteToDescriptor(d->Socket, "\033[1;36m", 7) == false )
-      return false;
-
-  if ( (ret=WriteToDescriptor(d->Socket,
-                                "(C)ontinue, (R)efresh, (B)ack, (Q)uit: [C] ", 0)) == false )
-    return false;
-
-  if ( IsBitSet( ch->Flags, PLR_ANSI ) )
-    {
-      char buf[32];
-
-      if ( d->Pager.PageColor == 7 )
-        strcpy( buf, "\033[m" );
-      else
-        sprintf(buf, "\033[0;%d;%s%dm", (d->Pager.PageColor & 8) == 8,
-                (d->Pager.PageColor > 15 ? "5;" : ""), (d->Pager.PageColor & 7)+30);
-
-      ret = WriteToDescriptor( d->Socket, buf, 0 );
-    }
-
-  return ret;
-}
-

@@ -2802,15 +2802,6 @@ CommandEntry
 
 CommandEntry
 {
-   Function = "do_pager", 
-   Log = "normal", 
-   Name = "pager", 
-   Position = "dead", 
-   Level = 1, 
-}
-
-CommandEntry
-{
    Function = "do_planets", 
    Log = "normal", 
    Name = "planets", 
