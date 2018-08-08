@@ -71,7 +71,6 @@ public:
   char *AuthedBy = NULL;      /* what crazy imm authed this name ;) */
   char *Prompt = NULL;         /* User config prompts */
   char *SubPrompt = NULL;      /* Substate prompt */
-  short PagerLength = 24;       /* For pager (NOT menus) */
   bool OpenedTourney = false;
 
   std::array<short, 10> Addiction;

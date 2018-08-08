@@ -393,7 +393,6 @@ _OBJ =  act_comm.o \
 	$(CMDDIR)/outcast.o \
 	$(CMDDIR)/override.o \
 	$(CMDDIR)/owhere.o \
-	$(CMDDIR)/pager.o \
 	$(CMDDIR)/pardon.o \
 	$(CMDDIR)/password.o \
 	$(CMDDIR)/peace.o \

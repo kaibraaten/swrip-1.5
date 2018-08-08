@@ -126,16 +126,6 @@ struct Descriptor
   unsigned  long OutSize;
   int       OutTop;
 
-  struct
-  {
-    char          *PageBuffer;
-    unsigned long  PageSize;
-    int            PageTop;
-    char          *PagePoint;
-    signed char    PageCommand;
-    char           PageColor;
-  } Pager;
-
   int           NewState;
   unsigned char PreviousColor;
 };
@@ -1156,7 +1146,6 @@ DECLARE_CMD_FUN( do_ostat        );
 DECLARE_CMD_FUN( do_outcast      );
 DECLARE_CMD_FUN( do_override     );
 DECLARE_CMD_FUN( do_owhere       );
-DECLARE_CMD_FUN( do_pager        );
 DECLARE_CMD_FUN( do_pardon       );
 DECLARE_CMD_FUN( do_password     );
 DECLARE_CMD_FUN( do_peace        );
