@@ -27,9 +27,9 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 
-static char *SeeHalucinatedObject( int ms, bool fShort );
+static std::string SeeHalucinatedObject( int ms, bool fShort );
 
-int GetRaceFromName( const char *arg )
+int GetRaceFromName( const std::string &arg )
 {
   int iRace;
 
@@ -62,7 +62,7 @@ bool RaceIsAvailableToPlayers( const Race *race )
     }
 }
 
-int GetClassFromName( const char *arg )
+int GetClassFromName( const std::string &arg )
 {
   int iClass;
 
@@ -152,7 +152,7 @@ char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fSho
 /*
  * Some increasingly freaky halucinated objects         -Thoric
  */
-static char *SeeHalucinatedObject( int ms, bool fShort )
+static std::string SeeHalucinatedObject( int ms, bool fShort )
 {
   int sms = urange( 1, (ms+10)/5, 20 );
 

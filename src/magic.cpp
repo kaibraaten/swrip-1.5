@@ -34,7 +34,7 @@ int pAbort = 0;
  */
 char *spell_target_name = NULL;
 
-static int ParseDiceExpression(const Character *ch, int level, const char *expr);
+static int ParseDiceExpression(const Character *ch, int level, const std::string &expr);
 
 ch_ret spell_null( int sn, int level, Character *ch, void *vo )
 {
@@ -338,7 +338,7 @@ int ModifySavingThrowBasedOnResistance( const Character *ch, int save_chance, in
  * Used for spell dice parsing, ie: 3d8+L-6
  *
  */
-static int ParseDiceExpression(const Character *ch, int level, const char *argument)
+static int ParseDiceExpression(const Character *ch, int level, const std::string &argument)
 {
   int x, lop = 0, gop = 0, eop = 0;
   char operation = '\0';
@@ -348,12 +348,12 @@ static int ParseDiceExpression(const Character *ch, int level, const char *argum
   char *expr = expr_buf;
 
   /* take care of nulls coming in */
-  if (!argument || !strlen(argument))
+  if (argument.empty())
     {
       return 0;
     }
 
-  strcpy( expr, argument );
+  strcpy( expr, argument.c_str() );
 
   /* get rid of brackets if they surround the entire expresion */
   if ((*expr == '(') && !strchr(expr+1,'(') && expr[strlen(expr)-1] == ')')
@@ -537,12 +537,9 @@ static int ParseDiceExpression(const Character *ch, int level, const char *argum
 }
 
 /* wrapper function so as not to destroy expr */
-int ParseDice(const Character *ch, int level, const char *expr)
+int ParseDice(const Character *ch, int level, const std::string &expr)
 {
-  char buf[MAX_INPUT_LENGTH];
-
-  strcpy( buf, expr );
-  return ParseDiceExpression(ch, level, buf);
+  return ParseDiceExpression(ch, level, expr);
 }
 
 /*
@@ -992,7 +989,7 @@ bool CheckSavingThrow( int sn, int level, const Character *ch, const Character *
   return saved;
 }
 
-int FindSpell( const Character *ch, const char *name, bool know )
+int FindSpell( const Character *ch, const std::string &name, bool know )
 {
   if ( IsNpc(ch) || !know )
     {

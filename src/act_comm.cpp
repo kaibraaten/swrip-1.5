@@ -29,9 +29,9 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 
-char *DrunkSpeech( const char *argument, Character *ch )
+const char *DrunkSpeech( const std::string &argument, Character *ch )
 {
-  const char *arg = argument;
+  const char *arg = argument.c_str();
   static char buf[MAX_INPUT_LENGTH*2];
   char buf1[MAX_INPUT_LENGTH*2] = { '\0' };
   int drunk = 0;
@@ -39,16 +39,16 @@ char *DrunkSpeech( const char *argument, Character *ch )
   char *txt1 = NULL;
 
   if ( IsNpc( ch ) || !ch->PCData )
-    return (char *) argument;
+    return argument.c_str();
 
   drunk = ch->PCData->Condition[COND_DRUNK];
 
   if ( drunk <= 0 )
-    return (char *) argument;
+    return argument.c_str();
 
   buf[0] = '\0';
 
-  if ( !argument )
+  if ( argument.empty() )
     {
       Log->Bug( "%s: NULL argument", __FUNCTION__ );
       return "";
@@ -180,12 +180,13 @@ char *DrunkSpeech( const char *argument, Character *ch )
 /*
  * Generic channel function.
  */
-void TalkChannel( Character *ch, const char *argument, int channel, const char *verb )
+void TalkChannel( Character *ch, const std::string &text, int channel, const char *verb )
 {
+  const char *argument = text.c_str();
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
-  Descriptor *d;
-  PositionType position;
+  Descriptor *d = nullptr;
+  PositionType position = 0;
   Clan *clan = NULL;
 
   if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL && channel != CHANNEL_IMMTALK && channel != CHANNEL_OOC
@@ -501,17 +502,16 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
     }
 }
 
-void ToChannel( const char *argument, int channel, const char *verb, short level )
+void ToChannel( const std::string &argument, int channel, const std::string &verb, short level )
 {
   char buf[MAX_STRING_LENGTH];
-  Descriptor *d;
 
-  if ( !FirstDescriptor || IsNullOrEmpty( argument ) )
+  if ( !FirstDescriptor || argument.empty() )
     return;
 
-  sprintf(buf, "%s: %s\r\n", verb, argument );
+  sprintf(buf, "%s: %s\r\n", verb.c_str(), argument.c_str() );
 
-  for ( d = FirstDescriptor; d; d = d->Next )
+  for ( Descriptor *d = FirstDescriptor; d; d = d->Next )
     {
       Character *och = d->Original ? d->Original : d->Character;
       Character *vch = d->Character;
@@ -655,14 +655,13 @@ bool IsInSameGroup( const Character *ach, const Character *bch )
  * I am not too sure if this method is right..
  */
 
-void TalkAuction (const char *argument)
+void TalkAuction(const std::string &argument)
 {
-  Descriptor *d;
   char buf[MAX_STRING_LENGTH];
 
-  sprintf (buf,"Auction: %s", argument); /* last %s to reset color */
+  sprintf (buf,"Auction: %s", argument.c_str()); /* last %s to reset color */
 
-  for (d = FirstDescriptor; d; d = d->Next)
+  for (Descriptor *d = FirstDescriptor; d; d = d->Next)
     {
       Character *original = d->Original ? d->Original : d->Character; /* if switched */
 

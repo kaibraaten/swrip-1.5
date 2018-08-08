@@ -929,7 +929,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
   CountMailMessages( ch );
 }
 
-bool IsNameAcceptable( const char *name )
+bool IsNameAcceptable( const std::string &name )
 {
   const char *pc = NULL;
   bool fIll = true;
@@ -943,14 +943,14 @@ bool IsNameAcceptable( const char *name )
   /*
    * Length restrictions.
    */
-  if( strlen(name) <  MIN_NAME_LENGTH || strlen(name) > MAX_NAME_LENGTH )
+  if( name.size() <  MIN_NAME_LENGTH || name.size() > MAX_NAME_LENGTH )
     return false;
 
   /*
    * Alphanumerics only.
    * Lock out IllIll twits.
    */
-  for ( pc = name; !IsNullOrEmpty( pc ); pc++ )
+  for ( pc = name.c_str(); !IsNullOrEmpty( pc ); pc++ )
     {
       if ( !isalpha(*pc) )
         return false;

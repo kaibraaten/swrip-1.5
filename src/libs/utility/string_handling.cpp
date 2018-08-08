@@ -234,9 +234,10 @@ int StringSuffix(const std::string &astr, const std::string &bstr)
  * Returns an initial-capped string.
  * Rewritten by FearItself@AvP
  */
-char *Capitalize( const char *str )
+char *Capitalize( const std::string &argument )
 {
   static char buf[MAX_STRING_LENGTH];
+  const char *str = argument.c_str();
   char *dest = buf;
   enum { Normal, Color } state = Normal;
   bool bFirst = true;
@@ -297,20 +298,18 @@ static bool isavowel( char letter )
 /*
  * Shove either "a " or "an " onto the beginning of a string    -Thoric
  */
-const char *AOrAn( const char *str )
+const char *AOrAn( const std::string &str )
 {
   static char temp[MAX_STRING_LENGTH];
 
-  assert(str != nullptr);
-
   if ( isavowel(str[0])
-       || ( strlen(str) > 1 && tolower((int)str[0]) == 'y'
+       || ( str.size() > 1 && tolower((int)str[0]) == 'y'
             && !isavowel(str[1])) )
     strcpy( temp, "an " );
   else
     strcpy( temp, "a " );
 
-  strcat( temp, str );
+  strcat( temp, str.c_str() );
   return temp;
 }
 
