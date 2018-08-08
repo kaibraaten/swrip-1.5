@@ -18,7 +18,7 @@ class FileSystemLogger : public Logger
 public:
   void Bug(const char *str, ...) override;
   void Boot(const char *str, ...) override;
-  void LogStringPlus( const char *str, short log_type, short level ) override;
+  void LogStringPlus( const std::string &str, short log_type, short level ) override;
   void Info( const char *fmt, ... ) override;
 };
 
@@ -102,7 +102,7 @@ void FileSystemLogger::Boot(const char *str, ...)
     }
 }
 
-void FileSystemLogger::LogStringPlus( const char *str, short log_type, short level )
+void FileSystemLogger::LogStringPlus( const std::string &str, short log_type, short level )
 {
   char *strtime = ctime( &current_time );
   int offset = 0;
@@ -110,9 +110,9 @@ void FileSystemLogger::LogStringPlus( const char *str, short log_type, short lev
   char buf[MAX_STRING_LENGTH];
 
   strtime[strlen(strtime)-1] = '\0';
-  fprintf( stderr, "%s :: %s\n", strtime, str );
+  fprintf( stderr, "%s :: %s\n", strtime, str.c_str() );
 
-  if( strncmp( str, "Log ", 4 ) == 0 )
+  if( strncmp( str.c_str(), "Log ", 4 ) == 0 )
     {
       offset = 4;
     }
@@ -121,7 +121,7 @@ void FileSystemLogger::LogStringPlus( const char *str, short log_type, short lev
       offset = 0;
     }
 
-  sprintf( buf, "%s&R&w", str + offset );
+  sprintf( buf, "%s&R&w", str.c_str() + offset );
 
   switch( log_type )
     {
@@ -167,7 +167,7 @@ void FileSystemLogger::LogStringPlus( const char *str, short log_type, short lev
                && vch->TopLevel >= level )
             {
               SetCharacterColor( AT_LOG, vch );
-              vch->Echo("Log: %s&R&w\r\n", str + offset);
+              vch->Echo("Log: %s&R&w\r\n", str.c_str() + offset);
             }
         }
     }

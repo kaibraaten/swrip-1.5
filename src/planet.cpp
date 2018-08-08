@@ -110,7 +110,7 @@ static int L_PlanetEntry( lua_State *L )
   return 0;
 }
 
-static void LoadPlanet( const char *filePath, void *userData )
+static void LoadPlanet( const std::string &filePath, void *userData )
 {
   LuaLoadDataFile( filePath, L_PlanetEntry, "PlanetEntry" );
 }

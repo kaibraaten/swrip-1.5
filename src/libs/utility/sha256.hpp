@@ -29,6 +29,7 @@
 #ifndef _SHA256_HPP_
 #define _SHA256_HPP_
 
+#include <string>
 #include <sys/types.h>
 
 typedef struct SHA256Context
@@ -45,6 +46,6 @@ char *SHA256_End( SHA256_CTX *, char * );
 char *SHA256_File( const char *, char * );
 char *SHA256_FileChunk( const char *, char *, off_t, off_t );
 char *SHA256_Data( const unsigned char *, unsigned int, char * );
-char *sha256_crypt( const char *pwd );
+char *sha256_crypt( const std::string &pwd );
 
 #endif /* !_SHA256_H_ */

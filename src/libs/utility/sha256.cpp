@@ -333,7 +333,7 @@ void SHA256_Final(unsigned char digest[32], SHA256_CTX * ctx)
   memset((void *)ctx, 0, sizeof(*ctx));
 }
 
-char *sha256_crypt( const char *pwd )
+char *sha256_crypt( const std::string &pwd )
 {
   SHA256_CTX context;
   static char output[65];
@@ -341,7 +341,7 @@ char *sha256_crypt( const char *pwd )
   unsigned int j;
 
   SHA256_Init( &context );
-  SHA256_Update( &context, (const unsigned char *) pwd, strlen(pwd) );
+  SHA256_Update( &context, (const unsigned char *) pwd.c_str(), strlen(pwd.c_str()) );
   SHA256_Final( sha256sum, &context );
 
   for( j = 0; j < 32; ++j )

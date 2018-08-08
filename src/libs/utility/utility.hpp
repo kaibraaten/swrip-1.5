@@ -132,7 +132,7 @@ do                                                              \
       }                                                                 \
   } while(0)
 
-int ParseBet (const int currentbet, const char *s);
+int ParseBet(const int currentbet, const std::string &s);
 int umin( int check, int ncheck );
 int umax( int check, int ncheck );
 int urange( int mincheck, int check, int maxcheck );
@@ -156,19 +156,19 @@ char *Capitalize( const char *str );
 std::string ToLower( std::string str );
 std::string ToUpper( std::string str );
 const char *AOrAn( const char *str );
-char *StripCarriageReturn( const char *str  );
+char *StripCarriageReturn(const std::string &str);
 char *CopyString( const std::string &str );
-int CountStringOccurances(const char *psource, const char *ptarget);
+int CountStringOccurances(const std::string &source, const std::string &target);
 void SmashTilde( char *str );
 void SmushTilde( char* );
 void HideTilde( char *str );
-char *ShowTilde( const char *str );
+char *ShowTilde( const std::string &arg);
 void ReplaceChar( char*, char, char );
-char *EncodeString( const char* );
+char *EncodeString( const std::string &str );
 char *TrimStringStart( char *string, char junk );
 char *TrimStringEnd( char *string, char junk );
 char *TrimString( char *string, char junk );
-char *Scramble( const char *argument, int modifier );
+char *Scramble( const std::string &argument, int modifier );
 bool IsNullOrEmpty( const char *str );
 const char *IntToString( int num );
 
@@ -181,7 +181,7 @@ void ReadToEndOfLine( FILE *fp, Logger *log);
 char *ReadWord( FILE *fp, Logger *log );
 char *ReadLine( FILE *fp, Logger *log );
 void ForEachLuaFileInDir( const char *pathToDir,
-			  void (*doOnFile)(const char*, void *ud),
+			  void (*doOnFile)(const std::string&, void *ud),
 			  void *userData );
 const char *ConvertToLuaFilename( const std::string &name );
 
@@ -220,6 +220,6 @@ void StartTimer(struct timeval *start_time);
 time_t StopTimer(struct timeval *start_time);
 
 std::string FlagString( int bitvector, const char * const flagarray[] );
-void AppendToFile( const char *file, const char *str );
+void AppendToFile( const std::string &file, const std::string &str );
 
 #endif /* include guard */

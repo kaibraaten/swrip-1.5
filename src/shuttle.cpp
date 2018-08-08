@@ -567,7 +567,7 @@ static int L_ShuttleEntry( lua_State *L )
   return 0;
 }
 
-static void ExecuteShuttleFile( const char *filePath, void *userData )
+static void ExecuteShuttleFile( const std::string &filePath, void *userData )
 {
   LuaLoadDataFile( filePath, L_ShuttleEntry, "ShuttleEntry" );
 }

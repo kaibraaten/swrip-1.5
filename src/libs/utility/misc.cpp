@@ -29,12 +29,13 @@ int urange( int mincheck, int check, int maxcheck )
   return check;
 }
 
-char *Scramble( const char *argument, int modifier )
+char *Scramble( const std::string &strToScamble, int modifier )
 {
   static char arg[MAX_INPUT_LENGTH];
   int position = 0;
   int conversion = 0;
-
+  const char *argument = strToScamble.c_str();
+  
   modifier %= GetRandomNumberFromRange( 80, 300 ); /* Bitvectors get way too large #s */
 
   for ( position = 0; position < MAX_INPUT_LENGTH; position++ )
@@ -326,11 +327,8 @@ char *PunctuateNumber( long number, char **externalBuffer )
       buffer = staticBuffer;
     }
 
-#ifdef AMIGA
-  sprintf(buffer, "%ld", number);
-#else
   setlocale( LC_MONETARY, "en_US" );
   strfmon( buffer, 1024, "%!#0.0n", (double)number );
-#endif
+
   return TrimString( buffer, ' ' );
 }

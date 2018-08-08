@@ -367,7 +367,7 @@ static int L_SpaceobjectEntry( lua_State *L )
   return 0;
 }
 
-static void ExecuteSpaceobjectFile( const char *filePath, void *userData )
+static void ExecuteSpaceobjectFile( const std::string &filePath, void *userData )
 {
   LuaLoadDataFile( filePath, L_SpaceobjectEntry, "SpaceobjectEntry" );
 }

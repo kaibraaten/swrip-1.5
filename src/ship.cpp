@@ -3023,7 +3023,7 @@ static void ReadyShipAfterLoad( Ship *ship )
   ship->Docking = SHIP_READY;
 }
 
-static void ExecuteShipFile( const char *filePath, void *userData )
+static void ExecuteShipFile( const std::string &filePath, void *userData )
 {
   LuaLoadDataFile( filePath, L_ShipEntry, "ShipEntry" );
 }

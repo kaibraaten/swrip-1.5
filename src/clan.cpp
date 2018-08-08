@@ -805,7 +805,7 @@ static int L_ClanEntry( lua_State *L )
   return 0;
 }
 
-static void ExecuteClanFile( const char *filePath, void *userData )
+static void ExecuteClanFile( const std::string &filePath, void *userData )
 {
   LuaLoadDataFile( filePath, L_ClanEntry, "ClanEntry" );
 }
