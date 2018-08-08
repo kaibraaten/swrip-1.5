@@ -37,14 +37,12 @@
 char reboot_time[50];
 time_t new_boot_time_t;
 
-void EchoToAll( short AT_COLOR, const char *argument, short tar )
+void EchoToAll( short AT_COLOR, const std::string &argument, short tar )
 {
-  Descriptor *d;
-
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     return;
 
-  for ( d = FirstDescriptor; d; d = d->Next )
+  for ( Descriptor *d = FirstDescriptor; d; d = d->Next )
     {
       /* Added showing echoes to players who are editing, so they won't
          miss out on important info like upcoming reboots. --Narn */
@@ -57,30 +55,29 @@ void EchoToAll( short AT_COLOR, const char *argument, short tar )
             continue;
           
           SetCharacterColor( AT_COLOR, d->Character );
-          d->Character->Echo( argument );
-          d->Character->Echo( "\r\n" );
+          d->Character->Echo( "%s\r\n", argument.c_str() );
         }
     }
 }
 
-void EchoToRoom( short AT_COLOR, const Room *room, const char *argument )
+void EchoToRoom( short AT_COLOR, const Room *room, const std::string &argument )
 {
   RealEchoToRoom( AT_COLOR, room, argument, true );
 }
 
-void EchoToRoomNoNewline( int ecolor, const Room *room, const char *argument )
+void EchoToRoomNoNewline( int ecolor, const Room *room, const std::string &argument )
 {
   RealEchoToRoom( ecolor, room, argument, false );
 }
 
-void RealEchoToRoom( short color, const Room *room, const char *text, bool sendNewline )
+void RealEchoToRoom( short color, const Room *room, const std::string &text, bool sendNewline )
 {
   assert(room != nullptr);
 
   for ( const Character *vic = room->FirstPerson; vic; vic = vic->NextInRoom )
     {
       SetCharacterColor( color, vic );
-      vic->Echo( text );
+      vic->Echo( "%s", text.c_str() );
 
       if( sendNewline )
 	{
@@ -89,13 +86,13 @@ void RealEchoToRoom( short color, const Room *room, const char *text, bool sendN
     }
 }
 
-Room *FindLocation( const Character *ch, const char *arg )
+Room *FindLocation( const Character *ch, const std::string &arg )
 {
   const Character *victim = NULL;
   const Object *obj = NULL;
 
   if ( IsNumber(arg) )
-    return GetRoom( atoi( arg ) );
+    return GetRoom( stoi( arg ) );
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) != NULL )
     return victim->InRoom;
@@ -106,7 +103,7 @@ Room *FindLocation( const Character *ch, const char *arg )
   return NULL;
 }
 
-void GenerateRebootString(void)
+void GenerateRebootString()
 {
   sprintf(reboot_time, "%s", asctime(new_boot_time));
 }

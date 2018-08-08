@@ -1396,61 +1396,61 @@ DECLARE_SPEC_FUN( spec_newbie_pilot );
  * One big lump ... this is every function in Merc.
  */
 
-  /* copyover.c */
-  void RecoverFromCopyover( void );
+/* copyover.c */
+void RecoverFromCopyover( void );
 
-  bool IsNameAcceptable( const char *name );
-  char *DrunkSpeech( const char *argument, Character *ch );
-  void TalkChannel( Character *ch, const char *argument,
-		     int channel, const char *verb );
-  bool IsFollowingInCircle( const Character *ch, const Character *victim );
-  void StartFollowing( Character *ch, Character *master );
-  void StopFollowing( Character *ch );
-  void DieFollower( Character *ch );
-  bool IsInSameGroup( const Character *ach, const Character *bch );
-  void ToChannel( const char *argument, int channel,
-		   const char *verb, short level );
-  void TalkAuction( const char *argument );
-  bool CharacterKnowsLanguage( const Character *ch, int language, const Character *cch );
-  bool CharacterCanLearnLanguage( const Character *ch, int language );
-  int CountLanguages( int languages );
+bool IsNameAcceptable( const std::string &name );
+const char *DrunkSpeech( const std::string &argument, Character *ch );
+void TalkChannel( Character *ch, const std::string &text,
+                  int channel, const char *verb );
+bool IsFollowingInCircle( const Character *ch, const Character *victim );
+void StartFollowing( Character *ch, Character *master );
+void StopFollowing( Character *ch );
+void DieFollower( Character *ch );
+bool IsInSameGroup( const Character *ach, const Character *bch );
+void ToChannel( const std::string &argument, int channel,
+                const std::string &verb, short level );
+void TalkAuction( const std::string &argument );
+bool CharacterKnowsLanguage( const Character *ch, int language, const Character *cch );
+bool CharacterCanLearnLanguage( const Character *ch, int language );
+int CountLanguages( int languages );
 
-  /* act_info.c */
-  bool RaceIsAvailableToPlayers( const Race *race );
-  int GetRaceFromName( const char *arg );
-  int GetClassFromName( const char *arg );
-  void ShowCharacterCondition( const Character *ch, const Character *victim );
-  char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fShort );
-  void ShowObjectListToCharacter( const Object *list, Character *ch,
-				  bool fShort, bool fShowNothing );
+/* act_info.c */
+bool RaceIsAvailableToPlayers( const Race *race );
+int GetRaceFromName( const std::string &arg );
+int GetClassFromName( const std::string &arg );
+void ShowCharacterCondition( const Character *ch, const Character *victim );
+char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fShort );
+void ShowObjectListToCharacter( const Object *list, Character *ch,
+                                bool fShort, bool fShowNothing );
 
-  /* act_move.c */
-  void SetBExitFlag( Exit *pexit, int flag );
-  void RemoveBExitFlag( Exit *pexit, int flag );
-  Room *GenerateExit( Room *in_room, Exit **pexit );
-  void ClearVirtualRooms( void );
-  Exit *FindDoor( Character *ch, const char *arg, bool quiet );
-  Exit *GetExit( const Room *room, DirectionType dir );
-  Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum );
-  Exit *GetExitNumber( const Room *room, short count );
-  ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall = 0 );
-  void Teleport( Character *ch, vnum_t room, int flags );
-  bool CharacterFallIfNoFloor( Character *ch, int fall );
+/* act_move.c */
+void SetBExitFlag( Exit *pexit, int flag );
+void RemoveBExitFlag( Exit *pexit, int flag );
+Room *GenerateExit( Room *in_room, Exit **pexit );
+void ClearVirtualRooms( void );
+Exit *FindDoor( Character *ch, const char *arg, bool quiet );
+Exit *GetExit( const Room *room, DirectionType dir );
+Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum );
+Exit *GetExitNumber( const Room *room, short count );
+ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall = 0 );
+void Teleport( Character *ch, vnum_t room, int flags );
+bool CharacterFallIfNoFloor( Character *ch, int fall );
 
-  /* act_obj.c */
-  char *GetObjectShortDescription( const Object *obj );
-  bool RemoveObject( Character *ch, WearLocation iWear, bool fReplace );
-  obj_ret DamageObject( Object *obj );
-  short GetObjectResistance( const Object *obj );
-  void ObjectFallIfNoFloor( Object *obj, bool through );
+/* act_obj.c */
+char *GetObjectShortDescription( const Object *obj );
+bool RemoveObject( Character *ch, WearLocation iWear, bool fReplace );
+obj_ret DamageObject( Object *obj );
+short GetObjectResistance( const Object *obj );
+void ObjectFallIfNoFloor( Object *obj, bool through );
 
-  /* act_wiz.c */
-  Room *FindLocation( const Character *ch, const char *arg );
-  void EchoToRoom( short AT_COLOR, const Room *room, const char *argument );
-  void EchoToRoomNoNewline( int ecolor, const Room *room, const char *argument );
-  void RealEchoToRoom( short color, const Room *room, const char *text, bool sendNewline );
-  void EchoToAll( short AT_COLOR, const char *argument, short tar );
-  void GenerateRebootString( void );
+/* act_wiz.c */
+Room *FindLocation( const Character *ch, const std::string &arg );
+void EchoToRoom( short AT_COLOR, const Room *room, const std::string &argument );
+void EchoToRoomNoNewline( int ecolor, const Room *room, const std::string &argument );
+void RealEchoToRoom( short color, const Room *room, const std::string &text, bool sendNewline );
+void EchoToAll( short AT_COLOR, const std::string &argument, short tar );
+void GenerateRebootString();
 
   /* const.c */
 std::string FlagString(int bitvector,
@@ -1696,13 +1696,13 @@ void CleanRoom( Room *room );
 void CleanObject( ProtoObject *obj );
 void CleanMobile( ProtoMobile *mob );
 void ExtractCharacter( Character *ch, bool fPull );
-Character *GetCharacterInRoom( const Character *ch, const char *argument );
-Character *GetCharacterAnywhere( const Character *ch, const char *argument );
+Character *GetCharacterInRoom( const Character *ch, const std::string &argument );
+Character *GetCharacterAnywhere( const Character *ch, const std::string &argument );
 Object *GetInstanceOfObject( const ProtoObject *pObjIndexData );
-Object *GetObjectInList( const Character *ch, const char *argument, Object *list );
-Object *GetObjectInListReverse( const Character *ch, const char *argument, Object *list );
-Object *GetObjectHere( const Character *ch, const char *argument );
-Object *GetObjectAnywhere( const Character *ch, const char *argument );
+Object *GetObjectInList( const Character *ch, const std::string &argument, Object *list );
+Object *GetObjectInListReverse( const Character *ch, const std::string &argument, Object *list );
+Object *GetObjectHere( const Character *ch, const std::string &argument );
+Object *GetObjectAnywhere( const Character *ch, const std::string &argument );
 int GetObjectCount( const Object *obj );
 int GetObjectWeight( const Object *obj );
 bool IsRoomDark( const Room *pRoomIndex );
@@ -1735,7 +1735,7 @@ Object *CopyObject( const Object *obj );
 void SplitGroupedObject( Object *obj, int num );
 void SeparateOneObjectFromGroup( Object *obj );
 bool EmptyObjectContents( Object *obj,Object *destobj,Room *destroom );
-Object *FindObject( Character *ch, const char *argument, bool carryonly );
+Object *FindObject( Character *ch, const std::string &argument, bool carryonly );
 void BoostEconomy( Area *tarea, int gold );
 void LowerEconomy( Area *tarea, int gold );
 void EconomizeMobileGold( Character *mob );
@@ -1758,19 +1758,19 @@ bool IsImmuneToDamageType( const Character *ch, short damtype );
 bool CheckSavingThrow( int sn, int level, const Character *ch, const Character *victim );
 void ImmuneCasting( Skill *skill, Character *ch, Character *victim, Object *obj );
 void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, Object **obj );
-int FindSpell( const Character *ch, const char *name, bool know );
+int FindSpell( const Character *ch, const std::string &name, bool know );
 bool SaveVsPoisonDeath( int level, const Character *victim ) ;
 bool SaveVsWands( int level, const Character *victim );
 bool SaveVsParalyze( int level, const Character *victim );
 bool SaveVsBreath( int level, const Character *victim );
 bool SaveVsSpellStaff( int level, const Character *victim );
 ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim, Object *obj );
-int ParseDice( const Character *ch, int level, const char *exp );
+int ParseDice( const Character *ch, int level, const std::string &exp );
 
 /* save.c */
 void SaveCharacter( Character *ch );
 void SaveClone( Character *ch );
-bool LoadCharacter( Descriptor *d, const char *name, bool preload );
+bool LoadCharacter( Descriptor *d, const std::string &name, bool preload );
 void SetAlarm( long seconds );
 void WriteObject( const Character *ch, const Object *obj, FILE *fp,
                   int iNest, short os_type );
@@ -1781,7 +1781,7 @@ void SaveHome( Character *ch );
 void SaveStoreroom( const Room *room );
 void LoadStorerooms( void );
 void LoadCorpses( void );
-void WriteCorpses( const Character *ch, const char *name );
+void WriteCorpses( const Character *ch, std::string name );
 
 /* special.c */
 SpecFun *SpecialLookup( const char *name );

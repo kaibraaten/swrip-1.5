@@ -1307,8 +1307,9 @@ void ExtractCharacter( Character *ch, bool fPull )
 /*
  * Find a char in the room.
  */
-Character *GetCharacterInRoom( const Character *ch, const char *argument )
+Character *GetCharacterInRoom( const Character *ch, const std::string &charName )
 {
+  const char *argument = charName.c_str();
   char arg[MAX_INPUT_LENGTH];
   Character *rch;
   int number, count;
@@ -1365,8 +1366,9 @@ Character *GetCharacterInRoom( const Character *ch, const char *argument )
 /*
  * Find a char in the world.
  */
-Character *GetCharacterAnywhere( const Character *ch, const char *argument )
+Character *GetCharacterAnywhere( const Character *ch, const std::string &charName)
 {
+  const char *argument = charName.c_str();
   char arg[MAX_INPUT_LENGTH];
   Character *wch;
   int number, count;
@@ -1469,8 +1471,9 @@ Object *GetInstanceOfObject( const ProtoObject *pObjIndex )
 /*
  * Find an obj in a list.
  */
-Object *GetObjectInList( const Character *ch, const char *argument, Object *list )
+Object *GetObjectInList( const Character *ch, const std::string &objName, Object *list )
 {
+  const char *argument = objName.c_str();
   char arg[MAX_INPUT_LENGTH];
   Object *obj = NULL;
   int number = NumberArgument( argument, arg );
@@ -1498,8 +1501,9 @@ Object *GetObjectInList( const Character *ch, const char *argument, Object *list
 /*
  * Find an obj in a list...going the other way                  -Thoric
  */
-Object *GetObjectInListReverse( const Character *ch, const char *argument, Object *list )
+Object *GetObjectInListReverse( const Character *ch, const std::string &objName, Object *list )
 {
+  const char *argument = objName.c_str();
   char arg[MAX_INPUT_LENGTH];
   Object *obj;
   int number;
@@ -1528,14 +1532,16 @@ Object *GetObjectInListReverse( const Character *ch, const char *argument, Objec
 /*
  * Find an obj in the room or in inventory.
  */
-Object *GetObjectHere( const Character *ch, const char *argument )
+Object *GetObjectHere( const Character *ch, const std::string &objName )
 {
-  Object *obj;
+  const char *argument = objName.c_str();
+  Object *obj = nullptr;
 
   if ( !ch || !ch->InRoom )
     return NULL;
 
   obj = GetObjectInListReverse( ch, argument, ch->InRoom->LastContent );
+
   if ( obj )
     return obj;
 
@@ -1551,11 +1557,12 @@ Object *GetObjectHere( const Character *ch, const char *argument )
 /*
  * Find an obj in the world.
  */
-Object *GetObjectAnywhere( const Character *ch, const char *argument )
+Object *GetObjectAnywhere( const Character *ch, const std::string &objName)
 {
+  const char *argument = objName.c_str();
   char arg[MAX_INPUT_LENGTH];
-  Object *obj;
-  int number, count;
+  Object *obj = nullptr;
+  int number = 0, count = 0;
   vnum_t vnum = INVALID_VNUM;
 
   if (!ch)
@@ -1601,7 +1608,7 @@ Object *GetObjectAnywhere( const Character *ch, const char *argument )
  * Generic get obj function that supports optional containers.  -Thoric
  * currently only used for "eat" and "quaff".
  */
-Object *FindObject( Character *ch, const char *orig_argument, bool carryonly )
+Object *FindObject( Character *ch, const std::string &orig_argument, bool carryonly )
 {
   char argument_buffer[MAX_INPUT_LENGTH];
   char *argument = argument_buffer;
@@ -1609,7 +1616,7 @@ Object *FindObject( Character *ch, const char *orig_argument, bool carryonly )
   char arg2[MAX_INPUT_LENGTH];
   Object *obj;
 
-  strcpy(argument, orig_argument);
+  strcpy(argument, orig_argument.c_str());
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 

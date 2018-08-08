@@ -30,7 +30,7 @@ static void PushHerbTable( lua_State *L, const void *userData );
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-bool CheckSkill( Character *ch, const char *command, char *argument )
+bool CheckSkill( Character *ch, const std::string &command, char *argument )
 {
   int sn = 0;
   int first = gsn_first_skill;
@@ -56,7 +56,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
           return false;
         }
 
-      if (strcasecmp( command, SkillTable[sn]->Name) < 1)
+      if (strcasecmp( command.c_str(), SkillTable[sn]->Name) < 1)
         {
           top = sn - 1;
         }
@@ -362,7 +362,7 @@ void LearnFromFailure( Character *ch, int sn )
 /*
  * Lookup a skill by name, only stopping at skills the player has.
  */
-int ChLookupSkill( const Character *ch, const char *name )
+int ChLookupSkill( const Character *ch, const std::string &name )
 {
   int sn = 0;
 
@@ -392,7 +392,7 @@ int ChLookupSkill( const Character *ch, const char *name )
 /*
  * Lookup an herb by name.
  */
-int LookupHerb( const char *name )
+int LookupHerb( const std::string &name )
 {
   int sn = 0;
 
@@ -416,7 +416,7 @@ int LookupHerb( const char *name )
 /*
  * Lookup a skill by name.
  */
-int LookupSkill( const char *name )
+int LookupSkill( const std::string &name )
 {
   int sn;
 
@@ -480,7 +480,7 @@ Skill *GetSkill( int sn )
  * Perform a binary search on a section of the skill table      -Thoric
  * Each different section of the skill table is sorted alphabetically
  */
-int BSearchSkill( const char *name, int first, int top )
+int BSearchSkill( const std::string &name, int first, int top )
 {
   for (;;)
     {
@@ -497,7 +497,7 @@ int BSearchSkill( const char *name, int first, int top )
           return -1;
         }
 
-      if (strcasecmp(name, SkillTable[sn]->Name) < 1)
+      if (strcasecmp(name.c_str(), SkillTable[sn]->Name) < 1)
         {
           top = sn - 1;
         }
@@ -515,7 +515,7 @@ int BSearchSkill( const char *name, int first, int top )
  * Each different section of the skill table is sorted alphabetically
  * Check for exact matches only
  */
-int BSearchSkillExact( const char *name, int first, int top )
+int BSearchSkillExact( const std::string &name, int first, int top )
 {
   for (;;)
     {
@@ -531,7 +531,7 @@ int BSearchSkillExact( const char *name, int first, int top )
           return -1;
         }
 
-      if (strcasecmp(name, SkillTable[sn]->Name) < 1)
+      if (strcasecmp(name.c_str(), SkillTable[sn]->Name) < 1)
         {
           top = sn - 1;
         }
@@ -549,7 +549,7 @@ int BSearchSkillExact( const char *name, int first, int top )
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-int ChBSearchSkill( const Character *ch, const char *name, int first, int top )
+int ChBSearchSkill( const Character *ch, const std::string &name, int first, int top )
 {
   for (;;)
     {
@@ -567,7 +567,7 @@ int ChBSearchSkill( const Character *ch, const char *name, int first, int top )
           return -1;
         }
 
-      if (strcasecmp( name, SkillTable[sn]->Name) < 1)
+      if (strcasecmp( name.c_str(), SkillTable[sn]->Name) < 1)
         {
           top = sn - 1;
         }

@@ -1035,7 +1035,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
 /*
  * Load a char and inventory into a new ch structure.
  */
-bool LoadCharacter( Descriptor *d, const char *name, bool preload )
+bool LoadCharacter( Descriptor *d, const std::string &name, bool preload )
 {
   char strsave[MAX_INPUT_LENGTH];
   FILE *fp = NULL;
@@ -1111,7 +1111,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
           if ( letter != '#' )
             {
               Log->Bug( "Load_char_obj: # not found.", 0 );
-              Log->Bug( name );
+              Log->Bug( "%s", name.c_str() );
               break;
             }
 
@@ -1148,7 +1148,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
 	  else
 	    {
 	      Log->Bug( "Load_char_obj: bad section." );
-	      Log->Bug( name );
+	      Log->Bug( "%s", name.c_str() );
 	      break;
 	    }
         }
@@ -2438,7 +2438,7 @@ void SetAlarm( long seconds )
   alarm( seconds );
 }
 
-void WriteCorpses( const Character *ch, const char *name )
+void WriteCorpses( const Character *ch, std::string name )
 {
   const Object *corpse = NULL;
   FILE *fp = NULL;

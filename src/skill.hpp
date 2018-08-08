@@ -262,17 +262,17 @@ extern short gsn_TopSN;
 #define IS_POISON(dt)           ( IS_VALID_SN(dt) &&                    \
 				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_POISON )
 
-bool CheckSkill( Character *ch, const char *command, char *argument );
+bool CheckSkill( Character *ch, const std::string &command, char *argument );
 void LearnFromSuccess( Character *ch, int sn );
 void LearnFromFailure( Character *ch, int sn );
 
-int ChLookupSkill( const Character *ch, const char *name );
-int LookupSkill( const char *name );
-int LookupHerb( const char *name );
+int ChLookupSkill( const Character *ch, const std::string &name );
+int LookupSkill( const std::string &name );
+int LookupHerb( const std::string &name );
 int SkillNumberFromSlot( int slot );
-int BSearchSkill( const char *name, int first, int top );
-int BSearchSkillExact( const char *name, int first, int top );
-int ChBSearchSkill( const Character *ch, const char *name, int first, int top );
+int BSearchSkill( const std::string &name, int first, int top );
+int BSearchSkillExact( const std::string &name, int first, int top );
+int ChBSearchSkill( const Character *ch, const std::string &name, int first, int top );
 Skill *GetSkill( int sn );
 
 SkillType GetSkillType(const std::string &skilltype);
