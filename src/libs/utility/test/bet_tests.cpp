@@ -5,6 +5,7 @@
 
 class BetTests : public ::testing::Test
 {
+protected:
   void SetUp() override
   {
 

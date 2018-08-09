@@ -172,6 +172,8 @@ static ListNode* InsertFront(ListNode* head, EventHandlerData *data)
 
 void DestroyEvent( event_t *ev )
 {
+  assert(ev != nullptr);
+  
   Traverse(ev->Handlers, DeleteNode);
   DisposeList(ev->Handlers);
   free(ev);
@@ -196,7 +198,7 @@ void RemoveEventHandler( event_t *ev, void *userdata,
     {
       EventHandlerData *data = cursor->data;
 
-      if(data->UserData == userdata && func != NULL)
+      if(data->UserData == userdata && data->Func == func)
         {
           ev->Handlers = RemoveAny(ev->Handlers, cursor);
           break;
