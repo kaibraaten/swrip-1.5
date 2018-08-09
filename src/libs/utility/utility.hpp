@@ -211,7 +211,7 @@ char *StripColorCodes( char *text );
  * be used. If this is a problem in your case you'll need
  * to supply your own buffer.
  */
-char *PunctuateNumber( long number, char **optionalBuffer );
+char *PunctuateNumber( long number, char **optionalBuffer = nullptr);
 
 /* time_fun.c */
 struct tm *UpdateTime( struct tm *old_time );
