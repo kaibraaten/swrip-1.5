@@ -610,7 +610,7 @@ void BootDatabase( bool fCopyOver )
 
     for ( ; ; )
       {
-        strcpy( strArea, ReadWord( fpList, Log ) );
+        strcpy( strArea, ReadWord( fpList, Log, fBootDb ) );
 
         if ( strArea[0] == '$' )
           break;
@@ -1453,13 +1453,13 @@ void MakeWizlist( void )
 
           if ( gfp )
             {
-              word = feof( gfp ) ? "End" : ReadWord( gfp, Log );
-              ilevel = ReadInt( gfp, Log );
-              ReadToEndOfLine( gfp, Log );
-              word = feof( gfp ) ? "End" : ReadWord( gfp, Log );
+              word = feof( gfp ) ? "End" : ReadWord( gfp, Log, fBootDb );
+              ilevel = ReadInt( gfp, Log, fBootDb );
+              ReadToEndOfLine( gfp, Log, fBootDb );
+              word = feof( gfp ) ? "End" : ReadWord( gfp, Log, fBootDb );
 
               if ( !StrCmp( word, "Pcflags" ) )
-                iflags = ReadInt( gfp, Log );
+                iflags = ReadInt( gfp, Log, fBootDb );
               else
                 iflags = 0;
 
@@ -1954,7 +1954,7 @@ static void LoadBuildList( void )
                   continue;
                 }
 
-              strcpy( word, ReadWord( fp, Log ) );
+              strcpy( word, ReadWord( fp, Log, fBootDb ) );
 
               if ( word[0] != '#' || StrCmp( &word[1], "AREA" ) )
                 {
@@ -1969,7 +1969,7 @@ static void LoadBuildList( void )
               sprintf( buf, "%s.are", dentry->d_name );
               pArea->Author = CopyString( dentry->d_name );
               pArea->Filename = CopyString( buf );
-              pArea->Name = ReadStringToTilde( fp, Log );
+              pArea->Name = ReadStringToTilde( fp, Log, fBootDb );
 
               sprintf( buf, "{PROTO} %s's area in progress", dentry->d_name );
               pArea->Name = CopyString( buf );

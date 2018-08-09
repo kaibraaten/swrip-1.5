@@ -503,30 +503,30 @@ void ReadComment( Character *ch, FILE *fp )
 
       AllocateMemory( pnote, Note, 1 );
 
-      if ( StrCmp( ReadWord( fp, Log ), "sender" ) )
+      if ( StrCmp( ReadWord( fp, Log, fBootDb ), "sender" ) )
         break;
 
-      pnote->Sender     = ReadStringToTilde( fp, Log );
+      pnote->Sender     = ReadStringToTilde( fp, Log, fBootDb );
 
-      if ( StrCmp( ReadWord( fp, Log ), "date" ) )
+      if ( StrCmp( ReadWord( fp, Log, fBootDb ), "date" ) )
         break;
 
-      pnote->Date       = ReadStringToTilde( fp, Log );
+      pnote->Date       = ReadStringToTilde( fp, Log, fBootDb );
 
-      if ( StrCmp( ReadWord( fp, Log ), "to" ) )
+      if ( StrCmp( ReadWord( fp, Log, fBootDb ), "to" ) )
         break;
 
-      pnote->ToList    = ReadStringToTilde( fp, Log );
+      pnote->ToList    = ReadStringToTilde( fp, Log, fBootDb );
 
-      if ( StrCmp( ReadWord( fp, Log ), "subject" ) )
+      if ( StrCmp( ReadWord( fp, Log, fBootDb ), "subject" ) )
         break;
 
-      pnote->Subject    = ReadStringToTilde( fp, Log );
+      pnote->Subject    = ReadStringToTilde( fp, Log, fBootDb );
 
-      if ( StrCmp( ReadWord( fp, Log ), "text" ) )
+      if ( StrCmp( ReadWord( fp, Log, fBootDb ), "text" ) )
         break;
 
-      pnote->Text       = ReadStringToTilde( fp, Log );
+      pnote->Text       = ReadStringToTilde( fp, Log, fBootDb );
 
       AddToList(ch->PCData->Comments, pnote);
       return;

@@ -677,7 +677,7 @@ BINOBJ = $(patsubst %,$(ODIR)/%,$(_BINOBJ))
 all:		libraries $(LIBNAME) $(BINARY) tests
 
 libraries:
-		$(MAKE) -C $(LIBDIR)/utility
+		$(MAKE) -C $(LIBDIR)/utility libutility.so
 
 tests:		$(BINARY)
 		$(MAKE) -C $(TESTDIR)

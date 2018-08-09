@@ -1,3 +1,4 @@
+TESTDIR = test
 ODIR = obj
 _OBJ = bet.o event.o file_io.o linkedlist.o misc.o os_posix.o \
 	oldrepository.o repositorybase.o sha256.o string_handling.o \
@@ -26,7 +27,7 @@ endif
 
 LIBNAME = libutility.$(LIB_EXT)
 
-all:		$(LIBNAME)
+all:		$(LIBNAME) tests
 
 $(ODIR)/%.o:	%.cpp
 		$(CXX) $(CXXFLAGS) -c -o $@ $<
@@ -38,6 +39,9 @@ else
 		ar cru $@ $^
 		ranlib $@
 endif
+
+tests:		$(LIBNAME)
+		$(MAKE) -C $(TESTDIR)
 
 clean:
 		rm -f *.so *.a *~ core* $(ODIR)/*.o $(ODIR)/*.d

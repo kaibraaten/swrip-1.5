@@ -70,14 +70,14 @@ void LoadAreaFile( Area *tarea, const char *filename )
     {
       const char *word;
 
-      if ( ReadChar( fpArea, Log ) != '#' )
+      if ( ReadChar( fpArea, Log, fBootDb ) != '#' )
         {
           Log->Bug( tarea->Filename );
           Log->Bug( "%s: # not found.", __FUNCTION__ );
           exit( 1 );
         }
 
-      word = ReadWord( fpArea, Log );
+      word = ReadWord( fpArea, Log, fBootDb );
 
       if ( word[0] == '$'               )
         {
@@ -93,7 +93,7 @@ void LoadAreaFile( Area *tarea, const char *filename )
           else
             {
               FreeMemory( tarea->Name );
-              tarea->Name = ReadStringToTilde( fpArea, Log );
+              tarea->Name = ReadStringToTilde( fpArea, Log, fBootDb );
             }
         }
       else if ( !StrCmp( word, "AUTHOR"   ) ) LoadAuthor  (tarea, fpArea);
@@ -282,7 +282,7 @@ static void LoadArea( FILE *fp )
   Area *pArea;
 
   AllocateMemory( pArea, Area, 1 );
-  pArea->Name           = ReadStringToTilde( fp, Log );
+  pArea->Name           = ReadStringToTilde( fp, Log, fBootDb );
   pArea->Author       = CopyString( "unknown" );
   pArea->Filename       = CopyString( strArea );
   pArea->Age            = 15;
@@ -313,7 +313,7 @@ static void LoadAuthor( Area *tarea, FILE *fp )
   if ( tarea->Author )
     FreeMemory( tarea->Author );
 
-  tarea->Author = ReadStringToTilde( fp, Log );
+  tarea->Author = ReadStringToTilde( fp, Log, fBootDb );
 }
 
 static void LoadEconomy( Area *tarea, FILE *fp )
@@ -333,8 +333,8 @@ static void LoadEconomy( Area *tarea, FILE *fp )
         }
     }
 
-  tarea->HighEconomy   = ReadInt( fp, Log );
-  tarea->LowEconomy    = ReadInt( fp, Log );
+  tarea->HighEconomy   = ReadInt( fp, Log, fBootDb );
+  tarea->LowEconomy    = ReadInt( fp, Log, fBootDb );
 }
 
 static void LoadResetMessage( Area *tarea, FILE *fp )
@@ -357,7 +357,7 @@ static void LoadResetMessage( Area *tarea, FILE *fp )
   if ( tarea->ResetMessage )
     FreeMemory( tarea->ResetMessage );
 
-  tarea->ResetMessage = ReadStringToTilde( fp, Log );
+  tarea->ResetMessage = ReadStringToTilde( fp, Log, fBootDb );
 }
 
 static void LoadFlags( Area *tarea, FILE *fp )
@@ -380,7 +380,7 @@ static void LoadFlags( Area *tarea, FILE *fp )
         }
     }
 
-  ln = ReadLine( fp, Log );
+  ln = ReadLine( fp, Log, fBootDb );
   sscanf( ln, "%d %d", &x1, &x2 );
   tarea->Flags = x1;
   tarea->ResetFrequency = x2;
@@ -417,7 +417,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
       int iHash = 0;
       bool oldmob = false;
       bool tmpBootDb = false;
-      char letter = ReadChar( fp, Log );
+      char letter = ReadChar( fp, Log, fBootDb );
 
       if ( letter != '#' )
         {
@@ -434,7 +434,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
             }
         }
 
-      vnum = ReadInt( fp, Log );
+      vnum = ReadInt( fp, Log, fBootDb );
 
       if ( vnum == INVALID_VNUM )
         break;
@@ -477,43 +477,43 @@ static void LoadMobiles( Area *tarea, FILE *fp )
             tarea->VnumRanges.Mob.Last    = vnum;
         }
 
-      pMobIndex->Name     = ReadStringToTilde( fp, Log );
-      pMobIndex->ShortDescr     = ReadStringToTilde( fp, Log );
-      pMobIndex->LongDescr      = ReadStringToTilde( fp, Log );
-      pMobIndex->Description     = ReadStringToTilde( fp, Log );
+      pMobIndex->Name     = ReadStringToTilde( fp, Log, fBootDb );
+      pMobIndex->ShortDescr     = ReadStringToTilde( fp, Log, fBootDb );
+      pMobIndex->LongDescr      = ReadStringToTilde( fp, Log, fBootDb );
+      pMobIndex->Description     = ReadStringToTilde( fp, Log, fBootDb );
 
       pMobIndex->LongDescr[0]   = CharToUppercase(pMobIndex->LongDescr[0]);
       pMobIndex->Description[0]  = CharToUppercase(pMobIndex->Description[0]);
 
-      pMobIndex->Flags           = ReadInt( fp, Log ) | ACT_NPC;
-      pMobIndex->AffectedBy     = ReadInt( fp, Log );
+      pMobIndex->Flags           = ReadInt( fp, Log, fBootDb ) | ACT_NPC;
+      pMobIndex->AffectedBy     = ReadInt( fp, Log, fBootDb );
       pMobIndex->Shop           = NULL;
       pMobIndex->RepairShop           = NULL;
-      pMobIndex->Alignment       = ReadInt( fp, Log );
-      letter                     = ReadChar( fp, Log );
-      pMobIndex->Level           = ReadInt( fp, Log );
+      pMobIndex->Alignment       = ReadInt( fp, Log, fBootDb );
+      letter                     = ReadChar( fp, Log, fBootDb );
+      pMobIndex->Level           = ReadInt( fp, Log, fBootDb );
 
-      pMobIndex->MobThac0        = ReadInt( fp, Log );
-      pMobIndex->ArmorClass      = ReadInt( fp, Log );
-      pMobIndex->HitNoDice       = ReadInt( fp, Log );
-      /* 'd'            */         ReadChar( fp, Log );
-      pMobIndex->HitSizeDice     = ReadInt( fp, Log );
-      /* '+'            */         ReadChar( fp, Log );
-      pMobIndex->HitPlus         = ReadInt( fp, Log );
-      pMobIndex->DamNoDice       = ReadInt( fp, Log );
-      /* 'd'            */         ReadChar( fp, Log );
-      pMobIndex->DamSizeDice     = ReadInt( fp, Log );
-      /* '+'            */         ReadChar( fp, Log );
-      pMobIndex->DamPlus         = ReadInt( fp, Log );
-      pMobIndex->Gold            = ReadInt( fp, Log );
-      pMobIndex->exp             = ReadInt( fp, Log );
-      pMobIndex->Position        = (PositionType)ReadInt( fp, Log );
-      pMobIndex->DefaultPosition = (PositionType)ReadInt( fp, Log );
+      pMobIndex->MobThac0        = ReadInt( fp, Log, fBootDb );
+      pMobIndex->ArmorClass      = ReadInt( fp, Log, fBootDb );
+      pMobIndex->HitNoDice       = ReadInt( fp, Log, fBootDb );
+      /* 'd'            */         ReadChar( fp, Log, fBootDb );
+      pMobIndex->HitSizeDice     = ReadInt( fp, Log, fBootDb );
+      /* '+'            */         ReadChar( fp, Log, fBootDb );
+      pMobIndex->HitPlus         = ReadInt( fp, Log, fBootDb );
+      pMobIndex->DamNoDice       = ReadInt( fp, Log, fBootDb );
+      /* 'd'            */         ReadChar( fp, Log, fBootDb );
+      pMobIndex->DamSizeDice     = ReadInt( fp, Log, fBootDb );
+      /* '+'            */         ReadChar( fp, Log, fBootDb );
+      pMobIndex->DamPlus         = ReadInt( fp, Log, fBootDb );
+      pMobIndex->Gold            = ReadInt( fp, Log, fBootDb );
+      pMobIndex->exp             = ReadInt( fp, Log, fBootDb );
+      pMobIndex->Position        = (PositionType)ReadInt( fp, Log, fBootDb );
+      pMobIndex->DefaultPosition = (PositionType)ReadInt( fp, Log, fBootDb );
 
       /*
        * Back to meaningful values.
        */
-      pMobIndex->Sex             = (SexType) ReadInt( fp, Log );
+      pMobIndex->Sex             = (SexType) ReadInt( fp, Log, fBootDb );
 
       if ( letter != 'S' && letter != 'C' && letter != 'Z' )
         {
@@ -525,20 +525,20 @@ static void LoadMobiles( Area *tarea, FILE *fp )
 
       if ( letter == 'C' || letter == 'Z' )
 	{
-          pMobIndex->Stats.PermStr       = ReadInt( fp, Log );
-          pMobIndex->Stats.PermInt       = ReadInt( fp, Log );
-          pMobIndex->Stats.PermWis       = ReadInt( fp, Log );
-          pMobIndex->Stats.PermDex       = ReadInt( fp, Log );
-          pMobIndex->Stats.PermCon       = ReadInt( fp, Log );
-          pMobIndex->Stats.PermCha       = ReadInt( fp, Log );
-          pMobIndex->Stats.PermLck       = ReadInt( fp, Log );
-          pMobIndex->Saving.PoisonDeath  = ReadInt( fp, Log );
-          pMobIndex->Saving.Wand         = ReadInt( fp, Log );
-          pMobIndex->Saving.ParaPetri    = ReadInt( fp, Log );
-          pMobIndex->Saving.Breath       = ReadInt( fp, Log );
-          pMobIndex->Saving.SpellStaff   = ReadInt( fp, Log );
+          pMobIndex->Stats.PermStr       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Stats.PermInt       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Stats.PermWis       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Stats.PermDex       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Stats.PermCon       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Stats.PermCha       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Stats.PermLck       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Saving.PoisonDeath  = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Saving.Wand         = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Saving.ParaPetri    = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Saving.Breath       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Saving.SpellStaff   = ReadInt( fp, Log, fBootDb );
 
-          ln = ReadLine( fp, Log );
+          ln = ReadLine( fp, Log, fBootDb );
           x1=x2=x3=x4=x5=x6=x7=0;
           sscanf( ln, "%d %d %d %d %d %d %d",
                   &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
@@ -556,7 +556,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
           if ( !pMobIndex->Speaking )
             pMobIndex->Speaking = RaceTable[pMobIndex->Race].Language;
 
-          ln = ReadLine( fp, Log );
+          ln = ReadLine( fp, Log, fBootDb );
           x1=x2=x3=x4=x5=x6=x7=x8=0;
           sscanf( ln, "%d %d %d %d %d %d %d %d",
 		  &x1, &x2, &x3, &x4, &x5, &x6, &x7, &x8 );
@@ -591,14 +591,14 @@ static void LoadMobiles( Area *tarea, FILE *fp )
 
       if ( letter == 'Z' ) /*  STar Wars Reality Complex Mob  */
         {
-          ln = ReadLine( fp, Log );
+          ln = ReadLine( fp, Log, fBootDb );
           x1 = x2 = x3 = x4 = x5 = x6 = x7 = x8 = 0;
           sscanf( ln, "%d %d %d %d %d %d %d %d",
 		  &x1, &x2, &x3, &x4, &x5,  &x6,  &x7,  &x8);
           pMobIndex->VipFlags = x1;
         }
 
-      letter = ReadChar( fp, Log );
+      letter = ReadChar( fp, Log, fBootDb );
 
       if ( letter == '>' )
         {
@@ -647,7 +647,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
       int iHash = 0;
       bool tmpBootDb = false;
       bool oldobj = false;
-      char letter = ReadChar( fp, Log );
+      char letter = ReadChar( fp, Log, fBootDb );
 
       if ( letter != '#' )
 	{
@@ -664,7 +664,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
             }
         }
 
-      vnum = ReadInt( fp, Log );
+      vnum = ReadInt( fp, Log, fBootDb );
 
       if ( vnum == INVALID_VNUM )
         break;
@@ -708,16 +708,16 @@ static void LoadObjects( Area *tarea, FILE *fp )
             tarea->VnumRanges.Object.Last = vnum;
         }
 
-      pObjIndex->Name         = ReadStringToTilde( fp, Log );
-      pObjIndex->ShortDescr  = ReadStringToTilde( fp, Log );
-      pObjIndex->Description  = ReadStringToTilde( fp, Log );
-      pObjIndex->ActionDescription  = ReadStringToTilde( fp, Log );
+      pObjIndex->Name         = ReadStringToTilde( fp, Log, fBootDb );
+      pObjIndex->ShortDescr  = ReadStringToTilde( fp, Log, fBootDb );
+      pObjIndex->Description  = ReadStringToTilde( fp, Log, fBootDb );
+      pObjIndex->ActionDescription  = ReadStringToTilde( fp, Log, fBootDb );
 
       /* Commented out by Narn, Apr/96 to allow item short descs like
          Bonecrusher and Oblivion */
       pObjIndex->Description[0] = CharToUppercase(pObjIndex->Description[0]);
 
-      ln = ReadLine( fp, Log );
+      ln = ReadLine( fp, Log, fBootDb );
       x1=x2=x3=x4=0;
       sscanf( ln, "%d %d %d %d",
 	       &x1, &x2, &x3, &x4 );
@@ -726,7 +726,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
       pObjIndex->WearFlags             = x3;
       pObjIndex->Layers         = x4;
 
-      ln = ReadLine( fp, Log );
+      ln = ReadLine( fp, Log, fBootDb );
       x1=x2=x3=x4=x5=x6=0;
       sscanf( ln, "%d %d %d %d %d %d",
               &x1, &x2, &x3, &x4, &x5, &x6 );
@@ -736,14 +736,14 @@ static void LoadObjects( Area *tarea, FILE *fp )
       pObjIndex->Value[3]               = x4;
       pObjIndex->Value[4]               = x5;
       pObjIndex->Value[5]               = x6;
-      pObjIndex->Weight         = ReadInt( fp, Log );
+      pObjIndex->Weight         = ReadInt( fp, Log, fBootDb );
       pObjIndex->Weight = umax( 1, pObjIndex->Weight );
-      pObjIndex->Cost                   = ReadInt( fp, Log );
-      pObjIndex->Rent                   = ReadInt( fp, Log ); /* unused */
+      pObjIndex->Cost                   = ReadInt( fp, Log, fBootDb );
+      pObjIndex->Rent                   = ReadInt( fp, Log, fBootDb ); /* unused */
 
       for ( ; ; )
         {
-          letter = ReadChar( fp, Log );
+          letter = ReadChar( fp, Log, fBootDb );
 
           if ( letter == 'A' )
             {
@@ -752,14 +752,14 @@ static void LoadObjects( Area *tarea, FILE *fp )
               AllocateMemory( paf, Affect, 1 );
               paf->Type         = -1;
               paf->Duration             = -1;
-              paf->Location             = ReadInt( fp, Log );
+              paf->Location             = ReadInt( fp, Log, fBootDb );
               if ( paf->Location == APPLY_WEAPONSPELL
                    ||   paf->Location == APPLY_WEARSPELL
 		   ||   paf->Location == APPLY_REMOVESPELL
                    ||   paf->Location == APPLY_STRIPSN )
-                paf->Modifier           = SkillNumberFromSlot( ReadInt(fp, Log) );
+                paf->Modifier           = SkillNumberFromSlot( ReadInt(fp, Log, fBootDb) );
               else
-                paf->Modifier           = ReadInt( fp, Log );
+                paf->Modifier           = ReadInt( fp, Log, fBootDb );
               paf->AffectedBy           = 0;
               LINK( paf, pObjIndex->FirstAffect, pObjIndex->LastAffect,
                     Next, Previous );
@@ -771,8 +771,8 @@ static void LoadObjects( Area *tarea, FILE *fp )
               ExtraDescription *ed;
 
               AllocateMemory( ed, ExtraDescription, 1 );
-              ed->Keyword               = ReadStringToTilde( fp, Log );
-              ed->Description           = ReadStringToTilde( fp, Log );
+              ed->Keyword               = ReadStringToTilde( fp, Log, fBootDb );
+              ed->Description           = ReadStringToTilde( fp, Log, fBootDb );
               LINK( ed, pObjIndex->FirstExtraDescription, pObjIndex->LastExtraDescription,
                     Next, Previous );
               top_ed++;
@@ -871,20 +871,20 @@ static void LoadResets( Area *tarea, FILE *fp )
       char letter;
       int extra, arg1, arg2, arg3;
 
-      if ( ( letter = ReadChar( fp, Log ) ) == 'S' )
+      if ( ( letter = ReadChar( fp, Log, fBootDb ) ) == 'S' )
         break;
 
       if ( letter == '*' )
         {
-          ReadToEndOfLine( fp, Log );
+          ReadToEndOfLine( fp, Log, fBootDb );
           continue;
         }
 
-      extra     = ReadInt( fp, Log );
-      arg1      = ReadInt( fp, Log );
-      arg2      = ReadInt( fp, Log );
-      arg3      = (letter == 'G' || letter == 'R') ? 0 : ReadInt( fp, Log );
-      ReadToEndOfLine( fp, Log );
+      extra     = ReadInt( fp, Log, fBootDb );
+      arg1      = ReadInt( fp, Log, fBootDb );
+      arg2      = ReadInt( fp, Log, fBootDb );
+      arg3      = (letter == 'G' || letter == 'R') ? 0 : ReadInt( fp, Log, fBootDb );
+      ReadToEndOfLine( fp, Log, fBootDb );
 
       ++count;
 
@@ -915,7 +915,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
       bool tmpBootDb = false;
       bool oldroom = false;
       int x1, x2, x3, x4, x5, x6;
-      char letter = ReadChar( fp, Log );
+      char letter = ReadChar( fp, Log, fBootDb );
 
       if ( letter != '#' )
         {
@@ -932,7 +932,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
             }
         }
 
-      vnum = ReadInt( fp, Log );
+      vnum = ReadInt( fp, Log, fBootDb );
 
       if ( vnum == INVALID_VNUM )
         break;
@@ -977,11 +977,11 @@ static void LoadRooms( Area *tarea, FILE *fp )
             tarea->VnumRanges.Room.Last = vnum;
         }
 
-      pRoomIndex->Name         = ReadStringToTilde( fp, Log );
-      pRoomIndex->Description  = ReadStringToTilde( fp, Log );
+      pRoomIndex->Name         = ReadStringToTilde( fp, Log, fBootDb );
+      pRoomIndex->Description  = ReadStringToTilde( fp, Log, fBootDb );
 
       /* Area number                      ReadInt( fp, Log ); */
-      ln = ReadLine( fp, Log );
+      ln = ReadLine( fp, Log, fBootDb );
       x1=x2=x3=x4=x5=x6=0;
       sscanf( ln, "%d %d %d %d %d %d",
               &x1, &x2, &x3, &x4, &x5, &x6 );
@@ -1001,7 +1001,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
 
       for ( ; ; )
         {
-          letter = ReadChar( fp, Log );
+          letter = ReadChar( fp, Log, fBootDb );
 
           if ( letter == 'S' )
             break;
@@ -1011,7 +1011,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
               Exit *pexit;
               int locks;
 
-              door = (DirectionType) ReadInt( fp, Log );
+              door = (DirectionType) ReadInt( fp, Log, fBootDb );
 
               if ( door < DIR_NORTH || door > DIR_SOMEWHERE )
                 {
@@ -1024,10 +1024,10 @@ static void LoadRooms( Area *tarea, FILE *fp )
               else
                 {
                   pexit = MakeExit( pRoomIndex, NULL, door );
-                  pexit->Description    = ReadStringToTilde( fp, Log );
-                  pexit->Keyword        = ReadStringToTilde( fp, Log );
+                  pexit->Description    = ReadStringToTilde( fp, Log, fBootDb );
+                  pexit->Keyword        = ReadStringToTilde( fp, Log, fBootDb );
                   pexit->Flags      = 0;
-                  ln = ReadLine( fp, Log );
+                  ln = ReadLine( fp, Log, fBootDb );
                   x1=x2=x3=x4=0;
                   sscanf( ln, "%d %d %d %d",
 			  &x1, &x2, &x3, &x4 );
@@ -1059,8 +1059,8 @@ static void LoadRooms( Area *tarea, FILE *fp )
               ExtraDescription *ed;
 
               AllocateMemory( ed, ExtraDescription, 1 );
-              ed->Keyword               = ReadStringToTilde( fp, Log );
-              ed->Description           = ReadStringToTilde( fp, Log );
+              ed->Keyword               = ReadStringToTilde( fp, Log, fBootDb );
+              ed->Description           = ReadStringToTilde( fp, Log, fBootDb );
               LINK( ed, pRoomIndex->FirstExtraDescription, pRoomIndex->LastExtraDescription,
                     Next, Previous );
               top_ed++;
@@ -1098,21 +1098,21 @@ static void LoadShops( Area *tarea, FILE *fp )
       Shop *pShop = NULL;
 
       AllocateMemory( pShop, Shop, 1 );
-      pShop->Keeper             = ReadInt( fp, Log );
+      pShop->Keeper             = ReadInt( fp, Log, fBootDb );
 
       if ( pShop->Keeper == INVALID_VNUM )
         break;
 
       for ( iTrade = 0; iTrade < MAX_TRADE; iTrade++ )
-        pShop->BuyType[iTrade] = (ItemTypes)ReadInt( fp, Log );
+        pShop->BuyType[iTrade] = (ItemTypes)ReadInt( fp, Log, fBootDb );
 
-      pShop->ProfitBuy = ReadInt( fp, Log );
-      pShop->ProfitSell        = ReadInt( fp, Log );
+      pShop->ProfitBuy = ReadInt( fp, Log, fBootDb );
+      pShop->ProfitSell        = ReadInt( fp, Log, fBootDb );
        pShop->ProfitBuy = urange( pShop->ProfitSell + 5, pShop->ProfitBuy, 1000 );
       pShop->ProfitSell        = urange( 0, pShop->ProfitSell, pShop->ProfitBuy - 5 );
-      pShop->BusinessHours.Open  = ReadInt( fp, Log );
-      pShop->BusinessHours.Close = ReadInt( fp, Log );
-      ReadToEndOfLine( fp, Log );
+      pShop->BusinessHours.Open  = ReadInt( fp, Log, fBootDb );
+      pShop->BusinessHours.Close = ReadInt( fp, Log, fBootDb );
+      ReadToEndOfLine( fp, Log, fBootDb );
       pMobIndex         = GetProtoMobile( pShop->Keeper );
       pMobIndex->Shop  = pShop;
 
@@ -1140,19 +1140,19 @@ static void LoadRepairs( Area *tarea, FILE *fp )
       RepairShop *rShop = NULL;
 
       AllocateMemory( rShop, RepairShop, 1 );
-      rShop->Keeper             = ReadInt( fp, Log );
+      rShop->Keeper             = ReadInt( fp, Log, fBootDb );
 
       if ( rShop->Keeper == INVALID_VNUM )
 	 break;
 
       for ( iFix = 0; iFix < MAX_FIX; iFix++ )
-        rShop->FixType[iFix] = (ItemTypes)ReadInt( fp, Log );
+        rShop->FixType[iFix] = (ItemTypes)ReadInt( fp, Log, fBootDb );
 
-      rShop->ProfitFix = ReadInt( fp, Log );
-      rShop->ShopType  = ReadInt( fp, Log );
-      rShop->BusinessHours.Open  = ReadInt( fp, Log );
-      rShop->BusinessHours.Close = ReadInt( fp, Log );
-      ReadToEndOfLine( fp, Log );
+      rShop->ProfitFix = ReadInt( fp, Log, fBootDb );
+      rShop->ShopType  = ReadInt( fp, Log, fBootDb );
+      rShop->BusinessHours.Open  = ReadInt( fp, Log, fBootDb );
+      rShop->BusinessHours.Close = ReadInt( fp, Log, fBootDb );
+      ReadToEndOfLine( fp, Log, fBootDb );
       pMobIndex         = GetProtoMobile( rShop->Keeper );
       pMobIndex->RepairShop  = rShop;
 
@@ -1178,7 +1178,7 @@ static void LoadSpecials( Area *tarea, FILE *fp )
       ProtoMobile *pMobIndex;
       char letter;
 
-      switch ( letter = ReadChar( fp, Log ) )
+      switch ( letter = ReadChar( fp, Log, fBootDb ) )
         {
         default:
           Log->Bug( "%s: letter '%c' not *MS.", __FUNCTION__, letter );
@@ -1191,11 +1191,11 @@ static void LoadSpecials( Area *tarea, FILE *fp )
           break;
 
         case 'M':
-          pMobIndex = GetProtoMobile( ReadInt( fp, Log ) );
+          pMobIndex = GetProtoMobile( ReadInt( fp, Log, fBootDb ) );
 
           if ( !pMobIndex->spec_fun )
             {
-              pMobIndex->spec_fun = SpecialLookup( ReadWord( fp, Log ) );
+              pMobIndex->spec_fun = SpecialLookup( ReadWord( fp, Log, fBootDb ) );
 
               if ( pMobIndex->spec_fun == 0 )
                 {
@@ -1205,7 +1205,7 @@ static void LoadSpecials( Area *tarea, FILE *fp )
             }
           else if ( !pMobIndex->spec_2 )
             {
-              pMobIndex->spec_2 = SpecialLookup( ReadWord( fp, Log ) );
+              pMobIndex->spec_2 = SpecialLookup( ReadWord( fp, Log, fBootDb ) );
 
               if ( pMobIndex->spec_2 == 0 )
                 {
@@ -1217,7 +1217,7 @@ static void LoadSpecials( Area *tarea, FILE *fp )
 	   break;
         }
 
-      ReadToEndOfLine( fp, Log );
+      ReadToEndOfLine( fp, Log, fBootDb );
     }
 }
 
@@ -1236,7 +1236,7 @@ static void LoadRanges( Area *tarea, FILE *fp )
   for ( ; ; )
     {
       int x1, x2, x3, x4;
-      const char *ln = ReadLine( fp, Log );
+      const char *ln = ReadLine( fp, Log, fBootDb );
 
       if (ln[0] == '$')
         break;
@@ -1261,7 +1261,7 @@ static void LoadMudProgs( Area *tarea, FILE *fp )
   int             value;
 
   for ( ; ; )
-    switch ( letter = ReadChar( fp, Log ) )
+    switch ( letter = ReadChar( fp, Log, fBootDb ) )
       {
       default:
         Log->Bug( "%s: bad command '%c'.", __FUNCTION__, letter);
@@ -1269,14 +1269,14 @@ static void LoadMudProgs( Area *tarea, FILE *fp )
         break;
       case 'S':
       case 's':
-        ReadToEndOfLine( fp, Log );
+        ReadToEndOfLine( fp, Log, fBootDb );
         return;
       case '*':
-        ReadToEndOfLine( fp, Log );
+        ReadToEndOfLine( fp, Log, fBootDb );
 	 break;
       case 'M':
       case 'm':
-        value = ReadInt( fp, Log );
+        value = ReadInt( fp, Log, fBootDb );
         if ( ( iMob = GetProtoMobile( value ) ) == NULL )
           {
             Log->Bug( "%s: vnum %d doesnt exist", __FUNCTION__, value );
@@ -1294,9 +1294,9 @@ static void LoadMudProgs( Area *tarea, FILE *fp )
           original->Next = working;
         else
           iMob->mprog.mudprogs = working;
-        working = MobProgReadFile( ReadWord( fp, Log ), working, iMob );
+        working = MobProgReadFile( ReadWord( fp, Log, fBootDb ), working, iMob );
         working->Next = NULL;
-        ReadToEndOfLine( fp, Log );
+        ReadToEndOfLine( fp, Log, fBootDb );
         break;
       }
 
@@ -1367,7 +1367,7 @@ static MPROG_DATA *MobProgReadFile( const char *f, MPROG_DATA *mprg, ProtoMobile
     }
 
   mprg2 = mprg;
-  switch ( letter = ReadChar( progfile, Log ) )
+  switch ( letter = ReadChar( progfile, Log, fBootDb ) )
     {
     case '>':
       break;
@@ -1383,7 +1383,7 @@ static MPROG_DATA *MobProgReadFile( const char *f, MPROG_DATA *mprg, ProtoMobile
 
   while ( !done )
     {
-      mprg2->type = MudProgNameToType( ReadWord( progfile, Log ) );
+      mprg2->type = MudProgNameToType( ReadWord( progfile, Log, fBootDb ) );
       switch ( mprg2->type )
         {
         case ERROR_PROG:
@@ -1396,9 +1396,9 @@ static MPROG_DATA *MobProgReadFile( const char *f, MPROG_DATA *mprg, ProtoMobile
           break;
         default:
           pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = ReadStringToTilde( progfile, Log );
-          mprg2->comlist       = ReadStringToTilde( progfile, Log );
-          switch ( letter = ReadChar( progfile, Log ) )
+          mprg2->arglist       = ReadStringToTilde( progfile, Log, fBootDb );
+          mprg2->comlist       = ReadStringToTilde( progfile, Log, fBootDb );
+          switch ( letter = ReadChar( progfile, Log, fBootDb ) )
             {
             case '>':
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
@@ -1429,7 +1429,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
   char        letter;
   bool        done = false;
 
-  if ( ( letter = ReadChar( fp, Log ) ) != '>' )
+  if ( ( letter = ReadChar( fp, Log, fBootDb ) ) != '>' )
     {
       Log->Bug( "%s: vnum %d MUDPROG char", __FUNCTION__, pMobIndex->Vnum );
       exit( 1 );
@@ -1439,7 +1439,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
 
   while ( !done )
     {
-      mprg->type = MudProgNameToType( ReadWord( fp, Log ) );
+      mprg->type = MudProgNameToType( ReadWord( fp, Log, fBootDb ) );
       switch ( mprg->type )
         {
         case ERROR_PROG:
@@ -1447,9 +1447,9 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = MobProgReadFile( ReadStringToTilde( fp, Log ), mprg,pMobIndex );
-          ReadToEndOfLine( fp, Log );
-          switch ( letter = ReadChar( fp, Log ) )
+          mprg = MobProgReadFile( ReadStringToTilde( fp, Log, fBootDb ), mprg,pMobIndex );
+          ReadToEndOfLine( fp, Log, fBootDb );
+          switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
               AllocateMemory( mprg->Next, MPROG_DATA, 1 );
@@ -1457,7 +1457,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
               break;
             case '|':
               mprg->Next = NULL;
-              ReadToEndOfLine( fp, Log );
+              ReadToEndOfLine( fp, Log, fBootDb );
               done = true;
               break;
             default:
@@ -1468,11 +1468,11 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
           break;
         default:
           pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = ReadStringToTilde( fp, Log );
-          ReadToEndOfLine( fp, Log );
-          mprg->comlist        = ReadStringToTilde( fp, Log );
-          ReadToEndOfLine( fp, Log );
-          switch ( letter = ReadChar( fp, Log ) )
+          mprg->arglist        = ReadStringToTilde( fp, Log, fBootDb );
+          ReadToEndOfLine( fp, Log, fBootDb );
+          mprg->comlist        = ReadStringToTilde( fp, Log, fBootDb );
+          ReadToEndOfLine( fp, Log, fBootDb );
+          switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
               AllocateMemory( mprg->Next, MPROG_DATA, 1 );
@@ -1480,7 +1480,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
               break;
 	      case '|':
               mprg->Next = NULL;
-              ReadToEndOfLine( fp, Log );
+              ReadToEndOfLine( fp, Log, fBootDb );
               done = true;
               break;
             default:
@@ -1526,7 +1526,7 @@ static MPROG_DATA *ObjProgReadFile( const char *f, MPROG_DATA *mprg, ProtoObject
     }
 
   mprg2 = mprg;
-  switch ( letter = ReadChar( progfile, Log ) )
+  switch ( letter = ReadChar( progfile, Log, fBootDb ) )
     {
     case '>':
       break;
@@ -1542,7 +1542,7 @@ static MPROG_DATA *ObjProgReadFile( const char *f, MPROG_DATA *mprg, ProtoObject
 
   while ( !done )
     {
-      mprg2->type = MudProgNameToType( ReadWord( progfile, Log ) );
+      mprg2->type = MudProgNameToType( ReadWord( progfile, Log, fBootDb ) );
       switch ( mprg2->type )
         {
         case ERROR_PROG:
@@ -1555,9 +1555,9 @@ static MPROG_DATA *ObjProgReadFile( const char *f, MPROG_DATA *mprg, ProtoObject
           break;
         default:
           pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = ReadStringToTilde( progfile, Log );
-          mprg2->comlist       = ReadStringToTilde( progfile, Log );
-          switch ( letter = ReadChar( progfile, Log ) )
+          mprg2->arglist       = ReadStringToTilde( progfile, Log, fBootDb );
+          mprg2->comlist       = ReadStringToTilde( progfile, Log, fBootDb );
+          switch ( letter = ReadChar( progfile, Log, fBootDb ) )
             {
             case '>':
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
@@ -1590,7 +1590,7 @@ static void LoadObjProgs( Area *tarea, FILE *fp )
   int             value;
 
   for ( ; ; )
-    switch ( letter = ReadChar( fp, Log ) )
+    switch ( letter = ReadChar( fp, Log, fBootDb ) )
       {
       default:
         Log->Bug( "%s: bad command '%c'.", __FUNCTION__, letter);
@@ -1598,14 +1598,14 @@ static void LoadObjProgs( Area *tarea, FILE *fp )
         break;
       case 'S':
       case 's':
-        ReadToEndOfLine( fp, Log );
+        ReadToEndOfLine( fp, Log, fBootDb );
 	return;
       case '*':
-        ReadToEndOfLine( fp, Log );
+        ReadToEndOfLine( fp, Log, fBootDb );
         break;
       case 'M':
       case 'm':
-        value = ReadInt( fp, Log );
+        value = ReadInt( fp, Log, fBootDb );
         if ( ( iObj = GetProtoObject( value ) ) == NULL )
           {
             Log->Bug( "%s: vnum %d doesnt exist", __FUNCTION__, value );
@@ -1623,9 +1623,9 @@ static void LoadObjProgs( Area *tarea, FILE *fp )
           original->Next = working;
         else
           iObj->mprog.mudprogs = working;
-        working = ObjProgReadFile( ReadWord( fp, Log ), working, iObj );
+        working = ObjProgReadFile( ReadWord( fp, Log, fBootDb ), working, iObj );
         working->Next = NULL;
-        ReadToEndOfLine( fp, Log );
+        ReadToEndOfLine( fp, Log, fBootDb );
         break;
       }
 
@@ -1641,7 +1641,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
   char        letter;
   bool        done = false;
 
-  if ( ( letter = ReadChar( fp, Log ) ) != '>' )
+  if ( ( letter = ReadChar( fp, Log, fBootDb ) ) != '>' )
     {
       Log->Bug( "%s: vnum %d OBJPROG char", __FUNCTION__, pObjIndex->Vnum );
       exit( 1 );
@@ -1651,7 +1651,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
 
   while ( !done )
     {
-      mprg->type = MudProgNameToType( ReadWord( fp, Log ) );
+      mprg->type = MudProgNameToType( ReadWord( fp, Log, fBootDb ) );
       switch ( mprg->type )
         {
         case ERROR_PROG:
@@ -1659,9 +1659,9 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = ObjProgReadFile( ReadStringToTilde( fp, Log ), mprg,pObjIndex );
-          ReadToEndOfLine( fp, Log );
-          switch ( letter = ReadChar( fp, Log ) )
+          mprg = ObjProgReadFile( ReadStringToTilde( fp, Log, fBootDb ), mprg,pObjIndex );
+          ReadToEndOfLine( fp, Log, fBootDb );
+          switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
               AllocateMemory( mprg->Next, MPROG_DATA, 1 );
@@ -1669,7 +1669,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
               break;
             case '|':
 	       mprg->Next = NULL;
-              ReadToEndOfLine( fp, Log );
+              ReadToEndOfLine( fp, Log, fBootDb );
               done = true;
               break;
             default:
@@ -1680,11 +1680,11 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
           break;
         default:
           pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = ReadStringToTilde( fp, Log );
-          ReadToEndOfLine( fp, Log );
-          mprg->comlist        = ReadStringToTilde( fp, Log );
-          ReadToEndOfLine( fp, Log );
-          switch ( letter = ReadChar( fp, Log ) )
+          mprg->arglist        = ReadStringToTilde( fp, Log, fBootDb );
+          ReadToEndOfLine( fp, Log, fBootDb );
+          mprg->comlist        = ReadStringToTilde( fp, Log, fBootDb );
+          ReadToEndOfLine( fp, Log, fBootDb );
+          switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
               AllocateMemory( mprg->Next, MPROG_DATA, 1 );
@@ -1692,7 +1692,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
               break;
             case '|':
               mprg->Next = NULL;
-              ReadToEndOfLine( fp, Log );
+              ReadToEndOfLine( fp, Log, fBootDb );
               done = true;
               break;
             default:
@@ -1733,7 +1733,7 @@ static MPROG_DATA *RoomProgReadFile( const char *f, MPROG_DATA *mprg, Room *Room
     }
 
   mprg2 = mprg;
-  switch ( letter = ReadChar( progfile, Log ) )
+  switch ( letter = ReadChar( progfile, Log, fBootDb ) )
     {
     case '>':
        break;
@@ -1749,7 +1749,7 @@ static MPROG_DATA *RoomProgReadFile( const char *f, MPROG_DATA *mprg, Room *Room
 
   while ( !done )
     {
-      mprg2->type = MudProgNameToType( ReadWord( progfile, Log ) );
+      mprg2->type = MudProgNameToType( ReadWord( progfile, Log, fBootDb ) );
       switch ( mprg2->type )
         {
         case ERROR_PROG:
@@ -1762,9 +1762,9 @@ static MPROG_DATA *RoomProgReadFile( const char *f, MPROG_DATA *mprg, Room *Room
           break;
         default:
           RoomIndex->mprog.progtypes = RoomIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = ReadStringToTilde( progfile, Log );
-          mprg2->comlist       = ReadStringToTilde( progfile, Log );
-          switch ( letter = ReadChar( progfile, Log ) )
+          mprg2->arglist       = ReadStringToTilde( progfile, Log, fBootDb );
+          mprg2->comlist       = ReadStringToTilde( progfile, Log, fBootDb );
+          switch ( letter = ReadChar( progfile, Log, fBootDb ) )
             {
             case '>':
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
@@ -1795,7 +1795,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
   char        letter;
   bool        done = false;
 
-  if ( ( letter = ReadChar( fp, Log ) ) != '>' )
+  if ( ( letter = ReadChar( fp, Log, fBootDb ) ) != '>' )
     {
       Log->Bug( "%s: vnum %d ROOMPROG char", __FUNCTION__, pRoomIndex->Vnum );
       exit( 1 );
@@ -1805,7 +1805,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
 
   while ( !done )
     {
-      mprg->type = MudProgNameToType( ReadWord( fp, Log ) );
+      mprg->type = MudProgNameToType( ReadWord( fp, Log, fBootDb ) );
       switch ( mprg->type )
         {
         case ERROR_PROG:
@@ -1813,9 +1813,9 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = RoomProgReadFile( ReadStringToTilde( fp, Log ), mprg,pRoomIndex );
-          ReadToEndOfLine( fp, Log );
-          switch ( letter = ReadChar( fp, Log ) )
+          mprg = RoomProgReadFile( ReadStringToTilde( fp, Log, fBootDb ), mprg,pRoomIndex );
+          ReadToEndOfLine( fp, Log, fBootDb );
+          switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
               AllocateMemory( mprg->Next, MPROG_DATA, 1 );
@@ -1823,7 +1823,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
               break;
             case '|':
               mprg->Next = NULL;
-              ReadToEndOfLine( fp, Log );
+              ReadToEndOfLine( fp, Log, fBootDb );
               done = true;
               break;
             default:
@@ -1834,12 +1834,12 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
           break;
         default:
           pRoomIndex->mprog.progtypes = pRoomIndex->mprog.progtypes | mprg->type;
-          mprg->arglist        = ReadStringToTilde( fp, Log );
-          ReadToEndOfLine( fp, Log );
-          mprg->comlist        = ReadStringToTilde( fp, Log );
-          ReadToEndOfLine( fp, Log );
+          mprg->arglist        = ReadStringToTilde( fp, Log, fBootDb );
+          ReadToEndOfLine( fp, Log, fBootDb );
+          mprg->comlist        = ReadStringToTilde( fp, Log, fBootDb );
+          ReadToEndOfLine( fp, Log, fBootDb );
 
-          switch ( letter = ReadChar( fp, Log ) )
+          switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
 	      AllocateMemory( mprg->Next, MPROG_DATA, 1 );
@@ -1847,7 +1847,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
               break;
             case '|':
               mprg->Next = NULL;
-              ReadToEndOfLine( fp, Log );
+              ReadToEndOfLine( fp, Log, fBootDb );
               done = true;
               break;
             default:
