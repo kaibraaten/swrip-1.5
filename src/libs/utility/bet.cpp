@@ -137,7 +137,7 @@ int ParseBet(const int currentbet, const std::string &arg)
           return (currentbet * (100 + atoi(s+1))) / 100;
         }
 
-      if ( s[0] == '*' || s[0] == 'x' ) /* multiply (default is by 2) */
+      if ( s[0] == '*' || CharToLowercase(s[0]) == 'x' ) /* multiply (default is by 2) */
         {
           if (s[1] == '\0')
             return (currentbet * 2);
