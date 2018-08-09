@@ -69,12 +69,12 @@ int IsNamePrefix(const std::string &str, const std::string &namelist)
  * See if a string is one of the names of an object.            -Thoric
  * Treats a dash as a word delimiter as well as a space
  */
-int IsName2(const std::string &str, const std::string &namelist)
+static int IsName2(const std::string &str, const std::string &namelist)
 {
   return IsNameInternal( str, namelist, StrCmp, OneArgument2 );
 }
 
-int IsName2Prefix(const std::string &str, const std::string &namelist)
+static int IsName2Prefix(const std::string &str, const std::string &namelist)
 {
   return IsNameInternal( str, namelist, StringPrefix, OneArgument2 );
 }
