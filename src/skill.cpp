@@ -913,7 +913,7 @@ static void LoadSkillTeachers( lua_State *L, Skill *skill )
 	      first = false;
 	    }
 
-	  strcat( buf, IntToString( vnum ) );
+	  strcat( buf, std::to_string( vnum ).c_str() );
 
 	  lua_pop( L, 1 );
         }

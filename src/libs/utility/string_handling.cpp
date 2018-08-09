@@ -695,14 +695,7 @@ int CountStringOccurances(const std::string &source, const std::string &target)
 
 bool IsNullOrEmpty( const char *str )
 {
-  return !str || str[0] == '\0';
-}
-
-const char *IntToString( int num )
-{
-  static char buf[MAX_STRING_LENGTH];
-  sprintf( buf, "%d", num );
-  return buf;  
+  return str == nullptr || str[0] == '\0';
 }
 
 static std::string GetNextChunk( std::string &str, const char c )

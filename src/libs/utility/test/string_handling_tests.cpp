@@ -250,3 +250,91 @@ TEST_F(StringHandlingTests, OneArgument_WithQuotes)
   EXPECT_STREQ(head, "find 14 apples");
   EXPECT_STREQ(remainder, "for me");
 }
+
+TEST_F(StringHandlingTests, CopyString)
+{
+  const char *original = "This is a string!";
+
+  char *target = CopyString(original);
+
+  EXPECT_STREQ(original, target);
+
+  FreeMemory(target);
+}
+
+TEST_F(StringHandlingTests, TrimStringStart)
+{
+  {
+    char buf[1024];
+    char *original = buf;
+    strcpy(original, "   Starts here.");
+
+    char *result = TrimStringStart(original);
+
+    EXPECT_STREQ(result, "Starts here.");
+  }
+  {
+    char buf[1024];
+    char *original = buf;
+    strcpy(original, "---Starts here.");
+
+    char *result = TrimStringStart(original, '-');
+
+    EXPECT_STREQ(result, "Starts here.");
+  }
+}
+
+TEST_F(StringHandlingTests, TrimStringEnd)
+{
+  {
+    char buf[1024];
+    char *original = buf;
+    strcpy(original, "Starts here.    ");
+
+    char *result = TrimStringEnd(original);
+
+    EXPECT_STREQ(result, "Starts here.");
+  }
+  {
+    char buf[1024];
+    char *original = buf;
+    strcpy(original, "Starts here.----");
+
+    char *result = TrimStringEnd(original, '-');
+
+    EXPECT_STREQ(result, "Starts here.");
+  }
+}
+
+TEST_F(StringHandlingTests, TrimString)
+{
+  char buf[1024];
+  char *original = buf;
+  strcpy(original, "        Starts here.    ");
+
+  char *result = TrimString(original);
+
+  EXPECT_STREQ(result, "Starts here.");
+}
+
+TEST_F(StringHandlingTests, CountStringOccurances)
+{
+  const char *haystack = "my haystack my haystack my precious";
+  const char *needle = "my";
+  const int expected = 3;
+
+  const int actual = CountStringOccurances(haystack, needle);
+
+  EXPECT_EQ(expected, actual);
+}
+
+TEST_F(StringHandlingTests, IsNullOrEmpty)
+{
+  const char empty[1] = { '\0' };
+  const char *null = nullptr;
+  const char *containsSomething = "Something";
+
+  EXPECT_TRUE(IsNullOrEmpty(empty));
+  EXPECT_TRUE(IsNullOrEmpty(null));
+  EXPECT_FALSE(IsNullOrEmpty(containsSomething));
+}
