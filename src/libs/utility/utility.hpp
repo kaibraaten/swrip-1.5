@@ -146,7 +146,11 @@ char *OneArgument( char *argument, char *arg_first );
 char *OneArgument2( char *argument, char *arg_first );
 int IsName(const std::string &str, const std::string &namelist);
 int IsNamePrefix(const std::string &str, const std::string &namelist);
+
+// Returns true if all keywords in str exists in namelist.
 int NiftyIsName(const std::string &str, const std::string &namelist);
+
+// Returns true if the prefix of all keywords in str exists in namelist.
 int NiftyIsNamePrefix(const std::string &str, const std::string &namelist);
 int StrCmp(const std::string &astr, const std::string &bstr);
 int StringPrefix(const std::string &astr, const std::string &bstr);
