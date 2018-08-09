@@ -20,6 +20,7 @@ typedef int (*STRING_COMPARATOR)(const std::string&, const std::string&);
 typedef char* (*STRING_TOKENIZER)( char*, char* );
 
 static std::string GetNextChunk( std::string &str, const char c );
+static char *OneArgument2( char *argument, char *arg_first );
 static int IsName2(const std::string&, const std::string&);
 static int IsName2Prefix(const std::string&, const std::string&);
 static int IsNameInternal(const std::string&, const std::string&,
@@ -376,6 +377,9 @@ int NumberArgument( const char *orig_argument, char *arg )
 /*
  * Pick off one argument from a string and return the rest.
  * Understands quotes.
+ * argument : The original string you want to be chopped up. Will not be modified.
+ * arg_first: The first token.
+ * returns  : The rest of the string after arg_first
  */
 char *OneArgument( char *argument, char *arg_first )
 {
@@ -413,7 +417,7 @@ char *OneArgument( char *argument, char *arg_first )
  * Pick off one argument from a string and return the rest.
  * Understands quotes.  Delimiters = { ' ', '-' }
  */
-char *OneArgument2( char *argument, char *arg_first )
+static char *OneArgument2( char *argument, char *arg_first )
 {
   char cEnd = ' ';
   short count = 0;

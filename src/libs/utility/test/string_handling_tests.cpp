@@ -175,3 +175,78 @@ TEST_F(StringHandlingTests, ToUpper)
   EXPECT_STREQ("BOB", ToUpper("bob").c_str());
   EXPECT_STREQ("BOB", ToUpper("bOB").c_str());
 }
+
+TEST_F(StringHandlingTests, AOrAn)
+{
+  EXPECT_STREQ("a fish", AOrAn("fish"));
+  EXPECT_STREQ("an apple", AOrAn("apple"));
+  EXPECT_STREQ("a yoke", AOrAn("yoke"));
+}
+
+TEST_F(StringHandlingTests, ReplaceChar)
+{
+  char buf[1024];
+  strcpy(buf, "My, oh my what a mess!");
+
+  ReplaceChar(buf, 'm', 'w');
+
+  EXPECT_STREQ("My, oh wy what a wess!", buf);
+}
+
+TEST_F(StringHandlingTests, IsNumber)
+{
+  EXPECT_TRUE(IsNumber("123"));
+  EXPECT_TRUE(IsNumber("+123"));
+  EXPECT_TRUE(IsNumber("-123"));
+  EXPECT_TRUE(IsNumber("-1,200.58"));
+  
+  EXPECT_FALSE(IsNumber("NotANumber"));
+}
+
+TEST_F(StringHandlingTests, NumberArgument)
+{
+  char buf[1024];
+  int number = NumberArgument("foo", buf);
+  EXPECT_EQ(1, number);
+  EXPECT_STREQ("foo", buf);
+  
+  number = NumberArgument("14.foo", buf);
+  EXPECT_EQ(14, number);
+  EXPECT_STREQ("foo", buf);
+
+  number = NumberArgument("-14.foo", buf);
+  EXPECT_EQ(-14, number);
+  EXPECT_STREQ("foo", buf);
+}
+
+TEST_F(StringHandlingTests, OneArgument)
+{
+  char original[1024];
+  strcpy(original, "find 14 apples");
+
+  char head[1024];
+  char arg2[1024];
+  char *remainder = arg2;
+
+  remainder = OneArgument(original, head);
+
+  EXPECT_STREQ(original, "find 14 apples");
+  EXPECT_STREQ(head, "find");
+  EXPECT_STREQ(remainder, "14 apples");
+}
+
+TEST_F(StringHandlingTests, OneArgument_WithQuotes)
+{
+  char original[1024];
+  strcpy(original, "'find 14 apples' for me");
+
+  char head[1024];
+  char arg2[1024];
+  char *remainder = arg2;
+
+  remainder = OneArgument(original, head);
+
+  EXPECT_STREQ(original, "'find 14 apples' for me");
+  EXPECT_STREQ(head, "find 14 apples");
+  EXPECT_STREQ(remainder, "for me");
+}
