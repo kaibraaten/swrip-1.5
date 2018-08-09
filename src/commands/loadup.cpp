@@ -63,10 +63,10 @@ void do_loadup( Character *ch, char *argument )
                   char letter;
                   const char *word;
 
-                  letter = ReadChar( fph, Log );
+                  letter = ReadChar( fph, Log, fBootDb );
                   if ( letter == '*' )
                     {
-                      ReadToEndOfLine( fph, Log );
+                      ReadToEndOfLine( fph, Log, fBootDb );
                       continue;
                     }
 
@@ -77,7 +77,7 @@ void do_loadup( Character *ch, char *argument )
                       break;
                     }
 
-                  word = ReadWord( fph, Log );
+                  word = ReadWord( fph, Log, fBootDb );
                   if ( !StrCmp( word, "OBJECT" ) )     /* Objects      */
                     ReadObject( supermob, fph, OS_CARRY );
                   else

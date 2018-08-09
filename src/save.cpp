@@ -1100,11 +1100,11 @@ bool LoadCharacter( Descriptor *d, const std::string &name, bool preload )
       for ( ; ; )
         {
 	  const char *word;
-          char letter = ReadChar( fp, Log );
+          char letter = ReadChar( fp, Log, fBootDb );
 
           if ( letter == '*' )
             {
-              ReadToEndOfLine( fp, Log );
+              ReadToEndOfLine( fp,Log, fBootDb );
               continue;
             }
 
@@ -1115,7 +1115,7 @@ bool LoadCharacter( Descriptor *d, const std::string &name, bool preload )
               break;
             }
 
-          word = ReadWord( fp, Log );
+          word = ReadWord( fp,Log, fBootDb );
 
           if ( !StrCmp( word, "PLAYER" ) )
             {
@@ -1242,25 +1242,25 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
       int x1 = 0, x2 = 0, x3 = 0, x4 = 0, x5 = 0, x6 = 0, x7 = 0, x8 = 0, x9 = 0, x0 = 0;
       time_t lastplayed = 0;
       int sn = 0;
-      const char *word = feof( fp ) ? "End" : ReadWord( fp, Log );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp,Log, fBootDb );
       bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          ReadToEndOfLine( fp, Log );
+          ReadToEndOfLine( fp,Log, fBootDb );
           break;
 
         case 'A':
-          KEY( "Act",           ch->Flags,                ReadInt( fp, Log ) );
-          KEY( "AffectedBy",    ch->AffectedBy,        ReadInt( fp, Log ) );
-          KEY( "Alignment",     ch->Alignment,          ReadInt( fp, Log ) );
-          KEY( "Armor", ch->ArmorClass,              ReadInt( fp, Log ) );
+          KEY( "Act",           ch->Flags,                ReadInt( fp,Log, fBootDb ) );
+          KEY( "AffectedBy",    ch->AffectedBy,        ReadInt( fp,Log, fBootDb ) );
+          KEY( "Alignment",     ch->Alignment,          ReadInt( fp,Log, fBootDb ) );
+          KEY( "Armor", ch->ArmorClass,              ReadInt( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "Addiction"  ) )
             {
-              line = ReadLine( fp, Log );
+              line = ReadLine( fp,Log, fBootDb );
               x0 = x1 = x2 = x3 = x4 = x5 = x6 = x7 = x8 = x9 = 0;
               sscanf( line, "%d %d %d %d %d %d %d %d %d %d",
                       &x0, &x1, &x2, &x3, &x4, &x5, &x6, &x7, &x8, &x9 );
@@ -1280,7 +1280,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "Ability"  ) )
             {
-              line = ReadLine( fp, Log );
+              line = ReadLine( fp,Log, fBootDb );
               x0=x1=x2=0;
               sscanf( line, "%d %d %d",
                       &x0, &x1, &x2 );
@@ -1302,7 +1302,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               if ( preload )
                 {
                   fMatch = true;
-                  ReadToEndOfLine( fp, Log );
+                  ReadToEndOfLine( fp,Log, fBootDb );
                   break;
                 }
 
@@ -1310,11 +1310,11 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
               if ( !StrCmp( word, "Affect" ) )
                 {
-                  paf->Type = ReadInt( fp, Log );
+                  paf->Type = ReadInt( fp,Log, fBootDb );
                 }
               else
                 {
-                  const char *sname = ReadWord(fp, Log);
+                  const char *sname = ReadWord(fp,Log, fBootDb);
 
                   if ( (sn=LookupSkill(sname)) < 0 )
                     {
@@ -1332,10 +1332,10 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                   paf->Type = sn;
                 }
 
-              paf->Duration   = ReadInt( fp, Log );
-              paf->Modifier   = ReadInt( fp, Log );
-              paf->Location   = ReadInt( fp, Log );
-              paf->AffectedBy = ReadInt( fp, Log );
+              paf->Duration   = ReadInt( fp,Log, fBootDb );
+              paf->Modifier   = ReadInt( fp,Log, fBootDb );
+              paf->Location   = ReadInt( fp,Log, fBootDb );
+              paf->AffectedBy = ReadInt( fp,Log, fBootDb );
               LINK(paf, ch->FirstAffect, ch->LastAffect, Next, Previous );
               fMatch = true;
               break;
@@ -1343,7 +1343,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "AttrMod"  ) )
             {
-              line = ReadLine( fp, Log );
+              line = ReadLine( fp,Log, fBootDb );
               x1=x2=x3=x4=x5=x6=x7=13;
               sscanf( line, "%d %d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
@@ -1367,14 +1367,14 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               if ( preload )
                 {
                   fMatch = true;
-                  ReadToEndOfLine( fp, Log );
+                  ReadToEndOfLine( fp,Log, fBootDb );
                   break;
                 }
 
               AllocateMemory( pal, Alias, 1 );
 
-              pal->Name = ReadStringToTilde( fp, Log );
-              pal->Command  = ReadStringToTilde( fp, Log );
+              pal->Name = ReadStringToTilde( fp,Log, fBootDb );
+              pal->Command  = ReadStringToTilde( fp,Log, fBootDb );
 	      AddAlias( ch, pal );
               fMatch = true;
               break;
@@ -1382,7 +1382,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "AttrPerm" ) )
             {
-              line = ReadLine( fp, Log );
+              line = ReadLine( fp,Log, fBootDb );
               x1=x2=x3=x4=x5=x6=x7=0;
               sscanf( line, "%d %d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
@@ -1403,21 +1403,21 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "AuthedBy",      ch->PCData->AuthedBy,  ReadStringToTilde( fp, Log ) );
+          KEY( "AuthedBy",      ch->PCData->AuthedBy,  ReadStringToTilde( fp,Log, fBootDb ) );
           break;
 
         case 'B':
-          KEY( "Bamfin",        ch->PCData->BamfIn,     ReadStringToTilde( fp, Log ) );
-          KEY( "Bamfout",       ch->PCData->BamfOut,    ReadStringToTilde( fp, Log ) );
-          KEY( "Bestowments", ch->PCData->Bestowments, ReadStringToTilde( fp, Log ) );
-          KEY( "Bio",           ch->PCData->Bio,        ReadStringToTilde( fp, Log ) );
-          KEY( "Bank",  ch->PCData->Bank,       ReadInt( fp, Log ) );
+          KEY( "Bamfin",        ch->PCData->BamfIn,     ReadStringToTilde( fp,Log, fBootDb ) );
+          KEY( "Bamfout",       ch->PCData->BamfOut,    ReadStringToTilde( fp,Log, fBootDb ) );
+          KEY( "Bestowments", ch->PCData->Bestowments, ReadStringToTilde( fp,Log, fBootDb ) );
+          KEY( "Bio",           ch->PCData->Bio,        ReadStringToTilde( fp,Log, fBootDb ) );
+          KEY( "Bank",  ch->PCData->Bank,       ReadInt( fp,Log, fBootDb ) );
           break;
 
         case 'C':
           if ( !StrCmp( word, "Clan" ) )
             {
-              ch->PCData->ClanInfo.ClanName = ReadStringToTilde( fp, Log );
+              ch->PCData->ClanInfo.ClanName = ReadStringToTilde( fp,Log, fBootDb );
 
               if ( !preload
                    && !IsNullOrEmpty( ch->PCData->ClanInfo.ClanName )
@@ -1437,11 +1437,11 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "Clones",        ch->PCData->Clones,             ReadInt( fp, Log ) );
+          KEY( "Clones",        ch->PCData->Clones,             ReadInt( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "Condition" ) )
             {
-              line = ReadLine( fp, Log );
+              line = ReadLine( fp,Log, fBootDb );
               sscanf( line, "%d %d %d %d",
                       &x1, &x2, &x3, &x4 );
               ch->PCData->Condition[0] = x1;
@@ -1455,13 +1455,13 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'D':
-          KEY( "Damroll",       ch->DamRoll,            ReadInt( fp, Log ) );
-          KEY( "Deaf",  ch->Deaf,               ReadInt( fp, Log ) );
-          KEY( "Description",   ch->Description,        ReadStringToTilde( fp, Log ) );
+          KEY( "Damroll",       ch->DamRoll,            ReadInt( fp,Log, fBootDb ) );
+          KEY( "Deaf",  ch->Deaf,               ReadInt( fp,Log, fBootDb ) );
+          KEY( "Description",   ch->Description,        ReadStringToTilde( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "Druglevel"  ) )
             {
-              line = ReadLine( fp, Log );
+              line = ReadLine( fp,Log, fBootDb );
               x0=x1=x2=x3=x4=x5=x6=x7=x8=x9=0;
               sscanf( line, "%d %d %d %d %d %d %d %d %d %d",
                       &x0, &x1, &x2, &x3, &x4, &x5, &x6, &x7, &x8, &x9 );
@@ -1483,11 +1483,11 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           /* 'E' was moved to after 'S' */
         case 'F':
-          KEY( "Flags", ch->PCData->Flags,      ReadInt( fp, Log ) );
+          KEY( "Flags", ch->PCData->Flags,      ReadInt( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "Force" ) )
             {
-              line = ReadLine( fp, Log );
+              line = ReadLine( fp,Log, fBootDb );
               x1=x2=x3=x4=x5=x6=0;
               sscanf( line, "%d %d %d %d",
                       &x1, &x2, &x3, &x4);
@@ -1501,11 +1501,11 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'G':
-          KEY( "Gold",  ch->Gold,               ReadInt( fp, Log ) );
+          KEY( "Gold",  ch->Gold,               ReadInt( fp,Log, fBootDb ) );
           /* temporary measure */
           if ( !StrCmp( word, "Guild" ) )
             {
-              ch->PCData->ClanInfo.ClanName = ReadStringToTilde( fp, Log );
+              ch->PCData->ClanInfo.ClanName = ReadStringToTilde( fp,Log, fBootDb );
 
               if ( !preload
                    && !IsNullOrEmpty( ch->PCData->ClanInfo.ClanName )
@@ -1525,8 +1525,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
         case 'H':
           if ( !StrCmp(word, "Helled") )
             {
-              ch->PCData->ReleaseDate = ReadInt(fp, Log);
-              ch->PCData->HelledBy = ReadStringToTilde(fp, Log);
+              ch->PCData->ReleaseDate = ReadInt(fp,Log, fBootDb);
+              ch->PCData->HelledBy = ReadStringToTilde(fp,Log, fBootDb);
 
               if ( ch->PCData->ReleaseDate < current_time )
                 {
@@ -1540,12 +1540,12 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "Hitroll",       ch->HitRoll,            ReadInt( fp, Log ) );
-          KEY( "Homepage",      ch->PCData->HomePage,   ReadStringToTilde( fp, Log ) );
+          KEY( "Hitroll",       ch->HitRoll,            ReadInt( fp,Log, fBootDb ) );
+          KEY( "Homepage",      ch->PCData->HomePage,   ReadStringToTilde( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "HpManaMove" ) )
             {
-              line = ReadLine( fp, Log );
+              line = ReadLine( fp,Log, fBootDb );
               x1=x2=x3=x4=x5=x6=0;
               sscanf( line, "%d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6 );
@@ -1573,8 +1573,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'I':
-          KEY( "IllegalPK",     ch->PCData->IllegalPk, ReadInt( fp, Log ) );
-          KEY( "Immune",        ch->Immune,             ReadInt( fp, Log ) );
+          KEY( "IllegalPK",     ch->PCData->IllegalPk, ReadInt( fp,Log, fBootDb ) );
+          KEY( "Immune",        ch->Immune,             ReadInt( fp,Log, fBootDb ) );
 
 	  if( ( fMatch = ImcLoadCharacter( ch, fp, word ) ) )
 	    {
@@ -1583,15 +1583,15 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           break;
         case 'J':
-          KEY( "Jailvnum",    ch->PCData->JailVnum,          ReadInt( fp, Log ) );
+          KEY( "Jailvnum",    ch->PCData->JailVnum,          ReadInt( fp,Log, fBootDb ) );
           break;
 
         case 'K':
           if ( !StrCmp( word, "Killed" ) )
             {
               fMatch = true;
-              vnum_t vnum = ReadInt(fp, Log);
-              char count = ReadInt(fp, Log);
+              vnum_t vnum = ReadInt(fp,Log, fBootDb);
+              char count = ReadInt(fp,Log, fBootDb);
 
               if(ch->PCData->Killed.size() < GetKillTrackCount(ch))
                 {
@@ -1603,34 +1603,34 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
         case 'L':
           if ( !StrCmp(word, "Lastplayed") )
             {
-              lastplayed = ReadInt(fp, Log);
+              lastplayed = ReadInt(fp,Log, fBootDb);
               fMatch = true;
               break;
             }
 
-          KEY( "LongDescr",     ch->LongDescr,         ReadStringToTilde( fp, Log ) );
+          KEY( "LongDescr",     ch->LongDescr,         ReadStringToTilde( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "Languages" ) )
             {
-              ch->Speaks = ReadInt( fp, Log );
-              ch->Speaking = ReadInt( fp, Log );
+              ch->Speaks = ReadInt( fp,Log, fBootDb );
+              ch->Speaking = ReadInt( fp,Log, fBootDb );
               fMatch = true;
             }
 
           break;
 
         case 'M':
-          KEY( "MainAbility",   ch->Ability.Main,               ReadInt( fp, Log ) );
-          KEY( "MDeaths",       ch->PCData->MDeaths,    ReadInt( fp, Log ) );
-          KEY( "Mentalstate", ch->MentalState, ReadInt( fp, Log ) );
-          KEY( "Minsnoop",      ch->PCData->MinSnoop,  ReadInt( fp, Log ) );
-          KEY( "MKills",        ch->PCData->MKills,     ReadInt( fp, Log ) );
-          KEY( "Mobinvis",      ch->MobInvis,           ReadInt( fp, Log ) );
+          KEY( "MainAbility",   ch->Ability.Main,               ReadInt( fp,Log, fBootDb ) );
+          KEY( "MDeaths",       ch->PCData->MDeaths,    ReadInt( fp,Log, fBootDb ) );
+          KEY( "Mentalstate", ch->MentalState, ReadInt( fp,Log, fBootDb ) );
+          KEY( "Minsnoop",      ch->PCData->MinSnoop,  ReadInt( fp,Log, fBootDb ) );
+          KEY( "MKills",        ch->PCData->MKills,     ReadInt( fp,Log, fBootDb ) );
+          KEY( "Mobinvis",      ch->MobInvis,           ReadInt( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "MobRange" ) )
             {
-              ch->PCData->Build.VnumRanges.Mob.First = ReadInt( fp, Log );
-              ch->PCData->Build.VnumRanges.Mob.Last = ReadInt( fp, Log );
+              ch->PCData->Build.VnumRanges.Mob.First = ReadInt( fp,Log, fBootDb );
+              ch->PCData->Build.VnumRanges.Mob.Last = ReadInt( fp,Log, fBootDb );
               fMatch = true;
             }
 
@@ -1642,41 +1642,41 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               /*
                * Name already set externally.
                */
-              ReadToEndOfLine( fp, Log );
+              ReadToEndOfLine( fp,Log, fBootDb );
               fMatch = true;
               break;
             }
           break;
 
         case 'O':
-          KEY( "Outcast_time", ch->PCData->OutcastTime, ReadInt( fp, Log ) );
+          KEY( "Outcast_time", ch->PCData->OutcastTime, ReadInt( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "ObjRange" ) )
             {
-              ch->PCData->Build.VnumRanges.Object.First = ReadInt( fp, Log );
-              ch->PCData->Build.VnumRanges.Object.Last = ReadInt( fp, Log );
+              ch->PCData->Build.VnumRanges.Object.First = ReadInt( fp,Log, fBootDb );
+              ch->PCData->Build.VnumRanges.Object.Last = ReadInt( fp,Log, fBootDb );
               fMatch = true;
             }
           break;
 
         case 'P':
-          KEY( "Password",      ch->PCData->Password,        ReadStringToTilde( fp, Log ) );
-          KEY( "PDeaths",       ch->PCData->PDeaths,    ReadInt( fp, Log ) );
-          KEY( "PKills",        ch->PCData->PKills,     ReadInt( fp, Log ) );
-          KEY( "Played",        ch->PCData->Played,     ReadInt( fp, Log ) );
-          KEY( "Position",      ch->Position,           (PositionType)ReadInt( fp, Log ) );
-          KEY( "Prompt",        ch->PCData->Prompt,     ReadStringToTilde( fp, Log ) );
+          KEY( "Password",      ch->PCData->Password,        ReadStringToTilde( fp,Log, fBootDb ) );
+          KEY( "PDeaths",       ch->PCData->PDeaths,    ReadInt( fp,Log, fBootDb ) );
+          KEY( "PKills",        ch->PCData->PKills,     ReadInt( fp,Log, fBootDb ) );
+          KEY( "Played",        ch->PCData->Played,     ReadInt( fp,Log, fBootDb ) );
+          KEY( "Position",      ch->Position,           (PositionType)ReadInt( fp,Log, fBootDb ) );
+          KEY( "Prompt",        ch->PCData->Prompt,     ReadStringToTilde( fp,Log, fBootDb ) );
 
           if (!StrCmp ( word, "PTimer" ) )
             {
-              AddTimerToCharacter( ch , TIMER_PKILLED, ReadInt(fp, Log), NULL, SUB_NONE );
+              AddTimerToCharacter( ch , TIMER_PKILLED, ReadInt(fp,Log, fBootDb), NULL, SUB_NONE );
               fMatch = true;
               break;
             }
 
           if ( !StrCmp( word, "PlrHome" ) )
             {
-              ch->PlayerHome = GetRoom( ReadInt( fp, Log ) );
+              ch->PlayerHome = GetRoom( ReadInt( fp,Log, fBootDb ) );
 
               if ( !ch->PlayerHome )
 		{
@@ -1690,14 +1690,14 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'R':
-          KEY( "Race",        ch->Race,         ReadInt( fp, Log ) );
-          KEY( "Rank",        ch->PCData->Rank, ReadStringToTilde( fp, Log ) );
-          KEY( "Resistant",     ch->Resistant,          ReadInt( fp, Log ) );
-          KEY( "Restore_time",ch->PCData->RestoreTime, ReadInt( fp, Log ) );
+          KEY( "Race",        ch->Race,         ReadInt( fp,Log, fBootDb ) );
+          KEY( "Rank",        ch->PCData->Rank, ReadStringToTilde( fp,Log, fBootDb ) );
+          KEY( "Resistant",     ch->Resistant,          ReadInt( fp,Log, fBootDb ) );
+          KEY( "Restore_time",ch->PCData->RestoreTime, ReadInt( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "Room" ) )
             {
-              ch->InRoom = GetRoom( ReadInt( fp, Log ) );
+              ch->InRoom = GetRoom( ReadInt( fp,Log, fBootDb ) );
 
               if ( !ch->InRoom )
 		{
@@ -1710,23 +1710,23 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "RoomRange" ) )
             {
-              ch->PCData->Build.VnumRanges.Room.First = ReadInt( fp, Log );
-              ch->PCData->Build.VnumRanges.Room.Last = ReadInt( fp, Log );
+              ch->PCData->Build.VnumRanges.Room.First = ReadInt( fp,Log, fBootDb );
+              ch->PCData->Build.VnumRanges.Room.Last = ReadInt( fp,Log, fBootDb );
               fMatch = true;
             }
 
           break;
 
         case 'S':
-          KEY( "Salary",      ch->PCData->ClanInfo.Salary, ReadInt( fp, Log ) );
-          KEY( "Salary_time",ch->PCData->ClanInfo.SalaryDate, ReadInt( fp, Log ) );
-          KEY( "Sex",           ch->Sex,                (SexType)ReadInt( fp, Log ) );
-          KEY( "ShortDescr",    ch->ShortDescr,        ReadStringToTilde( fp, Log ) );
-          KEY( "Susceptible",   ch->Susceptible,        ReadInt( fp, Log ) );
+          KEY( "Salary",      ch->PCData->ClanInfo.Salary, ReadInt( fp,Log, fBootDb ) );
+          KEY( "Salary_time",ch->PCData->ClanInfo.SalaryDate, ReadInt( fp,Log, fBootDb ) );
+          KEY( "Sex",           ch->Sex,                (SexType)ReadInt( fp,Log, fBootDb ) );
+          KEY( "ShortDescr",    ch->ShortDescr,        ReadStringToTilde( fp,Log, fBootDb ) );
+          KEY( "Susceptible",   ch->Susceptible,        ReadInt( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "SavingThrow" ) )
             {
-              ch->Saving.Wand   = ReadInt( fp, Log );
+              ch->Saving.Wand   = ReadInt( fp,Log, fBootDb );
               ch->Saving.PoisonDeath = ch->Saving.Wand;
               ch->Saving.ParaPetri     = ch->Saving.Wand;
               ch->Saving.Breath         = ch->Saving.Wand;
@@ -1737,11 +1737,11 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "SavingThrows" ) )
             {
-              ch->Saving.PoisonDeath = ReadInt( fp, Log );
-              ch->Saving.Wand   = ReadInt( fp, Log );
-              ch->Saving.ParaPetri     = ReadInt( fp, Log );
-              ch->Saving.Breath         = ReadInt( fp, Log );
-              ch->Saving.SpellStaff    = ReadInt( fp, Log );
+              ch->Saving.PoisonDeath = ReadInt( fp,Log, fBootDb );
+              ch->Saving.Wand   = ReadInt( fp,Log, fBootDb );
+              ch->Saving.ParaPetri     = ReadInt( fp,Log, fBootDb );
+              ch->Saving.Breath         = ReadInt( fp,Log, fBootDb );
+              ch->Saving.SpellStaff    = ReadInt( fp,Log, fBootDb );
               fMatch = true;
               break;
             }
@@ -1750,11 +1750,11 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
             {
               if ( !preload )
                 {
-                  ch->Echo( "Last connected from: %s\r\n", ReadWord( fp, Log ) );
+                  ch->Echo( "Last connected from: %s\r\n", ReadWord( fp,Log, fBootDb ) );
                 }
               else
 		{
-		  ReadToEndOfLine( fp, Log );
+		  ReadToEndOfLine( fp,Log, fBootDb );
 		}
 
               fMatch = true;
@@ -1779,15 +1779,15 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 		}
               else
                 {
-                  value = ReadInt( fp, Log );
+                  value = ReadInt( fp,Log, fBootDb );
 
                   if ( file_ver < 3 )
 		    {
-		      sn = LookupSkill( ReadWord( fp, Log ) );
+		      sn = LookupSkill( ReadWord( fp,Log, fBootDb ) );
 		    }
                   else
 		    {
-		      sn = BSearchSkillExact( ReadWord( fp, Log ), gsn_first_skill, gsn_first_weapon-1 );
+		      sn = BSearchSkillExact( ReadWord( fp,Log, fBootDb ), gsn_first_skill, gsn_first_weapon-1 );
 		    }
 
                   if ( sn < 0 )
@@ -1815,8 +1815,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 		}
               else
                 {
-                  value = ReadInt( fp, Log );
-                  sn = BSearchSkillExact( ReadWord( fp, Log ), gsn_first_spell, gsn_first_skill-1 );
+                  value = ReadInt( fp,Log, fBootDb );
+                  sn = BSearchSkillExact( ReadWord( fp,Log, fBootDb ), gsn_first_spell, gsn_first_skill-1 );
 
                   if ( sn < 0 )
 		    {
@@ -1948,12 +1948,12 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               return;
             }
 
-          KEY( "Email", ch->PCData->Email,      ReadStringToTilde( fp, Log ) );
+          KEY( "Email", ch->PCData->Email,      ReadStringToTilde( fp,Log, fBootDb ) );
           break;
 
         case 'T':
-          KEY( "Targ",  ch->PCData->Target,     ReadStringToTilde( fp, Log ) );
-          KEY( "Toplevel",      ch->TopLevel,          ReadInt( fp, Log ) );
+          KEY( "Targ",  ch->PCData->Target,     ReadStringToTilde( fp,Log, fBootDb ) );
+          KEY( "Toplevel",      ch->TopLevel,          ReadInt( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "Tongue" ) )
             {
@@ -1965,8 +1965,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 		}
               else
                 {
-                  value = ReadInt( fp, Log );
-                  sn = BSearchSkillExact( ReadWord( fp, Log ), gsn_first_tongue, gsn_TopSN-1 );
+                  value = ReadInt( fp,Log, fBootDb );
+                  sn = BSearchSkillExact( ReadWord( fp,Log, fBootDb ), gsn_first_tongue, gsn_TopSN-1 );
 
                   if ( sn < 0 )
 		    {
@@ -1984,13 +1984,13 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "Trust", ch->Trust, ReadInt( fp, Log ) );
+          KEY( "Trust", ch->Trust, ReadInt( fp,Log, fBootDb ) );
           /* Let no character be trusted higher than one below maxlevel -- Narn */
           ch->Trust = umin( ch->Trust, MAX_LEVEL - 1 );
 
           if ( !StrCmp( word, "Title" ) )
             {
-              ch->PCData->Title = ReadStringToTilde( fp, Log );
+              ch->PCData->Title = ReadStringToTilde( fp,Log, fBootDb );
 
               if ( isalpha(ch->PCData->Title[0])
                    || isdigit(ch->PCData->Title[0]) )
@@ -2012,12 +2012,12 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
         case 'V':
           if ( !StrCmp( word, "Vnum" ) )
             {
-              ch->Prototype = GetProtoMobile( ReadInt( fp, Log ) );
+              ch->Prototype = GetProtoMobile( ReadInt( fp,Log, fBootDb ) );
               fMatch = true;
               break;
             }
 
-          KEY( "Version",       file_ver,               ReadInt( fp, Log ) );
+          KEY( "Version",       file_ver,               ReadInt( fp,Log, fBootDb ) );
           break;
 
         case 'W':
@@ -2031,8 +2031,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 		}
               else
                 {
-                  value = ReadInt( fp, Log );
-                  sn = BSearchSkillExact( ReadWord( fp, Log ), gsn_first_weapon, gsn_first_tongue-1 );
+                  value = ReadInt( fp,Log, fBootDb );
+                  sn = BSearchSkillExact( ReadWord( fp,Log, fBootDb ), gsn_first_weapon, gsn_first_tongue-1 );
                   if ( sn < 0 )
 		    {
 		      Log->Bug( "%s (%d): unknown weapon sn %d.",
@@ -2048,9 +2048,9 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "Wimpy", ch->Wimpy,              ReadInt( fp, Log ) );
-          KEY( "WizInvis",      ch->PCData->WizInvis,   ReadInt( fp, Log ) );
-          KEY( "Wanted",        ch->PCData->WantedFlags,  ReadInt( fp, Log ) );
+          KEY( "Wimpy", ch->Wimpy,              ReadInt( fp,Log, fBootDb ) );
+          KEY( "WizInvis",      ch->PCData->WizInvis,   ReadInt( fp,Log, fBootDb ) );
+          KEY( "Wanted",        ch->PCData->WantedFlags,  ReadInt( fp,Log, fBootDb ) );
           break;
         }
 
@@ -2076,14 +2076,14 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
   for ( ; ; )
     {
-      const char *word = feof( fp ) ? "End" : ReadWord( fp, Log );
+      const char *word = feof( fp ) ? "End" : ReadWord( fp,Log, fBootDb );
       bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
         case '*':
           fMatch = true;
-          ReadToEndOfLine( fp, Log );
+          ReadToEndOfLine( fp,Log, fBootDb );
           break;
 
         case 'A':
@@ -2096,11 +2096,11 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
               if ( !StrCmp( word, "Affect" ) )
                 {
-                  paf->Type = ReadInt( fp, Log );
+                  paf->Type = ReadInt( fp,Log, fBootDb );
                 }
               else
                 {
-                  int sn = LookupSkill( ReadWord( fp, Log ) );
+                  int sn = LookupSkill( ReadWord( fp,Log, fBootDb ) );
 
                   if ( sn < 0 )
 		    {
@@ -2113,10 +2113,10 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 		    }
                 }
 
-              paf->Duration     = ReadInt( fp, Log );
-              pafmod            = ReadInt( fp, Log );
-              paf->Location     = ReadInt( fp, Log );
-              paf->AffectedBy   = ReadInt( fp, Log );
+              paf->Duration     = ReadInt( fp,Log, fBootDb );
+              pafmod            = ReadInt( fp,Log, fBootDb );
+              paf->Location     = ReadInt( fp,Log, fBootDb );
+              paf->AffectedBy   = ReadInt( fp,Log, fBootDb );
 
               if ( paf->Location == APPLY_WEAPONSPELL
                    || paf->Location == APPLY_WEARSPELL
@@ -2134,28 +2134,28 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
               break;
             }
 
-          KEY( "Actiondesc",    obj->ActionDescription,       ReadStringToTilde( fp, Log ) );
+          KEY( "Actiondesc",    obj->ActionDescription,       ReadStringToTilde( fp,Log, fBootDb ) );
           break;
 
         case 'C':
-          KEY( "Cost",  obj->Cost,              ReadInt( fp, Log ) );
-          KEY( "Count", obj->Count,             ReadInt( fp, Log ) );
+          KEY( "Cost",  obj->Cost,              ReadInt( fp,Log, fBootDb ) );
+          KEY( "Count", obj->Count,             ReadInt( fp,Log, fBootDb ) );
           break;
 
         case 'D':
-          KEY( "Description",   obj->Description,       ReadStringToTilde( fp, Log ) );
+          KEY( "Description",   obj->Description,       ReadStringToTilde( fp,Log, fBootDb ) );
           break;
 
         case 'E':
-          KEY( "ExtraFlags",    obj->Flags,       ReadInt( fp, Log ) );
+          KEY( "ExtraFlags",    obj->Flags,       ReadInt( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "ExtraDescr" ) )
             {
               ExtraDescription *ed = NULL;
 
               AllocateMemory( ed, ExtraDescription, 1 );
-              ed->Keyword = ReadStringToTilde( fp, Log );
-              ed->Description = ReadStringToTilde( fp, Log );
+              ed->Keyword = ReadStringToTilde( fp,Log, fBootDb );
+              ed->Description = ReadStringToTilde( fp,Log, fBootDb );
               LINK(ed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
               fMatch = true;
             }
@@ -2285,19 +2285,19 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'I':
-          KEY( "ItemType",      obj->ItemType,         (ItemTypes)ReadInt( fp, Log ) );
+          KEY( "ItemType",      obj->ItemType,         (ItemTypes)ReadInt( fp,Log, fBootDb ) );
           break;
 
         case 'L':
-          KEY( "Level", obj->Level,             ReadInt( fp, Log ) );
+          KEY( "Level", obj->Level,             ReadInt( fp,Log, fBootDb ) );
           break;
 
         case 'N':
-          KEY( "Name",  obj->Name,              ReadStringToTilde( fp, Log ) );
+          KEY( "Name",  obj->Name,              ReadStringToTilde( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "Nest" ) )
             {
-              iNest = ReadInt( fp, Log );
+              iNest = ReadInt( fp,Log, fBootDb );
 
               if ( iNest < 0 || iNest >= MAX_NEST )
                 {
@@ -2311,15 +2311,15 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'R':
-          KEY( "Room", room, GetRoom(ReadInt(fp, Log)) );
+          KEY( "Room", room, GetRoom(ReadInt(fp,Log, fBootDb)) );
 
         case 'S':
-          KEY( "ShortDescr",    obj->ShortDescr,       ReadStringToTilde( fp, Log ) );
+          KEY( "ShortDescr",    obj->ShortDescr,       ReadStringToTilde( fp,Log, fBootDb ) );
 
           if ( !StrCmp( word, "Spell" ) )
             {
-              int iValue = ReadInt( fp, Log );
-              int sn     = LookupSkill( ReadWord( fp, Log ) );
+              int iValue = ReadInt( fp,Log, fBootDb );
+              int sn     = LookupSkill( ReadWord( fp,Log, fBootDb ) );
 
               if ( iValue < 0 || iValue > 5 )
 		{
@@ -2342,14 +2342,14 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'T':
-          KEY( "Timer", obj->Timer,             ReadInt( fp, Log ) );
+          KEY( "Timer", obj->Timer,             ReadInt( fp,Log, fBootDb ) );
           break;
 
         case 'V':
           if ( !StrCmp( word, "Values" ) )
             {
               int x1 = 0, x2 = 0, x3 = 0, x4 = 0, x5 = 0, x6 = 0;
-              const char *ln = ReadLine( fp, Log );
+              const char *ln = ReadLine( fp,Log, fBootDb );
 
               sscanf( ln, "%d %d %d %d %d %d", &x1, &x2, &x3, &x4, &x5, &x6 );
 
@@ -2365,7 +2365,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
           if ( !StrCmp( word, "Vnum" ) )
             {
-              vnum_t vnum = ReadInt( fp, Log );
+              vnum_t vnum = ReadInt( fp,Log, fBootDb );
 
               if ( ( obj->Prototype = GetProtoObject( vnum ) ) == NULL )
                 {
@@ -2388,9 +2388,9 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'W':
-          KEY( "WearFlags",     obj->WearFlags,        ReadInt( fp, Log ) );
-          KEY( "WearLoc",       obj->WearLoc,          (WearLocation)ReadInt( fp, Log ) );
-          KEY( "Weight",        obj->Weight,            ReadInt( fp, Log ) );
+          KEY( "WearFlags",     obj->WearFlags,        ReadInt( fp,Log, fBootDb ) );
+          KEY( "WearLoc",       obj->WearLoc,          (WearLocation)ReadInt( fp,Log, fBootDb ) );
+          KEY( "Weight",        obj->Weight,            ReadInt( fp,Log, fBootDb ) );
           break;
 
         }
@@ -2402,7 +2402,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
           Log->Bug( "Fread_obj: no match." );
           Log->Bug( word );
-          ReadToEndOfLine( fp, Log );
+          ReadToEndOfLine( fp,Log, fBootDb );
 
           if ( obj->Name )
             FreeMemory( obj->Name        );
@@ -2525,11 +2525,11 @@ void LoadCorpses( void )
           for ( ; ; )
             {
               const char *word;
-              char letter = ReadChar( fpArea, Log );
+              char letter = ReadChar( fpArea,Log, fBootDb );
 
               if ( letter == '*' )
                 {
-                  ReadToEndOfLine(fpArea, Log);
+                  ReadToEndOfLine(fpArea,Log, fBootDb);
                   continue;
                 }
 
@@ -2539,7 +2539,7 @@ void LoadCorpses( void )
                   break;
                 }
 
-              word = ReadWord( fpArea, Log );
+              word = ReadWord( fpArea,Log, fBootDb );
 
               if ( !StrCmp(word, "CORPSE" ) )
 		{
@@ -2630,11 +2630,11 @@ void LoadStorerooms( void )
           for ( ; ; )
             {
               const char *word = NULL;
-              char letter = ReadChar( fpArea, Log );
+              char letter = ReadChar( fpArea,Log, fBootDb );
 
               if ( letter == '*' )
                 {
-                  ReadToEndOfLine( fpArea, Log );
+                  ReadToEndOfLine( fpArea,Log, fBootDb );
                   continue;
                 }
 
@@ -2645,7 +2645,7 @@ void LoadStorerooms( void )
                   break;
                 }
 
-              word = ReadWord( fpArea, Log );
+              word = ReadWord( fpArea,Log, fBootDb );
 
               if ( !StrCmp( word, "OBJECT" ) ) /* Objects      */
 		{
@@ -2749,11 +2749,11 @@ void LoadVendors( void )
           for ( ; ; )
             {
               const char *word = NULL;
-	      char letter = ReadChar( fpArea, Log );
+	      char letter = ReadChar( fpArea,Log, fBootDb );
 
               if ( letter == '*' )
                 {
-                  ReadToEndOfLine(fpArea, Log);
+                  ReadToEndOfLine(fpArea,Log, fBootDb);
                   continue;
                 }
 
@@ -2763,7 +2763,7 @@ void LoadVendors( void )
                   break;
                 }
 
-              word = ReadWord( fpArea, Log );
+              word = ReadWord( fpArea,Log, fBootDb );
 
               if ( !StrCmp(word, "VENDOR" ) )
 		{
@@ -2854,11 +2854,11 @@ static Character *ReadMobile( FILE *fp )
   bool fMatch = false;
   int inroom = 0;
   Room *pRoomIndex = NULL;
-  const char *word = feof( fp ) ? "EndMobile" : ReadWord( fp, Log );
+  const char *word = feof( fp ) ? "EndMobile" : ReadWord( fp,Log, fBootDb );
 
   if ( !StrCmp(word, "Vnum") )
     {
-      int vnum = ReadInt( fp, Log );
+      int vnum = ReadInt( fp,Log, fBootDb );
 
       mob = CreateMobile( GetProtoMobile(vnum) );
 
@@ -2866,7 +2866,7 @@ static Character *ReadMobile( FILE *fp )
         {
           for ( ; ; )
 	    {
-	      word = feof( fp ) ? "EndMobile" : ReadWord( fp, Log );
+	      word = feof( fp ) ? "EndMobile" : ReadWord( fp,Log, fBootDb );
 	      /* So we don't get so many bug messages when something messes up
 	       * --Shaddai
 	       */
@@ -2882,7 +2882,7 @@ static Character *ReadMobile( FILE *fp )
     {
       for ( ; ; )
 	{
-	  word = feof( fp ) ? "EndMobile" : ReadWord( fp, Log );
+	  word = feof( fp ) ? "EndMobile" : ReadWord( fp,Log, fBootDb );
 	  /* So we don't get so many bug messages when something messes up
 	   * --Shaddai
 	   */
@@ -2899,21 +2899,21 @@ static Character *ReadMobile( FILE *fp )
 
   for ( ; ;)
     {
-      word = feof( fp ) ? "EndMobile" : ReadWord( fp, Log );
+      word = feof( fp ) ? "EndMobile" : ReadWord( fp,Log, fBootDb );
       fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
 	{
 	case '*':
 	  fMatch = true;
-	  ReadToEndOfLine( fp, Log );
+	  ReadToEndOfLine( fp,Log, fBootDb );
 	  break;
 
 	case '#':
 	  if ( !StrCmp( word, "#OBJECT" ) )
 	    ReadObject ( mob, fp, OS_CARRY );
 	case 'D':
-	  KEY( "Description", mob->Description, ReadStringToTilde(fp, Log));
+	  KEY( "Description", mob->Description, ReadStringToTilde(fp,Log, fBootDb));
 	  break;
 
 	case 'E':
@@ -2937,27 +2937,27 @@ static Character *ReadMobile( FILE *fp )
 	  break;
 
 	case 'F':
-	  KEY( "Flags", mob->Flags, ReadInt( fp, Log ));
+	  KEY( "Flags", mob->Flags, ReadInt( fp,Log, fBootDb ));
 	  break;
 
 	case 'L':
-	  KEY( "Long", mob->LongDescr, ReadStringToTilde(fp, Log) );
+	  KEY( "Long", mob->LongDescr, ReadStringToTilde(fp,Log, fBootDb) );
 	  break;
 
 	case 'N':
-	  KEY( "Name", mob->Name, ReadStringToTilde( fp, Log ) );
+	  KEY( "Name", mob->Name, ReadStringToTilde( fp,Log, fBootDb ) );
 	  break;
 
 	case 'P':
-	  KEY( "Position", mob->Position, (PositionType)ReadInt( fp, Log ) );
+	  KEY( "Position", mob->Position, (PositionType)ReadInt( fp,Log, fBootDb ) );
 	  break;
 
 	case 'R':
-	  KEY( "Room",  inroom, ReadInt(fp, Log));
+	  KEY( "Room",  inroom, ReadInt(fp,Log, fBootDb));
 	  break;
 
 	case 'S':
-	  KEY( "Short", mob->ShortDescr, ReadStringToTilde(fp, Log));
+	  KEY( "Short", mob->ShortDescr, ReadStringToTilde(fp,Log, fBootDb));
 	  break;
 	}
 

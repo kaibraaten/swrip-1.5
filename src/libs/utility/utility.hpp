@@ -173,13 +173,13 @@ bool IsNullOrEmpty( const char *str );
 const char *IntToString( int num );
 
 /* file_io.c */
-char ReadChar( FILE *fp, Logger *log );
-float ReadFloat( FILE *fp, Logger *log );
-int ReadInt( FILE *fp, Logger *log );
-char *ReadStringToTilde( FILE *fp, Logger *log );
-void ReadToEndOfLine( FILE *fp, Logger *log);
-char *ReadWord( FILE *fp, Logger *log );
-char *ReadLine( FILE *fp, Logger *log );
+char ReadChar( FILE *fp, Logger *log, bool fBootDb );
+float ReadFloat( FILE *fp, Logger *log, bool fBootDb );
+int ReadInt( FILE *fp, Logger *log, bool fBootDb );
+char *ReadStringToTilde( FILE *fp, Logger *log, bool fBootDb );
+void ReadToEndOfLine( FILE *fp, Logger *log, bool fBootDb);
+char *ReadWord( FILE *fp, Logger *log, bool fBootDb );
+char *ReadLine( FILE *fp, Logger *log, bool fBootDb );
 void ForEachLuaFileInDir( const char *pathToDir,
 			  void (*doOnFile)(const std::string&, void *ud),
 			  void *userData );

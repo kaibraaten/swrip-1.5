@@ -860,14 +860,11 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
 	  for ( ; ; )
 	    {
-	      char letter;
-	      char *word;
-
-	      letter = ReadChar( fph, Log );
+	      char letter = ReadChar( fph, Log, fBootDb );
 
 	      if ( letter == '*' )
 		{
-		  ReadToEndOfLine( fph, Log );
+		  ReadToEndOfLine( fph, Log, fBootDb );
 		  continue;
 		}
 
@@ -878,7 +875,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 		  break;
 		}
 
-	      word = ReadWord( fph, Log );
+	      const char *word = ReadWord( fph, Log, fBootDb );
 
 	      if ( !StrCmp( word, "OBJECT" ) )     /* Objects      */
 		{

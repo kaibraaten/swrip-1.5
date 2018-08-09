@@ -20,12 +20,10 @@
  * -- Altrag
  */
 
-extern bool fBootDb;
-
 /*
  * Read a letter from a file.
  */
-char ReadChar( FILE *fp, Logger *log )
+char ReadChar( FILE *fp, Logger *log, bool fBootDb )
 {
   char c = '\0';
 
@@ -51,7 +49,7 @@ char ReadChar( FILE *fp, Logger *log )
 /*
  * Read a float number from a file. Turn the result into a float value.
  */
-float ReadFloat( FILE *fp, Logger *log )
+float ReadFloat( FILE *fp, Logger *log, bool fBootDb )
 {
   float number = 0.0;
   bool sign = false, decimal = false;
@@ -128,7 +126,7 @@ float ReadFloat( FILE *fp, Logger *log )
 
   if( c == '|' )
     {
-      number += ReadFloat( fp, log );
+      number += ReadFloat( fp, log, fBootDb );
     }
   else if( c != ' ' )
     {
@@ -147,7 +145,7 @@ float ReadFloat( FILE *fp, Logger *log )
 /*
  * Read a number from a file.
  */
-int ReadInt( FILE *fp, Logger *log )
+int ReadInt( FILE *fp, Logger *log, bool fBootDb )
 {
   int number = 0;
   bool sign = false;
@@ -204,7 +202,7 @@ int ReadInt( FILE *fp, Logger *log )
 
   if ( c == '|' )
     {
-      number += ReadInt( fp, log );
+      number += ReadInt( fp, log, fBootDb );
     }
   else if ( c != ' ' )
     {
@@ -223,7 +221,7 @@ int ReadInt( FILE *fp, Logger *log )
 /*
  * Read a string from file fp
  */
-char *ReadStringToTilde( FILE *fp, Logger *log )
+char *ReadStringToTilde( FILE *fp, Logger *log, bool fBootDb )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
   char *plast = buf;
@@ -292,7 +290,7 @@ char *ReadStringToTilde( FILE *fp, Logger *log )
 /*
  * Read to end of line (for comments).
  */
-void ReadToEndOfLine( FILE *fp, Logger *log )
+void ReadToEndOfLine( FILE *fp, Logger *log, bool fBootDb )
 {
   char c = 0;
 
@@ -327,7 +325,7 @@ void ReadToEndOfLine( FILE *fp, Logger *log )
 /*
  * Read to end of line into static buffer                       -Thoric
  */
-char *ReadLine( FILE *fp, Logger *log )
+char *ReadLine( FILE *fp, Logger *log, bool fBootDb )
 {
   static char line[MAX_STRING_LENGTH];
   char *pline = line;
@@ -403,7 +401,7 @@ char *ReadLine( FILE *fp, Logger *log )
 /*
  * Read one word (into static buffer).
  */
-char *ReadWord( FILE *fp, Logger *log )
+char *ReadWord( FILE *fp, Logger *log, bool fBootDb )
 {
   static char word[MAX_INPUT_LENGTH];
   char *pword = NULL;

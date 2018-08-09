@@ -378,11 +378,11 @@ Character *ReadVendor( FILE *fp )
   Character *mob = NULL;
   const char *word = NULL;
 
-  word = feof( fp ) ? "END" : ReadWord( fp, Log );
+  word = feof( fp ) ? "END" : ReadWord( fp, Log, fBootDb );
 
   if ( !StrCmp(word, "Vnum") )
     {
-      vnum_t vnum = ReadInt( fp, Log );
+      vnum_t vnum = ReadInt( fp, Log, fBootDb );
 
       mob = CreateMobile( GetProtoMobile(vnum));
 
@@ -390,7 +390,7 @@ Character *ReadVendor( FILE *fp )
         {
           for ( ; ; )
             {
-              word = feof( fp ) ? "END" : ReadWord( fp, Log );
+              word = feof( fp ) ? "END" : ReadWord( fp, Log, fBootDb );
 
               if ( !StrCmp( word, "END" ) )
 		{
@@ -406,7 +406,7 @@ Character *ReadVendor( FILE *fp )
     {
       for ( ; ; )
         {
-          word = feof( fp ) ? "END" : ReadWord( fp, Log );
+          word = feof( fp ) ? "END" : ReadWord( fp, Log, fBootDb );
 
           if ( !StrCmp( word, "END" ) )
 	    {
@@ -424,13 +424,13 @@ Character *ReadVendor( FILE *fp )
       vnum_t inroom = 0;
       Room *pRoomIndex = NULL;
 
-      word = feof( fp ) ? "END" : ReadWord( fp, Log );
+      word = feof( fp ) ? "END" : ReadWord( fp, Log, fBootDb );
 
       switch ( CharToUppercase(word[0]) )
 	{
 	case '*':
 	  fMatch = true;
-	  ReadToEndOfLine( fp, Log );
+	  ReadToEndOfLine( fp, Log, fBootDb );
 	  break;
 
 	case '#':
@@ -441,7 +441,7 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'D':
-	  KEY( "Description", mob->Description, ReadStringToTilde(fp, Log));
+	  KEY( "Description", mob->Description, ReadStringToTilde(fp, Log, fBootDb));
 	  break;
 
 	case 'E':
@@ -493,15 +493,15 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'F':
-	  KEY( "Flags", mob->Flags, ReadInt(fp, Log));
+	  KEY( "Flags", mob->Flags, ReadInt(fp, Log, fBootDb));
 	  break;
 
 	case 'G':
-	  KEY("Gold", mob->Gold, ReadInt(fp, Log));
+	  KEY("Gold", mob->Gold, ReadInt(fp, Log, fBootDb));
 	  break;
 
 	case 'H':
-	  KEY("Home", inroom, ReadInt(fp, Log) );
+	  KEY("Home", inroom, ReadInt(fp, Log, fBootDb) );
 	  break;
 
 	case 'L':
@@ -511,15 +511,15 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'O':
-	  KEY ("Owner", mob->Owner, ReadStringToTilde(fp, Log) );
+	  KEY ("Owner", mob->Owner, ReadStringToTilde(fp, Log, fBootDb) );
 	  break;
 
 	case 'P':
-	  KEY( "Position", mob->Position, (PositionType)ReadInt( fp, Log ) );
+	  KEY( "Position", mob->Position, (PositionType)ReadInt( fp, Log, fBootDb ) );
 	  break;
 
 	case 'S':
-	  KEY( "Short", mob->ShortDescr, ReadStringToTilde(fp, Log));
+	  KEY( "Short", mob->ShortDescr, ReadStringToTilde(fp, Log, fBootDb));
 	  break;
 	}
 
