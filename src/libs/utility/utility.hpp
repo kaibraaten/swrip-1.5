@@ -173,7 +173,6 @@ char *TrimStringEnd( char *string, char junk = ' ' );
 char *TrimString( char *string, char junk  = ' ');
 char *Scramble( const std::string &argument, int modifier );
 bool IsNullOrEmpty( const char *str );
-const char *IntToString( int num );
 
 /* file_io.c */
 char ReadChar( FILE *fp, Logger *log, bool fBootDb );
