@@ -44,3 +44,68 @@ TEST_F(MiscTests, urange)
   EXPECT_EQ(lower_bound, urange(lower_bound, 25, upper_bound));
   EXPECT_EQ(upper_bound, urange(lower_bound, 125, upper_bound));
 }
+
+TEST_F(MiscTests, FlagString)
+{
+  std::vector<const char*> flagNames;
+
+  for(int i = 0; i < 32; ++i)
+    {
+      char *name = CopyString(std::to_string(i));
+      flagNames.push_back(name);
+    }
+
+  unsigned long bitvector = 1 << 4 | 1 << 7 | 1 << 23;
+  const std::string expected = "4 7 23";
+
+  const std::string actual = FlagString(bitvector, &flagNames[0]);
+
+  EXPECT_EQ(expected, actual);
+
+  for(const char *name : flagNames)
+    {
+      char *nonConst = const_cast<char*>(name);
+      FreeMemory(nonConst);
+    }
+}
+
+TEST_F(MiscTests, StripColorCodes_StripsForeground)
+{
+  char *input = "&WYo &gman!&G";
+  const std::string expected = "Yo man!";
+
+  const std::string actual = StripColorCodes(input);
+
+  EXPECT_EQ(expected, actual);
+}
+
+TEST_F(MiscTests, StripColorCodes_StripsBackground)
+{
+  char *input = "^WYo ^xman!^G";
+  const std::string expected = "Yo man!";
+
+  const std::string actual = StripColorCodes(input);
+
+  EXPECT_EQ(expected, actual);
+}
+
+TEST_F(MiscTests, StripColorCodes_StripsMixOfForeAndBackground)
+{
+  char *input = "^WYo ^xma&Bn!^G";
+  const std::string expected = "Yo man!";
+
+  const std::string actual = StripColorCodes(input);
+
+  EXPECT_EQ(expected, actual);
+}
+
+TEST_F(MiscTests, PunctuateNumber)
+{
+  EXPECT_STREQ("5", PunctuateNumber(5));
+  EXPECT_STREQ("50", PunctuateNumber(50));
+  EXPECT_STREQ("500", PunctuateNumber(500));
+  EXPECT_STREQ("5,000", PunctuateNumber(5000));
+  EXPECT_STREQ("2,000,000,000", PunctuateNumber(2000000000));
+  EXPECT_STREQ("-5", PunctuateNumber(-5));
+  EXPECT_STREQ("-5,000", PunctuateNumber(-5000));
+}

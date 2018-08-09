@@ -250,8 +250,7 @@ int Interpolate( int level, int value_00, int value_32 )
  * This function should properly remove the color codes from a string
  * Not sure if its any use to anyone, but i thought i'd give it out.
  *
- * I'm not asking for my name to be displayed, but i would like to have my name\
- at
+ * I'm not asking for my name to be displayed, but i would like to have my name at
  * least still attached to this function. Altho, it certainly would be nice.
  *
  * Feel free to contact me if you have any problems.
@@ -280,10 +279,11 @@ char *StripColorCodes( char *text )
       /* Loop through until you've hit your terminating 0 */
       while (text[i] != '\0')
         {
-          while (text[i] == '&')
+          while (text[i] == '&' || text[i] == '^')
             {
               i += 2;
             }
+          
 	  if ( text[i] != '\0' )
             {
               if ( isspace(text[i]) )
@@ -300,7 +300,9 @@ char *StripColorCodes( char *text )
                 }
             }
           else
-            buf[j] = '\0';
+            {
+              buf[j] = '\0';
+            }
         }
 
       buf[j] = '\0';
