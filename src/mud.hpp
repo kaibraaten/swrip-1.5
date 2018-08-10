@@ -1402,7 +1402,7 @@ void RecoverFromCopyover( void );
 bool IsNameAcceptable( const std::string &name );
 const char *DrunkSpeech( const std::string &argument, Character *ch );
 void TalkChannel( Character *ch, const std::string &text,
-                  int channel, const char *verb );
+                  int channel, const std::string &verb );
 bool IsFollowingInCircle( const Character *ch, const Character *victim );
 void StartFollowing( Character *ch, Character *master );
 void StopFollowing( Character *ch );
@@ -1429,7 +1429,7 @@ void SetBExitFlag( Exit *pexit, int flag );
 void RemoveBExitFlag( Exit *pexit, int flag );
 Room *GenerateExit( Room *in_room, Exit **pexit );
 void ClearVirtualRooms( void );
-Exit *FindDoor( Character *ch, const char *arg, bool quiet );
+Exit *FindDoor( Character *ch, const std::string &arg, bool quiet );
 Exit *GetExit( const Room *room, DirectionType dir );
 Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum );
 Exit *GetExitNumber( const Room *room, short count );
@@ -1527,15 +1527,15 @@ void Nanny( Descriptor *d, char *argument );
 /* comm.c */
 int MakeColorSequence( const char *col, char *buf, Descriptor *d );
 void CloseDescriptor( Descriptor *dclose, bool force );
-bool WriteToDescriptor( socket_t desc, char *txt, int length );
-void WriteToBuffer( Descriptor *d, const char *txt, size_t length );
+bool WriteToDescriptor( socket_t desc, const std::string &txt, int length );
+void WriteToBuffer( Descriptor *d, const std::string &txt, size_t length );
 void SetCharacterColor( short AType, const Character *ch );
-void Act( short AType, const char *format, Character *ch,
+void Act( short AType, const std::string &format, Character *ch,
           const void *arg1, const void *arg2, int type );
 socket_t InitializeSocket( short port );
-bool CheckReconnect( Descriptor *d, const char *name, bool fConn );
-unsigned char CheckPlaying( Descriptor *d, const char *name, bool kick );
-bool CheckMultiplaying( Descriptor *d, const char *name );
+bool CheckReconnect( Descriptor *d, const std::string &name, bool fConn );
+unsigned char CheckPlaying( Descriptor *d, const std::string &name, bool kick );
+bool CheckMultiplaying( Descriptor *d, const std::string &name );
 void InitializeDescriptor(Descriptor *dnew, socket_t desc);
 void FreeDescriptor( Descriptor *d );
 

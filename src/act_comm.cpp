@@ -180,7 +180,7 @@ const char *DrunkSpeech( const std::string &argument, Character *ch )
 /*
  * Generic channel function.
  */
-void TalkChannel( Character *ch, const std::string &text, int channel, const char *verb )
+void TalkChannel( Character *ch, const std::string &text, int channel, const std::string &verb )
 {
   const char *argument = text.c_str();
   char buf[MAX_STRING_LENGTH];
@@ -248,7 +248,7 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const cha
 
   if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_SILENCE) )
     {
-      ch->Echo( "You can't %s.\r\n", verb );
+      ch->Echo( "You can't %s.\r\n", verb.c_str() );
       return;
     }
 
@@ -258,8 +258,8 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const cha
     {
     default:
       SetCharacterColor( AT_GOSSIP, ch );
-      ch->Echo( "&z&CYou %s over the public network&c, '&C%s&c'\r\n", verb, argument );
-      sprintf( buf, "&z&C$n &C%ss over the public network&c, '&C$t&c'",     verb );
+      ch->Echo( "&z&CYou %s over the public network&c, '&C%s&c'\r\n", verb.c_str(), argument );
+      sprintf( buf, "&z&C$n &C%ss over the public network&c, '&C$t&c'", verb.c_str() );
       break;
 
     case CHANNEL_CLANTALK:
@@ -295,14 +295,14 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const cha
     case CHANNEL_YELL:
     case CHANNEL_SHOUT:
       SetCharacterColor( AT_GOSSIP, ch );
-      ch->Echo( "You %s, '%s'\r\n", verb, argument );
-      sprintf( buf, "$n %ss, '$t'",     verb );
+      ch->Echo( "You %s, '%s'\r\n", verb.c_str(), argument );
+      sprintf( buf, "$n %ss, '$t'", verb.c_str() );
       break;
 
     case CHANNEL_ASK:
       SetCharacterColor( AT_OOC, ch );
-      ch->Echo( "&z&g(&GOOC&g)&Y You %s, '%s'\r\n", verb, argument );
-      sprintf( buf, "&z&g(&GOOC&g)&Y $n &Y%ss, '$t'",     verb );
+      ch->Echo( "&z&g(&GOOC&g)&Y You %s, '%s'\r\n", verb.c_str(), argument );
+      sprintf( buf, "&z&g(&GOOC&g)&Y $n &Y%ss, '$t'", verb.c_str() );
       break;
 
     case CHANNEL_NEWBIE:
@@ -322,8 +322,8 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const cha
 
     case CHANNEL_WARTALK:
       SetCharacterColor( AT_WARTALK, ch );
-      ch->Echo( "&z&cYou %s '&R%s&c'\r\n", verb, argument );
-      sprintf( buf, "&z&c$n &c%ss '&R$t&c'", verb );
+      ch->Echo( "&z&cYou %s '&R%s&c'\r\n", verb.c_str(), argument );
+      sprintf( buf, "&z&c$n &c%ss '&R$t&c'", verb.c_str() );
       break;
 
     case CHANNEL_AVTALK:
@@ -362,7 +362,7 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const cha
   if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf2, "%s: %s (%s)", IsNpc( ch ) ? ch->ShortDescr : ch->Name,
-               argument, verb );
+               argument, verb.c_str() );
       AppendToFile( LOG_FILE, buf2 );
     }
 

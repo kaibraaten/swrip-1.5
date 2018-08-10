@@ -299,7 +299,7 @@ void SaveCharacter( Character *ch )
 
   ReEquipCharacter( ch );
 
-  WriteCorpses(ch, NULL);
+  WriteCorpses(ch, "");
   quitting_char = NULL;
   saving_char   = NULL;
 }
@@ -360,7 +360,7 @@ void SaveClone( Character *ch )
   ch->PCData->Clones--;
   ReEquipCharacter( ch );
 
-  WriteCorpses(ch, NULL);
+  WriteCorpses(ch, "");
   quitting_char = NULL;
   saving_char   = NULL;
 }
