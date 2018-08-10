@@ -1149,7 +1149,7 @@ static bool FlushBuffer( Descriptor *d, bool fPrompt )
 /*
  * Append onto an output buffer.
  */
-void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
+void WriteToBuffer( Descriptor *d, const std::string &txt, size_t length )
 {
   if ( !d )
     {
@@ -1167,7 +1167,7 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
    * Find length in case caller didn't.
    */
   if ( length <= 0 )
-    length = strlen(txt);
+    length = txt.size();
 
   /*
    * Initial \r\n if needed.
@@ -1199,7 +1199,7 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
   /*
    * Copy.
    */
-  strncpy( d->OutBuffer + d->OutTop, txt, length );
+  strncpy( d->OutBuffer + d->OutTop, txt.c_str(), length );
   d->OutTop += length;
   d->OutBuffer[d->OutTop] = '\0';
 }
@@ -1211,20 +1211,18 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
  * If this gives errors on very long blocks (like 'ofind all'),
  *   try lowering the max block size.
  */
-bool WriteToDescriptor( socket_t desc, char *txt, int length )
+bool WriteToDescriptor( socket_t desc, const std::string &txt, int length )
 {
-  int iStart;
-  ssize_t nWrite;
-  int nBlock;
+  ssize_t nWrite = 0;
 
   if ( length <= 0 )
-    length = strlen(txt);
+    length = txt.size();
 
-  for ( iStart = 0; iStart < length; iStart += nWrite )
+  for ( int iStart = 0; iStart < length; iStart += nWrite )
     {
-      nBlock = umin( length - iStart, 4096 );
+      int nBlock = umin( length - iStart, 4096 );
 
-      if( ( nWrite = send( desc, txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR)
+      if( ( nWrite = send( desc, txt.c_str() + iStart, nBlock, 0 ) ) == SOCKET_ERROR)
         {
           Log->Bug("Write_to_descriptor: error on socket %d: %s",
                    desc, strerror( GETERROR ) );
@@ -1239,11 +1237,9 @@ bool WriteToDescriptor( socket_t desc, char *txt, int length )
 /*
  * Look for link-dead player to reconnect.
  */
-bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
+bool CheckReconnect( Descriptor *d, const std::string &name, bool fConn )
 {
-  Character *ch;
-
-  for ( ch = FirstCharacter; ch; ch = ch->Next )
+  for ( Character *ch = FirstCharacter; ch; ch = ch->Next )
     {
       if ( !IsNpc(ch)
            && ( !fConn || !ch->Desc )
@@ -1293,11 +1289,9 @@ bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
  * Check if already playing.
  */
 
-bool CheckMultiplaying( Descriptor *d, const char *name )
+bool CheckMultiplaying( Descriptor *d, const std::string &name )
 {
-  Descriptor *dold;
-
-  for ( dold = FirstDescriptor; dold; dold = dold->Next )
+  for ( Descriptor *dold = FirstDescriptor; dold; dold = dold->Next )
     {
       if ( dold != d
            && (  dold->Character || dold->Original )
@@ -1324,21 +1318,18 @@ bool CheckMultiplaying( Descriptor *d, const char *name )
 
 }
 
-unsigned char CheckPlaying( Descriptor *d, const char *name, bool kick )
+unsigned char CheckPlaying( Descriptor *d, const std::string &name, bool kick )
 {
-  Character *ch;
-  Descriptor *dold;
-  int   cstate;
-
-  for ( dold = FirstDescriptor; dold; dold = dold->Next )
+  for ( Descriptor *dold = FirstDescriptor; dold; dold = dold->Next )
     {
       if ( dold != d
            && (  dold->Character || dold->Original )
            &&   !StrCmp( name, dold->Original
                           ? dold->Original->Name : dold->Character->Name ) )
         {
-          cstate = dold->ConnectionState;
-          ch = dold->Original ? dold->Original : dold->Character;
+          int cstate = dold->ConnectionState;
+          Character *ch = dold->Original ? dold->Original : dold->Character;
+
           if ( !ch->Name
                || ( cstate != CON_PLAYING && cstate != CON_EDITING ) )
             {
@@ -1347,8 +1338,10 @@ unsigned char CheckPlaying( Descriptor *d, const char *name, bool kick )
               Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
               return BERR;
             }
+
           if ( !kick )
             return true;
+
           WriteToBuffer( d, "Already playing... Kicking off old connection.\r\n", 0 );
           WriteToBuffer( dold, "Kicking off old connection... bye!\r\n", 0 );
           CloseDescriptor( dold, false );
@@ -1554,21 +1547,21 @@ static char *ActString(const char *format, Character *to, Character *ch,
 }
 #undef NAME
 
-void Act( short AType, const char *format, Character *ch, const void *arg1, const void *arg2, int type )
+void Act( short AType, const std::string &format, Character *ch, const void *arg1, const void *arg2, int type )
 {
-  char *txt;
-  Character *to;
+  char *txt = nullptr;
+  Character *to = nullptr;
   Character *vch = (Character *)arg2;
 
   /*
    * Discard null and zero-length messages.
    */
-  if ( IsNullOrEmpty( format ) )
+  if ( format.empty())
     return;
 
   if ( !ch )
     {
-      Log->Bug( "Act: null ch. (%s)", format );
+      Log->Bug( "Act: null ch. (%s)", format.c_str() );
       return;
     }
 
@@ -1590,13 +1583,13 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
       if ( !vch )
         {
           Log->Bug( "Act: null vch with TO_VICT." );
-          Log->Bug( "%s (%s)", ch->Name, format );
+          Log->Bug( "%s (%s)", ch->Name, format.c_str() );
           return;
         }
       if ( !vch->InRoom )
         {
           Log->Bug( "Act: vch in NULL room!" );
-          Log->Bug( "%s -> %s (%s)", ch->Name, vch->Name, format );
+          Log->Bug( "%s -> %s (%s)", ch->Name, vch->Name, format.c_str() );
           return;
         }
       to = vch;
@@ -1607,7 +1600,7 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
     {
       Object *to_obj;
 
-      txt = ActString(format, NULL, ch, arg1, arg2);
+      txt = ActString(format.c_str(), NULL, ch, arg1, arg2);
 
       if ( IsBitSet(to->InRoom->mprog.progtypes, ACT_PROG) )
         RoomProgActTrigger(txt, to->InRoom, ch, (Object *)arg1, (void *)arg2);
@@ -1644,7 +1637,7 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
       if(!CanSeeCharacter(to, ch) && type != TO_VICT )
         continue;
 
-      txt = ActString(format, to, ch, arg1, arg2);
+      txt = ActString(format.c_str(), to, ch, arg1, arg2);
 
       if (to && to->Desc)
         {

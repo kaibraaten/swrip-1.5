@@ -1025,15 +1025,14 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   return retcode;
 }
 
-Exit *FindDoor( Character *ch, const char *arg, bool quiet )
+Exit *FindDoor( Character *ch, const std::string &arg, bool quiet )
 {
   Exit *pexit = NULL;
   DirectionType door = DIR_INVALID;
 
-  if (arg == NULL || !StrCmp(arg,""))
+  if (arg.empty())
     return NULL;
 
-  pexit = NULL;
   if ( !StrCmp( arg, "n" ) || !StrCmp( arg, "north" ) )
     {
       door = DIR_NORTH;
@@ -1088,7 +1087,7 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
 
       if ( !quiet )
 	{
-	  Act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
+	  Act( AT_PLAIN, "You see no $T here.", ch, NULL, arg.c_str(), TO_CHAR );
 	}
 
       return NULL;
@@ -1097,7 +1096,7 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
   if ( (pexit = GetExit( ch->InRoom, door )) == NULL )
     {
       if ( !quiet)
-        Act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
+        Act( AT_PLAIN, "You see no $T here.", ch, NULL, arg.c_str(), TO_CHAR );
       return NULL;
     }
 
@@ -1106,7 +1105,7 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
 
   if ( IsBitSet(pexit->Flags, EX_SECRET) )
     {
-      Act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
+      Act( AT_PLAIN, "You see no $T here.", ch, NULL, arg.c_str(), TO_CHAR );
       return NULL;
     }
 
