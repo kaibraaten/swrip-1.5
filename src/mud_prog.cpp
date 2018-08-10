@@ -91,7 +91,7 @@ static void MudProgDriver( char* com_list, Character* mob,
 			  Character* actor, Object* obj,
 			  void* vo, bool single_step );
 static bool MudProgKeywordCheck( const char *argu, const char *argl );
-static void ObjProgWordlistCheck( char *arg, Character *mob, Character *actor, Object *obj, void *vo, int type, Object *iobj );
+static void ObjProgWordlistCheck( const std::string &arg, Character *mob, Character *actor, Object *obj, void *vo, int type, Object *iobj );
 static void MudProgSetSupermob(Object *obj);
 static bool ObjProgPercentCheck( Character *mob, Character *actor, Object *obj, void *vo, int type);
 static void RoomProgPercentCheck( Character *mob, Character *actor, Object *obj, void *vo, int type);
@@ -2151,7 +2151,7 @@ static bool MudProgKeywordCheck( const char *argu, const char *argl )
  *  on a certain percent, or trigger on a keyword or word phrase.
  *  To see how this works, look at the various trigger routines..
  */
-void MobProgWordlistCheck( char *arg, Character *mob, Character *actor,
+void MobProgWordlistCheck( const std::string &arg, Character *mob, Character *actor,
                            Object *obj, void *vo, int type )
 {
   char        temp1[ MAX_STRING_LENGTH ];
@@ -2176,7 +2176,7 @@ void MobProgWordlistCheck( char *arg, Character *mob, Character *actor,
 	      list[i] = CharToLowercase( list[i] );
 	    }
 
-	  strcpy( temp2, arg );
+	  strcpy( temp2, arg.c_str() );
 	  dupl = temp2;
 
 	  for ( i = 0; i < strlen( dupl ); i++ )
@@ -2303,7 +2303,7 @@ static void MobileActAdd( Character *mob )
  * make sure you remember to modify the variable names to the ones in the
  * trigger calls.
  */
-void MobProgActTrigger( char *buf, Character *mob, Character *ch,
+void MobProgActTrigger( const std::string &buf, Character *mob, Character *ch,
                         Object *obj, void *vo)
 {
   MPROG_ACT_LIST * tmp_act = NULL;
@@ -2322,7 +2322,7 @@ void MobProgActTrigger( char *buf, Character *mob, Character *ch,
       for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
 	{
 	  if ( mprg->type & ACT_PROG
-	       && MudProgKeywordCheck( buf, mprg->arglist ) )
+	       && MudProgKeywordCheck( buf.c_str(), mprg->arglist ) )
 	    {
 	      found = true;
 	      break;
@@ -2643,12 +2643,10 @@ void ObjProgGreetTrigger( Character *ch )
     }
 }
 
-void ObjProgSpeechTrigger( char *txt, Character *ch )
+void ObjProgSpeechTrigger( const std::string &txt, Character *ch )
 {
-  Object *vobj;
-
   /* supermob is set and released in ObjProgWordlistCheck */
-  for ( vobj=ch->InRoom->FirstContent; vobj; vobj = vobj->NextContent )
+  for ( Object *vobj = ch->InRoom->FirstContent; vobj; vobj = vobj->NextContent )
     {
       if  ( vobj->Prototype->mprog.progtypes & SPEECH_PROG )
 	{
@@ -2856,7 +2854,7 @@ void ObjProgPushTrigger( Character *ch, Object *obj )
     }
 }
 
-void ObjProgActTrigger( char *buf, Object *mobj, Character *ch,
+void ObjProgActTrigger( const std::string &buf, Object *mobj, Character *ch,
                         Object *obj, void *vo )
 {
   if ( mobj->Prototype->mprog.progtypes & ACT_PROG )
@@ -2880,12 +2878,10 @@ void ObjProgActTrigger( char *buf, Object *mobj, Character *ch,
     }
 }
 
-static void ObjProgWordlistCheck( char *arg, Character *mob, Character *actor,
+static void ObjProgWordlistCheck( const std::string &arg, Character *mob, Character *actor,
 				  Object *obj, void *vo, int type, Object *iobj )
 {
-  MPROG_DATA *mprg;
-
-  for ( mprg = iobj->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
+  for ( MPROG_DATA *mprg = iobj->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
     {
       if ( mprg->type & type )
 	{
@@ -2905,7 +2901,7 @@ static void ObjProgWordlistCheck( char *arg, Character *mob, Character *actor,
 	      list[i] = CharToLowercase( list[i] );
 	    }
 
-	  strcpy( temp2, arg );
+	  strcpy( temp2, arg.c_str() );
 	  dupl = temp2;
 
 	  for ( i = 0; i < strlen( dupl ); i++ )
@@ -3026,7 +3022,7 @@ static void RoomProgPercentCheck( Character *mob, Character *actor, Object *obj,
  *  Hold on this
  * Unhold. -- Alty
  */
-void RoomProgActTrigger( char *buf, Room *room, Character *ch,
+void RoomProgActTrigger( const std::string &buf, Room *room, Character *ch,
                         Object *obj, void *vo )
 {
   if ( room->mprog.progtypes & ACT_PROG )
@@ -3274,7 +3270,7 @@ void RoomProgHourTrigger( Character *ch )
 }
 
 /* Written by Jenny, Nov 29/95 */
-void ProgBug( const char *str, const Character *mob )
+void ProgBug( const std::string &str, const Character *mob )
 {
   /* Check if we're dealing with supermob, which means the bug occurred
      in a room or obj prog. */
@@ -3283,12 +3279,12 @@ void ProgBug( const char *str, const Character *mob )
       /* It's supermob.  In MudProgSetSupermob and RoomProgSetSupermob, the description
          was set to indicate the object or room, so we just need to show
          the description in the bug message. */
-      Log->Bug( "%s, %s.", str,
+      Log->Bug( "%s, %s.", str.c_str(),
                 mob->Description == NULL ? "(unknown)" : mob->Description );
     }
   else
     {
-      Log->Bug( "%s, Mob #%ld.", str, mob->Prototype->Vnum );
+      Log->Bug( "%s, Mob #%ld.", str.c_str(), mob->Prototype->Vnum );
     }
 }
 

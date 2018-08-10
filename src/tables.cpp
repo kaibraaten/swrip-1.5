@@ -29,23 +29,23 @@
 #include "skill.hpp"
 #include "log.hpp"
 
-SpellFun *GetSpellFunction( const char *name )
+SpellFun *GetSpellFunction( const std::string &name )
 {
   SpellFun *fun_handle = NULL;
 #ifdef _WIN32
-  fun_handle = (SpellFun*) GetProcAddress( SysData.DlHandle, name );
+  fun_handle = (SpellFun*) GetProcAddress( SysData.DlHandle, name.c_str() );
 
   if( !fun_handle )
     {
-      Log->Bug( "Could not find symbol '%s': %s", name, GetLastError() );
+      Log->Bug( "Could not find symbol '%s': %s", name.c_str(), GetLastError() );
       return spell_notfound;
     }
 #else
-  fun_handle = (SpellFun*)(long)dlsym( SysData.DlHandle, name );
+  fun_handle = (SpellFun*)(long)dlsym( SysData.DlHandle, name.c_str() );
 
   if( !fun_handle )
     {
-      Log->Bug( "Could not find symbol '%s': %s", name, dlerror() );
+      Log->Bug( "Could not find symbol '%s': %s", name.c_str(), dlerror() );
       return spell_notfound;
     }
 #endif
@@ -53,23 +53,23 @@ SpellFun *GetSpellFunction( const char *name )
   return fun_handle;
 }
 
-CmdFun *GetSkillFunction( const char *name )
+CmdFun *GetSkillFunction( const std::string &name )
 {
   CmdFun *fun_handle = NULL;
 #ifdef _WIN32
-  fun_handle = (CmdFun*) GetProcAddress( SysData.DlHandle, name );
+  fun_handle = (CmdFun*) GetProcAddress( SysData.DlHandle, name.c_str() );
 
   if( !fun_handle )
     {
-      Log->Bug( "Could not find symbol '%s': %s", name, GetLastError() );
+      Log->Bug( "Could not find symbol '%s': %s", name.c_str(), GetLastError() );
       return skill_notfound;
     }
 #else
-  fun_handle = (CmdFun*)(long)dlsym( SysData.DlHandle, name );
+  fun_handle = (CmdFun*)(long)dlsym( SysData.DlHandle, name.c_str() );
 
   if( !fun_handle )
     {
-      Log->Bug( "Could not find symbol '%s': %s", name, dlerror() );
+      Log->Bug( "Could not find symbol '%s': %s", name.c_str(), dlerror() );
       return skill_notfound;
     }
 #endif

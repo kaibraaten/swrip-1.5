@@ -20,56 +20,53 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <array>
 #include <sys/types.h>
 #include <cstdio>
 #include <cstring>
 #include <ctime>
 #include "mud.hpp"
 
-typedef struct spec_fun_entry
+struct spec_fun_entry
 {
   const char *fun_name;
   SpecFun *fun_ptr;
-} SpecFun_ENTRY;
-
-static const SpecFun_ENTRY spec_fun_table[] = {
-  { "spec_jedi",              spec_jedi },
-  { "spec_dark_jedi",         spec_dark_jedi },
-  { "spec_fido",              spec_fido },
-  { "spec_guardian",          spec_guardian },
-  { "spec_janitor",           spec_janitor },
-  { "spec_poison",            spec_poison },
-  { "spec_thief",             spec_thief },
-  { "spec_auth",              spec_auth },
-  { "spec_stormtrooper",      spec_stormtrooper },
-  { "spec_rebel_trooper",     spec_rebel_trooper },
-  { "spec_customs_smut",      spec_customs_smut },
-  { "spec_customs_alcohol",   spec_customs_alcohol },
-  { "spec_customs_weapons",   spec_customs_weapons },
-  { "spec_customs_spice",     spec_customs_spice },
-  { "spec_police_attack",     spec_police_attack },
-  { "spec_police_jail",       spec_police_jail },
-  { "spec_police_fine",       spec_police_fine },
-  { "spec_police_undercover", spec_police_undercover },
-  { "spec_police",            spec_police },
-  { "spec_clan_guard",        spec_clan_guard },
-  { "spec_newbie_pilot",      spec_newbie_pilot }
 };
 
-static size_t SpecFunTableSize( void )
-{
-  return sizeof( spec_fun_table ) / sizeof( *spec_fun_table );
-}
+static const std::array<const spec_fun_entry, 21> spec_fun_table =
+  {
+   spec_fun_entry { "spec_jedi",              spec_jedi },
+   { "spec_dark_jedi",         spec_dark_jedi },
+   { "spec_fido",              spec_fido },
+   { "spec_guardian",          spec_guardian },
+   { "spec_janitor",           spec_janitor },
+   { "spec_poison",            spec_poison },
+   { "spec_thief",             spec_thief },
+   { "spec_auth",              spec_auth },
+   { "spec_stormtrooper",      spec_stormtrooper },
+   { "spec_rebel_trooper",     spec_rebel_trooper },
+   { "spec_customs_smut",      spec_customs_smut },
+   { "spec_customs_alcohol",   spec_customs_alcohol },
+   { "spec_customs_weapons",   spec_customs_weapons },
+   { "spec_customs_spice",     spec_customs_spice },
+   { "spec_police_attack",     spec_police_attack },
+   { "spec_police_jail",       spec_police_jail },
+   { "spec_police_fine",       spec_police_fine },
+   { "spec_police_undercover", spec_police_undercover },
+   { "spec_police",            spec_police },
+   { "spec_clan_guard",        spec_clan_guard },
+   { "spec_newbie_pilot",      spec_newbie_pilot }
+  };
 
 /*
  * Given a name, return the appropriate spec fun.
  */
-SpecFun *SpecialLookup( const char *name )
+SpecFun *SpecialLookup( const std::string &name )
 {
   SpecFun *fun_ptr = NULL;
   size_t i = 0;
 
-  for( i = 0; i < SpecFunTableSize(); ++i )
+  for( i = 0; i < spec_fun_table.size(); ++i )
     {
       if( !StrCmp( name, spec_fun_table[i].fun_name ) )
         {
@@ -88,7 +85,7 @@ const char *LookupSpecial( SpecFun *special )
 {
   size_t i = 0;
 
-  for( i = 0; i < SpecFunTableSize(); ++i )
+  for( i = 0; i < spec_fun_table.size(); ++i )
     {
       if( spec_fun_table[i].fun_ptr == special )
         {
