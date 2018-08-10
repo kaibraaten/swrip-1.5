@@ -44,7 +44,7 @@ static void MobProgReadPrograms( FILE* fp, ProtoMobile *pMobIndex );
 static void ObjProgReadPrograms( FILE* fp, ProtoObject *pObjIndex );
 static void RoomProgReadPrograms( FILE* fp, Room *pRoomIndex );
 
-void LoadAreaFile( Area *tarea, const char *filename )
+void LoadAreaFile( Area *tarea, const std::string &filename )
 {
   char buf[MAX_STRING_LENGTH];
 
@@ -57,12 +57,11 @@ void LoadAreaFile( Area *tarea, const char *filename )
       return;
     }
 
-  sprintf( buf, "%s%s", AREA_DIR, filename );
+  sprintf( buf, "%s%s", AREA_DIR, filename.c_str() );
 
   if ( ( fpArea = fopen( buf, "r" ) ) == NULL )
     {
-      Log->Bug( "%s: error loading file (can't open)", __FUNCTION__ );
-      Log->Bug( filename );
+      Log->Bug( "%s: error loading file (can't open) %s", __FUNCTION__, filename.c_str() );
       return;
     }
 
@@ -142,12 +141,16 @@ void LoadAreaFile( Area *tarea, const char *filename )
                tarea->VnumRanges.Room.First, tarea->VnumRanges.Room.Last,
                tarea->VnumRanges.Object.First, tarea->VnumRanges.Object.Last,
                tarea->VnumRanges.Mob.First, tarea->VnumRanges.Mob.Last );
+
       if ( !tarea->Author )
         tarea->Author = CopyString( "" );
+
       SetBit( tarea->Status, AREA_LOADED );
     }
   else
-    fprintf( stderr, "(%s)\n", filename );
+    {
+      fprintf( stderr, "(%s)\n", filename.c_str() );
+    }
 }
 
 void FixAreaExits( Area *tarea )
@@ -1862,7 +1865,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
   return;
 }
 
-Area *GetArea( const char *name )
+Area *GetArea( const std::string &name )
 {
   Area *area = NULL;
 
