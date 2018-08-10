@@ -294,13 +294,13 @@ static void ToWizFile( const char *line );
 static void AddToWizList( const char *name, int level );
 static void PushSystemData( lua_State *L, const void* );
 
-void ShutdownMud( const char *reason )
+void ShutdownMud( const std::string &reason )
 {
   FILE *fp;
 
   if ( (fp = fopen( SHUTDOWN_FILE, "a" )) != NULL )
     {
-      fprintf( fp, "%s\n", reason );
+      fprintf( fp, "%s\n", reason.c_str() );
       fclose( fp );
     }
 }
@@ -1238,7 +1238,7 @@ Object *CreateObject( ProtoObject *proto, int level )
 /*
  * Get an extra description from a list.
  */
-char *GetExtraDescription( const char *name, ExtraDescription *ed )
+char *GetExtraDescription( const std::string &name, ExtraDescription *ed )
 {
   for ( ; ed; ed = ed->Next )
     if ( IsName( name, ed->Keyword ) )
@@ -1319,24 +1319,26 @@ Room *GetRoom( vnum_t vnum )
 /*
  * Dump a text file to a player, a line at a time               -Thoric
  */
-void ShowFile( const Character *ch, const char *filename )
+void ShowFile( const Character *ch, const std::string &filename )
 {
-  FILE *fp;
-  char buf[MAX_STRING_LENGTH];
-  int c;
-  int num = 0;
+  FILE *fp = nullptr;
 
-  if ( (fp = fopen( filename, "r" )) != NULL )
+  if ( (fp = fopen( filename.c_str(), "r" )) != NULL )
     {
+      int num = 0;
+      char buf[MAX_STRING_LENGTH];
+      
       while ( !feof(fp) )
         {
           while ( ( buf[ num ] = fgetc( fp ) ) != (char) EOF
 		  && buf[num] != '\n'
 		  && buf[num] != '\r'
 		  && num < (MAX_STRING_LENGTH-2))
-            num++;
-
-          c = fgetc(fp);
+            {
+              num++;
+            }
+          
+          int c = fgetc(fp);
 
           if ( (c != '\n' && c != '\r') || c == buf[num] )
             ungetc(c, fp);
@@ -1636,7 +1638,7 @@ Room *MakeRoom( vnum_t vnum )
  * Create a new INDEX object (for online building)              -Thoric
  * Option to clone an existing index object.
  */
-ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
+ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
 {
   ProtoObject *pObjIndex = NULL, *cObjIndex = NULL;
   char buf[MAX_STRING_LENGTH];
@@ -1654,9 +1656,9 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
 
   if ( !cObjIndex )
     {
-      sprintf( buf, "A %s", name );
+      sprintf( buf, "A %s", name.c_str() );
       pObjIndex->ShortDescr    = CopyString( buf  );
-      sprintf( buf, "A %s is here.", name );
+      sprintf( buf, "A %s is here.", name.c_str() );
       pObjIndex->Description    = CopyString( buf );
       pObjIndex->ActionDescription    = CopyString( "" );
       pObjIndex->ShortDescr[0] = CharToLowercase(pObjIndex->ShortDescr[0]);
@@ -1722,7 +1724,7 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
  * Create a new INDEX mobile (for online building)              -Thoric
  * Option to clone an existing index mobile.
  */
-ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
+ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name )
 {
   ProtoMobile *pMobIndex, *cMobIndex;
   char buf[MAX_STRING_LENGTH];
@@ -1739,9 +1741,9 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
 
   if ( !cMobIndex )
     {
-      sprintf( buf, "A newly created %s", name );
+      sprintf( buf, "A newly created %s", name.c_str() );
       pMobIndex->ShortDescr    = CopyString( buf  );
-      sprintf( buf, "Some god abandoned a newly created %s here.\r\n", name );
+      sprintf( buf, "Some god abandoned a newly created %s here.\r\n", name.c_str() );
       pMobIndex->LongDescr             = CopyString( buf );
       pMobIndex->Description    = CopyString( "" );
       pMobIndex->ShortDescr[0] = CharToLowercase(pMobIndex->ShortDescr[0]);
@@ -2002,7 +2004,7 @@ static void LoadBuildList( void )
  * Sorted, and flagged if loaded.
  */
 void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
-		const char *loadst, const char *notloadst )
+		const std::string &loadst, const std::string &notloadst )
 {
   const Area *pArea = NULL;
   const Area *first_sort = NULL;
@@ -2038,7 +2040,7 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
                 pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
                 pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,
                 pArea->VnumRanges.Mob.First, pArea->VnumRanges.Mob.Last,
-                IsBitSet(pArea->Status, AREA_LOADED) ? loadst : notloadst );
+                IsBitSet(pArea->Status, AREA_LOADED) ? loadst.c_str() : notloadst.c_str() );
       count++;
     }
 
@@ -2274,21 +2276,21 @@ static void LoadSystemData( void )
 /*
  * Append a string to a file.
  */
-void AppendFile( const Character *ch, const char *file, const char *str )
+void AppendFile( const Character *ch, const std::string &file, const std::string &str )
 {
   FILE *fp;
 
-  if ( IsNpc(ch) || IsNullOrEmpty( str ) )
+  if ( IsNpc(ch) || str.empty() )
     return;
 
-  if ( ( fp = fopen( file, "a" ) ) == NULL )
+  if ( ( fp = fopen( file.c_str(), "a" ) ) == NULL )
     {
       ch->Echo( "Could not open the file!\n\r" );
     }
   else
     {
       fprintf( fp, "[%5ld] %s: %s\n",
-	       ch->InRoom ? ch->InRoom->Vnum : 0, ch->Name, str );
+	       ch->InRoom ? ch->InRoom->Vnum : 0, ch->Name, str.c_str() );
       fclose( fp );
     }
 }

@@ -1,6 +1,7 @@
 #ifndef _SWRIP_AREA_HPP_
 #define _SWRIP_AREA_HPP_
 
+#include <string>
 #include "types.hpp"
 
 struct Area
@@ -65,14 +66,14 @@ extern Area *FirstBSort;
 extern Area *LastBSort;
 
 void FixAreaExits( Area *tarea );
-void LoadAreaFile( Area *tarea, const char *filename );
+void LoadAreaFile( Area *tarea, const std::string &filename );
 void SortArea( Area *pArea, bool proto );
-Area *GetArea( const char *nameOrFile );
+Area *GetArea( const std::string &nameOrFile );
 void AreaUpdate( void );
 void CloseArea( Area *pArea );
 void FreeArea( Area *are );
 void AssignAreaTo( Character *ch );
-void FoldArea( Area *tarea, char *filename, bool install );
+void FoldArea( Area *tarea, const std::string &filename, bool install );
 void CleanResets( Area *tarea );
 
 #endif

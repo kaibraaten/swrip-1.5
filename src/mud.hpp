@@ -1544,25 +1544,25 @@ void ReadComment( Character *ch, FILE *fp );
 void WriteComments( const Character *ch, FILE *fp );
 
 /* db.c */
-void ShutdownMud( const char *reason );
+void ShutdownMud( const std::string &reason );
 void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
-                const char *loadst, const char *notloadst );
+                const std::string &loadst, const std::string &notloadst );
 void SaveSystemData( const SystemData sys );
-void AppendFile( const Character *ch, const char *file, const char *str );
-void ShowFile( const Character *ch, const char *filename );
+void AppendFile( const Character *ch, const std::string &file, const std::string &str );
+void ShowFile( const Character *ch, const std::string &filename );
 void BootDatabase( bool fCopyover );
 void AddCharacter( Character *ch );
 Character *AllocateMobile( ProtoMobile *pMobIndex );
 Character *CreateMobile( ProtoMobile *pMobIndex );
 Object *CreateObject( ProtoObject *pObjIndex, int level );
 Object *AllocateObject( ProtoObject *pObjIndex, int level );
-char *GetExtraDescription( const char *name, ExtraDescription *ed );
+char *GetExtraDescription( const std::string &name, ExtraDescription *ed );
 ProtoMobile *GetProtoMobile( vnum_t vnum );
 ProtoObject *GetProtoObject( vnum_t vnum );
 Room *GetRoom( vnum_t vnum );
 Room *MakeRoom( vnum_t vnum );
-ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name );
-ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name );
+ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name );
+ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name );
 Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door );
 void RandomizeExits( Room *room, short maxdir );
 void MakeWizlist( void );
@@ -1571,8 +1571,8 @@ bool DeleteObject( ProtoObject *obj );
 bool DeleteMobile( ProtoMobile *mob );
 
 /* build.c */
-void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
-void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
+void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::string &argument );
+void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::string &argument );
 void WriteAreaList( void );
 
 bool CanModifyRoom( const Character *ch, const Room *room );
@@ -1581,12 +1581,12 @@ bool CanModifyCharacter( const Character *ch, const Character *mob );
 
 bool CanMedit( const Character *ch, const ProtoMobile *mob );
 void FreeReset( Area *are, Reset *res );
-ExtraDescription *SetRExtra( Room *room, char *keywords );
-bool DelRExtra( Room *room, char *keywords );
-ExtraDescription *SetOExtra( Object *obj, char *keywords );
-bool DelOExtra( Object *obj, char *keywords );
-ExtraDescription *SetOExtraProto( ProtoObject *obj, char *keywords );
-bool DelOExtraProto( ProtoObject *obj, char *keywords );
+ExtraDescription *SetRExtra( Room *room, const std::string &keywords );
+bool DelRExtra( Room *room, const std::string &keywords );
+ExtraDescription *SetOExtra( Object *obj, const std::string &keywords );
+bool DelOExtra( Object *obj, const std::string &keywords );
+ExtraDescription *SetOExtraProto( ProtoObject *obj, const std::string &keywords );
+bool DelOExtraProto( ProtoObject *obj, const std::string &keywords );
 Reset *ParseReset( const Area *tarea, char *argument, const Character *ch );
 
 /* fight.c */

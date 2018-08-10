@@ -168,7 +168,7 @@ void FreeReset( Area *are, Reset *res )
   FreeMemory( res );
 }
 
-ExtraDescription *SetRExtra( Room *room, char *keywords )
+ExtraDescription *SetRExtra( Room *room, const std::string &keywords )
 {
   ExtraDescription *ed;
 
@@ -188,7 +188,7 @@ ExtraDescription *SetRExtra( Room *room, char *keywords )
   return ed;
 }
 
-bool DelRExtra( Room *room, char *keywords )
+bool DelRExtra( Room *room, const std::string &keywords )
 {
   ExtraDescription *rmed;
 
@@ -208,7 +208,7 @@ bool DelRExtra( Room *room, char *keywords )
   return true;
 }
 
-ExtraDescription *SetOExtra( Object *obj, char *keywords )
+ExtraDescription *SetOExtra( Object *obj, const std::string &keywords )
 {
   ExtraDescription *ed;
 
@@ -228,7 +228,7 @@ ExtraDescription *SetOExtra( Object *obj, char *keywords )
   return ed;
 }
 
-bool DelOExtra( Object *obj, char *keywords )
+bool DelOExtra( Object *obj, const std::string &keywords )
 {
   ExtraDescription *rmed;
 
@@ -247,7 +247,7 @@ bool DelOExtra( Object *obj, char *keywords )
   return true;
 }
 
-ExtraDescription *SetOExtraProto( ProtoObject *obj, char *keywords )
+ExtraDescription *SetOExtraProto( ProtoObject *obj, const std::string &keywords )
 {
   ExtraDescription *ed;
 
@@ -267,7 +267,7 @@ ExtraDescription *SetOExtraProto( ProtoObject *obj, char *keywords )
   return ed;
 }
 
-bool DelOExtraProto( ProtoObject *obj, char *keywords )
+bool DelOExtraProto( ProtoObject *obj, const std::string &keywords )
 {
   ExtraDescription *rmed;
 
@@ -288,7 +288,7 @@ bool DelOExtraProto( ProtoObject *obj, char *keywords )
   return true;
 }
 
-void FoldArea( Area *tarea, char *filename, bool install )
+void FoldArea( Area *tarea, const std::string &filename, bool install )
 {
   Reset *treset = NULL;
   Room *room = NULL;
@@ -310,14 +310,14 @@ void FoldArea( Area *tarea, char *filename, bool install )
   sprintf( buf, "Saving %s...", tarea->Filename );
   Log->LogStringPlus( buf, LOG_NORMAL, LEVEL_GREATER );
 
-  sprintf( buf, "%s%s", AREA_DIR, filename );
-  sprintf( backup, "%s%s.bak", AREA_DIR, filename );
+  sprintf( buf, "%s%s", AREA_DIR, filename.c_str() );
+  sprintf( backup, "%s%s.bak", AREA_DIR, filename.c_str() );
   rename( buf, backup );
 
   if ( ( fpout = fopen( buf, "w" ) ) == NULL )
     {
       Log->Bug( "%s: fopen", __FUNCTION__ );
-      perror( filename );
+      perror( filename.c_str() );
       return;
     }
 
@@ -760,20 +760,20 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   char arg4[MAX_INPUT_LENGTH];
-  char letter;
-  int extra, val1, val2, val3;
-  int value;
-  Room *room;
-  Exit *pexit;
+  char letter = '*';
+  int extra = 0;
+  int value = 0;
+  Room *room = nullptr;
+  Exit *pexit = nullptr;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
   argument = OneArgument( argument, arg4 );
-  extra = 0; letter = '*';
-  val1 = atoi( arg2 );
-  val2 = atoi( arg3 );
-  val3 = atoi( arg4 );
+
+  int val1 = atoi( arg2 );
+  int val2 = atoi( arg3 );
+  int val3 = atoi( arg4 );
   
   if ( IsNullOrEmpty( arg1 ) )
     {
@@ -1038,7 +1038,7 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
     return MakeReset( letter, extra, val1, val3, val2 );
 }
 
-void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
+void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::string &argument )
 {
   if ( mptype != -1 )
     {
@@ -1067,7 +1067,7 @@ void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
 /*
  * RoomProg Support
  */
-void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
+void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::string &argument )
 {
   if ( mptype != -1 )
     {
