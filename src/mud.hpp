@@ -1638,12 +1638,12 @@ const char *MobProgTypeToName( int type );
 
 /* mud_prog.c */
 void InitializeSupermob( void );
-void MobProgWordlistCheck( char * arg, Character *mob,
+void MobProgWordlistCheck( const std::string &arg, Character *mob,
                            Character* actor, Object* object,
                            void* vo, int type );
 void MobProgPercentCheck( Character *mob, Character* actor,
                           Object* object, void* vo, int type );
-void MobProgActTrigger( char* buf, Character* mob,
+void MobProgActTrigger( const std::string &buf, Character* mob,
                         Character* ch, Object* obj, void* vo );
 void MobProgBribeTrigger( Character* mob, Character* ch, int amount );
 void MobProgEntryTrigger( Character* mob );
@@ -1657,7 +1657,7 @@ void MobProgSpeechTrigger( char* txt, Character* mob );
 void MobProgScriptTrigger( Character *mob );
 void MobProgHourTrigger( Character *mob );
 void MobProgTimeTrigger( Character *mob );
-void ProgBug( const char *str, const Character *mob );
+void ProgBug( const std::string &str, const Character *mob );
 void RoomProgSetSupermob( Room *room );
 void ReleaseSupermob( void );
 void RoomActUpdate( void );
@@ -1784,12 +1784,12 @@ void LoadCorpses( void );
 void WriteCorpses( const Character *ch, std::string name );
 
 /* special.c */
-SpecFun *SpecialLookup( const char *name );
+SpecFun *SpecialLookup( const std::string &name );
 const char *LookupSpecial( SpecFun *special );
 
 /* tables.c */
-SpellFun *GetSpellFunction( const char *name );
-CmdFun *GetSkillFunction( const char *name );
+SpellFun *GetSpellFunction( const std::string &name );
+CmdFun *GetSkillFunction( const std::string &name );
 
 /* update.c */
 void AdvanceLevel( Character *ch , int ability );
@@ -1809,7 +1809,7 @@ const char *GetCharacterRace( const Character *ch );
  */
 extern Character *supermob;
 
-void ObjProgSpeechTrigger( char *txt, Character *ch );
+void ObjProgSpeechTrigger( const std::string &txt, Character *ch );
 void ObjProgRandomTrigger( Object *obj );
 void ObjProgWearTrigger( Character *ch, Object *obj );
 bool ObjProgUseTrigger( Character *ch, Object *obj,
@@ -1839,16 +1839,10 @@ void RoomProgTimeTrigger( Character *ch );
 void RoomProgHourTrigger( Character *ch );
 char *RoomProgTypeToName(int type );
 
-#define OPROG_ACT_TRIGGER
-#ifdef OPROG_ACT_TRIGGER
-void ObjProgActTrigger( char *buf, Object *mobj, Character *ch,
+void ObjProgActTrigger( const std::string &buf, Object *mobj, Character *ch,
                         Object *obj, void *vo );
-#endif
-#define RPROG_ACT_TRIGGER
-#ifdef RPROG_ACT_TRIGGER
-void RoomProgActTrigger( char *buf, Room *room, Character *ch,
+void RoomProgActTrigger( const std::string &buf, Room *room, Character *ch,
                          Object *obj, void *vo );
-#endif
 
 #define GET_BETTED_ON(ch)    ((ch)->BettedOn)
 #define GET_BET_AMT(ch) ((ch)->BetAmount)
