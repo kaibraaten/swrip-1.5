@@ -514,8 +514,10 @@ static Object *FindQuill( const Character *ch )
   return quill;
 }
 
-void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
+void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MAIL )
 {
+  char arg_passed_buf[MAX_STRING_LENGTH] = { '\0' };
+  char *arg_passed = arg_passed_buf;
   char buf[MAX_STRING_LENGTH] = { '\0' };
   char arg[MAX_INPUT_LENGTH] = { '\0' };
   Board *board = NULL;
@@ -558,6 +560,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       return;
     }
 
+  strcpy(arg_passed, stl_arg_passed.c_str());
   SetCharacterColor( AT_NOTE, ch );
   arg_passed = OneArgument( arg_passed, arg );
   SmashTilde( arg_passed );
@@ -1447,12 +1450,12 @@ Board *FindBoardHere( const Character *ch )
   return NULL;
 }
 
-Board *GetBoard( const char *name )
+Board *GetBoard( const std::string &name )
 {
   return Boards->Find([name](const auto &board){ return StrCmp(board->Name, name) == 0; });
 }
 
-Board *AllocateBoard(const char *name)
+Board *AllocateBoard(const std::string &name)
 {
   Board *board = new Board();
   board->Name           = CopyString( ToLower(name) );
