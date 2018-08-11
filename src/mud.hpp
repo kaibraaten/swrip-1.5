@@ -55,34 +55,34 @@ extern "C" {
  */
 struct WhoData
 {
-  WhoData *Previous;
-  WhoData *Next;
-  char     *Text;
-  int       Type;
+  WhoData *Previous = nullptr;
+  WhoData *Next = nullptr;
+  char     *Text = nullptr;
+  int       Type = 0;
 };
 
 struct TimeInfo
 {
-  int Hour;
-  int Day;
-  int Month;
-  int Year;
+  int Hour = 0;
+  int Day = 0;
+  int Month = 0;
+  int Year = 0;
 };
 
 struct HourMinSec
 {
-  int Hour;
-  int Minute;
-  int Second;
-  int Manual;
+  int Hour = 0;
+  int Minute = 0;
+  int Second = 0;
+  int Manual = 0;
 };
 
 struct Weather
 {
-  int Mmhg;
-  int Change;
-  int Sky;
-  int Sunlight;
+  int Mmhg = 0;
+  int Change = 0;
+  int Sky = 0;
+  int Sunlight = 0;
 };
 
 /*
@@ -90,44 +90,45 @@ struct Weather
  */
 struct Wizard
 {
-  Wizard *Next;
-  Wizard *Last;
-  char   *Name;
-  short   Level;
+  Wizard *Next = nullptr;
+  Wizard *Last = nullptr;
+  char   *Name = nullptr;
+  short   Level = 0;
 };
 
 /*
  * Descriptor (channel) structure.
  */
-struct Descriptor
+class Descriptor
 {
-  Descriptor *Next;
-  Descriptor *Previous;
-  Descriptor *SnoopBy;
-  struct Character *Character;
-  struct Character *Original;
+public:
+  Descriptor *Next = nullptr;
+  Descriptor *Previous = nullptr;
+  Descriptor *SnoopBy = nullptr;
+  struct Character *Character = nullptr;
+  struct Character *Original = nullptr;
 
   struct
   {
-    char *Hostname;
-    char *HostIP;
-    short Port;
+    char *Hostname = nullptr;
+    char *HostIP = nullptr;
+    short Port = 0;
   } Remote;
 
-  socket_t  Socket;
-  short     ConnectionState;
-  short     Idle;
-  bool      fCommand;
+  socket_t  Socket = INVALID_SOCKET;
+  short     ConnectionState = 0;
+  short     Idle = 0;
+  bool      fCommand = false;
   char      InBuffer[MAX_INBUF_SIZE];
   char      InComm[MAX_INPUT_LENGTH];
   char      InLast[MAX_INPUT_LENGTH];
-  int       Repeat;
-  char     *OutBuffer;
-  unsigned  long OutSize;
-  int       OutTop;
+  int       Repeat = 0;
+  char     *OutBuffer  = nullptr;
+  unsigned  long OutSize = 0;
+  int       OutTop = 0;
 
-  int           NewState;
-  unsigned char PreviousColor;
+  int           NewState = 0;
+  unsigned char PreviousColor = 0;
 };
 
 /*
@@ -145,72 +146,72 @@ public:
 
   }
 
-  short ToHit;
-  short ToDamage;
-  short Carry;
-  short Wield;
+  short ToHit = 0;
+  short ToDamage = 0;
+  short Carry = 0;
+  short Wield = 0;
 };
 
 struct IntelligenceBonusType
 {
-  short Learn;
+  short Learn = 0;
 };
 
 struct WisdomBonusType
 {
-  short Practice;
+  short Practice = 0;
 };
 
 struct DexterityBonusType
 {
-  short Defensive;
+  short Defensive = 0;
 };
 
 struct ConstitutionBonusType
 {
-  short HitPoint;
-  short Shock;
+  short HitPoint = 0;
+  short Shock = 0;
 };
 
 struct CharismaBonusType
 {
-  short Charm;
+  short Charm = 0;
 };
 
 struct LuckBonusType
 {
-  short Luck;
+  short Luck = 0;
 };
 
 struct ForceBonusType
 {
-  short Force;
+  short Force = 0;
 };
 
 /* Mob program structures */
 struct act_prog_data
 {
-  struct act_prog_data *Next;
-  void                 *vo;
+  struct act_prog_data *Next = nullptr;
+  void                 *vo = nullptr;
 };
 
 struct MPROG_ACT_LIST
 {
-  MPROG_ACT_LIST *Next;
-  char           *buf;
-  Character      *ch;
-  Object       *obj;
-  void           *vo;
+  MPROG_ACT_LIST *Next = nullptr;
+  char           *buf = nullptr;
+  Character      *ch = nullptr;
+  Object       *obj = nullptr;
+  void           *vo = nullptr;
 };
 
 struct MPROG_DATA
 {
-  MPROG_DATA *Next;
-  int         type;
-  bool        triggered;
-  int         resetdelay;
-  char       *arglist;
-  char       *comlist;
+  MPROG_DATA *Next = nullptr;
+  int         type = 0;
+  bool        triggered = false;
+  int         resetdelay = 0;
+  char       *arglist = nullptr;
+  char       *comlist = nullptr;
 };
 
 extern bool MOBtrigger;
@@ -221,37 +222,37 @@ extern bool fBootDb;
 struct Race
 {
   char Name[20];   /* Race name                    */
-  int Affected;               /* Default affect bitvectors    */
+  int Affected = 0;               /* Default affect bitvectors    */
 
   struct
   {
-    short ModStr;               /* Str bonus/penalty            */
-    short ModDex;               /* Dex      "                   */
-    short ModWis;               /* Wis      "                   */
-    short ModInt;               /* Int      "                   */
-    short ModCon;               /* Con      "                   */
-    short ModCha;               /* Cha      "                   */
-    short ModLck;               /* Lck      "                   */
-    short ModFrc;               /* Frc      "                   */
+    short ModStr = 0;               /* Str bonus/penalty            */
+    short ModDex = 0;               /* Dex      "                   */
+    short ModWis = 0;               /* Wis      "                   */
+    short ModInt = 0;               /* Int      "                   */
+    short ModCon = 0;               /* Con      "                   */
+    short ModCha = 0;               /* Cha      "                   */
+    short ModLck = 0;               /* Lck      "                   */
+    short ModFrc = 0;               /* Frc      "                   */
   } Stats;
 
   std::array<int, MAX_ABILITY> AbilityMod;
 
-  short Hit;
-  short Mana;
-  int   Resistant;
-  int   Susceptible;
-  int   ClassRestriction;       /* Flags for illegal classes    */
-  int   Language;               /* Default racial language      */
-  bool AvailableForSelection;   /* Race can be selected by players */
+  short Hit = 0;
+  short Mana = 0;
+  int   Resistant = 0;
+  int   Susceptible = 0;
+  int   ClassRestriction = 0;       /* Flags for illegal classes    */
+  int   Language = 0;               /* Default racial language      */
+  bool AvailableForSelection = false;   /* Race can be selected by players */
 };
 
 struct Storeroom
 {
-  Storeroom       *Next;
-  Storeroom       *Previous;
-  vnum_t           Vnum;
-  struct Room *Room;
+  Storeroom       *Next = nullptr;
+  Storeroom       *Previous = nullptr;
+  vnum_t           Vnum = INVALID_VNUM;
+  struct Room *Room = nullptr;
 };
 
 /*
@@ -259,13 +260,13 @@ struct Storeroom
  */
 struct Affect
 {
-  Affect *Next;
-  Affect *Previous;
-  short Type;
-  short Duration;
-  short Location;
-  int   Modifier;
-  int   AffectedBy;
+  Affect *Next = nullptr;
+  Affect *Previous = nullptr;
+  short Type = 0;
+  short Duration = 0;
+  short Location = 0;
+  int Modifier = 0;
+  int AffectedBy = 0;
 };
 
 /*
@@ -273,21 +274,21 @@ struct Affect
  */
 struct SmaugAffect
 {
-  SmaugAffect *Next;
-  char *Duration;
-  short Location;
-  char *Modifier;
-  int   AffectedBy;
+  SmaugAffect *Next = nullptr;
+  char *Duration = nullptr;
+  short Location = 0;
+  char *Modifier = nullptr;
+  int AffectedBy = 0;
 };
 
 struct Timer
 {
-  Timer  *Previous;
-  Timer  *Next;
-  CmdFun *DoFun;
-  int     Value;
-  short   Type;
-  short   Count;
+  Timer  *Previous = nullptr;
+  Timer  *Next = nullptr;
+  CmdFun *DoFun = nullptr;
+  int     Value = 0;
+  short   Type = 0;
+  short   Count = 0;
 };
 
 /*
@@ -296,109 +297,109 @@ struct Timer
  */
 struct ProtoMobile
 {
-  ProtoMobile *Next;
-  ProtoMobile *NextSort;
-  SpecFun *spec_fun;
-  SpecFun *spec_2;
-  struct Shop *Shop;
-  struct RepairShop *RepairShop;
-  char           *Name;
-  char           *ShortDescr;
-  char           *LongDescr;
-  char           *Description;
-  vnum_t          Vnum;
-  short           Count;
-  short           Killed;
-  SexType           Sex;
-  short           Level;
-  int             Flags;
-  int             AffectedBy;
-  short           Alignment;
-  short           MobThac0;               /* Unused */
-  short           ArmorClass;
-  short           HitNoDice;
-  short           HitSizeDice;
-  short           HitPlus;
-  short           DamNoDice;
-  short           DamSizeDice;
-  short           DamPlus;
-  short           NumberOfAttacks;
-  int             Gold;
-  int             exp;
-  int             BodyParts;
-  int             Resistant;
-  int             Immune;
-  int             Susceptible;
-  int             AttackFlags;
-  int             DefenseFlags;
-  int             Speaks;
-  int             Speaking;
-  PositionType    Position;
-  PositionType    DefaultPosition;
-  short           Height;
-  short           Weight;
-  short           Race;
-  short           HitRoll;
-  short           DamRoll;
-  int             VipFlags;
+  ProtoMobile *Next = nullptr;
+  ProtoMobile *NextSort = nullptr;
+  SpecFun *spec_fun = nullptr;
+  SpecFun *spec_2 = nullptr;
+  struct Shop *Shop = nullptr;
+  struct RepairShop *RepairShop = nullptr;
+  char           *Name = nullptr;
+  char           *ShortDescr = nullptr;
+  char           *LongDescr = nullptr;
+  char           *Description = nullptr;
+  vnum_t          Vnum = INVALID_VNUM;
+  short           Count = 0;
+  short           Killed = 0;
+  SexType         Sex = 0;
+  short           Level = 0;
+  int             Flags = 0;
+  int             AffectedBy = 0;
+  short           Alignment = 0;
+  short           MobThac0 = 0;               /* Unused */
+  short           ArmorClass = 0;
+  short           HitNoDice = 0;
+  short           HitSizeDice = 0;
+  short           HitPlus = 0;
+  short           DamNoDice = 0;
+  short           DamSizeDice = 0;
+  short           DamPlus = 0;
+  short           NumberOfAttacks = 0;
+  int             Gold = 0;
+  int             exp = 0;
+  int             BodyParts = 0;
+  int             Resistant = 0;
+  int             Immune = 0;
+  int             Susceptible = 0;
+  int             AttackFlags = 0;
+  int             DefenseFlags = 0;
+  int             Speaks = 0;
+  int             Speaking = 0;
+  PositionType    Position = 0;
+  PositionType    DefaultPosition = 0;
+  short           Height = 0;
+  short           Weight = 0;
+  short           Race = 0;
+  short           HitRoll = 0;
+  short           DamRoll = 0;
+  int             VipFlags = 0;
 
   struct
   {
-    MPROG_DATA *mudprogs;
-    int progtypes;
+    MPROG_DATA *mudprogs = nullptr;
+    int progtypes = 0;
   } mprog;
 
   struct
   {
-    short PermStr;
-    short PermInt;
-    short PermWis;
-    short PermDex;
-    short PermCon;
-    short PermCha;
-    short PermLck;
-    short PermFrc;
+    short PermStr = 0;
+    short PermInt = 0;
+    short PermWis = 0;
+    short PermDex = 0;
+    short PermCon = 0;
+    short PermCha = 0;
+    short PermLck = 0;
+    short PermFrc = 0;
   } Stats;
 
   struct
   {
-    short PoisonDeath;
-    short Wand;
-    short ParaPetri;
-    short Breath;
-    short SpellStaff;
+    short PoisonDeath = 0;
+    short Wand = 0;
+    short ParaPetri = 0;
+    short Breath = 0;
+    short SpellStaff = 0;
   } Saving;
 };
 
 
 struct HuntHateFear
 {
-  char      *Name;
-  Character *Who;
+  char      *Name = nullptr;
+  Character *Who = nullptr;
 };
 
 struct Fight
 {
-  Character *Who;
-  long        Xp;
-  short      Align;
-  short      Duration;
-  short      TimesKilled;
+  Character *Who = nullptr;
+  long        Xp = 0;
+  short      Align = 0;
+  short      Duration = 0;
+  short      TimesKilled = 0;
 };
 
 struct ExtractedCharacter
 {
-  ExtractedCharacter *Next;
-  struct Character         *Character;
-  Room *InRoom;
-  ch_ret             RetCode;
-  bool               Extract;
+  ExtractedCharacter *Next = nullptr;
+  struct Character *Character = nullptr;
+  Room *InRoom = nullptr;
+  ch_ret             RetCode = rNONE;
+  bool               Extract = false;
 };
 
 struct KilledData
 {
-  vnum_t Vnum;
-  char  Count;
+  vnum_t Vnum = INVALID_VNUM;
+  char  Count = 0;
 };
 
 /*
@@ -406,8 +407,8 @@ struct KilledData
  */
 struct LiquidType
 {
-  char  *Name;
-  char  *Color;
+  char  *Name = nullptr;
+  char  *Color = nullptr;
   std::array<short, 3> Affect;
 };
 
@@ -416,10 +417,10 @@ struct LiquidType
  */
 struct ExtraDescription
 {
-  ExtraDescription *Next;       /* Next in list                     */
-  ExtraDescription *Previous;       /* Previous in list                 */
-  char             *Keyword;              /* Keyword in look/examine          */
-  char             *Description;          /* What to see                      */
+  ExtraDescription *Next = nullptr;       /* Next in list                     */
+  ExtraDescription *Previous = nullptr;       /* Previous in list                 */
+  char             *Keyword = nullptr;              /* Keyword in look/examine          */
+  char             *Description = nullptr;          /* What to see                      */
 };
 
 /*
@@ -427,33 +428,33 @@ struct ExtraDescription
  */
 struct ProtoObject
 {
-  ProtoObject   *Next;
-  ProtoObject   *NextSort;
-  ExtraDescription *FirstExtraDescription;
-  ExtraDescription *LastExtraDescription;
-  Affect      *FirstAffect;
-  Affect      *LastAffect;
-  char             *Name;
-  char             *ShortDescr;
-  char             *Description;
-  char             *ActionDescription;
-  vnum_t            Vnum;
-  short             Level;
-  ItemTypes         ItemType;
-  int               Flags;
-  int               WearFlags;
-  short             Count;
-  short             Weight;
-  int               Cost;
+  ProtoObject   *Next = nullptr;
+  ProtoObject   *NextSort = nullptr;
+  ExtraDescription *FirstExtraDescription = nullptr;
+  ExtraDescription *LastExtraDescription = nullptr;
+  Affect      *FirstAffect = nullptr;
+  Affect      *LastAffect = nullptr;
+  char             *Name = nullptr;
+  char             *ShortDescr = nullptr;
+  char             *Description = nullptr;
+  char             *ActionDescription = nullptr;
+  vnum_t            Vnum = INVALID_VNUM;
+  short             Level = 0;
+  ItemTypes         ItemType = 0;
+  int               Flags = 0;
+  int               WearFlags = 0;
+  short             Count = 0;
+  short             Weight = 0;
+  int               Cost = 0;
   std::array<int, MAX_OVAL> Value;
-  int               Serial;
-  short             Layers;
-  int               Rent;                   /* Unused */
+  int               Serial = 0;
+  short             Layers = 0;
+  int               Rent = 0;                   /* Unused */
 
   struct
   {
-    MPROG_DATA *mudprogs;
-    int progtypes;
+    MPROG_DATA *mudprogs = nullptr;
+    int progtypes = 0;
   } mprog;
 };
 
@@ -463,43 +464,43 @@ struct ProtoObject
  */
 struct Object
 {
-  Object         *Next;
-  Object         *Previous;
-  Object         *NextContent;
-  Object         *PreviousContent;
-  Object         *FirstContent;
-  Object         *LastContent;
-  Object         *InObject;
-  Character        *CarriedBy;
-  ExtraDescription *FirstExtraDescription;
-  ExtraDescription *LastExtraDescription;
-  Affect      *FirstAffect;
-  Affect      *LastAffect;
-  ProtoObject   *Prototype;
-  Room  *InRoom;
-  char             *ArmedBy;
-  char             *Name;
-  char             *ShortDescr;
-  char             *Description;
-  char             *ActionDescription;
-  ItemTypes         ItemType;
-  int               Flags;
-  int               WearFlags;
-  int               BlasterSetting;
-  WearLocation      WearLoc;
-  short             Weight;
-  int               Cost;
-  short             Level;
-  short             Timer;
+  Object         *Next = nullptr;
+  Object         *Previous = nullptr;
+  Object         *NextContent = nullptr;
+  Object         *PreviousContent = nullptr;
+  Object         *FirstContent = nullptr;
+  Object         *LastContent = nullptr;
+  Object         *InObject = nullptr;
+  Character        *CarriedBy = nullptr;
+  ExtraDescription *FirstExtraDescription = nullptr;
+  ExtraDescription *LastExtraDescription = nullptr;
+  Affect      *FirstAffect = nullptr;
+  Affect      *LastAffect = nullptr;
+  ProtoObject   *Prototype = nullptr;
+  Room  *InRoom = nullptr;
+  char             *ArmedBy = nullptr;
+  char             *Name = nullptr;
+  char             *ShortDescr = nullptr;
+  char             *Description = nullptr;
+  char             *ActionDescription = nullptr;
+  ItemTypes         ItemType = 0;
+  int               Flags = 0;
+  int               WearFlags = 0;
+  int               BlasterSetting = 0;
+  WearLocation      WearLoc = 0;
+  short             Weight = 0;
+  int               Cost = 0;
+  short             Level = 0;
+  short             Timer = 0;
   std::array<int, MAX_OVAL> Value;
-  short             Count;          /* support for object grouping */
-  int               Serial;         /* serial number               */
+  short             Count = 0;          /* support for object grouping */
+  int               Serial = 0;         /* serial number               */
 
   struct
   {
-    MPROG_ACT_LIST *mpact;
-    int             mpactnum;
-    short           mpscriptpos;
+    MPROG_ACT_LIST *mpact = nullptr;
+    int             mpactnum = 0;
+    short           mpscriptpos = 0;
   } mprog;
 };
 
@@ -508,18 +509,18 @@ struct Object
  */
 struct Exit
 {
-  Exit       *Previous;           /* previous exit in linked list */
-  Exit       *Next;           /* next exit in linked list     */
-  Exit       *ReverseExit;          /* Reverse exit pointer         */
-  Room *ToRoom;        /* Pointer to destination room  */
-  char            *Keyword;        /* Keywords for exit or door    */
-  char            *Description;    /* Description of exit          */
-  vnum_t           Vnum;           /* Vnum of room exit leads to   */
-  vnum_t           ReverseVnum;          /* Vnum of room in opposite dir */
-  int              Flags;      /* door states & other flags    */
-  vnum_t           Key;            /* Key vnum                     */
-  DirectionType    Direction;           /* Physical "direction"         */
-  short            Distance;       /* how far to the next room     */
+  Exit       *Previous = nullptr;           /* previous exit in linked list */
+  Exit       *Next = nullptr;           /* next exit in linked list     */
+  Exit       *ReverseExit = nullptr;          /* Reverse exit pointer         */
+  Room *ToRoom = nullptr;        /* Pointer to destination room  */
+  char            *Keyword = nullptr;        /* Keywords for exit or door    */
+  char            *Description = nullptr;    /* Description of exit          */
+  vnum_t           Vnum = INVALID_VNUM;           /* Vnum of room exit leads to   */
+  vnum_t           ReverseVnum = INVALID_VNUM;          /* Vnum of room in opposite dir */
+  int              Flags = 0;      /* door states & other flags    */
+  vnum_t           Key = INVALID_VNUM;            /* Key vnum                     */
+  DirectionType    Direction = 0;           /* Physical "direction"         */
+  short            Distance = 0;       /* how far to the next room     */
 };
 
 /*
@@ -527,43 +528,43 @@ struct Exit
  */
 struct SystemData
 {
-  int    MaxPlayersThisBoot;             /* Maximum players this boot   */
-  int    MaxPlayersEver;             /* Maximum players ever   */
-  char  *TimeOfMaxPlayersEver;            /* Time of max ever */
-  bool   NoNameResolving;      /* Hostnames are not resolved  */
-  bool   DenyNewPlayers;       /* New players cannot connect  */
-  bool   NewPlayersMustWaitForAuth;          /* New players must be auth'ed */
-  short  ReadAllMail;          /* Read all player mail(was 54)*/
-  short  ReadMailFree;         /* Read mail for free (was 51) */
-  short  WriteMailFree;        /* Write mail for free(was 51) */
-  short  TakeOthersMail;       /* Take others mail (was 54)   */
-  short  LevelOfBuildChannel;
-  short  LevelOfLogChannel;              /* Level of log channel LEVEL LOG*/
-  short  LevelToModifyProto;     /* Level to modify prototype stuff LEVEL_CREATOR */
-  short  LevelToOverridePrivateFlag; /* override private flag */
-  short  LevelToMsetPlayers;      /* Level to mset a player */
-  short  StunModPlrVsPlr;        /* Stun mod player vs. player */
-  short  StunRegular;           /* Stun difficult */
-  short  DamagePlrVsPlr;         /* Damage mod player vs. player */
-  short  DamagePlrVsMob;         /* Damage mod player vs. mobile */
-  short  DamageMobVsPlr;         /* Damage mod mobile vs. player */
-  short  DamageMobVsMob;         /* Damage mod mobile vs. mobile */
-  short  LevelToGetObjectsWithoutTakeFlag;     /* Get objects without take flag */
-  short  LevelToForcePlayers;          /* The level at which you can use force on players. */
-  short  MaxSN;                 /* Max skills */
-  int    SaveFlags;             /* Toggles for saving conditions */
-  short  SaveFrequency;         /* How old to autosave someone */
-  short  Port;
-  bool DisableHunger;
-  bool CanChooseJedi;
-  bool PermaDeath;
-  bool ExtendedRaceSelection;
+  int    MaxPlayersThisBoot = 0;             /* Maximum players this boot   */
+  int    MaxPlayersEver = 0;             /* Maximum players ever   */
+  char  *TimeOfMaxPlayersEver = nullptr;            /* Time of max ever */
+  bool   NoNameResolving = false;      /* Hostnames are not resolved  */
+  bool   DenyNewPlayers = false;       /* New players cannot connect  */
+  bool   NewPlayersMustWaitForAuth = false;          /* New players must be auth'ed */
+  short  ReadAllMail = 0;          /* Read all player mail(was 54)*/
+  short  ReadMailFree = 0;         /* Read mail for free (was 51) */
+  short  WriteMailFree = 0;        /* Write mail for free(was 51) */
+  short  TakeOthersMail = 0;       /* Take others mail (was 54)   */
+  short  LevelOfBuildChannel = 0;
+  short  LevelOfLogChannel = 0;              /* Level of log channel LEVEL LOG*/
+  short  LevelToModifyProto = 0;     /* Level to modify prototype stuff LEVEL_CREATOR */
+  short  LevelToOverridePrivateFlag = 0; /* override private flag */
+  short  LevelToMsetPlayers = 0;      /* Level to mset a player */
+  short  StunModPlrVsPlr = 0;        /* Stun mod player vs. player */
+  short  StunRegular = 0;           /* Stun difficult */
+  short  DamagePlrVsPlr = 0;         /* Damage mod player vs. player */
+  short  DamagePlrVsMob = 0;         /* Damage mod player vs. mobile */
+  short  DamageMobVsPlr = 0;         /* Damage mod mobile vs. player */
+  short  DamageMobVsMob = 0;         /* Damage mod mobile vs. mobile */
+  short  LevelToGetObjectsWithoutTakeFlag = 0;     /* Get objects without take flag */
+  short  LevelToForcePlayers = 0;          /* The level at which you can use force on players. */
+  short  MaxSN = 0;                 /* Max skills */
+  int    SaveFlags = 0;             /* Toggles for saving conditions */
+  short  SaveFrequency = 0;         /* How old to autosave someone */
+  short  Port = 0;
+  bool DisableHunger = false;
+  bool CanChooseJedi = false;
+  bool PermaDeath = false;
+  bool ExtendedRaceSelection = false;
 #ifdef _WIN32
   HMODULE DlHandle;
 #else
-  void *DlHandle;
+  void *DlHandle = nullptr;
 #endif
-  unsigned char *MCCP_Buffer;
+  unsigned char *MCCP_Buffer = nullptr;
 };
 
 /*
@@ -571,38 +572,38 @@ struct SystemData
  */
 struct Room
 {
-  Room  *Next;
-  Room  *NextSort;
-  Character        *FirstPerson;
-  Character        *LastPerson;
-  Object         *FirstContent;
-  Object         *LastContent;
-  ExtraDescription *FirstExtraDescription;
-  ExtraDescription *LastExtraDescription;
-  struct Area        *Area;
-  Exit        *FirstExit;
-  Exit        *LastExit;
-  Ship        *FirstShip;
-  Ship        *LastShip;
-  char             *Name;
-  char             *Description;
-  vnum_t            Vnum;
-  int               Flags;
-  short             Light;
-  SectorType Sector;
-  vnum_t            TeleVnum;
-  short             TeleDelay;
-  short             Tunnel;              /* max people that will fit */
-  Shuttle     *FirstShuttle;
-  Shuttle     *LastShuttle;
+  Room  *Next = nullptr;
+  Room  *NextSort = nullptr;
+  Character        *FirstPerson = nullptr;
+  Character        *LastPerson = nullptr;
+  Object         *FirstContent = nullptr;
+  Object         *LastContent = nullptr;
+  ExtraDescription *FirstExtraDescription = nullptr;
+  ExtraDescription *LastExtraDescription = nullptr;
+  struct Area        *Area = nullptr;
+  Exit        *FirstExit = nullptr;
+  Exit        *LastExit = nullptr;
+  Ship        *FirstShip = nullptr;
+  Ship        *LastShip = nullptr;
+  char             *Name = nullptr;
+  char             *Description = nullptr;
+  vnum_t            Vnum = INVALID_VNUM;
+  int               Flags = 0;
+  short             Light = 0;
+  SectorType Sector = 0;
+  vnum_t            TeleVnum = INVALID_VNUM;
+  short             TeleDelay = 0;
+  short             Tunnel = 0;              /* max people that will fit */
+  Shuttle     *FirstShuttle = nullptr;
+  Shuttle     *LastShuttle = nullptr;
 
   struct
   {
-    MPROG_ACT_LIST *mpact;
-    int             mpactnum;
-    short           mpscriptpos;
-    MPROG_DATA     *mudprogs;
-    int             progtypes;
+    MPROG_ACT_LIST *mpact = nullptr;
+    int             mpactnum = 0;
+    short           mpscriptpos = 0;
+    MPROG_DATA     *mudprogs = nullptr;
+    int             progtypes = 0;
   } mprog;
 };
 
@@ -611,15 +612,15 @@ struct Room
  */
 struct TeleportData
 {
-  TeleportData   *Next;
-  TeleportData   *Previous;
-  Room *FromRoom;
-  short            TeleportTimer;
+  TeleportData   *Next = nullptr;
+  TeleportData   *Previous = nullptr;
+  Room *FromRoom = nullptr;
+  short            TeleportTimer = 0;
 };
 
 struct timerset
 {
-  int            NumberOfTimesUsed;
+  int            NumberOfTimesUsed = 0;
   struct timeval TotalTime;
   struct timeval MinTime;
   struct timeval MaxTime;
@@ -627,13 +628,13 @@ struct timerset
 
 struct Auction
 {
-  Object  *Item;   /* a pointer to the item */
-  Character *Seller; /* a pointer to the seller - which may NOT quit */
-  Character *Buyer;  /* a pointer to the buyer - which may NOT quit */
-  int        Bet;    /* last bet - or 0 if noone has bet anything */
-  short      Going;  /* 1,2, sold */
-  short      Pulse;  /* how many pulses (.25 sec) until another call-out ? */
-  int        Starting;
+  Object  *Item = nullptr;   /* a pointer to the item */
+  Character *Seller = nullptr; /* a pointer to the seller - which may NOT quit */
+  Character *Buyer = nullptr;  /* a pointer to the buyer - which may NOT quit */
+  int        Bet = 0;    /* last bet - or 0 if noone has bet anything */
+  short      Going = 0;  /* 1,2, sold */
+  short      Pulse = 0;  /* how many pulses (.25 sec) until another call-out ? */
+  int        Starting = 0;
 };
 
 #define CHECK_SUBRESTRICTED(ch)                                         \
