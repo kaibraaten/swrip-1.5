@@ -32,7 +32,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 
-Alias *FindAlias( const Character *ch, const char *original_argument )
+Alias *FindAlias( const Character *ch, const std::string &original_argument )
 {
   char alias_name[MAX_INPUT_LENGTH];
   char argument[MAX_INPUT_LENGTH];
@@ -42,7 +42,7 @@ Alias *FindAlias( const Character *ch, const char *original_argument )
       return nullptr;
     }
 
-  strcpy(argument, original_argument);
+  strcpy(argument, original_argument.c_str());
   OneArgument(argument, alias_name);
 
   for(Alias *alias : ch->PCData->Aliases)
@@ -56,7 +56,7 @@ Alias *FindAlias( const Character *ch, const char *original_argument )
   return nullptr;
 }
 
-Alias *AllocateAlias( const char *name, const char *command )
+Alias *AllocateAlias( const std::string &name, const std::string &command )
 {
   Alias *alias = new Alias();
   alias->Name = CopyString( name );
@@ -97,12 +97,12 @@ void FreeAliases( Character *ch )
   ch->PCData->Aliases.clear();
 }
 
-bool CheckAlias( Character *ch, char *command, char *argument )
+bool CheckAlias( Character *ch, const std::string &command, const std::string &argument )
 {
   char arg[MAX_INPUT_LENGTH];
   bool nullarg = true;
 
-  if ( !IsNullOrEmpty( argument ) )
+  if ( !argument.empty() )
     {
       nullarg = false;
     }
@@ -132,10 +132,10 @@ bool CheckAlias( Character *ch, char *command, char *argument )
       return false;
     }
 
-  if ( !IsNullOrEmpty( argument ) && !nullarg)
+  if ( !argument.empty() && !nullarg)
     {
       strcat(arg, " ");
-      strcat(arg, argument);
+      strcat(arg, argument.c_str());
     }
 
   Interpret(ch, arg);
