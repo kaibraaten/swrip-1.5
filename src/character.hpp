@@ -301,12 +301,12 @@ void UnequipCharacter( Character *ch, Object *obj );
 /*
  * Find an obj in player's inventory.
  */
-Object *GetCarriedObject( const Character *ch, const char *argument );
+Object *GetCarriedObject( const Character *ch, const std::string &argument );
 
 /*
  * Find an obj in player's equipment.
  */
-Object *GetWornObject( const Character *ch, const char *argument );
+Object *GetWornObject( const Character *ch, const std::string &argument );
 
 /*
  * How mental state could affect finding an object              -Thoric
@@ -424,7 +424,7 @@ const char *HisHersIts( const Character *ch );
 
 void AddReinforcements( Character *ch );
 
-void SetCharacterTitle( Character *ch, const char *title );
+void SetCharacterTitle( Character *ch, const std::string &title );
 
 bool HasPermanentSneak( const Character *ch );
 

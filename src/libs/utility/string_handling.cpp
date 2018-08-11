@@ -351,12 +351,12 @@ bool IsNumber( const std::string &arg )
 /*
  * Given a string like 14.foo, return 14 and 'foo'
  */
-int NumberArgument( const char *orig_argument, char *arg )
+int NumberArgument( const std::string &orig_argument, char *arg )
 {
   char *pdot = NULL;
   int number = 0;
   char argument[MAX_STRING_LENGTH];
-  sprintf( argument, "%s", orig_argument );
+  sprintf( argument, "%s", orig_argument.c_str() );
 
   for ( pdot = argument; *pdot != '\0'; pdot++ )
     {

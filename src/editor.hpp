@@ -37,7 +37,7 @@
 
 void StartEditing( Character *ch, char *data );
 void StopEditing( Character *ch );
-void EditBuffer( Character *ch, char *argument );
+void EditBuffer( Character *ch, std::string argument );
 char *CopyBuffer( Character *ch );
 void SetEditorDescription( Character *ch, const char *desc_fmt, ... );
 

@@ -12,7 +12,7 @@ struct Bounty
 };
 
 void AddBounty( const Character *ch, const Character *victim, long amount );
-Bounty *GetBounty( const char *target );
+Bounty *GetBounty( const std::string &target );
 void LoadBounties( void );
 void RemoveBounty( Bounty *bounty );
 void ClaimBounty( Character *ch, const Character *victim );

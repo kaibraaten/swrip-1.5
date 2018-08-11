@@ -74,8 +74,8 @@ extern ClanMemberList *LastClanMemberList;
 #define GUILD_PRICE 100000
 
 void SaveClanStoreroom( Character *ch, const Clan *clan );
-void ShowClanMembers( const Character *ch, const char *clanName, const char *format );
-Clan *GetClan( const char *name );
+void ShowClanMembers( const Character *ch, const std::string &clanName, const std::string &format );
+Clan *GetClan( const std::string &name );
 void UpdateClanMember( const Character *ch );
 void RemoveClanMember( const Character *ch );
 ClanMemberList *GetMemberList( const Clan *clan );
@@ -85,7 +85,7 @@ size_t CountClanMembers( const Clan *clan );
 void AssignGuildToMainclan(Clan *guild);
 void AssignGuildToMainclan( Clan *guild, Clan *mainClan );
 const char *GetClanFilename( const Clan *clan );
-bool IsBountyHuntersGuild(const char *clanName);
+bool IsBountyHuntersGuild(const std::string &clanName);
 ClanRepository *NewClanRepository();
 
 #endif /* include guard*/

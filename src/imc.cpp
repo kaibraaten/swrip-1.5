@@ -3542,7 +3542,7 @@ static void imc_char_login( Character * ch )
       imc_send_ucache_update( CH_IMCNAME( ch ), sex );
 }
 
-bool ImcLoadCharacter( Character * ch, FILE * fp, const char *word )
+bool ImcLoadCharacter( Character * ch, FILE * fp, const std::string &word )
 {
    bool fMatch = false;
 
@@ -3563,7 +3563,7 @@ bool ImcLoadCharacter( Character * ch, FILE * fp, const char *word )
          KEY( "IMCMSN", IMC_MSN( ch ), imcReadLine( fp ) );
          KEY( "IMCHomepage", IMC_HOMEPAGE( ch ), imcReadLine( fp ) );
          KEY( "IMCComment", IMC_COMMENT( ch ), imcReadLine( fp ) );
-         if( !strcasecmp( word, "IMCFlags" ) )
+         if( !strcasecmp( word.c_str(), "IMCFlags" ) )
          {
             IMCFLAG( ch ) = ReadInt( fp, Log, fBootDb );
             imc_char_login( ch );
@@ -3571,7 +3571,7 @@ bool ImcLoadCharacter( Character * ch, FILE * fp, const char *word )
             break;
          }
 
-         if( !strcasecmp( word, "IMClisten" ) )
+         if( !strcasecmp( word.c_str(), "IMClisten" ) )
          {
             IMC_LISTEN( ch ) = imcReadLine( fp );
             if( IMC_LISTEN( ch ) != NULL && this_imcmud->state == IMC_ONLINE )
@@ -3596,7 +3596,7 @@ bool ImcLoadCharacter( Character * ch, FILE * fp, const char *word )
             break;
          }
 
-         if( !strcasecmp( word, "IMCdeny" ) )
+         if( !strcasecmp( word.c_str(), "IMCdeny" ) )
          {
             IMC_DENY( ch ) = imcReadLine( fp );
             if( IMC_DENY( ch ) != NULL && this_imcmud->state == IMC_ONLINE )
@@ -3621,7 +3621,7 @@ bool ImcLoadCharacter( Character * ch, FILE * fp, const char *word )
             break;
          }
 
-         if( !strcasecmp( word, "IMCignore" ) )
+         if( !strcasecmp( word.c_str(), "IMCignore" ) )
          {
             IMC_IGNORE *temp;
 
@@ -7834,12 +7834,15 @@ static IMC_FUN *imc_function( const char *func )
 }
 
 /* Check for IMC channels, return true to stop command processing, false otherwise */
-bool ImcCommandHook( Character * ch, const char *command, const char *argument )
+bool ImcCommandHook( Character * ch, const std::string &stl_command,
+                     const std::string &stl_argument )
 {
-   IMC_CMD_DATA *cmd;
-   IMC_ALIAS *alias;
-   IMC_CHANNEL *c;
-   const char *p;
+  const char *command = stl_command.c_str();
+  const char *argument = stl_argument.c_str();
+  IMC_CMD_DATA *cmd = nullptr;
+  IMC_ALIAS *alias = nullptr;
+  IMC_CHANNEL *c = nullptr;
+  const char *p = nullptr;
 
    if( IsNpc( ch ) )
       return false;

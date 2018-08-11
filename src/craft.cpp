@@ -269,7 +269,7 @@ static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *rec
 }
 
 CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engineer,
-					  char *commandArgument )
+					  const std::string &commandArgument )
 {
   CraftingSession *session = NULL;
   struct FinishedCraftingUserData *finishedCraftingUserData = NULL;

@@ -47,7 +47,7 @@ static ClanMember *GetMemberData( const ClanMemberList*, const char *memberName 
 /*
  * Get pointer to clan structure from clan name.
  */
-Clan *GetClan( const char *name )
+Clan *GetClan( const std::string &name )
 {
   return Clans->Find([name](const auto &clan)
                          {
@@ -188,7 +188,7 @@ static int LessName(const ClanMember *lhv, const ClanMember *rhv)
   return StrCmp(lhv->Name, rhv->Name);
 }
 
-void ShowClanMembers( const Character *ch, const char *clanName, const char *format )
+void ShowClanMembers( const Character *ch, const std::string &clanName, const std::string &format )
 {
   const Clan *clan = GetClan( clanName );
   ClanMemberList *members_list = GetMemberList( clan );
@@ -206,7 +206,7 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
   ch->Echo( "------------------------------------------------------------------------------\r\n" );
   ch->Echo( "Lvl  Name            Class                 Kills    Deaths              Joined\r\n\r\n" );
 
-  if( !IsNullOrEmpty( format ) )
+  if( !format.empty() )
     {
       if( !StrCmp( format, "kills" )
           || !StrCmp( format, "deaths" )
@@ -824,7 +824,7 @@ size_t CountClanMembers( const Clan *clan )
   return counter;
 }
 
-bool IsBountyHuntersGuild(const char *clanName)
+bool IsBountyHuntersGuild(const std::string &clanName)
 {
   return !StrCmp(clanName, "the hunters guild")
     || !StrCmp(clanName, "the bounty hunters guild")

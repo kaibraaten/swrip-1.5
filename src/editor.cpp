@@ -410,16 +410,19 @@ void StopEditing( Character *ch )
   ch->Desc->ConnectionState = CON_PLAYING;
 }
 
-void EditBuffer( Character *ch, char *argument )
+void EditBuffer( Character *ch, std::string stl_argument )
 {
-  Descriptor *d;
-  Editor *edd;
-  EditorLine *newline;
+  Descriptor *d = nullptr;
+  Editor *edd = nullptr;
+  EditorLine *newline = nullptr;
   char cmd[MAX_INPUT_LENGTH];
-  short linelen;
-  bool cont_line;
-  char *p;
-
+  short linelen = 0;
+  bool cont_line = false;
+  char *p = nullptr;
+  char argument_buf[MAX_INPUT_LENGTH];
+  char *argument = argument_buf;
+  strcpy(argument, stl_argument.c_str());
+  
   d = ch->Desc;
 
   if ( d == NULL )
