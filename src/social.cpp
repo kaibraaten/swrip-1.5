@@ -42,7 +42,7 @@ void FreeSocial( Social *social )
   FreeMemory( social );
 }
 
-bool CheckSocial( Character *ch, const char *command, char *argument )
+bool CheckSocial( Character *ch, const std::string &command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
