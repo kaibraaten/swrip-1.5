@@ -197,30 +197,26 @@ static bool IsRoomReset( const Reset *pReset, const Room *aRoom, const Area *pAr
   return false;
 }
 
-Room *FindRoom( const Character *ch, char *argument, Room *pRoom )
+Room *FindRoom( const Character *ch, const std::string &arg, Room *pRoom )
 {
-  char arg[MAX_INPUT_LENGTH];
-
   if ( pRoom )
     {
       return pRoom;
     }
 
-  OneArgument(argument, arg);
-
-  if ( !IsNumber(arg) && !IsNullOrEmpty( arg ) )
+  if ( !IsNumber(arg) && !arg.empty() )
     {
       ch->Echo( "Reset to which room?\r\n" );
       return NULL;
     }
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       pRoom = ch->InRoom;
     }
   else
     {
-      pRoom = GetRoom(atoi(arg));
+      pRoom = GetRoom(stoi(arg));
     }
 
   if ( !pRoom )

@@ -171,7 +171,7 @@ public:
 
 ch_ret DriveShip( Character *ch, Ship *ship, Exit *exit, int fall );
 void ResetShip( Ship *ship );
-void EchoToDockedShip( int color, const Ship *ship, const char *argument );
+void EchoToDockedShip( int color, const Ship *ship, const std::string &argument );
 bool CanDock( const Ship *ship );
 bool IsShipInHyperspace( const Ship *ship );
 bool IsShipDisabled( const Ship *ship );
@@ -180,7 +180,7 @@ bool IsMissileInRange( const Ship *ship, const Missile *missile );
 bool IsSpaceobjectInRange( const Ship *ship, const Spaceobject *object );
 bool IsSpaceobjectInCaptureRange( const Ship *ship, const Spaceobject *object );
 bool CheckHostile( Ship *ship );
-Ship *GetShipAnywhere( const char *name );
+Ship *GetShipAnywhere( const std::string &name );
 Ship *GetShipFromEntrance( vnum_t vnum );
 Ship *GetShipFromHangar( vnum_t vnum );
 Ship *GetShipFromCockpit( vnum_t vnum );
@@ -190,15 +190,16 @@ Ship *GetShipFromPilotSeat( vnum_t vnum );
 Ship *GetShipFromGunSeat( vnum_t vnum );
 Ship *GetShipFromTurret( vnum_t vnum );
 Ship *GetShipFromEngine( vnum_t vnum );
-Ship *GetShipInRange( const char *name, const Ship *eShip );
+Ship *GetShipInRange( const std::string &name, const Ship *eShip );
 void UpdateShipMovement( void );
 void RechargeShips( void );
 void ShipUpdate( void );
 void UpdateSpaceCombat(void);
 bool IsShipRental( const Character *ch, const Ship *ship );
-void EchoToShip( int color, const Ship *ship, const char *argument );
-void EchoToCockpit( int color, const Ship *ship, const char *argument );
-void EchoToNearbyShips( int color, const Ship *ship, const char *argument, const Ship *ignore );
+void EchoToShip( int color, const Ship *ship, const std::string &argument );
+void EchoToCockpit( int color, const Ship *ship, const std::string &argument );
+void EchoToNearbyShips( int color, const Ship *ship, const std::string &argument,
+                        const Ship *ignore );
 bool ExtractShip( Ship *ship );
 bool ShipToRoom( Ship *ship, vnum_t vnum );
 long GetShipValue( const Ship *ship );
@@ -208,12 +209,13 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 void DestroyShip( Ship *ship, Character *killer );
 void ShipToSpaceobject( Ship *ship, Spaceobject *spaceobject );
 void ShipFromSpaceobject( Ship *ship, Spaceobject *spaceobject);
-Ship *GetShipInRoom( const Room *room, const char *name );
+Ship *GetShipInRoom( const Room *room, const std::string &name );
 void TransferShip( Ship *ship , vnum_t destination );
 bool IsShipAutoflying( const Ship *ship );
 bool CheckPilot( const Character *ch, const Ship *ship );
 const char *GetShipFilename( const Ship *ship );
-bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *personalname );
+bool ShipNameAndPersonalnameComboIsUnique( const std::string &name,
+                                           const std::string &personalname );
 void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData);
 
 class ShipRepository : public Ceris::Repository<Ship*>

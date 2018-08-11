@@ -23,6 +23,7 @@
 #ifndef _SWRIP_RESET_HPP_
 #define _SWRIP_RESET_HPP_
 
+#include <string>
 #include <utility/utility.hpp>
 #include "types.hpp"
 
@@ -57,7 +58,7 @@ struct Reset
 };
 
 
-Room *FindRoom( const Character *ch, char *argument, Room *pRoom );
+Room *FindRoom( const Character *ch, const std::string &argument, Room *pRoom );
 void WipeResets( Area *pArea, Room *pRoom );
 void InstallRoom( Area *pArea, Room *pRoom, bool dodoors );
 void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom );
