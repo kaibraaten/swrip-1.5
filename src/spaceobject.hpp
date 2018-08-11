@@ -29,11 +29,12 @@ struct Spaceobject
 };
 
 const char *GetSpaceobjectFilename( const Spaceobject *spaceobject );
-Spaceobject *GetSpaceobject( const char *name );
+Spaceobject *GetSpaceobject( const std::string &name );
 Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum );
 void SpaceobjectUpdate( void );
-LandingSite *GetLandingSiteFromVnum( const Spaceobject *spaceobj, vnum_t vnum );
-LandingSite *GetLandingSiteFromLocationName( const Spaceobject *spaceobj, const char *name );
+const LandingSite *GetLandingSiteFromVnum( const Spaceobject *spaceobj, vnum_t vnum );
+const LandingSite *GetLandingSiteFromLocationName(const Spaceobject *spaceobj,
+                                                  const std::string &name);
 
 class SpaceobjectRepository : public Ceris::Repository<Spaceobject*>
 {

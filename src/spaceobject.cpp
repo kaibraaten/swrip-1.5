@@ -60,7 +60,7 @@ void SpaceobjectUpdate( void )
 /*
  * Get pointer to space structure from spaceobject name.
  */
-Spaceobject *GetSpaceobject( const char *name )
+Spaceobject *GetSpaceobject( const std::string &name )
 {
   Spaceobject *spaceobject = Spaceobjects->Find([name](const auto &so)
                                                 {
@@ -372,7 +372,7 @@ static void ExecuteSpaceobjectFile( const std::string &filePath, void *userData 
   LuaLoadDataFile( filePath, L_SpaceobjectEntry, "SpaceobjectEntry" );
 }
 
-LandingSite *GetLandingSiteFromVnum( const Spaceobject *spaceobj, vnum_t vnum )
+const LandingSite *GetLandingSiteFromVnum( const Spaceobject *spaceobj, vnum_t vnum )
 {
   size_t siteNum = 0;
 
@@ -382,14 +382,15 @@ LandingSite *GetLandingSiteFromVnum( const Spaceobject *spaceobj, vnum_t vnum )
 
       if( vnum == site->Dock )
         {
-          return (LandingSite*) site;
+          return site;
         }
     }
 
   return NULL;
 }
 
-LandingSite *GetLandingSiteFromLocationName( const Spaceobject *spaceobj, const char *name )
+const LandingSite *GetLandingSiteFromLocationName( const Spaceobject *spaceobj,
+                                                   const std::string &name )
 {
   size_t siteNum = 0;
 
@@ -399,7 +400,7 @@ LandingSite *GetLandingSiteFromLocationName( const Spaceobject *spaceobj, const 
 
       if ( !StringPrefix( name, site->LocationName ) )
         {
-          return (LandingSite*) site;
+          return site;
         }
     }
 

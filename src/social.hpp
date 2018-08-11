@@ -20,7 +20,7 @@ struct Social
 };
 
 void FreeSocial( Social *social );
-bool CheckSocial( Character *ch, const char *command, char *argument );
+bool CheckSocial( Character *ch, const std::string &command, char *argument );
 
 struct CompareSocial
 {

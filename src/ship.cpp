@@ -390,7 +390,7 @@ static void LandShip( Ship *ship, const char *arg )
   char buf[MAX_STRING_LENGTH];
   vnum_t destination = INVALID_VNUM;
   Character *ch = NULL;
-  LandingSite *site = GetLandingSiteFromLocationName( ship->Spaceobject, arg );
+  const LandingSite *site = GetLandingSiteFromLocationName( ship->Spaceobject, arg );
 
   if( site )
     {
