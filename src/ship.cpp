@@ -1151,7 +1151,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   return retcode;
 }
 
-void EchoToShip( int color, const Ship *ship, const char *argument )
+void EchoToShip( int color, const Ship *ship, const std::string &argument )
 {
   vnum_t roomVnum = INVALID_VNUM;
 
@@ -1958,7 +1958,7 @@ void UpdateSpaceCombat(void)
     }
 }
 
-void EchoToDockedShip( int color, const Ship *ship, const char *argument )
+void EchoToDockedShip( int color, const Ship *ship, const std::string &argument )
 {
   for(const Ship *dockedShip : Ships->Entities())
     {
@@ -1969,7 +1969,7 @@ void EchoToDockedShip( int color, const Ship *ship, const char *argument )
     }
 }
 
-void EchoToCockpit( int color, const Ship *ship, const char *argument )
+void EchoToCockpit( int color, const Ship *ship, const std::string &argument )
 {
   vnum_t room = INVALID_VNUM;
 
@@ -3121,7 +3121,7 @@ void ResetShip( Ship *ship )
   Ships->Save(ship);
 }
 
-void EchoToNearbyShips( int color, const Ship *ship, const char *argument,
+void EchoToNearbyShips( int color, const Ship *ship, const std::string &argument,
 			const Ship *ignore )
 {
   if (!ship->Spaceobject)
@@ -3144,7 +3144,7 @@ void EchoToNearbyShips( int color, const Ship *ship, const char *argument,
     }
 }
 
-Ship *GetShipInRoom( const Room *room, const char *name )
+Ship *GetShipInRoom( const Room *room, const std::string &name )
 {
   Ship *ship = NULL;
 
@@ -3185,7 +3185,7 @@ Ship *GetShipInRoom( const Room *room, const char *name )
 /*
  * Get pointer to ship structure from ship name.
  */
-Ship *GetShipAnywhere( const char *name )
+Ship *GetShipAnywhere( const std::string &name )
 {
   Ship *foundShip = NULL;
 
@@ -3222,7 +3222,7 @@ Ship *GetShipAnywhere( const char *name )
 /*
  * Checks if ship is in a spaceobject and returns pointer if it is.
  */
-Ship *GetShipInRange( const char *name, const Ship *eShip)
+Ship *GetShipInRange( const std::string &name, const Ship *eShip)
 {
   char arg[MAX_INPUT_LENGTH];
   int number = NumberArgument( name, arg );
@@ -3313,32 +3313,32 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
 Ship *GetShipFromCockpit( vnum_t vnum )
 {
   return Ships->Find([vnum](const auto &ship)
+                     {
+                       if ( vnum == ship->Rooms.Cockpit
+                            || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[0] )
+                            || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[1] )
+                            || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[2] )
+                            || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[3] )
+                            || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[4] )
+                            || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[5] )
+                            || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[6] )
+                            || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[7] )
+                            || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[8] )
+                            || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[9] )
+                            || vnum == ship->Rooms.Hangar
+                            || vnum == ship->Rooms.Pilotseat
+                            || vnum == ship->Rooms.Coseat
+                            || vnum == ship->Rooms.Navseat
+                            || vnum == ship->Rooms.Gunseat
+                            || vnum == ship->Rooms.Engine )
                          {
-                           if ( vnum == ship->Rooms.Cockpit
-                                || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[0] )
-                                || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[1] )
-                                || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[2] )
-                                || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[3] )
-                                || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[4] )
-                                || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[5] )
-                                || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[6] )
-                                || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[7] )
-                                || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[8] )
-                                || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[9] )
-                                || vnum == ship->Rooms.Hangar
-                                || vnum == ship->Rooms.Pilotseat
-                                || vnum == ship->Rooms.Coseat
-                                || vnum == ship->Rooms.Navseat
-                                || vnum == ship->Rooms.Gunseat
-                                || vnum == ship->Rooms.Engine )
-                             {
-                               return true;
-                             }
-                           else
-                             {
-                               return false;
-                             }
-                         });
+                           return true;
+                         }
+                       else
+                         {
+                           return false;
+                         }
+                     });
 }
 
 Ship *GetShipFromPilotSeat( vnum_t vnum )
@@ -3364,25 +3364,25 @@ Ship *GetShipFromGunSeat( vnum_t vnum )
 Ship *GetShipFromEngine( vnum_t vnum )
 {
   return Ships->Find([vnum](const auto &ship)
-                         {
-                           return vnum == ship->Rooms.Engine
-                             || vnum == ship->Rooms.Cockpit;
-                         });
+                     {
+                       return vnum == ship->Rooms.Engine
+                         || vnum == ship->Rooms.Cockpit;
+                     });
 }
 
 Ship *GetShipFromTurret( vnum_t vnum )
 {
   return Ships->Find([vnum](const auto &ship)
+                     {
+                       for(const Turret *turret : ship->WeaponSystems.Turrets)
                          {
-                           for(const Turret *turret : ship->WeaponSystems.Turrets)
+                           if(vnum == GetTurretRoom(turret))
                              {
-                               if(vnum == GetTurretRoom(turret))
-                                 {
-                                   return true;
-                                 }
+                               return true;
                              }
-                           return false;
-                         });
+                         }
+                       return false;
+                     });
 }
 
 Ship *GetShipFromEntrance( vnum_t vnum )
@@ -3824,7 +3824,8 @@ bool RentShip( Character *ch, const Ship *ship )
   return true;
 }
 
-bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *personalname )
+bool ShipNameAndPersonalnameComboIsUnique( const std::string &name,
+                                           const std::string &personalname )
 {
   const Ship *existingShip = Ships->Find([name, personalname](const auto &ship)
                                          {
