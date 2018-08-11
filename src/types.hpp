@@ -38,7 +38,7 @@ struct ExtractedCharacter;
 class Character;
 struct HuntHateFear;
 struct Fight;
-struct Descriptor;
+class Descriptor;
 struct Exit;
 struct ExtraDescription;
 struct HelpFile;

@@ -112,8 +112,6 @@ int SwripMain(int argc, char *argv[])
   bool fCopyOver = false;
   socket_t imcsocket = INVALID_SOCKET;
 
-  memset( &SysData, 0, sizeof( SysData ) );
-
   Log = NewLogger();
 
   /*
