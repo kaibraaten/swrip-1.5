@@ -108,7 +108,7 @@ CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial*, int duration,
 				  vnum_t protoObject, long flags );
 void FreeCraftRecipe( CraftRecipe* );
 CraftingSession *AllocateCraftingSession( CraftRecipe*, Character *engineer,
-					  char *commandArgument );
+					  const std::string &commandArgument );
 void FreeCraftingSession( CraftingSession* );
 Character *GetEngineer( const CraftingSession* );
 void AddInterpretArgumentsCraftingHandler( CraftingSession *session, void *userData,

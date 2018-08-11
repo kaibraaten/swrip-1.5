@@ -37,13 +37,13 @@ typedef struct imcchar_data IMC_CHARDATA; /* Player flags */
 
 extern SiteInfo *this_imcmud;
 
-bool ImcCommandHook( Character * ch, const char *command,
-		       const char *argument );
+bool ImcCommandHook( Character * ch, const std::string &command,
+                     const std::string &argument );
 void ImcCopyover( void );
 void ImcStartup( bool force, socket_t desc, bool connected );
 void ImcShutdown( bool reconnect );
 void ImcInitializeCharacter( Character * ch );
-bool ImcLoadCharacter( Character * ch, FILE * fp, const char *word );
+bool ImcLoadCharacter( Character * ch, FILE * fp, const std::string &word );
 void ImcSaveCharacter( const Character * ch, FILE * fp );
 void ImcFreeCharacter( Character * ch );
 void ImcLoop( void );

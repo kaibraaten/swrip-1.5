@@ -60,7 +60,7 @@ bool IsBountyOn( const Character *victim )
   return GetBounty(victim->Name) != NULL;
 }
 
-Bounty *GetBounty( const char *name )
+Bounty *GetBounty( const std::string &name )
 {
   return Bounties->Find([name](const auto &bounty){ return StrCmp(name, bounty->Target) == 0; });
 }

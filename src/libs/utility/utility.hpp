@@ -141,7 +141,7 @@ int urange( int mincheck, int check, int maxcheck );
 char *WordWrap( char *txt, unsigned short wrap );
 char *CatSprintf(char *dest, const char *fmt, ...);
 bool IsNumber(const std::string &arg);
-int NumberArgument( const char *argument, char *arg );
+int NumberArgument( const std::string &argument, char *arg );
 char *OneArgument( char *argument, char *arg_first );
 int IsName(const std::string &str, const std::string &namelist);
 int IsNamePrefix(const std::string &str, const std::string &namelist);

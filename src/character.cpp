@@ -515,7 +515,7 @@ void UnequipCharacter( Character *ch, Object *obj )
 /*
  * Find an obj in player's inventory.
  */
-Object *GetCarriedObject( const Character *ch, const char *argument )
+Object *GetCarriedObject( const Character *ch, const std::string &argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Object *obj = NULL;
@@ -556,7 +556,7 @@ Object *GetCarriedObject( const Character *ch, const char *argument )
 /*
  * Find an obj in player's equipment.
  */
-Object *GetWornObject( const Character *ch, const char *argument )
+Object *GetWornObject( const Character *ch, const std::string &argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Object *obj = NULL;
@@ -1423,7 +1423,7 @@ const char *GetCharacterRace( const Character *ch)
   return "Unknown";
 }
 
-void SetCharacterTitle( Character *ch, const char *title )
+void SetCharacterTitle( Character *ch, const std::string &title )
 {
   char buf[MAX_STRING_LENGTH];
   char *bufptr = buf;
@@ -1434,7 +1434,7 @@ void SetCharacterTitle( Character *ch, const char *title )
       return;
     }
 
-  strcpy(bufptr, title);
+  strcpy(bufptr, title.c_str());
 
   bufptr = TrimString(buf, ' ');
 
