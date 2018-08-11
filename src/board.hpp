@@ -36,13 +36,13 @@ public:
   std::list<Note*> Notes;
 };
 
-Board *AllocateBoard(const char *name);
+Board *AllocateBoard(const std::string &name);
 void FreeBoard(Board *board);
 Board *GetBoardFromObject( const Object *obj );
 Board *FindBoardHere( const Character *ch );
-Board *GetBoard( const char *name );
+Board *GetBoard( const std::string &name );
 void FreeNote( Note *pnote, void *ud );
-void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL );
+void OperateOnNote( Character *ch, const std::string &arg_passed, bool IS_MAIL );
 void AttachNote(Character *ch);
 void CountMailMessages(const Character *ch);
 const char *GetBoardFilename( const Board *board );
