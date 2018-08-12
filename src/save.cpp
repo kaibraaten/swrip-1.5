@@ -44,6 +44,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 /*
  * Increment with every major format change.

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "area.hpp"
+#include "room.hpp"
 
 void do_foldarea( Character *ch, char *argument )
 {

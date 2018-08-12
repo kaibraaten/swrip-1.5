@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
 {

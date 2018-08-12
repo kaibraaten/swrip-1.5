@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 /*
  * Deposit some gold into the current area's economy            -Thoric
@@ -7,7 +8,7 @@
 void do_mp_deposit( Character *ch, char *argument )
 {
   char arg[MAX_STRING_LENGTH];
-  int gold;
+  long gold = 0;
 
   if ( !IsNpc(ch) )
     {

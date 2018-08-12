@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_recall( Character *ch, char *argument )
 {

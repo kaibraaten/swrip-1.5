@@ -5,6 +5,7 @@
 #include "skill.hpp"
 #include "spaceobject.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_calculate_diff(Character *ch, char *argument )
 {

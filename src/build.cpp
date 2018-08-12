@@ -30,6 +30,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 bool CanModifyRoom( const Character *ch, const Room *room )
 {

@@ -5,6 +5,7 @@
 #include "turret.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_repairship(Character *ch, char *argument )
 {

@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt );
 
@@ -13,8 +14,8 @@ void do_mp_damage( Character *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];
-  Character *victim;
-  int dam;
+  Character *victim = nullptr;
+  int dam = 0;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;

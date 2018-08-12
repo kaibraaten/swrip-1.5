@@ -1,10 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 bool spec_janitor( Character *ch )
 {
-  Object *trash;
-  Object *trash_next;
+  Object *trash = nullptr;
+  Object *trash_next = nullptr;
 
   if ( !IsAwake(ch) )
     return false;
@@ -12,9 +13,11 @@ bool spec_janitor( Character *ch )
   for ( trash = ch->InRoom->FirstContent; trash; trash = trash_next )
     {
       trash_next = trash->NextContent;
+
       if ( !IsBitSet( trash->WearFlags, ITEM_TAKE )
            ||    IS_OBJ_STAT( trash, ITEM_BURRIED ) )
         continue;
+
       if ( trash->ItemType == ITEM_DRINK_CON
            ||   trash->ItemType == ITEM_TRASH
            ||   trash->Cost < 10

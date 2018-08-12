@@ -1,13 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "room.hpp"
 
 bool spec_dark_jedi( Character *ch )
 {
-  Character *victim;
-  Character *v_next;
-  char *spell;
-  int sn;
+  Character *victim = nullptr;
+  Character *v_next = nullptr;
+  const char *spell = nullptr;
+  int sn = 0;
 
   if ( ch->Position != POS_FIGHTING )
     return false;
@@ -25,7 +26,7 @@ bool spec_dark_jedi( Character *ch )
 
   for ( ;; )
     {
-      int min_level;
+      int min_level = 0;
 
       switch ( NumberBits( 4 ) )
         {

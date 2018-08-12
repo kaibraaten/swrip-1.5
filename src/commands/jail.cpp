@@ -1,10 +1,11 @@
-#include <time.h>
+#include <ctime>
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
 #include "skill.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_jail( Character *ch , char *argument )
 {

@@ -1,6 +1,7 @@
 #include "command.hpp"
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 void do_cmdtable( Character *ch, char *argument )
 {

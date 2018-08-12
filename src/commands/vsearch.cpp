@@ -1,12 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 void do_vsearch( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   bool found = false;
-  Object *obj;
-  Object *in_obj;
+  Object *obj = nullptr;
+  Object *in_obj = nullptr;
   int obj_counter = 1;
   vnum_t argi = INVALID_VNUM;
 

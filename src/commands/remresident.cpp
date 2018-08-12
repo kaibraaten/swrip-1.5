@@ -1,10 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 void do_remresident(Character *ch, char *argument)
 {
-  Room *home;
-  Character *victim;
+  Room *home = nullptr;
+  Character *victim = nullptr;
 
   home = ch->InRoom;
 

@@ -1,10 +1,11 @@
-#include <string.h>
-#include <time.h>
+#include <cstring>
+#include <ctime>
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_mstat( Character *ch, char *argument )
 {

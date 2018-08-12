@@ -1,10 +1,11 @@
 #include "mud.hpp"
 #include "ship.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 void do_openbay( Character *ch, char *argument )
 {
-  Ship *ship;
+  Ship *ship = nullptr;
   char buf[MAX_STRING_LENGTH];
 
   if ( GetShipFromPilotSeat(ch->InRoom->Vnum) == NULL

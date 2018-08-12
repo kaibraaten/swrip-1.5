@@ -1,21 +1,18 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 bool spec_guardian( Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
-  Character *victim;
-  Character *v_next;
-  Character *ech;
-  char *crime;
-  int max_evil;
+  Character *victim = nullptr;
+  Character *v_next = nullptr;
+  Character *ech = nullptr;
+  const char *crime = "";
+  int max_evil = 300;
 
   if ( !IsAwake(ch) || ch->Fighting )
     return false;
-
-  max_evil = 300;
-  ech      = NULL;
-  crime    = "";
 
   for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {

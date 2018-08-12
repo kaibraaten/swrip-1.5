@@ -2,11 +2,12 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "spaceobject.hpp"
+#include "room.hpp"
 
 void do_shiptrack( Character *ch, char *argument)
 {
-  Ship *ship;
-  Spaceobject *spaceobject;
+  Ship *ship = nullptr;
+  Spaceobject *spaceobject = nullptr;
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

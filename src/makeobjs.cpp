@@ -27,6 +27,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "area.hpp"
+#include "room.hpp"
 
 /*
  * Make a fire.

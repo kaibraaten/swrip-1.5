@@ -5,6 +5,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_tractorbeam(Character *ch, char *argument )
 {

@@ -2,14 +2,15 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 void do_loadup( Character *ch, char *argument )
 {
   char fname[1024];
   char name[256];
   struct stat fst;
-  Descriptor *d;
-  int old_room_vnum;
+  Descriptor *d = nullptr;
+  vnum_t old_room_vnum = INVALID_VNUM;
   char buf[MAX_STRING_LENGTH];
 
   OneArgument( argument, name );

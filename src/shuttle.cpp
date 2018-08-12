@@ -20,12 +20,6 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#ifdef __STRICT_ANSI__
-/* To include the prototype for sprintf() */
-#define _DEFAULT_SOURCE
-#define _BSD_SOURCE
-#endif
-
 #include <unistd.h>
 #include <cstdio>
 #include <cctype>
@@ -36,6 +30,7 @@
 #include "script.hpp"
 #include "log.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 ShuttleRepository *Shuttles = nullptr;
 

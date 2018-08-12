@@ -1,16 +1,12 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
+#include "room.hpp"
 
 void do_sellhome (Character *ch, char *argument)
 {
-  /* Added by Ulysses, Dec '99/Jan '00 */
-
-  /* changed it so you can change the variable faster and easier. Darrik Vequir */
-
-  int sellHomeCreditReturn = 50000;
-
-  Room *room;
+  constexpr int sellHomeCreditReturn = 50000;
+  Room *room = 0;
 
   if ( ch->PlayerHome == NULL )
     {

@@ -4,10 +4,11 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 void do_dig( Character *ch, char *argument )
 {
-  char arg [MAX_INPUT_LENGTH];
+  char arg[MAX_INPUT_LENGTH];
   Object *obj = NULL;
   Object *startobj = NULL;
   bool found = false, shovel = false;

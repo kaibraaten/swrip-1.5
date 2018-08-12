@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "arena.hpp"
+#include "room.hpp"
 
 void do_awho(Character *ch, char *argument)
 {

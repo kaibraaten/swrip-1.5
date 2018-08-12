@@ -27,6 +27,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 Room *vroom_hash[64];
 

@@ -5,6 +5,7 @@
 #include "turret.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_status(Character *ch, char *argument )
 {

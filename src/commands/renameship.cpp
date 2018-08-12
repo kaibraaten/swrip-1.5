@@ -2,11 +2,13 @@
 #include "ship.hpp"
 #include "character.hpp"
 #include "clan.hpp"
+#include "room.hpp"
 
 void do_renameship( Character *ch, char *argument )
 {
-  Ship *ship;
-  Clan *clan;
+  Ship *ship = nullptr;
+  const Clan *clan = nullptr;
+  
   if ( (ship = GetShipFromCockpit( ch->InRoom->Vnum ) ) == NULL)
     {
       ch->Echo("You must be in the cockpit of a ship to do that!\r\n");

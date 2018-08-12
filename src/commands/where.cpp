@@ -1,13 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
+#include "room.hpp"
 
 void do_where( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  Descriptor *d;
-  bool found;
+  Character *victim = nullptr;
+  Descriptor *d = nullptr;
+  bool found = false;
 
   if (GetTrustLevel(ch) < LEVEL_IMMORTAL)
     {

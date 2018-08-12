@@ -1,9 +1,10 @@
-#include <ctype.h>
+#include <cctype>
 #include "social.hpp"
 #include "mud.hpp"
 #include "character.hpp"
 #include "script.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 #define SOCIAL_DATA_FILE     DATA_DIR "socials.lua"
 

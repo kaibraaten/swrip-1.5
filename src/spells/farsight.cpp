@@ -1,16 +1,17 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "room.hpp"
 
 extern char *spell_target_name;
 
 ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
 {
-  Room *location;
-  Room *original;
-  Character *victim;
+  Room *location = nullptr;
+  Room *original = nullptr;
+  Character *victim = nullptr;
   Skill *skill = GetSkill(sn);
-  int saving;
+  int saving = 0;
 
   /* The spell fails if the victim isn't playing, the victim is the caster,
      the target room has private, solitary, noastral, death or proto flags,

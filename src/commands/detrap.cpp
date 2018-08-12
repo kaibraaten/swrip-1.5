@@ -4,6 +4,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 void do_detrap( Character *ch, char *argument )
 {

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 #define CLONEGOLD 1000
 

@@ -1,9 +1,10 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 void do_weather( Character *ch, char *argument )
 {
-  static char * const sky_look[4] =
+  static char * const sky_look[] =
     {
       "cloudless",
       "cloudy",

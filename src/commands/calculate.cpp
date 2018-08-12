@@ -5,13 +5,14 @@
 #include "skill.hpp"
 #include "spaceobject.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_calculate(Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
-  int the_chance, distance = 0;
+  int the_chance = 0, distance = 0;
   Ship *ship = NULL;
   bool found = false;
 

@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "grub.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 static int rgrub_int_comp(const void *i, const void *j);
 static void rgrub_help(Character *ch);

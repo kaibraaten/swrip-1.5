@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "craft.hpp"
 #include "skill.hpp"
+#include "room.hpp"
 
 #define MAX_NUMBER_OF_CRYSTALS 3
 

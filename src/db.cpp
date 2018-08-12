@@ -48,6 +48,7 @@
 #include "ban.hpp"
 #include "log.hpp"
 #include "playerrepository.hpp"
+#include "room.hpp"
 
 /*
  * Globals.

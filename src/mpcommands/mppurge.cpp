@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 /* lets the mobile purge all objects and other npcs in the room,
    or purge a specified object or mob in the room.  It can purge
@@ -8,9 +9,9 @@
 
 void do_mppurge( Character *ch, char *argument )
 {
-  char       arg[ MAX_INPUT_LENGTH ];
-  Character *victim;
-  Object  *obj;
+  char arg[ MAX_INPUT_LENGTH ];
+  Character *victim = nullptr;
+  Object *obj = nullptr;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;

@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_instazone( Character *ch, char *argument )
 {

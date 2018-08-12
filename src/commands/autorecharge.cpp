@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_autorecharge(Character *ch, char *argument )
 {

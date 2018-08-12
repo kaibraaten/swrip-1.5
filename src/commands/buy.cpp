@@ -4,6 +4,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 void do_buy( Character *ch, char *argument )
 {

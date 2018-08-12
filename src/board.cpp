@@ -30,6 +30,7 @@
 #include "board.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 /* Defines for voting on notes. -- Narn */
 #define VOTE_NONE 0

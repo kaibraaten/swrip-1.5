@@ -1,11 +1,12 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "room.hpp"
 
 bool spec_jedi( Character *ch )
 {
-  Character *victim;
-  Character *v_next;
+  Character *victim = nullptr;
+  Character *v_next = nullptr;
 
   if ( !IsAwake(ch) || ch->Fighting )
     return false;

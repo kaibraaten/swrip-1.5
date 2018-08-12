@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 /*
  * Generic area attack                                          -Thoric

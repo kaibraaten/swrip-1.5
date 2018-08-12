@@ -5,6 +5,7 @@
 #include "skill.hpp"
 #include "spaceobject.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 static bool LeaveHyperspaceIfDocked(Ship *dockedShip, void *userData);
 

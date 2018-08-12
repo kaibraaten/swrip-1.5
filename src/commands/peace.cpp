@@ -1,12 +1,12 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 void do_peace( Character *ch, char *argument )
 {
-  Character *rch;
-
   Act( AT_IMMORT, "$n booms, 'PEACE!'", ch, NULL, NULL, TO_ROOM );
-  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->NextInRoom )
+
+  for ( Character *rch = ch->InRoom->FirstPerson; rch; rch = rch->NextInRoom )
     {
       if ( rch->Fighting )
         {

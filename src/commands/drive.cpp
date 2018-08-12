@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "room.hpp"
 
 void do_drive( Character *ch, char *argument )
 {

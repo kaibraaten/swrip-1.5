@@ -20,8 +20,6 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <sys/types.h>
-#include <sys/time.h>
 #include <cstdio>
 #include <cstring>
 #include <ctime>
@@ -41,6 +39,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 /*
  * Local functions.

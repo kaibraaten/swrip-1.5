@@ -3,6 +3,7 @@
 #include "ship.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_guard( Character *ch, char *argument )
 {

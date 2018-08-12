@@ -40,6 +40,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 #define COST_EQUATION  (int) (cost*CostEquation( obj ))
 
@@ -551,9 +552,7 @@ void SaveVendor( Character *ch )
   else
     {
       bool ferr = false;
-#ifndef AMIGA
       fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);
-#endif
       fprintf( fp, "#VENDOR\n"          );
       WriteVendor( fp, ch );
 

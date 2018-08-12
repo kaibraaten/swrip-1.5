@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "arena.hpp"
+#include "room.hpp"
 
 void do_arena(Character *ch, char *argument)
 {

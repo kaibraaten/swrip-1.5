@@ -1,11 +1,12 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 void do_scatter( Character *ch, char *argument )
 {
-  Character *victim;
+  Character *victim = nullptr;
   char arg[MAX_INPUT_LENGTH];
-  Room *pRoomIndex;
+  Room *pRoomIndex = nullptr;
 
   SetCharacterColor( AT_IMMORT, ch );
   OneArgument( argument, arg );

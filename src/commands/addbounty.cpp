@@ -3,6 +3,7 @@
 #include "clan.hpp"
 #include "bounty.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_addbounty( Character *ch, char *argument )
 {

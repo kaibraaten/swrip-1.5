@@ -4,6 +4,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_trajectory( Character *ch, char *argument )
 {

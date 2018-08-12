@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "ship.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 void do_adjusttractorbeam(Character *ch, char *argument )
 {

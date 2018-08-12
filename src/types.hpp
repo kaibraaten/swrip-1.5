@@ -49,7 +49,7 @@ struct Object;
 struct ProtoObject;
 class PCData;
 struct Reset;
-struct Room;
+class Room;
 struct Shop;
 struct RepairShop;
 struct TimeInfo;
@@ -85,6 +85,7 @@ class Clan;
 struct BadName;
 struct timerset;
 struct MPROG_ACT_LIST;
+struct MPROG_DATA;
 
 /*
  * Function types.

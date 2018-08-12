@@ -2,13 +2,14 @@
 #include "shuttle.hpp"
 #include "ship.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 void do_board( Character *ch, char *argument )
 {
-  Room *toroom;
-  Ship *ship;
-  char * name = NULL;
-  Shuttle *shuttle;
+  Room *toroom = nullptr;
+  Ship *ship = nullptr;
+  char * name = nullptr;
+  Shuttle *shuttle = nullptr;
 
   if ( IsNullOrEmpty( argument ) )
     {

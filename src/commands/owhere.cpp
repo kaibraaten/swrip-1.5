@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 static void trunc1(char *s, size_t len);
 
@@ -8,10 +9,11 @@ void do_owhere( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH], field[MAX_INPUT_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  Object *obj, *outer_obj;
+  Object *obj = nullptr, *outer_obj = nullptr;
   bool found = false;
-  int icnt=0, vnum=0;
-  const char *heading =
+  int icnt = 0;
+  vnum_t vnum = INVALID_VNUM;
+  static const char * const heading =
     "    Vnum  Short Desc        Vnum  Room/Char          Vnum  Container\r\n";
 
   argument = OneArgument( argument, arg );

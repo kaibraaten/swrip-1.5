@@ -1,15 +1,16 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "room.hpp"
 
 extern char *spell_target_name;
 
 ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
 {
-  Object *obj;
-  Object *trap;
-  bool found;
-  int retcode;
+  Object *obj = nullptr;
+  Object *trap = nullptr;
+  bool found = false;
+  int retcode = rNONE;
   Skill *skill = GetSkill(sn);
 
   if ( IsNullOrEmpty( spell_target_name ) )

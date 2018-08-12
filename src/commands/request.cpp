@@ -5,6 +5,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_request(Character *ch, char *argument)
 {
