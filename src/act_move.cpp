@@ -19,8 +19,9 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <string.h>
-#include <ctype.h>
+#include <cstring>
+#include <cctype>
+#include <cassert>
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
@@ -144,15 +145,9 @@ void ClearVirtualRooms( void )
  */
 Exit *GetExit( const Room *room, DirectionType dir )
 {
-  Exit *xit = NULL;
+  assert(room != nullptr);
 
-  if ( !room )
-    {
-      Log->Bug( "Get_exit: NULL room" );
-      return NULL;
-    }
-
-  for (xit = room->FirstExit; xit; xit = xit->Next )
+  for(Exit *xit : room->Exits())
     {
       if ( xit->Direction == dir )
 	{
@@ -160,7 +155,7 @@ Exit *GetExit( const Room *room, DirectionType dir )
 	}
     }
 
-  return NULL;
+  return nullptr;
 }
 
 /*
@@ -168,15 +163,9 @@ Exit *GetExit( const Room *room, DirectionType dir )
  */
 Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum )
 {
-  Exit *xit = NULL;
+  assert(room != nullptr);
 
-  if ( !room )
-    {
-      Log->Bug( "Get_exit: NULL room" );
-      return NULL;
-    }
-
-  for (xit = room->FirstExit; xit; xit = xit->Next )
+  for(Exit *xit : room->Exits())
     {
       if ( xit->Direction == dir && xit->Vnum == vnum )
 	{
@@ -184,7 +173,7 @@ Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum )
 	}
     }
 
-  return NULL;
+  return nullptr;
 }
 
 /*
@@ -192,16 +181,11 @@ Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum )
  */
 Exit *GetExitNumber( const Room *room, short count )
 {
-  Exit *xit = NULL;
+  assert(room != nullptr);
+  
   int cnt = 0;
 
-  if ( !room )
-    {
-      Log->Bug( "Get_exit: NULL room", 0 );
-      return NULL;
-    }
-
-  for (cnt = 0, xit = room->FirstExit; xit; xit = xit->Next )
+  for(Exit *xit : room->Exits())
     {
       if ( ++cnt == count )
 	{
@@ -209,7 +193,7 @@ Exit *GetExitNumber( const Room *room, short count )
 	}
     }
 
-  return NULL;
+  return nullptr;
 }
 
 /*
@@ -1076,13 +1060,13 @@ Exit *FindDoor( Character *ch, const std::string &arg, bool quiet )
     }
   else
     {
-      for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->Next )
+      for(Exit *xit : ch->InRoom->Exits())
         {
-          if ( (quiet || IsBitSet(pexit->Flags, EX_ISDOOR))
-               && pexit->Keyword
-               && NiftyIsName( arg, pexit->Keyword ) )
+          if ( (quiet || IsBitSet(xit->Flags, EX_ISDOOR))
+               && xit->Keyword
+               && NiftyIsName( arg, xit->Keyword ) )
 	    {
-	      return pexit;
+	      return xit;
 	    }
         }
 

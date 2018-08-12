@@ -156,18 +156,15 @@ void LoadAreaFile( Area *tarea, const std::string &filename )
 
 void FixAreaExits( Area *tarea )
 {
-  Room *pRoomIndex;
-  Exit *pexit, *rev_exit;
-  int rnum;
-
-  for ( rnum = tarea->VnumRanges.Room.First; rnum <= tarea->VnumRanges.Room.Last; rnum++ )
+  for ( vnum_t rnum = tarea->VnumRanges.Room.First; rnum <= tarea->VnumRanges.Room.Last; rnum++ )
     {
+      Room *pRoomIndex = nullptr;
       bool fexit = false;
 
       if ( (pRoomIndex = GetRoom( rnum )) == NULL )
         continue;
 
-      for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->Next )
+      for(Exit *pexit : pRoomIndex->Exits())
         {
           fexit = true;
           pexit->ReverseVnum = pRoomIndex->Vnum;
@@ -183,16 +180,18 @@ void FixAreaExits( Area *tarea )
     }
 
 
-  for ( rnum = tarea->VnumRanges.Room.First; rnum <= tarea->VnumRanges.Room.Last; rnum++ )
+  for ( vnum_t rnum = tarea->VnumRanges.Room.First; rnum <= tarea->VnumRanges.Room.Last; rnum++ )
     {
+      const Room *pRoomIndex = nullptr;
+      
       if ( (pRoomIndex = GetRoom( rnum )) == NULL )
         continue;
 
-      for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->Next )
+      for(Exit *pexit : pRoomIndex->Exits())
         {
           if ( pexit->ToRoom && !pexit->ReverseExit )
             {
-              rev_exit = GetExitTo( pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum );
+              Exit *rev_exit = GetExitTo( pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum );
               if ( rev_exit )
                 {
                   pexit->ReverseExit  = rev_exit;
@@ -1964,7 +1963,6 @@ void CloseArea( Area *pArea )
   Reset *ereset_next;
   ExtraDescription *eed;
   ExtraDescription *eed_next;
-  Exit *exit_next;
   MPROG_ACT_LIST *mpact;
   MPROG_ACT_LIST *mpact_next;
   MPROG_DATA *mprog;
@@ -2004,19 +2002,17 @@ void CloseArea( Area *pArea )
      {
       for ( rid = RoomIndexHash[icnt]; rid; rid = rid_next )
         {
-          Exit *exit_iter = NULL;
+          std::list<Exit*> copyOfExitList(rid->Exits());
           rid_next = rid->Next;
 
-          for ( exit_iter = rid->FirstExit; exit_iter; exit_iter = exit_next )
+          for(Exit *xit : copyOfExitList)
             {
-              exit_next = exit_iter->Next;
-
-              if ( rid->Area == pArea || exit_iter->ToRoom->Area == pArea )
+              if ( rid->Area == pArea || xit->ToRoom->Area == pArea )
                 {
-                  FreeMemory( exit_iter->Keyword );
-                  FreeMemory( exit_iter->Description );
-                  UNLINK( exit_iter, rid->FirstExit, rid->LastExit, Next, Previous );
-                  FreeMemory( exit_iter );
+                  FreeMemory( xit->Keyword );
+                  FreeMemory( xit->Description );
+                  rid->Remove(xit);
+                  FreeMemory( xit );
                 }
             }
 

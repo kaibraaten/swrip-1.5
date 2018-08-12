@@ -7,7 +7,6 @@
 void do_mpasound( Character *ch, char *argument )
 {
   Room *was_in_room = nullptr;
-  Exit *pexit = nullptr;
   int mobflags = 0;
 
   assert(ch != nullptr);
@@ -31,7 +30,7 @@ void do_mpasound( Character *ch, char *argument )
   RemoveBit(ch->Flags, ACT_SECRETIVE);
   was_in_room = ch->InRoom;
 
-  for ( pexit = was_in_room->FirstExit; pexit; pexit = pexit->Next )
+  for(const Exit *pexit : was_in_room->Exits())
     {
       if ( pexit->ToRoom
            &&   pexit->ToRoom != was_in_room )

@@ -11,7 +11,6 @@ void do_rstat( Character *ch, char *argument )
   Room *location = NULL;
   Object *obj = NULL;
   Character *rch = NULL;
-  Exit *pexit = NULL;
   int cnt = 0;
   static const char * const dir_text[] = { "n", "e", "s", "w", "u", "d", "ne", "nw", "se", "sw", "?" };
 
@@ -42,20 +41,24 @@ void do_rstat( Character *ch, char *argument )
       ch->Echo("Exits for room '%s.' vnum %d\r\n",
                  location->Name,
                  location->Vnum );
+      cnt = 0;
 
-      for ( cnt = 0, pexit = location->FirstExit; pexit; pexit = pexit->Next )
-        ch->Echo("%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum: %d  Distance: %d\r\n",
-                 ++cnt,
-                 dir_text[pexit->Direction],
-                 pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
-                 pexit->Key,
-                 pexit->Flags,
-                 pexit->Keyword,
-                 !IsNullOrEmpty( pexit->Description )
-                 ? pexit->Description : "(none).\r\n",
-                 pexit->ReverseExit ? pexit->ReverseExit->Vnum : 0,
-                 pexit->ReverseVnum,
-                 pexit->Distance );
+      for(const Exit *pexit : location->Exits())
+        {
+          ch->Echo("%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum: %d  Distance: %d\r\n",
+                   ++cnt,
+                   dir_text[pexit->Direction],
+                   pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
+                   pexit->Key,
+                   pexit->Flags,
+                   pexit->Keyword,
+                   !IsNullOrEmpty( pexit->Description )
+                   ? pexit->Description : "(none).\r\n",
+                   pexit->ReverseExit ? pexit->ReverseExit->Vnum : 0,
+                   pexit->ReverseVnum,
+                   pexit->Distance );
+        }
+      
       return;
     }
 
@@ -136,16 +139,22 @@ void do_rstat( Character *ch, char *argument )
     }
   ch->Echo(".\r\n");
 
-  if ( location->FirstExit )
-    ch->Echo("------------------- EXITS -------------------\r\n");
+  if ( !location->Exits().empty() )
+    {
+      ch->Echo("------------------- EXITS -------------------\r\n");
+    }
+  
+  cnt = 0;
 
-  for ( cnt = 0, pexit = location->FirstExit; pexit; pexit = pexit->Next )
-    ch->Echo("%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
-             ++cnt,
-             dir_text[pexit->Direction],
-             pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
-             pexit->Key,
-             pexit->Flags,
-             !IsNullOrEmpty( pexit->Keyword ) ? pexit->Keyword : "(none)" );
+  for(const Exit *pexit : location->Exits())
+    {
+      ch->Echo("%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
+               ++cnt,
+               dir_text[pexit->Direction],
+               pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
+               pexit->Key,
+               pexit->Flags,
+               !IsNullOrEmpty( pexit->Keyword ) ? pexit->Keyword : "(none)" );
+    }
 }
 

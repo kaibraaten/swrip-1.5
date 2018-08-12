@@ -1919,21 +1919,23 @@ static void ObjectUpdate( void )
               && obj->InRoom->Sector == SECT_AIR
               && (obj->WearFlags & ITEM_TAKE) )
             {
-              Room *new_room = NULL;
-              Exit *xit = NULL;
+              Room *new_room = nullptr;
+              Exit *xit = nullptr;
+              const auto &exitIter = find_if(std::begin(obj->InRoom->Exits()),
+                                             std::end(obj->InRoom->Exits()),
+                                             [](auto ex)
+                                             {
+                                               return ex->Direction == DIR_DOWN;
+                                             });
 
-              for (xit = obj->InRoom->FirstExit; xit; xit = xit->Next )
-		{
-		  if ( xit->Direction == DIR_DOWN )
-		    {
-		      break;
-		    }
-		}
-
-              if ( !xit )
-		{
-		  continue;
-		}
+              if(exitIter != std::end(obj->InRoom->Exits()))
+                {
+                  xit = *exitIter;
+                }
+              else
+                {
+                  continue;
+                }
 
               new_room = xit->ToRoom;
 
@@ -2698,18 +2700,19 @@ void RemovePortal( Object *portal )
   Room *toRoom = NULL;
   Character *ch = NULL;
   Exit *pexit = NULL;
-  bool found = false;
 
-  for ( pexit = fromRoom->FirstExit; pexit; pexit = pexit->Next )
+  const auto &exitIter = find_if(std::begin(fromRoom->Exits()),
+                                 std::end(fromRoom->Exits()),
+                                 [](auto ex)
+                                 {
+                                   return IsBitSet(ex->Flags, EX_PORTAL);
+                                 });
+
+  if(exitIter != std::end(fromRoom->Exits()))
     {
-      if ( IsBitSet( pexit->Flags, EX_PORTAL ) )
-	{
-	  found = true;
-	  break;
-	}
+      pexit = *exitIter;
     }
-
-  if ( !found )
+  else
     {
       Log->Bug( "RemovePortal: portal not found in room %ld!", fromRoom->Vnum );
       return;

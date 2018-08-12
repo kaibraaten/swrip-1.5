@@ -4,15 +4,13 @@
 
 void do_leave( Character *ch, char *argument )
 {
-  Exit *pexit = NULL;
-
   if ( IsNullOrEmpty( argument ) )
     {
-      for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->Next )
+      for ( Exit *ex : ch->InRoom->Exits() )
 	{
-	  if ( IsBitSet( pexit->Flags, EX_xLEAVE ) )
+	  if ( IsBitSet( ex->Flags, EX_xLEAVE ) )
 	    {
-	      MoveCharacter( ch, pexit, 0 );
+	      MoveCharacter( ch, ex );
 	      return;
 	    }
 	}
@@ -21,11 +19,11 @@ void do_leave( Character *ch, char *argument )
       return;
     }
 
-  pexit = FindDoor( ch, argument, true );
-
+  Exit *pexit = FindDoor( ch, argument, true );
+  
   if ( pexit && IsBitSet( pexit->Flags, EX_xLEAVE ) )
     {
-      MoveCharacter( ch, pexit, 0 );
+      MoveCharacter( ch, pexit );
       return;
     }
 
