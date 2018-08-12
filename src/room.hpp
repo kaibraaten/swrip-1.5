@@ -9,6 +9,11 @@ class Room
 {
 public:
   Room();
+  virtual ~Room();
+  void Add(Ship *ship);
+  void Remove(Ship *ship);
+  const std::list<Ship*> &Ships() const;
+  
   Room  *Next = nullptr;
   Room  *NextSort = nullptr;
   Character        *FirstPerson = nullptr;
@@ -20,8 +25,6 @@ public:
   struct Area        *Area = nullptr;
   Exit        *FirstExit = nullptr;
   Exit        *LastExit = nullptr;
-  Ship        *FirstShip = nullptr;
-  Ship        *LastShip = nullptr;
   char             *Name = nullptr;
   char             *Description = nullptr;
   vnum_t            Vnum = INVALID_VNUM;
@@ -42,6 +45,10 @@ public:
     MPROG_DATA     *mudprogs = nullptr;
     int             progtypes = 0;
   } mprog;
+
+private:
+  struct Impl;
+  Impl *pImpl;
 };
 
 #endif
