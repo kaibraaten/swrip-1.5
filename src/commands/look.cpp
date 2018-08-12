@@ -25,7 +25,7 @@ static void LookThroughShipWindow(Character *ch, const Ship *ship);
 static bool ShowShipIfInVincinity(Ship *target, void *userData);
 static void show_char_to_char_0( Character *victim, Character *ch );
 static void show_char_to_char_1( Character *victim, Character *ch );
-static void show_ships_to_char( Ship *ship, Character *ch );
+static void show_ships_to_char( const Room *room, const Character *ch );
 static void show_visible_affects_to_char( Character *victim, Character *ch );
 static void show_exit_to_char( Character *ch, Exit *pexit, short door );
 static void show_no_arg( Character *ch, bool is_auto );
@@ -543,19 +543,27 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       LearnFromFailure( ch, gsn_peek );
 }
 
-static void show_ships_to_char( Ship *ship, Character *ch )
+static void show_ships_to_char( const Room *room, const Character *ch )
 {
-  Ship *rship;
-  Ship *nship=NULL;
-
-  for ( rship = ship; rship; rship = nship )
+  const int NUMBER_OF_COLUMNS = 2;
+  int column = 0;
+  
+  for(const Ship *ship : room->Ships())
     {
-      ch ->Echo("&C%-35s     ", rship->Name );
-      if ( ( nship = rship->NextInRoom ) !=NULL )
+      ch ->Echo("&C%-35s", ship->Name );
+
+      if(++column % NUMBER_OF_COLUMNS == 0)
         {
-          ch ->Echo("%-35s", nship->Name );
-          nship = nship->NextInRoom;
+          ch->Echo("\r\n&w");
         }
+      else
+        {
+          ch ->Echo("     ");
+        }
+    }
+
+  if(++column % NUMBER_OF_COLUMNS == 0)
+    {
       ch->Echo("\r\n&w");
     }
 }
@@ -949,7 +957,7 @@ static void show_no_arg( Character *ch, bool is_auto )
       do_exits( ch, "" );
     }
 
-  show_ships_to_char( ch->InRoom->FirstShip, ch );
+  show_ships_to_char( ch->InRoom, ch );
   ShowShuttlesToCharacter( ch->InRoom->FirstShuttle, ch );
   ShowObjectListToCharacter( ch->InRoom->FirstContent, ch, false, false );
   show_char_to_char( ch->InRoom->FirstPerson,  ch );

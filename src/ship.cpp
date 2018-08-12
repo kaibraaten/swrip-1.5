@@ -1047,10 +1047,9 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( to_room->Tunnel > 0 )
     {
-      Character *ctmp = NULL;
       int count = 0;
 
-      for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
+      for ( const Character *ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
 	{
 	  if ( ++count >= to_room->Tunnel )
 	    {
@@ -2969,8 +2968,7 @@ static void ReadyShipAfterLoad( Ship *ship )
   else if ( ( room = GetRoom( ship->LastDock ) ) != NULL
 	    && ship->Class != CAPITAL_SHIP && ship->Class != SHIP_PLATFORM )
     {
-      LINK( ship, room->FirstShip, room->LastShip, NextInRoom, PreviousInRoom );
-      ship->InRoom = room;
+      room->Add(ship);
       ship->Location = ship->LastDock;
     }
 
@@ -3147,14 +3145,9 @@ void EchoToNearbyShips( int color, const Ship *ship, const std::string &argument
 
 Ship *GetShipInRoom( const Room *room, const std::string &name )
 {
-  Ship *ship = NULL;
+  assert(room != nullptr);
 
-  if ( !room )
-    {
-      return NULL;
-    }
-
-  for ( ship = room->FirstShip ; ship ; ship = ship->NextInRoom )
+  for(Ship *ship : room->Ships())
     {
       if( ship->PersonalName && !StrCmp( name, ship->PersonalName ) )
         {
@@ -3167,7 +3160,7 @@ Ship *GetShipInRoom( const Room *room, const std::string &name )
         }
     }
 
-  for ( ship = room->FirstShip ; ship ; ship = ship->NextInRoom )
+  for(Ship *ship : room->Ships())
     {
       if( ship->PersonalName && NiftyIsNamePrefix( name, ship->PersonalName ) )
         {
@@ -3180,7 +3173,7 @@ Ship *GetShipInRoom( const Room *room, const std::string &name )
         }
     }
 
-  return NULL;
+  return nullptr;
 }
 
 /*
@@ -3558,10 +3551,9 @@ bool ExtractShip( Ship *ship )
 {
   Room *room = ship->InRoom;
 
-  if ( room )
+  if ( room != nullptr )
     {
-      UNLINK( ship, room->FirstShip, room->LastShip, NextInRoom, PreviousInRoom );
-      ship->InRoom = NULL;
+      room->Remove(ship);
     }
 
   return true;
@@ -3798,8 +3790,7 @@ bool ShipToRoom(Ship *ship, vnum_t vnum )
       return false;
     }
 
-  LINK( ship, shipto->FirstShip, shipto->LastShip, NextInRoom, PreviousInRoom );
-  ship->InRoom = shipto;
+  shipto->Add(ship);
   return true;
 }
 
