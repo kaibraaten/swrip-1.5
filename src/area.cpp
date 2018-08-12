@@ -8,6 +8,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];

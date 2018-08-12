@@ -6,6 +6,7 @@
 #include "missile.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_fire(Character *ch, char *argument )
 {

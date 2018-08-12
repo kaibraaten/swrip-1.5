@@ -2,6 +2,7 @@
 #include "vector3_aux.hpp"
 #include "mud.hpp"
 #include "ship.hpp"
+#include "room.hpp"
 
 void do_info(Character *ch, char *argument )
 {

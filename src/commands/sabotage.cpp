@@ -5,6 +5,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 void do_sabotage(Character *ch, char *argument )
 {

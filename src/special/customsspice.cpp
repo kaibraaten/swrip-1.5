@@ -1,13 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 bool spec_customs_spice( Character *ch )
 {
-  Character *victim;
-  Character *v_next;
-  Object  *obj;
-  char       buf[MAX_STRING_LENGTH];
-  long       ch_exp;
+  Character *victim = nullptr;
+  Character *v_next = nullptr;
+  Object *obj = nullptr;
+  char buf[MAX_STRING_LENGTH];
+  long ch_exp = 0;
 
   if ( !IsAwake(ch) || ch->Position == POS_FIGHTING )
     return false;

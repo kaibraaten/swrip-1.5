@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 void do_enter( Character *ch, char *argument )
 {

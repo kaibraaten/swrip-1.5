@@ -5,6 +5,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 void do_collectgold (Character *ch, char *argument)
 {

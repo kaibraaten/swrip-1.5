@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 void do_sit (Character *ch, char *argument )
 {

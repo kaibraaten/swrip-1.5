@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 void do_rreset( Character *ch, char *argument )
 {

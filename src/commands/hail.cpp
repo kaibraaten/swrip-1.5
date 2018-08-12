@@ -4,6 +4,7 @@
 #include "ship.hpp"
 #include "character.hpp"
 #include "area.hpp"
+#include "room.hpp"
 
 void do_hail( Character *ch , char *argument )
 {

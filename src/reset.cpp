@@ -40,6 +40,7 @@
 #include "planet.hpp"
 #include "area.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 static bool IsRoomReset( const Reset *pReset, const Room *aRoom, const Area *pArea );
 static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 );

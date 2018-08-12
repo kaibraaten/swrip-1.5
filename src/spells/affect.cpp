@@ -3,25 +3,27 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 /*
  * Generic spell affect                                         -Thoric
  */
 ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
 {
-  SmaugAffect *saf;
+  SmaugAffect *saf = nullptr;
   Skill *skill = GetSkill(sn);
   Character *victim = (Character *) vo;
-  bool groupsp;
-  bool areasp;
-  bool hitchar, hitroom, hitvict = false;
-  ch_ret retcode;
+  bool groupsp = false;
+  bool areasp = false;
+  bool hitchar = false, hitroom = false, hitvict = false;
+  ch_ret retcode = rNONE;
 
   if ( !skill->Affects )
     {
       Log->Bug( "spell_affect has no affects sn %d", sn );
       return rNONE;
     }
+
   if ( SPELL_FLAG(skill, SF_GROUPSPELL) )
     groupsp = true;
   else

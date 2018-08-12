@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
+#include "room.hpp"
 
 void do_buyhome( Character *ch, char *argument )
 {

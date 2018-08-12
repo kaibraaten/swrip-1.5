@@ -6,6 +6,7 @@
 #include "skill.hpp"
 #include "spaceobject.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_land( Character *ch, char *argument )
 {

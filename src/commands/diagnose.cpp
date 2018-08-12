@@ -5,6 +5,7 @@
 #include "grub.hpp"
 #include "character.hpp"
 #include "playerrepository.hpp"
+#include "room.hpp"
 
 static int diag_int_comp(const void *i, const void *j);
 static void diagnose_help (Character *ch);

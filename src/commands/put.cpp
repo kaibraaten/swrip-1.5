@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "clan.hpp"
+#include "room.hpp"
 
 static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 

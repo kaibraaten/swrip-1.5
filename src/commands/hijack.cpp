@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_hijack( Character *ch, char *argument )
 {

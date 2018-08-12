@@ -6,6 +6,7 @@
 #include "planet.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_gather_intelligence( Character *ch , char *argument )
 {

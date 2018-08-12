@@ -5,6 +5,7 @@
 #include "clan.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_launch( Character *ch, char *argument )
 {

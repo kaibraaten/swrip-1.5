@@ -29,6 +29,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 struct CraftRecipe
 {

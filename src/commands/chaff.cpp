@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_chaff( Character *ch, char *argument )
 {

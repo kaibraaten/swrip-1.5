@@ -26,6 +26,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 int pAbort = 0;
 

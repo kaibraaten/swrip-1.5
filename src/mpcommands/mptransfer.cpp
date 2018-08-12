@@ -1,17 +1,18 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 /* lets the mobile transfer people.  the all argument transfers
    everyone in the current room to the specified location */
 
 void do_mptransfer( Character *ch, char *argument )
 {
-  char             arg1[ MAX_INPUT_LENGTH ];
-  char             arg2[ MAX_INPUT_LENGTH ];
+  char arg1[ MAX_INPUT_LENGTH ];
+  char arg2[ MAX_INPUT_LENGTH ];
   char buf[MAX_STRING_LENGTH];
-  Room *location;
-  Character       *victim;
-  Character       *nextinroom;
+  Room *location = nullptr;
+  Character *victim = nullptr;
+  Character *nextinroom = nullptr;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;

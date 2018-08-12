@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 bool spec_police_attack( Character *ch )
 {

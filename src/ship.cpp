@@ -36,6 +36,7 @@
 #include "script.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 ShipRepository *Ships = nullptr;
 

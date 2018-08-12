@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 bool spec_rebel_trooper( Character *ch )
 {

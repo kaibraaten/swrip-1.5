@@ -33,6 +33,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 extern char lastplayercmd[MAX_INPUT_LENGTH];
 extern Character *gch_prev;

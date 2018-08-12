@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void show_char_to_char( Character *list, Character *ch );
 

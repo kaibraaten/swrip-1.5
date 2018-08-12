@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "ship.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 struct UserData
 {

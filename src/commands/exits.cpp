@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 void do_exits( Character *ch, char *argument )
 {

@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "planet.hpp"
 #include "area.hpp"
+#include "room.hpp"
 
 void do_astat( Character *ch, char *argument )
 {

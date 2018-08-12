@@ -5,6 +5,7 @@
 #include "planet.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_mass_propaganda( Character *ch , char *argument )
 {

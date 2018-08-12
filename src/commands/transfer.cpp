@@ -1,13 +1,14 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 void do_transfer( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Room *location;
-  Descriptor *d;
-  Character *victim;
+  Room *location = nullptr;
+  Descriptor *d = nullptr;
+  Character *victim = nullptr;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );

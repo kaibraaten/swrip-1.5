@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 void do_emote( Character *ch, char *argument )
 {

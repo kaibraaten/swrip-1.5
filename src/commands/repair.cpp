@@ -1,17 +1,18 @@
 #include "shop.hpp"
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
-			    char *arg, int maxgold, char *fixstr, char *fixstr2 );
+			    char *arg, int maxgold, const char *fixstr, const char *fixstr2 );
 
 void do_repair( Character *ch, char *argument )
 {
-  Character *keeper;
-  Object *obj;
-  char *fixstr;
-  char *fixstr2;
-  int maxgold;
+  Character *keeper = nullptr;
+  Object *obj = nullptr;
+  const char *fixstr = nullptr;
+  const char *fixstr2 = nullptr;
+  int maxgold = 0;
 
   if ( IsNullOrEmpty( argument ) )
     {
@@ -65,10 +66,10 @@ void do_repair( Character *ch, char *argument )
 }
 
 static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
-			    char *arg, int maxgold, char *fixstr, char*fixstr2 )
+			    char *arg, int maxgold, const char *fixstr, const char *fixstr2 )
 {
   char buf[MAX_STRING_LENGTH];
-  int cost;
+  int cost = 0;
 
   if ( !CanDropObject( ch, obj ) )
     ch->Echo("You can't let go of %s.\r\n", obj->Name );

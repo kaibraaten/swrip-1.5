@@ -1,14 +1,15 @@
 #include "character.hpp"
 #include "shop.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 void do_sell( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  Character *keeper;
-  Object *obj;
-  int cost;
+  Character *keeper = nullptr;
+  Object *obj = nullptr;
+  int cost = 0;
   bool spice = false;
 
   OneArgument( argument, arg );

@@ -3,6 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 static bool is_legal_kill(Character *ch, Character *vch);
 

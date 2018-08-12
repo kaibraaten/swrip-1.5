@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_buyship(Character *ch, char *argument )
 {

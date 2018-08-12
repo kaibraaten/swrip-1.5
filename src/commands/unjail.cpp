@@ -1,10 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_unjail ( Character *ch , char *argument )
 {
-  Character *victim =NULL;
+  Character *victim = NULL;
   char arg[MAX_INPUT_LENGTH];
 
   argument = OneArgument(argument, arg);

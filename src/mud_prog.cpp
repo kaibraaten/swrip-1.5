@@ -40,6 +40,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 /* Defines by Narn for new mudprog parsing, used as
    return values from mprog_do_command. */

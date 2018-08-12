@@ -1,11 +1,12 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 bool spec_thief( Character *ch )
 {
-  Character *victim;
-  Character *v_next;
-  int gold, maxgold;
+  Character *victim = nullptr;
+  Character *v_next = nullptr;
+  int gold = 0, maxgold = 0;
 
   if ( ch->Position != POS_STANDING )
     return false;

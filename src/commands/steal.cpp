@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_steal( Character *ch, char *argument )
 {

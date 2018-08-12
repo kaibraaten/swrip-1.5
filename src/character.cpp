@@ -30,6 +30,7 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 static bool FindComlink( const Object *element, const Object **comlink );
 

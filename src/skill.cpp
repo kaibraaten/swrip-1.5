@@ -8,6 +8,7 @@
 #include "script.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 int TopSN = 0;
 int TopHerb = 0;

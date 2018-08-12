@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 extern char *spell_target_name;
 
@@ -9,7 +10,7 @@ ch_ret spell_ventriloquate( int sn, int level, Character *ch, void *vo )
   char buf1[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   char speaker[MAX_INPUT_LENGTH];
-  Character *vch;
+  Character *vch = nullptr;
 
   spell_target_name = OneArgument( spell_target_name, speaker );
 

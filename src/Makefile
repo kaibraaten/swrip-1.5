@@ -90,6 +90,7 @@ _OBJ =  act_comm.o \
 	planet.o \
 	playerrepository.o \
 	reset.o \
+	room.o \
 	save.o \
 	script.o \
 	ship.o \

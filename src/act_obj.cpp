@@ -23,6 +23,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 /*
  * how resistant an object is to damage                         -Thoric

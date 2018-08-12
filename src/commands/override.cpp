@@ -3,14 +3,15 @@
 #include "mud.hpp"
 #include "ship.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 void do_override(Character *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  Ship *ship;
-  Ship *eShip = NULL;
+  Ship *ship = nullptr;
+  Ship *eShip = nullptr;
 
   argument = OneArgument( argument, arg );
   strcpy ( arg2, argument);

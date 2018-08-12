@@ -1,10 +1,11 @@
 #include "ship.hpp"
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 void do_openhatch(Character *ch, char *argument )
 {
-  Ship *ship;
+  Ship *ship = nullptr;
   char buf[MAX_STRING_LENGTH];
 
   if ( IsNullOrEmpty( argument ) || !StrCmp(argument,"hatch") )

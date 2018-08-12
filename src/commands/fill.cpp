@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 /*
  * Fill a container

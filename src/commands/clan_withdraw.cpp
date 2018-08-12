@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_clan_withdraw( Character *ch, char *argument )
 {

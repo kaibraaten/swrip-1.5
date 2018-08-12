@@ -2,16 +2,17 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 extern char *spell_target_name;
 
 ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
 {
   Affect af;
-  int retcode;
-  int sleep_chance;
-  int tmp;
-  Character *victim;
+  int retcode = rNONE;
+  int sleep_chance = 0;
+  int tmp = 0;
+  Character *victim = nullptr;
   Skill *skill = GetSkill(sn);
 
   if ( ( victim = GetCharacterInRoom( ch, spell_target_name ) ) == NULL )

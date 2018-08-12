@@ -4,6 +4,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 void do_reset( Character *ch, char *argument )
 {

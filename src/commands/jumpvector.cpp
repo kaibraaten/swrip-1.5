@@ -4,6 +4,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 static bool ship_was_in_range( Ship *ship, Ship *target );
 

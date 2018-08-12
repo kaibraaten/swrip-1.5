@@ -1,10 +1,11 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 void do_noemote( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
 
   OneArgument( argument, arg );
 

@@ -30,6 +30,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "playerrepository.hpp"
+#include "room.hpp"
 
 extern Character *gch_prev;
 extern Object *gobj_prev;

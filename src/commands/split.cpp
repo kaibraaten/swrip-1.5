@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 /*
  * 'Split' originally by Gnort, God of Chaos.

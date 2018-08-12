@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 void do_sleep( Character *ch, char *argument )
 {

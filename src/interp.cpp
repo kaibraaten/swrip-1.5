@@ -19,12 +19,6 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#ifdef __STRICT_ANSI__
-/* To include the prototype for strdup() */
-#define _DEFAULT_SOURCE
-#define _BSD_SOURCE
-#endif
-
 #include <cstring>
 #include <strings.h>
 #include <cctype>
@@ -36,6 +30,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 /*
  * Log-all switch.

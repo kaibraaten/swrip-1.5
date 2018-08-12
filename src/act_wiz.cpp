@@ -29,11 +29,11 @@
 #include "shop.hpp"
 #include "area.hpp"
 #include "script.hpp"
+#include "room.hpp"
 
 /*
  * Global variables.
  */
-
 char reboot_time[50];
 time_t new_boot_time_t;
 

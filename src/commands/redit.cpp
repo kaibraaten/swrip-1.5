@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "editor.hpp"
@@ -6,6 +6,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 void do_redit( Character *ch, char *argument )
 {

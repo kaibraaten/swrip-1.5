@@ -4,6 +4,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 extern char *spell_target_name;
 extern int pAbort;

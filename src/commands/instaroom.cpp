@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 void do_instaroom( Character *ch, char *argument )
 {

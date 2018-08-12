@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "room.hpp"
 
 void do_flee( Character *ch, char *argument )
 {

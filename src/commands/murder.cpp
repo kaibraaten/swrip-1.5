@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 void do_murder( Character *ch, char *argument )
 {

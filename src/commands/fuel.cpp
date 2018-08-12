@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "ship.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 static Ship *GetFuelTarget(const Ship *fuelSource);
 

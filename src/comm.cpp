@@ -36,6 +36,7 @@
 #include "help.hpp"
 #include "ban.hpp"
 #include "pcdata.hpp"
+#include "room.hpp"
 
 /*
  * Socket and TCP/IP stuff.

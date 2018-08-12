@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "ship.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 void do_closebay( Character *ch, char *argument )
 {

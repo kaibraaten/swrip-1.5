@@ -2,6 +2,7 @@
 #include "shop.hpp"
 #include "mud.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 void do_list( Character *ch, char *argument )
 {

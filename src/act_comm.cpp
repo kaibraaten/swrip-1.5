@@ -28,6 +28,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 const char *DrunkSpeech( const std::string &argument, Character *ch )
 {

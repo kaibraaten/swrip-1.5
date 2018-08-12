@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "planet.hpp"
 #include "area.hpp"
+#include "room.hpp"
 
 void do_aset( Character *ch, char *argument )
 {

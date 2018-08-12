@@ -28,6 +28,7 @@
 #include "track.hpp"
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 #define TRACK_THROUGH_DOORS
 

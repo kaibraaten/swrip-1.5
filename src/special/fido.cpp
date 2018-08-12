@@ -1,12 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "room.hpp"
 
 bool spec_fido( Character *ch )
 {
-  Object *corpse;
-  Object *c_next;
-  Object *obj;
-  Object *obj_next;
+  Object *corpse = nullptr;
+  Object *c_next = nullptr;
+  Object *obj = nullptr;
+  Object *obj_next = nullptr;
 
   if ( !IsAwake(ch) )
     return false;

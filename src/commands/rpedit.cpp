@@ -2,14 +2,15 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "log.hpp"
+#include "room.hpp"
 
 void do_rpedit( Character *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
   char arg3 [MAX_INPUT_LENGTH];
-  MPROG_DATA *mprog, *mprg, *mprg_next;
-  int value, mptype, cnt;
+  MPROG_DATA *mprog = nullptr, *mprg = nullptr, *mprg_next = nullptr;
+  int value = 0, mptype = 0, cnt = 0;
 
   if ( IsNpc( ch ) )
     {

@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 static void rpfind_help (Character *ch);
 

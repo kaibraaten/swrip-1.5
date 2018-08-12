@@ -1,6 +1,7 @@
 #include "ship.hpp"
 #include "mud.hpp"
 #include "character.hpp"
+#include "room.hpp"
 
 void do_drag( Character *ch, char *argument )
 {
