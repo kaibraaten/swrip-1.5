@@ -1,9 +1,11 @@
 #include "room.hpp"
 #include "ship.hpp"
+#include "shuttle.hpp"
 
 struct Room::Impl
 {
   std::list<Ship*> Ships;
+  std::list<Shuttle*> Shuttles;
 };
 
 Room::Room()
@@ -32,4 +34,21 @@ void Room::Remove(Ship *ship)
 const std::list<Ship*> &Room::Ships() const
 {
   return pImpl->Ships;
+}
+
+void Room::Add(Shuttle *shuttle)
+{
+  pImpl->Shuttles.push_back(shuttle);
+  shuttle->InRoom = this;
+}
+
+void Room::Remove(Shuttle *shuttle)
+{
+  pImpl->Shuttles.remove(shuttle);
+  shuttle->InRoom = nullptr;
+}
+
+const std::list<Shuttle*> &Room::Shuttles() const
+{
+  return pImpl->Shuttles;
 }

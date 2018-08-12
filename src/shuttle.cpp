@@ -333,20 +333,28 @@ void ShuttleUpdate( void )
     }
 }
 
-void ShowShuttlesToCharacter( const Shuttle *shuttle, Character *ch )
+void ShowShuttlesToCharacter( const std::list<Shuttle*> &shuttles, Character *ch )
 {
-  while (shuttle)
+  const int NUMBER_OF_COLUMNS = 2;
+  int column = 0;
+  
+  for(const Shuttle *shuttle : shuttles)
     {
       SetCharacterColor( AT_SHIP, ch );
       ch->Echo( "%-35s", shuttle->Name );
 
-      if ( shuttle->NextInRoom )
-	{
-	  shuttle = shuttle->NextInRoom;
-	  ch->Echo( "%-35s", shuttle->Name );
-	}
+      if(++column % NUMBER_OF_COLUMNS == 0)
+        {
+          ch->Echo("\r\n&w");
+        }
+      else
+        {
+          ch ->Echo("     ");
+        }
+    }
 
-      shuttle = shuttle->NextInRoom;
+  if(++column % NUMBER_OF_COLUMNS == 0)
+    {
       ch->Echo("\r\n&w");
     }
 }
@@ -357,8 +365,7 @@ bool ExtractShuttle( Shuttle * shuttle )
 
   if ( ( room = shuttle->InRoom ) != NULL )
     {
-      UNLINK( shuttle, room->FirstShuttle, room->LastShuttle, NextInRoom, PreviousInRoom );
-      shuttle->InRoom = NULL;
+      room->Remove(shuttle);
     }
 
   return true;
@@ -374,8 +381,7 @@ bool InsertShuttle( Shuttle *shuttle, Room *room )
       ExtractShuttle(shuttle);
     }
 
-  shuttle->InRoom = room;
-  LINK( shuttle, room->FirstShuttle, room->LastShuttle, NextInRoom, PreviousInRoom );
+  room->Add(shuttle);
   return true;
 }
 
@@ -603,14 +609,12 @@ void PermanentlyDestroyShuttle(Shuttle *shuttle)
 
 Shuttle *GetShuttleInRoom( const Room *room, const std::string &name )
 {
-  Shuttle *shuttle = nullptr;
-
   if (room == nullptr)
     {
       return NULL;
     }
 
-  for ( shuttle = room->FirstShuttle ; shuttle ; shuttle = shuttle->NextInRoom )
+  for(Shuttle *shuttle : room->Shuttles())
     {
       if ( !StrCmp( name, shuttle->Name ) )
 	{
@@ -618,7 +622,7 @@ Shuttle *GetShuttleInRoom( const Room *room, const std::string &name )
 	}
     }
 
-  for ( shuttle = room->FirstShuttle ; shuttle ; shuttle = shuttle->NextInRoom )
+  for(Shuttle *shuttle : room->Shuttles())
     {
       if ( NiftyIsNamePrefix( name, shuttle->Name ) )
 	{

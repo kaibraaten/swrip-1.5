@@ -550,7 +550,8 @@ static void show_ships_to_char( const Room *room, const Character *ch )
   
   for(const Ship *ship : room->Ships())
     {
-      ch ->Echo("&C%-35s", ship->Name );
+      SetCharacterColor( AT_SHIP, ch );      
+      ch ->Echo("%-35s", ship->Name );
 
       if(++column % NUMBER_OF_COLUMNS == 0)
         {
@@ -958,7 +959,7 @@ static void show_no_arg( Character *ch, bool is_auto )
     }
 
   show_ships_to_char( ch->InRoom, ch );
-  ShowShuttlesToCharacter( ch->InRoom->FirstShuttle, ch );
+  ShowShuttlesToCharacter( ch->InRoom->Shuttles(), ch );
   ShowObjectListToCharacter( ch->InRoom->FirstContent, ch, false, false );
   show_char_to_char( ch->InRoom->FirstPerson,  ch );
 

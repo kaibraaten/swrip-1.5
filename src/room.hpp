@@ -10,9 +10,14 @@ class Room
 public:
   Room();
   virtual ~Room();
+
   void Add(Ship *ship);
   void Remove(Ship *ship);
   const std::list<Ship*> &Ships() const;
+
+  void Add(Shuttle *shuttle);
+  void Remove(Shuttle *shuttle);
+  const std::list<Shuttle*> &Shuttles() const;
   
   Room  *Next = nullptr;
   Room  *NextSort = nullptr;
@@ -34,8 +39,6 @@ public:
   vnum_t            TeleVnum = INVALID_VNUM;
   short             TeleDelay = 0;
   short             Tunnel = 0;              /* max people that will fit */
-  Shuttle     *FirstShuttle = nullptr;
-  Shuttle     *LastShuttle = nullptr;
 
   struct
   {
