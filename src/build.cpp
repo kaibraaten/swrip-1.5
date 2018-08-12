@@ -291,16 +291,15 @@ bool DelOExtraProto( ProtoObject *obj, const std::string &keywords )
 
 void FoldArea( Area *tarea, const std::string &filename, bool install )
 {
-  Reset *treset = NULL;
+  const Reset *treset = NULL;
   Room *room = NULL;
   ProtoMobile *pMobIndex = NULL;
   ProtoObject *pObjIndex = NULL;
-  MPROG_DATA *mprog = NULL;
-  Exit *xit = NULL;
-  ExtraDescription *ed = NULL;
-  Affect *paf = NULL;
-  Shop *pShop = NULL;
-  RepairShop *pRepair = NULL;
+  const MPROG_DATA *mprog = NULL;
+  const ExtraDescription *ed = NULL;
+  const Affect *paf = NULL;
+  const Shop *pShop = NULL;
+  const RepairShop *pRepair = NULL;
   char buf[MAX_STRING_LENGTH];
   FILE *fpout = NULL;
   vnum_t vnum = INVALID_VNUM;
@@ -546,6 +545,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
 
   /* save rooms   */
   fprintf( fpout, "#ROOMS\n" );
+
   for ( vnum = tarea->VnumRanges.Room.First; vnum <= tarea->VnumRanges.Room.Last; vnum++ )
     {
       if ( (room = GetRoom( vnum )) == NULL )
@@ -584,7 +584,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
       else
         fprintf( fpout, "0 %d %d\n", room->Flags, room->Sector );
 
-      for ( xit = room->FirstExit; xit; xit = xit->Next )
+      for(const Exit *xit : room->Exits())
         {
           if ( IsBitSet(xit->Flags, EX_PORTAL) ) /* don't fold portals */
             continue;

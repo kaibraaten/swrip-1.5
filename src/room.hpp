@@ -18,6 +18,10 @@ public:
   void Add(Shuttle *shuttle);
   void Remove(Shuttle *shuttle);
   const std::list<Shuttle*> &Shuttles() const;
+
+  void Add(Exit *xit);
+  void Remove(Exit *xit);
+  const std::list<Exit*> &Exits() const;
   
   Room  *Next = nullptr;
   Room  *NextSort = nullptr;
@@ -28,8 +32,6 @@ public:
   ExtraDescription *FirstExtraDescription = nullptr;
   ExtraDescription *LastExtraDescription = nullptr;
   struct Area        *Area = nullptr;
-  Exit        *FirstExit = nullptr;
-  Exit        *LastExit = nullptr;
   char             *Name = nullptr;
   char             *Description = nullptr;
   vnum_t            Vnum = INVALID_VNUM;

@@ -117,8 +117,6 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
   Character *rnext = NULL;
   Object *robj = NULL;
   Object *robj_next = NULL;
-  Exit *pexit = 0;
-
   int dam = 0;
 
   if ( IsBitSet( room->Flags, BFS_MARK ) )
@@ -166,7 +164,7 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
     }
 
   /* other rooms */
-  for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
+  for(const Exit *pexit : room->Exits())
     {
       if ( pexit->ToRoom
 	   && pexit->ToRoom != room )
@@ -196,9 +194,7 @@ void ExplodeRoom_2( Room *room , int blast )
 
   if ( blast > 0 )
     {
-      Exit *pexit = NULL;
-
-      for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
+      for(const Exit *pexit : room->Exits())
         {
           if ( pexit->ToRoom && pexit->ToRoom != room )
             {
@@ -2036,7 +2032,7 @@ Object *GetTrap( const Object *obj )
  */
 void ExtractExit( Room *room, Exit *pexit )
 {
-  UNLINK( pexit, room->FirstExit, room->LastExit, Next, Previous );
+  room->Remove(pexit);
 
   if ( pexit->ReverseExit )
     pexit->ReverseExit->ReverseExit = NULL;
@@ -2052,7 +2048,6 @@ void ExtractExit( Room *room, Exit *pexit )
 void CleanRoom( Room *room )
 {
   ExtraDescription      *ed, *ed_next;
-  Exit             *pexit, *pexit_next;
 
   if ( !room )
     return;
@@ -2072,17 +2067,16 @@ void CleanRoom( Room *room )
   room->FirstExtraDescription = NULL;
   room->LastExtraDescription = NULL;
 
-  for ( pexit = room->FirstExit; pexit; pexit = pexit_next )
+  while(!room->Exits().empty())
     {
-      pexit_next = pexit->Next;
+      Exit *pexit = room->Exits().front();
+      room->Remove(pexit);
       FreeMemory( pexit->Keyword );
       FreeMemory( pexit->Description );
       FreeMemory( pexit );
       top_exit--;
     }
   
-  room->FirstExit = NULL;
-  room->LastExit = NULL;
   room->Flags = 0;
   room->Sector = SECT_CITY;
   room->Light = 0;

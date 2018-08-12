@@ -722,7 +722,6 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 {
   int count = 0;
   Object *obj = NULL;
-  Exit *pexit = NULL;
 
   if ( IsNullOrEmpty( what ) )
     {
@@ -772,7 +771,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
       break;
 
     case ITEM_PORTAL:
-      for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->Next )
+      for(const Exit *pexit : ch->InRoom->Exits())
 	{
 	  if ( pexit->Direction == DIR_PORTAL
 	       &&   IsBitSet(pexit->Flags, EX_PORTAL) )

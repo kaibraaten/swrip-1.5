@@ -289,7 +289,9 @@ static void LoadBuildList( void );
 static void LoadSystemData( void );
 static void InitializeEconomy( void );
 static void FixExits( void );
+#if 0
 static int ExitComparator( Exit **xit1, Exit **xit2 );
+#endif
 static void SortExits( Room *room );
 static void ToWizFile( const char *line );
 static void AddToWizList( const char *name, int level );
@@ -760,12 +762,11 @@ static void FixExits( void )
             pRoomIndex;
             pRoomIndex  = pRoomIndex->Next )
         {
-	  Exit *pexit = nullptr, *pexit_next = nullptr;
           bool fexit = false;
+          std::list<Exit*> copyOfExitList(pRoomIndex->Exits());
 
-          for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit_next )
+          for(Exit *pexit : copyOfExitList)
             {
-              pexit_next = pexit->Next;
               pexit->ReverseVnum = pRoomIndex->Vnum;
 
               if ( pexit->Vnum <= 0
@@ -803,7 +804,7 @@ static void FixExits( void )
             pRoomIndex;
             pRoomIndex  = pRoomIndex->Next )
         {
-          for ( Exit *pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->Next )
+          for ( Exit *pexit : pRoomIndex->Exits())
             {
               if ( pexit->ToRoom && !pexit->ReverseExit )
                 {
@@ -823,6 +824,7 @@ static void FixExits( void )
  * (prelude...) This is going to be fun... NOT!
  * (conclusion) QSort is f*cked!
  */
+#if 0
 static int ExitComparator( Exit **xit1, Exit **xit2 )
 {
   int d1, d2;
@@ -836,15 +838,16 @@ static int ExitComparator( Exit **xit1, Exit **xit2 )
     return 1;
   return 0;
 }
+#endif
 
+// TODO: Re-implement this.
 static void SortExits( Room *room )
 {
-  Exit *pexit; /* *texit */ /* Unused */
+#if 0
   Exit *exits[MAX_REXITS];
-  int x, nexits;
+  int nexits = 0;
 
-  nexits = 0;
-  for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
+  for(Exit *pexit : room->Exits())
     {
       exits[nexits++] = pexit;
 
@@ -855,7 +858,7 @@ static void SortExits( Room *room )
   qsort( &exits[0], nexits, sizeof( Exit * ),
          (int(*)(const void *, const void *)) ExitComparator );
 
-  for ( x = 0; x < nexits; x++ )
+  for ( int x = 0; x < nexits; x++ )
     {
       if ( x > 0 )
 	{
@@ -866,34 +869,38 @@ static void SortExits( Room *room )
           exits[x]->Previous        = NULL;
           room->FirstExit      = exits[x];
         }
+
       if ( x >= (nexits - 1) )
         {
           exits[x]->Next        = NULL;
           room->LastExit       = exits[x];
         }
       else
-        exits[x]->Next  = exits[x+1];
+        {
+          exits[x]->Next  = exits[x+1];
+        ]
     }
+#endif
 }
 
 void RandomizeExits( Room *room, short maxdir )
 {
-  Exit *pexit;
-  int nexits, d0, d1, count; /* Maxd unused */
-  DirectionType door;
+  int nexits = 0;
   DirectionType vdirs[MAX_REXITS];
 
-  nexits = 0;
-  for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
-    vdirs[nexits++] = pexit->Direction;
-
-  for ( d0 = 0; d0 < nexits; d0++ )
+  for(Exit *pexit : room->Exits())
+    {
+      vdirs[nexits++] = pexit->Direction;
+    }
+  
+  for ( int d0 = 0; d0 < nexits; d0++ )
     {
       if ( vdirs[d0] > maxdir )
         continue;
 
-      count = 0;
-
+      int count = 0;
+      int d1 = 0;
+      
       while ( vdirs[(d1 = GetRandomNumberFromRange( d0, nexits - 1 ))] > maxdir
               ||      ++count > 5 )
 	;
@@ -901,14 +908,18 @@ void RandomizeExits( Room *room, short maxdir )
       if ( vdirs[d1] > maxdir )
         continue;
 
-      door              = vdirs[d0];
+      DirectionType door = vdirs[d0];
       vdirs[d0] = vdirs[d1];
       vdirs[d1] = door;
     }
-  count = 0;
-  for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
-    pexit->Direction = vdirs[count++];
 
+  int count = 0;
+  
+  for(Exit *pexit : room->Exits())
+    {
+      pexit->Direction = vdirs[count++];
+    }
+  
   SortExits( room );
 }
 
@@ -1818,8 +1829,7 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name )
  */
 Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
 {
-  Exit *pexit = NULL, *texit = NULL;
-  bool broke = false;
+  Exit *pexit = nullptr;
 
   AllocateMemory( pexit, Exit, 1 );
   pexit->Direction           = door;
@@ -1830,49 +1840,16 @@ Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
   if ( to_room )
     {
       pexit->Vnum = to_room->Vnum;
-      texit = GetExitTo( to_room, GetReverseDirection(door), pRoomIndex->Vnum );
+      Exit *texit = GetExitTo( to_room, GetReverseDirection(door), pRoomIndex->Vnum );
 
-      if ( texit )      /* assign reverse exit pointers */
+      if ( texit != nullptr )      /* assign reverse exit pointers */
         {
           texit->ReverseExit = pexit;
           pexit->ReverseExit = texit;
         }
     }
-  
-  for ( texit = pRoomIndex->FirstExit; texit; texit = texit->Next )
-    {
-      if ( door < texit->Direction )
-	{
-	  broke = true;
-	  break;
-	}
-    }
-  
-  if ( !pRoomIndex->FirstExit )
-    {
-      pRoomIndex->FirstExit      = pexit;
-    }
-  else
-    {
-      /* keep exits in incremental order - insert exit into list */
-      if ( broke && texit )
-        {
-          if ( !texit->Previous )
-            pRoomIndex->FirstExit      = pexit;
-          else
-            texit->Previous->Next           = pexit;
-          pexit->Previous                   = texit->Previous;
-          pexit->Next                   = texit;
-          texit->Previous                   = pexit;
-          top_exit++;
-          return pexit;
-        }
-      pRoomIndex->LastExit->Next       = pexit;
-    }
 
-  pexit->Next                   = NULL;
-  pexit->Previous                   = pRoomIndex->LastExit;
-  pRoomIndex->LastExit         = pexit;
+  pRoomIndex->Add(pexit);
   top_exit++;
   return pexit;
 }

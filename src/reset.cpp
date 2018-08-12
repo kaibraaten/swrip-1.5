@@ -1351,9 +1351,7 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
 
   if ( dodoors )
     {
-      Exit *pexit = NULL;
-
-      for ( pexit = pRoom->FirstExit; pexit; pexit = pexit->Next )
+      for(const Exit *pexit : pRoom->Exits())
         {
           int state = 0;
 

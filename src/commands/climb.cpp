@@ -4,15 +4,13 @@
 
 void do_climb( Character *ch, char *argument )
 {
-  Exit *pexit = NULL;
-
   if ( IsNullOrEmpty( argument ) )
     {
-      for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->Next )
+      for(Exit *ex : ch->InRoom->Exits())
 	{
-	  if ( IsBitSet( pexit->Flags, EX_xCLIMB ) )
+	  if ( IsBitSet( ex->Flags, EX_xCLIMB ) )
 	    {
-	      MoveCharacter( ch, pexit );
+	      MoveCharacter( ch, ex );
 	      return;
 	    }
 	}
@@ -21,7 +19,7 @@ void do_climb( Character *ch, char *argument )
       return;
     }
 
-  pexit = FindDoor( ch, argument, true );
+  Exit *pexit = FindDoor( ch, argument, true );
 
   if ( pexit && IsBitSet( pexit->Flags, EX_xCLIMB ) )
     {

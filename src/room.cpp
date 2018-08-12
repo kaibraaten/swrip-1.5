@@ -1,11 +1,13 @@
 #include "room.hpp"
 #include "ship.hpp"
 #include "shuttle.hpp"
+#include "mud.hpp"
 
 struct Room::Impl
 {
   std::list<Ship*> Ships;
   std::list<Shuttle*> Shuttles;
+  std::list<Exit*> Exits;
 };
 
 Room::Room()
@@ -51,4 +53,23 @@ void Room::Remove(Shuttle *shuttle)
 const std::list<Shuttle*> &Room::Shuttles() const
 {
   return pImpl->Shuttles;
+}
+
+void Room::Add(Exit *xit)
+{
+  pImpl->Exits.push_back(xit);
+  pImpl->Exits.sort([](const auto x1, const auto x2)
+                    {
+                      return x1->Direction <= x2->Direction;
+                    });
+}
+
+void Room::Remove(Exit *xit)
+{
+  pImpl->Exits.remove(xit);
+}
+
+const std::list<Exit*> &Room::Exits() const
+{
+  return pImpl->Exits;
 }
