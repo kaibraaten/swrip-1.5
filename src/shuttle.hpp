@@ -23,6 +23,7 @@
 #ifndef _SWRIP_SHUTTLE_HPP_
 #define _SWRIP_SHUTTLE_HPP_
 
+#include <list>
 #include <string>
 #include <utility/repository.hpp>
 #include "types.hpp"
@@ -106,7 +107,7 @@ Shuttle *NewShuttle(const std::string &name);
 bool ExtractShuttle( Shuttle *shuttle );
 bool InsertShuttle( Shuttle *shuttle, Room *room );
 void PermanentlyDestroyShuttle( Shuttle *shuttle );
-void ShowShuttlesToCharacter( const Shuttle *shuttle, Character *ch );
+void ShowShuttlesToCharacter( const std::list<Shuttle*> &shuttles, Character *ch );
 Shuttle *GetShuttleInRoom( const Room *room, const std::string &name );
 Shuttle *GetShuttleFromEntrance( vnum_t vnum );
 ShuttleStop *AllocateShuttleStop( void );
