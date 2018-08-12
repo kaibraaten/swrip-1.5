@@ -45,10 +45,6 @@ void do_config( Character *ch, char *argument )
                 ? "[+GAG      ] You see only necessary battle text.\r\n"
                 : "[-gag      ] You see full battle text.\r\n");
 
-      ch->Echo( "%s",  IsBitSet(ch->PCData->Flags, PCFLAG_PAGERON)
-                ? "[+PAGER    ] Long output is page-paused.\r\n"
-                : "[-pager    ] Long output scrolls to the end.\r\n");
-
       ch->Echo( "%s", IsBitSet(ch->Flags, PLR_BLANK)
                 ? "[+BLANK    ] You have a blank line before your prompt.\r\n"
                 : "[-blank    ] You have no blank line before your prompt.\r\n");
@@ -196,8 +192,6 @@ void do_config( Character *ch, char *argument )
 	    bit = PCFLAG_NOSUMMON;
           else if ( !StringPrefix( arg+1, "gag"      ) )
 	    bit = PCFLAG_GAG;
-          else if ( !StringPrefix( arg+1, "pager"    ) )
-	    bit = PCFLAG_PAGERON;
           else if ( !StringPrefix( arg+1, "roomflags")
                     && (IsImmortal(ch)))
 	    bit = PCFLAG_ROOM;

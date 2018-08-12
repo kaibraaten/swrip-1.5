@@ -302,7 +302,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
 
   if ( !found )
     {
-      AllocateMemory( room, Room, 1 );
+      room = new Room();
       room->Area          = in_room->Area;
       room->Vnum          = serial;
       room->TeleVnum     = roomnum;

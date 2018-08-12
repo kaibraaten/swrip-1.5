@@ -965,7 +965,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
       else
         {
 	  oldroom = false;
-          AllocateMemory( pRoomIndex, Room, 1 );
+          pRoomIndex = new Room();
         }
 
       fBootDb = tmpBootDb;

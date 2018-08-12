@@ -2540,7 +2540,7 @@ const std::array<const char * const, MAX_BIT> PcFlags =
     "Retired",
     "Guest",
     "NoSummon",
-    "PagerOn",
+    "_09",
     "NoTitled",
     "Room",
     "_12",

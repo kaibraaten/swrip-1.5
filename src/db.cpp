@@ -1594,7 +1594,7 @@ bool DeleteRoom( Room *room )
   FreeMemory( room->Description );
 
   /* Free up the ram held by the room index itself. */
-  free( room );
+  delete room;
 
   top_room--;
   return true;
@@ -1617,17 +1617,15 @@ bool DeleteMobile( ProtoMobile *mob )
  */
 Room *MakeRoom( vnum_t vnum )
 {
-  Room *pRoomIndex;
-  int   iHash;
+  Room *pRoomIndex = new Room();
 
-  AllocateMemory( pRoomIndex, Room, 1 );
   pRoomIndex->Vnum              = vnum;
   pRoomIndex->Name              = CopyString("Floating in a void");
   pRoomIndex->Description               = CopyString("");
   pRoomIndex->Flags                = ROOM_PROTOTYPE;
   pRoomIndex->Sector               = SECT_INSIDE;
 
-  iHash                 = vnum % MAX_KEY_HASH;
+  int iHash                 = vnum % MAX_KEY_HASH;
   pRoomIndex->Next      = RoomIndexHash[iHash];
   RoomIndexHash[iHash]        = pRoomIndex;
   top_room++;

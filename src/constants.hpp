@@ -1800,7 +1800,7 @@ enum
 #define PCFLAG_RETIRED   BV06
 #define PCFLAG_GUEST     BV07
 #define PCFLAG_NOSUMMON  BV08
-#define PCFLAG_PAGERON   BV09
+
 #define PCFLAG_NOTITLE   BV10
 #define PCFLAG_ROOM      BV11
 #define PCFLAG_DND       BV12
