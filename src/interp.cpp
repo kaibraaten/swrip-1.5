@@ -501,7 +501,7 @@ void Interpret( Character *ch, char *argument )
   StopTimer(&time_used);
 
   /*
-   * Update the record of how many times this command.hppas been used (haus)
+   * Update the record of how many times this command has been used (haus)
    */
   UpdateNumberOfTimesUsed(&time_used, cmd->UseRec);
   tmptime = umin(time_used.tv_sec,19) * 1000000 + time_used.tv_usec;

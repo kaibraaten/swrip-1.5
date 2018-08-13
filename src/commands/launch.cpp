@@ -82,7 +82,7 @@ void do_launch( Character *ch, char *argument )
 
   if (ship->Thrusters.Energy.Current == 0)
     {
-      ch->Echo("&RThis ship.hppas no fuel.\r\n");
+      ch->Echo("&RThis ship has no fuel.\r\n");
       return;
     }
 
@@ -211,7 +211,7 @@ void do_launch( Character *ch, char *argument )
       ch->Echo("Launch sequence initiated.\r\n");
       Act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
            NULL, argument , TO_ROOM );
-      EchoToShip( AT_YELLOW , ship , "The ship.hppums as it lifts off the ground.");
+      EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
       sprintf( buf, "%s begins to launch.", ship->Name );
       EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
       EchoToDockedShip( AT_YELLOW , ship, "The ship shudders as it lifts off the ground." );

@@ -100,19 +100,18 @@ void do_drag( Character *ch, char *argument )
 
               if ( to_room->Tunnel > 0 )
                 {
-                  int count = 0;
+                  int count = to_room->Characters().size();
 
-                  for ( const Character *ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
-                    if ( count+2 >= to_room->Tunnel )
-                      {
-                        ch->Echo( "There is no room for you both in there.\r\n" );
-                        return;
-                      }
+                  if ( count + 2 >= to_room->Tunnel )
+                    {
+                      ch->Echo( "There is no room for you both in there.\r\n" );
+                      return;
+                    }
                 }
 
               if ( ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2 )
                 {
-                  ch->Echo("&rThat ship.hppas already started launching!\r\n");
+                  ch->Echo("&rThat ship has already started launching!\r\n");
                   return;
                 }
 
@@ -139,7 +138,7 @@ void do_drag( Character *ch, char *argument )
             }
           else
             {
-              ch->Echo("That ship.hppas no entrance!\r\n");
+              ch->Echo("That ship has no entrance!\r\n");
               return;
             }
         }
@@ -183,21 +182,18 @@ void do_drag( Character *ch, char *argument )
 
               if ( to_room->Tunnel > 0 )
                 {
-                  int count = 0;
+                  int count = to_room->Characters().size();
 
-                  for(const Character *ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
+                  if ( count + 2 >= to_room->Tunnel )
                     {
-                      if ( count+2 >= to_room->Tunnel )
-                        {
-                          ch->Echo( "There is no room for you both in there.\r\n" );
-                          return;
-                        }
+                      ch->Echo( "There is no room for you both in there.\r\n" );
+                      return;
                     }
                 }
 
               if ( ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2 )
                 {
-                  ch->Echo("&rThat ship.hppas already started launching!\r\n");
+                  ch->Echo("&rThat ship has already started launching!\r\n");
                   return;
                 }
 
@@ -224,7 +220,7 @@ void do_drag( Character *ch, char *argument )
             }
 	  else
             {
-              ch->Echo("That ship.hppas no entrance!\r\n");
+              ch->Echo("That ship has no entrance!\r\n");
               return;
             }
         }

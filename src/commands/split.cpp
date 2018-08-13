@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
@@ -9,8 +10,6 @@ void do_split( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  Character *gch = NULL;
-  int members = 0;
   int amount = 0;
   int share = 0;
   int extra = 0;
@@ -43,15 +42,13 @@ void do_split( Character *ch, char *argument )
       return;
     }
 
-  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->NextInRoom )
-    {
-      if ( IsInSameGroup( gch, ch ) )
-	{
-	  members++;
-	}
-    }
-
-
+  int members = count_if(std::begin(ch->InRoom->Characters()),
+                         std::end(ch->InRoom->Characters()),
+                         [ch](auto gch)
+                         {
+                           return IsInSameGroup(gch, ch);
+                         });
+  
   if (( IsBitSet(ch->Flags, PLR_AUTOGOLD)) && (members < 2))
     {
       return;
@@ -82,7 +79,7 @@ void do_split( Character *ch, char *argument )
   sprintf( buf, "$n splits %d credits. Your share is %d credits.",
            amount, share );
 
-  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->NextInRoom )
+  for(Character *gch : ch->InRoom->Characters())
     {
       if ( gch != ch && IsInSameGroup( gch, ch ) )
         {

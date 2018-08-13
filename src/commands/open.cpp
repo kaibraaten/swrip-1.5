@@ -50,9 +50,7 @@ void do_open( Character *ch, char *argument )
           if ( (pexit_rev = pexit->ReverseExit) != NULL
                && pexit_rev->ToRoom == ch->InRoom )
             {
-              Character *rch = NULL;
-
-              for ( rch = pexit->ToRoom->FirstPerson; rch; rch = rch->NextInRoom )
+              for(Character *rch : pexit->ToRoom->Characters())
 		{
 		  Act( AT_ACTION, "The $d opens.",
 		       rch, NULL, pexit_rev->Keyword, TO_CHAR );

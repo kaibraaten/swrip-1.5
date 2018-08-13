@@ -22,7 +22,7 @@ void do_closebay( Character *ch, char *argument )
 
   if ( ship->Rooms.Hangar == INVALID_VNUM )
     {
-      ch->Echo("&RThis ship.hppas no hangar!\r\n");
+      ch->Echo("&RThis ship has no hangar!\r\n");
       return;
     }
 

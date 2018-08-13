@@ -53,16 +53,16 @@ void do_first_aid( Character *ch, char *argument )
   if ( victim == ch )
     {
       ch->Echo( "You tend to your wounds.\r\n");
-      sprintf( buf , "$n uses %s to help.hppeal $s wounds." , medpac->ShortDescr );
+      sprintf( buf , "$n uses %s to help heal $s wounds." , medpac->ShortDescr );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_ROOM );
     }
   else
     {
       sprintf( buf , "You tend to $N's wounds." );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_CHAR );
-      sprintf( buf , "$n uses %s to help.hppeal $N's wounds." , medpac->ShortDescr );
+      sprintf( buf , "$n uses %s to help heal $N's wounds." , medpac->ShortDescr );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
-      sprintf( buf , "$n uses %s to help.hppeal your wounds." , medpac->ShortDescr );
+      sprintf( buf , "$n uses %s to help heal your wounds." , medpac->ShortDescr );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_VICT );
     }
 

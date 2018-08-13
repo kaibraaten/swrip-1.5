@@ -13,7 +13,7 @@ void do_close( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      do_closehatch(  ch , "" );
+      do_closehatch( ch, "" );
       return;
     }
 
@@ -41,11 +41,9 @@ void do_close( Character *ch, char *argument )
       if ( ( pexit_rev = pexit->ReverseExit ) != NULL
            && pexit_rev->ToRoom == ch->InRoom )
         {
-          Character *rch = NULL;
-
           SetBit( pexit_rev->Flags, EX_CLOSED );
 
-          for ( rch = pexit->ToRoom->FirstPerson; rch; rch = rch->NextInRoom )
+          for(Character *rch : pexit->ToRoom->Characters())
 	    {
 	      Act( AT_ACTION, "The $d closes.",
 		   rch, NULL, pexit_rev->Keyword, TO_CHAR );

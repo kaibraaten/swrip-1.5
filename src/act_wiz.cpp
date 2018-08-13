@@ -74,7 +74,7 @@ void RealEchoToRoom( short color, const Room *room, const std::string &text, boo
 {
   assert(room != nullptr);
 
-  for ( const Character *vic = room->FirstPerson; vic; vic = vic->NextInRoom )
+  for ( const Character *vic : room->Characters())
     {
       SetCharacterColor( color, vic );
       vic->Echo( "%s", text.c_str() );

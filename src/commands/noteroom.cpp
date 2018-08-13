@@ -33,7 +33,7 @@ void do_noteroom( Character *ch, char *argument )
 
       if ( !board )
         {
-          ch->Echo("There is no bulletin board.hppere to look at.\r\n");
+          ch->Echo("There is no bulletin board here to look at.\r\n");
           return;
         }
 

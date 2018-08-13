@@ -89,9 +89,10 @@ void Explode( Object *obj )
 
 	      if ( room )
 		{
-		  if ( !held && room->FirstPerson )
+		  if ( !held && !room->Characters().empty())
 		    {
-		      Act( AT_WHITE, "$p EXPLODES!", room->FirstPerson , obj, NULL, TO_ROOM );
+                      Character *ch = room->Characters().front();
+		      Act( AT_WHITE, "$p EXPLODES!", ch, obj, NULL, TO_ROOM );
 		    }
 
 		  ExplodeRoom( obj , xch, room );
@@ -113,8 +114,6 @@ void ExplodeRoom( Object *obj, Character *xch, Room *room )
 
 void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
 {
-  Character *rch = NULL;
-  Character *rnext = NULL;
   Object *robj = NULL;
   Object *robj_next = NULL;
   int dam = 0;
@@ -124,11 +123,12 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
 
   SetBit( room->Flags , BFS_MARK );
 
-  for ( rch = room->FirstPerson ; rch ;  rch = rnext )
+  std::list<Character*> copyOfCharacterList(room->Characters());
+
+  for(Character *rch : copyOfCharacterList)
     {
-      rnext = rch->NextInRoom;
       Act( AT_WHITE, "The shockwave from a massive explosion rips through your body!",
-	   room->FirstPerson , obj, NULL, TO_ROOM );
+	   room->Characters().front(), obj, NULL, TO_ROOM );
       dam = GetRandomNumberFromRange ( obj->Value[OVAL_EXPLOSIVE_MIN_DMG] , obj->Value[OVAL_EXPLOSIVE_MAX_DMG] );
       InflictDamage( rch, rch , dam, TYPE_UNDEFINED );
 
@@ -728,11 +728,7 @@ void CharacterFromRoom( Character *ch )
       --ch->InRoom->Light;
     }
 
-  UNLINK( ch, ch->InRoom->FirstPerson, ch->InRoom->LastPerson,
-          NextInRoom, PreviousInRoom );
-  ch->InRoom      = NULL;
-  ch->NextInRoom = NULL;
-  ch->PreviousInRoom = NULL;
+  ch->InRoom->Remove(ch);
 
   if ( !IsNpc(ch)
        && GetTimer( ch, TIMER_SHOVEDRAG ) > 0 )
@@ -748,9 +744,7 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
   assert(pRoomIndex != nullptr);
   Object *obj = nullptr;
 
-  ch->InRoom           = pRoomIndex;
-  LINK( ch, pRoomIndex->FirstPerson, pRoomIndex->LastPerson,
-        NextInRoom, PreviousInRoom );
+  pRoomIndex->Add(ch);
 
   if ( !IsNpc(ch) )
     if ( ++ch->InRoom->Area->NumberOfPlayers > ch->InRoom->Area->MaxPlayers )
@@ -888,21 +882,17 @@ void ObjectFromCharacter( Object *obj )
 
 int CountCharactersOnObject(const Object *obj)
 {
-  const Character *fch = NULL;
-  int count = 0;
-
   if (obj->InRoom == NULL)
     {
       return 0;
     }
-
-  for (fch = obj->InRoom->FirstPerson; fch != NULL; fch = fch->NextInRoom)
-    {
-      if (fch->On == obj)
-	{
-	  count++;
-	}
-    }
+  
+  const std::list<Character*> &people = obj->InRoom->Characters();
+  int count = count_if(std::begin(people), std::end(people),
+                       [obj](auto fch)
+                       {
+                         return fch->On == obj;
+                       });
 
   return count;
 }
@@ -1308,11 +1298,9 @@ Character *GetCharacterInRoom( const Character *ch, const std::string &charName 
 {
   const char *argument = charName.c_str();
   char arg[MAX_INPUT_LENGTH];
-  Character *rch;
-  int number, count;
   vnum_t vnum = INVALID_VNUM;
 
-  number = NumberArgument( argument, arg );
+  int number = NumberArgument( argument, arg );
 
   if ( !StrCmp( arg, "self" ) )
     return (Character*)ch;
@@ -1320,20 +1308,22 @@ Character *GetCharacterInRoom( const Character *ch, const std::string &charName 
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     vnum = atoi( arg );
 
-  count  = 0;
+  int count  = 0;
 
-  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->NextInRoom )
-    if ( CanSeeCharacter( ch, rch )
-         &&  (( (NiftyIsName( arg, rch->Name ) || (!IsNpc(rch) && NiftyIsName( arg, rch->PCData->Title )))
-                ||  (IsNpc(rch) && vnum == rch->Prototype->Vnum))) )
-      {
-        if ( number == 0 && !IsNpc(rch) )
-          return rch;
-        else
-          if ( ++count == number )
+  for(Character *rch : ch->InRoom->Characters())
+    {
+      if ( CanSeeCharacter( ch, rch )
+           && (( (NiftyIsName( arg, rch->Name )
+                  || (!IsNpc(rch) && NiftyIsName( arg, rch->PCData->Title )))
+                 ||  (IsNpc(rch) && vnum == rch->Prototype->Vnum))) )
+        {
+          if ( number == 0 && !IsNpc(rch) )
             return rch;
-      }
-
+          else if ( ++count == number )
+            return rch;
+        }
+    }
+  
   if ( vnum != INVALID_VNUM )
     return NULL;
 
@@ -1342,7 +1332,8 @@ Character *GetCharacterInRoom( const Character *ch, const std::string &charName 
      Added by Narn, Sept/96
   */
   count  = 0;
-  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->NextInRoom )
+
+  for(Character *rch : ch->InRoom->Characters())
     {
       if ( !CanSeeCharacter( ch, rch ) ||
            (!NiftyIsNamePrefix( arg, rch->Name ) &&
@@ -1367,12 +1358,10 @@ Character *GetCharacterAnywhere( const Character *ch, const std::string &charNam
 {
   const char *argument = charName.c_str();
   char arg[MAX_INPUT_LENGTH];
-  Character *wch;
-  int number, count;
   vnum_t vnum = INVALID_VNUM;
 
-  number = NumberArgument( argument, arg );
-  count  = 0;
+  int number = NumberArgument( argument, arg );
+  int count  = 0;
 
   if ( !StrCmp( arg, "self" ) )
     return (Character*)ch;
@@ -1384,31 +1373,33 @@ Character *GetCharacterAnywhere( const Character *ch, const std::string &charNam
     vnum = atoi( arg );
 
   /* check the room for an exact match */
-  for ( wch = ch->InRoom->FirstPerson; wch; wch = wch->NextInRoom )
-    if ( (NiftyIsName( arg, wch->Name )
-          ||  (IsNpc(wch) && vnum == wch->Prototype->Vnum)) && IsWizVis(ch,wch))
-      {
-        if ( number == 0 && !IsNpc(wch) )
-          return wch;
-        else
-          if ( ++count == number )
+  for(Character *wch : ch->InRoom->Characters())
+    {
+      if ( (NiftyIsName( arg, wch->Name )
+            ||  (IsNpc(wch) && vnum == wch->Prototype->Vnum)) && IsWizVis(ch,wch))
+        {
+          if ( number == 0 && !IsNpc(wch) )
             return wch;
-      }
-
+          else if ( ++count == number )
+            return wch;
+        }
+    }
+  
   count = 0;
 
   /* check the world for an exact match */
-  for ( wch = FirstCharacter; wch; wch = wch->Next )
-    if ( (NiftyIsName( arg, wch->Name )
-          ||  (IsNpc(wch) && vnum == wch->Prototype->Vnum)) && IsWizVis(ch,wch) )
-      {
-        if ( number == 0 && !IsNpc(wch) )
-          return wch;
-        else
-          if ( ++count == number  )
+  for ( Character *wch = FirstCharacter; wch; wch = wch->Next )
+    {
+      if ( (NiftyIsName( arg, wch->Name )
+            ||  (IsNpc(wch) && vnum == wch->Prototype->Vnum)) && IsWizVis(ch,wch) )
+        {
+          if ( number == 0 && !IsNpc(wch) )
             return wch;
-      }
-
+          else if ( ++count == number  )
+            return wch;
+        }
+    }
+  
   /* bail out if looking for a vnum match */
   if ( vnum != INVALID_VNUM )
     return NULL;
@@ -1419,7 +1410,8 @@ Character *GetCharacterAnywhere( const Character *ch, const std::string &charNam
    * Added by Narn, Sept/96
    */
   count  = 0;
-  for ( wch = ch->InRoom->FirstPerson; wch; wch = wch->NextInRoom )
+
+  for(Character *wch : ch->InRoom->Characters())
     {
       if ( !NiftyIsNamePrefix( arg, wch->Name ) )
         continue;
@@ -1436,7 +1428,7 @@ Character *GetCharacterAnywhere( const Character *ch, const std::string &charNam
    * Added by Narn, Sept/96
    */
   count  = 0;
-  for ( wch = FirstCharacter; wch; wch = wch->Next )
+  for ( Character *wch = FirstCharacter; wch; wch = wch->Next )
     {
       if ( !NiftyIsNamePrefix( arg, wch->Name ) )
         continue;
@@ -1727,10 +1719,7 @@ bool IsRoomPrivate( const Character *ch, const Room *pRoomIndex )
   if ( IsBitSet(pRoomIndex->Flags, ROOM_PLR_HOME) && ch->PlayerHome != pRoomIndex)
     return true;
 
-  int count = 0;
-
-  for (const Character *rch = pRoomIndex->FirstPerson; rch; rch = rch->NextInRoom )
-    count++;
+  size_t count = pRoomIndex->Characters().size();
 
   if ( IsBitSet(pRoomIndex->Flags, ROOM_PRIVATE) && count >= 2 )
     return true;

@@ -34,7 +34,6 @@
 void PullOrPush( Character *ch, Object *obj, bool pull )
 {
   char buf[MAX_STRING_LENGTH];
-  Character *rch = NULL;
   Room *room = NULL,  *to_room = NULL;
   Exit *pexit = NULL, *pexit_rev = NULL;
   DirectionType edir = DIR_INVALID;
@@ -160,7 +159,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
       RandomizeExits( room, maxd );
 
-      for ( rch = room->FirstPerson; rch; rch = rch->NextInRoom )
+      for(const Character *rch : room->Characters())
         {
           rch->Echo( "You hear a loud rumbling sound.\r\n" );
           rch->Echo( "Something seems different...\r\n" );
@@ -283,7 +282,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
         {
           RemoveBit(pexit->Flags, EX_CLOSED);
 
-          for ( rch = room->FirstPerson; rch; rch = rch->NextInRoom )
+          for(Character *rch : room->Characters())
 	    {
 	      Act( AT_ACTION, "The $d opens.", rch, NULL, pexit->Keyword, TO_CHAR );
 	    }
@@ -293,7 +292,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
             {
               RemoveBit( pexit_rev->Flags, EX_CLOSED );
 
-              for ( rch = to_room->FirstPerson; rch; rch = rch->NextInRoom )
+              for(Character *rch : to_room->Characters())
 		{
 		  Act( AT_ACTION, "The $d opens.", rch, NULL, pexit_rev->Keyword, TO_CHAR );
 		}
@@ -308,7 +307,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
         {
           SetBit(pexit->Flags, EX_CLOSED);
 
-          for ( rch = room->FirstPerson; rch; rch = rch->NextInRoom )
+          for(Character *rch : room->Characters())
 	    {
 	      Act( AT_ACTION, "The $d closes.", rch, NULL, pexit->Keyword, TO_CHAR );
 	    }
@@ -318,7 +317,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
             {
               SetBit( pexit_rev->Flags, EX_CLOSED );
 
-              for ( rch = to_room->FirstPerson; rch; rch = rch->NextInRoom )
+              for(Character *rch : to_room->Characters())
 		{
 		  Act( AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->Keyword, TO_CHAR );
 		}

@@ -95,9 +95,9 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
         hitvict = true;
 
       if ( victim )
-        victim = victim->InRoom->FirstPerson;
+        victim = victim->InRoom->Characters().front();
       else
-        victim = ch->InRoom->FirstPerson;
+        victim = ch->InRoom->Characters().front();
     }
   
   if ( !victim )
@@ -107,8 +107,10 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  for ( ; victim; victim = victim->NextInRoom )
+  for(Character *person : victim->InRoom->Characters())
     {
+      victim = person;
+      
       if ( groupsp || areasp )
         {
           if ((groupsp && !IsInSameGroup( victim, ch ))

@@ -6,16 +6,18 @@
 bool spec_jedi_healer( Character *ch )
 {
   Character *victim = nullptr;
-  Character *v_next = nullptr;
 
   if ( !IsAwake(ch) )
     return false;
 
-  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
+  for(Character *potentialVictim : ch->InRoom->Characters())
     {
-      v_next = victim->NextInRoom;
-      if ( victim != ch && CanSeeCharacter( ch, victim ) && NumberBits( 1 ) == 0 )
-        break;
+      if ( potentialVictim != ch
+           && CanSeeCharacter( ch, potentialVictim ) && NumberBits( 1 ) == 0 )
+        {
+          victim = potentialVictim;
+          break;
+        }
     }
 
   if ( !victim )

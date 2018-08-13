@@ -668,7 +668,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
       if ( !board )
         {
-          ch->Echo( "There is no board.hppere to look at.\r\n" );
+          ch->Echo( "There is no board here to look at.\r\n" );
           return;
         }
       
@@ -794,7 +794,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
       if ( !board )
         {
-          ch->Echo( "There is no bulletin board.hppere.\r\n" );
+          ch->Echo( "There is no bulletin board here.\r\n" );
           return;
         }
 

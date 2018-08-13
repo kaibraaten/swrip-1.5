@@ -202,7 +202,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( !tarea->FirstReset )
         {
-          ch->Echo("This area.hppas no resets to list.\r\n");
+          ch->Echo("This area has no resets to list.\r\n");
           return;
         }
 

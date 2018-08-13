@@ -8,7 +8,6 @@
 void do_pick( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *gch = NULL;
   Object *obj = NULL;
   Exit *pexit = NULL;
   Ship *ship = NULL;
@@ -39,7 +38,7 @@ void do_pick( Character *ch, char *argument )
   SetWaitState( ch, SkillTable[gsn_pick_lock]->Beats );
 
   /* look for guards */
-  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->NextInRoom )
+  for(Character *gch : ch->InRoom->Characters())
     {
       if ( IsNpc(gch) && IsAwake(gch) && GetAbilityLevel( ch, SMUGGLING_ABILITY ) < gch->TopLevel )
         {
@@ -165,7 +164,7 @@ void do_pick( Character *ch, char *argument )
 
       if ( ship->State != SHIP_LANDED && !IsShipDisabled( ship ) )
         {
-          ch->Echo("&RThat ship.hppas already started to launch");
+          ch->Echo("&RThat ship has already started to launch");
           return;
         }
 

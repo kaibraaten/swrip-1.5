@@ -103,8 +103,9 @@ void MakeScraps( Object *obj )
     }
   else if ( obj->InRoom )
     {
-      if ( (ch = obj->InRoom->FirstPerson ) != NULL )
+      if(!obj->InRoom->Characters().empty())
 	{
+          ch = obj->InRoom->Characters().front();
 	  Act( AT_OBJECT, "$p is reduced to little more than scraps.",
 	       ch, obj, NULL, TO_ROOM );
 	  Act( AT_OBJECT, "$p is reduced to little more than scraps.",

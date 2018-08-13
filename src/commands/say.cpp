@@ -5,7 +5,6 @@
 void do_say( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  Character *vch = NULL;
   int mobflags = ch->Flags;
 
   if ( IsNullOrEmpty( argument ) )
@@ -23,7 +22,7 @@ void do_say( Character *ch, char *argument )
   if ( IsNpc( ch ) )
     RemoveBit( ch->Flags, ACT_SECRETIVE );
 
-  for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->NextInRoom )
+  for(Character *vch : ch->InRoom->Characters())
     {
       const char *sbuf = argument;
 

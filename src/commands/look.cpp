@@ -19,7 +19,7 @@ struct UserData
 };
 
 /* Locals */
-void show_char_to_char( Character *list, Character *ch );
+void show_char_to_char( const std::list<Character*> &list, Character *ch );
 
 static void LookThroughShipWindow(Character *ch, const Ship *ship);
 static bool ShowShipIfInVincinity(Ship *target, void *userData);
@@ -569,11 +569,9 @@ static void show_ships_to_char( const Room *room, const Character *ch )
     }
 }
 
-void show_char_to_char( Character *list, Character *ch )
+void show_char_to_char( const std::list<Character*> &list, Character *ch )
 {
-  Character *rch;
-
-  for ( rch = list; rch; rch = rch->NextInRoom )
+  for(Character *rch : list)
     {
       if ( rch == ch )
         continue;
@@ -710,7 +708,7 @@ static bool requirements_are_met( Character *ch )
     {
       SetCharacterColor( AT_DGREY, ch );
       ch->Echo("It is pitch black...\r\n");
-      show_char_to_char( ch->InRoom->FirstPerson, ch );
+      show_char_to_char( ch->InRoom->Characters(), ch );
 
       return false;
     }
@@ -960,7 +958,7 @@ static void show_no_arg( Character *ch, bool is_auto )
   show_ships_to_char( ch->InRoom, ch );
   ShowShuttlesToCharacter( ch->InRoom->Shuttles(), ch );
   ShowObjectListToCharacter( ch->InRoom->FirstContent, ch, false, false );
-  show_char_to_char( ch->InRoom->FirstPerson,  ch );
+  show_char_to_char( ch->InRoom->Characters(),  ch );
 
   if ( !is_auto )
     {

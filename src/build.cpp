@@ -550,21 +550,25 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
     {
       if ( (room = GetRoom( vnum )) == NULL )
         continue;
+
       if ( install )
         {
-          Character *victim, *vnext;
-          Object  *obj, *obj_next;
+          Object *obj = nullptr, *obj_next = nullptr;
 
           /* remove prototype flag from room */
           RemoveBit( room->Flags, ROOM_PROTOTYPE );
+          
           /* purge room of (prototyped) mobiles */
-          for ( victim = room->FirstPerson; victim; victim = vnext )
+          std::list<Character*> copyOfCharacterList(room->Characters());
+
+          for(Character *victim : copyOfCharacterList)
             {
-              vnext = victim->NextInRoom;
-	      
               if ( IsNpc(victim) )
-                ExtractCharacter( victim, true );
+                {
+                  ExtractCharacter( victim, true );
+                }
             }
+
           /* purge room of (prototyped) objects */
           for ( obj = room->FirstContent; obj; obj = obj_next )
             {

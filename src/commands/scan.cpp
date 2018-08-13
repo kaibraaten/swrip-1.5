@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void show_char_to_char( Character *list, Character *ch );
+void show_char_to_char( const std::list<Character*> &list, Character *ch );
 
 void do_scan( Character *ch, char *argument )
 {
@@ -83,7 +83,7 @@ void do_scan( Character *ch, char *argument )
       ch->Echo(ch->InRoom->Name);
       ch->Echo("\r\n");
       ShowObjectListToCharacter( ch->InRoom->FirstContent, ch, false, false );
-      show_char_to_char( ch->InRoom->FirstPerson, ch );
+      show_char_to_char( ch->InRoom->Characters(), ch );
 
       switch( ch->InRoom->Sector )
         {

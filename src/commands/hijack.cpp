@@ -101,7 +101,7 @@ void do_hijack( Character *ch, char *argument )
       ch->Echo( "Launch sequence initiated.\r\n" );
       Act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
            NULL, argument , TO_ROOM );
-      EchoToShip( AT_YELLOW , ship , "The ship.hppums as it lifts off the ground.");
+      EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
       sprintf( buf, "%s begins to launch.", ship->Name );
       EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
       ship->State = SHIP_LAUNCH;

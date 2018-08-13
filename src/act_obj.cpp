@@ -66,11 +66,8 @@ short GetObjectResistance( const Object *obj )
  */
 obj_ret DamageObject( Object *obj )
 {
-  Character *ch;
-  obj_ret objcode;
-
-  ch = obj->CarriedBy;
-  objcode = rNONE;
+  Character *ch = obj->CarriedBy;
+  obj_ret objcode = rNONE;
 
   if (ch && ch->InRoom && IsBitSet(ch->InRoom->Flags,ROOM_ARENA))
     return objcode;
@@ -78,16 +75,19 @@ obj_ret DamageObject( Object *obj )
   SeparateOneObjectFromGroup( obj );
   
   if ( ch )
-    Act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
-  else
-    if ( obj->InRoom && ( ch = obj->InRoom->FirstPerson ) != NULL )
-      {
-        Act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_ROOM );
-        Act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
-        ch = NULL;
-      }
+    {
+      Act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
+    }
+  else if ( obj->InRoom && !obj->InRoom->Characters().empty() )
+    {
+      ch = obj->InRoom->Characters().front();
+      Act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_ROOM );
+      Act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
+      ch = NULL;
+    }
 
   ObjProgDamageTrigger(ch, obj);
+
   if ( IsObjectExtracted(obj) )
     return global_objcode;
 
@@ -97,6 +97,7 @@ obj_ret DamageObject( Object *obj )
       MakeScraps( obj );
       objcode = rOBJ_SCRAPPED;
       break;
+
     case ITEM_CONTAINER:
       if (--obj->Value[OVAL_CONTAINER_CONDITION] <= 0)
         {
@@ -104,6 +105,7 @@ obj_ret DamageObject( Object *obj )
           objcode = rOBJ_SCRAPPED;
         }
       break;
+
     case ITEM_ARMOR:
       if ( ch && obj->Value[OVAL_ARMOR_CONDITION] >= 1 )
         ch->ArmorClass += GetObjectArmorClass( obj, obj->WearLoc );
@@ -118,6 +120,7 @@ obj_ret DamageObject( Object *obj )
           ch->ArmorClass -= GetObjectArmorClass( obj, obj->WearLoc );
 
       break;
+
     case ITEM_WEAPON:
       if (--obj->Value[OVAL_WEAPON_CONDITION] <= 0)
         {
@@ -126,6 +129,7 @@ obj_ret DamageObject( Object *obj )
         }
       break;
     }
+
   return objcode;
 }
 
@@ -168,42 +172,48 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
           return;
         }
 
-      if (obj->InRoom->FirstPerson)
+      if (!obj->InRoom->Characters().empty())
         {
-          Act( AT_PLAIN, "$p falls far below...",
-               obj->InRoom->FirstPerson, obj, NULL, TO_ROOM );
-          Act( AT_PLAIN, "$p falls far below...",
-               obj->InRoom->FirstPerson, obj, NULL, TO_CHAR );
+          Character *ch = obj->InRoom->Characters().front();
+          Act( AT_PLAIN, "$p falls far below...", ch, obj, NULL, TO_ROOM );
+          Act( AT_PLAIN, "$p falls far below...", ch, obj, NULL, TO_CHAR );
         }
+      
       ObjectFromRoom( obj );
       is_falling = true;
       obj = ObjectToRoom( obj, to_room );
       is_falling = false;
 
-      if (obj->InRoom->FirstPerson)
+      if (!obj->InRoom->Characters().empty())
         {
-          Act( AT_PLAIN, "$p falls from above...",
-               obj->InRoom->FirstPerson, obj, NULL, TO_ROOM );
-          Act( AT_PLAIN, "$p falls from above...",
-               obj->InRoom->FirstPerson, obj, NULL, TO_CHAR );
+          Character *ch = obj->InRoom->Characters().front();
+          Act( AT_PLAIN, "$p falls from above...", ch, obj, NULL, TO_ROOM );
+          Act( AT_PLAIN, "$p falls from above...", ch, obj, NULL, TO_CHAR );
         }
 
       if (!IsBitSet( obj->InRoom->Flags, ROOM_NOFLOOR ) && through )
         {
           /*            int dam = (int)9.81*sqrt(fall_count*2/9.81)*obj->weight/2;
-           */           int dam = fall_count*obj->Weight/2;
+           */
+
+          int dam = fall_count * obj->Weight / 2;
+
           /* Damage players */
-          if ( obj->InRoom->FirstPerson && GetRandomPercent() > 15 )
+          if ( !obj->InRoom->Characters().empty() && GetRandomPercent() > 15 )
             {
-              Character *rch;
               Character *vch = NULL;
               int chcnt = 0;
 
-              for ( rch = obj->InRoom->FirstPerson; rch;
-                    rch = rch->NextInRoom, chcnt++ )
-                if ( GetRandomNumberFromRange( 0, chcnt ) == 0 )
-                  vch = rch;
+              for(Character *rch : obj->InRoom->Characters())
+                {
+                  if ( GetRandomNumberFromRange( 0, chcnt ) == 0 )
+                    {
+                      vch = rch;
+                    }
 
+                  chcnt++;
+                }
+              
               Act( AT_WHITE, "$p falls on $n!", vch, obj, NULL, TO_ROOM );
               Act( AT_WHITE, "$p falls on you!", vch, obj, NULL, TO_CHAR );
               InflictDamage( vch, vch, dam*vch->TopLevel, TYPE_UNDEFINED );
@@ -215,12 +225,11 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
             case ITEM_ARMOR:
               if ( (obj->Value[OVAL_ARMOR_CONDITION] - dam) <= 0 )
                 {
-                  if (obj->InRoom->FirstPerson)
+                  if (!obj->InRoom->Characters().empty())
                     {
-                      Act( AT_PLAIN, "$p is destroyed by the fall!",
-                           obj->InRoom->FirstPerson, obj, NULL, TO_ROOM );
-                      Act( AT_PLAIN, "$p is destroyed by the fall!",
-                           obj->InRoom->FirstPerson, obj, NULL, TO_CHAR );
+                      Character *ch = obj->InRoom->Characters().front();
+                      Act( AT_PLAIN, "$p is destroyed by the fall!", ch, obj, NULL, TO_ROOM );
+                      Act( AT_PLAIN, "$p is destroyed by the fall!", ch, obj, NULL, TO_CHAR );
                     }
                   MakeScraps(obj);
                 }
@@ -230,18 +239,19 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
             default:
               if ( (dam*15) > GetObjectResistance(obj) )
                 {
-                  if (obj->InRoom->FirstPerson)
+                  if (!obj->InRoom->Characters().empty())
                     {
-                      Act( AT_PLAIN, "$p is destroyed by the fall!",
-                           obj->InRoom->FirstPerson, obj, NULL, TO_ROOM );
-                      Act( AT_PLAIN, "$p is destroyed by the fall!",
-                           obj->InRoom->FirstPerson, obj, NULL, TO_CHAR );
+                      Character *ch = obj->InRoom->Characters().front();
+                      Act( AT_PLAIN, "$p is destroyed by the fall!", ch, obj, NULL, TO_ROOM );
+                      Act( AT_PLAIN, "$p is destroyed by the fall!", ch, obj, NULL, TO_CHAR );
                     }
+
                   MakeScraps(obj);
                 }
               break;
             }
         }
+
       ObjectFallIfNoFloor( obj, true );
     }
 }

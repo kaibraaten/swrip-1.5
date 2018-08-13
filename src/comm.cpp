@@ -1569,7 +1569,7 @@ void Act( short AType, const std::string &format, Character *ch, const void *arg
   else if ( type == TO_CHAR )
     to = ch;
   else
-    to = ch->InRoom->FirstPerson;
+    to = ch->InRoom->Characters().front();
 
   /*
    * ACT_SECRETIVE handling
@@ -1612,24 +1612,38 @@ void Act( short AType, const std::string &format, Character *ch, const void *arg
 
   /* Anyone feel like telling me the point of looping through the whole
      room when we're only sending to one char anyways..? -- Alty */
-  for ( ; to; to = (type == TO_CHAR || type == TO_VICT)
-          ? NULL : to->NextInRoom )
+  std::list<Character*> charactersInRoom;
+
+  if(type == TO_CHAR || type == TO_VICT)
     {
+      charactersInRoom.push_back(to);
+    }
+  else
+    {
+      charactersInRoom = ch->InRoom->Characters();
+    }
+
+  for(Character *person : charactersInRoom)
+    {
+      to = person;
+      
       if (((!to || !to->Desc)
            && (  IsNpc(to) && !IsBitSet(to->Prototype->mprog.progtypes, ACT_PROG) ))
           ||   !IsAwake(to) )
         continue;
-
 
       if(!CanSeeCharacter(to, ch) && type != TO_VICT )
         continue;
 
       if ( type == TO_CHAR && to != ch )
         continue;
+
       if ( type == TO_VICT && ( to != vch || to == ch ) )
         continue;
+
       if ( type == TO_ROOM && to == ch )
         continue;
+
       if ( type == TO_NOTVICT && (to == ch || to == vch) )
         continue;
 

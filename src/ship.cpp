@@ -628,7 +628,7 @@ static void LaunchShip( Ship *ship )
   ship->Position.y += (ship->Heading.y * ship->Thrusters.Speed.Current * 2);
   ship->Position.z += (ship->Heading.z * ship->Thrusters.Speed.Current * 2);
 
-  EchoToRoom( AT_GREEN , GetRoom(ship->Location) , "Launch complete.\r\n");
+  EchoToCockpit( AT_GREEN, ship, "Launch complete.\r\n");
   EchoToShip( AT_YELLOW , ship , "The ship leaves the platform far behind as it flies into space." );
   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
 	   ship->Name, ship->Position.x, ship->Position.y, ship->Position.z );
@@ -863,8 +863,6 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   DirectionType door = DIR_INVALID;
   short the_chance = 0;
   bool drunk = false;
-  Character *rch = NULL;
-  Character *next_rch = NULL;
 
   if ( !IsNpc( ch ) )
     {
@@ -1047,16 +1045,13 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( to_room->Tunnel > 0 )
     {
-      int count = 0;
+      int count = to_room->Characters().size();
 
-      for ( const Character *ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
-	{
-	  if ( ++count >= to_room->Tunnel )
-	    {
-	      ch->Echo( "There is no room for you in there.\r\n" );
-	      return rNONE;
-	    }
-	}
+      if ( count >= to_room->Tunnel )
+        {
+          ch->Echo( "There is no room for you in there.\r\n" );
+          return rNONE;
+        }
     }
 
   if ( fall )
@@ -1136,9 +1131,11 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   sprintf( buf, "%s %s from %s.", ship->Name, txt, dtxt );
   EchoToRoom( AT_ACTION , GetRoom(ship->Location) , buf );
 
-  for ( rch = ch->InRoom->LastPerson ; rch ; rch = next_rch )
+  std::list<Character*> charactersInRoom(ch->InRoom->Characters());
+
+  for(auto iter = std::rbegin(charactersInRoom); iter != std::rend(charactersInRoom); ++iter)
     {
-      next_rch = rch->PreviousInRoom;
+      Character *rch = *iter;
       original = rch->InRoom;
       CharacterFromRoom( rch );
       CharacterToRoom( rch, to_room );
@@ -3679,9 +3676,6 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 void DestroyShip( Ship *ship, Character *killer )
 {
   char buf[MAX_STRING_LENGTH];
-  Room *room = NULL;
-  Object *robj = NULL;
-  Character *rch = NULL;
 
   if (!ship)
     {
@@ -3714,14 +3708,14 @@ void DestroyShip( Ship *ship, Character *killer )
 
   for ( vnum_t roomnum = ship->Rooms.First; roomnum <= ship->Rooms.Last; roomnum++ )
     {
-      room = GetRoom(roomnum);
+      Room *room = GetRoom(roomnum);
 
       if (room != NULL)
         {
-          rch = room->FirstPerson;
-
-          while ( rch )
+          while(!room->Characters().empty())
             {
+              Character *rch = room->Characters().front();
+              
               if ( IsImmortal(rch) )
                 {
                   CharacterFromRoom(rch);
@@ -3738,11 +3732,9 @@ void DestroyShip( Ship *ship, Character *killer )
 		      RawKill( rch , rch );
 		    }
                 }
-
-              rch = room->FirstPerson;
             }
 
-          for ( robj = room->FirstContent ; robj ; robj = robj->NextContent )
+          for ( Object *robj = room->FirstContent ; robj ; robj = robj->NextContent )
             {
               SeparateOneObjectFromGroup( robj );
               ExtractObject( robj );

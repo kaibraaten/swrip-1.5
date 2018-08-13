@@ -124,7 +124,7 @@ bool UpdateMissile( Missile *missile, void *unused )
 	      char buf[MAX_STRING_LENGTH];
 
 	      EchoToRoom( AT_YELLOW, GetRoom(ship->Rooms.Gunseat),
-			  "Your missile.hppits its target dead on!" );
+			  "Your missile hits its target dead on!" );
 	      EchoToCockpit( AT_BLOOD, target,
 			     "The ship is hit by a missile.");
 	      EchoToShip( AT_RED, target,

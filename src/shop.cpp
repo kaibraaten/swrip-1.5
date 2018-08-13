@@ -63,13 +63,13 @@ Character *FindKeeper( const Character *ch )
 
 Character *FindKeeperQ( const Character *ch, bool message )
 {
-  Character *keeper = NULL;
-  const Shop *pShop = NULL;
+  Character *keeper = nullptr;
+  const Shop *pShop = nullptr;
 
-  for ( keeper = ch->InRoom->FirstPerson;
-        keeper;
-        keeper = keeper->NextInRoom )
+  for(auto i = std::begin(ch->InRoom->Characters()); i != std::end(ch->InRoom->Characters()); ++i)
     {
+      keeper = *i;
+      
       if ( IsNpc(keeper) && (pShop = keeper->Prototype->Shop) != NULL )
 	{
 	  break;
@@ -131,10 +131,10 @@ Character *FindFixer( const Character *ch )
   Character *keeper = NULL;
   const RepairShop *rShop = NULL;
 
-  for ( keeper = ch->InRoom->FirstPerson;
-        keeper;
-        keeper = keeper->NextInRoom )
+  for(auto i = std::begin(ch->InRoom->Characters()); i != std::end(ch->InRoom->Characters()); ++i)
     {
+      keeper = *i;
+      
       if ( IsNpc(keeper) && (rShop = keeper->Prototype->RepairShop) != NULL )
 	{
 	  break;
@@ -448,8 +448,6 @@ Character *ReadVendor( FILE *fp )
 	case 'E':
 	  if ( !StrCmp( word, "END" ) )
 	    {
-	      Character *victim = NULL;
-	      Character *vnext = NULL;
 	      char buf[MAX_INPUT_LENGTH];
 	      char vnum1[MAX_INPUT_LENGTH];
 
@@ -471,10 +469,10 @@ Character *ReadVendor( FILE *fp )
 
 	      /* the following code is to make sure no more than one player owned vendor
 		 is in the room - meckteck */
-	      for ( victim = mob->InRoom->FirstPerson; victim; victim = vnext )
+              std::list<Character*> charactersInRoom(mob->InRoom->Characters());
+              
+              for(Character *victim : charactersInRoom)
 		{
-		  vnext = victim->NextInRoom;
-
 		  if (victim->Home != NULL)
 		    {
 		      ExtractCharacter( victim, true);

@@ -57,7 +57,7 @@ void do_openhatch(Character *ch, char *argument )
 
   if ( ship->State != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
-      ch->Echo("&RThat ship.hppas already started to launch");
+      ch->Echo("&RThat ship has already started to launch");
       return;
     }
 

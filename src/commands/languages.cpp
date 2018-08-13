@@ -15,9 +15,8 @@ void do_languages( Character *ch, char *argument )
   if ( !IsNullOrEmpty( arg ) && !StringPrefix( arg, "learn" ) &&
        !IsImmortal(ch) && !IsNpc(ch) )
     {
-      Character *sch;
       char arg2[MAX_INPUT_LENGTH];
-      int prct;
+      int prct = 0;
 
       argument = OneArgument( argument, arg2 );
 
@@ -61,14 +60,21 @@ void do_languages( Character *ch, char *argument )
           return;
         }
 
-      for ( sch = ch->InRoom->FirstPerson; sch; sch = sch->Next )
-        if ( IsNpc(sch) && IsBitSet(sch->Flags, ACT_SCHOLAR) &&
-             CharacterKnowsLanguage( sch, ch->Speaking, ch ) &&
-             CharacterKnowsLanguage( sch, LanguageArray[lang], sch ) &&
-             (!sch->Speaking || CharacterKnowsLanguage( ch, sch->Speaking, sch )) )
-          break;
+      bool teacherIsPresent = false;
 
-      if ( !sch )
+      for(const Character *sch : ch->InRoom->Characters())
+        {
+          if ( IsNpc(sch) && IsBitSet(sch->Flags, ACT_SCHOLAR) &&
+               CharacterKnowsLanguage( sch, ch->Speaking, ch ) &&
+               CharacterKnowsLanguage( sch, LanguageArray[lang], sch ) &&
+               (!sch->Speaking || CharacterKnowsLanguage( ch, sch->Speaking, sch )) )
+            {
+              teacherIsPresent = true;
+              break;
+            }
+        }
+      
+      if ( !teacherIsPresent )
         {
           ch->Echo("There is no one who can teach that language here.\r\n");
           return;
@@ -79,6 +85,7 @@ void do_languages( Character *ch, char *argument )
           ch->Echo("Language lessons cost 25 credits... you don't have enough.\r\n");
           return;
         }
+
       ch->Gold -= 25;
       /* Max 12% (5 + 4 + 3) at 24+ int and 21+ wis. -- Altrag */
       prct = 5 + (GetCurrentIntelligence(ch) / 6) + (GetCurrentWisdom(ch) / 7);

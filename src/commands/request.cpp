@@ -63,7 +63,7 @@ void do_request(Character *ch, char *argument)
 
   if ( eShip->Rooms.Hangar == INVALID_VNUM )
     {
-      ch->Echo("&RThat ship.hppas no hangar!");
+      ch->Echo("&RThat ship has no hangar!");
       return;
     }
 

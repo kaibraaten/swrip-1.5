@@ -58,13 +58,13 @@ void do_addbounty( Character *ch, char *argument )
 
   if ( IsNpc(victim) )
     {
-      ch->Echo( "You can only set bounties on other players .. not mobs!\r\n" );
+      ch->Echo( "You can only set bounties on other players... not mobs!\r\n" );
       return;
     }
   if ( IsClanned( victim )
        && !StrCmp(victim->PCData->ClanInfo.Clan->Name, "the hunters guild"))
     {
-      ch->Echo( "&RYou can not post bounties on bounty.hppunters!\r\n" );
+      ch->Echo( "&RYou can not post bounties on bounty hunters!\r\n" );
       return;
     }
 

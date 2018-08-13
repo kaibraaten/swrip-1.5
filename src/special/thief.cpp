@@ -1,20 +1,20 @@
+#include <vector>
+#include <algorithm>
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
 
 bool spec_thief( Character *ch )
 {
-  Character *victim = nullptr;
-  Character *v_next = nullptr;
-  int gold = 0, maxgold = 0;
-
   if ( ch->Position != POS_STANDING )
     return false;
 
-  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
-    {
-      v_next = victim->NextInRoom;
+  std::vector<Character*> victims(std::begin(ch->InRoom->Characters()),
+                                  std::end(ch->InRoom->Characters()));
+  random_shuffle(std::begin(victims), std::end(victims));
 
+  for(Character *victim : victims)
+    {
       if ( GetTrustLevel(victim) >= LEVEL_IMMORTAL
            ||   NumberBits( 2 ) != 0
            ||   !CanSeeCharacter( ch, victim ) )        /* Thx Glop */
@@ -30,8 +30,8 @@ bool spec_thief( Character *ch )
         }
       else
         {
-          maxgold = 1000;
-	  gold = victim->Gold * GetRandomNumberFromRange( 1, urange(2, ch->TopLevel/4, 10) ) / 100;
+          long maxgold = 1000;
+	  long gold = victim->Gold * GetRandomNumberFromRange( 1, urange(2, ch->TopLevel/4, 10) ) / 100;
 	  ch->Gold     += 9 * gold / 10;
 	  victim->Gold -= gold;
 	  if ( ch->Gold > maxgold )

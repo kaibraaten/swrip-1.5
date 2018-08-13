@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
@@ -9,9 +10,6 @@ void do_order( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   char argbuf[MAX_INPUT_LENGTH];
   Character *victim = NULL;
-  Character *och = NULL;
-  Character *och_next = NULL;
-  bool found = false;
   bool fAll = false;
 
   strcpy( argbuf, argument );
@@ -60,23 +58,27 @@ void do_order( Character *ch, char *argument )
       return;
     }
 
-  for ( och = ch->InRoom->FirstPerson; och; och = och_next )
-    {
-      och_next = och->NextInRoom;
+  std::list<Character*> charactersToOrder;
 
-      if ( IsAffectedBy(och, AFF_CHARM)
-           && och->Master == ch
-           && ( fAll || och == victim ) )
+  copy_if(std::begin(ch->InRoom->Characters()),
+          std::end(ch->InRoom->Characters()),
+          std::begin(charactersToOrder),
+          [ch, fAll, victim](auto och)
+          {
+            return IsAffectedBy(och, AFF_CHARM)
+              && och->Master == ch
+              && ( fAll || och == victim );
+          });
+  
+  if ( !charactersToOrder.empty() )
+    {
+      for(Character *och : charactersToOrder)
         {
-          found = true;
           Act( AT_ACTION, "$n orders you to '$t'.",
-	       ch, argument, och, TO_VICT );
-	  Interpret( och, argument );
+               ch, argument, och, TO_VICT );
+          Interpret( och, argument );
         }
-    }
-
-  if ( found )
-    {
+      
       Log->Info("%s: order %s.", ch->Name, argbuf );
       ch->Echo("Ok.\r\n");
       SetWaitState( ch, 12 );

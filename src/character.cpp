@@ -361,6 +361,26 @@ bool HasComlink( const Character *ch )
   return comlink ? true : false;
 }
 
+static bool FindDiploma( const Object *element, const Object **diploma )
+{
+  if( element->Prototype->Vnum == OBJ_VNUM_SCHOOL_DIPLOMA )
+    {
+      *diploma = element;
+      return false;
+    }
+
+  return true;
+}
+
+bool HasDiploma( const Character *ch )
+{
+  const Object *diploma = NULL;
+
+  ForEach( Object, ch->LastCarrying, PreviousContent, FindDiploma, &diploma );
+
+  return diploma ? true : false;
+}
+
 short GetAbilityLevel( const Character *ch, short ability )
 {
   return ch->Ability.Level[ability];

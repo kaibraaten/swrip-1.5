@@ -1948,8 +1948,6 @@ void AreaUpdate( void )
  */
 void CloseArea( Area *pArea )
 {
-  Character *ech;
-  Character *ech_next;
   Object *eobj;
   Object *eobj_next;
   int icnt;
@@ -1970,7 +1968,7 @@ void CloseArea( Area *pArea )
   Affect *paf;
   Affect *paf_next;
 
-  for ( ech = FirstCharacter; ech; ech = ech_next )
+  for ( Character *ech = FirstCharacter, *ech_next; ech; ech = ech_next )
     {
       ech_next = ech->Next;
 
@@ -2022,14 +2020,14 @@ void CloseArea( Area *pArea )
           FreeMemory(rid->Name);
           FreeMemory(rid->Description);
 
-          if ( rid->FirstPerson )
+          if ( !rid->Characters().empty() )
             {
               Log->Bug( "CloseArea: room with people #%d", rid->Vnum );
 
-              for ( ech = rid->FirstPerson; ech; ech = ech_next )
-                {
-                  ech_next = ech->NextInRoom;
+              std::list<Character*> copyOfCharacterList(rid->Characters());
 
+              for(Character *ech : copyOfCharacterList)
+                {
                   if ( ech->Fighting )
                     StopFighting( ech, true );
 

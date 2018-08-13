@@ -151,26 +151,29 @@ void do_for(Character *ch, char *argument)
             /* Anyone in here at all? */
             if (fEverywhere) /* Everywhere executes always */
               found = true;
-            else if (!room->FirstPerson) /* Skip it if room is empty */
+            else if (room->Characters().empty()) /* Skip it if room is empty */
               continue;
             /* ->people changed to first_person -- TRI */
 
             /* Check if there is anyone here of the requried type */
             /* Stop as soon as a match is found or there are no more ppl in room */
             /* ->people to ->first_person -- TRI */
-            for (p = room->FirstPerson; p && !found; p = p->NextInRoom)
+            for(Character *tmp : room->Characters())
               {
+                if(tmp == ch)
+                  {
+                    continue;
+                  }
 
-                if (p == ch) /* do not execute on oneself */
-                  continue;
-
-                if (IsNpc(p) && fMobs)
-                  found = true;
-                else if (!IsNpc(p) && ( GetTrustLevel(p) >= LEVEL_IMMORTAL) && fGods)
-                  found = true;
-                else if (!IsNpc(p) && ( GetTrustLevel(p) <= LEVEL_IMMORTAL) && fMortals)
-                  found = true;
-	      } /* for everyone inside the room */
+                if((IsNpc(p) && fMobs)
+                    || (!IsNpc(p) && ( GetTrustLevel(p) >= LEVEL_IMMORTAL) && fGods)
+                    || (!IsNpc(p) && ( GetTrustLevel(p) <= LEVEL_IMMORTAL) && fMortals))
+                  {
+                    p = tmp;
+                    found = true;
+                    break;
+                  }
+              }
 
             if (found && !IsRoomPrivate(p, room)) /* Any of the required type here AND room not private? */
               {
@@ -196,7 +199,6 @@ void do_for(Character *ch, char *argument)
 static const char *name_expand(Character *ch)
 {
   int count = 1;
-  Character *rch;
   char name[256]; /*  HOPEFULLY no mob has a name longer than THAT */
 
   static char outbuf[MAX_INPUT_LENGTH];
@@ -213,9 +215,17 @@ static const char *name_expand(Character *ch)
     }
 
   /* ->people changed to ->first_person -- TRI */
-  for (rch = ch->InRoom->FirstPerson; rch && (rch != ch);rch = rch->NextInRoom)
-    if ( IsName(name, rch->Name))
-      count++;
+  for(const Character *rch : ch->InRoom->Characters())
+    {
+      if(rch == ch)
+        {
+          break;
+        }
+      else if(IsName(name, rch->Name))
+        {
+          ++count;
+        }
+    }
 
   sprintf (outbuf, "%d.%s", count, name);
   return outbuf;

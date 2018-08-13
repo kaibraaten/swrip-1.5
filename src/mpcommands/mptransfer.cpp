@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
@@ -12,7 +13,6 @@ void do_mptransfer( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   Room *location = nullptr;
   Character *victim = nullptr;
-  Character *nextinroom = nullptr;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -34,17 +34,24 @@ void do_mptransfer( Character *ch, char *argument )
   /* Put in the variable nextinroom to make this work right. -Narn */
   if ( !StrCmp( arg1, "all" ) )
     {
-      for ( victim = ch->InRoom->FirstPerson; victim; victim = nextinroom )
+      std::list<Character*> charactersToTransfer;
+
+      copy_if(std::begin(ch->InRoom->Characters()),
+              std::end(ch->InRoom->Characters()),
+              std::begin(charactersToTransfer),
+              [ch](auto candidate)
+              {
+                return candidate != ch
+                  && IsAuthed(candidate)
+                  && CanSeeCharacter(ch, candidate);
+              });
+
+      for(Character *transferee : charactersToTransfer)
         {
-          nextinroom = victim->NextInRoom;
-          if ( victim != ch
-               && IsAuthed(victim)
-               && CanSeeCharacter( ch, victim ) )
-            {
-              sprintf( buf, "%s %s", victim->Name, arg2 );
-              do_mptransfer( ch, buf );
-            }
+          sprintf( buf, "%s %s", transferee->Name, arg2 );
+          do_mptransfer( ch, buf );
         }
+
       return;
     }
 

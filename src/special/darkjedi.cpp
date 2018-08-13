@@ -6,19 +6,19 @@
 bool spec_dark_jedi( Character *ch )
 {
   Character *victim = nullptr;
-  Character *v_next = nullptr;
   const char *spell = nullptr;
   int sn = 0;
 
   if ( ch->Position != POS_FIGHTING )
     return false;
 
-  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
+  for(Character *fighter : ch->InRoom->Characters())
     {
-      v_next = victim->NextInRoom;
-
-      if ( GetFightingOpponent( victim ) && NumberBits( 2 ) == 0 )
-        break;
+      if ( GetFightingOpponent( fighter ) && NumberBits( 2 ) == 0 )
+        {
+          victim = fighter;
+          break;
+        }
     }
 
   if ( !victim || victim == ch )

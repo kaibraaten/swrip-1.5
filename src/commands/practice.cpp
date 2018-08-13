@@ -103,16 +103,20 @@ void do_practice( Character *ch, char *argument )
           return;
         }
 
-      for ( mob = ch->InRoom->FirstPerson; mob; mob = mob->NextInRoom )
-        if ( IsNpc(mob) && IsBitSet(mob->Flags, ACT_PRACTICE) )
-          break;
-
+      for(Character *potentialTeacher : ch->InRoom->Characters())
+        {
+          if(IsNpc(potentialTeacher) && IsBitSet(potentialTeacher->Flags, ACT_PRACTICE))
+            {
+              mob = potentialTeacher;
+              break;
+            }
+        }
+      
       if ( !mob )
         {
           ch->Echo("You can't do that here.\r\n");
           return;
         }
-
 
       sn = LookupSkill( argument );
 

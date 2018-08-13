@@ -6,7 +6,6 @@
 
 void do_cutdoor( Character *ch, char *argument )
 {
-  Character *gch = nullptr;
   Exit *pexit = nullptr;
   char arg[MAX_INPUT_LENGTH];
   const Object *wield = nullptr;
@@ -83,8 +82,6 @@ void do_cutdoor( Character *ch, char *argument )
                &&   (pexit_rev = pexit->ReverseExit) != NULL
                &&    pexit_rev->ToRoom == ch->InRoom )
             {
-              Character *rch;
-
               RemoveBit( pexit_rev->Flags, EX_CLOSED );
 
               if ( IsBitSet( pexit_rev->Flags, EX_LOCKED ) )
@@ -92,7 +89,7 @@ void do_cutdoor( Character *ch, char *argument )
 
 	      SetBit( pexit_rev->Flags, EX_BASHED );
 
-              for ( rch = to_room->FirstPerson; rch; rch = rch->NextInRoom )
+              for(Character *rch : to_room->Characters())
                 {
                   Act(AT_SKILL, "The $d falls open!",
                       rch, NULL, pexit_rev->Keyword, TO_CHAR );
@@ -123,7 +120,7 @@ void do_cutdoor( Character *ch, char *argument )
 
   if ( !CharacterDiedRecently( ch ) )
     {
-      for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->NextInRoom )
+      for(Character *gch : ch->InRoom->Characters())
 	{
 	  if ( IsAwake( gch )
 	       && !gch->Fighting

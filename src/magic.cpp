@@ -925,13 +925,10 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
        && victim != ch
        && !CharacterDiedRecently(victim) )
     {
-      Character *vch = NULL;
-      Character *vch_next = NULL;
+      std::list<Character*> copyOfCharacterList(ch->InRoom->Characters());
 
-      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
+      for(Character *vch : copyOfCharacterList)
         {
-          vch_next = vch->NextInRoom;
-
           if ( victim == vch && !victim->Fighting && victim->Master != ch )
             {
               retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );

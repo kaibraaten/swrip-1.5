@@ -5266,7 +5266,7 @@ void ImcStartup( bool force, socket_t desc, bool connected )
 }
 
 /*****************************************
- * User level commands and social.hppooks. *
+ * User level commands and social hooks. *
  *****************************************/
 
 /* The imccommand command, aka icommand. Channel manipulation at the server level etc. */
@@ -6323,9 +6323,9 @@ IMC_CMD( imcconfig )
       imc_printf( ch, "~wClientPwd      : ~G%s\r\n", this_imcmud->clientpw );
       imc_printf( ch, "~wServerPwd      : ~G%s\r\n", this_imcmud->serverpw );
       if( this_imcmud->sha256 )
-         imc_to_char( "~RThis mud.hppas enabled SHA-256 authentication.\r\n", ch );
+         imc_to_char( "~RThis mud has enabled SHA-256 authentication.\r\n", ch );
       else
-         imc_to_char( "~RThis mud.hppas disabled SHA-256 authentication.\r\n", ch );
+         imc_to_char( "~RThis mud has disabled SHA-256 authentication.\r\n", ch );
       if( this_imcmud->sha256 && this_imcmud->sha256pass )
          imc_to_char( "~RThe mud is using SHA-256 encryption to authenticate.\r\n", ch );
       else
@@ -7890,7 +7890,7 @@ bool ImcCommandHook( Character * ch, const std::string &stl_command,
 
          if( cmd->function == NULL )
          {
-            imc_to_char( "That command.hppas no code set. Inform the administration.\r\n", ch );
+            imc_to_char( "That command has no code set. Inform the administration.\r\n", ch );
             imcbug( "ImcCommandHook: Command %s has no code set!", cmd->Name );
             return true;
          }

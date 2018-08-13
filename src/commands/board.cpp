@@ -28,7 +28,7 @@ void do_board( Character *ch, char *argument )
 
       if ( ( toroom = GetRoom( ship->Rooms.Entrance ) ) == NULL )
         {
-          ch->Echo("That ship.hppas no entrance!\r\n");
+          ch->Echo("That ship has no entrance!\r\n");
           return;
         }
 
@@ -40,7 +40,7 @@ void do_board( Character *ch, char *argument )
 
       if ( ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2 )
         {
-          ch->Echo("&rThat ship.hppas already started launching!\r\n");
+          ch->Echo("&rThat ship has already started launching!\r\n");
           return;
         }
 
@@ -64,15 +64,12 @@ void do_board( Character *ch, char *argument )
 
   if ( toroom->Tunnel > 0 )
     {
-      int count = 0;
+      int count = toroom->Characters().size();
 
-      for ( const Character *ctmp = toroom->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
+      if ( count >= toroom->Tunnel )
         {
-          if ( ++count >= toroom->Tunnel )
-            {
-              ch->Echo( "There is no room for you in there.\r\n" );
-              return;
-            }
+          ch->Echo( "There is no room for you in there.\r\n" );
+          return;
         }
     }
 
