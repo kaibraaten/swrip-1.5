@@ -62,7 +62,7 @@ void do_clone( Character *ch, char *argument )
       frc = ch->Stats.PermFrc;
       mana = ch->Mana;
 
-      /* if character.hppas force, there is a chance of losing force
+      /* if character has force, there is a chance of losing force
 	 depending on the magnitude, the lesser force  the greater chance, as
 	 well as a slight chance of gaining force, also depending on
 	 the magnitude of the character's force */

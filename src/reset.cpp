@@ -1313,10 +1313,9 @@ static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
 
 void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
 {
-  Character *rch = NULL;
   Object *obj = NULL;
 
-  for ( rch = pRoom->FirstPerson; rch; rch = rch->NextInRoom )
+  for(const Character *rch : pRoom->Characters())
     {
       if ( !IsNpc(rch) )
 	{

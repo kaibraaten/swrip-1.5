@@ -9,7 +9,7 @@
  * The mud will likely crash if:
  *   (a) this area is already loaded
  *   (b) it contains vnums that exist
- *   (c) the area.hppas errors
+ *   (c) the area has errors
  *
  * NOTE: Use of this command is not recommended.                -Thoric
  */

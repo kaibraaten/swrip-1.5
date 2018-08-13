@@ -10,7 +10,6 @@ void do_rstat( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   Room *location = NULL;
   Object *obj = NULL;
-  Character *rch = NULL;
   int cnt = 0;
   static const char * const dir_text[] = { "n", "e", "s", "w", "u", "d", "ne", "nw", "se", "sw", "?" };
 
@@ -119,13 +118,13 @@ void do_rstat( Character *ch, char *argument )
 
   ch->Echo("Characters:");
 
-  for ( rch = location->FirstPerson; rch; rch = rch->NextInRoom )
+  for(const Character *rch : location->Characters())
     {
       if ( CanSeeCharacter( ch, rch ) )
         {
           ch->Echo(" ");
           OneArgument( rch->Name, buf );
-   ch->Echo(buf);
+          ch->Echo(buf);
         }
     }
 

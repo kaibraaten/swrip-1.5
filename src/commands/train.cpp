@@ -7,7 +7,6 @@ void do_train( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *mob = nullptr;
-  bool tfound = false;
   bool successful = false;
 
   if ( IsNpc(ch) )
@@ -31,14 +30,16 @@ void do_train( Character *ch, char *argument )
           return;
         }
 
-      for ( mob = ch->InRoom->FirstPerson; mob; mob = mob->NextInRoom )
-        if ( IsNpc(mob) && IsBitSet(mob->Flags, ACT_TRAIN) )
-          {
-            tfound = true;
-            break;
-          }
-
-      if ( (!mob) || (!tfound) )
+      for(Character *potentialTrainer : ch->InRoom->Characters())
+        {
+          if ( IsNpc(potentialTrainer) && IsBitSet(potentialTrainer->Flags, ACT_TRAIN) )
+            {
+              mob = potentialTrainer;
+              break;
+            }
+        }
+      
+      if ( mob == nullptr )
         {
           ch->Echo("You can't do that here.\r\n");
           return;

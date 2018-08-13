@@ -230,39 +230,44 @@ void do_cast( Character *ch, char *argument )
       if ( skill->Participants > 1 )
         {
           int cnt = 1;
-          Character *tmp;
-          Timer *t;
+          Timer *t = nullptr;
 
-          for ( tmp = ch->InRoom->FirstPerson; tmp; tmp = tmp->NextInRoom )
-            if (  tmp != ch
-		  &&   (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
-                  &&    t->Count >= 1 && t->DoFun == do_cast
-                  &&    tmp->tempnum == sn && tmp->dest_buf
-                  &&   !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
-              ++cnt;
-
+          for(Character *tmp : ch->InRoom->Characters())
+            {
+              if(tmp != ch
+                 && (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
+                 && t->Count >= 1 && t->DoFun == do_cast
+                 && tmp->tempnum == sn && tmp->dest_buf
+                 && !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
+                {
+                  ++cnt;
+                }
+            }
+          
           if ( cnt >= skill->Participants )
             {
-              for ( tmp = ch->InRoom->FirstPerson; tmp; tmp = tmp->NextInRoom )
-                if (  tmp != ch
-                      &&   (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
-                      &&    t->Count >= 1 && t->DoFun == do_cast
-                      &&    tmp->tempnum == sn && tmp->dest_buf
-                      &&   !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
-                  {
-                    ExtractTimer( tmp, t );
-                    Act( AT_MAGIC, "Channeling your energy into $n, you help direct the force",
-			 ch, NULL, tmp, TO_VICT );
-                    Act( AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, TO_CHAR );
-                    Act( AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, TO_NOTVICT );
-                    LearnFromSuccess( tmp, sn );
+              for(Character *tmp : ch->InRoom->Characters())
+                {
+                  if(tmp != ch
+                     && (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
+                     && t->Count >= 1 && t->DoFun == do_cast
+                     && tmp->tempnum == sn && tmp->dest_buf
+                     && !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
+                    {
+                      ExtractTimer( tmp, t );
+                      Act( AT_MAGIC, "Channeling your energy into $n, you help direct the force",
+                           ch, NULL, tmp, TO_VICT );
+                      Act( AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, TO_CHAR );
+                      Act( AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, TO_NOTVICT );
+                      LearnFromSuccess( tmp, sn );
 
-                    tmp->Mana -= mana;
-                    tmp->SubState = SUB_NONE;
-                    tmp->tempnum = -1;
-                    FreeMemory( tmp->dest_buf );
-                  }
-
+                      tmp->Mana -= mana;
+                      tmp->SubState = SUB_NONE;
+                      tmp->tempnum = -1;
+                      FreeMemory( tmp->dest_buf );
+                    }
+                }
+              
               dont_wait = true;
               ch->Echo( "You concentrate all the energy into a burst of force!\r\n" );
               vo = LocateSpellTargets( ch, targetName, sn, &victim, &obj );
@@ -426,17 +431,18 @@ void do_cast( Character *ch, char *argument )
        &&  !CharacterDiedRecently(victim)
        &&        victim != ch )
     {
-      Character *vch, *vch_next;
+      std::list<Character*> copyOfCharactersInRoom(ch->InRoom->Characters());
 
-      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
+      for(Character *vch : copyOfCharactersInRoom)
         {
-          vch_next = vch->NextInRoom;
-
           if ( vch == victim )
             {
               if ( victim->Master != ch
                    &&  !victim->Fighting )
-                retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
+                {
+                  retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
+                }
+              
               break;
             }
         }

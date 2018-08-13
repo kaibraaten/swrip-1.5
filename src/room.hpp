@@ -22,11 +22,13 @@ public:
   void Add(Exit *xit);
   void Remove(Exit *xit);
   const std::list<Exit*> &Exits() const;
+
+  void Add(Character *character);
+  void Remove(Character *character);
+  const std::list<Character*> &Characters() const;
   
   Room  *Next = nullptr;
   Room  *NextSort = nullptr;
-  Character        *FirstPerson = nullptr;
-  Character        *LastPerson = nullptr;
   Object         *FirstContent = nullptr;
   Object         *LastContent = nullptr;
   ExtraDescription *FirstExtraDescription = nullptr;

@@ -28,15 +28,19 @@ void do_mpforce( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "all" ) )
     {
-      Character *vch;
+      std::list<Character*> charactersToForce(ch->InRoom->Characters());
 
-      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->NextInRoom )
-        if ( GetTrustLevel( vch ) < GetTrustLevel( ch ) && CanSeeCharacter( ch, vch ) )
-          Interpret( vch, argument );
+      for(Character *vch : charactersToForce)
+        {
+          if ( GetTrustLevel( vch ) < GetTrustLevel( ch ) && CanSeeCharacter( ch, vch ) )
+            {
+              Interpret( vch, argument );
+            }
+        }
     }
   else
     {
-      Character *victim;
+      Character *victim = nullptr;
 
       if ( ( victim = GetCharacterInRoomMudProg( ch, arg ) ) == NULL )
         {

@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
@@ -26,18 +27,25 @@ void do_mppurge( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      /* 'purge' */
-      Character *vnext;
+      std::list<Character*> npcsToPurge;
+      copy_if(std::begin(ch->InRoom->Characters()),
+              std::end(ch->InRoom->Characters()),
+              std::begin(npcsToPurge),
+              [ch](auto npc)
+              {
+                return IsNpc(npc) && npc != ch;
+              });
 
-      for ( victim = ch->InRoom->FirstPerson; victim; victim = vnext )
+      for(Character *npc : npcsToPurge)
         {
-	  vnext = victim->NextInRoom;
-          if ( IsNpc( victim ) && victim != ch )
-            ExtractCharacter( victim, true );
+          ExtractCharacter(npc, true);
         }
+      
       while ( ch->InRoom->FirstContent )
-        ExtractObject( ch->InRoom->FirstContent );
-
+        {
+          ExtractObject( ch->InRoom->FirstContent );
+        }
+      
       return;
     }
 

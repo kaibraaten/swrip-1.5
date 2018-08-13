@@ -7,8 +7,6 @@
 
 void do_brandish( Character *ch, char *argument )
 {
-  Character *vch = NULL;
-  Character *vch_next = NULL;
   Object *staff = NULL;
   ch_ret retcode = rNONE;
   int sn = 0;
@@ -42,40 +40,46 @@ void do_brandish( Character *ch, char *argument )
           Act( AT_MAGIC, "$n brandishes $p.", ch, staff, NULL, TO_ROOM );
           Act( AT_MAGIC, "You brandish $p.",  ch, staff, NULL, TO_CHAR );
         }
-      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
+
+      std::list<Character*> copyOfCharactersInRoom(ch->InRoom->Characters());
+
+      for(Character *vch : copyOfCharactersInRoom)
 	{
-          vch_next      = vch->NextInRoom;
           if ( !IsNpc( vch ) && IsBitSet( vch->Flags, PLR_WIZINVIS )
                && vch->PCData->WizInvis >= LEVEL_IMMORTAL )
-            continue;
+            {
+              continue;
+            }
           else
-            switch ( SkillTable[sn]->Target )
-              {
-              default:
-                Log->Bug( "Do_brandish: bad target for sn %d.", sn );
-                return;
+            {
+              switch ( SkillTable[sn]->Target )
+                {
+                default:
+                  Log->Bug( "Do_brandish: bad target for sn %d.", sn );
+                  return;
 
-              case TAR_IGNORE:
-                if ( vch != ch )
-                  continue;
-                break;
+                case TAR_IGNORE:
+                  if ( vch != ch )
+                    continue;
+                  break;
 
-              case TAR_CHAR_OFFENSIVE:
-                if ( IsNpc(ch) ? IsNpc(vch) : !IsNpc(vch) )
-                  continue;
-                break;
+                case TAR_CHAR_OFFENSIVE:
+                  if ( IsNpc(ch) ? IsNpc(vch) : !IsNpc(vch) )
+                    continue;
+                  break;
 
-              case TAR_CHAR_DEFENSIVE:
-                if ( IsNpc(ch) ? !IsNpc(vch) : IsNpc(vch) )
-                  continue;
-                break;
+                case TAR_CHAR_DEFENSIVE:
+                  if ( IsNpc(ch) ? !IsNpc(vch) : IsNpc(vch) )
+                    continue;
+                  break;
 
-              case TAR_CHAR_SELF:
-                if ( vch != ch )
-                  continue;
-                break;
-              }
-
+                case TAR_CHAR_SELF:
+                  if ( vch != ch )
+                    continue;
+                  break;
+                }
+            }
+          
           retcode = CastSpellWithObject( staff->Value[OVAL_STAFF_SPELL],
                                          staff->Value[OVAL_STAFF_LEVEL], ch, vch, NULL );
 

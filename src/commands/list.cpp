@@ -19,7 +19,7 @@ void do_list( Character *ch, char *argument )
 
       bool found = false;
 
-      for ( const Character *pet = pRoomIndexNext->FirstPerson; pet; pet = pet->NextInRoom )
+      for ( const Character *pet : pRoomIndexNext->Characters() )
         {
           if ( IsBitSet(pet->Flags, ACT_PET) && IsNpc(pet) )
             {

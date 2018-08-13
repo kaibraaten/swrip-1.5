@@ -29,7 +29,6 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-
   if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
       ch->Echo("&RYou aren't in the pilots seat.\r\n");
@@ -99,7 +98,7 @@ void do_hyperspace(Character *ch, char *argument )
 
   if (ship->State != SHIP_READY && !IsShipInHyperspace( ship ) )
     {
-      ch->Echo("&RPlease wait until the ship.hppas finished its current manouver.\r\n");
+      ch->Echo("&RPlease wait until the ship has finished its current manouver.\r\n");
       return;
     }
 

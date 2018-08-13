@@ -185,7 +185,7 @@ void do_tractorbeam(Character *ch, char *argument )
 
   if (  target == NULL || target == ship)
     {
-      ch->Echo("&RThe ship.hppas left the starsytem. Targeting aborted.\r\n");
+      ch->Echo("&RThe ship has left the starsytem. Targeting aborted.\r\n");
       return;
     }
 

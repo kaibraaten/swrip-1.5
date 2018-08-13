@@ -102,7 +102,7 @@ void do_dock(Character *ch, char *argument)
 
   if (ship->State != SHIP_READY)
     {
-      ch->Echo("&RPlease wait until the ship.hppas finished its current maneuver.\r\n");
+      ch->Echo("&RPlease wait until the ship has finished its current maneuver.\r\n");
       return;
     }
 

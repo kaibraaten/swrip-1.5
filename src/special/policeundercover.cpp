@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "character.hpp"
 #include "mud.hpp"
 #include "pcdata.hpp"
@@ -5,29 +6,26 @@
 
 bool spec_police_undercover( Character *ch )
 {
-  Character *victim = NULL;
-  Character *v_next = NULL;
-  char buf[MAX_STRING_LENGTH];
-
   if ( !IsAwake(ch) || ch->Fighting )
     return false;
 
-  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
+  std::list<Character*> potentialCriminals;
+  copy_if(std::begin(ch->InRoom->Characters()),
+          std::end(ch->InRoom->Characters()),
+          std::begin(potentialCriminals),
+          [ch](auto victim)
+          {
+            return !IsNpc(victim)
+              && CanSeeCharacter(ch, victim)
+              && NumberBits(1) != 0;
+          });
+
+  for(Character *victim : potentialCriminals)
     {
-      v_next = victim->NextInRoom;
-
-      if ( IsNpc(victim) )
-        continue;
-
-      if ( !CanSeeCharacter( ch, victim ) )
-        continue;
-
-      if ( NumberBits ( 1 ) == 0 )
-        continue;
-
       for (size_t vip = 0 ; vip < MAX_BIT ; vip++ )
         if ( IsBitSet ( ch->VipFlags , 1 << vip ) &&  IsBitSet( victim->PCData->WantedFlags , 1 << vip) )
           {
+            char buf[MAX_STRING_LENGTH];
             sprintf( buf , "Got you!" );
             do_say( ch , buf );
             RemoveBit( victim->PCData->WantedFlags , 1 << vip );

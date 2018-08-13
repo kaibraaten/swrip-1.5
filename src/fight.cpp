@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <cassert>
 #include <cstring>
 #include <cctype>
 #include <cerrno>
@@ -170,7 +171,6 @@ void ViolenceUpdate( void )
   char buf[MAX_STRING_LENGTH];
   Character *ch = NULL;
   Character *victim = NULL;
-  Character *rch, *rch_next = NULL;
   Affect *paf = NULL;
   Affect *paf_next = NULL;
   Timer *timer = NULL;
@@ -318,10 +318,10 @@ void ViolenceUpdate( void )
       /*
        * Fun for the whole family!
        */
-      for ( rch = ch->InRoom->FirstPerson; rch; rch = rch_next )
-        {
-          rch_next = rch->NextInRoom;
+      std::list<Character*> copyOfCharacterList(ch->InRoom->Characters());
 
+      for(Character *rch : ch->InRoom->Characters())
+        {
           if ( IsAwake(rch) && !rch->Fighting )
             {
               /*
@@ -346,14 +346,10 @@ void ViolenceUpdate( void )
                   if ( rch->Prototype == ch->Prototype
                        ||   NumberBits( 3 ) == 0 )
                     {
-                      Character *vch;
-                      Character *target;
-                      int number;
+                      Character *target = nullptr;
+                      int number = 0;
 
-                      target = NULL;
-                      number = 0;
-
-		      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->Next )
+                      for(Character *vch : ch->InRoom->Characters())
 			{
 			  if ( CanSeeCharacter( rch, vch )
 			       &&   IsInSameGroup( vch, victim )
@@ -1558,12 +1554,20 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         }
       
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_NOKILL )  )
-        Act( AT_YELLOW, "$n flees for $s life... barely escaping certain death!", victim, 0, 0, TO_ROOM );
-      else if ( (IsNpc(victim) && IsBitSet( victim->Flags, ACT_DROID ) ) || (!IsNpc(victim) && victim->Race == RACE_DROID ) )
-        Act( AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, TO_ROOM );
+        {
+          Act( AT_YELLOW, "$n flees for $s life... barely escaping certain death!",
+               victim, 0, 0, TO_ROOM );
+        }
+      else if ( (IsNpc(victim) && IsBitSet( victim->Flags, ACT_DROID ) )
+                || (!IsNpc(victim) && victim->Race == RACE_DROID ) )
+        {
+          Act( AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, TO_ROOM );
+        }
       else
-        Act( AT_DEAD, "$n is DEAD!", victim, 0, 0, TO_ROOM );
-
+        {
+          Act( AT_DEAD, "$n is DEAD!", victim, 0, 0, TO_ROOM );
+        }
+      
       victim->Echo("&WYou have been KILLED!\r\n");
       break;
 
@@ -2033,11 +2037,7 @@ void StartFighting( Character *ch, Character *victim )
 
 Character *GetFightingOpponent( const Character *ch )
 {
-  if ( !ch )
-    {
-      Log->Bug( "%s: null ch", __FUNCTION__ );
-      return NULL;
-    }
+  assert(ch != nullptr);
 
   if ( !ch->Fighting )
     return NULL;
@@ -2389,23 +2389,19 @@ static void CheckObjectAlignmentZapping( Character *ch )
 
 static int CountGroupMembersInRoom( const Character *ch )
 {
-  const Character *gch = NULL;
-  int members = 0;
-
-  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->NextInRoom )
-    {
-      if ( IsInSameGroup( gch, ch ) )
-        {
-          members++;
-        }
-    }
+  const std::list<Character*> &charsInRoom = ch->InRoom->Characters();
+  
+  int members = count_if(std::begin(charsInRoom), std::end(charsInRoom),
+                         [ch](auto character)
+                         {
+                           return IsInSameGroup(character, ch);
+                         });
 
   return members;
 }
 
 static void GainGroupXP( Character *ch, Character *victim )
 {
-  Character *gch = NULL;
   const Character *lch = NULL;
   long xp = 0;
   int members = 0;
@@ -2429,7 +2425,7 @@ static void GainGroupXP( Character *ch, Character *victim )
 
   lch = ch->Leader ? ch->Leader : ch;
 
-  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->NextInRoom )
+  for(Character *gch : ch->InRoom->Characters())
     {
       if ( !IsInSameGroup( gch, ch ) )
 	{

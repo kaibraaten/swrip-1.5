@@ -9,8 +9,6 @@ static bool is_legal_kill(Character *ch, Character *vch);
 
 void do_hitall( Character *ch, char *argument )
 {
-  Character *vch = NULL;
-  Character *vch_next = NULL;
   short nvict = 0;
   short nhit = 0;
   short percent = 0;
@@ -21,7 +19,7 @@ void do_hitall( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->InRoom->FirstPerson )
+  if ( ch->InRoom->Characters().empty())
     {
       ch->Echo("There's no one here!\r\n");
       return;
@@ -29,10 +27,10 @@ void do_hitall( Character *ch, char *argument )
 
   percent = IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_hitall];
 
-  for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
-    {
-      vch_next = vch->NextInRoom;
+  std::list<Character*> copyOfCharactersInRoom(ch->InRoom->Characters());
 
+  for(Character *vch : copyOfCharactersInRoom)
+    {
       if ( IsInSameGroup(ch, vch) || !is_legal_kill(ch, vch) ||
            !CanSeeCharacter(ch, vch) || IsSafe(ch, vch) )
         continue;

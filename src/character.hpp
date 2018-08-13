@@ -36,8 +36,6 @@ public:
   
   Character *Next = NULL;
   Character *Previous = NULL;
-  Character *NextInRoom = NULL;
-  Character *PreviousInRoom = NULL;
   Character *Master = NULL;
   Character *Leader = NULL;
   Fight *Fighting = NULL;
@@ -267,6 +265,8 @@ void AddKill( Character *ch, const Character *mob );
 int TimesKilled( const Character *ch, const Character *mob );
 
 bool HasComlink( const Character *ch );
+
+bool HasDiploma(const Character *ch);
 
 short GetAbilityLevel( const Character *ch, short ability );
 

@@ -397,7 +397,6 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
   if ( !StrCmp(chck, "mobinroom") )
     {
       int vnum = atoi(cvar);
-      Character *oMob = NULL;
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
@@ -405,17 +404,12 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
           return BERR;
         }
 
-      lhsvl = 0;
-
-      for ( oMob = mob->InRoom->FirstPerson; oMob;
-            oMob = oMob->NextInRoom )
-	{
-	  if ( IsNpc(oMob) && oMob->Prototype->Vnum == vnum )
-	    {
-	      lhsvl++;
-	    }
-	}
-
+      lhsvl = count_if(std::begin(mob->InRoom->Characters()),
+                       std::end(mob->InRoom->Characters()),
+                       [vnum](auto oMob)
+                       {
+                         return IsNpc(oMob) && oMob->Prototype->Vnum == vnum;
+                       });
       rhsvl = atoi(rval);
 
       if ( rhsvl < 1 )
@@ -1663,14 +1657,13 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
  *  This function rewritten by Narn for Realms of Despair, Dec/95.
  *
  */
-static void MudProgDriver ( char *com_list, Character *mob, Character *actor,
+static void MudProgDriver( char *com_list, Character *mob, Character *actor,
 			   Object *obj, void *vo, bool single_step)
 {
   char tmpcmndlst[ MAX_STRING_LENGTH ];
   char *command_list = NULL;
   char *cmnd = NULL;
   Character *rndm  = NULL;
-  Character *vch   = NULL;
   int count        = 0;
   int ignorelevel  = 0;
   int iflevel = 0, result = 0;
@@ -1726,14 +1719,19 @@ static void MudProgDriver ( char *com_list, Character *mob, Character *actor,
 
   count = 0;
 
-  for ( vch = mob->InRoom->FirstPerson; vch; vch = vch->NextInRoom )
-    if ( !IsNpc( vch ) )
-      {
-        if ( GetRandomNumberFromRange( 0, count ) == 0 )
-          rndm = vch;
-        count++;
-      }
-
+  for(Character *vch : mob->InRoom->Characters())
+    {
+      if ( !IsNpc( vch ) )
+        {
+          if ( GetRandomNumberFromRange( 0, count ) == 0 )
+            {
+              rndm = vch;
+            }
+          
+          count++;
+        }
+    }
+  
   strcpy( tmpcmndlst, com_list );
   command_list = tmpcmndlst;
 
@@ -2445,12 +2443,10 @@ void MobProgGiveTrigger( Character *mob, Character *ch, Object *obj )
 
 void MobProgGreetTrigger( Character *ch )
 {
-  Character *vmob = NULL, *vmob_next = NULL;
+  std::list<Character*> copyOfCharacterList(ch->InRoom->Characters());
 
-  for ( vmob = ch->InRoom->FirstPerson; vmob; vmob = vmob_next )
+  for(Character *vmob : copyOfCharacterList)
     {
-      vmob_next = vmob->NextInRoom;
-
       if ( !IsNpc( vmob )
            || vmob->Fighting
            || !IsAwake( vmob ) )
@@ -2516,9 +2512,9 @@ void MobProgHourTrigger( Character *mob )
 
 void MobProgSpeechTrigger( char *txt, Character *actor )
 {
-  Character *vmob;
+  std::list<Character*> copyOfCharacterList(actor->InRoom->Characters());
 
-  for ( vmob = actor->InRoom->FirstPerson; vmob; vmob = vmob->NextInRoom )
+  for(Character *vmob : copyOfCharacterList)
     {
       if ( IsNpc( vmob ) && ( vmob->Prototype->mprog.progtypes & SPEECH_PROG ) )
         {
@@ -3488,7 +3484,6 @@ const char *MobProgTypeToName( int type )
 Character *GetCharacterInRoomMudProg( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *rch = NULL;
   int count = 0;
   vnum_t vnum = INVALID_VNUM;
   int number = NumberArgument( argument, arg );
@@ -3505,7 +3500,7 @@ Character *GetCharacterInRoomMudProg( Character *ch, char *argument )
 
   count  = 0;
 
-  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->NextInRoom )
+  for(Character *rch : ch->InRoom->Characters())
     {
       if ( (NiftyIsName( arg, rch->Name )
 	    ||  (IsNpc(rch) && vnum == rch->Prototype->Vnum)) )
@@ -3528,7 +3523,7 @@ Character *GetCharacterInRoomMudProg( Character *ch, char *argument )
 
   count = 0;
 
-  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->NextInRoom )
+  for(Character *rch : ch->InRoom->Characters())
     {
       if ( !NiftyIsNamePrefix( arg, rch->Name ) )
 	{

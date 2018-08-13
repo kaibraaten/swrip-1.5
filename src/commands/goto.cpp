@@ -8,8 +8,6 @@ void do_goto( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Room *location = NULL;
-  Character *fch = NULL;
-  Character *fch_next = NULL;
   Room *in_room = NULL;
   Area *pArea = NULL;
   vnum_t vnum = INVALID_VNUM;
@@ -125,16 +123,15 @@ void do_goto( Character *ch, char *argument )
         Act( AT_IMMORT, "$n $T", ch, NULL, "enters in a swirl of the Force.",  TO_ROOM );
     }
 
-
-
   do_look( ch, "auto" );
 
   if ( ch->InRoom == in_room )
     return;
 
-  for ( fch = in_room->FirstPerson; fch; fch = fch_next )
+  std::list<Character*> copyOfCharactersInRoom(in_room->Characters());
+
+  for(Character *fch : copyOfCharactersInRoom)
     {
-      fch_next = fch->NextInRoom;
       if ( fch->Master == ch && IsImmortal(fch) )
         {
           Act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );

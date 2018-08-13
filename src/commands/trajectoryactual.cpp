@@ -65,7 +65,7 @@ void do_trajectory_actual( Character *ch, char *argument )
 
   if (ship->State != SHIP_READY)
     {
-      ch->Echo("&RPlease wait until the ship.hppas finished its current manouver.\r\n");
+      ch->Echo("&RPlease wait until the ship has finished its current manouver.\r\n");
       return;
     }
 

@@ -93,7 +93,7 @@ void do_land( Character *ch, char *argument )
     }
   if (ship->State != SHIP_READY)
     {
-      ch->Echo("&RPlease wait until the ship.hppas finished its current manouver.\r\n");
+      ch->Echo("&RPlease wait until the ship has finished its current maneuver.\r\n");
       return;
     }
 
@@ -170,7 +170,7 @@ void do_land( Character *ch, char *argument )
 
       if ( ! target->Rooms.Hangar )
         {
-          ch->Echo("&RThat ship.hppas no hangar for you to land in!\r\n");
+          ch->Echo("&RThat ship has no hangar for you to land in!\r\n");
           return;
         }
 

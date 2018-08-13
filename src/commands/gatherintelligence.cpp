@@ -123,7 +123,7 @@ void do_gather_intelligence( Character *ch , char *argument )
               break;
 
 	    case HUNTING_ABILITY:
-              sprintf( buf, "%s appears to have centered training on bounty.hppunting.", victim->Name );
+              sprintf( buf, "%s appears to have centered training on bounty hunting.", victim->Name );
               break;
 
             case SMUGGLING_ABILITY:

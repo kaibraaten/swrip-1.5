@@ -9,7 +9,6 @@ void do_tell( Character *ch, char *argument )
   Character *victim = NULL;
   PositionType position = POS_STANDING;
   Character *switched_victim = NULL;
-  Character *vch = NULL;
   bool sameroom = false;
 
   if ( IsBitSet( ch->Deaf, CHANNEL_TELLS ) && !IsImmortal( ch ) )
@@ -173,7 +172,7 @@ void do_tell( Character *ch, char *argument )
 
   if( !IsImmortal(ch) && !sameroom )
     {
-      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->NextInRoom )
+      for(Character *vch : ch->InRoom->Characters())
         {
           const char *sbuf = argument;
 

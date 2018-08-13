@@ -103,7 +103,7 @@ void ClearVirtualRooms( void )
   for ( hash = 0; hash < 64; hash++ )
     {
       while ( vroom_hash[hash]
-              && !vroom_hash[hash]->FirstPerson
+              && vroom_hash[hash]->Characters().empty()
               && !vroom_hash[hash]->FirstContent )
         {
           room = vroom_hash[hash];
@@ -119,7 +119,7 @@ void ClearVirtualRooms( void )
         {
           room_next = room->Next;
 
-          if ( !room->FirstPerson && !room->FirstContent )
+          if ( room->Characters().empty() && !room->FirstContent )
             {
               if ( prev )
 		{
@@ -706,19 +706,18 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
    */
   if ( to_room->Tunnel > 0 )
     {
-      Character *ctmp;
       int count = ch->Mount ? 1 : 0;
+      count += to_room->Characters().size();
 
-      for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
-        if ( ++count >= to_room->Tunnel )
-          {
-            if ( ch->Mount && count == to_room->Tunnel )
-              ch->Echo( "There is no room for both you and your mount in there.\r\n" );
-            else
-              ch->Echo( "There is no room for you in there.\r\n" );
+      if ( count >= to_room->Tunnel )
+        {
+          if ( ch->Mount && count == to_room->Tunnel )
+            ch->Echo( "There is no room for both you and your mount in there.\r\n" );
+          else
+            ch->Echo( "There is no room for you in there.\r\n" );
 
-            return rNONE;
-          }
+          return rNONE;
+        }
     }
 
   /* check for traps on exit - later */
@@ -940,24 +939,23 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   */
   if ( !fall )
     {
-      Character *fch;
-      Character *nextinroom;
-      int chars = 0, count = 0;
+      size_t count = 0;
+      const size_t chars = from_room->Characters().size();
+      std::list<Character*> copyOfCharacterList(from_room->Characters());
 
-      for ( fch = from_room->FirstPerson; fch; fch = fch->NextInRoom )
-        chars++;
-
-      for ( fch = from_room->FirstPerson; fch && ( count < chars ); fch = nextinroom )
+      for(Character *fch : copyOfCharacterList)
         {
-          nextinroom = fch->NextInRoom;
-          count++;
-	  
+          if(++count >= chars)
+            {
+              break;
+            }
+          
           if ( fch != ch                /* loop room bug fix here by Thoric */
                && fch->Master == ch
                && fch->Position == POS_STANDING )
             {
               Act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );
-              MoveCharacter( fch, pexit, 0 );
+              MoveCharacter( fch, pexit );
             }
         }
     }
@@ -1144,10 +1142,9 @@ static void TeleportCharacter( Character *ch, Room *room, bool show )
 
 void Teleport( Character *ch, vnum_t room, int flags )
 {
-  Character *nch = NULL, *nch_next = NULL;
   Room *pRoomIndex = GetRoom( room );
   bool show = false;
-
+  
   if ( !pRoomIndex )
     {
       Log->Bug( "%s: bad room vnum %d", __FUNCTION__, room );
@@ -1165,9 +1162,10 @@ void Teleport( Character *ch, vnum_t room, int flags )
       return;
     }
 
-  for ( nch = ch->InRoom->FirstPerson; nch; nch = nch_next )
+  std::list<Character*> copyOfCharacterList(ch->InRoom->Characters());
+
+  for(Character *nch : copyOfCharacterList)
     {
-      nch_next = nch->NextInRoom;
       TeleportCharacter( nch, pRoomIndex, show );
     }
 }

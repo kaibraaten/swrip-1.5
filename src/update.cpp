@@ -867,7 +867,7 @@ static void MobileUpdate( void )
 
       if ( ch->Prototype->Vnum == MOB_VNUM_ANIMATED_CORPSE && !IsAffectedBy(ch, AFF_CHARM) )
         {
-          if(ch->InRoom->FirstPerson)
+          if(!ch->InRoom->Characters().empty())
 	    {
 	      Act(AT_MAGIC, "$n returns to the dust from whence $e came.",
 		  ch, NULL, NULL, TO_ROOM);
@@ -1090,12 +1090,9 @@ static void MobileUpdate( void )
            && !IsBitSet(pexit->Flags, EX_CLOSED)
            && !IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB) )
         {
-          Character *rch = NULL;
           bool found = false;
 
-          for ( rch = ch->InRoom->FirstPerson;
-                rch;
-                rch = rch->NextInRoom )
+          for(Character *rch : ch->InRoom->Characters())
             {
               if ( IsFearing(ch, rch) )
                 {
@@ -1939,8 +1936,9 @@ static void ObjectUpdate( void )
 
               new_room = xit->ToRoom;
 
-              if (( rch = obj->InRoom->FirstPerson ) != NULL )
+              if (!obj->InRoom->Characters().empty() )
                 {
+                  rch = obj->InRoom->Characters().front();
                   Act( AT_ACTION, "$p falls away.", rch, obj, NULL, TO_ROOM );
                   Act( AT_ACTION, "$p falls away.", rch, obj, NULL, TO_CHAR );
                 }
@@ -1948,8 +1946,9 @@ static void ObjectUpdate( void )
               ObjectFromRoom(obj);
               ObjectToRoom(obj, new_room);
 
-              if (( rch = obj->InRoom->FirstPerson) != NULL )
+              if (!obj->InRoom->Characters().empty() )
                 {
+                  rch = obj->InRoom->Characters().front();
                   Act( AT_ACTION, "$p floats by.", rch, obj, NULL, TO_ROOM );
                   Act( AT_ACTION, "$p floats by.", rch, obj, NULL, TO_CHAR );
                 }
@@ -2024,6 +2023,7 @@ static void ObjectUpdate( void )
         case ITEM_FIRE:
           if (obj->InRoom)
             --obj->InRoom->Light;
+
           message = "$p burns out.";
           AT_TEMP = AT_FIRE;
         }
@@ -2033,9 +2033,10 @@ static void ObjectUpdate( void )
           Act( AT_TEMP, message, obj->CarriedBy, obj, NULL, TO_CHAR );
         }
       else if ( obj->InRoom
-                && ( rch = obj->InRoom->FirstPerson ) != NULL
+                && !obj->InRoom->Characters().empty()
                 && !IS_OBJ_STAT( obj, ITEM_BURRIED ) )
         {
+          rch = obj->InRoom->Characters().front();
           Act( AT_TEMP, message, rch, obj, NULL, TO_ROOM );
           Act( AT_TEMP, message, rch, obj, NULL, TO_CHAR );
         }
@@ -2242,9 +2243,7 @@ static void CharacterCheck( void )
  */
 static void AggroUpdate( void )
 {
-  Character *wch = NULL;
   Character *ch = NULL;
-  Character *ch_next = NULL;
   Character *victim = NULL;
   Character *wch_next = NULL;
   struct act_prog_data *apdtmp = NULL;
@@ -2252,7 +2251,7 @@ static void AggroUpdate( void )
   /* check mobprog act queue */
   while ( (apdtmp = mob_act_list) != NULL )
     {
-      wch = (Character*)mob_act_list->vo;
+      Character *wch = (Character*)mob_act_list->vo;
 
       if ( !CharacterDiedRecently(wch) && wch->mprog.mpactnum > 0 )
         {
@@ -2304,10 +2303,10 @@ static void AggroUpdate( void )
 	  continue;
 	}
 
-      for ( wch = ch->InRoom->FirstPerson; wch; wch = ch_next )
-        {
-          ch_next = wch->NextInRoom;
+      std::list<Character*> charactersInRoom(ch->InRoom->Characters());
 
+      for(Character *wch : charactersInRoom)
+        {
           if ( IsHating( ch, wch ) )
             {
               FoundPrey( ch, wch );
@@ -2378,7 +2377,6 @@ static void AggroUpdate( void )
 static void PerformRandomDrunkBehavior( Character *ch )
 {
   Character *rvch = NULL;
-  Character *vch = NULL;
   short drunk = 0;
   PositionType position = POS_DEAD;
 
@@ -2422,7 +2420,7 @@ static void PerformRandomDrunkBehavior( Character *ch )
     {
       char name[MAX_STRING_LENGTH];
 
-      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->NextInRoom )
+      for(Character *vch : ch->InRoom->Characters())
 	{
 	  if ( GetRandomPercent() < 10 )
 	    {
@@ -2548,9 +2546,9 @@ static void TeleportUpdate( void )
 
       if ( --tele->TeleportTimer <= 0 )
         {
-          if ( tele->FromRoom->FirstPerson )
+          if ( !tele->FromRoom->Characters().empty() )
             {
-              Teleport( tele->FromRoom->FirstPerson, tele->FromRoom->TeleVnum,
+              Teleport( tele->FromRoom->Characters().front(), tele->FromRoom->TeleVnum,
                         TELE_TRANSALL );
             }
 
@@ -2730,8 +2728,9 @@ void RemovePortal( Object *portal )
 
   ExtractExit( fromRoom, pexit );
 
-  if ( toRoom && (ch = toRoom->FirstPerson) != NULL )
+  if ( toRoom && !toRoom->Characters().empty())
     {
+      ch = toRoom->Characters().front();
       Act( AT_PLAIN, "A magical portal above winks from existence.", ch, NULL, NULL, TO_ROOM );
     }
 }

@@ -10,7 +10,6 @@ ch_ret spell_ventriloquate( int sn, int level, Character *ch, void *vo )
   char buf1[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   char speaker[MAX_INPUT_LENGTH];
-  Character *vch = nullptr;
 
   spell_target_name = OneArgument( spell_target_name, speaker );
 
@@ -18,12 +17,12 @@ ch_ret spell_ventriloquate( int sn, int level, Character *ch, void *vo )
   sprintf( buf2, "Someone makes %s say '%s'.\r\n", speaker, spell_target_name );
   buf1[0] = CharToUppercase(buf1[0]);
 
-  for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->NextInRoom )
+  for(const Character *vch : ch->InRoom->Characters())
     {
       if ( !IsName( speaker, vch->Name ) )
 	{
 	  SetCharacterColor( AT_SAY, vch );
-   vch->Echo(SaveVsSpellStaff( level, vch ) ? buf2 : buf1);
+          vch->Echo(SaveVsSpellStaff( level, vch ) ? buf2 : buf1);
 	}
     }
 

@@ -81,10 +81,9 @@ void do_group( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "all" ) )
     {
-      Character *rch = NULL;
       int count = 0;
 
-      for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->NextInRoom )
+      for(Character *rch : ch->InRoom->Characters())
         {
           if ( ch != rch
                && !IsNpc( rch )

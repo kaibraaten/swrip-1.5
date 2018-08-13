@@ -6,20 +6,14 @@
 
 bool spec_clan_guard( Character *ch )
 {
-  Character *victim = NULL;
-  Character *v_next = NULL;
-  Clan *clan = NULL;
-  bool found = false;
-
   if ( !IsAwake(ch) || ch->Fighting )
     return false;
 
-  clan = GetClan(ch->Name);
+  const Clan *clan = GetClan(ch->Name);
+  std::list<Character*> charactersToActOn(ch->InRoom->Characters());
 
-  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
+  for(Character *victim : charactersToActOn)
     {
-      v_next = victim->NextInRoom;
-
       if ( !CanSeeCharacter( ch, victim ) )
         continue;
 
@@ -36,9 +30,6 @@ bool spec_clan_guard( Character *ch )
            && ( !clan->MainClan
 		|| clan->MainClan != victim->PCData->ClanInfo.Clan ) )
         {
-          if(found)
-            continue;
-
           do_yell( ch, "Hey you're not allowed in here!" );
           HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
           return true;

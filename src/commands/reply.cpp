@@ -7,7 +7,6 @@ void do_reply( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   Character *victim = NULL;
   PositionType position = POS_STANDING;
-  Character *vch = NULL;
   bool sameroom = false;
 
   RemoveBit( ch->Deaf, CHANNEL_TELLS );
@@ -118,7 +117,7 @@ void do_reply( Character *ch, char *argument )
 
   if( !IsImmortal(ch) && !sameroom )
     {
-      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->NextInRoom )
+      for(Character *vch : ch->InRoom->Characters())
         {
           const char *sbuf = argument;
 

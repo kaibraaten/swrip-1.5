@@ -51,7 +51,7 @@ void do_leaveship( Character *ch, char *argument )
     {
       if ( !shuttle->InRoom || ( toroom = GetRoom( shuttle->InRoom->Vnum ) ) == NULL )
         {
-          ch->Echo("The ship.hppasn't landed yet. Do you want to kill yourself?\r\n");
+          ch->Echo("The ship hasn't landed yet. Do you want to kill yourself?\r\n");
           return;
         }
     }

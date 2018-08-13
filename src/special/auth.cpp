@@ -5,17 +5,13 @@
 
 bool spec_auth( Character *ch )
 {
-  Character *victim = NULL;
-  Character *v_next = NULL;
   char buf[MAX_STRING_LENGTH];
   ProtoObject *pObjIndex = NULL;
   Object *obj = NULL;
   bool hasdiploma = false;
 
-  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
+  for(Character *victim : ch->InRoom->Characters())
     {
-      v_next = victim->NextInRoom;
-
       if ( !IsNpc(victim) && ( pObjIndex = GetProtoObject( OBJ_VNUM_SCHOOL_DIPLOMA ) ) != NULL )
         {
           hasdiploma = false;
@@ -50,4 +46,3 @@ bool spec_auth( Character *ch )
 
   return false;
 }
-

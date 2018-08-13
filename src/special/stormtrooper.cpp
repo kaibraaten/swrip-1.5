@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <vector>
 #include "character.hpp"
 #include "mud.hpp"
 #include "clan.hpp"
@@ -6,37 +8,36 @@
 
 bool spec_stormtrooper( Character *ch )
 {
-  Character *victim = NULL;
-  Character *v_next = NULL;
-
   if ( !IsAwake(ch) || ch->Fighting )
     return false;
 
-  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
+  std::vector<Character*> rebels;
+  copy_if(std::begin(ch->InRoom->Characters()),
+          std::end(ch->InRoom->Characters()),
+          std::begin(rebels),
+          [ch](auto victim)
+          {
+            return CanSeeCharacter(ch, victim)
+              && GetTimer(victim, TIMER_RECENTFIGHT) == 0
+              && ( ( IsNpc( victim )
+                     && ( NiftyIsName( "rebel", victim->Name )
+                          || NiftyIsName( "republic", victim->Name ) )
+                     && victim->Fighting
+                     && GetFightingOpponent( victim ) != ch )
+                   || ( !IsNpc( victim ) && IsClanned( victim )
+                        && IsAwake(victim)
+                        && ( NiftyIsName( "rebel" , victim->PCData->ClanInfo.Clan->Name )
+                             || NiftyIsName( "republic", victim->PCData->ClanInfo.Clan->Name ))));
+          });
+
+  random_shuffle(std::begin(rebels),
+                 std::end(rebels));
+  
+  for(Character *victim : rebels)
     {
-      v_next = victim->NextInRoom;
-
-      if ( !CanSeeCharacter( ch, victim ) )
-        continue;
-
-      if ( GetTimer(victim, TIMER_RECENTFIGHT) > 0 )
-        continue;
-
-      if ( ( IsNpc( victim )
-	     && ( NiftyIsName( "rebel", victim->Name )
-		  || NiftyIsName( "republic", victim->Name ) )
-             && victim->Fighting
-	     && GetFightingOpponent( victim ) != ch )
-	   || ( !IsNpc( victim ) && IsClanned( victim )
-		&& IsAwake(victim)
-		&& ( NiftyIsName( "rebel" , victim->PCData->ClanInfo.Clan->Name )
-		     || NiftyIsName( "republic", victim->PCData->ClanInfo.Clan->Name ) ) ) )
-        {
-          do_yell( ch, "Die Rebel Scum!" );
-          HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
-          return true;
-        }
-
+      do_yell( ch, "Die Rebel Scum!" );
+      HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
+      return true;
     }
 
   return false;
