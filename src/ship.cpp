@@ -628,7 +628,7 @@ static void LaunchShip( Ship *ship )
   ship->Position.y += (ship->Heading.y * ship->Thrusters.Speed.Current * 2);
   ship->Position.z += (ship->Heading.z * ship->Thrusters.Speed.Current * 2);
 
-  EchoToCockpit( AT_GREEN, ship, "Launch complete.\r\n");
+  EchoToCockpit( AT_GREEN, ship, "Launch complete.");
   EchoToShip( AT_YELLOW , ship , "The ship leaves the platform far behind as it flies into space." );
   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
 	   ship->Name, ship->Position.x, ship->Position.y, ship->Position.z );
