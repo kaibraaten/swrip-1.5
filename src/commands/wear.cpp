@@ -3,6 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "object.hpp"
 
 static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit);
 static bool can_layer( const Character *ch, const Object *obj, short wear_loc );

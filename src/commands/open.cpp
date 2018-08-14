@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_open( Character *ch, char *argument )
 {

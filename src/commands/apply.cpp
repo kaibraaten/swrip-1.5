@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "object.hpp"
 
 /*
  * Apply a salve/ointment                                       -Thoric

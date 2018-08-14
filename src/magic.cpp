@@ -27,6 +27,7 @@
 #include "skill.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 int pAbort = 0;
 

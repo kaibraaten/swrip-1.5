@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "object.hpp"
 
 /* Opstat - Scryn 8/12*/
 void do_opstat( Character *ch, char *argument )

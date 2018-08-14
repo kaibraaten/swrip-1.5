@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 bool spec_customs_alcohol( Character *ch )
 {

@@ -30,6 +30,7 @@
 #include "area.hpp"
 #include "script.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 /*
  * Global variables.

@@ -27,6 +27,7 @@
 #include "badname.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 /*
  * Function to handle the state changing of a triggerobject (lever)  -Thoric

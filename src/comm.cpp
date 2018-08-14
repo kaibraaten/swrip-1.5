@@ -25,6 +25,7 @@
 #define _BSD_SOURCE
 #endif
 
+#include <algorithm>
 #include <cstring>
 #include <cctype>
 #include <ctime>
@@ -37,6 +38,7 @@
 #include "ban.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 /*
  * Socket and TCP/IP stuff.
@@ -1597,17 +1599,23 @@ void Act( short AType, const std::string &format, Character *ch, const void *arg
 
   if ( MOBtrigger && type != TO_CHAR && type != TO_VICT && to )
     {
-      Object *to_obj;
-
       txt = ActString(format.c_str(), NULL, ch, arg1, arg2);
 
       if ( IsBitSet(to->InRoom->mprog.progtypes, ACT_PROG) )
-        RoomProgActTrigger(txt, to->InRoom, ch, (Object *)arg1, (void *)arg2);
+        {
+          RoomProgActTrigger(txt, to->InRoom, ch, (Object *)arg1, (void *)arg2);
+        }
+      
+      std::list<Object*> objectsToTrigger = Filter(to->InRoom->Objects(),
+                                                   [](auto to_obj)
+                                                   {
+                                                     return IsBitSet(to_obj->Prototype->mprog.progtypes, ACT_PROG);
+                                                   });
 
-      for ( to_obj = to->InRoom->FirstContent; to_obj;
-            to_obj = to_obj->NextContent )
-        if ( IsBitSet(to_obj->Prototype->mprog.progtypes, ACT_PROG) )
+      for(Object *to_obj : objectsToTrigger)
+        {
           ObjProgActTrigger(txt, to_obj, ch, (Object *)arg1, (void *)arg2);
+        }
     }
 
   /* Anyone feel like telling me the point of looping through the whole

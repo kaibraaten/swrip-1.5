@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_purge( Character *ch, char *argument )
 {
@@ -10,21 +11,25 @@ void do_purge( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      std::list<Character*> copyOfCharactersInRoom(ch->InRoom->Characters());
-      
-      for(Character *victim : copyOfCharactersInRoom)
+      std::list<Character*> charactersToExtract = Filter(ch->InRoom->Characters(),
+                                                         [ch](const auto victim)
+                                                         {
+                                                           return IsNpc(victim)
+                                                             && victim != ch
+                                                             && !IsBitSet(victim->Flags, ACT_POLYMORPHED);
+                                                         });
+      for(Character *victim : charactersToExtract)
         {
-          if ( IsNpc(victim) && victim != ch && !IsBitSet(victim->Flags, ACT_POLYMORPHED))
-            ExtractCharacter( victim, true );
+          ExtractCharacter( victim, true );
         }
 
-      for ( Object *obj = ch->InRoom->FirstContent, *obj_next = nullptr; obj; obj = obj_next )
+      std::list<Object*> objectsToExtract = Filter(ch->InRoom->Objects(),
+                                                   [](const auto obj)
+                                                   {
+                                                     return obj->ItemType != ITEM_SPACECRAFT;
+                                                   });
+      for(Object *obj : objectsToExtract)
         {
-          obj_next = obj->NextContent;
-
-	  if ( obj->ItemType == ITEM_SPACECRAFT )
-            continue;
-
 	  ExtractObject( obj );
         }
 

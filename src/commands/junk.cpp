@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_junk( Character *ch, char *argument )
 {
@@ -21,7 +22,7 @@ void do_junk( Character *ch, char *argument )
   if ( HasMentalStateToFindObject(ch) )
     return;
 
-  obj = GetObjectInListReverse( ch, arg, ch->InRoom->LastContent );
+  obj = GetObjectInListReverse( ch, arg, ch->InRoom->Objects() );
 
   if ( !obj )
     {

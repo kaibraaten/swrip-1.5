@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <algorithm>
 #include <cstring>
 #include <cassert>
 #include "character.hpp"
@@ -31,6 +32,7 @@
 #include "log.hpp"
 #include "playerrepository.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 extern Character *gch_prev;
 extern Object *gobj_prev;
@@ -114,10 +116,6 @@ void ExplodeRoom( Object *obj, Character *xch, Room *room )
 
 void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
 {
-  Object *robj = NULL;
-  Object *robj_next = NULL;
-  int dam = 0;
-
   if ( IsBitSet( room->Flags, BFS_MARK ) )
     return;
 
@@ -129,7 +127,7 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
     {
       Act( AT_WHITE, "The shockwave from a massive explosion rips through your body!",
 	   room->Characters().front(), obj, NULL, TO_ROOM );
-      dam = GetRandomNumberFromRange ( obj->Value[OVAL_EXPLOSIVE_MIN_DMG] , obj->Value[OVAL_EXPLOSIVE_MAX_DMG] );
+      int dam = GetRandomNumberFromRange ( obj->Value[OVAL_EXPLOSIVE_MIN_DMG] , obj->Value[OVAL_EXPLOSIVE_MAX_DMG] );
       InflictDamage( rch, rch , dam, TYPE_UNDEFINED );
 
       if ( !CharacterDiedRecently(rch) )
@@ -148,19 +146,20 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
         }
     }
 
-  for ( robj = room->FirstContent; robj; robj = robj_next )
-    {
-      robj_next = robj->NextContent;
+  std::list<Object*> objectsToScrap = Filter(room->Objects(),
+                                             [obj](auto robj)
+                                             {
+                                               return robj != obj
+                                                 && robj->ItemType != ITEM_SPACECRAFT
+                                                 && robj->ItemType != ITEM_SCRAPS
+                                                 && robj->ItemType != ITEM_CORPSE_NPC
+                                                 && robj->ItemType != ITEM_CORPSE_PC
+                                                 && robj->ItemType != ITEM_DROID_CORPSE;
+                                             });
 
-      if ( robj != obj
-	   && robj->ItemType != ITEM_SPACECRAFT
-	   && robj->ItemType != ITEM_SCRAPS
-           && robj->ItemType != ITEM_CORPSE_NPC
-	   && robj->ItemType != ITEM_CORPSE_PC
-	   && robj->ItemType != ITEM_DROID_CORPSE)
-	{
-	  MakeScraps( robj );
-	}
+  for(Object *robj : objectsToScrap)
+    {
+      MakeScraps( robj );
     }
 
   /* other rooms */
@@ -967,14 +966,24 @@ int GetObjectArmorClass( const Object *obj, int iWear )
  */
 int CountOccurancesOfObjectInList( const ProtoObject *pObjIndex, const Object *list )
 {
-  const Object *obj = NULL;
-  int nMatch = 0;
+  std::list<Object*> output;
 
-  for ( obj = list; obj; obj = obj->NextContent )
-    if ( obj->Prototype == pObjIndex )
-      nMatch++;
+  for(const Object *obj = list; obj; obj = obj->NextContent)
+    {
+      output.push_back(const_cast<Object*>(obj));
+    }
 
-  return nMatch;
+  return CountOccurancesOfObjectInList(pObjIndex, output);
+}
+
+int CountOccurancesOfObjectInList( const ProtoObject *protoobj, const std::list<Object*> &list )
+{
+  return count_if(std::begin(list),
+                  std::end(list),
+                  [protoobj](const auto obj)
+                  {
+                    return obj->Prototype == protoobj;
+                  });
 }
 
 /*
@@ -987,8 +996,7 @@ void ObjectFromRoom( Object *obj )
   Room *in_room = obj->InRoom;
   assert(in_room != nullptr);
 
-  UNLINK( obj, in_room->FirstContent, in_room->LastContent,
-          NextContent, PreviousContent );
+  in_room->Remove(obj);
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->FirstContent )
     EmptyObjectContents( obj, NULL, obj->InRoom );
@@ -997,7 +1005,6 @@ void ObjectFromRoom( Object *obj )
     obj->InRoom->Light -= obj->Count;
 
   obj->CarriedBy   = NULL;
-  obj->InObject         = NULL;
   obj->InRoom      = NULL;
 
   if ( obj->Prototype->Vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
@@ -1009,21 +1016,25 @@ void ObjectFromRoom( Object *obj )
  */
 Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
 {
-  Object *otmp, *oret;
   short count = obj->Count;
   short item_type = obj->ItemType;
 
-  for ( otmp = pRoomIndex->FirstContent; otmp; otmp = otmp->NextContent )
-    if ( (oret=GroupObject( otmp, obj )) == otmp )
-      {
-        if (item_type == ITEM_FIRE)
-          pRoomIndex->Light += count;
-        return oret;
-      }
+  for(Object *otmp : pRoomIndex->Objects())
+    {
+      Object *oret = GroupObject(otmp, obj);
 
-  LINK( obj, pRoomIndex->FirstContent, pRoomIndex->LastContent,
-        NextContent, PreviousContent );
-  obj->InRoom                          = pRoomIndex;
+      if(oret == otmp)
+        {
+          if (item_type == ITEM_FIRE)
+            {
+              pRoomIndex->Light += count;
+            }
+          
+          return oret;
+        }
+    }
+
+  pRoomIndex->Add(obj);
   obj->CarriedBy                               = NULL;
   obj->InObject                                   = NULL;
 
@@ -1462,60 +1473,99 @@ Object *GetInstanceOfObject( const ProtoObject *pObjIndex )
  */
 Object *GetObjectInList( const Character *ch, const std::string &objName, Object *list )
 {
+  std::list<Object*> listOfObjects;
+
+  for(Object *obj = list; obj; obj = obj->NextContent)
+    {
+      listOfObjects.push_back(obj);
+    }
+
+  return GetObjectInList(ch, objName, listOfObjects);
+}
+
+Object *GetObjectInList( const Character *ch, const std::string &objName,
+                         const std::list<Object*> &list )
+{
   const char *argument = objName.c_str();
   char arg[MAX_INPUT_LENGTH];
-  Object *obj = NULL;
   int number = NumberArgument( argument, arg );
   int count  = 0;
 
-  for ( obj = list; obj; obj = obj->NextContent )
-    if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
-      if ( (count += obj->Count) >= number )
-        return obj;
-
+  for(Object *obj : list)
+    {
+      if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
+        {
+          if ( (count += obj->Count) >= number )
+            {
+              return obj;
+            }
+        }
+    }
+  
   /* If we didn't find an exact match, run through the list of objects
      again looking for prefix matching, ie swo == sword.
      Added by Narn, Sept/96
   */
   count = 0;
 
-  for ( obj = list; obj; obj = obj->NextContent )
-    if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
-      if ( (count += obj->Count) >= number )
-        return obj;
-
-  return NULL;
+  for(Object *obj : list)
+    {
+      if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
+        {
+          if ( (count += obj->Count) >= number )
+            {
+              return obj;
+            }
+        }
+    }
+  
+  return nullptr;
 }
 
 /*
  * Find an obj in a list...going the other way                  -Thoric
  */
-Object *GetObjectInListReverse( const Character *ch, const std::string &objName, Object *list )
+Object *GetObjectInListReverse( const Character *ch, const std::string &objName,
+                                const std::list<Object*> &list )
 {
   const char *argument = objName.c_str();
   char arg[MAX_INPUT_LENGTH];
-  Object *obj;
-  int number;
-  int count;
+  int count = 0;
+  int number = NumberArgument( argument, arg );
 
-  number = NumberArgument( argument, arg );
-  count  = 0;
-  for ( obj = list; obj; obj = obj->PreviousContent )
-    if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
-      if ( (count += obj->Count) >= number )
-        return obj;
-
+  for(auto iter = std::rbegin(list); iter != std::rend(list); ++iter)
+    {
+      Object *obj = *iter;
+      
+      if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
+        {
+          if ( (count += obj->Count) >= number )
+            {
+              return obj;
+            }
+        }
+    }
+  
   /* If we didn't find an exact match, run through the list of objects
      again looking for prefix matching, ie swo == sword.
      Added by Narn, Sept/96
   */
   count = 0;
-  for ( obj = list; obj; obj = obj->PreviousContent )
-    if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
-      if ( (count += obj->Count) >= number )
-        return obj;
 
-  return NULL;
+  for(auto iter = std::begin(list); iter != std::end(list); ++iter)
+    {
+      Object *obj = *iter;
+
+      if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
+        {
+          if ( (count += obj->Count) >= number )
+            {
+              return obj;
+            }
+        }
+    }
+  
+  return nullptr;
 }
 
 /*
@@ -1529,7 +1579,7 @@ Object *GetObjectHere( const Character *ch, const std::string &objName )
   if ( !ch || !ch->InRoom )
     return NULL;
 
-  obj = GetObjectInListReverse( ch, argument, ch->InRoom->LastContent );
+  obj = GetObjectInListReverse( ch, argument, ch->InRoom->Objects() );
 
   if ( obj )
     return obj;
@@ -1949,7 +1999,6 @@ ch_ret CheckObjectForTrap( Character *ch, const Object *obj, int flag )
  */
 ch_ret CheckRoomForTraps( Character *ch, int flag )
 {
-  Object *check = NULL;
   ch_ret retcode = rNONE;
 
   if ( !ch )
@@ -1957,10 +2006,10 @@ ch_ret CheckRoomForTraps( Character *ch, int flag )
       return rERROR;
     }
 
-  if ( !ch->InRoom || !ch->InRoom->FirstContent )
+  if ( !ch->InRoom || ch->InRoom->Objects().empty())
     return rNONE;
 
-  for ( check = ch->InRoom->FirstContent; check; check = check->NextContent )
+  for(Object *check : ch->InRoom->Objects())
     {
       if ( check->ItemType == ITEM_LANDMINE && flag == TRAP_ENTER_ROOM )
         {
@@ -2284,7 +2333,7 @@ void CleanObjectQueue()
       FreeMemory( obj->Name        );
       FreeMemory( obj->Description );
       FreeMemory( obj->ShortDescr );
-      FreeMemory( obj );
+      delete obj;
       --cur_qobjs;
     }
 }
@@ -2477,10 +2526,8 @@ bool Chance( const Character *ch, short percent )
  */
 Object *CopyObject( const Object *obj )
 {
-  Object *clone = NULL;
-  int oval = 0;
+  Object *clone = new Object();
 
-  AllocateMemory( clone, Object, 1 );
   clone->Prototype     = obj->Prototype;
   clone->Name           = CopyString( obj->Name );
   clone->ShortDescr    = CopyString( obj->ShortDescr );
@@ -2495,12 +2542,11 @@ Object *CopyObject( const Object *obj )
   clone->Level  = obj->Level;
   clone->Timer  = obj->Timer;
 
-  for( oval = 0; oval < MAX_OVAL; ++oval )
+  for( size_t oval = 0; oval < MAX_OVAL; ++oval )
     {
       clone->Value[oval] = obj->Value[oval];
     }
 
-  clone->Count  = 1;
   ++obj->Prototype->Count;
   ++numobjsloaded;
   ++physicalobjects;
@@ -2609,10 +2655,8 @@ void SplitGroupedObject( Object *obj, int num )
   else
     if ( obj->InRoom )
       {
-        LINK( rest, obj->InRoom->FirstContent, obj->InRoom->LastContent,
-              NextContent, PreviousContent );
+        obj->InRoom->Add(rest);
         rest->CarriedBy                = NULL;
-        rest->InRoom                   = obj->InRoom;
         rest->InObject                    = NULL;
       }
     else

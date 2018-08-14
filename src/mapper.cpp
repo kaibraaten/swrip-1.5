@@ -23,6 +23,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 /* Size of the map and depth of recursion to undertake */
 #define MAPX     10

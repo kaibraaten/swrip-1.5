@@ -20,7 +20,6 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <sys/types.h>
 #include <cstdio>
 #include <cstring>
 #include <ctime>
@@ -29,6 +28,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 #define TRACK_THROUGH_DOORS
 

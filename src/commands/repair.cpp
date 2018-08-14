@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
 			    char *arg, int maxgold, const char *fixstr, const char *fixstr2 );
@@ -118,13 +119,13 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
           ch->Echo("For some reason, you think you got ripped off...\r\n");
           break;
         case ITEM_ARMOR:
-          obj->Value[0] = obj->Value[1];
+          obj->Value[OVAL_ARMOR_CONDITION] = obj->Value[OVAL_ARMOR_AC];
           break;
         case ITEM_WEAPON:
-          obj->Value[0] = INIT_WEAPON_CONDITION;
+          obj->Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
           break;
         case ITEM_DEVICE:
-          obj->Value[2] = obj->Value[1];
+          obj->Value[OVAL_DEVICE_CHARGES] = obj->Value[OVAL_DEVICE_MAX_CHARGES];
           break;
         }
 

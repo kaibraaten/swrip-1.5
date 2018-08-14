@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_list( Character *ch, char *argument )
 {

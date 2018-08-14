@@ -2,6 +2,7 @@
 #include "shop.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_sell( Character *ch, char *argument )
 {

@@ -1,12 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "object.hpp"
 
 extern char *spell_target_name;
 
 ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
 {
-  Character *victim;
+  Character *victim = nullptr;
   Skill *skill = GetSkill(sn);
 
   /* Modifications on 1/2/96 to work on player/object - Scryn */

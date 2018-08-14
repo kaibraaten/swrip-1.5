@@ -82,7 +82,7 @@ void do_scan( Character *ch, char *argument )
       SetCharacterColor( AT_RMNAME, ch );
       ch->Echo(ch->InRoom->Name);
       ch->Echo("\r\n");
-      ShowObjectListToCharacter( ch->InRoom->FirstContent, ch, false, false );
+      ShowObjectListToCharacter( ch->InRoom->Objects(), ch, false, false );
       show_char_to_char( ch->InRoom->Characters(), ch );
 
       switch( ch->InRoom->Sector )

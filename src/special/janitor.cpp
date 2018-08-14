@@ -1,34 +1,31 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 bool spec_janitor( Character *ch )
 {
-  Object *trash = nullptr;
-  Object *trash_next = nullptr;
-
   if ( !IsAwake(ch) )
     return false;
 
-  for ( trash = ch->InRoom->FirstContent; trash; trash = trash_next )
+  std::list<Object*> itemsToPickUp = Filter(ch->InRoom->Objects(),
+                                            [](const auto obj)
+                                            {
+                                              return IsBitSet(obj->WearFlags, ITEM_TAKE)
+                                                && !IS_OBJ_STAT(obj, ITEM_BURRIED)
+                                                && (obj->ItemType == ITEM_DRINK_CON
+                                                    || obj->ItemType == ITEM_TRASH
+                                                    || obj->Cost < 10
+                                                    || (obj->Prototype->Vnum == OBJ_VNUM_SHOPPING_BAG
+                                                        && obj->FirstContent == nullptr));
+                                            });
+
+  for(Object *trash : itemsToPickUp)
     {
-      trash_next = trash->NextContent;
-
-      if ( !IsBitSet( trash->WearFlags, ITEM_TAKE )
-           ||    IS_OBJ_STAT( trash, ITEM_BURRIED ) )
-        continue;
-
-      if ( trash->ItemType == ITEM_DRINK_CON
-           ||   trash->ItemType == ITEM_TRASH
-           ||   trash->Cost < 10
-           ||  (trash->Prototype->Vnum == OBJ_VNUM_SHOPPING_BAG
-                &&  !trash->FirstContent) )
-        {
-          Act( AT_ACTION, "$n picks up some trash.", ch, NULL, NULL, TO_ROOM );
-          ObjectFromRoom( trash );
-          ObjectToCharacter( trash, ch );
-          return true;
-        }
+      Act( AT_ACTION, "$n picks up some trash.", ch, NULL, NULL, TO_ROOM );
+      ObjectFromRoom( trash );
+      ObjectToCharacter( trash, ch );
+      return true;
     }
 
   return false;

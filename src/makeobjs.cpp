@@ -19,7 +19,6 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <sys/types.h>
 #include <cstdio>
 #include <cstring>
 #include <ctime>
@@ -28,6 +27,7 @@
 #include "character.hpp"
 #include "area.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 /*
  * Make a fire.

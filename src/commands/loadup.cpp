@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_loadup( Character *ch, char *argument )
 {
@@ -40,14 +41,12 @@ void do_loadup( Character *ch, char *argument )
       if ( d->Character->PlayerHome != NULL )
         {
           char filename[256];
-	  FILE *fph;
+	  FILE *fph = nullptr;
           Room *storeroom = d->Character->PlayerHome;
-          Object *obj;
-          Object *obj_next;
+          std::list<Object*> objectsToExtract(storeroom->Objects());
 
-          for ( obj = storeroom->FirstContent; obj; obj = obj_next )
+          for(Object *obj : objectsToExtract)
             {
-              obj_next = obj->NextContent;
               ExtractObject( obj );
             }
 

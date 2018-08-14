@@ -1,10 +1,11 @@
-#include <string.h>
-#include <stdlib.h>
+#include <cstring>
+#include <cstdlib>
 
 #include "mud.hpp"
 #include "craft.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "object.hpp"
 
 struct UserData
 {

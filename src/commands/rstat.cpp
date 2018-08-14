@@ -3,13 +3,13 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_rstat( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
   Room *location = NULL;
-  Object *obj = NULL;
   int cnt = 0;
   static const char * const dir_text[] = { "n", "e", "s", "w", "u", "d", "ne", "nw", "se", "sw", "?" };
 
@@ -130,7 +130,7 @@ void do_rstat( Character *ch, char *argument )
 
   ch->Echo(".\r\nObjects:   ");
 
-  for ( obj = location->FirstContent; obj; obj = obj->NextContent )
+  for(Object *obj : location->Objects())
     {
       ch->Echo(" ");
       OneArgument( obj->Name, buf );

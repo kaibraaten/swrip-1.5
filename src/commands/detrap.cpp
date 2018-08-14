@@ -5,6 +5,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_detrap( Character *ch, char *argument )
 {
@@ -48,14 +49,16 @@ void do_detrap( Character *ch, char *argument )
           return;
         }
 
-      if ( !ch->InRoom->FirstContent )
+      if ( ch->InRoom->Objects().empty() )
         {
           ch->Echo( "You can't find that here.\r\n" );
           return;
         }
 
-      for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
+      for(auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
         {
+          obj = *i;
+          
           if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
             {
               found = true;
@@ -96,14 +99,16 @@ void do_detrap( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->InRoom->FirstContent )
+  if ( ch->InRoom->Objects().empty() )
     {
       ch->Echo( "You can't find that here.\r\n" );
       return;
     }
-  
-  for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
+
+  for(auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
     {
+      obj = *i;
+      
       if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
         {
           found = true;

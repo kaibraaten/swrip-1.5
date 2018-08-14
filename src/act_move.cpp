@@ -29,6 +29,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 Room *vroom_hash[64];
 
@@ -104,7 +105,7 @@ void ClearVirtualRooms( void )
     {
       while ( vroom_hash[hash]
               && vroom_hash[hash]->Characters().empty()
-              && !vroom_hash[hash]->FirstContent )
+              && vroom_hash[hash]->Objects().empty() )
         {
           room = vroom_hash[hash];
           vroom_hash[hash] = room->Next;
@@ -119,7 +120,7 @@ void ClearVirtualRooms( void )
         {
           room_next = room->Next;
 
-          if ( room->Characters().empty() && !room->FirstContent )
+          if ( room->Characters().empty() && room->Objects().empty())
             {
               if ( prev )
 		{
@@ -960,7 +961,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
         }
     }
 
-  if ( ch->InRoom->FirstContent )
+  if ( !ch->InRoom->Objects().empty())
     retcode = CheckRoomForTraps( ch, TRAP_ENTER_ROOM );
   if ( retcode != rNONE )
     return retcode;

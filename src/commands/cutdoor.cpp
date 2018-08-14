@@ -3,6 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_cutdoor( Character *ch, char *argument )
 {

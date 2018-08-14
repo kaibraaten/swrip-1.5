@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 bool spec_auth( Character *ch )
 {

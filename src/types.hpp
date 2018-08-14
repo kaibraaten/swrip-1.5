@@ -45,7 +45,7 @@ struct HelpFile;
 struct ProtoMobile;
 struct Note;
 class Board;
-struct Object;
+class Object;
 struct ProtoObject;
 class PCData;
 struct Reset;

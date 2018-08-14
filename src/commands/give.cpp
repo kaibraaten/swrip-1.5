@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.hpp"
 #include "character.hpp"
+#include "object.hpp"
 
 void do_give( Character *ch, char *argument )
 {

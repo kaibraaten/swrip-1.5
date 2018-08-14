@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 static void get_obj( Character *ch, Object *obj, Object *container );
@@ -10,8 +11,6 @@ void do_get( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Object *obj = NULL;
-  Object *obj_next = NULL;
   Object *container = NULL;
   short number = 0;
   bool found = false;
@@ -92,7 +91,7 @@ void do_get( Character *ch, char *argument )
 	   && StringPrefix( "all.", arg1 ) )
         {
           /* 'get obj' */
-          obj = GetObjectInList( ch, arg1, ch->InRoom->FirstContent );
+          Object *obj = GetObjectInList( ch, arg1, ch->InRoom->Objects() );
 
           if ( !obj )
             {
@@ -134,10 +133,10 @@ void do_get( Character *ch, char *argument )
             chk = &arg1[4];
 
           /* 'get all' or 'get all.obj' */
-          for ( obj = ch->InRoom->FirstContent; obj; obj = obj_next )
-            {
-              obj_next = obj->NextContent;
+          std::list<Object*> objectsOnGround(ch->InRoom->Objects());
 
+          for(Object *obj : objectsOnGround)
+            {
               if ( ( fAll || NiftyIsName( chk, obj->Name ) )
                    && CanSeeObject( ch, obj ) )
                 {
@@ -240,7 +239,8 @@ void do_get( Character *ch, char *argument )
 	   && StringPrefix( "all.", arg1 ) )
         {
           /* 'get obj container' */
-          obj = GetObjectInList( ch, arg1, container->FirstContent );
+          Object *obj = GetObjectInList( ch, arg1, container->FirstContent );
+
           if ( !obj )
             {
               Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
@@ -282,9 +282,10 @@ void do_get( Character *ch, char *argument )
 
           found = false;
 
-          for ( obj = container->FirstContent; obj; obj = obj_next )
+          for ( Object *obj = container->FirstContent, *obj_next = nullptr; obj; obj = obj_next )
             {
               obj_next = obj->NextContent;
+
               if ( ( fAll || NiftyIsName( chk, obj->Name ) )
                    &&   CanSeeObject( ch, obj ) )
                 {

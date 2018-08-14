@@ -40,6 +40,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 /*
  * Local functions.
@@ -1027,14 +1028,13 @@ static void MobileUpdate( void )
 
       /* Scavenge */
       if ( IsBitSet(ch->Flags, ACT_SCAVENGER)
-           && ch->InRoom->FirstContent
+           && !ch->InRoom->Objects().empty()
            && NumberBits( 2 ) == 0 )
         {
-          Object *obj = NULL;
           Object *obj_best = NULL;
           int max = 1;
 
-          for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
+          for(Object *obj : ch->InRoom->Objects())
             {
               if ( CAN_WEAR(obj, ITEM_TAKE) && obj->Cost > max
                    && !IS_OBJ_STAT( obj, ITEM_BURRIED ) )

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_ostat( Character *ch, char *argument )
 {

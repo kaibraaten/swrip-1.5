@@ -2,8 +2,9 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
-void do_auction (Character *ch, char *argument)
+void do_auction(Character *ch, char *argument)
 {
   Object *obj = nullptr;
   char arg1[MAX_INPUT_LENGTH];

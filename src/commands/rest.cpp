@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_rest( Character *ch, char *argument )
 {
@@ -15,7 +16,7 @@ void do_rest( Character *ch, char *argument )
   /* okay, now that we know we can rest, find an object to rest on */
   if ( !IsNullOrEmpty( argument ) )
     {
-      obj = GetObjectInList(ch, argument, ch->InRoom->FirstContent);
+      obj = GetObjectInList(ch, argument, ch->InRoom->Objects());
 
       if (obj == NULL)
         {

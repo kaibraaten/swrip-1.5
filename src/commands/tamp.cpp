@@ -1,9 +1,10 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "object.hpp"
 
 void do_tamp( Character *ch, char *argument )
 {
-  Object *pipe_obj;
+  Object *pipe_obj = nullptr;
   char arg[MAX_INPUT_LENGTH];
 
   OneArgument( argument, arg );

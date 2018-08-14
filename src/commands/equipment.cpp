@@ -1,6 +1,7 @@
 #include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
+#include "object.hpp"
 
 void do_equipment( Character *ch, char *argument )
 {

@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 /* lets the mobile purge all objects and other npcs in the room,
    or purge a specified object or mob in the room.  It can purge
@@ -12,7 +13,6 @@ void do_mppurge( Character *ch, char *argument )
 {
   char arg[ MAX_INPUT_LENGTH ];
   Character *victim = nullptr;
-  Object *obj = nullptr;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -40,10 +40,12 @@ void do_mppurge( Character *ch, char *argument )
         {
           ExtractCharacter(npc, true);
         }
-      
-      while ( ch->InRoom->FirstContent )
+
+      std::list<Object*> objectsToPurge(ch->InRoom->Objects());
+
+      for(Object *obj : objectsToPurge)
         {
-          ExtractObject( ch->InRoom->FirstContent );
+          ExtractObject( obj );
         }
       
       return;
@@ -51,10 +53,17 @@ void do_mppurge( Character *ch, char *argument )
 
   if ( (victim = GetCharacterInRoom( ch, arg )) == NULL )
     {
-      if ( (obj = GetObjectHere( ch, arg )) != NULL )
-        ExtractObject( obj );
+      Object *obj = GetObjectHere(ch, arg);
+      
+      if ( obj != nullptr )
+        {
+          ExtractObject( obj );
+        }
       else
-        ProgBug( "Mppurge - Bad argument", ch );
+        {
+          ProgBug( "Mppurge - Bad argument", ch );
+        }
+      
       return;
     }
 

@@ -22,6 +22,7 @@
 #ifndef _SWRIP_MUD_HPP_
 #define _SWRIP_MUD_HPP_
 
+#include <algorithm>
 #include <array>
 #include <list>
 #include <string>
@@ -455,52 +456,6 @@ struct ProtoObject
   {
     MPROG_DATA *mudprogs = nullptr;
     int progtypes = 0;
-  } mprog;
-};
-
-
-/*
- * One object.
- */
-struct Object
-{
-  Object         *Next = nullptr;
-  Object         *Previous = nullptr;
-  Object         *NextContent = nullptr;
-  Object         *PreviousContent = nullptr;
-  Object         *FirstContent = nullptr;
-  Object         *LastContent = nullptr;
-  Object         *InObject = nullptr;
-  Character        *CarriedBy = nullptr;
-  ExtraDescription *FirstExtraDescription = nullptr;
-  ExtraDescription *LastExtraDescription = nullptr;
-  Affect      *FirstAffect = nullptr;
-  Affect      *LastAffect = nullptr;
-  ProtoObject   *Prototype = nullptr;
-  Room  *InRoom = nullptr;
-  char             *ArmedBy = nullptr;
-  char             *Name = nullptr;
-  char             *ShortDescr = nullptr;
-  char             *Description = nullptr;
-  char             *ActionDescription = nullptr;
-  ItemTypes         ItemType = 0;
-  int               Flags = 0;
-  int               WearFlags = 0;
-  int               BlasterSetting = 0;
-  WearLocation      WearLoc = 0;
-  short             Weight = 0;
-  int               Cost = 0;
-  short             Level = 0;
-  short             Timer = 0;
-  std::array<int, MAX_OVAL> Value;
-  short             Count = 0;          /* support for object grouping */
-  int               Serial = 0;         /* serial number               */
-
-  struct
-  {
-    MPROG_ACT_LIST *mpact = nullptr;
-    int             mpactnum = 0;
-    short           mpscriptpos = 0;
   } mprog;
 };
 
@@ -1384,7 +1339,8 @@ void ShowCharacterCondition( const Character *ch, const Character *victim );
 char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fShort );
 void ShowObjectListToCharacter( const Object *list, Character *ch,
                                 bool fShort, bool fShowNothing );
-
+void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
+                                bool fShort, bool fShowNothing );
 /* act_move.c */
 void SetBExitFlag( Exit *pexit, int flag );
 void RemoveBExitFlag( Exit *pexit, int flag );
@@ -1645,7 +1601,8 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex );
 Object *ObjectToCharacter( Object *obj, Character *ch );
 void ObjectFromCharacter( Object *obj );
 int GetObjectArmorClass( const Object *obj, int iWear );
-int CountOccurancesOfObjectInList( const ProtoObject *obj, const Object *list );
+int CountOccurancesOfObjectInList( const ProtoObject *protoobj, const Object *list );
+int CountOccurancesOfObjectInList( const ProtoObject *protoobj, const std::list<Object*> &list );
 void ObjectFromRoom( Object *obj );
 Object *ObjectToRoom( Object *obj, Room *pRoomIndex );
 Object *ObjectToObject( Object *obj, Object *obj_to );
@@ -1660,8 +1617,13 @@ void ExtractCharacter( Character *ch, bool fPull );
 Character *GetCharacterInRoom( const Character *ch, const std::string &argument );
 Character *GetCharacterAnywhere( const Character *ch, const std::string &argument );
 Object *GetInstanceOfObject( const ProtoObject *pObjIndexData );
-Object *GetObjectInList( const Character *ch, const std::string &argument, Object *list );
-Object *GetObjectInListReverse( const Character *ch, const std::string &argument, Object *list );
+
+Object *GetObjectInList( const Character *ch, const std::string &objName, Object *list );
+Object *GetObjectInList( const Character *ch, const std::string &objName,
+                         const std::list<Object*> &list );
+
+Object *GetObjectInListReverse( const Character *ch, const std::string &objName,
+                                const std::list<Object*> &list );
 Object *GetObjectHere( const Character *ch, const std::string &argument );
 Object *GetObjectAnywhere( const Character *ch, const std::string &argument );
 int GetObjectCount( const Object *obj );
@@ -1808,5 +1770,16 @@ void RoomProgActTrigger( const std::string &buf, Room *room, Character *ch,
 #define GET_BETTED_ON(ch)    ((ch)->BettedOn)
 #define GET_BET_AMT(ch) ((ch)->BetAmount)
 #define IN_ARENA(ch)            (IsBitSet((ch)->InRoom->Flags, ROOM_ARENA))
+
+template<typename Container, typename UnaryPredicate>
+auto Filter(const Container &original, UnaryPredicate pred)
+{
+  Container filteredElements;
+  copy_if(std::begin(original),
+          std::end(original),
+          std::begin(filteredElements),
+          pred);
+  return filteredElements;
+}
 
 #endif /* include guard */

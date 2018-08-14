@@ -21,7 +21,6 @@
  ****************************************************************************/
 
 #include <array>
-#include <sys/types.h>
 #include <cstdio>
 #include <cstring>
 #include <ctime>

@@ -11,6 +11,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 struct UserData
 {
@@ -43,7 +44,6 @@ void do_look( Character *ch, char *argument )
   char arg3[MAX_INPUT_LENGTH];
   Exit *pexit = NULL;
   Character *victim = NULL;
-  Object *obj = NULL;
   char *pdesc = NULL;
   bool doexaprog = false;
   DirectionType door = DIR_INVALID;
@@ -114,7 +114,7 @@ void do_look( Character *ch, char *argument )
 
   number = NumberArgument( arg1, arg );
 
-  for ( cnt = 0, obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
+  for ( Object *obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
     {
       if ( CanSeeObject( ch, obj ) )
         {
@@ -158,8 +158,10 @@ void do_look( Character *ch, char *argument )
         }
     }
 
-  for ( obj = ch->InRoom->LastContent; obj; obj = obj->PreviousContent )
+  for(auto i = std::rbegin(ch->InRoom->Objects()); i != std::rend(ch->InRoom->Objects()); ++i)
     {
+      Object *obj = *i;
+      
       if ( CanSeeObject( ch, obj ) )
         {
           if ( (pdesc=GetExtraDescription(arg, obj->FirstExtraDescription)) != NULL )
@@ -957,7 +959,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   show_ships_to_char( ch->InRoom, ch );
   ShowShuttlesToCharacter( ch->InRoom->Shuttles(), ch );
-  ShowObjectListToCharacter( ch->InRoom->FirstContent, ch, false, false );
+  ShowObjectListToCharacter( ch->InRoom->Objects(), ch, false, false );
   show_char_to_char( ch->InRoom->Characters(),  ch );
 
   if ( !is_auto )

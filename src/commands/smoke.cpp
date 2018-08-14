@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "log.hpp"
+#include "object.hpp"
 
 void do_smoke( Character *ch, char *argument )
 {

@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "log.hpp"
+#include "object.hpp"
 
 void do_zap( Character *ch, char *argument )
 {

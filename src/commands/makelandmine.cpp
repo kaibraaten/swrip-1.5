@@ -4,6 +4,7 @@
 #include "craft.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "object.hpp"
 
 struct UserData
 {

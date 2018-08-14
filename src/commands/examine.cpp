@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "board.hpp"
 #include "character.hpp"
+#include "object.hpp"
 
 void do_examine( Character *ch, char *argument )
 {

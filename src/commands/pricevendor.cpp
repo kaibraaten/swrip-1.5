@@ -4,6 +4,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "object.hpp"
 
 void do_pricevendor (Character *ch, char *argument)
 {

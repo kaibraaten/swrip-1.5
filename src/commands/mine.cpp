@@ -3,6 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_mine( Character *ch, char *argument )
 {
@@ -36,7 +37,7 @@ void do_mine( Character *ch, char *argument )
         break;
       }
 
-  obj = GetObjectInListReverse( ch, arg, ch->InRoom->LastContent );
+  obj = GetObjectInListReverse( ch, arg, ch->InRoom->Objects() );
 
   if ( !obj )
     {
