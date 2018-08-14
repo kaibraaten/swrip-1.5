@@ -26,7 +26,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
       ch->Echo("Object '%s' is %s, special properties: %s\r\nIts weight is %d, value is %d.\r\n",
                obj->Name,
                AOrAn( GetItemTypeName( obj ) ),
-               FlagString( obj->Flags, ObjectFlags ),
+               FlagString( obj->Flags, ObjectFlags ).c_str(),
                obj->Weight,
                obj->Cost
                );
