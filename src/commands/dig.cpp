@@ -5,12 +5,12 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_dig( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Object *obj = NULL;
-  Object *startobj = NULL;
   bool found = false, shovel = false;
   Exit *pexit = NULL;
 
@@ -137,11 +137,12 @@ void do_dig( Character *ch, char *argument )
       return;
     }
 
-  startobj = ch->InRoom->FirstContent;
   found = false;
 
-  for ( obj = startobj; obj; obj = obj->NextContent )
+  for(auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
     {
+      obj = *i;
+      
       /* twice as hard to find something without a shovel */
       if ( IS_OBJ_STAT( obj, ITEM_BURRIED )
            &&  (GetRandomPercent() * (shovel ? 1 : 2)) <

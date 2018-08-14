@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "object.hpp"
 
 void do_backstab( Character *ch, char *argument )
 {

@@ -45,6 +45,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 /*
  * Increment with every major format change.
@@ -86,8 +87,6 @@ void SaveHome( Character *ch )
       FILE *fp = NULL;
       char filename[256];
       short templvl = 0;
-      Object *contents = NULL;
-
 
       sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->Name[0]),
                Capitalize( ch->Name ) );
@@ -96,11 +95,10 @@ void SaveHome( Character *ch )
         {
           templvl = ch->TopLevel;
           ch->TopLevel = LEVEL_AVATAR;           /* make sure EQ doesn't get lost */
-          contents = ch->PlayerHome->LastContent;
 
-          if (contents)
+          for(const Object *obj : ch->PlayerHome->Objects())
 	    {
-	      WriteObject(ch, contents, fp, 0, OS_CARRY );
+	      WriteObject(ch, obj, fp, 0, OS_CARRY );
 	    }
 
           fprintf( fp, "#END\n" );
@@ -2064,16 +2062,12 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
 void ReadObject( Character *ch, FILE *fp, short os_type )
 {
-  Object *obj = NULL;
   int iNest = 0;
   bool fNest = true; /* Yes, these should             */
   bool fVnum = true; /* indeed be initialized as true */
   Room *room = NULL;
 
-  AllocateMemory( obj, Object, 1 );
-  obj->Count     = 1;
-  obj->WearLoc  = WEAR_NONE;
-  obj->Weight    = 1;
+  Object *obj = new Object();
 
   for ( ; ; )
     {
@@ -2176,7 +2170,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
                   if ( obj->ShortDescr )
                     FreeMemory( obj->ShortDescr );
 
-                  FreeMemory( obj );
+                  delete obj;
                   return;
                 }
               else
@@ -2428,7 +2422,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
               FreeMemory( paf );
             }
 
-          FreeMemory( obj );
+          delete obj;
           return;
         }
     }
@@ -2693,7 +2687,6 @@ void SaveStoreroom( const Room *room )
 
   char strsave[MAX_INPUT_LENGTH];
   FILE *fp = NULL;
-  const Object *contents = NULL;
 
   sprintf( strsave, "%s%ld",STOREROOM_DIR, room->Vnum );
 
@@ -2707,11 +2700,10 @@ void SaveStoreroom( const Room *room )
   else
     {
       fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);
-      contents = room->LastContent;
 
-      if (contents)
+      for(const Object *obj : room->Objects())
 	{
-	  WriteObject(NULL, contents, fp, 0, OS_CARRY );
+	  WriteObject(NULL, obj, fp, 0, OS_CARRY );
 	}
 
       fprintf( fp, "#END\n" );

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "object.hpp"
 
 void do_poison_weapon( Character *ch, char *argument )
 {

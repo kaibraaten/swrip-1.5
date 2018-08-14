@@ -58,17 +58,13 @@ void do_order( Character *ch, char *argument )
       return;
     }
 
-  std::list<Character*> charactersToOrder;
-
-  copy_if(std::begin(ch->InRoom->Characters()),
-          std::end(ch->InRoom->Characters()),
-          std::begin(charactersToOrder),
-          [ch, fAll, victim](auto och)
-          {
-            return IsAffectedBy(och, AFF_CHARM)
-              && och->Master == ch
-              && ( fAll || och == victim );
-          });
+  std::list<Character*> charactersToOrder = Filter(ch->InRoom->Characters(),
+                                                   [ch, fAll, victim](auto och)
+                                                   {
+                                                     return IsAffectedBy(och, AFF_CHARM)
+                                                       && och->Master == ch
+                                                       && ( fAll || och == victim );
+                                                   });
   
   if ( !charactersToOrder.empty() )
     {

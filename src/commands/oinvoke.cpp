@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "object.hpp"
 
 void do_oinvoke( Character *ch, char *argument )
 {

@@ -3,6 +3,7 @@
 #include "shuttle.hpp"
 #include "mud.hpp"
 #include "character.hpp"
+#include "object.hpp"
 
 struct Room::Impl
 {
@@ -10,6 +11,7 @@ struct Room::Impl
   std::list<Shuttle*> Shuttles;
   std::list<Exit*> Exits;
   std::list<Character*> Characters;
+  std::list<Object*> Objects;
 };
 
 Room::Room()
@@ -91,4 +93,21 @@ void Room::Remove(Character *character)
 const std::list<Character*> &Room::Characters() const
 {
   return pImpl->Characters;
+}
+
+void Room::Add(Object *object)
+{
+  pImpl->Objects.push_back(object);
+  object->InRoom = this;
+}
+
+void Room::Remove(Object *object)
+{
+  pImpl->Objects.remove(object);
+  object->InRoom = nullptr;
+}
+
+const std::list<Object*> &Room::Objects() const
+{
+  return pImpl->Objects;
 }

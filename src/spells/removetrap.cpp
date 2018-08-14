@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 extern char *spell_target_name;
 
@@ -21,19 +22,23 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
 
   found = false;
 
-  if ( !ch->InRoom->FirstContent )
+  if ( ch->InRoom->Objects().empty() )
     {
       ch->Echo("You can't find that here.\r\n");
       return rNONE;
     }
 
-  for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
-    if ( CanSeeObject( ch, obj ) && NiftyIsName( spell_target_name, obj->Name ) )
-      {
-        found = true;
-        break;
-      }
-
+  for(auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
+    {
+      obj = *i;
+      
+      if ( CanSeeObject( ch, obj ) && NiftyIsName( spell_target_name, obj->Name ) )
+        {
+          found = true;
+          break;
+        }
+    }
+  
   if ( !found )
     {
       ch->Echo("You can't find that here.\r\n");

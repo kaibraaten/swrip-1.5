@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_sleep( Character *ch, char *argument )
 {
@@ -26,7 +27,7 @@ void do_sleep( Character *ch, char *argument )
           if ( IsNullOrEmpty( argument ) )
             obj = ch->On;
           else
-            obj = GetObjectInList( ch, argument,  ch->InRoom->FirstContent );
+            obj = GetObjectInList( ch, argument,  ch->InRoom->Objects());
 
           if (obj == NULL)
             {

@@ -1,8 +1,9 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "craft.hpp"
 #include "skill.hpp"
+#include "object.hpp"
 
 struct UserData
 {

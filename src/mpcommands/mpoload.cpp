@@ -1,13 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "object.hpp"
 
 void do_mpoload( Character *ch, char *argument )
 {
   char arg1[ MAX_INPUT_LENGTH ];
   char arg2[ MAX_INPUT_LENGTH ];
-  ProtoObject *pObjIndex;
-  Object       *obj;
-  int             level;
+  ProtoObject *pObjIndex = nullptr;
+  Object       *obj = nullptr;
+  int             level = 0;
   int               timer = 0;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )

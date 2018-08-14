@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <algorithm>
 #include <cstring>
 #include <cctype>
 #include "reset.hpp"
@@ -31,6 +32,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 bool CanModifyRoom( const Character *ch, const Room *room )
 {
@@ -553,26 +555,26 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
 
       if ( install )
         {
-          Object *obj = nullptr, *obj_next = nullptr;
-
           /* remove prototype flag from room */
           RemoveBit( room->Flags, ROOM_PROTOTYPE );
           
           /* purge room of (prototyped) mobiles */
-          std::list<Character*> copyOfCharacterList(room->Characters());
-
-          for(Character *victim : copyOfCharacterList)
+          std::list<Character*> charactersToExtract = Filter(room->Characters(),
+                                                             [](auto victim)
+                                                             {
+                                                               return IsNpc(victim);
+                                                             });
+          
+          for(Character *victim : charactersToExtract)
             {
-              if ( IsNpc(victim) )
-                {
-                  ExtractCharacter( victim, true );
-                }
+              ExtractCharacter( victim, true );
             }
 
           /* purge room of (prototyped) objects */
-          for ( obj = room->FirstContent; obj; obj = obj_next )
+          std::list<Object*> objectsToExtract(room->Objects());
+
+          for(Object *obj : objectsToExtract)
             {
-              obj_next = obj->NextContent;
               ExtractObject( obj );
             }
         }

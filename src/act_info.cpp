@@ -19,13 +19,14 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <ctype.h>
-#include <string.h>
+#include <cctype>
+#include <cstring>
 #include "character.hpp"
 #include "mud.hpp"
 #include "vector3_aux.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "object.hpp"
 
 static std::string SeeHalucinatedObject( int ms, bool fShort );
 
@@ -217,15 +218,27 @@ static std::string SeeHalucinatedObject( int ms, bool fShort )
  */
 void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, bool fShowNothing )
 {
-  char **prgpstrShow;
-  int *prgnShow;
-  int *pitShow;
-  char *pstrShow;
-  const Object *obj;
-  int nShow;
-  int iShow;
-  int count, offcount, tmp, ms, cnt;
-  bool fCombine;
+  std::list<Object*> objects;
+  
+  for ( const Object *obj = list; obj; obj = obj->NextContent )
+    {
+      objects.push_back(const_cast<Object*>(obj));
+    }
+
+  ShowObjectListToCharacter(objects, ch, fShort, fShowNothing);
+}
+
+void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
+                                bool fShort, bool fShowNothing )
+{
+  char **prgpstrShow = nullptr;
+  int *prgnShow = nullptr;
+  int *pitShow = nullptr;
+  char *pstrShow = nullptr;
+  int nShow = 0;
+  int iShow = 0;
+  int count = list.size(), offcount = 0, tmp = 0, cnt = 0;
+  bool fCombine = false;
 
   if ( !ch->Desc )
     return;
@@ -233,7 +246,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
   /*
    * if there's no list... then don't do all this crap!  -Thoric
    */
-  if ( !list )
+  if ( list.empty() )
     {
       if ( fShowNothing )
         {
@@ -247,11 +260,8 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
   /*
    * Alloc space for output lines.
    */
-  count = 0;
-  for ( obj = list; obj; obj = obj->NextContent )
-    count++;
 
-  ms  = (ch->MentalState ? ch->MentalState : 1)
+  int ms  = (ch->MentalState ? ch->MentalState : 1)
     * (IsNpc(ch) ? 1 : (ch->PCData->Condition[COND_DRUNK] ? (ch->PCData->Condition[COND_DRUNK]/12) : 1));
 
   /*
@@ -291,10 +301,11 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
   /*
    * Format the list of objects.
    */
-  for ( obj = list; obj; obj = obj->NextContent )
+  for(Object *obj : list)
     {
       if ( offcount < 0 && ++cnt > (count + offcount) )
         break;
+
       if ( tmp > 0 && NumberBits(1) == 0 )
         {
           prgpstrShow [nShow] = CopyString( SeeHalucinatedObject(ms, fShort) );

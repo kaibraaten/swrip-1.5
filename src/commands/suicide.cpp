@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "object.hpp"
 
 void do_suicide( Character *ch, char *argument )
 {
@@ -28,7 +29,7 @@ void do_suicide( Character *ch, char *argument )
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL
 
-       ||   ( obj->Value[3] != WEAPON_VIBRO_BLADE ) )
+       ||   ( obj->Value[OVAL_WEAPON_TYPE] != WEAPON_VIBRO_BLADE ) )
     {
       ch->Echo("You need to wield a blade to slit your throat!.\r\n");
       return;

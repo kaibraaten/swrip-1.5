@@ -31,6 +31,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 /* Defines for voting on notes. -- Narn */
 #define VOTE_NONE 0
@@ -1437,18 +1438,17 @@ void CountMailMessages(const Character *ch)
 
 Board *FindBoardHere( const Character *ch )
 {
-  const Object *obj;
-  Board *board = NULL;
-
-  for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
+  for(const Object *obj : ch->InRoom->Objects())
     {
-      if ( (board = GetBoardFromObject(obj)) != NULL )
+      Board *board = GetBoardFromObject(obj);
+      
+      if ( board == nullptr )
 	{
 	  return board;
 	}
     }
 
-  return NULL;
+  return nullptr;
 }
 
 Board *GetBoard( const std::string &name )

@@ -41,6 +41,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 #define COST_EQUATION  (int) (cost*CostEquation( obj ))
 

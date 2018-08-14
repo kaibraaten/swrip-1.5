@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "log.hpp"
+#include "object.hpp"
 
 void do_use( Character *ch, char *argument )
 {

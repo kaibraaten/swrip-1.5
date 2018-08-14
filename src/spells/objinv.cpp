@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "object.hpp"
 
 /*
  * Generic inventory object spell                               -Thoric

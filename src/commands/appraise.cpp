@@ -2,6 +2,7 @@
 #include "shop.hpp"
 #include "mud.hpp"
 #include "character.hpp"
+#include "object.hpp"
 
 static void appraise_all( Character *ch, Character *keeper, char *fixstr );
 

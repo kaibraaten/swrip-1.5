@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "object.hpp"
 
 void do_remove( Character *ch, char *argument )
 {

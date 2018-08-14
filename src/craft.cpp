@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <algorithm>
 #include <cassert>
 #include <cstring>
 #include <utility/event.hpp>
@@ -30,6 +31,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 struct CraftRecipe
 {

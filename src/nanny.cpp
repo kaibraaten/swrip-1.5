@@ -34,6 +34,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 typedef void NannyFun( Descriptor *d, char *argument );
 
@@ -840,14 +841,13 @@ static void NannyReadMotd( Descriptor *d, char *argument )
   if ( ch->PlayerHome != NULL )
     {
       char filename[256];
-      FILE *fph;
+      FILE *fph = nullptr;
       Room *storeroom = ch->PlayerHome;
-      Object *obj;
-      Object *obj_next;
 
-      for ( obj = storeroom->FirstContent; obj; obj = obj_next )
+      std::list<Object*> objectsToExtract(storeroom->Objects());
+
+      for(Object *obj : objectsToExtract)
 	{
-	  obj_next = obj->NextContent;
 	  ExtractObject( obj );
 	}
 

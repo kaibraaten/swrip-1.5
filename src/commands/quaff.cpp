@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "pcdata.hpp"
+#include "object.hpp"
 
 void do_quaff( Character *ch, char *argument )
 {

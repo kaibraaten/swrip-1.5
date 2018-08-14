@@ -86,6 +86,7 @@ _OBJ =  act_comm.o \
 	missile.o \
 	mud_prog.o \
 	nanny.o \
+	object.o \
 	pcdata.o \
 	planet.o \
 	playerrepository.o \

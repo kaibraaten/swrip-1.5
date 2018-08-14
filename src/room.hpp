@@ -26,11 +26,13 @@ public:
   void Add(Character *character);
   void Remove(Character *character);
   const std::list<Character*> &Characters() const;
+
+  void Add(Object *object);
+  void Remove(Object *object);
+  const std::list<Object*> &Objects() const;
   
   Room  *Next = nullptr;
   Room  *NextSort = nullptr;
-  Object         *FirstContent = nullptr;
-  Object         *LastContent = nullptr;
   ExtraDescription *FirstExtraDescription = nullptr;
   ExtraDescription *LastExtraDescription = nullptr;
   struct Area        *Area = nullptr;

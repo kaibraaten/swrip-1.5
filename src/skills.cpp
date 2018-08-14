@@ -20,7 +20,6 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <sys/types.h>
 #include <cstdio>
 #include <cstring>
 #include <strings.h>
@@ -31,6 +30,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "object.hpp"
 
 /*
  * Dummy function

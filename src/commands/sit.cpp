@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_sit (Character *ch, char *argument )
 {
@@ -15,7 +16,7 @@ void do_sit (Character *ch, char *argument )
   /* okay, now that we know we can sit, find an object to sit on */
   if ( !IsNullOrEmpty( argument ) )
     {
-      obj = GetObjectInList( ch, argument, ch->InRoom->FirstContent );
+      obj = GetObjectInList( ch, argument, ch->InRoom->Objects());
 
       if (obj == NULL)
         {

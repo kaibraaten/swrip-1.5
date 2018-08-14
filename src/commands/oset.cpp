@@ -5,6 +5,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "object.hpp"
 
 void do_oset( Character *ch, char *argument )
 {

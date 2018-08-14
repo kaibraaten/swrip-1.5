@@ -37,6 +37,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 ShipRepository *Ships = nullptr;
 
@@ -3734,7 +3735,9 @@ void DestroyShip( Ship *ship, Character *killer )
                 }
             }
 
-          for ( Object *robj = room->FirstContent ; robj ; robj = robj->NextContent )
+          std::list<Object*> objectsToExtract(room->Objects());
+
+          for(Object *robj : objectsToExtract)
             {
               SeparateOneObjectFromGroup( robj );
               ExtractObject( robj );

@@ -1,12 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "object.hpp"
 
 extern char *spell_target_name;
 
 ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 {
-  Object *obj;
+  Object *obj = nullptr;
   Skill *skill = GetSkill(sn);
 
   if ( IsNullOrEmpty( spell_target_name ) )

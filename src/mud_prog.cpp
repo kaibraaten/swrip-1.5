@@ -41,6 +41,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 /* Defines by Narn for new mudprog parsing, used as
    return values from mprog_do_command. */
@@ -444,8 +445,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
   if ( !StrCmp(chck, "ovnumhere") )
     {
-      Object *pObj = NULL;
-      int vnum = atoi(cvar);
+      vnum_t vnum = atoi(cvar);
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
@@ -455,7 +455,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
+      for ( const Object *pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum )
 	    {
@@ -463,8 +463,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 	    }
 	}
 
-      for ( pObj = mob->InRoom->FirstContent; pObj;
-            pObj = pObj->NextContent )
+      for(const Object *pObj : mob->InRoom->Objects())
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum )
 	    {
@@ -489,7 +488,6 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
   if ( !StrCmp(chck, "otypehere") )
     {
-      Object *pObj = NULL;
       ItemTypes type = ITEM_NONE;
 
       if ( IsNumber(cvar) )
@@ -505,7 +503,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
+      for ( const Object *pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->ItemType == type )
 	    {
@@ -513,8 +511,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 	    }
 	}
 
-      for ( pObj = mob->InRoom->FirstContent; pObj;
-            pObj = pObj->NextContent )
+      for(const Object *pObj : mob->InRoom->Objects())
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->ItemType == type )
 	    {
@@ -539,8 +536,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
   if ( !StrCmp(chck, "ovnumroom") )
     {
-      Object *pObj = NULL;
-      int vnum = atoi(cvar);
+      vnum_t vnum = atoi(cvar);
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
@@ -550,8 +546,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->InRoom->FirstContent; pObj;
-            pObj = pObj->NextContent )
+      for(const Object *pObj : mob->InRoom->Objects())
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum )
 	    {
@@ -576,7 +571,6 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
   if ( !StrCmp(chck, "otyperoom") )
     {
-      Object *pObj = NULL;
       ItemTypes type = ITEM_NONE;
 
       if ( IsNumber(cvar) )
@@ -596,8 +590,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->InRoom->FirstContent; pObj;
-            pObj = pObj->NextContent )
+      for(const Object *pObj : mob->InRoom->Objects())
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->ItemType == type )
 	    {
@@ -2627,28 +2620,32 @@ static bool ObjProgPercentCheck( Character *mob, Character *actor, Object *obj,
  */
 void ObjProgGreetTrigger( Character *ch )
 {
-  Object *vobj;
+  std::list<Object*> objectsWithGreetTrigger = Filter(ch->InRoom->Objects(),
+                                                      [](auto vobj)
+                                                      {
+                                                        return vobj->Prototype->mprog.progtypes & GREET_PROG;
+                                                      });
 
-  for ( vobj=ch->InRoom->FirstContent; vobj; vobj = vobj->NextContent )
+  for(Object *vobj : objectsWithGreetTrigger)
     {
-      if  ( vobj->Prototype->mprog.progtypes & GREET_PROG )
-	{
-	  MudProgSetSupermob( vobj );  /* not very efficient to do here */
-	  ObjProgPercentCheck( supermob, ch, vobj, NULL, GREET_PROG );
-	  ReleaseSupermob();
-	}
+      MudProgSetSupermob( vobj );  /* not very efficient to do here */
+      ObjProgPercentCheck( supermob, ch, vobj, NULL, GREET_PROG );
+      ReleaseSupermob();
     }
 }
 
 void ObjProgSpeechTrigger( const std::string &txt, Character *ch )
 {
+  auto objectsWithSpeechTrigger = Filter(ch->InRoom->Objects(),
+                                         [](auto vobj)
+                                         {
+                                           return vobj->Prototype->mprog.progtypes & SPEECH_PROG;
+                                         });
+
   /* supermob is set and released in ObjProgWordlistCheck */
-  for ( Object *vobj = ch->InRoom->FirstContent; vobj; vobj = vobj->NextContent )
+  for(Object *vobj : objectsWithSpeechTrigger)
     {
-      if  ( vobj->Prototype->mprog.progtypes & SPEECH_PROG )
-	{
-	  ObjProgWordlistCheck( txt, supermob, ch, vobj, NULL, SPEECH_PROG, vobj );
-	}
+      ObjProgWordlistCheck( txt, supermob, ch, vobj, NULL, SPEECH_PROG, vobj );
     }
 }
 

@@ -4,6 +4,9 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
+
+static Object *FindFountain(const Room *location);
 
 void do_drink( Character *ch, char *argument )
 {
@@ -19,10 +22,7 @@ void do_drink( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
-        if ( (obj->ItemType == ITEM_FOUNTAIN)
-             ||   (obj->ItemType == ITEM_BLOOD) )
-          break;
+      obj = FindFountain(ch->InRoom);
 
       if ( !obj )
         {
@@ -153,4 +153,16 @@ void do_drink( Character *ch, char *argument )
   SetWaitState(ch, PULSE_PER_SECOND );
 }
 
+static Object *FindFountain(const Room *location)
+{
+  for(Object *fountain : location->Objects())
+    {
+      if(fountain->ItemType == ITEM_FOUNTAIN
+         || fountain->ItemType == ITEM_BLOOD)
+        {
+          return fountain;
+        }
+    }
 
+  return nullptr;
+}

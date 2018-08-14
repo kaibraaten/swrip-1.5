@@ -3,6 +3,7 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 bool spec_customs_weapons( Character *ch )
 {

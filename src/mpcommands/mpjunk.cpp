@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "object.hpp"
 
 /* lets the mobile destroy an object in its inventory
    it can also destroy a worn object and it can destroy

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 /*
  * Fill a container
@@ -154,16 +155,16 @@ void do_fill( Character *ch, char *argument )
 
   if ( !source )
     {
-      bool      found = false;
-      Object *src_next;
+      bool found = false;
 
-      found = false;
       SeparateOneObjectFromGroup( obj );
-      for ( source = ch->InRoom->FirstContent;
-            source;
-            source = src_next )
+
+      std::list<Object*> sources(ch->InRoom->Objects());
+
+      for(auto i = std::begin(sources); i != std::end(sources); ++i)
         {
-          src_next = source->NextContent;
+          source = *i;
+          
           if (dest_item == ITEM_CONTAINER)
             {
               if ( !CAN_WEAR(source, ITEM_TAKE)

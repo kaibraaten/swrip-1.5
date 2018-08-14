@@ -41,6 +41,7 @@
 #include "area.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 static bool IsRoomReset( const Reset *pReset, const Room *aRoom, const Area *pArea );
 static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 );
@@ -1313,8 +1314,6 @@ static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
 
 void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
 {
-  Object *obj = NULL;
-
   for(const Character *rch : pRoom->Characters())
     {
       if ( !IsNpc(rch) )
@@ -1325,7 +1324,7 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
       AddReset( pArea, 'M', 1, rch->Prototype->Vnum, rch->Prototype->Count,
                  pRoom->Vnum );
 
-      for ( obj = rch->FirstCarrying; obj; obj = obj->NextContent )
+      for ( Object *obj = rch->FirstCarrying; obj; obj = obj->NextContent )
         {
           if ( obj->WearLoc == WEAR_NONE )
 	    {
@@ -1338,13 +1337,14 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
         }
     }
 
-  for ( obj = pRoom->FirstContent; obj; obj = obj->NextContent )
+  std::list<Object*> objectsToAddResetsTo = Filter(pRoom->Objects(),
+                                                  [](auto obj)
+                                                  {
+                                                    return obj->ItemType != ITEM_SPACECRAFT;
+                                                  });
+  
+  for(Object *obj : objectsToAddResetsTo)
     {
-      if ( obj->ItemType == ITEM_SPACECRAFT )
-	{
-	  continue;
-	}
-
       AddObjectReset( pArea, 'O', obj, 1, pRoom->Vnum );
     }
 
@@ -1610,7 +1610,7 @@ void ResetArea( Area *pArea )
               continue;
             }
 
-          if ( CountOccurancesOfObjectInList(pObjIndex, pRoomIndex->FirstContent) > 0 )
+          if ( CountOccurancesOfObjectInList(pObjIndex, pRoomIndex->Objects()) > 0 )
             {
               obj = NULL;
               lastobj = NULL;
@@ -1758,7 +1758,7 @@ void ResetArea( Area *pArea )
 
               if ( pArea->NumberOfPlayers > 0 ||
                    CountOccurancesOfObjectInList(GetProtoObject(OBJ_VNUM_TRAP),
-                                  pRoomIndex->FirstContent) > 0 )
+                                                 pRoomIndex->Objects()) > 0 )
 		{
 		  break;
 		}

@@ -2,14 +2,13 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 
 void do_drop( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Object *obj = nullptr;
-  Object *obj_next = nullptr;
   bool found = false;
   int number = 0;
 
@@ -64,10 +63,10 @@ void do_drop( Character *ch, char *argument )
 
           ch->Gold -= number;
 
-          for ( obj = ch->InRoom->FirstContent; obj; obj = obj_next )
-            {
-              obj_next = obj->NextContent;
+          std::list<Object*> objectsToExtract(ch->InRoom->Objects());
 
+          for(Object *obj : objectsToExtract)
+            {
               switch ( obj->Prototype->Vnum )
                 {
                 case OBJ_VNUM_MONEY_ONE:
@@ -101,6 +100,8 @@ void do_drop( Character *ch, char *argument )
 
   if ( number <= 1 && StrCmp( arg, "all" ) && StringPrefix( "all.", arg ) )
     {
+      Object *obj = nullptr;
+      
       /* 'drop obj' */
       if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
         {
@@ -158,7 +159,7 @@ void do_drop( Character *ch, char *argument )
 
       found = false;
 
-      for ( obj = ch->FirstCarrying; obj; obj = obj_next )
+      for ( Object *obj = ch->FirstCarrying, *obj_next = nullptr; obj; obj = obj_next )
         {
           obj_next = obj->NextContent;
 

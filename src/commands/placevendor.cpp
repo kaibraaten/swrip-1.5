@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_placevendor (Character *ch, char *argument)
 {

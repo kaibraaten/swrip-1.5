@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "editor.hpp"
 #include "log.hpp"
+#include "object.hpp"
 
 void do_opedit( Character *ch, char *argument )
 {

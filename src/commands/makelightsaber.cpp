@@ -4,6 +4,7 @@
 #include "craft.hpp"
 #include "skill.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 #define MAX_NUMBER_OF_CRYSTALS 3
 

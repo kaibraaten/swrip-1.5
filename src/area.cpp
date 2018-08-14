@@ -9,6 +9,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];
@@ -1948,8 +1949,6 @@ void AreaUpdate( void )
  */
 void CloseArea( Area *pArea )
 {
-  Object *eobj;
-  Object *eobj_next;
   int icnt;
   Room *rid;
   Room *rid_next;
@@ -1986,7 +1985,7 @@ void CloseArea( Area *pArea )
       if ( ech->InRoom && ech->InRoom->Area == pArea )
         do_recall( ech, "" );
     }
-  for ( eobj = FirstObject; eobj; eobj = eobj_next )
+  for ( Object *eobj = FirstObject, *eobj_next = nullptr; eobj; eobj = eobj_next )
     {
       eobj_next = eobj->Next;
       /* if obj is in area, or part of area. */
@@ -2038,13 +2037,14 @@ void CloseArea( Area *pArea )
                 }
             }
 
-          if ( rid->FirstContent )
+          if ( !rid->Objects().empty() )
             {
               Log->Bug( "CloseArea: room with contents #%d", rid->Vnum );
 
-              for ( eobj = rid->FirstContent; eobj; eobj = eobj_next )
+              std::list<Object*> objectsToExtract(rid->Objects());
+
+              for(Object *eobj : objectsToExtract)
                 {
-                  eobj_next = eobj->NextContent;
                   ExtractObject( eobj );
                 }
             }

@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include "object.hpp"
 #include "character.hpp"
 #include "mud.hpp"
 #include "clan.hpp"

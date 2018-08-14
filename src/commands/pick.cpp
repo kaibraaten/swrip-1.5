@@ -4,6 +4,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 void do_pick( Character *ch, char *argument )
 {

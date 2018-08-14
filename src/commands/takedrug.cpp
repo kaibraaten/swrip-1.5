@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "object.hpp"
 
 void do_takedrug( Character *ch, char *argument )
 {
@@ -10,7 +11,7 @@ void do_takedrug( Character *ch, char *argument )
   int drug = 0;
   int sn = 0;
 
-  if ( IsNullOrEmpty( argument ) || !StrCmp(argument, "") )
+  if ( IsNullOrEmpty( argument ) )
     {
       ch->Echo("Use what?\r\n");
       return;

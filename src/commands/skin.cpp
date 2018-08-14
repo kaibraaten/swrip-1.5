@@ -2,14 +2,14 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "log.hpp"
+#include "object.hpp"
 
 void do_skin( Character *ch, char *argument)
 {
-  Object *korps;
-  Object *corpse;
-  Object *obj;
-  Object *skin;
-  char *name;
+  Object *corpse = nullptr;
+  Object *obj = nullptr;
+  Object *skin = nullptr;
+  char *name = nullptr;
   char buf[MAX_STRING_LENGTH];
 
   if ( IsNullOrEmpty( argument ) )
@@ -62,9 +62,8 @@ void do_skin( Character *ch, char *argument)
 
   Act( AT_BLOOD, "$n strips the skin from $p.", ch, corpse, NULL, TO_ROOM);
   Act( AT_BLOOD, "You strip the skin from $p.", ch, corpse, NULL, TO_CHAR);
-  korps = corpse;
   skin = CreateObject( GetProtoObject(OBJ_VNUM_SKIN), 0 );
-  name = IsNpc(ch) ? korps->ShortDescr : corpse->ShortDescr;
+  name = corpse->ShortDescr;
   sprintf( buf, skin->ShortDescr, name );
   FreeMemory( skin->ShortDescr );
   skin->ShortDescr = CopyString( buf );

@@ -28,7 +28,6 @@
  */
 
 #include <sstream>
-#include <sys/types.h>
 #include <cctype>
 #include <cstdio>
 #include <cstdlib>

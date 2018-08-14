@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 static void trunc1(char *s, size_t len);
 

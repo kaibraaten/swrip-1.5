@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "object.hpp"
 
 void do_ammo( Character *ch, char *argument )
 {

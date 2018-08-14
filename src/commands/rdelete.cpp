@@ -33,7 +33,7 @@ void do_rdelete( Character *ch, char *argument )
     }
 
   /* We could go to the trouble of clearing out the room, but why? */
-  if ( !location->Characters().empty() || location->FirstContent )
+  if ( !location->Characters().empty() || !location->Objects().empty())
     {
       ch->Echo("The room must be empty first.\r\n");
       return;

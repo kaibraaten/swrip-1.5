@@ -31,6 +31,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 static bool FindComlink( const Object *element, const Object **comlink );
 

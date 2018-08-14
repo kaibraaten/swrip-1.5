@@ -49,6 +49,7 @@
 #include "log.hpp"
 #include "playerrepository.hpp"
 #include "room.hpp"
+#include "object.hpp"
 
 /*
  * Globals.
@@ -1034,15 +1035,10 @@ Character *CreateMobile( ProtoMobile *proto )
 Object *AllocateObject( ProtoObject *pObjIndex, int level )
 {
   assert(pObjIndex != nullptr);
-  Object *obj = NULL;
-
-  AllocateMemory( obj, Object, 1 );
+  Object *obj = new Object();
 
   obj->Prototype       = pObjIndex;
-  obj->InRoom  = NULL;
   obj->Level            = level;
-  obj->WearLoc = WEAR_NONE;
-  obj->Count            = 1;
   cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
   obj->Serial = obj->Prototype->Serial = cur_obj_serial;
 

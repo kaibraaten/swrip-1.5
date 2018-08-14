@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "object.hpp"
 
 void do_delay( Character *ch, char *argument )
 {

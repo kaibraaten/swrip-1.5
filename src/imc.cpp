@@ -44,9 +44,6 @@
 #include <unistd.h>
 #endif
 #include <cerrno>
-#if defined(__OpenBSD__) || defined(__FreeBSD__)
-#include <sys/types.h>
-#endif
 #include <utility/sha256.hpp>
 #include "mud.hpp"
 #include "character.hpp"
