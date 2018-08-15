@@ -1823,7 +1823,7 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name )
  * to_room and vnum.                                            -Thoric
  * Exits are inserted into the linked list based on vdir.
  */
-Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
+Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door, const std::string &keyword )
 {
   Exit *pexit = nullptr;
 
@@ -1832,6 +1832,7 @@ Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
   pexit->ReverseVnum          = pRoomIndex->Vnum;
   pexit->ToRoom                = to_room;
   pexit->Distance               = 1;
+  pexit->Keyword = CopyString(keyword);
   
   if ( to_room )
     {

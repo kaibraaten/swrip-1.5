@@ -1027,9 +1027,13 @@ static void LoadRooms( Area *tarea, FILE *fp )
                 }
               else
                 {
-                  pexit = MakeExit( pRoomIndex, NULL, door );
-                  pexit->Description    = ReadStringToTilde( fp, Log, fBootDb );
-                  pexit->Keyword        = ReadStringToTilde( fp, Log, fBootDb );
+                  char *description    = ReadStringToTilde( fp, Log, fBootDb );
+                  char *keyword        = ReadStringToTilde( fp, Log, fBootDb );
+                  
+                  pexit = MakeExit( pRoomIndex, NULL, door, keyword );
+                  FreeMemory(keyword);
+                  
+                  pexit->Description    = description;
                   pexit->Flags      = 0;
                   ln = ReadLine( fp, Log, fBootDb );
                   x1=x2=x3=x4=0;

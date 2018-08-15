@@ -64,7 +64,14 @@ void Room::Add(Exit *xit)
   pImpl->Exits.push_back(xit);
   pImpl->Exits.sort([](const auto x1, const auto x2)
                     {
-                      return x1->Direction <= x2->Direction;
+                      if(x1->Direction == x2->Direction)
+                        {
+                          return StrCmp(x1->Keyword, x2->Keyword) < 0;
+                        }
+                      else
+                        {
+                          return x1->Direction <= x2->Direction;
+                        }
                     });
 }
 
