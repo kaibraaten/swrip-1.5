@@ -5,25 +5,35 @@
 ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 {
   Affect af;
-  SmaugAffect *saf;
   Skill *skill = GetSkill(sn);
   Character *victim = (Character *) vo;
-  int aff_chance;
+  int aff_chance = 0;
   ch_ret retcode = rNONE;
 
   if ( SPELL_FLAG( skill, SF_RECASTABLE ) )
-    StripAffect( victim, sn );
-  for ( saf = skill->Affects; saf; saf = saf->Next )
+    {
+      StripAffect( victim, sn );
+    }
+  
+  for ( SmaugAffect *saf = skill->Affects; saf; saf = saf->Next )
     {
       if ( saf->Location >= REVERSE_APPLY )
-        victim = ch;
+        {
+          victim = ch;
+        }
       else
-        victim = (Character *) vo;
+        {
+          victim = static_cast<Character*>(vo);
+        }
+      
       /* Check if char has this bitvector already */
       if ( (af.AffectedBy = saf->AffectedBy) != 0
-           &&    IsAffectedBy( victim, af.AffectedBy )
-           &&   !SPELL_FLAG( skill, SF_ACCUMULATIVE ) )
-        continue;
+           && IsAffectedBy( victim, af.AffectedBy )
+           && !SPELL_FLAG( skill, SF_ACCUMULATIVE ) )
+        {
+          continue;
+        }
+      
       /*
        * necessary for StripAffect to work properly...
        */
@@ -35,31 +45,39 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 
         case AFF_POISON:
 	  af.Type = gsn_poison;
-   ch->Echo("You feel the hatred grow within you!\r\n");
+          ch->Echo("You feel the hatred grow within you!\r\n");
           ch->Alignment = ch->Alignment - 100;
           ch->Alignment = urange( -1000, ch->Alignment, 1000 );
           ApplySithPenalty( ch );
           aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_POISON );
 
           if ( victim->Race == RACE_DROID )
-            aff_chance = 1000;
-
+            {
+              aff_chance = 1000;
+            }
+          
           if ( aff_chance == 1000 )
             {
               retcode = rVICT_IMMUNE;
 
               if ( SPELL_FLAG(skill, SF_STOPONFAIL) )
-                return retcode;
-
+                {
+                  return retcode;
+                }
+              
               continue;
             }
 
           if ( SaveVsPoisonDeath( aff_chance, victim ) )
             {
               if ( SPELL_FLAG(skill, SF_STOPONFAIL) )
-                return retcode;
+                {
+                  return retcode;
+                }
+              
               continue;
             }
+          
           victim->MentalState = urange( 30, victim->MentalState + 2, 100 );
           break;
 
@@ -76,13 +94,19 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
           aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_SLEEP );
 
           if ( victim->Race == RACE_DROID )
-            aff_chance = 1000;
-
+            {
+              aff_chance = 1000;
+            }
+          
           if ( aff_chance == 1000 )
             {
               retcode = rVICT_IMMUNE;
+              
               if ( SPELL_FLAG(skill, SF_STOPONFAIL) )
-                return retcode;
+                {
+                  return retcode;
+                }
+              
               continue;
             }
           break;
@@ -92,12 +116,19 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
           aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_CHARM );
 
 	  if ( victim->Race == RACE_DROID )
-            aff_chance = 1000;
+            {
+              aff_chance = 1000;
+            }
+          
           if ( aff_chance == 1000 )
             {
               retcode = rVICT_IMMUNE;
+              
               if ( SPELL_FLAG(skill, SF_STOPONFAIL) )
-                return retcode;
+                {
+                  return retcode;
+                }
+              
               continue;
             }
           break;
@@ -113,11 +144,13 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 
       if ( af.Duration == 0 )
         {
-
           switch( af.Location )
             {
             case APPLY_HIT:
-              if ( ch != victim && victim->Hit < victim->MaxHit && af.Modifier > 0 && victim->Race != RACE_DROID)
+              if ( ch != victim
+                   && victim->Hit < victim->MaxHit
+                   && af.Modifier > 0
+                   && victim->Race != RACE_DROID)
                 {
                   ch->Echo("The noble Jedi use their powers to help others!\r\n");
                   ch->Alignment = ch->Alignment +20 ;
@@ -135,7 +168,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
               break;
 
             case APPLY_MANA:
-              if  ( af.Modifier > 0 && victim->Mana >= victim->MaxMana )
+              if( af.Modifier > 0 && victim->Mana >= victim->MaxMana )
                 {
                   return rSPELL_FAILED;
                 }
@@ -147,6 +180,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
 		  ApplyJediBonus(ch);
                 }
+
               victim->Mana = urange( 0, victim->Mana + af.Modifier, victim->MaxMana );
               UpdatePosition( victim );
               break;
@@ -166,12 +200,16 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
               break;
             }
         }
-      else
-        if ( SPELL_FLAG( skill, SF_ACCUMULATIVE ) )
+      else if ( SPELL_FLAG( skill, SF_ACCUMULATIVE ) )
+        {
           JoinAffect( victim, &af );
-        else
+        }
+      else
+        {
           AffectToCharacter( victim, &af );
+        }
     }
+  
   UpdatePosition( victim );
   return retcode;
 }

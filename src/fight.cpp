@@ -2746,7 +2746,7 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
   if ( GetAbilityLevel( ch, COMBAT_ABILITY ) >= 50 )
     {
       char damageAmountMsg[100];
-      sprintf( damageAmountMsg, "You do %d points of damage.", dam);
+      sprintf( damageAmountMsg, " You do %d points of damage.", dam);
       strcat(buf2, damageAmountMsg);
     }
 

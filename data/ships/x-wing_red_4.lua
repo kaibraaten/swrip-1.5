@@ -96,10 +96,10 @@ ShipEntry
    Description = "", 
    Guard = false, 
    Type = "Rebel", 
-   Pilot = "Syn", 
+   Pilot = "", 
    Name = "X-wing", 
    PersonalName = "Red 4", 
-   Owner = "Naty", 
+   Owner = "", 
    Thrusters = 
    {
       Energy = 
