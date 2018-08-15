@@ -87,6 +87,6 @@ void do_flee( Character *ch, char *argument )
       return;
     }
 
-  ch->Echo("You attempt to run for cover!");
+  ch->Echo("You attempt to run for cover!\r\n");
 }
 

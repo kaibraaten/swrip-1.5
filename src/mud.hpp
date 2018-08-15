@@ -1480,7 +1480,8 @@ Room *GetRoom( vnum_t vnum );
 Room *MakeRoom( vnum_t vnum );
 ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name );
 ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name );
-Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door );
+Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door,
+                const std::string &keyword = "" );
 void RandomizeExits( Room *room, short maxdir );
 void MakeWizlist( void );
 bool DeleteRoom( Room *room );
