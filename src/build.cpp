@@ -314,7 +314,6 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
   Room *room = NULL;
   ProtoMobile *pMobIndex = NULL;
   ProtoObject *pObjIndex = NULL;
-  const MPROG_DATA *mprog = NULL;
   const Affect *paf = NULL;
   const Shop *pShop = NULL;
   const RepairShop *pRepair = NULL;
@@ -443,7 +442,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
         }
       if ( pMobIndex->mprog.mudprogs )
         {
-          for ( mprog = pMobIndex->mprog.mudprogs; mprog; mprog = mprog->Next )
+          for ( const MPROG_DATA *mprog = pMobIndex->mprog.mudprogs; mprog; mprog = mprog->Next )
             fprintf( fpout, "> %s %s~\n%s~\n",
                      MobProgTypeToName( mprog->type ),
                      mprog->arglist, StripCarriageReturn(mprog->comlist) );
@@ -548,7 +547,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
 
       if ( pObjIndex->mprog.mudprogs )
         {
-          for ( mprog = pObjIndex->mprog.mudprogs; mprog; mprog = mprog->Next )
+          for ( const MPROG_DATA *mprog = pObjIndex->mprog.mudprogs; mprog; mprog = mprog->Next )
             fprintf( fpout, "> %s %s~\n%s~\n",
                      MobProgTypeToName( mprog->type ),
                      mprog->arglist, StripCarriageReturn(mprog->comlist) );
@@ -634,17 +633,23 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
                    ed->Keyword, StripCarriageReturn( ed->Description ));
         }
       
-      if ( room->mprog.mudprogs )
+      if ( !room->mprog.MudProgs().empty() )
         {
-          for ( mprog = room->mprog.mudprogs; mprog; mprog = mprog->Next )
-            fprintf( fpout, "> %s %s~\n%s~\n",
-                     MobProgTypeToName( mprog->type ),
-                     mprog->arglist, StripCarriageReturn(mprog->comlist) );
+          for(const MPROG_DATA *mprog : room->mprog.MudProgs())
+            {
+              fprintf( fpout, "> %s %s~\n%s~\n",
+                       MobProgTypeToName( mprog->type ),
+                       mprog->arglist, StripCarriageReturn(mprog->comlist) );
+            }
+          
           fprintf( fpout, "|\n" );
         }
+      
       fprintf( fpout, "S\n" );
     }
+
   fprintf( fpout, "#0\n\n\n" );
+
   if ( install && vnum < tarea->VnumRanges.Room.Last )
     tarea->VnumRanges.Room.Last = vnum - 1;
 

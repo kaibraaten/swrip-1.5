@@ -2989,19 +2989,17 @@ void RoomProgSetSupermob( Room *room)
 static void RoomProgPercentCheck( Character *mob, Character *actor, Object *obj,
 				 void *vo, int type)
 {
-  MPROG_DATA * mprg;
-
   if(!mob->InRoom)
     return;
 
-  for ( mprg = mob->InRoom->mprog.mudprogs; mprg; mprg = mprg->Next )
+  for(MPROG_DATA *mprg : mob->InRoom->mprog.MudProgs())
     {
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
 	{
 	  MudProgDriver( mprg->comlist, mob, actor, obj, vo, false );
 
-	  if(type!=ENTER_PROG)
+	  if(type != ENTER_PROG)
 	    break;
 	}
     }
@@ -3021,20 +3019,17 @@ void RoomProgActTrigger( const std::string &buf, Room *room, Character *ch,
 {
   if ( room->mprog.progtypes & ACT_PROG )
     {
-      MPROG_ACT_LIST *tmp_act;
+      MPROG_ACT_LIST *tmp_act = nullptr;
 
       AllocateMemory(tmp_act, MPROG_ACT_LIST, 1);
 
-      if ( room->mprog.mpactnum > 0 )
-        tmp_act->Next = room->mprog.mpact;
-      else
-        tmp_act->Next = NULL;
+      tmp_act->buf = CopyString(buf);
+      tmp_act->ch = ch;
+      tmp_act->obj = obj;
+      tmp_act->vo = vo;
 
-      room->mprog.mpact = tmp_act;
-      room->mprog.mpact->buf = CopyString(buf);
-      room->mprog.mpact->ch = ch;
-      room->mprog.mpact->obj = obj;
-      room->mprog.mpact->vo = vo;
+      room->mprog.Add(tmp_act);
+      
       room->mprog.mpactnum++;
       RoomActAdd(room);
     }
@@ -3126,14 +3121,12 @@ void RoomProgRandomTrigger( Character *ch )
 static void RoomProgWordlistCheck( char *arg, Character *mob, Character *actor,
 				  Object *obj, void *vo, int type, Room *room )
 {
-  MPROG_DATA *mprg;
-
   if ( actor && !CharacterDiedRecently(actor) && actor->InRoom )
     {
       room = actor->InRoom;
     }
 
-  for ( mprg = room->mprog.mudprogs; mprg; mprg = mprg->Next )
+  for(MPROG_DATA *mprg : room->mprog.MudProgs())
     {
       if ( mprg->type & type )
 	{
@@ -3220,9 +3213,8 @@ static void rprog_time_check( Character *mob, Character *actor, Object *obj,
 			      void *vo, int type )
 {
   Room * room = (Room *) vo;
-  MPROG_DATA * mprg;
 
-  for ( mprg = room->mprog.mudprogs; mprg; mprg = mprg->Next )
+  for(MPROG_DATA *mprg : room->mprog.MudProgs())
     {
       bool trigger_time = ( time_info.Hour == atoi( mprg->arglist ) );
 
@@ -3311,22 +3303,22 @@ void RoomActUpdate( void )
   while ( (runner = room_act_list) != NULL )
     {
       Room *room = (Room*)runner->vo;
-      MPROG_ACT_LIST *mpact;
 
-      while ( (mpact = room->mprog.mpact) != NULL )
+      std::list<MPROG_ACT_LIST*> actLists(room->mprog.ActLists());
+
+      for(MPROG_ACT_LIST *mpact : actLists)
         {
           if ( mpact->ch->InRoom == room )
 	    {
 	      RoomProgWordlistCheck(mpact->buf, supermob, mpact->ch, mpact->obj,
-				   mpact->vo, ACT_PROG, room);
+                                    mpact->vo, ACT_PROG, room);
 	    }
 
-          room->mprog.mpact = mpact->Next;
+          room->mprog.Remove(mpact);
           FreeMemory(mpact->buf);
           FreeMemory(mpact);
         }
 
-      room->mprog.mpact = NULL;
       room->mprog.mpactnum = 0;
       room_act_list = runner->Next;
       FreeMemory(runner);

@@ -199,10 +199,10 @@ struct act_prog_data
 struct MPROG_ACT_LIST
 {
   MPROG_ACT_LIST *Next = nullptr;
-  char           *buf = nullptr;
-  Character      *ch = nullptr;
-  Object       *obj = nullptr;
-  void           *vo = nullptr;
+  char *buf = nullptr;
+  Character *ch = nullptr;
+  Object *obj = nullptr;
+  void *vo = nullptr;
 };
 
 struct MPROG_DATA

@@ -5,9 +5,7 @@
 /* Rpstat - Scryn 8/12 */
 void do_rpstat( Character *ch, char *argument )
 {
-  MPROG_DATA *mprg;
-
-  if ( !( ch->InRoom->mprog.progtypes ) )
+  if ( ch->InRoom->mprog.MudProgs().empty() )
     {
       ch->Echo("This room has no programs set.\r\n");
       return;
@@ -16,10 +14,12 @@ void do_rpstat( Character *ch, char *argument )
   ch->Echo("Name: %s.  Vnum: %d.\r\n",
              ch->InRoom->Name, ch->InRoom->Vnum );
 
-  for ( mprg = ch->InRoom->mprog.mudprogs; mprg; mprg = mprg->Next )
-    ch->Echo(">%s %s\r\n%s\r\n",
+  for(const MPROG_DATA *mprg : ch->InRoom->mprog.MudProgs())
+    {
+      ch->Echo(">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),
                mprg->arglist,
                mprg->comlist );
+    }
 }
 
