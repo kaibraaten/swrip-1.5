@@ -2085,25 +2085,21 @@ void ExtractExit( Room *room, Exit *pexit )
  */
 void CleanRoom( Room *room )
 {
-  ExtraDescription      *ed, *ed_next;
-
-  if ( !room )
-    return;
+  assert(room != nullptr);
 
   FreeMemory( room->Description );
   FreeMemory( room->Name );
 
-  for ( ed = room->FirstExtraDescription; ed; ed = ed_next )
+  std::list<ExtraDescription*> extraDescriptions(room->ExtraDescriptions());
+  
+  for(ExtraDescription *ed : extraDescriptions)
     {
-      ed_next = ed->Next;
+      room->Remove(ed);
       FreeMemory( ed->Description );
       FreeMemory( ed->Keyword );
       FreeMemory( ed );
       top_ed--;
     }
-
-  room->FirstExtraDescription = NULL;
-  room->LastExtraDescription = NULL;
 
   while(!room->Exits().empty())
     {

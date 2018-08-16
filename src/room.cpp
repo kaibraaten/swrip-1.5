@@ -12,6 +12,7 @@ struct Room::Impl
   std::list<Exit*> Exits;
   std::list<Character*> Characters;
   std::list<Object*> Objects;
+  std::list<ExtraDescription*> ExtraDescriptions;
 };
 
 Room::Room()
@@ -117,4 +118,19 @@ void Room::Remove(Object *object)
 const std::list<Object*> &Room::Objects() const
 {
   return pImpl->Objects;
+}
+
+void Room::Add(ExtraDescription *extraDescription)
+{
+  pImpl->ExtraDescriptions.push_back(extraDescription);
+}
+
+void Room::Remove(ExtraDescription *extraDescription)
+{
+  pImpl->ExtraDescriptions.remove(extraDescription);
+}
+
+const std::list<ExtraDescription*> &Room::ExtraDescriptions() const
+{
+  return pImpl->ExtraDescriptions;
 }

@@ -1141,9 +1141,12 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
           return;
         }
 
-      if ( (subject = GetExtraDescription( "_subject_", paper->FirstExtraDescription )) == NULL )
+      const auto extraDescriptions(OldStyleExtraListToNew(paper->FirstExtraDescription));
+      
+      if ( (subject = GetExtraDescription( "_subject_", extraDescriptions )) == NULL )
         subject = "(no subject)";
-      if ( (to_list = GetExtraDescription( "_to_", paper->FirstExtraDescription )) == NULL )
+      
+      if ( (to_list = GetExtraDescription( "_to_", extraDescriptions )) == NULL )
         to_list = "(nobody)";
 
       ch->Echo( "%s: %s\r\nTo: %s\r\n",
@@ -1151,7 +1154,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
                 subject,
                 to_list );
 
-      if ( (text = GetExtraDescription( "_text_", paper->FirstExtraDescription )) == NULL )
+      if ( (text = GetExtraDescription( "_text_", extraDescriptions )) == NULL )
         text = "The disk is blank.\r\n";
 
       ch->Echo(text);
@@ -1220,16 +1223,18 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
       Act( AT_ACTION, "$n uploads a message.", ch, NULL, NULL, TO_ROOM );
 
+      const auto extraDescriptions(OldStyleExtraListToNew(paper->FirstExtraDescription));
+      
       char *strtime                     = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
       Note *note = new Note();
       note->Date                       = CopyString( strtime );
 
-      char *text = GetExtraDescription( "_text_", paper->FirstExtraDescription );
+      char *text = GetExtraDescription( "_text_", extraDescriptions );
       note->Text = text ? CopyString( text ) : CopyString( "" );
-      text = GetExtraDescription( "_to_", paper->FirstExtraDescription );
+      text = GetExtraDescription( "_to_", extraDescriptions );
       note->ToList = text ? CopyString( text ) : CopyString( "all" );
-      text = GetExtraDescription( "_subject_", paper->FirstExtraDescription );
+      text = GetExtraDescription( "_subject_", extraDescriptions );
       note->Subject = text ? CopyString( text ) : CopyString( "" );
       note->Sender  = CopyString( ch->Name );
       note->Voting      = 0;

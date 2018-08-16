@@ -173,37 +173,54 @@ void FreeReset( Area *are, Reset *res )
 
 ExtraDescription *SetRExtra( Room *room, const std::string &keywords )
 {
-  ExtraDescription *ed;
+  ExtraDescription *ed = nullptr;
+  bool found = false;
 
-  for ( ed = room->FirstExtraDescription; ed; ed = ed->Next )
+  for(auto i = std::begin(room->ExtraDescriptions());
+      i != std::end(room->ExtraDescriptions()); ++i)
     {
+      ed = *i;
+      
       if ( IsName( keywords, ed->Keyword ) )
-        break;
+        {
+          found = true;
+          break;
+        }
     }
-  if ( !ed )
+
+  if ( !found )
     {
       AllocateMemory( ed, ExtraDescription, 1 );
-      LINK( ed, room->FirstExtraDescription, room->LastExtraDescription, Next, Previous );
+      room->Add(ed);
       ed->Keyword       = CopyString( keywords );
       ed->Description   = CopyString( "" );
       top_ed++;
     }
+
   return ed;
 }
 
 bool DelRExtra( Room *room, const std::string &keywords )
 {
-  ExtraDescription *rmed;
+  ExtraDescription *rmed = nullptr;
+  bool found = false;
 
-  for ( rmed = room->FirstExtraDescription; rmed; rmed = rmed->Next )
+  for(auto i = std::begin(room->ExtraDescriptions());
+      i != std::end(room->ExtraDescriptions()); ++i)
     {
+      rmed = *i;
+
       if ( IsName( keywords, rmed->Keyword ) )
-        break;
+        {
+          found = true;
+          break;
+        }
     }
-  if ( !rmed )
-    return false;
   
-  UNLINK( rmed, room->FirstExtraDescription, room->LastExtraDescription, Next, Previous );
+  if ( !found )
+    return false;
+
+  room->Remove(rmed);
   FreeMemory( rmed->Keyword );
   FreeMemory( rmed->Description );
   FreeMemory( rmed );
@@ -298,7 +315,6 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
   ProtoMobile *pMobIndex = NULL;
   ProtoObject *pObjIndex = NULL;
   const MPROG_DATA *mprog = NULL;
-  const ExtraDescription *ed = NULL;
   const Affect *paf = NULL;
   const Shop *pShop = NULL;
   const RepairShop *pRepair = NULL;
@@ -517,7 +533,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
                pObjIndex->Rent ? pObjIndex->Rent :
                (int) (pObjIndex->Cost / 10)             );
 
-      for ( ed = pObjIndex->FirstExtraDescription; ed; ed = ed->Next )
+      for ( const ExtraDescription *ed = pObjIndex->FirstExtraDescription; ed; ed = ed->Next )
         fprintf( fpout, "E\n%s~\n%s~\n",
                  ed->Keyword, StripCarriageReturn( ed->Description )       );
 
@@ -612,10 +628,12 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
                      xit->Vnum );
         }
 
-      for ( ed = room->FirstExtraDescription; ed; ed = ed->Next )
-        fprintf( fpout, "E\n%s~\n%s~\n",
-                 ed->Keyword, StripCarriageReturn( ed->Description ));
-
+      for(const ExtraDescription *ed : room->ExtraDescriptions())
+        {
+          fprintf( fpout, "E\n%s~\n%s~\n",
+                   ed->Keyword, StripCarriageReturn( ed->Description ));
+        }
+      
       if ( room->mprog.mudprogs )
         {
           for ( mprog = room->mprog.mudprogs; mprog; mprog = mprog->Next )

@@ -99,13 +99,11 @@ void do_rstat( Character *ch, char *argument )
         FlagString(location->Flags, RoomFlags).c_str() );
   ch->Echo("Description:\r\n%s", location->Description );
 
-  if ( location->FirstExtraDescription )
+  if ( !location->ExtraDescriptions().empty() )
     {
-      ExtraDescription *ed = NULL;
-
       ch->Echo("Extra description keywords: '");
 
-      for ( ed = location->FirstExtraDescription; ed; ed = ed->Next )
+      for(const ExtraDescription *ed : location->ExtraDescriptions())
         {
           ch->Echo(ed->Keyword);
 

@@ -28,15 +28,20 @@ void do_ostat( Character *ch, char *argument )
     }
 
   ch->Echo("Name: %s.\r\n", obj->Name );
+  const auto objExtraDescriptions(OldStyleExtraListToNew(obj->FirstExtraDescription));
+  const auto protoExtraDescriptions(OldStyleExtraListToNew(obj->Prototype->FirstExtraDescription));
+  
+  pdesc=GetExtraDescription(arg, objExtraDescriptions);
 
-  pdesc=GetExtraDescription(arg, obj->FirstExtraDescription);
+  if ( !pdesc )
+    pdesc=GetExtraDescription(arg, protoExtraDescriptions);
 
   if ( !pdesc )
-    pdesc=GetExtraDescription(arg, obj->Prototype->FirstExtraDescription);
+    pdesc = GetExtraDescription( obj->Name, objExtraDescriptions );
+
   if ( !pdesc )
-    pdesc = GetExtraDescription( obj->Name, obj->FirstExtraDescription );
-  if ( !pdesc )
-    pdesc = GetExtraDescription( obj->Name, obj->Prototype->FirstExtraDescription );
+    pdesc = GetExtraDescription( obj->Name, protoExtraDescriptions );
+
   if ( pdesc )
     ch->Echo(pdesc);
 

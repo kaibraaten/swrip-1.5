@@ -80,7 +80,7 @@ void do_look( Character *ch, char *argument )
       return;
     }
 
-  pdesc = GetExtraDescription(arg1, ch->InRoom->FirstExtraDescription);
+  pdesc = GetExtraDescription(arg1, ch->InRoom->ExtraDescriptions());
 
   if ( pdesc )
     {
@@ -118,7 +118,9 @@ void do_look( Character *ch, char *argument )
     {
       if ( CanSeeObject( ch, obj ) )
         {
-          if ( (pdesc=GetExtraDescription(arg, obj->FirstExtraDescription)) != NULL )
+          const auto objExtraDescriptions(OldStyleExtraListToNew(obj->FirstExtraDescription));
+          
+          if ( (pdesc=GetExtraDescription(arg, objExtraDescriptions)) != NULL )
             {
               if ( (cnt += obj->Count) < number )
                 continue;
@@ -127,7 +129,8 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          if ( (pdesc=GetExtraDescription(arg, obj->Prototype->FirstExtraDescription)) != NULL )
+          const auto protoExtraDescriptions(OldStyleExtraListToNew(obj->Prototype->FirstExtraDescription));
+          if ( (pdesc=GetExtraDescription(arg, protoExtraDescriptions)) != NULL )
             {
               if ( (cnt += obj->Count) < number )
 		continue;
@@ -140,9 +143,12 @@ void do_look( Character *ch, char *argument )
             {
               if ( (cnt += obj->Count) < number )
                 continue;
-              pdesc = GetExtraDescription( obj->Name, obj->Prototype->FirstExtraDescription );
+
+              pdesc = GetExtraDescription( obj->Name, protoExtraDescriptions );
+
               if ( !pdesc )
-                pdesc = GetExtraDescription( obj->Name, obj->FirstExtraDescription );
+                pdesc = GetExtraDescription( obj->Name, objExtraDescriptions );
+
               if ( !pdesc )
                 ch->Echo("You see nothing special.\r\n");
               else
@@ -164,7 +170,10 @@ void do_look( Character *ch, char *argument )
       
       if ( CanSeeObject( ch, obj ) )
         {
-          if ( (pdesc=GetExtraDescription(arg, obj->FirstExtraDescription)) != NULL )
+          const auto objExtraDescriptions(OldStyleExtraListToNew(obj->FirstExtraDescription));
+          const auto protoExtraDescriptions(OldStyleExtraListToNew(obj->Prototype->FirstExtraDescription));
+          
+          if ( (pdesc=GetExtraDescription(arg, objExtraDescriptions)) != NULL )
             {
               if ( (cnt += obj->Count) < number )
                 continue;
@@ -177,7 +186,7 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          if ( (pdesc=GetExtraDescription(arg, obj->Prototype->FirstExtraDescription)) != NULL )
+          if ( (pdesc=GetExtraDescription(arg, protoExtraDescriptions)) != NULL )
             {
               if ( (cnt += obj->Count) < number )
                 continue;
@@ -193,9 +202,9 @@ void do_look( Character *ch, char *argument )
 	    {
               if ( (cnt += obj->Count) < number )
                 continue;
-              pdesc = GetExtraDescription( obj->Name, obj->Prototype->FirstExtraDescription );
+              pdesc = GetExtraDescription( obj->Name, protoExtraDescriptions );
               if ( !pdesc )
-                pdesc = GetExtraDescription( obj->Name, obj->FirstExtraDescription );
+                pdesc = GetExtraDescription( obj->Name, objExtraDescriptions );
               if ( !pdesc )
                 ch->Echo("You see nothing special.\r\n");
               else
