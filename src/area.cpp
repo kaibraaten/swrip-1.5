@@ -1297,10 +1297,12 @@ static void LoadMudProgs( Area *tarea, FILE *fp )
           for ( ; original->Next; original = original->Next );
 
         AllocateMemory( working, MPROG_DATA, 1 );
+
         if ( original )
           original->Next = working;
         else
           iMob->mprog.mudprogs = working;
+
         working = MobProgReadFile( ReadWord( fp, Log, fBootDb ), working, iMob );
         working->Next = NULL;
         ReadToEndOfLine( fp, Log, fBootDb );
@@ -1807,12 +1809,14 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
       Log->Bug( "%s: vnum %d ROOMPROG char", __FUNCTION__, pRoomIndex->Vnum );
       exit( 1 );
     }
+
   AllocateMemory( mprg, MPROG_DATA, 1 );
-  pRoomIndex->mprog.mudprogs = mprg;
+  pRoomIndex->mprog.Add(mprg);
 
   while ( !done )
     {
       mprg->type = MudProgNameToType( ReadWord( fp, Log, fBootDb ) );
+
       switch ( mprg->type )
         {
         case ERROR_PROG:
@@ -1961,10 +1965,6 @@ void CloseArea( Area *pArea )
   ProtoMobile *mid_next;
   Reset *ereset;
   Reset *ereset_next;
-  MPROG_ACT_LIST *mpact;
-  MPROG_ACT_LIST *mpact_next;
-  MPROG_DATA *mprog;
-  MPROG_DATA *mprog_next;
   Affect *paf;
   Affect *paf_next;
 
@@ -2059,17 +2059,21 @@ void CloseArea( Area *pArea )
               FreeMemory( eed->Description );
               FreeMemory( eed );
             }
-          
-          for ( mpact = rid->mprog.mpact; mpact; mpact = mpact_next )
+
+          std::list<MPROG_ACT_LIST*> mprogActLists(rid->mprog.ActLists());
+
+          for(MPROG_ACT_LIST *mpact : mprogActLists)
             {
-              mpact_next = mpact->Next;
+              rid->mprog.Remove(mpact);
               FreeMemory( mpact->buf );
               FreeMemory( mpact );
             }
 
-          for ( mprog = rid->mprog.mudprogs; mprog; mprog = mprog_next )
+          std::list<MPROG_DATA*> mudProgs(rid->mprog.MudProgs());
+
+          for(MPROG_DATA *mprog : mudProgs)
             {
-              mprog_next = mprog->Next;
+              rid->mprog.Remove(mprog);
 	      FreeMemory( mprog->arglist );
               FreeMemory( mprog->comlist );
               FreeMemory( mprog );
@@ -2119,13 +2123,15 @@ void CloseArea( Area *pArea )
               FreeMemory( mid->RepairShop );
             }
 
-          for ( mprog = mid->mprog.mudprogs; mprog; mprog = mprog_next )
+          for ( MPROG_DATA *mprog = mid->mprog.mudprogs, *mprog_next = nullptr;
+                mprog; mprog = mprog_next )
             {
               mprog_next = mprog->Next;
               FreeMemory(mprog->arglist);
               FreeMemory(mprog->comlist);
               FreeMemory(mprog);
             }
+
           if ( mid == MobIndexHash[icnt] )
             MobIndexHash[icnt] = mid->Next;
           else
@@ -2135,6 +2141,7 @@ void CloseArea( Area *pArea )
               for ( tmid = MobIndexHash[icnt]; tmid; tmid = tmid->Next )
                 if ( tmid->Next == mid )
                   break;
+
               if ( !tmid )
                 Log->Bug( "Close_area: mid not in hash list %s", mid->Vnum );
               else
@@ -2172,7 +2179,8 @@ void CloseArea( Area *pArea )
               FreeMemory(paf);
             }
 
-          for ( mprog = oid->mprog.mudprogs; mprog; mprog = mprog_next )
+          for ( MPROG_DATA *mprog = oid->mprog.mudprogs, *mprog_next = nullptr;
+                mprog; mprog = mprog_next )
             {
               mprog_next = mprog->Next;
               FreeMemory(mprog->arglist);

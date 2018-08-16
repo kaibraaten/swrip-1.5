@@ -9,14 +9,10 @@ static void rpfind_help (Character *ch);
  */
 void do_rpfind( Character *ch, char *argument )   /* Gorog */
 {
-  Room *pRoom = NULL;
-  MPROG_DATA *pProg;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
-  int lo_vnum = MIN_VNUM, hi_vnum = MAX_VNUM;
-  int tot_vnum = 0, tot_hits = 0;
-  int i = 0, disp_cou = 0, disp_limit = 0;
+  vnum_t lo_vnum = MIN_VNUM, hi_vnum = MAX_VNUM;
 
   argument = OneArgument( argument, arg1 );   /* display_limit */
   argument = OneArgument( argument, arg2 );
@@ -27,7 +23,7 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
       return;
     }
 
-  disp_limit = atoi (arg1);
+  int disp_limit = atoi (arg1);
   disp_limit = umax(0, disp_limit);
 
   if ( StrCmp(arg2, "mud") )
@@ -59,19 +55,28 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
       return;
     }
 
-  for (i = lo_vnum; i <= hi_vnum; i++)
+  int tot_hits = 0;
+  int disp_cou = 0;
+  
+  for (vnum_t i = lo_vnum; i <= hi_vnum; i++)
     {
-      if ( (pRoom=GetRoom(i)) && (pProg=pRoom->mprog.mudprogs) )
+      const Room *pRoom = GetRoom(i);
+      
+      if ( pRoom != nullptr && !pRoom->mprog.MudProgs().empty())
         {
-          tot_vnum = 0;
+          int tot_vnum = 0;
 
-          for ( ; pProg; pProg=pProg->Next)
-            tot_vnum += CountStringOccurances(pProg->comlist, argument);
-
+          for(const MPROG_DATA *pProg : pRoom->mprog.MudProgs())
+            {
+              tot_vnum += CountStringOccurances(pProg->comlist, argument);
+            }
+          
           tot_hits += tot_vnum;
 
           if ( tot_vnum && ++disp_cou <= disp_limit)
-            ch->Echo("%5d %5d %5d\r\n", disp_cou, i, tot_vnum);
+            {
+              ch->Echo("%5d %5d %5d\r\n", disp_cou, i, tot_vnum);
+            }
         }
     }
 
