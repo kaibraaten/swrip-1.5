@@ -1430,7 +1430,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
   char fname[MAX_INPUT_LENGTH];
   char *point = buf;
   const char *str = format;
-  const char *i;
+  const char *i = nullptr;
   Character *vch = (Character *) arg2;
   Object *obj1 = (Object  *) arg1;
   Object *obj2 = (Object  *) arg2;
@@ -1442,84 +1442,141 @@ static char *ActString(const char *format, Character *to, Character *ch,
           *point++ = *str++;
           continue;
         }
+
       ++str;
+
       if ( !arg2 && *str >= 'A' && *str <= 'Z' )
         {
           Log->Bug( "%s: missing arg2 for code %c:", __FUNCTION__, *str );
-          Log->Bug( format );
+          Log->Bug( "%s", format );
           i = " <@@@> ";
         }
       else
         {
           switch ( *str )
             {
-            default:  Log->Bug( "%s: bad code %c.", __FUNCTION__, *str );
-              i = " <@@@> ";                                            break;
-            case 't': i = (char *) arg1;                                        break;
-            case 'T': i = (char *) arg2;                                        break;
-            case 'n': i = (to ? PERS( ch, to) : NAME( ch));                     break;
-            case 'N': i = (to ? PERS(vch, to) : NAME(vch));                     break;
-            case 'e': if (ch->Sex > 2 || ch->Sex < 0)
+            default:
+              Log->Bug( "%s: bad code %c.", __FUNCTION__, *str );
+              i = " <@@@> ";
+              break;
+
+            case 't':
+              i = (char *) arg1;
+              break;
+
+            case 'T':
+              i = (char *) arg2;
+              break;
+
+            case 'n':
+              i = (to ? PERS( ch, to) : NAME( ch));
+              break;
+
+            case 'N':
+              i = (to ? PERS(vch, to) : NAME(vch));
+              break;
+
+            case 'e':
+              if (ch->Sex > 2 || ch->Sex < 0)
                 {
                   Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
-                      ch->Sex);
+                           ch->Sex);
                   i = "it";
                 }
               else
-                i = he_she [urange(SEX_NEUTRAL,  ch->Sex, SEX_FEMALE)];
+                {
+                  i = he_she[urange(SEX_NEUTRAL, ch->Sex, SEX_FEMALE)];
+                }
+              
               break;
-            case 'E': if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL )
+
+            case 'E':
+              if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL )
                 {
                   Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
-                      vch->Sex);
+                           vch->Sex);
                   i = "it";
                 }
               else
-                i = he_she [urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
+                {
+                  i = he_she[urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
+                }
+              
               break;
-            case 'm': if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
+
+            case 'm':
+              if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
                 {
                   Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
-                      ch->Sex);
+                           ch->Sex);
                   i = "it";
                 }
               else
-                i = him_her[urange(SEX_NEUTRAL,  ch->Sex, SEX_FEMALE)];
+                {
+                  i = him_her[urange(SEX_NEUTRAL,  ch->Sex, SEX_FEMALE)];
+                }
+              
               break;
-            case 'M': if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
+
+            case 'M':
+              if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
                 {
                   Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
-                      vch->Sex);
+                           vch->Sex);
                   i = "it";
                 }
               else
-                i = him_her[urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
+                {
+                  i = him_her[urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
+                }
+              
               break;
-            case 's': if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
+
+            case 's':
+              if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
                 {
                   Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
-                      ch->Sex);
+                           ch->Sex);
                   i = "its";
                 }
               else
-                i = his_her[urange(SEX_NEUTRAL,  ch->Sex, SEX_FEMALE)];
+                {
+                  i = his_her[urange(SEX_NEUTRAL,  ch->Sex, SEX_FEMALE)];
+                }
+              
               break;
-            case 'S': if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
+
+            case 'S':
+              if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
                 {
                   Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
-                      vch->Sex);
+                           vch->Sex);
                   i = "its";
                 }
               else
-                i = his_her[urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
+                {
+                  i = his_her[urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
+                }
               break;
-            case 'q': i = (to == ch) ? "" : "s";                                break;
-            case 'Q': i = (to == ch) ? "your" :
-              his_her[urange(SEX_NEUTRAL,  ch->Sex, SEX_FEMALE)];                  break;
-            case 'p': i = (!to || CanSeeObject(to, obj1)
-                           ? GetObjectShortDescription(obj1) : "something");                    break;
-            case 'P': i = (!to || CanSeeObject(to, obj2)
-                           ? GetObjectShortDescription(obj2) : "something");                    break;
+
+            case 'q':
+              i = (to == ch) ? "" : "s";
+              break;
+
+            case 'Q':
+              i = (to == ch) ? "your" : his_her[urange(SEX_NEUTRAL,  ch->Sex, SEX_FEMALE)];
+              break;
+
+            case 'p':
+              i = (!to || CanSeeObject(to, obj1)
+                   ? GetObjectShortDescription(obj1) : "something");
+              break;
+
+            case 'P':
+              i = (!to || CanSeeObject(to, obj2)
+                   ? GetObjectShortDescription(obj2) : "something");
+              break;
+
             case 'd':
               if ( IsNullOrEmpty( (const char*) arg2 ) )
 		{
@@ -1530,6 +1587,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
                   OneArgument((char *) arg2, fname);
                   i = fname;
                 }
+
               break;
             }
         }
@@ -1663,7 +1721,7 @@ void Act( short AType, const std::string &format, Character *ch, const void *arg
       if (to && to->Desc)
         {
           SetCharacterColor(AType, to);
-          to->Echo(txt);
+          to->Echo("%s", txt);
         }
       
       if (MOBtrigger)

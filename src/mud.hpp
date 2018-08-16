@@ -1316,7 +1316,7 @@ DECLARE_SPEC_FUN( spec_newbie_pilot );
 void RecoverFromCopyover( void );
 
 bool IsNameAcceptable( const std::string &name );
-const char *DrunkSpeech( const std::string &argument, Character *ch );
+std::string DrunkSpeech( const std::string &argument, Character *ch );
 void TalkChannel( Character *ch, const std::string &text,
                   int channel, const std::string &verb );
 bool IsFollowingInCircle( const Character *ch, const Character *victim );

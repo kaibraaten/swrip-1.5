@@ -30,10 +30,10 @@
 #include "log.hpp"
 #include "room.hpp"
 
-const char *DrunkSpeech( const std::string &argument, Character *ch )
+std::string DrunkSpeech( const std::string &argument, Character *ch )
 {
   const char *arg = argument.c_str();
-  static char buf[MAX_INPUT_LENGTH*2];
+  char buf[MAX_INPUT_LENGTH*2] = { '\0' };
   char buf1[MAX_INPUT_LENGTH*2] = { '\0' };
   int drunk = 0;
   char *txt = NULL;
@@ -45,20 +45,13 @@ const char *DrunkSpeech( const std::string &argument, Character *ch )
   drunk = ch->PCData->Condition[COND_DRUNK];
 
   if ( drunk <= 0 )
-    return argument.c_str();
-
-  buf[0] = '\0';
+    return argument;
 
   if ( argument.empty() )
     {
       Log->Bug( "%s: NULL argument", __FUNCTION__ );
       return "";
     }
-
-  /*
-    if ( *arg == '\0' )
-    return (char *) argument;
-  */
 
   txt = buf;
   txt1 = buf1;
