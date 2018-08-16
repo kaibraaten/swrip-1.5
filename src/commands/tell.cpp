@@ -183,11 +183,11 @@ void do_tell( Character *ch, char *argument )
                (!IsNpc(ch) || ch->Speaking != 0) )
             sbuf = Scramble(argument, ch->Speaking);
 
-          sbuf = DrunkSpeech( sbuf, ch );
+          std::string speech = DrunkSpeech( sbuf, ch );
 
           MOBtrigger = false;
           Act( AT_SAY, "$n says quietly into $s comlink '$t'",
-	       ch, sbuf, vch, TO_VICT );
+	       ch, speech.c_str(), vch, TO_VICT );
         }
 
       if ( !IsImmortal(victim) )
