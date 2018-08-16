@@ -1069,8 +1069,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
               AllocateMemory( ed, ExtraDescription, 1 );
               ed->Keyword               = ReadStringToTilde( fp, Log, fBootDb );
               ed->Description           = ReadStringToTilde( fp, Log, fBootDb );
-              LINK( ed, pRoomIndex->FirstExtraDescription, pRoomIndex->LastExtraDescription,
-                    Next, Previous );
+              pRoomIndex->Add(ed);
               top_ed++;
             }
 	   else if ( letter == '>' )
@@ -1962,8 +1961,6 @@ void CloseArea( Area *pArea )
   ProtoMobile *mid_next;
   Reset *ereset;
   Reset *ereset_next;
-  ExtraDescription *eed;
-  ExtraDescription *eed_next;
   MPROG_ACT_LIST *mpact;
   MPROG_ACT_LIST *mpact_next;
   MPROG_DATA *mprog;
@@ -2052,13 +2049,17 @@ void CloseArea( Area *pArea )
                   ExtractObject( eobj );
                 }
             }
-          for ( eed = rid->FirstExtraDescription; eed; eed = eed_next )
+
+          std::list<ExtraDescription*> extrasInRoom(rid->ExtraDescriptions());
+
+          for(ExtraDescription *eed : extrasInRoom)
             {
-              eed_next = eed->Next;
+              rid->Remove(eed);
               FreeMemory( eed->Keyword );
               FreeMemory( eed->Description );
               FreeMemory( eed );
             }
+          
           for ( mpact = rid->mprog.mpact; mpact; mpact = mpact_next )
             {
               mpact_next = mpact->Next;
@@ -2156,18 +2157,21 @@ void CloseArea( Area *pArea )
           FreeMemory(oid->Description);
           FreeMemory(oid->ActionDescription);
 
-          for ( eed = oid->FirstExtraDescription; eed; eed = eed_next )
+          for ( ExtraDescription *eed = oid->FirstExtraDescription, *eed_next = nullptr;
+                eed != nullptr; eed = eed_next )
             {
               eed_next = eed->Next;
               FreeMemory(eed->Keyword);
               FreeMemory(eed->Description);
               FreeMemory(eed);
             }
+
           for ( paf = oid->FirstAffect; paf; paf = paf_next )
             {
               paf_next = paf->Next;
               FreeMemory(paf);
             }
+
           for ( mprog = oid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
               mprog_next = mprog->Next;
@@ -2175,8 +2179,11 @@ void CloseArea( Area *pArea )
               FreeMemory(mprog->comlist);
               FreeMemory(mprog);
             }
-	  if ( oid == ObjectIndexHash[icnt] )
-            ObjectIndexHash[icnt] = oid->Next;
+
+          if ( oid == ObjectIndexHash[icnt] )
+            {
+              ObjectIndexHash[icnt] = oid->Next;
+            }
           else
             {
               ProtoObject *toid;

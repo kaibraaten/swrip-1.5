@@ -1246,13 +1246,17 @@ Object *CreateObject( ProtoObject *proto, int level )
 /*
  * Get an extra description from a list.
  */
-char *GetExtraDescription( const std::string &name, ExtraDescription *ed )
+char *GetExtraDescription( const std::string &name, const std::list<ExtraDescription*> &extras )
 {
-  for ( ; ed; ed = ed->Next )
-    if ( IsName( name, ed->Keyword ) )
-      return ed->Description;
-
-  return NULL;
+  for(const ExtraDescription *ed : extras)
+    {
+      if ( IsName( name, ed->Keyword ) )
+        {
+          return ed->Description;
+        }
+    }
+  
+  return nullptr;
 }
 
 /*
@@ -2285,3 +2289,14 @@ void AllocateRepositories(void)
   PlayerCharacters = NewPlayerRepository();
 }
 
+std::list<ExtraDescription*> OldStyleExtraListToNew(ExtraDescription *extraList)
+{
+  std::list<ExtraDescription*> newStyleList;
+
+  for(ExtraDescription *ed = extraList; ed != nullptr; ed = ed->Next)
+    {
+      newStyleList.push_back(ed);
+    }
+
+  return newStyleList;
+}

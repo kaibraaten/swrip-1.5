@@ -1461,6 +1461,7 @@ void ReadComment( Character *ch, FILE *fp );
 void WriteComments( const Character *ch, FILE *fp );
 
 /* db.c */
+std::list<ExtraDescription*> OldStyleExtraListToNew(ExtraDescription *extraList);
 void ShutdownMud( const std::string &reason );
 void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
                 const std::string &loadst, const std::string &notloadst );
@@ -1473,7 +1474,7 @@ Character *AllocateMobile( ProtoMobile *pMobIndex );
 Character *CreateMobile( ProtoMobile *pMobIndex );
 Object *CreateObject( ProtoObject *pObjIndex, int level );
 Object *AllocateObject( ProtoObject *pObjIndex, int level );
-char *GetExtraDescription( const std::string &name, ExtraDescription *ed );
+char *GetExtraDescription( const std::string &name, const std::list<ExtraDescription*> &extras);
 ProtoMobile *GetProtoMobile( vnum_t vnum );
 ProtoObject *GetProtoObject( vnum_t vnum );
 Room *GetRoom( vnum_t vnum );
