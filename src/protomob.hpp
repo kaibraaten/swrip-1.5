@@ -54,12 +54,15 @@ public:
   short           DamRoll = 0;
   int             VipFlags = 0;
 
+  /*
   struct
   {
     MPROG_DATA *mudprogs = nullptr;
     int progtypes = 0;
   } mprog;
-
+  */
+  MProg mprog;
+  
   struct
   {
     short PermStr = 0;

@@ -1327,7 +1327,6 @@ void FreeCharacter( Character *ch )
   Object *obj;
   Affect *paf;
   Timer *timer;
-  MPROG_ACT_LIST *mpact, *mpact_next;
 
   if ( !ch )
     {
@@ -1398,9 +1397,8 @@ void FreeCharacter( Character *ch )
       ImcFreeCharacter( ch );
     }
 
-  for ( mpact = ch->mprog.mpact; mpact; mpact = mpact_next )
+  for(MPROG_ACT_LIST *mpact : ch->mprog.ActLists())
     {
-      mpact_next = mpact->Next;
       FreeMemory( mpact->buf );
       FreeMemory( mpact        );
     }

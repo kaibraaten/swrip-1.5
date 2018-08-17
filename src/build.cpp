@@ -442,12 +442,16 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
           fprintf( fpout, "%d 0 0 0 0 0 0 0\n",
                    pMobIndex->VipFlags );
         }
-      if ( pMobIndex->mprog.mudprogs )
+      
+      if ( !pMobIndex->mprog.MudProgs().empty() )
         {
-          for ( const MPROG_DATA *mprog = pMobIndex->mprog.mudprogs; mprog; mprog = mprog->Next )
-            fprintf( fpout, "> %s %s~\n%s~\n",
-                     MobProgTypeToName( mprog->type ),
-                     mprog->arglist, StripCarriageReturn(mprog->comlist) );
+          for(const MPROG_DATA *mprog : pMobIndex->mprog.MudProgs())
+            {
+              fprintf( fpout, "> %s %s~\n%s~\n",
+                       MobProgTypeToName( mprog->type ),
+                       mprog->arglist, StripCarriageReturn(mprog->comlist) );
+            }
+          
           fprintf( fpout, "|\n" );
         }
     }

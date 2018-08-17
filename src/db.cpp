@@ -1738,16 +1738,15 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
  */
 ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name )
 {
-  ProtoMobile *pMobIndex, *cMobIndex;
+  ProtoMobile *cMobIndex = nullptr;
   char buf[MAX_STRING_LENGTH];
-  int   iHash;
 
   if ( cvnum > 0 )
-    cMobIndex = GetProtoMobile( cvnum );
-  else
-    cMobIndex = NULL;
+    {
+      cMobIndex = GetProtoMobile( cvnum );
+    }
 
-  AllocateMemory( pMobIndex, ProtoMobile, 1 );
+  ProtoMobile *pMobIndex = new ProtoMobile();
   pMobIndex->Vnum                       = vnum;
   pMobIndex->Name                = CopyString( name );
 
@@ -1816,7 +1815,7 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name )
       pMobIndex->DefenseFlags               = cMobIndex->DefenseFlags;
     }
 
-  iHash                         = vnum % MAX_KEY_HASH;
+  int iHash                         = vnum % MAX_KEY_HASH;
   pMobIndex->Next                       = MobIndexHash[iHash];
   MobIndexHash[iHash]         = pMobIndex;
   top_mob_index++;

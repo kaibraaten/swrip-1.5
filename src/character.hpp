@@ -25,6 +25,7 @@
 #include <array>
 #include "types.hpp"
 #include "constants.hpp"
+#include "mprog.hpp"
 
 class Character
 {
@@ -153,12 +154,7 @@ public:
     std::array<long, MAX_ABILITY> Experience;
   } Ability;
 
-  struct
-  {
-    MPROG_ACT_LIST *mpact = NULL;
-    int mpactnum = 0;
-    short mpscriptpos = 0;
-  } mprog;
+  MProg mprog;
 
   struct
   {

@@ -2148,44 +2148,39 @@ static bool MudProgKeywordCheck( const char *argu, const char *argl )
 void MobProgWordlistCheck( const std::string &arg, Character *mob, Character *actor,
                            Object *obj, void *vo, int type )
 {
-  char        temp1[ MAX_STRING_LENGTH ];
-  char        temp2[ MAX_INPUT_LENGTH ];
-  char        word[ MAX_INPUT_LENGTH ];
-  MPROG_DATA *mprg = NULL;
-  char       *list = NULL;
-  char       *start = NULL;
-  char       *dupl = NULL;
-  char       *end = NULL;
-  size_t      i = 0;
-
-  for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
+  for(MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
     {
       if ( mprg->type & type )
 	{
+          char temp1[ MAX_STRING_LENGTH ];
 	  strcpy( temp1, mprg->arglist );
-	  list = temp1;
+	  char *list = temp1;
 
-	  for ( i = 0; i < strlen( list ); i++ )
+	  for ( size_t i = 0; i < strlen( list ); i++ )
 	    {
 	      list[i] = CharToLowercase( list[i] );
 	    }
 
+          char temp2[ MAX_INPUT_LENGTH ];
 	  strcpy( temp2, arg.c_str() );
-	  dupl = temp2;
+	  char *dupl = temp2;
 
-	  for ( i = 0; i < strlen( dupl ); i++ )
+	  for ( size_t i = 0; i < strlen( dupl ); i++ )
 	    {
 	      dupl[i] = CharToLowercase( dupl[i] );
 	    }
 
 	  if ( ( list[0] == 'p' ) && ( list[1] == ' ' ) )
 	    {
+              char *start = nullptr;
 	      list += 2;
 
 	      while ( ( start = strstr( dupl, list ) ) )
 		{
-		  if ( (start == dupl || *(start-1) == ' ' )
-		       && ( *(end = start + strlen( list ) ) == ' '
+                  const char *end = start + strlen(list);
+                  
+		  if ( (start == dupl || *(start - 1) == ' ' )
+		       && ( *end == ' '
 			    || *end == '\n'
 			    || *end == '\r'
 			    || *end == '\0' ) )
@@ -2201,14 +2196,20 @@ void MobProgWordlistCheck( const std::string &arg, Character *mob, Character *ac
 	    }
 	  else
 	    {
+              char word[MAX_INPUT_LENGTH];
+              
 	      list = OneArgument( list, word );
 
 	      for( ; !IsNullOrEmpty( word ); list = OneArgument( list, word ) )
 		{
+                  char *start = nullptr;
+                  
 		  while ( ( start = strstr( dupl, word ) ) )
 		    {
-		      if ( ( start == dupl || *(start-1) == ' ' )
-			   && ( *(end = start + strlen( word ) ) == ' '
+                      char *end = start + strlen(word);
+                      
+		      if ( ( start == dupl || *(start - 1) == ' ' )
+			   && ( *end == ' '
 				|| *end == '\n'
 				|| *end == '\r'
 				|| *end == '\0' ) )
@@ -2218,7 +2219,7 @@ void MobProgWordlistCheck( const std::string &arg, Character *mob, Character *ac
 			}
 		      else
 			{
-			  dupl = start+1;
+			  dupl = start + 1;
 			}
 		    }
 		}
@@ -2230,9 +2231,7 @@ void MobProgWordlistCheck( const std::string &arg, Character *mob, Character *ac
 void MobProgPercentCheck( Character *mob, Character *actor, Object *obj,
                           void *vo, int type)
 {
-  MPROG_DATA * mprg;
-
-  for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
+  for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
     {
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
@@ -2248,9 +2247,7 @@ void MobProgPercentCheck( Character *mob, Character *actor, Object *obj,
 static void mprog_time_check( Character *mob, Character *actor, Object *obj,
 			      void *vo, int type)
 {
-  MPROG_DATA * mprg;
-
-  for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
+  for(MPROG_DATA * mprg : mob->Prototype->mprog.MudProgs())
     {
       bool trigger_time = ( time_info.Hour == atoi( mprg->arglist ) );
 
@@ -2300,10 +2297,6 @@ static void MobileActAdd( Character *mob )
 void MobProgActTrigger( const std::string &buf, Character *mob, Character *ch,
                         Object *obj, void *vo)
 {
-  MPROG_ACT_LIST * tmp_act = NULL;
-  MPROG_DATA *mprg = NULL;
-  bool found = false;
-
   if ( IsNpc( mob )
        && IsBitSet( mob->Prototype->mprog.progtypes, ACT_PROG ) )
     {
@@ -2312,8 +2305,10 @@ void MobProgActTrigger( const std::string &buf, Character *mob, Character *ch,
       if ( IsNpc( ch ) && ch->Prototype == mob->Prototype )
         return;
 
+      bool found = false;
+      
       /* make sure this is a matching trigger */
-      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
+      for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
 	{
 	  if ( mprg->type & ACT_PROG
 	       && MudProgKeywordCheck( buf.c_str(), mprg->arglist ) )
@@ -2324,20 +2319,19 @@ void MobProgActTrigger( const std::string &buf, Character *mob, Character *ch,
 	}
 
       if ( !found )
-        return;
-
+        {
+          return;
+        }
+      
+      MPROG_ACT_LIST *tmp_act = nullptr;
+      
       AllocateMemory( tmp_act, MPROG_ACT_LIST, 1 );
-
-      if ( mob->mprog.mpactnum > 0 )
-        tmp_act->Next = mob->mprog.mpact;
-      else
-        tmp_act->Next = NULL;
-
-      mob->mprog.mpact      = tmp_act;
-      mob->mprog.mpact->buf = CopyString( buf );
-      mob->mprog.mpact->ch  = ch;
-      mob->mprog.mpact->obj = obj;
-      mob->mprog.mpact->vo  = vo;
+      mob->mprog.Add(tmp_act);
+      
+      tmp_act->buf = CopyString( buf );
+      tmp_act->ch  = ch;
+      tmp_act->obj = obj;
+      tmp_act->vo  = vo;
       mob->mprog.mpactnum++;
       MobileActAdd( mob );
     }
@@ -2345,11 +2339,6 @@ void MobProgActTrigger( const std::string &buf, Character *mob, Character *ch,
 
 void MobProgBribeTrigger( Character *mob, Character *ch, int amount )
 {
-
-  char buf[ MAX_STRING_LENGTH ];
-  MPROG_DATA *mprg = NULL;
-  Object   *obj = NULL;
-
   if ( IsNpc( mob )
        && ( mob->Prototype->mprog.progtypes & BRIBE_PROG ) )
     {
@@ -2358,7 +2347,8 @@ void MobProgBribeTrigger( Character *mob, Character *ch, int amount )
       if ( IsNpc( ch ) && ch->Prototype == mob->Prototype )
         return;
 
-      obj = CreateObject( GetProtoObject( OBJ_VNUM_MONEY_SOME ), 0 );
+      Object *obj = CreateObject( GetProtoObject( OBJ_VNUM_MONEY_SOME ), 0 );
+      char buf[MAX_STRING_LENGTH];
       sprintf( buf, obj->ShortDescr, amount );
       FreeMemory( obj->ShortDescr );
       obj->ShortDescr = CopyString( buf );
@@ -2366,7 +2356,7 @@ void MobProgBribeTrigger( Character *mob, Character *ch, int amount )
       obj = ObjectToCharacter( obj, mob );
       mob->Gold -= amount;
 
-      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
+      for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
 	{
 	  if ( ( mprg->type & BRIBE_PROG )
 	       && ( amount >= atoi( mprg->arglist ) ) )
@@ -2407,9 +2397,6 @@ void MobProgFightTrigger( Character *mob, Character *ch )
 
 void MobProgGiveTrigger( Character *mob, Character *ch, Object *obj )
 {
-  char buf[MAX_INPUT_LENGTH];
-  MPROG_DATA *mprg = NULL;
-
   if ( IsNpc( mob )
        && ( mob->Prototype->mprog.progtypes & GIVE_PROG ) )
     {
@@ -2420,8 +2407,9 @@ void MobProgGiveTrigger( Character *mob, Character *ch, Object *obj )
 	  return;
 	}
 
-      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
+      for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
         {
+          char buf[MAX_INPUT_LENGTH];
           OneArgument( mprg->arglist, buf );
 
           if ( ( mprg->type & GIVE_PROG )
@@ -2469,13 +2457,10 @@ void MobProgGreetTrigger( Character *ch )
 
 void MobProgHitPercentTrigger( Character *mob, Character *ch)
 {
-
-  MPROG_DATA *mprg;
-
   if ( IsNpc( mob )
        && ( mob->Prototype->mprog.progtypes & HITPRCNT_PROG ) )
     {
-      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
+      for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
 	{
 	  if ( ( mprg->type & HITPRCNT_PROG )
 	       && ( ( 100*mob->Hit / mob->MaxHit ) < atoi( mprg->arglist ) ) )
@@ -2523,18 +2508,18 @@ void MobProgSpeechTrigger( char *txt, Character *actor )
 
 void MobProgScriptTrigger( Character *mob )
 {
-  MPROG_DATA * mprg;
-
   if ( mob->Prototype->mprog.progtypes & SCRIPT_PROG)
     {
-      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
+      for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
 	{
 	  if ( ( mprg->type & SCRIPT_PROG ) )
 	    {
 	      if ( IsNullOrEmpty( mprg->arglist )
 		   || mob->mprog.mpscriptpos != 0
 		   || atoi( mprg->arglist ) == time_info.Hour )
-		MudProgDriver( mprg->comlist, mob, NULL, NULL, NULL, true );
+                {
+                  MudProgDriver( mprg->comlist, mob, NULL, NULL, NULL, true );
+                }
 	    }
 	}
     }
