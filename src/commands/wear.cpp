@@ -4,6 +4,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit);
 static bool can_layer( const Character *ch, const Object *obj, short wear_loc );

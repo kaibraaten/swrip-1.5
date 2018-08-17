@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 static void trunc1(char *s, size_t len);
 

@@ -3,6 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 void do_poison_weapon( Character *ch, char *argument )
 {

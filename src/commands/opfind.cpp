@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "protoobject.hpp"
 
 static void opfind_help (Character *ch);
 

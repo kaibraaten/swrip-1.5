@@ -10,6 +10,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];

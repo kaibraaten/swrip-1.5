@@ -3,6 +3,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 void do_oinvoke( Character *ch, char *argument )
 {

@@ -19,7 +19,7 @@ bool spec_customs_alcohol( Character *ch )
 
       for ( Object *obj = victim->LastCarrying; obj; obj = obj->PreviousContent )
         {
-          if (obj->Prototype->ItemType == ITEM_DRINK_CON)
+          if (obj->ItemType == ITEM_DRINK_CON)
             {
               int liquid = 0;
               
@@ -73,7 +73,7 @@ bool spec_customs_alcohol( Character *ch )
             {
               for ( Object *content = obj->FirstContent; content; content = content->NextContent )
                 {
-                  if (content->Prototype->ItemType == ITEM_DRINK_CON
+                  if (content->ItemType == ITEM_DRINK_CON
 		      && !IsBitSet( content->Flags , ITEM_CONTRABAND ) )
                     {
                       int liquid = 0;

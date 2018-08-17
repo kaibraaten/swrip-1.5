@@ -3,6 +3,7 @@
 #include "clan.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 

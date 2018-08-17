@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "grub.hpp"
 #include "character.hpp"
+#include "protoobject.hpp"
 
 /*
  * The "showlayers" command is used to list all layerable eq in the

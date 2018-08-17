@@ -50,6 +50,7 @@
 #include "playerrepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 /*
  * Globals.

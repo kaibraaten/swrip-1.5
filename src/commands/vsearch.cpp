@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 void do_vsearch( Character *ch, char *argument )
 {
