@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <cassert>
 #include "character.hpp"
 #include "mud.hpp"
 #include "editor.hpp"
@@ -7,13 +9,10 @@
 
 void do_opedit( Character *ch, char *argument )
 {
-  char arg1 [MAX_INPUT_LENGTH];
-  char arg2 [MAX_INPUT_LENGTH];
-  char arg3 [MAX_INPUT_LENGTH];
-  char arg4 [MAX_INPUT_LENGTH];
-  Object   *obj;
-  MPROG_DATA *mprog, *mprg, *mprg_next;
-  int value, mptype, cnt;
+  char arg1[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH];
+  char arg3[MAX_INPUT_LENGTH];
+  char arg4[MAX_INPUT_LENGTH];
 
   if ( IsNpc( ch ) )
     {
@@ -31,6 +30,7 @@ void do_opedit( Character *ch, char *argument )
     {
     default:
       break;
+
     case SUB_MPROG_EDIT:
       if ( !ch->dest_buf )
         {
@@ -40,12 +40,17 @@ void do_opedit( Character *ch, char *argument )
           return;
         }
 
-      mprog = (MPROG_DATA*)ch->dest_buf;
+      {
+        MPROG_DATA *mprog = (MPROG_DATA*)ch->dest_buf;
 
-      if ( mprog->comlist )
-        FreeMemory( mprog->comlist );
-
-      mprog->comlist = CopyBuffer( ch );
+        if ( mprog->comlist )
+          {
+            FreeMemory( mprog->comlist );
+          }
+        
+        mprog->comlist = CopyBuffer( ch );
+      }
+      
       StopEditing( ch );
       return;
     }
@@ -54,7 +59,7 @@ void do_opedit( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
-  value = atoi( arg3 );
+  int value = atoi( arg3 );
 
   if ( IsNullOrEmpty( arg1) || IsNullOrEmpty( arg2 ) )
     {
@@ -71,9 +76,13 @@ void do_opedit( Character *ch, char *argument )
       return;
     }
 
+  Object *obj = nullptr;
+  
   if ( GetTrustLevel( ch ) < LEVEL_GREATER )
     {
-      if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
+      obj = GetCarriedObject( ch, arg1 );
+      
+      if ( obj == nullptr )
 	{
           ch->Echo("You aren't carrying that.\r\n");
           return;
@@ -81,7 +90,9 @@ void do_opedit( Character *ch, char *argument )
     }
   else
     {
-      if ( ( obj = GetObjectAnywhere( ch, arg1 ) ) == NULL )
+      obj = GetObjectAnywhere( ch, arg1 );
+      
+      if ( obj == nullptr )
         {
           ch->Echo("Nothing like that in all the realms.\r\n");
           return;
@@ -97,30 +108,35 @@ void do_opedit( Character *ch, char *argument )
       return;
     }
 
-  mprog = obj->Prototype->mprog.mudprogs;
-
+  const std::list<MPROG_DATA*> &mudProgs(obj->Prototype->mprog.MudProgs());
+  
   SetCharacterColor( AT_GREEN, ch );
 
   if ( !StrCmp( arg2, "list" ) )
     {
-      cnt = 0;
-      if ( !mprog )
+      int cnt = 0;
+
+      if ( mudProgs.empty() )
         {
           ch->Echo("That object has no obj programs.\r\n");
           return;
         }
-      for ( mprg = mprog; mprg; mprg = mprg->Next )
-        ch->Echo("%d>%s %s\r\n%s\r\n",
+
+      for(const MPROG_DATA *mprg : mudProgs)
+        {
+          ch->Echo("%d>%s %s\r\n%s\r\n",
                    ++cnt,
                    MobProgTypeToName( mprg->type ),
                    mprg->arglist,
                    mprg->comlist );
+        }
+      
       return;
     }
 
   if ( !StrCmp( arg2, "edit" ) )
     {
-      if ( !mprog )
+      if ( mudProgs.empty() )
         {
           ch->Echo("That object has no obj programs.\r\n");
           return;
@@ -128,6 +144,8 @@ void do_opedit( Character *ch, char *argument )
 
       argument = OneArgument( argument, arg4 );
 
+      int mptype = 0;
+      
       if ( !IsNullOrEmpty( arg4 ) )
         {
           mptype = GetMudProgFlag( arg4 );
@@ -139,46 +157,59 @@ void do_opedit( Character *ch, char *argument )
             }
         }
       else
-        mptype = -1;
+        {
+          mptype = -1;
+        }
+      
       if ( value < 1 )
         {
           ch->Echo("Program not found.\r\n");
           return;
         }
-      cnt = 0;
-      for ( mprg = mprog; mprg; mprg = mprg->Next )
+
+      int cnt = 0;
+
+      for(MPROG_DATA *mprg : mudProgs)
         {
           if ( ++cnt == value )
             {
               EditMobProg( ch, mprg, mptype, argument );
               obj->Prototype->mprog.progtypes = 0;
-              for ( mprg = mprog; mprg; mprg = mprg->Next )
-                obj->Prototype->mprog.progtypes |= mprg->type;
+
+              for(MPROG_DATA *inner : mudProgs)
+                {
+                  obj->Prototype->mprog.progtypes |= inner->type;
+                }
+              
               return;
             }
         }
+
       ch->Echo("Program not found.\r\n");
       return;
     }
 
   if ( !StrCmp( arg2, "delete" ) )
     {
-      int num;
-      bool found;
-
-      if ( !mprog )
+      if ( mudProgs.empty() )
 	{
           ch->Echo("That object has no obj programs.\r\n");
           return;
         }
+
       argument = OneArgument( argument, arg4 );
+
       if ( value < 1 )
         {
           ch->Echo("Program not found.\r\n");
           return;
         }
-      cnt = 0; found = false;
-      for ( mprg = mprog; mprg; mprg = mprg->Next )
+
+      int cnt = 0;
+      bool found = false;
+      int mptype = 0;
+      
+      for(const MPROG_DATA *mprg : mudProgs)
         {
           if ( ++cnt == value )
             {
@@ -187,102 +218,106 @@ void do_opedit( Character *ch, char *argument )
               break;
             }
         }
+
       if ( !found )
         {
           ch->Echo("Program not found.\r\n");
           return;
         }
-      cnt = num = 0;
-      for ( mprg = mprog; mprg; mprg = mprg->Next )
-        if ( IsBitSet( mprg->type, mptype ) )
-          num++;
-      if ( value == 1 )
-        {
-          mprg_next = obj->Prototype->mprog.mudprogs;
-          obj->Prototype->mprog.mudprogs = mprg_next->Next;
-        }
-      else
-        for ( mprg = mprog; mprg; mprg = mprg_next )
-          {
-            mprg_next = mprg->Next;
-            if ( ++cnt == (value - 1) )
-              {
-                mprg->Next = mprg_next->Next;
-                break;
-              }
-          }
-      FreeMemory( mprg_next->arglist );
-      FreeMemory( mprg_next->comlist );
-      FreeMemory( mprg_next );
+
+      cnt = 0;
+      int num = count_if(std::begin(mudProgs), std::end(mudProgs),
+                         [mptype](const auto mprg)
+                         {
+                           return IsBitSet(mprg->type, mptype);
+                         });
+
+      auto result = Filter(mudProgs,
+                           [&cnt, value](auto)
+                           {
+                             return (++cnt) == value;
+                           });
+      
+      assert(!result.empty());
+
+      MPROG_DATA *progToDelete = result.front();
+      
+      FreeMemory( progToDelete->arglist );
+      FreeMemory( progToDelete->comlist );
+      FreeMemory( progToDelete );
+
       if ( num <= 1 )
-        RemoveBit( obj->Prototype->mprog.progtypes, mptype );
+        {
+          RemoveBit( obj->Prototype->mprog.progtypes, mptype );
+        }
+
       ch->Echo("Program removed.\r\n");
       return;
     }
 
   if ( !StrCmp( arg2, "insert" ) )
     {
-      if ( !mprog )
+      if ( mudProgs.empty() )
         {
           ch->Echo("That object has no obj programs.\r\n");
           return;
         }
-      argument = OneArgument( argument, arg4 );
-      mptype = GetMudProgFlag( arg4 );
+
+      argument = OneArgument( argument, arg3 );
+      int mptype = GetMudProgFlag( arg2 );
+
       if ( mptype == -1 )
         {
           ch->Echo("Unknown program type.\r\n");
           return;
         }
+
       if ( value < 1 )
         {
           ch->Echo("Program not found.\r\n");
           return;
         }
-      if ( value == 1 )
+
+      int cnt = 0;
+
+      auto result = Filter(mudProgs,
+                           [&cnt, value](auto mprg)
+                           {
+                             return (++cnt) == value;
+                           });
+
+      if(!result.empty())
         {
+          MPROG_DATA *mprg = nullptr;
           AllocateMemory( mprg, MPROG_DATA, 1 );
-          obj->Prototype->mprog.progtypes    |= ( 1 << mptype );
+          obj->Prototype->mprog.progtypes |= ( 1 << mptype );
           EditMobProg( ch, mprg, mptype, argument );
-          mprg->Next = mprog;
-          obj->Prototype->mprog.mudprogs = mprg;
-          return;
+          obj->Prototype->mprog.InsertBefore(value, mprg);
         }
-      cnt = 1;
-      for ( mprg = mprog; mprg; mprg = mprg->Next )
+      else
         {
-          if ( ++cnt == value && mprg->Next )
-            {
-              AllocateMemory( mprg_next, MPROG_DATA, 1 );
-              obj->Prototype->mprog.progtypes |= ( 1 << mptype );
-              EditMobProg( ch, mprg_next, mptype, argument );
-              mprg_next->Next = mprg->Next;
-	      mprg->Next        = mprg_next;
-              return;
-            }
+          ch->Echo("Program not found.\r\n");
         }
-      ch->Echo("Program not found.\r\n");
+      
       return;
     }
 
   if ( !StrCmp( arg2, "add" ) )
     {
-      mptype = GetMudProgFlag( arg3 );
+      int mptype = GetMudProgFlag( arg2 );
+
       if ( mptype == -1 )
         {
           ch->Echo("Unknown program type.\r\n");
           return;
         }
-      if ( mprog != NULL )
-        for ( ; mprog->Next; mprog = mprog->Next );
+
+      MPROG_DATA *mprg = nullptr;
       AllocateMemory( mprg, MPROG_DATA, 1 );
-      if ( mprog )
-        mprog->Next                      = mprg;
-      else
-        obj->Prototype->mprog.mudprogs        = mprg;
-      obj->Prototype->mprog.progtypes        |= ( 1 << mptype );
+
+      obj->Prototype->mprog.Add(mprg);
+      obj->Prototype->mprog.progtypes |= ( 1 << mptype );
       EditMobProg( ch, mprg, mptype, argument );
-      mprg->Next = NULL;
       return;
     }
 

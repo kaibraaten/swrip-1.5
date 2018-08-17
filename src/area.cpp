@@ -697,7 +697,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
       else
         {
           oldobj = false;
-          AllocateMemory( pObjIndex, ProtoObject, 1 );
+          pObjIndex = new ProtoObject();
         }
 
       fBootDb = tmpBootDb;
@@ -1593,11 +1593,10 @@ static MPROG_DATA *ObjProgReadFile( const char *f, MPROG_DATA *mprg, ProtoObject
  */
 static void LoadObjProgs( Area *tarea, FILE *fp )
 {
-  ProtoObject *iObj;
-  MPROG_DATA     *original;
-  MPROG_DATA     *working;
-  char            letter;
-  int             value;
+  ProtoObject *iObj = nullptr;
+  MPROG_DATA *working = nullptr;
+  char letter = 0;
+  int value = 0;
 
   for ( ; ; )
     switch ( letter = ReadChar( fp, Log, fBootDb ) )
@@ -1625,16 +1624,9 @@ static void LoadObjProgs( Area *tarea, FILE *fp )
         /* Go to the end of the prog command list if other commands
            exist */
 
-        if ( (original = iObj->mprog.mudprogs) != NULL )
-          for ( ; original->Next; original = original->Next );
-
         AllocateMemory( working, MPROG_DATA, 1 );
-        if ( original )
-          original->Next = working;
-        else
-          iObj->mprog.mudprogs = working;
+        iObj->mprog.Add(working);
         working = ObjProgReadFile( ReadWord( fp, Log, fBootDb ), working, iObj );
-        working->Next = NULL;
         ReadToEndOfLine( fp, Log, fBootDb );
         break;
       }
@@ -1656,55 +1648,63 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
       Log->Bug( "%s: vnum %d OBJPROG char", __FUNCTION__, pObjIndex->Vnum );
       exit( 1 );
     }
+
   AllocateMemory( mprg, MPROG_DATA, 1 );
-  pObjIndex->mprog.mudprogs = mprg;
+  pObjIndex->mprog.Add(mprg);
 
   while ( !done )
     {
       mprg->type = MudProgNameToType( ReadWord( fp, Log, fBootDb ) );
+
       switch ( mprg->type )
         {
         case ERROR_PROG:
           Log->Bug( "%s: vnum %d OBJPROG type.", __FUNCTION__, pObjIndex->Vnum );
           exit( 1 );
           break;
+
         case IN_FILE_PROG:
           mprg = ObjProgReadFile( ReadStringToTilde( fp, Log, fBootDb ), mprg,pObjIndex );
           ReadToEndOfLine( fp, Log, fBootDb );
+
           switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
-              AllocateMemory( mprg->Next, MPROG_DATA, 1 );
-              mprg = mprg->Next;
+              AllocateMemory( mprg, MPROG_DATA, 1 );
+              pObjIndex->mprog.Add(mprg);
               break;
+
             case '|':
-	       mprg->Next = NULL;
               ReadToEndOfLine( fp, Log, fBootDb );
               done = true;
               break;
+
             default:
               Log->Bug( "%s: vnum %d bad OBJPROG.", __FUNCTION__, pObjIndex->Vnum );
               exit( 1 );
               break;
             }
           break;
+
         default:
           pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg->type;
           mprg->arglist        = ReadStringToTilde( fp, Log, fBootDb );
           ReadToEndOfLine( fp, Log, fBootDb );
           mprg->comlist        = ReadStringToTilde( fp, Log, fBootDb );
           ReadToEndOfLine( fp, Log, fBootDb );
+
           switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
-              AllocateMemory( mprg->Next, MPROG_DATA, 1 );
-              mprg = mprg->Next;
+              AllocateMemory( mprg, MPROG_DATA, 1 );
+              pObjIndex->mprog.Add(mprg);
               break;
+
             case '|':
-              mprg->Next = NULL;
               ReadToEndOfLine( fp, Log, fBootDb );
               done = true;
               break;
+
             default:
               Log->Bug( "%s: vnum %d bad OBJPROG.", __FUNCTION__, pObjIndex->Vnum );
               exit( 1 );
@@ -2180,10 +2180,11 @@ void CloseArea( Area *pArea )
               FreeMemory(paf);
             }
 
-          for ( MPROG_DATA *mprog = oid->mprog.mudprogs, *mprog_next = nullptr;
-                mprog; mprog = mprog_next )
+          std::list<MPROG_DATA*> objProgs(oid->mprog.MudProgs());
+
+          for(MPROG_DATA *mprog : objProgs)
             {
-              mprog_next = mprog->Next;
+              oid->mprog.Remove(mprog);
               FreeMemory(mprog->arglist);
               FreeMemory(mprog->comlist);
               FreeMemory(mprog);

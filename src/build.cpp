@@ -546,12 +546,15 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
                   && IS_VALID_SN(paf->Modifier))
                  ? SkillTable[paf->Modifier]->Slot : paf->Modifier             );
 
-      if ( pObjIndex->mprog.mudprogs )
+      if ( !pObjIndex->mprog.MudProgs().empty() )
         {
-          for ( const MPROG_DATA *mprog = pObjIndex->mprog.mudprogs; mprog; mprog = mprog->Next )
-            fprintf( fpout, "> %s %s~\n%s~\n",
-                     MobProgTypeToName( mprog->type ),
-                     mprog->arglist, StripCarriageReturn(mprog->comlist) );
+          for(const MPROG_DATA *mprog : pObjIndex->mprog.MudProgs())
+            {
+              fprintf( fpout, "> %s %s~\n%s~\n",
+                       MobProgTypeToName( mprog->type ),
+                       mprog->arglist, StripCarriageReturn(mprog->comlist) );
+            }
+          
           fprintf( fpout, "|\n" );
         }
     }
