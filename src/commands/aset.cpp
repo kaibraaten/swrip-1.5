@@ -73,11 +73,10 @@ void do_aset( Character *ch, char *argument )
           if (tarea->Planet)
             {
               Planet *old_planet = tarea->Planet;
-              UNLINK(tarea, old_planet->FirstArea, old_planet->LastArea, NextOnPlanet, PreviousOnPlanet);
+              old_planet->Remove(tarea);
             }
 
-          tarea->Planet = planet;
-	  LINK(tarea, planet->FirstArea, planet->LastArea, NextOnPlanet, PreviousOnPlanet);
+          planet->Add(tarea);
           Planets->Save(planet);
         }
       return;

@@ -39,7 +39,7 @@ void do_setplanet( Character *ch, char *argument )
     {
       if( Planets->FindByName(argument) != nullptr)
 	{
-   ch->Echo("There's already another planet with that name.\r\n" );
+          ch->Echo("There's already another planet with that name.\r\n" );
 	  return;
 	}
       

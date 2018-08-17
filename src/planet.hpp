@@ -2,20 +2,31 @@
 #define _SWRIP_PLANET_HPP_
 
 #include <string>
+#include <list>
 #include <utility/repository.hpp>
 #include "types.hpp"
 
-struct Planet
+class Planet
 {
-  struct Spaceobject *Spaceobject;
-  Area *FirstArea;
-  Area *LastArea;
-  char *Name;
-  long BaseValue;
-  Clan *GovernedBy;
-  int Population;
-  int Flags;
-  float PopularSupport;
+public:
+  Planet();
+  virtual ~Planet();
+
+  const std::list<Area*> &Areas() const;
+  void Add(Area *area);
+  void Remove(Area *area);
+  
+  struct Spaceobject *Spaceobject = nullptr;
+  char *Name = nullptr;
+  long BaseValue = 0;
+  Clan *GovernedBy = nullptr;
+  int Population = 0;
+  int Flags = 0;
+  float PopularSupport = 0.0;
+
+private:
+  struct Impl;
+  Impl *pImpl;
 };
 
 long GetTaxes( const Planet *planet );

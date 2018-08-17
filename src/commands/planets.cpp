@@ -38,13 +38,11 @@ static bool ShowEntry( const Planet *planet, const Character *ch )
 
   if ( IsImmortal(ch) )
     {
-      const Area *area = NULL;
-
       ch->Echo("&WAreas: &G");
 
-      for ( area = planet->FirstArea ; area ; area = area->NextOnPlanet )
+      for(const Area *area : planet->Areas())
 	{
-   ch ->Echo("%s,  ", area->Filename );
+          ch ->Echo("%s,  ", area->Filename );
 	}
 
       ch->Echo("\r\n" );

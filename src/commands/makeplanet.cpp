@@ -4,8 +4,6 @@
 
 void do_makeplanet( Character *ch, char *argument )
 {
-  Planet *planet = nullptr;
-
   if ( IsNullOrEmpty( argument ) )
     {
       ch->Echo("Usage: makeplanet <planet name>\r\n");
@@ -18,8 +16,8 @@ void do_makeplanet( Character *ch, char *argument )
       return;
     }
 
-  AllocateMemory( planet, Planet, 1 );
+  Planet *planet = new Planet();
   Planets->Add(planet);
-  planet->Name          = CopyString( argument );
+  planet->Name = CopyString( argument );
 }
 
