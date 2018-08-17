@@ -1651,7 +1651,7 @@ Room *MakeRoom( vnum_t vnum )
  */
 ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
 {
-  ProtoObject *pObjIndex = NULL, *cObjIndex = NULL;
+  ProtoObject *cObjIndex = NULL;
   char buf[MAX_STRING_LENGTH];
   int iHash = 0;
 
@@ -1660,7 +1660,7 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
       cObjIndex = GetProtoObject( cvnum );
     }
 
-  AllocateMemory( pObjIndex, ProtoObject, 1 );
+  ProtoObject *pObjIndex = new ProtoObject();
 
   pObjIndex->Vnum = vnum;
   pObjIndex->Name = CopyString( name );

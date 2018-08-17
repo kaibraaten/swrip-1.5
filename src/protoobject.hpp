@@ -5,6 +5,7 @@
 #include <array>
 #include "types.hpp"
 #include "constants.hpp"
+#include "mprog.hpp"
 
 class ProtoObject
 {
@@ -35,11 +36,7 @@ public:
   short             Layers = 0;
   int               Rent = 0;                   /* Unused */
 
-  struct
-  {
-    MPROG_DATA *mudprogs = nullptr;
-    int progtypes = 0;
-    } mprog;
+  MProg mprog;
 };
 
 #endif

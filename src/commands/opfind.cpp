@@ -9,14 +9,10 @@ static void opfind_help (Character *ch);
  */
 void do_opfind( Character *ch, char *argument )   /* Gorog */
 {
-  ProtoObject *pObj = NULL;
-  MPROG_DATA *pProg = NULL;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
-  int lo_vnum = MIN_VNUM, hi_vnum = MAX_VNUM;
-  int tot_vnum = 0, tot_hits = 0;
-  int i = 0, disp_cou=0, disp_limit = 0;
+  vnum_t lo_vnum = MIN_VNUM, hi_vnum = MAX_VNUM;
 
   argument = OneArgument( argument, arg1 );   /* display_limit */
   argument = OneArgument( argument, arg2 );
@@ -27,7 +23,7 @@ void do_opfind( Character *ch, char *argument )   /* Gorog */
       return;
     }
 
-  disp_limit = atoi (arg1);
+  int disp_limit = atoi (arg1);
   disp_limit = umax(0, disp_limit);
 
   if ( StrCmp(arg2, "mud") )
@@ -36,7 +32,7 @@ void do_opfind( Character *ch, char *argument )   /* Gorog */
 
       if ( IsNullOrEmpty( arg3 ) || IsNullOrEmpty( argument )
            || !IsNumber(arg2) || !IsNumber(arg3) )
-	{
+        {
           opfind_help(ch);
           return;
         }
@@ -52,24 +48,38 @@ void do_opfind( Character *ch, char *argument )   /* Gorog */
             }
         }
     }
+
   if ( IsNullOrEmpty( argument ) )
     {
       opfind_help(ch);
       return;
     }
 
-  for (i = lo_vnum; i <= hi_vnum; i++)
+  int tot_hits = 0;
+  int disp_cou = 0;
+
+  for (vnum_t i = lo_vnum; i <= hi_vnum; i++)
     {
-      if ( (pObj=GetProtoObject(i)) && (pProg=pObj->mprog.mudprogs) )
+      const ProtoObject *obj = GetProtoObject(i);
+
+      if ( obj != nullptr && !obj->mprog.MudProgs().empty())
         {
-          tot_vnum = 0;
-          for ( ; pProg; pProg=pProg->Next)
-            tot_vnum += CountStringOccurances(pProg->comlist, argument);
+          int tot_vnum = 0;
+
+          for(const MPROG_DATA *pProg : obj->mprog.MudProgs())
+            {
+              tot_vnum += CountStringOccurances(pProg->comlist, argument);
+            }
+
           tot_hits += tot_vnum;
+
           if ( tot_vnum && ++disp_cou <= disp_limit)
-            ch->Echo("%5d %5d %5d\r\n", disp_cou, i, tot_vnum);
+            {
+              ch->Echo("%5d %5d %5d\r\n", disp_cou, i, tot_vnum);
+            }
         }
     }
+
   ch->Echo("Total: %10d\r\n", tot_hits);
 }
 

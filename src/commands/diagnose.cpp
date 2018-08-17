@@ -104,11 +104,13 @@ void do_diagnose( Character *ch, char *argument )
   if (!StrCmp(arg1, "of")) {
     if (*arg2)                                    /* empty arg gets dft number */
       num = atoi (arg2);
+
     if (num > DIAG_MAX_SIZE  || num < 1) {        /* display num out of bounds */
       diagnose_help(ch);
       return;
     }
-    AllocateMemory(freq, ProtoObject *, num);           /* dynamic freq array */
+
+    freq = new ProtoObject*[num];
 
     for (cou = 0; cou < num; cou++)                /* initialize freq array */
       freq[cou] = NULL;                          /* to NULL pointers */
@@ -125,7 +127,7 @@ void do_diagnose( Character *ch, char *argument )
     for (cou = 0; cou < num && freq[cou]; cou++)
       ch->Echo("%3d%8d%8d\r\n", cou+1,freq[cou]->Vnum,freq[cou]->Count);
 
-    FreeMemory(freq);
+    delete[] freq;
     return;
   }
 

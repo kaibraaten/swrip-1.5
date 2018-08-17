@@ -2597,10 +2597,9 @@ void ReleaseSupermob( void )
 static bool ObjProgPercentCheck( Character *mob, Character *actor, Object *obj,
 				 void *vo, int type)
 {
-  MPROG_DATA * mprg;
   bool executed = false;
 
-  for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
+  for(MPROG_DATA *mprg : obj->Prototype->mprog.MudProgs())
     {
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
@@ -2858,16 +2857,12 @@ void ObjProgActTrigger( const std::string &buf, Object *mobj, Character *ch,
 
       AllocateMemory(tmp_act, MPROG_ACT_LIST, 1);
 
-      if ( mobj->mprog.mpactnum > 0 )
-        tmp_act->Next = mobj->mprog.mpact;
-      else
-        tmp_act->Next = NULL;
+      mobj->mprog.Add(tmp_act);
 
-      mobj->mprog.mpact = tmp_act;
-      mobj->mprog.mpact->buf = CopyString(buf);
-      mobj->mprog.mpact->ch = ch;
-      mobj->mprog.mpact->obj = obj;
-      mobj->mprog.mpact->vo = vo;
+      tmp_act->buf = CopyString(buf);
+      tmp_act->ch = ch;
+      tmp_act->obj = obj;
+      tmp_act->vo = vo;
       mobj->mprog.mpactnum++;
       ObjectActAdd(mobj);
     }
@@ -2876,7 +2871,7 @@ void ObjProgActTrigger( const std::string &buf, Object *mobj, Character *ch,
 static void ObjProgWordlistCheck( const std::string &arg, Character *mob, Character *actor,
 				  Object *obj, void *vo, int type, Object *iobj )
 {
-  for ( MPROG_DATA *mprg = iobj->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
+  for(MPROG_DATA *mprg : iobj->Prototype->mprog.MudProgs())
     {
       if ( mprg->type & type )
 	{
@@ -3351,18 +3346,18 @@ void ObjectActUpdate( void )
   while ( (runner = obj_act_list) != NULL )
     {
       Object *obj = (Object*)runner->vo;
-      MPROG_ACT_LIST *mpact;
 
-      while ( (mpact = obj->mprog.mpact) != NULL )
+      std::list<MPROG_ACT_LIST*> actLists(obj->mprog.ActLists());
+
+      for(MPROG_ACT_LIST *mpact :actLists)
         {
           ObjProgWordlistCheck(mpact->buf, supermob, mpact->ch, mpact->obj,
                                mpact->vo, ACT_PROG, obj);
-          obj->mprog.mpact = mpact->Next;
+          obj->mprog.Remove(mpact);
           FreeMemory(mpact->buf);
           FreeMemory(mpact);
         }
 
-      obj->mprog.mpact = NULL;
       obj->mprog.mpactnum = 0;
       obj_act_list = runner->Next;
       FreeMemory(runner);

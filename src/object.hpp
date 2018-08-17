@@ -5,6 +5,7 @@
 #include <string>
 #include "types.hpp"
 #include "constants.hpp"
+#include "mprog.hpp"
 
 class Object
 {
@@ -43,12 +44,7 @@ public:
   short             Count = 1;          /* support for object grouping */
   int               Serial = 0;         /* serial number               */
 
-  struct
-  {
-    MPROG_ACT_LIST *mpact = nullptr;
-    int             mpactnum = 0;
-    short           mpscriptpos = 0;
-  } mprog;
+  MProg mprog;
 };
 
 #endif
