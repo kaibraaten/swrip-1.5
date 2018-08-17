@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 extern char *spell_target_name;
 
@@ -37,7 +38,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
         case ITEM_PILL:
         case ITEM_SCROLL:
         case ITEM_POTION:
-   ch->Echo("Level %d spells of:", obj->Value[0] );
+          ch->Echo("Level %d spells of:", obj->Value[0] );
 
           if ( obj->Value[1] >= 0 && (sktmp=GetSkill(obj->Value[1])) != NULL )
             {
@@ -128,7 +129,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
           break;
 
         case ITEM_ARMOR:
-   ch->Echo("Current armor class is %d. ( based on current condition )\r\n", obj->Value[0] );
+          ch->Echo("Current armor class is %d. ( based on current condition )\r\n", obj->Value[0] );
           ch->Echo("Maximum armor class is %d. ( based on top condition )\r\n", obj->Value[1] );
           ch->Echo("Applied armor class is %d. ( based condition and location worn )\r\n", GetObjectArmorClass(obj, obj->WearLoc) );
           break;

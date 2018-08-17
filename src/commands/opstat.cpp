@@ -1,13 +1,14 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 /* Opstat - Scryn 8/12*/
 void do_opstat( Character *ch, char *argument )
 {
   char        arg[MAX_INPUT_LENGTH];
-  MPROG_DATA *mprg;
-  Object   *obj;
+  MPROG_DATA *mprg = nullptr;
+  Object   *obj = nullptr;
 
   OneArgument( argument, arg );
 

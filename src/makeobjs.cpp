@@ -28,6 +28,7 @@
 #include "area.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 /*
  * Make a fire.

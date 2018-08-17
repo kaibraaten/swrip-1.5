@@ -46,7 +46,7 @@ struct ProtoMobile;
 struct Note;
 class Board;
 class Object;
-struct ProtoObject;
+class ProtoObject;
 class PCData;
 struct Reset;
 class Room;

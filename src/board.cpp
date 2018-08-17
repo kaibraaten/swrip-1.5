@@ -32,6 +32,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 /* Defines for voting on notes. -- Narn */
 #define VOTE_NONE 0

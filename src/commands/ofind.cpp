@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "protoobject.hpp"
 
 void do_ofind( Character *ch, char *argument )
 {

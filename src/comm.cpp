@@ -39,6 +39,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 /*
  * Socket and TCP/IP stuff.

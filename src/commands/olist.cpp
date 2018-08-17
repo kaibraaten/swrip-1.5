@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "protoobject.hpp"
 
 void do_olist( Character *ch, char *argument )
 {

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 bool spec_janitor( Character *ch )
 {

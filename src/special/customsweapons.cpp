@@ -4,6 +4,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 bool spec_customs_weapons( Character *ch )
 {

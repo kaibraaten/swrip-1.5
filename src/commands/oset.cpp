@@ -6,6 +6,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "object.hpp"
+#include "protoobject.hpp"
 
 void do_oset( Character *ch, char *argument )
 {
