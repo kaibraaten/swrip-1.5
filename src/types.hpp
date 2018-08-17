@@ -56,7 +56,7 @@ struct TimeInfo;
 struct HourMinSec;
 struct Weather;
 struct Bounty;
-struct Planet;
+class Planet;
 struct Storeroom;
 struct Spaceobject;
 class Ship;

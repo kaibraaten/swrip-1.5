@@ -20,8 +20,9 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <ctype.h>
-#include <string.h>
+#include <cassert>
+#include <cctype>
+#include <cstring>
 #include "mud.hpp"
 #include "clan.hpp"
 #include "spaceobject.hpp"
@@ -30,6 +31,47 @@
 #include "area.hpp"
 
 PlanetRepository *Planets = nullptr;
+
+/////////////////////////////////////////////////////
+struct Planet::Impl
+{
+  std::list<Area*> Areas;
+};
+
+/////////////////////////////////////////////////////
+Planet::Planet()
+  : pImpl(new Impl())
+{
+  
+}
+
+Planet::~Planet()
+{
+  delete pImpl;
+}
+
+const std::list<Area*> &Planet::Areas() const
+{
+  return pImpl->Areas;
+}
+
+void Planet::Add(Area *area)
+{
+  assert(area->Planet == nullptr);
+  
+  pImpl->Areas.push_back(area);
+  area->Planet = this;
+}
+
+void Planet::Remove(Area *area)
+{
+  assert(area->Planet != nullptr);
+  
+  pImpl->Areas.remove(area);
+  area->Planet = nullptr;
+}
+
+////////////////////////////////////////////////////
 
 static void LoadPlanetAreas( lua_State *L, Planet *planet )
 {
@@ -46,9 +88,7 @@ static void LoadPlanetAreas( lua_State *L, Planet *planet )
 
 	  if( area )
 	    {
-	      area->Planet = planet;
-	      LINK( area, planet->FirstArea, planet->LastArea,
-		    NextOnPlanet, PreviousOnPlanet);	      
+              planet->Add(area);
 	    }
 
 	  lua_pop( L, 1 );
@@ -63,10 +103,9 @@ static int L_PlanetEntry( lua_State *L )
   int idx = lua_gettop( L );
   const int topAtStart = idx;
   int topAfterGets = 0;
-  Planet *planet = NULL;
   luaL_checktype( L, 1, LUA_TTABLE );
 
-  AllocateMemory( planet, Planet, 1 );
+  Planet *planet = new Planet();
 
   lua_getfield( L, idx, "Name" );
   lua_getfield( L, idx, "BaseValue" );
@@ -126,14 +165,13 @@ long GetTaxes( const Planet *planet )
 
 static void LuaPushAreas( lua_State *L, const Planet *planet )
 {
-  if( planet->FirstArea )
+  if( !planet->Areas().empty() )
     {
-      const Area *area = NULL;
       int idx = 1;
       lua_pushstring( L, "Areas" );
       lua_newtable( L );
 
-      for( area = planet->FirstArea; area; area = area->NextOnPlanet, ++idx )
+      for(const Area *area : planet->Areas())
 	{
 	  lua_pushinteger( L, idx );
 	  lua_pushstring( L, area->Filename );
@@ -215,4 +253,3 @@ PlanetRepository *NewPlanetRepository()
 {
   return new LuaPlanetRepository();
 }
-
