@@ -9,6 +9,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "protomob.hpp"
 
 int TopSN = 0;
 int TopHerb = 0;

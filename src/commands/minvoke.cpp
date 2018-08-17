@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "protomob.hpp"
 
 void do_minvoke( Character *ch, char *argument )
 {

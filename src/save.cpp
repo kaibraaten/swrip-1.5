@@ -47,6 +47,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "protomob.hpp"
 
 /*
  * Increment with every major format change.

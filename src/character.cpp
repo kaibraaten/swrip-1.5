@@ -33,6 +33,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "protomob.hpp"
 
 static bool FindComlink( const Object *element, const Object **comlink );
 

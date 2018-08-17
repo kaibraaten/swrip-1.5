@@ -91,6 +91,7 @@ _OBJ =  act_comm.o \
 	pcdata.o \
 	planet.o \
 	playerrepository.o \
+	protomob.o \
 	protoobject.o \
 	reset.o \
 	room.o \

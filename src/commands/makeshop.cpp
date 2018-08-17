@@ -1,12 +1,13 @@
 #include "mud.hpp"
 #include "shop.hpp"
 #include "character.hpp"
+#include "protomob.hpp"
 
 void do_makeshop( Character *ch, char *argument )
 {
-  Shop *shop;
-  short vnum;
-  ProtoMobile *mob;
+  Shop *shop = nullptr;
+  vnum_t vnum = INVALID_VNUM;
+  ProtoMobile *mob = nullptr;
 
   if ( IsNullOrEmpty( argument ) )
     {

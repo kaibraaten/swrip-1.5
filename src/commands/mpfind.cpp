@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "protomob.hpp"
 
 static void mpfind_help (Character *ch);
 

@@ -6,6 +6,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "protomob.hpp"
 
 void do_mset( Character *ch, char *argument )
 {

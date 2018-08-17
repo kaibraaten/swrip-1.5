@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "protomob.hpp"
 
 void do_mlist( Character *ch, char *argument )
 {

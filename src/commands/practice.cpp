@@ -3,6 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "protomob.hpp"
 
 void do_practice( Character *ch, char *argument )
 {

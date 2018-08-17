@@ -34,6 +34,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "protomob.hpp"
 
 extern Character *gch_prev;
 extern Object *gobj_prev;

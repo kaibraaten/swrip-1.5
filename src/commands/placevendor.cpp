@@ -5,6 +5,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "protomob.hpp"
 
 void do_placevendor (Character *ch, char *argument)
 {

@@ -41,6 +41,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "protomob.hpp"
 
 /*
  * Local functions.

@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "object.hpp"
+#include "protomob.hpp"
 
 static void appraise_all( Character *ch, Character *keeper, char *fixstr );
 

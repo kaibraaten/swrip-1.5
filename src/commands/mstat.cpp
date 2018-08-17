@@ -6,6 +6,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "protomob.hpp"
 
 void do_mstat( Character *ch, char *argument )
 {

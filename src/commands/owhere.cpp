@@ -4,6 +4,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "protomob.hpp"
 
 static void trunc1(char *s, size_t len);
 

@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "shop.hpp"
 #include "character.hpp"
+#include "protomob.hpp"
 
 void do_shopset( Character *ch, char *argument )
 {
