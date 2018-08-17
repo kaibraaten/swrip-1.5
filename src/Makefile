@@ -84,6 +84,7 @@ _OBJ =  act_comm.o \
 	mapper.o \
 	misc.o \
 	missile.o \
+	mprog.o \
 	mud_prog.o \
 	nanny.o \
 	object.o \
