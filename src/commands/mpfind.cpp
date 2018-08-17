@@ -9,15 +9,10 @@ static void mpfind_help (Character *ch);
  */
 void do_mpfind( Character *ch, char *argument )   /* Gorog */
 {
-  ProtoMobile *pMob = NULL;
-  MPROG_DATA *pProg = NULL;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
-  int lo_vnum = MIN_VNUM, hi_vnum= MAX_VNUM;
-  int tot_vnum;
-  int tot_hits=0;
-  int i, disp_cou=0, disp_limit;
+  vnum_t lo_vnum = MIN_VNUM, hi_vnum= MAX_VNUM;
 
   argument = OneArgument( argument, arg1 );   /* display_limit */
   argument = OneArgument( argument, arg2 );
@@ -28,7 +23,7 @@ void do_mpfind( Character *ch, char *argument )   /* Gorog */
       return;
     }
 
-  disp_limit = atoi (arg1);
+  int disp_limit = atoi (arg1);
   disp_limit = umax(0, disp_limit);
 
   if ( StrCmp(arg2, "mud") )
@@ -44,6 +39,7 @@ void do_mpfind( Character *ch, char *argument )   /* Gorog */
         {
           lo_vnum = urange(MIN_VNUM, atoi(arg2), MAX_VNUM);
           hi_vnum = urange(MIN_VNUM, atoi(arg3), MAX_VNUM);
+
           if ( lo_vnum > hi_vnum )
             {
               mpfind_help(ch);
@@ -58,18 +54,31 @@ void do_mpfind( Character *ch, char *argument )   /* Gorog */
       return;
     }
 
-  for (i = lo_vnum; i <= hi_vnum; i++)
+  int tot_hits = 0;
+  int disp_cou = 0;
+  
+  for (vnum_t i = lo_vnum; i <= hi_vnum; i++)
     {
-      if ( (pMob=GetProtoMobile(i)) && (pProg=pMob->mprog.mudprogs) )
+      const ProtoMobile *pMob = GetProtoMobile(i);
+      
+      if ( pMob != nullptr && !pMob->mprog.MudProgs().empty() )
         {
-          tot_vnum = 0;
-          for ( ; pProg; pProg=pProg->Next)
-            tot_vnum += CountStringOccurances(pProg->comlist, argument);
+          int tot_vnum = 0;
+
+          for(const MPROG_DATA *pProg : pMob->mprog.MudProgs())
+            {
+              tot_vnum += CountStringOccurances(pProg->comlist, argument);
+            }
+          
           tot_hits += tot_vnum;
+
           if ( tot_vnum && ++disp_cou <= disp_limit)
-            ch->Echo("%5d %5d %5d\r\n", disp_cou, i, tot_vnum);
+            {
+              ch->Echo("%5d %5d %5d\r\n", disp_cou, i, tot_vnum);
+            }
         }
     }
+  
   ch->Echo("Total: %10d\r\n", tot_hits);
 }
 

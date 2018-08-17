@@ -241,7 +241,7 @@ void do_opedit( Character *ch, char *argument )
       assert(!result.empty());
 
       MPROG_DATA *progToDelete = result.front();
-      
+      obj->Prototype->mprog.Remove(progToDelete);
       FreeMemory( progToDelete->arglist );
       FreeMemory( progToDelete->comlist );
       FreeMemory( progToDelete );

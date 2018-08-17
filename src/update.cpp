@@ -2256,9 +2256,9 @@ static void AggroUpdate( void )
 
       if ( !CharacterDiedRecently(wch) && wch->mprog.mpactnum > 0 )
         {
-          MPROG_ACT_LIST * tmp_act = NULL;
+          std::list<MPROG_ACT_LIST*> actLists(wch->mprog.ActLists());
 
-          while ( (tmp_act = wch->mprog.mpact) != NULL )
+          for(MPROG_ACT_LIST *tmp_act : actLists)
             {
               if ( tmp_act->obj && IsObjectExtracted(tmp_act->obj) )
 		{
@@ -2271,13 +2271,12 @@ static void AggroUpdate( void )
 					tmp_act->obj, tmp_act->vo, ACT_PROG );
 		}
 
-              wch->mprog.mpact = tmp_act->Next;
+              wch->mprog.Remove(tmp_act);
               FreeMemory(tmp_act->buf);
               FreeMemory(tmp_act);
             }
 
           wch->mprog.mpactnum = 0;
-          wch->mprog.mpact    = NULL;
         }
 
       mob_act_list = apdtmp->Next;

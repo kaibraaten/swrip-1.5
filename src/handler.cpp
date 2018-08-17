@@ -2173,8 +2173,6 @@ void CleanObject( ProtoObject *obj )
  */
 void CleanMobile( ProtoMobile *mob )
 {
-  MPROG_DATA *mprog, *mprog_next;
-
   FreeMemory( mob->Name );
   FreeMemory( mob->ShortDescr );
   FreeMemory( mob->LongDescr  );
@@ -2185,13 +2183,16 @@ void CleanMobile( ProtoMobile *mob )
   mob->RepairShop    = NULL;
   mob->mprog.progtypes        = 0;
 
-  for ( mprog = mob->mprog.mudprogs; mprog; mprog = mprog_next )
+  std::list<MPROG_DATA*> mobProgs(mob->mprog.MudProgs());
+  
+  for(MPROG_DATA *mprog : mobProgs)
     {
-      mprog_next = mprog->Next;
+      mob->mprog.Remove(mprog);
       FreeMemory( mprog->arglist );
       FreeMemory( mprog->comlist );
       FreeMemory( mprog );
     }
+
   mob->Count     = 0;
   mob->Killed          = 0;
   mob->Sex       = SEX_NEUTRAL;

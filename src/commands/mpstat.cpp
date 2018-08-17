@@ -8,9 +8,7 @@
  */
 void do_mpstat( Character *ch, char *argument )
 {
-  char        arg[MAX_INPUT_LENGTH];
-  MPROG_DATA *mprg;
-  Character  *victim;
+  char arg[MAX_INPUT_LENGTH];
 
   OneArgument( argument, arg );
 
@@ -20,7 +18,9 @@ void do_mpstat( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+  Character *victim = GetCharacterAnywhere( ch, arg );
+  
+  if ( victim == nullptr )
     {
       ch->Echo("They aren't here.\r\n");
       return;
@@ -32,7 +32,7 @@ void do_mpstat( Character *ch, char *argument )
       return;
     }
 
-  if ( !( victim->Prototype->mprog.progtypes ) )
+  if ( victim->Prototype->mprog.MudProgs().empty() )
     {
       ch->Echo("That Mobile has no Programs set.\r\n");
       return;
@@ -55,10 +55,12 @@ void do_mpstat( Character *ch, char *argument )
            victim->TopLevel,        victim->Alignment,
            GetArmorClass( victim ),    victim->Gold);
 
-  for ( mprg = victim->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
-    ch->Echo(">%s %s\r\n%s\r\n",
+  for(const MPROG_DATA *mprg : victim->Prototype->mprog.MudProgs())
+    {
+      ch->Echo(">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),
                mprg->arglist,
                mprg->comlist );
+    }
 }
 

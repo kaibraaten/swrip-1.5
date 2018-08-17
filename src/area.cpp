@@ -468,7 +468,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
       else
         {
           oldmob = false;
-          AllocateMemory( pMobIndex, ProtoMobile, 1 );
+          pMobIndex = new ProtoMobile();
         }
 
       fBootDb = tmpBootDb;
@@ -1263,11 +1263,10 @@ static void LoadRanges( Area *tarea, FILE *fp )
 
 static void LoadMudProgs( Area *tarea, FILE *fp )
 {
-  ProtoMobile *iMob;
-  MPROG_DATA     *original;
-  MPROG_DATA     *working;
-  char            letter;
-  int             value;
+  ProtoMobile *iMob = nullptr;
+  MPROG_DATA *working = nullptr;
+  char letter = 0;
+  int value = 0;
 
   for ( ; ; )
     switch ( letter = ReadChar( fp, Log, fBootDb ) )
@@ -1292,21 +1291,10 @@ static void LoadMudProgs( Area *tarea, FILE *fp )
             exit( 1 );
           }
 
-        /* Go to the end of the prog command list if other commands
-           exist */
-
-        if ( (original = iMob->mprog.mudprogs) != NULL )
-          for ( ; original->Next; original = original->Next );
-
         AllocateMemory( working, MPROG_DATA, 1 );
-
-        if ( original )
-          original->Next = working;
-        else
-          iMob->mprog.mudprogs = working;
+        iMob->mprog.Add(working);
 
         working = MobProgReadFile( ReadWord( fp, Log, fBootDb ), working, iMob );
-        working->Next = NULL;
         ReadToEndOfLine( fp, Log, fBootDb );
         break;
       }
@@ -1436,75 +1424,81 @@ static MPROG_DATA *MobProgReadFile( const char *f, MPROG_DATA *mprg, ProtoMobile
 
 static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
 {
-  MPROG_DATA *mprg;
-  char        letter;
-  bool        done = false;
+  MPROG_DATA *mprg = nullptr;
+  char letter = 0;
+  bool done = false;
 
   if ( ( letter = ReadChar( fp, Log, fBootDb ) ) != '>' )
     {
       Log->Bug( "%s: vnum %d MUDPROG char", __FUNCTION__, pMobIndex->Vnum );
       exit( 1 );
     }
+
   AllocateMemory( mprg, MPROG_DATA, 1 );
-  pMobIndex->mprog.mudprogs = mprg;
+  pMobIndex->mprog.Add(mprg);
 
   while ( !done )
     {
       mprg->type = MudProgNameToType( ReadWord( fp, Log, fBootDb ) );
+
       switch ( mprg->type )
         {
         case ERROR_PROG:
 	  Log->Bug( "%s: vnum %d MUDPROG type.", __FUNCTION__, pMobIndex->Vnum );
           exit( 1 );
           break;
+
         case IN_FILE_PROG:
           mprg = MobProgReadFile( ReadStringToTilde( fp, Log, fBootDb ), mprg,pMobIndex );
           ReadToEndOfLine( fp, Log, fBootDb );
+
           switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
-              AllocateMemory( mprg->Next, MPROG_DATA, 1 );
-              mprg = mprg->Next;
+              AllocateMemory( mprg, MPROG_DATA, 1 );
+              pMobIndex->mprog.Add(mprg);
               break;
+
             case '|':
-              mprg->Next = NULL;
               ReadToEndOfLine( fp, Log, fBootDb );
               done = true;
               break;
+
             default:
               Log->Bug( "%s: vnum %d bad MUDPROG.", __FUNCTION__, pMobIndex->Vnum );
               exit( 1 );
               break;
             }
           break;
+
         default:
           pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg->type;
           mprg->arglist        = ReadStringToTilde( fp, Log, fBootDb );
           ReadToEndOfLine( fp, Log, fBootDb );
           mprg->comlist        = ReadStringToTilde( fp, Log, fBootDb );
           ReadToEndOfLine( fp, Log, fBootDb );
+
           switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
-              AllocateMemory( mprg->Next, MPROG_DATA, 1 );
-              mprg = mprg->Next;
+              AllocateMemory( mprg, MPROG_DATA, 1 );
+              pMobIndex->mprog.Add(mprg);
               break;
-	      case '|':
-              mprg->Next = NULL;
+
+            case '|':
               ReadToEndOfLine( fp, Log, fBootDb );
               done = true;
               break;
+
             default:
               Log->Bug( "%s: vnum %d bad MUDPROG.", __FUNCTION__, pMobIndex->Vnum );
               exit( 1 );
               break;
             }
+
           break;
         }
     }
-
-  return;
-
 }
 
 
@@ -2071,9 +2065,9 @@ void CloseArea( Area *pArea )
               FreeMemory( mpact );
             }
 
-          std::list<MPROG_DATA*> mudProgs(rid->mprog.MudProgs());
+          std::list<MPROG_DATA*> roomProgs(rid->mprog.MudProgs());
 
-          for(MPROG_DATA *mprog : mudProgs)
+          for(MPROG_DATA *mprog : roomProgs)
             {
               rid->mprog.Remove(mprog);
 	      FreeMemory( mprog->arglist );
@@ -2125,10 +2119,11 @@ void CloseArea( Area *pArea )
               FreeMemory( mid->RepairShop );
             }
 
-          for ( MPROG_DATA *mprog = mid->mprog.mudprogs, *mprog_next = nullptr;
-                mprog; mprog = mprog_next )
+          std::list<MPROG_DATA*> mobProgs(mid->mprog.MudProgs());
+
+          for(MPROG_DATA *mprog : mobProgs)
             {
-              mprog_next = mprog->Next;
+              mid->mprog.Remove(mprog);
               FreeMemory(mprog->arglist);
               FreeMemory(mprog->comlist);
               FreeMemory(mprog);
