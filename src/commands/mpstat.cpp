@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "protomob.hpp"
 
 /* A trivial rehack of do_mstat.  This doesnt show all the data, but just
  * enough to identify the mob and give its basic condition.  It does however,

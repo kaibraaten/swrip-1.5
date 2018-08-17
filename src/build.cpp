@@ -34,6 +34,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "protomob.hpp"
 
 bool CanModifyRoom( const Character *ch, const Room *room )
 {

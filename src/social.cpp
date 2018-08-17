@@ -5,6 +5,7 @@
 #include "script.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "protomob.hpp"
 
 #define SOCIAL_DATA_FILE     DATA_DIR "socials.lua"
 

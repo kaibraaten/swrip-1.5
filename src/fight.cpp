@@ -37,6 +37,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "protomob.hpp"
 
 extern char lastplayercmd[MAX_INPUT_LENGTH];
 extern Character *gch_prev;

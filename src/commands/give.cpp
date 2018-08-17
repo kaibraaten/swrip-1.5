@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "object.hpp"
+#include "protomob.hpp"
 
 void do_give( Character *ch, char *argument )
 {

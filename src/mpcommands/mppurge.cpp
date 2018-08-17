@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "protomob.hpp"
 
 /* lets the mobile purge all objects and other npcs in the room,
    or purge a specified object or mob in the room.  It can purge

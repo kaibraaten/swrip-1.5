@@ -8,6 +8,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "protomob.hpp"
 
 static int diag_int_comp(const void *i, const void *j);
 static void diagnose_help (Character *ch);

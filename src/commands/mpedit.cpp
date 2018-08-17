@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "editor.hpp"
 #include "log.hpp"
+#include "protomob.hpp"
 
 /*
  * Mobprogram editing - cumbersome                              -Thoric

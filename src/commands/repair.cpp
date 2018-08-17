@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "protomob.hpp"
 
 static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
 			    char *arg, int maxgold, const char *fixstr, const char *fixstr2 );

@@ -43,6 +43,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "protomob.hpp"
 
 /* Defines by Narn for new mudprog parsing, used as
    return values from mprog_do_command. */

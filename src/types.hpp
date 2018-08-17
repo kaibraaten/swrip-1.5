@@ -42,7 +42,7 @@ class Descriptor;
 struct Exit;
 struct ExtraDescription;
 struct HelpFile;
-struct ProtoMobile;
+class ProtoMobile;
 struct Note;
 class Board;
 class Object;
