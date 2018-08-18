@@ -8,6 +8,10 @@
 class ProtoMobile
 {
 public:
+  ProtoMobile() = delete;
+  ProtoMobile(vnum_t vnum);
+  virtual ~ProtoMobile();
+  
   ProtoMobile *Next = nullptr;
   ProtoMobile *NextSort = nullptr;
   SpecFun *spec_fun = nullptr;
@@ -54,13 +58,6 @@ public:
   short           DamRoll = 0;
   int             VipFlags = 0;
 
-  /*
-  struct
-  {
-    MPROG_DATA *mudprogs = nullptr;
-    int progtypes = 0;
-  } mprog;
-  */
   MProg mprog;
   
   struct

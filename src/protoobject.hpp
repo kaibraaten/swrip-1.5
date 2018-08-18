@@ -10,7 +10,8 @@
 class ProtoObject
 {
 public:
-  ProtoObject();
+  ProtoObject() = delete;
+  ProtoObject(vnum_t vnum);
   virtual ~ProtoObject();
   
   ProtoObject   *Next = nullptr;

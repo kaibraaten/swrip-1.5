@@ -1389,9 +1389,8 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
       cObjIndex = GetProtoObject( cvnum );
     }
 
-  ProtoObject *pObjIndex = new ProtoObject();
+  ProtoObject *pObjIndex = new ProtoObject(vnum);
 
-  pObjIndex->Vnum = vnum;
   pObjIndex->Name = CopyString( name );
 
   if ( !cObjIndex )
@@ -1474,8 +1473,7 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name )
       cMobIndex = GetProtoMobile( cvnum );
     }
 
-  ProtoMobile *pMobIndex = new ProtoMobile();
-  pMobIndex->Vnum                       = vnum;
+  ProtoMobile *pMobIndex = new ProtoMobile(vnum);
   pMobIndex->Name                = CopyString( name );
 
   if ( !cMobIndex )

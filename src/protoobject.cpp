@@ -1,6 +1,7 @@
 #include "protoobject.hpp"
 
-ProtoObject::ProtoObject()
+ProtoObject::ProtoObject(vnum_t vnum)
+  : Vnum(vnum)
 {
 
 }
