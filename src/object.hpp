@@ -11,7 +11,9 @@ class Object
 {
 public:
   Object();
+  Object(ProtoObject *protoObj, int level);
   virtual ~Object();
+  
   Object         *Next = nullptr;
   Object         *Previous = nullptr;
   Object         *NextContent = nullptr;
