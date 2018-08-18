@@ -468,11 +468,10 @@ static void LoadMobiles( Area *tarea, FILE *fp )
       else
         {
           oldmob = false;
-          pMobIndex = new ProtoMobile();
+          pMobIndex = new ProtoMobile(vnum);
         }
 
       fBootDb = tmpBootDb;
-      pMobIndex->Vnum = vnum;
 
       if ( fBootDb )
         {
@@ -698,12 +697,10 @@ static void LoadObjects( Area *tarea, FILE *fp )
       else
         {
           oldobj = false;
-          pObjIndex = new ProtoObject();
+          pObjIndex = new ProtoObject(vnum);
         }
 
       fBootDb = tmpBootDb;
-
-      pObjIndex->Vnum = vnum;
 
       if ( fBootDb )
         {
