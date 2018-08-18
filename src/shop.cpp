@@ -45,6 +45,8 @@
 #include "protoobject.hpp"
 #include "protomob.hpp"
 
+ShopRepository *Shops = nullptr;
+
 #define COST_EQUATION  (int) (cost*CostEquation( obj ))
 
 static float CostEquation( const Object *obj )
@@ -576,3 +578,13 @@ void SaveVendor( Character *ch )
   ReEquipCharacter( ch );
 }
 
+///////////////////////////////////////////////////////////
+class InMemoryShopRepository : public ShopRepository
+{
+
+};
+
+ShopRepository *NewShopRepository()
+{
+  return new InMemoryShopRepository();
+}
