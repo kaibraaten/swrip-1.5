@@ -37,10 +37,94 @@
 
 static bool FindComlink( const Object *element, const Object **comlink );
 
-Character::Character()
+Character::Character(class PCData *pcdata, Descriptor *desc)
+  : Desc(desc),
+    PCData(pcdata),
+    Flags(PLR_BLANK | PLR_COMBINE | PLR_PROMPT)
+{
+  desc->Character = this;
+  Ability.Level.fill(0);
+  Ability.Experience.fill(0);
+}
+
+Character::Character(ProtoMobile *protoMob)
+  : spec_fun(protoMob->spec_fun),
+    spec_2(protoMob->spec_2),
+    Prototype(protoMob),
+    Name(CopyString(protoMob->Name)),
+    ShortDescr(CopyString(protoMob->ShortDescr)),
+    LongDescr(CopyString(protoMob->LongDescr)),
+    Description(CopyString(protoMob->Description)),
+    Sex(protoMob->Sex),
+    Race(protoMob->Race),
+    TopLevel(NumberFuzzy(protoMob->Level)),
+    NumberOfAttacks(protoMob->NumberOfAttacks),
+    Gold(protoMob->Gold),
+    Flags(protoMob->Flags),
+    AffectedBy(protoMob->AffectedBy),
+    BodyParts(protoMob->BodyParts),
+    Resistant(protoMob->Resistant),
+    Immune(protoMob->Immune),
+    Susceptible(protoMob->Susceptible),
+    AttackFlags(protoMob->AttackFlags),
+    DefenseFlags(protoMob->DefenseFlags),
+    Speaks(protoMob->Speaks),
+    Speaking(protoMob->Speaking),
+    Alignment(protoMob->Alignment),
+    BareNumDie(protoMob->DamNoDice),
+    BareSizeDie(protoMob->DamSizeDice),
+    MobThac0(protoMob->MobThac0),
+    HitRoll(protoMob->HitRoll),
+    DamRoll(protoMob->DamRoll),
+    HitPlus(protoMob->HitPlus),
+    DamPlus(protoMob->DamPlus),
+    Position(protoMob->Position),
+    DefaultPosition(protoMob->DefaultPosition),
+    Height(protoMob->Height),
+    Weight(protoMob->Weight),
+    VipFlags(protoMob->VipFlags),
+    MobClan(CopyString(""))
 {
   Ability.Level.fill(0);
   Ability.Experience.fill(0);
+
+  for(int ability = 0 ; ability < MAX_ABILITY ; ability++)
+    {
+      SetAbilityLevel( this, ability, TopLevel );
+    }
+
+  if(protoMob->ArmorClass != 0)
+    {
+      ArmorClass = protoMob->ArmorClass;
+    }
+  else
+    {
+      ArmorClass = 100 - TopLevel * 2.5;
+    }
+
+  if(protoMob->HitNoDice != 0)
+    {
+      MaxHit = protoMob->HitNoDice * GetRandomNumberFromRange(1, protoMob->HitSizeDice) + protoMob->HitPlus;
+    }
+  else
+    {
+      MaxHit = TopLevel * 10 + GetRandomNumberFromRange(TopLevel, TopLevel * 10);
+    }
+
+  Hit = MaxHit;
+  Stats.PermStr = protoMob->Stats.PermStr;
+  Stats.PermDex = protoMob->Stats.PermDex;
+  Stats.PermWis = protoMob->Stats.PermWis;
+  Stats.PermInt = protoMob->Stats.PermInt;
+  Stats.PermCon = protoMob->Stats.PermCon;
+  Stats.PermCha = protoMob->Stats.PermCha;
+  Stats.PermLck = protoMob->Stats.PermLck;
+
+  Saving.PoisonDeath = protoMob->Saving.PoisonDeath;
+  Saving.Wand        = protoMob->Saving.Wand;
+  Saving.ParaPetri   = protoMob->Saving.ParaPetri;
+  Saving.Breath      = protoMob->Saving.Breath;
+  Saving.SpellStaff  = protoMob->Saving.SpellStaff;
 }
 
 Character::~Character()

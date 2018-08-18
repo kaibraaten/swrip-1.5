@@ -69,10 +69,8 @@ void do_who( Character *ch, char *argument )
   if ( !ch )
     {
       NullCh = true;
-      ch = new Character();
+      ch = new Character(new PCData(), nullptr);
       ch->TopLevel = 1;
-      ch->Trust = 0;
-      ch->PCData = new PCData();
       ch->InRoom = GetRoom( ROOM_VNUM_LIMBO );
     }
 

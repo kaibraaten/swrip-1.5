@@ -30,70 +30,36 @@
 class Character
 {
 public:
-  Character();
+  Character() = delete;
+  Character(class PCData *pcdata, Descriptor *desc);
+  Character(ProtoMobile *protoMob);
+  
   virtual ~Character();
 
   virtual void Echo(const char *fmt, ...) const;
   
-  Character *Next = NULL;
-  Character *Previous = NULL;
-  Character *Master = NULL;
-  Character *Leader = NULL;
-  Fight *Fighting = NULL;
-  Character *Reply = NULL;
-  Character *Switched = NULL;
-  Character *Mount = NULL;
-
   SpecFun *spec_fun = NULL;
   SpecFun *spec_2 = NULL;
-
   ProtoMobile *Prototype = NULL;
   Descriptor *Desc = NULL;
-  Affect *FirstAffect = NULL;
-  Affect *LastAffect = NULL;
-  Object *FirstCarrying = NULL;
-  Object *LastCarrying = NULL;
-  Room *InRoom = NULL;
-  Room *WasInRoom = NULL;
-  Room *WasSentinel = NULL;
-  Room *PlayerHome = NULL;
   class PCData *PCData = NULL;
-  CmdFun *LastCommand = NULL;
-  CmdFun *PreviousCommand = NULL;   /* mapping */
-  void *dest_buf = NULL;
-  void *dest_buf_2 = NULL;
-  void *spare_ptr = NULL;
-  int tempnum = 0;
-  struct Editor * Editor = NULL;
-  Timer *FirstTimer = NULL;
-  Timer *LastTimer = NULL;
   char *Name = NULL;
   char *ShortDescr = NULL;
   char *LongDescr = NULL;
   char *Description = NULL;
-  short NumFighting = 0;
-  CharacterSubState SubState = SUB_NONE;
   SexType Sex = 0;
   short Race = 0;
   short TopLevel = 0;
-
-  short Trust = 0;
-  short IdleTimer = 0;
-  short Wait = 0;
-
   short Hit = 500;
   short MaxHit = 500;
   short Mana = 0;
   short MaxMana = 0;
   short Move = 1000;
   short MaxMove = 1000;
-
   short NumberOfAttacks = 0;
   int Gold = 0;
   int Flags = 0;
   int AffectedBy = 0;
-  int CarryWeight = 0;
-  int CarryNumber = 0;
   int BodyParts = 0;
   int Resistant = 0;
   int Immune = 0;
@@ -116,45 +82,7 @@ public:
   short Height = 72;
   short Weight = 180;
   short ArmorClass = 100;
-  short Wimpy = 0;
-  int Deaf = 0;
-
-  short MentalState = 0;           /* simplified */
-  short EmotionalState = 0;        /* simplified */
-  vnum_t ReTran = INVALID_VNUM;
-  vnum_t ReGoto = INVALID_VNUM;
-  short MobInvis = 0;       /* Mobinvis level SB */
   int VipFlags = 0;
-  short BackupWait = 0;       /* reinforcements */
-  vnum_t BackupMob = INVALID_VNUM;     /* reinforcements */
-  short WasStunned = 0;
-  char *MobClan = NULL;    /* for spec_clan_guard.. set by postguard */
-  Room *BuzzedHome = NULL;
-  Room *BuzzedFromRoom = NULL;
-  Character *Challenged = NULL;
-  Character *BettedOn = NULL;
-  int BetAmount = 0;
-  char *Owner = NULL;
-  Room *Home = NULL;
-  short CmdRecurse = 0;
-  Object *On = NULL;
-  Character *Pet = NULL;
-
-  struct
-  {
-    HuntHateFear *Hunting = NULL;
-    HuntHateFear *Fearing = NULL;
-    HuntHateFear *Hating = NULL;
-  } HHF;
-
-  struct
-  {
-    short Main = 0;
-    std::array<short, MAX_ABILITY> Level;
-    std::array<long, MAX_ABILITY> Experience;
-  } Ability;
-
-  MProg mprog;
 
   struct
   {
@@ -185,6 +113,78 @@ public:
     short ModLck = 0;
     short ModFrc = 0;
   } Stats;
+
+  /////////////////////////////////////////////////////
+  // Not persisted runtime data
+  MProg mprog;
+  Character *Next = NULL;
+  Character *Previous = NULL;
+  Character *Master = NULL;
+  Character *Leader = NULL;
+  Fight *Fighting = NULL;
+  Character *Reply = NULL;
+  Character *Switched = NULL;
+  Character *Mount = NULL;
+  Affect *FirstAffect = NULL;
+  Affect *LastAffect = NULL;
+  Object *FirstCarrying = NULL;
+  Object *LastCarrying = NULL;
+  Room *InRoom = NULL;
+  Room *WasInRoom = NULL;
+  Room *WasSentinel = NULL;
+  Room *PlayerHome = NULL;
+  CmdFun *LastCommand = NULL;
+  CmdFun *PreviousCommand = NULL;   /* mapping */
+  void *dest_buf = NULL;
+  void *dest_buf_2 = NULL;
+  void *spare_ptr = NULL;
+  int tempnum = 0;
+  struct Editor * Editor = NULL;
+  Timer *FirstTimer = NULL;
+  Timer *LastTimer = NULL;
+  short NumFighting = 0;
+  CharacterSubState SubState = SUB_NONE;
+  short Trust = 0;
+  short IdleTimer = 0;
+  short Wait = 0;
+  int CarryWeight = 0;
+  int CarryNumber = 0;
+  short Wimpy = 0;
+  int Deaf = 0;
+  short MentalState = 0;           /* simplified */
+  short EmotionalState = 0;        /* simplified */
+  vnum_t ReTran = INVALID_VNUM;
+  vnum_t ReGoto = INVALID_VNUM;
+  short MobInvis = 0;
+  short BackupWait = 0;       /* reinforcements */
+  vnum_t BackupMob = INVALID_VNUM;     /* reinforcements */
+  short WasStunned = 0;
+  char *MobClan = NULL;    /* for spec_clan_guard.. set by postguard */
+  Room *BuzzedHome = NULL;
+  Room *BuzzedFromRoom = NULL;
+  Character *Challenged = NULL;
+  Character *BettedOn = NULL;
+  int BetAmount = 0;
+  char *Owner = NULL;
+  Room *Home = NULL;
+  short CmdRecurse = 0;
+  Object *On = NULL;
+  Character *Pet = NULL;
+
+  struct
+  {
+    HuntHateFear *Hunting = NULL;
+    HuntHateFear *Fearing = NULL;
+    HuntHateFear *Hating = NULL;
+  } HHF;
+
+  struct
+  {
+    short Main = 0;
+    std::array<short, MAX_ABILITY> Level;
+    std::array<long, MAX_ABILITY> Experience;
+  } Ability;
+  
 };
 
 bool IsWizVis( const Character *ch, const Character *victim );

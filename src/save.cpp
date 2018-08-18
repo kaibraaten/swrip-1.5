@@ -1044,7 +1044,7 @@ bool LoadCharacter( Descriptor *d, const std::string &name, bool preload )
   struct stat fst;
   char buf[MAX_INPUT_LENGTH];
 
-  Character *ch = new Character();
+  Character *ch = new Character(new PCData(), d);
 
   for ( int x = 0; x < MAX_WEAR; x++ )
     {
@@ -1056,12 +1056,7 @@ bool LoadCharacter( Descriptor *d, const std::string &name, bool preload )
 
   loading_char = ch;
 
-  ch->PCData = new PCData();
-  d->Character = ch;
-  ch->Desc = d;
   ch->Name = CopyString( name );
-  ch->Flags = PLR_BLANK | PLR_COMBINE | PLR_PROMPT;
-  ch->MentalState = -10;
 
   ImcInitializeCharacter( ch );
 

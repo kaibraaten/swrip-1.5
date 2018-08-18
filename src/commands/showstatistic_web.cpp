@@ -6,7 +6,6 @@
 
 void do_showstatistic_web( Character *ch, char *argument )
 {
-  Character *raceCh = NULL;
   int race = 0, pclass = 0, iR = 0, iC = 0, iC2 = 0;
   bool chk_race = false;
   FILE *whoout = NULL;
@@ -37,10 +36,8 @@ void do_showstatistic_web( Character *ch, char *argument )
       return;
     }
 
-  raceCh = new Character();
+  Character *raceCh = new Character(new PCData(), nullptr);
   raceCh->TopLevel = 1;
-  raceCh->Trust = 0;
-  raceCh->PCData = new PCData();
   raceCh->InRoom = GetRoom( ROOM_VNUM_LIMBO );
   raceCh->Stats.PermStr = 20;
   raceCh->Stats.PermInt = 20;

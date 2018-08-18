@@ -4,23 +4,31 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "protomob.hpp"
 
 class AliasDataTests : public ::testing::Test
 {
 protected:
   void SetUp() override
   {
-    _testCharacter = new Character();
-    _testCharacter->PCData = new PCData();
+    _testCharacter = new Character(new PCData(), new Descriptor());
+    ProtoMobile *protoMob = MakeMobile(1, INVALID_VNUM, "Foo");
+    _testNpc = new Character(protoMob);
   }
 
   void TearDown() override
   {
+    delete _testCharacter->Desc;
     delete _testCharacter;
     _testCharacter = nullptr;
+
+    delete _testNpc->Prototype;
+    delete _testNpc;
+    _testNpc = nullptr;
   }
 
   Character *_testCharacter = nullptr;
+  Character *_testNpc = nullptr;
   static constexpr char *_expectedAliasName = "alias";
   static constexpr char *_expectedCommand = "command";
 };
@@ -58,10 +66,9 @@ TEST_F(AliasDataTests, TestAddAliasAllowsNoDuplicates)
 
 TEST_F(AliasDataTests, TestAddAliasIgnoresNpcs)
 {
-  Character *npc = new Character();
   Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
 
-  AddAlias(npc, alias);
+  AddAlias(_testNpc, alias);
 
   // No asserts because we'd get a segfault if test failed.
 }
@@ -79,19 +86,16 @@ TEST_F(AliasDataTests, TestUnlinkAliasRemovesAlias)
 
 TEST_F(AliasDataTests, TestUnlinkAliasIgnoresNpcs)
 {
-  Character *npc = new Character();
   Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
 
-  UnlinkAlias(npc, alias);
+  UnlinkAlias(_testNpc, alias);
 
   // No asserts because we'd get a segfault if test failed.
 }
 
 TEST_F(AliasDataTests, TestFreeAliasesIgnoresNpcs)
 {
-  Character *npc = new Character();
-  
-  FreeAliases(npc);
+  FreeAliases(_testNpc);
 
   // No asserts because we'd get a segfault if test failed.
 }
@@ -128,7 +132,5 @@ TEST_F(AliasDataTests, TestFindAliasDoesNotFindNonexistentAlias)
 
 TEST_F(AliasDataTests, TestFindAliasIgnoresNpcs)
 {
-  Character *npc = new Character();
-
-  FindAlias(npc, "argument_does_not_matter");
+  FindAlias(_testNpc, "argument_does_not_matter");
 }
