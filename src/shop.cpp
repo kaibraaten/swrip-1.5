@@ -46,6 +46,7 @@
 #include "protomob.hpp"
 
 ShopRepository *Shops = nullptr;
+RepairShopRepository *RepairShops = nullptr;
 
 #define COST_EQUATION  (int) (cost*CostEquation( obj ))
 
@@ -584,7 +585,17 @@ class InMemoryShopRepository : public ShopRepository
 
 };
 
+class InMemoryRepairShopRepository : public RepairShopRepository
+{
+
+};
+
 ShopRepository *NewShopRepository()
 {
   return new InMemoryShopRepository();
+}
+
+RepairShopRepository *NewRepairShopRepository()
+{
+  return new InMemoryRepairShopRepository();
 }

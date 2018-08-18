@@ -46,8 +46,6 @@ struct Shop
 
 struct RepairShop
 {
-  RepairShop *Next;                /* Next shop in list            */
-  RepairShop *Previous;                /* Previous shop in list        */
   vnum_t       Keeper;              /* Vnum of shop keeper mob      */
   std::array<ItemTypes, MAX_FIX> FixType; /* Item types shop will fix     */
   short        ProfitFix;          /* Cost multiplier for fixing   */
@@ -70,15 +68,16 @@ Character *ReadVendor( FILE *fp );
 void LoadVendors( void );
 void SaveVendor( Character *ch );
 
+template<typename T>
 struct CompareShop
 {
-  bool operator()(const Shop *lhs, const Shop *rhs)
+  bool operator()(const T lhs, const T rhs)
   {
     return lhs->Keeper < rhs->Keeper;
   }
 };
 
-class ShopRepository : public Ceris::Repository<Shop*, CompareShop>
+class ShopRepository : public Ceris::Repository<Shop*, CompareShop<Shop*>>
 {
 public:
 
@@ -86,8 +85,18 @@ protected:
   ShopRepository() { }
 };
 
+class RepairShopRepository : public Ceris::Repository<RepairShop*, CompareShop<RepairShop*>>
+{
+public:
+
+protected:
+  RepairShopRepository() { }
+};
+
 extern ShopRepository *Shops;
+extern RepairShopRepository *RepairShops;
 
 ShopRepository *NewShopRepository();
+RepairShopRepository *NewRepairShopRepository();
 
 #endif

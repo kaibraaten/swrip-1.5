@@ -1154,15 +1154,7 @@ static void LoadRepairs( Area *tarea, FILE *fp )
       pMobIndex         = GetProtoMobile( rShop->Keeper );
       pMobIndex->RepairShop  = rShop;
 
-      if ( !FirstRepairShop )
-        FirstRepairShop            = rShop;
-      else
-        LastRepairShop->Next       = rShop;
-
-      rShop->Next               = NULL;
-      rShop->Previous           = LastRepairShop;
-      LastRepairShop               = rShop;
-      top_repair++;
+      RepairShops->Add(rShop);
     }
 }
 
@@ -2105,7 +2097,7 @@ void CloseArea( Area *pArea )
 
           if ( mid->RepairShop )
             {
-              UNLINK( mid->RepairShop, FirstRepairShop, LastRepairShop, Next, Previous );
+              RepairShops->Remove(mid->RepairShop);
               FreeMemory( mid->RepairShop );
             }
 

@@ -565,8 +565,6 @@ extern int              cur_obj_serial;
 extern bool             cur_obj_extracted;
 extern obj_ret          global_objcode;
 
-extern RepairShop     *FirstRepairShop;
-extern RepairShop     *LastRepairShop;
 extern Character       *FirstCharacter;
 extern Character       *LastCharacter;
 extern Descriptor      *FirstDescriptor;
