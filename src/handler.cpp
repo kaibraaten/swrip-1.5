@@ -2525,9 +2525,8 @@ bool Chance( const Character *ch, short percent )
  */
 Object *CopyObject( const Object *obj )
 {
-  Object *clone = new Object();
+  Object *clone = new Object(obj->Prototype, obj->Level);
 
-  clone->Prototype     = obj->Prototype;
   clone->Name           = CopyString( obj->Name );
   clone->ShortDescr    = CopyString( obj->ShortDescr );
   clone->Description    = CopyString( obj->Description );
@@ -2538,7 +2537,6 @@ Object *CopyObject( const Object *obj )
   clone->WearLoc       = obj->WearLoc;
   clone->Weight = obj->Weight;
   clone->Cost           = obj->Cost;
-  clone->Level  = obj->Level;
   clone->Timer  = obj->Timer;
 
   for( size_t oval = 0; oval < MAX_OVAL; ++oval )
