@@ -5,7 +5,6 @@
 
 void do_showstatistic( Character *ch, char *argument )
 {
-  Character *raceCh = NULL;
   int raceIndex = 0, pclass = -1, iR = 0, iC = 0, iC2 = 0;
   const Race *race = NULL;
   bool chk_race = false;
@@ -45,11 +44,9 @@ void do_showstatistic( Character *ch, char *argument )
       ch->Echo("Gods are indefeasible...\r\n");
       return;
     }
-
-  raceCh = new Character();
+  
+  Character *raceCh = new Character(new PCData(), nullptr);
   raceCh->TopLevel = 1;
-  raceCh->Trust = 0;
-  raceCh->PCData = new PCData();
   raceCh->InRoom = GetRoom( ROOM_VNUM_LIMBO );
   raceCh->Stats.PermStr = 20;
   raceCh->Stats.PermInt = 20;
