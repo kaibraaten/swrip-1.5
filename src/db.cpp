@@ -2015,6 +2015,7 @@ void AllocateRepositories(void)
   Shuttles = NewShuttleRepository();
   PlayerCharacters = NewPlayerRepository();
   Shops = NewShopRepository();
+  RepairShops = NewRepairShopRepository();
 }
 
 std::list<ExtraDescription*> OldStyleExtraListToNew(ExtraDescription *extraList)

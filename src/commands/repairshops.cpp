@@ -4,9 +4,7 @@
 
 void do_repairshops( Character *ch, char *argument )
 {
-  RepairShop *repair;
-
-  if ( !FirstRepairShop )
+  if ( RepairShops->Count() == 0)
     {
       ch->Echo("There are no repair shops.\r\n");
       return;
@@ -14,10 +12,11 @@ void do_repairshops( Character *ch, char *argument )
 
   SetCharacterColor( AT_NOTE, ch );
 
-  for ( repair = FirstRepairShop; repair; repair = repair->Next )
-    ch->Echo("Keeper: %5d Profit: %3d Type: %d Open: %2d Close: %2d Fix: %2d %2d %2d\r\n",
+  for(const RepairShop *repair : RepairShops->Entities())
+    {
+      ch->Echo("Keeper: %5d Profit: %3d Type: %d Open: %2d Close: %2d Fix: %2d %2d %2d\r\n",
                repair->Keeper,       repair->ProfitFix, repair->ShopType,
                repair->BusinessHours.Open,   repair->BusinessHours.Close,
                repair->FixType[0], repair->FixType[1], repair->FixType[2] );
+    }
 }
-
