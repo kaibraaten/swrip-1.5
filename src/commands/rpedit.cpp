@@ -210,7 +210,7 @@ void do_rpedit( Character *ch, char *argument )
       
       FreeMemory( progToDelete->arglist );
       FreeMemory( progToDelete->comlist );
-      FreeMemory( progToDelete );
+      delete progToDelete;
 
       if ( num <= 1 )
         {
@@ -254,8 +254,7 @@ void do_rpedit( Character *ch, char *argument )
 
       if(!result.empty())
 	{
-          MPROG_DATA *mprg = nullptr;
-          AllocateMemory( mprg, MPROG_DATA, 1 );
+          MPROG_DATA *mprg = new MPROG_DATA();
           ch->InRoom->mprog.progtypes |= ( 1 << mptype );
           EditMobProg( ch, mprg, mptype, argument );
           ch->InRoom->mprog.InsertBefore(value, mprg);
@@ -278,8 +277,7 @@ void do_rpedit( Character *ch, char *argument )
           return;
         }
 
-      MPROG_DATA *mprg = nullptr;
-      AllocateMemory( mprg, MPROG_DATA, 1 );
+      MPROG_DATA *mprg = new MPROG_DATA();
 
       ch->InRoom->mprog.Add(mprg);
       ch->InRoom->mprog.progtypes |= ( 1 << mptype );

@@ -2273,14 +2273,14 @@ static void AggroUpdate( void )
 
               wch->mprog.Remove(tmp_act);
               FreeMemory(tmp_act->buf);
-              FreeMemory(tmp_act);
+              delete tmp_act;
             }
 
           wch->mprog.mpactnum = 0;
         }
 
       mob_act_list = apdtmp->Next;
-      FreeMemory( apdtmp );
+      delete apdtmp;
     }
 
   for( ch = FirstCharacter; ch; ch = wch_next )

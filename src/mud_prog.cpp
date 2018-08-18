@@ -2280,7 +2280,7 @@ static void MobileActAdd( Character *mob )
 	}
     }
 
-  AllocateMemory(runner, struct act_prog_data, 1);
+  runner = new act_prog_data();
   runner->vo = mob;
   runner->Next = mob_act_list;
   mob_act_list = runner;
@@ -2323,9 +2323,8 @@ void MobProgActTrigger( const std::string &buf, Character *mob, Character *ch,
           return;
         }
       
-      MPROG_ACT_LIST *tmp_act = nullptr;
+      MPROG_ACT_LIST *tmp_act = new MPROG_ACT_LIST();
       
-      AllocateMemory( tmp_act, MPROG_ACT_LIST, 1 );
       mob->mprog.Add(tmp_act);
       
       tmp_act->buf = CopyString( buf );
@@ -2839,9 +2838,7 @@ void ObjProgActTrigger( const std::string &buf, Object *mobj, Character *ch,
 {
   if ( mobj->Prototype->mprog.progtypes & ACT_PROG )
     {
-      MPROG_ACT_LIST *tmp_act;
-
-      AllocateMemory(tmp_act, MPROG_ACT_LIST, 1);
+      MPROG_ACT_LIST *tmp_act = new MPROG_ACT_LIST();
 
       mobj->mprog.Add(tmp_act);
 
@@ -3001,9 +2998,7 @@ void RoomProgActTrigger( const std::string &buf, Room *room, Character *ch,
 {
   if ( room->mprog.progtypes & ACT_PROG )
     {
-      MPROG_ACT_LIST *tmp_act = nullptr;
-
-      AllocateMemory(tmp_act, MPROG_ACT_LIST, 1);
+      MPROG_ACT_LIST *tmp_act = new MPROG_ACT_LIST();
 
       tmp_act->buf = CopyString(buf);
       tmp_act->ch = ch;
@@ -3272,7 +3267,7 @@ static void RoomActAdd( Room *room )
 	}
     }
 
-  AllocateMemory(runner, struct act_prog_data, 1);
+  runner = new act_prog_data();
   runner->vo = room;
   runner->Next = room_act_list;
   room_act_list = runner;
@@ -3303,7 +3298,7 @@ void RoomActUpdate( void )
 
       room->mprog.mpactnum = 0;
       room_act_list = runner->Next;
-      FreeMemory(runner);
+      delete runner;
     }
 }
 
@@ -3319,7 +3314,7 @@ static void ObjectActAdd( Object *obj )
 	}
     }
 
-  AllocateMemory(runner, struct act_prog_data, 1);
+  runner = new act_prog_data();
   runner->vo = obj;
   runner->Next = obj_act_list;
   obj_act_list = runner;
@@ -3335,18 +3330,18 @@ void ObjectActUpdate( void )
 
       std::list<MPROG_ACT_LIST*> actLists(obj->mprog.ActLists());
 
-      for(MPROG_ACT_LIST *mpact :actLists)
+      for(MPROG_ACT_LIST *mpact : actLists)
         {
           ObjProgWordlistCheck(mpact->buf, supermob, mpact->ch, mpact->obj,
                                mpact->vo, ACT_PROG, obj);
           obj->mprog.Remove(mpact);
           FreeMemory(mpact->buf);
-          FreeMemory(mpact);
+          delete mpact;
         }
 
       obj->mprog.mpactnum = 0;
       obj_act_list = runner->Next;
-      FreeMemory(runner);
+      delete runner;
     }
 }
 

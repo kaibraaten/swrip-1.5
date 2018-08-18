@@ -244,7 +244,7 @@ void do_opedit( Character *ch, char *argument )
       obj->Prototype->mprog.Remove(progToDelete);
       FreeMemory( progToDelete->arglist );
       FreeMemory( progToDelete->comlist );
-      FreeMemory( progToDelete );
+      delete progToDelete;
 
       if ( num <= 1 )
         {
@@ -288,8 +288,7 @@ void do_opedit( Character *ch, char *argument )
 
       if(!result.empty())
         {
-          MPROG_DATA *mprg = nullptr;
-          AllocateMemory( mprg, MPROG_DATA, 1 );
+          MPROG_DATA *mprg = new MPROG_DATA();
           obj->Prototype->mprog.progtypes |= ( 1 << mptype );
           EditMobProg( ch, mprg, mptype, argument );
           obj->Prototype->mprog.InsertBefore(value, mprg);
@@ -312,8 +311,7 @@ void do_opedit( Character *ch, char *argument )
           return;
         }
 
-      MPROG_DATA *mprg = nullptr;
-      AllocateMemory( mprg, MPROG_DATA, 1 );
+      MPROG_DATA *mprg = new MPROG_DATA();
 
       obj->Prototype->mprog.Add(mprg);
       obj->Prototype->mprog.progtypes |= ( 1 << mptype );
