@@ -24,6 +24,7 @@
 #define _SWRIP_SHOP_HPP_
 
 #include <array>
+#include <utility/repository.hpp>
 #include "types.hpp"
 #include "constants.hpp"
 
@@ -31,8 +32,6 @@
 
 struct Shop
 {
-  Shop *Next;                  /* Next shop in list            */
-  Shop *Previous;                  /* Previous shop in list        */
   vnum_t     Keeper;                /* Vnum of shop keeper mob      */
   std::array<ItemTypes, MAX_TRADE> BuyType; /* Item types shop will buy     */
   short      ProfitBuy;            /* Cost multiplier for buying   */
@@ -70,5 +69,25 @@ void WriteVendor( FILE *fp, Character *mob );
 Character *ReadVendor( FILE *fp );
 void LoadVendors( void );
 void SaveVendor( Character *ch );
+
+struct CompareShop
+{
+  bool operator()(const Shop *lhs, const Shop *rhs)
+  {
+    return lhs->Keeper < rhs->Keeper;
+  }
+};
+
+class ShopRepository : public Ceris::Repository<Shop*, CompareShop>
+{
+public:
+
+protected:
+  ShopRepository() { }
+};
+
+extern ShopRepository *Shops;
+
+ShopRepository *NewShopRepository();
 
 #endif

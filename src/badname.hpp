@@ -23,7 +23,6 @@ void AddBadName( const std::string &name );
 void RemoveBadName( const std::string &name );
 BadNameRepository *NewBadNameRepository();
 
-//auto CompareBadName = [](auto a, auto b) { return StrCmp(a->Name, b->Name) < 0; };
 struct CompareBadName
 {
   bool operator()(const BadName *lhs, const BadName *rhs)

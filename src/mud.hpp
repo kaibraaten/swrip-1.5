@@ -549,7 +549,6 @@ extern int top_mob_index;
 extern int top_obj_index;
 extern int top_reset;
 extern int top_room;
-extern int top_shop;
 extern int top_repair;
 extern int cur_qobjs;
 extern int cur_qchars;
@@ -566,8 +565,6 @@ extern int              cur_obj_serial;
 extern bool             cur_obj_extracted;
 extern obj_ret          global_objcode;
 
-extern Shop       *FirstShop;
-extern Shop       *LastShop;
 extern RepairShop     *FirstRepairShop;
 extern RepairShop     *LastRepairShop;
 extern Character       *FirstCharacter;

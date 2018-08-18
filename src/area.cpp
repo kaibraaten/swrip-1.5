@@ -1122,15 +1122,7 @@ static void LoadShops( Area *tarea, FILE *fp )
       pMobIndex         = GetProtoMobile( pShop->Keeper );
       pMobIndex->Shop  = pShop;
 
-      if ( !FirstShop )
-        FirstShop              = pShop;
-      else
-        LastShop->Next = pShop;
-
-      pShop->Next               = NULL;
-      pShop->Previous               = LastShop;
-      LastShop         = pShop;
-      top_shop++;
+      Shops->Add(pShop);
     }
 }
 
@@ -2104,9 +2096,10 @@ void CloseArea( Area *pArea )
           FreeMemory( mid->ShortDescr );
 	  FreeMemory( mid->LongDescr  );
           FreeMemory( mid->Description );
+
           if ( mid->Shop )
             {
-              UNLINK( mid->Shop, FirstShop, LastShop, Next, Previous );
+              Shops->Remove(mid->Shop);
               FreeMemory( mid->Shop );
             }
 

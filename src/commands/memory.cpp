@@ -3,6 +3,7 @@
 #include "skill.hpp"
 #include "playerrepository.hpp"
 #include "character.hpp"
+#include "shop.hpp"
 
 void do_memory( Character *ch, char *argument )
 {
@@ -15,7 +16,7 @@ void do_memory( Character *ch, char *argument )
   ch->Echo("IdxMobs %5d    Mobs    %5d\r\n", top_mob_index, nummobsloaded );
   ch->Echo("IdxObjs %5d    Objs    %5d (%d)\r\n", top_obj_index, numobjsloaded, physicalobjects );
   ch->Echo("Rooms   %5d    VRooms  %5d\r\n", top_room,   top_vroom   );
-  ch->Echo("Shops   %5d    RepShps %5d\r\n", top_shop,   top_repair );
+  ch->Echo("Shops   %5d    RepShps %5d\r\n", Shops->Count(),   top_repair );
   ch->Echo("CurOq's %5d    CurCq's %5d\r\n", cur_qobjs,  cur_qchars );
   ch->Echo("Players %5d    Maxplrs %5d\r\n", PlayerCharacters->Count(),
         SysData.MaxPlayersThisBoot );
