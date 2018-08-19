@@ -230,7 +230,7 @@ static void FindGameWinner(void)
 
           if (i->Hit > 1)
             {
-	      struct HallOfFameElement *fame_node = NULL;
+	      HallOfFameElement *fame_node = NULL;
 	      char buf[MAX_INPUT_LENGTH];
 
               if(arena.TimeLeftInGame == 1)
@@ -252,7 +252,7 @@ static void FindGameWinner(void)
               Log->Info( "%s awarded %d credits for winning arena", i->Name,
 			 arena.ArenaPot / 2);
 
-              AllocateMemory(fame_node, struct HallOfFameElement, 1);
+              fame_node = new HallOfFameElement();
               strncpy(fame_node->Name, i->Name, MAX_INPUT_LENGTH);
               fame_node->Name[MAX_INPUT_LENGTH] = '\0';
               fame_node->Date = time(0);
@@ -369,7 +369,7 @@ int CharactersInArena(void)
 
 static int L_HallOfFameEntry( lua_State *L )
 {
-  struct HallOfFameElement *fameNode = NULL;
+  HallOfFameElement *fameNode = NULL;
   int idx = lua_gettop( L );
   const int topAtStart = idx;
   int elementsToPop = 0;
@@ -381,7 +381,7 @@ static int L_HallOfFameEntry( lua_State *L )
 
   elementsToPop = lua_gettop( L ) - topAtStart;
 
-  AllocateMemory( fameNode, struct HallOfFameElement, 1 );
+  fameNode = new HallOfFameElement();
 
   if( !lua_isnil( L, ++idx ) )
     {

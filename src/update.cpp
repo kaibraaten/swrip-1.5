@@ -2553,7 +2553,7 @@ static void TeleportUpdate( void )
             }
 
           UNLINK( tele, FirstTeleport, LastTeleport, Next, Previous );
-          FreeMemory( tele );
+          delete tele;
         }
     }
 }

@@ -5,15 +5,16 @@
 #include "types.hpp"
 #include "constants.hpp"
 
-struct Command
+class Command
 {
-  char    *Name;
-  CmdFun  *Function;
-  char    *FunctionName;
-  PositionType Position;
-  short    Level;
-  int      Log;
-  struct timerset *UseRec;
+public:
+  char    *Name = nullptr;
+  CmdFun  *Function = nullptr;
+  char    *FunctionName = nullptr;
+  PositionType Position = 0;
+  short    Level = 0;
+  int      Log = 0;
+  timerset *UseRec = nullptr;
 };
 
 extern OldRepository *CommandRepository;

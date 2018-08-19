@@ -44,8 +44,6 @@
  * Data types and other definitions
  */
 
-typedef struct EditorLine EditorLine;
-
 #define CHAR_BLOCK (80)
 
 #define BLOCK_ROUNDUP( size )           (((size)+CHAR_BLOCK-1) / CHAR_BLOCK * CHAR_BLOCK)

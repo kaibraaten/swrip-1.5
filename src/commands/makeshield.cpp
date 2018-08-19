@@ -23,11 +23,9 @@ static void FreeUserData( struct UserData *ud );
 
 void do_makeshield( Character *ch, char *argument )
 {
-  struct UserData *data = NULL;
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
-
-  AllocateMemory( data, struct UserData, 1 );
+  UserData *data = new UserData();
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
@@ -140,6 +138,6 @@ static void FreeUserData( struct UserData *ud )
       FreeMemory( ud->ItemName );
     }
 
-  FreeMemory( ud );
+  delete ud;
 }
 

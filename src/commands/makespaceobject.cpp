@@ -5,7 +5,6 @@
 void do_makespaceobject( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Spaceobject *spaceobject;
   size_t n = 0;
 
   if ( IsNullOrEmpty( argument ))
@@ -19,8 +18,8 @@ void do_makespaceobject( Character *ch, char *argument )
       ch->Echo("&RThere's already another spaceobject with that name.&d\r\n" );
       return;
     }
-  
-  AllocateMemory( spaceobject, Spaceobject, 1 );
+
+  Spaceobject *spaceobject = new Spaceobject();
   Spaceobjects->Add(spaceobject);
 
   spaceobject->Name      = CopyString( argument );

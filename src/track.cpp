@@ -40,9 +40,9 @@ static bool MobSnipe( Character *ch, Character *victim);
 */
 
 struct bfs_queue_struct {
-  Room *room;
-  DirectionType dir;
-  struct bfs_queue_struct *Next;
+  Room *room = nullptr;
+  DirectionType dir = DIR_INVALID;
+  bfs_queue_struct *Next = nullptr;
 };
 
 static struct bfs_queue_struct *queue_head = NULL;
@@ -83,9 +83,7 @@ static bool IsValidEdge( const Room *room, DirectionType door )
 
 static void bfs_enqueue(Room *room, DirectionType dir)
 {
-  struct bfs_queue_struct *curr = NULL;
-
-  AllocateMemory( curr, struct bfs_queue_struct, 1 );
+  bfs_queue_struct *curr = new bfs_queue_struct();
   curr->room = room;
   curr->dir = dir;
 
@@ -102,14 +100,14 @@ static void bfs_enqueue(Room *room, DirectionType dir)
 
 static void bfs_dequeue( void )
 {
-  struct bfs_queue_struct *curr = queue_head;
+  bfs_queue_struct *curr = queue_head;
 
   if (!(queue_head = queue_head->Next))
     {
       queue_tail = NULL;
     }
 
-  FreeMemory(curr);
+  delete curr;
 }
 
 static void bfs_clear_queue(void)
@@ -122,9 +120,7 @@ static void bfs_clear_queue(void)
 
 static void room_enqueue(Room *room)
 {
-  struct bfs_queue_struct *curr = NULL;
-
-  AllocateMemory( curr, struct bfs_queue_struct, 1 );
+  bfs_queue_struct *curr = new bfs_queue_struct();
   curr->room = room;
   curr->Next = room_queue;
 
@@ -133,14 +129,14 @@ static void room_enqueue(Room *room)
 
 static void CleanRoom_queue(void)
 {
-  struct bfs_queue_struct *curr = NULL;
-  struct bfs_queue_struct *curr_next = NULL;
+  bfs_queue_struct *curr = NULL;
+  bfs_queue_struct *curr_next = NULL;
 
   for (curr = room_queue; curr; curr = curr_next )
     {
       UNMARK( curr->room );
       curr_next = curr->Next;
-      FreeMemory( curr );
+      delete curr;
     }
 
   room_queue = NULL;

@@ -7,16 +7,17 @@
 #include "types.hpp"
 #include "constants.hpp"
 
-struct Social
+class Social
 {
-  char *Name;
-  char *CharNoArg;
-  char *OthersNoArg;
-  char *CharFound;
-  char *OthersFound;
-  char *VictimFound;
-  char *CharAuto;
-  char *OthersAuto;
+public:
+  char *Name = nullptr;
+  char *CharNoArg = nullptr;
+  char *OthersNoArg = nullptr;
+  char *CharFound = nullptr;
+  char *OthersFound = nullptr;
+  char *VictimFound = nullptr;
+  char *CharAuto = nullptr;
+  char *OthersAuto = nullptr;
 };
 
 void FreeSocial( Social *social );

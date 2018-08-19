@@ -25,8 +25,9 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
-struct HelpFile
+class HelpFile
 {
+public:
   short      Level = 0;
   char      *Keyword = nullptr;
   char      *Text = nullptr;
@@ -36,11 +37,11 @@ struct CompareHelpFile
 {
   bool operator()(const HelpFile *pHelp, const HelpFile *tHelp) const
   {
-    int match = 0;
+    const char *lhs = pHelp->Keyword[0]=='\'' ? pHelp->Keyword+1 : pHelp->Keyword;
+    const char *rhs = tHelp->Keyword[0]=='\'' ? tHelp->Keyword+1 : tHelp->Keyword;
+    int match = StrCmp(lhs, rhs);
 
-    if((match=StrCmp(pHelp->Keyword[0]=='\'' ? pHelp->Keyword+1 : pHelp->Keyword,
-                     tHelp->Keyword[0]=='\'' ? tHelp->Keyword+1 : tHelp->Keyword)) < 0
-       || (match == 0 && pHelp->Level > tHelp->Level))
+    if(match < 0 || (match == 0 && pHelp->Level > tHelp->Level))
       {
         return true;
       }

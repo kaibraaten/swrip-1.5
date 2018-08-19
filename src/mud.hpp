@@ -28,6 +28,7 @@
 #include <string>
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 #include <climits>
 #include <utility/utility.hpp>
 
@@ -54,32 +55,36 @@ extern "C" {
 /*
  * do_who output structure -- Narn
  */
-struct WhoData
+class WhoData
 {
+public:
   WhoData *Previous = nullptr;
   WhoData *Next = nullptr;
   char     *Text = nullptr;
   int       Type = 0;
 };
 
-struct TimeInfo
+class TimeInfo
 {
+public:
   int Hour = 0;
   int Day = 0;
   int Month = 0;
   int Year = 0;
 };
 
-struct HourMinSec
+class HourMinSec
 {
+public:
   int Hour = 0;
   int Minute = 0;
   int Second = 0;
   int Manual = 0;
 };
 
-struct Weather
+class Weather
 {
+public:
   int Mmhg = 0;
   int Change = 0;
   int Sky = 0;
@@ -89,8 +94,9 @@ struct Weather
 /*
  * Structure used to build wizlist
  */
-struct Wizard
+class Wizard
 {
+public:
   Wizard *Next = nullptr;
   Wizard *Last = nullptr;
   char   *Name = nullptr;
@@ -106,8 +112,8 @@ public:
   Descriptor *Next = nullptr;
   Descriptor *Previous = nullptr;
   Descriptor *SnoopBy = nullptr;
-  struct Character *Character = nullptr;
-  struct Character *Original = nullptr;
+  class Character *Character = nullptr;
+  class Character *Original = nullptr;
 
   struct
   {
@@ -153,39 +159,46 @@ public:
   short Wield = 0;
 };
 
-struct IntelligenceBonusType
+class IntelligenceBonusType
 {
+public:
   short Learn = 0;
 };
 
-struct WisdomBonusType
+class WisdomBonusType
 {
+public:
   short Practice = 0;
 };
 
-struct DexterityBonusType
+class DexterityBonusType
 {
+public:
   short Defensive = 0;
 };
 
-struct ConstitutionBonusType
+class ConstitutionBonusType
 {
+public:
   short HitPoint = 0;
   short Shock = 0;
 };
 
-struct CharismaBonusType
+class CharismaBonusType
 {
+public:
   short Charm = 0;
 };
 
-struct LuckBonusType
+class LuckBonusType
 {
+public:
   short Luck = 0;
 };
 
-struct ForceBonusType
+class ForceBonusType
 {
+public:
   short Force = 0;
 };
 
@@ -193,8 +206,9 @@ extern bool mud_down;
 extern bool fBootDb;
 
 /* race dedicated stuff */
-struct Race
+class Race
 {
+public:
   char Name[20];   /* Race name                    */
   int Affected = 0;               /* Default affect bitvectors    */
 
@@ -221,19 +235,21 @@ struct Race
   bool AvailableForSelection = false;   /* Race can be selected by players */
 };
 
-struct Storeroom
+class Storeroom
 {
+public:
   Storeroom       *Next = nullptr;
   Storeroom       *Previous = nullptr;
   vnum_t           Vnum = INVALID_VNUM;
-  struct Room *Room = nullptr;
+  class Room *Room = nullptr;
 };
 
 /*
  * An affect.
  */
-struct Affect
+class Affect
 {
+public:
   Affect *Next = nullptr;
   Affect *Previous = nullptr;
   short Type = 0;
@@ -246,8 +262,9 @@ struct Affect
 /*
  * A SMAUG spell
  */
-struct SmaugAffect
+class SmaugAffect
 {
+public:
   SmaugAffect *Next = nullptr;
   char *Duration = nullptr;
   short Location = 0;
@@ -255,8 +272,9 @@ struct SmaugAffect
   int AffectedBy = 0;
 };
 
-struct Timer
+class Timer
 {
+public:
   Timer  *Previous = nullptr;
   Timer  *Next = nullptr;
   CmdFun *DoFun = nullptr;
@@ -265,14 +283,16 @@ struct Timer
   short   Count = 0;
 };
 
-struct HuntHateFear
+class HuntHateFear
 {
+public:
   char      *Name = nullptr;
   Character *Who = nullptr;
 };
 
-struct Fight
+class Fight
 {
+public:
   Character *Who = nullptr;
   long        Xp = 0;
   short      Align = 0;
@@ -280,17 +300,19 @@ struct Fight
   short      TimesKilled = 0;
 };
 
-struct ExtractedCharacter
+class ExtractedCharacter
 {
+public:
   ExtractedCharacter *Next = nullptr;
-  struct Character *Character = nullptr;
+  class Character *Character = nullptr;
   Room *InRoom = nullptr;
   ch_ret             RetCode = rNONE;
   bool               Extract = false;
 };
 
-struct KilledData
+class KilledData
 {
+public:
   vnum_t Vnum = INVALID_VNUM;
   char  Count = 0;
 };
@@ -298,8 +320,9 @@ struct KilledData
 /*
  * Liquids.
  */
-struct LiquidType
+class LiquidType
 {
+public:
   char  *Name = nullptr;
   char  *Color = nullptr;
   std::array<short, 3> Affect;
@@ -308,8 +331,9 @@ struct LiquidType
 /*
  * Extra description data for a room or object.
  */
-struct ExtraDescription
+class ExtraDescription
 {
+public:
   ExtraDescription *Next = nullptr;       /* Next in list                     */
   ExtraDescription *Previous = nullptr;       /* Previous in list                 */
   char             *Keyword = nullptr;              /* Keyword in look/examine          */
@@ -319,8 +343,9 @@ struct ExtraDescription
 /*
  * Exit data.
  */
-struct Exit
+class Exit
 {
+public:
   Exit       *Previous = nullptr;           /* previous exit in linked list */
   Exit       *Next = nullptr;           /* next exit in linked list     */
   Exit       *ReverseExit = nullptr;          /* Reverse exit pointer         */
@@ -338,8 +363,9 @@ struct Exit
 /*
  * Used to keep track of system settings and statistics         -Thoric
  */
-struct SystemData
+class SystemData
 {
+public:
   int    MaxPlayersThisBoot = 0;             /* Maximum players this boot   */
   int    MaxPlayersEver = 0;             /* Maximum players ever   */
   char  *TimeOfMaxPlayersEver = nullptr;            /* Time of max ever */
@@ -382,24 +408,34 @@ struct SystemData
 /*
  * Delayed teleport type.
  */
-struct TeleportData
+class TeleportData
 {
+public:
   TeleportData   *Next = nullptr;
   TeleportData   *Previous = nullptr;
   Room *FromRoom = nullptr;
   short            TeleportTimer = 0;
 };
 
-struct timerset
+class timerset
 {
+public:
+  timerset()
+  {
+    memset(&TotalTime, 0, sizeof(TotalTime));
+    memset(&MinTime, 0, sizeof(MinTime));
+    memset(&MaxTime, 0, sizeof(MaxTime));
+  }
+  
   int            NumberOfTimesUsed = 0;
-  struct timeval TotalTime;
-  struct timeval MinTime;
-  struct timeval MaxTime;
+  class timeval TotalTime;
+  class timeval MinTime;
+  class timeval MaxTime;
 };
 
-struct Auction
+class Auction
 {
+public:
   Object  *Item = nullptr;   /* a pointer to the item */
   Character *Seller = nullptr; /* a pointer to the seller - which may NOT quit */
   Character *Buyer = nullptr;  /* a pointer to the buyer - which may NOT quit */
@@ -447,7 +483,7 @@ struct Auction
 extern time_t last_restore_all_time;
 extern time_t boot_time;  /* this should be moved down */
 extern HourMinSec * set_boot_time;
-extern struct tm *new_boot_time;
+extern tm *new_boot_time;
 extern time_t new_boot_time_t;
 
 extern const std::array<const StrengthBonusType, MAX_STAT + 1> StrengthBonus;
@@ -512,7 +548,7 @@ extern int numobjsloaded;
 extern int nummobsloaded;
 extern int physicalobjects;
 extern int num_descriptors;
-extern struct SystemData SysData;
+extern SystemData SysData;
 extern int top_vroom;
 extern int top_affect;
 extern int top_area;
@@ -1494,8 +1530,8 @@ int CountCharactersOnObject(const Object *obj);
 /* interp.c */
 bool CheckPosition( const Character *ch, PositionType position );
 void Interpret( Character *ch, char *argument );
-void SendTimer( struct timerset *vtime, Character *ch );
-void UpdateNumberOfTimesUsed( struct timeval *time_used, struct timerset *userec );
+void SendTimer( timerset *vtime, Character *ch );
+void UpdateNumberOfTimesUsed( timeval *time_used, timerset *userec );
 
 /* magic.c */
 int ModifySavingThrowBasedOnResistance( const Character *ch, int save_chance, int ris );

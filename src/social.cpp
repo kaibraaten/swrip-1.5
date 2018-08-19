@@ -41,7 +41,7 @@ void FreeSocial( Social *social )
   if ( social->OthersAuto )
     FreeMemory( social->OthersAuto );
 
-  FreeMemory( social );
+  delete social;
 }
 
 bool CheckSocial( Character *ch, const std::string &command, char *argument )
@@ -211,10 +211,9 @@ static void PushSocialTable( lua_State *L, const void *userData )
 static int L_SocialEntry( lua_State *L )
 {
   int idx = 0;
-  Social *social = NULL;
   luaL_checktype( L, 1, LUA_TTABLE );
   idx = lua_gettop( L );
-  AllocateMemory( social, Social, 1 );
+  Social *social = new Social();
 
   lua_getfield( L, idx, "Name" );
   lua_getfield( L, idx, "CharNoArg" );

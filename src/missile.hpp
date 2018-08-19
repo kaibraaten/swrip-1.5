@@ -9,19 +9,20 @@
 extern Missile *FirstMissile;
 extern Missile *LastMissile;
 
-struct Missile
+class Missile
 {
-  Missile *Next;
-  Missile *Previous;
-  Missile *NextInSpaceobject;
-  Missile *PreviousInSpaceobject;
-  struct Spaceobject *Spaceobject;
-  Ship *Target;
-  Ship *FiredFrom;
-  char *FiredBy;
-  MissileType Type;
-  short Age;
-  int Speed;
+public:
+  Missile *Next = nullptr;
+  Missile *Previous = nullptr;
+  Missile *NextInSpaceobject = nullptr;
+  Missile *PreviousInSpaceobject = nullptr;
+  struct Spaceobject *Spaceobject = nullptr;
+  Ship *Target = nullptr;
+  Ship *FiredFrom = nullptr;
+  char *FiredBy = nullptr;
+  MissileType Type = 0;
+  short Age = 0;
+  int Speed = 0;
   Vector3 Position;
   Vector3 Heading;
 };

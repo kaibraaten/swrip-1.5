@@ -1203,8 +1203,8 @@ static Skill *LoadSkillOrHerb( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      AllocateMemory( skill, Skill, 1 );
-      AllocateMemory( skill->UseRec, struct timerset, 1 );
+      skill = new Skill();
+      skill->UseRec = new timerset();
       skill->Name = CopyString( lua_tostring( L, idx ) );
     }
   else

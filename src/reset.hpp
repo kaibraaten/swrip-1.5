@@ -46,15 +46,16 @@
 /*
  * Area-reset definition.
  */
-struct Reset
+class Reset
 {
-  Reset *Next;
-  Reset *Previous;
-  char Command;
-  int MiscData;
-  int Arg1;
-  int Arg2;
-  int Arg3;
+public:
+  Reset *Next = nullptr;
+  Reset *Previous = nullptr;
+  char Command = 0;
+  int MiscData = 0;
+  int Arg1 = 0;
+  int Arg2 = 0;
+  int Arg3 = 0;
 };
 
 

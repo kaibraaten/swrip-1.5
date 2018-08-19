@@ -33,9 +33,7 @@ void do_makecontainer( Character *ch, char *argument )
                                              10, OBJ_VNUM_CRAFTING_CONTAINER,
 					     CRAFTFLAG_NEED_WORKSHOP );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
-  struct UserData *ud = NULL;
-
-  AllocateMemory( ud, struct UserData, 1 );
+  UserData *ud = new UserData();
 
   AddInterpretArgumentsCraftingHandler( session, ud, InterpretArgumentsHandler );
   AddSetObjectStatsCraftingHandler( session, ud, SetObjectStatsHandler );
@@ -133,7 +131,7 @@ static void FreeUserData( struct UserData *ud )
       FreeMemory( ud->ItemName );
     }
 
-  FreeMemory( ud );
+  delete ud;
 }
 
 static bool CanUseWearLocation( int wearLocation )
@@ -143,5 +141,3 @@ static bool CanUseWearLocation( int wearLocation )
     || wearLocation == ITEM_HOLD
     || wearLocation == ITEM_TAKE;
 }
-
-

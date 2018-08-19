@@ -29,8 +29,9 @@
 
 #include "types.hpp"
 
-struct Alias
+class Alias
 {
+public:
   char *Name = nullptr;
   char *Command = nullptr;
 };

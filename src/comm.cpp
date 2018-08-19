@@ -637,7 +637,6 @@ void InitializeDescriptor(Descriptor *dnew, socket_t desc)
 static void NewDescriptor( socket_t new_desc )
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
-  Descriptor *dnew = nullptr;
   struct hostent  *from = nullptr;
   struct sockaddr_in sock;
   socket_t desc = 0;
@@ -684,7 +683,7 @@ static void NewDescriptor( socket_t new_desc )
       return;
     }
 
-  AllocateMemory( dnew, Descriptor, 1 );
+  Descriptor *dnew = new Descriptor();
   InitializeDescriptor(dnew, desc);
   dnew->Remote.Port = ntohs( sock.sin_port );
 
@@ -758,6 +757,7 @@ static void NewDescriptor( socket_t new_desc )
     {
       if ( SysData.TimeOfMaxPlayersEver )
         FreeMemory(SysData.TimeOfMaxPlayersEver);
+
       sprintf(buf, "%24.24s", ctime(&current_time));
       SysData.TimeOfMaxPlayersEver = CopyString(buf);
       SysData.MaxPlayersEver = SysData.MaxPlayersThisBoot;
@@ -776,7 +776,7 @@ void FreeDescriptor( Descriptor *d )
   FreeMemory( d->Remote.Hostname );
   FreeMemory( d->OutBuffer );
 
-  FreeMemory( d );
+  delete d;
   --num_descriptors;
 }
 

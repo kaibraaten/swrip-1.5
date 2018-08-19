@@ -1293,8 +1293,6 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "Affect" ) || !StrCmp( word, "AffectData" ) )
             {
-              Affect *paf = NULL;
-
               if ( preload )
                 {
                   fMatch = true;
@@ -1302,7 +1300,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                   break;
                 }
 
-              AllocateMemory( paf, Affect, 1 );
+              Affect *paf = new Affect();
 
               if ( !StrCmp( word, "Affect" ) )
                 {
@@ -1358,8 +1356,6 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "Alias" ) )
             {
-              Alias *pal = NULL;
-
               if ( preload )
                 {
                   fMatch = true;
@@ -1367,7 +1363,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                   break;
                 }
 
-              AllocateMemory( pal, Alias, 1 );
+              Alias *pal = new Alias();
 
               pal->Name = ReadStringToTilde( fp,Log, fBootDb );
               pal->Command  = ReadStringToTilde( fp,Log, fBootDb );
@@ -2081,10 +2077,8 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
         case 'A':
           if ( !StrCmp( word, "Affect" ) || !StrCmp( word, "AffectData" ) )
             {
-              Affect *paf = NULL;
+              Affect *paf = new Affect();
               int pafmod = 0;
-
-              AllocateMemory( paf, Affect, 1 );
 
               if ( !StrCmp( word, "Affect" ) )
                 {
@@ -2143,9 +2137,8 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
           if ( !StrCmp( word, "ExtraDescr" ) )
             {
-              ExtraDescription *ed = NULL;
+              ExtraDescription *ed = new ExtraDescription();
 
-              AllocateMemory( ed, ExtraDescription, 1 );
               ed->Keyword = ReadStringToTilde( fp,Log, fBootDb );
               ed->Description = ReadStringToTilde( fp,Log, fBootDb );
               LINK(ed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
@@ -2410,13 +2403,13 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
               FreeMemory( ed->Keyword );
               FreeMemory( ed->Description );
               UNLINK( ed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
-              FreeMemory( ed );
+              delete ed;
             }
 
           while ( (paf=obj->FirstAffect) != NULL )
             {
               UNLINK( paf, obj->FirstAffect, obj->LastAffect, Next, Previous );
-              FreeMemory( paf );
+              delete paf;
             }
 
           delete obj;

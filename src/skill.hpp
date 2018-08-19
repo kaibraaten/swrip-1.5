@@ -12,45 +12,46 @@
 /*
  * Skills include spells as a particular case.
  */
-struct Skill
+class Skill
 {
-  char      *Name;                   /* Name of skill                */
-  SpellFun  *SpellFunction;              /* Spell pointer (for spells)   */
-  CmdFun    *SkillFunction;              /* Skill pointer (for skills)   */
-  char      *FunctionName;
-  SkillTargetType Target;                 /* Legal targets                */
-  PositionType Position;       /* Position for caster / user   */
-  short      Slot;                   /* Slot for #OBJECT loading     */
-  short      Mana;               /* Minimum mana used            */
-  short      Beats;                  /* Rounds required to use skill */
-  short      Guild;                  /* Which guild the skill belongs to */
-  short      Level;              /* Minimum level to be able to cast */
-  SkillType Type;                   /* Spell/Skill/Weapon/Tongue    */
-  unsigned int Flags;                  /* extra stuff                  */
+public:
+  char      *Name = nullptr;                   /* Name of skill                */
+  SpellFun  *SpellFunction = nullptr;              /* Spell pointer (for spells)   */
+  CmdFun    *SkillFunction = nullptr;              /* Skill pointer (for skills)   */
+  char      *FunctionName = nullptr;
+  SkillTargetType Target = 0;                 /* Legal targets                */
+  PositionType Position = 0;       /* Position for caster / user   */
+  short      Slot = 0;                   /* Slot for #OBJECT loading     */
+  short      Mana = 0;               /* Minimum mana used            */
+  short      Beats = 0;                  /* Rounds required to use skill */
+  short      Guild = 0;                  /* Which guild the skill belongs to */
+  short      Level = 0;              /* Minimum level to be able to cast */
+  SkillType Type = 0;                   /* Spell/Skill/Weapon/Tongue    */
+  unsigned int Flags = 0;                  /* extra stuff                  */
 
   struct
   {
-    char      *NounDamage;            /* Damage message               */
-    char      *WearOff;                /* Wear off message             */
+    char      *NounDamage = nullptr;            /* Damage message               */
+    char      *WearOff = nullptr;                /* Wear off message             */
 
     struct
     {
-      char *ToCaster;
-      char *ToVictim;
-      char *ToRoom;
+      char *ToCaster = nullptr;
+      char *ToVictim = nullptr;
+      char *ToRoom = nullptr;
     } Success, Failure, VictimDeath, VictimImmune;
 
   } Messages;
 
-  char      *Dice;                   /* Dice roll                    */
-  int        Value;                  /* Misc value                   */
-  char       Saves;                  /* What saving spell applies    */
-  char       Difficulty;             /* Difficulty of casting/learning */
-  SmaugAffect *Affects;                /* Spell affects, if any        */
-  char      *Teachers;               /* Skill requires a special teacher */
-  char       Participants;           /* # of required participants   */
-  struct timerset *UseRec; /* Usage record                 */
-  int        Alignment;              /* for jedi powers */
+  char      *Dice = nullptr;                   /* Dice roll                    */
+  int        Value = 0;                  /* Misc value                   */
+  char       Saves = 0;                  /* What saving spell applies    */
+  char       Difficulty = 0;             /* Difficulty of casting/learning */
+  SmaugAffect *Affects = nullptr;                /* Spell affects, if any        */
+  char      *Teachers = nullptr;               /* Skill requires a special teacher */
+  char       Participants = 0;           /* # of required participants   */
+  timerset *UseRec = nullptr; /* Usage record                 */
+  int        Alignment = 0;              /* for jedi powers */
 };
 
 extern const std::array<const char * const, SKILLTYPE_MAX> SkillTypeName;

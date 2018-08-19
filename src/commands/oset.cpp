@@ -576,7 +576,8 @@ void do_oset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = atoi( arg3 );
         }
-      AllocateMemory( paf, Affect, 1 );
+
+      paf = new Affect();
       paf->Type         = -1;
       paf->Duration             = -1;
       paf->Location             = loc;
@@ -622,7 +623,7 @@ void do_oset( Character *ch, char *argument )
               if ( ++count == loc )
                 {
                   UNLINK( paf, pObjIndex->FirstAffect, pObjIndex->LastAffect, Next, Previous );
-                  FreeMemory( paf );
+                  delete paf;
                   ch->Echo("Removed.\r\n");
                   --top_affect;
                   return;
@@ -638,7 +639,7 @@ void do_oset( Character *ch, char *argument )
               if ( ++count == loc )
                 {
                   UNLINK( paf, obj->FirstAffect, obj->LastAffect, Next, Previous );
-                  FreeMemory( paf );
+                  delete paf;
                   ch->Echo("Removed.\r\n");
                   --top_affect;
                   return;

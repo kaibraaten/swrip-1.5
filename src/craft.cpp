@@ -34,50 +34,54 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 
-struct CraftRecipe
+class CraftRecipe
 {
-  int Skill;
-  const CraftingMaterial *Materials;
-  int Duration;
-  vnum_t Prototype;
-  long Flags;
+public:
+  int Skill = 0;
+  const CraftingMaterial *Materials = nullptr;
+  int Duration = 0;
+  vnum_t Prototype = INVALID_VNUM;
+  long Flags = 0;
 };
 
-struct FoundMaterial
+class FoundMaterial
 {
+public:
   CraftingMaterial Material;
-  bool Found;
-  bool KeepFinding;
+  bool Found = false;
+  bool KeepFinding = false;
 };
 
-struct CraftingSession
+class CraftingSession
 {
-  event_t *OnInterpretArguments;
-  event_t *OnCheckRequirements;
-  event_t *OnMaterialFound;
-  event_t *OnSetObjectStats;
-  event_t *OnFinishedCrafting;
-  event_t *OnAbort;
+public:
+  event_t *OnInterpretArguments = nullptr;
+  event_t *OnCheckRequirements = nullptr;
+  event_t *OnMaterialFound = nullptr;
+  event_t *OnSetObjectStats = nullptr;
+  event_t *OnFinishedCrafting = nullptr;
+  event_t *OnAbort = nullptr;
 
-  Character *Engineer;
-  CraftRecipe *Recipe;
-  struct FoundMaterial *FoundMaterials;
-  char *CommandArgument;
+  Character *Engineer = nullptr;
+  CraftRecipe *Recipe = nullptr;
+  FoundMaterial *FoundMaterials = nullptr;
+  char *CommandArgument = nullptr;
 };
 
-struct FinishedCraftingUserData
+class FinishedCraftingUserData
 {
-  CraftRecipe *Recipe;
+public:
+  CraftRecipe *Recipe = nullptr;
 };
 
 static void AfterDelay( CraftingSession *session );
 static void AbortSession( CraftingSession *session );
 static bool CheckMaterials( CraftingSession *session, bool extract );
 static size_t CountCraftingMaterials( const CraftingMaterial *material );
-static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials );
+static FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials );
 static bool CheckSkillLevel( const CraftingSession *session );
 static const char *GetItemTypeNameExtended( ItemTypes itemType, int extraInfo );
-static struct FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const Object *obj );
+static FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const Object *obj );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *eventArgs );
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args );
 
@@ -146,7 +150,7 @@ static void AfterDelay( CraftingSession *session )
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *eventArgs )
 {
   CraftingSession *session = eventArgs->CraftingSession;
-  struct FinishedCraftingUserData *data = (struct FinishedCraftingUserData*) userData;
+  FinishedCraftingUserData *data = (FinishedCraftingUserData*) userData;
   Character *ch = GetEngineer( session );
   const char *itemType = GetItemTypeNameExtended( eventArgs->Object->ItemType, eventArgs->Object->Value[OVAL_WEAPON_TYPE] );
   char actBuf[MAX_STRING_LENGTH];
@@ -165,7 +169,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
 
   LearnFromSuccess( ch, data->Recipe->Skill );
 
-  FreeMemory( data );
+  delete data;
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
@@ -210,8 +214,7 @@ Character *GetEngineer( const CraftingSession *session )
 CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, int duration,
 				  vnum_t prototypeObject, long flags )
 {
-  CraftRecipe *recipe = NULL;
-  AllocateMemory( recipe, CraftRecipe, 1 );
+  CraftRecipe *recipe = new CraftRecipe();
 
   recipe->Skill      = sn;
   recipe->Materials  = materialList;
@@ -236,7 +239,7 @@ CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, 
 
 void FreeCraftRecipe( CraftRecipe *recipe )
 {
-  FreeMemory( recipe );
+  delete recipe;
 }
 
 static size_t CountCraftingMaterials( const CraftingMaterial *material )
@@ -254,15 +257,12 @@ static size_t CountCraftingMaterials( const CraftingMaterial *material )
   return numberOfElements;
 }
 
-static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials )
+static FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials )
 {
   size_t numberOfElements = CountCraftingMaterials( recipeMaterials );
-  size_t i = 0;
-  struct FoundMaterial *foundMaterials = NULL;
+  FoundMaterial *foundMaterials = new FoundMaterial[numberOfElements];
 
-  AllocateMemory( foundMaterials, struct FoundMaterial, numberOfElements );
-
-  for( i = 0; i < numberOfElements; ++i )
+  for( size_t i = 0; i < numberOfElements; ++i )
     {
       foundMaterials[i].Material = recipeMaterials[i];
       foundMaterials[i].Found = false;
@@ -275,10 +275,7 @@ static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *rec
 CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engineer,
 					  const std::string &commandArgument )
 {
-  CraftingSession *session = NULL;
-  struct FinishedCraftingUserData *finishedCraftingUserData = NULL;
-
-  AllocateMemory( session, CraftingSession, 1 );
+  CraftingSession *session = new CraftingSession();
   session->OnInterpretArguments = CreateEvent();
   session->OnCheckRequirements = CreateEvent();
   session->OnMaterialFound = CreateEvent();
@@ -286,7 +283,7 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
   session->OnFinishedCrafting = CreateEvent();
   session->OnAbort = CreateEvent();
 
-  AllocateMemory( finishedCraftingUserData, struct FinishedCraftingUserData, 1 );
+  FinishedCraftingUserData *finishedCraftingUserData = new FinishedCraftingUserData();
   finishedCraftingUserData->Recipe = recipe;
   AddFinishedCraftingHandler( session, finishedCraftingUserData, FinishedCraftingHandler );
 
@@ -312,7 +309,7 @@ void FreeCraftingSession( CraftingSession *session )
   DestroyEvent( session->OnAbort );
 
   FreeCraftRecipe( session->Recipe );
-  FreeMemory( session->FoundMaterials );
+  delete[] session->FoundMaterials;
   FreeMemory( session->CommandArgument );
 
   if( session->Engineer )
@@ -320,7 +317,7 @@ void FreeCraftingSession( CraftingSession *session )
       session->Engineer->PCData->CraftingSession = NULL;
     }
 
-  FreeMemory( session );
+  delete session;
 }
 
 static bool CheckSkillLevel( const CraftingSession *session )
@@ -387,7 +384,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
   Object *obj = NULL;
   Character *ch = GetEngineer( session );
   bool foundAll = true;
-  struct FoundMaterial *material = NULL;
+  FoundMaterial *material = NULL;
 
   for( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
     {
@@ -439,15 +436,15 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
       ++material;
     }
 
-  FreeMemory( session->FoundMaterials );
+  delete[] session->FoundMaterials;
   session->FoundMaterials = AllocateFoundMaterials( session->Recipe->Materials );
 
   return foundAll;
 }
 
-static struct FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const Object *obj )
+static FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const Object *obj )
 {
-  struct FoundMaterial *material = session->FoundMaterials;
+  FoundMaterial *material = session->FoundMaterials;
 
   while( material->Material.ItemType != ITEM_NONE )
     {

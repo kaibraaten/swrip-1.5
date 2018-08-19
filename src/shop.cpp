@@ -50,6 +50,16 @@ RepairShopRepository *RepairShops = nullptr;
 
 #define COST_EQUATION  (int) (cost*CostEquation( obj ))
 
+Shop::Shop()
+{
+  BuyType.fill(0);
+}
+
+RepairShop::RepairShop()
+{
+  FixType.fill(0);
+}
+
 static float CostEquation( const Object *obj )
 {
   float count = obj->Prototype->Count;

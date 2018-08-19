@@ -37,71 +37,63 @@ struct CraftingSession;
 typedef struct CraftingSession CraftingSession;
 */
 
-struct CraftRecipe;
-typedef struct CraftRecipe CraftRecipe;
+class CraftRecipe;
+class CraftingMaterial;
+class SetObjectStatsEventArgs;
+class InterpretArgumentsEventArgs;
+class MaterialFoundEventArgs;
+class FinishedCraftingEventArgs;
+class CheckRequirementsEventArgs;
+class AbortCraftingEventArgs;
 
-struct CraftingMaterial;
-typedef struct CraftingMaterial CraftingMaterial;
-
-struct SetObjectStatsEventArgs;
-typedef struct SetObjectStatsEventArgs SetObjectStatsEventArgs;
-
-struct InterpretArgumentsEventArgs;
-typedef struct InterpretArgumentsEventArgs InterpretArgumentsEventArgs;
-
-struct MaterialFoundEventArgs;
-typedef struct MaterialFoundEventArgs MaterialFoundEventArgs;
-
-struct FinishedCraftingEventArgs;
-typedef struct FinishedCraftingEventArgs FinishedCraftingEventArgs;
-
-struct CheckRequirementsEventArgs;
-typedef struct CheckRequirementsEventArgs CheckRequirementsEventArgs;
-
-struct AbortCraftingEventArgs;
-typedef struct AbortCraftingEventArgs AbortCraftingEventArgs;
-
-struct InterpretArgumentsEventArgs
+class InterpretArgumentsEventArgs
 {
-  struct CraftingSession *CraftingSession;
-  const char *CommandArguments;
-  bool AbortSession;
+public:
+  class CraftingSession *CraftingSession = nullptr;
+  const char *CommandArguments = nullptr;
+  bool AbortSession = false;
 };
 
-struct MaterialFoundEventArgs
+class MaterialFoundEventArgs
 {
-  struct CraftingSession *CraftingSession;
-  struct Object *Object;
-  bool KeepFinding;
+public:
+  class CraftingSession *CraftingSession = nullptr;
+  class Object *Object = nullptr;
+  bool KeepFinding = false;
 };
 
-struct SetObjectStatsEventArgs
+class SetObjectStatsEventArgs
 {
-  struct CraftingSession *CraftingSession;
-  struct Object *Object;
+public:
+  class CraftingSession *CraftingSession = nullptr;
+  class Object *Object = nullptr;
 };
 
-struct FinishedCraftingEventArgs
+class FinishedCraftingEventArgs
 {
-  struct CraftingSession *CraftingSession;
-  struct Object *Object;
+public:
+  class CraftingSession *CraftingSession = nullptr;
+  class Object *Object = nullptr;
 };
 
-struct CheckRequirementsEventArgs
+class CheckRequirementsEventArgs
 {
-  struct CraftingSession *CraftingSession;
-  bool AbortSession;
+public:
+  class CraftingSession *CraftingSession = nullptr;
+  bool AbortSession = false;
 };
 
-struct AbortCraftingEventArgs
+class AbortCraftingEventArgs
 {
-  struct CraftingSession *CraftingSession;
+public:
+  class CraftingSession *CraftingSession = nullptr;
 };
 
-struct CraftingMaterial
+class CraftingMaterial
 {
-  ItemTypes ItemType;
-  long Flags;
+public:
+  ItemTypes ItemType = ITEM_NONE;
+  long Flags = 0;
 };
 
 CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial*, int duration,

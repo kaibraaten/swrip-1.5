@@ -50,7 +50,7 @@ void do_sedit( Character *ch, char *argument )
           return;
         }
 
-      AllocateMemory( social, Social, 1 );
+      social = new Social();
       social->Name = CopyString( arg1 );
       sprintf( arg2, "You %s.", arg1 );
       social->CharNoArg = CopyString( arg2 );

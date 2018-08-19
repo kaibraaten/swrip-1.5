@@ -32,7 +32,6 @@ Missile *LastMissile = NULL;
 void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missiletype )
 {
   Spaceobject *spaceobject = NULL;
-  Missile *missile = NULL;
 
   if ( ship  == NULL )
     {
@@ -49,7 +48,7 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missi
       return;
     }
 
-  AllocateMemory( missile, Missile, 1 );
+  Missile *missile = new Missile();
   LINK( missile, FirstMissile, LastMissile, Next, Previous );
 
   missile->Target = target;
@@ -102,7 +101,7 @@ void ExtractMissile( Missile *missile )
       FreeMemory( missile->FiredBy );
     }
 
-  FreeMemory( missile );
+  delete missile;
 }
 
 bool UpdateMissile( Missile *missile, void *unused )

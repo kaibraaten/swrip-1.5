@@ -39,11 +39,6 @@ static void LoadRepairs( Area *tarea, FILE *fp );
 static void LoadSpecials( Area *tarea, FILE *fp );
 static void LoadRanges( Area *tarea, FILE *fp );
 static int MudProgNameToType( const char* name );
-static MPROG_DATA *MobProgReadFile( const char* f, MPROG_DATA* mprg, ProtoMobile *pMobIndex );
-static MPROG_DATA *ObjProgReadFile( const char* f, MPROG_DATA* mprg, ProtoObject *pObjIndex );
-static MPROG_DATA *RoomProgReadFile( const char* f, MPROG_DATA* mprg, Room *pRoomIndex );
-static void LoadMudProgs( Area *tarea, FILE* fp );
-static void LoadObjProgs( Area *tarea, FILE* fp );
 static void MobProgReadPrograms( FILE* fp, ProtoMobile *pMobIndex );
 static void ObjProgReadPrograms( FILE* fp, ProtoObject *pObjIndex );
 static void RoomProgReadPrograms( FILE* fp, Room *pRoomIndex );
@@ -106,9 +101,7 @@ void LoadAreaFile( Area *tarea, const std::string &filename )
       else if ( !StrCmp( word, "RESETMSG" ) ) LoadResetMessage(tarea, fpArea);
       /* Rennard */
       else if ( !StrCmp( word, "MOBILES"  ) ) LoadMobiles (tarea, fpArea);
-      else if ( !StrCmp( word, "MUDPROGS" ) ) LoadMudProgs(tarea, fpArea);
       else if ( !StrCmp( word, "OBJECTS"  ) ) LoadObjects (tarea, fpArea);
-      else if ( !StrCmp( word, "OBJPROGS" ) ) LoadObjProgs(tarea, fpArea);
       else if ( !StrCmp( word, "RESETS"   ) ) LoadResets  (tarea, fpArea);
       else if ( !StrCmp( word, "ROOMS"    ) ) LoadRooms   (tarea, fpArea);
       else if ( !StrCmp( word, "SHOPS"    ) ) LoadShops   (tarea, fpArea);
@@ -285,9 +278,8 @@ void SortArea( Area *pArea, bool proto )
 
 static void LoadArea( FILE *fp )
 {
-  Area *pArea;
+  Area *pArea = new Area();
 
-  AllocateMemory( pArea, Area, 1 );
   pArea->Name           = ReadStringToTilde( fp, Log, fBootDb );
   pArea->Author       = CopyString( "unknown" );
   pArea->Filename       = CopyString( strArea );
@@ -750,12 +742,12 @@ static void LoadObjects( Area *tarea, FILE *fp )
 
           if ( letter == 'A' )
             {
-              Affect *paf;
+              Affect *paf = new Affect();
 
-              AllocateMemory( paf, Affect, 1 );
               paf->Type         = -1;
               paf->Duration             = -1;
               paf->Location             = ReadInt( fp, Log, fBootDb );
+
               if ( paf->Location == APPLY_WEAPONSPELL
                    ||   paf->Location == APPLY_WEARSPELL
 		   ||   paf->Location == APPLY_REMOVESPELL
@@ -763,6 +755,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
                 paf->Modifier           = SkillNumberFromSlot( ReadInt(fp, Log, fBootDb) );
               else
                 paf->Modifier           = ReadInt( fp, Log, fBootDb );
+
               paf->AffectedBy           = 0;
               LINK( paf, pObjIndex->FirstAffect, pObjIndex->LastAffect,
                     Next, Previous );
@@ -771,9 +764,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
 
           else if ( letter == 'E' )
             {
-              ExtraDescription *ed;
-
-              AllocateMemory( ed, ExtraDescription, 1 );
+              ExtraDescription *ed = new ExtraDescription();
               ed->Keyword               = ReadStringToTilde( fp, Log, fBootDb );
               ed->Description           = ReadStringToTilde( fp, Log, fBootDb );
               LINK( ed, pObjIndex->FirstExtraDescription, pObjIndex->LastExtraDescription,
@@ -1063,9 +1054,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
             }
           else if ( letter == 'E' )
             {
-              ExtraDescription *ed;
-
-              AllocateMemory( ed, ExtraDescription, 1 );
+              ExtraDescription *ed = new ExtraDescription();
               ed->Keyword               = ReadStringToTilde( fp, Log, fBootDb );
               ed->Description           = ReadStringToTilde( fp, Log, fBootDb );
               pRoomIndex->Add(ed);
@@ -1101,9 +1090,8 @@ static void LoadShops( Area *tarea, FILE *fp )
     {
       ProtoMobile *pMobIndex = NULL;
       int iTrade = 0;
-      Shop *pShop = NULL;
+      Shop *pShop = new Shop();
 
-      AllocateMemory( pShop, Shop, 1 );
       pShop->Keeper             = ReadInt( fp, Log, fBootDb );
 
       if ( pShop->Keeper == INVALID_VNUM )
@@ -1135,9 +1123,7 @@ static void LoadRepairs( Area *tarea, FILE *fp )
     {
       ProtoMobile *pMobIndex;
       int iFix;
-      RepairShop *rShop = NULL;
-
-      AllocateMemory( rShop, RepairShop, 1 );
+      RepairShop *rShop = new RepairShop();
       rShop->Keeper             = ReadInt( fp, Log, fBootDb );
 
       if ( rShop->Keeper == INVALID_VNUM )
@@ -1242,54 +1228,12 @@ static void LoadRanges( Area *tarea, FILE *fp )
     }
 }
 
-static void LoadMudProgs( Area *tarea, FILE *fp )
-{
-  ProtoMobile *iMob = nullptr;
-  MPROG_DATA *working = nullptr;
-  char letter = 0;
-  int value = 0;
-
-  for ( ; ; )
-    switch ( letter = ReadChar( fp, Log, fBootDb ) )
-      {
-      default:
-        Log->Bug( "%s: bad command '%c'.", __FUNCTION__, letter);
-        exit(1);
-        break;
-      case 'S':
-      case 's':
-        ReadToEndOfLine( fp, Log, fBootDb );
-        return;
-      case '*':
-        ReadToEndOfLine( fp, Log, fBootDb );
-	 break;
-      case 'M':
-      case 'm':
-        value = ReadInt( fp, Log, fBootDb );
-        if ( ( iMob = GetProtoMobile( value ) ) == NULL )
-          {
-            Log->Bug( "%s: vnum %d doesnt exist", __FUNCTION__, value );
-            exit( 1 );
-          }
-
-        AllocateMemory( working, MPROG_DATA, 1 );
-        iMob->mprog.Add(working);
-
-        working = MobProgReadFile( ReadWord( fp, Log, fBootDb ), working, iMob );
-        ReadToEndOfLine( fp, Log, fBootDb );
-        break;
-      }
-
-  return;
-}
-
 /* mud prog functions */
 
 /* This routine reads in scripts of MUDprograms from a file */
 
 static int MudProgNameToType( const char *name )
 {
-  if ( !StrCmp( name, "in_file_prog"   ) )     return IN_FILE_PROG;
   if ( !StrCmp( name, "act_prog"       ) )    return ACT_PROG;
   if ( !StrCmp( name, "speech_prog"    ) )     return SPEECH_PROG;
   if ( !StrCmp( name, "rand_prog"      ) )     return RAND_PROG;
@@ -1329,83 +1273,11 @@ static int MudProgNameToType( const char *name )
   return( ERROR_PROG );
 }
 
-static MPROG_DATA *MobProgReadFile( const char *f, MPROG_DATA *mprg, ProtoMobile *pMobIndex )
-{
-  char        MUDProgfile[ MAX_INPUT_LENGTH ];
-  FILE       *progfile;
-  char        letter;
-  MPROG_DATA *mprg_next, *mprg2;
-  bool        done = false;
-
-  sprintf( MUDProgfile, "%s%s", PROG_DIR, f );
-
-  progfile = fopen( MUDProgfile, "r" );
-  if ( !progfile )
-    {
-      Log->Bug( "Mob: %d couldn't open mudprog file", pMobIndex->Vnum );
-      exit( 1 );
-    }
-
-  mprg2 = mprg;
-  switch ( letter = ReadChar( progfile, Log, fBootDb ) )
-    {
-    case '>':
-      break;
-    case '|':
-      Log->Bug( "empty mudprog file." );
-      exit( 1 );
-      break;
-    default:
-      Log->Bug( "in mudprog file syntax error." );
-      exit( 1 );
-      break;
-    }
-
-  while ( !done )
-    {
-      mprg2->type = MudProgNameToType( ReadWord( progfile, Log, fBootDb ) );
-      switch ( mprg2->type )
-        {
-        case ERROR_PROG:
-          Log->Bug( "mudprog file type error" );
-          exit( 1 );
-          break;
-        case IN_FILE_PROG:
-          Log->Bug( "mprog file contains a call to file." );
-          exit( 1 );
-          break;
-        default:
-          pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = ReadStringToTilde( progfile, Log, fBootDb );
-          mprg2->comlist       = ReadStringToTilde( progfile, Log, fBootDb );
-          switch ( letter = ReadChar( progfile, Log, fBootDb ) )
-            {
-            case '>':
-              AllocateMemory( mprg_next, MPROG_DATA, 1 );
-              mprg_next->Next = mprg2;
-              mprg2 = mprg_next;
-              break;
-            case '|':
-              done = true;
-              break;
-	       default:
-              Log->Bug( "in mudprog file syntax error." );
-              exit( 1 );
-              break;
-            }
-          break;
-        }
-    }
-  fclose( progfile );
-  return mprg2;
-}
-
 /* This procedure is responsible for reading any in_file MUDprograms.
  */
 
 static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
 {
-  MPROG_DATA *mprg = nullptr;
   char letter = 0;
   bool done = false;
 
@@ -1415,7 +1287,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
       exit( 1 );
     }
 
-  AllocateMemory( mprg, MPROG_DATA, 1 );
+  MPROG_DATA *mprg = new MPROG_DATA();
   pMobIndex->mprog.Add(mprg);
 
   while ( !done )
@@ -1429,29 +1301,6 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
           exit( 1 );
           break;
 
-        case IN_FILE_PROG:
-          mprg = MobProgReadFile( ReadStringToTilde( fp, Log, fBootDb ), mprg,pMobIndex );
-          ReadToEndOfLine( fp, Log, fBootDb );
-
-          switch ( letter = ReadChar( fp, Log, fBootDb ) )
-            {
-            case '>':
-              AllocateMemory( mprg, MPROG_DATA, 1 );
-              pMobIndex->mprog.Add(mprg);
-              break;
-
-            case '|':
-              ReadToEndOfLine( fp, Log, fBootDb );
-              done = true;
-              break;
-
-            default:
-              Log->Bug( "%s: vnum %d bad MUDPROG.", __FUNCTION__, pMobIndex->Vnum );
-              exit( 1 );
-              break;
-            }
-          break;
-
         default:
           pMobIndex->mprog.progtypes = pMobIndex->mprog.progtypes | mprg->type;
           mprg->arglist        = ReadStringToTilde( fp, Log, fBootDb );
@@ -1462,7 +1311,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
           switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
-              AllocateMemory( mprg, MPROG_DATA, 1 );
+              mprg = new MPROG_DATA();
               pMobIndex->mprog.Add(mprg);
               break;
 
@@ -1482,141 +1331,12 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
     }
 }
 
-
-
-/*************************************************************/
-/* obj prog functions */
-/* This routine transfers between alpha and numeric forms of the
- *  mob_prog bitvector types. This allows the use of the words in the
- *  mob/script files.
- */
-
-/* This routine reads in scripts of OBJprograms from a file */
-
-
-static MPROG_DATA *ObjProgReadFile( const char *f, MPROG_DATA *mprg, ProtoObject *pObjIndex )
-{
-  char        MUDProgfile[ MAX_INPUT_LENGTH ];
-  FILE       *progfile;
-  char        letter;
-  MPROG_DATA *mprg_next, *mprg2;
-  bool        done = false;
-
-  sprintf( MUDProgfile, "%s%s", PROG_DIR, f );
-
-  progfile = fopen( MUDProgfile, "r" );
-  if ( !progfile )
-    {
-      Log->Bug( "Obj: %d couldnt open mudprog file", pObjIndex->Vnum );
-      exit( 1 );
-    }
-
-  mprg2 = mprg;
-  switch ( letter = ReadChar( progfile, Log, fBootDb ) )
-    {
-    case '>':
-      break;
-    case '|':
-      Log->Bug( "empty objprog file." );
-      exit( 1 );
-      break;
-    default:
-      Log->Bug( "in objprog file syntax error." );
-      exit( 1 );
-      break;
-    }
-
-  while ( !done )
-    {
-      mprg2->type = MudProgNameToType( ReadWord( progfile, Log, fBootDb ) );
-      switch ( mprg2->type )
-        {
-        case ERROR_PROG:
-          Log->Bug( "objprog file type error" );
-          exit( 1 );
-	   break;
-        case IN_FILE_PROG:
-          Log->Bug( "objprog file contains a call to file." );
-          exit( 1 );
-          break;
-        default:
-          pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = ReadStringToTilde( progfile, Log, fBootDb );
-          mprg2->comlist       = ReadStringToTilde( progfile, Log, fBootDb );
-          switch ( letter = ReadChar( progfile, Log, fBootDb ) )
-            {
-            case '>':
-              AllocateMemory( mprg_next, MPROG_DATA, 1 );
-              mprg_next->Next = mprg2;
-              mprg2 = mprg_next;
-              break;
-            case '|':
-              done = true;
-              break;
-            default:
-              Log->Bug( "in objprog file syntax error." );
-              exit( 1 );
-              break;
-            }
-          break;
-        }
-    }
-  fclose( progfile );
-  return mprg2;
-}
-
-/* Load a MUDprogram section from the area file.
- */
-static void LoadObjProgs( Area *tarea, FILE *fp )
-{
-  ProtoObject *iObj = nullptr;
-  MPROG_DATA *working = nullptr;
-  char letter = 0;
-  int value = 0;
-
-  for ( ; ; )
-    switch ( letter = ReadChar( fp, Log, fBootDb ) )
-      {
-      default:
-        Log->Bug( "%s: bad command '%c'.", __FUNCTION__, letter);
-        exit(1);
-        break;
-      case 'S':
-      case 's':
-        ReadToEndOfLine( fp, Log, fBootDb );
-	return;
-      case '*':
-        ReadToEndOfLine( fp, Log, fBootDb );
-        break;
-      case 'M':
-      case 'm':
-        value = ReadInt( fp, Log, fBootDb );
-        if ( ( iObj = GetProtoObject( value ) ) == NULL )
-          {
-            Log->Bug( "%s: vnum %d doesnt exist", __FUNCTION__, value );
-            exit( 1 );
-          }
-
-        /* Go to the end of the prog command list if other commands
-           exist */
-
-        AllocateMemory( working, MPROG_DATA, 1 );
-        iObj->mprog.Add(working);
-        working = ObjProgReadFile( ReadWord( fp, Log, fBootDb ), working, iObj );
-        ReadToEndOfLine( fp, Log, fBootDb );
-        break;
-      }
-
-  return;
-}
-
 /* This procedure is responsible for reading any in_file OBJprograms.
  */
 
 static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
 {
-  MPROG_DATA *mprg;
-  char        letter;
+  char        letter = 0;
   bool        done = false;
 
   if ( ( letter = ReadChar( fp, Log, fBootDb ) ) != '>' )
@@ -1625,7 +1345,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
       exit( 1 );
     }
 
-  AllocateMemory( mprg, MPROG_DATA, 1 );
+  MPROG_DATA *mprg = new MPROG_DATA();
   pObjIndex->mprog.Add(mprg);
 
   while ( !done )
@@ -1639,29 +1359,6 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
           exit( 1 );
           break;
 
-        case IN_FILE_PROG:
-          mprg = ObjProgReadFile( ReadStringToTilde( fp, Log, fBootDb ), mprg,pObjIndex );
-          ReadToEndOfLine( fp, Log, fBootDb );
-
-          switch ( letter = ReadChar( fp, Log, fBootDb ) )
-            {
-            case '>':
-              AllocateMemory( mprg, MPROG_DATA, 1 );
-              pObjIndex->mprog.Add(mprg);
-              break;
-
-            case '|':
-              ReadToEndOfLine( fp, Log, fBootDb );
-              done = true;
-              break;
-
-            default:
-              Log->Bug( "%s: vnum %d bad OBJPROG.", __FUNCTION__, pObjIndex->Vnum );
-              exit( 1 );
-              break;
-            }
-          break;
-
         default:
           pObjIndex->mprog.progtypes = pObjIndex->mprog.progtypes | mprg->type;
           mprg->arglist        = ReadStringToTilde( fp, Log, fBootDb );
@@ -1672,7 +1369,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
           switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
-              AllocateMemory( mprg, MPROG_DATA, 1 );
+              mprg = new MPROG_DATA();
               pObjIndex->mprog.Add(mprg);
               break;
 
@@ -1693,92 +1390,12 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
   return;
 }
 
-/*************************************************************/
-/* room prog functions */
-/* This routine transfers between alpha and numeric forms of the
- *  mob_prog bitvector types. This allows the use of the words in the
- *  mob/script files.
- */
-
-/* This routine reads in scripts of OBJprograms from a file */
-static MPROG_DATA *RoomProgReadFile( const char *f, MPROG_DATA *mprg, Room *RoomIndex )
-{
-  char        MUDProgfile[ MAX_INPUT_LENGTH ];
-  FILE       *progfile;
-  char        letter;
-  MPROG_DATA *mprg_next, *mprg2;
-  bool        done = false;
-
-  sprintf( MUDProgfile, "%s%s", PROG_DIR, f );
-
-  progfile = fopen( MUDProgfile, "r" );
-  if ( !progfile )
-    {
-      Log->Bug( "Room: %d couldnt open roomprog file", RoomIndex->Vnum );
-      exit( 1 );
-    }
-
-  mprg2 = mprg;
-  switch ( letter = ReadChar( progfile, Log, fBootDb ) )
-    {
-    case '>':
-       break;
-    case '|':
-      Log->Bug( "empty roomprog file." );
-      exit( 1 );
-      break;
-    default:
-      Log->Bug( "in roomprog file syntax error." );
-      exit( 1 );
-      break;
-    }
-
-  while ( !done )
-    {
-      mprg2->type = MudProgNameToType( ReadWord( progfile, Log, fBootDb ) );
-      switch ( mprg2->type )
-        {
-        case ERROR_PROG:
-          Log->Bug( "roomprog file type error" );
-          exit( 1 );
-          break;
-        case IN_FILE_PROG:
-          Log->Bug( "roomprog file contains a call to file." );
-          exit( 1 );
-          break;
-        default:
-          RoomIndex->mprog.progtypes = RoomIndex->mprog.progtypes | mprg2->type;
-          mprg2->arglist       = ReadStringToTilde( progfile, Log, fBootDb );
-          mprg2->comlist       = ReadStringToTilde( progfile, Log, fBootDb );
-          switch ( letter = ReadChar( progfile, Log, fBootDb ) )
-            {
-            case '>':
-              AllocateMemory( mprg_next, MPROG_DATA, 1 );
-              mprg_next->Next = mprg2;
-              mprg2 = mprg_next;
-              break;
-	      case '|':
-              done = true;
-              break;
-            default:
-              Log->Bug( "in roomprog file syntax error." );
-              exit( 1 );
-              break;
-            }
-          break;
-        }
-    }
-  fclose( progfile );
-  return mprg2;
-}
-
 /* This procedure is responsible for reading any in_file ROOMprograms.
  */
 
 static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
 {
-  MPROG_DATA *mprg;
-  char        letter;
+  char        letter = 0;
   bool        done = false;
 
   if ( ( letter = ReadChar( fp, Log, fBootDb ) ) != '>' )
@@ -1787,7 +1404,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
       exit( 1 );
     }
 
-  AllocateMemory( mprg, MPROG_DATA, 1 );
+  MPROG_DATA *mprg = new MPROG_DATA();
   pRoomIndex->mprog.Add(mprg);
 
   while ( !done )
@@ -1800,26 +1417,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
           Log->Bug( "%s: vnum %d ROOMPROG type.", __FUNCTION__, pRoomIndex->Vnum );
           exit( 1 );
           break;
-        case IN_FILE_PROG:
-          mprg = RoomProgReadFile( ReadStringToTilde( fp, Log, fBootDb ), mprg,pRoomIndex );
-          ReadToEndOfLine( fp, Log, fBootDb );
-          switch ( letter = ReadChar( fp, Log, fBootDb ) )
-            {
-            case '>':
-              AllocateMemory( mprg->Next, MPROG_DATA, 1 );
-              mprg = mprg->Next;
-              break;
-            case '|':
-              mprg->Next = NULL;
-              ReadToEndOfLine( fp, Log, fBootDb );
-              done = true;
-              break;
-            default:
-              Log->Bug( "%s: vnum %d bad ROOMPROG.", __FUNCTION__, pRoomIndex->Vnum );
-              exit( 1 );
-              break;
-            }
-          break;
+
         default:
           pRoomIndex->mprog.progtypes = pRoomIndex->mprog.progtypes | mprg->type;
           mprg->arglist        = ReadStringToTilde( fp, Log, fBootDb );
@@ -1830,24 +1428,24 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
           switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
-	      AllocateMemory( mprg->Next, MPROG_DATA, 1 );
-              mprg = mprg->Next;
+              mprg = new MPROG_DATA();
+              pRoomIndex->mprog.Add(mprg);
               break;
+              
             case '|':
-              mprg->Next = NULL;
               ReadToEndOfLine( fp, Log, fBootDb );
               done = true;
               break;
+
             default:
               Log->Bug( "%s: vnum %d bad ROOMPROG.", __FUNCTION__, pRoomIndex->Vnum );
               exit( 1 );
               break;
             }
+
           break;
         }
     }
-
-  return;
 }
 
 Area *GetArea( const std::string &name )
@@ -1987,7 +1585,7 @@ void CloseArea( Area *pArea )
                   FreeMemory( xit->Keyword );
                   FreeMemory( xit->Description );
                   rid->Remove(xit);
-                  FreeMemory( xit );
+                  delete xit;
                 }
             }
 
@@ -2034,7 +1632,7 @@ void CloseArea( Area *pArea )
               rid->Remove(eed);
               FreeMemory( eed->Keyword );
               FreeMemory( eed->Description );
-              FreeMemory( eed );
+              delete eed;
             }
 
           std::list<MPROG_ACT_LIST*> mprogActLists(rid->mprog.ActLists());
@@ -2043,7 +1641,7 @@ void CloseArea( Area *pArea )
             {
               rid->mprog.Remove(mpact);
               FreeMemory( mpact->buf );
-              FreeMemory( mpact );
+              delete mpact;
             }
 
           std::list<MPROG_DATA*> roomProgs(rid->mprog.MudProgs());
@@ -2053,7 +1651,7 @@ void CloseArea( Area *pArea )
               rid->mprog.Remove(mprog);
 	      FreeMemory( mprog->arglist );
               FreeMemory( mprog->comlist );
-              FreeMemory( mprog );
+              delete mprog;
             }
 
           if ( rid == RoomIndexHash[icnt] )
@@ -2073,7 +1671,8 @@ void CloseArea( Area *pArea )
               else
                 trid->Next = rid->Next;
             }
-          FreeMemory(rid);
+
+          delete rid;
         }
 
       for ( mid = MobIndexHash[icnt]; mid; mid = mid_next )
@@ -2092,13 +1691,13 @@ void CloseArea( Area *pArea )
           if ( mid->Shop )
             {
               Shops->Remove(mid->Shop);
-              FreeMemory( mid->Shop );
+              delete mid->Shop;
             }
 
           if ( mid->RepairShop )
             {
               RepairShops->Remove(mid->RepairShop);
-              FreeMemory( mid->RepairShop );
+              delete mid->RepairShop;
             }
 
           std::list<MPROG_DATA*> mobProgs(mid->mprog.MudProgs());
@@ -2108,11 +1707,13 @@ void CloseArea( Area *pArea )
               mid->mprog.Remove(mprog);
               FreeMemory(mprog->arglist);
               FreeMemory(mprog->comlist);
-              FreeMemory(mprog);
+              delete mprog;
             }
 
           if ( mid == MobIndexHash[icnt] )
-            MobIndexHash[icnt] = mid->Next;
+            {
+              MobIndexHash[icnt] = mid->Next;
+            }
           else
             {
               ProtoMobile *tmid;
@@ -2127,7 +1728,7 @@ void CloseArea( Area *pArea )
                 tmid->Next = mid->Next;
             }
 
-	  FreeMemory(mid);
+          delete mid;
         }
 
       for ( oid = ObjectIndexHash[icnt]; oid; oid = oid_next )
@@ -2149,13 +1750,13 @@ void CloseArea( Area *pArea )
               eed_next = eed->Next;
               FreeMemory(eed->Keyword);
               FreeMemory(eed->Description);
-              FreeMemory(eed);
+              delete eed;
             }
 
           for ( paf = oid->FirstAffect; paf; paf = paf_next )
             {
               paf_next = paf->Next;
-              FreeMemory(paf);
+              delete paf;
             }
 
           std::list<MPROG_DATA*> objProgs(oid->mprog.MudProgs());
@@ -2165,7 +1766,7 @@ void CloseArea( Area *pArea )
               oid->mprog.Remove(mprog);
               FreeMemory(mprog->arglist);
               FreeMemory(mprog->comlist);
-              FreeMemory(mprog);
+              delete mprog;
             }
 
           if ( oid == ObjectIndexHash[icnt] )
@@ -2184,20 +1785,23 @@ void CloseArea( Area *pArea )
               else
                 toid->Next = oid->Next;
             }
-          FreeMemory(oid);
+
+          delete oid;
         }
     }
+  
   for ( ereset = pArea->FirstReset; ereset; ereset = ereset_next )
     {
       ereset_next = ereset->Next;
-      FreeMemory(ereset);
+      delete ereset;
     }
+
   FreeMemory(pArea->Name);
   FreeMemory(pArea->Filename);
   FreeMemory(pArea->Author);
   UNLINK( pArea, FirstBuild, LastBuild, Next, Previous );
   UNLINK( pArea, FirstASort, LastASort, NextSort, PreviousSort );
-  FreeMemory( pArea );
+  delete pArea;
 }
 
 void FreeArea( Area *are )
@@ -2208,7 +1812,7 @@ void FreeArea( Area *are )
   while ( are->FirstReset )
     FreeReset( are, are->FirstReset );
 
-  FreeMemory( are );
+  delete are;
 }
 
 void AssignAreaTo( Character *ch )
@@ -2247,7 +1851,7 @@ void AssignAreaTo( Character *ch )
         {
           sprintf( buf, "Creating area entry for %s", ch->Name );
           Log->LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
-          AllocateMemory( tarea, Area, 1 );
+          tarea = new Area();
           LINK( tarea, FirstBuild, LastBuild, Next, Previous );
           sprintf( buf, "{PROTO} %s's area in progress", ch->Name );
           tarea->Name           = CopyString( buf );
@@ -2285,7 +1889,7 @@ void CleanResets( Area *tarea )
   for ( pReset = tarea->FirstReset; pReset; pReset = pReset_next )
     {
       pReset_next = pReset->Next;
-      FreeMemory( pReset );
+      delete pReset;
       --top_reset;
     }
 

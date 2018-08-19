@@ -4,26 +4,29 @@
 #include <array>
 #include <utility/repository.hpp>
 #include "types.hpp"
+#include "constants.hpp"
 
 constexpr size_t MAX_LANDINGSITE = 3;
 
-struct LandingSite
+class LandingSite
 {
-  char  *LocationName;
-  vnum_t Dock;
-  bool   IsSecret;
+public:
+  char  *LocationName = nullptr;
+  vnum_t Dock = INVALID_VNUM;
+  bool   IsSecret = false;
 };
 
-struct Spaceobject
+class Spaceobject
 {
-  struct Planet *Planet;
-  char        *Name;
-  SpaceobjectType Type;
+public:
+  class Planet *Planet = nullptr;
+  char        *Name = nullptr;
+  SpaceobjectType Type = 0;
   Vector3      Position;
   Vector3      Heading;
-  int          Speed;
-  int          Gravity;
-  bool         IsSimulator;
+  int          Speed = 0;
+  int          Gravity = 0;
+  bool         IsSimulator = false;
 
   std::array<LandingSite, MAX_LANDINGSITE> LandingSites;
 };

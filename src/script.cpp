@@ -178,9 +178,9 @@ unsigned int LuaLoadFlags( lua_State *L, const std::string &key )
 static SmaugAffect *LuaLoadOneSmaugAffect( lua_State *L )
 {
   int idx = lua_gettop( L );
-  SmaugAffect *affect = NULL;
   luaL_checktype( L, 1, LUA_TTABLE );
-  AllocateMemory( affect, SmaugAffect, 1 );
+
+  SmaugAffect *affect = new SmaugAffect();
 
   lua_getfield( L, idx, "Duration" );
   lua_getfield( L, idx, "Modifier" );

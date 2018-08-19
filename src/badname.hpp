@@ -11,8 +11,9 @@
 
 class BadNameRepository;
 
-struct BadName
+class BadName
 {
+public:
   std::string Name;
 };
 

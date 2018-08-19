@@ -1484,7 +1484,7 @@ void FreeCharacter( Character *ch )
   for(MPROG_ACT_LIST *mpact : ch->mprog.ActLists())
     {
       FreeMemory( mpact->buf );
-      FreeMemory( mpact        );
+      delete mpact;
     }
   
   delete ch;

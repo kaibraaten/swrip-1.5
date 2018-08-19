@@ -323,7 +323,7 @@ void do_who( Character *ch, char *argument )
        */
 
       /* First make the structure. */
-      AllocateMemory( cur_who, WhoData, 1 );
+      cur_who = new WhoData();
       cur_who->Text = CopyString( buf );
       if ( IsImmortal( wch ) )
         cur_who->Type = WT_IMM;
@@ -375,7 +375,7 @@ void do_who( Character *ch, char *argument )
         ch->Echo(cur_who->Text);
       next_who = cur_who->Next;
       FreeMemory( cur_who->Text );
-      FreeMemory( cur_who );
+      delete cur_who;
     }
 
 
@@ -396,7 +396,7 @@ void do_who( Character *ch, char *argument )
 
       next_who = cur_who->Next;
       FreeMemory( cur_who->Text );
-      FreeMemory( cur_who );
+      delete cur_who;
     }
 
   if ( first_imm )
@@ -415,7 +415,7 @@ void do_who( Character *ch, char *argument )
         ch->Echo(cur_who->Text);
       next_who = cur_who->Next;
       FreeMemory( cur_who->Text );
-      FreeMemory( cur_who );
+      delete cur_who;
     }
 
   if ( NullCh )
