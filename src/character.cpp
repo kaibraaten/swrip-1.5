@@ -35,11 +35,10 @@
 #include "protoobject.hpp"
 #include "protomob.hpp"
 
-static bool FindComlink( const Object *element, const Object **comlink );
-
 struct Character::Impl
 {
   std::list<Affect*> Affects;
+  std::list<Object*> Objects;
 };
 
 Character::Character(class PCData *pcdata, Descriptor *desc)
@@ -207,6 +206,23 @@ void Character::Add(Affect *affect)
 void Character::Remove(Affect *affect)
 {
   pImpl->Affects.remove(affect);
+}
+
+const std::list<Object*> &Character::Objects() const
+{
+  return pImpl->Objects;
+}
+
+void Character::Add(Object *object)
+{
+  pImpl->Objects.push_back(object);
+  object->CarriedBy = this;
+}
+
+void Character::Remove(Object *object)
+{
+  pImpl->Objects.remove(object);
+  object->CarriedBy = nullptr;
 }
 
 ////////////////////////////////////////////////////////////////
@@ -447,49 +463,24 @@ int TimesKilled( const Character *ch, const Character *mob )
   return 0;
 }
 
-static bool FindComlink( const Object *element, const Object **comlink )
-{
-  if( element->Prototype->ItemType == ITEM_COMLINK )
-    {
-      *comlink = element;
-      return false;
-    }
-
-  return true;
-}
-
 bool HasComlink( const Character *ch )
 {
-  const Object *comlink = NULL;
-
   if( IsImmortal( ch ) )
     {
       return true;
     }
 
-  ForEach( Object, ch->LastCarrying, PreviousContent, FindComlink, &comlink );
-
-  return comlink ? true : false;
-}
-
-static bool FindDiploma( const Object *element, const Object **diploma )
-{
-  if( element->Prototype->Vnum == OBJ_VNUM_SCHOOL_DIPLOMA )
-    {
-      *diploma = element;
-      return false;
-    }
-
-  return true;
+  const Object *comlink = GetFirstObjectOfType(ch, ITEM_COMLINK);
+  return comlink != nullptr ? true : false;
 }
 
 bool HasDiploma( const Character *ch )
 {
-  const Object *diploma = NULL;
-
-  ForEach( Object, ch->LastCarrying, PreviousContent, FindDiploma, &diploma );
-
-  return diploma ? true : false;
+  return Find(ch->Objects(),
+              [](auto obj)
+              {
+                return obj->Prototype->Vnum == OBJ_VNUM_SCHOOL_DIPLOMA;
+              });
 }
 
 short GetAbilityLevel( const Character *ch, short ability )
@@ -516,11 +507,11 @@ void SetAbilityLevel( Character *ch, short ability, int newlevel )
  */
 bool IsAffected( const Character *ch, int sn )
 {
-  return Filter(ch->Affects(),
-                [sn](const auto affect)
-                {
-                  return affect->Type == sn;
-                }).empty() == false;
+  return Find(ch->Affects(),
+              [sn](const auto affect)
+              {
+                return affect->Type == sn;
+              });
 }
 
 bool IsAffectedBy( const Character *ch, int affected_by_bit )
@@ -534,19 +525,24 @@ bool IsAffectedBy( const Character *ch, int affected_by_bit )
  */
 Object *GetEquipmentOnCharacter( const Character *ch, WearLocation iWear )
 {
-  Object *obj, *maxobj = NULL;
+  Object *maxobj = NULL;
 
-  for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
-    if ( obj->WearLoc == iWear )
-      {
-        if ( !obj->Prototype->Layers )
-          return obj;
-        else
-          if ( !maxobj
-               ||    obj->Prototype->Layers > maxobj->Prototype->Layers )
-            maxobj = obj;
-      }
-
+  for(Object *obj : ch->Objects())
+    {
+      if ( obj->WearLoc == iWear )
+        {
+          if ( !obj->Prototype->Layers )
+            {
+              return obj;
+            }
+          else if ( !maxobj
+                    || obj->Prototype->Layers > maxobj->Prototype->Layers )
+            {
+              maxobj = obj;
+            }
+        }
+    }
+  
   return maxobj;
 }
 
@@ -628,6 +624,7 @@ void UnequipCharacter( Character *ch, Object *obj )
 
   for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
     ModifyAffect( ch, paf, false );
+
   if ( obj->CarriedBy )
     for ( paf = obj->FirstAffect; paf; paf = paf->Next )
       ModifyAffect( ch, paf, false );
@@ -648,24 +645,34 @@ void UnequipCharacter( Character *ch, Object *obj )
 Object *GetCarriedObject( const Character *ch, const std::string &argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Object *obj = NULL;
-  int number = 0, count = 0;
   vnum_t vnum = INVALID_VNUM;
-
-  number = NumberArgument( argument, arg );
+  int count = 0;
+  int number = NumberArgument( argument, arg );
 
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
-    vnum = atoi( arg );
+    {
+      vnum = atoi( arg );
+    }
 
-  for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
-    if ( obj->WearLoc == WEAR_NONE
-         &&   CanSeeObject( ch, obj )
-         &&  (NiftyIsName( arg, obj->Name ) || obj->Prototype->Vnum == vnum) )
-      if ( (count += obj->Count) >= number )
-        return obj;
-
+  for(Object *obj : Reverse(ch->Objects()))
+    {
+      if ( obj->WearLoc == WEAR_NONE
+           && CanSeeObject( ch, obj )
+           && (NiftyIsName( arg, obj->Name ) || obj->Prototype->Vnum == vnum) )
+        {
+          count += obj->Count;
+          
+          if ( count >= number )
+            {
+              return obj;
+            }
+        }
+    }
+  
   if ( vnum != INVALID_VNUM )
-    return NULL;
+    {
+      return NULL;
+    }
 
   /* If we didn't find an exact match, run through the list of objects
      again looking for prefix matching, ie swo == sword.
@@ -673,12 +680,18 @@ Object *GetCarriedObject( const Character *ch, const std::string &argument )
   */
   count = 0;
 
-  for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
-    if ( obj->WearLoc == WEAR_NONE
-         &&   CanSeeObject( ch, obj )
-         &&   NiftyIsNamePrefix( arg, obj->Name ) )
-      if ( (count += obj->Count) >= number )
-        return obj;
+  for(Object *obj : Reverse(ch->Objects()))
+    {
+      if ( obj->WearLoc == WEAR_NONE
+           && CanSeeObject( ch, obj )
+           && NiftyIsNamePrefix( arg, obj->Name ) )
+        {
+          if ( (count += obj->Count) >= number )
+            {
+              return obj;
+            }
+        }
+    }
 
   return NULL;
 }
@@ -689,7 +702,6 @@ Object *GetCarriedObject( const Character *ch, const std::string &argument )
 Object *GetWornObject( const Character *ch, const std::string &argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Object *obj = NULL;
   int number = 0, count = 0;
   vnum_t vnum = INVALID_VNUM;
 
@@ -703,7 +715,7 @@ Object *GetWornObject( const Character *ch, const std::string &argument )
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     vnum = atoi( arg );
 
-  for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
+  for(Object *obj : Reverse(ch->Objects()))
     if ( obj->WearLoc != WEAR_NONE
          &&   CanSeeObject( ch, obj )
          &&  (NiftyIsName( arg, obj->Name ) || obj->Prototype->Vnum == vnum) )
@@ -718,7 +730,8 @@ Object *GetWornObject( const Character *ch, const std::string &argument )
      Added by Narn, Sept/96
   */
   count = 0;
-  for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
+
+  for(Object *obj : Reverse(ch->Objects()))
     if ( obj->WearLoc != WEAR_NONE
          &&   CanSeeObject( ch, obj )
          &&   NiftyIsNamePrefix( arg, obj->Name ) )
@@ -994,7 +1007,7 @@ bool CanDropObject( const Character *ch, const Object *obj )
   if ( !IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL )
     return true;
 
-  if ( IsNpc(ch) && ch->Prototype->Vnum == 3 )
+  if ( IsNpc(ch) && ch->Prototype->Vnum == MOB_VNUM_SUPERMOB )
     return true;
 
   return false;
@@ -1006,17 +1019,17 @@ bool CanDropObject( const Character *ch, const Object *obj )
 void FixCharacterStats( Character *ch )
 {
   Object *carry[MAX_LEVEL*200];
-  Object *obj = NULL;
   int ncarry = 0;
 
   DeEquipCharacter( ch );
 
-  while ( (obj=ch->FirstCarrying) != NULL )
+  while(!ch->Objects().empty())
     {
+      Object *obj = ch->Objects().front();
       carry[ncarry++]  = obj;
       ObjectFromCharacter( obj );
     }
-
+  
   for(Affect *aff : ch->Affects())
     {
       ModifyAffect( ch, aff, false );
@@ -1072,9 +1085,8 @@ void ImproveMentalState( Character *ch, int mod )
 
   if ( ch->MentalState < 0 )
     ch->MentalState = urange( -100, ch->MentalState + c, 0 );
-  else
-    if ( ch->MentalState > 0 )
-      ch->MentalState = urange( 0, ch->MentalState - c, 100 );
+  else if ( ch->MentalState > 0 )
+    ch->MentalState = urange( 0, ch->MentalState - c, 100 );
 }
 
 /*
@@ -1314,34 +1326,6 @@ void ResetPlayerOnDeath( Character *ch )
   ch->PCData->JailVnum = INVALID_VNUM;
 }
 
-int GetCostToQuit( const Character *ch )
-{
-  long cost = 1000;
-  int golddem = 100000;
-  long gold = 0;
-
-  if( !ch )
-    {
-      return 0;
-    }
-
-  if( ch->TopLevel <= 6 )
-    {
-      return 0;
-    }
-
-  gold = ch->Gold + (IsNpc(ch) ? 0 : ch->PCData->Bank) + 1;
-
-  if( gold < 5000 )
-    {
-      return 0;
-    }
-
-  cost *= gold / golddem;
-
-  return (int) cost;
-}
-
 bool IsBlind( const Character *ch )
 {
   if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT) )
@@ -1360,17 +1344,12 @@ bool IsBlind( const Character *ch )
 
 bool HasKey( const Character *ch, vnum_t key )
 {
-  Object *obj = NULL;
-
-  for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
-    {
-      if ( obj->Prototype->Vnum == key || obj->Value[OVAL_KEY_UNLOCKS_VNUM] == key )
-        {
-          return true;
-        }
-    }
-
-  return false;
+  return Find(ch->Objects(),
+              [key](auto obj)
+              {
+                return obj->Prototype->Vnum == key
+                  || obj->Value[OVAL_KEY_UNLOCKS_VNUM] == key;
+              });
 }
 
 /*
@@ -1432,8 +1411,7 @@ vnum_t WhereHome( const Character *ch)
  */
 void FreeCharacter( Character *ch )
 {
-  Object *obj;
-  Timer *timer;
+  Timer *timer = nullptr;
 
   if ( !ch )
     {
@@ -1444,17 +1422,21 @@ void FreeCharacter( Character *ch )
   if ( ch->Desc )
     Log->Bug( "%s: char still has descriptor.", __FUNCTION__ );
 
-  while ( (obj = ch->LastCarrying) != NULL )
-    ExtractObject( obj );
-
+  while(!ch->Objects().empty())
+    {
+      ExtractObject( ch->Objects().back() );
+    }
+  
   while(!ch->Affects().empty())
     {
       RemoveAffect( ch, ch->Affects().back() );
     }
   
   while ( (timer = ch->FirstTimer) != NULL )
-    ExtractTimer( ch, timer );
-
+    {
+      ExtractTimer( ch, timer );
+    }
+  
   FreeMemory( ch->Name             );
   FreeMemory( ch->ShortDescr      );
   FreeMemory( ch->LongDescr       );
@@ -1743,3 +1725,11 @@ unsigned int GetKillTrackCount(const Character *ch)
   return urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
 }
 
+Object *GetFirstObjectOfType(const Character *ch, ItemTypes type)
+{
+  return Find(ch->Objects(),
+              [type](auto obj)
+              {
+                return obj->ItemType == type;
+              });
+}

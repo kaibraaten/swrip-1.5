@@ -1604,4 +1604,19 @@ auto Filter(const Container &original, UnaryPredicate pred)
   return filteredElements;
 }
 
+template<typename Container>
+auto Reverse(const Container &original)
+{
+  Container reversed(std::rbegin(original), std::rend(original));
+  return reversed;
+}
+
+template<typename Container, typename UnaryPredicate>
+auto Find(const Container &original, UnaryPredicate pred)
+{
+  auto result = Filter(original, pred);
+
+  return !result.empty() ? *std::begin(result) : nullptr;
+}
+
 #endif /* include guard */

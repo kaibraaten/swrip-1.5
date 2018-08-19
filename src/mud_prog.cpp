@@ -457,7 +457,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( const Object *pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
+      for ( const Object *pObj : mob->Objects() )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum )
 	    {
@@ -505,7 +505,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( const Object *pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
+      for ( const Object *pObj : mob->Objects() )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->ItemType == type )
 	    {
@@ -617,7 +617,6 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
   if ( !StrCmp(chck, "ovnumcarry") )
     {
-      Object *pObj = NULL;
       int vnum = atoi(cvar);
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
@@ -628,7 +627,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
+      for(const Object *pObj : mob->Objects())
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum )
 	    {
@@ -653,7 +652,6 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
   if ( !StrCmp(chck, "otypecarry") )
     {
-      Object *pObj = NULL;
       ItemTypes type = ITEM_NONE;
 
       if ( IsNumber(cvar) )
@@ -673,7 +671,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
+      for ( const Object *pObj : mob->Objects() )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->ItemType == type )
 	    {
@@ -695,9 +693,9 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
     }
+
   if ( !StrCmp(chck, "ovnumwear") )
     {
-      Object *pObj;
       int vnum = atoi(cvar);
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
@@ -708,7 +706,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
+      for(const Object *pObj : mob->Objects())
 	{
 	  if ( pObj->WearLoc != WEAR_NONE && CanSeeObject(mob, pObj) &&
 	       pObj->Prototype->Vnum == vnum )
@@ -734,7 +732,6 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
   if ( !StrCmp(chck, "otypewear") )
     {
-      Object *pObj;
       ItemTypes type = ITEM_NONE;
 
       if ( IsNumber(cvar) )
@@ -750,11 +747,15 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
-        if ( pObj->WearLoc != WEAR_NONE && CanSeeObject(mob, pObj) &&
-             pObj->ItemType == type )
-          lhsvl++;
-
+      for(const Object *pObj : mob->Objects())
+        {
+          if ( pObj->WearLoc != WEAR_NONE && CanSeeObject(mob, pObj) &&
+               pObj->ItemType == type )
+            {
+              lhsvl++;
+            }
+        }
+      
       rhsvl = IsNumber(rval) ? atoi(rval) : -1;
 
       if ( rhsvl < 1 )
@@ -768,7 +769,6 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
   if ( !StrCmp(chck, "ovnuminv") )
     {
-      Object *pObj;
       int vnum = atoi(cvar);
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
@@ -779,11 +779,15 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
-        if ( pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) &&
-             pObj->Prototype->Vnum == vnum )
-          lhsvl++;
-
+      for ( const Object *pObj : mob->Objects() )
+        {
+          if ( pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) &&
+               pObj->Prototype->Vnum == vnum )
+            {
+              lhsvl++;
+            }
+        }
+      
       rhsvl = IsNumber(rval) ? atoi(rval) : -1;
 
       if ( rhsvl < 1 )
@@ -797,7 +801,6 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
   if ( !StrCmp(chck, "otypeinv") )
     {
-      Object *pObj = NULL;
       ItemTypes type = ITEM_NONE;
 
       if ( IsNumber(cvar) )
@@ -813,11 +816,15 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
-        if ( pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) &&
-             pObj->ItemType == type )
-          lhsvl++;
-
+      for(const Object *pObj : mob->Objects())
+        {
+          if ( pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) &&
+               pObj->ItemType == type )
+            {
+              lhsvl++;
+            }
+        }
+      
       rhsvl = IsNumber(rval) ? atoi(rval) : -1;
 
       if ( rhsvl < 1 )
@@ -1030,7 +1037,6 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if (!StrCmp(chck, "iscarrying"))
         {
-          Object *pObj;
           int vnum = atoi(rval);
 
           if (vnum < 1 || vnum > 2097152000)
@@ -1045,7 +1051,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
               return BERR ;
             }
 
-          for (pObj = chkchar->FirstCarrying; pObj; pObj = pObj->NextContent)
+          for(const Object *pObj : chkchar->Objects())
             if (pObj->Prototype->Vnum == vnum)
               return true ;
 
@@ -1054,9 +1060,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( !StrCmp(chck, "iswearing") )
 	{
-	  Object *pObj;
 	  int vnum = atoi(rval);
-	  int iWear;
 
 	  if ( vnum < 1 || vnum > 2097152000 ) {
 	    ProgBug("iswearing: bad vnum", mob);
@@ -1069,9 +1073,9 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 	    return BERR ;
 	  }
 
-        for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
+        for ( int iWear = 0; iWear < MAX_WEAR; iWear++ )
 	  {
-	    for ( pObj = chkchar->FirstCarrying; pObj; pObj = pObj->NextContent )
+	    for ( const Object *pObj : chkchar->Objects() )
 	      {
 		if ( pObj->WearLoc == (WearLocation)iWear )
 		  {

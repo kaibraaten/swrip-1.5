@@ -15,7 +15,6 @@ void do_wear( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Object *obj = NULL;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
@@ -39,14 +38,15 @@ void do_wear( Character *ch, char *argument )
 
   if ( !StrCmp( arg1, "all" ) )
     {
-      Object *obj_next;
-
-      for ( obj = ch->FirstCarrying; obj; obj = obj_next )
+      std::list<Object*> objectsToWear = Filter(ch->Objects(),
+                                                [ch](auto obj)
+                                                {
+                                                  return obj->WearLoc == WEAR_NONE
+                                                    && CanSeeObject( ch, obj );
+                                                });
+      for(Object *obj : objectsToWear)
         {
-          obj_next = obj->NextContent;
-
-          if ( obj->WearLoc == WEAR_NONE && CanSeeObject( ch, obj ) )
-            wear_obj( ch, obj, false, -1 );
+          wear_obj( ch, obj, false, -1 );
         }
 
       return;
@@ -54,16 +54,19 @@ void do_wear( Character *ch, char *argument )
   else
     {
       short wear_bit = -1;
+      Object *obj = GetCarriedObject( ch, arg1 );
       
-      if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
+      if ( obj == nullptr )
         {
           ch->Echo("You do not have that item.\r\n");
           return;
         }
 
       if ( !IsNullOrEmpty( arg2 ) )
-        wear_bit = GetWearFlag(arg2);
-
+        {
+          wear_bit = GetWearFlag(arg2);
+        }
+      
       wear_obj( ch, obj, true, wear_bit );
     }
 }
@@ -776,23 +779,26 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
  */
 static bool can_layer( const Character *ch, const Object *obj, short wear_loc )
 {
-  Object *otmp;
-  short bitlayers = 0;
-  short objlayers = obj->Prototype->Layers;
+  long bitlayers = 0;
+  const long objlayers = obj->Prototype->Layers;
 
-  for ( otmp = ch->FirstCarrying; otmp; otmp = otmp->NextContent )
-    if ( otmp->WearLoc == wear_loc )
-      {
-        if ( !otmp->Prototype->Layers )
-          return false;
-        else
-          bitlayers |= otmp->Prototype->Layers;
-      }
-
+  for(const Object *otmp : ch->Objects())
+    {
+      if ( otmp->WearLoc == wear_loc )
+        {
+          if ( !otmp->Prototype->Layers )
+            return false;
+          else
+            bitlayers |= otmp->Prototype->Layers;
+        }
+    }
+  
   if ( (bitlayers && !objlayers) || bitlayers > objlayers )
     return false;
+
   if ( !bitlayers || ((bitlayers & ~objlayers) == bitlayers) )
     return true;
+
   return false;
 }
 

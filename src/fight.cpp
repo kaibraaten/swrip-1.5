@@ -1625,27 +1625,30 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
 
   if ( victim->Hit <=0 && !IsNpc(victim))
     {
-      Object *obj;
-      Object *obj_next;
-      int cnt=0;
-
+      int cnt = 0;
+      Object *equippedObject = nullptr;
+      
       StopFighting( victim, true );
 
-      if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD ) ) != NULL )
-        UnequipCharacter( victim, obj );
-      if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_WIELD ) ) != NULL )
-        UnequipCharacter( victim, obj );
-      if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_HOLD ) ) != NULL )
-        UnequipCharacter( victim, obj );
-      if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_MISSILE_WIELD ) ) != NULL )
-        UnequipCharacter( victim, obj );
-      if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_LIGHT ) ) != NULL )
-        UnequipCharacter( victim, obj );
+      if ( ( equippedObject = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD ) ) != NULL )
+        UnequipCharacter( victim, equippedObject );
 
-      for ( obj = victim->FirstCarrying; obj; obj = obj_next )
+      if ( ( equippedObject = GetEquipmentOnCharacter( victim, WEAR_WIELD ) ) != NULL )
+        UnequipCharacter( victim, equippedObject );
+
+      if ( ( equippedObject = GetEquipmentOnCharacter( victim, WEAR_HOLD ) ) != NULL )
+        UnequipCharacter( victim, equippedObject );
+
+      if ( ( equippedObject = GetEquipmentOnCharacter( victim, WEAR_MISSILE_WIELD ) ) != NULL )
+        UnequipCharacter( victim, equippedObject );
+
+      if ( ( equippedObject = GetEquipmentOnCharacter( victim, WEAR_LIGHT ) ) != NULL )
+        UnequipCharacter( victim, equippedObject );
+
+      std::list<Object*> carriedByVictim(victim->Objects());
+
+      for(Object *obj : carriedByVictim)
         {
-          obj_next = obj->NextContent;
-
           if ( obj->WearLoc == WEAR_NONE )
             {
               if ( obj->Prototype->mprog.progtypes & DROP_PROG && obj->Count > 1 )
@@ -1653,14 +1656,13 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
                   ++cnt;
                   SeparateOneObjectFromGroup( obj );
                   ObjectFromCharacter( obj );
-                  if ( !obj_next )
-                    obj_next = victim->FirstCarrying;
                 }
               else
                 {
                   cnt += obj->Count;
                   ObjectFromCharacter( obj );
                 }
+
               Act( AT_ACTION, "$n drops $p.", victim, obj, NULL, TO_ROOM );
               Act( AT_ACTION, "You drop $p.", victim, obj, NULL, TO_CHAR );
               obj = ObjectToRoom( obj, victim->InRoom );
@@ -2136,11 +2138,10 @@ static bool RemoveShipOwner(Ship *ship, void *userData)
 
 void RawKill( Character *killer, Character *victim )
 {
-  Character *victmp;
+  Character *victmp = nullptr;
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   char arg[MAX_STRING_LENGTH];
-  Object *obj, *obj_next;
 
   if ( !victim )
     {
@@ -2195,9 +2196,10 @@ void RawKill( Character *killer, Character *victim )
     MakeCorpse( victim );
   else
     {
-      for ( obj = victim->LastCarrying; obj; obj = obj_next )
+      std::list<Object*> carriedByVictim( Reverse( victim->Objects() ) );
+
+      for(Object *obj : carriedByVictim)
         {
-          obj_next = obj->PreviousContent;
           ObjectFromCharacter( obj );
           ExtractObject( obj );
         }
@@ -2371,13 +2373,10 @@ void RawKill( Character *killer, Character *victim )
 
 static void CheckObjectAlignmentZapping( Character *ch )
 {
-  Object *obj = NULL;
-  Object *obj_next = NULL;
+  std::list<Object*> carriedObjects(ch->Objects());
 
-  for ( obj = ch->FirstCarrying; obj; obj = obj_next )
+  for(Object *obj : carriedObjects)
     {
-      obj_next = obj->NextContent;
-
       if ( obj->WearLoc == WEAR_NONE )
 	{
 	  continue;

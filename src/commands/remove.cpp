@@ -5,7 +5,6 @@
 void do_remove( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Object *obj = NULL, *obj_next = NULL;
 
   OneArgument( argument, arg );
 
@@ -20,26 +19,33 @@ void do_remove( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "all" ) )  /* SB Remove all */
     {
-      for ( obj = ch->FirstCarrying; obj != NULL ; obj = obj_next )
+      std::list<Object*> carriedObjects(ch->Objects());
+
+      for(Object *obj : carriedObjects)
         {
-          obj_next = obj->NextContent;
           if ( obj->WearLoc != WEAR_NONE && CanSeeObject ( ch, obj ) )
-            RemoveObject ( ch, obj->WearLoc, true );
+            {
+              RemoveObject ( ch, obj->WearLoc, true );
+            }
         }
 
       return;
     }
 
-  if ( ( obj = GetWornObject( ch, arg ) ) == NULL )
+  Object *obj = GetWornObject(ch, arg);
+  
+  if ( obj == nullptr )
     {
       ch->Echo("You are not using that item.\r\n");
       return;
     }
 
-  if ( (obj_next=GetEquipmentOnCharacter(ch, obj->WearLoc)) != obj )
+  Object *alreadyWorn = GetEquipmentOnCharacter(ch, obj->WearLoc);
+  
+  if ( alreadyWorn != obj )
     {
       Act( AT_PLAIN, "You must remove $p first.",
-	   ch, obj_next, NULL, TO_CHAR );
+	   ch, alreadyWorn, NULL, TO_CHAR );
       return;
     }
 

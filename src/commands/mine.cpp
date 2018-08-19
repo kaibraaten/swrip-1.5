@@ -8,9 +8,6 @@
 void do_mine( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Object *obj = NULL;
-  bool shovel = false;
-  short move = 0;
 
   if ( ch->PCData->Learned[gsn_mine] <= 0 )
     {
@@ -29,15 +26,8 @@ void do_mine( Character *ch, char *argument )
   if ( HasMentalStateToFindObject(ch) )
     return;
 
-  shovel = false;
-  for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
-    if ( obj->ItemType == ITEM_SHOVEL )
-      {
-        shovel = true;
-        break;
-      }
-
-  obj = GetObjectInListReverse( ch, arg, ch->InRoom->Objects() );
+  bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL);
+  Object *obj = GetObjectInListReverse( ch, arg, ch->InRoom->Objects() );
 
   if ( !obj )
     {
@@ -87,7 +77,7 @@ void do_mine( Character *ch, char *argument )
       return;
     }
 
-  move = (obj->Weight * 50 * (shovel ? 1 : 5)) / umax(1, GetCarryCapacityWeight(ch));
+  int move = (obj->Weight * 50 * (shovel ? 1 : 5)) / umax(1, GetCarryCapacityWeight(ch));
   move = urange( 2, move, 1000 );
   if ( move > ch->Move )
     {

@@ -6,11 +6,6 @@ void do_compare( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Object *obj1 = nullptr;
-  Object *obj2 = nullptr;
-  int value1 = 0;
-  int value2 = 0;
-  const char *msg = nullptr;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
@@ -21,21 +16,28 @@ void do_compare( Character *ch, char *argument )
       return;
     }
 
-  if ( ( obj1 = GetCarriedObject( ch, arg1 ) ) == NULL )
+  const Object *obj1 = GetCarriedObject(ch, arg1);
+  
+  if ( obj1 == nullptr )
     {
       ch->Echo( "You do not have that item.\r\n" );
       return;
     }
 
+  const Object *obj2 = nullptr;
+  
   if ( IsNullOrEmpty( arg2 ) )
     {
-      for ( obj2 = ch->FirstCarrying; obj2; obj2 = obj2->NextContent )
+      for(const Object *iter : ch->Objects())
         {
-          if ( obj2->WearLoc != WEAR_NONE
-               &&   CanSeeObject( ch, obj2 )
-               &&   obj1->ItemType == obj2->ItemType
-               && ( obj1->WearFlags & obj2->WearFlags & ~ITEM_TAKE) != 0 )
-            break;
+          if ( iter->WearLoc != WEAR_NONE
+               && CanSeeObject( ch, iter )
+               && obj1->ItemType == iter->ItemType
+               && ( obj1->WearFlags & iter->WearFlags & ~ITEM_TAKE) != 0 )
+            {
+              obj2 = iter;
+              break;
+            }
         }
 
       if ( !obj2 )
@@ -46,13 +48,19 @@ void do_compare( Character *ch, char *argument )
     }
   else
     {
-      if ( ( obj2 = GetCarriedObject( ch, arg2 ) ) == NULL )
+      obj2 = GetCarriedObject( ch, arg2 );
+      
+      if ( obj2 == nullptr )
         {
           ch->Echo( "You do not have that item.\r\n" );
           return;
         }
     }
 
+  const char *msg = nullptr;
+  int value1 = 0;
+  int value2 = 0;
+  
   if ( obj1 == obj2 )
     {
       msg = "You compare $p to itself. It looks about the same.";
@@ -79,14 +87,16 @@ void do_compare( Character *ch, char *argument )
           value2 = obj2->Value[1] + obj2->Value[2];
           break;
         }
-
     }
 
-  if ( !msg )
+  if ( msg == nullptr )
     {
-      if ( value1 == value2 ) msg = "$p and $P look about the same.";
-      else if ( value1  > value2 ) msg = "$p looks better than $P.";
-      else                         msg = "$p looks worse than $P.";
+      if ( value1 == value2 )
+        msg = "$p and $P look about the same.";
+      else if ( value1  > value2 )
+        msg = "$p looks better than $P.";
+      else
+        msg = "$p looks worse than $P.";
     }
 
   Act( AT_PLAIN, msg, ch, obj1, obj2, TO_CHAR );

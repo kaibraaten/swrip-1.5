@@ -220,13 +220,10 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
     }
   else
     {
-      const Object *obj2 = NULL;
-      int itype = 0;
-
       profitmod = GetCurrentCharisma(ch) - 13 - (richcustomer ? 15 : 0);
       cost = 0;
 
-      for ( itype = 0; itype < MAX_TRADE; itype++ )
+      for ( int itype = 0; itype < MAX_TRADE; itype++ )
         {
           if ( obj->ItemType == pShop->BuyType[itype] )
             {
@@ -237,7 +234,7 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
             }
         }
 
-      for ( obj2 = keeper->FirstCarrying; obj2; obj2 = obj2->NextContent )
+      for(const Object *obj2 : keeper->Objects())
         {
           if ( obj->Prototype == obj2->Prototype )
             {
@@ -570,9 +567,9 @@ void SaveVendor( Character *ch )
       fprintf( fp, "#VENDOR\n"          );
       WriteVendor( fp, ch );
 
-      if ( ch->FirstCarrying )
+      for(const Object *obj : Reverse(ch->Objects()))
 	{
-	  WriteObject( ch, ch->LastCarrying, fp, 0, OS_CARRY );
+	  WriteObject( ch, obj, fp, 0, OS_CARRY );
 	}
 
       fprintf(fp, "#END\n" );

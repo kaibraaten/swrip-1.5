@@ -42,6 +42,10 @@ public:
   const std::list<Affect*> &Affects() const;
   void Add(Affect *affect);
   void Remove(Affect *affect);
+
+  const std::list<Object*> &Objects() const;
+  void Add(Object *object);
+  void Remove(Object *object);
   
   // Player AND mob
   SpecFun *spec_fun = NULL;
@@ -141,8 +145,6 @@ public:
   Character *Reply = NULL;
   Character *Switched = NULL;
   Character *Mount = NULL;
-  Object *FirstCarrying = NULL;
-  Object *LastCarrying = NULL;
   Room *InRoom = NULL;
   Room *WasInRoom = NULL;
   Room *WasSentinel = NULL;
@@ -281,6 +283,8 @@ bool HasComlink( const Character *ch );
 
 bool HasDiploma(const Character *ch);
 
+Object *GetFirstObjectOfType(const Character *ch, ItemTypes type);
+
 short GetAbilityLevel( const Character *ch, short ability );
 
 void SetAbilityLevel( Character *ch, short ability, int newlevel );
@@ -410,8 +414,6 @@ bool IsJedi( const Character *ch );
 bool IsDroid( const Character *ch );
 
 void ResetPlayerOnDeath( Character *ch );
-
-int GetCostToQuit( const Character *ch );
 
 bool IsBlind( const Character *ch );
 

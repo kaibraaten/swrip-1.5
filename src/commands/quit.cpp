@@ -6,10 +6,9 @@
 
 void do_quit( Character *ch, char *argument )
 {
-  int x = 0, y = 0, cost = 0;
+  int x = 0, y = 0;
   int level = 0;
   char qbuf[MAX_INPUT_LENGTH];
-  char buf[MAX_INPUT_LENGTH];
 
   if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_POLYMORPHED))
     {
@@ -48,36 +47,6 @@ void do_quit( Character *ch, char *argument )
       ch->Echo("You will have to find a safer resting place such as a hotel...\r\n");
       ch->Echo("Maybe you could HAIL a speeder.\r\n");
       return;
-    }
-
-  if ( !IsImmortal(ch) && ch->InRoom
-       && IsBitSet( ch->InRoom->Flags, ROOM_HOTEL )
-       && !IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME )
-       && !IsBitSet( ch->InRoom->Flags, ROOM_SPACECRAFT )
-       && IsAuthed(ch) )
-    {
-      cost = GetCostToQuit( ch );
-
-      if( !cost )
-        {
-          sprintf( buf, "The keeper takes a good look at you and adopts a look of pity, letting you stay here for free\r\n");
-          ch->Echo("The keeper takes a good look at you and adopts a look of pity, letting you stay here for free\r\n");
-        }
-      else if( ch->Gold < cost )
-        {
-          sprintf( buf, "You need %d credits to spend the night here!\r\n", cost );
-          ch->Echo(buf);
-          return;
-        }
-      else
-        {
-          sprintf( buf, "The keeper takes a good look at you and lets you stay here for %d credits\r\n", cost );
-          ch->Echo(buf);
-          ch->Gold -= cost;
-
-          if( ch->InRoom && ch->InRoom->Area )
-            BoostEconomy( ch->InRoom->Area, cost );
-        }
     }
 
   if ( ch->Challenged )

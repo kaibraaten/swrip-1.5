@@ -160,10 +160,10 @@ void do_drop( Character *ch, char *argument )
 
       found = false;
 
-      for ( Object *obj = ch->FirstCarrying, *obj_next = nullptr; obj; obj = obj_next )
-        {
-          obj_next = obj->NextContent;
+      std::list<Object*> carriedObjects(ch->Objects());
 
+      for(Object *obj : carriedObjects)
+        {
           if ( (fAll || NiftyIsName( chk, obj->Name ) )
                && CanSeeObject( ch, obj )
                && obj->WearLoc == WEAR_NONE
@@ -176,9 +176,6 @@ void do_drop( Character *ch, char *argument )
                   ++cnt;
                   SeparateOneObjectFromGroup( obj );
                   ObjectFromCharacter( obj );
-
-                  if ( !obj_next )
-                    obj_next = ch->FirstCarrying;
                 }
               else
                 {

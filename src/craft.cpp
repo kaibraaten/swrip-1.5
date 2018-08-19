@@ -381,12 +381,13 @@ void StartCrafting( CraftingSession *session )
 
 static bool CheckMaterials( CraftingSession *session, bool extract )
 {
-  Object *obj = NULL;
   Character *ch = GetEngineer( session );
   bool foundAll = true;
   FoundMaterial *material = NULL;
 
-  for( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
+  std::list<Object*> carriedObjects(ch->Objects());
+
+  for(Object *obj : carriedObjects)
     {
       material = GetUnfoundMaterial( session, obj );
 

@@ -138,19 +138,25 @@ void do_buy( Character *ch, char *argument )
 
           onum =0;
           oref = atoi(arg+1);
-          for ( obj = keeper->LastCarrying; obj; obj = obj->PreviousContent )
+
+          for(Object *iter : Reverse(keeper->Objects()))
             {
-              if ( obj->WearLoc == WEAR_NONE
-                   &&   CanSeeObject( ch, obj ) )
+              if ( iter->WearLoc == WEAR_NONE
+                   && CanSeeObject( ch, iter ) )
                 onum++;
+
               if ( onum == oref )
                 {
+                  obj = iter;
                   ofound = true;
                   break;
                 }
               else if ( onum > oref )
-                break;
+                {
+                  break;
+                }
             }
+
           if (!ofound)
             obj = NULL;
         }

@@ -529,7 +529,6 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       if ( in_room->Sector == SECT_WATER_NOSWIM
            ||   to_room->Sector == SECT_WATER_NOSWIM )
         {
-          Object *obj = NULL;
           bool found = false;
 
           if ( ch->Mount )
@@ -550,19 +549,22 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
            * Look for a boat.
            */
           if ( !found )
-            for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
-              {
-                if ( obj->ItemType == ITEM_BOAT )
-                  {
-                    found = true;
-                    if ( drunk )
-                      txt = "paddles unevenly";
-                    else
-                      txt = "paddles";
-                    break;
-                  }
-              }
+            {
+              found = GetFirstObjectOfType(ch, ITEM_BOAT);
 
+              if(found)
+                {
+                  if ( drunk )
+                    {
+                      txt = "paddles unevenly";
+                    }
+                  else
+                    {
+                      txt = "paddles";
+                    }
+                }
+            }
+          
           if ( !found )
             {
               ch->Echo( "You'd need a boat to go there.\r\n" );
@@ -585,17 +587,8 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
               if ( ( !IsNpc(ch) && GetRandomPercent() > ch->PCData->Learned[gsn_climb] )
                    || drunk || ch->MentalState < -90 )
                 {
-                  Object *obj;
-                  bool ch_rope = false;
+                  bool ch_rope = GetFirstObjectOfType(ch, ITEM_ROPE);
 
-                  for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
-                    {
-                      if (obj->ItemType == ITEM_ROPE)
-                        {
-                          ch_rope = true;
-                          break;
-                        }
-                    }
                   if( !ch_rope )
                     {
                       ch->Echo( "You start to climb... but lose your grip and fall!\r\n");

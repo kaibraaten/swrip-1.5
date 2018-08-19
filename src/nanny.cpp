@@ -855,8 +855,6 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	       Capitalize( ch->Name ) );
       if ( ( fph = fopen( filename, "r" ) ) != NULL )
 	{
-	  Object *tobj, *tobj_next;
-
 	  RoomProgSetSupermob(storeroom);
 
 	  for ( ; ; )
@@ -897,9 +895,10 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
 	  fclose( fph );
 
-	  for ( tobj = supermob->FirstCarrying; tobj; tobj = tobj_next )
+          std::list<Object*> carriedBySupermob(supermob->Objects());
+
+          for(Object *tobj : carriedBySupermob)
 	    {
-	      tobj_next = tobj->NextContent;
 	      ObjectFromCharacter( tobj );
 
 	      if( tobj->ItemType != ITEM_MONEY )

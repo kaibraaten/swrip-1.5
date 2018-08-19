@@ -47,7 +47,6 @@ void do_list( Character *ch, char *argument )
     {
       char arg[MAX_INPUT_LENGTH];
       Character *keeper;
-      Object *obj;
       int cost;
       int oref = 0;
       bool found;
@@ -58,22 +57,26 @@ void do_list( Character *ch, char *argument )
         return;
 
       found = false;
-      for ( obj = keeper->LastCarrying; obj; obj = obj->PreviousContent )
+
+      for(const Object *obj : keeper->Objects())
         {
           if ( obj->WearLoc == WEAR_NONE
                &&   CanSeeObject( ch, obj ) )
             {
               oref++;
+
               if ( ( cost = GetObjectCost( ch, keeper, obj, true ) ) > 0
                    && ( IsNullOrEmpty( arg ) || NiftyIsName( arg, obj->Name ) ) )
                 {
                   if (keeper->Home != NULL)
                     cost = obj->Cost;
+
                   if ( !found )
                     {
                       found = true;
                       ch->Echo("[Price] {ref} Item\r\n");
                     }
+
                   ch->Echo("[%5d] {%3d} %s%s.\r\n",
                              cost, oref, Capitalize( obj->ShortDescr ),
                              IsBitSet(obj->Flags, ITEM_HUTT_SIZE) ? " (hutt size)" :

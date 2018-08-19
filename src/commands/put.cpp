@@ -10,12 +10,7 @@ void do_put( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Object *container = NULL;
-  Object *obj = NULL;
-  Object *obj_next = NULL;
-  short count = 0;
   int number = 0;
-  bool save_char = false;
 
   argument = OneArgument( argument, arg1 );
 
@@ -53,12 +48,16 @@ void do_put( Character *ch, char *argument )
       return;
     }
 
-  if ( ( container = GetObjectHere( ch, arg2 ) ) == NULL )
+  Object *container = GetObjectHere(ch, arg2);
+  
+  if ( container == nullptr )
     {
       Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
       return;
     }
 
+  bool save_char = false;
+  
   if ( !container->CarriedBy && IsBitSet( SysData.SaveFlags, SV_PUT ) )
     save_char = true;
 
@@ -87,8 +86,10 @@ void do_put( Character *ch, char *argument )
 
   if ( number <= 1 && StrCmp( arg1, "all" ) && StringPrefix( "all.", arg1 ) )
     {
+      Object *obj = GetCarriedObject(ch, arg1);
+      
       /* 'put obj container' */
-      if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
+      if ( obj == nullptr )
         {
           ch->Echo("You do not have that item.\r\n");
           return;
@@ -128,9 +129,11 @@ void do_put( Character *ch, char *argument )
       ObjectFromCharacter( obj );
       obj = ObjectToObject( obj, container );
       CheckObjectForTrap ( ch, container, TRAP_PUT );
+
       if ( CharacterDiedRecently(ch) )
         return;
-      count = obj->Count;
+
+      int count = obj->Count;
       obj->Count = 1;
       Act( AT_ACTION, IS_OBJ_STAT( container, ITEM_COVERING )
            ? "$n hides $p beneath $P." : "$n puts $p in $P.",
@@ -143,8 +146,10 @@ void do_put( Character *ch, char *argument )
       if ( save_char )
         {
           SaveCharacter( ch );
+
           if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
             SaveHome (ch );
+
           if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
             SaveStoreroom( ch->InRoom );
         }
@@ -162,8 +167,8 @@ void do_put( Character *ch, char *argument )
     {
       bool found = false;
       int cnt = 0;
-      bool fAll;
-      char *chk;
+      bool fAll = false;
+      const char *chk = nullptr;
 
       if ( !StrCmp(arg1, "all") )
         fAll = true;
@@ -175,21 +180,23 @@ void do_put( Character *ch, char *argument )
         chk = &arg1[4];
 
       SeparateOneObjectFromGroup(container);
-      /* 'put all container' or 'put all.obj container' */
-      for ( obj = ch->FirstCarrying; obj; obj = obj_next )
-        {
-          obj_next = obj->NextContent;
 
+      /* 'put all container' or 'put all.obj container' */
+      std::list<Object*> carriedObjects(ch->Objects());
+
+      for(Object *obj : carriedObjects)
+        {
           if ( ( fAll || NiftyIsName( chk, obj->Name ) )
-               &&   CanSeeObject( ch, obj )
-               &&   obj->WearLoc == WEAR_NONE
-               &&   obj != container
-               &&   CanDropObject( ch, obj )
-	       &&   GetObjectWeight( obj ) + GetObjectWeight( container )
+               && CanSeeObject( ch, obj )
+               && obj->WearLoc == WEAR_NONE
+               && obj != container
+               && CanDropObject( ch, obj )
+	       && GetObjectWeight( obj ) + GetObjectWeight( container )
                <= container->Value[OVAL_CONTAINER_CAPACITY] )
             {
               if ( number && (cnt + obj->Count) > number )
                 SplitGroupedObject( obj, number - cnt );
+
               cnt += obj->Count;
               ObjectFromCharacter( obj );
               Act( AT_ACTION, "$n puts $p in $P.", ch, obj, container, TO_ROOM );
@@ -198,8 +205,10 @@ void do_put( Character *ch, char *argument )
               found = true;
 
               CheckObjectForTrap( ch, container, TRAP_PUT );
+
               if ( CharacterDiedRecently(ch) )
                 return;
+
               if ( number && cnt >= number )
                 break;
             }
@@ -222,8 +231,10 @@ void do_put( Character *ch, char *argument )
       if ( save_char )
         {
           SaveCharacter( ch );
+
           if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
             SaveHome (ch );
+
           if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
             SaveStoreroom( ch->InRoom );
         }
