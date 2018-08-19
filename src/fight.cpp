@@ -174,8 +174,6 @@ void ViolenceUpdate( void )
   char buf[MAX_STRING_LENGTH];
   Character *ch = NULL;
   Character *victim = NULL;
-  Timer *timer = NULL;
-  Timer *timer_next = NULL;
   ch_ret retcode = rNONE;
   Skill *skill = NULL;
 
@@ -203,11 +201,10 @@ void ViolenceUpdate( void )
         if ( (++ch->Fighting->Duration % 24) == 0 )
           ch->Fighting->Xp = ((ch->Fighting->Xp * 9) / 10);
 
+      std::list<Timer*> characterTimers(ch->Timers());
 
-      for ( timer = ch->FirstTimer; timer; timer = timer_next )
+      for(Timer *timer : characterTimers)
         {
-          timer_next = timer->Next;
-
           if ( --timer->Count <= 0 )
             {
               if ( timer->Type == TIMER_CMD_FUN )

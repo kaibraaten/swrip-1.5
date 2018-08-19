@@ -46,6 +46,10 @@ public:
   const std::list<Object*> &Objects() const;
   void Add(Object *object);
   void Remove(Object *object);
+
+  const std::list<Timer*> &Timers() const;
+  void Add(Timer *timer);
+  void Remove(Timer *timer);
   
   // Player AND mob
   SpecFun *spec_fun = NULL;
@@ -156,8 +160,6 @@ public:
   void *spare_ptr = NULL;
   int tempnum = 0;
   struct Editor * Editor = NULL;
-  Timer *FirstTimer = NULL;
-  Timer *LastTimer = NULL;
   short NumFighting = 0;
   CharacterSubState SubState = SUB_NONE;
   short Trust = 0;
