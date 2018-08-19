@@ -25,9 +25,7 @@ void do_makearmor( Character *ch, char *argument )
 {
   CraftRecipe *recipe = CreateMakeArmorRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
-  struct UserData *data;
-
-  AllocateMemory( data, struct UserData, 1 );
+  UserData *data = new UserData();
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
@@ -149,7 +147,7 @@ static void FreeUserData( struct UserData *ud )
       FreeMemory( ud->ItemName );
     }
 
-  FreeMemory( ud );
+  delete ud;
 }
 
 static bool CanUseWearLocation( int wearLocation )
@@ -163,5 +161,3 @@ static bool CanUseWearLocation( int wearLocation )
     || wearLocation == ITEM_WEAR_WAIST
     || wearLocation == ITEM_WEAR_OVER;
 }
-
-

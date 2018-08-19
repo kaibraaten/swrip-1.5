@@ -91,8 +91,8 @@ void do_sset( Character *ch, char *argument )
             return;
           }
 
-      AllocateMemory( skill, Skill, 1 );
-      AllocateMemory( skill->UseRec, struct timerset, 1 );
+      skill = new Skill();
+      skill->UseRec = new timerset();
 
       if ( type == SKILL_HERB )
         {
@@ -352,7 +352,7 @@ void do_sset( Character *ch, char *argument )
               skill->Affects = aff->Next;
               FreeMemory( aff->Duration );
               FreeMemory( aff->Modifier );
-              FreeMemory( aff );
+              delete aff;
               ch->Echo("Removed.\r\n");
               return;
             }
@@ -363,7 +363,7 @@ void do_sset( Character *ch, char *argument )
                   aff->Next = aff_next->Next;
                   FreeMemory( aff_next->Duration );
                   FreeMemory( aff_next->Modifier );
-                  FreeMemory( aff_next );
+                  delete aff_next;
                   ch->Echo("Removed.\r\n");
                   return;
                 }
@@ -411,7 +411,7 @@ void do_sset( Character *ch, char *argument )
                 bit |= (1 << tmpbit);
             }
 
-          AllocateMemory( aff, SmaugAffect, 1 );
+          aff = new SmaugAffect();
 
           if ( !StrCmp( duration, "0" ) )
             duration[0] = '\0';

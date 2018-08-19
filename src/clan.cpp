@@ -308,7 +308,7 @@ void RemoveClanMember( const Character *ch )
 	{
 	  UNLINK( member, members_list->FirstMember, members_list->LastMember, Next, Previous );
 	  FreeMemory( member->Name );
-	  FreeMemory( member );
+	  delete member;
 	  Clans->Save( ch->PCData->ClanInfo.Clan );
 	}
     }
@@ -331,7 +331,7 @@ void UpdateClanMember( const Character *ch )
 
       if( !member )
 	{
-	  AllocateMemory( member, ClanMember, 1 );
+          member = new ClanMember();
 	  member->Name = CopyString( ch->Name );
 	  member->Since = current_time;
 
@@ -569,9 +569,8 @@ const char *GetClanFilename( const Clan *clan )
 static void LoadOneMember( lua_State *L, ClanMemberList *memberList )
 {
   int idx = lua_gettop( L );
-  ClanMember *member = NULL;
+  ClanMember *member = new ClanMember();
 
-  AllocateMemory( member, ClanMember, 1 );
   lua_getfield( L, idx, "Name" );
   lua_getfield( L, idx, "MemberSince" );
   lua_getfield( L, idx, "Ability" );
@@ -621,10 +620,9 @@ static void LoadOneMember( lua_State *L, ClanMemberList *memberList )
 
 static void LoadMembers( lua_State *L, const Clan *clan )
 {
-  ClanMemberList *memberList = NULL;
+  ClanMemberList *memberList = new ClanMemberList();
   int idx = lua_gettop( L );
 
-  AllocateMemory( memberList, ClanMemberList, 1 );
   memberList->Name = CopyString( clan->Name );
   LINK( memberList, FirstClanMemberList, LastClanMemberList, Next, Previous );
 

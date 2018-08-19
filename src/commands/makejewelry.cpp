@@ -24,11 +24,9 @@ static bool CanUseWearLocation( int wearLocation );
 
 void do_makejewelry( Character *ch, char *argument )
 {
-  struct UserData *data = NULL;
+  UserData *data = new UserData();
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
-
-  AllocateMemory( data, struct UserData, 1 );
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
@@ -166,7 +164,7 @@ static void FreeUserData( struct UserData *ud )
       FreeMemory( ud->ItemName );
     }
 
-  FreeMemory( ud );
+  delete ud;
 }
 
 static bool CanUseWearLocation( int wearLocation )

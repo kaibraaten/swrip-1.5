@@ -30,31 +30,35 @@
 
 #define VENDOR_FEE  .05 /*fee vendor charges, taken out of all gode with teh GETGOLD command*/
 
-struct Shop
+class Shop
 {
-  vnum_t     Keeper;                /* Vnum of shop keeper mob      */
+public:
+  Shop();
+  vnum_t Keeper = INVALID_VNUM;                /* Vnum of shop keeper mob      */
   std::array<ItemTypes, MAX_TRADE> BuyType; /* Item types shop will buy     */
-  short      ProfitBuy;            /* Cost multiplier for buying   */
-  short      ProfitSell;           /* Cost multiplier for selling  */
+  short ProfitBuy = 0;            /* Cost multiplier for buying   */
+  short ProfitSell = 0;           /* Cost multiplier for selling  */
 
   struct
   {
-    short Open;              /* First opening hour           */
-    short Close;             /* First closing hour           */
+    short Open = 0;              /* First opening hour           */
+    short Close = 0;             /* First closing hour           */
   } BusinessHours;
 };
 
-struct RepairShop
+class RepairShop
 {
-  vnum_t       Keeper;              /* Vnum of shop keeper mob      */
+public:
+  RepairShop();
+  vnum_t Keeper = INVALID_VNUM;              /* Vnum of shop keeper mob      */
   std::array<ItemTypes, MAX_FIX> FixType; /* Item types shop will fix     */
-  short        ProfitFix;          /* Cost multiplier for fixing   */
-  short       ShopType;            /* Repair shop type             */
+  short ProfitFix = 0;          /* Cost multiplier for fixing   */
+  short ShopType = 0;            /* Repair shop type             */
 
   struct
   {
-    short Open;              /* First opening hour           */
-    short Close;             /* First closing hour           */
+    short Open = 0;              /* First opening hour           */
+    short Close = 0;             /* First closing hour           */
   } BusinessHours;
 };
 

@@ -45,21 +45,23 @@ public:
   std::list<Clan*> Subclans;
 };
 
-struct ClanMember
+class ClanMember
 {
-  char         *Name;  /* Name of member */
-  time_t        Since; /* Member since */
-  int           Ability; /* class of member */
-  int           Level;  /* level of member */
-  int           Deaths; /* Pdeaths for clans, mdeaths for guilds/orders */
-  int           Kills;  /* Pkills for clans, mkills for guilds/orders */
-  time_t        LastActivity;
-  ClanMember  *Next;  /* Next member */
-  ClanMember  *Previous;  /* Prev member */
+public:
+  char         *Name = nullptr;  /* Name of member */
+  time_t        Since = 0; /* Member since */
+  int           Ability = 0; /* class of member */
+  int           Level = 0;  /* level of member */
+  int           Deaths = 0; /* Pdeaths for clans, mdeaths for guilds/orders */
+  int           Kills = 0;  /* Pkills for clans, mkills for guilds/orders */
+  time_t        LastActivity = 0;
+  ClanMember  *Next = nullptr;  /* Next member */
+  ClanMember  *Previous = nullptr;  /* Prev member */
 };
 
-struct ClanMemberList
+class ClanMemberList
 {
+public:
   char          *Name = nullptr;          /* Clan name */
   ClanMember   *FirstMember = nullptr;  /* First Member */
   ClanMember   *LastMember = nullptr;   /* Last Member */

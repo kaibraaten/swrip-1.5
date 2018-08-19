@@ -106,7 +106,7 @@ void StopHunting( Character *ch )
   if ( ch->HHF.Hunting )
     {
       FreeMemory( ch->HHF.Hunting->Name );
-      FreeMemory( ch->HHF.Hunting );
+      delete ch->HHF.Hunting;
       ch->HHF.Hunting = NULL;
     }
 }
@@ -116,7 +116,7 @@ void StopHating( Character *ch )
   if ( ch->HHF.Hating )
     {
       FreeMemory( ch->HHF.Hating->Name );
-      FreeMemory( ch->HHF.Hating );
+      delete ch->HHF.Hating;
       ch->HHF.Hating = NULL;
     }
 }
@@ -126,7 +126,7 @@ void StopFearing( Character *ch )
   if ( ch->HHF.Fearing )
     {
       FreeMemory( ch->HHF.Fearing->Name );
-      FreeMemory( ch->HHF.Fearing );
+      delete ch->HHF.Fearing;
       ch->HHF.Fearing = NULL;
     }
 }
@@ -136,7 +136,7 @@ void StartHunting( Character *ch, Character *victim )
   if ( ch->HHF.Hunting )
     StopHunting( ch );
 
-  AllocateMemory( ch->HHF.Hunting, HuntHateFear, 1 );
+  ch->HHF.Hunting = new HuntHateFear();
   ch->HHF.Hunting->Name = CopyString( victim->Name );
   ch->HHF.Hunting->Who  = victim;
 }
@@ -146,7 +146,7 @@ void StartHating( Character *ch, Character *victim )
   if ( ch->HHF.Hating )
     StopHating( ch );
 
-  AllocateMemory( ch->HHF.Hating, HuntHateFear, 1 );
+  ch->HHF.Hating = new HuntHateFear();
   ch->HHF.Hating->Name = CopyString( victim->Name );
   ch->HHF.Hating->Who  = victim;
 }
@@ -156,7 +156,7 @@ void StartFearing( Character *ch, Character *victim )
   if ( ch->HHF.Fearing )
     StopFearing( ch );
 
-  AllocateMemory( ch->HHF.Fearing, HuntHateFear, 1 );
+  ch->HHF.Fearing = new HuntHateFear();
   ch->HHF.Fearing->Name = CopyString( victim->Name );
   ch->HHF.Fearing->Who  = victim;
 }
@@ -2018,7 +2018,7 @@ void StartFighting( Character *ch, Character *victim )
       return;
     }
 
-  AllocateMemory( fight, Fight, 1 );
+  fight = new Fight();
   fight->Who     = victim;
   fight->Xp      = ComputeXP( ch, victim );
   fight->Align = ComputeNewAlignment( ch, victim );
@@ -2061,7 +2061,7 @@ void FreeFight( Character *ch )
       if ( !CharacterDiedRecently(ch->Fighting->Who) )
         --ch->Fighting->Who->NumFighting;
 
-      FreeMemory( ch->Fighting );
+      delete ch->Fighting;
     }
 
   ch->Fighting = NULL;

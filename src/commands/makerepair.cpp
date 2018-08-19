@@ -5,19 +5,16 @@
 
 void do_makerepair( Character *ch, char *argument )
 {
-  RepairShop *repair;
-  short vnum;
-  ProtoMobile *mob;
-
   if ( IsNullOrEmpty( argument ) )
     {
       ch->Echo("Usage: makerepair <mobvnum>\r\n");
       return;
     }
 
-  vnum = atoi( argument );
-
-  if ( (mob = GetProtoMobile(vnum)) == NULL )
+  vnum_t vnum = atoi( argument );
+  ProtoMobile *mob = GetProtoMobile(vnum);
+  
+  if ( mob == nullptr )
     {
       ch->Echo("Mobile not found.\r\n");
       return;
@@ -32,7 +29,7 @@ void do_makerepair( Character *ch, char *argument )
       return;
     }
 
-  AllocateMemory( repair, RepairShop, 1 );
+  RepairShop *repair = new RepairShop();
 
   RepairShops->Add(repair);
   repair->Keeper        = vnum;

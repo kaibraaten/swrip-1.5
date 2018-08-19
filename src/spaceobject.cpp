@@ -287,7 +287,7 @@ static int L_SpaceobjectEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      AllocateMemory( spaceobj, Spaceobject, 1 );
+      spaceobj = new Spaceobject();
       spaceobj->Name = CopyString( lua_tostring( L, idx ) );
     }
   else

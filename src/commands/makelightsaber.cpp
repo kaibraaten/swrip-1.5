@@ -26,7 +26,6 @@ static void FreeUserData( struct UserData *ud );
 
 void do_makelightsaber( Character *ch, char *argument )
 {
-  struct UserData *data = NULL;
   static const struct CraftingMaterial materials[] =
     {
       { ITEM_TOOLKIT,        CRAFTFLAG_NONE },
@@ -44,8 +43,7 @@ void do_makelightsaber( Character *ch, char *argument )
 					     25, OBJ_VNUM_CRAFTING_LIGHTSABER,
 					     CRAFTFLAG_NONE );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
-
-  AllocateMemory( data, struct UserData, 1 );
+  UserData *data = new UserData();
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
@@ -99,8 +97,6 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   struct UserData *ud = (struct UserData*) userData;
   Object *lightsaber = eventArgs->Object;
   char buf[MAX_STRING_LENGTH];
-  Affect *hitroll = NULL;
-  Affect *parry = NULL;
 
   SetBit( lightsaber->WearFlags, ITEM_WIELD );
   SetBit( lightsaber->WearFlags, ITEM_TAKE );
@@ -123,7 +119,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   strcat( buf, " ignites with a hum and a soft glow." );
   lightsaber->ActionDescription = CopyString( buf );
 
-  AllocateMemory( hitroll, Affect, 1 );
+  Affect *hitroll = new Affect();
   hitroll->Type               = -1;
   hitroll->Duration           = -1;
   hitroll->Location           = GetAffectType( "hitroll" );
@@ -131,7 +127,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   LINK( hitroll, lightsaber->FirstAffect, lightsaber->LastAffect, Next, Previous );
   ++top_affect;
 
-  AllocateMemory( parry, Affect, 1 );
+  Affect *parry = new Affect();
   parry->Type               = -1;
   parry->Duration           = -1;
   parry->Location           = GetAffectType( "parry" );
@@ -167,7 +163,7 @@ static void FreeUserData( struct UserData *ud )
       FreeMemory( ud->ItemName );
     }
 
-  FreeMemory( ud );
+  delete ud;
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *eventArgs )

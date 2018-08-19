@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <vector>
 #include <cstring>
 #include <cctype>
 #include <cassert>
@@ -31,7 +32,7 @@
 #include "room.hpp"
 #include "object.hpp"
 
-Room *vroom_hash[64];
+static Room *vroom_hash[64];
 
 static void DecorateVirtualRoom( Room *room );
 static void TeleportCharacter( Character *ch, Room *room, bool show );
@@ -110,7 +111,7 @@ void ClearVirtualRooms( void )
           room = vroom_hash[hash];
           vroom_hash[hash] = room->Next;
           CleanRoom( room );
-          FreeMemory( room );
+          delete room;
           --top_vroom;
         }
 
@@ -128,7 +129,8 @@ void ClearVirtualRooms( void )
 		}
 
               CleanRoom( room );
-              FreeMemory( room );
+              delete room;
+              room = nullptr;
               --top_vroom;
             }
 

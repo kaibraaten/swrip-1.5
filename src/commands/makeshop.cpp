@@ -5,19 +5,16 @@
 
 void do_makeshop( Character *ch, char *argument )
 {
-  Shop *shop = nullptr;
-  vnum_t vnum = INVALID_VNUM;
-  ProtoMobile *mob = nullptr;
-
   if ( IsNullOrEmpty( argument ) )
     {
       ch->Echo("Usage: makeshop <mobvnum>\r\n");
       return;
     }
 
-  vnum = atoi( argument );
-
-  if ( (mob = GetProtoMobile(vnum)) == NULL )
+  vnum_t vnum = atoi( argument );
+  ProtoMobile *mob = GetProtoMobile(vnum);
+  
+  if ( mob == nullptr )
     {
       ch->Echo("Mobile not found.\r\n");
       return;
@@ -32,7 +29,7 @@ void do_makeshop( Character *ch, char *argument )
       return;
     }
 
-  AllocateMemory( shop, Shop, 1 );
+  Shop *shop = new Shop();
 
   Shops->Add(shop);
   shop->Keeper  = vnum;

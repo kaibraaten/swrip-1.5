@@ -95,8 +95,7 @@ static int L_BountyEntry( lua_State *L )
 
   if( !IsNullOrEmpty( target ) && !IsNullOrEmpty( poster ) )
     {
-      Bounty *bounty = nullptr;
-      AllocateMemory( bounty, Bounty, 1 );
+      Bounty *bounty = new Bounty();
       Bounties->Add(bounty);
 
       bounty->Target = CopyString( target );
@@ -116,7 +115,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
 
   if (bounty == nullptr)
     {
-      AllocateMemory( bounty, Bounty, 1 );
+      bounty = new Bounty();
       Bounties->Add(bounty);
 
       bounty->Target = CopyString( victim->Name );
@@ -147,7 +146,7 @@ void RemoveBounty( Bounty *bounty )
   Bounties->Remove(bounty);
   FreeMemory( bounty->Target );
   FreeMemory( bounty->Poster );
-  FreeMemory( bounty );
+  delete bounty;
 
   Bounties->Save();
 }

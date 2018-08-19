@@ -396,8 +396,7 @@ void BootDatabase( bool fCopyOver )
   quitting_char       = NULL;
   loading_char        = NULL;
   saving_char         = NULL;
-  AllocateMemory( auction, Auction, 1);
-  auction->Item       = NULL;
+  auction = new Auction();
 
   for ( wear = 0; wear < MAX_WEAR; wear++ )
     for ( x = 0; x < MAX_LAYERS; x++ )
@@ -1130,13 +1129,11 @@ static void ToWizFile( const char *line )
 
 static void AddToWizList( const char *name, int level )
 {
-  Wizard *wiz, *tmp;
-
 #ifdef DEBUG
   Log->Info( "Adding to wizlist..." );
 #endif
 
-  AllocateMemory( wiz, Wizard, 1 );
+  Wizard *wiz = new Wizard();
   wiz->Name     = CopyString( name );
   wiz->Level    = level;
 
@@ -1148,19 +1145,22 @@ static void AddToWizList( const char *name, int level )
     }
 
   /* insert sort, of sorts */
-  for ( tmp = first_wiz; tmp; tmp = tmp->Next )
-    if ( level > tmp->Level )
-      {
-        if ( !tmp->Last )
-          first_wiz     = wiz;
-        else
-          tmp->Last->Next = wiz;
-        wiz->Last = tmp->Last;
-        wiz->Next = tmp;
-        tmp->Last = wiz;
-        return;
-      }
-
+  for ( Wizard *tmp = first_wiz; tmp; tmp = tmp->Next )
+    {
+      if ( level > tmp->Level )
+        {
+          if ( !tmp->Last )
+            first_wiz     = wiz;
+          else
+            tmp->Last->Next = wiz;
+          
+          wiz->Last = tmp->Last;
+          wiz->Next = tmp;
+          tmp->Last = wiz;
+          return;
+        }
+    }
+  
   wiz->Last             = last_wiz;
   wiz->Next             = NULL;
   last_wiz->Next        = wiz;
@@ -1292,8 +1292,9 @@ void MakeWizlist( void )
     {
       wiznext = wiz->Next;
       FreeMemory(wiz->Name);
-      FreeMemory(wiz);
+      delete wiz;
     }
+  
   first_wiz = NULL;
   last_wiz = NULL;
 }
@@ -1429,7 +1430,7 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
 
       for ( ced = cObjIndex->FirstExtraDescription; ced; ced = ced->Next )
         {
-          AllocateMemory( ed, ExtraDescription, 1 );
+          ed = new ExtraDescription();
           ed->Keyword           = CopyString( ced->Keyword );
           ed->Description               = CopyString( ced->Description );
           LINK( ed, pObjIndex->FirstExtraDescription, pObjIndex->LastExtraDescription,
@@ -1439,7 +1440,7 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
 
       for ( cpaf = cObjIndex->FirstAffect; cpaf; cpaf = cpaf->Next )
         {
-          AllocateMemory( paf, Affect, 1 );
+          paf = new Affect();
           paf->Type         = cpaf->Type;
           paf->Duration     = cpaf->Duration;
           paf->Location     = cpaf->Location;
@@ -1556,9 +1557,7 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name )
  */
 Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door, const std::string &keyword )
 {
-  Exit *pexit = nullptr;
-
-  AllocateMemory( pexit, Exit, 1 );
+  Exit *pexit = new Exit();
   pexit->Direction           = door;
   pexit->ReverseVnum          = pRoomIndex->Vnum;
   pexit->ToRoom                = to_room;
@@ -1671,7 +1670,7 @@ static void LoadBuildList( void )
                   continue;
                 }
 
-              AllocateMemory( pArea, Area, 1 );
+              pArea = new Area();
               sprintf( buf, "%s.are", dentry->d_name );
               pArea->Author = CopyString( dentry->d_name );
               pArea->Filename = CopyString( buf );

@@ -10,7 +10,6 @@ void do_loadup( Character *ch, char *argument )
   char fname[1024];
   char name[256];
   struct stat fst;
-  Descriptor *d = nullptr;
   vnum_t old_room_vnum = INVALID_VNUM;
   char buf[MAX_STRING_LENGTH];
 
@@ -29,7 +28,7 @@ void do_loadup( Character *ch, char *argument )
 
   if ( stat( fname, &fst ) != -1 )
     {
-      AllocateMemory( d, Descriptor, 1 );
+      Descriptor *d = new Descriptor();
       d->ConnectionState = CON_GET_NAME;
       d->OutSize = 2000;
       AllocateMemory( d->OutBuffer, char, d->OutSize );
@@ -119,7 +118,7 @@ void do_loadup( Character *ch, char *argument )
       d->Character->ReTran    = old_room_vnum;
       d->Character              = NULL;
       FreeMemory( d->OutBuffer );
-      FreeMemory( d );
+      delete d;
       ch->Echo("Player %s loaded from room %d.\r\n", Capitalize( name ),old_room_vnum );
       sprintf(buf, "%s appears from nowhere, eyes glazed over.\r\n", Capitalize( name ) );
       Act( AT_IMMORT, buf, ch, NULL, NULL, TO_ROOM );

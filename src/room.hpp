@@ -53,7 +53,7 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl;
+  Impl *pImpl = nullptr;
 };
 
 #endif

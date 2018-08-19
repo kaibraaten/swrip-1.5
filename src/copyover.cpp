@@ -147,7 +147,7 @@ void RecoverFromCopyover( void )
 	break;
       }
 
-    AllocateMemory( d, Descriptor, 1 );
+    d = new Descriptor();
     InitializeDescriptor( d, desc ); /* set up various stuff */
     d->Remote.Hostname = CopyString( host );
     d->Remote.HostIP = CopyString( ip );

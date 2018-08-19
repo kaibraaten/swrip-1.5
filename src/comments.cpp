@@ -322,7 +322,7 @@ void do_comment( Character *ch, char *argument )
           FreeMemory( ch->PCData->Note->ToList );
           FreeMemory( ch->PCData->Note->Date );
           FreeMemory( ch->PCData->Note->Sender );
-          FreeMemory( ch->PCData->Note );
+          delete ch->PCData->Note;
         }
 
       ch->PCData->Note = NULL;
@@ -501,7 +501,7 @@ void ReadComment( Character *ch, FILE *fp )
 
       ungetc( letter, fp );
 
-      AllocateMemory( pnote, Note, 1 );
+      pnote = new Note();
 
       if ( StrCmp( ReadWord( fp, Log, fBootDb ), "sender" ) )
         break;

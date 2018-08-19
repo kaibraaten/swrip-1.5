@@ -6,8 +6,9 @@
 #include "types.hpp"
 #include "constants.hpp"
 
-struct Note
+class Note
 {
+public:
   char *Sender = nullptr;
   char *Date = nullptr;
   char *ToList = nullptr;

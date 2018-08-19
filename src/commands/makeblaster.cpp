@@ -23,7 +23,6 @@ static void FreeUserData( struct UserData *ud );
 
 void do_makeblaster( Character *ch, char *argument )
 {
-  struct UserData *data = NULL;
   static const struct CraftingMaterial materials[] =
     {
       { ITEM_TOOLKIT,         CRAFTFLAG_NONE },
@@ -41,8 +40,7 @@ void do_makeblaster( Character *ch, char *argument )
                                              25, OBJ_VNUM_CRAFTING_BLASTER,
 					     CRAFTFLAG_NEED_WORKSHOP );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
-
-  AllocateMemory( data, struct UserData, 1 );
+  UserData *data = new UserData();
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
@@ -93,8 +91,6 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 {
   struct UserData *ud = (struct UserData*) userData;
   char buf[MAX_STRING_LENGTH];
-  Affect *hitroll = NULL;
-  Affect *damroll = NULL;
   Object *blaster = args->Object;
 
   if( ud->Scope )
@@ -119,7 +115,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   strcat( buf, " was carelessly misplaced here." );
   blaster->Description = CopyString( Capitalize( buf ) );
 
-  AllocateMemory( hitroll, Affect, 1 );
+  Affect *hitroll = new Affect();
   hitroll->Type       = -1;
   hitroll->Duration   = -1;
   hitroll->Location   = GetAffectType( "hitroll" );
@@ -127,7 +123,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   LINK( hitroll, blaster->FirstAffect, blaster->LastAffect, Next, Previous );
   ++top_affect;
 
-  AllocateMemory( damroll, Affect, 1 );
+  Affect *damroll = new Affect();
   damroll->Type      = -1;
   damroll->Duration  = -1;
   damroll->Location  = GetAffectType( "damroll" );
@@ -137,9 +133,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 
   if ( ud->Scope == true )
     {
-      Affect *snipe = NULL;
-
-      AllocateMemory( snipe, Affect, 1 );
+      Affect *snipe = new Affect();
       snipe->Type      = -1;
       snipe->Duration  = -1;
       snipe->Location  = GetAffectType( "snipe" );
@@ -177,7 +171,7 @@ static void FreeUserData( struct UserData *ud )
       FreeMemory( ud->ItemName );
     }
 
-  FreeMemory( ud );
+  delete ud;
 }
 
 

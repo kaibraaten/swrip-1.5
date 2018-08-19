@@ -80,8 +80,8 @@ void do_makeguild( Character *ch, char *argument )
   guild->Leadership.Number2 = CopyString( "" );
   guild->tmpstr             = CopyString( mainClan->Name );
   guild->FoundationDate = current_time;
-  
-  AllocateMemory( memberList, ClanMemberList, 1 );
+
+  memberList = new ClanMemberList();
   memberList->Name = CopyString( guild->Name );
   LINK( memberList, FirstClanMemberList, LastClanMemberList, Next, Previous );
 

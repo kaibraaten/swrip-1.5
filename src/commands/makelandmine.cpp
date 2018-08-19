@@ -23,7 +23,6 @@ static void FreeUserData( struct UserData *ud );
 
 void do_makelandmine( Character *ch, char *argument )
 {
-  struct UserData *data = NULL;
   static const struct CraftingMaterial materials[] =
     {
       { ITEM_TOOLKIT,         CRAFTFLAG_NONE },
@@ -37,8 +36,7 @@ void do_makelandmine( Character *ch, char *argument )
                                              25, OBJ_VNUM_CRAFTING_LANDMINE,
 					     CRAFTFLAG_NEED_WORKSHOP );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
-
-  AllocateMemory( data, struct UserData, 1 );
+  UserData *data = new UserData();
   data->Level = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->Learned[gsn_makelandmine]);
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
@@ -129,7 +127,7 @@ static void FreeUserData( struct UserData *ud )
       FreeMemory( ud->ItemName );
     }
 
-  FreeMemory( ud );
+  delete ud;
 }
 
 

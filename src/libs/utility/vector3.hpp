@@ -26,14 +26,15 @@
 #ifndef _VECTOR3_HPP_
 #define _VECTOR3_HPP_
 
-typedef struct vector3 Vector3;
-
 /*
  * General purpose vector structure in three dimensions.
  */
-struct vector3
+class Vector3
 {
-  double x, y, z;
+public:
+  double x = 0;
+  double y = 0;
+  double z = 0;
 };
 
 /*

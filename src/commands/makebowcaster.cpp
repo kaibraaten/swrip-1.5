@@ -24,11 +24,9 @@ static void FreeUserData( struct UserData *ud );
 
 void do_makebowcaster( Character *ch, char *argument )
 {
-  struct UserData *data = NULL;
   CraftRecipe *recipe = CreateMakeBowcasterCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
-
-  AllocateMemory( data, struct UserData, 1 );
+  UserData *data = new UserData();
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddCheckRequirementsCraftingHandler( session, data, CheckRequirementsHandler );
@@ -111,11 +109,9 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
 {
-  struct UserData *ud = (struct UserData*) userData;
+  UserData *ud = static_cast<UserData*>(userData);
   char buf[MAX_STRING_LENGTH];
   Object *obj = args->Object;
-  Affect *hitroll = NULL;
-  Affect *damroll = NULL;
 
   obj->ItemType = ITEM_WEAPON;
   SetBit( obj->WearFlags, ITEM_WIELD );
@@ -135,7 +131,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   strcat( buf, " was carefully placed here." );
   obj->Description = CopyString( Capitalize( buf ) );
 
-  AllocateMemory( hitroll, Affect, 1 );
+  Affect *hitroll = new Affect();
   hitroll->Type      = -1;
   hitroll->Duration  = -1;
   hitroll->Location  = GetAffectType( "hitroll" );
@@ -143,7 +139,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   LINK( hitroll, obj->FirstAffect, obj->LastAffect, Next, Previous );
   ++top_affect;
 
-  AllocateMemory( damroll, Affect, 1 );
+  Affect *damroll = new Affect();
   damroll->Type      = -1;
   damroll->Duration  = -1;
   damroll->Location  = GetAffectType( "damroll" );
@@ -179,7 +175,7 @@ static void FreeUserData( struct UserData *ud )
       FreeMemory( ud->ItemName );
     }
 
-  FreeMemory( ud );
+  delete ud;
 }
 
 

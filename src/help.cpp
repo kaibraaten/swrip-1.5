@@ -190,9 +190,8 @@ static void PushHelpFile(lua_State *L, const HelpFile *help)
 
 HelpFile *AllocateHelpFile( const char *keyword, short level )
 {
-  HelpFile *help = NULL;
+  HelpFile *help = new HelpFile();
   
-  AllocateMemory( help, HelpFile, 1 );
   SetHelpFileKeyword( help, keyword );
   SetHelpFileText( help, "" );
   SetHelpFileLevel( help, level );
@@ -204,7 +203,7 @@ void FreeHelpFile( HelpFile *help )
 {
   FreeMemory( help->Keyword );
   FreeMemory( help->Text );
-  FreeMemory( help );
+  delete help;
 }
 
 /*

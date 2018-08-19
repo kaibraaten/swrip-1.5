@@ -1987,7 +1987,6 @@ enum
                                                      determine best reboot time */
 
 #define ERROR_PROG           -1
-#define IN_FILE_PROG          0
 #define ACT_PROG           BV00
 #define SPEECH_PROG        BV01
 #define RAND_PROG          BV02

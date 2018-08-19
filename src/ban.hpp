@@ -6,8 +6,9 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
-struct Ban
+class Ban
 {
+public:
   std::string Site;
   int Level = 0;
   std::string BanTime;

@@ -36,26 +36,13 @@ ShuttleRepository *Shuttles = nullptr;
 
 ShuttleStop *AllocateShuttleStop( void )
 {
-  ShuttleStop *stop = nullptr;
-
-  AllocateMemory( stop, ShuttleStop, 1);
-  stop->RoomVnum = INVALID_VNUM;
-
+  ShuttleStop *stop = new ShuttleStop();
   return stop;
 }
 
 static Shuttle *AllocateShuttle( void )
 {
-  Shuttle *shuttle = NULL;
-
-  AllocateMemory(shuttle, Shuttle, 1);
-  shuttle->CurrentNumber = -1;
-  shuttle->State          = SHUTTLE_STATE_LANDED;
-  shuttle->FirstStop     = shuttle->LastStop = NULL;
-  shuttle->Type           = SHUTTLE_TURBOCAR;
-  shuttle->Delay          = shuttle->CurrentDelay = 2;
-  shuttle->Rooms.First     = shuttle->Rooms.Last = shuttle->Rooms.Entrance = ROOM_VNUM_LIMBO;
-
+  Shuttle *shuttle = new Shuttle();
   return shuttle;
 }
 
@@ -227,7 +214,16 @@ void ShuttleUpdate( void )
 		  sprintf(buf, "%s speeds out of the station.", shuttle->Name );
 		}
 
-              EchoToRoom( AT_YELLOW , shuttle->InRoom , buf );
+              if(shuttle->InRoom != nullptr)
+                {
+                  EchoToRoom( AT_YELLOW , shuttle->InRoom , buf );
+                }
+              else
+                {
+                  Log->Bug("%s, %s, %d: '%s' shuttle->InRoom == nullptr, shuttle->CurrentStop == vnum %ld",
+                           __FILE__, __FUNCTION__, __LINE__, shuttle->Name, shuttle->CurrentStop->RoomVnum);
+                }
+              
               ExtractShuttle( shuttle );
 
               if (shuttle->Type == SHUTTLE_TURBOCAR || shuttle->Type == SHUTTLE_SPACE)
@@ -429,9 +425,8 @@ static void LoadStop( lua_State *L, Shuttle *shuttle )
   int idx = lua_gettop( L );
   const int topAtStart = idx;
   int elementsToPop = 0;
-  ShuttleStop *stop = NULL;
+  ShuttleStop *stop = new ShuttleStop();
 
-  AllocateMemory( stop, ShuttleStop, 1 );
   lua_getfield( L, idx, "Name" );
   lua_getfield( L, idx, "RoomVnum" );
 
@@ -475,10 +470,9 @@ static int L_ShuttleEntry( lua_State *L )
   int idx = lua_gettop( L );
   const int topAtStart = idx;
   int elementsToPop = 0;
-  Shuttle *shuttle = NULL;
   luaL_checktype( L, 1, LUA_TTABLE );
 
-  AllocateMemory( shuttle, Shuttle, 1 );
+  Shuttle *shuttle = new Shuttle();
   lua_getfield( L, idx, "Name" );
   lua_getfield( L, idx, "Delay" );
   lua_getfield( L, idx, "CurrentDelay" );
@@ -587,7 +581,7 @@ static void FreeShuttle( Shuttle *shuttle )
           FreeMemory(stop->Name);
         }
 
-      FreeMemory(stop);
+      delete stop;
     }
 
   if (shuttle->Name)
@@ -595,7 +589,7 @@ static void FreeShuttle( Shuttle *shuttle )
       FreeMemory(shuttle->Name);
     }
 
-  FreeMemory(shuttle);
+  delete shuttle;
 }
 
 void PermanentlyDestroyShuttle(Shuttle *shuttle)

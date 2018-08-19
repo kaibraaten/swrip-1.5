@@ -21,11 +21,9 @@ static CraftRecipe *MakeCraftRecipe( void );
 
 void do_makedisguise( Character *ch, char *argument )
 {
-  struct UserData *data = NULL;
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
-
-  AllocateMemory( data, struct UserData, 1 );
+  UserData *data = new UserData();
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddSetObjectStatsCraftingHandler( session, data, SetObjectStatsHandler );
@@ -159,7 +157,7 @@ static void FreeUserData( struct UserData *ud )
       FreeMemory( ud->Name );
     }
 
-  FreeMemory( ud );
+  delete ud;
 }
 
 

@@ -38,9 +38,8 @@ Command *GetCommand( const char *name )
 
 Command *AllocateCommand( void )
 {
-  Command *command = NULL;
-  AllocateMemory( command, Command, 1 );
-  AllocateMemory( command->UseRec, struct timerset, 1 );
+  Command *command = new Command();
+  command->UseRec = new timerset();
 
   return command;
 }
@@ -56,8 +55,8 @@ void FreeCommand( Command *command )
   if( command->FunctionName )
     FreeMemory( command->FunctionName );
 
-  FreeMemory( command->UseRec );
-  FreeMemory( command );
+  delete command->UseRec;
+  delete command;
 }
 
 /*

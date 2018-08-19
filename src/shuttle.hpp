@@ -27,15 +27,17 @@
 #include <string>
 #include <utility/repository.hpp>
 #include "types.hpp"
+#include "constants.hpp"
 
 #define SHUTTLE_DIR     DATA_DIR "shuttles/"
 
-struct ShuttleStop
+class ShuttleStop
 {
-  ShuttleStop *Previous; /* Previous Stop */
-  ShuttleStop *Next; /* Next Stop */
-  char      *Name; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
-  vnum_t     RoomVnum;
+public:
+  ShuttleStop *Previous = nullptr; /* Previous Stop */
+  ShuttleStop *Next = nullptr; /* Next Stop */
+  char      *Name = nullptr; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
+  vnum_t     RoomVnum = INVALID_VNUM;
 };
 
 enum _ShuttleState
@@ -58,37 +60,38 @@ enum
 
 typedef int ShuttleClass;
 
-struct Shuttle
+class Shuttle
 {
-  Shuttle* NextInRoom;
-  Shuttle* PreviousInRoom;
+public:
+  Shuttle* NextInRoom = nullptr;
+  Shuttle* PreviousInRoom = nullptr;
 
-  Room *InRoom;
+  Room *InRoom = nullptr;
 
   /* HOTBOOT info, save vnum of current, then loop through on load to find it */
-  ShuttleStop *CurrentStop;
-  int CurrentNumber;
+  ShuttleStop *CurrentStop = nullptr;
+  int CurrentNumber = -1;
 
-  int State;
+  int State = SHUTTLE_STATE_LANDED;
 
-  ShuttleStop *FirstStop;
-  ShuttleStop *LastStop;
+  ShuttleStop *FirstStop = nullptr;
+  ShuttleStop *LastStop = nullptr;
 
-  ShuttleClass Type;
+  ShuttleClass Type = SHUTTLE_TURBOCAR;
 
-  char *Name;
+  char *Name = nullptr;
   
   /* Delay Between Stops */
-  int Delay;
+  int Delay = 2;
   /* Actual time for delay.. */
-  int CurrentDelay;
+  int CurrentDelay = 2;
 
   /* For echoing any messages */
   struct
   {
-    vnum_t First;
-    vnum_t Last;
-    vnum_t Entrance;
+    vnum_t First = ROOM_VNUM_LIMBO;
+    vnum_t Last = ROOM_VNUM_LIMBO;
+    vnum_t Entrance = ROOM_VNUM_LIMBO;
   } Rooms;
 };
 

@@ -170,7 +170,7 @@ bool CanMedit( const Character *ch, const ProtoMobile *mob )
 void FreeReset( Area *are, Reset *res )
 {
   UNLINK( res, are->FirstReset, are->LastReset, Next, Previous );
-  FreeMemory( res );
+  delete res;
 }
 
 ExtraDescription *SetRExtra( Room *room, const std::string &keywords )
@@ -192,7 +192,7 @@ ExtraDescription *SetRExtra( Room *room, const std::string &keywords )
 
   if ( !found )
     {
-      AllocateMemory( ed, ExtraDescription, 1 );
+      ed = new ExtraDescription();
       room->Add(ed);
       ed->Keyword       = CopyString( keywords );
       ed->Description   = CopyString( "" );
@@ -225,28 +225,30 @@ bool DelRExtra( Room *room, const std::string &keywords )
   room->Remove(rmed);
   FreeMemory( rmed->Keyword );
   FreeMemory( rmed->Description );
-  FreeMemory( rmed );
+  delete rmed;
   top_ed--;
   return true;
 }
 
 ExtraDescription *SetOExtra( Object *obj, const std::string &keywords )
 {
-  ExtraDescription *ed;
+  ExtraDescription *ed = nullptr;
 
   for ( ed = obj->FirstExtraDescription; ed; ed = ed->Next )
     {
       if ( IsName( keywords, ed->Keyword ) )
         break;
     }
+  
   if ( !ed )
     {
-      AllocateMemory( ed, ExtraDescription, 1 );
+      ed = new ExtraDescription();
       LINK( ed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
       ed->Keyword       = CopyString( keywords );
       ed->Description   = CopyString( "" );
       top_ed++;
     }
+
   return ed;
 }
 
@@ -264,7 +266,7 @@ bool DelOExtra( Object *obj, const std::string &keywords )
   UNLINK( rmed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
   FreeMemory( rmed->Keyword );
   FreeMemory( rmed->Description );
-  FreeMemory( rmed );
+  delete rmed;
   top_ed--;
   return true;
 }
@@ -280,7 +282,7 @@ ExtraDescription *SetOExtraProto( ProtoObject *obj, const std::string &keywords 
     }
   if ( !ed )
     {
-      AllocateMemory( ed, ExtraDescription, 1 );
+      ed = new ExtraDescription();
       LINK( ed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
       ed->Keyword       = CopyString( keywords );
       ed->Description   = CopyString( "" );
@@ -305,7 +307,7 @@ bool DelOExtraProto( ProtoObject *obj, const std::string &keywords )
   UNLINK( rmed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
   FreeMemory( rmed->Keyword );
   FreeMemory( rmed->Description );
-  FreeMemory( rmed );
+  delete rmed;
   top_ed--;
   return true;
 }

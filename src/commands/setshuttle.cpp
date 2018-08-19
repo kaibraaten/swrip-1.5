@@ -218,13 +218,13 @@ void do_setshuttle(Character * ch, char * argument)
 		  FreeMemory(stop->Name);
 		}
 
-	      FreeMemory(stop);
-       ch->Echo("Stop removed.\r\n");
+	      delete stop;
+              ch->Echo("Stop removed.\r\n");
 	      return;
 	    }
 	  else
 	    {
-       ch->Echo("Invalid Option.\r\n");
+              ch->Echo("Invalid Option.\r\n");
 	      return;
 	    }
 	}

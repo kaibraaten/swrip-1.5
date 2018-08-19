@@ -627,9 +627,8 @@ void AffectToCharacter( Character *ch, Affect *paf )
   assert(ch != nullptr);
   assert(paf != nullptr);
 
-  Affect *paf_new;
+  Affect *paf_new = new Affect();
 
-  AllocateMemory( paf_new, Affect, 1 );
   LINK( paf_new, ch->FirstAffect, ch->LastAffect, Next, Previous );
   paf_new->Type        = paf->Type;
   paf_new->Duration    = paf->Duration;
@@ -654,7 +653,7 @@ void RemoveAffect( Character *ch, Affect *paf )
   ModifyAffect( ch, paf, false );
 
   UNLINK( paf, ch->FirstAffect, ch->LastAffect, Next, Previous );
-  FreeMemory( paf );
+  delete paf;
 }
 
 /*
@@ -768,13 +767,11 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
   if ( IsBitSet( ch->InRoom->Flags, ROOM_TELEPORT )
        &&        ch->InRoom->TeleDelay > 0 )
     {
-      TeleportData *tele;
-
-      for ( tele = FirstTeleport; tele; tele = tele->Next )
+      for ( const TeleportData *tele = FirstTeleport; tele; tele = tele->Next )
         if ( tele->FromRoom == pRoomIndex )
           return;
 
-      AllocateMemory( tele, TeleportData, 1 );
+      TeleportData *tele = new TeleportData();
       LINK( tele, FirstTeleport, LastTeleport, Next, Previous );
       tele->FromRoom                = pRoomIndex;
       tele->TeleportTimer               = pRoomIndex->TeleDelay;
@@ -1148,8 +1145,9 @@ void ExtractObject( Object *obj )
     for ( paf = obj->FirstAffect; paf; paf = paf_next )
       {
         paf_next    = paf->Next;
-        FreeMemory( paf );
+        delete paf;
       }
+
     obj->FirstAffect = obj->LastAffect = NULL;
   }
 
@@ -1162,8 +1160,9 @@ void ExtractObject( Object *obj )
         ed_next = ed->Next;
         FreeMemory( ed->Description );
         FreeMemory( ed->Keyword     );
-        FreeMemory( ed );
+        delete ed;
       }
+    
     obj->FirstExtraDescription = obj->LastExtraDescription = NULL;
   }
 
@@ -2079,7 +2078,7 @@ void ExtractExit( Room *room, Exit *pexit )
 
   FreeMemory( pexit->Keyword );
   FreeMemory( pexit->Description );
-  FreeMemory( pexit );
+  delete pexit;
 }
 
 /*
@@ -2099,7 +2098,7 @@ void CleanRoom( Room *room )
       room->Remove(ed);
       FreeMemory( ed->Description );
       FreeMemory( ed->Keyword );
-      FreeMemory( ed );
+      delete ed;
       top_ed--;
     }
 
@@ -2109,7 +2108,7 @@ void CleanRoom( Room *room )
       room->Remove(pexit);
       FreeMemory( pexit->Keyword );
       FreeMemory( pexit->Description );
-      FreeMemory( pexit );
+      delete pexit;
       top_exit--;
     }
   
@@ -2148,7 +2147,7 @@ void CleanObject( ProtoObject *obj )
   for ( paf = obj->FirstAffect; paf; paf = paf_next )
     {
       paf_next    = paf->Next;
-      FreeMemory( paf );
+      delete paf;
       top_affect--;
     }
 
@@ -2160,7 +2159,7 @@ void CleanObject( ProtoObject *obj )
       ed_next = ed->Next;
       FreeMemory( ed->Description );
       FreeMemory( ed->Keyword     );
-      FreeMemory( ed );
+      delete ed;
       top_ed--;
     }
 
@@ -2190,7 +2189,7 @@ void CleanMobile( ProtoMobile *mob )
       mob->mprog.Remove(mprog);
       FreeMemory( mprog->arglist );
       FreeMemory( mprog->comlist );
-      FreeMemory( mprog );
+      delete mprog;
     }
 
   mob->Count     = 0;
@@ -2371,9 +2370,8 @@ bool CharacterDiedRecently( const Character *ch )
 void QueueExtractedCharacter( Character *ch, bool extract )
 {
   assert(ch != nullptr);
-  ExtractedCharacter *ccd;
+  ExtractedCharacter *ccd = new ExtractedCharacter();
 
-  AllocateMemory( ccd, ExtractedCharacter, 1 );
   ccd->Character                       = ch;
   ccd->InRoom                     = ch->InRoom;
   ccd->Extract          = extract;
@@ -2393,14 +2391,14 @@ void QueueExtractedCharacter( Character *ch, bool extract )
  */
 void CleanCharacterQueue()
 {
-  ExtractedCharacter *ccd;
-
-  for ( ccd = extracted_char_queue; ccd; ccd = extracted_char_queue )
+  for ( ExtractedCharacter *ccd = extracted_char_queue; ccd; ccd = extracted_char_queue )
     {
       extracted_char_queue = ccd->Next;
+
       if ( ccd->Extract )
         FreeCharacter( ccd->Character );
-      FreeMemory( ccd );
+
+      delete ccd;
       --cur_qchars;
     }
 }
@@ -2414,16 +2412,19 @@ void AddTimerToCharacter( Character *ch, short type, short count, CmdFun *fun, i
   Timer *timer;
 
   for ( timer = ch->FirstTimer; timer; timer = timer->Next )
-    if ( timer->Type == type )
-      {
-        timer->Count  = count;
-        timer->DoFun = fun;
-        timer->Value     = value;
-        break;
-      }
+    {
+      if ( timer->Type == type )
+        {
+          timer->Count  = count;
+          timer->DoFun = fun;
+          timer->Value     = value;
+          break;
+        }
+    }
+  
   if ( !timer )
     {
-      AllocateMemory( timer, Timer, 1 );
+      timer = new Timer();
       timer->Count      = count;
       timer->Type       = type;
       timer->DoFun     = fun;
@@ -2459,7 +2460,7 @@ void ExtractTimer( Character *ch, Timer *timer )
   assert(timer != nullptr);
 
   UNLINK( timer, ch->FirstTimer, ch->LastTimer, Next, Previous );
-  FreeMemory( timer );
+  delete timer;
 }
 
 void RemoveTimer( Character *ch, short type )

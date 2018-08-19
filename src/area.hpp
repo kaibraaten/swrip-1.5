@@ -3,32 +3,34 @@
 
 #include <string>
 #include "types.hpp"
+#include "constants.hpp"
 
-struct Area
+class Area
 {
-  Area *Next;
-  Area *Previous;
-  Area *NextSort;
-  Area *PreviousSort;
-  Reset *FirstReset;
-  Reset *LastReset;
-  struct Planet *Planet;
-  Area *NextOnPlanet;
-  Area *PreviousOnPlanet;
-  char *Name;
-  char *Filename;
-  int Flags;
-  short Status;
-  short Age;
-  short NumberOfPlayers;
-  short ResetFrequency;
+public:
+  Area *Next = nullptr;
+  Area *Previous = nullptr;
+  Area *NextSort = nullptr;
+  Area *PreviousSort = nullptr;
+  Reset *FirstReset = nullptr;
+  Reset *LastReset = nullptr;
+  class Planet *Planet = nullptr;
+  Area *NextOnPlanet = nullptr;
+  Area *PreviousOnPlanet = nullptr;
+  char *Name = nullptr;
+  char *Filename = nullptr;
+  int Flags = 0;
+  short Status = 0;
+  short Age = 0;
+  short NumberOfPlayers = 0;
+  short ResetFrequency = 0;
 
   struct
   {
     struct
     {
-      vnum_t First;
-      vnum_t Last;
+      vnum_t First = INVALID_VNUM;
+      vnum_t Last = INVALID_VNUM;
     } Room, Mob, Object;
   } VnumRanges;
 
@@ -36,24 +38,24 @@ struct Area
   {
     struct
     {
-      int Low;
-      int High;
+      int Low = 0;
+      int High = 0;
     } Soft, Hard;
   } LevelRanges;
 
-  char *Author;
-  char *ResetMessage;
-  Reset *LastMobReset;
-  Reset *LastObjectReset;
-  short MaxPlayers;
-  int MKills;
-  int MDeaths;
-  int PKills;
-  int PDeaths;
-  int GoldLooted;
-  int IllegalPk;
-  int HighEconomy;
-  int LowEconomy;
+  char *Author = nullptr;
+  char *ResetMessage = nullptr;
+  Reset *LastMobReset = nullptr;
+  Reset *LastObjectReset = nullptr;
+  short MaxPlayers = 0;
+  int MKills = 0;
+  int MDeaths = 0;
+  int PKills = 0;
+  int PDeaths = 0;
+  int GoldLooted = 0;
+  int IllegalPk = 0;
+  int HighEconomy = 0;
+  int LowEconomy = 0;
 };
 
 extern Area *FirstArea;

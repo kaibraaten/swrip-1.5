@@ -23,9 +23,7 @@ void do_makecomlink( Character *ch, char *argument )
 {
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
-  struct UserData *ud = NULL;
-
-  AllocateMemory( ud, struct UserData, 1 );
+  UserData *ud = new UserData();
 
   AddInterpretArgumentsCraftingHandler( session, ud, InterpretArgumentsHandler );
   AddSetObjectStatsCraftingHandler( session, ud, SetObjectStatsHandler );
@@ -141,7 +139,7 @@ static void FreeUserData( struct UserData *ud )
       FreeMemory( ud->ItemName );
     }
 
-  FreeMemory( ud );
+  delete ud;
 }
 
 static bool CanUseWearLocation( int wearLocation )
@@ -151,5 +149,3 @@ static bool CanUseWearLocation( int wearLocation )
     || wearLocation == ITEM_WEAR_WRIST
     || wearLocation == ITEM_WEAR_EARS;
 }
-
-

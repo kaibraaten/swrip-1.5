@@ -3293,7 +3293,7 @@ void RoomActUpdate( void )
 
           room->mprog.Remove(mpact);
           FreeMemory(mpact->buf);
-          FreeMemory(mpact);
+          delete mpact;
         }
 
       room->mprog.mpactnum = 0;
@@ -3349,9 +3349,6 @@ const char *MobProgTypeToName( int type )
 {
   switch ( type )
     {
-    case IN_FILE_PROG:
-      return "in_file_prog";
-
     case ACT_PROG:
       return "act_prog";
 

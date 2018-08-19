@@ -4,11 +4,12 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
-struct Bounty
+class Bounty
 {
-  char *Target;
-  long Reward;
-  char *Poster;
+public:
+  char *Target = nullptr;
+  long Reward = 0;
+  char *Poster = nullptr;
 };
 
 void AddBounty( const Character *ch, const Character *victim, long amount );

@@ -36,7 +36,7 @@ struct act_prog_data
 
 struct MPROG_ACT_LIST
 {
-  MPROG_ACT_LIST *Next = nullptr;
+  //MPROG_ACT_LIST *Next = nullptr;
   char *buf = nullptr;
   Character *ch = nullptr;
   Object *obj = nullptr;
@@ -45,7 +45,7 @@ struct MPROG_ACT_LIST
 
 struct MPROG_DATA
 {
-  MPROG_DATA *Next = nullptr;
+  //MPROG_DATA *Next = nullptr;
   int         type = 0;
   bool        triggered = false;
   int         resetdelay = 0;
