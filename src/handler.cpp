@@ -2399,12 +2399,13 @@ void CleanCharacterQueue()
  */
 void AddTimerToCharacter( Character *ch, short type, short count, CmdFun *fun, int value )
 {
-  Timer *timer;
+  Timer *timer = nullptr;
 
-  for ( timer = ch->FirstTimer; timer; timer = timer->Next )
+  for(Timer *iter : ch->Timers())
     {
-      if ( timer->Type == type )
+      if ( iter->Type == type )
         {
+          timer = iter;
           timer->Count  = count;
           timer->DoFun = fun;
           timer->Value     = value;
@@ -2415,30 +2416,28 @@ void AddTimerToCharacter( Character *ch, short type, short count, CmdFun *fun, i
   if ( !timer )
     {
       timer = new Timer();
-      timer->Count      = count;
-      timer->Type       = type;
-      timer->DoFun     = fun;
-      timer->Value      = value;
-      LINK( timer, ch->FirstTimer, ch->LastTimer, Next, Previous );
+      timer->Count = count;
+      timer->Type = type;
+      timer->DoFun = fun;
+      timer->Value = value;
+      ch->Add(timer);
     }
 }
 
 Timer *GetTimerPointer( const Character *ch, short type )
 {
-  Timer *timer;
-
-  for ( timer = ch->FirstTimer; timer; timer = timer->Next )
-    if ( timer->Type == type )
-      return timer;
-
-  return NULL;
+  return Find(ch->Timers(),
+              [type](auto timer)
+              {
+                return timer->Type == type;
+              });
 }
 
 short GetTimer( const Character *ch, short type )
 {
-  Timer *timer;
+  Timer *timer = GetTimerPointer( ch, type );
 
-  if ( (timer = GetTimerPointer( ch, type )) != NULL )
+  if ( timer != nullptr )
     return timer->Count;
   else
     return 0;
@@ -2449,20 +2448,18 @@ void ExtractTimer( Character *ch, Timer *timer )
   assert(ch != nullptr);
   assert(timer != nullptr);
 
-  UNLINK( timer, ch->FirstTimer, ch->LastTimer, Next, Previous );
+  ch->Remove(timer);
   delete timer;
 }
 
 void RemoveTimer( Character *ch, short type )
 {
-  Timer *timer;
+  Timer *timer = GetTimerPointer(ch, type);
 
-  for ( timer = ch->FirstTimer; timer; timer = timer->Next )
-    if ( timer->Type == type )
-      break;
-
-  if ( timer )
-    ExtractTimer( ch, timer );
+  if ( timer != nullptr )
+    {
+      ExtractTimer( ch, timer );
+    }
 }
 
 bool InSoftRange( const Character *ch, const Area *tarea )

@@ -39,6 +39,7 @@ struct Character::Impl
 {
   std::list<Affect*> Affects;
   std::list<Object*> Objects;
+  std::list<Timer*> Timers;
 };
 
 Character::Character(class PCData *pcdata, Descriptor *desc)
@@ -223,6 +224,21 @@ void Character::Remove(Object *object)
 {
   pImpl->Objects.remove(object);
   object->CarriedBy = nullptr;
+}
+
+const std::list<Timer*> &Character::Timers() const
+{
+  return pImpl->Timers;
+}
+
+void Character::Add(Timer *timer)
+{
+  pImpl->Timers.push_back(timer);
+}
+
+void Character::Remove(Timer *timer)
+{
+  pImpl->Timers.remove(timer);
 }
 
 ////////////////////////////////////////////////////////////////
@@ -1411,17 +1427,13 @@ vnum_t WhereHome( const Character *ch)
  */
 void FreeCharacter( Character *ch )
 {
-  Timer *timer = nullptr;
-
-  if ( !ch )
-    {
-      Log->Bug( "%s: null ch!", __FUNCTION__ );
-      return;
-    }
+  assert(ch != nullptr);
 
   if ( ch->Desc )
-    Log->Bug( "%s: char still has descriptor.", __FUNCTION__ );
-
+    {
+      Log->Bug( "%s: char still has descriptor.", __FUNCTION__ );
+    }
+  
   while(!ch->Objects().empty())
     {
       ExtractObject( ch->Objects().back() );
@@ -1431,10 +1443,10 @@ void FreeCharacter( Character *ch )
     {
       RemoveAffect( ch, ch->Affects().back() );
     }
-  
-  while ( (timer = ch->FirstTimer) != NULL )
+
+  while(!ch->Timers().empty())
     {
-      ExtractTimer( ch, timer );
+      ExtractTimer( ch, ch->Timers().front() );
     }
   
   FreeMemory( ch->Name             );
