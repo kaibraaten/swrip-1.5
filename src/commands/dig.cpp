@@ -10,9 +10,6 @@
 void do_dig( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Object *obj = NULL;
-  bool found = false, shovel = false;
-  Exit *pexit = NULL;
 
   switch( ch->SubState )
     {
@@ -33,17 +30,19 @@ void do_dig( Character *ch, char *argument )
 
       if ( !IsNullOrEmpty( arg ) )
         {
-	  if ( ( pexit = FindDoor( ch, arg, true ) ) == NULL
+          const Exit *pexit = FindDoor(ch, arg, true);
+          
+	  if ( pexit == nullptr
                && GetDirection(arg) == -1 )
             {
               ch->Echo( "What direction is that?\r\n" );
               return;
             }
 
-          if ( pexit )
+          if ( pexit != nullptr )
             {
               if ( !IsBitSet(pexit->Flags, EX_DIG)
-                   &&   !IsBitSet(pexit->Flags, EX_CLOSED) )
+                   && !IsBitSet(pexit->Flags, EX_CLOSED) )
                 {
                   ch->Echo( "There is no need to dig out that exit.\r\n" );
                   return;
@@ -104,20 +103,16 @@ void do_dig( Character *ch, char *argument )
   ch->SubState = SUB_NONE;
 
   /* not having a shovel makes it harder to succeed */
-  shovel = false;
-  for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
-    if ( obj->ItemType == ITEM_SHOVEL )
-      {
-        shovel = true;
-        break;
-      }
+  bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL);
 
   /* dig out an EX_DIG exit... */
   if ( !IsNullOrEmpty( arg ) )
     {
-      if ( ( pexit = FindDoor( ch, arg, true ) ) != NULL
-           &&     IsBitSet( pexit->Flags, EX_DIG )
-           &&     IsBitSet( pexit->Flags, EX_CLOSED ) )
+      Exit *pexit = FindDoor(ch, arg, true);
+      
+      if ( pexit != nullptr
+           && IsBitSet( pexit->Flags, EX_DIG )
+           && IsBitSet( pexit->Flags, EX_CLOSED ) )
         {
           /* 4 times harder to dig open a passage without a shovel */
           if ( (GetRandomPercent() * (shovel ? 1 : 4)) <
@@ -137,8 +132,9 @@ void do_dig( Character *ch, char *argument )
       return;
     }
 
-  found = false;
-
+  bool found = false;
+  Object *obj = nullptr;
+  
   for(auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
     {
       obj = *i;

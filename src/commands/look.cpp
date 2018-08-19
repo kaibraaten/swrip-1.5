@@ -115,7 +115,7 @@ void do_look( Character *ch, char *argument )
 
   number = NumberArgument( arg1, arg );
 
-  for ( Object *obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
+  for ( Object *obj : Reverse(ch->Objects()) )
     {
       if ( CanSeeObject( ch, obj ) )
         {
@@ -547,7 +547,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
   if ( GetRandomPercent() < ch->PCData->Learned[gsn_peek] )
     {
       ch->Echo("\r\nYou peek at the inventory:\r\n");
-      ShowObjectListToCharacter( victim->FirstCarrying, ch, true, true );
+      ShowObjectListToCharacter( victim->Objects(), ch, true, true );
       LearnFromSuccess( ch, gsn_peek );
     }
   else

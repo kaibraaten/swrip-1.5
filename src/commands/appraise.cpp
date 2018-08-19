@@ -78,11 +78,10 @@ void do_appraise( Character *ch, char *argument )
 
 static void appraise_all( Character *ch, Character *keeper, char *fixstr )
 {
-  Object *obj = nullptr;
   char buf[MAX_STRING_LENGTH], *pbuf=buf;
   int cost = 0, total=0;
 
-  for ( obj = ch->FirstCarrying; obj != NULL ; obj = obj->NextContent )
+  for(const Object *obj : ch->Objects())
     {
       if ( obj->WearLoc  == WEAR_NONE
            &&   CanSeeObject( ch, obj )
@@ -92,7 +91,9 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
 
         {
           if ( !CanDropObject( ch, obj ) )
-            ch->Echo( "You can't let go of %s.\r\n", obj->Name );
+            {
+              ch->Echo( "You can't let go of %s.\r\n", obj->Name );
+            }
           else if ( ( cost = GetRepairCost( keeper, obj ) ) < 0 )
             {
               if (cost != -2)
@@ -113,6 +114,7 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
             }
         }
     }
+
   if ( total > 0 )
     {
       ch->Echo("\r\n");

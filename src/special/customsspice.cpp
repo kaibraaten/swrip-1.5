@@ -17,7 +17,7 @@ bool spec_customs_spice( Character *ch )
       if ( IsNpc(victim) || victim->Position == POS_FIGHTING )
         continue;
 
-      for ( Object *obj = victim->LastCarrying; obj; obj = obj->PreviousContent )
+      for ( Object *obj : Reverse(victim->Objects()))
         {
           if (obj->ItemType == ITEM_SPICE || obj->ItemType  == ITEM_RAWSPICE)
             {

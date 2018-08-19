@@ -53,8 +53,6 @@ void do_loadup( Character *ch, char *argument )
                    Capitalize( d->Character->Name ) );
           if ( ( fph = fopen( filename, "r" ) ) != NULL )
             {
-              Object *tobj, *tobj_next;
-
               RoomProgSetSupermob(storeroom);
 
               for ( ; ; )
@@ -92,16 +90,17 @@ void do_loadup( Character *ch, char *argument )
 
               fclose( fph );
 
-              for ( tobj = supermob->FirstCarrying; tobj; tobj = tobj_next )
+              std::list<Object*> carriedBySupermob(supermob->Objects());
+
+              for(Object *tobj : carriedBySupermob)
                 {
-                  tobj_next = tobj->NextContent;
                   ObjectFromCharacter( tobj );
+
                   if( tobj->ItemType != ITEM_MONEY )
                     ObjectToRoom( tobj, storeroom );
                 }
 
               ReleaseSupermob();
-
             }
         }
 

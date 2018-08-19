@@ -8,9 +8,7 @@
 
 void do_mpjunk( Character *ch, char *argument )
 {
-  char      arg[ MAX_INPUT_LENGTH ];
-  Object *obj;
-  Object *obj_next;
+  char arg[ MAX_INPUT_LENGTH ];
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -31,27 +29,40 @@ void do_mpjunk( Character *ch, char *argument )
 
   if ( StrCmp( arg, "all" ) && StringPrefix( "all.", arg ) )
     {
-      if ( ( obj = GetWornObject( ch, arg ) ) != NULL )
+      Object *obj = GetWornObject(ch, arg);
+      
+      if ( obj != nullptr )
         {
           UnequipCharacter( ch, obj );
           ExtractObject( obj );
-          return;
         }
-      if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
-        return;
-      ExtractObject( obj );
+      else
+        {
+          obj = GetCarriedObject(ch, arg);
+
+          if(obj != nullptr)
+            {
+              ExtractObject( obj );
+            }
+        }
     }
   else
-    for ( obj = ch->FirstCarrying; obj; obj = obj_next )
-      {
-        obj_next = obj->NextContent;
-
-	if ( arg[3] == '\0' || IsName( &arg[4], obj->Name ) )
-          {
-            if ( obj->WearLoc != WEAR_NONE)
+    {
+      std::list<Object*> objectsToExtract = Filter(ch->Objects(),
+                                                   [arg](auto obj)
+                                                   {
+                                                     return arg[3] == '\0'
+                                                       || IsName(&arg[4], obj->Name);
+                                                   });
+      for(Object *obj : objectsToExtract)
+        {
+          if ( obj->WearLoc != WEAR_NONE)
+            {
               UnequipCharacter( ch, obj );
-            ExtractObject( obj );
-          }
-      }
+            }
+          
+          ExtractObject( obj );
+        }
+    }
 }
 

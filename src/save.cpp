@@ -98,7 +98,7 @@ void SaveHome( Character *ch )
           templvl = ch->TopLevel;
           ch->TopLevel = LEVEL_AVATAR;           /* make sure EQ doesn't get lost */
 
-          for(const Object *obj : ch->PlayerHome->Objects())
+          for(const Object *obj : Reverse(ch->PlayerHome->Objects()))
 	    {
 	      WriteObject(ch, obj, fp, 0, OS_CARRY );
 	    }
@@ -116,22 +116,20 @@ void SaveHome( Character *ch )
  */
 void DeEquipCharacter( Character *ch )
 {
-  Object *obj = NULL;
-  int x = 0;
-  int y = 0;
-
-  for ( x = 0; x < MAX_WEAR; x++ )
+  for ( int x = 0; x < MAX_WEAR; x++ )
     {
-      for ( y = 0; y < MAX_LAYERS; y++ )
+      for ( int y = 0; y < MAX_LAYERS; y++ )
 	{
 	  save_equipment[x][y] = NULL;
 	}
     }
 
-  for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
+  for ( Object *obj : ch->Objects() )
     {
       if ( obj->WearLoc > WEAR_NONE && obj->WearLoc < MAX_WEAR )
 	{
+          int x = 0;
+          
 	  for ( x = 0; x < MAX_LAYERS; x++ )
 	    {
 	      if ( !save_equipment[obj->WearLoc][x] )
@@ -279,9 +277,9 @@ void SaveCharacter( Character *ch )
     {
       WriteCharacter( ch, fp );
 
-      if ( ch->FirstCarrying )
+      for(const Object *obj : Reverse(ch->Objects()))
 	{
-	  WriteObject( ch, ch->LastCarrying, fp, 0, OS_CARRY );
+	  WriteObject( ch, obj, fp, 0, OS_CARRY );
 	}
 
       if ( ch->PCData && ch->PCData->Comments )
@@ -2573,11 +2571,6 @@ void LoadStorerooms( void )
     {
       if ( de->d_name[0] != '.' )
         {
-          int iNest = 0;
-          Object *tobj = NULL;
-	  Object *tobj_next = NULL;
-          Room *storeroom = NULL;
-
           sprintf(strArea, "%s%s", STOREROOM_DIR, de->d_name );
           fprintf(stderr, "Storeroom -> %s\n", strArea);
 
@@ -2587,7 +2580,7 @@ void LoadStorerooms( void )
               continue;
             }
 
-          storeroom = GetRoom(atoi(de->d_name));
+          Room *storeroom = GetRoom(atoi(de->d_name));
 
           if( !storeroom )
             {
@@ -2606,7 +2599,7 @@ void LoadStorerooms( void )
 
           RoomProgSetSupermob(storeroom);
 
-          for ( iNest = 0; iNest < MAX_NEST; iNest++ )
+          for ( int iNest = 0; iNest < MAX_NEST; iNest++ )
 	    {
 	      rgObjNest[iNest] = NULL;
 	    }
@@ -2649,9 +2642,10 @@ void LoadStorerooms( void )
 
           fclose( fpArea );
 
-          for ( tobj = supermob->FirstCarrying; tobj; tobj = tobj_next )
+          std::list<Object*> carriedBySupermob(supermob->Objects());
+
+          for(Object *tobj : carriedBySupermob)
             {
-              tobj_next = tobj->NextContent;
               ObjectFromCharacter( tobj );
 
               if( tobj->ItemType != ITEM_MONEY )
@@ -2819,9 +2813,10 @@ static void WriteMobile( FILE *fp, const Character *mob )
      DeEquipCharacter( mob );
      ReEquipCharacter( mob );
   */
-  if ( mob->FirstCarrying )
+
+  for(const Object *obj : Reverse(mob->Objects()))
     {
-      WriteObject( mob, mob->LastCarrying, fp, 0, OS_CARRY );
+      WriteObject( mob, obj, fp, 0, OS_CARRY );
     }
 
   fprintf( fp, "EndMobile\n" );

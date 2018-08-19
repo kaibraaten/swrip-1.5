@@ -229,7 +229,8 @@ void do_diagnose( Character *ch, char *argument )
 
   if (!StrCmp(arg1, "visit"))
     {
-      diag_visit_obj( ch, ch->FirstCarrying);
+      //diag_visit_obj( ch, ch->FirstCarrying);
+      diag_visit_obj(ch, nullptr);
       return;
     }
 
@@ -241,10 +242,10 @@ void do_diagnose( Character *ch, char *argument )
       char           buf[MAX_STRING_LENGTH];
 
       ch->Echo("CHAR name=%s \r\n", ch->Name);
-      strcpy(buf, ch->FirstCarrying ? ch->FirstCarrying->Name : "NULL");
-      ch->Echo("   first_carry=%s\r\n", buf);
-      strcpy(buf, ch->LastCarrying ? ch->LastCarrying->Name : "NULL");
-      ch->Echo("   last_carry=%s\r\n", buf);
+      ch->Echo("   first_carry=%s\r\n",
+               ch->Objects().empty() ? "NULL" : ch->Objects().front()->Name);
+      ch->Echo("   last_carry=%s\r\n",
+               ch->Objects().empty() ? "NULL" : ch->Objects().back()->Name);
 
       /*
         for (pa=ch->FirstAffect; pa; pa=pa->Next)
@@ -396,18 +397,25 @@ static void zero_sort( int *vnums, int *count, int left, int right )
 
 static void diag_visit_obj( Character *ch, Object *obj )
 {
+#if 0
   ch->Echo( "***obj=%s\r\n", obj->Name );
 
   if ( obj->FirstContent )
     {
       diag_visit_obj( ch, obj->FirstContent );
+
       if ( obj->NextContent )
-        diag_visit_obj( ch, obj->NextContent );
+        {
+          diag_visit_obj( ch, obj->NextContent );
+        }
+    }
+  else if ( obj->NextContent )
+    {
+      diag_visit_obj( ch, obj->NextContent );
     }
   else
-    if ( obj->NextContent )
-      diag_visit_obj( ch, obj->NextContent );
-    else
+    {
       return;
+    }
+#endif
 }
-

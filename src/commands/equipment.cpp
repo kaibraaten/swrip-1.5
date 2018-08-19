@@ -13,7 +13,7 @@ void do_equipment( Character *ch, char *argument )
 
   for ( int iWear = 0; iWear < MAX_WEAR; iWear++ )
     {
-      for ( Object *obj = ch->FirstCarrying; obj; obj = obj->NextContent )
+      for ( Object *obj : ch->Objects() )
         {
           if ( obj->WearLoc == iWear )
             {

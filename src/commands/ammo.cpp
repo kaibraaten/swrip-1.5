@@ -53,8 +53,10 @@ void do_ammo( Character *ch, char *argument )
         }
       else
         {
-          for ( ammo = ch->LastCarrying; ammo; ammo = ammo->PreviousContent )
+          for(auto i = std::rbegin(ch->Objects()); i != std::rend(ch->Objects()); ++i)
             {
+              ammo = *i;
+              
               if ( ammo->ItemType == ITEM_AMMO)
                 {
                   if ( wield->Value[OVAL_WEAPON_MAX_CHARGE] < ammo->Value[OVAL_AMMO_CHARGE] )
@@ -105,8 +107,10 @@ void do_ammo( Character *ch, char *argument )
         }
       else
         {
-          for ( ammo = ch->LastCarrying; ammo; ammo = ammo->PreviousContent )
+          for(auto i = std::rbegin(ch->Objects()); i != std::rend(ch->Objects()); ++i)
             {
+              ammo = *i;
+              
               if ( ammo->ItemType == ITEM_BOLT)
                 {
                   if ( ammo->Value[OVAL_AMMO_CHARGE] > wield->Value[OVAL_WEAPON_MAX_CHARGE] )
@@ -135,7 +139,6 @@ void do_ammo( Character *ch, char *argument )
     }
   else
     {
-
       if ( ammo && ammo->ItemType != ITEM_BATTERY )
         {
           ch->Echo( "&RYour hands are too full to replace the power cell.\r\n&w" );
@@ -152,8 +155,10 @@ void do_ammo( Character *ch, char *argument )
         }
       else
         {
-          for ( ammo = ch->LastCarrying; ammo; ammo = ammo->PreviousContent )
+          for(auto i = std::rbegin(ch->Objects()); i != std::rend(ch->Objects()); ++i)
             {
+              ammo = *i;
+              
               if ( ammo->ItemType == ITEM_BATTERY)
                 {
                   checkammo = true;

@@ -780,7 +780,6 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
  */
 Object *ObjectToCharacter( Object *obj, Character *ch )
 {
-  Object *otmp = NULL;
   Object *oret = obj;
   bool skipgroup = false, grouped = false;
   int oweight = GetObjectWeight( obj );
@@ -818,9 +817,11 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
 
   if ( !skipgroup )
     {
-      for ( otmp = ch->FirstCarrying; otmp; otmp = otmp->NextContent )
+      for(Object *otmp : ch->Objects())
 	{
-	  if ( (oret=GroupObject( otmp, obj )) == otmp )
+          oret = GroupObject(otmp, obj);
+          
+	  if ( oret == otmp )
 	    {
 	      grouped = true;
 	      break;
@@ -830,7 +831,7 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
 
   if ( !grouped )
     {
-      LINK( obj, ch->FirstCarrying, ch->LastCarrying, NextContent, PreviousContent );
+      ch->Add(obj);
       obj->CarriedBy                   = ch;
       obj->InRoom                      = NULL;
       obj->InObject                       = NULL;
@@ -864,7 +865,7 @@ void ObjectFromCharacter( Object *obj )
   if ( !obj->CarriedBy )
     return;
 
-  UNLINK( obj, ch->FirstCarrying, ch->LastCarrying, NextContent, PreviousContent );
+  ch->Remove(obj);
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->FirstContent )
     EmptyObjectContents( obj, NULL, NULL );
@@ -1192,10 +1193,6 @@ void ExtractCharacter( Character *ch, bool fPull )
   assert(ch->InRoom != nullptr);
   assert(ch != supermob);
 
-  Character *wch = nullptr;
-  Object *obj = nullptr;
-  Room *location = nullptr;
-
   if ( CharacterDiedRecently(ch) )
     {
       Log->Bug("ExtractCharacter: %s already died!", ch->Name );
@@ -1231,7 +1228,7 @@ void ExtractCharacter( Character *ch, bool fPull )
     }
 
   if ( IsNpc(ch) && IsBitSet( ch->Flags, ACT_MOUNTED ) )
-    for ( wch = FirstCharacter; wch; wch = wch->Next )
+    for ( Character *wch = FirstCharacter; wch; wch = wch->Next )
       {
         if ( wch->Mount == ch )
           {
@@ -1246,19 +1243,19 @@ void ExtractCharacter( Character *ch, bool fPull )
                    wch, NULL, ch, TO_CHAR );
           }
       }
+
   RemoveBit( ch->Flags, ACT_MOUNTED );
 
-  while ( (obj = ch->LastCarrying) != NULL )
-    ExtractObject( obj );
-
+  while( !ch->Objects().empty() )
+    {
+      ExtractObject( ch->Objects().back() );
+    }
+  
   CharacterFromRoom( ch );
 
   if ( !fPull )
     {
-      location = NULL;
-
-      if ( !location )
-        location = GetRoom( WhereHome( ch ) );
+      Room *location = GetRoom( WhereHome( ch ) );
 
       if ( !location )
         location = GetRoom( ROOM_VNUM_LIMBO );
@@ -1282,7 +1279,7 @@ void ExtractCharacter( Character *ch, bool fPull )
   if ( ch->Desc && ch->Desc->Original )
     do_return( ch, "" );
 
-  for ( wch = FirstCharacter; wch; wch = wch->Next )
+  for ( Character *wch = FirstCharacter; wch; wch = wch->Next )
     if ( wch->Reply == ch )
       wch->Reply = NULL;
 
@@ -1531,10 +1528,8 @@ Object *GetObjectInListReverse( const Character *ch, const std::string &objName,
   int count = 0;
   int number = NumberArgument( argument, arg );
 
-  for(auto iter = std::rbegin(list); iter != std::rend(list); ++iter)
+  for(Object *obj : Reverse(list))
     {
-      Object *obj = *iter;
-      
       if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
         {
           if ( (count += obj->Count) >= number )
@@ -1550,10 +1545,8 @@ Object *GetObjectInListReverse( const Character *ch, const std::string &objName,
   */
   count = 0;
 
-  for(auto iter = std::begin(list); iter != std::end(list); ++iter)
+  for(Object *obj : list)
     {
-      Object *obj = *iter;
-
       if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
         {
           if ( (count += obj->Count) >= number )
@@ -2640,29 +2633,24 @@ void SplitGroupedObject( Object *obj, int num )
 
   if ( obj->CarriedBy )
     {
-      LINK( rest, obj->CarriedBy->FirstCarrying,
-            obj->CarriedBy->LastCarrying,
-            NextContent, PreviousContent );
-      rest->CarriedBy          = obj->CarriedBy;
+      obj->CarriedBy->Add(rest);
       rest->InRoom                     = NULL;
       rest->InObject                      = NULL;
     }
-  else
-    if ( obj->InRoom )
-      {
-        obj->InRoom->Add(rest);
-        rest->CarriedBy                = NULL;
-        rest->InObject                    = NULL;
-      }
-    else
-      if ( obj->InObject )
-        {
-          LINK( rest, obj->InObject->FirstContent, obj->InObject->LastContent,
-                NextContent, PreviousContent );
-          rest->InObject                   = obj->InObject;
-          rest->InRoom                  = NULL;
-          rest->CarriedBy               = NULL;
-        }
+  else if ( obj->InRoom )
+    {
+      obj->InRoom->Add(rest);
+      rest->CarriedBy                = NULL;
+      rest->InObject                    = NULL;
+    }
+  else if ( obj->InObject )
+    {
+      LINK( rest, obj->InObject->FirstContent, obj->InObject->LastContent,
+            NextContent, PreviousContent );
+      rest->InObject                   = obj->InObject;
+      rest->InRoom                  = NULL;
+      rest->CarriedBy               = NULL;
+    }
 }
 
 void SeparateOneObjectFromGroup( Object *obj )

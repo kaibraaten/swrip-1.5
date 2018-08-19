@@ -1326,7 +1326,7 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
       AddReset( pArea, 'M', 1, rch->Prototype->Vnum, rch->Prototype->Count,
                  pRoom->Vnum );
 
-      for ( Object *obj = rch->FirstCarrying; obj; obj = obj->NextContent )
+      for ( Object *obj : rch->Objects() )
         {
           if ( obj->WearLoc == WEAR_NONE )
 	    {

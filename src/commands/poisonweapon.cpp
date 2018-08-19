@@ -7,11 +7,7 @@
 
 void do_poison_weapon( Character *ch, char *argument )
 {
-  Object *obj = NULL;
-  Object *pobj = NULL;
-  Object *wobj = NULL;
   char arg[ MAX_INPUT_LENGTH ];
-  int percent = 0;
 
   if ( !IsNpc( ch )
        &&  ch->PCData->Learned[gsn_poison_weapon] <= 0  )
@@ -27,25 +23,32 @@ void do_poison_weapon( Character *ch, char *argument )
       ch->Echo("What are you trying to poison?\r\n");
       return;
     }
+
   if ( ch->Fighting )
     {
       ch->Echo("While you're fighting?  Nice try.\r\n");
       return;
     }
+
   if ( HasMentalStateToFindObject(ch) )
     return;
 
-  if ( !( obj = GetCarriedObject( ch, arg ) ) )
+  Object *obj = GetCarriedObject( ch, arg );
+  
+  if ( obj == nullptr )
     {
       ch->Echo("You do not have that weapon.\r\n");
       return;
     }
+
   if ( obj->ItemType != ITEM_WEAPON )
     {
       ch->Echo("That item is not a weapon.\r\n");
       return;
     }
-  if ( obj->Value[3] != WEAPON_VIBRO_BLADE && obj->Value[3] != WEAPON_FORCE_PIKE )
+
+  if ( obj->Value[OVAL_WEAPON_TYPE] != WEAPON_VIBRO_BLADE
+       && obj->Value[OVAL_WEAPON_TYPE] != WEAPON_FORCE_PIKE )
     {
       ch->Echo("You can not apply poison to that.\r\n");
       return;
@@ -56,30 +59,34 @@ void do_poison_weapon( Character *ch, char *argument )
       ch->Echo("That weapon is already poisoned.\r\n");
       return;
     }
-  /* Now we have a valid weapon...check to see if we have the powder. */
-  for ( pobj = ch->FirstCarrying; pobj; pobj = pobj->NextContent )
-    {
-      if ( pobj->Prototype->Vnum == OBJ_VNUM_BLACK_POWDER )
-        break;
-    }
+
+  Object *pobj = Find(ch->Objects(),
+                      [](auto o)
+                      {
+                        return o->Prototype->Vnum == OBJ_VNUM_BLACK_POWDER;
+                      });
+  
   if ( !pobj )
     {
       ch->Echo("You do not have the black poison powder.\r\n");
       return;
     }
+
   /* Okay, we have the powder...do we have water? */
-  for ( wobj = ch->FirstCarrying; wobj; wobj = wobj->NextContent )
-    {
-      if ( wobj->ItemType == ITEM_DRINK_CON
-           && wobj->Value[1]  >  0
-           && wobj->Value[2]  == 0 )
-        break;
-    }
+  Object *wobj = Find(ch->Objects(),
+                      [](auto o)
+                      {
+                        return o->ItemType == ITEM_DRINK_CON
+                          && o->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] > 0
+                          && o->Value[OVAL_DRINK_CON_LIQUID_TYPE] == 0;
+                      });
+                      
   if ( !wobj )
     {
       ch->Echo("You have no water to mix with the powder.\r\n");
       return;
     }
+
   /* And does the thief have steady enough hands? */
   if ( !IsNpc( ch )
        &&  ( ch->PCData->Condition[COND_DRUNK] > 0 ) )
@@ -87,13 +94,15 @@ void do_poison_weapon( Character *ch, char *argument )
       ch->Echo("Your hands aren't steady enough to properly mix the poison.\r\n");
       return;
     }
+
   SetWaitState( ch, SkillTable[gsn_poison_weapon]->Beats );
 
-  percent = (GetRandomPercent() - GetCurrentLuck(ch) - 14);
+  int percent = (GetRandomPercent() - GetCurrentLuck(ch) - 14);
 
   /* Check the skill percentage */
   SeparateOneObjectFromGroup( pobj );
   SeparateOneObjectFromGroup( wobj );
+
   if ( !IsNpc( ch )
        && percent > ch->PCData->Learned[gsn_poison_weapon] )
     {
@@ -107,6 +116,7 @@ void do_poison_weapon( Character *ch, char *argument )
       LearnFromFailure( ch, gsn_poison_weapon );
       return;
     }
+
   SeparateOneObjectFromGroup( obj );
   /* Well, I'm tired of waiting.  Are you? */
   Act(AT_RED, "You mix $p in $P, creating a deadly poison!", ch, pobj, wobj, TO_CHAR );

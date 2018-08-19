@@ -1132,11 +1132,10 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   sprintf( buf, "%s %s from %s.", ship->Name, txt, dtxt );
   EchoToRoom( AT_ACTION , GetRoom(ship->Location) , buf );
 
-  std::list<Character*> charactersInRoom(ch->InRoom->Characters());
+  std::list<Character*> charactersInRoom(Reverse(ch->InRoom->Characters()));
 
-  for(auto iter = std::rbegin(charactersInRoom); iter != std::rend(charactersInRoom); ++iter)
+  for(Character *rch : charactersInRoom)
     {
-      Character *rch = *iter;
       original = rch->InRoom;
       CharacterFromRoom( rch );
       CharacterToRoom( rch, to_room );

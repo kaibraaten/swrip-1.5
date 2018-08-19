@@ -23,7 +23,7 @@ bool spec_customs_weapons( Character *ch )
       if ( IsClanned( victim ) && !StrCmp(victim->PCData->ClanInfo.Clan->Name, ch->MobClan) )
         continue;
 
-      for ( Object *obj = victim->LastCarrying; obj; obj = obj->PreviousContent )
+      for ( Object *obj : Reverse(victim->Objects()))
         {
           if (obj->Prototype->ItemType == ITEM_WEAPON)
 	    {

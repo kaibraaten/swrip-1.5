@@ -507,14 +507,21 @@ static void RemoveNote( Board *board, Note *pnote )
 
 static Object *FindQuill( const Character *ch )
 {
-  Object *quill = NULL;
+  auto result = Filter(ch->Objects(),
+                       [ch](auto obj)
+                       {
+                         return obj->ItemType == ITEM_PEN
+                           && CanSeeObject(ch, obj);
+                       });
 
-  for ( quill = ch->LastCarrying; quill; quill = quill->PreviousContent )
-    if ( quill->ItemType == ITEM_PEN
-         && CanSeeObject( ch, quill ) )
-      return quill;
-
-  return quill;
+  if(!result.empty())
+    {
+      return result.front();
+    }
+  else
+    {
+      return nullptr;
+    }
 }
 
 void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MAIL )

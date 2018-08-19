@@ -152,8 +152,6 @@ void MakeCorpse( Character *ch )
 {
   char buf[MAX_STRING_LENGTH];
   Object *corpse = NULL;
-  Object *obj = NULL;
-  Object *obj_next = NULL;
   char *name = NULL;
 
   if ( IsNpc(ch) )
@@ -218,9 +216,10 @@ void MakeCorpse( Character *ch )
   FreeMemory( corpse->Description );
   corpse->Description = CopyString( buf );
 
-  for ( obj = ch->FirstCarrying; obj; obj = obj_next )
+  std::list<Object*> carriedObjects(ch->Objects());
+
+  for(Object *obj : carriedObjects)
     {
-      obj_next = obj->NextContent;
       ObjectFromCharacter( obj );
 
       if ( IS_OBJ_STAT( obj, ITEM_INVENTORY )

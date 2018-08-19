@@ -43,9 +43,12 @@ void do_immortalize( Character *ch, char *argument )
   do_help(victim, "M_GODLVL1_" );
   SetCharacterColor( AT_WHITE, victim );
   victim->Echo("You awake... all your possessions are gone.\r\n");
-  while ( victim->FirstCarrying )
-    ExtractObject( victim->FirstCarrying );
 
+  while( !victim->Objects().empty() )
+    {
+      ExtractObject( victim->Objects().front() );
+    }
+  
   victim->TopLevel = LEVEL_IMMORTAL;
   victim->Trust = 0;
 }

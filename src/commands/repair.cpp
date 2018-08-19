@@ -10,23 +10,21 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
 
 void do_repair( Character *ch, char *argument )
 {
-  Character *keeper = nullptr;
-  Object *obj = nullptr;
-  const char *fixstr = nullptr;
-  const char *fixstr2 = nullptr;
-  int maxgold = 0;
-
   if ( IsNullOrEmpty( argument ) )
     {
       ch->Echo("Repair what?\r\n");
       return;
     }
 
-  if ( ( keeper = FindFixer( ch ) ) == NULL )
+  Character *keeper = FindFixer(ch);
+  
+  if ( keeper == nullptr )
     return;
 
-  maxgold = keeper->TopLevel * 10;
-
+  long maxgold = keeper->TopLevel * 10;
+  const char *fixstr = nullptr;
+  const char *fixstr2 = nullptr;
+  
   switch( keeper->Prototype->RepairShop->ShopType )
     {
     default:
@@ -43,20 +41,24 @@ void do_repair( Character *ch, char *argument )
 
   if ( !StrCmp( argument, "all" ) )
     {
-      for ( obj = ch->FirstCarrying; obj ; obj = obj->NextContent )
+      for(Object *obj : ch->Objects())
         {
           if ( obj->WearLoc  == WEAR_NONE
                &&   CanSeeObject( ch, obj )
                && ( obj->ItemType == ITEM_ARMOR
 		    ||   obj->ItemType == ITEM_WEAPON
                     ||   obj->ItemType == ITEM_DEVICE ) )
-            repair_one_obj( ch, keeper, obj, argument, maxgold,
-                            fixstr, fixstr2);
+            {
+              repair_one_obj( ch, keeper, obj, argument, maxgold, fixstr, fixstr2);
+            }
         }
+      
       return;
     }
 
-  if ( ( obj = GetCarriedObject( ch, argument ) ) == NULL )
+  Object *obj = GetCarriedObject(ch, argument);
+  
+  if ( obj == nullptr )
     {
       Act( AT_TELL, "$n tells you 'You don't have that item.'",
            keeper, NULL, ch, TO_VICT );
