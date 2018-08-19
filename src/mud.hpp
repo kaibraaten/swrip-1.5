@@ -1614,9 +1614,8 @@ auto Reverse(const Container &original)
 template<typename Container, typename UnaryPredicate>
 auto Find(const Container &original, UnaryPredicate pred)
 {
-  auto result = Filter(original, pred);
-
-  return !result.empty() ? *std::begin(result) : nullptr;
+  auto i = find_if(std::begin(original), std::end(original), pred);
+  return i != std::end(original) ? *i : nullptr;
 }
 
 #endif /* include guard */

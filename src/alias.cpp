@@ -45,15 +45,13 @@ Alias *FindAlias( const Character *ch, const std::string &original_argument )
   strcpy(argument, original_argument.c_str());
   OneArgument(argument, alias_name);
 
-  for(Alias *alias : ch->PCData->Aliases)
-    {
-      if(StringPrefix(alias_name, alias->Name) == 0)
-        {
-          return alias;
-        }
-    }
+  Alias *alias = Find(ch->PCData->Aliases(),
+                      [alias_name](auto a)
+                      {
+                        return StringPrefix(alias_name, a->Name) == 0;
+                      });
 
-  return nullptr;
+  return alias;
 }
 
 Alias *AllocateAlias( const std::string &name, const std::string &command )
@@ -89,12 +87,12 @@ void FreeAliases( Character *ch )
       return;
     }
 
-  for(Alias *alias : ch->PCData->Aliases)
+  while(!ch->PCData->Aliases().empty())
     {
+      Alias *alias = ch->PCData->Aliases().front();
+      ch->PCData->Remove(alias);
       FreeAlias(alias);
     }
-
-  ch->PCData->Aliases.clear();
 }
 
 bool CheckAlias( Character *ch, const std::string &command, const std::string &argument )
@@ -149,16 +147,15 @@ void AddAlias( Character *ch, Alias *alias )
       return;
     }
   
-  std::list<Alias*>::const_iterator i = find_if(ch->PCData->Aliases.begin(),
-                                                ch->PCData->Aliases.end(),
-                                                [alias](auto a)
-                                                {
-                                                  return StrCmp(alias->Name, a->Name) == 0;
-                                                });
+  bool alreadyExists = Find(ch->PCData->Aliases(),
+                            [alias](auto a)
+                            {
+                              return StrCmp(alias->Name, a->Name) == 0;
+                            });
 
-  if(i == ch->PCData->Aliases.end())
+  if( !alreadyExists )
     {
-      ch->PCData->Aliases.push_back(alias);
+      ch->PCData->Add(alias);
     }
 }
 
@@ -169,6 +166,6 @@ void UnlinkAlias( Character *ch, Alias *alias )
       return;
     }
   
-  ch->PCData->Aliases.remove(alias);
+  ch->PCData->Remove(alias);
 }
 

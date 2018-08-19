@@ -562,7 +562,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "Prompt       %s~\n",      ch->PCData->Prompt      );
 	}
 
-      for(const Alias *alias : ch->PCData->Aliases)
+      for(const Alias *alias : ch->PCData->Aliases())
         {
           if(IsNullOrEmpty(alias->Name) || IsNullOrEmpty(alias->Command))
 	    {
