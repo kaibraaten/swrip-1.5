@@ -18,8 +18,10 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
     {
       SetCharacterColor( AT_MAGIC, ch );
       ch->Echo("You pass your hands around your body...\r\n");
-      while ( victim->FirstAffect )
-        RemoveAffect( victim, victim->FirstAffect );
+
+      while( !victim->Affects().empty() )
+        RemoveAffect( victim, victim->Affects().front() );
+
       victim->AffectedBy = RaceTable[victim->Race].Affected;
       return rNONE;
     }

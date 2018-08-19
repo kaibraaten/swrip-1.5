@@ -37,10 +37,16 @@
 
 static bool FindComlink( const Object *element, const Object **comlink );
 
+struct Character::Impl
+{
+  std::list<Affect*> Affects;
+};
+
 Character::Character(class PCData *pcdata, Descriptor *desc)
   : Desc(desc),
     PCData(pcdata),
-    Flags(PLR_BLANK | PLR_COMBINE | PLR_PROMPT)
+    Flags(PLR_BLANK | PLR_COMBINE | PLR_PROMPT),
+    pImpl(new Impl())
 {
   desc->Character = this;
   Ability.Level.fill(0);
@@ -83,7 +89,8 @@ Character::Character(ProtoMobile *protoMob)
     Height(protoMob->Height),
     Weight(protoMob->Weight),
     VipFlags(protoMob->VipFlags),
-    MobClan(CopyString(""))
+    MobClan(CopyString("")),
+    pImpl(new Impl())
 {
   Ability.Level.fill(0);
   Ability.Experience.fill(0);
@@ -187,6 +194,23 @@ void Character::Echo(const char *fmt, ...) const
     }
 }
 
+const std::list<Affect*> &Character::Affects() const
+{
+  return pImpl->Affects;
+}
+
+void Character::Add(Affect *affect)
+{
+  pImpl->Affects.push_back(affect);
+}
+
+void Character::Remove(Affect *affect)
+{
+  pImpl->Affects.remove(affect);
+}
+
+////////////////////////////////////////////////////////////////
+// Non-class functions
 bool IsWizVis( const Character *ch, const Character *victim )
 {
   if ( !IsNpc(victim)
@@ -492,13 +516,11 @@ void SetAbilityLevel( Character *ch, short ability, int newlevel )
  */
 bool IsAffected( const Character *ch, int sn )
 {
-  Affect *paf = NULL;
-
-  for ( paf = ch->FirstAffect; paf; paf = paf->Next )
-    if ( paf->Type == sn )
-      return true;
-
-  return false;
+  return Filter(ch->Affects(),
+                [sn](const auto affect)
+                {
+                  return affect->Type == sn;
+                }).empty() == false;
 }
 
 bool IsAffectedBy( const Character *ch, int affected_by_bit )
@@ -983,10 +1005,8 @@ bool CanDropObject( const Character *ch, const Object *obj )
  */
 void FixCharacterStats( Character *ch )
 {
-  Affect *aff = NULL;
   Object *carry[MAX_LEVEL*200];
   Object *obj = NULL;
-  int x = 0;
   int ncarry = 0;
 
   DeEquipCharacter( ch );
@@ -997,7 +1017,7 @@ void FixCharacterStats( Character *ch )
       ObjectFromCharacter( obj );
     }
 
-  for ( aff = ch->FirstAffect; aff; aff = aff->Next )
+  for(Affect *aff : ch->Affects())
     {
       ModifyAffect( ch, aff, false );
     }
@@ -1027,12 +1047,16 @@ void FixCharacterStats( Character *ch )
   ch->CarryWeight         = 0;
   ch->CarryNumber         = 0;
 
-  for ( aff = ch->FirstAffect; aff; aff = aff->Next )
-    ModifyAffect( ch, aff, true );
-
-  for ( x = 0; x < ncarry; x++ )
-    ObjectToCharacter( carry[x], ch );
-
+  for(Affect *aff : ch->Affects())
+    {
+      ModifyAffect( ch, aff, true );
+    }
+  
+  for ( int x = 0; x < ncarry; x++ )
+    {
+      ObjectToCharacter( carry[x], ch );
+    }
+  
   ReEquipCharacter( ch );
 }
 
@@ -1261,9 +1285,9 @@ void ResetPlayerOnDeath( Character *ch )
   ch->Fighting = NULL;
   ch->Mount = NULL;
 
-  while( ch->FirstAffect )
+  while( !ch->Affects().empty() )
     {
-      RemoveAffect( ch, ch->FirstAffect );
+      RemoveAffect( ch, ch->Affects().front() );
     }
 
   ch->AffectedBy = RaceTable[ch->Race].Affected;
@@ -1409,7 +1433,6 @@ vnum_t WhereHome( const Character *ch)
 void FreeCharacter( Character *ch )
 {
   Object *obj;
-  Affect *paf;
   Timer *timer;
 
   if ( !ch )
@@ -1424,9 +1447,11 @@ void FreeCharacter( Character *ch )
   while ( (obj = ch->LastCarrying) != NULL )
     ExtractObject( obj );
 
-  while ( (paf = ch->LastAffect) != NULL )
-    RemoveAffect( ch, paf );
-
+  while(!ch->Affects().empty())
+    {
+      RemoveAffect( ch, ch->Affects().back() );
+    }
+  
   while ( (timer = ch->FirstTimer) != NULL )
     ExtractTimer( ch, timer );
 

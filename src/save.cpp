@@ -371,7 +371,6 @@ void SaveClone( Character *ch )
  */
 static void WriteCharacter( const Character *ch, FILE *fp )
 {
-  const Affect *paf = NULL;
   int sn = 0;
   int drug = 0;
   const Skill *skill = NULL;
@@ -725,7 +724,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
         }
     }
 
-  for ( paf = ch->FirstAffect; paf; paf = paf->Next )
+  for(const Affect *paf : ch->Affects())
     {
       if ( paf->Type >= 0 && (skill=GetSkill(paf->Type)) == NULL )
 	{
@@ -1330,7 +1329,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               paf->Modifier   = ReadInt( fp,Log, fBootDb );
               paf->Location   = ReadInt( fp,Log, fBootDb );
               paf->AffectedBy = ReadInt( fp,Log, fBootDb );
-              LINK(paf, ch->FirstAffect, ch->LastAffect, Next, Previous );
+              ch->Add(paf);
               fMatch = true;
               break;
             }

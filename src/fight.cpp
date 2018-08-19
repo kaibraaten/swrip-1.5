@@ -174,8 +174,6 @@ void ViolenceUpdate( void )
   char buf[MAX_STRING_LENGTH];
   Character *ch = NULL;
   Character *victim = NULL;
-  Affect *paf = NULL;
-  Affect *paf_next = NULL;
   Timer *timer = NULL;
   Timer *timer_next = NULL;
   ch_ret retcode = rNONE;
@@ -236,40 +234,55 @@ void ViolenceUpdate( void )
        * We need spells that have shorter durations than an hour.
        * So a melee round sounds good to me... -Thoric
        */
-      for ( paf = ch->FirstAffect; paf; paf = paf_next )
+      std::list<Affect*> affects(ch->Affects());
+
+      for(auto affectIter = std::begin(affects); affectIter != std::end(affects); ++affectIter)
         {
-          paf_next = paf->Next;
-	  
+          Affect *paf = *affectIter;
+          
           if ( paf->Duration > 0 )
-            paf->Duration--;
+            {
+              paf->Duration--;
+            }
+          else if ( paf->Duration < 0 )
+            {
+              // Intentionally empty
+            }
           else
-            if ( paf->Duration < 0 )
-              ;
-            else
-              {
-                if ( !paf_next
-                     ||    paf_next->Type != paf->Type
-                     ||    paf_next->Duration > 0 )
-                  {
-                    skill = GetSkill(paf->Type);
+            {
+              Affect *paf_next = nullptr;
+              auto nextIter = affectIter;
+              ++nextIter;
+              
+              if(nextIter != std::end(affects))
+                {
+                  paf_next = *nextIter;
+                }
+              
+              if ( paf_next == nullptr
+                   || paf_next->Type != paf->Type
+                   || paf_next->Duration > 0 )
+                {
+                  skill = GetSkill(paf->Type);
 
-                    if ( paf->Type > 0 && skill && !IsNullOrEmpty( skill->Messages.WearOff ))
-                      {
-                        SetCharacterColor( AT_WEAROFF, ch );
-                        ch->Echo( "%s\r\n", skill->Messages.WearOff );
-                      }
-                  }
+                  if ( paf->Type > 0 && skill && !IsNullOrEmpty( skill->Messages.WearOff ))
+                    {
+                      SetCharacterColor( AT_WEAROFF, ch );
+                      ch->Echo( "%s\r\n", skill->Messages.WearOff );
+                    }
+                }
 
-                if (paf->Type == gsn_possess)
-                  {
-                    ch->Desc->Character       = ch->Desc->Original;
-                    ch->Desc->Original        = NULL;
-                    ch->Desc->Character->Desc = ch->Desc;
-                    ch->Desc->Character->Switched = NULL;
-                    ch->Desc                  = NULL;
-                  }
-                RemoveAffect( ch, paf );
-              }
+              if (paf->Type == gsn_possess)
+                {
+                  ch->Desc->Character       = ch->Desc->Original;
+                  ch->Desc->Original        = NULL;
+                  ch->Desc->Character->Desc = ch->Desc;
+                  ch->Desc->Character->Switched = NULL;
+                  ch->Desc                  = NULL;
+                }
+
+              RemoveAffect( ch, paf );
+            }
         }
 
       if ( ( victim = GetFightingOpponent( ch ) ) == NULL
@@ -303,7 +316,6 @@ void ViolenceUpdate( void )
           do_wear( ch, "blaster" );
           do_wear( ch, "all" );
         }
-
 
       /*
        *  Mob triggers

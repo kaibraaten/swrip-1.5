@@ -22,6 +22,7 @@
 #ifndef _SWRIP_CHARACTER_HPP_
 #define _SWRIP_CHARACTER_HPP_
 
+#include <list>
 #include <array>
 #include "types.hpp"
 #include "constants.hpp"
@@ -37,7 +38,12 @@ public:
   virtual ~Character();
 
   virtual void Echo(const char *fmt, ...) const;
+
+  const std::list<Affect*> &Affects() const;
+  void Add(Affect *affect);
+  void Remove(Affect *affect);
   
+  // Player AND mob
   SpecFun *spec_fun = NULL;
   SpecFun *spec_2 = NULL;
   ProtoMobile *Prototype = NULL;
@@ -68,7 +74,6 @@ public:
   int DefenseFlags = 0;
   int Speaks = LANG_COMMON;
   int Speaking = LANG_COMMON;
-
   short Alignment = 0;
   short BareNumDie = 1;
   short BareSizeDie = 4;
@@ -114,9 +119,20 @@ public:
     short ModFrc = 0;
   } Stats;
 
+  // Player only
+
+
+  // Mob only
+
+  
   /////////////////////////////////////////////////////
   // Not persisted runtime data
+  /////////////////////////////////////////////////////
+
+  // Mob only
   MProg mprog;
+
+  // Player AND mob
   Character *Next = NULL;
   Character *Previous = NULL;
   Character *Master = NULL;
@@ -125,8 +141,6 @@ public:
   Character *Reply = NULL;
   Character *Switched = NULL;
   Character *Mount = NULL;
-  Affect *FirstAffect = NULL;
-  Affect *LastAffect = NULL;
   Object *FirstCarrying = NULL;
   Object *LastCarrying = NULL;
   Room *InRoom = NULL;
@@ -184,7 +198,10 @@ public:
     std::array<short, MAX_ABILITY> Level;
     std::array<long, MAX_ABILITY> Experience;
   } Ability;
-  
+
+private:
+  struct Impl;
+  Impl *pImpl = nullptr;
 };
 
 bool IsWizVis( const Character *ch, const Character *victim );
