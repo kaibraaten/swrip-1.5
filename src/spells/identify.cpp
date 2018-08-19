@@ -9,10 +9,8 @@ extern char *spell_target_name;
 ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
 {
   /* Modified by Scryn to work on mobs/players/objs */
-  Object *obj;
-  Character *victim;
-  Affect *paf;
-  Skill *sktmp;
+  Object *obj = nullptr;
+  Character *victim = nullptr;
   Skill *skill = GetSkill(sn);
 
   if ( IsNullOrEmpty( spell_target_name ) )
@@ -23,6 +21,8 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
 
   if ( ( obj = GetCarriedObject( ch, spell_target_name ) ) != NULL )
     {
+      const Skill *sktmp = nullptr;
+      
       SetCharacterColor( AT_LBLUE, ch );
       ch->Echo("Object '%s' is %s, special properties: %s\r\nIts weight is %d, value is %d.\r\n",
                obj->Name,
@@ -138,6 +138,8 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
 	  break;
         }
 
+      const Affect *paf = nullptr;
+      
       for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
         ShowAffectToCharacter( ch, paf );
 
@@ -176,20 +178,22 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
         {
           ch->Echo("%s appears to be affected by: ", victim->Name);
 
-          if (!victim->FirstAffect)
+          if ( victim->Affects().empty() )
 	    {
               ch->Echo("nothing.\r\n");
               return rNONE;
             }
 
-          for ( paf = victim->FirstAffect; paf; paf = paf->Next )
+          for(const Affect *paf : victim->Affects())
             {
-              if (victim->FirstAffect != victim->LastAffect)
+              const Skill *sktmp = nullptr;
+              
+              if (victim->Affects().size() == 1)
                 {
-                  if( paf != victim->LastAffect && (sktmp=GetSkill(paf->Type)) != NULL )
+                  if( paf != victim->Affects().back() && (sktmp=GetSkill(paf->Type)) != NULL )
                     ch->Echo("%s, ", sktmp->Name );
 
-                  if( paf == victim->LastAffect && (sktmp=GetSkill(paf->Type)) != NULL )
+                  if( paf == victim->Affects().back() && (sktmp=GetSkill(paf->Type)) != NULL )
                     {
                       ch->Echo("and %s.\r\n", sktmp->Name );
                       return rNONE;

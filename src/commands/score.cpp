@@ -268,17 +268,18 @@ void do_score(Character * ch, char *argument)
         }
     }
 
-  if (ch->FirstAffect)
+  if (!ch->Affects().empty())
     {
       int i = 0;
-      const Skill *sktmp = NULL;
-      const Affect *paf = NULL;
-
+      
       ch->Echo("&C----------------------------------------------------------------------------\r\n");
       ch->Echo("&cAFFECT DATA:                            &C");
-      for (paf = ch->FirstAffect; paf; paf = paf->Next)
+
+      for(const Affect *paf : ch->Affects())
         {
-          if ( (sktmp=GetSkill(paf->Type)) == NULL )
+          const Skill *sktmp = GetSkill(paf->Type);
+          
+          if ( sktmp == nullptr )
             continue;
 
           if (ch->TopLevel < 20)
@@ -286,9 +287,9 @@ void do_score(Character * ch, char *argument)
               ch->Echo("&c[&C%-34.34s&c]    ", Capitalize(sktmp->Name));
 
               if (i == 0)
-                i = 2;
+                i = 1;
 
-              if ((++i % 3) == 0)
+              if ((++i % 2) == 0)
                 ch->Echo("\r\n");
             }
           else

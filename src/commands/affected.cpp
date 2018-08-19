@@ -2,11 +2,9 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_affected ( Character *ch, char *argument )
+void do_affected( Character *ch, char *argument )
 {
-  char arg [MAX_INPUT_LENGTH];
-  Affect *paf;
-  Skill *skill;
+  char arg[MAX_INPUT_LENGTH];
 
   if ( IsNpc(ch) )
     return;
@@ -52,18 +50,20 @@ void do_affected ( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->FirstAffect )
+  if ( ch->Affects().empty() )
     {
       SetCharacterColor( AT_SCORE, ch );
-      ch->Echo( "\r\nNo cantrip or skill affects you.\r\n" );
+      ch->Echo( "\r\nNo buffs or debuffs affects you.\r\n" );
     }
   else
     {
       ch->Echo( "\r\n" );
 
-      for (paf = ch->FirstAffect; paf; paf = paf->Next)
+      for(const Affect *paf : ch->Affects())
 	{
-	  if ( (skill=GetSkill(paf->Type)) != NULL )
+          Skill *skill = GetSkill(paf->Type);
+          
+	  if ( skill != nullptr )
 	    {
 	      SetCharacterColor( AT_BLUE, ch );
 	      ch->Echo( "Affected:  " );

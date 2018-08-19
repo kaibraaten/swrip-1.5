@@ -629,7 +629,7 @@ void AffectToCharacter( Character *ch, Affect *paf )
 
   Affect *paf_new = new Affect();
 
-  LINK( paf_new, ch->FirstAffect, ch->LastAffect, Next, Previous );
+  ch->Add(paf_new);
   paf_new->Type        = paf->Type;
   paf_new->Duration    = paf->Duration;
   paf_new->Location    = paf->Location;
@@ -644,15 +644,14 @@ void AffectToCharacter( Character *ch, Affect *paf )
  */
 void RemoveAffect( Character *ch, Affect *paf )
 {
-  if ( !ch->FirstAffect )
+  if ( ch->Affects().empty() )
     {
       Log->Bug( "%s: no affect.", __FUNCTION__ );
       return;
     }
 
   ModifyAffect( ch, paf, false );
-
-  UNLINK( paf, ch->FirstAffect, ch->LastAffect, Next, Previous );
+  ch->Remove(paf);
   delete paf;
 }
 
@@ -661,15 +660,15 @@ void RemoveAffect( Character *ch, Affect *paf )
  */
 void StripAffect( Character *ch, int sn )
 {
-  Affect *paf;
-  Affect *paf_next;
+  std::list<Affect*> affectsToRemove = Filter(ch->Affects(),
+                                              [sn](const auto affect)
+                                              {
+                                                return affect->Type == sn;
+                                              });
 
-  for ( paf = ch->FirstAffect; paf; paf = paf_next )
+  for(Affect *affect : affectsToRemove)
     {
-      paf_next = paf->Next;
-
-      if ( paf->Type == sn )
-        RemoveAffect( ch, paf );
+      RemoveAffect( ch, affect );
     }
 }
 
@@ -680,9 +679,7 @@ void StripAffect( Character *ch, int sn )
  */
 void JoinAffect( Character *ch, Affect *paf )
 {
-  Affect *paf_old = NULL;
-
-  for ( paf_old = ch->FirstAffect; paf_old; paf_old = paf_old->Next )
+  for(Affect *paf_old : ch->Affects())
     {
       if ( paf_old->Type == paf->Type )
 	{

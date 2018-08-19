@@ -5,9 +5,6 @@
 
 void do_oldscore( Character *ch, char *argument )
 {
-  Affect *paf = NULL;
-  Skill *skill = NULL;
-
   if ( IsAffectedBy(ch, AFF_POSSESS) )
     {
       ch->Echo("You can't do that in your current state of mind!\r\n");
@@ -208,18 +205,31 @@ void do_oldscore( Character *ch, char *argument )
     ch->Echo("AC: %d.  ", GetArmorClass(ch) );
 
   ch->Echo("You are ");
-                                   ch->Echo("WORSE than naked!\r\n");
-                                        ch->Echo("naked.\r\n");
-                                        ch->Echo("wearing clothes.\r\n");
-                                        ch->Echo("slightly armored.\r\n");
-                                        ch->Echo("somewhat armored.\r\n");
-                                        ch->Echo("armored.\r\n");
-                                        ch->Echo("well armored.\r\n");
-                                        ch->Echo("strongly armored.\r\n");
-                                        ch->Echo("heavily armored.\r\n");
-                                        ch->Echo("superbly armored.\r\n");
-                                        ch->Echo("divinely armored.\r\n");
-                                 ch->Echo("invincible!\r\n");
+
+  if ( GetArmorClass(ch) >=  101 )
+    ch->Echo("WORSE than naked!\r\n");
+  else if ( GetArmorClass(ch) >=   80 )
+    ch->Echo("naked.\r\n");
+  else if ( GetArmorClass(ch) >=   60 )
+    ch->Echo("wearing clothes.\r\n");
+  else if ( GetArmorClass(ch) >=   40 )
+    ch->Echo("slightly armored.\r\n");
+  else if ( GetArmorClass(ch) >=   20 )
+    ch->Echo("somewhat armored.\r\n");
+  else if ( GetArmorClass(ch) >=    0 )
+    ch->Echo("armored.\r\n");
+  else if ( GetArmorClass(ch) >= - 20 )
+    ch->Echo("well armored.\r\n");
+  else if ( GetArmorClass(ch) >= - 40 )
+    ch->Echo("strongly armored.\r\n");
+  else if ( GetArmorClass(ch) >= - 60 )
+    ch->Echo("heavily armored.\r\n");
+  else if ( GetArmorClass(ch) >= - 80 )
+    ch->Echo("superbly armored.\r\n");
+  else if ( GetArmorClass(ch) >= -100 )
+    ch->Echo("divinely armored.\r\n");
+  else
+    ch->Echo("invincible!\r\n");
 
   if ( ch->TopLevel >= 15 )
     ch->Echo("Hitroll: %d  Damroll: %d.\r\n",
@@ -229,32 +239,49 @@ void do_oldscore( Character *ch, char *argument )
     ch->Echo("Alignment: %d.  ", ch->Alignment );
 
   ch->Echo("You are ");
-                              ch->Echo("angelic.\r\n");
-                                   ch->Echo("saintly.\r\n");
-                                   ch->Echo("good.\r\n");
-                                   ch->Echo("kind.\r\n");
-                                   ch->Echo("neutral.\r\n");
-                                   ch->Echo("mean.\r\n");
-                                   ch->Echo("evil.\r\n");
-                                   ch->Echo("demonic.\r\n");
-                                   ch->Echo("satanic.\r\n");
 
-  if ( ch->FirstAffect )
+  if ( ch->Alignment >  900 )
+    ch->Echo("angelic.\r\n");
+  else if ( ch->Alignment >  700 )
+    ch->Echo("saintly.\r\n");
+  else if ( ch->Alignment >  350 )
+    ch->Echo("good.\r\n");
+  else if ( ch->Alignment >  100 )
+    ch->Echo("kind.\r\n");
+  else if ( ch->Alignment > -100 )
+    ch->Echo("neutral.\r\n");
+  else if ( ch->Alignment > -350 )
+    ch->Echo("mean.\r\n");
+  else if ( ch->Alignment > -700 )
+    ch->Echo("evil.\r\n");
+  else if ( ch->Alignment > -900 )
+    ch->Echo("demonic.\r\n");
+  else
+    ch->Echo("satanic.\r\n");
+
+  if ( !ch->Affects().empty() )
     {
       ch->Echo("You are affected by:\r\n");
-      for ( paf = ch->FirstAffect; paf; paf = paf->Next )
-        if ( (skill=GetSkill(paf->Type)) != NULL )
-          {
-            ch->Echo("Spell: '%s'", skill->Name );
 
-            if ( ch->TopLevel >= 20 )
-              ch->Echo(" modifies %s by %d for %d rounds",
-                         GetAffectLocationName( paf->Location ),
-                         paf->Modifier,
-                         paf->Duration );
+      for(const Affect *paf : ch->Affects())
+        {
+          const Skill *skill = GetSkill(paf->Type);
+          
+          if ( skill != nullptr )
+            {
+              ch->Echo("Spell: '%s'", skill->Name );
 
-            ch->Echo(".\r\n");
-          }
+              if ( ch->TopLevel >= 20 )
+                {
+                  ch->Echo(" modifies %s by %d for %d rounds",
+                           GetAffectLocationName( paf->Location ),
+                           paf->Modifier,
+                           paf->Duration );
+                }
+              
+              ch->Echo(".\r\n");
+            }
+        }
     }
 
   if ( !IsNpc( ch ) && IsImmortal( ch ) )
@@ -273,5 +300,3 @@ void do_oldscore( Character *ch, char *argument )
                    ch->PCData->Build.VnumRanges.Mob.Last       );
     }
 }
-
-
