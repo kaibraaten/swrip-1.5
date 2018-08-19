@@ -16,7 +16,7 @@ void do_alias( Character *ch, char *argument )
 
   if (IsNullOrEmpty(arg))
     {
-      if (ch->PCData->Aliases.empty())
+      if (ch->PCData->Aliases().empty())
         {
           ch->Echo("You have no aliases defined!\r\n");
           return;
@@ -24,7 +24,7 @@ void do_alias( Character *ch, char *argument )
 
       ch->Echo( "%-20s What it does\r\n", "Alias" );
 
-      for(const Alias *alias : ch->PCData->Aliases)
+      for(const Alias *alias : ch->PCData->Aliases())
         {
           ch->Echo( "%-20s %s\r\n", alias->Name, alias->Command );
         }

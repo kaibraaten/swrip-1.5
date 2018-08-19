@@ -40,28 +40,30 @@ TEST_F(AliasDataTests, TestAllocateAlias)
   ASSERT_NE(target, nullptr);
   EXPECT_STREQ(_expectedAliasName, target->Name);
   EXPECT_STREQ(_expectedCommand, target->Command);
+
+  FreeAlias(target);
 }
 
 TEST_F(AliasDataTests, TestAddAlias)
 {
   Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
-  size_t expectedNumberOfAliases = _testCharacter->PCData->Aliases.size() + 1;
+  size_t expectedNumberOfAliases = _testCharacter->PCData->Aliases().size() + 1;
   
   AddAlias(_testCharacter, alias);
   
-  EXPECT_EQ(expectedNumberOfAliases, _testCharacter->PCData->Aliases.size());
+  EXPECT_EQ(expectedNumberOfAliases, _testCharacter->PCData->Aliases().size());
 }
 
 TEST_F(AliasDataTests, TestAddAliasAllowsNoDuplicates)
 {
   Alias *alias1 = AllocateAlias(_expectedAliasName, _expectedCommand);
   Alias *alias2 = AllocateAlias(_expectedAliasName, _expectedCommand);
-  size_t expectedNumberOfAliases = _testCharacter->PCData->Aliases.size() + 1;
+  size_t expectedNumberOfAliases = _testCharacter->PCData->Aliases().size() + 1;
 
   AddAlias(_testCharacter, alias1);
   AddAlias(_testCharacter, alias2);
   
-  EXPECT_EQ(expectedNumberOfAliases, _testCharacter->PCData->Aliases.size());
+  EXPECT_EQ(expectedNumberOfAliases, _testCharacter->PCData->Aliases().size());
 }
 
 TEST_F(AliasDataTests, TestAddAliasIgnoresNpcs)
@@ -71,17 +73,21 @@ TEST_F(AliasDataTests, TestAddAliasIgnoresNpcs)
   AddAlias(_testNpc, alias);
 
   // No asserts because we'd get a segfault if test failed.
+
+  FreeAlias(alias);
 }
 
 TEST_F(AliasDataTests, TestUnlinkAliasRemovesAlias)
 {
   Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
   AddAlias(_testCharacter, alias);
-  size_t expectedNumberOfAliases = _testCharacter->PCData->Aliases.size() - 1;
+  size_t expectedNumberOfAliases = _testCharacter->PCData->Aliases().size() - 1;
 
   UnlinkAlias(_testCharacter, alias);
 
-  EXPECT_EQ(expectedNumberOfAliases, _testCharacter->PCData->Aliases.size());
+  EXPECT_EQ(expectedNumberOfAliases, _testCharacter->PCData->Aliases().size());
+
+  FreeAlias(alias);
 }
 
 TEST_F(AliasDataTests, TestUnlinkAliasIgnoresNpcs)
@@ -91,6 +97,8 @@ TEST_F(AliasDataTests, TestUnlinkAliasIgnoresNpcs)
   UnlinkAlias(_testNpc, alias);
 
   // No asserts because we'd get a segfault if test failed.
+
+  FreeAlias(alias);
 }
 
 TEST_F(AliasDataTests, TestFreeAliasesIgnoresNpcs)
@@ -107,7 +115,7 @@ TEST_F(AliasDataTests, TestFreeAliasesClearsList)
 
   FreeAliases(_testCharacter);
 
-  EXPECT_TRUE(_testCharacter->PCData->Aliases.empty());
+  EXPECT_TRUE(_testCharacter->PCData->Aliases().empty());
 }
 
 TEST_F(AliasDataTests, TestFindAliasFindsTheAlias)

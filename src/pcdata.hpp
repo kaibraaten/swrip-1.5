@@ -11,7 +11,11 @@ class PCData
 {
 public:
   PCData();
-  ~PCData();
+  virtual ~PCData();
+
+  const std::list<Alias*> &Aliases() const;
+  void Add(Alias *alias);
+  void Remove(Alias *alias);
   
   char *Password = NULL;
 
@@ -82,8 +86,6 @@ public:
   char *BettedOn = NULL;
   int BetAmount = 0;
 
-  std::list<Alias*> Aliases;
-
   Character *Pet = NULL;
   char *Target = NULL;
   struct Note *Note = NULL;
@@ -94,6 +96,10 @@ public:
   time_t SaveTime = 0;
   struct CraftingSession *CraftingSession = NULL;
   IMC_CHARDATA *imcchardata = NULL;
+
+private:
+  struct Impl;
+  Impl *pImpl = nullptr;
 };
 
 #endif
