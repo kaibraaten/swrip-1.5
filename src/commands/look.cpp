@@ -675,7 +675,7 @@ static void look_under( Character *ch, const char *what, bool doexaprog )
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
     {
-      ShowObjectListToCharacter( obj->FirstContent, ch, true, true );
+      ShowObjectListToCharacter( obj->Objects(), ch, true, true );
     }
   else
     {
@@ -825,7 +825,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
       obj->Count = 1;
       Act( AT_PLAIN, "$p contains:", ch, obj, NULL, TO_CHAR );
       obj->Count = count;
-      ShowObjectListToCharacter( obj->FirstContent, ch, true, true );
+      ShowObjectListToCharacter( obj->Objects(), ch, true, true );
 
       if ( doexaprog )
 	{

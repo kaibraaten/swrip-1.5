@@ -239,9 +239,9 @@ void do_get( Character *ch, char *argument )
 	   && StringPrefix( "all.", arg1 ) )
         {
           /* 'get obj container' */
-          Object *obj = GetObjectInList( ch, arg1, container->FirstContent );
+          Object *obj = GetObjectInList( ch, arg1, container->Objects() );
 
-          if ( !obj )
+          if ( obj == nullptr )
             {
               Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
                    "I see nothing like that beneath the $T." :
@@ -282,10 +282,10 @@ void do_get( Character *ch, char *argument )
 
           found = false;
 
-          for ( Object *obj = container->FirstContent, *obj_next = nullptr; obj; obj = obj_next )
+          std::list<Object*> contents(container->Objects());
+          
+          for( Object *obj : contents )
             {
-              obj_next = obj->NextContent;
-
               if ( ( fAll || NiftyIsName( chk, obj->Name ) )
                    &&   CanSeeObject( ch, obj ) )
                 {

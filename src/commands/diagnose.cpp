@@ -239,7 +239,6 @@ void do_diagnose( Character *ch, char *argument )
     {
       Object       *po, *pt = NULL;
       int            i=0;
-      char           buf[MAX_STRING_LENGTH];
 
       ch->Echo("CHAR name=%s \r\n", ch->Name);
       ch->Echo("   first_carry=%s\r\n",
@@ -269,17 +268,18 @@ void do_diagnose( Character *ch, char *argument )
                 pt=pt->InObject;
             }
 
-          if ( ch==po->CarriedBy || (pt && ch==pt->CarriedBy) )
+          if ( ch == po->CarriedBy || (pt && ch == pt->CarriedBy) )
             {
               ch->Echo("\r\n%d OBJ name=%s \r\n", i, po->Name);
-              strcpy(buf, po->NextContent ? po->NextContent->Name : "NULL");
-              ch->Echo("   NextContent=%s\r\n", buf);
-              strcpy(buf, po->PreviousContent ? po->PreviousContent->Name : "NULL");
-              ch->Echo("   PreviousContent=%s\r\n", buf);
-              strcpy(buf, po->FirstContent ? po->FirstContent->Name : "NULL");
-              ch->Echo("   FirstContent=%s\r\n", buf);
-              strcpy(buf, po->LastContent ? po->LastContent->Name : "NULL");
-              ch->Echo("   LastContent=%s\r\n", buf);
+              /*
+              ch->Echo("   NextContent=%s\r\n", po->NextContent ? po->NextContent->Name : "NULL");
+              ch->Echo("   PreviousContent=%s\r\n",
+                       po->PreviousContent ? po->PreviousContent->Name : "NULL");
+              ch->Echo("   FirstContent=%s\r\n",
+                       po->FirstContent ? po->FirstContent->Name : "NULL");
+              ch->Echo("   LastContent=%s\r\n",
+                       po->LastContent ? po->LastContent->Name : "NULL");
+              */
             }
         }
       

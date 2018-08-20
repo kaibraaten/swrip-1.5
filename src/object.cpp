@@ -8,6 +8,7 @@ struct Object::Impl
 {
   std::list<ExtraDescription*> ExtraDescriptions;
   std::list<Affect*> Affects;
+  std::list<Object*> Objects;
 };
 
 Object::Object()
@@ -247,4 +248,21 @@ void Object::Add(Affect *affect)
 void Object::Remove(Affect *affect)
 {
   pImpl->Affects.remove(affect);
+}
+
+void Object::Add(Object *object)
+{
+  pImpl->Objects.push_back(object);
+  object->InObject = this;
+}
+
+void Object::Remove(Object *object)
+{
+  pImpl->Objects.remove(object);
+  object->InObject = nullptr;
+}
+
+const std::list<Object*> &Object::Objects() const
+{
+  return pImpl->Objects;
 }

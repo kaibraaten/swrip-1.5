@@ -19,7 +19,7 @@ bool spec_janitor( Character *ch )
                                                     || obj->ItemType == ITEM_TRASH
                                                     || obj->Cost < 10
                                                     || (obj->Prototype->Vnum == OBJ_VNUM_SHOPPING_BAG
-                                                        && obj->FirstContent == nullptr));
+                                                        && obj->Objects().empty() ));
                                             });
 
   for(Object *trash : itemsToPickUp)

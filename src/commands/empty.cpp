@@ -67,7 +67,7 @@ void do_empty( Character *ch, char *argument )
           return;
         }
 
-      if ( !obj->FirstContent )
+      if ( obj->Objects().empty() )
         {
           ch->Echo( "It's already empty.\r\n" );
           return;

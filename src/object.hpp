@@ -21,13 +21,13 @@ public:
   const std::list<Affect*> &Affects() const;
   void Add(Affect *affect);
   void Remove(Affect *affect);
+
+  void Add(Object *object);
+  void Remove(Object *object);
+  const std::list<Object*> &Objects() const;
   
   Object         *Next = nullptr;
   Object         *Previous = nullptr;
-  Object         *NextContent = nullptr;
-  Object         *PreviousContent = nullptr;
-  Object         *FirstContent = nullptr;
-  Object         *LastContent = nullptr;
   Object         *InObject = nullptr;
   Character        *CarriedBy = nullptr;
   ProtoObject   *Prototype = nullptr;

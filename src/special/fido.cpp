@@ -6,9 +6,6 @@
 
 bool spec_fido( Character *ch )
 {
-  Object *obj = nullptr;
-  Object *obj_next = nullptr;
-
   if ( !IsAwake(ch) )
     return false;
 
@@ -22,9 +19,10 @@ bool spec_fido( Character *ch )
     {
       Act( AT_ACTION, "$n savagely devours a corpse.", ch, NULL, NULL, TO_ROOM );
 
-      for ( obj = corpse->FirstContent; obj; obj = obj_next )
+      std::list<Object*> objectsInCorpse(corpse->Objects());
+
+      for(Object *obj : objectsInCorpse)
         {
-          obj_next = obj->NextContent;
           ObjectFromObject( obj );
           ObjectToRoom( obj, ch->InRoom );
         }

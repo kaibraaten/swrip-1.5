@@ -72,7 +72,7 @@ bool spec_customs_alcohol( Character *ch )
             }
           else if ( obj->ItemType == ITEM_CONTAINER )
             {
-              for ( Object *content = obj->FirstContent; content; content = content->NextContent )
+              for ( Object *content : obj->Objects() )
                 {
                   if (content->ItemType == ITEM_DRINK_CON
 		      && !IsBitSet( content->Flags , ITEM_CONTRABAND ) )

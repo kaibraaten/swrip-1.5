@@ -216,18 +216,6 @@ static std::string SeeHalucinatedObject( int ms, bool fShort )
  * Show a list to a character.
  * Can coalesce duplicated items.
  */
-void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, bool fShowNothing )
-{
-  std::list<Object*> objects;
-  
-  for ( const Object *obj = list; obj; obj = obj->NextContent )
-    {
-      objects.push_back(const_cast<Object*>(obj));
-    }
-
-  ShowObjectListToCharacter(objects, ch, fShort, fShowNothing);
-}
-
 void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
                                 bool fShort, bool fShowNothing )
 {

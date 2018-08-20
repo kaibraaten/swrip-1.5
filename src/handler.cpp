@@ -867,7 +867,7 @@ void ObjectFromCharacter( Object *obj )
 
   ch->Remove(obj);
 
-  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->FirstContent )
+  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && !obj->Objects().empty() )
     EmptyObjectContents( obj, NULL, NULL );
 
   obj->InRoom   = NULL;
@@ -961,26 +961,13 @@ int GetObjectArmorClass( const Object *obj, int iWear )
 /*
  * Count occurrences of an obj in a list.
  */
-int CountOccurancesOfObjectInList( const ProtoObject *pObjIndex, const Object *list )
-{
-  std::list<Object*> output;
-
-  for(const Object *obj = list; obj; obj = obj->NextContent)
-    {
-      output.push_back(const_cast<Object*>(obj));
-    }
-
-  return CountOccurancesOfObjectInList(pObjIndex, output);
-}
-
 int CountOccurancesOfObjectInList( const ProtoObject *protoobj, const std::list<Object*> &list )
 {
-  return count_if(std::begin(list),
-                  std::end(list),
-                  [protoobj](const auto obj)
-                  {
-                    return obj->Prototype == protoobj;
-                  });
+  return Count(list,
+               [protoobj](const auto obj)
+               {
+                 return obj->Prototype == protoobj;
+               });
 }
 
 /*
@@ -995,7 +982,7 @@ void ObjectFromRoom( Object *obj )
 
   in_room->Remove(obj);
 
-  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->FirstContent )
+  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && !obj->Objects().empty() )
     EmptyObjectContents( obj, NULL, obj->InRoom );
 
   if (obj->ItemType == ITEM_FIRE)
@@ -1053,8 +1040,6 @@ Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
  */
 Object *ObjectToObject( Object *obj, Object *obj_to )
 {
-  Object *otmp, *oret;
-
   if ( obj == obj_to )
     {
       Log->Bug( "Obj_to_obj: trying to put object inside itself: vnum %ld",
@@ -1071,12 +1056,17 @@ Object *ObjectToObject( Object *obj, Object *obj_to )
         obj_to->CarriedBy->CarryWeight += GetObjectWeight( obj );
     }
 
-  for ( otmp = obj_to->FirstContent; otmp; otmp = otmp->NextContent )
-    if ( (oret=GroupObject( otmp, obj )) == otmp )
-      return oret;
+  for(Object *otmp : obj_to->Objects())
+    {
+      Object *oret = GroupObject(otmp, obj);
+      
+      if ( oret == otmp )
+        {
+          return oret;
+        }
+    }
 
-  LINK( obj, obj_to->FirstContent, obj_to->LastContent,
-        NextContent, PreviousContent );
+  obj_to->Add(obj);
   obj->InObject                            = obj_to;
   obj->InRoom                   = NULL;
   obj->CarriedBy                        = NULL;
@@ -1092,10 +1082,9 @@ void ObjectFromObject( Object *obj )
   Object *obj_from = obj->InObject;
   assert(obj_from != nullptr);
 
-  UNLINK( obj, obj_from->FirstContent, obj_from->LastContent,
-          NextContent, PreviousContent );
+  obj_from->Remove(obj);
 
-  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->FirstContent )
+  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && !obj->Objects().empty() )
     EmptyObjectContents( obj, obj->InObject, NULL );
 
   obj->InObject       = NULL;
@@ -1103,8 +1092,12 @@ void ObjectFromObject( Object *obj )
   obj->CarriedBy   = NULL;
 
   for ( ; obj_from; obj_from = obj_from->InObject )
-    if ( obj_from->CarriedBy && obj_from->WearLoc != WEAR_FLOATING )
-      obj_from->CarriedBy->CarryWeight -= GetObjectWeight( obj );
+    {
+      if ( obj_from->CarriedBy && obj_from->WearLoc != WEAR_FLOATING )
+        {
+          obj_from->CarriedBy->CarryWeight -= GetObjectWeight( obj );
+        }
+    }
 }
 
 /*
@@ -1113,7 +1106,6 @@ void ObjectFromObject( Object *obj )
 void ExtractObject( Object *obj )
 {
   assert(obj != nullptr);
-  Object *obj_content;
 
   if ( IsObjectExtracted(obj) )
     {
@@ -1133,9 +1125,13 @@ void ExtractObject( Object *obj )
       if ( obj->InObject )
         ObjectFromObject( obj );
 
-  while ( ( obj_content = obj->LastContent ) != NULL )
-    ExtractObject( obj_content );
+  std::list<Object*> contents(obj->Objects());
 
+  for(Object *obj_content : contents)
+    {
+      ExtractObject( obj_content );
+    }
+  
   std::list<Affect*> affects(obj->Affects());
 
   for(Affect *paf : affects)
@@ -1456,18 +1452,6 @@ Object *GetInstanceOfObject( const ProtoObject *pObjIndex )
 /*
  * Find an obj in a list.
  */
-Object *GetObjectInList( const Character *ch, const std::string &objName, Object *list )
-{
-  std::list<Object*> listOfObjects;
-
-  for(Object *obj = list; obj; obj = obj->NextContent)
-    {
-      listOfObjects.push_back(obj);
-    }
-
-  return GetObjectInList(ch, objName, listOfObjects);
-}
-
 Object *GetObjectInList( const Character *ch, const std::string &objName,
                          const std::list<Object*> &list )
 {
@@ -1684,7 +1668,7 @@ Object *FindObject( Character *ch, const std::string &orig_argument, bool carryo
           return NULL;
         }
 
-      obj = GetObjectInList( ch, arg1, container->FirstContent );
+      obj = GetObjectInList( ch, arg1, container->Objects() );
 
       if ( !obj )
         Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
@@ -1709,9 +1693,11 @@ int GetObjectWeight( const Object *obj )
 {
   int weight = obj->Count * obj->Weight;
 
-  for ( obj = obj->FirstContent; obj; obj = obj->NextContent )
-    weight += GetObjectWeight( obj );
-
+  for(const Object *inner : obj->Objects())
+    {
+      weight += GetObjectWeight( inner );
+    }
+  
   return weight;
 }
 
@@ -1950,15 +1936,14 @@ ch_ret SpringTrap( Character *ch, Object *obj )
  */
 ch_ret CheckObjectForTrap( Character *ch, const Object *obj, int flag )
 {
-  Object *check = NULL;
   ch_ret retcode = rNONE;
 
-  if ( !obj->FirstContent )
+  if ( obj->Objects().empty() )
     {
       return rNONE;
     }
 
-  for ( check = obj->FirstContent; check; check = check->NextContent )
+  for(Object *check : obj->Objects())
     {
       if ( check->ItemType == ITEM_TRAP
 	   && IsBitSet(check->Value[OVAL_TRAP_FLAGS], flag) )
@@ -2017,16 +2002,7 @@ ch_ret CheckRoomForTraps( Character *ch, int flag )
  */
 bool IsObjectTrapped( const Object *obj )
 {
-  Object *check;
-
-  if ( !obj->FirstContent )
-    return false;
-
-  for ( check = obj->FirstContent; check; check = check->NextContent )
-    if ( check->ItemType == ITEM_TRAP )
-      return true;
-
-  return false;
+  return GetTrap(obj);
 }
 
 /*
@@ -2034,16 +2010,11 @@ bool IsObjectTrapped( const Object *obj )
  */
 Object *GetTrap( const Object *obj )
 {
-  Object *check;
-
-  if ( !obj->FirstContent )
-    return NULL;
-
-  for ( check = obj->FirstContent; check; check = check->NextContent )
-    if ( check->ItemType == ITEM_TRAP )
-      return check;
-
-  return NULL;
+  return Find(obj->Objects(),
+              [](const auto check)
+              {
+                return check->ItemType == ITEM_TRAP;
+              });
 }
 
 /*
@@ -2569,8 +2540,8 @@ static Object *GroupObject( Object *obj1, Object *obj2 )
        && obj2->ExtraDescriptions().empty()
        && obj1->Affects().empty()
        && obj2->Affects().empty()
-       && !obj1->FirstContent
-       && !obj2->FirstContent )
+       && obj1->Objects().empty()
+       && obj2->Objects().empty() )
     {
       obj1->Count += obj2->Count;
       obj1->Prototype->Count += obj2->Count;   /* to be decremented in */
@@ -2621,8 +2592,7 @@ void SplitGroupedObject( Object *obj, int num )
     }
   else if ( obj->InObject )
     {
-      LINK( rest, obj->InObject->FirstContent, obj->InObject->LastContent,
-            NextContent, PreviousContent );
+      obj->InObject->Add(rest);
       rest->InObject                   = obj->InObject;
       rest->InRoom                  = NULL;
       rest->CarriedBy               = NULL;
@@ -2641,18 +2611,17 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
 {
   assert(obj != nullptr);
 
-  Object *otmp = nullptr, *otmp_next = nullptr;
   Character *ch = obj->CarriedBy;
-  bool movedsome = false;
 
   if ( destobj || (!destroom && !ch && (destobj = obj->InObject) != NULL) )
     {
-      for ( otmp = obj->FirstContent; otmp; otmp = otmp_next )
-        {
-          otmp_next = otmp->NextContent;
+      bool movedsome = false;
+      std::list<Object*> objects(obj->Objects());
 
+      for(Object *otmp : objects)
+        {
           if ( destobj->ItemType == ITEM_CONTAINER
-               &&   GetObjectWeight( otmp ) + GetObjectWeight( destobj )
+               && GetObjectWeight( otmp ) + GetObjectWeight( destobj )
                > destobj->Value[OVAL_CONTAINER_CAPACITY] )
 	    {
 	      continue;
@@ -2662,44 +2631,54 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
           ObjectToObject( otmp, destobj );
           movedsome = true;
         }
+
       return movedsome;
     }
 
   if ( destroom || (!ch && (destroom = obj->InRoom) != NULL) )
     {
-      for ( otmp = obj->FirstContent; otmp; otmp = otmp_next )
+      bool movedsome = false;
+      std::list<Object*> objects(obj->Objects());
+
+      for(Object *otmp : objects)
         {
-          otmp_next = otmp->NextContent;
           if ( ch && (otmp->Prototype->mprog.progtypes & DROP_PROG) && otmp->Count > 1 )
             {
               SeparateOneObjectFromGroup( otmp );
               ObjectFromObject( otmp );
-              if ( !otmp_next )
-                otmp_next = obj->FirstContent;
             }
           else
-            ObjectFromObject( otmp );
+            {
+              ObjectFromObject( otmp );
+            }
+          
           otmp = ObjectToRoom( otmp, destroom );
+
           if ( ch )
             {
               ObjProgDropTrigger( ch, otmp );           /* mudprogs */
+
               if ( CharacterDiedRecently(ch) )
                 ch = NULL;
             }
           movedsome = true;
         }
+
       return movedsome;
     }
 
   if ( ch )
     {
-      for ( otmp = obj->FirstContent; otmp; otmp = otmp_next )
+      bool movedsome = false;
+      std::list<Object*> objects(obj->Objects());
+
+      for(Object *otmp : objects)
         {
-          otmp_next = otmp->NextContent;
           ObjectFromObject( otmp );
           ObjectToCharacter( otmp, ch );
           movedsome = true;
         }
+
       return movedsome;
     }
 
