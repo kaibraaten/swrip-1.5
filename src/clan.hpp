@@ -16,6 +16,13 @@ public:
 class Clan
 {
 public:
+  Clan();
+  virtual ~Clan();
+  
+  const std::list<Clan*> &Subclans() const;
+  void Add(Clan *clan);
+  void Remove(Clan *clan);
+  
   Clan  *MainClan = nullptr;
   char  *Name = nullptr;           /* Clan name                            */
   char  *Description = nullptr;    /* A brief description of the clan      */
@@ -42,7 +49,9 @@ public:
     char *Number2 = nullptr;        /* Second officer                       */
   } Leadership;
 
-  std::list<Clan*> Subclans;
+private:
+  struct Impl;
+  Impl *pImpl = nullptr;
 };
 
 class ClanMember

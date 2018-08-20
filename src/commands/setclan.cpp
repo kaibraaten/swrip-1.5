@@ -90,7 +90,7 @@ void do_setclan( Character *ch, char *argument )
           return;
         }
 
-      if (!guild->Subclans.empty())
+      if (!guild->Subclans().empty())
         {
           ch->Echo("Guild has guilds of its own that need removing first.\r\n");
           return;

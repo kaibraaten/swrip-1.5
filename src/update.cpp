@@ -1138,7 +1138,7 @@ static void TaxUpdate( void )
 
       if ( clan != NULL )
         {
-          int numberOfSubclans = clan->Subclans.size();
+          int numberOfSubclans = clan->Subclans().size();
 
           if ( numberOfSubclans > 0)
             {

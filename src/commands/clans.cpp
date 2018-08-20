@@ -48,11 +48,11 @@ void do_clans( Character *ch, char *argument )
 
       ch->Echo( "%-3d&W\r\nRevenue: &O%-29ld&W\r\n",support,revenue);
 
-      if (clan->Subclans.size() > 0)
+      if (clan->Subclans().size() > 0)
         {
           ch->Echo( "  &z&wGuilds               Leader\r\n");
 
-          for(const Clan *guild : clan->Subclans)
+          for(const Clan *guild : clan->Subclans())
             {
               ch->Echo( "  &O%-20s %-10s\r\n",
                         guild->Name, guild->Leadership.Leader );
