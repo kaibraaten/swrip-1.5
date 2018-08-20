@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "craft.hpp"
@@ -8,10 +8,10 @@
 
 struct UserData
 {
-  int Strength;
-  int Weight;
-  int Level;
-  char *ItemName;
+  int Strength = 0;
+  int Weight = 0;
+  int Level = 0;
+  char *ItemName = nullptr;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );

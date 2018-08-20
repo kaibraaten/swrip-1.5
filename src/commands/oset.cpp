@@ -524,9 +524,8 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "affect" ) )
     {
-      Affect *paf;
-      short loc;
-      int bitv;
+      short loc = 0;
+      int bitv = 0;
 
       argument = OneArgument( argument, arg2 );
       
@@ -545,12 +544,15 @@ void do_oset( Character *ch, char *argument )
           ch->Echo("punch       climb       grip        scribe        brew\r\n");
           return;
         }
+      
       loc = GetAffectType( arg2 );
+
       if ( loc < 1 )
         {
           ch->Echo("Unknown field: %s\r\n", arg2 );
           return;
         }
+
       if ( loc >= APPLY_AFFECT && loc < APPLY_WEAPONSPELL )
         {
           bitv = 0;
@@ -558,17 +560,21 @@ void do_oset( Character *ch, char *argument )
           while ( !IsNullOrEmpty( argument ) )
             {
               argument = OneArgument( argument, arg3 );
+
               if ( loc == APPLY_AFFECT )
                 value = GetAffectFlag( arg3 );
               else
                 value = GetResistanceFlag( arg3 );
+
               if ( value < 0 || value > 31 )
                 ch->Echo("Unknown flag: %s\r\n", arg3 );
               else
                 SetBit( bitv, 1 << value );
             }
+          
           if ( !bitv )
             return;
+
           value = bitv;
         }
       else
@@ -577,17 +583,16 @@ void do_oset( Character *ch, char *argument )
           value = atoi( arg3 );
         }
 
-      paf = new Affect();
+      Affect *paf = new Affect();
       paf->Type         = -1;
       paf->Duration             = -1;
       paf->Location             = loc;
       paf->Modifier             = value;
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        LINK( paf, obj->Prototype->FirstAffect,
-              obj->Prototype->LastAffect, Next, Previous );
+        obj->Prototype->Add(paf);
       else
-        LINK( paf, obj->FirstAffect, obj->LastAffect, Next, Previous );
+        obj->Add(paf);
 
       ++top_affect;
       ch->Echo("Done.\r\n");
@@ -596,8 +601,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "rmaffect" ) )
     {
-      Affect *paf;
-      short loc, count;
+      short loc = 0, count = 0;
 
       if ( IsNullOrEmpty( argument ) )
         {
@@ -615,14 +619,13 @@ void do_oset( Character *ch, char *argument )
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          ProtoObject *pObjIndex;
+          ProtoObject *pObjIndex = obj->Prototype;
 
-          pObjIndex = obj->Prototype;
-          for ( paf = pObjIndex->FirstAffect; paf; paf = paf->Next )
+          for(Affect *paf : pObjIndex->Affects())
             {
               if ( ++count == loc )
                 {
-                  UNLINK( paf, pObjIndex->FirstAffect, pObjIndex->LastAffect, Next, Previous );
+                  pObjIndex->Remove(paf);
                   delete paf;
                   ch->Echo("Removed.\r\n");
                   --top_affect;
@@ -634,11 +637,11 @@ void do_oset( Character *ch, char *argument )
         }
       else
         {
-          for ( paf = obj->FirstAffect; paf; paf = paf->Next )
+          for(Affect *paf : obj->Affects())
             {
               if ( ++count == loc )
                 {
-                  UNLINK( paf, obj->FirstAffect, obj->LastAffect, Next, Previous );
+                  obj->Remove(paf);
                   delete paf;
                   ch->Echo("Removed.\r\n");
                   --top_affect;

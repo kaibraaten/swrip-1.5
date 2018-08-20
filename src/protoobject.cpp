@@ -3,18 +3,19 @@
 struct ProtoObject::Impl
 {
   std::list<ExtraDescription*> ExtraDescriptions;
+  std::list<Affect*> Affects;
 };
 
 ProtoObject::ProtoObject(vnum_t vnum)
   : Vnum(vnum),
     pImpl(new Impl())
 {
-
+  Value.fill(0);
 }
 
 ProtoObject::~ProtoObject()
 {
-
+  delete pImpl;
 }
 
 void ProtoObject::Add(ExtraDescription *extraDescription)
@@ -30,4 +31,19 @@ void ProtoObject::Remove(ExtraDescription *extraDescription)
 const std::list<ExtraDescription*> &ProtoObject::ExtraDescriptions() const
 {
   return pImpl->ExtraDescriptions;
+}
+
+const std::list<Affect*> &ProtoObject::Affects() const
+{
+  return pImpl->Affects;
+}
+
+void ProtoObject::Add(Affect *affect)
+{
+  pImpl->Affects.push_back(affect);
+}
+
+void ProtoObject::Remove(Affect *affect)
+{
+  pImpl->Affects.remove(affect);
 }

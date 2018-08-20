@@ -977,7 +977,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
       break;
     }
 
-  for ( const Affect *paf = obj->FirstAffect; paf; paf = paf->Next )
+  for ( const Affect *paf : obj->Affects() )
     {
       /*
        * Save extra object affects                              -Thoric
@@ -2110,7 +2110,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 		  paf->Modifier = pafmod;
 		}
 
-              LINK(paf, obj->FirstAffect, obj->LastAffect, Next, Previous );
+              obj->Add(paf);
               fMatch                            = true;
               break;
             }
@@ -2399,10 +2399,10 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
               delete ed;
             }
 
-          while( obj->FirstAffect != nullptr )
+          while( !obj->Affects().empty() )
             {
-              Affect *paf = obj->FirstAffect;
-              UNLINK( paf, obj->FirstAffect, obj->LastAffect, Next, Previous );
+              Affect *paf = obj->Affects().front();
+              obj->Remove(paf);
               delete paf;
             }
 

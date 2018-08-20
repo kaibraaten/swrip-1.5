@@ -757,8 +757,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
                 paf->Modifier           = ReadInt( fp, Log, fBootDb );
 
               paf->AffectedBy           = 0;
-              LINK( paf, pObjIndex->FirstAffect, pObjIndex->LastAffect,
-                    Next, Previous );
+              pObjIndex->Add(paf);
               top_affect++;
             }
 
@@ -1539,8 +1538,6 @@ void CloseArea( Area *pArea )
   ProtoMobile *mid_next;
   Reset *ereset;
   Reset *ereset_next;
-  Affect *paf;
-  Affect *paf_next;
 
   for ( Character *ech = FirstCharacter, *ech_next; ech; ech = ech_next )
     {
@@ -1753,9 +1750,11 @@ void CloseArea( Area *pArea )
               delete eed;
             }
 
-          for ( paf = oid->FirstAffect; paf; paf = paf_next )
+          std::list<Affect*> affects(oid->Affects());
+
+          for(Affect *paf : affects)
             {
-              paf_next = paf->Next;
+              oid->Remove(paf);
               delete paf;
             }
 

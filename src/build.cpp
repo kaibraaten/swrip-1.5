@@ -316,7 +316,6 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
   Room *room = NULL;
   ProtoMobile *pMobIndex = NULL;
   ProtoObject *pObjIndex = NULL;
-  const Affect *paf = NULL;
   const Shop *pShop = NULL;
   const RepairShop *pRepair = NULL;
   char buf[MAX_STRING_LENGTH];
@@ -542,7 +541,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
         fprintf( fpout, "E\n%s~\n%s~\n",
                  ed->Keyword, StripCarriageReturn( ed->Description )       );
 
-      for ( paf = pObjIndex->FirstAffect; paf; paf = paf->Next )
+      for(const Affect *paf : pObjIndex->Affects())
         fprintf( fpout, "A\n%d %d\n", paf->Location,
                  ((paf->Location == APPLY_WEAPONSPELL
                    || paf->Location == APPLY_WEARSPELL

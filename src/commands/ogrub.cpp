@@ -1,5 +1,5 @@
-#include <ctype.h>
-#include <string.h>
+#include <cctype>
+#include <cstring>
 #include "mud.hpp"
 #include "grub.hpp"
 #include "character.hpp"
@@ -334,7 +334,6 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
         OSAV0, OSAV1, OSAV2, OSAV3, OSAV4};
   ProtoObject  *px;
   Object        *po;
-  Affect     *pa;
   GO_STRUCT         r;                 /* input (physical record)         */
   GO_STRUCT     a[MAX_DISPLAY_LINES];  /* array of records                */
   GO_STRUCT    *p[MAX_DISPLAY_LINES];  /* array of pointers to records    */
@@ -352,9 +351,12 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
     {
       if ( !ok_otype[po->ItemType] )      /* don't process useless stuff*/
         continue;
+
       memset(&r, 0, sizeof r);
+
       if ( !go_read_names( ch, po, &r, np_sw, nm_sw, ng_sw ) )
         continue;
+
       px          = po->Prototype;
       r.n[OCOUNT] = po->Count;
       r.n[OVNUM]  = px->Vnum;
@@ -364,10 +366,10 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
       r.n[OAVG]   = (po->ItemType == ITEM_WEAPON) ?
         (po->Value[1] + po->Value[2])/2 : 0;
 
-      for (pa=px->FirstAffect; pa; pa=pa->Next)
+      for(const Affect *pa : px->Affects())
         go_accum_aff (&r, pa->Location, pa->Modifier);
 
-      for (pa=po->FirstAffect; pa; pa=pa->Next)
+      for(const Affect *pa : po->Affects())
         go_accum_aff (&r, pa->Location, pa->Modifier);
 
       res = or_sw ? go_eval_or(ch, &r, op_num) : go_eval_and(ch, &r, op_num);

@@ -1136,18 +1136,13 @@ void ExtractObject( Object *obj )
   while ( ( obj_content = obj->LastContent ) != NULL )
     ExtractObject( obj_content );
 
-  {
-    Affect *paf;
-    Affect *paf_next;
+  std::list<Affect*> affects(obj->Affects());
 
-    for ( paf = obj->FirstAffect; paf; paf = paf_next )
-      {
-        paf_next    = paf->Next;
-        delete paf;
-      }
-
-    obj->FirstAffect = obj->LastAffect = NULL;
-  }
+  for(Affect *paf : affects)
+    {
+      obj->Remove(paf);
+      delete paf;
+    }
 
   std::list<ExtraDescription*> extraDescriptions(obj->ExtraDescriptions());
 
@@ -2107,10 +2102,6 @@ void CleanRoom( Room *room )
  */
 void CleanObject( ProtoObject *obj )
 {
-  Affect *paf = NULL;
-  Affect *paf_next = NULL;
-  int oval = 0;
-
   FreeMemory( obj->Name );
   FreeMemory( obj->ShortDescr );
   FreeMemory( obj->Description );
@@ -2122,20 +2113,16 @@ void CleanObject( ProtoObject *obj )
   obj->Weight           = 0;
   obj->Cost             = 0;
 
-  for( oval = 0; oval < MAX_OVAL; ++oval )
-    {
-      obj->Value[oval] = 0;
-    }
+  obj->Value.fill(0);
 
-  for ( paf = obj->FirstAffect; paf; paf = paf_next )
+  std::list<Affect*> affects(obj->Affects());
+
+  for(Affect *paf : affects)
     {
-      paf_next    = paf->Next;
+      obj->Remove(paf);
       delete paf;
       top_affect--;
     }
-
-  obj->FirstAffect     = NULL;
-  obj->LastAffect      = NULL;
 
   std::list<ExtraDescription*> extraDescriptions(obj->ExtraDescriptions());
 
@@ -2580,8 +2567,8 @@ static Object *GroupObject( Object *obj1, Object *obj2 )
        && HasSameOvalues( obj1, obj2 )
        && obj1->ExtraDescriptions().empty()
        && obj2->ExtraDescriptions().empty()
-       && !obj1->FirstAffect
-       && !obj2->FirstAffect
+       && obj1->Affects().empty()
+       && obj2->Affects().empty()
        && !obj1->FirstContent
        && !obj2->FirstContent )
     {

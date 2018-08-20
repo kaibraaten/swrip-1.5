@@ -7,11 +7,11 @@
 
 struct UserData
 {
-  int Ammo;
-  bool Scope;
-  int Lens;
-  int Power;
-  char *ItemName;
+  int Ammo = 0;
+  bool Scope = false;
+  int Lens = 0;
+  int Power = 0;
+  char *ItemName = nullptr;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
@@ -120,7 +120,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   hitroll->Duration   = -1;
   hitroll->Location   = GetAffectType( "hitroll" );
   hitroll->Modifier   = urange( 0, 1 + ud->Scope, blaster->Level / 30 );
-  LINK( hitroll, blaster->FirstAffect, blaster->LastAffect, Next, Previous );
+  blaster->Add(hitroll);
   ++top_affect;
 
   Affect *damroll = new Affect();
@@ -128,7 +128,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   damroll->Duration  = -1;
   damroll->Location  = GetAffectType( "damroll" );
   damroll->Modifier  = urange( 0, ud->Power, blaster->Level / 30);
-  LINK( damroll, blaster->FirstAffect, blaster->LastAffect, Next, Previous );
+  blaster->Add(damroll);
   ++top_affect;
 
   if ( ud->Scope == true )
@@ -138,7 +138,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       snipe->Duration  = -1;
       snipe->Location  = GetAffectType( "snipe" );
       snipe->Modifier  = urange( 0, 30, blaster->Level / 3);
-      LINK( snipe, blaster->FirstAffect, blaster->LastAffect, Next, Previous );
+      blaster->Add(snipe);
     }
 
   ++top_affect;

@@ -138,20 +138,20 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
 	  break;
         }
 
-      const Affect *paf = nullptr;
+      for(const Affect *paf : obj->Prototype->Affects())
+        {
+          ShowAffectToCharacter( ch, paf );
+        }
+
+      for(const Affect *paf : obj->Affects())
+        {
+          ShowAffectToCharacter( ch, paf );
+        }
       
-      for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
-        ShowAffectToCharacter( ch, paf );
-
-      for ( paf = obj->FirstAffect; paf; paf = paf->Next )
-        ShowAffectToCharacter( ch, paf );
-
       return rNONE;
     }
-
   else if ( ( victim = GetCharacterInRoom( ch, spell_target_name ) ) != NULL )
     {
-
       if ( IsBitSet( victim->Immune, RIS_MAGIC ) )
         {
           ImmuneCasting( skill, ch, victim, NULL );

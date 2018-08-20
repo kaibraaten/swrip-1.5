@@ -1381,9 +1381,8 @@ Room *MakeRoom( vnum_t vnum )
  */
 ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
 {
-  ProtoObject *cObjIndex = NULL;
+  ProtoObject *cObjIndex = nullptr;
   char buf[MAX_STRING_LENGTH];
-  int iHash = 0;
 
   if ( cvnum > 0 )
     {
@@ -1409,20 +1408,12 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
     }
   else
     {
-      Affect *paf = NULL, *cpaf = NULL;
-      int oval = 0;
-
       pObjIndex->ShortDescr    = CopyString( cObjIndex->ShortDescr );
       pObjIndex->Description    = CopyString( cObjIndex->Description );
       pObjIndex->ActionDescription    = CopyString( cObjIndex->ActionDescription );
       pObjIndex->ItemType      = cObjIndex->ItemType;
       pObjIndex->Flags    = cObjIndex->Flags | ITEM_PROTOTYPE;
       pObjIndex->WearFlags     = cObjIndex->WearFlags;
-
-      for( oval = 0; oval < MAX_OVAL; ++oval )
-        {
-          pObjIndex->Value[oval] = 0;
-        }
 
       pObjIndex->Weight         = cObjIndex->Weight;
       pObjIndex->Cost           = cObjIndex->Cost;
@@ -1436,21 +1427,20 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
           top_ed++;
         }
 
-      for ( cpaf = cObjIndex->FirstAffect; cpaf; cpaf = cpaf->Next )
+      for(const Affect *cpaf : cObjIndex->Affects())
         {
-          paf = new Affect();
+          Affect *paf = new Affect();
           paf->Type         = cpaf->Type;
           paf->Duration     = cpaf->Duration;
           paf->Location     = cpaf->Location;
           paf->Modifier     = cpaf->Modifier;
           paf->AffectedBy   = cpaf->AffectedBy;
-          LINK( paf, pObjIndex->FirstAffect, pObjIndex->LastAffect,
-                Next, Previous );
+          pObjIndex->Add(paf);
           top_affect++;
         }
     }
 
-  iHash                  = vnum % MAX_KEY_HASH;
+  int iHash                  = vnum % MAX_KEY_HASH;
   pObjIndex->Next        = ObjectIndexHash[iHash];
   ObjectIndexHash[iHash]  = pObjIndex;
   top_obj_index++;

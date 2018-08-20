@@ -7,8 +7,8 @@
 
 struct UserData
 {
-  char *ItemName;
-  int Charge;
+  char *ItemName = nullptr;
+  int Charge = 0;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );

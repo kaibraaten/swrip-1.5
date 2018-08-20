@@ -7,9 +7,9 @@
 
 struct UserData
 {
-  char *ItemName;
-  int Charge;
-  int GemType;
+  char *ItemName = nullptr;
+  int Charge = 0;
+  int GemType = 0;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );

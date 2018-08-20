@@ -36,7 +36,6 @@ void do_auction(Character *ch, char *argument)
     {
       if (auction->Item != NULL)
         {
-          Affect *paf = nullptr;
           obj = auction->Item;
           SetCharacterColor( AT_BLUE, ch );
           
@@ -71,12 +70,16 @@ void do_auction(Character *ch, char *argument)
 	      break;
             }
 
-          for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
-	    ShowAffectToCharacter( ch, paf );
+          for(const Affect *paf : obj->Prototype->Affects())
+            {
+              ShowAffectToCharacter( ch, paf );
+            }
 
-          for ( paf = obj->FirstAffect; paf; paf = paf->Next )
-            ShowAffectToCharacter( ch, paf );
-
+          for(const Affect *paf : obj->Affects())
+            {
+              ShowAffectToCharacter( ch, paf );
+            }
+          
           if ( ( obj->ItemType == ITEM_CONTAINER ) && ( obj->FirstContent ) )
             {
               SetCharacterColor( AT_OBJECT, ch );

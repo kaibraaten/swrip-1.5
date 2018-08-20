@@ -112,11 +112,11 @@ void do_ostat( Character *ch, char *argument )
       ch->Echo("%s'.\r\n", output.c_str());
     }
 
-  for ( const Affect *paf = obj->FirstAffect; paf; paf = paf->Next )
+  for ( const Affect *paf : obj->Affects() )
     ch->Echo("Affects %s by %d. (extra)\r\n",
              GetAffectLocationName( paf->Location ), paf->Modifier );
 
-  for ( const Affect *paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
+  for ( const Affect *paf : obj->Prototype->Affects() )
     ch->Echo("Affects %s by %d.\r\n",
                GetAffectLocationName( paf->Location ), paf->Modifier );
 }

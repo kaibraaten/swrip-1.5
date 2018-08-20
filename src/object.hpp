@@ -17,6 +17,10 @@ public:
   const std::list<ExtraDescription*> &ExtraDescriptions() const;
   void Add(ExtraDescription *extraDescription);
   void Remove(ExtraDescription *extraDescription);
+
+  const std::list<Affect*> &Affects() const;
+  void Add(Affect *affect);
+  void Remove(Affect *affect);
   
   Object         *Next = nullptr;
   Object         *Previous = nullptr;
@@ -26,8 +30,6 @@ public:
   Object         *LastContent = nullptr;
   Object         *InObject = nullptr;
   Character        *CarriedBy = nullptr;
-  Affect      *FirstAffect = nullptr;
-  Affect      *LastAffect = nullptr;
   ProtoObject   *Prototype = nullptr;
   Room  *InRoom = nullptr;
   char             *ArmedBy = nullptr;

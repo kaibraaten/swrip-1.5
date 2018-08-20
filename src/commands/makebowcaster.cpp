@@ -7,10 +7,10 @@
 
 struct UserData
 {
-  int Ammo;
-  int Tinder;
-  int Lenses;
-  char *ItemName;
+  int Ammo = 0;
+  int Tinder = 0;
+  int Lenses = 0;
+  char *ItemName = nullptr;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
@@ -136,7 +136,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   hitroll->Duration  = -1;
   hitroll->Location  = GetAffectType( "hitroll" );
   hitroll->Modifier  = urange( 0, 1 + ud->Lenses, obj->Level / 30 );
-  LINK( hitroll, obj->FirstAffect, obj->LastAffect, Next, Previous );
+  obj->Add(hitroll);
   ++top_affect;
 
   Affect *damroll = new Affect();
@@ -144,7 +144,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   damroll->Duration  = -1;
   damroll->Location  = GetAffectType( "damroll" );
   damroll->Modifier  = urange( 0, ud->Tinder, obj->Level / 30);
-  LINK( damroll, obj->FirstAffect, obj->LastAffect, Next, Previous );
+  obj->Add(damroll);
   ++top_affect;
 
   obj->Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;

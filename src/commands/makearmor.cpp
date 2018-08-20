@@ -7,9 +7,9 @@
 
 struct UserData
 {
-  int ArmorValue;
-  int WearLocation;
-  char *ItemName;
+  int ArmorValue = 0;
+  int WearLocation = 0;
+  char *ItemName = nullptr;
 };
 
 static CraftRecipe *CreateMakeArmorRecipe( void );
