@@ -23,6 +23,13 @@ public:
 class Board
 {
 public:
+  Board();
+  virtual ~Board();
+
+  const std::list<Note*> &Notes() const;
+  void Add(Note *note);
+  void Remove(Note *note);
+  
   char *Name = nullptr;             /* Filename to save notes to       */
   char *ReadGroup = nullptr;            /* Can restrict a board to a       */
   char *PostGroup = nullptr;            /* council, clan, guild etc        */
@@ -34,7 +41,10 @@ public:
   short MinRemoveLevel = 0;      /* Minimum level to remove a note  */
   short MaxPosts = 0;             /* Maximum amount of notes allowed */
   int Type = BOARD_NOTE;                  /* Normal board or mail board? */
-  std::list<Note*> Notes;
+
+private:
+  struct Impl;
+  Impl *pImpl = nullptr;
 };
 
 Board *AllocateBoard(const std::string &name);
@@ -47,7 +57,6 @@ void OperateOnNote( Character *ch, const std::string &arg_passed, bool IS_MAIL )
 void AttachNote(Character *ch);
 void CountMailMessages(const Character *ch);
 const char *GetBoardFilename( const Board *board );
-void AddNote(Board *board, Note *note);
 
 class BoardRepository : public Ceris::Repository<Board*>
 {

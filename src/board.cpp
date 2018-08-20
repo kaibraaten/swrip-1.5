@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <cassert>
 #include <cctype>
 #include <ctime>
 #include <cstring>
@@ -76,6 +77,41 @@ static bool CanRemove( const Character *ch, const Board *board );
 static bool CanRead( const Character *ch, const Board *board );
 static bool CanPost( const Character *ch, const Board *board );
 static Object *FindQuill( const Character *ch );
+
+//////////////////////////////////////////////////////////////
+struct Board::Impl
+{
+  std::list<Note*> Notes;
+};
+
+//////////////////////////////////////////////////////////////
+Board::Board()
+  : pImpl(new Impl())
+{
+
+}
+
+Board::~Board()
+{
+  delete pImpl;
+}
+
+void Board::Add(Note *note)
+{
+  pImpl->Notes.push_back(note);
+}
+
+void Board::Remove(Note *note)
+{
+  pImpl->Notes.remove(note);
+}
+
+const std::list<Note*> &Board::Notes() const
+{
+  return pImpl->Notes;
+}
+
+//////////////////////////////////////////////////////////////
 
 static bool CanRemove( const Character *ch, const Board *board )
 {
@@ -245,7 +281,7 @@ static void LoadNote( lua_State *L, Board *board )
     }
   
   lua_pop( L, topAfterGets - topAtStart );
-  AddNote(board, note);
+  board->Add(note);
 }
 
 static void LoadNotes( lua_State *L, Board *board )
@@ -376,13 +412,13 @@ static void ExecuteBoardFile( const std::string &filePath, void *userData )
 
 static void PushNotes( lua_State *L, const Board *board )
 {
-  if(!board->Notes.empty())
+  if(!board->Notes().empty())
     {
       int idx = 0;
       lua_pushstring( L, "Notes" );
       lua_newtable( L );
 
-      for(const Note *note : board->Notes)
+      for(const Note *note : board->Notes())
 	{
           ++idx;
 	  lua_pushinteger( L, idx );
@@ -483,22 +519,13 @@ void FreeNote( Note *pnote, void *unused )
 
 static void RemoveNote( Board *board, Note *pnote )
 {
-  if ( !board )
-    {
-      Log->Bug( "note remove: null board", 0 );
-      return;
-    }
-
-  if ( !pnote )
-    {
-      Log->Bug( "note remove: null pnote", 0 );
-      return;
-    }
+  assert(board != nullptr);
+  assert(pnote != nullptr);
 
   /*
    * Remove note from linked list.
    */
-  board->Notes.remove(pnote);
+  board->Remove(pnote);
 
   FreeNote( pnote, NULL );
   Boards->Save(board);
@@ -614,7 +641,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
           SetCharacterColor( AT_NOTE, ch );
           _IsNoteTo _isNoteTo(ch);
 
-          for(const Note *note : board->Notes)
+          for(const Note *note : board->Notes())
             {
               count++;
 
@@ -643,7 +670,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
           if (IS_MAIL) /* SB Mail check for Brit */
             {
-              bool mfound = find_if(board->Notes.begin(), board->Notes.end(), _IsNoteTo(ch)) != board->Notes.end();
+              bool mfound = Find(board->Notes(), _IsNoteTo(ch));
 
               if ( !mfound && GetTrustLevel(ch) < SysData.ReadAllMail )
                 {
@@ -654,7 +681,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
           _IsNoteTo _isNoteTo(ch);
 
-          for(const Note *note : board->Notes)
+          for(const Note *note : board->Notes())
             {
               if (_isNoteTo( note ) || GetTrustLevel(ch) > SysData.ReadAllMail)
                 {
@@ -710,7 +737,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
           int counter = 0;
           bool wasfound = false;
 
-          for(const Note *note : board->Notes)
+          for(const Note *note : board->Notes())
             {
               counter++;
 
@@ -751,7 +778,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
           bool wasfound = false;
           _IsNoteTo _isNoteTo(ch);
 
-          for(const Note *note : board->Notes)
+          for(const Note *note : board->Notes())
             {
               if (_isNoteTo(note) || GetTrustLevel(ch) > SysData.ReadAllMail)
                 {
@@ -825,8 +852,8 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
       counter = 1;
 
-      for(std::list<Note*>::const_iterator i = board->Notes.begin();
-          i != board->Notes.end(); ++i)
+      for(std::list<Note*>::const_iterator i = board->Notes().begin();
+          i != board->Notes().end(); ++i)
         {
           note = *i;
           ++counter;
@@ -1223,7 +1250,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
           return;
         }
 
-      if ( board->Notes.size() >= (size_t)board->MaxPosts )
+      if ( board->Notes().size() >= (size_t)board->MaxPosts )
         {
           ch->Echo( "This terminal is full. There is no room for your message.\r\n" );
           return;
@@ -1250,7 +1277,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
       note->NoVotes     = CopyString( "" );
       note->Abstentions = CopyString( "" );
 
-      AddNote(board, note);
+      board->Add(note);
       Boards->Save(board);
       ch->Echo( "You upload your message to the terminal.\r\n" );
       ExtractObject( paper );
@@ -1311,7 +1338,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
       anum = atoi( arg_passed );
       _IsNoteTo _isNoteTo(ch);
 
-      for(Note *note : board->Notes)
+      for(Note *note : board->Notes())
         {
           if (IS_MAIL && ((_isNoteTo(note))
                           || GetTrustLevel(ch) >= SysData.TakeOthersMail))
@@ -1439,7 +1466,7 @@ void CountMailMessages(const Character *ch)
     {
       if ( board->Type == BOARD_MAIL && CanRead(ch, board) )
 	{
-          cnt += count_if(board->Notes.begin(), board->Notes.end(), _IsNoteTo(ch));
+          cnt += Count(board->Notes(), _IsNoteTo(ch));
 	}
     }
 
@@ -1509,11 +1536,6 @@ void FreeBoard(Board *board)
     }
 
   delete board;
-}
-
-void AddNote(Board *board, Note *note)
-{
-  board->Notes.push_back(note);
 }
 
 ///////////////////////////////////////
