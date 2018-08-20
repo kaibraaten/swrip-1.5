@@ -80,11 +80,11 @@ void do_auction(Character *ch, char *argument)
               ShowAffectToCharacter( ch, paf );
             }
           
-          if ( ( obj->ItemType == ITEM_CONTAINER ) && ( obj->FirstContent ) )
+          if ( obj->ItemType == ITEM_CONTAINER && !obj->Objects().empty() )
             {
               SetCharacterColor( AT_OBJECT, ch );
               ch->Echo( "Contents:\r\n" );
-              ShowObjectListToCharacter( obj->FirstContent, ch, true, false );
+              ShowObjectListToCharacter( obj->Objects(), ch, true, false );
             }
 
           if (IsImmortal(ch))

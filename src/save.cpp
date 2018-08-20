@@ -793,9 +793,9 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
    * Slick recursion to write lists backwards,
    *   so loading them will load in forwards order.
    */
-  if ( obj->PreviousContent && os_type != OS_CORPSE )
+  for(const Object *content : Reverse(obj->Objects()))
     {
-      WriteObject( ch, obj->PreviousContent, fp, iNest, OS_CARRY );
+      WriteObject( ch, content, fp, iNest, OS_CARRY );
     }
 
   /*
@@ -1022,9 +1022,9 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
 
   fprintf( fp, "End\n\n" );
 
-  if ( obj->FirstContent )
+  for(const Object *content : Reverse(obj->Objects()))
     {
-      WriteObject( ch, obj->LastContent, fp, iNest + 1, OS_CARRY );
+      WriteObject( ch, content, fp, iNest + 1, OS_CARRY );
     }
 }
 

@@ -232,7 +232,6 @@ void do_fill( Character *ch, char *argument )
 
   if (dest_item == ITEM_CONTAINER)
     {
-      Object *otmp = nullptr, *otmp_next = nullptr;
       char name[MAX_INPUT_LENGTH];
       Character *gch = nullptr;
       char *pd = nullptr;
@@ -311,7 +310,7 @@ void do_fill( Character *ch, char *argument )
             }
         case ITEM_DROID_CORPSE:
         case ITEM_CORPSE_NPC:
-          if ( (otmp=source->FirstContent) == NULL )
+          if ( source->Objects().empty() )
             {
               ch->Echo( "It's empty.\r\n" );
               return;
@@ -319,10 +318,10 @@ void do_fill( Character *ch, char *argument )
 
           SeparateOneObjectFromGroup( obj );
 
-          for ( ; otmp; otmp = otmp_next )
-            {
-              otmp_next = otmp->NextContent;
+          std::list<Object*> contents(source->Objects());
 
+          for(Object *otmp : contents)
+            {
               if ( !CAN_WEAR(otmp, ITEM_TAKE)
                    ||   (IS_OBJ_STAT( otmp, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
 		   ||    ch->CarryNumber + otmp->Count > GetCarryCapacityNumber(ch)
@@ -335,6 +334,7 @@ void do_fill( Character *ch, char *argument )
               ObjectToObject(otmp, obj);
               found = true;
             }
+
           if ( found )
             {
               Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );

@@ -68,7 +68,7 @@ bool spec_customs_weapons( Character *ch )
             }
           else if ( obj->ItemType == ITEM_CONTAINER )
             {
-	      for ( Object *content = obj->FirstContent; content; content = content->NextContent )
+	      for ( Object *content : obj->Objects() )
                 {
                   if (content->Prototype->ItemType == ITEM_WEAPON
                       && !IsBitSet( content->Flags , ITEM_CONTRABAND ) )

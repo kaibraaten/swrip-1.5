@@ -47,7 +47,7 @@
 #include "protomob.hpp"
 
 static bool IsRoomReset( const Reset *pReset, const Room *aRoom, const Area *pArea );
-static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 );
+static void AddObjectReset( Area *pArea, char cm, const Object *obj, int v2, int v3 );
 static void DeleteReset( Area *pArea, Reset *pReset );
 static Reset *FindReset( const Area *pArea, const Room *pRoom, int num );
 static void ListResets( const Character *ch, const Area *pArea,
@@ -1265,9 +1265,8 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     }
 }
 
-static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
+static void AddObjectReset( Area *pArea, char cm, const Object *obj, int v2, int v3 )
 {
-  Object *inobj;
   static int iNest;
 
   if ( (cm == 'O' || cm == 'P') && obj->Prototype->Vnum == OBJ_VNUM_TRAP )
@@ -1291,7 +1290,7 @@ static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
       AddReset(pArea, 'H', 1, 0, 0, 0);
     }
 
-  for ( inobj = obj->FirstContent; inobj; inobj = inobj->NextContent )
+  for(const Object *inobj : obj->Objects())
     {
       if ( inobj->Prototype->Vnum == OBJ_VNUM_TRAP )
 	{
@@ -1304,7 +1303,7 @@ static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
       iNest++;
     }
 
-  for ( inobj = obj->FirstContent; inobj; inobj = inobj->NextContent )
+  for(const Object *inobj : obj->Objects())
     {
       AddObjectReset( pArea, 'P', inobj, 1, 0 );
     }
@@ -1661,7 +1660,7 @@ void ResetArea( Area *pArea )
               if ( pArea->NumberOfPlayers > 0 ||
                    !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
                    !to_obj->InRoom ||
-                   CountOccurancesOfObjectInList(pObjIndex, to_obj->FirstContent) > 0 )
+                   CountOccurancesOfObjectInList(pObjIndex, to_obj->Objects()) > 0 )
                 {
                   obj = NULL;
                   break;
@@ -1680,7 +1679,9 @@ void ResetArea( Area *pArea )
 
               for ( iNest = 0; iNest < pReset->MiscData; iNest++ )
 		{
-		  if ( !(to_obj = to_obj->LastContent) )
+                  to_obj = !to_obj->Objects().empty() ? to_obj->Objects().back() : nullptr;
+
+		  if ( to_obj == nullptr )
 		    {
 		      Log->Bug( "%s: %s: 'P': Invalid nesting obj %d.",
 			   pArea->Filename, __FUNCTION__, pReset->Arg1 );

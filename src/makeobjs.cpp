@@ -118,7 +118,7 @@ void MakeScraps( Object *obj )
     }
 
   if ( (obj->ItemType == ITEM_CONTAINER
-        || obj->ItemType == ITEM_CORPSE_PC) && obj->FirstContent )
+        || obj->ItemType == ITEM_CORPSE_PC) && !obj->Objects().empty() )
     {
       if ( ch && ch->InRoom )
         {

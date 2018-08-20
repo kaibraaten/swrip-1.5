@@ -770,22 +770,24 @@ void WriteAreaList( void )
   fclose( fpout );
 }
 
-void AddResetNested( Area *tarea, Object *obj )
+void AddResetNested( Area *tarea, Object *root )
 {
-  int limit;
-
-  for ( obj = obj->FirstContent; obj; obj = obj->NextContent )
+  for(Object *obj : root->Objects())
     {
-      limit = obj->Prototype->Count;
+      int limit = obj->Prototype->Count;
 
       if ( limit < 1 )
-        limit = 1;
-
+        {
+          limit = 1;
+        }
+      
       AddReset( tarea, 'P', 1, obj->Prototype->Vnum, limit,
-                 obj->InObject->Prototype->Vnum );
+                obj->InObject->Prototype->Vnum );
 
-      if ( obj->FirstContent )
-        AddResetNested( tarea, obj );
+      if ( !obj->Objects().empty() )
+        {
+          AddResetNested( tarea, obj );
+        }
     }
 }
 

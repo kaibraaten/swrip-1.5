@@ -1222,8 +1222,6 @@ int GetRaceFromName( const std::string &arg );
 int GetClassFromName( const std::string &arg );
 void ShowCharacterCondition( const Character *ch, const Character *victim );
 char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fShort );
-void ShowObjectListToCharacter( const Object *list, Character *ch,
-                                bool fShort, bool fShowNothing );
 void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
                                 bool fShort, bool fShowNothing );
 /* act_move.c */
@@ -1460,7 +1458,6 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex );
 Object *ObjectToCharacter( Object *obj, Character *ch );
 void ObjectFromCharacter( Object *obj );
 int GetObjectArmorClass( const Object *obj, int iWear );
-int CountOccurancesOfObjectInList( const ProtoObject *protoobj, const Object *list );
 int CountOccurancesOfObjectInList( const ProtoObject *protoobj, const std::list<Object*> &list );
 void ObjectFromRoom( Object *obj );
 Object *ObjectToRoom( Object *obj, Room *pRoomIndex );
@@ -1476,11 +1473,8 @@ void ExtractCharacter( Character *ch, bool fPull );
 Character *GetCharacterInRoom( const Character *ch, const std::string &argument );
 Character *GetCharacterAnywhere( const Character *ch, const std::string &argument );
 Object *GetInstanceOfObject( const ProtoObject *pObjIndexData );
-
-Object *GetObjectInList( const Character *ch, const std::string &objName, Object *list );
 Object *GetObjectInList( const Character *ch, const std::string &objName,
                          const std::list<Object*> &list );
-
 Object *GetObjectInListReverse( const Character *ch, const std::string &objName,
                                 const std::list<Object*> &list );
 Object *GetObjectHere( const Character *ch, const std::string &argument );
