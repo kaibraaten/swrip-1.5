@@ -23,6 +23,7 @@
 #include <cstring>
 #include <cctype>
 #include <cerrno>
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "ship.hpp"
 #include "character.hpp"

@@ -19,8 +19,8 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <string.h>
-#include <ctype.h>
+#include <cstring>
+#include <cctype>
 #include "help.hpp"
 #include "character.hpp"
 #include "mud.hpp"
@@ -304,4 +304,3 @@ HelpFileRepository *NewHelpFileRepository()
 {
   return new LuaHelpFileRepository();
 }
-

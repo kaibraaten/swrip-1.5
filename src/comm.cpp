@@ -25,11 +25,11 @@
 #define _BSD_SOURCE
 #endif
 
-#include <algorithm>
 #include <cstring>
 #include <cctype>
 #include <ctime>
 #include <cstdarg>
+#include <utility/algorithms.hpp>
 #include "log.hpp"
 #include "mud.hpp"
 #include "character.hpp"

@@ -1409,7 +1409,6 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
     }
   else
     {
-      ExtraDescription *ed = NULL, *ced = NULL;
       Affect *paf = NULL, *cpaf = NULL;
       int oval = 0;
 
@@ -1428,13 +1427,12 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
       pObjIndex->Weight         = cObjIndex->Weight;
       pObjIndex->Cost           = cObjIndex->Cost;
 
-      for ( ced = cObjIndex->FirstExtraDescription; ced; ced = ced->Next )
+      for(ExtraDescription *ced : cObjIndex->ExtraDescriptions() )
         {
-          ed = new ExtraDescription();
+          ExtraDescription *ed = new ExtraDescription();
           ed->Keyword           = CopyString( ced->Keyword );
           ed->Description               = CopyString( ced->Description );
-          LINK( ed, pObjIndex->FirstExtraDescription, pObjIndex->LastExtraDescription,
-                Next, Previous );
+          pObjIndex->Add(ed);
           top_ed++;
         }
 
@@ -2015,16 +2013,4 @@ void AllocateRepositories(void)
   PlayerCharacters = NewPlayerRepository();
   Shops = NewShopRepository();
   RepairShops = NewRepairShopRepository();
-}
-
-std::list<ExtraDescription*> OldStyleExtraListToNew(ExtraDescription *extraList)
-{
-  std::list<ExtraDescription*> newStyleList;
-
-  for(ExtraDescription *ed = extraList; ed != nullptr; ed = ed->Next)
-    {
-      newStyleList.push_back(ed);
-    }
-
-  return newStyleList;
 }

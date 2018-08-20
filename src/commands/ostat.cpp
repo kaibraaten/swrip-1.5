@@ -1,4 +1,5 @@
-#include <string.h>
+#include <sstream>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
@@ -8,7 +9,6 @@
 void do_ostat( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Affect *paf = NULL;
   Object *obj = NULL;
   const char *pdesc = NULL;
 
@@ -29,8 +29,8 @@ void do_ostat( Character *ch, char *argument )
     }
 
   ch->Echo("Name: %s.\r\n", obj->Name );
-  const auto objExtraDescriptions(OldStyleExtraListToNew(obj->FirstExtraDescription));
-  const auto protoExtraDescriptions(OldStyleExtraListToNew(obj->Prototype->FirstExtraDescription));
+  const auto objExtraDescriptions(obj->ExtraDescriptions());
+  const auto protoExtraDescriptions(obj->Prototype->ExtraDescriptions());
   
   pdesc=GetExtraDescription(arg, objExtraDescriptions);
 
@@ -83,45 +83,40 @@ void do_ostat( Character *ch, char *argument )
   ch->Echo("Object Values: %d %d %d %d %d %d.\r\n",
              obj->Value[0], obj->Value[1], obj->Value[2], obj->Value[3], obj->Value[4], obj->Value[5] );
 
-  if ( obj->Prototype->FirstExtraDescription )
+  if ( !obj->Prototype->ExtraDescriptions().empty() )
     {
-      ExtraDescription *ed;
-
+      std::ostringstream buf;
       ch->Echo("Primary description keywords:   '");
 
-      for ( ed = obj->Prototype->FirstExtraDescription; ed; ed = ed->Next )
+      for(const ExtraDescription *ed : obj->Prototype->ExtraDescriptions())
         {
-          ch->Echo(ed->Keyword);
-
-          if ( ed->Next )
-            ch->Echo(" ");
+          buf << ed->Keyword << " ";
         }
 
-      ch->Echo("'.\r\n");
+      std::string output = TrimString(buf.str());
+      ch->Echo("%s'.\r\n", output.c_str());
     }
 
-  if ( obj->FirstExtraDescription )
+  if ( !obj->ExtraDescriptions().empty() )
     {
-      ExtraDescription *ed;
+      std::ostringstream buf;
 
       ch->Echo("Secondary description keywords: '");
 
-      for ( ed = obj->FirstExtraDescription; ed; ed = ed->Next )
+      for(const ExtraDescription *ed : obj->ExtraDescriptions())
         {
-          ch->Echo(ed->Keyword);
-
-          if ( ed->Next )
-            ch->Echo(" ");
+          buf << ed->Keyword << " ";
         }
 
-      ch->Echo("'.\r\n");
+      std::string output = TrimString(buf.str());
+      ch->Echo("%s'.\r\n", output.c_str());
     }
 
-  for ( paf = obj->FirstAffect; paf; paf = paf->Next )
+  for ( const Affect *paf = obj->FirstAffect; paf; paf = paf->Next )
     ch->Echo("Affects %s by %d. (extra)\r\n",
-               GetAffectLocationName( paf->Location ), paf->Modifier );
+             GetAffectLocationName( paf->Location ), paf->Modifier );
 
-  for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
+  for ( const Affect *paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
     ch->Echo("Affects %s by %d.\r\n",
                GetAffectLocationName( paf->Location ), paf->Modifier );
 }

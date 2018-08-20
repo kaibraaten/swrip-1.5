@@ -1,4 +1,4 @@
-#include <algorithm>
+#include <utility/algorithms.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "pcdata.hpp"
@@ -11,16 +11,13 @@ bool spec_police( Character *ch )
       return false;
     }
 
-  std::list<Character*> potentialCriminals;
-  copy_if(std::begin(ch->InRoom->Characters()),
-          std::end(ch->InRoom->Characters()),
-          std::begin(potentialCriminals),
-          [ch](auto victim)
-          {
-            return !IsNpc(victim)
-              && CanSeeCharacter(ch, victim)
-              && NumberBits(1) != 0;
-          });
+  std::list<Character*> potentialCriminals = Filter(ch->InRoom->Characters(),
+                                                    [ch](auto victim)
+                                                    {
+                                                      return !IsNpc(victim)
+                                                        && CanSeeCharacter(ch, victim)
+                                                        && NumberBits(1) != 0;
+                                                    });
 
   for(Character *victim : potentialCriminals)
     {

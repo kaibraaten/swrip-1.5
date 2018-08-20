@@ -767,8 +767,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
               ExtraDescription *ed = new ExtraDescription();
               ed->Keyword               = ReadStringToTilde( fp, Log, fBootDb );
               ed->Description           = ReadStringToTilde( fp, Log, fBootDb );
-              LINK( ed, pObjIndex->FirstExtraDescription, pObjIndex->LastExtraDescription,
-                    Next, Previous );
+              pObjIndex->Add(ed);
               top_ed++;
             }
           else if ( letter == '>' )
@@ -1744,10 +1743,11 @@ void CloseArea( Area *pArea )
           FreeMemory(oid->Description);
           FreeMemory(oid->ActionDescription);
 
-          for ( ExtraDescription *eed = oid->FirstExtraDescription, *eed_next = nullptr;
-                eed != nullptr; eed = eed_next )
+          std::list<ExtraDescription*> extraDescrs(oid->ExtraDescriptions());
+          
+          for ( ExtraDescription *eed : extraDescrs )
             {
-              eed_next = eed->Next;
+              oid->Remove(eed);
               FreeMemory(eed->Keyword);
               FreeMemory(eed->Description);
               delete eed;

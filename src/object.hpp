@@ -13,6 +13,10 @@ public:
   Object();
   Object(ProtoObject *protoObj, int level);
   virtual ~Object();
+
+  const std::list<ExtraDescription*> &ExtraDescriptions() const;
+  void Add(ExtraDescription *extraDescription);
+  void Remove(ExtraDescription *extraDescription);
   
   Object         *Next = nullptr;
   Object         *Previous = nullptr;
@@ -22,8 +26,6 @@ public:
   Object         *LastContent = nullptr;
   Object         *InObject = nullptr;
   Character        *CarriedBy = nullptr;
-  ExtraDescription *FirstExtraDescription = nullptr;
-  ExtraDescription *LastExtraDescription = nullptr;
   Affect      *FirstAffect = nullptr;
   Affect      *LastAffect = nullptr;
   ProtoObject   *Prototype = nullptr;
@@ -47,6 +49,10 @@ public:
   int               Serial = 0;         /* serial number               */
 
   MProg mprog;
+
+private:
+  struct Impl;
+  Impl *pImpl = nullptr;
 };
 
 #endif

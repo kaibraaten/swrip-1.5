@@ -338,3 +338,106 @@ TEST_F(StringHandlingTests, IsNullOrEmpty)
   EXPECT_TRUE(IsNullOrEmpty(null));
   EXPECT_FALSE(IsNullOrEmpty(containsSomething));
 }
+
+TEST_F(StringHandlingTests, TrimStringStart_STL)
+{
+  {
+    std::string original = "   Starts here.";
+
+    std::string result = TrimStringStart(original);
+
+    EXPECT_EQ(result, "Starts here.");
+  }
+  {
+    std::string original = "---Starts here.";
+
+    std::string result = TrimStringStart(original, '-');
+
+    EXPECT_EQ(result, "Starts here.");
+  }
+  {
+    std::string original = "Starts here.";
+
+    std::string result = TrimStringStart(original);
+
+    EXPECT_EQ(result, "Starts here.");
+  }
+  {
+    std::string original = "";
+
+    std::string result = TrimStringStart(original);
+
+    EXPECT_EQ(result, "");
+  }
+}
+
+TEST_F(StringHandlingTests, TrimStringEnd_STL)
+{
+  {
+    std::string original = "Starts here.    ";
+
+    std::string result = TrimStringEnd(original);
+
+    EXPECT_EQ(result, "Starts here.");
+  }
+  {
+    std::string original = "Starts here.----";
+
+    std::string result = TrimStringEnd(original, '-');
+
+    EXPECT_EQ(result, "Starts here.");
+  }
+  {
+    std::string original = "Starts-here.";
+
+    std::string result = TrimStringEnd(original, '-');
+
+    EXPECT_EQ(result, "Starts-here.");
+  }
+  {
+    std::string original = "";
+
+    std::string result = TrimStringEnd(original);
+
+    EXPECT_EQ(result, "");
+  }
+}
+
+TEST_F(StringHandlingTests, TrimString_STL)
+{
+  {
+    std::string original = "        Starts here.    ";
+
+    std::string result = TrimString(original);
+
+    EXPECT_EQ(result, "Starts here.");
+  }
+  {
+    std::string original = "        Starts here.";
+
+    std::string result = TrimString(original);
+
+    EXPECT_EQ(result, "Starts here.");
+  }
+  {
+    std::string original = "Starts here.    ";
+
+    std::string result = TrimString(original);
+
+    EXPECT_EQ(result, "Starts here.");
+  }
+  {
+    std::string original = "Starts here.";
+
+    std::string result = TrimString(original);
+
+    EXPECT_EQ(result, "Starts here.");
+  }
+  {
+    std::string original = "";
+
+    std::string result = TrimString(original);
+
+    EXPECT_EQ(result, "");
+  }  
+}

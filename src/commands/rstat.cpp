@@ -1,3 +1,4 @@
+#include <sstream>
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
@@ -101,17 +102,15 @@ void do_rstat( Character *ch, char *argument )
 
   if ( !location->ExtraDescriptions().empty() )
     {
+      std::ostringstream outbuf;
       ch->Echo("Extra description keywords: '");
 
       for(const ExtraDescription *ed : location->ExtraDescriptions())
         {
-          ch->Echo(ed->Keyword);
-
-          if ( ed->Next )
-            ch->Echo(" ");
+          outbuf << ed->Keyword << " ";
         }
 
-      ch->Echo("'.\r\n");
+      ch->Echo("%s'.\r\n", TrimString(outbuf.str()).c_str());
     }
 
   ch->Echo("Characters:");

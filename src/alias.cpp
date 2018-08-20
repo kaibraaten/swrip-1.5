@@ -25,7 +25,7 @@
  http://dotd.mudservices.com  dotd@dotd.mudservices.com
  ******************************************************/
 
-#include <algorithm>
+#include <utility/algorithms.hpp>
 #include <cstring>
 #include <cassert>
 #include "mud.hpp"

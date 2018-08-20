@@ -34,6 +34,7 @@
 
 #include <cstring>
 #include <cctype>
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"

@@ -1,5 +1,6 @@
-#include <string.h>
-#include <ctype.h>
+#include <cstring>
+#include <cctype>
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "vector3_aux.hpp"
 #include "ship.hpp"
@@ -119,7 +120,7 @@ void do_look( Character *ch, char *argument )
     {
       if ( CanSeeObject( ch, obj ) )
         {
-          const auto objExtraDescriptions(OldStyleExtraListToNew(obj->FirstExtraDescription));
+          const auto objExtraDescriptions(obj->ExtraDescriptions());
           
           if ( (pdesc=GetExtraDescription(arg, objExtraDescriptions)) != NULL )
             {
@@ -130,7 +131,8 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          const auto protoExtraDescriptions(OldStyleExtraListToNew(obj->Prototype->FirstExtraDescription));
+          const auto protoExtraDescriptions(obj->Prototype->ExtraDescriptions());
+
           if ( (pdesc=GetExtraDescription(arg, protoExtraDescriptions)) != NULL )
             {
               if ( (cnt += obj->Count) < number )
@@ -171,8 +173,8 @@ void do_look( Character *ch, char *argument )
       
       if ( CanSeeObject( ch, obj ) )
         {
-          const auto objExtraDescriptions(OldStyleExtraListToNew(obj->FirstExtraDescription));
-          const auto protoExtraDescriptions(OldStyleExtraListToNew(obj->Prototype->FirstExtraDescription));
+          const auto objExtraDescriptions(obj->ExtraDescriptions());
+          const auto protoExtraDescriptions(obj->Prototype->ExtraDescriptions());
           
           if ( (pdesc=GetExtraDescription(arg, objExtraDescriptions)) != NULL )
             {
