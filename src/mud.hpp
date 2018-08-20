@@ -1618,4 +1618,10 @@ auto Find(const Container &original, UnaryPredicate pred)
   return i != std::end(original) ? *i : nullptr;
 }
 
+template<typename Container, typename UnaryPredicate>
+size_t Count(const Container &container, UnaryPredicate pred)
+{
+  return count_if(std::begin(container), std::end(container), pred);
+}
+
 #endif /* include guard */

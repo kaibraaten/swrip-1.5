@@ -27,7 +27,7 @@ void do_bstat( Character *ch, char *argument )
             board->Name,   board->BoardObject,
             board->MinReadLevel,      board->MinPostLevel,
             board->MinRemoveLevel, board->MaxPosts,
-            board->Notes.size(), board->Type );
+            board->Notes().size(), board->Type );
 
   ch->Echo( "Read_group: %-15s Post_group: %-15s \r\nExtra_readers: %-10s\r\n",
             board->ReadGroup, board->PostGroup, board->ExtraReaders );

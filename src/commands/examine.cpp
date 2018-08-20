@@ -31,7 +31,7 @@ void do_examine( Character *ch, char *argument )
     {
       if ( (board = GetBoardFromObject( obj )) != NULL )
         {
-          const size_t numberOfPosts = board->Notes.size();
+          const size_t numberOfPosts = board->Notes().size();
 
           if (numberOfPosts > 0)
             {

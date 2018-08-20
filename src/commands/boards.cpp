@@ -17,7 +17,7 @@ void do_boards( Character *ch, char *argument )
       ch->Echo( "%-16s Vnum: %5d Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %d Type: %d\r\n",
                 board->Name,         board->BoardObject,
                 board->MinReadLevel,    board->MinPostLevel,
-                board->MinRemoveLevel, board->MaxPosts, board->Notes.size(),
+                board->MinRemoveLevel, board->MaxPosts, board->Notes().size(),
                 board->Type);
     }
 }
