@@ -44,15 +44,54 @@ ClanMemberList *LastClanMemberList = nullptr;
 /*static void LoadClanStoreroom( const Clan *clan );*/
 static ClanMember *GetMemberData( const ClanMemberList*, const char *memberName );
 
+//////////////////////////////////////////////////////////////
+struct Clan::Impl
+{
+  std::list<Clan*> Subclans;
+};
+
+//////////////////////////////////////////////////////////////
+Clan::Clan()
+  : pImpl(new Impl())
+{
+
+}
+
+Clan::~Clan()
+{
+  delete pImpl;
+}
+
+void Clan::Add(Clan *guild)
+{
+  pImpl->Subclans.push_back(guild);
+
+  guild->Type = CLAN_GUILD;
+  guild->MainClan = this;
+}
+
+void Clan::Remove(Clan *guild)
+{
+  pImpl->Subclans.remove(guild);
+  guild->MainClan = nullptr;
+}
+
+const std::list<Clan*> &Clan::Subclans() const
+{
+  return pImpl->Subclans;
+}
+
+//////////////////////////////////////////////////////////////
+
 /*
  * Get pointer to clan structure from clan name.
  */
 Clan *GetClan( const std::string &name )
 {
   return Clans->Find([name](const auto &clan)
-                         {
-                           return StrCmp(clan->Name, name) == 0;
-                         });
+                     {
+                       return StrCmp(clan->Name, name) == 0;
+                     });
 }
 
 #if 0
@@ -149,9 +188,7 @@ void AssignGuildToMainclan( Clan *guild, Clan *mainClan )
 {
   if ( mainClan )
     {
-      guild->Type = CLAN_GUILD;
-      mainClan->Subclans.push_back(guild);
-      guild->MainClan = mainClan;
+      mainClan->Add(guild);
     }
 }
 
@@ -214,7 +251,7 @@ void ShowClanMembers( const Character *ch, const std::string &clanName, const st
         {
           std::list<const ClanMember*> sortedList;
 
-          for( const ClanMember *member = members_list->FirstMember->Next; member; member = member->Next )
+          for( const ClanMember *member = members_list->FirstMember; member; member = member->Next )
             {
               if( StrCmp( member->Name, clan->Leadership.Leader ) != 0
                   && StrCmp( member->Name, clan->Leadership.Number1 ) != 0
