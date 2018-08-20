@@ -171,6 +171,9 @@ char *EncodeString( const std::string &str );
 char *TrimStringStart( char *string, char junk = ' ' );
 char *TrimStringEnd( char *string, char junk = ' ' );
 char *TrimString( char *string, char junk  = ' ');
+std::string TrimStringStart( const std::string &str, char junk = ' ' );
+std::string TrimStringEnd( const std::string &str, char junk = ' ' );
+std::string TrimString( const std::string &str, char junk  = ' ');
 char *Scramble( const std::string &argument, int modifier );
 bool IsNullOrEmpty( const char *str );
 

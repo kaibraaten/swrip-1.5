@@ -1,5 +1,5 @@
-#include <algorithm>
 #include <cstring>
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "log.hpp"

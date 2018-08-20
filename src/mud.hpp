@@ -334,8 +334,6 @@ public:
 class ExtraDescription
 {
 public:
-  ExtraDescription *Next = nullptr;       /* Next in list                     */
-  ExtraDescription *Previous = nullptr;       /* Previous in list                 */
   char             *Keyword = nullptr;              /* Keyword in look/examine          */
   char             *Description = nullptr;          /* What to see                      */
 };
@@ -1348,7 +1346,6 @@ void ReadComment( Character *ch, FILE *fp );
 void WriteComments( const Character *ch, FILE *fp );
 
 /* db.c */
-std::list<ExtraDescription*> OldStyleExtraListToNew(ExtraDescription *extraList);
 void ShutdownMud( const std::string &reason );
 void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
                 const std::string &loadst, const std::string &notloadst );
@@ -1592,36 +1589,5 @@ const char *GetCharacterRace( const Character *ch );
 #define GET_BETTED_ON(ch)    ((ch)->BettedOn)
 #define GET_BET_AMT(ch) ((ch)->BetAmount)
 #define IN_ARENA(ch)            (IsBitSet((ch)->InRoom->Flags, ROOM_ARENA))
-
-template<typename Container, typename UnaryPredicate>
-auto Filter(const Container &original, UnaryPredicate pred)
-{
-  Container filteredElements;
-  copy_if(std::begin(original),
-          std::end(original),
-          std::begin(filteredElements),
-          pred);
-  return filteredElements;
-}
-
-template<typename Container>
-auto Reverse(const Container &original)
-{
-  Container reversed(std::rbegin(original), std::rend(original));
-  return reversed;
-}
-
-template<typename Container, typename UnaryPredicate>
-auto Find(const Container &original, UnaryPredicate pred)
-{
-  auto i = find_if(std::begin(original), std::end(original), pred);
-  return i != std::end(original) ? *i : nullptr;
-}
-
-template<typename Container, typename UnaryPredicate>
-size_t Count(const Container &container, UnaryPredicate pred)
-{
-  return count_if(std::begin(container), std::end(container), pred);
-}
 
 #endif /* include guard */

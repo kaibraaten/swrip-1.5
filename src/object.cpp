@@ -4,12 +4,19 @@
 #include "constants.hpp"
 #include "log.hpp"
 
+struct Object::Impl
+{
+  std::list<ExtraDescription*> ExtraDescriptions;
+};
+
 Object::Object()
+  : pImpl(new Impl())
 {
   Value.fill(0);
 }
 
 Object::Object(ProtoObject *pObjIndex, int level)
+  : pImpl(new Impl())
 {
   Value.fill(0);
 
@@ -35,7 +42,6 @@ Object::Object(ProtoObject *pObjIndex, int level)
     }
 
   obj->Weight           = pObjIndex->Weight;
-
   obj->Cost             = pObjIndex->Cost;
 
   /*
@@ -47,7 +53,6 @@ Object::Object(ProtoObject *pObjIndex, int level)
       Log->Bug( "%s: vnum %d bad type.", __FUNCTION__, pObjIndex->Vnum );
       Log->Bug( "------------------------>     ", obj->ItemType );
       break;
-
 
     case ITEM_FIGHTERCOMP:
     case ITEM_MIDCOMP:
@@ -63,7 +68,7 @@ Object::Object(ProtoObject *pObjIndex, int level)
     case ITEM_COMLINK:
     case ITEM_MEDPAC:
     case ITEM_FABRIC:
-      case ITEM_RARE_METAL:
+    case ITEM_RARE_METAL:
     case ITEM_MAGNET:
     case ITEM_THREAD:
     case ITEM_CHEMICAL:
@@ -117,7 +122,7 @@ Object::Object(ProtoObject *pObjIndex, int level)
     case ITEM_DIAL:
     case ITEM_TRAP:
     case ITEM_MAP:
-      case ITEM_PAPER:
+    case ITEM_PAPER:
     case ITEM_PEN:
     case ITEM_LOCKPICK:
     case ITEM_FUEL:
@@ -210,5 +215,20 @@ Object::Object(ProtoObject *pObjIndex, int level)
 
 Object::~Object()
 {
+  delete pImpl;
+}
 
+void Object::Add(ExtraDescription *extraDescription)
+{
+  pImpl->ExtraDescriptions.push_back(extraDescription);
+}
+
+void Object::Remove(ExtraDescription *extraDescription)
+{
+  pImpl->ExtraDescriptions.remove(extraDescription);
+}
+
+const std::list<ExtraDescription*> &Object::ExtraDescriptions() const
+{
+  return pImpl->ExtraDescriptions;
 }

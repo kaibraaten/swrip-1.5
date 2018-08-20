@@ -645,6 +645,36 @@ char *TrimString( char *string, char junk )
   return string;
 }
 
+std::string TrimStringStart( const std::string &str, char junk )
+{
+  const auto strBegin = str.find_first_not_of(junk);
+
+  if (strBegin == std::string::npos)
+    return ""; // no content
+
+  return str.substr(strBegin);
+}
+
+std::string TrimStringEnd( const std::string &str, char junk )
+{
+  const auto strEnd = str.find_last_not_of(junk);
+
+  return str.substr(0, strEnd + 1);
+}
+
+std::string TrimString( const std::string &str, char junk )
+{
+  const auto strBegin = str.find_first_not_of(junk);
+
+  if (strBegin == std::string::npos)
+    return ""; // no content
+
+  const auto strEnd = str.find_last_not_of(junk);
+  const auto strRange = strEnd - strBegin + 1;
+
+  return str.substr(strBegin, strRange);
+}
+
 /*
  * Find the position of a target substring in a source string.
  * Returns pointer to the first occurrence of the string pointed to

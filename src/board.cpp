@@ -23,6 +23,7 @@
 #include <cctype>
 #include <ctime>
 #include <cstring>
+#include <utility/algorithms.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "editor.hpp"
@@ -1176,7 +1177,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
           return;
         }
 
-      const auto extraDescriptions(OldStyleExtraListToNew(paper->FirstExtraDescription));
+      const auto extraDescriptions(paper->ExtraDescriptions());
       
       if ( (subject = GetExtraDescription( "_subject_", extraDescriptions )) == NULL )
         subject = "(no subject)";
@@ -1258,7 +1259,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
       Act( AT_ACTION, "$n uploads a message.", ch, NULL, NULL, TO_ROOM );
 
-      const auto extraDescriptions(OldStyleExtraListToNew(paper->FirstExtraDescription));
+      const auto extraDescriptions(paper->ExtraDescriptions());
       
       char *strtime                     = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
@@ -1482,7 +1483,7 @@ Board *FindBoardHere( const Character *ch )
     {
       Board *board = GetBoardFromObject(obj);
       
-      if ( board == nullptr )
+      if ( board != nullptr )
 	{
 	  return board;
 	}

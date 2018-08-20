@@ -13,11 +13,13 @@ public:
   ProtoObject() = delete;
   ProtoObject(vnum_t vnum);
   virtual ~ProtoObject();
+
+  const std::list<ExtraDescription*> &ExtraDescriptions() const;
+  void Add(ExtraDescription *extraDescription);
+  void Remove(ExtraDescription *extraDescription);
   
   ProtoObject   *Next = nullptr;
   ProtoObject   *NextSort = nullptr;
-  ExtraDescription *FirstExtraDescription = nullptr;
-  ExtraDescription *LastExtraDescription = nullptr;
   Affect      *FirstAffect = nullptr;
   Affect      *LastAffect = nullptr;
   char             *Name = nullptr;
@@ -38,6 +40,10 @@ public:
   int               Rent = 0;                   /* Unused */
 
   MProg mprog;
+
+private:
+  struct Impl;
+  Impl *pImpl = nullptr;
 };
 
 #endif

@@ -32,10 +32,10 @@
 #define _POSIX_SOURCE
 #endif
 
-#include <algorithm>
 #include <cassert>
 #include <cstring>
 #include <cctype>
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "shop.hpp"
@@ -781,8 +781,6 @@ static bool HasAnyOvalues( const Object *obj )
  */
 void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, short os_type )
 {
-  ExtraDescription *ed = NULL;
-  Affect *paf = NULL;
   short wear = 0, wear_loc = 0, x = 0;
 
   if ( iNest >= MAX_NEST )
@@ -979,7 +977,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
       break;
     }
 
-  for ( paf = obj->FirstAffect; paf; paf = paf->Next )
+  for ( const Affect *paf = obj->FirstAffect; paf; paf = paf->Next )
     {
       /*
        * Save extra object affects                              -Thoric
@@ -1016,7 +1014,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
 	}
     }
 
-  for ( ed = obj->FirstExtraDescription; ed; ed = ed->Next )
+  for(const ExtraDescription *ed : obj->ExtraDescriptions())
     {
       fprintf( fp, "ExtraDescr   %s~ %s~\n",
 	       ed->Keyword, ed->Description );
@@ -2138,7 +2136,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
               ed->Keyword = ReadStringToTilde( fp,Log, fBootDb );
               ed->Description = ReadStringToTilde( fp,Log, fBootDb );
-              LINK(ed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
+              obj->Add(ed);
               fMatch = true;
             }
 
@@ -2379,9 +2377,6 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
       if ( !fMatch )
         {
-          ExtraDescription *ed = NULL;
-          Affect *paf = NULL;
-
           Log->Bug( "Fread_obj: no match." );
           Log->Bug( word );
           ReadToEndOfLine( fp,Log, fBootDb );
@@ -2395,16 +2390,18 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           if ( obj->ShortDescr )
             FreeMemory( obj->ShortDescr );
 
-          while ( (ed=obj->FirstExtraDescription) != NULL )
+          while( !obj->ExtraDescriptions().empty() )
             {
+              ExtraDescription *ed = obj->ExtraDescriptions().front();
+              obj->Remove(ed);
               FreeMemory( ed->Keyword );
               FreeMemory( ed->Description );
-              UNLINK( ed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
               delete ed;
             }
 
-          while ( (paf=obj->FirstAffect) != NULL )
+          while( obj->FirstAffect != nullptr )
             {
+              Affect *paf = obj->FirstAffect;
               UNLINK( paf, obj->FirstAffect, obj->LastAffect, Next, Previous );
               delete paf;
             }

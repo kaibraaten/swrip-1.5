@@ -23,6 +23,7 @@
 #include <cctype>
 #include <cstring>
 #include <cassert>
+#include <utility/algorithms.hpp>
 #include "ship.hpp"
 #include "mud.hpp"
 #include "vector3_aux.hpp"

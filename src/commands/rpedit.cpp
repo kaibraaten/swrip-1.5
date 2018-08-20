@@ -1,4 +1,5 @@
 #include <cassert>
+#include <utility/algorithms.hpp>
 #include "editor.hpp"
 #include "character.hpp"
 #include "mud.hpp"

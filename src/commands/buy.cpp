@@ -1,4 +1,5 @@
-#include <string.h>
+#include <cstring>
+#include <utility/algorithms.hpp>
 #include "shop.hpp"
 #include "mud.hpp"
 #include "character.hpp"

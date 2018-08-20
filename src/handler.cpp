@@ -19,9 +19,9 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <algorithm>
 #include <cstring>
 #include <cassert>
+#include <utility/algorithms.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "track.hpp"
@@ -1149,21 +1149,16 @@ void ExtractObject( Object *obj )
     obj->FirstAffect = obj->LastAffect = NULL;
   }
 
-  {
-    ExtraDescription *ed;
-    ExtraDescription *ed_next;
+  std::list<ExtraDescription*> extraDescriptions(obj->ExtraDescriptions());
 
-    for ( ed = obj->FirstExtraDescription; ed; ed = ed_next )
-      {
-        ed_next = ed->Next;
-        FreeMemory( ed->Description );
-        FreeMemory( ed->Keyword     );
-        delete ed;
-      }
+  for(ExtraDescription *ed : extraDescriptions)
+    {
+      FreeMemory( ed->Description );
+      FreeMemory( ed->Keyword     );
+      delete ed;
+      obj->Remove(ed);
+    }
     
-    obj->FirstExtraDescription = obj->LastExtraDescription = NULL;
-  }
-
   if ( obj == gobj_prev )
     gobj_prev = obj->Previous;
 
@@ -2114,8 +2109,6 @@ void CleanObject( ProtoObject *obj )
 {
   Affect *paf = NULL;
   Affect *paf_next = NULL;
-  ExtraDescription *ed = 0;
-  ExtraDescription *ed_next = 0;
   int oval = 0;
 
   FreeMemory( obj->Name );
@@ -2144,17 +2137,16 @@ void CleanObject( ProtoObject *obj )
   obj->FirstAffect     = NULL;
   obj->LastAffect      = NULL;
 
-  for ( ed = obj->FirstExtraDescription; ed; ed = ed_next )
+  std::list<ExtraDescription*> extraDescriptions(obj->ExtraDescriptions());
+
+  for(ExtraDescription *ed : obj->ExtraDescriptions())
     {
-      ed_next = ed->Next;
       FreeMemory( ed->Description );
       FreeMemory( ed->Keyword     );
       delete ed;
       top_ed--;
+      obj->Remove(ed);
     }
-
-  obj->FirstExtraDescription  = NULL;
-  obj->LastExtraDescription   = NULL;
 }
 
 /*
@@ -2586,8 +2578,8 @@ static Object *GroupObject( Object *obj1, Object *obj2 )
        && obj1->Level        == obj2->Level
        && obj1->Timer        == obj2->Timer
        && HasSameOvalues( obj1, obj2 )
-       && !obj1->FirstExtraDescription
-       && !obj2->FirstExtraDescription
+       && obj1->ExtraDescriptions().empty()
+       && obj2->ExtraDescriptions().empty()
        && !obj1->FirstAffect
        && !obj2->FirstAffect
        && !obj1->FirstContent

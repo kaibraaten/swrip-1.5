@@ -35,6 +35,7 @@
 #include <cctype>
 #include <cstring>
 #include <cassert>
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "shop.hpp"
 #include "character.hpp"

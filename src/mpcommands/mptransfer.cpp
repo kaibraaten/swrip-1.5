@@ -1,4 +1,4 @@
-#include <algorithm>
+#include <utility/algorithms.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
@@ -22,6 +22,7 @@ void do_mptransfer( Character *ch, char *argument )
       ch->Echo("Huh?\r\n");
       return;
     }
+
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
@@ -34,17 +35,13 @@ void do_mptransfer( Character *ch, char *argument )
   /* Put in the variable nextinroom to make this work right. -Narn */
   if ( !StrCmp( arg1, "all" ) )
     {
-      std::list<Character*> charactersToTransfer;
-
-      copy_if(std::begin(ch->InRoom->Characters()),
-              std::end(ch->InRoom->Characters()),
-              std::begin(charactersToTransfer),
-              [ch](auto candidate)
-              {
-                return candidate != ch
-                  && IsAuthed(candidate)
-                  && CanSeeCharacter(ch, candidate);
-              });
+      std::list<Character*> charactersToTransfer = Filter(ch->InRoom->Characters(),
+                                                          [ch](auto candidate)
+                                                          {
+                                                            return candidate != ch
+                                                              && IsAuthed(candidate)
+                                                              && CanSeeCharacter(ch, candidate);
+                                                          });
 
       for(Character *transferee : charactersToTransfer)
         {

@@ -1,4 +1,4 @@
-#include <algorithm>
+#include <utility/algorithms.hpp>
 #include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
@@ -6,16 +6,13 @@
 
 bool spec_newbie_pilot( Character *ch )
 {
-  std::list<Character*> newbies;
-  copy_if(std::begin(ch->InRoom->Characters()),
-          std::end(ch->InRoom->Characters()),
-          std::begin(newbies),
-          [](auto victim)
-          {
-            return !IsNpc(victim)
-              && victim->Position != POS_FIGHTING
-              && HasDiploma(victim);
-          });
+  std::list<Character*> newbies = Filter(ch->InRoom->Characters(),
+                                         [](auto victim)
+                                         {
+                                           return !IsNpc(victim)
+                                             && victim->Position != POS_FIGHTING
+                                             && HasDiploma(victim);
+                                         });
 
   for(Character *victim : newbies)
     {

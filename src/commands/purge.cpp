@@ -1,3 +1,4 @@
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"

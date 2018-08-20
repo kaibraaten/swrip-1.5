@@ -19,9 +19,9 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <algorithm>
 #include <cstring>
 #include <cctype>
+#include <utility/algorithms.hpp>
 #include "reset.hpp"
 #include "mud.hpp"
 #include "character.hpp"
@@ -232,18 +232,15 @@ bool DelRExtra( Room *room, const std::string &keywords )
 
 ExtraDescription *SetOExtra( Object *obj, const std::string &keywords )
 {
-  ExtraDescription *ed = nullptr;
-
-  for ( ed = obj->FirstExtraDescription; ed; ed = ed->Next )
-    {
-      if ( IsName( keywords, ed->Keyword ) )
-        break;
-    }
-  
-  if ( !ed )
+  ExtraDescription *ed = Find(obj->ExtraDescriptions(),
+                              [keywords](auto descr)
+                              {
+                                return IsName(keywords, descr->Keyword);
+                              });
+  if ( ed == nullptr )
     {
       ed = new ExtraDescription();
-      LINK( ed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
+      obj->Add(ed);
       ed->Keyword       = CopyString( keywords );
       ed->Description   = CopyString( "" );
       top_ed++;
@@ -254,16 +251,18 @@ ExtraDescription *SetOExtra( Object *obj, const std::string &keywords )
 
 bool DelOExtra( Object *obj, const std::string &keywords )
 {
-  ExtraDescription *rmed;
+  ExtraDescription *rmed = Find(obj->ExtraDescriptions(),
+                                [keywords](auto ed)
+                                {
+                                  return IsName( keywords, ed->Keyword );
+                                });
 
-  for ( rmed = obj->FirstExtraDescription; rmed; rmed = rmed->Next )
+  if ( rmed == nullptr )
     {
-      if ( IsName( keywords, rmed->Keyword ) )
-        break;
+      return false;
     }
-  if ( !rmed )
-    return false;
-  UNLINK( rmed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
+
+  obj->Remove(rmed);
   FreeMemory( rmed->Keyword );
   FreeMemory( rmed->Description );
   delete rmed;
@@ -273,38 +272,37 @@ bool DelOExtra( Object *obj, const std::string &keywords )
 
 ExtraDescription *SetOExtraProto( ProtoObject *obj, const std::string &keywords )
 {
-  ExtraDescription *ed;
-
-  for ( ed = obj->FirstExtraDescription; ed; ed = ed->Next )
-    {
-      if ( IsName( keywords, ed->Keyword ) )
-        break;
-    }
-  if ( !ed )
+  ExtraDescription *ed = Find(obj->ExtraDescriptions(),
+                              [keywords](auto extra)
+                              {
+                                return IsName( keywords, extra->Keyword );
+                              });
+  if ( ed == nullptr )
     {
       ed = new ExtraDescription();
-      LINK( ed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
+      obj->Add(ed);
       ed->Keyword       = CopyString( keywords );
       ed->Description   = CopyString( "" );
       top_ed++;
     }
+
   return ed;
 }
 
 bool DelOExtraProto( ProtoObject *obj, const std::string &keywords )
 {
-  ExtraDescription *rmed;
+  ExtraDescription *rmed = Find(obj->ExtraDescriptions(),
+                                [keywords](auto ed)
+                                {
+                                  return IsName( keywords, ed->Keyword );
+                                });
 
-  for ( rmed = obj->FirstExtraDescription; rmed; rmed = rmed->Next )
+  if ( rmed == nullptr )
     {
-      if ( IsName( keywords, rmed->Keyword ) )
-        break;
+      return false;
     }
-  
-  if ( !rmed )
-    return false;
 
-  UNLINK( rmed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
+  obj->Remove(rmed);
   FreeMemory( rmed->Keyword );
   FreeMemory( rmed->Description );
   delete rmed;
@@ -540,7 +538,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
                pObjIndex->Rent ? pObjIndex->Rent :
                (int) (pObjIndex->Cost / 10)             );
 
-      for ( const ExtraDescription *ed = pObjIndex->FirstExtraDescription; ed; ed = ed->Next )
+      for ( const ExtraDescription *ed : pObjIndex->ExtraDescriptions() )
         fprintf( fpout, "E\n%s~\n%s~\n",
                  ed->Keyword, StripCarriageReturn( ed->Description )       );
 
