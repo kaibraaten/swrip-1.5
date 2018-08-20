@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "craft.hpp"
@@ -10,10 +10,10 @@
 
 struct UserData
 {
-  char *ItemName;
-  int GemType;
-  int GemCount;
-  int Charge;
+  char *ItemName = nullptr;
+  int GemType = 0;
+  int GemCount = 0;
+  int Charge = 0;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
@@ -124,7 +124,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   hitroll->Duration           = -1;
   hitroll->Location           = GetAffectType( "hitroll" );
   hitroll->Modifier           = urange( 0, ud->GemCount, lightsaber->Level / 30 );
-  LINK( hitroll, lightsaber->FirstAffect, lightsaber->LastAffect, Next, Previous );
+  lightsaber->Add(hitroll);
   ++top_affect;
 
   Affect *parry = new Affect();
@@ -132,7 +132,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   parry->Duration           = -1;
   parry->Location           = GetAffectType( "parry" );
   parry->Modifier           = lightsaber->Level / 3;
-  LINK( parry, lightsaber->FirstAffect, lightsaber->LastAffect, Next, Previous );
+  lightsaber->Add(parry);
   ++top_affect;
 
   lightsaber->Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;

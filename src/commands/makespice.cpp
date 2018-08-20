@@ -8,9 +8,9 @@
 
 struct UserData
 {
-  char *ItemName;
-  int SpiceType;
-  int SpiceGrade;
+  char *ItemName = nullptr;
+  int SpiceType = 0;
+  int SpiceGrade = 0;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );

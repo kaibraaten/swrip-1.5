@@ -17,11 +17,13 @@ public:
   const std::list<ExtraDescription*> &ExtraDescriptions() const;
   void Add(ExtraDescription *extraDescription);
   void Remove(ExtraDescription *extraDescription);
+
+  const std::list<Affect*> &Affects() const;
+  void Add(Affect *affect);
+  void Remove(Affect *affect);
   
   ProtoObject   *Next = nullptr;
   ProtoObject   *NextSort = nullptr;
-  Affect      *FirstAffect = nullptr;
-  Affect      *LastAffect = nullptr;
   char             *Name = nullptr;
   char             *ShortDescr = nullptr;
   char             *Description = nullptr;

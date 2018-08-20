@@ -7,8 +7,8 @@
 
 struct UserData
 {
-  char *ItemName;
-  int WearLocation;
+  char *ItemName = nullptr;
+  int WearLocation = 0;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );

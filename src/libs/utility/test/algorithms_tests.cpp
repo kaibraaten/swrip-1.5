@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <utility/algorithms.hpp>
-
+#include <numeric>
 class Person
 {
 public:
@@ -148,4 +148,23 @@ TEST_F(AlgorithmsTests, Find_NonExistantReturnsNullptr)
   Person *nobody = Find(People, [](const auto p){ return p->Age == 123456; });
 
   EXPECT_EQ(nullptr, nobody);
+}
+
+TEST_F(AlgorithmsTests, Learning_accumulate)
+{
+  int expectedSumOfAges = 0;
+
+  for(const Person *person : People)
+    {
+      expectedSumOfAges += person->Age;
+    }
+
+  int actualSumOfAges = accumulate(std::begin(People), std::end(People), 0,
+                                   [](int sumSoFar, auto person)
+                                   {
+                                     return sumSoFar + person->Age;
+                                   });
+
+
+  EXPECT_EQ(expectedSumOfAges, actualSumOfAges);
 }

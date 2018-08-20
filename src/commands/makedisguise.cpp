@@ -7,9 +7,9 @@
 
 struct UserData
 {
-  int Race;
-  int Sex;
-  char *Name;
+  int Race = 0;
+  int Sex = 0;
+  char *Name = nullptr;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );

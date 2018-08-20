@@ -7,9 +7,9 @@
 
 struct UserData
 {
-  int Charge;
-  bool HasStaff;
-  char *ItemName;
+  int Charge = 0;
+  bool HasStaff = false;
+  char *ItemName = nullptr;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
@@ -115,20 +115,19 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   backstab->Modifier           = weapon->Level / 3;
   backstab->AffectedBy         = 0;
   backstab->Next               = NULL;
-  LINK( backstab, weapon->FirstAffect, weapon->LastAffect, Next, Previous );
+  weapon->Add(backstab);
   ++top_affect;
 
   if ( !ud->HasStaff )
     {
       Affect *hitroll = new Affect();
-
       hitroll->Type               = -1;
       hitroll->Duration           = -1;
       hitroll->Location           = GetAffectType( "hitroll" );
       hitroll->Modifier           = -2;
       hitroll->AffectedBy         = 0;
       hitroll->Next               = NULL;
-      LINK( hitroll, weapon->FirstAffect, weapon->LastAffect, Next, Previous );
+      weapon->Add(hitroll);
       ++top_affect;
     }
 

@@ -568,17 +568,17 @@ Object *GetEquipmentOnCharacter( const Character *ch, WearLocation iWear )
  */
 void EquipCharacter( Character *ch, Object *obj, WearLocation iWear )
 {
-  Affect *paf;
-  Object      *otmp;
+  Object *otmp = GetEquipmentOnCharacter( ch, iWear );
 
-  if ( (otmp=GetEquipmentOnCharacter( ch, iWear )) != NULL
-       &&   (!otmp->Prototype->Layers || !obj->Prototype->Layers) )
+  if ( otmp != nullptr
+       &&  (otmp->Prototype->Layers == 0 || obj->Prototype->Layers == 0) )
     {
       Log->Bug( "%s: already equipped (%d).", __FUNCTION__, iWear );
       return;
     }
 
   SeparateOneObjectFromGroup(obj);    /* just in case */
+
   if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IsEvil(ch)    )
        ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IsGood(ch)    )
        ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IsNeutral(ch) ) )
@@ -591,12 +591,16 @@ void EquipCharacter( Character *ch, Object *obj, WearLocation iWear )
           Act( AT_MAGIC, "You are zapped by $p and drop it.", ch, obj, NULL, TO_CHAR );
           Act( AT_MAGIC, "$n is zapped by $p and drops it.",  ch, obj, NULL, TO_ROOM );
         }
+
       if ( obj->CarriedBy )
         ObjectFromCharacter( obj );
+
       ObjectToRoom( obj, ch->InRoom );
       ObjProgZapTrigger( ch, obj);
+
       if ( IsBitSet(SysData.SaveFlags, SV_ZAPDROP) && !CharacterDiedRecently(ch) )
         SaveCharacter( ch );
+
       return;
     }
 
@@ -604,13 +608,14 @@ void EquipCharacter( Character *ch, Object *obj, WearLocation iWear )
   obj->WearLoc  = iWear;
 
   ch->CarryNumber      -= GetObjectCount( obj );
+
   if ( IsBitSet( obj->Flags, ITEM_MAGIC ) || obj->WearLoc == WEAR_FLOATING )
     ch->CarryWeight  -= GetObjectWeight( obj );
 
-  for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
+  for(Affect *paf : obj->Prototype->Affects())
     ModifyAffect( ch, paf, true );
 
-  for ( paf = obj->FirstAffect; paf; paf = paf->Next )
+  for(Affect *paf : obj->Affects())
     ModifyAffect( ch, paf, true );
 
   if ( obj->ItemType == ITEM_LIGHT
@@ -624,8 +629,6 @@ void EquipCharacter( Character *ch, Object *obj, WearLocation iWear )
  */
 void UnequipCharacter( Character *ch, Object *obj )
 {
-  Affect *paf;
-
   if ( obj->WearLoc == WEAR_NONE )
     {
       Log->Bug( "%s: already unequipped.", __FUNCTION__ );
@@ -639,11 +642,11 @@ void UnequipCharacter( Character *ch, Object *obj )
   ch->ArmorClass += GetObjectArmorClass( obj, obj->WearLoc );
   obj->WearLoc  = WEAR_NONE;
 
-  for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
+  for(Affect *paf : obj->Prototype->Affects())
     ModifyAffect( ch, paf, false );
 
   if ( obj->CarriedBy )
-    for ( paf = obj->FirstAffect; paf; paf = paf->Next )
+    for(Affect *paf : obj->Affects())
       ModifyAffect( ch, paf, false );
 
   if ( !obj->CarriedBy )

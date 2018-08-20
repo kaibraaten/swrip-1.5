@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <numeric>
 #include <cassert>
 #include <cstring>
 #include <cctype>
@@ -591,24 +592,31 @@ static int GetWeaponProficiencyBonus( const Character *ch, const Object *wield, 
  */
 static int GetObjectHitrollBonus( const Object *obj )
 {
-  int tohit = 0;
-  const Affect *paf = NULL;
+  int tohit = accumulate(std::begin(obj->Prototype->Affects()),
+                         std::end(obj->Prototype->Affects()),
+                         0,
+                         [](int sumSoFar, const auto affect)
+                         {
+                           if(affect->Location == APPLY_HITROLL)
+                             {
+                               sumSoFar += affect->Modifier;
+                             }
 
-  for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
-    {
-      if ( paf->Location == APPLY_HITROLL )
-	{
-	  tohit += paf->Modifier;
-	}
-    }
-
-  for ( paf = obj->FirstAffect; paf; paf = paf->Next )
-    {
-      if ( paf->Location == APPLY_HITROLL )
-	{
-	  tohit += paf->Modifier;
-	}
-    }
+                           return sumSoFar;
+                         });
+  
+  tohit += accumulate(std::begin(obj->Affects()),
+                      std::end(obj->Affects()),
+                      0,
+                      [](int sumSoFar, const auto affect)
+                      {
+                        if(affect->Location == APPLY_HITROLL)
+                          {
+                            sumSoFar += affect->Modifier;
+                          }
+                        
+                        return sumSoFar;
+                      });
 
   return tohit;
 }
@@ -1106,22 +1114,20 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
        &&  !IsBitSet(victim->Immune, RIS_MAGIC)
        &&  !IsBitSet(victim->InRoom->Flags, ROOM_NO_MAGIC) )
     {
-      Affect *aff;
-
-      for ( aff = wield->Prototype->FirstAffect; aff; aff = aff->Next )
+      for(const Affect *aff : wield->Prototype->Affects())
         if ( aff->Location == APPLY_WEAPONSPELL
              &&   IS_VALID_SN(aff->Modifier)
              &&   SkillTable[aff->Modifier]->SpellFunction )
-          retcode = (*SkillTable[aff->Modifier]->SpellFunction) ( aff->Modifier, (wield->Level+3)/3, ch, victim );
+          retcode = SkillTable[aff->Modifier]->SpellFunction( aff->Modifier, (wield->Level+3)/3, ch, victim );
 
       if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
         return retcode;
 
-      for ( aff = wield->FirstAffect; aff; aff = aff->Next )
+      for(const Affect *aff : wield->Affects())
         if ( aff->Location == APPLY_WEAPONSPELL
              &&   IS_VALID_SN(aff->Modifier)
              &&   SkillTable[aff->Modifier]->SpellFunction )
-          retcode = (*SkillTable[aff->Modifier]->SpellFunction) ( aff->Modifier, (wield->Level+3)/3, ch, victim );
+          retcode = SkillTable[aff->Modifier]->SpellFunction( aff->Modifier, (wield->Level+3)/3, ch, victim );
 
       if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
         return retcode;
