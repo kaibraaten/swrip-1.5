@@ -32,7 +32,63 @@
 #include "character.hpp"
 #include "room.hpp"
 
+#define SHUTTLE_DIR     DATA_DIR "shuttles/"
+
 ShuttleRepository *Shuttles = nullptr;
+
+///////////////////////////////////////////////////////////
+struct Shuttle::Impl
+{
+  std::vector<ShuttleStop*> Stops;
+};
+
+///////////////////////////////////////////////////////////
+Shuttle::Shuttle()
+  : pImpl(new Impl())
+{
+
+}
+
+Shuttle::~Shuttle()
+{
+  delete pImpl;
+}
+
+void Shuttle::Add(ShuttleStop *stop)
+{
+  pImpl->Stops.push_back(stop);
+}
+
+void Shuttle::Remove(ShuttleStop *stop)
+{
+  auto pos = find(std::begin(pImpl->Stops), std::end(pImpl->Stops), stop);
+
+  if(pos != std::end(pImpl->Stops))
+    {
+      pImpl->Stops.erase(pos);
+    }
+}
+
+const std::vector<ShuttleStop*> &Shuttle::Stops() const
+{
+  return pImpl->Stops;
+}
+
+ShuttleStop *Shuttle::CurrentStop() const
+{
+  ShuttleStop *stop = nullptr;
+  
+  if(CurrentNumber >= 0)
+    {
+      assert(!pImpl->Stops.empty());
+      assert(CurrentNumber < static_cast<int>(pImpl->Stops.size()));
+      stop = pImpl->Stops[CurrentNumber];
+    }
+
+  return stop;
+}
+
+///////////////////////////////////////////////////////////
 
 ShuttleStop *AllocateShuttleStop( void )
 {
@@ -70,12 +126,11 @@ static void PushStop( lua_State *L, const ShuttleStop *stop, const int idx )
 
 static void PushStops( lua_State *L, const Shuttle *shuttle )
 {
-  const ShuttleStop *stop = NULL;
   int idx = 0;
   lua_pushstring( L, "Stops" );
   lua_newtable( L );
 
-  for( stop = shuttle->FirstStop; stop; stop = stop->Next )
+  for(const ShuttleStop *stop : shuttle->Stops())
     {
       PushStop( L, stop, ++idx );
     }
@@ -105,7 +160,7 @@ static void PushShuttle( lua_State *L, const void *userData )
   LuaSetfieldNumber( L, "Delay", shuttle->Delay );
   LuaSetfieldNumber( L, "CurrentDelay", shuttle->CurrentDelay );
 
-  if( shuttle->CurrentStop )
+  if( shuttle->CurrentStop() != nullptr )
     {
       LuaSetfieldNumber( L, "CurrentStop", shuttle->CurrentNumber );
     }
@@ -135,14 +190,14 @@ void ShuttleUpdate( void )
   for(Shuttle *shuttle : Shuttles->Entities())
     {
       /* No Stops? Make sure we ignore */
-      if (shuttle->FirstStop == NULL)
+      if (shuttle->Stops().empty())
 	{
 	  continue;
 	}
 
-      if (shuttle->CurrentStop == NULL)
+      if (shuttle->CurrentStop() == nullptr)
 	{
-	  shuttle->CurrentStop = shuttle->FirstStop;
+	  shuttle->CurrentNumber = 0;
 	  continue;
 	}
 
@@ -155,14 +210,13 @@ void ShuttleUpdate( void )
           if (shuttle->State == SHUTTLE_STATE_TAKINGOFF)
             {
               /* Move to next spot */
-              if (shuttle->CurrentStop->Next == NULL)
+              //if (shuttle->CurrentNumber == static_cast<int>(shuttle->Stops().size()) - 1)
+              if(shuttle->CurrentStop() == shuttle->Stops().back())
                 {
-                  shuttle->CurrentStop = shuttle->FirstStop;
-                  shuttle->CurrentNumber = 1;
+                  shuttle->CurrentNumber = 0;
                 }
               else
                 {
-                  shuttle->CurrentStop = shuttle->CurrentStop->Next;
                   shuttle->CurrentNumber++;
                 }
 
@@ -177,16 +231,16 @@ void ShuttleUpdate( void )
               if ( shuttle->Type == SHUTTLE_TURBOCAR )
 		{
 		  sprintf( buf,
-			    "An electronic voice says, 'Preparing for departure.'\r\n"
-			    "It continues, 'Next stop, %s'",
-			    shuttle->CurrentStop->Name);
+                           "An electronic voice says, 'Preparing for departure.'\r\n"
+                           "It continues, 'Next stop, %s'",
+                           shuttle->CurrentStop()->Name);
 		}
               else
 		{
 		  sprintf( buf,
-			    "An electronic voice says, 'Preparing for launch.'\r\n"
-			    "It continues, 'Next stop, %s'",
-			    shuttle->CurrentStop->Name);
+                           "An electronic voice says, 'Preparing for launch.'\r\n"
+                           "It continues, 'Next stop, %s'",
+                           shuttle->CurrentStop()->Name);
 		}
 
               for (room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
@@ -221,7 +275,7 @@ void ShuttleUpdate( void )
               else
                 {
                   Log->Bug("%s, %s, %d: '%s' shuttle->InRoom == nullptr, shuttle->CurrentStop == vnum %ld",
-                           __FILE__, __FUNCTION__, __LINE__, shuttle->Name, shuttle->CurrentStop->RoomVnum);
+                           __FILE__, __FUNCTION__, __LINE__, shuttle->Name, shuttle->CurrentStop()->RoomVnum);
                 }
               
               ExtractShuttle( shuttle );
@@ -272,12 +326,12 @@ void ShuttleUpdate( void )
 
               /* action_desc */
               sprintf( buf,
-                        "An electronic voice says, 'Welcome to %s'\r\n"
-                        "It continues, 'Please exit through the %s. Enjoy your stay.'",
-                        shuttle->CurrentStop->Name,
-                        shuttle->Type == SHUTTLE_TURBOCAR ? "doors" : "main ramp" );
+                       "An electronic voice says, 'Welcome to %s'\r\n"
+                       "It continues, 'Please exit through the %s. Enjoy your stay.'",
+                       shuttle->CurrentStop()->Name,
+                       shuttle->Type == SHUTTLE_TURBOCAR ? "doors" : "main ramp" );
 
-              InsertShuttle(shuttle, GetRoom(shuttle->CurrentStop->RoomVnum));
+              InsertShuttle(shuttle, GetRoom(shuttle->CurrentStop()->RoomVnum));
 
               for (room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
                 {
@@ -443,7 +497,7 @@ static void LoadStop( lua_State *L, Shuttle *shuttle )
     }
 
   lua_pop( L, elementsToPop );
-  LINK( stop, shuttle->FirstStop, shuttle->LastStop, Next, Previous );
+  shuttle->Add(stop);
 }
 
 static void LoadStops( lua_State *L, Shuttle *shuttle )
@@ -533,30 +587,14 @@ static int L_ShuttleEntry( lua_State *L )
       shuttle->Rooms.Entrance = shuttle->Rooms.First;
     }
   
-  if (shuttle->CurrentNumber != -1)
-    {
-      int count = 0;
-      ShuttleStop * stop = NULL;
-
-      for (stop = shuttle->FirstStop; stop; stop = stop->Next)
-	{
-	  count++;
-	  
-	  if (count == shuttle->CurrentNumber)
-	    {
-	      shuttle->CurrentStop = stop;
-	    }
-	}
-    }
-  else
+  if (shuttle->CurrentNumber == -1 && !shuttle->Stops().empty())
     {
       shuttle->CurrentNumber = 0;
-      shuttle->CurrentStop = shuttle->FirstStop;
     }
 
-  if (shuttle->CurrentStop)
+  if (shuttle->CurrentStop() != nullptr)
     {
-      InsertShuttle(shuttle, GetRoom(shuttle->CurrentStop->RoomVnum));
+      InsertShuttle(shuttle, GetRoom(shuttle->CurrentStop()->RoomVnum));
     }
 
   return 0;
@@ -569,13 +607,8 @@ static void ExecuteShuttleFile( const std::string &filePath, void *userData )
 
 static void FreeShuttle( Shuttle *shuttle )
 {
-  ShuttleStop *stop = NULL;
-  ShuttleStop *stop_next = NULL;
-
-  for ( stop =  shuttle->FirstStop; stop ; stop = stop_next)
+  for(ShuttleStop *stop : shuttle->Stops())
     {
-      stop_next = stop->Next;
-
       if (stop->Name)
         {
           FreeMemory(stop->Name);

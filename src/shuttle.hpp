@@ -24,18 +24,15 @@
 #define _SWRIP_SHUTTLE_HPP_
 
 #include <list>
+#include <vector>
 #include <string>
 #include <utility/repository.hpp>
 #include "types.hpp"
 #include "constants.hpp"
 
-#define SHUTTLE_DIR     DATA_DIR "shuttles/"
-
 class ShuttleStop
 {
 public:
-  ShuttleStop *Previous = nullptr; /* Previous Stop */
-  ShuttleStop *Next = nullptr; /* Next Stop */
   char      *Name = nullptr; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
   vnum_t     RoomVnum = INVALID_VNUM;
 };
@@ -63,19 +60,20 @@ typedef int ShuttleClass;
 class Shuttle
 {
 public:
-  Shuttle* NextInRoom = nullptr;
-  Shuttle* PreviousInRoom = nullptr;
+  Shuttle();
+  virtual ~Shuttle();
 
+  void Add(ShuttleStop *stop);
+  void Remove(ShuttleStop *stop);
+  const std::vector<ShuttleStop*> &Stops() const;
+  
   Room *InRoom = nullptr;
 
   /* HOTBOOT info, save vnum of current, then loop through on load to find it */
-  ShuttleStop *CurrentStop = nullptr;
+  ShuttleStop *CurrentStop() const;
   int CurrentNumber = -1;
 
   int State = SHUTTLE_STATE_LANDED;
-
-  ShuttleStop *FirstStop = nullptr;
-  ShuttleStop *LastStop = nullptr;
 
   ShuttleClass Type = SHUTTLE_TURBOCAR;
 
@@ -93,6 +91,10 @@ public:
     vnum_t Last = ROOM_VNUM_LIMBO;
     vnum_t Entrance = ROOM_VNUM_LIMBO;
   } Rooms;
+
+private:
+  struct Impl;
+  Impl *pImpl = nullptr;
 };
 
 #ifndef MSL
