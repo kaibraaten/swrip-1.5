@@ -26,10 +26,6 @@ void do_makeclan( Character *ch, char *argument )
   clan->Leadership.Number2 = CopyString( "" );
   clan->tmpstr             = CopyString( "" );
 
-  ClanMemberList *memberList = new ClanMemberList();
-  memberList->Name = CopyString( clan->Name );
-  LINK( memberList, FirstClanMemberList, LastClanMemberList, Next, Previous );
-
   Clans->Save( clan );
 }
 

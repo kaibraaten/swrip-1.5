@@ -22,7 +22,11 @@ public:
   const std::list<Clan*> &Subclans() const;
   void Add(Clan *clan);
   void Remove(Clan *clan);
-  
+
+  const std::list<ClanMember*> &Members() const;
+  void Add(ClanMember *member);
+  void Remove(ClanMember *member);
+
   Clan  *MainClan = nullptr;
   char  *Name = nullptr;           /* Clan name                            */
   char  *Description = nullptr;    /* A brief description of the clan      */
@@ -64,35 +68,19 @@ public:
   int           Deaths = 0; /* Pdeaths for clans, mdeaths for guilds/orders */
   int           Kills = 0;  /* Pkills for clans, mkills for guilds/orders */
   time_t        LastActivity = 0;
-  ClanMember  *Next = nullptr;  /* Next member */
-  ClanMember  *Previous = nullptr;  /* Prev member */
-};
-
-class ClanMemberList
-{
-public:
-  char          *Name = nullptr;          /* Clan name */
-  ClanMember   *FirstMember = nullptr;  /* First Member */
-  ClanMember   *LastMember = nullptr;   /* Last Member */
-  ClanMemberList   *Next = nullptr;          /* Next clan */
-  ClanMemberList   *Previous = nullptr;          /* Prev clan */
 };
 
 extern ClanRepository *Clans;
-extern ClanMemberList *FirstClanMemberList;
-extern ClanMemberList *LastClanMemberList;
 
 #define GUILD_PRICE 100000
 
 void SaveClanStoreroom( Character *ch, const Clan *clan );
-void ShowClanMembers( const Character *ch, const std::string &clanName, const std::string &format );
+void ShowClanMembers( const Character *ch, const Clan *clan, const std::string &format = "");
 Clan *GetClan( const std::string &name );
 void UpdateClanMember( const Character *ch );
 void RemoveClanMember( const Character *ch );
-ClanMemberList *GetMemberList( const Clan *clan );
 Clan *AllocateClan( void );
 void FreeClan( Clan *clan );
-size_t CountClanMembers( const Clan *clan );
 void AssignGuildToMainclan(Clan *guild);
 void AssignGuildToMainclan( Clan *guild, Clan *mainClan );
 const char *GetClanFilename( const Clan *clan );

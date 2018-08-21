@@ -21,7 +21,7 @@ public:
 
   struct
   {
-    struct Clan *Clan = NULL;
+    class Clan *Clan = NULL;
     char *ClanName = NULL;
     int Salary = 0;
     long SalaryDate = 0;

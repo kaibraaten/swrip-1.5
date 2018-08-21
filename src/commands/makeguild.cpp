@@ -11,7 +11,6 @@ void do_makeguild( Character *ch, char *argument )
   char faction[MAX_INPUT_LENGTH];
   Clan *guild = NULL;
   Clan *mainClan = NULL;
-  ClanMemberList *memberList = NULL;
   argument = OneArgument( argument, faction );
   
   if ( IsNullOrEmpty( faction ) || IsNullOrEmpty( argument ) )
@@ -81,10 +80,6 @@ void do_makeguild( Character *ch, char *argument )
   guild->tmpstr             = CopyString( mainClan->Name );
   guild->FoundationDate = current_time;
 
-  memberList = new ClanMemberList();
-  memberList->Name = CopyString( guild->Name );
-  LINK( memberList, FirstClanMemberList, LastClanMemberList, Next, Previous );
-
   AssignGuildToMainclan( guild, mainClan );
   Clans->Save( guild );
   ch->PCData->ClanInfo.Clan = guild;
@@ -92,7 +87,7 @@ void do_makeguild( Character *ch, char *argument )
   UpdateClanMember( ch );
 
   ch->Echo("&GCongratulations, your new guild %s has been successfully created!\r\n",
-	guild->Name );
+           guild->Name );
   ch->Echo("See HELP GUILD to get started.&d\r\n" );
 }
 

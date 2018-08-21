@@ -23,6 +23,7 @@
 #include <cstring>
 #include <ctime>
 #include <cassert>
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
@@ -37,17 +38,14 @@ static Object *rgObjNest[MAX_NEST];
 
 ClanRepository *Clans = nullptr;
 
-ClanMemberList *FirstClanMemberList = nullptr;
-ClanMemberList *LastClanMemberList = nullptr;
-
 /* local routines */
 /*static void LoadClanStoreroom( const Clan *clan );*/
-static ClanMember *GetMemberData( const ClanMemberList*, const char *memberName );
 
 //////////////////////////////////////////////////////////////
 struct Clan::Impl
 {
   std::list<Clan*> Subclans;
+  std::list<ClanMember*> Members;
 };
 
 //////////////////////////////////////////////////////////////
@@ -79,6 +77,21 @@ void Clan::Remove(Clan *guild)
 const std::list<Clan*> &Clan::Subclans() const
 {
   return pImpl->Subclans;
+}
+
+void Clan::Add(ClanMember *member)
+{
+  pImpl->Members.push_back(member);
+}
+
+void Clan::Remove(ClanMember *member)
+{
+  pImpl->Members.remove(member);
+}
+
+const std::list<ClanMember*> &Clan::Members() const
+{
+  return pImpl->Members;
 }
 
 //////////////////////////////////////////////////////////////
@@ -192,24 +205,6 @@ void AssignGuildToMainclan( Clan *guild, Clan *mainClan )
     }
 }
 
-ClanMemberList *GetMemberList( const Clan *clan )
-{
-  ClanMemberList *members_list = NULL;
-
-  if( clan )
-    {
-      for( members_list = FirstClanMemberList; members_list; members_list = members_list->Next )
-	{
-	  if( !StrCmp( members_list->Name, clan->Name ) )
-	    {
-	      break;
-	    }
-	}
-    }
-
-  return members_list;
-}
-
 static int MoreKillsThan(const ClanMember *lhv, const ClanMember *rhv)
 {
   return lhv->Kills > rhv->Kills ? -1 : lhv->Kills < rhv->Kills ? 1 : 0;
@@ -225,14 +220,11 @@ static int LessName(const ClanMember *lhv, const ClanMember *rhv)
   return StrCmp(lhv->Name, rhv->Name);
 }
 
-void ShowClanMembers( const Character *ch, const std::string &clanName, const std::string &format )
+void ShowClanMembers( const Character *ch, const Clan *clan, const std::string &format )
 {
-  const Clan *clan = GetClan( clanName );
-  ClanMemberList *members_list = GetMemberList( clan );
   int members = 0;
 
   assert(clan != NULL);
-  assert(members_list != NULL);
 
   ch->Echo( "\r\nMembers of %s\r\n", clan->Name );
   ch->Echo( "------------------------------------------------------------------------------\r\n" );
@@ -251,7 +243,7 @@ void ShowClanMembers( const Character *ch, const std::string &clanName, const st
         {
           std::list<const ClanMember*> sortedList;
 
-          for( const ClanMember *member = members_list->FirstMember; member; member = member->Next )
+          for( const ClanMember *member : clan->Members() )
             {
               if( StrCmp( member->Name, clan->Leadership.Leader ) != 0
                   && StrCmp( member->Name, clan->Leadership.Number1 ) != 0
@@ -288,9 +280,7 @@ void ShowClanMembers( const Character *ch, const std::string &clanName, const st
         }
       else
         {
-          const ClanMember *member = NULL;
-
-          for( member = members_list->FirstMember; member; member = member->Next )
+          for(const ClanMember *member : clan->Members())
             {
               if( !StringPrefix( format, member->Name ) )
                 {
@@ -308,9 +298,7 @@ void ShowClanMembers( const Character *ch, const std::string &clanName, const st
     }
   else
     {
-      const ClanMember *member = NULL;
-
-      for( member = members_list->FirstMember; member; member = member->Next )
+      for(const ClanMember *member : clan->Members())
 	{
 	  members++;
 	  ch->Echo( "%3d  %-15s %-17s %9d %9d %19s\r\n",
@@ -335,15 +323,20 @@ void RemoveClanMember( const Character *ch )
       return;
     }
 
-  ClanMemberList *members_list = GetMemberList( ch->PCData->ClanInfo.Clan );
+  Clan *clan = ch->PCData->ClanInfo.Clan;
 
-  if( members_list )
+  if(clan != nullptr)
     {
-      ClanMember *member = GetMemberData( members_list, ch->Name );
-
-      if( member )
+      const char *name = ch->Name;
+      ClanMember *member = Find(clan->Members(),
+                                [name](const auto m)
+                                {
+                                  return StrCmp(m->Name, name) == 0;
+                                });
+      
+      if( member != nullptr )
 	{
-	  UNLINK( member, members_list->FirstMember, members_list->LastMember, Next, Previous );
+          clan->Remove(member);
 	  FreeMemory( member->Name );
 	  delete member;
 	  Clans->Save( ch->PCData->ClanInfo.Clan );
@@ -353,26 +346,29 @@ void RemoveClanMember( const Character *ch )
 
 void UpdateClanMember( const Character *ch )
 {
-  ClanMemberList *members_list = NULL;
-
   if( IsNpc( ch ) || IsImmortal(ch) || !IsClanned( ch ) )
     {
       return;
     }
 
-  members_list = GetMemberList( ch->PCData->ClanInfo.Clan );
+  Clan *clan = ch->PCData->ClanInfo.Clan;
 
-  if( members_list )
+  if( clan != nullptr )
     {
-      ClanMember *member = GetMemberData( members_list, ch->Name );
+      const char *name = ch->Name;
+      ClanMember *member = Find(clan->Members(),
+                                [name](const auto m)
+                                {
+                                  return StrCmp(m->Name, name) == 0;
+                                });
 
-      if( !member )
+      if( member != nullptr )
 	{
           member = new ClanMember();
 	  member->Name = CopyString( ch->Name );
 	  member->Since = current_time;
 
-	  LINK( member, members_list->FirstMember, members_list->LastMember, Next, Previous );
+          clan->Add(member);
 	}
 
       member->Kills = ch->PCData->PKills;
@@ -430,21 +426,6 @@ void SaveClanStoreroom( Character *ch, const Clan *clan )
       fclose( fp );
     }
 #endif
-}
-
-static ClanMember *GetMemberData( const ClanMemberList *clanMemberList, const char *memberName )
-{
-  ClanMember *member = NULL;
-
-  for( member = clanMemberList->FirstMember; member; member = member->Next )
-    {
-      if ( !StrCmp( member->Name, memberName ) )
-	{
-	  break;
-	}
-    }
-
-  return member;
 }
 
 Clan *AllocateClan( void )
@@ -515,22 +496,16 @@ static void PushMember( lua_State *L, const ClanMember *member, int idx )
 
 static void PushMembers( lua_State *L, const Clan *clan )
 {
-  const ClanMemberList *memberList = GetMemberList( clan );
+  int idx = 0;
+  lua_pushstring( L, "Members" );
+  lua_newtable( L );
 
-  if( memberList )
+  for(const ClanMember *member : clan->Members() )
     {
-      const ClanMember *member = NULL;
-      int idx = 0;
-      lua_pushstring( L, "Members" );
-      lua_newtable( L );
-
-      for( member = memberList->FirstMember; member; member = member->Next )
-	{
-	  PushMember( L, member, ++idx );
-	}
-
-      lua_settable( L, -3 );
+      PushMember( L, member, ++idx );
     }
+
+  lua_settable( L, -3 );
 }
 
 static void PushClan( lua_State *L, const void *userData )
@@ -603,7 +578,7 @@ const char *GetClanFilename( const Clan *clan )
   return fullPath;
 }
 
-static void LoadOneMember( lua_State *L, ClanMemberList *memberList )
+static void LoadOneMember( lua_State *L, Clan *clan )
 {
   int idx = lua_gettop( L );
   ClanMember *member = new ClanMember();
@@ -650,18 +625,14 @@ static void LoadOneMember( lua_State *L, ClanMemberList *memberList )
     {
       member->LastActivity = lua_tointeger( L, idx );
     }
-  
-  LINK( member, memberList->FirstMember, memberList->LastMember, Next, Previous );
+
+  clan->Add(member);
   lua_pop( L, 7 );
 }
 
-static void LoadMembers( lua_State *L, const Clan *clan )
+static void LoadMembers( lua_State *L, Clan *clan )
 {
-  ClanMemberList *memberList = new ClanMemberList();
   int idx = lua_gettop( L );
-
-  memberList->Name = CopyString( clan->Name );
-  LINK( memberList, FirstClanMemberList, LastClanMemberList, Next, Previous );
 
   lua_getfield( L, idx, "Members" );
 
@@ -671,7 +642,7 @@ static void LoadMembers( lua_State *L, const Clan *clan )
 
       while( lua_next( L, -2 ) )
 	{
-	  LoadOneMember( L, memberList );
+	  LoadOneMember( L, clan );
 	  lua_pop( L, 1 );
 	}
     }
@@ -843,20 +814,6 @@ static int L_ClanEntry( lua_State *L )
 static void ExecuteClanFile( const std::string &filePath, void *userData )
 {
   LuaLoadDataFile( filePath, L_ClanEntry, "ClanEntry" );
-}
-
-size_t CountClanMembers( const Clan *clan )
-{
-  ClanMemberList *memberList = GetMemberList( clan );
-  ClanMember *member = NULL;
-  size_t counter = 0;
-
-  for( member = memberList->FirstMember; member; member = member->Next )
-    {
-      ++counter;
-    }
-
-  return counter;
 }
 
 bool IsBountyHuntersGuild(const std::string &clanName)
