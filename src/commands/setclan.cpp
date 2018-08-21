@@ -161,7 +161,6 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      ClanMemberList *memberList = GetMemberList( clan );
       char oldFilename[MAX_STRING_LENGTH] = { '\0' };
       struct UpdateOwnerNameData data;
 
@@ -170,7 +169,7 @@ void do_setclan( Character *ch, char *argument )
 
       if( GetClan( argument ) )
 	{
-   ch->Echo("There's already another guild with that name." );
+          ch->Echo("There's already another guild with that name." );
 	  return;
 	}
 
@@ -181,9 +180,6 @@ void do_setclan( Character *ch, char *argument )
 
       FreeMemory( clan->Name );
       clan->Name = CopyString( argument );
-
-      FreeMemory( memberList->Name );
-      memberList->Name = CopyString( clan->Name );
 
       ch->Echo("Done.\r\n");
       Clans->Save(clan);

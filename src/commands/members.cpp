@@ -12,23 +12,23 @@ void do_members( Character *ch, char *argument )
 
   if( !StrCmp( argument, "all" ) )
     {
-      ClanMemberList *members_list;
-
-      for( members_list = FirstClanMemberList; members_list; members_list = members_list->Next )
+      for(const Clan *clan : Clans->Entities())
 	{
-	  ShowClanMembers( ch, members_list->Name, NULL );
+	  ShowClanMembers( ch, clan );
 	}
 
       return;
     }
 
-  if( !GetMemberList( GetClan( argument ) ) )
+  const Clan *clan = GetClan(argument);
+
+  if(clan != nullptr)
     {
-      ch->Echo("&RNo such member list.\r\n" );
+      ShowClanMembers( ch, clan );
     }
   else
     {
-      ShowClanMembers( ch, argument, NULL );
+      ch->Echo("&RNo such member list.\r\n" );
     }
 }
 
