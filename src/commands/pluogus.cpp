@@ -1,20 +1,21 @@
+#include <cassert>
 #include "character.hpp"
 #include "mud.hpp"
 #include "shuttle.hpp"
 
-static void output_shuttle(Character * ch, Shuttle * shuttle);
+static constexpr int MAX_STOPS_TO_DISPLAY = 4;
+
+static void output_shuttle(const Character *ch, const Shuttle *shuttle);
 
 void do_pluogus( Character *ch, char *argument )
 {
-  Shuttle *shuttle = nullptr;
-
   if ( !HasComlink( ch ) )
     {
       ch->Echo("You need a comlink to do that!\r\n");
       return;
     }
 
-  shuttle = Shuttles->FindByName("Serin Pluogus");
+  const Shuttle *shuttle = Shuttles->FindByName("Serin Pluogus");
 
   if (shuttle != nullptr)
     {
@@ -31,56 +32,60 @@ void do_pluogus( Character *ch, char *argument )
     }
 }
 
-static void output_shuttle(Character * ch, Shuttle * shuttle)
+static void output_shuttle(const Character *ch, const Shuttle *shuttle)
 {
-  ShuttleStop * stop = NULL;
-  int itt = 0;
-
-  if (shuttle == NULL)
+  assert(shuttle != nullptr);
+  
+  if(shuttle->Stops().empty())
     return;
-
-  if (shuttle->CurrentStop == NULL)
-    return;
-
-  if (shuttle->FirstStop == NULL)
+  
+  if (shuttle->CurrentStop() == nullptr)
     return;
 
   SetCharacterColor(AT_SHIP, ch);
   ch->Echo("%s Schedule Information:\r\n", shuttle->Name );
 
-  stop = shuttle->CurrentStop;
+  const ShuttleStop *stop = shuttle->CurrentStop();
+
   /* current port */
   if ( shuttle->State == SHUTTLE_STATE_LANDING || shuttle->State == SHUTTLE_STATE_LANDED )
     {
-      ch->Echo("Currently docked at %s.\r\n", shuttle->CurrentStop->Name );
-      stop = stop->Next;
+      ch->Echo("Currently docked at %s.\r\n", shuttle->CurrentStop()->Name );
     }
 
   ch->Echo("Next stops: ");
-  /* Safety Check */
-  if ( stop == NULL)
-    stop = shuttle->FirstStop;
 
-  itt = 0;
+  int stopsDisplayed = 0;
 
+  auto pos = std::cbegin(shuttle->Stops()) + shuttle->CurrentNumber;
+  
   while(true)
     {
-      itt++;
-      /* No stops i guess */
-      if (stop == NULL)
-	break;
+      stopsDisplayed++;
+      pos++;
 
-      if (itt > 4)
-	break;
+      if(pos == std::cend(shuttle->Stops()))
+        {
+          pos = std::cbegin(shuttle->Stops());
+        }
 
+      stop = *pos;
+      
+      if (stopsDisplayed > MAX_STOPS_TO_DISPLAY)
+        {
+          break;
+        }
+      
       if ( stop->Name )
-        ch->Echo("%s  ", stop->Name );
+        {
+          ch->Echo("%s  ", stop->Name );
+        }
       else
-        ch->Echo("(unnamed)  ");
-
-      if ( (stop = stop->Next) == NULL)
-        stop = shuttle->FirstStop;
+        {
+          ch->Echo("(unnamed)  ");
+        }
     }
+
   ch->Echo("\r\n");
 }
 

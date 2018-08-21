@@ -4,11 +4,9 @@
 
 void do_showshuttle (Character * ch, char * argument)
 {
-  ShuttleStop * stop = NULL;
-  int count = 0;
-  Shuttle * shuttle = Shuttles->FindByName(argument);
+  const Shuttle *shuttle = Shuttles->FindByName(argument);
 
-  if ( !shuttle )
+  if ( shuttle == nullptr )
     {
       if (Shuttles->Count() == 0)
         {
@@ -45,10 +43,11 @@ void do_showshuttle (Character * ch, char * argument)
 
   ch->Echo("Stops:\r\n");
 
-  for (stop = shuttle->FirstStop; stop; stop = stop->Next)
+  int count = 0;
+  
+  for(const ShuttleStop *stop : shuttle->Stops())
     {
-      count += 1;
-      ch->Echo("\tStop # %d\r\n", count );
+      ch->Echo("\tStop # %d\r\n", ++count );
       ch->Echo("\t\tStop Name: %s (%d)\r\n", stop->Name, stop->RoomVnum );
     }
 }

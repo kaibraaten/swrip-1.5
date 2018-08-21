@@ -94,7 +94,7 @@ void do_setshuttle(Character * ch, char * argument)
     {
       if(Shuttles->FindByName( argument ) != nullptr)
 	{
-   ch->Echo("There's already another shuttle with that name.\r\n" );
+          ch->Echo("There's already another shuttle with that name.\r\n" );
 	  return;
 	}
       
@@ -158,38 +158,26 @@ void do_setshuttle(Character * ch, char * argument)
 
           stop->Name = CopyString("Stopless Name");
           stop->RoomVnum = ROOM_VNUM_LIMBO;
-          LINK( stop, shuttle->FirstStop, shuttle->LastStop, Next, Previous );
-
-          if (shuttle->CurrentStop == NULL)
-	    {
-	      shuttle->CurrentStop = shuttle->FirstStop;
-	    }
+          shuttle->Add(stop);
         }
       else
 	{
-	  int count = 0;
-
 	  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( argument ) )
 	    {
-       ch->Echo("Invalid Param.\r\n");
+              ch->Echo("Invalid Param.\r\n");
 	      return;
 	    }
 
 	  value = IsNumber( arg1 ) ? atoi( arg1 ) : -1;
+          size_t pos = value - 1;
 
-	  for (stop = shuttle->FirstStop; stop; stop = stop->Next)
+          if( pos < shuttle->Stops().size() )
+            {
+              stop = shuttle->Stops()[pos];
+            }
+          else
 	    {
-	      count++;
-
-	      if (value == count)
-		{
-		  break;
-		}
-	    }
-
-	  if ( stop == NULL)
-	    {
-       ch->Echo("Invalid Stop\r\n");
+              ch->Echo("Invalid Stop\r\n");
 	      return;
 	    }
 
@@ -211,7 +199,7 @@ void do_setshuttle(Character * ch, char * argument)
 	    }
 	  else if (!StrCmp(arg2, "remove"))
 	    {
-	      UNLINK(stop, shuttle->FirstStop, shuttle->LastStop, Next, Previous);
+              shuttle->Remove(stop);
 
 	      if (stop->Name)
 		{
