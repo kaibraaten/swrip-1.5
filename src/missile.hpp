@@ -14,8 +14,6 @@ class Missile
 public:
   Missile *Next = nullptr;
   Missile *Previous = nullptr;
-  Missile *NextInSpaceobject = nullptr;
-  Missile *PreviousInSpaceobject = nullptr;
   struct Spaceobject *Spaceobject = nullptr;
   Ship *Target = nullptr;
   Ship *FiredFrom = nullptr;
