@@ -33,8 +33,6 @@ class Ship
 {
 public:
   Ship();
-  Ship *NextInSpaceobject = nullptr;
-  Ship *PreviousInSpaceobject = nullptr;
 
   /* Persisted state */
   char *Name = nullptr;
