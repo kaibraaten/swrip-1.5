@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <functional>
 #include <numeric>
 #include <cassert>
 #include <cstring>
@@ -163,6 +164,88 @@ void StartFearing( Character *ch, Character *victim )
   ch->HHF.Fearing->Who  = victim;
 }
 
+static void ExpireCommandCallbackTimers(Character *ch)
+{
+  std::list<Timer*> characterTimers(ch->Timers());
+
+  for(Timer *timer : characterTimers)
+    {
+      if ( --timer->Count <= 0 )
+        {
+          if ( timer->Type == TIMER_CMD_FUN )
+            {
+              CharacterSubState tempsub = ch->SubState;
+
+              ch->SubState = (CharacterSubState)timer->Value;
+              timer->DoFun( ch, "" );
+
+              if ( CharacterDiedRecently(ch) )
+                {
+                  break;
+                }
+
+              ch->SubState = tempsub;
+            }
+
+          ExtractTimer( ch, timer );
+        }
+    }
+}
+
+static void RemoveExpiredAffects(Character *ch)
+{
+  std::list<Affect*> affects(ch->Affects());
+
+  for(auto affectIter = std::begin(affects); affectIter != std::end(affects); ++affectIter)
+    {
+      Affect *paf = *affectIter;
+
+      if ( paf->Duration > 0 )
+        {
+          paf->Duration--;
+        }
+      else if ( paf->Duration < 0 )
+        {
+          // Intentionally empty
+        }
+      else
+        {
+          Affect *paf_next = nullptr;
+          auto nextIter = affectIter;
+          ++nextIter;
+
+          if(nextIter != std::end(affects))
+            {
+              paf_next = *nextIter;
+            }
+
+          if ( paf_next == nullptr
+               || paf_next->Type != paf->Type
+               || paf_next->Duration > 0 )
+            {
+              const Skill *skill = GetSkill(paf->Type);
+
+              if ( paf->Type > 0 && skill && !IsNullOrEmpty( skill->Messages.WearOff ))
+                {
+                  SetCharacterColor( AT_WEAROFF, ch );
+                  ch->Echo( "%s\r\n", skill->Messages.WearOff );
+                }
+            }
+
+          if (paf->Type == gsn_possess)
+            {
+              ch->Desc->Character       = ch->Desc->Original;
+              ch->Desc->Original        = NULL;
+              ch->Desc->Character->Desc = ch->Desc;
+              ch->Desc->Character->Switched = NULL;
+              ch->Desc                  = NULL;
+            }
+          
+          RemoveAffect( ch, paf );
+        }
+    }
+}
+
 /*
  * Control the fights going on.
  * Called periodically by UpdateHandler.
@@ -173,13 +256,7 @@ void StartFearing( Character *ch, Character *victim )
  */
 void ViolenceUpdate( void )
 {
-  char buf[MAX_STRING_LENGTH];
-  Character *ch = NULL;
-  Character *victim = NULL;
-  ch_ret retcode = rNONE;
-  Skill *skill = NULL;
-
-  for ( ch = LastCharacter; ch; ch = gch_prev )
+  for ( Character *ch = LastCharacter; ch; ch = gch_prev )
     {
       SetCurrentGlobalCharacter( ch );
 
@@ -193,123 +270,65 @@ void ViolenceUpdate( void )
        * and should not already be in another fight already
        */
       if ( CharacterDiedRecently(ch) )
-        continue;
-
+        {
+          continue;
+        }
 
       /*
        * Experience gained during battle deceases as battle drags on
        */
-      if ( ch->Fighting )
-        if ( (++ch->Fighting->Duration % 24) == 0 )
-          ch->Fighting->Xp = ((ch->Fighting->Xp * 9) / 10);
-
-      std::list<Timer*> characterTimers(ch->Timers());
-
-      for(Timer *timer : characterTimers)
+      if ( ch->Fighting != nullptr )
         {
-          if ( --timer->Count <= 0 )
+          if ( (++ch->Fighting->Duration % 24) == 0 )
             {
-              if ( timer->Type == TIMER_CMD_FUN )
-                {
-                  CharacterSubState tempsub = ch->SubState;
-
-                  ch->SubState = (CharacterSubState)timer->Value;
-                  timer->DoFun( ch, "" );
-
-                  if ( CharacterDiedRecently(ch) )
-                    break;
-
-                  ch->SubState = tempsub;
-                }
-
-              ExtractTimer( ch, timer );
+              ch->Fighting->Xp = ((ch->Fighting->Xp * 9) / 10);
             }
         }
+
+      ExpireCommandCallbackTimers(ch);
 
       if ( CharacterDiedRecently(ch) )
-        continue;
-
-      /*
-       * We need spells that have shorter durations than an hour.
-       * So a melee round sounds good to me... -Thoric
-       */
-      std::list<Affect*> affects(ch->Affects());
-
-      for(auto affectIter = std::begin(affects); affectIter != std::end(affects); ++affectIter)
         {
-          Affect *paf = *affectIter;
-          
-          if ( paf->Duration > 0 )
-            {
-              paf->Duration--;
-            }
-          else if ( paf->Duration < 0 )
-            {
-              // Intentionally empty
-            }
-          else
-            {
-              Affect *paf_next = nullptr;
-              auto nextIter = affectIter;
-              ++nextIter;
-              
-              if(nextIter != std::end(affects))
-                {
-                  paf_next = *nextIter;
-                }
-              
-              if ( paf_next == nullptr
-                   || paf_next->Type != paf->Type
-                   || paf_next->Duration > 0 )
-                {
-                  skill = GetSkill(paf->Type);
-
-                  if ( paf->Type > 0 && skill && !IsNullOrEmpty( skill->Messages.WearOff ))
-                    {
-                      SetCharacterColor( AT_WEAROFF, ch );
-                      ch->Echo( "%s\r\n", skill->Messages.WearOff );
-                    }
-                }
-
-              if (paf->Type == gsn_possess)
-                {
-                  ch->Desc->Character       = ch->Desc->Original;
-                  ch->Desc->Original        = NULL;
-                  ch->Desc->Character->Desc = ch->Desc;
-                  ch->Desc->Character->Switched = NULL;
-                  ch->Desc                  = NULL;
-                }
-
-              RemoveAffect( ch, paf );
-            }
+          continue;
         }
 
-      if ( ( victim = GetFightingOpponent( ch ) ) == NULL
-           ||   IsAffectedBy( ch, AFF_PARALYSIS ) )
-        continue;
+      RemoveExpiredAffects(ch);
 
-      retcode = rNONE;
+      Character *victim = GetFightingOpponent(ch);
+      
+      if ( victim == nullptr || IsAffectedBy( ch, AFF_PARALYSIS ) )
+        {
+          continue;
+        }
+      
+      ch_ret retcode = rNONE;
 
       if ( IsBitSet(ch->InRoom->Flags, ROOM_SAFE ) )
         {
-          sprintf( buf, "ViolenceUpdate: %s fighting %s in a SAFE room.",
-                   ch->Name, victim->Name );
-          Log->Info( buf );
+          Log->Info( "ViolenceUpdate: %s fighting %s in a SAFE room.",
+                     ch->Name, victim->Name );
           StopFighting( ch, true );
         }
-      else
-        if ( IsAwake(ch) && ch->InRoom == victim->InRoom )
+      else if ( IsAwake(ch) && ch->InRoom == victim->InRoom )
+        {
           retcode = HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
-        else
+        }
+      else
+        {
           StopFighting( ch, false );
-
+        }
+      
       if ( CharacterDiedRecently(ch) )
-        continue;
+        {
+          continue;
+        }
 
       if ( retcode == rCHAR_DIED
            || ( victim = GetFightingOpponent( ch ) ) == NULL )
-        continue;
-
+        {
+          continue;
+        }
+      
       if( IsNpc(ch) )
         {
           do_wear( ch, "blaster" );
@@ -320,15 +339,26 @@ void ViolenceUpdate( void )
        *  Mob triggers
        */
       RoomProgFightTrigger( ch );
-      if ( CharacterDiedRecently(ch) )
-        continue;
-      MobProgHitPercentTrigger( ch, victim );
-      if ( CharacterDiedRecently(ch) )
-        continue;
-      MobProgFightTrigger( ch, victim );
-      if ( CharacterDiedRecently(ch) )
-        continue;
 
+      if ( CharacterDiedRecently(ch) )
+        {
+          continue;
+        }
+      
+      MobProgHitPercentTrigger( ch, victim );
+
+      if ( CharacterDiedRecently(ch) )
+        {
+          continue;
+        }
+      
+      MobProgFightTrigger( ch, victim );
+
+      if ( CharacterDiedRecently(ch) )
+        {
+          continue;
+        }
+      
       /*
        * Fun for the whole family!
        */
@@ -344,8 +374,11 @@ void ViolenceUpdate( void )
               if ( !IsNpc(ch) || IsAffectedBy(ch, AFF_CHARM) )
                 {
                   if ( ( !IsNpc(rch) || IsAffectedBy(rch, AFF_CHARM) )
-                       &&   IsInSameGroup(ch, rch) )
-                    HitMultipleTimes( rch, victim, TYPE_UNDEFINED );
+                       && IsInSameGroup(ch, rch) )
+                    {
+                      HitMultipleTimes( rch, victim, TYPE_UNDEFINED );
+                    }
+                  
                   continue;
                 }
 
@@ -356,9 +389,12 @@ void ViolenceUpdate( void )
                    &&  !IsBitSet(rch->Flags, ACT_NOASSIST) )
                 {
                   if ( CharacterDiedRecently(ch) )
-                    break;
+                    {
+                      break;
+                    }
+                  
                   if ( rch->Prototype == ch->Prototype
-                       ||   NumberBits( 3 ) == 0 )
+                       || NumberBits( 3 ) == 0 )
                     {
                       Character *target = nullptr;
                       int number = 0;
@@ -366,16 +402,18 @@ void ViolenceUpdate( void )
                       for(Character *vch : ch->InRoom->Characters())
 			{
 			  if ( CanSeeCharacter( rch, vch )
-			       &&   IsInSameGroup( vch, victim )
-			       &&   GetRandomNumberFromRange( 0, number ) == 0 )
+			       && IsInSameGroup( vch, victim )
+			       && GetRandomNumberFromRange( 0, number ) == 0 )
 			    {
 			      target = vch;
 			      number++;
 			    }
 			}
 
-                      if ( target )
-                        HitMultipleTimes( rch, target, TYPE_UNDEFINED );
+                      if ( target != nullptr )
+                        {
+                          HitMultipleTimes( rch, target, TYPE_UNDEFINED );
+                        }
                     }
                 }
             }
@@ -383,60 +421,140 @@ void ViolenceUpdate( void )
     }
 }
 
+static ch_ret PerformNthAttack(Character *ch, Character *victim, int dt, int gsn,
+                               std::function<int()> getHitChance)
+{
+  int hit_chance = getHitChance();
+  
+  if ( GetRandomPercent() < hit_chance )
+    {
+      LearnFromSuccess( ch, gsn );
+      ch_ret retcode = HitOnce( ch, victim, dt );
 
+      if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
+        {
+          return retcode;
+        }
+    }
+  else
+    {
+      LearnFromFailure( ch, gsn );
+    }
+
+  return rNONE;
+}
+
+static ch_ret Perform2ndAttack(Character *ch, Character *victim, int dual_bonus, int dt)
+{
+  return PerformNthAttack(ch, victim, dt, gsn_second_attack,
+                          [ch, dual_bonus]()
+                          {
+                            return IsNpc(ch) ? ch->TopLevel
+                              : (int) ((ch->PCData->Learned[gsn_second_attack]+dual_bonus)/1.5);
+                          });
+}
+
+static ch_ret Perform3rdAttack(Character *ch, Character *victim, int dual_bonus, int dt)
+{
+  return PerformNthAttack(ch, victim, dt, gsn_third_attack,
+                          [ch, dual_bonus]()
+                          {
+                            return IsNpc(ch) ? ch->TopLevel
+                              : (int) ((ch->PCData->Learned[gsn_third_attack]+(dual_bonus*1.5))/2);
+                          });
+}
+
+static ch_ret Perform4thAttack(Character *ch, Character *victim, int dual_bonus, int dt)
+{
+  return PerformNthAttack(ch, victim, dt, gsn_fourth_attack,
+                          [ch, dual_bonus]()
+                          {
+                            return IsNpc(ch) ? ch->TopLevel
+                              : (int) ((ch->PCData->Learned[gsn_fourth_attack]+(dual_bonus*1.5))/2);
+                          });
+}
+
+static ch_ret Perform5thAttack(Character *ch, Character *victim, int dual_bonus, int dt)
+{
+  return PerformNthAttack(ch, victim, dt, gsn_fifth_attack,
+                          [ch, dual_bonus]()
+                          {
+                            return IsNpc(ch) ? ch->TopLevel
+                              : (int) ((ch->PCData->Learned[gsn_fifth_attack]+(dual_bonus*1.5))/2);
+                          });
+}
 
 /*
  * Do one group of attacks.
  */
 ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
 {
-  int     hit_chance;
-  int       dual_bonus;
-  ch_ret  retcode;
-
   /* add timer if player is attacking another player */
   if ( !IsNpc(ch) && !IsNpc(victim) )
-    AddTimerToCharacter( ch, TIMER_RECENTFIGHT, 20, NULL, SUB_NONE );
-
+    {
+      AddTimerToCharacter( ch, TIMER_RECENTFIGHT, 20, NULL, SUB_NONE );
+    }
+  
   if ( !IsNpc(ch) && IsBitSet( ch->Flags, PLR_NICE ) && !IsNpc( victim ) )
-    return rNONE;
+    {
+      return rNONE;
+    }
 
-  if ( (retcode = HitOnce( ch, victim, dt )) != rNONE )
-    return retcode;
-
+  ch_ret retcode = HitOnce( ch, victim, dt );
+  
+  if ( retcode != rNONE )
+    {
+      return retcode;
+    }
+  
   if ( GetFightingOpponent( ch ) != victim || dt == gsn_backstab || dt == gsn_circle)
-    return rNONE;
-
+    {
+      return rNONE;
+    }
+  
   /* Very high chance of hitting compared to chance of going berserk */
   /* 40% or higher is always hit.. don't learn anything here though. */
   /* -- Altrag */
-  hit_chance = IsNpc(ch) ? 100 : (ch->PCData->Learned[gsn_berserk]*5/2);
+  int hit_chance = IsNpc(ch) ? 100 : (ch->PCData->Learned[gsn_berserk]*5/2);
 
   if ( IsAffectedBy(ch, AFF_BERSERK) && GetRandomPercent() < hit_chance )
-    if ( (retcode = HitOnce( ch, victim, dt )) != rNONE ||
-         GetFightingOpponent( ch ) != victim )
-      return retcode;
+    {
+      retcode = HitOnce( ch, victim, dt );
+      
+      if ( retcode != rNONE
+           || GetFightingOpponent( ch ) != victim )
+        {
+          return retcode;
+        }
+    }
 
+  // Dual wield
+  int dual_bonus = 0;
+  
   if ( GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD ) )
     {
       dual_bonus = IsNpc(ch) ? (GetAbilityLevel( ch, COMBAT_ABILITY ) / 10) : (ch->PCData->Learned[gsn_dual_wield] / 10);
-      hit_chance = IsNpc(ch) ? ch->TopLevel : ch->PCData->Learned[gsn_dual_wield];
-      if ( GetRandomPercent() < hit_chance )
+
+      retcode = PerformNthAttack(ch, victim, dt, gsn_dual_wield,
+                                 [ch, dual_bonus]()
+                                 {
+                                   return IsNpc(ch) ? ch->TopLevel : ch->PCData->Learned[gsn_dual_wield];
+                                 });
+      if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
         {
-          LearnFromSuccess( ch, gsn_dual_wield );
-          retcode = HitOnce( ch, victim, dt );
-          if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
-            return retcode;
+          return retcode;
         }
-      else
-        LearnFromFailure( ch, gsn_dual_wield );
     }
   else
-    dual_bonus = 0;
-
+    {
+      dual_bonus = 0;
+    }
+  
   if ( ch->Move < 10 )
-    dual_bonus = -20;
-
+    {
+      dual_bonus = -20;
+    }
+  
   /*
    * NPC predetermined number of attacks                        -Thoric
    */
@@ -445,82 +563,81 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
       for ( hit_chance = 0; hit_chance <= ch->NumberOfAttacks; hit_chance++ )
         {
           retcode = HitOnce( ch, victim, dt );
+
           if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
-            return retcode;
+            {
+              return retcode;
+            }
         }
+      
       return retcode;
     }
 
-  hit_chance = IsNpc(ch) ? ch->TopLevel
-    : (int) ((ch->PCData->Learned[gsn_second_attack]+dual_bonus)/1.5);
-  if ( GetRandomPercent() < hit_chance )
-    {
-      LearnFromSuccess( ch, gsn_second_attack );
-      retcode = HitOnce( ch, victim, dt );
-      if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
-        return retcode;
-    }
-  else
-    LearnFromFailure( ch, gsn_second_attack );
+  // Second attack
+  retcode = Perform2ndAttack(ch, victim, dual_bonus, dt);
 
-  hit_chance = IsNpc(ch) ? ch->TopLevel
-    : (int) ((ch->PCData->Learned[gsn_third_attack]+(dual_bonus*1.5))/2);
-  if ( GetRandomPercent() < hit_chance )
+  if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
     {
-      LearnFromSuccess( ch, gsn_third_attack );
-      retcode = HitOnce( ch, victim, dt );
-      if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
-        return retcode;
+      return retcode;
     }
-  else
-    LearnFromFailure( ch, gsn_third_attack );
 
-  hit_chance = IsNpc(ch) ? ch->TopLevel
-    : (int) ((ch->PCData->Learned[gsn_fourth_attack]+(dual_bonus*1.5))/2);
-  if ( GetRandomPercent() < hit_chance )
+  // Third attack
+  retcode = Perform3rdAttack( ch, victim, dual_bonus, dt );
+      
+  if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
     {
-      LearnFromSuccess( ch, gsn_fourth_attack );
-      retcode = HitOnce( ch, victim, dt );
-      if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
-        return retcode;
+      return retcode;
     }
-  else
-    LearnFromFailure( ch, gsn_fourth_attack );
 
-  hit_chance = IsNpc(ch) ? ch->TopLevel
-    : (int) ((ch->PCData->Learned[gsn_fifth_attack]+(dual_bonus*1.5))/2);
-  if ( GetRandomPercent() < hit_chance )
+  // Fourth attack
+  retcode = Perform4thAttack( ch, victim, dual_bonus, dt );
+
+  if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
     {
-      LearnFromSuccess( ch, gsn_fifth_attack );
-      retcode = HitOnce( ch, victim, dt );
-      if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
-        return retcode;
+      return retcode;
     }
-  else
-    LearnFromFailure( ch, gsn_fifth_attack );
 
+  // Fifth attack
+  retcode = Perform5thAttack( ch, victim, dual_bonus, dt );
+
+  if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
+    {
+      return retcode;
+    }
+  
   retcode = rNONE;
 
+  // Extra 25% chance bonus attack for NPCs.
   hit_chance = IsNpc(ch) ? (int) (ch->TopLevel / 4) : 0;
-  if ( GetRandomPercent() < hit_chance )
-    retcode = HitOnce( ch, victim, dt );
 
+  if ( GetRandomPercent() < hit_chance )
+    {
+      retcode = HitOnce( ch, victim, dt );
+    }
+
+  // Inflict movement cost
   if ( retcode == rNONE )
     {
-      int move;
+      int move = 0;
 
       if ( !IsAffectedBy(ch, AFF_FLYING)
-           &&   !IsAffectedBy(ch, AFF_FLOATING) )
-        move = GetCarryEncumbrance( ch, MovementLoss[umin(SECT_MAX-1, ch->InRoom->Sector)] );
+           && !IsAffectedBy(ch, AFF_FLOATING) )
+        {
+          move = GetCarryEncumbrance( ch, MovementLoss[umin(SECT_MAX-1, ch->InRoom->Sector)] );
+        }
       else
-        move = GetCarryEncumbrance( ch, 1 );
-      if ( ch->Move )
-        ch->Move = umax( 0, ch->Move - move );
+        {
+          move = GetCarryEncumbrance( ch, 1 );
+        }
+      
+      if ( ch->Move != 0 )
+        {
+          ch->Move = umax( 0, ch->Move - move );
+        }
     }
 
   return retcode;
 }
-
 
 /*
  * Weapon types, haus
@@ -535,41 +652,41 @@ static int GetWeaponProficiencyBonus( const Character *ch, const Object *wield, 
     {
       switch(wield->Value[OVAL_WEAPON_TYPE])
         {
-        default:
-	  *gsn_ptr = -1;
-	  break;
-
-        case 3:
+        case WEAPON_LIGHTSABER:
 	  *gsn_ptr = gsn_lightsabers;
 	  break;
 
-        case 2:
+        case WEAPON_VIBRO_BLADE:
 	  *gsn_ptr = gsn_vibro_blades;
 	  break;
 
-        case 4:
+        case WEAPON_WHIP:
 	  *gsn_ptr = gsn_flexible_arms;
 	  break;
 
-        case 5:
+        case WEAPON_CLAW:
 	  *gsn_ptr = gsn_talonous_arms;
 	  break;
 
-        case 6:
+        case WEAPON_BLASTER:
 	  *gsn_ptr = gsn_blasters;
 	  break;
 
-        case 8:
+        case WEAPON_BLUDGEON:
 	  *gsn_ptr = gsn_bludgeons;
 	  break;
 
-        case 9:
+        case WEAPON_BOWCASTER:
 	  *gsn_ptr = gsn_bowcasters;
 	  break;
 
-        case 11:
+        case WEAPON_FORCE_PIKE:
 	  *gsn_ptr = gsn_force_pikes;
 	  break;
+
+        default:
+          *gsn_ptr = -1;
+          break;
         }
 
       if ( *gsn_ptr != -1 )
@@ -626,11 +743,9 @@ static int GetObjectHitrollBonus( const Object *obj )
  */
 static short GetOffensiveShieldLevelModifier( const Character *ch, const Character *victim )
 {
-  short lvl = 0;
-
   if ( !IsNpc(ch) )            /* players get much less effect */
     {
-      lvl = umax( 1, (GetAbilityLevel( ch, FORCE_ABILITY ) ) );
+      short lvl = umax( 1, (GetAbilityLevel( ch, FORCE_ABILITY ) ) );
 
       if ( GetRandomPercent() + (GetAbilityLevel( victim, COMBAT_ABILITY ) - lvl) < 35 )
 	{
@@ -643,7 +758,7 @@ static short GetOffensiveShieldLevelModifier( const Character *ch, const Charact
     }
   else
     {
-      lvl = ch->TopLevel;
+      short lvl = ch->TopLevel;
 
       if ( GetRandomPercent() + (GetAbilityLevel( victim, COMBAT_ABILITY ) - lvl) < 70 )
 	{
@@ -684,8 +799,9 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
    * Guard against weird room-leavings.
    */
   if ( victim->Position == POS_DEAD || ch->InRoom != victim->InRoom )
-    return rVICT_DIED;
-
+    {
+      return rVICT_DIED;
+    }
 
   /*
    * Figure out the weapon doing the damage                     -Thoric
@@ -698,37 +814,51 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
         }
       else
-        dual_flip = false;
+        {
+          dual_flip = false;
+        }
     }
   else
-    wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
-
+    {
+      wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
+    }
+  
   prof_bonus = GetWeaponProficiencyBonus( ch, wield, &prof_gsn );
 
   if ( ch->Fighting             /* make sure fight is already started */
-       &&   dt == TYPE_UNDEFINED
-       &&   IsNpc(ch)
-       &&   ch->AttackFlags != 0 )
+       && dt == TYPE_UNDEFINED
+       && IsNpc(ch)
+       && ch->AttackFlags != 0 )
     {
       cnt = 0;
+
       for ( ;; )
         {
           x = GetRandomNumberFromRange( 0, 6 );
           attacktype = 1 << x;
+
           if ( IsBitSet( ch->AttackFlags, attacktype ) )
-            break;
+            {
+              break;
+            }
+          
           if ( cnt++ > 16 )
             {
               attacktype = 0;
               break;
             }
         }
+
       if ( attacktype == ATCK_BACKSTAB )
-        attacktype = 0;
-
+        {
+          attacktype = 0;
+        }
+      
       if ( wield && GetRandomPercent() > 25 )
-        attacktype = 0;
-
+        {
+          attacktype = 0;
+        }
+      
       switch ( attacktype )
         {
         default:
@@ -757,15 +887,21 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           attacktype = 0;
           break;
         }
+
       if ( attacktype )
-        return retcode;
+        {
+          return retcode;
+        }
     }
 
   if ( dt == TYPE_UNDEFINED )
     {
       dt = TYPE_HIT;
+
       if ( wield && wield->ItemType == ITEM_WEAPON )
-        dt += wield->Value[OVAL_WEAPON_TYPE];
+        {
+          dt += wield->Value[OVAL_WEAPON_TYPE];
+        }
     }
 
   /*
@@ -778,30 +914,42 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
 
   /* if you can't see what's coming... */
   if ( wield && !CanSeeObject( victim, wield) )
-    victim_ac += 1;
+    {
+      victim_ac += 1;
+    }
+  
   if ( !CanSeeCharacter( ch, victim ) )
-    victim_ac -= 4;
-
+    {
+      victim_ac -= 4;
+    }
+  
   if ( ch->Race == RACE_DEFEL )
-    victim_ac += 2;
-
+    {
+      victim_ac += 2;
+    }
+  
   if ( !IsAwake ( victim ) )
-    victim_ac += 5;
+    {
+      victim_ac += 5;
+    }
 
   /* Weapon proficiency bonus */
-  victim_ac += prof_bonus/20;
+  victim_ac += prof_bonus / 20;
 
   /*
    * The moment of excitement!
    */
-  diceroll = GetRandomNumberFromRange( 1,20 );
+  diceroll = GetRandomNumberFromRange( 1, 20 );
 
   if ( diceroll == 1
        || ( diceroll < 20 && diceroll < thac0 - victim_ac ) )
     {
       /* Miss. */
       if ( prof_gsn != -1 )
-        LearnFromFailure( ch, prof_gsn );
+        {
+          LearnFromFailure( ch, prof_gsn );
+        }
+      
       InflictDamage( ch, victim, 0, dt );
       return rNONE;
     }
@@ -810,7 +958,6 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
    * Hit.
    * Calc damage.
    */
-
   if ( !wield )       /* dice formula fixed by Thoric */
     {
       dam = GetRandomNumberFromRange( ch->BareNumDie, ch->BareSizeDie * ch->BareNumDie );
@@ -818,18 +965,18 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
   else
     {
       dam = GetRandomNumberFromRange( wield->Value[OVAL_WEAPON_NUM_DAM_DIE],
-			  wield->Value[OVAL_WEAPON_SIZE_DAM_DIE] );
+                                      wield->Value[OVAL_WEAPON_SIZE_DAM_DIE] );
     }
 
   /*
    * Bonuses.
    */
-
   dam += GetDamageRoll(ch);
 
   if ( prof_bonus )
-    dam *= ( 1 + prof_bonus / 100 );
-
+    {
+      dam *= ( 1 + prof_bonus / 100 );
+    }
 
   if ( !IsNpc(ch) && ch->PCData->Learned[gsn_enhanced_damage] > 0 )
     {
@@ -837,66 +984,102 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
       LearnFromSuccess( ch, gsn_enhanced_damage );
     }
 
-
   if ( !IsAwake(victim) )
-    dam *= 2;
+    {
+      dam *= 2;
+    }
+  
   if ( dt == gsn_backstab )
-    dam *= (2 + urange( 2, GetAbilityLevel( ch, HUNTING_ABILITY ) - (GetAbilityLevel( victim, COMBAT_ABILITY ) / 4), 30 ) / 8);
-
+    {
+      dam *= (2 + urange( 2, GetAbilityLevel( ch, HUNTING_ABILITY ) - (GetAbilityLevel( victim, COMBAT_ABILITY ) / 4), 30 ) / 8);
+    }
+  
   if ( dt == gsn_circle )
-    dam *= (2 + urange( 2, GetAbilityLevel( ch, HUNTING_ABILITY ) - (GetAbilityLevel( victim, COMBAT_ABILITY ) / 2), 30 ) / 40);
-
+    {
+      dam *= (2 + urange( 2, GetAbilityLevel( ch, HUNTING_ABILITY ) - (GetAbilityLevel( victim, COMBAT_ABILITY ) / 2), 30 ) / 40);
+    }
+  
   plusris = 0;
 
   if ( wield )
     {
       if ( IsBitSet( wield->Flags, ITEM_MAGIC ) )
-        dam = ModifyDamageBasedOnResistance( victim, dam, RIS_MAGIC );
+        {
+          dam = ModifyDamageBasedOnResistance( victim, dam, RIS_MAGIC );
+        }
       else
-        dam = ModifyDamageBasedOnResistance( victim, dam, RIS_NONMAGIC );
-
+        {
+          dam = ModifyDamageBasedOnResistance( victim, dam, RIS_NONMAGIC );
+        }
+      
       /*
        * Handle PLUS1 - PLUS6 ris bits vs. weapon hitroll       -Thoric
        */
       plusris = GetObjectHitrollBonus( wield );
     }
   else
-    dam = ModifyDamageBasedOnResistance( victim, dam, RIS_NONMAGIC );
+    {
+      dam = ModifyDamageBasedOnResistance( victim, dam, RIS_NONMAGIC );
+    }
 
   /* check for RIS_PLUSx                                        -Thoric */
-  if ( dam )
+  if ( dam != 0 )
     {
-      int i, res, imm, sus, mod;
+      int res = -1;
+      int imm = -1;
+      int sus = -1;
 
-      if ( plusris )
-        plusris = RIS_PLUS1 << umin(plusris, 7);
-
-      /* initialize values to handle a zero plusris */
-      imm = res = -1;  sus = 1;
-
+      if ( plusris != 0 )
+        {
+          plusris = RIS_PLUS1 << umin(plusris, 7);
+        }
+      
       /* find high ris */
-      for ( i = RIS_PLUS1; i <= RIS_PLUS6; i <<= 1 )
+      for ( int i = RIS_PLUS1; i <= RIS_PLUS6; i <<= 1 )
         {
           if ( IsBitSet( victim->Immune, i ) )
-            imm = i;
+            {
+              imm = i;
+            }
+          
           if ( IsBitSet( victim->Resistant, i ) )
-            res = i;
+            {
+              res = i;
+            }
+          
           if ( IsBitSet( victim->Susceptible, i ) )
-            sus = i;
+            {
+              sus = i;
+            }
         }
-      mod = 10;
-      if ( imm >= plusris )
-        mod -= 10;
-      if ( res >= plusris )
-        mod -= 2;
-      if ( sus <= plusris )
-        mod += 2;
+      
+      int mod = 10;
 
+      if ( imm >= plusris )
+        {
+          mod -= 10;
+        }
+      
+      if ( res >= plusris )
+        {
+          mod -= 2;
+        }
+      
+      if ( sus <= plusris )
+        {
+          mod += 2;
+        }
+      
       /* check if immune */
       if ( mod <= 0 )
-        dam = -1;
+        {
+          dam = -1;
+        }
+      
       if ( mod != 10 )
-        dam = (dam * mod) / 10;
+        {
+          dam = (dam * mod) / 10;
+        }
     }
 
   /* race modifier */
@@ -909,12 +1092,16 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
     {
       if ( wield->Value[OVAL_WEAPON_CHARGE] < 1  )
         {
-          Act( AT_YELLOW, "$n points their blaster at you but nothing happens.",  ch, NULL, victim, TO_VICT    );
-          Act( AT_YELLOW, "*CLICK* ... your blaster needs a new ammunition cell!", ch, NULL, victim, TO_CHAR    );
+          Act( AT_YELLOW, "$n points their blaster at you but nothing happens.",
+               ch, NULL, victim, TO_VICT );
+          Act( AT_YELLOW, "*CLICK* ... your blaster needs a new ammunition cell!",
+               ch, NULL, victim, TO_CHAR );
+
           if ( IsNpc(ch) )
             {
               do_remove( ch, wield->Name );
             }
+
           return rNONE;
         }
       else if ( wield->BlasterSetting == BLASTER_FULL && wield->Value[OVAL_WEAPON_CHARGE] >=5 )
@@ -937,22 +1124,33 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           wield->Value[OVAL_WEAPON_CHARGE] -= 3;
           fail = false;
           hit_chance = ModifySavingThrowBasedOnResistance( victim, GetAbilityLevel( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
+
           if ( hit_chance == 1000 )
-            fail = true;
+            {
+              fail = true;
+            }
           else
-            fail = SaveVsParalyze( hit_chance, victim );
+            {
+              fail = SaveVsParalyze( hit_chance, victim );
+            }
+
           if ( victim->WasStunned > 0 )
             {
               fail = true;
               victim->WasStunned--;
             }
+
           hit_chance = 100 - GetCurrentConstitution(victim) - GetAbilityLevel( victim, COMBAT_ABILITY ) / 2;
           /* harder for player to stun another player */
           if ( !IsNpc(ch) && !IsNpc(victim) )
-            hit_chance -= SysData.StunModPlrVsPlr;
+            {
+              hit_chance -= SysData.StunModPlrVsPlr;
+            }
           else
-            hit_chance -= SysData.StunRegular;
-
+            {
+              hit_chance -= SysData.StunRegular;
+            }
+          
           hit_chance = urange( 5, hit_chance, 95 );
 
           if ( !fail && GetRandomPercent() < hit_chance )
@@ -962,6 +1160,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
               Act( AT_BLUE, "Blue rings of energy from your blaster strike $N, leaving $M stunned!", ch, NULL, victim, TO_CHAR );
               Act( AT_BLUE, "Blue rings of energy from $n's blaster hit $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT );
               StopFighting( victim, true );
+
               if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
                 {
                   af.Type       = gsn_stun;
@@ -985,12 +1184,11 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
               Act( AT_BLUE, "Blue rings of energy from $N's blaster hit you but have little effect", victim, NULL, ch, TO_CHAR );
               Act( AT_BLUE, "Blue rings of energy from your blaster hit $N, but nothing seems to happen!", ch, NULL, victim, TO_CHAR );
               Act( AT_BLUE, "Blue rings of energy from $n's blaster hit $N, but nothing seems to happen!", ch, NULL, victim, TO_NOTVICT );
-
             }
         }
       else if ( wield->BlasterSetting == BLASTER_HALF && wield->Value[OVAL_WEAPON_CHARGE] >=2 )
         {
-          dam *=  0.75;
+          dam *= 0.75;
           wield->Value[OVAL_WEAPON_CHARGE] -= 2;
         }
       else
@@ -998,45 +1196,45 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           dam *= 0.5;
           wield->Value[OVAL_WEAPON_CHARGE] -= 1;
         }
-
     }
-  else if (
-           dt == (TYPE_HIT + WEAPON_VIBRO_BLADE )
-           && wield && wield->ItemType == ITEM_WEAPON
-           )
+  else if ( dt == (TYPE_HIT + WEAPON_VIBRO_BLADE )
+            && wield != nullptr
+            && wield->ItemType == ITEM_WEAPON )
     {
       if ( wield->Value[OVAL_WEAPON_CHARGE] < 1  )
         {
-          Act( AT_YELLOW, "Your vibro-blade needs recharging ...", ch, NULL, victim, TO_CHAR    );
+          Act( AT_YELLOW, "Your vibro-blade needs recharging...", ch, NULL, victim, TO_CHAR );
           dam /= 3;
         }
     }
-  else if (
-           dt == (TYPE_HIT + WEAPON_FORCE_PIKE )
-           && wield && wield->ItemType == ITEM_WEAPON
-           )
+  else if ( dt == (TYPE_HIT + WEAPON_FORCE_PIKE )
+            && wield != nullptr
+            && wield->ItemType == ITEM_WEAPON )
     {
       if ( wield->Value[OVAL_WEAPON_CHARGE] < 1  )
         {
-          Act( AT_YELLOW, "Your force-pike needs recharging ...", ch, NULL, victim, TO_CHAR    );
+          Act( AT_YELLOW, "Your force-pike needs recharging...", ch, NULL, victim, TO_CHAR    );
           dam /= 2;
         }
       else
-        wield->Value[OVAL_WEAPON_CHARGE]--;
+        {
+          wield->Value[OVAL_WEAPON_CHARGE]--;
+        }
     }
-  else if (
-           dt == (TYPE_HIT + WEAPON_LIGHTSABER )
-           && wield && wield->ItemType == ITEM_WEAPON
-           )
+  else if ( dt == (TYPE_HIT + WEAPON_LIGHTSABER )
+            && wield != nullptr
+            && wield->ItemType == ITEM_WEAPON )
     {
       if ( wield->Value[OVAL_WEAPON_CHARGE] < 1  )
         {
           Act( AT_YELLOW, "$n waves a dead hand grip around in the air.",  ch, NULL, victim, TO_VICT    );
           Act( AT_YELLOW, "You need to recharge your lightsaber ... it seems to be lacking a blade.", ch, NULL, victim, TO_CHAR    );
+
           if ( IsNpc(ch) )
             {
               do_remove( ch, wield->Name );
             }
+
           return rNONE;
         }
     }
@@ -1046,25 +1244,35 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
         {
           Act( AT_YELLOW, "$n points their bowcaster at you but nothing happens.",  ch, NULL, victim, TO_VICT    );
           Act( AT_YELLOW, "*CLICK* ... your bowcaster needs a new bolt cartridge!", ch, NULL, victim, TO_CHAR    );
+
           if ( IsNpc(ch) )
             {
               do_remove( ch, wield->Name );
             }
+
           return rNONE;
         }
       else
-        wield->Value[OVAL_WEAPON_CHARGE]--;
+        {
+          wield->Value[OVAL_WEAPON_CHARGE]--;
+        }
     }
 
   if ( dam <= 0 )
-    dam = 1;
-
+    {
+      dam = 1;
+    }
+  
   if ( prof_gsn != -1 )
     {
       if ( dam > 0 )
-        LearnFromSuccess( ch, prof_gsn );
+        {
+          LearnFromSuccess( ch, prof_gsn );
+        }
       else
-        LearnFromFailure( ch, prof_gsn );
+        {
+          LearnFromFailure( ch, prof_gsn );
+        }
     }
 
   /* immune to damage */
@@ -1094,70 +1302,115 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
             }
 
           if ( found )
-            return rNONE;
+            {
+              return rNONE;
+            }
         }
+      
       dam = 0;
     }
-  if ( (retcode = InflictDamage( ch, victim, dam, dt )) != rNONE )
-    return retcode;
+
+  retcode = InflictDamage( ch, victim, dam, dt );
+  
+  if ( retcode != rNONE )
+    {
+      return retcode;
+    }
+  
   if ( CharacterDiedRecently(ch) )
-    return rCHAR_DIED;
+    {
+      return rCHAR_DIED;
+    }
+  
   if ( CharacterDiedRecently(victim) )
-    return rVICT_DIED;
-
+    {
+      return rVICT_DIED;
+    }
+  
   retcode = rNONE;
-  if ( dam == 0 )
-    return retcode;
 
+  if ( dam == 0 )
+    {
+      return retcode;
+    }
+  
   /* weapon spells      -Thoric */
-  if ( wield
-       &&  !IsBitSet(victim->Immune, RIS_MAGIC)
-       &&  !IsBitSet(victim->InRoom->Flags, ROOM_NO_MAGIC) )
+  if ( wield != nullptr
+       && !IsBitSet(victim->Immune, RIS_MAGIC)
+       && !IsBitSet(victim->InRoom->Flags, ROOM_NO_MAGIC) )
     {
       for(const Affect *aff : wield->Prototype->Affects())
-        if ( aff->Location == APPLY_WEAPONSPELL
-             &&   IS_VALID_SN(aff->Modifier)
-             &&   SkillTable[aff->Modifier]->SpellFunction )
-          retcode = SkillTable[aff->Modifier]->SpellFunction( aff->Modifier, (wield->Level+3)/3, ch, victim );
-
-      if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
-        return retcode;
-
+        {
+          if ( aff->Location == APPLY_WEAPONSPELL
+               && IS_VALID_SN(aff->Modifier)
+               && SkillTable[aff->Modifier]->SpellFunction )
+            {
+              retcode = SkillTable[aff->Modifier]->SpellFunction( aff->Modifier, (wield->Level+3)/3, ch, victim );
+            }
+        }
+      
+      if ( retcode != rNONE
+           || CharacterDiedRecently(ch)
+           || CharacterDiedRecently(victim) )
+        {
+          return retcode;
+        }
+      
       for(const Affect *aff : wield->Affects())
-        if ( aff->Location == APPLY_WEAPONSPELL
-             &&   IS_VALID_SN(aff->Modifier)
-             &&   SkillTable[aff->Modifier]->SpellFunction )
-          retcode = SkillTable[aff->Modifier]->SpellFunction( aff->Modifier, (wield->Level+3)/3, ch, victim );
-
-      if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
-        return retcode;
+        {
+          if ( aff->Location == APPLY_WEAPONSPELL
+               && IS_VALID_SN(aff->Modifier)
+               && SkillTable[aff->Modifier]->SpellFunction )
+            {
+              retcode = SkillTable[aff->Modifier]->SpellFunction( aff->Modifier, (wield->Level+3)/3, ch, victim );
+            }
+        }
+      
+      if ( retcode != rNONE
+           || CharacterDiedRecently(ch)
+           || CharacterDiedRecently(victim) )
+        {
+          return retcode;
+        }
     }
 
   /*
    * magic shields that retaliate                               -Thoric
    */
   if ( IsAffectedBy( victim, AFF_FIRESHIELD )
-       &&  !IsAffectedBy( ch, AFF_FIRESHIELD ) )
-    retcode = spell_fireball( gsn_fireball, GetOffensiveShieldLevelModifier(victim, ch), victim, ch );
-  if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
-    return retcode;
-
-  if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
-    return retcode;
-
+       && !IsAffectedBy( ch, AFF_FIRESHIELD ) )
+    {
+      retcode = spell_fireball( gsn_fireball, GetOffensiveShieldLevelModifier(victim, ch), victim, ch );
+    }
+  
+  if ( retcode != rNONE
+       || CharacterDiedRecently(ch)
+       || CharacterDiedRecently(victim) )
+    {
+      return retcode;
+    }
+  
   if ( IsAffectedBy( victim, AFF_SHOCKSHIELD )
-       &&  !IsAffectedBy( ch, AFF_SHOCKSHIELD ) )
-    retcode = spell_lightning_bolt( gsn_lightning_bolt, GetOffensiveShieldLevelModifier(victim, ch), victim, ch );
-  if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
-    return retcode;
-
+       && !IsAffectedBy( ch, AFF_SHOCKSHIELD ) )
+    {
+      retcode = spell_lightning_bolt( gsn_lightning_bolt, GetOffensiveShieldLevelModifier(victim, ch), victim, ch );
+    }
+  
+  if ( retcode != rNONE
+       || CharacterDiedRecently(ch)
+       || CharacterDiedRecently(victim) )
+    {
+      return retcode;
+    }
+  
   /*
    *   folks with blasters move and snipe instead of getting neatin up in one spot.
    */
   if ( IsNpc(victim) )
     {
       Object *wielding = GetEquipmentOnCharacter( victim, WEAR_WIELD );
-      if ( wielding != NULL
+
+      if ( wielding != nullptr
 	   && wielding->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER
 	   && SprintForCover( victim ) == true )
         {
@@ -1943,11 +2196,7 @@ static void UpdateKillStats( Character *ch, Character *victim )
  */
 void UpdatePosition( Character *victim )
 {
-  if ( !victim )
-    {
-      Log->Bug( "%s: null victim", __FUNCTION__ );
-      return;
-    }
+  assert(victim != nullptr);
 
   if ( victim->Hit > 0 )
     {
@@ -2197,7 +2446,9 @@ void RawKill( Character *killer, Character *victim )
     return;
 
   if ( !IsNpc(victim) || ( !IsBitSet( victim->Flags, ACT_NOKILL  ) && !IsBitSet( victim->Flags, ACT_NOCORPSE ) ) )
-    MakeCorpse( victim );
+    {
+      MakeCorpse( victim );
+    }
   else
     {
       std::list<Object*> carriedByVictim( Reverse( victim->Objects() ) );
@@ -2492,10 +2743,9 @@ static int ComputeNewAlignment( const Character *gch, const Character *victim )
  */
 long ComputeXP( const Character *gch, const Character *victim )
 {
-  int align;
   long xp = (GetXPWorth( victim )
 	     *  urange( 1, (GetAbilityLevel( victim, COMBAT_ABILITY ) - GetAbilityLevel( gch, COMBAT_ABILITY ) ) + 10, 20 )) / 10;
-  align = gch->Alignment - victim->Alignment;
+  int align = gch->Alignment - victim->Alignment;
 
   /* bonus for attacking opposite alignment */
   if ( align >  990 || align < -990 )
@@ -2576,7 +2826,8 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
       vp = "bruises";
     }
   else if ( dampc <= 50 )
-    { vs = "hit";
+    {
+      vs = "hit";
       vp = "hits";
     }
   else if ( dampc <= 60 )
@@ -2664,7 +2915,7 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
       gvflag = true;
     }
 
-  if ( dt >=0 && dt < TopSN )
+  if ( 0 <= dt && dt < TopSN )
     {
       skill = SkillTable[dt];
     }
