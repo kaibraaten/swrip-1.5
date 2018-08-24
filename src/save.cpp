@@ -282,7 +282,7 @@ void SaveCharacter( Character *ch )
 	  WriteObject( ch, obj, fp, 0, OS_CARRY );
 	}
 
-      if ( ch->PCData && ch->PCData->Comments )
+      if ( ch->PCData && !ch->PCData->Comments().empty() )
 	{
 	  WriteComments( ch, fp );
 	}
@@ -347,7 +347,7 @@ void SaveClone( Character *ch )
     {
       WriteCharacter( ch, fp );
 
-      if ( ch->PCData && ch->PCData->Comments )
+      if ( ch->PCData && !ch->PCData->Comments().empty() )
 	{
 	  WriteComments( ch, fp );
 	}

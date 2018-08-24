@@ -22,31 +22,6 @@
  *           and problem players.  -haus 6/25/1995                          *
  ****************************************************************************/
 
-/*  INSTALLATION: 1) Add following stuff to mud.hpp
- *
- *  Note *      comments;   (* inside char_data definition *)
- *  DECLARE_CMD_FUN( do_comment      );
- *
- *                2) Add do_comment to interp.c, as usual
- *
- *                3) in save.c the following must be added
- *
- * save.c:107:     if ( ch->PCData->Comments )                                              (* saves comments *)
- * save.c:108:       fwrite_comments( ch, fp );                                           (*  in file *)
- *
- *
- * save.c:411:    ch->PCData->Comments                        = NULL;                   (* nulls ch->PCData->Comments *)
- *
- *
- * save.c:457:         else if ( !StrCmp( word, "COMMENT") ) fread_comment(ch, fp ); (*snags #COMMENT*)
- *
- *                4) That looks like it to these eyes.  Lemme know if i forgot anything.
- *
- *
- * EXAMPLE:  See end of this file.
- *
- */
-
 #include <sys/types.h>
 #include <cctype>
 #include <cstdio>
@@ -70,14 +45,13 @@ static void RemoveComment( Character *ch, Character *victim, Note *pnote )
       return;
     }
 
-  assert(victim->PCData->Comments != NULL);
   assert(pnote != NULL);
 
   /*
    * Remove comment from linked list.
    */
-  RemoveFromList(victim->PCData->Comments, pnote);
-  FreeNote(pnote, NULL);
+  victim->PCData->Remove(pnote);
+  FreeNote(pnote);
 
   /*
    * Rewrite entire list.
@@ -89,7 +63,6 @@ void do_comment( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];
-  Note *pnote = NULL;
   Character *victim = NULL;
   int noteNumber = 0;
   int anum = 0;
@@ -161,7 +134,6 @@ void do_comment( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "list" ) )
     {
-      ListIterator *iterator = NULL;
       victim = GetCharacterAnywhere(ch, argument);
 
       if (!victim)
@@ -182,18 +154,14 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( ListSize(victim->PCData->Comments) == 0 )
+      if ( victim->PCData->Comments().size() == 0 )
         {
           ch->Echo( "There are no relevant comments.\r\n" );
           return;
         }
 
-      iterator = AllocateListIterator(victim->PCData->Comments);
-
-      while(ListHasMoreElements(iterator))
+      for(const Note *pnote : victim->PCData->Comments())
         {
-          pnote = (Note*) GetListData(iterator);
-          MoveToNextListElement(iterator);
           noteNumber++;
           ch->Echo( "%2d) %-10s [%s] %s\r\n",
                     noteNumber,
@@ -202,7 +170,6 @@ void do_comment( Character *ch, char *argument )
                     pnote->Subject );
         }
 
-      FreeListIterator(iterator);
       /* Act( AT_ACTION, "$n glances over the notes.", ch, NULL, NULL, TO_ROOM ); */
       return;
     }
@@ -210,7 +177,6 @@ void do_comment( Character *ch, char *argument )
   if ( !StrCmp( arg, "read" ) )
     {
       bool fAll = false;
-      ListIterator *iterator = NULL;
 
       argument = OneArgument( argument, arg1 );
       victim = GetCharacterAnywhere(ch, arg1);
@@ -233,7 +199,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( ListSize(victim->PCData->Comments) == 0 )
+      if ( victim->PCData->Comments().size() == 0 )
         {
           ch->Echo( "There are no relevant comments.\r\n" );
           return;
@@ -256,12 +222,9 @@ void do_comment( Character *ch, char *argument )
 	}
 
       noteNumber = 0;
-      iterator = AllocateListIterator(victim->PCData->Comments);
 
-      while(ListHasMoreElements(iterator))
+      for(const Note *pnote : victim->PCData->Comments())
         {
-          pnote = (Note*) GetListData(iterator);
-          MoveToNextListElement(iterator);
           noteNumber++;
 
           if ( noteNumber == anum || fAll )
@@ -275,12 +238,10 @@ void do_comment( Character *ch, char *argument )
 
               ch->Echo( pnote->Text );
               /* Act( AT_ACTION, "$n reads a note.", ch, NULL, NULL, TO_ROOM ); */
-              FreeListIterator(iterator);
               return;
             }
         }
 
-      FreeListIterator(iterator);
       ch->Echo( "No such comment.\r\n" );
       return;
     }
@@ -384,9 +345,9 @@ void do_comment( Character *ch, char *argument )
       strtime[strlen(strtime)-1]        = '\0';
       ch->PCData->Note->Date                   = CopyString( strtime );
 
-      pnote             = ch->PCData->Note;
+      Note *pnote             = ch->PCData->Note;
       ch->PCData->Note = NULL;
-      AddToList(victim->PCData->Comments, pnote);
+      victim->PCData->Add(pnote);
 
       SaveCharacter(victim);
 
@@ -396,7 +357,6 @@ void do_comment( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "remove" ) )
     {
-      ListIterator *iterator = NULL;
       bool found = false;
       argument = OneArgument(argument, arg1);
       victim = GetCharacterAnywhere(ch, arg1);
@@ -429,12 +389,9 @@ void do_comment( Character *ch, char *argument )
 
       anum = atoi( argument );
       noteNumber = 0;
-      iterator = AllocateListIterator(victim->PCData->Comments);
 
-      while(ListHasMoreElements(iterator))
+      for(Note *pnote : victim->PCData->Comments())
         {
-          pnote = (Note*) GetListData(iterator);
-          MoveToNextListElement(iterator);
           noteNumber++;
 
           if ( IsGreater( ch ) && noteNumber == anum )
@@ -445,8 +402,6 @@ void do_comment( Character *ch, char *argument )
               break;
             }
         }
-
-      FreeListIterator(iterator);
 
       if(!found)
         {
@@ -459,7 +414,7 @@ void do_comment( Character *ch, char *argument )
   ch->Echo( "Huh? Type 'help comment' for usage.\r\n" );
 }
 
-static void WriteToFile(Note *pnote, FILE *fp)
+static void WriteToFile(const Note *pnote, FILE *fp)
 {
   fprintf( fp,"#COMMENT\n" );
   fprintf( fp,"sender       %s~\n",pnote->Sender);
@@ -472,9 +427,11 @@ static void WriteToFile(Note *pnote, FILE *fp)
 void WriteComments( const Character *ch, FILE *fp )
 {
   assert(ch->PCData != NULL);
-  assert(ch->PCData->Comments != NULL);
 
-  ForEachInList(ch->PCData->Comments, (ForEachFunc*)WriteToFile, fp);
+  for(const Note *note : ch->PCData->Comments())
+    {
+      WriteToFile(note, fp);
+    }
 }
 
 void ReadComment( Character *ch, FILE *fp )
@@ -528,7 +485,7 @@ void ReadComment( Character *ch, FILE *fp )
 
       pnote->Text       = ReadStringToTilde( fp, Log, fBootDb );
 
-      AddToList(ch->PCData->Comments, pnote);
+      ch->PCData->Add(pnote);
       return;
     }
 

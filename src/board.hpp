@@ -52,7 +52,7 @@ void FreeBoard(Board *board);
 Board *GetBoardFromObject( const Object *obj );
 Board *FindBoardHere( const Character *ch );
 Board *GetBoard( const std::string &name );
-void FreeNote( Note *pnote, void *ud );
+void FreeNote( Note *pnote );
 void OperateOnNote( Character *ch, const std::string &arg_passed, bool IS_MAIL );
 void AttachNote(Character *ch);
 void CountMailMessages(const Character *ch);

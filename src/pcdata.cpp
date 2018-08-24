@@ -1,15 +1,16 @@
 #include <utility/linkedlist.hpp>
 #include "pcdata.hpp"
 #include "mud.hpp"
+#include "board.hpp"
 
 struct PCData::Impl
 {
   std::list<Alias*> Aliases;
+  std::list<class Note*> Comments;
 };
 
 PCData::PCData()
-  : Comments(AllocateList()),
-    pImpl(new Impl())
+  : pImpl(new Impl())
 {
   Condition.fill(0);
   Condition[COND_THIRST]  = 48;
@@ -28,6 +29,11 @@ PCData::~PCData()
     {
       FreeAlias(alias);
     }
+
+  for(class Note *comment : Comments())
+    {
+      FreeNote(comment);
+    }
 }
 
 const std::list<Alias*> &PCData::Aliases() const
@@ -43,4 +49,19 @@ void PCData::Add(Alias *alias)
 void PCData::Remove(Alias *alias)
 {
   pImpl->Aliases.remove(alias);
+}
+
+const std::list<Note*> &PCData::Comments() const
+{
+  return pImpl->Comments;
+}
+
+void PCData::Add(class Note *comment)
+{
+  pImpl->Comments.push_back(comment);
+}
+
+void PCData::Remove(class Note *comment)
+{
+  pImpl->Comments.remove(comment);
 }

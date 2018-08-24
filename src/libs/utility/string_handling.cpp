@@ -5,6 +5,7 @@
 #endif
 
 #include <algorithm>
+#include <functional>
 #include <cctype>
 #include <cstring>
 #include <cstdlib>
@@ -16,8 +17,8 @@
 
 #define HIDDEN_TILDE    '*'
 
-typedef int (*STRING_COMPARATOR)(const std::string&, const std::string&);
-typedef char* (*STRING_TOKENIZER)( char*, char* );
+using STRING_COMPARATOR = std::function<int(const std::string&, const std::string&)>;
+using STRING_TOKENIZER = std::function<char*(char*, char*)>;
 
 static std::string GetNextChunk( std::string &str, const char c );
 static char *OneArgument2( char *argument, char *arg_first );

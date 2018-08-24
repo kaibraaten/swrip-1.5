@@ -16,6 +16,10 @@ public:
   const std::list<Alias*> &Aliases() const;
   void Add(Alias *alias);
   void Remove(Alias *alias);
+
+  const std::list<class Note*> &Comments() const;
+  void Add(class Note *comment);
+  void Remove(class Note *comment);
   
   char *Password = NULL;
 
@@ -88,8 +92,7 @@ public:
 
   Character *Pet = NULL;
   char *Target = NULL;
-  struct Note *Note = NULL;
-  List *Comments = NULL;
+  class Note *Note = nullptr;
   short Clones = 0;
   int Played = 0;
   time_t Logon = 0;

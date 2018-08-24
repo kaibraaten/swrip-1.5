@@ -498,7 +498,7 @@ void AttachNote( Character *ch )
   ch->PCData->Note     = pnote;
 }
 
-void FreeNote( Note *pnote, void *unused )
+void FreeNote( Note *pnote )
 {
   FreeMemory( pnote->Text );
   FreeMemory( pnote->Subject );
@@ -528,7 +528,7 @@ static void RemoveNote( Board *board, Note *pnote )
    */
   board->Remove(pnote);
 
-  FreeNote( pnote, NULL );
+  FreeNote( pnote );
   Boards->Save(board);
 }
 

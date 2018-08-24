@@ -26,7 +26,7 @@
 #ifndef _CERIS_EVENT_HPP_
 #define _CERIS_EVENT_HPP_
 
-typedef struct event_t event_t;
+struct event_t;
 typedef void (*EventHandler)( void *userdata, void *eventargs );
 
 /*

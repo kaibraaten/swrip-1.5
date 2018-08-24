@@ -188,8 +188,10 @@ static char *GetMultiCommand( Descriptor *d, char *argument )
   return multicommand;
 }
 
-static bool _CommandFunctionEquals(const Command *command, const CmdFun *function)
+static bool _CommandFunctionEquals(void *cmd, const void *fun)
 {
+  const Command *command = static_cast<const Command*>(cmd);
+  const CmdFun *function = reinterpret_cast<const CmdFun*>(fun);
   return command->Function == function;
 }
 
@@ -199,8 +201,10 @@ struct CommandFindData
   const char *command;
 };
 
-static bool _CheckTrustAndBestowments(const Command *cmd, const struct CommandFindData *data)
+static bool _CheckTrustAndBestowments(void *c, const void *d)
 {
+  const Command *cmd = static_cast<const Command*>(c);
+  const CommandFindData *data = static_cast<const CommandFindData*>(d);
   const char *command = data->command;
   const Character *ch = data->ch;
   int trust = GetTrustLevel(ch);
@@ -240,7 +244,7 @@ void Interpret( Character *ch, char *argument )
       assert(fun != nullptr);
 
       const List *commands = GetEntities(CommandRepository);
-      cmd = (Command*) FindIfInList(commands, (Predicate*) _CommandFunctionEquals, (const void*)fun);
+      cmd = (Command*) FindIfInList(commands, _CommandFunctionEquals, (const void*)fun);
       found = cmd != NULL;
 
       if ( !found )
@@ -334,7 +338,7 @@ void Interpret( Character *ch, char *argument )
         const List *commands = GetEntities(CommandRepository);
 	findData.ch = ch;
 	findData.command = command;
-        cmd = (Command*) FindIfInList(commands, (Predicate*) _CheckTrustAndBestowments, &findData);
+        cmd = (Command*) FindIfInList(commands, _CheckTrustAndBestowments, &findData);
 
         if(cmd != NULL)
           {

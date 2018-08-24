@@ -1,23 +1,22 @@
+#include <functional>
 #include <cstdio>
 #include <cstdlib>
 #include <cassert>
 #include "event.hpp"
-
-typedef struct EventHandlerData EventHandlerData;
-
-typedef struct ListNode
-{
-  EventHandlerData *data;
-  struct ListNode* next;
-} ListNode;
-
-typedef void (*ListCallback)(ListNode* data);
 
 struct EventHandlerData
 {
   void *UserData;
   EventHandler Func;
 };
+
+struct ListNode
+{
+  EventHandlerData *data;
+  struct ListNode* next;
+};
+
+using ListCallback = std::function<void(ListNode*)>;
 
 struct event_t
 {
