@@ -1471,7 +1471,7 @@ void FreeCharacter( Character *ch )
     {
       if ( ch->PCData->Note )
         {
-          FreeNote( ch->PCData->Note, NULL );
+          FreeNote( ch->PCData->Note );
         }
 
       if( ch->PCData->CraftingSession )
@@ -1492,8 +1492,10 @@ void FreeCharacter( Character *ch )
       FreeMemory( ch->PCData->AuthedBy    );
       FreeMemory( ch->PCData->Prompt       );
 
-      ForEachInList(ch->PCData->Comments, (ForEachFunc*)FreeNote, NULL);
-      FreeList( ch->PCData->Comments );
+      while(!ch->PCData->Comments().empty())
+        {
+          FreeNote(ch->PCData->Comments().front());
+        }
 
       if ( ch->PCData->SubPrompt )
         {

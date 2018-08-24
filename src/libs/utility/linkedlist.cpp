@@ -35,8 +35,7 @@ static struct jsw_list *new_list(int has_dummy_head, int has_dummy_tail);
 static struct jsw_node *new_node(void *data, struct jsw_node *prev, struct jsw_node *next);
 static struct jsw_node *insert_after(struct jsw_list *list, struct jsw_node *pos, void *data);
 static struct jsw_node *insert_before(struct jsw_list *list, struct jsw_node *pos, void *data);
-static struct jsw_node *insert_sorted(struct jsw_list *list, void *data,
-                                      int (*compare)(const void*, const void*));
+static struct jsw_node *insert_sorted(struct jsw_list *list, void *data, Comparator compare);
 static struct jsw_node *remove_node(struct jsw_list *list, struct jsw_node *pos);
 static struct jsw_node *destroy_node(struct jsw_node *node, void (destroy_data)(void*));
 static void destroy_list(struct jsw_list *list, void (destroy_data)(void*));
@@ -244,8 +243,7 @@ static struct jsw_node *remove_node(struct jsw_list *list, struct jsw_node *pos)
     Insert a new node in sorted order
     Returns a pointer to the new node or NULL on failure
 */
-static struct jsw_node *insert_sorted(struct jsw_list *list, void *data,
-                                      int (*compare)(const void*, const void*))
+static struct jsw_node *insert_sorted(struct jsw_list *list, void *data, Comparator compare)
 {
   struct jsw_node *rv = NULL;
 
@@ -313,7 +311,7 @@ void AddToList(List *list, void *data)
   AddToListBack(list, data);
 }
 
-void AddToListSorted(List *list, void *data, Comparator *compare)
+void AddToListSorted(List *list, void *data, Comparator compare)
 {
   insert_sorted(list->implementation, data, compare);
 }
@@ -415,7 +413,7 @@ size_t ListSize(const List *list)
   return list->implementation->size;
 }
 
-void *FindIfInList(const List *list, Predicate *predicate, const void *userData)
+void *FindIfInList(const List *list, Predicate predicate, const void *userData)
 {
   ListIterator *iterator = AllocateListIterator(list);
   void *result = NULL;
@@ -438,7 +436,7 @@ void *FindIfInList(const List *list, Predicate *predicate, const void *userData)
   return result;
 }
 
-void ForEachInList(const List *list, ForEachFunc *action, void *userData)
+void ForEachInList(const List *list, ForEachFunc action, void *userData)
 {
   ListIterator *iterator = AllocateListIterator(list);
 
@@ -452,7 +450,7 @@ void ForEachInList(const List *list, ForEachFunc *action, void *userData)
   FreeListIterator(iterator);
 }
 
-size_t CountIfInList(const List *list, Predicate *predicate, const void *userData)
+size_t CountIfInList(const List *list, Predicate predicate, const void *userData)
 {
   ListIterator *iterator = AllocateListIterator(list);
   size_t counter = 0;

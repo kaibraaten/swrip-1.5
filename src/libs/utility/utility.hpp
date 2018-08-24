@@ -1,6 +1,7 @@
 #ifndef _SWR_UTILITY_HPP_
 #define _SWR_UTILITY_HPP_
 
+#include <functional>
 #include <string>
 #include <cstdio>
 #include <cstdlib>
@@ -186,7 +187,7 @@ void ReadToEndOfLine( FILE *fp, Logger *log, bool fBootDb);
 char *ReadWord( FILE *fp, Logger *log, bool fBootDb );
 char *ReadLine( FILE *fp, Logger *log, bool fBootDb );
 void ForEachLuaFileInDir( const char *pathToDir,
-			  void (*doOnFile)(const std::string&, void *ud),
+                          std::function<void(const std::string&, void*)> doOnFile,
 			  void *userData );
 const char *ConvertToLuaFilename( const std::string &name );
 

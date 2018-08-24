@@ -25,12 +25,13 @@
 #ifndef _CERIS_OLDREPOSITORY_HPP_
 #define _CERIS_OLDREPOSITORY_HPP_
 
+#include <functional>
 #include <utility/types.hpp>
 #include <utility/linkedlist.hpp>
 
-typedef struct OldRepository OldRepository;
-typedef void (*EntityLoader)(OldRepository *self);
-typedef void (*EntitySaver)(const OldRepository *self);
+struct OldRepository;
+using EntityLoader = std::function<void(OldRepository *self)>;
+using EntitySaver = std::function<void(const OldRepository *self)>;
 
 OldRepository *NewRepository(EntityLoader loadFunc, EntitySaver saveFunc);
 void AddEntity(OldRepository *repo, void *entity);

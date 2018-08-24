@@ -9,28 +9,32 @@
 
 static int L_CommandEntry( lua_State *L );
 static void PushCommandTable( lua_State *L, const void *userData );
-static void PushCommand( const Command *command, lua_State *L );
+static void PushCommand(void *command, void *L);
 
 OldRepository *CommandRepository = NULL;
 
-static bool _ExactMatch(const Command *command, const char *name)
+static bool _ExactMatch(void *cmd, const void *n)
 {
+  const Command *command = static_cast<const Command*>(cmd);
+  const char *name = static_cast<const char*>(n);
   return StrCmp(command->Name, name) == 0;
 }
 
-static bool _PrefixMatch(const Command *command, const char *name)
+static bool _PrefixMatch(void *cmd, const void *n)
 {
+  const Command *command = static_cast<const Command*>(cmd);
+  const char *name = static_cast<const char*>(n);
   return StringPrefix(command->Name, name) == 0;
 }
 
 Command *GetCommand( const char *name )
 {
   const List *commandList = GetEntities(CommandRepository);
-  Command *command = (Command*) FindIfInList(commandList, (Predicate*)_ExactMatch, name);
+  Command *command = (Command*) FindIfInList(commandList, _ExactMatch, name);
 
   if(command == NULL)
     {
-      command = (Command*) FindIfInList(commandList, (Predicate*)_PrefixMatch, name);
+      command = (Command*) FindIfInList(commandList, _PrefixMatch, name);
     }
 
   return command;
@@ -85,8 +89,11 @@ void AddCommand( Command *command )
   AddEntity(CommandRepository, command);
 }
 
-static void PushCommand(const Command *command, lua_State *L)
+static void PushCommand(void *cmd, void *state)
 {
+  const Command *command = static_cast<const Command*>(cmd);
+  lua_State *L = static_cast<lua_State*>(state);
+  
   static int idx = 0;
   lua_pushinteger( L, ++idx );
   lua_newtable( L );
@@ -104,7 +111,7 @@ static void PushCommandTable( lua_State *L, const void *dummy )
 {
   const List *commands = GetEntities(CommandRepository);
   lua_newtable( L );
-  ForEachInList(commands, (ForEachFunc*) PushCommand, L);
+  ForEachInList(commands, PushCommand, L);
   lua_setglobal( L, "commands" );
 }
 

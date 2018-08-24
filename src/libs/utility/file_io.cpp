@@ -481,7 +481,7 @@ void AppendToFile( const std::string &file, const std::string &str )
 }
 
 void ForEachLuaFileInDir( const char *pathToDir,
-			  void (*doOnFile)(const std::string&, void *ud),
+                          std::function<void(const std::string&, void*)> doOnFile,
 			  void *userData )
 {
   DIR *dp = NULL;
