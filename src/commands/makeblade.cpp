@@ -113,8 +113,6 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   backstab->Duration           = -1;
   backstab->Location           = GetAffectType( "backstab" );
   backstab->Modifier           = weapon->Level / 3;
-  backstab->AffectedBy         = 0;
-  backstab->Next               = NULL;
   weapon->Add(backstab);
   ++top_affect;
 
@@ -125,8 +123,6 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       hitroll->Duration           = -1;
       hitroll->Location           = GetAffectType( "hitroll" );
       hitroll->Modifier           = -2;
-      hitroll->AffectedBy         = 0;
-      hitroll->Next               = NULL;
       weapon->Add(hitroll);
       ++top_affect;
     }

@@ -26,18 +26,17 @@
 void do_who( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
-  char clan_name[MAX_INPUT_LENGTH / 2];
-  char invis_str[MAX_INPUT_LENGTH / 2];
-  char char_name[MAX_INPUT_LENGTH / 2];
-  char extra_title[MAX_STRING_LENGTH / 2];
-  char race_text[MAX_INPUT_LENGTH];
-  Descriptor *d = NULL;
+  char clan_name[MAX_INPUT_LENGTH / 2] = {'\0'};
+  char invis_str[MAX_INPUT_LENGTH / 2] = {'\0'};
+  char char_name[MAX_INPUT_LENGTH / 2] = {'\0'};
+  char extra_title[MAX_STRING_LENGTH / 2] = {'\0'};
+  char race_text[MAX_INPUT_LENGTH] = {'\0'};
   int iRace = 0;
   int iLevelLower = 0;
-  int iLevelUpper = 0;
+  int iLevelUpper = MAX_LEVEL;
   int nNumber = 0;
   int nMatch = 0;
-  bool rgfRace[MAX_RACE];
+  std::array<bool, MAX_RACE> rgfRace;
   bool fRaceRestrict = false;
   bool fImmortalOnly = false;
   bool fShowHomepage = false;
@@ -45,28 +44,16 @@ void do_who( Character *ch, char *argument )
   bool NullCh = false;
   Clan *pClan = NULL;
   FILE *whoout = NULL;
-  WhoData *cur_who = NULL;
-  WhoData *next_who = NULL;
-  WhoData *first_mortal = NULL;
-  WhoData *first_newbie = NULL;
-  WhoData *first_imm = NULL;
-
+  std::list<WhoData> immortals;
+  std::list<WhoData> mortals;
+  std::list<WhoData> newbies;
+  
   /*
    * Set default arguments.
    */
+  rgfRace.fill(false);
 
-  iLevelLower    = 0;
-  iLevelUpper    = MAX_LEVEL;
-
-  fRaceRestrict  = false;
-  fImmortalOnly  = false;
-  fShowHomepage  = false;
-  fClanMatch = false;
-
-  for ( iRace = 0; iRace < MAX_RACE; iRace++ )
-    rgfRace[iRace] = false;
-
-  if ( !ch )
+  if ( ch == nullptr )
     {
       NullCh = true;
       ch = new Character(new PCData(), nullptr);
@@ -77,8 +64,6 @@ void do_who( Character *ch, char *argument )
   /*
    * Parse arguments.
    */
-  nNumber = 0;
-
   for ( ;; )
     {
       char arg[MAX_STRING_LENGTH];
@@ -168,7 +153,7 @@ void do_who( Character *ch, char *argument )
                         }
                       else
                         {
-     ch->Echo("&ROnly immortal's can do that to another clan!&w\r\n");
+                          ch->Echo("&ROnly immortal's can do that to another clan!&w\r\n");
                           return;
                         }
                     }
@@ -210,41 +195,58 @@ void do_who( Character *ch, char *argument )
     }
 
   /* start from last to first to get it in the proper order */
-  for ( d = LastDescriptor; d; d = d->Previous )
+  for ( const Descriptor *d = LastDescriptor; d; d = d->Previous )
     {
-      Character *wch;
-      char const *race;
+      const Character *wch = nullptr;
+      const char *race = nullptr;
       char force_char = ' ';
 
       if ( (d->ConnectionState != CON_PLAYING && d->ConnectionState != CON_EDITING)
            || ( !CanSeeCharacter( ch, d->Character ) && IsImmortal( d->Character ) )
            || d->Original)
-        continue;
-      wch   = d->Original ? d->Original : d->Character;
+        {
+          continue;
+        }
+      
+      wch = d->Original ? d->Original : d->Character;
+
       if ( wch->TopLevel < iLevelLower
            ||   wch->TopLevel > iLevelUpper
            || ( fImmortalOnly  && wch->TopLevel < LEVEL_IMMORTAL )
            || ( fRaceRestrict && !rgfRace[wch->Race] )
            || ( fClanMatch && ( pClan != wch->PCData->ClanInfo.Clan ))  /* SB */ )
-        continue;
+        {
+          continue;
+        }
+      
       nMatch++;
       /* added optional invisibility on the who list to players who want it.
          Darrik Vequir */
 
       if ( (wch->PCData->WhoCloak == true) && (ch->TopLevel < LEVEL_GREATER))
-        continue;
-
+        {
+          continue;
+        }
+      
       if ( fShowHomepage
            && !IsNullOrEmpty( wch->PCData->HomePage ) )
-        sprintf( char_name, "<A HREF=\"%s\">%s</A>",
-                 ShowTilde( wch->PCData->HomePage ), wch->Name );
+        {
+          sprintf( char_name, "<A HREF=\"%s\">%s</A>",
+                   ShowTilde( wch->PCData->HomePage ), wch->Name );
+        }
       else
-        strcpy( char_name, "") ;
-
+        {
+          strcpy( char_name, "") ;
+        }
+      
       if ( IsGreater(ch) )
-        sprintf( race_text, "(%s) ", RaceTable[wch->Race].Name);
+        {
+          sprintf( race_text, "(%s) ", RaceTable[wch->Race].Name);
+        }
       else
-        strcpy( race_text, "" );
+        {
+          strcpy( race_text, "" );
+        }
 
       race = race_text;
 
@@ -323,31 +325,29 @@ void do_who( Character *ch, char *argument )
        */
 
       /* First make the structure. */
-      cur_who = new WhoData();
-      cur_who->Text = CopyString( buf );
+      WhoData cur_who;
+      cur_who.Text = buf;
+
       if ( IsImmortal( wch ) )
-        cur_who->Type = WT_IMM;
+        cur_who.Type = WT_IMM;
       else if ( GetTrustLevel( wch ) <= 5 )
-        cur_who->Type = WT_NEWBIE;
+        cur_who.Type = WT_NEWBIE;
       else
-        cur_who->Type = WT_MORTAL;
+        cur_who.Type = WT_MORTAL;
 
       /* Then put it into the appropriate list. */
-      switch ( cur_who->Type )
+      switch ( cur_who.Type )
         {
         case WT_MORTAL:
-          cur_who->Next = first_mortal;
-          first_mortal = cur_who;
+          mortals.push_back(cur_who);
           break;
 	  
         case WT_IMM:
-          cur_who->Next = first_imm;
-          first_imm = cur_who;
+          immortals.push_back(cur_who);
           break;
 	  
         case WT_NEWBIE:
-          cur_who->Next = first_newbie;
-          first_newbie = cur_who;
+          newbies.push_back(cur_who);
 	  break;
         }
     }
@@ -359,7 +359,7 @@ void do_who( Character *ch, char *argument )
 
   /* Deadly list removed for swr ... now only 2 lists */
 
-  if ( first_newbie )
+  if ( !newbies.empty() )
     {
       if ( NullCh )
         fprintf( whoout,"\r\n----------------------------------[ New Citizens ]----------------------------\r\n\r\n" );
@@ -367,19 +367,16 @@ void do_who( Character *ch, char *argument )
         ch->Echo("\r\n&G----------------------------------[ New Citizens ]----------------------------&W\r\n\r\n");
     }
 
-  for ( cur_who = first_newbie; cur_who; cur_who = next_who )
+  for(const WhoData &cur_who : newbies)
     {
       if ( NullCh )
-        fprintf( whoout, "%s", cur_who->Text );
+        fprintf( whoout, "%s", cur_who.Text.c_str() );
       else
-        ch->Echo(cur_who->Text);
-      next_who = cur_who->Next;
-      FreeMemory( cur_who->Text );
-      delete cur_who;
+        ch->Echo(cur_who.Text);
     }
 
 
-  if ( first_mortal )
+  if ( !mortals.empty() )
     {
       if ( NullCh )
         fprintf( whoout,"\r\n--------------------------------[ Galactic Citizens ]-------------------------\r\n\r\n" );
@@ -387,19 +384,15 @@ void do_who( Character *ch, char *argument )
         ch->Echo("\r\n&G--------------------------------[ Galactic Citizens ]-------------------------&W\r\n\r\n");
     }
 
-  for ( cur_who = first_mortal; cur_who; cur_who = next_who )
+  for(const WhoData &cur_who : mortals)
     {
       if ( NullCh )
-        fprintf( whoout, "%s", cur_who->Text );
+        fprintf( whoout, "%s", cur_who.Text.c_str() );
       else
-        ch->Echo(cur_who->Text);
-
-      next_who = cur_who->Next;
-      FreeMemory( cur_who->Text );
-      delete cur_who;
+        ch->Echo(cur_who.Text);
     }
 
-  if ( first_imm )
+  if ( !immortals.empty() )
     {
       if ( NullCh )
         fprintf( whoout, "\r\n-------------------------------[ Omnipresent Beings ]-------------------------\r\n\r\n" );
@@ -407,15 +400,12 @@ void do_who( Character *ch, char *argument )
         ch->Echo("\r\n&G-------------------------------[ Omnipresent Beings ]--------------------------&W\r\n\r\n");
     }
 
-  for ( cur_who = first_imm; cur_who; cur_who = next_who )
+  for(const WhoData &cur_who : immortals)
     {
       if ( NullCh )
-        fprintf( whoout, "%s", cur_who->Text );
+        fprintf( whoout, "%s", cur_who.Text.c_str() );
       else
-        ch->Echo(cur_who->Text);
-      next_who = cur_who->Next;
-      FreeMemory( cur_who->Text );
-      delete cur_who;
+        ch->Echo(cur_who.Text);
     }
 
   if ( NullCh )

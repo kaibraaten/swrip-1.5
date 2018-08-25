@@ -58,10 +58,8 @@ extern "C" {
 class WhoData
 {
 public:
-  WhoData *Previous = nullptr;
-  WhoData *Next = nullptr;
-  char     *Text = nullptr;
-  int       Type = 0;
+  std::string Text;
+  int Type = 0;
 };
 
 class TimeInfo
@@ -250,8 +248,6 @@ public:
 class Affect
 {
 public:
-  Affect *Next = nullptr;
-  Affect *Previous = nullptr;
   short Type = 0;
   short Duration = 0;
   short Location = 0;
@@ -275,8 +271,6 @@ public:
 class Timer
 {
 public:
-  Timer  *Previous = nullptr;
-  Timer  *Next = nullptr;
   CmdFun *DoFun = nullptr;
   int     Value = 0;
   short   Type = 0;
