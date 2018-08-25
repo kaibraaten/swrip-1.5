@@ -500,6 +500,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
       return rNONE;
     }
 
+  // First attack
   ch_ret retcode = HitOnce( ch, victim, dt );
   
   if ( retcode != rNONE )
@@ -507,15 +508,23 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
       return retcode;
     }
   
-  if ( GetFightingOpponent( ch ) != victim || dt == gsn_backstab || dt == gsn_circle)
+  if ( GetFightingOpponent( ch ) != victim )
     {
       return rNONE;
     }
-  
+
+  // Don't do more attacks if this is a backstab or a circle.
+  if ( dt == gsn_backstab
+       || dt == gsn_circle)
+    {
+      return rNONE;
+    }
+
+  // Berserk extra attack
   /* Very high chance of hitting compared to chance of going berserk */
   /* 40% or higher is always hit.. don't learn anything here though. */
   /* -- Altrag */
-  int hit_chance = IsNpc(ch) ? 100 : (ch->PCData->Learned[gsn_berserk]*5/2);
+  int hit_chance = IsNpc(ch) ? 100 : (ch->PCData->Learned[gsn_berserk] * 5 / 2);
 
   if ( IsAffectedBy(ch, AFF_BERSERK) && GetRandomPercent() < hit_chance )
     {
@@ -556,11 +565,11 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
     }
   
   /*
-   * NPC predetermined number of attacks                        -Thoric
+   * NPC predetermined number of (extra) attacks                        -Thoric
    */
   if ( IsNpc(ch) && ch->NumberOfAttacks > 0 )
     {
-      for ( hit_chance = 0; hit_chance <= ch->NumberOfAttacks; hit_chance++ )
+      for ( int i = 0; i <= ch->NumberOfAttacks; ++i )
         {
           retcode = HitOnce( ch, victim, dt );
 
@@ -776,24 +785,6 @@ static short GetOffensiveShieldLevelModifier( const Character *ch, const Charact
  */
 ch_ret HitOnce( Character *ch, Character *victim, int dt )
 {
-  Object *wield = NULL;
-  int victim_ac = 0;
-  int thac0 = 0;
-  int thac0_00 = 0;
-  int thac0_32 = 0;
-  int plusris = 0;
-  int dam = 0;
-  int x = 0;
-  int diceroll = 0;
-  int attacktype = 0;
-  int cnt = 0;
-  int prof_bonus = 0;
-  int prof_gsn = 0;
-  ch_ret retcode = rNONE;
-  int hit_chance = 0;
-  bool fail = false;
-  Affect af;
-
   /*
    * Can't beat a dead char!
    * Guard against weird room-leavings.
@@ -806,7 +797,9 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
   /*
    * Figure out the weapon doing the damage                     -Thoric
    */
-  if ( (wield = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD )) != NULL )
+  Object *wield = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
+  
+  if ( wield != nullptr )
     {
       if ( dual_flip == false )
         {
@@ -822,19 +815,22 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
     {
       wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
     }
-  
-  prof_bonus = GetWeaponProficiencyBonus( ch, wield, &prof_gsn );
 
-  if ( ch->Fighting             /* make sure fight is already started */
+  int prof_gsn = 0;
+  int prof_bonus = GetWeaponProficiencyBonus( ch, wield, &prof_gsn );
+  ch_ret retcode = rNONE;
+  
+  if ( ch->Fighting != nullptr            /* make sure fight is already started */
        && dt == TYPE_UNDEFINED
        && IsNpc(ch)
        && ch->AttackFlags != 0 )
     {
-      cnt = 0;
-
+      int cnt = 0;
+      int attacktype = 0;
+      
       for ( ;; )
         {
-          x = GetRandomNumberFromRange( 0, 6 );
+          int x = GetRandomNumberFromRange( 0, 6 );
           attacktype = 1 << x;
 
           if ( IsBitSet( ch->AttackFlags, attacktype ) )
@@ -858,7 +854,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
         {
           attacktype = 0;
         }
-      
+
       switch ( attacktype )
         {
         default:
@@ -907,10 +903,10 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
   /*
    * Calculate to-hit-armor-class-0 versus armor.
    */
-  thac0_00 = 20;
-  thac0_32 = 10;
-  thac0     = Interpolate( GetAbilityLevel( ch, COMBAT_ABILITY ), thac0_00, thac0_32 ) - GetHitRoll(ch);
-  victim_ac = (int) (GetArmorClass(victim) / 10);
+  int thac0_00 = 20;
+  int thac0_32 = 10;
+  int thac0 = Interpolate( GetAbilityLevel( ch, COMBAT_ABILITY ), thac0_00, thac0_32 ) - GetHitRoll(ch);
+  int victim_ac = (int) (GetArmorClass(victim) / 10);
 
   /* if you can't see what's coming... */
   if ( wield && !CanSeeObject( victim, wield) )
@@ -939,7 +935,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
   /*
    * The moment of excitement!
    */
-  diceroll = GetRandomNumberFromRange( 1, 20 );
+  int diceroll = GetRandomNumberFromRange( 1, 20 );
 
   if ( diceroll == 1
        || ( diceroll < 20 && diceroll < thac0 - victim_ac ) )
@@ -954,6 +950,8 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
       return rNONE;
     }
 
+  int dam = 0;
+  
   /*
    * Hit.
    * Calc damage.
@@ -999,7 +997,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
       dam *= (2 + urange( 2, GetAbilityLevel( ch, HUNTING_ABILITY ) - (GetAbilityLevel( victim, COMBAT_ABILITY ) / 2), 30 ) / 40);
     }
   
-  plusris = 0;
+  int plusris = 0;
 
   if ( wield )
     {
@@ -1122,9 +1120,9 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
         {
           dam /= 10;
           wield->Value[OVAL_WEAPON_CHARGE] -= 3;
-          fail = false;
-          hit_chance = ModifySavingThrowBasedOnResistance( victim, GetAbilityLevel( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
-
+          int hit_chance = ModifySavingThrowBasedOnResistance( victim, GetAbilityLevel( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
+          bool fail = false;
+          
           if ( hit_chance == 1000 )
             {
               fail = true;
@@ -1163,6 +1161,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
 
               if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
                 {
+                  Affect af;
                   af.Type       = gsn_stun;
                   af.Location   = APPLY_AC;
                   af.Modifier   = 20;
