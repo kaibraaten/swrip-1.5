@@ -2516,8 +2516,8 @@ static bool HasSameOvalues( const Object *a, const Object *b )
  */
 static Object *GroupObject( Object *obj1, Object *obj2 )
 {
-  if ( !obj1 || !obj2 )
-    return NULL;
+  assert(obj1 != nullptr);
+  assert(obj2 != nullptr);
 
   if ( obj1 == obj2 )
     return obj1;
@@ -2559,20 +2559,16 @@ static Object *GroupObject( Object *obj1, Object *obj2 )
  */
 void SplitGroupedObject( Object *obj, int num )
 {
-  int count = 0;
-  Object *rest = NULL;
+  assert(obj != nullptr);
+  
+  int count = obj->Count;
 
-  if (!obj)
+  if ( count <= num || num == 0 )
     {
       return;
     }
-
-  count = obj->Count;
-
-  if ( count <= num || num == 0 )
-    return;
-
-  rest = CopyObject(obj);
+  
+  Object *rest = CopyObject(obj);
   --obj->Prototype->Count;     /* since CopyObject() ups this value */
   --numobjsloaded;
   rest->Count = obj->Count - num;
@@ -2638,14 +2634,22 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
   if ( destroom || (!ch && (destroom = obj->InRoom) != NULL) )
     {
       bool movedsome = false;
-      std::list<Object*> objects(obj->Objects());
 
-      for(Object *otmp : objects)
+      for(auto i = std::begin(obj->Objects()), i_next = std::end(obj->Objects());
+          i != std::end(obj->Objects()); i = i_next)
         {
+          Object *otmp = *i;
+          i_next = ++i;
+          
           if ( ch && (otmp->Prototype->mprog.progtypes & DROP_PROG) && otmp->Count > 1 )
             {
               SeparateOneObjectFromGroup( otmp );
               ObjectFromObject( otmp );
+
+              if(i_next == std::end(obj->Objects()))
+                {
+                  i_next = std::begin(obj->Objects());
+                }
             }
           else
             {
@@ -2748,21 +2752,18 @@ bool EconomyHas( const Area *tarea, int gold )
  */
 void EconomizeMobileGold( Character *mob )
 {
-  int gold;
-  Area *tarea;
+  assert(mob->InRoom != nullptr);
 
   /* make sure it isn't way too much */
   mob->Gold = umin( mob->Gold, mob->TopLevel * mob->TopLevel * 400 );
 
-  if ( !mob->InRoom )
-    return;
-
-  tarea = mob->InRoom->Area;
-
-  gold = ((tarea->HighEconomy > 0) ? 1 : 0) * 1000000000 + tarea->LowEconomy;
+  Area *tarea = mob->InRoom->Area;
+  long gold = ((tarea->HighEconomy > 0) ? 1 : 0) * 1000000000 + tarea->LowEconomy;
   mob->Gold = urange( 0, mob->Gold, gold / 100 );
 
-  if ( mob->Gold )
-    LowerEconomy( tarea, mob->Gold );
+  if ( mob->Gold != 0 )
+    {
+      LowerEconomy( tarea, mob->Gold );
+    }
 }
 

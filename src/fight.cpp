@@ -1901,10 +1901,13 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       if ( ( equippedObject = GetEquipmentOnCharacter( victim, WEAR_LIGHT ) ) != NULL )
         UnequipCharacter( victim, equippedObject );
 
-      std::list<Object*> carriedByVictim(victim->Objects());
-
-      for(Object *obj : carriedByVictim)
+      for(auto i = std::begin(victim->Objects()), i_next = std::end(victim->Objects());
+          i != std::end(victim->Objects());
+          i = i_next)
         {
+          Object *obj = *i;
+          i_next = ++i;
+          
           if ( obj->WearLoc == WEAR_NONE )
             {
               if ( obj->Prototype->mprog.progtypes & DROP_PROG && obj->Count > 1 )
@@ -1912,6 +1915,11 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
                   ++cnt;
                   SeparateOneObjectFromGroup( obj );
                   ObjectFromCharacter( obj );
+
+                  if(i_next == std::end(victim->Objects()))
+                    {
+                      i_next = std::begin(victim->Objects());
+                    }
                 }
               else
                 {
