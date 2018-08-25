@@ -38,7 +38,8 @@ public:
   virtual ~Character();
 
   virtual void Echo(const char *fmt, ...) const;
-
+  virtual void Echo(const std::string &txt) const;
+  
   const std::list<Affect*> &Affects() const;
   void Add(Affect *affect);
   void Remove(Affect *affect);

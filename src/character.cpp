@@ -143,6 +143,11 @@ Character::~Character()
     }
 }
 
+void Character::Echo(const std::string &txt) const
+{
+  Echo("%s", txt.c_str());
+}
+
 void Character::Echo(const char *fmt, ...) const
 {
   if(IsNpc(this))
