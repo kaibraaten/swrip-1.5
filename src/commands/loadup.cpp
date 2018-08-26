@@ -29,10 +29,7 @@ void do_loadup( Character *ch, char *argument )
 
   if ( stat( fname, &fst ) != -1 )
     {
-      Descriptor *d = new Descriptor();
-      d->ConnectionState = CON_GET_NAME;
-      d->OutSize = 2000;
-      AllocateMemory( d->OutBuffer, char, d->OutSize );
+      Descriptor *d = new NullDescriptor();
 
       AddCharacter( d->Character );
       old_room_vnum = d->Character->InRoom->Vnum;
@@ -129,5 +126,3 @@ void do_loadup( Character *ch, char *argument )
 
   ch->Echo("No such player.\r\n");
 }
-
-

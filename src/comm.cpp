@@ -669,8 +669,7 @@ static void NewDescriptor( socket_t new_desc )
       return;
     }
 
-  Descriptor *dnew = new Descriptor();
-  dnew->Initialize(desc);
+  Descriptor *dnew = new Descriptor(desc);
   dnew->Remote.Port = ntohs( sock.sin_port );
 
   strcpy( buf, inet_ntoa( sock.sin_addr ) );

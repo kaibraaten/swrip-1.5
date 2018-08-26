@@ -32,14 +32,20 @@ struct Descriptor::Impl
   unsigned char PreviousColor = 0;
 };
 
-Descriptor::Descriptor()
+Descriptor::Descriptor(socket_t desc)
+  : pImpl(new Impl())
 {
+  Socket = desc;
+  ConnectionState = CON_GET_NAME;
+  OutSize = 2000;
+  pImpl->PreviousColor = 0x07;
 
+  AllocateMemory( OutBuffer, char, OutSize );
 }
 
 Descriptor::~Descriptor()
 {
-
+  delete pImpl;
 }
 
 void Descriptor::WriteToBuffer(const std::string &txt, size_t length)
@@ -48,8 +54,10 @@ void Descriptor::WriteToBuffer(const std::string &txt, size_t length)
    * Find length in case caller didn't.
    */
   if ( length <= 0 )
-    length = txt.size();
-
+    {
+      length = txt.size();
+    }
+  
   /*
    * Initial \r\n if needed.
    */
@@ -93,7 +101,7 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
   const char *ctype = col;
   unsigned char cl = 0;
   class Character *och = Original ? Original : Character;
-  bool ansi = !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI);
+  const bool ansi = !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI);
 
   col++;
 
@@ -140,7 +148,7 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
 
         case '^':
           {
-            int newcol = GetColorIndex(*col);
+            const int newcol = GetColorIndex(*col);
 
             if ( newcol < 0 )
               {
@@ -169,12 +177,12 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
             {
               strcat(buf, "m\033[");
 
-              if ( (cl & 0x08) )
+              if ( cl & 0x08 )
                 {
                   strcat(buf, "1;");
                 }
 
-              if ( (cl & 0x80) )
+              if ( cl & 0x80 )
                 {
                   strcat(buf, "5;");
                 }
@@ -189,7 +197,7 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
 
           if ( (cl & 0x07) != (pImpl->PreviousColor & 0x07) )
             {
-              sprintf(buf+ln, "3%d;", cl & 0x07);
+              sprintf(buf + ln, "3%d;", cl & 0x07);
               ln += 3;
             }
 
@@ -235,12 +243,12 @@ bool Descriptor::CheckReconnect( const std::string &name, bool fConn )
               WriteToBuffer( "Already playing.\r\nName: ", 0 );
               ConnectionState = CON_GET_NAME;
 
-              if ( Character )
+              if ( Character != nullptr )
                 {
                   /* clear descriptor pointer to get rid of bug message in log */
-                  Character->Desc = NULL;
+                  Character->Desc = nullptr;
                   FreeCharacter( Character );
-                  Character = NULL;
+                  Character = nullptr;
                 }
               
               return BERR;
@@ -254,13 +262,13 @@ bool Descriptor::CheckReconnect( const std::string &name, bool fConn )
           else
             {
               /* clear descriptor pointer to get rid of bug message in log */
-              Character->Desc = NULL;
+              Character->Desc = nullptr;
               FreeCharacter( Character );
               Character = ch;
               ch->Desc = this;
               ch->IdleTimer = 0;
               ch->Echo( "Reconnecting.\r\n" );
-              Act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
+              Act( AT_ACTION, "$n has reconnected.", ch, nullptr, nullptr, TO_ROOM );
               sprintf( log_buf, "%s@%s reconnected.", ch->Name, Remote.Hostname );
               Log->LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
               ConnectionState = CON_PLAYING;
@@ -278,7 +286,7 @@ bool Descriptor::CheckMultiplaying( const std::string &name )
   for ( Descriptor *dold = FirstDescriptor; dold; dold = dold->Next )
     {
       if ( dold != this
-           && (  dold->Character || dold->Original )
+           && ( dold->Character || dold->Original )
            &&   StrCmp( name, dold->Original
                          ? dold->Original->Name : dold->Character->Name )
            && !StrCmp(dold->Remote.Hostname , this->Remote.Hostname ) )
@@ -289,12 +297,12 @@ bool Descriptor::CheckMultiplaying( const std::string &name )
               return false;
             }
           
-          WriteToBuffer( "Sorry multi-playing is not allowed... have your other character quit first.\r\n", 0 );
+          WriteToBuffer( "Sorry multi-playing is not allowed... have your other character quit first.\r\n" );
           sprintf( log_buf, "%s attempting to multiplay with %s.",
                    dold->Original ? dold->Original->Name : dold->Character->Name,
                    Character->Name );
           Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
-          Character = NULL;
+          Character = nullptr;
           FreeCharacter( Character );
           return true;
         }
@@ -308,11 +316,11 @@ unsigned char Descriptor::CheckPlaying( const std::string &name, bool kick )
   for ( Descriptor *dold = FirstDescriptor; dold; dold = dold->Next )
     {
       if ( dold != this
-           && (  dold->Character || dold->Original )
-           &&   !StrCmp( name, dold->Original
-                          ? dold->Original->Name : dold->Character->Name ) )
+           && ( dold->Character || dold->Original )
+           && !StrCmp( name, dold->Original
+                       ? dold->Original->Name : dold->Character->Name ) )
         {
-          int cstate = dold->ConnectionState;
+          const int cstate = dold->ConnectionState;
           class Character *ch = dold->Original ? dold->Original : dold->Character;
           
           if ( !ch->Name
@@ -325,25 +333,29 @@ unsigned char Descriptor::CheckPlaying( const std::string &name, bool kick )
             }
 
           if ( !kick )
-            return true;
-
+            {
+              return true;
+            }
+          
           WriteToBuffer( "Already playing... Kicking off old connection.\r\n", 0 );
           dold->WriteToBuffer( "Kicking off old connection... bye!\r\n", 0 );
           CloseDescriptor( dold, false );
           /* clear descriptor pointer to get rid of bug message in log */
-          Character->Desc = NULL;
+          Character->Desc = nullptr;
           FreeCharacter( Character );
           Character = ch;
           ch->Desc = this;
           ch->IdleTimer = 0;
 
           if ( ch->Switched )
-            do_return( ch->Switched, "" );
-
-          ch->Switched = NULL;
+            {
+              do_return( ch->Switched, "" );
+            }
+          
+          ch->Switched = nullptr;
           ch->Echo( "Reconnecting.\r\n" );
           Act( AT_ACTION, "$n has reconnected, kicking off old link.",
-               ch, NULL, NULL, TO_ROOM );
+               ch, nullptr, nullptr, TO_ROOM );
           sprintf( log_buf, "%s@%s reconnected, kicking off old link.",
                    ch->Name, Remote.Hostname );
           Log->LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
@@ -356,21 +368,11 @@ unsigned char Descriptor::CheckPlaying( const std::string &name, bool kick )
   return false;
 }
 
-void Descriptor::Initialize(socket_t desc)
-{
-  Socket    = desc;
-  ConnectionState     = CON_GET_NAME;
-  OutSize       = 2000;
-  pImpl->PreviousColor     = 0x07;
-
-  AllocateMemory( OutBuffer, char, OutSize );
-}
-
 void Descriptor::DisplayPrompt()
 {
-  class Character *ch = Character;
-  class Character *och = Original ? Original : Character;
-  bool ansi = (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI));
+  const class Character *ch = Character;
+  const class Character *och = Original ? Original : Character;
+  const bool ansi = (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI));
   const char *prompt = nullptr;
   char buf[MAX_STRING_LENGTH];
   char *pbuf = buf;
@@ -792,6 +794,12 @@ void Descriptor::ReadFromBuffer()
 
 ///////////////////////////////////////////////////
 // NullDescriptor
+NullDescriptor::NullDescriptor()
+  : Descriptor(INVALID_SOCKET)
+{
+
+}
+
 void NullDescriptor::WriteToBuffer(const std::string &txt, size_t len)
 {
 
@@ -815,11 +823,6 @@ unsigned char NullDescriptor::CheckPlaying(const std::string &name, bool kick )
 bool NullDescriptor::CheckMultiplaying(const std::string &name )
 {
   return false;
-}
-
-void NullDescriptor::Initialize(socket_t desc)
-{
-
 }
 
 void NullDescriptor::DisplayPrompt()
