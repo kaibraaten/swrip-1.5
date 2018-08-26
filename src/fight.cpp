@@ -41,6 +41,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
+#include "descriptor.hpp"
 
 extern char lastplayercmd[MAX_INPUT_LENGTH];
 extern Character *gch_prev;

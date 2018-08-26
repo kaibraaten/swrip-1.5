@@ -33,6 +33,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cstdarg>
+#include "descriptor.hpp"
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
@@ -148,7 +149,7 @@ void RecoverFromCopyover( void )
       }
 
     d = new Descriptor();
-    InitializeDescriptor( d, desc ); /* set up various stuff */
+    d->Initialize( desc ); /* set up various stuff */
     d->Remote.Hostname = CopyString( host );
     d->Remote.HostIP = CopyString( ip );
 

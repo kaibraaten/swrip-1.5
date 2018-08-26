@@ -1,10 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "descriptor.hpp"
 
 void do_switch( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
 
   OneArgument( argument, arg );
 

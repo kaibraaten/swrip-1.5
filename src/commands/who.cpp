@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "clan.hpp"
 #include "pcdata.hpp"
+#include "descriptor.hpp"
 
 /*
  * New do_who with WHO REQUEST, clan, race and homepage support.  -Thoric
@@ -44,6 +45,7 @@ void do_who( Character *ch, char *argument )
   bool NullCh = false;
   Clan *pClan = NULL;
   FILE *whoout = NULL;
+  Descriptor *desc = nullptr;
   std::list<WhoData> immortals;
   std::list<WhoData> mortals;
   std::list<WhoData> newbies;
@@ -56,7 +58,8 @@ void do_who( Character *ch, char *argument )
   if ( ch == nullptr )
     {
       NullCh = true;
-      ch = new Character(new PCData(), nullptr);
+      desc = new NullDescriptor();
+      ch = new Character(new PCData(), desc);
       ch->TopLevel = 1;
       ch->InRoom = GetRoom( ROOM_VNUM_LIMBO );
     }
@@ -413,10 +416,10 @@ void do_who( Character *ch, char *argument )
       fprintf( whoout, "%d player%s.\r\n", nMatch, nMatch == 1 ? "" : "s" );
       fclose( whoout );
       delete ch;
+      delete desc;
       return;
     }
 
   SetCharacterColor( AT_YELLOW, ch );
   ch->Echo("%d player%s.\r\n", nMatch, nMatch == 1 ? "" : "s" );
 }
-

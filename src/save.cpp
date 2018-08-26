@@ -48,6 +48,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
+#include "descriptor.hpp"
 
 /*
  * Increment with every major format change.

@@ -20,6 +20,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <functional>
 #include <cctype>
 #include <cstring>
 #include <arpa/telnet.h>
@@ -35,8 +36,9 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "descriptor.hpp"
 
-typedef void NannyFun( Descriptor *d, char *argument );
+using NannyFun = std::function<void(Descriptor*, char*)>;
 
 static const char echo_off_str    [] = { (const char)IAC, (const char)WILL, TELOPT_ECHO, '\0' };
 static const char echo_on_str     [] = { (const char)IAC, (const char)WONT, TELOPT_ECHO, '\0' };
@@ -68,8 +70,8 @@ static void FinalizeCharacter( Descriptor *d );
  */
 void Nanny( Descriptor *d, char *argument )
 {
-  NannyFun *nannyFun = NULL;
-
+  NannyFun nannyFun;
+  
   while ( isspace(*argument) )
     argument++;
 
@@ -145,7 +147,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   if ( !IsNameAcceptable( argument ) )
     {
-      WriteToBuffer( d, "Illegal name, try another.\r\nName: ", 0 );
+      d->WriteToBuffer( "Illegal name, try another.\r\nName: ", 0 );
       return;
     }
 
@@ -158,11 +160,11 @@ static void NannyGetName( Descriptor *d, char *argument )
 	  if (SysData.DenyNewPlayers == true)
 	    {
 	      sprintf( buf, "The mud is currently preparing for a reboot.\r\n" );
-	      WriteToBuffer( d, buf, 0 );
+	      d->WriteToBuffer( buf, 0 );
 	      sprintf( buf, "New players are not accepted during this time.\r\n" );
-	      WriteToBuffer( d, buf, 0 );
+	      d->WriteToBuffer( buf, 0 );
 	      sprintf( buf, "Please try again in a few minutes.\r\n" );
-	      WriteToBuffer( d, buf, 0 );
+	      d->WriteToBuffer( buf, 0 );
 	      CloseDescriptor( d, false );
 	    }
 
@@ -171,21 +173,21 @@ static void NannyGetName( Descriptor *d, char *argument )
                        "to role play, and be sure that it suits our Star Wars theme.\r\n"
                        "If the name you select is not acceptable, you will be asked to choose\r\n"
  "another one.\r\n\r\nPlease choose a name for your character: ");
-	  WriteToBuffer( d, buf, 0 );
+	  d->WriteToBuffer( buf, 0 );
 	  d->NewState++;
 	  d->ConnectionState = CON_GET_NAME;
 	  return;
 	}
       else
 	{
-	  WriteToBuffer(d, "Illegal name, try another.\r\nName: ", 0);
+	  d->WriteToBuffer( "Illegal name, try another.\r\nName: ", 0);
 	  return;
 	}
     }
 
-  if ( CheckPlaying( d, argument, false ) == BERR )
+  if ( d->CheckPlaying( argument, false ) == BERR )
     {
-      WriteToBuffer( d, "Name: ", 0 );
+      d->WriteToBuffer( "Name: ", 0 );
       return;
     }
 
@@ -194,7 +196,7 @@ static void NannyGetName( Descriptor *d, char *argument )
   if ( !d->Character )
     {
       Log->Bug("Bad player file %s@%s.", argument, d->Remote.Hostname );
-      WriteToBuffer( d, "Your playerfile is corrupt...Please notify mail@mymud.com\r\n", 0 );
+      d->WriteToBuffer( "Your playerfile is corrupt...Please notify mail@mymud.com\r\n", 0 );
       CloseDescriptor( d, false );
       return;
     }
@@ -210,7 +212,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   if(pban != nullptr)
     {
-      WriteToBuffer( d, "Your site has been banned from this Mud.\r\n", 0 );
+      d->WriteToBuffer( "Your site has been banned from this Mud.\r\n", 0 );
       CloseDescriptor( d, false );
       return;
     }
@@ -222,17 +224,17 @@ static void NannyGetName( Descriptor *d, char *argument )
 
       if (d->NewState != 0)
 	{
-	  WriteToBuffer( d, "That name is already taken. Please choose another: ", 0 );
+	  d->WriteToBuffer( "That name is already taken. Please choose another: ", 0 );
 	  d->ConnectionState = CON_GET_NAME;
 	  return;
 	}
 
-      WriteToBuffer( d, "You are denied access.\r\n", 0 );
+      d->WriteToBuffer( "You are denied access.\r\n", 0 );
       CloseDescriptor( d, false );
       return;
     }
 
-  chk = CheckReconnect( d, argument, false );
+  chk = d->CheckReconnect( argument, false );
 
   if ( chk == BERR )
     {
@@ -247,8 +249,8 @@ static void NannyGetName( Descriptor *d, char *argument )
     {
       if ( wizlock && !IsImmortal(ch) )
 	{
-	  WriteToBuffer( d, "The game is wizlocked. Only immortals can connect now.\r\n", 0 );
-	  WriteToBuffer( d, "Please try back later.\r\n", 0 );
+	  d->WriteToBuffer( "The game is wizlocked. Only immortals can connect now.\r\n", 0 );
+	  d->WriteToBuffer( "Please try back later.\r\n", 0 );
 	  CloseDescriptor( d, false );
 	  return;
 	}
@@ -258,31 +260,31 @@ static void NannyGetName( Descriptor *d, char *argument )
     {
       if (d->NewState != 0)
 	{
-	  WriteToBuffer( d, "That name is already taken. Please choose another: ", 0 );
+	  d->WriteToBuffer( "That name is already taken. Please choose another: ", 0 );
 	  d->ConnectionState = CON_GET_NAME;
 	  return;
 	}
 
       /* Old player */
-      WriteToBuffer( d, "Password: ", 0 );
-      WriteToBuffer( d, echo_off_str, 0 );
+      d->WriteToBuffer( "Password: ", 0 );
+      d->WriteToBuffer( echo_off_str, 0 );
       d->ConnectionState = CON_GET_OLD_PASSWORD;
       return;
     }
   else
     {
       if (IsBadName(ch->Name)) {
-	WriteToBuffer( d, "\r\nThat name is unacceptable, please choose a\
+	d->WriteToBuffer( "\r\nThat name is unacceptable, please choose a\
 nother.\r\n", 0);
-	WriteToBuffer( d, "Name: ",0);
+	d->WriteToBuffer( "Name: ",0);
 	d->ConnectionState = CON_GET_NAME;
 	return;
       }
 
-      WriteToBuffer( d, "\r\nI don't recognize your name, you must be new\
+      d->WriteToBuffer( "\r\nI don't recognize your name, you must be new\
  here.\r\n\r\n", 0 );
       sprintf( buf, "Did I get that right, %s (Y/N)? ", argument );
-      WriteToBuffer( d, buf, 0 );
+      d->WriteToBuffer( buf, 0 );
       d->ConnectionState = CON_CONFIRM_NEW_NAME;
       return;
     }
@@ -294,25 +296,25 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
   unsigned char chk = 0;
   char buf[MAX_STRING_LENGTH];
 
-  WriteToBuffer( d, "\r\n", 2 );
+  d->WriteToBuffer( "\r\n", 2 );
 
   if ( StrCmp( EncodeString( argument ), ch->PCData->Password ) )
     {
-      WriteToBuffer( d, "Wrong password.\r\n", 0 );
+      d->WriteToBuffer( "Wrong password.\r\n", 0 );
       /* clear descriptor pointer to get rid of bug message in log */
       d->Character->Desc = NULL;
       CloseDescriptor( d, false );
       return;
     }
 
-  WriteToBuffer( d, echo_on_str, 0 );
+  d->WriteToBuffer( echo_on_str, 0 );
 
-  if ( CheckPlaying( d, ch->Name, true ) )
+  if ( d->CheckPlaying( ch->Name, true ) )
     {
       return;
     }
 
-  chk = CheckReconnect( d, ch->Name, true );
+  chk = d->CheckReconnect( ch->Name, true );
 
   if ( chk == BERR )
     {
@@ -330,7 +332,7 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
       return;
     }
 
-  if ( CheckMultiplaying( d , ch->Name  ) )
+  if ( d->CheckMultiplaying( ch->Name ) )
     {
       CloseDescriptor( d, false );
       return;
@@ -353,7 +355,7 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
       Log->LogStringPlus( log_buf, LOG_COMM, ch->TopLevel );
     }
 
-  WriteToBuffer( d, "Press enter...\r\n", 0 );
+  d->WriteToBuffer( "Press enter...\r\n", 0 );
   d->ConnectionState = CON_PRESS_ENTER;
 
   if ( ch->PCData->Build.Area )
@@ -373,12 +375,12 @@ static void NannyConfirmNewName( Descriptor *d, char *argument )
       sprintf( buf, "\r\nMake sure to use a password that won't be easily guessed by someone else."
 	       "\r\nPick a good password for %s: %s",
 	       ch->Name, echo_off_str );
-      WriteToBuffer( d, buf, 0 );
+      d->WriteToBuffer( buf, 0 );
       d->ConnectionState = CON_GET_NEW_PASSWORD;
       break;
 
     case 'n': case 'N':
-      WriteToBuffer( d, "Ok, what IS it, then? ", 0 );
+      d->WriteToBuffer( "Ok, what IS it, then? ", 0 );
       /* clear descriptor pointer to get rid of bug message in log */
       d->Character->Desc = NULL;
       FreeCharacter( d->Character );
@@ -387,7 +389,7 @@ static void NannyConfirmNewName( Descriptor *d, char *argument )
       break;
 
     default:
-      WriteToBuffer( d, "Please type Yes or No. ", 0 );
+      d->WriteToBuffer( "Please type Yes or No. ", 0 );
       break;
     }
 }
@@ -397,11 +399,11 @@ static void NannyGetNewPassword( Descriptor *d, char *argument )
   char *pwdnew = NULL, *p = NULL;
   Character *ch = d->Character;
 
-  WriteToBuffer( d, "\r\n", 2 );
+  d->WriteToBuffer( "\r\n", 2 );
 
   if ( strlen(argument) < 5 )
     {
-      WriteToBuffer( d, "Password must be at least five characters long.\r\nPassword: ", 0 );
+      d->WriteToBuffer( "Password must be at least five characters long.\r\nPassword: ", 0 );
       return;
     }
 
@@ -411,14 +413,14 @@ static void NannyGetNewPassword( Descriptor *d, char *argument )
     {
       if ( *p == '~' )
 	{
-	  WriteToBuffer( d, "New password not acceptable, try again.\r\nPassword: ", 0 );
+	  d->WriteToBuffer( "New password not acceptable, try again.\r\nPassword: ", 0 );
 	  return;
 	}
     }
 
   FreeMemory( ch->PCData->Password );
   ch->PCData->Password   = CopyString( pwdnew );
-  WriteToBuffer( d, "\r\nPlease retype the password to confirm: ", 0 );
+  d->WriteToBuffer( "\r\nPlease retype the password to confirm: ", 0 );
   d->ConnectionState = CON_CONFIRM_NEW_PASSWORD;
 }
 
@@ -426,16 +428,16 @@ static void NannyConfirmNewPassword( Descriptor *d, char *argument )
 {
   Character *ch = d->Character;
 
-  WriteToBuffer( d, "\r\n", 2 );
+  d->WriteToBuffer( "\r\n", 2 );
 
   if ( StrCmp( EncodeString( argument ), ch->PCData->Password ) )
     {
-      WriteToBuffer( d, "Passwords don't match.\r\nRetype password: ", 0 );
+      d->WriteToBuffer( "Passwords don't match.\r\nRetype password: ", 0 );
       d->ConnectionState = CON_GET_NEW_PASSWORD;
       return;
     }
 
-  WriteToBuffer( d, echo_on_str, 0 );
+  d->WriteToBuffer( echo_on_str, 0 );
   AskForRace( d );
   d->ConnectionState = CON_GET_NEW_RACE;
 }
@@ -457,7 +459,7 @@ static void NannyGetNewSex( Descriptor *d, char *argument )
     break;
 
     default:
-      WriteToBuffer( d, "That's not a sex.\r\n", 0 );
+      d->WriteToBuffer( "That's not a sex.\r\n", 0 );
       AskForGender( d );
       return;
     }
@@ -477,14 +479,14 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
   if (!StrCmp( arg, "help") )
     {
       do_help(ch, argument);
-      WriteToBuffer( d, "Please choose a race: ", 0);
+      d->WriteToBuffer( "Please choose a race: ", 0);
       return;
     }
 
   if (!StrCmp( arg, "showstat") )
     {
       do_showstatistic(ch, argument);
-      WriteToBuffer( d, "Please choose a race: ", 0);
+      d->WriteToBuffer( "Please choose a race: ", 0);
       return;
     }
 
@@ -504,7 +506,7 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
   if ( iRace == MAX_RACE || iRace == RACE_GOD
        || IsNullOrEmpty( RaceTable[iRace].Name ) )
     {
-      WriteToBuffer( d, "That's not a race.\r\n", 0 );
+      d->WriteToBuffer( "That's not a race.\r\n", 0 );
       AskForRace( d );
       return;
     }
@@ -533,7 +535,7 @@ static void NannyGetNewClass( Descriptor *d, char *argument )
   if (!StrCmp( arg, "help") )
     {
       do_help(ch, argument);
-      WriteToBuffer( d, "Please choose an ability class: ", 0);
+      d->WriteToBuffer( "Please choose an ability class: ", 0);
       return;
     }
 
@@ -551,12 +553,12 @@ static void NannyGetNewClass( Descriptor *d, char *argument )
        || ( iClass == FORCE_ABILITY && !SysData.CanChooseJedi )
        || IsNullOrEmpty( AbilityName[iClass] ) )
     {
-      WriteToBuffer( d, "That's not a skill class.\r\n", 0 );
+      d->WriteToBuffer( "That's not a skill class.\r\n", 0 );
       AskForClass( d );
       return;
     }
 
-  WriteToBuffer( d, "\r\nRolling stats....\r\n", 0 );
+  d->WriteToBuffer( "\r\nRolling stats....\r\n", 0 );
   AskForStats( d );
   d->ConnectionState = CON_STATS_OK;
 }
@@ -576,7 +578,7 @@ static void NannyStatsOk( Descriptor *d, char *argument )
       AskForStats( d );
       return;
     default:
-      WriteToBuffer( d, "Invalid selection.\r\nYES or NO? ", 0 );
+      d->WriteToBuffer( "Invalid selection.\r\nYES or NO? ", 0 );
       return;
     }
 
@@ -647,7 +649,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
   Character *ch = d->Character;
   char buf[MAX_STRING_LENGTH];
 
-  WriteToBuffer( d, "\r\nWelcome to SWRiP 1.5\r\n\r\n", 0 );
+  d->WriteToBuffer( "\r\nWelcome to SWRiP 1.5\r\n\r\n", 0 );
   AddCharacter( ch );
   d->ConnectionState      = CON_PLAYING;
 
@@ -966,7 +968,7 @@ bool IsNameAcceptable( const std::string &name )
 
 static void AskForGender( Descriptor *d )
 {
-  WriteToBuffer( d, "\r\nWhat is your sex (M/F)? ", 0 );
+  d->WriteToBuffer( "\r\nWhat is your sex (M/F)? ", 0 );
 }
 
 static void AskForRace( Descriptor *d )
@@ -976,7 +978,7 @@ static void AskForRace( Descriptor *d )
   char buf[MAX_STRING_LENGTH] = { '\0' };
   char buf2[MAX_STRING_LENGTH];
   
-  WriteToBuffer( d, "\r\nYou may choose from the following races, or type showstat [race] to learn more:\r\n", 0 );
+  d->WriteToBuffer( "\r\nYou may choose from the following races, or type showstat [race] to learn more:\r\n", 0 );
 
   for ( iRace = 0; iRace < MAX_RACE; iRace++ )
     {
@@ -997,7 +999,7 @@ static void AskForRace( Descriptor *d )
 	      strcat( buf, "\r\n" );
 	    }
 	  
-          WriteToBuffer( d, buf, 0 );
+          d->WriteToBuffer( buf, 0 );
           buf[0] = '\0';
         }
     }
@@ -1008,7 +1010,7 @@ static void AskForRace( Descriptor *d )
     }
 
   strcat( buf, ": " );
-  WriteToBuffer( d, buf, 0 );
+  d->WriteToBuffer( buf, 0 );
 }
 
 static void AskForClass( Descriptor *d )
@@ -1018,7 +1020,7 @@ static void AskForClass( Descriptor *d )
   int iClass = 0;
   int columns = 0;
   
-  WriteToBuffer( d, "\r\nPlease choose a main ability from the following classes:\r\n", 0 );
+  d->WriteToBuffer( "\r\nPlease choose a main ability from the following classes:\r\n", 0 );
 
   for ( iClass = 0; iClass < MAX_ABILITY; iClass++ )
     {
@@ -1037,7 +1039,7 @@ static void AskForClass( Descriptor *d )
               strcat( buf, "\r\n" );
             }
 
-          WriteToBuffer( d, buf, 0 );
+          d->WriteToBuffer( buf, 0 );
           buf[0] = '\0';
         }
     }
@@ -1048,7 +1050,7 @@ static void AskForClass( Descriptor *d )
     }
 
   strcat( buf, ": " );
-  WriteToBuffer( d, buf, 0 );
+  d->WriteToBuffer( buf, 0 );
 }
 
 static void AskForStats( Descriptor *d )
@@ -1074,8 +1076,8 @@ static void AskForStats( Descriptor *d )
            ch->Stats.PermStr, ch->Stats.PermInt, ch->Stats.PermWis,
            ch->Stats.PermDex, ch->Stats.PermCon, ch->Stats.PermCha) ;
 
-  WriteToBuffer( d, buf, 0 );
-  WriteToBuffer( d, "\r\nAre these stats OK, (Y/N)? ", 0 );
+  d->WriteToBuffer( buf, 0 );
+  d->WriteToBuffer( "\r\nAre these stats OK, (Y/N)? ", 0 );
 }
 
 static void FinalizeCharacter( Descriptor *d )
@@ -1087,8 +1089,8 @@ static void FinalizeCharacter( Descriptor *d )
            RaceTable[ch->Race].Name);
   Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
-  WriteToBuffer( d, "Press [ENTER] ", 0 );
-  WriteToBuffer( d, "Press enter...\r\n", 0 );
+  d->WriteToBuffer( "Press [ENTER] ", 0 );
+  d->WriteToBuffer( "Press enter...\r\n", 0 );
 
   for ( ability = 0; ability < MAX_ABILITY; ability++ )
     {

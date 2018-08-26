@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
+#include "descriptor.hpp"
 
 void do_transfer( Character *ch, char *argument )
 {

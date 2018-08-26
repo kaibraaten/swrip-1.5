@@ -42,6 +42,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protomob.hpp"
+#include "descriptor.hpp"
 
 /*
  * Local functions.

@@ -7,6 +7,7 @@
 #include "log.hpp"
 #include "character.hpp"
 #include "mud.hpp"
+#include "descriptor.hpp"
 
 extern FILE *fpArea;
 extern char strArea[];
@@ -144,9 +145,7 @@ void FileSystemLogger::LogStringPlus( const std::string &str, short log_type, sh
 
   if (lognone)
     {
-      Descriptor *d = NULL;
-
-      for ( d = FirstDescriptor; d; d = d->Next )
+      for ( const Descriptor *d = FirstDescriptor; d; d = d->Next )
         {
           Character *och = d->Original ? d->Original : d->Character;
           Character *vch = d->Character;

@@ -41,6 +41,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
+#include "descriptor.hpp"
 
 /*
  * Socket and TCP/IP stuff.
@@ -80,21 +81,15 @@ int            maxdesc = 0;
 /*
  * Other local functions (OS-independent).
  */
-static bool FlushBuffer( Descriptor *d, bool fPrompt );
-static void ReadFromBuffer( Descriptor *d );
 static void StopIdling( Character *ch );
-static void DisplayPrompt( Descriptor *d );
 static void GameLoop( void );
 static void NewDescriptor( socket_t new_desc );
-static bool ReadFromDescriptor( Descriptor *d );
 static void ExecuteOnExit( void );
 static void CaughtAlarm( int dummy );
 static bool CheckBadSocket( socket_t desc );
 static void AcceptNewSocket( socket_t ctrl );
 static char *ActString(const char *format, Character *to, Character *ch,
                        const void *arg1, const void *arg2);
-static char *DefaultPrompt( const Character *ch );
-static int GetColorIndex(char clr);
 
 static void ExecuteOnExit( void )
 {
@@ -483,7 +478,8 @@ static void GameLoop( void )
 
                       if ( d->Character )
                         d->Character->IdleTimer = 0;
-                      if ( !ReadFromDescriptor( d ) )
+
+                      if ( !d->Read() )
                         {
                           FD_CLR( d->Socket, &out_set );
                           if ( d->Character
@@ -502,7 +498,7 @@ static void GameLoop( void )
                       continue;
                     }
 
-                  ReadFromBuffer( d );
+                  d->ReadFromBuffer();
 
                   if ( !IsNullOrEmpty( d->InComm ) )
                     {
@@ -554,7 +550,7 @@ static void GameLoop( void )
           if ( ( d->fCommand || d->OutTop > 0 )
                &&   FD_ISSET(d->Socket, &out_set) )
             {
-              if ( !FlushBuffer( d, true ) )
+              if ( !d->FlushBuffer( true ) )
                 {
                   if ( d->Character
                        && ( d->ConnectionState == CON_PLAYING
@@ -624,16 +620,6 @@ static void GameLoop( void )
     }
 }
 
-void InitializeDescriptor(Descriptor *dnew, socket_t desc)
-{
-  dnew->Socket    = desc;
-  dnew->ConnectionState     = CON_GET_NAME;
-  dnew->OutSize       = 2000;
-  dnew->PreviousColor     = 0x07;
-
-  AllocateMemory( dnew->OutBuffer, char, dnew->OutSize );
-}
-
 static void NewDescriptor( socket_t new_desc )
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
@@ -684,7 +670,7 @@ static void NewDescriptor( socket_t new_desc )
     }
 
   Descriptor *dnew = new Descriptor();
-  InitializeDescriptor(dnew, desc);
+  dnew->Initialize(desc);
   dnew->Remote.Port = ntohs( sock.sin_port );
 
   strcpy( buf, inet_ntoa( sock.sin_addr ) );
@@ -743,9 +729,9 @@ static void NewDescriptor( socket_t new_desc )
    */
   {
     if ( HelpGreeting[0] == '.' )
-      WriteToBuffer( dnew, HelpGreeting+1, 0 );
+      dnew->WriteToBuffer( HelpGreeting + 1 );
     else
-      WriteToBuffer( dnew, HelpGreeting  , 0 );
+      dnew->WriteToBuffer( HelpGreeting );
   }
 
   if ( ++num_descriptors > SysData.MaxPlayersThisBoot )
@@ -782,18 +768,17 @@ void FreeDescriptor( Descriptor *d )
 
 void CloseDescriptor( Descriptor *dclose, bool force )
 {
-  Character *ch;
-  Descriptor *d;
+  Character *ch = nullptr;
+  Descriptor *d = nullptr;
   bool DoNotUnlink = false;
 
   /* flush outbuf */
   if ( !force && dclose->OutTop > 0 )
-    FlushBuffer( dclose, false );
+    dclose->FlushBuffer( false );
 
   /* say bye to whoever's snooping this descriptor */
   if ( dclose->SnoopBy )
-    WriteToBuffer( dclose->SnoopBy,
-                     "Your victim has left the game.\r\n", 0 );
+    dclose->SnoopBy->WriteToBuffer( "Your victim has left the game.\r\n" );
 
   /* stop snooping everyone else */
   for ( d = FirstDescriptor; d; d = d->Next )
@@ -903,311 +888,6 @@ void CloseDescriptor( Descriptor *dclose, bool force )
   return;
 }
 
-static bool ReadFromDescriptor( Descriptor *d )
-{
-  size_t iStart;
-
-  if ( !IsNullOrEmpty( d->InComm ) )
-    return true;
-
-  iStart = strlen(d->InBuffer);
-
-  if ( iStart >= sizeof(d->InBuffer) - 10 )
-    {
-      sprintf( log_buf, "%s input overflow!", d->Remote.Hostname );
-      Log->Info( log_buf );
-      WriteToDescriptor( d->Socket,
-                           "\r\n*** PUT A LID ON IT!!! ***\r\n", 0 );
-      return false;
-    }
-
-  for ( ; ; )
-    {
-      ssize_t nRead = recv( d->Socket, d->InBuffer + iStart,
-                            sizeof( d->InBuffer ) - 10 - iStart, 0 );
-
-      if ( nRead == 0 )
-        {
-          Log->LogStringPlus( "EOF encountered on read.", LOG_COMM, SysData.LevelOfLogChannel );
-          return false;
-        }
-
-      if( nRead == SOCKET_ERROR )
-        {
-          if( GETERROR == EWOULDBLOCK || GETERROR == EAGAIN )
-            {
-              break;
-            }
-          else
-            {
-              Log->LogStringPlus( strerror( GETERROR ), LOG_COMM, SysData.LevelOfLogChannel );
-              return false;
-            }
-        }
-
-      iStart += nRead;
-
-      if ( d->InBuffer[iStart-1] == '\n' || d->InBuffer[iStart-1] == '\r' )
-	{
-	  break;
-	}
-    }
-
-  d->InBuffer[iStart] = '\0';
-  return true;
-}
-
-/*
- * Transfer one line from input buffer to input line.
- */
-static void ReadFromBuffer( Descriptor *d )
-{
-  int i, j, k;
-
-  /*
-   * Hold horses if pending command already.
-   */
-  if ( !IsNullOrEmpty( d->InComm ) )
-    return;
-
-  /*
-   * Look for at least one new line.
-   */
-  for ( i = 0; d->InBuffer[i] != '\n' && d->InBuffer[i] != '\r' && i<MAX_INBUF_SIZE;
-        i++ )
-    {
-      if ( d->InBuffer[i] == '\0' )
-        return;
-    }
-
-  /*
-   * Canonical input processing.
-   */
-  for ( i = 0, k = 0; d->InBuffer[i] != '\n' && d->InBuffer[i] != '\r'; i++ )
-    {
-      if ( k >= 254 )
-        {
-          WriteToDescriptor( d->Socket, "Line too long.\r\n", 0 );
-
-          d->InBuffer[i]   = '\n';
-          d->InBuffer[i+1] = '\0';
-          break;
-        }
-
-      if ( d->InBuffer[i] == '\b' && k > 0 )
-        --k;
-      else if ( isascii(d->InBuffer[i]) && isprint(d->InBuffer[i]) )
-        d->InComm[k++] = d->InBuffer[i];
-    }
-
-  /*
-   * Finish off the line.
-   */
-  if ( k == 0 )
-    d->InComm[k++] = ' ';
-
-  d->InComm[k] = '\0';
-
-  /*
-   * Deal with bozos with #repeat 1000 ...
-   */
-  if ( k > 1 || d->InComm[0] == '!' )
-    {
-      if ( d->InComm[0] != '!' && StrCmp( d->InComm, d->InLast ) )
-        {
-          d->Repeat = 0;
-        }
-      else
-        {
-          if ( ++d->Repeat >= 100 )
-            {
-              WriteToDescriptor( d->Socket,
-                                   "\r\n*** PUT A LID ON IT!!! ***\r\n", 0 );
-            }
-        }
-    }
-
-  /*
-   * Do '!' substitution.
-   */
-  if ( d->InComm[0] == '!' )
-    strcpy( d->InComm, d->InLast );
-  else
-    strcpy( d->InLast, d->InComm );
-
-  /*
-   * Shift the input buffer.
-   */
-  while ( d->InBuffer[i] == '\n' || d->InBuffer[i] == '\r' )
-    i++;
-
-  for ( j = 0; ( d->InBuffer[j] = d->InBuffer[i+j] ) != '\0'; j++ )
-    ;
-}
-
-/*
- * Low level output function.
- */
-static bool FlushBuffer( Descriptor *d, bool fPrompt )
-{
-  char buf[MAX_INPUT_LENGTH];
-  Character *ch;
-
-  ch = d->Original ? d->Original : d->Character;
-
-  if( ch && ch->Fighting && ch->Fighting->Who )
-    ShowCharacterCondition( ch, ch->Fighting->Who );
-
-  /*
-   * If buffer has more than 4K inside, spit out .5K at a time   -Thoric
-   */
-  if ( !mud_down && d->OutTop > 4096 )
-    {
-      memcpy( buf, d->OutBuffer, 512 );
-      memmove( d->OutBuffer, d->OutBuffer + 512, d->OutTop - 512 );
-      d->OutTop -= 512;
-      if ( d->SnoopBy )
-        {
-          char snoopbuf[MAX_INPUT_LENGTH];
-
-          buf[512] = '\0';
-          if ( d->Character && d->Character->Name )
-            {
-              if (d->Original && d->Original->Name)
-                sprintf( snoopbuf, "%s (%s)", d->Character->Name, d->Original->Name );
-              else
-                sprintf( snoopbuf, "%s", d->Character->Name);
-              WriteToBuffer( d->SnoopBy, snoopbuf, 0);
-            }
-          WriteToBuffer( d->SnoopBy, "% ", 2 );
-          WriteToBuffer( d->SnoopBy, buf, 0 );
-        }
-      if ( !WriteToDescriptor( d->Socket, buf, 512 ) )
-        {
-          d->OutTop = 0;
-          return false;
-        }
-      return true;
-    }
-
-
-  /*
-   * Bust a prompt.
-   */
-  if ( fPrompt && !mud_down && d->ConnectionState == CON_PLAYING )
-    {
-      ch = d->Original ? d->Original : d->Character;
-      if ( IsBitSet(ch->Flags, PLR_BLANK) )
-        WriteToBuffer( d, "\r\n", 2 );
-
-      if ( IsBitSet(ch->Flags, PLR_PROMPT) )
-        DisplayPrompt(d);
-
-      if ( IsBitSet(ch->Flags, PLR_TELNET_GA) )
-        WriteToBuffer( d, go_ahead_str, 0 );
-    }
-
-  /*
-   * Short-circuit if nothing to write.
-   */
-  if ( d->OutTop == 0 )
-    return true;
-
-  /*
-   * Snoop-o-rama.
-   */
-  if ( d->SnoopBy )
-    {
-      /* without check, 'force mortal quit' while snooped caused crash, -h */
-      if ( d->Character && d->Character->Name )
-        {
-          /* Show original snooped names. -- Altrag */
-          if ( d->Original && d->Original->Name )
-            sprintf( buf, "%s (%s)", d->Character->Name, d->Original->Name );
-          else
-            sprintf( buf, "%s", d->Character->Name);
-          WriteToBuffer( d->SnoopBy, buf, 0);
-        }
-      WriteToBuffer( d->SnoopBy, "% ", 2 );
-      WriteToBuffer( d->SnoopBy, d->OutBuffer, d->OutTop );
-    }
-
-  /*
-   * OS-dependent output.
-   */
-  if ( !WriteToDescriptor( d->Socket, d->OutBuffer, d->OutTop ) )
-    {
-      d->OutTop = 0;
-      return false;
-    }
-  else
-    {
-      d->OutTop = 0;
-      return true;
-    }
-}
-
-
-
-/*
- * Append onto an output buffer.
- */
-void WriteToBuffer( Descriptor *d, const std::string &txt, size_t length )
-{
-  if ( !d )
-    {
-      Log->Bug( "Write_to_buffer: NULL descriptor" );
-      return;
-    }
-
-  /*
-   * Normally a bug... but can happen if loadup is used.
-   */
-  if ( !d->OutBuffer )
-    return;
-
-  /*
-   * Find length in case caller didn't.
-   */
-  if ( length <= 0 )
-    length = txt.size();
-
-  /*
-   * Initial \r\n if needed.
-   */
-  if ( d->OutTop == 0 && !d->fCommand )
-    {
-      d->OutBuffer[0]      = '\n';
-      d->OutBuffer[1]      = '\r';
-      d->OutTop = 2;
-    }
-
-  /*
-   * Expand the buffer as needed.
-   */
-  while ( d->OutTop + length >= d->OutSize )
-    {
-      if (d->OutSize > SHRT_MAX)
-        {
-          /* empty buffer */
-          d->OutTop = 0;
-          CloseDescriptor(d, true);
-          Log->Bug("Buffer overflow. Closing (%s).", d->Character ? d->Character->Name : "???" );
-          return;
-        }
-      d->OutSize *= 2;
-      ReAllocateMemory( d->OutBuffer, char, d->OutSize );
-    }
-
-  /*
-   * Copy.
-   */
-  strncpy( d->OutBuffer + d->OutTop, txt.c_str(), length );
-  d->OutTop += length;
-  d->OutBuffer[d->OutTop] = '\0';
-}
-
-
 /*
  * Lowest level output function.
  * Write a block of text to the file descriptor.
@@ -1235,143 +915,6 @@ bool WriteToDescriptor( socket_t desc, const std::string &txt, int length )
     }
 
   return true;
-}
-
-/*
- * Look for link-dead player to reconnect.
- */
-bool CheckReconnect( Descriptor *d, const std::string &name, bool fConn )
-{
-  for ( Character *ch = FirstCharacter; ch; ch = ch->Next )
-    {
-      if ( !IsNpc(ch)
-           && ( !fConn || !ch->Desc )
-           &&    ch->Name
-           &&   !StrCmp( name, ch->Name ) )
-        {
-          if ( fConn && ch->Switched )
-            {
-              WriteToBuffer( d, "Already playing.\r\nName: ", 0 );
-              d->ConnectionState = CON_GET_NAME;
-              if ( d->Character )
-                {
-                  /* clear descriptor pointer to get rid of bug message in log */
-                  d->Character->Desc = NULL;
-                  FreeCharacter( d->Character );
-                  d->Character = NULL;
-                }
-              return BERR;
-            }
-          if ( fConn == false )
-            {
-              FreeMemory( d->Character->PCData->Password );
-              d->Character->PCData->Password = CopyString( ch->PCData->Password );
-            }
-          else
-            {
-              /* clear descriptor pointer to get rid of bug message in log */
-              d->Character->Desc = NULL;
-              FreeCharacter( d->Character );
-              d->Character = ch;
-              ch->Desc   = d;
-              ch->IdleTimer  = 0;
-              ch->Echo( "Reconnecting.\r\n" );
-              Act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
-              sprintf( log_buf, "%s@%s reconnected.", ch->Name, d->Remote.Hostname );
-              Log->LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
-              d->ConnectionState = CON_PLAYING;
-            }
-          return true;
-        }
-    }
-
-  return false;
-}
-
-/*
- * Check if already playing.
- */
-
-bool CheckMultiplaying( Descriptor *d, const std::string &name )
-{
-  for ( Descriptor *dold = FirstDescriptor; dold; dold = dold->Next )
-    {
-      if ( dold != d
-           && (  dold->Character || dold->Original )
-           &&   StrCmp( name, dold->Original
-                         ? dold->Original->Name : dold->Character->Name )
-           && !StrCmp(dold->Remote.Hostname , d->Remote.Hostname ) )
-        {
-          if ( d->Character->TopLevel >= LEVEL_CREATOR
-               || ( dold->Original ? dold->Original : dold->Character )->TopLevel >= LEVEL_CREATOR )
-	    {
-	      return false;
-	    }
-
-          WriteToBuffer( d, "Sorry multi-playing is not allowed ... have you other character quit first.\r\n", 0 );
-          sprintf( log_buf, "%s attempting to multiplay with %s.", dold->Original ? dold->Original->Name : dold->Character->Name , d->Character->Name );
-          Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
-          d->Character = NULL;
-          FreeCharacter( d->Character );
-          return true;
-        }
-    }
-
-  return false;
-
-}
-
-unsigned char CheckPlaying( Descriptor *d, const std::string &name, bool kick )
-{
-  for ( Descriptor *dold = FirstDescriptor; dold; dold = dold->Next )
-    {
-      if ( dold != d
-           && (  dold->Character || dold->Original )
-           &&   !StrCmp( name, dold->Original
-                          ? dold->Original->Name : dold->Character->Name ) )
-        {
-          int cstate = dold->ConnectionState;
-          Character *ch = dold->Original ? dold->Original : dold->Character;
-
-          if ( !ch->Name
-               || ( cstate != CON_PLAYING && cstate != CON_EDITING ) )
-            {
-              WriteToBuffer( d, "Already connected - try again.\r\n", 0 );
-              sprintf( log_buf, "%s already connected.", ch->Name );
-              Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
-              return BERR;
-            }
-
-          if ( !kick )
-            return true;
-
-          WriteToBuffer( d, "Already playing... Kicking off old connection.\r\n", 0 );
-          WriteToBuffer( dold, "Kicking off old connection... bye!\r\n", 0 );
-          CloseDescriptor( dold, false );
-          /* clear descriptor pointer to get rid of bug message in log */
-          d->Character->Desc = NULL;
-          FreeCharacter( d->Character );
-          d->Character = ch;
-          ch->Desc       = d;
-          ch->IdleTimer      = 0;
-
-          if ( ch->Switched )
-            do_return( ch->Switched, "" );
-
-          ch->Switched = NULL;
-          ch->Echo( "Reconnecting.\r\n" );
-          Act( AT_ACTION, "$n has reconnected, kicking off old link.",
-               ch, NULL, NULL, TO_ROOM );
-          sprintf( log_buf, "%s@%s reconnected, kicking off old link.",
-                   ch->Name, d->Remote.Hostname );
-          Log->LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
-
-          d->ConnectionState = cstate;
-          return true;
-        }
-    }
-
-  return false;
 }
 
 static void StopIdling( Character *ch )
@@ -1412,7 +955,7 @@ void SetCharacterColor( short AType, const Character *ch )
 		  (AType > 15 ? "5;" : ""), (AType & 7)+30);
 	}
 
-      WriteToBuffer( ch->Desc, buf, strlen(buf) );
+      ch->Desc->WriteToBuffer( buf );
     }
 }
 
@@ -1736,7 +1279,7 @@ void Act( short AType, const std::string &format, Character *ch, const void *arg
   return;
 }
 
-static char *DefaultPrompt( const Character *ch )
+char *DefaultPrompt( const Character *ch )
 {
   static char buf[MAX_STRING_LENGTH];
   strcpy( buf,"" );
@@ -1747,328 +1290,4 @@ static char *DefaultPrompt( const Character *ch )
   strcat(buf, "&BHealth:&C%h&B/%H  &BMovement:&C%v&B/%V");
   strcat(buf, "&C >&w");
   return buf;
-}
-
-static int GetColorIndex(char clr)
-{
-  static const char colors[] = "xrgObpcwzRGYBPCW";
-  int r;
-
-  for ( r = 0; r < 16; r++ )
-    if ( clr == colors[r] )
-      return r;
-  return -1;
-}
-
-static void DisplayPrompt( Descriptor *d )
-{
-  Character *ch = d->Character;
-  Character *och = (d->Original ? d->Original : d->Character);
-  bool ansi = (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI));
-  const char *prompt;
-  char buf[MAX_STRING_LENGTH];
-  char *pbuf = buf;
-  int the_stat;
-
-  if ( !ch )
-    {
-      Log->Bug( "%s: NULL ch", __FUNCTION__ );
-      return;
-    }
-
-  if ( !IsNpc(ch) && ch->SubState != SUB_NONE && !IsNullOrEmpty( ch->PCData->SubPrompt ) )
-    prompt = ch->PCData->SubPrompt;
-  else if ( IsNpc(ch) || IsNullOrEmpty( ch->PCData->Prompt ) )
-    prompt = DefaultPrompt(ch);
-  else
-    prompt = ch->PCData->Prompt;
-
-  if ( ansi )
-    {
-      strcpy(pbuf, "\033[m");
-      d->PreviousColor = 0x07;
-      pbuf += 3;
-    }
-
-  for ( ; *prompt; prompt++ )
-    {
-      /*
-       * '&' = foreground color/intensity bit
-       * '^' = background color/blink bit
-       * '%' = prompt commands
-       * Note: foreground changes will revert background to 0 (black)
-       */
-      if ( *prompt != '&' && *prompt != '^' && *prompt != '%' )
-        {
-          *(pbuf++) = *prompt;
-          continue;
-        }
-
-      ++prompt;
-
-      if ( !*prompt )
-        break;
-
-      if ( *prompt == *(prompt-1) )
-        {
-          *(pbuf++) = *prompt;
-          continue;
-        }
-
-      switch(*(prompt-1))
-        {
-        default:
-          Log->Bug( "Display_prompt: bad command char '%c'.", *(prompt-1) );
-          break;
-
-        case '&':
-        case '^':
-          the_stat = MakeColorSequence(&prompt[-1], pbuf, d);
-          if ( the_stat < 0 )
-            --prompt;
-          else if ( the_stat > 0 )
-            pbuf += the_stat;
-          break;
-
-        case '%':
-          *pbuf = '\0';
-          the_stat = 0x80000000;
-
-          switch(*prompt)
-            {
-            case '%':
-              *pbuf++ = '%';
-              *pbuf = '\0';
-              break;
-
-            case 'a':
-              if ( ch->TopLevel >= 10 )
-                the_stat = ch->Alignment;
-              else if ( IsGood(ch) )
-                strcpy(pbuf, "good");
-              else if ( IsEvil(ch) )
-                strcpy(pbuf, "evil");
-              else
-                strcpy(pbuf, "neutral");
-              break;
-
-            case 'h':
-              the_stat = ch->Hit;
-              break;
-
-            case 'H':
-              the_stat = ch->MaxHit;
-              break;
-
-            case 'm':
-              if ( IsImmortal(ch) || IsJedi( ch ) )
-                the_stat = ch->Mana;
-              else
-                the_stat = 0;
-              break;
-
-            case 'M':
-              if ( IsImmortal(ch) || IsJedi( ch ) )
-                the_stat = ch->MaxMana;
-              else
-                the_stat = 0;
-              break;
-
-            case 'p':
-              if ( ch->Position == POS_RESTING )
-                strcpy(pbuf, "resting");
-              else if ( ch->Position == POS_SLEEPING )
-                strcpy(pbuf, "sleeping");
-              else if ( ch->Position == POS_SITTING )
-                strcpy(pbuf, "sitting");
-              break;
-
-            case 'u':
-              the_stat = num_descriptors;
-              break;
-
-            case 'U':
-              the_stat = SysData.MaxPlayersThisBoot;
-              break;
-
-            case 'v':
-              the_stat = ch->Move;
-              break;
-
-            case 'V':
-              the_stat = ch->MaxMove;
-              break;
-
-            case 'g':
-              the_stat = ch->Gold;
-              break;
-
-            case 'r':
-              if ( IsImmortal(och) )
-                the_stat = ch->InRoom->Vnum;
-              break;
-
-            case 'R':
-              if ( IsBitSet(och->Flags, PLR_ROOMVNUM) )
-                sprintf(pbuf, "<#%ld> ", ch->InRoom->Vnum);
-              break;
-
-            case 'i':
-              if ( (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_WIZINVIS)) ||
-                   (IsNpc(ch) && IsBitSet(ch->Flags, ACT_MOBINVIS)) )
-                sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->MobInvis : ch->PCData->WizInvis));
-              else if ( IsAffectedBy(ch, AFF_INVISIBLE) )
-		sprintf(pbuf, "(Invis) " );
-              break;
-
-            case 'I':
-              the_stat = (IsNpc(ch) ? (IsBitSet(ch->Flags, ACT_MOBINVIS) ? ch->MobInvis : 0)
-                      : (IsBitSet(ch->Flags, PLR_WIZINVIS) ? ch->PCData->WizInvis : 0));
-              break;
-            }
-
-          if ( (unsigned int)the_stat != 0x80000000 )
-            sprintf(pbuf, "%d", the_stat);
-
-          pbuf += strlen(pbuf);
-          break;
-        }
-    }
-  *pbuf = '\0';
-  WriteToBuffer(d, buf, (pbuf-buf));
-  return;
-}
-
-int MakeColorSequence(const char *col, char *buf, Descriptor *d)
-{
-  int ln = 0;
-  const char *ctype = col;
-  unsigned char cl = 0;
-  Character *och = d->Original ? d->Original : d->Character;
-  bool ansi = !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI);
-
-  col++;
-
-  if (IsNullOrEmpty(col))
-    {
-      ln = -1;
-    }
-  else if ( *ctype != '&' && *ctype != '^' )
-    {
-      Log->Bug("%s: command '%c' not '&' or '^'.", __FUNCTION__, *ctype);
-      ln = -1;
-    }
-  else if ( *col == *ctype )
-    {
-      buf[0] = *col;
-      buf[1] = '\0';
-      ln = 1;
-    }
-  else if ( !ansi )
-    {
-      ln = 0;
-    }
-  else
-    {
-      cl = d->PreviousColor;
-
-      switch(*ctype)
-        {
-        default:
-          Log->Bug( "%s: bad command char '%c'.", __FUNCTION__, *ctype );
-          ln = -1;
-          break;
-
-        case '&':
-          if ( *col == '-' )
-            {
-              buf[0] = '~';
-              buf[1] = '\0';
-              ln = 1;
-              /*break;*/
-            }
-
-          break;
-
-        case '^':
-          {
-            int newcol = GetColorIndex(*col);
-
-            if ( newcol < 0 )
-              {
-                ln = 0;
-                break;
-              }
-            else if ( *ctype == '&' )
-              {
-                cl = (cl & 0xF0) | newcol;
-              }
-            else
-              {
-                cl = (cl & 0x0F) | (newcol << 4);
-              }
-          }
-
-          if ( cl == d->PreviousColor )
-            {
-              ln = 0;
-              break;
-            }
-
-          strcpy(buf, "\033[");
-
-          if ( (cl & 0x88) != (d->PreviousColor & 0x88) )
-            {
-              strcat(buf, "m\033[");
-
-              if ( (cl & 0x08) )
-                {
-                  strcat(buf, "1;");
-                }
-
-              if ( (cl & 0x80) )
-                {
-                  strcat(buf, "5;");
-                }
-
-              d->PreviousColor = 0x07 | (cl & 0x88);
-              ln = strlen(buf);
-            }
-          else
-            {
-              ln = 2;
-            }
-
-          if ( (cl & 0x07) != (d->PreviousColor & 0x07) )
-            {
-              sprintf(buf+ln, "3%d;", cl & 0x07);
-              ln += 3;
-            }
-
-          if ( (cl & 0x70) != (d->PreviousColor & 0x70) )
-            {
-              sprintf(buf+ln, "4%d;", (cl & 0x70) >> 4);
-              ln += 3;
-            }
-
-          if ( buf[ln-1] == ';' )
-            {
-              buf[ln-1] = 'm';
-            }
-          else
-            {
-              buf[ln++] = 'm';
-              buf[ln] = '\0';
-            }
-
-          d->PreviousColor = cl;
-        }
-    }
-
-  if ( ln <= 0 )
-    {
-      *buf = '\0';
-    }
-
-  return ln;
 }

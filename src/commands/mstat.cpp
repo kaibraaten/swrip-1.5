@@ -7,6 +7,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "protomob.hpp"
+#include "descriptor.hpp"
 
 void do_mstat( Character *ch, char *argument )
 {

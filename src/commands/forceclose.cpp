@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "descriptor.hpp"
 
 void do_forceclose( Character *ch, char *argument )
 {

@@ -102,41 +102,6 @@ public:
 };
 
 /*
- * Descriptor (channel) structure.
- */
-class Descriptor
-{
-public:
-  Descriptor *Next = nullptr;
-  Descriptor *Previous = nullptr;
-  Descriptor *SnoopBy = nullptr;
-  class Character *Character = nullptr;
-  class Character *Original = nullptr;
-
-  struct
-  {
-    char *Hostname = nullptr;
-    char *HostIP = nullptr;
-    short Port = 0;
-  } Remote;
-
-  socket_t  Socket = INVALID_SOCKET;
-  short     ConnectionState = 0;
-  short     Idle = 0;
-  bool      fCommand = false;
-  char      InBuffer[MAX_INBUF_SIZE];
-  char      InComm[MAX_INPUT_LENGTH];
-  char      InLast[MAX_INPUT_LENGTH];
-  int       Repeat = 0;
-  char     *OutBuffer  = nullptr;
-  unsigned  long OutSize = 0;
-  int       OutTop = 0;
-
-  int           NewState = 0;
-  unsigned char PreviousColor = 0;
-};
-
-/*
  * Attribute bonus structures.
  */
 class StrengthBonusType
@@ -1318,19 +1283,14 @@ int GetShipFlag(const std::string &txt);
 /* nanny.c */
 void Nanny( Descriptor *d, char *argument );
 
-/* comm.c */
-int MakeColorSequence( const char *col, char *buf, Descriptor *d );
+/* comm.cpp */
+char *DefaultPrompt( const Character *ch );
 void CloseDescriptor( Descriptor *dclose, bool force );
 bool WriteToDescriptor( socket_t desc, const std::string &txt, int length );
-void WriteToBuffer( Descriptor *d, const std::string &txt, size_t length );
 void SetCharacterColor( short AType, const Character *ch );
 void Act( short AType, const std::string &format, Character *ch,
           const void *arg1, const void *arg2, int type );
 socket_t InitializeSocket( short port );
-bool CheckReconnect( Descriptor *d, const std::string &name, bool fConn );
-unsigned char CheckPlaying( Descriptor *d, const std::string &name, bool kick );
-bool CheckMultiplaying( Descriptor *d, const std::string &name );
-void InitializeDescriptor(Descriptor *dnew, socket_t desc);
 void FreeDescriptor( Descriptor *d );
 
 /* comments.c */

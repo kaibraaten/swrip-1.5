@@ -29,6 +29,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "descriptor.hpp"
 
 std::string DrunkSpeech( const std::string &argument, Character *ch )
 {

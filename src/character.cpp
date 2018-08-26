@@ -35,6 +35,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
+#include "descriptor.hpp"
 
 struct Character::Impl
 {
@@ -175,11 +176,11 @@ void Character::Echo(const char *fmt, ...) const
     {
       if (colstr > prevstr)
         {
-          WriteToBuffer(d, prevstr, (colstr - prevstr));
+          d->WriteToBuffer(prevstr, (colstr - prevstr));
         }
 
       char colbuf[20];
-      int ln = MakeColorSequence(colstr, colbuf, d);
+      int ln = d->MakeColorSequence(colstr, colbuf);
 
       if ( ln < 0 )
         {
@@ -188,7 +189,7 @@ void Character::Echo(const char *fmt, ...) const
         }
       else if ( ln > 0 )
         {
-          WriteToBuffer(d, colbuf, ln);
+          d->WriteToBuffer(colbuf, ln);
         }
       
       prevstr = colstr+2;
@@ -196,7 +197,7 @@ void Character::Echo(const char *fmt, ...) const
 
   if ( *prevstr )
     {
-      WriteToBuffer(d, prevstr, 0);
+      d->WriteToBuffer(prevstr, 0);
     }
 }
 

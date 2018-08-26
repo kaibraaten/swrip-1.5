@@ -14,6 +14,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "descriptor.hpp"
 
 struct UserData
 {

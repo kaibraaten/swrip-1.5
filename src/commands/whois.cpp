@@ -5,6 +5,7 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "descriptor.hpp"
 
 void do_whois( Character *ch, char *argument)
 {

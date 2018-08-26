@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "pcdata.hpp"
+#include "descriptor.hpp"
 
 void do_snoop( Character *ch, char *argument )
 {

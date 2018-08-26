@@ -1,6 +1,7 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
+#include "descriptor.hpp"
 
 void do_users( Character *ch, char *argument )
 {

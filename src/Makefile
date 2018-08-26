@@ -71,6 +71,7 @@ _OBJ =  act_comm.o \
 	copyover.o \
 	craft.o \
 	db.o \
+	descriptor.o \
 	editor.o \
 	fight.o \
 	fslogger.o \

@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "descriptor.hpp"
 
 extern char *spell_target_name;
 
