@@ -261,7 +261,7 @@ void ShuttleUpdate( void )
 
               if (shuttle->Type != SHUTTLE_TURBOCAR)
 		{
-		  sprintf(buf, "The hatch on %s closes and it begins to launch..", shuttle->Name );
+		  sprintf(buf, "The hatch on %s closes and it begins to launch.", shuttle->Name );
 		}
               else
 		{
