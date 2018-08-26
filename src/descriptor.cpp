@@ -24,6 +24,14 @@ static int GetColorIndex(char clr)
 
 static const char go_ahead_str[] = { (const char)IAC, (const char)GA, '\0' };
 
+struct Descriptor::Impl
+{
+  char InBuffer[MAX_INBUF_SIZE];
+  char InLast[MAX_INPUT_LENGTH];
+  int Repeat = 0;
+  unsigned char PreviousColor = 0;
+};
+
 Descriptor::Descriptor()
 {
 
@@ -110,7 +118,7 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
     }
   else
     {
-      cl = PreviousColor;
+      cl = pImpl->PreviousColor;
 
       switch(*ctype)
         {
@@ -149,7 +157,7 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
               }
           }
 
-          if ( cl == PreviousColor )
+          if ( cl == pImpl->PreviousColor )
             {
               ln = 0;
               break;
@@ -157,7 +165,7 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
 
           strcpy(buf, "\033[");
 
-          if ( (cl & 0x88) != (PreviousColor & 0x88) )
+          if ( (cl & 0x88) != (pImpl->PreviousColor & 0x88) )
             {
               strcat(buf, "m\033[");
 
@@ -171,7 +179,7 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
                   strcat(buf, "5;");
                 }
 
-              PreviousColor = 0x07 | (cl & 0x88);
+              pImpl->PreviousColor = 0x07 | (cl & 0x88);
               ln = strlen(buf);
             }
           else
@@ -179,13 +187,13 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
               ln = 2;
             }
 
-          if ( (cl & 0x07) != (PreviousColor & 0x07) )
+          if ( (cl & 0x07) != (pImpl->PreviousColor & 0x07) )
             {
               sprintf(buf+ln, "3%d;", cl & 0x07);
               ln += 3;
             }
 
-          if ( (cl & 0x70) != (PreviousColor & 0x70) )
+          if ( (cl & 0x70) != (pImpl->PreviousColor & 0x70) )
             {
               sprintf(buf+ln, "4%d;", (cl & 0x70) >> 4);
               ln += 3;
@@ -201,7 +209,7 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
               buf[ln] = '\0';
             }
 
-          PreviousColor = cl;
+          pImpl->PreviousColor = cl;
         }
     }
 
@@ -353,7 +361,7 @@ void Descriptor::Initialize(socket_t desc)
   Socket    = desc;
   ConnectionState     = CON_GET_NAME;
   OutSize       = 2000;
-  PreviousColor     = 0x07;
+  pImpl->PreviousColor     = 0x07;
 
   AllocateMemory( OutBuffer, char, OutSize );
 }
@@ -384,7 +392,7 @@ void Descriptor::DisplayPrompt()
   if ( ansi )
     {
       strcpy(pbuf, "\033[m");
-      PreviousColor = 0x07;
+      pImpl->PreviousColor = 0x07;
       pbuf += 3;
     }
 
@@ -649,9 +657,9 @@ bool Descriptor::Read()
   if ( !IsNullOrEmpty( InComm ) )
     return true;
 
-  iStart = strlen(InBuffer);
+  iStart = strlen(pImpl->InBuffer);
 
-  if ( iStart >= sizeof(InBuffer) - 10 )
+  if ( iStart >= sizeof(pImpl->InBuffer) - 10 )
     {
       sprintf( log_buf, "%s input overflow!", Remote.Hostname );
       Log->Info( log_buf );
@@ -662,8 +670,8 @@ bool Descriptor::Read()
 
   for ( ; ; )
     {
-      ssize_t nRead = recv( Socket, InBuffer + iStart,
-                            sizeof( InBuffer ) - 10 - iStart, 0 );
+      ssize_t nRead = recv( Socket, pImpl->InBuffer + iStart,
+                            sizeof( pImpl->InBuffer ) - 10 - iStart, 0 );
 
       if ( nRead == 0 )
         {
@@ -686,13 +694,13 @@ bool Descriptor::Read()
 
       iStart += nRead;
 
-      if ( InBuffer[iStart-1] == '\n' || InBuffer[iStart-1] == '\r' )
+      if ( pImpl->InBuffer[iStart-1] == '\n' || pImpl->InBuffer[iStart-1] == '\r' )
         {
           break;
         }
     }
 
-  InBuffer[iStart] = '\0';
+  pImpl->InBuffer[iStart] = '\0';
   return true;
 }
 
@@ -707,10 +715,10 @@ void Descriptor::ReadFromBuffer()
   /*
    * Look for at least one new line.
 */
-  for ( int i = 0; InBuffer[i] != '\n' && InBuffer[i] != '\r' && i<MAX_INBUF_SIZE;
+  for ( int i = 0; pImpl->InBuffer[i] != '\n' && pImpl->InBuffer[i] != '\r' && i<MAX_INBUF_SIZE;
         i++ )
     {
-      if ( InBuffer[i] == '\0' )
+      if ( pImpl->InBuffer[i] == '\0' )
         return;
     }
 
@@ -720,21 +728,21 @@ void Descriptor::ReadFromBuffer()
   int i = 0;
   int k = 0;
   
-  for ( i = 0, k = 0; InBuffer[i] != '\n' && InBuffer[i] != '\r'; i++ )
+  for ( i = 0, k = 0; pImpl->InBuffer[i] != '\n' && pImpl->InBuffer[i] != '\r'; i++ )
     {
       if ( k >= 254 )
         {
           WriteToDescriptor( Socket, "Line too long.\r\n", 0 );
 
-          InBuffer[i]   = '\n';
-          InBuffer[i+1] = '\0';
+          pImpl->InBuffer[i]   = '\n';
+          pImpl->InBuffer[i+1] = '\0';
           break;
         }
 
-      if ( InBuffer[i] == '\b' && k > 0 )
+      if ( pImpl->InBuffer[i] == '\b' && k > 0 )
         --k;
-      else if ( isascii(InBuffer[i]) && isprint(InBuffer[i]) )
-        InComm[k++] = InBuffer[i];
+      else if ( isascii(pImpl->InBuffer[i]) && isprint(pImpl->InBuffer[i]) )
+        InComm[k++] = pImpl->InBuffer[i];
     }
 
   /*
@@ -750,13 +758,13 @@ void Descriptor::ReadFromBuffer()
    */
   if ( k > 1 || InComm[0] == '!' )
     {
-      if ( InComm[0] != '!' && StrCmp( InComm, InLast ) )
+      if ( InComm[0] != '!' && StrCmp( InComm, pImpl->InLast ) )
         {
-          Repeat = 0;
+          pImpl->Repeat = 0;
         }
       else
         {
-          if ( ++Repeat >= 100 )
+          if ( ++pImpl->Repeat >= 100 )
             {
               WriteToDescriptor( Socket,
                                  "\r\n*** PUT A LID ON IT!!! ***\r\n", 0 );
@@ -768,17 +776,17 @@ void Descriptor::ReadFromBuffer()
    * Do '!' substitution.
    */
   if ( InComm[0] == '!' )
-    strcpy( InComm, InLast );
+    strcpy( InComm, pImpl->InLast );
   else
-    strcpy( InLast, InComm );
+    strcpy( pImpl->InLast, InComm );
 
   /*
    * Shift the input buffer.
    */
-  while ( InBuffer[i] == '\n' || InBuffer[i] == '\r' )
+  while ( pImpl->InBuffer[i] == '\n' || pImpl->InBuffer[i] == '\r' )
     i++;
 
-  for ( int j = 0; ( InBuffer[j] = InBuffer[i+j] ) != '\0'; j++ )
+  for ( int j = 0; ( pImpl->InBuffer[j] = pImpl->InBuffer[i+j] ) != '\0'; j++ )
     ;
 }
 
