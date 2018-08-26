@@ -16,7 +16,6 @@ public:
   virtual bool CheckReconnect(const std::string &name, bool fConn );
   virtual unsigned char CheckPlaying(const std::string &name, bool kick );
   virtual bool CheckMultiplaying(const std::string &name );
-  virtual void DisplayPrompt();
   virtual bool FlushBuffer(bool fPrompt);
   virtual void ReadFromBuffer();
   virtual bool Read();
@@ -42,7 +41,7 @@ public:
   char     *OutBuffer  = nullptr;
   unsigned  long OutSize = 0;
   int       OutTop = 0;
-
+  unsigned char PreviousColor = 0;
   int           NewState = 0;
   
 private:
@@ -60,7 +59,6 @@ public:
   bool CheckReconnect(const std::string &name, bool fConn ) override;
   unsigned char CheckPlaying(const std::string &name, bool kick ) override;
   bool CheckMultiplaying(const std::string &name ) override;
-  void DisplayPrompt() override;
   bool FlushBuffer(bool fPrompt) override;
   void ReadFromBuffer() override;
   bool Read() override;

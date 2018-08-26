@@ -29,7 +29,6 @@ struct Descriptor::Impl
   char InBuffer[MAX_INBUF_SIZE];
   char InLast[MAX_INPUT_LENGTH];
   int Repeat = 0;
-  unsigned char PreviousColor = 0;
 };
 
 Descriptor::Descriptor(socket_t desc)
@@ -38,7 +37,7 @@ Descriptor::Descriptor(socket_t desc)
   Socket = desc;
   ConnectionState = CON_GET_NAME;
   OutSize = 2000;
-  pImpl->PreviousColor = 0x07;
+  PreviousColor = 0x07;
 
   AllocateMemory( OutBuffer, char, OutSize );
 }
@@ -126,7 +125,7 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
     }
   else
     {
-      cl = pImpl->PreviousColor;
+      cl = PreviousColor;
 
       switch(*ctype)
         {
@@ -165,7 +164,7 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
               }
           }
 
-          if ( cl == pImpl->PreviousColor )
+          if ( cl == PreviousColor )
             {
               ln = 0;
               break;
@@ -173,7 +172,7 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
 
           strcpy(buf, "\033[");
 
-          if ( (cl & 0x88) != (pImpl->PreviousColor & 0x88) )
+          if ( (cl & 0x88) != (PreviousColor & 0x88) )
             {
               strcat(buf, "m\033[");
 
@@ -187,7 +186,7 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
                   strcat(buf, "5;");
                 }
 
-              pImpl->PreviousColor = 0x07 | (cl & 0x88);
+              PreviousColor = 0x07 | (cl & 0x88);
               ln = strlen(buf);
             }
           else
@@ -195,13 +194,13 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
               ln = 2;
             }
 
-          if ( (cl & 0x07) != (pImpl->PreviousColor & 0x07) )
+          if ( (cl & 0x07) != (PreviousColor & 0x07) )
             {
               sprintf(buf + ln, "3%d;", cl & 0x07);
               ln += 3;
             }
 
-          if ( (cl & 0x70) != (pImpl->PreviousColor & 0x70) )
+          if ( (cl & 0x70) != (PreviousColor & 0x70) )
             {
               sprintf(buf+ln, "4%d;", (cl & 0x70) >> 4);
               ln += 3;
@@ -217,7 +216,7 @@ int Descriptor::MakeColorSequence(const std::string &c, char *buf)
               buf[ln] = '\0';
             }
 
-          pImpl->PreviousColor = cl;
+          PreviousColor = cl;
         }
     }
 
@@ -368,185 +367,6 @@ unsigned char Descriptor::CheckPlaying( const std::string &name, bool kick )
   return false;
 }
 
-void Descriptor::DisplayPrompt()
-{
-  const class Character *ch = Character;
-  const class Character *och = Original ? Original : Character;
-  const bool ansi = (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI));
-  const char *prompt = nullptr;
-  char buf[MAX_STRING_LENGTH];
-  char *pbuf = buf;
-  int the_stat = 0;
-
-  if ( !ch )
-    {
-      Log->Bug( "%s: NULL ch", __FUNCTION__ );
-      return;
-    }
-
-  if ( !IsNpc(ch) && ch->SubState != SUB_NONE && !IsNullOrEmpty( ch->PCData->SubPrompt ) )
-    prompt = ch->PCData->SubPrompt;
-  else if ( IsNpc(ch) || IsNullOrEmpty( ch->PCData->Prompt ) )
-    prompt = DefaultPrompt(ch);
-  else
-    prompt = ch->PCData->Prompt;
-
-  if ( ansi )
-    {
-      strcpy(pbuf, "\033[m");
-      pImpl->PreviousColor = 0x07;
-      pbuf += 3;
-    }
-
-  for ( ; *prompt; prompt++ )
-    {
-      /*
-       * '&' = foreground color/intensity bit
-       * '^' = background color/blink bit
-       * '%' = prompt commands
-       * Note: foreground changes will revert background to 0 (black)
-       */
-      if ( *prompt != '&' && *prompt != '^' && *prompt != '%' )
-        {
-          *(pbuf++) = *prompt;
-          continue;
-          }
-
-      ++prompt;
-
-      if ( !*prompt )
-        break;
-
-      if ( *prompt == *(prompt-1) )
-        {
-          *(pbuf++) = *prompt;
-          continue;
-        }
-
-      switch(*(prompt-1))
-        {
-        default:
-          Log->Bug( "Display_prompt: bad command char '%c'.", *(prompt-1) );
-          break;
-
-        case '&':
-        case '^':
-          the_stat = MakeColorSequence(&prompt[-1], pbuf);
-          if ( the_stat < 0 )
-            --prompt;
-          else if ( the_stat > 0 )
-            pbuf += the_stat;
-          break;
-
-          case '%':
-          *pbuf = '\0';
-          the_stat = 0x80000000;
-
-          switch(*prompt)
-            {
-            case '%':
-              *pbuf++ = '%';
-              *pbuf = '\0';
-              break;
-
-            case 'a':
-              if ( ch->TopLevel >= 10 )
-                the_stat = ch->Alignment;
-              else if ( IsGood(ch) )
-                strcpy(pbuf, "good");
-              else if ( IsEvil(ch) )
-                strcpy(pbuf, "evil");
-              else
-                strcpy(pbuf, "neutral");
-              break;
-
-            case 'h':
-              the_stat = ch->Hit;
-              break;
-
-              case 'H':
-              the_stat = ch->MaxHit;
-              break;
-
-            case 'm':
-              if ( IsImmortal(ch) || IsJedi( ch ) )
-                the_stat = ch->Mana;
-              else
-                the_stat = 0;
-              break;
-
-            case 'M':
-              if ( IsImmortal(ch) || IsJedi( ch ) )
-                the_stat = ch->MaxMana;
-              else
-                the_stat = 0;
-              break;
-
-            case 'p':
-              if ( ch->Position == POS_RESTING )
-                strcpy(pbuf, "resting");
-              else if ( ch->Position == POS_SLEEPING )
-                strcpy(pbuf, "sleeping");
-              else if ( ch->Position == POS_SITTING )
-                strcpy(pbuf, "sitting");
-              break;
-
-              case 'u':
-              the_stat = num_descriptors;
-              break;
-
-            case 'U':
-              the_stat = SysData.MaxPlayersThisBoot;
-              break;
-
-            case 'v':
-              the_stat = ch->Move;
-              break;
-
-            case 'V':
-              the_stat = ch->MaxMove;
-              break;
-
-            case 'g':
-              the_stat = ch->Gold;
-              break;
-
-            case 'r':
-              if ( IsImmortal(och) )
-                the_stat = ch->InRoom->Vnum;
-              break;
-
-            case 'R':
-              if ( IsBitSet(och->Flags, PLR_ROOMVNUM) )
-                sprintf(pbuf, "<#%ld> ", ch->InRoom->Vnum);
-              break;
-
-            case 'i':
-              if ( (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_WIZINVIS)) ||
-                   (IsNpc(ch) && IsBitSet(ch->Flags, ACT_MOBINVIS)) )
-                sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->MobInvis : ch->PCData->WizInvis));
-              else if ( IsAffectedBy(ch, AFF_INVISIBLE) )
-                sprintf(pbuf, "(Invis) " );
-              break;
-
-            case 'I':
-              the_stat = (IsNpc(ch) ? (IsBitSet(ch->Flags, ACT_MOBINVIS) ? ch->MobInvis : 0)
-                      : (IsBitSet(ch->Flags, PLR_WIZINVIS) ? ch->PCData->WizInvis : 0));
-              break;
-            }
-
-          if ( (unsigned int)the_stat != 0x80000000 )
-            sprintf(pbuf, "%d", the_stat);
-
-          pbuf += strlen(pbuf);
-          break;
-        }
-    }
-
-  *pbuf = '\0';
-  WriteToBuffer( buf, (pbuf - buf));
-}
-
 bool Descriptor::FlushBuffer(bool fPrompt)
 {
   char buf[MAX_INPUT_LENGTH];
@@ -592,7 +412,6 @@ bool Descriptor::FlushBuffer(bool fPrompt)
       return true;
     }
 
-
   /*
    * Bust a prompt.
    */
@@ -604,7 +423,7 @@ bool Descriptor::FlushBuffer(bool fPrompt)
         WriteToBuffer( "\r\n", 2 );
 
       if ( IsBitSet(ch->Flags, PLR_PROMPT) )
-        DisplayPrompt();
+        DisplayPrompt(this);
 
       if ( IsBitSet(ch->Flags, PLR_TELNET_GA) )
         WriteToBuffer( go_ahead_str, 0 );
@@ -823,11 +642,6 @@ unsigned char NullDescriptor::CheckPlaying(const std::string &name, bool kick )
 bool NullDescriptor::CheckMultiplaying(const std::string &name )
 {
   return false;
-}
-
-void NullDescriptor::DisplayPrompt()
-{
-
 }
 
 bool NullDescriptor::FlushBuffer(bool fPrompt)
