@@ -19,8 +19,8 @@ endif
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 LIBDIR = libs
 TESTDIR = test
-CXXFLAGS = -std=c++14 -fPIC -g3 -MMD -I. -Ilibs -I$(LIBDIR)/utility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
-LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility $(LUA_LIBS) -L. -lswrip -Wl,-rpath,./src
+CXXFLAGS = -std=c++14 -fPIC -g3 -MMD -I. -I$(LIBDIR) $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
+LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility -L$(LIBDIR)/colorparser -lcolorparser -Wl,-rpath,./src/$(LIBDIR)/colorparser $(LUA_LIBS) -L. -lswrip -Wl,-rpath,./src
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
 #SOLARIS = 1
@@ -684,6 +684,7 @@ all:		libraries $(LIBNAME) $(BINARY) tests
 
 libraries:
 		$(MAKE) -C $(LIBDIR)/utility libutility.so
+		$(MAKE) -C $(LIBDIR)/colorparser libcolorparser.so
 
 tests:		$(BINARY)
 		$(MAKE) -C $(TESTDIR)

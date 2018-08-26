@@ -1284,7 +1284,7 @@ int GetShipFlag(const std::string &txt);
 void Nanny( Descriptor *d, char *argument );
 
 /* comm.cpp */
-char *DefaultPrompt( const Character *ch );
+void DisplayPrompt(Descriptor *d);
 void CloseDescriptor( Descriptor *dclose, bool force );
 bool WriteToDescriptor( socket_t desc, const std::string &txt, int length );
 void SetCharacterColor( short AType, const Character *ch );

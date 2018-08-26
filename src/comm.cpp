@@ -25,6 +25,7 @@
 #define _BSD_SOURCE
 #endif
 
+#include <cassert>
 #include <cstring>
 #include <cctype>
 #include <ctime>
@@ -1274,19 +1275,203 @@ void Act( short AType, const std::string &format, Character *ch, const void *arg
           MobProgActTrigger( txt, to, ch, (Object *)arg1, (void *)arg2 );
         }
     }
+
   MOBtrigger = true;
   return;
 }
 
-char *DefaultPrompt( const Character *ch )
+static char *DefaultPrompt( const Character *ch )
 {
   static char buf[MAX_STRING_LENGTH];
   strcpy( buf,"" );
 
   if (IsJedi(ch) || IsImmortal( ch ) )
-    strcat(buf, "&pForce:&P%m/&p%M  &pAlign:&P%a\r\n");
+    strcat(buf, "&pForce:&P$m/&p$M  &pAlign:&P$a\r\n");
 
-  strcat(buf, "&BHealth:&C%h&B/%H  &BMovement:&C%v&B/%V");
+  strcat(buf, "&BHealth:&C$h&B/$H  &BMovement:&C$v&B/$V");
   strcat(buf, "&C >&w");
   return buf;
+}
+
+void DisplayPrompt(Descriptor *d)
+{
+  const Character *ch = d->Character;
+  const Character *och = d->Original ? d->Original : d->Character;
+  const bool ansi = (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI));
+  const char *prompt = nullptr;
+  char buf[MAX_STRING_LENGTH];
+  char *pbuf = buf;
+  int the_stat = 0;
+  const char variableMarker = '$';
+  
+  assert(ch != nullptr);
+
+  if ( !IsNpc(ch) && ch->SubState != SUB_NONE && !IsNullOrEmpty( ch->PCData->SubPrompt ) )
+    {
+      prompt = ch->PCData->SubPrompt;
+    }
+  else if ( IsNpc(ch) || IsNullOrEmpty( ch->PCData->Prompt ) )
+    {
+      prompt = DefaultPrompt(ch);
+    }
+  else
+    {
+      prompt = ch->PCData->Prompt;
+    }
+  
+  if ( ansi )
+    {
+      strcpy(pbuf, "\033[m");
+      d->PreviousColor = 0x07;
+      pbuf += 3;
+    }
+
+  for ( ; *prompt; prompt++ )
+    {
+      /*
+       * '&' = foreground color/intensity bit
+       * '^' = background color/blink bit
+       * '$' = prompt commands
+       * Note: foreground changes will revert background to 0 (black)
+       */
+      if ( *prompt != '&' && *prompt != '^' && *prompt != variableMarker )
+        {
+          *(pbuf++) = *prompt;
+          continue;
+        }
+
+      ++prompt;
+
+      if ( !*prompt )
+        break;
+
+      if ( *prompt == *(prompt-1) )
+        {
+          *(pbuf++) = *prompt;
+          continue;
+        }
+
+      switch(*(prompt-1))
+        {
+        default:
+          Log->Bug( "Display_prompt: bad command char '%c'.", *(prompt-1) );
+          break;
+
+        case '&':
+        case '^':
+          the_stat = d->MakeColorSequence(&prompt[-1], pbuf);
+
+          if ( the_stat < 0 )
+            --prompt;
+          else if ( the_stat > 0 )
+            pbuf += the_stat;
+          break;
+
+        case variableMarker:
+          *pbuf = '\0';
+          the_stat = 0x80000000;
+
+          switch(*prompt)
+            {
+            case variableMarker:
+              *pbuf++ = variableMarker;
+              *pbuf = '\0';
+              break;
+
+            case 'a':
+              if ( ch->TopLevel >= 10 )
+                the_stat = ch->Alignment;
+              else if ( IsGood(ch) )
+                strcpy(pbuf, "good");
+              else if ( IsEvil(ch) )
+                strcpy(pbuf, "evil");
+              else
+                strcpy(pbuf, "neutral");
+              break;
+
+            case 'h':
+              the_stat = ch->Hit;
+              break;
+
+            case 'H':
+              the_stat = ch->MaxHit;
+              break;
+
+            case 'm':
+              if ( IsImmortal(ch) || IsJedi( ch ) )
+                the_stat = ch->Mana;
+              else
+                the_stat = 0;
+              break;
+
+            case 'M':
+              if ( IsImmortal(ch) || IsJedi( ch ) )
+                the_stat = ch->MaxMana;
+              else
+                the_stat = 0;
+              break;
+
+            case 'p':
+              if ( ch->Position == POS_RESTING )
+                strcpy(pbuf, "resting");
+              else if ( ch->Position == POS_SLEEPING )
+                strcpy(pbuf, "sleeping");
+              else if ( ch->Position == POS_SITTING )
+                strcpy(pbuf, "sitting");
+              break;
+
+            case 'u':
+              the_stat = num_descriptors;
+              break;
+
+            case 'U':
+              the_stat = SysData.MaxPlayersThisBoot;
+              break;
+
+            case 'v':
+              the_stat = ch->Move;
+              break;
+
+            case 'V':
+              the_stat = ch->MaxMove;
+              break;
+
+            case 'g':
+              the_stat = ch->Gold;
+              break;
+
+            case 'r':
+              if ( IsImmortal(och) )
+                the_stat = ch->InRoom->Vnum;
+              break;
+
+            case 'R':
+              if ( IsBitSet(och->Flags, PLR_ROOMVNUM) )
+                sprintf(pbuf, "<#%ld> ", ch->InRoom->Vnum);
+              break;
+
+            case 'i':
+              if ( (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_WIZINVIS)) ||
+                   (IsNpc(ch) && IsBitSet(ch->Flags, ACT_MOBINVIS)) )
+                sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->MobInvis : ch->PCData->WizInvis));
+              else if ( IsAffectedBy(ch, AFF_INVISIBLE) )
+                sprintf(pbuf, "(Invis) " );
+              break;
+
+            case 'I':
+              the_stat = (IsNpc(ch) ? (IsBitSet(ch->Flags, ACT_MOBINVIS) ? ch->MobInvis : 0)
+                      : (IsBitSet(ch->Flags, PLR_WIZINVIS) ? ch->PCData->WizInvis : 0));
+              break;
+            }
+
+          if ( (unsigned int)the_stat != 0x80000000 )
+            sprintf(pbuf, "%d", the_stat);
+
+          pbuf += strlen(pbuf);
+          break;
+        }
+    }
+
+  *pbuf = '\0';
+  d->WriteToBuffer( buf, (pbuf - buf));
 }
