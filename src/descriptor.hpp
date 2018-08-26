@@ -21,12 +21,12 @@ public:
   virtual bool FlushBuffer(bool fPrompt);
   virtual void ReadFromBuffer();
   virtual bool Read();
-  
+
   Descriptor *Next = nullptr;
   Descriptor *Previous = nullptr;
-  Descriptor *SnoopBy = nullptr;
   class Character *Character = nullptr;
   class Character *Original = nullptr;
+  Descriptor *SnoopBy = nullptr;
 
   struct
   {
@@ -34,22 +34,18 @@ public:
     char *HostIP = nullptr;
     short Port = 0;
   } Remote;
-
+  
   socket_t  Socket = INVALID_SOCKET;
-  short     ConnectionState = 0;
+  short ConnectionState = 0;
   short     Idle = 0;
   bool      fCommand = false;
-  char      InBuffer[MAX_INBUF_SIZE];
   char      InComm[MAX_INPUT_LENGTH];
-  char      InLast[MAX_INPUT_LENGTH];
-  int       Repeat = 0;
   char     *OutBuffer  = nullptr;
   unsigned  long OutSize = 0;
   int       OutTop = 0;
 
   int           NewState = 0;
-  unsigned char PreviousColor = 0;
-
+  
 private:
   struct Impl;
   Impl *pImpl = nullptr;
