@@ -8,7 +8,7 @@
 class Descriptor
 {
 public:
-  Descriptor();
+  Descriptor(socket_t desc);
   virtual ~Descriptor();
 
   virtual void WriteToBuffer(const std::string &txt, size_t len = 0);
@@ -16,7 +16,6 @@ public:
   virtual bool CheckReconnect(const std::string &name, bool fConn );
   virtual unsigned char CheckPlaying(const std::string &name, bool kick );
   virtual bool CheckMultiplaying(const std::string &name );
-  virtual void Initialize(socket_t desc);
   virtual void DisplayPrompt();
   virtual bool FlushBuffer(bool fPrompt);
   virtual void ReadFromBuffer();
@@ -54,12 +53,13 @@ private:
 class NullDescriptor : public Descriptor
 {
 public:
+  NullDescriptor();
+  
   void WriteToBuffer(const std::string &txt, size_t len = 0) override;
   int MakeColorSequence(const std::string &col, char *buf) override;
   bool CheckReconnect(const std::string &name, bool fConn ) override;
   unsigned char CheckPlaying(const std::string &name, bool kick ) override;
   bool CheckMultiplaying(const std::string &name ) override;
-  void Initialize(socket_t desc) override;
   void DisplayPrompt() override;
   bool FlushBuffer(bool fPrompt) override;
   void ReadFromBuffer() override;
