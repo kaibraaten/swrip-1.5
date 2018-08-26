@@ -6,17 +6,6 @@
 #include "room.hpp"
 #include "pcdata.hpp"
 
-static int GetColorIndex(char clr)
-{
-  static const char colors[] = "xrgObpcwzRGYBPCW";
-  int r;
-
-  for ( r = 0; r < 16; r++ )
-    if ( clr == colors[r] )
-      return r;
-  return -1;
-}
-
 /*
  * Socket and TCP/IP stuff.
  */
@@ -91,141 +80,6 @@ void Descriptor::WriteToBuffer(const std::string &txt, size_t length)
   strncpy( OutBuffer + OutTop, txt.c_str(), length );
   OutTop += length;
   OutBuffer[OutTop] = '\0';
-}
-
-int Descriptor::MakeColorSequence(const std::string &c, char *buf)
-{
-  const char *col = c.c_str();
-  int ln = 0;
-  const char *ctype = col;
-  unsigned char cl = 0;
-  class Character *och = Original ? Original : Character;
-  const bool ansi = !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI);
-
-  col++;
-
-  if (IsNullOrEmpty(col))
-    {
-      ln = -1;
-    }
-  else if ( *ctype != '&' && *ctype != '^' )
-    {
-      Log->Bug("%s: command '%c' not '&' or '^'.", __FUNCTION__, *ctype);
-      ln = -1;
-    }
-  else if ( *col == *ctype )
-    {
-      buf[0] = *col;
-      buf[1] = '\0';
-      ln = 1;
-    }
-  else if ( !ansi )
-    {
-      ln = 0;
-    }
-  else
-    {
-      cl = PreviousColor;
-
-      switch(*ctype)
-        {
-        default:
-          Log->Bug( "%s: bad command char '%c'.", __FUNCTION__, *ctype );
-          ln = -1;
-          break;
-
-        case '&':
-          if ( *col == '-' )
-            {
-              buf[0] = '~';
-              buf[1] = '\0';
-              ln = 1;
-              /*break;*/
-            }
-
-          break;
-
-        case '^':
-          {
-            const int newcol = GetColorIndex(*col);
-
-            if ( newcol < 0 )
-              {
-                ln = 0;
-                break;
-              }
-            else if ( *ctype == '&' )
-              {
-                cl = (cl & 0xF0) | newcol;
-              }
-            else
-              {
-                cl = (cl & 0x0F) | (newcol << 4);
-              }
-          }
-
-          if ( cl == PreviousColor )
-            {
-              ln = 0;
-              break;
-            }
-
-          strcpy(buf, "\033[");
-
-          if ( (cl & 0x88) != (PreviousColor & 0x88) )
-            {
-              strcat(buf, "m\033[");
-
-              if ( cl & 0x08 )
-                {
-                  strcat(buf, "1;");
-                }
-
-              if ( cl & 0x80 )
-                {
-                  strcat(buf, "5;");
-                }
-
-              PreviousColor = 0x07 | (cl & 0x88);
-              ln = strlen(buf);
-            }
-          else
-            {
-              ln = 2;
-            }
-
-          if ( (cl & 0x07) != (PreviousColor & 0x07) )
-            {
-              sprintf(buf + ln, "3%d;", cl & 0x07);
-              ln += 3;
-            }
-
-          if ( (cl & 0x70) != (PreviousColor & 0x70) )
-            {
-              sprintf(buf+ln, "4%d;", (cl & 0x70) >> 4);
-              ln += 3;
-            }
-
-          if ( buf[ln-1] == ';' )
-            {
-              buf[ln-1] = 'm';
-            }
-          else
-            {
-              buf[ln++] = 'm';
-              buf[ln] = '\0';
-            }
-
-          PreviousColor = cl;
-        }
-    }
-
-  if ( ln <= 0 )
-    {
-      *buf = '\0';
-    }
-
-  return ln;
 }
 
 bool Descriptor::CheckReconnect( const std::string &name, bool fConn )
@@ -622,11 +476,6 @@ NullDescriptor::NullDescriptor()
 void NullDescriptor::WriteToBuffer(const std::string &txt, size_t len)
 {
 
-}
-
-int NullDescriptor::MakeColorSequence(const std::string &col, char *buf)
-{
-  return 0;
 }
 
 bool NullDescriptor::CheckReconnect(const std::string &name, bool fConn )

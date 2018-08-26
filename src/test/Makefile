@@ -2,7 +2,7 @@ BINARY = test
 WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wredundant-decls -Wshadow -Wno-unused-parameter -Wno-char-subscripts -Wno-write-strings -Wno-long-long -Wextra -Wno-implicit-fallthrough -Wno-unused-result
 
 CXXFLAGS = -std=c++14 -g3 -MMD -I. -I.. -I../libs  $(WFLAGS)
-LDFLAGS = -L.. -L../libs/utility -Wl,-rpath,.. -Wl,-rpath,../libs/utility -lm -lz -lgtest -lgmock -lutility -lswrip -llua -ldl
+LDFLAGS = -L.. -L../libs/utility -Wl,-rpath,.. -Wl,-rpath,../libs/utility -L../libs/colorparser -Wl,-rpath,../libs/colorparser  -lm -lz -lgtest -lgmock -lutility -lcolorparser -lswrip -llua -ldl
 
 ODIR = obj
 _OBJ = main.o arraydatatests.o alias_tests.o

@@ -25,12 +25,14 @@
 #define _BSD_SOURCE
 #endif
 
+#include <sstream>
 #include <cassert>
 #include <cstring>
 #include <cctype>
 #include <ctime>
 #include <cstdarg>
 #include <utility/algorithms.hpp>
+#include <colorparser/colorparser.hpp>
 #include "log.hpp"
 #include "mud.hpp"
 #include "character.hpp"
@@ -894,13 +896,16 @@ void CloseDescriptor( Descriptor *dclose, bool force )
  * If this gives errors on very long blocks (like 'ofind all'),
  *   try lowering the max block size.
  */
-bool WriteToDescriptor( socket_t desc, const std::string &txt, int length )
+bool WriteToDescriptor( socket_t desc, const std::string &orig, int length )
 {
+  std::string txt = ColorParser::Smaug2Ansi(orig);
   ssize_t nWrite = 0;
 
   if ( length <= 0 )
-    length = txt.size();
-
+    {
+      length = txt.size();
+    }
+  
   for ( int iStart = 0; iStart < length; iStart += nWrite )
     {
       int nBlock = umin( length - iStart, 4096 );
@@ -1280,17 +1285,19 @@ void Act( short AType, const std::string &format, Character *ch, const void *arg
   return;
 }
 
-static char *DefaultPrompt( const Character *ch )
+static std::string DefaultPrompt( const Character *ch )
 {
-  static char buf[MAX_STRING_LENGTH];
-  strcpy( buf,"" );
+  std::ostringstream buf;
 
   if (IsJedi(ch) || IsImmortal( ch ) )
-    strcat(buf, "&pForce:&P$m/&p$M  &pAlign:&P$a\r\n");
+    {
+      buf << "&pForce:&P$m/&p$M  &pAlign:&P$a\r\n";
+    }
+  
+  buf << "&BHealth:&C$h&B/$H  &BMovement:&C$v&B/$V";
+  buf << "&C >&w";
 
-  strcat(buf, "&BHealth:&C$h&B/$H  &BMovement:&C$v&B/$V");
-  strcat(buf, "&C >&w");
-  return buf;
+  return buf.str();
 }
 
 void DisplayPrompt(Descriptor *d)
@@ -1298,6 +1305,7 @@ void DisplayPrompt(Descriptor *d)
   const Character *ch = d->Character;
   const Character *och = d->Original ? d->Original : d->Character;
   const bool ansi = (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI));
+  std::string promptBuffer;
   const char *prompt = nullptr;
   char buf[MAX_STRING_LENGTH];
   char *pbuf = buf;
@@ -1312,7 +1320,8 @@ void DisplayPrompt(Descriptor *d)
     }
   else if ( IsNpc(ch) || IsNullOrEmpty( ch->PCData->Prompt ) )
     {
-      prompt = DefaultPrompt(ch);
+      promptBuffer = DefaultPrompt(ch);
+      prompt = promptBuffer.c_str();
     }
   else
     {
@@ -1334,7 +1343,7 @@ void DisplayPrompt(Descriptor *d)
        * '$' = prompt commands
        * Note: foreground changes will revert background to 0 (black)
        */
-      if ( *prompt != '&' && *prompt != '^' && *prompt != variableMarker )
+      if ( *prompt != variableMarker )
         {
           *(pbuf++) = *prompt;
           continue;
@@ -1356,17 +1365,7 @@ void DisplayPrompt(Descriptor *d)
         default:
           Log->Bug( "Display_prompt: bad command char '%c'.", *(prompt-1) );
           break;
-
-        case '&':
-        case '^':
-          the_stat = d->MakeColorSequence(&prompt[-1], pbuf);
-
-          if ( the_stat < 0 )
-            --prompt;
-          else if ( the_stat > 0 )
-            pbuf += the_stat;
-          break;
-
+          
         case variableMarker:
           *pbuf = '\0';
           the_stat = 0x80000000;
