@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "descriptor.hpp"
 
 void do_showstatistic( Character *ch, char *argument )
 {
@@ -10,7 +11,7 @@ void do_showstatistic( Character *ch, char *argument )
   bool chk_race = false;
   char buf[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
-
+  
   if( !ch )
     {
       do_showstatistic_web( NULL, argument );
@@ -44,8 +45,9 @@ void do_showstatistic( Character *ch, char *argument )
       ch->Echo("Gods are indefeasible...\r\n");
       return;
     }
-  
-  Character *raceCh = new Character(new PCData(), nullptr);
+
+  Descriptor *desc = new NullDescriptor();
+  Character *raceCh = new Character(new PCData(), desc);
   raceCh->TopLevel = 1;
   raceCh->InRoom = GetRoom( ROOM_VNUM_LIMBO );
   raceCh->Stats.PermStr = 20;
@@ -142,5 +144,5 @@ void do_showstatistic( Character *ch, char *argument )
     }
 
   delete raceCh;
+  delete desc;
 }
-

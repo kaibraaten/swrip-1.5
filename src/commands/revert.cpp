@@ -1,9 +1,10 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "descriptor.hpp"
 
 void do_revert(Character *ch, char *argument)
 {
-  Character *mob;
+  Character *mob = nullptr;
 
   if ( !IsNpc(ch) || !IsBitSet(ch->Flags, ACT_POLYMORPHED) )
     {

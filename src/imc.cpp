@@ -50,6 +50,7 @@
 #include "social.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "descriptor.hpp"
 
 #include <ctime>
 

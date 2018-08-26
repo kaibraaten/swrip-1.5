@@ -39,6 +39,7 @@
 #include "editor.hpp"
 #include "character.hpp"
 #include "log.hpp"
+#include "descriptor.hpp"
 
 /****************************************************************************
  * Data types and other definitions

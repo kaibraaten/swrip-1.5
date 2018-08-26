@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "descriptor.hpp"
 
 void do_mpapplyb( Character *ch, char *argument )
 {

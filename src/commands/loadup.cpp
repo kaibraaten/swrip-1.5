@@ -4,6 +4,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "descriptor.hpp"
 
 void do_loadup( Character *ch, char *argument )
 {

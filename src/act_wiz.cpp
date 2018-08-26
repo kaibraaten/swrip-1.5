@@ -31,6 +31,7 @@
 #include "script.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "descriptor.hpp"
 
 /*
  * Global variables.

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "room.hpp"
+#include "descriptor.hpp"
 
 void do_where( Character *ch, char *argument )
 {

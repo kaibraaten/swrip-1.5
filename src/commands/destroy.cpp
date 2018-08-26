@@ -4,6 +4,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "area.hpp"
+#include "descriptor.hpp"
 
 static void CloseDescriptorIfHalfwayLoggedIn(const std::string &name);
 static void ExtractVictim(Character *victim);

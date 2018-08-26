@@ -22,7 +22,6 @@
  *           and problem players.  -haus 6/25/1995                          *
  ****************************************************************************/
 
-#include <sys/types.h>
 #include <cctype>
 #include <cstdio>
 #include <cstring>
@@ -34,6 +33,7 @@
 #include "board.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "descriptor.hpp"
 
 static void RemoveComment( Character *ch, Character *victim, Note *pnote );
 

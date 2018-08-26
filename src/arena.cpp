@@ -39,6 +39,7 @@
 #include "script.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "descriptor.hpp"
 
 Arena arena;
 

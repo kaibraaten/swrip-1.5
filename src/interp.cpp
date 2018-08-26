@@ -31,6 +31,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "descriptor.hpp"
 
 /*
  * Log-all switch.
@@ -406,10 +407,10 @@ void Interpret( Character *ch, char *argument )
   if ( ch->Desc && ch->Desc->SnoopBy )
     {
       sprintf( logname, "%s", ch->Name);
-      WriteToBuffer( ch->Desc->SnoopBy, logname, 0 );
-      WriteToBuffer( ch->Desc->SnoopBy, "% ",    2 );
-      WriteToBuffer( ch->Desc->SnoopBy, logline, 0 );
-      WriteToBuffer( ch->Desc->SnoopBy, "\r\n",  2 );
+      ch->Desc->SnoopBy->WriteToBuffer( logname, 0 );
+      ch->Desc->SnoopBy->WriteToBuffer( "% ",    2 );
+      ch->Desc->SnoopBy->WriteToBuffer( logline, 0 );
+      ch->Desc->SnoopBy->WriteToBuffer( "\r\n",  2 );
     }
 
   if ( timer )

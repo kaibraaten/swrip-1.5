@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "descriptor.hpp"
 
 void do_beep( Character *ch, char *argument )
 {

@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "descriptor.hpp"
 
 void do_return( Character *ch, char *argument )
 {

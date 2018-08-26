@@ -5,13 +5,14 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "protomob.hpp"
+#include "descriptor.hpp"
 
 class AliasDataTests : public ::testing::Test
 {
 protected:
   void SetUp() override
   {
-    _testCharacter = new Character(new PCData(), new Descriptor());
+    _testCharacter = new Character(new PCData(), new NullDescriptor());
     ProtoMobile *protoMob = MakeMobile(1, INVALID_VNUM, "Foo");
     _testNpc = new Character(protoMob);
   }
