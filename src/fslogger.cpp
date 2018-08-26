@@ -3,7 +3,6 @@
 #include <cstring>
 #include <sys/stat.h>
 #include "constants.hpp"
-#include "logger.hpp"
 #include "log.hpp"
 #include "character.hpp"
 #include "mud.hpp"

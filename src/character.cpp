@@ -163,41 +163,9 @@ void Character::Echo(const char *fmt, ...) const
   vsprintf(txt, fmt, args);
   va_end(args);
 
-  if(IsNullOrEmpty(txt))
+  if(!IsNullOrEmpty(txt))
     {
-      return;
-    }
-  
-  Descriptor *d = Desc;
-  const char *colstr = nullptr;
-  const char *prevstr = txt;
-  
-  while ( d && ((colstr = strpbrk(prevstr, "&^")) != NULL ))
-    {
-      if (colstr > prevstr)
-        {
-          d->WriteToBuffer(prevstr, (colstr - prevstr));
-        }
-
-      char colbuf[20];
-      int ln = d->MakeColorSequence(colstr, colbuf);
-
-      if ( ln < 0 )
-        {
-          prevstr = colstr+1;
-          break;
-        }
-      else if ( ln > 0 )
-        {
-          d->WriteToBuffer(colbuf, ln);
-        }
-      
-      prevstr = colstr+2;
-    }
-
-  if ( *prevstr )
-    {
-      d->WriteToBuffer(prevstr, 0);
+      Desc->WriteToBuffer(txt);
     }
 }
 

@@ -12,7 +12,6 @@ public:
   virtual ~Descriptor();
 
   virtual void WriteToBuffer(const std::string &txt, size_t len = 0);
-  virtual int MakeColorSequence(const std::string &col, char *buf);
   virtual bool CheckReconnect(const std::string &name, bool fConn );
   virtual unsigned char CheckPlaying(const std::string &name, bool kick );
   virtual bool CheckMultiplaying(const std::string &name );
@@ -55,7 +54,6 @@ public:
   NullDescriptor();
   
   void WriteToBuffer(const std::string &txt, size_t len = 0) override;
-  int MakeColorSequence(const std::string &col, char *buf) override;
   bool CheckReconnect(const std::string &name, bool fConn ) override;
   unsigned char CheckPlaying(const std::string &name, bool kick ) override;
   bool CheckMultiplaying(const std::string &name ) override;
