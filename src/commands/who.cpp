@@ -25,6 +25,14 @@
  * Races will no longer show up for mortals - DV Oct/00
 
  */
+
+class WhoData
+{
+public:
+  std::string Text;
+  int Type = 0;
+};
+
 void do_who( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};

@@ -52,16 +52,6 @@ extern "C" {
 #include "alias.hpp"
 #include "constants.hpp"
 
-/*
- * do_who output structure -- Narn
- */
-class WhoData
-{
-public:
-  std::string Text;
-  int Type = 0;
-};
-
 class TimeInfo
 {
 public:
