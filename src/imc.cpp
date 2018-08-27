@@ -45,6 +45,7 @@
 #endif
 #include <cerrno>
 #include <utility/sha256.hpp>
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "social.hpp"
@@ -933,16 +934,17 @@ static char *escape_string( const char *src )
  */
 static Character *imc_find_user( const char *name )
 {
-   Descriptor *d;
-   Character *vch = NULL;
+  Descriptor *desc = Find(Descriptors->Entities(),
+                          [name](const auto d)
+                          {
+                            Character *vch = d->Character ? d->Character : d->Original;
 
-   for( d = FirstDescriptor; d; d = d->Next )
-   {
-      if( ( vch = d->Character ? d->Character : d->Original ) != NULL && !strcasecmp( CH_IMCNAME( vch ), name )
-          && d->ConnectionState == CON_PLAYING )
-         return vch;
-   }
-   return NULL;
+                            return vch != nullptr
+                              && !strcasecmp(CH_IMCNAME(vch), name)
+                              && d->ConnectionState == CON_PLAYING;
+                          });
+  Character *ch = desc->Character ? desc->Character : desc->Original;
+  return ch;
 }
 
 static char *imcgetname( const char *from )
@@ -1775,24 +1777,29 @@ PFUN( imc_recv_tell )
 
 PFUN( imc_recv_emote )
 {
-   Descriptor *d;
-   Character *ch;
-   char txt[LGST], lvl[SMST];
-   int level;
+  char txt[LGST], lvl[SMST];
 
-   imc_getData( txt, "text", packet );
-   imc_getData( lvl, "level", packet );
+  imc_getData( txt, "text", packet );
+  imc_getData( lvl, "level", packet );
 
-   level = get_imcpermvalue( lvl );
-   if( level < 0 || level > IMCPERM_IMP )
+  int level = get_imcpermvalue( lvl );
+
+  if( level < 0 || level > IMCPERM_IMP )
+    {
       level = IMCPERM_IMM;
-
-   for( d = FirstDescriptor; d; d = d->Next )
-   {
-      if( d->ConnectionState == CON_PLAYING && ( ch = d->Original ? d->Original : d->Character ) != NULL
+    }
+  
+  for(const Descriptor *d : Descriptors->Entities())
+    {
+      Character *ch = nullptr;
+      
+      if( d->ConnectionState == CON_PLAYING
+          && ( ch = d->Original ? d->Original : d->Character ) != NULL
           && IMCPERM( ch ) >= level )
-         imc_printf( ch, "~p[~GIMC~p] %s %s\r\n", imcgetname( q->from ), txt );
-   }
+        {
+          imc_printf( ch, "~p[~GIMC~p] %s %s\r\n", imcgetname( q->from ), txt );
+        }
+    }
 }
 
 static void update_imchistory( IMC_CHANNEL * channel, const char *message )
@@ -1883,8 +1890,6 @@ static void update_imchistory( IMC_CHANNEL * channel, const char *message )
 
 static void imc_display_channel( IMC_CHANNEL * c, const char *from, char *txt, int emote )
 {
-   Descriptor *d;
-   Character *ch;
    char buf[LGST], name[SMST];
 
    if( IsNullOrEmpty( c->local_name ) || !c->refreshed )
@@ -1895,9 +1900,9 @@ static void imc_display_channel( IMC_CHANNEL * c, const char *from, char *txt, i
    else
       sprintf( buf, c->socformat, txt );
 
-   for( d = FirstDescriptor; d; d = d->Next )
+   for(const Descriptor *d : Descriptors->Entities())
    {
-      ch = d->Original ? d->Original : d->Character;
+     Character *ch = d->Original ? d->Original : d->Character;
 
       if( !ch || d->ConnectionState != CON_PLAYING )
          continue;
@@ -2019,17 +2024,15 @@ PFUN( imc_recv_chanwhoreply )
 
 static const char *get_local_chanwho( IMC_CHANNEL * c )
 {
-   Descriptor *d;
-   Character *person;
    static char buf[IMC_BUFF_SIZE];
    int count = 0, col = 0;
 
    sprintf( buf, "The following people are listening to %s on %s:\r\n\r\n",
              c->local_name, this_imcmud->localname );
 
-   for( d = FirstDescriptor; d; d = d->Next )
+   for(const Descriptor *d : Descriptors->Entities())
    {
-      person = d->Original ? d->Original : d->Character;
+     Character *person = d->Original ? d->Original : d->Character;
 
       if( !person )
          continue;
@@ -2297,98 +2300,97 @@ static char *process_who_template( char *head, char *tail, char *plrlines, char 
 
 static char *imc_assemble_who( void )
 {
-   Character *person;
-   Descriptor *d;
-   int pcount = 0;
-   bool plr = false, imm = false;
-   char plrheader[SMST] = {'\0'};
-   char immheader[SMST] = {'\0'};
-   char rank[SMST];
-   char flags[SMST];
-   char name[SMST];
-   char title[SMST];
-   char plrline[SMST];
-   char immline[SMST];
-   char plrlines[LGST] = {'\0'};
-   char immlines[LGST] = {'\0'};
-   char head[LGST];
-   char tail[LGST];
-   static char master[LGST];  /* The final result that gets returned */
+  int pcount = 0;
+  bool plr = false, imm = false;
+  char plrheader[SMST] = {'\0'};
+  char immheader[SMST] = {'\0'};
+  char rank[SMST];
+  char flags[SMST];
+  char name[SMST];
+  char title[SMST];
+  char plrline[SMST];
+  char immline[SMST];
+  char plrlines[LGST] = {'\0'};
+  char immlines[LGST] = {'\0'};
+  char head[LGST];
+  char tail[LGST];
+  static char master[LGST];  /* The final result that gets returned */
 
-   for( d = FirstDescriptor; d; d = d->Next )
-   {
-      person = d->Original ? d->Original : d->Character;
+  for(const Descriptor *d : Descriptors->Entities())
+    {
+      Character *person = d->Original ? d->Original : d->Character;
 
       if( person && d->ConnectionState == CON_PLAYING )
-      {
-         if( IMCPERM( person ) <= IMCPERM_NONE || IMCPERM( person ) >= IMCPERM_IMM )
+        {
+          if( IMCPERM( person ) <= IMCPERM_NONE || IMCPERM( person ) >= IMCPERM_IMM )
             continue;
 
-         if( IMCISINVIS( person ) )
+          if( IMCISINVIS( person ) )
             continue;
 
-         ++pcount;
+          ++pcount;
 
-         if( !plr )
-         {
-            strncpy( plrheader, whot->plrheader, SMST );
-            plr = true;
-         }
+          if( !plr )
+            {
+              strncpy( plrheader, whot->plrheader, SMST );
+              plr = true;
+            }
 
-         strncpy( rank, imcrankbuffer( person ), SMST );
+          strncpy( rank, imcrankbuffer( person ), SMST );
 
-         if( IMCAFK( person ) )
+          if( IMCAFK( person ) )
             strncpy( flags, "AFK", SMST );
-         else
+          else
             strncpy( flags, "---", SMST );
 
-         strncpy( name, CH_IMCNAME( person ), SMST );
-         strncpy( title, color_mtoi( CH_IMCTITLE( person ) ), SMST );
-         strncpy( plrline, process_plrline( rank, flags, name, title ), SMST );
-         strncat( plrlines, plrline, LGST - 1 );
-      }
-   }
+          strncpy( name, CH_IMCNAME( person ), SMST );
+          strncpy( title, color_mtoi( CH_IMCTITLE( person ) ), SMST );
+          strncpy( plrline, process_plrline( rank, flags, name, title ), SMST );
+          strncat( plrlines, plrline, LGST - 1 );
+        }
+    }
 
-   imm = false;
-   for( d = FirstDescriptor; d; d = d->Next )
-   {
-      person = d->Original ? d->Original : d->Character;
+  imm = false;
+
+  for(const Descriptor *d : Descriptors->Entities())
+    {
+      Character *person = d->Original ? d->Original : d->Character;
 
       if( person && d->ConnectionState == CON_PLAYING )
-      {
-         if( IMCPERM( person ) <= IMCPERM_NONE || IMCPERM( person ) < IMCPERM_IMM )
+        {
+          if( IMCPERM( person ) <= IMCPERM_NONE || IMCPERM( person ) < IMCPERM_IMM )
             continue;
 
-         if( IMCISINVIS( person ) )
+          if( IMCISINVIS( person ) )
             continue;
 
-         ++pcount;
+          ++pcount;
 
-         if( !imm )
-         {
-            strncpy( immheader, whot->immheader, SMST );
-            imm = true;
-         }
+          if( !imm )
+            {
+              strncpy( immheader, whot->immheader, SMST );
+              imm = true;
+            }
 
-         strncpy( rank, imcrankbuffer( person ), SMST );
+          strncpy( rank, imcrankbuffer( person ), SMST );
 
-         if( IMCAFK( person ) )
+          if( IMCAFK( person ) )
             strncpy( flags, "AFK", SMST );
-         else
+          else
             strncpy( flags, "---", SMST );
 
-         strncpy( name, CH_IMCNAME( person ), SMST );
-         strncpy( title, color_mtoi( CH_IMCTITLE( person ) ), SMST );
-         strncpy( immline, process_immline( rank, flags, name, title ), SMST );
-         strncat( immlines, immline, LGST - 1 );
-      }
-   }
+          strncpy( name, CH_IMCNAME( person ), SMST );
+          strncpy( title, color_mtoi( CH_IMCTITLE( person ) ), SMST );
+          strncpy( immline, process_immline( rank, flags, name, title ), SMST );
+          strncat( immlines, immline, LGST - 1 );
+        }
+    }
 
-   strncpy( head, process_who_head( pcount ), LGST );
-   strncpy( tail, process_who_tail( pcount ), LGST );
-   strncpy( master, process_who_template( head, tail, plrlines, immlines, plrheader, immheader ), LGST );
+  strncpy( head, process_who_head( pcount ), LGST );
+  strncpy( tail, process_who_tail( pcount ), LGST );
+  strncpy( master, process_who_template( head, tail, plrlines, immlines, plrheader, immheader ), LGST );
 
-   return master;
+  return master;
 }
 
 static void imc_process_who( char *from )

@@ -8,7 +8,6 @@ void do_transfer( Character *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   Room *location = nullptr;
-  Descriptor *d = nullptr;
   Character *victim = nullptr;
 
   argument = OneArgument( argument, arg1 );
@@ -22,7 +21,7 @@ void do_transfer( Character *ch, char *argument )
 
   if ( !StrCmp( arg1, "all" ) )
     {
-      for ( d = FirstDescriptor; d; d = d->Next )
+      for(const Descriptor *d : Descriptors->Entities())
         {
           if ( d->ConnectionState == CON_PLAYING
                && d->Character != ch

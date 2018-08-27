@@ -1162,9 +1162,11 @@ static void TaxUpdate( void )
         }
     }
 
-  for ( const Descriptor *d = FirstDescriptor; d; d = d->Next )
+  for ( const Descriptor *d : Descriptors->Entities() )
     {
-      if ( d && d->Character && d->Character->PCData && d->ConnectionState == CON_PLAYING ) /* Interest */
+      /* Interest */
+      if ( d->Character != nullptr
+           && d->ConnectionState == CON_PLAYING )
 	{
 	  d->Character->PCData->Bank *= 1.0071428571428571;
 	}
@@ -1186,7 +1188,6 @@ static void TaxUpdate( void )
 static void WeatherUpdate( void )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
-  Descriptor *d = NULL;
   int diff = 0;
   short AT_TEMP = AT_PLAIN;
 
@@ -1242,7 +1243,7 @@ static void WeatherUpdate( void )
 
   if ( !IsNullOrEmpty( buf ) )
     {
-      for ( d = FirstDescriptor; d; d = d->Next )
+      for(const Descriptor *d : Descriptors->Entities())
         {
           if ( d->ConnectionState == CON_PLAYING
                && IS_OUTSIDE(d->Character)
@@ -1346,7 +1347,7 @@ static void WeatherUpdate( void )
 
   if ( !IsNullOrEmpty( buf ) )
     {
-      for ( d = FirstDescriptor; d; d = d->Next )
+      for(const Descriptor *d : Descriptors->Entities())
         {
           if ( d->ConnectionState == CON_PLAYING
                &&   IS_OUTSIDE(d->Character)

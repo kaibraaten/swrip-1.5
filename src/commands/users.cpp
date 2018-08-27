@@ -1,3 +1,4 @@
+#include <sstream>
 #include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
@@ -5,21 +6,19 @@
 
 void do_users( Character *ch, char *argument )
 {
-  char buf[MAX_STRING_LENGTH];
-  Descriptor *d;
+  char arg[MAX_STRING_LENGTH];
   int count = 0;
-  char arg[MAX_INPUT_LENGTH];
+  std::ostringstream buf;
 
   OneArgument (argument, arg);
   SetCharacterColor( AT_PLAIN, ch );
-  sprintf(buf,
-          "Desc|Con|Idle| Port | Player@HostIP                 ");
-  strcat(buf, "\r\n");
-  strcat(buf, "----+---+----+------+-------------------------------");
-  strcat(buf, "\r\n");
-  ch->Echo(buf);
+  buf << "Desc|Con|Idle| Port | Player@HostIP                 "
+      << "\r\n"
+      << "----+---+----+------+-------------------------------"
+      << "\r\n";
+  ch->Echo(buf.str());
 
-  for ( d = FirstDescriptor; d; d = d->Next )
+  for ( const Descriptor *d : Descriptors->Entities() )
     {
       if ( IsNullOrEmpty( arg ) )
         {
@@ -27,8 +26,7 @@ void do_users( Character *ch, char *argument )
 	      || (d->Character && CanSeeCharacter( ch, d->Character )) )
             {
               count++;
-              sprintf( buf,
-                       " %3d| %2d|%4d|%6d| %s@%s ",
+              ch->Echo(" %3d| %2d|%4d|%6d| %s@%s ",
                        d->Socket,
                        d->ConnectionState,
                        d->Idle / 4,
@@ -39,10 +37,9 @@ void do_users( Character *ch, char *argument )
 
 	      if ( ch->TopLevel >= LEVEL_GREATER
 		   && ( !d->Character || d->Character->TopLevel <= LEVEL_GREATER ) )
-                sprintf( buf + strlen( buf ), " (%s)", d->Remote.Hostname  );
+                ch->Echo(" (%s)", d->Remote.Hostname  );
 
-	      strcat(buf, "\r\n");
-              ch->Echo(buf);
+              ch->Echo("\r\n");
             }
         }
       else

@@ -6,6 +6,8 @@
 #include "room.hpp"
 #include "pcdata.hpp"
 
+DescriptorRepository *Descriptors = nullptr;
+
 /*
  * Socket and TCP/IP stuff.
  */
@@ -136,7 +138,7 @@ bool Descriptor::CheckReconnect( const std::string &name, bool fConn )
 
 bool Descriptor::CheckMultiplaying( const std::string &name )
 {
-  for ( Descriptor *dold = FirstDescriptor; dold; dold = dold->Next )
+  for ( Descriptor *dold : Descriptors->Entities() )
     {
       if ( dold != this
            && ( dold->Character || dold->Original )
@@ -166,7 +168,7 @@ bool Descriptor::CheckMultiplaying( const std::string &name )
 
 unsigned char Descriptor::CheckPlaying( const std::string &name, bool kick )
 {
-  for ( Descriptor *dold = FirstDescriptor; dold; dold = dold->Next )
+  for ( Descriptor *dold : Descriptors->Entities() )
     {
       if ( dold != this
            && ( dold->Character || dold->Original )
@@ -506,4 +508,15 @@ void NullDescriptor::ReadFromBuffer()
 bool NullDescriptor::Read()
 {
   return true;
+}
+
+///////////////////////////////////////////////////////////
+class InMemoryDescriptorRepository : public DescriptorRepository
+{
+
+};
+
+DescriptorRepository *NewDescriptorRepository()
+{
+  return new InMemoryDescriptorRepository();
 }

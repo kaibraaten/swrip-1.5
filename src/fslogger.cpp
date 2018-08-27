@@ -112,6 +112,12 @@ void FileSystemLogger::LogStringPlus( const std::string &str, short log_type, sh
   strtime[strlen(strtime)-1] = '\0';
   fprintf( stderr, "%s :: %s\n", strtime, str.c_str() );
 
+  if(Descriptors == nullptr)
+    {
+      // Repository hasn't been allocated yet.
+      return;
+    }
+  
   if( strncmp( str.c_str(), "Log ", 4 ) == 0 )
     {
       offset = 4;
@@ -144,7 +150,7 @@ void FileSystemLogger::LogStringPlus( const std::string &str, short log_type, sh
 
   if (lognone)
     {
-      for ( const Descriptor *d = FirstDescriptor; d; d = d->Next )
+      for ( const Descriptor *d : Descriptors->Entities() )
         {
           Character *och = d->Original ? d->Original : d->Character;
           Character *vch = d->Character;
