@@ -2920,38 +2920,38 @@ const std::array<int, LANG_MAX + 1> LanguageArray =
 
 const std::array<const char * const, LANG_MAX + 1> LanguageNames =
   {
-    "common",
-    "wookiee",
-    "twilek",
-    "rodian",
-    "hutt",
-    "mon calamari",
+    "basic",
+    "shyriiwook",
+    "twileki",
+    "rodese",
+    "huttese",
+    "mon calamarian",
     "shistavanen",
-    "ewok",
-    "ithorian",
-    "gotal",
-    "devaronian",
+    "ewokese",
+    "ithorese",
+    "antarian",
+    "devaronese",
     "barabel",
     "firrerreo",
-    "bothan",
-    "gamorrean",
+    "bothese",
+    "gamorrese",
     "togorian",
-    "kubaz",
-    "jawa",
-    "clan",
-    "adarian",
+    "kubazian",
+    "jawaese",
+    "_clan",
+    "adarese",
     "verpine",
     "defel",
-    "trandoshan",
+    "dosh",
     "chadra-fan",
-    "quarren",
-    "sullustan",
+    "quarrenese",
+    "sullustese",
     "falleen",
     "binary",
     "yevethan",
     "gand",
-    "duros",
-    "coynite",
+    "durese",
+    "coyn",
     ""
   };
 
@@ -3279,12 +3279,19 @@ int GetDefenseFlag(const std::string &flag)
 
 int GetLanguage(const std::string &flag)
 {
-  int x = 0;
-
-  for ( x = 0; LanguageArray[x] != LANG_UNKNOWN; x++ )
-    if ( !StrCmp( flag, LanguageNames[x] ) )
-      return LanguageArray[x];
-
+  for ( int x = 0; LanguageArray[x] != LANG_UNKNOWN; x++ )
+    {
+      if(LanguageNames[x][0] == '\0' || LanguageNames[x][0] == '_')
+        {
+          continue;
+        }
+      
+      if ( !StrCmp( flag, LanguageNames[x] ) )
+        {
+          return LanguageArray[x];
+        }
+    }
+  
   return LANG_UNKNOWN;
 }
 

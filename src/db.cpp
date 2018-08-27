@@ -225,6 +225,10 @@ short gsn_lightning_bolt;
 
 /* languages */
 short gsn_common;
+short gsn_falleen;
+short gsn_devaronese;
+short gsn_antarian;
+short gsn_ithorese;
 short gsn_wookiee;
 short gsn_twilek;
 short gsn_rodian;
@@ -250,6 +254,7 @@ short gsn_gand;
 short gsn_kubaz;
 short gsn_togorian;
 short gsn_yevethan;
+short gsn_binary;
 
 /* for searching */
 short gsn_first_spell = 0;
@@ -536,32 +541,38 @@ void BootDatabase( bool fCopyOver )
   ASSIGN_GSN( gsn_poison,             "poison" );
   ASSIGN_GSN( gsn_sleep,              "sleep" );
   ASSIGN_GSN( gsn_possess,    "possess" );
-  ASSIGN_GSN( gsn_common,             "common" );
-  ASSIGN_GSN( gsn_wookiee,    "wookiee" );
-  ASSIGN_GSN( gsn_twilek,     "twilek" );
-  ASSIGN_GSN( gsn_rodian,             "rodian" );
-  ASSIGN_GSN( gsn_hutt,               "hutt" );
-  ASSIGN_GSN( gsn_mon_calamari,       "mon calamari" );
+
+  ASSIGN_GSN( gsn_falleen, "falleen" );
+  ASSIGN_GSN( gsn_common,             "basic" );
+  ASSIGN_GSN( gsn_binary, "binary" );
+  ASSIGN_GSN( gsn_antarian, "antarian" );
+  ASSIGN_GSN( gsn_wookiee,    "shyriiwook" );
+  ASSIGN_GSN( gsn_twilek,     "twileki" );
+  ASSIGN_GSN( gsn_ithorese, "ithorese" );
+  ASSIGN_GSN( gsn_devaronese, "devaronese" );
+  ASSIGN_GSN( gsn_rodian,             "rodese" );
+  ASSIGN_GSN( gsn_hutt,               "huttese" );
+  ASSIGN_GSN( gsn_mon_calamari,       "mon calamarian" );
   ASSIGN_GSN( gsn_noghri,     "shistavanen" );
-  ASSIGN_GSN( gsn_gamorrean,  "gamorrean" );
-  ASSIGN_GSN( gsn_jawa,       "jawa" );
-  ASSIGN_GSN( gsn_adarian,        "adarian" );
-  ASSIGN_GSN( gsn_ewok,           "ewok" );
+  ASSIGN_GSN( gsn_gamorrean,  "gamorrese" );
+  ASSIGN_GSN( gsn_jawa,       "jawaese" );
+  ASSIGN_GSN( gsn_adarian,        "adarese" );
+  ASSIGN_GSN( gsn_ewok,           "ewokese" );
   ASSIGN_GSN( gsn_verpine,        "verpine" );
   ASSIGN_GSN( gsn_defel,          "defel" );
-  ASSIGN_GSN( gsn_trandoshan,     "trandoshan" );
+  ASSIGN_GSN( gsn_trandoshan,     "dosh" );
   ASSIGN_GSN( gsn_chadra_fan,     "chadra-fan" );
-  ASSIGN_GSN( gsn_quarren,        "quarren" );
+  ASSIGN_GSN( gsn_quarren,        "quarrenese" );
   ASSIGN_GSN( gsn_barabel, "barabel" );
   ASSIGN_GSN( gsn_firrerreo, "firrerreo" );
-  ASSIGN_GSN( gsn_bothan, "bothan" );
-  ASSIGN_GSN( gsn_coynite, "coynite" );
-  ASSIGN_GSN( gsn_duros, "duros" );
+  ASSIGN_GSN( gsn_bothan, "bothese" );
+  ASSIGN_GSN( gsn_coynite, "coyn" );
+  ASSIGN_GSN( gsn_duros, "durese" );
   ASSIGN_GSN( gsn_gand, "gand" );
-  ASSIGN_GSN( gsn_kubaz, "kubaz" );
+  ASSIGN_GSN( gsn_kubaz, "kubazian" );
   ASSIGN_GSN( gsn_togorian, "togorian" );
   ASSIGN_GSN( gsn_yevethan, "yevethan" );
-  ASSIGN_GSN( gsn_sullustan,      "sullustan" );
+  ASSIGN_GSN( gsn_sullustan,      "sullustese" );
   ASSIGN_GSN( gsn_shipdocking,    "ship docking" );
 
   /*

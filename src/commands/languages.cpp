@@ -30,6 +30,7 @@ void do_languages( Character *ch, char *argument )
         {
           if ( LanguageArray[lang] == LANG_CLAN )
             continue;
+          
           if ( !StringPrefix( arg2, LanguageNames[lang] ) )
             break;
         }

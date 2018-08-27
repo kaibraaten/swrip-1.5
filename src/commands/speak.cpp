@@ -3,7 +3,6 @@
 
 void do_speak( Character *ch, char *argument )
 {
-  int langs = 0;
   char arg[MAX_INPUT_LENGTH];
 
   argument = OneArgument(argument, arg );
@@ -95,7 +94,7 @@ void do_speak( Character *ch, char *argument )
       return;
     }
 
-  for ( langs = 0; LanguageArray[langs] != LANG_UNKNOWN; langs++ )
+  for ( int langs = 0; LanguageArray[langs] != LANG_UNKNOWN; langs++ )
     {
       if ( !StringPrefix( arg, LanguageNames[langs] ) )
 	{
@@ -109,7 +108,7 @@ void do_speak( Character *ch, char *argument )
 
 	      ch->Speaking = LanguageArray[langs];
 	      SetCharacterColor( AT_SAY, ch );
-       ch->Echo("You now speak %s.\r\n", LanguageNames[langs] );
+              ch->Echo("You now speak %s.\r\n", LanguageNames[langs] );
 	      return;
 	    }
 	}

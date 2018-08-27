@@ -694,13 +694,11 @@ bool CharacterKnowsLanguage( const Character *ch, int language, const Character 
     }
   if ( !IsNpc( ch ) )
     {
-      int lang;
-
       /* Racial languages for PCs */
       if ( IsBitSet(RaceTable[ch->Race].Language, language) )
         return true;
 
-      for ( lang = 0; LanguageArray[lang] != LANG_UNKNOWN; lang++ )
+      for ( int lang = 0; LanguageArray[lang] != LANG_UNKNOWN; lang++ )
         if ( IsBitSet(language, LanguageArray[lang]) &&
              IsBitSet(ch->Speaks, LanguageArray[lang]) )
           {
