@@ -184,6 +184,10 @@ extern short gsn_grip;
 
 /* languages */
 extern short gsn_common;
+extern short gsn_binary;
+extern short gsn_falleen;
+extern short gsn_devaronese;
+extern short gsn_antarian;
 extern short gsn_wookiee;
 extern short gsn_twilek;
 extern short gsn_rodian;
@@ -209,6 +213,7 @@ extern short gsn_gand;
 extern short gsn_kubaz;
 extern short gsn_togorian;
 extern short gsn_yevethan;
+extern short gsn_ithorese;
 
 /* used to do specific lookups */
 extern short gsn_first_spell;

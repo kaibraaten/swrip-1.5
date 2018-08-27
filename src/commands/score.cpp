@@ -217,6 +217,11 @@ void do_score(Character * ch, char *argument)
     if ( CharacterKnowsLanguage( ch, LanguageArray[iLang], ch )
          ||  (IsNpc(ch) && ch->Speaks == 0) )
       {
+        if(LanguageNames[iLang][0] == '_')
+          {
+            continue;
+          }
+        
         if ( LanguageArray[iLang] & ch->Speaking
              ||  (IsNpc(ch) && !ch->Speaking) )
           SetCharacterColor( AT_RED, ch );
