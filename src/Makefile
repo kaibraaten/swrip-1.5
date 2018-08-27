@@ -106,6 +106,7 @@ _OBJ =  act_comm.o \
 	social.o \
 	special.o \
 	spaceobject.o \
+	systemdata.o \
 	tables.o \
 	track.o \
 	turret.o \

@@ -4,6 +4,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "systemdata.hpp"
 
 static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 

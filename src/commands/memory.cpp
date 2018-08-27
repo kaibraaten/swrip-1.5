@@ -4,6 +4,7 @@
 #include "playerrepository.hpp"
 #include "character.hpp"
 #include "shop.hpp"
+#include "systemdata.hpp"
 
 void do_memory( Character *ch, char *argument )
 {

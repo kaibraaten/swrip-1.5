@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "systemdata.hpp"
 
 void do_stun( Character *ch, char *argument )
 {

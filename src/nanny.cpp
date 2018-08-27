@@ -37,6 +37,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "descriptor.hpp"
+#include "systemdata.hpp"
 
 using NannyFun = std::function<void(Descriptor*, char*)>;
 

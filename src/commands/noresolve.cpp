@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "systemdata.hpp"
 
 void do_noresolve( Character *ch, char *argument )
 {

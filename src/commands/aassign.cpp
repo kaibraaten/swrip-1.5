@@ -3,6 +3,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "systemdata.hpp"
 
 void do_aassign( Character *ch, char *argument )
 {

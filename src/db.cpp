@@ -53,6 +53,7 @@
 #include "protoobject.hpp"
 #include "protomob.hpp"
 #include "descriptor.hpp"
+#include "systemdata.hpp"
 
 /*
  * Globals.
@@ -264,8 +265,6 @@ ProtoMobile *MobIndexHash[MAX_KEY_HASH];
 ProtoObject *ObjectIndexHash[MAX_KEY_HASH];
 Room *RoomIndexHash[MAX_KEY_HASH];
 
-SystemData SysData;
-
 int top_affect = 0;
 int top_area = 0;
 int top_ed = 0;
@@ -290,7 +289,6 @@ char strArea[MAX_INPUT_LENGTH];
  */
 static void AllocateRepositories(void);
 static void LoadBuildList( void );
-static void LoadSystemData( void );
 static void InitializeEconomy( void );
 static void FixExits( void );
 #if 0
@@ -299,7 +297,6 @@ static int ExitComparator( Exit **xit1, Exit **xit2 );
 static void SortExits( Room *room );
 static void ToWizFile( const char *line );
 static void AddToWizList( const char *name, int level );
-static void PushSystemData( lua_State *L, const void* );
 
 void ShutdownMud( const std::string &reason )
 {
@@ -317,8 +314,6 @@ void ShutdownMud( const std::string &reason )
  */
 void BootDatabase( bool fCopyOver )
 {
-  short wear, x;
-
   unlink( BOOTLOG_FILE );
   Log->Boot( "---------------------[ Boot Log ]--------------------" );
 
@@ -327,34 +322,7 @@ void BootDatabase( bool fCopyOver )
 
   Log->Boot( "Loading SysData.configuration..." );
 
-  /* default values */
-  SysData.ReadAllMail             = LEVEL_CREATOR;
-  SysData.ReadMailFree            = LEVEL_IMMORTAL;
-  SysData.WriteMailFree           = LEVEL_IMMORTAL;
-  SysData.TakeOthersMail          = LEVEL_CREATOR;
-  SysData.LevelOfBuildChannel     = LEVEL_CREATOR;
-  SysData.LevelOfLogChannel       = LEVEL_LOG;
-  SysData.LevelToModifyProto      = LEVEL_CREATOR;
-  SysData.LevelToOverridePrivateFlag  = LEVEL_GREATER;
-  SysData.LevelToMsetPlayers       = LEVEL_CREATOR;
-  SysData.StunModPlrVsPlr         = 15;
-  SysData.StunRegular            = 15;
-  SysData.DamagePlrVsPlr          = 100;
-  SysData.DamagePlrVsMob          = 100;
-  SysData.DamageMobVsPlr          = 100;
-  SysData.DamageMobVsMob          = 100;
-  SysData.LevelToGetObjectsWithoutTakeFlag = LEVEL_GREATER;
-  SysData.SaveFrequency          = 20;   /* minutes */
-  SysData.DisableHunger          = false;
-  SysData.CanChooseJedi          = false;
-  SysData.PermaDeath             = true;
-  SysData.ExtendedRaceSelection  = true;
-  SysData.AllowMultiplaying = false;
-  SysData.SaveFlags              = SV_DEATH | SV_PASSCHG | SV_AUTO
-    | SV_PUT | SV_DROP | SV_GIVE
-    | SV_AUCTION | SV_ZAPDROP | SV_IDLE;
-
-  LoadSystemData();
+  SysData.Load();
 
   Log->Boot( "Loading commands" );
   LoadCommands();
@@ -368,7 +336,7 @@ void BootDatabase( bool fCopyOver )
 
   gsn_TopSN = TopSN;
 
-  for ( x = 0; x < TopSN; x++ )
+  for ( int x = 0; x < TopSN; x++ )
     {
       if ( !gsn_first_spell && SkillTable[x]->Type == SKILL_SPELL )
 	gsn_first_spell = x;
@@ -400,8 +368,8 @@ void BootDatabase( bool fCopyOver )
   saving_char         = NULL;
   auction = new Auction();
 
-  for ( wear = 0; wear < MAX_WEAR; wear++ )
-    for ( x = 0; x < MAX_LAYERS; x++ )
+  for ( int wear = 0; wear < MAX_WEAR; wear++ )
+    for ( int x = 0; x < MAX_LAYERS; x++ )
       save_equipment[wear][x] = NULL;
 
   /*
@@ -414,219 +382,212 @@ void BootDatabase( bool fCopyOver )
   /*
    * Set time and weather.
    */
-  {
-    long lhour = 0, lday = 0, lmonth = 0;
+  long lhour = 0, lday = 0, lmonth = 0;
 
-    Log->Boot("Setting time and weather");
+  Log->Boot("Setting time and weather");
 
-    lhour               = (current_time - 650336715) / (PULSE_TICK / PULSE_PER_SECOND);
-    time_info.Hour      = lhour  % 24;
-    lday                = lhour  / 24;
-    time_info.Day       = lday   % 35;
-    lmonth              = lday   / 35;
-    time_info.Month     = lmonth % 17;
-    time_info.Year      = lmonth / 17;
+  lhour               = (current_time - 650336715) / (PULSE_TICK / PULSE_PER_SECOND);
+  time_info.Hour      = lhour  % 24;
+  lday                = lhour  / 24;
+  time_info.Day       = lday   % 35;
+  lmonth              = lday   / 35;
+  time_info.Month     = lmonth % 17;
+  time_info.Year      = lmonth / 17;
 
-    if ( time_info.Hour <  5 )
-      weather_info.Sunlight = SUN_DARK;
-    else if ( time_info.Hour <  6 )
-      weather_info.Sunlight = SUN_RISE;
-    else if ( time_info.Hour < 19 )
-      weather_info.Sunlight = SUN_LIGHT;
-    else if ( time_info.Hour < 20 )
-      weather_info.Sunlight = SUN_SET;
-    else
-      weather_info.Sunlight = SUN_DARK;
+  if ( time_info.Hour <  5 )
+    weather_info.Sunlight = SUN_DARK;
+  else if ( time_info.Hour <  6 )
+    weather_info.Sunlight = SUN_RISE;
+  else if ( time_info.Hour < 19 )
+    weather_info.Sunlight = SUN_LIGHT;
+  else if ( time_info.Hour < 20 )
+    weather_info.Sunlight = SUN_SET;
+  else
+    weather_info.Sunlight = SUN_DARK;
 
-    weather_info.Change = 0;
-    weather_info.Mmhg   = 960;
+  weather_info.Change = 0;
+  weather_info.Mmhg   = 960;
 
-    if ( time_info.Month >= 7 && time_info.Month <=12 )
-      weather_info.Mmhg += GetRandomNumberFromRange( 1, 50 );
-    else
-      weather_info.Mmhg += GetRandomNumberFromRange( 1, 80 );
+  if ( time_info.Month >= 7 && time_info.Month <=12 )
+    weather_info.Mmhg += GetRandomNumberFromRange( 1, 50 );
+  else
+    weather_info.Mmhg += GetRandomNumberFromRange( 1, 80 );
 
-    if ( weather_info.Mmhg <=  980 )
-      weather_info.Sky = SKY_LIGHTNING;
-    else if ( weather_info.Mmhg <= 1000 )
-      weather_info.Sky = SKY_RAINING;
-    else if ( weather_info.Mmhg <= 1020 )
-      weather_info.Sky = SKY_CLOUDY;
-    else
-      weather_info.Sky = SKY_CLOUDLESS;
-  }
-
+  if ( weather_info.Mmhg <=  980 )
+    weather_info.Sky = SKY_LIGHTNING;
+  else if ( weather_info.Mmhg <= 1000 )
+    weather_info.Sky = SKY_RAINING;
+  else if ( weather_info.Mmhg <= 1020 )
+    weather_info.Sky = SKY_CLOUDY;
+  else
+    weather_info.Sky = SKY_CLOUDLESS;
 
   /*
    * Assign gsn's for skills which need them.
    */
-  {
-    Log->Boot("Assigning gsn's");
-    ASSIGN_GSN( gsn_cloak, "cloak" );
-    ASSIGN_GSN( gsn_cutdoor, "cutdoor" );
-    ASSIGN_GSN( gsn_bind, "bind" );
-    ASSIGN_GSN( gsn_slicing, "slicing" );
-    ASSIGN_GSN( gsn_addpatrol , "add_patrol" );
-    ASSIGN_GSN( gsn_eliteguard , "elite_guard" );
-    ASSIGN_GSN( gsn_gather_intelligence , "gather_intelligence" );
-    ASSIGN_GSN( gsn_specialforces , "special_forces" );
-    ASSIGN_GSN( gsn_jail , "jail" );
-    ASSIGN_GSN( gsn_smalltalk , "smalltalk" );
-    ASSIGN_GSN( gsn_propaganda , "propaganda" );
-    ASSIGN_GSN( gsn_bribe , "bribe" );
-    ASSIGN_GSN( gsn_seduce , "seduce" );
-    ASSIGN_GSN( gsn_masspropaganda , "mass_propaganda" );
-    ASSIGN_GSN( gsn_beg  , "beg" );
-    ASSIGN_GSN( gsn_hijack  , "hijack" );
-    ASSIGN_GSN( gsn_makejewelry  , "makejewelry" );
-    ASSIGN_GSN( gsn_grenades  , "grenades" );
-    ASSIGN_GSN( gsn_makeblade  , "makeblade" );
-    ASSIGN_GSN( gsn_makeblaster  , "makeblaster" );
-    ASSIGN_GSN( gsn_makebowcaster  , "makebowcaster" );
-    ASSIGN_GSN( gsn_makeglowrod   , "makeglowrod" );
-    ASSIGN_GSN( gsn_makecomlink   , "makecomlink" );
-    ASSIGN_GSN( gsn_makegrenade   , "makegrenade" );
-    ASSIGN_GSN( gsn_makelandmine  , "makelandmine" );
-    ASSIGN_GSN( gsn_makearmor  , "makearmor" );
-    ASSIGN_GSN( gsn_makeshield  , "makeshield" );
-    ASSIGN_GSN( gsn_makecontainer  , "makecontainer" );
-    ASSIGN_GSN( gsn_reinforcements  , "reinforcements" );
-    ASSIGN_GSN( gsn_postguard   , "post guard" );
-    ASSIGN_GSN( gsn_torture   , "torture" );
-    ASSIGN_GSN( gsn_throw   , "throw" );
-    ASSIGN_GSN( gsn_snipe   , "snipe" );
-    ASSIGN_GSN( gsn_disguise   , "disguise" );
-    ASSIGN_GSN( gsn_mine   , "mine" );
-    ASSIGN_GSN( gsn_first_aid   , "first aid" );
-    ASSIGN_GSN( gsn_lightsaber_crafting, "lightsaber crafting" );
-    ASSIGN_GSN( gsn_spice_refining,  "spice refining" );
-    ASSIGN_GSN( gsn_spacecombat,     "space combat 1" );
-    ASSIGN_GSN( gsn_spacecombat2,     "space combat 2" );
-    ASSIGN_GSN( gsn_spacecombat3,     "space combat 3" );
-    ASSIGN_GSN( gsn_speeders,     "speeders" );
-    ASSIGN_GSN( gsn_speedercombat,     "speeder combat" );
-    ASSIGN_GSN( gsn_weaponsystems,   "weapon systems" );
-    ASSIGN_GSN( gsn_starfighters,    "starfighters" );
-    ASSIGN_GSN( gsn_navigation,      "navigation" );
-    ASSIGN_GSN( gsn_shipsystems,     "ship systems" );
-    ASSIGN_GSN( gsn_midships,        "midships" );
-    ASSIGN_GSN( gsn_capitalships,    "capital ships" );
-    ASSIGN_GSN( gsn_tractorbeams,    "tractor beams" );
-    ASSIGN_GSN( gsn_shipmaintenance, "ship maintenance" );
-    ASSIGN_GSN( gsn_sabotage, "sabotage" );
-    ASSIGN_GSN( gsn_jumpvector, "jumpvector" );
-    ASSIGN_GSN( gsn_fake_signal, "fake signal" );
-    ASSIGN_GSN( gsn_blasters,   "blasters" );
-    ASSIGN_GSN( gsn_bowcasters, "bowcasters" );
-    ASSIGN_GSN( gsn_force_pikes,        "force pikes" );
-    ASSIGN_GSN( gsn_lightsabers,        "lightsabers" );
-    ASSIGN_GSN( gsn_vibro_blades,       "vibro-blades" );
-    ASSIGN_GSN( gsn_flexible_arms,      "flexible arms" );
-    ASSIGN_GSN( gsn_talonous_arms,      "talonous arms" );
-    ASSIGN_GSN( gsn_bludgeons,  "bludgeons" );
-    ASSIGN_GSN( gsn_detrap,             "detrap" );
-    ASSIGN_GSN( gsn_backstab,   "backstab" );
-    ASSIGN_GSN( gsn_circle,             "circle" );
-    ASSIGN_GSN( gsn_dodge,              "dodge" );
-    ASSIGN_GSN( gsn_steal,              "lift" );
-    ASSIGN_GSN( gsn_hide,               "stealth" );
-    ASSIGN_GSN( gsn_peek,               "peek" );
-    ASSIGN_GSN( gsn_pick_lock,  "pick lock" );
-    ASSIGN_GSN( gsn_pickshiplock  , "pick ship lock" );
-    ASSIGN_GSN( gsn_sneak,              "sneak" );
-    ASSIGN_GSN( gsn_gouge,              "gouge" );
-    ASSIGN_GSN( gsn_poison_weapon,      "poison weapon" );
-    ASSIGN_GSN( gsn_disarm,             "disarm" );
-    ASSIGN_GSN( gsn_enhanced_damage, "enhanced damage" );
-    ASSIGN_GSN( gsn_kick,               "kick" );
-    ASSIGN_GSN( gsn_parry,              "parry" );
-    ASSIGN_GSN( gsn_rescue,             "rescue" );
-    ASSIGN_GSN( gsn_second_attack,      "second attack" );
-    ASSIGN_GSN( gsn_third_attack,       "third attack" );
-    ASSIGN_GSN( gsn_fourth_attack,      "fourth attack" );
-    ASSIGN_GSN( gsn_fifth_attack,       "fifth attack" );
-    ASSIGN_GSN( gsn_dual_wield, "dual wield" );
-    ASSIGN_GSN( gsn_punch,              "punch" );
-    ASSIGN_GSN( gsn_bash,               "bash" );
-    ASSIGN_GSN( gsn_stun,               "stun" );
-    ASSIGN_GSN( gsn_skin,               "skin" );
-    ASSIGN_GSN( gsn_bashdoor,   "doorbash" );
-    ASSIGN_GSN( gsn_grip,               "grip" );
-    ASSIGN_GSN( gsn_berserk,    "berserk" );
-    ASSIGN_GSN( gsn_hitall,             "hitall" );
-    ASSIGN_GSN( gsn_aid,                "aid" );
-    ASSIGN_GSN( gsn_track,              "track" );
-    ASSIGN_GSN( gsn_search,             "search" );
-    ASSIGN_GSN( gsn_dig,                "dig" );
-    ASSIGN_GSN( gsn_mount,              "mount" );
-    ASSIGN_GSN( gsn_study,              "study" );
-    ASSIGN_GSN( gsn_climb,              "climb" );
-    ASSIGN_GSN( gsn_scan,               "scan" );
-    ASSIGN_GSN( gsn_fireball,   "fireball" );
-    ASSIGN_GSN( gsn_lightning_bolt,     "force bolt" );
-    ASSIGN_GSN( gsn_aqua_breath,        "aqua breath" );
-    ASSIGN_GSN( gsn_blindness,  "blindness" );
-    ASSIGN_GSN( gsn_charm_person,       "affect mind" );
-    ASSIGN_GSN( gsn_invis,              "mask" );
-    ASSIGN_GSN( gsn_mass_invis, "group masking" );
-    ASSIGN_GSN( gsn_poison,             "poison" );
-    ASSIGN_GSN( gsn_sleep,              "sleep" );
-    ASSIGN_GSN( gsn_possess,    "possess" );
-    ASSIGN_GSN( gsn_common,             "common" );
-    ASSIGN_GSN( gsn_wookiee,    "wookiee" );
-    ASSIGN_GSN( gsn_twilek,     "twilek" );
-    ASSIGN_GSN( gsn_rodian,             "rodian" );
-    ASSIGN_GSN( gsn_hutt,               "hutt" );
-    ASSIGN_GSN( gsn_mon_calamari,       "mon calamari" );
-    ASSIGN_GSN( gsn_noghri,     "shistavanen" );
-    ASSIGN_GSN( gsn_gamorrean,  "gamorrean" );
-    ASSIGN_GSN( gsn_jawa,       "jawa" );
-    ASSIGN_GSN( gsn_adarian,        "adarian" );
-    ASSIGN_GSN( gsn_ewok,           "ewok" );
-    ASSIGN_GSN( gsn_verpine,        "verpine" );
-    ASSIGN_GSN( gsn_defel,          "defel" );
-    ASSIGN_GSN( gsn_trandoshan,     "trandoshan" );
-    ASSIGN_GSN( gsn_chadra_fan,     "chadra-fan" );
-    ASSIGN_GSN( gsn_quarren,        "quarren" );
-    ASSIGN_GSN( gsn_barabel, "barabel" );
-    ASSIGN_GSN( gsn_firrerreo, "firrerreo" );
-    ASSIGN_GSN( gsn_bothan, "bothan" );
-    ASSIGN_GSN( gsn_coynite, "coynite" );
-    ASSIGN_GSN( gsn_duros, "duros" );
-    ASSIGN_GSN( gsn_gand, "gand" );
-    ASSIGN_GSN( gsn_kubaz, "kubaz" );
-    ASSIGN_GSN( gsn_togorian, "togorian" );
-    ASSIGN_GSN( gsn_yevethan, "yevethan" );
-    ASSIGN_GSN( gsn_sullustan,      "sullustan" );
-    ASSIGN_GSN( gsn_shipdocking,    "ship docking" );
-  }
+  Log->Boot("Assigning gsn's");
+  ASSIGN_GSN( gsn_cloak, "cloak" );
+  ASSIGN_GSN( gsn_cutdoor, "cutdoor" );
+  ASSIGN_GSN( gsn_bind, "bind" );
+  ASSIGN_GSN( gsn_slicing, "slicing" );
+  ASSIGN_GSN( gsn_addpatrol , "add_patrol" );
+  ASSIGN_GSN( gsn_eliteguard , "elite_guard" );
+  ASSIGN_GSN( gsn_gather_intelligence , "gather_intelligence" );
+  ASSIGN_GSN( gsn_specialforces , "special_forces" );
+  ASSIGN_GSN( gsn_jail , "jail" );
+  ASSIGN_GSN( gsn_smalltalk , "smalltalk" );
+  ASSIGN_GSN( gsn_propaganda , "propaganda" );
+  ASSIGN_GSN( gsn_bribe , "bribe" );
+  ASSIGN_GSN( gsn_seduce , "seduce" );
+  ASSIGN_GSN( gsn_masspropaganda , "mass_propaganda" );
+  ASSIGN_GSN( gsn_beg  , "beg" );
+  ASSIGN_GSN( gsn_hijack  , "hijack" );
+  ASSIGN_GSN( gsn_makejewelry  , "makejewelry" );
+  ASSIGN_GSN( gsn_grenades  , "grenades" );
+  ASSIGN_GSN( gsn_makeblade  , "makeblade" );
+  ASSIGN_GSN( gsn_makeblaster  , "makeblaster" );
+  ASSIGN_GSN( gsn_makebowcaster  , "makebowcaster" );
+  ASSIGN_GSN( gsn_makeglowrod   , "makeglowrod" );
+  ASSIGN_GSN( gsn_makecomlink   , "makecomlink" );
+  ASSIGN_GSN( gsn_makegrenade   , "makegrenade" );
+  ASSIGN_GSN( gsn_makelandmine  , "makelandmine" );
+  ASSIGN_GSN( gsn_makearmor  , "makearmor" );
+  ASSIGN_GSN( gsn_makeshield  , "makeshield" );
+  ASSIGN_GSN( gsn_makecontainer  , "makecontainer" );
+  ASSIGN_GSN( gsn_reinforcements  , "reinforcements" );
+  ASSIGN_GSN( gsn_postguard   , "post guard" );
+  ASSIGN_GSN( gsn_torture   , "torture" );
+  ASSIGN_GSN( gsn_throw   , "throw" );
+  ASSIGN_GSN( gsn_snipe   , "snipe" );
+  ASSIGN_GSN( gsn_disguise   , "disguise" );
+  ASSIGN_GSN( gsn_mine   , "mine" );
+  ASSIGN_GSN( gsn_first_aid   , "first aid" );
+  ASSIGN_GSN( gsn_lightsaber_crafting, "lightsaber crafting" );
+  ASSIGN_GSN( gsn_spice_refining,  "spice refining" );
+  ASSIGN_GSN( gsn_spacecombat,     "space combat 1" );
+  ASSIGN_GSN( gsn_spacecombat2,     "space combat 2" );
+  ASSIGN_GSN( gsn_spacecombat3,     "space combat 3" );
+  ASSIGN_GSN( gsn_speeders,     "speeders" );
+  ASSIGN_GSN( gsn_speedercombat,     "speeder combat" );
+  ASSIGN_GSN( gsn_weaponsystems,   "weapon systems" );
+  ASSIGN_GSN( gsn_starfighters,    "starfighters" );
+  ASSIGN_GSN( gsn_navigation,      "navigation" );
+  ASSIGN_GSN( gsn_shipsystems,     "ship systems" );
+  ASSIGN_GSN( gsn_midships,        "midships" );
+  ASSIGN_GSN( gsn_capitalships,    "capital ships" );
+  ASSIGN_GSN( gsn_tractorbeams,    "tractor beams" );
+  ASSIGN_GSN( gsn_shipmaintenance, "ship maintenance" );
+  ASSIGN_GSN( gsn_sabotage, "sabotage" );
+  ASSIGN_GSN( gsn_jumpvector, "jumpvector" );
+  ASSIGN_GSN( gsn_fake_signal, "fake signal" );
+  ASSIGN_GSN( gsn_blasters,   "blasters" );
+  ASSIGN_GSN( gsn_bowcasters, "bowcasters" );
+  ASSIGN_GSN( gsn_force_pikes,        "force pikes" );
+  ASSIGN_GSN( gsn_lightsabers,        "lightsabers" );
+  ASSIGN_GSN( gsn_vibro_blades,       "vibro-blades" );
+  ASSIGN_GSN( gsn_flexible_arms,      "flexible arms" );
+  ASSIGN_GSN( gsn_talonous_arms,      "talonous arms" );
+  ASSIGN_GSN( gsn_bludgeons,  "bludgeons" );
+  ASSIGN_GSN( gsn_detrap,             "detrap" );
+  ASSIGN_GSN( gsn_backstab,   "backstab" );
+  ASSIGN_GSN( gsn_circle,             "circle" );
+  ASSIGN_GSN( gsn_dodge,              "dodge" );
+  ASSIGN_GSN( gsn_steal,              "lift" );
+  ASSIGN_GSN( gsn_hide,               "stealth" );
+  ASSIGN_GSN( gsn_peek,               "peek" );
+  ASSIGN_GSN( gsn_pick_lock,  "pick lock" );
+  ASSIGN_GSN( gsn_pickshiplock  , "pick ship lock" );
+  ASSIGN_GSN( gsn_sneak,              "sneak" );
+  ASSIGN_GSN( gsn_gouge,              "gouge" );
+  ASSIGN_GSN( gsn_poison_weapon,      "poison weapon" );
+  ASSIGN_GSN( gsn_disarm,             "disarm" );
+  ASSIGN_GSN( gsn_enhanced_damage, "enhanced damage" );
+  ASSIGN_GSN( gsn_kick,               "kick" );
+  ASSIGN_GSN( gsn_parry,              "parry" );
+  ASSIGN_GSN( gsn_rescue,             "rescue" );
+  ASSIGN_GSN( gsn_second_attack,      "second attack" );
+  ASSIGN_GSN( gsn_third_attack,       "third attack" );
+  ASSIGN_GSN( gsn_fourth_attack,      "fourth attack" );
+  ASSIGN_GSN( gsn_fifth_attack,       "fifth attack" );
+  ASSIGN_GSN( gsn_dual_wield, "dual wield" );
+  ASSIGN_GSN( gsn_punch,              "punch" );
+  ASSIGN_GSN( gsn_bash,               "bash" );
+  ASSIGN_GSN( gsn_stun,               "stun" );
+  ASSIGN_GSN( gsn_skin,               "skin" );
+  ASSIGN_GSN( gsn_bashdoor,   "doorbash" );
+  ASSIGN_GSN( gsn_grip,               "grip" );
+  ASSIGN_GSN( gsn_berserk,    "berserk" );
+  ASSIGN_GSN( gsn_hitall,             "hitall" );
+  ASSIGN_GSN( gsn_aid,                "aid" );
+  ASSIGN_GSN( gsn_track,              "track" );
+  ASSIGN_GSN( gsn_search,             "search" );
+  ASSIGN_GSN( gsn_dig,                "dig" );
+  ASSIGN_GSN( gsn_mount,              "mount" );
+  ASSIGN_GSN( gsn_study,              "study" );
+  ASSIGN_GSN( gsn_climb,              "climb" );
+  ASSIGN_GSN( gsn_scan,               "scan" );
+  ASSIGN_GSN( gsn_fireball,   "fireball" );
+  ASSIGN_GSN( gsn_lightning_bolt,     "force bolt" );
+  ASSIGN_GSN( gsn_aqua_breath,        "aqua breath" );
+  ASSIGN_GSN( gsn_blindness,  "blindness" );
+  ASSIGN_GSN( gsn_charm_person,       "affect mind" );
+  ASSIGN_GSN( gsn_invis,              "mask" );
+  ASSIGN_GSN( gsn_mass_invis, "group masking" );
+  ASSIGN_GSN( gsn_poison,             "poison" );
+  ASSIGN_GSN( gsn_sleep,              "sleep" );
+  ASSIGN_GSN( gsn_possess,    "possess" );
+  ASSIGN_GSN( gsn_common,             "common" );
+  ASSIGN_GSN( gsn_wookiee,    "wookiee" );
+  ASSIGN_GSN( gsn_twilek,     "twilek" );
+  ASSIGN_GSN( gsn_rodian,             "rodian" );
+  ASSIGN_GSN( gsn_hutt,               "hutt" );
+  ASSIGN_GSN( gsn_mon_calamari,       "mon calamari" );
+  ASSIGN_GSN( gsn_noghri,     "shistavanen" );
+  ASSIGN_GSN( gsn_gamorrean,  "gamorrean" );
+  ASSIGN_GSN( gsn_jawa,       "jawa" );
+  ASSIGN_GSN( gsn_adarian,        "adarian" );
+  ASSIGN_GSN( gsn_ewok,           "ewok" );
+  ASSIGN_GSN( gsn_verpine,        "verpine" );
+  ASSIGN_GSN( gsn_defel,          "defel" );
+  ASSIGN_GSN( gsn_trandoshan,     "trandoshan" );
+  ASSIGN_GSN( gsn_chadra_fan,     "chadra-fan" );
+  ASSIGN_GSN( gsn_quarren,        "quarren" );
+  ASSIGN_GSN( gsn_barabel, "barabel" );
+  ASSIGN_GSN( gsn_firrerreo, "firrerreo" );
+  ASSIGN_GSN( gsn_bothan, "bothan" );
+  ASSIGN_GSN( gsn_coynite, "coynite" );
+  ASSIGN_GSN( gsn_duros, "duros" );
+  ASSIGN_GSN( gsn_gand, "gand" );
+  ASSIGN_GSN( gsn_kubaz, "kubaz" );
+  ASSIGN_GSN( gsn_togorian, "togorian" );
+  ASSIGN_GSN( gsn_yevethan, "yevethan" );
+  ASSIGN_GSN( gsn_sullustan,      "sullustan" );
+  ASSIGN_GSN( gsn_shipdocking,    "ship docking" );
 
   /*
    * Read in all the area files.
    */
-  {
-    FILE *fpList;
+  FILE *fpList = nullptr;
 
-    Log->Boot("Reading in area files...");
+  Log->Boot("Reading in area files...");
 
-    if ( ( fpList = fopen( AREA_DIR AREA_LIST, "r" ) ) == NULL )
-      {
-        ShutdownMud( "Unable to open area list" );
-        exit( 1 );
-      }
+  if ( ( fpList = fopen( AREA_DIR AREA_LIST, "r" ) ) == NULL )
+    {
+      ShutdownMud( "Unable to open area list" );
+      exit( 1 );
+    }
 
-    for ( ; ; )
-      {
-        strcpy( strArea, ReadWord( fpList, Log, fBootDb ) );
+  for ( ; ; )
+    {
+      strcpy( strArea, ReadWord( fpList, Log, fBootDb ) );
 
-        if ( strArea[0] == '$' )
-          break;
+      if ( strArea[0] == '$' )
+        break;
 
-        LoadAreaFile( LastArea, strArea );
-      }
+      LoadAreaFile( LastArea, strArea );
+    }
 
-    fclose( fpList );
-  }
+  fclose( fpList );
 
   /*
    *   initialize supermob.
@@ -1738,238 +1699,6 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
     }
 
   ch->Echo( "Areas listed: %d  Loaded: %d\r\n", count, loaded );
-}
-
-/*
- * Save system info to data file
- */
-void SaveSystemData( const SystemData sys )
-{
-  LuaSaveDataFile( SYSTEMDATA_FILE, PushSystemData, "systemdata", NULL );
-}
-
-static void PushSystemData( lua_State *L, const void *userData )
-{
-  lua_newtable( L );
-
-  LuaSetfieldNumber( L, "AllTimeMaxPlayers", SysData.MaxPlayersEver );
-
-  if( !IsNullOrEmpty( SysData.TimeOfMaxPlayersEver ) )
-    {
-      LuaSetfieldString( L, "AllTimeMaxPlayersTime", SysData.TimeOfMaxPlayersEver );
-    }
-
-  LuaSetfieldBoolean( L, "NoNameResolving", SysData.NoNameResolving );
-  LuaSetfieldBoolean( L, "WaitForAuth", SysData.NewPlayersMustWaitForAuth );
-  LuaSetfieldNumber( L, "ReadAllMail", SysData.ReadAllMail );
-  LuaSetfieldNumber( L, "ReadMailFree", SysData.ReadMailFree );
-  LuaSetfieldNumber( L, "WriteMailFree", SysData.WriteMailFree );
-  LuaSetfieldNumber( L, "TakeOthersMail", SysData.TakeOthersMail );
-  LuaSetfieldNumber( L, "BuildChannelLevel", SysData.LevelOfBuildChannel );
-  LuaSetfieldNumber( L, "LogChannelLevel", SysData.LevelOfLogChannel );
-  LuaSetfieldNumber( L, "ModifyProto", SysData.LevelToModifyProto );
-  LuaSetfieldNumber( L, "OverridePrivateFlag", SysData.LevelToOverridePrivateFlag );
-  LuaSetfieldNumber( L, "MsetPlayer", SysData.LevelToMsetPlayers );
-  LuaSetfieldNumber( L, "StunModPvP", SysData.StunModPlrVsPlr );
-  LuaSetfieldNumber( L, "StunRegular", SysData.StunRegular );
-  LuaSetfieldNumber( L, "DamModPvP", SysData.DamagePlrVsPlr );
-  LuaSetfieldNumber( L, "DamModPvE", SysData.DamagePlrVsMob );
-  LuaSetfieldNumber( L, "DamModEvP", SysData.DamageMobVsPlr );
-  LuaSetfieldNumber( L, "DamModEvE", SysData.DamageMobVsMob );
-  LuaSetfieldNumber( L, "ForcePc", SysData.LevelToForcePlayers );
-  LuaSetfieldNumber( L, "SaveFlags", SysData.SaveFlags );
-  LuaSetfieldNumber( L, "SaveFrequency", SysData.SaveFrequency );
-  LuaSetfieldBoolean( L, "DisableHunger", SysData.DisableHunger );
-  LuaSetfieldBoolean( L, "CanChooseJedi", SysData.CanChooseJedi );
-  LuaSetfieldBoolean( L, "ExtendedRaceSelection", SysData.ExtendedRaceSelection );
-  LuaSetfieldBoolean( L, "PermaDeath", SysData.PermaDeath );
-  LuaSetfieldBoolean( L, "AllowMultiplaying", SysData.AllowMultiplaying );
-  lua_setglobal( L, "systemdata" );
-}
-
-static int L_SystemDataEntry( lua_State *L )
-{
-  int idx = lua_gettop( L );
-  luaL_checktype( L, 1, LUA_TTABLE );
-
-  lua_getfield( L, idx, "AllTimeMaxPlayers" );
-  lua_getfield( L, idx, "AllTimeMaxPlayersTime" );
-  lua_getfield( L, idx, "NoNameResolving" );
-  lua_getfield( L, idx, "WaitForAuth" );
-  lua_getfield( L, idx, "ReadAllMail" );
-  lua_getfield( L, idx, "ReadMailFree" );
-  lua_getfield( L, idx, "WriteMailFree" );
-  lua_getfield( L, idx, "TakeOthersMail" );
-  lua_getfield( L, idx, "BuildChannelLevel" );
-  lua_getfield( L, idx, "LogChannelLevel" );
-  lua_getfield( L, idx, "ModifyProto" );
-  lua_getfield( L, idx, "OverridePrivateFlag" );
-  lua_getfield( L, idx, "MsetPlayer" );
-  lua_getfield( L, idx, "StunModPvP" );
-  lua_getfield( L, idx, "StunRegular" );
-  lua_getfield( L, idx, "DamModPvP" );
-  lua_getfield( L, idx, "DamModPvE" );
-  lua_getfield( L, idx, "DamModEvP" );
-  lua_getfield( L, idx, "DamModEvE" );
-  lua_getfield( L, idx, "ForcePc" );
-  lua_getfield( L, idx, "SaveFlags" );
-  lua_getfield( L, idx, "SaveFrequency" );
-  lua_getfield( L, idx, "DisableHunger" );
-  lua_getfield( L, idx, "CanChooseJedi" );
-  lua_getfield( L, idx, "PermaDeath" );
-  lua_getfield( L, idx, "ExtendedRaceSelection" );
-  lua_getfield( L, idx, "AllowMultiplaying" );
-  
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.MaxPlayersEver = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.TimeOfMaxPlayersEver = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      SysData.TimeOfMaxPlayersEver = CopyString( "(not recorded)" );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.NoNameResolving = lua_toboolean( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.NewPlayersMustWaitForAuth = lua_toboolean( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.ReadAllMail = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.ReadMailFree = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.WriteMailFree = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.TakeOthersMail = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.LevelOfBuildChannel = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.LevelOfLogChannel = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.LevelToModifyProto = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.LevelToOverridePrivateFlag = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.LevelToMsetPlayers = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.StunModPlrVsPlr = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.StunRegular = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.DamagePlrVsPlr = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.DamagePlrVsMob = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.DamageMobVsPlr = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.DamageMobVsMob = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.LevelToForcePlayers = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.SaveFlags = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.SaveFrequency = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.DisableHunger = lua_toboolean( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.CanChooseJedi = lua_toboolean( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.PermaDeath = lua_toboolean( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.ExtendedRaceSelection = lua_toboolean( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.AllowMultiplaying = lua_toboolean( L, idx );
-    }
-
-  lua_pop( L, lua_gettop( L ) - 1 );
-
-  return 0;
-}
-
-/*
- * Load the SysData.file
- */
-static void LoadSystemData( void )
-{
-  LuaLoadDataFile( SYSTEMDATA_FILE, L_SystemDataEntry, "SystemDataEntry" );
 }
 
 /*

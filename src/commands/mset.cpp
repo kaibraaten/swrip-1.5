@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "editor.hpp"
@@ -7,6 +7,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "protomob.hpp"
+#include "systemdata.hpp"
 
 void do_mset( Character *ch, char *argument )
 {

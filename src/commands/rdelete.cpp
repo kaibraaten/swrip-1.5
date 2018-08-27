@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "systemdata.hpp"
 
 void do_rdelete( Character *ch, char *argument )
 {

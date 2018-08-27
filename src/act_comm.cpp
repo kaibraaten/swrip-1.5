@@ -19,7 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <ctype.h>
+#include <cctype>
 #include "character.hpp"
 #include "mud.hpp"
 #include "vector3_aux.hpp"
@@ -30,6 +30,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "descriptor.hpp"
+#include "systemdata.hpp"
 
 std::string DrunkSpeech( const std::string &argument, Character *ch )
 {

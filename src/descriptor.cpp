@@ -5,6 +5,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "pcdata.hpp"
+#include "systemdata.hpp"
 
 DescriptorRepository *Descriptors = nullptr;
 

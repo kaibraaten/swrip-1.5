@@ -28,6 +28,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "log.hpp"
+#include "systemdata.hpp"
 
 SpellFun *GetSpellFunction( const std::string &name )
 {

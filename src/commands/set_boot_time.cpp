@@ -1,6 +1,7 @@
-#include <time.h>
+#include <ctime>
 #include "mud.hpp"
 #include "character.hpp"
+#include "systemdata.hpp"
 
 extern char reboot_time[];
 extern struct tm new_boot_struct;

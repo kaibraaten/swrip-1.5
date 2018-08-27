@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "systemdata.hpp"
 
 void do_empty( Character *ch, char *argument )
 {

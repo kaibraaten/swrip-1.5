@@ -1,8 +1,9 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "systemdata.hpp"
 
 #define CLONEGOLD 1000
 

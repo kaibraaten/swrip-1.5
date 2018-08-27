@@ -12,6 +12,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
+#include "systemdata.hpp"
 
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];

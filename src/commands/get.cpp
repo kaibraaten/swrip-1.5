@@ -3,6 +3,7 @@
 #include "clan.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "systemdata.hpp"
 
 static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 static void get_obj( Character *ch, Object *obj, Object *container );

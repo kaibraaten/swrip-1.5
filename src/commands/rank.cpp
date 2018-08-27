@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "pcdata.hpp"
+#include "systemdata.hpp"
 
 void do_rank( Character *ch, char *argument )
 {

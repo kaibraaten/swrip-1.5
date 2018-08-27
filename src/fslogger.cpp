@@ -7,6 +7,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "descriptor.hpp"
+#include "systemdata.hpp"
 
 extern FILE *fpArea;
 extern char strArea[];
@@ -86,7 +87,7 @@ void FileSystemLogger::Bug( const char *str, ... )
 void FileSystemLogger::Boot(const char *str, ...)
 {
   char buf[MAX_STRING_LENGTH];
-  FILE *fp;
+  FILE *fp = nullptr;
   va_list param;
 
   strcpy( buf, "[*****] BOOT: " );
