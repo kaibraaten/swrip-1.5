@@ -530,7 +530,6 @@ DECLARE_CMD_FUN( do_makeplanet );
 DECLARE_CMD_FUN( do_planets );
 DECLARE_CMD_FUN( do_showplanet );
 DECLARE_CMD_FUN( do_showstatistic );
-DECLARE_CMD_FUN( do_showstatistic_web );
 DECLARE_CMD_FUN( do_teach );
 DECLARE_CMD_FUN( do_gather_intelligence );
 DECLARE_CMD_FUN( do_add_patrol );
