@@ -32,6 +32,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "descriptor.hpp"
+#include "alias.hpp"
 
 /*
  * Log-all switch.

@@ -31,6 +31,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "alias.hpp"
 
 Alias *FindAlias( const Character *ch, const std::string &original_argument )
 {
