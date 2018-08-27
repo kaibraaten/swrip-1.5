@@ -84,7 +84,7 @@ void do_showstatistic( Character *ch, char *argument )
 
       for( iC = 0; iC < MAX_ABILITY; iC++ )
         {
-          if( iC == FORCE_ABILITY )
+          if( iC == FORCE_ABILITY && !SysData.CanChooseJedi )
 	    {
 	      continue;
 	    }
@@ -120,6 +120,11 @@ void do_showstatistic( Character *ch, char *argument )
 
       for( iR = 0; iR < MAX_RACE; iR++ )
         {
+          if(!RaceIsAvailableToPlayers(&RaceTable[iR]))
+            {
+              continue;
+            }
+          
           raceCh->Race = iR;
           raceCh->Stats.PermStr = 20 + RaceTable[raceCh->Race].Stats.ModStr;
           raceCh->Stats.PermInt = 20 + RaceTable[raceCh->Race].Stats.ModInt;
@@ -129,7 +134,7 @@ void do_showstatistic( Character *ch, char *argument )
           raceCh->Stats.PermCha = 20 + RaceTable[raceCh->Race].Stats.ModCha;
           sprintf( buf, "\r\n&c%-20s &B| &C", RaceTable[iR].Name );
 
-          for( iC2 = 0; iC2 <= FORCE_ABILITY; iC2++ )
+          for( iC2 = 0; iC2 < FORCE_ABILITY; iC2++ )
             {
               if( iC2 == SMUGGLING_ABILITY )
                 sprintf( buf2, "%-3d+ &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );

@@ -65,10 +65,16 @@ bool RaceIsAvailableToPlayers( const Race *race )
 
 int GetClassFromName( const std::string &arg )
 {
-  int iClass;
+  int iClass = 0;
 
   for ( iClass = 0; iClass < MAX_ABILITY; iClass++ )
     {
+      if(iClass == FORCE_ABILITY
+         && (StrCmp(arg, "jedi") == 0 || StrCmp(arg, "sith") == 0))
+        {
+          break;
+        }
+      
       if ( toupper(arg[0]) == toupper(AbilityName[iClass][0])
            && !StringPrefix( arg, AbilityName[iClass] ) )
 	{
