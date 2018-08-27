@@ -7,18 +7,12 @@
 
 void do_showstatistic( Character *ch, char *argument )
 {
-  int raceIndex = 0, pclass = -1, iR = 0, iC = 0, iC2 = 0;
+  int pclass = -1, iR = 0, iC = 0, iC2 = 0;
   const Race *race = NULL;
   bool chk_race = false;
   char buf[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
-  
-  if( !ch )
-    {
-      do_showstatistic_web( NULL, argument );
-    }
-
-  raceIndex = GetRaceFromName( argument );
+  int raceIndex = GetRaceFromName( argument );
 
   if ( raceIndex < 0 )
     {

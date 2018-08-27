@@ -502,7 +502,6 @@ _OBJ =  act_comm.o \
 	$(CMDDIR)/showshuttle.o \
 	$(CMDDIR)/showspaceobject.o \
 	$(CMDDIR)/showstatistic.o \
-	$(CMDDIR)/showstatistic_web.o \
 	$(CMDDIR)/shutdown.o \
 	$(CMDDIR)/silence.o \
 	$(CMDDIR)/sit.o \
