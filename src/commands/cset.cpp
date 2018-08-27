@@ -33,6 +33,7 @@ void do_cset( Character *ch, char *argument )
       ch->Echo( "Can choose Jedi: %s\r\n", SysData.CanChooseJedi ? "Yes" : "No" );
       ch->Echo( "Death is permanent: %s\r\n", SysData.PermaDeath ? "Yes" : "No" );
       ch->Echo( "Extended race selection: %s\r\n", SysData.ExtendedRaceSelection ? "Yes" : "No" );
+      ch->Echo( "Multiplaying allowed: %s\r\n", SysData.AllowMultiplaying ? "Yes" : "No" );
       return;
     }
 
@@ -82,6 +83,14 @@ void do_cset( Character *ch, char *argument )
       return;
     }
 
+  if( !StrCmp( arg, "allow_multiplaying" ) )
+    {
+      SysData.AllowMultiplaying = !SysData.AllowMultiplaying;
+      ch->Echo( "Multiplaying %s.\r\n",
+                SysData.AllowMultiplaying ? "ENABLED" : "DISABLED" );
+      return;
+    }
+  
   if (!StrCmp(arg, "saveflag"))
     {
       int x = GetSaveFlag( argument );
