@@ -49,7 +49,6 @@ extern "C" {
 #include <cmath>
 
 #include "types.hpp"
-#include "alias.hpp"
 #include "constants.hpp"
 
 class TimeInfo

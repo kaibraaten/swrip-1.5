@@ -6,8 +6,9 @@
 #include "pcdata.hpp"
 #include "protomob.hpp"
 #include "descriptor.hpp"
+#include "alias.hpp"
 
-class AliasDataTests : public ::testing::Test
+class AliasTests : public ::testing::Test
 {
 protected:
   void SetUp() override
@@ -34,7 +35,7 @@ protected:
   static constexpr char *_expectedCommand = "command";
 };
 
-TEST_F(AliasDataTests, TestAllocateAlias)
+TEST_F(AliasTests, AllocateAlias)
 {
   Alias *target = AllocateAlias(_expectedAliasName, _expectedCommand);
 
@@ -45,7 +46,7 @@ TEST_F(AliasDataTests, TestAllocateAlias)
   FreeAlias(target);
 }
 
-TEST_F(AliasDataTests, TestAddAlias)
+TEST_F(AliasTests, AddAlias)
 {
   Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
   size_t expectedNumberOfAliases = _testCharacter->PCData->Aliases().size() + 1;
@@ -55,7 +56,7 @@ TEST_F(AliasDataTests, TestAddAlias)
   EXPECT_EQ(expectedNumberOfAliases, _testCharacter->PCData->Aliases().size());
 }
 
-TEST_F(AliasDataTests, TestAddAliasAllowsNoDuplicates)
+TEST_F(AliasTests, AddAliasAllowsNoDuplicates)
 {
   Alias *alias1 = AllocateAlias(_expectedAliasName, _expectedCommand);
   Alias *alias2 = AllocateAlias(_expectedAliasName, _expectedCommand);
@@ -67,7 +68,7 @@ TEST_F(AliasDataTests, TestAddAliasAllowsNoDuplicates)
   EXPECT_EQ(expectedNumberOfAliases, _testCharacter->PCData->Aliases().size());
 }
 
-TEST_F(AliasDataTests, TestAddAliasIgnoresNpcs)
+TEST_F(AliasTests, AddAliasIgnoresNpcs)
 {
   Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
 
@@ -78,7 +79,7 @@ TEST_F(AliasDataTests, TestAddAliasIgnoresNpcs)
   FreeAlias(alias);
 }
 
-TEST_F(AliasDataTests, TestUnlinkAliasRemovesAlias)
+TEST_F(AliasTests, UnlinkAliasRemovesAlias)
 {
   Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
   AddAlias(_testCharacter, alias);
@@ -91,7 +92,7 @@ TEST_F(AliasDataTests, TestUnlinkAliasRemovesAlias)
   FreeAlias(alias);
 }
 
-TEST_F(AliasDataTests, TestUnlinkAliasIgnoresNpcs)
+TEST_F(AliasTests, UnlinkAliasIgnoresNpcs)
 {
   Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
 
@@ -102,14 +103,14 @@ TEST_F(AliasDataTests, TestUnlinkAliasIgnoresNpcs)
   FreeAlias(alias);
 }
 
-TEST_F(AliasDataTests, TestFreeAliasesIgnoresNpcs)
+TEST_F(AliasTests, FreeAliasesIgnoresNpcs)
 {
   FreeAliases(_testNpc);
 
   // No asserts because we'd get a segfault if test failed.
 }
 
-TEST_F(AliasDataTests, TestFreeAliasesClearsList)
+TEST_F(AliasTests, FreeAliasesClearsList)
 {
   Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
   AddAlias(_testCharacter, alias);
@@ -119,7 +120,7 @@ TEST_F(AliasDataTests, TestFreeAliasesClearsList)
   EXPECT_TRUE(_testCharacter->PCData->Aliases().empty());
 }
 
-TEST_F(AliasDataTests, TestFindAliasFindsTheAlias)
+TEST_F(AliasTests, FindAliasFindsTheAlias)
 {
   Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
   AddAlias(_testCharacter, alias);
@@ -129,7 +130,7 @@ TEST_F(AliasDataTests, TestFindAliasFindsTheAlias)
   EXPECT_TRUE(found);
 }
 
-TEST_F(AliasDataTests, TestFindAliasDoesNotFindNonexistentAlias)
+TEST_F(AliasTests, FindAliasDoesNotFindNonexistentAlias)
 {
   Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
   AddAlias(_testCharacter, alias);
@@ -139,7 +140,7 @@ TEST_F(AliasDataTests, TestFindAliasDoesNotFindNonexistentAlias)
   EXPECT_FALSE(found);
 }
 
-TEST_F(AliasDataTests, TestFindAliasIgnoresNpcs)
+TEST_F(AliasTests, FindAliasIgnoresNpcs)
 {
   FindAlias(_testNpc, "argument_does_not_matter");
 }
