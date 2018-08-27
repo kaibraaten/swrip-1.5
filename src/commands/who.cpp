@@ -1,4 +1,5 @@
-#include <string.h>
+#include <utility/algorithms.hpp>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
@@ -198,7 +199,7 @@ void do_who( Character *ch, char *argument )
     }
 
   /* start from last to first to get it in the proper order */
-  for ( const Descriptor *d = LastDescriptor; d; d = d->Previous )
+  for ( const Descriptor *d : Reverse(Descriptors->Entities()))
     {
       const Character *wch = nullptr;
       const char *race = nullptr;

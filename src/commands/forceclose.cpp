@@ -16,7 +16,7 @@ void do_forceclose( Character *ch, char *argument )
 
   int desc = atoi( arg );
 
-  for ( Descriptor *d = FirstDescriptor; d; d = d->Next )
+  for ( Descriptor *d : Descriptors->Entities() )
     {
       if ( d->Socket == desc )
         {

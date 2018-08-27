@@ -6,7 +6,6 @@
 void do_snoop( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Descriptor *d = NULL;
   Character *victim = NULL;
 
   OneArgument( argument, arg );
@@ -32,9 +31,15 @@ void do_snoop( Character *ch, char *argument )
   if ( victim == ch )
     {
       ch->Echo("Cancelling all snoops.\r\n");
-      for ( d = FirstDescriptor; d; d = d->Next )
-        if ( d->SnoopBy == ch->Desc )
-	  d->SnoopBy = NULL;
+
+      for(Descriptor *d : Descriptors->Entities())
+        {
+          if ( d->SnoopBy == ch->Desc )
+            {
+              d->SnoopBy = NULL;
+            }
+        }
+      
       return;
     }
 
@@ -57,12 +62,14 @@ void do_snoop( Character *ch, char *argument )
 
   if ( ch->Desc )
     {
-      for ( d = ch->Desc->SnoopBy; d; d = d->SnoopBy )
-        if ( d->Character == victim || d->Original == victim )
-          {
-            ch->Echo("No snoop loops.\r\n");
-            return;
-          }
+      for ( const Descriptor *d = ch->Desc->SnoopBy; d; d = d->SnoopBy )
+        {
+          if ( d->Character == victim || d->Original == victim )
+            {
+              ch->Echo("No snoop loops.\r\n");
+              return;
+            }
+        }
     }
 
   /*  Snoop notification for higher imms, if desired, uncomment this

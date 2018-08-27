@@ -2563,14 +2563,17 @@ void RawKill( Character *killer, Character *victim )
 
       if ( !victim )
         {
-          Descriptor *d;
-
           /* Make sure they aren't halfway logged in. */
-          for ( d = FirstDescriptor; d; d = d->Next )
-            if ( (victim = d->Character) && !IsNpc(victim)  )
-              break;
-          if ( d )
-            CloseDescriptor( d, true );
+          Descriptor *d = Find(Descriptors->Entities(),
+                               [&victim](const auto descriptor)
+                               {
+                                 return (victim = descriptor->Character) && !IsNpc(victim);
+                               });
+
+          if ( d != nullptr )
+            {
+              CloseDescriptor( d, true );
+            }
         }
       else
         {

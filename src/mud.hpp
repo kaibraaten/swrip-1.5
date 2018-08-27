@@ -535,8 +535,6 @@ extern obj_ret          global_objcode;
 
 extern Character       *FirstCharacter;
 extern Character       *LastCharacter;
-extern Descriptor      *FirstDescriptor;
-extern Descriptor      *LastDescriptor;
 extern Object          *FirstObject;
 extern Object          *LastObject;
 

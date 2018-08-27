@@ -156,8 +156,6 @@ void do_pick( Character *ch, char *argument )
 
   if ( ( ship = GetShipInRoom(ch->InRoom, arg ) ) != NULL )
     {
-      Descriptor *d;
-
       if ( CheckPilot( ch , ship ) )
         {
           ch->Echo("&RWhat would be the point of that!\r\n");
@@ -183,9 +181,9 @@ void do_pick( Character *ch, char *argument )
 	  if ( !StrCmp("Public",ship->Owner) )
             return;
 
-	  for ( d = FirstDescriptor; d; d = d->Next )
+          for(const Descriptor *d : Descriptors->Entities())
             {
-              Character *victim = d->Original ? d->Original : d->Character;
+              const Character *victim = d->Original ? d->Original : d->Character;
 
               if ( d->ConnectionState != CON_PLAYING )
                 continue;
@@ -230,9 +228,9 @@ void do_pick( Character *ch, char *argument )
 	  if ( !StrCmp("Public",ship->Owner) )
             return;
 
-	  for ( d = FirstDescriptor; d; d = d->Next )
+	  for ( const Descriptor *d : Descriptors->Entities() )
             {
-              Character *victim = d->Original ? d->Original : d->Character;
+              const Character *victim = d->Original ? d->Original : d->Character;
 
               if ( d->ConnectionState != CON_PLAYING )
                 continue;

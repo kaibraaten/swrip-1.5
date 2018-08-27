@@ -52,6 +52,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
+#include "descriptor.hpp"
 
 /*
  * Globals.
@@ -2010,4 +2011,5 @@ void AllocateRepositories(void)
   PlayerCharacters = NewPlayerRepository();
   Shops = NewShopRepository();
   RepairShops = NewRepairShopRepository();
+  Descriptors = NewDescriptorRepository();
 }

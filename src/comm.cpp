@@ -60,9 +60,6 @@ bool bootup = false;
 /*
  * Global variables.
  */
-Descriptor    *FirstDescriptor = NULL; /* First descriptor */
-Descriptor    *LastDescriptor = NULL;  /* Last descriptor              */
-Descriptor    *d_next = NULL;          /* Next descriptor in loop      */
 int            num_descriptors = 0;
 bool           mud_down = false;       /* Shutdown                     */
 bool           wizlock = false;     /* Game is wizlocked            */
@@ -355,7 +352,6 @@ static bool CheckBadSocket( socket_t desc )
 static void AcceptNewSocket( socket_t ctrl )
 {
   static struct timeval null_time;
-  Descriptor *d = NULL;
   int result = 0;
 
   /*
@@ -368,15 +364,12 @@ static void AcceptNewSocket( socket_t ctrl )
   maxdesc = ctrl;
   newdesc = 0;
 
-  for ( d = FirstDescriptor; d; d = d->Next )
+  for ( Descriptor *d : Descriptors->Entities() )
     {
       maxdesc = umax( maxdesc, d->Socket );
       FD_SET( d->Socket, &in_set  );
       FD_SET( d->Socket, &out_set );
       FD_SET( d->Socket, &exc_set );
-
-      if ( d == LastDescriptor )
-        break;
     }
 
   result = select( maxdesc + 1, &in_set, &out_set, &exc_set, &null_time );
@@ -404,7 +397,6 @@ static void GameLoop( void )
 {
   struct timeval last_time;
   char cmdline[MAX_INPUT_LENGTH];
-  Descriptor *d = NULL;
 
   signal( SIGPIPE, SIG_IGN );
   signal( SIGALRM, CaughtAlarm );
@@ -421,119 +413,114 @@ static void GameLoop( void )
        * Kick out descriptors with raised exceptions
        * or have been idle, then check for input.
        */
-      for ( d = FirstDescriptor; d; d = d_next )
-        {
-          if ( d == d->Next )
-            {
-              Log->Bug( "descriptor_loop: loop found & fixed" );
-              d->Next = NULL;
-            }
-          d_next = d->Next;
+      std::list<Descriptor*> inputDescriptors(Descriptors->Entities());
 
+      for(Descriptor *d : inputDescriptors)
+        {
           d->Idle++;    /* make it so a descriptor can idle out */
+
           if ( FD_ISSET( d->Socket, &exc_set ) )
             {
               FD_CLR( d->Socket, &in_set  );
               FD_CLR( d->Socket, &out_set );
+
               if ( d->Character
                    && ( d->ConnectionState == CON_PLAYING
                         ||   d->ConnectionState == CON_EDITING ) )
                 SaveCharacter( d->Character );
+
               d->OutTop = 0;
               CloseDescriptor( d, true );
               continue;
             }
+          else if (( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : false) &&
+                   ( d->Idle > 7200 ) && !IsBitSet(d->Character->Flags, PLR_AFK))                /* 30 minutes  */
+            {
+              if( (d->Character && d->Character->InRoom) ? d->Character->TopLevel <= LEVEL_IMMORTAL : false)
+                {
+                  WriteToDescriptor( d->Socket,
+                                     "Idle 30 Minutes. Activating AFK Flag\r\n", 0 );
+                  SetBit(d->Character->Flags, PLR_AFK);
+                  Act(AT_GREY,"$n is now afk due to idle time.", d->Character, NULL, NULL, TO_ROOM);
+                  continue;
+                }
+            }
+          else if (( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true) &&
+                   ( (!d->Character && d->Idle > 360)              /* 2 mins */
+                     ||   ( d->ConnectionState != CON_PLAYING && d->Idle > 1200) /* 5 mins */
+                     ||     d->Idle > 28800 ))                             /* 2 hrs  */
+            {
+              if( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true)
+                {
+                  WriteToDescriptor( d->Socket,
+                                     "Idle timeout... disconnecting.\r\n", 0 );
+                  d->OutTop = 0;
+                  CloseDescriptor( d, true );
+                  continue;
+                }
+            }
           else
-            if (( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : false) &&
-                ( d->Idle > 7200 ) && !IsBitSet(d->Character->Flags, PLR_AFK))                /* 30 minutes  */
-              {
-                if( (d->Character && d->Character->InRoom) ? d->Character->TopLevel <= LEVEL_IMMORTAL : false)
-                  {
-                    WriteToDescriptor( d->Socket,
-                                         "Idle 30 Minutes. Activating AFK Flag\r\n", 0 );
-                    SetBit(d->Character->Flags, PLR_AFK);
-                    Act(AT_GREY,"$n is now afk due to idle time.", d->Character, NULL, NULL, TO_ROOM);
-                    continue;
-                  }
-              }
-            else
-              if (( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true) &&
-                  ( (!d->Character && d->Idle > 360)              /* 2 mins */
-                    ||   ( d->ConnectionState != CON_PLAYING && d->Idle > 1200) /* 5 mins */
-                    ||     d->Idle > 28800 ))                             /* 2 hrs  */
+            {
+              d->fCommand   = false;
+
+              if ( FD_ISSET( d->Socket, &in_set ) )
                 {
-                  if( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true)
+                  d->Idle = 0;
+
+                  if ( d->Character )
+                    d->Character->IdleTimer = 0;
+
+                  if ( !d->Read() )
                     {
-                      WriteToDescriptor( d->Socket,
-                                           "Idle timeout... disconnecting.\r\n", 0 );
-                      d->OutTop = 0;
-                      CloseDescriptor( d, true );
+                      FD_CLR( d->Socket, &out_set );
+
+                      if ( d->Character
+                           && ( d->ConnectionState == CON_PLAYING
+                                ||   d->ConnectionState == CON_EDITING ) )
+                        SaveCharacter( d->Character );
+
+                      d->OutTop     = 0;
+                      CloseDescriptor( d, false );
                       continue;
                     }
                 }
-              else
+
+              if ( d->Character && d->Character->Wait > 0 )
                 {
-                  d->fCommand   = false;
+                  --d->Character->Wait;
+                  continue;
+                }
 
-                  if ( FD_ISSET( d->Socket, &in_set ) )
+              d->ReadFromBuffer();
+
+              if ( !IsNullOrEmpty( d->InComm ) )
+                {
+                  d->fCommand       = true;
+                  StopIdling( d->Character );
+
+                  strcpy( cmdline, d->InComm );
+                  d->InComm[0] = '\0';
+
+                  if ( d->Character )
+                    SetCurrentGlobalCharacter( d->Character );
+
+                  switch( d->ConnectionState )
                     {
-                      d->Idle = 0;
+                    default:
+                      Nanny( d, cmdline );
+                      break;
 
-                      if ( d->Character )
-                        d->Character->IdleTimer = 0;
+                    case CON_PLAYING:
+                      d->Character->CmdRecurse = 0;
+                      Interpret( d->Character, cmdline );
+                      break;
 
-                      if ( !d->Read() )
-                        {
-                          FD_CLR( d->Socket, &out_set );
-                          if ( d->Character
-                               && ( d->ConnectionState == CON_PLAYING
-                                    ||   d->ConnectionState == CON_EDITING ) )
-                            SaveCharacter( d->Character );
-                          d->OutTop     = 0;
-                          CloseDescriptor( d, false );
-                          continue;
-                        }
-                    }
-
-                  if ( d->Character && d->Character->Wait > 0 )
-                    {
-                      --d->Character->Wait;
-                      continue;
-                    }
-
-                  d->ReadFromBuffer();
-
-                  if ( !IsNullOrEmpty( d->InComm ) )
-                    {
-                      d->fCommand       = true;
-                      StopIdling( d->Character );
-
-                      strcpy( cmdline, d->InComm );
-                      d->InComm[0] = '\0';
-
-                      if ( d->Character )
-                        SetCurrentGlobalCharacter( d->Character );
-
-                      switch( d->ConnectionState )
-                        {
-                        default:
-                          Nanny( d, cmdline );
-                          break;
-
-                        case CON_PLAYING:
-                          d->Character->CmdRecurse = 0;
-                          Interpret( d->Character, cmdline );
-                          break;
-
-                        case CON_EDITING:
-                          EditBuffer( d->Character, cmdline );
-                          break;
-                        }
+                    case CON_EDITING:
+                      EditBuffer( d->Character, cmdline );
+                      break;
                     }
                 }
-          
-          if ( d == LastDescriptor )
-            break;
+            }
         }
 
       /*
@@ -546,10 +533,10 @@ static void GameLoop( void )
       /*
        * Output.
        */
-      for ( d = FirstDescriptor; d; d = d_next )
+      std::list<Descriptor*> outputDescriptors(Descriptors->Entities());
+      
+      for(Descriptor *d : outputDescriptors)
         {
-          d_next = d->Next;
-
           if ( ( d->fCommand || d->OutTop > 0 )
                &&   FD_ISSET(d->Socket, &out_set) )
             {
@@ -563,8 +550,6 @@ static void GameLoop( void )
                   CloseDescriptor( d, false );
                 }
             }
-          if ( d == LastDescriptor )
-            break;
         }
 
       /*
@@ -712,29 +697,15 @@ static void NewDescriptor( socket_t new_desc )
   /*
    * Init descriptor data.
    */
-
-  if ( !LastDescriptor && FirstDescriptor )
-    {
-      Descriptor *d;
-
-      Log->Bug( "New_descriptor: last_desc is NULL, but first_desc is not! ...fixing" );
-
-      for ( d = FirstDescriptor; d; d = d->Next )
-        if ( !d->Next )
-          LastDescriptor = d;
-    }
-
-  LINK( dnew, FirstDescriptor, LastDescriptor, Next, Previous );
+  Descriptors->Add(dnew);
 
   /*
    * Send the greeting.
    */
-  {
-    if ( HelpGreeting[0] == '.' )
-      dnew->WriteToBuffer( HelpGreeting + 1 );
-    else
-      dnew->WriteToBuffer( HelpGreeting );
-  }
+  if ( HelpGreeting[0] == '.' )
+    dnew->WriteToBuffer( HelpGreeting + 1 );
+  else
+    dnew->WriteToBuffer( HelpGreeting );
 
   if ( ++num_descriptors > SysData.MaxPlayersThisBoot )
     {
@@ -771,7 +742,6 @@ void FreeDescriptor( Descriptor *d )
 void CloseDescriptor( Descriptor *dclose, bool force )
 {
   Character *ch = nullptr;
-  Descriptor *d = nullptr;
   bool DoNotUnlink = false;
 
   /* flush outbuf */
@@ -783,7 +753,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
     dclose->SnoopBy->WriteToBuffer( "Your victim has left the game.\r\n" );
 
   /* stop snooping everyone else */
-  for ( d = FirstDescriptor; d; d = d->Next )
+  for ( Descriptor *d : Descriptors->Entities())
     if ( d->SnoopBy == dclose )
       d->SnoopBy = NULL;
 
@@ -802,58 +772,6 @@ void CloseDescriptor( Descriptor *dclose, bool force )
     }
 
   ch = dclose->Character;
-
-  /* sanity check :( */
-  if ( !dclose->Previous && dclose != FirstDescriptor )
-    {
-      Descriptor *dp, *dn;
-      Log->Bug( "Close_socket: %s desc:%p != first_desc:%p and desc->prev = NULL!",
-           ch ? ch->Name : d->Remote.Hostname, dclose, FirstDescriptor );
-      dp = NULL;
-      for ( d = FirstDescriptor; d; d = dn )
-        {
-          dn = d->Next;
-          if ( d == dclose )
-            {
-              Log->Bug( "Close_socket: %s desc:%p found, prev should be:%p, fixing.",
-                   ch ? ch->Name : d->Remote.Hostname, dclose, dp );
-              dclose->Previous = dp;
-              break;
-            }
-          dp = d;
-        }
-      if ( !dclose->Previous )
-        {
-          Log->Bug( "Close_socket: %s desc:%p could not be found!.",
-               ch ? ch->Name : dclose->Remote.Hostname, dclose );
-          DoNotUnlink = true;
-        }
-    }
-  if ( !dclose->Next && dclose != LastDescriptor )
-    {
-      Descriptor *dp, *dn;
-      Log->Bug( "Close_socket: %s desc:%p != last_desc:%p and desc->Next = NULL!",
-           ch ? ch->Name : d->Remote.Hostname, dclose, LastDescriptor );
-      dn = NULL;
-      for ( d = LastDescriptor; d; d = dp )
-        {
-          dp = d->Previous;
-          if ( d == dclose )
-            {
-              Log->Bug( "Close_socket: %s desc:%p found, next should be:%p, fixing.",
-                   ch ? ch->Name : d->Remote.Hostname, dclose, dn );
-              dclose->Next = dn;
-              break;
-            }
-          dn = d;
-        }
-      if ( !dclose->Next )
-        {
-          Log->Bug( "Close_socket: %s desc:%p could not be found!.",
-               ch ? ch->Name : dclose->Remote.Hostname, dclose );
-          DoNotUnlink = true;
-        }
-    }
 
   if ( dclose->Character )
     {
@@ -877,10 +795,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
 
   if ( !DoNotUnlink )
     {
-      /* make sure loop doesn't get messed up */
-      if ( d_next == dclose )
-        d_next = d_next->Next;
-      UNLINK( dclose, FirstDescriptor, LastDescriptor, Next, Previous );
+      Descriptors->Remove(dclose);
     }
 
   if ( dclose->Socket == maxdesc )

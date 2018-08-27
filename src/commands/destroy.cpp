@@ -1,6 +1,7 @@
 #include <cstring>
 #include <cctype>
 #include <cerrno>
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "area.hpp"
@@ -116,18 +117,13 @@ void do_destroy( Character *ch, char *argument )
 
 static void CloseDescriptorIfHalfwayLoggedIn(const std::string &name)
 {
-  Descriptor *d = nullptr;
-
-  /* Make sure they aren't halfway logged in. */
-  for ( d = FirstDescriptor; d; d = d->Next )
-    {
-      const Character *victim = d->Character;
-      
-      if ( victim != nullptr && !IsNpc(victim) && !StrCmp(victim->Name, name) )
-        {
-          break;
-        }
-    }
+  Descriptor *d = Find(Descriptors->Entities(),
+                       [name](const auto desc)
+                       {
+                         return desc->Character != nullptr
+                           && !IsNpc(desc->Character)
+                           && !StrCmp(desc->Character->Name, name);
+                       });
 
   if ( d != nullptr )
     {

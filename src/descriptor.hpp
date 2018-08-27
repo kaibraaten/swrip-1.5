@@ -2,6 +2,7 @@
 #define _SWRIP_DESCRIPTOR_HPP_
 
 #include <utility/os.hpp>
+#include <utility/repository.hpp>
 #include "types.hpp"
 #include "constants.hpp"
 
@@ -61,5 +62,17 @@ public:
   void ReadFromBuffer() override;
   bool Read() override;
 };
+
+class DescriptorRepository : public Ceris::Repository<Descriptor*>
+{
+public:
+
+protected:
+  DescriptorRepository() { }
+};
+
+extern DescriptorRepository *Descriptors;
+
+DescriptorRepository *NewDescriptorRepository();
 
 #endif

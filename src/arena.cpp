@@ -139,9 +139,7 @@ void StartArena(void)
 
 static void StartGame(void)
 {
-  Descriptor *d = NULL;
-
-  for (d = FirstDescriptor; d; d = d->Next)
+  for(Descriptor *d : Descriptors->Entities())
     {
       if (!d->ConnectionState)
 	{
@@ -209,9 +207,7 @@ void UpdateArena(void)
 
 static void FindGameWinner(void)
 {
-  Descriptor *d = NULL;
-
-  for (d = FirstDescriptor; d; d = d->Next)
+  for(Descriptor *d : Descriptors->Entities())
     {
       Character *i = d->Original ? d->Original : d->Character;
 
@@ -306,9 +302,8 @@ static void SilentEnd(void)
 static void DoEndGame(void)
 {
   char buf[MAX_INPUT_LENGTH];
-  Descriptor *d = NULL;
 
-  for (d = FirstDescriptor; d; d = d->Next)
+  for(Descriptor *d : Descriptors->Entities())
     {
       if (!d->ConnectionState)
 	{
@@ -344,10 +339,9 @@ static void DoEndGame(void)
 
 int CharactersInArena(void)
 {
-  Descriptor *d;
   int num = 0;
 
-  for (d = FirstDescriptor; d; d = d->Next)
+  for(Descriptor *d : Descriptors->Entities())
     {
       Character *i = d->Original ? d->Original : d->Character;
 
@@ -445,9 +439,7 @@ void SaveHallOfFame( void )
 
 static void FindBetWinners(Character *winner)
 {
-  Descriptor *d = NULL;
-
-  for (d = FirstDescriptor; d; d = d->Next)
+  for(Descriptor *d : Descriptors->Entities())
     {
       if (!d->ConnectionState)
 	{
