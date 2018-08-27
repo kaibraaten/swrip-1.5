@@ -1970,7 +1970,6 @@ enum
 #define BAN_LIST        DATA_DIR "banned.lua"       /* List of bans                 */
 #define GOD_LIST        "gods.lst"      /* List of gods                 */
 #define GUARD_LIST      "guard.lst"
-#define SYSTEMDATA_FILE DATA_DIR "sysdata.lua"
 #define SHUTDOWN_FILE   "shutdown.txt"          /* For 'shutdown'        */
 
 #define COPYOVER_FILE   DATA_DIR "copyover.dat"

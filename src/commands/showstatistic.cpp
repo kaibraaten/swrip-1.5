@@ -1,8 +1,9 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "descriptor.hpp"
+#include "systemdata.hpp"
 
 void do_showstatistic( Character *ch, char *argument )
 {

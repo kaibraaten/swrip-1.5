@@ -36,6 +36,7 @@
 #include "protoobject.hpp"
 #include "protomob.hpp"
 #include "descriptor.hpp"
+#include "systemdata.hpp"
 
 struct Character::Impl
 {

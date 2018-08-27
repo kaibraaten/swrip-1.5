@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "object.hpp"
 #include "protomob.hpp"
+#include "systemdata.hpp"
 
 void do_give( Character *ch, char *argument )
 {

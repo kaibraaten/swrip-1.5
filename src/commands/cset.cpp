@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "systemdata.hpp"
 
 void do_cset( Character *ch, char *argument )
 {
@@ -47,7 +48,7 @@ void do_cset( Character *ch, char *argument )
 
   if (!StrCmp(arg, "save"))
     {
-      SaveSystemData(SysData);
+      SysData.Save();
       return;
     }
 

@@ -1,9 +1,10 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "systemdata.hpp"
 
 void do_auction(Character *ch, char *argument)
 {

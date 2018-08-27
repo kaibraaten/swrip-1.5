@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
+#include "systemdata.hpp"
 
 /*
  * Set a skill's attributes or what skills a player has.

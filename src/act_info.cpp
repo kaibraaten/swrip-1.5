@@ -27,6 +27,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "object.hpp"
+#include "systemdata.hpp"
 
 static std::string SeeHalucinatedObject( int ms, bool fShort );
 

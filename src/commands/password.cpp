@@ -1,8 +1,9 @@
-#include <ctype.h>
-#include <string.h>
+#include <cctype>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "systemdata.hpp"
 
 void do_password( Character *ch, char *argument )
 {

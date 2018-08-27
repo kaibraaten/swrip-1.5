@@ -45,6 +45,7 @@
 #include "protoobject.hpp"
 #include "protomob.hpp"
 #include "descriptor.hpp"
+#include "systemdata.hpp"
 
 /*
  * Socket and TCP/IP stuff.
@@ -723,10 +724,10 @@ static void NewDescriptor( socket_t new_desc )
       sprintf( log_buf, "Broke all-time maximum player record: %d", SysData.MaxPlayersEver );
       Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
-      SaveSystemData( SysData );
+      SysData.Save();
     }
+  
   SetAlarm(0);
-  return;
 }
 
 void FreeDescriptor( Descriptor *d )

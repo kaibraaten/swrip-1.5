@@ -49,6 +49,7 @@
 #include "protoobject.hpp"
 #include "protomob.hpp"
 #include "descriptor.hpp"
+#include "systemdata.hpp"
 
 /*
  * Increment with every major format change.

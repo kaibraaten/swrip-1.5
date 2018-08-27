@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 #include "object.hpp"
+#include "systemdata.hpp"
 
 void do_quaff( Character *ch, char *argument )
 {

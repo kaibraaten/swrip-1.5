@@ -39,6 +39,8 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "playerrepository.hpp"
+#include "systemdata.hpp"
+
 #ifdef _WIN32
 #include <process.h>
 #endif

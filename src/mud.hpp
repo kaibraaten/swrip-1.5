@@ -318,53 +318,6 @@ public:
 };
 
 /*
- * Used to keep track of system settings and statistics         -Thoric
- */
-class SystemData
-{
-public:
-  int    MaxPlayersThisBoot = 0;             /* Maximum players this boot   */
-  int    MaxPlayersEver = 0;             /* Maximum players ever   */
-  char  *TimeOfMaxPlayersEver = nullptr;            /* Time of max ever */
-  bool   NoNameResolving = false;      /* Hostnames are not resolved  */
-  bool   DenyNewPlayers = false;       /* New players cannot connect  */
-  bool   NewPlayersMustWaitForAuth = false;          /* New players must be auth'ed */
-  short  ReadAllMail = 0;          /* Read all player mail(was 54)*/
-  short  ReadMailFree = 0;         /* Read mail for free (was 51) */
-  short  WriteMailFree = 0;        /* Write mail for free(was 51) */
-  short  TakeOthersMail = 0;       /* Take others mail (was 54)   */
-  short  LevelOfBuildChannel = 0;
-  short  LevelOfLogChannel = 0;              /* Level of log channel LEVEL LOG*/
-  short  LevelToModifyProto = 0;     /* Level to modify prototype stuff LEVEL_CREATOR */
-  short  LevelToOverridePrivateFlag = 0; /* override private flag */
-  short  LevelToMsetPlayers = 0;      /* Level to mset a player */
-  short  StunModPlrVsPlr = 0;        /* Stun mod player vs. player */
-  short  StunRegular = 0;           /* Stun difficult */
-  short  DamagePlrVsPlr = 0;         /* Damage mod player vs. player */
-  short  DamagePlrVsMob = 0;         /* Damage mod player vs. mobile */
-  short  DamageMobVsPlr = 0;         /* Damage mod mobile vs. player */
-  short  DamageMobVsMob = 0;         /* Damage mod mobile vs. mobile */
-  short  LevelToGetObjectsWithoutTakeFlag = 0;     /* Get objects without take flag */
-  short  LevelToForcePlayers = 0;          /* The level at which you can use force on players. */
-  short  MaxSN = 0;                 /* Max skills */
-  int    SaveFlags = 0;             /* Toggles for saving conditions */
-  short  SaveFrequency = 0;         /* How old to autosave someone */
-  short  Port = 0;
-  bool DisableHunger = false;
-  bool CanChooseJedi = false;
-  bool PermaDeath = false;
-  bool ExtendedRaceSelection = false;
-  bool AllowMultiplaying = false;
-  
-#ifdef _WIN32
-  HMODULE DlHandle;
-#else
-  void *DlHandle = nullptr;
-#endif
-  unsigned char *MCCP_Buffer = nullptr;
-};
-
-/*
  * Delayed teleport type.
  */
 class TeleportData
@@ -507,7 +460,6 @@ extern int numobjsloaded;
 extern int nummobsloaded;
 extern int physicalobjects;
 extern int num_descriptors;
-extern SystemData SysData;
 extern int top_vroom;
 extern int top_affect;
 extern int top_area;
@@ -1301,7 +1253,6 @@ void WriteComments( const Character *ch, FILE *fp );
 void ShutdownMud( const std::string &reason );
 void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
                 const std::string &loadst, const std::string &notloadst );
-void SaveSystemData( const SystemData sys );
 void AppendFile( const Character *ch, const std::string &file, const std::string &str );
 void ShowFile( const Character *ch, const std::string &filename );
 void BootDatabase( bool fCopyover );
