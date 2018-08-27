@@ -332,7 +332,7 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
       return;
     }
 
-  if ( d->CheckMultiplaying( ch->Name ) )
+  if ( !SysData.AllowMultiplaying && d->CheckMultiplaying( ch->Name ) )
     {
       CloseDescriptor( d, false );
       return;

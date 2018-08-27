@@ -336,24 +336,26 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
 
 ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 {
-  Room *in_room;
-  Room *to_room;
-  Room *from_room;
+  Room *in_room = nullptr;
+  Room *to_room = nullptr;
+  Room *from_room = nullptr;
   char buf[MAX_STRING_LENGTH];
-  const char *txt;
-  const char *dtxt;
-  ch_ret retcode;
-  DirectionType door;
-  short distance;
+  const char *txt = nullptr;
+  const char *dtxt = nullptr;
+  ch_ret retcode = rNONE;
+  DirectionType door = DIR_INVALID;
+  short distance = 0;
   bool drunk = false;
   bool brief = false;
-  int hpmove;
+  int hpmove = 0;
 
-  if ( !IsNpc( ch ) )
-    if ( IsDrunk( ch ) && ( ch->Position != POS_SHOVE )
-         && ( ch->Position != POS_DRAG ) )
+  if ( !IsNpc( ch )
+       && IsDrunk( ch ) && ch->Position != POS_SHOVE
+       && ch->Position != POS_DRAG )
+    {
       drunk = true;
-
+    }
+  
   if ( drunk && !fall )
     {
       door = (DirectionType)GetRandomDoor();
@@ -368,20 +370,24 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
     }
 #endif
 
-  retcode = rNONE;
-  txt = NULL;
-
   if ( IsNpc(ch) && IsBitSet( ch->Flags, ACT_MOUNTED ) )
-    return retcode;
+    {
+      return retcode;
+    }
 
   in_room = ch->InRoom;
   from_room = in_room;
+
   if ( !pexit || (to_room = pexit->ToRoom) == NULL )
     {
       if ( drunk )
-        ch->Echo( "You hit a wall in your drunken state.\r\n" );
+        {
+          ch->Echo( "You hit a wall in your drunken state.\r\n" );
+        }
       else
-        ch->Echo( "Alas, you cannot go that way.\r\n" );
+        {
+          ch->Echo( "Alas, you cannot go that way.\r\n" );
+        }
 
       return rNONE;
     }
@@ -447,7 +453,9 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
    */
   if ( distance > 1 )
     {
-      if ( (to_room=GenerateExit(in_room, &pexit)) == NULL )
+      to_room = GenerateExit(in_room, &pexit);
+      
+      if ( to_room == nullptr )
 	{
 	  ch->Echo( "Alas, you cannot go that way.\r\n" );
 	}
@@ -507,7 +515,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
   if ( !fall && !IsNpc(ch) )
     {
-      int move;
+      int move = 0;
 
       if ( in_room->Sector == SECT_AIR
            ||   to_room->Sector == SECT_AIR
@@ -768,6 +776,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
                         }
               }
           }
+
       if ( ch->Mount )
         {
           sprintf( buf, "$n %s %s upon $N.", txt, GetDirectionName(door) );
@@ -790,8 +799,10 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   if ( ch->Mount )
     {
       RoomProgLeaveTrigger( ch->Mount );
+
       if( CharacterDiedRecently(ch) )
         return global_retcode;
+
       if( ch->Mount )
         {
           CharacterFromRoom( ch->Mount );
@@ -801,53 +812,71 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
 
   CharacterToRoom( ch, to_room );
+
   if ( !IsAffectedBy(ch, AFF_SNEAK)
        && ( IsNpc(ch) || !IsBitSet(ch->Flags, PLR_WIZINVIS) ) )
     {
       if ( fall )
-        txt = "falls";
-      else
-        if ( ch->Mount )
-          {
-            if ( IsAffectedBy( ch->Mount, AFF_FLOATING ) )
+        {
+          txt = "falls";
+        }
+      else if ( ch->Mount )
+        {
+          if ( IsAffectedBy( ch->Mount, AFF_FLOATING ) )
+            {
               txt = "floats in";
-            else
-              if ( IsAffectedBy( ch->Mount, AFF_FLYING ) )
-                txt = "flys in";
-              else
-                txt = "rides in";
-          }
-        else
-          {
-            if ( IsAffectedBy( ch, AFF_FLOATING ) )
-              {
-                if ( drunk )
-                  txt = "floats in unsteadily";
-                else
-                  txt = "floats in";
-              }
-            else
-              if ( IsAffectedBy( ch, AFF_FLYING ) )
+            }
+          else if ( IsAffectedBy( ch->Mount, AFF_FLYING ) )
+            {
+              txt = "flys in";
+            }
+          else
+            {
+              txt = "rides in";
+            }
+        }
+      else
+        {
+          if ( IsAffectedBy( ch, AFF_FLOATING ) )
+            {
+              if ( drunk )
                 {
-                  if ( drunk )
-                    txt = "flys in shakily";
-                  else
-                    txt = "flys in";
+                  txt = "floats in unsteadily";
                 }
               else
-                if ( ch->Position == POS_SHOVE )
-                  txt = "is shoved in";
-                else
-                  if ( ch->Position == POS_DRAG )
-                    txt = "is dragged in";
-                  else
-                    {
-                      if ( drunk )
-                        txt = "stumbles drunkenly in";
-                      else
-                        txt = "arrives";
-                    }
-          }
+                {
+                  txt = "floats in";
+                }
+            }
+          else if ( IsAffectedBy( ch, AFF_FLYING ) )
+            {
+              if ( drunk )
+                {
+                  txt = "flys in shakily";
+                }
+              else
+                {
+                  txt = "flys in";
+                }
+            }
+          else if ( ch->Position == POS_SHOVE )
+            {
+              txt = "is shoved in";
+            }
+          else if ( ch->Position == POS_DRAG )
+            {
+              txt = "is dragged in";
+            }
+          else if ( drunk )
+            {
+              txt = "stumbles drunkenly in";
+            }
+          else
+            {
+              txt = "arrives";
+            }
+        }
+
       switch( door )
         {
         default:
@@ -941,7 +970,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
       for(Character *fch : copyOfCharacterList)
         {
-          if(++count >= chars)
+          if(count++ >= chars)
             {
               break;
             }

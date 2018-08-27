@@ -155,8 +155,8 @@ bool Descriptor::CheckMultiplaying( const std::string &name )
                    dold->Original ? dold->Original->Name : dold->Character->Name,
                    Character->Name );
           Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
-          Character = nullptr;
           FreeCharacter( Character );
+          Character = nullptr;
           return true;
         }
     }

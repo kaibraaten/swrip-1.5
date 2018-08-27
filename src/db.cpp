@@ -348,6 +348,7 @@ void BootDatabase( bool fCopyOver )
   SysData.CanChooseJedi          = false;
   SysData.PermaDeath             = true;
   SysData.ExtendedRaceSelection  = true;
+  SysData.AllowMultiplaying = false;
   SysData.SaveFlags              = SV_DEATH | SV_PASSCHG | SV_AUTO
     | SV_PUT | SV_DROP | SV_GIVE
     | SV_AUCTION | SV_ZAPDROP | SV_IDLE;
@@ -1781,7 +1782,7 @@ static void PushSystemData( lua_State *L, const void *userData )
   LuaSetfieldBoolean( L, "CanChooseJedi", SysData.CanChooseJedi );
   LuaSetfieldBoolean( L, "ExtendedRaceSelection", SysData.ExtendedRaceSelection );
   LuaSetfieldBoolean( L, "PermaDeath", SysData.PermaDeath );
-  
+  LuaSetfieldBoolean( L, "AllowMultiplaying", SysData.AllowMultiplaying );
   lua_setglobal( L, "systemdata" );
 }
 
@@ -1816,6 +1817,7 @@ static int L_SystemDataEntry( lua_State *L )
   lua_getfield( L, idx, "CanChooseJedi" );
   lua_getfield( L, idx, "PermaDeath" );
   lua_getfield( L, idx, "ExtendedRaceSelection" );
+  lua_getfield( L, idx, "AllowMultiplaying" );
   
   if( !lua_isnil( L, ++idx ) )
     {
@@ -1949,6 +1951,11 @@ static int L_SystemDataEntry( lua_State *L )
   if( !lua_isnil( L, ++idx ) )
     {
       SysData.ExtendedRaceSelection = lua_toboolean( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      SysData.AllowMultiplaying = lua_toboolean( L, idx );
     }
 
   lua_pop( L, lua_gettop( L ) - 1 );
