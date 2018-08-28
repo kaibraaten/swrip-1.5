@@ -2,9 +2,11 @@
 #define _SWR_UTILITY_HPP_
 
 #include <functional>
+#include <vector>
 #include <string>
 #include <cstdio>
 #include <cstdlib>
+#include <cstdarg>
 #include <utility/types.hpp>
 #include <utility/vector3.hpp>
 #include <utility/os.hpp>
@@ -177,7 +179,10 @@ std::string TrimStringEnd( const std::string &str, char junk = ' ' );
 std::string TrimString( const std::string &str, char junk  = ' ');
 char *Scramble( const std::string &argument, int modifier );
 bool IsNullOrEmpty( const char *str );
-
+std::string CenterString( const std::string &txt, size_t totalWidth, char pad );
+std::string FormatString( const char *fmt, ... );
+std::vector< char > CreateFmtBuffer( const char *fmt, va_list va );
+  
 /* file_io.c */
 char ReadChar( FILE *fp, Logger *log, bool fBootDb );
 float ReadFloat( FILE *fp, Logger *log, bool fBootDb );

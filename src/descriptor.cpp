@@ -18,8 +18,8 @@ static const char go_ahead_str[] = { (const char)IAC, (const char)GA, '\0' };
 
 struct Descriptor::Impl
 {
-  char InBuffer[MAX_INBUF_SIZE];
-  char InLast[MAX_INPUT_LENGTH];
+  char InBuffer[MAX_INBUF_SIZE] = {'\0'};
+  char InLast[MAX_INPUT_LENGTH] = {'\0'};
   int Repeat = 0;
 };
 
@@ -36,6 +36,7 @@ Descriptor::Descriptor(socket_t desc)
 
 Descriptor::~Descriptor()
 {
+  FreeMemory(OutBuffer);
   delete pImpl;
 }
 
@@ -226,7 +227,7 @@ unsigned char Descriptor::CheckPlaying( const std::string &name, bool kick )
 
 bool Descriptor::FlushBuffer(bool fPrompt)
 {
-  char buf[MAX_INPUT_LENGTH];
+  char buf[MAX_INPUT_LENGTH] = {'\0'};
   class Character *ch = Original ? Original : Character;
 
   if( ch && ch->Fighting && ch->Fighting->Who )
@@ -243,7 +244,7 @@ bool Descriptor::FlushBuffer(bool fPrompt)
 
       if ( SnoopBy )
         {
-          char snoopbuf[MAX_INPUT_LENGTH];
+          char snoopbuf[MAX_INPUT_LENGTH] = {'\0'};
           buf[512] = '\0';
 
           if ( Character && Character->Name )
