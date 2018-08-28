@@ -4,6 +4,7 @@
 #define _BSD_SOURCE
 #endif
 
+#include <sstream>
 #include <algorithm>
 #include <functional>
 #include <cctype>
@@ -255,7 +256,7 @@ char *Capitalize( const std::string &argument )
             }
           else if( isalpha( (int) c ) )
             {
-              c = bFirst ? toupper( (int) c )  : tolower( (int) c );
+              c = bFirst ? toupper( (int) c ) : c;
               bFirst = false;
             }
         }
@@ -744,4 +745,37 @@ static std::string GetNextChunk( std::string &str, const char c )
     }
 
   return line;
+}
+
+std::vector< char > CreateFmtBuffer( const char *fmt, va_list va )
+{
+  va_list va_tmp;
+  va_copy( va_tmp, va );
+  std::vector< char > buf( vsnprintf( 0, 0, fmt, va_tmp ) + 1 );
+  va_end( va_tmp );
+
+  vsnprintf( &buf[0], buf.size(), fmt, va );
+
+  return buf;
+}
+
+std::string FormatString( const char *fmt, ... )
+{
+  va_list va;
+  va_start( va, fmt );
+  std::vector< char > buf = CreateFmtBuffer( fmt, va );
+  va_end( va );
+
+  return &buf[0];
+}
+
+std::string CenterString( const std::string &txt, size_t width, char pad )
+{
+  std::ostringstream output;
+
+  output << std::string( width / 2 - txt.size() / 2, pad );
+  output << txt;
+  output << std::string( width - output.str().size(), pad );
+
+  return output.str();
 }

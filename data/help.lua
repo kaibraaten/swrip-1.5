@@ -4,13 +4,7 @@
 HelpEntry
 {
    Level = 0, 
-   Keyword = "HELPS\
-\r\
-\r0 HELPS\
-\r\
-\r0 HELPS\
-\r\
-\r0 !", 
+   Keyword = "!", 
    Text = "&CSyntax &W: &Y!\
   \
 &c! repeats the last command you typed.\
@@ -20,8 +14,8 @@ HelpEntry
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"ACUTE AWARENESS\" ACUTE_AWARENESS", 
-   Text = "&CSyntax &R&W: &YAcute_awarness\
+   Keyword = "'ACUTE AWARENESS' ACUTEAWARENESS", 
+   Text = "&CSyntax &R&W: &YAcuteAwareness\
  \
 &cThis skill adds the ability to detect those who are stealthed for a short\
 period of time.\
@@ -31,8 +25,8 @@ period of time.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"ACUTE DAMAGE\" ACUTE_DAMAGE", 
-   Text = "&CSyntax &R&W: &YAcute_damage\
+   Keyword = "'ACUTE DAMAGE' ACUTEDAMAGE", 
+   Text = "&CSyntax &R&W: &YAcuteDamage\
  \
 &cThis skill lets you focus your energy into increasing your damage and\
 damroll.\
@@ -42,9 +36,8 @@ damroll.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"AFFECT MIND\"", 
-   Text = ".\
-&CSyntax : &Yfeel 'affect mind' (victim)\
+   Keyword = "'AFFECT MIND'", 
+   Text = "&CSyntax : &Yfeel 'affect mind' (victim)\
  \
 &cThis attempts to control a person or monster.  If successful, they will\
 follow you for a limited period.  Failure, however, will start a fight\
@@ -55,7 +48,7 @@ follow you for a limited period.  Failure, however, will start a fight\
 HelpEntry
 {
    Level = 0, 
-   Keyword = "\"BOUNTY HUNTER\" BH \"BOUNTY HUNTING\" HUNTER", 
+   Keyword = "'BOUNTY HUNTER'", 
    Text = "&cBounty hunters are some of the most feared people in the galaxy. \
 Although they cannot roll force, their ability more than makes up for it.\
 Backstab and circle provide an attacking ability to quickly take most of\
@@ -66,24 +59,24 @@ practice their offensive skills.  Hunters are not for newbies. \
 &P          Help Track\
 &P          Help Backstab\
 &P          Help Doorbash\
-&P          Help \"Poison Weapon\"\
+&P          Help PoisonWeapon\
 &P          Help Apprehend\
 &P          Help Bind\
-&P          Help \"Acute Awareness\"\
+&P          Help AcuteAwareness\
 &P          Help Circle\
-&P          Help \"See Masking\"\
-&P          Help \"Focus Strength\"\
-&P          Help \"Inner Strength\"\
-&P          Help \"Heightened Accuracy\"\
+&P          Help SeeMasking\
+&P          Help FocusStrength\
+&P          Help InnerStrength\
+&P          Help HeightenedAccuracy\
 &P          Help Limber\
-&P          Help \"Acute Damage\"\
+&P          Help AcuteDamage\
 ", 
 }
 
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"CAPITAL SHIPS\" \"MIDSHIPS\" \"STARFIGHTERS\"", 
+   Keyword = "'CAPITAL SHIPS' MIDSHIPS STARFIGHTERS", 
    Text = "&CSyntax &W: &YAutomatic\
   \
 &cThese skills allow you to fly ships of their respective size. \
@@ -97,48 +90,9 @@ these skills, you will not be able to move a ship.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"CLAN SUMMARY\"", 
-   Text = "&CThe Bounty Hunter's Guild&c\
-The Guild exists for one purpose: contract killing. They live by their\
-creed, and any hunter who violates that creed will be killed.  They \
-may use official bounties or private bounties. \
-&C \
-Black Sun.&c \
-Prince Xizor's crime syndicate. Based on Coruscant, they run legitimate\
-businesses to finance their operations.  They also provide protection,\
-both in space and in the air, and special equipment. \
-&C\
-The Triad Syndicate.&c \
-A large business run by three co-CEO's based on Corellia.  If they can\
-make\
-money off of it, they will do it, but their only motivation is the buck\
-<or credit>. \
-&C\
-Outlaw Techs.&c \
-A engineer-pirate clan based off an asteroid in the Hoth system,\
-providing\
-black market equipment as well as protection. \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "\"CREATE FIRE\"", 
+   Keyword = "'CURE BLINDNESS'", 
    Text = ".\
-&CSyntax &W:&W feel 'create fire' \
- \
-&cCreates a small contained fire in the room.\
- \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "\"CURE BLINDNESS\"", 
-   Text = ".\
-&CSyntax &W:&Y feel 'cure blindness' (target)\
+&CSyntax &W:&Y feel 'cure blindness' <target>\
  \
 &cCures blindness of the target. \
  \
@@ -148,11 +102,11 @@ HelpEntry
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"CURE CRITICAL\" CURE \"CURE LIGHT\" \"CURE SERIOUS\" HEAL", 
-   Text = "&CSyntax &W:&Y feel 'cure light' (target)\
-&CSyntax &W:&Y feel 'cure serious' (target)\
-&CSyntax &W:&Y feel 'cure critical' (target)\
-&CSyntax &W:&Y feel heal (target)\
+   Keyword = "'CURE CRITICAL' 'CURE LIGHT' 'CURE SERIOUS' HEAL", 
+   Text = "&CSyntax &W:&Y feel 'cure light' <target>\
+&CSyntax &W:&Y feel 'cure serious' <target>\
+&CSyntax &W:&Y feel 'cure critical' <target>\
+&CSyntax &W:&Y feel heal <target>\
   \
 &cHeals the tagert.  The stregnth of the healing depends on the ability, as\
 cure light does very little to heal a wound, wheras \"heal\" can perform \
@@ -163,9 +117,9 @@ miracle healings. \
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"CURE POISON\"", 
+   Keyword = "'CURE POISON'", 
    Text = ".\
-&CSyntax &W:&Y feel 'cure poison' (target)\
+&CSyntax &W:&Y feel 'cure poison' <target>\
  \
 &cRemoves poison from target's blood.\
 ", 
@@ -174,8 +128,8 @@ HelpEntry
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"DETECT DARKNESS\" \"DETECT FORCE\" \"DETECT INTENT\" \"DETECT MASKING\" \"DETECT POISON\" \"DETECT TRAPS\"", 
-   Text = "&CSyntax &W:&Y feel 'detect (ability)'\
+   Keyword = "'DETECT DARKNESS' 'DETECT FORCE' 'DETECT INTENT' 'DETECT MASKING' 'DETECT POISON' 'DETECT TRAPS'", 
+   Text = "&CSyntax &W:&Y feel 'detect <ability>'\
  \
 &CDetect Darkness\
 &cPlaces a red aura around those who follow the ways of evil.\
@@ -201,9 +155,9 @@ Tells the emotions and general alignment of a being. \
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"DISPEL DARK\"", 
+   Keyword = "'DISPEL DARK'", 
    Text = ".\
-&CSyntax &W:Y feel 'dispel dark' (target)\
+&CSyntax &W:Y feel 'dispel dark' <target>\
  \
 &cDamages characters aligned with the Dark Side\
  \
@@ -213,7 +167,7 @@ HelpEntry
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"DISPEL FORCE\"", 
+   Keyword = "'DISPEL FORCE'", 
    Text = "Syntax : feel \"dispel force\" <target>\
 &G\
 Removes any force affecting the victim.\
@@ -224,8 +178,8 @@ Removes any force affecting the victim.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"DRAIN ESSENCE\"", 
-   Text = "Syntax : feel \"drain essence\" <victim>\
+   Keyword = "'DRAIN ESSENCE'", 
+   Text = "Syntax : feel 'drain essence' <victim>\
 &r\
 Drains XP, MANA and HP from victim.\
 User gains HP.\
@@ -236,19 +190,19 @@ User gains HP.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"FOCUS STRENGTH\" FOCUS FOCUS_STRENGTH", 
-   Text = "&CSyntax &R&W: &YFocus Strength\
+   Keyword = "'FOCUS STRENGTH' FOCUSSTRENGTH", 
+   Text = "&CSyntax &R&W: &YFocusStrength\
  \
 &cThis skill allows you to focus your energy, increasing your strength for\
-a period of time.  During this time, you can carry more, and hit harder.\
+a period of time. During this time, you can carry more, and hit harder.\
 ", 
 }
 
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"FORCE BLAST\"", 
-   Text = "Syntax : feel \"force blast\"\
+   Keyword = "'FORCE BLAST WRATH'", 
+   Text = "Syntax : feel 'force blast wrath'\
 \
 Require THREE people and causes heavy damage to all in the room,\
 and then blinds everyone, including casters.\
@@ -258,8 +212,8 @@ and then blinds everyone, including casters.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"FORCE BOLT\"", 
-   Text = "Syntax : feel \"force bolt\" <victim>\
+   Keyword = "'FORCE BOLT'", 
+   Text = "Syntax : feel 'force bolt' <victim>\
 \
 Sends a bolt of force at the victim.\
 ", 
@@ -268,9 +222,9 @@ Sends a bolt of force at the victim.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"FORCE BUBBLE\" \"FORCE SHIELD\"", 
-   Text = "Syntax : feel \"force bubble\"\
-Syntax : feel \"force shield\"\
+   Keyword = "'FORCE BUBBLE' 'FORCE SHIELD'", 
+   Text = "Syntax : feel 'force bubble'\
+Syntax : feel 'force shield'\
 \
 Creates a force bubble/shield that lowers AC and increase resistance.\
 ", 
@@ -279,8 +233,8 @@ Creates a force bubble/shield that lowers AC and increase resistance.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"FORCE FUNNEL\"", 
-   Text = "Syntax : feel \"force funnel\" <victim>\
+   Keyword = "'FORCE FUNNEL'", 
+   Text = "Syntax : feel 'force funnel' <victim>\
 \
 Makes victim more susceptable.\
 ", 
@@ -289,8 +243,8 @@ Makes victim more susceptable.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"FORCE LIGHTNING\"", 
-   Text = "Syntax : feel \"force lightning\" <victim>\
+   Keyword = "'FORCE LIGHTNING'", 
+   Text = "Syntax : feel 'force lightning' <victim>\
 \
 Sends bolts of lightning into victim.\
 ", 
@@ -299,8 +253,8 @@ Sends bolts of lightning into victim.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"FORCE SIGHT\"", 
-   Text = "Syntax : feel \"force sight\"\
+   Keyword = "'FORCE SIGHT'", 
+   Text = "Syntax : feel 'force sight'\
 \
 Allows user to see in the dark.\
 ", 
@@ -309,8 +263,8 @@ Allows user to see in the dark.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"FORCE SPRAY\"", 
-   Text = "Syntax : feel \"force spray\" <victim>\
+   Keyword = "'FORCE SPRAY'", 
+   Text = "Syntax : feel 'force spray' <victim>\
 \
 Cause minor damage to victim.\
 ", 
@@ -319,8 +273,8 @@ Cause minor damage to victim.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"GOOD FORTUNE\"", 
-   Text = "Syntax : feel \"good fortune\"\
+   Keyword = "'GOOD FORTUNE'", 
+   Text = "Syntax : feel 'good fortune' <target>\
 \
 Increase hitroll and improves saving roll against the force.\
 ", 
@@ -329,7 +283,7 @@ Increase hitroll and improves saving roll against the force.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"GROUP MASKING\"", 
+   Keyword = "'GROUP MASKING'", 
    Text = "Syntax : feel \"group masking\"\
 \
 Masks all those in your group (including you).\
@@ -339,8 +293,8 @@ Masks all those in your group (including you).\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"HAND OF DARKNESS\"", 
-   Text = "Syntax : feel \"hand of darkness\" <victim>\
+   Keyword = "'HAND OF DARKNESS'", 
+   Text = "Syntax : feel 'hand of darkness' <victim>\
 \
 Cause heavy damage to target.\
 ", 
@@ -349,10 +303,10 @@ Cause heavy damage to target.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"HEIGHTENED ACCURACY\"", 
-   Text = "&CSyntax &R&W: &YHeightened Accuracy\
+   Keyword = "'HEIGHTENED ACCURACY' HEIGHTENEDACCURACY", 
+   Text = "&CSyntax &R&W: &YHeightenedAccuracy\
  \
-&cThis skill allows you to focus your energy to increase your accuracy.  It\
+&cThis skill allows you to focus your energy to increase your accuracy. It\
 raises your hitroll for a limited period.\
 ", 
 }
@@ -360,8 +314,8 @@ raises your hitroll for a limited period.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"HEIGHTENED AWARENESS\"", 
-   Text = "Syntax : feel \"heightened awareness\"\
+   Keyword = "'HEIGHTENED AWARENESS'", 
+   Text = "Syntax : feel 'heightened awareness'\
 \
 Allows user to detect characters sneaking around.\
 ", 
@@ -370,9 +324,9 @@ Allows user to detect characters sneaking around.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"HEIGHTENED STRENGTH\"", 
+   Keyword = "'HEIGHTENED STRENGTH' HEIGHTENEDSTRENGTH", 
    Text = ".\
-Syntax : Heightened accuracy\
+Syntax : HeightenedStrength\
  \
  Increase your hitroll for a short time.\
 ", 
@@ -381,8 +335,8 @@ Syntax : Heightened accuracy\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"INNER FORTRESS\"", 
-   Text = "Syntax : feel \"inner fortress\"\
+   Keyword = "'INNER FORTRESS'", 
+   Text = "Syntax : feel 'inner fortress'\
 \
 Improves constitution for a limited period.\
 ", 
@@ -391,8 +345,8 @@ Improves constitution for a limited period.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"INNER STRENGTH\"", 
-   Text = "&CSyntax &R&W: &YInner Strength\
+   Keyword = "'INNER STRENGTH' INNERSTRENGTH", 
+   Text = "&CSyntax &R&W: &YInnerStrength\
  \
 &cThis skill will increase both your constitution and your max hit points\
 for a short period of time.\
@@ -402,8 +356,8 @@ for a short period of time.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"INVADE ESSENCE\"", 
-   Text = "Syntax : feel \"invade essence\" <victim>\
+   Keyword = "'INVADE ESSENCE'", 
+   Text = "Syntax : feel 'invade essence' <victim>\
 \
 Causes damage to victim.\
 ", 
@@ -412,25 +366,18 @@ Causes damage to victim.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"JEDI MASTER\"", 
-   Text = "", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "\"KNOW ESSENCE\"", 
-   Text = "Syntax : feel \"know essence\" <target>\
+   Keyword = "'KNOW ESSENCE'", 
+   Text = "Syntax : feel 'know essence' <target>\
 \
-Dispels information on target.\
+Displays information on target.\
 ", 
 }
 
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"PICK LOCK\" PICKLOCK PICK", 
-   Text = "&CSyntax &W:&Y Pick (direction)\
+   Keyword = "'PICK LOCK' PICKLOCK PICK", 
+   Text = "&CSyntax &W:&Y Pick <direction>\
 &c\
 This skill enables you to pick open locked doors.\
 ", 
@@ -439,7 +386,7 @@ This skill enables you to pick open locked doors.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"PICK SHIP LOCK\" PICKSHIP PICKSHIPLOCK", 
+   Keyword = "'PICK SHIP LOCK' PICKSHIP PICKSHIPLOCK", 
    Text = "&CSyntax &R&W: &YPick &R&W<&YShip&R&W>\
  \
 &cA useful skill if you wish to get into someone's ship. \
@@ -452,21 +399,19 @@ for &YPick Ship Lock&r to work.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"POST GUARD\"", 
-   Text = "&CSyntax &W: &YPost guard \
+   Keyword = "'POST GUARD' POSTGUARD", 
+   Text = "&CSyntax &W: &YPostGuard \
   \
 &cThis posts a guard from your clan or organization at your location. \
 These guards will attack other clanned members beside your own. \
-  \
-&RSee also&W: &PRule 9 \
 ", 
 }
 
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"PROTECTION FROM DARKNESS\"", 
-   Text = "Syntax : feel \"protection from darkness\"\
+   Keyword = "'PROTECTION FROM DARKNESS'", 
+   Text = "Syntax : feel 'protection from darkness' <target>\
 \
 Protect users from the darkside for a limited period.\
 ", 
@@ -475,8 +420,8 @@ Protect users from the darkside for a limited period.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"REMOVE MASKING\"", 
-   Text = "Syntax : feel \"remove masking\" <victim>\
+   Keyword = "'REMOVE MASKING'", 
+   Text = "Syntax : feel 'remove masking' <victim>\
 \
 Makes victim visible.\
 ", 
@@ -485,8 +430,8 @@ Makes victim visible.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"REMOVE TRAP\"", 
-   Text = "Syntax : feel \"remove trap\" <target>\
+   Keyword = "'REMOVE TRAP'", 
+   Text = "Syntax : feel 'remove trap' <target>\
 \
 Remove trap.\
 ", 
@@ -495,8 +440,8 @@ Remove trap.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"RESTORATION\"", 
-   Text = "Syntax : feel \"restoration\"\
+   Keyword = "RESTORATION", 
+   Text = "Syntax : feel 'restoration'\
 \
 Requires two people to cast and heals one target.\
 ", 
@@ -505,8 +450,8 @@ Requires two people to cast and heals one target.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"SCORCHING SURGE\"", 
-   Text = "Syntax : feel \"scorching surge\" <victim>\
+   Keyword = "'SCORCHING SURGE'", 
+   Text = "Syntax : feel 'scorching surge' <victim>\
 \
 Cause great harm to victim.\
 ", 
@@ -515,17 +460,17 @@ Cause great harm to victim.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"SHIP MAINTENANCE\"", 
-   Text = "&cThis provides you with the ability to &YRepairship&c. \
+   Keyword = "'SHIP MAINTENANCE'", 
+   Text = "&cThis provides you with the ability to &YRepairShip&c. \
   \
-&RAlso see&W: &PHelp Repairship, Help Ships \
+&RAlso see&W: &PHelp RepairShip, Help Ships \
 ", 
 }
 
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"SHIP SYSTEMS\" ", 
+   Keyword = "'SHIP SYSTEMS' STATUS", 
    Text = "&CSyntax &W: &YStatus \
 &CSyntax &W: &YStatus <ship> \
   \
@@ -541,8 +486,8 @@ seat.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"SHOCKING GRASP\"", 
-   Text = "Syntax : feel \"shocking grasp\" <victim>\
+   Keyword = "'SHOCKING GRASP'", 
+   Text = "Syntax : feel 'shocking grasp' <victim>\
 \
 Send small lightning bolts through victim from your hands.\
 ", 
@@ -551,10 +496,10 @@ Send small lightning bolts through victim from your hands.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"SPACE COMBAT 1\" \"SPACE COMBAT 2\" \"SPACE COMBAT 3\"", 
+   Keyword = "'SPACE COMBAT 1' 'SPACE COMBAT 2' 'SPACE COMBAT 3'", 
    Text = "&CSyntax &R&W: &YAutomatic \
   \
-&R&cThese skills increase the damage you do in ships.  It acts like\
+&R&cThese skills increase the damage you do in ships. They act like\
 enhanced damage, except for ships.\
 ", 
 }
@@ -562,7 +507,7 @@ enhanced damage, except for ships.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"SPICE REFINING\"", 
+   Keyword = "'SPICE REFINING' MAKESPICE", 
    Text = "&CSyntax &W: &YMakespice &W<&YSpice&W> \
   \
 &cThis skill allows you to make spice usable for consumption.  You need to\
@@ -576,8 +521,8 @@ to work. \
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"UNRAVEL DEFENSE\"", 
-   Text = "Syntax : feel \"unravel defense\" <victim>\
+   Keyword = "'UNRAVEL DEFENSE'", 
+   Text = "Syntax : feel 'unravel defense' <victim>\
 \
 Makes victim more susceptable.\
 ", 
@@ -586,7 +531,7 @@ Makes victim more susceptable.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "\"WEAPON SYSTEMS\"", 
+   Keyword = "'WEAPON SYSTEMS'", 
    Text = "&CSyntax &W: &YTarget &W<&YShip&W> \
   \
 &cThis skill allows you to make use of a ship's weapon systems, ie firing\
@@ -594,37 +539,6 @@ and targeting with them. \
   \
 &RAlso see&W: &PHelp Ships \
 ", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "-PK- PK PKILL PKILLING RULE_12", 
-   Text = "&cPlayer killing is legal on Star Wars: Rise in Power. \
-  \
-However, please note the following: \
-&Y Keep pkilling in-character. \
-&Y Newbie killing is very discouraged/punishable. \
-&Y Ask an immortal before you kill, if you have \
-&Y questions about the validity of a pkill. \
-  \
-  \
-&cAny player-killer who has killed out-of-character will \
-Be slayed.  If the player-killer was ordered to do an \
-OOC kill, the player-killer and the person who ordered \
-The kill will be slayed, regardless on whether or not the \
-Player-killer was aware of the OOC situation or not. So \
-Be sure you get a reason for an ordered pk before you do it. \
- \
-&RSee also&W: &PHelp IC\
-", 
-}
-
-HelpEntry
-{
-   Level = 105, 
-   Keyword = "'104.REMOVE'", 
-   Text = "", 
 }
 
 HelpEntry
@@ -789,13 +703,12 @@ for payment must be made between the resident and the home owner.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "ADD_PATROL", 
-   Text = "&CSyntax&R&W : &YAdd_patrol \
+   Keyword = "'ADD PATROL' ADDPATROL", 
+   Text = "&CSyntax&R&W : &YAddPatrol \
  \
 &cThis allows you to call a guard from your clan or organization at your\
 location.  These guards act like posted guards, but will walk around. \
  \
-&RSee also&W: &Phelp guard_posting\
 ", 
 }
 
@@ -872,23 +785,6 @@ HelpEntry
 \
    Also credit to Ken Wellsch for porting the original Fortran-77 version\
    to UNIX-C (over a period of about 3 years) (c)1984.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "ADVERTIZING RULE_1", 
-   Text = "&c\
-Do not advertise another mud on ANY channel.  Doing so will get you \
-site-banned. This means giving out a name or site to another mud to \
-attract players there. It is considered rude in all circles.  I will \
-personally go to any MUD that is advertised And talk to the immortals\
-there.  People have been banned on THEIR mud for doing so. \
- \
-Also, I will ban any player found to be advertising on another MUD about\
-this one if it is illegal on said mud, and if an immortal complains to me\
-about the advertizing. \
 ", 
 }
 
@@ -1164,14 +1060,7 @@ to be recharged.  To recharge a blaster, you must find an ammunition cell.\
 
 HelpEntry
 {
-   Level = 104, 
-   Keyword = "AMOT", 
-   Text = "", 
-}
-
-HelpEntry
-{
-   Level = 0, 
+   Level = 100, 
    Keyword = "AMOTD", 
    Text = "No message of the day for avatars.\
 ", 
@@ -1199,13 +1088,6 @@ HelpEntry
 In your travels you may come across various ointments and salves, use\
 'apply' to rub them into your skin.\
 ", 
-}
-
-HelpEntry
-{
-   Level = 102, 
-   Keyword = "APPOINT PROMOTE", 
-   Text = "", 
 }
 
 HelpEntry
@@ -1544,13 +1426,6 @@ attain level 100 in at least one skill area.  \
 
 HelpEntry
 {
-   Level = 104, 
-   Keyword = "AVT", 
-   Text = "", 
-}
-
-HelpEntry
-{
    Level = 100, 
    Keyword = "AVTALK IMMTALK :", 
    Text = "&CSyntax &W:&Y immtalk <message>\
@@ -1660,13 +1535,6 @@ respect for the Jedi Knights. \
  \
 &RAlso Type&W:&Y SHOWSTAT BARABEL\
 ", 
-}
-
-HelpEntry
-{
-   Level = 102, 
-   Keyword = "BAS", 
-   Text = "", 
 }
 
 HelpEntry
@@ -1800,34 +1668,6 @@ rounds.  However, it only works when that person is stunned. \
 
 HelpEntry
 {
-   Level = 0, 
-   Keyword = "BIO DESCRIPTION RULE_7", 
-   Text = "&CSyntax &W: &YBIO\
-&CSyntax &W: &YDESCRIPTION\
- \
-&cThe &YBIO&c command puts you into an editor to edit your character's\
-personal biography.  It is what people see when they check WHOIS on you. \
-It should contain information about your character's past history, and any\
-other information that people should know when RPing with you.\
- \
-The &YDESCRIPTION&c command puts you in a similiar editor to edit your\
-character's description.  This is what people see when the LOOK at you. \
-This should be what your character looks like.\
-\
-&RA good description site:&W http://themudjournal.com/rp/ABCs-B.php3&R&c \
- \
-Once in the editor &Y/f&c will format, and &Y/s&c will save. \
- \
-&cBios and descriptions are required for all players after level \
-six.  After you reach level 100, you may be required to rewrite \
-your bio and description to be better quality, as avatars are \
-expected to have good roleplay abilities. &R&w\
- \
-", 
-}
-
-HelpEntry
-{
    Level = 1, 
    Keyword = "BLIND GOUGE BLINDNESS", 
    Text = "&R&cCertain powers and attacks can render a player blind for anywhere from\
@@ -1915,28 +1755,6 @@ of Endor, records were discovered at Mount Tantiss that told of the \
 Bothan involvement. \
  \
 &RAlso Type&W:&Y SHOWSTAT BOTHAN\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "BOUNTIES RULE_4", 
-   Text = "&c\
-PK is heavily restricted.  Paying a player to kill another can ONLY be\
-done if certain conditions are met:\
-1. The player to be hired must be a bounty hunter   OR\
-2. The target must be a bounty hunter itself. \
-\
-This does not include assistance in killing a player.  \
-This applies only to hired hits. \
-\
-All hired hits will be verified by an immortal BEFORE it is carried out.\
-If a hunter carries out a hit without immortal approval, that hunter may\
-Lose its position and its hunter levels.  A system will be set up to make\
-Communication between immortals and hunters easier.  &R&w\
- \
-&RSee also&W:&P Help Addbounty\
 ", 
 }
 
@@ -2040,19 +1858,7 @@ to the mud implementors.\
 
 HelpEntry
 {
-   Level = 1, 
-   Keyword = "BUG_ABUSE RULE_13", 
-   Text = "&c\
-Any abuse of a bug by a player or an immortal will result in an \
-Instant slay.  If you find a bug or see someone using a bug, report\
-It to Darrik via his mail account in the &Phelp Darrik&c pfile.  A\
-reward MAY be given determined by Darrik. &R&w\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
+   Level = 101, 
    Keyword = "BUILD BUILDING", 
    Text = "SWreality Building:\
                            TABLE OF CONTENTS\
@@ -2077,7 +1883,7 @@ See HELP BUILD1\
 
 HelpEntry
 {
-   Level = 1, 
+   Level = 101, 
    Keyword = "BUILD1 BUILDER1 BUILDING1", 
    Text = "SWReality Building Page 1:\
  \
@@ -2108,7 +1914,7 @@ see HELP BUILD2\
 
 HelpEntry
 {
-   Level = 1, 
+   Level = 101, 
    Keyword = "BUILD2 BUILDING2 BUILDER2", 
    Text = "SWReality Building Pg 2:\
                           ROOM BUILDING BASICS\
@@ -2140,7 +1946,7 @@ see HELP BUILD3\
 
 HelpEntry
 {
-   Level = 1, 
+   Level = 101, 
    Keyword = "BUILD3", 
    Text = "SWReality Building Pg 3\
                          MOB BUILDING BASICS\
@@ -2181,7 +1987,7 @@ see HELP BUILD4\
 
 HelpEntry
 {
-   Level = 1, 
+   Level = 101, 
    Keyword = "BUILD4", 
    Text = "SWReality Building Pg 4\
                        OBJECT BUILDING BASICS\
@@ -2214,7 +2020,7 @@ HelpEntry
    Text = "&c \
 To apply to build for Star Wars: Rise in Power: \
  \
-Send an email to Darrik@swrip.net. \
+Send an email to <insert@email.here>. \
 Include your past experience \
     ( Not necessary for hiring, we just like to know ) \
 Past characters on the mud, if any. \
@@ -2398,31 +2204,6 @@ under a planet or sun. \
 
 HelpEntry
 {
-   Level = 1, 
-   Keyword = "CAPITALRULES", 
-   Text = "&cCapital ships may now be destroyed even if they are unmanned. However,\
-this doesn't apply to all cases. Ships that are &Bunmanned and in their\
-clans' capital system may not be attacked&c. Manned ships in a clan's \
-capital system, however, may.\
-\
-&R   Clan                      ---                  Capital System\
-&cGalactic Empire&O                                     Coruscant\
-&cNew Republic&O                                         Calamari\
-&cAssassins Guild                                    &OOrd Mantell\
-&cBlack Sun&O                                           Coruscant\
-&c   Xizor Fleet Systems&O                            Asteroid 1234\
-&cOutlaw Techs&O                                           Hoth \
-&cTriad Syndicate&O                                       Bespin \
- \
-&R&WNote: &YUnmanned capital ships in safe sectors may NOT be sabotaged or\
-      otherwise harmed.\
-&WNote: &YUnmanned ships that are used deliberate in a battle are fair game\
-while that battle lasts.&R&w \
-", 
-}
-
-HelpEntry
-{
    Level = 0, 
    Keyword = "CAST FEEL", 
    Text = "&CSyntax &W:&Y feel <force power> <target>\
@@ -2489,145 +2270,6 @@ be flighty and have short attention spans, though they enjoy tinkering \
 with technological items. \
  \
 &RAlso type&W:&Y showstat chadra-fan\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "CHANGES", 
-   Text = "&c\
-New Space System is in! Help NEWSPACE for answers on the changes and how to\
-fly!. \
- \
-Chaos has a purse option, for quests and such. \
- \
-Ships will no longer refuel when taking off from midships and cap ships.\
-You will need to use the fuel command fromthe hanger.\
- \
-Ships has been changed. It will only show t hose ships you have access to.\
- \
-I have added two new wearlocs, over and floating.  Over can be used \
-with makearmor... closing a piece you have in your over wearloc will \
-keep others from seeing what you have worn under it. Floating objects\
-are only found in the game. There are only two, currently. However, \
-floating containers do not affect your weight. \
-\
-Economy is being 'tweaked' to work properly.  Hail, quit, and launch\
-have been modified to cost, or cost more, credits.  Those credits \
-will be output through selling items, delivering packages and repoping\
-mobs with credits, as it should. I will continue tweaking it until I \
-have it working properly, and realistically. \
-\
-The Serins have been completely revamped. each has its own route. Use the\
-findserin command to see them.\
-\
-Ship AI is smarter. Don't underestimate them. \
-\
-I have completed coding the basic modules, the ones governing ship stats. \
-Although I have built the items themselves for Z-100s, I still have far to\
-go, and can not work fast on them.  I was going to have the help of a\
-builder on the matter, but alas, Zilbringi appears to have disappeared. \
-Such is life. \
- \
-drag <person> out will work, now, for dragging people out of ships. \
-Oh, shove <person> in <ship and shove <person> out will work too :P \
-\
-&PSee Also: &WOLDCHANGES, OLDCHANGES2, OLDCHANGES3&R&w\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "CHANGESOLD OLDCHANGES", 
-   Text = "Coruscant has been redesigned to a smaller, less confusing, setup. \
-Luke has been morphed into Yoda and has been relocated to Dagobah.\
-Roleplaying is now enforced.  help roleplay for information.\
-BAYDOORS and Mass_prop have been added!!!!\
-Ship Docking and Tractor beams have been added!!!!\
-Request (open bay doors remotely) has been added!\
-Apprehend has been added for bhers. You can bring in those live bounties.\
-Cloak has been added, a disguise for forcers. \
-A new sensor system has been added, which has varying levels of detection\
-depending on distance, from full detail, to class type, to\
-non-detection.\
-Astroarray now determines how close your hyperjump will put you to your\
-calculated coordinates.\
-Makecomlink now accepts wearlocs!!\
-hail will now take two arguements to 'hail' a ship in space.\
-Upgradeship, buzz and invite (for visitors to homes) and sellhome added.\
-New ship alarm system added (upgradeship installalarm to install one at\
-space garage, costs 500k).\
-Bay doors on cap ships are closed on reboot.\
-Safe rooms have been removed from the game.\
-You can no longer run into the sun. The ship will automatically evade. \
-When you run out of energy, you will be stuck there. It will not recharge,\
-and it will not blow up. \
-reload <ship> will reload any ship on the ground.\
-Who on / Who off - Wholist cloaking, go invis on the wholist.\
-Who <clan> restricted to immortals only.\
- \
-Ion cannons added.\
-All leadership and diplomacy skills coded.\
-Addition of two Serins - Cassia and Siego.\
-Trainer ships added.\
-Bank transfers added.  'Help bank'\
-Who on/off added.\
-'Recho' added for mortals.  Rp purpose only.\
-Wizi imms show up as 'A Great One' instead of someone.\
-Jumpvector added. 'Help jumpvector'\
-Fake signal added for engineers.\
-'Bind' for Hunters added. 'Help bind'\
-Override added. 'Help override' This is a command, not a skill.\
-Hide changed to stealth.\
-Defels now hide, instead of invis.\
-Infrared goggles see hidden instead of invis.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "CHANGESOLD2 OLDCHANGES2", 
-   Text = "check 'oldchanges for ever earlier changes!!\
-Titles will show up on channels for visible and disguised\
-people.\
-Addresident and remresident added.  'Help addresident'\
-Some shopkeepers now speak multiple languages.\
-Can no longer launch from a ship with its bays closed.  Use\
-override.\
-'Speeders' and 'Speeder combat' skills added.\
-If you can fly a ship, you can addpilot/rempilot to it.\
-A couple of bug fixes. Gather int will return the same message whether\
-or not the person is online. \
-Sellship will eliminate pilot and copilot as well as just the owner.\
-Quest master is in!\
-Bank deposits will now accrue interest.\
-Salary can now be added with the command addsalary.\
-Salary and Empower can now be empowered to other members besides the\
-leader.\
-Tells and Reply have been modified due to mortal recommendation to\
-(Outgoing Message) and (Incoming Message)\
-Unjail has been added to compensate for the inconveniences of jail\
-<player 0> \
-Prompt has been brought down to a level 1 command now that I \
-discovered the cheat doesnt carry over to stock SWR.\
-Speeders will not be able to leave ships into indoor areas. \
-Cutdoor has been added... a doorbash for forcers... you need a \
-lightsber and lightsaber skill for it to work. \
-Steal will now only create a message to a PC instead of an autoattack. \
-NPC's will still autoattack of course. Also, Steal will not be able to \
-be learned past 50% on PCs. \
-You can now use a persons disguise to reference him/her/it \
-<attacking, looking> \
-You can now ask for <pay for?> enlistment centers for the syndicates. \
-Player Shops are coded! We just need to make rooms for them! \
-Aliases are in. \
-You can now sit, rest and sleep on furniture. \
-Duinuogwuin race replaced with the Sullustan race. \
-Bounty Hunting skills now give fail/success messages. \
-You can now put your position into your prompt. It is %p. \
 ", 
 }
 
@@ -2950,7 +2592,7 @@ HelpEntry
    Level = 0, 
    Keyword = "CLASS_DIPLOMAT", 
    Text = "Diplomat's also tend to have high leadership levels as well. Diplomat's can\
-'mass_propeganda', which will raise or lower popular support on a planet.\
+'MassPropaganda', which will raise or lower popular support on a planet.\
 'Seduce' will force a person or mob to follow you.   There are not many\
 diplomatic skills, but most get all the leadership skills as well.\
 ", 
@@ -2977,8 +2619,8 @@ HelpEntry
 guards, but they can post *elite* guards, as well as call special\
 forces... a more powerful form of reinforcements.  They also get dominate,\
 which will make a mob your slave, and torture, which will permanently\
-remove hitpoints from a person or a mob.  A new skill,\
-gather_intelligence, will gather information on an individual in the\
+remove hitpoints from a person or a mob.  Another skill,\
+GatherIntelligence, will gather information on an individual in the\
 game... anything from where he/she/it is at that moment, to what clan it\
 is in.\
 ", 
@@ -3086,33 +2728,6 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
-   Keyword = "CODE_AVOIDING CODE_AVOIDANCE RULE_10", 
-   Text = "&c\
-Using loops or bugs in the code to avoid a restriction is illegal.  This\
-Includes, for example, resigning from a clan in order to bypass code \
-restrictions of members in that clan. &R&w\
-", 
-}
-
-HelpEntry
-{
-   Level = 101, 
-   Keyword = "COINDUCT COOUTCAST", 
-   Text = "'Syntax:  coinduct  <player>\
-Syntax:  cooutcast <player>\
- \
-Coinduct and cooutcast are similar to the 'clan' commands of induct and\
-outcast, but function to induct or outcast members from councils.\
- \
-Coinduct will bring a new player into the council.\
-Cooutcast will remove them from the council.\
- \
-", 
-}
-
-HelpEntry
-{
    Level = 0, 
    Keyword = "COLOUR COLOR COLOURS COLORS PCOLORS", 
    Text = "&w^xThe foreground special character is:  &&\
@@ -3165,13 +2780,6 @@ can be done by using &YFLEE&c. \
  \
 &RSEE ALSO&W: &PKILL, MURDER, WIMPY, RESCUE, AID \
 ", 
-}
-
-HelpEntry
-{
-   Level = 102, 
-   Keyword = "COMBAT_CLASS", 
-   Text = "", 
 }
 
 HelpEntry
@@ -3562,13 +3170,6 @@ behind as a warning.\
 
 HelpEntry
 {
-   Level = 102, 
-   Keyword = "CORPSES", 
-   Text = "", 
-}
-
-HelpEntry
-{
    Level = 1, 
    Keyword = "CORULAG", 
    Text = "&CSystem &W:&Y Corulag\
@@ -3688,38 +3289,6 @@ was similar to the En'Tra'Sol in many respects. One code is known as \
 the Cradle Law. \
 \
 &RAlso Type&W:&Y SHOWSTAT COYNITE\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "CREATING HELPFILES", 
-   Text = "Guess what? We need more helpfiles. \
- \
-Silphion is working on updating our old smaug ones, which... just don't\
-fit. \
- \
-What we need are good ones, about playing the game...\
-roleplay, money making, descriptions. \
-Things that will help the newbie... things that only you players know. \
- \
-So, we are asking you to write some. \
- \
-Send them to Darrik@swrip.net.  We will review them. \
- \
-If we put them in the game, you will be rewarded. \
- \
-The reward of course, will be based on HOW good the help file is. \
- \
-The reward will most likely take the form of quest points. \
- \
-Don't worry, Naz is working on objects that you will be able to buy with\
-them.  Unbalanced Mandalorian Armor aside. \
- \
-That's all. Good luck, have fun. \
- \
-DV.\
 ", 
 }
 
@@ -3882,29 +3451,6 @@ energy          suscept      summon                    breath\
 acid            divinate     life                      power_staff\
 poison          obscure      death\
 drain           change       illusion\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "DARRIK", 
-   Text = "The came from the woodwork to listen to the fears,\
-Savoring the taste of a little child's tears.\
-Bogeyman in the closet, monsters under the bed, Terrors of the night\
-creeping into your head.\
-There's no place to hide when you are alone,\
-Under the covers shaking to the bone.\
-Take a deep breath and try to relax,\
-Try to forget the man with the axe.\
-But they whisper to you from deep in the night,\
-And you are too scared to turn on the light.\
-So fear the night terrors my dear little ones,\
-And pray for the rise of the new morning sun.\
- \
-Email: Darrik@swrip.net\
- \
-Darrik Vequir \
 ", 
 }
 
@@ -4229,12 +3775,12 @@ order to use many diplomatic skills, one must be a part of a clan or\
 organization. \
  \
 &RAlso see&W: &PHelp Aid\
-          Help \"First Aid\"\
+          Help FirstAid\
           Help Smalltalk\
           Help Bribe\
           Help Propaganda\
           Help Seduce\
-          Help \"Mass propaganda\"\
+          Help MassPropaganda\
  \
 &RAlso type&W: &Yshowstat diplomat\
 ", 
@@ -4718,8 +4264,8 @@ description or other long bodies of text. The commands in the editor are:\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "ELITE_GUARD", 
-   Text = "&CSyntax &R&W: &YElite_guard\
+   Keyword = "'ELITE GUARD' ELITEGUARD", 
+   Text = "&CSyntax &R&W: &YEliteGuard\
  \
 &cThis skill allows you to call an elite guard to your location.  Elite\
 guards act like posted guards, but are much stronger and experienced.\
@@ -5167,13 +4713,6 @@ Sends a fireball at victim.\
 
 HelpEntry
 {
-   Level = 102, 
-   Keyword = "FIRRERRE", 
-   Text = "", 
-}
-
-HelpEntry
-{
    Level = 1, 
    Keyword = "FIRRERREO", 
    Text = "&COrigin&W:&Y Firrerre\
@@ -5197,11 +4736,11 @@ clan affiliations, and a fair amount of Force sensitivity. \
 HelpEntry
 {
    Level = 1, 
-   Keyword = "FIRSTAID \"FIRST AID\" MEDPAC", 
-   Text = "&CSyntax &R&W: &YFirst &R&W<&YPlayer&R&W>\
-         &YFirst self\
+   Keyword = "'FIRST AID' FIRSTAID MEDPAC", 
+   Text = "&CSyntax &R&W: &YFirstAid &R&W<&YPlayer&R&W>\
+         &YFirstAid self\
  \
-&cFirst aid, along with a medpac, allows you to heal minor damage to\
+&cFirstAid, along with a medpac, allows you to heal minor damage to\
 yourself, or another character.\
  \
 &RSee also&W:&P AID\
@@ -5577,13 +5116,6 @@ CLANTALK, ORDERTALK, AND GUILDTALK &cchannels for clans, guilds, and orders\
 
 HelpEntry
 {
-   Level = 102, 
-   Keyword = "GAMMOREAN", 
-   Text = "", 
-}
-
-HelpEntry
-{
    Level = 1, 
    Keyword = "GAMORR", 
    Text = "&CSystem &W:&Y Opoku\
@@ -5650,16 +5182,9 @@ the Gand have certain regenerative properties. \
 
 HelpEntry
 {
-   Level = 102, 
-   Keyword = "GATHER_INT", 
-   Text = "", 
-}
-
-HelpEntry
-{
    Level = 1, 
-   Keyword = "GATHER_INT GATHER_INTELLIGENCE 'GATHER INTELLIGENCE'", 
-   Text = "&CSyntax &W: &YGather <Player> \
+   Keyword = "'GATHER INTELLIGENCE' GATHERINTELLIGENCE", 
+   Text = "&CSyntax &W: &YGatherIntelligence <Player> \
  \
 &cThis skill will attempt to retrieve information about a character, such\
 as their location, skill focus, organization they belong to, and others.\
@@ -5932,21 +5457,7 @@ will not move from its current location unless under direct control.\
  \
 &RNOTE: &wGuard is a level 30 command. \
  \
-&RSEE ALSO&W:&P AUTOPILOT CAPITAL_RULES\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "GUARD_POSTING RULE_9", 
-   Text = "&c\
-The skills post_guard, add_patrol, and elite_guard post guards that will\
-Attack a person of any other clan automatically.  These guards are \
-Restricted to clan-held or private areas, such as ships.  Multiple \
-Violations to this rule will be dealt with harshly.  If a guard is posted\
-On a landing pad with security guards or other high level guards that \
-Will assist the posted guards, the poster will be slayed. &R&w\
+&RSEE ALSO&W:&P AUTOPILOT\
 ", 
 }
 
@@ -6035,13 +5546,6 @@ HelpEntry
 \
 Causes damage to victim.\
 ", 
-}
-
-HelpEntry
-{
-   Level = 105, 
-   Keyword = "HCANGES", 
-   Text = "", 
 }
 
 HelpEntry
@@ -6147,7 +5651,7 @@ You can also type hlist to get a list of ALL help topics. \
 
 HelpEntry
 {
-   Level = 1, 
+   Level = 101, 
    Keyword = "HELP BUILD5", 
    Text = "SWreality Building Pg 5\
 ", 
@@ -6155,7 +5659,7 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
+   Level = 101, 
    Keyword = "HELP BUILD6", 
    Text = "SWreality Building Pg 6\
 ", 
@@ -6163,7 +5667,7 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
+   Level = 101, 
    Keyword = "HELP BUILD7", 
    Text = "SWreality Building Pg 7\
 ", 
@@ -6171,7 +5675,7 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
+   Level = 101, 
    Keyword = "HELP BUILD8", 
    Text = "SWreality Building Pg 8\
 ", 
@@ -6179,7 +5683,7 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
+   Level = 101, 
    Keyword = "HELP BUILD9", 
    Text = "SWreality Building Pg 9\
 ", 
@@ -6187,14 +5691,7 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 102, 
-   Keyword = "HELP PILOT", 
-   Text = "", 
-}
-
-HelpEntry
-{
-   Level = 100, 
+   Level = 101, 
    Keyword = "HELPFILE FILE HELPFILES", 
    Text = "To edit/make a help file there are some basic and yet confusing\
 commands\
@@ -6339,23 +5836,6 @@ poison it by planting modified kholm grass. This modified grass would \
 choke out all other vegetation, while making it appear that the planet \
 could still support life.\
  \
-&RSee also&W:&P HONOGHRRULES\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "HONOGHRRULES", 
-   Text = "&c\
-Honoghr is the planet of the Noghri.  Heavily controlled by the Empire \
-in this timeline.  It's space is patrolled by an agressive fleet.  Any \
-ship entering their space will be destroyed. \
- \
-Once rediscovered by the Empire, that fleet may allow imperial ships \
-in.  Anyone entering the Empire, and proceeding to Honoghr, without \
-IC reason to do so, will be helled and any equipment from the planet \
-confiscated. \
 ", 
 }
 
@@ -6432,13 +5912,6 @@ Note:  If you have instances of multiple help files with the same keyname,\
  \
 See also: HEDIT\
 ", 
-}
-
-HelpEntry
-{
-   Level = 101, 
-   Keyword = "HSET HEDIT", 
-   Text = "", 
 }
 
 HelpEntry
@@ -6757,59 +6230,6 @@ Creates a ball of force light.\
 
 HelpEntry
 {
-   Level = 0, 
-   Keyword = "IMMD1", 
-   Text = ".\
-First, I would like to start off saying that this is a roleplay \
-mud.  This means, that ooc information and ooc identities have \
-absolutely nothing to do with the actions on the mud. Half of \
-the immortals on this mud were imm'd because of respect gained \
-in their use of roleplay and their ability to distinguish \
-between OOC and IC.  That ability does not disappear over time, \
-believe me.  That is why they act as RP police, and most of \
-them have kept their mortals, for the same reason they started \
-to play here, they love roleplaying.\
-Lately, these people have been getting harrassed by people\
-who walk up to them and talk to them, or even taunt them, oocly, \
-as if they were the person in front of the monitor, instead of \
-the character they play here.  This blatant disregard for \
-roleplay is disrespectful to all involved. This is an rp-enforced \
-mud. Anyone continuing to do this will be dealth with properly. \
-&RCont in IMMD2&R&w\
-", 
-}
-
-HelpEntry
-{
-   Level = 105, 
-   Keyword = "IMMD1 LEVEL 0", 
-   Text = "", 
-}
-
-HelpEntry
-{
-   Level = 0, 
-   Keyword = "IMMD2", 
-   Text = "We allow mortal's here on RiP for two reasons. The first, the \
-obvious, is that the immortals here mostly came to play, and \
-became staff later. They enjoying playing RiP, and wish to \
-continue to do so. \"That's great!\" you say, \"but they do not \
-need to hide who their morts are!\" Ah, but they do, for the\
-second reason, which is to get the feel of the \
-mud. Several times, the implementors have found that the mud's \
-population has gone down over the last week, and they wonder \
-why. Well, asking the question over the imm channel gives a \
-few great ideas, and implementing these ideas has brought the \
-population up once again.  If everyone on the mud can honestly \
-say they will talk as freely and openly to someone they know \
-is an immortal as they would to a long-time roleplayer, then \
-I am sure every immortal would be happy to tell you who they \
-play as, since their characters is a point of pride for everyone. \
-", 
-}
-
-HelpEntry
-{
    Level = 101, 
    Keyword = "IMMORTALIZE", 
    Text = "Syntax:  immortalize <character>\
@@ -6818,27 +6238,6 @@ Used to advance a level 50 character (avatar) to level 51 (the first\
 level of immortality).  This command will destroy the character's\
 inventory and display to them a pre-written message.\
 ", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "IMMORTAL_RESPECT RULE_14", 
-   Text = "&c\
-The immortals work hard on Rise in Power and deserve your respect.  \
-Any disrespect will be punished, right up to and including slaying and \
-Siteban.  However, this works both ways.  Immortals are required to \
-Show respect to mortals unless it is no longer deserved.  Any disobeying \
-Of this rule can result right up to and including slaying and siteban.\
-&R&w\
-", 
-}
-
-HelpEntry
-{
-   Level = 104, 
-   Keyword = "IMMT", 
-   Text = "", 
 }
 
 HelpEntry
@@ -7053,33 +6452,6 @@ disables a ship.\
 HelpEntry
 {
    Level = 101, 
-   Keyword = "IRULES", 
-   Text = "Immortal Rules:\
- \
-* No unnecessary action is to be taken against players. If a player is\
-causing trouble, a warning is to be first given, followed by hell if\
-necessary. Slay and such commands are highly discouraged and immortals\
-caught using them unnecessarily will be\
-seriously dealt with.\
-\
-* No bogus items are to be created (rooms, objects, areas, etc.) This makes\
-the db messy and is hard to clean up.\
-* Do not create too many items for personal use. One ship is of course ok\
-but don't go overboard.\
- \
-* For immortals who can promote players to immortals, no player is to be\
-given immortal status without consulting the other\
-imms.\
-The same goes for promoting immortals. This includes commands such as\
-trust, etc. (Yes, this includes me too.)\
- \
-Uly\
-", 
-}
-
-HelpEntry
-{
-   Level = 101, 
    Keyword = "ITEMVALUES", 
    Text = "In these values, 'sn' is a power number;  a negative value means 'no power'.\
 Item Type |V0         |V1          |V2         |V3         |V4       |V5\
@@ -7199,7 +6571,7 @@ Akkik\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "JEDIS \"JEDI KINGHT\" JEDI", 
+   Keyword = "JEDIS \"JEDI KNIGHT\" JEDI", 
    Text = "&CJedi Apprentice:&c\
 A jedi apprentice must have a max force of 25+ and must be inducted by\
 a master. \
@@ -7303,20 +6675,6 @@ crew chiefs. Doole had the atmospheric production reduced in an effort\
 to save money; he felt that since the prisoners worked underground, an\
 above-ground atmosphere was a frivolous waste of money. \
 ", 
-}
-
-HelpEntry
-{
-   Level = 102, 
-   Keyword = "KEYWORD 'ACCELERATE VELOCITY' VELOCITY", 
-   Text = "", 
-}
-
-HelpEntry
-{
-   Level = 105, 
-   Keyword = "KEYWORD DELETE", 
-   Text = "", 
 }
 
 HelpEntry
@@ -7502,49 +6860,14 @@ person or a mob.  A leadership centered character is usually weaker in\
 areas such as combat and piloting, and stronger in diplomacy.\
  \
 &RSee also&W: &PHelp Jail\
-          Help \"Post Guard\"\
-          Help Add_patrol\
+          Help PostGuard\
+          Help AddPatrol\
           Help Reinforcements\
           Help Dominate\
-          Help Elite_guard\
+          Help EliteGuard\
           Help Torture\
-          Help Special_forces\
-          Help Gather_intelligence\
-", 
-}
-
-HelpEntry
-{
-   Level = 105, 
-   Keyword = "LEVEL 1 IMMD1", 
-   Text = "", 
-}
-
-HelpEntry
-{
-   Level = 105, 
-   Keyword = "LEVEL 1 JEDI", 
-   Text = "Apprentice:\
-A jedi apprentice must have a max force of 25+ and must be inducted\
-by\
-a master.\
- \
-Jedi Knight:\
-A jedi knight must be skilled in combat (Thats 75%), and must be at\
-least\
-level 10 in leadership.  A knight must be maxed out in at least two\
-specialties,\
-one being force, which must be at least 25.  Your stats must be maxed. \
-You must also have created your first lightsaber.\
- \
-Jedi Master:\
-You must be level 75 Force, maxed out combat, leadership, and\
-piloting.\
-The only way you can be advanced to Master is to complete a quest,\
-which\
-will be roleplay related in that it will have something to do with\
-the\
-force.\
+          Help SpecialForces\
+          Help GatherIntelligence\
 ", 
 }
 
@@ -7973,55 +7296,6 @@ newly created wizlist.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "MANDALOR", 
-   Text = "Email:  caggin@hotmail.com\
- \
-'The crows seem to be calling my name,' thought Caw.\
- \
-  /\\____/\\\
-  | *  * |    &YMeow&R&W\
- \
-&cHelp Files Finished:\
-     &CRaces (All) \
-     Pkill\
-     Multi\
-     Piloting Skills \
-     Engineering Skills\
-     Bounty Hunting Skills\
-     Smuggling Skills\
-     Diplomacy Skills\
-     Leadership Skills\
-     Clone\
-     Death / Suicide\
- \
-&cSpace Ghost - Coast to Coast\
- \
-&CMoltar:&P So, Mark... what was it like working with Lord Vader?\
-&CMark Hamil: &POh it was great... James Earl Jones is amazing. \
-&CZorak: &PInfidel!  David Prowse is the true Lord Vader!\
-&CMoltar: &PDavid who?  James Earl Jones!\
-&CMark Hamil: &P*laugh* You got me there...\
-&CMoltar: &PNo!  James Earl Jones!!\
-&CZorak: &PDavid Prrroooooowwwssseeee!\
-&R&W\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "MANNED RULE_8", 
-   Text = "&c\
-If you are on a ship, and that ship has a turret from which \
-you can fire, or if not, if you can turn the autopilot off, \
-whether you can move the ship or not, that ship is considered \
-manned. &R&w\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
    Keyword = "MASK", 
    Text = "&CSyntax &W:&Y feel mask\
  \
@@ -8032,20 +7306,13 @@ HelpEntry
 HelpEntry
 {
    Level = 1, 
-   Keyword = "MASS MASS_PROPEGANDA \"MASS PROPEGANDA\"", 
-   Text = "&CSyntax &R&W: &YMass_prop &R&W<&YCitizen&R&W> \
+   Keyword = "'MASS PROPAGANDA' MASSPROPAGANDA", 
+   Text = "&CSyntax &R&W: &YMassPropaganda &R&W<&YCitizen&R&W> \
  \
-&cThis allows you to spread propeganda to all the citizens on a planet\
+&cThis allows you to spread propaganda to all the citizens on a planet\
 through one citizen.  The actual number for this is +/-&R&W(Number of\
 citizens on the planet)&Y*&c2.5.\
 ", 
-}
-
-HelpEntry
-{
-   Level = 103, 
-   Keyword = "MASTRO", 
-   Text = "", 
 }
 
 HelpEntry
@@ -9281,22 +8548,6 @@ use: mset <mob#> flags nokill\
 
 HelpEntry
 {
-   Level = 1, 
-   Keyword = "NONMUD_INFORMATION NON-MUD_INFORMATION RULE_11", 
-   Text = "&c\
-Information must be passed along MUD channels.  ICQ, AIM, and \
-Other instant messenger programs, as well as phone or same-room \
-Conversations, are NOT acceptable channels.  The one exception to \
-This rule is any non-instant form of communication such as E-mail, \
-Where large amounts of information can be transferred in such a way \
-That is not possible over mud-mail.  This rule is to help immortals \
-Patrol for multiplaying.  Any person violating this rule may be slayed \
-For multiplaying. &R&w\
-", 
-}
-
-HelpEntry
-{
    Level = 101, 
    Keyword = "NORESOLVE", 
    Text = "Syntax:  noresolve\
@@ -9526,13 +8777,6 @@ Use           <percentage>        [see 'help useprog' for details]\
  \
 For objects see also: OPSTAT, OPEDIT, TRIGGER, OPCOMMANDS, IFCHECKS, VARIABLES.\
 ", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "OFFICER", 
-   Text = "", 
 }
 
 HelpEntry
@@ -9989,24 +9233,6 @@ See VSEARCH\
 
 HelpEntry
 {
-   Level = 102, 
-   Keyword = "PAGELEGNTH", 
-   Text = "", 
-}
-
-HelpEntry
-{
-   Level = 0, 
-   Keyword = "PAGELENGTH", 
-   Text = "&CSyntax &W:&Y pagelength <number of lines>\
-&c\
-This command sets your screen to only display a certain amount of lines.\
-After setting pagelength, type clear to reinitialize your screen.\
-", 
-}
-
-HelpEntry
-{
    Level = 101, 
    Keyword = "PARDON", 
    Text = "Syntax: pardon <character> killer\
@@ -10200,13 +9426,6 @@ give them.\
 
 HelpEntry
 {
-   Level = 102, 
-   Keyword = "PLUOGUS", 
-   Text = "", 
-}
-
-HelpEntry
-{
    Level = 0, 
    Keyword = "POISON", 
    Text = "Syntax: feel poison <victim>\
@@ -10238,13 +9457,6 @@ HelpEntry
  \
 This power enables you to switch into a mob for a short amount of time.\
 ", 
-}
-
-HelpEntry
-{
-   Level = 102, 
-   Keyword = "POSTGUARD", 
-   Text = "", 
 }
 
 HelpEntry
@@ -10293,32 +9505,32 @@ game default.  Otherwise you may use any string you want.  A few special\
 characters may be embedded into the string to customize it to your\
 player, followed by a token indicating what action to take.\
  \
-The first special character is:  %\
-Tokens for % are:\
-  %h  - current hitpoints\
-  %H  - maximum hitpoints\
-  %m  - current forcepoints\
-  %M  - maximum forcepoints\
-  %v  - current movement\
-  %V  - maximum movement\
-  %g  - gold held\
-  %a  - your alignment\
-  %r  - vnum of current room (Immortal only)\
-  %R  - vnum of current room (Immortal only, and only if config +vnum is\
+The first special character is:  $\
+Tokens for $ are:\
+  $h  - current hitpoints\
+  $H  - maximum hitpoints\
+  $m  - current forcepoints\
+  $M  - maximum forcepoints\
+  $v  - current movement\
+  $V  - maximum movement\
+  $g  - credits held\
+  $a  - your alignment\
+  $r  - vnum of current room (Immortal only)\
+  $R  - vnum of current room (Immortal only, and only if config +vnum is\
         set.  Shows '<#vnum> ', including trailing space)\
-  %x  - current experience\
-  %X  - experience needed to gain a level\
-  %i  - Wizinvis (Immortal only, shows '(Invis Lv) ', including trailing\
+  $x  - current experience\
+  $X  - experience needed to gain a level\
+  $i  - Wizinvis (Immortal only, shows '(Invis Lv) ', including trailing\
         space)\
-  %I  - Raw wizinvis (Immortal only, only shows 'Lv', and only if wizinvis\
+  $I  - Raw wizinvis (Immortal only, only shows 'Lv', and only if wizinvis\
         is active)\
-  %p  - Position (ie Resting, Sitting, Sleeping)\
+  $p  - Position (ie Resting, Sitting, Sleeping)\
  \
 The other special characters are:\
   &&  - Foreground color\
   ^^  - Background color\
  \
-Example: Prompt %h%m%v\
+Example: Prompt $h$m$v\
          Will give you a prompt of current hit points, force, and movement.\
  \
 Please see HELP COLORS for a list of the color tokens.\
@@ -10328,11 +9540,11 @@ Please see HELP COLORS for a list of the color tokens.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "PROPEGANDA", 
-   Text = "&CSyntax &R&W: &YPropeganda &R&W<&YCitizen&R&W> \
+   Keyword = "PROPAGANDA", 
+   Text = "&CSyntax &R&W: &YPropaganda &R&W<&YCitizen&R&W> \
  \
 &cThis increases your clan's popular support if they control the planet or\
-decreases it if they don't.  Actual number is +/-2.5 per successful\
+decreases it if they don't. Actual number is +/-2.5 per successful\
 conversation. \
 ", 
 }
@@ -10532,18 +9744,6 @@ The sleeping compartment on the &CPLUOGUS&c.&W \
 HelpEntry
 {
    Level = 1, 
-   Keyword = "QUITTING_RULES RULE_5", 
-   Text = "&c\
-Quitting the game, flagging yourself AFK, or otherwise using OOC \
-commands to get out of an ic situation is highly illegal. If the immortal\
-involved decides you would have died if you had not, you will be \
-slayed. There are no exceptions to this rule. &R&w\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
    Keyword = "RACE RACES", 
    Text = "&W0.  &cHuman                &W19. &cDevaronian\
 &W1.  &cWookiee              &W20. &cGotal\
@@ -10722,13 +9922,6 @@ See EXITTYPES, EXFLAGS, EXITMAKING, SECTORTYPES and ROOMFLAGS.\
 
 HelpEntry
 {
-   Level = 103, 
-   Keyword = "REDIT_FLAGS", 
-   Text = "", 
-}
-
-HelpEntry
-{
    Level = 101, 
    Keyword = "REDRAW", 
    Text = "Syntax: redraw\
@@ -10774,13 +9967,6 @@ HelpEntry
  \
 &RAlso see:&P Help Order\
 ", 
-}
-
-HelpEntry
-{
-   Level = 104, 
-   Keyword = "REMOVE", 
-   Text = "", 
 }
 
 HelpEntry
@@ -11113,22 +10299,6 @@ See MENU for generic menu commands.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "ROBERT", 
-   Text = "If you need something mail me.\
-Robert@swrip.net\
-", 
-}
-
-HelpEntry
-{
-   Level = 104, 
-   Keyword = "ROBERT LEVEL 1", 
-   Text = "", 
-}
-
-HelpEntry
-{
-   Level = 1, 
    Keyword = "ROCHE", 
    Text = "&CSystem &W:&Y Roche\
 &CInhabitants &W:&W Verpine, Barabels, Kubaz\
@@ -11360,24 +10530,6 @@ See RPEDIT, TRIGGER, RPTRIGGERS, RPCOMMANDS, IFCHECKS, IFCHECKS2, VARIABLES\
 
 HelpEntry
 {
-   Level = 1, 
-   Keyword = "RP_CHANNELS RULE_16", 
-   Text = "&c\
-The chat channel, the tell channel, the clan channel and the system channel\
-Are all IC channels that include your name or disguise when you speak on \
-Them.  However, despite this code, the name you see can NOT be used Icly \
-Unless you have met the person before and spoken to him, her or it, or \
-Unless you know their voice from another source.  This will be verified by\
-The immortals if a question comes up. &R&w\
- \
-&RSending an OOC tell to a person, enemy or otherwise, to see if they\
-are online is a slayable offense.  I will begin to deal with these harshly.\
-There will not be a warning beyond this message. &R&w\
-", 
-}
-
-HelpEntry
-{
    Level = 101, 
    Keyword = "RRESET", 
    Text = "Syntax: rreset <list|edit|delete|add|insert|place>\
@@ -11395,73 +10547,6 @@ Syntax: rreset bit <set|toggle|remove> object <obj name> <extra flags>\
 Syntax: rreset bit <set|toggle|remove> mobile <mob name> <affect flags>\
 Syntax: rreset bit <set|toggle|remove> room <room flags>\
 Syntax: rreset random <last dir>\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "RULES POLICY LAWS", 
-   Text = "&c\
-Breaking rules will have consequences.\
- \
-&c1.  &WDo not advertise another mud. \
-    &RHelp&R advertising\
- \
-&c2.  &WNo Muliplaying.  &RHelp&R Multiplay\
- \
-&c3.  &WShip destruction must be done for IC reasons. \
-    &RHelp&R ship_destruction.\
- \
-&c4.  &WPaid killing will be done by the Hunters. &RHelp&R Bounties.\
- \
-&c5.  &WUsing QUIT or AFK to avoid a situation is illegal.  \
-     &RHelp Quitting \
- \
-&c6.  &WShip owning is limited.  &RHelp&R ship_limits.\
- \
-&c7.  &WBios and descriptions are required. &RHelp&R Bio.\
- \
-&c8.  &GCapital Ships may be destroyed now, with exceptions.\
-    &RHelp Manned, Help CapitalRules\
- \
-&c9.  &WGuards can only be posted in clan or private areas.  \
-    &RHelp&R Guard_posting. \
- \
-&c10. &WAvoiding a code restriction by doing something OOC is illegal.\
-    &Rhelp&R code_avoiding.\
- \
-&c11. &WInformation must be passed along MUD channels.  \
-    &RHelp&R Nonmud_information.\
- \
-&c12. &WPK is done for IC reasons. The killer will be punished.  \
-    &RHelp&R PK.\
- \
-&c13. &WBug abuse is a slayable offense. &RHelp&R Bug_abuse.\
- \
-&c14. &WImmortals work hard and deserve your respect.  &RHelp&R Rule_14. \
-  \
-&c15. &WTitles must be visible to all players. &RHelp&R title_restrictions.\
- \
-&c16. &WNames on channels are not known IC unless met before. \
-    &RHelp&R RP_Channels.\
- \
-&c17. &WTriggers are illegal, conditionally. &RHelp triggers&R&c \
- \
-&c18. &WUsing arena to get out of hell is slay offense, no excuse. \
-&YSee Help Rules2&R&W\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "RULES2 RULES_2 MORE_RULES", 
-   Text = "&c19. &zInfiltrating clans as a newbie to assassinate members is illegal.\
-        &RHelp Infiltrate&R&W\
- \
-&c20. &zKilling a player simply because you want their ship is illegal. \
-        &RHelp Ship_Related_PK.&R&W\
 ", 
 }
 
@@ -11521,34 +10606,6 @@ a level in battle, getting new items, making purchases or repairs, etc.\
  \
 Some objects (such as keys) may not be saved.\
 ", 
-}
-
-HelpEntry
-{
-   Level = 103, 
-   Keyword = "SAVE AMOTD", 
-   Text = "", 
-}
-
-HelpEntry
-{
-   Level = 105, 
-   Keyword = "SAVE DOCK", 
-   Text = "", 
-}
-
-HelpEntry
-{
-   Level = 105, 
-   Keyword = "SAVE DUINUOGWUIN", 
-   Text = "", 
-}
-
-HelpEntry
-{
-   Level = 105, 
-   Keyword = "SAVE JEDI KINGHT", 
-   Text = "", 
 }
 
 HelpEntry
@@ -11697,10 +10754,10 @@ is charmed by another player.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "SEE MASKING \"SEE MASKING\" SEE_MASKING", 
-   Text = "&CSyntax &R&W: &YSee Masking\
+   Keyword = "'SEE MASKING' SEEMASKING", 
+   Text = "&CSyntax &R&W: &YSeeMasking\
 \
-&cThis skill allows you to see things that are masked(invisible), both\
+&cThis skill allows you to see things that are masked (invisible), both\
 objects and creatures.\
  \
 See Masking simply means you have the ability IC to see characters \
@@ -11925,55 +10982,6 @@ out of hyperspace periodically, allowing you to  \
 check your radar. \
  \
 &RSee Also&W:&P JUMPVECTOR COURSE HYPERSPACE\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "SHIP_DESTRUCTION RULE_3", 
-   Text = "&c\
-Destruction of ships must be done for IC reasons.  If you have a grudge\
-Against the owner, this is acceptable.  Destruction of a ship because \
-You are a 'pirate' or a psycho, is not. A ship can not be blown up and\
-Then bought by the person or by a person who hired the person who \
-Destroyed that ship, whatever the reason the ship was destroyed. \
-Destroying a system hopper or another pubic ship should be done \
-Only if all other possibilities have been exhausted.  Newbies fly these\
-Ships often, and we prefer them to remain alive to learn how to 'ID'.\
-&R&w\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "SHIP_MAXES SHIP_LIMITS RULE_6", 
-   Text = "&c\
-A player can ONLY own 1 starfighter and 1 midship.  Capital \
-ships and platforms are unlimited, if you can afford them and \
-find an immortal to make them for you. \
- \
-Anyone found breaking this limit will have ALL ships of that \
-Particular type removed from that player's ownership. \
- \
-&RUnder no circumstances should a criminal family own more than 10 fighters\
-and midships combined. Also, these new ships are for characters, not\
-clans. I do not want the clans buying them. \
-&R&w\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "SHIP_RELATED_PK SHIP_PK RULE_20", 
-   Text = ".\
-&cKilling someone simply because you desire their ship is in no way shape\
-or form acceptible. There are no exceptions. You may not kill someone\
-because they purchased your ship after death. Again, there are no\
-exceptions. Should you ignore these rules and kill someone for their ship,\
-you will be &RSLAIN&c.&R&W\
 ", 
 }
 
@@ -12375,37 +11383,6 @@ Removes a character's inebriation and all affects of alcohol.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "SOLDIER SOLDIERS", 
-   Text = "", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "SONJA", 
-   Text = "I am Sonja. I'm the bitch. I'm not just a bitch, I'm the Bitch, and it's\
-MRS. Bitch to you. I have a short fuse, and if you're reading it, it's\
-more than likely you're on the burning end of said fuse. I'm responsible\
-for keeping you guys in line, and I'm responsible for making certain\
-things run smoothly. Don't push my buttons and we'll all get along fine..\
-just fine..  \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "SOUND", 
-   Text = "&CSyntax &W:&Y sound &W<&Yon&W/&Yoff&W>\
-&c\
-This toggles the sound support commands for your mudclient.  This can also\
-be done with the &YCONFIG&c command. \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
    Keyword = "SPACE SHIP SHIPS FLIGHT SPACECRAFT", 
    Text = "The following are commands you can use to control spacecraft: \
 &z.\
@@ -12504,10 +11481,10 @@ spec_police_jail, spec_police\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "SPECIAL_FORCES 'SPECIAL FORCES'", 
-   Text = "&CSyntax &R&W: &YSpecial_forces\
+   Keyword = "'SPECIAL FORCES' SPECIALFORCES", 
+   Text = "&CSyntax &R&W: &YSpecialForces\
  \
-&cThis allows you to call elite troops to do your bidding.  Special forces\
+&cThis allows you to call elite troops to do your bidding. Special forces\
 are like reinforcements, but much stronger and more expensive.\
 ", 
 }
@@ -12661,17 +11638,6 @@ calculation. \
 HelpEntry
 {
    Level = 1, 
-   Keyword = "STATUS", 
-   Text = "&CSyntax &W:&Y Status\
-&c\
-&YSTATUS&c allows a person with the &Yship systems&c skill to check on the\
-condition of their ship at any function terminal.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
    Keyword = "STEALTH SNEAK VISIBLE", 
    Text = "&CSyntax &R&W: &YSneak\
  \
@@ -12807,45 +11773,6 @@ any problems you may have as his time allows. \
 HelpEntry
 {
    Level = 1, 
-   Keyword = "SWRIPC CHRONICLES", 
-   Text = "&c\
-   The Star Wars : Rise In Power Chronicles, or SWRIPC, is an ongoing \
-epic whose content is decided primarily by you, the active roleplayer. \
-You see, SWRIPC is a story which is continuously updated to tell the  \
-story of the events which take place here, on RIP. This story revolves \
-around a central group of characters from the MUD, which is always \
-changing and evolving. This group interacts with others in strange and\
-destined ways, creating intruiging tangents and subplots for \
-storylines. The SWRIPC also keeps a continuous eye on the ever \
-struggling Rebel Alliance and the Empire, aswell as an idle \
-eye on the Neutral clans, such as the Assassins Guild. This story will\
-be decided by three things. \
-A) The emails you send me with ideas, suggestions, and events. \
-B) The ideas I come up with to tie you all together.\
-C) The events of the MUD, such as deaths and conflicts.\
- \
-   My email box is always open, and ready to receive ANY ideas or\
-suggestions you may have, and I always want to be updated about \
-roleplay events and occurances. What if your character dies? No \
-problem! Send me details of his death, and we'll make him go out in\
-style! In addition to this, at regular intervals, I'll be personally\
-selecting an organization or character that has shown excellant ideas,\
-initiative, or action in their roleplay and single him/her/them out in\
-an exclusive story I'll entitle \"Tales of _________\". For example, \
-should someone, say Magellan, make a superbly impressive bounty and \
-take someone out? \"Tales of the Bounty Hunters : Volume I - Magellan's \
-Hunt\" would be released detailing a wonderful story about him and \
-making him even more famous than he is! \
- \
-    So please, participate, because the SWRIPC is only as good as YOU \
-MAKE IT! Email me, Caspian, at avatar.is@home.com with anything you \
-want, even if it's just a question. \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
    Keyword = "TAKEDRUG DRUG DRUGS SPICE RHYLL", 
    Text = "&CSyntax &W:&Y Takedrug (drug)\
 &c\
@@ -12858,11 +11785,11 @@ HelpEntry
    Level = 1, 
    Keyword = "TARGET", 
    Text = ".\
-Syntax : Target (ship name)\
+Syntax : Target <ship name>\
  \
 Used in ship to ship combat to target enemy ships.\
  \
-See also help Space Combat 1, help Weapon Syatems.\
+See also help Space Combat 1, help Weapon Systems.\
 ", 
 }
 
@@ -13002,24 +11929,6 @@ advance a level.  You can use TITLE to set your title to something else.\
 HelpEntry
 {
    Level = 1, 
-   Keyword = "TITLE_RESTRICTIONS RULE_15", 
-   Text = "&c\
-Title must be in-character.  OOC information should not be included\
-in them. The only exception to this rule is to inform people that you \
-are running on triggers, also known as scripting.  However, remember \
-that only certain triggers are allowed, and that if you are using triggers,\
-you are to be considered IC by any player to run into you. \
- \
-Also, titles must be seen by all players.  This means that several of the \
-darker colors which can not be seen by many players can not be used on \
-the name part of  your Title.  This includes &zgrey&R&w, &xblack&R&w, \
-and &bDark Blue&R&w.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
    Keyword = "TOGORIAN TOGORIANS", 
    Text = "&COrigin&W:&Y Togoria\
 &c\
@@ -13126,13 +12035,6 @@ There is a new command for that.\
  \
 SEE ALSO: &WOPENBAY ADJUSTTRACTOR \
 ", 
-}
-
-HelpEntry
-{
-   Level = 105, 
-   Keyword = "TRACTORBEAM", 
-   Text = "", 
 }
 
 HelpEntry
@@ -13997,11 +12899,4 @@ HelpEntry
 \
 ...nothing.\
 ", 
-}
-
-HelpEntry
-{
-   Level = 105, 
-   Keyword = "TEST", 
-   Text = "", 
 }

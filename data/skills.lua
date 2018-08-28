@@ -1977,7 +1977,7 @@ SkillEntry
    Level = 56, 
    Target = "offensive", 
    Alignment = -1001, 
-   Name = "hand of Darkness", 
+   Name = "Hand of Darkness", 
 }
 
 SkillEntry
@@ -3169,7 +3169,7 @@ SkillEntry
       }, 
    }, 
    Type = "Skill", 
-   Name = "acute_awareness", 
+   Name = "AcuteAwareness", 
    Affects = 
    {
       [2] = 
@@ -3213,7 +3213,7 @@ SkillEntry
       NounDamage = "You focus on your opponents weak points increasing your damage.", 
    }, 
    Type = "Skill", 
-   Name = "acute_damage", 
+   Name = "AcuteDamage", 
    Affects = 
    {
       [2] = 
@@ -3254,7 +3254,7 @@ SkillEntry
       }, 
    }, 
    Type = "Skill", 
-   Name = "add_patrol", 
+   Name = "AddPatrol", 
    Beats = 12, 
    Position = "standing", 
    Function = "do_add_patrol", 
@@ -3982,7 +3982,7 @@ SkillEntry
       }, 
    }, 
    Type = "Skill", 
-   Name = "elite_guard", 
+   Name = "EliteGuard", 
    Beats = 12, 
    Position = "standing", 
    Function = "do_elite_guard", 
@@ -4114,7 +4114,7 @@ SkillEntry
       }, 
    }, 
    Type = "Skill", 
-   Name = "first aid", 
+   Name = "FirstAid", 
    Beats = 12, 
    Position = "standing", 
    Function = "do_first_aid", 
@@ -4150,7 +4150,7 @@ SkillEntry
       }, 
    }, 
    Type = "Skill", 
-   Name = "focus strength", 
+   Name = "FocusStrength", 
    Affects = 
    {
       [2] = 
@@ -4225,7 +4225,7 @@ SkillEntry
       }, 
    }, 
    Type = "Skill", 
-   Name = "gather_intelligence", 
+   Name = "GatherIntelligence", 
    Beats = 40, 
    Teachers = 
    {
@@ -4366,7 +4366,7 @@ SkillEntry
       }, 
    }, 
    Type = "Skill", 
-   Name = "heightened accuracy", 
+   Name = "HeightenedAccuracy", 
    Affects = 
    {
       [2] = 
@@ -4478,7 +4478,7 @@ SkillEntry
       }, 
    }, 
    Type = "Skill", 
-   Name = "inner strength", 
+   Name = "InnerStrength", 
    Affects = 
    {
       [2] = 
@@ -5104,7 +5104,7 @@ SkillEntry
       }, 
    }, 
    Type = "Skill", 
-   Name = "mass_propaganda", 
+   Name = "MassPropaganda", 
    Beats = 12, 
    Position = "standing", 
    Function = "do_mass_propaganda", 
@@ -5446,7 +5446,7 @@ SkillEntry
       NounDamage = "poisonous concoction", 
    }, 
    Type = "Skill", 
-   Name = "poison weapon", 
+   Name = "PoisonWeapon", 
    Beats = 12, 
    Position = "standing", 
    Function = "do_poison_weapon", 
@@ -5478,7 +5478,7 @@ SkillEntry
       }, 
    }, 
    Type = "Skill", 
-   Name = "post guard", 
+   Name = "PostGuard", 
    Beats = 12, 
    Position = "standing", 
    Function = "do_postguard", 
@@ -5813,7 +5813,7 @@ SkillEntry
       }, 
    }, 
    Type = "Skill", 
-   Name = "see masking", 
+   Name = "SeeMasking", 
    Affects = 
    {
       [2] = 
@@ -6224,7 +6224,7 @@ SkillEntry
       }, 
    }, 
    Type = "Skill", 
-   Name = "special_forces", 
+   Name = "SpecialForces", 
    Beats = 12, 
    Position = "standing", 
    Function = "do_special_forces", 
@@ -7540,7 +7540,7 @@ SkillEntry
       }, 
    }, 
    Position = "dead", 
-   Name = "quarrese", 
+   Name = "quarrenese", 
    Function = "spell_null", 
    Target = "ignore", 
    Type = "Tongue", 

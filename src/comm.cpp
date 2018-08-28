@@ -69,8 +69,8 @@ HourMinSec   set_boot_time_struct;
 HourMinSec  *set_boot_time = NULL;
 struct tm     *new_boot_time = NULL;
 struct tm      new_boot_struct;
-char           str_boot_time[MAX_INPUT_LENGTH];
-char           lastplayercmd[MAX_INPUT_LENGTH*2];
+char           str_boot_time[MAX_INPUT_LENGTH] = {'\0'};
+char           lastplayercmd[MAX_INPUT_LENGTH*2] = {'\0'};
 time_t         current_time = 0;       /* Time of this pulse           */
 socket_t       control = 0;            /* Controlling descriptor       */
 socket_t       newdesc = 0;            /* New descriptor               */
@@ -188,7 +188,7 @@ int SwripMain(int argc, char *argv[])
   /*
    * Get the port number.
    */
-  SysData.Port = 4000;
+  SysData.Port = 7000;
 
   if ( argc > 1 )
     {
@@ -318,7 +318,7 @@ socket_t InitializeSocket( short port )
  */
 static void CaughtAlarm( int dummy )
 {
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   Log->Bug( "ALARM CLOCK!" );
   strcpy( buf, "Alas, the hideous mandalorian entity known only as 'Lag' rises once more!\r\n" );
   EchoToAll( AT_IMMORT, buf, ECHOTAR_ALL );
@@ -397,7 +397,7 @@ static void AcceptNewSocket( socket_t ctrl )
 static void GameLoop( void )
 {
   struct timeval last_time;
-  char cmdline[MAX_INPUT_LENGTH];
+  char cmdline[MAX_INPUT_LENGTH] = {'\0'};
 
   signal( SIGPIPE, SIG_IGN );
   signal( SIGALRM, CaughtAlarm );
@@ -558,51 +558,47 @@ static void GameLoop( void )
        * Sleep( last_time + 1/PULSE_PER_SECOND - now ).
        * Careful here of signed versus unsigned arithmetic.
        */
-      {
-        struct timeval now_time;
-        long secDelta;
-        long usecDelta;
+      struct timeval now_time;
+      gettimeofday( &now_time, NULL );
+      long usecDelta = ((int) last_time.tv_usec) - ((int) now_time.tv_usec)
+        + 1000000 / PULSE_PER_SECOND;
+      long secDelta = ((int) last_time.tv_sec ) - ((int) now_time.tv_sec );
 
-        gettimeofday( &now_time, NULL );
-        usecDelta       = ((int) last_time.tv_usec) - ((int) now_time.tv_usec)
-          + 1000000 / PULSE_PER_SECOND;
-        secDelta        = ((int) last_time.tv_sec ) - ((int) now_time.tv_sec );
-        while ( usecDelta < 0 )
-          {
-            usecDelta += 1000000;
-            secDelta  -= 1;
-          }
+      while ( usecDelta < 0 )
+        {
+          usecDelta += 1000000;
+          secDelta  -= 1;
+        }
 
-        while ( usecDelta >= 1000000 )
-          {
-            usecDelta -= 1000000;
-            secDelta  += 1;
-          }
+      while ( usecDelta >= 1000000 )
+        {
+          usecDelta -= 1000000;
+          secDelta  += 1;
+        }
 
-        if ( secDelta > 0 || ( secDelta == 0 && usecDelta > 0 ) )
-          {
-            struct timeval stall_time;
-	    int result = 0;
+      if ( secDelta > 0 || ( secDelta == 0 && usecDelta > 0 ) )
+        {
+          struct timeval stall_time;
+          int result = 0;
 #ifdef _WIN32
-	    fd_set dummy_set;
-	    FD_ZERO( &dummy_set );
-	    FD_SET( control, &dummy_set );
+          fd_set dummy_set;
+          FD_ZERO( &dummy_set );
+          FD_SET( control, &dummy_set );
 #endif
-            stall_time.tv_usec = usecDelta;
-            stall_time.tv_sec  = secDelta;
+          stall_time.tv_usec = usecDelta;
+          stall_time.tv_sec  = secDelta;
 
 #if defined(_WIN32)
-	    result = select( 0, NULL, NULL, &dummy_set, &stall_time );
+          result = select( 0, NULL, NULL, &dummy_set, &stall_time );
 #else
-	    result = select( 0, NULL, NULL, NULL, &stall_time );
+          result = select( 0, NULL, NULL, NULL, &stall_time );
 #endif
-            if ( result == SOCKET_ERROR )
-              {
-                perror( "game_loop: select: stall" );
-                exit( 1 );
-              }
-          }
-      }
+          if ( result == SOCKET_ERROR )
+            {
+              perror( "game_loop: select: stall" );
+              exit( 1 );
+            }
+        }
 
       gettimeofday( &last_time, NULL );
       current_time = (time_t) last_time.tv_sec;
@@ -856,8 +852,8 @@ static void StopIdling( Character *ch )
 
 void SetCharacterColor( short AType, const Character *ch )
 {
-  char buf[16];
-  const Character *och;
+  char buf[16] = {'\0'};
+  const Character *och = nullptr;
 
   if ( !ch || !ch->Desc )
     return;
@@ -892,8 +888,8 @@ static char *ActString(const char *format, Character *to, Character *ch,
   static char * const he_she  [] = { "it",  "he",  "she" };
   static char * const him_her [] = { "it",  "him", "her" };
   static char * const his_her [] = { "its", "his", "her" };
-  static char buf[MAX_STRING_LENGTH];
-  char fname[MAX_INPUT_LENGTH];
+  static char buf[MAX_STRING_LENGTH] = {'\0'};
+  char fname[MAX_INPUT_LENGTH] = {'\0'};
   char *point = buf;
   const char *str = format;
   const char *i = nullptr;
@@ -1223,7 +1219,7 @@ void DisplayPrompt(Descriptor *d)
   const bool ansi = (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI));
   std::string promptBuffer;
   const char *prompt = nullptr;
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   char *pbuf = buf;
   int the_stat = 0;
   const char variableMarker = '$';

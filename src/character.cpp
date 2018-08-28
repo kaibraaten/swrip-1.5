@@ -144,6 +144,8 @@ Character::~Character()
     {
       delete PCData;
     }
+
+  delete pImpl;
 }
 
 void Character::Echo(const std::string &txt) const
@@ -158,16 +160,14 @@ void Character::Echo(const char *fmt, ...) const
       return;
     }
   
-  char txt[MAX_STRING_LENGTH*2];        /* better safe than sorry */
-  va_list args;
+  va_list va;
+  va_start( va, fmt );
+  std::vector< char > buf = CreateFmtBuffer( fmt, va );
+  va_end( va );
 
-  va_start(args, fmt);
-  vsprintf(txt, fmt, args);
-  va_end(args);
-
-  if(!IsNullOrEmpty(txt))
+  if(!buf.empty())
     {
-      Desc->WriteToBuffer(txt);
+      Desc->WriteToBuffer(&buf[0]);
     }
 }
 
