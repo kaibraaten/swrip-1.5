@@ -3,9 +3,8 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_rescue( Character *ch, char *argument )
+void do_rescue( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
   Character *fch = NULL;
   int percent = 0;
@@ -16,9 +15,7 @@ void do_rescue( Character *ch, char *argument )
       return;
     }
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Rescue whom?\r\n");
       return;
@@ -60,13 +57,14 @@ void do_rescue( Character *ch, char *argument )
       return;
     }
 
-  ch->Alignment = ch->Alignment + 5;
+  ch->Alignment += 5;
   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
 
   percent = GetRandomPercent() - (GetCurrentLuck(ch) - 14)
     - (GetCurrentLuck(victim) - 16);
 
   SetWaitState( ch, SkillTable[gsn_rescue]->Beats );
+
   if ( !IsNpc(ch) && percent > ch->PCData->Learned[gsn_rescue] )
     {
       ch->Echo("You fail the rescue.\r\n");
@@ -80,7 +78,7 @@ void do_rescue( Character *ch, char *argument )
   Act( AT_SKILL, "$n rescues you!", ch, NULL, victim, TO_VICT    );
   Act( AT_SKILL, "$n moves in front of $N!",  ch, NULL, victim, TO_NOTVICT );
 
-  ch->Alignment = ch->Alignment + 50;
+  ch->Alignment += 50;
   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
 
   LearnFromSuccess( ch, gsn_rescue );
@@ -93,4 +91,3 @@ void do_rescue( Character *ch, char *argument )
   StartFighting( ch, fch );
   StartFighting( fch, ch );
 }
-

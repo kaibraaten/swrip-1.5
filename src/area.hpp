@@ -17,8 +17,8 @@ public:
   class Planet *Planet = nullptr;
   Area *NextOnPlanet = nullptr;
   Area *PreviousOnPlanet = nullptr;
-  char *Name = nullptr;
-  char *Filename = nullptr;
+  std::string Name;
+  std::string Filename;
   int Flags = 0;
   short Status = 0;
   short Age = 0;
@@ -43,8 +43,8 @@ public:
     } Soft, Hard;
   } LevelRanges;
 
-  char *Author = nullptr;
-  char *ResetMessage = nullptr;
+  std::string Author;
+  std::string ResetMessage;
   Reset *LastMobReset = nullptr;
   Reset *LastObjectReset = nullptr;
   short MaxPlayers = 0;

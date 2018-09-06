@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "vector3_aux.hpp"
 #include "mud.hpp"
 #include "ship.hpp"
@@ -7,15 +7,12 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_request(Character *ch, char *argument)
+void do_request( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   int the_chance = 0;
   Ship *ship = NULL;
   Ship *eShip = NULL;
-
-  strcpy( arg, argument );
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
@@ -41,7 +38,7 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("&RRequest the opening of the baydoors of what ship?\r\n");
       return;
@@ -86,9 +83,11 @@ void do_request(Character *ch, char *argument)
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->Learned[gsn_fake_signal]);
-  if ( (eShip->Class == SHIP_PLATFORM ? 1 : (GetRandomPercent() >= the_chance)) && !CheckPilot(ch,eShip) )
+
+  if ( (eShip->Class == SHIP_PLATFORM ? 1 : (GetRandomPercent() >= the_chance))
+       && !CheckPilot(ch,eShip) )
     {
-      ch->Echo("&RHey! That's not your ship!");
+      ch->Echo("&RHey! That's not your ship!\r\n");
       return;
     }
 
@@ -100,10 +99,11 @@ void do_request(Character *ch, char *argument)
   if ( the_chance && !CheckPilot(ch, eShip) )
     LearnFromSuccess(ch, gsn_fake_signal);
 
-  ch->Echo("&RYou open the bay doors of the remote ship.");
-  Act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
+  ch->Echo("You open the bay doors of the remote ship.\r\n");
+  Act( AT_PLAIN,"$n flips a switch on the control panel.",
+       ch, nullptr, arg.c_str(), TO_ROOM);
   eShip->BayOpen = true;
-  sprintf( buf ,"%s's bay doors open." , eShip->Name );
+  sprintf( buf ,"%s's bay doors open.", eShip->Name.c_str() );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }
 

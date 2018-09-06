@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "room.hpp"
 
-void do_openbay( Character *ch, char *argument )
+void do_openbay( Character *ch, std::string argument )
 {
   Ship *ship = nullptr;
   char buf[MAX_STRING_LENGTH];
@@ -33,12 +33,12 @@ void do_openbay( Character *ch, char *argument )
     }
 
   Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
-       NULL, argument , TO_ROOM );
+       NULL, argument.c_str(), TO_ROOM );
   ship->BayOpen = true;
 
   EchoToCockpit( AT_YELLOW , ship, "Bay Doors Open");
   ch->Echo("You open the bay doors");
-  sprintf( buf ,"%s's bay doors open." , ship->Name );
-  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+  sprintf( buf ,"%s's bay doors open.", ship->Name.c_str() );
+  EchoToNearbyShips( AT_YELLOW, ship, buf, NULL );
 }
 

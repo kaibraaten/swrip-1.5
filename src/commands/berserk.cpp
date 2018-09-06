@@ -3,9 +3,9 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_berserk( Character *ch, char *argument )
+void do_berserk( Character *ch, std::string argument )
 {
-  short percent;
+  short percent = 0;
   Affect af;
 
   if ( !ch->Fighting )
@@ -44,4 +44,3 @@ void do_berserk( Character *ch, char *argument )
   ch->Echo( "You start to lose control..\r\n" );
   LearnFromSuccess(ch, gsn_berserk);
 }
-

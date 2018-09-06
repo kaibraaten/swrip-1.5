@@ -15,7 +15,7 @@
 #include "ban.hpp"
 #include "arena.hpp"
 
-void do_test( Character *ch, char *argument )
+void do_test( Character *ch, std::string argument )
 {
   if( !StrCmp( argument, "uname" ) )
     {
@@ -23,16 +23,16 @@ void do_test( Character *ch, char *argument )
 
       if( uname(&buf) == 0 )
 	{
-   ch->Echo("&Y%s-%s %s\r\n", buf.sysname, buf.machine, buf.release );
-   ch->Echo("&Ysysname  %s\r\n", buf.sysname );
-   ch->Echo("&Ynodename %s\r\n", buf.nodename );
-   ch->Echo("&Yrelease  %s\r\n", buf.release );
-   ch->Echo("&Yversion  %s\r\n", buf.version );
-   ch->Echo("&Ymachine  %s\r\n", buf.machine );
+          ch->Echo("&Y%s-%s %s\r\n", buf.sysname, buf.machine, buf.release );
+          ch->Echo("&Ysysname  %s\r\n", buf.sysname );
+          ch->Echo("&Ynodename %s\r\n", buf.nodename );
+          ch->Echo("&Yrelease  %s\r\n", buf.release );
+          ch->Echo("&Yversion  %s\r\n", buf.version );
+          ch->Echo("&Ymachine  %s\r\n", buf.machine );
 	}
       else
 	{
-   ch->Echo("&RSomething didn't go right.&w\r\n" );
+          ch->Echo("&RSomething didn't go right.&w\r\n" );
 	}
 
       return;
@@ -101,4 +101,3 @@ void do_test( Character *ch, char *argument )
        return;
      }
 }
-

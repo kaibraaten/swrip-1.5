@@ -2,14 +2,11 @@
 #include "mud.hpp"
 #include "object.hpp"
 
-void do_tamp( Character *ch, char *argument )
+void do_tamp( Character *ch, std::string arg )
 {
   Object *pipe_obj = nullptr;
-  char arg[MAX_INPUT_LENGTH];
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Tamp what?\r\n");
       return;
@@ -30,14 +27,13 @@ void do_tamp( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsBitSet( pipe_obj->Value[3], PIPE_TAMPED ) )
+  if ( !IsBitSet( pipe_obj->Value[OVAL_PIPE_FLAGS], PIPE_TAMPED ) )
     {
       Act( AT_ACTION, "You gently tamp $p.", ch, pipe_obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n gently tamps $p.", ch, pipe_obj, NULL, TO_ROOM );
-      SetBit( pipe_obj->Value[3], PIPE_TAMPED );
+      SetBit( pipe_obj->Value[OVAL_PIPE_FLAGS], PIPE_TAMPED );
       return;
     }
 
   ch->Echo("It doesn't need tamping.\r\n");
 }
-

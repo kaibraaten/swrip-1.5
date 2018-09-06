@@ -1,14 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_fixchar( Character *ch, char *argument )
+void do_fixchar( Character *ch, std::string argument )
 {
-  char name[MAX_STRING_LENGTH];
+  std::string name;
   Character *victim = nullptr;
 
   OneArgument( argument, name );
 
-  if ( IsNullOrEmpty( name ) )
+  if ( name.empty() )
     {
       ch->Echo( "Usage: fixchar <playername>\r\n" );
       return;
@@ -25,4 +25,3 @@ void do_fixchar( Character *ch, char *argument )
   FixCharacterStats( victim );
   ch->Echo( "Done.\r\n" );
 }
-

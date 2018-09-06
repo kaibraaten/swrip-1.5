@@ -5,11 +5,11 @@
 /*
  * Command editor/displayer/save/delete                         -Thoric
  */
-void do_cedit( Character *ch, char *argument )
+void do_cedit( Character *ch, std::string argument )
 {
   Command *command;
-  char commandName[1024];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string commandName;
+  std::string arg2;
 
   SmashTilde( argument );
   argument = OneArgument( argument, commandName );
@@ -17,7 +17,7 @@ void do_cedit( Character *ch, char *argument )
 
   SetCharacterColor( AT_IMMORT, ch );
 
-  if ( IsNullOrEmpty( commandName ) )
+  if ( commandName.empty() )
     {
       ch->Echo( "Syntax: cedit save\r\n" );
 
@@ -52,13 +52,13 @@ void do_cedit( Character *ch, char *argument )
         }
 
       command = AllocateCommand();
-      command->Name = CopyString( commandName );
+      command->Name = commandName;
       command->Level = GetTrustLevel(ch);
 
-      if ( *argument )
+      if ( !argument.empty() )
         OneArgument(argument, arg2);
       else
-        sprintf( arg2, "do_%s", ToLower(commandName).c_str() );
+        arg2 = "do_" + ToLower(commandName);
 
       command->Function = GetSkillFunction( arg2 );
       AddCommand( command );
@@ -66,12 +66,12 @@ void do_cedit( Character *ch, char *argument )
 
       if ( command->Function == skill_notfound )
         {
-          ch->Echo( "Code %s not found. Set to no code.\r\n", arg2 );
-          command->FunctionName = CopyString( "" );
+          ch->Echo( "Code %s not found. Set to no code.\r\n", arg2.c_str() );
+          command->FunctionName.erase();
         }
       else
         {
-          command->FunctionName = CopyString( arg2 );
+          command->FunctionName = arg2;
         }
 
       return;
@@ -88,12 +88,12 @@ void do_cedit( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty(arg2) || !StrCmp( arg2, "show" ) )
+  if ( arg2.empty() || !StrCmp( arg2, "show" ) )
     {
       ch->Echo( "Command:  %s\r\nLevel:    %d\r\nPosition: %s\r\nLog:      %s\r\nCode:     %s\r\n",
-                command->Name, command->Level,
+                command->Name.c_str(), command->Level,
                 PositionName[command->Position], CmdLogName[command->Log],
-                command->FunctionName);
+                command->FunctionName.c_str());
 
       if ( command->UseRec->NumberOfTimesUsed )
         SendTimer(command->UseRec, ch);
@@ -126,15 +126,14 @@ void do_cedit( Character *ch, char *argument )
         }
 
       command->Function = fun;
-      FreeMemory( command->FunctionName );
-      command->FunctionName = CopyString( argument );
+      command->FunctionName = argument;
       ch->Echo( "Done.\r\n" );
       return;
     }
 
   if ( !StrCmp( arg2, "level" ) )
     {
-      int level = atoi( argument );
+      int level = std::stoi( argument );
 
       if ( level < 0 || level > GetTrustLevel(ch) )
         {
@@ -151,12 +150,11 @@ void do_cedit( Character *ch, char *argument )
     {
       int log_type = 0;
 
-      if( IsNullOrEmpty( argument ) )
+      if( argument.empty() )
 	{
-	  int i = 0;
 	  ch->Echo( "Supply a log type from the following list:\r\n" );
 
-	  for( i = 0; i < MAX_LOG; ++i )
+	  for( size_t i = 0; i < MAX_LOG; ++i )
 	    {
 	      ch->Echo( "  %s\r\n", CmdLogName[i] );
 	    }
@@ -173,7 +171,7 @@ void do_cedit( Character *ch, char *argument )
         }
 
       ch->Echo( "Log type for %s changed from %s",
-                command->Name, CmdLogName[command->Log] );
+                command->Name.c_str(), CmdLogName[command->Log] );
       command->Log = log_type;
       ch->Echo( " to %s.\r\n", CmdLogName[command->Log] );
       ch->Echo( "Done.\r\n" );
@@ -184,7 +182,7 @@ void do_cedit( Character *ch, char *argument )
     {
       PositionType position = 0;
 
-      if( IsNullOrEmpty( argument ) )
+      if( argument.empty() )
         {
           ch->Echo( "Supply a position from the following list:\r\n" );
 
@@ -216,16 +214,13 @@ void do_cedit( Character *ch, char *argument )
     {
       OneArgument( argument, commandName );
 
-      if ( IsNullOrEmpty( commandName ) )
+      if ( commandName.empty() )
         {
           ch->Echo( "Cannot clear name field!\r\n" );
           return;
         }
 
-      if ( command->Name != NULL )
-        FreeMemory( command->Name );
-
-      command->Name = CopyString( commandName );
+      command->Name = commandName;
 
       ch->Echo( "Done.\r\n" );
       return;

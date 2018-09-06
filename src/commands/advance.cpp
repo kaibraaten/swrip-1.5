@@ -1,20 +1,22 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_advance( Character *ch, char *argument )
+void do_advance( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
   Character *victim = nullptr;
-  int level = 0, ability = 0;
-  int iLevel = 0, iAbility = 0;
+  int level = 0;
+  int ability = -1;
+  int iLevel = 0;
+  int iAbility = 0;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg3 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( arg3 ) || !IsNumber( arg2 ) )
+  if ( arg1.empty() || arg2.empty() || arg3.empty() )
     {
       ch->Echo( "Syntax: advance <char> <ability> <level>.\r\n" );
       return;
@@ -25,8 +27,6 @@ void do_advance( Character *ch, char *argument )
       ch->Echo( "That player is not here.\r\n" );
       return;
     }
-
-  ability = -1;
 
   for ( iAbility = 0 ; iAbility < MAX_ABILITY ; iAbility++ )
     {
@@ -57,9 +57,9 @@ void do_advance( Character *ch, char *argument )
       return;
     }
 
-  if ( ( level = atoi( arg2 ) ) < 1 || level > 500 )
+  if ( ( level = std::stoi( arg2 ) ) < 1 || level > MAX_ABILITY_LEVEL )
     {
-      ch->Echo( "Level must be 1 to 500.\r\n" );
+      ch->Echo( "Level must be 1 to %d.\r\n", MAX_ABILITY_LEVEL );
       return;
     }
 

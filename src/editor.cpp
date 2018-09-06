@@ -31,6 +31,7 @@
  *  you must give credit to the original author(s).
  */
 
+#include <vector>
 #include <cstdio>
 #include <cstring>
 #include <cctype>
@@ -62,22 +63,22 @@
 
 struct EditorLine
 {
-  char        *Line;           /* line text */
-  short        LineSize;      /* size allocated in "line" */
-  short        LineUsed;      /* bytes used of "line" */
-  EditorLine *next;
+  char        *Line = nullptr;           /* line text */
+  short        LineSize = 0;      /* size allocated in "line" */
+  short        LineUsed = 0;      /* bytes used of "line" */
+  EditorLine *next = nullptr;
 };
 
 struct Editor
 {
-  EditorLine *first_line;     /* list of lines */
-  short        LineCount;     /* number of lines allocated */
-  EditorLine *OnLine;        /* pointer to the line being edited */
-  int          TextSize;      /* total size of text (not counting
-                                  newlines). */
-  int          MaxSize;       /* max size in chars of string being
-                                   edited (counting newlines) */
-  char        *Description;           /* buffer description */
+  EditorLine *first_line = nullptr;     /* list of lines */
+  short        LineCount = 0;     /* number of lines allocated */
+  EditorLine *OnLine = nullptr;        /* pointer to the line being edited */
+  int          TextSize = 0;      /* total size of text (not counting
+                                     newlines). */
+  int          MaxSize = 0;       /* max size in chars of string being
+                                     edited (counting newlines) */
+  char        *Description = 0;           /* buffer description */
 };
 
 /* "max_size" is the maximum size of the final text converted to string */
@@ -101,10 +102,10 @@ struct Editor
 static EditorLine *MakeNewLine( char *str );
 static void DiscardEditData( Editor *edd );
 static Editor *CloneEditData( Editor *edd );
-static Editor *StringToEditData( char *str, short max_size );
+static Editor *StringToEditData( const std::string &str, short max_size );
 static char *EditDataToString( Editor *edd );
 
-static void StartEditingNoLimit( Character *ch, char *old_text, short max_total );
+static void StartEditingNoLimit( Character *ch, const std::string &old_text, short max_total );
 
 /* misc functions */
 static char *FinerOneArgument( char *argument, char *arg_first );
@@ -129,7 +130,6 @@ static void EditorSave( Character *ch, Editor *edd, char *argument );
 
 static EditorLine *MakeNewLine( char *str )
 {
-  EditorLine *new_line = NULL;
   short size = 0;
 
   size = strlen( str );
@@ -140,7 +140,7 @@ static EditorLine *MakeNewLine( char *str )
       size = CHAR_BLOCK;
     }
 
-  AllocateMemory(new_line, EditorLine, 1);
+  EditorLine *new_line = new EditorLine();
   AllocateMemory(new_line->Line, char, size);
   new_line->LineSize = size;
   new_line->LineUsed = strlen( str );
@@ -157,7 +157,7 @@ static void DiscardEditData( Editor *edd )
     {
       EditorLine *elnext = eline->next;
       FreeMemory( eline->Line );
-      FreeMemory( eline );
+      delete eline;
       eline = elnext;
     }
 
@@ -166,17 +166,15 @@ static void DiscardEditData( Editor *edd )
       FreeMemory( edd->Description );
     }
 
-  FreeMemory( edd );
+  delete edd;
 }
 
 static Editor *CloneEditData( Editor *edd )
 {
-  Editor *new_edd = NULL;
   EditorLine *eline = NULL;
   EditorLine root_line;
   EditorLine *new_line = &root_line;
-
-  AllocateMemory( new_edd, Editor, 1 );
+  Editor *new_edd = new Editor();
 
   for( eline = edd->first_line ; eline ; eline = eline->next )
     {
@@ -199,16 +197,15 @@ static Editor *CloneEditData( Editor *edd )
   return new_edd;
 }
 
-static Editor *StringToEditData( char *str, short max_size )
+static Editor *StringToEditData( const std::string &str, short max_size )
 {
-  char *p = str;
-  Editor *edd = NULL;
+  const char *p = str.c_str();
   EditorLine *eline = MakeNewLine( "" );
   short i = 0;
   short tsize = 0;
   short line_count = 1;
 
-  AllocateMemory(edd, Editor, 1);
+  Editor *edd = new Editor();
 
   edd->first_line = eline;
 
@@ -264,7 +261,6 @@ static char *EditDataToString( Editor *edd )
 {
   EditorLine *eline = edd->first_line;
   char *buf = NULL;
-  char *tmp = NULL;
   short size = MAX_STRING_LENGTH;
   short used = 0;
   short i = 0;
@@ -304,9 +300,10 @@ static char *EditDataToString( Editor *edd )
   buf[i++] = '\0';
   used++;
 
-  tmp = CopyString( buf );
+  std::string withoutTilde = buf;
+  SmushTilde(withoutTilde);
+  char *tmp = CopyString( withoutTilde );
   FreeMemory(buf);
-  SmushTilde(tmp);
   return tmp;
 }
 
@@ -314,34 +311,32 @@ static char *EditDataToString( Editor *edd )
  * Main editor functions
  */
 
-void StartEditing( Character *ch, char *data )
+void StartEditing( Character *ch, const std::string &data )
 {
   StartEditingNoLimit( ch, data, MAX_STRING_LENGTH );
 }
 
-void SetEditorDescription( Character *ch, const char *desc_fmt, ... )
+void SetEditorDescription( Character *ch, const char *fmt, ... )
 {
-  char buf[ MAX_STRING_LENGTH * 2 ]; /* umpf.. */
-  va_list args;
-
   if( !ch || !ch->Editor )
     {
       return;
     }
 
-  va_start(args, desc_fmt);
-  vsprintf(buf, desc_fmt, args);
-  va_end(args);
+  va_list va;
+  va_start( va, fmt );
+  std::vector<char> buf = CreateFmtBuffer( fmt, va );
+  va_end( va );
 
   if( ch->Editor->Description )
     {
       FreeMemory( ch->Editor->Description );
     }
 
-  ch->Editor->Description = CopyString( buf );
+  ch->Editor->Description = CopyString( &buf[0] );
 }
 
-static void StartEditingNoLimit( Character *ch, char *old_text, short max_total )
+static void StartEditingNoLimit( Character *ch, const std::string &old_text, short max_total )
 {
   if ( !ch->Desc )
     {
@@ -409,18 +404,15 @@ void StopEditing( Character *ch )
   ch->Desc->ConnectionState = CON_PLAYING;
 }
 
-void EditBuffer( Character *ch, std::string stl_argument )
+void EditBuffer( Character *ch, std::string argument )
 {
   Descriptor *d = nullptr;
   Editor *edd = nullptr;
   EditorLine *newline = nullptr;
-  char cmd[MAX_INPUT_LENGTH];
+  std::string cmd;
   short linelen = 0;
   bool cont_line = false;
   char *p = nullptr;
-  char argument_buf[MAX_INPUT_LENGTH];
-  char *argument = argument_buf;
-  strcpy(argument, stl_argument.c_str());
   
   d = ch->Desc;
 
@@ -461,51 +453,52 @@ void EditBuffer( Character *ch, std::string stl_argument )
 
       argument = OneArgument( argument, cmd );
       editor_command = tolower(cmd[1]);
-
+      std::vector<char> vargument = StringToVector(argument);
+      
       switch( editor_command )
 	{
 	case '?':
-	  EditorHelp( ch, edd, argument );
+	  EditorHelp( ch, edd, vargument.data() );
 	  break;
 
 	case 'c':
-	  EditorClearBuffer( ch, edd, argument );
+	  EditorClearBuffer( ch, edd, vargument.data() );
 	  break;
 
 	case 'r':
-	  EditorSearchAndReplace( ch, edd, argument );
+	  EditorSearchAndReplace( ch, edd, vargument.data() );
 	  break;
 
 	case 'i':
-	  EditorInsertLine( ch, edd, argument );
+	  EditorInsertLine( ch, edd, vargument.data() );
 	  break;
 
 	case 'd':
-	  EditorDeleteLine( ch, edd, argument );
+	  EditorDeleteLine( ch, edd, vargument.data() );
 	  break;
 
 	case 'g':
-	  EditorGotoLine( ch, edd, argument );
+	  EditorGotoLine( ch, edd, vargument.data() );
 	  break;
 
 	case 'l':
-	  EditorList( ch, edd, argument );
+	  EditorList( ch, edd, vargument.data() );
 	  break;
 
 	case 'a':
-	  EditorAbort( ch, edd, argument );
+	  EditorAbort( ch, edd, vargument.data() );
 	  break;
 
 	case 's':
-	  EditorSave( ch, edd, argument );
+	  EditorSave( ch, edd, vargument.data() );
 	  break;
 
 	case '!':
-	  EditorEscapedCommand( ch, edd, argument );
+	  EditorEscapedCommand( ch, edd, vargument.data() );
 	  break;
 
 	case 'p':
-	  EditorPrintInfo( ch, edd, argument );
+	  EditorPrintInfo( ch, edd, vargument.data() );
 	  break;
 
 	default:
@@ -525,19 +518,20 @@ void EditBuffer( Character *ch, std::string stl_argument )
    * empty lines. Don't let this fill up usable buffer space.. */
   if( !StrCmp( argument, " " ) )
     {
-      strcpy( argument, "" );
+      argument.erase();
     }
 
-  linelen = strlen(argument);
+  linelen = argument.size();
+  char cargument[MAX_STRING_LENGTH];
+  strcpy(cargument, argument.c_str());
+  p = cargument + linelen - 1;
 
-  p = argument + linelen - 1;
-
-  while( p > argument && isspace(*p) )
+  while( p > argument.c_str() && isspace(*p) )
     {
       p--;
     }
 
-  if( p > argument && *p == '\\' )
+  if( p > argument.c_str() && *p == '\\' )
     {
       cont_line = true;
       *p = '\0';
@@ -557,7 +551,7 @@ void EditBuffer( Character *ch, std::string stl_argument )
       /* add it to the current line */
       RESIZE_IF_NEEDED( edd->OnLine->Line, edd->OnLine->LineSize,
                         edd->OnLine->LineUsed, linelen+1 );
-      strcat( edd->OnLine->Line, argument );
+      strcat( edd->OnLine->Line, argument.c_str() );
       edd->OnLine->LineUsed += linelen;
       edd->TextSize += linelen;
 
@@ -872,7 +866,7 @@ static void EditorDeleteLine( Character *ch, Editor *edd, char *argument )
 
   edd->LineCount--;
   FreeMemory(del_line->Line);
-  FreeMemory(del_line);
+  delete del_line;
 
   ch->Echo( "Deleted line %d.\r\n", lineindex);
 }
@@ -908,19 +902,20 @@ static void EditorGotoLine( Character *ch, Editor *edd, char *argument )
   ch->Echo( "On line %d.\r\n", lineindex);
 }
 
-static void EditorList( Character *ch, Editor *edd, char *argument )
+static void EditorList( Character *ch, Editor *edd, char *cargument )
 {
   EditorLine *eline = NULL;
   short line_num = 1;
   short from = 0;
   short to = 0;
-  char arg1[ MAX_INPUT_LENGTH ];
+  std::string argument = cargument;
+  std::string arg1;
 
   argument = OneArgument( argument, arg1 );
 
-  if( !IsNullOrEmpty( arg1 ) && IsNumber(arg1) )
+  if( !arg1.empty() && IsNumber(arg1) )
     {
-      from = atoi(arg1);
+      from = std::stoi(arg1);
     }
   else
     {
@@ -929,9 +924,9 @@ static void EditorList( Character *ch, Editor *edd, char *argument )
 
   argument = OneArgument( argument, arg1 );
 
-  if( !IsNullOrEmpty( arg1 ) && IsNumber(arg1) )
+  if( !arg1.empty() && IsNumber(arg1) )
     {
-      to = atoi(arg1);
+      to = std::stoi(arg1);
     }
   else
     {

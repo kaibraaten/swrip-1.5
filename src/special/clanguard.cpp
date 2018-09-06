@@ -38,4 +38,3 @@ bool spec_clan_guard( Character *ch )
 
   return false;
 }
-

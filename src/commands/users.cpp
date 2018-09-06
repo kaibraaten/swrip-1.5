@@ -4,13 +4,11 @@
 #include "character.hpp"
 #include "descriptor.hpp"
 
-void do_users( Character *ch, char *argument )
+void do_users( Character *ch, std::string arg )
 {
-  char arg[MAX_STRING_LENGTH];
   int count = 0;
   std::ostringstream buf;
 
-  OneArgument (argument, arg);
   SetCharacterColor( AT_PLAIN, ch );
   buf << "Desc|Con|Idle| Port | Player@HostIP                 "
       << "\r\n"
@@ -20,7 +18,7 @@ void do_users( Character *ch, char *argument )
 
   for ( const Descriptor *d : Descriptors->Entities() )
     {
-      if ( IsNullOrEmpty( arg ) )
+      if ( arg.empty() )
         {
           if( GetTrustLevel(ch) >= LEVEL_IMPLEMENTOR
 	      || (d->Character && CanSeeCharacter( ch, d->Character )) )
@@ -31,13 +29,13 @@ void do_users( Character *ch, char *argument )
                        d->ConnectionState,
                        d->Idle / 4,
                        d->Remote.Port,
-                       d->Original  ? d->Original->Name  :
-                       d->Character ? d->Character->Name : "(none)",
-                       d->Remote.HostIP );
+                       d->Original  ? d->Original->Name.c_str()  :
+                       d->Character ? d->Character->Name.c_str() : "(none)",
+                       d->Remote.HostIP.c_str() );
 
 	      if ( ch->TopLevel >= LEVEL_GREATER
 		   && ( !d->Character || d->Character->TopLevel <= LEVEL_GREATER ) )
-                ch->Echo(" (%s)", d->Remote.Hostname  );
+                ch->Echo(" (%s)", d->Remote.Hostname.c_str()  );
 
               ch->Echo("\r\n");
             }
@@ -55,9 +53,9 @@ void do_users( Character *ch, char *argument )
                        d->ConnectionState,
                        d->Idle / 4,
                        d->Remote.Port,
-                       d->Original  ? d->Original->Name  :
-                       d->Character ? d->Character->Name : "(none)",
-                       d->Remote.Hostname
+                       d->Original  ? d->Original->Name.c_str() :
+                       d->Character ? d->Character->Name.c_str() : "(none)",
+                       d->Remote.Hostname.c_str()
                        );
 
               ch->Echo("\r\n");
@@ -67,4 +65,3 @@ void do_users( Character *ch, char *argument )
 
   ch->Echo("%d user%s.\r\n", count, count == 1 ? "" : "s" );
 }
-

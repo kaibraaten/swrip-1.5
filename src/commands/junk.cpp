@@ -3,17 +3,11 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_junk( Character *ch, char *argument )
+void do_junk( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Object *obj = NULL;
 
-  OneArgument( argument, arg );
-
-  if( !ch || !ch->InRoom )
-    return;
-
-  if ( IsNullOrEmpty( arg ) || !StrCmp( arg, ch->Name ) )
+  if ( arg.empty() || !StrCmp( arg, ch->Name ) )
     {
       ch->Echo("Junk what?");
       return;

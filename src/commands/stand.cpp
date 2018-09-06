@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_stand( Character *ch, char *argument )
+void do_stand( Character *ch, std::string argument )
 {
   switch ( ch->Position )
     {

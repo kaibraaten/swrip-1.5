@@ -1,16 +1,16 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_pardon( Character *ch, char *argument )
+void do_pardon( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  Character *victim;
+  std::string arg1;
+  std::string arg2;
+  Character *victim = nullptr;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1) || IsNullOrEmpty( arg2 ) )
+  if ( arg1.empty() || arg2.empty() )
     {
       ch->Echo("Syntax: pardon <character> <planet>.\r\n");
       return;
@@ -30,4 +30,3 @@ void do_pardon( Character *ch, char *argument )
 
   ch->Echo("Syntax: pardon <character> <planet>.... But it doesn't work .... Tell Durga to hurry up and finish it :p\r\n");
 }
-

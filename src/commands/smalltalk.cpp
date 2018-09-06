@@ -7,10 +7,10 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_smalltalk( Character *ch , char *argument )
+void do_smalltalk( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
-  char arg1[MAX_INPUT_LENGTH];
+  std::string arg1;
   Character *victim = NULL;
   Planet *planet = NULL;
   Clan *clan = NULL;
@@ -29,7 +29,7 @@ void do_smalltalk( Character *ch , char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo("Create smalltalk with whom?\r\n");
       return;
@@ -92,13 +92,13 @@ void do_smalltalk( Character *ch , char *argument )
       /*
        * Failure.
        */
-      ch->Echo("You attempt to make smalltalk with them.. but are ignored.\r\n");
+      ch->Echo("You attempt to make smalltalk with them, but are ignored.\r\n");
       Act( AT_ACTION, "$n is really getting on your nerves with all this chatter!\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n asks $N about the weather but is ignored.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
       if ( victim->Alignment < -500 && victim->TopLevel >= ch->TopLevel+5 )
         {
-          sprintf( buf, "SHUT UP %s!", ch->Name );
+          sprintf( buf, "SHUT UP %s!", ch->Name.c_str() );
           do_yell( victim, buf );
           global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
         }
@@ -132,4 +132,3 @@ void do_smalltalk( Character *ch , char *argument )
   if ( planet->PopularSupport > 100 )
     planet->PopularSupport = 100;
 }
-

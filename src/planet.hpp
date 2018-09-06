@@ -17,7 +17,7 @@ public:
   void Remove(Area *area);
   
   struct Spaceobject *Spaceobject = nullptr;
-  char *Name = nullptr;
+  std::string Name;
   long BaseValue = 0;
   Clan *GovernedBy = nullptr;
   int Population = 0;
@@ -30,7 +30,7 @@ private:
 };
 
 long GetTaxes( const Planet *planet );
-const char *GetPlanetFilename( const Planet *planet );
+std::string GetPlanetFilename( const Planet *planet );
 
 class PlanetRepository : public Ceris::Repository<Planet*>
 {

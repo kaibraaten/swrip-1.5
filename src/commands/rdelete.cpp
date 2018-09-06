@@ -4,14 +4,11 @@
 #include "room.hpp"
 #include "systemdata.hpp"
 
-void do_rdelete( Character *ch, char *argument )
+void do_rdelete( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Room *location = NULL;
 
-  argument = OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Delete which room?\r\n");
       return;
@@ -48,4 +45,3 @@ void do_rdelete( Character *ch, char *argument )
 
   ch->Echo("Room deleted.\r\n");
 }
-

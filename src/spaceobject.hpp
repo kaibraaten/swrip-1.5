@@ -11,7 +11,7 @@ constexpr size_t MAX_LANDINGSITE = 3;
 class LandingSite
 {
 public:
-  char  *LocationName = nullptr;
+  std::string LocationName;
   vnum_t Dock = INVALID_VNUM;
   bool   IsSecret = false;
 };
@@ -20,7 +20,7 @@ class Spaceobject
 {
 public:
   class Planet *Planet = nullptr;
-  char        *Name = nullptr;
+  std::string Name;
   SpaceobjectType Type = 0;
   Vector3      Position;
   Vector3      Heading;
@@ -31,7 +31,7 @@ public:
   std::array<LandingSite, MAX_LANDINGSITE> LandingSites;
 };
 
-const char *GetSpaceobjectFilename( const Spaceobject *spaceobject );
+std::string GetSpaceobjectFilename( const Spaceobject *spaceobject );
 Spaceobject *GetSpaceobject( const std::string &name );
 Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum );
 void SpaceobjectUpdate( void );

@@ -3,11 +3,11 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_bank( Character *ch, char *argument )
+void do_bank( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
   long amount = 0;
   Character *victim = nullptr;
 
@@ -16,8 +16,10 @@ void do_bank( Character *ch, char *argument )
   argument = OneArgument( argument , arg3 );
 
   if ( IsNpc(ch) || !ch->PCData )
-    return;
-
+    {
+      return;
+    }
+  
   if ( !IsAuthed(ch) )
     {
       ch->Echo("You can not access your bank account until after you've graduated from the academy.\r\n");
@@ -33,18 +35,20 @@ void do_bank( Character *ch, char *argument )
         }
     }
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo( "Usage: BANK <deposit|withdraw|balance|transfer> [amount] [receivee]\r\n" );
       return;
     }
 
-  if ( !IsNullOrEmpty( arg2 ) )
-    amount = atoi(arg2);
-
+  if ( !arg2.empty() )
+    {
+      amount = std::stoi(arg2);
+    }
+  
   if ( !StringPrefix( arg1 , "deposit" ) )
     {
-      if ( amount  <= 0 )
+      if ( amount <= 0 )
         {
           ch->Echo( "You may only deposit amounts greater than zero.\r\n" );
           do_bank( ch , "" );
@@ -63,9 +67,9 @@ void do_bank( Character *ch, char *argument )
       ch->Echo( "You deposit %ld credits into your account.\r\n", amount );
       return;
     }
-  else if ( !StringPrefix( arg1 , "withdrawl" ) )
+  else if ( !StringPrefix( arg1 , "withdraw" ) )
     {
-      if ( amount  <= 0 )
+      if ( amount <= 0 )
         {
           ch->Echo( "You may only withdraw amounts greater than zero.\r\n" );
           do_bank( ch , "" );
@@ -103,8 +107,7 @@ void do_bank( Character *ch, char *argument )
           return;
         }
 
-
-      if ( amount  <= 0 )
+      if ( amount <= 0 )
         {
           ch->Echo( "You may only transfer amounts greater than zero.\r\n" );
           do_bank( ch , "" );
@@ -120,8 +123,10 @@ void do_bank( Character *ch, char *argument )
       ch->PCData->Bank -= amount;
       victim->PCData->Bank += amount;
 
-      ch->Echo( "You transfer %ld credits to %s's account.\r\n", amount, victim->Name );
-      victim->Echo( "%s transfers %ld credits to your account.\r\n", ch->Name, amount);
+      ch->Echo( "You transfer %ld credits to %s's account.\r\n",
+                amount, victim->Name.c_str() );
+      victim->Echo( "%s transfers %ld credits to your account.\r\n",
+                    ch->Name.c_str(), amount);
       return;
     }
   else

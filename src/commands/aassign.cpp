@@ -5,15 +5,14 @@
 #include "room.hpp"
 #include "systemdata.hpp"
 
-void do_aassign( Character *ch, char *argument )
+void do_aassign( Character *ch, std::string argument )
 {
-  char buf[MAX_STRING_LENGTH];
   Area *tarea = nullptr, *tmp = nullptr;
 
   if ( IsNpc( ch ) )
     return;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Syntax: aassign <filename.are>\r\n" );
       return;
@@ -34,13 +33,11 @@ void do_aassign( Character *ch, char *argument )
       return;
     }
 
-  sprintf( buf, "%s", argument );
-
   if ( GetTrustLevel(ch) >= LEVEL_GREATER
-       ||  (IsName( buf, ch->PCData->Bestowments )
+       ||  (IsName( argument, ch->PCData->Bestowments )
             &&   GetTrustLevel(ch) >= SysData.LevelToModifyProto) )
     for ( tmp = FirstArea; tmp; tmp = tmp->Next )
-      if ( !StrCmp( buf, tmp->Filename ) )
+      if ( !StrCmp( argument, tmp->Filename ) )
         {
           tarea = tmp;
           break;
@@ -48,7 +45,7 @@ void do_aassign( Character *ch, char *argument )
 
   if ( !tarea )
     for ( tmp = FirstBuild; tmp; tmp = tmp->Next )
-      if ( !StrCmp( buf, tmp->Filename ) )
+      if ( !StrCmp( argument, tmp->Filename ) )
         {
           /*            if ( GetTrustLevel(ch) >= SysData.level_modify_proto  */
           if ( GetTrustLevel(ch) >= LEVEL_GREATER
@@ -64,7 +61,7 @@ void do_aassign( Character *ch, char *argument )
             }
         }
 
-  if( !StrCmp( buf, "this" ) )
+  if( !StrCmp( argument, "this" ) )
     {
       tarea = ch->InRoom->Area;
     }

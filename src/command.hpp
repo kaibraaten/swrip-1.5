@@ -8,9 +8,9 @@
 class Command
 {
 public:
-  char    *Name = nullptr;
+  std::string Name;
   CmdFun  *Function = nullptr;
-  char    *FunctionName = nullptr;
+  std::string FunctionName;
   PositionType Position = 0;
   short    Level = 0;
   int      Log = 0;
@@ -23,7 +23,7 @@ Command *AllocateCommand( void );
 void FreeCommand( Command *command );
 void RemoveCommand( Command *command );
 void AddCommand( Command *command );
-Command *GetCommand( const char *command );
+Command *GetCommand( const std::string &command );
 void LoadCommands( void );
 void SaveCommands( void );
 OldRepository *NewCommandRepository();

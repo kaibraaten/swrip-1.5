@@ -4,23 +4,23 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_languages( Character *ch, char *argument )
+void do_languages( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   int lang = 0;
   int sn = 0;
 
   argument = OneArgument( argument, arg );
 
-  if ( !IsNullOrEmpty( arg ) && !StringPrefix( arg, "learn" ) &&
-       !IsImmortal(ch) && !IsNpc(ch) )
+  if ( !arg.empty() && !StringPrefix( arg, "learn" )
+       && !IsImmortal(ch) && !IsNpc(ch) )
     {
-      char arg2[MAX_INPUT_LENGTH];
+      std::string arg2;
       int prct = 0;
 
       argument = OneArgument( argument, arg2 );
 
-      if ( IsNullOrEmpty( arg2 ) )
+      if ( arg2.empty() )
         {
           ch->Echo("Learn which language?\r\n");
           return;
@@ -127,8 +127,7 @@ void do_languages( Character *ch, char *argument )
       else
         ch ->Echo("(%3d) ", ch->PCData->Learned[sn] );
 
-      ch->Echo(LanguageNames[lang]);
-      ch->Echo("\r\n");
+      ch->Echo("%s\r\n", LanguageNames[lang]);
     }
 
   ch->Echo("\r\n");

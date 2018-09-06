@@ -16,11 +16,11 @@ static const char * const month_name[] =
     "The Fall of the Machine", "The Search for Rebellion", "The Rise of a Jedi"
   };
 
-void do_time( Character *ch, char *argument )
+void do_time( Character *ch, std::string argument )
 {
-  extern char str_boot_time[];
-  extern char reboot_time[];
-  const char *suf;
+  extern std::string str_boot_time;
+  extern std::string reboot_time;
+  const char *suf = nullptr;
   int day = time_info.Day + 1;
 
   if ( day > 4 && day <  20 )
@@ -39,14 +39,13 @@ void do_time( Character *ch, char *argument )
            "The mud started up at:    %s\r"
            "The system time (E.S.T.): %s\r"
            "Next Reboot is set for:   %s\r",
-
            (time_info.Hour % 12 == 0) ? 12 : time_info.Hour % 12,
            time_info.Hour >= 12 ? "pm" : "am",
            day_name[day % 7],
            day, suf,
            month_name[time_info.Month],
-           str_boot_time,
+           str_boot_time.c_str(),
            (char *) ctime( &current_time ),
-           reboot_time
+           reboot_time.c_str()
            );
 }

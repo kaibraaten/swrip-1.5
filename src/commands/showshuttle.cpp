@@ -2,7 +2,7 @@
 #include "shuttle.hpp"
 #include "character.hpp"
 
-void do_showshuttle (Character * ch, char * argument)
+void do_showshuttle (Character *ch, std::string argument)
 {
   const Shuttle *shuttle = Shuttles->FindByName(argument);
 
@@ -21,17 +21,17 @@ void do_showshuttle (Character * ch, char * argument)
 
       for(const Shuttle *s : Shuttles->Entities())
         {
-          ch->Echo("Shuttle Name: %s - %s\r\n", s->Name,
-               s->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
-               s->Type == SHUTTLE_SPACE ? "Space" :
-               s->Type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
+          ch->Echo( "Shuttle Name: %s - %s\r\n", s->Name.c_str(),
+                    s->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
+                    s->Type == SHUTTLE_SPACE ? "Space" :
+                    s->Type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
         }
 
       return;
     }
 
   SetCharacterColor( AT_YELLOW, ch );
-  ch->Echo("Shuttle Name: %s - %s\r\n", shuttle->Name,
+  ch->Echo("Shuttle Name: %s - %s\r\n", shuttle->Name.c_str(),
             shuttle->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
             shuttle->Type == SHUTTLE_SPACE ? "Space" :
             shuttle->Type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
@@ -48,7 +48,6 @@ void do_showshuttle (Character * ch, char * argument)
   for(const ShuttleStop *stop : shuttle->Stops())
     {
       ch->Echo("\tStop # %d\r\n", ++count );
-      ch->Echo("\t\tStop Name: %s (%d)\r\n", stop->Name, stop->RoomVnum );
+      ch->Echo("\t\tStop Name: %s (%d)\r\n", stop->Name.c_str(), stop->RoomVnum );
     }
 }
-

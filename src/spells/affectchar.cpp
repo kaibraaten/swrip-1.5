@@ -153,7 +153,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                    && victim->Race != RACE_DROID)
                 {
                   ch->Echo("The noble Jedi use their powers to help others!\r\n");
-                  ch->Alignment = ch->Alignment +20 ;
+                  ch->Alignment += 5;
                   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
                   ApplyJediBonus(ch);
                 }
@@ -176,7 +176,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
               if ( ch != victim && victim->Race != RACE_DROID)
                 {
                   ch->Echo("The noble Jedi use their powers to help others!\r\n");
-                  ch->Alignment = ch->Alignment +25 ;
+                  ch->Alignment += 10 ;
                   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
 		  ApplyJediBonus(ch);
                 }
@@ -213,4 +213,3 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
   UpdatePosition( victim );
   return retcode;
 }
-

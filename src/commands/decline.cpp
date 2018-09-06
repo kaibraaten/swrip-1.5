@@ -2,21 +2,19 @@
 #include "arena.hpp"
 #include "character.hpp"
 
-void do_decline(Character *ch, char *argument)
+void do_decline(Character *ch, std::string argument)
 {
-  char buf[MAX_INPUT_LENGTH];
-
   if (ch->Challenged)
     {
-      sprintf(buf,"%s has DECLINED %s's challenge! WHAT A WUSS!!!\r\n",ch->Name,ch->Challenged->Name);
-      ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
-      ch->Challenged=NULL;
-      return;
+      char buf[MAX_INPUT_LENGTH];
+      sprintf( buf,"%s has DECLINED %s's challenge! WHAT A WUSS!!!\r\n",
+               ch->Name.c_str(), ch->Challenged->Name.c_str() );
+      ToChannel( buf, CHANNEL_ARENA, "&RArena&W", 5 );
+      ch->Challenged = nullptr;
     }
   else
     {
       ch->Echo("You have not been challenged!\r\n");
-      return;
     }
 }
 

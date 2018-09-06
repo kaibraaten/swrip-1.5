@@ -5,9 +5,9 @@
 
 static constexpr int MAX_STOPS_TO_DISPLAY = 4;
 
-static void output_shuttle(const Character *ch, const Shuttle *shuttle);
+static void OutputShuttle(const Character *ch, const Shuttle *shuttle);
 
-void do_pluogus( Character *ch, char *argument )
+void do_pluogus( Character *ch, std::string argument )
 {
   if ( !HasComlink( ch ) )
     {
@@ -19,7 +19,7 @@ void do_pluogus( Character *ch, char *argument )
 
   if (shuttle != nullptr)
     {
-      output_shuttle(ch, shuttle);
+      OutputShuttle(ch, shuttle);
       ch->Echo("\r\n");
     }
 
@@ -27,12 +27,12 @@ void do_pluogus( Character *ch, char *argument )
 
   if (shuttle != nullptr)
     {
-      output_shuttle(ch, shuttle);
+      OutputShuttle(ch, shuttle);
       ch->Echo("\r\n");
     }
 }
 
-static void output_shuttle(const Character *ch, const Shuttle *shuttle)
+static void OutputShuttle(const Character *ch, const Shuttle *shuttle)
 {
   assert(shuttle != nullptr);
   
@@ -43,14 +43,15 @@ static void output_shuttle(const Character *ch, const Shuttle *shuttle)
     return;
 
   SetCharacterColor(AT_SHIP, ch);
-  ch->Echo("%s Schedule Information:\r\n", shuttle->Name );
+  ch->Echo("%s Schedule Information:\r\n", shuttle->Name.c_str() );
 
   const ShuttleStop *stop = shuttle->CurrentStop();
 
   /* current port */
   if ( shuttle->State == SHUTTLE_STATE_LANDING || shuttle->State == SHUTTLE_STATE_LANDED )
     {
-      ch->Echo("Currently docked at %s.\r\n", shuttle->CurrentStop()->Name );
+      ch->Echo("Currently docked at %s.\r\n",
+               shuttle->CurrentStop()->Name.c_str() );
     }
 
   ch->Echo("Next stops: ");
@@ -76,9 +77,9 @@ static void output_shuttle(const Character *ch, const Shuttle *shuttle)
           break;
         }
       
-      if ( stop->Name )
+      if ( !stop->Name.empty() )
         {
-          ch->Echo("%s  ", stop->Name );
+          ch->Echo("%s  ", stop->Name.c_str() );
         }
       else
         {
@@ -88,4 +89,3 @@ static void output_shuttle(const Character *ch, const Shuttle *shuttle)
 
   ch->Echo("\r\n");
 }
-

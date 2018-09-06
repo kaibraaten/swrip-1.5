@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_clan_donate( Character *ch, char *argument )
+void do_clan_donate( Character *ch, std::string argument )
 {
   Clan *clan = NULL;
   long amount = 0;
@@ -25,7 +25,7 @@ void do_clan_donate( Character *ch, char *argument )
     }
 
   clan = ch->PCData->ClanInfo.Clan;
-  amount = atoi( argument );
+  amount = std::stoi( argument );
 
   if ( amount == 0 )
     {
@@ -35,7 +35,7 @@ void do_clan_donate( Character *ch, char *argument )
 
   if ( amount < 0 )
     {
-      ch->Echo( "Nice try...\r\n" );
+      ch->Echo( "Nice try.\r\n" );
       return;
     }
 
@@ -45,7 +45,7 @@ void do_clan_donate( Character *ch, char *argument )
       return;
     }
 
-  ch->Echo( "You donate %ld credits to %s's funds.\r\n", amount, clan->Name );
+  ch->Echo( "You donate %ld credits to %s's funds.\r\n", amount, clan->Name.c_str() );
 
   clan->Funds += amount;
   ch->Gold -= amount;

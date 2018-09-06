@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 
-void do_kick( Character *ch, char *argument )
+void do_kick( Character *ch, std::string argument )
 {
   Character *victim = NULL;
 
@@ -22,7 +22,8 @@ void do_kick( Character *ch, char *argument )
 
   if ( IsBitSet(victim->Flags, PLR_AFK))
     {
-      Log->Info("%s just attacked %s with an afk flag on!." , ch->Name, victim->Name );
+      Log->Info("%s just attacked %s with an afk flag on!"
+                , ch->Name.c_str(), victim->Name.c_str() );
     }
 
   SetWaitState( ch, SkillTable[gsn_kick]->Beats );

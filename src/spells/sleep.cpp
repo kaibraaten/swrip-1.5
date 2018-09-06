@@ -4,7 +4,7 @@
 #include "log.hpp"
 #include "room.hpp"
 
-extern char *spell_target_name;
+extern std::string spell_target_name;
 
 ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
 {
@@ -68,7 +68,8 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
   /* Added by Narn at the request of Dominus. */
   if ( !IsNpc( victim ) )
     {
-      sprintf( log_buf, "%s has cast sleep on %s.", ch->Name, victim->Name );
+      sprintf( log_buf, "%s has cast sleep on %s.",
+               ch->Name.c_str(), victim->Name.c_str() );
       Log->LogStringPlus( log_buf, LOG_NORMAL, ch->TopLevel );
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", umax( LEVEL_IMMORTAL, ch->TopLevel ) );
     }

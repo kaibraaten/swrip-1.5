@@ -27,14 +27,14 @@ static bool _PrefixMatch(void *cmd, const void *n)
   return StringPrefix(command->Name, name) == 0;
 }
 
-Command *GetCommand( const char *name )
+Command *GetCommand( const std::string &name )
 {
   const List *commandList = GetEntities(CommandRepository);
-  Command *command = (Command*) FindIfInList(commandList, _ExactMatch, name);
+  Command *command = (Command*) FindIfInList(commandList, _ExactMatch, name.c_str());
 
   if(command == NULL)
     {
-      command = (Command*) FindIfInList(commandList, _PrefixMatch, name);
+      command = (Command*) FindIfInList(commandList, _PrefixMatch, name.c_str());
     }
 
   return command;
@@ -53,12 +53,6 @@ Command *AllocateCommand( void )
  */
 void FreeCommand( Command *command )
 {
-  if ( command->Name )
-    FreeMemory( command->Name );
-
-  if( command->FunctionName )
-    FreeMemory( command->FunctionName );
-
   delete command->UseRec;
   delete command;
 }
@@ -76,12 +70,11 @@ void RemoveCommand( Command *command )
  */
 void AddCommand( Command *command )
 {
-  int i = 0;
-  assert(!IsNullOrEmpty(command->Name));
+  assert(!command->Name.empty());
   assert(command->Function != NULL);
 
   /* make sure the name is all lowercase */
-  for ( i = 0; command->Name[i] != '\0'; i++ )
+  for ( size_t i = 0; i < command->Name.size(); ++i )
     {
       command->Name[i] = CharToLowercase(command->Name[i]);
     }
@@ -142,7 +135,7 @@ static int L_CommandEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      newCommand->Name = CopyString( lua_tostring( L, idx ) );
+      newCommand->Name = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -153,11 +146,7 @@ static int L_CommandEntry( lua_State *L )
 
       if( newCommand->Function != skill_notfound )
 	{
-	  newCommand->FunctionName = CopyString( symbolName );
-	}
-      else
-	{
-	  newCommand->FunctionName = CopyString( "" );
+	  newCommand->FunctionName = symbolName;
 	}
     }
 
@@ -193,7 +182,7 @@ static int L_CommandEntry( lua_State *L )
 
   lua_pop( L, lua_gettop( L ) - 1 );
 
-  if( IsNullOrEmpty( newCommand->Name ) )
+  if( newCommand->Name.empty() )
     {
       FreeCommand( newCommand );
     }

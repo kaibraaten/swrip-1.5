@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "room.hpp"
 
-void do_cmdtable( Character *ch, char *argument )
+void do_cmdtable( Character *ch, std::string argument )
 {
   const List *commands = GetEntities(CommandRepository);
   ListIterator *iterator = AllocateListIterator(commands);
@@ -18,7 +18,8 @@ void do_cmdtable( Character *ch, char *argument )
       MoveToNextListElement(iterator);
       ++column;
 
-      ch->Echo("%-6.6s %4d", command->Name, command->UseRec->NumberOfTimesUsed);
+      ch->Echo("%-6.6s %4d",
+               command->Name.c_str(), command->UseRec->NumberOfTimesUsed);
 
       if (column % 4 != 0)
         {

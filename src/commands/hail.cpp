@@ -6,33 +6,32 @@
 #include "area.hpp"
 #include "room.hpp"
 
-void do_hail( Character *ch , char *argument )
+void do_hail( Character *ch , std::string argument )
 {
   vnum_t vnum = INVALID_VNUM;
   long gold = 1;
   bool steal = false;
   Room *room = nullptr;
-  char arg[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg2;
   char buf[MAX_STRING_LENGTH];
   Ship *ship = nullptr;
   Ship *target = nullptr;
 
   argument = OneArgument( argument, arg );
-  strcpy ( arg2, argument);
+  arg2 = argument;
 
-  if ( !IsNullOrEmpty( arg ) )
+  if ( !arg.empty() )
     {
       if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
-
         {
           ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
           return;
         }
 
-      if ( IsNullOrEmpty( arg2 ) )
+      if ( arg2.empty() )
         {
-          ch->Echo( "&RUsage: hail <ship> <message>\r\n&w");
+          ch->Echo( "&RUsage: Hail <ship> <message>\r\n&w");
           return;
         }
 
@@ -44,15 +43,13 @@ void do_hail( Character *ch , char *argument )
 
       target = GetShipInRange( arg,ship );
 
-
-      if (  target == NULL )
-
+      if ( target == NULL )
         {
           ch->Echo("&RThat ship isn't here!\r\n");
           return;
         }
 
-      if (  target == ship )
+      if ( target == ship )
         {
           ch->Echo("&RWhy don't you just say it?\r\n");
           return;
@@ -65,18 +62,18 @@ void do_hail( Character *ch , char *argument )
           return;
         }
 
-      strcpy( buf , "You hail the " );
-      strcat( buf , target->Name );
-      strcat( buf , ": &C" );
-      strcat( buf , arg2 );
-      strcat( buf , "&w\r\n" );
+      strcpy( buf, "You hail the " );
+      strcat( buf, target->Name.c_str() );
+      strcat( buf, ": &C" );
+      strcat( buf, arg2.c_str() );
+      strcat( buf, "&w\r\n" );
 
       EchoToShip( AT_WHITE , ship , buf);
 
-      strcpy( buf , ship->Name );
-      strcat( buf , " hails you: &C" );
-      strcat( buf , arg2 );
-      strcat( buf , "&w\r\n" );
+      strcpy( buf, ship->Name.c_str() );
+      strcat( buf, " hails you: &C" );
+      strcat( buf, arg2.c_str() );
+      strcat( buf, "&w\r\n" );
 
       EchoToShip( AT_WHITE , target , buf);
 
@@ -134,7 +131,9 @@ void do_hail( Character *ch , char *argument )
 
   vnum = ch->InRoom->Vnum;
 
-  for ( vnum = ch->InRoom->Area->VnumRanges.Room.First  ;  vnum <= ch->InRoom->Area->VnumRanges.Room.Last  ;  vnum++ )
+  for ( vnum = ch->InRoom->Area->VnumRanges.Room.First;
+        vnum <= ch->InRoom->Area->VnumRanges.Room.Last;
+        vnum++ )
     {
       room = GetRoom ( vnum );
 
@@ -158,7 +157,8 @@ void do_hail( Character *ch , char *argument )
   if( ch->InRoom && ch->InRoom->Area )
     BoostEconomy( ch->InRoom->Area, gold );
 
-  Act( AT_ACTION, "$n hails a speederbike, and drives off to seek shelter.", ch, NULL, NULL,  TO_ROOM );
+  Act( AT_ACTION, "$n hails a speederbike, and drives off to seek shelter.",
+       ch, NULL, NULL,  TO_ROOM );
 
   CharacterFromRoom( ch );
   CharacterToRoom( ch, room );
@@ -181,4 +181,3 @@ void do_hail( Character *ch , char *argument )
 
   do_look( ch, "auto" );
 }
-

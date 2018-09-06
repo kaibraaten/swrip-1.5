@@ -117,7 +117,7 @@ static int L_PlanetEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      planet->Name = CopyString( lua_tostring( L, idx ) );
+      planet->Name = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -174,7 +174,7 @@ static void LuaPushAreas( lua_State *L, const Planet *planet )
       for(const Area *area : planet->Areas())
 	{
 	  lua_pushinteger( L, idx );
-	  lua_pushstring( L, area->Filename );
+	  lua_pushstring( L, area->Filename.c_str() );
 	  lua_settable( L, -3 );
 	}
       
@@ -209,10 +209,10 @@ static void PushPlanet( lua_State *L, const void *userData )
   lua_setglobal( L, "planet" );
 }
 
-const char *GetPlanetFilename( const Planet *planet )
+std::string GetPlanetFilename( const Planet *planet )
 {
-  static char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s", PLANET_DIR, ConvertToLuaFilename( planet->Name ) );
+  char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", PLANET_DIR, ConvertToLuaFilename( planet->Name ).c_str() );
   return fullPath;
 }
 

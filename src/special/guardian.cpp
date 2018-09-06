@@ -29,14 +29,14 @@ bool spec_guardian( Character *ch )
       if( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
         {
           sprintf( buf, "%s is a %s! As well as a COWARD!",
-                   victim->Name, crime );
+                   victim->Name.c_str(), crime );
           do_yell( ch, buf );
           return true;
         }
       else
         {
           sprintf( buf, "%s is a %s! PROTECT THE INNOCENT!!",
-                   victim->Name, crime );
+                   victim->Name.c_str(), crime );
           do_shout( ch, buf );
           HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
           return true;
@@ -45,4 +45,3 @@ bool spec_guardian( Character *ch )
   
   return false;
 }
-

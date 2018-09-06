@@ -3,7 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_hide( Character *ch, char *argument )
+void do_hide( Character *ch, std::string argument )
 {
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {

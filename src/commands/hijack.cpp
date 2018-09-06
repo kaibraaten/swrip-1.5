@@ -5,14 +5,13 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_hijack( Character *ch, char *argument )
+void do_hijack( Character *ch, std::string argument )
 {
   int the_chance = 0;
   Ship *ship = NULL;
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   Character *p = NULL, *p_prev = NULL, *victim = NULL;
-
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
@@ -81,28 +80,31 @@ void do_hijack( Character *ch, char *argument )
   if ( ship->Class == FIGHTER_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_starfighters]) ;
+
   if ( ship->Class == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_midships]) ;
+
   if ( ship->Class == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int) (ch->PCData->Learned[gsn_capitalships]);
+
   if ( GetRandomPercent() < the_chance )
     {
-
       if (ship->HatchOpen)
         {
           ship->HatchOpen = false;
-          sprintf( buf , "The hatch on %s closes." , ship->Name);
+          sprintf( buf , "The hatch on %s closes.", ship->Name.c_str() );
           EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
           EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Entrance) , "The hatch slides shut." );
         }
+
       SetCharacterColor( AT_GREEN, ch );
       ch->Echo( "Launch sequence initiated.\r\n" );
       Act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
-           NULL, argument , TO_ROOM );
+           NULL, argument.c_str(), TO_ROOM );
       EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
-      sprintf( buf, "%s begins to launch.", ship->Name );
+      sprintf( buf, "%s begins to launch.", ship->Name.c_str() );
       EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
       ship->State = SHIP_LAUNCH;
       ship->Thrusters.Speed.Current = ship->Thrusters.Speed.Max;
@@ -119,21 +121,21 @@ void do_hijack( Character *ch, char *argument )
       LearnFromSuccess( ch, gsn_hijack );
 
       for (p = LastCharacter; p ; p = p_prev )
-
         {
           p_prev = p->Previous;  /* TRI */
 
           if (!IsNpc(p) && GetTrustLevel(p) >= LEVEL_GREATER)
             {
-              sprintf( buf2, "%s(%s)", ship->Name, ship->PersonalName );
-              p->Echo( "&R[Alarm] %s has been hijacked by %s!\r\n", buf2, ch->Name);
+              sprintf( buf2, "%s(%s)", ship->Name.c_str(), ship->PersonalName.c_str() );
+              p->Echo( "&R[Alarm] %s has been hijacked by %s!\r\n",
+                       buf2, ch->Name.c_str());
             }
         }
 
       if ( !ship->Alarm )
 	return;
       
-      if ( !StrCmp("Public",ship->Owner) )
+      if ( !StrCmp("Public", ship->Owner) )
         return;
       
       for ( victim = FirstCharacter; victim; victim = victim->Next )
@@ -150,7 +152,7 @@ void do_hijack( Character *ch, char *argument )
           if ( !IsAwake(victim) || IsBitSet(victim->InRoom->Flags,ROOM_SILENCE) )
             continue;
 
-          victim->Echo("&R[Alarm] %s has been hijacked!\r\n", ship->Name);
+          victim->Echo("&R[Alarm] %s has been hijacked!\r\n", ship->Name.c_str());
         }
 
       return;

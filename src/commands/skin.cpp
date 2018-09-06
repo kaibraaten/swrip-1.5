@@ -4,15 +4,15 @@
 #include "log.hpp"
 #include "object.hpp"
 
-void do_skin( Character *ch, char *argument)
+void do_skin( Character *ch, std::string argument)
 {
   Object *corpse = nullptr;
   Object *obj = nullptr;
   Object *skin = nullptr;
-  char *name = nullptr;
+  std::string name;
   char buf[MAX_STRING_LENGTH];
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Whose corpse do you wish to skin?\r\n");
       return;
@@ -64,26 +64,23 @@ void do_skin( Character *ch, char *argument)
   Act( AT_BLOOD, "You strip the skin from $p.", ch, corpse, NULL, TO_CHAR);
   skin = CreateObject( GetProtoObject(OBJ_VNUM_SKIN), 0 );
   name = corpse->ShortDescr;
-  sprintf( buf, skin->ShortDescr, name );
-  FreeMemory( skin->ShortDescr );
-  skin->ShortDescr = CopyString( buf );
-  sprintf( buf, skin->Description, name );
-  FreeMemory( skin->Description );
-  skin->Description = CopyString( buf );
+  sprintf( buf, skin->ShortDescr.c_str(), name.c_str() );
+  skin->ShortDescr = buf;
+  sprintf( buf, skin->Description.c_str(), name.c_str() );
+  skin->Description = buf;
 
-  sprintf( buf, "The skinned bones of %s", name );
-  FreeMemory( corpse->Name );
-  corpse->Name = CopyString( buf );
-  sprintf( buf, "The skinned bones of %s", name );
-  FreeMemory( corpse->Description );
-  corpse->Description = CopyString( buf );
-  sprintf( buf, "The skinned bones of %s", name );
-  FreeMemory( corpse->ShortDescr );
-  corpse->ShortDescr = CopyString( buf );
+  sprintf( buf, "The skinned bones of %s", name.c_str() );
+  corpse->Name = buf;
+
+  sprintf( buf, "The skinned bones of %s", name.c_str() );
+  corpse->Description = buf;
+
+  sprintf( buf, "The skinned bones of %s", name.c_str() );
+  corpse->ShortDescr = buf;
+
   corpse->Value[OVAL_CORPSE_SKINNED] = 1;
   corpse->Value[OVAL_CORPSE_DECAY] = -1;
   corpse->Timer = -1;
 
   ObjectToCharacter( skin, ch );
 }
-

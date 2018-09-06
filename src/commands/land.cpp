@@ -8,17 +8,14 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_land( Character *ch, char *argument )
+void do_land( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
   int the_chance = 0;
   Ship *ship = NULL;
   Ship *target = NULL;
   char buf[MAX_STRING_LENGTH];
   Spaceobject *spaceobj = NULL;
   bool found = false;
-
-  strcpy( arg, argument );
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
@@ -52,14 +49,16 @@ void do_land( Character *ch, char *argument )
 
   if (ship->Class == CAPITAL_SHIP)
     {
-      ch->Echo("&RCapital ships are to big to land. You'll have to take a shuttle.\r\n");
+      ch->Echo("&RThis ship is too big to land. You'll have to take a shuttle.\r\n");
       return;
     }
+
   if (IsShipDisabled( ship ))
     {
-      ch->Echo("&RThe ships drive is disabled. Unable to land.\r\n");
+      ch->Echo("&RThe ship's drive is disabled. Unable to land.\r\n");
       return;
     }
+
   if (ship->State == SHIP_LANDED)
     {
       if ( ship->Docked == NULL )
@@ -68,6 +67,7 @@ void do_land( Character *ch, char *argument )
           return;
         }
     }
+
   if (ship->Docking != SHIP_READY)
     {
       ch->Echo("&RYou can't do that while docked to another ship!\r\n");
@@ -85,12 +85,14 @@ void do_land( Character *ch, char *argument )
       ch->Echo("&RYou can not move in a tractorbeam!\r\n");
       return;
     }
+
   if (ship->WeaponSystems.TractorBeam.Tractoring
       && ship->WeaponSystems.TractorBeam.Tractoring->Class > ship->Class )
     {
       ch->Echo("&RYou can not move while a tractorbeam is locked on to such a large mass.\r\n");
       return;
     }
+
   if (ship->State != SHIP_READY)
     {
       ch->Echo("&RPlease wait until the ship has finished its current maneuver.\r\n");
@@ -99,14 +101,14 @@ void do_land( Character *ch, char *argument )
 
   if ( ship->Thrusters.Energy.Current < (25 + 25 * ((int)ship->Class) ) )
     {
-      ch->Echo("&RTheres not enough fuel!\r\n");
+      ch->Echo("&RThere's not enough fuel!\r\n");
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       SetCharacterColor(  AT_CYAN, ch );
-      ch->Echo("%s" , "Land where?\r\n\r\nChoices: ");
+      ch->Echo( "Land where?\r\n\r\nChoices: " );
 
       for(std::list<Spaceobject*>::const_iterator i = Spaceobjects->Entities().cbegin();
           i != Spaceobjects->Entities().cend(); ++i)
@@ -123,12 +125,12 @@ void do_land( Character *ch, char *argument )
 
 		  if ( site->Dock && !site->IsSecret )
 		    {
-                      ch->Echo("%s (%s)  %.0f %.0f %.0f\r\n         " ,
-			   site->LocationName,
-			   spaceobj->Name,
-			   spaceobj->Position.x,
-			   spaceobj->Position.y,
-			   spaceobj->Position.z );
+                      ch->Echo("%s (%s)  %.0f %.0f %.0f\r\n         ",
+                               site->LocationName.c_str(),
+                               spaceobj->Name.c_str(),
+                               spaceobj->Position.x,
+                               spaceobj->Position.y,
+                               spaceobj->Position.z );
 		    }
 		}
             }
@@ -216,13 +218,13 @@ void do_land( Character *ch, char *argument )
       SetCharacterColor( AT_GREEN, ch );
       ch->Echo("Landing sequence initiated.\r\n");
       Act( AT_PLAIN, "$n begins the landing sequence.", ch,
-           NULL, argument , TO_ROOM );
-      sprintf( buf ,"%s begins its landing sequence." , ship->Name );
+           NULL, argument.c_str(), TO_ROOM );
+      sprintf( buf, "%s begins its landing sequence.", ship->Name.c_str() );
       EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
       EchoToDockedShip( AT_YELLOW , ship, "The ship begins to enter the atmosphere." );
 
       EchoToShip( AT_YELLOW , ship , "The ship slowly begins its landing approach.");
-      ship->LandingDestination = CopyString(arg);
+      ship->LandingDestination = argument;
       ship->State = SHIP_LAND;
 
       if ( ship->Class == FIGHTER_SHIP )

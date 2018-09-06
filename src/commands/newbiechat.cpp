@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_newbiechat( Character *ch, char *argument )
+void do_newbiechat( Character *ch, std::string argument )
 {
   if ( ch->TopLevel > 5 )
     {

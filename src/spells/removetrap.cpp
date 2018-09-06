@@ -4,7 +4,7 @@
 #include "room.hpp"
 #include "object.hpp"
 
-extern char *spell_target_name;
+extern std::string spell_target_name;
 
 ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
 {
@@ -14,7 +14,7 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
   int retcode = rNONE;
   Skill *skill = GetSkill(sn);
 
-  if ( IsNullOrEmpty( spell_target_name ) )
+  if ( spell_target_name.empty() )
     {
       ch->Echo("Remove trap on what?\r\n");
       return rSPELL_FAILED;

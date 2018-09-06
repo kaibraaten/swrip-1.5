@@ -41,7 +41,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
               return rSPELL_FAILED;
             }
 
-          water = umin( (skill->Dice ? ParseDice(ch, level, skill->Dice) : level)
+          water = umin( (!skill->Dice.empty() ? ParseDice(ch, level, skill->Dice) : level)
                         * (weather_info.Sky >= SKY_RAINING ? 2 : 1),
                         obj->Value[OVAL_DRINK_CON_CAPACITY] - obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] );
 
@@ -55,9 +55,8 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
                 {
                   char buf[MAX_STRING_LENGTH];
 
-                  sprintf( buf, "%s water", obj->Name );
-                  FreeMemory( obj->Name );
-                  obj->Name = CopyString( buf );
+                  sprintf( buf, "%s water", obj->Name.c_str() );
+                  obj->Name = buf;
                 }
             }
           SuccessfulCasting( skill, ch, NULL, obj );
@@ -144,7 +143,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
             }
           break;
           clone = CopyObject(obj);
-          clone->Timer = skill->Dice ? ParseDice(ch, level, skill->Dice) : 0;
+          clone->Timer = !skill->Dice.empty() ? ParseDice(ch, level, skill->Dice) : 0;
           ObjectToCharacter( clone, ch );
           SuccessfulCasting( skill, ch, NULL, obj );
         }
@@ -171,7 +170,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
       return rNONE;
     case SA_OBSCURE:                    /* make obj invis */
       if ( IS_OBJ_STAT(obj, ITEM_INVIS)
-           ||   Chance(ch, skill->Dice ? ParseDice(ch, level, skill->Dice) : 20))
+           ||   Chance(ch, !skill->Dice.empty() ? ParseDice(ch, level, skill->Dice) : 20))
         {
           FailedCasting( skill, ch, NULL, NULL );
           return rSPELL_FAILED;

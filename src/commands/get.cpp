@@ -8,10 +8,10 @@
 static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 static void get_obj( Character *ch, Object *obj, Object *container );
 
-void do_get( Character *ch, char *argument )
+void do_get( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
   Object *container = NULL;
   short number = 0;
   bool found = false;
@@ -22,7 +22,7 @@ void do_get( Character *ch, char *argument )
 
   if ( IsNumber(arg1) )
     {
-      number = atoi(arg1);
+      number = std::stoi(arg1);
 
       if ( number < 1 )
         {
@@ -46,13 +46,13 @@ void do_get( Character *ch, char *argument )
   argument = OneArgument( argument, arg2 );
 
   /* munch optional words */
-  if ( !StrCmp( arg2, "from" ) && !IsNullOrEmpty( argument ) )
+  if ( !StrCmp( arg2, "from" ) && !argument.empty() )
     {
       argument = OneArgument( argument, arg2 );
     }
 
   /* Get type. */
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo( "Get what?\r\n" );
       return;
@@ -86,7 +86,7 @@ void do_get( Character *ch, char *argument )
         }
     }
 
-  if ( IsNullOrEmpty( arg2 ) )
+  if ( arg2.empty() )
     {
       if ( number <= 1 && StrCmp( arg1, "all" )
 	   && StringPrefix( "all.", arg1 ) )
@@ -96,7 +96,7 @@ void do_get( Character *ch, char *argument )
 
           if ( !obj )
             {
-              Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg1, TO_CHAR );
+              Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg1.c_str(), TO_CHAR );
               return;
             }
 
@@ -121,7 +121,7 @@ void do_get( Character *ch, char *argument )
         {
           short cnt = 0;
           bool fAll = false;
-          const char *chk = NULL;
+          std::string chk;
 
           if ( !StrCmp(arg1, "all") )
             fAll = true;
@@ -131,7 +131,7 @@ void do_get( Character *ch, char *argument )
           if ( number > 1 )
             chk = arg1;
           else
-            chk = &arg1[4];
+            chk = arg1.size() > 4 ? arg1.substr(4) : "";
 
           /* 'get all' or 'get all.obj' */
           std::list<Object*> objectsOnGround(ch->InRoom->Objects());
@@ -176,7 +176,7 @@ void do_get( Character *ch, char *argument )
               if ( fAll )
                 ch->Echo( "I see nothing here.\r\n" );
               else
-                Act( AT_PLAIN, "I see no $T here.", ch, NULL, chk, TO_CHAR );
+                Act( AT_PLAIN, "I see no $T here.", ch, NULL, chk.c_str(), TO_CHAR );
             }
           else if ( IsBitSet( SysData.SaveFlags, SV_GET ) )
 	    {
@@ -201,7 +201,7 @@ void do_get( Character *ch, char *argument )
 
       if ( ( container = GetObjectHere( ch, arg2 ) ) == NULL )
         {
-          Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2.c_str(), TO_CHAR );
           return;
         }
 
@@ -230,9 +230,10 @@ void do_get( Character *ch, char *argument )
         }
 
       if ( !IS_OBJ_STAT(container, ITEM_COVERING )
-           &&    IsBitSet(container->Value[1], CONT_CLOSED) )
+           && IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
-          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->Name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.",
+               ch, NULL, container->Name.c_str(), TO_CHAR );
           return;
         }
 
@@ -247,20 +248,25 @@ void do_get( Character *ch, char *argument )
               Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
                    "I see nothing like that beneath the $T." :
                    "I see nothing like that in the $T.",
-                   ch, NULL, arg2, TO_CHAR );
+                   ch, NULL, arg2.c_str(), TO_CHAR );
               return;
             }
+
           SeparateOneObjectFromGroup(obj);
           get_obj( ch, obj, container );
 
           CheckObjectForTrap( ch, container, TRAP_GET );
+
           if ( CharacterDiedRecently(ch) )
             return;
+
           if ( IsBitSet( SysData.SaveFlags, SV_GET ) )
             {
 	      SaveCharacter( ch );
+
               if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
                 SaveHome (ch );
+
               if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
                 SaveStoreroom( ch->InRoom );
             }
@@ -268,8 +274,8 @@ void do_get( Character *ch, char *argument )
       else
         {
           int cnt = 0;
-          bool fAll;
-          char *chk;
+          bool fAll = false;
+          std::string chk;
 
           if ( !StrCmp(arg1, "all") )
             fAll = true;
@@ -279,7 +285,7 @@ void do_get( Character *ch, char *argument )
           if ( number > 1 )
             chk = arg1;
           else
-            chk = &arg1[4];
+            chk = arg1.size() > 4 ? arg1.substr(4) : "";
 
           found = false;
 
@@ -291,10 +297,13 @@ void do_get( Character *ch, char *argument )
                    &&   CanSeeObject( ch, obj ) )
                 {
                   found = true;
+
                   if ( number && (cnt + obj->Count) > number )
                     SplitGroupedObject( obj, number - cnt );
+
                   cnt += obj->Count;
                   get_obj( ch, obj, container );
+
                   if ( CharacterDiedRecently(ch)
                        ||   ch->CarryNumber >= GetCarryCapacityNumber( ch )
                        ||   ch->CarryWeight >= GetCarryCapacityWeight( ch )
@@ -309,12 +318,12 @@ void do_get( Character *ch, char *argument )
                 Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
                      "I see nothing beneath the $T." :
                      "I see nothing in the $T.",
-                     ch, NULL, arg2, TO_CHAR );
+                     ch, NULL, arg2.c_str(), TO_CHAR );
               else
                 Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
                      "I see nothing like that beneath the $T." :
                      "I see nothing like that in the $T.",
-                     ch, NULL, arg2, TO_CHAR );
+                     ch, NULL, arg2.c_str(), TO_CHAR );
             }
           else
             {
@@ -332,7 +341,7 @@ void do_get( Character *ch, char *argument )
 
               if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
                 {
-                  SaveHome (ch );
+                  SaveHome( ch );
                 }
 
               if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
@@ -346,7 +355,7 @@ void do_get( Character *ch, char *argument )
 
 static void get_obj( Character *ch, Object *obj, Object *container )
 {
-  int weight;
+  int weight = 0;
 
   if ( !CAN_WEAR(obj, ITEM_TAKE)
        && (ch->TopLevel < SysData.LevelToGetObjectsWithoutTakeFlag )  )
@@ -365,7 +374,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   if ( ch->CarryNumber + GetObjectCount( obj ) > GetCarryCapacityNumber( ch ) )
     {
       Act( AT_PLAIN, "$d: you can't carry that many items.",
-           ch, NULL, obj->Name, TO_CHAR );
+           ch, NULL, obj->Name.c_str(), TO_CHAR );
       return;
     }
 
@@ -377,7 +386,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   if ( ch->CarryWeight + weight > GetCarryCapacityWeight( ch ) )
     {
       Act( AT_PLAIN, "$d: you can't carry that much weight.",
-           ch, NULL, obj->Name, TO_CHAR );
+           ch, NULL, obj->Name.c_str(), TO_CHAR );
       return;
     }
 
@@ -437,4 +446,3 @@ static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch)
       SaveClanStoreroom(ch, clan);
     }
 }
-

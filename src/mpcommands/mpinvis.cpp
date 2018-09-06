@@ -2,20 +2,15 @@
 #include "mud.hpp"
 
 /* Allow mobiles to go wizinvis with programs -- SB */
-
-void do_mpinvis( Character *ch, char *argument )
+void do_mpinvis( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-
   if ( !IsNpc(ch))
     {
       ch->Echo("Huh?\r\n");
       return;
     }
 
-  argument = OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       short level = 0;
 
@@ -25,7 +20,7 @@ void do_mpinvis( Character *ch, char *argument )
           return;
         }
 
-      level = atoi( arg );
+      level = std::stoi( arg );
 
       if ( level < 2 || level > MAX_LEVEL )
         {
@@ -54,4 +49,3 @@ void do_mpinvis( Character *ch, char *argument )
       ch->Echo("You slowly vanish into thin air.\r\n");
     }
 }
-

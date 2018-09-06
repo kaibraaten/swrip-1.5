@@ -3,7 +3,7 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_sit (Character *ch, char *argument )
+void do_sit( Character *ch, std::string argument )
 {
   Object *obj = NULL;
 
@@ -14,7 +14,7 @@ void do_sit (Character *ch, char *argument )
     }
 
   /* okay, now that we know we can sit, find an object to sit on */
-  if ( !IsNullOrEmpty( argument ) )
+  if ( !argument.empty() )
     {
       obj = GetObjectInList( ch, argument, ch->InRoom->Objects());
 
@@ -126,4 +126,3 @@ void do_sit (Character *ch, char *argument )
       break;
     }
 }
-

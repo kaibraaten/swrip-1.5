@@ -7,7 +7,7 @@
 #include "protoobject.hpp"
 #include "protomob.hpp"
 
-void do_placevendor (Character *ch, char *argument)
+void do_placevendor (Character *ch, std::string argument)
 {
   char strsave[MAX_INPUT_LENGTH];
   struct stat fst;
@@ -47,15 +47,13 @@ void do_placevendor (Character *ch, char *argument)
       return;
     }
 
-  sprintf( strsave, "%s/%s", VENDOR_DIR, Capitalize( ch->Name ) );
+  sprintf( strsave, "%s/%s", VENDOR_DIR, Capitalize( ToLower(ch->Name) ).c_str() );
 
   if ( stat( strsave, &fst ) != -1 )
     {
       ch->Echo("You already have a shop!\r\n");
       return;
     }
-
-
 
   if ( (temp = GetProtoMobile (MOB_VNUM_VENDOR) ) == NULL )
     {
@@ -66,12 +64,10 @@ void do_placevendor (Character *ch, char *argument)
   CharacterToRoom( CreateMobile( temp ), ch->InRoom );
   vendor = GetCharacterInRoom(ch, temp->Name);
 
-  sprintf (buf, vendor->LongDescr, ch->Name);
-  vendor->LongDescr =  CopyString( buf );
+  sprintf(buf, vendor->LongDescr.c_str(), ch->Name.c_str());
+  vendor->LongDescr = buf;
 
-  sprintf (buf, "%s", ch->Name);
-
-  vendor->Owner = CopyString(buf);
+  vendor->Owner = ch->Name;
   vendor->Home = ch->InRoom;
 
   SaveVendor (vendor);
@@ -82,7 +78,7 @@ void do_placevendor (Character *ch, char *argument)
   Act( AT_ACTION, "$n appears in a swirl of smoke.\n", vendor, NULL, NULL, TO_ROOM );
 
   sprintf(vnum1,"%ld", vendor->Prototype->Vnum);
-  do_makeshop (vendor, vnum1 ); /*makes the vendor a shop.. there has to be a
+  do_makeshop(vendor, vnum1 ); /*makes the vendor a shop.. there has to be a
                                   better way to do it but hell if i know what it is!*/
 }
 

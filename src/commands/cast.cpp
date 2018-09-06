@@ -6,17 +6,16 @@
 #include "log.hpp"
 #include "room.hpp"
 
-extern char *spell_target_name;
+extern std::string spell_target_name;
 extern int pAbort;
 
 /*
  * Cast a spell.  Multi-caster and component support by Thoric
  */
-void do_cast( Character *ch, char *argument )
+void do_cast( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char targetName[1024];
-  static char staticbuf[MAX_INPUT_LENGTH + 1];
+  std::string arg1;
+  std::string targetName;
   Character *victim = nullptr;
   Object *obj = nullptr;
   void *vo = nullptr;
@@ -47,7 +46,7 @@ void do_cast( Character *ch, char *argument )
       spell_target_name = OneArgument( argument, arg1 );
       OneArgument( spell_target_name, targetName );
 
-      if ( IsNullOrEmpty( arg1 ) )
+      if ( arg1.empty() )
         {
           ch->Echo( "Cast which what where?\r\n" );
           return;
@@ -176,8 +175,7 @@ void do_cast( Character *ch, char *argument )
       Act( AT_MAGIC, "You begin to feel the force in yourself and those around you...",
 	   ch, NULL, NULL, TO_CHAR );
       Act( AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, TO_ROOM );
-      sprintf( staticbuf, "%s %s", targetName, spell_target_name );
-      ch->dest_buf = CopyString( staticbuf );
+      ch->dest_buf = CopyString( targetName + " " + spell_target_name );
       ch->tempnum = sn;
       return;
 
@@ -222,8 +220,8 @@ void do_cast( Character *ch, char *argument )
         }
 
       mana = IsNpc(ch) ? 0 : skill->Mana;
-      strcpy( staticbuf, (const char*)ch->dest_buf );
-      spell_target_name = OneArgument(staticbuf, targetName);
+      std::string buf = static_cast<const char*>( ch->dest_buf );
+      spell_target_name = OneArgument(buf, targetName);
       FreeMemory( ch->dest_buf );
       ch->SubState = SUB_NONE;
 
@@ -238,7 +236,7 @@ void do_cast( Character *ch, char *argument )
                  && (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
                  && t->Count >= 1 && t->DoFun == do_cast
                  && tmp->tempnum == sn && tmp->dest_buf
-                 && !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
+                 && !StrCmp( (const char*)tmp->dest_buf, buf ) )
                 {
                   ++cnt;
                 }
@@ -252,7 +250,7 @@ void do_cast( Character *ch, char *argument )
                      && (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
                      && t->Count >= 1 && t->DoFun == do_cast
                      && tmp->tempnum == sn && tmp->dest_buf
-                     && !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
+                     && !StrCmp( (const char*)tmp->dest_buf, buf ) )
                     {
                       ExtractTimer( tmp, t );
                       Act( AT_MAGIC, "Channeling your energy into $n, you help direct the force",
@@ -307,7 +305,7 @@ void do_cast( Character *ch, char *argument )
           return;
         }
 
-      if (  ch->Alignment < skill->Alignment )
+      if ( ch->Alignment < skill->Alignment )
         {
           ch->Echo( "Your anger and hatred prevent you from focusing.\r\n" );
 
@@ -397,7 +395,7 @@ void do_cast( Character *ch, char *argument )
       else
         {
           StartTimer(&time_used);
-          retcode = (*skill->SpellFunction) ( sn, GetAbilityLevel( ch, FORCE_ABILITY ), ch, vo );
+          retcode = skill->SpellFunction( sn, GetAbilityLevel( ch, FORCE_ABILITY ), ch, vo );
           StopTimer(&time_used);
           UpdateNumberOfTimesUsed(&time_used, skill->UseRec);
         }
@@ -405,11 +403,10 @@ void do_cast( Character *ch, char *argument )
 
   if ( retcode == rCHAR_DIED || retcode == rERROR || CharacterDiedRecently(ch) )
     return;
+
   if ( retcode != rSPELL_FAILED )
     {
-      int force_exp;
-
-      force_exp = skill->Level * skill->Level * 10;
+      int force_exp = skill->Level * skill->Level * 10;
       force_exp = urange( 0, force_exp, ( GetRequiredXpForLevel(GetAbilityLevel( ch, FORCE_ABILITY ) + 1 ) - GetRequiredXpForLevel(GetAbilityLevel(ch, FORCE_ABILITY ) ) )/35 );
 
       if( !ch->Fighting  )
@@ -448,4 +445,3 @@ void do_cast( Character *ch, char *argument )
         }
     }
 }
-

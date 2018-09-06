@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_clantalk( Character *ch, char *argument )
+void do_clantalk( Character *ch, std::string argument )
 {
   if (!IsAuthed(ch))
     {

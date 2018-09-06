@@ -98,9 +98,9 @@ static int L_BountyEntry( lua_State *L )
       Bounty *bounty = new Bounty();
       Bounties->Add(bounty);
 
-      bounty->Target = CopyString( target );
+      bounty->Target = target;
       bounty->Reward = reward;
-      bounty->Poster = CopyString( poster );
+      bounty->Poster = poster;
     }
 
   lua_pop( L, lua_gettop( L ) - 1 );
@@ -118,8 +118,8 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
       bounty = new Bounty();
       Bounties->Add(bounty);
 
-      bounty->Target = CopyString( victim->Name );
-      bounty->Poster = CopyString( ch->Name );
+      bounty->Target = victim->Name;
+      bounty->Poster = ch->Name;
     }
 
   bounty->Reward = bounty->Reward + amount;
@@ -127,8 +127,8 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
 
   victim->Echo("&RSomeone has added %ld credits to the bounty on you!\r\n", amount);
   sprintf( buf, "&R%s has added %ld credits to the bounty on %s.\r\n",
-           ch->Name, amount, victim->Name );
-  ch->Echo(buf);
+           ch->Name.c_str(), amount, victim->Name.c_str() );
+  ch->Echo("%s", buf);
 
   for (echoTo = LastCharacter; echoTo; echoTo = echoTo->Previous)
     {
@@ -136,7 +136,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
           || IsImmortal(echoTo))
          && echoTo != ch)
 	{
-	  echoTo->Echo(buf);
+	  echoTo->Echo("%s", buf);
 	}
     }
 }
@@ -144,8 +144,6 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
 void RemoveBounty( Bounty *bounty )
 {
   Bounties->Remove(bounty);
-  FreeMemory( bounty->Target );
-  FreeMemory( bounty->Poster );
   delete bounty;
 
   Bounties->Save();
@@ -205,9 +203,9 @@ void ClaimBounty( Character *ch, const Character *victim )
 
   SetCharacterColor( AT_BLOOD, ch );
   ch->Echo( "You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n",
-            xp, bounty->Reward, bounty->Target );
+            xp, bounty->Reward, bounty->Target.c_str() );
 
-  sprintf( buf, "The disintegration bounty on %s has been claimed!",victim->Name );
+  sprintf( buf, "The disintegration bounty on %s has been claimed!",victim->Name.c_str() );
   EchoToAll( AT_RED , buf, 0 );
 
   if ( !IsBitSet(victim->Flags , PLR_KILLER ) )

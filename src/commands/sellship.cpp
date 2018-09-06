@@ -2,19 +2,21 @@
 #include "ship.hpp"
 #include "character.hpp"
 
-void do_sellship(Character *ch, char *argument )
+void do_sellship(Character *ch, std::string argument )
 {
-  long         price;
-  Ship   *ship;
+  long price = 0;
+  Ship *ship = nullptr;
 
-  ship = GetShipInRoom( ch->InRoom , argument );
+  ship = GetShipInRoom( ch->InRoom, argument );
+
   if ( !ship )
     {
-      Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+      Act( AT_PLAIN, "I see no $T here.",
+           ch, NULL, argument.c_str(), TO_CHAR );
       return;
     }
 
-  if ( StrCmp( ship->Owner , ch->Name ) )
+  if ( StrCmp( ship->Owner, ch->Name ) )
     {
       ch->Echo("&RThat isn't your ship!" );
       return;
@@ -23,15 +25,13 @@ void do_sellship(Character *ch, char *argument )
   price = GetShipValue( ship );
 
   ch->Gold += ( price - price/10 );
-  ch->Echo("&GYou receive %ld credits from selling your ship.\r\n" , price - price/10 );
+  ch->Echo("&GYou receive %ld credits from selling your ship.\r\n", price - price/10 );
 
-  Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
-       NULL, argument , TO_ROOM );
+  Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",
+       ch, NULL, argument.c_str(), TO_ROOM );
 
-  FreeMemory( ship->Owner );
-  ship->Owner = CopyString( "" );
-  ship->Pilot = CopyString( "" );
-  ship->CoPilot = CopyString( "" );
+  ship->Owner.erase();
+  ship->Pilot.erase();
+  ship->CoPilot.erase();
   Ships->Save(ship);
 }
-

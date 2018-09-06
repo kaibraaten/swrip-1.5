@@ -1,16 +1,16 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_at( Character *ch, char *argument )
+void do_at( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   Room *location = NULL;
   Room *original = NULL;
   Character *wch = NULL;
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
+  if ( arg.empty() || argument.empty() )
     {
       ch->Echo( "At where what?\r\n" );
       return;

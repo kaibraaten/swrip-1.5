@@ -2,13 +2,13 @@
 #include "character.hpp"
 #include "systemdata.hpp"
 
-void do_force( Character *ch, char *argument )
+void do_force( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   bool mobsonly = false;
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
+  if ( arg.empty() || argument.empty() )
     {
       ch->Echo( "Force whom to do what?\r\n" );
       return;
@@ -33,7 +33,8 @@ void do_force( Character *ch, char *argument )
 
           if ( !IsNpc(vch) && GetTrustLevel( vch ) < GetTrustLevel( ch ) )
             {
-              Act( AT_IMMORT, "$n forces you to '$t'.", ch, argument, vch, TO_VICT );
+              Act( AT_IMMORT, "$n forces you to '$t'.",
+                   ch, argument.c_str(), vch, TO_VICT );
               Interpret( vch, argument );
 	    }
         }
@@ -61,7 +62,8 @@ void do_force( Character *ch, char *argument )
           return;
         }
 
-      Act( AT_IMMORT, "$n forces you to '$t'.", ch, argument, victim, TO_VICT );
+      Act( AT_IMMORT, "$n forces you to '$t'.",
+           ch, argument.c_str(), victim, TO_VICT );
       Interpret( victim, argument );
     }
 

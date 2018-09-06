@@ -60,7 +60,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
   if ( ch != victim )
     ch->Echo("Ok.\r\n");
 
-  sprintf( buf, "%s has charmed %s.", ch->Name, victim->Name);
+  sprintf( buf, "%s has charmed %s.", ch->Name.c_str(), victim->Name.c_str());
   Log->LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
 
   return rNONE;

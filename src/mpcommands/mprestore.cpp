@@ -4,12 +4,12 @@
 /*
  * syntax: mprestore (character) (#hps)                Gorog
  */
-void do_mp_restore( Character *ch, char *argument )
+void do_mp_restore( Character *ch, std::string argument )
 {
-  char arg1[ MAX_INPUT_LENGTH ];
-  char arg2[ MAX_INPUT_LENGTH ];
-  Character *victim;
-  int hp;
+  std::string arg1;
+  std::string arg2;
+  Character *victim = nullptr;
+  int hp = 0;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -19,17 +19,18 @@ void do_mp_restore( Character *ch, char *argument )
       ch->Echo("Huh?\r\n");
       return;
     }
+
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo("mprestore whom?\r\n");
       ProgBug( "Mprestore: invalid argument1", ch );
       return;
     }
 
-  if ( IsNullOrEmpty( arg2 ) )
+  if ( arg2.empty() )
     {
       ch->Echo("mprestore how many hps?\r\n");
       ProgBug( "Mprestore: invalid argument2", ch );
@@ -43,7 +44,7 @@ void do_mp_restore( Character *ch, char *argument )
       return;
     }
 
-  hp = atoi(arg2);
+  hp = std::stoi(arg2);
 
   if( hp < 0 || hp > 32000 )
     {
@@ -51,7 +52,7 @@ void do_mp_restore( Character *ch, char *argument )
       ProgBug( "Mprestore: invalid (nonexistent?) argument", ch );
       return;
     }
+
   hp += victim->Hit;
   victim->Hit = (hp > SHRT_MAX || hp < 0 || hp > victim->MaxHit) ? victim->MaxHit : hp;
 }
-

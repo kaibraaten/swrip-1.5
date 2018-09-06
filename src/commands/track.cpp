@@ -5,11 +5,10 @@
 #include "ship.hpp"
 #include "pcdata.hpp"
 
-void do_track( Character *ch, char *argument )
+void do_track( Character *ch, std::string arg )
 {
   Character *vict = NULL;
-  char arg[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   int maxdist = 0;
 
   if ( !IsNpc(ch) && !ch->PCData->Learned[gsn_track] )
@@ -18,9 +17,7 @@ void do_track( Character *ch, char *argument )
       return;
     }
 
-  OneArgument(argument, arg);
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Whom are you trying to track?\r\n");
       return;
@@ -64,4 +61,3 @@ void do_track( Character *ch, char *argument )
       break;
     }
 }
-

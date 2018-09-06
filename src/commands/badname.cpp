@@ -4,9 +4,9 @@
 #include "pcdata.hpp"
 #include "character.hpp"
 
-void do_badname( Character *ch, char *argument )
+void do_badname( Character *ch, std::string argument )
 {
-  char command[MAX_STRING_LENGTH] = { '\0' };
+  std::string command;
 
   if( !StrCmp( argument, "list" ) )
     {
@@ -38,7 +38,7 @@ void do_badname( Character *ch, char *argument )
   
   argument = OneArgument( argument, command );
   
-  if( IsNullOrEmpty( argument ) || IsNullOrEmpty( command ) )
+  if( argument.empty() || command.empty() )
     {
       ch->Echo( "Usage: badname <command> <name>\r\n" );
       ch->Echo( "Commands:\r\n" );

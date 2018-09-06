@@ -3,26 +3,26 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_teach( Character *ch, char *argument )
+void do_teach( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   int sn = 0;
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
 
   if ( IsNpc(ch) )
     return;
 
   argument = OneArgument(argument, arg);
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Teach who, what?\r\n");
       return;
     }
   else
     {
-      Character *victim;
-      int adept;
+      Character *victim = nullptr;
+      int adept = 0;
 
       if ( !IsAwake(ch) )
         {
@@ -32,13 +32,13 @@ void do_teach( Character *ch, char *argument )
 
       if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
         {
-          ch->Echo("They don't seem to be here...\r\n");
+          ch->Echo("They don't seem to be here.\r\n");
           return;
         }
 
       if (IsNpc(victim))
         {
-   ch->Echo("You can't teach that to them!\r\n");
+          ch->Echo("You can't teach that to them!\r\n");
           return;
         }
 
@@ -79,21 +79,22 @@ void do_teach( Character *ch, char *argument )
           Act( AT_TELL, "$n must practice that on their own.", victim, NULL, ch, TO_VICT );
           return;
         }
+
       if ( ch->PCData->Learned[sn] < 100 )
         {
-          Act( AT_TELL, "You must perfect that yourself before teaching others.", victim, NULL, ch, TO_VICT );
+          Act( AT_TELL, "You must perfect that yourself before teaching others.",
+               victim, NULL, ch, TO_VICT );
           return;
 	}
       else
         {
           victim->PCData->Learned[sn] += IntelligenceBonus[GetCurrentIntelligence(ch)].Learn;
-          sprintf( buf, "You teach %s $T.", victim->Name );
+          sprintf( buf, "You teach %s $T.", victim->Name.c_str() );
           Act( AT_ACTION, buf,
-               ch, NULL, SkillTable[sn]->Name, TO_CHAR );
-          sprintf( buf, "%s teaches you $T.", ch->Name );
+               ch, NULL, SkillTable[sn]->Name.c_str(), TO_CHAR );
+          sprintf( buf, "%s teaches you $T.", ch->Name.c_str() );
           Act( AT_ACTION, buf,
-               victim, NULL, SkillTable[sn]->Name, TO_CHAR );
+               victim, NULL, SkillTable[sn]->Name.c_str(), TO_CHAR );
         }
     }
 }
-

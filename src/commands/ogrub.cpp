@@ -59,12 +59,12 @@ static bool go_read_names( Character *ch, Object *po, GO_STRUCT *r, bool np_sw,
   free(p); free(a);
 */
 
-void do_ogrub (Character *ch, char *argument)
+void do_ogrub (Character *ch, std::string argument)
 {
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
         OSTR, ODEX, OCON, OWIS, OINT, OLUCK,
         OSAV0, OSAV1, OSAV2, OSAV3, OSAV4};
-  char arg1[MAX_STRING_LENGTH];
+  std::string arg1;
   int  dis_num;                            /* display lines requested     */
   int  op_num = 0;                         /* num of operands on cmd line */
   int  sor_ind  = OVNUM;                   /* sort indicator              */
@@ -79,44 +79,53 @@ void do_ogrub (Character *ch, char *argument)
   go_init();                              /* initialize data structures  */
   argument = OneArgument (argument, arg1);
 
-  if ( !*arg1 )
+  if ( arg1.empty() )
     {
       ch->Echo("Syntax: ogrub <num of lines> <sort order> [keywords] [operands].\r\n");
       return;
     }
-  if ( isdigit(*arg1) )        /* first arg is number of display lines   */
-    dis_num = atoi(arg1);
+
+  if ( IsNumber(arg1) )        /* first arg is number of display lines   */
+    {
+      dis_num = std::stoi(arg1);
+    }
   else
     {
       ch->Echo("You did not specify the number of display lines.\r\n");
       return;
     }
+
   if ( dis_num > MAX_DISPLAY_LINES )
     {
-      ch->Echo("Sorry. You have requested more than %d display "
-                   "lines.\r\n", MAX_DISPLAY_LINES);
+      ch->Echo("Sorry. You have requested more than %d display lines.\r\n",
+               MAX_DISPLAY_LINES);
       return;
     }
 
   argument = OneArgument (argument, arg1);
-  while ( *arg1 )                      /* build the operand table        */
+
+  while ( !arg1.empty() )                      /* build the operand table        */
     {
       if ( op_num >= MAX_NUM_OPS )
         {
           ch->Echo("Sorry. You have entered more than %d operands.\r\n",
-                       MAX_NUM_OPS, MAX_NUM_OPS );
+                   MAX_NUM_OPS, MAX_NUM_OPS );
           return;
         }
-      if ( !go_parse_operand (ch, arg1, &op_num, &sor_ind, &sor_dir,
+
+      if ( !go_parse_operand (ch, arg1.c_str(), &op_num, &sor_ind, &sor_dir,
                               &or_sw, &np_sw, &nm_sw, &ng_sw, &do_sw, &d2_sw ) )
         return;
+      
       argument = OneArgument (argument, arg1);
     }
+
   if (op_num <= 0)
     {
       ch->Echo("Sorry. You did not include any valid operands.\r\n");
       return;
     }
+
   if ( do_sw )
     display_operand_table (ch, op_num);
 
@@ -672,14 +681,14 @@ static bool go_read_names( Character *ch, Object *po, GO_STRUCT *r, bool np_sw,
   const char *ground = "(none)";
   const char *ack    = "(error in data structure)";
 
-  r->s[ONAME] = ( po->Name ) ? po->Name : ack;  /* set object name */
+  r->s[ONAME] = !po->Name.empty() ? po->Name.c_str() : ack;  /* set object name */
 
   if ( po->CarriedBy )                  /* it's being carried by a char */
     {
       if ( GetTrustLevel(ch) < po->CarriedBy->TopLevel ) return false;
       if ( nm_sw &&  IsNpc(po->CarriedBy) ) return false;
       if ( np_sw && !IsNpc(po->CarriedBy) ) return false;
-      r->s[CNAME] = po->CarriedBy->Name;
+      r->s[CNAME] = po->CarriedBy->Name.c_str();
     }
   else if ( po->InObject )                 /* it's in a container          */
     {
@@ -692,7 +701,7 @@ static bool go_read_names( Character *ch, Object *po, GO_STRUCT *r, bool np_sw,
         return false;
       if ( pt->CarriedBy && np_sw && !IsNpc(pt->CarriedBy) )
         return false;
-      if ( pt->CarriedBy ) r->s[CNAME] = pt->CarriedBy->Name;
+      if ( pt->CarriedBy ) r->s[CNAME] = pt->CarriedBy->Name.c_str();
       else
         {
           if ( ng_sw ) return false;

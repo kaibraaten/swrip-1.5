@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_wartalk( Character *ch, char *argument )
+void do_wartalk( Character *ch, std::string argument )
 {
   if (!IsAuthed(ch))
     {
@@ -11,4 +11,3 @@ void do_wartalk( Character *ch, char *argument )
 
   TalkChannel( ch, argument, CHANNEL_WARTALK, "war" );
 }
-

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_save( Character *ch, char *argument )
+void do_save( Character *ch, std::string argument )
 {
   if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_POLYMORPHED))
     {
@@ -37,4 +37,3 @@ void do_save( Character *ch, char *argument )
   saving_char = NULL;
   ch->Echo("Ok.\r\n");
 }
-

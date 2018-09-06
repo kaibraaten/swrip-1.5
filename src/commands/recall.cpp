@@ -4,14 +4,14 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_recall( Character *ch, char *argument )
+void do_recall( Character *ch, std::string argument )
 {
   Room *location = GetRoom( WhereHome(ch) );
   Character *opponent = NULL;
 
   if ( GetTrustLevel( ch ) < LEVEL_IMMORTAL )
     {
-      Area * pArea = NULL;
+      Area *pArea = NULL;
 
       if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
@@ -34,14 +34,10 @@ void do_recall( Character *ch, char *argument )
     }
 
   if ( ch->InRoom == location )
-    return;
-
-  /*    if ( IsBitSet(ch->InRoom->Flags, ROOM_NO_RECALL) )
-        {
-        ch->Echo("For some strange reason... nothing happens.\r\n");
-        return;
-        }*/
-
+    {
+      return;
+    }
+  
   if ( IsBitSet(ch->AffectedBy, AFF_CURSE) )
     {
       ch->Echo("You are cursed and cannot recall!\r\n");
@@ -65,12 +61,13 @@ void do_recall( Character *ch, char *argument )
   Act( AT_ACTION, "$n disappears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM );
   CharacterFromRoom( ch );
   CharacterToRoom( ch, location );
+
   if ( ch->Mount )
     {
       CharacterFromRoom( ch->Mount );
       CharacterToRoom( ch->Mount, location );
     }
+
   Act( AT_ACTION, "$n appears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM );
   do_look( ch, "auto" );
 }
-

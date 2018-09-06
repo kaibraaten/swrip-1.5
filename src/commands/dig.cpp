@@ -7,10 +7,8 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_dig( Character *ch, char *argument )
+void do_dig( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-
   switch( ch->SubState )
     {
     default:
@@ -26,9 +24,7 @@ void do_dig( Character *ch, char *argument )
           return;
         }
 
-      OneArgument( argument, arg );
-
-      if ( !IsNullOrEmpty( arg ) )
+      if ( !arg.empty() )
         {
           const Exit *pexit = FindDoor(ch, arg, true);
           
@@ -73,7 +69,8 @@ void do_dig( Character *ch, char *argument )
             }
         }
 
-      AddTimerToCharacter( ch, TIMER_CMD_FUN, umin(SkillTable[gsn_dig]->Beats / 10, 3), do_dig, SUB_PAUSE);
+      AddTimerToCharacter( ch, TIMER_CMD_FUN, umin(SkillTable[gsn_dig]->Beats / 10, 3),
+                           do_dig, SUB_PAUSE);
       ch->dest_buf = CopyString( arg );
       ch->Echo( "You begin digging...\r\n" );
       Act( AT_PLAIN, "$n begins digging...", ch, NULL, NULL, TO_ROOM );
@@ -88,7 +85,7 @@ void do_dig( Character *ch, char *argument )
           return;
         }
 
-      strcpy( arg, (const char*)ch->dest_buf );
+      arg = static_cast<const char*>( ch->dest_buf );
       FreeMemory( ch->dest_buf );
       break;
 
@@ -106,7 +103,7 @@ void do_dig( Character *ch, char *argument )
   bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL);
 
   /* dig out an EX_DIG exit... */
-  if ( !IsNullOrEmpty( arg ) )
+  if ( !arg.empty() )
     {
       Exit *pexit = FindDoor(ch, arg, true);
       
@@ -163,4 +160,3 @@ void do_dig( Character *ch, char *argument )
   Act( AT_SKILL, "$n's dig uncovered $p!", ch, obj, NULL, TO_ROOM );
   LearnFromSuccess( ch, gsn_dig );
 }
-

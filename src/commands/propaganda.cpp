@@ -7,10 +7,9 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_propaganda( Character *ch , char *argument )
+void do_propaganda( Character *ch, std::string arg1 )
 {
   char buf[MAX_STRING_LENGTH];
-  char arg1[MAX_INPUT_LENGTH];
   Character *victim = NULL;
   Planet *planet = NULL;
   Clan *clan = NULL;
@@ -22,7 +21,6 @@ void do_propaganda( Character *ch , char *argument )
     }
 
   planet = ch->InRoom->Area->Planet;
-  argument = OneArgument( argument, arg1 );
 
   if ( ch->Mount )
     {
@@ -30,9 +28,9 @@ void do_propaganda( Character *ch , char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
-      ch->Echo("Spread propaganda to who?\r\n");
+      ch->Echo("Spread propaganda to whom?\r\n");
       return;
     }
 
@@ -88,8 +86,9 @@ void do_propaganda( Character *ch , char *argument )
 
   if ( !IsClanned( ch ) )
     {
-      sprintf( buf, "You speak to them about the evils of %s" , planet->GovernedBy ? planet->GovernedBy->Name : "their current leaders" );
-      ch->Echo(buf );
+      sprintf( buf, "You speak to them about the evils of %s",
+               planet->GovernedBy ? planet->GovernedBy->Name.c_str() : "their current leaders" );
+      ch->Echo( buf );
       Act( AT_ACTION, "$n speaks about the planets organization.\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n tells $N about the evils of their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
     }
@@ -102,9 +101,10 @@ void do_propaganda( Character *ch , char *argument )
 
       planet = ch->InRoom->Area->Planet;
 
-      sprintf( buf, ", and the evils of %s" , planet->GovernedBy ? planet->GovernedBy->Name : "their current leaders" );
+      sprintf( buf, ", and the evils of %s",
+               planet->GovernedBy ? planet->GovernedBy->Name.c_str() : "their current leaders" );
       ch->Echo("You speak to them about the benefits of the %s%s.\r\n",
-	    ch->PCData->ClanInfo.Clan->Name,
+	    ch->PCData->ClanInfo.Clan->Name.c_str(),
 	    planet->GovernedBy == clan ? "" : buf );
       Act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
@@ -116,7 +116,7 @@ void do_propaganda( Character *ch , char *argument )
     {
       if ( IsClanned( ch ) ? planet->GovernedBy != clan : true)
         {
-          sprintf( buf, "%s is a traitor!" , ch->Name);
+          sprintf( buf, "%s is a traitor!", ch->Name.c_str());
           do_yell( victim, buf );
           global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
         }
@@ -146,4 +146,3 @@ void do_propaganda( Character *ch , char *argument )
   if ( planet->PopularSupport < -100 )
     planet->PopularSupport = -100;
 }
-

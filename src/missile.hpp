@@ -17,7 +17,7 @@ public:
   struct Spaceobject *Spaceobject = nullptr;
   Ship *Target = nullptr;
   Ship *FiredFrom = nullptr;
-  char *FiredBy = nullptr;
+  std::string FiredBy;
   MissileType Type = 0;
   short Age = 0;
   int Speed = 0;

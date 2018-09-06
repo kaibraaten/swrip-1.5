@@ -48,7 +48,7 @@
 /*  Warm reboot stuff, gotta make sure to thank Erwin for this :) */
 extern socket_t control;                /* Controlling descriptor       */
 
-void do_copyover( Character * ch, char *argument )
+void do_copyover( Character * ch, std::string argument )
 {
   char buf[100];
   FILE *fp = fopen( COPYOVER_FILE, "w" );
@@ -84,7 +84,7 @@ void do_copyover( Character * ch, char *argument )
           socket_t cur_desc = d->Socket;
 
           fprintf( fp, "%d %d %s %s %s\n", cur_desc, 0,
-                   och->Name, d->Remote.HostIP, d->Remote.Hostname );
+                   och->Name.c_str(), d->Remote.HostIP.c_str(), d->Remote.Hostname.c_str() );
           SaveCharacter( och );
           WriteToDescriptor( d->Socket, buf, 0 );
         }
@@ -101,7 +101,7 @@ void do_copyover( Character * ch, char *argument )
   sprintf( buf2, "%d", control );
 
 #ifdef _WIN32
-  sprintf(filename, "\"%s\"", SysData.exe_filename);
+  sprintf(filename, "\"%s\"", SysData.exe_filename.c_str());
 #else
   sprintf(filename, "%s", "./swrip");
 #define _execl execl
@@ -151,8 +151,8 @@ void RecoverFromCopyover( void )
         }
 
       d = new Descriptor(desc);
-      d->Remote.Hostname = CopyString( host );
-      d->Remote.HostIP = CopyString( ip );
+      d->Remote.Hostname = host;
+      d->Remote.HostIP = ip;
 
       /* Write something, and check if it goes error-free */
       if( !WriteToDescriptor( d->Socket, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )
@@ -177,8 +177,6 @@ void RecoverFromCopyover( void )
         }
       else                      /* ok! */
         {
-          char argument[MAX_INPUT_LENGTH];
-          sprintf( argument, "%s", "auto noprog" );
           WriteToDescriptor( d->Socket, "\r\nCopyover recovery complete.\r\n", 0 );
 
           /* Just In Case,  Someone said this isn't necassary, but _why_
@@ -190,7 +188,7 @@ void RecoverFromCopyover( void )
           AddCharacter(d->Character);
 
           CharacterToRoom( d->Character, d->Character->InRoom );
-          do_look( d->Character, argument );
+          do_look( d->Character, "auto noprog" );
 
           Act( AT_ACTION, "$n materializes!", d->Character, NULL, NULL,
                TO_ROOM );

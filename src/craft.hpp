@@ -50,7 +50,7 @@ class InterpretArgumentsEventArgs
 {
 public:
   class CraftingSession *CraftingSession = nullptr;
-  const char *CommandArguments = nullptr;
+  std::string CommandArguments;
   bool AbortSession = false;
 };
 

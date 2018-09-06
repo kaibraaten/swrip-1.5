@@ -7,7 +7,7 @@
 /*
  * Help editor                                                  -Thoric
  */
-void do_hedit( Character *ch, char *argument )
+void do_hedit( Character *ch, std::string argument )
 {
   HelpFile *pHelp = NULL;
 
@@ -31,7 +31,7 @@ void do_hedit( Character *ch, char *argument )
           return;
         }
 
-      SetHelpFileTextNoAlloc( pHelp, CopyBuffer( ch ) );
+      SetHelpFileText( pHelp, CopyBuffer( ch ) );
       StopEditing( ch );
       return;
     }
@@ -48,6 +48,6 @@ void do_hedit( Character *ch, char *argument )
   ch->SubState = SUB_HELP_EDIT;
   ch->dest_buf = pHelp;
   StartEditing( ch, GetHelpFileText( pHelp ) );
-  SetEditorDescription( ch, "Help file: %s", GetHelpFileKeyword( pHelp ) );
+  SetEditorDescription( ch, "Help file: %s", GetHelpFileKeyword( pHelp ).c_str() );
 }
 

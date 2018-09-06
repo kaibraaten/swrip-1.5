@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "ship.hpp"
 #include "character.hpp"
@@ -6,19 +6,16 @@
 
 struct UserData
 {
-  const Character *ch;
-  int count;
+  const Character *ch = nullptr;
+  int count = 0;
 };
 
 static bool ShowIfPilotable(Ship *ship, void *userData);
 static bool ShowIfInRoom(Ship *ship, void *userData);
 
-void do_ships( Character *ch, char *argument )
+void do_ships( Character *ch, std::string argument )
 {
-  struct UserData data;
-
-  data.ch = ch;
-  data.count = 0;
+  UserData data { ch, 0 };
 
   if ( !IsNpc(ch) )
     {
@@ -63,8 +60,8 @@ static bool ShowIfInRoom(Ship *ship, void *userData)
   else
     SetCharacterColor( AT_BLUE, ch );
 
-  sprintf( buf, "%s (%s)", ship->Name, ship->PersonalName );
-  ch->Echo("%-35s %-15s", buf, ship->Owner );
+  sprintf( buf, "%s (%s)", ship->Name.c_str(), ship->PersonalName.c_str() );
+  ch->Echo("%-35s %-15s", buf, ship->Owner.c_str() );
 
   if (ship->Type == MOB_SHIP || ship->Class == SHIP_PLATFORM )
     {
@@ -72,12 +69,12 @@ static bool ShowIfInRoom(Ship *ship, void *userData)
       return true;
     }
 
-  if ( !StrCmp(ship->Owner, "Public") )
+  if( !StrCmp(ship->Owner, "Public") )
     {
       ch->Echo("%ld to rent.\r\n", GetRentalPrice(ship));
     }
-  else if ( StrCmp(ship->Owner, "") )
-    ch->Echo("%s", "\r\n" );
+  else if( ship->Owner.empty() )
+    ch->Echo( "\r\n" );
   else
     ch->Echo("%ld to buy.\r\n", GetShipValue(ship) );
 
@@ -93,7 +90,7 @@ static bool ShowIfPilotable(Ship *ship, void *userData)
   bool owned = false, set = false;
   char pilottype[MAX_STRING_LENGTH] = { '\0' };
   char pilottype2[MAX_STRING_LENGTH / 2] = { '\0' };
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
 
   if ( StrCmp(ship->Owner, ch->Name) )
     {
@@ -141,20 +138,19 @@ static bool ShowIfPilotable(Ship *ship, void *userData)
     }
 
   if( !owned )
-    sprintf( pilottype, "(%s) - %s", pilottype2, ship->Owner );
+    sprintf( pilottype, "(%s) - %s", pilottype2, ship->Owner.c_str() );
   else
     sprintf( pilottype, "(%s)", pilottype2 );
 
-  sprintf( buf, "%s (%s)", ship->Name, ship->PersonalName );
+  sprintf( buf, "%s (%s)", ship->Name.c_str(), ship->PersonalName.c_str() );
 
   if  ( ship->InRoom )
     ch->Echo("%-35s (%s) \n&R&W- %-24s&R&w \r\n",
-                 buf, ship->InRoom->Name, pilottype );
+             buf, ship->InRoom->Name.c_str(), pilottype );
   else
     ch->Echo("%-35s (%.0f %.0f %.0f) \r\n&R&W- %-35s&R&w\r\n",
-                 buf, ship->Position.x, ship->Position.y, ship->Position.z, pilottype );
+             buf, ship->Position.x, ship->Position.y, ship->Position.z, pilottype );
 
   data->count++;
   return true;
 }
-

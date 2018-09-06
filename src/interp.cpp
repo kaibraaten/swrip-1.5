@@ -39,8 +39,8 @@
  */
 bool fLogAll = false;
 
-static char *ParseTarget( const Character *ch, char *oldstring );
-static char *GetMultiCommand( Descriptor *d, char *argument );
+static std::string ParseTarget( const Character *ch, std::string oldstring );
+static std::string GetMultiCommand( Descriptor *d, std::string argument );
 
 /*
  * Character not in position for command?
@@ -90,18 +90,13 @@ bool CheckPosition( const Character *ch, PositionType position )
   return true;
 }
 
-extern char lastplayercmd[MAX_INPUT_LENGTH*2];
-
 /*
  * The main entry point for executing commands.
  * Can be recursively called from 'at', 'order', 'force'.
  */
-
-char multicommand[MAX_INPUT_LENGTH];
-
-static char *ParseTarget( const Character *ch, char *oldstring )
+static std::string ParseTarget( const Character *ch, std::string oldstring )
 {
-  const char *str = oldstring;
+  const char *str = oldstring.c_str();
   int count = 0;
   char buf[MAX_INPUT_LENGTH] = {'\0'};
   char *point = buf;
@@ -117,7 +112,7 @@ static char *ParseTarget( const Character *ch, char *oldstring )
 
       ++str;
 
-      if ( *str == '$' && !IsNullOrEmpty( ch->PCData->Target ) )
+      if ( *str == '$' && !ch->PCData->Target.empty() )
         {
           char *i = CopyString(ch->PCData->Target);
           ++str;
@@ -144,18 +139,15 @@ static char *ParseTarget( const Character *ch, char *oldstring )
     }
 
   buf[count] = '\0';
-  strcpy( oldstring, buf );
-
-  return oldstring;
+  return buf;
 }
 
-static char *GetMultiCommand( Descriptor *d, char *argument )
+static std::string GetMultiCommand( Descriptor *d, std::string argument )
 {
   int counter = 0;
   int counter2 = 0;
-  char leftover[MAX_INPUT_LENGTH];
-
-  multicommand[0] = '\0';
+  char leftover[MAX_INPUT_LENGTH] = { '\0' };
+  char multicommand[MAX_INPUT_LENGTH] = { '\0' };
 
   for ( counter = 0; argument[counter] != '\0'; counter++ )
     {
@@ -171,7 +163,7 @@ static char *GetMultiCommand( Descriptor *d, char *argument )
 
           leftover[counter2] = '\0';
           strcpy( d->InComm, leftover );
-          return (multicommand);
+          return multicommand;
         }
       else if (argument[counter] == '|' && argument[counter+1] == '|')
 	{
@@ -200,20 +192,20 @@ static bool _CommandFunctionEquals(void *cmd, const void *fun)
 struct CommandFindData
 {
   Character *ch;
-  const char *command;
+  std::string command;
 };
 
 static bool _CheckTrustAndBestowments(void *c, const void *d)
 {
   const Command *cmd = static_cast<const Command*>(c);
   const CommandFindData *data = static_cast<const CommandFindData*>(d);
-  const char *command = data->command;
+  std::string command = data->command;
   const Character *ch = data->ch;
   int trust = GetTrustLevel(ch);
 
   if ( !StringPrefix( command, cmd->Name )
        && (cmd->Level <= trust
-           ||(!IsNpc(ch) && !IsNullOrEmpty( ch->PCData->Bestowments )
+           ||(!IsNpc(ch) && !ch->PCData->Bestowments.empty()
               && IsName( cmd->Name, ch->PCData->Bestowments )
               && cmd->Level <= (trust + 5) ) ) )
     {
@@ -225,13 +217,12 @@ static bool _CheckTrustAndBestowments(void *c, const void *d)
     }
 }
 
-void Interpret( Character *ch, char *argument )
+void Interpret( Character *ch, std::string argument )
 {
   assert(ch != nullptr);
 
-  char command[MAX_INPUT_LENGTH];
+  std::string command;
   char logline[MAX_INPUT_LENGTH];
-  char logname[MAX_INPUT_LENGTH];
   Timer *timer = NULL;
   Command *cmd = NULL;
   int loglvl = 0;
@@ -255,27 +246,24 @@ void Interpret( Character *ch, char *argument )
           return;
         }
 
-      sprintf( logline, "(%s) %s", cmd->Name, argument );
+      sprintf( logline, "(%s) %s", cmd->Name.c_str(), argument.c_str() );
     }
 
   if ( !cmd )
     {
       /* Changed the order of these ifchecks to prevent crashing. */
-      if (IsNullOrEmpty(argument))
+      if (argument.empty())
         {
-          Log->Bug( "Interpret: null argument!", 0 );
+          Log->Bug( "Interpret: null argument!" );
           return;
         }
 
       /*
        * Strip leading spaces.
        */
-      while ( isspace(*argument) )
-	{
-	  argument++;
-	}
+      argument = TrimStringStart(argument);
 
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
 	{
 	  return;
 	}
@@ -296,35 +284,26 @@ void Interpret( Character *ch, char *argument )
        * Special parsing so ' can be a command,
        *   also no spaces needed after punctuation.
        */
-      strcpy( logline, argument );
+      strcpy( logline, argument.c_str() );
 
-      if( ch->Desc && (index(argument, '|')))
+      if( ch->Desc && (strchr(argument.c_str(), '|') != nullptr))
 	{
 	  argument = GetMultiCommand( ch->Desc, argument );
 	}
 
-
-      if ( !IsNpc(ch) && ch->PCData && ch->PCData->Target )
+      if ( !IsNpc(ch) && ch->PCData && !ch->PCData->Target.empty() )
 	{
-	  if ( !IsNullOrEmpty( ch->PCData->Target ) )
-	    {
-	      if( index(argument, '$'))
-		{
-		  argument = ParseTarget(ch, argument);
-		}
-	    }
+          if( strchr(argument.c_str(), '$') != nullptr)
+            {
+              argument = ParseTarget(ch, argument);
+            }
 	}
 
       if ( !isalpha(argument[0]) && !isdigit(argument[0]) )
         {
-          command[0] = argument[0];
-          command[1] = '\0';
-          argument++;
-
-          while ( isspace(*argument) )
-	    {
-	      argument++;
-	    }
+          command = argument[0];
+          argument = argument.substr(1);
+          argument = TrimStringStart(argument);
         }
       else
 	{
@@ -335,22 +314,20 @@ void Interpret( Character *ch, char *argument )
        * Look for command in command table.
        * Check for council powers and/or bestowments
        */
-      {
-        struct CommandFindData findData;
-        const List *commands = GetEntities(CommandRepository);
-	findData.ch = ch;
-	findData.command = command;
-        cmd = (Command*) FindIfInList(commands, _CheckTrustAndBestowments, &findData);
+      struct CommandFindData findData;
+      const List *commands = GetEntities(CommandRepository);
+      findData.ch = ch;
+      findData.command = command;
+      cmd = (Command*) FindIfInList(commands, _CheckTrustAndBestowments, &findData);
 
-        if(cmd != NULL)
-          {
-            found = true;
-          }
-        else
-          {
-            found = false;
-          }
-      }
+      if(cmd != NULL)
+        {
+          found = true;
+        }
+      else
+        {
+          found = false;
+        }
 
       /*
        * Turn off afk bit when any command performed.
@@ -365,8 +342,6 @@ void Interpret( Character *ch, char *argument )
   /*
    * Log and snoop.
    */
-  sprintf( lastplayercmd, "** %s: %s", ch->Name, logline );
-
   if ( found && cmd->Log == LOG_NEVER )
     {
       strcpy( logline, "XXXXXXXX XXXXXXXX XXXXXXXX" );
@@ -384,12 +359,12 @@ void Interpret( Character *ch, char *argument )
          a logged command.  Check for descriptor in case force is used. */
       if ( ch->Desc && ch->Desc->Original )
 	{
-	  sprintf( log_buf, "Log %s (%s): %s", ch->Name,
-		   ch->Desc->Original->Name, logline );
+	  sprintf( log_buf, "Log %s (%s): %s", ch->Name.c_str(),
+		   ch->Desc->Original->Name.c_str(), logline );
 	}
       else
 	{
-	  sprintf( log_buf, "Log %s: %s", ch->Name, logline );
+	  sprintf( log_buf, "Log %s: %s", ch->Name.c_str(), logline );
 	}
 
       /*
@@ -407,8 +382,7 @@ void Interpret( Character *ch, char *argument )
 
   if ( ch->Desc && ch->Desc->SnoopBy )
     {
-      sprintf( logname, "%s", ch->Name);
-      ch->Desc->SnoopBy->WriteToBuffer( logname, 0 );
+      ch->Desc->SnoopBy->WriteToBuffer( ch->Name, 0 );
       ch->Desc->SnoopBy->WriteToBuffer( "% ",    2 );
       ch->Desc->SnoopBy->WriteToBuffer( logline, 0 );
       ch->Desc->SnoopBy->WriteToBuffer( "\r\n",  2 );
@@ -460,7 +434,8 @@ void Interpret( Character *ch, char *argument )
                 {
                   if ( !IsBitSet( pexit->Flags, EX_SECRET ) )
 		    {
-		      Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->Keyword, TO_CHAR );
+		      Act( AT_PLAIN, "The $d is closed.",
+                           ch, NULL, pexit->Keyword.c_str(), TO_CHAR );
 		    }
                   else
 		    {
@@ -470,7 +445,7 @@ void Interpret( Character *ch, char *argument )
                   return;
                 }
 
-              MoveCharacter( ch, pexit, 0 );
+              MoveCharacter( ch, pexit );
               return;
             }
 
@@ -516,9 +491,9 @@ void Interpret( Character *ch, char *argument )
   if ( tmptime > 1500000 )
     {
       sprintf(log_buf, "[*****] LAG: %s: %s %s (R:%ld S:%d.%06d)",
-	      ch->Name,
-              cmd->Name,
-	      (cmd->Log == LOG_NEVER ? "XXX" : argument),
+	      ch->Name.c_str(),
+              cmd->Name.c_str(),
+	      (cmd->Log == LOG_NEVER ? "XXX" : argument.c_str()),
               ch->InRoom ? ch->InRoom->Vnum : 0,
               (int) (time_used.tv_sec),
 	      (int) (time_used.tv_usec) );
@@ -572,4 +547,3 @@ void UpdateNumberOfTimesUsed(struct timeval *time_used, struct timerset *userec)
       userec->TotalTime.tv_usec -= 1000000;
     }
 }
-

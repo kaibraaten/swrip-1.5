@@ -6,14 +6,14 @@
 
 static bool IsGuildNameAcceptable( const std::string &name );
 
-void do_makeguild( Character *ch, char *argument )
+void do_makeguild( Character *ch, std::string argument )
 {
-  char faction[MAX_INPUT_LENGTH];
+  std::string faction;
   Clan *guild = NULL;
   Clan *mainClan = NULL;
   argument = OneArgument( argument, faction );
   
-  if ( IsNullOrEmpty( faction ) || IsNullOrEmpty( argument ) )
+  if ( faction.empty() || argument.empty() )
     {
       ch->Echo("Usage: startguild <imperial|rebel|independent> <guild name>\r\n" );
       return;
@@ -61,7 +61,7 @@ void do_makeguild( Character *ch, char *argument )
   if( ch->Gold < GUILD_PRICE )
     {
       ch->Echo("&RStarting a guild costs %d credits. You don't have the funds.&d\r\n",
-	    GUILD_PRICE );
+               GUILD_PRICE );
       return;
     }
   else
@@ -72,22 +72,21 @@ void do_makeguild( Character *ch, char *argument )
   guild = AllocateClan();
   Clans->Add(guild);
 
-  guild->Name               = CopyString( argument );
-  guild->Description        = CopyString( "" );
-  guild->Leadership.Leader  = CopyString( ch->Name );
-  guild->Leadership.Number1 = CopyString( "" );
-  guild->Leadership.Number2 = CopyString( "" );
-  guild->tmpstr             = CopyString( mainClan->Name );
+  guild->Name               = argument;
+  guild->Leadership.Leader  = ch->Name;
+  guild->tmpstr             = mainClan->Name;
   guild->FoundationDate = current_time;
 
+  Clans->Add(guild);
   AssignGuildToMainclan( guild, mainClan );
   Clans->Save( guild );
+
   ch->PCData->ClanInfo.Clan = guild;
-  ch->PCData->ClanInfo.ClanName = CopyString( guild->Name );
+  ch->PCData->ClanInfo.ClanName = guild->Name;
   UpdateClanMember( ch );
 
   ch->Echo("&GCongratulations, your new guild %s has been successfully created!\r\n",
-           guild->Name );
+           guild->Name.c_str() );
   ch->Echo("See HELP GUILD to get started.&d\r\n" );
 }
 
@@ -98,5 +97,3 @@ static bool IsGuildNameAcceptable( const std::string &name )
   return nameIsAvailable
     && StringInfix( "Jedi Order", name ) != 0;
 }
-
-

@@ -8,10 +8,10 @@
  * Set a skill's attributes or what skills a player has.
  * High god command, with support for creating skills/spells/herbs/etc
  */
-void do_sset( Character *ch, char *argument )
+void do_sset( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH / 2];
+  std::string arg1;
+  std::string arg2;
   Character *victim = nullptr;
   int value = 0;
   int sn = 0;
@@ -20,10 +20,11 @@ void do_sset( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( argument ) )
+  if ( arg1.empty() || arg2.empty() || argument.empty() )
     {
       ch->Echo("Syntax: sset <victim> <skill> <value>\r\n");
       ch->Echo("or:     sset <victim> all     <value>\r\n");
+
       if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM )
         {
           ch->Echo("or:     sset save skill table\r\n");
@@ -31,6 +32,7 @@ void do_sset( Character *ch, char *argument )
           ch->Echo("or:     sset create skill 'new skill'\r\n");
           ch->Echo("or:     sset create herb 'new herb'\r\n");
         }
+
       if ( GetTrustLevel(ch) > LEVEL_GREATER )
 	{
           ch->Echo("or:     sset <sn>     <field> <value>\r\n");
@@ -42,13 +44,14 @@ void do_sset( Character *ch, char *argument )
           ch->Echo("Affect having the fields: <location> <modfifier> [duration] [bitvector]\r\n");
           ch->Echo("(See AFFECTTYPES for location, and AFFECTED_BY for bitvector)\r\n");
         }
+
       ch->Echo("Skill being any skill or spell.\r\n");
       return;
     }
 
   if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM
-       &&  !StrCmp( arg1, "save" )
-       &&       !StrCmp( argument, "table" ) )
+       && !StrCmp( arg1, "save" )
+       && !StrCmp( argument, "table" ) )
     {
       if ( !StrCmp( arg2, "skill" ) )
         {
@@ -56,6 +59,7 @@ void do_sset( Character *ch, char *argument )
           SaveSkills();
           return;
         }
+
       if ( !StrCmp( arg2, "herb" ) )
         {
           ch->Echo("Saving herb table...\r\n");
@@ -63,8 +67,9 @@ void do_sset( Character *ch, char *argument )
           return;
         }
     }
+
   if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM
-       &&  !StrCmp( arg1, "create" )
+       && !StrCmp( arg1, "create" )
        && (!StrCmp( arg2, "skill" ) || !StrCmp( arg2, "herb" )) )
     {
       Skill *skill = NULL;
@@ -73,24 +78,24 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "herb" ) )
         {
           type = SKILL_HERB;
+
           if ( TopHerb >= MAX_HERB )
             {
               ch->Echo("The current top herb is %d, which is the maximum.  "
-                         "To add more herbs,\r\nMAX_HERB will have to be "
-			 "raised in mud.hpp, and the mud recompiled.\r\n",
-                         TopSN );
+                       "To add more herbs,\r\nMAX_HERB will have to be "
+                       "raised in constants.hpp, and the mud recompiled.\r\n",
+                       TopSN );
               return;
             }
         }
-      else
-        if ( TopSN >= MAX_SKILL )
-          {
-            ch->Echo("The current top sn is %d, which is the maximum.  "
-                       "To add more skills,\r\nMAX_SKILL will have to be "
-                       "raised in mud.hpp, and the mud recompiled.\r\n",
-                       TopSN );
-            return;
-          }
+      else if ( TopSN >= MAX_SKILL )
+        {
+          ch->Echo("The current top sn is %d, which is the maximum.  "
+                   "To add more skills,\r\nMAX_SKILL will have to be "
+                   "raised in constants.hpp, and the mud recompiled.\r\n",
+                   TopSN );
+          return;
+        }
 
       skill = new Skill();
       skill->UseRec = new timerset();
@@ -100,18 +105,17 @@ void do_sset( Character *ch, char *argument )
           int max, x;
 
           HerbTable[TopHerb++] = skill;
+
           for ( max = x = 0; x < TopHerb-1; x++ )
             if ( HerbTable[x] && HerbTable[x]->Slot > max )
               max = HerbTable[x]->Slot;
+
           skill->Slot = max+1;
         }
       else
         SkillTable[TopSN++] = skill;
 
-      skill->Name = CopyString( argument );
-      skill->FunctionName = CopyString( "" );
-      skill->Messages.NounDamage = CopyString( "" );
-      skill->Messages.WearOff = CopyString( "" );
+      skill->Name = argument;
       skill->SpellFunction = spell_smaug;
       skill->Type = type;
       ch->Echo("Done.\r\n");
@@ -119,14 +123,16 @@ void do_sset( Character *ch, char *argument )
     }
 
   if ( arg1[0] == 'h' )
-    sn = atoi( arg1+1 );
+    sn = stoi( arg1.substr( 1 ) );
   else
-    sn = atoi( arg1 );
+    sn = stoi( arg1 );
+
   if ( GetTrustLevel(ch) > LEVEL_GREATER
-       && ((arg1[0] == 'h' && IsNumber(arg1+1) && (sn=atoi(arg1+1))>=0)
-           ||  (IsNumber(arg1) && (sn=atoi(arg1)) >= 0)) )
+       && ((arg1[0] == 'h' && IsNumber( arg1.substr( 1 ) )
+            && (sn=std::stoi(arg1.substr( 1 )))>=0)
+           ||  (IsNumber(arg1) && (sn=std::stoi(arg1)) >= 0)) )
     {
-      Skill *skill;
+      Skill *skill = nullptr;
 
       if ( arg1[0] == 'h' )
         {
@@ -135,6 +141,7 @@ void do_sset( Character *ch, char *argument )
               ch->Echo("Herb number out of range.\r\n");
               return;
             }
+
           skill = HerbTable[sn];
         }
       else
@@ -144,27 +151,31 @@ void do_sset( Character *ch, char *argument )
               ch->Echo("Skill number out of range.\r\n");
               return;
             }
+
           sn %= 1000;
         }
 
       if ( !StrCmp( arg2, "difficulty" ) )
         {
-          skill->Difficulty = atoi( argument );
+          skill->Difficulty = std::stoi( argument );
           ch->Echo("Ok.\r\n");
           return;
         }
+
       if ( !StrCmp( arg2, "participants" ) )
         {
-          skill->Participants = atoi( argument );
+          skill->Participants = std::stoi( argument );
           ch->Echo("Ok.\r\n");
           return;
         }
+
       if ( !StrCmp( arg2, "alignment" ) )
         {
-          skill->Alignment = atoi( argument );
+          skill->Alignment = std::stoi( argument );
           ch->Echo("Ok.\r\n");
           return;
         }
+
       if ( !StrCmp( arg2, "damtype" ) )
         {
           int x = GetSpellDamage( argument );
@@ -176,8 +187,10 @@ void do_sset( Character *ch, char *argument )
               SET_SDAM( skill, x );
               ch->Echo("Ok.\r\n");
             }
+
           return;
         }
+
       if ( !StrCmp( arg2, "acttype" ) )
         {
           int x = GetSpellAction( argument );
@@ -191,6 +204,7 @@ void do_sset( Character *ch, char *argument )
             }
           return;
         }
+
       if ( !StrCmp( arg2, "classtype" ) )
         {
           int x = GetSpellClass( argument );
@@ -204,6 +218,7 @@ void do_sset( Character *ch, char *argument )
             }
           return;
         }
+
       if ( !StrCmp( arg2, "powertype" ) )
         {
           int x = GetSpellPower( argument );
@@ -213,10 +228,11 @@ void do_sset( Character *ch, char *argument )
           else
             {
               SET_SPOW( skill, x );
-       ch->Echo("Ok.\r\n");
+              ch->Echo("Ok.\r\n");
             }
           return;
         }
+
       if ( !StrCmp( arg2, "flag" ) )
         {
           int x = GetSpellFlag( argument );
@@ -230,6 +246,7 @@ void do_sset( Character *ch, char *argument )
             }
           return;
         }
+
       if ( !StrCmp( arg2, "saves" ) )
         {
           int x = GetSpellSave( argument );
@@ -246,24 +263,22 @@ void do_sset( Character *ch, char *argument )
 
       if ( !StrCmp( arg2, "code" ) )
         {
-          SpellFun *spellfun;
-          CmdFun    *dofun;
+          SpellFun *spellfun = nullptr;
+          CmdFun    *dofun = nullptr;
 
           if ( !StringPrefix( "spell_", argument )
                && (spellfun=GetSpellFunction(argument)) != spell_notfound )
             {
               skill->SpellFunction = spellfun;
               skill->SkillFunction = NULL;
-              FreeMemory( skill->FunctionName );
-              skill->FunctionName = CopyString( argument );
+              skill->FunctionName = argument;
             }
           else if ( !StringPrefix( "do_", argument )
 		    && (dofun=GetSkillFunction(argument)) != skill_notfound )
             {
               skill->SkillFunction = dofun;
               skill->SpellFunction = NULL;
-              FreeMemory( skill->FunctionName );
-              skill->FunctionName = CopyString( argument );
+              skill->FunctionName = argument;
             }
           else
             {
@@ -288,59 +303,68 @@ void do_sset( Character *ch, char *argument )
             }
           return;
         }
+
       if ( !StrCmp( arg2, "minpos" ) )
         {
-          skill->Position = (PositionType)urange( POS_DEAD, atoi( argument ), POS_DRAG );
+          skill->Position = (PositionType)urange( POS_DEAD, std::stoi( argument ), POS_DRAG );
           ch->Echo("Ok.\r\n");
           return;
         }
+
       if ( !StrCmp( arg2, "minlevel" ) )
         {
-          skill->Level = urange( 1, atoi( argument ), MAX_ABILITY_LEVEL );
+          skill->Level = urange( 1, std::stoi( argument ), MAX_ABILITY_LEVEL );
           ch->Echo("Ok.\r\n");
           return;
         }
+
       if ( !StrCmp( arg2, "slot" ) )
         {
-          skill->Slot = urange( 0, atoi( argument ), SHRT_MAX );
-   ch->Echo("Ok.\r\n");
+          skill->Slot = urange( 0, std::stoi( argument ), SHRT_MAX );
+          ch->Echo("Ok.\r\n");
           return;
         }
+      
       if ( !StrCmp( arg2, "mana" ) )
         {
-          skill->Mana = urange( 0, atoi( argument ), 2000 );
+          skill->Mana = urange( 0, std::stoi( argument ), 2000 );
           ch->Echo("Ok.\r\n");
           return;
         }
+
       if ( !StrCmp( arg2, "beats" ) )
         {
-          skill->Beats = urange( 0, atoi( argument ), 120 );
+          skill->Beats = urange( 0, std::stoi( argument ), 120 );
           ch->Echo("Ok.\r\n");
           return;
         }
+
       if ( !StrCmp( arg2, "guild" ) )
         {
-          skill->Guild = atoi( argument );
+          skill->Guild = std::stoi( argument );
           ch->Echo("Ok.\r\n");
           return;
         }
+
       if ( !StrCmp( arg2, "value" ) )
         {
-          skill->Value = atoi( argument );
+          skill->Value = std::stoi( argument );
           ch->Echo("Ok.\r\n");
           return;
         }
+
       if ( !StrCmp( arg2, "type" ) )
         {
           skill->Type = GetSkillType( argument );
           ch->Echo("Ok.\r\n");
           return;
         }
+
       if ( !StrCmp( arg2, "rmaffect" ) )
         {
           SmaugAffect *aff = skill->Affects;
           SmaugAffect *aff_next;
-          int num = atoi( argument );
+          int num = std::stoi( argument );
           int cnt = 1;
 
           if ( !aff )
@@ -348,48 +372,48 @@ void do_sset( Character *ch, char *argument )
               ch->Echo("This spell has no special affects to remove.\r\n");
               return;
             }
+
 	  if ( num == 1 )
             {
               skill->Affects = aff->Next;
-              FreeMemory( aff->Duration );
-              FreeMemory( aff->Modifier );
               delete aff;
               ch->Echo("Removed.\r\n");
               return;
             }
+
           for ( ; aff; aff = aff->Next )
             {
               if ( ++cnt == num && (aff_next=aff->Next) != NULL )
                 {
                   aff->Next = aff_next->Next;
-                  FreeMemory( aff_next->Duration );
-                  FreeMemory( aff_next->Modifier );
                   delete aff_next;
                   ch->Echo("Removed.\r\n");
                   return;
                 }
             }
+
           ch->Echo("Not found.\r\n");
           return;
         }
+
       /*
        * affect <location> <modifier> <duration> <bitvector>
        */
       if ( !StrCmp( arg2, "affect" ) )
         {
-          char location[MAX_INPUT_LENGTH];
-          char modifier[MAX_INPUT_LENGTH];
-          char duration[MAX_INPUT_LENGTH];
-          char bitvector[MAX_INPUT_LENGTH];
-          int loc, bit, tmpbit;
-          SmaugAffect *aff;
+          std::string location;
+          std::string modifier;
+          std::string duration;
+          std::string bitvector;
+          int loc = 0, bit = 0, tmpbit = 0;
+          SmaugAffect *aff = nullptr;
 
           argument = OneArgument( argument, location );
           argument = OneArgument( argument, modifier );
           argument = OneArgument( argument, duration );
 
           if ( location[0] == '!' )
-            loc = GetAffectType( location+1 ) + REVERSE_APPLY;
+            loc = GetAffectType( location.substr( 1 ) ) + REVERSE_APPLY;
           else
             loc = GetAffectType( location );
 
@@ -402,12 +426,12 @@ void do_sset( Character *ch, char *argument )
 
           bit = 0;
 
-          while ( argument[0] != 0 )
+          while( !argument.empty() )
             {
               argument = OneArgument( argument, bitvector );
 
               if ( (tmpbit=GetAffectFlag( bitvector )) == -1 )
-                ch->Echo("Unknown bitvector: %s.  See AFFECTED_BY\r\n", bitvector );
+                ch->Echo("Unknown bitvector: %s.  See AFFECTED_BY\r\n", bitvector.c_str() );
               else
                 bit |= (1 << tmpbit);
             }
@@ -415,14 +439,14 @@ void do_sset( Character *ch, char *argument )
           aff = new SmaugAffect();
 
           if ( !StrCmp( duration, "0" ) )
-            duration[0] = '\0';
+            duration.erase();
 
           if ( !StrCmp( modifier, "0" ) )
-            modifier[0] = '\0';
+            modifier.erase();
 
-          aff->Duration = CopyString( duration );
+          aff->Duration = duration;
           aff->Location = loc;
-          aff->Modifier = CopyString( modifier );
+          aff->Modifier = modifier;
           aff->AffectedBy = bit;
           aff->Next = skill->Affects;
           skill->Affects = aff;
@@ -432,175 +456,190 @@ void do_sset( Character *ch, char *argument )
 
       if ( !StrCmp( arg2, "level" ) )
         {
-          skill->Level = urange( 1, atoi( argument ), MAX_ABILITY_LEVEL );
+          skill->Level = urange( 1, std::stoi( argument ), MAX_ABILITY_LEVEL );
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "name" ) )
         {
-          FreeMemory(skill->Name);
-          skill->Name = CopyString( argument );
+          skill->Name = argument;
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "dammsg" ) )
         {
-          FreeMemory(skill->Messages.NounDamage);
           if ( !StrCmp( argument, "clear" ) )
-            skill->Messages.NounDamage = CopyString( "" );
+            skill->Messages.NounDamage.erase();
           else
-            skill->Messages.NounDamage = CopyString( argument );
+            skill->Messages.NounDamage = argument;
+
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "wearoff" ) )
         {
-          FreeMemory(skill->Messages.WearOff);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Messages.WearOff = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Messages.WearOff.erase();
+          else
+            skill->Messages.WearOff = argument;
+
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "hitchar" ) )
         {
-          if ( skill->Messages.Success.ToCaster )
-            FreeMemory(skill->Messages.Success.ToCaster);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Messages.Success.ToCaster = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Messages.Success.ToCaster.erase();
+          else
+            skill->Messages.Success.ToCaster = argument;
+
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "hitvict" ) )
         {
-          if ( skill->Messages.Success.ToVictim )
-            FreeMemory(skill->Messages.Success.ToVictim);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Messages.Success.ToVictim = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Messages.Success.ToVictim.erase();
+          else
+            skill->Messages.Success.ToVictim = argument;
+
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "hitroom" ) )
         {
-          if ( skill->Messages.Success.ToRoom )
-            FreeMemory(skill->Messages.Success.ToRoom);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Messages.Success.ToRoom = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Messages.Success.ToRoom.erase();
+          else
+            skill->Messages.Success.ToRoom = argument;
+          
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "misschar" ) )
         {
-          if ( skill->Messages.Failure.ToCaster )
-            FreeMemory(skill->Messages.Failure.ToCaster);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Messages.Failure.ToCaster = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Messages.Failure.ToCaster.erase();
+          else
+            skill->Messages.Failure.ToCaster = argument;
+
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "missvict" ) )
         {
-          if ( skill->Messages.Failure.ToVictim )
-            FreeMemory(skill->Messages.Failure.ToVictim);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Messages.Failure.ToVictim = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Messages.Failure.ToVictim.erase();
+          else
+            skill->Messages.Failure.ToVictim = argument;
+
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "missroom" ) )
         {
-          if ( skill->Messages.Failure.ToRoom )
-            FreeMemory(skill->Messages.Failure.ToRoom);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Messages.Failure.ToRoom = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Messages.Failure.ToRoom.erase();
+          else
+            skill->Messages.Failure.ToRoom = argument;
+
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "diechar" ) )
         {
-          if ( skill->Messages.VictimDeath.ToCaster )
-            FreeMemory(skill->Messages.VictimDeath.ToCaster);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Messages.VictimDeath.ToCaster = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Messages.VictimDeath.ToCaster.erase();
+          else
+            skill->Messages.VictimDeath.ToCaster = argument;
+          
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "dievict" ) )
         {
-          if ( skill->Messages.VictimDeath.ToVictim )
-            FreeMemory(skill->Messages.VictimDeath.ToVictim);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Messages.VictimDeath.ToVictim = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Messages.VictimDeath.ToVictim.erase();
+          else
+            skill->Messages.VictimDeath.ToVictim = argument;
+          
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "dieroom" ) )
         {
-          if ( skill->Messages.VictimDeath.ToRoom )
-            FreeMemory(skill->Messages.VictimDeath.ToRoom);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Messages.VictimDeath.ToRoom = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Messages.VictimDeath.ToRoom.erase();
+          else
+            skill->Messages.VictimDeath.ToRoom = argument;
+          
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "immchar" ) )
         {
-          if ( skill->Messages.VictimImmune.ToCaster )
-            FreeMemory(skill->Messages.VictimImmune.ToCaster);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Messages.VictimImmune.ToCaster = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Messages.VictimImmune.ToCaster.erase();
+          else
+            skill->Messages.VictimImmune.ToCaster = argument;
+          
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "immvict" ) )
         {
-          if ( skill->Messages.VictimImmune.ToVictim )
-            FreeMemory(skill->Messages.VictimImmune.ToVictim);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Messages.VictimImmune.ToVictim = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Messages.VictimImmune.ToVictim.erase();
+          else
+            skill->Messages.VictimImmune.ToVictim = argument;
+          
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "immroom" ) )
         {
-          if ( skill->Messages.VictimImmune.ToRoom )
-            FreeMemory(skill->Messages.VictimImmune.ToRoom);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Messages.VictimImmune.ToRoom = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Messages.VictimImmune.ToRoom.erase();
+          else
+            skill->Messages.VictimImmune.ToRoom = argument;
+          
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "dice" ) )
         {
-          if ( skill->Dice )
-            FreeMemory(skill->Dice);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Dice = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Dice.erase();
+          else
+            skill->Dice = argument;
+          
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "teachers" ) )
         {
-          if ( skill->Teachers )
-            FreeMemory(skill->Teachers);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Teachers = CopyString( argument );
+          if ( !StrCmp( argument, "clear" ) )
+            skill->Teachers.erase();
+          else
+            skill->Teachers = argument;
+          
           ch->Echo("Ok.\r\n");
           return;
         }
@@ -613,7 +652,8 @@ void do_sset( Character *ch, char *argument )
     {
       if ( (sn = LookupSkill(arg1)) >= 0 )
         {
-          sprintf(arg1, "%d %s %s", sn, arg2, argument);
+          arg1 = FormatString( "%d %s %s",
+                               sn, arg2.c_str(), argument.c_str() );
           do_sset(ch, arg1);
         }
       else
@@ -638,6 +678,7 @@ void do_sset( Character *ch, char *argument )
 
   fAll = !StrCmp( arg2, "all" );
   sn   = 0;
+
   if ( !fAll && ( sn = LookupSkill( arg2 ) ) < 0 )
     {
       ch->Echo("No such skill or spell.\r\n");
@@ -653,7 +694,8 @@ void do_sset( Character *ch, char *argument )
       return;
     }
 
-  value = atoi( argument );
+  value = std::stoi( argument );
+
   if ( value < 0 || value > 100 )
     {
       ch->Echo("Value range is 0 to 100.\r\n");
@@ -667,7 +709,8 @@ void do_sset( Character *ch, char *argument )
           /* Fix by Narn to prevent ssetting skills the player shouldn't have. */
           if (SkillTable[sn]->Guild < 0 || SkillTable[sn]->Guild >= MAX_ABILITY )
             continue;
-          if ( SkillTable[sn]->Name
+
+          if ( !SkillTable[sn]->Name.empty()
                && ( GetAbilityLevel( victim, SkillTable[sn]->Guild ) >= SkillTable[sn]->Level
                     || value == 0 ) )
             victim->PCData->Learned[sn] = value;
@@ -678,4 +721,3 @@ void do_sset( Character *ch, char *argument )
       victim->PCData->Learned[sn] = value;
     }
 }
-

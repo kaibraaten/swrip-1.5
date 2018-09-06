@@ -5,16 +5,13 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_balzhur( Character *ch, char *argument )
+void do_balzhur( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   Character *victim = nullptr;
 
-  argument = OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Who is deserving of such a fate?\r\n" );
       return;
@@ -43,7 +40,7 @@ void do_balzhur( Character *ch, char *argument )
   ch->Echo( "Balzhur sneers at you evilly, then vanishes in a puff of smoke.\r\n" );
   SetCharacterColor( AT_IMMORT, victim );
   victim->Echo( "You hear an ungodly sound in the distance that makes your blood run cold!\r\n" );
-  sprintf( buf, "Balzhur screams, 'You are MINE %s!!!'", victim->Name );
+  sprintf( buf, "Balzhur screams, 'You are MINE %s!!!'", victim->Name.c_str() );
   EchoToAll( AT_IMMORT, buf, ECHOTAR_ALL );
   victim->TopLevel = 1;
   victim->Trust = 0;
@@ -66,7 +63,7 @@ void do_balzhur( Character *ch, char *argument )
 
   char victimImmortalFilename[1024];
   
-  sprintf( victimImmortalFilename, "%s%s", GOD_DIR, Capitalize(victim->Name) );
+  sprintf( victimImmortalFilename, "%s%s", GOD_DIR, Capitalize(victim->Name).c_str() );
 
   if ( !remove( victimImmortalFilename ) )
     {
@@ -76,11 +73,11 @@ void do_balzhur( Character *ch, char *argument )
     {
       ch->Echo( "Unknown error #%d - %s (immortal data).  Report to Thoric\r\n",
                 errno, strerror( errno ) );
-      sprintf( buf2, "%s balzhuring %s", ch->Name, victimImmortalFilename );
+      sprintf( buf2, "%s balzhuring %s", ch->Name.c_str(), victimImmortalFilename );
       perror( buf2 );
     }
 
-  sprintf( buf2, "%s.are", Capitalize(arg) );
+  sprintf( buf2, "%s.are", Capitalize(arg).c_str() );
   MakeWizlist();
   do_help(victim, "M_BALZHUR_" );
   SetCharacterColor( AT_WHITE, victim );
@@ -91,4 +88,3 @@ void do_balzhur( Character *ch, char *argument )
       ExtractObject( victim->Objects().front() );
     }
 }
-

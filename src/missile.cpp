@@ -56,11 +56,7 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missi
 
   if ( firedBy )
     {
-      missile->FiredBy = CopyString( firedBy->Name );
-    }
-  else
-    {
-      missile->FiredBy = CopyString( "" );
+      missile->FiredBy = firedBy->Name;
     }
 
   missile->Type = missiletype;
@@ -96,11 +92,6 @@ void ExtractMissile( Missile *missile )
 
   UNLINK( missile, FirstMissile, LastMissile, Next, Previous );
 
-  if (  missile->FiredBy )
-    {
-      FreeMemory( missile->FiredBy );
-    }
-
   delete missile;
 }
 
@@ -128,7 +119,8 @@ bool UpdateMissile( Missile *missile, void *unused )
 			     "The ship is hit by a missile.");
 	      EchoToShip( AT_RED, target,
 			  "A loud explosion shakes thee ship violently!" );
-	      sprintf( buf, "You see a small explosion as %s is hit by a missile", target->Name );
+	      sprintf( buf, "You see a small explosion as %s is hit by a missile",
+                       target->Name.c_str() );
 	      EchoToNearbyShips( AT_ORANGE, target, buf, ship );
 
 	      for ( ch = FirstCharacter; ch; ch = ch->Next )

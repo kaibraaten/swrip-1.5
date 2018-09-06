@@ -1,20 +1,17 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_special_forces ( Character *ch , char *argument )
+void do_special_forces( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
   int the_chance = 0, credits = 0;
   Clan *clan = NULL;
   
   if ( IsNpc( ch ) )
     return;
-
-  strcpy( arg, argument );
 
   switch( ch->SubState )
     {
@@ -43,11 +40,12 @@ void do_special_forces ( Character *ch , char *argument )
         {
           ch->Echo("&GYou begin making the call for reinforcements.\r\n");
           Act( AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
-               NULL, argument , TO_ROOM );
+               NULL, argument.c_str(), TO_ROOM );
           AddTimerToCharacter( ch , TIMER_CMD_FUN , 1 , do_special_forces , SUB_PAUSE );
-          ch->dest_buf = CopyString(arg);
+          ch->dest_buf = CopyString(argument);
           return;
         }
+
       ch->Echo("&RYou call for reinforcements but nobody answers.\r\n");
       LearnFromFailure( ch, gsn_specialforces );
       return;
@@ -55,7 +53,8 @@ void do_special_forces ( Character *ch , char *argument )
     case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, (const char*)ch->dest_buf);
+
+      argument = static_cast<const char*>( ch->dest_buf );
       FreeMemory( ch->dest_buf);
       break;
 
@@ -86,4 +85,3 @@ void do_special_forces ( Character *ch , char *argument )
 
   ch->BackupWait = GetRandomNumberFromRange(1,2);
 }
-

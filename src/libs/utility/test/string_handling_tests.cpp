@@ -72,41 +72,13 @@ TEST_F(StringHandlingTests, NiftyIsNamePrefix)
 
 TEST_F(StringHandlingTests, SmashTilde)
 {
-  char buffer[1024];
-  char *pointer = buffer;
-  const char *input = "This~is a st~ring.~";
-  const char *expected = "This-is a st-ring.-";
-  strcpy(pointer, input);
+  const std::string input = "This~is a st~ring.~";
+  const std::string expected = "This-is a st-ring.-";
+  std::string actual = input;
 
-  SmashTilde(pointer);
+  SmashTilde(actual);
 
-  EXPECT_STREQ(expected, pointer);
-}
-
-TEST_F(StringHandlingTests, HideTilde)
-{
-  char buffer[1024];
-  char *pointer = buffer;
-  const char *input = "This~is a st~ring.~";
-  const char *expected = "This*is a st*ring.*";
-  strcpy(pointer, input);
-
-  HideTilde(pointer);
-
-  EXPECT_STREQ(expected, pointer);
-}
-
-TEST_F(StringHandlingTests, ShowTilde)
-{
-  char buffer[1024];
-  char *pointer = buffer;
-  const char *input = "This*is a st*ring.*";
-  const char *expected = "This~is a st~ring.~";
-  strcpy(pointer, input);
-
-  const std::string actual = ShowTilde(pointer);
-
-  EXPECT_STREQ(expected, actual.c_str());
+  EXPECT_EQ(expected, actual);
 }
 
 TEST_F(StringHandlingTests, StrCmp)
@@ -156,41 +128,40 @@ TEST_F(StringHandlingTests, StringSuffix)
 
 TEST_F(StringHandlingTests, Capitalize)
 {
-  EXPECT_STREQ("Bob", Capitalize("bob"));
-  EXPECT_STREQ("Bob", Capitalize("Bob"));
+  EXPECT_EQ("Bob", Capitalize("bob"));
+  EXPECT_EQ("Bob", Capitalize("Bob"));
 
-  EXPECT_STRNE("BOB", Capitalize("bob"));
+  EXPECT_NE("BOB", Capitalize("bob"));
 }
 
 TEST_F(StringHandlingTests, ToLower)
 {
-  EXPECT_STREQ("bob", ToLower("BOB").c_str());
-  EXPECT_STREQ("bob", ToLower("bob").c_str());
-  EXPECT_STREQ("bob", ToLower("bOB").c_str());
+  EXPECT_EQ("bob", ToLower("BOB"));
+  EXPECT_EQ("bob", ToLower("bob"));
+  EXPECT_EQ("bob", ToLower("bOB"));
 }
 
 TEST_F(StringHandlingTests, ToUpper)
 {
-  EXPECT_STREQ("BOB", ToUpper("BOB").c_str());
-  EXPECT_STREQ("BOB", ToUpper("bob").c_str());
-  EXPECT_STREQ("BOB", ToUpper("bOB").c_str());
+  EXPECT_EQ("BOB", ToUpper("BOB"));
+  EXPECT_EQ("BOB", ToUpper("bob"));
+  EXPECT_EQ("BOB", ToUpper("bOB"));
 }
 
 TEST_F(StringHandlingTests, AOrAn)
 {
-  EXPECT_STREQ("a fish", AOrAn("fish"));
-  EXPECT_STREQ("an apple", AOrAn("apple"));
-  EXPECT_STREQ("a yoke", AOrAn("yoke"));
+  EXPECT_EQ("a fish", AOrAn("fish"));
+  EXPECT_EQ("an apple", AOrAn("apple"));
+  EXPECT_EQ("a yoke", AOrAn("yoke"));
 }
 
 TEST_F(StringHandlingTests, ReplaceChar)
 {
-  char buf[1024];
-  strcpy(buf, "My, oh my what a mess!");
+  std::string buf = "My, oh my what a mess!";
 
   ReplaceChar(buf, 'm', 'w');
 
-  EXPECT_STREQ("My, oh wy what a wess!", buf);
+  EXPECT_EQ("My, oh wy what a wess!", buf);
 }
 
 TEST_F(StringHandlingTests, IsNumber)
@@ -205,50 +176,44 @@ TEST_F(StringHandlingTests, IsNumber)
 
 TEST_F(StringHandlingTests, NumberArgument)
 {
-  char buf[1024];
+  std::string buf;
   int number = NumberArgument("foo", buf);
   EXPECT_EQ(1, number);
-  EXPECT_STREQ("foo", buf);
+  EXPECT_EQ("foo", buf);
   
   number = NumberArgument("14.foo", buf);
   EXPECT_EQ(14, number);
-  EXPECT_STREQ("foo", buf);
+  EXPECT_EQ("foo", buf);
 
   number = NumberArgument("-14.foo", buf);
   EXPECT_EQ(-14, number);
-  EXPECT_STREQ("foo", buf);
+  EXPECT_EQ("foo", buf);
 }
 
 TEST_F(StringHandlingTests, OneArgument)
 {
-  char original[1024];
-  strcpy(original, "find 14 apples");
-
-  char head[1024];
-  char arg2[1024];
-  char *remainder = arg2;
+  std::string original = "find 14 apples";
+  std::string head;
+  std::string remainder;
 
   remainder = OneArgument(original, head);
 
-  EXPECT_STREQ(original, "find 14 apples");
-  EXPECT_STREQ(head, "find");
-  EXPECT_STREQ(remainder, "14 apples");
+  EXPECT_EQ(original, "find 14 apples");
+  EXPECT_EQ(head, "find");
+  EXPECT_EQ(remainder, "14 apples");
 }
 
 TEST_F(StringHandlingTests, OneArgument_WithQuotes)
 {
-  char original[1024];
-  strcpy(original, "'find 14 apples' for me");
-
-  char head[1024];
-  char arg2[1024];
-  char *remainder = arg2;
+  std::string original = "'find 14 apples' for me";
+  std::string head;
+  std::string remainder;
 
   remainder = OneArgument(original, head);
 
-  EXPECT_STREQ(original, "'find 14 apples' for me");
-  EXPECT_STREQ(head, "find 14 apples");
-  EXPECT_STREQ(remainder, "for me");
+  EXPECT_EQ(original, "'find 14 apples' for me");
+  EXPECT_EQ(head, "find 14 apples");
+  EXPECT_EQ(remainder, "for me");
 }
 
 TEST_F(StringHandlingTests, CopyString)
@@ -260,61 +225,6 @@ TEST_F(StringHandlingTests, CopyString)
   EXPECT_STREQ(original, target);
 
   FreeMemory(target);
-}
-
-TEST_F(StringHandlingTests, TrimStringStart)
-{
-  {
-    char buf[1024];
-    char *original = buf;
-    strcpy(original, "   Starts here.");
-
-    char *result = TrimStringStart(original);
-
-    EXPECT_STREQ(result, "Starts here.");
-  }
-  {
-    char buf[1024];
-    char *original = buf;
-    strcpy(original, "---Starts here.");
-
-    char *result = TrimStringStart(original, '-');
-
-    EXPECT_STREQ(result, "Starts here.");
-  }
-}
-
-TEST_F(StringHandlingTests, TrimStringEnd)
-{
-  {
-    char buf[1024];
-    char *original = buf;
-    strcpy(original, "Starts here.    ");
-
-    char *result = TrimStringEnd(original);
-
-    EXPECT_STREQ(result, "Starts here.");
-  }
-  {
-    char buf[1024];
-    char *original = buf;
-    strcpy(original, "Starts here.----");
-
-    char *result = TrimStringEnd(original, '-');
-
-    EXPECT_STREQ(result, "Starts here.");
-  }
-}
-
-TEST_F(StringHandlingTests, TrimString)
-{
-  char buf[1024];
-  char *original = buf;
-  strcpy(original, "        Starts here.    ");
-
-  char *result = TrimString(original);
-
-  EXPECT_STREQ(result, "Starts here.");
 }
 
 TEST_F(StringHandlingTests, CountStringOccurances)
@@ -339,7 +249,7 @@ TEST_F(StringHandlingTests, IsNullOrEmpty)
   EXPECT_FALSE(IsNullOrEmpty(containsSomething));
 }
 
-TEST_F(StringHandlingTests, TrimStringStart_STL)
+TEST_F(StringHandlingTests, TrimStringStart)
 {
   {
     std::string original = "   Starts here.";
@@ -371,7 +281,7 @@ TEST_F(StringHandlingTests, TrimStringStart_STL)
   }
 }
 
-TEST_F(StringHandlingTests, TrimStringEnd_STL)
+TEST_F(StringHandlingTests, TrimStringEnd)
 {
   {
     std::string original = "Starts here.    ";
@@ -403,7 +313,7 @@ TEST_F(StringHandlingTests, TrimStringEnd_STL)
   }
 }
 
-TEST_F(StringHandlingTests, TrimString_STL)
+TEST_F(StringHandlingTests, TrimString)
 {
   {
     std::string original = "        Starts here.    ";

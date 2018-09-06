@@ -7,19 +7,13 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_launch( Character *ch, char *argument )
+void do_launch( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-
   int the_chance = 0;
   long price = 0;
   Ship *ship = NULL;
   char buf[MAX_STRING_LENGTH];
   Room *room = NULL;
-
-  argument = OneArgument( argument , arg1);
-  argument = OneArgument( argument , arg2);
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
@@ -89,12 +83,15 @@ void do_launch( Character *ch, char *argument )
   if ( ship->Class <= FIGHTER_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_starfighters]) ;
+
   if ( ship->Class == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_midships]) ;
+
   if ( ship->Class == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int) (ch->PCData->Learned[gsn_capitalships]);
+
   if ( GetRandomPercent() < the_chance )
     {
       if ( IsShipRental(ch,ship) )
@@ -148,15 +145,19 @@ void do_launch( Character *ch, char *argument )
         {
           if ( ch->PCData->ClanInfo.Clan->Funds < price )
             {
-              ch->Echo("&R%s doesn't have enough funds to prepare this ship for launch.\r\n", ch->PCData->ClanInfo.Clan->Name );
+              ch->Echo("&R%s doesn't have enough funds to prepare this ship for launch.\r\n",
+                       ch->PCData->ClanInfo.Clan->Name.c_str() );
               return;
             }
 
           ch->PCData->ClanInfo.Clan->Funds -= price;
           room = GetRoom( ship->Location );
+
           if( room != NULL && room->Area )
             BoostEconomy( room->Area, price );
-          ch->Echo("&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->PCData->ClanInfo.Clan->Name, price );
+
+          ch->Echo("&GIt costs %s %ld credits to ready this ship for launch.\r\n",
+                   ch->PCData->ClanInfo.Clan->Name.c_str(), price );
         }
       else if ( StrCmp( ship->Owner , "Public" ) )
         {
@@ -202,19 +203,19 @@ void do_launch( Character *ch, char *argument )
       if (ship->HatchOpen)
         {
           ship->HatchOpen = false;
-          sprintf( buf , "The hatch on %s closes." , ship->Name);
-          EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
-          EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Entrance) , "The hatch slides shut." );
+          sprintf( buf , "The hatch on %s closes.", ship->Name.c_str());
+          EchoToRoom( AT_YELLOW , GetRoom(ship->Location), buf );
+          EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Entrance), "The hatch slides shut." );
         }
 
       SetCharacterColor( AT_GREEN, ch );
       ch->Echo("Launch sequence initiated.\r\n");
       Act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
-           NULL, argument , TO_ROOM );
+           NULL, argument.c_str(), TO_ROOM );
       EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
-      sprintf( buf, "%s begins to launch.", ship->Name );
-      EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
-      EchoToDockedShip( AT_YELLOW , ship, "The ship shudders as it lifts off the ground." );
+      sprintf( buf, "%s begins to launch.", ship->Name.c_str() );
+      EchoToRoom( AT_YELLOW , GetRoom(ship->Location), buf );
+      EchoToDockedShip( AT_YELLOW, ship, "The ship shudders as it lifts off the ground." );
       ship->State = SHIP_LAUNCH;
       ship->Thrusters.Speed.Current = ship->Thrusters.Speed.Max;
 

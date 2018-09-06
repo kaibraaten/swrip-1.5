@@ -2,12 +2,10 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_invite(Character *ch, char *argument)
+void do_invite(Character *ch, std::string argument )
 {
-  Room *home;
-  Character *victim;
-
-  home = ch->InRoom;
+  Room *home = ch->InRoom;
+  Character *victim = nullptr;
 
   if ( !IsBitSet(home->Flags,ROOM_PLR_HOME) || home != ch->PlayerHome )
     {
@@ -15,13 +13,13 @@ void do_invite(Character *ch, char *argument)
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("&RInvite who?\r\n");
       return;
     }
 
-  if ( (victim = GetCharacterAnywhere(ch,argument)) == NULL )
+  if ( (victim = GetCharacterAnywhere(ch, argument)) == NULL )
     {
       ch->Echo("&RThey aren't here.\r\n");
       return;

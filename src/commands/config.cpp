@@ -2,18 +2,14 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 
-void do_config( Character *ch, char *argument )
+void do_config( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-
   if ( IsNpc(ch) )
     return;
 
-  OneArgument( argument, arg );
-
   SetCharacterColor( AT_WHITE, ch );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "[ Keyword  ] Option\r\n" );
 
@@ -136,63 +132,65 @@ void do_config( Character *ch, char *argument )
           return;
         }
 
-      if ( !StringPrefix( arg+1, "autoexit" ) )
+      std::string option = arg.substr(1);
+      
+      if ( !StringPrefix( option, "autoexit" ) )
 	bit = PLR_AUTOEXIT;
-      else if ( !StringPrefix( arg+1, "autoloot" ) )
+      else if ( !StringPrefix( option, "autoloot" ) )
 	bit = PLR_AUTOLOOT;
-      else if ( !StringPrefix( arg+1, "autosac"  ) )
+      else if ( !StringPrefix( option, "autosac"  ) )
 	bit = PLR_AUTOSAC;
-      else if ( !StringPrefix( arg+1, "autocred" ) )
+      else if ( !StringPrefix( option, "autocred" ) )
 	bit = PLR_AUTOGOLD;
-      else if ( !StringPrefix( arg+1, "blank"    ) )
+      else if ( !StringPrefix( option, "blank"    ) )
 	bit = PLR_BLANK;
-      else if ( !StringPrefix( arg+1, "brief"    ) )
+      else if ( !StringPrefix( option, "brief"    ) )
 	bit = PLR_BRIEF;
-      else if ( !StringPrefix( arg+1, "combine"  ) )
+      else if ( !StringPrefix( option, "combine"  ) )
 	bit = PLR_COMBINE;
-      else if ( !StringPrefix( arg+1, "prompt"   ) )
+      else if ( !StringPrefix( option, "prompt"   ) )
 	bit = PLR_PROMPT;
-      else if ( !StringPrefix( arg+1, "telnetga" ) )
+      else if ( !StringPrefix( option, "telnetga" ) )
 	bit = PLR_TELNET_GA;
-      else if ( !StringPrefix( arg+1, "ansi"     ) )
+      else if ( !StringPrefix( option, "ansi"     ) )
 	bit = PLR_ANSI;
-      else if ( !StringPrefix( arg+1, "flee"     ) )
+      else if ( !StringPrefix( option, "flee"     ) )
 	bit = PLR_FLEE;
-      else if ( !StringPrefix( arg+1, "nice"     ) )
+      else if ( !StringPrefix( option, "nice"     ) )
 	bit = PLR_NICE;
-      else if ( !StringPrefix( arg+1, "shovedrag") )
+      else if ( !StringPrefix( option, "shovedrag") )
 	bit = PLR_SHOVEDRAG;
-      else if ( !StringPrefix( arg+1, "dontautofuel") )
+      else if ( !StringPrefix( option, "dontautofuel") )
 	bit = PLR_DONTAUTOFUEL;
       else if ( IsImmortal( ch )
-                &&   !StringPrefix( arg+1, "vnum"     ) )
+                &&   !StringPrefix( option, "vnum"     ) )
 	bit = PLR_ROOMVNUM;
       else if ( IsImmortal( ch )
-                &&   !StringPrefix( arg+1, "map"      ) )
+                &&   !StringPrefix( option, "map"      ) )
 	bit = PLR_AUTOMAP;
 
       if (bit)
         {
 
           if ( fSet )
-            SetBit    (ch->Flags, bit);
+            SetBit(ch->Flags, bit);
           else
-            RemoveBit (ch->Flags, bit);
+            RemoveBit(ch->Flags, bit);
 
           ch->Echo( "Ok.\r\n" );
           return;
         }
       else
         {
-          if ( !StringPrefix( arg+1, "norecall" ) )
+          if ( !StringPrefix( option, "norecall" ) )
 	    bit = PCFLAG_NORECALL;
-          else if ( !StringPrefix( arg+1, "nointro"  ) )
+          else if ( !StringPrefix( option, "nointro"  ) )
 	    bit = PCFLAG_NOINTRO;
-          else if ( !StringPrefix( arg+1, "nosummon" ) )
+          else if ( !StringPrefix( option, "nosummon" ) )
 	    bit = PCFLAG_NOSUMMON;
-          else if ( !StringPrefix( arg+1, "gag"      ) )
+          else if ( !StringPrefix( option, "gag"      ) )
 	    bit = PCFLAG_GAG;
-          else if ( !StringPrefix( arg+1, "roomflags")
+          else if ( !StringPrefix( option, "roomflags")
                     && (IsImmortal(ch)))
 	    bit = PCFLAG_ROOM;
           else

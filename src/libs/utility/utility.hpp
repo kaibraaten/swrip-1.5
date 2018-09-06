@@ -141,11 +141,11 @@ int umax( int check, int ncheck );
 int urange( int mincheck, int check, int maxcheck );
 
 /* string_handling.c */
-char *WordWrap( char *txt, unsigned short wrap );
-char *CatSprintf(char *dest, const char *fmt, ...);
+std::string WordWrap(const std::string &txt, unsigned short wrap);
 bool IsNumber(const std::string &arg);
-int NumberArgument( const std::string &argument, char *arg );
-char *OneArgument( char *argument, char *arg_first );
+int NumberArgument( const std::string &argument, std::string &arg );
+//char *OneArgument( char *argument, char *arg_first );
+std::string OneArgument( const std::string&, std::string& );
 int IsName(const std::string &str, const std::string &namelist);
 int IsNamePrefix(const std::string &str, const std::string &namelist);
 
@@ -158,31 +158,27 @@ int StrCmp(const std::string &astr, const std::string &bstr);
 int StringPrefix(const std::string &astr, const std::string &bstr);
 int StringInfix(const std::string &astr, const std::string &bstr);
 int StringSuffix(const std::string &astr, const std::string &bstr);
-char *Capitalize( const std::string &str );
+std::string Capitalize( const std::string &str );
 std::string ToLower( std::string str );
 std::string ToUpper( std::string str );
-const char *AOrAn( const std::string &str );
-char *StripCarriageReturn(const std::string &str);
+std::string AOrAn( const std::string &str );
+std::string StripCarriageReturn(const std::string &str);
 char *CopyString( const std::string &str );
 int CountStringOccurances(const std::string &source, const std::string &target);
-void SmashTilde( char *str );
-void SmushTilde( char* );
-void HideTilde( char *str );
-char *ShowTilde( const std::string &arg);
-void ReplaceChar( char*, char, char );
-char *EncodeString( const std::string &str );
-char *TrimStringStart( char *string, char junk = ' ' );
-char *TrimStringEnd( char *string, char junk = ' ' );
-char *TrimString( char *string, char junk  = ' ');
+std::string SmashTilde( std::string &str );
+std::string SmushTilde( std::string &str );
+void ReplaceChar( std::string &str, char, char );
+std::string EncodeString( const std::string &str );
 std::string TrimStringStart( const std::string &str, char junk = ' ' );
 std::string TrimStringEnd( const std::string &str, char junk = ' ' );
 std::string TrimString( const std::string &str, char junk  = ' ');
-char *Scramble( const std::string &argument, int modifier );
+std::string Scramble( const std::string &argument, int modifier );
 bool IsNullOrEmpty( const char *str );
 std::string CenterString( const std::string &txt, size_t totalWidth, char pad );
 std::string FormatString( const char *fmt, ... );
-std::vector< char > CreateFmtBuffer( const char *fmt, va_list va );
-  
+std::vector<char> CreateFmtBuffer( const char *fmt, va_list va );
+std::vector<char> StringToVector(const std::string&);
+
 /* file_io.c */
 char ReadChar( FILE *fp, Logger *log, bool fBootDb );
 float ReadFloat( FILE *fp, Logger *log, bool fBootDb );
@@ -194,7 +190,7 @@ char *ReadLine( FILE *fp, Logger *log, bool fBootDb );
 void ForEachLuaFileInDir( const char *pathToDir,
                           std::function<void(const std::string&, void*)> doOnFile,
 			  void *userData );
-const char *ConvertToLuaFilename( const std::string &name );
+std::string ConvertToLuaFilename( const std::string &name );
 
 /* Random number stuff */
 void InitMM( void );
@@ -212,17 +208,8 @@ char *StripColorCodes( char *text );
 /*
  * Takes a number such as 1234567890
  * and returns it as 1,234,567,890
- *
- * The second argument is optional. If you supply NULL, the
- * function will return a pointer to an internal static
- * character string. The implication is that it will not
- * be threadsafe, and you can't use it twice in the same
- * statement. For instance, if you use it twice in the
- * same sprintf() call, only the last result will actually
- * be used. If this is a problem in your case you'll need
- * to supply your own buffer.
  */
-char *PunctuateNumber( long number, char **optionalBuffer = nullptr);
+std::string PunctuateNumber( long number );
 
 /* time_fun.c */
 struct tm *UpdateTime( struct tm *old_time );

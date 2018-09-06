@@ -4,10 +4,10 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 
-void do_ocreate( Character *ch, char *argument )
+void do_ocreate( Character *ch, std::string argument )
 {
-  char arg [MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg2;
   ProtoObject *pObjIndex = NULL;
   Object *obj = NULL;
   vnum_t vnum = INVALID_VNUM;
@@ -21,9 +21,9 @@ void do_ocreate( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  vnum = IsNumber( arg ) ? atoi( arg ) : INVALID_VNUM;
+  vnum = IsNumber( arg ) ? std::stoi( arg ) : INVALID_VNUM;
 
-  if ( vnum == INVALID_VNUM || IsNullOrEmpty( argument ) )
+  if ( vnum == INVALID_VNUM || argument.empty() )
     {
       ch->Echo("Usage: ocreate <vnum> [copy vnum] <item name>\r\n");
       return;
@@ -36,7 +36,7 @@ void do_ocreate( Character *ch, char *argument )
     }
 
   OneArgument( argument, arg2 );
-  cvnum = atoi( arg2 );
+  cvnum = std::stoi( arg2 );
 
   if ( cvnum != INVALID_VNUM )
     argument = OneArgument( argument, arg2 );
@@ -55,7 +55,7 @@ void do_ocreate( Character *ch, char *argument )
 
   if ( GetTrustLevel( ch ) <= LEVEL_IMMORTAL )
     {
-      Area *pArea;
+      Area *pArea = nullptr;
 
       if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
@@ -90,4 +90,3 @@ void do_ocreate( Character *ch, char *argument )
   Act( AT_IMMORT, "You make some ancient arcane gestures, and open your hands to reveal $p!",
        ch, obj, NULL, TO_CHAR );
 }
-

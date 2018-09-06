@@ -1,17 +1,17 @@
-#include <ctype.h>
+#include <cctype>
 #include "mud.hpp"
 #include "help.hpp"
 #include "character.hpp"
 
-static short str_similarity( const char *astr, const char *bstr );
-static void similar_help_files(Character *ch, char *argument);
+static short str_similarity( const std::string &astr, const std::string &bstr );
+static void similar_help_files(Character *ch, const std::string &argument);
 
-void do_help( Character *ch, char *argument )
+void do_help( Character *ch, std::string argument )
 {
   HelpFile *pHelp = NULL;
-  const char *help_text = NULL;
+  std::string help_text;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       do_help( ch, "help" );
       return;
@@ -21,14 +21,14 @@ void do_help( Character *ch, char *argument )
 
   if ( !pHelp )
     {
-      ch->Echo( "&C&wNo help on \'%s\' found.\r\n", argument );
+      ch->Echo( "&C&wNo help on \'%s\' found.\r\n", argument.c_str() );
       similar_help_files(ch, argument);
       return;
     }
 
   if ( GetHelpFileLevel( pHelp ) >= 0 && StrCmp( argument, "imotd" ) )
     {
-      ch->Echo( "%s\r\n", GetHelpFileKeyword( pHelp ) );
+      ch->Echo( "%s\r\n", GetHelpFileKeyword( pHelp ).c_str() );
     }
 
   help_text = GetHelpFileText( pHelp );
@@ -38,15 +38,17 @@ void do_help( Character *ch, char *argument )
    */
   if ( GetHelpFileText( pHelp )[0] == '.' )
     {
-      ++help_text;
+      help_text = help_text.substr(1);
     }
-
-  ch->Echo( "%s", help_text );
+  
+  ch->Echo( "%s", help_text.c_str() );
 }
 
-static short str_similarity( const char *astr, const char *bstr )
+static short str_similarity( const std::string &stl_astr, const std::string &stl_bstr )
 {
-  short matches=0;
+  const char *astr = stl_astr.c_str();
+  const char *bstr = stl_bstr.c_str();
+  short matches = 0;
 
   if (!astr || !bstr)
     return matches;
@@ -65,7 +67,7 @@ static short str_similarity( const char *astr, const char *bstr )
   return matches;
 }
 
-static void similar_help_files(Character *ch, char *argument)
+static void similar_help_files(Character *ch, const std::string &argument)
 {
   short level = 0;
   bool single = false;
@@ -74,16 +76,16 @@ static void similar_help_files(Character *ch, char *argument)
 
   for(const HelpFile *pHelp : HelpFiles->Entities())
     {
-      char buf[MAX_STRING_LENGTH] = { '\0' };
-      char *extension = GetHelpFileKeyword( pHelp );
+      std::string extension = GetHelpFileKeyword( pHelp );
 
       if (GetHelpFileLevel( pHelp ) > GetTrustLevel(ch))
 	{
 	  continue;
 	}
 
-      while ( !IsNullOrEmpty( extension ) )
+      while ( !extension.empty() )
         {
+          std::string buf;
           extension = OneArgument(extension, buf);
 
           if ( str_similarity(argument, buf) > level)
@@ -106,11 +108,11 @@ static void similar_help_files(Character *ch, char *argument)
 
   for(const HelpFile *pHelp : HelpFiles->Entities())
     {
-      char buf[MAX_STRING_LENGTH] = { '\0' };
-      char *extension = GetHelpFileKeyword( pHelp );
+      std::string extension = GetHelpFileKeyword( pHelp );
 
-      while ( !IsNullOrEmpty( extension ) )
+      while ( !extension.empty() )
         {
+          std::string buf;
           extension = OneArgument(extension, buf);
 
           if ( str_similarity(argument, buf) >= level
@@ -123,10 +125,9 @@ static void similar_help_files(Character *ch, char *argument)
                   return;
                 }
 
-              ch->Echo( "&C&G   %s\r\n", GetHelpFileKeyword( pHelp ) );
+              ch->Echo( "&C&G   %s\r\n", GetHelpFileKeyword( pHelp ).c_str() );
               break;
             }
         }
     }
 }
-

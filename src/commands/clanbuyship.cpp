@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_clanbuyship(Character *ch, char *argument )
+void do_clanbuyship(Character *ch, std::string argument )
 {
   long price = 0;
   Ship *ship = NULL;
@@ -27,8 +27,7 @@ void do_clanbuyship(Character *ch, char *argument )
   clan = ch->PCData->ClanInfo.Clan;
   mainclan = clan->MainClan ? clan->MainClan : clan;
 
-  if ( ( ch->PCData->Bestowments
-         && IsName("clanbuyship", ch->PCData->Bestowments))
+  if ( IsName("clanbuyship", ch->PCData->Bestowments)
        || !StrCmp( ch->Name, clan->Leadership.Leader ))
     ;
   else
@@ -45,12 +44,12 @@ void do_clanbuyship(Character *ch, char *argument )
 
       if ( !ship )
         {
-          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), TO_CHAR );
           return;
         }
     }
 
-  if ( StrCmp( ship->Owner , "" )  || ship->Type == MOB_SHIP )
+  if ( !ship->Owner.empty() || ship->Type == MOB_SHIP )
     {
       ch->Echo( "&RThat ship isn't for sale!\r\n" );
       return;
@@ -58,19 +57,19 @@ void do_clanbuyship(Character *ch, char *argument )
 
   if ( StrCmp( mainclan->Name, BADGUY_CLAN ) && ship->Type == SHIP_IMPERIAL )
     {
-      ch->Echo( "&RThat ship may only be purchaced by %s!\r\n", BADGUY_CLAN );
+      ch->Echo( "&RThat ship may only be purchased by %s!\r\n", BADGUY_CLAN );
       return;
     }
 
   if ( StrCmp( mainclan->Name, GOODGUY_CLAN ) && ship->Type == SHIP_REBEL )
     {
-      ch->Echo( "&RThat ship may only be purchaced by %s!\r\n", GOODGUY_CLAN );
+      ch->Echo( "&RThat ship may only be purchased by %s!\r\n", GOODGUY_CLAN );
       return;
     }
 
   if ( !StrCmp( clan->Name, BADGUY_CLAN ) && ship->Type != SHIP_IMPERIAL )
     {
-      ch->Echo( "&RDue to contractual agreements that ship may not be purchaced by %s!\r\n",
+      ch->Echo( "&RDue to contractual agreements that ship may not be purchased by %s!\r\n",
                 BADGUY_CLAN );
       return;
     }
@@ -79,18 +78,19 @@ void do_clanbuyship(Character *ch, char *argument )
 
   if ( clan->Funds < price )
     {
-      ch->Echo("&RThis ship costs %ld. You don't have enough credits!\r\n", price );
+      ch->Echo("&RThis ship costs %ld. %s doesn't have enough credits!\r\n",
+               price, clan->Name.c_str() );
       return;
     }
 
   clan->Funds -= price;
-  ch->Echo( "&G%s pays %ld credits to purchace the ship.\r\n", clan->Name , price );
+  ch->Echo( "&G%s pays %ld credits to purchace the ship.\r\n",
+            clan->Name.c_str(), price );
 
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
-       NULL, argument , TO_ROOM );
+       NULL, argument.c_str(), TO_ROOM );
 
-  FreeMemory( ship->Owner );
-  ship->Owner = CopyString( clan->Name );
+  ship->Owner = clan->Name;
   Ships->Save(ship);
 
   if ( ship->Class <= SHIP_PLATFORM )

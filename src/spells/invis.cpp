@@ -3,7 +3,7 @@
 #include "skill.hpp"
 #include "object.hpp"
 
-extern char *spell_target_name;
+extern std::string spell_target_name;
 
 ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
 {
@@ -12,7 +12,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
 
   /* Modifications on 1/2/96 to work on player/object - Scryn */
 
-  if ( IsNullOrEmpty( spell_target_name ) )
+  if ( spell_target_name.empty() )
     victim = ch;
   else
     victim = GetCharacterInRoom(ch, spell_target_name);
@@ -64,7 +64,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
         }
     }
 
-  ch->Echo("You can't find %s!\r\n", spell_target_name);
+  ch->Echo("You can't find %s!\r\n", spell_target_name.c_str());
   return rSPELL_FAILED;
 }
 

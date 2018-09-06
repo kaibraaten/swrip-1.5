@@ -71,7 +71,7 @@ void LoadAreaFile( Area *tarea, const std::string &filename )
 
       if ( ReadChar( fpArea, Log, fBootDb ) != '#' )
         {
-          Log->Bug( tarea->Filename );
+          Log->Bug( "%s", tarea->Filename.c_str() );
           Log->Bug( "%s: # not found.", __FUNCTION__ );
           exit( 1 );
         }
@@ -91,7 +91,6 @@ void LoadAreaFile( Area *tarea, const std::string &filename )
             }
           else
             {
-              FreeMemory( tarea->Name );
               tarea->Name = ReadStringToTilde( fpArea, Log, fBootDb );
             }
         }
@@ -110,7 +109,7 @@ void LoadAreaFile( Area *tarea, const std::string &filename )
       else if ( !StrCmp( word, "SPECIALS" ) ) LoadSpecials(tarea, fpArea);
       else
         {
-          Log->Bug( tarea->Filename );
+          Log->Bug( "%s", tarea->Filename.c_str() );
           Log->Bug( "%s: bad section name.", __FUNCTION__ );
 
 	  if ( fBootDb )
@@ -135,13 +134,10 @@ void LoadAreaFile( Area *tarea, const std::string &filename )
         SortArea( tarea, false );
 
       fprintf( stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld Mobs: %5ld - %ld\n",
-               tarea->Filename,
+               tarea->Filename.c_str(),
                tarea->VnumRanges.Room.First, tarea->VnumRanges.Room.Last,
                tarea->VnumRanges.Object.First, tarea->VnumRanges.Object.Last,
                tarea->VnumRanges.Mob.First, tarea->VnumRanges.Mob.Last );
-
-      if ( !tarea->Author )
-        tarea->Author = CopyString( "" );
 
       SetBit( tarea->Status, AREA_LOADED );
     }
@@ -282,8 +278,8 @@ static void LoadArea( FILE *fp )
   Area *pArea = new Area();
 
   pArea->Name           = ReadStringToTilde( fp, Log, fBootDb );
-  pArea->Author       = CopyString( "unknown" );
-  pArea->Filename       = CopyString( strArea );
+  pArea->Author         = "unknown";
+  pArea->Filename       = strArea;
   pArea->Age            = 15;
   pArea->LevelRanges.Soft.High  = MAX_LEVEL;
   pArea->LevelRanges.Hard.High  = MAX_LEVEL;
@@ -308,9 +304,6 @@ static void LoadAuthor( Area *tarea, FILE *fp )
           return;
         }
     }
-
-  if ( tarea->Author )
-    FreeMemory( tarea->Author );
 
   tarea->Author = ReadStringToTilde( fp, Log, fBootDb );
 }
@@ -352,9 +345,6 @@ static void LoadResetMessage( Area *tarea, FILE *fp )
           return;
         }
     }
-
-  if ( tarea->ResetMessage )
-    FreeMemory( tarea->ResetMessage );
 
   tarea->ResetMessage = ReadStringToTilde( fp, Log, fBootDb );
 }
@@ -853,7 +843,7 @@ static void LoadResets( Area *tarea, FILE *fp )
            * Clean out the old resets
            */
           char buf[MAX_STRING_LENGTH];
-          sprintf( buf, "Cleaning resets: %s", tarea->Name );
+          sprintf( buf, "Cleaning resets: %s", tarea->Name.c_str() );
           Log->LogStringPlus( buf, LOG_BUILD, SysData.LevelOfLogChannel );
           CleanResets( tarea );
         }
@@ -1023,6 +1013,8 @@ static void LoadRooms( Area *tarea, FILE *fp )
                   FreeMemory(keyword);
                   
                   pexit->Description    = description;
+                  FreeMemory(description);
+                  
                   pexit->Flags      = 0;
                   ln = ReadLine( fp, Log, fBootDb );
                   x1=x2=x3=x4=0;
@@ -1486,10 +1478,11 @@ void AreaUpdate( void )
           char buf[MAX_STRING_LENGTH];
 
           /* Rennard */
-          if ( pArea->ResetMessage )
-	     sprintf( buf, "%s\r\n", pArea->ResetMessage );
+          if ( !pArea->ResetMessage.empty() )
+	     sprintf( buf, "%s\r\n", pArea->ResetMessage.c_str() );
           else
             strcpy( buf, "You hear some squeaking sounds...\r\n" );
+
           for ( pch = FirstCharacter; pch; pch = pch->Next )
             {
               if ( !IsNpc(pch)
@@ -1498,7 +1491,7 @@ void AreaUpdate( void )
                    &&   pch->InRoom->Area == pArea )
                 {
                   SetCharacterColor( AT_RESET, pch );
-                  pch->Echo( buf );
+                  pch->Echo( "%s", buf );
                 }
             }
         }
@@ -1511,13 +1504,16 @@ void AreaUpdate( void )
         {
           Room *pRoomIndex;
 
-          fprintf( stderr, "Resetting: %s\n", pArea->Filename );
+          fprintf( stderr, "Resetting: %s\n", pArea->Filename.c_str() );
           ResetArea( pArea );
+          
           if ( reset_age == -1 )
             pArea->Age = -1;
           else
             pArea->Age = GetRandomNumberFromRange( 0, reset_age / 5 );
+
           pRoomIndex = GetRoom( ROOM_VNUM_SCHOOL );
+
           if ( pRoomIndex != NULL && pArea == pRoomIndex->Area
                &&   pArea->ResetFrequency == 0 )
             pArea->Age = 15 - 3;
@@ -1579,8 +1575,6 @@ void CloseArea( Area *pArea )
             {
               if ( rid->Area == pArea || xit->ToRoom->Area == pArea )
                 {
-                  FreeMemory( xit->Keyword );
-                  FreeMemory( xit->Description );
                   rid->Remove(xit);
                   delete xit;
                 }
@@ -1588,9 +1582,6 @@ void CloseArea( Area *pArea )
 
           if ( rid->Area != pArea )
             continue;
-
-          FreeMemory(rid->Name);
-          FreeMemory(rid->Description);
 
           if ( !rid->Characters().empty() )
             {
@@ -1627,8 +1618,6 @@ void CloseArea( Area *pArea )
           for(ExtraDescription *eed : extrasInRoom)
             {
               rid->Remove(eed);
-              FreeMemory( eed->Keyword );
-              FreeMemory( eed->Description );
               delete eed;
             }
 
@@ -1679,11 +1668,6 @@ void CloseArea( Area *pArea )
           if ( mid->Vnum < pArea->VnumRanges.Mob.First
                || mid->Vnum > pArea->VnumRanges.Mob.Last )
             continue;
-
-          FreeMemory( mid->Name );
-          FreeMemory( mid->ShortDescr );
-	  FreeMemory( mid->LongDescr  );
-          FreeMemory( mid->Description );
 
           if ( mid->Shop )
             {
@@ -1736,18 +1720,11 @@ void CloseArea( Area *pArea )
                || oid->Vnum > pArea->VnumRanges.Object.Last )
             continue;
 
-          FreeMemory(oid->Name);
-          FreeMemory(oid->ShortDescr);
-          FreeMemory(oid->Description);
-          FreeMemory(oid->ActionDescription);
-
           std::list<ExtraDescription*> extraDescrs(oid->ExtraDescriptions());
           
           for ( ExtraDescription *eed : extraDescrs )
             {
               oid->Remove(eed);
-              FreeMemory(eed->Keyword);
-              FreeMemory(eed->Description);
               delete eed;
             }
 
@@ -1796,9 +1773,6 @@ void CloseArea( Area *pArea )
       delete ereset;
     }
 
-  FreeMemory(pArea->Name);
-  FreeMemory(pArea->Filename);
-  FreeMemory(pArea->Author);
   UNLINK( pArea, FirstBuild, LastBuild, Next, Previous );
   UNLINK( pArea, FirstASort, LastASort, NextSort, PreviousSort );
   delete pArea;
@@ -1806,9 +1780,6 @@ void CloseArea( Area *pArea )
 
 void FreeArea( Area *are )
 {
-  FreeMemory( are->Name );
-  FreeMemory( are->Filename );
-
   while ( are->FirstReset )
     FreeReset( are, are->FirstReset );
 
@@ -1833,7 +1804,7 @@ void AssignAreaTo( Character *ch )
       bool created = false;
       Area *tarea = ch->PCData->Build.Area;
 
-      sprintf( taf, "%s.are", Capitalize( ch->Name ) );
+      sprintf( taf, "%s.are", Capitalize( ch->Name ).c_str() );
 
       if ( tarea == nullptr )
         {
@@ -1849,21 +1820,21 @@ void AssignAreaTo( Character *ch )
 
       if ( tarea == nullptr )
         {
-          sprintf( buf, "Creating area entry for %s", ch->Name );
+          sprintf( buf, "Creating area entry for %s", ch->Name.c_str() );
           Log->LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
           tarea = new Area();
           LINK( tarea, FirstBuild, LastBuild, Next, Previous );
-          sprintf( buf, "{PROTO} %s's area in progress", ch->Name );
-          tarea->Name           = CopyString( buf );
-          tarea->Filename       = CopyString( taf );
-          sprintf( buf2, "%s", ch->Name );
-          tarea->Author         = CopyString( buf2 );
+          sprintf( buf, "{PROTO} %s's area in progress", ch->Name.c_str() );
+          tarea->Name           = buf;
+          tarea->Filename       = taf;
+          sprintf( buf2, "%s", ch->Name.c_str() );
+          tarea->Author         = buf2;
 
 	  created = true;
         }
       else
         {
-          sprintf( buf, "Updating area entry for %s", ch->Name );
+          sprintf( buf, "Updating area entry for %s", ch->Name.c_str() );
           Log->LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
         }
 

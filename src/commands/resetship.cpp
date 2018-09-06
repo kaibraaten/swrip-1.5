@@ -4,7 +4,7 @@
 #include "spaceobject.hpp"
 #include "character.hpp"
 
-void do_resetship( Character *ch, char *argument )
+void do_resetship( Character *ch, std::string argument )
 {
   Ship *ship = GetShipAnywhere( argument );
 
@@ -17,7 +17,7 @@ void do_resetship( Character *ch, char *argument )
   ResetShip( ship );
 
   if ( ( ship->Class == SHIP_PLATFORM || ship->Type == MOB_SHIP || ship->Class == CAPITAL_SHIP )
-       && ship->Home )
+       && !ship->Home.empty() )
     {
       InitializeVector( &ship->Position );
       ShipToSpaceobject(ship, GetSpaceobject(ship->Home) );
@@ -34,4 +34,3 @@ void do_resetship( Character *ch, char *argument )
       ship->Defenses.Shield.Current = ship->Defenses.Shield.Max;
     }
 }
-

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_weather( Character *ch, char *argument )
+void do_weather( Character *ch, std::string argument )
 {
   static char * const sky_look[] =
     {
@@ -26,4 +26,3 @@ void do_weather( Character *ch, char *argument )
              : "a cold northern gust blows"
              );
 }
-

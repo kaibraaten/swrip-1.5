@@ -3,10 +3,10 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 
-void do_addsalary( Character *ch , char *argument )
+void do_addsalary( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg2;
 
   if ( !IsClanned( ch ) )
     {
@@ -16,7 +16,7 @@ void do_addsalary( Character *ch , char *argument )
 
   Clan *clan = ch->PCData->ClanInfo.Clan;
 
-  if ( (ch->PCData && ch->PCData->Bestowments
+  if ( (!ch->PCData->Bestowments.empty()
         && IsName("salary", ch->PCData->Bestowments))
        || !StrCmp( ch->Name, clan->Leadership.Leader  ) )
     ;
@@ -29,9 +29,9 @@ void do_addsalary( Character *ch , char *argument )
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
 
-  int salary = atoi(arg2);
+  int salary = std::stoi(arg2);
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Assign a salary to whom?\r\n" );
       return;
@@ -70,7 +70,6 @@ void do_addsalary( Character *ch , char *argument )
     }
 
   victim->PCData->ClanInfo.Salary = salary;
-  ch->Echo( "%s has been assigned %d credits for a salary.\r\n", victim->Name, salary );
-  victim->Echo( "%s has give you a %d credit salary.\r\n", ch->Name, salary );
+  ch->Echo( "%s has been assigned %d credits for a salary.\r\n", victim->Name.c_str(), salary );
+  victim->Echo( "%s has given you a %d credit salary.\r\n", ch->Name.c_str(), salary );
 }
-

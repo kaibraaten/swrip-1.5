@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "object.hpp"
 
-void do_equipment( Character *ch, char *argument )
+void do_equipment( Character *ch, std::string argument )
 {
   bool found = false;
 
@@ -22,10 +22,9 @@ void do_equipment( Character *ch, char *argument )
               if ( CanSeeObject( ch, obj ) )
                 {
                   int dam = 0;
-                  char buf[MAX_STRING_LENGTH];
+                  char buf[MAX_STRING_LENGTH] = {'\0'};
                   
-                  ch->Echo( "%s", FormatObjectToCharacter( obj, ch, true ) );
-                  strcpy( buf , "" );
+                  ch->Echo( "%s", FormatObjectToCharacter( obj, ch, true ).c_str() );
 
                   switch ( obj->ItemType )
                     {
@@ -112,4 +111,3 @@ void do_equipment( Character *ch, char *argument )
       ch->Echo( "Nothing.\r\n" );
     }
 }
-

@@ -7,7 +7,7 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_search( Character *ch, char *argument )
+void do_search( Character *ch, std::string argument )
 {
 #pragma message("Implement this when Object stores contained Objects in std::list.")
 #if 0

@@ -3,7 +3,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_closebay( Character *ch, char *argument )
+void do_closebay( Character *ch, std::string argument )
 {
   Ship *ship = nullptr;
   char buf[MAX_STRING_LENGTH];
@@ -22,7 +22,7 @@ void do_closebay( Character *ch, char *argument )
 
   if ( ship->Rooms.Hangar == INVALID_VNUM )
     {
-      ch->Echo("&RThis ship has no hangar!\r\n");
+      ch->Echo("&RThis ship has no hangar!&d\r\n");
       return;
     }
 
@@ -33,12 +33,11 @@ void do_closebay( Character *ch, char *argument )
     }
 
   Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
-       NULL, argument , TO_ROOM );
+       NULL, argument.c_str(), TO_ROOM );
   ship->BayOpen = false;
 
   EchoToCockpit( AT_YELLOW , ship, "Bay Doors close");
   ch->Echo("You close the bay doors.");
-  sprintf( buf ,"%s's bay doors close." , ship->Name );
+  sprintf( buf ,"%s's bay doors close." , ship->Name.c_str() );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }
-

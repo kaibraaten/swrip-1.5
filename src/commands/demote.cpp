@@ -3,7 +3,7 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 
-void do_demote( Character *ch , char *argument )
+void do_demote( Character *ch , std::string argument )
 {
   if ( IsNpc( ch ) )
     return;
@@ -14,13 +14,13 @@ void do_demote( Character *ch , char *argument )
       return;
     }
 
-  if ( StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Leader  )  )
+  if ( StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Leader ) )
     {
       ch->Echo( "Only your leader can do that!\r\n" );
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Demote who?\r\n" );
       return;
@@ -29,16 +29,12 @@ void do_demote( Character *ch , char *argument )
   if ( !StrCmp( argument , ch->PCData->ClanInfo.Clan->Leadership.Number1 )  )
     {
       ch->Echo( "Player demoted!" );
-
-      FreeMemory( ch->PCData->ClanInfo.Clan->Leadership.Number1 );
-      ch->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
+      ch->PCData->ClanInfo.Clan->Leadership.Number1.erase();
     }
   else if ( !StrCmp( argument , ch->PCData->ClanInfo.Clan->Leadership.Number2 )  )
     {
       ch->Echo( "Player Demoted!" );
-
-      FreeMemory( ch->PCData->ClanInfo.Clan->Leadership.Number2 );
-      ch->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
+      ch->PCData->ClanInfo.Clan->Leadership.Number2.erase();
     }
   else
     {
@@ -48,4 +44,3 @@ void do_demote( Character *ch , char *argument )
 
   Clans->Save( ch->PCData->ClanInfo.Clan );
 }
-

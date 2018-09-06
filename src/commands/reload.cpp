@@ -6,24 +6,20 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 
-void do_reload( Character *ch, char *argument )
+void do_reload( Character *ch, std::string arg )
 {
-  /* Reload code added by Darrik Vequir */
-  char arg[MAX_INPUT_LENGTH];
-  Ship *ship;
+  Ship *ship = nullptr;
   short price = 0;
 
-  strcpy( arg, argument );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("&RYou need to specify a target!\r\n");
       return;
     }
 
-  if ( ( ship = GetShipInRoom( ch->InRoom , argument ) ) == NULL )
+  if ( ( ship = GetShipInRoom( ch->InRoom, arg ) ) == NULL )
     {
-      Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+      Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg.c_str(), TO_CHAR );
       return;
     }
 
@@ -49,12 +45,13 @@ void do_reload( Character *ch, char *argument )
       if ( ch->PCData->ClanInfo.Clan->Funds < price )
         {
           ch->Echo("&R%s doesn't have enough funds to prepare this ship for launch.\r\n",
-		    ch->PCData->ClanInfo.Clan->Name );
+		    ch->PCData->ClanInfo.Clan->Name.c_str() );
           return;
         }
 
       ch->PCData->ClanInfo.Clan->Funds -= price;
-      ch->Echo("&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->PCData->ClanInfo.Clan->Name, price );
+      ch->Echo("&GIt costs %s %ld credits to ready this ship for launch.\r\n",
+               ch->PCData->ClanInfo.Clan->Name.c_str(), price );
     }
   else if ( StrCmp( ship->Owner , "Public" ) )
     {
@@ -85,4 +82,3 @@ void do_reload( Character *ch, char *argument )
 
   ship->State = SHIP_LANDED;
 }
-

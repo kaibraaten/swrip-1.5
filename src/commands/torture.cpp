@@ -4,9 +4,8 @@
 #include "pcdata.hpp"
 #include "systemdata.hpp"
 
-void do_torture( Character *ch, char *argument )
+void do_torture( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
   int the_chance = 0, dam = 0;
   bool fail = false;
@@ -24,15 +23,13 @@ void do_torture( Character *ch, char *argument )
       return;
     }
 
-  OneArgument( argument, arg );
-
   if ( ch->Mount )
     {
       ch->Echo("You can't get close enough while mounted.\r\n");
       return;
     }
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Torture whom?\r\n");
       return;
@@ -46,7 +43,7 @@ void do_torture( Character *ch, char *argument )
 
   if ( victim == ch )
     {
-      ch->Echo("Are you masacistic or what...\r\n");
+      ch->Echo("Are you masochistic or what?\r\n");
       return;
     }
 
@@ -61,7 +58,7 @@ void do_torture( Character *ch, char *argument )
 
   if ( victim->Fighting )
     {
-      ch->Echo("You can't torture someone whos in combat.\r\n");
+      ch->Echo("You can't torture someone who is in combat.\r\n");
       return;
     }
 
@@ -90,9 +87,12 @@ void do_torture( Character *ch, char *argument )
       LearnFromSuccess( ch, gsn_torture );
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       SetWaitState( victim, PULSE_VIOLENCE );
-      Act( AT_SKILL, "$N slowly tortures you. The pain is excruciating.", victim, NULL, ch, TO_CHAR );
-      Act( AT_SKILL, "You torture $N, leaving $M screaming in pain.", ch, NULL, victim, TO_CHAR );
-      Act( AT_SKILL, "$n tortures $N, leaving $M screaming in agony!", ch, NULL, victim, TO_NOTVICT );
+      Act( AT_SKILL, "$N slowly tortures you. The pain is excruciating.",
+           victim, NULL, ch, TO_CHAR );
+      Act( AT_SKILL, "You torture $N, leaving $M screaming in pain.",
+           ch, NULL, victim, TO_CHAR );
+      Act( AT_SKILL, "$n tortures $N, leaving $M screaming in agony!",
+           ch, NULL, victim, TO_NOTVICT );
 
       dam = RollDice( GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 80 , 4 );
       dam = urange( 0, victim->MaxHit-10, dam );
@@ -107,8 +107,7 @@ void do_torture( Character *ch, char *argument )
       Act( AT_SKILL, "$N tries to cut off your finger!", victim, NULL, ch, TO_CHAR );
       Act( AT_SKILL, "You mess up big time.", ch, NULL, victim, TO_CHAR );
       Act( AT_SKILL, "$n tries to painfully torture $N.", ch, NULL, victim, TO_NOTVICT );
-      SetWaitState( ch,     2 * PULSE_VIOLENCE );
+      SetWaitState( ch, 2 * PULSE_VIOLENCE );
       global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
     }
 }
-

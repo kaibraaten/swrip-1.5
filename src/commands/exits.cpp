@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "room.hpp"
 
-void do_exits( Character *ch, char *argument )
+void do_exits( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
   bool found = false;
@@ -31,32 +31,32 @@ void do_exits( Character *ch, char *argument )
               if ( IsBitSet(pexit->Flags, EX_CLOSED) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - (closed)\r\n",
-                           Capitalize( GetDirectionName(pexit->Direction) ) );
+                           Capitalize( GetDirectionName(pexit->Direction) ).c_str() );
                 }
               else if ( IsBitSet(pexit->Flags, EX_WINDOW) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - (window)\r\n",
-			   Capitalize( GetDirectionName(pexit->Direction) ) );
+			   Capitalize( GetDirectionName(pexit->Direction) ).c_str() );
                 }
               else if ( IsBitSet(pexit->Flags, EX_xAUTO) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - %s\r\n",
-                           Capitalize( pexit->Keyword ),
+                           Capitalize( pexit->Keyword ).c_str(),
                            IsRoomDark( pexit->ToRoom )
                            ?  "Too dark to tell"
-                           : pexit->ToRoom->Name );
+                           : pexit->ToRoom->Name.c_str() );
                 }
               else
                 sprintf( buf + strlen(buf), "%-5s - %s\r\n",
-                         Capitalize( GetDirectionName(pexit->Direction) ),
+                         Capitalize( GetDirectionName(pexit->Direction) ).c_str(),
                          IsRoomDark( pexit->ToRoom )
                          ?  "Too dark to tell"
-                         : pexit->ToRoom->Name );
+                         : pexit->ToRoom->Name.c_str() );
             }
           else
             {
               sprintf( buf + strlen(buf), " %s",
-                       Capitalize( GetDirectionName(pexit->Direction) ) );
+                       Capitalize( GetDirectionName(pexit->Direction) ).c_str() );
             }
         }
     }
@@ -68,4 +68,3 @@ void do_exits( Character *ch, char *argument )
 
   ch->Echo("%s", buf);
 }
-

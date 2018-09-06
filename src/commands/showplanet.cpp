@@ -3,7 +3,7 @@
 #include "spaceobject.hpp"
 #include "planet.hpp"
 
-void do_showplanet( Character *ch, char *argument )
+void do_showplanet( Character *ch, std::string argument )
 {
   if ( IsNpc( ch ) )
     {
@@ -11,7 +11,7 @@ void do_showplanet( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Usage: showplanet <planet>\r\n");
       return;
@@ -26,7 +26,7 @@ void do_showplanet( Character *ch, char *argument )
     }
 
   ch->Echo("%s\r\nStarsystem: %s\r\n",
-	planet->Name,
-	planet->Spaceobject ? planet->Spaceobject->Name : "None");
+           planet->Name.c_str(),
+           planet->Spaceobject ? planet->Spaceobject->Name.c_str() : "None");
 }
 

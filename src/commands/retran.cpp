@@ -1,15 +1,12 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_retran( Character *ch, char *argument )
+void do_retran( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
   char buf[MAX_STRING_LENGTH];
 
-  argument = OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Retransfer whom?\r\n");
       return;
@@ -21,7 +18,7 @@ void do_retran( Character *ch, char *argument )
       return;
     }
 
-  sprintf(buf, "'%s' %ld", victim->Name, victim->ReTran);
+  sprintf(buf, "'%s' %ld", victim->Name.c_str(), victim->ReTran);
   do_transfer(ch, buf);
 }
 

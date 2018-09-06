@@ -5,16 +5,16 @@
 
 struct UpdateOwnerNameData
 {
-  const char *OldName;
-  const char *NewName;
+  std::string OldName;
+  std::string NewName;
 };
 
 static bool UpdateOwnerName(Ship *ship, void *userData);
 
-void do_setclan( Character *ch, char *argument )
+void do_setclan( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH] = { '\0' };
-  char arg2[MAX_INPUT_LENGTH] = { '\0' };
+  std::string arg1;
+  std::string arg2;
   Clan *clan = NULL;
 
   if ( IsNpc( ch ) )
@@ -26,16 +26,16 @@ void do_setclan( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( argument ) )
+  if ( arg1.empty() || arg2.empty() || argument.empty() )
     {
       ch->Echo("Usage: setclan <clan> <field> <leader|number1|number2> <player>\r\n");
       ch->Echo("\r\nField being one of:\r\n");
-      ch->Echo(" leader number1 number2 addguild enlist1 jail\r\n");
-      ch->Echo(" enlist2 board storage funds\r\n");
+      ch->Echo("  leader number1 number2 addguild enlist1 jail\r\n");
+      ch->Echo("  enlist2 board storage funds\r\n");
 
       if ( GetTrustLevel( ch ) >= LEVEL_SUB_IMPLEM )
         {
-          ch->Echo(" name desc\r\n");
+          ch->Echo("  name desc\r\n");
         }
 
       return;
@@ -51,7 +51,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "enlistroom1" ) )
     {
-      clan->EnlistRoom1 = atoi( argument );
+      clan->EnlistRoom1 = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -59,7 +59,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "enlistroom2" ) )
     {
-      clan->EnlistRoom2 = atoi( argument );
+      clan->EnlistRoom2 = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -67,8 +67,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "leader" ) )
     {
-      FreeMemory( clan->Leadership.Leader );
-      clan->Leadership.Leader = CopyString( argument );
+      clan->Leadership.Leader = argument;
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -105,8 +104,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "number1" ) )
     {
-      FreeMemory( clan->Leadership.Number1 );
-      clan->Leadership.Number1 = CopyString( argument );
+      clan->Leadership.Number1 = argument;
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -114,8 +112,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "number2" ) )
     {
-      FreeMemory( clan->Leadership.Number2 );
-      clan->Leadership.Number2 = CopyString( argument );
+      clan->Leadership.Number2 = argument;
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -123,7 +120,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "board" ) )
     {
-      clan->Board = atoi( argument );
+      clan->Board = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -131,7 +128,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "funds" ) )
     {
-      clan->Funds = atoi( argument );
+      clan->Funds = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -139,7 +136,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "storage" ) )
     {
-      clan->Storeroom = atoi( argument );
+      clan->Storeroom = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -147,7 +144,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "jail" ) )
     {
-      clan->Jail = atoi( argument );
+      clan->Jail = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -175,11 +172,11 @@ void do_setclan( Character *ch, char *argument )
 
       ForEachShip(UpdateOwnerName, &data);
 
-      sprintf( oldFilename, "%s%s", CLAN_DIR, ConvertToLuaFilename( clan->Name ) );
-      unlink( GetClanFilename( clan ) );
+      sprintf( oldFilename, "%s%s", CLAN_DIR,
+               ConvertToLuaFilename( clan->Name ).c_str() );
+      unlink( GetClanFilename( clan ).c_str() );
 
-      FreeMemory( clan->Name );
-      clan->Name = CopyString( argument );
+      clan->Name = argument;
 
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
@@ -188,8 +185,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "desc" ) )
     {
-      FreeMemory( clan->Description );
-      clan->Description = CopyString( argument );
+      clan->Description = argument;
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -204,10 +200,8 @@ static bool UpdateOwnerName(Ship *ship, void *userData)
 
   if( !StrCmp( ship->Owner, data->OldName ) )
     {
-      FreeMemory( ship->Owner );
-      ship->Owner = CopyString( data->NewName );
+      ship->Owner = data->NewName;
     }
 
   return true;
 }
-

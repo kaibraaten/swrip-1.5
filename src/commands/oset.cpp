@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "editor.hpp"
@@ -8,19 +8,18 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 
-void do_oset( Character *ch, char *argument )
+void do_oset( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
   char buf[MAX_STRING_LENGTH];
   char outbuf[MAX_STRING_LENGTH];
   Object *obj = NULL, *tmpobj = NULL;
   ExtraDescription *ed = NULL;
   bool lockobj = false;
-  char *origarg = argument;
-
-  int value, tmp;
+  std::string origarg = argument;
+  int value = 0, tmp = 0;
 
   if ( IsNpc( ch ) )
     {
@@ -42,7 +41,7 @@ void do_oset( Character *ch, char *argument )
     case SUB_OBJ_EXTRA:
       if ( !ch->dest_buf )
         {
-   ch->Echo("Fatal error: report to Thoric.\r\n");
+          ch->Echo("Fatal error: report to Thoric.\r\n");
           Log->Bug( "do_oset: sub_obj_extra: NULL ch->dest_buf" );
           ch->SubState = SUB_NONE;
           return;
@@ -54,7 +53,6 @@ void do_oset( Character *ch, char *argument )
        * extra_descr lists for a matching pointer...
        */
       ed  = (ExtraDescription*)ch->dest_buf;
-      FreeMemory( ed->Description );
       ed->Description = CopyBuffer( ch );
       tmpobj = (Object*)ch->spare_ptr;
       StopEditing( ch );
@@ -80,13 +78,11 @@ void do_oset( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( obj->Description );
       obj->Description = CopyBuffer( ch );
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          FreeMemory( obj->Prototype->Description );
-          obj->Prototype->Description = CopyString( obj->Description );
+          obj->Prototype->Description = obj->Description;
 	}
 
       tmpobj = (Object*)ch->spare_ptr;
@@ -109,43 +105,46 @@ void do_oset( Character *ch, char *argument )
           obj = NULL;
           argument = "done";
         }
-      if ( IsNullOrEmpty( argument ) || !StrCmp( argument, " " )
-           ||   !StrCmp( argument, "stat" ) )
+
+      if ( argument.empty()
+           || !StrCmp( argument, "stat" ) )
         {
           if ( obj )
             do_ostat( ch, obj->Name );
           else
             ch->Echo("No object selected.  Type '?' for help.\r\n");
+
           return;
         }
+
       if ( !StrCmp( argument, "done" ) || !StrCmp( argument, "off" ) )
         {
           ch->Echo("Oset mode off.\r\n");
           ch->SubState = SUB_NONE;
           FreeMemory(ch->dest_buf);
 	  
-          if ( ch->PCData && ch->PCData->SubPrompt )
-            FreeMemory( ch->PCData->SubPrompt );
+          ch->PCData->SubPrompt.erase();
 
 	  return;
         }
     }
+
   if ( obj )
     {
       lockobj = true;
-      strcpy( arg1, obj->Name );
+      arg1 = obj->Name;
       argument = OneArgument( argument, arg2 );
-      strcpy( arg3, argument );
+      arg3 = argument;
     }
   else
     {
       lockobj = false;
       argument = OneArgument( argument, arg1 );
       argument = OneArgument( argument, arg2 );
-      strcpy( arg3, argument );
+      arg3 = argument;
     }
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || !StrCmp( arg1, "?" ) )
+  if ( arg1.empty() || arg2.empty() || !StrCmp( arg1, "?" ) )
     {
       if ( ch->SubState == SUB_REPEATCMD )
         {
@@ -156,6 +155,7 @@ void do_oset( Character *ch, char *argument )
         }
       else
         ch->Echo("Syntax: oset <object> <field>  <value>\r\n");
+
       ch->Echo("\r\n");
       ch->Echo("Field being one of:\r\n");
       ch->Echo("  flags wear level weight cost rent timer\r\n");
@@ -198,21 +198,25 @@ void do_oset( Character *ch, char *argument )
             return;
           }
       }
+
   if ( lockobj )
     ch->dest_buf = obj;
   else
     FreeMemory(ch->dest_buf);
 
   SeparateOneObjectFromGroup( obj );
-  value = atoi( arg3 );
+  value = std::stoi( arg3 );
 
   if ( !StrCmp( arg2, "value0" ) || !StrCmp( arg2, "v0" ) )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
+
       obj->Value[0] = value;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->Value[0] = value;
+
       return;
     }
 
@@ -220,9 +224,12 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
+
       obj->Value[1] = value;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
 	obj->Prototype->Value[1] = value;
+
       return;
     }
 
@@ -230,13 +237,17 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
+
       obj->Value[2] = value;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
           obj->Prototype->Value[2] = value;
+
           if ( obj->ItemType == ITEM_WEAPON && value != 0 )
             obj->Value[2] = obj->Prototype->Value[1] * obj->Prototype->Value[2];
         }
+
       return;
     }
 
@@ -244,9 +255,12 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
+
       obj->Value[3] = value;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->Value[3] = value;
+
       return;
     }
 
@@ -254,9 +268,12 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
+
       obj->Value[4] = value;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->Value[4] = value;
+
       return;
     }
 
@@ -264,9 +281,12 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
+
       obj->Value[5] = value;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->Value[5] = value;
+
       return;
     }
 
@@ -275,7 +295,7 @@ void do_oset( Character *ch, char *argument )
       if ( !CanModifyObject( ch, obj ) )
         return;
       
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: oset <object> type <type>\r\n");
           ch->Echo("Possible Types:\r\n");
@@ -294,12 +314,15 @@ void do_oset( Character *ch, char *argument )
           ch->Echo("Bolt        Chemical\r\n");
           return;
         }
+
       value = GetObjectType( argument );
+
       if ( value < 1 )
         {
-          ch->Echo("Unknown type: %s\r\n", arg3 );
+          ch->Echo("Unknown type: %s\r\n", arg3.c_str() );
           return;
         }
+
       obj->ItemType = (ItemTypes) value;
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -313,23 +336,23 @@ void do_oset( Character *ch, char *argument )
       if ( !CanModifyObject( ch, obj ) )
         return;
       
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: oset <object> flags <flag> [flag]...\r\n");
-	  ch->Echo( "glow, dark, magic, bless, antievil, noremove, antisith, antisoldier,\r\n");
-          ch->Echo("donation, covering, hum, invis, nodrop, antigood, antipilot, anticitizen\r\n");
-          ch->Echo( "antineutral, inventory, antithief, antijedi, clanobject, antihunter\r\n");
-          ch->Echo("small_size, human_size, large_size, hutt_size, contraband\r\n");
+	  ch->Echo( "  glow, dark, magic, bless, antievil, noremove, antisith, antisoldier,\r\n");
+          ch->Echo( "  donation, covering, hum, invis, nodrop, antigood, antipilot, anticitizen\r\n");
+          ch->Echo( "  antineutral, inventory, antithief, antijedi, clanobject, antihunter\r\n");
+          ch->Echo( "  small_size, human_size, large_size, hutt_size, contraband\r\n");
           return;
         }
 
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetObjectFlag( arg3 );
 	  
           if ( value < 0 || value > 31 )
-            ch->Echo("Unknown flag: %s\r\n", arg3 );
+            ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             {
               ToggleBit(obj->Flags, 1 << value);
@@ -349,30 +372,32 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      if ( IsNullOrEmpty( argument ))
+
+      if ( argument.empty() )
         {
           ch->Echo("Usage: oset <object> wear <flag> [flag]...\r\n");
           ch->Echo("Possible locations:\r\n");
-          ch->Echo("take   finger   neck    body    head   legs\r\n");
-          ch->Echo("feet   hands    arms    shield  about  waist\r\n");
-          ch->Echo("wrist  wield    hold    ears    eyes   floating\r\n");
-          ch->Echo("over\r\n");
+          ch->Echo("  take   finger   neck    body    head   legs\r\n");
+          ch->Echo("  feet   hands    arms    shield  about  waist\r\n");
+          ch->Echo("  wrist  wield    hold    ears    eyes   floating\r\n");
+          ch->Echo("  over\r\n");
           return;
         }
       
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetWearFlag( arg3 );
 
 	  if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
-            ch->Echo("Unknown flag: %s\r\n", arg3 );
+            ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( obj->WearFlags, 1 << value );
         }
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->WearFlags = obj->WearFlags;
+
       return;
     }
 
@@ -380,6 +405,7 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
+
       obj->Level = value;
       return;
     }
@@ -388,9 +414,12 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
+
       obj->Weight = value;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->Weight = value;
+
       return;
     }
 
@@ -398,9 +427,12 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
+
       obj->Cost = value;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->Cost = value;
+
       return;
     }
 
@@ -408,10 +440,12 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->Rent = value;
       else
         ch->Echo("Item must have prototype flag to set this value.\r\n");
+
       return;
     }
 
@@ -419,10 +453,12 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->Layers = value;
       else
         ch->Echo("Item must have prototype flag to set this value.\r\n");
+
       return;
     }
 
@@ -430,6 +466,7 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
+
       obj->Timer = value;
       return;
     }
@@ -438,24 +475,24 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      FreeMemory( obj->Name );
-      obj->Name = CopyString( arg3 );
+
+      obj->Name = arg3;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          FreeMemory(obj->Prototype->Name );
-          obj->Prototype->Name = CopyString( obj->Name );
+          obj->Prototype->Name = obj->Name;
         }
+
       return;
     }
 
   if ( !StrCmp( arg2, "short" ) )
     {
-      FreeMemory( obj->ShortDescr );
-      obj->ShortDescr = CopyString( arg3 );
+      obj->ShortDescr = arg3;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          FreeMemory(obj->Prototype->ShortDescr );
-	  obj->Prototype->ShortDescr = CopyString( obj->ShortDescr );
+	  obj->Prototype->ShortDescr = obj->ShortDescr;
         }
       else
         /* Feature added by Narn, Apr/96
@@ -465,60 +502,65 @@ void do_oset( Character *ch, char *argument )
         {
           if ( StringInfix( "rename", obj->Name ) )
             {
-              sprintf( buf, "%s %s", obj->Name, "rename" );
-              FreeMemory( obj->Name );
-              obj->Name = CopyString( buf );
+              sprintf( buf, "%s %s", obj->Name.c_str(), "rename" );
+              obj->Name = buf;
             }
         }
+
       return;
     }
 
   if ( !StrCmp( arg2, "actiondesc" ) )
     {
-      if ( strstr( arg3, "%n" )
-           ||   strstr( arg3, "%d" )
-           ||   strstr( arg3, "%l" ) )
+      if ( strstr( arg3.c_str(), "%n" )
+           || strstr( arg3.c_str(), "%d" )
+           || strstr( arg3.c_str(), "%l" ) )
         {
           ch->Echo("Illegal characters!\r\n");
           return;
         }
-      FreeMemory( obj->ActionDescription );
-      obj->ActionDescription = CopyString( arg3 );
+
+      obj->ActionDescription = arg3;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          FreeMemory(obj->Prototype->ActionDescription );
-          obj->Prototype->ActionDescription = CopyString( obj->ActionDescription );
+          obj->Prototype->ActionDescription = obj->ActionDescription;
         }
+
       return;
     }
 
   if ( !StrCmp( arg2, "long" ) )
     {
-      if ( arg3[0] )
+      if ( !arg3.empty() )
         {
-          FreeMemory( obj->Description );
-          obj->Description = CopyString( arg3 );
+          obj->Description = arg3;
+
           if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
             {
-	      FreeMemory(obj->Prototype->Description );
-              obj->Prototype->Description = CopyString( obj->Description );
+              obj->Prototype->Description = obj->Description;
             }
+
           return;
         }
+
       CHECK_SUBRESTRICTED( ch );
+
       if ( ch->SubState == SUB_REPEATCMD )
         ch->tempnum = SUB_REPEATCMD;
       else
         ch->tempnum = SUB_NONE;
+
       if ( lockobj )
         ch->spare_ptr = obj;
       else
         ch->spare_ptr = NULL;
+
       ch->SubState = SUB_OBJ_LONG;
       ch->dest_buf = obj;
       StartEditing( ch, obj->Description );
       SetEditorDescription( ch, "Object %d (%s) long description",
-			    obj->Prototype->Vnum, obj->Name );
+			    obj->Prototype->Vnum, obj->Name.c_str() );
       return;
     }
 
@@ -529,19 +571,19 @@ void do_oset( Character *ch, char *argument )
 
       argument = OneArgument( argument, arg2 );
       
-      if ( IsNullOrEmpty( arg2 ) || IsNullOrEmpty( argument ) )
+      if ( arg2.empty() || argument.empty() )
         {
-          ch->Echo("Usage: oset <object> affect <field> <value>\r\n");
-          ch->Echo("Affect Fields:\r\n");
-          ch->Echo("none        strength    dexterity   intelligence  wisdom       constitution\r\n");
-          ch->Echo( "sex         level       age         height        weight       force\r\n");
-          ch->Echo("hit         move        credits     experience    armor        hitroll\r\n");
-          ch->Echo("damroll     save_para   save_rod    save_poison   save_breath  save_power\r\n");
-          ch->Echo( "charisma    resistant   immune      susceptible   affected     luck\r\n");
-          ch->Echo( "backstab    pick        track       steal         sneak        hide\r\n");
-          ch->Echo("detrap      dodge       peek        scan          gouge        search\r\n");
-	  ch->Echo( "mount       disarm      kick        parry         bash         stun\r\n");
-          ch->Echo("punch       climb       grip        scribe        brew\r\n");
+          ch->Echo( "Usage: oset <object> affect <field> <value>\r\n");
+          ch->Echo( "Affect Fields:\r\n");
+          ch->Echo( "  none        strength    dexterity   intelligence  wisdom       constitution\r\n");
+          ch->Echo( "  sex         level       age         height        weight       force\r\n");
+          ch->Echo( "  hit         move        credits     experience    armor        hitroll\r\n");
+          ch->Echo( "  damroll     save_para   save_rod    save_poison   save_breath  save_power\r\n");
+          ch->Echo( "  charisma    resistant   immune      susceptible   affected     luck\r\n");
+          ch->Echo( "  backstab    pick        track       steal         sneak        hide\r\n");
+          ch->Echo( "  detrap      dodge       peek        scan          gouge        search\r\n");
+	  ch->Echo( "  mount       disarm      kick        parry         bash         stun\r\n");
+          ch->Echo( "  punch       climb       grip        scribe        brew\r\n");
           return;
         }
       
@@ -549,7 +591,7 @@ void do_oset( Character *ch, char *argument )
 
       if ( loc < 1 )
         {
-          ch->Echo("Unknown field: %s\r\n", arg2 );
+          ch->Echo("Unknown field: %s\r\n", arg2.c_str() );
           return;
         }
 
@@ -557,7 +599,7 @@ void do_oset( Character *ch, char *argument )
         {
           bitv = 0;
 	  
-          while ( !IsNullOrEmpty( argument ) )
+          while ( !argument.empty() )
             {
               argument = OneArgument( argument, arg3 );
 
@@ -567,7 +609,7 @@ void do_oset( Character *ch, char *argument )
                 value = GetResistanceFlag( arg3 );
 
               if ( value < 0 || value > 31 )
-                ch->Echo("Unknown flag: %s\r\n", arg3 );
+                ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
               else
                 SetBit( bitv, 1 << value );
             }
@@ -580,7 +622,7 @@ void do_oset( Character *ch, char *argument )
       else
         {
           argument = OneArgument( argument, arg3 );
-          value = atoi( arg3 );
+          value = std::stoi( arg3 );
         }
 
       Affect *paf = new Affect();
@@ -603,12 +645,14 @@ void do_oset( Character *ch, char *argument )
     {
       short loc = 0, count = 0;
 
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: oset <object> rmaffect <affect#>\r\n");
           return;
         }
-      loc = atoi( argument );
+
+      loc = std::stoi( argument );
+
       if ( loc < 1 )
         {
           ch->Echo("Invalid number.\r\n");
@@ -632,6 +676,7 @@ void do_oset( Character *ch, char *argument )
                   return;
                 }
             }
+
           ch->Echo("Not found.\r\n");
           return;
         }
@@ -648,6 +693,7 @@ void do_oset( Character *ch, char *argument )
                   return;
                 }
             }
+
           ch->Echo("Not found.\r\n");
           return;
         }
@@ -655,83 +701,97 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "ed" ) )
     {
-      if ( IsNullOrEmpty( arg3 ) )
+      if ( arg3.empty() )
         {
           ch->Echo( "Syntax: oset <object> ed <keywords>\r\n");
           return;
         }
+
       CHECK_SUBRESTRICTED( ch );
+
       if ( obj->Timer )
         {
           ch->Echo("It's not safe to edit an extra description on an object with a timer.\r\nTurn it off first.\r\n");
           return;
         }
+
       if ( obj->ItemType == ITEM_PAPER )
         {
           ch->Echo("You can not add an extra description to a note paper at the moment.\r\n");
           return;
         }
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         ed = SetOExtraProto( obj->Prototype, arg3 );
       else
         ed = SetOExtra( obj, arg3 );
+
       if ( ch->SubState == SUB_REPEATCMD )
         ch->tempnum = SUB_REPEATCMD;
       else
         ch->tempnum = SUB_NONE;
+
       if ( lockobj )
         ch->spare_ptr = obj;
       else
         ch->spare_ptr = NULL;
+
       ch->SubState = SUB_OBJ_EXTRA;
       ch->dest_buf = ed;
       StartEditing( ch, ed->Description );
       SetEditorDescription( ch, "Object %d (%s) extra description: %s",
-			    obj->Prototype->Vnum, obj->Name, arg3 );
+			    obj->Prototype->Vnum, obj->Name.c_str(), arg3.c_str() );
       return;
     }
 
   if ( !StrCmp( arg2, "desc" ) )
     {
       CHECK_SUBRESTRICTED( ch );
+
       if ( obj->Timer )
         {
           ch->Echo("It's not safe to edit a description on an object with a timer.\r\nTurn it off first.\r\n");
           return;
         }
+
       if ( obj->ItemType == ITEM_PAPER )
         {
           ch->Echo("You can not add a description to a note paper at the moment.\r\n");
           return;
         }
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         ed = SetOExtraProto( obj->Prototype, obj->Name );
       else
         ed = SetOExtra( obj, obj->Name );
+
       if ( ch->SubState == SUB_REPEATCMD )
         ch->tempnum = SUB_REPEATCMD;
       else
         ch->tempnum = SUB_NONE;
+
       if ( lockobj )
         ch->spare_ptr = obj;
       else
         ch->spare_ptr = NULL;
+
       ch->SubState = SUB_OBJ_EXTRA;
       ch->dest_buf = ed;
       StartEditing( ch, ed->Description );
       SetEditorDescription( ch, "Object %d (%s) description",
-                            obj->Prototype->Vnum, obj->Name );
+                            obj->Prototype->Vnum, obj->Name.c_str() );
       return;
     }
 
   if ( !StrCmp( arg2, "rmed" ) )
     {
-      if ( IsNullOrEmpty( arg3 ) )
+      if ( arg3.empty() )
         {
           ch->Echo("Syntax: oset <object> rmed <keywords>\r\n");
           return;
         }
-      if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
+
+        if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
           if ( DelOExtraProto( obj->Prototype, arg3 ) )
             ch->Echo("Deleted.\r\n");
@@ -739,10 +799,12 @@ void do_oset( Character *ch, char *argument )
             ch->Echo("Not found.\r\n");
           return;
         }
+        
       if ( DelOExtra( obj, arg3 ) )
         ch->Echo("Deleted.\r\n");
       else
         ch->Echo("Not found.\r\n");
+
       return;
     }
   /*
@@ -750,58 +812,59 @@ void do_oset( Character *ch, char *argument )
    */
   if ( !StrCmp( arg2, "ris" ) )
     {
-      sprintf(outbuf, "%s affect resistant %s", arg1, arg3);
+      sprintf(outbuf, "%s affect resistant %s", arg1.c_str(), arg3.c_str());
       do_oset( ch, outbuf );
-      sprintf(outbuf, "%s affect immune %s", arg1, arg3);
+      sprintf(outbuf, "%s affect immune %s", arg1.c_str(), arg3.c_str());
       do_oset( ch, outbuf );
-      sprintf(outbuf, "%s affect susceptible %s", arg1, arg3);
+      sprintf(outbuf, "%s affect susceptible %s", arg1.c_str(), arg3.c_str());
       do_oset( ch, outbuf );
       return;
     }
 
   if ( !StrCmp( arg2, "r" ) )
     {
-      sprintf(outbuf, "%s affect resistant %s", arg1, arg3);
+      sprintf(outbuf, "%s affect resistant %s", arg1.c_str(), arg3.c_str());
       do_oset( ch, outbuf );
       return;
     }
 
   if ( !StrCmp( arg2, "i" ) )
     {
-      sprintf(outbuf, "%s affect immune %s", arg1, arg3);
+      sprintf(outbuf, "%s affect immune %s", arg1.c_str(), arg3.c_str());
       do_oset( ch, outbuf );
       return;
     }
+
   if ( !StrCmp( arg2, "s" ) )
     {
-      sprintf(outbuf, "%s affect susceptible %s", arg1, arg3);
+      sprintf(outbuf, "%s affect susceptible %s", arg1.c_str(), arg3.c_str());
       do_oset( ch, outbuf );
       return;
     }
 
   if ( !StrCmp( arg2, "ri" ) )
     {
-      sprintf(outbuf, "%s affect resistant %s", arg1, arg3);
+      sprintf(outbuf, "%s affect resistant %s", arg1.c_str(), arg3.c_str());
       do_oset( ch, outbuf );
-      sprintf(outbuf, "%s affect immune %s", arg1, arg3);
+      sprintf(outbuf, "%s affect immune %s", arg1.c_str(), arg3.c_str());
       do_oset( ch, outbuf );
       return;
     }
 
   if ( !StrCmp( arg2, "rs" ) )
     {
-      sprintf(outbuf, "%s affect resistant %s", arg1, arg3);
+      sprintf(outbuf, "%s affect resistant %s", arg1.c_str(), arg3.c_str());
       do_oset( ch, outbuf );
-      sprintf(outbuf, "%s affect susceptible %s", arg1, arg3);
+      sprintf(outbuf, "%s affect susceptible %s", arg1.c_str(), arg3.c_str());
       do_oset( ch, outbuf );
       return;
     }
 
   if ( !StrCmp( arg2, "is" ) )
     {
-      sprintf(outbuf, "%s affect immune %s", arg1, arg3);
+      sprintf(outbuf, "%s affect immune %s", arg1.c_str(), arg3.c_str());
       do_oset( ch, outbuf );
-      sprintf(outbuf, "%s affect susceptible %s", arg1, arg3);
+      sprintf(outbuf, "%s affect susceptible %s", arg1.c_str(), arg3.c_str());
       do_oset( ch, outbuf );
       return;
     }
@@ -811,6 +874,7 @@ void do_oset( Character *ch, char *argument )
    *                                            -Thoric
    */
   tmp = -1;
+
   switch( obj->ItemType )
     {
     case ITEM_WEAPON:
@@ -835,9 +899,11 @@ void do_oset( Character *ch, char *argument )
 
               return;
             }
+
           tmp = 3;
           break;
         }
+
       if ( !StrCmp( arg2, "condition" ) )      tmp = 0;
       if ( !StrCmp( arg2, "numdamdie" ) )        tmp = 1;
       if ( !StrCmp( arg2, "sizedamdie" ) )       tmp = 2;
@@ -846,15 +912,18 @@ void do_oset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "charge" ) )          tmp = 4;
       if ( !StrCmp( arg2, "maxcharge" ) )       tmp = 5;
       break;
+
     case ITEM_BOLT:
     case ITEM_AMMO:
       if ( !StrCmp( arg2, "charges" ) )          tmp = 0;
       if ( !StrCmp( arg2, "charge" ) )          tmp = 0;
       break;
+
     case ITEM_BATTERY:
       if ( !StrCmp( arg2, "charges" ) )          tmp = 0;
       if ( !StrCmp( arg2, "charge" ) )          tmp = 0;
       break;
+
     case ITEM_RAWSPICE:
     case ITEM_SPICE:
       if ( !StrCmp( arg2, "grade" ) )          tmp = 1;
@@ -882,6 +951,7 @@ void do_oset( Character *ch, char *argument )
           break;
         }
       break;
+
     case ITEM_CRYSTAL:
       if ( !StrCmp( arg2, "gemtype" ) )
         {
@@ -903,14 +973,17 @@ void do_oset( Character *ch, char *argument )
               ch->Echo("\r\n");
               return;
             }
+
 	  tmp = 0;
           break;
         }
       break;
+
     case ITEM_ARMOR:
       if ( !StrCmp( arg2, "condition" ) )      tmp = 0;
       if ( !StrCmp( arg2, "ac" )       )               tmp = 1;
       break;
+
     case ITEM_SALVE:
       if ( !StrCmp( arg2, "slevel"   ) )               tmp = 0;
       if ( !StrCmp( arg2, "maxdoses" ) )               tmp = 1;
@@ -920,6 +993,7 @@ void do_oset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "spell2"   ) )               tmp = 5;
       if ( tmp >=4 && tmp <= 5 )                        value = LookupSkill(arg3);
       break;
+
     case ITEM_POTION:
     case ITEM_PILL:
       if ( !StrCmp( arg2, "slevel" ) )         tmp = 0;
@@ -928,6 +1002,7 @@ void do_oset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "spell3" ) )         tmp = 3;
       if ( tmp >=1 && tmp <= 3 )                        value = LookupSkill(arg3);
       break;
+
     case ITEM_DEVICE:
       if ( !StrCmp( arg2, "slevel" ) )         tmp = 0;
       if ( !StrCmp( arg2, "spell" ) )
@@ -938,11 +1013,13 @@ void do_oset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "maxcharges" )       )       tmp = 1;
       if ( !StrCmp( arg2, "charges" ) )                tmp = 2;
       break;
+
     case ITEM_CONTAINER:
       if ( !StrCmp( arg2, "capacity" ) )               tmp = 0;
       if ( !StrCmp( arg2, "cflags" ) )         tmp = 1;
       if ( !StrCmp( arg2, "key" ) )            tmp = 2;
       break;
+
     case ITEM_SWITCH:
     case ITEM_LEVER:
     case ITEM_BUTTON:
@@ -956,13 +1033,17 @@ void do_oset( Character *ch, char *argument )
     default:
       break;
     }
+
   if ( tmp >= 0 && tmp <= 5 )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
+
       obj->Value[tmp] = value;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->Value[tmp] = value;
+
       return;
     }
 
@@ -978,6 +1059,7 @@ void do_oset( Character *ch, char *argument )
     }
   else
     do_oset( ch, "" );
+
   return;
 }
 

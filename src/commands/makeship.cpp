@@ -3,14 +3,14 @@
 #include "turret.hpp"
 #include "character.hpp"
 
-void do_makeship( Character *ch, char *argument )
+void do_makeship( Character *ch, std::string argument )
 {
   Ship *ship = NULL;
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( argument ) || IsNullOrEmpty( arg ) )
+  if ( argument.empty() || arg.empty() )
     {
       ch->Echo("Usage: makeship <ship name> <personalname>\r\n");
       return;
@@ -23,17 +23,11 @@ void do_makeship( Character *ch, char *argument )
     }
   
   ship = new Ship();
-  Ships->Add(ship);
 
-  ship->Name            = CopyString( arg );
-  ship->PersonalName            = CopyString( argument );
-  ship->Description     = CopyString( "" );
-  ship->Owner   = CopyString( "" );
-  ship->CoPilot       = CopyString( "" );
-  ship->Pilot         = CopyString( "" );
-  ship->Home          = CopyString( "" );
-  ship->Type          = SHIP_CIVILIAN;
+  ship->Name = arg;
+  ship->PersonalName = argument;
 
-  Ships->Save(ship);
+  Ships->Add( ship );
+  Ships->Save( ship );
 }
 

@@ -3,12 +3,9 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_unjail ( Character *ch , char *argument )
+void do_unjail( Character *ch, std::string arg )
 {
   Character *victim = NULL;
-  char arg[MAX_INPUT_LENGTH];
-
-  argument = OneArgument(argument, arg);
 
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
     {
@@ -52,8 +49,8 @@ void do_unjail ( Character *ch , char *argument )
       ch->Echo("Only an immortal can unhell someone.\r\n");
       return;
     }
+
   ch->Echo("Jail restrictions released.\r\n");
   victim->PCData->JailVnum = 0;
   victim->PCData->ReleaseDate = 0;
 }
-

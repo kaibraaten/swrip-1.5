@@ -2,14 +2,11 @@
 #include "character.hpp"
 #include "room.hpp"
 
-void do_noemote( Character *ch, char *argument )
+void do_noemote( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Noemote whom?\r\n");
       return;
@@ -46,4 +43,3 @@ void do_noemote( Character *ch, char *argument )
       ch->Echo("NO_EMOTE set.\r\n");
     }
 }
-

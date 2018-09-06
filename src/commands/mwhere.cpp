@@ -3,15 +3,12 @@
 #include "room.hpp"
 #include "protomob.hpp"
 
-void do_mwhere( Character *ch, char *argument )
+void do_mwhere( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
   bool found = false;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Mwhere whom?\r\n");
       return;
@@ -27,14 +24,13 @@ void do_mwhere( Character *ch, char *argument )
         {
           found = true;
           ch->Echo("[%5d] %-28s [%5d] %s\r\n",
-                        victim->Prototype->Vnum,
-                        victim->ShortDescr,
-                        victim->InRoom->Vnum,
-                        victim->InRoom->Name );
+                   victim->Prototype->Vnum,
+                   victim->ShortDescr.c_str(),
+                   victim->InRoom->Vnum,
+                   victim->InRoom->Name.c_str() );
         }
     }
 
   if ( !found )
-    Act( AT_PLAIN, "You didn't find any $T.", ch, NULL, arg, TO_CHAR );
+    Act( AT_PLAIN, "You didn't find any $T.", ch, NULL, arg.c_str(), TO_CHAR );
 }
-

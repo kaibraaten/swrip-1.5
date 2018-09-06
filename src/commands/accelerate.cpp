@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_accelerate( Character *ch, char *argument )
+void do_accelerate( Character *ch, std::string argument )
 {
   int the_chance = 0;
   int change = 0;
@@ -26,7 +26,7 @@ void do_accelerate( Character *ch, char *argument )
 
   if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
-      ch->Echo("&RThe controls must be at the pilots chair...\r\n");
+      ch->Echo("&RThe controls must be at the pilots chair.\r\n");
       return;
     }
 
@@ -79,7 +79,7 @@ void do_accelerate( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->Thrusters.Energy.Current < abs((atoi(argument)-abs(ship->Thrusters.Speed.Current))/10) )
+  if ( ship->Thrusters.Energy.Current < abs((std::stoi(argument)-abs(ship->Thrusters.Speed.Current))/10) )
     {
       ch->Echo("&RTheres not enough fuel!\r\n");
       return;
@@ -112,10 +112,10 @@ void do_accelerate( Character *ch, char *argument )
       return;
     }
 
-  change = atoi(argument);
+  change = std::stoi(argument);
 
   Act( AT_PLAIN, "$n manipulates the ships controls.", ch,
-       NULL, argument , TO_ROOM );
+       NULL, argument.c_str() , TO_ROOM );
 
   if ( change > ship->Thrusters.Speed.Current )
     {
@@ -123,7 +123,7 @@ void do_accelerate( Character *ch, char *argument )
       ch->Echo( "&GAccelerating\r\n" );
       EchoToCockpit( AT_YELLOW , ship , "The ship begins to accelerate.");
       EchoToDockedShip( AT_YELLOW , ship, "The hull groans at an increase in speed." );
-      sprintf( buf, "%s begins to speed up." , ship->Name );
+      sprintf( buf, "%s begins to speed up." , ship->Name.c_str() );
       EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
     }
 
@@ -132,7 +132,7 @@ void do_accelerate( Character *ch, char *argument )
       ch->Echo( "&GDecelerating.\r\n" );
       EchoToCockpit( AT_YELLOW , ship , "The ship begins to slow down.");
       EchoToDockedShip( AT_YELLOW , ship, "The hull groans as the ship slows." );
-      sprintf( buf, "%s begins to slow down." , ship->Name );
+      sprintf( buf, "%s begins to slow down." , ship->Name.c_str() );
       EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
     }
 

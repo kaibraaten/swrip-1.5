@@ -5,9 +5,8 @@
 /*
  * Withdraw some gold from the current area's economy           -Thoric
  */
-void do_mp_withdraw( Character *ch, char *argument )
+void do_mp_withdraw( Character *ch, std::string arg )
 {
-  char arg[MAX_STRING_LENGTH];
   long gold = 0;
 
   if ( !IsNpc(ch) )
@@ -16,15 +15,13 @@ void do_mp_withdraw( Character *ch, char *argument )
       return;
     }
 
-  OneArgument(argument, arg);
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ProgBug("Mpwithdraw - bad syntax", ch );
       return;
     }
 
-  gold = atoi( arg );
+  gold = std::stoi( arg );
 
   if ( ch->Gold < 1000000000 && gold < 1000000000 && ch->InRoom
        &&   EconomyHas( ch->InRoom->Area, gold ) )
@@ -33,4 +30,3 @@ void do_mp_withdraw( Character *ch, char *argument )
       LowerEconomy( ch->InRoom->Area, gold );
     }
 }
-

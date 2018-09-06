@@ -100,7 +100,7 @@ static void ObjProgWordlistCheck( const std::string &arg, Character *mob, Charac
 static void MudProgSetSupermob(Object *obj);
 static bool ObjProgPercentCheck( Character *mob, Character *actor, Object *obj, void *vo, int type);
 static void RoomProgPercentCheck( Character *mob, Character *actor, Object *obj, void *vo, int type);
-static void RoomProgWordlistCheck( char *arg, Character *mob, Character *actor,
+static void RoomProgWordlistCheck(const char *arg, Character *mob, Character *actor,
 				  Object *obj, void *vo, int type, Room *room );
 static void MobileActAdd( Character *mob );
 static void ObjectActAdd( Object *obj );
@@ -981,7 +981,8 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
           if ( IsNpc(chkchar) || !chkchar->PCData->ClanInfo.Clan )
             return false;
 
-          return MudProgCompareStrings(chkchar->PCData->ClanInfo.Clan->Name, opr, rval, mob);
+          return MudProgCompareStrings(chkchar->PCData->ClanInfo.Clan->Name.c_str(),
+                                       opr, rval, mob);
         }
 
       if ( !StrCmp(chck, "class") )
@@ -1149,9 +1150,9 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
   if ( !StrCmp(chck, "name") )
     {
       if ( chkchar )
-        return MudProgCompareStrings(chkchar->Name, opr, rval, mob);
+        return MudProgCompareStrings(chkchar->Name.c_str(), opr, rval, mob);
 
-      return MudProgCompareStrings(chkobj->Name, opr, rval, mob);
+      return MudProgCompareStrings(chkobj->Name.c_str(), opr, rval, mob);
     }
 
   /* Ok... all the ifchecks are done, so if we didnt find ours then something
@@ -1194,459 +1195,478 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
 
   *t = '\0';
 
-  switch ( ch ) {
-  case 'i':
-    if ( mob && !CharacterDiedRecently(mob) )
-      {
-        if (mob->Name)
-          OneArgument( mob->Name, t );
+  switch ( ch )
+    {
+    case 'i':
+      if ( mob && !CharacterDiedRecently(mob) )
+        {
+          if (!mob->Name.empty())
+            {
+              std::string name;
+              OneArgument( mob->Name, name );
+              strcpy(t, name.c_str());
+            }
+        }
+      else
+        {
+          strcpy( t, "someone" );
+        }
+      
+      break;
 
-      }
-    else
-      {
-	strcpy( t, "someone" );
-      }
-    break;
+    case 'I':
+      if ( mob && !CharacterDiedRecently(mob) )
+        {
+          if (!mob->ShortDescr.empty())
+            {
+              strcpy( t, mob->ShortDescr.c_str() );
+            }
+          else
+            {
+              strcpy( t, "someone" );
+            }
+        }
+      else
+        {
+          strcpy( t, "someone" );
+        }
+      break;
 
-  case 'I':
-    if ( mob && !CharacterDiedRecently(mob) )
-      {
-        if (mob->ShortDescr)
-          {
-            strcpy( t, mob->ShortDescr );
-          } else
-	  {
-	    strcpy( t, "someone" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "someone" );
-      }
-    break;
-
-  case 'n':
-    if ( actor && !CharacterDiedRecently(actor) )
-      {
-        OneArgument( actor->Name, t );
-
-        if ( !IsNpc( actor ) )
-          *t = CharToUppercase( *t );
-      }
-    else
-      {
-	strcpy( t, "someone" );
-      }
-    break;
-
-  case 'N':
-    if( actor && !CharacterDiedRecently( actor ) )
-      {
-	if( CanSeeCharacter( mob, actor ) )
-	  {
-	    if( IsNpc( actor ) )
-	      {
-		strcpy( t, actor->ShortDescr );
-	      }
-	    else
-	      {
-		strcpy( t, actor->Name );
-		strcat( t, actor->PCData->Title );
-	      }
-	  }
-	else
-	  {
-	    strcpy( t, "someone" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "someone" );
-      }
-    break;
-
-  case 't':
-    if ( vict && !CharacterDiedRecently(vict) )
-      {
-        OneArgument( vict->Name, t );
-
-        if ( !IsNpc( vict ) )
-	  {
-	    *t = CharToUppercase( *t );
-	  }
-      }
-    else
-      {
-	strcpy( t, "someone" );
-      }
-
-    break;
-
-  case 'T':
-    if ( vict && !CharacterDiedRecently(vict) )
-      {
-        if ( CanSeeCharacter( mob, vict ) )
-	  {
-	    if ( IsNpc( vict ) )
-	      {
-		strcpy( t, vict->ShortDescr );
-	      }
-	    else
-	      {
-		strcpy( t, vict->Name );
-		strcat( t, " " );
-		strcat( t, vict->PCData->Title );
-	      }
-	  }
-        else
-	  {
-	    strcpy( t, "someone" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "someone" );
-      }
-    break;
-
-  case 'r':
-    if ( rndm && !CharacterDiedRecently(rndm) )
-      {
-        OneArgument( rndm->Name, t );
-
-        if ( !IsNpc( rndm ) )
-          {
+    case 'n':
+      if ( actor && !CharacterDiedRecently(actor) )
+        {
+          std::string name;
+          OneArgument( actor->Name, name );
+          strcpy(t, name.c_str());
+          
+          if ( !IsNpc( actor ) )
             *t = CharToUppercase( *t );
-          }
-      }
-    else
-      {
-	strcpy( t, "someone" );
-      }
-    break;
+        }
+      else
+        {
+          strcpy( t, "someone" );
+        }
+      
+      break;
 
-  case 'R':
-    if ( rndm && !CharacterDiedRecently(rndm) )
-      {
-        if ( CanSeeCharacter( mob, rndm ) )
-	  {
-	    if ( IsNpc( rndm ) )
-	      {
-		strcpy(t,rndm->ShortDescr);
-	      }
-	    else
-	      {
-		strcpy( t, rndm->Name );
-		strcat( t, " " );
-		strcat( t, rndm->PCData->Title );
-	      }
-	  }
-        else
-	  {
-	    strcpy( t, "someone" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "someone" );
-      }
-    break;
+    case 'N':
+      if( actor && !CharacterDiedRecently( actor ) )
+        {
+          if( CanSeeCharacter( mob, actor ) )
+            {
+              if( IsNpc( actor ) )
+                {
+                  strcpy( t, actor->ShortDescr.c_str() );
+                }
+              else
+                {
+                  strcpy( t, actor->Name.c_str() );
+                  strcat( t, actor->PCData->Title.c_str() );
+                }
+            }
+          else
+            {
+              strcpy( t, "someone" );
+            }
+        }
+      else
+        {
+          strcpy( t, "someone" );
+        }
+      break;
 
-  case 'e':
-    if ( actor && !CharacterDiedRecently(actor) )
-      {
-        if( CanSeeCharacter( mob, actor ) )
-	  {
-	    strcpy( t, he_she[ actor->Sex ] );
-	  }
-	else
-	  {
-	    strcpy( t, "someone" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "it" );
-      }
-    break;
+    case 't':
+      if ( vict && !CharacterDiedRecently(vict) )
+        {
+          std::string name;
+          OneArgument( vict->Name, name );
+          strcpy(t, name.c_str());
+          
+          if ( !IsNpc( vict ) )
+            {
+              *t = CharToUppercase( *t );
+            }
+        }
+      else
+        {
+          strcpy( t, "someone" );
+        }
 
-  case 'm':
-    if ( actor && !CharacterDiedRecently(actor) )
-      {
-        if( CanSeeCharacter( mob, actor ) )
-	  {
-	    strcpy( t, him_her[ actor->Sex ] );
-	  }
-	else
-	  {
-	    strcpy( t, "someone" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "it" );
-      }
-    break;
+      break;
 
-  case 's':
-    if ( actor && !CharacterDiedRecently(actor) )
-      {
-        if( CanSeeCharacter( mob, actor ) )
-	  {
-	    strcpy( t, his_her[ actor->Sex ] );
-	  }
-	else
-	  {
-	    strcpy( t, "someone's" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "its'" );
-      }
-    break;
+    case 'T':
+      if ( vict && !CharacterDiedRecently(vict) )
+        {
+          if ( CanSeeCharacter( mob, vict ) )
+            {
+              if ( IsNpc( vict ) )
+                {
+                  strcpy( t, vict->ShortDescr.c_str() );
+                }
+              else
+                {
+                  strcpy( t, vict->Name.c_str() );
+                  strcat( t, " " );
+                  strcat( t, vict->PCData->Title.c_str() );
+                }
+            }
+          else
+            {
+              strcpy( t, "someone" );
+            }
+        }
+      else
+        {
+          strcpy( t, "someone" );
+        }
+      break;
 
-  case 'E':
-    if ( vict && !CharacterDiedRecently(vict) )
-      {
-        if( CanSeeCharacter( mob, vict ) )
-	  {
-	    strcpy( t, he_she[ vict->Sex ] );
-	  }
-	else
-	  {
-	    strcpy( t, "someone" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "it" );
-      }
-    break;
+    case 'r':
+      if ( rndm && !CharacterDiedRecently(rndm) )
+        {
+          std::string name;
+          OneArgument( rndm->Name, name );
+          strcpy(t, name.c_str());
+          
+          if ( !IsNpc( rndm ) )
+            {
+              *t = CharToUppercase( *t );
+            }
+        }
+      else
+        {
+          strcpy( t, "someone" );
+        }
+      break;
 
-  case 'M':
-    if ( vict && !CharacterDiedRecently(vict) )
-      {
-        if( CanSeeCharacter( mob, vict ) )
-	  {
-	    strcpy( t, him_her[ vict->Sex ] );
-	  }
-	else
-	  {
-	    strcpy( t, "someone" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "it" );
-      }
-    break;
+    case 'R':
+      if ( rndm && !CharacterDiedRecently(rndm) )
+        {
+          if ( CanSeeCharacter( mob, rndm ) )
+            {
+              if ( IsNpc( rndm ) )
+                {
+                  strcpy(t, rndm->ShortDescr.c_str());
+                }
+              else
+                {
+                  strcpy( t, rndm->Name.c_str() );
+                  strcat( t, " " );
+                  strcat( t, rndm->PCData->Title.c_str() );
+                }
+            }
+          else
+            {
+              strcpy( t, "someone" );
+            }
+        }
+      else
+        {
+          strcpy( t, "someone" );
+        }
+      break;
 
-  case 'S':
-    if ( vict && !CharacterDiedRecently(vict) )
-      {
-        if( CanSeeCharacter( mob, vict ) )
-	  {
-	    strcpy( t, his_her[ vict->Sex ] );
-	  }
-	else
-	  {
-	    strcpy( t, "someone's" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "its'" );
-      }
-    break;
+    case 'e':
+      if ( actor && !CharacterDiedRecently(actor) )
+        {
+          if( CanSeeCharacter( mob, actor ) )
+            {
+              strcpy( t, he_she[ actor->Sex ] );
+            }
+          else
+            {
+              strcpy( t, "someone" );
+            }
+        }
+      else
+        {
+          strcpy( t, "it" );
+        }
+      break;
 
-  case 'j':
-    if (mob && !CharacterDiedRecently(mob))
-      {
-        strcpy( t, he_she[ mob->Sex ] );
-      }
-    else
-      {
-	strcpy( t, "it" );
-      }
-    break;
+    case 'm':
+      if ( actor && !CharacterDiedRecently(actor) )
+        {
+          if( CanSeeCharacter( mob, actor ) )
+            {
+              strcpy( t, him_her[ actor->Sex ] );
+            }
+          else
+            {
+              strcpy( t, "someone" );
+            }
+        }
+      else
+        {
+          strcpy( t, "it" );
+        }
+      break;
 
-  case 'k':
-    if( mob && !CharacterDiedRecently(mob) )
-      {
-        strcpy( t, him_her[ mob->Sex ] );
-      } else {
-      strcpy( t, "it" );
+    case 's':
+      if ( actor && !CharacterDiedRecently(actor) )
+        {
+          if( CanSeeCharacter( mob, actor ) )
+            {
+              strcpy( t, his_her[ actor->Sex ] );
+            }
+          else
+            {
+              strcpy( t, "someone's" );
+            }
+        }
+      else
+        {
+          strcpy( t, "its'" );
+        }
+      break;
+
+    case 'E':
+      if ( vict && !CharacterDiedRecently(vict) )
+        {
+          if( CanSeeCharacter( mob, vict ) )
+            {
+              strcpy( t, he_she[ vict->Sex ] );
+            }
+          else
+            {
+              strcpy( t, "someone" );
+            }
+        }
+      else
+        {
+          strcpy( t, "it" );
+        }
+      break;
+
+    case 'M':
+      if ( vict && !CharacterDiedRecently(vict) )
+        {
+          if( CanSeeCharacter( mob, vict ) )
+            {
+              strcpy( t, him_her[ vict->Sex ] );
+            }
+          else
+            {
+              strcpy( t, "someone" );
+            }
+        }
+      else
+        {
+          strcpy( t, "it" );
+        }
+      break;
+
+    case 'S':
+      if ( vict && !CharacterDiedRecently(vict) )
+        {
+          if( CanSeeCharacter( mob, vict ) )
+            {
+              strcpy( t, his_her[ vict->Sex ] );
+            }
+          else
+            {
+              strcpy( t, "someone's" );
+            }
+        }
+      else
+        {
+          strcpy( t, "its'" );
+        }
+      break;
+
+    case 'j':
+      if (mob && !CharacterDiedRecently(mob))
+        {
+          strcpy( t, he_she[ mob->Sex ] );
+        }
+      else
+        {
+          strcpy( t, "it" );
+        }
+      break;
+
+    case 'k':
+      if( mob && !CharacterDiedRecently(mob) )
+        {
+          strcpy( t, him_her[ mob->Sex ] );
+        }
+      else
+        {
+          strcpy( t, "it" );
+        }
+      break;
+
+    case 'l':
+      if( mob && !CharacterDiedRecently(mob) )
+        {
+          strcpy( t, his_her[ mob->Sex ] );
+        }
+      else
+        {
+          strcpy( t, "it" );
+        }
+      break;
+
+    case 'J':
+      if ( rndm && !CharacterDiedRecently(rndm) )
+        {
+          if( CanSeeCharacter( mob, rndm ) )
+            {
+              strcpy( t, he_she[ rndm->Sex ] );
+            }
+          else
+            {
+              strcpy( t, "someone" );
+            }
+        }
+      else
+        {
+          strcpy( t, "it" );
+        }
+      break;
+
+    case 'K':
+      if ( rndm && !CharacterDiedRecently(rndm) )
+        {
+          if( CanSeeCharacter( mob, rndm ) )
+            {
+              strcpy( t, him_her[ rndm->Sex ] );
+            }
+          else
+            {
+              strcpy( t, "someone's" );
+            }
+        }
+      else
+        {
+          strcpy( t, "its'" );
+        }
+      break;
+
+    case 'L':
+      if ( rndm && !CharacterDiedRecently(rndm) )
+        {
+          if( CanSeeCharacter( mob, rndm ) )
+            {
+              strcpy( t, his_her[ rndm->Sex ] );
+            }
+          else
+            {
+              strcpy( t, "someone" );
+            }
+        }
+      else
+        {
+          strcpy( t, "its" );
+        }
+      break;
+      
+    case 'o':
+      if ( obj && !IsObjectExtracted(obj) )
+        {
+          if( CanSeeObject( mob, obj ) )
+            {
+              std::string name;
+              OneArgument( obj->Name, name );
+              strcpy(t, name.c_str());
+            }
+          else
+            {
+              strcpy( t, "something" );
+            }
+        }
+      else
+        {
+          strcpy( t, "something" );
+        }
+      break;
+      
+    case 'O':
+      if ( obj && !IsObjectExtracted(obj) )
+        {
+          if( CanSeeObject( mob, obj ) )
+            {
+              strcpy( t, obj->ShortDescr.c_str() );
+            }
+          else
+            {
+              strcpy( t, "something" );
+            }
+        }
+      else
+        {
+          strcpy( t, "something" );
+        }
+      break;
+
+    case 'p':
+      if ( v_obj && !IsObjectExtracted(v_obj) )
+        {
+          if( CanSeeObject( mob, v_obj ) )
+            {
+              std::string name;
+              OneArgument( v_obj->Name, name );
+              strcpy(t, name.c_str());
+            }
+          else
+            {
+              strcpy( t, "something" );
+            }
+        }
+      else
+        {
+          strcpy( t, "something" );
+        }
+      break;
+
+    case 'P':
+      if ( v_obj && !IsObjectExtracted(v_obj) )
+        {
+          if( CanSeeObject( mob, v_obj ) )
+            {
+              strcpy( t, v_obj->ShortDescr.c_str() );
+            }
+          else
+            {
+              strcpy( t, "something" );
+            }
+        }
+      else
+        {
+          strcpy( t, "something" );
+        }
+      break;
+
+    case 'a':
+      if ( obj && !IsObjectExtracted(obj) )
+        {
+          strcpy( t, AOrAn(obj->Name).c_str() );
+        }
+      else
+        {
+          strcpy( t, "a" );
+        }
+      break;
+      
+    case 'A':
+      if ( v_obj && !IsObjectExtracted(v_obj) )
+        {
+          strcpy( t, AOrAn(v_obj->Name).c_str() );
+        }
+      else
+        {
+          strcpy( t, "a" );
+        }
+      break;
+      
+    case '$':
+      strcpy( t, "$" );
+      break;
+      
+    default:
+      ProgBug( "Bad $var", mob );
+      break;
     }
-    break;
-
-  case 'l':
-    if( mob && !CharacterDiedRecently(mob) )
-      {
-        strcpy( t, his_her[ mob->Sex ] );
-      }
-    else
-      {
-	strcpy( t, "it" );
-      }
-    break;
-
-  case 'J':
-    if ( rndm && !CharacterDiedRecently(rndm) )
-      {
-        if( CanSeeCharacter( mob, rndm ) )
-	  {
-	    strcpy( t, he_she[ rndm->Sex ] );
-	  }
-	else
-	  {
-	    strcpy( t, "someone" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "it" );
-      }
-    break;
-
-  case 'K':
-    if ( rndm && !CharacterDiedRecently(rndm) )
-      {
-        if( CanSeeCharacter( mob, rndm ) )
-	  {
-	    strcpy( t, him_her[ rndm->Sex ] );
-	  }
-	else
-	  {
-	    strcpy( t, "someone's" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "its'" );
-      }
-    break;
-
-  case 'L':
-    if ( rndm && !CharacterDiedRecently(rndm) )
-      {
-        if( CanSeeCharacter( mob, rndm ) )
-	  {
-	    strcpy( t, his_her[ rndm->Sex ] );
-	  }
-	else
-	  {
-	    strcpy( t, "someone" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "its" );
-      }
-    break;
-
-  case 'o':
-    if ( obj && !IsObjectExtracted(obj) )
-      {
-	if( CanSeeObject( mob, obj ) )
-	  {
-	    OneArgument( obj->Name, t );
-	  }
-	else
-	  {
-	    strcpy( t, "something" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "something" );
-      }
-    break;
-
-  case 'O':
-    if ( obj && !IsObjectExtracted(obj) )
-      {
-        if( CanSeeObject( mob, obj ) )
-	  {
-	    strcpy( t, obj->ShortDescr );
-	  }
-	else
-	  {
-	    strcpy( t, "something" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "something" );
-      }
-    break;
-
-  case 'p':
-    if ( v_obj && !IsObjectExtracted(v_obj) )
-      {
-        if( CanSeeObject( mob, v_obj ) )
-	  {
-	    OneArgument( v_obj->Name, t );
-	  }
-	else
-	  {
-	    strcpy( t, "something" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "something" );
-      }
-    break;
-
-  case 'P':
-    if ( v_obj && !IsObjectExtracted(v_obj) )
-      {
-        if( CanSeeObject( mob, v_obj ) )
-	  {
-	    strcpy( t, v_obj->ShortDescr );
-	  }
-	else
-	  {
-	    strcpy( t, "something" );
-	  }
-      }
-    else
-      {
-	strcpy( t, "something" );
-      }
-    break;
-
-  case 'a':
-    if ( obj && !IsObjectExtracted(obj) )
-      {
-        strcpy( t, AOrAn(obj->Name) );
-      }
-    else
-      {
-	strcpy( t, "a" );
-      }
-    break;
-
-  case 'A':
-    if ( v_obj && !IsObjectExtracted(v_obj) )
-      {
-        strcpy( t, AOrAn(v_obj->Name) );
-      }
-    else
-      {
-	strcpy( t, "a" );
-      }
-    break;
-
-  case '$':
-    strcpy( t, "$" );
-    break;
-
-  default:
-    ProgBug( "Bad $var", mob );
-    break;
-  }
 }
 
 /*  The main focus of the MOBprograms.  This routine is called
@@ -1968,8 +1988,8 @@ static int MudProgDoCommand( char *cmnd, Character *mob, Character *actor,
 			     Object *obj, void *vo, Character *rndm,
 			     bool ignore, bool ignore_ors )
 {
-  char firstword[MAX_INPUT_LENGTH];
-  char *ifcheck = NULL;
+  std::string firstword;
+  std::string ifcheck;
   char buf[ MAX_INPUT_LENGTH ];
   char tmp[ MAX_INPUT_LENGTH ];
   char *point = NULL, *str = NULL, *i = NULL;
@@ -1987,7 +2007,7 @@ static int MudProgDoCommand( char *cmnd, Character *mob, Character *actor,
       if ( ignore )
         return IFIGNORED;
       else
-        validif = MudProgDoIfCheck( ifcheck, mob, actor, obj, vo, rndm );
+        validif = MudProgDoIfCheck( ifcheck.c_str(), mob, actor, obj, vo, rndm );
 
       if ( validif == 1 )
         return IFtrue;
@@ -2005,7 +2025,7 @@ static int MudProgDoCommand( char *cmnd, Character *mob, Character *actor,
       if ( ignore_ors )
         return ORIGNORED;
       else
-        validif = MudProgDoIfCheck( ifcheck, mob, actor, obj, vo, rndm );
+        validif = MudProgDoIfCheck( ifcheck.c_str(), mob, actor, obj, vo, rndm );
 
       if ( validif == 1 )
         return ORtrue;
@@ -2081,7 +2101,7 @@ static int MudProgDoCommand( char *cmnd, Character *mob, Character *actor,
 
 static bool MudProgKeywordCheck( const char *argu, const char *argl )
 {
-  char word[MAX_INPUT_LENGTH];
+  std::string word;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   size_t i = 0;
@@ -2121,14 +2141,16 @@ static bool MudProgKeywordCheck( const char *argu, const char *argl )
     }
   else
     {
-      arglist = OneArgument( arglist, word );
-
-      for ( ; !IsNullOrEmpty( word ); arglist = OneArgument( arglist, word ) )
+      std::string stl_arglist = OneArgument( arglist, word );
+      
+      for ( ; !word.empty(); stl_arglist = OneArgument( arglist, word ) )
 	{
-	  while ( ( start = strstr( arg, word ) ) )
+          strcpy(arglist, stl_arglist.c_str());
+          
+	  while ( ( start = strstr( arg, word.c_str() ) ) )
 	    {
 	      if ( ( start == arg || *(start-1) == ' ' )
-		   && ( *(end = start + strlen( word ) ) == ' '
+		   && ( *(end = start + word.size() ) == ' '
 			|| *end == '\n'
 			|| *end == '\r'
 			|| *end == '\0' ) )
@@ -2201,17 +2223,18 @@ void MobProgWordlistCheck( const std::string &arg, Character *mob, Character *ac
 	    }
 	  else
 	    {
-              char word[MAX_INPUT_LENGTH];
-              
-	      list = OneArgument( list, word );
+              std::string word;
+              std::string stl_list = OneArgument( list, word );
 
-	      for( ; !IsNullOrEmpty( word ); list = OneArgument( list, word ) )
+	      for( ; !word.empty(); stl_list = OneArgument( list, word ) )
 		{
+                  strcpy(list, stl_list.c_str());
+                  
                   char *start = nullptr;
                   
-		  while ( ( start = strstr( dupl, word ) ) )
+		  while ( ( start = strstr( dupl, word.c_str() ) ) )
 		    {
-                      char *end = start + strlen(word);
+                      char *end = start + word.size();
                       
 		      if ( ( start == dupl || *(start - 1) == ' ' )
 			   && ( *end == ' '
@@ -2353,9 +2376,8 @@ void MobProgBribeTrigger( Character *mob, Character *ch, int amount )
 
       Object *obj = CreateObject( GetProtoObject( OBJ_VNUM_MONEY_SOME ), 0 );
       char buf[MAX_STRING_LENGTH];
-      sprintf( buf, obj->ShortDescr, amount );
-      FreeMemory( obj->ShortDescr );
-      obj->ShortDescr = CopyString( buf );
+      sprintf( buf, obj->ShortDescr.c_str(), amount );
+      obj->ShortDescr = buf;
       obj->Value[OVAL_MONEY_AMOUNT] = amount;
       obj = ObjectToCharacter( obj, mob );
       mob->Gold -= amount;
@@ -2413,7 +2435,7 @@ void MobProgGiveTrigger( Character *mob, Character *ch, Object *obj )
 
       for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
         {
-          char buf[MAX_INPUT_LENGTH];
+          std::string buf;
           OneArgument( mprg->arglist, buf );
 
           if ( ( mprg->type & GIVE_PROG )
@@ -2494,7 +2516,7 @@ void MobProgHourTrigger( Character *mob )
     mprog_time_check(mob,NULL,NULL,NULL,HOUR_PROG);
 }
 
-void MobProgSpeechTrigger( char *txt, Character *actor )
+void MobProgSpeechTrigger( const std::string &txt, Character *actor )
 {
   std::list<Character*> copyOfCharacterList(actor->InRoom->Characters());
 
@@ -2559,17 +2581,13 @@ void MudProgSetSupermob( Object *obj)
   if(!room)
     return;
 
-  if (supermob->ShortDescr)
-    FreeMemory(supermob->ShortDescr);
-
-  supermob->ShortDescr = CopyString(obj->ShortDescr);
+  supermob->ShortDescr = obj->ShortDescr;
   supermob->mprog.mpscriptpos = obj->mprog.mpscriptpos;
 
   /* Added by Jenny to allow bug messages to show the vnum
      of the object, and not just supermob's vnum */
   sprintf( buf, "Object #%ld", obj->Prototype->Vnum );
-  FreeMemory( supermob->Description );
-  supermob->Description = CopyString( buf );
+  supermob->Description = buf;
 
   if(room != NULL)
     {
@@ -2912,16 +2930,17 @@ static void ObjProgWordlistCheck( const std::string &arg, Character *mob, Charac
 	    }
 	  else
 	    {
-	      char word[MAX_INPUT_LENGTH];
+              std::string word;
+              std::string stl_list = OneArgument( list, word );
 
-	      list = OneArgument( list, word );
-
-	      for( ; !IsNullOrEmpty( word ); list = OneArgument( list, word ) )
+	      for( ; !word.empty(); stl_list = OneArgument( list, word ) )
 		{
-		  while ( ( start = strstr( dupl, word ) ) )
+                  strcpy(list, stl_list.c_str());
+                  
+		  while ( ( start = strstr( dupl, word.c_str() ) ) )
 		    {
 		      if ( ( start == dupl || *(start-1) == ' ' )
-			   && ( *(end = start + strlen( word ) ) == ' '
+			   && ( *(end = start + word.size() ) == ' '
 				|| *end == '\n'
 				|| *end == '\r'
 				|| *end == '\0' ) )
@@ -2952,18 +2971,14 @@ void RoomProgSetSupermob( Room *room)
 
   if (room)
     {
-      FreeMemory(supermob->ShortDescr);
-      supermob->ShortDescr = CopyString(room->Name);
-      FreeMemory(supermob->Name);
-      supermob->Name        = CopyString(room->Name);
-
+      supermob->ShortDescr = room->Name;
+      supermob->Name = room->Name;
       supermob->mprog.mpscriptpos = room->mprog.mpscriptpos;
 
       /* Added by Jenny to allow bug messages to show the vnum
          of the room, and not just supermob's vnum */
       sprintf( buf, "Room #%ld", room->Vnum );
-      FreeMemory( supermob->Description );
-      supermob->Description = CopyString( buf );
+      supermob->Description = buf;
 
       CharacterFromRoom (supermob );
       CharacterToRoom( supermob, room);
@@ -3080,12 +3095,12 @@ void RoomProgDeathTrigger( Character *killer, Character *ch )
     }
 }
 
-void RoomProgSpeechTrigger( char *txt, Character *ch )
+void RoomProgSpeechTrigger(const std::string &txt, Character *ch )
 {
   if( ch->InRoom->mprog.progtypes & SPEECH_PROG )
     {
       /* supermob is set and released in RoomProgWordlistCheck */
-      RoomProgWordlistCheck( txt, supermob, ch, NULL, NULL, SPEECH_PROG, ch->InRoom );
+      RoomProgWordlistCheck( txt.c_str(), supermob, ch, NULL, NULL, SPEECH_PROG, ch->InRoom );
     }
 }
 
@@ -3100,7 +3115,7 @@ void RoomProgRandomTrigger( Character *ch )
     }
 }
 
-static void RoomProgWordlistCheck( char *arg, Character *mob, Character *actor,
+static void RoomProgWordlistCheck(const char *arg, Character *mob, Character *actor,
 				  Object *obj, void *vo, int type, Room *room )
 {
   if ( actor && !CharacterDiedRecently(actor) && actor->InRoom )
@@ -3161,16 +3176,17 @@ static void RoomProgWordlistCheck( char *arg, Character *mob, Character *actor,
 	    }
 	  else
 	    {
-	      char word[ MAX_INPUT_LENGTH ];
+              std::string word;
+              std::string stl_list = OneArgument( list, word );
 
-	      list = OneArgument( list, word );
-
-	      for( ; !IsNullOrEmpty( word ); list = OneArgument( list, word ) )
+	      for( ; !word.empty(); stl_list = OneArgument( list, word ) )
 		{
-		  while ( ( start = strstr( dupl, word ) ) )
+                  strcpy(list, stl_list.c_str());
+                  
+		  while ( ( start = strstr( dupl, word.c_str() ) ) )
 		    {
 		      if ( ( start == dupl || *(start-1) == ' ' )
-			   && ( *(end = start + strlen( word ) ) == ' '
+			   && ( *(end = start + word.size() ) == ' '
 				|| *end == '\n'
 				|| *end == '\r'
 				|| *end == '\0' ) )
@@ -3248,7 +3264,7 @@ void ProgBug( const std::string &str, const Character *mob )
          was set to indicate the object or room, so we just need to show
          the description in the bug message. */
       Log->Bug( "%s, %s.", str.c_str(),
-                mob->Description == NULL ? "(unknown)" : mob->Description );
+                mob->Description.empty() ? "(unknown)" : mob->Description.c_str() );
     }
   else
     {
@@ -3449,9 +3465,9 @@ const char *MobProgTypeToName( int type )
     }
 }
 
-Character *GetCharacterInRoomMudProg( Character *ch, char *argument )
+Character *GetCharacterInRoomMudProg( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   int count = 0;
   vnum_t vnum = INVALID_VNUM;
   int number = NumberArgument( argument, arg );
@@ -3463,7 +3479,7 @@ Character *GetCharacterInRoomMudProg( Character *ch, char *argument )
 
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     {
-      vnum = atoi( arg );
+      vnum = std::stoi( arg );
     }
 
   count  = 0;

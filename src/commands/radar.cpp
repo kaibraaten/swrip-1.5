@@ -16,7 +16,7 @@ struct ShowShipData
 
 static bool ShowShipIfInRadarRange(Ship *target, void *userData);
 
-void do_radar( Character *ch, char *argument )
+void do_radar( Character *ch, std::string argument )
 {
   int the_chance = 0;
   Ship *ship = NULL;
@@ -39,7 +39,7 @@ void do_radar( Character *ch, char *argument )
     {
       if (ship->Docked == NULL)
 	{
-   ch->Echo("&RWait until after you launch!\r\n");
+          ch->Echo("&RWait until after you launch!\r\n");
 	  return;
 	}
     }
@@ -66,16 +66,16 @@ void do_radar( Character *ch, char *argument )
       return;
     }
 
-  Act( AT_PLAIN, "$n checks the radar.", ch, NULL, argument , TO_ROOM );
+  Act( AT_PLAIN, "$n checks the radar.", ch, NULL, argument.c_str(), TO_ROOM );
   SetCharacterColor(  AT_RED, ch );
 
   for(const Spaceobject *spaceobj : Spaceobjects->Entities())
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->Type == SPACE_SUN
-	   && StrCmp(spaceobj->Name,"") )
+	   && !spaceobj->Name.empty() )
         ch->Echo("%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
-                  spaceobj->Name,
+                  spaceobj->Name.c_str(),
                   spaceobj->Position.x,
                   spaceobj->Position.y,
                   spaceobj->Position.z,
@@ -91,9 +91,9 @@ void do_radar( Character *ch, char *argument )
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->Type == SPACE_PLANET
-	   && StrCmp(spaceobj->Name,"") )
+	   && !spaceobj->Name.empty() )
         ch->Echo("%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
-                  spaceobj->Name,
+                  spaceobj->Name.c_str(),
                   spaceobj->Position.x,
                   spaceobj->Position.y,
                   spaceobj->Position.z,
@@ -109,9 +109,10 @@ void do_radar( Character *ch, char *argument )
   for(const Spaceobject *spaceobj : Spaceobjects->Entities())
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
-	   && spaceobj->Type > SPACE_PLANET && StrCmp(spaceobj->Name,"") )
+	   && spaceobj->Type > SPACE_PLANET
+           && !spaceobj->Name.empty() )
         ch->Echo("%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
-                 spaceobj->Name,
+                 spaceobj->Name.c_str(),
                  spaceobj->Position.x,
                  spaceobj->Position.y,
                  spaceobj->Position.z, "",
@@ -157,7 +158,7 @@ static bool ShowShipIfInRadarRange(Ship *target, void *userData)
     {
       if( GetShipDistanceToShip( ship, target ) < 100*(ship->Instruments.Sensor + 10)*((target->Class == SHIP_DEBRIS ? 2 : target->Class) +1))
         ch->Echo("%s    %.0f %.0f %.0f\r\n",
-                 target->Name,
+                 target->Name.c_str(),
                  (target->Position.x - ship->Position.x),
                  (target->Position.y - ship->Position.y),
                  (target->Position.z - ship->Position.z));
@@ -188,4 +189,3 @@ static bool ShowShipIfInRadarRange(Ship *target, void *userData)
 
   return true;
 }
-

@@ -4,20 +4,20 @@
 #include "spaceobject.hpp"
 #include "room.hpp"
 
-void do_shiptrack( Character *ch, char *argument)
+void do_shiptrack( Character *ch, std::string argument)
 {
   Ship *ship = nullptr;
   Spaceobject *spaceobject = nullptr;
-  char arg[MAX_INPUT_LENGTH];
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
   char buf[MAX_STRING_LENGTH];
 
-  argument = OneArgument( argument , arg);
-  argument = OneArgument( argument , arg1);
-  argument = OneArgument( argument , arg2);
-  argument = OneArgument( argument , arg3);
+  argument = OneArgument( argument, arg);
+  argument = OneArgument( argument, arg1);
+  argument = OneArgument( argument, arg2);
+  argument = OneArgument( argument, arg3);
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
@@ -39,7 +39,7 @@ void do_shiptrack( Character *ch, char *argument)
 
   if( !StrCmp( arg, "dist" ) )
     {
-      ship->tcount = atoi(arg1);
+      ship->tcount = std::stoi(arg1);
       ch->Echo("&RJump distance set!\r\n");
       return;
     }
@@ -60,7 +60,7 @@ void do_shiptrack( Character *ch, char *argument)
           return;
         }
 
-      SetVector( &head, atoi(arg1), atoi(arg2), atoi(arg3) );
+      SetVector( &head, std::stoi(arg1), std::stoi(arg2), std::stoi(arg3) );
       sprintf( buf, "%.0f %.0f %.0f", ship->Position.x + head.x,
                ship->Position.y + head.y, ship->Position.z + head.z );
 
@@ -82,7 +82,7 @@ void do_shiptrack( Character *ch, char *argument)
       do_trajectory( ch, buf);
 
       SetVector( &ship->Jump, ship->Position.x + head.x,
-                  ship->Position.y + head.y, ship->Position.z + head.z );
+                 ship->Position.y + head.y, ship->Position.z + head.z );
 
       
       for(Spaceobject *so : Spaceobjects->Entities())
@@ -107,8 +107,8 @@ void do_shiptrack( Character *ch, char *argument)
           || ship->Heading.x > MAX_COORD || ship->Heading.y > MAX_COORD || ship->Heading.z > MAX_COORD
           || ship->Heading.x < -MAX_COORD || ship->Heading.y < -MAX_COORD || ship->Heading.z < -MAX_COORD )
         {
-          EchoToCockpit( AT_RED, ship, "WARNING... Jump coordinates outside of the known galaxy.");
-          EchoToCockpit( AT_RED, ship, "WARNING... Hyperjump NOT set.");
+          EchoToCockpit( AT_RED, ship, "WARNING! Jump coordinates outside of the known galaxy.");
+          EchoToCockpit( AT_RED, ship, "WARNING! Hyperjump NOT set.");
           ship->CurrentJump = NULL;
           ship->Tracking = false;
           return;
@@ -130,4 +130,3 @@ void do_shiptrack( Character *ch, char *argument)
         do_hyperspace( ch, "off" );
     }
 }
-

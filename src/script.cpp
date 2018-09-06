@@ -189,20 +189,12 @@ static SmaugAffect *LuaLoadOneSmaugAffect( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      affect->Duration = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      affect->Duration = CopyString( "" );
+      affect->Duration = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      affect->Modifier = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      affect->Modifier = CopyString( "" );
+      affect->Modifier = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -249,7 +241,7 @@ static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int 
   lua_pushinteger( L, ++idx );
   lua_newtable( L );
 
-  if( !IsNullOrEmpty( affect->Duration ) )
+  if( !affect->Duration.empty() )
     {
       LuaSetfieldString( L, "Duration", affect->Duration );
     }
@@ -259,7 +251,7 @@ static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int 
       LuaSetfieldNumber( L, "Location", affect->Location );
     }
 
-  if( !IsNullOrEmpty( affect->Modifier ) )
+  if( !affect->Modifier.empty() )
     {
       LuaSetfieldString( L, "Modifier", affect->Modifier );
     }

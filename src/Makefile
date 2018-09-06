@@ -172,17 +172,17 @@ _OBJ =  act_comm.o \
 	$(CMDDIR)/boards.o \
 	$(CMDDIR)/bodybag.o \
 	$(CMDDIR)/bounties.o \
-	$(CMDDIR)/bribe.o \
-	$(CMDDIR)/buy.o \
-	$(CMDDIR)/buyhome.o \
-	$(CMDDIR)/buzz.o \
 	$(CMDDIR)/brandish.o \
+	$(CMDDIR)/bribe.o \
 	$(CMDDIR)/bset.o \
 	$(CMDDIR)/bstat.o \
 	$(CMDDIR)/bug.o \
 	$(CMDDIR)/bury.o \
+	$(CMDDIR)/buy.o \
+	$(CMDDIR)/buyhome.o \
 	$(CMDDIR)/buyship.o \
 	$(CMDDIR)/buyvendor.o \
+	$(CMDDIR)/buzz.o \
 	$(CMDDIR)/calculate.o \
 	$(CMDDIR)/calculatediff.o \
 	$(CMDDIR)/capture.o \

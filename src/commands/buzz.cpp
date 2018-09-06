@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_buzz (Character *ch, char *arg)
+void do_buzz(Character *ch, std::string arg)
 {
   DirectionType exit_dir = DIR_INVALID;
 
@@ -60,4 +60,3 @@ void do_buzz (Character *ch, char *arg)
   ch->Echo("You press the door buzzer.\r\n");
   Act(AT_ACTION,"$n presses a door buzzer.", ch, NULL, NULL, TO_ROOM);
 }
-

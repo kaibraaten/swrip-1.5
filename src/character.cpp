@@ -61,10 +61,10 @@ Character::Character(ProtoMobile *protoMob)
   : spec_fun(protoMob->spec_fun),
     spec_2(protoMob->spec_2),
     Prototype(protoMob),
-    Name(CopyString(protoMob->Name)),
-    ShortDescr(CopyString(protoMob->ShortDescr)),
-    LongDescr(CopyString(protoMob->LongDescr)),
-    Description(CopyString(protoMob->Description)),
+    Name(protoMob->Name),
+    ShortDescr(protoMob->ShortDescr),
+    LongDescr(protoMob->LongDescr),
+    Description(protoMob->Description),
     Sex(protoMob->Sex),
     Race(protoMob->Race),
     TopLevel(NumberFuzzy(protoMob->Level)),
@@ -93,7 +93,6 @@ Character::Character(ProtoMobile *protoMob)
     Height(protoMob->Height),
     Weight(protoMob->Weight),
     VipFlags(protoMob->VipFlags),
-    MobClan(CopyString("")),
     pImpl(new Impl())
 {
   Ability.Level.fill(0);
@@ -162,7 +161,7 @@ void Character::Echo(const char *fmt, ...) const
   
   va_list va;
   va_start( va, fmt );
-  std::vector< char > buf = CreateFmtBuffer( fmt, va );
+  std::vector<char> buf = CreateFmtBuffer( fmt, va );
   va_end( va );
 
   if(!buf.empty())
@@ -549,7 +548,12 @@ void EquipCharacter( Character *ch, Object *obj, WearLocation iWear )
   if ( otmp != nullptr
        &&  (otmp->Prototype->Layers == 0 || obj->Prototype->Layers == 0) )
     {
-      Log->Bug( "%s: already equipped (%d).", __FUNCTION__, iWear );
+      Log->Bug( "%s: %s %s (%d) already has %s (%ld) equipped on wear location %d.",
+                __FUNCTION__,
+                IsNpc(ch) ? "Mob" : "Player",
+                ch->Name.c_str(), IsNpc(ch) ? ch->Prototype->Vnum : INVALID_VNUM,
+                otmp->ShortDescr.c_str(), otmp->Prototype->Vnum,
+                iWear );
       return;
     }
 
@@ -640,14 +644,14 @@ void UnequipCharacter( Character *ch, Object *obj )
  */
 Object *GetCarriedObject( const Character *ch, const std::string &argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   vnum_t vnum = INVALID_VNUM;
   int count = 0;
   int number = NumberArgument( argument, arg );
 
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     {
-      vnum = atoi( arg );
+      vnum = std::stoi( arg );
     }
 
   for(Object *obj : Reverse(ch->Objects()))
@@ -697,8 +701,8 @@ Object *GetCarriedObject( const Character *ch, const std::string &argument )
  */
 Object *GetWornObject( const Character *ch, const std::string &argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  int number = 0, count = 0;
+  std::string arg;
+  int count = 0;
   vnum_t vnum = INVALID_VNUM;
 
   if ( !ch )
@@ -706,10 +710,10 @@ Object *GetWornObject( const Character *ch, const std::string &argument )
       Log->Bug( "%s: null ch", __FUNCTION__ );
     }
 
-  number = NumberArgument( argument, arg );
+  int number = NumberArgument( argument, arg );
 
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
-    vnum = atoi( arg );
+    vnum = std::stoi( arg );
 
   for(Object *obj : Reverse(ch->Objects()))
     if ( obj->WearLoc != WEAR_NONE
@@ -1251,7 +1255,7 @@ bool IsWaitingForAuth( const Character *ch )
 
 #define DISGUISE(ch)            ((!NiftyIsName((ch)->Name, (ch)->PCData->Title)) ? 1 : 0)
 
-const char *PERS( const Character *ch, const Character *looker )
+std::string PERS( const Character *ch, const Character *looker )
 {
   return CanSeeCharacter( looker, ch ) ? ( IsNpc(ch) ? ch->ShortDescr : ((GetTrustLevel(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->PCData->Title : ch->Name ) : ch->Name)) : ( IsImmortal(ch) ? "A Great One" : "someone" );
 }
@@ -1429,11 +1433,6 @@ void FreeCharacter( Character *ch )
       ExtractTimer( ch, ch->Timers().front() );
     }
   
-  FreeMemory( ch->Name             );
-  FreeMemory( ch->ShortDescr      );
-  FreeMemory( ch->LongDescr       );
-  FreeMemory( ch->Description      );
-
   if ( ch->Editor )
     StopEditing( ch );
 
@@ -1441,7 +1440,6 @@ void FreeCharacter( Character *ch )
   StopHating ( ch );
   StopFearing( ch );
   FreeFight( ch );
-
 
   if ( ch->PCData )
     {
@@ -1455,27 +1453,9 @@ void FreeCharacter( Character *ch )
           FreeCraftingSession( ch->PCData->CraftingSession );
         }
 
-      FreeMemory( ch->PCData->ClanInfo.ClanName    );
-      FreeMemory( ch->PCData->Password  );  /* no hash */
-      FreeMemory( ch->PCData->Email        );  /* no hash */
-      FreeMemory( ch->PCData->BamfIn       );  /* no hash */
-      FreeMemory( ch->PCData->BamfOut      );  /* no hash */
-      FreeMemory( ch->PCData->Rank );
-      FreeMemory( ch->PCData->Title        );
-      FreeMemory( ch->PCData->Bio  );
-      FreeMemory( ch->PCData->Bestowments ); /* no hash */
-      FreeMemory( ch->PCData->HomePage     );  /* no hash */
-      FreeMemory( ch->PCData->AuthedBy    );
-      FreeMemory( ch->PCData->Prompt       );
-
       while(!ch->PCData->Comments().empty())
         {
           FreeNote(ch->PCData->Comments().front());
-        }
-
-      if ( ch->PCData->SubPrompt )
-        {
-          FreeMemory( ch->PCData->SubPrompt );
         }
 
       FreeAliases( ch );
@@ -1532,21 +1512,13 @@ const char *GetCharacterRace( const Character *ch)
 
 void SetCharacterTitle( Character *ch, const std::string &title )
 {
-  char buf[MAX_STRING_LENGTH];
-  char *bufptr = buf;
-
   if ( IsNpc(ch) )
     {
       Log->Bug( "Set_title: NPC.", 0 );
       return;
     }
 
-  strcpy(bufptr, title.c_str());
-
-  bufptr = TrimString(buf, ' ');
-
-  FreeMemory( ch->PCData->Title );
-  ch->PCData->Title = CopyString( buf );
+  ch->PCData->Title = TrimString(title);
 }
 
 void AddReinforcements( Character *ch )
@@ -1563,7 +1535,7 @@ void AddReinforcements( Character *ch )
 
   assert(ch->InRoom != nullptr);
 
-  Log->Info( "%s just posted a guard on %ld!", ch->Name, ch->InRoom->Vnum );
+  Log->Info( "%s just posted a guard on %ld!", ch->Name.c_str(), ch->InRoom->Vnum );
 
   if ( ch->BackupMob == MOB_VNUM_STORMTROOPER ||
        ch->BackupMob == MOB_VNUM_NR_TROOPER   ||
@@ -1637,13 +1609,10 @@ void AddReinforcements( Character *ch )
 
       if ( ch->PCData && ch->PCData->ClanInfo.Clan )
         {
-          char tmpbuf[MAX_STRING_LENGTH];
-
-          FreeMemory( mob->Name );
-          mob->Name = CopyString( ch->PCData->ClanInfo.Clan->Name );
-          sprintf( tmpbuf , "(%s) %s" , ch->PCData->ClanInfo.Clan->Name  , mob->LongDescr );
-          FreeMemory( mob->LongDescr );
-          mob->LongDescr = CopyString( tmpbuf );
+          mob->Name = ch->PCData->ClanInfo.Clan->Name;
+          mob->LongDescr = FormatString("(%s) %s",
+                                        ch->PCData->ClanInfo.Clan->Name.c_str(),
+                                        mob->LongDescr.c_str() );
         }
 
       Act( AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM );
@@ -1670,14 +1639,9 @@ void AddReinforcements( Character *ch )
 
       /* for making this more accurate in the future */
 
-      if ( mob->MobClan )
-        {
-          FreeMemory( mob->MobClan );
-        }
-
       if ( ch->PCData && ch->PCData->ClanInfo.Clan )
         {
-          mob->MobClan = CopyString( ch->PCData->ClanInfo.Clan->Name );
+          mob->MobClan = ch->PCData->ClanInfo.Clan->Name;
         }
     }
 }

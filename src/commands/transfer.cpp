@@ -3,17 +3,17 @@
 #include "room.hpp"
 #include "descriptor.hpp"
 
-void do_transfer( Character *ch, char *argument )
+void do_transfer( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
   Room *location = nullptr;
   Character *victim = nullptr;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo("Transfer whom (and where)?\r\n");
       return;
@@ -29,8 +29,8 @@ void do_transfer( Character *ch, char *argument )
                && d->NewState != 2
                && CanSeeCharacter( ch, d->Character ) )
             {
-              char buf[MAX_STRING_LENGTH];
-              sprintf( buf, "%s %s", d->Character->Name, arg2 );
+              char buf[MAX_STRING_LENGTH] = {'\0'};
+              sprintf( buf, "%s %s", d->Character->Name.c_str(), arg2.c_str() );
               do_transfer( ch, buf );
             }
         }
@@ -41,7 +41,7 @@ void do_transfer( Character *ch, char *argument )
   /*
    * Thanks to Grodyn for the optional location parameter.
    */
-  if ( IsNullOrEmpty( arg2 ) )
+  if ( arg2.empty() )
     {
       location = ch->InRoom;
     }
@@ -68,20 +68,21 @@ void do_transfer( Character *ch, char *argument )
 
   if (!IsAuthed(victim))
     {
-      ch->Echo("They are not authorized yet!\r\n");
+      ch->Echo("%s is not authorized yet!\r\n", HeSheIt( victim ) );
       return;
     }
 
   if ( !victim->InRoom )
     {
-      ch->Echo("They are in limbo.\r\n");
+      ch->Echo("%s is in limbo.\r\n", HeSheIt( victim ) );
       return;
     }
 
   if ( victim->Fighting )
     StopFighting( victim, true );
 
-  Act( AT_MAGIC, "$n disappears in a cloud of swirling colors.", victim, NULL, NULL, TO_ROOM );
+  Act( AT_MAGIC, "$n disappears in a cloud of swirling colors.",
+       victim, NULL, NULL, TO_ROOM );
   victim->ReTran = victim->InRoom->Vnum;
   CharacterFromRoom( victim );
   CharacterToRoom( victim, location );
@@ -99,4 +100,3 @@ void do_transfer( Character *ch, char *argument )
       ch->Echo("Warning: the player's level is not within the area's level range.\r\n");
     }
 }
-

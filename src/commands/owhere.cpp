@@ -8,10 +8,10 @@
 
 static void trunc1(char *s, size_t len);
 
-void do_owhere( Character *ch, char *argument )
+void do_owhere( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH], field[MAX_INPUT_LENGTH];
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   Object *obj = nullptr, *outer_obj = nullptr;
   bool found = false;
   int icnt = 0;
@@ -21,14 +21,14 @@ void do_owhere( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Owhere what?\r\n" );
       return;
     }
 
   if ( IsNumber(arg) )
-    vnum=atoi(arg);
+    vnum = std::stoi(arg);
 
   for ( obj = FirstObject; obj; obj = obj->Next )
     {
@@ -51,13 +51,13 @@ void do_owhere( Character *ch, char *argument )
       while ( outer_obj->InObject )
         outer_obj = outer_obj->InObject;
 
-      sprintf(field, "%-18s", GetObjectShortDescription(obj));
+      sprintf(field, "%-18s", GetObjectShortDescription(obj).c_str());
       trunc1(field, 18);
       sprintf(buf, "%3d &R&w%5ld &R&w%-18s &R&w", ++icnt, obj->Prototype->Vnum, field);
 
       if ( outer_obj->CarriedBy )
         {
-          sprintf(field, "%-18s", PERS(outer_obj->CarriedBy, ch));
+          sprintf(field, "%-18s", PERS(outer_obj->CarriedBy, ch).c_str());
           trunc1(field, 18);
           sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
                   (IsNpc(outer_obj->CarriedBy) ?
@@ -65,7 +65,7 @@ void do_owhere( Character *ch, char *argument )
 
           if ( outer_obj!=obj )
             {
-              sprintf(field, "%-18s", obj->InObject->Name);
+              sprintf(field, "%-18s", obj->InObject->Name.c_str());
               trunc1(field, 18);
               sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
                       obj->InObject->Prototype->Vnum, field);
@@ -76,14 +76,14 @@ void do_owhere( Character *ch, char *argument )
         }
       else if ( outer_obj->InRoom )
         {
-          sprintf(field, "%-18s", outer_obj->InRoom->Name);
+          sprintf(field, "%-18s", outer_obj->InRoom->Name.c_str());
           trunc1(field, 18);
           sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
                   outer_obj->InRoom->Vnum, field);
 
           if ( outer_obj!=obj )
             {
-              sprintf(field, "%-18s", obj->InObject->Name);
+              sprintf(field, "%-18s", obj->InObject->Name.c_str());
               trunc1(field, 18);
               sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
                       obj->InObject->Prototype->Vnum, field);
@@ -103,4 +103,3 @@ static void trunc1(char *s, size_t len)
   if ( strlen(s) > len )
     s[len] = '\0';
 }
-

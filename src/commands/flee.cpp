@@ -3,7 +3,7 @@
 #include "skill.hpp"
 #include "room.hpp"
 
-void do_flee( Character *ch, char *argument )
+void do_flee( Character *ch, std::string argument )
 {
   Room *was_in = nullptr;
   Room *now_in = nullptr;
@@ -36,6 +36,7 @@ void do_flee( Character *ch, char *argument )
     return;
 
   was_in = ch->InRoom;
+
   for ( attempt = 0; attempt < 8; attempt++ )
     {
 
@@ -54,23 +55,28 @@ void do_flee( Character *ch, char *argument )
           StripAffect ( ch, gsn_sneak );
           RemoveBit   ( ch->AffectedBy, AFF_SNEAK );
         }
+
       if ( ch->Mount && ch->Mount->Fighting )
         StopFighting( ch->Mount, true );
       MoveCharacter( ch, pexit, 0 );
 
       MobProgEntryTrigger( ch );
+
       if ( CharacterDiedRecently(ch) )
         return;
 
       RoomProgEnterTrigger( ch );
+
       if ( CharacterDiedRecently(ch) )
         return;
 
       MobProgGreetTrigger( ch );
+
       if ( CharacterDiedRecently(ch) )
         return;
 
       ObjProgGreetTrigger( ch );
+
       if ( CharacterDiedRecently(ch) )
         return;
 
@@ -89,4 +95,3 @@ void do_flee( Character *ch, char *argument )
 
   ch->Echo("You attempt to run for cover!\r\n");
 }
-

@@ -3,9 +3,9 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 
-void do_appoint( Character *ch , char *argument )
+void do_appoint( Character *ch , std::string argument )
 {
-  char arg[MAX_STRING_LENGTH];
+  std::string arg;
 
   argument = OneArgument( argument, arg );
 
@@ -24,35 +24,31 @@ void do_appoint( Character *ch , char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
-      ch->Echo( "Usage: appoint <name> < first | second >\r\n" );
+      ch->Echo( "Usage: appoint <name> <first|second>\r\n" );
       return;
     }
 
   if ( !StrCmp( argument, "first" )  )
     {
-      if ( ch->PCData->ClanInfo.Clan->Leadership.Number1
-	   && StrCmp( ch->PCData->ClanInfo.Clan->Leadership.Number1 , "" ) )
+      if ( !ch->PCData->ClanInfo.Clan->Leadership.Number1.empty() )
         {
           ch->Echo( "You already have someone in that position... demote them first.\r\n" );
           return;
         }
 
-      FreeMemory( ch->PCData->ClanInfo.Clan->Leadership.Number1 );
-      ch->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( arg );
+      ch->PCData->ClanInfo.Clan->Leadership.Number1 = arg;
     }
   else if ( !StrCmp( argument , "second" )  )
     {
-      if ( ch->PCData->ClanInfo.Clan->Leadership.Number2
-	   && StrCmp( ch->PCData->ClanInfo.Clan->Leadership.Number2 , "" ))
+      if ( !ch->PCData->ClanInfo.Clan->Leadership.Number2.empty() )
         {
           ch->Echo( "You already have someone in that position... demote them first.\r\n" );
           return;
         }
 
-      FreeMemory( ch->PCData->ClanInfo.Clan->Leadership.Number2 );
-      ch->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( arg );
+      ch->PCData->ClanInfo.Clan->Leadership.Number2 = arg;
     }
   else
     {

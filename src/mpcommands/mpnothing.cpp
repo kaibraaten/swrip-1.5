@@ -4,7 +4,7 @@
 /*
  * Does nothing.  Used for scripts.
  */
-void do_mpnothing( Character *ch, char *argument )
+void do_mpnothing( Character *ch, std::string argument )
 {
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -15,4 +15,3 @@ void do_mpnothing( Character *ch, char *argument )
       return;
     }
 }
-

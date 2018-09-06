@@ -2,16 +2,17 @@
 #include "spaceobject.hpp"
 #include "character.hpp"
 
-static void showspaceobject( Character *ch , const Spaceobject *spaceobject )
+static void showspaceobject( Character *ch, const Spaceobject *spaceobject )
 {
   size_t siteNum = 0;
-  ch->Echo("Space object: %s\r\n", spaceobject->Name);
+  ch->Echo("Space object: %s\r\n", spaceobject->Name.c_str());
   ch->Echo("Is simulator: %s\r\n", spaceobject->IsSimulator ? "Yes" : "No");
   ch->Echo("Type:         %s (%d)\r\n",
-	Capitalize(SpaceobjectTypeName[spaceobject->Type]), spaceobject->Type);
+           Capitalize(SpaceobjectTypeName[spaceobject->Type]).c_str(),
+           spaceobject->Type);
 
   ch->Echo("Coordinates:  %.0f %0.f %.0f\r\n",
-	spaceobject->Position.x, spaceobject->Position.y, spaceobject->Position.z);
+           spaceobject->Position.x, spaceobject->Position.y, spaceobject->Position.z);
   ch->Echo("Gravity:      %d\r\n", spaceobject->Gravity);
   ch->Echo("Landing sites:\r\n" );
 
@@ -19,11 +20,11 @@ static void showspaceobject( Character *ch , const Spaceobject *spaceobject )
     {
       const LandingSite *site = &spaceobject->LandingSites[siteNum];
       ch->Echo("    %cDock %d: %5d (%s)\r\n",
-	    site->IsSecret ? '-' : ' ', siteNum, site->Dock, site->LocationName );
+               site->IsSecret ? '-' : ' ', siteNum, site->Dock, site->LocationName.c_str() );
     }
 }
 
-void do_showspaceobject( Character *ch, char *argument )
+void do_showspaceobject( Character *ch, std::string argument )
 {
   const Spaceobject *spaceobject = GetSpaceobject( argument );
 

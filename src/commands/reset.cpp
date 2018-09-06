@@ -6,11 +6,11 @@
 #include "log.hpp"
 #include "room.hpp"
 
-void do_reset( Character *ch, char *argument )
+void do_reset( Character *ch, std::string argument )
 {
   Area *pArea = NULL;
-  char arg[MAX_INPUT_LENGTH];
-  char *parg = OneArgument(argument, arg);
+  std::string arg;
+  std::string parg = OneArgument(argument, arg);
 
   if ( ch->SubState == SUB_REPEATCMD )
     {
@@ -18,7 +18,7 @@ void do_reset( Character *ch, char *argument )
 
       if ( pArea && pArea != ch->PCData->Build.Area && pArea != ch->InRoom->Area )
         {
-          Area *tmp;
+          Area *tmp = nullptr;
 
           for ( tmp = FirstBuild; tmp; tmp = tmp->Next )
 	    if ( tmp == pArea )
@@ -32,16 +32,16 @@ void do_reset( Character *ch, char *argument )
           if ( !tmp )
             {
               ch->Echo("Your area pointer got lost. Reset mode off.\r\n");
-              Log->Bug("do_reset: %s's dest_buf points to invalid area", ch->Name);
+              Log->Bug("do_reset: %s's dest_buf points to invalid area", ch->Name.c_str());
               ch->SubState = SUB_NONE;
               FreeMemory(ch->dest_buf);
               return;
             }
         }
 
-      if ( !*arg )
+      if ( arg.empty() )
         {
-          ch->Echo("Editing resets for area: %s\r\n", pArea->Name);
+          ch->Echo("Editing resets for area: %s\r\n", pArea->Name.c_str());
           return;
         }
 
@@ -53,11 +53,12 @@ void do_reset( Character *ch, char *argument )
           return;
         }
     }
+
   if ( !pArea && GetTrustLevel(ch) > LEVEL_GREATER )
     {
       char fname[80];
 
-      sprintf(fname, "%s.are", Capitalize(arg));
+      sprintf(fname, "%s.are", Capitalize(arg).c_str());
 
       for ( pArea = FirstBuild; pArea; pArea = pArea->Next )
 	{
@@ -87,4 +88,3 @@ void do_reset( Character *ch, char *argument )
 
   EditReset(ch, argument, pArea, NULL);
 }
-

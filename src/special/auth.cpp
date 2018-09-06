@@ -30,15 +30,10 @@ bool spec_auth( Character *ch )
       victim->PCData->AuthState = 3;
       RemoveBit(victim->PCData->Flags, PCFLAG_UNAUTHED);
 
-      if ( victim->PCData->AuthedBy != nullptr )
-        {
-          FreeMemory( victim->PCData->AuthedBy );
-        }
-      
-      victim->PCData->AuthedBy = CopyString( ch->Name );
+      victim->PCData->AuthedBy = ch->Name;
       char buf[MAX_STRING_LENGTH];
-      sprintf( buf, "%s authorized %s", ch->Name,
-               victim->Name );
+      sprintf( buf, "%s authorized %s", ch->Name.c_str(),
+               victim->Name.c_str() );
       ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );
     }
 

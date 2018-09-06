@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_autotrack( Character *ch, char *argument )
+void do_autotrack( Character *ch, std::string argument )
 {
   Ship *ship = nullptr;
   int the_chance = 0;
@@ -57,13 +57,13 @@ void do_autotrack( Character *ch, char *argument )
 
   if ( GetRandomPercent() > the_chance )
     {
-      ch->Echo("&RYour not sure which switch to flip.\r\n");
+      ch->Echo("&RYou're not sure which switch to flip.\r\n");
       LearnFromFailure( ch, gsn_shipsystems );
       return;
     }
 
   Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
-       NULL, argument , TO_ROOM );
+       NULL, argument.c_str(), TO_ROOM );
 
   if (ship->AutoTrack)
     {

@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "object.hpp"
 
-void do_arm( Character *ch, char *argument )
+void do_arm( Character *ch, std::string argument )
 {
   Object *obj = nullptr;
 
@@ -29,10 +29,9 @@ void do_arm( Character *ch, char *argument )
     }
 
   obj->Timer = 1;
-  FreeMemory( obj->ArmedBy );
-  obj->ArmedBy = CopyString ( ch->Name );
+  obj->ArmedBy = ch->Name;
 
-  ch->Echo( "You arm %s.\r\n", obj->ShortDescr );
+  ch->Echo( "You arm %s.\r\n", obj->ShortDescr.c_str() );
   Act( AT_PLAIN, "$n arms $p.", ch, obj, NULL, TO_ROOM );
 
   LearnFromSuccess( ch , gsn_grenades );

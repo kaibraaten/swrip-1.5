@@ -4,20 +4,20 @@
 #include "area.hpp"
 #include "room.hpp"
 
-void do_aset( Character *ch, char *argument )
+void do_aset( Character *ch, std::string argument )
 {
   Area *tarea = NULL;
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
   bool found = false;
   int value = 0;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
-  value = atoi( argument );
+  value = std::stoi( argument );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
+  if ( arg1.empty() || arg2.empty() )
     {
       ch->Echo( "Usage: aset <area filename> <field> <value>\r\n" );
       ch->Echo( "\r\nField being one of:\r\n" );
@@ -58,8 +58,7 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      FreeMemory( tarea->Name );
-      tarea->Name = CopyString( argument );
+      tarea->Name = argument;
       ch->Echo( "Done.\r\n" );
       return;
     }
@@ -79,13 +78,13 @@ void do_aset( Character *ch, char *argument )
           planet->Add(tarea);
           Planets->Save(planet);
         }
+
       return;
     }
 
   if ( !StrCmp( arg2, "filename" ) )
     {
-      FreeMemory( tarea->Filename );
-      tarea->Filename = CopyString( argument );
+      tarea->Filename = argument;
       WriteAreaList();
       FoldArea( tarea, tarea->Filename, true );
       ch->Echo( "Done.\r\n" );
@@ -202,23 +201,25 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "author" ) )
     {
-      FreeMemory( tarea->Author );
-      tarea->Author = CopyString( argument );
+      tarea->Author = argument;
       ch->Echo( "Done.\r\n" );
       return;
     }
 
   if ( !StrCmp( arg2, "resetmsg" ) )
     {
-      if ( tarea->ResetMessage )
-        FreeMemory( tarea->ResetMessage );
-
-      if ( StrCmp( argument, "clear" ) )
-        tarea->ResetMessage = CopyString( argument );
-
+      if ( !StrCmp( argument, "clear" ) )
+        {
+          tarea->ResetMessage.erase();
+        }
+      else
+        {
+          tarea->ResetMessage = argument;
+        }
+      
       ch->Echo( "Done.\r\n" );
       return;
-    } /* Rennard */
+    }
 
   if ( !StrCmp( arg2, "resetfreq" ) )
     {
@@ -229,20 +230,20 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "flags" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo( "Usage: aset <filename> flags <flag> [flag]...\r\n" );
           return;
         }
       
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetAreaFlag( arg3 );
 	  
           if ( value < 0 || static_cast<size_t>(value) > MAX_BIT )
             {
-              ch->Echo( "Unknown flag: %s\r\n", arg3 );
+              ch->Echo( "Unknown flag: %s\r\n", arg3.c_str() );
             }
           else
             {

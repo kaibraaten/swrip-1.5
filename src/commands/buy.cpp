@@ -9,14 +9,14 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 
-void do_buy( Character *ch, char *argument )
+void do_buy( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   int maxgold = 0;
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Buy what?\r\n" );
       return;
@@ -80,17 +80,14 @@ void do_buy( Character *ch, char *argument )
 
       argument = OneArgument( argument, arg );
 
-      if ( !IsNullOrEmpty( arg ) )
+      if ( !arg.empty() )
         {
-          sprintf( buf, "%s %s", pet->Name, arg );
-          FreeMemory( pet->Name );
-          pet->Name = CopyString( buf );
+          pet->Name += " " + arg;
         }
 
       sprintf( buf, "%sA neck tag says 'I belong to %s'.\r\n",
-               pet->Description, ch->Name );
-      FreeMemory( pet->Description );
-      pet->Description = CopyString( buf );
+               pet->Description.c_str(), ch->Name.c_str() );
+      pet->Description = buf;
 
       if( ch->PCData )
         ch->PCData->Pet = pet;
@@ -103,9 +100,9 @@ void do_buy( Character *ch, char *argument )
     }
   else
     {
-      Character *keeper;
-      Object *obj;
-      int cost;
+      Character *keeper = nullptr;
+      Object *obj = nullptr;
+      int cost = 0;
       int noi = 1;              /* Number of items */
       short mnoi = 20;  /* Max number of items to be bought at once */
 
@@ -119,8 +116,9 @@ void do_buy( Character *ch, char *argument )
 
       if ( IsNumber( arg ) )
         {
-          noi = atoi( arg );
+          noi = std::stoi( arg );
           argument = OneArgument( argument, arg );
+
           if ( noi > mnoi )
             {
               Act( AT_TELL, "$n tells you 'I don't sell that many items at"
@@ -134,11 +132,9 @@ void do_buy( Character *ch, char *argument )
 
       if ( !obj && arg[0] == '#' )
         {
-          int onum, oref;
+          int onum = 0;
           bool ofound = false;
-
-          onum =0;
-          oref = atoi(arg+1);
+          int oref = std::stoi(arg.substr(1));
 
           for(Object *iter : Reverse(keeper->Objects()))
             {
@@ -168,11 +164,10 @@ void do_buy( Character *ch, char *argument )
           return;
         }
 
-      cost = ( GetObjectCost( ch, keeper, obj, true ) * noi );
+      cost = GetObjectCost( ch, keeper, obj, true ) * noi;
 
       if (keeper->Home != NULL && obj->Cost > 0)
         cost= obj->Cost;
-
 
       if ( cost <= 0 || !CanSeeObject( ch, obj ) )
 	{
@@ -225,19 +220,21 @@ void do_buy( Character *ch, char *argument )
         {
           if ( !IS_OBJ_STAT( obj, ITEM_INVENTORY ) || ( keeper->Home != NULL ) )
             SeparateOneObjectFromGroup( obj );
+
           Act( AT_ACTION, "$n buys $p.", ch, obj, NULL, TO_ROOM );
           Act( AT_ACTION, "You buy $p.", ch, obj, NULL, TO_CHAR );
         }
       else
         {
-          sprintf( arg, "$n buys %d $p%s.", noi,
-                   ( obj->ShortDescr[strlen(obj->ShortDescr)-1] == 's'
+          char buf[MAX_STRING_LENGTH];
+          sprintf( buf, "$n buys %d $p%s.", noi,
+                   ( obj->ShortDescr[obj->ShortDescr.size() - 1] == 's'
                      ? "" : "s" ) );
-          Act( AT_ACTION, arg, ch, obj, NULL, TO_ROOM );
-          sprintf( arg, "You buy %d $p%s.", noi,
-                   ( obj->ShortDescr[strlen(obj->ShortDescr)-1] == 's'
+          Act( AT_ACTION, buf, ch, obj, NULL, TO_ROOM );
+          sprintf( buf, "You buy %d $p%s.", noi,
+                   ( obj->ShortDescr[obj->ShortDescr.size() - 1] == 's'
                      ? "" : "s" ) );
-          Act( AT_ACTION, arg, ch, obj, NULL, TO_CHAR );
+          Act( AT_ACTION, buf, ch, obj, NULL, TO_CHAR );
           Act( AT_ACTION, "$N puts them into a bag and hands it to you.",
                ch, NULL, keeper, TO_CHAR );
         }
@@ -245,18 +242,16 @@ void do_buy( Character *ch, char *argument )
       ch->Gold     -= cost;
       keeper->Gold += cost;
 
-      if ( ( keeper->Gold > maxgold ) && (keeper->Owner == NULL ))
+      if ( keeper->Gold > maxgold && keeper->Owner.empty() )
         {
           BoostEconomy( keeper->InRoom->Area, keeper->Gold - maxgold/2 );
-          keeper->Gold = maxgold/2;
+          keeper->Gold = maxgold / 2;
           Act( AT_ACTION, "$n puts some credits into a large safe.", keeper, NULL, NULL, TO_ROOM );
         }
 
       if ( IS_OBJ_STAT( obj, ITEM_INVENTORY ) && ( keeper->Home == NULL ) )
         {
-          Object *buy_obj, *bag;
-
-          buy_obj = CreateObject( obj->Prototype, obj->Level );
+          Object *buy_obj = CreateObject( obj->Prototype, obj->Level );
 
           /*
            * Due to grouped objects and carry limitations in SMAUG
@@ -266,7 +261,7 @@ void do_buy( Character *ch, char *argument )
            */
           if ( noi > 1 )
 	    {
-              bag = CreateObject( GetProtoObject( OBJ_VNUM_SHOPPING_BAG ), 1 );
+              Object *bag = CreateObject( GetProtoObject( OBJ_VNUM_SHOPPING_BAG ), 1 );
               /* perfect size bag ;) */
               bag->Value[0] = bag->Weight + (buy_obj->Weight * noi);
               buy_obj->Count = noi;
@@ -283,9 +278,11 @@ void do_buy( Character *ch, char *argument )
                 }
             }
           else
-            ObjectToCharacter( buy_obj, ch );
-
-          /* vendor snippit. Forces vendor to save after anyone buys anything*/
+            {
+              ObjectToCharacter( buy_obj, ch );
+            }
+          
+          /* vendor snippet. Forces vendor to save after anyone buys anything*/
           if (  keeper->Home != NULL )
             {
               SaveVendor (keeper);
@@ -308,4 +305,3 @@ void do_buy( Character *ch, char *argument )
       return;
     }
 }
-

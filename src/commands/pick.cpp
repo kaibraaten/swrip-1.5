@@ -7,9 +7,8 @@
 #include "object.hpp"
 #include "descriptor.hpp"
 
-void do_pick( Character *ch, char *argument )
+void do_pick( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Object *obj = NULL;
   Exit *pexit = NULL;
   Ship *ship = NULL;
@@ -20,9 +19,7 @@ void do_pick( Character *ch, char *argument )
       return;
     }
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Pick what?\r\n");
       return;
@@ -55,7 +52,7 @@ void do_pick( Character *ch, char *argument )
     {
       /* 'pick door' */
       /*        Room *to_room; */ /* Unused */
-      Exit *pexit_rev;
+      Exit *pexit_rev = nullptr;
 
       if ( !IsBitSet(pexit->Flags, EX_CLOSED) )
         {
@@ -92,14 +89,17 @@ void do_pick( Character *ch, char *argument )
 
       RemoveBit(pexit->Flags, EX_LOCKED);
       ch->Echo("*Click*\r\n");
-      Act( AT_ACTION, "$n picks the $d.", ch, NULL, pexit->Keyword, TO_ROOM );
+      Act( AT_ACTION, "$n picks the $d.",
+           ch, NULL, pexit->Keyword.c_str(), TO_ROOM );
       LearnFromSuccess( ch, gsn_pick_lock );
+
       /* pick the other side */
       if ( ( pexit_rev = pexit->ReverseExit ) != NULL
-           &&   pexit_rev->ToRoom == ch->InRoom )
+           && pexit_rev->ToRoom == ch->InRoom )
         {
           RemoveBit( pexit_rev->Flags, EX_LOCKED );
         }
+
       CheckRoomForTraps( ch, TRAP_PICK | TrapDoor[pexit->Direction] );
       return;
     }
@@ -112,25 +112,25 @@ void do_pick( Character *ch, char *argument )
           return;
         }
       
-      if ( !IsBitSet(obj->Value[1], CONT_CLOSED) )
+      if ( !IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           ch->Echo("It's not closed.\r\n");
           return;
         }
       
-      if ( obj->Value[2] < 0 )
+      if ( obj->Value[OVAL_CONTAINER_KEY] < 0 )
         {
           ch->Echo("It can't be unlocked.\r\n");
           return;
         }
       
-      if ( !IsBitSet(obj->Value[1], CONT_LOCKED) )
+      if ( !IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_LOCKED) )
         {
           ch->Echo("It's already unlocked.\r\n");
           return;
         }
       
-      if ( IsBitSet(obj->Value[1], CONT_PICKPROOF) )
+      if ( IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_PICKPROOF) )
         {
           ch->Echo("You failed.\r\n");
           LearnFromFailure( ch, gsn_pick_lock );
@@ -146,7 +146,7 @@ void do_pick( Character *ch, char *argument )
         }
 
       SeparateOneObjectFromGroup( obj );
-      RemoveBit(obj->Value[1], CONT_LOCKED);
+      RemoveBit(obj->Value[OVAL_CONTAINER_FLAGS], CONT_LOCKED);
       ch->Echo("*Click*\r\n");
       Act( AT_ACTION, "$n picks $p.", ch, obj, NULL, TO_ROOM );
       LearnFromSuccess( ch, gsn_pick_lock );
@@ -217,9 +217,12 @@ void do_pick( Character *ch, char *argument )
       if ( !ship->HatchOpen)
         {
           ship->HatchOpen = true;
-          Act( AT_PLAIN, "You pick the lock and open the hatch on $T.", ch, NULL, ship->Name, TO_CHAR );
-          Act( AT_PLAIN, "$n picks open the hatch on $T.", ch, NULL, ship->Name, TO_ROOM );
-          EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Entrance) , "The hatch opens from the outside." );
+          Act( AT_PLAIN, "You pick the lock and open the hatch on $T.",
+               ch, NULL, ship->Name.c_str(), TO_CHAR );
+          Act( AT_PLAIN, "$n picks open the hatch on $T.",
+               ch, NULL, ship->Name.c_str(), TO_ROOM );
+          EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Entrance),
+                      "The hatch opens from the outside." );
           LearnFromSuccess( ch, gsn_pickshiplock );
 
           if ( !ship->Alarm )
@@ -256,12 +259,14 @@ void do_pick( Character *ch, char *argument )
               if ( d->ConnectionState == CON_EDITING )
                 continue;
 
-              victim->Echo("&R[alarm] %s has been picked!\r\n",ship->Name);
+              victim->Echo("&R[Alarm] %s has been picked!\r\n",
+                           ship->Name.c_str());
             }
         }
+
       return;
     }
 
-  ch->Echo("You see no %s here.\r\n", arg );
+  ch->Echo("You see no %s here.\r\n", arg.c_str() );
 }
 

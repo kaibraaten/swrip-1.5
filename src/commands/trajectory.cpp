@@ -6,11 +6,11 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_trajectory( Character *ch, char *argument )
+void do_trajectory( Character *ch, std::string argument )
 {
-  char  buf[MAX_STRING_LENGTH];
-  char  arg2[MAX_INPUT_LENGTH];
-  char  arg3[MAX_INPUT_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
+  std::string arg2;
+  std::string arg3;
   int the_chance = 0;
   Vector3 argvec;
   Ship *ship = NULL;
@@ -29,19 +29,19 @@ void do_trajectory( Character *ch, char *argument )
 
   if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
-      ch->Echo("&RYour not in the pilots seat.\r\n");
+      ch->Echo("&RYou're not in the pilot's seat.\r\n");
       return;
     }
 
   if ( IsShipAutoflying(ship))
     {
-      ch->Echo("&RYou'll have to turn off the ships autopilot first.\r\n");
+      ch->Echo("&RYou'll have to turn off the ship's autopilot first.\r\n");
       return;
     }
 
   if (IsShipDisabled( ship ))
     {
-      ch->Echo("&RThe ships drive is disabled. Unable to manuever.\r\n");
+      ch->Echo("&RThe ship's drive is disabled. Unable to maneuver.\r\n");
       return;
     }
 
@@ -71,7 +71,7 @@ void do_trajectory( Character *ch, char *argument )
 
   if (ship->State != SHIP_READY && ship->State != SHIP_TRACTORED)
     {
-      ch->Echo("&RPlease wait until the ship has finished its current manouver.\r\n");
+      ch->Echo("&RPlease wait until the ship has finished its current maneuver.\r\n");
       return;
     }
 
@@ -94,14 +94,17 @@ void do_trajectory( Character *ch, char *argument )
   if ( ship->Class == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? 0
       : (int) (ch->PCData->Learned[gsn_capitalships]);
+
   if ( GetRandomPercent() > the_chance )
     {
       ch->Echo("&RYou fail to work the controls properly.\r\n");
 
       if ( ship->Class == FIGHTER_SHIP )
         LearnFromFailure( ch, gsn_starfighters );
+
       if ( ship->Class == MIDSIZE_SHIP )
         LearnFromFailure( ch, gsn_midships );
+
       if ( ship->Class == CAPITAL_SHIP )
         LearnFromFailure( ch, gsn_capitalships );
 
@@ -112,14 +115,14 @@ void do_trajectory( Character *ch, char *argument )
   argument = OneArgument( argument, arg3 );
   InitializeVector( &argvec );
 
-  if( !IsNullOrEmpty( arg2 ) )
-    argvec.x = atof( arg2 );
+  if( !arg2.empty() )
+    argvec.x = std::stod( arg2 );
 
-  if( !IsNullOrEmpty( arg3 ) )
-    argvec.y = atof( arg3 );
+  if( !arg3.empty() )
+    argvec.y = std::stod( arg3 );
 
-  if( !IsNullOrEmpty( argument ) )
-    argvec.z = atof( argument );
+  if( !argument.empty() )
+    argvec.z = std::stod( argument );
   else if ( argvec.x != ship->Position.x && argvec.y != ship->Position.y )
     argvec.z = 0;
   else
@@ -129,12 +132,13 @@ void do_trajectory( Character *ch, char *argument )
   ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
 
   ch ->Echo("&GNew course set, approaching %.0f %.0f %.0f.\r\n",
-	argvec.x, argvec.y, argvec.z );
-  Act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
+            argvec.x, argvec.y, argvec.z );
+  Act( AT_PLAIN, "$n manipulates the ships controls.",
+       ch, NULL, argument.c_str(), TO_ROOM );
 
   EchoToCockpit( AT_YELLOW ,ship, "The ship begins to turn.\r\n" );
-  sprintf( buf, "%s turns altering its present course." , ship->Name );
-  EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
+  sprintf( buf, "%s turns altering its present course.", ship->Name.c_str() );
+  EchoToNearbyShips( AT_ORANGE, ship, buf, NULL );
 
   if ( ship->Class == FIGHTER_SHIP
        || ( ship->Class == MIDSIZE_SHIP && ship->Thrusters.Maneuver > 50 ) )
@@ -154,4 +158,3 @@ void do_trajectory( Character *ch, char *argument )
   if ( ship->Class == CAPITAL_SHIP )
     LearnFromSuccess( ch, gsn_capitalships );
 }
-

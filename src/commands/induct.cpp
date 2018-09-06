@@ -3,9 +3,9 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 
-void do_induct( Character *ch, char *argument )
+void do_induct( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   Character *victim = NULL;
   Clan *clan = NULL;
 
@@ -17,7 +17,7 @@ void do_induct( Character *ch, char *argument )
 
   clan = ch->PCData->ClanInfo.Clan;
 
-  if ( (ch->PCData && ch->PCData->Bestowments
+  if ( (ch->PCData
         && IsName("induct", ch->PCData->Bestowments))
        || !StrCmp( ch->Name, clan->Leadership.Leader  )
        || !StrCmp( ch->Name, clan->Leadership.Number1 )
@@ -33,7 +33,7 @@ void do_induct( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Induct whom?\r\n");
       return;
@@ -84,13 +84,12 @@ void do_induct( Character *ch, char *argument )
     }
 
   victim->PCData->ClanInfo.Clan = clan;
-  FreeMemory(victim->PCData->ClanInfo.ClanName);
-  victim->PCData->ClanInfo.ClanName = CopyString( clan->Name );
+  victim->PCData->ClanInfo.ClanName = clan->Name;
   UpdateClanMember( victim );
 
-  Act( AT_MAGIC, "You induct $N into $t", ch, clan->Name, victim, TO_CHAR );
-  Act( AT_MAGIC, "$n inducts $N into $t", ch, clan->Name, victim, TO_NOTVICT );
-  Act( AT_MAGIC, "$n inducts you into $t", ch, clan->Name, victim, TO_VICT );
+  Act( AT_MAGIC, "You induct $N into $t", ch, clan->Name.c_str(), victim, TO_CHAR );
+  Act( AT_MAGIC, "$n inducts $N into $t", ch, clan->Name.c_str(), victim, TO_NOTVICT );
+  Act( AT_MAGIC, "$n inducts you into $t", ch, clan->Name.c_str(), victim, TO_VICT );
   SaveCharacter( victim );
 }
 

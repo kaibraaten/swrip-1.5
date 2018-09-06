@@ -7,31 +7,27 @@
 /*
  * Based on last time modified, show when a player was last on  -Thoric
  */
-void do_last( Character *ch, char *argument )
+void do_last( Character *ch, std::string arg )
 {
   char buf[MAX_STRING_LENGTH];
-  char arg[MAX_INPUT_LENGTH];
-  char name[MAX_INPUT_LENGTH];
   struct stat fst;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Usage: last <playername>\r\n");
       return;
     }
 
-  strcpy( name, Capitalize(arg) );
-  sprintf( buf, "%s%c/%s", PLAYER_DIR, tolower(arg[0]), name );
+  std::string name = Capitalize(ToLower(arg));
+  sprintf( buf, "%s%c/%s", PLAYER_DIR, tolower(arg[0]), name.c_str() );
 
   if ( stat( buf, &fst ) != -1 )
     {
-      ch->Echo("%s was last on: %s\r", name, ctime( &fst.st_mtime ) );
+      ch->Echo("%s was last on: %s\r", name.c_str(), ctime( &fst.st_mtime ) );
     }
   else
     {
-      ch->Echo("%s was not found.\r\n", name );
+      ch->Echo("%s was not found.\r\n", name.c_str() );
     }
 }
 

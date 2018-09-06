@@ -2,15 +2,14 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 
-void do_bestow( Character *ch, char *argument )
+void do_bestow( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
+  std::string arg;
   Character *victim = NULL;
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Bestow whom with what?\r\n" );
       return;
@@ -34,30 +33,24 @@ void do_bestow( Character *ch, char *argument )
       return;
     }
 
-  if (!victim->PCData->Bestowments)
-    victim->PCData->Bestowments = CopyString("");
-
-  if ( IsNullOrEmpty( argument ) || !StrCmp( argument, "list" ) )
+  if ( argument.empty() || !StrCmp( argument, "list" ) )
     {
       ch->Echo( "Current bestowed commands on %s: %s.\r\n",
-                victim->Name, victim->PCData->Bestowments );
+                victim->Name.c_str(), victim->PCData->Bestowments.c_str() );
       return;
     }
 
   if ( !StrCmp( argument, "none" ) )
     {
-      FreeMemory( victim->PCData->Bestowments );
-      victim->PCData->Bestowments = CopyString("");
-      ch->Echo( "Bestowments removed from %s.\r\n", victim->Name );
-      victim->Echo( "%s has removed your bestowed commands.\r\n", ch->Name );
+      victim->PCData->Bestowments.erase();
+      ch->Echo( "Bestowments removed from %s.\r\n", victim->Name.c_str() );
+      victim->Echo( "%s has removed your bestowed commands.\r\n", ch->Name.c_str() );
       return;
     }
 
-  sprintf( buf, "%s %s", victim->PCData->Bestowments, argument );
-  FreeMemory( victim->PCData->Bestowments );
-  victim->PCData->Bestowments = CopyString( buf );
+  victim->PCData->Bestowments += " " + argument;
   victim->Echo( "%s has bestowed on you the command(s): %s\r\n",
-                ch->Name, argument );
+                ch->Name.c_str(), argument.c_str() );
   ch->Echo( "Done.\r\n" );
 }
 

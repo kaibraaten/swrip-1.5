@@ -6,13 +6,9 @@
  * enough to identify the mob and give its basic condition.  It does however,
  * show the MUDprograms which are set.
  */
-void do_mpstat( Character *ch, char *argument )
+void do_mpstat( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("MProg stat whom?\r\n");
       return;
@@ -39,12 +35,12 @@ void do_mpstat( Character *ch, char *argument )
     }
 
   ch->Echo("Name: %s.  Vnum: %d.\r\n",
-             victim->Name, victim->Prototype->Vnum );
+           victim->Name.c_str(), victim->Prototype->Vnum );
 
   ch->Echo("Short description: %s.\r\nLong  description: %s",
-	victim->ShortDescr,
-	!IsNullOrEmpty( victim->LongDescr )
-	? victim->LongDescr : "(none).\r\n" );
+           victim->ShortDescr.c_str(),
+           !victim->LongDescr.empty()
+           ? victim->LongDescr : "(none).\r\n" );
 
   ch->Echo("Hp: %d/%d.  Mana: %d/%d.  Move: %d/%d. \r\n",
              victim->Hit,         victim->MaxHit,

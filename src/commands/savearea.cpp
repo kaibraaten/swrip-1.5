@@ -4,19 +4,19 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_savearea( Character *ch, char *argument )
+void do_savearea( Character *ch, std::string argument )
 {
   Area *tarea = NULL;
   char filename[256];
 
   if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_AVATAR || !ch->PCData
-       ||  ( IsNullOrEmpty( argument ) && !ch->PCData->Build.Area) )
+       ||  ( argument.empty() && !ch->PCData->Build.Area) )
     {
       ch->Echo("You don't have an assigned area to save.\r\n");
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       tarea = ch->PCData->Build.Area;
     }
@@ -59,7 +59,7 @@ void do_savearea( Character *ch, char *argument )
       return;
     }
 
-  sprintf( filename, "%s%s", BUILD_DIR, tarea->Filename );
+  sprintf( filename, "%s%s", BUILD_DIR, tarea->Filename.c_str() );
   FoldArea( tarea, filename, false );
   ch->Echo("Done.\r\n");
 }

@@ -1,4 +1,4 @@
-#include <algorithm>
+#include <utility/algorithms.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
@@ -6,23 +6,20 @@
 /*
  * 'Split' originally by Gnort, God of Chaos.
  */
-void do_split( Character *ch, char *argument )
+void do_split( Character *ch, std::string arg )
 {
   char buf[MAX_STRING_LENGTH];
-  char arg[MAX_INPUT_LENGTH];
   int amount = 0;
   int share = 0;
   int extra = 0;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Split how much?\r\n");
       return;
     }
 
-  amount = atoi( arg );
+  amount = std::stoi( arg );
 
   if ( amount < 0 )
     {
@@ -42,12 +39,11 @@ void do_split( Character *ch, char *argument )
       return;
     }
 
-  int members = count_if(std::begin(ch->InRoom->Characters()),
-                         std::end(ch->InRoom->Characters()),
-                         [ch](auto gch)
-                         {
-                           return IsInSameGroup(gch, ch);
-                         });
+  int members = Count(ch->InRoom->Characters(),
+                      [ch](auto gch)
+                      {
+                        return IsInSameGroup(gch, ch);
+                      });
   
   if (( IsBitSet(ch->Flags, PLR_AUTOGOLD)) && (members < 2))
     {
@@ -88,4 +84,3 @@ void do_split( Character *ch, char *argument )
         }
     }
 }
-

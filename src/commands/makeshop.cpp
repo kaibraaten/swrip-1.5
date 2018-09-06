@@ -3,15 +3,15 @@
 #include "character.hpp"
 #include "protomob.hpp"
 
-void do_makeshop( Character *ch, char *argument )
+void do_makeshop( Character *ch, std::string argument )
 {
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Usage: makeshop <mobvnum>\r\n");
       return;
     }
 
-  vnum_t vnum = atoi( argument );
+  vnum_t vnum = std::stoi( argument );
   ProtoMobile *mob = GetProtoMobile(vnum);
   
   if ( mob == nullptr )
@@ -31,13 +31,14 @@ void do_makeshop( Character *ch, char *argument )
 
   Shop *shop = new Shop();
 
+  shop->Keeper = vnum;
+  shop->ProfitBuy = 120;
+  shop->ProfitSell = 90;
+  shop->BusinessHours.Open = 0;
+  shop->BusinessHours.Close = 23;
+  mob->Shop = shop;
+
   Shops->Add(shop);
-  shop->Keeper  = vnum;
-  shop->ProfitBuy      = 120;
-  shop->ProfitSell     = 90;
-  shop->BusinessHours.Open       = 0;
-  shop->BusinessHours.Close      = 23;
-  mob->Shop            = shop;
   ch->Echo("Done.\r\n");
 }
 

@@ -6,20 +6,16 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 
-void do_poison_weapon( Character *ch, char *argument )
+void do_poison_weapon( Character *ch, std::string arg )
 {
-  char arg[ MAX_INPUT_LENGTH ];
-
   if ( !IsNpc( ch )
        &&  ch->PCData->Learned[gsn_poison_weapon] <= 0  )
     {
-      ch->Echo("What do you think you are, a thief?\r\n");
+      ch->Echo("What do you think you are, a bounty hunter?\r\n");
       return;
     }
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("What are you trying to poison?\r\n");
       return;
@@ -27,7 +23,7 @@ void do_poison_weapon( Character *ch, char *argument )
 
   if ( ch->Fighting )
     {
-      ch->Echo("While you're fighting?  Nice try.\r\n");
+      ch->Echo("While you're fighting? Nice try.\r\n");
       return;
     }
 
@@ -108,7 +104,7 @@ void do_poison_weapon( Character *ch, char *argument )
        && percent > ch->PCData->Learned[gsn_poison_weapon] )
     {
       SetCharacterColor( AT_RED, ch );
-      ch->Echo("You failed and spill some on yourself.  Ouch!\r\n");
+      ch->Echo("You failed and spill some on yourself. Ouch!\r\n");
       SetCharacterColor( AT_GREY, ch );
       InflictDamage( ch, ch, GetAbilityLevel( ch, HUNTING_ABILITY ), gsn_poison_weapon );
       Act(AT_RED, "$n spills the poison all over!", ch, NULL, NULL, TO_ROOM );

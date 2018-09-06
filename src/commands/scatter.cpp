@@ -2,16 +2,14 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_scatter( Character *ch, char *argument )
+void do_scatter( Character *ch, std::string arg )
 {
   Character *victim = nullptr;
-  char arg[MAX_INPUT_LENGTH];
   Room *pRoomIndex = nullptr;
 
   SetCharacterColor( AT_IMMORT, ch );
-  OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Scatter whom?\r\n");
       return;
@@ -53,13 +51,14 @@ void do_scatter( Character *ch, char *argument )
 
   Act( AT_MAGIC, "With the sweep of an arm, $n flings $N to the winds.",
        ch, NULL, victim, TO_NOTVICT );
-  Act( AT_MAGIC, "With the sweep of an arm, $n flings you to the astral winds.", ch, NULL, victim, TO_VICT );
+  Act( AT_MAGIC, "With the sweep of an arm, $n flings you to the astral winds.",
+       ch, NULL, victim, TO_VICT );
   Act( AT_MAGIC, "With the sweep of an arm, you fling $N to the astral winds.",
        ch, NULL, victim, TO_CHAR );
   CharacterFromRoom( victim );
   CharacterToRoom( victim, pRoomIndex );
   victim->Position = POS_RESTING;
-  Act( AT_MAGIC, "$n staggers forth from a sudden gust of wind, and collapses.", victim, NULL, NULL, TO_ROOM );
+  Act( AT_MAGIC, "$n staggers forth from a sudden gust of wind, and collapses.",
+       victim, NULL, NULL, TO_ROOM );
   do_look( victim, "auto" );
 }
-

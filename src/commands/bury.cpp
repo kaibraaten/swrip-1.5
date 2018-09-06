@@ -3,13 +3,9 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_bury( Character *ch, char *argument )
+void do_bury( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "What do you wish to bury?\r\n" );
       return;
@@ -20,10 +16,10 @@ void do_bury( Character *ch, char *argument )
       return;
     }
 
-  bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL);
-  Object *obj = GetObjectInListReverse( ch, arg, ch->InRoom->Objects());
+  bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL );
+  Object *obj = GetObjectInListReverse( ch, arg, ch->InRoom->Objects()) ;
 
-  if ( !obj )
+  if ( obj == nullptr )
     {
       ch->Echo( "You can't find it.\r\n" );
       return;

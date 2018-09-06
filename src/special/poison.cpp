@@ -4,7 +4,7 @@
 
 bool spec_poison( Character *ch )
 {
-  Character *victim;
+  Character *victim = nullptr;
 
   if ( ch->Position != POS_FIGHTING
        || ( victim = GetFightingOpponent( ch ) ) == NULL

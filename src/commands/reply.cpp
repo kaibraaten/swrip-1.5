@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "room.hpp"
 
-void do_reply( Character *ch, char *argument )
+void do_reply( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   Character *victim = NULL;
@@ -47,7 +47,7 @@ void do_reply( Character *ch, char *argument )
       if ( !victim_comlink )
         {
           ch->Echo("%s doesn't seem to have a comlink!\r\n",
-		Capitalize( HeSheIt( victim ) ) );
+                   Capitalize( HeSheIt( victim ) ).c_str() );
           return;
         }
     }
@@ -81,7 +81,7 @@ void do_reply( Character *ch, char *argument )
   if ( !IsNpc (victim) && ( IsBitSet (victim->Flags, PLR_AFK ) ) )
     {
       ch->Echo("That player is afk so %s may not respond.\r\n",
-	    Capitalize( HeSheIt( victim ) ) );
+               Capitalize( HeSheIt( victim ) ).c_str() );
     }
 
   if (victim->InRoom == ch->InRoom )
@@ -89,18 +89,21 @@ void do_reply( Character *ch, char *argument )
       sameroom = true;
     }
 
-  Act( AT_TELL, "(&COutgoing Message&B) $N: '$t'", ch, argument, victim, TO_CHAR );
+  Act( AT_TELL, "(&COutgoing Message&B) $N: '$t'",
+       ch, argument.c_str(), victim, TO_CHAR );
   position = victim->Position;
   victim->Position = POS_STANDING;
 
   if ( CharacterKnowsLanguage( victim, ch->Speaking, ch ) ||
        (IsNpc(ch) && !ch->Speaking) )
     {
-      Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'", ch, argument, victim, TO_VICT );
+      Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'",
+           ch, argument.c_str(), victim, TO_VICT );
     }
   else
     {
-    Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'", ch, Scramble(argument, ch->Speaking), victim, TO_VICT );
+      Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'",
+           ch, Scramble(argument, ch->Speaking).c_str(), victim, TO_VICT );
     }
 
   victim->Position = position;
@@ -109,9 +112,9 @@ void do_reply( Character *ch, char *argument )
   if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf, "%s: %s (reply to) %s.",
-               IsNpc( ch ) ? ch->ShortDescr : ch->Name,
-               argument,
-               IsNpc( victim ) ? victim->ShortDescr : victim->Name );
+               IsNpc( ch ) ? ch->ShortDescr.c_str() : ch->Name.c_str(),
+               argument.c_str(),
+               IsNpc( victim ) ? victim->ShortDescr.c_str() : victim->Name.c_str() );
       AppendToFile( LOG_FILE, buf );
     }
 
@@ -119,7 +122,7 @@ void do_reply( Character *ch, char *argument )
     {
       for(Character *vch : ch->InRoom->Characters())
         {
-          const char *sbuf = argument;
+          std::string sbuf = argument;
 
           if ( vch == ch )
             continue;

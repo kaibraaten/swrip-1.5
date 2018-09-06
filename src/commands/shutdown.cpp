@@ -1,11 +1,11 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "ship.hpp"
 #include "character.hpp"
 
-void do_shutdown( Character *ch, char *argument )
+void do_shutdown( Character *ch, std::string argument )
 {
-  char buf[MAX_STRING_LENGTH] = { '\0' };
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   Character *vch = NULL;
 
   if ( StrCmp( argument, "mud now" ) && StrCmp(argument, "nosave") )
@@ -17,7 +17,7 @@ void do_shutdown( Character *ch, char *argument )
   if ( auction->Item )
     do_auction( ch, "stop");
 
-  sprintf( buf, "Shutdown by %s.", ch->Name );
+  sprintf( buf, "Shutdown by %s.", ch->Name.c_str() );
   AppendFile( ch, SHUTDOWN_FILE, buf );
   strcat( buf, "\r\n" );
   do_echo( ch, buf );
@@ -34,4 +34,3 @@ void do_shutdown( Character *ch, char *argument )
 
   mud_down = true;
 }
-

@@ -9,7 +9,7 @@ struct UserData
 {
   int Race = 0;
   int Sex = 0;
-  char *Name = nullptr;
+  std::string Name;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
@@ -19,7 +19,7 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static void FreeUserData( struct UserData *ud );
 static CraftRecipe *MakeCraftRecipe( void );
 
-void do_makedisguise( Character *ch, char *argument )
+void do_makedisguise( Character *ch, std::string argument )
 {
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
@@ -49,7 +49,7 @@ static CraftRecipe *MakeCraftRecipe( void )
   return recipe;
 }
 
-static int GetSexFromName( const char *sexName )
+static int GetSexFromName( const std::string &sexName )
 {
   int sex = -1;
 
@@ -73,16 +73,14 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 {
   struct UserData *ud = (struct UserData*) userData;
   Character *ch = GetEngineer( args->CraftingSession );
-  char argumentBuf[MAX_INPUT_LENGTH];
-  char *argument = argumentBuf;
-  char sex[MAX_INPUT_LENGTH];
-  char race[MAX_INPUT_LENGTH];
+  std::string argument = args->CommandArguments;
+  std::string sex;
+  std::string race;
 
-  strcpy( argumentBuf, args->CommandArguments );
   argument = OneArgument( argument, sex );
   argument = OneArgument( argument, race );
 
-  if ( IsNullOrEmpty( argument ) || IsNullOrEmpty( sex ) || IsNullOrEmpty( race ) )
+  if ( argument.empty() || sex.empty() || race.empty() )
     {
       ch->Echo("&RUsage: Makedisguise <sex> <race> <name>\r\n&w" );
       args->AbortSession = true;
@@ -102,12 +100,12 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if( ud->Race < 0 )
     {
-      ch->Echo("&R'%s' is not a valid race.&w\r\n", race );
+      ch->Echo("&R'%s' is not a valid race.&w\r\n", race.c_str() );
       args->AbortSession = true;
       return;
     }
 
-  ud->Name = CopyString( argument );
+  ud->Name = argument;
 }
 
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
@@ -119,17 +117,14 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( disguise->WearFlags, ITEM_DISGUISE );
   SetBit( disguise->WearFlags, ITEM_TAKE );
 
-  FreeMemory( disguise->Name );
-  strcpy( buf, ud->Name );
+  strcpy( buf, ud->Name.c_str() );
   strcat( buf, " disguise");
-  disguise->Name = CopyString( buf );
+  disguise->Name = buf;
 
-  strcpy( buf, ud->Name );
-  FreeMemory( disguise->ShortDescr );
-  disguise->ShortDescr = CopyString( buf );
+  strcpy( buf, ud->Name.c_str() );
+  disguise->ShortDescr = buf;
 
-  FreeMemory( disguise->Description );
-  disguise->Description = CopyString( "" );
+  disguise->Description.erase();
 
   disguise->Value[OVAL_DISGUISE_MAX_CONDITION] = INIT_WEAPON_CONDITION;
   disguise->Value[OVAL_DISGUISE_CONDITION] = INIT_WEAPON_CONDITION;
@@ -152,11 +147,6 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 
 static void FreeUserData( struct UserData *ud )
 {
-  if( ud->Name )
-    {
-      FreeMemory( ud->Name );
-    }
-
   delete ud;
 }
 

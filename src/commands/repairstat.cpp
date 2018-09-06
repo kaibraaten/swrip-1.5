@@ -3,19 +3,19 @@
 #include "character.hpp"
 #include "protomob.hpp"
 
-void do_repairstat( Character *ch, char *argument )
+void do_repairstat( Character *ch, std::string argument )
 {
-  RepairShop *repair;
-  ProtoMobile *mob;
-  vnum_t vnum;
+  RepairShop *repair = nullptr;
+  ProtoMobile *mob = nullptr;
+  vnum_t vnum = INVALID_VNUM;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Usage: repairstat <keeper vnum>\r\n");
       return;
     }
 
-  vnum = atoi( argument );
+  vnum = std::stoi( argument );
 
   if ( (mob = GetProtoMobile(vnum)) == NULL )
     {
@@ -31,7 +31,7 @@ void do_repairstat( Character *ch, char *argument )
 
   repair = mob->RepairShop;
 
-  ch->Echo("Keeper: %d  %s\r\n", repair->Keeper, mob->ShortDescr );
+  ch->Echo("Keeper: %d  %s\r\n", repair->Keeper, mob->ShortDescr.c_str() );
   ch->Echo("fix0 [%s]  fix1 [%s]  fix2 [%s]\r\n",
              ObjectTypes[repair->FixType[0]],
              ObjectTypes[repair->FixType[1]],
@@ -43,4 +43,3 @@ void do_repairstat( Character *ch, char *argument )
              repair->BusinessHours.Open,
              repair->BusinessHours.Close );
 }
-

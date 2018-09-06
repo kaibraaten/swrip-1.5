@@ -6,11 +6,8 @@
 #include "shop.hpp"
 #include "systemdata.hpp"
 
-void do_memory( Character *ch, char *argument )
+void do_memory( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-
-  argument = OneArgument( argument, arg );
   ch->Echo("Affects %5d    Areas   %5d\r\n",  top_affect, top_area   );
   ch->Echo("ExtDes  %5d    Exits   %5d\r\n", top_ed,       top_exit   );
   ch->Echo("Helps   %5d    Resets  %5d\r\n", HelpFiles->Count(), top_reset  );
@@ -23,44 +20,5 @@ void do_memory( Character *ch, char *argument )
         SysData.MaxPlayersThisBoot );
   ch->Echo("MaxEver %5d    Topsn   %5d (%d)\r\n", SysData.MaxPlayersEver, TopSN, MAX_SKILL );
   ch->Echo("MaxEver time recorded at:   %s\r\n", SysData.TimeOfMaxPlayersEver );
-
-  if ( !StrCmp( arg, "check" ) )
-    {
-#ifdef HASHSTR
-      ch->Echo(check_hash(argument));
-#else
-      ch->Echo("Hash strings not enabled.\r\n");
-#endif
-      return;
-    }
-
-  if ( !StrCmp( arg, "showhigh" ) )
-    {
-#ifdef HASHSTR
-      show_high_hash( atoi(argument) );
-#else
-      ch->Echo("Hash strings not enabled.\r\n");
-#endif
-      return;
-    }
-
-  if ( !StrCmp( arg, "hash" ) )
-    {
-#ifdef HASHSTR
-      int hash = 0;
-
-      if ( !IsNullOrEmpty( argument ) )
-	hash = atoi(argument);
-      else
-	hash = -1;
-
-      ch->Echo("Hash statistics:\r\n%s", hash_stats() );
-
-      if ( hash != -1 )
-        hash_dump( hash );
-#else
-      ch->Echo("Hash strings not enabled.\r\n");
-#endif
-    }
 }
 

@@ -3,10 +3,10 @@
 #include "character.hpp"
 #include "room.hpp"
 
-void do_drag( Character *ch, char *argument )
+void do_drag( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg2;
   DirectionType exit_dir = DIR_INVALID;
   Character *victim = nullptr;
   Exit *pexit = nullptr;
@@ -19,7 +19,7 @@ void do_drag( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Drag whom?\r\n" );
       return;
@@ -49,7 +49,7 @@ void do_drag( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( arg2 ) )
+  if ( arg2.empty() )
     {
       ch->Echo( "Drag them in which direction?\r\n");
       return;
@@ -70,7 +70,7 @@ void do_drag( Character *ch, char *argument )
     {
       if (!StrCmp( arg2, "in" ))
         {
-          if ( IsNullOrEmpty( argument ) )
+          if ( argument.empty() )
             {
               ch->Echo( "Drag them into what?\r\n" );
               return;
@@ -78,13 +78,15 @@ void do_drag( Character *ch, char *argument )
 
           if ( ( ship = GetShipInRoom( ch->InRoom, argument ) ) == NULL )
             {
-              Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+              Act( AT_PLAIN, "I see no $T here.",
+                   ch, nullptr, argument.c_str(), TO_CHAR );
               return;
             }
 
           if ( IsBitSet( ch->Flags, ACT_MOUNTED ) )
             {
-	      Act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
+	      Act( AT_PLAIN, "You can't go in there riding THAT.", ch,
+                   nullptr, argument.c_str(), TO_CHAR );
               return;
             }
 
@@ -116,23 +118,23 @@ void do_drag( Character *ch, char *argument )
                 }
 
               Act( AT_PLAIN, "$n enters $T.", ch,
-                   NULL, ship->Name , TO_ROOM );
+                   NULL, ship->Name.c_str(), TO_ROOM );
               Act( AT_PLAIN, "You enter $T.", ch,
-                   NULL, ship->Name , TO_CHAR );
+                   NULL, ship->Name.c_str(), TO_CHAR );
               CharacterFromRoom( ch );
               CharacterToRoom( ch , to_room );
               Act( AT_PLAIN, "$n enters the ship.", ch,
-                   NULL, argument , TO_ROOM );
+                   NULL, argument.c_str(), TO_ROOM );
               do_look( ch , "auto" );
 
               Act( AT_PLAIN, "$n enters $T.", victim,
-                   NULL, ship->Name , TO_ROOM );
+                   NULL, ship->Name.c_str(), TO_ROOM );
               Act( AT_PLAIN, "You enter $T.", victim,
-		   NULL, ship->Name , TO_CHAR );
+		   NULL, ship->Name.c_str(), TO_CHAR );
               CharacterFromRoom( victim );
               CharacterToRoom( victim , to_room );
               Act( AT_PLAIN, "$n enters the ship.", victim,
-                   NULL, argument , TO_ROOM );
+                   NULL, argument.c_str(), TO_ROOM );
               do_look( victim , "auto" );
               return;
             }
@@ -155,7 +157,8 @@ void do_drag( Character *ch, char *argument )
 
           if ( IsBitSet( ch->Flags, ACT_MOUNTED ) )
             {
-              Act( AT_PLAIN, "You can't go out there riding THAT.", ch, NULL, argument, TO_CHAR );
+              Act( AT_PLAIN, "You can't go out there riding THAT.",
+                   ch, NULL, argument.c_str(), TO_CHAR );
               return;
             }
 
@@ -179,7 +182,6 @@ void do_drag( Character *ch, char *argument )
 
           if ( ( to_room = GetRoom( ship->Location ) ) != NULL )
             {
-
               if ( to_room->Tunnel > 0 )
                 {
                   int count = to_room->Characters().size();
@@ -198,23 +200,23 @@ void do_drag( Character *ch, char *argument )
                 }
 
               Act( AT_PLAIN, "$n exits the ship.", ch,
-                   NULL, ship->Name , TO_ROOM );
+                   NULL, ship->Name.c_str(), TO_ROOM );
               Act( AT_PLAIN, "You exits the ship.", ch,
-                   NULL, ship->Name , TO_CHAR );
+                   NULL, ship->Name.c_str(), TO_CHAR );
               CharacterFromRoom( ch );
-              CharacterToRoom( ch , to_room );
+              CharacterToRoom( ch, to_room );
               Act( AT_PLAIN, "$n exits $T.", ch,
-                   NULL, ship->Name , TO_ROOM );
+                   NULL, ship->Name.c_str(), TO_ROOM );
               do_look( ch , "auto" );
 
               Act( AT_PLAIN, "$n exits the ship.", victim,
-                   NULL, ship->Name , TO_ROOM );
+                   NULL, ship->Name.c_str(), TO_ROOM );
               Act( AT_PLAIN, "You exits the ship.", victim,
-                   NULL, ship->Name , TO_CHAR );
+                   NULL, ship->Name.c_str(), TO_CHAR );
               CharacterFromRoom( victim );
               CharacterToRoom( victim , to_room );
               Act( AT_PLAIN, "$n exits $T.", victim,
-                   NULL, ship->Name , TO_ROOM );
+                   NULL, ship->Name.c_str(), TO_ROOM );
               do_look( victim , "auto" );
               return;
             }
@@ -273,11 +275,10 @@ void do_drag( Character *ch, char *argument )
         victim->Position = temp;
 
       /* Move ch to the room too.. they are doing dragging - Scryn */
-      MoveCharacter( ch, GetExit(ch->InRoom,exit_dir), 0);
+      MoveCharacter( ch, GetExit(ch->InRoom,exit_dir) );
       SetWaitState(ch, 12);
       return;
     }
 
   ch->Echo("You cannot do that to someone who is standing.\r\n");
 }
-

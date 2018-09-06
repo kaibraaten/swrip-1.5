@@ -3,16 +3,16 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_close( Character *ch, char *argument )
+void do_close( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   Object *obj = NULL;
   Exit *pexit = NULL;
   int door = 0;
 
   OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       do_closehatch( ch, "" );
       return;
@@ -35,8 +35,8 @@ void do_close( Character *ch, char *argument )
 	  return;
 	}
 
-      Act( AT_ACTION, "$n closes the $d.", ch, NULL, pexit->Keyword, TO_ROOM );
-      Act( AT_ACTION, "You close the $d.", ch, NULL, pexit->Keyword, TO_CHAR );
+      Act( AT_ACTION, "$n closes the $d.", ch, NULL, pexit->Keyword.c_str(), TO_ROOM );
+      Act( AT_ACTION, "You close the $d.", ch, NULL, pexit->Keyword.c_str(), TO_CHAR );
 
       /* close the other side */
       if ( ( pexit_rev = pexit->ReverseExit ) != NULL
@@ -47,7 +47,7 @@ void do_close( Character *ch, char *argument )
           for(Character *rch : pexit->ToRoom->Characters())
 	    {
 	      Act( AT_ACTION, "The $d closes.",
-		   rch, NULL, pexit_rev->Keyword, TO_CHAR );
+		   rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR );
 	    }
         }
 
@@ -76,25 +76,25 @@ void do_close( Character *ch, char *argument )
             }
 
           ch->Echo( "%s isn't a container.\r\n",
-                    Capitalize( obj->ShortDescr ) );
+                    Capitalize( obj->ShortDescr ).c_str() );
           return;
         }
 
-      if ( IsBitSet(obj->Value[1], CONT_CLOSED) )
+      if ( IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           ch->Echo( "%s is already closed.\r\n",
-                    Capitalize( obj->ShortDescr ) );
+                    Capitalize( obj->ShortDescr ).c_str() );
           return;
         }
 
-      if ( !IsBitSet(obj->Value[1], CONT_CLOSEABLE) )
+      if ( !IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSEABLE) )
         {
           ch->Echo( "%s cannot be opened or closed.\r\n",
-		     Capitalize( obj->ShortDescr ) );
+		     Capitalize( obj->ShortDescr ).c_str() );
 	  return;
         }
 
-      SetBit(obj->Value[1], CONT_CLOSED);
+      SetBit(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED);
       Act( AT_ACTION, "You close $p.", ch, obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n closes $p.", ch, obj, NULL, TO_ROOM );
       CheckObjectForTrap( ch, obj, TRAP_CLOSE );
@@ -103,10 +103,10 @@ void do_close( Character *ch, char *argument )
 
   if ( !StrCmp( arg , "hatch" ) )
     {
-      do_closehatch( ch , argument );
+      do_closehatch( ch, argument );
       return;
     }
 
-  do_closehatch( ch , arg );
+  do_closehatch( ch, arg );
 }
 

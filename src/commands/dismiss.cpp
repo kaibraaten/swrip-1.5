@@ -1,14 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_dismiss( Character *ch, char *argument )
+void do_dismiss( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Dismiss whom?\r\n" );
       return;

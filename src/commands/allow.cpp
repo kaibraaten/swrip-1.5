@@ -2,21 +2,17 @@
 #include "ban.hpp"
 #include "character.hpp"
 
-void do_allow( Character *ch, char *argument )
+void do_allow( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Remove which site from the ban list?\r\n" );
       return;
     }
 
-  auto ban = Bans->Find([arg](const auto &b)
+  auto ban = Bans->Find([argument](const auto &b)
                         {
-                          return StrCmp(arg, b->Site) == 0;
+                          return StrCmp(argument, b->Site) == 0;
                         });
 
   if (ban != nullptr)

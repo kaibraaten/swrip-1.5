@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_wizlock( Character *ch, char *argument )
+void do_wizlock( Character *ch, std::string argument )
 {
   extern bool wizlock;
   wizlock = !wizlock;
@@ -11,4 +11,3 @@ void do_wizlock( Character *ch, char *argument )
   else
     ch->Echo("Game un-wizlocked.\r\n");
 }
-

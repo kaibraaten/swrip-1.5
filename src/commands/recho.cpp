@@ -1,10 +1,10 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_recho( Character *ch, char *argument )
+void do_recho( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  short color;
+  std::string arg;
+  short color = 0;
 
   if ( IsBitSet(ch->Flags, PLR_NO_EMOTE) )
     {
@@ -12,26 +12,13 @@ void do_recho( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Recho what?\r\n");
       return;
     }
 
   OneArgument( argument, arg );
-
-  if ( !StrCmp( arg, "Thoric" )
-       || !StrCmp( arg, "Dominus" )
-       || !StrCmp( arg, "Circe" )
-       || !StrCmp( arg, "Haus" )
-       || !StrCmp( arg, "Narn" )
-       || !StrCmp( arg, "Scryn" )
-       || !StrCmp( arg, "Blodkai" )
-       || !StrCmp( arg, "Damian" ) )
-    {
-      ch->Echo("I don't think %s would like that!\r\n", arg );
-      return;
-    }
 
   if ( (color = GetColor ( argument )) )
     {
@@ -43,4 +30,3 @@ void do_recho( Character *ch, char *argument )
       EchoToRoom ( AT_IMMORT, ch->InRoom, argument );
     }
 }
-

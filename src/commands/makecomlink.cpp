@@ -7,7 +7,7 @@
 
 struct UserData
 {
-  char *ItemName = nullptr;
+  std::string ItemName;
   int WearLocation = 0;
 };
 
@@ -15,11 +15,11 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
-static void FreeUserData( struct UserData *ud );
+static void FreeUserData( UserData *ud );
 static bool CanUseWearLocation( int wearLocation );
 static CraftRecipe *MakeCraftRecipe( void );
 
-void do_makecomlink( Character *ch, char *argument )
+void do_makecomlink( Character *ch, std::string argument )
 {
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
@@ -35,7 +35,7 @@ void do_makecomlink( Character *ch, char *argument )
 
 static CraftRecipe *MakeCraftRecipe( void )
 {
-  static const struct CraftingMaterial materials[] =
+  static const CraftingMaterial materials[] =
     {
       { ITEM_TOOLKIT,  CRAFTFLAG_NONE },
       { ITEM_OVEN,     CRAFTFLAG_NONE },
@@ -52,18 +52,16 @@ static CraftRecipe *MakeCraftRecipe( void )
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args )
 {
-  struct UserData *ud = (struct UserData*) userData;
+  UserData *ud = (UserData*) userData;
   Character *ch = GetEngineer( args->CraftingSession );
-  char originalArgs[MAX_INPUT_LENGTH];
-  char *argument = originalArgs;
-  char wearLoc[MAX_STRING_LENGTH];
-  char itemName[MAX_STRING_LENGTH];
+  std::string argument = args->CommandArguments;
+  std::string wearLoc;
+  std::string itemName;
 
-  strcpy( argument, args->CommandArguments );
   argument = OneArgument( argument, wearLoc );
-  strcpy( itemName, argument );
+  itemName = argument;
 
-  if ( IsNullOrEmpty( itemName ) )
+  if ( itemName.empty() )
     {
       ch->Echo("&RUsage: Makecomlink <wearloc> <name>\r\n&w" );
       args->AbortSession = true;
@@ -74,7 +72,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if( ud->WearLocation == -1 )
     {
-      ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc );
+      ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc.c_str() );
       args->AbortSession = true;
       return;
     }
@@ -90,13 +88,13 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = CopyString( itemName );
+  ud->ItemName = itemName;
 }
 
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
 {
-  struct UserData *ud = (struct UserData*) userData;
-  char buf[MAX_STRING_LENGTH];
+  UserData *ud = (UserData*) userData;
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   Object *comlink = args->Object;
 
   SetBit( comlink->WearFlags, ITEM_TAKE );
@@ -104,41 +102,33 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 
   comlink->Weight = 1;
 
-  FreeMemory( comlink->Name );
-  strcpy( buf, ud->ItemName );
+  strcpy( buf, ud->ItemName.c_str() );
   strcat( buf, " comlink" );
-  comlink->Name = CopyString( buf );
+  comlink->Name = buf;
 
-  strcpy( buf, ud->ItemName );
-  FreeMemory( comlink->ShortDescr );
-  comlink->ShortDescr = CopyString( buf );
+  strcpy( buf, ud->ItemName.c_str() );
+  comlink->ShortDescr = buf;
 
-  FreeMemory( comlink->Description );
   strcat( buf, " was left here." );
-  comlink->Description = CopyString( Capitalize( buf ) );
+  comlink->Description = Capitalize( buf );
 
   comlink->Cost = 50;
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
 {
-  struct UserData *ud = (struct UserData*) userData;
+  UserData *ud = (UserData*) userData;
   FreeUserData( ud );
 }
 
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 {
-  struct UserData *ud = (struct UserData*) userData;
+  UserData *ud = (UserData*) userData;
   FreeUserData( ud );
 }
 
-static void FreeUserData( struct UserData *ud )
+static void FreeUserData(UserData *ud )
 {
-  if( ud->ItemName )
-    {
-      FreeMemory( ud->ItemName );
-    }
-
   delete ud;
 }
 

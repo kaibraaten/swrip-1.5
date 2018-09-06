@@ -7,12 +7,12 @@
 #include "character.hpp"
 #include "room.hpp"
 
-void do_collectgold (Character *ch, char *argument)
+void do_collectgold( Character *ch, std::string argument )
 {
   Character *vendor = NULL;
   Character *ch1 = NULL;
   long gold = 0;
-  char name[MAX_INPUT_LENGTH];
+  std::string name;
   struct tm *tms = NULL;
 
   if ( ( vendor = FindKeeper (ch) ) == NULL )
@@ -20,13 +20,13 @@ void do_collectgold (Character *ch, char *argument)
       return;
     }
 
-  if (vendor->Owner == NULL)
+  if ( vendor->Owner.empty() )
     {
       ch->Echo("That's not a vendor!\r\n");
       return;
     }
 
-  sprintf(name, "%s", vendor->Owner);
+  name = vendor->Owner;
 
   if ( (ch1 = GetCharacterInRoom(ch, vendor->Owner)) == NULL )
     {
@@ -34,13 +34,16 @@ void do_collectgold (Character *ch, char *argument)
       return;
     }
 
+  // Given the call to GetCharacterInRoom() above, how could
+  // this expression ever evaluate to true? Need to
+  // investigate this further.
   if ( StrCmp( ch1->Name, vendor->Owner ) )
     {
       ch->Echo("Trying to steal, huh?\r\n");
       tms = localtime(&current_time);
       tms->tm_hour += 24;
       ch->PCData->ReleaseDate = mktime(tms);
-      ch->PCData->HelledBy = CopyString("VendorCheat");
+      ch->PCData->HelledBy = "VendorCheat";
       Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
       CharacterFromRoom(ch);
       CharacterToRoom(ch, GetRoom(ROOM_VNUM_HELL));
@@ -49,21 +52,21 @@ void do_collectgold (Character *ch, char *argument)
       ch->Echo("The immortals are not pleased with your actions.\r\n"
                "You shall remain in hell for 24 Hours.\r\n");
       SaveCharacter(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
-      Log->Info( "%s just tried to abuse the vendor bug!", ch->Name);
+      Log->Info( "%s just tried to abuse the vendor bug!", ch->Name.c_str());
       return;
     }
 
 
   if ( ch != ch1 )
     {
-      Log->Info("collectgold: %s and ch1 = %s\r\n", name, ch1->Name);
+      Log->Info("collectgold: %s and ch1 = %s\r\n", name.c_str(), ch1->Name.c_str());
       ch->Echo("This isn't your vendor!\r\n");
       return;
     }
 
   if ( ch->Fighting)
     {
-      ch->Echo("Not while you're fighting!\r\n",ch);
+      ch->Echo("Not while you're fighting!\r\n");
       return;
     }
 

@@ -2,9 +2,9 @@
 #include "clan.hpp"
 #include "character.hpp"
 
-void do_makeclan( Character *ch, char *argument )
+void do_makeclan( Character *ch, std::string argument )
 {
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Usage: makeclan <clan name>\r\n");
       return;
@@ -17,16 +17,7 @@ void do_makeclan( Character *ch, char *argument )
     }
 
   Clan *clan = AllocateClan();
+  clan->Name = argument;
   Clans->Add(clan);
-
-  clan->Name               = CopyString( argument );
-  clan->Description        = CopyString( "" );
-  clan->Leadership.Leader  = CopyString( "" );
-  clan->Leadership.Number1 = CopyString( "" );
-  clan->Leadership.Number2 = CopyString( "" );
-  clan->tmpstr             = CopyString( "" );
-
   Clans->Save( clan );
 }
-
-

@@ -132,7 +132,7 @@ Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
 
 static bool LandingSiteIsBlank( const LandingSite *site )
 {
-  return IsNullOrEmpty( site->LocationName ) && site->Dock == INVALID_VNUM;
+  return site->LocationName.empty() && site->Dock == INVALID_VNUM;
 }
 
 static void PushOneSite( lua_State *L, const LandingSite *site, int idx )
@@ -204,10 +204,10 @@ static void PushSpaceobject( lua_State *L, const void *userData )
   lua_setglobal( L, "spaceobject" );
 }
 
-const char *GetSpaceobjectFilename( const Spaceobject *spaceobject )
+std::string GetSpaceobjectFilename( const Spaceobject *spaceobject )
 {
-  static char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s", SPACE_DIR, ConvertToLuaFilename( spaceobject->Name ) );
+  char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", SPACE_DIR, ConvertToLuaFilename( spaceobject->Name ).c_str() );
   return fullPath;
 }
 
@@ -220,7 +220,7 @@ static void LoadLandingSite( lua_State *L, LandingSite *site )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      site->LocationName = CopyString( lua_tostring( L, idx ) );
+      site->LocationName = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -239,7 +239,6 @@ static void LoadLandingSite( lua_State *L, LandingSite *site )
 static void LoadLandingSites( lua_State *L, Spaceobject *spaceobj )
 {
   int idx = lua_gettop( L );
-  size_t n = 0;
 
   lua_getfield( L, idx, "LandingSites" );
 
@@ -253,16 +252,6 @@ static void LoadLandingSites( lua_State *L, Spaceobject *spaceobj )
 	  LoadLandingSite( L, &spaceobj->LandingSites[subscript] );
           lua_pop( L, 1 );
         }
-    }
-
-  for( n = 0; n < MAX_LANDINGSITE; ++n )
-    {
-      LandingSite *site = &spaceobj->LandingSites[n];
-
-      if( !site->LocationName )
-	{
-	  site->LocationName = CopyString( "" );
-	}
     }
 
   lua_pop( L, 1 );
@@ -288,7 +277,7 @@ static int L_SpaceobjectEntry( lua_State *L )
   if( !lua_isnil( L, ++idx ) )
     {
       spaceobj = new Spaceobject();
-      spaceobj->Name = CopyString( lua_tostring( L, idx ) );
+      spaceobj->Name = lua_tostring( L, idx );
     }
   else
     {
@@ -305,7 +294,7 @@ static int L_SpaceobjectEntry( lua_State *L )
       if( !spaceobj->Planet )
 	{
 	  Log->Bug( "%s: Unknown planet name '%s' for spaceobject %s.",
-	       __FUNCTION__, planetName, spaceobj->Name );
+	       __FUNCTION__, planetName.c_str(), spaceobj->Name.c_str() );
 	}
     }
 

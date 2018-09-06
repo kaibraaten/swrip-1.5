@@ -5,7 +5,7 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_list( Character *ch, char *argument )
+void do_list( Character *ch, std::string argument )
 {
   if ( IsBitSet(ch->InRoom->Flags, ROOM_PET_SHOP) )
     {
@@ -29,10 +29,11 @@ void do_list( Character *ch, char *argument )
                   found = true;
                   ch->Echo("Pets for sale:\r\n");
                 }
-       ch->Echo("[%2d] %8d - %s\r\n",
-                         pet->TopLevel,
-                         10 * pet->TopLevel * pet->TopLevel,
-                         pet->ShortDescr );
+
+              ch->Echo("[%2d] %8d - %s\r\n",
+                       pet->TopLevel,
+                       10 * pet->TopLevel * pet->TopLevel,
+                       pet->ShortDescr.c_str() );
             }
         }
 
@@ -45,18 +46,16 @@ void do_list( Character *ch, char *argument )
     }
   else
     {
-      char arg[MAX_INPUT_LENGTH];
-      Character *keeper;
-      int cost;
+      std::string arg;
+      Character *keeper = nullptr;
+      int cost = 0;
       int oref = 0;
-      bool found;
+      bool found = false;
 
       OneArgument( argument, arg );
 
       if ( ( keeper = FindKeeper( ch ) ) == NULL )
         return;
-
-      found = false;
 
       for(const Object *obj : keeper->Objects())
         {
@@ -66,7 +65,7 @@ void do_list( Character *ch, char *argument )
               oref++;
 
               if ( ( cost = GetObjectCost( ch, keeper, obj, true ) ) > 0
-                   && ( IsNullOrEmpty( arg ) || NiftyIsName( arg, obj->Name ) ) )
+                   && ( arg.empty() || NiftyIsName( arg, obj->Name ) ) )
                 {
                   if (keeper->Home != NULL)
                     cost = obj->Cost;
@@ -90,7 +89,7 @@ void do_list( Character *ch, char *argument )
 
       if ( !found )
         {
-          if ( IsNullOrEmpty( arg ) )
+          if ( arg.empty() )
             ch->Echo("You can't buy anything here.\r\n");
           else
             ch->Echo("You can't buy that here.\r\n");
@@ -99,5 +98,3 @@ void do_list( Character *ch, char *argument )
       return;
     }
 }
-
-

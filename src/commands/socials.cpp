@@ -2,7 +2,7 @@
 #include "social.hpp"
 #include "character.hpp"
 
-void do_socials( Character *ch, char *argument )
+void do_socials( Character *ch, std::string argument )
 {
   const int NUMBER_OF_COLUMNS = 6;
   int col = 0;
@@ -11,7 +11,7 @@ void do_socials( Character *ch, char *argument )
 
   for(const Social *social : Socials->Entities())
     {
-      ch->Echo("%-12s", social->Name );
+      ch->Echo("%-12s", social->Name.c_str() );
       
       if ( ++col % NUMBER_OF_COLUMNS == 0 )
         {
@@ -24,4 +24,3 @@ void do_socials( Character *ch, char *argument )
       ch->Echo("\r\n");
     }
 }
-

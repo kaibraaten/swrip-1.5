@@ -4,13 +4,9 @@
 
 #define RESTORE_INTERVAL 21600
 
-void do_restore( Character *ch, char *argument )
+void do_restore( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Restore whom?\r\n");
       return;
@@ -18,8 +14,8 @@ void do_restore( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "all" ) )
     {
-      Character *vch;
-      Character *vch_next;
+      Character *vch = nullptr;
+      Character *vch_next = nullptr;
 
       if ( !ch->PCData )
         return;
@@ -57,14 +53,14 @@ void do_restore( Character *ch, char *argument )
               vch->Mana = vch->MaxMana;
               vch->Move = vch->MaxMove;
               vch->PCData->Condition[COND_BLOODTHIRST] = (10 + vch->TopLevel);
-              UpdatePosition (vch);
+              UpdatePosition(vch);
               Act( AT_IMMORT, "$n has restored you.", ch, NULL, vch, TO_VICT);
             }
         }
     }
   else
     {
-      Character *victim;
+      Character *victim = nullptr;
 
       if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
         {
@@ -96,4 +92,3 @@ void do_restore( Character *ch, char *argument )
       return;
     }
 }
-

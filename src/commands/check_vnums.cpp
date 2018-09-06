@@ -4,20 +4,20 @@
 #include "character.hpp"
 
 /* Check to make sure range of vnums is free - Scryn 2/27/96 */
-void do_check_vnums( Character *ch, char *argument )
+void do_check_vnums( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   Area *pArea = nullptr;
-  char arg1[MAX_STRING_LENGTH];
-  char arg2[MAX_STRING_LENGTH];
+  std::string arg1;
+  std::string arg2;
   bool room = false, mob = false, obj = false, all = false, area_conflict = false;
   int low_range = 0, high_range = 0;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo("Please specify room, mob, object, or all as your first argument.\r\n");
       return;
@@ -25,13 +25,10 @@ void do_check_vnums( Character *ch, char *argument )
 
   if(!StrCmp(arg1, "room"))
     room = true;
-
   else if(!StrCmp(arg1, "mob"))
     mob = true;
-
   else if(!StrCmp(arg1, "object"))
     obj = true;
-
   else if(!StrCmp(arg1, "all"))
     all = true;
   else
@@ -40,20 +37,20 @@ void do_check_vnums( Character *ch, char *argument )
       return;
     }
 
-  if( IsNullOrEmpty( arg2 ) )
+  if( arg2.empty() )
     {
       ch->Echo("Please specify the low end of the range to be searched.\r\n");
       return;
     }
 
-  if( IsNullOrEmpty( argument ) )
+  if( argument.empty() )
     {
       ch->Echo("Please specify the high end of the range to be searched.\r\n");
       return;
     }
 
-  low_range = atoi(arg2);
-  high_range = atoi(argument);
+  low_range = std::stoi(arg2);
+  high_range = std::stoi(argument);
 
   if (low_range < MIN_VNUM || low_range > MAX_VNUM )
     {
@@ -83,30 +80,31 @@ void do_check_vnums( Character *ch, char *argument )
       do_check_vnums(ch, buf);
       return;
     }
+
   SetCharacterColor( AT_PLAIN, ch );
 
   for ( pArea = FirstASort; pArea; pArea = pArea->NextSort )
     {
       area_conflict = false;
+
       if ( IsBitSet( pArea->Status, AREA_DELETED ) )
         continue;
-      else
-        if (room)
-          {
-            if ( low_range < pArea->VnumRanges.Room.First && pArea->VnumRanges.Room.First < high_range )
-              area_conflict = true;
+      else if (room)
+        {
+          if ( low_range < pArea->VnumRanges.Room.First && pArea->VnumRanges.Room.First < high_range )
+            area_conflict = true;
 
-            if ( low_range < pArea->VnumRanges.Room.Last && pArea->VnumRanges.Room.Last < high_range )
-              area_conflict = true;
+          if ( low_range < pArea->VnumRanges.Room.Last && pArea->VnumRanges.Room.Last < high_range )
+            area_conflict = true;
 
-            if ( ( low_range >= pArea->VnumRanges.Room.First )
-                 && ( low_range <= pArea->VnumRanges.Room.Last ) )
-              area_conflict = true;
+          if ( ( low_range >= pArea->VnumRanges.Room.First )
+               && ( low_range <= pArea->VnumRanges.Room.Last ) )
+            area_conflict = true;
 
-            if ( ( high_range <= pArea->VnumRanges.Room.Last )
-                 && ( high_range >= pArea->VnumRanges.Room.First ) )
-              area_conflict = true;
-          }
+          if ( ( high_range <= pArea->VnumRanges.Room.Last )
+               && ( high_range >= pArea->VnumRanges.Room.First ) )
+            area_conflict = true;
+        }
 
       if (mob)
         {
@@ -115,6 +113,7 @@ void do_check_vnums( Character *ch, char *argument )
 
 	  if ( low_range < pArea->VnumRanges.Mob.Last && pArea->VnumRanges.Mob.Last < high_range )
             area_conflict = true;
+
           if ( ( low_range >= pArea->VnumRanges.Mob.First )
                && ( low_range <= pArea->VnumRanges.Mob.Last ) )
             area_conflict = true;
@@ -144,13 +143,16 @@ void do_check_vnums( Character *ch, char *argument )
       if (area_conflict)
         {
           ch->Echo("Conflict:%-15s| ",
-                   (pArea->Filename ? pArea->Filename : "(invalid)"));
+                   !pArea->Filename.empty() ? pArea->Filename.c_str() : "(invalid)");
+
           if(room)
             sprintf( buf2, "Rooms: %5ld - %-5ld\r\n", pArea->VnumRanges.Room.First,
                      pArea->VnumRanges.Room.Last);
+
           if(mob)
             sprintf( buf2, "Mobs: %5ld - %-5ld\r\n", pArea->VnumRanges.Mob.First,
                      pArea->VnumRanges.Mob.Last);
+
           if(obj)
             sprintf( buf2, "Objects: %5ld - %-5ld\r\n", pArea->VnumRanges.Object.First,
                      pArea->VnumRanges.Object.Last);
@@ -162,25 +164,25 @@ void do_check_vnums( Character *ch, char *argument )
   for ( pArea = FirstBSort; pArea; pArea = pArea->NextSort )
     {
       area_conflict = false;
+
       if ( IsBitSet( pArea->Status, AREA_DELETED ) )
         continue;
-      else
-        if (room)
-          {
-            if ( low_range < pArea->VnumRanges.Room.First && pArea->VnumRanges.Room.First < high_range )
-              area_conflict = true;
+      else if (room)
+        {
+          if ( low_range < pArea->VnumRanges.Room.First && pArea->VnumRanges.Room.First < high_range )
+            area_conflict = true;
 
-            if ( low_range < pArea->VnumRanges.Room.Last && pArea->VnumRanges.Room.Last < high_range )
-              area_conflict = true;
+          if ( low_range < pArea->VnumRanges.Room.Last && pArea->VnumRanges.Room.Last < high_range )
+            area_conflict = true;
 
-            if ( ( low_range >= pArea->VnumRanges.Room.First )
-                 && ( low_range <= pArea->VnumRanges.Room.Last ) )
-              area_conflict = true;
+          if ( ( low_range >= pArea->VnumRanges.Room.First )
+               && ( low_range <= pArea->VnumRanges.Room.Last ) )
+            area_conflict = true;
 
-            if ( ( high_range <= pArea->VnumRanges.Room.Last )
-                 && ( high_range >= pArea->VnumRanges.Room.First ) )
-              area_conflict = true;
-          }
+          if ( ( high_range <= pArea->VnumRanges.Room.Last )
+               && ( high_range >= pArea->VnumRanges.Room.First ) )
+            area_conflict = true;
+        }
 
       if (mob)
         {
@@ -189,6 +191,7 @@ void do_check_vnums( Character *ch, char *argument )
 
           if ( low_range < pArea->VnumRanges.Mob.Last && pArea->VnumRanges.Mob.Last < high_range )
             area_conflict = true;
+
           if ( ( low_range >= pArea->VnumRanges.Mob.First )
                && ( low_range <= pArea->VnumRanges.Mob.Last ) )
             area_conflict = true;
@@ -218,13 +221,16 @@ void do_check_vnums( Character *ch, char *argument )
       if (area_conflict)
         {
           sprintf(buf, "Conflict:%-15s| ",
-                  (pArea->Filename ? pArea->Filename : "(invalid)"));
+                  !pArea->Filename.empty() ? pArea->Filename.c_str() : "(invalid)");
+
           if(room)
             sprintf( buf2, "Rooms: %5ld - %-5ld\r\n", pArea->VnumRanges.Room.First,
                      pArea->VnumRanges.Room.Last);
+
           if(mob)
             sprintf( buf2, "Mobs: %5ld - %-5ld\r\n", pArea->VnumRanges.Mob.First,
                      pArea->VnumRanges.Mob.Last);
+
           if(obj)
             sprintf( buf2, "Objects: %5ld - %-5ld\r\n", pArea->VnumRanges.Object.First,
                      pArea->VnumRanges.Object.Last);

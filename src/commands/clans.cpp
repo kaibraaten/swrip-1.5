@@ -3,7 +3,7 @@
 #include "planet.hpp"
 #include "character.hpp"
 
-void do_clans( Character *ch, char *argument )
+void do_clans( Character *ch, std::string argument )
 {
   int count = 0;
 
@@ -34,7 +34,7 @@ void do_clans( Character *ch, char *argument )
         }
 
       ch->Echo( "--------------------------------------------------------------------------------\r\n");
-      ch->Echo( "&z&WOrganization: &Y%-20s    ", clan->Name);
+      ch->Echo( "&z&WOrganization: &Y%-20s    ", clan->Name.c_str());
       ch->Echo( "&WPlanets: &O%-4d &z&WAvg Pop Support: ",pCount);
 
       if (support < 50)
@@ -55,7 +55,7 @@ void do_clans( Character *ch, char *argument )
           for(const Clan *guild : clan->Subclans())
             {
               ch->Echo( "  &O%-20s %-10s\r\n",
-                        guild->Name, guild->Leadership.Leader );
+                        guild->Name.c_str(), guild->Leadership.Leader.c_str() );
             }
         }
 
@@ -72,4 +72,3 @@ void do_clans( Character *ch, char *argument )
 
   SetCharacterColor( AT_GREY, ch );
 }
-

@@ -4,10 +4,10 @@
 #include "spaceobject.hpp"
 #include "planet.hpp"
 
-void do_setplanet( Character *ch, char *argument )
+void do_setplanet( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
 
   if ( IsNpc( ch ) )
     {
@@ -18,12 +18,12 @@ void do_setplanet( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo("Usage: setplanet <planet> <field> [value]\r\n");
       ch->Echo("\r\nField being one of:\r\n");
-      ch->Echo(" base_value flags\r\n");
-      ch->Echo(" name spaceobject governed_by\r\n");
+      ch->Echo("  base_value flags\r\n");
+      ch->Echo("  name spaceobject governed_by\r\n");
       return;
     }
 
@@ -43,9 +43,8 @@ void do_setplanet( Character *ch, char *argument )
 	  return;
 	}
       
-      unlink( GetPlanetFilename( planet ) );
-      FreeMemory( planet->Name );
-      planet->Name = CopyString( argument );
+      unlink( GetPlanetFilename( planet ).c_str() );
+      planet->Name = argument;
       ch->Echo("Done.\r\n");
       Planets->Save(planet);
       return;
@@ -92,7 +91,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "base_value" ) )
     {
-      planet->BaseValue = atoi( argument );
+      planet->BaseValue = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Planets->Save(planet);
       return;
@@ -100,17 +99,17 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "flags" ) )
     {
-      char farg[MAX_INPUT_LENGTH];
+      std::string farg;
 
       argument = OneArgument( argument, farg);
 
-      if ( IsNullOrEmpty( farg ) )
+      if ( farg.empty() )
         {
           ch->Echo("Possible flags: nocapture\r\n");
           return;
         }
 
-      for ( ; !IsNullOrEmpty( farg ); argument = OneArgument( argument, farg) )
+      for ( ; !farg.empty(); argument = OneArgument( argument, farg) )
 	{
           if ( !StrCmp( farg, "nocapture" ) )
             {
@@ -118,7 +117,7 @@ void do_setplanet( Character *ch, char *argument )
             }
           else
             {
-              ch ->Echo("No such flag: %s\r\n" , farg );
+              ch ->Echo("No such flag: %s\r\n" , farg.c_str() );
             }
         }
 
@@ -129,4 +128,3 @@ void do_setplanet( Character *ch, char *argument )
 
   do_setplanet( ch, "" );
 }
-

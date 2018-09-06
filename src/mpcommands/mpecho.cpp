@@ -3,11 +3,11 @@
 
 /* prints message to room at large. */
 
-void do_mpecho( Character *ch, char *argument )
+void do_mpecho( Character *ch, std::string argument )
 {
-  char       arg1 [MAX_INPUT_LENGTH];
-  short     color;
-  int        mobflags;
+  std::string arg1;
+  short color = 0;
+  int mobflags = 0;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -18,7 +18,7 @@ void do_mpecho( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ProgBug( "Mpecho - called w/o argument", ch );
       return;
@@ -37,4 +37,3 @@ void do_mpecho( Character *ch, char *argument )
 
   ch->Flags = mobflags;
 }
-

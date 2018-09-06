@@ -70,7 +70,7 @@ struct go_struct                /* input record containing object data  */
   const char *s[2];
 };
 
-bool go_eval_str(const char *lval, int op, const char *rval);
+bool go_eval_str(const std::string &lval, int op, const std::string &rval);
 bool go_eval_num(long lval, int op, long rval);
 
 #endif

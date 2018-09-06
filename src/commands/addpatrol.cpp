@@ -5,16 +5,13 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_add_patrol( Character *ch , char *argument )
+void do_add_patrol( Character *ch , std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;
   Clan *clan = NULL;
   
   if ( IsNpc( ch ) || !ch->PCData )
     return;
-
-  strcpy( arg, argument );
 
   switch( ch->SubState )
     {
@@ -43,9 +40,9 @@ void do_add_patrol( Character *ch , char *argument )
         {
           ch->Echo( "&GYou begin making the call for reinforcements.\r\n");
           Act( AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
-               NULL, argument , TO_ROOM );
+               NULL, argument.c_str(), TO_ROOM );
           AddTimerToCharacter( ch, TIMER_CMD_FUN, 1, do_add_patrol, SUB_PAUSE );
-          ch->dest_buf = CopyString(arg);
+          ch->dest_buf = CopyString(argument);
           return;
         }
 
@@ -56,7 +53,7 @@ void do_add_patrol( Character *ch , char *argument )
     case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, (const char*)ch->dest_buf);
+
       FreeMemory( ch->dest_buf);
       break;
 

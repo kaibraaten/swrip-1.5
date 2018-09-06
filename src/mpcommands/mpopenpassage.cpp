@@ -8,15 +8,17 @@
  *
  *  won't mess with existing exits
  */
-void do_mp_open_passage( Character *ch, char *argument )
+void do_mp_open_passage( Character *ch, std::string argument )
 {
-  char arg1[ MAX_INPUT_LENGTH ];
-  char arg2[ MAX_INPUT_LENGTH ];
-  char arg3[ MAX_INPUT_LENGTH ];
-  Room *targetRoom, *fromRoom;
-  int targetRoomVnum, fromRoomVnum;
-  DirectionType exit_num;
-  Exit *pexit;
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
+  Room *targetRoom = nullptr;
+  Room *fromRoom = nullptr;
+  vnum_t targetRoomVnum = INVALID_VNUM;
+  vnum_t fromRoomVnum = INVALID_VNUM;
+  DirectionType exit_num = DIR_INVALID;
+  Exit *pexit = nullptr;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -31,7 +33,7 @@ void do_mp_open_passage( Character *ch, char *argument )
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( arg3 ) )
+  if ( arg1.empty() || arg2.empty() || arg3.empty() )
     {
       ProgBug( "MpOpenPassage - Bad syntax", ch );
       return;
@@ -43,8 +45,9 @@ void do_mp_open_passage( Character *ch, char *argument )
       return;
     }
 
-  fromRoomVnum = atoi(arg1);
-  if(  (fromRoom = GetRoom( fromRoomVnum ) )  ==NULL)
+  fromRoomVnum = std::stoi(arg1);
+
+  if( ( fromRoom = GetRoom( fromRoomVnum ) )  ==NULL)
     {
       ProgBug( "MpOpenPassage - Bad syntax", ch );
       return;
@@ -56,8 +59,9 @@ void do_mp_open_passage( Character *ch, char *argument )
       return;
     }
 
-  targetRoomVnum = atoi(arg2);
-  if(  (targetRoom = GetRoom( targetRoomVnum ) )  ==NULL)
+  targetRoomVnum = std::stoi(arg2);
+
+  if( ( targetRoom = GetRoom( targetRoomVnum ) )  ==NULL)
     {
       ProgBug( "MpOpenPassage - Bad syntax", ch );
       return;
@@ -69,7 +73,7 @@ void do_mp_open_passage( Character *ch, char *argument )
       return;
     }
 
-  exit_num = (DirectionType)atoi(arg3);
+  exit_num = (DirectionType) std::stoi(arg3);
 
   if( exit_num < DIR_NORTH || exit_num > MAX_DIR )
     {
@@ -81,14 +85,12 @@ void do_mp_open_passage( Character *ch, char *argument )
     {
       if( !IsBitSet( pexit->Flags, EX_PASSAGE) )
         return;
+
       ProgBug( "MpOpenPassage - Exit exists", ch );
       return;
     }
 
   pexit = MakeExit( fromRoom, targetRoom, exit_num );
-  pexit->Keyword                = CopyString( "" );
-  pexit->Description            = CopyString( "" );
   pexit->Key                    = -1;
   pexit->Flags              = EX_PASSAGE;
 }
-

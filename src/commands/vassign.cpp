@@ -4,21 +4,21 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 
-void do_vassign( Character *ch, char *argument )
+void do_vassign( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
-  vnum_t r_lo = INVALID_VNUM, r_hi = INVALID_VNUM;
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
   Character *victim = NULL;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
-  r_lo = atoi( arg2 );
-  r_hi = atoi( arg3 );
 
-  if ( IsNullOrEmpty( arg1 ) || r_lo < 0 || r_hi < 0 )
+  vnum_t r_lo = std::stoi( arg2 );
+  vnum_t r_hi = std::stoi( arg3 );
+
+  if ( arg1.empty() || r_lo < 0 || r_hi < 0 )
     {
       ch->Echo("Syntax: vassign <who> <low> <high>\r\n");
       return;
@@ -55,7 +55,7 @@ void do_vassign( Character *ch, char *argument )
   AssignAreaTo( victim );
   ch->Echo("Done.\r\n");
   victim->Echo("%s has assigned you the vnum range %d - %d.\r\n",
-             ch->Name, r_lo, r_hi );
+               ch->Name.c_str(), r_lo, r_hi );
   AssignAreaTo( victim );        /* Put back by Thoric on 02/07/96 */
 
   assert(victim->PCData->Build.Area != nullptr);
@@ -71,4 +71,3 @@ void do_vassign( Character *ch, char *argument )
       RemoveBit( victim->PCData->Build.Area->Status, AREA_DELETED );
     }
 }
-

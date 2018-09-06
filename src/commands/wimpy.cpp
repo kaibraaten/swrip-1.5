@@ -1,17 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_wimpy( Character *ch, char *argument )
+void do_wimpy( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  int wimpy;
+  int wimpy = 0;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     wimpy = (int) ch->MaxHit / 5;
   else
-    wimpy = atoi( arg );
+    wimpy = std::stoi( arg );
 
   if ( wimpy < 0 )
     {
@@ -28,4 +25,3 @@ void do_wimpy( Character *ch, char *argument )
   ch->Wimpy = wimpy;
   ch->Echo("Wimpy set to %d hit points.\r\n", wimpy );
 }
-

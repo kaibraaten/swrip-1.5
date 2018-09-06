@@ -114,7 +114,7 @@ int GetMaxAbilityLevel( const Character *ch, int ability)
 
   if ( IsImmortal(ch) || ch->Race == RACE_GOD )
     {
-      return 200;
+      return MAX_ABILITY_LEVEL;
     }
 
   switch( ability )
@@ -185,7 +185,7 @@ static int GetMaxCombatLevel( const Character *ch )
   level += RaceTable[ch->Race].AbilityMod[COMBAT_ABILITY];
   level += ch->Stats.PermCon + ch->Stats.PermDex + ch->Stats.PermStr;
 
-  return urange( 1, level, 150 );
+  return urange( 1, level, MAX_ABILITY_LEVEL );
 }
 
 static int GetMaxPilotingLevel( const Character *ch )
@@ -213,7 +213,7 @@ static int GetMaxPilotingLevel( const Character *ch )
   level += RaceTable[ch->Race].AbilityMod[PILOTING_ABILITY];
   level += ch->Stats.PermDex * 2;
 
-  return urange( 1, level, 150 );
+  return urange( 1, level, MAX_ABILITY_LEVEL );
 }
 
 static int GetMaxEngineeringLevel( const Character *ch )
@@ -229,7 +229,7 @@ static int GetMaxEngineeringLevel( const Character *ch )
   level += RaceTable[ch->Race].AbilityMod[ENGINEERING_ABILITY];
   level += ch->Stats.PermInt * 2;
 
-  return urange( 1, level, 150 );
+  return urange( 1, level, MAX_ABILITY_LEVEL );
 }
 
 static int GetMaxBountyHuntingLevel( const Character *ch )
@@ -241,7 +241,7 @@ static int GetMaxBountyHuntingLevel( const Character *ch )
 
   level += RaceTable[ch->Race].AbilityMod[HUNTING_ABILITY];
 
-  return urange( 1, level, 150 );
+  return urange( 1, level, MAX_ABILITY_LEVEL );
 }
 
 static int GetMaxSmugglingLevel( const Character *ch )
@@ -263,7 +263,7 @@ static int GetMaxSmugglingLevel( const Character *ch )
   level += RaceTable[ch->Race].AbilityMod[SMUGGLING_ABILITY];
   level += ch->Stats.PermLck * 2;
 
-  return urange( 1, level, 150 );
+  return urange( 1, level, MAX_ABILITY_LEVEL );
 }
 
 static int GetMaxLeadershipLevel( const Character *ch )
@@ -282,7 +282,7 @@ static int GetMaxLeadershipLevel( const Character *ch )
   level += RaceTable[ch->Race].AbilityMod[LEADERSHIP_ABILITY];
   level += ch->Stats.PermWis + ch->Stats.PermCha + ch->Stats.PermInt;
 
-  return urange( 1, level, 150 );
+  return urange( 1, level, MAX_ABILITY_LEVEL );
 }
 
 static int GetMaxDiplomacyLevel( const Character *ch )
@@ -301,7 +301,7 @@ static int GetMaxDiplomacyLevel( const Character *ch )
   level += RaceTable[ch->Race].AbilityMod[DIPLOMACY_ABILITY];
   level += ch->Stats.PermCha * 3;
 
-  return urange( 1, level, 150 );
+  return urange( 1, level, MAX_ABILITY_LEVEL );
 }
 
 static int GetMaxForceLevel( const Character *ch )
@@ -1102,19 +1102,19 @@ static void MobileUpdate( void )
                   switch( NumberBits(2) )
                     {
                     case 0:
-                      sprintf( buf, "Get away from me, %s!", rch->Name );
+                      sprintf( buf, "Get away from me, %s!", rch->Name.c_str() );
                       break;
 
                     case 1:
-                      sprintf( buf, "Leave me be, %s!", rch->Name );
+                      sprintf( buf, "Leave me be, %s!", rch->Name.c_str() );
                       break;
 
                     case 2:
-                      sprintf( buf, "%s is trying to kill me!  Help!", rch->Name );
+                      sprintf( buf, "%s is trying to kill me! Help!", rch->Name.c_str() );
                       break;
 
                     case 3:
-                      sprintf( buf, "Someone save me from %s!", rch->Name );
+                      sprintf( buf, "Someone save me from %s!", rch->Name.c_str() );
                       break;
                     }
 
@@ -1864,8 +1864,8 @@ static void ObjectUpdate( void )
           if ( obj->Timer > 0 && obj->Value[OVAL_CORPSE_DECAY] > timerfrac )
             {
               char buf[MAX_STRING_LENGTH];
-              char name[MAX_STRING_LENGTH];
-              char *bufptr = NULL;
+              std::string name;
+              std::string bufptr;
 
               bufptr = OneArgument( obj->ShortDescr, name );
               bufptr = OneArgument( bufptr, name );
@@ -1877,16 +1877,15 @@ static void ObjectUpdate( void )
               if ( obj->ItemType == ITEM_DROID_CORPSE )
 		{
 		  sprintf( buf, d_corpse_descs[ umin( timerfrac - 1, 4 ) ],
-			   bufptr );
+			   bufptr.c_str() );
 		}
               else
 		{
 		  sprintf( buf, corpse_descs[ umin( timerfrac - 1, 4 ) ],
-			   Capitalize( bufptr ) );
+			   Capitalize( bufptr ).c_str() );
 		}
 
-              FreeMemory( obj->Description );
-              obj->Description = CopyString( buf );
+              obj->Description = buf;
             }
         }
 
@@ -2431,7 +2430,7 @@ static void PerformRandomDrunkBehavior( Character *ch )
 	    }
 	}
 
-      strcpy(name, rvch ? rvch->Name : "");
+      strcpy(name, rvch ? rvch->Name.c_str() : "");
       CheckSocial( ch, "puke", name);
     }
 
@@ -2789,7 +2788,7 @@ void RebootCheck( time_t reset )
       if ( auction->Item )
         {
           sprintf(buf, "Sale of %s has been stopped by mud.",
-                  auction->Item->ShortDescr);
+                  auction->Item->ShortDescr.c_str());
           TalkAuction(buf);
           ObjectToCharacter(auction->Item, auction->Seller);
           auction->Item = NULL;
@@ -2845,16 +2844,16 @@ static void AuctionUpdate( void )
     case 2 : /* going twice */
       if (auction->Bet > auction->Starting)
 	{
-	  sprintf (buf, "%s: going %s for %d.", auction->Item->ShortDescr,
-		   ((auction->Going == 1) ? "once" : "twice"), auction->Bet);
+	  sprintf(buf, "%s: going %s for %d.", auction->Item->ShortDescr.c_str(),
+                  ((auction->Going == 1) ? "once" : "twice"), auction->Bet);
 	}
       else
 	{
-	  sprintf (buf, "%s: going %s (bid not received yet).", auction->Item->ShortDescr,
-		   ((auction->Going == 1) ? "once" : "twice"));
+	  sprintf(buf, "%s: going %s (bid not received yet).", auction->Item->ShortDescr.c_str(),
+                  ((auction->Going == 1) ? "once" : "twice"));
 	}
 
-      TalkAuction (buf);
+      TalkAuction(buf);
       break;
 
     case 3 : /* SOLD! */
@@ -2867,8 +2866,8 @@ static void AuctionUpdate( void )
       if (auction->Bet > 0 && auction->Buyer != auction->Seller)
         {
           sprintf (buf, "%s sold to %s for %d.",
-                   auction->Item->ShortDescr,
-                   IsNpc(auction->Buyer) ? auction->Buyer->ShortDescr : auction->Buyer->Name,
+                   auction->Item->ShortDescr.c_str(),
+                   IsNpc(auction->Buyer) ? auction->Buyer->ShortDescr.c_str() : auction->Buyer->Name.c_str(),
                    auction->Bet);
           TalkAuction(buf);
 
@@ -2907,7 +2906,7 @@ static void AuctionUpdate( void )
       else /* not sold */
         {
           sprintf (buf, "No bids received for %s - object has been removed from auction\r\n.",
-		   auction->Item->ShortDescr);
+		   auction->Item->ShortDescr.c_str());
           TalkAuction(buf);
           Act(AT_ACTION, "The auctioneer appears before you to return $p to you.",
                auction->Seller,auction->Item,NULL,TO_CHAR);

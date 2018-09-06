@@ -3,7 +3,7 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 
-void do_roster( Character *ch, char *argument )
+void do_roster( Character *ch, std::string argument )
 {
   if( IsNpc( ch ) || !IsClanned( ch ) )
     {
@@ -16,8 +16,7 @@ void do_roster( Character *ch, char *argument )
   if( StrCmp(ch->Name, clan->Leadership.Leader )
       && StrCmp(ch->Name, clan->Leadership.Number1 )
       && StrCmp(ch->Name, clan->Leadership.Number2 )
-      && (!ch->PCData->Bestowments
-	  || !IsName("roster", ch->PCData->Bestowments)) )
+      && !IsName("roster", ch->PCData->Bestowments) )
     {
       ch->Echo("Huh?\r\n");
       return;
@@ -25,4 +24,3 @@ void do_roster( Character *ch, char *argument )
 
   ShowClanMembers( ch, clan, argument );
 }
-

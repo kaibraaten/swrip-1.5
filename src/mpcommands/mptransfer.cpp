@@ -6,11 +6,11 @@
 /* lets the mobile transfer people.  the all argument transfers
    everyone in the current room to the specified location */
 
-void do_mptransfer( Character *ch, char *argument )
+void do_mptransfer( Character *ch, std::string argument )
 {
-  char arg1[ MAX_INPUT_LENGTH ];
-  char arg2[ MAX_INPUT_LENGTH ];
-  char buf[MAX_STRING_LENGTH];
+  std::string arg1;
+  std::string arg2;
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   Room *location = nullptr;
   Character *victim = nullptr;
 
@@ -26,7 +26,7 @@ void do_mptransfer( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ProgBug( "Mptransfer - Bad syntax", ch );
       return;
@@ -45,7 +45,7 @@ void do_mptransfer( Character *ch, char *argument )
 
       for(Character *transferee : charactersToTransfer)
         {
-          sprintf( buf, "%s %s", transferee->Name, arg2 );
+          sprintf( buf, "%s %s", transferee->Name.c_str(), arg2.c_str() );
           do_mptransfer( ch, buf );
         }
 
@@ -55,7 +55,7 @@ void do_mptransfer( Character *ch, char *argument )
   /*
    * Thanks to Grodyn for the optional location parameter.
    */
-  if ( IsNullOrEmpty( arg2 ) )
+  if ( arg2.empty() )
     {
       location = ch->InRoom;
     }
@@ -104,4 +104,3 @@ void do_mptransfer( Character *ch, char *argument )
   CharacterFromRoom( victim );
   CharacterToRoom( victim, location );
 }
-

@@ -17,7 +17,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
   ch_ret retcode = rNONE;
 
   ch->Echo("You feel the hatred grow within you!\r\n");
-  ch->Alignment = ch->Alignment - 100;
+  ch->Alignment -= 100;
   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
   ApplySithPenalty( ch );
 
@@ -27,14 +27,14 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  affects = (skill->Affects ? true : false);
+  affects = skill->Affects ? true : false;
 
-  if ( !IsNullOrEmpty( skill->Messages.Success.ToCaster ) )
+  if ( !skill->Messages.Success.ToCaster.empty() )
     {
       Act( AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, NULL, TO_CHAR );
     }
   
-  if ( !IsNullOrEmpty( skill->Messages.Success.ToRoom ) )
+  if ( !skill->Messages.Success.ToRoom.empty() )
     {
       Act( AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, NULL, TO_ROOM );
     }
@@ -58,7 +58,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
               FailedCasting( skill, ch, vch, NULL );
               dam = 0;
             }
-          else if ( skill->Dice )
+          else if ( !skill->Dice.empty() )
             {
               dam = ParseDice(ch, level, skill->Dice);
             }

@@ -4,25 +4,22 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 
-void do_vsearch( Character *ch, char *argument )
+void do_vsearch( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   bool found = false;
   Object *obj = nullptr;
   Object *in_obj = nullptr;
   int obj_counter = 1;
   vnum_t argi = INVALID_VNUM;
 
-  OneArgument( argument, arg );
-
-  if( IsNullOrEmpty( arg ) )
+  if( arg.empty() )
     {
-      ch->Echo("Syntax: vsearch <vnum>.\r\n");
+      ch->Echo("Syntax: vsearch <vnum>\r\n");
       return;
     }
 
   SetCharacterColor( AT_PLAIN, ch );
-  argi = atoi(arg);
+  argi = std::stoi(arg);
 
   if (argi < MIN_VNUM && argi > MAX_VNUM)
     {
@@ -41,15 +38,16 @@ void do_vsearch( Character *ch, char *argument )
             in_obj = in_obj->InObject );
 
       if ( in_obj->CarriedBy != NULL )
- ch->Echo("[%2d] Level %d %s carried by %s.\r\n",
-                      obj_counter,
-                      obj->Level, GetObjectShortDescription(obj),
-                      PERS( in_obj->CarriedBy, ch ) );
+        ch->Echo("[%2d] Level %d %s carried by %s.\r\n",
+                 obj_counter,
+                 obj->Level, GetObjectShortDescription(obj).c_str(),
+                 PERS( in_obj->CarriedBy, ch ).c_str() );
       else
         ch->Echo("[%2d] [%-5d] %s in %s.\r\n", obj_counter,
-                      ( ( in_obj->InRoom ) ? in_obj->InRoom->Vnum : 0 ),
-                      GetObjectShortDescription(obj), ( in_obj->InRoom == NULL ) ?
-                      "somewhere" : in_obj->InRoom->Name );
+                 in_obj->InRoom ? in_obj->InRoom->Vnum : 0,
+                 GetObjectShortDescription(obj).c_str(),
+                 in_obj->InRoom == nullptr ?
+                 "somewhere" : in_obj->InRoom->Name.c_str() );
 
       obj_counter++;
     }
@@ -57,4 +55,3 @@ void do_vsearch( Character *ch, char *argument )
   if ( !found )
     ch->Echo("Nothing like that in hell, earth, or heaven.\r\n" );
 }
-

@@ -2,9 +2,9 @@
 #include "clan.hpp"
 #include "character.hpp"
 
-void do_members( Character *ch, char *argument )
+void do_members( Character *ch, std::string argument )
 {
-  if( IsNullOrEmpty( argument ) )
+  if( argument.empty() )
     {
       ch->Echo("Usage: members <clan name>\r\n" );
       return;
@@ -31,4 +31,3 @@ void do_members( Character *ch, char *argument )
       ch->Echo("&RNo such member list.\r\n" );
     }
 }
-

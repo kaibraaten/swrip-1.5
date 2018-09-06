@@ -5,12 +5,12 @@
 /*
  * Apply a salve/ointment                                       -Thoric
  */
-void do_apply( Character *ch, char *argument )
+void do_apply( Character *ch, std::string argument )
 {
   Object *obj = nullptr;
   ch_ret retcode = rNONE;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Apply what?\r\n" );
       return;
@@ -34,13 +34,15 @@ void do_apply( Character *ch, char *argument )
 
   SeparateOneObjectFromGroup( obj );
 
-  --obj->Value[1];
+  --obj->Value[OVAL_SALVE_DOSES];
+
   if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
     {
-      if ( IsNullOrEmpty( obj->ActionDescription ) )
+      if ( obj->ActionDescription.empty() )
         {
           Act( AT_ACTION, "$n rubs $p onto $s body.",  ch, obj, NULL, TO_ROOM );
-          if ( obj->Value[1] <= 0 )
+
+          if ( obj->Value[OVAL_SALVE_MAX_DOSES] <= 0 )
             Act( AT_ACTION, "You apply the last of $p onto your body.", ch, obj, NULL, TO_CHAR );
           else
             Act( AT_ACTION, "You apply $p onto your body.", ch, obj, NULL, TO_CHAR );
@@ -49,13 +51,15 @@ void do_apply( Character *ch, char *argument )
         ActionDescription( ch, obj, NULL );
     }
 
-  SetWaitState( ch, obj->Value[2] );
-  retcode = CastSpellWithObject( obj->Value[4], obj->Value[0], ch, ch, NULL );
+  SetWaitState( ch, obj->Value[OVAL_SALVE_DELAY] );
+  retcode = CastSpellWithObject( obj->Value[OVAL_SALVE_SPELL1],
+                                 obj->Value[OVAL_SALVE_LEVEL], ch, ch, NULL );
 
   if ( retcode == rNONE )
-    retcode = CastSpellWithObject( obj->Value[5], obj->Value[0], ch, ch, NULL );
+    retcode = CastSpellWithObject( obj->Value[OVAL_SALVE_SPELL2],
+                                   obj->Value[OVAL_SALVE_LEVEL], ch, ch, NULL );
 
-  if ( !IsObjectExtracted(obj) && obj->Value[1] <= 0 )
+  if ( !IsObjectExtracted(obj) && obj->Value[OVAL_SALVE_DOSES] <= 0 )
     ExtractObject( obj );
 }
 

@@ -3,19 +3,19 @@
 #include "character.hpp"
 #include "protomob.hpp"
 
-void do_shopset( Character *ch, char *argument )
+void do_shopset( Character *ch, std::string argument )
 {
-  Shop *shop;
-  ProtoMobile *mob, *mob2;
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  vnum_t vnum;
-  int value;
+  Shop *shop = nullptr;
+  ProtoMobile *mob = nullptr, *mob2 = nullptr;
+  std::string arg1;
+  std::string arg2;
+  vnum_t vnum = INVALID_VNUM;
+  int value = 0;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
+  if ( arg1.empty() || arg2.empty() )
     {
       ch->Echo("Usage: shopset <mob vnum> <field> value\r\n");
       ch->Echo("\r\nField being one of:\r\n");
@@ -23,7 +23,7 @@ void do_shopset( Character *ch, char *argument )
       return;
     }
 
-  vnum = atoi( arg1 );
+  vnum = std::stoi( arg1 );
 
   if ( (mob = GetProtoMobile(vnum)) == NULL )
     {
@@ -41,7 +41,7 @@ void do_shopset( Character *ch, char *argument )
     }
 
   shop = mob->Shop;
-  value = atoi( argument );
+  value = std::stoi( argument );
 
   if ( !StrCmp( arg2, "buy0" ) )
     {
@@ -201,4 +201,3 @@ void do_shopset( Character *ch, char *argument )
 
   do_shopset( ch, "" );
 }
-

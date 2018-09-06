@@ -6,7 +6,7 @@
 
 void show_char_to_char( const std::list<Character*> &list, Character *ch );
 
-void do_scan( Character *ch, char *argument )
+void do_scan( Character *ch, std::string argument )
 {
   Room *was_in_room = NULL;
   Room *to_room = NULL;
@@ -15,7 +15,7 @@ void do_scan( Character *ch, char *argument )
   short dist = 0;
   short max_dist = 5;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Scan in a direction...\r\n");
       return;
@@ -40,15 +40,17 @@ void do_scan( Character *ch, char *argument )
       return;
     }
 
-
   if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
     {
       Act( AT_GREY, "You can't see $t.", ch, GetDirectionName(dir), NULL, TO_CHAR );
       return;
     }
 
-  if ( ch->TopLevel < 50 ) max_dist--;
-  if ( ch->TopLevel < 20 ) max_dist--;
+  if ( ch->TopLevel < 50 )
+    max_dist--;
+
+  if ( ch->TopLevel < 20 )
+    max_dist--;
 
   for ( dist = 1; dist <= max_dist; )
     {
@@ -64,6 +66,7 @@ void do_scan( Character *ch, char *argument )
         }
 
       to_room = NULL;
+
       if ( pexit->Distance > 1 )
         to_room = GenerateExit( ch->InRoom , &pexit );
 
@@ -77,6 +80,7 @@ void do_scan( Character *ch, char *argument )
                GetDirectionName(dir), NULL, TO_CHAR );
 	  break;
         }
+
       CharacterFromRoom( ch );
       CharacterToRoom( ch, to_room );
       SetCharacterColor( AT_RMNAME, ch );
@@ -126,6 +130,7 @@ void do_scan( Character *ch, char *argument )
                "farther $t.", ch, GetDirectionName(dir), NULL, TO_CHAR );
           break;
         }
+
       if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
         {
           Act( AT_GREY, "Your view $t is blocked by a wall.", ch,
@@ -138,4 +143,3 @@ void do_scan( Character *ch, char *argument )
   CharacterToRoom( ch, was_in_room );
   LearnFromSuccess( ch, gsn_scan );
 }
-

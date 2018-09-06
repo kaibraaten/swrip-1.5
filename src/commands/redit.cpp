@@ -8,19 +8,20 @@
 #include "log.hpp"
 #include "room.hpp"
 
-void do_redit( Character *ch, char *argument )
+void do_redit( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg2;
+  std::string arg3;
   char buf[MAX_STRING_LENGTH];
-  Room *location = NULL, *tmp = NULL;
+  Room *location = NULL;
+  Room *tmp = NULL;
   ExtraDescription *ed = NULL;
   Exit *xit = NULL, *texit = NULL;
   int value = 0;
   DirectionType edir = DIR_INVALID;
   vnum_t evnum = INVALID_VNUM;
-  char *origarg = argument;
+  std::string origarg = argument;
 
   if ( !ch->Desc )
     {
@@ -42,7 +43,6 @@ void do_redit( Character *ch, char *argument )
           location = ch->InRoom;
         }
 
-      FreeMemory( location->Description );
       location->Description = CopyBuffer( ch );
       StopEditing( ch );
       ch->SubState = (CharacterSubState)ch->tempnum;
@@ -58,7 +58,6 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( ed->Description );
       ed->Description = CopyBuffer( ch );
       StopEditing( ch );
       ch->SubState = (CharacterSubState)ch->tempnum;
@@ -72,7 +71,7 @@ void do_redit( Character *ch, char *argument )
 
   if ( ch->SubState == SUB_REPEATCMD )
     {
-      if ( IsNullOrEmpty( arg ) )
+      if ( arg.empty() )
         {
           do_rstat( ch, "" );
           return;
@@ -81,16 +80,13 @@ void do_redit( Character *ch, char *argument )
       if ( !StrCmp( arg, "done" ) || !StrCmp( arg, "off" ) )
         {
           ch->Echo("Redit mode off.\r\n");
-
-	  if ( ch->PCData && ch->PCData->SubPrompt )
-            FreeMemory( ch->PCData->SubPrompt );
-
+          ch->PCData->SubPrompt.erase();
           ch->SubState = SUB_NONE;
           return;
         }
     }
 
-  if ( IsNullOrEmpty( arg ) || !StrCmp( arg, "?" ) )
+  if ( arg.empty() || !StrCmp( arg, "?" ) )
     {
       if ( ch->SubState == SUB_REPEATCMD )
         ch->Echo("Syntax: <field> value\r\n");
@@ -111,15 +107,14 @@ void do_redit( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "name" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Set the room name. A very brief single line room description.\r\n");
           ch->Echo("Usage: redit name <Room summary>\r\n");
           return;
         }
 
-      FreeMemory( location->Name );
-      location->Name = CopyString( argument );
+      location->Name = argument;
       return;
     }
 
@@ -134,27 +129,27 @@ void do_redit( Character *ch, char *argument )
       ch->dest_buf = location;
       StartEditing( ch, location->Description );
       SetEditorDescription( ch, "Room %d (%s) description",
-                            location->Vnum, location->Name );
+                            location->Vnum, location->Name.c_str() );
       return;
     }
 
   if ( !StrCmp( arg, "tunnel" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Set the maximum characters allowed in the room at one time. (0 = unlimited).\r\n");
           ch->Echo("Usage: redit tunnel <value>\r\n");
           return;
         }
 
-      location->Tunnel = urange( 0, atoi(argument), 1000 );
+      location->Tunnel = urange( 0, std::stoi(argument), 1000 );
       ch->Echo("Done.\r\n");
       return;
     }
 
   if ( !StrCmp( arg, "ed" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Create an extra description.\r\n");
           ch->Echo("You must supply keyword(s).\r\n");
@@ -173,13 +168,13 @@ void do_redit( Character *ch, char *argument )
       ch->dest_buf = ed;
       StartEditing( ch, ed->Description );
       SetEditorDescription( ch, "Room %d (%s) extra description: %s",
-                            location->Vnum, location->Name, argument );
+                            location->Vnum, location->Name.c_str(), argument.c_str() );
       return;
     }
 
   if ( !StrCmp( arg, "rmed" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Remove an extra description.\r\n");
           ch->Echo("You must supply keyword(s).\r\n");
@@ -208,12 +203,15 @@ void do_redit( Character *ch, char *argument )
 
       for ( pReset = tarea->FirstReset; pReset; pReset = pReset->Next )
         {
-	  const char *bptr = NULL;
           num++;
 
-          if ( (bptr = SPrintReset( ch, pReset, num, true )) == NULL )
-            continue;
+          std::string bptr = SPrintReset( ch, pReset, num, true );
 
+          if( bptr.empty() )
+            {
+              continue;
+            }
+          
           ch->Echo(bptr);
         }
 
@@ -222,28 +220,32 @@ void do_redit( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "flags" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
-          ch->Echo("Toggle the room flags.\r\n");
-   ch->Echo("Usage: redit flags <flag> [flag]...\r\n");
-          ch->Echo("\r\nPossible Flags: \r\n");
-          ch->Echo("dark, nomob, indoors, nomagic, bank,\r\n");
-          ch->Echo("private, safe, petshop, norecall, donation, nodropall, silence,\r\n");
-          ch->Echo("logspeach, nodrop, clanstoreroom, plr_home, empty_home, teleport\r\n");
-          ch->Echo("nofloor, prototype, refinery, factory, recruit\r\n");
-          ch->Echo("spacecraft, auction, no_drive, can_land, can_fly, hotel\r\n");
+          ch->Echo( "Toggle the room flags.\r\n");
+          ch->Echo( "Usage: redit flags <flag> [flag]...\r\n");
+          ch->Echo( "\r\nPossible Flags: \r\n");
+          ch->Echo( "  dark, nomob, indoors, nomagic, bank,\r\n");
+          ch->Echo( "  private, safe, petshop, norecall, donation, nodropall, silence,\r\n");
+          ch->Echo( "  logspeach, nodrop, clanstoreroom, plr_home, empty_home, teleport\r\n");
+          ch->Echo( "  nofloor, prototype, refinery, factory, recruit\r\n");
+          ch->Echo( "  spacecraft, auction, no_drive, can_land, can_fly, hotel\r\n");
           return;
         }
 
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg2 );
           value = GetRoomFlag( arg2 );
 
           if ( value < 0 || value > 31 )
-            ch->Echo("Unknown flag: %s\r\n", arg2 );
+            {
+              ch->Echo( "Unknown flag: %s\r\n", arg2.c_str() );
+            }
           else if ( 1 << value == ROOM_PLR_HOME && GetTrustLevel(ch) < LEVEL_IMPLEMENTOR )
-            ch->Echo("If you want to build a player home use the 'empty_home' flag instead.\r\n");
+            {
+              ch->Echo("If you want to build a player home use the 'empty_home' flag instead.\r\n");
+            }
           else
             {
               ToggleBit( location->Flags, 1 << value );
@@ -255,14 +257,14 @@ void do_redit( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "teledelay" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Set the delay of the teleport. (0 = off).\r\n");
           ch->Echo("Usage: redit teledelay <value>\r\n");
           return;
         }
 
-      location->TeleDelay = atoi( argument );
+      location->TeleDelay = std::stoi( argument );
       ch->Echo("Done.\r\n");
       return;
     }
@@ -271,24 +273,24 @@ void do_redit( Character *ch, char *argument )
     {
       vnum_t televnum = INVALID_VNUM;
 
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
-   ch->Echo("Set the vnum of the room to teleport to.\r\n");
+          ch->Echo("Set the vnum of the room to teleport to.\r\n");
           ch->Echo("Usage: redit televnum <vnum>\r\n");
           return;
 
         }
 
-      televnum = atoi( argument );
+      televnum = std::stoi( argument );
 
       if( !GetRoom( televnum ) )
 	{
-   ch->Echo("&R%ld is not a valid room vnum.\r\n" );
+          ch->Echo("&R%ld is not a valid room vnum.\r\n", televnum );
 	}
       else
 	{
 	  location->TeleVnum = televnum;
-   ch->Echo("Done.\r\n");
+          ch->Echo("Done.\r\n");
 	}
 
       return;
@@ -296,7 +298,7 @@ void do_redit( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "sector" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
 	  SectorType sector = SECT_INSIDE;
           ch->Echo("Set the sector type.\r\n");
@@ -305,7 +307,7 @@ void do_redit( Character *ch, char *argument )
 
 	  for( sector = SECT_INSIDE; sector < SECT_MAX; sector = (SectorType)(sector + 1) )
 	    {
-       ch->Echo("  %s\r\n", SectorNames[sector][1] );
+              ch->Echo("  %s\r\n", SectorNames[sector][1] );
 	    }
 
           return;
@@ -320,7 +322,7 @@ void do_redit( Character *ch, char *argument )
         }
       else
 	{
-   ch->Echo("Done.\r\n");
+          ch->Echo("Done.\r\n");
 	}
 
       return;
@@ -333,7 +335,7 @@ void do_redit( Character *ch, char *argument )
       argument = OneArgument( argument, arg2 );
       argument = OneArgument( argument, arg3 );
 
-      if ( IsNullOrEmpty( arg2 ) || IsNullOrEmpty( arg3 ) )
+      if ( arg2.empty() || arg3.empty() )
         {
           ch->Echo("Usage: redit exkey <dir> <key vnum>\r\n");
           return;
@@ -341,7 +343,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( arg2[0] == '#' )
         {
-	  edir = (DirectionType)atoi( arg2 + 1 );
+	  edir = (DirectionType) std::stoi( arg2.substr( 1 ) );
           xit = GetExitNumber( location, edir );
         }
       else
@@ -350,11 +352,11 @@ void do_redit( Character *ch, char *argument )
           xit = GetExit( location, edir );
         }
 
-      keyvnum = atoi( arg3 );
+      keyvnum = std::stoi( arg3 );
 
       if ( !xit )
         {
-          ch->Echo("No exit in that direction.  Use 'redit exit ...' first.\r\n");
+          ch->Echo("No exit in that direction. Use 'redit exit ...' first.\r\n");
           return;
         }
 
@@ -367,7 +369,7 @@ void do_redit( Character *ch, char *argument )
     {
       argument = OneArgument( argument, arg2 );
 
-      if ( IsNullOrEmpty( arg2 ) )
+      if ( arg2.empty() )
         {
           ch->Echo("Change or clear exit keywords.\r\n");
           ch->Echo("Usage: redit exname <dir> [keywords]\r\n");
@@ -376,7 +378,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( arg2[0] == '#' )
         {
-          edir = (DirectionType)atoi( arg2+1 );
+          edir = (DirectionType)std::stoi( arg2.substr( 1 ) );
           xit = GetExitNumber( location, edir );
         }
       else
@@ -391,23 +393,21 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( xit->Keyword );
-      xit->Keyword = CopyString( argument );
+      xit->Keyword = argument;
       ch->Echo("Done.\r\n");
       return;
     }
 
   if ( !StrCmp( arg, "exflags" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
-          ch->Echo("Toggle or display exit flags.\r\n");
-          ch->Echo("Usage: redit exflags <dir> <flag> [flag]...\r\n");
-          ch->Echo("\r\nExit flags:\r\n");
-          ch->Echo( "isdoor, closed, locked, can_look, searchable, can_leave, can_climb,\r\n");
-          ch->Echo("nopassdoor, secret, pickproof, fly, climb, dig, window, auto, can_enter\r\n");
-          ch->Echo("hidden, no_mob, bashproof, bashed\r\n");
-
+          ch->Echo( "Toggle or display exit flags.\r\n");
+          ch->Echo( "Usage: redit exflags <dir> <flag> [flag]...\r\n");
+          ch->Echo( "\r\nExit flags:\r\n");
+          ch->Echo( "  isdoor, closed, locked, can_look, searchable, can_leave, can_climb,\r\n");
+          ch->Echo( "  nopassdoor, secret, pickproof, fly, climb, dig, window, auto, can_enter\r\n");
+          ch->Echo( "  hidden, no_mob, bashproof, bashed\r\n");
           return;
         }
 
@@ -415,7 +415,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( arg2[0] == '#' )
         {
-          edir = (DirectionType)atoi( arg2+1 );
+          edir = (DirectionType)std::stoi( arg2.substr( 1 ) );
           xit = GetExitNumber( location, edir );
         }
       else
@@ -426,14 +426,14 @@ void do_redit( Character *ch, char *argument )
 
       if ( !xit )
         {
-          ch->Echo("No exit in that direction.  Use 'redit exit ...' first.\r\n");
+          ch->Echo("No exit in that direction. Use 'redit exit ...' first.\r\n");
           return;
         }
 
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           sprintf( buf, "Flags for exit direction: %d  Keywords: %s  Key: %ld\r\n[ ",
-                   xit->Direction, xit->Keyword, xit->Key );
+                   xit->Direction, xit->Keyword.c_str(), xit->Key );
 
           for (size_t bit = 0; bit <= MAX_BIT; ++bit)
             {
@@ -449,13 +449,13 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg2 );
           value = GetExitFlag( arg2 );
 
           if (value < 0)
-            ch->Echo("Unknown flag: %s\r\n", arg2 );
+            ch->Echo("Unknown flag: %s\r\n", arg2.c_str() );
           else
             ToggleBit( xit->Flags, 1 << value );
         }
@@ -471,7 +471,7 @@ void do_redit( Character *ch, char *argument )
       argument = OneArgument( argument, arg2 );
       argument = OneArgument( argument, arg3 );
 
-      if ( IsNullOrEmpty( arg2 ) )
+      if ( arg2.empty() )
         {
           ch->Echo("Create, change or remove an exit.\r\n");
           ch->Echo("Usage: redit exit <dir> [room] [flags] [key] [keywords]\r\n");
@@ -485,29 +485,33 @@ void do_redit( Character *ch, char *argument )
 	  break;
 
         case '+':
-	  edir = GetDirection(arg2+1);
+	  edir = GetDirection(arg2.substr(1));
 	  addexit = true;
 	  break;
 
         case '#':
-	  edir = (DirectionType)atoi(arg2+1);
+	  edir = (DirectionType)std::stoi(arg2.substr(1));
 	  numnotdir = true;
 	  break;
         }
 
-      if ( IsNullOrEmpty( arg3 ) )
+      if ( arg3.empty() )
         evnum = INVALID_VNUM;
       else
-        evnum = atoi( arg3 );
+        evnum = std::stoi( arg3 );
 
       if ( numnotdir )
         {
 	  if ( (xit = GetExitNumber(location, edir)) != NULL )
-            edir = xit->Direction;
+            {
+              edir = xit->Direction;
+            }
         }
       else
-        xit = GetExit(location, edir);
-
+        {
+          xit = GetExit(location, edir);
+        }
+      
       if ( evnum == INVALID_VNUM )
         {
           if ( xit )
@@ -554,15 +558,14 @@ void do_redit( Character *ch, char *argument )
             }
 
           xit = MakeExit( location, tmp, edir );
-	  xit->Keyword          = CopyString( "" );
-          xit->Description              = CopyString( "" );
           xit->Key                      = -1;
-          xit->Flags                = 0;
           Act( AT_IMMORT, "$n reveals a hidden passage!", ch, NULL, NULL, TO_ROOM );
         }
       else
-        Act( AT_IMMORT, "Something is different...", ch, NULL, NULL, TO_ROOM );
-
+        {
+          Act( AT_IMMORT, "Something is different...", ch, NULL, NULL, TO_ROOM );
+        }
+      
       if ( xit->ToRoom != tmp )
         {
           xit->ToRoom = tmp;
@@ -578,15 +581,17 @@ void do_redit( Character *ch, char *argument )
 
       argument = OneArgument( argument, arg3 );
 
-      if ( IsNullOrEmpty( arg3 ) )
-        xit->Flags = atoi( arg3 );
-
-      if ( !IsNullOrEmpty( argument ) )
+      if ( !arg3.empty() )
+        {
+          xit->Flags = std::stoi( arg3 );
+        }
+      
+      if ( !argument.empty() )
         {
 	  vnum_t ekey = INVALID_VNUM;
 
           OneArgument( argument, arg3 );
-          ekey = atoi( arg3 );
+          ekey = std::stoi( arg3 );
 
           if ( ekey != 0 || arg3[0] == '0' )
             {
@@ -594,10 +599,9 @@ void do_redit( Character *ch, char *argument )
               xit->Key = ekey;
             }
 
-          if ( IsNullOrEmpty( argument ) )
+          if ( argument.empty() )
             {
-              FreeMemory( xit->Keyword );
-              xit->Keyword = CopyString( argument );
+              xit->Keyword = argument;
             }
         }
 
@@ -612,17 +616,17 @@ void do_redit( Character *ch, char *argument )
   if ( !StrCmp( arg, "bexit" ) )
     {
       Exit *this_exit = NULL, *rxit = NULL;
-      char tmpcmd[MAX_STRING_LENGTH];
+      std::string tmpcmd;
       Room *tmploc = NULL;
       vnum_t vnum = INVALID_VNUM;
       int exnum = 0;
-      char rvnum[MAX_INPUT_LENGTH];
+      std::string rvnum;
       bool numnotdir = false;
 
       argument = OneArgument( argument, arg2 );
       argument = OneArgument( argument, arg3 );
 
-      if ( IsNullOrEmpty( arg2 ) )
+      if ( arg2.empty() )
         {
           ch->Echo("Create, change or remove a two-way exit.\r\n");
           ch->Echo("Usage: redit bexit <dir> [room] [flags] [key] [keywords]\r\n");
@@ -637,11 +641,11 @@ void do_redit( Character *ch, char *argument )
 
         case '#':
           numnotdir = true;
-          edir = (DirectionType)atoi( arg2+1 );
+          edir = (DirectionType)std::stoi( arg2.substr( 1 ) );
           break;
 
         case '+':
-          edir = GetDirection( arg2+1 );
+          edir = GetDirection( arg2.substr( 1 ) );
           break;
         }
 
@@ -664,8 +668,8 @@ void do_redit( Character *ch, char *argument )
         {
           vnum = this_exit->Vnum;
 
-          if ( !IsNullOrEmpty( arg3 ) )
-            sprintf( rvnum, "%ld", tmploc->Vnum );
+          if ( !arg3.empty() )
+            rvnum = FormatString( "%ld", tmploc->Vnum );
 
           if ( this_exit->ToRoom )
             rxit = GetExit(this_exit->ToRoom, GetReverseDirection(edir));
@@ -673,7 +677,8 @@ void do_redit( Character *ch, char *argument )
             rxit = NULL;
         }
 
-      sprintf( tmpcmd, "exit %s %s %s", arg2, arg3, argument );
+      tmpcmd = FormatString( "exit %s %s %s",
+                             arg2.c_str(), arg3.c_str(), argument.c_str() );
       do_redit( ch, tmpcmd );
 
       if ( numnotdir )
@@ -685,8 +690,8 @@ void do_redit( Character *ch, char *argument )
         {
           vnum = this_exit->Vnum;
 
-          if ( !IsNullOrEmpty( arg3 ) )
-            sprintf( rvnum, "%ld", tmploc->Vnum );
+          if ( !arg3.empty() )
+            rvnum = FormatString( "%ld", tmploc->Vnum );
 
           if ( this_exit->ToRoom )
             rxit = GetExit(this_exit->ToRoom, GetReverseDirection(edir));
@@ -696,8 +701,9 @@ void do_redit( Character *ch, char *argument )
 
       if ( vnum != INVALID_VNUM )
         {
-          sprintf( tmpcmd, "%ld redit exit %d %s %s",
-                   vnum, GetReverseDirection(edir), rvnum, argument );
+          tmpcmd = FormatString( "%ld redit exit %d %s %s",
+                                 vnum, GetReverseDirection(edir),
+                                 rvnum.c_str(), argument.c_str() );
           do_at( ch, tmpcmd );
         }
 
@@ -708,16 +714,16 @@ void do_redit( Character *ch, char *argument )
     {
       argument = OneArgument( argument, arg2 );
 
-      if ( IsNullOrEmpty( arg2 ) )
+      if ( arg2.empty() )
         {
-   ch->Echo("Set the distance (in rooms) between this room, and the destination room.\r\n");
+          ch->Echo("Set the distance (in rooms) between this room, and the destination room.\r\n");
           ch->Echo("Usage: redit exdistance <dir> [distance]\r\n");
           return;
         }
 
       if ( arg2[0] == '#' )
         {
-          edir = (DirectionType)atoi( arg2+1 );
+          edir = (DirectionType)std::stoi( arg2.substr( 1 ) );
           xit = GetExitNumber( location, edir );
         }
       else
@@ -728,11 +734,12 @@ void do_redit( Character *ch, char *argument )
 
       if ( xit )
         {
-          xit->Distance = urange( 1, atoi(argument), 50 );
+          xit->Distance = urange( 1, std::stoi(argument), 50 );
           ch->Echo("Done.\r\n");
           return;
         }
-      ch->Echo("No exit in that direction.  Use 'redit exit ...' first.\r\n");
+
+      ch->Echo("No exit in that direction. Use 'redit exit ...' first.\r\n");
       return;
     }
 
@@ -740,7 +747,7 @@ void do_redit( Character *ch, char *argument )
     {
       argument = OneArgument( argument, arg2 );
 
-      if ( IsNullOrEmpty( arg2 ) )
+      if ( arg2.empty() )
         {
           ch->Echo("Create or clear a description for an exit.\r\n");
           ch->Echo("Usage: redit exdesc <dir> [description]\r\n");
@@ -749,7 +756,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( arg2[0] == '#' )
         {
-          edir = (DirectionType)atoi( arg2+1 );
+          edir = (DirectionType) std::stoi( arg2.substr( 1 ) );
           xit = GetExitNumber( location, edir );
         }
       else
@@ -760,23 +767,20 @@ void do_redit( Character *ch, char *argument )
 
       if ( xit )
 	{
-          FreeMemory( xit->Description );
-
-          if ( IsNullOrEmpty( argument ) )
+          if ( argument.empty() )
 	    {
-	      xit->Description = CopyString( "" );
+	      xit->Description.erase();
 	    }
           else
             {
-              sprintf( buf, "%s\r\n", argument );
-              xit->Description = CopyString( buf );
+              xit->Description = FormatString( "%s\r\n", argument.c_str() );
             }
 
           ch->Echo("Done.\r\n");
           return;
         }
 
-      ch->Echo("No exit in that direction.  Use 'redit exit ...' first.\r\n");
+      ch->Echo("No exit in that direction. Use 'redit exit ...' first.\r\n");
       return;
     }
 
@@ -795,4 +799,3 @@ void do_redit( Character *ch, char *argument )
       do_redit( ch, "" );
     }
 }
-

@@ -3,12 +3,12 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_slist( Character *ch, char *argument )
+void do_slist( Character *ch, std::string argument )
 {
   int sn = 0, i = 0;
   char skn[MAX_INPUT_LENGTH];
   char skn2[MAX_INPUT_LENGTH / 2];
-  int lowlev = 1, hilev = 150;
+  int lowlev = 1, hilev = MAX_ABILITY_LEVEL;
   int col = 0;
   int ability = 0;
   int filter_ability = GetAbility(argument);
@@ -41,7 +41,7 @@ void do_slist( Character *ch, char *argument )
 
       if ( ability >= 0 )
         {
-          sprintf(skn2, "** %s **", Capitalize( AbilityName[ability] ) );
+          sprintf(skn2, "** %s **", Capitalize( AbilityName[ability] ).c_str() );
           sprintf(skn, "\r\n\t\t\t  %s \r\n", skn2 );
 	}
       else
@@ -58,7 +58,7 @@ void do_slist( Character *ch, char *argument )
             {
 	      const Skill *skill = SkillTable[sn];
 
-              if ( IsNullOrEmpty( skill->Name ) )
+              if ( skill->Name.empty() )
                 {
                   break;
                 }
@@ -78,7 +78,7 @@ void do_slist( Character *ch, char *argument )
                 {
                   SetCharacterColor( AT_LBLUE, ch );
                   ch->Echo("(%3d) %-18.18s  ",
-                               i,  Capitalize( skill->Name ) );
+                           i, Capitalize( skill->Name ).c_str() );
 
                   if ( ++col == 3 )
                     {
@@ -96,4 +96,3 @@ void do_slist( Character *ch, char *argument )
         }
     }
 }
-

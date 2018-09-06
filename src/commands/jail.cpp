@@ -7,12 +7,12 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_jail( Character *ch , char *argument )
+void do_jail( Character *ch, std::string argument )
 {
   Character *victim =NULL;
-  Clan   *clan =NULL;
+  Clan *clan =NULL;
   Room *jail =NULL;
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   short jail_time = 0;
   bool h_d = false;
   struct tm *tms = NULL;
@@ -53,7 +53,7 @@ void do_jail( Character *ch , char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Jail who?\r\n");
       return;
@@ -97,13 +97,14 @@ void do_jail( Character *ch , char *argument )
     }
 
   argument = OneArgument(argument, arg);
-  if ( !*arg || !IsNumber(arg) )
+
+  if ( arg.empty() || !IsNumber(arg) )
     {
       ch->Echo("Jail them for how long?\r\n");
       return;
     }
 
-  jail_time = atoi(arg);
+  jail_time = std::stoi(arg);
 
   if ( jail_time < 0 )
     {
@@ -128,8 +129,10 @@ void do_jail( Character *ch , char *argument )
 
   argument = OneArgument(argument, arg);
 
-  if ( !*arg || !StringPrefix(arg, "hours") )
-    h_d = true;
+  if ( arg.empty() || !StringPrefix(arg, "hours") )
+    {
+      h_d = true;
+    }
   else if ( StringPrefix(arg, "days") )
     {
       ch->Echo("Is that value in hours or days?\r\n");
@@ -149,9 +152,9 @@ void do_jail( Character *ch , char *argument )
     tms->tm_mday += jail_time;
 
   victim->PCData->ReleaseDate = mktime(tms);
-  victim->PCData->HelledBy = CopyString(ch->Name);
+  victim->PCData->HelledBy = ch->Name;
   victim->PCData->JailVnum = jail->Vnum;
-  ch->Echo("%s will be released from jail at %24.24s.\r\n", victim->Name,
+  ch->Echo("%s will be released from jail at %24.24s.\r\n", victim->Name.c_str(),
             ctime(&victim->PCData->ReleaseDate));
   Act(AT_MAGIC, "$n is dragged away.", victim, NULL, ch, TO_NOTVICT);
   CharacterFromRoom(victim);
@@ -159,8 +162,8 @@ void do_jail( Character *ch , char *argument )
   Act(AT_MAGIC, "$n is dragged in.", victim, NULL, ch, TO_NOTVICT);
   do_look(victim, "auto");
   victim->Echo("Whoops. You broke too many laws.\r\n"
-            "You shall remain in jail for %d %s%s.\r\n", jail_time,
-            (h_d ? "hour" : "day"), (jail_time == 1 ? "" : "s"));
+               "You shall remain in jail for %d %s%s.\r\n", jail_time,
+               (h_d ? "hour" : "day"), (jail_time == 1 ? "" : "s"));
   SaveCharacter(victim);        /* used to save ch, fixed by Thoric 09/17/96 */
 
   LearnFromSuccess( ch , gsn_jail );

@@ -33,14 +33,14 @@ public:
   int Type = 0;
 };
 
-void do_who( Character *ch, char *argument )
+void do_who( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
-  char clan_name[MAX_INPUT_LENGTH / 2] = {'\0'};
-  char invis_str[MAX_INPUT_LENGTH / 2] = {'\0'};
-  char char_name[MAX_INPUT_LENGTH / 2] = {'\0'};
-  char extra_title[MAX_STRING_LENGTH / 2] = {'\0'};
-  char race_text[MAX_INPUT_LENGTH] = {'\0'};
+  std::string clan_name;
+  std::string invis_str;
+  std::string char_name;
+  std::string extra_title;
+  std::string race_text;
   int iRace = 0;
   int iLevelLower = 0;
   int iLevelUpper = MAX_LEVEL;
@@ -78,9 +78,10 @@ void do_who( Character *ch, char *argument )
    */
   for ( ;; )
     {
-      char arg[MAX_STRING_LENGTH];
+      std::string arg;
       argument = OneArgument( argument, arg );
-      if ( IsNullOrEmpty( arg ) )
+
+      if ( arg.empty() )
         break;
 
       if ( IsNumber( arg ) )
@@ -89,8 +90,14 @@ void do_who( Character *ch, char *argument )
             {
               switch ( ++nNumber )
                 {
-                case 1: iLevelLower = atoi( arg ); break;
-                case 2: iLevelUpper = atoi( arg ); break;
+                case 1:
+                  iLevelLower = std::stoi( arg );
+                  break;
+
+                case 2:
+                  iLevelUpper = std::stoi( arg );
+                  break;
+
                 default:
                   ch->Echo("Only two level numbers allowed.\r\n");
                   return;
@@ -119,6 +126,7 @@ void do_who( Character *ch, char *argument )
                   return;
 		}
             }
+
           if ( !StrCmp( arg, "off" ) && ch->PCData )
             {
               if (ch->PCData->WhoCloak)
@@ -134,7 +142,7 @@ void do_who( Character *ch, char *argument )
                 }
             }
 
-          if ( strlen(arg) < 3 )
+          if ( arg.size() < 3 )
             {
               ch->Echo("Be a little more specific please.\r\n");
               return;
@@ -153,7 +161,7 @@ void do_who( Character *ch, char *argument )
               else               /* SB who clan (order), guild */
                 {
                   if (!StrCmp( arg, "clan" ) && IsClanned( ch ) )
-                    strcpy(arg, ch->PCData->ClanInfo.Clan->Name);
+                    arg = ch->PCData->ClanInfo.Clan->Name;
 
                   if ( (pClan = GetClan (arg)) && (fClanMatch != true))
                     {
@@ -165,7 +173,7 @@ void do_who( Character *ch, char *argument )
                         }
                       else
                         {
-                          ch->Echo("&ROnly immortal's can do that to another clan!&w\r\n");
+                          ch->Echo("&ROnly immortals can do that to another clan!&w\r\n");
                           return;
                         }
                     }
@@ -179,8 +187,10 @@ void do_who( Character *ch, char *argument )
                               break;
                             }
                         }
+
                       if ( iRace != MAX_RACE )
                         fRaceRestrict = true;
+
                       if ( iRace == MAX_RACE && fClanMatch == false )
                         {
                           ch->Echo("Only immortals can do that.\r\n");
@@ -191,6 +201,7 @@ void do_who( Character *ch, char *argument )
             }
         }
     }
+
   /*
    * Now find matching chars.
    */
@@ -210,7 +221,7 @@ void do_who( Character *ch, char *argument )
   for ( const Descriptor *d : Reverse(Descriptors->Entities()))
     {
       const Character *wch = nullptr;
-      const char *race = nullptr;
+      std::string race;
       char force_char = ' ';
 
       if ( (d->ConnectionState != CON_PLAYING && d->ConnectionState != CON_EDITING)
@@ -241,23 +252,24 @@ void do_who( Character *ch, char *argument )
         }
       
       if ( fShowHomepage
-           && !IsNullOrEmpty( wch->PCData->HomePage ) )
+           && !wch->PCData->HomePage.empty() )
         {
-          sprintf( char_name, "<A HREF=\"%s\">%s</A>",
-                   ShowTilde( wch->PCData->HomePage ), wch->Name );
+          char_name = FormatString( "<A HREF=\"%s\">%s</A>",
+                                    wch->PCData->HomePage.c_str(),
+                                    wch->Name.c_str() );
         }
       else
         {
-          strcpy( char_name, "") ;
+          char_name.erase();
         }
       
       if ( IsGreater(ch) )
         {
-          sprintf( race_text, "(%s) ", RaceTable[wch->Race].Name);
+          race_text = FormatString( "(%s) ", RaceTable[wch->Race].Name);
         }
       else
         {
-          strcpy( race_text, "" );
+          race_text.erase();
         }
 
       race = race_text;
@@ -272,23 +284,38 @@ void do_who( Character *ch, char *argument )
 
       switch ( wch->TopLevel )
 	{
-        default: break;
-        case 200: race = "The Ghost in the Machine";    break;
-        case MAX_LEVEL -  0: race = "Implementor";      break;
-        case MAX_LEVEL -  1: race = "Head Administrator";       break;
-        case MAX_LEVEL -  2: race = "Administrator";    break;
-        case MAX_LEVEL -  3: race = "Builder";  break;
-        case MAX_LEVEL -  4: race = "Builder";  break;
+        default:
+          break;
+
+        case MAX_LEVEL - 0:
+          race = "Implementor";
+          break;
+
+        case MAX_LEVEL - 1:
+          race = "Head Administrator";
+          break;
+
+        case MAX_LEVEL - 2:
+          race = "Administrator";
+          break;
+
+        case MAX_LEVEL - 3:
+          race = "Builder";
+          break;
+
+        case MAX_LEVEL - 4:
+          race = "Builder";
+          break;
         }
 
       if ( !NiftyIsName(wch->Name, wch->PCData->Title) && ch->TopLevel > wch->TopLevel )
-        sprintf( extra_title , " [%s]" , wch->Name );
+        extra_title = FormatString( " [%s]" , wch->Name.c_str() );
       else
-        strcpy(extra_title, "");
+        extra_title.erase();
 
       if ( IsRetiredImmortal( wch ) )
         race = "Retired";
-      else if ( !IsNullOrEmpty( wch->PCData->Rank ) )
+      else if ( !wch->PCData->Rank.empty() )
         race = wch->PCData->Rank;
 
       if ( IsClanned( wch )
@@ -298,37 +325,39 @@ void do_who( Character *ch, char *argument )
         {
           Clan *pclan = wch->PCData->ClanInfo.Clan;
 
-          strcpy( clan_name, " (" );
+          clan_name = " (" ;
 
           if ( !StrCmp( wch->Name, pclan->Leadership.Leader ) )
-            strcat( clan_name, "Leader, " );
+            clan_name += "Leader, ";
           if ( !StrCmp( wch->Name, pclan->Leadership.Number1 ) )
-            strcat( clan_name, "First, " );
+            clan_name += "First, ";
           if ( !StrCmp( wch->Name, pclan->Leadership.Number2 ) )
-            strcat( clan_name, "Second, " );
+            clan_name += "Second, ";
 
-          strcat( clan_name, pclan->Name );
-          strcat( clan_name, ")" );
+          clan_name += pclan->Name;
+          clan_name += ")";
         }
       else
-        clan_name[0] = '\0';
-
+        {
+          clan_name.erase();
+        }
 
       if ( IsBitSet(wch->Flags, PLR_WIZINVIS) )
-	sprintf( invis_str, "(%d) ", wch->PCData->WizInvis );
+	invis_str = FormatString( "(%d) ", wch->PCData->WizInvis );
       else
-        invis_str[0] = '\0';
+        invis_str.erase();
 
       sprintf( buf, "%c%s %s%s%s%s %s%s%s%s\r\n",
                force_char,
-               race,
-               invis_str,
+               race.c_str(),
+               invis_str.c_str(),
                IsBitSet(wch->Flags, PLR_AFK) ? "[AFK] " : "",
-               char_name,
-               wch->PCData->Title,
-               extra_title, wch->PCData->WhoCloak ? "<WC>" : "",
-               clan_name,
-               IsBitSet(wch->Flags, PLR_KILLER) && (ch->TopLevel >= LEVEL_IMMORTAL) ? "&R [Wanted for Murder]&W" : "&W" );
+               char_name.c_str(),
+               wch->PCData->Title.c_str(),
+               extra_title.c_str(), wch->PCData->WhoCloak ? "<WC>" : "",
+               clan_name.c_str(),
+               IsBitSet(wch->Flags, PLR_KILLER)
+               && (ch->TopLevel >= LEVEL_IMMORTAL) ? "&R [Wanted for Murder]&W" : "&W" );
 
 
       /*

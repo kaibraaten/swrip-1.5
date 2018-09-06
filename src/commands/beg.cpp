@@ -4,10 +4,9 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_beg( Character *ch, char *argument )
+void do_beg( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
-  char arg1[MAX_INPUT_LENGTH];
   Character *victim = nullptr;
   int percent = 0, xp = 0;
   int amount = 0;
@@ -15,15 +14,13 @@ void do_beg( Character *ch, char *argument )
   if ( IsNpc (ch) )
     return;
 
-  argument = OneArgument( argument, arg1 );
-
   if ( ch->Mount )
     {
       ch->Echo( "You can't do that while mounted.\r\n" );
       return;
     }
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Beg for money from whom?\r\n" );
       return;
@@ -32,7 +29,7 @@ void do_beg( Character *ch, char *argument )
   if ( HasMentalStateToFindObject(ch) )
     return;
 
-  if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, argument ) ) == NULL )
     {
       ch->Echo( "They aren't here.\r\n" );
       return;
@@ -78,8 +75,8 @@ void do_beg( Character *ch, char *argument )
   if ( !IsNpc( victim ) )
     {
       ch->Echo( "You beg them for money.\r\n" );
-      Act( AT_ACTION, "$n begs you to give $s some change.\r\n", ch, NULL, victim, TO_VICT    );
-      Act( AT_ACTION, "$n begs $N for change.\r\n",  ch, NULL, victim, TO_NOTVICT );
+      Act( AT_ACTION, "$n begs you to give $s some change.", ch, NULL, victim, TO_VICT    );
+      Act( AT_ACTION, "$n begs $N for change.",  ch, NULL, victim, TO_NOTVICT );
       return;
     }
 
@@ -92,12 +89,13 @@ void do_beg( Character *ch, char *argument )
        * Failure.
        */
       ch->Echo( "You beg them for money but don't get any!\r\n" );
-      Act( AT_ACTION, "$n is really getting on your nerves with all this begging!\r\n", ch, NULL, victim, TO_VICT    );
-      Act( AT_ACTION, "$n begs $N for money.\r\n",  ch, NULL, victim, TO_NOTVICT );
+      Act( AT_ACTION, "$n is really getting on your nerves with all this begging!", ch, NULL, victim, TO_VICT    );
+      Act( AT_ACTION, "$n begs $N for money.",  ch, NULL, victim, TO_NOTVICT );
 
-      if ( victim->Alignment < 0 && victim->TopLevel >= ch->TopLevel+5 )
+      if ( victim->Alignment < 0 && victim->TopLevel >= ch->TopLevel + 5 )
         {
-          sprintf( buf, "%s is an annoying beggar and needs to be taught a lesson!", ch->Name );
+          sprintf( buf, "%s is an annoying beggar and needs to be taught a lesson!",
+                   ch->Name.c_str() );
           do_yell( victim, buf );
           global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
         }
@@ -107,28 +105,27 @@ void do_beg( Character *ch, char *argument )
       return;
     }
 
-
-  Act( AT_ACTION, "$n begs $N for money.\r\n",  ch, NULL, victim, TO_NOTVICT );
-  Act( AT_ACTION, "$n begs you for money!\r\n", ch, NULL, victim, TO_VICT    );
+  Act( AT_ACTION, "$n begs $N for money.",  ch, NULL, victim, TO_NOTVICT );
+  Act( AT_ACTION, "$n begs you for money!", ch, NULL, victim, TO_VICT    );
 
   amount = umin( victim->Gold , GetRandomNumberFromRange(1, 10) );
+
   if ( amount <= 0 )
     {
-      do_look( victim , ch->Name );
-      do_say( victim , "Sorry I have nothing to spare.\r\n" );
+      do_look( victim, ch->Name );
+      do_say( victim, "Sorry I have nothing to spare.\r\n" );
       LearnFromFailure( ch, gsn_beg );
       return;
     }
 
   ch->Gold     += amount;
   victim->Gold -= amount;
-  ch->Echo( "%s gives you %d credits.\r\n", victim->ShortDescr , amount );
+  ch->Echo( "%s gives you %d credits.\r\n", victim->ShortDescr.c_str(), amount );
   LearnFromSuccess( ch, gsn_beg );
   xp = umin( amount*10 , ( GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  )  );
   xp = umin( xp , ComputeXP( ch, victim ) );
   GainXP( ch, SMUGGLING_ABILITY, xp );
   ch->Echo( "&WYou gain %ld smuggling experience points!\r\n", xp );
-  Act( AT_ACTION, "$N gives $n some money.\r\n",  ch, NULL, victim, TO_NOTVICT );
-  Act( AT_ACTION, "You give $n some money.\r\n", ch, NULL, victim, TO_VICT    );
+  Act( AT_ACTION, "$N gives $n some money.",  ch, NULL, victim, TO_NOTVICT );
+  Act( AT_ACTION, "You give $n some money.", ch, NULL, victim, TO_VICT    );
 }
-

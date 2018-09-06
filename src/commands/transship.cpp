@@ -2,12 +2,13 @@
 #include "mud.hpp"
 #include "ship.hpp"
 
-void do_transship(Character *ch, char *argument)
+void do_transship(Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  int arg3, origShipyard;
-  Ship *ship;
+  std::string arg1;
+  std::string arg2;
+  vnum_t arg3 = 0;
+  vnum_t origShipyard = INVALID_VNUM;
+  Ship *ship = nullptr;
 
   if ( IsNpc( ch ) )
     {
@@ -26,9 +27,9 @@ void do_transship(Character *ch, char *argument)
       return;
     }
 
-  arg3 = atoi( arg2 );
+  arg3 = std::stoi( arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
+  if ( arg1.empty() || arg2.empty() )
     {
       ch->Echo("Usage: TransferShip <ship> <vnum>\r\n");
       return;
@@ -59,6 +60,5 @@ void do_transship(Character *ch, char *argument)
     }
 
   Ships->Save(ship);
-  ch->Echo("Ship Transfered.\r\n");
+  ch->Echo("Ship transferred.\r\n");
 }
-

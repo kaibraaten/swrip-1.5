@@ -4,12 +4,12 @@
 #include "turret.hpp"
 #include "clan.hpp"
 
-static bool room_is_in_use( const Ship *ship, int room_vnum );
+static bool room_is_in_use( const Ship *ship, vnum_t room_vnum );
 
-void do_setship( Character *ch, char *argument )
+void do_setship( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
   Ship *ship = NULL;
   int tempnum = 0;
   Room *roomindex = NULL;
@@ -23,18 +23,18 @@ void do_setship( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() || arg2.empty() || argument.empty() )
     {
-      ch->Echo("Usage: setship <ship> <field> <values>\r\n");
-      ch->Echo("\r\nField being one of:\r\n");
-      ch->Echo("name personalname owner copilot pilot description home\r\n");
-      ch->Echo("cockpit entrance turret1 turret2 hangar\r\n");
-      ch->Echo("engineroom firstroom lastroom shipyard\r\n");
-      ch->Echo("manuever speed hyperspeed tractorbeam\r\n");
-      ch->Echo("lasers missiles shield hull energy chaff\r\n");
-      ch->Echo("comm sensor astroarray class torpedos\r\n");
-      ch->Echo("pilotseat coseat gunseat navseat rockets alarm\r\n");
-      ch->Echo("ions dockingports guard (0-1)\r\n");
+      ch->Echo( "Usage: setship <ship> <field> <values>\r\n");
+      ch->Echo( "\r\nField being one of:\r\n");
+      ch->Echo( "  name personalname owner copilot pilot description home\r\n");
+      ch->Echo( "  cockpit entrance turret1 turret2 hangar\r\n");
+      ch->Echo( "  engineroom firstroom lastroom shipyard\r\n");
+      ch->Echo( "  manuever speed hyperspeed tractorbeam\r\n");
+      ch->Echo( "  lasers missiles shield hull energy chaff\r\n");
+      ch->Echo( "  comm sensor astroarray class torpedos\r\n");
+      ch->Echo( "  pilotseat coseat gunseat navseat rockets alarm\r\n");
+      ch->Echo( "  ions dockingports guard (0-1)\r\n");
       return;
     }
 
@@ -60,8 +60,7 @@ void do_setship( Character *ch, char *argument )
           Clans->Save(clan);
         }
 
-      FreeMemory( ship->Owner );
-      ship->Owner = CopyString( argument );
+      ship->Owner = argument;
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
 
@@ -80,8 +79,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "home" ) )
     {
-      FreeMemory( ship->Home );
-      ship->Home = CopyString( argument );
+      ship->Home = argument;
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -89,8 +87,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "pilot" ) )
     {
-      FreeMemory( ship->Pilot );
-      ship->Pilot = CopyString( argument );
+      ship->Pilot = argument;
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -98,8 +95,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "copilot" ) )
     {
-      FreeMemory( ship->CoPilot );
-      ship->CoPilot = CopyString( argument );
+      ship->CoPilot = argument;
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -107,7 +103,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "firstroom" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -138,7 +134,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "lastroom" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -179,7 +175,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "cockpit" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -190,7 +186,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -208,7 +204,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "pilotseat" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -219,7 +215,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
 	{
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -237,7 +233,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "coseat" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -266,7 +262,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "navseat" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -277,7 +273,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -295,7 +291,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "gunseat" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -306,7 +302,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
 	}
 
@@ -324,7 +320,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "entrance" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -335,7 +331,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -353,7 +349,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "turret1" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -364,7 +360,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -388,7 +384,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "turret2" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -399,7 +395,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -423,7 +419,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "turret3" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -434,7 +430,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -464,7 +460,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "turret4" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -475,7 +471,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -506,7 +502,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "turret5" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -517,7 +513,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -547,7 +543,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "turret6" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -558,7 +554,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -588,7 +584,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "turret7" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -599,7 +595,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -629,7 +625,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "turret8" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -640,7 +636,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -670,7 +666,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "turret9" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -681,7 +677,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -711,7 +707,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "turret0" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -722,7 +718,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -752,18 +748,18 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "hangar" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
-      if (roomindex == NULL && atoi(argument) != 0 )
+      if (roomindex == NULL && std::stoi(argument) != 0 )
 	{
           ch->Echo("That room doesn't exist.\r\n");
           return;
         }
 
-      if (( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last ) && (atoi(argument) != 0 ))
+      if (( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last ) && (std::stoi(argument) != 0 ))
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
         }
 
@@ -787,7 +783,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "engineroom" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -798,7 +794,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
-          ch->Echo("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n");
+          ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
 	}
 
@@ -816,7 +812,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "shipyard" ) )
     {
-      tempnum = atoi(argument);
+      tempnum = std::stoi(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -843,7 +839,7 @@ void do_setship( Character *ch, char *argument )
         ship->Type = MOB_SHIP;
       else
         {
-   ch->Echo("Ship type must be either: rebel, imperial, civilian or mob.\r\n");
+          ch->Echo("Ship type must be either: rebel, imperial, civilian or mob.\r\n");
           return;
         }
 
@@ -856,14 +852,13 @@ void do_setship( Character *ch, char *argument )
     {
       if( !ShipNameAndPersonalnameComboIsUnique( argument, ship->PersonalName ) )
 	{
-   ch->Echo("&RThere's already another ship with that combination of name and personalname.&d\r\n" );
+          ch->Echo("&RThere's already another ship with that combination of name and personalname.&d\r\n" );
 	  return;
 	}
 
-      unlink( GetShipFilename( ship ) );
+      unlink( GetShipFilename( ship ).c_str() );
       
-      FreeMemory( ship->Name );
-      ship->Name = CopyString( argument );
+      ship->Name = argument;
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -873,16 +868,13 @@ void do_setship( Character *ch, char *argument )
     {
        if( !ShipNameAndPersonalnameComboIsUnique( ship->Name, argument ) )
 	 {
-    ch->Echo("&RThere's already another ship with that combination of name and personalname.&d\r\n" );
+           ch->Echo("&RThere's already another ship with that combination of name and personalname.&d\r\n" );
 	   return;
 	 }
        
-      unlink( GetShipFilename( ship ) );
+      unlink( GetShipFilename( ship ).c_str() );
       
-      if ( ship->PersonalName )
-        FreeMemory( ship->PersonalName );
-
-      ship->PersonalName = CopyString( argument );
+      ship->PersonalName = argument;
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -890,8 +882,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "desc" ) )
     {
-      FreeMemory( ship->Description );
-      ship->Description = CopyString( argument );
+      ship->Description = argument;
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -899,7 +890,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "dockingports" ) )
     {
-      ship->DockingPorts = urange( -1, atoi(argument) , 20 );
+      ship->DockingPorts = urange( -1, std::stoi(argument) , 20 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -907,7 +898,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "guard" ) )
     {
-      ship->Guard = urange( -1, atoi(argument) , 1 );
+      ship->Guard = urange( -1, std::stoi(argument) , 1 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -915,7 +906,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "manuever" ) )
     {
-      ship->Thrusters.Maneuver = urange( 0, atoi(argument) , 250 );
+      ship->Thrusters.Maneuver = urange( 0, std::stoi(argument) , 250 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -924,9 +915,9 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "lasers" ) )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
-        ship->WeaponSystems.Laser.Count = urange( 0, atoi(argument) , 20 );
+        ship->WeaponSystems.Laser.Count = urange( 0, std::stoi(argument), 20 );
       else
-        ship->WeaponSystems.Laser.Count = urange( 0, atoi(argument) , 10 );
+        ship->WeaponSystems.Laser.Count = urange( 0, std::stoi(argument), 10 );
 
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
@@ -936,9 +927,9 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "ions" ) )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
-        ship->WeaponSystems.IonCannon.Count = urange( 0, atoi(argument) , 20 );
+        ship->WeaponSystems.IonCannon.Count = urange( 0, std::stoi(argument), 20 );
       else
-        ship->WeaponSystems.IonCannon.Count = urange( 0, atoi(argument) , 10 );
+        ship->WeaponSystems.IonCannon.Count = urange( 0, std::stoi(argument), 10 );
 
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
@@ -947,7 +938,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "class" ) )
     {
-      ship->Class = (ShipClass)urange( 0, atoi(argument) , WALKER );
+      ship->Class = (ShipClass)urange( 0, std::stoi(argument) , WALKER );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -955,7 +946,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "missiles" ) )
     {
-      ship->WeaponSystems.Tube.Missiles.Current = ship->WeaponSystems.Tube.Missiles.Max = urange( 0, atoi(argument) , 255 );
+      ship->WeaponSystems.Tube.Missiles.Current = ship->WeaponSystems.Tube.Missiles.Max = urange( 0, std::stoi(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -963,7 +954,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "torpedos" ) )
     {
-      ship->WeaponSystems.Tube.Torpedoes.Current = ship->WeaponSystems.Tube.Torpedoes.Max = urange( 0, atoi(argument) , 255 );
+      ship->WeaponSystems.Tube.Torpedoes.Current = ship->WeaponSystems.Tube.Torpedoes.Max = urange( 0, std::stoi(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -971,7 +962,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "rockets" ) )
     {
-      ship->WeaponSystems.Tube.Rockets.Current = ship->WeaponSystems.Tube.Rockets.Max = urange( 0, atoi(argument) , 255 );
+      ship->WeaponSystems.Tube.Rockets.Current = ship->WeaponSystems.Tube.Rockets.Max = urange( 0, std::stoi(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -980,9 +971,9 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "speed" ) )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
-        ship->Thrusters.Speed.Max = urange( 0, atoi(argument) , 255 );
+        ship->Thrusters.Speed.Max = urange( 0, std::stoi(argument), 255 );
       else
-        ship->Thrusters.Speed.Max = urange( 0, atoi(argument) , 150 );
+        ship->Thrusters.Speed.Max = urange( 0, std::stoi(argument), 150 );
 
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
@@ -991,7 +982,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "tractorbeam" ) )
     {
-      ship->WeaponSystems.TractorBeam.Strength = urange( 0, atoi(argument) , 255 );
+      ship->WeaponSystems.TractorBeam.Strength = urange( 0, std::stoi(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -999,7 +990,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "hyperspeed" ) )
     {
-      ship->Hyperdrive.Speed = urange( 0, atoi(argument) , 255 );
+      ship->Hyperdrive.Speed = urange( 0, std::stoi(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -1008,9 +999,9 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "shield" ) )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
-        ship->Defenses.Shield.Max = urange( 0, atoi(argument) , SHRT_MAX );
+        ship->Defenses.Shield.Max = urange( 0, std::stoi(argument) , SHRT_MAX );
       else
-        ship->Defenses.Shield.Max = urange( 0, atoi(argument) , 1000 );
+        ship->Defenses.Shield.Max = urange( 0, std::stoi(argument) , 1000 );
 
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
@@ -1021,11 +1012,11 @@ void do_setship( Character *ch, char *argument )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
         {
-          ship->Defenses.Hull.Current = ship->Defenses.Hull.Max = urange( 1, atoi(argument) , SHRT_MAX );
+          ship->Defenses.Hull.Current = ship->Defenses.Hull.Max = urange( 1, std::stoi(argument) , SHRT_MAX );
         }
       else
         {
-          ship->Defenses.Hull.Current = ship->Defenses.Hull.Max = urange( 1, atoi(argument) , 20000 );
+          ship->Defenses.Hull.Current = ship->Defenses.Hull.Max = urange( 1, std::stoi(argument) , 20000 );
         }
 
       ch->Echo("Done.\r\n");
@@ -1035,7 +1026,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "energy" ) )
     {
-      ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max = urange( 1, atoi(argument), SHRT_MAX );
+      ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max = urange( 1, std::stoi(argument), SHRT_MAX );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -1043,7 +1034,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "sensor" ) )
     {
-      ship->Instruments.Sensor = urange( 0, atoi(argument) , 255 );
+      ship->Instruments.Sensor = urange( 0, std::stoi(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -1051,7 +1042,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "astroarray" ) )
     {
-      ship->Instruments.AstroArray = urange( 0, atoi(argument) , 255 );
+      ship->Instruments.AstroArray = urange( 0, std::stoi(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -1059,7 +1050,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "comm" ) )
     {
-      ship->Instruments.Comm = urange( 0, atoi(argument) , 255 );
+      ship->Instruments.Comm = urange( 0, std::stoi(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -1069,11 +1060,11 @@ void do_setship( Character *ch, char *argument )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
         {
-          ship->Defenses.Chaff.Current = ship->Defenses.Chaff.Max = urange( 0, atoi(argument) , 255 );
+          ship->Defenses.Chaff.Current = ship->Defenses.Chaff.Max = urange( 0, std::stoi(argument) , 255 );
         }
       else
 	{
-          ship->Defenses.Chaff.Current = ship->Defenses.Chaff.Max = urange( 0, atoi(argument) , 25 );
+          ship->Defenses.Chaff.Current = ship->Defenses.Chaff.Max = urange( 0, std::stoi(argument) , 25 );
         }
 
       ch->Echo("Done.\r\n");
@@ -1092,7 +1083,7 @@ void do_setship( Character *ch, char *argument )
   do_setship( ch, "" );
 }
 
-static bool room_is_in_use( const Ship *ship, int room_vnum )
+static bool room_is_in_use( const Ship *ship, vnum_t room_vnum )
 {
   if( room_vnum == ship->Rooms.Hangar
       || room_vnum == ship->Rooms.Entrance
@@ -1117,4 +1108,3 @@ static bool room_is_in_use( const Ship *ship, int room_vnum )
 
   return false;
 }
-

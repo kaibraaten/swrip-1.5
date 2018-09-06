@@ -4,7 +4,7 @@
 #include "room.hpp"
 
 /* Prints the argument to all the rooms around the mobile */
-void do_mpasound( Character *ch, char *argument )
+void do_mpasound( Character *ch, std::string argument )
 {
   Room *was_in_room = nullptr;
   int mobflags = 0;
@@ -20,7 +20,7 @@ void do_mpasound( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ProgBug( "Mpasound - No argument", ch );
       return;

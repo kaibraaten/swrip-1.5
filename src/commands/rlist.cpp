@@ -4,12 +4,12 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_rlist( Character *ch, char *argument )
+void do_rlist( Character *ch, std::string argument )
 {
   Room *room = NULL;
   vnum_t vnum = INVALID_VNUM;
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
   Area *tarea = ch->PCData->Build.Area;
   vnum_t lrange = INVALID_VNUM;
   vnum_t trange = INVALID_VNUM;
@@ -26,15 +26,15 @@ void do_rlist( Character *ch, char *argument )
 
   if ( tarea )
     {
-      if ( IsNullOrEmpty( arg1 ) )
+      if ( arg1.empty() )
 	lrange = tarea->VnumRanges.Room.First;     /* here.            -Thoric */
       else
-        lrange = atoi( arg1 );
+        lrange = std::stoi( arg1 );
       
-      if ( IsNullOrEmpty( arg2 ) )
+      if ( arg2.empty() )
         trange = tarea->VnumRanges.Room.Last;
       else
-        trange = atoi(arg2);
+        trange = std::stoi(arg2);
 
       if ( ( lrange < tarea->VnumRanges.Room.First || trange > tarea->VnumRanges.Room.Last )
            && GetTrustLevel( ch ) < LEVEL_GREATER )
@@ -45,15 +45,15 @@ void do_rlist( Character *ch, char *argument )
     }
   else
     {
-      lrange = ( IsNumber( arg1 ) ? atoi( arg1 ) : 1 );
-      trange = ( IsNumber( arg2 ) ? atoi( arg2 ) : 1 );
+      lrange = IsNumber( arg1 ) ? std::stoi( arg1 ) : 1;
+      trange = IsNumber( arg2 ) ? std::stoi( arg2 ) : 1;
     }
 
   for ( vnum = lrange; vnum <= trange; vnum++ )
     {
       if ( (room = GetRoom( vnum )) == NULL )
         continue;
-      ch->Echo("&w%5d) %s\r\n", vnum, room->Name );
+
+      ch->Echo("&w%5d) %s\r\n", vnum, room->Name.c_str() );
     }
 }
-

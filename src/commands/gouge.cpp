@@ -3,7 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_gouge( Character *ch, char *argument )
+void do_gouge( Character *ch, std::string argument )
 {
   Character *victim = NULL;
   Affect af;

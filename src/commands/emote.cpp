@@ -4,10 +4,8 @@
 #include "character.hpp"
 #include "room.hpp"
 
-void do_emote( Character *ch, char *argument )
+void do_emote( Character *ch, std::string argument )
 {
-  char buf[MAX_STRING_LENGTH];
-  char *plast = NULL;
   int mobflags = ch->Flags;
 
   if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_NO_EMOTE) )
@@ -16,7 +14,7 @@ void do_emote( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Emote what?\r\n" );
       return;
@@ -26,32 +24,29 @@ void do_emote( Character *ch, char *argument )
     {
       RemoveBit( ch->Flags, ACT_SECRETIVE );
     }
-
-  for ( plast = argument; !IsNullOrEmpty( plast ); plast++ )
+  
+  std::string buf = argument;
+  const char lastCharacter = argument.back();
+  
+  if ( isalpha(lastCharacter) )
     {
-      /* intentionally left empty */
-    }
-
-  strcpy( buf, argument );
-
-  if ( isalpha(plast[-1]) )
-    {
-      strcat( buf, "." );
+      buf += ".";
     }
 
   MOBtrigger = false;
-  Act( AT_ACTION, "$n $T", ch, NULL, buf, TO_ROOM );
+  Act( AT_ACTION, "$n $T", ch, NULL, buf.c_str(), TO_ROOM );
 
   MOBtrigger = false;
-  Act( AT_ACTION, "$n $T", ch, NULL, buf, TO_CHAR );
+  Act( AT_ACTION, "$n $T", ch, NULL, buf.c_str(), TO_CHAR );
 
   ch->Flags = mobflags;
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
     {
-      sprintf( buf, "%s %s (emote)", IsNpc( ch ) ? ch->ShortDescr : ch->Name,
-               argument );
-      AppendToFile( LOG_FILE, buf );
+      char logbuf[MAX_STRING_LENGTH];
+      sprintf( logbuf, "%s %s (emote)",
+               IsNpc( ch ) ? ch->ShortDescr.c_str() : ch->Name.c_str(),
+               argument.c_str() );
+      AppendToFile( LOG_FILE, logbuf );
     }
 }
-

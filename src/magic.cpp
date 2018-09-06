@@ -34,7 +34,7 @@ int pAbort = 0;
 /*
  * The kludgy global is for spells who want more stuff from command line.
  */
-char *spell_target_name = NULL;
+std::string spell_target_name;
 
 static int ParseDiceExpression(const Character *ch, int level, const std::string &expr);
 
@@ -131,7 +131,7 @@ void SuccessfulCasting( Skill *skill, Character *ch,
 
   if ( ch && ch != victim )
     {
-      if ( !IsNullOrEmpty( skill->Messages.Success.ToCaster ) )
+      if ( !skill->Messages.Success.ToCaster.empty() )
 	{
 	  Act( chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR );
 	}
@@ -141,12 +141,12 @@ void SuccessfulCasting( Skill *skill, Character *ch,
 	}
     }
 
-  if ( ch && !IsNullOrEmpty( skill->Messages.Success.ToRoom ) )
+  if ( ch && !skill->Messages.Success.ToRoom.empty() )
     {
       Act( chitroom, skill->Messages.Success.ToRoom, ch, obj, victim, TO_NOTVICT );
     }
 
-  if ( ch && victim && !IsNullOrEmpty( skill->Messages.Success.ToVictim ) )
+  if ( ch && victim && !skill->Messages.Success.ToVictim.empty() )
     {
       if ( ch != victim )
 	{
@@ -181,7 +181,7 @@ void FailedCasting( Skill *skill, Character *ch,
 
   if ( ch && ch != victim )
     {
-      if ( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ))
+      if ( !skill->Messages.Failure.ToCaster.empty() )
 	{
 	  Act( chit, skill->Messages.Failure.ToCaster, ch, obj, victim, TO_CHAR );
 	}
@@ -191,12 +191,12 @@ void FailedCasting( Skill *skill, Character *ch,
 	}
     }
 
-  if ( ch && !IsNullOrEmpty( skill->Messages.Failure.ToRoom ) )
+  if ( ch && !skill->Messages.Failure.ToRoom.empty() )
     {
       Act( chitroom, skill->Messages.Failure.ToRoom, ch, obj, victim, TO_NOTVICT );
     }
 
-  if ( ch && victim && !IsNullOrEmpty( skill->Messages.Failure.ToVictim ) )
+  if ( ch && victim && !skill->Messages.Failure.ToVictim.empty() )
     {
       if ( ch != victim )
 	{
@@ -209,7 +209,7 @@ void FailedCasting( Skill *skill, Character *ch,
     }
   else if ( ch && ch == victim )
     {
-      if ( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ) )
+      if ( !skill->Messages.Failure.ToCaster.empty() )
 	{
 	  Act( chitme, skill->Messages.Failure.ToCaster, ch, obj, victim, TO_CHAR );
 	}
@@ -236,67 +236,70 @@ void ImmuneCasting( Skill *skill, Character *ch,
       chitme = chitroom;
     }
 
-  if ( ch && ch != victim )
-    {
-      if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToCaster ) )
-	{
-	  Act( chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, TO_CHAR );
-	}
-      else if ( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ) )
-	{
-	  Act( chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR );
-	}
-      else if ( skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL )
-	{
-	  Act( chit, "That appears to have no effect.", ch, NULL, NULL, TO_CHAR );
-	}
-    }
-
-  if ( ch && !IsNullOrEmpty( skill->Messages.VictimImmune.ToRoom ) )
-    {
-      Act( chitroom, skill->Messages.VictimImmune.ToRoom, ch, obj, victim, TO_NOTVICT );
-    }
-  else if ( ch && !IsNullOrEmpty( skill->Messages.Failure.ToRoom ) )
-    {
-      Act( chitroom, skill->Messages.Failure.ToRoom, ch, obj, victim, TO_NOTVICT );
-    }
-
-  if ( ch && victim && !IsNullOrEmpty( skill->Messages.VictimImmune.ToVictim ) )
+  if( ch != nullptr )
     {
       if ( ch != victim )
-	{
-	  Act( chitme, skill->Messages.VictimImmune.ToVictim, ch, obj, victim, TO_VICT );
-	}
-      else
-	{
-	  Act( chitme, skill->Messages.VictimImmune.ToVictim, ch, obj, victim, TO_CHAR );
-	}
-    }
-  else if ( ch && victim && !IsNullOrEmpty( skill->Messages.Failure.ToVictim ) )
-    {
-      if ( ch != victim )
-	{
-	  Act( chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_VICT );
-	}
-      else
-	{
-	  Act( chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_CHAR );
-	}
-    }
-  else if ( ch && ch == victim )
-    {
-      if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToCaster ) )
-	{
-	  Act( chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, TO_CHAR );
-	}
-      else if( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ) )
-	{
-	  Act( chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR );
-	}
-      else if ( skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL )
-	{
-	  Act( chit, "That appears to have no affect.", ch, NULL, NULL, TO_CHAR );
-	}
+        {
+          if ( !skill->Messages.VictimImmune.ToCaster.empty() )
+            {
+              Act( chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, TO_CHAR );
+            }
+          else if ( !skill->Messages.Failure.ToCaster.empty() )
+            {
+              Act( chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR );
+            }
+          else if ( skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL )
+            {
+              Act( chit, "That appears to have no effect.", ch, NULL, NULL, TO_CHAR );
+            }
+        }
+
+      if ( !skill->Messages.VictimImmune.ToRoom.empty() )
+        {
+          Act( chitroom, skill->Messages.VictimImmune.ToRoom, ch, obj, victim, TO_NOTVICT );
+        }
+      else if ( !skill->Messages.Failure.ToRoom.empty() )
+        {
+          Act( chitroom, skill->Messages.Failure.ToRoom, ch, obj, victim, TO_NOTVICT );
+        }
+
+      if ( victim && !skill->Messages.VictimImmune.ToVictim.empty() )
+        {
+          if ( ch != victim )
+            {
+              Act( chitme, skill->Messages.VictimImmune.ToVictim, ch, obj, victim, TO_VICT );
+            }
+          else
+            {
+              Act( chitme, skill->Messages.VictimImmune.ToVictim, ch, obj, victim, TO_CHAR );
+            }
+        }
+      else if ( victim && !skill->Messages.Failure.ToVictim.empty() )
+        {
+          if ( ch != victim )
+            {
+              Act( chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_VICT );
+            }
+          else
+            {
+              Act( chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_CHAR );
+            }
+        }
+      else if ( ch == victim )
+        {
+          if ( !skill->Messages.VictimImmune.ToCaster.empty() )
+            {
+              Act( chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, TO_CHAR );
+            }
+          else if( !skill->Messages.Failure.ToCaster.empty() )
+            {
+              Act( chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR );
+            }
+          else if ( skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL )
+            {
+              Act( chit, "That appears to have no affect.", ch, NULL, NULL, TO_CHAR );
+            }
+        }
     }
 }
 
@@ -627,13 +630,14 @@ bool SaveVsSpellStaff( int level, const Character *victim )
 /*
  * Locate targets.
  */
-void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, Object **obj )
+void *LocateSpellTargets( Character *ch, const std::string &arg,
+                          int sn, Character **victim, Object **obj )
 {
   Skill *skill = GetSkill( sn );
-  void *vo = NULL;
+  void *vo = nullptr;
 
-  *victim = NULL;
-  *obj = NULL;
+  *victim = nullptr;
+  *obj = nullptr;
 
   switch ( skill->Target )
     {
@@ -645,9 +649,11 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
       break;
 
     case TAR_CHAR_OFFENSIVE:
-      if ( IsNullOrEmpty( arg ) )
+      if ( arg.empty() )
         {
-          if ( !( *victim = GetFightingOpponent( ch ) ) )
+          *victim = GetFightingOpponent( ch );
+          
+          if ( *victim == nullptr )
             {
               ch->Echo( "Cast the spell on whom?\r\n" );
               return &pAbort;
@@ -655,7 +661,9 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
         }
       else
         {
-          if ( !( *victim = GetCharacterInRoom( ch, arg ) ) )
+          *victim = GetCharacterInRoom( ch, arg );
+          
+          if ( *victim == nullptr )
             {
               ch->Echo( "They aren't here.\r\n" );
               return &pAbort;
@@ -700,13 +708,15 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
       break;
 
     case TAR_CHAR_DEFENSIVE:
-      if ( IsNullOrEmpty( arg ) )
+      if ( arg.empty() )
 	{
 	  *victim = ch;
 	}
       else
         {
-          if ( !( *victim = GetCharacterInRoom( ch, arg ) ) )
+          *victim = GetCharacterInRoom( ch, arg );
+          
+          if ( *victim == nullptr )
             {
               ch->Echo( "They aren't here.\r\n" );
               return &pAbort;
@@ -717,7 +727,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
       break;
 
     case TAR_CHAR_SELF:
-      if ( !IsNullOrEmpty( arg ) && !NiftyIsName( arg, ch->Name ) )
+      if ( !arg.empty() && !NiftyIsName( arg, ch->Name ) )
         {
           ch->Echo( "You cannot cast this spell on another.\r\n" );
           return &pAbort;
@@ -727,13 +737,15 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
       break;
 
     case TAR_OBJ_INV:
-      if ( IsNullOrEmpty( arg ) )
+      if ( arg.empty() )
         {
           ch->Echo( "What should the spell be cast upon?\r\n" );
           return &pAbort;
         }
 
-      if ( ( *obj = GetCarriedObject( ch, arg ) ) == NULL )
+      *obj = GetCarriedObject( ch, arg );
+      
+      if ( *obj == nullptr )
         {
           ch->Echo( "You are not carrying that.\r\n" );
           return &pAbort;
@@ -791,14 +803,14 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
 	  break;
 
         case 1:
-          Act( AT_MAGIC, "The $t backfires!", ch, skill->Name, victim, TO_CHAR );
+          Act( AT_MAGIC, "The $t backfires!", ch, skill->Name.c_str(), victim, TO_CHAR );
 
           if ( victim )
 	    {
-	      Act( AT_MAGIC, "$n's $t backfires!", ch, skill->Name, victim, TO_VICT );
+	      Act( AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, TO_VICT );
 	    }
 
-          Act( AT_MAGIC, "$n's $t backfires!", ch, skill->Name, victim, TO_NOTVICT );
+          Act( AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, TO_NOTVICT );
           return InflictDamage( ch, ch, GetRandomNumberFromRange( 1, level ), TYPE_UNDEFINED );
 
         case 2:
@@ -806,14 +818,14 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
 	  break;
 
         case 3:
-          Act( AT_MAGIC, "The $t backfires!", ch, skill->Name, victim, TO_CHAR );
+          Act( AT_MAGIC, "The $t backfires!", ch, skill->Name.c_str(), victim, TO_CHAR );
 
           if ( victim )
 	    {
-	      Act( AT_MAGIC, "$n's $t backfires!", ch, skill->Name, victim, TO_VICT );
+	      Act( AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, TO_VICT );
 	    }
 
-          Act( AT_MAGIC, "$n's $t backfires!", ch, skill->Name, victim, TO_NOTVICT );
+          Act( AT_MAGIC, "$n's $t backfires!", ch, skill->Name.c_str(), victim, TO_NOTVICT );
           return InflictDamage( ch, ch, GetRandomNumberFromRange( 1, level ), TYPE_UNDEFINED );
         }
 

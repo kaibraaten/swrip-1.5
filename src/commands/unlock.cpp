@@ -2,15 +2,12 @@
 #include "character.hpp"
 #include "object.hpp"
 
-void do_unlock( Character *ch, char *argument )
+void do_unlock( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Object *obj = NULL;
   Exit *pexit = NULL;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Unlock what?\r\n");
       return;
@@ -49,11 +46,11 @@ void do_unlock( Character *ch, char *argument )
 	}
 
       if ( !IsBitSet(pexit->Flags, EX_SECRET)
-           ||   (pexit->Keyword && NiftyIsName( arg, pexit->Keyword )) )
+           || NiftyIsName( arg, pexit->Keyword ) )
         {
           ch->Echo("*Click*\r\n");
           Act( AT_ACTION, "$n unlocks the $d.",
-	       ch, NULL, pexit->Keyword, TO_ROOM );
+	       ch, NULL, pexit->Keyword.c_str(), TO_ROOM );
 	  RemoveBExitFlag( pexit, EX_LOCKED );
           return;
         }
@@ -100,4 +97,3 @@ void do_unlock( Character *ch, char *argument )
 
   ch->Echo("You see no %s here.\r\n", arg );
 }
-

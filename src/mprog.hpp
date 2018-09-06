@@ -36,7 +36,6 @@ struct act_prog_data
 
 struct MPROG_ACT_LIST
 {
-  //MPROG_ACT_LIST *Next = nullptr;
   char *buf = nullptr;
   Character *ch = nullptr;
   Object *obj = nullptr;
@@ -45,7 +44,6 @@ struct MPROG_ACT_LIST
 
 struct MPROG_DATA
 {
-  //MPROG_DATA *Next = nullptr;
   int         type = 0;
   bool        triggered = false;
   int         resetdelay = 0;
@@ -77,7 +75,7 @@ void MobProgFightTrigger( Character* mob, Character* ch );
 void MobProgHitPercentTrigger( Character* mob, Character* ch );
 void MobProgDeathTrigger( Character *killer, Character* mob );
 void MobProgRandomTrigger( Character* mob );
-void MobProgSpeechTrigger( char* txt, Character* mob );
+void MobProgSpeechTrigger( const std::string &txt, Character* mob );
 void MobProgScriptTrigger( Character *mob );
 void MobProgHourTrigger( Character *mob );
 void MobProgTimeTrigger( Character *mob );
@@ -106,7 +104,7 @@ void RoomProgSleepTrigger( Character *ch );
 void RoomProgRestTrigger( Character *ch );
 void RoomProgFightTrigger( Character *ch );
 void RoomProgDeathTrigger( Character *killer, Character *ch );
-void RoomProgSpeechTrigger( char *txt, Character *ch );
+void RoomProgSpeechTrigger( const std::string &txt, Character *ch );
 void RoomProgRandomTrigger( Character *ch );
 void RoomProgTimeTrigger( Character *ch );
 void RoomProgHourTrigger( Character *ch );

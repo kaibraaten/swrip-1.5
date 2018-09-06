@@ -3,12 +3,12 @@
 
 /* lets the mobile do a command at another location. Very useful */
 
-void do_mpat( Character *ch, char *argument )
+void do_mpat( Character *ch, std::string argument )
 {
-  char             arg[ MAX_INPUT_LENGTH ];
-  Room *location;
-  Room *original;
-  Character       *wch;
+  std::string arg;
+  Room *location = nullptr;
+  Room *original = nullptr;
+  Character *wch = nullptr;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -21,7 +21,7 @@ void do_mpat( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
+  if ( arg.empty() || argument.empty() )
     {
       ProgBug( "Mpat - Bad argument", ch );
       return;
@@ -43,11 +43,12 @@ void do_mpat( Character *ch, char *argument )
    * Handles 'at XXXX quit' case.
    */
   for ( wch = FirstCharacter; wch; wch = wch->Next )
-    if ( wch == ch )
-      {
-        CharacterFromRoom( ch );
-        CharacterToRoom( ch, original );
-        break;
-      }
+    {
+      if ( wch == ch )
+        {
+          CharacterFromRoom( ch );
+          CharacterToRoom( ch, original );
+          break;
+        }
+    }
 }
-

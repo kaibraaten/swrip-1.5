@@ -6,59 +6,53 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 
-void do_ostat( Character *ch, char *argument )
+void do_ostat( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Object *obj = NULL;
-  const char *pdesc = NULL;
+  std::string pdesc;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Ostat what?\r\n");
       return;
     }
-  if ( arg[0] != '\'' && arg[0] != '"' && strlen(argument) > strlen(arg) )
-    strcpy( arg, argument );
 
   if ( ( obj = GetObjectAnywhere( ch, arg ) ) == NULL )
     {
-      ch->Echo("Nothing like that in hell, earth, or heaven.\r\n");
+      ch->Echo( "Nothing like that in hell, earth, or heaven.\r\n" );
       return;
     }
 
-  ch->Echo("Name: %s.\r\n", obj->Name );
+  ch->Echo( "Name: %s.\r\n", obj->Name.c_str() );
   const auto objExtraDescriptions(obj->ExtraDescriptions());
   const auto protoExtraDescriptions(obj->Prototype->ExtraDescriptions());
   
-  pdesc=GetExtraDescription(arg, objExtraDescriptions);
+  pdesc = GetExtraDescription(arg, objExtraDescriptions);
 
-  if ( !pdesc )
-    pdesc=GetExtraDescription(arg, protoExtraDescriptions);
+  if ( pdesc.empty() )
+    pdesc = GetExtraDescription(arg, protoExtraDescriptions);
 
-  if ( !pdesc )
+  if ( pdesc.empty() )
     pdesc = GetExtraDescription( obj->Name, objExtraDescriptions );
 
-  if ( !pdesc )
+  if ( pdesc.empty() )
     pdesc = GetExtraDescription( obj->Name, protoExtraDescriptions );
 
-  if ( pdesc )
+  if ( !pdesc.empty() )
     ch->Echo(pdesc);
 
-
   ch->Echo("Vnum: %d.  Type: %s.  Count: %d  Gcount: %d\r\n",
-             obj->Prototype->Vnum, GetItemTypeName( obj ), obj->Prototype->Count,
-             obj->Count );
+           obj->Prototype->Vnum, GetItemTypeName( obj ), obj->Prototype->Count,
+           obj->Count );
 
   ch->Echo("Serial#: %d  TopIdxSerial#: %d  TopSerial#: %d\r\n",
-             obj->Serial, obj->Prototype->Serial, cur_obj_serial );
+           obj->Serial, obj->Prototype->Serial, cur_obj_serial );
 
   ch->Echo("Short description: %s.\r\nLong description: %s\r\n",
-             obj->ShortDescr, obj->Description );
+           obj->ShortDescr.c_str(), obj->Description.c_str() );
 
-  if ( !IsNullOrEmpty( obj->ActionDescription ) )
-    ch->Echo("Action description: %s.\r\n", obj->ActionDescription );
+  if ( !obj->ActionDescription.empty() )
+    ch->Echo("Action description: %s.\r\n", obj->ActionDescription.c_str() );
 
   ch->Echo("Wear flags : %s\r\n", FlagString(obj->WearFlags, WearFlags).c_str() );
   ch->Echo("Extra flags: %s\r\n", FlagString(obj->Flags, ObjectFlags).c_str() );
@@ -71,17 +65,17 @@ void do_ostat( Character *ch, char *argument )
              obj->Cost, obj->Prototype->Rent, obj->Timer, obj->Level );
 
   ch->Echo("In room: %d.  In object: %s.  Carried by: %s.  Wear_loc: %d.\r\n",
-           obj->InRoom    == NULL    ?        0 : obj->InRoom->Vnum,
-           obj->InObject     == NULL    ? "(none)" : obj->InObject->ShortDescr,
-           obj->CarriedBy == NULL    ? "(none)" : obj->CarriedBy->Name,
+           obj->InRoom == NULL ? 0 : obj->InRoom->Vnum,
+           obj->InObject == NULL ? "(none)" : obj->InObject->ShortDescr.c_str(),
+           obj->CarriedBy == NULL ? "(none)" : obj->CarriedBy->Name.c_str(),
            obj->WearLoc );
 
   ch->Echo("Index Values : %d %d %d %d %d %d.\r\n",
-             obj->Prototype->Value[0], obj->Prototype->Value[1],
-             obj->Prototype->Value[2], obj->Prototype->Value[3],
-             obj->Prototype->Value[4], obj->Prototype->Value[5] );
+           obj->Prototype->Value[0], obj->Prototype->Value[1],
+           obj->Prototype->Value[2], obj->Prototype->Value[3],
+           obj->Prototype->Value[4], obj->Prototype->Value[5] );
   ch->Echo("Object Values: %d %d %d %d %d %d.\r\n",
-             obj->Value[0], obj->Value[1], obj->Value[2], obj->Value[3], obj->Value[4], obj->Value[5] );
+           obj->Value[0], obj->Value[1], obj->Value[2], obj->Value[3], obj->Value[4], obj->Value[5] );
 
   if ( !obj->Prototype->ExtraDescriptions().empty() )
     {

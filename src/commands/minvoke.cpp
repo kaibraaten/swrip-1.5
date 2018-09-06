@@ -4,16 +4,13 @@
 #include "pcdata.hpp"
 #include "protomob.hpp"
 
-void do_minvoke( Character *ch, char *argument )
+void do_minvoke( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   ProtoMobile *pMobIndex = NULL;
   Character *victim = NULL;
   vnum_t vnum = INVALID_VNUM;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Syntax: minvoke <vnum>.\r\n");
       return;
@@ -21,12 +18,10 @@ void do_minvoke( Character *ch, char *argument )
 
   if ( !IsNumber( arg ) )
     {
-      char arg2[MAX_INPUT_LENGTH];
-      int  hash, cnt;
-      int  count = NumberArgument( arg, arg2 );
+      std::string arg2;
+      int count = NumberArgument( arg, arg2 );
 
-      vnum = -1;
-      for ( hash = cnt = 0; hash < MAX_KEY_HASH; hash++ )
+      for ( int hash = 0, cnt = 0; hash < MAX_KEY_HASH; hash++ )
         for ( pMobIndex = MobIndexHash[hash];
               pMobIndex;
               pMobIndex = pMobIndex->Next )
@@ -36,18 +31,21 @@ void do_minvoke( Character *ch, char *argument )
               vnum = pMobIndex->Vnum;
               break;
 	    }
-      if ( vnum == -1 )
+
+      if ( vnum == INVALID_VNUM )
         {
           ch->Echo("No such mobile exists.\r\n");
           return;
         }
     }
   else
-    vnum = atoi( arg );
+    {
+      vnum = std::stoi( arg );
+    }
 
   if ( GetTrustLevel(ch) < LEVEL_CREATOR )
     {
-      Area *pArea;
+      Area *pArea = nullptr;
 
       if ( IsNpc(ch) )
         {
@@ -60,8 +58,9 @@ void do_minvoke( Character *ch, char *argument )
           ch->Echo("You must have an assigned area to invoke this mobile.\r\n");
           return;
         }
+
       if ( vnum < pArea->VnumRanges.Mob.First
-           &&   vnum > pArea->VnumRanges.Mob.Last )
+           && vnum > pArea->VnumRanges.Mob.Last )
         {
           ch->Echo("That number is not in your allocated range.\r\n");
           return;

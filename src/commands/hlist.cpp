@@ -6,23 +6,23 @@
  * Show help topics in a level range                            -Thoric
  * Idea suggested by Gorog
  */
-void do_hlist( Character *ch, char *argument )
+void do_hlist( Character *ch, std::string argument )
 {
   int min = 0;
   int max = 0;
   int maxlimit = GetTrustLevel(ch);
   int minlimit = maxlimit >= LEVEL_GREATER ? -1 : 0;
   int pagesFound = 0;
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   argument = OneArgument( argument, arg );
 
-  if ( !IsNullOrEmpty( arg ) )
+  if ( !arg.empty() )
     {
-      min = urange( minlimit, atoi(arg), maxlimit );
+      min = urange( minlimit, std::stoi(arg), maxlimit );
 
-      if ( !IsNullOrEmpty( argument ) )
+      if ( !argument.empty() )
 	{
-	  max = urange( min, atoi(argument), maxlimit );
+	  max = urange( min, std::stoi(argument), maxlimit );
 	}
       else
 	{
@@ -42,8 +42,8 @@ void do_hlist( Character *ch, char *argument )
     {
       if ( GetHelpFileLevel( help ) >= min && GetHelpFileLevel( help ) <= max )
 	{
-   ch->Echo("  %3d %s\r\n",
-		       GetHelpFileLevel( help ), GetHelpFileKeyword( help ) );
+          ch->Echo("  %3d %s\r\n",
+                   GetHelpFileLevel( help ), GetHelpFileKeyword( help ).c_str() );
 	  ++pagesFound;
 	}
     }
@@ -57,5 +57,3 @@ void do_hlist( Character *ch, char *argument )
       ch->Echo("None found.\r\n");
     }
 }
-
-

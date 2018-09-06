@@ -14,7 +14,7 @@ struct UserData
 static bool ShowIfPilotable(Ship *ship, void *userData);
 static bool ShowIfInRoom(Ship *ship, void *userData);
 
-void do_speeders( Character *ch, char *argument )
+void do_speeders( Character *ch, std::string argument )
 {
   struct UserData data;
 
@@ -84,8 +84,8 @@ static bool ShowIfPilotable(Ship *ship, void *userData)
       SetCharacterColor( AT_BLUE, ch );
     }
 
-  sprintf( buf, "%s(%s)", ship->Name, ship->PersonalName );
-  ch->Echo("%-35s%-15s ", buf, ship->Owner );
+  sprintf( buf, "%s(%s)", ship->Name.c_str(), ship->PersonalName.c_str() );
+  ch->Echo("%-35s%-15s ", buf, ship->Owner.c_str() );
 
   data->count++;
   return true;
@@ -109,14 +109,14 @@ static bool ShowIfInRoom(Ship *ship, void *userData)
   else
     SetCharacterColor( AT_BLUE, ch );
 
-  sprintf( buf, "%s(%s)", ship->Name, ship->PersonalName );
-  ch->Echo("%-35s%-15s ", buf, ship->Owner );
+  sprintf( buf, "%s(%s)", ship->Name.c_str(), ship->PersonalName.c_str() );
+  ch->Echo("%-35s%-15s ", buf, ship->Owner.c_str() );
 
   if ( !StrCmp(ship->Owner, "Public") )
     {
       ch->Echo("%ld to rent.\r\n", GetRentalPrice(ship));
     }
-  else if ( StrCmp(ship->Owner, "") )
+  else if ( ship->Owner.empty() )
     ch->Echo("%s", "\r\n" );
   else
     ch->Echo("%ld to buy.\r\n", GetShipValue(ship) );
@@ -124,4 +124,3 @@ static bool ShowIfInRoom(Ship *ship, void *userData)
   data->count++;
   return true;
 }
-

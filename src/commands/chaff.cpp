@@ -5,50 +5,50 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_chaff( Character *ch, char *argument )
+void do_chaff( Character *ch, std::string argument )
 {
   int the_chance = 0;
   Ship *ship = NULL;
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
-      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!&d\r\n");
       return;
     }
 
   if ( ship->Class > SHIP_PLATFORM )
     {
-      ch->Echo("&RThis isn't a spacecraft!\r\n");
+      ch->Echo("&RThis isn't a spacecraft!&d\r\n");
       return;
     }
 
   if (  (ship = GetShipFromCoSeat(ch->InRoom->Vnum))  == NULL )
     {
-      ch->Echo("&RThe controls are at the copilots seat!\r\n");
+      ch->Echo("&RThe controls are at the copilots seat!&d\r\n");
       return;
     }
 
   if ( IsShipAutoflying(ship) )
     {
-      ch->Echo("&RYou'll have to turn the autopilot off first...\r\n");
+      ch->Echo("&RYou'll have to turn the autopilot off first.&d\r\n");
       return;
     }
 
   if ( IsShipInHyperspace( ship ) )
     {
-      ch->Echo("&RYou can only do that in realspace!\r\n");
+      ch->Echo("&RYou can only do that in realspace!&d\r\n");
       return;
     }
   
   if (ship->State == SHIP_LANDED)
     {
-      ch->Echo("&RYou can't do that until after you've launched!\r\n");
+      ch->Echo("&RYou can't do that until after you've launched!&d\r\n");
       return;
     }
 
   if (ship->Defenses.Chaff.Current <= 0 )
     {
-      ch->Echo("&RYou don't have any chaff to release!\r\n");
+      ch->Echo("&RYou don't have any chaff to release!&d\r\n");
       return;
     }
 
@@ -57,7 +57,7 @@ void do_chaff( Character *ch, char *argument )
 
   if ( GetRandomPercent() > the_chance )
     {
-      ch->Echo("&RYou can't figure out which switch it is.\r\n");
+      ch->Echo("&RYou can't figure out which switch it is.&d\r\n");
       LearnFromFailure( ch, gsn_weaponsystems );
       return;
     }
@@ -67,7 +67,7 @@ void do_chaff( Character *ch, char *argument )
 
   ch->Echo( "You flip the chaff release switch.\r\n");
   Act( AT_PLAIN, "$n flips a switch on the control pannel", ch,
-       NULL, argument , TO_ROOM );
+       NULL, argument.c_str(), TO_ROOM );
   EchoToCockpit( AT_YELLOW , ship , "A burst of chaff is released from the ship.");
   LearnFromSuccess( ch, gsn_weaponsystems );
 }

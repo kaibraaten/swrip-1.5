@@ -517,10 +517,10 @@ void ForEachLuaFileInDir( const char *pathToDir,
   closedir( dp );
 }
 
-const char *ConvertToLuaFilename( const std::string &name )
+std::string ConvertToLuaFilename( const std::string &name )
 {
   size_t n = 0;
-  static char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH];
   strcpy( buf, ToLower( name ).c_str() );
 
   for( n = 0; n < strlen( buf ); ++n )

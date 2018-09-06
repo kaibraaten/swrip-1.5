@@ -31,8 +31,8 @@ protected:
 
   Character *_testCharacter = nullptr;
   Character *_testNpc = nullptr;
-  static constexpr char *_expectedAliasName = "alias";
-  static constexpr char *_expectedCommand = "command";
+  const std::string _expectedAliasName = "alias";
+  const std::string _expectedCommand = "command";
 };
 
 TEST_F(AliasTests, AllocateAlias)
@@ -40,8 +40,8 @@ TEST_F(AliasTests, AllocateAlias)
   Alias *target = AllocateAlias(_expectedAliasName, _expectedCommand);
 
   ASSERT_NE(target, nullptr);
-  EXPECT_STREQ(_expectedAliasName, target->Name);
-  EXPECT_STREQ(_expectedCommand, target->Command);
+  EXPECT_EQ(_expectedAliasName, target->Name);
+  EXPECT_EQ(_expectedCommand, target->Command);
 
   FreeAlias(target);
 }

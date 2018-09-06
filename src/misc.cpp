@@ -241,10 +241,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
             }
 
           pexit = MakeExit( room, to_room, edir );
-          pexit->Keyword        = CopyString( "" );
-          pexit->Description    = CopyString( "" );
           pexit->Key            = -1;
-          pexit->Flags      = 0;
           top_exit++;
           Act( AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_CHAR );
           Act( AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_ROOM );
@@ -286,7 +283,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
           for(Character *rch : room->Characters())
 	    {
-	      Act( AT_ACTION, "The $d opens.", rch, NULL, pexit->Keyword, TO_CHAR );
+	      Act( AT_ACTION, "The $d opens.", rch, NULL, pexit->Keyword.c_str(), TO_CHAR );
 	    }
 
           if ( ( pexit_rev = pexit->ReverseExit ) != NULL
@@ -296,7 +293,8 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
               for(Character *rch : to_room->Characters())
 		{
-		  Act( AT_ACTION, "The $d opens.", rch, NULL, pexit_rev->Keyword, TO_CHAR );
+		  Act( AT_ACTION, "The $d opens.",
+                       rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR );
 		}
             }
 
@@ -311,7 +309,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
           for(Character *rch : room->Characters())
 	    {
-	      Act( AT_ACTION, "The $d closes.", rch, NULL, pexit->Keyword, TO_CHAR );
+	      Act( AT_ACTION, "The $d closes.", rch, NULL, pexit->Keyword.c_str(), TO_CHAR );
 	    }
 
           if ( ( pexit_rev = pexit->ReverseExit ) != NULL
@@ -321,7 +319,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
               for(Character *rch : to_room->Characters())
 		{
-		  Act( AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->Keyword, TO_CHAR );
+		  Act( AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR );
 		}
             }
 
@@ -335,7 +333,7 @@ void ActionDescription( Character *ch, Object *obj, void *vo )
 {
   char charbuf[MAX_STRING_LENGTH];
   char roombuf[MAX_STRING_LENGTH];
-  char *srcptr = obj->ActionDescription;
+  const char *srcptr = obj->ActionDescription.c_str();
   char *charptr = charbuf;
   char *roomptr = roombuf;
   const char *ichar = NULL;
@@ -378,7 +376,7 @@ void ActionDescription( Character *ch, Object *obj, void *vo )
       else if ( *srcptr == '%' && *++srcptr == 's' )
         {
           ichar = "You";
-          iroom = IsNpc( ch ) ? ch->ShortDescr : ch->Name;
+          iroom = IsNpc( ch ) ? ch->ShortDescr.c_str() : ch->Name.c_str();
         }
       else
         {
@@ -434,26 +432,28 @@ void ActionDescription( Character *ch, Object *obj, void *vo )
  * This function examines a text string to see if the first "word" is a
  * color indicator (e.g. _red, _whi_, _blu).  -  Gorog
  */
-int GetColor(const char *origarg)    /* get color code from command string */
+int GetColor(const std::string &argument)    /* get color code from command string */
 {
-  char argument[MAX_INPUT_LENGTH];
-  char color[MAX_INPUT_LENGTH];
+  std::string color;
   const char *cptr = NULL;
-  static char const * color_list =
+  static const char * const color_list =
     "_bla_red_dgr_bro_dbl_pur_cya_cha_dch_ora_gre_yel_blu_pin_lbl_whi";
-  static char const * blink_list =
+  static const char * const blink_list =
     "*bla*red*dgr*bro*dbl*pur*cya*cha*dch*ora*gre*yel*blu*pin*lbl*whi";
 
-  strcpy(argument, origarg);
-  OneArgument (argument, color);
+  OneArgument(argument, color);
 
-  if (color[0]!='_' && color[0]!='*')
-    return 0;
-
-  if ( (cptr = strstr(color_list, color)) )
-    return (cptr - color_list) / 4;
-
-  if ( (cptr = strstr(blink_list, color)) )
+  if (color.empty() || ( color[0] != '_' && color[0] !='*' ) )
+    {
+      return 0;
+    }
+  
+  if ( (cptr = strstr(color_list, color.c_str())) )
+    {
+      return (cptr - color_list) / 4;
+    }
+  
+  if ( (cptr = strstr(blink_list, color.c_str())) )
     return (cptr - blink_list) / 4 + AT_BLINK;
 
   return 0;
@@ -474,9 +474,9 @@ bool IsValidLanguage( int language )
   return VALID_LANGUAGES & language ? true : false;
 }
 
-const char *FormatDate( const time_t *date )
+std::string FormatDate( const time_t *date )
 {
-  static char buffer[MAX_STRING_LENGTH];
+  char buffer[MAX_STRING_LENGTH];
   struct tm *t = localtime( date );
   sprintf( buffer, "%02d/%02d-%04d", t->tm_mon + 1, t->tm_mday, t->tm_year + 1900 );
 

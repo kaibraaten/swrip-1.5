@@ -3,7 +3,7 @@
 #include "skill.hpp"
 #include "room.hpp"
 
-extern char *spell_target_name;
+extern std::string spell_target_name;
 
 ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
 {

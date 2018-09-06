@@ -2,18 +2,17 @@
 #include "board.hpp"
 #include "character.hpp"
 
-void do_bset( Character *ch, char *argument )
+void do_bset( Character *ch, std::string argument )
 {
   Board *board = NULL;
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
+  std::string arg1;
+  std::string arg2;
   int value = 0;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
+  if ( arg1.empty() || arg2.empty() )
     {
       ch->Echo( "Usage: bset <board name> <field> value\r\n" );
       ch->Echo( "\r\nField being one of:\r\n" );
@@ -22,7 +21,7 @@ void do_bset( Character *ch, char *argument )
       return;
     }
 
-  value = atoi( argument );
+  value = std::stoi( argument );
 
   board = GetBoard( arg1 );
 
@@ -62,18 +61,16 @@ void do_bset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "read_group" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo( "No group specified.\r\n" );
           return;
         }
 
-      FreeMemory( board->ReadGroup );
-
       if ( !StrCmp( argument, "none" ) )
-	board->ReadGroup = CopyString( "" );
+	board->ReadGroup.erase();
       else
-        board->ReadGroup = CopyString( argument );
+        board->ReadGroup = argument;
 
       Boards->Save(board);
       ch->Echo( "Done.\r\n" );
@@ -82,18 +79,16 @@ void do_bset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "post_group" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo( "No group specified.\r\n" );
           return;
         }
 
-      FreeMemory( board->PostGroup );
-
       if ( !StrCmp( argument, "none" ) )
-        board->PostGroup = CopyString( "" );
+        board->PostGroup.erase();
       else
-        board->PostGroup = CopyString( argument );
+        board->PostGroup = argument;
 
       Boards->Save(board);
       ch->Echo( "Done.\r\n" );
@@ -102,7 +97,7 @@ void do_bset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "extra_removers" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo( "No names specified.\r\n" );
           return;
@@ -110,15 +105,13 @@ void do_bset( Character *ch, char *argument )
 
       if ( !StrCmp( argument, "none" ) )
 	{
-	  buf[0] = '\0';
+          board->ExtraRemovers.erase();
 	}
       else
 	{
-	  sprintf( buf, "%s %s", board->ExtraRemovers, argument );
-	}
-
-      FreeMemory( board->ExtraRemovers );
-      board->ExtraRemovers = CopyString( buf );
+          board->ExtraRemovers += " " + argument;
+        }
+      
       Boards->Save(board);
       ch->Echo( "Done.\r\n" );
       return;
@@ -126,7 +119,7 @@ void do_bset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "extra_readers" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo( "No names specified.\r\n" );
           return;
@@ -134,15 +127,13 @@ void do_bset( Character *ch, char *argument )
 
       if ( !StrCmp( argument, "none" ) )
 	{
-	  buf[0] = '\0';
+          board->ExtraReaders.erase();
 	}
       else
 	{
-	  sprintf( buf, "%s %s", board->ExtraReaders, argument );
-	}
-
-      FreeMemory( board->ExtraReaders );
-      board->ExtraReaders = CopyString( buf );
+          board->ExtraReaders += " " + argument;
+        }
+      
       Boards->Save(board);
       ch->Echo( "Done.\r\n" );
       return;
@@ -150,7 +141,7 @@ void do_bset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo( "No name specified.\r\n" );
           return;
@@ -162,9 +153,8 @@ void do_bset( Character *ch, char *argument )
 	  return;
 	}
       
-      unlink( GetBoardFilename( board ) );
-      FreeMemory( board->Name );
-      board->Name = CopyString( argument );
+      unlink( GetBoardFilename( board ).c_str() );
+      board->Name = argument;
       Boards->Save(board);
       ch->Echo( "Done.\r\n" );
       return;
@@ -211,11 +201,21 @@ void do_bset( Character *ch, char *argument )
       ch->Echo( "Done.\r\n" );
       return;
     }
+
   if ( !StrCmp( arg2, "type" ) )
     {
+      if(!StrCmp(argument, "mail"))
+        {
+          value = BOARD_MAIL;
+        }
+      else if(!StrCmp(argument, "note"))
+        {
+          value = BOARD_NOTE;
+        }
+      
       if ( value < 0 || value > 1 )
         {
-          ch->Echo( "Value out of range.\r\n" );
+          ch->Echo( "Value out of range. Type \"mail\" or \"note\"\r\n" );
           return;
         }
 

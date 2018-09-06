@@ -5,9 +5,9 @@
 /* lets the mobile force someone to do something.  must be mortal level
    and the all argument only affects those in the room with the mobile */
 
-void do_mpforce( Character *ch, char *argument )
+void do_mpforce( Character *ch, std::string argument )
 {
-  char arg[ MAX_INPUT_LENGTH ];
+  std::string arg;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -20,7 +20,7 @@ void do_mpforce( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
+  if ( arg.empty() || argument.empty() )
     {
       ProgBug( "Mpforce - Bad syntax", ch );
       return;
@@ -62,8 +62,6 @@ void do_mpforce( Character *ch, char *argument )
           return;
         }
 
-
       Interpret( victim, argument );
     }
 }
-

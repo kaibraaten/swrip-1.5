@@ -4,7 +4,7 @@
 #include "log.hpp"
 #include "descriptor.hpp"
 
-void do_mpapplyb( Character *ch, char *argument )
+void do_mpapplyb( Character *ch, std::string argument )
 {
   Character *victim = NULL;
 
@@ -14,7 +14,7 @@ void do_mpapplyb( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ProgBug("Mpapplyb - bad syntax", ch );
       return;
@@ -45,7 +45,7 @@ void do_mpapplyb( Character *ch, char *argument )
     default:
       victim->Echo("You attempt to regain the gods' attention.\r\n");
       sprintf( log_buf, "%s@%s new %s applying for authorization...",
-               victim->Name, victim->Desc->Remote.Hostname,
+               victim->Name.c_str(), victim->Desc->Remote.Hostname.c_str(),
                RaceTable[victim->Race].Name);
       Log->Info( log_buf );
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
@@ -61,8 +61,10 @@ void do_mpapplyb( Character *ch, char *argument )
     case 3:
       victim->Echo("The gods permit you to enter the Star Wars Reality.\r\n");
       RemoveBit(victim->PCData->Flags, PCFLAG_UNAUTHED);
+
       if ( victim->Fighting )
         StopFighting( victim, true );
+
       CharacterFromRoom(victim);
       CharacterToRoom(victim, GetRoom(ROOM_VNUM_SCHOOL));
       Act( AT_WHITE, "$n enters this world from within a column of blinding light!",
@@ -71,4 +73,3 @@ void do_mpapplyb( Character *ch, char *argument )
       break;
     }
 }
-

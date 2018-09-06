@@ -6,9 +6,9 @@
    same you would see if you enter the room and have config +brief.
    -- Narn, winter '96
 */
-void do_glance( Character *ch, char *argument )
+void do_glance( Character *ch, std::string argument )
 {
-  char arg1 [MAX_INPUT_LENGTH];
+  std::string arg1;
   Character *victim = nullptr;
 
   if ( !ch->Desc )
@@ -34,7 +34,7 @@ void do_glance( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg1 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       int saveFlags = ch->Flags;
       SetBit( ch->Flags, PLR_BRIEF );
@@ -60,4 +60,3 @@ void do_glance( Character *ch, char *argument )
       return;
     }
 }
-

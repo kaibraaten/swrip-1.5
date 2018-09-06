@@ -3,10 +3,10 @@
 #include "room.hpp"
 #include "descriptor.hpp"
 
-void do_beep( Character *ch, char *argument )
+void do_beep( Character *ch, std::string argument )
 {
   Character *victim = NULL;
-  char arg[MAX_STRING_LENGTH];
+  std::string arg;
   bool ch_comlink = false, victim_comlink = false;
 
   argument = OneArgument( argument, arg );
@@ -27,9 +27,9 @@ void do_beep( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
-      ch->Echo( "Beep who?\r\n" );
+      ch->Echo( "Beep whom?\r\n" );
       return;
     }
 
@@ -108,20 +108,23 @@ void do_beep( Character *ch, char *argument )
     }
 
   if ( victim->Desc
-       &&   victim->Desc->ConnectionState == CON_EDITING
-       &&   GetTrustLevel(ch) < LEVEL_GREATER )
+       && victim->Desc->ConnectionState == CON_EDITING
+       && GetTrustLevel(ch) < LEVEL_GREATER )
     {
-      Act( AT_PLAIN, "$E is currently in a writing buffer. Please try again in a few minutes.", ch, 0, victim, TO_CHAR );
+      Act( AT_PLAIN, "$E is currently in a writing buffer. Please try again in a few minutes.",
+           ch, 0, victim, TO_CHAR );
       return;
     }
 
-  ch->Echo( "&WYou beep %s: %s\r\n\a" , victim->Name, argument );
+  ch->Echo( "&WYou beep %s: %s\r\n\a",
+            victim->Name.c_str(), argument.c_str() );
   victim->Echo("\a");
 
   if ( CharacterKnowsLanguage( victim, ch->Speaking, ch )
-       ||  (IsNpc(ch) && !ch->Speaking) )
-    Act( AT_WHITE, "$n beeps: '$t'", ch, argument, victim, TO_VICT );
+       || (IsNpc(ch) && !ch->Speaking) )
+    Act( AT_WHITE, "$n beeps: '$t'", ch, argument.c_str(), victim, TO_VICT );
   else
-    Act( AT_WHITE, "$n beeps: '$t'", ch, Scramble(argument, ch->Speaking), victim, TO_VICT );
+    Act( AT_WHITE, "$n beeps: '$t'", ch,
+         Scramble(argument, ch->Speaking).c_str(), victim, TO_VICT );
 }
 

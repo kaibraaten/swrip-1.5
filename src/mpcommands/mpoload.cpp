@@ -2,14 +2,14 @@
 #include "mud.hpp"
 #include "object.hpp"
 
-void do_mpoload( Character *ch, char *argument )
+void do_mpoload( Character *ch, std::string argument )
 {
-  char arg1[ MAX_INPUT_LENGTH ];
-  char arg2[ MAX_INPUT_LENGTH ];
+  std::string arg1;
+  std::string arg2;
   ProtoObject *pObjIndex = nullptr;
-  Object       *obj = nullptr;
-  int             level = 0;
-  int               timer = 0;
+  Object *obj = nullptr;
+  int level = 0;
+  int timer = 0;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -23,13 +23,13 @@ void do_mpoload( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || !IsNumber( arg1 ) )
+  if ( arg1.empty() || !IsNumber( arg1 ) )
     {
       ProgBug( "Mpoload - Bad syntax", ch );
       return;
     }
 
-  if ( IsNullOrEmpty( arg2 ) )
+  if ( arg2.empty() )
     {
       level = GetTrustLevel( ch );
     }
@@ -43,7 +43,9 @@ void do_mpoload( Character *ch, char *argument )
           ProgBug( "Mpoload - Bad level syntax", ch );
           return;
         }
-      level = atoi( arg2 );
+
+      level = std::stoi( arg2 );
+
       if ( level < 0 || level > GetTrustLevel( ch ) )
         {
           ProgBug( "Mpoload - Bad level", ch );
@@ -53,7 +55,8 @@ void do_mpoload( Character *ch, char *argument )
       /*
        * New feature from Thoric.
        */
-      timer = atoi( argument );
+      timer = std::stoi( argument );
+
       if ( timer < 0 )
         {
           ProgBug( "Mpoload - Bad timer", ch );
@@ -61,7 +64,7 @@ void do_mpoload( Character *ch, char *argument )
         }
     }
 
-  if ( ( pObjIndex = GetProtoObject( atoi( arg1 ) ) ) == NULL )
+  if ( ( pObjIndex = GetProtoObject( std::stoi( arg1 ) ) ) == NULL )
     {
       ProgBug( "Mpoload - Bad vnum arg", ch );
       return;
@@ -69,9 +72,9 @@ void do_mpoload( Character *ch, char *argument )
 
   obj = CreateObject( pObjIndex, level );
   obj->Timer = timer;
+
   if ( CAN_WEAR(obj, ITEM_TAKE) )
     ObjectToCharacter( obj, ch );
   else
     ObjectToRoom( obj, ch->InRoom );
 }
-

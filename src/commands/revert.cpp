@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "descriptor.hpp"
 
-void do_revert(Character *ch, char *argument)
+void do_revert(Character *ch, std::string argument)
 {
   Character *mob = nullptr;
 
@@ -13,7 +13,6 @@ void do_revert(Character *ch, char *argument)
     }
 
   RemoveBit(ch->Flags, ACT_POLYMORPHED);
-
   CharacterFromRoom(ch->Desc->Original);
 
   if(ch->Desc->Character)
@@ -35,4 +34,3 @@ void do_revert(Character *ch, char *argument)
   ch->Desc->Character->Switched = NULL;
   ch->Desc                  = NULL;
 }
-

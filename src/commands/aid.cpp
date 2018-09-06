@@ -3,9 +3,8 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_aid( Character *ch, char *argument )
+void do_aid( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = nullptr;
   int percent = 0;
 
@@ -15,15 +14,13 @@ void do_aid( Character *ch, char *argument )
       return;
     }
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Aid whom?\r\n" );
       return;
     }
 
-  if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, argument ) ) == NULL )
     {
       ch->Echo( "They aren't here.\r\n" );
       return;

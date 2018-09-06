@@ -59,10 +59,10 @@ static void RemoveComment( Character *ch, Character *victim, Note *pnote )
   SaveCharacter(victim);
 }
 
-void do_comment( Character *ch, char *argument )
+void do_comment( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char arg1[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg1;
   Character *victim = NULL;
   int noteNumber = 0;
   int anum = 0;
@@ -75,7 +75,7 @@ void do_comment( Character *ch, char *argument )
 
   if ( !ch->Desc )
     {
-      Log->Bug( "do_comment: no descriptor", 0 );
+      Log->Bug( "do_comment: no descriptor" );
       return;
     }
 
@@ -91,8 +91,8 @@ void do_comment( Character *ch, char *argument )
     {
     default:
       break;
-    case SUB_WRITING_NOTE:
 
+    case SUB_WRITING_NOTE:
       if ( !ch->PCData->Note )
         {
           Log->Bug( "do_comment: note got lost?", 0 );
@@ -104,7 +104,6 @@ void do_comment( Character *ch, char *argument )
       if ( ch->dest_buf != ch->PCData->Note )
         Log->Bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote", 0 );
 
-      FreeMemory( ch->PCData->Note->Text );
       ch->PCData->Note->Text = CopyBuffer( ch );
       StopEditing( ch );
       return;
@@ -154,7 +153,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( victim->PCData->Comments().size() == 0 )
+      if ( victim->PCData->Comments().empty() )
         {
           ch->Echo( "There are no relevant comments.\r\n" );
           return;
@@ -165,9 +164,9 @@ void do_comment( Character *ch, char *argument )
           noteNumber++;
           ch->Echo( "%2d) %-10s [%s] %s\r\n",
                     noteNumber,
-                    pnote->Sender,
-                    pnote->Date,
-                    pnote->Subject );
+                    pnote->Sender.c_str(),
+                    pnote->Date.c_str(),
+                    pnote->Subject.c_str() );
         }
 
       /* Act( AT_ACTION, "$n glances over the notes.", ch, NULL, NULL, TO_ROOM ); */
@@ -199,7 +198,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( victim->PCData->Comments().size() == 0 )
+      if ( victim->PCData->Comments().empty() )
         {
           ch->Echo( "There are no relevant comments.\r\n" );
           return;
@@ -213,7 +212,7 @@ void do_comment( Character *ch, char *argument )
       else if ( IsNumber( argument ) )
 	{
 	  fAll = false;
-	  anum = atoi( argument );
+	  anum = std::stoi( argument );
 	}
       else
 	{
@@ -231,12 +230,12 @@ void do_comment( Character *ch, char *argument )
             {
               ch->Echo( "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n",
                         noteNumber,
-                        pnote->Sender,
-                        pnote->Subject,
-                        pnote->Date,
-                        pnote->ToList);
+                        pnote->Sender.c_str(),
+                        pnote->Subject.c_str(),
+                        pnote->Date.c_str(),
+                        pnote->ToList.c_str());
 
-              ch->Echo( pnote->Text );
+              ch->Echo( pnote->Text.c_str() );
               /* Act( AT_ACTION, "$n reads a note.", ch, NULL, NULL, TO_ROOM ); */
               return;
             }
@@ -259,8 +258,7 @@ void do_comment( Character *ch, char *argument )
   if ( !StrCmp( arg, "subject" ) )
     {
       AttachNote( ch );
-      FreeMemory( ch->PCData->Note->Subject );
-      ch->PCData->Note->Subject = CopyString( argument );
+      ch->PCData->Note->Subject = argument;
       ch->Echo( "Ok.\r\n" );
       return;
     }
@@ -268,25 +266,19 @@ void do_comment( Character *ch, char *argument )
   if ( !StrCmp( arg, "to" ) )
     {
       AttachNote( ch );
-      FreeMemory( ch->PCData->Note->ToList );
-      ch->PCData->Note->ToList = CopyString( argument );
+      ch->PCData->Note->ToList = argument;
       ch->Echo( "Ok.\r\n" );
       return;
     }
 
   if ( !StrCmp( arg, "clear" ) )
     {
-      if ( ch->PCData->Note )
+      if ( ch->PCData->Note != nullptr )
         {
-          FreeMemory( ch->PCData->Note->Text );
-          FreeMemory( ch->PCData->Note->Subject );
-          FreeMemory( ch->PCData->Note->ToList );
-          FreeMemory( ch->PCData->Note->Date );
-          FreeMemory( ch->PCData->Note->Sender );
           delete ch->PCData->Note;
         }
 
-      ch->PCData->Note = NULL;
+      ch->PCData->Note = nullptr;
 
       ch->Echo( "Ok.\r\n" );
       return;
@@ -294,17 +286,17 @@ void do_comment( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "show" ) )
     {
-      if ( !ch->PCData->Note )
+      if ( ch->PCData->Note == nullptr )
         {
           ch->Echo( "You have no comment in progress.\r\n" );
           return;
         }
 
       ch->Echo( "%s: %s\r\nTo: %s\r\n",
-                ch->PCData->Note->Sender,
-                ch->PCData->Note->Subject,
-                ch->PCData->Note->ToList);
-      ch->Echo( "%s", ch->PCData->Note->Text );
+                ch->PCData->Note->Sender.c_str(),
+                ch->PCData->Note->Subject.c_str(),
+                ch->PCData->Note->ToList.c_str());
+      ch->Echo( "%s", ch->PCData->Note->Text.c_str() );
       return;
     }
 
@@ -343,9 +335,9 @@ void do_comment( Character *ch, char *argument )
 
       strtime                           = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
-      ch->PCData->Note->Date                   = CopyString( strtime );
+      ch->PCData->Note->Date = strtime;
 
-      Note *pnote             = ch->PCData->Note;
+      Note *pnote = ch->PCData->Note;
       ch->PCData->Note = NULL;
       victim->PCData->Add(pnote);
 
@@ -387,7 +379,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      anum = atoi( argument );
+      anum = std::stoi( argument );
       noteNumber = 0;
 
       for(Note *pnote : victim->PCData->Comments())
@@ -417,11 +409,11 @@ void do_comment( Character *ch, char *argument )
 static void WriteToFile(const Note *pnote, FILE *fp)
 {
   fprintf( fp,"#COMMENT\n" );
-  fprintf( fp,"sender       %s~\n",pnote->Sender);
-  fprintf( fp,"date         %s~\n",pnote->Date);
-  fprintf( fp,"to           %s~\n",pnote->ToList);
-  fprintf( fp,"subject      %s~\n",pnote->Subject);
-  fprintf( fp,"text\n%s~\n",pnote->Text);
+  fprintf( fp,"sender       %s~\n",pnote->Sender.c_str());
+  fprintf( fp,"date         %s~\n",pnote->Date.c_str());
+  fprintf( fp,"to           %s~\n",pnote->ToList.c_str());
+  fprintf( fp,"subject      %s~\n",pnote->Subject.c_str());
+  fprintf( fp,"text\n%s~\n",pnote->Text.c_str());
 }
 
 void WriteComments( const Character *ch, FILE *fp )
@@ -441,8 +433,7 @@ void ReadComment( Character *ch, FILE *fp )
 
   for ( ; ; )
     {
-      char letter;
-      Note *pnote = NULL;
+      char letter = 0;
 
       do
         {
@@ -458,32 +449,32 @@ void ReadComment( Character *ch, FILE *fp )
 
       ungetc( letter, fp );
 
-      pnote = new Note();
+      Note *pnote = new Note();
 
       if ( StrCmp( ReadWord( fp, Log, fBootDb ), "sender" ) )
         break;
 
-      pnote->Sender     = ReadStringToTilde( fp, Log, fBootDb );
+      pnote->Sender = ReadStringToTilde( fp, Log, fBootDb );
 
       if ( StrCmp( ReadWord( fp, Log, fBootDb ), "date" ) )
         break;
 
-      pnote->Date       = ReadStringToTilde( fp, Log, fBootDb );
+      pnote->Date = ReadStringToTilde( fp, Log, fBootDb );
 
       if ( StrCmp( ReadWord( fp, Log, fBootDb ), "to" ) )
         break;
 
-      pnote->ToList    = ReadStringToTilde( fp, Log, fBootDb );
+      pnote->ToList = ReadStringToTilde( fp, Log, fBootDb );
 
       if ( StrCmp( ReadWord( fp, Log, fBootDb ), "subject" ) )
         break;
 
-      pnote->Subject    = ReadStringToTilde( fp, Log, fBootDb );
+      pnote->Subject = ReadStringToTilde( fp, Log, fBootDb );
 
       if ( StrCmp( ReadWord( fp, Log, fBootDb ), "text" ) )
         break;
 
-      pnote->Text       = ReadStringToTilde( fp, Log, fBootDb );
+      pnote->Text = ReadStringToTilde( fp, Log, fBootDb );
 
       ch->PCData->Add(pnote);
       return;

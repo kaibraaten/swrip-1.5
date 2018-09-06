@@ -5,7 +5,7 @@
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 
-void do_showstatistic( Character *ch, char *argument )
+void do_showstatistic( Character *ch, std::string argument )
 {
   int pclass = -1, iR = 0, iC = 0, iC2 = 0;
   const Race *race = NULL;
@@ -85,7 +85,7 @@ void do_showstatistic( Character *ch, char *argument )
 	    }
 
           raceCh->Ability.Main = iC;
-	  sprintf( buf, "\r\n&c%-20s &B| &C", Capitalize( AbilityName[iC] ) );
+	  sprintf( buf, "\r\n&c%-20s &B| &C", Capitalize( AbilityName[iC] ).c_str() );
 
           for( iC2 = 0; iC2 < MAX_ABILITY; iC2++ )
             {
@@ -108,7 +108,7 @@ void do_showstatistic( Character *ch, char *argument )
     }
   else
     {
-      sprintf( buf, "&R%s Statistics\r\n", Capitalize(AbilityName[pclass]));
+      sprintf( buf, "&R%s Statistics\r\n", Capitalize(AbilityName[pclass]).c_str());
       ch->Echo(buf);
 
       ch->Echo("                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );

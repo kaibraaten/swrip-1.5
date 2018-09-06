@@ -7,24 +7,22 @@
 
 static void appraise_all( Character *ch, Character *keeper, char *fixstr );
 
-void do_appraise( Character *ch, char *argument )
+void do_appraise( Character *ch, std::string arg )
 {
   char buf[MAX_STRING_LENGTH];
-  char arg[MAX_INPUT_LENGTH];
-  Character *keeper = nullptr;
   Object *obj = nullptr;
   int cost = 0;
   char *fixstr = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Appraise what?\r\n" );
       return;
     }
 
-  if ( ( keeper = FindFixer( ch ) ) == NULL )
+  Character *keeper = FindFixer(ch);
+  
+  if ( keeper == nullptr )
     return;
 
   switch( keeper->Prototype->RepairShop->ShopType )
@@ -92,7 +90,7 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
         {
           if ( !CanDropObject( ch, obj ) )
             {
-              ch->Echo( "You can't let go of %s.\r\n", obj->Name );
+              ch->Echo( "You can't let go of %s.\r\n", obj->Name.c_str() );
             }
           else if ( ( cost = GetRepairCost( keeper, obj ) ) < 0 )
             {
@@ -108,7 +106,7 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
             {
               sprintf( buf,
                        "$N tells you, 'It will cost %d credit%s to %s %s'",
-                       cost, cost == 1 ? "" : "s", fixstr, obj->Name );
+                       cost, cost == 1 ? "" : "s", fixstr, obj->Name.c_str() );
               Act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
               total += cost;
             }

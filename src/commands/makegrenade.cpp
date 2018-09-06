@@ -11,7 +11,7 @@ struct UserData
   int Strength = 0;
   int Weight = 0;
   int Level = 0;
-  char *ItemName = nullptr;
+  std::string ItemName;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
@@ -21,7 +21,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static void FreeUserData( struct UserData *ud );
 
-void do_makegrenade( Character *ch, char *argument )
+void do_makegrenade( Character *ch, std::string argument )
 {
   static const struct CraftingMaterial materials[] =
     {
@@ -54,14 +54,14 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   Character *ch = GetEngineer( args->CraftingSession );
   struct UserData *ud = (struct UserData*) userData;
 
-  if ( IsNullOrEmpty( args->CommandArguments ) )
+  if ( args->CommandArguments.empty() )
     {
       ch->Echo("&RUsage: Makegrenade <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
 
-  ud->ItemName = CopyString( args->CommandArguments );
+  ud->ItemName = args->CommandArguments;
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
@@ -91,18 +91,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( grenade->WearFlags, ITEM_TAKE );
   grenade->Weight = ud->Weight;
 
-  FreeMemory( grenade->Name );
-  strcpy( buf, ud->ItemName );
+  strcpy( buf, ud->ItemName.c_str() );
   strcat( buf, " grenade");
-  grenade->Name = CopyString( buf );
+  grenade->Name = buf;
 
-  strcpy( buf, ud->ItemName );
-  FreeMemory( grenade->ShortDescr );
-  grenade->ShortDescr = CopyString( buf );
+  strcpy( buf, ud->ItemName.c_str() );
+  grenade->ShortDescr = buf;
 
-  FreeMemory( grenade->Description );
   strcat( buf, " was carelessly misplaced here." );
-  grenade->Description = CopyString( Capitalize( buf ) );
+  grenade->Description = Capitalize( buf );
 
   grenade->Value[OVAL_EXPLOSIVE_MIN_DMG] = ud->Strength / 2;
   grenade->Value[OVAL_EXPLOSIVE_MAX_DMG] = ud->Strength;
@@ -123,11 +120,6 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 
 static void FreeUserData( struct UserData *ud )
 {
-  if( ud->ItemName )
-    {
-      FreeMemory( ud->ItemName );
-    }
-
   delete ud;
 }
 

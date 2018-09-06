@@ -9,22 +9,15 @@
 #include "protomob.hpp"
 #include "descriptor.hpp"
 
-void do_mstat( Character *ch, char *argument )
+void do_mstat( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-
   SetCharacterColor( AT_PLAIN, ch );
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Mstat whom?\r\n");
       return;
     }
-
-  if ( arg[0] != '\'' && arg[0] != '"' && strlen(argument) > strlen(arg) )
-    strcpy( arg, argument );
 
   Character *victim = GetCharacterAnywhere(ch, arg);
   
@@ -45,20 +38,20 @@ void do_mstat( Character *ch, char *argument )
     }
 
   ch->Echo("Name: %s     Organization: %s\r\n",
-             victim->Name,
-             ( IsNpc( victim ) || !victim->PCData->ClanInfo.Clan ) ? "(none)"
-             : victim->PCData->ClanInfo.Clan->Name );
+           victim->Name.c_str(),
+           ( IsNpc( victim ) || !victim->PCData->ClanInfo.Clan ) ? "(none)"
+           : victim->PCData->ClanInfo.Clan->Name.c_str() );
 
   if( GetTrustLevel(ch) >= LEVEL_GREATER && !IsNpc(victim) && victim->Desc )
     ch->Echo("Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
-	  victim->Desc->Remote.Hostname, victim->Desc->Socket,
-	  victim->Trust, !IsNullOrEmpty( victim->PCData->AuthedBy )
-	  ? victim->PCData->AuthedBy : "(unknown)" );
+             victim->Desc->Remote.Hostname.c_str(), victim->Desc->Socket,
+             victim->Trust, !victim->PCData->AuthedBy.empty()
+             ? victim->PCData->AuthedBy.c_str() : "(unknown)" );
 
   if ( !IsNpc(victim) && victim->PCData->ReleaseDate != 0 )
     ch->Echo("Helled until %24.24s by %s.\r\n",
               ctime(&victim->PCData->ReleaseDate),
-              victim->PCData->HelledBy);
+              victim->PCData->HelledBy.c_str());
 
   ch->Echo("Vnum: %d   Sex: %s   Room: %d   Count: %d  Killed: %d\r\n",
              IsNpc(victim) ? victim->Prototype->Vnum : 0,
@@ -110,9 +103,9 @@ void do_mstat( Character *ch, char *argument )
            GetHitRoll(victim), GetDamageRoll(victim),
            victim->Position,    victim->Wimpy );
   ch->Echo("Fighting: %s    Master: %s    Leader: %s\r\n",
-           victim->Fighting ? victim->Fighting->Who->Name : "(none)",
-           victim->Master      ? victim->Master->Name   : "(none)",
-           victim->Leader      ? victim->Leader->Name   : "(none)" );
+           victim->Fighting ? victim->Fighting->Who->Name.c_str() : "(none)",
+           victim->Master      ? victim->Master->Name.c_str() : "(none)",
+           victim->Leader      ? victim->Leader->Name.c_str() : "(none)" );
 
   if ( !IsNpc(victim) )
     {
@@ -194,14 +187,14 @@ void do_mstat( Character *ch, char *argument )
 
   ch->Echo("\r\n");
 
-  if ( victim->PCData && !IsNullOrEmpty( victim->PCData->Bestowments ) )
+  if ( !IsNpc(victim) && !victim->PCData->Bestowments.empty() )
     {
-      ch->Echo("Bestowments: %s\r\n", victim->PCData->Bestowments );
+      ch->Echo("Bestowments: %s\r\n", victim->PCData->Bestowments.c_str() );
     }
 
   ch->Echo("Short description: %s\r\nLong  description: %s",
-           victim->ShortDescr,
-           !IsNullOrEmpty( victim->LongDescr ) ? victim->LongDescr : "(none)\r\n" );
+           victim->ShortDescr.c_str(),
+           !victim->LongDescr.empty() ? victim->LongDescr.c_str() : "(none)\r\n" );
 
   if ( IsNpc(victim) && ( victim->spec_fun || victim->spec_2 ) )
     {
@@ -231,7 +224,7 @@ void do_mstat( Character *ch, char *argument )
 	{
           ch->Echo("%s: '%s' modifies %s by %d for %d rounds with bits %s.\r\n",
                    SkillTypeName[skill->Type],
-                   skill->Name,
+                   skill->Name.c_str(),
                    GetAffectLocationName( paf->Location ),
                    paf->Modifier,
                    paf->Duration,
@@ -240,4 +233,3 @@ void do_mstat( Character *ch, char *argument )
 	}
     }
 }
-

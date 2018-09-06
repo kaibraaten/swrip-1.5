@@ -69,7 +69,8 @@ void Descriptor::WriteToBuffer(const std::string &txt, size_t length)
         {
           /* empty buffer */
           OutTop = 0;
-          Log->Bug("Buffer overflow. Closing (%s).", Character ? Character->Name : "???" );
+          Log->Bug("Buffer overflow. Closing (%s).",
+                   Character ? Character->Name.c_str() : "???" );
           CloseDescriptor(this, true);
           return;
         }
@@ -92,8 +93,8 @@ bool Descriptor::CheckReconnect( const std::string &name, bool fConn )
     {
       if ( !IsNpc(ch)
            && ( !fConn || !ch->Desc )
-           &&    ch->Name
-           &&   !StrCmp( name, ch->Name ) )
+           && !ch->Name.empty()
+           && !StrCmp( name, ch->Name ) )
         {
           if ( fConn && ch->Switched )
             {
@@ -113,8 +114,7 @@ bool Descriptor::CheckReconnect( const std::string &name, bool fConn )
           
           if ( fConn == false )
             {
-              FreeMemory( Character->PCData->Password );
-              Character->PCData->Password = CopyString( ch->PCData->Password );
+              Character->PCData->Password = ch->PCData->Password;
             }
           else
             {
@@ -126,7 +126,8 @@ bool Descriptor::CheckReconnect( const std::string &name, bool fConn )
               ch->IdleTimer = 0;
               ch->Echo( "Reconnecting.\r\n" );
               Act( AT_ACTION, "$n has reconnected.", ch, nullptr, nullptr, TO_ROOM );
-              sprintf( log_buf, "%s@%s reconnected.", ch->Name, Remote.Hostname );
+              sprintf( log_buf, "%s@%s reconnected.",
+                       ch->Name.c_str(), Remote.Hostname.c_str() );
               Log->LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
               ConnectionState = CON_PLAYING;
             }
@@ -156,8 +157,8 @@ bool Descriptor::CheckMultiplaying( const std::string &name )
           
           WriteToBuffer( "Sorry multi-playing is not allowed... have your other character quit first.\r\n" );
           sprintf( log_buf, "%s attempting to multiplay with %s.",
-                   dold->Original ? dold->Original->Name : dold->Character->Name,
-                   Character->Name );
+                   dold->Original ? dold->Original->Name.c_str() : dold->Character->Name.c_str(),
+                   Character->Name.c_str() );
           Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
           FreeCharacter( Character );
           Character = nullptr;
@@ -180,11 +181,11 @@ unsigned char Descriptor::CheckPlaying( const std::string &name, bool kick )
           const int cstate = dold->ConnectionState;
           class Character *ch = dold->Original ? dold->Original : dold->Character;
           
-          if ( !ch->Name
+          if ( ch->Name.empty()
                || ( cstate != CON_PLAYING && cstate != CON_EDITING ) )
             {
               WriteToBuffer( "Already connected - try again.\r\n", 0 );
-              sprintf( log_buf, "%s already connected.", ch->Name );
+              sprintf( log_buf, "%s already connected.", ch->Name.c_str() );
               Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
               return BERR;
             }
@@ -214,7 +215,7 @@ unsigned char Descriptor::CheckPlaying( const std::string &name, bool kick )
           Act( AT_ACTION, "$n has reconnected, kicking off old link.",
                ch, nullptr, nullptr, TO_ROOM );
           sprintf( log_buf, "%s@%s reconnected, kicking off old link.",
-                   ch->Name, Remote.Hostname );
+                   ch->Name.c_str(), Remote.Hostname.c_str() );
           Log->LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
 
           ConnectionState = cstate;
@@ -247,12 +248,12 @@ bool Descriptor::FlushBuffer(bool fPrompt)
           char snoopbuf[MAX_INPUT_LENGTH] = {'\0'};
           buf[512] = '\0';
 
-          if ( Character && Character->Name )
+          if ( Character && !Character->Name.empty() )
             {
-              if (Original && Original->Name)
-                sprintf( snoopbuf, "%s (%s)", Character->Name, Original->Name );
+              if (Original && !Original->Name.empty())
+                sprintf( snoopbuf, "%s (%s)", Character->Name.c_str(), Original->Name.c_str() );
               else
-                sprintf( snoopbuf, "%s", Character->Name);
+                sprintf( snoopbuf, "%s", Character->Name.c_str());
 
               SnoopBy->WriteToBuffer( snoopbuf );
             }
@@ -299,13 +300,13 @@ bool Descriptor::FlushBuffer(bool fPrompt)
   if ( SnoopBy )
     {
       /* without check, 'force mortal quit' while snooped caused crash, -h */
-      if ( Character && Character->Name )
+      if ( Character && !Character->Name.empty() )
         {
           /* Show original snooped names. -- Altrag */
-          if ( Original && Original->Name )
-            sprintf( buf, "%s (%s)", Character->Name, Original->Name );
+          if ( Original && !Original->Name.empty() )
+            sprintf( buf, "%s (%s)", Character->Name.c_str(), Original->Name.c_str() );
           else
-            sprintf( buf, "%s", Character->Name);
+            sprintf( buf, "%s", Character->Name.c_str());
 
           SnoopBy->WriteToBuffer( buf );
         }
@@ -340,8 +341,7 @@ bool Descriptor::Read()
 
   if ( iStart >= sizeof(pImpl->InBuffer) - 10 )
     {
-      sprintf( log_buf, "%s input overflow!", Remote.Hostname );
-      Log->Info( log_buf );
+      Log->Info( "%s input overflow!", Remote.Hostname.c_str() );
       WriteToDescriptor( Socket,
                          "\r\n*** PUT A LID ON IT!!! ***\r\n", 0 );
       return false;

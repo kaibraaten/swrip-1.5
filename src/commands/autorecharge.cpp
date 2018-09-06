@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_autorecharge(Character *ch, char *argument )
+void do_autorecharge(Character *ch, std::string argument )
 {
   int the_chance = 0;
   Ship *ship = nullptr;
@@ -40,17 +40,17 @@ void do_autorecharge(Character *ch, char *argument )
     }
 
   Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
-       NULL, argument , TO_ROOM );
+       NULL, argument.c_str(), TO_ROOM );
 
   if ( !StrCmp(argument,"on" ) )
     {
-      ship->AutoRecharge=true;
+      ship->AutoRecharge = true;
       ch->Echo( "&GYou power up the shields.\r\n" );
       EchoToCockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON.");
     }
   else if ( !StrCmp(argument,"off" ) )
     {
-      ship->AutoRecharge=false;
+      ship->AutoRecharge = false;
       ch->Echo( "&GYou shutdown the shields.\r\n" );
       EchoToCockpit( AT_YELLOW , ship , "Shields OFF. Shield strength set to 0. Autorecharge OFF.");
       ship->Defenses.Shield.Current = 0;
@@ -59,7 +59,7 @@ void do_autorecharge(Character *ch, char *argument )
     {
       ship->AutoRecharge=false;
       ch->Echo( "&GYou let the shields idle.\r\n" );
-      EchoToCockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
+      EchoToCockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLING.");
     }
   else
     {
@@ -67,7 +67,7 @@ void do_autorecharge(Character *ch, char *argument )
         {
           ship->AutoRecharge=false;
           ch->Echo( "&GYou toggle the shields.\r\n" );
-          EchoToCockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
+          EchoToCockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLING.");
         }
       else
         {

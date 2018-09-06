@@ -1,19 +1,19 @@
-#include <time.h>
+#include <ctime>
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
 
-void do_hell( Character *ch, char *argument )
+void do_hell( Character *ch, std::string argument )
 {
   Character *victim = NULL;
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   short hell_time = 0;
   bool h_d = false;
   struct tm *tms = NULL;
 
   argument = OneArgument(argument, arg);
 
-  if ( !*arg )
+  if ( arg.empty() )
     {
       ch->Echo( "Hell who, and for how long?\r\n" );
       return;
@@ -34,19 +34,20 @@ void do_hell( Character *ch, char *argument )
   if ( victim->PCData->ReleaseDate != 0 )
     {
       ch->Echo( "They are already in hell until %24.24s, by %s.\r\n",
-                ctime(&victim->PCData->ReleaseDate), victim->PCData->HelledBy);
+                ctime(&victim->PCData->ReleaseDate),
+                victim->PCData->HelledBy.c_str());
       return;
     }
 
   argument = OneArgument(argument, arg);
 
-  if ( !*arg || !IsNumber(arg) )
+  if ( arg.empty() || !IsNumber(arg) )
     {
       ch->Echo( "Hell them for how long?\r\n" );
       return;
     }
 
-  hell_time = atoi(arg);
+  hell_time = std::stoi(arg);
 
   if ( hell_time <= 0 )
     {
@@ -56,7 +57,7 @@ void do_hell( Character *ch, char *argument )
 
   argument = OneArgument(argument, arg);
 
-  if ( !*arg || !StringPrefix(arg, "hours") )
+  if ( arg.empty() || !StringPrefix(arg, "hours") )
     {
       h_d = true;
     }
@@ -79,7 +80,7 @@ void do_hell( Character *ch, char *argument )
     tms->tm_mday += hell_time;
 
   victim->PCData->ReleaseDate = mktime(tms);
-  victim->PCData->HelledBy = CopyString(ch->Name);
+  victim->PCData->HelledBy = ch->Name;
   ch->Echo( "%s will be released from hell at %24.24s.\r\n", victim->Name,
             ctime(&victim->PCData->ReleaseDate));
   Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", victim, NULL, ch, TO_NOTVICT);
@@ -90,6 +91,5 @@ void do_hell( Character *ch, char *argument )
   victim->Echo( "The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for %d %s%s.\r\n", hell_time,
                 (h_d ? "hour" : "day"), (hell_time == 1 ? "" : "s"));
-  SaveCharacter(victim);        /* used to save ch, fixed by Thoric 09/17/96 */
+  SaveCharacter(victim);
 }
-

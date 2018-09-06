@@ -3,15 +3,15 @@
 #include "character.hpp"
 #include "protomob.hpp"
 
-void do_makerepair( Character *ch, char *argument )
+void do_makerepair( Character *ch, std::string argument )
 {
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Usage: makerepair <mobvnum>\r\n");
       return;
     }
 
-  vnum_t vnum = atoi( argument );
+  vnum_t vnum = std::stoi( argument );
   ProtoMobile *mob = GetProtoMobile(vnum);
   
   if ( mob == nullptr )
@@ -31,13 +31,13 @@ void do_makerepair( Character *ch, char *argument )
 
   RepairShop *repair = new RepairShop();
 
+  repair->Keeper = vnum;
+  repair->ProfitFix = 100;
+  repair->ShopType = SHOP_FIX;
+  repair->BusinessHours.Open = 0;
+  repair->BusinessHours.Close = 23;
+  mob->RepairShop = repair;
+
   RepairShops->Add(repair);
-  repair->Keeper        = vnum;
-  repair->ProfitFix    = 100;
-  repair->ShopType     = SHOP_FIX;
-  repair->BusinessHours.Open     = 0;
-  repair->BusinessHours.Close    = 23;
-  mob->RepairShop            = repair;
   ch->Echo("Done.\r\n");
 }
-

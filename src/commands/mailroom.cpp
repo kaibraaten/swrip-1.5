@@ -3,13 +3,11 @@
 #include "character.hpp"
 #include "board.hpp"
 
-void do_mailroom(Character *ch, char *argument)
+void do_mailroom(Character *ch, std::string argument)
 {
-  Board *board;
-  char arg[MAX_STRING_LENGTH];
-  char arg_passed[MAX_STRING_LENGTH];
-
-  strcpy(arg_passed, argument);
+  Board *board = nullptr;
+  std::string arg;
+  std::string arg_passed = argument;
 
   switch( ch->SubState )
     {
@@ -18,12 +16,13 @@ void do_mailroom(Character *ch, char *argument)
       break;
 
     default:
-
       argument = OneArgument(argument, arg);
       SmashTilde( argument );
 
-      if (!StrCmp(arg, "write") || !StrCmp(arg, "to")
-          ||  !StrCmp(arg, "subject") || !StrCmp(arg, "show"))
+      if (!StrCmp(arg, "write")
+          || !StrCmp(arg, "to")
+          || !StrCmp(arg, "subject")
+          || !StrCmp(arg, "show"))
         {
           OperateOnNote(ch, arg_passed, true);
           return;
@@ -49,5 +48,3 @@ void do_mailroom(Character *ch, char *argument)
         }
     }
 }
-
-

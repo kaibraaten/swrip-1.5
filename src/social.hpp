@@ -10,18 +10,18 @@
 class Social
 {
 public:
-  char *Name = nullptr;
-  char *CharNoArg = nullptr;
-  char *OthersNoArg = nullptr;
-  char *CharFound = nullptr;
-  char *OthersFound = nullptr;
-  char *VictimFound = nullptr;
-  char *CharAuto = nullptr;
-  char *OthersAuto = nullptr;
+  std::string Name;
+  std::string CharNoArg;
+  std::string OthersNoArg;
+  std::string CharFound;
+  std::string OthersFound;
+  std::string VictimFound;
+  std::string CharAuto;
+  std::string OthersAuto;
 };
 
 void FreeSocial( Social *social );
-bool CheckSocial( Character *ch, const std::string &command, char *argument );
+bool CheckSocial( Character *ch, const std::string &command, const std::string &argument );
 
 struct CompareSocial
 {

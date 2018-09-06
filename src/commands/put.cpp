@@ -7,17 +7,17 @@
 
 static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 
-void do_put( Character *ch, char *argument )
+void do_put( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
   int number = 0;
 
   argument = OneArgument( argument, arg1 );
 
   if ( IsNumber(arg1) )
     {
-      number = atoi(arg1);
+      number = std::stoi(arg1);
 
       if ( number < 1 )
         {
@@ -29,12 +29,13 @@ void do_put( Character *ch, char *argument )
     }
 
   argument = OneArgument( argument, arg2 );
+
   /* munch optional words */
   if ( (!StrCmp(arg2, "into") || !StrCmp(arg2, "inside") || !StrCmp(arg2, "in"))
-       && !IsNullOrEmpty( argument ) )
+       && !argument.empty() )
     argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
+  if ( arg1.empty() || arg2.empty() )
     {
       ch->Echo("Put what in what?\r\n");
       return;
@@ -53,7 +54,8 @@ void do_put( Character *ch, char *argument )
   
   if ( container == nullptr )
     {
-      Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
+      Act( AT_PLAIN, "I see no $T here.",
+           ch, NULL, arg2.c_str(), TO_CHAR );
       return;
     }
 
@@ -80,7 +82,7 @@ void do_put( Character *ch, char *argument )
 
       if ( IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
-          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->Name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->Name.c_str(), TO_CHAR );
           return;
         }
     }
@@ -169,7 +171,7 @@ void do_put( Character *ch, char *argument )
       bool found = false;
       int cnt = 0;
       bool fAll = false;
-      const char *chk = nullptr;
+      std::string chk;
 
       if ( !StrCmp(arg1, "all") )
         fAll = true;
@@ -178,7 +180,7 @@ void do_put( Character *ch, char *argument )
       if ( number > 1 )
         chk = arg1;
       else
-        chk = &arg1[4];
+        chk = arg1.substr(4);
 
       SeparateOneObjectFromGroup(container);
 
@@ -225,7 +227,7 @@ void do_put( Character *ch, char *argument )
                  ch, NULL, NULL, TO_CHAR );
           else
             Act( AT_PLAIN, "You are not carrying any $T.",
-                 ch, NULL, chk, TO_CHAR );
+                 ch, NULL, chk.c_str(), TO_CHAR );
           return;
         }
 
@@ -258,4 +260,3 @@ static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch)
       SaveClanStoreroom(ch, clan);
     }
 }
-

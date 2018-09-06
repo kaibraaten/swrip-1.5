@@ -8,9 +8,9 @@
 
 static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 
-void do_drop( Character *ch, char *argument )
+void do_drop( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   bool found = false;
   int number = 0;
 
@@ -18,7 +18,7 @@ void do_drop( Character *ch, char *argument )
 
   if ( IsNumber(arg) )
     {
-      number = atoi(arg);
+      number = std::stoi(arg);
 
       if ( number < 1 )
         {
@@ -33,7 +33,7 @@ void do_drop( Character *ch, char *argument )
       number = 0;
     }
   
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Drop what?\r\n" );
       return;
@@ -90,8 +90,10 @@ void do_drop( Character *ch, char *argument )
           if ( IsBitSet( SysData.SaveFlags, SV_DROP ) )
             {
               SaveCharacter( ch );
+
               if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
                 SaveHome (ch );
+
               if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
                 SaveStoreroom( ch->InRoom );
             }
@@ -140,17 +142,18 @@ void do_drop( Character *ch, char *argument )
   else
     {
       int cnt = 0;
-      char *chk = nullptr;
+      std::string chk;
       bool fAll = false;
 
       if ( !StrCmp(arg, "all") )
         fAll = true;
       else
 	fAll = false;
+
       if ( number > 1 )
         chk = arg;
       else
-        chk = &arg[4];
+        chk = arg.size() > 4 ? arg.substr(4) : "";
 
       /* 'drop all' or 'drop all.obj' */
       if ( IsBitSet( ch->InRoom->Flags, ROOM_NODROPALL ) )
@@ -215,14 +218,17 @@ void do_drop( Character *ch, char *argument )
                  ch, NULL, NULL, TO_CHAR );
           else
             Act( AT_PLAIN, "You are not carrying any $T.",
-                 ch, NULL, chk, TO_CHAR );
+                 ch, NULL, chk.c_str(), TO_CHAR );
         }
     }
+
   if ( IsBitSet( SysData.SaveFlags, SV_DROP ) )
     {
       SaveCharacter( ch );
+
       if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
         SaveHome (ch );
+
       if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
         SaveStoreroom( ch->InRoom );
     } /* duping protector */

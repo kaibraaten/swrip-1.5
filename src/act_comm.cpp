@@ -237,7 +237,7 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
 
   if ( IsNullOrEmpty( argument ) )
     {
-      ch->Echo( "%s what?\r\n", Capitalize(verb) );
+      ch->Echo( "%s what?\r\n", Capitalize(verb).c_str() );
       return;
     }
 
@@ -302,7 +302,7 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
 
     case CHANNEL_NEWBIE:
       SetCharacterColor( AT_OOC, ch );
-      ch->Echo( "&z&r(&RNEWBIE&r)&Y %s: %s\r\n", ch->Name, argument );
+      ch->Echo( "&z&r(&RNEWBIE&r)&Y %s: %s\r\n", ch->Name.c_str(), argument );
       sprintf( buf, "&z&r(&RNEWBIE&r)&Y $n&Y: $t" );
       break;
 
@@ -356,7 +356,7 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
     {
-      sprintf( buf2, "%s: %s (%s)", IsNpc( ch ) ? ch->ShortDescr : ch->Name,
+      sprintf( buf2, "%s: %s (%s)", IsNpc( ch ) ? ch->ShortDescr.c_str() : ch->Name.c_str(),
                argument, verb.c_str() );
       AppendToFile( LOG_FILE, buf2 );
     }
@@ -370,7 +370,7 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
            &&   vch != ch
            &&  !IsBitSet(och->Deaf, channel) )
         {
-          const char *sbuf = argument;
+          std::string sbuf = argument;
 
           if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL && channel != CHANNEL_IMMTALK && channel != CHANNEL_OOC
                && channel != CHANNEL_ASK && channel != CHANNEL_NEWBIE && channel != CHANNEL_AVTALK
@@ -432,7 +432,7 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
           if ( channel == CHANNEL_SHIP || channel == CHANNEL_SPACE || channel == CHANNEL_SYSTEM )
             {
               Ship *ship = GetShipFromCockpit( ch->InRoom->Vnum );
-              Ship *target;
+              Ship *target = nullptr;
 
               if ( !ship )
                 continue;
@@ -478,17 +478,17 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
 
 	  if ( channel == CHANNEL_IMMTALK || channel == CHANNEL_AVTALK
                || channel == CHANNEL_103 || channel == CHANNEL_104 || channel == CHANNEL_105 )
-            Act( channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT , buf, ch, sbuf, vch, TO_VICT );
+            Act( channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT , buf, ch, sbuf.c_str(), vch, TO_VICT );
           else if (channel == CHANNEL_WARTALK)
-            Act( AT_WARTALK, buf, ch, sbuf, vch, TO_VICT );
+            Act( AT_WARTALK, buf, ch, sbuf.c_str(), vch, TO_VICT );
           else if (channel == CHANNEL_OOC || channel == CHANNEL_NEWBIE || channel == CHANNEL_ASK )
-            Act( AT_OOC, buf, ch, sbuf, vch, TO_VICT );
+            Act( AT_OOC, buf, ch, sbuf.c_str(), vch, TO_VICT );
           else if ( channel == CHANNEL_SHIP )
-            Act( AT_SHIP, buf, ch, sbuf, vch, TO_VICT );
+            Act( AT_SHIP, buf, ch, sbuf.c_str(), vch, TO_VICT );
           else if ( channel == CHANNEL_CLAN )
-            Act( AT_CLAN, buf, ch, sbuf, vch, TO_VICT );
+            Act( AT_CLAN, buf, ch, sbuf.c_str(), vch, TO_VICT );
           else
-            Act( AT_GOSSIP, buf, ch, sbuf, vch, TO_VICT );
+            Act( AT_GOSSIP, buf, ch, sbuf.c_str(), vch, TO_VICT );
           vch->Position = position;
         }
     }
@@ -524,7 +524,7 @@ void ToChannel( const std::string &argument, int channel, const std::string &ver
            && vch->TopLevel >= level )
         {
           SetCharacterColor( AT_LOG, vch );
-          vch->Echo( buf );
+          vch->Echo( "%s", buf );
         }
     }
 }

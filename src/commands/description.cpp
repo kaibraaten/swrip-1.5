@@ -3,7 +3,7 @@
 #include "editor.hpp"
 #include "log.hpp"
 
-void do_description( Character *ch, char *argument )
+void do_description( Character *ch, std::string argument )
 {
   if ( IsNpc( ch ) )
     {
@@ -20,7 +20,7 @@ void do_description( Character *ch, char *argument )
   switch( ch->SubState )
     {
     default:
-      Log->Bug( "do_description: illegal substate", 0 );
+      Log->Bug( "do_description: illegal substate (%d)", ch->SubState );
       return;
 
     case SUB_RESTRICTED:
@@ -35,7 +35,6 @@ void do_description( Character *ch, char *argument )
       return;
 
     case SUB_PERSONAL_DESC:
-      FreeMemory( ch->Description );
       ch->Description = CopyBuffer( ch );
       StopEditing( ch );
       return;

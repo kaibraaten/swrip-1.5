@@ -2,13 +2,9 @@
 #include "character.hpp"
 #include "object.hpp"
 
-void do_remove( Character *ch, char *argument )
+void do_remove( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Remove what?\r\n");
       return;
@@ -23,9 +19,9 @@ void do_remove( Character *ch, char *argument )
 
       for(Object *obj : carriedObjects)
         {
-          if ( obj->WearLoc != WEAR_NONE && CanSeeObject ( ch, obj ) )
+          if ( obj->WearLoc != WEAR_NONE && CanSeeObject( ch, obj ) )
             {
-              RemoveObject ( ch, obj->WearLoc, true );
+              RemoveObject( ch, obj->WearLoc, true );
             }
         }
 
@@ -51,4 +47,3 @@ void do_remove( Character *ch, char *argument )
 
   RemoveObject( ch, obj->WearLoc, true );
 }
-

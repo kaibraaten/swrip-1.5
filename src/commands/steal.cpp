@@ -5,11 +5,11 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_steal( Character *ch, char *argument )
+void do_steal( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
   Character *victim = NULL, *mst = NULL;
   Object *obj = NULL, *obj_next = NULL;
   int percent = 0, xp = 0;
@@ -23,7 +23,7 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
+  if ( arg1.empty() || arg2.empty() )
     {
       ch->Echo("Steal what from whom?\r\n");
       return;
@@ -56,9 +56,10 @@ void do_steal( Character *ch, char *argument )
     - (GetCurrentLuck(ch) - 15) + (GetCurrentLuck(victim) - 13)
     + TimesKilled( ch, victim )*7;
 
-  if ( ( IsBitSet( victim->Immune, RIS_STEAL ) ) ||
-       ( victim->Position != POS_STUNNED && (victim->Position == POS_FIGHTING
-                                             ||   percent > ( IsNpc(ch) ? 90 : ch->PCData->Learned[gsn_steal] ) ) ) )
+  if ( ( IsBitSet( victim->Immune, RIS_STEAL ) )
+       || ( victim->Position != POS_STUNNED
+            && (victim->Position == POS_FIGHTING
+                || percent > ( IsNpc(ch) ? 90 : ch->PCData->Learned[gsn_steal] ) ) ) )
     {
       /*
        * Failure.
@@ -69,11 +70,12 @@ void do_steal( Character *ch, char *argument )
 
       if (IsNpc(victim))
 	{
-          sprintf( buf, "%s is a bloody thief!", ch->Name );
+          sprintf( buf, "%s is a bloody thief!", ch->Name.c_str() );
           do_yell( victim, buf );
         }
 
       LearnFromFailure( ch, gsn_steal );
+
       if ( !IsNpc(ch) )
         {
           if ( CanLootVictim( ch, victim ) )
@@ -91,6 +93,7 @@ void do_steal( Character *ch, char *argument )
                 }
               else
                 mst = ch;
+
               if ( IsNpc( mst ) )
                 return;
 
@@ -104,12 +107,11 @@ void do_steal( Character *ch, char *argument )
     AddKill( ch, victim );  /* makes it harder to steal from same char */
 
   if ( !StrCmp( arg1, "credits"  )
-       ||   !StrCmp( arg1, "credit" )
-       ||   !StrCmp( arg1, "money"  ) )
+       || !StrCmp( arg1, "credit" )
+       || !StrCmp( arg1, "money"  ) )
     {
-      int amount;
+      int amount = (int) (victim->Gold * GetRandomNumberFromRange(1, 10) / 100);
 
-      amount = (int) (victim->Gold * GetRandomNumberFromRange(1, 10) / 100);
       if ( amount <= 0 )
         {
           ch->Echo("You couldn't get any credits.\r\n");
@@ -120,6 +122,7 @@ void do_steal( Character *ch, char *argument )
       ch->Gold     += amount;
       victim->Gold -= amount;
       ch->Echo("Aha!  You got %d credits.\r\n", amount );
+
       if ( !IsNpc(victim) || (ch->PCData->Learned[gsn_steal] < 50 ) )
         LearnFromSuccess( ch, gsn_steal );
 
@@ -128,8 +131,9 @@ void do_steal( Character *ch, char *argument )
 	  xp = umin( amount*10 , ( GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY ) + 1 ) - GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY))  ) / 35  );
 	  xp = umin( xp , ComputeXP( ch, victim ) );
 	  GainXP( ch, SMUGGLING_ABILITY, xp );
-   ch->Echo("&WYou gain %ld smuggling experience!\r\n", xp );
+          ch->Echo("&WYou gain %ld smuggling experience!\r\n", xp );
 	}
+
       return;
     }
 
@@ -141,7 +145,8 @@ void do_steal( Character *ch, char *argument )
             {
               if ( (obj_next=GetEquipmentOnCharacter(victim, obj->WearLoc)) != obj )
                 {
-                  ch->Echo("They are wearing %s on top of %s.\r\n", obj_next->ShortDescr, obj->ShortDescr);
+                  ch->Echo("They are wearing %s on top of %s.\r\n",
+                           obj_next->ShortDescr.c_str(), obj->ShortDescr.c_str());
                   ch->Echo("You'll have to steal that first.\r\n");
                   LearnFromFailure( ch, gsn_steal );
                   return;
@@ -157,8 +162,8 @@ void do_steal( Character *ch, char *argument )
     }
 
   if ( !CanDropObject( ch, obj )
-       ||   IS_OBJ_STAT(obj, ITEM_INVENTORY)
-       ||        IS_OBJ_STAT(obj, ITEM_PROTOTYPE))
+       || IS_OBJ_STAT(obj, ITEM_INVENTORY)
+       || IS_OBJ_STAT(obj, ITEM_PROTOTYPE))
     {
       ch->Echo("You can't manage to pry it away.\r\n");
       LearnFromFailure( ch, gsn_steal );
@@ -180,8 +185,10 @@ void do_steal( Character *ch, char *argument )
     }
 
   ch->Echo("Ok.\r\n");
+
   if ( IsNpc(victim)  || ch->PCData->Learned[gsn_steal] )
     LearnFromSuccess( ch, gsn_steal );
+
   if ( IsNpc( victim ) )
     {
       xp = umin( obj->Cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );
@@ -189,8 +196,8 @@ void do_steal( Character *ch, char *argument )
       GainXP( ch, SMUGGLING_ABILITY, xp );
       ch->Echo("&WYou gain %ld smuggling experience!\r\n", xp );
     }
+
   SeparateOneObjectFromGroup( obj );
   ObjectFromCharacter( obj );
   ObjectToCharacter( obj, ch );
 }
-

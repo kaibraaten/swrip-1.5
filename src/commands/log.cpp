@@ -1,14 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_log( Character *ch, char *argument )
+void do_log( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Log whom?\r\n");
       return;

@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "systemdata.hpp"
 
-void do_stun( Character *ch, char *argument )
+void do_stun( Character *ch, std::string argument )
 {
   Character *victim = NULL;
   Affect af;
@@ -89,4 +89,3 @@ void do_stun( Character *ch, char *argument )
       Act( AT_SKILL, "$n charges screaming at $N, but keeps going right on past.", ch, NULL, victim, TO_NOTVICT );
     }
 }
-

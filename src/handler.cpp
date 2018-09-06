@@ -58,7 +58,7 @@ static void ExplodeRoom_2( Room *room , int blast );
 
 void Explode( Object *obj )
 {
-  if ( obj->ArmedBy )
+  if ( !obj->ArmedBy.empty() )
     {
       Room *room = NULL;
       Character *xch = NULL;
@@ -993,7 +993,7 @@ void ObjectFromRoom( Object *obj )
   obj->InRoom      = NULL;
 
   if ( obj->Prototype->Vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
-    WriteCorpses( NULL, obj->ShortDescr + 14 );
+    WriteCorpses( NULL, obj->ShortDescr.c_str() + 14 );
 }
 
 /*
@@ -1031,7 +1031,7 @@ Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
   falling--;
 
   if ( obj->Prototype->Vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
-    WriteCorpses( NULL, obj->ShortDescr + 14 );
+    WriteCorpses( NULL, obj->ShortDescr.c_str() + 14 );
 
   return obj;
 }
@@ -1145,8 +1145,6 @@ void ExtractObject( Object *obj )
 
   for(ExtraDescription *ed : extraDescriptions)
     {
-      FreeMemory( ed->Description );
-      FreeMemory( ed->Keyword     );
       delete ed;
       obj->Remove(ed);
     }
@@ -1182,7 +1180,7 @@ void ExtractCharacter( Character *ch, bool fPull )
 
   if ( CharacterDiedRecently(ch) )
     {
-      Log->Bug("ExtractCharacter: %s already died!", ch->Name );
+      Log->Bug("ExtractCharacter: %s already died!", ch->Name.c_str() );
       return;
     }
 
@@ -1287,10 +1285,9 @@ void ExtractCharacter( Character *ch, bool fPull )
 /*
  * Find a char in the room.
  */
-Character *GetCharacterInRoom( const Character *ch, const std::string &charName )
+Character *GetCharacterInRoom( const Character *ch, std::string argument )
 {
-  const char *argument = charName.c_str();
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   vnum_t vnum = INVALID_VNUM;
 
   int number = NumberArgument( argument, arg );
@@ -1299,7 +1296,7 @@ Character *GetCharacterInRoom( const Character *ch, const std::string &charName 
     return (Character*)ch;
 
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
-    vnum = atoi( arg );
+    vnum = std::stoi( arg );
 
   int count  = 0;
 
@@ -1330,15 +1327,13 @@ Character *GetCharacterInRoom( const Character *ch, const std::string &charName 
     {
       if ( !CanSeeCharacter( ch, rch ) ||
            (!NiftyIsNamePrefix( arg, rch->Name ) &&
-            (IsNpc(rch) || (!IsNpc(rch) && !NiftyIsNamePrefix( arg, rch->PCData->Title )))
-            )
-           )
+            (IsNpc(rch) || (!IsNpc(rch) && !NiftyIsNamePrefix( arg, rch->PCData->Title )))))
         continue;
+      
       if ( number == 0 && !IsNpc(rch) )
         return rch;
-      else
-        if ( ++count == number )
-          return rch;
+      else if ( ++count == number )
+        return rch;
     }
 
   return NULL;
@@ -1347,10 +1342,9 @@ Character *GetCharacterInRoom( const Character *ch, const std::string &charName 
 /*
  * Find a char in the world.
  */
-Character *GetCharacterAnywhere( const Character *ch, const std::string &charName)
+Character *GetCharacterAnywhere( const Character *ch, std::string argument )
 {
-  const char *argument = charName.c_str();
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   vnum_t vnum = INVALID_VNUM;
 
   int number = NumberArgument( argument, arg );
@@ -1363,7 +1357,7 @@ Character *GetCharacterAnywhere( const Character *ch, const std::string &charNam
    * Allow reference by vnum for saints+                        -Thoric
    */
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
-    vnum = atoi( arg );
+    vnum = std::stoi( arg );
 
   /* check the room for an exact match */
   for(Character *wch : ch->InRoom->Characters())
@@ -1408,11 +1402,11 @@ Character *GetCharacterAnywhere( const Character *ch, const std::string &charNam
     {
       if ( !NiftyIsNamePrefix( arg, wch->Name ) )
         continue;
+
       if ( number == 0 && !IsNpc(wch) && IsWizVis(ch,wch))
         return wch;
-      else
-        if ( ++count == number  && IsWizVis(ch, wch) )
-          return wch;
+      else if ( ++count == number  && IsWizVis(ch, wch) )
+        return wch;
     }
 
   /*
@@ -1421,6 +1415,7 @@ Character *GetCharacterAnywhere( const Character *ch, const std::string &charNam
    * Added by Narn, Sept/96
    */
   count  = 0;
+
   for ( Character *wch = FirstCharacter; wch; wch = wch->Next )
     {
       if ( !NiftyIsNamePrefix( arg, wch->Name ) )
@@ -1453,11 +1448,10 @@ Object *GetInstanceOfObject( const ProtoObject *pObjIndex )
 /*
  * Find an obj in a list.
  */
-Object *GetObjectInList( const Character *ch, const std::string &objName,
+Object *GetObjectInList( const Character *ch, std::string argument,
                          const std::list<Object*> &list )
 {
-  const char *argument = objName.c_str();
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   int number = NumberArgument( argument, arg );
   int count  = 0;
 
@@ -1495,11 +1489,10 @@ Object *GetObjectInList( const Character *ch, const std::string &objName,
 /*
  * Find an obj in a list...going the other way                  -Thoric
  */
-Object *GetObjectInListReverse( const Character *ch, const std::string &objName,
+Object *GetObjectInListReverse( const Character *ch, std::string argument,
                                 const std::list<Object*> &list )
 {
-  const char *argument = objName.c_str();
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   int count = 0;
   int number = NumberArgument( argument, arg );
 
@@ -1520,7 +1513,7 @@ Object *GetObjectInListReverse( const Character *ch, const std::string &objName,
   */
   count = 0;
 
-  for(Object *obj : list)
+  for(Object *obj : Reverse(list))
     {
       if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
         {
@@ -1537,9 +1530,8 @@ Object *GetObjectInListReverse( const Character *ch, const std::string &objName,
 /*
  * Find an obj in the room or in inventory.
  */
-Object *GetObjectHere( const Character *ch, const std::string &objName )
+Object *GetObjectHere( const Character *ch, std::string argument )
 {
-  const char *argument = objName.c_str();
   Object *obj = nullptr;
 
   if ( !ch || !ch->InRoom )
@@ -1562,10 +1554,9 @@ Object *GetObjectHere( const Character *ch, const std::string &objName )
 /*
  * Find an obj in the world.
  */
-Object *GetObjectAnywhere( const Character *ch, const std::string &objName)
+Object *GetObjectAnywhere( const Character *ch, std::string argument )
 {
-  const char *argument = objName.c_str();
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   Object *obj = nullptr;
   int number = 0, count = 0;
   vnum_t vnum = INVALID_VNUM;
@@ -1582,7 +1573,7 @@ Object *GetObjectAnywhere( const Character *ch, const std::string &objName)
    * Allow reference by vnum for saints+                        -Thoric
    */
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
-    vnum = atoi( arg );
+    vnum = std::stoi( arg );
 
   count  = 0;
 
@@ -1601,6 +1592,7 @@ Object *GetObjectAnywhere( const Character *ch, const std::string &objName)
      Added by Narn, Sept/96
   */
   count  = 0;
+
   for ( obj = FirstObject; obj; obj = obj->Next )
     if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
       if ( (count += obj->Count) >= number )
@@ -1613,23 +1605,22 @@ Object *GetObjectAnywhere( const Character *ch, const std::string &objName)
  * Generic get obj function that supports optional containers.  -Thoric
  * currently only used for "eat" and "quaff".
  */
-Object *FindObject( Character *ch, const std::string &orig_argument, bool carryonly )
+Object *FindObject( Character *ch, std::string argument, bool carryonly )
 {
-  char argument_buffer[MAX_INPUT_LENGTH];
-  char *argument = argument_buffer;
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  Object *obj;
+  std::string arg1;
+  std::string arg2;
+  Object *obj = nullptr;
 
-  strcpy(argument, orig_argument.c_str());
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
   if ( !StrCmp( arg2, "from" )
-       && !IsNullOrEmpty( argument ) )
-    argument = OneArgument( argument, arg2 );
-
-  if ( IsNullOrEmpty( arg2 ) )
+       && !argument.empty() )
+    {
+      argument = OneArgument( argument, arg2 );
+    }
+  
+  if ( arg2.empty() )
     {
       if ( carryonly && ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
         {
@@ -1638,7 +1629,7 @@ Object *FindObject( Character *ch, const std::string &orig_argument, bool carryo
         }
       else if ( !carryonly && ( obj = GetObjectHere( ch, arg1 ) ) == NULL )
         {
-          Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg1, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg1.c_str(), TO_CHAR );
           return NULL;
         }
       
@@ -1658,14 +1649,14 @@ Object *FindObject( Character *ch, const std::string &orig_argument, bool carryo
       
       if ( !carryonly && ( container = GetObjectHere( ch, arg2 ) ) == NULL )
         {
-          Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2.c_str(), TO_CHAR );
           return NULL;
         }
 
       if ( !IS_OBJ_STAT(container, ITEM_COVERING )
            &&    IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
-          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->Name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->Name.c_str(), TO_CHAR );
           return NULL;
         }
 
@@ -2028,8 +2019,6 @@ void ExtractExit( Room *room, Exit *pexit )
   if ( pexit->ReverseExit )
     pexit->ReverseExit->ReverseExit = NULL;
 
-  FreeMemory( pexit->Keyword );
-  FreeMemory( pexit->Description );
   delete pexit;
 }
 
@@ -2040,16 +2029,14 @@ void CleanRoom( Room *room )
 {
   assert(room != nullptr);
 
-  FreeMemory( room->Description );
-  FreeMemory( room->Name );
+  room->Name.erase();
+  room->Description.erase();
 
   std::list<ExtraDescription*> extraDescriptions(room->ExtraDescriptions());
   
   for(ExtraDescription *ed : extraDescriptions)
     {
       room->Remove(ed);
-      FreeMemory( ed->Description );
-      FreeMemory( ed->Keyword );
       delete ed;
       top_ed--;
     }
@@ -2058,8 +2045,6 @@ void CleanRoom( Room *room )
     {
       Exit *pexit = room->Exits().front();
       room->Remove(pexit);
-      FreeMemory( pexit->Keyword );
-      FreeMemory( pexit->Description );
       delete pexit;
       top_exit--;
     }
@@ -2074,10 +2059,10 @@ void CleanRoom( Room *room )
  */
 void CleanObject( ProtoObject *obj )
 {
-  FreeMemory( obj->Name );
-  FreeMemory( obj->ShortDescr );
-  FreeMemory( obj->Description );
-  FreeMemory( obj->ActionDescription );
+  obj->Name.erase();
+  obj->ShortDescr.erase();
+  obj->Description.erase();
+  obj->ActionDescription.erase();
   obj->ItemType        = ITEM_NONE;
   obj->Flags      = 0;
   obj->WearFlags       = 0;
@@ -2100,8 +2085,6 @@ void CleanObject( ProtoObject *obj )
 
   for(ExtraDescription *ed : obj->ExtraDescriptions())
     {
-      FreeMemory( ed->Description );
-      FreeMemory( ed->Keyword     );
       delete ed;
       top_ed--;
       obj->Remove(ed);
@@ -2113,10 +2096,10 @@ void CleanObject( ProtoObject *obj )
  */
 void CleanMobile( ProtoMobile *mob )
 {
-  FreeMemory( mob->Name );
-  FreeMemory( mob->ShortDescr );
-  FreeMemory( mob->LongDescr  );
-  FreeMemory( mob->Description );
+  mob->Name.erase();
+  mob->ShortDescr.erase();
+  mob->LongDescr.erase();
+  mob->Description.erase();
   mob->spec_fun = NULL;
   mob->spec_2   = NULL;
   mob->Shop    = NULL;
@@ -2191,7 +2174,7 @@ void ShowAffectToCharacter( const Character *ch, const Affect *paf )
         case APPLY_WEARSPELL:
         case APPLY_REMOVESPELL:
           sprintf( buf, "Casts spell '%s'\r\n",
-                   IS_VALID_SN(paf->Modifier) ? SkillTable[paf->Modifier]->Name
+                   IS_VALID_SN(paf->Modifier) ? SkillTable[paf->Modifier]->Name.c_str()
                    : "unknown" );
           break;
         case APPLY_RESISTANT:
@@ -2269,9 +2252,6 @@ void CleanObjectQueue()
     {
       obj = extracted_obj_queue;
       extracted_obj_queue = extracted_obj_queue->Next;
-      FreeMemory( obj->Name        );
-      FreeMemory( obj->Description );
-      FreeMemory( obj->ShortDescr );
       delete obj;
       --cur_qobjs;
     }
@@ -2466,10 +2446,10 @@ Object *CopyObject( const Object *obj )
 {
   Object *clone = new Object(obj->Prototype, obj->Level);
 
-  clone->Name           = CopyString( obj->Name );
-  clone->ShortDescr    = CopyString( obj->ShortDescr );
-  clone->Description    = CopyString( obj->Description );
-  clone->ActionDescription = CopyString( obj->ActionDescription );
+  clone->Name           = obj->Name;
+  clone->ShortDescr    = obj->ShortDescr;
+  clone->Description    = obj->Description;
+  clone->ActionDescription = obj->ActionDescription;
   clone->ItemType      = obj->ItemType;
   clone->Flags    = obj->Flags;
   clone->WearFlags     = obj->WearFlags;

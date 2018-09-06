@@ -5,22 +5,22 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_addbounty( Character *ch, char *argument )
+void do_addbounty( Character *ch, std::string argument )
 {
-  const long MINIMUM_BOUNTY = 5000;
-  char arg[MAX_STRING_LENGTH];
+  constexpr long MINIMUM_BOUNTY = 5000;
+  std::string arg;
   long amount = 0;
   Character *victim = NULL;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
-      do_bounties( ch , argument );
+      do_bounties( ch, "" );
       return;
     }
 
   argument = OneArgument(argument, arg);
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Usage: Addbounty <target> <amount>\r\n" );
       return;
@@ -39,10 +39,10 @@ void do_addbounty( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     amount = 0;
   else
-    amount = atoi (argument);
+    amount = std::stoi(argument);
 
   if ( amount < MINIMUM_BOUNTY )
     {
@@ -50,7 +50,9 @@ void do_addbounty( Character *ch, char *argument )
       return;
     }
 
-  if ( !(victim = GetCharacterAnywhere( ch, arg )) )
+  victim = GetCharacterAnywhere( ch, arg );
+  
+  if ( victim == nullptr )
     {
       ch->Echo( "They don't appear to be here... wait til they log in.\r\n" );
       return;
@@ -61,8 +63,9 @@ void do_addbounty( Character *ch, char *argument )
       ch->Echo( "You can only set bounties on other players... not mobs!\r\n" );
       return;
     }
+
   if ( IsClanned( victim )
-       && !StrCmp(victim->PCData->ClanInfo.Clan->Name, "the hunters guild"))
+       && IsBountyHuntersGuild(victim->PCData->ClanInfo.Clan->Name) )
     {
       ch->Echo( "&RYou can not post bounties on bounty hunters!\r\n" );
       return;

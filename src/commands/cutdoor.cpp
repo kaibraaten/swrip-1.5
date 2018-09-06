@@ -5,10 +5,9 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_cutdoor( Character *ch, char *argument )
+void do_cutdoor( Character *ch, std::string arg )
 {
   Exit *pexit = nullptr;
-  char arg[MAX_INPUT_LENGTH];
   const Object *wield = nullptr;
 
   if ( ( wield = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL
@@ -25,9 +24,7 @@ void do_cutdoor( Character *ch, char *argument )
       return;
     }
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Cut what?\r\n" );
       return;
@@ -44,7 +41,7 @@ void do_cutdoor( Character *ch, char *argument )
       const Room *to_room = nullptr;
       Exit *pexit_rev = nullptr;
       int the_chance = 0;
-      const char *keyword = nullptr;
+      std::string keyword;
 
       if ( !IsBitSet( pexit->Flags, EX_CLOSED ) )
         {
@@ -75,8 +72,8 @@ void do_cutdoor( Character *ch, char *argument )
 
 	  SetBit( pexit->Flags, EX_BASHED );
 
-          Act(AT_SKILL, "You cut open the $d!", ch, NULL, keyword, TO_CHAR );
-          Act(AT_SKILL, "$n cuts open the $d!",          ch, NULL, keyword, TO_ROOM );
+          Act(AT_SKILL, "You cut open the $d!", ch, NULL, keyword.c_str(), TO_CHAR );
+          Act(AT_SKILL, "$n cuts open the $d!", ch, NULL, keyword.c_str(), TO_ROOM );
 	  LearnFromSuccess(ch, gsn_cutdoor);
 
           if ( (to_room = pexit->ToRoom) != NULL
@@ -93,7 +90,7 @@ void do_cutdoor( Character *ch, char *argument )
               for(Character *rch : to_room->Characters())
                 {
                   Act(AT_SKILL, "The $d falls open!",
-                      rch, NULL, pexit_rev->Keyword, TO_CHAR );
+                      rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR );
                 }
             }
 
@@ -102,9 +99,9 @@ void do_cutdoor( Character *ch, char *argument )
       else
         {
           Act(AT_SKILL, "You cut at the $d, but you handle it badly and just score it.",
-              ch, NULL, keyword, TO_CHAR );
+              ch, NULL, keyword.c_str(), TO_CHAR );
           Act(AT_SKILL, "$n cuts at the $d, but just scores it.",
-              ch, NULL, keyword, TO_ROOM );
+              ch, NULL, keyword.c_str(), TO_ROOM );
           InflictDamage( ch, ch, ( ch->MaxHit / 20 ) + 10, gsn_cutdoor );
           LearnFromFailure(ch, gsn_cutdoor);
         }

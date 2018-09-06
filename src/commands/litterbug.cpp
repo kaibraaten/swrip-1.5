@@ -1,14 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_litterbug( Character *ch, char *argument )
+void do_litterbug( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Set litterbug flag on whom?\r\n");
       return;
@@ -45,5 +42,3 @@ void do_litterbug( Character *ch, char *argument )
       ch->Echo("LITTERBUG set.\r\n");
     }
 }
-
-

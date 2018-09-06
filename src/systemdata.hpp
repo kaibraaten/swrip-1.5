@@ -11,7 +11,7 @@ public:
   
   int MaxPlayersThisBoot = 0;             /* Maximum players this boot   */
   int MaxPlayersEver = 0;             /* Maximum players ever   */
-  char *TimeOfMaxPlayersEver = nullptr;            /* Time of max ever */
+  std::string TimeOfMaxPlayersEver;            /* Time of max ever */
   bool NoNameResolving = false;      /* Hostnames are not resolved  */
   bool DenyNewPlayers = false;       /* New players cannot connect  */
   bool NewPlayersMustWaitForAuth = false;          /* New players must be auth'ed */

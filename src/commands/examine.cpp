@@ -4,23 +4,20 @@
 #include "character.hpp"
 #include "object.hpp"
 
-void do_examine( Character *ch, char *argument )
+void do_examine( Character *ch, std::string arg )
 {
-  char buf[MAX_STRING_LENGTH];
-  char arg[MAX_INPUT_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   Object *obj = nullptr;
   Board *board = nullptr;
   short dam = 0;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Examine what?\r\n" );
       return;
     }
 
-  sprintf( buf, "%s noprog", arg );
+  sprintf( buf, "%s noprog", arg.c_str() );
   do_look( ch, buf );
 
   /*
@@ -236,7 +233,7 @@ void do_examine( Character *ch, char *argument )
             break;
 
           ch->Echo( "When you look inside, you see:\r\n" );
-          sprintf( buf, "in %s noprog", arg );
+          sprintf( buf, "in %s noprog", arg.c_str() );
           do_look( ch, buf );
           break;
 
@@ -275,14 +272,14 @@ void do_examine( Character *ch, char *argument )
 
         case ITEM_DRINK_CON:
           ch->Echo( "When you look inside, you see:\r\n" );
-          sprintf( buf, "in %s noprog", arg );
+          sprintf( buf, "in %s noprog", arg.c_str() );
           do_look( ch, buf );
           break;
         }
 
       if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
         {
-          sprintf( buf, "under %s noprog", arg );
+          sprintf( buf, "under %s noprog", arg.c_str() );
           do_look( ch, buf );
         }
 
@@ -294,4 +291,3 @@ void do_examine( Character *ch, char *argument )
       CheckObjectForTrap( ch, obj, TRAP_EXAMINE );
     }
 }
-

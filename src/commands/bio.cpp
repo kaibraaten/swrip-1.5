@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 
-void do_bio( Character *ch, char *argument )
+void do_bio( Character *ch, std::string argument )
 {
   if ( IsNpc( ch ) )
     {
@@ -30,7 +30,6 @@ void do_bio( Character *ch, char *argument )
       return;
 
     case SUB_PERSONAL_BIO:
-      FreeMemory( ch->PCData->Bio );
       ch->PCData->Bio = CopyBuffer( ch );
       StopEditing( ch );
       return;

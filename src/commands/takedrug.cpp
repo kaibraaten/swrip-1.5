@@ -4,14 +4,14 @@
 #include "pcdata.hpp"
 #include "object.hpp"
 
-void do_takedrug( Character *ch, char *argument )
+void do_takedrug( Character *ch, std::string argument )
 {
   Object *obj = NULL;
   Affect af;
   int drug = 0;
   int sn = 0;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Use what?\r\n");
       return;
@@ -34,8 +34,10 @@ void do_takedrug( Character *ch, char *argument )
 
   if ( obj->ItemType != ITEM_SPICE )
     {
-      Act( AT_ACTION, "$n looks at $p and scratches $s head.", ch, obj, NULL, TO_ROOM );
-      Act( AT_ACTION, "You can't quite figure out what to do with $p.", ch, obj, NULL, TO_CHAR );
+      Act( AT_ACTION, "$n looks at $p and scratches $s head.",
+           ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "You can't quite figure out what to do with $p.",
+           ch, obj, NULL, TO_CHAR );
       return;
     }
 
@@ -67,13 +69,10 @@ void do_takedrug( Character *ch, char *argument )
           return;
         }
 
-      drug = obj->Value[0];
-
+      drug = obj->Value[OVAL_SPICE_TYPE];
       SetWaitState( ch, PULSE_PER_SECOND/4 );
-
       GainCondition( ch, COND_THIRST, 1 );
-
-      ch->PCData->DrugLevel[drug] = umin(ch->PCData->DrugLevel[drug]+obj->Value[1] , 255);
+      ch->PCData->DrugLevel[drug] = umin(ch->PCData->DrugLevel[drug] + obj->Value[OVAL_SPICE_GRADE] , 255);
 
       if ( ch->PCData->DrugLevel[drug] >=255
 	   || ch->PCData->DrugLevel[drug] > ( ch->PCData->Addiction[drug]+100 ) )
@@ -182,4 +181,3 @@ void do_takedrug( Character *ch, char *argument )
 
   ExtractObject( obj );
 }
-

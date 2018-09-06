@@ -3,7 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_oldscore( Character *ch, char *argument )
+void do_oldscore( Character *ch, std::string argument )
 {
   if ( IsAffectedBy(ch, AFF_POSSESS) )
     {
@@ -13,8 +13,8 @@ void do_oldscore( Character *ch, char *argument )
 
   SetCharacterColor( AT_SCORE, ch );
   ch->Echo("You are %s%s, level %d.\r\n",
-           ch->Name,
-           IsNpc(ch) ? "" : ch->PCData->Title,
+           ch->Name.c_str(),
+           IsNpc(ch) ? "" : ch->PCData->Title.c_str(),
            ch->TopLevel );
 
   if ( GetTrustLevel( ch ) != ch->TopLevel )
@@ -269,7 +269,7 @@ void do_oldscore( Character *ch, char *argument )
           
           if ( skill != nullptr )
             {
-              ch->Echo("Spell: '%s'", skill->Name );
+              ch->Echo("Spell: '%s'", skill->Name.c_str() );
 
               if ( ch->TopLevel >= 20 )
                 {
@@ -287,16 +287,19 @@ void do_oldscore( Character *ch, char *argument )
   if ( !IsNpc( ch ) && IsImmortal( ch ) )
     {
       ch->Echo("WizInvis level: %d   WizInvis is %s\r\n",
-		 ch->PCData->WizInvis,
-                 IsBitSet( ch->Flags, PLR_WIZINVIS ) ? "ON" : "OFF" );
+               ch->PCData->WizInvis,
+               IsBitSet( ch->Flags, PLR_WIZINVIS ) ? "ON" : "OFF" );
+
       if ( ch->PCData->Build.VnumRanges.Room.First && ch->PCData->Build.VnumRanges.Room.Last )
         ch->Echo("Room Range: %d - %d\r\n", ch->PCData->Build.VnumRanges.Room.First,
-                   ch->PCData->Build.VnumRanges.Room.Last       );
+                 ch->PCData->Build.VnumRanges.Room.Last       );
+
       if ( ch->PCData->Build.VnumRanges.Object.First && ch->PCData->Build.VnumRanges.Object.Last )
         ch->Echo("Obj Range : %d - %d\r\n", ch->PCData->Build.VnumRanges.Object.First,
-                   ch->PCData->Build.VnumRanges.Object.Last       );
+                 ch->PCData->Build.VnumRanges.Object.Last       );
+
       if ( ch->PCData->Build.VnumRanges.Mob.First && ch->PCData->Build.VnumRanges.Mob.Last )
         ch->Echo("Mob Range : %d - %d\r\n", ch->PCData->Build.VnumRanges.Mob.First,
-                   ch->PCData->Build.VnumRanges.Mob.Last       );
+                 ch->PCData->Build.VnumRanges.Mob.Last       );
     }
 }

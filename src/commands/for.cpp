@@ -35,17 +35,16 @@ target in them. Private rooms are not violated.
 
 */
 
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
 
-static const char * name_expand (Character *ch);
+static std::string name_expand(const Character *ch);
 
-void do_for(Character *ch, char *argument)
+void do_for( Character *ch, std::string argument )
 {
-  char range[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
+  std::string range;
   bool fGods = false, fMortals = false, fMobs = false, fEverywhere = false, found = false;
   Room *room = nullptr, *old_room = nullptr;
   Character *p = nullptr, *p_prev = nullptr;
@@ -53,7 +52,7 @@ void do_for(Character *ch, char *argument)
 
   argument = OneArgument (argument, range);
 
-  if (!range[0] || !argument[0]) /* invalid usage? */
+  if ( range.empty() || argument.empty() )
     {
       do_help (ch, "for");
       return;
@@ -82,13 +81,13 @@ void do_for(Character *ch, char *argument)
     do_help (ch, "for"); /* show syntax */
 
   /* do not allow # to make it easier */
-  if (fEverywhere && strchr (argument, '#'))
+  if (fEverywhere && strchr(argument.c_str(), '#'))
     {
-      ch->Echo("Cannot use FOR EVERYWHERE with the # thingie.\r\n");
+      ch->Echo("Cannot use FOR EVERYWHERE with the # thingy.\r\n");
       return;
     }
 
-  if (strchr (argument, '#')) /* replace # ? */
+  if (strchr (argument.c_str(), '#')) /* replace # ? */
     {
       /* char_list - LastCharacter, p_next - gch_prev -- TRI */
       for (p = LastCharacter; p ; p = p_prev )
@@ -110,24 +109,33 @@ void do_for(Character *ch, char *argument)
           /* It looks ugly to me.. but it works :) */
           if (found) /* p is 'appropriate' */
             {
-              char *pSource = argument; /* head of buffer to be parsed */
+              const char *pSource = argument.c_str(); /* head of buffer to be parsed */
+              char buf[MAX_STRING_LENGTH];
               char *pDest = buf; /* parse into this */
 
               while (*pSource)
                 {
                   if (*pSource == '#') /* Replace # with name of target */
                     {
-                      const char *namebuf = name_expand (p);
-
-                      if (namebuf) /* in case there is no mob name ?? */
-                        while (*namebuf) /* copy name over */
-                          *(pDest++) = *(namebuf++);
-
+                      std::string namebuf = name_expand (p);
+                      const char *namebufptr = namebuf.c_str();
+                      
+                      if (namebufptr) /* in case there is no mob name ?? */
+                        {
+                          while (*namebufptr) /* copy name over */
+                            {
+                              *(pDest++) = *(namebufptr++);
+                            }
+                        }
+                      
                       pSource++;
                     }
 		  else
-                    *(pDest++) = *(pSource++);
+                    {
+                      *(pDest++) = *(pSource++);
+                    }
                 } /* while */
+
               *pDest = '\0'; /* Terminate */
 
               /* Execute */
@@ -137,7 +145,6 @@ void do_for(Character *ch, char *argument)
               Interpret (ch, buf);
               CharacterFromRoom (ch);
               CharacterToRoom (ch,old_room);
-
             } /* if found */
         } /* for every char */
     }
@@ -196,22 +203,19 @@ void do_for(Character *ch, char *argument)
 /* Expand the name of a character into a string that identifies THAT
    character within a room. E.g. the second 'guard' -> 2. guard
 */
-static const char *name_expand(Character *ch)
+static std::string name_expand(const Character *ch)
 {
   int count = 1;
-  char name[256]; /*  HOPEFULLY no mob has a name longer than THAT */
-
-  static char outbuf[MAX_INPUT_LENGTH];
+  std::string name;
 
   if (!IsNpc(ch))
     return ch->Name;
 
-  OneArgument (ch->Name, name); /* copy the first word into name */
+  OneArgument(ch->Name, name); /* copy the first word into name */
 
-  if (!name[0]) /* weird mob .. no keywords */
+  if ( name.empty() )
     {
-      strcpy (outbuf, ""); /* Do not return NULL, just an empty buffer */
-      return outbuf;
+      return "";
     }
 
   /* ->people changed to ->first_person -- TRI */
@@ -227,7 +231,6 @@ static const char *name_expand(Character *ch)
         }
     }
 
-  sprintf (outbuf, "%d.%s", count, name);
-  return outbuf;
+  return FormatString( "%d.%s", count, name.c_str() );
 }
 

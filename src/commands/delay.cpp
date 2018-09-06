@@ -2,17 +2,17 @@
 #include "mud.hpp"
 #include "object.hpp"
 
-void do_delay( Character *ch, char *argument )
+void do_delay( Character *ch, std::string argument )
 {
   Character *victim = NULL;
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   int delay = 0;
 
   SetCharacterColor( AT_IMMORT, ch );
 
   argument = OneArgument( argument, arg );
 
-  if ( !*arg )
+  if ( arg.empty() )
     {
       ch->Echo( "Syntax:  delay <victim> <# of rounds>\r\n" );
       return;
@@ -32,13 +32,13 @@ void do_delay( Character *ch, char *argument )
 
   if ( !IsNpc(victim) && GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      ch->Echo( "You haven't the power to succeed against them.\r\n" );
+      ch->Echo( "You don't have the power to succeed against them.\r\n" );
       return;
     }
 
   argument = OneArgument(argument, arg);
 
-  if ( !*arg )
+  if ( arg.empty() )
     {
       ch->Echo( "For how long do you wish to delay them?\r\n" );
       return;
@@ -51,7 +51,7 @@ void do_delay( Character *ch, char *argument )
       return;
     }
 
-  delay = atoi( arg );
+  delay = std::stoi( arg );
   
   if ( delay < 1 )
     {
@@ -66,6 +66,6 @@ void do_delay( Character *ch, char *argument )
     }
 
   SetWaitState( victim, delay * PULSE_VIOLENCE );
-  ch->Echo( "You've delayed %s for %d rounds.\r\n", victim->Name, delay );
+  ch->Echo( "You've delayed %s for %d rounds.\r\n", victim->Name.c_str(), delay );
 }
 

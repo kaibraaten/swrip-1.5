@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_wizhelp( Character *ch, char *argument )
+void do_wizhelp( Character *ch, std::string argument )
 {
   const int NUM_COLUMNS = 6;
   int column = 0;
@@ -18,7 +18,7 @@ void do_wizhelp( Character *ch, char *argument )
 
       if ( cmd->Level >= LEVEL_AVATAR && cmd->Level <= GetTrustLevel( ch ) )
         {
-          ch->Echo("%-12s", cmd->Name );
+          ch->Echo("%-12s", cmd->Name.c_str() );
 
           if ( ++column % NUM_COLUMNS == 0 )
             {

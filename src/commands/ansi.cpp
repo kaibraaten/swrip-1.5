@@ -1,19 +1,15 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_ansi( Character *ch, char *argument )
+void do_ansi( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( argument.empty() )
     {
       ch->Echo( "ANSI ON or OFF?\r\n" );
       return;
     }
 
-  if ( !StrCmp(arg,"on") )
+  if ( !StrCmp(argument, "on") )
     {
       SetBit(ch->Flags, PLR_ANSI);
       SetCharacterColor( AT_WHITE + AT_BLINK, ch);
@@ -21,7 +17,7 @@ void do_ansi( Character *ch, char *argument )
       return;
     }
 
-  if ( !StrCmp(arg,"off") )
+  if ( !StrCmp(argument, "off") )
     {
       RemoveBit(ch->Flags, PLR_ANSI);
       ch->Echo( "Okay... ANSI support is now off\r\n" );

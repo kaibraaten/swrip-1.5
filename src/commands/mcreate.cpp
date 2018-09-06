@@ -4,13 +4,13 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 
-void do_mcreate( Character *ch, char *argument )
+void do_mcreate( Character *ch, std::string argument )
 {
-  char arg [MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg2;
   ProtoMobile *pMobIndex = NULL;
   Character *mob = NULL;
-  int vnum = 0, cvnum = 0;
+  vnum_t vnum = 0, cvnum = 0;
 
   if ( IsNpc(ch) )
     {
@@ -20,9 +20,9 @@ void do_mcreate( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  vnum = IsNumber( arg ) ? atoi( arg ) : -1;
+  vnum = IsNumber( arg ) ? std::stoi( arg ) : -1;
 
-  if ( vnum == -1 || IsNullOrEmpty( argument ) )
+  if ( vnum == -1 || argument.empty() )
     {
       ch->Echo("Usage: mcreate <vnum> [cvnum] <mobile name>\r\n");
       return;
@@ -35,7 +35,7 @@ void do_mcreate( Character *ch, char *argument )
     }
 
   OneArgument( argument, arg2 );
-  cvnum = atoi( arg2 );
+  cvnum = std::stoi( arg2 );
 
   if ( cvnum != 0 )
     argument = OneArgument( argument, arg2 );
@@ -61,8 +61,9 @@ void do_mcreate( Character *ch, char *argument )
           ch->Echo("You must have an assigned area to create mobiles.\r\n");
           return;
         }
+
       if ( vnum < pArea->VnumRanges.Mob.First
-           ||   vnum > pArea->VnumRanges.Mob.Last )
+           || vnum > pArea->VnumRanges.Mob.Last )
         {
           ch->Echo("That number is not in your allocated range.\r\n");
           return;
@@ -85,4 +86,3 @@ void do_mcreate( Character *ch, char *argument )
   Act( AT_IMMORT, "You wave your arms about, and $N appears at your command!",
        ch, NULL, mob, TO_CHAR );
 }
-

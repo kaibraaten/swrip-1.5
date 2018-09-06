@@ -3,7 +3,7 @@
 #include "area.hpp"
 #include "room.hpp"
 
-void do_sellhome (Character *ch, char *argument)
+void do_sellhome( Character *ch, std::string argument )
 {
   constexpr int sellHomeCreditReturn = 50000;
   Room *room = 0;
@@ -26,8 +26,7 @@ void do_sellhome (Character *ch, char *argument)
       return;
     }
 
-  FreeMemory(room->Name);
-  room->Name = CopyString("An Empty Apartment");
+  room->Name = "An Empty Apartment";
   ch->Gold += sellHomeCreditReturn;
   RemoveBit(room->Flags,ROOM_PLR_HOME);
   SetBit(room->Flags,ROOM_EMPTY_HOME);
@@ -36,4 +35,3 @@ void do_sellhome (Character *ch, char *argument)
   do_save(ch,"");
   ch->Echo("You sell your home. You receive %d credits.\r\n",sellHomeCreditReturn);
 }
-

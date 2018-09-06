@@ -15,16 +15,13 @@ struct UserData
 
 static bool CheckIfProtectingPlanet(Ship *ship, void *userData);
 
-void do_capture( Character *ch , char *argument )
+void do_capture( Character *ch , std::string argument )
 {
   Clan *clan = nullptr;
   Planet *planet = nullptr;
   float support = 0.0;
   int pCount = 0;
   char buf[MAX_STRING_LENGTH];
-
-  if ( !ch->InRoom || !ch->InRoom->Area)
-    return;
 
   if ( IsNpc(ch) )
     {
@@ -100,7 +97,8 @@ void do_capture( Character *ch , char *argument )
   planet->GovernedBy = clan;
   planet->PopularSupport = 50;
 
-  sprintf( buf , "%s has claimed the planet %s!", clan->Name, planet->Name );
+  sprintf( buf, "%s has claimed the planet %s!",
+           clan->Name.c_str(), planet->Name.c_str() );
   EchoToAll( AT_RED , buf , 0 );
 
   Planets->Save(planet);

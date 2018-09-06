@@ -7,13 +7,9 @@
  * Saw no need for level restrictions on this.
  * Written by Narn, Apr/96
  */
-void do_sober( Character *ch, char *argument )
+void do_sober( Character *ch, std::string arg1 )
 {
   Character *victim = NULL;
-  char arg1 [MAX_INPUT_LENGTH];
-
-  SmashTilde( argument );
-  argument = OneArgument( argument, arg1 );
 
   if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
@@ -33,4 +29,3 @@ void do_sober( Character *ch, char *argument )
   ch->Echo("Ok.\r\n");
   victim->Echo("You feel sober again.\r\n");
 }
-
