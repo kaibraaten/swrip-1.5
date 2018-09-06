@@ -4,10 +4,10 @@
 /*
  * Shows installed areas, sorted. Mark unloaded areas with an X.
  */
-void do_zones( Character *ch, char *argument )
+void do_zones( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
   vnum_t low = MIN_VNUM;
   vnum_t high = MAX_VNUM;
 
@@ -16,12 +16,12 @@ void do_zones( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( !IsNullOrEmpty(arg1))
+  if ( !arg1.empty() )
     {
-      low = atoi(arg1);
+      low = std::stoi(arg1);
 
-      if ( !IsNullOrEmpty( arg2 ) )
-        high = atoi(arg2);
+      if ( !arg2.empty() )
+        high = std::stoi(arg2);
     }
 
   ShowVnums( ch, low, high, false, true, "", " X" );

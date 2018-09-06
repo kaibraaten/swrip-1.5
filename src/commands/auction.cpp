@@ -6,11 +6,11 @@
 #include "protoobject.hpp"
 #include "systemdata.hpp"
 
-void do_auction(Character *ch, char *argument)
+void do_auction(Character *ch, std::string argument)
 {
   Object *obj = nullptr;
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
   char buf[MAX_STRING_LENGTH];
 
   argument = OneArgument (argument, arg1);
@@ -33,7 +33,7 @@ void do_auction(Character *ch, char *argument)
       return;
     }
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       if (auction->Item != NULL)
         {
@@ -48,8 +48,8 @@ void do_auction(Character *ch, char *argument)
 
           SetCharacterColor( AT_LBLUE, ch );
           ch->Echo( "Object '%s' is %s, special properties: %s\r\nIts weight is %d, value is %d.\r\n",
-                    obj->Name,
-                    AOrAn( GetItemTypeName( obj ) ),
+                    obj->Name.c_str(),
+                    AOrAn( GetItemTypeName( obj ) ).c_str(),
                     FlagString( obj->Flags, ObjectFlags ).c_str(),
                     obj->Weight,
                     obj->Cost );
@@ -91,7 +91,7 @@ void do_auction(Character *ch, char *argument)
           if (IsImmortal(ch))
             {
               ch->Echo( "Seller: %s.  Bidder: %s.  Round: %d.\r\n",
-                        auction->Seller->Name, auction->Buyer->Name,
+                        auction->Seller->Name.c_str(), auction->Buyer->Name.c_str(),
                         (auction->Going + 1));
               ch->Echo( "Time left in round: %d.\r\n", auction->Pulse );
             }
@@ -117,7 +117,7 @@ void do_auction(Character *ch, char *argument)
         {
           SetCharacterColor( AT_LBLUE, ch );
           sprintf (buf,"Sale of %s has been stopped by an Immortal.",
-                   auction->Item->ShortDescr);
+                   auction->Item->ShortDescr.c_str());
           TalkAuction (buf);
           ObjectToCharacter (auction->Item, auction->Seller);
 
@@ -148,18 +148,17 @@ void do_auction(Character *ch, char *argument)
               return;
             }
 
-          /* make - perhaps - a bet now */
-          if ( IsNullOrEmpty( argument ) )
+          if ( argument.empty() )
             {
               ch->Echo("Bid how much?\r\n");
               return;
             }
 
-          newbet = ParseBet (auction->Bet, argument);
+          newbet = ParseBet(auction->Bet, argument);
 
           if (newbet < auction->Starting)
             {
-              ch->Echo("You must place a bid that is higher than the starting bet.\r\n");
+              ch->Echo("You must place a bid that is higher than the starting bid.\r\n");
               return;
             }
 
@@ -168,7 +167,7 @@ void do_auction(Character *ch, char *argument)
 	  */
           if (newbet < (auction->Bet + 100))
             {
-	      ch->Echo("You must at least bid 10000 credits over the current bid.\r\n");
+	      ch->Echo("You must at least bid 100 credits over the current bid.\r\n");
               return;
             }
 
@@ -200,11 +199,9 @@ void do_auction(Character *ch, char *argument)
           auction->Going = 0;
           auction->Pulse = PULSE_AUCTION; /* start the auction over again */
 
-          sprintf (buf,"A bid of %d credits has been received on %s.\r\n",newbet,auction->Item->ShortDescr);
+          sprintf (buf,"A bid of %d credits has been received on %s.\r\n",newbet,auction->Item->ShortDescr.c_str());
           TalkAuction (buf);
           return;
-
-
         }
       else
         {
@@ -233,10 +230,10 @@ void do_auction(Character *ch, char *argument)
 
   argument = OneArgument (argument, arg2);
 
-  if ( IsNullOrEmpty( arg2 ) )
+  if ( arg2.empty() )
     {
       auction->Starting = 0;
-      strcpy(arg2, "0");
+      arg2 = "0";
     }
 
   if ( !IsNumber(arg2) )
@@ -245,7 +242,7 @@ void do_auction(Character *ch, char *argument)
       return;
     }
 
-  if ( atoi(arg2) < 0 )
+  if ( std::stoi(arg2) < 0 )
     {
       ch->Echo("You can't auction something for less than 0 credits!\r\n");
       return;
@@ -282,12 +279,12 @@ void do_auction(Character *ch, char *argument)
 	  auction->Seller = ch;
 	  auction->Pulse = PULSE_AUCTION;
 	  auction->Going = 0;
-	  auction->Starting = atoi(arg2);
+	  auction->Starting = std::stoi(arg2);
 
 	  if (auction->Starting > 0)
 	    auction->Bet = auction->Starting;
 
-	  sprintf (buf, "A new item is being auctioned: %s at %d credits.", obj->ShortDescr, auction->Starting);
+	  sprintf (buf, "A new item is being auctioned: %s at %d credits.", obj->ShortDescr.c_str(), auction->Starting);
 	  TalkAuction (buf);
 	}
     }
@@ -298,4 +295,3 @@ void do_auction(Character *ch, char *argument)
       return;
     }
 }
-

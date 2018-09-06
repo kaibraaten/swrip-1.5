@@ -367,19 +367,19 @@ void WriteVendor( FILE *fp, Character *mob )
       fprintf (fp, "Gold     %d\n",mob->Gold);
     }
 
-  if ( mob->Home )
+  if ( mob->Home != nullptr )
     {
       fprintf( fp, "Home     %ld\n", mob->Home->Vnum );
     }
 
-  if (mob->Owner != NULL )
+  if (!mob->Owner.empty())
     {
-      fprintf (fp, "Owner     %s~\n", mob->Owner );
+      fprintf (fp, "Owner     %s~\n", mob->Owner.c_str() );
     }
 
   if ( StrCmp( mob->ShortDescr, mob->Prototype->ShortDescr) )
     {
-      fprintf( fp, "Short     %s~\n", mob->ShortDescr );
+      fprintf( fp, "Short     %s~\n", mob->ShortDescr.c_str() );
     }
 
   fprintf( fp, "Position   %d\n", mob->Position );
@@ -497,8 +497,8 @@ Character *ReadVendor( FILE *fp )
 	      CharacterToRoom(mob, pRoomIndex);
 	      sprintf(vnum1,"%ld", mob->Prototype->Vnum);
 	      do_makeshop (mob, vnum1 );
-	      sprintf (buf, mob->LongDescr, mob->Owner);
-	      mob->LongDescr = CopyString( buf );
+	      sprintf (buf, mob->LongDescr.c_str(), mob->Owner.c_str());
+	      mob->LongDescr = buf;
 	      mob->Hit = 10000;
 	      mob->MaxHit = 10000;
 	      return mob;
@@ -554,7 +554,7 @@ void SaveVendor( Character *ch )
 
   DeEquipCharacter( ch );
 
-  sprintf( strsave, "%s%s",VENDOR_DIR, Capitalize( ch->Owner ) );
+  sprintf( strsave, "%s%s",VENDOR_DIR, Capitalize( ch->Owner ).c_str() );
 
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
     {

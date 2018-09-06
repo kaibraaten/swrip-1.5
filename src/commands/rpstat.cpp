@@ -3,7 +3,7 @@
 #include "room.hpp"
 
 /* Rpstat - Scryn 8/12 */
-void do_rpstat( Character *ch, char *argument )
+void do_rpstat( Character *ch, std::string argument )
 {
   if ( ch->InRoom->mprog.MudProgs().empty() )
     {
@@ -12,7 +12,7 @@ void do_rpstat( Character *ch, char *argument )
     }
 
   ch->Echo("Name: %s.  Vnum: %d.\r\n",
-             ch->InRoom->Name, ch->InRoom->Vnum );
+           ch->InRoom->Name.c_str(), ch->InRoom->Vnum );
 
   for(const MPROG_DATA *mprg : ch->InRoom->mprog.MudProgs())
     {
@@ -22,4 +22,3 @@ void do_rpstat( Character *ch, char *argument )
                mprg->comlist );
     }
 }
-

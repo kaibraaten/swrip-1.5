@@ -30,22 +30,22 @@
 #define HELP_DATA_FILE DATA_DIR "help.lua"
 
 HelpFileRepository *HelpFiles = nullptr;
-char *HelpGreeting = nullptr;
+std::string HelpGreeting;
 
 static int L_HelpEntry( lua_State *L );
 static void PushHelps( lua_State *L, const void* );
 static void PushHelpFile(lua_State *L, const HelpFile*);
-static char *MunchLeadingSpace( char *text );
+static std::string MunchLeadingSpace( const std::string &text );
 
-HelpFile *GetHelpFile( const Character *ch, char *argument )
+HelpFile *GetHelpFile( const Character *ch, std::string argument )
 {
-  char argall[MAX_INPUT_LENGTH] = {'\0'};
-  char argone[MAX_INPUT_LENGTH] = {'\0'};
-  char argnew[MAX_INPUT_LENGTH] = {'\0'};
+  std::string argall;
+  std::string argone;
+  std::string argnew;
   HelpFile *foundHelpfile = NULL;
   int lev = 0;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       argument = "summary";
     }
@@ -63,16 +63,16 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
   /*
    * Tricky argument handling so 'help a b' doesn't match a.
    */
-  while ( !IsNullOrEmpty( argument ) )
+  while ( !argument.empty() )
     {
       argument = OneArgument( argument, argone );
 
-      if ( !IsNullOrEmpty( argall ) )
+      if ( !argall.empty() )
 	{
-	  strcat( argall, " " );
+          argall += " ";
 	}
 
-      strcat( argall, argone );
+      argall += argone;
     }
 
   for(HelpFile *pHelp : HelpFiles->Entities())
@@ -145,7 +145,7 @@ static int L_HelpEntry( lua_State *L )
 
   lua_pop( L, lua_gettop( L ) - 1 );
 
-  if( IsNullOrEmpty( help->Keyword ) )
+  if( help->Keyword.empty() )
     {
       FreeHelpFile( help );
     }
@@ -188,7 +188,7 @@ static void PushHelpFile(lua_State *L, const HelpFile *help)
   lua_settable( L, -3 );
 }
 
-HelpFile *AllocateHelpFile( const char *keyword, short level )
+HelpFile *AllocateHelpFile( const std::string &keyword, short level )
 {
   HelpFile *help = new HelpFile();
   
@@ -201,22 +201,20 @@ HelpFile *AllocateHelpFile( const char *keyword, short level )
 
 void FreeHelpFile( HelpFile *help )
 {
-  FreeMemory( help->Keyword );
-  FreeMemory( help->Text );
   delete help;
 }
 
 /*
  * Stupid leading space muncher fix                             -Thoric
  */
-static char *MunchLeadingSpace( char *text )
+static std::string MunchLeadingSpace( const std::string &text )
 {
-  char *fixed = NULL;
-
-  if ( !text )
-    return "";
-
-  fixed = StripCarriageReturn(text);
+  if(text.empty())
+    {
+      return "";
+    }
+  
+  std::string fixed = StripCarriageReturn(text);
 
   if ( fixed[0] == ' ' )
     fixed[0] = '.';
@@ -242,43 +240,23 @@ void SetHelpFileLevel( HelpFile *help, short level )
     }
 }
 
-char *GetHelpFileKeyword( const HelpFile *help )
+std::string GetHelpFileKeyword( const HelpFile *help )
 {
   return help->Keyword;
 }
 
-void SetHelpFileKeyword( HelpFile *help, const char *keyword )
+void SetHelpFileKeyword( HelpFile *help, const std::string &keyword )
 {
-  if( help->Keyword )
-    {
-      FreeMemory( help->Keyword );
-    }
-
-  help->Keyword = CopyString( ToUpper( keyword ) );
+  help->Keyword = keyword;
 }
 
-char *GetHelpFileText( const HelpFile *help )
+std::string GetHelpFileText( const HelpFile *help )
 {
   return help->Text;
 }
 
-void SetHelpFileText( HelpFile *help, const char *text )
+void SetHelpFileText( HelpFile *help, const std::string &text )
 {
-  if( help->Text )
-    {
-      FreeMemory( help->Text );
-    }
-
-  help->Text = CopyString( text );
-}
-
-void SetHelpFileTextNoAlloc( HelpFile *help, char *text )
-{
-  if( help->Text )
-    {
-      FreeMemory( help->Text );
-    }
-
   help->Text = text;
 }
 

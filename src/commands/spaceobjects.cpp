@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "spaceobject.hpp"
 
-void do_spaceobjects( Character *ch, char *argument )
+void do_spaceobjects( Character *ch, std::string argument )
 {
   int count = 0;
 
@@ -14,7 +14,7 @@ void do_spaceobjects( Character *ch, char *argument )
         continue;
 
       if ( !(spaceobject->IsSimulator && (!IsGreater(ch))) )
-        ch->Echo("%s\r\n", spaceobject->Name );
+        ch->Echo("%s\r\n", spaceobject->Name.c_str() );
 
       count++;
     }
@@ -28,7 +28,7 @@ void do_spaceobjects( Character *ch, char *argument )
 	continue;
 
       if ( !(spaceobject->IsSimulator && (!IsGreater(ch))) )
-        ch->Echo("%s\r\n", spaceobject->Name );
+        ch->Echo("%s\r\n", spaceobject->Name.c_str() );
 
       count++;
     }

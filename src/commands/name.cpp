@@ -1,13 +1,13 @@
-#include <ctype.h>
+#include <cctype>
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
 
-void do_name( Character *ch, char *argument )
+void do_name( Character *ch, std::string argument )
 {
   char fname[1024];
   struct stat fst;
-  Character *tmp;
+  Character *tmp = nullptr;
   char buf[MAX_STRING_LENGTH];
 
   if ( IsAuthed(ch) || ch->PCData->AuthState != 2)
@@ -16,6 +16,12 @@ void do_name( Character *ch, char *argument )
       return;
     }
 
+  if( argument.empty() )
+    {
+      ch->Echo( "Change your name to what?\r\n" );
+      return;
+    }
+  
   argument[0] = CharToUppercase(argument[0]);
 
   if (!IsNameAcceptable(argument))
@@ -38,25 +44,24 @@ void do_name( Character *ch, char *argument )
 
   if ( tmp )
     {
-      ch->Echo("That name is already taken.  Please choose another.\r\n");
+      ch->Echo("That name is already taken. Please choose another.\r\n");
       return;
     }
 
   sprintf( fname, "%s%c/%s", PLAYER_DIR, tolower(argument[0]),
-           Capitalize( argument ) );
+           Capitalize( ToLower(argument) ).c_str() );
+
   if ( stat( fname, &fst ) != -1 )
     {
       ch->Echo("That name is already taken. Please choose another.\r\n");
       return;
     }
 
-  FreeMemory( ch->Name );
-  ch->Name = CopyString( argument );
-  sprintf( buf, "%s the %s",ch->Name,
+  ch->Name = argument;
+  sprintf( buf, "%s the %s",ch->Name.c_str(),
            RaceTable[ch->Race].Name );
   SetCharacterTitle( ch, buf );
 
   ch->Echo("Your name has been changed. Please apply again.\r\n");
   ch->PCData->AuthState = 1;
 }
-

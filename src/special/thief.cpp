@@ -34,6 +34,7 @@ bool spec_thief( Character *ch )
 	  long gold = victim->Gold * GetRandomNumberFromRange( 1, urange(2, ch->TopLevel/4, 10) ) / 100;
 	  ch->Gold     += 9 * gold / 10;
 	  victim->Gold -= gold;
+
 	  if ( ch->Gold > maxgold )
 	    {
 	      BoostEconomy( ch->InRoom->Area, ch->Gold - maxgold/2 );
@@ -45,4 +46,3 @@ bool spec_thief( Character *ch )
 
   return false;
 }
-

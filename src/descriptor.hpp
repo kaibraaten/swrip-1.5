@@ -28,8 +28,8 @@ public:
 
   struct
   {
-    char *Hostname = nullptr;
-    char *HostIP = nullptr;
+    std::string Hostname;
+    std::string HostIP;
     short Port = 0;
   } Remote;
   

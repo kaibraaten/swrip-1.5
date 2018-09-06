@@ -7,10 +7,10 @@
 #include "shuttle.hpp"
 #include "character.hpp"
 
-void do_setshuttle(Character * ch, char * argument)
+void do_setshuttle( Character *ch, std::string argument )
 {
-  char arg1[MIL];
-  char arg2[MIL];
+  std::string arg1;
+  std::string arg2;
   int value = 0;
 
   if ( IsNpc( ch ) )
@@ -22,7 +22,7 @@ void do_setshuttle(Character * ch, char * argument)
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( argument ) )
+  if ( arg1.empty() || arg2.empty() || argument.empty() )
     {
       ch->Echo("Usage: setshuttle <shuttle name> <field> <value>\r\n");
       ch->Echo("Fields:\r\n\tfirstroom, lastroom, entrance, delay\r\n");
@@ -43,22 +43,22 @@ void do_setshuttle(Character * ch, char * argument)
 
       for(const Shuttle *s : Shuttles->Entities())
 	{
-          ch->Echo("Shuttle Name: %s - %s\r\n", s->Name,
-		    s->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
-		    s->Type == SHUTTLE_SPACE ? "Space" :
-		    s->Type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
+          ch->Echo( "Shuttle Name: %s - %s\r\n", s->Name.c_str(),
+                    s->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
+                    s->Type == SHUTTLE_SPACE ? "Space" :
+                    s->Type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
 	}
 
       return;
     }
 
-  value = IsNumber( argument ) ? atoi( argument ) : -1;
+  value = IsNumber( argument ) ? std::stoi( argument ) : -1;
 
   if (!StrCmp(arg2, "firstroom"))
     {
       if (value > shuttle->Rooms.Last)
         {
-          ch->Echo("Uh.. First room should be less than last room.\r\n");
+          ch->Echo("First room should be less than last room.\r\n");
           return;
         }
 
@@ -68,7 +68,7 @@ void do_setshuttle(Character * ch, char * argument)
     {
       if (value < shuttle->Rooms.First)
         {
-          ch->Echo("Uh.. First room should be less than last room.\r\n");
+          ch->Echo("First room should be less than last room.\r\n");
           return;
         }
 
@@ -98,14 +98,8 @@ void do_setshuttle(Character * ch, char * argument)
 	  return;
 	}
       
-      unlink( GetShuttleFilename( shuttle ) );
-      
-      if (shuttle->Name)
-	{
-	  FreeMemory(shuttle->Name);
-	}
-
-      shuttle->Name = CopyString(argument);
+      unlink( GetShuttleFilename( shuttle ).c_str() );
+      shuttle->Name = argument;
     }
   else if (!StrCmp(arg2, "type"))
     {
@@ -135,10 +129,10 @@ void do_setshuttle(Character * ch, char * argument)
     }
   else if (!StrCmp(arg2, "stop"))
     {
-      ShuttleStop * stop = nullptr;
+      ShuttleStop *stop = nullptr;
       argument = OneArgument(argument, arg1);
 
-      if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( argument ))
+      if ( arg1.empty() || argument.empty() )
         {
           ch->Echo("Usage: \r\n");
           ch->Echo("\tsetshuttle <shuttle> stop <add>\r\n");
@@ -151,24 +145,19 @@ void do_setshuttle(Character * ch, char * argument)
         {
           stop = AllocateShuttleStop();
 
-          if ( stop->Name )
-	    {
-	      FreeMemory( stop->Name );
-	    }
-
-          stop->Name = CopyString("Stopless Name");
+          stop->Name = "Nameless stop";
           stop->RoomVnum = ROOM_VNUM_LIMBO;
           shuttle->Add(stop);
         }
       else
 	{
-	  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( argument ) )
+	  if ( arg1.empty() || argument.empty() )
 	    {
               ch->Echo("Invalid Param.\r\n");
 	      return;
 	    }
 
-	  value = IsNumber( arg1 ) ? atoi( arg1 ) : -1;
+	  value = IsNumber( arg1 ) ? std::stoi( arg1 ) : -1;
           size_t pos = value - 1;
 
           if( pos < shuttle->Stops().size() )
@@ -185,27 +174,16 @@ void do_setshuttle(Character * ch, char * argument)
 
 	  if (!StrCmp(arg2, "name"))
 	    {
-	      if (stop->Name)
-		{
-		  FreeMemory(stop->Name);
-		}
-
-	      stop->Name = CopyString(argument);
+	      stop->Name = argument;
 	    }
 	  else if (!StrCmp(arg2, "room"))
 	    {
-	      value = IsNumber( argument ) ? atoi( argument ) : -1;
+	      value = IsNumber( argument ) ? std::stoi( argument ) : -1;
 	      stop->RoomVnum = value;
 	    }
 	  else if (!StrCmp(arg2, "remove"))
 	    {
               shuttle->Remove(stop);
-
-	      if (stop->Name)
-		{
-		  FreeMemory(stop->Name);
-		}
-
 	      delete stop;
               ch->Echo("Stop removed.\r\n");
 	      return;
@@ -226,4 +204,3 @@ void do_setshuttle(Character * ch, char * argument)
   Shuttles->Save(shuttle);
   ch->Echo("Ok.\r\n");
 }
-

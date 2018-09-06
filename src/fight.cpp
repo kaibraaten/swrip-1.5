@@ -44,7 +44,6 @@
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 
-extern char lastplayercmd[MAX_INPUT_LENGTH];
 extern Character *gch_prev;
 
 /*
@@ -110,7 +109,6 @@ void StopHunting( Character *ch )
 {
   if ( ch->HHF.Hunting )
     {
-      FreeMemory( ch->HHF.Hunting->Name );
       delete ch->HHF.Hunting;
       ch->HHF.Hunting = NULL;
     }
@@ -120,7 +118,6 @@ void StopHating( Character *ch )
 {
   if ( ch->HHF.Hating )
     {
-      FreeMemory( ch->HHF.Hating->Name );
       delete ch->HHF.Hating;
       ch->HHF.Hating = NULL;
     }
@@ -130,7 +127,6 @@ void StopFearing( Character *ch )
 {
   if ( ch->HHF.Fearing )
     {
-      FreeMemory( ch->HHF.Fearing->Name );
       delete ch->HHF.Fearing;
       ch->HHF.Fearing = NULL;
     }
@@ -142,7 +138,7 @@ void StartHunting( Character *ch, Character *victim )
     StopHunting( ch );
 
   ch->HHF.Hunting = new HuntHateFear();
-  ch->HHF.Hunting->Name = CopyString( victim->Name );
+  ch->HHF.Hunting->Name = victim->Name;
   ch->HHF.Hunting->Who  = victim;
 }
 
@@ -152,7 +148,7 @@ void StartHating( Character *ch, Character *victim )
     StopHating( ch );
 
   ch->HHF.Hating = new HuntHateFear();
-  ch->HHF.Hating->Name = CopyString( victim->Name );
+  ch->HHF.Hating->Name = victim->Name;
   ch->HHF.Hating->Who  = victim;
 }
 
@@ -162,7 +158,7 @@ void StartFearing( Character *ch, Character *victim )
     StopFearing( ch );
 
   ch->HHF.Fearing = new HuntHateFear();
-  ch->HHF.Fearing->Name = CopyString( victim->Name );
+  ch->HHF.Fearing->Name = victim->Name;
   ch->HHF.Fearing->Who  = victim;
 }
 
@@ -227,10 +223,10 @@ static void RemoveExpiredAffects(Character *ch)
             {
               const Skill *skill = GetSkill(paf->Type);
 
-              if ( paf->Type > 0 && skill && !IsNullOrEmpty( skill->Messages.WearOff ))
+              if ( paf->Type > 0 && skill && !skill->Messages.WearOff.empty())
                 {
                   SetCharacterColor( AT_WEAROFF, ch );
-                  ch->Echo( "%s\r\n", skill->Messages.WearOff );
+                  ch->Echo( "%s\r\n", skill->Messages.WearOff.c_str() );
                 }
             }
 
@@ -308,7 +304,7 @@ void ViolenceUpdate( void )
       if ( IsBitSet(ch->InRoom->Flags, ROOM_SAFE ) )
         {
           Log->Info( "ViolenceUpdate: %s fighting %s in a SAFE room.",
-                     ch->Name, victim->Name );
+                     ch->Name.c_str(), victim->Name.c_str() );
           StopFighting( ch, true );
         }
       else if ( IsAwake(ch) && ch->InRoom == victim->InRoom )
@@ -1284,19 +1280,19 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           Skill *skill = SkillTable[dt];
           bool found = false;
 
-          if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToCaster ) )
+          if ( !skill->Messages.VictimImmune.ToCaster.empty() )
             {
               Act( AT_HIT, skill->Messages.VictimImmune.ToCaster, ch, NULL, victim, TO_CHAR );
               found = true;
             }
 
-          if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToVictim ) )
+          if ( !skill->Messages.VictimImmune.ToVictim.empty() )
             {
               Act( AT_HITME, skill->Messages.VictimImmune.ToVictim, ch, NULL, victim, TO_VICT );
               found = true;
             }
 
-          if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToRoom ) )
+          if ( !skill->Messages.VictimImmune.ToRoom.empty() )
             {
               Act( AT_ACTION, skill->Messages.VictimImmune.ToRoom, ch, NULL, victim, TO_NOTVICT );
               found = true;
@@ -1514,19 +1510,19 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
               bool found = false;
               Skill *skill = SkillTable[dt];
 
-              if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToCaster ) )
+              if ( !skill->Messages.VictimImmune.ToCaster.empty() )
                 {
                   Act( AT_HIT, skill->Messages.VictimImmune.ToCaster, ch, NULL, victim, TO_CHAR );
                   found = true;
                 }
 
-              if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToVictim ) )
+              if ( !skill->Messages.VictimImmune.ToVictim.empty() )
                 {
                   Act( AT_HITME, skill->Messages.VictimImmune.ToVictim, ch, NULL, victim, TO_VICT );
                   found = true;
                 }
 
-              if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToRoom ) )
+              if ( !skill->Messages.VictimImmune.ToRoom.empty() )
                 {
                   Act( AT_ACTION, skill->Messages.VictimImmune.ToRoom, ch, NULL, victim, TO_NOTVICT );
                   found = true;
@@ -1550,8 +1546,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
             {
               if ( victim->HHF.Hunting->Who != ch )
                 {
-                  FreeMemory( victim->HHF.Hunting->Name );
-                  victim->HHF.Hunting->Name = CopyString( ch->Name );
+                  victim->HHF.Hunting->Name = ch->Name;
                   victim->HHF.Hunting->Who  = ch;
                 }
             }
@@ -1563,8 +1558,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         {
           if ( victim->HHF.Hating->Who != ch )
             {
-              FreeMemory( victim->HHF.Hating->Name );
-              victim->HHF.Hating->Name = CopyString( ch->Name );
+              victim->HHF.Hating->Name = ch->Name;
               victim->HHF.Hating->Who  = ch;
             }
         }
@@ -1749,7 +1743,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
           victim->Hit = victim->MaxHit;
           victim->Mana = victim->MaxMana;
           victim->Move = victim->MaxMove;
-          sprintf(buf,"%s is out of the fight.",victim->Name);
+          sprintf(buf,"%s is out of the fight.",victim->Name.c_str());
           ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
           StopFighting(victim, true);
 
@@ -1816,13 +1810,13 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         {
           Skill *skill = SkillTable[dt];
 
-          if ( !IsNullOrEmpty( skill->Messages.VictimDeath.ToCaster ) )
+          if ( !skill->Messages.VictimDeath.ToCaster.empty() )
             Act( AT_DEAD, skill->Messages.VictimDeath.ToCaster, ch, NULL, victim, TO_CHAR );
 
-          if ( !IsNullOrEmpty( skill->Messages.VictimDeath.ToVictim ) )
+          if ( !skill->Messages.VictimDeath.ToVictim.empty() )
             Act( AT_DEAD, skill->Messages.VictimDeath.ToVictim, ch, NULL, victim, TO_VICT );
 
-          if ( !IsNullOrEmpty( skill->Messages.VictimDeath.ToRoom ) )
+          if ( !skill->Messages.VictimDeath.ToRoom.empty() )
             Act( AT_DEAD, skill->Messages.VictimDeath.ToRoom, ch, NULL, victim, TO_NOTVICT );
         }
 
@@ -1956,8 +1950,8 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       if ( !npcvict )
         {
           sprintf( log_buf, "%s killed by %s at %ld",
-                   victim->Name,
-                   (IsNpc(ch) ? ch->ShortDescr : ch->Name),
+                   victim->Name.c_str(),
+                   (IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str()),
                    victim->InRoom->Vnum );
           Log->Info( log_buf );
           ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
@@ -2123,7 +2117,7 @@ static void ApplyWantedFlags( Character *ch, const Character *victim )
       if ( !ch->Master )
         {
           Log->Bug( "%s: %s bad AFF_CHARM",
-                    __FUNCTION__, IsNpc(ch) ? ch->ShortDescr : ch->Name );
+                    __FUNCTION__, IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str() );
           StripAffect( ch, gsn_charm_person );
           RemoveBit( ch->AffectedBy, AFF_CHARM );
           return;
@@ -2157,7 +2151,7 @@ static void UpdateKillStats( Character *ch, Character *victim )
       if ( !ch->Master )
         {
           Log->Bug( "%s: %s bad AFF_CHARM",
-                    __FUNCTION__, IsNpc(ch) ? ch->ShortDescr : ch->Name );
+                    __FUNCTION__, IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str() );
           StripAffect( ch, gsn_charm_person );
           RemoveBit( ch->AffectedBy, AFF_CHARM );
           return;
@@ -2280,7 +2274,8 @@ void StartFighting( Character *ch, Character *victim )
   if ( ch->Fighting )
     {
       Log->Bug( "%s: %s -> %s (already fighting %s)",
-                __FUNCTION__, ch->Name, victim->Name, ch->Fighting->Who->Name );
+                __FUNCTION__, ch->Name.c_str(), victim->Name.c_str(),
+                ch->Fighting->Who->Name.c_str() );
       return;
     }
 
@@ -2352,7 +2347,7 @@ void FreeFight( Character *ch )
     {
       StripAffect(ch, gsn_berserk);
       SetCharacterColor(AT_WEAROFF, ch);
-      ch->Echo("%s\r\n", SkillTable[gsn_berserk]->Messages.WearOff);
+      ch->Echo("%s\r\n", SkillTable[gsn_berserk]->Messages.WearOff.c_str());
     }
 }
 
@@ -2385,12 +2380,9 @@ static bool RemoveShipOwner(Ship *ship, void *userData)
 
   if ( !StrCmp( ship->Owner, victim->Name ) )
     {
-      FreeMemory( ship->Owner );
-      ship->Owner = CopyString( "" );
-      FreeMemory( ship->Pilot );
-      ship->Pilot = CopyString( "" );
-      FreeMemory( ship->CoPilot );
-      ship->CoPilot = CopyString( "" );
+      ship->Owner.erase();
+      ship->Pilot.erase();
+      ship->CoPilot.erase();
 
       Ships->Save(ship);
     }
@@ -2403,7 +2395,6 @@ void RawKill( Character *killer, Character *victim )
   Character *victmp = nullptr;
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
-  char arg[MAX_STRING_LENGTH];
 
   if ( !victim )
     {
@@ -2411,7 +2402,7 @@ void RawKill( Character *killer, Character *victim )
       return;
     }
 
-  strcpy( arg , victim->Name );
+  std::string arg = victim->Name;
 
   if ( !IsNpc( victim ) && victim->PCData->ClanInfo.Clan )
     RemoveClanMember( victim );
@@ -2482,32 +2473,13 @@ void RawKill( Character *killer, Character *victim )
 
   if( SysData.PermaDeath )
     {
-      /* swreality changes begin here */
-      /*
-        for ( ship = FirstShip; ship; ship = ship->Next )
-        {
-        if ( !StrCmp( ship->Owner, victim->Name ) )
-        {
-        FreeMemory( ship->Owner );
-        ship->Owner = CopyString( "" );
-        FreeMemory( ship->Pilot );
-        ship->Pilot = CopyString( "" );
-        FreeMemory( ship->CoPilot );
-        ship->CoPilot = CopyString( "" );
-
-        SaveShip( ship );
-        }
-        }
-      */
-
       ForEachShip(RemoveShipOwner, victim);
 
       if ( victim->PlayerHome )
         {
           Room *room = victim->PlayerHome;
 
-          FreeMemory( room->Name );
-          room->Name = CopyString( "An Empty Apartment" );
+          room->Name = "An Empty Apartment";
 
           RemoveBit( room->Flags , ROOM_PLR_HOME );
           SetBit( room->Flags , ROOM_EMPTY_HOME );
@@ -2519,46 +2491,38 @@ void RawKill( Character *killer, Character *victim )
         {
           if ( !StrCmp( victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Leader ) )
             {
-              FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Leader );
-
-              if ( victim->PCData->ClanInfo.Clan->Leadership.Number1 )
+              if ( !victim->PCData->ClanInfo.Clan->Leadership.Number1.empty() )
                 {
-                  victim->PCData->ClanInfo.Clan->Leadership.Leader = CopyString( victim->PCData->ClanInfo.Clan->Leadership.Number1 );
-                  FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number1 );
-                  victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
+                  victim->PCData->ClanInfo.Clan->Leadership.Leader = victim->PCData->ClanInfo.Clan->Leadership.Number1;
+                  victim->PCData->ClanInfo.Clan->Leadership.Number1.erase();
                 }
-              else if ( victim->PCData->ClanInfo.Clan->Leadership.Number2 )
+              else if ( !victim->PCData->ClanInfo.Clan->Leadership.Number2.empty() )
                 {
-                  victim->PCData->ClanInfo.Clan->Leadership.Leader = CopyString( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
-                  FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
-                  victim->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
+                  victim->PCData->ClanInfo.Clan->Leadership.Leader = victim->PCData->ClanInfo.Clan->Leadership.Number2;
+                  victim->PCData->ClanInfo.Clan->Leadership.Number2.erase();
                 }
               else
                 {
-                  victim->PCData->ClanInfo.Clan->Leadership.Leader = CopyString( "" );
+                  victim->PCData->ClanInfo.Clan->Leadership.Leader.erase();
                 }
             }
 
           if ( !StrCmp( victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Number1 ) )
             {
-              FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number1 );
-
-              if ( victim->PCData->ClanInfo.Clan->Leadership.Number2 )
+              if ( !victim->PCData->ClanInfo.Clan->Leadership.Number2.empty() )
                 {
-                  victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
-                  FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
-                  victim->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
+                  victim->PCData->ClanInfo.Clan->Leadership.Number1 = victim->PCData->ClanInfo.Clan->Leadership.Number2;
+                  victim->PCData->ClanInfo.Clan->Leadership.Number2.erase();
                 }
               else
                 {
-                  victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
+                  victim->PCData->ClanInfo.Clan->Leadership.Number1.erase();
                 }
             }
 
           if ( !StrCmp( victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Number2 ) )
             {
-              FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
-              victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
+              victim->PCData->ClanInfo.Clan->Leadership.Number1.erase();
             }
         }
 
@@ -2590,20 +2554,20 @@ void RawKill( Character *killer, Character *victim )
         }
 
       sprintf( buf, "%s%c/%s", PLAYER_DIR, tolower(arg[0]),
-               Capitalize( arg ) );
+               Capitalize( arg ).c_str() );
       sprintf( buf2, "%s%c/%s", BACKUP_DIR, tolower(arg[0]),
-               Capitalize( arg ) );
+               Capitalize( arg ).c_str() );
 
       rename( buf, buf2 );
 
       sprintf( buf, "%s%c/%s.clone", PLAYER_DIR, tolower(arg[0]),
-               Capitalize( arg ) );
+               Capitalize( arg ).c_str() );
       sprintf( buf2, "%s%c/%s", PLAYER_DIR, tolower(arg[0]),
-               Capitalize( arg ) );
+               Capitalize( arg ).c_str() );
 
       rename( buf, buf2 );
 
-      sprintf( buf, "%s%s", GOD_DIR, Capitalize(victim->Name) );
+      sprintf( buf, "%s%s", GOD_DIR, Capitalize(victim->Name).c_str() );
 
       if ( !remove( buf ) )
         {
@@ -2613,13 +2577,13 @@ void RawKill( Character *killer, Character *victim )
         {
           killer->Echo( "Unknown error #%d - %s (immortal data). Report to the administration\r\n",
                         errno, strerror( errno ) );
-          sprintf( buf2, "%s slaying ", killer->Name);
+          sprintf( buf2, "%s slaying ", killer->Name.c_str());
           strcpy(buf2, buf);
           perror( buf2 );
         }
 
       sprintf( buf, "%s%c/%s.home", PLAYER_DIR, tolower(arg[0]),
-               Capitalize( arg ) );
+               Capitalize( arg ).c_str() );
       remove( buf );
     }
   else
@@ -2959,25 +2923,25 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
     {
       if ( skill )
         {
-          attack = skill->Messages.NounDamage;
+          attack = skill->Messages.NounDamage.c_str();
 
           if ( dam == 0 )
             {
               bool found = false;
 
-              if ( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ) )
+              if ( !skill->Messages.Failure.ToCaster.empty() )
                 {
                   Act( AT_HIT, skill->Messages.Failure.ToCaster, ch, NULL, victim, TO_CHAR );
                   found = true;
                 }
 
-              if ( !IsNullOrEmpty( skill->Messages.Failure.ToVictim ) )
+              if ( !skill->Messages.Failure.ToVictim.empty() )
                 {
                   Act( AT_HITME, skill->Messages.Failure.ToVictim, ch, NULL, victim, TO_VICT );
                   found = true;
                 }
 
-              if ( !IsNullOrEmpty( skill->Messages.Failure.ToRoom ) )
+              if ( !skill->Messages.Failure.ToRoom.empty() )
                 {
                   Act( AT_ACTION, skill->Messages.Failure.ToRoom, ch, NULL, victim, TO_NOTVICT );
                   found = true;
@@ -2990,17 +2954,17 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
             }
           else
             {
-              if ( !IsNullOrEmpty( skill->Messages.Success.ToCaster ) )
+              if ( !skill->Messages.Success.ToCaster.empty() )
                 {
                   Act( AT_HIT, skill->Messages.Success.ToCaster, ch, NULL, victim, TO_CHAR );
                 }
 
-              if ( !IsNullOrEmpty( skill->Messages.Success.ToVictim ) )
+              if ( !skill->Messages.Success.ToVictim.empty() )
                 {
                   Act( AT_HITME, skill->Messages.Success.ToVictim, ch, NULL, victim, TO_VICT );
                 }
 
-              if ( !IsNullOrEmpty( skill->Messages.Success.ToRoom ) )
+              if ( !skill->Messages.Success.ToRoom.empty() )
                 {
                   Act( AT_ACTION, skill->Messages.Success.ToRoom, ch, NULL, victim, TO_NOTVICT );
                 }

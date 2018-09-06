@@ -69,8 +69,7 @@ HourMinSec   set_boot_time_struct;
 HourMinSec  *set_boot_time = NULL;
 struct tm     *new_boot_time = NULL;
 struct tm      new_boot_struct;
-char           str_boot_time[MAX_INPUT_LENGTH] = {'\0'};
-char           lastplayercmd[MAX_INPUT_LENGTH*2] = {'\0'};
+std::string str_boot_time;
 time_t         current_time = 0;       /* Time of this pulse           */
 socket_t       control = 0;            /* Controlling descriptor       */
 socket_t       newdesc = 0;            /* New descriptor               */
@@ -89,8 +88,8 @@ static void ExecuteOnExit( void );
 static void CaughtAlarm( int dummy );
 static bool CheckBadSocket( socket_t desc );
 static void AcceptNewSocket( socket_t ctrl );
-static char *ActString(const char *format, Character *to, Character *ch,
-                       const void *arg1, const void *arg2);
+static std::string ActString(const std::string &format, Character *to, Character *ch,
+                             const void *arg1, const void *arg2);
 
 static void ExecuteOnExit( void )
 {
@@ -156,7 +155,7 @@ int SwripMain(int argc, char *argv[])
   current_time = (time_t) now_time.tv_sec;
 
   boot_time = time(0);
-  strcpy( str_boot_time, ctime( &current_time ) );
+  str_boot_time = ctime( &current_time );
 
   /*
    * Init boot time.
@@ -662,7 +661,7 @@ static void NewDescriptor( socket_t new_desc )
            buf, dnew->Remote.Port );
   Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
 
-  dnew->Remote.HostIP = CopyString( buf );
+  dnew->Remote.HostIP = buf;
 
   if ( !SysData.NoNameResolving )
     {
@@ -674,7 +673,7 @@ static void NewDescriptor( socket_t new_desc )
       from = NULL;
     }
 
-  dnew->Remote.Hostname = CopyString( (char *)( from ? from->h_name : buf) );
+  dnew->Remote.Hostname = from ? from->h_name : buf;
 
   auto pban = Bans->Find([dnew](const auto &b)
                          {
@@ -700,7 +699,7 @@ static void NewDescriptor( socket_t new_desc )
    * Send the greeting.
    */
   if ( HelpGreeting[0] == '.' )
-    dnew->WriteToBuffer( HelpGreeting + 1 );
+    dnew->WriteToBuffer( HelpGreeting.substr(1) );
   else
     dnew->WriteToBuffer( HelpGreeting );
 
@@ -711,11 +710,8 @@ static void NewDescriptor( socket_t new_desc )
 
   if ( SysData.MaxPlayersThisBoot > SysData.MaxPlayersEver )
     {
-      if ( SysData.TimeOfMaxPlayersEver )
-        FreeMemory(SysData.TimeOfMaxPlayersEver);
-
       sprintf(buf, "%24.24s", ctime(&current_time));
-      SysData.TimeOfMaxPlayersEver = CopyString(buf);
+      SysData.TimeOfMaxPlayersEver = buf;
       SysData.MaxPlayersEver = SysData.MaxPlayersThisBoot;
       sprintf( log_buf, "Broke all-time maximum player record: %d", SysData.MaxPlayersEver );
       Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
@@ -729,9 +725,6 @@ static void NewDescriptor( socket_t new_desc )
 void FreeDescriptor( Descriptor *d )
 {
   closesocket( d->Socket );
-  FreeMemory( d->Remote.Hostname );
-  FreeMemory( d->OutBuffer );
-
   delete d;
   --num_descriptors;
 }
@@ -762,7 +755,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
       else
         {
           Log->Bug( "Close_socket: dclose->Original without character %s",
-               (dclose->Original->Name ? dclose->Original->Name : "unknown") );
+                    !dclose->Original->Name.empty() ? dclose->Original->Name.c_str() : "unknown" );
           dclose->Character = dclose->Original;
           dclose->Original = NULL;
         }
@@ -772,7 +765,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
 
   if ( dclose->Character )
     {
-      sprintf( log_buf, "Closing link to %s.", ch->Name );
+      sprintf( log_buf, "Closing link to %s.", ch->Name.c_str() );
       Log->LogStringPlus( log_buf, LOG_COMM, umax( SysData.LevelOfLogChannel, ch->TopLevel ) );
 
       if ( dclose->ConnectionState == CON_PLAYING
@@ -882,17 +875,17 @@ void SetCharacterColor( short AType, const Character *ch )
 /* Major overhaul. -- Alty */
 #define NAME(ch)        (IsNpc(ch) ? ch->ShortDescr : ch->Name)
 
-static char *ActString(const char *format, Character *to, Character *ch,
-		       const void *arg1, const void *arg2)
+static std::string ActString(const std::string &format, Character *to, Character *ch,
+                             const void *arg1, const void *arg2)
 {
   static char * const he_she  [] = { "it",  "he",  "she" };
   static char * const him_her [] = { "it",  "him", "her" };
   static char * const his_her [] = { "its", "his", "her" };
-  static char buf[MAX_STRING_LENGTH] = {'\0'};
-  char fname[MAX_INPUT_LENGTH] = {'\0'};
+  char buf[MAX_STRING_LENGTH] = {'\0'};
+  std::string fname;
   char *point = buf;
-  const char *str = format;
-  const char *i = nullptr;
+  const char *str = format.c_str();
+  std::string i;
   Character *vch = (Character *) arg2;
   Object *obj1 = (Object  *) arg1;
   Object *obj2 = (Object  *) arg2;
@@ -939,9 +932,9 @@ static char *ActString(const char *format, Character *to, Character *ch,
               break;
 
             case 'e':
-              if (ch->Sex > 2 || ch->Sex < 0)
+              if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
                 {
-                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
+                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name.c_str(),
                            ch->Sex);
                   i = "it";
                 }
@@ -955,7 +948,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
             case 'E':
               if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL )
                 {
-                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
+                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name.c_str(),
                            vch->Sex);
                   i = "it";
                 }
@@ -969,7 +962,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
             case 'm':
               if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
                 {
-                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
+                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name.c_str(),
                            ch->Sex);
                   i = "it";
                 }
@@ -983,7 +976,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
             case 'M':
               if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
                 {
-                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
+                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name.c_str(),
                            vch->Sex);
                   i = "it";
                 }
@@ -997,7 +990,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
             case 's':
               if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
                 {
-                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
+                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name.c_str(),
                            ch->Sex);
                   i = "its";
                 }
@@ -1011,7 +1004,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
             case 'S':
               if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
                 {
-                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
+                  Log->Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name.c_str(),
                            vch->Sex);
                   i = "its";
                 }
@@ -1031,7 +1024,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
 
             case 'p':
               i = (!to || CanSeeObject(to, obj1)
-                   ? GetObjectShortDescription(obj1) : "something");
+                   ? GetObjectShortDescription(obj1): "something");
               break;
 
             case 'P':
@@ -1046,7 +1039,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
 		}
               else
                 {
-                  OneArgument((char *) arg2, fname);
+                  OneArgument(std::string((char *) arg2), fname);
                   i = fname;
                 }
 
@@ -1055,10 +1048,11 @@ static char *ActString(const char *format, Character *to, Character *ch,
         }
 
       ++str;
-
-      while ( (*point = *i) != '\0' )
+      const char *i_ptr = i.c_str();
+      
+      while ( (*point = *i_ptr) != '\0' )
 	{
-	  ++point, ++i;
+	  ++point, ++i_ptr;
 	}
     }
 
@@ -1070,7 +1064,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
 
 void Act( short AType, const std::string &format, Character *ch, const void *arg1, const void *arg2, int type )
 {
-  char *txt = nullptr;
+  std::string txt;
   Character *to = nullptr;
   Character *vch = (Character *)arg2;
 
@@ -1104,13 +1098,13 @@ void Act( short AType, const std::string &format, Character *ch, const void *arg
       if ( !vch )
         {
           Log->Bug( "Act: null vch with TO_VICT." );
-          Log->Bug( "%s (%s)", ch->Name, format.c_str() );
+          Log->Bug( "%s (%s)", ch->Name.c_str(), format.c_str() );
           return;
         }
       if ( !vch->InRoom )
         {
           Log->Bug( "Act: vch in NULL room!" );
-          Log->Bug( "%s -> %s (%s)", ch->Name, vch->Name, format.c_str() );
+          Log->Bug( "%s -> %s (%s)", ch->Name.c_str(), vch->Name.c_str(), format.c_str() );
           return;
         }
       to = vch;
@@ -1119,7 +1113,7 @@ void Act( short AType, const std::string &format, Character *ch, const void *arg
 
   if ( MOBtrigger && type != TO_CHAR && type != TO_VICT && to )
     {
-      txt = ActString(format.c_str(), NULL, ch, arg1, arg2);
+      txt = ActString(format, NULL, ch, arg1, arg2);
 
       if ( IsBitSet(to->InRoom->mprog.progtypes, ACT_PROG) )
         {
@@ -1178,12 +1172,12 @@ void Act( short AType, const std::string &format, Character *ch, const void *arg
       if(!CanSeeCharacter(to, ch) && type != TO_VICT )
         continue;
 
-      txt = ActString(format.c_str(), to, ch, arg1, arg2);
+      txt = ActString(format, to, ch, arg1, arg2);
 
       if (to && to->Desc)
         {
           SetCharacterColor(AType, to);
-          to->Echo("%s", txt);
+          to->Echo("%s", txt.c_str());
         }
       
       if (MOBtrigger)
@@ -1226,18 +1220,18 @@ void DisplayPrompt(Descriptor *d)
   
   assert(ch != nullptr);
 
-  if ( !IsNpc(ch) && ch->SubState != SUB_NONE && !IsNullOrEmpty( ch->PCData->SubPrompt ) )
+  if ( !IsNpc(ch) && ch->SubState != SUB_NONE && !ch->PCData->SubPrompt.empty() )
     {
-      prompt = ch->PCData->SubPrompt;
+      prompt = ch->PCData->SubPrompt.c_str();
     }
-  else if ( IsNpc(ch) || IsNullOrEmpty( ch->PCData->Prompt ) )
+  else if ( IsNpc(ch) || ch->PCData->Prompt.empty() )
     {
       promptBuffer = DefaultPrompt(ch);
       prompt = promptBuffer.c_str();
     }
   else
     {
-      prompt = ch->PCData->Prompt;
+      prompt = ch->PCData->Prompt.c_str();
     }
   
   if ( ansi )

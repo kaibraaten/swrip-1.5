@@ -4,9 +4,8 @@
 #include "room.hpp"
 #include "descriptor.hpp"
 
-void do_where( Character *ch, char *argument )
+void do_where( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = nullptr;
   bool found = false;
 
@@ -16,16 +15,14 @@ void do_where( Character *ch, char *argument )
       return;
     }
 
-  OneArgument( argument, arg );
-
   SetCharacterColor( AT_PERSON, ch );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       if (GetTrustLevel(ch) >= LEVEL_IMMORTAL)
         ch->Echo("Players logged in:\r\n");
       else
-        ch->Echo("Players near you in %s:\r\n", ch->InRoom->Area->Name );
+        ch->Echo("Players near you in %s:\r\n", ch->InRoom->Area->Name.c_str() );
 
       found = false;
 
@@ -41,7 +38,7 @@ void do_where( Character *ch, char *argument )
             {
               found = true;
               ch->Echo("%-28s %s\r\n",
-                       victim->Name, victim->InRoom->Name );
+                       victim->Name.c_str(), victim->InRoom->Name.c_str() );
             }
         }
       
@@ -65,15 +62,15 @@ void do_where( Character *ch, char *argument )
             {
               found = true;
               ch->Echo("%-28s %s\r\n",
-                       PERS(victim, ch), victim->InRoom->Name );
+                       PERS(victim, ch).c_str(), victim->InRoom->Name.c_str() );
               break;
             }
         }
       
       if ( !found )
         {
-          Act( AT_PLAIN, "You didn't find any $T.", ch, NULL, arg, TO_CHAR );
+          Act( AT_PLAIN, "You didn't find any $T.",
+               ch, NULL, arg.c_str(), TO_CHAR );
         }
     }
 }
-

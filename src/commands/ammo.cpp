@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "object.hpp"
 
-void do_ammo( Character *ch, char *argument )
+void do_ammo( Character *ch, std::string argument )
 {
   Object *ammo = nullptr;
   bool checkammo = false;

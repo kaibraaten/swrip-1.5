@@ -1,3 +1,4 @@
+#include <utility/algorithms.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
@@ -8,19 +9,19 @@
 
 static Object *FindFountain(const Room *location);
 
-void do_drink( Character *ch, char *argument )
+void do_drink( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   Object *obj = NULL;
   int liquid = 0;
 
   argument = OneArgument( argument, arg );
 
   /* munch optional words */
-  if ( !StrCmp( arg, "from" ) && !IsNullOrEmpty( argument ) )
+  if ( !StrCmp( arg, "from" ) && !argument.empty() )
     argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       obj = FindFountain(ch->InRoom);
 
@@ -41,7 +42,7 @@ void do_drink( Character *ch, char *argument )
 
   if ( !IsNpc(ch) && ch->PCData->Condition[COND_DRUNK] > 40 )
     {
-      ch->Echo( "You fail to reach your mouth.  *Hic*\r\n" );
+      ch->Echo( "You fail to reach your mouth. *Hic*\r\n" );
       return;
     }
 
@@ -50,13 +51,17 @@ void do_drink( Character *ch, char *argument )
     default:
       if ( obj->CarriedBy == ch )
         {
-          Act( AT_ACTION, "$n lifts $p up to $s mouth and tries to drink from it...", ch, obj, NULL, TO_ROOM );
-          Act( AT_ACTION, "You bring $p up to your mouth and try to drink from it...", ch, obj, NULL, TO_CHAR );
+          Act( AT_ACTION, "$n lifts $p up to $s mouth and tries to drink from it...",
+               ch, obj, NULL, TO_ROOM );
+          Act( AT_ACTION, "You bring $p up to your mouth and try to drink from it...",
+               ch, obj, NULL, TO_CHAR );
         }
       else
         {
-          Act( AT_ACTION, "$n gets down and tries to drink from $p... (Is $e feeling ok?)", ch, obj, NULL, TO_ROOM );
-          Act( AT_ACTION, "You get down on the ground and try to drink from $p...", ch, obj, NULL, TO_CHAR );
+          Act( AT_ACTION, "$n gets down and tries to drink from $p... (Is $e feeling ok?)",
+               ch, obj, NULL, TO_ROOM );
+          Act( AT_ACTION, "You get down on the ground and try to drink from $p...",
+               ch, obj, NULL, TO_CHAR );
         }
       break;
 
@@ -155,14 +160,9 @@ void do_drink( Character *ch, char *argument )
 
 static Object *FindFountain(const Room *location)
 {
-  for(Object *fountain : location->Objects())
-    {
-      if(fountain->ItemType == ITEM_FOUNTAIN
-         || fountain->ItemType == ITEM_BLOOD)
-        {
-          return fountain;
-        }
-    }
-
-  return nullptr;
+  return Find(location->Objects(),
+              [](const auto fountain)
+              {
+                return fountain->ItemType == ITEM_FOUNTAIN || fountain->ItemType == ITEM_BLOOD;
+              });
 }

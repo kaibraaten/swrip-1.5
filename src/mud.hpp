@@ -86,7 +86,7 @@ class Wizard
 public:
   Wizard *Next = nullptr;
   Wizard *Last = nullptr;
-  char   *Name = nullptr;
+  std::string Name;
   short   Level = 0;
 };
 
@@ -161,7 +161,7 @@ extern bool fBootDb;
 class Race
 {
 public:
-  char Name[20];   /* Race name                    */
+  const char *Name;
   int Affected = 0;               /* Default affect bitvectors    */
 
   struct
@@ -216,9 +216,9 @@ class SmaugAffect
 {
 public:
   SmaugAffect *Next = nullptr;
-  char *Duration = nullptr;
+  std::string Duration;
   short Location = 0;
-  char *Modifier = nullptr;
+  std::string Modifier;
   int AffectedBy = 0;
 };
 
@@ -234,7 +234,7 @@ public:
 class HuntHateFear
 {
 public:
-  char      *Name = nullptr;
+  std::string Name;
   Character *Who = nullptr;
 };
 
@@ -271,8 +271,8 @@ public:
 class LiquidType
 {
 public:
-  char  *Name = nullptr;
-  char  *Color = nullptr;
+  const char *Name;
+  const char *Color;
   std::array<short, 3> Affect;
 };
 
@@ -282,8 +282,8 @@ public:
 class ExtraDescription
 {
 public:
-  char             *Keyword = nullptr;              /* Keyword in look/examine          */
-  char             *Description = nullptr;          /* What to see                      */
+  std::string Keyword;
+  std::string Description;
 };
 
 /*
@@ -292,12 +292,14 @@ public:
 class Exit
 {
 public:
-  Exit       *Previous = nullptr;           /* previous exit in linked list */
-  Exit       *Next = nullptr;           /* next exit in linked list     */
-  Exit       *ReverseExit = nullptr;          /* Reverse exit pointer         */
+#if 0
+  Exit *Previous = nullptr;           /* previous exit in linked list */
+  Exit *Next = nullptr;           /* next exit in linked list     */
+#endif
+  Exit *ReverseExit = nullptr;          /* Reverse exit pointer         */
   Room *ToRoom = nullptr;        /* Pointer to destination room  */
-  char            *Keyword = nullptr;        /* Keywords for exit or door    */
-  char            *Description = nullptr;    /* Description of exit          */
+  std::string Keyword;        /* Keywords for exit or door    */
+  std::string Description;    /* Description of exit          */
   vnum_t           Vnum = INVALID_VNUM;           /* Vnum of room exit leads to   */
   vnum_t           ReverseVnum = INVALID_VNUM;          /* Vnum of room in opposite dir */
   int              Flags = 0;      /* door states & other flags    */
@@ -1120,7 +1122,7 @@ bool RaceIsAvailableToPlayers( const Race *race );
 int GetRaceFromName( const std::string &arg );
 int GetClassFromName( const std::string &arg );
 void ShowCharacterCondition( const Character *ch, const Character *victim );
-char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fShort );
+std::string FormatObjectToCharacter( const Object *obj, const Character *ch, bool fShort );
 void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
                                 bool fShort, bool fShowNothing );
 /* act_move.c */
@@ -1137,7 +1139,7 @@ void Teleport( Character *ch, vnum_t room, int flags );
 bool CharacterFallIfNoFloor( Character *ch, int fall );
 
 /* act_obj.c */
-char *GetObjectShortDescription( const Object *obj );
+std::string GetObjectShortDescription( const Object *obj );
 bool RemoveObject( Character *ch, WearLocation iWear, bool fReplace );
 obj_ret DamageObject( Object *obj );
 short GetObjectResistance( const Object *obj );
@@ -1221,7 +1223,7 @@ ShipType GetShipType(const std::string &txt);
 int GetShipFlag(const std::string &txt);
   
 /* nanny.c */
-void Nanny( Descriptor *d, char *argument );
+void Nanny( Descriptor *d, std::string argument );
 
 /* comm.cpp */
 void DisplayPrompt(Descriptor *d);
@@ -1249,7 +1251,7 @@ Character *AllocateMobile( ProtoMobile *pMobIndex );
 Character *CreateMobile( ProtoMobile *pMobIndex );
 Object *CreateObject( ProtoObject *pObjIndex, int level );
 Object *AllocateObject( ProtoObject *pObjIndex, int level );
-char *GetExtraDescription( const std::string &name, const std::list<ExtraDescription*> &extras);
+std::string GetExtraDescription( const std::string &name, const std::list<ExtraDescription*> &extras);
 ProtoMobile *GetProtoMobile( vnum_t vnum );
 ProtoObject *GetProtoObject( vnum_t vnum );
 Room *GetRoom( vnum_t vnum );
@@ -1281,7 +1283,7 @@ ExtraDescription *SetOExtra( Object *obj, const std::string &keywords );
 bool DelOExtra( Object *obj, const std::string &keywords );
 ExtraDescription *SetOExtraProto( ProtoObject *obj, const std::string &keywords );
 bool DelOExtraProto( ProtoObject *obj, const std::string &keywords );
-Reset *ParseReset( const Area *tarea, char *argument, const Character *ch );
+Reset *ParseReset( const Area *tarea, std::string argument, const Character *ch );
 
 /* fight.c */
 ch_ret HitOnce( Character *ch, Character *victim, int dt );
@@ -1317,17 +1319,17 @@ Object *MakeTrap( int v0, int v1, int v2, int v3 );
 Object *CreateMoney( int amount );
 
 /* mapper.c */
-void DrawMap( const Character *ch, const char *desc );
+void DrawMap( const Character *ch, const std::string &desc );
 
 /* misc.c */
 bool IsValidLanguage( int language );
 void PullOrPush( Character *ch, Object *obj, bool pull );
 void ActionDescription( Character *ch, Object *obj, void *vo );
-const char *FormatDate( const time_t* );
+std::string FormatDate( const time_t* );
 
 /* mud_comm.c */
-Character *GetCharacterInRoomMudProg( Character *ch, char *argument );
-int GetColor(const char *argument);
+Character *GetCharacterInRoomMudProg( Character *ch, std::string argument );
+int GetColor(const std::string &argument);
 const char *MobProgTypeToName( int type );
 
 /* skills.c */
@@ -1363,15 +1365,15 @@ void CleanRoom( Room *room );
 void CleanObject( ProtoObject *obj );
 void CleanMobile( ProtoMobile *mob );
 void ExtractCharacter( Character *ch, bool fPull );
-Character *GetCharacterInRoom( const Character *ch, const std::string &argument );
-Character *GetCharacterAnywhere( const Character *ch, const std::string &argument );
+Character *GetCharacterInRoom( const Character *ch, std::string argument );
+Character *GetCharacterAnywhere( const Character *ch, std::string argument );
 Object *GetInstanceOfObject( const ProtoObject *pObjIndexData );
-Object *GetObjectInList( const Character *ch, const std::string &objName,
+Object *GetObjectInList( const Character *ch, std::string objName,
                          const std::list<Object*> &list );
-Object *GetObjectInListReverse( const Character *ch, const std::string &objName,
+Object *GetObjectInListReverse( const Character *ch, std::string objName,
                                 const std::list<Object*> &list );
-Object *GetObjectHere( const Character *ch, const std::string &argument );
-Object *GetObjectAnywhere( const Character *ch, const std::string &argument );
+Object *GetObjectHere( const Character *ch, std::string argument );
+Object *GetObjectAnywhere( const Character *ch, std::string argument );
 int GetObjectCount( const Object *obj );
 int GetObjectWeight( const Object *obj );
 bool IsRoomDark( const Room *pRoomIndex );
@@ -1404,7 +1406,7 @@ Object *CopyObject( const Object *obj );
 void SplitGroupedObject( Object *obj, int num );
 void SeparateOneObjectFromGroup( Object *obj );
 bool EmptyObjectContents( Object *obj,Object *destobj,Room *destroom );
-Object *FindObject( Character *ch, const std::string &argument, bool carryonly );
+Object *FindObject( Character *ch, std::string argument, bool carryonly );
 void BoostEconomy( Area *tarea, int gold );
 void LowerEconomy( Area *tarea, int gold );
 void EconomizeMobileGold( Character *mob );
@@ -1413,7 +1415,7 @@ int CountCharactersOnObject(const Object *obj);
 
 /* interp.c */
 bool CheckPosition( const Character *ch, PositionType position );
-void Interpret( Character *ch, char *argument );
+void Interpret( Character *ch, std::string argument );
 void SendTimer( timerset *vtime, Character *ch );
 void UpdateNumberOfTimesUsed( timeval *time_used, timerset *userec );
 
@@ -1426,7 +1428,8 @@ void FailedCasting( Skill *skill, Character *ch,
 bool IsImmuneToDamageType( const Character *ch, short damtype );
 bool CheckSavingThrow( int sn, int level, const Character *ch, const Character *victim );
 void ImmuneCasting( Skill *skill, Character *ch, Character *victim, Object *obj );
-void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, Object **obj );
+void *LocateSpellTargets( Character *ch, const std::string &arg,
+                          int sn, Character **victim, Object **obj );
 int FindSpell( const Character *ch, const std::string &name, bool know );
 bool SaveVsPoisonDeath( int level, const Character *victim ) ;
 bool SaveVsWands( int level, const Character *victim );

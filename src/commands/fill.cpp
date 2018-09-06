@@ -8,10 +8,10 @@
  * Fill a container
  * Many enhancements added by Thoric (ie: filling non-drink containers)
  */
-void do_fill( Character *ch, char *argument )
+void do_fill( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
   Object *obj = nullptr;
   Object *source = nullptr;
   ItemTypes dest_item = ITEM_NONE, src_item1 = ITEM_NONE, src_item2 = ITEM_NONE, src_item3 = ITEM_NONE, src_item4 = ITEM_NONE;
@@ -23,10 +23,10 @@ void do_fill( Character *ch, char *argument )
 
   /* munch optional words */
   if ( (!StrCmp( arg2, "from" ) || !StrCmp( arg2, "with" ))
-       && !IsNullOrEmpty( argument ) )
+       && !argument.empty() )
     argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo( "Fill what?\r\n" );
       return;
@@ -41,8 +41,10 @@ void do_fill( Character *ch, char *argument )
       return;
     }
   else
-    dest_item = obj->ItemType;
-
+    {
+      dest_item = obj->ItemType;
+    }
+  
   src_item1 = src_item2 = src_item3 = src_item4 = (ItemTypes)-1;
 
   switch( dest_item )
@@ -80,7 +82,7 @@ void do_fill( Character *ch, char *argument )
     {
       if ( IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
-          Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->Name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->Name.c_str(), TO_CHAR );
           return;
         }
       if ( GetObjectWeight( obj ) / obj->Count
@@ -108,7 +110,7 @@ void do_fill( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNullOrEmpty( arg2 ) )
+  if ( !arg2.empty() )
     {
       if ( dest_item == ITEM_CONTAINER
            && (!StrCmp( arg2, "all" ) || !StringPrefix( "all.", arg2 )) )
@@ -173,10 +175,13 @@ void do_fill( Character *ch, char *argument )
                    ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->Count)
                    > obj->Value[OVAL_CONTAINER_CAPACITY] )
                 continue;
+
               if ( all && arg2[3] == '.'
                    &&  !NiftyIsName( &arg2[4], source->Name ) )
                 continue;
+
               ObjectFromRoom(source);
+
               if ( source->ItemType == ITEM_MONEY )
                 {
                   ch->Gold += source->Value[OVAL_MONEY_AMOUNT];
@@ -184,6 +189,7 @@ void do_fill( Character *ch, char *argument )
                 }
 	      else
                 ObjectToObject(source, obj);
+
               found = true;
             }
           else
@@ -196,6 +202,7 @@ void do_fill( Character *ch, char *argument )
                 break;
               }
         }
+
       if ( !found )
         {
           switch( src_item1 )
@@ -232,9 +239,9 @@ void do_fill( Character *ch, char *argument )
 
   if (dest_item == ITEM_CONTAINER)
     {
-      char name[MAX_INPUT_LENGTH];
+      std::string name;
       Character *gch = nullptr;
-      char *pd = nullptr;
+      std::string pd;
       bool found = false;
 
       if ( source == obj )
@@ -256,6 +263,7 @@ void do_fill( Character *ch, char *argument )
               ch->Echo( "You can't do that.\r\n" );
               return;
             }
+
           SeparateOneObjectFromGroup( obj );
           Act( AT_ACTION, "You take $P and put it inside $p.", ch, obj, source, TO_CHAR );
           Act( AT_ACTION, "$n takes $P and puts it inside $p.", ch, obj, source, TO_ROOM );
@@ -281,9 +289,8 @@ void do_fill( Character *ch, char *argument )
 
 	  if ( StrCmp( name, ch->Name ) && !IsImmortal(ch) )
             {
-              bool fGroup;
+              bool fGroup = false;
 
-              fGroup = false;
               for ( gch = FirstCharacter; gch; gch = gch->Next )
                 {
                   if ( !IsNpc(gch)
@@ -294,6 +301,7 @@ void do_fill( Character *ch, char *argument )
                       break;
                     }
                 }
+
               if ( !fGroup )
                 {
                   ch->Echo( "That's someone else's corpse.\r\n" );
@@ -305,7 +313,7 @@ void do_fill( Character *ch, char *argument )
           if ( source->ItemType == ITEM_CONTAINER  /* don't remove */
                &&   IsBitSet(source->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
             {
-              Act( AT_PLAIN, "The $d is closed.", ch, NULL, source->Name, TO_CHAR );
+              Act( AT_PLAIN, "The $d is closed.", ch, NULL, source->Name.c_str(), TO_CHAR );
               return;
             }
         case ITEM_DROID_CORPSE:
@@ -398,8 +406,9 @@ void do_fill( Character *ch, char *argument )
       obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] += diff;
       Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
-
-      if ( (source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] -= diff) < 1 )
+      source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] -= diff;
+      
+      if ( source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 1 )
         {
           ExtractObject( source );
           MakeBloodstain( ch );
@@ -407,39 +416,41 @@ void do_fill( Character *ch, char *argument )
       return;
 
     case ITEM_HERB:
-      if ( obj->Value[1] != 0 && obj->Value[2] != source->Value[2] )
+      if ( obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] != 0
+           && obj->Value[OVAL_PIPE_TOBACCO_HERB] != source->Value[OVAL_PIPE_TOBACCO_HERB] )
         {
           ch->Echo( "There is already another type of herb in it.\r\n" );
           return;
         }
 
-      obj->Value[2] = source->Value[2];
+      obj->Value[OVAL_PIPE_TOBACCO_HERB] = source->Value[OVAL_PIPE_TOBACCO_HERB];
 
-      if ( source->Value[1] < diff )
-        diff = source->Value[1];
+      if ( source->Value[OVAL_PIPE_TOBACCO_AMOUNT] < diff )
+        diff = source->Value[OVAL_PIPE_TOBACCO_AMOUNT];
 
-      obj->Value[1] += diff;
+      obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] += diff;
       Act( AT_ACTION, "You fill $p with $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p with $P.", ch, obj, source, TO_ROOM );
 
-      if ( (source->Value[1] -= diff) < 1 )
+      if ( (source->Value[OVAL_PIPE_TOBACCO_AMOUNT] -= diff) < 1 )
         ExtractObject( source );
       return;
 
     case ITEM_HERB_CON:
-      if ( obj->Value[1] != 0 && obj->Value[2] != source->Value[2] )
+      if ( obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] != 0
+           && obj->Value[OVAL_PIPE_TOBACCO_HERB] != source->Value[OVAL_PIPE_TOBACCO_HERB] )
         {
           ch->Echo( "There is already another type of herb in it.\r\n" );
           return;
         }
 
-      obj->Value[2] = source->Value[2];
+      obj->Value[OVAL_PIPE_TOBACCO_HERB] = source->Value[OVAL_PIPE_TOBACCO_HERB];
 
-      if ( source->Value[1] < diff )
-        diff = source->Value[1];
+      if ( source->Value[OVAL_PIPE_TOBACCO_AMOUNT] < diff )
+        diff = source->Value[OVAL_PIPE_TOBACCO_AMOUNT];
 
-      obj->Value[1] += diff;
-      source->Value[1] -= diff;
+      obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] += diff;
+      source->Value[OVAL_PIPE_TOBACCO_AMOUNT] -= diff;
       Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
       return;
@@ -464,4 +475,3 @@ void do_fill( Character *ch, char *argument )
       return;
     }
 }
-

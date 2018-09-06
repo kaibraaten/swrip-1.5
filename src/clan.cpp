@@ -126,11 +126,11 @@ static void LoadClanStoreroom( const Clan *clan )
   if ( clan->Storeroom == INVALID_VNUM
        || (storeroom = GetRoom( clan->Storeroom )) == NULL )
     {
-      Log->Bug( "Storeroom for clan %s not found.", clan->Name );
+      Log->Bug( "Storeroom for clan %s not found.", clan->Name.c_str() );
       return;
     }
 
-  sprintf( filename, "%s%s.vault", CLAN_DIR, clan->filename );
+  sprintf( filename, "%s%s.vault", CLAN_DIR, clan->filename.c_str() );
 
   if ( ( fp = fopen( filename, "r" ) ) != NULL )
     {
@@ -157,7 +157,7 @@ static void LoadClanStoreroom( const Clan *clan )
 
 	  if ( letter != '#' )
 	    {
-	      Log->Bug( "%s: # not found (%s)", __FUNCTION__, clan->Name );
+	      Log->Bug( "%s: # not found (%s)", __FUNCTION__, clan->Name.c_str() );
 	      break;
 	    }
 
@@ -173,7 +173,7 @@ static void LoadClanStoreroom( const Clan *clan )
 	    }
 	  else
 	    {
-	      Log->Bug( "%s: bad section (%s)", __FUNCTION__, clan->Name );
+	      Log->Bug( "%s: bad section (%s)", __FUNCTION__, clan->Name.c_str() );
 	      break;
 	    }
 	}
@@ -186,7 +186,7 @@ static void LoadClanStoreroom( const Clan *clan )
     }
   else
     {
-      Log->Bug( "Cannot open clan vault for %s", clan->Name );
+      Log->Bug( "Cannot open clan vault for %s", clan->Name.c_str() );
     }
 }
 #endif
@@ -226,11 +226,11 @@ void ShowClanMembers( const Character *ch, const Clan *clan, const std::string &
 
   assert(clan != NULL);
 
-  ch->Echo( "\r\nMembers of %s\r\n", clan->Name );
+  ch->Echo( "\r\nMembers of %s\r\n", clan->Name.c_str() );
   ch->Echo( "------------------------------------------------------------------------------\r\n" );
-  ch->Echo( "Leader: %s\r\n", clan->Leadership.Leader );
-  ch->Echo( "Number1: %s\r\n", clan->Leadership.Number1 );
-  ch->Echo( "Number2: %s\r\n", clan->Leadership.Number2 );
+  ch->Echo( "Leader: %s\r\n", clan->Leadership.Leader.c_str() );
+  ch->Echo( "Number1: %s\r\n", clan->Leadership.Number1.c_str() );
+  ch->Echo( "Number2: %s\r\n", clan->Leadership.Number2.c_str() );
   ch->Echo( "Spacecraft: %d  Vehicles: %d\r\n", clan->Spacecraft, clan->Vehicles );
   ch->Echo( "------------------------------------------------------------------------------\r\n" );
   ch->Echo( "Lvl  Name            Class                 Kills    Deaths              Joined\r\n\r\n" );
@@ -327,7 +327,7 @@ void RemoveClanMember( const Character *ch )
 
   if(clan != nullptr)
     {
-      const char *name = ch->Name;
+      std::string name = ch->Name;
       ClanMember *member = Find(clan->Members(),
                                 [name](const auto m)
                                 {
@@ -337,7 +337,6 @@ void RemoveClanMember( const Character *ch )
       if( member != nullptr )
 	{
           clan->Remove(member);
-	  FreeMemory( member->Name );
 	  delete member;
 	  Clans->Save( ch->PCData->ClanInfo.Clan );
 	}
@@ -355,7 +354,7 @@ void UpdateClanMember( const Character *ch )
 
   if( clan != nullptr )
     {
-      const char *name = ch->Name;
+      std::string name = ch->Name;
       ClanMember *member = Find(clan->Members(),
                                 [name](const auto m)
                                 {
@@ -365,7 +364,7 @@ void UpdateClanMember( const Character *ch )
       if( member != nullptr )
 	{
           member = new ClanMember();
-	  member->Name = CopyString( ch->Name );
+	  member->Name = ch->Name;
 	  member->Since = current_time;
 
           clan->Add(member);
@@ -402,7 +401,7 @@ void SaveClanStoreroom( Character *ch, const Clan *clan )
       return;
     }
 
-  sprintf( filename, "%s%s.vault", CLAN_DIR, clan->filename );
+  sprintf( filename, "%s%s.vault", CLAN_DIR, clan->filename.c_str() );
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
@@ -436,36 +435,6 @@ Clan *AllocateClan( void )
 
 void FreeClan( Clan *clan )
 {
-  if( clan->Name )
-    {
-      FreeMemory( clan->Name );
-    }
-
-  if( clan->Description )
-    {
-      FreeMemory( clan->Description );
-    }
-
-  if( clan->tmpstr )
-    {
-      FreeMemory( clan->tmpstr );
-    }
-
-  if( clan->Leadership.Leader )
-    {
-      FreeMemory( clan->Leadership.Leader );
-    }
-
-  if( clan->Leadership.Number1 )
-    {
-      FreeMemory( clan->Leadership.Number1 );
-    }
-
-  if( clan->Leadership.Number2 )
-    {
-      FreeMemory( clan->Leadership.Number2 );
-    }
-
   delete clan;
 }
 
@@ -522,7 +491,7 @@ static void PushClan( lua_State *L, const void *userData )
       LuaSetfieldString( L, "MainClan", clan->MainClan->Name );
     }
 
-  if( !IsNullOrEmpty( clan->Description ) )
+  if( !clan->Description.empty() )
     {
       LuaSetfieldString( L, "Description", clan->Description );
     }
@@ -570,10 +539,10 @@ static void PushClan( lua_State *L, const void *userData )
   lua_setglobal( L, "clan" );
 }
 
-const char *GetClanFilename( const Clan *clan )
+std::string GetClanFilename( const Clan *clan )
 {
-  static char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s", CLAN_DIR, ConvertToLuaFilename( clan->Name ) );
+  char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", CLAN_DIR, ConvertToLuaFilename( clan->Name ).c_str() );
 
   return fullPath;
 }
@@ -593,7 +562,7 @@ static void LoadOneMember( lua_State *L, Clan *clan )
   
   if( !lua_isnil( L, ++idx ) )
     {
-      member->Name = CopyString( lua_tostring( L, idx ) );
+      member->Name = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -687,8 +656,8 @@ static int L_ClanEntry( lua_State *L )
  if( !lua_isnil( L, ++idx ) )
     {
       clan = AllocateClan();
-      clan->Name = CopyString( lua_tostring( L, idx ) );
-      Log->Info( "Loading %s", clan->Name );
+      clan->Name = lua_tostring( L, idx );
+      Log->Info( "Loading %s", clan->Name.c_str() );
     }
   else
     {
@@ -699,20 +668,12 @@ static int L_ClanEntry( lua_State *L )
   
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->tmpstr = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      clan->tmpstr = CopyString( "" );
+      clan->tmpstr = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->Description = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      clan->Description = CopyString( "" );
+      clan->Description = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -772,29 +733,17 @@ static int L_ClanEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->Leadership.Leader = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      clan->Leadership.Leader = CopyString( "" );
+      clan->Leadership.Leader = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->Leadership.Number1 = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      clan->Leadership.Number1 = CopyString( "" );
+      clan->Leadership.Number1 = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->Leadership.Number2 = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      clan->Leadership.Number2 = CopyString( "" );
+      clan->Leadership.Number2 = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )

@@ -15,10 +15,10 @@
 class Skill
 {
 public:
-  char      *Name = nullptr;                   /* Name of skill                */
+  std::string Name;                   /* Name of skill                */
   SpellFun  *SpellFunction = nullptr;              /* Spell pointer (for spells)   */
   CmdFun    *SkillFunction = nullptr;              /* Skill pointer (for skills)   */
-  char      *FunctionName = nullptr;
+  std::string FunctionName;
   SkillTargetType Target = 0;                 /* Legal targets                */
   PositionType Position = 0;       /* Position for caster / user   */
   short      Slot = 0;                   /* Slot for #OBJECT loading     */
@@ -31,24 +31,24 @@ public:
 
   struct
   {
-    char      *NounDamage = nullptr;            /* Damage message               */
-    char      *WearOff = nullptr;                /* Wear off message             */
+    std::string NounDamage;            /* Damage message               */
+    std::string WearOff;                /* Wear off message             */
 
     struct
     {
-      char *ToCaster = nullptr;
-      char *ToVictim = nullptr;
-      char *ToRoom = nullptr;
+      std::string ToCaster;
+      std::string ToVictim;
+      std::string ToRoom;
     } Success, Failure, VictimDeath, VictimImmune;
 
   } Messages;
 
-  char      *Dice = nullptr;                   /* Dice roll                    */
+  std::string Dice;                   /* Dice roll                    */
   int        Value = 0;                  /* Misc value                   */
   char       Saves = 0;                  /* What saving spell applies    */
   char       Difficulty = 0;             /* Difficulty of casting/learning */
   SmaugAffect *Affects = nullptr;                /* Spell affects, if any        */
-  char      *Teachers = nullptr;               /* Skill requires a special teacher */
+  std::string Teachers;               /* Skill requires a special teacher */
   char       Participants = 0;           /* # of required participants   */
   timerset *UseRec = nullptr; /* Usage record                 */
   int        Alignment = 0;              /* for jedi powers */
@@ -232,11 +232,11 @@ extern short gsn_TopSN;
 
 #define IS_VALID_SN(sn)         ( (sn) >=0 && (sn) < MAX_SKILL  \
 				  && SkillTable[(sn)]          \
-				  && SkillTable[(sn)]->Name )
+                                  && !SkillTable[(sn)]->Name.empty() )
 
 #define IS_VALID_HERB(sn)       ( (sn) >=0 && (sn) < MAX_HERB   \
 				  && HerbTable[(sn)]           \
-				  && HerbTable[(sn)]->Name )
+                                  && !HerbTable[(sn)]->Name.empty() )
 
 #define SPELL_FLAG(skill, flag) ( IsBitSet((skill)->Flags, (flag)) )
 #define SPELL_DAMAGE(skill)     ( ((skill)->Flags     ) & 7 )
@@ -268,7 +268,7 @@ extern short gsn_TopSN;
 #define IS_POISON(dt)           ( IS_VALID_SN(dt) &&                    \
 				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_POISON )
 
-bool CheckSkill( Character *ch, const std::string &command, char *argument );
+bool CheckSkill( Character *ch, const std::string &command, const std::string &argument );
 void LearnFromSuccess( Character *ch, int sn );
 void LearnFromFailure( Character *ch, int sn );
 

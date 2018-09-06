@@ -2,15 +2,12 @@
 #include "character.hpp"
 #include "object.hpp"
 
-void do_lock( Character *ch, char *argument )
+void do_lock( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Object *obj = nullptr;
   Exit *pexit = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Lock what?\r\n");
       return;
@@ -49,11 +46,12 @@ void do_lock( Character *ch, char *argument )
 	}
 
       if ( !IsBitSet(pexit->Flags, EX_SECRET)
-           || ( !IsNullOrEmpty( pexit->Keyword ) && NiftyIsName( arg, pexit->Keyword )) )
+           || ( !pexit->Keyword.empty()
+                && NiftyIsName( arg, pexit->Keyword )) )
         {
           ch->Echo("*Click*\r\n");
 	  Act( AT_ACTION, "$n locks the $d.",
-	       ch, NULL, pexit->Keyword, TO_ROOM );
+	       ch, NULL, pexit->Keyword.c_str(), TO_ROOM );
           SetBExitFlag( pexit, EX_LOCKED );
           return;
         }
@@ -98,7 +96,5 @@ void do_lock( Character *ch, char *argument )
       return;
     }
 
-  ch->Echo("You see no %s here.\r\n", arg );
+  ch->Echo("You see no %s here.\r\n", arg.c_str() );
 }
-
-

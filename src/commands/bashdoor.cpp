@@ -4,10 +4,9 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_bashdoor( Character *ch, char *argument )
+void do_bashdoor( Character *ch, std::string arg )
 {
   Exit *pexit = NULL;
-  char arg[MAX_INPUT_LENGTH];
 
   if ( !IsNpc( ch )
        && ch->PCData->Learned[gsn_bashdoor] <= 0  )
@@ -16,9 +15,7 @@ void do_bashdoor( Character *ch, char *argument )
       return;
     }
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Bash what?\r\n" );
       return;
@@ -35,7 +32,7 @@ void do_bashdoor( Character *ch, char *argument )
       Room *to_room = NULL;
       Exit *pexit_rev = NULL;
       int bash_chance = 0;
-      char *keyword = NULL;
+      std::string keyword;
 
       if ( !IsBitSet( pexit->Flags, EX_CLOSED ) )
         {
@@ -65,15 +62,15 @@ void do_bashdoor( Character *ch, char *argument )
             RemoveBit( pexit->Flags, EX_LOCKED );
 
           SetBit( pexit->Flags, EX_BASHED );
-          Act(AT_SKILL, "Crash!  You bashed open the $d!",
-	      ch, NULL, keyword, TO_CHAR );
+          Act(AT_SKILL, "Crash! You bashed open the $d!",
+	      ch, NULL, keyword.c_str(), TO_CHAR );
           Act(AT_SKILL, "$n bashes open the $d!",
-	      ch, NULL, keyword, TO_ROOM );
+	      ch, NULL, keyword.c_str(), TO_ROOM );
           LearnFromSuccess(ch, gsn_bashdoor);
 
           if ( (to_room = pexit->ToRoom) != NULL
-               &&   (pexit_rev = pexit->ReverseExit) != NULL
-               &&    pexit_rev->ToRoom == ch->InRoom )
+               && (pexit_rev = pexit->ReverseExit) != NULL
+               && pexit_rev->ToRoom == ch->InRoom )
             {
               RemoveBit( pexit_rev->Flags, EX_CLOSED );
 
@@ -85,7 +82,7 @@ void do_bashdoor( Character *ch, char *argument )
               for(Character *rch : to_room->Characters())
                 {
                   Act(AT_SKILL, "The $d crashes open!",
-                      rch, NULL, pexit_rev->Keyword, TO_CHAR );
+                      rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR );
 		}
             }
 
@@ -94,9 +91,9 @@ void do_bashdoor( Character *ch, char *argument )
       else
         {
           Act(AT_SKILL, "WHAAAAM!!! You bash against the $d, but it doesn't budge.",
-              ch, NULL, keyword, TO_CHAR );
+              ch, NULL, keyword.c_str(), TO_CHAR );
           Act(AT_SKILL, "WHAAAAM!!! $n bashes against the $d, but it holds strong.",
-              ch, NULL, keyword, TO_ROOM );
+              ch, NULL, keyword.c_str(), TO_ROOM );
           InflictDamage( ch, ch, ( ch->MaxHit / 20 ) + 10, gsn_bashdoor );
           LearnFromFailure(ch, gsn_bashdoor);
         }

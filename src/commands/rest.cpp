@@ -3,7 +3,7 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_rest( Character *ch, char *argument )
+void do_rest( Character *ch, std::string argument )
 {
   Object *obj = NULL;
 
@@ -14,7 +14,7 @@ void do_rest( Character *ch, char *argument )
     }
 
   /* okay, now that we know we can rest, find an object to rest on */
-  if ( !IsNullOrEmpty( argument ) )
+  if ( !argument.empty() )
     {
       obj = GetObjectInList(ch, argument, ch->InRoom->Objects());
 
@@ -88,7 +88,7 @@ void do_rest( Character *ch, char *argument )
     case POS_STANDING:
       if (obj == NULL)
         {
-   ch->Echo("You rest.\r\n");
+          ch->Echo("You rest.\r\n");
           Act( AT_ACTION, "$n sits down and rests.", ch, NULL, NULL, TO_ROOM );
         }
       else if (obj->Value[OVAL_FURNITURE_PREPOSITION] == REST_AT)

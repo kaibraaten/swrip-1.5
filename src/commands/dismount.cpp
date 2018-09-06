@@ -3,7 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_dismount( Character *ch, char *argument )
+void do_dismount( Character *ch, std::string argument )
 {
   Character *victim = NULL;
 
@@ -19,7 +19,7 @@ void do_dismount( Character *ch, char *argument )
     {
       Act( AT_SKILL, "You dismount $N.", ch, NULL, victim, TO_CHAR );
       Act( AT_SKILL, "$n skillfully dismounts $N.", ch, NULL, victim, TO_NOTVICT );
-      Act( AT_SKILL, "$n dismounts you.  Whew!", ch, NULL, victim, TO_VICT );
+      Act( AT_SKILL, "$n dismounts you. Whew!", ch, NULL, victim, TO_VICT );
       RemoveBit( victim->Flags, ACT_MOUNTED );
       ch->Mount = NULL;
       ch->Position = POS_STANDING;
@@ -37,4 +37,3 @@ void do_dismount( Character *ch, char *argument )
       global_retcode = InflictDamage( ch, ch, 1, TYPE_UNDEFINED );
     }
 }
-

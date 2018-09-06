@@ -5,11 +5,10 @@
    are loaded into inventory.  you can specify a level with
    the load object portion as well. */
 
-void do_mpmload( Character *ch, char *argument )
+void do_mpmload( Character *ch, std::string arg )
 {
-  char            arg[ MAX_INPUT_LENGTH ];
-  ProtoMobile *pMobIndex;
-  Character      *victim;
+  ProtoMobile *pMobIndex = nullptr;
+  Character *victim = nullptr;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -20,15 +19,13 @@ void do_mpmload( Character *ch, char *argument )
       return;
     }
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) || !IsNumber(arg) )
+  if ( arg.empty() || !IsNumber(arg) )
     {
       ProgBug( "Mpmload - Bad vnum as arg", ch );
       return;
     }
 
-  if ( ( pMobIndex = GetProtoMobile( atoi( arg ) ) ) == NULL )
+  if ( ( pMobIndex = GetProtoMobile( std::stoi( arg ) ) ) == NULL )
     {
       ProgBug( "Mpmload - Bad mob vnum", ch );
       return;
@@ -37,4 +34,3 @@ void do_mpmload( Character *ch, char *argument )
   victim = CreateMobile( pMobIndex );
   CharacterToRoom( victim, ch->InRoom );
 }
-

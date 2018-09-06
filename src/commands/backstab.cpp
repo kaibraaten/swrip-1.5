@@ -4,9 +4,8 @@
 #include "pcdata.hpp"
 #include "object.hpp"
 
-void do_backstab( Character *ch, char *argument )
+void do_backstab( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = nullptr;
   Object *obj = nullptr;
   int percent = 0;
@@ -17,15 +16,13 @@ void do_backstab( Character *ch, char *argument )
       return;
     }
 
-  OneArgument( argument, arg );
-
   if ( ch->Mount )
     {
       ch->Echo( "You can't get close enough while mounted.\r\n" );
       return;
     }
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Backstab whom?\r\n" );
       return;
@@ -64,9 +61,9 @@ void do_backstab( Character *ch, char *argument )
   /* Can backstab a char even if it's hurt as long as it's sleeping. -Narn */
   /* Or if it can't see you. -Ulysses */
   if ( victim->Hit < victim->MaxHit
-       && ( IsAwake(victim) && CanSeeCharacter(victim,ch) ) )
+       && IsAwake(victim) && CanSeeCharacter(victim,ch) )
     {
-      Act( AT_PLAIN, "$N is hurt and suspicious ... you can't sneak up.",
+      Act( AT_PLAIN, "$N is hurt and suspicious... you can't sneak up.",
            ch, NULL, victim, TO_CHAR );
       return;
     }
@@ -77,12 +74,11 @@ void do_backstab( Character *ch, char *argument )
   SetWaitState( ch, SkillTable[gsn_backstab]->Beats );
 
   if ( !IsAwake(victim)
-       ||   IsNpc(ch)
-       ||   percent < ch->PCData->Learned[gsn_backstab] )
+       || IsNpc(ch)
+       || percent < ch->PCData->Learned[gsn_backstab] )
     {
       LearnFromSuccess( ch, gsn_backstab );
       global_retcode = HitMultipleTimes( ch, victim, gsn_backstab );
-
     }
   else
     {

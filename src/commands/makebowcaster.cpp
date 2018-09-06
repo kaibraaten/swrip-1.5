@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "craft.hpp"
@@ -10,7 +10,7 @@ struct UserData
   int Ammo = 0;
   int Tinder = 0;
   int Lenses = 0;
-  char *ItemName = nullptr;
+  std::string ItemName;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
@@ -19,10 +19,10 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
-static CraftRecipe *CreateMakeBowcasterCraftRecipe( void );
-static void FreeUserData( struct UserData *ud );
+static CraftRecipe *CreateMakeBowcasterCraftRecipe();
+static void FreeUserData( UserData *ud );
 
-void do_makebowcaster( Character *ch, char *argument )
+void do_makebowcaster( Character *ch, std::string argument )
 {
   CraftRecipe *recipe = CreateMakeBowcasterCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
@@ -38,9 +38,9 @@ void do_makebowcaster( Character *ch, char *argument )
   StartCrafting( session );
 }
 
-static CraftRecipe *CreateMakeBowcasterCraftRecipe( void )
+static CraftRecipe *CreateMakeBowcasterCraftRecipe()
 {
-  static const struct CraftingMaterial materials[] =
+  static const CraftingMaterial materials[] =
     {
       { ITEM_TOOLKIT,    CRAFTFLAG_NONE },
       { ITEM_OVEN,       CRAFTFLAG_NONE },
@@ -62,16 +62,16 @@ static CraftRecipe *CreateMakeBowcasterCraftRecipe( void )
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args )
 {
   Character *ch = GetEngineer( args->CraftingSession );
-  struct UserData *ud = (struct UserData*) userData;
+  UserData *ud = static_cast<UserData*>( userData );
 
-  if ( IsNullOrEmpty( args->CommandArguments ) )
+  if ( args->CommandArguments.empty() )
     {
       ch->Echo("&RUsage: Makebowcaster <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
 
-  ud->ItemName = CopyString( args->CommandArguments );
+  ud->ItemName = args->CommandArguments;
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
@@ -118,18 +118,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( obj->WearFlags, ITEM_TAKE );
   obj->Weight = 2 + obj->Level / 7;
 
-  FreeMemory( obj->Name );
-  strcpy( buf, ud->ItemName );
+  strcpy( buf, ud->ItemName.c_str() );
   strcat( buf, " bowcaster");
-  obj->Name = CopyString( buf );
+  obj->Name = buf;
 
-  strcpy( buf, ud->ItemName );
-  FreeMemory( obj->ShortDescr );
-  obj->ShortDescr = CopyString( buf );
+  strcpy( buf, ud->ItemName.c_str() );
+  obj->ShortDescr = buf;
 
-  FreeMemory( obj->Description );
   strcat( buf, " was carefully placed here." );
-  obj->Description = CopyString( Capitalize( buf ) );
+  obj->Description = Capitalize( buf );
 
   Affect *hitroll = new Affect();
   hitroll->Type      = -1;
@@ -170,12 +167,5 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 
 static void FreeUserData( struct UserData *ud )
 {
-  if( ud->ItemName )
-    {
-      FreeMemory( ud->ItemName );
-    }
-
   delete ud;
 }
-
-

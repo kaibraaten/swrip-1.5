@@ -24,10 +24,10 @@ public:
   
   ProtoObject   *Next = nullptr;
   ProtoObject   *NextSort = nullptr;
-  char             *Name = nullptr;
-  char             *ShortDescr = nullptr;
-  char             *Description = nullptr;
-  char             *ActionDescription = nullptr;
+  std::string Name;
+  std::string ShortDescr;
+  std::string Description;
+  std::string ActionDescription;
   vnum_t            Vnum = INVALID_VNUM;
   short             Level = 0;
   ItemTypes         ItemType = 0;

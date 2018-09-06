@@ -1,12 +1,8 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_speak( Character *ch, char *argument )
+void do_speak( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-
-  argument = OneArgument(argument, arg );
-
   if ( !StrCmp( arg, "all" ) && IsImmortal( ch ) )
     {
       SetCharacterColor( AT_SAY, ch );
@@ -22,8 +18,7 @@ void do_speak( Character *ch, char *argument )
       return;
     }
 
-
-  if ( ch->Race == RACE_WOOKIEE && StringPrefix( arg, "wookiee" ))
+  if ( ch->Race == RACE_WOOKIEE && StringPrefix( arg, "shyriiwook" ))
     {
       SetCharacterColor( AT_SAY, ch );
       ch->Echo("Your vocal cords refuse to make those sounds.\r\n");
@@ -33,26 +28,26 @@ void do_speak( Character *ch, char *argument )
   if ( ch->Race == RACE_VERPINE && StringPrefix( arg, "verpine" ))
     {
       SetCharacterColor( AT_SAY, ch );
-      ch->Echo("Your jaws cant pronounce that language.\r\n");
+      ch->Echo("Your jaws can't pronounce that language.\r\n");
       return;
     }
 
-  if ( ch->Race == RACE_GAMORREAN && StringPrefix( arg, "gamorrean" ))
+  if ( ch->Race == RACE_GAMORREAN && StringPrefix( arg, "gamorrese" ))
     {
       SetCharacterColor( AT_SAY, ch );
       ch->Echo("You can barely speak your own language!\r\n");
       return;
     }
 
-  if ( !StringPrefix( arg, "common" ) &&
-       ( ch->Race == RACE_EWOK || ch->Race == RACE_JAWA ))
+  if ( !StringPrefix( arg, "basic" )
+       && ( ch->Race == RACE_EWOK || ch->Race == RACE_JAWA ))
     {
       SetCharacterColor( AT_SAY, ch );
-      ch->Echo("You can not speak common, although you may be able to learn to understand it.\r\n");
+      ch->Echo("You can not speak basic, although you may be able to learn to understand it.\r\n");
       return;
     }
 
-  if ( !StringPrefix( arg, "twilek" ) && ch->Race != RACE_TWI_LEK )
+  if ( !StringPrefix( arg, "twileki" ) && ch->Race != RACE_TWI_LEK )
     {
       SetCharacterColor( AT_SAY, ch );
       ch->Echo("To speak the Twi'lek language requires body parts that you don't have.\r\n");
@@ -73,21 +68,21 @@ void do_speak( Character *ch, char *argument )
       return;
     }
 
-  if ( !StringPrefix( arg, "trandoshan" ) && ch->Race != RACE_TRANDOSHAN )
+  if ( !StringPrefix( arg, "dosh" ) && ch->Race != RACE_TRANDOSHAN )
     {
       SetCharacterColor( AT_SAY, ch );
       ch->Echo("Only a fellow reptile can speak the trandoshan language.\r\n");
       return;
     }
 
-  if ( !StringPrefix( arg, "gamorrean" ) && ch->Race != RACE_GAMORREAN )
+  if ( !StringPrefix( arg, "gamorrese" ) && ch->Race != RACE_GAMORREAN )
     {
       SetCharacterColor( AT_SAY, ch );
       ch->Echo("The gamorrean language can only be spoken by the pigs themselves!\r\n");
       return;
     }
 
-  if ( !StringPrefix( arg, "ithorian" ) && ch->Race != RACE_ITHORIAN )
+  if ( !StringPrefix( arg, "ithorese" ) && ch->Race != RACE_ITHORIAN )
     {
       SetCharacterColor( AT_SAY, ch );
       ch->Echo("You can not replicate the sounds of the ithorian language.\r\n");
@@ -117,4 +112,3 @@ void do_speak( Character *ch, char *argument )
   SetCharacterColor( AT_SAY, ch );
   ch->Echo("You do not know that language.\r\n");
 }
-

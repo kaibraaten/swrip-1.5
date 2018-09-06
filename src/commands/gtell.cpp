@@ -1,11 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_gtell( Character *ch, char *argument )
+void do_gtell( Character *ch, std::string argument )
 {
   Character *gch = nullptr;
 
-  if ( IsNullOrEmpty( argument) )
+  if ( argument.empty() )
     {
       ch->Echo( "Tell your group what?\r\n" );
       return;
@@ -30,9 +30,11 @@ void do_gtell( Character *ch, char *argument )
              still garble though. -- Altrag */
           if ( CharacterKnowsLanguage( gch, ch->Speaking, gch )
                ||  (IsNpc(ch) && !ch->Speaking) )
-            gch->Echo( "%s tells the group '%s'.\r\n", ch->Name, argument );
+            gch->Echo( "%s tells the group '%s'.\r\n",
+                       ch->Name.c_str(), argument.c_str() );
           else
-            gch->Echo( "%s tells the group '%s'.\r\n", ch->Name, Scramble(argument, ch->Speaking) );
+            gch->Echo( "%s tells the group '%s'.\r\n",
+                       ch->Name.c_str(), Scramble(argument, ch->Speaking).c_str() );
         }
     }
 }

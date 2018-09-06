@@ -10,9 +10,8 @@
    itself, but this had best be the last command in the MUDprogram
    otherwise ugly stuff will happen */
 
-void do_mppurge( Character *ch, char *argument )
+void do_mppurge( Character *ch, std::string arg )
 {
-  char arg[ MAX_INPUT_LENGTH ];
   Character *victim = nullptr;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
@@ -24,9 +23,7 @@ void do_mppurge( Character *ch, char *argument )
       return;
     }
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       std::list<Character*> npcsToPurge = Filter(ch->InRoom->Characters(),
                                                  [ch](auto npc)
@@ -77,7 +74,7 @@ void do_mppurge( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( victim ) && victim->Prototype->Vnum == 3 )
+  if ( IsNpc( victim ) && victim->Prototype->Vnum == MOB_VNUM_SUPERMOB )
     {
       ProgBug( "Mppurge: trying to purge supermob", ch );
       return;
@@ -85,4 +82,3 @@ void do_mppurge( Character *ch, char *argument )
 
   ExtractCharacter( victim, true );
 }
-

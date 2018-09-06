@@ -8,7 +8,7 @@
 
 static bool ship_was_in_range( Ship *ship, Ship *target );
 
-void do_jumpvector( Character *ch, char *argument )
+void do_jumpvector( Character *ch, std::string argument )
 {
   int the_chance = 0;
   Vector3 projected;
@@ -57,6 +57,7 @@ void do_jumpvector( Character *ch, char *argument )
 
   the_chance = IsNpc(ch) ? ch->TopLevel
     : (int)  (ch->PCData->Learned[gsn_jumpvector]) ;
+
   if ( GetRandomPercent() > the_chance )
     {
       ch->Echo("&RYou cant figure out the course vectors correctly.\r\n");
@@ -72,7 +73,7 @@ void do_jumpvector( Character *ch, char *argument )
 
       ch->Echo("After some deliberation, you figure out its projected course.\r\n");
       sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
-              target->Name, projected.x, projected.y, projected.z );
+              target->Name.c_str(), projected.x, projected.y, projected.z );
       EchoToCockpit( AT_BLOOD, ship , buf );
       LearnFromSuccess( ch, gsn_jumpvector );
       return;
@@ -84,7 +85,7 @@ void do_jumpvector( Character *ch, char *argument )
 
   ch->Echo("After some deliberation, you figure out its projected course.\r\n");
   sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
-          target->Name, projected.x, projected.y, projected.z  );
+          target->Name.c_str(), projected.x, projected.y, projected.z  );
   EchoToCockpit( AT_BLOOD, ship , buf );
   LearnFromSuccess( ch, gsn_jumpvector );
 }

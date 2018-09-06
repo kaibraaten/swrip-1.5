@@ -3,7 +3,7 @@
 #include "area.hpp"
 #include "room.hpp"
 
-void do_buyhome( Character *ch, char *argument )
+void do_buyhome( Character *ch, std::string argument )
 {
   const int houseCost = 100000;
   
@@ -32,25 +32,24 @@ void do_buyhome( Character *ch, char *argument )
 
   if ( !IsBitSet( room->Flags, ROOM_EMPTY_HOME ) )
     {
-      ch->Echo( "&RThis room isn't for sale!\r\n&w" );
+      ch->Echo( "&RThis room isn't for sale!\r\n&d" );
       return;
     }
 
   if ( ch->Gold < houseCost )
     {
-      ch->Echo( "&RThis room costs %d credits you don't have enough!\r\n&w" );
+      ch->Echo( "&RThis room costs %d credits you don't have enough!\r\n&d" );
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Set the room name. A very brief single line room description.\r\n" );
       ch->Echo( "Usage: Buyhome <Room Name>\r\n" );
       return;
     }
 
-  FreeMemory( room->Name );
-  room->Name = CopyString( argument );
+  room->Name = argument;
 
   ch->Gold -= houseCost;
 

@@ -84,9 +84,9 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
     }
   else
     {
-      if ( !IsNullOrEmpty( skill->Messages.Success.ToCaster ) )
+      if ( !skill->Messages.Success.ToCaster.empty() )
         {
-          if ( strstr(skill->Messages.Success.ToCaster, "$N") )
+          if ( strstr(skill->Messages.Success.ToCaster.c_str(), "$N") )
             {
               hitchar = true;
             }
@@ -96,9 +96,9 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
             }
         }
       
-      if ( !IsNullOrEmpty( skill->Messages.Success.ToRoom ) )
+      if ( !skill->Messages.Success.ToRoom.empty() )
         {
-          if ( strstr(skill->Messages.Success.ToRoom, "$N") )
+          if ( strstr(skill->Messages.Success.ToRoom.c_str(), "$N") )
             {
               hitroom = true;
             }
@@ -108,7 +108,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
             }
         }
       
-      if ( !IsNullOrEmpty( skill->Messages.Success.ToVictim ) )
+      if ( !skill->Messages.Success.ToVictim.empty() )
         {
           hitvict = true;
         }
@@ -130,10 +130,10 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  std::list<Character*>::const_iterator begin = find(std::begin(victim->InRoom->Characters()),
-                                                     std::end(victim->InRoom->Characters()),
+  std::list<Character*>::const_iterator begin = find(std::cbegin(victim->InRoom->Characters()),
+                                                     std::cend(victim->InRoom->Characters()),
                                                      victim);
-  std::list<Character*>::const_iterator end = std::end(victim->InRoom->Characters());
+  std::list<Character*>::const_iterator end = std::cend(victim->InRoom->Characters());
   
   for(auto i = begin; i != end; ++i)
     {

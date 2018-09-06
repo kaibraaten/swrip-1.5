@@ -3,10 +3,10 @@
 #include "arena.hpp"
 #include "room.hpp"
 
-void do_bet(Character *ch, char *argument)
+void do_bet(Character *ch, std::string argument)
 {
-  char arg[MAX_INPUT_LENGTH];
-  char buf1[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string buf1;
 
   argument = OneArgument(argument,arg);
   OneArgument(argument,buf1);
@@ -23,7 +23,7 @@ void do_bet(Character *ch, char *argument)
       return;
     }
 
-  if( IsNullOrEmpty( arg ) )
+  if( arg.empty() )
     {
       ch->Echo("Usage: bet <player> <amount>\r\n");
       return;
@@ -59,7 +59,7 @@ void do_bet(Character *ch, char *argument)
         }
 
       GET_BETTED_ON(ch) = ch->BettedOn;
-      int newbet = ParseBet(arena.BetPot,buf1);
+      int newbet = ParseBet(arena.BetPot, buf1);
 
       if(newbet == 0)
         {
@@ -83,11 +83,12 @@ void do_bet(Character *ch, char *argument)
       arena.ArenaPot += (newbet / 2);
       arena.BetPot += (newbet / 2);
       GET_BET_AMT(ch) = newbet;
-      ch->Echo("You place %d credits on %s.\r\n", newbet, ch->BettedOn->Name);
+      ch->Echo("You place %d credits on %s.\r\n",
+               newbet, ch->BettedOn->Name.c_str());
 
       char buf[MAX_STRING_LENGTH];
-      sprintf(buf,"%s has placed %d credits on %s.", ch->Name,
-              newbet, ch->BettedOn->Name);
+      sprintf(buf,"%s has placed %d credits on %s.", ch->Name.c_str(),
+              newbet, ch->BettedOn->Name.c_str());
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
 }

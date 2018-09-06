@@ -1,8 +1,9 @@
 #include "mud.hpp"
 #include "board.hpp"
 #include "character.hpp"
+#include "log.hpp"
 
-void do_boards( Character *ch, char *argument )
+void do_boards( Character *ch, std::string argument )
 {
   if (Boards->Count() == 0)
     {
@@ -14,11 +15,28 @@ void do_boards( Character *ch, char *argument )
 
   for(const Board *board : Boards->Entities())
     {
-      ch->Echo( "%-16s Vnum: %5d Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %d Type: %d\r\n",
-                board->Name,         board->BoardObject,
+      const char *boardType = nullptr;
+
+      if(board->Type == BOARD_NOTE)
+        {
+          boardType = "Note";
+        }
+      else if(board->Type == BOARD_MAIL)
+        {
+          boardType = "Mail";
+        }
+      else
+        {
+          Log->Bug("%s: Board %s/%d has invalid type %d",
+                   __FUNCTION__, board->Name.c_str(), board->BoardObject, board->Type);
+          boardType = "*** Invalid ***";
+        }
+      
+      ch->Echo( "%-16s Vnum: %5d Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %d Type: %s\r\n",
+                board->Name.c_str(), board->BoardObject,
                 board->MinReadLevel,    board->MinPostLevel,
                 board->MinRemoveLevel, board->MaxPosts, board->Notes().size(),
-                board->Type);
+                boardType);
     }
 }
 

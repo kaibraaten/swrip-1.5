@@ -4,7 +4,7 @@
 #include "bounty.hpp"
 #include "pcdata.hpp"
 
-void do_bounties( Character *ch, char *argument )
+void do_bounties( Character *ch, std::string argument )
 {
   if ( ( GetTrustLevel(ch) < LEVEL_IMMORTAL)
        && (!IsClanned( ch )
@@ -22,7 +22,8 @@ void do_bounties( Character *ch, char *argument )
       for(const Bounty *bounty : Bounties->Entities())
         {
           SetCharacterColor( AT_RED, ch );
-          ch->Echo( "%-26s   %-14ld %-20s\r\n", bounty->Target, bounty->Reward, bounty->Poster );
+          ch->Echo( "%-26s   %-14ld %-20s\r\n",
+                    bounty->Target.c_str(), bounty->Reward, bounty->Poster.c_str() );
         }
     }
   else

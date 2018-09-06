@@ -1,17 +1,14 @@
-#include <string.h>
+#include <cstring>
 #include "vector3_aux.hpp"
 #include "mud.hpp"
 #include "ship.hpp"
 #include "character.hpp"
 #include "room.hpp"
 
-void do_adjusttractorbeam(Character *ch, char *argument )
+void do_adjusttractorbeam(Character *ch, std::string argument )
 {
   char buf[MAX_INPUT_LENGTH];
-  char arg[MAX_INPUT_LENGTH];
   Ship *ship = nullptr, *eShip = nullptr;
-
-  strcpy( arg, argument );
 
   if (  (ship = GetShipFromCoSeat(ch->InRoom->Vnum))  == NULL )
     {
@@ -28,7 +25,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( argument.empty() )
     {
       sprintf( buf, "&RCurrent tractor beam settings: ");
 
@@ -56,9 +53,9 @@ void do_adjusttractorbeam(Character *ch, char *argument )
   eShip = ship->WeaponSystems.TractorBeam.Tractoring;
 
   Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
-       NULL, argument , TO_ROOM );
+       NULL, argument.c_str() , TO_ROOM );
 
-  if( StrCmp( arg, "undock" ) && eShip->Docked && eShip->Docked != ship)
+  if( StrCmp( argument, "undock" ) && eShip->Docked && eShip->Docked != ship)
     {
       EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set on docked ship. Undock it first.\r\n" );
       return;
@@ -76,26 +73,27 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       return;
     }
 
-  if ( !StrCmp( arg, "pull") || !StrCmp( arg, "none" ) )
+  if ( !StrCmp( argument, "pull") || !StrCmp( argument, "none" ) )
     {
       EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set to pull target.\r\n" );
       eShip->State = SHIP_TRACTORED;
       eShip->Docked = NULL;
       eShip->Docking = SHIP_READY;
-      FreeMemory(eShip->LandingDestination);
+      eShip->LandingDestination.erase();
       return;
     }
-  if ( !StrCmp( arg, "abort" ) )
+  
+  if ( !StrCmp( argument, "abort" ) )
     {
       EchoToCockpit( AT_YELLOW, ship, "Manuever aborted. Tractor beam returned to default setting.\r\n" );
       eShip->State = SHIP_TRACTORED;
       eShip->Docked = NULL;
       eShip->Docking = SHIP_READY;
-      FreeMemory(eShip->LandingDestination);
+      eShip->LandingDestination.erase();
       return;
     }
 
-  if ( !StrCmp( arg, "dock") )
+  if ( !StrCmp( argument, "dock") )
     {
       if ( GetShipDistanceToShip(ship, eShip) > 100 )
 	{
@@ -115,7 +113,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       return;
     }
 
-  if ( !StrCmp( arg, "land") )
+  if ( !StrCmp( argument, "land") )
     {
       if ( GetShipDistanceToShip(ship, eShip) > 100 )
         {
@@ -143,11 +141,11 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 
       EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set to land target.\r\n" );
       eShip->State = SHIP_LAND;
-      eShip->LandingDestination = CopyString(ship->Name);
+      eShip->LandingDestination = ship->Name;
       return;
     }
 
-  if ( !StrCmp( arg, "undock" ) )
+  if ( !StrCmp( argument, "undock" ) )
     {
       if ( GetShipDistanceToShip(ship, eShip) > 100 )
         {

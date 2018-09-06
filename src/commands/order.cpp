@@ -5,17 +5,16 @@
 #include "log.hpp"
 #include "room.hpp"
 
-void do_order( Character *ch, char *argument )
+void do_order( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char argbuf[MAX_INPUT_LENGTH];
+  std::string arg;
   Character *victim = NULL;
   bool fAll = false;
-
-  strcpy( argbuf, argument );
+  std::string argbuf = argument;
+  
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
+  if ( arg.empty() || argument.empty() )
     {
       ch->Echo("Order whom to do what?\r\n");
       return;
@@ -71,11 +70,11 @@ void do_order( Character *ch, char *argument )
       for(Character *och : charactersToOrder)
         {
           Act( AT_ACTION, "$n orders you to '$t'.",
-               ch, argument, och, TO_VICT );
+               ch, argument.c_str(), och, TO_VICT );
           Interpret( och, argument );
         }
       
-      Log->Info("%s: order %s.", ch->Name, argbuf );
+      Log->Info("%s: order %s.", ch->Name.c_str(), argbuf.c_str() );
       ch->Echo("Ok.\r\n");
       SetWaitState( ch, 12 );
     }
@@ -84,4 +83,3 @@ void do_order( Character *ch, char *argument )
       ch->Echo("You have no followers here.\r\n");
     }
 }
-

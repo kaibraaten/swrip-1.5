@@ -28,17 +28,17 @@
 class HelpFile
 {
 public:
-  short      Level = 0;
-  char      *Keyword = nullptr;
-  char      *Text = nullptr;
+  short Level = 0;
+  std::string Keyword;
+  std::string Text;
 };
 
 struct CompareHelpFile
 {
   bool operator()(const HelpFile *pHelp, const HelpFile *tHelp) const
   {
-    const char *lhs = pHelp->Keyword[0]=='\'' ? pHelp->Keyword+1 : pHelp->Keyword;
-    const char *rhs = tHelp->Keyword[0]=='\'' ? tHelp->Keyword+1 : tHelp->Keyword;
+    const char *lhs = pHelp->Keyword[0]=='\'' ? pHelp->Keyword.c_str() + 1 : pHelp->Keyword.c_str();
+    const char *rhs = tHelp->Keyword[0]=='\'' ? tHelp->Keyword.c_str() + 1 : tHelp->Keyword.c_str();
     int match = StrCmp(lhs, rhs);
 
     if(match < 0 || (match == 0 && pHelp->Level > tHelp->Level))
@@ -60,21 +60,20 @@ public:
 };
 
 extern HelpFileRepository *HelpFiles;
-extern char *HelpGreeting;
+extern std::string HelpGreeting;
 
-HelpFile *GetHelpFile( const Character *ch, char *argument );
-HelpFile *AllocateHelpFile( const char *keyword, short level );
+HelpFile *GetHelpFile( const Character *ch, std::string argument );
+HelpFile *AllocateHelpFile( const std::string &keyword, short level );
 void FreeHelpFile( HelpFile *help );
 
 short GetHelpFileLevel( const HelpFile *help );
 void SetHelpFileLevel( HelpFile *help, short level );
 
-char *GetHelpFileKeyword( const HelpFile *help );
-void SetHelpFileKeyword( HelpFile *help, const char *keyword );
+std::string GetHelpFileKeyword( const HelpFile *help );
+void SetHelpFileKeyword( HelpFile *help, const std::string &keyword );
 
-char *GetHelpFileText( const HelpFile *help );
-void SetHelpFileText( HelpFile *help, const char *text );
-void SetHelpFileTextNoAlloc( HelpFile *help, char *text );
+std::string GetHelpFileText( const HelpFile *help );
+void SetHelpFileText( HelpFile *help, const std::string &text );
 
 HelpFileRepository *NewHelpFileRepository();
 

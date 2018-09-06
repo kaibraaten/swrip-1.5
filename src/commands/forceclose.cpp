@@ -2,19 +2,15 @@
 #include "mud.hpp"
 #include "descriptor.hpp"
 
-void do_forceclose( Character *ch, char *argument )
+void do_forceclose( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Usage: forceclose <descriptor#>\r\n" );
       return;
     }
 
-  int desc = atoi( arg );
+  int desc = std::stoi( arg );
 
   for ( Descriptor *d : Descriptors->Entities() )
     {

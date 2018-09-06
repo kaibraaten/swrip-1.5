@@ -7,7 +7,7 @@
 
 struct UserData
 {
-  char *ItemName = nullptr;
+  std::string ItemName;
   int Charge = 0;
 };
 
@@ -20,7 +20,7 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static CraftRecipe *MakeCraftRecipe( void );
 static void FreeUserData( struct UserData *ud );
 
-void do_makeglowrod( Character *ch, char *argument )
+void do_makeglowrod( Character *ch, std::string argument )
 {
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
@@ -59,14 +59,14 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   struct UserData *ud = (struct UserData*) userData;
   Character *ch = GetEngineer( args->CraftingSession );
 
-  if ( IsNullOrEmpty( args->CommandArguments ) )
+  if ( args->CommandArguments.empty() )
     {
       ch->Echo("&RUsage: Makeglowrod <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
 
-  ud->ItemName = CopyString( args->CommandArguments );
+  ud->ItemName = args->CommandArguments;
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
@@ -94,18 +94,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( glowrod->WearFlags, ITEM_TAKE );
   glowrod->Weight = 3;
 
-  FreeMemory( glowrod->Name );
-  strcpy( buf, ud->ItemName );
+  strcpy( buf, ud->ItemName.c_str() );
   strcat( buf, " glowrod");
-  glowrod->Name = CopyString( buf );
+  glowrod->Name = buf;
 
-  strcpy( buf, ud->ItemName );
-  FreeMemory( glowrod->ShortDescr );
-  glowrod->ShortDescr = CopyString( buf );
+  strcpy( buf, ud->ItemName.c_str() );
+  glowrod->ShortDescr = buf;
 
-  FreeMemory( glowrod->Description );
   strcat( buf, " was carelessly misplaced here." );
-  glowrod->Description = CopyString( Capitalize( buf ) );
+  glowrod->Description = Capitalize( buf );
 
   glowrod->Value[OVAL_LIGHT_POWER] = ud->Charge;
   glowrod->Cost = glowrod->Value[OVAL_LIGHT_POWER];
@@ -125,11 +122,6 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 
 static void FreeUserData( struct UserData *ud )
 {
-  if( ud->ItemName )
-    {
-      FreeMemory( ud->ItemName );
-    }
-
   delete ud;
 }
 

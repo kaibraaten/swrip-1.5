@@ -1,14 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_freeze( Character *ch, char *argument )
+void do_freeze( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   Character *victim = nullptr;
 
   OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Freeze whom?\r\n" );
       return;

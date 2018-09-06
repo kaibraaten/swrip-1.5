@@ -10,7 +10,7 @@ struct UserData
   int count;
 };
 
-void do_allspeeders( Character *ch, char *argument )
+void do_allspeeders( Character *ch, std::string argument )
 {
   struct UserData data;
   data.ch = ch;
@@ -46,8 +46,8 @@ static bool ShowShip(Ship *ship, void *userData)
   else
     SetCharacterColor( AT_BLUE, data->ch );
 
-  sprintf( buf, "%s(%s)", ship->Name, ship->PersonalName );
-  data->ch->Echo( "%-35s%-15s ", buf, ship->Owner );
+  sprintf( buf, "%s(%s)", ship->Name.c_str(), ship->PersonalName.c_str() );
+  data->ch->Echo( "%-35s%-15s ", buf, ship->Owner.c_str() );
 
   if ( !StrCmp(ship->Owner, "Public") )
     {

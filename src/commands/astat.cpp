@@ -5,21 +5,20 @@
 #include "area.hpp"
 #include "room.hpp"
 
-void do_astat( Character *ch, char *argument )
+void do_astat( Character *ch, std::string argument )
 {
   Area *tarea = nullptr;
   bool proto = false;
   bool found= false;
-  char filename_buf[MAX_INPUT_LENGTH];
-  char *filename = filename_buf;
+  std::string filename;
 
   if( !StrCmp( argument, "this" ) )
     {
-      strcpy( filename, ch->InRoom->Area->Filename );
+      filename = ch->InRoom->Area->Filename;
     }
   else
     {
-      strcpy( filename, argument );
+      filename = argument;
     }
 
   for ( tarea = FirstArea; tarea; tarea = tarea->Next )
@@ -40,7 +39,7 @@ void do_astat( Character *ch, char *argument )
 
   if ( !found )
     {
-      if ( !IsNullOrEmpty( filename ) )
+      if ( !filename.empty() )
         {
           ch->Echo( "Area not found. Check 'zones'.\r\n" );
           return;
@@ -52,8 +51,8 @@ void do_astat( Character *ch, char *argument )
     }
 
   ch->Echo( "Name: %s\r\nFilename: %-20s  Prototype: %s\r\n",
-            tarea->Name,
-            tarea->Filename,
+            tarea->Name.c_str(),
+            tarea->Filename.c_str(),
             proto ? "yes" : "no" );
 
   if ( !proto )
@@ -71,7 +70,7 @@ void do_astat( Character *ch, char *argument )
         ch->Echo( "Area economy: %d credits.\r\n", tarea->LowEconomy );
 
       if ( tarea->Planet )
-        ch->Echo( "Planet: %s.\r\n", tarea->Planet->Name );
+        ch->Echo( "Planet: %s.\r\n", tarea->Planet->Name.c_str() );
 
       ch->Echo( "Mdeaths: %d  Mkills: %d  Pdeaths: %d  Pkills: %d\r\n",
                 tarea->MDeaths,
@@ -81,7 +80,7 @@ void do_astat( Character *ch, char *argument )
     }
 
   ch->Echo( "Author: %s\r\nAge: %d   Number of players: %d\r\n",
-             tarea->Author,
+             tarea->Author.c_str(),
              tarea->Age,
              tarea->NumberOfPlayers );
  ch->Echo( "Area flags: %s\r\n", FlagString(tarea->Flags, AreaFlags).c_str() );
@@ -99,9 +98,9 @@ void do_astat( Character *ch, char *argument )
              tarea->LevelRanges.Soft.High,
              tarea->LevelRanges.Hard.Low,
              tarea->LevelRanges.Hard.High );
- ch->Echo( "Resetmsg: %s\r\n", tarea->ResetMessage ? tarea->ResetMessage
-             : "(default)" ); /* Rennard */
+ ch->Echo( "Resetmsg: %s\r\n",
+           !tarea->ResetMessage.empty() ? tarea->ResetMessage.c_str()
+           : "(default)" );
  ch->Echo( "Reset frequency: %d minutes.\r\n",
              tarea->ResetFrequency ? tarea->ResetFrequency : 15 );
 }
-

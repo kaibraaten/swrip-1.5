@@ -1,16 +1,13 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_wake( Character *ch, char *argument )
+void do_wake( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
-      do_stand( ch, argument );
+      do_stand( ch, arg );
       return;
     }
 
@@ -43,4 +40,3 @@ void do_wake( Character *ch, char *argument )
   victim->Position = POS_STANDING;
   Act( AT_ACTION, "$n wakes you.", ch, NULL, victim, TO_VICT );
 }
-

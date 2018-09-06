@@ -9,12 +9,12 @@
 /*
  * Mobprogram editing - cumbersome                              -Thoric
  */
-void do_mpedit( Character *ch, char *argument )
+void do_mpedit( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
-  char arg4[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
+  std::string arg4;
 
   if ( IsNpc( ch ) )
     {
@@ -58,9 +58,9 @@ void do_mpedit( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
-  int value = atoi( arg3 );
+  int value = std::stoi( arg3 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
+  if ( arg1.empty() || arg2.empty() )
     {
       ch->Echo("Syntax: mpedit <victim> <command> [number] <program> <value>\r\n");
       ch->Echo("\r\n");
@@ -148,7 +148,7 @@ void do_mpedit( Character *ch, char *argument )
 
       int mptype = 0;
       
-      if ( !IsNullOrEmpty( arg4 ) )
+      if ( !arg4.empty() )
         {
           mptype = GetMudProgFlag( arg4 );
 

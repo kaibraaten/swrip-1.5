@@ -39,7 +39,7 @@
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 
-using NannyFun = std::function<void(Descriptor*, char*)>;
+using NannyFun = std::function<void(Descriptor*, std::string)>;
 
 static const char echo_off_str    [] = { (const char)IAC, (const char)WILL, TELOPT_ECHO, '\0' };
 static const char echo_on_str     [] = { (const char)IAC, (const char)WONT, TELOPT_ECHO, '\0' };
@@ -48,17 +48,17 @@ extern bool wizlock;
 /*
  * Local functions
  */
-static void NannyGetName( Descriptor *d, char *argument );
-static void NannyGetOldPassword( Descriptor *d, char *argument );
-static void NannyConfirmNewName( Descriptor *d, char *argument );
-static void NannyGetNewPassword( Descriptor *d, char *argument );
-static void NannyConfirmNewPassword( Descriptor *d, char *argument );
-static void NannyGetNewSex( Descriptor *d, char *argument );
-static void NannyGetNewRace( Descriptor *d, char *argument );
-static void NannyGetNewClass( Descriptor *d, char *argument );
-static void NannyStatsOk( Descriptor *d, char *argument );
-static void NannyPressEnter( Descriptor *d, char *argument );
-static void NannyReadMotd( Descriptor *d, char *argument );
+static void NannyGetName( Descriptor *d, std::string argument );
+static void NannyGetOldPassword( Descriptor *d, std::string argument );
+static void NannyConfirmNewName( Descriptor *d, std::string argument );
+static void NannyGetNewPassword( Descriptor *d, std::string argument );
+static void NannyConfirmNewPassword( Descriptor *d, std::string argument );
+static void NannyGetNewSex( Descriptor *d, std::string argument );
+static void NannyGetNewRace( Descriptor *d, std::string argument );
+static void NannyGetNewClass( Descriptor *d, std::string argument );
+static void NannyStatsOk( Descriptor *d, std::string argument );
+static void NannyPressEnter( Descriptor *d, std::string argument );
+static void NannyReadMotd( Descriptor *d, std::string argument );
 
 static void AskForGender( Descriptor *d );
 static void AskForRace( Descriptor *d );
@@ -69,12 +69,11 @@ static void FinalizeCharacter( Descriptor *d );
 /*
  * Deal with sockets that haven't logged in yet.
  */
-void Nanny( Descriptor *d, char *argument )
+void Nanny( Descriptor *d, std::string argument )
 {
   NannyFun nannyFun;
-  
-  while ( isspace(*argument) )
-    argument++;
+
+  argument = TrimStringStart(argument);
 
   switch ( d->ConnectionState )
     {
@@ -131,14 +130,14 @@ void Nanny( Descriptor *d, char *argument )
   nannyFun( d, argument );
 }
 
-static void NannyGetName( Descriptor *d, char *argument )
+static void NannyGetName( Descriptor *d, std::string argument )
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
   bool fOld = false;
   unsigned char chk = 0;
   Character *ch = d->Character;
 
-  if ( IsNullOrEmpty(argument))
+  if ( argument.empty() )
     {
       CloseDescriptor( d, false );
       return;
@@ -196,7 +195,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   if ( !d->Character )
     {
-      Log->Bug("Bad player file %s@%s.", argument, d->Remote.Hostname );
+      Log->Bug("Bad player file %s@%s.", argument.c_str(), d->Remote.Hostname.c_str() );
       d->WriteToBuffer( "Your playerfile is corrupt...Please notify mail@mymud.com\r\n", 0 );
       CloseDescriptor( d, false );
       return;
@@ -220,7 +219,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   if ( IsBitSet(ch->Flags, PLR_DENY) )
     {
-      sprintf( log_buf, "Denying access to %s@%s.", argument, d->Remote.Hostname );
+      sprintf( log_buf, "Denying access to %s@%s.", argument.c_str(), d->Remote.Hostname.c_str() );
       Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
 
       if (d->NewState != 0)
@@ -275,23 +274,21 @@ static void NannyGetName( Descriptor *d, char *argument )
   else
     {
       if (IsBadName(ch->Name)) {
-	d->WriteToBuffer( "\r\nThat name is unacceptable, please choose a\
-nother.\r\n", 0);
+	d->WriteToBuffer( "\r\nThat name is unacceptable, please choose another.\r\n", 0);
 	d->WriteToBuffer( "Name: ",0);
 	d->ConnectionState = CON_GET_NAME;
 	return;
       }
 
-      d->WriteToBuffer( "\r\nI don't recognize your name, you must be new\
- here.\r\n\r\n", 0 );
-      sprintf( buf, "Did I get that right, %s (Y/N)? ", argument );
+      d->WriteToBuffer( "\r\nI don't recognize your name, you must be new here.\r\n\r\n", 0 );
+      sprintf( buf, "Did I get that right, %s (Y/N)? ", argument.c_str() );
       d->WriteToBuffer( buf, 0 );
       d->ConnectionState = CON_CONFIRM_NEW_NAME;
       return;
     }
 }
 
-static void NannyGetOldPassword( Descriptor *d, char *argument )
+static void NannyGetOldPassword( Descriptor *d, std::string argument )
 {
   Character *ch = d->Character;
   unsigned char chk = 0;
@@ -339,12 +336,12 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
       return;
     }
 
-  sprintf( buf, "%s", ch->Name );
+  sprintf( buf, "%s", ch->Name.c_str() );
   d->Character->Desc = NULL;
   FreeCharacter( d->Character );
   LoadCharacter( d, buf, false );
   ch = d->Character;
-  sprintf( log_buf, "%s@%s has connected.", ch->Name, d->Remote.Hostname );
+  sprintf( log_buf, "%s@%s has connected.", ch->Name.c_str(), d->Remote.Hostname.c_str() );
 
   if ( ch->TopLevel < LEVEL_CREATOR )
     {
@@ -365,17 +362,17 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
     }
 }
 
-static void NannyConfirmNewName( Descriptor *d, char *argument )
+static void NannyConfirmNewName( Descriptor *d, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   Character *ch = d->Character;
 
-  switch ( *argument )
+  switch ( argument[0] )
     {
     case 'y': case 'Y':
       sprintf( buf, "\r\nMake sure to use a password that won't be easily guessed by someone else."
 	       "\r\nPick a good password for %s: %s",
-	       ch->Name, echo_off_str );
+	       ch->Name.c_str(), echo_off_str );
       d->WriteToBuffer( buf, 0 );
       d->ConnectionState = CON_GET_NEW_PASSWORD;
       break;
@@ -395,37 +392,33 @@ static void NannyConfirmNewName( Descriptor *d, char *argument )
     }
 }
 
-static void NannyGetNewPassword( Descriptor *d, char *argument )
+static void NannyGetNewPassword( Descriptor *d, std::string argument )
 {
-  char *pwdnew = NULL, *p = NULL;
+  std::string pwdnew;
   Character *ch = d->Character;
 
   d->WriteToBuffer( "\r\n", 2 );
 
-  if ( strlen(argument) < 5 )
+  if ( argument.size() < 5 )
     {
-      d->WriteToBuffer( "Password must be at least five characters long.\r\nPassword: ", 0 );
+      d->WriteToBuffer( "Password must be at least five characters long.\r\nPassword: " );
       return;
     }
 
   pwdnew = EncodeString( argument );
 
-  for ( p = pwdnew; !IsNullOrEmpty( p ); p++ )
+  if( pwdnew.find('~') != std::string::npos )
     {
-      if ( *p == '~' )
-	{
-	  d->WriteToBuffer( "New password not acceptable, try again.\r\nPassword: ", 0 );
-	  return;
-	}
+      d->WriteToBuffer( "New password not acceptable, try again.\r\nPassword: " );
+      return;
     }
 
-  FreeMemory( ch->PCData->Password );
-  ch->PCData->Password   = CopyString( pwdnew );
+  ch->PCData->Password = pwdnew;
   d->WriteToBuffer( "\r\nPlease retype the password to confirm: ", 0 );
   d->ConnectionState = CON_CONFIRM_NEW_PASSWORD;
 }
 
-static void NannyConfirmNewPassword( Descriptor *d, char *argument )
+static void NannyConfirmNewPassword( Descriptor *d, std::string argument )
 {
   Character *ch = d->Character;
 
@@ -443,7 +436,7 @@ static void NannyConfirmNewPassword( Descriptor *d, char *argument )
   d->ConnectionState = CON_GET_NEW_RACE;
 }
 
-static void NannyGetNewSex( Descriptor *d, char *argument )
+static void NannyGetNewSex( Descriptor *d, std::string argument )
 {
   Character *ch = d->Character;
 
@@ -469,9 +462,9 @@ static void NannyGetNewSex( Descriptor *d, char *argument )
   d->ConnectionState = CON_GET_NEW_CLASS;
 }
 
-static void NannyGetNewRace( Descriptor *d, char *argument )
+static void NannyGetNewRace( Descriptor *d, std::string argument )
 {
-  char arg[MAX_STRING_LENGTH];
+  std::string arg;
   Character *ch = d->Character;
   int iRace = 0;
   
@@ -525,9 +518,9 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
     }
 }
 
-static void NannyGetNewClass( Descriptor *d, char *argument )
+static void NannyGetNewClass( Descriptor *d, std::string argument )
 {
-  char arg[MAX_STRING_LENGTH];
+  std::string arg;
   Character *ch = d->Character;
   int iClass = 0;
 
@@ -564,7 +557,7 @@ static void NannyGetNewClass( Descriptor *d, char *argument )
   d->ConnectionState = CON_STATS_OK;
 }
 
-static void NannyStatsOk( Descriptor *d, char *argument )
+static void NannyStatsOk( Descriptor *d, std::string argument )
 {
   Character *ch = d->Character;
 
@@ -588,7 +581,7 @@ static void NannyStatsOk( Descriptor *d, char *argument )
   d->ConnectionState = CON_PRESS_ENTER;
 }
 
-static void NannyPressEnter( Descriptor *d, char *argument )
+static void NannyPressEnter( Descriptor *d, std::string argument )
 {
   Character *ch = d->Character;
 
@@ -645,7 +638,7 @@ static bool PutCharacterInCorrectShip(Ship *ship, void *userData)
   return true;
 }
 
-static void NannyReadMotd( Descriptor *d, char *argument )
+static void NannyReadMotd( Descriptor *d, std::string argument )
 {
   Character *ch = d->Character;
   char buf[MAX_STRING_LENGTH];
@@ -656,17 +649,14 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
   if ( ch->TopLevel == 0 )
     {
-      Object *obj;
-      int iLang;
-
-      ch->PCData->ClanInfo.ClanName = CopyString( "" );
-      ch->PCData->ClanInfo.Clan     = NULL;
+      Object *obj = nullptr;
+      int iLang = 0;
 
       ch->Stats.PermLck = GetRandomNumberFromRange(6, 20);
       ch->Stats.PermFrc = GetRandomNumberFromRange(-800, 20);
-      ch->AffectedBy         = RaceTable[ch->Race].Affected;
-      ch->Stats.PermLck   += RaceTable[ch->Race].Stats.ModLck;
-      ch->Stats.PermFrc   += RaceTable[ch->Race].Stats.ModFrc;
+      ch->AffectedBy    = RaceTable[ch->Race].Affected;
+      ch->Stats.PermLck += RaceTable[ch->Race].Stats.ModLck;
+      ch->Stats.PermFrc += RaceTable[ch->Race].Stats.ModFrc;
 
       if ( ch->Ability.Main == FORCE_ABILITY )
 	{
@@ -760,7 +750,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
       ch->MaxMana += RaceTable[ch->Race].Mana;
       ch->Mana      = 0;
-      sprintf( buf, "%s the %s",ch->Name, RaceTable[ch->Race].Name );
+      sprintf( buf, "%s the %s",ch->Name.c_str(), RaceTable[ch->Race].Name );
       SetCharacterTitle( ch, buf );
 
       /* Added by Narn.  Start new characters with autoexit and autgold
@@ -779,16 +769,13 @@ static void NannyReadMotd( Descriptor *d, char *argument )
       EquipCharacter( ch, obj, WEAR_WIELD );
 
       /* comlink */
+      ProtoObject *obj_ind = GetProtoObject( OBJ_VNUM_SCHOOL_COMLINK );
 
-      {
-	ProtoObject *obj_ind = GetProtoObject( OBJ_VNUM_SCHOOL_COMLINK );
-
-	if ( obj_ind != NULL )
-	  {
-	    obj = CreateObject( obj_ind, 0 );
-	    ObjectToCharacter( obj, ch );
-	  }
-      }
+      if ( obj_ind != NULL )
+        {
+          obj = CreateObject( obj_ind, 0 );
+          ObjectToCharacter( obj, ch );
+        }
 
       if ( !SysData.NewPlayersMustWaitForAuth )
 	{
@@ -801,8 +788,6 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	  ch->PCData->AuthState = 1;
 	  SetBit(ch->PCData->Flags, PCFLAG_UNAUTHED);
 	}
-      /* Display_prompt Interprets blank as default */
-      ch->PCData->Prompt = CopyString("");
     }
   else if ( !IsImmortal(ch) && ch->PCData->ReleaseDate > current_time )
     {
@@ -855,7 +840,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	}
 
       sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->Name[0]),
-	       Capitalize( ch->Name ) );
+	       Capitalize( ch->Name ).c_str() );
       if ( ( fph = fopen( filename, "r" ) ) != NULL )
 	{
 	  RoomProgSetSupermob(storeroom);
@@ -872,8 +857,8 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
 	      if ( letter != '#' )
 		{
-		  Log->Bug( "Load_plr_home: # not found.", 0 );
-		  Log->Bug( ch->Name, 0 );
+		  Log->Bug( "Load_plr_home: # not found." );
+		  Log->Bug( ch->Name.c_str() );
 		  break;
 		}
 
@@ -890,8 +875,8 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 		  }
 		else
 		  {
-		    Log->Bug( "Load_plr_home: bad section.", 0 );
-		    Log->Bug( ch->Name, 0 );
+		    Log->Bug( "Load_plr_home: bad section." );
+		    Log->Bug( ch->Name.c_str() );
 		    break;
 		  }
 	    }
@@ -1032,7 +1017,7 @@ static void AskForClass( Descriptor *d )
 
       if ( !IsNullOrEmpty( AbilityName[iClass] ) )
         {
-          sprintf( buf2, "%-20s", Capitalize( AbilityName[iClass] ) );
+          sprintf( buf2, "%-20s", Capitalize( AbilityName[iClass] ).c_str() );
           strcat( buf, buf2 );
 
           if( ++columns % 2 == 0 )
@@ -1086,7 +1071,8 @@ static void FinalizeCharacter( Descriptor *d )
   Character *ch = d->Character;
   int ability = 0;
   
-  sprintf( log_buf, "%s@%s new %s.", ch->Name, d->Remote.Hostname,
+  sprintf( log_buf, "%s@%s new %s.",
+           ch->Name.c_str(), d->Remote.Hostname.c_str(),
            RaceTable[ch->Race].Name);
   Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );

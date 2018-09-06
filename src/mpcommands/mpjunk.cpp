@@ -7,10 +7,8 @@
    it can also destroy a worn object and it can destroy
    items using all.xxxxx or just plain all of them */
 
-void do_mpjunk( Character *ch, char *argument )
+void do_mpjunk( Character *ch, std::string arg )
 {
-  char arg[ MAX_INPUT_LENGTH ];
-
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
@@ -20,9 +18,7 @@ void do_mpjunk( Character *ch, char *argument )
       return;
     }
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ProgBug( "Mpjunk - No argument", ch );
       return;
@@ -53,7 +49,7 @@ void do_mpjunk( Character *ch, char *argument )
                                                    [arg](auto obj)
                                                    {
                                                      return arg[3] == '\0'
-                                                       || IsName(&arg[4], obj->Name);
+                                                       || IsName(arg.substr( 4 ), obj->Name);
                                                    });
       for(Object *obj : objectsToExtract)
         {
@@ -66,4 +62,3 @@ void do_mpjunk( Character *ch, char *argument )
         }
     }
 }
-

@@ -1,16 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_consider( Character *ch, char *argument )
+void do_consider( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   const Character *victim = nullptr;
   const char *msg = nullptr;
   int diff = 0;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Consider killing whom?\r\n" );
       return;
@@ -42,7 +39,7 @@ void do_consider( Character *ch, char *argument )
   else if ( diff <=  150)
     msg = "It would take a lot of luck, and a really big blaster!";
   else if ( diff <=  200)
-    msg = "Why don't you just attack a star destoyer with a vibroblade?";
+    msg = "Why don't you just attack a Star Destroyer with a vibroblade?";
   else
     msg = "$N is built like an AT-AT!";
 

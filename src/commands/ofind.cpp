@@ -2,17 +2,13 @@
 #include "character.hpp"
 #include "protoobject.hpp"
 
-void do_ofind( Character *ch, char *argument )
+void do_ofind( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  ProtoObject *pObjIndex;
-  int hash;
-  int nMatch;
-  bool fAll;
+  ProtoObject *pObjIndex = nullptr;
+  int nMatch = 0;
+  bool fAll = false;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Ofind what?\r\n");
       return;
@@ -20,9 +16,8 @@ void do_ofind( Character *ch, char *argument )
 
   SetCharacterColor( AT_PLAIN, ch );
   fAll  = !StrCmp( arg, "all" );
-  nMatch        = 0;
 
-  for ( hash = 0; hash < MAX_KEY_HASH; hash++ )
+  for ( int hash = 0; hash < MAX_KEY_HASH; hash++ )
     for ( pObjIndex = ObjectIndexHash[hash];
           pObjIndex;
           pObjIndex = pObjIndex->Next )
@@ -30,7 +25,7 @@ void do_ofind( Character *ch, char *argument )
         {
           nMatch++;
           ch->Echo("[%5d] %s\r\n",
-                        pObjIndex->Vnum, Capitalize( pObjIndex->ShortDescr ) );
+                   pObjIndex->Vnum, Capitalize( pObjIndex->ShortDescr ).c_str() );
         }
 
   if ( nMatch )

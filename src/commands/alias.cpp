@@ -3,9 +3,9 @@
 #include "alias.hpp"
 #include "pcdata.hpp"
 
-void do_alias( Character *ch, char *argument )
+void do_alias( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
 
   if(IsNpc(ch))
     {
@@ -14,7 +14,7 @@ void do_alias( Character *ch, char *argument )
 
   argument = OneArgument(argument, arg);
 
-  if (IsNullOrEmpty(arg))
+  if ( arg.empty() )
     {
       if (ch->PCData->Aliases().empty())
         {
@@ -26,13 +26,13 @@ void do_alias( Character *ch, char *argument )
 
       for(const Alias *alias : ch->PCData->Aliases())
         {
-          ch->Echo( "%-20s %s\r\n", alias->Name, alias->Command );
+          ch->Echo( "%-20s %s\r\n", alias->Name.c_str(), alias->Command.c_str() );
         }
 
       return;
     }
 
-  if (IsNullOrEmpty(argument))
+  if (argument.empty())
     {
       Alias *alias = FindAlias(ch, arg);
 
@@ -60,12 +60,7 @@ void do_alias( Character *ch, char *argument )
     }
   else
     {
-      if (alias->Command != nullptr)
-        {
-          FreeMemory(alias->Command);
-        }
-
-      alias->Command  = CopyString(argument);
+      alias->Command = argument;
       ch->Echo("Modified Alias.\r\n");
     }
 }

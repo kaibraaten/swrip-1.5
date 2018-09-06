@@ -2,9 +2,9 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_climb( Character *ch, char *argument )
+void do_climb( Character *ch, std::string argument )
 {
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       for(Exit *ex : ch->InRoom->Exits())
 	{
@@ -29,4 +29,3 @@ void do_climb( Character *ch, char *argument )
 
   ch->Echo( "You cannot climb there.\r\n" );
 }
-

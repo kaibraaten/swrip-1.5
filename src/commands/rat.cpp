@@ -1,26 +1,27 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_rat( Character *ch, char *argument )
+void do_rat( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  Room *location = NULL;
-  Room *original = NULL;
-  int Start = 0;
-  int End = 0;
-  int vnum = 0;
+  std::string arg1;
+  std::string arg2;
+  Room *location = nullptr;
+  Room *original = nullptr;
+  vnum_t Start = INVALID_VNUM;
+  vnum_t End = INVALID_VNUM;
+  vnum_t vnum = INVALID_VNUM;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( argument ) )
+  if ( arg1.empty() || arg2.empty() || argument.empty() )
     {
       ch->Echo("Syntax: rat <start> <end> <command>\r\n");
       return;
     }
 
-  Start = atoi( arg1 ); End = atoi( arg2 );
+  Start = std::stoi( arg1 );
+  End = std::stoi( arg2 );
 
   if ( Start < MIN_VNUM || End < Start || Start > End || Start == End || End > MAX_VNUM )
     {
@@ -50,4 +51,3 @@ void do_rat( Character *ch, char *argument )
   CharacterToRoom( ch, original );
   ch->Echo("Done.\r\n");
 }
-

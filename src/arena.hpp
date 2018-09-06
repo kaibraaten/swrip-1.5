@@ -1,6 +1,9 @@
 #ifndef _SWRIP_ARENA_HPP_
 #define _SWRIP_ARENA_HPP_
 
+#include <string>
+#include <ctime>
+
 #define ARENA_MAXBET 100
 
 #define PREP_START  42   /* vnum of first prep room */
@@ -25,7 +28,7 @@ public:
 class HallOfFameElement
 {
 public:
-  char Name[MAX_INPUT_LENGTH+1];
+  std::string Name;
   time_t Date = 0;
   int Award = 0;
   HallOfFameElement *Next = nullptr;

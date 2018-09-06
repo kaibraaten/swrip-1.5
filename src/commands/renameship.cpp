@@ -4,7 +4,7 @@
 #include "clan.hpp"
 #include "room.hpp"
 
-void do_renameship( Character *ch, char *argument )
+void do_renameship( Character *ch, std::string argument )
 {
   Ship *ship = nullptr;
   const Clan *clan = nullptr;
@@ -24,7 +24,7 @@ void do_renameship( Character *ch, char *argument )
 
   if( GetShipAnywhere( argument ) != NULL )
     {
-      ch->Echo("&RImperial Database: &WA ship already exists of that name.\r\n");
+      ch->Echo("&RImperial Database: &WA ship of that name already exists.\r\n");
       return;
     }
 
@@ -36,9 +36,7 @@ void do_renameship( Character *ch, char *argument )
     }
 
   ch->Gold -= 50000;
-  FreeMemory( ship->PersonalName );
-  ship->PersonalName            = CopyString( argument );
+  ship->PersonalName = argument;
   Ships->Save(ship);
   ch->Echo("&RImperial Database: &WTransaction Complete. Name changed.");
 }
-

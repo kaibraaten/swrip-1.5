@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "object.hpp"
 
-void do_setblaster( Character *ch, char *argument )
+void do_setblaster( Character *ch, std::string argument )
 {
   Object *wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
 
@@ -28,7 +28,7 @@ void do_setblaster( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("&RUsage: setblaster <full|high|normal|half|low|stun>\r\n&w");
       return;
@@ -45,13 +45,13 @@ void do_setblaster( Character *ch, char *argument )
       if (wield != nullptr)
         {
           wield->BlasterSetting = BLASTER_FULL;
-          ch->Echo("&YWielded blaster set to FULL Power\r\n&w");
+          ch->Echo("&YWielded blaster set to FULL Power.\r\n&w");
         }
 
       if (wield2 != nullptr)
         {
           wield2->BlasterSetting = BLASTER_FULL;
-          ch->Echo("&YDual wielded blaster set to FULL Power\r\n&w");
+          ch->Echo("&YDual wielded blaster set to FULL Power.\r\n&w");
         }
 
       return;
@@ -62,13 +62,13 @@ void do_setblaster( Character *ch, char *argument )
       if (wield)
         {
           wield->BlasterSetting = BLASTER_HIGH;
-          ch->Echo("&YWielded blaster set to HIGH Power\r\n&w");
+          ch->Echo("&YWielded blaster set to HIGH Power.\r\n&w");
         }
 
       if (wield2)
         {
           wield2->BlasterSetting = BLASTER_HIGH;
-          ch->Echo("&YDual wielded blaster set to HIGH Power\r\n&w");
+          ch->Echo("&YDual wielded blaster set to HIGH Power.\r\n&w");
         }
 
       return;
@@ -79,12 +79,12 @@ void do_setblaster( Character *ch, char *argument )
       if (wield)
         {
           wield->BlasterSetting = BLASTER_NORMAL;
-          ch->Echo("&YWielded blaster set to NORMAL Power\r\n&w");
+          ch->Echo("&YWielded blaster set to NORMAL Power.\r\n&w");
         }
       if (wield2)
         {
           wield2->BlasterSetting = BLASTER_NORMAL;
-          ch->Echo("&YDual wielded blaster set to NORMAL Power\r\n&w");
+          ch->Echo("&YDual wielded blaster set to NORMAL Power.\r\n&w");
 	}
 
       return;
@@ -95,13 +95,13 @@ void do_setblaster( Character *ch, char *argument )
       if (wield)
         {
           wield->BlasterSetting = BLASTER_HALF;
-          ch->Echo("&YWielded blaster set to HALF Power\r\n&w");
+          ch->Echo("&YWielded blaster set to HALF Power.\r\n&w");
         }
 
       if (wield2)
         {
           wield2->BlasterSetting = BLASTER_HALF;
-          ch->Echo("&YDual wielded blaster set to HALF Power\r\n&w");
+          ch->Echo("&YDual wielded blaster set to HALF Power.\r\n&w");
         }
 
       return;
@@ -112,13 +112,13 @@ void do_setblaster( Character *ch, char *argument )
       if (wield)
         {
           wield->BlasterSetting = BLASTER_LOW;
-          ch->Echo("&YWielded blaster set to LOW Power\r\n&w");
+          ch->Echo("&YWielded blaster set to LOW Power.\r\n&w");
         }
 
       if (wield2)
         {
           wield2->BlasterSetting = BLASTER_LOW;
-          ch->Echo("&YDual wielded blaster set to LOW Power\r\n&w");
+          ch->Echo("&YDual wielded blaster set to LOW Power.\r\n&w");
         }
 
       return;
@@ -129,12 +129,13 @@ void do_setblaster( Character *ch, char *argument )
       if (wield)
         {
           wield->BlasterSetting = BLASTER_STUN;
-          ch->Echo("&YWielded blaster set to STUN\r\n&w");
+          ch->Echo("&YWielded blaster set to STUN.\r\n&w");
         }
+
       if (wield2)
         {
           wield2->BlasterSetting = BLASTER_STUN;
-          ch->Echo("&YDual wielded blaster set to STUN\r\n&w");
+          ch->Echo("&YDual wielded blaster set to STUN.\r\n&w");
         }
 
       return;
@@ -144,4 +145,3 @@ void do_setblaster( Character *ch, char *argument )
       do_setblaster( ch , "" );
     }
 }
-

@@ -6,11 +6,11 @@
 #include "log.hpp"
 #include "room.hpp"
 
-void do_rpedit( Character *ch, char *argument )
+void do_rpedit( Character *ch, std::string argument )
 {
-  char arg1 [MAX_INPUT_LENGTH];
-  char arg2 [MAX_INPUT_LENGTH];
-  char arg3 [MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
 
   if ( IsNpc( ch ) )
     {
@@ -41,9 +41,6 @@ void do_rpedit( Character *ch, char *argument )
       {
         MPROG_DATA *mprog = (MPROG_DATA*)ch->dest_buf;
 
-        if ( mprog->comlist )
-          FreeMemory( mprog->comlist );
-
         mprog->comlist = CopyBuffer( ch );
         StopEditing( ch );
         return;
@@ -53,9 +50,9 @@ void do_rpedit( Character *ch, char *argument )
   SmashTilde( argument );
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
-  int value = atoi( arg2 );
+  int value = std::stoi( arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo("Syntax: rpedit <command> [number] <program> <value>\r\n");
       ch->Echo("\r\n");
@@ -110,7 +107,7 @@ void do_rpedit( Character *ch, char *argument )
 
       argument = OneArgument( argument, arg3 );
 
-      if ( !IsNullOrEmpty( arg3 ) )
+      if ( !arg3.empty() )
         {
           mptype = GetMudProgFlag( arg3 );
 
@@ -288,4 +285,3 @@ void do_rpedit( Character *ch, char *argument )
 
   do_rpedit( ch, "" );
 }
-

@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "room.hpp"
 
-void do_peace( Character *ch, char *argument )
+void do_peace( Character *ch, std::string argument )
 {
   Act( AT_IMMORT, "$n booms, 'PEACE!'", ch, NULL, NULL, TO_ROOM );
 
@@ -22,4 +22,3 @@ void do_peace( Character *ch, char *argument )
 
   ch->Echo("Ok.\r\n");
 }
-

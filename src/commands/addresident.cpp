@@ -2,12 +2,9 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_addresident(Character *ch, char *argument)
+void do_addresident(Character *ch, std::string argument)
 {
-  Room *home;
-  Character *victim;
-
-  home = ch->InRoom;
+  Room *home = ch->InRoom;
 
   if ( !IsBitSet(home->Flags,ROOM_PLR_HOME) || home != ch->PlayerHome )
     {
@@ -21,13 +18,15 @@ void do_addresident(Character *ch, char *argument)
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("&RAdd who as a resident?\r\n");
       return;
     }
 
-  if ( (victim = GetCharacterInRoom(ch,argument)) == NULL )
+  Character *victim = GetCharacterInRoom(ch,argument);
+  
+  if ( victim == nullptr )
     {
       ch->Echo("&RThey aren't here.\r\n");
       return;

@@ -39,8 +39,8 @@ public:
   Room  *Next = nullptr;
   Room  *NextSort = nullptr;
   struct Area        *Area = nullptr;
-  char             *Name = nullptr;
-  char             *Description = nullptr;
+  std::string Name;
+  std::string Description;
   vnum_t            Vnum = INVALID_VNUM;
   int               Flags = 0;
   short             Light = 0;

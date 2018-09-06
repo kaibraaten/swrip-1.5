@@ -35,7 +35,7 @@
 /*
  * Dummy function
  */
-void skill_notfound( Character *ch, char *argument )
+void skill_notfound( Character *ch, std::string argument )
 {
   ch->Echo( "Huh?\r\n" );
 }

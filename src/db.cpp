@@ -949,7 +949,8 @@ Object *CreateObject( ProtoObject *proto, int level )
 /*
  * Get an extra description from a list.
  */
-char *GetExtraDescription( const std::string &name, const std::list<ExtraDescription*> &extras )
+std::string GetExtraDescription( const std::string &name,
+                                 const std::list<ExtraDescription*> &extras )
 {
   for(const ExtraDescription *ed : extras)
     {
@@ -959,7 +960,7 @@ char *GetExtraDescription( const std::string &name, const std::list<ExtraDescrip
         }
     }
   
-  return nullptr;
+  return "";
 }
 
 /*
@@ -1108,7 +1109,7 @@ static void AddToWizList( const char *name, int level )
 #endif
 
   Wizard *wiz = new Wizard();
-  wiz->Name     = CopyString( name );
+  wiz->Name     = name;
   wiz->Level    = level;
 
   if ( !first_wiz )
@@ -1242,14 +1243,14 @@ void MakeWizlist( void )
                 }
             }
 
-          if ( strlen( buf ) + strlen( wiz->Name ) > 76 )
+          if ( strlen( buf ) + wiz->Name.size() > 76 )
             {
               ToWizFile( buf );
               buf[0] = '\0';
             }
 
 	  strcat( buf, " " );
-          strcat( buf, wiz->Name );
+          strcat( buf, wiz->Name.c_str() );
 
           if ( strlen( buf ) > 70 )
             {
@@ -1265,7 +1266,6 @@ void MakeWizlist( void )
   for ( wiz = first_wiz; wiz; wiz = wiznext )
     {
       wiznext = wiz->Next;
-      FreeMemory(wiz->Name);
       delete wiz;
     }
   
@@ -1305,11 +1305,6 @@ bool DeleteRoom( Room *room )
       RoomIndexHash[iHash] = room->Next;
     }
 
-  /* Free up the ram for all strings attached to the room. */
-  FreeMemory( room->Name );
-  FreeMemory( room->Description );
-
-  /* Free up the ram held by the room index itself. */
   delete room;
 
   top_room--;
@@ -1336,8 +1331,7 @@ Room *MakeRoom( vnum_t vnum )
   Room *pRoomIndex = new Room();
 
   pRoomIndex->Vnum              = vnum;
-  pRoomIndex->Name              = CopyString("Floating in a void");
-  pRoomIndex->Description               = CopyString("");
+  pRoomIndex->Name              = "Floating in a void";
   pRoomIndex->Flags                = ROOM_PROTOTYPE;
   pRoomIndex->Sector               = SECT_INSIDE;
 
@@ -1365,15 +1359,14 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
 
   ProtoObject *pObjIndex = new ProtoObject(vnum);
 
-  pObjIndex->Name = CopyString( name );
+  pObjIndex->Name = name;
 
   if ( !cObjIndex )
     {
       sprintf( buf, "A %s", name.c_str() );
-      pObjIndex->ShortDescr    = CopyString( buf  );
+      pObjIndex->ShortDescr    = buf;
       sprintf( buf, "A %s is here.", name.c_str() );
-      pObjIndex->Description    = CopyString( buf );
-      pObjIndex->ActionDescription    = CopyString( "" );
+      pObjIndex->Description    = buf;
       pObjIndex->ShortDescr[0] = CharToLowercase(pObjIndex->ShortDescr[0]);
       pObjIndex->Description[0] = CharToUppercase(pObjIndex->Description[0]);
       pObjIndex->ItemType      = ITEM_TRASH;
@@ -1382,9 +1375,9 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
     }
   else
     {
-      pObjIndex->ShortDescr    = CopyString( cObjIndex->ShortDescr );
-      pObjIndex->Description    = CopyString( cObjIndex->Description );
-      pObjIndex->ActionDescription    = CopyString( cObjIndex->ActionDescription );
+      pObjIndex->ShortDescr    = cObjIndex->ShortDescr;
+      pObjIndex->Description    = cObjIndex->Description;
+      pObjIndex->ActionDescription    = cObjIndex->ActionDescription;
       pObjIndex->ItemType      = cObjIndex->ItemType;
       pObjIndex->Flags    = cObjIndex->Flags | ITEM_PROTOTYPE;
       pObjIndex->WearFlags     = cObjIndex->WearFlags;
@@ -1395,8 +1388,8 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
       for(ExtraDescription *ced : cObjIndex->ExtraDescriptions() )
         {
           ExtraDescription *ed = new ExtraDescription();
-          ed->Keyword           = CopyString( ced->Keyword );
-          ed->Description               = CopyString( ced->Description );
+          ed->Keyword           = ced->Keyword;
+          ed->Description               = ced->Description;
           pObjIndex->Add(ed);
           top_ed++;
         }
@@ -1437,18 +1430,16 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name )
     }
 
   ProtoMobile *pMobIndex = new ProtoMobile(vnum);
-  pMobIndex->Name                = CopyString( name );
+  pMobIndex->Name = name;
 
   if ( !cMobIndex )
     {
       sprintf( buf, "A newly created %s", name.c_str() );
-      pMobIndex->ShortDescr    = CopyString( buf  );
+      pMobIndex->ShortDescr = buf;
       sprintf( buf, "Some god abandoned a newly created %s here.\r\n", name.c_str() );
-      pMobIndex->LongDescr             = CopyString( buf );
-      pMobIndex->Description    = CopyString( "" );
+      pMobIndex->LongDescr = buf;
       pMobIndex->ShortDescr[0] = CharToLowercase(pMobIndex->ShortDescr[0]);
       pMobIndex->LongDescr[0]  = CharToUppercase(pMobIndex->LongDescr[0]);
-      pMobIndex->Description[0] = CharToUppercase(pMobIndex->Description[0]);
       pMobIndex->Flags          = ACT_NPC | ACT_PROTOTYPE;
       pMobIndex->Level          = 1;
       pMobIndex->Position       = DEFAULT_POSITION;
@@ -1465,9 +1456,9 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name )
     }
   else
     {
-      pMobIndex->ShortDescr    = CopyString( cMobIndex->ShortDescr );
-      pMobIndex->LongDescr             = CopyString( cMobIndex->LongDescr  );
-      pMobIndex->Description    = CopyString( cMobIndex->Description );
+      pMobIndex->ShortDescr    = cMobIndex->ShortDescr;
+      pMobIndex->LongDescr             = cMobIndex->LongDescr;
+      pMobIndex->Description    = cMobIndex->Description;
       pMobIndex->Flags            = cMobIndex->Flags | ACT_PROTOTYPE;
       pMobIndex->AffectedBy    = cMobIndex->AffectedBy;
       pMobIndex->spec_fun               = cMobIndex->spec_fun;
@@ -1524,7 +1515,7 @@ Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door, const std::
   pexit->ReverseVnum          = pRoomIndex->Vnum;
   pexit->ToRoom                = to_room;
   pexit->Distance               = 1;
-  pexit->Keyword = CopyString(keyword);
+  pexit->Keyword = keyword;
   
   if ( to_room )
     {
@@ -1634,23 +1625,28 @@ static void LoadBuildList( void )
 
               pArea = new Area();
               sprintf( buf, "%s.are", dentry->d_name );
-              pArea->Author = CopyString( dentry->d_name );
-              pArea->Filename = CopyString( buf );
+              pArea->Author = dentry->d_name;
+              pArea->Filename = buf;
               pArea->Name = ReadStringToTilde( fp, Log, fBootDb );
 
               sprintf( buf, "{PROTO} %s's area in progress", dentry->d_name );
-              pArea->Name = CopyString( buf );
+              pArea->Name = buf;
 
               fclose( fp );
-              pArea->VnumRanges.Room.First = rlow; pArea->VnumRanges.Room.Last = rhi;
-              pArea->VnumRanges.Mob.First = mlow; pArea->VnumRanges.Mob.Last = mhi;
-              pArea->VnumRanges.Object.First = olow; pArea->VnumRanges.Object.Last = ohi;
-              pArea->LevelRanges.Soft.Low = -1; pArea->LevelRanges.Soft.High = -1;
-              pArea->LevelRanges.Hard.Low = -1; pArea->LevelRanges.Hard.High = -1;
+              pArea->VnumRanges.Room.First = rlow;
+              pArea->VnumRanges.Room.Last = rhi;
+              pArea->VnumRanges.Mob.First = mlow;
+              pArea->VnumRanges.Mob.Last = mhi;
+              pArea->VnumRanges.Object.First = olow;
+              pArea->VnumRanges.Object.Last = ohi;
+              pArea->LevelRanges.Soft.Low = -1;
+              pArea->LevelRanges.Soft.High = -1;
+              pArea->LevelRanges.Hard.Low = -1;
+              pArea->LevelRanges.Hard.High = -1;
               LINK( pArea, FirstBuild, LastBuild, Next, Previous );
               fprintf( stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld "
                        "Mobs: %5ld - %-5ld\n",
-                       pArea->Filename,
+                       pArea->Filename.c_str(),
                        pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
                        pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,
                        pArea->VnumRanges.Mob.First, pArea->VnumRanges.Mob.Last );
@@ -1701,7 +1697,7 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
 
       ch->Echo( "%-22s| Rooms: %10d - %-10d"
                 " Objs: %10d - %-10d Mobs: %10d - %-10d%s\r\n",
-                (pArea->Filename ? pArea->Filename : "(invalid)"),
+                (!pArea->Filename.empty() ? pArea->Filename.c_str() : "(invalid)"),
                 pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
                 pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,
                 pArea->VnumRanges.Mob.First, pArea->VnumRanges.Mob.Last,
@@ -1729,7 +1725,7 @@ void AppendFile( const Character *ch, const std::string &file, const std::string
   else
     {
       fprintf( fp, "[%5ld] %s: %s\n",
-	       ch->InRoom ? ch->InRoom->Vnum : 0, ch->Name, str.c_str() );
+	       ch->InRoom ? ch->InRoom->Vnum : 0, ch->Name.c_str(), str.c_str() );
       fclose( fp );
     }
 }

@@ -1,9 +1,9 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_typo( Character *ch, char *argument )
+void do_typo( Character *ch, std::string argument )
 {
-  if(!IsNullOrEmpty(argument))
+  if( !argument.empty() )
     {
       AppendFile( ch, TYPO_FILE, argument );
       ch->Echo("Ok. Thanks.\r\n");

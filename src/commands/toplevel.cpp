@@ -1,17 +1,17 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_toplevel( Character *ch, char *argument )
+void do_toplevel( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
   Character *victim;
   int level;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || !IsNumber( arg2 ) )
+  if ( arg1.empty() || arg2.empty() || !IsNumber( arg2 ) )
     {
       ch->Echo("Syntax: toplevel <char> <level>.\r\n");
       return;
@@ -23,9 +23,9 @@ void do_toplevel( Character *ch, char *argument )
       return;
     }
 
-  if ( ( level = atoi( arg2 ) ) < 0 || level > MAX_LEVEL )
+  if ( ( level = std::stoi( arg2 ) ) < 0 || level > MAX_LEVEL )
     {
-      ch->Echo("Level must be 0 (reset) or 1 to 60.\r\n");
+      ch->Echo("Level must be 0 (reset) or 1 to %d.\r\n", MAX_LEVEL);
       return;
     }
 
@@ -44,4 +44,3 @@ void do_toplevel( Character *ch, char *argument )
   victim->TopLevel = level;
   ch->Echo("Ok.\r\n");
 }
-

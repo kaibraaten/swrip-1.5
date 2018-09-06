@@ -1,13 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_push( Character *ch, char *argument )
+void do_push( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  Object *obj;
+  Object *obj = nullptr;
 
-  OneArgument( argument, arg );
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Push what?\r\n");
       return;
@@ -18,10 +16,9 @@ void do_push( Character *ch, char *argument )
 
   if ( ( obj = GetObjectHere( ch, arg ) ) == NULL )
     {
-      Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg, TO_CHAR );
+      Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg.c_str(), TO_CHAR );
       return;
     }
 
   PullOrPush( ch, obj, false );
 }
-

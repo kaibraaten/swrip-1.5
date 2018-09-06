@@ -3,7 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_disarm( Character *ch, char *argument )
+void do_disarm( Character *ch, std::string argument )
 {
   Character *victim = NULL;
   Object *obj = NULL;
@@ -58,4 +58,3 @@ void do_disarm( Character *ch, char *argument )
       LearnFromFailure( ch, gsn_disarm );
     }
 }
-

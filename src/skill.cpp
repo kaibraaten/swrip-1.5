@@ -17,7 +17,7 @@ int TopHerb = 0;
 std::array<Skill*, MAX_SKILL> SkillTable;
 std::array<Skill*, MAX_SKILL> HerbTable;
 
-extern char *spell_target_name;       /* from magic.c */
+extern std::string spell_target_name;       /* from magic.c */
 
 static int CompareSkills( Skill **sk1, Skill **sk2 );
 static void PushSkillTable( lua_State *L, const void* );
@@ -32,7 +32,7 @@ static void PushHerbTable( lua_State *L, const void *userData );
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-bool CheckSkill( Character *ch, const std::string &command, char *argument )
+bool CheckSkill( Character *ch, const std::string &command, const std::string &argument )
 {
   int sn = 0;
   int first = gsn_first_skill;
@@ -58,7 +58,7 @@ bool CheckSkill( Character *ch, const std::string &command, char *argument )
           return false;
         }
 
-      if (strcasecmp( command.c_str(), SkillTable[sn]->Name) < 1)
+      if (StrCmp( command, SkillTable[sn]->Name) < 1)
         {
           top = sn - 1;
         }
@@ -119,7 +119,7 @@ bool CheckSkill( Character *ch, const std::string &command, char *argument )
         case TAR_IGNORE:
           vo = NULL;
 
-          if ( IsNullOrEmpty( argument) )
+          if ( argument.empty() )
             {
               if ( (victim = GetFightingOpponent(ch)) != NULL )
                 {
@@ -133,13 +133,13 @@ bool CheckSkill( Character *ch, const std::string &command, char *argument )
           break;
 
         case TAR_CHAR_OFFENSIVE:
-          if ( IsNullOrEmpty( argument )
+          if ( argument.empty()
                && (victim=GetFightingOpponent(ch)) == NULL )
             {
-              ch->Echo( "%s who?\r\n", Capitalize( SkillTable[sn]->Name ) );
+              ch->Echo( "%s who?\r\n", Capitalize( SkillTable[sn]->Name ).c_str() );
               return true;
             }
-          else if ( !IsNullOrEmpty( argument )
+          else if ( !argument.empty()
 		    && (victim=GetCharacterInRoom(ch, argument)) == NULL )
             {
               ch->Echo( "They aren't here.\r\n" );
@@ -155,7 +155,7 @@ bool CheckSkill( Character *ch, const std::string &command, char *argument )
           break;
 
         case TAR_CHAR_DEFENSIVE:
-          if ( !IsNullOrEmpty( argument )
+          if ( !argument.empty()
                &&  (victim=GetCharacterInRoom(ch, argument)) == NULL )
             {
 	      ch->Echo( "They aren't here.\r\n" );
@@ -336,7 +336,7 @@ void LearnFromSuccess( Character *ch, int sn )
           gain = 50 * sklvl;
           SetCharacterColor( AT_WHITE, ch );
           ch->Echo( "You are now an adept of %s! You gain %d bonus experience!\r\n",
-                    SkillTable[sn]->Name, gain );
+                    SkillTable[sn]->Name.c_str(), gain );
         }
       else
         {
@@ -363,16 +363,14 @@ void LearnFromFailure( Character *ch, int sn )
  */
 int ChLookupSkill( const Character *ch, const std::string &name )
 {
-  int sn = 0;
-
   if ( IsNpc(ch) )
     {
       return LookupSkill( name );
     }
 
-  for ( sn = 0; sn < TopSN; sn++ )
+  for ( int sn = 0; sn < TopSN; sn++ )
     {
-      if ( !SkillTable[sn]->Name )
+      if ( SkillTable[sn]->Name.empty() )
         {
           break;
         }
@@ -397,7 +395,7 @@ int LookupHerb( const std::string &name )
 
   for ( sn = 0; sn < TopHerb; sn++ )
     {
-      if ( !HerbTable[sn] || !HerbTable[sn]->Name )
+      if ( HerbTable[sn] == nullptr || HerbTable[sn]->Name.empty() )
         {
           return -1;
         }
@@ -430,7 +428,7 @@ int LookupSkill( const std::string &name )
                 {
                   for ( sn = gsn_TopSN; sn < TopSN; sn++ )
                     {
-                      if ( !SkillTable[sn] || !SkillTable[sn]->Name )
+                      if ( !SkillTable[sn] || SkillTable[sn]->Name.empty() )
                         {
                           return -1;
                         }
@@ -496,7 +494,7 @@ int BSearchSkill( const std::string &name, int first, int top )
           return -1;
         }
 
-      if (strcasecmp(name.c_str(), SkillTable[sn]->Name) < 1)
+      if (StrCmp(name, SkillTable[sn]->Name) < 1)
         {
           top = sn - 1;
         }
@@ -530,7 +528,7 @@ int BSearchSkillExact( const std::string &name, int first, int top )
           return -1;
         }
 
-      if (strcasecmp(name.c_str(), SkillTable[sn]->Name) < 1)
+      if (StrCmp(name, SkillTable[sn]->Name) < 1)
         {
           top = sn - 1;
         }
@@ -566,7 +564,7 @@ int ChBSearchSkill( const Character *ch, const std::string &name, int first, int
           return -1;
         }
 
-      if (strcasecmp( name.c_str(), SkillTable[sn]->Name) < 1)
+      if (StrCmp( name, SkillTable[sn]->Name) < 1)
         {
           top = sn - 1;
         }
@@ -652,34 +650,32 @@ static int CompareSkills( Skill **sk1, Skill **sk2 )
       return 1;
     }
 
-  return strcasecmp( skill1->Name, skill2->Name );
+  return StrCmp( skill1->Name, skill2->Name );
 }
 
 static void PushSkillTeachers( lua_State *L, const Skill *skill )
 {
-  if( !IsNullOrEmpty( skill->Teachers ) )
+  if( !skill->Teachers.empty() )
     {
-      char buf[MAX_STRING_LENGTH];
-      char *teacherList = buf;
-      strcpy( teacherList, skill->Teachers );
+      std::string teacherList = skill->Teachers;
 
       lua_pushstring( L, "Teachers" );
       lua_newtable( L );
 
-      while( !IsNullOrEmpty( teacherList ) )
+      while( !teacherList.empty() )
 	{
 	  const ProtoMobile *mobile = NULL;
-	  char teacher[MAX_STRING_LENGTH];
+          std::string teacher;
 	  vnum_t vnum = INVALID_VNUM;
 
 	  teacherList = OneArgument( teacherList, teacher );
-	  vnum = atoi( teacher );
+	  vnum = std::stoi( teacher );
 	  mobile = GetProtoMobile( vnum );
 
 	  if( mobile )
 	    {
 	      lua_pushinteger( L, vnum );
-	      lua_pushstring( L, mobile->Name );
+	      lua_pushstring( L, mobile->Name.c_str() );
 	      lua_settable( L, -3 );
 	    }
 	}
@@ -693,93 +689,42 @@ void PushSkillMessages( lua_State *L, const Skill *skill )
   lua_pushstring( L, "Messages" );
   lua_newtable( L );
   {
-    if( !IsNullOrEmpty( skill->Messages.NounDamage ))
-      {
-	LuaSetfieldString( L, "NounDamage", skill->Messages.NounDamage );
-      }
-
-    if( !IsNullOrEmpty( skill->Messages.WearOff ))
-      {
-	LuaSetfieldString( L, "WearOff", skill->Messages.WearOff );
-      }
+    LuaSetfieldString( L, "NounDamage", skill->Messages.NounDamage );
+    LuaSetfieldString( L, "WearOff", skill->Messages.WearOff );
 
     lua_pushstring( L, "Success" );
     lua_newtable( L );
     {
-      if( !IsNullOrEmpty( skill->Messages.Success.ToCaster ))
-	{
-	  LuaSetfieldString( L, "ToCaster", skill->Messages.Success.ToCaster );
-	}
-
-      if( !IsNullOrEmpty( skill->Messages.Success.ToVictim ))
-	{
-	  LuaSetfieldString( L, "ToVictim", skill->Messages.Success.ToVictim );
-	}
-
-      if( !IsNullOrEmpty( skill->Messages.Success.ToRoom) )
-	{
-	  LuaSetfieldString( L, "ToRoom", skill->Messages.Success.ToRoom );
-	}
+      LuaSetfieldString( L, "ToCaster", skill->Messages.Success.ToCaster );
+      LuaSetfieldString( L, "ToVictim", skill->Messages.Success.ToVictim );
+      LuaSetfieldString( L, "ToRoom", skill->Messages.Success.ToRoom );
     }
     lua_settable( L, -3 );
 
     lua_pushstring( L, "Failure" );
     lua_newtable( L );
     {
-      if( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ))
-        {
-          LuaSetfieldString( L, "ToCaster", skill->Messages.Failure.ToCaster );
-        }
-
-      if( !IsNullOrEmpty( skill->Messages.Failure.ToVictim ))
-        {
-          LuaSetfieldString( L, "ToVictim", skill->Messages.Failure.ToVictim );
-        }
-
-      if( !IsNullOrEmpty( skill->Messages.Failure.ToRoom) )
-        {
-          LuaSetfieldString( L, "ToRoom", skill->Messages.Failure.ToRoom );
-        }
+      LuaSetfieldString( L, "ToCaster", skill->Messages.Failure.ToCaster );
+      LuaSetfieldString( L, "ToVictim", skill->Messages.Failure.ToVictim );
+      LuaSetfieldString( L, "ToRoom", skill->Messages.Failure.ToRoom );
     }
     lua_settable( L, -3 );
 
     lua_pushstring( L, "VictimDeath" );
     lua_newtable( L );
     {
-      if( !IsNullOrEmpty( skill->Messages.VictimDeath.ToCaster ))
-        {
-          LuaSetfieldString( L, "ToCaster", skill->Messages.VictimDeath.ToCaster );
-        }
-
-      if( !IsNullOrEmpty( skill->Messages.VictimDeath.ToVictim ))
-        {
-          LuaSetfieldString( L, "ToVictim", skill->Messages.VictimDeath.ToVictim );
-        }
-
-      if( !IsNullOrEmpty( skill->Messages.VictimDeath.ToRoom) )
-        {
-          LuaSetfieldString( L, "ToRoom", skill->Messages.VictimDeath.ToRoom );
-        }
+      LuaSetfieldString( L, "ToCaster", skill->Messages.VictimDeath.ToCaster );
+      LuaSetfieldString( L, "ToVictim", skill->Messages.VictimDeath.ToVictim );
+      LuaSetfieldString( L, "ToRoom", skill->Messages.VictimDeath.ToRoom );
     }
     lua_settable( L, -3 );
 
     lua_pushstring( L, "VictimImmune" );
     lua_newtable( L );
     {
-      if( !IsNullOrEmpty( skill->Messages.VictimImmune.ToCaster ))
-        {
-          LuaSetfieldString( L, "ToCaster", skill->Messages.VictimImmune.ToCaster );
-        }
-
-      if( !IsNullOrEmpty( skill->Messages.VictimImmune.ToVictim ))
-        {
-          LuaSetfieldString( L, "ToVictim", skill->Messages.VictimImmune.ToVictim );
-        }
-
-      if( !IsNullOrEmpty( skill->Messages.VictimImmune.ToRoom) )
-        {
-          LuaSetfieldString( L, "ToRoom", skill->Messages.VictimImmune.ToRoom );
-        }
+      LuaSetfieldString( L, "ToCaster", skill->Messages.VictimImmune.ToCaster );
+      LuaSetfieldString( L, "ToVictim", skill->Messages.VictimImmune.ToVictim );
+      LuaSetfieldString( L, "ToRoom", skill->Messages.VictimImmune.ToRoom );
     }
     lua_settable( L, -3 );
   }
@@ -827,7 +772,7 @@ static void PushSkill( lua_State *L, const Skill *skill )
       LuaSetfieldNumber( L, "Level", skill->Level );
     }
 
-  if( skill->Dice )
+  if( !skill->Dice.empty() )
     {
       LuaSetfieldString( L, "Dice", skill->Dice );
     }
@@ -866,14 +811,13 @@ static void PushSkill( lua_State *L, const Skill *skill )
 
 static void PushSkillTable( lua_State *L, const void *userData )
 {
-  int sn = 0;
   lua_newtable( L );
 
-  for( sn = 0; sn < TopSN; ++sn )
+  for( int sn = 0; sn < TopSN; ++sn )
     {
       const Skill *skill = SkillTable[sn];
 
-      if( !IsNullOrEmpty( skill->Name ) )
+      if( !skill->Name.empty() )
 	{
 	  PushSkill( L, skill );
 	}
@@ -917,12 +861,7 @@ static void LoadSkillTeachers( lua_State *L, Skill *skill )
 	  lua_pop( L, 1 );
         }
 
-      if( skill->Teachers )
-	{
-	  FreeMemory( skill->Teachers );
-	}
-
-      skill->Teachers = CopyString( buf );
+      skill->Teachers = buf;
     }
 
   lua_pop( L, 1 );
@@ -936,20 +875,12 @@ static void LoadBasicMessages( lua_State *L, Skill *skill )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      skill->Messages.NounDamage = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      skill->Messages.NounDamage = CopyString( "" );
+      skill->Messages.NounDamage = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      skill->Messages.WearOff = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      skill->Messages.WearOff = CopyString( "" );
+      skill->Messages.WearOff = lua_tostring( L, idx );
     }
 
   lua_pop( L, 2 );
@@ -970,29 +901,17 @@ static void LoadSuccessMessages( lua_State *L, Skill *skill )
 
       if( !lua_isnil( L, ++sub_idx ) )
 	{
-	  skill->Messages.Success.ToCaster = CopyString( lua_tostring( L, sub_idx ) );
-	}
-      else
-	{
-	  skill->Messages.Success.ToCaster = CopyString( "" );
+	  skill->Messages.Success.ToCaster = lua_tostring( L, sub_idx );
 	}
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.Success.ToVictim = CopyString( lua_tostring( L, sub_idx ) );
-        }
-      else
-        {
-          skill->Messages.Success.ToVictim = CopyString( "" );
+          skill->Messages.Success.ToVictim = lua_tostring( L, sub_idx );
         }
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.Success.ToRoom = CopyString( lua_tostring( L, sub_idx ) );
-        }
-      else
-        {
-          skill->Messages.Success.ToRoom = CopyString( "" );
+          skill->Messages.Success.ToRoom = lua_tostring( L, sub_idx );
         }
 
       lua_pop( L, 3 );
@@ -1020,29 +939,17 @@ static void LoadFailureMessages( lua_State *L, Skill *skill )
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.Failure.ToCaster = CopyString( lua_tostring( L, sub_idx ) );
-        }
-      else
-        {
-          skill->Messages.Failure.ToCaster = CopyString( "" );
+          skill->Messages.Failure.ToCaster = lua_tostring( L, sub_idx );
         }
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.Failure.ToVictim = CopyString( lua_tostring( L, sub_idx ) );
-        }
-      else
-        {
-          skill->Messages.Failure.ToVictim = CopyString( "" );
+          skill->Messages.Failure.ToVictim = lua_tostring( L, sub_idx );
         }
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.Failure.ToRoom = CopyString( lua_tostring( L, sub_idx ) );
-        }
-      else
-        {
-	  skill->Messages.Failure.ToRoom = CopyString( "" );
+          skill->Messages.Failure.ToRoom = lua_tostring( L, sub_idx );
         }
 
       lua_pop( L, 3 );
@@ -1066,29 +973,17 @@ static void LoadVictimDeathMessages( lua_State *L, Skill *skill )
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.VictimDeath.ToCaster = CopyString( lua_tostring( L, sub_idx ) );
-        }
-      else
-        {
-          skill->Messages.VictimDeath.ToCaster = CopyString( "" );
+          skill->Messages.VictimDeath.ToCaster = lua_tostring( L, sub_idx );
         }
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.VictimDeath.ToVictim = CopyString( lua_tostring( L, sub_idx ) );
-        }
-      else
-        {
-          skill->Messages.VictimDeath.ToVictim = CopyString( "" );
+          skill->Messages.VictimDeath.ToVictim = lua_tostring( L, sub_idx );
         }
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.VictimDeath.ToRoom = CopyString( lua_tostring( L, sub_idx ) );
-        }
-      else
-        {
-	  skill->Messages.VictimDeath.ToRoom = CopyString( "" );
+          skill->Messages.VictimDeath.ToRoom = lua_tostring( L, sub_idx );
         }
 
       lua_pop( L, 3 );
@@ -1112,29 +1007,17 @@ static void LoadVictimImmuneMessages( lua_State *L, Skill *skill )
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.VictimImmune.ToCaster = CopyString( lua_tostring( L, sub_idx ) );
-        }
-      else
-        {
-          skill->Messages.VictimImmune.ToCaster = CopyString( "" );
+          skill->Messages.VictimImmune.ToCaster = lua_tostring( L, sub_idx );
         }
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.VictimImmune.ToVictim = CopyString( lua_tostring( L, sub_idx ) );
-        }
-      else
-        {
-          skill->Messages.VictimImmune.ToVictim = CopyString( "" );
+          skill->Messages.VictimImmune.ToVictim = lua_tostring( L, sub_idx );
         }
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.VictimImmune.ToRoom = CopyString( lua_tostring( L, sub_idx ) );
-        }
-      else
-        {
-	  skill->Messages.VictimImmune.ToRoom = CopyString( "" );
+          skill->Messages.VictimImmune.ToRoom = lua_tostring( L, sub_idx );
         }
 
       lua_pop( L, 3 );
@@ -1205,7 +1088,7 @@ static Skill *LoadSkillOrHerb( lua_State *L )
     {
       skill = new Skill();
       skill->UseRec = new timerset();
-      skill->Name = CopyString( lua_tostring( L, idx ) );
+      skill->Name = lua_tostring( L, idx );
     }
   else
     {
@@ -1254,18 +1137,17 @@ static Skill *LoadSkillOrHerb( lua_State *L )
 	  && !StringPrefix( "spell_", funName ) )
 	{
 	  skill->SpellFunction = spellfun;
-	  skill->FunctionName = CopyString( funName );
+	  skill->FunctionName = funName;
 	}
       else if( ( dofun = GetSkillFunction( funName ) ) != skill_notfound
 	       && !StringPrefix( "do_", funName ) )
 	{
 	  skill->SkillFunction = dofun;
-	  skill->FunctionName = CopyString( funName );
+	  skill->FunctionName = funName;
 	}
       else
 	{
 	  Log->Bug( "%s: unknown skill/spell code %s", __FUNCTION__, funName );
-	  skill->FunctionName = CopyString( "" );
 	}
     }
 
@@ -1301,7 +1183,7 @@ static Skill *LoadSkillOrHerb( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      skill->Dice = CopyString( lua_tostring( L, idx ) );
+      skill->Dice = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -1371,7 +1253,7 @@ static void PushHerbTable( lua_State *L, const void *userData )
     {
       const Skill *herb = HerbTable[sn];
 
-      if( !IsNullOrEmpty( herb->Name ) )
+      if( !herb->Name.empty() )
 	{
 	  PushSkill( L, herb );
 	}
@@ -1389,4 +1271,3 @@ void LoadHerbs( void )
 {
   LuaLoadDataFile( HERB_DATA_FILE, L_HerbEntry, "HerbEntry" );
 }
-

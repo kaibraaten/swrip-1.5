@@ -3,14 +3,11 @@
 #include "pcdata.hpp"
 #include "descriptor.hpp"
 
-void do_snoop( Character *ch, char *argument )
+void do_snoop( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Snoop whom?\r\n");
       return;
@@ -79,4 +76,3 @@ void do_snoop( Character *ch, char *argument )
   victim->Desc->SnoopBy = ch->Desc;
   ch->Echo("Ok.\r\n");
 }
-

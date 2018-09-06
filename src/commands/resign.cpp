@@ -3,7 +3,7 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 
-void do_resign( Character *ch, char *argument )
+void do_resign( Character *ch, std::string argument )
 {
   Clan *clan = NULL;
   long xp_to_lose = 0;
@@ -25,7 +25,7 @@ void do_resign( Character *ch, char *argument )
 
   if ( !StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Leader ) )
     {
-      ch->Echo("You can't resign from %s ... you are the leader!\r\n", clan->Name );
+      ch->Echo("You can't resign from %s. You are the leader!\r\n", clan->Name.c_str() );
       return;
     }
 
@@ -36,28 +36,25 @@ void do_resign( Character *ch, char *argument )
 
   if ( !StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Number1 ) )
     {
-      FreeMemory( ch->PCData->ClanInfo.Clan->Leadership.Number1 );
-      ch->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
+      ch->PCData->ClanInfo.Clan->Leadership.Number1.erase();
     }
 
   if ( !StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Number2 ) )
     {
-      FreeMemory( ch->PCData->ClanInfo.Clan->Leadership.Number2 );
-      ch->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
+      ch->PCData->ClanInfo.Clan->Leadership.Number2.erase();
     }
 
   RemoveClanMember( ch );
   ch->PCData->ClanInfo.Clan = NULL;
-  FreeMemory(ch->PCData->ClanInfo.ClanName);
-  ch->PCData->ClanInfo.ClanName = CopyString( "" );
-  Act( AT_MAGIC, "You resign your position in $t", ch, clan->Name, NULL , TO_CHAR );
+  ch->PCData->ClanInfo.ClanName.erase();
+  Act( AT_MAGIC, "You resign your position in $t",
+       ch, clan->Name.c_str(), nullptr, TO_CHAR );
 
   xp_to_lose = umax( GetAbilityXP( ch, DIPLOMACY_ABILITY ) - GetRequiredXpForLevel( GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ), 0 );
   xp_actually_lost = LoseXP( ch, DIPLOMACY_ABILITY, xp_to_lose );
   ch->Echo("You lose %ld diplomacy experience.\r\n", xp_actually_lost );
 
-  FreeMemory( ch->PCData->Bestowments );
-  ch->PCData->Bestowments = CopyString("");
+  ch->PCData->Bestowments.erase();
   SaveCharacter( ch );
 }
 

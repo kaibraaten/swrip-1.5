@@ -3,7 +3,7 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_sleep( Character *ch, char *argument )
+void do_sleep( Character *ch, std::string argument )
 {
   Object *obj = NULL;
 
@@ -16,7 +16,7 @@ void do_sleep( Character *ch, char *argument )
     case POS_RESTING:
     case POS_SITTING:
     case POS_STANDING:
-      if ( IsNullOrEmpty( argument ) && ch->On == NULL)
+      if ( argument.empty() && ch->On == NULL)
         {
           ch->Echo("You go to sleep.\r\n");
           Act(AT_ACTION, "$n goes to sleep.", ch, NULL, NULL, TO_ROOM );
@@ -24,20 +24,21 @@ void do_sleep( Character *ch, char *argument )
         }
       else  /* find an object and sleep on it */
         {
-          if ( IsNullOrEmpty( argument ) )
+          if ( argument.empty() )
             obj = ch->On;
           else
-            obj = GetObjectInList( ch, argument,  ch->InRoom->Objects());
+            obj = GetObjectInList( ch, argument, ch->InRoom->Objects());
 
           if (obj == NULL)
             {
               ch->Echo("You don't see that here.\r\n");
               return;
             }
+
           if (obj->ItemType != ITEM_FURNITURE
-              ||  (!obj->Value[OVAL_FURNITURE_PREPOSITION]))
+              || (!obj->Value[OVAL_FURNITURE_PREPOSITION]))
             {
-       ch->Echo("You can't sleep on that!\r\n");
+              ch->Echo("You can't sleep on that!\r\n");
               return;
             }
 
@@ -80,4 +81,3 @@ void do_sleep( Character *ch, char *argument )
 
   RoomProgSleepTrigger( ch );
 }
-

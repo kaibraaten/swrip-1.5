@@ -24,9 +24,9 @@ protected:
     Log = new MockLogger();
     _protomob = MakeMobile(1, INVALID_VNUM, "Foo");
     _follower = new Character(_protomob);
-    _follower->Name = CopyString("Follower");
+    _follower->Name = "Follower";
     _leader = new Character(_protomob);
-    _leader->Name = CopyString("Leader");
+    _leader->Name = "Leader";
     _fromRoom = new Room();
     _toRoom = new Room();
     _sourceExit = MakeExit(_fromRoom, _toRoom, DIR_NORTH);
@@ -38,11 +38,9 @@ protected:
 
   void TearDown() override
   {
-    FreeMemory(_leader->Name);
     delete _leader;
     _leader = nullptr;
 
-    FreeMemory(_follower->Name);
     delete _follower;
     _follower = nullptr;
 

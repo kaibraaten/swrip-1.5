@@ -3,7 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_sneak( Character *ch, char *argument )
+void do_sneak( Character *ch, std::string argument )
 {
   Affect af;
 
@@ -35,4 +35,3 @@ void do_sneak( Character *ch, char *argument )
   else
     LearnFromFailure( ch, gsn_sneak );
 }
-

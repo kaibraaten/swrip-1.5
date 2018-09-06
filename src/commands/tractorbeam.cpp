@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "vector3_aux.hpp"
 #include "mud.hpp"
 #include "ship.hpp"
@@ -7,15 +7,12 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_tractorbeam(Character *ch, char *argument )
+void do_tractorbeam( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   int the_chance = 0;
   Ship *ship = NULL;
   Ship *target = NULL;
-  char buf[MAX_STRING_LENGTH];
-
-  strcpy( arg, argument );
+  char buf[MAX_STRING_LENGTH] = {'\0'};
 
   switch( ch->SubState )
     {
@@ -31,6 +28,7 @@ void do_tractorbeam(Character *ch, char *argument )
           ch->Echo("&RThis isn't a spacecraft!\r\n");
           return;
         }
+
       if ( !ship->WeaponSystems.TractorBeam.Strength )
         {
           ch->Echo("&RThis craft does not have a tractorbeam!\r\n");
@@ -48,6 +46,7 @@ void do_tractorbeam(Character *ch, char *argument )
           ch->Echo("&RThe ship structure can not tolerate pressure from both tractorbeam and docking port.\r\n");
           return;
         }
+
       if (ship->State == SHIP_TRACTORED)
         {
           ch->Echo("&RYou can not move in a tractorbeam!\r\n");
@@ -56,11 +55,11 @@ void do_tractorbeam(Character *ch, char *argument )
 
       if ( IsShipAutoflying(ship) )
         {
-          ch->Echo("&RYou'll have to turn off the ships autopilot first....\r\n");
+          ch->Echo("&RYou'll have to turn off the ship's autopilot first.\r\n");
           return;
         }
 
-      if ( IsNullOrEmpty( arg ) )
+      if ( arg.empty() )
         {
           ch->Echo("&RYou need to specify a target!\r\n");
           return;
@@ -70,7 +69,8 @@ void do_tractorbeam(Character *ch, char *argument )
         {
           ch->Echo("&GTractorbeam set to no target.\r\n");
 
-          if( ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy == ship )
+          if( ship->WeaponSystems.TractorBeam.Tractoring
+              && ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy == ship )
             {
               ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy = NULL;
 
@@ -97,9 +97,7 @@ void do_tractorbeam(Character *ch, char *argument )
             ship->WeaponSystems.TractorBeam.Tractoring->State = SHIP_READY;
         }
 
-
       target = GetShipInRange( arg, ship );
-
 
       if( target == NULL )
         {
@@ -127,7 +125,7 @@ void do_tractorbeam(Character *ch, char *argument )
 
       if ( ship->Thrusters.Energy.Current < (25 + 25 * ((int)target->Class) ) )
         {
-   ch->Echo("&RTheres not enough fuel!\r\n");
+          ch->Echo("&RThere's not enough fuel!\r\n");
           return;
         }
 
@@ -147,11 +145,12 @@ void do_tractorbeam(Character *ch, char *argument )
         {
           ch->Echo("&GTracking target.\r\n");
           Act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
-               NULL, argument , TO_ROOM );
+               NULL, arg.c_str(), TO_ROOM );
           AddTimerToCharacter( ch , TIMER_CMD_FUN , 1 , do_tractorbeam , SUB_PAUSE );
           ch->dest_buf = CopyString(arg);
           return;
         }
+
       ch->Echo("&RYou fail to work the controls properly.\r\n");
       LearnFromFailure( ch, gsn_tractorbeams );
       return;
@@ -160,7 +159,7 @@ void do_tractorbeam(Character *ch, char *argument )
       if ( !ch->dest_buf )
         return;
 
-      strcpy(arg, (const char*)ch->dest_buf);
+      arg = static_cast<const char*>( ch->dest_buf );
       FreeMemory( ch->dest_buf);
       break;
 
@@ -170,6 +169,7 @@ void do_tractorbeam(Character *ch, char *argument )
 
       if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
         return;
+
       ch->Echo("&RYour concentration is broken. You fail to lock onto your target.\r\n");
       return;
     }
@@ -183,9 +183,9 @@ void do_tractorbeam(Character *ch, char *argument )
   
   target = GetShipInRange( arg, ship );
 
-  if (  target == NULL || target == ship)
+  if ( target == NULL || target == ship)
     {
-      ch->Echo("&RThe ship has left the starsytem. Targeting aborted.\r\n");
+      ch->Echo("&RThe ship has left the starsystem. Targetting aborted.\r\n");
       return;
     }
 
@@ -197,7 +197,7 @@ void do_tractorbeam(Character *ch, char *argument )
   the_chance += ship->Thrusters.Maneuver - target->Thrusters.Maneuver;
   the_chance -= GetShipDistanceToShip( ship, target ) /(10*(target->Class+1));
   the_chance /= 2;
-  the_chance = urange( 1 , the_chance , 99 );
+  the_chance = urange( 1, the_chance, 99 );
 
   if ( GetRandomPercent() >= the_chance )
     {
@@ -209,7 +209,7 @@ void do_tractorbeam(Character *ch, char *argument )
   ship->WeaponSystems.TractorBeam.Tractoring = target;
   target->TractoredBy = ship;
   target->State = SHIP_TRACTORED;
-  ship->Thrusters.Energy.Current -= 25 + 25*target->Class;
+  ship->Thrusters.Energy.Current -= 25 + 25 * target->Class;
 
   if ( target->Class <= ship->Class )
     {
@@ -224,16 +224,17 @@ void do_tractorbeam(Character *ch, char *argument )
     }
 
   ch->Echo("&GTarget Locked.\r\n");
-  sprintf( buf , "You have been locked in a tractor beam by %s." , ship->Name);
+  sprintf( buf, "You have been locked in a tractor beam by %s.",
+           ship->Name.c_str());
   EchoToCockpit( AT_BLOOD , target , buf );
-
   LearnFromSuccess( ch, gsn_tractorbeams );
 
-  if ( IsShipAutoflying(target) && !target->WeaponSystems.Target && StrCmp( target->Owner, ship->Owner ) )
+  if ( IsShipAutoflying(target)
+       && !target->WeaponSystems.Target
+       && StrCmp( target->Owner, ship->Owner ) )
     {
-      sprintf( buf , "You are being targetted by %s." , target->Name);
-      EchoToCockpit( AT_BLOOD , ship , buf );
+      sprintf( buf, "You are being targetted by %s.", target->Name.c_str());
+      EchoToCockpit( AT_BLOOD, ship, buf );
       target->WeaponSystems.Target = ship;
     }
 }
-

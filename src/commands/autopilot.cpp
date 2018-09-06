@@ -3,7 +3,7 @@
 #include "ship.hpp"
 #include "room.hpp"
 
-void do_autopilot(Character *ch, char *argument )
+void do_autopilot(Character *ch, std::string argument )
 {
   Ship *ship = GetShipFromCockpit(ch->InRoom->Vnum);
 
@@ -45,7 +45,7 @@ void do_autopilot(Character *ch, char *argument )
 
 
   Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
-       NULL, argument , TO_ROOM );
+       NULL, argument.c_str(), TO_ROOM );
 
   if ( ( ship->Autopilot == true && StrCmp(argument,"on") )
        || !StrCmp(argument,"off") )

@@ -2,14 +2,11 @@
 #include "mud.hpp"
 #include "object.hpp"
 
-void do_light( Character *ch, char *argument )
+void do_light( Character *ch, std::string arg )
 {
-  Object *pipe_obj;
-  char arg[MAX_INPUT_LENGTH];
+  Object *pipe_obj = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Light what?\r\n");
       return;
@@ -38,6 +35,7 @@ void do_light( Character *ch, char *argument )
           Act( AT_ACTION, "$n tries to light $p, but it's empty.", ch, pipe_obj, NULL, TO_ROOM );
           return;
         }
+
       Act( AT_ACTION, "You carefully light $p.", ch, pipe_obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n carefully lights $p.", ch, pipe_obj, NULL, TO_ROOM );
       SetBit( pipe_obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT );
@@ -46,5 +44,3 @@ void do_light( Character *ch, char *argument )
   
   ch->Echo("It's already lit.\r\n");
 }
-
-

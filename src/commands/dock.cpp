@@ -7,14 +7,11 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_dock(Character *ch, char *argument)
+void do_dock(Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   int the_chance = 0;
   Ship *ship = NULL;
   Ship *eShip = NULL;
-
-  strcpy( arg, argument );
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
@@ -28,7 +25,7 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if (! ship->Spaceobject )
+  if ( ship->Spaceobject == nullptr )
     {
       ch->Echo("&RYou can't do that until you've finished launching!\r\n");
       return;
@@ -88,7 +85,9 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if (ship->State == SHIP_TRACTORED && ship->TractoredBy && ship->TractoredBy->Class >= ship->Class )
+  if (ship->State == SHIP_TRACTORED
+      && ship->TractoredBy != nullptr
+      && ship->TractoredBy->Class >= ship->Class )
     {
       ch->Echo("&RYou can not move in a tractorbeam!\r\n");
       return;
@@ -118,7 +117,7 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("&RDock where?\r\n");
       return;
@@ -206,8 +205,8 @@ void do_dock(Character *ch, char *argument)
       return;
     }
   
-  EchoToShip( AT_YELLOW , ship , "The ship slowly begins its docking maneuvers.");
-  EchoToShip( AT_YELLOW , eShip , "The ship slowly begins its docking maneuvers.");
+  EchoToShip( AT_YELLOW, ship, "The ship slowly begins its docking maneuvers.");
+  EchoToShip( AT_YELLOW, eShip, "The ship slowly begins its docking maneuvers.");
   ship->Docked = eShip;
   ship->Docking= SHIP_DOCK;
   ship->Ch = ch;

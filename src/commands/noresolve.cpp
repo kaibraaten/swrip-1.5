@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "systemdata.hpp"
 
-void do_noresolve( Character *ch, char *argument )
+void do_noresolve( Character *ch, std::string arg )
 {
   SysData.NoNameResolving = !SysData.NoNameResolving;
 

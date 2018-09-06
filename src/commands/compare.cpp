@@ -2,15 +2,15 @@
 #include "mud.hpp"
 #include "object.hpp"
 
-void do_compare( Character *ch, char *argument )
+void do_compare( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo( "Compare what to what?\r\n" );
       return;
@@ -26,7 +26,7 @@ void do_compare( Character *ch, char *argument )
 
   const Object *obj2 = nullptr;
   
-  if ( IsNullOrEmpty( arg2 ) )
+  if ( arg2.empty() )
     {
       for(const Object *iter : ch->Objects())
         {
@@ -78,13 +78,13 @@ void do_compare( Character *ch, char *argument )
           break;
 
         case ITEM_ARMOR:
-          value1 = obj1->Value[0];
-          value2 = obj2->Value[0];
+          value1 = obj1->Value[OVAL_ARMOR_CONDITION];
+          value2 = obj2->Value[OVAL_ARMOR_CONDITION];
           break;
 
         case ITEM_WEAPON:
-          value1 = obj1->Value[1] + obj1->Value[2];
-          value2 = obj2->Value[1] + obj2->Value[2];
+          value1 = obj1->Value[OVAL_WEAPON_NUM_DAM_DIE] + obj1->Value[OVAL_WEAPON_SIZE_DAM_DIE];
+          value2 = obj2->Value[OVAL_WEAPON_NUM_DAM_DIE] + obj2->Value[OVAL_WEAPON_SIZE_DAM_DIE];
           break;
         }
     }

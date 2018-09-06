@@ -3,7 +3,7 @@
 #include "arena.hpp"
 #include "room.hpp"
 
-void do_accept(Character *ch, char *argument)
+void do_accept(Character *ch, std::string argument)
 {
   char buf[MAX_INPUT_LENGTH];
 
@@ -22,7 +22,7 @@ void do_accept(Character *ch, char *argument)
     {
       Character *dch = ch->Challenged;
 
-      if (!dch || !(dch->InRoom) || IsNullOrEmpty( dch->Name ))
+      if (dch == nullptr )
         return;
 
       if ( dch->InRoom == ch->InRoom )
@@ -36,7 +36,8 @@ void do_accept(Character *ch, char *argument)
           return;
         }
 
-      sprintf(buf,"%s has accepted %s's challenge!\r\n",ch->Name,dch->Name);
+      sprintf(buf,"%s has accepted %s's challenge!\r\n",
+              ch->Name.c_str(), dch->Name.c_str());
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
       ch->Challenged = NULL;
       ch->ReTran = ch->InRoom->Vnum;

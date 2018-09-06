@@ -1,9 +1,9 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
 
-void do_title( Character *ch, char *argument )
+void do_title( Character *ch, std::string argument )
 {
   if ( IsNpc(ch) )
     return;
@@ -14,8 +14,7 @@ void do_title( Character *ch, char *argument )
       return;
     }
 
-
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Change your title to what?\r\n");
       return;
@@ -27,7 +26,7 @@ void do_title( Character *ch, char *argument )
       return;
     }
 
-  if (strlen(argument) > 40)
+  if ( argument.size() > 40 )
     {
       ch->Echo("40 characters is maximum allowed for titles now.\r\n");
       return;
@@ -37,4 +36,3 @@ void do_title( Character *ch, char *argument )
   SetCharacterTitle( ch, argument );
   ch->Echo("Ok.\r\n");
 }
-

@@ -5,12 +5,12 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_instaroom( Character *ch, char *argument )
+void do_instaroom( Character *ch, std::string argument )
 {
   Area *pArea = NULL;
   Room *pRoom = NULL;
   bool dodoors = false;
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
 
   if ( IsNpc(ch) || GetTrustLevel(ch) < LEVEL_CREATOR || !ch->PCData
        || !ch->PCData->Build.Area )

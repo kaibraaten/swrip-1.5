@@ -13,9 +13,9 @@
  *
  * NOTE: Use of this command is not recommended.                -Thoric
  */
-void do_unfoldarea( Character *ch, char *argument )
+void do_unfoldarea( Character *ch, std::string argument )
 {
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Unfold what?\r\n");
       return;

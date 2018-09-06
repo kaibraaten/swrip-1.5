@@ -4,13 +4,13 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 
-static bool aff_paralysis( Character *ch, Character *victim );
+static bool AffParalysis( Character *ch, Character *victim );
 
-void do_bind( Character *ch , char *argument )
+void do_bind( Character *ch, std::string argument )
 {
   Character *victim = nullptr;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Bind whom?\r\n" );
       return;
@@ -30,7 +30,8 @@ void do_bind( Character *ch , char *argument )
 
   if ( IsBitSet(victim->Flags, PLR_AFK))
     {
-      Log->Info( "%s just bound %s with an afk flag on!." , ch->Name, victim->Name );
+      Log->Info( "%s just bound %s with an afk flag on!.",
+                 ch->Name.c_str(), victim->Name.c_str() );
     }
 
   if ( IsSafe( ch, victim ) )
@@ -67,11 +68,11 @@ void do_bind( Character *ch , char *argument )
   Act( AT_YELLOW, "$n binds you up!",  ch, NULL, victim, TO_VICT    );
   Act( AT_YELLOW, "You bind $N up.", ch, NULL, victim, TO_CHAR    );
   Act( AT_BLUE, "$n quickly binds $N, leaving $M helpless!", ch, NULL, victim, TO_NOTVICT );
-  aff_paralysis( ch, victim );
+  AffParalysis( ch, victim );
   LearnFromSuccess( ch, gsn_bind );
 }
 
-static bool aff_paralysis( Character *ch, Character *victim )
+static bool AffParalysis( Character *ch, Character *victim )
 {
   Affect af;
 
@@ -95,4 +96,3 @@ static bool aff_paralysis( Character *ch, Character *victim )
 
   return true;
 }
-

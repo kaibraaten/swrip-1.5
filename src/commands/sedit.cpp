@@ -5,11 +5,11 @@
 /*
  * Social editor/displayer/save/delete                          -Thoric
  */
-void do_sedit( Character *ch, char *argument )
+void do_sedit( Character *ch, std::string argument )
 {
-  Social *social;
-  char arg1[MAX_INPUT_LENGTH - 10];
-  char arg2[MAX_INPUT_LENGTH];
+  Social *social = nullptr;
+  std::string arg1;
+  std::string arg2;
 
   SmashTilde( argument );
   argument = OneArgument( argument, arg1 );
@@ -17,7 +17,7 @@ void do_sedit( Character *ch, char *argument )
 
   SetCharacterColor( AT_SOCIAL, ch );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo("Syntax: sedit <social> [field]\r\n");
       ch->Echo("Syntax: sedit <social> create\r\n");
@@ -51,9 +51,8 @@ void do_sedit( Character *ch, char *argument )
         }
 
       social = new Social();
-      social->Name = CopyString( arg1 );
-      sprintf( arg2, "You %s.", arg1 );
-      social->CharNoArg = CopyString( arg2 );
+      social->Name = arg1;
+      social->CharNoArg = "You " + arg1 + ".";
       Socials->Add(social);
       ch->Echo("Social added.\r\n");
       return;
@@ -65,18 +64,18 @@ void do_sedit( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( arg2 ) || !StrCmp( arg2, "show" ) )
+  if ( arg2.empty() || !StrCmp( arg2, "show" ) )
     {
       ch->Echo("Social: %s\r\n\r\nCNoArg: %s\r\n",
-	    social->Name,  social->CharNoArg );
+               social->Name.c_str(), social->CharNoArg.c_str() );
       ch->Echo("ONoArg: %s\r\nCFound: %s\r\nOFound: %s\r\n",
-	    social->OthersNoArg ? social->OthersNoArg : "(not set)",
-	    social->CharFound   ? social->CharFound   : "(not set)",
-	    social->OthersFound ? social->OthersFound : "(not set)" );
+               !social->OthersNoArg.empty() ? social->OthersNoArg.c_str() : "(not set)",
+               !social->CharFound.empty()   ? social->CharFound.c_str()   : "(not set)",
+               !social->OthersFound.empty() ? social->OthersFound.c_str() : "(not set)" );
       ch->Echo("VFound: %s\r\nCAuto : %s\r\nOAuto : %s\r\n",
-	    social->VictimFound ? social->VictimFound : "(not set)",
-	    social->CharAuto    ? social->CharAuto    : "(not set)",
-	    social->OthersAuto  ? social->OthersAuto  : "(not set)" );
+               !social->VictimFound.empty() ? social->VictimFound.c_str() : "(not set)",
+               !social->CharAuto.empty()    ? social->CharAuto.c_str()    : "(not set)",
+               !social->OthersAuto.empty()  ? social->OthersAuto.c_str()  : "(not set)" );
       return;
     }
 
@@ -90,27 +89,23 @@ void do_sedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "cnoarg" ) )
     {
-      if ( IsNullOrEmpty( argument ) || !StrCmp( argument, "clear" ) )
+      if ( argument.empty() || !StrCmp( argument, "clear" ) )
         {
           ch->Echo("You cannot clear this field. It must have a message.\r\n");
           return;
         }
 
-      if ( social->CharNoArg )
-        FreeMemory( social->CharNoArg );
-
-      social->CharNoArg = CopyString( argument );
+      social->CharNoArg = argument;
       ch->Echo("Done.\r\n");
       return;
     }
 
   if ( !StrCmp( arg2, "onoarg" ) )
     {
-      if ( social->OthersNoArg )
-        FreeMemory( social->OthersNoArg );
-
-      if ( !IsNullOrEmpty( argument ) && StrCmp( argument, "clear" ) )
-        social->OthersNoArg = CopyString( argument );
+      if( argument.empty() || !StrCmp( argument, "clear" ) )
+        social->OthersNoArg.erase();
+      else
+        social->OthersNoArg = argument;
 
       ch->Echo("Done.\r\n");
       return;
@@ -118,11 +113,10 @@ void do_sedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "cfound" ) )
     {
-      if ( social->CharFound )
-        FreeMemory( social->CharFound );
-
-      if ( !IsNullOrEmpty( argument ) && StrCmp( argument, "clear" ) )
-        social->CharFound = CopyString( argument );
+      if ( argument.empty() || !StrCmp( argument, "clear" ) )
+        social->CharFound.erase();
+      else
+        social->CharFound = argument;
 
       ch->Echo("Done.\r\n");
       return;
@@ -130,11 +124,10 @@ void do_sedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "ofound" ) )
     {
-      if ( social->OthersFound )
-        FreeMemory( social->OthersFound );
-
-      if ( !IsNullOrEmpty( argument ) && StrCmp( argument, "clear" ) )
-        social->OthersFound = CopyString( argument );
+      if ( argument.empty() || !StrCmp( argument, "clear" ) )
+        social->OthersFound.erase();
+      else
+        social->OthersFound = argument;
 
       ch->Echo("Done.\r\n");
       return;
@@ -142,11 +135,10 @@ void do_sedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "vfound" ) )
     {
-      if ( social->VictimFound )
-        FreeMemory( social->VictimFound );
-
-      if ( !IsNullOrEmpty( argument ) && StrCmp( argument, "clear" ) )
-        social->VictimFound = CopyString( argument );
+      if ( argument.empty() || !StrCmp( argument, "clear" ) )
+        social->VictimFound.erase();
+      else
+        social->VictimFound = argument;
 
       ch->Echo("Done.\r\n");
       return;
@@ -154,11 +146,10 @@ void do_sedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "cauto" ) )
     {
-      if ( social->CharAuto )
-        FreeMemory( social->CharAuto );
-
-      if ( !IsNullOrEmpty( argument ) && StrCmp( argument, "clear" ) )
-        social->CharAuto = CopyString( argument );
+      if ( argument.empty() || !StrCmp( argument, "clear" ) )
+        social->CharAuto.erase();
+      else
+        social->CharAuto = argument;
 
       ch->Echo("Done.\r\n");
       return;
@@ -166,11 +157,10 @@ void do_sedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "oauto" ) )
     {
-      if ( social->OthersAuto )
-        FreeMemory( social->OthersAuto );
-
-      if ( !IsNullOrEmpty( argument ) && StrCmp( argument, "clear" ) )
-        social->OthersAuto = CopyString( argument );
+      if ( argument.empty() || !StrCmp( argument, "clear" ) )
+        social->OthersAuto.erase();
+      else
+        social->OthersAuto = argument;
 
       ch->Echo("Done.\r\n");
       return;
@@ -178,31 +168,17 @@ void do_sedit( Character *ch, char *argument )
 
   if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( arg2, "name" ) )
     {
-      bool relocate = false;
-
       OneArgument( argument, arg1 );
 
-      if ( IsNullOrEmpty( arg1 ) )
+      if ( arg1.empty() )
         {
-   ch->Echo("Cannot clear name field!\r\n");
+          ch->Echo("Cannot clear name field!\r\n");
           return;
         }
 
-      if ( arg1[0] != social->Name[0] )
-        {
-          Socials->Remove(social);
-          relocate = true;
-        }
-
-      if ( social->Name )
-        FreeMemory( social->Name );
-
-      social->Name = CopyString( arg1 );
-
-      if ( relocate )
-        {
-          Socials->Add(social);
-        }
+      Socials->Remove(social);
+      social->Name = arg1;
+      Socials->Add(social);
 
       ch->Echo("Done.\r\n");
       return;
@@ -211,4 +187,3 @@ void do_sedit( Character *ch, char *argument )
   /* display usage message */
   do_sedit( ch, "" );
 }
-

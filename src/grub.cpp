@@ -18,16 +18,19 @@
 #include "grub.hpp"
 #include "mud.hpp"
 
-static int go_strcmp( const char *astr, const char *bstr )
+static int go_strcmp( const std::string &stl_astr, const std::string &stl_bstr )
 {
-  int i;
-
+  const char *astr = stl_astr.c_str();
+  const char *bstr = stl_bstr.c_str();
+  
   for ( ; *astr || *bstr; astr++, bstr++ )
     {
-      i=CharToLowercase(*astr)-CharToLowercase(*bstr);
+      int i = CharToLowercase(*astr) - CharToLowercase(*bstr);
 
       if( i )
-	return i;
+        {
+          return i;
+        }
     }
 
   return 0;
@@ -36,7 +39,7 @@ static int go_strcmp( const char *astr, const char *bstr )
 /*
  * Evaluate one string criteria
  */
-bool go_eval_str (const char *lval, int op, const char *rval)
+bool go_eval_str(const std::string &lval, int op, const std::string &rval)
 {
   enum op_type {EQ, NE, SU, GE, GT, LE, LT};
 
@@ -54,7 +57,7 @@ bool go_eval_str (const char *lval, int op, const char *rval)
       else return false;
     case LE: if (  go_strcmp(lval, rval) <= 0 ) return true;
       else return false;
-    case SU: if ( strstr(lval, rval) ) return true;
+    case SU: if ( strstr(lval.c_str(), rval.c_str()) ) return true;
       else return false;
     }
   return false;

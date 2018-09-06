@@ -4,9 +4,9 @@
 
 static const char *GetClanType(const Clan *const clan);
 
-void do_showclan( Character *ch, char *argument )
+void do_showclan( Character *ch, std::string argument )
 {
-  Clan *clan;
+  Clan *clan = nullptr;
 
   if ( IsNpc( ch ) )
     {
@@ -14,7 +14,7 @@ void do_showclan( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Usage: showclan <clan>\r\n");
       return;
@@ -29,28 +29,27 @@ void do_showclan( Character *ch, char *argument )
     }
 
   ch->Echo("%s: %s\r\nFilename: %s\r\n",
-	GetClanType(clan),
-	clan->Name, ConvertToLuaFilename( clan->Name ) );
-  ch->Echo("Founded: %s\r\n", FormatDate( &clan->FoundationDate ) );
+           GetClanType(clan),
+           clan->Name.c_str(), ConvertToLuaFilename( clan->Name ).c_str() );
+  ch->Echo("Founded: %s\r\n", FormatDate( &clan->FoundationDate ).c_str() );
   ch->Echo("Description: %s\r\nLeader: %s\r\n",
-	clan->Description,
-	clan->Leadership.Leader );
+           clan->Description.c_str(),
+           clan->Leadership.Leader.c_str() );
   ch->Echo("Number1: %s\r\nNumber2: %s\r\nPKills: %6d    PDeaths: %6d\r\n",
-	clan->Leadership.Number1,
-	clan->Leadership.Number2,
-	clan->PlayerKills,
-	clan->PlayerDeaths );
+           clan->Leadership.Number1.c_str(),
+           clan->Leadership.Number2.c_str(),
+           clan->PlayerKills,
+           clan->PlayerDeaths );
   ch->Echo("MKills: %6d    MDeaths: %6d\r\n", clan->MobKills, clan->MobDeaths );
   ch->Echo("Type: %d\r\n", clan->Type );
   ch->Echo("Members: %3d\r\n", clan->Members().size());
   ch->Echo("Board: %5d   Jail: %5d\r\n", clan->Board, clan->Jail);
   ch->Echo("Funds: %ld\r\n", clan->Funds );
   ch->Echo("Enlist Room 1: %ld  Enlist Room 2: %ld\r\n",
-	clan->EnlistRoom1, clan->EnlistRoom2 );
+           clan->EnlistRoom1, clan->EnlistRoom2 );
 }
 
 static const char *GetClanType(const Clan *const clan)
 {
   return clan->Type == CLAN_GUILD ? "Guild" : "Organization";
 }
-

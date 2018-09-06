@@ -102,10 +102,10 @@ void StartArena(void)
             }
 
           outbuf1 << "Type &Rarena &Wto enter.\r\n";
-          ToChannel(outbuf1.str().c_str(),CHANNEL_ARENA,"&RArena&W",arena.MinLevel);
+          ToChannel(outbuf1.str(), CHANNEL_ARENA,"&RArena&W",arena.MinLevel);
 
           outbuf2 << "Place your bets!!!\r\n";
-          ToChannel(outbuf2.str().c_str(), CHANNEL_ARENA,"&RArena&W",5);
+          ToChannel(outbuf2.str(), CHANNEL_ARENA,"&RArena&W",5);
           arena.TimeToStart--;
         }
     }
@@ -187,19 +187,19 @@ void UpdateArena(void)
     {
       sprintf(buf, "With %d hours left in the game there are %d players left.",
               arena.TimeLeftInGame, CharactersInArena());
-      ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
+      ToChannel(buf, CHANNEL_ARENA, "&RArena&W", 5);
     }
   else if(arena.TimeLeftInGame == 1)
     {
       sprintf(buf, "With 1 hour left in the game there are %d players left.",
               CharactersInArena());
-      ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
+      ToChannel(buf, CHANNEL_ARENA, "&RArena&W", 5);
     }
   else if(arena.TimeLeftInGame <= 4)
     {
       sprintf(buf, "With %d hours left in the game there are %d players left.",
               arena.TimeLeftInGame, CharactersInArena());
-      ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
+      ToChannel(buf, CHANNEL_ARENA, "&RArena&W", 5);
     }
 
   arena.TimeLeftInGame--;
@@ -232,13 +232,13 @@ static void FindGameWinner(void)
 
               if(arena.TimeLeftInGame == 1)
                 {
-                  sprintf(buf, "After 1 hour of battle %s is declared the winner",i->Name);
+                  sprintf(buf, "After 1 hour of battle %s is declared the winner",i->Name.c_str());
                   ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
                 }
               else
                 {
                   sprintf(buf, "After %d hours of battle %s is declared the winner",
-                          arena.GameLength - arena.TimeLeftInGame, i->Name);
+                          arena.GameLength - arena.TimeLeftInGame, i->Name.c_str());
                   ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
                 }
 
@@ -246,12 +246,11 @@ static void FindGameWinner(void)
               i->Echo( "You have been awarded %d credits for winning the arena\r\n",
                        arena.ArenaPot / 2);
 
-              Log->Info( "%s awarded %d credits for winning arena", i->Name,
+              Log->Info( "%s awarded %d credits for winning arena", i->Name.c_str(),
 			 arena.ArenaPot / 2);
 
               fame_node = new HallOfFameElement();
-              strncpy(fame_node->Name, i->Name, MAX_INPUT_LENGTH);
-              fame_node->Name[MAX_INPUT_LENGTH] = '\0';
+              fame_node->Name = i->Name;
               fame_node->Date = time(0);
               fame_node->Award = (arena.ArenaPot/2);
               fame_node->Next = FameList;
@@ -278,7 +277,7 @@ static void ShowJackpot(void)
   buf << "\r\nLets get ready to RUMBLE!!!!!!!!\r\n"
       << "The jack pot for this arena is " << arena.ArenaPot << " credits\r\n"
       << arena.BetPot << " credits have been bet on this arena.\r\n";
-  ToChannel(buf.str().c_str(),CHANNEL_ARENA,"&RArena&W",5);
+  ToChannel(buf.str(),CHANNEL_ARENA,"&RArena&W",5);
 }
 
 static void SilentEnd(void)
@@ -380,7 +379,7 @@ static int L_HallOfFameEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      strcpy( fameNode->Name, lua_tostring( L, idx ) );
+      fameNode->Name = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )

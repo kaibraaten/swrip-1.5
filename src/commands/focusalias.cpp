@@ -3,14 +3,11 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 
-static void set_target( Character *ch, const char *target );
+static void SetTarget( Character *ch, const std::string &target );
 
-void do_focusalias( Character *ch, char *argument)
+void do_focusalias( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-
-  SmashTilde(argument);
-  OneArgument( argument, arg );
+  SmashTilde(arg);
 
   if ( IsNpc(ch) )
     {
@@ -18,12 +15,13 @@ void do_focusalias( Character *ch, char *argument)
       return;
     }
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
 
-      if ( !IsNullOrEmpty( ch->PCData->Target ) )
+      if ( !ch->PCData->Target.empty() )
         {
-          ch->Echo( "Your current alias focus is : %s\r\n", ch->PCData->Target);
+          ch->Echo( "Your current alias focus is : %s\r\n",
+                    ch->PCData->Target.c_str());
           return;
         }
 
@@ -32,21 +30,14 @@ void do_focusalias( Character *ch, char *argument)
     }
   else
     {
-      set_target( ch, arg );
-      ch->Echo( "Your new alias focus is : %s\r\n", ch->PCData->Target);
+      SetTarget( ch, arg );
+      ch->Echo( "Your new alias focus is : %s\r\n",
+                ch->PCData->Target.c_str());
       return;
     }
 }
 
-static void set_target( Character *ch, const char *target )
+static void SetTarget( Character *ch, const std::string &target )
 {
-  char buf[MAX_STRING_LENGTH];
-
-  strcpy( buf, target );
-
-  if ( !IsNullOrEmpty( ch->PCData->Target ) )
-    FreeMemory( ch->PCData->Target );
-
-  ch->PCData->Target = CopyString( buf );
+  ch->PCData->Target = target;
 }
-

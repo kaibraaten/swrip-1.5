@@ -1,15 +1,16 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-extern char *spell_target_name;
+extern std::string spell_target_name;
 
 ch_ret spell_dream( int sn, int level, Character *ch, void *vo )
 {
   Character *victim;
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
 
   spell_target_name = OneArgument(spell_target_name, arg);
   SetCharacterColor(AT_MAGIC, ch);
+
   if ( !(victim = GetCharacterAnywhere(ch, arg)) )
     {
       ch->Echo("They aren't here.\r\n");
@@ -26,7 +27,7 @@ ch_ret spell_dream( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( !spell_target_name )
+  if ( spell_target_name.empty() )
     {
       ch->Echo("What do you want them to dream about?\r\n");
       return rSPELL_FAILED;
@@ -34,7 +35,7 @@ ch_ret spell_dream( int sn, int level, Character *ch, void *vo )
 
   SetCharacterColor(AT_TELL, victim);
   victim->Echo("You have dreams about %s telling you '%s'.\r\n",
-               PERS(ch, victim), spell_target_name);
+               PERS(ch, victim).c_str(), spell_target_name.c_str());
   ch->Echo("Ok.\r\n");
   return rNONE;
 }

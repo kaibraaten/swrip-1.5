@@ -1,20 +1,20 @@
-#include <string.h>
+#include <cstring>
 #include "ship.hpp"
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
 #include "room.hpp"
 
-void do_drive( Character *ch, char *argument )
+void do_drive( Character *ch, std::string argument )
 {
   DirectionType dir = DIR_INVALID;
   Ship *ship = nullptr, *target = nullptr;
-  char arg[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg2;
   char buf[MAX_INPUT_LENGTH];
 
   argument = OneArgument( argument, arg );
-  strcpy ( arg2, argument);
+  arg2 = argument;
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
@@ -46,7 +46,7 @@ void do_drive( Character *ch, char *argument )
 
       if ( !target )
         {
-          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), TO_CHAR );
           return;
         }
 
@@ -70,12 +70,13 @@ void do_drive( Character *ch, char *argument )
         }
 
       ch->Echo("You drive the vehicle into the bay.\r\n");
-      sprintf( buf, "%s drives into %s.", ship->Name, target->Name);
+      sprintf( buf, "%s drives into %s.",
+               ship->Name.c_str(), target->Name.c_str());
       EchoToRoom( AT_GREY, ship->InRoom, buf);
 
       TransferShip(ship, target->Rooms.Hangar);
 
-      sprintf( buf, "%s drives into the bay", ship->Name);
+      sprintf( buf, "%s drives into the bay", ship->Name.c_str());
       EchoToRoom( AT_GREY, ship->InRoom, buf);
       LearnFromSuccess( ch, gsn_speeders );
       return;
@@ -111,12 +112,13 @@ void do_drive( Character *ch, char *argument )
         }
 
       ch->Echo("You drive the vehicle out of the bay.\r\n");
-      sprintf( buf, "%s drives out of the ship.", ship->Name);
+      sprintf( buf, "%s drives out of the ship.", ship->Name.c_str());
       EchoToRoom( AT_GREY,  ship->InRoom, buf);
 
       TransferShip(ship, target->InRoom->Vnum);
 
-      sprintf( buf, "%s drives out of %s", ship->Name, target->Name);
+      sprintf( buf, "%s drives out of %s",
+               ship->Name.c_str(), target->Name.c_str());
       EchoToRoom( AT_GREY, ship->InRoom, buf);
       LearnFromSuccess( ch, gsn_speeders );
       return;
@@ -130,4 +132,3 @@ void do_drive( Character *ch, char *argument )
 
   DriveShip( ch, ship, GetExit(GetRoom(ship->Location), dir), 0 );
 }
-

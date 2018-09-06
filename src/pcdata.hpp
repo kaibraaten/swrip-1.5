@@ -21,26 +21,26 @@ public:
   void Add(class Note *comment);
   void Remove(class Note *comment);
   
-  char *Password = NULL;
+  std::string Password;
 
   struct
   {
     class Clan *Clan = NULL;
-    char *ClanName = NULL;
+    std::string ClanName;
     int Salary = 0;
     long SalaryDate = 0;
   } ClanInfo;
 
-  char *HomePage = NULL;
-  char *Email = NULL;
+  std::string HomePage;
+  std::string Email;
 
-  char *BamfIn = NULL;
-  char *BamfOut = NULL;
+  std::string BamfIn;
+  std::string BamfOut;
 
-  char *Rank = NULL;
-  char *Title = NULL;
+  std::string Rank;
+  std::string Title;
 
-  char *Bestowments = NULL;    /* Special bestowed commands       */
+  std::string Bestowments;    /* Special bestowed commands       */
   int Flags = 0;            /* Whether the player is deadly and whatever else we add.      */
 
   int PKills = 0;         /* Number of pkills on behalf of clan */
@@ -54,7 +54,7 @@ public:
 
   struct
   {
-    struct Area *Area = NULL;
+    class Area *Area = NULL;
 
     struct
     {
@@ -74,11 +74,11 @@ public:
   int AuthState = 0;
   time_t ReleaseDate = 0;   /* Auto-helling.. Altrag */
   vnum_t JailVnum = INVALID_VNUM;
-  char *HelledBy = NULL;
-  char *Bio = NULL;            /* Personal Bio */
-  char *AuthedBy = NULL;      /* what crazy imm authed this name ;) */
-  char *Prompt = NULL;         /* User config prompts */
-  char *SubPrompt = NULL;      /* Substate prompt */
+  std::string HelledBy;
+  std::string Bio;            /* Personal Bio */
+  std::string AuthedBy;      /* what crazy imm authed this name ;) */
+  std::string Prompt;         /* User config prompts */
+  std::string SubPrompt;      /* Substate prompt */
   bool OpenedTourney = false;
 
   std::array<short, 10> Addiction;
@@ -87,11 +87,11 @@ public:
   long Bank = 0;
   bool WhoCloak = false;
 
-  char *BettedOn = NULL;
+  std::string BettedOn;
   int BetAmount = 0;
 
   Character *Pet = NULL;
-  char *Target = NULL;
+  std::string Target;
   class Note *Note = nullptr;
   short Clones = 0;
   int Played = 0;

@@ -2,14 +2,11 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_group( Character *ch, char *argument )
+void do_group( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       Character *gch = NULL;
 
@@ -26,18 +23,18 @@ void do_group( Character *ch, char *argument )
                 ch->Echo( "[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
                           gch->TopLevel,
                           IsNpc(gch) ? "Mob" : RaceTable[gch->Race].Name,
-                          Capitalize( PERS(gch, ch) ),
+                          Capitalize( PERS(gch, ch) ).c_str(),
                           "????",
                           "????",
                           "????",
                           "????",
-                          "?????"    );
+                          "?????");
 
               else
                 ch->Echo( "[%2d %s] %-16s %4d/%4d hp %4d/%4d mv\r\n",
                           gch->TopLevel,
                           IsNpc(gch) ? "Mob" : RaceTable[gch->Race].Name,
-                          Capitalize( PERS(gch, ch) ),
+                          Capitalize( PERS(gch, ch) ).c_str(),
                           gch->Hit,
                           gch->MaxHit,
                           gch->Move,
@@ -146,4 +143,3 @@ void do_group( Character *ch, char *argument )
   Act( AT_ACTION, "You join $n's group.", ch, NULL, victim, TO_VICT );
   Act( AT_ACTION, "$N joins your group.", ch, NULL, victim, TO_CHAR );
 }
-

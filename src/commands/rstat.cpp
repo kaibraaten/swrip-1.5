@@ -6,11 +6,10 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_rstat( Character *ch, char *argument )
+void do_rstat( Character *ch, std::string argument )
 {
-  char buf[MAX_STRING_LENGTH];
-  char arg[MAX_INPUT_LENGTH];
-  Room *location = NULL;
+  std::string arg;
+  Room *location = nullptr;
   int cnt = 0;
   static const char * const dir_text[] = { "n", "e", "s", "w", "u", "d", "ne", "nw", "se", "sw", "?" };
 
@@ -39,8 +38,8 @@ void do_rstat( Character *ch, char *argument )
       location = ch->InRoom;
 
       ch->Echo("Exits for room '%s.' vnum %d\r\n",
-                 location->Name,
-                 location->Vnum );
+               location->Name.c_str(),
+               location->Vnum );
       cnt = 0;
 
       for(const Exit *pexit : location->Exits())
@@ -51,9 +50,8 @@ void do_rstat( Character *ch, char *argument )
                    pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
                    pexit->Key,
                    pexit->Flags,
-                   pexit->Keyword,
-                   !IsNullOrEmpty( pexit->Description )
-                   ? pexit->Description : "(none).\r\n",
+                   pexit->Keyword.c_str(),
+                   !pexit->Description.empty() ? pexit->Description.c_str() : "(none).\r\n",
                    pexit->ReverseExit ? pexit->ReverseExit->Vnum : 0,
                    pexit->ReverseVnum,
                    pexit->Distance );
@@ -62,7 +60,7 @@ void do_rstat( Character *ch, char *argument )
       return;
     }
 
-  location = IsNullOrEmpty( arg ) ? ch->InRoom : FindLocation( ch, arg );
+  location = arg.empty() ? ch->InRoom : FindLocation( ch, arg );
 
   if ( !location )
     {
@@ -83,12 +81,12 @@ void do_rstat( Character *ch, char *argument )
         }
     }
 
-  ch->Echo("Name: %s.\r\nArea: %s  Filename: %s.\r\n",
-             location->Name,
-             location->Area ? location->Area->Name : "None????",
-             location->Area ? location->Area->Filename : "None????" );
+  ch->Echo("Name: %s.\r\nArea: %s  Filename: %s\r\n",
+           location->Name.c_str(),
+           location->Area ? location->Area->Name.c_str() : "None????",
+           location->Area ? location->Area->Filename.c_str() : "None????" );
 
-  ch->Echo("Vnum: %d.  Sector: %s.  Light: %d.  TeleDelay: %d.  TeleVnum: %d  Tunnel: %d.\r\n",
+  ch->Echo("Vnum: %d  Sector: %s  Light: %d  TeleDelay: %d  TeleVnum: %d  Tunnel: %d\r\n",
            location->Vnum,
            SectorNames[location->Sector][0],
            location->Light,
@@ -97,8 +95,8 @@ void do_rstat( Character *ch, char *argument )
            location->Tunnel );
 
   ch->Echo("Room flags: %s\r\n",
-        FlagString(location->Flags, RoomFlags).c_str() );
-  ch->Echo("Description:\r\n%s", location->Description );
+           FlagString(location->Flags, RoomFlags).c_str() );
+  ch->Echo("Description:\r\n%s", location->Description.c_str() );
 
   if ( !location->ExtraDescriptions().empty() )
     {
@@ -119,6 +117,7 @@ void do_rstat( Character *ch, char *argument )
     {
       if ( CanSeeCharacter( ch, rch ) )
         {
+          std::string buf;
           ch->Echo(" ");
           OneArgument( rch->Name, buf );
           ch->Echo(buf);
@@ -129,10 +128,12 @@ void do_rstat( Character *ch, char *argument )
 
   for(Object *obj : location->Objects())
     {
+      std::string buf;
       ch->Echo(" ");
       OneArgument( obj->Name, buf );
       ch->Echo(buf);
     }
+
   ch->Echo(".\r\n");
 
   if ( !location->Exits().empty() )
@@ -150,7 +151,6 @@ void do_rstat( Character *ch, char *argument )
                pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
                pexit->Key,
                pexit->Flags,
-               !IsNullOrEmpty( pexit->Keyword ) ? pexit->Keyword : "(none)" );
+               !pexit->Keyword.empty() ? pexit->Keyword.c_str() : "(none)" );
     }
 }
-

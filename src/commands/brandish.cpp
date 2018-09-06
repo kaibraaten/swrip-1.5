@@ -6,7 +6,7 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_brandish( Character *ch, char *argument )
+void do_brandish( Character *ch, std::string argument )
 {
   Object *staff = NULL;
   ch_ret retcode = rNONE;
@@ -103,4 +103,3 @@ void do_brandish( Character *ch, char *argument )
       ExtractObject( staff );
     }
 }
-

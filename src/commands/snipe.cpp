@@ -5,11 +5,11 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_snipe( Character *ch, char *argument )
+void do_snipe( Character *ch, std::string argument )
 {
   Object *wield = NULL;
-  char arg[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg2;
   DirectionType dir = DIR_INVALID;
   short dist = 0;
   short max_dist = 1;
@@ -24,7 +24,7 @@ void do_snipe( Character *ch, char *argument )
   if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      ch->Echo("You'll have to do that elswhere.\r\n");
+      ch->Echo("You'll have to do that elsewhere.\r\n");
       return;
     }
 
@@ -35,19 +35,22 @@ void do_snipe( Character *ch, char *argument )
     }
 
   wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
-  if ( !wield || wield->ItemType != ITEM_WEAPON || wield->Value[3] != WEAPON_BLASTER )
+
+  if ( wield == nullptr
+       || wield->ItemType != ITEM_WEAPON
+       || wield->Value[OVAL_WEAPON_TYPE] != WEAPON_BLASTER )
     {
       ch->Echo("You don't seem to be holding a blaster");
       return;
     }
 
-  if ( !IsNpc(ch) && ch->PCData->Learned[gsn_snipe]> 100)
+  if ( !IsNpc(ch) && ch->PCData->Learned[gsn_snipe] > 100)
     max_dist += (ch->PCData->Learned[gsn_snipe]) / 15;
 
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
 
-  if ( ( dir = GetDirection( arg ) ) == -1 || IsNullOrEmpty( arg2 ) )
+  if ( ( dir = GetDirection( arg ) ) == -1 || arg2.empty() )
     {
       ch->Echo("Usage: snipe <dir> <target>\r\n");
       return;
@@ -86,7 +89,6 @@ void do_snipe( Character *ch, char *argument )
       CharacterFromRoom( ch );
       CharacterToRoom( ch, to_room );
 
-
       if ( IsNpc(ch) && ( victim = GetCharacterInRoomMudProg( ch, arg2 ) ) != NULL )
         {
           pfound = true;
@@ -98,10 +100,8 @@ void do_snipe( Character *ch, char *argument )
           break;
         }
 
-
       if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
         break;
-
     }
 
   CharacterFromRoom( ch );
@@ -109,8 +109,8 @@ void do_snipe( Character *ch, char *argument )
 
   if ( !pfound )
     {
-      ch->Echo("You don't see that person to the %s!\r\n",
-                 GetDirectionName(dir) );
+      ch->Echo( "You don't see that person to the %s!\r\n",
+                GetDirectionName(dir) );
       CharacterFromRoom( ch );
       CharacterToRoom( ch, was_in_room );
       return;
@@ -118,7 +118,7 @@ void do_snipe( Character *ch, char *argument )
 
   if ( victim == ch )
     {
-      ch->Echo("Shoot yourself ... really?\r\n");
+      ch->Echo("Shoot yourself... really?\r\n");
       return;
     }
 
@@ -192,10 +192,10 @@ void do_snipe( Character *ch, char *argument )
 
   if ( GetRandomPercent() < the_chance )
     {
-      sprintf( buf , "A blaster shot fires at you from the %s." , GetDirectionName(dir) );
+      sprintf( buf , "A blaster shot fires at you from the %s.", GetDirectionName(dir) );
       Act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );
       Act( AT_ACTION, "You fire at $N.", ch, NULL, victim, TO_CHAR );
-      sprintf( buf, "A blaster shot fires at $N from the %s." , GetDirectionName(dir) );
+      sprintf( buf, "A blaster shot fires at $N from the %s.", GetDirectionName(dir) );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
 
       HitOnce( ch, victim, TYPE_UNDEFINED );
@@ -204,13 +204,12 @@ void do_snipe( Character *ch, char *argument )
         return;
 
       StopFighting( ch , true );
-
       LearnFromSuccess( ch, gsn_snipe );
     }
   else
     {
       Act( AT_ACTION, "You fire at $N but don't even come close.", ch, NULL, victim, TO_CHAR );
-      sprintf( buf, "A blaster shot fired from the %s barely misses you." , GetDirectionName(dir) );
+      sprintf( buf, "A blaster shot fired from the %s barely misses you.", GetDirectionName(dir) );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_ROOM );
       LearnFromFailure( ch, gsn_snipe );
     }
@@ -219,7 +218,9 @@ void do_snipe( Character *ch, char *argument )
   CharacterToRoom( ch, was_in_room );
 
   if ( IsNpc(ch) )
-    SetWaitState( ch, 1 * PULSE_VIOLENCE );
+    {
+      SetWaitState( ch, 1 * PULSE_VIOLENCE );
+    }
   else
     {
       if ( GetRandomPercent() < ch->PCData->Learned[gsn_third_attack] )
@@ -229,6 +230,7 @@ void do_snipe( Character *ch, char *argument )
       else
         SetWaitState( ch, 3 * PULSE_PER_SECOND );
     }
+
   if ( IsNpc( victim ) && !CharacterDiedRecently(victim) )
     {
       if ( IsBitSet( victim->Flags , ACT_SENTINEL ) )
@@ -241,4 +243,3 @@ void do_snipe( Character *ch, char *argument )
       StartHunting( victim, ch );
     }
 }
-

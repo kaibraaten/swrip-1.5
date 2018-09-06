@@ -22,17 +22,17 @@ static void diag_visit_obj( Character *ch, Object *obj );
  * parameters to handle different diagnostic routines.
  */
 
-void do_diagnose( Character *ch, char *argument )
+void do_diagnose( Character *ch, std::string argument )
 {
 #define   DIAG_MAX_SIZE  1000
   ProtoObject *pObj = nullptr;
   ProtoObject **freq = nullptr;                        /* dynamic array of pointers */
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
-  char arg4[MAX_INPUT_LENGTH];
-  char arg5[MAX_INPUT_LENGTH];
-  char arg6[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
+  std::string arg4;
+  std::string arg5;
+  std::string arg6;
   int num = 20;                               /* display lines requested */
   int cou = 0;
 
@@ -43,7 +43,7 @@ void do_diagnose( Character *ch, char *argument )
   argument = OneArgument( argument, arg5 );
   argument = OneArgument( argument, arg6 );
 
-  if (!*arg1)
+  if ( arg1.empty() )
     {
       diagnose_help(ch);
       return;
@@ -64,18 +64,18 @@ void do_diagnose( Character *ch, char *argument )
       Room *pRoom = nullptr;
       int match = 0, hit_cou = 0, vnum[DIAG_RF_MAX_SIZE];
 
-      if (!*arg2)                                   /* empty arg gets help scrn */
+      if ( arg2.empty() )
         {
           diagnose_help(ch);
           return;
         }
       else
         {
-          match = atoi (arg2);
+          match = std::stoi(arg2);
         }
       
-      int lo = (*arg3) ? atoi (arg3) : 0;
-      int hi = (*arg4) ? atoi (arg4) : MAX_VNUM;
+      int lo = !arg3.empty() ? std::stoi(arg3) : 0;
+      int hi = !arg4.empty() ? std::stoi(arg4) : MAX_VNUM;
 
       ch->Echo("\r\nRoom Vnums\r\n");
       
@@ -103,41 +103,43 @@ void do_diagnose( Character *ch, char *argument )
       return;
     }
 
-  if (!StrCmp(arg1, "of")) {
-    if (*arg2)                                    /* empty arg gets dft number */
-      num = atoi (arg2);
+  if (!StrCmp(arg1, "of"))
+    {
+      if ( !arg2.empty() )
+        num = std::stoi(arg2);
 
-    if (num > DIAG_MAX_SIZE  || num < 1) {        /* display num out of bounds */
-      diagnose_help(ch);
+      if (num > DIAG_MAX_SIZE  || num < 1)
+        {
+          diagnose_help(ch);
+          return;
+        }
+
+      freq = new ProtoObject*[num];
+
+      for (cou = 0; cou < num; cou++)                /* initialize freq array */
+        freq[cou] = NULL;                          /* to NULL pointers */
+
+      for (cou = 0; cou < MAX_KEY_HASH; cou++) {     /* loop thru ObjectIndexHash */
+        if ( ObjectIndexHash[cou] )                 /* safety check */
+          for (pObj=ObjectIndexHash[cou];          /* loop thru all pObjInd */
+               pObj; pObj=pObj->Next)
+            diag_ins (pObj, num, freq, ch);    /* insert pointer into list */
+      }
+    
+      ch->Echo("\r\nObject Frequencies\r\n");  /* send results to char */
+
+      for (cou = 0; cou < num && freq[cou]; cou++)
+        ch->Echo("%3d%8d%8d\r\n", cou+1,freq[cou]->Vnum,freq[cou]->Count);
+
+      delete[] freq;
       return;
     }
-
-    freq = new ProtoObject*[num];
-
-    for (cou = 0; cou < num; cou++)                /* initialize freq array */
-      freq[cou] = NULL;                          /* to NULL pointers */
-
-    for (cou = 0; cou < MAX_KEY_HASH; cou++) {     /* loop thru ObjectIndexHash */
-      if ( ObjectIndexHash[cou] )                 /* safety check */
-        for (pObj=ObjectIndexHash[cou];          /* loop thru all pObjInd */
-             pObj; pObj=pObj->Next)
-          diag_ins (pObj, num, freq, ch);    /* insert pointer into list */
-    }
-    
-    ch->Echo("\r\nObject Frequencies\r\n");  /* send results to char */
-
-    for (cou = 0; cou < num && freq[cou]; cou++)
-      ch->Echo("%3d%8d%8d\r\n", cou+1,freq[cou]->Vnum,freq[cou]->Count);
-
-    delete[] freq;
-    return;
-  }
 
   if (!StrCmp(arg1, "mm"))
     {
       Character *victim;
 
-      if ( !*arg2 )
+      if ( arg2.empty() )
         return;
 
       if ( GetTrustLevel(ch) < LEVEL_SUB_IMPLEM )
@@ -196,8 +198,9 @@ void do_diagnose( Character *ch, char *argument )
       int zero_obj     = 0;                        /* num of objs with 0 wt */
       int zero_num     = -1;                       /* num of lines requested */
 
-      if (*arg2)
-        zero_num = atoi (arg2);
+      if( !arg2.empty() )
+        zero_num = std::stoi(arg2);
+
       for (cou = 0; cou < MAX_KEY_HASH; cou++)     /* loop thru ObjectIndexHash */
         if ( ObjectIndexHash[cou] )
           for (pObj=ObjectIndexHash[cou]; pObj; pObj=pObj->Next)
@@ -241,11 +244,11 @@ void do_diagnose( Character *ch, char *argument )
       Object       *po, *pt = NULL;
       int            i=0;
 
-      ch->Echo("CHAR name=%s \r\n", ch->Name);
+      ch->Echo("CHAR name=%s \r\n", ch->Name.c_str());
       ch->Echo("   first_carry=%s\r\n",
-               ch->Objects().empty() ? "NULL" : ch->Objects().front()->Name);
+               ch->Objects().empty() ? "NULL" : ch->Objects().front()->Name.c_str());
       ch->Echo("   last_carry=%s\r\n",
-               ch->Objects().empty() ? "NULL" : ch->Objects().back()->Name);
+               ch->Objects().empty() ? "NULL" : ch->Objects().back()->Name.c_str());
 
       /*
         for (pa=ch->FirstAffect; pa; pa=pa->Next)
@@ -257,7 +260,7 @@ void do_diagnose( Character *ch, char *argument )
       for (po=FirstObject; po; po=po->Next)
 	{
           i++;
-          pt=NULL;
+          pt = NULL;
 
           if ( !po->CarriedBy && !po->InObject )
             continue;
@@ -265,13 +268,14 @@ void do_diagnose( Character *ch, char *argument )
           if ( !po->CarriedBy )
             {
               pt = po;
+
               while( pt->InObject )           /* could be in a container on ground */
                 pt=pt->InObject;
             }
 
           if ( ch == po->CarriedBy || (pt && ch == pt->CarriedBy) )
             {
-              ch->Echo("\r\n%d OBJ name=%s \r\n", i, po->Name);
+              ch->Echo("\r\n%d OBJ name=%s \r\n", i, po->Name.c_str());
               /*
               ch->Echo("   NextContent=%s\r\n", po->NextContent ? po->NextContent->Name : "NULL");
               ch->Echo("   PreviousContent=%s\r\n",
@@ -292,18 +296,19 @@ void do_diagnose( Character *ch, char *argument )
       ProtoMobile *pm = nullptr;
       short race_num = 0, dis_num = 0, vnum1 = 0, vnum2 = 0, dis_cou = 0;
 
-      if ( !*arg2 || !*arg3 || !*arg4 || !*arg5
-           || !isdigit(*arg2) || !isdigit(*arg3) || !isdigit(*arg4)
-           || !isdigit(*arg5))
+      if ( arg2.empty() || arg3.empty() || arg4.empty() || arg5.empty()
+           || !isdigit(arg2[0]) || !isdigit(arg3[0]) || !isdigit(arg4[0])
+           || !isdigit(arg5[0]))
         {
           ch->Echo( "Sorry. Invalid format.\r\n\r\n" );
           diagnose_help(ch);
           return;
         }
-      dis_num  = umin(atoi (arg2), DIAG_MAX_SIZE);
-      race_num     = atoi (arg3);
-      vnum1    = atoi (arg4);
-      vnum2    = atoi (arg5);
+
+      dis_num = umin( std::stoi(arg2), DIAG_MAX_SIZE );
+      race_num = std::stoi(arg3);
+      vnum1 = std::stoi(arg4);
+      vnum2 = std::stoi(arg5);
       ch->Echo("\r\n");
 
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
@@ -313,7 +318,7 @@ void do_diagnose( Character *ch, char *argument )
               {
                 if ( pm->Vnum >= vnum1 && pm->Vnum <= vnum2
                      &&   pm->Race == race_num && dis_cou++ < dis_num )
-                  ch->Echo( "%5d %s\r\n", pm->Vnum, pm->Name );
+                  ch->Echo( "%5d %s\r\n", pm->Vnum, pm->Name.c_str() );
               }
         }
       return;
@@ -399,7 +404,7 @@ static void zero_sort( int *vnums, int *count, int left, int right )
 static void diag_visit_obj( Character *ch, Object *obj )
 {
 #if 0
-  ch->Echo( "***obj=%s\r\n", obj->Name );
+  ch->Echo( "***obj=%s\r\n", obj->Name.c_str() );
 
   if ( obj->FirstContent )
     {

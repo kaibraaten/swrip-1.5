@@ -4,7 +4,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 
-extern char *spell_target_name;
+extern std::string spell_target_name;
 
 ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
 {
@@ -13,7 +13,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
   Character *victim = nullptr;
   Skill *skill = GetSkill(sn);
 
-  if ( IsNullOrEmpty( spell_target_name ) )
+  if ( spell_target_name.empty() )
     {
       ch->Echo("What would you like identified?\r\n");
       return rSPELL_FAILED;
@@ -25,8 +25,8 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
       
       SetCharacterColor( AT_LBLUE, ch );
       ch->Echo("Object '%s' is %s, special properties: %s\r\nIts weight is %d, value is %d.\r\n",
-               obj->Name,
-               AOrAn( GetItemTypeName( obj ) ),
+               obj->Name.c_str(),
+               AOrAn( GetItemTypeName( obj ) ).c_str(),
                FlagString( obj->Flags, ObjectFlags ).c_str(),
                obj->Weight,
                obj->Cost
@@ -161,22 +161,23 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
       if ( IsNpc(victim) )
         {
           ch->Echo("%s appears to be between level %d and %d.\r\n",
-                    victim->Name,
+                    victim->Name.c_str(),
                     victim->TopLevel - (victim->TopLevel % 5),
                     victim->TopLevel - (victim->TopLevel % 5) + 5);
         }
       else
         {
-          ch->Echo("%s appears to be level %d.\r\n", victim->Name, victim->TopLevel);
+          ch->Echo("%s appears to be level %d.\r\n",
+                   victim->Name.c_str(), victim->TopLevel);
         }
 
       ch->Echo("%s looks like %s.\r\n",
-                victim->Name, AOrAn(GetCharacterRace(victim)));
+                victim->Name.c_str(), AOrAn(GetCharacterRace(victim)).c_str());
 
       if ( (Chance(ch, 50) && ch->TopLevel >= victim->TopLevel + 10 )
            ||    IsImmortal(ch) )
         {
-          ch->Echo("%s appears to be affected by: ", victim->Name);
+          ch->Echo("%s appears to be affected by: ", victim->Name.c_str());
 
           if ( victim->Affects().empty() )
 	    {
@@ -191,18 +192,18 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
               if (victim->Affects().size() == 1)
                 {
                   if( paf != victim->Affects().back() && (sktmp=GetSkill(paf->Type)) != NULL )
-                    ch->Echo("%s, ", sktmp->Name );
+                    ch->Echo("%s, ", sktmp->Name.c_str() );
 
                   if( paf == victim->Affects().back() && (sktmp=GetSkill(paf->Type)) != NULL )
                     {
-                      ch->Echo("and %s.\r\n", sktmp->Name );
+                      ch->Echo("and %s.\r\n", sktmp->Name.c_str() );
                       return rNONE;
                     }
                 }
               else
                 {
                   if ( (sktmp=GetSkill(paf->Type)) != NULL )
-                    ch->Echo("%s.\r\n", sktmp->Name );
+                    ch->Echo("%s.\r\n", sktmp->Name.c_str() );
                   else
                     ch->Echo("\r\n");
                   return rNONE;
@@ -213,7 +214,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
 
   else
     {
-      ch->Echo("You can't find %s!\r\n", spell_target_name );
+      ch->Echo("You can't find %s!\r\n", spell_target_name.c_str() );
       return rSPELL_FAILED;
     }
 

@@ -28,8 +28,8 @@ public:
   void Remove(ClanMember *member);
 
   Clan  *MainClan = nullptr;
-  char  *Name = nullptr;           /* Clan name                            */
-  char  *Description = nullptr;    /* A brief description of the clan      */
+  std::string Name;           /* Clan name                            */
+  std::string Description;    /* A brief description of the clan      */
   int    PlayerKills = 0;         /* Number of pkills on behalf of clan   */
   int    PlayerDeaths = 0;        /* Number of pkills against clan        */
   int    MobKills = 0;         /* Number of mkills on behalf of clan   */
@@ -43,14 +43,14 @@ public:
   vnum_t Jail = INVALID_VNUM;
   vnum_t EnlistRoom1 = INVALID_VNUM;
   vnum_t EnlistRoom2 = INVALID_VNUM;
-  char  *tmpstr = nullptr;
+  std::string tmpstr;
   time_t FoundationDate = 0;
   
   struct
   {
-    char *Leader = nullptr;         /* Head clan leader                     */
-    char *Number1 = nullptr;        /* First officer                        */
-    char *Number2 = nullptr;        /* Second officer                       */
+    std::string Leader;         /* Head clan leader                     */
+    std::string Number1;        /* First officer                        */
+    std::string Number2;        /* Second officer                       */
   } Leadership;
 
 private:
@@ -61,13 +61,13 @@ private:
 class ClanMember
 {
 public:
-  char         *Name = nullptr;  /* Name of member */
-  time_t        Since = 0; /* Member since */
-  int           Ability = 0; /* class of member */
-  int           Level = 0;  /* level of member */
-  int           Deaths = 0; /* Pdeaths for clans, mdeaths for guilds/orders */
-  int           Kills = 0;  /* Pkills for clans, mkills for guilds/orders */
-  time_t        LastActivity = 0;
+  std::string Name;  /* Name of member */
+  time_t Since = 0; /* Member since */
+  int Ability = 0; /* class of member */
+  int Level = 0;  /* level of member */
+  int Deaths = 0; /* Pdeaths for clans, mdeaths for guilds/orders */
+  int Kills = 0;  /* Pkills for clans, mkills for guilds/orders */
+  time_t LastActivity = 0;
 };
 
 extern ClanRepository *Clans;
@@ -83,7 +83,7 @@ Clan *AllocateClan( void );
 void FreeClan( Clan *clan );
 void AssignGuildToMainclan(Clan *guild);
 void AssignGuildToMainclan( Clan *guild, Clan *mainClan );
-const char *GetClanFilename( const Clan *clan );
+std::string GetClanFilename( const Clan *clan );
 bool IsBountyHuntersGuild(const std::string &clanName);
 ClanRepository *NewClanRepository();
 

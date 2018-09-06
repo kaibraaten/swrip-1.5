@@ -10,10 +10,10 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
 /*
  * syntax: mpdamage (character) (#hps)
  */
-void do_mp_damage( Character *ch, char *argument )
+void do_mp_damage( Character *ch, std::string argument )
 {
-  char arg1[ MAX_INPUT_LENGTH ];
-  char arg2[ MAX_INPUT_LENGTH ];
+  std::string arg1;
+  std::string arg2;
   Character *victim = nullptr;
   int dam = 0;
 
@@ -29,14 +29,14 @@ void do_mp_damage( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo("mpdamage whom?\r\n");
       ProgBug( "Mpdamage: invalid argument1", ch );
       return;
     }
 
-  if ( IsNullOrEmpty( arg2 ) )
+  if ( arg2.empty() )
     {
       ch->Echo("mpdamage inflict how many hps?\r\n");
       ProgBug( "Mpdamage: invalid argument2", ch );
@@ -57,7 +57,7 @@ void do_mp_damage( Character *ch, char *argument )
       return;
     }
 
-  dam = atoi(arg2);
+  dam = std::stoi(arg2);
 
   if( dam < 0 || dam > SHRT_MAX )
     {
@@ -88,8 +88,8 @@ void do_mp_damage( Character *ch, char *argument )
  */
 static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
 {
-  bool npcvict;
-  Object *damobj;
+  bool npcvict = false;
+  Object *damobj = nullptr;
 
   assert(ch != nullptr);
   assert(victim != nullptr);
@@ -159,6 +159,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
       /* get a random body eq part */
       WearLocation dameq  = (WearLocation)GetRandomNumberFromRange(WEAR_LIGHT, WEAR_EYES);
       damobj = GetEquipmentOnCharacter(victim, dameq);
+
       if ( damobj )
         {
           if ( dam > GetObjectResistance(damobj) )
@@ -234,14 +235,13 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
       if ( !npcvict )
         {
           sprintf( log_buf, "%s killed by %s at %ld",
-                   victim->Name,
-                   (IsNpc(ch) ? ch->ShortDescr : ch->Name),
+                   victim->Name.c_str(),
+                   (IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str()),
 		   victim->InRoom->Vnum );
           Log->Info( log_buf );
           ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
-
-
         }
+      
       SetCurrentGlobalCharacter(victim);
       RawKill( ch, victim );
       victim = NULL;
@@ -291,4 +291,3 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
 
   return rNONE;
 }
-

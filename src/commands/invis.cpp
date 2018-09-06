@@ -2,21 +2,20 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 
-void do_invis( Character *ch, char *argument )
+void do_invis( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   short level = 0;
 
-  argument = OneArgument( argument, arg );
-
-  if ( !IsNullOrEmpty( arg ) )
+  if ( !arg.empty() )
     {
       if ( !IsNumber( arg ) )
         {
-          ch->Echo("Usage: invis | invis <level>\r\n");
+          ch->Echo("Usage: invis [<level>]\r\n");
           return;
         }
-      level = atoi( arg );
+
+      level = std::stoi( arg );
+
       if ( level < 2 || level > ch->TopLevel)
         {
           ch->Echo("Invalid level.\r\n");

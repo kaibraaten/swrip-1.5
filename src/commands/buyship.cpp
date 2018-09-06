@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_buyship(Character *ch, char *argument )
+void do_buyship(Character *ch, std::string argument)
 {
   long price = 0;
   Ship *ship = NULL;
@@ -16,7 +16,7 @@ void do_buyship(Character *ch, char *argument )
       return;
     }
 
-  ship = GetShipInRoom( ch->InRoom , argument );
+  ship = GetShipInRoom( ch->InRoom, argument );
 
   if ( !ship )
     {
@@ -24,14 +24,14 @@ void do_buyship(Character *ch, char *argument )
 
       if ( !ship )
         {
-          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), TO_CHAR );
           return;
         }
     }
 
-  if ( StrCmp( ship->Owner , "" )  || ship->Type == MOB_SHIP )
+  if ( !ship->Owner.empty() || ship->Type == MOB_SHIP )
     {
-      ch->Echo( "&RThat ship isn't for sale!" );
+      ch->Echo( "&RThat ship isn't for sale!&d" );
       return;
     }
 
@@ -73,13 +73,11 @@ void do_buyship(Character *ch, char *argument )
     }
 
   ch->Gold -= price;
-  ch->Echo( "&GYou pay %ld credits to purchace the ship.\r\n" , price );
+  ch->Echo( "&GYou pay %ld credits to purchace the ship.\r\n", price );
 
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
-       NULL, argument , TO_ROOM );
+       NULL, argument.c_str() , TO_ROOM );
 
-  FreeMemory( ship->Owner );
-  ship->Owner = CopyString( ch->Name );
-  Ships->Save(ship);
+  ship->Owner = ch->Name;
+  Ships->Save( ship );
 }
-

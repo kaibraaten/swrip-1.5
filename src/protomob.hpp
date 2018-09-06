@@ -18,10 +18,10 @@ public:
   SpecFun *spec_2 = nullptr;
   struct Shop *Shop = nullptr;
   struct RepairShop *RepairShop = nullptr;
-  char           *Name = nullptr;
-  char           *ShortDescr = nullptr;
-  char           *LongDescr = nullptr;
-  char           *Description = nullptr;
+  std::string Name;
+  std::string ShortDescr;
+  std::string LongDescr;
+  std::string Description;
   vnum_t          Vnum = INVALID_VNUM;
   short           Count = 0;
   short           Killed = 0;

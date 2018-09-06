@@ -19,6 +19,8 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <string>
+#include <sstream>
 #include <cassert>
 #include <cctype>
 #include <ctime>
@@ -121,7 +123,7 @@ static bool CanRemove( const Character *ch, const Board *board )
   if ( GetTrustLevel( ch ) >= board->MinRemoveLevel )
     return true;
 
-  if ( !IsNullOrEmpty( board->ExtraRemovers ) )
+  if ( !board->ExtraRemovers.empty() )
     {
       if ( IsName( ch->Name, board->ExtraRemovers ) )
         return true;
@@ -138,7 +140,7 @@ static bool CanRead( const Character *ch, const Board *board )
 
   /* Your trust wasn't high enough, so check if a read_group or extra
      readers have been set up. */
-  if ( !IsNullOrEmpty( board->ReadGroup ) )
+  if ( !board->ReadGroup.empty() )
     {
       if ( ch->PCData->ClanInfo.Clan
 	   && !StrCmp( ch->PCData->ClanInfo.Clan->Name, board->ReadGroup ) )
@@ -151,7 +153,7 @@ static bool CanRead( const Character *ch, const Board *board )
 
     }
 
-  if ( !IsNullOrEmpty( board->ExtraReaders ) )
+  if ( !board->ExtraReaders.empty() )
     {
       if ( IsName( ch->Name, board->ExtraReaders ) )
         return true;
@@ -167,7 +169,7 @@ static bool CanPost( const Character *ch, const Board *board )
     return true;
 
   /* Your trust wasn't high enough, so check if a post_group has been set up. */
-  if ( !IsNullOrEmpty( board->PostGroup ) )
+  if ( !board->PostGroup.empty() )
     {
       if ( ch->PCData->ClanInfo.Clan
 	   && !StrCmp( ch->PCData->ClanInfo.Clan->Name, board->PostGroup ) )
@@ -203,38 +205,22 @@ static void LoadNote( lua_State *L, Board *board )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      note->Sender = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      note->Sender = CopyString( "" );
+      note->Sender = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      note->Date = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      note->Date = CopyString( "" );
+      note->Date = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      note->ToList = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      note->ToList = CopyString( "" );
+      note->ToList = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      note->Subject = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      note->Subject = CopyString( "" );
+      note->Subject = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -248,38 +234,22 @@ static void LoadNote( lua_State *L, Board *board )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      note->YesVotes = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      note->YesVotes = CopyString( "" );
+      note->YesVotes = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      note->NoVotes = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      note->NoVotes = CopyString( "" );
+      note->NoVotes = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      note->Abstentions = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      note->Abstentions = CopyString( "" );
+      note->Abstentions = lua_tostring( L, idx );
     }
 
-   if( !lua_isnil( L, ++idx ) )
+  if( !lua_isnil( L, ++idx ) )
     {
-      note->Text = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      note->Text = CopyString( "" );
+      note->Text = lua_tostring( L, idx );
     }
   
   lua_pop( L, topAfterGets - topAtStart );
@@ -329,7 +299,7 @@ static int L_BoardEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      board->Name = CopyString( lua_tostring( L, idx ) );
+      board->Name = lua_tostring( L, idx );
     }
     
   if( !lua_isnil( L, ++idx ) )
@@ -365,38 +335,22 @@ static int L_BoardEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      board->ReadGroup = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      board->ReadGroup = CopyString( "" );
+      board->ReadGroup = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      board->PostGroup = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      board->PostGroup = CopyString( "" );
+      board->PostGroup = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      board->ExtraReaders = CopyString( lua_tostring( L, idx ) );
+      board->ExtraReaders = lua_tostring( L, idx );
     }
-  else
-    {
-      board->ExtraReaders = CopyString( "" );
-    }
-  
+
   if( !lua_isnil( L, ++idx ) )
     {
-      board->ExtraRemovers = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      board->ExtraReaders = CopyString( "" );
+      board->ExtraRemovers = lua_tostring( L, idx );
     }
   
   lua_pop( L, topAfterGets - topAtStart );
@@ -466,10 +420,10 @@ static void PushBoard( lua_State *L, const void *userData )
   lua_setglobal( L, "board" );
 }
 
-const char *GetBoardFilename( const Board *board )
+std::string GetBoardFilename( const Board *board )
 {
-  static char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s", BOARD_DIR, ConvertToLuaFilename( board->Name ) );
+  char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", BOARD_DIR, ConvertToLuaFilename( board->Name ).c_str() );
 
   return fullPath;
 }
@@ -491,31 +445,12 @@ void AttachNote( Character *ch )
     return;
 
   Note *pnote = new Note();
-  pnote->Sender = CopyString( ch->Name );
-  pnote->Date           = CopyString( "" );
-  pnote->ToList        = CopyString( "" );
-  pnote->Subject        = CopyString( "" );
-  pnote->Text           = CopyString( "" );
+  pnote->Sender = ch->Name;
   ch->PCData->Note     = pnote;
 }
 
 void FreeNote( Note *pnote )
 {
-  FreeMemory( pnote->Text );
-  FreeMemory( pnote->Subject );
-  FreeMemory( pnote->ToList );
-  FreeMemory( pnote->Date );
-  FreeMemory( pnote->Sender );
-
-  if ( pnote->YesVotes )
-    FreeMemory( pnote->YesVotes );
-
-  if ( pnote->NoVotes )
-    FreeMemory( pnote->NoVotes );
-
-  if ( pnote->Abstentions )
-    FreeMemory( pnote->Abstentions );
-
   delete pnote;
 }
 
@@ -553,21 +488,15 @@ static Object *FindQuill( const Character *ch )
     }
 }
 
-void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MAIL )
+void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
 {
-  char arg_passed_buf[MAX_STRING_LENGTH] = { '\0' };
-  char *arg_passed = arg_passed_buf;
   char buf[MAX_STRING_LENGTH] = { '\0' };
-  char arg[MAX_INPUT_LENGTH] = { '\0' };
+  std::string arg;
   Board *board = NULL;
   int anum = 0;
   int first_list = 0;
   Object *quill = NULL, *paper = NULL, *tmpobj = NULL;
   ExtraDescription *ed = NULL;
-  char notebuf[MAX_STRING_LENGTH] = { '\0' };
-  char short_desc_buf[MAX_STRING_LENGTH] = { '\0' };
-  char long_desc_buf[MAX_STRING_LENGTH] = { '\0' };
-  char keyword_buf[MAX_STRING_LENGTH] = { '\0' };
 
   if ( IsNpc(ch) )
     return;
@@ -593,13 +522,11 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
         }
 
       ed = (ExtraDescription*)ch->dest_buf;
-      FreeMemory( ed->Description );
       ed->Description = CopyBuffer( ch );
       StopEditing( ch );
       return;
     }
 
-  strcpy(arg_passed, stl_arg_passed.c_str());
   SetCharacterColor( AT_NOTE, ch );
   arg_passed = OneArgument( arg_passed, arg );
   SmashTilde( arg_passed );
@@ -620,7 +547,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
           return;
         }
 
-      first_list = atoi(arg_passed);
+      first_list = std::stoi(arg_passed);
 
       if (first_list)
         {
@@ -651,10 +578,10 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
                 ch->Echo( "%2d%c %-12s%c %-12s %s\r\n",
                           count,
                           _isNoteTo( note ) ? ')' : '}',
-                          note->Sender,
+                          note->Sender.c_str(),
                           (note->Voting != VOTE_NONE) ? (note->Voting == VOTE_OPEN ? 'V' : 'C') : ':',
-                          note->ToList,
-                          note->Subject );
+                          note->ToList.c_str(),
+                          note->Subject.c_str() );
             }
 
           Act( AT_ACTION, "$n glances over the messages.", ch, NULL, NULL, TO_ROOM );
@@ -690,8 +617,8 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
                   ch->Echo( "%2d%c %s: %s\r\n",
                             ++count,
                             _isNoteTo( note ) ? '-' : '}',
-                            note->Sender,
-                            note->Subject );
+                            note->Sender.c_str(),
+                            note->Subject.c_str() );
                 }
             }
 
@@ -724,7 +651,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
       else if ( IsNumber( arg_passed ) )
         {
           fAll = false;
-          anum = atoi( arg_passed );
+          anum = std::stoi( arg_passed );
         }
       else
         {
@@ -748,19 +675,20 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
                   wasfound = true;
                   ch->Echo( "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
                             counter,
-                            note->Sender,
-                            note->Subject,
-                            note->Date,
-                            note->ToList,
-                            note->Text );
+                            note->Sender.c_str(),
+                            note->Subject.c_str(),
+                            note->Date.c_str(),
+                            note->ToList.c_str(),
+                            note->Text.c_str() );
 
-                  if ( !IsNullOrEmpty( note->YesVotes )
-		       || !IsNullOrEmpty( note->NoVotes )
-                       || !IsNullOrEmpty( note->Abstentions ) )
+                  if ( !note->YesVotes.empty()
+		       || !note->NoVotes.empty()
+                       || !note->Abstentions.empty() )
                     {
                       ch->Echo("------------------------------------------------------------\r\n");
                       ch->Echo( "Votes:\r\nYes:     %s\r\nNo:      %s\r\nAbstain: %s\r\n",
-                                note->YesVotes, note->NoVotes, note->Abstentions );
+                                note->YesVotes.c_str(), note->NoVotes.c_str(),
+                                note->Abstentions.c_str() );
                     }
 
                   Act( AT_ACTION, "$n reads a message.", ch, NULL, NULL, TO_ROOM );
@@ -804,11 +732,11 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
                       ch->Echo( "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
                                 counter,
-                                note->Sender,
-                                note->Subject,
-                                note->Date,
-                                note->ToList,
-                                note->Text );
+                                note->Sender.c_str(),
+                                note->Subject.c_str(),
+                                note->Date.c_str(),
+                                note->ToList.c_str(),
+                                note->Text.c_str() );
                     }
                 }
             }
@@ -823,7 +751,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
     }
   else if ( !StrCmp( arg, "vote" ) )
     {
-      char arg2[MAX_INPUT_LENGTH];
+      std::string arg2;
       int counter = 0;
       bool found = false;
       Note *note = nullptr;
@@ -844,7 +772,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
       if ( IsNumber( arg2 ) )
         {
-          anum = atoi( arg2 );
+          anum = std::stoi( arg2 );
         }
       else
         {
@@ -916,7 +844,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
       /* Can only vote once on a note. */
       sprintf( buf, "%s %s %s",
-               note->YesVotes, note->NoVotes, note->Abstentions );
+               note->YesVotes.c_str(), note->NoVotes.c_str(), note->Abstentions.c_str() );
 
       if ( IsName( ch->Name, buf ) )
         {
@@ -926,9 +854,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
       if ( !StrCmp( arg_passed, "yes" ) )
         {
-          sprintf( buf, "%s %s", note->YesVotes, ch->Name );
-          FreeMemory( note->YesVotes );
-          note->YesVotes = CopyString( buf );
+          note->YesVotes += " " + ch->Name;
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           ch->Echo( "Ok.\r\n" );
           Boards->Save(board);
@@ -937,9 +863,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
       if ( !StrCmp( arg_passed, "no" ) )
         {
-          sprintf( buf, "%s %s", note->NoVotes, ch->Name );
-          FreeMemory( note->NoVotes );
-          note->NoVotes = CopyString( buf );
+          note->NoVotes += " " + ch->Name;
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           ch->Echo( "Ok.\r\n" );
           Boards->Save(board);
@@ -948,9 +872,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
       if ( !StrCmp( arg_passed, "abstain" ) )
         {
-          sprintf( buf, "%s %s", note->Abstentions, ch->Name );
-          FreeMemory( note->Abstentions );
-          note->Abstentions = CopyString( buf );
+          note->Abstentions += " " + ch->Name;
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           ch->Echo( "Ok.\r\n" );
           Boards->Save(board);
@@ -1049,7 +971,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
             }
         }
       
-      if ( IsNullOrEmpty( arg_passed ) )
+      if ( arg_passed.empty() )
         {
           ch->Echo("What do you wish the subject to be?\r\n");
           return;
@@ -1085,8 +1007,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
         {
           paper->Value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
-          FreeMemory( ed->Description );
-          ed->Description = CopyString( arg_passed );
+          ed->Description = arg_passed;
           ch->Echo("Ok.\r\n");
           return;
         }
@@ -1113,7 +1034,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
             }
         }
 
-      if ( IsNullOrEmpty( arg_passed ) )
+      if ( arg_passed.empty() )
         {
           ch->Echo("Please specify an addressee.\r\n");
           return;
@@ -1150,14 +1071,13 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
       arg_passed[0] = CharToUppercase(arg_passed[0]);
 
       sprintf( fname, "%s%c/%s", PLAYER_DIR, tolower(arg_passed[0]),
-               Capitalize( arg_passed ) );
+               Capitalize( arg_passed ).c_str() );
 
       if ( !IS_MAIL || stat( fname, &fst ) != -1 || !StrCmp(arg_passed, "all") )
         {
           paper->Value[OVAL_PAPER_2] = 1;
           ed = SetOExtra(paper, "_to_");
-          FreeMemory( ed->Description );
-          ed->Description = CopyString( arg_passed );
+          ed->Description = arg_passed;
           ch->Echo("Ok.\r\n");
           return;
         }
@@ -1169,8 +1089,6 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
     }
   else if ( !StrCmp( arg, "show" ) )
     {
-      char *subject, *to_list, *text;
-
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->ItemType != ITEM_PAPER )
         {
@@ -1179,22 +1097,28 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
         }
 
       const auto extraDescriptions(paper->ExtraDescriptions());
+
+      std::string subject = GetExtraDescription( "_subject_", extraDescriptions );
       
-      if ( (subject = GetExtraDescription( "_subject_", extraDescriptions )) == NULL )
+      if ( subject.empty() )
         subject = "(no subject)";
+
+      std::string to_list = GetExtraDescription( "_to_", extraDescriptions );
       
-      if ( (to_list = GetExtraDescription( "_to_", extraDescriptions )) == NULL )
+      if ( to_list.empty() )
         to_list = "(nobody)";
 
       ch->Echo( "%s: %s\r\nTo: %s\r\n",
-                ch->Name,
-                subject,
-                to_list );
+                ch->Name.c_str(),
+                subject.c_str(),
+                to_list.c_str() );
 
-      if ( (text = GetExtraDescription( "_text_", extraDescriptions )) == NULL )
+      std::string text = GetExtraDescription( "_text_", extraDescriptions );
+      
+      if ( text.empty() )
         text = "The disk is blank.\r\n";
 
-      ch->Echo(text);
+      ch->Echo("%s", text);
       return;
     }
   else if ( !StrCmp( arg, "post" ) )
@@ -1217,8 +1141,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
           ch->Echo("This message has no subject... using 'none'.\r\n");
           paper->Value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
-          FreeMemory( ed->Description );
-          ed->Description = CopyString( "none" );
+          ed->Description = "none";
         }
 
       if (paper->Value[OVAL_PAPER_2] == 0)
@@ -1233,8 +1156,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
               ch->Echo("This message is addressed to no one... sending to 'all'!\r\n");
               paper->Value[OVAL_PAPER_2] = 1;
               ed = SetOExtra(paper, "_to_");
-              FreeMemory( ed->Description );
-              ed->Description = CopyString( "All" );
+              ed->Description = "All";
             }
         }
 
@@ -1265,19 +1187,12 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
       char *strtime                     = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
       Note *note = new Note();
-      note->Date                       = CopyString( strtime );
+      note->Date = strtime;
 
-      char *text = GetExtraDescription( "_text_", extraDescriptions );
-      note->Text = text ? CopyString( text ) : CopyString( "" );
-      text = GetExtraDescription( "_to_", extraDescriptions );
-      note->ToList = text ? CopyString( text ) : CopyString( "all" );
-      text = GetExtraDescription( "_subject_", extraDescriptions );
-      note->Subject = text ? CopyString( text ) : CopyString( "" );
-      note->Sender  = CopyString( ch->Name );
-      note->Voting      = 0;
-      note->YesVotes    = CopyString( "" );
-      note->NoVotes     = CopyString( "" );
-      note->Abstentions = CopyString( "" );
+      note->Text = GetExtraDescription( "_text_", extraDescriptions );
+      note->ToList = GetExtraDescription( "_to_", extraDescriptions );
+      note->Subject = GetExtraDescription( "_subject_", extraDescriptions );
+      note->Sender = ch->Name;
 
       board->Add(note);
       Boards->Save(board);
@@ -1337,7 +1252,7 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
           return;
         }
 
-      anum = atoi( arg_passed );
+      anum = std::stoi( arg_passed );
       _IsNoteTo _isNoteTo(ch);
 
       for(Note *note : board->Notes())
@@ -1381,47 +1296,33 @@ void OperateOnNote( Character *ch, const std::string &stl_arg_passed, bool IS_MA
 
                   paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
                   ed = SetOExtra( paper, "_sender_" );
-                  FreeMemory( ed->Description );
-                  ed->Description = CopyString(note->Sender);
+                  ed->Description = note->Sender;
                   ed = SetOExtra( paper, "_text_" );
-                  FreeMemory( ed->Description );
-                  ed->Description = CopyString(note->Text);
+                  ed->Description = note->Text;
                   ed = SetOExtra( paper, "_to_" );
-                  FreeMemory( ed->Description );
-                  ed->Description = CopyString( note->ToList );
+                  ed->Description = note->ToList;
                   ed = SetOExtra( paper, "_subject_" );
-                  FreeMemory( ed->Description );
-                  ed->Description = CopyString( note->Subject );
+                  ed->Description = note->Subject;
                   ed = SetOExtra( paper, "_date_" );
-                  FreeMemory( ed->Description );
-                  ed->Description = CopyString( note->Date );
+                  ed->Description = note->Date;
                   ed = SetOExtra( paper, "note" );
-                  FreeMemory( ed->Description );
-                  sprintf(notebuf, "From: ");
-                  strcat(notebuf, note->Sender);
-                  strcat(notebuf, "\r\nTo: ");
-                  strcat(notebuf, note->ToList);
-                  strcat(notebuf, "\r\nSubject: ");
-                  strcat(notebuf, note->Subject);
-                  strcat(notebuf, "\r\n\r\n");
-                  strcat(notebuf, note->Text);
-                  strcat(notebuf, "\r\n");
-                  ed->Description = CopyString(notebuf);
+                  std::ostringstream notebuf;
+                  
+                  notebuf << "From: " << note->Sender
+                          << "\r\nTo: " << note->ToList
+                          << "\r\nSubject: " << note->Subject
+                          << "\r\n\r\n"
+                          << note->Text
+                          << "\r\n";
+                  ed->Description = notebuf.str();
                   paper->Value[OVAL_PAPER_0] = 2;
                   paper->Value[OVAL_PAPER_1] = 2;
                   paper->Value[OVAL_PAPER_2] = 2;
-                  sprintf(short_desc_buf, "a note from %s to %s",
-                          note->Sender, note->ToList);
-                  FreeMemory(paper->ShortDescr);
-                  paper->ShortDescr = CopyString(short_desc_buf);
-                  sprintf(long_desc_buf, "A note from %s to %s lies on the ground.",
-                          note->Sender, note->ToList);
-                  FreeMemory(paper->Description);
-                  paper->Description = CopyString(long_desc_buf);
-                  sprintf(keyword_buf, "note parchment paper %s",
-                          note->ToList);
-                  FreeMemory(paper->Name);
-                  paper->Name = CopyString(keyword_buf);
+                  paper->ShortDescr = FormatString("a note from %s to %s",
+                                                   note->Sender.c_str(), note->ToList.c_str());
+                  paper->Description = FormatString("A note from %s to %s lies on the ground.",
+                                                    note->Sender.c_str(), note->ToList.c_str() );
+                  paper->Name = FormatString("note parchment paper %s", note->ToList.c_str());
                 }
 
               if ( take != NOTE_COPY )
@@ -1501,42 +1402,13 @@ Board *GetBoard( const std::string &name )
 Board *AllocateBoard(const std::string &name)
 {
   Board *board = new Board();
-  board->Name           = CopyString( ToLower(name) );
-  board->ReadGroup      = CopyString( "" );
-  board->PostGroup      = CopyString( "" );
-  board->ExtraReaders   = CopyString( "" );
-  board->ExtraRemovers  = CopyString( "" );
+  board->Name           = ToLower(name);
 
   return board;
 }
 
 void FreeBoard(Board *board)
 {
-  if(board->Name != NULL)
-    {
-      FreeMemory(board->Name);
-    }
-
-  if(board->ReadGroup != NULL)
-    {
-      FreeMemory(board->ReadGroup);
-    }
-
-  if(board->PostGroup != NULL)
-    {
-      FreeMemory(board->PostGroup);
-    }
-
-  if(board->ExtraReaders != NULL)
-    {
-      FreeMemory(board->ExtraReaders);
-    }
-
-  if(board->ExtraRemovers != NULL)
-    {
-      FreeMemory(board->ExtraRemovers);
-    }
-
   delete board;
 }
 

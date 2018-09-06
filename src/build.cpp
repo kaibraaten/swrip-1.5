@@ -195,8 +195,7 @@ ExtraDescription *SetRExtra( Room *room, const std::string &keywords )
     {
       ed = new ExtraDescription();
       room->Add(ed);
-      ed->Keyword       = CopyString( keywords );
-      ed->Description   = CopyString( "" );
+      ed->Keyword = keywords;
       top_ed++;
     }
 
@@ -224,8 +223,6 @@ bool DelRExtra( Room *room, const std::string &keywords )
     return false;
 
   room->Remove(rmed);
-  FreeMemory( rmed->Keyword );
-  FreeMemory( rmed->Description );
   delete rmed;
   top_ed--;
   return true;
@@ -242,8 +239,7 @@ ExtraDescription *SetOExtra( Object *obj, const std::string &keywords )
     {
       ed = new ExtraDescription();
       obj->Add(ed);
-      ed->Keyword       = CopyString( keywords );
-      ed->Description   = CopyString( "" );
+      ed->Keyword = keywords;
       top_ed++;
     }
 
@@ -264,8 +260,6 @@ bool DelOExtra( Object *obj, const std::string &keywords )
     }
 
   obj->Remove(rmed);
-  FreeMemory( rmed->Keyword );
-  FreeMemory( rmed->Description );
   delete rmed;
   top_ed--;
   return true;
@@ -282,8 +276,7 @@ ExtraDescription *SetOExtraProto( ProtoObject *obj, const std::string &keywords 
     {
       ed = new ExtraDescription();
       obj->Add(ed);
-      ed->Keyword       = CopyString( keywords );
-      ed->Description   = CopyString( "" );
+      ed->Keyword = keywords;
       top_ed++;
     }
 
@@ -304,8 +297,6 @@ bool DelOExtraProto( ProtoObject *obj, const std::string &keywords )
     }
 
   obj->Remove(rmed);
-  FreeMemory( rmed->Keyword );
-  FreeMemory( rmed->Description );
   delete rmed;
   top_ed--;
   return true;
@@ -326,7 +317,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
   bool complexmob = false;
   char backup[MAX_STRING_LENGTH];
 
-  sprintf( buf, "Saving %s...", tarea->Filename );
+  sprintf( buf, "Saving %s...", tarea->Filename.c_str() );
   Log->LogStringPlus( buf, LOG_NORMAL, LEVEL_GREATER );
 
   sprintf( buf, "%s%s", AREA_DIR, filename.c_str() );
@@ -340,9 +331,9 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
       return;
     }
 
-  fprintf( fpout, "#AREA   %s~\n\n\n\n", tarea->Name );
+  fprintf( fpout, "#AREA   %s~\n\n\n\n", tarea->Name.c_str() );
 
-  fprintf( fpout, "#AUTHOR %s~\n\n", tarea->Author );
+  fprintf( fpout, "#AUTHOR %s~\n\n", tarea->Author.c_str() );
   fprintf( fpout, "#RANGES\n");
   fprintf( fpout, "%d %d %d %d\n", tarea->LevelRanges.Soft.Low,
            tarea->LevelRanges.Soft.High,
@@ -350,8 +341,8 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
            tarea->LevelRanges.Hard.High );
   fprintf( fpout, "$\n\n");
 
-  if ( !IsNullOrEmpty(tarea->ResetMessage ))        /* Rennard */
-    fprintf( fpout, "#RESETMSG %s~\n\n", tarea->ResetMessage );
+  if ( !tarea->ResetMessage.empty())        /* Rennard */
+    fprintf( fpout, "#RESETMSG %s~\n\n", tarea->ResetMessage.c_str() );
 
   if ( tarea->ResetFrequency )
     fprintf( fpout, "#FLAGS\n%d %d\n\n",
@@ -384,10 +375,10 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
       else
         complexmob = false;
       fprintf( fpout, "#%ld\n",  vnum                            );
-      fprintf( fpout, "%s~\n",  pMobIndex->Name          );
-      fprintf( fpout,   "%s~\n",        pMobIndex->ShortDescr          );
-      fprintf( fpout,   "%s~\n",        StripCarriageReturn(pMobIndex->LongDescr) );
-      fprintf( fpout, "%s~\n",  StripCarriageReturn(pMobIndex->Description));
+      fprintf( fpout, "%s~\n",  pMobIndex->Name.c_str()          );
+      fprintf( fpout,   "%s~\n",        pMobIndex->ShortDescr.c_str()          );
+      fprintf( fpout,   "%s~\n",        StripCarriageReturn(pMobIndex->LongDescr).c_str() );
+      fprintf( fpout, "%s~\n",  StripCarriageReturn(pMobIndex->Description).c_str());
       fprintf( fpout, "%d %d %d %c\n",pMobIndex->Flags,
                pMobIndex->AffectedBy,
                pMobIndex->Alignment,
@@ -449,7 +440,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
             {
               fprintf( fpout, "> %s %s~\n%s~\n",
                        MobProgTypeToName( mprog->type ),
-                       mprog->arglist, StripCarriageReturn(mprog->comlist) );
+                       mprog->arglist, StripCarriageReturn(mprog->comlist).c_str() );
             }
           
           fprintf( fpout, "|\n" );
@@ -470,10 +461,11 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
         RemoveBit( pObjIndex->Flags, ITEM_PROTOTYPE );
 
       fprintf( fpout, "#%ld\n",  vnum                            );
-      fprintf( fpout, "%s~\n",  pObjIndex->Name                 );
-      fprintf( fpout, "%s~\n",  pObjIndex->ShortDescr          );
-      fprintf( fpout, "%s~\n",  pObjIndex->Description          );
-      fprintf( fpout, "%s~\n",  pObjIndex->ActionDescription          );
+      fprintf( fpout, "%s~\n",  pObjIndex->Name.c_str()                 );
+      fprintf( fpout, "%s~\n",  pObjIndex->ShortDescr.c_str()          );
+      fprintf( fpout, "%s~\n",  pObjIndex->Description.c_str()          );
+      fprintf( fpout, "%s~\n",  pObjIndex->ActionDescription.c_str()          );
+
       if ( pObjIndex->Layers )
         fprintf( fpout, "%d %d %d %d\n",        pObjIndex->ItemType,
                  pObjIndex->Flags,
@@ -540,7 +532,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
 
       for ( const ExtraDescription *ed : pObjIndex->ExtraDescriptions() )
         fprintf( fpout, "E\n%s~\n%s~\n",
-                 ed->Keyword, StripCarriageReturn( ed->Description )       );
+                 ed->Keyword.c_str(), StripCarriageReturn( ed->Description ).c_str() );
 
       for(const Affect *paf : pObjIndex->Affects())
         fprintf( fpout, "A\n%d %d\n", paf->Location,
@@ -557,7 +549,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
             {
               fprintf( fpout, "> %s %s~\n%s~\n",
                        MobProgTypeToName( mprog->type ),
-                       mprog->arglist, StripCarriageReturn(mprog->comlist) );
+                       mprog->arglist, StripCarriageReturn(mprog->comlist).c_str() );
             }
           
           fprintf( fpout, "|\n" );
@@ -603,8 +595,8 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
             }
         }
       fprintf( fpout, "#%ld\n",  vnum                            );
-      fprintf( fpout, "%s~\n",  room->Name                      );
-      fprintf( fpout, "%s~\n",  StripCarriageReturn( room->Description )   );
+      fprintf( fpout, "%s~\n",  room->Name.c_str()                      );
+      fprintf( fpout, "%s~\n",  StripCarriageReturn( room->Description ).c_str()   );
       if ( (room->TeleDelay > 0 && room->TeleVnum > 0) || room->Tunnel > 0 )
         fprintf( fpout, "0 %d %d %d %ld %d\n",   room->Flags,
                  room->Sector,
@@ -619,9 +611,9 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
           if ( IsBitSet(xit->Flags, EX_PORTAL) ) /* don't fold portals */
             continue;
 
-          fprintf( fpout, "D%d\n",              xit->Direction );
-          fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->Description ) );
-          fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->Keyword ) );
+          fprintf( fpout, "D%d\n", xit->Direction );
+          fprintf( fpout, "%s~\n", StripCarriageReturn( xit->Description ).c_str() );
+          fprintf( fpout, "%s~\n", StripCarriageReturn( xit->Keyword ).c_str() );
 
 	  if ( xit->Distance > 1 )
             fprintf( fpout, "%d %ld %ld %d\n",
@@ -639,7 +631,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
       for(const ExtraDescription *ed : room->ExtraDescriptions())
         {
           fprintf( fpout, "E\n%s~\n%s~\n",
-                   ed->Keyword, StripCarriageReturn( ed->Description ));
+                   ed->Keyword.c_str(), StripCarriageReturn( ed->Description ).c_str());
         }
       
       if ( !room->mprog.MudProgs().empty() )
@@ -648,7 +640,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
             {
               fprintf( fpout, "> %s %s~\n%s~\n",
                        MobProgTypeToName( mprog->type ),
-                       mprog->arglist, StripCarriageReturn(mprog->comlist) );
+                       mprog->arglist, StripCarriageReturn(mprog->comlist).c_str() );
             }
           
           fprintf( fpout, "|\n" );
@@ -707,7 +699,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
       fprintf( fpout, "        %2d %2d    ; %s\n",
                pShop->BusinessHours.Open,
                pShop->BusinessHours.Close,
-               pMobIndex->ShortDescr );
+               pMobIndex->ShortDescr.c_str() );
     }
   fprintf( fpout, "0\n\n\n" );
 
@@ -729,7 +721,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
       fprintf( fpout, "        %2d %2d    ; %s\n",
                pRepair->BusinessHours.Open,
                pRepair->BusinessHours.Close,
-               pMobIndex->ShortDescr );
+               pMobIndex->ShortDescr.c_str() );
     }
   fprintf( fpout, "0\n\n\n" );
 
@@ -765,7 +757,7 @@ void WriteAreaList( void )
     }
 
   for ( tarea = FirstArea; tarea; tarea = tarea->Next )
-    fprintf( fpout, "%s\n", tarea->Filename );
+    fprintf( fpout, "%s\n", tarea->Filename.c_str() );
 
   fprintf( fpout, "$\n" );
   fclose( fpout );
@@ -795,12 +787,12 @@ void AddResetNested( Area *tarea, Object *root )
 /*
  * Parse a reset command string into a reset_data structure
  */
-Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
+Reset *ParseReset( const Area *tarea, std::string argument, const Character *ch )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
-  char arg4[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
+  std::string arg4;
   char letter = '*';
   int extra = 0;
   int value = 0;
@@ -812,11 +804,11 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
   argument = OneArgument( argument, arg3 );
   argument = OneArgument( argument, arg4 );
 
-  int val1 = atoi( arg2 );
-  int val2 = atoi( arg3 );
-  int val3 = atoi( arg4 );
+  int val1 = std::stoi( arg2 );
+  int val2 = std::stoi( arg3 );
+  int val3 = std::stoi( arg4 );
   
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo( "Reset commands: mob obj give equip door rand trap hide.\r\n" );
       return NULL;
@@ -824,7 +816,7 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
 
   if ( !StrCmp( arg1, "hide" ) )
     {
-      if ( !IsNullOrEmpty( arg2 ) && !GetProtoObject(val1) )
+      if ( !arg2.empty() && !GetProtoObject(val1) )
         {
           ch->Echo( "Reset: HIDE: no such object\r\n" );
           return NULL;
@@ -839,7 +831,7 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
       val3 = 0;
       letter = 'H';
     }
-  else if ( IsNullOrEmpty( arg2 ) )
+  else if ( arg2.empty() )
     {
       ch->Echo( "Reset: not enough arguments.\r\n" );
       return NULL;
@@ -847,7 +839,7 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
   else if ( val1 < MIN_VNUM || val1 > MAX_VNUM )
     {
       ch->Echo( "Reset: value out of range. Must be between %ld and %s.\r\n",
-                MIN_VNUM, PunctuateNumber( MAX_VNUM, NULL ) );
+                MIN_VNUM, PunctuateNumber( MAX_VNUM ).c_str() );
       return NULL;
     }
   else if ( !StrCmp( arg1, "mob" ) )
@@ -953,7 +945,7 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
       
       extra = umax(val3, 0);
       argument = OneArgument(argument, arg4);
-      val3 = (IsNumber(argument) ? atoi(arg4) : 0);
+      val3 = (IsNumber(argument) ? std::stoi(arg4) : 0);
 
       if ( val3 < 0 )
         {
@@ -970,7 +962,7 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
           return NULL;
         }
       
-      if ( val2 < 0 || val2 > 9 )
+      if ( val2 < DIR_NORTH || val2 > DIR_SOUTHWEST )
         {
           ch->Echo( "Reset: DOOR: invalid exit\r\n" );
           return NULL;
@@ -1002,7 +994,7 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
           return NULL;
         }
 
-      if ( val2 < 0 || val2 > 9 )
+      if ( val2 < DIR_NORTH || val2 > DIR_SOUTHWEST )
         {
           ch->Echo( "Reset: RAND: invalid max exit\r\n" );
           return NULL;
@@ -1026,7 +1018,7 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
           return NULL;
         }
 
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg4 );
           value = GetTrapFlag( arg4 );
@@ -1133,4 +1125,3 @@ void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::strin
   StartEditing( ch, mprg->comlist );
   SetEditorDescription( ch, "ROOMPROG script" );
 }
-

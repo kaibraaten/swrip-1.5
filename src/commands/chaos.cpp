@@ -2,24 +2,25 @@
 #include "arena.hpp"
 #include "character.hpp"
 
-void do_chaos(Character *ch, char *argument)
+void do_chaos(Character *ch, std::string argument)
 {
-  char lolimit[MAX_INPUT_LENGTH];
-  char hilimit[MAX_INPUT_LENGTH], start_delay[MAX_INPUT_LENGTH];
-  char length[MAX_INPUT_LENGTH];
-  char purse[MAX_INPUT_LENGTH];
+  std::string lolimit;
+  std::string hilimit;
+  std::string start_delay;
+  std::string length;
+  std::string purse;
   /*Usage: chaos lo hi start_delay cost/lev length*/
 
   argument = OneArgument(argument, lolimit);
-  arena.MinLevel = atoi(lolimit);
+  arena.MinLevel = std::stoi(lolimit);
   argument = OneArgument(argument, hilimit);
-  arena.MaxLevel = atoi(hilimit);
+  arena.MaxLevel = std::stoi(hilimit);
   argument = OneArgument(argument, start_delay);
-  arena.StartTime = atoi(start_delay);
+  arena.StartTime = std::stoi(start_delay);
   argument = OneArgument(argument, length);
-  arena.GameLength = atoi(length);
+  arena.GameLength = std::stoi(length);
   OneArgument(argument, purse);
-  arena.ArenaPot = atoi(purse);
+  arena.ArenaPot = std::stoi(purse);
 
   ch->Echo("LowLim %d HiLim %d Delay %d Length %d\r\n", arena.MinLevel,
            arena.MaxLevel, arena.StartTime, arena.GameLength);
@@ -30,7 +31,7 @@ void do_chaos(Character *ch, char *argument)
       return;
     }
 
-  if(!*lolimit || !*hilimit || !*start_delay || !*length)
+  if( lolimit.empty() || hilimit.empty() || start_delay.empty() || length.empty() )
     {
       ch->Echo("Usage: chaos lo hi start_delay length [purse]");
       return;

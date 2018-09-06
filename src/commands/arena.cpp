@@ -3,7 +3,7 @@
 #include "arena.hpp"
 #include "room.hpp"
 
-void do_arena(Character *ch, char *argument)
+void do_arena(Character *ch, std::string argument)
 {
   char buf[MAX_INPUT_LENGTH];
 
@@ -45,7 +45,7 @@ void do_arena(Character *ch, char *argument)
       Act(AT_WHITE,"$n is dropped from the sky.", ch, NULL, NULL, TO_ROOM);
       ch->Echo("You have been taken to the killing fields\r\n");
       do_look(ch, "auto");
-      sprintf(buf, "%s has joined the blood bath.", ch->Name);
+      sprintf(buf, "%s has joined the blood bath.", ch->Name.c_str());
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
       ch->Echo( "%s", buf );
       ch->Hit = ch->MaxHit;

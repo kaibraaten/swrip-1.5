@@ -7,7 +7,7 @@
 
 struct UserData
 {
-  char *ItemName = nullptr;
+  std::string ItemName;
   int WearLocation = 0;
   long Cost = 0;
 };
@@ -22,7 +22,7 @@ static CraftRecipe *MakeCraftRecipe( void );
 static void FreeUserData( struct UserData *ud );
 static bool CanUseWearLocation( int wearLocation );
 
-void do_makejewelry( Character *ch, char *argument )
+void do_makejewelry( Character *ch, std::string argument )
 {
   UserData *data = new UserData();
   CraftRecipe *recipe = MakeCraftRecipe();
@@ -59,16 +59,14 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 {
   struct UserData *ud = (struct UserData*) userData;
   Character *ch = GetEngineer( args->CraftingSession );
-  char originalArgs[MAX_INPUT_LENGTH];
-  char *argument = originalArgs;
-  char wearLoc[MAX_STRING_LENGTH];
-  char name[MAX_STRING_LENGTH];
+  std::string argument = args->CommandArguments;
+  std::string wearLoc;
+  std::string name;
 
-  strcpy( argument, args->CommandArguments );
   argument = OneArgument( argument, wearLoc );
-  strcpy( name, argument );
+  name = argument;
 
-  if ( IsNullOrEmpty( name ) )
+  if ( name.empty() )
     {
       ch->Echo("&RUsage: Makejewelry <wearloc> <name>\r\n&w" );
       args->AbortSession = true;
@@ -79,7 +77,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if( ud->WearLocation == -1 )
     {
-      ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc );
+      ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc.c_str() );
       args->AbortSession = true;
       return;
     }
@@ -95,7 +93,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = CopyString( name );
+  ud->ItemName = name;
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
@@ -128,17 +126,14 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( obj->WearFlags, ITEM_TAKE );
   SetBit( obj->WearFlags, ud->WearLocation );
 
-  FreeMemory( obj->Name );
-  strcpy( buf, ud->ItemName );
-  obj->Name = CopyString( buf );
+  strcpy( buf, ud->ItemName.c_str() );
+  obj->Name = buf;
 
-  strcpy( buf, ud->ItemName );
-  FreeMemory( obj->ShortDescr );
-  obj->ShortDescr = CopyString( buf );
+  strcpy( buf, ud->ItemName.c_str() );
+  obj->ShortDescr = buf;
 
-  FreeMemory( obj->Description );
   strcat( buf, " was dropped here." );
-  obj->Description = CopyString( Capitalize( buf ) );
+  obj->Description = Capitalize( buf );
 
   obj->Value[OVAL_ARMOR_CONDITION] = obj->Value[OVAL_ARMOR_AC];
 
@@ -159,11 +154,6 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 
 static void FreeUserData( struct UserData *ud )
 {
-  if( ud->ItemName )
-    {
-      FreeMemory( ud->ItemName );
-    }
-
   delete ud;
 }
 

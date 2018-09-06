@@ -6,12 +6,12 @@
 static int rgrub_int_comp(const void *i, const void *j);
 static void rgrub_help(Character *ch);
 
-void do_rgrub (Character *ch, char *argument)
+void do_rgrub( Character *ch, std::string argument )
 {
-  char arg1[MAX_STRING_LENGTH];
-  char arg2[MAX_STRING_LENGTH];
-  char arg3[MAX_STRING_LENGTH];
-  char arg4[MAX_STRING_LENGTH];
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
+  std::string arg4;
 
   argument = OneArgument (argument, arg1);
   argument = OneArgument (argument, arg2);
@@ -21,20 +21,22 @@ void do_rgrub (Character *ch, char *argument)
   if (!StrCmp(arg1, "st"))
     {
 #define RGRUB_ST_MAX_SIZE 5000
-      Room *pRoom;
-      int match, lo, hi, hit_cou, cou, vnum[RGRUB_ST_MAX_SIZE];
+      Room *pRoom = nullptr;
+      int match = 0, lo = 0, hi = 0, hit_cou = 0, cou = 0, vnum[RGRUB_ST_MAX_SIZE];
 
-      if (!*arg2)                                   /* empty arg gets help scrn */
+      if ( arg2.empty() )
         {
           rgrub_help(ch);
           return;
         }
       else
-	match = atoi (arg2);
-
+        {
+          match = std::stoi(arg2);
+        }
+      
       hit_cou = 0;                                 /* number of vnums found */
-      lo = (*arg3) ? atoi (arg3) : 0;
-      hi = (*arg4) ? atoi (arg4) : MAX_VNUM;
+      lo = !arg3.empty() ? std::stoi(arg3) : 0;
+      hi = !arg4.empty() ? std::stoi(arg4) : MAX_VNUM;
 
       ch->Echo("\r\nRoom Vnums\r\n");
 
@@ -86,4 +88,3 @@ static void rgrub_help (Character *ch)
             "      that are sectortype 6.\r\n");
   ch->Echo("   e.g. rgrub st 2 - list all rooms sectortype 2.\r\n");
 }
-

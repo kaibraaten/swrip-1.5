@@ -29,11 +29,10 @@ Object::Object(ProtoObject *pObjIndex, int level)
   cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
   obj->Serial = obj->Prototype->Serial = cur_obj_serial;
 
-  obj->ArmedBy       = CopyString( "" );
-  obj->Name             = CopyString( pObjIndex->Name     );
-  obj->ShortDescr      = CopyString( pObjIndex->ShortDescr );
-  obj->Description      = CopyString( pObjIndex->Description );
-  obj->ActionDescription      = CopyString( pObjIndex->ActionDescription );
+  obj->Name             = pObjIndex->Name;
+  obj->ShortDescr      = pObjIndex->ShortDescr;
+  obj->Description      = pObjIndex->Description;
+  obj->ActionDescription = pObjIndex->ActionDescription;
   obj->ItemType        = pObjIndex->ItemType;
   obj->Flags      = pObjIndex->Flags;
   obj->WearFlags       = pObjIndex->WearFlags;

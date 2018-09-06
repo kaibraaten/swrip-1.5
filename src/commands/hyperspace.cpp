@@ -9,7 +9,7 @@
 
 static bool LeaveHyperspaceIfDocked(Ship *dockedShip, void *userData);
 
-void do_hyperspace(Character *ch, char *argument )
+void do_hyperspace(Character *ch, std::string argument )
 {
   int the_chance = 0;
   Vector3 tmp;
@@ -53,13 +53,13 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if( IsNullOrEmpty( argument ) && IsShipInHyperspace( ship ) )
+  if( argument.empty() && IsShipInHyperspace( ship ) )
     {
       ch->Echo("&RYou are already travelling lightspeed!\r\n");
       return;
     }
 
-    if ( !IsNullOrEmpty( argument ) && !StrCmp( argument, "off" )
+  if ( !StrCmp( argument, "off" )
        && !IsShipInHyperspace( ship ) )
     {
       ch->Echo("&RHyperdrive not active.\r\n");
@@ -90,7 +90,8 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if (ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->Class > ship->Class )
+  if (ship->WeaponSystems.TractorBeam.Tractoring
+      && ship->WeaponSystems.TractorBeam.Tractoring->Class > ship->Class )
     {
       ch->Echo("&RYou can not enter hyperspace with your tractor beam locked on.\r\n");
       return;
@@ -102,7 +103,7 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if ( argument && !StrCmp( argument, "off" )
+  if ( !StrCmp( argument, "off" )
        && IsShipInHyperspace( ship ) )
     {
       ShipToSpaceobject (ship, ship->CurrentJump);
@@ -134,11 +135,11 @@ void do_hyperspace(Character *ch, char *argument )
 
           EchoToRoom( AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Hyperjump complete.");
           EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
-          sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->Name, ship->Position.x, ship->Position.y, ship->Position.z );
+          sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
+                   ship->Name.c_str(), ship->Position.x, ship->Position.y, ship->Position.z );
           EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
           ship->State = SHIP_READY;
-          FreeMemory( ship->Home );
-          ship->Home = CopyString( ship->Spaceobject->Name );
+          ship->Home = ship->Spaceobject->Name;
 
           if ( StrCmp("Public",ship->Owner) )
             {
@@ -173,7 +174,7 @@ void do_hyperspace(Character *ch, char *argument )
       if( GetShipDistanceToSpaceobject( ship,  spaceobj ) < 100 + ( spaceobj->Gravity * 5 ) )
         {
           ch->Echo("&RYou are too close to %s to make the jump to lightspeed.\r\n",
-                   spaceobj->Name );
+                   spaceobj->Name.c_str() );
           return;
         }
     }
@@ -195,15 +196,20 @@ void do_hyperspace(Character *ch, char *argument )
   if ( GetRandomPercent() > the_chance )
     {
       ch->Echo("&RYou can't figure out which lever to use.\r\n");
+
       if ( ship->Class == FIGHTER_SHIP )
         LearnFromFailure( ch, gsn_starfighters );
+
       if ( ship->Class == MIDSIZE_SHIP )
         LearnFromFailure( ch, gsn_midships );
+
       if ( ship->Class == CAPITAL_SHIP )
         LearnFromFailure( ch, gsn_capitalships );
+
       return;
     }
-  sprintf( buf ,"%s enters hyperspace." , ship->Name );
+
+  sprintf( buf ,"%s enters hyperspace." , ship->Name.c_str() );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 
   ship->LastSystem = ship->Spaceobject;
@@ -212,7 +218,7 @@ void do_hyperspace(Character *ch, char *argument )
 
   ch->Echo("&GYou push forward the hyperspeed lever.\r\n");
   Act( AT_PLAIN, "$n pushes a lever forward on the control panel.", ch,
-       NULL, argument , TO_ROOM );
+       NULL, argument.c_str(), TO_ROOM );
   EchoToShip( AT_YELLOW , ship , "The ship lurches slightly as it makes the jump to lightspeed." );
   EchoToCockpit( AT_YELLOW , ship , "The stars become streaks of light as you enter hyperspace.");
   EchoToDockedShip( AT_YELLOW , ship, "The stars become streaks of light as you enter hyperspace." );
@@ -247,11 +253,10 @@ static bool LeaveHyperspaceIfDocked(Ship *dockedShip, void *userData)
       EchoToShip( AT_YELLOW, dockedShip,
                   "The ship lurches slightly as it comes out of hyperspace.");
       sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
-               dockedShip->Name, dockedShip->Position.x,
+               dockedShip->Name.c_str(), dockedShip->Position.x,
                dockedShip->Position.y, dockedShip->Position.z );
       EchoToNearbyShips( AT_YELLOW, dockedShip, buf, NULL );
-      FreeMemory( dockedShip->Home );
-      dockedShip->Home = CopyString( ship->Home );
+      dockedShip->Home = ship->Home;
 
       if ( StrCmp("Public", dockedShip->Owner) )
         {
@@ -261,5 +266,3 @@ static bool LeaveHyperspaceIfDocked(Ship *dockedShip, void *userData)
 
   return true;
 }
-
-

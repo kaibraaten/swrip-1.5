@@ -4,12 +4,12 @@
 #include "object.hpp"
 #include "systemdata.hpp"
 
-void do_quaff( Character *ch, char *argument )
+void do_quaff( Character *ch, std::string argument )
 {
   Object *obj = NULL;
   ch_ret retcode = rNONE;
 
-  if ( IsNullOrEmpty( argument ) || !StrCmp(argument, "") )
+  if ( argument.empty() )
     {
       ch->Echo("Quaff what?\r\n");
       return;
@@ -42,6 +42,7 @@ void do_quaff( Character *ch, char *argument )
     }
 
   SeparateOneObjectFromGroup( obj );
+
   if ( obj->InObject )
     {
       Act( AT_PLAIN, "You take $p from $P.", ch, obj, obj->InObject, TO_CHAR );
@@ -53,8 +54,10 @@ void do_quaff( Character *ch, char *argument )
    */
   if ( ch->Fighting && GetRandomPercent() > (GetCurrentDexterity(ch) * 2 + 48) )
     {
-      Act( AT_MAGIC, "$n accidentally drops $p and it smashes into a thousand fragments.", ch, obj, NULL, TO_ROOM );
-      Act( AT_MAGIC, "Oops... $p gets knocked from your hands and smashes into pieces!", ch, obj, NULL ,TO_CHAR );
+      Act( AT_MAGIC, "$n accidentally drops $p and it smashes into a thousand fragments.",
+           ch, obj, NULL, TO_ROOM );
+      Act( AT_MAGIC, "Oops... $p gets knocked from your hands and smashes into pieces!",
+           ch, obj, NULL, TO_CHAR );
     }
   else
     {
@@ -68,8 +71,10 @@ void do_quaff( Character *ch, char *argument )
 
       GainCondition( ch, COND_THIRST, 1 );
       retcode = CastSpellWithObject( obj->Value[1], obj->Value[0], ch, ch, NULL );
+
       if ( retcode == rNONE )
         retcode = CastSpellWithObject( obj->Value[2], obj->Value[0], ch, ch, NULL );
+
       if ( retcode == rNONE )
         retcode = CastSpellWithObject( obj->Value[3], obj->Value[0], ch, ch, NULL );
     }
@@ -79,4 +84,3 @@ void do_quaff( Character *ch, char *argument )
 
   ExtractObject( obj );
 }
-

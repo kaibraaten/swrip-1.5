@@ -1,14 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_deny( Character *ch, char *argument )
+void do_deny( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Deny whom?\r\n" );
       return;

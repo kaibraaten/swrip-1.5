@@ -1,20 +1,20 @@
-#include <string.h>
+#include <cstring>
 #include "vector3_aux.hpp"
 #include "mud.hpp"
 #include "ship.hpp"
 #include "character.hpp"
 #include "room.hpp"
 
-void do_override(Character *ch, char *argument)
+void do_override(Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg2;
   char buf[MAX_STRING_LENGTH];
   Ship *ship = nullptr;
   Ship *eShip = nullptr;
 
   argument = OneArgument( argument, arg );
-  strcpy ( arg2, argument);
+  arg2 = argument;
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
@@ -40,7 +40,7 @@ void do_override(Character *ch, char *argument)
       return;
     }
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("&ROverride the controls of what ship?\r\n");
       return;
@@ -89,12 +89,13 @@ void do_override(Character *ch, char *argument)
           return;
         }
     }
+
   if ( !StrCmp( arg2, "closebay" ) )
     {
       eShip->BayOpen=false;
       ch->Echo("&GBays Close. Confirmed.\r\n");
       EchoToCockpit( AT_YELLOW , eShip , "Bays Open");
-      sprintf( buf ,"%s's bay doors close." , eShip->Name );
+      sprintf( buf ,"%s's bay doors close." , eShip->Name.c_str() );
       EchoToNearbyShips( AT_YELLOW, eShip, buf , NULL );
       return;
     }
@@ -103,8 +104,8 @@ void do_override(Character *ch, char *argument)
     {
       eShip->Thrusters.Speed.Current = 0;
       ch->Echo("&GBreaking Thrusters. Confirmed.\r\n");
-      EchoToCockpit( AT_GREY , eShip , "Breaking thrusters fire and the ship stops");
-      sprintf( buf ,"%s decelerates." , eShip->Name );
+      EchoToCockpit( AT_GREY , eShip , "Breaking thrusters fire and the ship stops.");
+      sprintf( buf ,"%s decelerates." , eShip->Name.c_str() );
       EchoToNearbyShips( AT_GREY, eShip, buf , NULL );
       return;
     }
@@ -130,9 +131,10 @@ void do_override(Character *ch, char *argument)
   if ( !StrCmp( arg2, "openbay" ) )
     {
       ch->Echo("&RYou open the bay doors of the remote ship.");
-      Act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
+      Act(AT_PLAIN,"$n flips a switch on the control panel.",
+          ch, NULL, argument.c_str(), TO_ROOM);
       eShip->BayOpen = true;
-      sprintf( buf ,"%s's bay doors open." , eShip->Name );
+      sprintf( buf ,"%s's bay doors open." , eShip->Name.c_str() );
       EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
       return;
     }

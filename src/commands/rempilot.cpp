@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_rempilot(Character *ch, char *argument )
+void do_rempilot( Character *ch, std::string argument )
 {
   int the_chance = 0;
   Ship *ship = NULL;
@@ -21,7 +21,9 @@ void do_rempilot(Character *ch, char *argument )
       ch->Echo("&RYou can't do that here.\r\n" );
       return;
     }
+
   the_chance = GetRandomPercent();
+
   if ( IsNpc(ch) || the_chance >= ch->PCData->Learned[gsn_slicing] )
     {
       if ( !CheckPilot( ch , ship ) )
@@ -31,7 +33,7 @@ void do_rempilot(Character *ch, char *argument )
         }
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("&RRemove which pilot?\r\n" );
       return;
@@ -40,19 +42,17 @@ void do_rempilot(Character *ch, char *argument )
   if ( the_chance < ch->PCData->Learned[gsn_slicing] )
     LearnFromSuccess( ch, gsn_slicing );
 
-  if ( !StrCmp( ship->Pilot , argument ) )
+  if ( !StrCmp( ship->Pilot, argument ) )
     {
-      FreeMemory( ship->Pilot );
-      ship->Pilot = CopyString( "" );
+      ship->Pilot.erase();
       ch->Echo("Pilot Removed.\r\n");
       Ships->Save(ship);
       return;
     }
 
-  if ( !StrCmp( ship->CoPilot , argument ) )
+  if ( !StrCmp( ship->CoPilot, argument ) )
     {
-      FreeMemory( ship->CoPilot );
-      ship->CoPilot = CopyString( "" );
+      ship->CoPilot.erase();
       ch->Echo("Copilot Removed.\r\n");
       Ships->Save(ship);
       return;
@@ -60,4 +60,3 @@ void do_rempilot(Character *ch, char *argument )
 
   ch->Echo("&RThat person isn't listed as one of the ships pilots.\r\n" );
 }
-

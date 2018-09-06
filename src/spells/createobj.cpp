@@ -3,8 +3,6 @@
 #include "skill.hpp"
 #include "object.hpp"
 
-extern char *spell_target_name;
-
 /*
  * Generic object creating spell                                -Thoric
  */
@@ -44,7 +42,7 @@ ch_ret spell_create_obj( int sn, int level, Character *ch, void *vo )
       FailedCasting( skill, ch, NULL, NULL );
       return rNONE;
     }
-  obj->Timer = skill->Dice ? ParseDice( ch, level, skill->Dice ) : 0;
+  obj->Timer = !skill->Dice.empty() ? ParseDice( ch, level, skill->Dice ) : 0;
   SuccessfulCasting( skill, ch, NULL, obj );
   if ( CAN_WEAR(obj, ITEM_TAKE) )
     ObjectToCharacter( obj, ch );

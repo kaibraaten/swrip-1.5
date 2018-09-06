@@ -33,17 +33,15 @@
 #include "pcdata.hpp"
 #include "alias.hpp"
 
-Alias *FindAlias( const Character *ch, const std::string &original_argument )
+Alias *FindAlias( const Character *ch, const std::string &argument )
 {
-  char alias_name[MAX_INPUT_LENGTH];
-  char argument[MAX_INPUT_LENGTH];
+  std::string alias_name;
 
   if (!ch || !ch->PCData)
     {
       return nullptr;
     }
 
-  strcpy(argument, original_argument.c_str());
   OneArgument(argument, alias_name);
 
   Alias *alias = Find(ch->PCData->Aliases(),
@@ -58,24 +56,14 @@ Alias *FindAlias( const Character *ch, const std::string &original_argument )
 Alias *AllocateAlias( const std::string &name, const std::string &command )
 {
   Alias *alias = new Alias();
-  alias->Name = CopyString( name );
-  alias->Command = CopyString( command );
+  alias->Name = name;
+  alias->Command = command;
 
   return alias;
 }
 
 void FreeAlias( Alias *alias )
 {
-  if( alias->Name )
-    {
-      FreeMemory( alias->Name );
-    }
-
-  if( alias->Command )
-    {
-      FreeMemory( alias->Command );
-    }
-
   delete alias;
 }
 
@@ -98,7 +86,7 @@ void FreeAliases( Character *ch )
 
 bool CheckAlias( Character *ch, const std::string &command, const std::string &argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  char arg[MAX_INPUT_LENGTH] = {'\0'};
   bool nullarg = true;
 
   if ( !argument.empty() )
@@ -113,12 +101,12 @@ bool CheckAlias( Character *ch, const std::string &command, const std::string &a
       return false;
     }
 
-  if ( IsNullOrEmpty( alias->Command ) )
+  if ( alias->Command.empty() )
     {
       return false;
     }
 
-  sprintf(arg, "%s", alias->Command);
+  sprintf(arg, "%s", alias->Command.c_str());
 
   if (ch->CmdRecurse == -1 || ++ch->CmdRecurse > 50)
     {

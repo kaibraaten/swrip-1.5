@@ -6,11 +6,11 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_trajectory_actual( Character *ch, char *argument )
+void do_trajectory_actual( Character *ch, std::string argument )
 {
-  char buf[MAX_STRING_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
+  std::string arg2;
+  std::string arg3;
   int the_chance = 0;
   Vector3 argvec;
   Ship *ship = NULL;
@@ -29,19 +29,19 @@ void do_trajectory_actual( Character *ch, char *argument )
 
   if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
-      ch->Echo("&RYour not in the pilots seat.\r\n");
+      ch->Echo("&RYou're not in the pilot's seat.\r\n");
       return;
     }
 
   if ( IsShipAutoflying(ship))
     {
-      ch->Echo("&RYou'll have to turn off the ships autopilot first.\r\n");
+      ch->Echo("&RYou'll have to turn off the ship's autopilot first.\r\n");
       return;
     }
 
   if (IsShipDisabled( ship ))
     {
-      ch->Echo("&RThe ships drive is disabled. Unable to manuever.\r\n");
+      ch->Echo("&RThe ship's drive is disabled. Unable to maneuver.\r\n");
       return;
     }
 
@@ -65,13 +65,13 @@ void do_trajectory_actual( Character *ch, char *argument )
 
   if (ship->State != SHIP_READY)
     {
-      ch->Echo("&RPlease wait until the ship has finished its current manouver.\r\n");
+      ch->Echo("&RPlease wait until the ship has finished its current maneuver.\r\n");
       return;
     }
 
   if ( ship->Thrusters.Energy.Current < ( ship->Thrusters.Speed.Current / 10 ) )
     {
-      ch->Echo("&RTheres not enough fuel!\r\n");
+      ch->Echo("&RThere's not enough fuel!\r\n");
       return;
     }
 
@@ -108,14 +108,14 @@ void do_trajectory_actual( Character *ch, char *argument )
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
 
-  SetVector( &argvec, atof( arg2 ), atof( arg3 ), atof( argument ) );
+  SetVector( &argvec, std::stod( arg2 ), std::stod( arg3 ), std::stod( argument ) );
 
   if ( argvec.x == ship->Position.x
        && argvec.y == ship->Position.y
        && argvec.z == ship->Position.z )
     {
-      ch ->Echo("The ship is already at %.0f %.0f %.0f!",
-                 argvec.x, argvec.y, argvec.z );
+      ch->Echo("The ship is already at %.0f %.0f %.0f!",
+               argvec.x, argvec.y, argvec.z );
       return;
     }
 
@@ -125,13 +125,14 @@ void do_trajectory_actual( Character *ch, char *argument )
   SetShipCourse( ship, &argvec );
   ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
 
-  ch ->Echo("&GNew course set, approaching %.0f %.0f %.0f.\r\n",
-	argvec.x, argvec.y, argvec.z );
-  Act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
+  ch->Echo("&GNew course set, approaching %.0f %.0f %.0f.\r\n",
+           argvec.x, argvec.y, argvec.z );
+  Act( AT_PLAIN, "$n manipulates the ships controls.",
+       ch, NULL, argument.c_str(), TO_ROOM );
 
   EchoToCockpit( AT_YELLOW ,ship, "The ship begins to turn.\r\n" );
-  sprintf( buf, "%s turns altering its present course." , ship->Name );
-  EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
+  sprintf( buf, "%s turns altering its present course.", ship->Name.c_str() );
+  EchoToNearbyShips( AT_ORANGE, ship, buf, NULL );
 
   if ( ship->Class == FIGHTER_SHIP
        || ( ship->Class == MIDSIZE_SHIP && ship->Thrusters.Maneuver > 50 ) )
@@ -144,9 +145,10 @@ void do_trajectory_actual( Character *ch, char *argument )
 
   if ( ship->Class == FIGHTER_SHIP )
     LearnFromSuccess( ch, gsn_starfighters );
+
   if ( ship->Class == MIDSIZE_SHIP )
     LearnFromSuccess( ch, gsn_midships );
+
   if ( ship->Class == CAPITAL_SHIP )
     LearnFromSuccess( ch, gsn_capitalships );
 }
-

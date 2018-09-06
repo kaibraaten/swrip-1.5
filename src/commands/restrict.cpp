@@ -3,19 +3,19 @@
 #include "command.hpp"
 #include "log.hpp"
 
-void do_restrict( Character *ch, char *argument )
+void do_restrict( Character *ch, std::string argument )
 {
   const List *commands = GetEntities(CommandRepository);
   ListIterator *iterator = NULL;
-  char arg[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg2;
   short level = 0;
   Command *cmd = NULL;
   bool found = false;
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Restrict which command?\r\n");
       return;
@@ -23,13 +23,13 @@ void do_restrict( Character *ch, char *argument )
 
   argument = OneArgument ( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg2 ) )
+  if ( arg2.empty() )
     {
       level = GetTrustLevel( ch );
     }
   else
     {
-      level = atoi( arg2 );
+      level = std::stoi( arg2 );
     }
 
   level = umax( umin( GetTrustLevel( ch ), level ), 0 );
@@ -56,18 +56,19 @@ void do_restrict( Character *ch, char *argument )
       if ( !StringPrefix( arg2, "show" ) )
         {
           char buf[MAX_STRING_LENGTH];
-          sprintf(buf, "%s show", cmd->Name);
+          sprintf(buf, "%s show", cmd->Name.c_str());
           do_cedit(ch, buf);
           return;
         }
 
       cmd->Level = level;
-      ch->Echo("You restrict %s to level %d\r\n", cmd->Name, level );
-      Log->Info("%s restricting %s to level %d", ch->Name, cmd->Name, level );
+      ch->Echo("You restrict %s to level %d\r\n",
+               cmd->Name.c_str(), level );
+      Log->Info("%s restricting %s to level %d",
+                ch->Name.c_str(), cmd->Name.c_str(), level );
     }
   else
     {
       ch->Echo("You may not restrict that command.\r\n");
     }
 }
-

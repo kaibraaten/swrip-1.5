@@ -53,9 +53,9 @@ static Reset *FindReset( const Area *pArea, const Room *pRoom, int num );
 static void ListResets( const Character *ch, const Area *pArea,
 			const Room *pRoom, int start, int end );
 static Reset *FindObjectReset(const Character *ch, const Area *pArea,
-                              const Room *pRoom, const char *name);
+                              const Room *pRoom, const std::string &name);
 static Reset *FindMobileReset(const Character *ch, const Area *pArea,
-                              const Room *pRoom, const char *name);
+                              const Room *pRoom, const std::string &name);
 static int GenerateItemLevel( const Area *pArea, const ProtoObject *pObjIndex );
 
 static Reset *FindReset( const Area *pArea, const Room *pRoom, int numb )
@@ -329,11 +329,11 @@ static void DeleteReset( Area *pArea, Reset *pReset )
 #undef DEL_RESET
 
 static Reset *FindObjectReset(const Character *ch, const Area *pArea,
-			      const Room *pRoom, const char *name)
+			      const Room *pRoom, const std::string &name)
 {
   Reset *reset = NULL;
 
-  if ( !*name )
+  if ( name.empty() )
     {
       for ( reset = pArea->LastReset; reset; reset = reset->Previous )
         {
@@ -366,7 +366,7 @@ static Reset *FindObjectReset(const Character *ch, const Area *pArea,
     }
   else
     {
-      char arg[MAX_INPUT_LENGTH];
+      std::string arg;
       int cnt = 0, num = NumberArgument(name, arg);
       ProtoObject *pObjTo = NULL;
 
@@ -407,11 +407,11 @@ static Reset *FindObjectReset(const Character *ch, const Area *pArea,
 }
 
 static Reset *FindMobileReset(const Character *ch, const Area *pArea,
-			      const Room *pRoom, const char *name)
+			      const Room *pRoom, const std::string &name)
 {
   Reset *reset = NULL;
 
-  if ( !*name )
+  if ( name.empty() )
     {
       for ( reset = pArea->LastReset; reset; reset = reset->Previous )
         {
@@ -440,7 +440,7 @@ static Reset *FindMobileReset(const Character *ch, const Area *pArea,
     }
   else
     {
-      char arg[MAX_INPUT_LENGTH];
+      std::string arg;
       int cnt = 0, num = NumberArgument(name, arg);
       ProtoMobile *pMob = NULL;
 
@@ -477,9 +477,9 @@ static Reset *FindMobileReset(const Character *ch, const Area *pArea,
   return reset;
 }
 
-void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
+void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   Reset *pReset = NULL;
   Reset *reset = NULL;
   ProtoMobile *pMob = NULL;
@@ -487,11 +487,11 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
   ProtoObject *pObj = NULL;
   int num = 0;
   vnum_t vnum = INVALID_VNUM;
-  char *origarg = argument;
+  std::string origarg = argument;
 
   argument = OneArgument(argument, arg);
 
-  if ( !*arg || !StrCmp(arg, "?") )
+  if ( arg.empty() || !StrCmp(arg, "?") )
     {
       const char *nm = (ch->SubState == SUB_REPEATCMD ? "" : (aRoom ? "rreset "
                                                         : "reset "));
@@ -550,10 +550,10 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       int start = 0, end = 0;
 
       argument = OneArgument(argument, arg);
-      start = IsNumber(arg) ? atoi(arg) : -1;
+      start = IsNumber(arg) ? std::stoi(arg) : -1;
 
       argument = OneArgument(argument, arg);
-      end = IsNumber(arg) ? atoi(arg) : -1;
+      end = IsNumber(arg) ? std::stoi(arg) : -1;
 
       ListResets(ch, pArea, aRoom, start, end);
       return;
@@ -563,7 +563,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     {
       argument = OneArgument(argument, arg);
 
-      if ( !*arg || !IsNumber(arg) )
+      if ( arg.empty() || !IsNumber(arg) )
         {
           ch->Echo( "Usage: reset edit <number> <command>\r\n" );
           return;
@@ -641,13 +641,13 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     {
       argument = OneArgument(argument, arg);
 
-      if ( !*arg || !IsNumber(arg) )
+      if ( arg.empty() || !IsNumber(arg) )
         {
           ch->Echo( "Usage: reset insert <number> <command>\r\n" );
           return;
         }
 
-      num = atoi(arg);
+      num = std::stoi(arg);
 
       if ( (reset = FindReset(pArea, aRoom, num)) == NULL )
         {
@@ -671,15 +671,15 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       int start = 0, end = 0;
       bool found = false;
 
-      if ( !*argument )
+      if ( argument.empty() )
         {
           ch->Echo( "Usage: reset delete <start> [end]\r\n" );
           return;
         }
 
       argument = OneArgument(argument, arg);
-      start = IsNumber(arg) ? atoi(arg) : -1;
-      end   = IsNumber(arg) ? atoi(arg) : -1;
+      start = IsNumber(arg) ? std::stoi(arg) : -1;
+      end   = IsNumber(arg) ? std::stoi(arg) : -1;
       num = 0;
 
       for ( pReset = pArea->FirstReset; pReset; pReset = reset )
@@ -731,13 +731,13 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       argument = OneArgument(argument, arg);
 
-      if ( IsNullOrEmpty( arg ) || !IsNumber(arg) )
+      if ( arg.empty() || !IsNumber(arg) )
         {
           ch->Echo( "Delete which reset?\r\n" );
           return;
         }
 
-      iarg = atoi(arg);
+      iarg = std::stoi(arg);
 
       for ( pReset = pArea->FirstReset; pReset; pReset = pReset->Next )
         {
@@ -762,13 +762,13 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     {
       argument = OneArgument(argument, arg);
 
-      if ( IsNullOrEmpty( arg ) || !IsNumber(arg) )
+      if ( arg.empty() || !IsNumber(arg) )
         {
           ch->Echo( "Reset which mobile vnum?\r\n" );
           return;
         }
 
-      if ( !(pMob = GetProtoMobile(atoi(arg))) )
+      if ( !(pMob = GetProtoMobile(std::stoi(arg))) )
         {
           ch->Echo( "Mobile does not exist.\r\n" );
           return;
@@ -776,7 +776,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       argument = OneArgument(argument, arg);
 
-      if ( IsNullOrEmpty( arg ))
+      if ( arg.empty() )
 	{
 	  num = 1;
 	}
@@ -787,7 +787,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
         }
       else
 	{
-	  num = atoi(arg);
+	  num = std::stoi(arg);
 	}
 
       if ( !(pRoom = FindRoom(ch, argument, aRoom)) )
@@ -805,13 +805,13 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     {
       argument = OneArgument(argument, arg);
 
-      if ( IsNullOrEmpty( arg ) || !IsNumber(arg) )
+      if ( arg.empty() || !IsNumber(arg) )
         {
           ch->Echo( "Reset which object vnum?\r\n" );
           return;
         }
 
-      if ( !(pObj = GetProtoObject(atoi(arg))) )
+      if ( !(pObj = GetProtoObject(std::stoi(arg))) )
         {
           ch->Echo( "Object does not exist.\r\n" );
           return;
@@ -819,8 +819,8 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       argument = OneArgument(argument, arg);
 
-      if ( IsNullOrEmpty( arg ) )
-        strcpy(arg, "room");
+      if ( arg.empty() )
+        arg = "room";
 
       if ( !StringPrefix( arg, "put" ) )
         {
@@ -841,7 +841,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
           argument = OneArgument(argument, arg);
 
-          if ( (vnum = atoi(arg)) < 1 )
+          if ( (vnum = std::stoi(arg)) < 1 )
 	    {
 	      vnum = 1;
 	    }
@@ -869,7 +869,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
           argument = OneArgument(argument, arg);
 
-          if ( (vnum = atoi(arg)) < 1 )
+          if ( (vnum = std::stoi(arg)) < 1 )
 	    {
 	      vnum = 1;
 	    }
@@ -918,7 +918,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
           argument = OneArgument(argument, arg);
 
-          if ( (vnum = atoi(arg)) < 1 )
+          if ( (vnum = std::stoi(arg)) < 1 )
 	    {
 	      vnum = 1;
 	    }
@@ -929,7 +929,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      if ( IsNullOrEmpty( arg ) || !(num = (int)StrCmp(arg, "room"))
+      if ( arg.empty() || !(num = (int)StrCmp(arg, "room"))
 	   || IsNumber(arg) )
         {
           if ( !(bool)num )
@@ -948,7 +948,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
               return;
             }
 
-          if ( (vnum = atoi(arg)) < 1 )
+          if ( (vnum = std::stoi(arg)) < 1 )
 	    {
 	      vnum = 1;
 	    }
@@ -998,15 +998,15 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
   if ( !StrCmp(arg, "trap") )
     {
-      char oname[MAX_INPUT_LENGTH];
+      std::string oname;
       int chrg, value, extra = 0;
       bool isobj;
 
       argument = OneArgument(argument, oname);
       argument = OneArgument(argument, arg);
-      num = IsNumber(arg) ? atoi(arg) : -1;
+      num = IsNumber(arg) ? std::stoi(arg) : -1;
       argument = OneArgument(argument, arg);
-      chrg = IsNumber(arg) ? atoi(arg) : -1;
+      chrg = IsNumber(arg) ? std::stoi(arg) : -1;
       isobj = IsName(argument, "obj");
 
       if ( isobj == IsName(argument, "room") )
@@ -1024,7 +1024,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
         {
           if ( IsNumber(oname) && !isobj )
             {
-              vnum = atoi(oname);
+              vnum = std::stoi(oname);
 
               if ( !GetRoom(vnum) )
                 {
@@ -1057,7 +1057,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      while ( *argument )
+      while ( !argument.empty() )
         {
           argument = OneArgument(argument, arg);
           value = GetTrapFlag(arg);
@@ -1086,12 +1086,12 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     {
       int (*flfunc)(const std::string &type);
       int flags = 0;
-      char option[MAX_INPUT_LENGTH];
-      char *parg;
+      std::string option;
+      const char *parg = nullptr;
 
       argument = OneArgument(argument, option);
 
-      if ( !*option )
+      if ( option.empty() )
         {
           ch->Echo( "You must specify SET, REMOVE, or TOGGLE.\r\n" );
           return;
@@ -1114,10 +1114,10 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
         }
 
       argument = OneArgument(argument, option);
-      parg = argument;
+      parg = argument.c_str();
       argument = OneArgument(argument, arg);
 
-      if ( !*option )
+      if ( option.empty() )
         {
           ch->Echo( "Must specify OBJECT, MOBILE, ROOM, or DOOR.\r\n" );
           return;
@@ -1144,7 +1144,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
           argument = OneArgument(argument, arg);
 
-          if ( !*arg )
+          if ( arg.empty() )
             {
               ch->Echo( "Must specify direction.\r\n" );
               return;
@@ -1207,11 +1207,10 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      while ( *argument )
+      while ( !argument.empty() )
         {
-          int value;
           argument = OneArgument(argument, arg);
-          value = flfunc(arg);
+          int value = flfunc(arg);
 
           if ( value < 0 || value > 31 )
             {
@@ -2011,9 +2010,9 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
   const ProtoObject *lastobj = NULL;
   const Reset *lo_reset = NULL;
   int num = 0;
-  const char *rname = NULL;
-  const char *mname = NULL;
-  const char *oname = NULL;
+  std::string rname;
+  std::string mname;
+  std::string oname;
 
   if ( !ch || !pArea )
     {
@@ -2053,7 +2052,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
           else
             rname = room->Name;
 
-          sprintf( pbuf, "%s (%d) -> %s (%d) [%d]", mname, pReset->Arg1, rname,
+          sprintf( pbuf, "%s (%d) -> %s (%d) [%d]", mname.c_str(), pReset->Arg1, rname.c_str(),
                    pReset->Arg3, pReset->Arg2 );
 
           if ( !room )
@@ -2077,7 +2076,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
           else
             oname = obj->Name;
 
-          sprintf( pbuf, "%s (%d) -> %s (%s) [%d]", oname, pReset->Arg1, mname,
+          sprintf( pbuf, "%s (%d) -> %s (%s) [%d]", oname.c_str(), pReset->Arg1, mname.c_str(),
                    (pReset->Command == 'G' ? "carry" : WearLocations[pReset->Arg3]),
                    pReset->Arg2 );
 
@@ -2101,8 +2100,8 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
           else
             rname = room->Name;
 
-          sprintf( pbuf, "(object) %s (%d) -> %s (%d) [%d]\r\n", oname,
-                   pReset->Arg1, rname, pReset->Arg3, pReset->Arg2 );
+          sprintf( pbuf, "(object) %s (%d) -> %s (%d) [%d]\r\n", oname.c_str(),
+                   pReset->Arg1, rname.c_str(), pReset->Arg3, pReset->Arg2 );
 
           if ( !room )
             obj = NULL;
@@ -2159,8 +2158,8 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                 rname = obj2->Name;
             }
 
-          sprintf( pbuf, "(Put) %s (%d) -> %s (%ld) [%d] {nest %d}\r\n", oname,
-                   pReset->Arg1, rname, (obj2 ? obj2->Vnum : pReset->Arg3),
+          sprintf( pbuf, "(Put) %s (%d) -> %s (%ld) [%d] {nest %d}\r\n", oname.c_str(),
+                   pReset->Arg1, rname.c_str(), (obj2 ? obj2->Vnum : pReset->Arg3),
                    pReset->Arg2, pReset->MiscData );
           break;
 
@@ -2180,7 +2179,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
             rname = "Object: *NULL obj*";
           else
             rname = oname;
-          sprintf(pbuf, "Hide %s (%ld)\r\n", rname,
+          sprintf(pbuf, "Hide %s (%ld)\r\n", rname.c_str(),
                   (pReset->Arg1 > 0 ? pReset->Arg1 : obj ? obj->Vnum : 0));
           break;
 
@@ -2224,7 +2223,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                   sprintf(pbuf, "Exit %s%s (%d), Room %s (%d)",
 			  GetDirectionName(door),
                           (room && GetExit(room, door) ? "" : " (NO EXIT!)"), door,
-                          rname, pReset->Arg1);
+                          rname.c_str(), pReset->Arg1);
                 }
 
                 flagarray = ExitFlags.data();
@@ -2236,7 +2235,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                 else
                   rname = room->Name;
 
-                sprintf(pbuf, "Room %s (%d)", rname, pReset->Arg1);
+                sprintf(pbuf, "Room %s (%d)", rname.c_str(), pReset->Arg1);
                 flagarray = RoomFlags.data();
                 break;
 
@@ -2251,7 +2250,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                 else
                   rname = oname;
 
-                sprintf(pbuf, "Object %s (%ld)", rname,
+                sprintf(pbuf, "Object %s (%ld)", rname.c_str(),
                         (pReset->Arg1 > 0 ? pReset->Arg1 : obj ? obj->Vnum : 0));
                 flagarray = ObjectFlags.data();
                 break;
@@ -2270,7 +2269,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                   rname = "Mobile: *NULL mob*";
                 else
                   rname = mname;
-                sprintf(pbuf, "Mobile %s (%ld)", rname,
+                sprintf(pbuf, "Mobile %s (%ld)", rname.c_str(),
                         (pReset->Arg1 > 0 ? pReset->Arg1 : mob ? mob->Vnum : 0));
                 flagarray = AffectFlags.data();
                 break;
@@ -2324,7 +2323,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
             sprintf(pbuf, "%s [%d] the %s%s [%d] door %s (%d)\r\n", ef_name,
                     pReset->Arg3, GetDirectionName((DirectionType)pReset->Arg2),
                     (room && GetExit(room, (DirectionType)pReset->Arg2) ? "" : " (NO EXIT!)"),
-                    pReset->Arg2, rname, pReset->Arg1);
+                    pReset->Arg2, rname.c_str(), pReset->Arg1);
           }
           break;
 
@@ -2335,7 +2334,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
             rname = room->Name;
 
           sprintf(pbuf, "Randomize exits 0 to %d -> %s (%d)\r\n", pReset->Arg2,
-                  rname, pReset->Arg1);
+                  rname.c_str(), pReset->Arg1);
           break;
         }
 
@@ -2699,12 +2698,12 @@ Reset *PlaceReset( Area *tarea, char letter, int extra, int arg1, int arg2, int 
   return pReset;
 }
 
-char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
+std::string SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
 {
-  static char buf[MAX_STRING_LENGTH];
-  char mobname[1024];
-  char roomname[1024];
-  char objname[1024];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
+  char mobname[1024] = {'\0'};
+  char roomname[1024] = {'\0'};
+  char objname[1024] = {'\0'};
   static Room *room = NULL;
   static ProtoObject *obj = NULL, *obj2 = NULL;
   static ProtoMobile *mob = NULL;
@@ -2740,12 +2739,12 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       room = GetRoom( pReset->Arg3 );
 
       if ( mob )
-        strcpy( mobname, mob->Name );
+        strcpy( mobname, mob->Name.c_str() );
       else
         strcpy( mobname, "Mobile: *BAD VNUM*" );
 
       if ( room )
-        strcpy( roomname, room->Name );
+        strcpy( roomname, room->Name.c_str() );
       else
         strcpy( roomname, "Room: *BAD VNUM*" );
 
@@ -2765,7 +2764,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       if ( (obj = GetProtoObject( pReset->Arg1 )) == NULL )
         strcpy( objname, "Object: *BAD VNUM*" );
       else
-        strcpy( objname, obj->Name );
+        strcpy( objname, obj->Name.c_str() );
 
       sprintf( buf, "%2d) %s (%d) -> %s (%s) [%d]\r\n",
                num,
@@ -2796,7 +2795,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       if ( (obj = GetProtoObject( pReset->Arg1 )) == NULL )
         strcpy( objname, "Object: *BAD VNUM*" );
       else
-        strcpy( objname, obj->Name );
+        strcpy( objname, obj->Name.c_str() );
 
       sprintf( buf, "%2d) %s (%d) -> %s (carry) [%d]\r\n",
                num,
@@ -2810,14 +2809,14 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       if ( (obj = GetProtoObject( pReset->Arg1 )) == NULL )
         strcpy( objname, "Object: *BAD VNUM*" );
       else
-        strcpy( objname, obj->Name );
+        strcpy( objname, obj->Name.c_str() );
 
       room = GetRoom( pReset->Arg3 );
 
       if ( !room )
         strcpy( roomname, "Room: *BAD VNUM*" );
       else
-        strcpy( roomname, room->Name );
+        strcpy( roomname, room->Name.c_str() );
 
       sprintf( buf, "%2d) (object) %s (%d) -> %s (%d) [%d]\r\n",
                num,
@@ -2832,7 +2831,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       if ( (obj2 = GetProtoObject( pReset->Arg1 )) == NULL )
         strcpy( objname, "Object1: *BAD VNUM*" );
       else
-        strcpy( objname, obj2->Name );
+        strcpy( objname, obj2->Name.c_str() );
 
       if ( pReset->Arg3 > 0
            &&  (obj = GetProtoObject( pReset->Arg3 )) == NULL )
@@ -2840,7 +2839,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       else if ( !obj )
 	strcpy( roomname, "Object2: *NULL obj*" );
       else
-	strcpy( roomname, obj->Name );
+	strcpy( roomname, obj->Name.c_str() );
 
       sprintf( buf, "%2d) (Put) %s (%d) -> %s (%ld) [%d]\r\n",
 	       num,
@@ -2862,7 +2861,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
         }
       else
         {
-          strcpy( roomname, room->Name );
+          strcpy( roomname, room->Name.c_str() );
           sprintf( objname, "%s%s",
                    GetDirectionName((DirectionType)pReset->Arg2),
                    GetExit(room, (DirectionType)pReset->Arg2) ? "" : " (NO EXIT!)" );
@@ -2901,7 +2900,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       if ( (room = GetRoom( pReset->Arg1 )) == NULL )
         strcpy( roomname, "Room: *BAD VNUM*" );
       else
-        strcpy( roomname, room->Name );
+        strcpy( roomname, room->Name.c_str() );
 
       sprintf( buf, "%2d) Randomize exits 0 to %d -> %s (%d)\r\n",
 	       num,

@@ -2,14 +2,11 @@
 #include "mud.hpp"
 #include "descriptor.hpp"
 
-void do_switch( Character *ch, char *argument )
+void do_switch( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Switch into whom?\r\n");
       return;

@@ -58,10 +58,10 @@ public:
   ProtoMobile *Prototype = NULL;
   Descriptor *Desc = NULL;
   class PCData *PCData = NULL;
-  char *Name = NULL;
-  char *ShortDescr = NULL;
-  char *LongDescr = NULL;
-  char *Description = NULL;
+  std::string Name;
+  std::string ShortDescr;
+  std::string LongDescr;
+  std::string Description;
   SexType Sex = 0;
   short Race = 0;
   short TopLevel = 0;
@@ -178,13 +178,13 @@ public:
   short BackupWait = 0;       /* reinforcements */
   vnum_t BackupMob = INVALID_VNUM;     /* reinforcements */
   short WasStunned = 0;
-  char *MobClan = NULL;    /* for spec_clan_guard.. set by postguard */
+  std::string MobClan;    /* for spec_clan_guard.. set by postguard */
   Room *BuzzedHome = NULL;
   Room *BuzzedFromRoom = NULL;
   Character *Challenged = NULL;
   Character *BettedOn = NULL;
   int BetAmount = 0;
-  char *Owner = NULL;
+  std::string Owner;
   Room *Home = NULL;
   short CmdRecurse = 0;
   Object *On = NULL;
@@ -406,7 +406,7 @@ bool IsAuthed( const Character *ch );
 
 bool IsWaitingForAuth( const Character *ch );
 
-const char *PERS( const Character *ch, const Character *looker );
+std::string PERS( const Character *ch, const Character *looker );
 
 bool IsClanned( const Character *ch );
 

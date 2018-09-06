@@ -1,14 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_mpgain( Character *ch, char *argument )
+void do_mpgain( Character *ch, std::string argument )
 {
-  char arg1[ MAX_INPUT_LENGTH ];
-  char arg2[ MAX_INPUT_LENGTH ];
-  char arg3[ MAX_INPUT_LENGTH ];
-  Character *victim;
-  long xp;
-  int  ability;
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
+  Character *victim = nullptr;
+  long xp = 0;
+  int  ability = 0;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -18,25 +18,26 @@ void do_mpgain( Character *ch, char *argument )
       ch->Echo("Huh?\r\n");
       return;
     }
+
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo("mpgain whom?\r\n");
       ProgBug( "Mpgain: invalid argument1", ch );
       return;
     }
 
-  if ( IsNullOrEmpty( arg2 ) )
+  if ( arg2.empty() )
     {
       ch->Echo("mpgain in what ability?\r\n");
       ProgBug( "Mpgain: invalid argument2", ch );
       return;
     }
 
-  if ( IsNullOrEmpty( arg3 ) )
+  if ( arg3.empty() )
     {
       ch->Echo("mpgain how much exp?\r\n");
       ProgBug( "Mpgain: invalid argument3", ch );
@@ -50,8 +51,8 @@ void do_mpgain( Character *ch, char *argument )
       return;
     }
 
-  ability = atoi(arg2);
-  xp = atoi(arg3);
+  ability = std::stoi(arg2);
+  xp = std::stoi(arg3);
 
   if( ability < 0 || ability >= MAX_ABILITY )
     {
@@ -67,9 +68,8 @@ void do_mpgain( Character *ch, char *argument )
       return;
     }
 
-  xp =  urange(1, xp, ( GetRequiredXpForLevel( GetAbilityLevel( victim, ability ) + 1 ) - GetRequiredXpForLevel( GetAbilityLevel( victim, ability ) ) ) );
+  xp = urange(1, xp, ( GetRequiredXpForLevel( GetAbilityLevel( victim, ability ) + 1 ) - GetRequiredXpForLevel( GetAbilityLevel( victim, ability ) ) ) );
 
   victim->Echo("You gain %ld %s experience.\r\n", xp, AbilityName[ability]  );
   GainXP( victim, ability, xp );
 }
-

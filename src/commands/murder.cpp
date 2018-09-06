@@ -3,14 +3,11 @@
 #include "log.hpp"
 #include "room.hpp"
 
-void do_murder( Character *ch, char *argument )
+void do_murder( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Murder whom?\r\n");
       return;
@@ -30,7 +27,8 @@ void do_murder( Character *ch, char *argument )
 
   if ( IsBitSet(victim->Flags, PLR_AFK))
     {
-      Log->Info("%s just attacked %s with an afk flag on!." , ch->Name, victim->Name );
+      Log->Info("%s just attacked %s with an afk flag on!",
+                ch->Name.c_str(), victim->Name.c_str() );
     }
 
   if ( IsSafe( ch, victim ) )

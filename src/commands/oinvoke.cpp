@@ -5,10 +5,10 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 
-void do_oinvoke( Character *ch, char *argument )
+void do_oinvoke( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
   ProtoObject *pObjIndex = NULL;
   Object *obj = NULL;
   vnum_t vnum = INVALID_VNUM;
@@ -17,13 +17,13 @@ void do_oinvoke( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo("Syntax: oinvoke <vnum> <level>.\r\n");
       return;
     }
 
-  if ( IsNullOrEmpty( arg2 ) )
+  if ( arg2.empty() )
     {
       level = GetTrustLevel( ch );
     }
@@ -34,7 +34,8 @@ void do_oinvoke( Character *ch, char *argument )
           ch->Echo("Syntax: oinvoke <vnum> <level>.\r\n");
           return;
         }
-      level = atoi( arg2 );
+
+      level = std::stoi( arg2 );
 
       if ( level < 0 || level > GetTrustLevel( ch ) )
 	{
@@ -45,12 +46,12 @@ void do_oinvoke( Character *ch, char *argument )
 
   if ( !IsNumber( arg1 ) )
     {
-      char arg[MAX_INPUT_LENGTH];
-      int  hash, cnt;
+      std::string arg;
       int  count = NumberArgument( arg1, arg );
 
       vnum = -1;
-      for ( hash = cnt = 0; hash < MAX_KEY_HASH; hash++ )
+
+      for ( int hash = 0, cnt = 0; hash < MAX_KEY_HASH; hash++ )
         for ( pObjIndex = ObjectIndexHash[hash];
               pObjIndex;
               pObjIndex = pObjIndex->Next )
@@ -60,6 +61,7 @@ void do_oinvoke( Character *ch, char *argument )
               vnum = pObjIndex->Vnum;
               break;
             }
+
       if ( vnum == -1 )
         {
           ch->Echo("No such object exists.\r\n");
@@ -67,11 +69,11 @@ void do_oinvoke( Character *ch, char *argument )
         }
     }
   else
-    vnum = atoi( arg1 );
+    vnum = std::stoi( arg1 );
 
   if ( GetTrustLevel(ch) < LEVEL_CREATOR )
     {
-      Area *pArea;
+      Area *pArea = nullptr;
 
       if ( IsNpc(ch) )
         {
@@ -84,6 +86,7 @@ void do_oinvoke( Character *ch, char *argument )
           ch->Echo("You must have an assigned area to invoke this object.\r\n");
 	  return;
         }
+
       if ( vnum < pArea->VnumRanges.Object.First
            &&   vnum > pArea->VnumRanges.Object.Last )
         {

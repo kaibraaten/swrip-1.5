@@ -2,11 +2,11 @@
 #include "shuttle.hpp"
 #include "character.hpp"
 
-void do_makeshuttle (Character * ch, char * argument)
+void do_makeshuttle (Character *ch, std::string argument)
 {
   Shuttle *shuttle = nullptr;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Usage: makeshuttle <shuttle name>\r\n");
       return;

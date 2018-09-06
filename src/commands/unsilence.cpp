@@ -1,14 +1,11 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_unsilence( Character *ch, char *argument )
+void do_unsilence( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Unsilence whom?\r\n");
       return;
@@ -43,4 +40,3 @@ void do_unsilence( Character *ch, char *argument )
       ch->Echo("That player is not silenced.\r\n");
     }
 }
-

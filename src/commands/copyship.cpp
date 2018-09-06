@@ -3,23 +3,21 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_copyship( Character *ch, char *argument )
+void do_copyship( Character *ch, std::string argument )
 {
   Ship *ship = NULL;
   Ship *old = NULL;
-  char arg[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg;
 
   argument = OneArgument( argument, arg );
-  argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
-      ch->Echo( "Usage: copyship <oldshipname> <filename> <newshipname>\r\n" );
+      ch->Echo( "Usage: copyship <oldshipname> <newshipname>\r\n" );
       return;
     }
 
-  old = GetShipAnywhere ( arg );
+  old = GetShipAnywhere( arg );
 
   if (!old)
     {
@@ -30,12 +28,7 @@ void do_copyship( Character *ch, char *argument )
   ship = new Ship();
   Ships->Add(ship);
 
-  ship->Name            = CopyString( argument );
-  ship->Description     = CopyString( "" );
-  ship->Owner   = CopyString( "" );
-  ship->CoPilot       = CopyString( "" );
-  ship->Pilot         = CopyString( "" );
-  ship->Home          = CopyString( "" );
+  ship->Name = argument;
   ship->Type          = old->Type;
   ship->Class         = old->Class;
   ship->WeaponSystems.Laser.Count = old->WeaponSystems.Laser.Count;

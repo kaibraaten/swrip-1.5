@@ -17,19 +17,19 @@ static bool IsWithinTrustLevel(const Command *command, const Character *ch)
   return command->Level <= GetTrustLevel(ch);
 }
 
-static bool NameBeginsWith(const Command *command, const char *name)
+static bool NameBeginsWith(const Command *command, const std::string &name)
 {
   return StringPrefix(name, command->Name) == 0;
 }
 
-void do_commands( Character *ch, char *argument )
+void do_commands( Character *ch, std::string argument )
 {
   const List *commands = GetEntities(CommandRepository);
   const int NumColumns = 6;
 
   SetCharacterColor( AT_PLAIN, ch );
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ListIterator *iterator = AllocateListIterator(commands);
       int col = 0;
@@ -44,7 +44,7 @@ void do_commands( Character *ch, char *argument )
                && IsWithinTrustLevel(command, ch)
                && !IsMudProgCommand(command))
             {
-              ch->Echo( "%-12s", command->Name );
+              ch->Echo( "%-12s", command->Name.c_str() );
 
               if ( col % NumColumns == 0 )
                 {
@@ -77,7 +77,7 @@ void do_commands( Character *ch, char *argument )
                && NameBeginsWith(command, argument)
                && !IsMudProgCommand(command))
             {
-              ch->Echo( "%-12s", command->Name );
+              ch->Echo( "%-12s", command->Name.c_str() );
               found = true;
 
               if ( col % NumColumns == 0 )
@@ -94,7 +94,7 @@ void do_commands( Character *ch, char *argument )
 
       if ( !found )
         {
-          ch->Echo( "No command found under %s.\r\n", argument);
+          ch->Echo( "No command found under %s.\r\n", argument.c_str());
         }
 
       FreeListIterator(iterator);

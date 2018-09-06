@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <sstream>
 #include <cctype>
 #include <cstring>
 #include "character.hpp"
@@ -91,70 +92,62 @@ int GetClassFromName( const std::string &arg )
   return iClass;
 }
 
-char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fShort )
+std::string FormatObjectToCharacter( const Object *obj, const Character *ch, bool fShort )
 {
-  static char buf[MAX_STRING_LENGTH];
-
-  buf[0] = '\0';
+  std::ostringstream buf;
 
   if ( IS_OBJ_STAT(obj, ITEM_INVIS) )
     {
-      strcat( buf, "(Invis) " );
+      buf << "(Invis) ";
     }
 
   if ( ( IsAffectedBy(ch, AFF_DETECT_MAGIC) || IsImmortal(ch) )
        && IS_OBJ_STAT(obj, ITEM_MAGIC) )
     {
-      strcat( buf, "&B(Blue Aura)&w " );
+      buf << "&B(Blue Aura)&w ";
     }
 
   if ( IS_OBJ_STAT(obj, ITEM_GLOW) )
     {    
-      strcat( buf, "(Glowing) " );
+      buf << "(Glowing) ";
     }
 
   if ( IS_OBJ_STAT(obj, ITEM_HUM) )
     {
-      strcat( buf, "(Humming) " );
+      buf << "(Humming) ";
     }
 
   if ( IS_OBJ_STAT(obj, ITEM_HIDDEN) )
     {
-      strcat( buf, "(Hidden) " );
+      buf << "(Hidden) ";
     }
 
   if ( IS_OBJ_STAT(obj, ITEM_BURRIED) )
     {
-      strcat( buf, "(Burried) " );
+      buf << "(Burried) ";
     }
 
   if ( IsImmortal(ch)
        && IS_OBJ_STAT(obj, ITEM_PROTOTYPE) )
     {
-      strcat( buf, "(PROTO) " );
+      buf << "(PROTO) ";
     }
 
   if ( IsAffectedBy(ch, AFF_DETECTTRAPS) && IsObjectTrapped(obj) )
     {
-      strcat( buf, "(Trap) "  );
+      buf << "(Trap) ";
     }
 
   if ( fShort )
     {
-      if ( obj->ShortDescr )
-	{
-	  strcat( buf, obj->ShortDescr );
-	}
+      buf << obj->ShortDescr;
     }
   else
     {
-      if ( obj->Description )
-	{
-	  strcat( buf, obj->Description );
-	}
+      buf << obj->Description;
     }
 
-  return buf;
+  return buf.str();
 }
 
 /*
@@ -229,7 +222,6 @@ void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
   char **prgpstrShow = nullptr;
   int *prgnShow = nullptr;
   int *pitShow = nullptr;
-  char *pstrShow = nullptr;
   int nShow = 0;
   int iShow = 0;
   int count = list.size(), offcount = 0, tmp = 0, cnt = 0;
@@ -309,12 +301,13 @@ void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
           nShow++;
           --tmp;
         }
+
       if ( obj->WearLoc == WEAR_NONE
            && CanSeeObject( ch, obj )
-           && ( !IsNullOrEmpty( obj->Description ) || ( IsBitSet(ch->Flags, PLR_HOLYLIGHT) || IsNpc(ch) ) )
+           && ( !obj->Description.empty() || ( IsBitSet(ch->Flags, PLR_HOLYLIGHT) || IsNpc(ch) ) )
            && (obj->ItemType != ITEM_TRAP || IsAffectedBy(ch, AFF_DETECTTRAPS) ) )
         {
-          pstrShow = FormatObjectToCharacter( obj, ch, fShort );
+          std::string pstrShow = FormatObjectToCharacter( obj, ch, fShort );
           fCombine = false;
 
           if ( IsNpc(ch) || IsBitSet(ch->Flags, PLR_COMBINE) )
@@ -442,7 +435,7 @@ void ShowCharacterCondition( const Character *ch, const Character *victim )
     percent = -1;
 
 
-  strcpy( buf, PERS(victim, ch) );
+  strcpy( buf, PERS(victim, ch).c_str() );
 
   if ( (IsNpc ( victim ) && IsBitSet( victim->Flags , ACT_DROID ) ) ||
        ( victim->Race == RACE_DROID ) )
@@ -479,6 +472,6 @@ void ShowCharacterCondition( const Character *ch, const Character *victim )
     }
   
   buf[0] = CharToUppercase(buf[0]);
-  ch->Echo( buf );
+  ch->Echo( "%s", buf );
 }
 

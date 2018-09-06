@@ -3,12 +3,12 @@
 
 /* prints message only to victim */
 
-void do_mpechoat( Character *ch, char *argument )
+void do_mpechoat( Character *ch, std::string argument )
 {
-  char arg[ MAX_INPUT_LENGTH ];
-  Character *victim;
-  int mobflags;
-  short color;
+  std::string arg;
+  Character *victim = nullptr;
+  int mobflags = 0;
+  short color = 0;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -21,7 +21,7 @@ void do_mpechoat( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
+  if ( arg.empty() || argument.empty() )
     {
       ProgBug( "Mpechoat - No argument", ch );
       return;
@@ -46,4 +46,3 @@ void do_mpechoat( Character *ch, char *argument )
 
   ch->Flags = mobflags;
 }
-

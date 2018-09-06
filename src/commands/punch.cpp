@@ -3,10 +3,9 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_punch( Character *ch, char *argument )
+void do_punch( Character *ch, std::string arg )
 {
   Character *victim = NULL;
-  char arg[MAX_INPUT_LENGTH];
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
@@ -15,7 +14,7 @@ void do_punch( Character *ch, char *argument )
     }
 
   if ( !IsNpc(ch)
-       &&   ch->PCData->Learned[gsn_punch] <= 0 )
+       && ch->PCData->Learned[gsn_punch] <= 0 )
     {
       ch->Echo("Your mind races as you realize you have no idea how to do that.\r\n");
       return;
@@ -23,10 +22,7 @@ void do_punch( Character *ch, char *argument )
 
   if ( ( victim = GetFightingOpponent( ch ) ) == NULL )
     {
-
-      OneArgument( argument, arg );
-
-      if ( IsNullOrEmpty( arg ) )
+      if ( arg.empty() )
         {
           ch->Echo("Punch whom?\r\n");
           return;
@@ -46,7 +42,7 @@ void do_punch( Character *ch, char *argument )
 
       if ( victim == ch )
         {
-          ch->Echo("You punch yourself.  Ouch!\r\n");
+          ch->Echo("You punch yourself. Ouch!\r\n");
           HitMultipleTimes( ch, ch, TYPE_UNDEFINED );
 	  return;
         }
@@ -77,4 +73,3 @@ void do_punch( Character *ch, char *argument )
       global_retcode = InflictDamage( ch, victim, 0, gsn_punch );
     }
 }
-

@@ -4,9 +4,8 @@
 
 /* lets the mobile kill any player or mobile without murder*/
 
-void do_mpkill( Character *ch, char *argument )
+void do_mpkill( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = nullptr;
 
   assert(ch != nullptr);
@@ -20,9 +19,7 @@ void do_mpkill( Character *ch, char *argument )
       return;
     }
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ProgBug( "MpKill - no argument", ch );
       return;
@@ -54,4 +51,3 @@ void do_mpkill( Character *ch, char *argument )
 
   HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
 }
-

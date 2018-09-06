@@ -16,13 +16,11 @@
 #include "utility.hpp"
 #include "sha256.hpp"
 
-#define HIDDEN_TILDE    '*'
-
 using STRING_COMPARATOR = std::function<int(const std::string&, const std::string&)>;
-using STRING_TOKENIZER = std::function<char*(char*, char*)>;
+using STRING_TOKENIZER = std::function<std::string(const std::string&, std::string&)>;
 
 static std::string GetNextChunk( std::string &str, const char c );
-static char *OneArgument2( char *argument, char *arg_first );
+static std::string OneArgument2( const std::string &argument, std::string &arg_first );
 static int IsName2(const std::string&, const std::string&);
 static int IsName2Prefix(const std::string&, const std::string&);
 static int IsNameInternal(const std::string&, const std::string&,
@@ -37,16 +35,14 @@ static int IsNameInternal( const std::string &str, const std::string &namelist,
                            STRING_COMPARATOR compare_string,
                            STRING_TOKENIZER tokenize_string )
 {
-  char name[MAX_INPUT_LENGTH];
-  char tmp_buf[MAX_INPUT_LENGTH];
-  char *tmp = tmp_buf;
-  sprintf( tmp_buf, "%s", namelist.c_str() );
+  std::string name;
+  std::string tmp = namelist;
 
   for ( ; ; )
     {
       tmp = tokenize_string( tmp, name );
 
-      if ( name[0] == '\0' )
+      if ( name.empty() )
         {
           return false;
         }
@@ -89,27 +85,27 @@ static int NiftyIsNameInternal(const std::string &str, const std::string &nameli
                                STRING_COMPARATOR compare_string,
                                STRING_TOKENIZER tokenize_string )
 {
-  char name[MAX_INPUT_LENGTH];
-  char tmp_str_buf[MAX_INPUT_LENGTH];
-  char *tmp_str = tmp_str_buf;
-  char tmp_namelist_buf[MAX_INPUT_LENGTH];
-  char *tmp_namelist = tmp_namelist_buf;
-
   if(str.empty())
-    return false;
+    {
+      return false;
+    }
 
-  sprintf( tmp_str_buf, "%s", str.c_str() );
-  sprintf( tmp_namelist_buf, "%s", namelist.c_str() );
+  std::string tmp = str;
+  std::string name;
 
   for ( ; ; )
     {
-      tmp_str = tokenize_string( tmp_str, name );
+      tmp = tokenize_string( tmp, name );
 
-      if ( name[0] == '\0' )
-        return true;
+      if ( name.empty() )
+        {
+          return true;
+        }
 
-      if ( !compare_string( name, tmp_namelist ) )
-        return false;
+      if ( !compare_string( name, namelist ) )
+        {
+          return false;
+        }
     }
 }
 
@@ -127,36 +123,10 @@ int NiftyIsNamePrefix(const std::string &str, const std::string &namelist)
  * Removes the tildes from a string.
  * Used for player-entered strings that go into disk files.
  */
-void SmashTilde( char *str )
+std::string SmashTilde( std::string &str )
 {
   ReplaceChar( str, '~', '-' );
-}
-
-/*
- * Encodes the tildes in a string.                              -Thoric
- * Used for player-entered strings that go into disk files.
- */
-void HideTilde( char *str )
-{
-  ReplaceChar( str, '~', HIDDEN_TILDE );
-}
-
-char *ShowTilde( const std::string &arg)
-{
-  static char buf[MAX_STRING_LENGTH];
-  char *bufptr = buf;
-  const char *str = arg.c_str();
-  
-  for ( ; *str != '\0'; str++, bufptr++ )
-    {
-      if ( *str == HIDDEN_TILDE )
-        *bufptr = '~';
-      else
-        *bufptr = *str;
-    }
-  *bufptr = '\0';
-
-  return buf;
+  return str;
 }
 
 /*
@@ -237,9 +207,9 @@ int StringSuffix(const std::string &astr, const std::string &bstr)
  * Returns an initial-capped string.
  * Rewritten by FearItself@AvP
  */
-char *Capitalize( const std::string &argument )
+std::string Capitalize( const std::string &argument )
 {
-  static char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH];
   const char *str = argument.c_str();
   char *dest = buf;
   enum { Normal, Color } state = Normal;
@@ -250,7 +220,7 @@ char *Capitalize( const std::string &argument )
     {
       if( state == Normal )
         {
-          if( c == '&' || c == '^' || c == '}' )
+          if( c == '&' || c == '^' )
             {
               state = Color;
             }
@@ -301,26 +271,27 @@ static bool isavowel( char letter )
 /*
  * Shove either "a " or "an " onto the beginning of a string    -Thoric
  */
-const char *AOrAn( const std::string &str )
+std::string AOrAn( const std::string &str )
 {
-  static char temp[MAX_STRING_LENGTH];
+  std::string temp;
 
   if ( isavowel(str[0])
        || ( str.size() > 1 && tolower((int)str[0]) == 'y'
             && !isavowel(str[1])) )
-    strcpy( temp, "an " );
+    {
+      temp = "an ";
+    }
   else
-    strcpy( temp, "a " );
+    {
+      temp = "a ";
+    }
 
-  strcat( temp, str.c_str() );
-  return temp;
+  return temp + str;
 }
 
-void ReplaceChar( char *buf, char replace, char with )
+void ReplaceChar( std::string &buf, char replace, char with )
 {
-  size_t i = 0;
-
-  for( i = 0; i < strlen( buf ); ++i )
+  for( size_t i = 0; i < buf.size(); ++i )
     {
       if( buf[i] == replace )
         {
@@ -340,10 +311,10 @@ bool IsNumber( const std::string &arg )
   for (char letter : arg)
     {
       if ( !isdigit((int) letter)
-	   && letter != '.'
-	   && letter != ','
-	   && letter != '+'
-	   && letter != '-' )
+           && letter != '.'
+           && letter != ','
+           && letter != '+'
+           && letter != '-' )
         return false;
     }
 
@@ -353,7 +324,7 @@ bool IsNumber( const std::string &arg )
 /*
  * Given a string like 14.foo, return 14 and 'foo'
  */
-int NumberArgument( const std::string &orig_argument, char *arg )
+int NumberArgument( const std::string &orig_argument, std::string &arg )
 {
   char *pdot = NULL;
   int number = 0;
@@ -367,12 +338,12 @@ int NumberArgument( const std::string &orig_argument, char *arg )
           *pdot = '\0';
           number = atoi( argument );
           *pdot = '.';
-          strcpy( arg, pdot+1 );
+          arg = pdot + 1;
           return number;
         }
     }
 
-  strcpy( arg, argument );
+  arg = argument;
   return 1;
 }
 
@@ -383,46 +354,57 @@ int NumberArgument( const std::string &orig_argument, char *arg )
  * arg_first: The first token.
  * returns  : The rest of the string after arg_first
  */
-char *OneArgument( char *argument, char *arg_first )
+std::string OneArgument( const std::string &argument, std::string &arg_first )
 {
+  std::string::const_iterator argp = argument.begin();
+  arg_first.erase();
+
+  while( argp != argument.end() && isspace( *argp ) )
+    ++argp;
+
   char cEnd = ' ';
-  short count = 0;
 
-  while ( isspace((int) *argument) )
-    argument++;
+  if( *argp == '\'' || *argp == '"' )
+    cEnd = *argp++;
 
-  if ( *argument == '\'' || *argument == '"' )
-    cEnd = *argument++;
-
-  while ( *argument != '\0' || ++count >= 255 )
+  while( argp != argument.end() )
     {
-      if ( *argument == cEnd )
+      if( *argp == cEnd )
         {
-          argument++;
+          ++argp;
           break;
         }
 
-      *arg_first = *argument;
-      arg_first++;
-      argument++;
+      arg_first.append( 1, *argp );
+      ++argp;
     }
 
-  *arg_first = '\0';
+  while( argp != argument.end() && isspace( *argp ) )
+    ++argp;
 
-  while ( isspace((int) *argument) )
-    argument++;
+  return std::string( argp, argument.end() );
+}
 
-  return argument;
+std::vector<char> StringToVector(const std::string &original)
+{
+  return std::vector<char>(original.c_str(),
+                           original.c_str() + original.size() + 1);
 }
 
 /*
  * Pick off one argument from a string and return the rest.
  * Understands quotes.  Delimiters = { ' ', '-' }
  */
-static char *OneArgument2( char *argument, char *arg_first )
+#if 0
+static std::string OneArgument2( const std::string &orig_argument,
+                                 std::string &orig_arg_first )
 {
   char cEnd = ' ';
   short count = 0;
+  std::vector<char> v_argument = StringToVector(orig_argument);
+  std::vector<char> v_arg_first = StringToVector(orig_arg_first);
+  const char *argument = &v_argument[0];
+  char *arg_first = &v_arg_first[0];
 
   while ( isspace((int) *argument) )
     argument++;
@@ -448,18 +430,51 @@ static char *OneArgument2( char *argument, char *arg_first )
   while ( isspace((int) *argument) )
     argument++;
 
+  orig_arg_first = arg_first;
   return argument;
+}
+#endif
+
+static std::string OneArgument2( const std::string &argument, std::string &arg_first )
+{
+  std::string::const_iterator argp = argument.begin();
+  arg_first.erase();
+
+  while( argp != argument.end() && isspace( *argp ) )
+    ++argp;
+
+  char cEnd = ' ';
+
+  if( *argp == '\'' || *argp == '"' )
+    cEnd = *argp++;
+
+  while( argp != argument.end() )
+    {
+      if( *argp == cEnd || *argp == '-' )
+        {
+          ++argp;
+          break;
+        }
+
+      arg_first.append( 1, *argp );
+      ++argp;
+    }
+
+  while( argp != argument.end() && isspace( *argp ) )
+    ++argp;
+
+  return std::string( argp, argument.end() );
 }
 
 /*
  * Remove carriage returns from a line
  */
-char *StripCarriageReturn( const std::string &arg)
+std::string StripCarriageReturn( const std::string &arg)
 {
-  static char newstr[MAX_STRING_LENGTH];
+  char newstr[MAX_STRING_LENGTH] = {'\0'};
   int i = 0, j = 0;
   const char *str = arg.c_str();
-  
+
   for ( i = j = 0; str[i] != '\0'; i++ )
     {
       if ( str[i] != '\r' )
@@ -467,7 +482,7 @@ char *StripCarriageReturn( const std::string &arg)
           newstr[j++] = str[i];
         }
     }
-  
+
   newstr[j] = '\0';
   return newstr;
 }
@@ -475,8 +490,10 @@ char *StripCarriageReturn( const std::string &arg)
 /*
  * Removes the tildes from a line, except if it's the last character.
  */
-void SmushTilde( char *str )
+std::string SmushTilde( std::string &orig_str )
 {
+  std::vector<char> v_str = StringToVector(orig_str);
+  char *str = &v_str[0];
   char *strptr = str;
   size_t len = strlen( str );
   char last = len != 0 ? strptr[len-1] : '\0';
@@ -489,122 +506,14 @@ void SmushTilde( char *str )
 
   if ( len )
     strptr[len-1] = last;
+
+  orig_str = str;
+  return orig_str;
 }
 
-static char *grab_word( char *argument, char *arg_first )
+std::string EncodeString( const std::string &str )
 {
-  char cEnd = ' ';
-  short count = 0;
-
-  while ( isspace((int)*argument) )
-    argument++;
-
-  if ( *argument == '\'' || *argument == '"' )
-    cEnd = *argument++;
-
-  while ( *argument != '\0' || ++count >= 255 )
-    {
-      if ( *argument == cEnd )
-        {
-          argument++;
-          break;
-        }
-
-      *arg_first++ = *argument++;
-    }
-
-  *arg_first = '\0';
-
-  while ( isspace((int)*argument) )
-    argument++;
-
-  return argument;
-}
-
-char *WordWrap( char *txt, unsigned short wrap )
-{
-  static char buf[MAX_STRING_LENGTH];
-  char *bufp = buf;
-
-  buf[0] = '\0';
-
-  if ( txt != NULL && strlen(txt) > 0 )
-    {
-      char line[MAX_STRING_LENGTH] = {'\0'};
-      char temp[MAX_STRING_LENGTH];
-      char *ptr = txt;
-
-      ++bufp;
-      line[0] = '\0';
-
-      while ( *ptr )
-        {
-          size_t ln = strlen( line );
-          size_t x = 0;
-
-          ptr = grab_word( ptr, temp );
-          x = strlen( temp );
-
-          if ( (ln + x + 1) < wrap )
-            {
-              char *p = NULL;
-
-              if ( ln > 0 && line[ln-1] == '.' )
-                {
-                  strcat( line, "  " );
-                }
-              else
-                {
-                  strcat( line, " " );
-                }
-
-              strcat( line, temp );
-              p = strchr( line, '\n' );
-
-              if ( !p )
-                {
-                  p = strchr( line, '\r' );
-                }
-
-              if ( p )
-                {
-                  strcat( buf, line );
-                  line[0] = '\0';
-                }
-            }
-          else
-            {
-              strcat( line, "\r\n" );
-              strcat( buf, line );
-              strcpy( line, temp );
-            }
-        }
-
-      if ( line[0] != '\0' )
-        {
-          strcat( buf, line );
-        }
-    }
-
-  return bufp;
-}
-
-char *EncodeString( const std::string &str )
-{
-  return sha256_crypt( str.c_str() );
-}
-
-char *CatSprintf(char *dest, const char *fmt, ...)
-{
-  char buf[MAX_STRING_LENGTH];
-
-  va_list args;
-
-  va_start(args, fmt);
-  vsprintf(buf, fmt, args);
-  va_end(args);
-
-  return strcat(dest, buf);
+  return sha256_crypt( str );
 }
 
 /*
@@ -616,35 +525,6 @@ char *CopyString(const std::string &str)
   AllocateMemory( ret, char, strlen( str.c_str() ) + 1 );
   strcpy( ret, str.c_str() );
   return ret;
-}
-
-char *TrimStringStart( char *string, char junk )
-{
-  while( *string == junk )
-    ++string;
-
-  return string;
-}
-
-char *TrimStringEnd( char *string, char junk )
-{
-  size_t pos = strlen( string ) - 1;
-
-  while( string[pos] == junk )
-    {
-      string[pos] = '\0';
-      --pos;
-    }
-
-  return string;
-}
-
-char *TrimString( char *string, char junk )
-{
-  string = TrimStringStart( string, junk );
-  string = TrimStringEnd( string, junk );
-
-  return string;
 }
 
 std::string TrimStringStart( const std::string &str, char junk )
@@ -778,4 +658,97 @@ std::string CenterString( const std::string &txt, size_t width, char pad )
   output << std::string( width - output.str().size(), pad );
 
   return output.str();
+}
+
+static char *grab_word( char *argument, char *arg_first )
+{
+  char cEnd = ' ';
+  short count = 0;
+
+  while ( isspace((int)*argument) )
+    argument++;
+
+  if ( *argument == '\'' || *argument == '"' )
+    cEnd = *argument++;
+
+  while ( *argument != '\0' || ++count >= 255 )
+    {
+      if ( *argument == cEnd )
+        {
+          argument++;
+          break;
+        }
+
+      *arg_first++ = *argument++;
+    }
+
+  *arg_first = '\0';
+
+  while ( isspace((int)*argument) )
+    argument++;
+
+  return argument;
+}
+
+std::string WordWrap(const std::string &stl_txt, unsigned short wrap)
+{
+  std::vector<char> txt = StringToVector(stl_txt);
+  char buf[MAX_STRING_LENGTH] = {'\0'};
+  char *bufp = buf;
+
+  if ( !txt.empty() )
+    {
+      char line[MAX_STRING_LENGTH] = {'\0'};
+      char temp[MAX_STRING_LENGTH] = {'\0'};
+      char *ptr = &txt[0];
+
+      ++bufp;
+      line[0] = '\0';
+
+      while ( *ptr )
+        {
+          size_t ln = strlen( line );
+          ptr = grab_word( ptr, temp );
+          size_t x = strlen( temp );
+
+          if ( (ln + x + 1) < wrap )
+            {
+              if ( ln > 0 && line[ln-1] == '.' )
+                {
+                  strcat( line, "  " );
+                }
+              else
+                {
+                  strcat( line, " " );
+                }
+
+              strcat( line, temp );
+              const char *p = strchr( line, '\n' );
+
+              if ( !p )
+                {
+                  p = strchr( line, '\r' );
+                }
+
+              if ( p )
+                {
+                  strcat( buf, line );
+                  line[0] = '\0';
+                }
+            }
+          else
+            {
+              strcat( line, "\r\n" );
+              strcat( buf, line );
+              strcpy( line, temp );
+            }
+        }
+
+      if ( line[0] != '\0' )
+        {
+          strcat( buf, line );
+        }
+    }
+
+  return bufp;
 }

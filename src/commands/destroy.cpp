@@ -11,13 +11,9 @@ static void CloseDescriptorIfHalfwayLoggedIn(const std::string &name);
 static void ExtractVictim(Character *victim);
 static Character *GetVictimInWorld(const std::string &name);
 
-void do_destroy( Character *ch, char *argument )
+void do_destroy( Character *ch, std::string victimName )
 {
-  char victimName[100];
-
-  OneArgument( argument, victimName );
-
-  if ( IsNullOrEmpty( victimName ) )
+  if ( victimName.empty() )
     {
       ch->Echo( "Destroy what player file?\r\n" );
       return;
@@ -38,9 +34,9 @@ void do_destroy( Character *ch, char *argument )
   char backupPath[256];
   
   sprintf( oldPath, "%s%c/%s", PLAYER_DIR, tolower(victimName[0]),
-           Capitalize( victimName ) );
+           Capitalize( victimName ).c_str() );
   sprintf( backupPath, "%s%c/%s", BACKUP_DIR, tolower(victimName[0]),
-           Capitalize( victimName ) );
+           Capitalize( victimName ).c_str() );
 
   if ( rename( oldPath, backupPath ) == 0 )
     {
@@ -49,7 +45,7 @@ void do_destroy( Character *ch, char *argument )
       
       SetCharacterColor( AT_RED, ch );
       ch->Echo( "Player destroyed. Pfile saved in backup directory.\r\n", ch );
-      sprintf( godDataPath, "%s%s", GOD_DIR, Capitalize(victimName) );
+      sprintf( godDataPath, "%s%s", GOD_DIR, Capitalize(victimName).c_str() );
 
       if ( remove( godDataPath ) == 0 )
         {
@@ -60,12 +56,12 @@ void do_destroy( Character *ch, char *argument )
           ch->Echo( "Unknown error #%d - %s (immortal data).  Report to Thoric.\r\n",
                     errno, strerror( errno ) );
           char errorMessage[1024];
-          sprintf( errorMessage, "%s destroying %s", ch->Name, godDataPath );
+          sprintf( errorMessage, "%s destroying %s", ch->Name.c_str(), godDataPath );
           perror( errorMessage );
         }
 
       char areaName[100];
-      sprintf( areaName, "%s.are", Capitalize(victimName) );
+      sprintf( areaName, "%s.are", Capitalize(victimName).c_str() );
 
       for ( pArea = FirstBuild; pArea; pArea = pArea->Next )
         {
@@ -93,7 +89,8 @@ void do_destroy( Character *ch, char *argument )
                   ch->Echo( "Unknown error #%d - %s (area data).  Report to Thoric.\r\n",
                             errno, strerror( errno ) );
                   char errorMessage[1024];
-                  sprintf( errorMessage, "%s destroying %s", ch->Name, areaPath );
+                  sprintf( errorMessage, "%s destroying %s",
+                           ch->Name.c_str(), areaPath );
                   perror(errorMessage);
                 }
             }
@@ -110,7 +107,7 @@ void do_destroy( Character *ch, char *argument )
       ch->Echo( "Unknown error #%d - %s.  Report to Thoric.\r\n",
                 errno, strerror( errno ) );
       char errorMessage[1024];
-      sprintf( errorMessage, "%s destroying %s", ch->Name, victimName );
+      sprintf( errorMessage, "%s destroying %s", ch->Name.c_str(), victimName.c_str() );
       perror( errorMessage );
     }
 }

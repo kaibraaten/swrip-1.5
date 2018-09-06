@@ -2,7 +2,7 @@
 #include "arena.hpp"
 #include "character.hpp"
 
-void do_challenge(Character *ch, char *argument)
+void do_challenge(Character *ch, std::string argument )
 {
   Character *victim = nullptr;
   char buf[MAX_INPUT_LENGTH];
@@ -44,7 +44,7 @@ void do_challenge(Character *ch, char *argument)
       return;
     }
 
-  if (GetTimer(victim,TIMER_PKILLED)>0)
+  if (GetTimer(victim,TIMER_PKILLED) > 0)
     {
       ch->Echo("&WThat player has died within the last 5 minutes and cannot be challenged!\r\n");
       return;
@@ -68,10 +68,9 @@ void do_challenge(Character *ch, char *argument)
       return;
     }
   
-  victim->Echo("&R%s &Whas challenged you to a duel!\r\n",ch->Name);
+  victim->Echo("&R%s &Whas challenged you to a duel!\r\n",ch->Name.c_str());
   victim->Echo("&WPlease either accept or decline the challenge.\r\n\r\n");
-  sprintf(buf,"%s has challenged %s to a duel!\r\n",ch->Name,victim->Name);
+  sprintf(buf,"%s has challenged %s to a duel!\r\n",ch->Name.c_str(),victim->Name.c_str());
   ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
   victim->Challenged = ch;
 }
-

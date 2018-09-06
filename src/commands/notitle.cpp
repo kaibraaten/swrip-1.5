@@ -2,15 +2,11 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 
-void do_notitle( Character *ch, char *argument )
+void do_notitle( Character *ch, std::string arg )
 {
-  char buf[MAX_STRING_LENGTH];
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Notitle whom?\r\n");
       return;
@@ -43,8 +39,7 @@ void do_notitle( Character *ch, char *argument )
   else
     {
       SetBit(victim->PCData->Flags, PCFLAG_NOTITLE);
-      sprintf( buf, "%s", victim->Name );
-      SetCharacterTitle( victim, buf );
+      SetCharacterTitle( victim, victim->Name );
       victim->Echo("You can't set your own title!\r\n");
       ch->Echo("NOTITLE set.\r\n");
     }

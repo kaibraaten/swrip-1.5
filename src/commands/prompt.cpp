@@ -1,11 +1,11 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
 
-void do_prompt( Character *ch, char *argument )
+void do_prompt( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
 
   if ( IsNpc(ch) )
     {
@@ -16,25 +16,27 @@ void do_prompt( Character *ch, char *argument )
   SmashTilde( argument );
   OneArgument( argument, arg );
 
-  if ( !*arg )
+  if ( arg.empty() )
     {
       ch->Echo("Set prompt to what? (try help prompt)\r\n");
       return;
     }
 
-  if (ch->PCData->Prompt)
-    FreeMemory(ch->PCData->Prompt);
-
-  if ( strlen(argument) > 128 )
-    argument[128] = '\0';
-
+  if ( argument.size() > 128 )
+    {
+      argument = argument.substr(0, 128);
+    }
+  
   /* Can add a list of pre-set prompts here if wanted.. perhaps
      'prompt 1' brings up a different, pre-set prompt */
   if ( !StrCmp(arg, "default") )
-    ch->PCData->Prompt = CopyString("");
+    {
+      ch->PCData->Prompt.erase();
+    }
   else
-    ch->PCData->Prompt = CopyString(argument);
-
+    {
+      ch->PCData->Prompt = argument;
+    }
+  
   ch->Echo("Ok.\r\n");
 }
-

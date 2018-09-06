@@ -1,19 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_newbieset( Character *ch, char *argument )
+void do_newbieset( Character *ch, std::string arg1 )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  Object *obj;
-  Character *victim;
+  Object *obj = nullptr;
+  Character *victim = nullptr;
 
-  argument = OneArgument( argument, arg1 );
-  argument = OneArgument (argument, arg2);
-
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
-      ch->Echo("Syntax: newbieset <char>.\r\n");
+      ch->Echo("Syntax: newbieset <char>\r\n");
       return;
     }
 
@@ -42,6 +37,6 @@ void do_newbieset( Character *ch, char *argument )
   ObjectToCharacter(obj, victim);
 
   Act( AT_IMMORT, "$n has equipped you with a newbieset.", ch, NULL, victim, TO_VICT);
-  ch->Echo("You have re-equipped %s.\r\n", victim->Name );
+  ch->Echo("You have re-equipped %s.\r\n", victim->Name.c_str() );
 }
 

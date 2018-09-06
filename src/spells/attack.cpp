@@ -10,11 +10,11 @@ ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
   Character *victim = (Character *) vo;
   Skill *skill = GetSkill(sn);
   bool saved = CheckSavingThrow( sn, level, ch, victim );
-  int dam;
-  ch_ret retcode;
+  int dam = 0;
+  ch_ret retcode = rNONE;
 
   ch->Echo("You feel the hatred grow within you!\r\n");
-  ch->Alignment = ch->Alignment - 100;
+  ch->Alignment -= 100;
   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
   ApplySithPenalty( ch );
 
@@ -24,7 +24,7 @@ ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( skill->Dice )
+  if ( !skill->Dice.empty() )
     dam = umax( 0, ParseDice( ch, level, skill->Dice ) );
   else
     dam = RollDice( 1, level );
@@ -43,4 +43,3 @@ ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
 
   return retcode;
 }
-

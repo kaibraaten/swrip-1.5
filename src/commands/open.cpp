@@ -3,16 +3,16 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_open( Character *ch, char *argument )
+void do_open( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   Object *obj = NULL;
   Exit *pexit = NULL;
   int door = 0;
 
   OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       do_openhatch( ch , "" );
       return;
@@ -24,29 +24,29 @@ void do_open( Character *ch, char *argument )
 
       if ( !IsBitSet(pexit->Flags, EX_ISDOOR) )
         {
-   ch->Echo("You can't do that.\r\n");
+          ch->Echo("You can't do that.\r\n");
 	  return;
 	}
 
       if ( !IsBitSet(pexit->Flags, EX_CLOSED) )
         {
-   ch->Echo("It's already open.\r\n");
+          ch->Echo("It's already open.\r\n");
 	  return;
 	}
 
       if (  IsBitSet(pexit->Flags, EX_LOCKED) )
         {
-   ch->Echo("It's locked.\r\n");
-	  return;
+          ch->Echo("It's locked.\r\n");
+          return;
 	}
 
       if ( !IsBitSet(pexit->Flags, EX_SECRET)
-           || (pexit->Keyword && NiftyIsName( arg, pexit->Keyword )) )
+           || NiftyIsName( arg, pexit->Keyword ) )
         {
           Act( AT_ACTION, "$n opens the $d.",
-	       ch, NULL, pexit->Keyword, TO_ROOM );
+	       ch, NULL, pexit->Keyword.c_str(), TO_ROOM );
           Act( AT_ACTION, "You open the $d.",
-	       ch, NULL, pexit->Keyword, TO_CHAR );
+	       ch, NULL, pexit->Keyword.c_str(), TO_CHAR );
 
           if ( (pexit_rev = pexit->ReverseExit) != NULL
                && pexit_rev->ToRoom == ch->InRoom )
@@ -54,7 +54,7 @@ void do_open( Character *ch, char *argument )
               for(Character *rch : pexit->ToRoom->Characters())
 		{
 		  Act( AT_ACTION, "The $d opens.",
-		       rch, NULL, pexit_rev->Keyword, TO_CHAR );
+		       rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR );
 		}
             }
 
@@ -85,27 +85,27 @@ void do_open( Character *ch, char *argument )
             }
 
           ch->Echo("%s isn't a container.\r\n",
-		     Capitalize( obj->ShortDescr ) );
+		     Capitalize( obj->ShortDescr ).c_str() );
           return;
         }
 
       if ( !IsBitSet(obj->Value[1], CONT_CLOSED) )
         {
-   ch->Echo("%s is already open.\r\n",
-		     Capitalize( obj->ShortDescr ) );
+          ch->Echo("%s is already open.\r\n",
+                   Capitalize( obj->ShortDescr ).c_str() );
           return;
         }
 
       if ( !IsBitSet(obj->Value[1], CONT_CLOSEABLE) )
         {
           ch->Echo("%s cannot be opened or closed.\r\n",
-		     Capitalize( obj->ShortDescr ) );
+                   Capitalize( obj->ShortDescr ).c_str() );
           return;
         }
 
       if ( IsBitSet(obj->Value[1], CONT_LOCKED) )
         {
-          ch->Echo("%s is locked.\r\n", Capitalize( obj->ShortDescr ) );
+          ch->Echo("%s is locked.\r\n", Capitalize( obj->ShortDescr ).c_str() );
           return;
         }
 
@@ -122,6 +122,6 @@ void do_open( Character *ch, char *argument )
       return;
     }
 
-  do_openhatch( ch , arg );
+  do_openhatch( ch, argument );
 }
 

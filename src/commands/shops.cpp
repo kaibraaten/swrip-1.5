@@ -2,7 +2,7 @@
 #include "shop.hpp"
 #include "character.hpp"
 
-void do_shops( Character *ch, char *argument )
+void do_shops( Character *ch, std::string argument )
 {
   if ( Shops->Count() == 0 )
     {
@@ -21,4 +21,3 @@ void do_shops( Character *ch, char *argument )
                shop->BuyType[2], shop->BuyType[3], shop->BuyType[4] );
     }
 }
-

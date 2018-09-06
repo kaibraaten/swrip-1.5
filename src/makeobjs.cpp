@@ -64,7 +64,6 @@ Object *MakeTrap(int v0, int v1, int v2, int v3)
  */
 void MakeScraps( Object *obj )
 {
-  char buf[MAX_STRING_LENGTH];
   Object *scraps = CreateObject( GetProtoObject( OBJ_VNUM_SCRAPS ), 0 );
   Object *tmpobj = NULL;
   Character *ch = NULL;
@@ -75,19 +74,13 @@ void MakeScraps( Object *obj )
   /* don't make scraps of scraps of scraps of ... */
   if ( obj->Prototype->Vnum == OBJ_VNUM_SCRAPS )
     {
-      FreeMemory( scraps->ShortDescr );
-      scraps->ShortDescr = CopyString( "some debris" );
-      FreeMemory( scraps->Description );
-      scraps->Description = CopyString( "Bits of debris lie on the ground here." );
+      scraps->ShortDescr = "some debris";
+      scraps->Description = "Bits of debris lie on the ground here.";
     }
   else
     {
-      sprintf( buf, scraps->ShortDescr, obj->ShortDescr );
-      FreeMemory( scraps->ShortDescr );
-      scraps->ShortDescr = CopyString( buf );
-      sprintf( buf, scraps->Description, obj->ShortDescr );
-      FreeMemory( scraps->Description );
-      scraps->Description = CopyString( buf );
+      scraps->ShortDescr = FormatString(scraps->ShortDescr.c_str(), obj->ShortDescr.c_str());
+      scraps->Description = FormatString(scraps->Description.c_str(), obj->ShortDescr.c_str());
     }
 
   if ( obj->CarriedBy )
@@ -150,9 +143,8 @@ void MakeScraps( Object *obj )
  */
 void MakeCorpse( Character *ch )
 {
-  char buf[MAX_STRING_LENGTH];
-  Object *corpse = NULL;
-  char *name = NULL;
+  Object *corpse = nullptr;
+  std::string name;
 
   if ( IsNpc(ch) )
     {
@@ -204,17 +196,9 @@ void MakeCorpse( Character *ch )
     }
 
   /* Added corpse name - make locate easier , other skills */
-  sprintf( buf, "corpse %s", name );
-  FreeMemory( corpse->Name );
-  corpse->Name = CopyString( buf );
-
-  sprintf( buf, corpse->ShortDescr, name );
-  FreeMemory( corpse->ShortDescr );
-  corpse->ShortDescr = CopyString( buf );
-
-  sprintf( buf, corpse->Description, name );
-  FreeMemory( corpse->Description );
-  corpse->Description = CopyString( buf );
+  corpse->Name = FormatString("corpse %s", name.c_str());
+  corpse->ShortDescr = FormatString(corpse->ShortDescr.c_str(), name);
+  corpse->Description = FormatString(corpse->Description.c_str(), name);
 
   std::list<Object*> carriedObjects(ch->Objects());
 
@@ -250,7 +234,6 @@ Object *CreateMoney( int amount )
 {
   assert(amount > 0);
 
-  char buf[MAX_STRING_LENGTH];
   Object *obj = NULL;
 
   if ( amount == 1 )
@@ -260,9 +243,7 @@ Object *CreateMoney( int amount )
   else
     {
       obj = CreateObject( GetProtoObject( OBJ_VNUM_MONEY_SOME ), 0 );
-      sprintf( buf, obj->ShortDescr, amount );
-      FreeMemory( obj->ShortDescr );
-      obj->ShortDescr = CopyString( buf );
+      obj->ShortDescr = FormatString(obj->ShortDescr.c_str(), amount);
       obj->Value[OVAL_MONEY_AMOUNT]      = amount;
     }
 

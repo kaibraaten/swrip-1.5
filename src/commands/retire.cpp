@@ -2,14 +2,11 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 
-void do_retire( Character *ch, char *argument )
+void do_retire( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  Character *victim = NULL;
+  Character *victim = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Retire whom?\r\n");
       return;
@@ -42,15 +39,16 @@ void do_retire( Character *ch, char *argument )
   if ( IsRetiredImmortal( victim ) )
     {
       RemoveBit( victim->PCData->Flags, PCFLAG_RETIRED );
-      ch->Echo("%s returns from retirement.\r\n", victim->Name );
-      victim->Echo("%s brings you back from retirement.\r\n", ch->Name );
+      ch->Echo( "%s returns from retirement.\r\n",
+                victim->Name.c_str() );
+      victim->Echo( "%s brings you back from retirement.\r\n",
+                    ch->Name.c_str() );
     }
   else
     {
       SetBit( victim->PCData->Flags, PCFLAG_RETIRED );
-      ch->Echo("%s is now a retired immortal.\r\n", victim->Name );
-      victim->Echo("Courtesy of %s, you are now a retired immortal.\r\n",
-		 ch->Name );
+      ch->Echo( "%s is now a retired immortal.\r\n", victim->Name.c_str() );
+      victim->Echo( "Courtesy of %s, you are now a retired immortal.\r\n",
+                    ch->Name.c_str() );
     }
 }
-

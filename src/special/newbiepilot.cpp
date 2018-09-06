@@ -24,7 +24,8 @@ bool spec_newbie_pilot( Character *ch )
       do_look( victim , "" );
 
       char buf[MAX_STRING_LENGTH];
-      sprintf( buf, "%s steps out and the shuttle quickly returns to the academy.\r\n", victim->Name );
+      sprintf( buf, "%s steps out and the shuttle quickly returns to the academy.\r\n",
+               victim->Name.c_str() );
       EchoToRoom( AT_ACTION , ch->InRoom, buf );
     }
 

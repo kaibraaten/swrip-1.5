@@ -10,7 +10,7 @@
 
 struct UserData
 {
-  char *ItemName = nullptr;
+  std::string ItemName;
   int GemType = 0;
   int GemCount = 0;
   int Charge = 0;
@@ -24,7 +24,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static void FreeUserData( struct UserData *ud );
 
-void do_makelightsaber( Character *ch, char *argument )
+void do_makelightsaber( Character *ch, std::string argument )
 {
   static const struct CraftingMaterial materials[] =
     {
@@ -60,14 +60,14 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   Character *ch = GetEngineer( eventArgs->CraftingSession );
   struct UserData *ud = (struct UserData*) userData;
 
-  if ( IsNullOrEmpty( eventArgs->CommandArguments ) )
+  if ( eventArgs->CommandArguments.empty() )
     {
       ch->Echo("&RUsage: Makelightsaber <name>\r\n&w" );
       eventArgs->AbortSession = true;
       return;
     }
 
-  ud->ItemName = CopyString( eventArgs->CommandArguments );
+  ud->ItemName = eventArgs->CommandArguments;
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventArgs )
@@ -103,21 +103,18 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
 
   lightsaber->Weight = 5;
 
-  FreeMemory( lightsaber->Name );
-  lightsaber->Name = CopyString( "lightsaber saber" );
+  lightsaber->Name = "lightsaber saber";
 
-  strcpy( buf, ud->ItemName );
-  FreeMemory( lightsaber->ShortDescr );
-  lightsaber->ShortDescr = CopyString( buf );
+  strcpy( buf, ud->ItemName.c_str() );
+  lightsaber->ShortDescr = buf;
 
-  FreeMemory( lightsaber->Description );
-  sprintf( buf, "%s was carelessly misplaced here.", Capitalize( ud->ItemName ) );
-  lightsaber->Description = CopyString( buf );
+  sprintf( buf, "%s was carelessly misplaced here.",
+           Capitalize( ud->ItemName ).c_str() );
+  lightsaber->Description = buf;
 
-  FreeMemory( lightsaber->ActionDescription );
-  strcpy( buf, ud->ItemName );
+  strcpy( buf, ud->ItemName.c_str() );
   strcat( buf, " ignites with a hum and a soft glow." );
-  lightsaber->ActionDescription = CopyString( buf );
+  lightsaber->ActionDescription = buf;
 
   Affect *hitroll = new Affect();
   hitroll->Type               = -1;
@@ -158,11 +155,6 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 
 static void FreeUserData( struct UserData *ud )
 {
-  if( ud->ItemName )
-    {
-      FreeMemory( ud->ItemName );
-    }
-
   delete ud;
 }
 

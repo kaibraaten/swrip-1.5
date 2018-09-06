@@ -2,7 +2,7 @@
 #include "shop.hpp"
 #include "character.hpp"
 
-void do_repairshops( Character *ch, char *argument )
+void do_repairshops( Character *ch, std::string argument )
 {
   if ( RepairShops->Count() == 0)
     {

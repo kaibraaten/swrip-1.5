@@ -3,9 +3,9 @@
 #include "room.hpp"
 #include "descriptor.hpp"
 
-void do_tell( Character *ch, char *argument )
+void do_tell( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   char buf[MAX_INPUT_LENGTH];
   Character *victim = NULL;
   PositionType position = POS_STANDING;
@@ -34,7 +34,7 @@ void do_tell( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
+  if ( arg.empty() || argument.empty() )
     {
       ch->Echo("Tell whom what?\r\n");
       return;
@@ -45,7 +45,7 @@ void do_tell( Character *ch, char *argument )
        || (IsAuthed(ch) && !IsAuthed(victim) && !IsImmortal(ch) ) )
     {
       ch->Echo("%s can't hear you.\r\n",
-	    Capitalize( victim != NULL ? HeSheIt( victim ) : "they" ) );
+	    Capitalize( victim != NULL ? HeSheIt( victim ) : "they" ).c_str() );
       return;
     }
 
@@ -72,8 +72,8 @@ void do_tell( Character *ch, char *argument )
 
       if ( !victim_comlink )
         {
-   ch->Echo("%s doesn't seem to have a comlink!\r\n",
-                Capitalize( HeSheIt( victim ) ) );
+          ch->Echo("%s doesn't seem to have a comlink!\r\n",
+                   Capitalize( HeSheIt( victim ) ).c_str() );
           return;
         }
     }
@@ -81,7 +81,7 @@ void do_tell( Character *ch, char *argument )
   if (!IsAuthed(ch) && IsAuthed(victim) && !IsImmortal(victim) )
     {
       ch->Echo("%s can't hear you because you are not authorized.\r\n",
-	    Capitalize( HeSheIt( victim ) ) );
+               Capitalize( HeSheIt( victim ) ).c_str() );
       return;
     }
 
@@ -115,13 +115,13 @@ void do_tell( Character *ch, char *argument )
   if ( !IsNpc (victim) && ( IsBitSet (victim->Flags, PLR_SILENCE ) ) )
     {
       ch->Echo("That player is silenced. %s will receive your message but can not respond.\r\n",
-	    Capitalize( HeSheIt( victim ) ) );
+               Capitalize( HeSheIt( victim ) ).c_str() );
     }
 
   if ( (!IsImmortal(ch) && !IsAwake(victim) )
        || (!IsNpc(victim)&&IsBitSet(victim->InRoom->Flags, ROOM_SILENCE ) ) )
     {
-      Act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
+      Act( AT_PLAIN, "$E can't hear you.", ch, nullptr, victim, TO_CHAR );
       return;
     }
 
@@ -129,21 +129,22 @@ void do_tell( Character *ch, char *argument )
        &&   victim->Desc->ConnectionState == CON_EDITING
        &&   GetTrustLevel(ch) < LEVEL_GREATER )
     {
-      Act( AT_PLAIN, "$E is currently in a writing buffer. Please try again in a few minutes.", ch, 0, victim, TO_CHAR );
+      Act( AT_PLAIN, "$E is currently in a writing buffer. Please try again in a few minutes.",
+           ch, nullptr, victim, TO_CHAR );
       return;
     }
 
   if ( !IsNpc (victim) && ( IsBitSet (victim->Flags, PLR_AFK ) ) )
     {
       ch->Echo("That player is afk so %s may not respond.\r\n",
-	    Capitalize( HeSheIt( victim ) ) );
+               Capitalize( HeSheIt( victim ) ).c_str() );
     }
 
   if(switched_victim)
     victim = switched_victim;
 
   Act( AT_TELL, "(&COutgoing Message&B) $N: '$t'",
-       ch, argument, victim, TO_CHAR );
+       ch, argument.c_str(), victim, TO_CHAR );
   position = victim->Position;
   victim->Position = POS_STANDING;
 
@@ -151,12 +152,12 @@ void do_tell( Character *ch, char *argument )
        ||  (IsNpc(ch) && !ch->Speaking) )
     {
       Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'",
-	   ch, argument, victim, TO_VICT );
+	   ch, argument.c_str(), victim, TO_VICT );
     }
   else
     {
       Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'",
-	   ch, Scramble(argument, ch->Speaking), victim, TO_VICT );
+	   ch, Scramble(argument, ch->Speaking).c_str(), victim, TO_VICT );
     }
 
   victim->Position = position;
@@ -165,9 +166,9 @@ void do_tell( Character *ch, char *argument )
   if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf, "%s: %s (tell to) %s.",
-               IsNpc( ch ) ? ch->ShortDescr : ch->Name,
-               argument,
-               IsNpc( victim ) ? victim->ShortDescr : victim->Name );
+               IsNpc( ch ) ? ch->ShortDescr.c_str() : ch->Name.c_str(),
+               argument.c_str(),
+               IsNpc( victim ) ? victim->ShortDescr.c_str() : victim->Name.c_str() );
       AppendToFile( LOG_FILE, buf );
     }
 
@@ -175,7 +176,7 @@ void do_tell( Character *ch, char *argument )
     {
       for(Character *vch : ch->InRoom->Characters())
         {
-          const char *sbuf = argument;
+          std::string sbuf = argument;
 
           if ( vch == ch )
             continue;
@@ -200,4 +201,3 @@ void do_tell( Character *ch, char *argument )
 
   MobProgSpeechTrigger( argument, ch );
 }
-

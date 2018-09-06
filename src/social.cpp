@@ -17,36 +17,12 @@ static int L_SocialEntry( lua_State *L );
 
 void FreeSocial( Social *social )
 {
-  if ( social->Name )
-    FreeMemory( social->Name );
-
-  if ( social->CharNoArg )
-    FreeMemory( social->CharNoArg );
-
-  if ( social->OthersNoArg )
-    FreeMemory( social->OthersNoArg );
-
-  if ( social->CharFound )
-    FreeMemory( social->CharFound );
-
-  if ( social->OthersFound )
-    FreeMemory( social->OthersFound );
-
-  if ( social->VictimFound )
-    FreeMemory( social->VictimFound );
-
-  if ( social->CharAuto )
-    FreeMemory( social->CharAuto );
-
-  if ( social->OthersAuto )
-    FreeMemory( social->OthersAuto );
-
   delete social;
 }
 
-bool CheckSocial( Character *ch, const std::string &command, char *argument )
+bool CheckSocial( Character *ch, const std::string &command, const std::string &argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   Character *victim = NULL;
   Social *social = Socials->FindByName(command);
 
@@ -95,7 +71,7 @@ bool CheckSocial( Character *ch, const std::string &command, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       Act( AT_SOCIAL, social->OthersNoArg, ch, NULL, victim, TO_ROOM    );
       Act( AT_SOCIAL, social->CharNoArg,   ch, NULL, victim, TO_CHAR    );
@@ -197,7 +173,7 @@ static void PushSocialTable( lua_State *L, const void *userData )
 
   for(const Social *social : Socials->Entities())
     {
-      if ( IsNullOrEmpty( social->Name ) )
+      if ( social->Name.empty() )
         {
           continue;
         }
@@ -226,84 +202,52 @@ static int L_SocialEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      social->Name = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      social->Name = CopyString( "" );
+      social->Name = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      social->CharNoArg = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      social->CharNoArg = CopyString( "" );
+      social->CharNoArg = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      social->OthersNoArg = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      social->OthersNoArg = CopyString( "" );
+      social->OthersNoArg = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      social->CharFound = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      social->CharFound = CopyString( "" );
+      social->CharFound = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      social->OthersFound = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      social->OthersFound = CopyString( "" );
+      social->OthersFound = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      social->VictimFound = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      social->VictimFound = CopyString( "" );
+      social->VictimFound = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      social->CharAuto = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      social->CharAuto = CopyString( "" );
+      social->CharAuto = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      social->OthersAuto = CopyString( lua_tostring( L, idx ) );
-    }
-  else
-    {
-      social->OthersAuto = CopyString( "" );
+      social->OthersAuto = lua_tostring( L, idx );
     }
 
   lua_pop( L, 8 );
 
-  if ( IsNullOrEmpty( social->Name ) )
+  if ( social->Name.empty() )
     {
       Log->Bug( "%s: Name not found", __FUNCTION__ );
       FreeSocial( social );
     }
-  else if ( IsNullOrEmpty( social->CharNoArg ) )
+  else if ( social->CharNoArg.empty() )
     {
       Log->Bug( "%s: CharNoArg not found", __FUNCTION__ );
       FreeSocial( social );

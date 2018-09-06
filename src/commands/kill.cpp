@@ -1,14 +1,11 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_kill( Character *ch, char *argument )
+void do_kill( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Kill whom?\r\n");
       return;
@@ -28,7 +25,7 @@ void do_kill( Character *ch, char *argument )
 
   if ( victim == ch )
     {
-      ch->Echo("You hit yourself.  Ouch!\r\n");
+      ch->Echo("You hit yourself. Ouch!\r\n");
       HitMultipleTimes( ch, ch, TYPE_UNDEFINED );
       return;
     }

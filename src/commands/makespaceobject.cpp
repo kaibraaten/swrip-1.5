@@ -2,12 +2,9 @@
 #include "spaceobject.hpp"
 #include "character.hpp"
 
-void do_makespaceobject( Character *ch, char *argument )
+void do_makespaceobject( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  size_t n = 0;
-
-  if ( IsNullOrEmpty( argument ))
+  if ( argument.empty() )
     {
       ch->Echo("Usage: makespaceobject <spaceobject name>\r\n");
       return;
@@ -20,16 +17,8 @@ void do_makespaceobject( Character *ch, char *argument )
     }
 
   Spaceobject *spaceobject = new Spaceobject();
+  spaceobject->Name = argument;
   Spaceobjects->Add(spaceobject);
-
-  spaceobject->Name      = CopyString( argument );
-
-  for( n = 0; n < MAX_LANDINGSITE; ++n )
-    {
-      spaceobject->LandingSites[n].LocationName = CopyString( "" );
-    }
-
-  argument = OneArgument( argument, arg );
   Spaceobjects->Save(spaceobject);
 }
 

@@ -1,14 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_disconnect( Character *ch, char *argument )
+void do_disconnect( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Disconnect whom?\r\n" );
       return;

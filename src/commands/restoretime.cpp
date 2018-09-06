@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 
-void do_restoretime( Character *ch, char *argument )
+void do_restoretime( Character *ch, std::string argument )
 {
   long int time_passed = 0;
   int hour = 0, minute = 0;
@@ -16,8 +16,8 @@ void do_restoretime( Character *ch, char *argument )
       time_passed = current_time - last_restore_all_time;
       hour = (int) ( time_passed / 3600 );
       minute = (int) ( ( time_passed - ( hour * 3600 ) ) / 60 );
-      ch->Echo("The  last restore all was %d hours and %d minutes ago.\r\n",
-                 hour, minute );
+      ch->Echo("The last restore all was %d hours and %d minutes ago.\r\n",
+               hour, minute );
     }
 
   if ( !ch->PCData )
@@ -33,6 +33,5 @@ void do_restoretime( Character *ch, char *argument )
   hour = (int) ( time_passed / 3600 );
   minute = (int) ( ( time_passed - ( hour * 3600 ) ) / 60 );
   ch->Echo("Your last restore all was %d hours and %d minutes ago.\r\n",
-             hour, minute );
+           hour, minute );
 }
-

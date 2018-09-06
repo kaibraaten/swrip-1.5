@@ -4,7 +4,7 @@
 #include "log.hpp"
 #include "descriptor.hpp"
 
-void do_mpapply( Character *ch, char *argument )
+void do_mpapply( Character *ch, std::string argument )
 {
   Character *victim = NULL;
 
@@ -14,7 +14,7 @@ void do_mpapply( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ProgBug("Mpapply - bad syntax", ch );
       return;
@@ -39,7 +39,7 @@ void do_mpapply( Character *ch, char *argument )
     return;
 
   sprintf( log_buf, "%s@%s new %s applying for authorization...",
-           victim->Name, victim->Desc->Remote.Hostname,
+           victim->Name.c_str(), victim->Desc->Remote.Hostname.c_str(),
            RaceTable[victim->Race].Name);
   Log->Info( log_buf );
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );

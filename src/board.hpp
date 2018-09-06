@@ -9,15 +9,15 @@
 class Note
 {
 public:
-  char *Sender = nullptr;
-  char *Date = nullptr;
-  char *ToList = nullptr;
-  char *Subject = nullptr;
+  std::string Sender;
+  std::string Date;
+  std::string ToList;
+  std::string Subject;
   bool Voting = false;
-  char *YesVotes = nullptr;
-  char *NoVotes = nullptr;
-  char *Abstentions = nullptr;
-  char *Text = nullptr;
+  std::string YesVotes;
+  std::string NoVotes;
+  std::string Abstentions;
+  std::string Text;
 };
 
 class Board
@@ -30,11 +30,11 @@ public:
   void Add(Note *note);
   void Remove(Note *note);
   
-  char *Name = nullptr;             /* Filename to save notes to       */
-  char *ReadGroup = nullptr;            /* Can restrict a board to a       */
-  char *PostGroup = nullptr;            /* council, clan, guild etc        */
-  char *ExtraReaders = nullptr;         /* Can give read rights to players */
-  char *ExtraRemovers = nullptr;        /* Can give remove rights to players */
+  std::string Name;             /* Filename to save notes to       */
+  std::string ReadGroup;            /* Can restrict a board to a       */
+  std::string PostGroup;            /* council, clan, guild etc        */
+  std::string ExtraReaders;         /* Can give read rights to players */
+  std::string ExtraRemovers;        /* Can give remove rights to players */
   vnum_t BoardObject = INVALID_VNUM;             /* Vnum of board object            */
   short MinReadLevel = 0;        /* Minimum level to read a note    */
   short MinPostLevel = 0;        /* Minimum level to post a note    */
@@ -53,10 +53,10 @@ Board *GetBoardFromObject( const Object *obj );
 Board *FindBoardHere( const Character *ch );
 Board *GetBoard( const std::string &name );
 void FreeNote( Note *pnote );
-void OperateOnNote( Character *ch, const std::string &arg_passed, bool IS_MAIL );
+void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL );
 void AttachNote(Character *ch);
 void CountMailMessages(const Character *ch);
-const char *GetBoardFilename( const Board *board );
+std::string GetBoardFilename( const Board *board );
 
 class BoardRepository : public Ceris::Repository<Board*>
 {

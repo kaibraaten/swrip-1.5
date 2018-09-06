@@ -7,9 +7,9 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_detrap( Character *ch, char *argument )
+void do_detrap( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   Object *obj = NULL;
   Object *trap = NULL;
   int percent = 0;
@@ -32,7 +32,7 @@ void do_detrap( Character *ch, char *argument )
           return;
         }
       
-      if ( IsNullOrEmpty( arg ) )
+      if ( arg.empty() )
         {
 	  ch->Echo( "Detrap what?\r\n" );
           return;
@@ -72,8 +72,10 @@ void do_detrap( Character *ch, char *argument )
           return;
         }
 
-      Act( AT_ACTION, "You carefully begin your attempt to remove a trap from $p...", ch, obj, NULL, TO_CHAR );
-      Act( AT_ACTION, "$n carefully attempts to remove a trap from $p...", ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "You carefully begin your attempt to remove a trap from $p...",
+           ch, obj, NULL, TO_CHAR );
+      Act( AT_ACTION, "$n carefully attempts to remove a trap from $p...",
+           ch, obj, NULL, TO_ROOM );
       ch->dest_buf = CopyString( obj->Name );
       AddTimerToCharacter( ch, TIMER_CMD_FUN, 3, do_detrap, SUB_PAUSE );
       return;
@@ -86,9 +88,8 @@ void do_detrap( Character *ch, char *argument )
           return;
         }
       
-      strcpy( arg, (const char*)ch->dest_buf );
+      arg = static_cast<const char*>(ch->dest_buf);
       FreeMemory( ch->dest_buf );
-      FreeMemory(ch->dest_buf);
       ch->SubState = SUB_NONE;
       break;
 
@@ -146,4 +147,3 @@ void do_detrap( Character *ch, char *argument )
   ch->Echo( "You successfully remove a trap.\r\n" );
   LearnFromSuccess( ch, gsn_detrap );
 }
-

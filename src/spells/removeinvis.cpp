@@ -3,14 +3,14 @@
 #include "skill.hpp"
 #include "object.hpp"
 
-extern char *spell_target_name;
+extern std::string spell_target_name;
 
 ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 {
   Object *obj = nullptr;
   Skill *skill = GetSkill(sn);
 
-  if ( IsNullOrEmpty( spell_target_name ) )
+  if ( spell_target_name.empty() )
     {
       ch->Echo("What should the spell be cast upon?\r\n");
       return rSPELL_FAILED;
@@ -39,7 +39,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
         {
           if(!CanSeeCharacter(ch, victim))
             {
-              ch->Echo("You don't see %s!\r\n", spell_target_name);
+              ch->Echo("You don't see %s!\r\n", spell_target_name.c_str());
 	      return rSPELL_FAILED;
             }
 
@@ -88,7 +88,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 	  return rNONE;
         }
 
-      ch->Echo("You can't find %s!\r\n", spell_target_name);
+      ch->Echo("You can't find %s!\r\n", spell_target_name.c_str());
       return rSPELL_FAILED;
     }
 }

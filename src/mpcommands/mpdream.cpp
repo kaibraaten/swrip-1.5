@@ -6,10 +6,10 @@
  *    with room sleep_progs
  *
  */
-void do_mpdream( Character *ch, char *argument )
+void do_mpdream( Character *ch, std::string argument )
 {
-  char arg1[MAX_STRING_LENGTH];
-  Character *vict;
+  std::string arg1;
+  Character *vict = nullptr;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -34,4 +34,3 @@ void do_mpdream( Character *ch, char *argument )
       vict->Echo("\r\n");
     }
 }
-

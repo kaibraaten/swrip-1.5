@@ -2,16 +2,12 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_affected( Character *ch, char *argument )
+void do_affected( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-
   if ( IsNpc(ch) )
     return;
 
-  argument = OneArgument( argument, arg );
-
-  if ( !StrCmp( arg, "by" ) )
+  if ( !StrCmp( argument, "by" ) )
     {
       SetCharacterColor( AT_BLUE, ch );
       ch->Echo( "\r\nImbued with:\r\n" );

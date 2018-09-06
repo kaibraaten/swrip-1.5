@@ -10,19 +10,19 @@
 struct UserData
 {
   int WearLocation = 0;
-  char *ItemName = nullptr;
+  std::string ItemName;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args );
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
-static void FreeUserData( struct UserData *ud );
+static void FreeUserData( UserData *ud );
 static bool CanUseWearLocation( int wearLocation );
 
-void do_makecontainer( Character *ch, char *argument )
+void do_makecontainer( Character *ch, std::string argument )
 {
-  static const struct CraftingMaterial materials[] =
+  static const CraftingMaterial materials[] =
     {
       { ITEM_FABRIC, CRAFTFLAG_EXTRACT },
       { ITEM_THREAD, CRAFTFLAG_NONE },
@@ -45,22 +45,15 @@ void do_makecontainer( Character *ch, char *argument )
 
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *eventArgs )
 {
-  struct UserData *ud = (struct UserData*) userData;
+  UserData *ud = (UserData*) userData;
   Object *container = eventArgs->Object;
-  char description[MAX_STRING_LENGTH];
 
   SetBit( container->WearFlags, ITEM_TAKE );
   SetBit( container->WearFlags, ud->WearLocation );
 
-  FreeMemory( container->Name );
-  container->Name = CopyString( ud->ItemName );
-
-  FreeMemory( container->ShortDescr );
-  container->ShortDescr = CopyString( ud->ItemName );
-
-  FreeMemory( container->Description );
-  sprintf( description, "%s was dropped here.", Capitalize( ud->ItemName ) );
-  container->Description = CopyString( description );
+  container->Name = ud->ItemName;
+  container->ShortDescr = ud->ItemName;
+  container->Description = Capitalize( ud->ItemName ) + " was dropped here.";
 
   container->Value[OVAL_CONTAINER_CAPACITY] = container->Level;
   container->Value[OVAL_CONTAINER_FLAGS] = 0;
@@ -70,19 +63,17 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *eventArgs )
 {
-  struct UserData *ud = (struct UserData*) userData;
+  UserData *ud = (UserData*) userData;
   CraftingSession *session = eventArgs->CraftingSession;
-  char originalArgs[MAX_INPUT_LENGTH];
-  char *argument = originalArgs;
-  char wearLoc[MAX_STRING_LENGTH];
-  char itemName[MAX_STRING_LENGTH];
+  std::string argument = eventArgs->CommandArguments;
+  std::string wearLoc;
+  std::string itemName;
   Character *ch = GetEngineer( session );
 
-  strcpy( argument, eventArgs->CommandArguments );
   argument = OneArgument( argument, wearLoc );
-  strcpy( itemName, argument );
+  itemName = argument;
 
-  if ( IsNullOrEmpty( itemName ) )
+  if ( itemName.empty() )
     {
       ch->Echo("&RUsage: Makecontainer <body|about|take|hold> <name>\r\n&w");
       eventArgs->AbortSession = true;
@@ -93,7 +84,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if( ud->WearLocation == -1 )
     {
-      ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc );
+      ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc.c_str() );
       eventArgs->AbortSession = true;
       return;
     }
@@ -109,28 +100,23 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = CopyString( itemName );
+  ud->ItemName = itemName;
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )
 {
-  struct UserData *ud = (struct UserData*) userData;
+  UserData *ud = (UserData*) userData;
   FreeUserData( ud );
 }
 
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 {
-  struct UserData *ud = (struct UserData*) userData;
+  UserData *ud = (UserData*) userData;
   FreeUserData( ud );
 }
 
-static void FreeUserData( struct UserData *ud )
+static void FreeUserData( UserData *ud )
 {
-  if( ud->ItemName )
-    {
-      FreeMemory( ud->ItemName );
-    }
-
   delete ud;
 }
 

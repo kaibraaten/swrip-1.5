@@ -3,19 +3,16 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_viewskills( Character *ch, char *argument )
+void do_viewskills( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   Character *victim = NULL;
   int sn = 0;
   int col = 0;
 
-  argument = OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
-      ch->Echo("&zSyntax: skills <player>.\r\n");
+      ch->Echo("&zSyntax: skills <player>\r\n");
       return;
     }
 
@@ -30,15 +27,16 @@ void do_viewskills( Character *ch, char *argument )
   if ( !IsNpc( victim ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      for ( sn = 0; sn < TopSN && SkillTable[sn] && SkillTable[sn]->Name; sn++ )
+
+      for ( sn = 0; sn < TopSN && SkillTable[sn] && !SkillTable[sn]->Name.empty(); sn++ )
         {
-	  if ( IsNullOrEmpty( SkillTable[sn]->Name ))
+	  if ( SkillTable[sn]->Name.empty() )
             break;
 
           if ( victim->PCData->Learned[sn] == 0 )
             continue;
 
-          sprintf( buf, "%20s %3d%% ", SkillTable[sn]->Name,
+          sprintf( buf, "%20s %3d%% ", SkillTable[sn]->Name.c_str(),
                    victim->PCData->Learned[sn]);
           ch->Echo(buf);
 
@@ -47,4 +45,3 @@ void do_viewskills( Character *ch, char *argument )
         }
     }
 }
-

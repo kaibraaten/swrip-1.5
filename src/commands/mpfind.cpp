@@ -7,38 +7,38 @@ static void mpfind_help (Character *ch);
 /*
  * Search mobs for mob progs containing a specified text string.
  */
-void do_mpfind( Character *ch, char *argument )   /* Gorog */
+void do_mpfind( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
-  vnum_t lo_vnum = MIN_VNUM, hi_vnum= MAX_VNUM;
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
+  vnum_t lo_vnum = MIN_VNUM, hi_vnum = MAX_VNUM;
 
   argument = OneArgument( argument, arg1 );   /* display_limit */
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || !IsNumber(arg1) )
+  if ( arg1.empty() || arg2.empty() || !IsNumber(arg1) )
     {
       mpfind_help(ch);
       return;
     }
 
-  int disp_limit = atoi (arg1);
+  int disp_limit = std::stoi(arg1);
   disp_limit = umax(0, disp_limit);
 
   if ( StrCmp(arg2, "mud") )
     {
       argument = OneArgument( argument, arg3 );
 
-      if ( IsNullOrEmpty( arg3 ) || !IsNumber(arg2) || !IsNumber(arg3) )
+      if ( arg3.empty() || !IsNumber(arg2) || !IsNumber(arg3) )
         {
 	  mpfind_help(ch);
           return;
         }
       else
         {
-          lo_vnum = urange(MIN_VNUM, atoi(arg2), MAX_VNUM);
-          hi_vnum = urange(MIN_VNUM, atoi(arg3), MAX_VNUM);
+          lo_vnum = urange(MIN_VNUM, std::stoi(arg2), MAX_VNUM);
+          hi_vnum = urange(MIN_VNUM, std::stoi(arg3), MAX_VNUM);
 
           if ( lo_vnum > hi_vnum )
             {
@@ -48,7 +48,7 @@ void do_mpfind( Character *ch, char *argument )   /* Gorog */
         }
     }
   
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       mpfind_help(ch);
       return;
@@ -108,4 +108,3 @@ static void mpfind_help (Character *ch)
             "   and display all mobs that contain the text \"mpslay\".\r\n"
             "   Display a maximum of 100 lines.\r\n\r\n" );
 }
-

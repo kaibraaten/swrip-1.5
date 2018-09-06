@@ -32,11 +32,11 @@ public:
   Character        *CarriedBy = nullptr;
   ProtoObject   *Prototype = nullptr;
   Room  *InRoom = nullptr;
-  char             *ArmedBy = nullptr;
-  char             *Name = nullptr;
-  char             *ShortDescr = nullptr;
-  char             *Description = nullptr;
-  char             *ActionDescription = nullptr;
+  std::string ArmedBy;
+  std::string Name;
+  std::string ShortDescr;
+  std::string Description;
+  std::string ActionDescription;
   ItemTypes         ItemType = 0;
   int               Flags = 0;
   int               WearFlags = 0;

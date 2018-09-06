@@ -3,10 +3,10 @@
 
 /* lets the mobile goto any location it wishes that is not private */
 
-void do_mpgoto( Character *ch, char *argument )
+void do_mpgoto( Character *ch, std::string argument )
 {
-  char arg[ MAX_INPUT_LENGTH ];
-  Room *location;
+  std::string arg;
+  Room *location = nullptr;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -19,7 +19,7 @@ void do_mpgoto( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ProgBug( "Mpgoto - No argument", ch );
       return;
@@ -37,4 +37,3 @@ void do_mpgoto( Character *ch, char *argument )
   CharacterFromRoom( ch );
   CharacterToRoom( ch, location );
 }
-

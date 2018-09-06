@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "skill.hpp"
 #include "character.hpp"
@@ -7,13 +7,13 @@
  * Lookup a skills information
  * High god command
  */
-void do_slookup( Character *ch, char *arg )
+void do_slookup( Character *ch, std::string arg )
 {
   char buf[MAX_STRING_LENGTH];
-  int sn;
+  int sn = 0;
   const Skill *skill = NULL;
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Slookup what?\r\n");
       return;
@@ -21,30 +21,30 @@ void do_slookup( Character *ch, char *arg )
 
   if ( !StrCmp( arg, "all" ) )
     {
-      for ( sn = 0; sn < TopSN && SkillTable[sn] && SkillTable[sn]->Name; sn++ )
+      for ( sn = 0; sn < TopSN && SkillTable[sn] && !SkillTable[sn]->Name.empty(); sn++ )
 	{
-   ch->Echo("Sn: %4d Slot: %4d Skill/spell: '%-20s' Damtype: %s\r\n",
-		       sn, SkillTable[sn]->Slot, SkillTable[sn]->Name,
-		       GetSpellDamageName(SPELL_DAMAGE( SkillTable[sn] )) );
+          ch->Echo("Sn: %4d Slot: %4d Skill/spell: '%-20s' Damtype: %s\r\n",
+                   sn, SkillTable[sn]->Slot, SkillTable[sn]->Name,
+                   GetSpellDamageName(SPELL_DAMAGE( SkillTable[sn] )) );
 	}
     }
   else if ( !StrCmp( arg, "herbs" ) )
     {
-      for ( sn = 0; sn < TopHerb && HerbTable[sn] && HerbTable[sn]->Name; sn++ )
- ch->Echo("%d) %s\r\n", sn, HerbTable[sn]->Name );
+      for ( sn = 0; sn < TopHerb && HerbTable[sn] && !HerbTable[sn]->Name.empty(); sn++ )
+        ch->Echo("%d) %s\r\n", sn, HerbTable[sn]->Name.c_str() );
     }
   else
     {
       const SmaugAffect *aff;
       int cnt = 0;
 
-      if ( arg[0] == 'h' && IsNumber(arg+1) )
+      if ( arg[0] == 'h' && IsNumber( arg.substr( 1 ) ) )
 	{
-	  sn = atoi(arg+1);
+	  sn = std::stoi(arg.substr( 1 ) );
 
 	  if ( !IS_VALID_HERB(sn) )
 	    {
-       ch->Echo("Invalid herb.\r\n");
+              ch->Echo("Invalid herb.\r\n");
 	      return;
 	    }
 
@@ -52,13 +52,14 @@ void do_slookup( Character *ch, char *arg )
 	}
       else if ( IsNumber(arg) )
 	{
-	  sn = atoi(arg);
+	  sn = std::stoi(arg);
 
 	  if ( (skill=GetSkill(sn)) == NULL )
 	    {
-       ch->Echo("Invalid sn.\r\n");
+              ch->Echo("Invalid sn.\r\n");
 	      return;
 	    }
+
 	  sn %= 1000;
 	}
       else if ( ( sn = LookupSkill( arg ) ) >= 0 )
@@ -67,28 +68,28 @@ void do_slookup( Character *ch, char *arg )
 	skill = HerbTable[sn];
       else
 	{
-   ch->Echo("No such skill, spell, proficiency or tongue.\r\n");
+          ch->Echo("No such skill, spell, proficiency or tongue.\r\n");
 	  return;
 	}
 
       if ( !skill )
 	{
-   ch->Echo("Not created yet.\r\n");
+          ch->Echo("Not created yet.\r\n");
 	  return;
 	}
 
       ch->Echo("Sn: %4d Slot: %4d %s: %s\r\n",
-	    sn, skill->Slot, SkillTypeName[skill->Type], skill->Name );
+	    sn, skill->Slot, SkillTypeName[skill->Type], skill->Name.c_str() );
 
       if ( skill->Flags )
 	{
 	  size_t x = 0;
 
-   ch->Echo("Damtype: %s  Acttype: %s   Classtype: %s   Powertype: %s\r\n",
-		GetSpellDamageName( SPELL_DAMAGE( skill ) ),
-		GetSpellActionName( SPELL_ACTION( skill ) ),
-		GetSpellClassName( SPELL_CLASS( skill ) ),
-		GetSpellPowerName( SPELL_POWER( skill ) ) );
+          ch->Echo("Damtype: %s  Acttype: %s   Classtype: %s   Powertype: %s\r\n",
+                   GetSpellDamageName( SPELL_DAMAGE( skill ) ),
+                   GetSpellActionName( SPELL_ACTION( skill ) ),
+                   GetSpellClassName( SPELL_CLASS( skill ) ),
+                   GetSpellPowerName( SPELL_POWER( skill ) ) );
 
 	  strcpy( buf, "Flags:" );
 
@@ -100,35 +101,35 @@ void do_slookup( Character *ch, char *arg )
 	      }
 
 	  strcat( buf, "\r\n" );
-   ch->Echo(buf);
+          ch->Echo(buf);
 	}
 
       ch->Echo("Saves: %s\r\n", GetSpellSavesName( skill->Saves ) );
 
       if ( skill->Difficulty )
- ch->Echo("Difficulty: %d\r\n", (int) skill->Difficulty );
+        ch->Echo("Difficulty: %d\r\n", (int) skill->Difficulty );
 
       ch->Echo("Type: %s  Target: %s  Minpos: %d  Mana: %d  Beats: %d\r\n",
-	    SkillTypeName[skill->Type],
-	    GetSpellTargetName(urange(TAR_IGNORE, skill->Target, TAR_OBJ_INV)),
-	    skill->Position,
-	    skill->Mana,
-	    skill->Beats );
+               SkillTypeName[skill->Type],
+               GetSpellTargetName(urange(TAR_IGNORE, skill->Target, TAR_OBJ_INV)),
+               skill->Position,
+               skill->Mana,
+               skill->Beats );
       ch->Echo("Code: %s\r\n",
-	    skill->SkillFunction || skill->SpellFunction ? skill->FunctionName : "(none set)");
+               skill->SkillFunction || skill->SpellFunction ? skill->FunctionName.c_str() : "(none set)");
 
       ch->Echo("Dammsg: %s\r\nWearoff: %s\n",
-	    skill->Messages.NounDamage,
-	    !IsNullOrEmpty( skill->Messages.WearOff ) ? skill->Messages.WearOff : "(none set)" );
+               skill->Messages.NounDamage,
+               !skill->Messages.WearOff.empty() ? skill->Messages.WearOff.c_str() : "(none set)" );
 
-      if ( !IsNullOrEmpty( skill->Dice ) )
- ch->Echo("Dice: %s\r\n", skill->Dice );
+      if ( !skill->Dice.empty() )
+        ch->Echo("Dice: %s\r\n", skill->Dice.c_str() );
 
-      if ( !IsNullOrEmpty( skill->Teachers ) )
- ch->Echo("Teachers: %s\r\n", skill->Teachers );
+      if ( !skill->Teachers.empty() )
+        ch->Echo("Teachers: %s\r\n", skill->Teachers.c_str() );
 
-      if ( skill->Participants )
- ch->Echo("Participants: %d\r\n", (int) skill->Participants );
+      if ( skill->Participants != 0 )
+        ch->Echo("Participants: %d\r\n", (int) skill->Participants );
 
       if ( skill->UseRec->NumberOfTimesUsed )
 	SendTimer(skill->UseRec, ch);
@@ -136,7 +137,7 @@ void do_slookup( Character *ch, char *arg )
       for ( aff = skill->Affects; aff; aff = aff->Next )
 	{
 	  if ( aff == skill->Affects )
-     ch->Echo("\r\n");
+            ch->Echo("\r\n");
 
 	  sprintf( buf, "Affect %d", ++cnt );
 
@@ -145,7 +146,7 @@ void do_slookup( Character *ch, char *arg )
 	      strcat( buf, " modifies " );
 	      strcat( buf, AffectTypes[aff->Location % REVERSE_APPLY] );
 	      strcat( buf, " by '" );
-	      strcat( buf, aff->Modifier );
+	      strcat( buf, aff->Modifier.c_str() );
 
 	      if ( aff->AffectedBy )
 		strcat( buf, "' and" );
@@ -167,10 +168,10 @@ void do_slookup( Character *ch, char *arg )
                 }
 	    }
 
-	  if ( !IsNullOrEmpty( aff->Duration ) )
+          if ( !aff->Duration.empty() )
 	    {
 	      strcat( buf, " for '" );
-	      strcat( buf, aff->Duration );
+	      strcat( buf, aff->Duration.c_str() );
 	      strcat( buf, "' rounds" );
 	    }
 
@@ -178,56 +179,67 @@ void do_slookup( Character *ch, char *arg )
 	    strcat( buf, " (affects caster only)" );
 
 	  strcat( buf, "\r\n" );
-   ch->Echo(buf);
+          ch->Echo(buf);
 
 	  if ( !aff->Next )
-     ch->Echo("\r\n");
+            ch->Echo("\r\n");
 	}
 
-      if ( !IsNullOrEmpty( skill->Messages.Success.ToCaster ) )
- ch->Echo("Hitchar   : %s\r\n", skill->Messages.Success.ToCaster );
+      if ( !skill->Messages.Success.ToCaster.empty() )
+        ch->Echo("Hitchar   : %s\r\n",
+                 skill->Messages.Success.ToCaster.c_str() );
 
-      if ( !IsNullOrEmpty( skill->Messages.Success.ToVictim ) )
- ch->Echo("Hitvict   : %s\r\n", skill->Messages.Success.ToVictim );
+      if ( !skill->Messages.Success.ToVictim.empty() )
+        ch->Echo("Hitvict   : %s\r\n",
+                 skill->Messages.Success.ToVictim.c_str() );
 
-      if ( !IsNullOrEmpty( skill->Messages.Success.ToRoom ) )
- ch->Echo("Hitroom   : %s\r\n", skill->Messages.Success.ToRoom );
+      if ( !skill->Messages.Success.ToRoom.empty() )
+        ch->Echo("Hitroom   : %s\r\n",
+                 skill->Messages.Success.ToRoom.c_str() );
 
-      if ( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ) )
- ch->Echo("Misschar  : %s\r\n", skill->Messages.Failure.ToCaster );
+      if ( !skill->Messages.Failure.ToCaster.empty() )
+        ch->Echo("Misschar  : %s\r\n",
+                 skill->Messages.Failure.ToCaster.c_str() );
 
-      if ( !IsNullOrEmpty( skill->Messages.Failure.ToVictim ) )
- ch->Echo("Missvict  : %s\r\n", skill->Messages.Failure.ToVictim );
+      if ( !skill->Messages.Failure.ToVictim.empty() )
+        ch->Echo("Missvict  : %s\r\n",
+                 skill->Messages.Failure.ToVictim.c_str() );
 
-      if ( !IsNullOrEmpty( skill->Messages.Failure.ToRoom ) )
- ch->Echo("Missroom  : %s\r\n", skill->Messages.Failure.ToRoom );
+      if ( !skill->Messages.Failure.ToRoom.empty() )
+        ch->Echo("Missroom  : %s\r\n",
+                 skill->Messages.Failure.ToRoom.c_str() );
 
-      if ( !IsNullOrEmpty( skill->Messages.VictimDeath.ToCaster ) )
- ch->Echo("Diechar   : %s\r\n", skill->Messages.VictimDeath.ToCaster );
+      if ( !skill->Messages.VictimDeath.ToCaster.empty() )
+        ch->Echo("Diechar   : %s\r\n",
+                 skill->Messages.VictimDeath.ToCaster.c_str() );
 
-      if ( !IsNullOrEmpty( skill->Messages.VictimDeath.ToVictim ) )
- ch->Echo("Dievict   : %s\r\n", skill->Messages.VictimDeath.ToVictim );
+      if ( !skill->Messages.VictimDeath.ToVictim.empty() )
+        ch->Echo("Dievict   : %s\r\n",
+                 skill->Messages.VictimDeath.ToVictim.c_str() );
 
-      if ( !IsNullOrEmpty( skill->Messages.VictimDeath.ToRoom ) )
- ch->Echo("Dieroom   : %s\r\n", skill->Messages.VictimDeath.ToRoom );
+      if ( !skill->Messages.VictimDeath.ToRoom.empty() )
+        ch->Echo("Dieroom   : %s\r\n",
+                 skill->Messages.VictimDeath.ToRoom.c_str() );
 
-      if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToCaster ) )
- ch->Echo("Immchar   : %s\r\n", skill->Messages.VictimImmune.ToCaster );
+      if ( !skill->Messages.VictimImmune.ToCaster.empty() )
+        ch->Echo("Immchar   : %s\r\n",
+                 skill->Messages.VictimImmune.ToCaster.c_str() );
 
-      if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToVictim ) )
- ch->Echo("Immvict   : %s\r\n", skill->Messages.VictimImmune.ToVictim );
+      if ( !skill->Messages.VictimImmune.ToVictim.empty() )
+        ch->Echo("Immvict   : %s\r\n",
+                 skill->Messages.VictimImmune.ToVictim.c_str() );
 
-      if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToRoom ) )
- ch->Echo("Immroom   : %s\r\n", skill->Messages.VictimImmune.ToRoom );
+      if ( !skill->Messages.VictimImmune.ToRoom.empty() )
+        ch->Echo("Immroom   : %s\r\n",
+                 skill->Messages.VictimImmune.ToRoom.c_str() );
 
       if ( skill->Type != SKILL_HERB && skill->Guild >= 0 && skill->Guild < MAX_ABILITY)
 	{
 	  sprintf(buf, "Ability: %s (%d)   Align: %4d   lvl: %3d\r\n",
 		  AbilityName[skill->Guild], skill->Guild, skill->Alignment, skill->Level );
-   ch->Echo(buf);
+          ch->Echo(buf);
 	}
 
       ch->Echo("\r\n");
     }
 }
-

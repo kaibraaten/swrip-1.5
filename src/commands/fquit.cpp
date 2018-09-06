@@ -4,13 +4,11 @@
 /*
  * Force a level one player to quit.             Gorog
  */
-void do_fquit( Character *ch, char *argument )
+void do_fquit( Character *ch, std::string arg1 )
 {
   Character *victim = nullptr;
-  char arg1[MAX_INPUT_LENGTH];
-  argument = OneArgument( argument, arg1 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo( "Force whom to quit?\r\n" );
       return;
@@ -32,4 +30,3 @@ void do_fquit( Character *ch, char *argument )
   do_quit(victim, "");
   ch->Echo( "Ok.\r\n" );
 }
-

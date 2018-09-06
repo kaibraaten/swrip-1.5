@@ -46,13 +46,7 @@ static void DecorateVirtualRoom( Room *room )
   int previous[8];
   SectorType sector = room->Sector;
 
-  if ( room->Name )
-    FreeMemory( room->Name );
-
-  if ( room->Description )
-    FreeMemory( room->Description );
-
-  room->Name = CopyString( SectorNames[sector][0] );
+  room->Name = SectorNames[sector][0];
   nRand = GetRandomNumberFromRange( 1, umin(8, SentTotal[sector]) );
 
   for ( iRand = 0; iRand < nRand; iRand++ )
@@ -88,8 +82,9 @@ static void DecorateVirtualRoom( Room *room )
           strcat( buf, buf2 );
         }
     }
-  sprintf( buf2, "%s\r\n", WordWrap(buf, 78) );
-  room->Description = CopyString( buf2 );
+
+  sprintf( buf2, "%s\r\n", WordWrap(buf, 78).c_str() );
+  room->Description = buf2;
 }
 
 /*
@@ -304,8 +299,6 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
   if ( !found || (xit=GetExit(room, vdir))==NULL )
     {
       xit = MakeExit(room, orig_exit->ToRoom, vdir);
-      xit->Keyword              = CopyString( "" );
-      xit->Description  = CopyString( "" );
       xit->Key          = -1;
       xit->Distance = distance;
     }
@@ -313,8 +306,6 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
   if ( !found )
     {
       bxit = MakeExit(room, backroom, GetReverseDirection(vdir));
-      bxit->Keyword             = CopyString( "" );
-      bxit->Description = CopyString( "" );
       bxit->Key         = -1;
 
       if ( (serial & 65535) != orig_exit->Vnum )
@@ -430,12 +421,12 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           if ( drunk )
             {
               Act( AT_PLAIN, "$n runs into the $d in $s drunken state.", ch,
-                   NULL, pexit->Keyword, TO_ROOM );
+                   NULL, pexit->Keyword.c_str(), TO_ROOM );
               Act( AT_PLAIN, "You run into the $d in your drunken state.", ch,
-                   NULL, pexit->Keyword, TO_CHAR );
+                   NULL, pexit->Keyword.c_str(), TO_CHAR );
             }
           else
-            Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->Keyword, TO_CHAR );
+            Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->Keyword.c_str(), TO_CHAR );
         }
       else
         {
@@ -1086,7 +1077,7 @@ Exit *FindDoor( Character *ch, const std::string &arg, bool quiet )
       for(Exit *xit : ch->InRoom->Exits())
         {
           if ( (quiet || IsBitSet(xit->Flags, EX_ISDOOR))
-               && xit->Keyword
+               && !xit->Keyword.empty()
                && NiftyIsName( arg, xit->Keyword ) )
 	    {
 	      return xit;

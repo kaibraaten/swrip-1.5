@@ -7,9 +7,9 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_bribe( Character *ch , char *argument )
+void do_bribe( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
+  std::string arg1;
   Character *victim = NULL;
   Planet *planet = NULL;
   Clan *clan = NULL;
@@ -30,13 +30,13 @@ void do_bribe( Character *ch , char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
-      ch->Echo( "Bribe who how much?\r\n" );
+      ch->Echo( "Bribe whom how much?\r\n" );
       return;
     }
 
-  amount = atoi( argument );
+  amount = std::stoi( argument );
 
   if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {
@@ -89,7 +89,7 @@ void do_bribe( Character *ch , char *argument )
 
   if ( victim->Position <= POS_SLEEPING )
     {
-      ch->Echo( "You might want to wake them first...\r\n" );
+      ch->Echo( "You might want to wake them first.\r\n" );
       return;
     }
 
@@ -102,7 +102,8 @@ void do_bribe( Character *ch , char *argument )
   ch->Gold -= amount;
   victim->Gold += amount;
 
-  ch->Echo( "You give them a small gift on behalf of %s.\r\n", ch->PCData->ClanInfo.Clan->Name );
+  ch->Echo( "You give them a small gift on behalf of %s.\r\n",
+            ch->PCData->ClanInfo.Clan->Name.c_str() );
   Act( AT_ACTION, "$n offers you a small bribe.\r\n", ch, NULL, victim, TO_VICT    );
   Act( AT_ACTION, "$n gives $N some money.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
@@ -118,7 +119,6 @@ void do_bribe( Character *ch , char *argument )
     clan = ch->PCData->ClanInfo.Clan;
 
   planet = ch->InRoom->Area->Planet;
-
 
   if ( clan == planet->GovernedBy )
     {

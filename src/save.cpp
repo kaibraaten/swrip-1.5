@@ -94,7 +94,7 @@ void SaveHome( Character *ch )
       short templvl = 0;
 
       sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->Name[0]),
-               Capitalize( ch->Name ) );
+               Capitalize( ch->Name ).c_str() );
 
       if ( ( fp = fopen( filename, "w" ) ) )
         {
@@ -145,7 +145,7 @@ void DeEquipCharacter( Character *ch )
 	  if ( x == MAX_LAYERS )
 	    {
 	      Log->Bug( "%s had on more than %d layers of clothing in one location (%d): %s",
-		   ch->Name, MAX_LAYERS, obj->WearLoc, obj->Name );
+		   ch->Name.c_str(), MAX_LAYERS, obj->WearLoc, obj->Name.c_str() );
 	    }
 
 	  UnequipCharacter(ch, obj);
@@ -216,7 +216,7 @@ void SaveCharacter( Character *ch )
 
   ch->PCData->SaveTime = current_time;
   sprintf( strsave, "%s%c/%s", PLAYER_DIR, tolower(ch->Name[0]),
-           Capitalize( ch->Name ) );
+           Capitalize( ch->Name ).c_str() );
 
   /*
    * Auto-backup pfile (can cause lag with high disk access situtations
@@ -224,7 +224,7 @@ void SaveCharacter( Character *ch )
   if ( IsBitSet( SysData.SaveFlags, SV_BACKUP ) )
     {
       sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->Name[0]),
-               Capitalize( ch->Name ) );
+               Capitalize( ch->Name ).c_str() );
       rename( strsave, strback );
     }
 
@@ -237,7 +237,7 @@ void SaveCharacter( Character *ch )
    */
   if ( GetTrustLevel(ch) > LEVEL_AVATAR )
     {
-      sprintf( strback, "%s%s", GOD_DIR, Capitalize( ch->Name ) );
+      sprintf( strback, "%s%s", GOD_DIR, Capitalize( ch->Name ).c_str() );
 
       if ( ( fp = fopen( strback, "w" ) ) == NULL )
         {
@@ -329,7 +329,7 @@ void SaveClone( Character *ch )
 
   ch->PCData->SaveTime = current_time;
   sprintf( strsave, "%s%c/%s.clone", PLAYER_DIR, tolower(ch->Name[0]),
-           Capitalize( ch->Name ) );
+           Capitalize( ch->Name ).c_str() );
 
   /*
    * Auto-backup pfile (can cause lag with high disk access situtations
@@ -337,7 +337,7 @@ void SaveClone( Character *ch )
   if ( IsBitSet( SysData.SaveFlags, SV_BACKUP ) )
     {
       sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->Name[0]),
-               Capitalize( ch->Name ) );
+               Capitalize( ch->Name ).c_str() );
       rename( strsave, strback );
     }
 
@@ -379,21 +379,21 @@ static void WriteCharacter( const Character *ch, FILE *fp )
   fprintf( fp, "#%s\n", IsNpc(ch) ? "MOB" : "PLAYER"           );
 
   fprintf( fp, "Version      %d\n",   SAVEVERSION               );
-  fprintf( fp, "Name         %s~\n",    ch->Name                );
+  fprintf( fp, "Name         %s~\n",    ch->Name.c_str()                );
 
-  if ( !IsNullOrEmpty( ch->ShortDescr ) )
+  if ( !ch->ShortDescr.empty() )
     {
-      fprintf( fp, "ShortDescr   %s~\n",  ch->ShortDescr );
+      fprintf( fp, "ShortDescr   %s~\n",  ch->ShortDescr.c_str() );
     }
 
-  if ( !IsNullOrEmpty( ch->LongDescr ) )
+  if ( !ch->LongDescr.empty() )
     {
-      fprintf( fp, "LongDescr    %s~\n",  ch->LongDescr  );
+      fprintf( fp, "LongDescr    %s~\n",  ch->LongDescr.c_str()  );
     }
 
-  if ( !IsNullOrEmpty( ch->Description ) )
+  if ( !ch->Description.empty() )
     {
-      fprintf( fp, "Description  %s~\n",  ch->Description );
+      fprintf( fp, "Description  %s~\n",  ch->Description.c_str() );
     }
 
   fprintf( fp, "Sex          %d\n",     ch->Sex                 );
@@ -510,49 +510,49 @@ static void WriteCharacter( const Character *ch, FILE *fp )
     }
   else
     {
-      fprintf( fp, "Password     %s~\n", ch->PCData->Password );
+      fprintf( fp, "Password     %s~\n", ch->PCData->Password.c_str() );
       fprintf( fp, "Lastplayed   %d\n", (int)current_time );
 
-      if ( !IsNullOrEmpty( ch->PCData->BamfIn ) )
+      if ( !ch->PCData->BamfIn.empty() )
 	{
-	  fprintf( fp, "Bamfin       %s~\n",      ch->PCData->BamfIn      );
+	  fprintf( fp, "Bamfin       %s~\n",      ch->PCData->BamfIn.c_str()      );
 	}
 
-      if ( !IsNullOrEmpty( ch->PCData->Email ) )
+      if ( !ch->PCData->Email.empty() )
 	{
-	  fprintf( fp, "Email       %s~\n",       ch->PCData->Email       );
+	  fprintf( fp, "Email       %s~\n",       ch->PCData->Email.c_str()       );
 	}
 
-      if ( !IsNullOrEmpty( ch->PCData->BamfOut ) )
+      if ( !ch->PCData->BamfOut.empty() )
 	{
-	  fprintf( fp, "Bamfout      %s~\n",      ch->PCData->BamfOut     );
+	  fprintf( fp, "Bamfout      %s~\n",      ch->PCData->BamfOut.c_str()     );
 	}
 
-      if ( !IsNullOrEmpty( ch->PCData->Rank ) )
+      if ( !ch->PCData->Rank.empty() )
 	{
-	  fprintf( fp, "Rank         %s~\n",      ch->PCData->Rank        );
+	  fprintf( fp, "Rank         %s~\n",      ch->PCData->Rank.c_str()        );
 	}
 
-      if ( !IsNullOrEmpty( ch->PCData->Bestowments ) )
+      if ( !ch->PCData->Bestowments.empty() )
 	{
-	  fprintf( fp, "Bestowments  %s~\n",      ch->PCData->Bestowments );
+	  fprintf( fp, "Bestowments  %s~\n",      ch->PCData->Bestowments.c_str() );
 	}
 
-      fprintf( fp, "Title        %s~\n",        ch->PCData->Title       );
+      fprintf( fp, "Title        %s~\n",        ch->PCData->Title.c_str()       );
 
-      if ( !IsNullOrEmpty( ch->PCData->HomePage ) )
+      if ( !ch->PCData->HomePage.empty() )
 	{
-	  fprintf( fp, "Homepage     %s~\n",      ch->PCData->HomePage    );
+	  fprintf( fp, "Homepage     %s~\n",      ch->PCData->HomePage.c_str()    );
 	}
 
-      if ( !IsNullOrEmpty( ch->PCData->Bio ) )
+      if ( !ch->PCData->Bio.empty() )
 	{
-	  fprintf( fp, "Bio          %s~\n",      ch->PCData->Bio         );
+	  fprintf( fp, "Bio          %s~\n",      ch->PCData->Bio.c_str()         );
 	}
 
-      if ( !IsNullOrEmpty( ch->PCData->AuthedBy ) )
+      if ( !ch->PCData->AuthedBy.empty() )
 	{
-	  fprintf( fp, "AuthedBy     %s~\n",      ch->PCData->AuthedBy   );
+	  fprintf( fp, "AuthedBy     %s~\n",      ch->PCData->AuthedBy.c_str()   );
 	}
 
       if ( ch->PCData->MinSnoop )
@@ -560,19 +560,19 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "Minsnoop     %d\n",       ch->PCData->MinSnoop   );
 	}
 
-      if ( !IsNullOrEmpty( ch->PCData->Prompt ) )
+      if ( !ch->PCData->Prompt.empty() )
 	{
-	  fprintf( fp, "Prompt       %s~\n",      ch->PCData->Prompt      );
+	  fprintf( fp, "Prompt       %s~\n",      ch->PCData->Prompt.c_str()      );
 	}
 
       for(const Alias *alias : ch->PCData->Aliases())
         {
-          if(IsNullOrEmpty(alias->Name) || IsNullOrEmpty(alias->Command))
+          if(alias->Name.empty() || alias->Command.empty())
 	    {
 	      continue;
 	    }
 
-          fprintf( fp, "Alias        %s~ %s~\n", alias->Name, alias->Command );
+          fprintf( fp, "Alias        %s~ %s~\n", alias->Name.c_str(), alias->Command.c_str() );
         }
 
       fprintf( fp, "Addiction   ");
@@ -620,9 +620,9 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	    }
         }
 
-      if ( ch->PCData->ClanInfo.Clan )
+      if ( ch->PCData->ClanInfo.Clan != nullptr )
 	{
-	  fprintf( fp, "Clan         %s~\n",      ch->PCData->ClanInfo.Clan->Name   );
+	  fprintf( fp, "Clan         %s~\n",      ch->PCData->ClanInfo.Clan->Name.c_str()   );
 	}
 
       fprintf( fp, "Flags        %d\n", ch->PCData->Flags       );
@@ -630,7 +630,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
       if ( ch->PCData->ReleaseDate > current_time )
 	{
 	  fprintf( fp, "Helled       %d %s~\n",
-		   (int)ch->PCData->ReleaseDate, ch->PCData->HelledBy );
+		   (int)ch->PCData->ReleaseDate, ch->PCData->HelledBy.c_str() );
 	}
 
       if ( ch->PCData->PKills )
@@ -643,9 +643,9 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "PDeaths      %d\n",       ch->PCData->PDeaths     );
 	}
 
-      if ( !IsNullOrEmpty( ch->PCData->Target ) )
+      if ( !ch->PCData->Target.empty() )
 	{
-	  fprintf( fp, "Targ %s~\n",      ch->PCData->Target      );
+	  fprintf( fp, "Targ %s~\n",      ch->PCData->Target.c_str()      );
 	}
 
       if ( GetTimer( ch , TIMER_PKILLED)
@@ -686,9 +686,9 @@ static void WriteCharacter( const Character *ch, FILE *fp )
                ch->PCData->Condition[2],
                ch->PCData->Condition[3] );
 
-      if ( ch->Desc && !IsNullOrEmpty( ch->Desc->Remote.Hostname ) )
+      if ( ch->Desc && !ch->Desc->Remote.Hostname.empty() )
 	{
-	  fprintf( fp, "Site         %s\n", ch->Desc->Remote.Hostname );
+	  fprintf( fp, "Site         %s\n", ch->Desc->Remote.Hostname.c_str() );
 	}
       else
 	{
@@ -697,28 +697,28 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 
       for ( sn = 1; sn < TopSN; sn++ )
         {
-          if ( SkillTable[sn]->Name && ch->PCData->Learned[sn] > 0 )
+          if ( !SkillTable[sn]->Name.empty() && ch->PCData->Learned[sn] > 0 )
 	    {
 	      switch( SkillTable[sn]->Type )
 		{
 		default:
 		  fprintf( fp, "Skill        %d '%s'\n",
-			   ch->PCData->Learned[sn], SkillTable[sn]->Name );
+			   ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str() );
 		  break;
 
 		case SKILL_SPELL:
 		  fprintf( fp, "Spell        %d '%s'\n",
-			   ch->PCData->Learned[sn], SkillTable[sn]->Name );
+			   ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str() );
 		  break;
 
 		case SKILL_WEAPON:
 		  fprintf( fp, "Weapon       %d '%s'\n",
-			   ch->PCData->Learned[sn], SkillTable[sn]->Name );
+			   ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str() );
 		  break;
 
 		case SKILL_TONGUE:
 		  fprintf( fp, "Tongue       %d '%s'\n",
-			   ch->PCData->Learned[sn], SkillTable[sn]->Name );
+			   ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str() );
 		  break;
 		}
 	    }
@@ -735,7 +735,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
       if ( paf->Type >= 0 && paf->Type < TYPE_PERSONAL )
 	{
 	  fprintf( fp, "AffectData   '%s' %3d %3d %3d %10d\n",
-		   skill->Name,
+		   skill->Name.c_str(),
 		   paf->Duration,
 		   paf->Modifier,
 		   paf->Location,
@@ -840,22 +840,22 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
 
   if ( StrCmp( obj->Name, obj->Prototype->Name ) )
     {
-      fprintf( fp, "Name         %s~\n",  obj->Name            );
+      fprintf( fp, "Name         %s~\n",  obj->Name.c_str()            );
     }
 
   if ( StrCmp( obj->ShortDescr, obj->Prototype->ShortDescr ) )
     {
-      fprintf( fp, "ShortDescr   %s~\n",  obj->ShortDescr     );
+      fprintf( fp, "ShortDescr   %s~\n",  obj->ShortDescr.c_str()     );
     }
 
   if ( StrCmp( obj->Description, obj->Prototype->Description ) )
     {
-      fprintf( fp, "Description  %s~\n",  obj->Description     );
+      fprintf( fp, "Description  %s~\n",  obj->Description.c_str()     );
     }
 
   if ( StrCmp( obj->ActionDescription, obj->Prototype->ActionDescription ) )
     {
-      fprintf( fp, "ActionDesc   %s~\n",  obj->ActionDescription     );
+      fprintf( fp, "ActionDesc   %s~\n",  obj->ActionDescription.c_str()     );
     }
 
   fprintf( fp, "Vnum         %ld\n",     obj->Prototype->Vnum );
@@ -937,19 +937,19 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
       if ( IS_VALID_SN(obj->Value[OVAL_PILL_SPELL1]) )
 	{
 	  fprintf( fp, "Spell 1      '%s'\n",
-		   SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name );
+		   SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name.c_str() );
 	}
 
       if ( IS_VALID_SN(obj->Value[OVAL_PILL_SPELL2]) )
 	{
 	  fprintf( fp, "Spell 2      '%s'\n",
-		   SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name );
+		   SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name.c_str() );
 	}
 
       if ( IS_VALID_SN(obj->Value[OVAL_PILL_SPELL3]) )
 	{
 	  fprintf( fp, "Spell 3      '%s'\n",
-		   SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name );
+		   SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name.c_str() );
 	}
       break;
 
@@ -957,7 +957,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
       if ( IS_VALID_SN(obj->Value[OVAL_DEVICE_SPELL]) )
 	{
 	  fprintf( fp, "Spell 3      '%s'\n",
-		   SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name );
+		   SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name.c_str() );
 	}
       break;
 
@@ -965,13 +965,13 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
       if ( IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL1]) )
 	{
 	  fprintf( fp, "Spell 4      '%s'\n",
-		   SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name );
+		   SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name.c_str() );
 	}
 
       if ( IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL2]) )
 	{
 	  fprintf( fp, "Spell 5      '%s'\n",
-		   SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name );
+		   SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name.c_str() );
 	}
 
       break;
@@ -1003,7 +1003,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
       else
 	{
 	  fprintf( fp, "AffectData   '%s' %d %d %d %d\n",
-		   SkillTable[paf->Type]->Name,
+		   SkillTable[paf->Type]->Name.c_str(),
 		   paf->Duration,
 		   ((paf->Location == APPLY_WEAPONSPELL
 		     || paf->Location == APPLY_WEARSPELL
@@ -1020,7 +1020,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
   for(const ExtraDescription *ed : obj->ExtraDescriptions())
     {
       fprintf( fp, "ExtraDescr   %s~ %s~\n",
-	       ed->Keyword, ed->Description );
+	       ed->Keyword.c_str(), ed->Description.c_str() );
     }
 
   fprintf( fp, "End\n\n" );
@@ -1054,25 +1054,25 @@ bool LoadCharacter( Descriptor *d, const std::string &name, bool preload )
 
   loading_char = ch;
 
-  ch->Name = CopyString( name );
+  ch->Name = name;
 
   ImcInitializeCharacter( ch );
 
   sprintf( strsave, "%s%c/%s", PLAYER_DIR, tolower(name[0]),
-           Capitalize( name ) );
+           Capitalize( name ).c_str() );
 
   if ( stat( strsave, &fst ) != -1 )
     {
       if ( fst.st_size == 0 )
         {
           sprintf( strsave, "%s%c/%s", BACKUP_DIR, tolower(name[0]),
-                   Capitalize( name ) );
+                   Capitalize( name ).c_str() );
           ch->Echo( "Restoring your backup player file..." );
         }
       else
         {
           sprintf( buf, "%s player data for: %s (%dK)",
-                   preload ? "Preloading" : "Loading", ch->Name,
+                   preload ? "Preloading" : "Loading", ch->Name.c_str(),
                    (int) fst.st_size/1024 );
           Log->LogStringPlus( buf, LOG_COMM, LEVEL_GREATER );
         }
@@ -1093,7 +1093,7 @@ bool LoadCharacter( Descriptor *d, const std::string &name, bool preload )
 
       for ( ; ; )
         {
-	  const char *word;
+	  const char *word = nullptr;
           char letter = ReadChar( fp, Log, fBootDb );
 
           if ( letter == '*' )
@@ -1152,42 +1152,8 @@ bool LoadCharacter( Descriptor *d, const std::string &name, bool preload )
       strcpy(strArea, "$");
     }
 
-  if ( !found )
+  if ( found )
     {
-      ch->ShortDescr           = CopyString( "" );
-      ch->LongDescr            = CopyString( "" );
-      ch->Description           = CopyString( "" );
-      ch->PCData->Target        = CopyString( "" );
-      ch->PCData->ClanInfo.ClanName = CopyString( "" );
-      ch->PCData->Password      = CopyString( "" );
-      ch->PCData->Email         = CopyString( "" );
-      ch->PCData->BamfIn        = CopyString( "" );
-      ch->PCData->BamfOut       = CopyString( "" );
-      ch->PCData->Rank          = CopyString( "" );
-      ch->PCData->Bestowments   = CopyString( "" );
-      ch->PCData->Title         = CopyString( "" );
-      ch->PCData->HomePage      = CopyString( "" );
-      ch->PCData->Bio           = CopyString( "" );
-      ch->PCData->AuthedBy      = CopyString( "" );
-      ch->PCData->Prompt        = CopyString( "" );
-    }
-  else
-    {
-      if ( !ch->PCData->ClanInfo.ClanName )
-        {
-          ch->PCData->ClanInfo.ClanName = CopyString( "" );
-        }
-
-      if ( !ch->PCData->Bio )
-	{
-	  ch->PCData->Bio  = CopyString( "" );
-	}
-
-      if ( !ch->PCData->AuthedBy )
-	{
-	  ch->PCData->AuthedBy    = CopyString( "" );
-	}
-
       if ( !IsNpc( ch ) && GetTrustLevel( ch ) > LEVEL_AVATAR )
         {
           if ( ch->PCData->WizInvis < 2 )
@@ -1231,7 +1197,6 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
   for ( ; ; )
     {
-      char buf[MAX_STRING_LENGTH];
       const char *line = NULL;
       int x1 = 0, x2 = 0, x3 = 0, x4 = 0, x5 = 0, x6 = 0, x7 = 0, x8 = 0, x9 = 0, x0 = 0;
       time_t lastplayed = 0;
@@ -1410,13 +1375,12 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               ch->PCData->ClanInfo.ClanName = ReadStringToTilde( fp,Log, fBootDb );
 
               if ( !preload
-                   && !IsNullOrEmpty( ch->PCData->ClanInfo.ClanName )
+                   && !ch->PCData->ClanInfo.ClanName.empty()
                    && ( ch->PCData->ClanInfo.Clan = GetClan( ch->PCData->ClanInfo.ClanName )) == NULL )
                 {
-                  ch->Echo( "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->PCData->ClanInfo.ClanName );
-                  FreeMemory( ch->PCData->ClanInfo.ClanName );
+                  ch->Echo( "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->PCData->ClanInfo.ClanName.c_str() );
+                  ch->PCData->ClanInfo.ClanName.erase();
                   RemoveClanMember(ch);
-                  ch->PCData->ClanInfo.ClanName = CopyString( "" );
                 }
               else
 		{
@@ -1498,13 +1462,12 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               ch->PCData->ClanInfo.ClanName = ReadStringToTilde( fp,Log, fBootDb );
 
               if ( !preload
-                   && !IsNullOrEmpty( ch->PCData->ClanInfo.ClanName )
+                   && !ch->PCData->ClanInfo.ClanName.empty()
                    && ( ch->PCData->ClanInfo.Clan = GetClan( ch->PCData->ClanInfo.ClanName )) == NULL )
                 {
                   ch->Echo( "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
-                            ch->PCData->ClanInfo.ClanName );
-                  FreeMemory( ch->PCData->ClanInfo.ClanName );
-                  ch->PCData->ClanInfo.ClanName = CopyString( "" );
+                            ch->PCData->ClanInfo.ClanName.c_str() );
+                  ch->PCData->ClanInfo.ClanName.erase();
                 }
 
               fMatch = true;
@@ -1520,8 +1483,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
               if ( ch->PCData->ReleaseDate < current_time )
                 {
-                  FreeMemory(ch->PCData->HelledBy);
-                  ch->PCData->HelledBy = NULL;
+                  ch->PCData->HelledBy.erase();
                   ch->PCData->ReleaseDate = 0;
                   ch->PCData->JailVnum = 0;
                 }
@@ -1831,50 +1793,6 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
         case 'E':
           if ( !StrCmp( word, "End" ) )
             {
-              if (!ch->ShortDescr)
-                ch->ShortDescr = CopyString( "" );
-
-              if (!ch->LongDescr)
-                ch->LongDescr  = CopyString( "" );
-
-              if (!ch->Description)
-                ch->Description = CopyString( "" );
-
-              if (!ch->PCData->Password)
-                ch->PCData->Password = CopyString( "" );
-
-              if (!ch->PCData->Email)
-                ch->PCData->Email       = CopyString( "" );
-
-              if (!ch->PCData->BamfIn)
-                ch->PCData->BamfIn      = CopyString( "" );
-
-              if (!ch->PCData->BamfOut)
-                ch->PCData->BamfOut     = CopyString( "" );
-
-              if (!ch->PCData->Bio)
-                ch->PCData->Bio = CopyString( "" );
-
-              if (!ch->PCData->Rank)
-                ch->PCData->Rank        = CopyString( "" );
-
-              if (!ch->PCData->Bestowments)
-                ch->PCData->Bestowments = CopyString( "" );
-
-              if (!ch->PCData->Title)
-                ch->PCData->Title       = CopyString( "" );
-
-              if (!ch->PCData->HomePage)
-                ch->PCData->HomePage    = CopyString( "" );
-
-              if (!ch->PCData->AuthedBy)
-                ch->PCData->AuthedBy = CopyString( "" );
-
-              if (!ch->PCData->Prompt )
-                ch->PCData->Prompt      = CopyString( "" );
-
-              ch->Editor                = NULL;
-
               for ( int ability = 0 ; ability < MAX_ABILITY ; ability++ )
                 {
                   if ( GetAbilityLevel( ch, ability ) == 0 )
@@ -1896,11 +1814,6 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 		    }
                 }
 
-              if ( !ch->PCData->Prompt )
-		{
-		  ch->PCData->Prompt = CopyString("");
-		}
-
               if ( lastplayed != 0 )
                 {
                   int hitgain = ( ( int ) ( current_time - lastplayed ) / 60 );
@@ -1917,7 +1830,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
               for ( sn = 0; sn < TopSN; sn++ )
                 {
-                  if ( !SkillTable[sn]->Name )
+                  if ( SkillTable[sn]->Name.empty() )
 		    {
 		      break;
 		    }
@@ -1982,6 +1895,9 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
             {
               ch->PCData->Title = ReadStringToTilde( fp,Log, fBootDb );
 
+#if 0
+              // The following code removes the title, then assigns
+              // back the exact same title? What's the point?
               if ( isalpha(ch->PCData->Title[0])
                    || isdigit(ch->PCData->Title[0]) )
                 {
@@ -1990,9 +1906,10 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                   if ( ch->PCData->Title )
                     FreeMemory( ch->PCData->Title );
 
-                  ch->PCData->Title = CopyString( buf );
+                  ch->PCData->Title = buf;
                 }
-
+#endif
+              
               fMatch = true;
               break;
             }
@@ -2148,16 +2065,6 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
               if ( !fNest || !fVnum )
                 {
                   Log->Bug( "Fread_obj: incomplete object.", 0 );
-
-                  if ( obj->Name )
-                    FreeMemory( obj->Name );
-
-                  if ( obj->Description )
-                    FreeMemory( obj->Description );
-
-                  if ( obj->ShortDescr )
-                    FreeMemory( obj->ShortDescr );
-
                   delete obj;
                   return;
                 }
@@ -2165,17 +2072,17 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
                 {
                   short wear_loc = obj->WearLoc;
 
-                  if ( !obj->Name )
-                    obj->Name = CopyString( obj->Prototype->Name );
+                  if ( obj->Name.empty() )
+                    obj->Name = obj->Prototype->Name;
 
-                  if ( !obj->Description )
-                    obj->Description = CopyString( obj->Prototype->Description );
+                  if ( obj->Description.empty() )
+                    obj->Description = obj->Prototype->Description;
 
-                  if ( !obj->ShortDescr )
-                    obj->ShortDescr = CopyString( obj->Prototype->ShortDescr );
+                  if ( obj->ShortDescr.empty() )
+                    obj->ShortDescr = obj->Prototype->ShortDescr;
 
-                  if ( !obj->ActionDescription )
-                    obj->ActionDescription = CopyString( obj->Prototype->ActionDescription );
+                  if ( obj->ActionDescription.empty() )
+                    obj->ActionDescription = obj->Prototype->ActionDescription;
 
                   LINK(obj, FirstObject, LastObject, Next, Previous );
                   obj->Prototype->Count += obj->Count;
@@ -2384,21 +2291,10 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           Log->Bug( word );
           ReadToEndOfLine( fp,Log, fBootDb );
 
-          if ( obj->Name )
-            FreeMemory( obj->Name        );
-
-          if ( obj->Description )
-            FreeMemory( obj->Description );
-
-          if ( obj->ShortDescr )
-            FreeMemory( obj->ShortDescr );
-
           while( !obj->ExtraDescriptions().empty() )
             {
               ExtraDescription *ed = obj->ExtraDescriptions().front();
               obj->Remove(ed);
-              FreeMemory( ed->Keyword );
-              FreeMemory( ed->Description );
               delete ed;
             }
 
@@ -2443,13 +2339,13 @@ void WriteCorpses( const Character *ch, std::string name )
     {
       if ( corpse->Prototype->Vnum == OBJ_VNUM_CORPSE_PC
 	   && corpse->InRoom != NULL && corpse->Value[OVAL_CORPSE_SKINNED] != 1
-	   && !StrCmp(corpse->ShortDescr+14, name) )
+	   && !StrCmp(corpse->ShortDescr.c_str() + 14, name) )
 	{
 	  if ( !fp )
 	    {
 	      char buf[127];
 
-	      sprintf(buf, "%s%s", CORPSE_DIR, Capitalize(name));
+	      sprintf(buf, "%s%s", CORPSE_DIR, Capitalize(name).c_str());
 
 	      if ( !(fp = fopen(buf, "w")) )
 		{
@@ -2472,7 +2368,7 @@ void WriteCorpses( const Character *ch, std::string name )
     {
       char buf[127];
 
-      sprintf(buf, "%s%s", CORPSE_DIR, Capitalize(name));
+      sprintf(buf, "%s%s", CORPSE_DIR, Capitalize(name).c_str());
       remove(buf);
     }
 }
@@ -2789,22 +2685,22 @@ static void WriteMobile( FILE *fp, const Character *mob )
 
   if ( StrCmp( mob->Name, mob->Prototype->Name) )
     {
-      fprintf( fp, "Name     %s~\n", mob->Name );
+      fprintf( fp, "Name     %s~\n", mob->Name.c_str() );
     }
 
   if ( StrCmp( mob->ShortDescr, mob->Prototype->ShortDescr) )
     {
-      fprintf( fp, "Short %s~\n", mob->ShortDescr );
+      fprintf( fp, "Short %s~\n", mob->ShortDescr.c_str() );
     }
 
   if ( StrCmp( mob->LongDescr, mob->Prototype->LongDescr) )
     {
-      fprintf( fp, "Long  %s~\n", mob->LongDescr );
+      fprintf( fp, "Long  %s~\n", mob->LongDescr.c_str() );
     }
 
   if ( StrCmp( mob->Description, mob->Prototype->Description) )
     {
-      fprintf( fp, "Description %s~\n", mob->Description );
+      fprintf( fp, "Description %s~\n", mob->Description.c_str() );
     }
 
   fprintf( fp, "Position %d\n", mob->Position );

@@ -3,17 +3,14 @@
 #include "log.hpp"
 #include "object.hpp"
 
-void do_zap( Character *ch, char *argument )
+void do_zap( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  Object *wand;
-  Object *obj;
-  ch_ret retcode;
+  Character *victim = nullptr;
+  Object *wand = nullptr;
+  Object *obj = nullptr;
+  ch_ret retcode = rNONE;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) && !ch->Fighting )
+  if ( arg.empty() && !ch->Fighting )
     {
       ch->Echo("Zap whom or what?\r\n");
       return;
@@ -33,7 +30,7 @@ void do_zap( Character *ch, char *argument )
 
   obj = NULL;
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       if ( ch->Fighting )
         {
@@ -47,8 +44,8 @@ void do_zap( Character *ch, char *argument )
     }
   else
     {
-      if ( ( victim = GetCharacterInRoom ( ch, arg ) ) == NULL
-           && ( obj = GetObjectHere  ( ch, arg ) ) == NULL )
+      if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL
+           && ( obj = GetObjectHere( ch, arg ) ) == NULL )
         {
           ch->Echo("You can't find it.\r\n");
           return;
@@ -90,9 +87,10 @@ void do_zap( Character *ch, char *argument )
     {
       Act( AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, TO_ROOM );
       Act( AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, TO_CHAR );
+
       if ( wand->Serial == cur_obj )
         global_objcode = rOBJ_USED;
+
       ExtractObject( wand );
     }
 }
-

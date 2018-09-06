@@ -4,11 +4,11 @@
 #include "log.hpp"
 #include "room.hpp"
 
-void do_quit( Character *ch, char *argument )
+void do_quit( Character *ch, std::string argument )
 {
   int x = 0, y = 0;
   int level = 0;
-  char qbuf[MAX_INPUT_LENGTH];
+  char qbuf[MAX_INPUT_LENGTH] = {'\0'};
 
   if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_POLYMORPHED))
     {
@@ -51,8 +51,8 @@ void do_quit( Character *ch, char *argument )
 
   if ( ch->Challenged )
     {
-      sprintf(qbuf,"%s has quit! Challenge is void. WHAT A WUSS!",ch->Name);
-      ch->Challenged=NULL;
+      sprintf(qbuf, "%s has quit! Challenge is void. WHAT A WUSS!", ch->Name.c_str());
+      ch->Challenged = NULL;
       ToChannel(qbuf,CHANNEL_ARENA,"&RArena&W",5);
     }
 
@@ -63,7 +63,7 @@ void do_quit( Character *ch, char *argument )
   Act( AT_BYE, "$n has left the game.", ch, NULL, NULL, TO_ROOM );
   SetCharacterColor( AT_GREY, ch);
 
-  sprintf( log_buf, "%s has quit.", ch->Name );
+  sprintf( log_buf, "%s has quit.", ch->Name.c_str() );
   quitting_char = ch;
   SaveCharacter( ch );
   SaveHome(ch);
@@ -85,4 +85,3 @@ void do_quit( Character *ch, char *argument )
 
   Log->LogStringPlus( log_buf, LOG_COMM, level );
 }
-

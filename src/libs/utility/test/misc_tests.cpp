@@ -101,11 +101,11 @@ TEST_F(MiscTests, StripColorCodes_StripsMixOfForeAndBackground)
 
 TEST_F(MiscTests, PunctuateNumber)
 {
-  EXPECT_STREQ("5", PunctuateNumber(5));
-  EXPECT_STREQ("50", PunctuateNumber(50));
-  EXPECT_STREQ("500", PunctuateNumber(500));
-  EXPECT_STREQ("5,000", PunctuateNumber(5000));
-  EXPECT_STREQ("2,000,000,000", PunctuateNumber(2000000000));
-  EXPECT_STREQ("-5", PunctuateNumber(-5));
-  EXPECT_STREQ("-5,000", PunctuateNumber(-5000));
+  EXPECT_EQ("5", PunctuateNumber(5));
+  EXPECT_EQ("50", PunctuateNumber(50));
+  EXPECT_EQ("500", PunctuateNumber(500));
+  EXPECT_EQ("5,000", PunctuateNumber(5000));
+  EXPECT_EQ("2,000,000,000", PunctuateNumber(2000000000));
+  EXPECT_EQ("-5", PunctuateNumber(-5));
+  EXPECT_EQ("-5,000", PunctuateNumber(-5000));
 }

@@ -4,19 +4,19 @@
 #include "object.hpp"
 #include "systemdata.hpp"
 
-void do_empty( Character *ch, char *argument )
+void do_empty( Character *ch, std::string argument )
 {
   Object *obj = nullptr;
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( !StrCmp( arg2, "into" ) && !IsNullOrEmpty( argument ) )
+  if ( !StrCmp( arg2, "into" ) && !argument.empty() )
     argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo( "Empty what?\r\n" );
       return;
@@ -64,7 +64,7 @@ void do_empty( Character *ch, char *argument )
     case ITEM_CONTAINER:
       if ( IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
-          Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->Name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->Name.c_str(), TO_CHAR );
           return;
         }
 
@@ -74,7 +74,7 @@ void do_empty( Character *ch, char *argument )
           return;
         }
 
-      if ( IsNullOrEmpty( arg2 ) )
+      if ( arg2.empty() )
         {
           if ( IsBitSet( ch->InRoom->Flags, ROOM_NODROP )
                || ( !IsNpc(ch) &&  IsBitSet( ch->Flags, PLR_LITTERBUG ) ) )
@@ -129,7 +129,7 @@ void do_empty( Character *ch, char *argument )
 
           if ( IsBitSet(dest->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
             {
-              Act( AT_PLAIN, "The $d is closed.", ch, NULL, dest->Name, TO_CHAR );
+              Act( AT_PLAIN, "The $d is closed.", ch, NULL, dest->Name.c_str(), TO_CHAR );
               return;
             }
 
@@ -153,4 +153,3 @@ void do_empty( Character *ch, char *argument )
       return;
     }
 }
-

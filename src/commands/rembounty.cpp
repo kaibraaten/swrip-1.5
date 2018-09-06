@@ -2,7 +2,7 @@
 #include "bounty.hpp"
 #include "character.hpp"
 
-void do_rembounty( Character *ch, char *argument )
+void do_rembounty( Character *ch, std::string argument )
 {
   Bounty *bounty = GetBounty( argument );
 

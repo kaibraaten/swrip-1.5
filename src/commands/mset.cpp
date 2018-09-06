@@ -9,20 +9,20 @@
 #include "protomob.hpp"
 #include "systemdata.hpp"
 
-void do_mset( Character *ch, char *argument )
+void do_mset( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
-  char outbuf[MAX_STRING_LENGTH];
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
+  char buf[MAX_STRING_LENGTH] = {'\0'};
+  char outbuf[MAX_STRING_LENGTH] = {'\0'};
   int  num = 0, size = 0, plus = 0;
   char char1 = 0, char2 = 0;
   Character *victim = NULL;
   int value = 0;
   int minattr = 0, maxattr = 0;
   bool lockvictim = false;
-  char *origarg = argument;
+  std::string origarg = argument;
 
   if ( IsNpc( ch ) )
     {
@@ -40,6 +40,7 @@ void do_mset( Character *ch, char *argument )
     {
     default:
       break;
+
     case SUB_MOB_DESC:
       if ( !ch->dest_buf )
         {
@@ -57,13 +58,14 @@ void do_mset( Character *ch, char *argument )
           StopEditing( ch );
           return;
         }
-      FreeMemory( victim->Description );
+
       victim->Description = CopyBuffer( ch );
+
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         {
-          FreeMemory( victim->Prototype->Description );
-          victim->Prototype->Description = CopyString( victim->Description );
+          victim->Prototype->Description = victim->Description;
         }
+
       StopEditing( ch );
       ch->SubState = (CharacterSubState)ch->tempnum;
       return;
@@ -83,52 +85,58 @@ void do_mset( Character *ch, char *argument )
           victim = NULL;
           argument = "done";
         }
-      if ( IsNullOrEmpty( argument ) || !StrCmp( argument, " " )
-           ||   !StrCmp( argument, "stat" ) )
+
+      if ( argument.empty() || !StrCmp( argument, " " )
+           || !StrCmp( argument, "stat" ) )
         {
           if ( victim )
             do_mstat( ch, victim->Name );
           else
-            ch->Echo("No victim selected.  Type '?' for help.\r\n");
+            ch->Echo("No victim selected. Type '?' for help.\r\n");
+
           return;
         }
+
       if ( !StrCmp( argument, "done" ) || !StrCmp( argument, "off" ) )
         {
           ch->Echo("Mset mode off.\r\n");
           ch->SubState = SUB_NONE;
-          FreeMemory(ch->dest_buf);
-          if ( ch->PCData && ch->PCData->SubPrompt )
-            FreeMemory( ch->PCData->SubPrompt );
+          ch->dest_buf = nullptr;
+
+          ch->PCData->SubPrompt.erase();
+
           return;
         }
     }
+
   if ( victim )
     {
       lockvictim = true;
-      strcpy( arg1, victim->Name );
+      arg1 = victim->Name;
       argument = OneArgument( argument, arg2 );
-      strcpy( arg3, argument );
+      arg3 = argument;
     }
   else
     {
       lockvictim = false;
       argument = OneArgument( argument, arg1 );
       argument = OneArgument( argument, arg2 );
-      strcpy( arg3, argument );
+      arg3 = argument;
     }
 
-  if ( IsNullOrEmpty( arg1 ) || ( IsNullOrEmpty( arg2 ) && ch->SubState != SUB_REPEATCMD)
-       ||   !StrCmp( arg1, "?" ) )
+  if ( arg1.empty() || ( arg2.empty() && ch->SubState != SUB_REPEATCMD)
+       || !StrCmp( arg1, "?" ) )
     {
       if ( ch->SubState == SUB_REPEATCMD )
         {
           if ( victim )
-     ch->Echo("Syntax: <field>  <value>\r\n");
+            ch->Echo("Syntax: <field>  <value>\r\n");
           else
             ch->Echo("Syntax: <victim> <field>  <value>\r\n");
         }
       else
         ch->Echo("Syntax: mset <victim> <field>  <value>\r\n");
+
       ch->Echo("\r\n");
       ch->Echo("Field being one of:\r\n");
       ch->Echo("  str int wis dex con cha lck frc sex\r\n");
@@ -167,18 +175,21 @@ void do_mset( Character *ch, char *argument )
             return;
           }
       }
+
   if ( GetTrustLevel(ch) < SysData.LevelToMsetPlayers && (victim != ch) && !IsNpc( victim ) )
     {
       ch->Echo("You can't do that!\r\n");
       FreeMemory(ch->dest_buf);
       return;
     }
+
   if ( GetTrustLevel( ch ) < GetTrustLevel( victim ) && !IsNpc( victim ) )
     {
       ch->Echo("You can't do that!\r\n");
       FreeMemory(ch->dest_buf);
       return;
     }
+
   if ( lockvictim )
     ch->dest_buf = victim;
 
@@ -193,23 +204,27 @@ void do_mset( Character *ch, char *argument )
       maxattr = 25;
     }
 
-  value = IsNumber( arg3 ) ? atoi( arg3 ) : -1;
+  value = IsNumber( arg3 ) ? std::stoi( arg3 ) : -1;
 
-  if ( atoi(arg3) < -1 && value == -1 )
-    value = atoi(arg3);
+  if ( std::stoi(arg3) < -1 && value == -1 )
+    value = std::stoi(arg3);
 
   if ( !StrCmp( arg2, "str" ) )
     {
       if ( !CanModifyCharacter( ch, victim ) )
         return;
+
       if ( value < minattr || value > maxattr )
         {
           ch->Echo("Strength range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
+
       victim->Stats.PermStr = value;
+
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         victim->Prototype->Stats.PermStr = value;
+
       return;
     }
 
@@ -217,14 +232,18 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !CanModifyCharacter( ch, victim ) )
         return;
+
       if ( value < minattr || value > maxattr )
         {
           ch->Echo("Intelligence range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
+
       victim->Stats.PermInt = value;
+
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         victim->Prototype->Stats.PermInt = value;
+
       return;
     }
 
@@ -232,14 +251,18 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !CanModifyCharacter( ch, victim ) )
         return;
+
       if ( value < minattr || value > maxattr )
         {
           ch->Echo("Wisdom range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
+
       victim->Stats.PermWis = value;
+
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         victim->Prototype->Stats.PermWis = value;
+
       return;
     }
 
@@ -247,14 +270,18 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !CanModifyCharacter( ch, victim ) )
         return;
+
       if ( value < minattr || value > maxattr )
         {
           ch->Echo("Dexterity range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
+
       victim->Stats.PermDex = value;
+
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         victim->Prototype->Stats.PermDex = value;
+
       return;
     }
 
@@ -262,14 +289,18 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !CanModifyCharacter( ch, victim ) )
         return;
+
       if ( value < minattr || value > maxattr )
         {
           ch->Echo("Constitution range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
+
       victim->Stats.PermCon = value;
+
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         victim->Prototype->Stats.PermCon = value;
+
       return;
     }
 
@@ -277,14 +308,18 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !CanModifyCharacter( ch, victim ) )
         return;
+
       if ( value < minattr || value > maxattr )
         {
           ch->Echo("Charisma range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
+
       victim->Stats.PermCha = value;
+
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         victim->Prototype->Stats.PermCha = value;
+
       return;
     }
 
@@ -292,14 +327,18 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !CanModifyCharacter( ch, victim ) )
         return;
+
       if ( value < minattr || value > maxattr )
         {
           ch->Echo("Luck range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
+
       victim->Stats.PermLck = value;
+
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         victim->Prototype->Stats.PermLck = value;
+
       return;
     }
 
@@ -419,7 +458,7 @@ void do_mset( Character *ch, char *argument )
         return;
       value = GetNpcRace( arg3 );
       if ( value < 0 )
-        value = atoi( arg3 );
+        value = std::stoi( arg3 );
       if ( !IsNpc(victim) && (value < 0 || value >= MAX_RACE) )
         {
           ch->Echo("Race range is 0 to %d.\n", MAX_RACE-1 );
@@ -487,17 +526,17 @@ void do_mset( Character *ch, char *argument )
           victim->Prototype->HitRoll = victim->HitRoll;
           victim->Prototype->DamRoll = victim->DamRoll;
         }
-      sprintf(outbuf,"%s damnumdie %d",arg1, value/10);
+      sprintf(outbuf,"%s damnumdie %d",arg1.c_str(), value/10);
       do_mset( ch, outbuf );
-      sprintf(outbuf,"%s damsizedie %d",arg1, 4);
+      sprintf(outbuf,"%s damsizedie %d",arg1.c_str(), 4);
       do_mset( ch, outbuf );
-      sprintf(outbuf,"%s DamPlus %d",arg1, 2);
+      sprintf(outbuf,"%s DamPlus %d",arg1.c_str(), 2);
       do_mset( ch, outbuf );
-      sprintf(outbuf,"%s hitnumdie %d",arg1, value/5);
+      sprintf(outbuf,"%s hitnumdie %d",arg1.c_str(), value/5);
       do_mset( ch, outbuf );
-      sprintf(outbuf,"%s hitsizedie %d",arg1, 10);
+      sprintf(outbuf,"%s hitsizedie %d",arg1.c_str(), 10);
       do_mset( ch, outbuf );
-      sprintf(outbuf,"%s HitPlus %d",arg1, value*10 );
+      sprintf(outbuf,"%s HitPlus %d",arg1.c_str(), value*10 );
       do_mset( ch, outbuf );
 
       return;
@@ -561,7 +600,7 @@ void do_mset( Character *ch, char *argument )
       if ( value < 1 || value > SHRT_MAX )
         {
           ch->Echo("Hp range is 1 to %s hit points.\r\n",
-		PunctuateNumber( SHRT_MAX, NULL ) );
+                   PunctuateNumber( SHRT_MAX ).c_str() );
           return;
         }
       victim->MaxHit = value;
@@ -576,7 +615,7 @@ void do_mset( Character *ch, char *argument )
       if ( value < 0 || value > SHRT_MAX )
         {
           ch->Echo("Force range is 0 to %s force points.\r\n",
-		PunctuateNumber( SHRT_MAX, NULL ) );
+                   PunctuateNumber( SHRT_MAX ).c_str() );
           return;
         }
       victim->MaxMana = value;
@@ -590,7 +629,7 @@ void do_mset( Character *ch, char *argument )
       if ( value < 0 || value > SHRT_MAX )
         {
           ch->Echo("Move range is 0 to %s move points.\r\n",
-		PunctuateNumber( SHRT_MAX, NULL ) );
+                   PunctuateNumber( SHRT_MAX ).c_str() );
           return;
         }
       victim->MaxMove = value;
@@ -614,45 +653,31 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "password" ) )
     {
-      char *pwdnew;
-      char *p;
-
       if ( GetTrustLevel( ch ) < LEVEL_SUB_IMPLEM )
         {
           ch->Echo("You can't do that.\r\n");
           return;
         }
+
       if ( IsNpc( victim ) )
         {
           ch->Echo("Mobs don't have passwords.\r\n");
           return;
         }
 
-      if ( strlen(arg3) < 5 )
+      if ( arg3.size() < 5 )
         {
-   ch->Echo("New password must be at least five characters long.\r\n" );
+          ch->Echo("New password must be at least five characters long.\r\n" );
           return;
         }
 
-      /*
-       * No tilde allowed because of player file format.
-       */
-      pwdnew = EncodeString( arg3 );
-      for ( p = pwdnew; !IsNullOrEmpty( p ); p++ )
-        {
-          if ( *p == '~' )
-            {
-       ch->Echo("New password not acceptable, try again.\r\n" );
-              return;
-            }
-        }
+      victim->PCData->Password = EncodeString( arg3 );
 
-      FreeMemory( victim->PCData->Password );
-      victim->PCData->Password = CopyString( pwdnew );
       if ( IsBitSet(SysData.SaveFlags, SV_PASSCHG) )
         SaveCharacter( victim );
+
       ch->Echo("Ok.\r\n");
-      victim->Echo("Your password has been changed by %s.\r\n", ch->Name );
+      victim->Echo("Your password has been changed by %s.\r\n", ch->Name.c_str() );
       return;
     }
 
@@ -760,12 +785,11 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( victim->Name );
-      victim->Name = CopyString( arg3 );
+      victim->Name = arg3;
+
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         {
-          FreeMemory( victim->Prototype->Name );
-          victim->Prototype->Name = CopyString( victim->Name );
+          victim->Prototype->Name = victim->Name;
         }
       return;
     }
@@ -779,7 +803,7 @@ void do_mset( Character *ch, char *argument )
         }
       if ( IsNpc(victim) )
         {
-   ch->Echo("Not on NPC's.\r\n");
+          ch->Echo("Not on NPC's.\r\n");
           return;
         }
       if ( victim->PCData )
@@ -804,17 +828,16 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( IsNullOrEmpty( arg3 ) )
+      if ( arg3.empty() )
         {
 	  if( !(clan = victim->PCData->ClanInfo.Clan ) )
 	    {
-       ch->Echo("%s isn't clanned.\r\n", victim->Name );
+              ch->Echo("%s isn't clanned.\r\n", victim->Name.c_str() );
 	      return;
 	    }
 
 	  RemoveClanMember( victim );
-          FreeMemory( victim->PCData->ClanInfo.ClanName );
-          victim->PCData->ClanInfo.ClanName = CopyString( "" );
+          victim->PCData->ClanInfo.ClanName.erase();
           victim->PCData->ClanInfo.Clan = NULL;
           ch->Echo("Removed from clan.\r\nBe sure to remove any bestowments they have been given.\r\n");
           Clans->Save(clan);
@@ -830,8 +853,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( victim->PCData->ClanInfo.ClanName );
-      victim->PCData->ClanInfo.ClanName = CopyString( clan->Name );
+      victim->PCData->ClanInfo.ClanName = clan->Name;
       victim->PCData->ClanInfo.Clan = clan;
 
       ch->Echo("Done.\r\n" );
@@ -844,26 +866,24 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "short" ) )
     {
-      FreeMemory( victim->ShortDescr );
-      victim->ShortDescr = CopyString( arg3 );
+      victim->ShortDescr = arg3;
+
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         {
-          FreeMemory( victim->Prototype->ShortDescr );
-          victim->Prototype->ShortDescr = CopyString( victim->ShortDescr );
+          victim->Prototype->ShortDescr = victim->ShortDescr;
         }
       return;
     }
 
   if ( !StrCmp( arg2, "long" ) )
     {
-      FreeMemory( victim->LongDescr );
-      strcpy( buf, arg3 );
+      strcpy( buf, arg3.c_str() );
       strcat( buf, "\r\n" );
-      victim->LongDescr = CopyString( buf );
+      victim->LongDescr = buf;
+
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         {
-          FreeMemory( victim->Prototype->LongDescr );
-          victim->Prototype->LongDescr = CopyString( victim->LongDescr );
+          victim->Prototype->LongDescr = victim->LongDescr;
         }
       return;
     }
@@ -872,12 +892,11 @@ void do_mset( Character *ch, char *argument )
     {
       if ( arg3[0] )
         {
-          FreeMemory( victim->Description );
-          victim->Description = CopyString( arg3 );
+          victim->Description = arg3;
+
           if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
             {
-              FreeMemory(victim->Prototype->Description );
-              victim->Prototype->Description = CopyString( victim->Description );
+              victim->Prototype->Description = victim->Description;
             }
           return;
         }
@@ -887,11 +906,12 @@ void do_mset( Character *ch, char *argument )
         ch->tempnum = SUB_REPEATCMD;
       else
         ch->tempnum = SUB_NONE;
+
       ch->SubState = SUB_MOB_DESC;
       ch->dest_buf = victim;
       StartEditing( ch, victim->Description );
       SetEditorDescription( ch, "Mobile %d (%s) description",
-			    victim->Prototype->Vnum, victim->Name );
+			    victim->Prototype->Vnum, victim->Name.c_str() );
       return;
     }
 
@@ -999,7 +1019,7 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
       
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: mset <victim> flags <flag> [flag]...\r\n");
           ch->Echo("sentinel, scavenger, aggressive, stayarea, wimpy, practice, immortal,\r\n");
@@ -1007,7 +1027,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           bool pcflag = false;
           argument = OneArgument( argument, arg3 );
@@ -1019,7 +1039,7 @@ void do_mset( Character *ch, char *argument )
               value = GetPcFlag( arg3 );
             }
           if ( value < 0 || value > 31 )
-            ch->Echo("Unknown flag: %s\r\n", arg3 );
+            ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
 	  else
             {
               if ( IsNpc(victim) && 1 << value == ACT_NPC )
@@ -1063,19 +1083,19 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
       
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: mset <victim> wanted <planet> [planet]...\r\n");
 	  return;
         }
 
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetWantedFlag( arg3 );
 
           if ( value < 0 || value > 31 )
-            ch->Echo("Unknown flag: %s\r\n", arg3 );
+            ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->PCData->WantedFlags, 1 << value );
         }
@@ -1093,18 +1113,18 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: mset <victim> vip <planet> [planet]...\r\n");
           return;
         }
 
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetVipFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ch->Echo("Unknown flag: %s\r\n", arg3 );
+            ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->VipFlags, 1 << value );
         }
@@ -1124,18 +1144,19 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
       
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: mset <victim> affected <flag> [flag]...\r\n");
           return;
         }
-      while ( !IsNullOrEmpty( argument ) )
+      
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetAffectFlag( arg3 );
 
           if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
-            ch->Echo("Unknown flag: %s\r\n", arg3 );
+            ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->AffectedBy, 1 << value );
         }
@@ -1159,7 +1180,7 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-      sprintf(outbuf,"%s resistant %s",arg1, arg3);
+      sprintf(outbuf,"%s resistant %s", arg1.c_str(), arg3.c_str());
       do_mset( ch, outbuf );
       return;
     }
@@ -1174,7 +1195,7 @@ void do_mset( Character *ch, char *argument )
         return;
 
 
-      sprintf(outbuf,"%s immune %s",arg1, arg3);
+      sprintf(outbuf,"%s immune %s", arg1.c_str(), arg3.c_str());
       do_mset( ch, outbuf );
       return;
     }
@@ -1188,7 +1209,7 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-      sprintf(outbuf,"%s susceptible %s",arg1, arg3);
+      sprintf(outbuf,"%s susceptible %s", arg1.c_str(), arg3.c_str());
       do_mset( ch, outbuf );
       return;
     }
@@ -1202,9 +1223,9 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-      sprintf(outbuf,"%s resistant %s",arg1, arg3);
+      sprintf(outbuf,"%s resistant %s", arg1.c_str(), arg3.c_str());
       do_mset( ch, outbuf );
-      sprintf(outbuf,"%s immune %s",arg1, arg3);
+      sprintf(outbuf,"%s immune %s", arg1.c_str(), arg3.c_str());
       do_mset( ch, outbuf );
       return;
     }
@@ -1219,9 +1240,9 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-      sprintf(outbuf,"%s resistant %s",arg1, arg3);
+      sprintf(outbuf,"%s resistant %s",arg1.c_str(), arg3.c_str());
       do_mset( ch, outbuf );
-      sprintf(outbuf,"%s susceptible %s",arg1, arg3);
+      sprintf(outbuf,"%s susceptible %s",arg1.c_str(), arg3.c_str());
       do_mset( ch, outbuf );
       return;
     }
@@ -1235,9 +1256,9 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-      sprintf(outbuf,"%s immune %s",arg1, arg3);
+      sprintf(outbuf,"%s immune %s",arg1.c_str(), arg3.c_str());
       do_mset( ch, outbuf );
-      sprintf(outbuf,"%s susceptible %s",arg1, arg3);
+      sprintf(outbuf,"%s susceptible %s",arg1.c_str(), arg3.c_str());
       do_mset( ch, outbuf );
       return;
     }
@@ -1251,11 +1272,11 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-      sprintf(outbuf,"%s resistant %s",arg1, arg3);
+      sprintf(outbuf,"%s resistant %s",arg1.c_str(), arg3.c_str());
       do_mset( ch, outbuf );
-      sprintf(outbuf,"%s immune %s",arg1, arg3);
+      sprintf(outbuf,"%s immune %s",arg1.c_str(), arg3.c_str());
       do_mset( ch, outbuf );
-      sprintf(outbuf,"%s susceptible %s",arg1, arg3);
+      sprintf(outbuf,"%s susceptible %s",arg1.c_str(), arg3.c_str());
       do_mset( ch, outbuf );
       return;
     }
@@ -1270,19 +1291,19 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
       
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: mset <victim> resistant <flag> [flag]...\r\n");
           return;
         }
       
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
 	  
           if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
-            ch->Echo("Unknown flag: %s\r\n", arg3 );
+            ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->Resistant, 1 << value );
         }
@@ -1302,19 +1323,19 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
       
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: mset <victim> immune <flag> [flag]...\r\n");
           return;
         }
 
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
 
           if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
-            ch->Echo("Unknown flag: %s\r\n", arg3 );
+            ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->Immune, 1 << value );
         }
@@ -1334,18 +1355,18 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
       
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: mset <victim> susceptible <flag> [flag]...\r\n");
           return;
         }
       
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ch->Echo("Unknown flag: %s\r\n", arg3 );
+            ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->Susceptible, 1 << value );
         }
@@ -1366,18 +1387,18 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
       
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: mset <victim> part <flag> [flag]...\r\n");
           return;
         }
       
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetBodyPartFlag( arg3 );
           if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
-            ch->Echo("Unknown flag: %s\r\n", arg3 );
+            ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->BodyParts, 1 << value );
         }
@@ -1396,7 +1417,7 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
       
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: mset <victim> attack <flag> [flag]...\r\n");
           ch->Echo("bite          claws        tail        sting      punch        kick\r\n");
@@ -1404,13 +1425,13 @@ void do_mset( Character *ch, char *argument )
           return;
         }
       
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetAttackFlag( arg3 );
 	  
           if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
-            ch->Echo("Unknown flag: %s\r\n", arg3 );
+            ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->AttackFlags, 1 << value );
         }
@@ -1429,20 +1450,20 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
       
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: mset <victim> defense <flag> [flag]...\r\n");
           ch->Echo("parry        dodge\r\n");
           return;
         }
 
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetDefenseFlag( arg3 );
 	  
           if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
-            ch->Echo("Unknown flag: %s\r\n", arg3 );
+            ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->DefenseFlags, 1 << value );
         }
@@ -1516,14 +1537,14 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-      sscanf(arg3,"%d %c %d %c %d",&num,&char1,&size,&char2,&plus);
-      sprintf(outbuf,"%s hitnumdie %d",arg1, num);
+      sscanf(arg3.c_str(),"%d %c %d %c %d",&num,&char1,&size,&char2,&plus);
+      sprintf(outbuf,"%s hitnumdie %d",arg1.c_str(), num);
       do_mset( ch, outbuf );
 
-      sprintf(outbuf,"%s hitsizedie %d",arg1, size);
+      sprintf(outbuf,"%s hitsizedie %d",arg1.c_str(), size);
       do_mset( ch, outbuf );
 
-      sprintf(outbuf,"%s HitPlus %d",arg1, plus);
+      sprintf(outbuf,"%s HitPlus %d",arg1.c_str(), plus);
       do_mset( ch, outbuf );
       return;
     }
@@ -1540,12 +1561,12 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-      sscanf(arg3,"%d %c %d %c %d",&num,&char1,&size,&char2,&plus);
-      sprintf(outbuf,"%s damnumdie %d",arg1, num);
+      sscanf(arg3.c_str(),"%d %c %d %c %d",&num,&char1,&size,&char2,&plus);
+      sprintf(outbuf,"%s damnumdie %d",arg1.c_str(), num);
       do_mset( ch, outbuf );
-      sprintf(outbuf,"%s damsizedie %d",arg1, size);
+      sprintf(outbuf,"%s damsizedie %d",arg1.c_str(), size);
       do_mset( ch, outbuf );
-      sprintf(outbuf,"%s DamPlus %d",arg1, plus);
+      sprintf(outbuf,"%s DamPlus %d",arg1.c_str(), plus);
       do_mset( ch, outbuf );
       return;
     }
@@ -1562,7 +1583,7 @@ void do_mset( Character *ch, char *argument )
       if ( value < 0 || value > SHRT_MAX )
         {
           ch->Echo("Number of hitpoint dice range is 0 to %s.\r\n",
-		PunctuateNumber( SHRT_MAX, NULL ) );
+                   PunctuateNumber( SHRT_MAX ).c_str() );
           return;
         }
       if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
@@ -1583,7 +1604,7 @@ void do_mset( Character *ch, char *argument )
       if ( value < 0 || value > SHRT_MAX )
         {
           ch->Echo("Hitpoint dice size range is 0 to %s.\r\n",
-		PunctuateNumber( SHRT_MAX, NULL ) );
+                   PunctuateNumber( SHRT_MAX ).c_str() );
           return;
         }
       if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
@@ -1604,7 +1625,7 @@ void do_mset( Character *ch, char *argument )
       if ( value < 0 || value > SHRT_MAX )
         {
           ch->Echo("Hitpoint bonus range is 0 to %s.\r\n",
-		PunctuateNumber( SHRT_MAX, NULL ) );
+                   PunctuateNumber( SHRT_MAX ).c_str() );
           return;
         }
       if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
@@ -1711,18 +1732,18 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
       
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: mset <victim> speaks <language> [language] ...\r\n");
           return;
         }
       
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetLanguage( arg3 );
           if ( value == LANG_UNKNOWN )
-            ch->Echo("Unknown language: %s\r\n", arg3 );
+            ch->Echo("Unknown language: %s\r\n", arg3.c_str() );
           else
             if ( !IsNpc( victim ) )
               {
@@ -1734,7 +1755,7 @@ void do_mset( Character *ch, char *argument )
 
                 if ( !(value &= valid_langs) )
                   {
-      ch->Echo("Players may not know %s.\r\n", arg3 );
+                    ch->Echo("Players may not know %s.\r\n", arg3.c_str() );
                     continue;
                   }
               }
@@ -1764,18 +1785,18 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           ch->Echo("Usage: mset <victim> speaking <language> [language]...\r\n");
           return;
         }
       
-      while ( !IsNullOrEmpty( argument ) )
+      while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
           value = GetLanguage( arg3 );
           if ( value == LANG_UNKNOWN )
-            ch->Echo("Unknown language: %s\r\n", arg3 );
+            ch->Echo("Unknown language: %s\r\n", arg3.c_str() );
           else
             ToggleBit( victim->Speaking, value );
         }

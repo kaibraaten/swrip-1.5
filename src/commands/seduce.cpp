@@ -3,15 +3,12 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_seduce ( Character *ch , char *argument )
+void do_seduce( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
   Character *victim = NULL;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Seduce whom?\r\n");
       return;
@@ -22,7 +19,6 @@ void do_seduce ( Character *ch , char *argument )
       ch->Echo("They aren't here.\r\n");
       return;
     }
-
 
   if ( IsAffectedBy(victim, AFF_CHARM) && victim->Master )
     {
@@ -36,13 +32,12 @@ void do_seduce ( Character *ch , char *argument )
       return;
     }
 
-
   SetWaitState( ch, SkillTable[gsn_seduce]->Beats );
 
   if ( victim->TopLevel - GetCurrentCharisma(ch) > ch->PCData->Learned[gsn_seduce] )
     {
       ch->Echo("You failed.\r\n");
-      sprintf(buf, "%s failed to seduce you.", ch->Name);
+      sprintf(buf, "%s failed to seduce you.", ch->Name.c_str());
       victim->Echo(buf);
       global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
       return;
@@ -55,4 +50,3 @@ void do_seduce ( Character *ch , char *argument )
   LearnFromSuccess( ch, gsn_seduce );
   StartFollowing( victim, ch );
 }
-

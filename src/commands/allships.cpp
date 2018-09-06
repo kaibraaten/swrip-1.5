@@ -13,10 +13,10 @@ struct UserData
   bool checkowner;
   int type;
   int count;
-  const char *argument;
+  std::string argument;
 };
 
-void do_allships( Character *ch, char *argument )
+void do_allships( Character *ch, std::string argument )
 {
   struct UserData data;
   data.ch = ch;
@@ -47,7 +47,7 @@ void do_allships( Character *ch, char *argument )
     {
       data.mobship = true;
     }
-  else if ( IsNullOrEmpty( argument ) )
+  else if ( argument.empty() )
     {
       ;
     }
@@ -87,7 +87,7 @@ static bool ShowShipVerbose(Ship *ship, void *userData)
       return true;
     }
 	
-  if( data->unowned && !IsNullOrEmpty( ship->Owner ) )
+  if( data->unowned && !ship->Owner.empty() )
     {
       return true;
     }
@@ -119,8 +119,8 @@ static bool ShowShipVerbose(Ship *ship, void *userData)
       SetCharacterColor( AT_BLUE, data->ch );
     }
 	
-  sprintf( buf, "%-10s(%-10s)", ship->Name, ship->PersonalName );
-  data->ch->Echo( "&w%-35s %-15s\r\n", buf, ship->Owner );
+  sprintf( buf, "%-10s(%-10s)", ship->Name.c_str(), ship->PersonalName.c_str() );
+  data->ch->Echo( "&w%-35s %-15s\r\n", buf, ship->Owner.c_str() );
 
   if (ship->Type == MOB_SHIP || ship->Class == SHIP_PLATFORM )
     {
@@ -132,7 +132,7 @@ static bool ShowShipVerbose(Ship *ship, void *userData)
     {
       data->ch->Echo( "%ld to rent.\r\n", GetRentalPrice(ship));
     }
-  else if ( !IsNullOrEmpty( ship->Owner ) )
+  else if ( !ship->Owner.empty() )
     {
       data->ch->Echo( "\r\n" );
     }
@@ -152,8 +152,8 @@ static bool ShowShipTerse(Ship *ship, void *userData)
 
   if (ship->Type == MOB_SHIP && ship->Class != SHIP_DEBRIS )
     {
-      sprintf( buf, "%s(%s)", ship->Name, ship->PersonalName );
-      ch->Echo( "&w%-35s %-10s\r\n", buf, ship->Owner );
+      sprintf( buf, "%s(%s)", ship->Name.c_str(), ship->PersonalName.c_str() );
+      ch->Echo( "&w%-35s %-10s\r\n", buf, ship->Owner.c_str() );
     }
 
   return true;

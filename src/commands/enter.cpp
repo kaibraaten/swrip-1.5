@@ -2,9 +2,9 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_enter( Character *ch, char *argument )
+void do_enter( Character *ch, std::string argument )
 {
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       for(Exit *ex : ch->InRoom->Exits())
 	{
@@ -29,4 +29,3 @@ void do_enter( Character *ch, char *argument )
 
   do_board(ch,argument);
 }
-

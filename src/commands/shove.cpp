@@ -3,10 +3,10 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_shove( Character *ch, char *argument )
+void do_shove( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg2;
   DirectionType exit_dir = DIR_NORTH;
   Exit *pexit = NULL;
   Character *victim = NULL;
@@ -16,7 +16,7 @@ void do_shove( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Shove whom?\r\n");
       return;
@@ -40,7 +40,7 @@ void do_shove( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( arg2 ) )
+  if ( arg2.empty() )
     {
       ch->Echo("Shove them in which direction?\r\n");
       return;
@@ -49,7 +49,7 @@ void do_shove( Character *ch, char *argument )
   exit_dir = GetDirection( arg2 );
 
   if ( IsBitSet(victim->InRoom->Flags, ROOM_SAFE)
-       &&  GetTimer(victim, TIMER_SHOVEDRAG) <= 0)
+       && GetTimer(victim, TIMER_SHOVEDRAG) <= 0 )
     {
       ch->Echo("That character cannot be shoved right now.\r\n");
       return;
@@ -64,24 +64,25 @@ void do_shove( Character *ch, char *argument )
 	  Room *to_room = NULL;
 	  Ship *ship = NULL;
 
-          if ( IsNullOrEmpty( argument ) )
+          if ( argument.empty() )
             {
               ch->Echo("Shove them into what?\r\n");
               return;
             }
 
-	  ship = GetShipInRoom( ch->InRoom , argument );
+	  ship = GetShipInRoom( ch->InRoom, argument );
 
           if ( !ship )
             {
               Act( AT_PLAIN, "I see no $T here.",
-		   ch, NULL, argument, TO_CHAR );
+		   ch, NULL, argument.c_str(), TO_CHAR );
               return;
             }
 
           if ( IsBitSet( ch->Flags, ACT_MOUNTED ) )
             {
-              Act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
+              Act( AT_PLAIN, "You can't go in there riding THAT.",
+                   ch, NULL, argument.c_str(), TO_CHAR );
               return;
             }
 
@@ -99,7 +100,7 @@ void do_shove( Character *ch, char *argument )
                 {
                   int count = to_room->Characters().size();
 
-                  if ( count+2 >= to_room->Tunnel )
+                  if ( count + 2 >= to_room->Tunnel )
                     {
                       ch->Echo("There is no room for you both in there.\r\n");
                       return;
@@ -114,23 +115,23 @@ void do_shove( Character *ch, char *argument )
                 }
 
               Act( AT_PLAIN, "$n enters $T.", ch,
-                   NULL, ship->Name , TO_ROOM );
+                   NULL, ship->Name.c_str(), TO_ROOM );
               Act( AT_PLAIN, "You enter $T.", ch,
-                   NULL, ship->Name , TO_CHAR );
+                   NULL, ship->Name.c_str(), TO_CHAR );
               CharacterFromRoom( ch );
               CharacterToRoom( ch , to_room );
               Act( AT_PLAIN, "$n enters the ship.", ch,
-                   NULL, argument , TO_ROOM );
-              do_look( ch , "auto" );
+                   NULL, argument.c_str(), TO_ROOM );
+              do_look( ch, "auto" );
 
               Act( AT_PLAIN, "$n enters $T.", victim,
-                   NULL, ship->Name , TO_ROOM );
+                   NULL, ship->Name.c_str(), TO_ROOM );
               Act( AT_PLAIN, "You enter $T.", victim,
-                   NULL, ship->Name , TO_CHAR );
+                   NULL, ship->Name.c_str(), TO_CHAR );
               CharacterFromRoom( victim );
               CharacterToRoom( victim , to_room );
               Act( AT_PLAIN, "$n enters the ship.", victim,
-                   NULL, argument , TO_ROOM );
+                   NULL, argument.c_str(), TO_ROOM );
               do_look( victim , "auto" );
               victim->Position = POS_STANDING;
               return;
@@ -156,7 +157,8 @@ void do_shove( Character *ch, char *argument )
 
           if ( IsBitSet( ch->Flags, ACT_MOUNTED ) )
             {
-	      Act( AT_PLAIN, "You can't go out there riding THAT.", ch, NULL, argument, TO_CHAR );
+	      Act( AT_PLAIN, "You can't go out there riding THAT.",
+                   ch, NULL, argument.c_str(), TO_CHAR );
               return;
             }
 
@@ -182,12 +184,11 @@ void do_shove( Character *ch, char *argument )
 
           if ( to_room )
             {
-
               if ( to_room->Tunnel > 0 )
                 {
                   int count = to_room->Characters().size();
 
-                  if ( count+2 >= to_room->Tunnel )
+                  if ( count + 2 >= to_room->Tunnel )
                     {
                       ch->Echo("There is no room for you both in there.\r\n");
                       return;
@@ -201,24 +202,24 @@ void do_shove( Character *ch, char *argument )
                 }
 
               Act( AT_PLAIN, "$n exits the ship.", ch,
-                   NULL, ship->Name , TO_ROOM );
+                   NULL, ship->Name.c_str(), TO_ROOM );
 	      Act( AT_PLAIN, "You exits the ship.", ch,
-                   NULL, ship->Name , TO_CHAR );
+                   NULL, ship->Name.c_str(), TO_CHAR );
               CharacterFromRoom( ch );
               CharacterToRoom( ch , to_room );
               Act( AT_PLAIN, "$n exits $T.", ch,
-                   NULL, ship->Name , TO_ROOM );
+                   NULL, ship->Name.c_str(), TO_ROOM );
               do_look( ch , "auto" );
 
               Act( AT_PLAIN, "$n exits the ship.", victim,
-                   NULL, ship->Name , TO_ROOM );
+                   NULL, ship->Name.c_str(), TO_ROOM );
               Act( AT_PLAIN, "You exits the ship.", victim,
-                   NULL, ship->Name , TO_CHAR );
+                   NULL, ship->Name.c_str(), TO_CHAR );
               CharacterFromRoom( victim );
-              CharacterToRoom( victim , to_room );
+              CharacterToRoom( victim, to_room );
               Act( AT_PLAIN, "$n exits $T.", victim,
-                   NULL, ship->Name , TO_ROOM );
-              do_look( victim , "auto" );
+                   NULL, ship->Name.c_str(), TO_ROOM );
+              do_look( victim, "auto" );
               victim->Position = POS_STANDING;
               return;
             }
@@ -287,4 +288,3 @@ void do_shove( Character *ch, char *argument )
       AddTimerToCharacter( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_PAUSE );
     }
 }
-

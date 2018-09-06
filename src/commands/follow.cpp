@@ -1,14 +1,11 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_follow( Character *ch, char *argument )
+void do_follow( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Follow whom?\r\n" );
       return;

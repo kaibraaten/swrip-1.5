@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 
-void do_gold(Character * ch, char *argument)
+void do_gold(Character * ch, std::string argument)
 {
   SetCharacterColor( AT_GOLD, ch );
   ch->Echo( "You have %d credits", ch->Gold );

@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "object.hpp"
 
-void do_first_aid( Character *ch, char *argument )
+void do_first_aid( Character *ch, std::string argument )
 {
   Object *medpac = NULL;
   Character *victim = NULL;
@@ -31,14 +31,14 @@ void do_first_aid( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     victim = ch;
   else
     victim = GetCharacterInRoom( ch, argument );
 
   if ( !victim )
     {
-      ch->Echo( "I don't see any %s here...\r\n" , argument );
+      ch->Echo( "I don't see any %s here...\r\n" , argument.c_str() );
       return;
     }
 
@@ -54,16 +54,19 @@ void do_first_aid( Character *ch, char *argument )
   if ( victim == ch )
     {
       ch->Echo( "You tend to your wounds.\r\n");
-      sprintf( buf , "$n uses %s to help heal $s wounds." , medpac->ShortDescr );
+      sprintf( buf, "$n uses %s to help heal $s wounds.",
+               medpac->ShortDescr.c_str() );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_ROOM );
     }
   else
     {
       sprintf( buf , "You tend to $N's wounds." );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_CHAR );
-      sprintf( buf , "$n uses %s to help heal $N's wounds." , medpac->ShortDescr );
+      sprintf( buf , "$n uses %s to help heal $N's wounds.",
+               medpac->ShortDescr.c_str() );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
-      sprintf( buf , "$n uses %s to help heal your wounds." , medpac->ShortDescr );
+      sprintf( buf , "$n uses %s to help heal your wounds.",
+               medpac->ShortDescr.c_str() );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_VICT );
     }
 
@@ -72,4 +75,3 @@ void do_first_aid( Character *ch, char *argument )
 
   LearnFromSuccess( ch , gsn_first_aid );
 }
-

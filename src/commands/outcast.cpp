@@ -3,9 +3,8 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 
-void do_outcast( Character *ch, char *argument )
+void do_outcast( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;
   Clan *clan = NULL;
 
@@ -17,8 +16,7 @@ void do_outcast( Character *ch, char *argument )
 
   clan = ch->PCData->ClanInfo.Clan;
 
-  if ( ( ch->PCData->Bestowments
-        && IsName("outcast", ch->PCData->Bestowments))
+  if ( IsName("outcast", ch->PCData->Bestowments )
        || !StrCmp( ch->Name, clan->Leadership.Leader  )
        || !StrCmp( ch->Name, clan->Leadership.Number1 )
        || !StrCmp( ch->Name, clan->Leadership.Number2 ) )
@@ -31,9 +29,7 @@ void do_outcast( Character *ch, char *argument )
       return;
     }
 
-  argument = OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Outcast whom?\r\n");
       return;
@@ -73,27 +69,25 @@ void do_outcast( Character *ch, char *argument )
 
   if ( !StrCmp( victim->Name, clan->Leadership.Number1 ) )
     {
-      FreeMemory( clan->Leadership.Number1 );
-      clan->Leadership.Number1 = CopyString( "" );
+      clan->Leadership.Number1.erase();
     }
 
   if ( !StrCmp( victim->Name, clan->Leadership.Number2 ) )
     {
-      FreeMemory( clan->Leadership.Number2 );
-      clan->Leadership.Number2 = CopyString( "" );
+      clan->Leadership.Number2.erase();
     }
 
   victim->PCData->ClanInfo.Clan = NULL;
   RemoveClanMember( victim );
-  FreeMemory(victim->PCData->ClanInfo.ClanName);
-  victim->PCData->ClanInfo.ClanName = CopyString( "" );
-  Act( AT_MAGIC, "You outcast $N from $t", ch, clan->Name, victim, TO_CHAR );
-  Act( AT_MAGIC, "$n outcasts $N from $t", ch, clan->Name, victim, TO_ROOM );
-  Act( AT_MAGIC, "$n outcasts you from $t", ch, clan->Name, victim, TO_VICT );
+  victim->PCData->ClanInfo.ClanName.erase();
+  Act( AT_MAGIC, "You outcast $N from $t",
+       ch, clan->Name.c_str(), victim, TO_CHAR );
+  Act( AT_MAGIC, "$n outcasts $N from $t",
+       ch, clan->Name.c_str(), victim, TO_ROOM );
+  Act( AT_MAGIC, "$n outcasts you from $t",
+       ch, clan->Name.c_str(), victim, TO_VICT );
 
-  FreeMemory( victim->PCData->Bestowments );
-  victim->PCData->Bestowments = CopyString("");
-
+  victim->PCData->Bestowments.erase();
   SaveCharacter( victim );      /* clan gets saved when pfile is saved */
 }
 

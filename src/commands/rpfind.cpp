@@ -7,30 +7,30 @@ static void rpfind_help (Character *ch);
 /*
  * Search rooms for room progs containing a specified text string.
  */
-void do_rpfind( Character *ch, char *argument )   /* Gorog */
+void do_rpfind( Character *ch, std::string argument )   /* Gorog */
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
   vnum_t lo_vnum = MIN_VNUM, hi_vnum = MAX_VNUM;
 
   argument = OneArgument( argument, arg1 );   /* display_limit */
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || !IsNumber(arg1) )
+  if ( arg1.empty() || arg2.empty() || !IsNumber(arg1) )
     {
       rpfind_help(ch);
       return;
     }
 
-  int disp_limit = atoi (arg1);
+  int disp_limit = std::stoi(arg1);
   disp_limit = umax(0, disp_limit);
 
   if ( StrCmp(arg2, "mud") )
     {
       argument = OneArgument( argument, arg3 );
 
-      if ( IsNullOrEmpty( arg3 ) || IsNullOrEmpty( argument )
+      if ( arg3.empty() || argument.empty()
            || !IsNumber(arg2) || !IsNumber(arg3) )
 	{
           rpfind_help(ch);
@@ -38,8 +38,8 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
         }
       else
         {
-          lo_vnum = urange(MIN_VNUM, atoi(arg2), MAX_VNUM);
-          hi_vnum = urange(MIN_VNUM, atoi(arg3), MAX_VNUM);
+          lo_vnum = urange(MIN_VNUM, std::stoi(arg2), MAX_VNUM);
+          hi_vnum = urange(MIN_VNUM, std::stoi(arg3), MAX_VNUM);
 
           if ( lo_vnum > hi_vnum )
             {
@@ -49,7 +49,7 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
         }
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       rpfind_help(ch);
       return;
@@ -86,7 +86,7 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
 /*
  * Displays the help screen for the "rpfind" command
  */
-static void rpfind_help (Character *ch)
+static void rpfind_help( Character *ch )
 {
   ch->Echo("Syntax:\r\n");
   ch->Echo( "rpfind n lo_vnum hi_vnum text \r\n"

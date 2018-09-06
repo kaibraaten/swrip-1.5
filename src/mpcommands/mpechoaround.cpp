@@ -3,12 +3,12 @@
 
 /* prints the message to everyone in the room other than the mob and victim */
 
-void do_mpechoaround( Character *ch, char *argument )
+void do_mpechoaround( Character *ch, std::string argument )
 {
-  char       arg[ MAX_INPUT_LENGTH ];
-  Character *victim;
-  int        mobflags;
-  short     color;
+  std::string arg;
+  Character *victim = nullptr;
+  int mobflags = 0;
+  short color = 0;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -21,7 +21,7 @@ void do_mpechoaround( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ProgBug( "Mpechoaround - No argument", ch );
       return;
@@ -46,4 +46,3 @@ void do_mpechoaround( Character *ch, char *argument )
 
   ch->Flags = mobflags;
 }
-

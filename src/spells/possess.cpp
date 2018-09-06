@@ -3,11 +3,11 @@
 #include "skill.hpp"
 #include "descriptor.hpp"
 
-extern char *spell_target_name;
+extern std::string spell_target_name;
 
 ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
 {
-  Character *victim;
+  Character *victim = nullptr;
   char buf[MAX_STRING_LENGTH];
   Affect af;
   Skill *skill = GetSkill(sn);
@@ -44,7 +44,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
 
   if (victim->Desc)
     {
-      ch->Echo("%s is already possessed.\r\n", victim->ShortDescr);
+      ch->Echo("%s is already possessed.\r\n", victim->ShortDescr.c_str());
       return rSPELL_FAILED;
     }
 
@@ -75,7 +75,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   af.AffectedBy = AFF_POSSESS;
   AffectToCharacter( victim, &af );
 
-  sprintf(buf, "You have possessed %s!\r\n", victim->ShortDescr);
+  sprintf(buf, "You have possessed %s!\r\n", victim->ShortDescr.c_str());
 
   ch->Desc->Character = victim;
   ch->Desc->Original  = ch;

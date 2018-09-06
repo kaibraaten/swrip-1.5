@@ -38,12 +38,13 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
       FailedCasting( skill, ch, NULL, NULL );
       return rNONE;
     }
-  mob->TopLevel   = umin( lvl, skill->Dice ? ParseDice(ch, level, skill->Dice) : mob->TopLevel );
+  
+  mob->TopLevel   = umin( lvl, !skill->Dice.empty() ? ParseDice(ch, level, skill->Dice) : mob->TopLevel );
   mob->ArmorClass = Interpolate( mob->TopLevel, 100, -100 );
 
   mob->MaxHit = mob->TopLevel * 8 + GetRandomNumberFromRange(
-                                                   mob->TopLevel * mob->TopLevel / 4,
-                                                   mob->TopLevel * mob->TopLevel );
+                                                             mob->TopLevel * mob->TopLevel / 4,
+                                                             mob->TopLevel * mob->TopLevel );
   mob->Hit       = mob->MaxHit;
   mob->Gold      = 0;
   SuccessfulCasting( skill, ch, mob, NULL );

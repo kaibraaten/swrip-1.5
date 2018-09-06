@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_clansellship(Character *ch, char *argument )
+void do_clansellship(Character *ch, std::string argument )
 {
   long price = 0;
   Ship *ship = NULL;
@@ -25,9 +25,8 @@ void do_clansellship(Character *ch, char *argument )
 
   clan = ch->PCData->ClanInfo.Clan;
 
-  if ( ( ch->PCData->Bestowments
-         && IsName("clanbuyship", ch->PCData->Bestowments))
-       || !StrCmp( ch->Name, clan->Leadership.Leader  ))
+  if ( IsName("clanbuyship", ch->PCData->Bestowments)
+       || !StrCmp( ch->Name, clan->Leadership.Leader ))
     ;
   else
     {
@@ -43,15 +42,9 @@ void do_clansellship(Character *ch, char *argument )
 
       if ( !ship )
         {
-          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), TO_CHAR );
           return;
         }
-    }
-
-  if ( !StrCmp( ship->Owner , "" )  || ship->Type == MOB_SHIP )
-    {
-      ch->Echo( "&RThat ship is not owned!\r\n" );
-      return;
     }
 
   if ( StrCmp( ship->Owner, clan->Name ) )
@@ -63,16 +56,15 @@ void do_clansellship(Character *ch, char *argument )
   price = GetShipValue( ship );
 
   clan->Funds += ( price - price/10 );
-  ch->Echo("&GYour clan receives %ld credits from selling your ship.\r\n" , price - price/10 );
+  ch->Echo("&G%s receives %ld credits from selling your ship.\r\n",
+           clan->Name.c_str(), price - price/10 );
 
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
-       NULL, argument , TO_ROOM );
+       NULL, argument.c_str(), TO_ROOM );
 
-  FreeMemory( ship->Owner );
-  ship->Owner = CopyString( "" );
-  ship->Pilot = CopyString( "" );
-  ship->CoPilot = CopyString( "" );
+  ship->Owner.erase();
+  ship->Pilot.erase();
+  ship->CoPilot.erase();
   Ships->Save(ship);
   Clans->Save(clan);
 }
-

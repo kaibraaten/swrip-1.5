@@ -6,15 +6,11 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_undock(Character *ch, char *argument)
+void do_undock(Character *ch, std::string argument)
 {
-  char arg[MAX_INPUT_LENGTH];
-
   int the_chance = 0;
   Ship *ship = NULL;
   Ship *eShip = NULL;
-
-  strcpy( arg, argument );
 
   if ( ( ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
@@ -30,13 +26,13 @@ void do_undock(Character *ch, char *argument)
 
   if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
-      ch->Echo("&RYou aren't in the pilots seat.\r\n");
+      ch->Echo("&RYou aren't in the pilot's seat.\r\n");
       return;
     }
 
   if ( (ship->Autopilot || ship->Type == MOB_SHIP)  )
     {
-      ch->Echo("&RYou'll have to turn off the ships autopilot first.\r\n");
+      ch->Echo("&RYou'll have to turn off the ship's autopilot first.\r\n");
       return;
     }
 
@@ -105,9 +101,9 @@ void do_undock(Character *ch, char *argument)
     }
 
   if( ship->Docking == SHIP_DOCKED )
-    EchoToShip( AT_YELLOW , ship , "The ship unlocks the clamps and begins to drift away.");
+    EchoToShip( AT_YELLOW, ship, "The ship unlocks the clamps and begins to drift away.");
   else
-    EchoToShip( AT_YELLOW , ship , "You abort the docking manuever.");
+    EchoToShip( AT_YELLOW, ship, "You abort the docking maneuver.");
 
   if ( ship->Location )
     ship->State = SHIP_LANDED;
@@ -135,15 +131,16 @@ void do_undock(Character *ch, char *argument)
       LearnFromSuccess( ch, gsn_starfighters );
       LearnFromSuccess( ch, gsn_shipdocking);
     }
+
   if ( ship->Class == MIDSIZE_SHIP )
     {
       LearnFromSuccess( ch, gsn_midships );
       LearnFromSuccess( ch, gsn_shipdocking);
     }
+
   if ( ship->Class == CAPITAL_SHIP )
     {
       LearnFromSuccess( ch, gsn_capitalships );
       LearnFromSuccess( ch, gsn_shipdocking);
     }
 }
-

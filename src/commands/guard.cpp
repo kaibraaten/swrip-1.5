@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_guard( Character *ch, char *argument )
+void do_guard( Character *ch, std::string argument )
 {
   int the_chance = 0;
   Ship *ship = NULL;
@@ -30,6 +30,7 @@ void do_guard( Character *ch, char *argument )
 
   the_chance = IsNpc(ch) ? ch->TopLevel
     : (int)  (ch->PCData->Learned[gsn_shipsystems]) ;
+
   if ( GetRandomPercent() > the_chance )
     {
       ch->Echo("&RYou fail to work the controls properly.\r\n");
@@ -38,7 +39,7 @@ void do_guard( Character *ch, char *argument )
     }
 
   Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
-       NULL, argument , TO_ROOM );
+       NULL, argument.c_str(), TO_ROOM );
 
   if ( !StrCmp(argument,"on" ) )
     {
@@ -72,4 +73,3 @@ void do_guard( Character *ch, char *argument )
 
   LearnFromSuccess( ch, gsn_shipsystems );
 }
-

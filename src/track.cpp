@@ -222,7 +222,8 @@ void FoundPrey( Character *ch, Character *victim )
   char buf[MAX_STRING_LENGTH];
   char victname[1024];
 
-  sprintf( victname, "%s", IsNpc( victim ) ? victim->ShortDescr : victim->Name );
+  sprintf( victname, "%s",
+           IsNpc( victim ) ? victim->ShortDescr.c_str() : victim->Name.c_str() );
 
   if ( !CanSeeCharacter(ch, victim) )
     {

@@ -1,12 +1,12 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_echo( Character *ch, char *argument )
+void do_echo( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   short color = AT_PLAIN;
   int target = 0;
-  char *parg = nullptr;
+  std::string parg;
 
   if ( IsBitSet(ch->Flags, PLR_NO_EMOTE) )
     {
@@ -14,7 +14,7 @@ void do_echo( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Echo what?\r\n" );
       return;
@@ -49,13 +49,6 @@ void do_echo( Character *ch, char *argument )
     color = AT_IMMORT;
 
   OneArgument(argument, arg);
-
-  if ( !StrCmp( arg, "Merth" )
-       || !StrCmp( arg, "Durga" ))
-    {
-      ch->Echo( "I don't think %s would like that!\r\n", arg );
-      return;
-    }
 
   EchoToAll ( color, argument, target );
 }

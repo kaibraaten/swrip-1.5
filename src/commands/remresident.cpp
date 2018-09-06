@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_remresident(Character *ch, char *argument)
+void do_remresident(Character *ch, std::string argument )
 {
   Room *home = nullptr;
   Character *victim = nullptr;
@@ -21,7 +21,7 @@ void do_remresident(Character *ch, char *argument)
       return;
     }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("&RRemove which resident?\r\n");
       return;
@@ -52,4 +52,3 @@ void do_remresident(Character *ch, char *argument)
   Act(AT_PLAIN,"You remove $N as a resident.",ch,NULL,victim,TO_CHAR);
   victim->Echo("You are no longer a resident of this home.\r\n");
 }
-

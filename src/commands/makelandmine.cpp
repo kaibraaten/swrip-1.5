@@ -11,7 +11,7 @@ struct UserData
   int Strength = 0;
   int Weight = 0;
   int Level = 0;
-  char *ItemName = nullptr;
+  std::string ItemName;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
@@ -21,7 +21,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static void FreeUserData( struct UserData *ud );
 
-void do_makelandmine( Character *ch, char *argument )
+void do_makelandmine( Character *ch, std::string argument )
 {
   static const struct CraftingMaterial materials[] =
     {
@@ -53,14 +53,14 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   Character *ch = GetEngineer( args->CraftingSession );
   struct UserData *ud = (struct UserData*) userData;
 
-  if ( IsNullOrEmpty( args->CommandArguments ) )
+  if ( args->CommandArguments.empty() )
     {
       ch->Echo("&RUsage: Makelandmine <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
 
-  ud->ItemName = CopyString( args->CommandArguments );
+  ud->ItemName = args->CommandArguments;
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
@@ -90,18 +90,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( landmine->WearFlags, ITEM_TAKE );
   landmine->Weight = ud->Weight;
 
-  FreeMemory( landmine->Name );
-  strcpy( buf, ud->ItemName );
+  strcpy( buf, ud->ItemName.c_str() );
   strcat( buf, " landmine");
-  landmine->Name = CopyString( buf );
+  landmine->Name = buf;
 
-  strcpy( buf, ud->ItemName );
-  FreeMemory( landmine->ShortDescr );
-  landmine->ShortDescr = CopyString( buf );
+  strcpy( buf, ud->ItemName.c_str() );
+  landmine->ShortDescr = buf;
 
-  FreeMemory( landmine->Description );
   strcat( buf, " was carelessly misplaced here." );
-  landmine->Description = CopyString( Capitalize( buf ) );
+  landmine->Description = Capitalize( buf );
 
   landmine->Value[OVAL_EXPLOSIVE_MIN_DMG] = ud->Strength / 2;
   landmine->Value[OVAL_EXPLOSIVE_MAX_DMG] = ud->Strength;
@@ -122,12 +119,5 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 
 static void FreeUserData( struct UserData *ud )
 {
-  if( ud->ItemName )
-    {
-      FreeMemory( ud->ItemName );
-    }
-
   delete ud;
 }
-
-

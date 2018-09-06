@@ -105,7 +105,7 @@ static Shuttle *AllocateShuttle( void )
 Shuttle *NewShuttle(const std::string &name)
 {
   Shuttle *shuttle   = AllocateShuttle();
-  shuttle->Name      = CopyString( name );
+  shuttle->Name      = name;
 
   Shuttles->Add(shuttle);
   Shuttles->Save(shuttle);
@@ -176,10 +176,10 @@ static void PushShuttle( lua_State *L, const void *userData )
   lua_setglobal( L, "shuttle" );
 }
 
-const char *GetShuttleFilename( const Shuttle *shuttle )
+std::string GetShuttleFilename( const Shuttle *shuttle )
 {
-  static char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ) );
+  char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ).c_str() );
   return fullPath;
 }
 
@@ -233,14 +233,14 @@ void ShuttleUpdate( void )
 		  sprintf( buf,
                            "An electronic voice says, 'Preparing for departure.'\r\n"
                            "It continues, 'Next stop, %s'",
-                           shuttle->CurrentStop()->Name);
+                           shuttle->CurrentStop()->Name.c_str());
 		}
               else
 		{
 		  sprintf( buf,
                            "An electronic voice says, 'Preparing for launch.'\r\n"
                            "It continues, 'Next stop, %s'",
-                           shuttle->CurrentStop()->Name);
+                           shuttle->CurrentStop()->Name.c_str());
 		}
 
               for (room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
@@ -261,11 +261,13 @@ void ShuttleUpdate( void )
 
               if (shuttle->Type != SHUTTLE_TURBOCAR)
 		{
-		  sprintf(buf, "The hatch on %s closes and it begins to launch.", shuttle->Name );
+		  sprintf(buf, "The hatch on %s closes and it begins to launch.",
+                          shuttle->Name.c_str() );
 		}
               else
 		{
-		  sprintf(buf, "%s speeds out of the station.", shuttle->Name );
+		  sprintf(buf, "%s speeds out of the station.",
+                          shuttle->Name.c_str() );
 		}
 
               if(shuttle->InRoom != nullptr)
@@ -275,7 +277,7 @@ void ShuttleUpdate( void )
               else
                 {
                   Log->Bug("%s, %s, %d: '%s' shuttle->InRoom == nullptr, shuttle->CurrentStop == vnum %ld",
-                           __FILE__, __FUNCTION__, __LINE__, shuttle->Name, shuttle->CurrentStop()->RoomVnum);
+                           __FILE__, __FUNCTION__, __LINE__, shuttle->Name.c_str(), shuttle->CurrentStop()->RoomVnum);
                 }
               
               ExtractShuttle( shuttle );
@@ -290,7 +292,7 @@ void ShuttleUpdate( void )
 		}
               else
 		{
-		  Log->Bug("Shuttle '%s' is an unknown type", shuttle->Name);
+		  Log->Bug("Shuttle '%s' is an unknown type", shuttle->Name.c_str());
 		}
             }
           else if (shuttle->State == SHUTTLE_STATE_HYPERSPACE_LAUNCH)
@@ -298,7 +300,7 @@ void ShuttleUpdate( void )
               for (room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
 		{
 		  EchoToRoom( AT_YELLOW, GetRoom(room),
-				"The ship lurches slightly as it makes the jump to lightspeed.");
+                              "The ship lurches slightly as it makes the jump to lightspeed.");
 		}
 
               shuttle->State = SHUTTLE_STATE_HYPERSPACE_END;
@@ -328,7 +330,7 @@ void ShuttleUpdate( void )
               sprintf( buf,
                        "An electronic voice says, 'Welcome to %s'\r\n"
                        "It continues, 'Please exit through the %s. Enjoy your stay.'",
-                       shuttle->CurrentStop()->Name,
+                       shuttle->CurrentStop()->Name.c_str(),
                        shuttle->Type == SHUTTLE_TURBOCAR ? "doors" : "main ramp" );
 
               InsertShuttle(shuttle, GetRoom(shuttle->CurrentStop()->RoomVnum));
@@ -351,18 +353,18 @@ void ShuttleUpdate( void )
 
               if (shuttle->Type != SHUTTLE_TURBOCAR)
 		{
-		  sprintf(buf, "%s lands on the platform.", shuttle->Name );
+		  sprintf(buf, "%s lands on the platform.", shuttle->Name.c_str() );
 		}
               else
 		{
-		  sprintf(buf, "%s arrives at the station.", shuttle->Name );
+		  sprintf(buf, "%s arrives at the station.", shuttle->Name.c_str() );
 		}
 
               EchoToRoom( AT_YELLOW , shuttle->InRoom , buf );
 
               if (shuttle->Type != SHUTTLE_TURBOCAR)
                 {
-                  sprintf(buf, "The hatch on %s opens.", shuttle->Name );
+                  sprintf(buf, "The hatch on %s opens.", shuttle->Name.c_str() );
                   EchoToRoom( AT_YELLOW , shuttle->InRoom , buf );
                 }
 
@@ -376,7 +378,7 @@ void ShuttleUpdate( void )
           else
             {
               Log->Bug("Shuttle '%s' has invalid state of %d",
-                       shuttle->Name, shuttle->State);
+                       shuttle->Name.c_str(), shuttle->State);
               continue;
             }
         }
@@ -488,7 +490,7 @@ static void LoadStop( lua_State *L, Shuttle *shuttle )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      stop->Name = CopyString( lua_tostring( L, idx ) );
+      stop->Name = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -537,7 +539,7 @@ static int L_ShuttleEntry( lua_State *L )
   
   if( !lua_isnil( L, ++idx ) )
     {
-      shuttle->Name = CopyString( lua_tostring( L, idx ) );
+      shuttle->Name = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -609,17 +611,7 @@ static void FreeShuttle( Shuttle *shuttle )
 {
   for(ShuttleStop *stop : shuttle->Stops())
     {
-      if (stop->Name)
-        {
-          FreeMemory(stop->Name);
-        }
-
       delete stop;
-    }
-
-  if (shuttle->Name)
-    {
-      FreeMemory(shuttle->Name);
     }
 
   delete shuttle;
@@ -629,7 +621,7 @@ void PermanentlyDestroyShuttle(Shuttle *shuttle)
 {
   char buf[MAX_STRING_LENGTH];
   Shuttles->Remove(shuttle);
-  sprintf(buf, "%s/%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ) );
+  sprintf(buf, "%s/%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ).c_str() );
   unlink(buf);
   FreeShuttle( shuttle );
 }

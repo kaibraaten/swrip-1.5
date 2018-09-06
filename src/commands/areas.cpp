@@ -4,7 +4,7 @@
 
 static bool ShowArea( const Area *area, const Character *ch );
 
-void do_areas( Character *ch, char *argument )
+void do_areas( Character *ch, std::string argument )
 {
   SetCharacterColor( AT_PLAIN, ch );
   ch->Echo("\r\n   Author    |             Area                     | Recommended |  Enforced\r\n");

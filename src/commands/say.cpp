@@ -2,12 +2,12 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-void do_say( Character *ch, char *argument )
+void do_say( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   int mobflags = ch->Flags;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Say what?\r\n");
       return;
@@ -24,7 +24,7 @@ void do_say( Character *ch, char *argument )
 
   for(Character *vch : ch->InRoom->Characters())
     {
-      const char *sbuf = argument;
+      std::string sbuf = argument;
 
       if ( vch == ch )
         continue;
@@ -45,8 +45,8 @@ void do_say( Character *ch, char *argument )
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
     {
-      sprintf( buf, "%s: %s", IsNpc( ch ) ? ch->ShortDescr : ch->Name,
-               argument );
+      sprintf( buf, "%s: %s", IsNpc( ch ) ? ch->ShortDescr.c_str() : ch->Name.c_str(),
+               argument.c_str() );
       AppendToFile( LOG_FILE, buf );
     }
 
@@ -62,4 +62,3 @@ void do_say( Character *ch, char *argument )
 
   RoomProgSpeechTrigger( argument, ch );
 }
-

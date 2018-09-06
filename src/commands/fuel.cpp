@@ -5,12 +5,12 @@
 
 static Ship *GetFuelTarget(const Ship *fuelSource);
 
-void do_fuel(Character *ch, char *argument )
+void do_fuel(Character *ch, std::string argument )
 {
   Ship *fuelSource = NULL;
   Ship *fuelTarget = NULL;
   int amount = 0;
-  char arg1[MAX_INPUT_LENGTH] = { '\0' };
+  std::string arg1;
   char buf[MAX_STRING_LENGTH] = { '\0' };
 
   argument = OneArgument( argument, arg1 );
@@ -22,13 +22,13 @@ void do_fuel(Character *ch, char *argument )
       return;
     }
 
-  if( IsNullOrEmpty( arg1 ) || !IsNumber(arg1) )
+  if( arg1.empty() || !IsNumber(arg1) )
     {
       ch->Echo( "Syntax: Fuel <amount> <ship>");
       return;
     }
 
-  if( IsNullOrEmpty( argument ) )
+  if( argument.empty() )
     {
       fuelTarget = GetFuelTarget(fuelSource);
     }
@@ -39,7 +39,7 @@ void do_fuel(Character *ch, char *argument )
       return;
     }
 
-  amount = atoi(arg1);
+  amount = std::stoi(arg1);
 
   if(fuelSource->Thrusters.Energy.Current <= amount)
     {
@@ -60,7 +60,8 @@ void do_fuel(Character *ch, char *argument )
 
   fuelTarget->Thrusters.Energy.Current += amount;
 
-  sprintf( buf, "&YFuel order filled: &O%s: %d\r\n", fuelTarget->Name, amount );
+  sprintf( buf, "&YFuel order filled: &O%s: %d\r\n",
+           fuelTarget->Name.c_str(), amount );
   EchoToCockpit( AT_YELLOW, fuelSource, buf );
   ch->Echo("%s", buf);
   sprintf( buf, "&YFuel remaining: %d\r\n", fuelSource->Thrusters.Energy.Current );
@@ -106,4 +107,3 @@ static Ship *GetFuelTarget(const Ship *fuelSource)
 
   return fuelTarget;
 }
-

@@ -3,10 +3,10 @@
 #include "character.hpp"
 #include "ban.hpp"
 
-void do_ban( Character *ch, char *argument )
+void do_ban( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
-  char arg[MAX_INPUT_LENGTH] = { '\0' };
+  std::string arg;
   int bnum = 0;
 
   if ( IsNpc(ch) )
@@ -16,7 +16,7 @@ void do_ban( Character *ch, char *argument )
 
   SetCharacterColor( AT_PLAIN, ch );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Banned sites:\r\n" );
       ch->Echo( "[ #] (Lv) Time                     Site\r\n" );
@@ -43,7 +43,7 @@ void do_ban( Character *ch, char *argument )
 
       for(auto b : Bans->Entities())
         {
-          if ( bnum == atoi(arg) )
+          if ( bnum == std::stoi(arg) )
             {
               pban = b;
               found = true;
@@ -61,7 +61,7 @@ void do_ban( Character *ch, char *argument )
 
       argument = OneArgument(argument, arg);
 
-      if ( IsNullOrEmpty( arg ) )
+      if ( arg.empty() )
         {
           do_ban( ch, "help" );
           return;
@@ -71,19 +71,19 @@ void do_ban( Character *ch, char *argument )
         {
           argument = OneArgument(argument, arg);
 
-	  if ( IsNullOrEmpty( arg ) || !IsNumber(arg) )
+	  if ( arg.empty() || !IsNumber(arg) )
             {
               do_ban( ch, "help" );
               return;
             }
 
-          if ( atoi(arg) < 1 || atoi(arg) > LEVEL_IMPLEMENTOR )
+          if ( std::stoi(arg) < 1 || std::stoi(arg) > LEVEL_IMPLEMENTOR )
             {
               ch->Echo("Level range: 1 - %d.\r\n", LEVEL_IMPLEMENTOR);
               return;
             }
 
-	  pban->Level = atoi(arg);
+	  pban->Level = std::stoi(arg);
           ch->Echo( "Ban level set.\r\n" );
         }
       else if ( !StrCmp(arg, "newban") )

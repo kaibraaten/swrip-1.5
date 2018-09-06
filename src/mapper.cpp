@@ -266,10 +266,10 @@ static void ShowMapToCharacter( const Character *ch, const char *text )
 }
 
 /* Clear, generate and display the map */
-void DrawMap( const Character *ch, const char *desc )
+void DrawMap( const Character *ch, const std::string &desc )
 {
   int x = 0, y = 0;
-  static char buf[MAX_STRING_LENGTH];
+  static char buf[MAX_STRING_LENGTH] = {'\0'};
   Object *device = NULL;
 
   if ( ( device = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL )

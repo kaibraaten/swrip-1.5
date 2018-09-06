@@ -1,14 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_silence( Character *ch, char *argument )
+void do_silence( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Silence whom?");
       return;
@@ -43,4 +40,3 @@ void do_silence( Character *ch, char *argument )
       ch->Echo("SILENCE set.\r\n");
     }
 }
-

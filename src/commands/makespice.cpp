@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "craft.hpp"
@@ -8,7 +8,7 @@
 
 struct UserData
 {
-  char *ItemName = nullptr;
+  std::string ItemName;
   int SpiceType = 0;
   int SpiceGrade = 0;
 };
@@ -22,7 +22,7 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static CraftRecipe *MakeCraftRecipe( void );
 static void FreeUserData( struct UserData *ud );
 
-void do_makespice( Character *ch, char *argument )
+void do_makespice( Character *ch, std::string argument )
 {
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
@@ -57,14 +57,14 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   struct UserData *ud = (struct UserData*) userData;
   Character *ch = GetEngineer( args->CraftingSession );
 
-  if ( IsNullOrEmpty( args->CommandArguments ) )
+  if ( args->CommandArguments.empty() )
     {
       ch->Echo("&RUsage: Makespice <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
 
-  ud->ItemName = CopyString( args->CommandArguments );
+  ud->ItemName = args->CommandArguments;
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
@@ -92,19 +92,16 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 
   spice->Value[OVAL_SPICE_GRADE] = urange(10, ud->SpiceGrade, ( IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->Learned[gsn_spice_refining]) ) + 10);
 
-  strcpy( buf, ud->ItemName );
-  FreeMemory( spice->Name );
+  strcpy( buf, ud->ItemName.c_str() );
   strcat( buf, " drug spice " );
   strcat( buf, GetSpiceTypeName( ud->SpiceType ) );
-  spice->Name = CopyString( buf );
+  spice->Name = buf;
 
-  strcpy( buf, ud->ItemName );
-  FreeMemory( spice->ShortDescr );
-  spice->ShortDescr = CopyString( buf );
+  strcpy( buf, ud->ItemName.c_str() );
+  spice->ShortDescr = buf;
 
   strcat( buf, " was foolishly left lying around here." );
-  FreeMemory( spice->Description );
-  spice->Description = CopyString( Capitalize( buf ) );
+  spice->Description = Capitalize( buf );
 
   spice->ItemType = ITEM_SPICE;
   spice->Value[OVAL_SPICE_TYPE] = ud->SpiceType;
@@ -132,11 +129,5 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 
 static void FreeUserData( struct UserData *ud )
 {
-  if( ud->ItemName )
-    {
-      FreeMemory( ud->ItemName );
-    }
-
   delete ud;
 }
-

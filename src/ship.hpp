@@ -23,6 +23,7 @@
 #ifndef _SWRIP_SHIPS_HPP_
 #define _SWRIP_SHIPS_HPP_
 
+#include <string>
 #include <array>
 #include <utility/vector3.hpp>
 #include <utility/repository.hpp>
@@ -35,12 +36,12 @@ public:
   Ship();
 
   /* Persisted state */
-  char *Name = nullptr;
-  char *PersonalName = nullptr;
-  char *Description = nullptr;
-  char *Owner = nullptr;
-  char *Pilot = nullptr;
-  char *CoPilot = nullptr;
+  std::string Name;
+  std::string PersonalName;
+  std::string Description;
+  std::string Owner;
+  std::string Pilot;
+  std::string CoPilot;
   ShipClass Class = FIGHTER_SHIP;
   vnum_t Shipyard = INVALID_VNUM;
   Vector3 Position;
@@ -52,7 +53,7 @@ public:
   int DockingPorts = 0;
   bool Guard = false;
   int Flags = 0;
-  char *Home = nullptr;
+  std::string Home;
   
   struct
   {
@@ -136,7 +137,7 @@ public:
    /* Runtime state, not persisted */
   Room *InRoom = nullptr;
   struct Spaceobject *Spaceobject = nullptr;
-  char *LandingDestination = nullptr;
+  std::string LandingDestination;
   int Hyperdistance = 0;
   int OriginalHyperdistance = 0;
   int Docking = SHIP_READY;
@@ -209,7 +210,7 @@ Ship *GetShipInRoom( const Room *room, const std::string &name );
 void TransferShip( Ship *ship , vnum_t destination );
 bool IsShipAutoflying( const Ship *ship );
 bool CheckPilot( const Character *ch, const Ship *ship );
-const char *GetShipFilename( const Ship *ship );
+std::string GetShipFilename( const Ship *ship );
 bool ShipNameAndPersonalnameComboIsUnique( const std::string &name,
                                            const std::string &personalname );
 void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData);

@@ -4,46 +4,49 @@
 #include "ship.hpp"
 #include "room.hpp"
 
-void do_info(Character *ch, char *argument )
+void do_info(Character *ch, std::string argument )
 {
-  Ship *ship;
-  Ship *target;
+  Ship *ship = nullptr;
+  Ship *target = nullptr;
   bool fromafar = true;
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
-      if ( IsNullOrEmpty( argument ) )
+      if ( argument.empty() )
         {
           Act( AT_PLAIN, "Which ship do you want info on?.", ch, NULL, NULL, TO_CHAR );
           return;
         }
 
       ship = GetShipInRoom( ch->InRoom , argument );
-      if ( !ship )
-        {
-          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
-          return;
-        }
-      target = ship;
-    }
-  else if ( ship->Rooms.Hangar == ch->InRoom->Vnum )
-    {
-      if ( IsNullOrEmpty( argument ) )
-        {
-          Act( AT_PLAIN, "Which ship do you want info on?.", ch, NULL, NULL, TO_CHAR );
-          return;
-        }
 
-      ship = GetShipInRoom( ch->InRoom , argument );
       if ( !ship )
         {
-          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), TO_CHAR );
           return;
         }
 
       target = ship;
     }
-  else if ( IsNullOrEmpty( argument ) )
+  else if ( ship->Rooms.Hangar == ch->InRoom->Vnum )
+    {
+      if ( argument.empty() )
+        {
+          Act( AT_PLAIN, "Which ship do you want info on?.", ch, NULL, NULL, TO_CHAR );
+          return;
+        }
+
+      ship = GetShipInRoom( ch->InRoom, argument );
+
+      if ( !ship )
+        {
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument.c_str(), TO_CHAR );
+          return;
+        }
+
+      target = ship;
+    }
+  else if ( argument.empty() )
     {
       target = ship;
       fromafar = false;
@@ -53,7 +56,8 @@ void do_info(Character *ch, char *argument )
 
   if ( target == NULL )
     {
-      ch->Echo("&RI don't see that here.\r\nTry the radar, or type info by itself for info on this ship.\r\n");
+      ch->Echo("&RI don't see that here.\r\n"
+               "Try the radar, or type info by itself for info on this ship.\r\n");
       return;
     }
 
@@ -67,27 +71,29 @@ void do_info(Character *ch, char *argument )
     }
 
   ch->Echo("&Y%s %s : %s (%s)\r\n&B",
-	ShipTypes[target->Type],
-	ShipClasses[target->Class],
-	target->Name,
-	target->PersonalName );
+           ShipTypes[target->Type],
+           ShipClasses[target->Class],
+           target->Name.c_str(),
+           target->PersonalName.c_str() );
   ch->Echo("Description: %s\r\nOwner: %s",
-	target->Description,
-	target->Owner );
+           target->Description.c_str(),
+           target->Owner.c_str() );
+
   if( fromafar == false )
-    ch->Echo("   Pilot: %s   Copilot: %s", target->Pilot,  target->CoPilot );
+    ch->Echo("   Pilot: %s   Copilot: %s",
+             target->Pilot.c_str(), target->CoPilot.c_str() );
 
   ch->Echo("\r\nLaser cannons: %d  Ion cannons: %d\r\n",
 	target->WeaponSystems.Laser.Count,
-	target->WeaponSystems.IonCannon.Count );
+           target->WeaponSystems.IonCannon.Count );
   ch->Echo("Max Hull: %d  ", target->Defenses.Hull.Max );
   ch->Echo("Max Shields: %d   Max Energy(fuel): %d\r\n",
-             target->Defenses.Shield.Max, target->Thrusters.Energy.Max );
+           target->Defenses.Shield.Max, target->Thrusters.Energy.Max );
   ch->Echo("Maximum Speed: %d   Hyperspeed: %d  Value: %d\r\n",
-             target->Thrusters.Speed.Max, target->Hyperdrive.Speed, GetShipValue( target ));
+           target->Thrusters.Speed.Max, target->Hyperdrive.Speed, GetShipValue( target ));
 
   Act( AT_PLAIN, "$n checks various gages and displays on the control panel.",
-       ch, NULL, argument , TO_ROOM );
+       ch, NULL, argument.c_str(), TO_ROOM );
 }
 
 

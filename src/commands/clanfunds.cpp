@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_clanfunds( Character *ch, char *argument )
+void do_clanfunds( Character *ch, std::string argument )
 {
   if ( !IsClanned( ch ) )
     {
@@ -25,10 +25,10 @@ void do_clanfunds( Character *ch, char *argument )
 
   if ( clan->Funds == 0 )
     {
-      ch->Echo("%s has no funds at its disposal.",clan->Name);
+      ch->Echo("%s has no funds at its disposal.", clan->Name.c_str());
       return;
     }
 
-  ch->Echo("%s has %ld credits at its disposal.\r\n",clan->Name, clan->Funds);
+  ch->Echo("%s has %ld credits at its disposal.\r\n", clan->Name.c_str(), clan->Funds);
 }
 

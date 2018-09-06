@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "craft.hpp"
@@ -7,7 +7,7 @@
 
 struct UserData
 {
-  char *ItemName = nullptr;
+  std::string ItemName;
   int Charge = 0;
   int GemType = 0;
 };
@@ -21,7 +21,7 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static CraftRecipe *MakeCraftRecipe( void );
 static void FreeUserData( struct UserData *ud );
 
-void do_makeshield( Character *ch, char *argument )
+void do_makeshield( Character *ch, std::string argument )
 {
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
@@ -60,14 +60,14 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   struct UserData *ud = (struct UserData*) userData;
   Character *ch = GetEngineer( args->CraftingSession );
 
-  if ( IsNullOrEmpty( args->CommandArguments ) )
+  if ( args->CommandArguments.empty() )
     {
       ch->Echo("&RUsage: Makeshield <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
 
-  ud->ItemName = CopyString( args->CommandArguments );
+  ud->ItemName = args->CommandArguments;
 }
 
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
@@ -93,7 +93,6 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
-  char buf[MAX_STRING_LENGTH];
   Object *shield = args->Object;
 
   shield->ItemType = ITEM_ARMOR;
@@ -101,16 +100,9 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( shield->WearFlags, ITEM_WEAR_SHIELD );
   shield->Weight = 2;
 
-  FreeMemory( shield->Name );
-  shield->Name = CopyString( "energy shield" );
-
-  strcpy( buf, ud->ItemName );
-  FreeMemory( shield->ShortDescr );
-  shield->ShortDescr = CopyString( buf );
-
-  FreeMemory( shield->Description );
-  strcat( buf, " was carelessly misplaced here." );
-  shield->Description = CopyString( Capitalize( buf ) );
+  shield->Name = ud->ItemName + " energy shield";
+  shield->ShortDescr = ud->ItemName;
+  shield->Description = Capitalize( ud->ItemName ) + " was carelessly misplaced here.";
 
   shield->Value[OVAL_ARMOR_CONDITION] = (int) (shield->Level / 10 + ud->GemType * 2);
   shield->Value[OVAL_ARMOR_AC] = (int) (shield->Level / 10 + ud->GemType * 2);
@@ -133,11 +125,5 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 
 static void FreeUserData( struct UserData *ud )
 {
-  if( ud->ItemName )
-    {
-      FreeMemory( ud->ItemName );
-    }
-
   delete ud;
 }
-

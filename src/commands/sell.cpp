@@ -4,18 +4,15 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_sell( Character *ch, char *argument )
+void do_sell( Character *ch, std::string arg )
 {
   char buf[MAX_STRING_LENGTH];
-  char arg[MAX_INPUT_LENGTH];
   Character *keeper = nullptr;
   Object *obj = nullptr;
   int cost = 0;
   bool spice = false;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Sell what?\r\n");
       return;
@@ -40,13 +37,15 @@ void do_sell( Character *ch, char *argument )
 
   if ( obj->Timer > 0 )
     {
-      Act( AT_TELL, "$n tells you, '$p is depreciating in value too quickly...'", keeper, obj, ch, TO_VICT );
+      Act( AT_TELL, "$n tells you, '$p is depreciating in value too quickly...'",
+           keeper, obj, ch, TO_VICT );
       return;
     }
 
   if ( ( cost = GetObjectCost( ch, keeper, obj, false ) ) <= 0 )
     {
-      Act( AT_ACTION, "$n looks uninterested in $p.", keeper, obj, ch, TO_VICT );
+      Act( AT_ACTION, "$n looks uninterested in $p.",
+           keeper, obj, ch, TO_VICT );
       return;
     }
 
@@ -58,6 +57,7 @@ void do_sell( Character *ch, char *argument )
       Act( AT_TELL, "$n makes a credit transaction.", keeper, obj, ch, TO_VICT );
       LowerEconomy( ch->InRoom->Area, cost-keeper->Gold );
     }
+
   if ( !EconomyHas( ch->InRoom->Area, cost ) && !spice )
     {
       Act( AT_ACTION, "$n can not afford $p right now.", keeper, obj, ch, TO_VICT );
@@ -71,18 +71,20 @@ void do_sell( Character *ch, char *argument )
   Act( AT_ACTION, buf, ch, obj, NULL, TO_CHAR );
   ch->Gold     += cost;
   keeper->Gold -= cost;
+
   if ( spice )
     BoostEconomy( ch->InRoom->Area, cost * 1.5);
+
   if ( keeper->Gold < 0 )
     keeper->Gold = 0;
 
   if ( obj->ItemType == ITEM_TRASH )
-    ExtractObject( obj );
-  else  if ( IsBitSet( obj->Flags , ITEM_CONTRABAND) )
     {
-      long ch_exp;
-
-      ch_exp = umin( obj->Cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  ) / 10  );
+      ExtractObject( obj );
+    }
+  else if ( IsBitSet( obj->Flags , ITEM_CONTRABAND) )
+    {
+      long ch_exp = umin( obj->Cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  ) / 10  );
       ch->Echo("You receive %ld smuggling experience for unloading your contraband.\r\n " , ch_exp );
       GainXP( ch, SMUGGLING_ABILITY, ch_exp );
 
@@ -102,7 +104,4 @@ void do_sell( Character *ch, char *argument )
       ObjectFromCharacter( obj );
       ObjectToCharacter( obj, keeper );
     }
-
-  return;
 }
-

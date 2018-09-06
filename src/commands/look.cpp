@@ -36,19 +36,19 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door );
 static void show_no_arg( Character *ch, bool is_auto );
 
 static char *get_sex( Character *ch );
-static void look_under( Character *ch, const char *what, bool doexaprog );
-static void look_in( Character *ch, const char *what, bool doexaprog );
+static void look_under( Character *ch, const std::string &what, bool doexaprog );
+static void look_in( Character *ch, const std::string &what, bool doexaprog );
 static bool requirements_are_met( Character *ch );
 
-void do_look( Character *ch, char *argument )
+void do_look( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
   Exit *pexit = NULL;
   Character *victim = NULL;
-  char *pdesc = NULL;
+  std::string pdesc;
   bool doexaprog = false;
   DirectionType door = DIR_INVALID;
   int number = 0, cnt = 0;
@@ -66,7 +66,7 @@ void do_look( Character *ch, char *argument )
   doexaprog = StrCmp( "noprog", arg2 ) && StrCmp( "noprog", arg3 );
   is_auto = !StrCmp( arg1, "auto" );
 
-  if ( IsNullOrEmpty( arg1 ) || is_auto )
+  if ( arg1.empty() || is_auto )
     {
       show_no_arg( ch, is_auto );
       return;
@@ -86,10 +86,9 @@ void do_look( Character *ch, char *argument )
 
   pdesc = GetExtraDescription(arg1, ch->InRoom->ExtraDescriptions());
 
-  if ( pdesc )
+  if ( !pdesc.empty() )
     {
-      ch->Echo("\r\n");
-      ch->Echo(pdesc);
+      ch->Echo( "\r\n%s", pdesc.c_str() );
       return;
     }
 
@@ -123,24 +122,33 @@ void do_look( Character *ch, char *argument )
       if ( CanSeeObject( ch, obj ) )
         {
           const auto objExtraDescriptions(obj->ExtraDescriptions());
+          pdesc = GetExtraDescription(arg, objExtraDescriptions);
           
-          if ( (pdesc=GetExtraDescription(arg, objExtraDescriptions)) != NULL )
+          if ( !pdesc.empty() )
             {
               if ( (cnt += obj->Count) < number )
                 continue;
+
               ch->Echo(pdesc);
-              if ( doexaprog ) ObjProgExamineTrigger( ch, obj );
+
+              if ( doexaprog )
+                ObjProgExamineTrigger( ch, obj );
+
               return;
             }
 
           const auto protoExtraDescriptions(obj->Prototype->ExtraDescriptions());
-
-          if ( (pdesc=GetExtraDescription(arg, protoExtraDescriptions)) != NULL )
+          pdesc = GetExtraDescription(arg, protoExtraDescriptions);
+          
+          if ( !pdesc.empty() )
             {
               if ( (cnt += obj->Count) < number )
 		continue;
+
               ch->Echo(pdesc);
-              if ( doexaprog ) ObjProgExamineTrigger( ch, obj );
+
+              if ( doexaprog )
+                ObjProgExamineTrigger( ch, obj );
               return;
             }
 
@@ -151,10 +159,10 @@ void do_look( Character *ch, char *argument )
 
               pdesc = GetExtraDescription( obj->Name, protoExtraDescriptions );
 
-              if ( !pdesc )
+              if ( pdesc.empty() )
                 pdesc = GetExtraDescription( obj->Name, objExtraDescriptions );
 
-              if ( !pdesc )
+              if ( pdesc.empty() )
                 ch->Echo("You see nothing special.\r\n");
               else
                 ch->Echo(pdesc);
@@ -177,8 +185,9 @@ void do_look( Character *ch, char *argument )
         {
           const auto objExtraDescriptions(obj->ExtraDescriptions());
           const auto protoExtraDescriptions(obj->Prototype->ExtraDescriptions());
+          pdesc = GetExtraDescription(arg, objExtraDescriptions);
           
-          if ( (pdesc=GetExtraDescription(arg, objExtraDescriptions)) != NULL )
+          if ( !pdesc.empty() )
             {
               if ( (cnt += obj->Count) < number )
                 continue;
@@ -191,10 +200,13 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          if ( (pdesc=GetExtraDescription(arg, protoExtraDescriptions)) != NULL )
+          pdesc = GetExtraDescription(arg, protoExtraDescriptions);
+          
+          if ( !pdesc.empty() )
             {
               if ( (cnt += obj->Count) < number )
                 continue;
+
               ch->Echo(pdesc);
 
               if ( doexaprog )
@@ -207,14 +219,20 @@ void do_look( Character *ch, char *argument )
 	    {
               if ( (cnt += obj->Count) < number )
                 continue;
+
               pdesc = GetExtraDescription( obj->Name, protoExtraDescriptions );
-              if ( !pdesc )
+
+              if ( pdesc.empty() )
                 pdesc = GetExtraDescription( obj->Name, objExtraDescriptions );
-              if ( !pdesc )
+
+              if ( pdesc.empty() )
                 ch->Echo("You see nothing special.\r\n");
               else
                 ch->Echo(pdesc);
-              if ( doexaprog ) ObjProgExamineTrigger( ch, obj );
+
+              if ( doexaprog )
+                ObjProgExamineTrigger( ch, obj );
+
               return;
             }
         }
@@ -226,18 +244,20 @@ void do_look( Character *ch, char *argument )
 static void show_char_to_char_0( Character *victim, Character *ch )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
-  char buf1[MAX_STRING_LENGTH];
-  char message[MAX_STRING_LENGTH];
+  char buf1[MAX_STRING_LENGTH] = {'\0'};
+  char message[MAX_STRING_LENGTH] = {'\0'};
 
   if ( !IsNpc(victim) && !victim->Desc )
     {
-      if ( !victim->Switched )          strcat( buf, "(Link Dead) "  );
-      else
-        if ( !IsAffectedBy(victim->Switched, AFF_POSSESS) )
-          strcat( buf, "(Switched) " );
+      if ( !victim->Switched )
+        strcat( buf, "(Link Dead) "  );
+      else if ( !IsAffectedBy(victim->Switched, AFF_POSSESS) )
+        strcat( buf, "(Switched) " );
     }
+  
   if ( !IsNpc(victim)
-       && IsBitSet(victim->Flags, PLR_AFK) )                strcat( buf, "[AFK] ");
+       && IsBitSet(victim->Flags, PLR_AFK) )
+    strcat( buf, "[AFK] ");
 
   if ( (!IsNpc(victim) && IsBitSet(victim->Flags, PLR_WIZINVIS))
        || (IsNpc(victim) && IsBitSet(victim->Flags, ACT_MOBINVIS)) )
@@ -249,36 +269,51 @@ static void show_char_to_char_0( Character *victim, Character *ch )
 
       strcat( buf, buf1 );
     }
-  if ( IsAffectedBy(victim, AFF_INVISIBLE)   ) strcat( buf, "(Invis) "      );
-  if ( IsAffectedBy(victim, AFF_HIDE)        ) strcat( buf, "(Stealth) "       );
-  if ( IsAffectedBy(victim, AFF_PASS_DOOR)   ) strcat( buf, "(Translucent) ");
-  if ( IsAffectedBy(victim, AFF_FAERIE_FIRE) ) strcat( buf, "&P(Pink Aura)&w "  );
+
+  if ( IsAffectedBy(victim, AFF_INVISIBLE)   )
+    strcat( buf, "(Invis) "      );
+
+  if ( IsAffectedBy(victim, AFF_HIDE)        )
+    strcat( buf, "(Stealth) "       );
+
+  if ( IsAffectedBy(victim, AFF_PASS_DOOR)   )
+    strcat( buf, "(Translucent) ");
+
+  if ( IsAffectedBy(victim, AFF_FAERIE_FIRE) )
+    strcat( buf, "&P(Pink Aura)&w "  );
+
   if ( IsEvil(victim)
-       &&   IsAffectedBy(ch, AFF_DETECT_EVIL)     ) strcat( buf, "&R(Red Aura)&w "   );
+       &&   IsAffectedBy(ch, AFF_DETECT_EVIL)     )
+    strcat( buf, "&R(Red Aura)&w "   );
+
   if ( ( victim->Mana > 10 )
        &&   ( IsAffectedBy( ch , AFF_DETECT_MAGIC ) || IsImmortal( ch ) ) )
     strcat( buf, "&B(Blue Aura)&w "  );
+
   if ( !IsNpc(victim) && IsBitSet(victim->Flags, PLR_LITTERBUG  ) )
     strcat( buf, "(LITTERBUG) "  );
+
   if ( IsNpc(victim) && IsImmortal(ch)
        && IsBitSet(victim->Flags, ACT_PROTOTYPE) ) strcat( buf, "(PROTO) " );
+
   if ( victim->Desc && victim->Desc->ConnectionState == CON_EDITING )
     strcat( buf, "(Writing) " );
 
   SetCharacterColor( AT_PERSON, ch );
   
-  if ( victim->Position == victim->DefaultPosition && !IsNullOrEmpty( victim->LongDescr ) )
+  if ( victim->Position == victim->DefaultPosition
+       && !victim->LongDescr.empty() )
     {
-      strcat( buf, victim->LongDescr );
+      strcat( buf, victim->LongDescr.c_str() );
       ch->Echo(buf);
       show_visible_affects_to_char( victim, ch );
       return;
     }
 
   if ( !IsNpc(victim) && !IsBitSet(ch->Flags, PLR_BRIEF) )
-    strcat( buf, victim->PCData->Title );
+    strcat( buf, victim->PCData->Title.c_str() );
   else
-    strcat( buf, PERS( victim, ch ) );
+    strcat( buf, PERS( victim, ch ).c_str() );
 
   switch ( victim->Position )
     {
@@ -292,34 +327,37 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           if (victim->On->Value[OVAL_FURNITURE_PREPOSITION] == SLEEP_AT)
             {
               sprintf(message," is sleeping at %s",
-                      victim->On->ShortDescr);
+                      victim->On->ShortDescr.c_str());
               if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
                   && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
+
               strcat(message, ".");
-              strcat(buf,message);
+              strcat(buf, message);
             }
           else if (victim->On->Value[OVAL_FURNITURE_PREPOSITION] == SLEEP_ON)
             {
               sprintf(message," is sleeping on %s",
-                      victim->On->ShortDescr);
+                      victim->On->ShortDescr.c_str());
+
               if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
 		  && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
+
               strcat(message, ".");
-              strcat(buf,message);
+              strcat(buf, message);
             }
           else
             {
               sprintf(message, " is sleeping in %s",
-                      victim->On->ShortDescr);
+                      victim->On->ShortDescr.c_str());
 	      
               if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
                   && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
 	      
               strcat(message, ".");
-              strcat(buf,message);
+              strcat(buf, message);
             }
         }
       else
@@ -331,33 +369,38 @@ static void show_char_to_char_0( Character *victim, Character *ch )
             strcat( buf, " is deep in slumber here." );
         }
       break;
+
     case POS_RESTING:
       if (victim->On != NULL)
         {
           if (victim->On->Value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
             {
               sprintf(message," is resting at %s",
-                      victim->On->ShortDescr);
+                      victim->On->ShortDescr.c_str());
+
               if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
                   && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
+
               strcat(message, ".");
               strcat(buf,message);
             }
           else if (victim->On->Value[OVAL_FURNITURE_PREPOSITION] == REST_ON)
             {
               sprintf(message," is resting on %s",
-                      victim->On->ShortDescr);
+                      victim->On->ShortDescr.c_str());
+
               if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
                   && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
+
 	      strcat(message, ".");
               strcat(buf,message);
             }
           else
             {
               sprintf(message, " is resting in %s",
-                      victim->On->ShortDescr);
+                      victim->On->ShortDescr.c_str());
 
 	      if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
                   && ch->On && (ch->On == victim->On ) )
@@ -377,36 +420,43 @@ static void show_char_to_char_0( Character *victim, Character *ch )
 	    strcat (buf, " is sprawled out here." );
         }
       break;
+
     case POS_SITTING:
       if (victim->On != NULL)
         {
           if (victim->On->Value[OVAL_FURNITURE_PREPOSITION] == SIT_AT)
             {
               sprintf(message," is sitting at %s",
-                      victim->On->ShortDescr);
+                      victim->On->ShortDescr.c_str());
+
               if( (ch->Position == POS_SITTING)
                   && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
+
               strcat(message, ".");
               strcat(buf,message);
             }
           else if (victim->On->Value[OVAL_FURNITURE_PREPOSITION] == SIT_ON)
             {
               sprintf(message," is sitting on %s",
-                      victim->On->ShortDescr);
+                      victim->On->ShortDescr.c_str());
+
               if( (ch->Position == POS_SITTING)
                   && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
-	      strcat(message, ".");
+
+              strcat(message, ".");
               strcat(buf,message);
             }
           else
             {
               sprintf(message, " is sitting in %s",
-                      victim->On->ShortDescr);
+                      victim->On->ShortDescr.c_str());
+
               if( (ch->Position == POS_SITTING)
                   && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
+
               strcat(message, ".");
               strcat(buf,message);
             }
@@ -415,13 +465,13 @@ static void show_char_to_char_0( Character *victim, Character *ch )
         {
           if (ch->Position == POS_SITTING)
             strcat( buf, " sits here with you." );
+          else if (ch->Position == POS_RESTING)
+            strcat( buf, " sits nearby as you lie around." );
           else
-            if (ch->Position == POS_RESTING)
-              strcat( buf, " sits nearby as you lie around." );
-            else
-              strcat( buf, " sits upright here." );
+            strcat( buf, " sits upright here." );
         }
       break;
+
     case POS_STANDING:
       if ( IsImmortal(victim) )
         strcat( buf, " is here before you." );
@@ -446,10 +496,12 @@ static void show_char_to_char_0( Character *victim, Character *ch )
                 else
                   strcat( buf, " is standing here." );
       break;
+
     case POS_SHOVE:    strcat( buf, " is being shoved around." );       break;
     case POS_DRAG:     strcat( buf, " is being dragged around." );      break;
     case POS_MOUNTED:
       strcat( buf, " is here, upon " );
+
       if ( !victim->Mount )
         strcat( buf, "thin air???" );
       else
@@ -458,21 +510,23 @@ static void show_char_to_char_0( Character *victim, Character *ch )
         else
           if ( victim->InRoom == victim->Mount->InRoom )
             {
-              strcat( buf, PERS( victim->Mount, ch ) );
+              strcat( buf, PERS( victim->Mount, ch ).c_str() );
               strcat( buf, "." );
             }
           else
-            strcat( buf, "someone who left??" );
+            strcat( buf, "someone who left???" );
       break;
+
     case POS_FIGHTING:
       strcat( buf, " is here, fighting " );
+
       if ( !victim->Fighting )
         strcat( buf, "thin air???" );
       else if ( GetFightingOpponent( victim ) == ch )
         strcat( buf, "YOU!" );
       else if ( victim->InRoom == victim->Fighting->Who->InRoom )
         {
-          strcat( buf, PERS( victim->Fighting->Who, ch ) );
+          strcat( buf, PERS( victim->Fighting->Who, ch ).c_str() );
           strcat( buf, "." );
         }
       else
@@ -491,9 +545,9 @@ static void show_char_to_char_0( Character *victim, Character *ch )
 
 static void show_char_to_char_1( Character *victim, Character *ch )
 {
-  Object *obj;
-  int iWear;
-  bool found;
+  Object *obj = nullptr;
+  int iWear = 0;
+  bool found = false;
 
   if ( CanSeeCharacter( victim, ch ) )
     {
@@ -501,9 +555,10 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       Act( AT_ACTION, "$n looks at $N.",  ch, NULL, victim, TO_NOTVICT );
     }
 
-  ch->Echo("%s is a %s %s\r\n", victim->Name, get_sex( victim ), NpcRace[victim->Race] );
+  ch->Echo("%s is a %s %s\r\n", victim->Name.c_str(),
+           get_sex( victim ), NpcRace[victim->Race] );
 
-  if ( !IsNullOrEmpty( victim->Description ) )
+  if ( !victim->Description.empty() )
     {
       ch->Echo(victim->Description);
     }
@@ -516,13 +571,14 @@ static void show_char_to_char_1( Character *victim, Character *ch )
 
   found = false;
 
-  if( ( (obj = GetEquipmentOnCharacter( victim, WEAR_OVER ) ) == NULL ) || obj->Value[2] == 0 || IsGreater(ch) )
+  if( ( (obj = GetEquipmentOnCharacter( victim, WEAR_OVER ) ) == NULL )
+      || obj->Value[2] == 0 || IsGreater(ch) )
     {
       for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
         {
           if ( ( obj = GetEquipmentOnCharacter( victim, (WearLocation)iWear ) ) != NULL
                && CanSeeObject( ch, obj )
-	       && ( !IsNullOrEmpty( obj->Description )
+	       && ( !obj->Description.empty()
 		    || ( IsBitSet(ch->Flags, PLR_HOLYLIGHT)
 			 || IsNpc(ch) ) ) )
             {
@@ -532,6 +588,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
 		  Act( AT_PLAIN, "$N is using:", ch, NULL, victim, TO_CHAR );
                   found = true;
                 }
+
               ch->Echo(WhereName[iWear]);
               ch->Echo(FormatObjectToCharacter( obj, ch, true ));
               ch->Echo("\r\n");
@@ -567,7 +624,7 @@ static void show_ships_to_char( const Room *room, const Character *ch )
   for(const Ship *ship : room->Ships())
     {
       SetCharacterColor( AT_SHIP, ch );      
-      ch ->Echo("%-35s", ship->Name );
+      ch ->Echo("%-35s", ship->Name.c_str() );
 
       if(++column % NUMBER_OF_COLUMNS == 0)
         {
@@ -618,13 +675,14 @@ static void show_visible_affects_to_char( Character *victim, Character *ch )
     {
       SetCharacterColor( AT_MAGIC, ch );
       ch->Echo("%s looks ahead free of expression.\r\n",
-                 IsNpc( victim ) ? Capitalize(victim->ShortDescr) : (victim->Name) );
+                 IsNpc( victim ) ? Capitalize(victim->ShortDescr).c_str() : victim->Name.c_str() );
     }
+  
   if ( !IsNpc(victim) && !victim->Desc
        &&    victim->Switched && IsAffectedBy(victim->Switched, AFF_POSSESS) )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      strcpy( buf, PERS( victim, ch ) );
+      strcpy( buf, PERS( victim, ch ).c_str() );
       strcat( buf, " appears to be in a deep trance...\r\n" );
     }
 }
@@ -644,12 +702,12 @@ static char *get_sex( Character *ch )
     }
 }
 
-static void look_under( Character *ch, const char *what, bool doexaprog )
+static void look_under( Character *ch, const std::string &what, bool doexaprog )
 {
   int count = 0;
   Object *obj = NULL;
 
-  if ( IsNullOrEmpty( what ) )
+  if ( what.empty() )
     {
       ch->Echo("Look beneath what?\r\n");
       return;
@@ -732,12 +790,12 @@ static bool requirements_are_met( Character *ch )
   return true;
 }
 
-static void look_in( Character *ch, const char *what, bool doexaprog )
+static void look_in( Character *ch, const std::string &what, bool doexaprog )
 {
   int count = 0;
   Object *obj = NULL;
 
-  if ( IsNullOrEmpty( what ) )
+  if ( what.empty() )
     {
       ch->Echo("Look in what?\r\n");
       return;
@@ -760,7 +818,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
     case ITEM_DRINK_CON:
       if ( obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] <= 0 )
 	{
-   ch->Echo("It is empty.\r\n");
+          ch->Echo("It is empty.\r\n");
 
 	  if ( doexaprog )
 	    {
@@ -771,12 +829,12 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 	}
 
       ch->Echo("It's %s full of a %s liquid.\r\n",
-	    obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < obj->Value[OVAL_DRINK_CON_CAPACITY] / 4
-	    ? "less than" :
-	    obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 3 * obj->Value[OVAL_DRINK_CON_CAPACITY] / 4
-	    ? "about"     : "more than",
-	    LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Color
-	    );
+               obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < obj->Value[OVAL_DRINK_CON_CAPACITY] / 4
+               ? "less than" :
+               obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 3 * obj->Value[OVAL_DRINK_CON_CAPACITY] / 4
+               ? "about"     : "more than",
+               LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Color
+               );
 
       if ( doexaprog )
 	{
@@ -796,7 +854,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 		   && GetTrustLevel(ch) < SysData.LevelToOverridePrivateFlag )
 		{
 		  SetCharacterColor( AT_WHITE, ch );
-    ch->Echo("That room is private buster!\r\n");
+                  ch->Echo("That room is private, buster!\r\n");
 		  return;
 		}
 
@@ -819,7 +877,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
     case ITEM_DROID_CORPSE:
       if ( IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
 	{
-   ch->Echo("It is closed.\r\n");
+          ch->Echo("It is closed.\r\n");
 	  break;
 	}
 
@@ -840,7 +898,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 
 static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 {
-  if ( !IsNullOrEmpty( pexit->Keyword ) )
+  if ( !pexit->Keyword.empty() )
     {
       if ( IsBitSet(pexit->Flags, EX_CLOSED)
 	   && !IsBitSet(pexit->Flags, EX_WINDOW) )
@@ -848,11 +906,12 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	  if ( IsBitSet(pexit->Flags, EX_SECRET)
 	       && door != DIR_INVALID )
 	    {
-       ch->Echo("Nothing special there.\r\n");
+              ch->Echo("Nothing special there.\r\n");
 	    }
 	  else
 	    {
-	      Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->Keyword, TO_CHAR );
+	      Act( AT_PLAIN, "The $d is closed.", ch, NULL,
+                   pexit->Keyword.c_str(), TO_CHAR );
 	    }
 
 	  return;
@@ -861,11 +920,11 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
       if ( IsBitSet( pexit->Flags, EX_BASHED ) )
 	{
 	  Act(AT_RED, "The $d has been bashed from its hinges!",
-	      ch, NULL, pexit->Keyword, TO_CHAR);
+	      ch, NULL, pexit->Keyword.c_str(), TO_CHAR);
 	}
     }
 
-  if ( !IsNullOrEmpty( pexit->Description ) )
+  if ( !pexit->Description.empty() )
     {
       ch->Echo(pexit->Description);
     }
@@ -888,7 +947,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	   && GetTrustLevel( ch ) < LEVEL_IMMORTAL )
 	{
 	  SetCharacterColor( AT_MAGIC, ch );
-   ch->Echo("You attempt to scry...\r\n");
+          ch->Echo("You attempt to scry...\r\n");
 
 	  if (!IsNpc(ch) )
 	    {
@@ -896,7 +955,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 
 	      if( GetRandomPercent() > percent )
 		{
-    ch->Echo("You fail.\r\n");
+                  ch->Echo("You fail.\r\n");
 		  return;
 		}
 	    }
@@ -906,7 +965,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	   && GetTrustLevel(ch) < SysData.LevelToOverridePrivateFlag )
 	{
 	  SetCharacterColor( AT_WHITE, ch );
-   ch->Echo("That room is private buster!\r\n");
+          ch->Echo("That room is private buster!\r\n");
 	  return;
 	}
 
@@ -951,7 +1010,7 @@ static void show_no_arg( Character *ch, bool is_auto )
       if ((GetTrustLevel(ch) >= LEVEL_IMMORTAL) && (IsBitSet(ch->PCData->Flags, PCFLAG_ROOM)))
 	{
 	  SetCharacterColor(AT_PURPLE, ch);
-          ch->Echo("{%d:%s}", ch->InRoom->Vnum, ch->InRoom->Area->Filename);
+          ch->Echo("{%d:%s}", ch->InRoom->Vnum, ch->InRoom->Area->Filename.c_str());
 
 	  SetCharacterColor(AT_CYAN, ch);
           ch->Echo("[%s]", FlagString(ch->InRoom->Flags, RoomFlags ).c_str() );
@@ -990,7 +1049,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 static void LookThroughShipWindow(Character *ch, const Ship *ship)
 {
   SetCharacterColor(  AT_WHITE, ch );
-  ch ->Echo("\r\nThrough the transparisteel windows you see:\r\n" );
+  ch->Echo("\r\nThrough the transparisteel windows you see:\r\n" );
 
   if ( ship->Location || ship->State == SHIP_LANDED )
     {
@@ -1018,11 +1077,9 @@ static void LookThroughShipWindow(Character *ch, const Ship *ship)
 
       for(const Spaceobject *spaceobject : Spaceobjects->Entities())
         {
-          if ( IsSpaceobjectInRange( ship, spaceobject)
-               && spaceobject->Name
-               && StrCmp(spaceobject->Name,"") )
+          if ( IsSpaceobjectInRange( ship, spaceobject) )
             {
-              ch->Echo("%s\r\n", spaceobject->Name);
+              ch->Echo("%s\r\n", spaceobject->Name.c_str());
             }
         }
       
@@ -1043,40 +1100,40 @@ static bool ShowShipIfInVincinity(Ship *target, void *userData)
       if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->Class == SHIP_DEBRIS ? 2 : target->Class ) + 1 ) )
         {
           ch->Echo("%s    %.0f %.0f %.0f\r\n",
-               target->Name,
-               (target->Position.x - ship->Position.x),
-               (target->Position.y - ship->Position.y),
-               (target->Position.z - ship->Position.z));
+                   target->Name.c_str(),
+                   (target->Position.x - ship->Position.x),
+                   (target->Position.y - ship->Position.y),
+                   (target->Position.z - ship->Position.z));
         }
       else if ( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->Class == SHIP_DEBRIS ? 2 : target->Class ) + 3 ) )
         {
           if ( target->Class == FIGHTER_SHIP )
             {
               ch->Echo("A small metallic mass    %.0f %.0f %.0f\r\n",
-                   (target->Position.x - ship->Position.x),
-                   (target->Position.y - ship->Position.y),
-                   (target->Position.z - ship->Position.z));
+                       (target->Position.x - ship->Position.x),
+                       (target->Position.y - ship->Position.y),
+                       (target->Position.z - ship->Position.z));
             }
           else if ( target->Class == MIDSIZE_SHIP )
             {
               ch->Echo("A goodsize metallic mass    %.0f %.0f %.0f\r\n",
-                   (target->Position.x - ship->Position.x),
-                   (target->Position.y - ship->Position.y),
-                   (target->Position.z - ship->Position.z));
+                       (target->Position.x - ship->Position.x),
+                       (target->Position.y - ship->Position.y),
+                       (target->Position.z - ship->Position.z));
             }
           else if ( target->Class == SHIP_DEBRIS )
             {
               ch->Echo("scattered metallic reflections    %.0f %.0f %.0f\r\n",
-                   (target->Position.x - ship->Position.x),
-                   (target->Position.y - ship->Position.y),
-                   (target->Position.z - ship->Position.z));
+                       (target->Position.x - ship->Position.x),
+                       (target->Position.y - ship->Position.y),
+                       (target->Position.z - ship->Position.z));
             }
           else if ( target->Class >= CAPITAL_SHIP )
             {
               ch->Echo("A huge metallic mass    %.0f %.0f %.0f\r\n",
-                   (target->Position.x - ship->Position.x),
-                   (target->Position.y - ship->Position.y),
-                   (target->Position.z - ship->Position.z));
+                       (target->Position.x - ship->Position.x),
+                       (target->Position.y - ship->Position.y),
+                       (target->Position.z - ship->Position.z));
             }
           else
             {
@@ -1087,5 +1144,3 @@ static bool ShowShipIfInVincinity(Ship *target, void *userData)
 
   return true;
 }
-
-

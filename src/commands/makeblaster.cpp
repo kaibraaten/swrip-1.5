@@ -11,7 +11,7 @@ struct UserData
   bool Scope = false;
   int Lens = 0;
   int Power = 0;
-  char *ItemName = nullptr;
+  std::string ItemName;
 };
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *args );
@@ -21,7 +21,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static void FreeUserData( struct UserData *ud );
 
-void do_makeblaster( Character *ch, char *argument )
+void do_makeblaster( Character *ch, std::string argument )
 {
   static const struct CraftingMaterial materials[] =
     {
@@ -56,14 +56,14 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   Character *ch = GetEngineer( args->CraftingSession );
   struct UserData *ud = (struct UserData*) userData;
 
-  if ( IsNullOrEmpty( args->CommandArguments ) )
+  if ( args->CommandArguments.empty() )
     {
       ch->Echo("&RUsage: Makeblaster <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
 
-  ud->ItemName = CopyString( args->CommandArguments );
+  ud->ItemName = args->CommandArguments;
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
@@ -90,7 +90,7 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   Object *blaster = args->Object;
 
   if( ud->Scope )
@@ -102,18 +102,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( blaster->WearFlags, ITEM_TAKE );
   blaster->Weight = 2 + blaster->Level / 10;
 
-  FreeMemory( blaster->Name );
-  strcpy( buf, ud->ItemName );
+  strcpy( buf, ud->ItemName.c_str() );
   strcat( buf, " blaster");
-  blaster->Name = CopyString( buf );
+  blaster->Name = buf;
 
-  strcpy( buf, ud->ItemName );
-  FreeMemory( blaster->ShortDescr );
-  blaster->ShortDescr = CopyString( buf );
+  strcpy( buf, ud->ItemName.c_str() );
+  blaster->ShortDescr = buf;
 
-  FreeMemory( blaster->Description );
   strcat( buf, " was carelessly misplaced here." );
-  blaster->Description = CopyString( Capitalize( buf ) );
+  blaster->Description = Capitalize( buf );
 
   Affect *hitroll = new Affect();
   hitroll->Type       = -1;
@@ -166,11 +163,6 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 
 static void FreeUserData( struct UserData *ud )
 {
-  if( ud->ItemName )
-    {
-      FreeMemory( ud->ItemName );
-    }
-
   delete ud;
 }
 

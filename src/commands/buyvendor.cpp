@@ -3,7 +3,7 @@
 #include "mud.hpp"
 #include "log.hpp"
 
-void do_buyvendor (Character *ch, char *argument)
+void do_buyvendor (Character *ch, std::string argument)
 {
   Character *keeper = nullptr;
   Object *deed = nullptr;
@@ -16,16 +16,16 @@ void do_buyvendor (Character *ch, char *argument)
 
   if ( !StrCmp( argument, "yes" ) )
     {
-      sprintf( buf, "%s/%s", VENDOR_DIR, Capitalize( ch->Name ) );
+      sprintf( buf, "%s/%s", VENDOR_DIR, Capitalize( ch->Name ).c_str() );
       remove( buf );
     }
 
-  sprintf( strsave, "%s/%s", VENDOR_DIR, Capitalize( ch->Name ) );
+  sprintf( strsave, "%s/%s", VENDOR_DIR, Capitalize( ch->Name ).c_str() );
 
   if ( stat( strsave, &fst ) != -1 )
     {
       ch->Echo( "You already have a shop!\r\n");
-      ch->Echo( "If you want to buy one anyway, type buyvendor yes.\r\n");
+      ch->Echo( "If you want to buy one anyway, type BUYVENDOR YES.\r\n");
       ch->Echo( "Your old one will be deleted.\r\n");
       return;
     }
@@ -39,13 +39,13 @@ void do_buyvendor (Character *ch, char *argument)
 
   if ( ch->Gold < COST_BUY_VENDOR )
     {
-      ch->Echo( "%s says, You are too poor!\r\n", keeper->Name);
+      ch->Echo( "%s says, You are too poor!\r\n", keeper->Name.c_str());
       return;
     }
 
   if ( (ch->TopLevel) < LEVEL_BUY_VENDOR )
     {
-      ch->Echo( "you must be at least %d level.\r\n", LEVEL_BUY_VENDOR);
+      ch->Echo( "You must be at least level %d.\r\n", LEVEL_BUY_VENDOR);
       return;
     }
 

@@ -3,12 +3,12 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_mount( Character *ch, char *argument )
+void do_mount( Character *ch, std::string argument )
 {
   Character *victim = NULL;
 
   if ( !IsNpc(ch)
-       &&   ch->PCData->Learned[gsn_mount] <= 0  )
+       && ch->PCData->Learned[gsn_mount] <= 0  )
     {
       ch->Echo("I don't think that would be a good idea...\r\n");
       return;
@@ -51,6 +51,7 @@ void do_mount( Character *ch, char *argument )
     }
 
   SetWaitState( ch, SkillTable[gsn_mount]->Beats );
+
   if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_mount] )
     {
       SetBit( victim->Flags, ACT_MOUNTED );
@@ -69,4 +70,3 @@ void do_mount( Character *ch, char *argument )
       LearnFromFailure( ch, gsn_mount );
     }
 }
-

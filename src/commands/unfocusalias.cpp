@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 
-void do_unfocusalias(Character *ch, char *argument)
+void do_unfocusalias(Character *ch, std::string argument)
 {
   if ( IsNpc(ch) )
     {
@@ -10,13 +10,12 @@ void do_unfocusalias(Character *ch, char *argument)
       return;
     }
 
-  if ( IsNullOrEmpty( ch->PCData->Target ) )
+  if ( ch->PCData->Target.empty() )
     {
       ch->Echo("Your alias focus is not defined at the moment.\r\n");
       return;
     }
 
   ch->Echo("You remove your current alias focus.\r\n");
-  ch->PCData->Target = CopyString("");
+  ch->PCData->Target.erase();
 }
-

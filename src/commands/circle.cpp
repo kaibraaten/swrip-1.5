@@ -4,9 +4,9 @@
 #include "pcdata.hpp"
 #include "object.hpp"
 
-void do_circle( Character *ch, char *argument )
+void do_circle( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   Character *victim = NULL;
   Object *obj = NULL;
   int percent = 0;
@@ -25,7 +25,7 @@ void do_circle( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Circle around whom?\r\n" );
       return;
@@ -82,7 +82,6 @@ void do_circle( Character *ch, char *argument )
     {
       LearnFromSuccess( ch, gsn_circle );
       global_retcode = HitMultipleTimes( ch, victim, gsn_circle );
-
     }
   else
     {
@@ -90,4 +89,3 @@ void do_circle( Character *ch, char *argument )
       global_retcode = InflictDamage( ch, victim, 0, gsn_circle );
     }
 }
-

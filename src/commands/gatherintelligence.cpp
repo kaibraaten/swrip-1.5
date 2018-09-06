@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
@@ -8,21 +8,21 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_gather_intelligence( Character *ch , char *argument )
+void do_gather_intelligence( Character *ch, std::string argument )
 {
   Character *victim = NULL;
   char buf[MAX_STRING_LENGTH] = {'\0'};
   int percent = 0, the_chance = 0;
   Planet *planet = NULL;
 
-  if( IsNullOrEmpty( argument ) )
+  if( argument.empty() )
     {
       ch->Echo("You must input a name.\r\n");
       return;
     }
 
   strcat(buf, "0.");
-  strcat(buf, argument);
+  strcat(buf, argument.c_str());
 
   SetWaitState( ch, SkillTable[gsn_gather_intelligence]->Beats );
 
@@ -34,7 +34,8 @@ void do_gather_intelligence( Character *ch , char *argument )
 
   if(IsNpc(victim))
     {
-      ch->Echo("This person has not made much of a name for himself!\r\n");
+      ch->Echo("This person has not made much of a name for %sself!\r\n",
+               HimHerIt(victim));
       return;
     }
 
@@ -45,7 +46,7 @@ void do_gather_intelligence( Character *ch , char *argument )
 
       if ( ch == victim )
         {
-          ch->Echo( "I am sure you know enough about yourself right now" );
+          ch->Echo( "I am sure you know enough about yourself right now.\r\n" );
           return;
         }
 
@@ -57,12 +58,13 @@ void do_gather_intelligence( Character *ch , char *argument )
         {
           if ( ( planet = victim->InRoom->Area->Planet ) == NULL )
             {
-              ch->Echo( "Information has been received that %s is travelling.", victim->Name );
+              ch->Echo( "Information has been received that %s is travelling.\r\n",
+                        victim->Name.c_str() );
             }
           else
             {
-              ch->Echo( "Information has been received that %s is on %s.",
-                        victim->Name, planet->Name );
+              ch->Echo( "Information has been received that %s is on %s.\r\n",
+                        victim->Name.c_str(), planet->Name.c_str() );
             }
 
           return;
@@ -72,12 +74,13 @@ void do_gather_intelligence( Character *ch , char *argument )
         {
           if ( IsClanned( victim ) )
             {
-              ch->Echo( "%s seems to be involved with %s.",
-                        victim->Name, victim->PCData->ClanInfo.Clan->Name );
+              ch->Echo( "%s seems to be involved with %s.\r\n",
+                        victim->Name.c_str(), victim->PCData->ClanInfo.Clan->Name.c_str() );
             }
           else
             {
-              ch->Echo( "%s does not seem to be involved with any organization.", victim->Name );
+              ch->Echo( "%s does not seem to be involved with any organization.\r\n",
+                        victim->Name.c_str() );
             }
 
           return;
@@ -87,20 +90,21 @@ void do_gather_intelligence( Character *ch , char *argument )
         {
           if ( victim->Hit < ((victim->MaxHit)/4) )
             {
-              ch->Echo( "Hospital records show that %s has had a very serious injury and has not fully recovered.", victim->Name );
+              ch->Echo( "Hospital records show that %s has had a very serious injury and has not fully recovered.\r\n", victim->Name.c_str() );
             }
           else if ( victim->Hit < ((victim->MaxHit)/2) )
             {
-              ch->Echo( "Hospital records show that %s has had a serious injury and has begun to recover.", victim->Name );
+              ch->Echo( "Hospital records show that %s has had a serious injury and has begun to recover.\r\n", victim->Name.c_str() );
             }
           else if ( victim->Hit < ((victim->MaxHit)) )
             {
-              ch->Echo( "Hospital records show that %s has had a minor injury recently.",
-                        victim->Name );
+              ch->Echo( "Hospital records show that %s has had a minor injury recently.\r\n",
+                        victim->Name.c_str() );
             }
           else if ( victim->Hit == victim->MaxHit )
             {
-              ch->Echo( "There has been no recently medical history for %s", victim->Name );
+              ch->Echo( "There has been no recently medical history for %s.\r\n",
+                        victim->Name.c_str() );
             }
 
           return;
@@ -111,46 +115,54 @@ void do_gather_intelligence( Character *ch , char *argument )
           switch(victim->Ability.Main)
             {
             case COMBAT_ABILITY:
-              sprintf( buf, "%s appears to have centered training on combat.", victim->Name );
+              sprintf( buf, "%s appears to have centered training on combat.",
+                       victim->Name.c_str() );
               break;
 
             case PILOTING_ABILITY:
-              sprintf( buf, "%s appears to have centered training on piloting ships.", victim->Name );
+              sprintf( buf, "%s appears to have centered training on piloting ships.",
+                       victim->Name.c_str() );
               break;
 
             case ENGINEERING_ABILITY:
-              sprintf( buf, "%s appears to have centered training on engineering.", victim->Name );
+              sprintf( buf, "%s appears to have centered training on engineering.",
+                       victim->Name.c_str() );
               break;
 
 	    case HUNTING_ABILITY:
-              sprintf( buf, "%s appears to have centered training on bounty hunting.", victim->Name );
+              sprintf( buf, "%s appears to have centered training on bounty hunting.",
+                       victim->Name.c_str() );
               break;
 
             case SMUGGLING_ABILITY:
-              sprintf( buf, "%s appears to have centered training on smuggling.",  victim->Name );
+              sprintf( buf, "%s appears to have centered training on smuggling.",
+                       victim->Name.c_str() );
               break;
 
             case DIPLOMACY_ABILITY:
-              sprintf( buf, "%s appears to have centered training on diplomacy.", victim->Name );
+              sprintf( buf, "%s appears to have centered training on diplomacy.",
+                       victim->Name.c_str() );
               break;
 
             case LEADERSHIP_ABILITY:
-              sprintf( buf, "%s appears to have centered training on leadership.", victim->Name );
+              sprintf( buf, "%s appears to have centered training on leadership.",
+                       victim->Name.c_str() );
               break;
 
             case FORCE_ABILITY:
-              sprintf( buf, "%s appears to have centered attention on studying the force.", victim->Name );
+              sprintf( buf, "%s appears to have centered attention on studying the Force.",
+                       victim->Name.c_str() );
               break;
 
             case COMMANDO_ABILITY:
-              sprintf( buf, "%s has not centered training on anything, but seems to mix smuggling with piloting abilities.", victim->Name );
+              sprintf( buf, "%s has not centered training on anything, but seems to mix smuggling with piloting abilities.", victim->Name.c_str() );
               break;
 
             default:
               break;
             }
 
-          ch->Echo("%s", buf);
+          ch->Echo("%s\r\n", buf);
           return;
         }
 
@@ -159,16 +171,19 @@ void do_gather_intelligence( Character *ch , char *argument )
           if ( IsJedi( victim ) )
             {
               if ( victim->Mana > 1000 )
-                sprintf( buf, "%s appears to have centered his attention on studying the force, and is rumored to excel at its use.", victim->Name );
+                sprintf( buf, "%s appears to have centered %s attention on studying the Force, and is rumored to excel at its use.", HisHersIts(victim), victim->Name.c_str() );
               else if ( victim->Mana > 200 )
-                sprintf( buf, "%s appears to have centered his attention on studying the force, and is rumored to have some skill.", victim->Name );
+                sprintf( buf, "%s appears to have centered %s attention on studying the Force, and is rumored to have some skill.", HisHersIts(victim), victim->Name.c_str() );
               else
-                sprintf( buf, "%s appears to have centered his attention on studying the force, and is rumored to have found some minor ability in it.", victim->Name );
+                sprintf( buf, "%s appears to have centered %s attention on studying the Force, and is rumored to have found some minor ability in it.", HisHersIts(victim), victim->Name.c_str() );
             }
           else
-            sprintf( buf, "%s appears to have centered his attention on the mundane", victim->Name );
+            {
+              sprintf( buf, "%s appears to have centered %s attention on the mundane.",
+                       HisHersIts(victim), victim->Name.c_str() );
+            }
 
-          ch->Echo("%s", buf);
+          ch->Echo("%s\r\n", buf);
           return;
         }
 

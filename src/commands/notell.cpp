@@ -1,14 +1,11 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_notell( Character *ch, char *argument )
+void do_notell( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = nullptr;
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Notell whom?");
       return;
@@ -45,4 +42,3 @@ void do_notell( Character *ch, char *argument )
       ch->Echo("NO_TELL set.\r\n");
     }
 }
-

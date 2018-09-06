@@ -1,13 +1,13 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "spaceobject.hpp"
 
-void do_setspaceobject( Character *ch, char *argument )
+void do_setspaceobject( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  Spaceobject *spaceobject;
+  std::string arg1;
+  std::string arg2;
+  Spaceobject *spaceobject = nullptr;
 
   if ( IsNpc( ch ) )
     {
@@ -18,7 +18,7 @@ void do_setspaceobject( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
+  if ( arg1.empty() || arg2.empty() )
     {
       ch->Echo("Usage: setspaceobject <spaceobject> <field> <values>\r\n");
       ch->Echo("\r\nField being one of:\r\n");
@@ -49,25 +49,25 @@ void do_setspaceobject( Character *ch, char *argument )
 
       if( !StrCmp( option, arg2 ) )
 	{
-   ch->Echo("Range is %s%d to %s%d.\r\n",
-		option, 0, option, MAX_LANDINGSITE - 1 );
+          ch->Echo("Range is %s%d to %s%d.\r\n",
+                   option, 0, option, MAX_LANDINGSITE - 1 );
 	  return;
 	}
-      else if( strlen( arg2 ) == strlen( option ) + 1 )
+      else if( arg2.size() == strlen( option ) + 1 )
 	{
-	  const char *numBuf = arg2 + strlen( option );
-	  size_t siteNum = strtol( numBuf, NULL, 10 );
+	  const char *numBuf = arg2.c_str() + strlen( option );
+	  size_t siteNum = std::stoi( numBuf );
 
 	  if( siteNum >= MAX_LANDINGSITE )
 	    {
-       ch->Echo("Range is %s%d to %s%d.\r\n",
-		    option, 0, option, MAX_LANDINGSITE - 1 );
+              ch->Echo("Range is %s%d to %s%d.\r\n",
+                       option, 0, option, MAX_LANDINGSITE - 1 );
 	    }
 	  else
 	    {
 	      LandingSite *site = &spaceobject->LandingSites[siteNum];
 	      site->IsSecret = !site->IsSecret;
-       ch->Echo("Done.\r\n");
+              ch->Echo("Done.\r\n");
 	      Spaceobjects->Save(spaceobject);
 	    }
 
@@ -82,27 +82,27 @@ void do_setspaceobject( Character *ch, char *argument )
       if( !StrCmp( option, arg2 ) )
         {
           ch->Echo("Range is %s%d to %s%d.\r\n",
-                option, 0, option, MAX_LANDINGSITE - 1 );
+                   option, 0, option, MAX_LANDINGSITE - 1 );
           return;
         }
-      else if( strlen( arg2 ) == strlen( option ) + 1 )
+      else if( arg2.size() == strlen( option ) + 1 )
         {
-          const char *numBuf = arg2 + strlen( option );
-          size_t siteNum = strtol( numBuf, NULL, 10 );
+          const char *numBuf = arg2.c_str() + strlen( option );
+          size_t siteNum = std::stoi( numBuf );
 
           if( siteNum >= MAX_LANDINGSITE )
             {
               ch->Echo("Range is %s%d to %s%d.\r\n",
-                    option, 0, option, MAX_LANDINGSITE - 1 );
+                       option, 0, option, MAX_LANDINGSITE - 1 );
             }
           else
             {
               LandingSite *site = &spaceobject->LandingSites[siteNum];
-	      vnum_t vnum = strtol( argument, NULL, 10 );
+	      vnum_t vnum = std::stoi( argument );
 
 	      if( !GetRoom( vnum ) && vnum != INVALID_VNUM )
 		{
-    ch->Echo("&RVnum %d doesn't exist.&d\r\n", vnum );
+                  ch->Echo("&RVnum %d doesn't exist.&d\r\n", vnum );
 		  return;
 		}
 
@@ -122,24 +122,23 @@ void do_setspaceobject( Character *ch, char *argument )
       if( !StrCmp( option, arg2 ) )
         {
           ch->Echo("Range is %s%d to %s%d.\r\n",
-                option, 0, option, MAX_LANDINGSITE - 1 );
+                   option, 0, option, MAX_LANDINGSITE - 1 );
           return;
         }
-      else if( strlen( arg2 ) == strlen( option ) + 1 )
+      else if( arg2.size() == strlen( option ) + 1 )
         {
-          const char *numBuf = arg2 + strlen( option );
-          size_t siteNum = strtol( numBuf, NULL, 10 );
+          const char *numBuf = arg2.c_str() + strlen( option );
+          size_t siteNum = std::stoi( numBuf );
 
           if( siteNum >= MAX_LANDINGSITE )
             {
               ch->Echo("Range is %s%d to %s%d.\r\n",
-                    option, 0, option, MAX_LANDINGSITE - 1 );
+                       option, 0, option, MAX_LANDINGSITE - 1 );
             }
           else
             {
               LandingSite *site = &spaceobject->LandingSites[siteNum];
-	      FreeMemory( site->LocationName );
-	      site->LocationName = CopyString( argument );
+	      site->LocationName = argument;
               ch->Echo("Done.\r\n");
               Spaceobjects->Save(spaceobject);
             }
@@ -154,7 +153,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
       if( IsNumber(argument) )
         {
-          sotype = (SpaceobjectType)atoi( argument );
+          sotype = (SpaceobjectType) std::stoi( argument );
         }
       else
         {
@@ -182,7 +181,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "xpos" ) )
     {
-      spaceobject->Position.x = atoi( argument );
+      spaceobject->Position.x = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -190,7 +189,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "ypos" ) )
     {
-      spaceobject->Position.y = atoi( argument );
+      spaceobject->Position.y = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -198,7 +197,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "zpos" ) )
     {
-      spaceobject->Position.z = atoi( argument );
+      spaceobject->Position.z = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -206,7 +205,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "gravity" ) )
     {
-      spaceobject->Gravity = atoi( argument );
+      spaceobject->Gravity = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -214,7 +213,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "hx" ) )
     {
-      spaceobject->Heading.x = atoi( argument );
+      spaceobject->Heading.x = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -222,7 +221,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "hy" ) )
     {
-      spaceobject->Heading.y = atoi( argument );
+      spaceobject->Heading.y = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -230,7 +229,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "hz" ) )
     {
-      spaceobject->Heading.z = atoi( argument );
+      spaceobject->Heading.z = std::stoi( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -238,11 +237,11 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "speed" ) )
     {
-      int speed = atoi( argument );
+      int speed = std::stoi( argument );
 
       if( speed < 0 )
 	{
-   ch->Echo("&RSpeed must be zero or more.&d\r\n" );
+          ch->Echo("&RSpeed must be zero or more.&d\r\n" );
 	  return;
 	}
 
@@ -256,14 +255,13 @@ void do_setspaceobject( Character *ch, char *argument )
     {
       if( GetSpaceobject( argument ) )
 	{
-   ch->Echo("&RThere's already another spaceobject with that name.&d\r\n" );
+          ch->Echo("&RThere's already another spaceobject with that name.&d\r\n" );
 	  return;
 	}
 
-      unlink( GetSpaceobjectFilename( spaceobject ) );
+      unlink( GetSpaceobjectFilename( spaceobject ).c_str() );
 
-      FreeMemory( spaceobject->Name );
-      spaceobject->Name = CopyString( argument );
+      spaceobject->Name = argument;
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -271,4 +269,3 @@ void do_setspaceobject( Character *ch, char *argument )
 
   do_setspaceobject( ch, "" );
 }
-

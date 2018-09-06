@@ -32,8 +32,8 @@
 class Alias
 {
 public:
-  char *Name = nullptr;
-  char *Command = nullptr;
+  std::string Name;
+  std::string Command;
 };
 
 DECLARE_CMD_FUN( do_alias );

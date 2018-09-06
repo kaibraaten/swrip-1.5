@@ -29,9 +29,9 @@ int urange( int mincheck, int check, int maxcheck )
   return check;
 }
 
-char *Scramble( const std::string &strToScamble, int modifier )
+std::string Scramble( const std::string &strToScamble, int modifier )
 {
-  static char arg[MAX_INPUT_LENGTH];
+  char arg[MAX_INPUT_LENGTH];
   int position = 0;
   int conversion = 0;
   const char *argument = strToScamble.c_str();
@@ -315,19 +315,9 @@ char *StripColorCodes( char *text )
     }
 }
 
-char *PunctuateNumber( long number, char **externalBuffer )
+std::string PunctuateNumber( long number )
 {
-  static char staticBuffer[1024];
-  char *buffer = NULL;
-
-  if( externalBuffer != NULL && *externalBuffer != NULL )
-    {
-      buffer = *externalBuffer;
-    }
-  else
-    {
-      buffer = staticBuffer;
-    }
+  char buffer[1024];
 
   setlocale( LC_MONETARY, "en_US" );
   strfmon( buffer, 1024, "%!#0.0n", (double)number );

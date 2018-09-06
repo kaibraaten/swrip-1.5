@@ -7,52 +7,52 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_calculate(Character *ch, char *argument )
+void do_calculate(Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
   int the_chance = 0, distance = 0;
   Ship *ship = NULL;
   bool found = false;
 
-  argument = OneArgument( argument , arg1);
-  argument = OneArgument( argument , arg2);
-  argument = OneArgument( argument , arg3);
+  argument = OneArgument( argument, arg1);
+  argument = OneArgument( argument, arg2);
+  argument = OneArgument( argument, arg3);
 
-  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
+  if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum) ) == NULL )
     {
-      ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
+      ch->Echo("&RYou must be in the cockpit of a ship to do that!&d\r\n");
       return;
     }
 
   if ( ship->Class > SHIP_PLATFORM )
     {
-      ch->Echo("&RThis isn't a spacecraft!\r\n");
+      ch->Echo("&RThis isn't a spacecraft!&d\r\n");
       return;
     }
 
   if (  (ship = GetShipFromNavSeat(ch->InRoom->Vnum))  == NULL )
     {
-      ch->Echo("&RYou must be at a nav computer to calculate jumps.\r\n");
+      ch->Echo("&RYou must be at a nav computer to calculate jumps.&d\r\n");
       return;
     }
 
   if ( IsShipAutoflying(ship)  )
     {
-      ch->Echo("&RYou'll have to turn off the ships autopilot first....\r\n");
+      ch->Echo("&RYou'll have to turn off the ships autopilot first.&d\r\n");
       return;
     }
 
   if  ( ship->Class == SHIP_PLATFORM )
     {
-      ch->Echo( "&RAnd what exactly are you going to calculate...?\r\n" );
+      ch->Echo( "&RAnd what exactly are you going to calculate?&d\r\n" );
       return;
     }
 
   if (ship->Hyperdrive.Speed == 0)
     {
-      ch->Echo("&RThis ship is not equipped with a hyperdrive!\r\n");
+      ch->Echo("&RThis ship is not equipped with a hyperdrive!&d\r\n");
       return;
     }
 
@@ -68,16 +68,17 @@ void do_calculate(Character *ch, char *argument )
       return;
     }
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
-      ch->Echo("&WFormat: Calculate <spaceobject> <entry x> <entry y> <entry z>\r\n&wPossible destinations:\r\n");
+      ch->Echo("&WFormat: Calculate <spaceobject> [distance]\r\n        Calculate <entry x> <entry y> <entry z>&d\r\n");
+      ch->Echo("&wPossible destinations:\r\n");
       SetCharacterColor( AT_RED, ch );
       
       for(const Spaceobject *spaceobject : Spaceobjects->Entities())
 	{
 	  if ( spaceobject->Type <= SPACE_SUN && !(spaceobject->IsSimulator && !IsGreater(ch)))
             {
-              ch->Echo( "%s\r\n", spaceobject->Name );
+              ch->Echo( "%s\r\n", spaceobject->Name.c_str() );
             }
 	}
 
@@ -89,7 +90,7 @@ void do_calculate(Character *ch, char *argument )
 	  if ( spaceobject->Type == SPACE_PLANET
                && !(spaceobject->IsSimulator && (!IsGreater(ch))) )
             {
-              ch->Echo( "%s\r\n", spaceobject->Name );
+              ch->Echo( "%s\r\n", spaceobject->Name.c_str() );
             }
 	}
       
@@ -109,8 +110,8 @@ void do_calculate(Character *ch, char *argument )
     {
       ship->CurrentJump = GetSpaceobject( arg1 );
 
-      if ( !IsNullOrEmpty( arg2 ) )
-        distance = atoi(arg2);
+      if ( !arg2.empty() )
+        distance = std::stoi(arg2);
 
       if( ship->CurrentJump )
         {
@@ -118,14 +119,14 @@ void do_calculate(Character *ch, char *argument )
           found = true;
         }
     }
-  else if( !IsNullOrEmpty( arg2 ) && !IsNullOrEmpty( arg3 ) )
+  else if( !arg2.empty() && !arg3.empty() )
     {
-      SetVector( &ship->Jump, atoi(arg1), atoi(arg2), atoi(arg3) );
+      SetVector( &ship->Jump, std::stoi(arg1), std::stoi(arg2), std::stoi(arg3) );
       found = true;
     }
   else
     {
-      ch->Echo("&WFormat: Calculate <spaceobject> \r\n        Calculate <entry x> <entry y> <entry z>&R&w\r\n");
+      ch->Echo("&WFormat: Calculate <spaceobject> [distance]\r\n        Calculate <entry x> <entry y> <entry z>&d\r\n");
       return;
     }
 
@@ -140,14 +141,14 @@ void do_calculate(Character *ch, char *argument )
 
   if (spaceobject && spaceobject->IsSimulator && (ship->Class != SHIP_TRAINER))
     {
-      ch->Echo( "&RYou can't seem to find that spacial object on your charts.\r\n");
+      ch->Echo( "&RYou can't seem to find that stellar object on your charts.\r\n");
       ship->CurrentJump = NULL;
       return;
     }
 
   if (ship->Class == SHIP_TRAINER && spaceobject && !spaceobject->IsSimulator )
     {
-      ch->Echo( "&RYou can't seem to find that starsytem on your charts.\r\n");
+      ch->Echo( "&RYou can't seem to find that stellar object on your charts.\r\n");
       ship->CurrentJump = NULL;
       return;
     }
@@ -160,16 +161,15 @@ void do_calculate(Character *ch, char *argument )
 
   for(const Spaceobject *spaceobj : Spaceobjects->Entities())
     {
-      if ( !spaceobj->IsSimulator && distance && StrCmp(spaceobj->Name,"")
+      if ( !spaceobj->IsSimulator && distance && !spaceobj->Name.empty()
            && GetDistanceBetweenVectors( &ship->Jump, &spaceobj->Position ) < spaceobj->Gravity * 4 )
         {
-          EchoToCockpit( AT_RED, ship, "WARNING.. Jump coordinates too close to stellar object.");
-          EchoToCockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
+          EchoToCockpit( AT_RED, ship, "WARNING! Jump coordinates too close to stellar object.");
+          EchoToCockpit( AT_RED, ship, "WARNING! Hyperjump NOT set.");
           ship->CurrentJump = NULL;
           return;
         }
     }
-
   
   for(Spaceobject *spaceobj : Spaceobjects->Entities())
     {
@@ -187,8 +187,8 @@ void do_calculate(Character *ch, char *argument )
   if( ship->Jump.x > MAX_COORD_S || ship->Jump.y > MAX_COORD_S || ship->Jump.z > MAX_COORD_S ||
       ship->Jump.x < -MAX_COORD_S || ship->Jump.y < -MAX_COORD_S || ship->Jump.z < -MAX_COORD_S )
     {
-      EchoToCockpit( AT_RED, ship, "WARNING.. Jump coordinates outside of the known galaxy.");
-      EchoToCockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
+      EchoToCockpit( AT_RED, ship, "WARNING! Jump coordinates outside of the known galaxy.");
+      EchoToCockpit( AT_RED, ship, "WARNING! Hyperjump NOT set.");
       ship->CurrentJump = NULL;
       return;
     }
@@ -203,11 +203,10 @@ void do_calculate(Character *ch, char *argument )
   ch->Echo("&GHyperspace course set. Estimated distance: %d\r\nReady for the jump to lightspeed.\r\n", ship->Hyperdistance );
   EchoToDockedShip( AT_YELLOW , ship, "The docking port link shows a new course being calculated." );
 
-  Act( AT_PLAIN, "$n does some calculations using the ships computer.", ch,
-       NULL, argument , TO_ROOM );
+  Act( AT_PLAIN, "$n does some calculations using the ship's computer.", ch,
+       NULL, argument.c_str(), TO_ROOM );
 
   LearnFromSuccess( ch, gsn_navigation );
 
   SetWaitState( ch , 2*PULSE_VIOLENCE );
 }
-

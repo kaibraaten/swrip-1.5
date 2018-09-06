@@ -3,16 +3,16 @@
 #include "log.hpp"
 #include "character.hpp"
 
-void do_hset( Character *ch, char *argument )
+void do_hset( Character *ch, std::string argument )
 {
   HelpFile *pHelp = NULL;
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
 
   SmashTilde( argument );
   argument = OneArgument( argument, arg1 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( arg1.empty() )
     {
       ch->Echo("Syntax: hset <field> [value] [help page]\r\n");
       ch->Echo("\r\n");
@@ -52,7 +52,7 @@ void do_hset( Character *ch, char *argument )
 
   if ( !StrCmp( arg1, "level" ) )
     {
-      SetHelpFileLevel( pHelp, atoi( arg2 ) );
+      SetHelpFileLevel( pHelp, std::stoi( arg2 ) );
       ch->Echo("Done.\r\n");
       return;
     }

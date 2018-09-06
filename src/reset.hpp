@@ -62,9 +62,9 @@ public:
 Room *FindRoom( const Character *ch, const std::string &argument, Room *pRoom );
 void WipeResets( Area *pArea, Room *pRoom );
 void InstallRoom( Area *pArea, Room *pRoom, bool dodoors );
-void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom );
+void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom );
 void ResetArea( Area *pArea );
-char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist );
+std::string SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist );
 Reset *MakeReset( char letter, int extra, int arg1, int arg2, int arg3 );
 Reset *AddReset( Area *tarea, char letter, int extra,
 		  int arg1, int arg2, int arg3 );

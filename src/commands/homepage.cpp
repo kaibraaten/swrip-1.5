@@ -1,48 +1,37 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
 
-void do_homepage( Character *ch, char *argument )
+void do_homepage( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
 
   if ( IsNpc(ch) )
     return;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
-      if ( !ch->PCData->HomePage )
-        ch->PCData->HomePage = CopyString( "" );
-
-      ch->Echo("Your homepage is: %s\r\n",
-                 ShowTilde( ch->PCData->HomePage ) );
+      ch->Echo("Your homepage is: %s\r\n", ch->PCData->HomePage.c_str() );
       return;
     }
 
   if ( !StrCmp( argument, "clear" ) )
     {
-      if ( ch->PCData->HomePage )
-        FreeMemory(ch->PCData->HomePage);
-      ch->PCData->HomePage = CopyString("");
+      ch->PCData->HomePage.erase();
       ch->Echo("Homepage cleared.\r\n");
       return;
     }
 
-  if ( strstr( argument, "://" ) )
-    strcpy( buf, argument );
+  if ( strstr( argument.c_str(), "://" ) )
+    strcpy( buf, argument.c_str() );
   else
-    sprintf( buf, "http://%s", argument );
+    sprintf( buf, "http://%s", argument.c_str() );
 
   if ( strlen(buf) > 70 )
     buf[70] = '\0';
 
-  HideTilde( buf );
-
-  if ( ch->PCData->HomePage )
-    FreeMemory(ch->PCData->HomePage);
-
-  ch->PCData->HomePage = CopyString(buf);
+  ch->PCData->HomePage = buf;
   ch->Echo("Homepage set.\r\n");
 }
 

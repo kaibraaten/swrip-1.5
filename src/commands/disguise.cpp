@@ -4,7 +4,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_disguise( Character *ch, char *argument )
+void do_disguise( Character *ch, std::string argument )
 {
   int the_chance = 0;
   short gsn = 0;
@@ -19,12 +19,16 @@ void do_disguise( Character *ch, char *argument )
       return;
     }
 
-  if(ch->PCData->Learned[gsn_disguise] <= 0)
-    gsn = gsn_cloak;
+  if(ch->PCData->Learned[gsn_disguise] > 0)
+    {
+      gsn = gsn_disguise;
+    }
   else
-    gsn = gsn_disguise;
+    {
+      gsn = gsn_cloak;
+    }
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Change your title to what?\r\n" );
       return;
@@ -38,9 +42,11 @@ void do_disguise( Character *ch, char *argument )
       return;
     }
 
-  if ( strlen(argument) > maxTitleLength )
-    argument[maxTitleLength] = '\0';
-
+  if ( argument.size() > maxTitleLength )
+    {
+      argument.erase(maxTitleLength);
+    }
+  
   SmashTilde( argument );
   SetCharacterTitle( ch, argument );
   LearnFromSuccess( ch, gsn );

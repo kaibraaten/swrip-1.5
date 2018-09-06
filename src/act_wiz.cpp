@@ -36,7 +36,7 @@
 /*
  * Global variables.
  */
-char reboot_time[50];
+std::string reboot_time;
 time_t new_boot_time_t;
 
 void EchoToAll( short AT_COLOR, const std::string &argument, short tar )
@@ -107,6 +107,5 @@ Room *FindLocation( const Character *ch, const std::string &arg )
 
 void GenerateRebootString()
 {
-  sprintf(reboot_time, "%s", asctime(new_boot_time));
+  reboot_time = asctime(new_boot_time);
 }
-

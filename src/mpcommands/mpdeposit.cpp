@@ -5,9 +5,8 @@
 /*
  * Deposit some gold into the current area's economy            -Thoric
  */
-void do_mp_deposit( Character *ch, char *argument )
+void do_mp_deposit( Character *ch, std::string arg )
 {
-  char arg[MAX_STRING_LENGTH];
   long gold = 0;
 
   if ( !IsNpc(ch) )
@@ -16,15 +15,13 @@ void do_mp_deposit( Character *ch, char *argument )
       return;
     }
 
-  OneArgument(argument, arg);
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ProgBug("Mpdeposit - bad syntax", ch );
       return;
     }
 
-  gold = atoi( arg );
+  gold = std::stoi( arg );
 
   if ( gold <= ch->Gold && ch->InRoom )
     {
@@ -32,4 +29,3 @@ void do_mp_deposit( Character *ch, char *argument )
       BoostEconomy( ch->InRoom->Area, gold );
     }
 }
-

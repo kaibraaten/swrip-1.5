@@ -10,7 +10,7 @@ static void PushSystemData( lua_State *L, const void *userData )
 
   LuaSetfieldNumber( L, "AllTimeMaxPlayers", SysData.MaxPlayersEver );
 
-  if( !IsNullOrEmpty( SysData.TimeOfMaxPlayersEver ) )
+  if( !SysData.TimeOfMaxPlayersEver.empty() )
     {
       LuaSetfieldString( L, "AllTimeMaxPlayersTime", SysData.TimeOfMaxPlayersEver );
     }
@@ -83,11 +83,11 @@ static int L_SystemDataEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      SysData.TimeOfMaxPlayersEver = CopyString( lua_tostring( L, idx ) );
+      SysData.TimeOfMaxPlayersEver = lua_tostring( L, idx );
     }
   else
     {
-      SysData.TimeOfMaxPlayersEver = CopyString( "(not recorded)" );
+      SysData.TimeOfMaxPlayersEver = "(not recorded)";
     }
 
   if( !lua_isnil( L, ++idx ) )

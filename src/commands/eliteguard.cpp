@@ -5,16 +5,13 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_elite_guard( Character *ch , char *argument )
+void do_elite_guard( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
   int the_chance = 0, credits = 0;
   Clan *clan = NULL;
   
   if ( IsNpc( ch ) )
     return;
-
-  strcpy( arg, argument );
 
   switch( ch->SubState )
     {
@@ -33,7 +30,7 @@ void do_elite_guard( Character *ch , char *argument )
 
       if ( ch->Gold < GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 200 )
         {
-          ch->Echo( "&RYou dont have enough credits.\r\n", ch );
+          ch->Echo( "&RYou don't have enough credits.\r\n", ch );
           return;
         }
 
@@ -43,7 +40,7 @@ void do_elite_guard( Character *ch , char *argument )
         {
           ch->Echo( "&GYou begin making the call for reinforcements.\r\n" );
           Act( AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
-               NULL, argument , TO_ROOM );
+               NULL, arg.c_str(), TO_ROOM );
           AddTimerToCharacter( ch , TIMER_CMD_FUN , 1 , do_elite_guard , SUB_PAUSE );
           ch->dest_buf = CopyString(arg);
           return;
@@ -56,7 +53,8 @@ void do_elite_guard( Character *ch , char *argument )
     case SUB_PAUSE:
       if ( !ch->dest_buf )
         return;
-      strcpy(arg, (const char*)ch->dest_buf);
+
+      arg = static_cast<const char*>(ch->dest_buf);
       FreeMemory( ch->dest_buf);
       break;
 
@@ -88,4 +86,3 @@ void do_elite_guard( Character *ch , char *argument )
 
   ch->BackupWait = 1;
 }
-

@@ -2,13 +2,12 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 
-void do_bamfin( Character *ch, char *argument )
+void do_bamfin( Character *ch, std::string argument )
 {
   if ( !IsNpc(ch) )
     {
       SmashTilde( argument );
-      FreeMemory( ch->PCData->BamfIn );
-      ch->PCData->BamfIn = CopyString( argument );
+      ch->PCData->BamfIn = argument;
       ch->Echo( "Ok.\r\n" );
     }
 }

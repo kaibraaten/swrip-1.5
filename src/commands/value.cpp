@@ -2,14 +2,14 @@
 #include "shop.hpp"
 #include "mud.hpp"
 
-void do_value( Character *ch, char *argument )
+void do_value( Character *ch, std::string argument )
 {
-  char buf[MAX_STRING_LENGTH];
-  Character *keeper;
-  Object *obj;
-  int cost;
+  char buf[MAX_STRING_LENGTH] = {'\0'};
+  Character *keeper = nullptr;
+  Object *obj = nullptr;
+  int cost = 0;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Value what?\r\n");
       return;
@@ -42,4 +42,3 @@ void do_value( Character *ch, char *argument )
   Act( AT_TELL, buf, keeper, obj, ch, TO_VICT );
   ch->Reply = keeper;
 }
-

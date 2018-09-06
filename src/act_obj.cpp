@@ -268,7 +268,7 @@ bool RemoveObject( Character *ch, WearLocation iWear, bool fReplace )
        &&   ch->CarryNumber + GetObjectCount( obj ) > GetCarryCapacityNumber( ch ) )
     {
       Act( AT_PLAIN, "$d: you can't carry that many items.",
-           ch, NULL, obj->Name, TO_CHAR );
+           ch, NULL, obj->Name.c_str(), TO_CHAR );
       return false;
     }
 
@@ -293,16 +293,12 @@ bool RemoveObject( Character *ch, WearLocation iWear, bool fReplace )
   return true;
 }
 
-char *GetObjectShortDescription( const Object *obj )
+std::string GetObjectShortDescription( const Object *obj )
 {
-  static char buf[MAX_STRING_LENGTH];
-
   if ( obj->Count > 1 )
     {
-      sprintf( buf, "%s (%d)", obj->ShortDescr, obj->Count );
-      return buf;
+      return FormatString( "%s (%d)", obj->ShortDescr, obj->Count );
     }
 
   return obj->ShortDescr;
 }
-

@@ -5,21 +5,21 @@
 #include "protomob.hpp"
 #include "systemdata.hpp"
 
-void do_give( Character *ch, char *argument )
+void do_give( Character *ch, std::string argument )
 {
-  char arg1 [MAX_INPUT_LENGTH];
-  char arg2 [MAX_INPUT_LENGTH];
-  char buf  [MAX_INPUT_LENGTH];
-  Character *victim;
-  Object  *obj;
+  std::string arg1;
+  std::string arg2;
+  char buf[MAX_INPUT_LENGTH];
+  Character *victim = nullptr;
+  Object *obj = nullptr;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
   
-  if ( !StrCmp( arg2, "to" ) && !IsNullOrEmpty( argument ) )
+  if ( !StrCmp( arg2, "to" ) && !argument.empty() )
     argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
+  if ( arg1.empty() || arg2.empty() )
     {
       ch->Echo( "Give what to whom?\r\n" );
       return;
@@ -31,9 +31,8 @@ void do_give( Character *ch, char *argument )
   if ( IsNumber( arg1 ) )
     {
       /* 'give NNNN coins victim' */
-      int amount;
+      int amount = std::stoi(arg1);
 
-      amount   = atoi(arg1);
       if ( amount <= 0
            || ( StrCmp( arg2, "credits" ) && StrCmp( arg2, "credit" ) ) )
         {
@@ -43,10 +42,10 @@ void do_give( Character *ch, char *argument )
 
       argument = OneArgument( argument, arg2 );
 
-      if ( !StrCmp( arg2, "to" ) && !IsNullOrEmpty( argument ) )
+      if ( !StrCmp( arg2, "to" ) && !argument.empty() )
         argument = OneArgument( argument, arg2 );
       
-      if ( IsNullOrEmpty( arg2 ) )
+      if ( arg2.empty() )
         {
 	  ch->Echo( "Give what to whom?\r\n" );
           return;
@@ -67,7 +66,7 @@ void do_give( Character *ch, char *argument )
       ch->Gold     -= amount;
       victim->Gold += amount;
       strcpy(buf, "$n gives you ");
-      strcat(buf, arg1);
+      strcat(buf, arg1.c_str());
       strcat(buf, (amount > 1) ? " credits." : " credit.");
 
       Act( AT_ACTION, buf, ch, NULL, victim, TO_VICT    );
@@ -130,9 +129,9 @@ void do_give( Character *ch, char *argument )
   if ( IsNpc(victim) && victim->Prototype && victim->Prototype->Shop )
     {
 
-      if ( victim->Owner && StrCmp( ch->Name, victim->Owner ) )
+      if ( !victim->Owner.empty() && StrCmp( ch->Name, victim->Owner ) )
         {
-          ch->Echo("This isnt your vendor!\r\n");
+          ch->Echo( "This isn't your vendor!\r\n" );
           return;
         }
     }
@@ -154,6 +153,7 @@ void do_give( Character *ch, char *argument )
 
   if ( IsBitSet( SysData.SaveFlags, SV_GIVE ) && !CharacterDiedRecently(ch) )
     SaveCharacter(ch);
+
   if ( IsBitSet( SysData.SaveFlags, SV_RECEIVE ) && !CharacterDiedRecently(victim) )
     SaveCharacter(victim);
 }

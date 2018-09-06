@@ -3,25 +3,22 @@
 #include "pcdata.hpp"
 #include "systemdata.hpp"
 
-void do_rank( Character *ch, char *argument )
+void do_rank( Character *ch, std::string argument )
 {
   if ( IsNpc(ch) )
     return;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
-      ch->Echo("Usage: rank <string>.\r\n");
-      ch->Echo("   or: rank none.\r\n");
+      ch->Echo("Usage: rank <string>\r\n");
+      ch->Echo("   or: rank none\r\n");
       return;
     }
 
-  SmashTilde( argument );
-  FreeMemory( ch->PCData->Rank );
-
   if ( !StrCmp( argument, "none" ) )
-    ch->PCData->Rank = CopyString( "" );
+    ch->PCData->Rank.erase();
   else
-    ch->PCData->Rank = CopyString( argument );
+    ch->PCData->Rank = argument;
 
   ch->Echo("Ok.\r\n");
 }

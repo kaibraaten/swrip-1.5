@@ -4,20 +4,17 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_purge( Character *ch, char *argument )
+void do_purge( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       std::list<Character*> charactersToExtract = Filter(ch->InRoom->Characters(),
                                                          [ch](const auto victim)
                                                          {
                                                            return IsNpc(victim)
                                                              && victim != ch
-                                                             && !IsBitSet(victim->Flags, ACT_POLYMORPHED);
+                                                             && !IsBitSet(victim->Flags,
+                                                                          ACT_POLYMORPHED);
                                                          });
       for(Character *victim : charactersToExtract)
         {
@@ -88,4 +85,3 @@ void do_purge( Character *ch, char *argument )
   Act( AT_IMMORT, "$n purges $N.", ch, NULL, victim, TO_NOTVICT );
   ExtractCharacter( victim, true );
 }
-

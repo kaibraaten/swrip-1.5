@@ -4,13 +4,9 @@
 #include "protoobject.hpp"
 
 /* Opstat - Scryn 8/12*/
-void do_opstat( Character *ch, char *argument )
+void do_opstat( Character *ch, std::string arg )
 {
-  char arg[MAX_INPUT_LENGTH];
-
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("OProg stat what?\r\n");
       return;
@@ -31,10 +27,10 @@ void do_opstat( Character *ch, char *argument )
     }
 
   ch->Echo("Name: %s.  Vnum: %d.\r\n",
-             obj->Name, obj->Prototype->Vnum );
+             obj->Name.c_str(), obj->Prototype->Vnum );
 
   ch->Echo("Short description: %s.\r\n",
-             obj->ShortDescr );
+             obj->ShortDescr.c_str() );
 
   for(const MPROG_DATA *mprg : obj->Prototype->mprog.MudProgs())
     {

@@ -1,3 +1,4 @@
+#include <array>
 #include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
@@ -7,19 +8,22 @@
 
 #define CLONEGOLD 1000
 
-void do_clone( Character *ch, char *argument )
+void do_clone( Character *ch, std::string argument )
 {
   long credits = 0, bank = 0;
   long played = 0, frc_experience = 0;
-  char clanname[MAX_STRING_LENGTH] = { '\0' };
-  char bestowments[MAX_STRING_LENGTH] = { '\0' };
-  char oldbestowments[MAX_STRING_LENGTH] = { '\0' };
-  int experience[MAX_ABILITY];
-  int skill_level[MAX_ABILITY];
+  std::string clanname;
+  std::string bestowments;
+  std::string oldbestowments;
+  std::array<int, MAX_ABILITY> experience;
+  std::array<int, MAX_ABILITY> skill_level;
   int flags = 0;
   short frc = 0, change = 0, change2 = 0, frc_level = 0, low_frc = 0, mana = 0;
   Room *home = NULL;
 
+  experience.fill(0);
+  skill_level.fill(0);
+  
   if ( IsNpc(ch) )
     {
       ch->Echo( "Yeah right!\r\n" );
@@ -47,8 +51,8 @@ void do_clone( Character *ch, char *argument )
     {
       if( SysData.PermaDeath )
 	{
-	  ch->Gold -= ch->TopLevel*200;
-	  ch->Echo( "You pay %d credits for cloning.\r\n" , ch->TopLevel*200 );
+	  ch->Gold -= ch->TopLevel * 200;
+	  ch->Echo( "You pay %d credits for cloning.\r\n" , ch->TopLevel * 200 );
 	}
       
       ch->Echo( "You are escorted into a small room.\r\n\r\n" );
@@ -113,7 +117,7 @@ void do_clone( Character *ch, char *argument )
 	  SetAbilityLevel( ch, FORCE_ABILITY, 1 );
 	}
 
-      ch->Mana = 100 + 100*ch->Stats.PermFrc;
+      ch->Mana = 100 + 100 * ch->Stats.PermFrc;
 
       flags   = ch->Flags;
       RemoveBit( ch->Flags, PLR_KILLER );
@@ -136,7 +140,7 @@ void do_clone( Character *ch, char *argument )
       ch->PCData->Bank = 0;
       home = ch->PlayerHome;
       ch->PlayerHome = NULL;
-      strcpy( oldbestowments, ch->PCData->Bestowments);
+      oldbestowments = ch->PCData->Bestowments;
 
       if( ch->PCData->Clones == 2 )
 	{
@@ -156,19 +160,18 @@ void do_clone( Character *ch, char *argument )
 
       ch->Mana = 100 + (ch->Stats.PermFrc*100);
 
-      if ( !IsNullOrEmpty( ch->PCData->ClanInfo.ClanName ) )
+      if ( !ch->PCData->ClanInfo.ClanName.empty() )
 	{
-	  strcpy( clanname, ch->PCData->ClanInfo.ClanName);
-	  FreeMemory( ch->PCData->ClanInfo.ClanName );
-	  ch->PCData->ClanInfo.ClanName = CopyString( "" );
-	  strcpy( bestowments, ch->PCData->Bestowments);
-	  FreeMemory( ch->PCData->Bestowments );
-	  ch->PCData->Bestowments = CopyString( "" );
+	  clanname = ch->PCData->ClanInfo.ClanName;
+	  ch->PCData->ClanInfo.ClanName.erase();
+
+	  bestowments = ch->PCData->Bestowments;
+	  ch->PCData->Bestowments.erase();
+
 	  SaveClone(ch);
-	  FreeMemory( ch->PCData->ClanInfo.ClanName );
-	  ch->PCData->ClanInfo.ClanName = CopyString( clanname );
-	  FreeMemory( ch->PCData->Bestowments );
-	  ch->PCData->Bestowments = CopyString( bestowments );
+
+          ch->PCData->ClanInfo.ClanName = clanname;
+	  ch->PCData->Bestowments = bestowments;
 	}
       else
         {
@@ -195,7 +198,7 @@ void do_clone( Character *ch, char *argument )
       ch->Gold = credits;
       ch->PCData->Bank = bank;
       ch->Flags = flags;
-      ch->PCData->Bestowments=CopyString( oldbestowments);
+      ch->PCData->Bestowments = oldbestowments;
       ch->Hit--;
     }
   

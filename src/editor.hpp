@@ -35,7 +35,7 @@
 
 #include "types.hpp"
 
-void StartEditing( Character *ch, char *data );
+void StartEditing( Character *ch, const std::string &data );
 void StopEditing( Character *ch );
 void EditBuffer( Character *ch, std::string argument );
 char *CopyBuffer( Character *ch );

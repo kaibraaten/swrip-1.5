@@ -1,9 +1,9 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_idea( Character *ch, char *argument )
+void do_idea( Character *ch, std::string argument )
 {
-   if(!IsNullOrEmpty(argument))
+  if( !argument.empty() )
     {
       AppendFile( ch, IDEA_FILE, argument );
       ch->Echo("Ok. Thanks.\r\n");

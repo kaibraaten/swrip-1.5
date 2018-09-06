@@ -4,14 +4,11 @@
 #include "log.hpp"
 #include "object.hpp"
 
-void do_smoke( Character *ch, char *argument )
+void do_smoke( Character *ch, std::string arg )
 {
   Object *pipe_obj = NULL;
-  char arg[MAX_INPUT_LENGTH];
 
-  OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Smoke what?\r\n");
       return;
@@ -25,18 +22,23 @@ void do_smoke( Character *ch, char *argument )
       ch->Echo("You aren't carrying that.\r\n");
       return;
     }
+
   if ( pipe_obj->ItemType != ITEM_PIPE )
     {
-      Act( AT_ACTION, "You try to smoke $p... but it doesn't seem to work.", ch, pipe_obj, NULL, TO_CHAR );
-      Act( AT_ACTION, "$n tries to smoke $p... (I wonder what $e's been putting his $s pipe_obj?)", ch, pipe_obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "You try to smoke $p... but it doesn't seem to work.",
+           ch, pipe_obj, NULL, TO_CHAR );
+      Act( AT_ACTION, "$n tries to smoke $p... (I wonder what $e's been putting his $s pipe?)",
+           ch, pipe_obj, NULL, TO_ROOM );
       return;
     }
+
   if ( !IsBitSet( pipe_obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
     {
       Act( AT_ACTION, "You try to smoke $p, but it's not lit.", ch, pipe_obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n tries to smoke $p, but it's not lit.", ch, pipe_obj, NULL, TO_ROOM );
       return;
     }
+
   if ( pipe_obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] > 0 )
     {
       if ( !ObjProgUseTrigger( ch, pipe_obj, NULL, NULL, NULL ) )
@@ -52,9 +54,11 @@ void do_smoke( Character *ch, char *argument )
           Skill *skill      = GetSkill( sn );
 
           SetWaitState( ch, skill->Beats );
+
           if ( skill->SpellFunction )
             CastSpellWithObject( sn, umin(skill->Level, ch->TopLevel),
                             ch, ch, NULL );
+
           if ( IsObjectExtracted( pipe_obj ) )
             return;
         }
@@ -73,4 +77,3 @@ void do_smoke( Character *ch, char *argument )
         }
     }
 }
-

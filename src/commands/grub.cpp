@@ -1,5 +1,5 @@
-#include <ctype.h>
-#include <string.h>
+#include <cctype>
+#include <cstring>
 #include "mud.hpp"
 #include "grub.hpp"
 #include "character.hpp"
@@ -31,25 +31,25 @@ static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num);
  * It then compares the appropriate values from the input record to
  * each operand in the operand table.
  */
-void do_grub (Character *ch, char *argument)
+void do_grub (Character *ch, std::string argument)
 {
-  char arg1[MAX_STRING_LENGTH];
+  std::string arg1;
   bool or_sw = false;                       /* or search criteria           */
-  int  dis_num;                             /* display lines requested      */
+  int  dis_num = 0;                         /* display lines requested      */
   int  op_num = 0;                          /* num of operands on cmd line  */
 
   gr_init();                                /* initialize data structures   */
   argument = OneArgument (argument, arg1);
 
-  if ( !*arg1 )
+  if ( arg1.empty() )
     {
       ch->Echo("Syntax <max results> [keywords] [operands].\r\n");
       return;
     }
 
-  if ( isdigit(*arg1) )        /* first argument is number of display lines */
+  if ( IsNumber(arg1) )        /* first argument is number of display lines */
     {
-      dis_num = atoi( arg1 );
+      dis_num = std::stoi( arg1 );
     }
   else
     {
@@ -59,9 +59,9 @@ void do_grub (Character *ch, char *argument)
 
   argument = OneArgument (argument, arg1);
 
-  while ( *arg1 )
+  while ( !arg1.empty() )
     {                                           /* build the operand table */
-      if ( !gr_parse_operand (ch, arg1, &or_sw, &op_num) )
+      if ( !gr_parse_operand (ch, arg1.c_str(), &or_sw, &op_num) )
         return;
 
       argument = OneArgument (argument, arg1);

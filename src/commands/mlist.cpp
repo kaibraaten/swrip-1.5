@@ -4,18 +4,19 @@
 #include "pcdata.hpp"
 #include "protomob.hpp"
 
-void do_mlist( Character *ch, char *argument )
+void do_mlist( Character *ch, std::string argument )
 {
   ProtoMobile *mob = NULL;
   vnum_t vnum = INVALID_VNUM;
   Area *tarea = NULL;
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
   int lrange = 0;
   int trange = 0;
 
-  if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_CREATOR || !ch->PCData
-       ||  ( !ch->PCData->Build.Area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
+  if ( IsNpc(ch)
+       || GetTrustLevel( ch ) < LEVEL_CREATOR
+       || ( !ch->PCData->Build.Area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
     {
       ch->Echo("You don't have an assigned area.\r\n");
       return;
@@ -27,15 +28,15 @@ void do_mlist( Character *ch, char *argument )
 
   if ( tarea )
     {
-      if ( IsNullOrEmpty( arg1 ) )            /* cleaned a big scary mess */
-	lrange = tarea->VnumRanges.Mob.First;     /* here.            -Thoric */
+      if ( arg1.empty() )
+	lrange = tarea->VnumRanges.Mob.First;
       else
-        lrange = atoi( arg1 );
+        lrange = std::stoi( arg1 );
 
-      if ( IsNullOrEmpty( arg2 ) )
+      if ( arg2.empty() )
         trange = tarea->VnumRanges.Mob.Last;
       else
-        trange = atoi( arg2 );
+        trange = std::stoi( arg2 );
 
       if ( ( lrange < tarea->VnumRanges.Mob.First || trange > tarea->VnumRanges.Mob.Last )
            && GetTrustLevel( ch ) < LEVEL_GREATER )
@@ -46,17 +47,18 @@ void do_mlist( Character *ch, char *argument )
     }
   else
     {
-      lrange = ( IsNumber( arg1 ) ? atoi( arg1 ) : 1 );
-      trange = ( IsNumber( arg2 ) ? atoi( arg2 ) : 1 );
+      lrange = ( IsNumber( arg1 ) ? std::stoi( arg1 ) : 1 );
+      trange = ( IsNumber( arg2 ) ? std::stoi( arg2 ) : 1 );
     }
 
   for ( vnum = lrange; vnum <= trange; vnum++ )
     {
       if ( (mob = GetProtoMobile( vnum )) == NULL )
         continue;
+
       ch->Echo("%5d) %-20s '%s'\r\n", vnum,
-                    mob->Name,
-                    mob->ShortDescr );
+               mob->Name.c_str(),
+               mob->ShortDescr.c_str() );
     }
 }
 

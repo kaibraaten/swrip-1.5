@@ -9,15 +9,16 @@
  * A complicated to use command as it currently exists.         -Thoric
  * Once area->Author and area->Name are cleaned up... it will be easier
  */
-void do_installarea( Character *ch, char *argument )
+void do_installarea( Character *ch, std::string argument )
 {
   Area *tarea = nullptr;
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   char buf[MAX_STRING_LENGTH];
   int num = 0;
 
   argument = OneArgument( argument, arg );
-  if ( IsNullOrEmpty( arg ) )
+
+  if ( arg.empty() )
     {
       ch->Echo("Syntax: installarea <filename> [Area title]\r\n");
       return;
@@ -27,10 +28,9 @@ void do_installarea( Character *ch, char *argument )
     {
       if ( !StrCmp( tarea->Filename, arg ) )
         {
-          if ( !IsNullOrEmpty( argument ) )
+          if ( !argument.empty() )
             {
-              FreeMemory( tarea->Name );
-              tarea->Name = CopyString( argument );
+              tarea->Name = argument;
             }
 
 	  /* Fold area with install flag -- auto-removes prototype flags */
@@ -69,9 +69,11 @@ void do_installarea( Character *ch, char *argument )
           ResetArea( tarea );
           tarea->NumberOfPlayers = num;
           ch->Echo("Renaming author's building file.\r\n");
-          sprintf( buf, "%s%s.installed", BUILD_DIR, tarea->Filename );
-          sprintf( arg, "%s%s", BUILD_DIR, tarea->Filename );
-          rename( arg, buf );
+          sprintf( buf, "%s%s.installed", BUILD_DIR, tarea->Filename.c_str() );
+
+          char old[MAX_STRING_LENGTH];
+          sprintf( old, "%s%s", BUILD_DIR, tarea->Filename.c_str() );
+          rename( old, buf );
           ch->Echo("Done.\r\n");
           return;
         }

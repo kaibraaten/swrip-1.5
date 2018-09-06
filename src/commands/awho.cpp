@@ -4,7 +4,7 @@
 #include "arena.hpp"
 #include "room.hpp"
 
-void do_awho(Character *ch, char *argument)
+void do_awho(Character *ch, std::string argument)
 {
   Character *tch = nullptr;
   std::ostringstream output;
@@ -19,7 +19,7 @@ void do_awho(Character *ch, char *argument)
 
   output << "&W  Players in the &BRise in Power&W Arena\r\n"
          << "%s-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-"
-         <<"%s&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-\r\n";
+         << "%s&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-\r\n";
   
   sprintf(buf,"Game Length = &R%-3d   &WTime To Start &R%-3d\r\n", arena.GameLength, arena.TimeToStart);
   output << buf;
@@ -39,7 +39,7 @@ void do_awho(Character *ch, char *argument)
       if (tch->InRoom && IsBitSet(tch->InRoom->Flags, ROOM_ARENA)
           && (tch->TopLevel < LEVEL_IMMORTAL))
         {
-          tch->Echo( "&W%s\r\n", tch->Name);
+          tch->Echo( "&W%s\r\n", tch->Name.c_str());
         }
     }
 }

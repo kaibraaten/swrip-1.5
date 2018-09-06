@@ -4,13 +4,13 @@
 #include "pcdata.hpp"
 #include "object.hpp"
 
-void do_eat( Character *ch, char *argument )
+void do_eat( Character *ch, std::string argument )
 {
   Object *obj = NULL;
   ch_ret retcode = rNONE;
   int foodcond = 0;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Eat what?\r\n" );
       return;
@@ -27,8 +27,10 @@ void do_eat( Character *ch, char *argument )
     {
       if ( obj->ItemType != ITEM_FOOD && obj->ItemType != ITEM_PILL )
         {
-          Act( AT_ACTION, "$n starts to nibble on $p... ($e must really be hungry)",  ch, obj, NULL, TO_ROOM );
-	  Act( AT_ACTION, "You try to nibble on $p...", ch, obj, NULL, TO_CHAR );
+          Act( AT_ACTION, "$n starts to nibble on $p... ($e must really be hungry)",
+               ch, obj, NULL, TO_ROOM );
+	  Act( AT_ACTION, "You try to nibble on $p...",
+               ch, obj, NULL, TO_CHAR );
           return;
         }
 
@@ -41,7 +43,6 @@ void do_eat( Character *ch, char *argument )
 
   /* required due to object grouping */
   SeparateOneObjectFromGroup( obj );
-
   SetWaitState( ch, PULSE_PER_SECOND/2 );
 
   if ( obj->InObject )
@@ -49,15 +50,18 @@ void do_eat( Character *ch, char *argument )
       Act( AT_PLAIN, "You take $p from $P.", ch, obj, obj->InObject, TO_CHAR );
       Act( AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->InObject, TO_ROOM );
     }
+
   if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
     {
-      if ( IsNullOrEmpty( obj->ActionDescription ) )
+      if ( obj->ActionDescription.empty() )
         {
           Act( AT_ACTION, "$n eats $p.",  ch, obj, NULL, TO_ROOM );
           Act( AT_ACTION, "You eat $p.", ch, obj, NULL, TO_CHAR );
         }
       else
-        ActionDescription( ch, obj, NULL );
+        {
+          ActionDescription( ch, obj, NULL );
+        }
     }
 
   switch ( obj->ItemType )
@@ -140,4 +144,3 @@ void do_eat( Character *ch, char *argument )
 
   ExtractObject( obj );
 }
-

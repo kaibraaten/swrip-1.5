@@ -2,14 +2,14 @@
 #include "character.hpp"
 #include "systemdata.hpp"
 
-void do_cset( Character *ch, char *argument )
+void do_cset( Character *ch, std::string argument )
 {
-  char arg[MAX_STRING_LENGTH];
+  std::string arg;
   short level = 0;
 
   SetCharacterColor( AT_IMMORT, ch );
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo( "Mail:\r\n  Read all mail: %d. Read mail for free: %d. Write mail for free: %d.\r\n",
 	   SysData.ReadAllMail, SysData.ReadMailFree, SysData.WriteMailFree );
@@ -109,7 +109,7 @@ void do_cset( Character *ch, char *argument )
       return;
     }
 
-  level = (short) atoi(argument);
+  level = (short) std::stoi(argument);
 
   if (!StringPrefix( arg, "savefrequency" ) )
     {
@@ -248,4 +248,3 @@ void do_cset( Character *ch, char *argument )
       return;
     }
 }
-

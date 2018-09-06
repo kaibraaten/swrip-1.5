@@ -3,13 +3,12 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 
-static void remove_area_names (char *inp, char *out);
-static void extract_area_names (char *inp, char *out);
+static void RemoveAreaNames(std::string inp, std::string &out);
+static void ExtractAreaNames(std::string inp, std::string &out);
 
-void do_bestowarea( Character *ch, char *argument )
+void do_bestowarea( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
+  std::string arg;
   Character *victim = nullptr;
   int arg_len = 0;
 
@@ -21,7 +20,7 @@ void do_bestowarea( Character *ch, char *argument )
       return;
     }
 
-  if ( !*arg )
+  if ( arg.empty() )
     {
       ch->Echo( "Syntax:\r\n"
                 "bestowarea <victim> <filename>.are\r\n"
@@ -49,26 +48,24 @@ void do_bestowarea( Character *ch, char *argument )
       return;
     }
 
-  if (!victim->PCData->Bestowments)
-    victim->PCData->Bestowments = CopyString("");
-
-  if ( !*argument || !StrCmp (argument, "list") )
+  if ( argument.empty() || !StrCmp (argument, "list") )
     {
-      extract_area_names (victim->PCData->Bestowments, buf);
-      ch->Echo( "Bestowed areas: %s\r\n", buf);
+      std::string buf;
+      ExtractAreaNames(victim->PCData->Bestowments, buf);
+      ch->Echo( "Bestowed areas: %s\r\n", buf.c_str());
       return;
     }
 
   if ( !StrCmp (argument, "none") )
     {
-      remove_area_names (victim->PCData->Bestowments, buf);
-      FreeMemory( victim->PCData->Bestowments );
-      victim->PCData->Bestowments = CopyString( buf );
+      std::string buf;
+      RemoveAreaNames(victim->PCData->Bestowments, buf);
+      victim->PCData->Bestowments = buf;
       ch->Echo( "Done.\r\n" );
       return;
     }
 
-  arg_len = strlen(argument);
+  arg_len = argument.size();
 
   if ( arg_len < 5
        || argument[arg_len-4] != '.' || argument[arg_len-3] != 'a'
@@ -79,11 +76,9 @@ void do_bestowarea( Character *ch, char *argument )
       return;
     }
 
-  sprintf( buf, "%s %s", victim->PCData->Bestowments, argument );
-  FreeMemory( victim->PCData->Bestowments );
-  victim->PCData->Bestowments = CopyString( buf );
+  victim->PCData->Bestowments += " " + argument;
   victim->Echo( "%s has bestowed on you the area: %s\r\n",
-                ch->Name, argument );
+                ch->Name.c_str(), argument.c_str() );
   ch->Echo( "Done.\r\n" );
 }
 
@@ -92,23 +87,23 @@ void do_bestowarea( Character *ch, char *argument )
  * e.g. "aset joe.are sedit susan.are cset" --> "joe.are susan.are"
  * - Gorog
  */
-static void extract_area_names (char *inp, char *out)
+static void ExtractAreaNames (std::string inp, std::string &out)
 {
-  char buf[MAX_INPUT_LENGTH], *pbuf=buf;
-  int  len;
+  out.erase();
 
-  *out='\0';
-
-  while (inp && *inp)
+  while( !inp.empty() )
     {
-      inp = OneArgument(inp, buf);
+      std::string segment;
+      inp = OneArgument(inp, segment);
 
-      if ( (len=strlen(buf)) >= 5 && !StrCmp(".are", pbuf+len-4) )
+      if ( segment.size() >= 5 && !StringSuffix(".are", segment) )
         {
-          if (*out)
-	    strcat (out, " ");
-
-          strcat (out, buf);
+          if( !out.empty() )
+            {
+              out += " ";
+            }
+          
+          out += segment;
         }
     }
 }
@@ -118,24 +113,23 @@ static void extract_area_names (char *inp, char *out)
  * e.g. "aset joe.are sedit susan.are cset" --> "aset sedit cset"
  * - Gorog
  */
-static void remove_area_names (char *inp, char *out)
+static void RemoveAreaNames(std::string inp, std::string &out)
 {
-  char buf[MAX_INPUT_LENGTH], *pbuf=buf;
-  int  len;
+  out.erase();
 
-  *out='\0';
-
-  while (inp && *inp)
+  while( !inp.empty() )
     {
-      inp = OneArgument(inp, buf);
+      std::string segment;
+      inp = OneArgument(inp, segment);
 
-      if ( (len=strlen(buf)) < 5 || StrCmp(".are", pbuf+len-4) )
+      if ( segment.size() >= 5 && StringSuffix(".are", segment) )
         {
-          if (*out)
-	    strcat (out, " ");
+          if( !out.empty() )
+            {
+              out += " ";
+            }
 
-          strcat (out, buf);
+          out += segment;
         }
     }
 }
-

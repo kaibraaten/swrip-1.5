@@ -5,13 +5,13 @@
 #include "room.hpp"
 #include "object.hpp"
 
-void do_throw( Character *ch, char *argument )
+void do_throw( Character *ch, std::string argument )
 {
   Object *obj = NULL;
   Object *tmpobj = NULL;
-  char arg[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
+  std::string arg;
+  std::string arg2;
+  std::string arg3;
   DirectionType dir = DIR_INVALID;
   Exit *pexit = NULL;
   Room *was_in_room = NULL;
@@ -25,7 +25,7 @@ void do_throw( Character *ch, char *argument )
 
   was_in_room = ch->InRoom;
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Usage: throw <object> [direction] [target]\r\n");
       return;
@@ -75,11 +75,11 @@ void do_throw( Character *ch, char *argument )
       Act( AT_ACTION, "$n throws $p at $N.", ch, obj, victim, TO_NOTVICT );
       Act( AT_ACTION, "$n throw $p at you.", ch, obj, victim, TO_VICT );
     }
-  else if ( IsNullOrEmpty( arg2 ) )
+  else if ( arg2.empty() )
     {
-      sprintf( buf, "$n throws %s at the floor." , obj->ShortDescr );
+      sprintf( buf, "$n throws %s at the floor.", obj->ShortDescr.c_str() );
       Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
-      ch->Echo("You throw %s at the floor.\r\n", obj->ShortDescr );
+      ch->Echo("You throw %s at the floor.\r\n", obj->ShortDescr.c_str() );
 
       victim = NULL;
     }
@@ -87,13 +87,13 @@ void do_throw( Character *ch, char *argument )
     {
       if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
 	{
-          ch->Echo("Are you expecting to throw it through a wall!?\r\n");
+          ch->Echo("Are you expecting to throw it through a wall?!\r\n");
           return;
         }
 
       if ( IsBitSet( pexit->Flags, EX_CLOSED ) )
         {
-          ch->Echo("Are you expecting to throw it  through a door!?\r\n");
+          ch->Echo("Are you expecting to throw it through a door?!\r\n");
           return;
         }
 
@@ -132,6 +132,7 @@ void do_throw( Character *ch, char *argument )
         }
 
       to_room = NULL;
+
       if ( pexit->Distance > 1 )
         to_room = GenerateExit( ch->InRoom , &pexit );
 
@@ -163,7 +164,6 @@ void do_throw( Character *ch, char *argument )
           CharacterFromRoom( ch );
           CharacterToRoom( ch, was_in_room );
 
-
           if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
             {
               SetCharacterColor( AT_MAGIC, ch );
@@ -172,6 +172,7 @@ void do_throw( Character *ch, char *argument )
             }
 
           to_room = NULL;
+
           if ( pexit->Distance > 1 )
             to_room = GenerateExit( ch->InRoom , &pexit );
 
@@ -181,20 +182,22 @@ void do_throw( Character *ch, char *argument )
           CharacterFromRoom( ch );
           CharacterToRoom( ch, to_room );
 
-	  sprintf( buf , "Someone throws %s at you from the %s." , obj->ShortDescr , GetDirectionName(dir) );
+	  sprintf( buf , "Someone throws %s at you from the %s.",
+                   obj->ShortDescr.c_str(), GetDirectionName(dir) );
           Act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );
           Act( AT_ACTION, "You throw %p at $N.", ch, obj, victim, TO_CHAR );
-          sprintf( buf, "%s is thrown at $N from the %s." , obj->ShortDescr , GetDirectionName(dir) );
+          sprintf( buf, "%s is thrown at $N from the %s.",
+                   obj->ShortDescr.c_str(), GetDirectionName(dir) );
           Act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
-
-
         }
       else
         {
-          ch->Echo("You throw %s %s.\r\n", obj->ShortDescr , GetDirectionName(GetDirection( arg2 ) ) );
-          sprintf( buf, "%s is thrown from the %s." , obj->ShortDescr , GetDirectionName(dir) );
+          ch->Echo("You throw %s %s.\r\n",
+                   obj->ShortDescr.c_str(),
+                   GetDirectionName(GetDirection( arg2 ) ) );
+          sprintf( buf, "%s is thrown from the %s.",
+                   obj->ShortDescr.c_str(), GetDirectionName(dir) );
           Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
-
         }
     }
   else if ( ( victim = GetCharacterInRoom( ch, arg2 ) ) != NULL )
@@ -213,7 +216,6 @@ void do_throw( Character *ch, char *argument )
           ch->Echo("You feel too nice to do that!\r\n");
           return;
         }
-
     }
   else
     {
@@ -246,11 +248,13 @@ void do_throw( Character *ch, char *argument )
     }
 
   if ( !victim || CharacterDiedRecently( victim ) )
-    LearnFromFailure( ch, gsn_throw );
+    {
+      LearnFromFailure( ch, gsn_throw );
+    }
   else
     {
-
       SetWaitState( ch, SkillTable[gsn_throw]->Beats );
+
       if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_throw] )
         {
           LearnFromSuccess( ch, gsn_throw );
@@ -275,4 +279,3 @@ void do_throw( Character *ch, char *argument )
 	}
     }
 }
-

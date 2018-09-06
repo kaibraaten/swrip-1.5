@@ -9,7 +9,7 @@ struct UserData
 {
   int ArmorValue = 0;
   int WearLocation = 0;
-  char *ItemName = nullptr;
+  std::string ItemName;
 };
 
 static CraftRecipe *CreateMakeArmorRecipe( void );
@@ -21,7 +21,7 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static void FreeUserData( struct UserData *ud );
 static bool CanUseWearLocation( int wearLocation );
 
-void do_makearmor( Character *ch, char *argument )
+void do_makearmor( Character *ch, std::string argument )
 {
   CraftRecipe *recipe = CreateMakeArmorRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
@@ -55,17 +55,14 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 {
   struct UserData *ud = (struct UserData*) userData;
   CraftingSession *session = eventArgs->CraftingSession;
-  char originalArgs[MAX_INPUT_LENGTH];
-  char *argument = originalArgs;
-  char wearLoc[MAX_STRING_LENGTH];
-  char name[MAX_STRING_LENGTH];
+  std::string argument = eventArgs->CommandArguments;
+  std::string wearLoc;
   Character *ch = GetEngineer( session );
 
-  strcpy( argument, eventArgs->CommandArguments );
   argument = OneArgument( argument, wearLoc );
-  strcpy( name, argument );
+  std::string name = argument;
 
-  if( IsNullOrEmpty(name) )
+  if( name.empty() )
     {
       ch->Echo("&RUsage: Makearmor <wearloc> <name>\r\n&w");
       eventArgs->AbortSession = true;
@@ -76,7 +73,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if( ud->WearLocation == -1 )
     {
-      ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc );
+      ch->Echo("&R'%s' is not a wear location.&w\r\n", wearLoc.c_str() );
       eventArgs->AbortSession = true;
       return;
     }
@@ -92,7 +89,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->ItemName = CopyString( name );
+  ud->ItemName = name;
 }
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventArgs )
@@ -108,21 +105,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
 {
   struct UserData *ud = (struct UserData*) userData;
   Object *armor = eventArgs->Object;
-  char description[MAX_STRING_LENGTH];
 
   armor->ItemType = ITEM_ARMOR;
   SetBit( armor->WearFlags, ITEM_TAKE );
   SetBit( armor->WearFlags, ud->WearLocation );
 
-  FreeMemory( armor->Name );
-  armor->Name = CopyString( ud->ItemName );
+  armor->Name = ud->ItemName;
+  armor->ShortDescr = ud->ItemName;
 
-  FreeMemory( armor->ShortDescr );
-  armor->ShortDescr = CopyString( ud->ItemName );
-
-  FreeMemory( armor->Description );
-  sprintf( description, "%s was dropped here.", Capitalize( ud->ItemName ) );
-  armor->Description = CopyString( description );
+  armor->Description = FormatString( "%s was dropped here.", Capitalize( ud->ItemName ).c_str() );
 
   armor->Value[OVAL_ARMOR_CONDITION] = armor->Value[OVAL_ARMOR_AC] = ud->ArmorValue;
   armor->Cost *= 10;
@@ -142,11 +133,6 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args )
 
 static void FreeUserData( struct UserData *ud )
 {
-  if( ud->ItemName )
-    {
-      FreeMemory( ud->ItemName );
-    }
-
   delete ud;
 }
 

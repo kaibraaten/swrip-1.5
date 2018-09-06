@@ -6,19 +6,19 @@
 #include "log.hpp"
 #include "object.hpp"
 
-void do_pricevendor (Character *ch, char *argument)
+void do_pricevendor( Character *ch, std::string argument )
 {
   Character *vendor = NULL;
   Character *ch1 = NULL;
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
+  std::string arg1;
+  std::string arg2;
   Object *obj = NULL;
   struct tm *tms = NULL;
 
   argument = OneArgument (argument, arg1);
   argument = OneArgument (argument, arg2);
 
-  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
+  if ( arg1.empty() || arg2.empty() )
     {
       ch->Echo("Syntax: pricevendor <item> <cost>\r\n");
       return;
@@ -29,9 +29,11 @@ void do_pricevendor (Character *ch, char *argument)
       return;
     }
 
-  if ( !(vendor->Owner) )
-    return;
-
+  if ( vendor->Owner.empty() )
+    {
+      return;
+    }
+  
   if ( (ch1 = GetCharacterInRoom(ch, vendor->Owner)) == NULL )
     {
       ch->Echo("This isnt your vendor!\r\n");
@@ -44,7 +46,7 @@ void do_pricevendor (Character *ch, char *argument)
       tms = localtime(&current_time);
       tms->tm_hour += 24;
       ch->PCData->ReleaseDate = mktime(tms);
-      ch->PCData->HelledBy = CopyString("VendorCheat");
+      ch->PCData->HelledBy = "VendorCheat";
       Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
       CharacterFromRoom(ch);
       CharacterToRoom(ch, GetRoom(ROOM_VNUM_HELL));
@@ -53,27 +55,24 @@ void do_pricevendor (Character *ch, char *argument)
       ch->Echo("The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for 24 Hours.\r\n");
       SaveCharacter(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
-      Log->Info("%s just tried to abuse the vendor bug!" , ch->Name);
+      Log->Info("%s just tried to abuse the vendor bug!", ch->Name.c_str());
       return;
     }
 
   if ( ch->Fighting)
     {
-      ch->Echo("Not while you fightZ!\r\n");
+      ch->Echo("Not while you're fighting!\r\n");
       return;
     }
 
   if ( (obj  = GetCarriedObject( vendor, arg1 )) != NULL)
     {
-      obj->Cost = atoi (arg2);
+      obj->Cost = std::stoi (arg2);
       ch->Echo("The price has been changed\r\n");
       SaveVendor(vendor);
       return;
     }
 
-
-  ch->Echo("He doesnt have that item!\r\n");
+  ch->Echo("He doesn't have that item!\r\n");
   SaveVendor(vendor);
 }
-
-

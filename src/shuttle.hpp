@@ -33,8 +33,8 @@
 class ShuttleStop
 {
 public:
-  char      *Name = nullptr; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
-  vnum_t     RoomVnum = INVALID_VNUM;
+  std::string Name; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
+  vnum_t RoomVnum = INVALID_VNUM;
 };
 
 enum _ShuttleState
@@ -77,7 +77,7 @@ public:
 
   ShuttleClass Type = SHUTTLE_TURBOCAR;
 
-  char *Name = nullptr;
+  std::string Name;
   
   /* Delay Between Stops */
   int Delay = 2;
@@ -116,7 +116,7 @@ void ShowShuttlesToCharacter( const std::list<Shuttle*> &shuttles, Character *ch
 Shuttle *GetShuttleInRoom( const Room *room, const std::string &name );
 Shuttle *GetShuttleFromEntrance( vnum_t vnum );
 ShuttleStop *AllocateShuttleStop( void );
-const char *GetShuttleFilename( const Shuttle *shuttle );
+std::string GetShuttleFilename( const Shuttle *shuttle );
 
 DECLARE_CMD_FUN( do_showshuttle );
 DECLARE_CMD_FUN( do_makeshuttle );

@@ -5,9 +5,9 @@
 #include "room.hpp"
 #include "systemdata.hpp"
 
-void do_goto( Character *ch, char *argument )
+void do_goto( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   Room *location = NULL;
   Room *in_room = NULL;
   Area *pArea = NULL;
@@ -15,7 +15,7 @@ void do_goto( Character *ch, char *argument )
 
   OneArgument( argument, arg );
   
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Goto where?\r\n" );
       return;
@@ -23,7 +23,7 @@ void do_goto( Character *ch, char *argument )
 
   if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
-      vnum = atoi( arg );
+      vnum = std::stoi( arg );
       
       if ( vnum < 0 || GetRoom( vnum ) )
         {
@@ -37,8 +37,8 @@ void do_goto( Character *ch, char *argument )
           return;
         }
 
-      if ( GetTrustLevel( ch ) < SysData.LevelToModifyProto &&
-           !( ch->PCData->Bestowments && IsName( "intergoto", ch->PCData->Bestowments) ))
+      if ( GetTrustLevel( ch ) < SysData.LevelToModifyProto
+           && !IsName( "intergoto", ch->PCData->Bestowments) )
         {
           if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
             {
@@ -65,10 +65,10 @@ void do_goto( Character *ch, char *argument )
       ch->Echo( "Overriding private flag!\r\n" );
     }
 
-  if ( GetTrustLevel( ch ) < LEVEL_GREATER &&
-       !( ch->PCData->Bestowments && IsName( "intergoto", ch->PCData->Bestowments) ))
+  if ( GetTrustLevel( ch ) < LEVEL_GREATER
+       && !IsName( "intergoto", ch->PCData->Bestowments) )
     {
-      vnum = atoi( arg );
+      vnum = std::stoi( arg );
 
       if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
@@ -99,10 +99,10 @@ void do_goto( Character *ch, char *argument )
 
   if ( !IsBitSet(ch->Flags, PLR_WIZINVIS) )
     {
-      if ( ch->PCData && !IsNullOrEmpty( ch->PCData->BamfOut ) )
-        Act( AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfOut ,  TO_ROOM );
+      if ( ch->PCData && !ch->PCData->BamfOut.empty() )
+        Act( AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfOut.c_str(), TO_ROOM );
       else
-        Act( AT_IMMORT, "$n $T", ch, NULL, "leaves in a swirl of the force.",  TO_ROOM );
+        Act( AT_IMMORT, "$n $T", ch, NULL, "leaves in a swirl of the force.", TO_ROOM );
     }
 
   ch->ReGoto = ch->InRoom->Vnum;
@@ -118,10 +118,10 @@ void do_goto( Character *ch, char *argument )
 
   if ( !IsBitSet(ch->Flags, PLR_WIZINVIS) )
     {
-      if ( ch->PCData && !IsNullOrEmpty( ch->PCData->BamfIn ) )
-        Act( AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfIn ,  TO_ROOM );
+      if ( ch->PCData && !ch->PCData->BamfIn.empty() )
+        Act( AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfIn.c_str(), TO_ROOM );
       else
-        Act( AT_IMMORT, "$n $T", ch, NULL, "enters in a swirl of the Force.",  TO_ROOM );
+        Act( AT_IMMORT, "$n $T", ch, NULL, "enters in a swirl of the Force.", TO_ROOM );
     }
 
   do_look( ch, "auto" );
@@ -140,4 +140,3 @@ void do_goto( Character *ch, char *argument )
         }
     }
 }
-

@@ -2,11 +2,11 @@
 #include "board.hpp"
 #include "character.hpp"
 
-void do_makeboard( Character *ch, char *argument )
+void do_makeboard( Character *ch, std::string argument )
 {
   Board *board = NULL;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       ch->Echo("Usage: makeboard <name>\r\n");
       return;

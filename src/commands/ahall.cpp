@@ -4,7 +4,7 @@
 #include "arena.hpp"
 #include "character.hpp"
 
-void do_ahall(Character *ch, char *argument)
+void do_ahall(Character *ch, std::string argument)
 {
   if (!FameList)
     {

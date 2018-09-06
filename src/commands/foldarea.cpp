@@ -1,19 +1,19 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "area.hpp"
 #include "room.hpp"
 
-void do_foldarea( Character *ch, char *argument )
+void do_foldarea( Character *ch, std::string argument )
 {
   Area *tarea = NULL;
-  char arg[MAX_INPUT_LENGTH];
+  std::string arg;
   bool fold_all_areas = false;
   bool found = false;
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Usage: foldarea <filename> [remproto]\r\n" );
       return;
@@ -21,7 +21,7 @@ void do_foldarea( Character *ch, char *argument )
 
   if( !StrCmp( arg, "this" ) )
     {
-      strcpy( arg, ch->InRoom->Area->Filename );
+      arg = ch->InRoom->Area->Filename;
     }
 
   fold_all_areas = !StrCmp( arg, "all" );

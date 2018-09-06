@@ -3,20 +3,21 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 
-void do_massign( Character *ch, char *argument )
+void do_massign( Character *ch, std::string argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  char arg3[MAX_INPUT_LENGTH];
-  short  m_lo = 0, m_hi = 0;
+  std::string arg1;
+  std::string arg2;
+  std::string arg3;
   Character *victim = NULL;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
-  m_lo = atoi( arg2 );  m_hi = atoi( arg3 );
 
-  if ( IsNullOrEmpty( arg1 ) || m_lo < 0 || m_hi < 0 )
+  vnum_t m_lo = std::stoi( arg2 );
+  vnum_t m_hi = std::stoi( arg3 );
+
+  if ( arg1.empty() || m_lo < 0 || m_hi < 0 )
     {
       ch->Echo("Syntax: massign <who> <low> <high>\r\n");
       return;
@@ -45,6 +46,6 @@ void do_massign( Character *ch, char *argument )
   AssignAreaTo( victim );
   ch->Echo("Done.\r\n");
   victim->Echo("%s has assigned you the monster vnum range %d - %d.\r\n",
-             ch->Name, m_lo, m_hi );
+               ch->Name.c_str(), m_lo, m_hi );
 }
 

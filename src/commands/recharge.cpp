@@ -5,7 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_recharge(Character *ch, char *argument )
+void do_recharge( Character *ch, std::string argument )
 {
   int recharge = 0;
   int the_chance = 0;
@@ -37,6 +37,7 @@ void do_recharge(Character *ch, char *argument )
 
   the_chance = IsNpc(ch) ? ch->TopLevel
     : (int) (ch->PCData->Learned[gsn_shipsystems]);
+
   if ( GetRandomPercent() > the_chance )
     {
       ch->Echo("&RYou fail to work the controls properly.\r\n");
@@ -44,9 +45,9 @@ void do_recharge(Character *ch, char *argument )
       return;
     }
 
-  ch->Echo("&GRecharging shields..\r\n");
-  Act( AT_PLAIN, "$n pulls back a lever on the control panel.", ch,
-       NULL, argument , TO_ROOM );
+  ch->Echo("&GRecharging shields.\r\n");
+  Act( AT_PLAIN, "$n pulls back a lever on the control panel.",
+       ch, NULL, argument.c_str(), TO_ROOM );
 
   LearnFromSuccess( ch, gsn_shipsystems );
 
@@ -55,4 +56,3 @@ void do_recharge(Character *ch, char *argument )
   ship->Defenses.Shield.Current += recharge;
   ship->Thrusters.Energy.Current -= ( recharge*2 + recharge * ship->Class );
 }
-

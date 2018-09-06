@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-extern char *spell_target_name;
+extern std::string spell_target_name;
 
 /*
  * Generic handler for new "SMAUG" spells                       -Thoric

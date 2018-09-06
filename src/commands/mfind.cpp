@@ -2,24 +2,22 @@
 #include "character.hpp"
 #include "protomob.hpp"
 
-void do_mfind( Character *ch, char *argument )
+void do_mfind( Character *ch, std::string argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  ProtoMobile *pMobIndex;
-  int hash;
-  int nMatch;
-  bool fAll;
+  std::string arg;
+  ProtoMobile *pMobIndex = nullptr;
+  int hash = 0;
+  int nMatch = 0;
 
   OneArgument( argument, arg );
   
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo("Mfind whom?\r\n");
       return;
     }
 
-  fAll  = !StrCmp( arg, "all" );
-  nMatch        = 0;
+  bool fAll = !StrCmp( arg, "all" );
   SetCharacterColor( AT_PLAIN, ch );
 
   for ( hash = 0; hash < MAX_KEY_HASH; hash++ )
@@ -29,8 +27,8 @@ void do_mfind( Character *ch, char *argument )
       if ( fAll || NiftyIsName( arg, pMobIndex->Name ) )
 	{
 	  nMatch++;
-   ch->Echo("[%5d] %s\r\n",
-			pMobIndex->Vnum, Capitalize( pMobIndex->ShortDescr ) );
+          ch->Echo("[%5d] %s\r\n",
+                   pMobIndex->Vnum, Capitalize( pMobIndex->ShortDescr ).c_str() );
 	}
 
   if ( nMatch )

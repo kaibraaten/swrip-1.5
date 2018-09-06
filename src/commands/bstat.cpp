@@ -1,15 +1,13 @@
 #include "mud.hpp"
 #include "board.hpp"
 #include "character.hpp"
+#include "log.hpp"
 
-void do_bstat( Character *ch, char *argument )
+void do_bstat( Character *ch, std::string arg )
 {
   Board *board = NULL;
-  char arg[MAX_INPUT_LENGTH];
 
-  argument = OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
       ch->Echo( "Usage: bstat <board filename>\r\n" );
       return;
@@ -23,13 +21,29 @@ void do_bstat( Character *ch, char *argument )
       return;
     }
 
-  ch->Echo( "%-12s Vnum: %5d Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %d Type: %d\r\n",
-            board->Name,   board->BoardObject,
+  const char *boardType = nullptr;
+
+      if(board->Type == BOARD_NOTE)
+        {
+          boardType = "Note";
+        }
+      else if(board->Type == BOARD_MAIL)
+        {
+          boardType = "Mail";
+        }
+      else
+        {
+          Log->Bug("%s: Board %s/%d has invalid type %d",
+                   __FUNCTION__, board->Name.c_str(), board->BoardObject, board->Type);
+          boardType = "*** Invalid ***";
+        }
+  
+  ch->Echo( "%-12s Vnum: %5d Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %d Type: %s\r\n",
+            board->Name.c_str(),   board->BoardObject,
             board->MinReadLevel,      board->MinPostLevel,
             board->MinRemoveLevel, board->MaxPosts,
-            board->Notes().size(), board->Type );
+            board->Notes().size(), boardType );
 
   ch->Echo( "Read_group: %-15s Post_group: %-15s \r\nExtra_readers: %-10s\r\n",
-            board->ReadGroup, board->PostGroup, board->ExtraReaders );
+            board->ReadGroup.c_str(), board->PostGroup.c_str(), board->ExtraReaders.c_str() );
 }
-
