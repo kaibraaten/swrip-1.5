@@ -25,8 +25,8 @@
 
 #include <utility/utility.hpp>
 
-typedef int ch_ret;
-typedef int obj_ret;
+using ch_ret = int;
+using obj_ret = int;
 
 class Affect;
 class Alias;
@@ -90,35 +90,29 @@ class MPROG_DATA;
 /*
  * Function types.
  */
-typedef void CmdFun( Character *ch, std::string argument );
-typedef bool SpecFun( Character *ch );
-typedef ch_ret SpellFun( int sn, int level, Character *ch, void *vo );
+using CmdFun = void( Character *ch, std::string argument );
+using SpecFun = bool( Character *ch );
+using SpellFun = ch_ret( int sn, int level, Character *ch, void *vo );
 
-typedef long vnum_t;
-typedef int LogType;
-typedef int ReturnType;
-typedef int SunPosition;
-typedef int SkyCondition;
-typedef int ConnectionType;
-typedef int CharacterSubState;
-typedef int ClanType;
-typedef int ShipType;
-typedef int ShipState;
-typedef int MissileState;
-typedef int ShipClass;
-typedef int MissileType;
-typedef int SpaceobjectType;
-typedef int SexType;
-typedef int TrapType;
-typedef int ItemTypes;
-typedef int ApplyType;
-typedef int DirectionType;
-typedef int SectorType;
-typedef int WearLocation;
-typedef int BoardType;
-typedef int PositionType;
-typedef int SkillTargetType;
-typedef int SkillType;
+using vnum_t = long;
+using LogType = int;
+
+using CharacterSubState = int;
+using ClanType = int;
+using ShipType = int;
+using ShipState = int;
+using MissileState = int;
+using ShipClass = int;
+using MissileType = int;
+using SpaceobjectType = int;
+using SexType = int;
+using ItemTypes = int;
+using DirectionType = int;
+using SectorType = int;
+using WearLocation = int;
+using PositionType = int;
+using SkillTargetType = int;
+using SkillType = int;
 
 #define DECLARE_CMD_FUN( fun )    extern "C" { CmdFun    fun; } CmdFun fun##_mangled
 #define DECLARE_SPEC_FUN( fun )  extern "C" { SpecFun  fun; } SpecFun fun##_mangled

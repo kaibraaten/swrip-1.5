@@ -32,8 +32,11 @@
 #ifndef _SWRIP_IMC2_HPP_
 #define _SWRIP_IMC2_HPP_
 
-typedef struct imc_siteinfo SiteInfo;  /* The given mud :) */
-typedef struct imcchar_data IMC_CHARDATA; /* Player flags */
+struct imc_siteinfo;
+struct imcchar_data;
+
+using SiteInfo = imc_siteinfo;      /* The given mud :) */
+using IMC_CHARDATA = imcchar_data;  /* Player flags     */
 
 extern SiteInfo *this_imcmud;
 
