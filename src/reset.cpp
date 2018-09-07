@@ -45,6 +45,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
+#include "exit.hpp"
 
 static bool IsRoomReset( const Reset *pReset, const Room *aRoom, const Area *pArea );
 static void AddObjectReset( Area *pArea, char cm, const Object *obj, int v2, int v3 );

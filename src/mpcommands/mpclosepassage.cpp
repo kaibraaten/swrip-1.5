@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "exit.hpp"
 
 /*
  * Syntax mp_close_passage x y

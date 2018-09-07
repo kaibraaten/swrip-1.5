@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "exit.hpp"
 
 /*
  * Syntax mp_open_passage x y z

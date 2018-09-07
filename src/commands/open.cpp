@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "exit.hpp"
 
 void do_open( Character *ch, std::string argument )
 {

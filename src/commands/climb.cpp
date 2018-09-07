@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "exit.hpp"
 
 void do_climb( Character *ch, std::string argument )
 {

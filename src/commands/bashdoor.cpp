@@ -3,6 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "exit.hpp"
 
 void do_bashdoor( Character *ch, std::string arg )
 {

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
+#include "exit.hpp"
 
 /* Prints the argument to all the rooms around the mobile */
 void do_mpasound( Character *ch, std::string argument )

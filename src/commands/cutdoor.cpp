@@ -4,6 +4,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "exit.hpp"
 
 void do_cutdoor( Character *ch, std::string arg )
 {

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
+#include "exit.hpp"
 
 void do_drag( Character *ch, std::string argument )
 {

@@ -39,6 +39,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "exit.hpp"
 
 ShipRepository *Ships = nullptr;
 

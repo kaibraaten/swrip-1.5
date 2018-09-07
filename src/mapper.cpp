@@ -19,11 +19,12 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "exit.hpp"
 
 /* Size of the map and depth of recursion to undertake */
 #define MAPX     10

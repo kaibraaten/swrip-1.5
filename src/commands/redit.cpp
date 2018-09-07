@@ -7,6 +7,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "exit.hpp"
 
 void do_redit( Character *ch, std::string argument )
 {

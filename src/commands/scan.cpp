@@ -3,6 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "exit.hpp"
 
 void show_char_to_char( const std::list<Character*> &list, Character *ch );
 

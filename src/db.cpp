@@ -54,6 +54,7 @@
 #include "protomob.hpp"
 #include "descriptor.hpp"
 #include "systemdata.hpp"
+#include "exit.hpp"
 
 /*
  * Globals.

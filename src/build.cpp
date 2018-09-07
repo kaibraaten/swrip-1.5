@@ -36,6 +36,7 @@
 #include "protoobject.hpp"
 #include "protomob.hpp"
 #include "systemdata.hpp"
+#include "exit.hpp"
 
 bool CanModifyRoom( const Character *ch, const Room *room )
 {

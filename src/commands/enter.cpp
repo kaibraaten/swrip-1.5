@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "exit.hpp"
 
 void do_enter( Character *ch, std::string argument )
 {

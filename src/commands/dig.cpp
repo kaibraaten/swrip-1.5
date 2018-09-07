@@ -6,6 +6,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "exit.hpp"
 
 void do_dig( Character *ch, std::string arg )
 {
