@@ -157,36 +157,6 @@ public:
 extern bool mud_down;
 extern bool fBootDb;
 
-/* race dedicated stuff */
-class Race
-{
-public:
-  const char *Name;
-  int Affected = 0;               /* Default affect bitvectors    */
-
-  struct
-  {
-    short ModStr = 0;               /* Str bonus/penalty            */
-    short ModDex = 0;               /* Dex      "                   */
-    short ModWis = 0;               /* Wis      "                   */
-    short ModInt = 0;               /* Int      "                   */
-    short ModCon = 0;               /* Con      "                   */
-    short ModCha = 0;               /* Cha      "                   */
-    short ModLck = 0;               /* Lck      "                   */
-    short ModFrc = 0;               /* Frc      "                   */
-  } Stats;
-
-  std::array<int, MAX_ABILITY> AbilityMod;
-
-  short Hit = 0;
-  short Mana = 0;
-  int   Resistant = 0;
-  int   Susceptible = 0;
-  int   ClassRestriction = 0;       /* Flags for illegal classes    */
-  int   Language = 0;               /* Default racial language      */
-  bool AvailableForSelection = false;   /* Race can be selected by players */
-};
-
 class Storeroom
 {
 public:
@@ -292,10 +262,6 @@ public:
 class Exit
 {
 public:
-#if 0
-  Exit *Previous = nullptr;           /* previous exit in linked list */
-  Exit *Next = nullptr;           /* next exit in linked list     */
-#endif
   Exit *ReverseExit = nullptr;          /* Reverse exit pointer         */
   Room *ToRoom = nullptr;        /* Pointer to destination room  */
   std::string Keyword;        /* Keywords for exit or door    */
@@ -398,7 +364,6 @@ extern const std::array<const CharismaBonusType, MAX_STAT + 1> CharismaBonus;
 extern const std::array<const LuckBonusType, MAX_STAT + 1> LuckBonus;
 extern const std::array<const ForceBonusType, MAX_STAT + 1> ForceBonus;
 
-extern const std::array<const Race, MAX_RACE> RaceTable;
 extern const std::array<const LiquidType, LIQ_MAX> LiquidTable;
 
 extern const std::array<const char * const, MAX_ABILITY> AbilityName;

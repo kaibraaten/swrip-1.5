@@ -38,6 +38,7 @@
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 #include "alias.hpp"
+#include "race.hpp"
 
 struct Character::Impl
 {

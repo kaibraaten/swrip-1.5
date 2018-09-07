@@ -51,6 +51,7 @@
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 #include "alias.hpp"
+#include "race.hpp"
 
 /*
  * Increment with every major format change.

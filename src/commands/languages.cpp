@@ -3,6 +3,7 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "race.hpp"
 
 void do_languages( Character *ch, std::string argument )
 {

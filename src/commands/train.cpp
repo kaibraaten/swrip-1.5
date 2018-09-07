@@ -1,7 +1,8 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
+#include "race.hpp"
 
 void do_train( Character *ch, std::string arg )
 {

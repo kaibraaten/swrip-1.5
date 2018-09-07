@@ -31,6 +31,7 @@
 #include "room.hpp"
 #include "descriptor.hpp"
 #include "systemdata.hpp"
+#include "race.hpp"
 
 std::string DrunkSpeech( const std::string &argument, Character *ch )
 {

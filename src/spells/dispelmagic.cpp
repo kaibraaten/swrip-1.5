@@ -1,11 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "race.hpp"
 
 ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
-  int affected_by, cnt;
+  int affected_by = 0;
+  int cnt = 0;
   Skill *skill = GetSkill(sn);
 
   if ( IsBitSet( victim->Immune, RIS_MAGIC ) )

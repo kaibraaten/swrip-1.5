@@ -44,6 +44,7 @@
 #include "protomob.hpp"
 #include "descriptor.hpp"
 #include "systemdata.hpp"
+#include "race.hpp"
 
 /*
  * Local functions.
