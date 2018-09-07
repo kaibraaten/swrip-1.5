@@ -241,8 +241,7 @@ void do_diagnose( Character *ch, std::string argument )
 
   if (!StrCmp(arg1, "xxxobxxx"))
     {
-      Object       *po, *pt = NULL;
-      int            i=0;
+      int i = 0;
 
       ch->Echo("CHAR name=%s \r\n", ch->Name.c_str());
       ch->Echo("   first_carry=%s\r\n",
@@ -257,10 +256,10 @@ void do_diagnose( Character *ch, std::string argument )
         pa->type, pa->duration, pa->Location, pa->modifier, pa->bitvector);
       */
 
-      for (po=FirstObject; po; po=po->Next)
+      for( const Object *po : Objects->Entities() )
 	{
           i++;
-          pt = NULL;
+          const Object *pt = nullptr;
 
           if ( !po->CarriedBy && !po->InObject )
             continue;

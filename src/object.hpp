@@ -3,6 +3,7 @@
 
 #include <array>
 #include <string>
+#include <utility/repository.hpp>
 #include "types.hpp"
 #include "constants.hpp"
 #include "mprog.hpp"
@@ -26,8 +27,6 @@ public:
   void Remove(Object *object);
   const std::list<Object*> &Objects() const;
   
-  Object         *Next = nullptr;
-  Object         *Previous = nullptr;
   Object         *InObject = nullptr;
   Character        *CarriedBy = nullptr;
   ProtoObject   *Prototype = nullptr;
@@ -56,5 +55,17 @@ private:
   struct Impl;
   Impl *pImpl = nullptr;
 };
+
+class ObjectRepository : public Ceris::Repository<Object*>
+{
+public:
+
+protected:
+  ObjectRepository() = default;
+};
+
+extern ObjectRepository *Objects;
+
+ObjectRepository *NewObjectRepository();
 
 #endif

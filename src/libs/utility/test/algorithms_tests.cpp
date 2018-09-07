@@ -168,3 +168,30 @@ TEST_F(AlgorithmsTests, Learning_accumulate)
 
   EXPECT_EQ(expectedSumOfAges, actualSumOfAges);
 }
+
+// Looks like memory leak, but the "person" object
+// is actually freed in the TearDown function.
+TEST_F(AlgorithmsTests, Contains_TrueIfFound)
+{
+  Person *person = new Person();
+  People.push_back(person);
+
+  bool found = Contains(People, person);
+
+  EXPECT_TRUE( found );
+}
+
+// Looks like memory leak, but the "person1" object
+// is actually freed in the TearDown function.
+// "person2" is not, however, so we construct it on the stack.
+TEST_F(AlgorithmsTests, Contains_FalseIfNotFound)
+{
+  Person *person1 = new Person();
+  Person person2;
+  
+  People.push_back(person1);
+
+  bool found = Contains(People, &person2);
+
+  EXPECT_FALSE( found );
+}

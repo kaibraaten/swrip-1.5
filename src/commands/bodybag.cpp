@@ -22,7 +22,7 @@ void do_bodybag( Character *ch, std::string arg )
 
   bool found = false;
 
-  for ( Object *obj = FirstObject; obj; obj = obj->Next )
+  for ( Object *obj : Objects->Entities() )
     {
       if ( obj->InRoom
            && !StrCmp( buf2, obj->ShortDescr )

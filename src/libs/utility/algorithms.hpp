@@ -29,6 +29,13 @@ auto Find(const Container &original, UnaryPredicate pred)
   return i != std::end(original) ? *i : nullptr;
 }
 
+template<typename Container, typename T>
+bool Contains(const Container &container, T element)
+{
+  auto i = find(std::begin(container), std::end(container), element);
+  return i != std::end(container);
+}
+
 template<typename Container, typename UnaryPredicate>
 size_t Count(const Container &container, UnaryPredicate pred)
 {

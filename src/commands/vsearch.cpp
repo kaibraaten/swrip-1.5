@@ -7,8 +7,6 @@
 void do_vsearch( Character *ch, std::string arg )
 {
   bool found = false;
-  Object *obj = nullptr;
-  Object *in_obj = nullptr;
   int obj_counter = 1;
   vnum_t argi = INVALID_VNUM;
 
@@ -27,13 +25,14 @@ void do_vsearch( Character *ch, std::string arg )
       return;
     }
 
-  for ( obj = FirstObject; obj != NULL; obj = obj->Next )
+  for( const Object *obj : Objects->Entities() )
     {
       if ( !CanSeeObject( ch, obj ) || !( argi == obj->Prototype->Vnum ))
         continue;
 
       found = true;
-
+      const Object *in_obj = nullptr;
+      
       for ( in_obj = obj; in_obj->InObject != NULL;
             in_obj = in_obj->InObject );
 

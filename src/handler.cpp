@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <deque>
 #include <cstring>
 #include <cassert>
 #include <utility/algorithms.hpp>
@@ -39,7 +40,6 @@
 #include "exit.hpp"
 
 extern Character *gch_prev;
-extern Object *gobj_prev;
 
 Character *cur_char = NULL;
 Room *cur_room = NULL;
@@ -50,6 +50,8 @@ int cur_obj = 0;
 int cur_obj_serial = 0;
 bool cur_obj_extracted = false;
 obj_ret global_objcode = rNONE;
+
+static std::deque<Object*> ExtractedObjectQueue;
 
 static Object *GroupObject( Object *obj1, Object *obj2 );
 
@@ -1150,10 +1152,8 @@ void ExtractObject( Object *obj )
       obj->Remove(ed);
     }
     
-  if ( obj == gobj_prev )
-    gobj_prev = obj->Previous;
-
-  UNLINK( obj, FirstObject, LastObject, Next, Previous );
+  Objects->Remove(obj);
+  
   /* shove onto extraction queue */
   QueueExtractedObject( obj );
 
@@ -1437,13 +1437,11 @@ Character *GetCharacterAnywhere( const Character *ch, std::string argument )
  */
 Object *GetInstanceOfObject( const ProtoObject *pObjIndex )
 {
-  Object *obj;
-
-  for ( obj = LastObject; obj; obj = obj->Previous )
-    if ( obj->Prototype == pObjIndex )
-      return obj;
-
-  return NULL;
+  return Find( Reverse(Objects->Entities()),
+               [pObjIndex](const auto obj)
+               {
+                 return obj->Prototype == pObjIndex;
+               });
 }
 
 /*
@@ -1576,13 +1574,29 @@ Object *GetObjectAnywhere( const Character *ch, std::string argument )
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     vnum = std::stoi( arg );
 
-  count  = 0;
+  count = 0;
 
-  for ( obj = FirstObject; obj; obj = obj->Next )
-    if ( CanSeeObject( ch, obj ) && (NiftyIsName( arg, obj->Name )
-                                    ||   vnum == obj->Prototype->Vnum) )
-      if ( (count += obj->Count) >= number )
-        return obj;
+  obj = Find( Objects->Entities(),
+              [&count, ch, arg, vnum, number](const auto o)
+              {
+                if ( CanSeeObject( ch, o ) && (NiftyIsName( arg, o->Name )
+                                               || vnum == o->Prototype->Vnum) )
+                  {
+                    count += o->Count;
+                    
+                    if ( count >= number )
+                      {
+                        return true;
+                      }
+                  }
+
+                return false;
+              });
+
+  if( obj != nullptr )
+    {
+      return obj;
+    }
 
   /* bail out if looking for a vnum */
   if ( vnum != INVALID_VNUM )
@@ -1594,12 +1608,23 @@ Object *GetObjectAnywhere( const Character *ch, std::string argument )
   */
   count  = 0;
 
-  for ( obj = FirstObject; obj; obj = obj->Next )
-    if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
-      if ( (count += obj->Count) >= number )
-        return obj;
+  obj = Find( Objects->Entities(),
+              [&count, ch, arg, number](const auto o)
+              {
+                if ( CanSeeObject( ch, o ) && NiftyIsNamePrefix( arg, o->Name ) )
+                  {
+                    count += o->Count;
+                    
+                    if ( count >= number )
+                      {
+                        return true;
+                      }
+                  }
 
-  return NULL;
+                return false;
+              });
+
+  return obj;
 }
 
 /*
@@ -2216,19 +2241,15 @@ void SetCurrentGlobalObject( Object *obj )
  */
 bool IsObjectExtracted( const Object *obj )
 {
-  Object *cod;
-
-  if ( !obj )
-    return true;
+  assert( obj != nullptr );
 
   if ( obj->Serial == cur_obj
-       &&   cur_obj_extracted )
-    return true;
-
-  for (cod = extracted_obj_queue; cod; cod = cod->Next )
-    if ( obj == cod )
+       && cur_obj_extracted )
+    {
       return true;
-  return false;
+    }
+  
+  return Contains( ExtractedObjectQueue, obj );
 }
 
 /*
@@ -2236,10 +2257,8 @@ bool IsObjectExtracted( const Object *obj )
  */
 void QueueExtractedObject( Object *obj )
 {
-
   ++cur_qobjs;
-  obj->Next = extracted_obj_queue;
-  extracted_obj_queue = obj;
+  ExtractedObjectQueue.push_back(obj);
 }
 
 /*
@@ -2247,12 +2266,10 @@ void QueueExtractedObject( Object *obj )
  */
 void CleanObjectQueue()
 {
-  Object *obj;
-
-  while ( extracted_obj_queue )
+  while ( !ExtractedObjectQueue.empty() )
     {
-      obj = extracted_obj_queue;
-      extracted_obj_queue = extracted_obj_queue->Next;
+      Object *obj = ExtractedObjectQueue.front();
+      ExtractedObjectQueue.pop_front();
       delete obj;
       --cur_qobjs;
     }
@@ -2469,7 +2486,7 @@ Object *CopyObject( const Object *obj )
   ++physicalobjects;
   cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
   clone->Serial = clone->Prototype->Serial = cur_obj_serial;
-  LINK( clone, FirstObject, LastObject, Next, Previous );
+  Objects->Add(clone);
   return clone;
 }
 

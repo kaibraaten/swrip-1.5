@@ -1,5 +1,6 @@
 #include <cstring>
 #include <cctype>
+#include <utility/algorithms.hpp>
 #include "area.hpp"
 #include "mud.hpp"
 #include "shop.hpp"
@@ -1556,14 +1557,21 @@ void CloseArea( Area *pArea )
       if ( ech->InRoom && ech->InRoom->Area == pArea )
         do_recall( ech, "" );
     }
-  for ( Object *eobj = FirstObject, *eobj_next = nullptr; eobj; eobj = eobj_next )
+
+  std::list<Object*> objectsToExtract = Filter(Objects->Entities(),
+                                               [pArea](const auto obj)
+                                               {
+                                                 return urange(pArea->VnumRanges.Object.First,
+                                                               obj->Prototype->Vnum,
+                                                               pArea->VnumRanges.Object.Last)
+                                                   == obj->Prototype->Vnum
+                                                   || (obj->InRoom != nullptr
+                                                       && obj->InRoom->Area == pArea);
+                                               });
+
+  for( Object *obj : objectsToExtract )
     {
-      eobj_next = eobj->Next;
-      /* if obj is in area, or part of area. */
-      if ( urange(pArea->VnumRanges.Object.First, eobj->Prototype->Vnum,
-                  pArea->VnumRanges.Object.Last) == eobj->Prototype->Vnum ||
-           (eobj->InRoom && eobj->InRoom->Area == pArea) )
-        ExtractObject( eobj );
+      ExtractObject( obj );
     }
 
   for ( icnt = 0; icnt < MAX_KEY_HASH; icnt++ )
@@ -1607,9 +1615,9 @@ void CloseArea( Area *pArea )
             {
               Log->Bug( "CloseArea: room with contents #%d", rid->Vnum );
 
-              std::list<Object*> objectsToExtract(rid->Objects());
+              std::list<Object*> objectsInRoom(rid->Objects());
 
-              for(Object *eobj : objectsToExtract)
+              for(Object *eobj : objectsInRoom)
                 {
                   ExtractObject( eobj );
                 }
