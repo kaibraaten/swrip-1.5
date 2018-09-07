@@ -3,6 +3,7 @@
 #include "pcdata.hpp"
 #include "playerrepository.hpp"
 #include "descriptor.hpp"
+#include "race.hpp"
 
 static Character *get_waiting_desc( const Character *ch, const std::string &name );
 

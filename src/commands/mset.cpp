@@ -8,6 +8,7 @@
 #include "log.hpp"
 #include "protomob.hpp"
 #include "systemdata.hpp"
+#include "race.hpp"
 
 void do_mset( Character *ch, std::string argument )
 {

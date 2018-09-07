@@ -23,6 +23,7 @@
 #include <cassert>
 #include "mud.hpp"
 #include "skill.hpp"
+#include "race.hpp"
 
 static int GetInArray(const std::string &name, const char * const * array,
                       size_t sz,

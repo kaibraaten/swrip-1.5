@@ -29,6 +29,7 @@
 #include "log.hpp"
 #include "object.hpp"
 #include "systemdata.hpp"
+#include "race.hpp"
 
 static std::string SeeHalucinatedObject( int ms, bool fShort );
 

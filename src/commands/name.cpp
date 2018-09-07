@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "race.hpp"
 
 void do_name( Character *ch, std::string argument )
 {

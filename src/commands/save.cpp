@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "race.hpp"
 
 void do_save( Character *ch, std::string argument )
 {

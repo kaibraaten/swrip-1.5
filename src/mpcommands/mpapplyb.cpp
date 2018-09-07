@@ -3,6 +3,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "descriptor.hpp"
+#include "race.hpp"
 
 void do_mpapplyb( Character *ch, std::string argument )
 {

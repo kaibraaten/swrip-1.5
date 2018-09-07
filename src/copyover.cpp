@@ -40,6 +40,7 @@
 #include "log.hpp"
 #include "playerrepository.hpp"
 #include "systemdata.hpp"
+#include "race.hpp"
 
 #ifdef _WIN32
 #include <process.h>

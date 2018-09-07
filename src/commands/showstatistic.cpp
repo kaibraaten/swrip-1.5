@@ -4,6 +4,7 @@
 #include "pcdata.hpp"
 #include "descriptor.hpp"
 #include "systemdata.hpp"
+#include "race.hpp"
 
 void do_showstatistic( Character *ch, std::string argument )
 {
