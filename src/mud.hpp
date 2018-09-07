@@ -425,12 +425,9 @@ extern obj_ret          global_objcode;
 
 extern Character       *FirstCharacter;
 extern Character       *LastCharacter;
-extern Object          *FirstObject;
-extern Object          *LastObject;
 
 extern TeleportData    *FirstTeleport;
 extern TeleportData    *LastTeleport;
-extern Object          *extracted_obj_queue;
 extern ExtractedCharacter *extracted_char_queue;
 extern Object          *save_equipment[MAX_WEAR][MAX_LAYERS];
 extern Character       *quitting_char;

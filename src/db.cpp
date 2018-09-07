@@ -74,15 +74,12 @@ RepairShop *LastRepairShop = NULL;
 TeleportData *FirstTeleport = NULL;
 TeleportData *LastTeleport = NULL;
 
-Object *extracted_obj_queue = NULL;
 ExtractedCharacter *extracted_char_queue = NULL;
 
 Character *FirstCharacter = NULL;
 Character *LastCharacter = NULL;
 char log_buf[2*MAX_INPUT_LENGTH];
 
-Object *FirstObject = NULL;
-Object *LastObject = NULL;
 TimeInfo time_info;
 Weather weather_info;
 
@@ -938,8 +935,7 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
 Object *CreateObject( ProtoObject *proto, int level )
 {
   Object *obj = AllocateObject( proto, level );
-
-  LINK( obj, FirstObject, LastObject, Next, Previous );
+  Objects->Add(obj);
   ++proto->Count;
   ++numobjsloaded;
   ++physicalobjects;
@@ -1749,4 +1745,5 @@ void AllocateRepositories(void)
   Shops = NewShopRepository();
   RepairShops = NewRepairShopRepository();
   Descriptors = NewDescriptorRepository();
+  Objects = NewObjectRepository();
 }

@@ -2085,7 +2085,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
                   if ( obj->ActionDescription.empty() )
                     obj->ActionDescription = obj->Prototype->ActionDescription;
 
-                  LINK(obj, FirstObject, LastObject, Next, Previous );
+                  Objects->Add(obj);
                   obj->Prototype->Count += obj->Count;
 
                   if ( !obj->Serial )
@@ -2319,7 +2319,6 @@ void SetAlarm( long seconds )
 
 void WriteCorpses( const Character *ch, std::string name )
 {
-  const Object *corpse = NULL;
   FILE *fp = NULL;
 
   /* Name and ch support so that we dont have to have a char to save their
@@ -2336,7 +2335,7 @@ void WriteCorpses( const Character *ch, std::string name )
     }
 
   /* Go by vnum, less chance of screwups. -- Altrag */
-  for ( corpse = FirstObject; corpse; corpse = corpse->Next )
+  for( const Object *corpse : Objects->Entities() )
     {
       if ( corpse->Prototype->Vnum == OBJ_VNUM_CORPSE_PC
 	   && corpse->InRoom != NULL && corpse->Value[OVAL_CORPSE_SKINNED] != 1

@@ -80,8 +80,6 @@ static int GetMaxForceLevel( const Character *ch );
  */
 
 Character *gch_prev = NULL;
-Object *gobj_prev = NULL;
-
 Character *timechar = NULL;
 
 const char * const corpse_descs[] =
@@ -1765,16 +1763,15 @@ static void CharacterUpdate( void )
  */
 static void ObjectUpdate( void )
 {
-  Object *obj = NULL;
   Object *wield = NULL;
   short AT_TEMP = 0;
 
-  for ( obj = LastObject; obj; obj = gobj_prev )
+  std::list<Object*> copyOfObjectList( Objects->Entities() );
+
+  for( Object *obj : copyOfObjectList )
     {
       Character *rch = NULL;
       const char *message = NULL;
-
-      gobj_prev = obj->Previous;
 
       SetCurrentGlobalObject( obj );
 

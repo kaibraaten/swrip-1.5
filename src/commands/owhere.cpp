@@ -12,7 +12,6 @@ void do_owhere( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH], field[MAX_INPUT_LENGTH];
   std::string arg;
-  Object *obj = nullptr, *outer_obj = nullptr;
   bool found = false;
   int icnt = 0;
   vnum_t vnum = INVALID_VNUM;
@@ -30,7 +29,7 @@ void do_owhere( Character *ch, std::string argument )
   if ( IsNumber(arg) )
     vnum = std::stoi(arg);
 
-  for ( obj = FirstObject; obj; obj = obj->Next )
+  for( const Object *obj : Objects->Entities() )
     {
       if ( vnum )
         {
@@ -46,7 +45,7 @@ void do_owhere( Character *ch, std::string argument )
         ch->Echo(heading);
 
       found = true;
-      outer_obj = obj;
+      const Object *outer_obj = obj;
 
       while ( outer_obj->InObject )
         outer_obj = outer_obj->InObject;
