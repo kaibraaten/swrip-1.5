@@ -29,6 +29,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "exit.hpp"
 
 /*
  * Function to handle the state changing of a triggerobject (lever)  -Thoric

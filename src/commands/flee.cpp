@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "room.hpp"
+#include "exit.hpp"
 
 void do_flee( Character *ch, std::string argument )
 {

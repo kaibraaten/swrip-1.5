@@ -4,6 +4,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "object.hpp"
+#include "exit.hpp"
 
 struct Room::Impl
 {

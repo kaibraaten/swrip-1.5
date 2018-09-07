@@ -6,6 +6,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "descriptor.hpp"
+#include "exit.hpp"
 
 void do_pick( Character *ch, std::string arg )
 {

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "exit.hpp"
 
 void do_close( Character *ch, std::string argument )
 {

@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "room.hpp"
+#include "exit.hpp"
 
 void do_buzz(Character *ch, std::string arg)
 {

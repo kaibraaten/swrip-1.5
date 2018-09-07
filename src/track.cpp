@@ -29,6 +29,7 @@
 #include "character.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "exit.hpp"
 
 #define TRACK_THROUGH_DOORS
 

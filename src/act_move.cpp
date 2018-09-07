@@ -31,6 +31,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "exit.hpp"
 
 static Room *vroom_hash[64];
 

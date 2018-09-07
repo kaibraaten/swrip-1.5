@@ -16,6 +16,7 @@
 #include "protoobject.hpp"
 #include "descriptor.hpp"
 #include "systemdata.hpp"
+#include "exit.hpp"
 
 struct UserData
 {

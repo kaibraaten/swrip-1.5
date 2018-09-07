@@ -36,6 +36,7 @@
 #include "protoobject.hpp"
 #include "protomob.hpp"
 #include "descriptor.hpp"
+#include "exit.hpp"
 
 extern Character *gch_prev;
 extern Object *gobj_prev;

@@ -14,6 +14,7 @@
 #include "protomob.hpp"
 #include "systemdata.hpp"
 #include "race.hpp"
+#include "exit.hpp"
 
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];

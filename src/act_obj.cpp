@@ -25,6 +25,7 @@
 #include "clan.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "exit.hpp"
 
 /*
  * how resistant an object is to damage                         -Thoric
