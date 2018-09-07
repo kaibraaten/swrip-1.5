@@ -26,8 +26,11 @@
 #define GR_NUM_FIELDS         12
 #define GO_NUM_FIELDS         24
 
-typedef struct gr_struct GR_STRUCT;
-typedef struct go_struct GO_STRUCT;
+struct gr_struct;
+struct go_struct;
+
+using GR_STRUCT = gr_struct;
+using GO_STRUCT = go_struct;
 
 struct field_struct         /* field table - info re each field          */
 {

@@ -55,7 +55,7 @@ enum
     SHUTTLE_HYPERSPACE
   };
 
-typedef int ShuttleClass;
+using ShuttleClass = int;
 
 class Shuttle
 {

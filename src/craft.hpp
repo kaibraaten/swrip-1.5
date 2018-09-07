@@ -31,12 +31,6 @@
 #define CRAFTFLAG_NEED_WORKSHOP  BV02
 #define CRAFTFLAG_NEED_REFINERY  BV03
 
-/*
- * Moved to types.h for now.
-struct CraftingSession;
-typedef struct CraftingSession CraftingSession;
-*/
-
 class CraftRecipe;
 class CraftingMaterial;
 class SetObjectStatsEventArgs;
