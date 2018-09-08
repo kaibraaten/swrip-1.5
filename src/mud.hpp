@@ -388,6 +388,7 @@ extern const std::array<const char * const, MAX_POSITION> PositionName;
 extern const std::array<const char * const, MAX_LOG> CmdLogName;
 extern const std::array<const char * const, MAX_SHIP_TYPE> ShipTypes;
 extern const std::array<const char * const, MAX_SHIP_CLASS> ShipClasses;
+extern const std::array<const char * const, MAX_BIT> ChannelNames;
 
 /*
  * Global variables.

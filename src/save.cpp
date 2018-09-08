@@ -192,7 +192,7 @@ void ReEquipCharacter( Character *ch )
 void SaveCharacter( Character *ch )
 {
   PlayerCharacters->Save(ch);
-  return;
+  //return;
   
   assert(ch != nullptr);
   char strsave[MAX_INPUT_LENGTH];
@@ -444,7 +444,6 @@ static void WriteCharacter( const Character *ch, FILE *fp )
   fprintf( fp, "Clones         %d\n",   ch->PCData->Clones              );
   fprintf( fp, "Salary_time         %ld\n",     ch->PCData->ClanInfo.SalaryDate );
   fprintf( fp, "Salary         %d\n",   ch->PCData->ClanInfo.Salary );
-  fprintf( fp, "Clones         %d\n",   ch->PCData->Clones              );
   fprintf( fp, "Jailvnum         %ld\n", ch->PCData->JailVnum   );
 
   if ( ch->Flags )
@@ -494,11 +493,6 @@ static void WriteCharacter( const Character *ch, FILE *fp )
   if ( ch->Susceptible )
     {
       fprintf( fp, "Susceptible  %d\n",   ch->Susceptible         );
-    }
-
-  if ( ch->PCData && ch->PCData->OutcastTime )
-    {
-      fprintf( fp, "Outcast_time %ld\n",ch->PCData->OutcastTime );
     }
 
   if ( ch->PCData && ch->PCData->RestoreTime )
@@ -1609,8 +1603,6 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'O':
-          KEY( "Outcast_time", ch->PCData->OutcastTime, ReadInt( fp,Log, fBootDb ) );
-
           if ( !StrCmp( word, "ObjRange" ) )
             {
               ch->PCData->Build.VnumRanges.Object.First = ReadInt( fp,Log, fBootDb );

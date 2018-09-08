@@ -3477,3 +3477,45 @@ int GetShipFlag(const std::string &flag)
   return GetInArray( flag, ShipFlags, StrCmp );
 }
 
+const std::array<const char * const, MAX_BIT> ChannelNames =
+  {
+   "Auction",
+   "Chat",
+   "_02",
+   "ImmTalk",
+   "Music",
+   "Ask",
+   "Shout",
+   "Yell",
+   "Monitor",
+   "Log",
+   "i104",
+   "ClanTalk",
+   "Build",
+   "i105",
+   "AvTalk",
+   "Pray",
+   "_16",
+   "Guild",
+   "Comm",
+   "Tells",
+   "Order",
+   "Newbie",
+   "WarTalk",
+   "OOC",
+   "ShipTalk",
+   "SystemTalk",
+   "SpaceTalk",
+   "i103",
+   "Arena",
+   "AllClanTalk",
+   "_30",
+   "_31"
+  };
+
+#if 0
+int GetChannelBit(const std::string &name)
+{
+  return GetInArray( name, ChannelNames, StrCmp );
+}
+#endif

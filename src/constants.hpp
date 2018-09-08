@@ -1835,7 +1835,7 @@ enum
 #define CHANNEL_105       BV13
 #define CHANNEL_AVTALK    BV14
 #define CHANNEL_PRAY      BV15
-#define CHANNEL_COUNCIL   BV16
+
 #define CHANNEL_GUILD     BV17
 #define CHANNEL_COMM      BV18
 #define CHANNEL_TELLS     BV19
