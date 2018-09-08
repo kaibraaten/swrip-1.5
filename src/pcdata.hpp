@@ -49,7 +49,6 @@ public:
   int MDeaths = 0;        /* Number of deaths due to mobs       */
   int IllegalPk = 0;     /* Number of illegal pk's committed   */
 
-  long OutcastTime = 0;     /* The time at which the char was outcast */
   long RestoreTime = 0;     /* The last time the char did a restore all */
 
   struct

@@ -372,3 +372,20 @@ void LuaLoadCurrentAndMax( lua_State *L, const std::string &key, int *current, i
   lua_pop( L, 1 );
 }
 
+void LuaPushAffects( lua_State *L, const std::list<Affect*> &affects,
+                     const std::string &key )
+{
+
+}
+
+void LuaPushObjects( lua_State *L, const std::list<Object*> &objects,
+                     const std::string &key )
+{
+
+}
+
+void LuaPushMobiles( lua_State *L, const std::list<Character*> &mobiles,
+                     const std::string &key )
+{
+
+}

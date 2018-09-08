@@ -361,7 +361,7 @@ void UpdateClanMember( const Character *ch )
                                   return StrCmp(m->Name, name) == 0;
                                 });
 
-      if( member != nullptr )
+      if( member == nullptr )
 	{
           member = new ClanMember();
 	  member->Name = ch->Name;

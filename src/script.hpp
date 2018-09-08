@@ -13,6 +13,7 @@ extern "C" {
 }
 #endif
 
+#include <list>
 #include <string>
 #include <array>
 #include <utility/vector3.hpp>
@@ -40,6 +41,12 @@ void LuaPushFlags( lua_State *L, unsigned long flags,
 unsigned int LuaLoadFlags( lua_State *L, const std::string &key );
 void LuaPushSmaugAffects( lua_State *L, const SmaugAffect *affectList );
 SmaugAffect *LuaLoadSmaugAffects( lua_State *L );
+void LuaPushAffects( lua_State *L, const std::list<Affect*> &affects,
+                     const std::string &key = "Affects" );
+void LuaPushObjects( lua_State *L, const std::list<Object*> &objects,
+                     const std::string &key = "Objects" );
+void LuaPushMobiles( lua_State *L, const std::list<Character*> &mobiles,
+                     const std::string &key = "Mobiles" );
 void LuaPushVector3( lua_State *L, const Vector3 *v, const std::string &key );
 void LuaLoadVector3( lua_State *L, Vector3 *vec, const std::string &key );
 void LuaPushCurrentAndMax( lua_State *L, const std::string &key, int current, int max );
