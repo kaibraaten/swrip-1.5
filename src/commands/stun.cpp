@@ -30,7 +30,7 @@ void do_stun( Character *ch, std::string argument )
       return;
     }
 
-  if ( ch->Move < 16 )
+  if ( ch->Fatigue.Current < 16 )
     {
       SetCharacterColor( AT_SKILL, ch );
       ch->Echo("You are far too tired to do that.\r\n");
@@ -61,7 +61,7 @@ void do_stun( Character *ch, std::string argument )
     {
       LearnFromSuccess( ch, gsn_stun );
       /*    DO *NOT* CHANGE!    -Thoric    */
-      ch->Move -= 15;
+      ch->Fatigue.Current -= 15;
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       SetWaitState( victim, PULSE_VIOLENCE );
       Act( AT_SKILL, "$N smashes into you, leaving you stunned!", victim, NULL, ch, TO_CHAR );
@@ -82,7 +82,7 @@ void do_stun( Character *ch, std::string argument )
   else
     {
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
-      ch->Move -= 5;
+      ch->Fatigue.Current -= 5;
       LearnFromFailure( ch, gsn_stun );
       Act( AT_SKILL, "$N charges at you screaming, but you dodge out of the way.", victim, NULL, ch, TO_CHAR );
       Act( AT_SKILL, "Your attempt to stun $N leaves you racing past $E as $e laughs.", ch, NULL, victim, TO_CHAR );

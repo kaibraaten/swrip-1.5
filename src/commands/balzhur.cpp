@@ -51,15 +51,15 @@ void do_balzhur( Character *ch, std::string arg )
       SetAbilityLevel( victim, ability, 1 );
     }
 
-  victim->MaxHit  = 500;
-  victim->MaxMana = 0;
-  victim->MaxMove = 1000;
+  victim->HitPoints.Max  = 500;
+  victim->Mana.Max = 0;
+  victim->Fatigue.Max = 1000;
 
   victim->PCData->Learned.fill(0);
 
-  victim->Hit      = victim->MaxHit;
-  victim->Mana     = victim->MaxMana;
-  victim->Move     = victim->MaxMove;
+  victim->HitPoints.Current = victim->HitPoints.Max;
+  victim->Mana.Current = victim->Mana.Max;
+  victim->Fatigue.Current = victim->Fatigue.Max;
 
   char victimImmortalFilename[1024];
   

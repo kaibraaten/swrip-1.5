@@ -36,10 +36,10 @@ void do_group( Character *ch, std::string arg )
                           gch->TopLevel,
                           IsNpc(gch) ? "Mob" : RaceTable[gch->Race].Name,
                           Capitalize( PERS(gch, ch) ).c_str(),
-                          gch->Hit,
-                          gch->MaxHit,
-                          gch->Move,
-                          gch->MaxMove );
+                          gch->HitPoints.Current,
+                          gch->HitPoints.Max,
+                          gch->Fatigue.Current,
+                          gch->Fatigue.Max );
             }
         }
 

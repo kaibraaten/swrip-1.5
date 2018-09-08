@@ -595,7 +595,7 @@ static bool MobSnipe( Character *ch, Character *victim )
 
       StopFighting( ch , true );
 
-      if ( victim && !CharacterDiedRecently(victim) && victim->Hit < 0 )
+      if ( victim && !CharacterDiedRecently(victim) && victim->HitPoints.Current < 0 )
         {
           StopHunting( ch );
           StopHating( ch );

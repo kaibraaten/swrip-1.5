@@ -42,10 +42,10 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
   mob->TopLevel   = umin( lvl, !skill->Dice.empty() ? ParseDice(ch, level, skill->Dice) : mob->TopLevel );
   mob->ArmorClass = Interpolate( mob->TopLevel, 100, -100 );
 
-  mob->MaxHit = mob->TopLevel * 8 + GetRandomNumberFromRange(
+  mob->HitPoints.Max = mob->TopLevel * 8 + GetRandomNumberFromRange(
                                                              mob->TopLevel * mob->TopLevel / 4,
                                                              mob->TopLevel * mob->TopLevel );
-  mob->Hit       = mob->MaxHit;
+  mob->HitPoints.Current = mob->HitPoints.Max;
   mob->Gold      = 0;
   SuccessfulCasting( skill, ch, mob, NULL );
   CharacterToRoom( mob, ch->InRoom );

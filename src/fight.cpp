@@ -558,7 +558,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
       dual_bonus = 0;
     }
 
-  if ( ch->Move < 10 )
+  if ( ch->Fatigue.Current < 10 )
     {
       dual_bonus = -20;
     }
@@ -638,9 +638,9 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
           move = GetCarryEncumbrance( ch, 1 );
         }
 
-      if ( ch->Move != 0 )
+      if ( ch->Fatigue.Current != 0 )
         {
-          ch->Move = umax( 0, ch->Move - move );
+          ch->Fatigue.Current = umax( 0, ch->Fatigue.Current - move );
         }
     }
 
@@ -1716,7 +1716,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
    * Inform the victim of his new state.
    */
 
-  victim->Hit -= dam;
+  victim->HitPoints.Current -= dam;
 
   /*
    * Get experience based on % of damage done                   -Thoric
@@ -1724,16 +1724,17 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
   if ( dam && ch != victim
        &&  !IsNpc(ch) && ch->Fighting && ch->Fighting->Xp )
     {
-      xp_gain = (long) (ComputeXP( ch, victim ) * 0.1 * dam) / victim->MaxHit;
+      xp_gain = (long) (ComputeXP( ch, victim ) * 0.1 * dam) / victim->HitPoints.Max;
       GainXP( ch, COMBAT_ABILITY, xp_gain );
     }
 
   if ( !IsNpc(victim)
        &&   ( victim->TopLevel >= LEVEL_IMMORTAL
               ||     IsBitSet(victim->InRoom->Flags,ROOM_ARENA) )
-       &&   victim->Hit < 1 )
+       &&   victim->HitPoints.Current < 1 )
     {
-      victim->Hit = 1;
+      victim->HitPoints.Current = 1;
+      
       if (IsBitSet(victim->InRoom->Flags, ROOM_ARENA) )
         {
           char buf[MAX_STRING_LENGTH];
@@ -1741,24 +1742,27 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
           CharacterToRoom(victim,GetRoom(victim->ReTran));
           do_look(victim, "auto");
           Act(AT_YELLOW,"$n falls from the sky.", victim, NULL, NULL, TO_ROOM);
-          victim->Hit = victim->MaxHit;
-          victim->Mana = victim->MaxMana;
-          victim->Move = victim->MaxMove;
+          victim->HitPoints.Current = victim->HitPoints.Max;
+          victim->Mana.Current = victim->Mana.Max;
+          victim->Fatigue.Current = victim->Fatigue.Max;
           sprintf(buf,"%s is out of the fight.",victim->Name.c_str());
           ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
           StopFighting(victim, true);
-
         }
     }
 
   if ( IsNpc(victim) && IsBitSet(victim->Flags,ACT_IMMORTAL) )
-    victim->Hit = victim->MaxHit;
-
+    {
+      victim->HitPoints.Current = victim->HitPoints.Max;
+    }
+  
   /* Make sure newbies dont die */
 
-  if (!IsNpc(victim) && !IsAuthed(victim) && victim->Hit < 1)
-    victim->Hit = 1;
-
+  if (!IsNpc(victim) && !IsAuthed(victim) && victim->HitPoints.Current < 1)
+    {
+      victim->HitPoints.Current = 1;
+    }
+  
   if ( dam > 0 && dt > TYPE_HIT
        && !IsAffectedBy( victim, AFF_POISON )
        &&  IsWieldingPoisonedWeapon( ch )
@@ -1779,8 +1783,11 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
   if ( !npcvict
        && GetTrustLevel(victim) >= LEVEL_IMMORTAL
        && GetTrustLevel(ch)     >= LEVEL_IMMORTAL
-       && victim->Hit < 1 )
-    victim->Hit = 1;
+       && victim->HitPoints.Current < 1 )
+    {
+      victim->HitPoints.Current = 1;
+    }
+  
   UpdatePosition( victim );
 
   switch( victim->Position )
@@ -1840,17 +1847,19 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       break;
 
     default:
-      if ( dam > victim->MaxHit / 4 )
+      if ( dam > victim->HitPoints.Max / 4 )
         {
           Act( AT_HURT, "That really did HURT!", victim, 0, 0, TO_CHAR );
+
           if ( NumberBits(3) == 0 )
             WorsenMentalState( ch, 1 );
         }
-      if ( victim->Hit < victim->MaxHit / 4 )
 
+      if ( victim->HitPoints.Current < victim->HitPoints.Max / 4 )
         {
           Act( AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
                victim, 0, 0, TO_CHAR );
+
           if ( NumberBits(2) == 0 )
             WorsenMentalState( ch, 1 );
         }
@@ -1876,7 +1885,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       StopFighting( victim, true );
     }
 
-  if ( victim->Hit <=0 && !IsNpc(victim))
+  if ( victim->HitPoints.Current <=0 && !IsNpc(victim))
     {
       int cnt = 0;
       Object *equippedObject = nullptr;
@@ -2048,7 +2057,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
   if ( npcvict && dam > 0 )
     {
       if ( ( IsBitSet(victim->Flags, ACT_WIMPY) && NumberBits( 1 ) == 0
-             &&   victim->Hit < victim->MaxHit / 2 )
+             &&   victim->HitPoints.Current < victim->HitPoints.Max / 2 )
            ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->Master
                   &&     victim->Master->InRoom != victim->InRoom ) )
         {
@@ -2059,9 +2068,9 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
     }
 
   if ( !npcvict
-       &&   victim->Hit > 0
-       &&   victim->Hit <= victim->Wimpy
-       &&   victim->Wait == 0 )
+       && victim->HitPoints.Current > 0
+       && victim->HitPoints.Current <= victim->Wimpy
+       && victim->Wait == 0 )
     do_flee( victim, "" );
   else
     if ( !npcvict && IsBitSet( victim->Flags, PLR_FLEE ) )
@@ -2202,7 +2211,7 @@ void UpdatePosition( Character *victim )
 {
   assert(victim != nullptr);
 
-  if ( victim->Hit > 0 )
+  if ( victim->HitPoints.Current > 0 )
     {
       if ( victim->Position <= POS_STUNNED )
         {
@@ -2218,13 +2227,13 @@ void UpdatePosition( Character *victim )
     }
 
 #ifdef NODEATH
-  if ( !IsNpc(victim) && victim->Hit <= -500 )
+  if ( !IsNpc(victim) && victim->HitPoints.Current <= -500 )
     {
-      victim->Hit = -250;
+      victim->HitPoints.Current = -250;
     }
 #endif
 
-  if ( IsNpc(victim) || victim->Hit <= -500 )
+  if ( IsNpc(victim) || victim->HitPoints.Current <= -500 )
     {
       if ( victim->Mount )
         {
@@ -2237,11 +2246,11 @@ void UpdatePosition( Character *victim )
       return;
     }
 
-  if ( victim->Hit <= -400 )
+  if ( victim->HitPoints.Current <= -400 )
     {
       victim->Position = POS_MORTAL;
     }
-  else if ( victim->Hit <= -200 )
+  else if ( victim->HitPoints.Current <= -200 )
     {
       victim->Position = POS_INCAP;
     }
@@ -2768,8 +2777,8 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
 
   if ( dam )
     {
-      dampc = ( (dam * 1000) / victim->MaxHit) +
-        ( 50 - ((victim->Hit * 50) / victim->MaxHit) );
+      dampc = ( (dam * 1000) / victim->HitPoints.Max) +
+        ( 50 - ((victim->HitPoints.Current * 50) / victim->HitPoints.Max) );
     }
 
   if ( dam == 0 )

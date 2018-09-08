@@ -115,14 +115,14 @@ Character::Character(ProtoMobile *protoMob)
 
   if(protoMob->HitNoDice != 0)
     {
-      MaxHit = protoMob->HitNoDice * GetRandomNumberFromRange(1, protoMob->HitSizeDice) + protoMob->HitPlus;
+      HitPoints.Max = protoMob->HitNoDice * GetRandomNumberFromRange(1, protoMob->HitSizeDice) + protoMob->HitPlus;
     }
   else
     {
-      MaxHit = TopLevel * 10 + GetRandomNumberFromRange(TopLevel, TopLevel * 10);
+      HitPoints.Max = TopLevel * 10 + GetRandomNumberFromRange(TopLevel, TopLevel * 10);
     }
 
-  Hit = MaxHit;
+  HitPoints.Current = HitPoints.Max;
   Stats.PermStr = protoMob->Stats.PermStr;
   Stats.PermDex = protoMob->Stats.PermDex;
   Stats.PermWis = protoMob->Stats.PermWis;
@@ -266,7 +266,7 @@ int GetXPWorth( const Character *ch )
   int xp = 0;
 
   xp = GetAbilityLevel( ch, COMBAT_ABILITY ) * ch->TopLevel * 50;
-  xp += ch->MaxHit * 2;
+  xp += ch->HitPoints.Max * 2;
   xp -= (ch->ArmorClass - 50) * 2;
   xp += ( ch->BareNumDie * ch->BareSizeDie + GetDamageRoll(ch) ) * 50;
   xp += GetHitRoll(ch) * ch->TopLevel * 10;
@@ -1038,10 +1038,10 @@ void FixCharacterStats( Character *ch )
 
   ch->AffectedBy          = RaceTable[ch->Race].Affected;
   ch->MentalState         = 0;
-  ch->Hit                  = umax( 1, ch->Hit  );
-  ch->Mana                 = umax( 1, ch->Mana );
-  ch->Move                 = umax( 1, ch->Move );
-  ch->ArmorClass                = 100;
+  ch->HitPoints.Current   = umax( 1, ch->HitPoints.Current  );
+  ch->Mana.Current        = umax( 1, ch->Mana.Current );
+  ch->Fatigue.Current     = umax( 1, ch->Fatigue.Current );
+  ch->ArmorClass          = 100;
   ch->Stats.ModStr        = 0;
   ch->Stats.ModDex        = 0;
   ch->Stats.ModWis        = 0;
@@ -1305,14 +1305,14 @@ void ResetPlayerOnDeath( Character *ch )
 
   ch->AffectedBy = RaceTable[ch->Race].Affected;
   ch->NumFighting = 0;
-  ch->Hit = 1;
+  ch->HitPoints.Current = 1;
 
   if(IsJedi(ch))
     {
-      ch->Mana = 1;
+      ch->Mana.Current = 1;
     }
   
-  ch->Move = 1;
+  ch->Fatigue.Current = 1;
   ch->EmotionalState = 0;
   ch->On = NULL;
   StopHunting(ch);
@@ -1481,7 +1481,7 @@ void ApplyJediBonus( Character *ch )
 {
   if ( GetRandomPercent() == 1 )
     {
-      ch->MaxMana++;
+      ch->Mana.Max++;
       ch->Echo( "&YYou are wise in your use of the force.\r\n" );
       ch->Echo( "You feel a little stronger in your wisdom.&w\r\n" );
     }
@@ -1491,14 +1491,14 @@ void ApplySithPenalty( Character *ch )
 {
   if ( GetRandomPercent() == 1 )
     {
-      ch->MaxMana++;
+      ch->Mana.Max++;
 
-      if (ch->MaxHit > 100)
+      if (ch->HitPoints.Max > 100)
         {
-          ch->MaxHit--;
+          ch->HitPoints.Max--;
         }
 
-      ch->Hit--;
+      ch->HitPoints.Current--;
       ch->Echo( "&zYour body grows weaker as your strength in the dark side grows.&w\r\n" );
     }
 }
@@ -1570,8 +1570,8 @@ void AddReinforcements( Character *ch )
               SetAbilityLevel( mob[mob_cnt], ability, mob[mob_cnt]->TopLevel );
             }
 
-          mob[mob_cnt]->Hit = mob[mob_cnt]->TopLevel*15;
-          mob[mob_cnt]->MaxHit = mob[mob_cnt]->Hit;
+          mob[mob_cnt]->HitPoints.Current = mob[mob_cnt]->TopLevel*15;
+          mob[mob_cnt]->HitPoints.Max = mob[mob_cnt]->HitPoints.Current;
           mob[mob_cnt]->ArmorClass = 100- mob[mob_cnt]->TopLevel*2.5;
           mob[mob_cnt]->DamRoll = mob[mob_cnt]->TopLevel/5;
           mob[mob_cnt]->HitRoll = mob[mob_cnt]->TopLevel/5;
@@ -1625,8 +1625,8 @@ void AddReinforcements( Character *ch )
           SetAbilityLevel( mob, ability, mob->TopLevel );
         }
 
-      mob->Hit = mob->TopLevel*10;
-      mob->MaxHit = mob->Hit;
+      mob->HitPoints.Current = mob->TopLevel*10;
+      mob->HitPoints.Max = mob->HitPoints.Current;
       mob->ArmorClass = 100- mob->TopLevel*2.5;
       mob->DamRoll = mob->TopLevel/5;
       mob->HitRoll = mob->TopLevel/5;

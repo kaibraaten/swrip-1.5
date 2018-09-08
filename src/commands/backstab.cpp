@@ -60,7 +60,7 @@ void do_backstab( Character *ch, std::string arg )
 
   /* Can backstab a char even if it's hurt as long as it's sleeping. -Narn */
   /* Or if it can't see you. -Ulysses */
-  if ( victim->Hit < victim->MaxHit
+  if ( victim->HitPoints.Current < victim->HitPoints.Max
        && IsAwake(victim) && CanSeeCharacter(victim,ch) )
     {
       Act( AT_PLAIN, "$N is hurt and suspicious... you can't sneak up.",

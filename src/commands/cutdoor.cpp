@@ -63,7 +63,7 @@ void do_cutdoor( Character *ch, std::string arg )
         the_chance = 90;
 
       if ( !IsBitSet( pexit->Flags, EX_BASHPROOF )
-           &&   ch->Move >= 15
+           &&   ch->Fatigue.Current >= 15
            &&   GetRandomPercent() < ( the_chance + 4 * ( GetCurrentStrength( ch ) - 19 ) ) )
         {
           RemoveBit( pexit->Flags, EX_CLOSED );
@@ -95,7 +95,7 @@ void do_cutdoor( Character *ch, std::string arg )
                 }
             }
 
-          InflictDamage( ch, ch, ( ch->MaxHit / 20 ), gsn_cutdoor );
+          InflictDamage( ch, ch, ( ch->HitPoints.Max / 20 ), gsn_cutdoor );
         }
       else
         {
@@ -103,7 +103,7 @@ void do_cutdoor( Character *ch, std::string arg )
               ch, NULL, keyword.c_str(), TO_CHAR );
           Act(AT_SKILL, "$n cuts at the $d, but just scores it.",
               ch, NULL, keyword.c_str(), TO_ROOM );
-          InflictDamage( ch, ch, ( ch->MaxHit / 20 ) + 10, gsn_cutdoor );
+          InflictDamage( ch, ch, ( ch->HitPoints.Max / 20 ) + 10, gsn_cutdoor );
           LearnFromFailure(ch, gsn_cutdoor);
         }
     }
@@ -113,7 +113,7 @@ void do_cutdoor( Character *ch, std::string arg )
           ch, NULL, NULL, TO_CHAR );
       Act(AT_SKILL, "$n cuts at the wall, but just scores it.",
           ch, NULL, NULL, TO_ROOM );
-      InflictDamage( ch, ch, ( ch->MaxHit / 20 ) + 10, gsn_cutdoor );
+      InflictDamage( ch, ch, ( ch->HitPoints.Max / 20 ) + 10, gsn_cutdoor );
       LearnFromFailure(ch, gsn_cutdoor);
     }
 

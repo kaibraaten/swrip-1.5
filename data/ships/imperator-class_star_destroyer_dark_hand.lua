@@ -1,67 +1,88 @@
 -- Imperator-class Star Destroyer
--- Last saved Monday 13-Aug-2018 22:16:48
+-- Last saved Friday 07-Sep-2018 21:51:09
 
 ShipEntry
 {
+   Type = "Imperial", 
+   Rooms = 
+   {
+      Engine = 629, 
+      Pilotseat = 675, 
+      Gunseat = 674, 
+      Last = 699, 
+      Navseat = 673, 
+      Hangar = 600, 
+      Entrance = 600, 
+      First = 600, 
+      Coseat = 677, 
+      Cockpit = 699, 
+   }, 
+   Pilot = "", 
+   PersonalName = "Dark Hand", 
    WeaponSystems = 
    {
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
       }, 
       Laser = 
       {
-         Count = 0, 
          State = 0, 
+         Count = 0, 
+      }, 
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 10, 
       }, 
       TractorBeam = 
       {
@@ -87,19 +108,35 @@ ShipEntry
             Current = 10, 
          }, 
       }, 
-      IonCannon = 
+   }, 
+   Shipyard = 32050, 
+   Owner = "The Empire", 
+   Defenses = 
+   {
+      Hull = 
       {
-         Count = 10, 
-         State = 0, 
+         Max = 20000, 
+         Current = 20000, 
+      }, 
+      Shield = 
+      {
+         Max = 1000, 
+         Current = 1000, 
+      }, 
+      Chaff = 
+      {
+         Max = 25, 
+         Current = 25, 
       }, 
    }, 
-   Description = "", 
-   Guard = true, 
-   Type = "Imperial", 
-   Pilot = "", 
    Name = "Imperator-class Star Destroyer", 
-   PersonalName = "Dark Hand", 
-   Owner = "The Empire", 
+   Instruments = 
+   {
+      AstroArray = 200, 
+      Comm = 11, 
+      Sensor = 250, 
+   }, 
+   Guard = true, 
    Thrusters = 
    {
       Energy = 
@@ -114,60 +151,23 @@ ShipEntry
          Current = 0, 
       }, 
    }, 
-   Rooms = 
+   Position = 
    {
-      First = 600, 
-      Coseat = 677, 
-      Engine = 629, 
-      Last = 699, 
-      Entrance = 600, 
-      Gunseat = 674, 
-      Hangar = 600, 
-      Navseat = 673, 
-      Pilotseat = 675, 
-      Cockpit = 699, 
+      X = 1000, 
+      Z = -1000, 
+      Y = 5001500, 
    }, 
-   Instruments = 
-   {
-      Comm = 11, 
-      AstroArray = 200, 
-      Sensor = 250, 
-   }, 
-   Defenses = 
-   {
-      Chaff = 
-      {
-         Max = 25, 
-         Current = 25, 
-      }, 
-      Shield = 
-      {
-         Max = 1000, 
-         Current = 1000, 
-      }, 
-      Hull = 
-      {
-         Max = 20000, 
-         Current = 20000, 
-      }, 
-   }, 
+   Home = "Byss", 
+   DockingPorts = 0, 
    Alarm = false, 
+   Location = 0, 
+   CoPilot = "", 
+   LastDock = 32050, 
+   Class = "Capital Ship", 
+   Description = "", 
+   State = 1, 
    Hyperdrive = 
    {
       Speed = 255, 
    }, 
-   Location = 0, 
-   State = 1, 
-   Position = 
-   {
-      Y = 5001500, 
-      X = 1000, 
-      Z = -1000, 
-   }, 
-   Home = "Byss", 
-   DockingPorts = 0, 
-   Class = "Capital Ship", 
-   CoPilot = "", 
-   Shipyard = 32050, 
-   LastDock = 32050, 
 }

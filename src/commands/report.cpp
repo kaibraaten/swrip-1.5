@@ -12,12 +12,12 @@ void do_report( Character *ch, std::string argument )
     }
 
   ch->Echo("You report: %d/%d hp %d/%d mv.\r\n",
-             ch->Hit,  ch->MaxHit,
-             ch->Move, ch->MaxMove   );
+             ch->HitPoints.Current, ch->HitPoints.Max,
+             ch->Fatigue.Current, ch->Fatigue.Max   );
 
   sprintf( buf, "$n reports: %d/%d hp %d/%d.",
-           ch->Hit,  ch->MaxHit,
-           ch->Move, ch->MaxMove   );
+           ch->HitPoints.Current, ch->HitPoints.Max,
+           ch->Fatigue.Current, ch->Fatigue.Max   );
 
   Act( AT_REPORT, buf, ch, NULL, NULL, TO_ROOM );
 }

@@ -52,6 +52,7 @@
 #include "systemdata.hpp"
 #include "alias.hpp"
 #include "race.hpp"
+#include "playerrepository.hpp"
 
 /*
  * Increment with every major format change.
@@ -190,6 +191,9 @@ void ReEquipCharacter( Character *ch )
  */
 void SaveCharacter( Character *ch )
 {
+  PlayerCharacters->Save(ch);
+  return;
+  
   assert(ch != nullptr);
   char strsave[MAX_INPUT_LENGTH];
   char strback[MAX_INPUT_LENGTH];
@@ -422,8 +426,11 @@ static void WriteCharacter( const Character *ch, FILE *fp )
     }
 
   fprintf( fp, "HpManaMove   %d %d 0 0 %d %d\n",
-           ch->Hit, ch->MaxHit, ch->Move, ch->MaxMove );
-  fprintf( fp, "Force        %d %d %d %d\n", ch->Stats.PermFrc, ch->Stats.ModFrc, ch->Mana, ch->MaxMana );
+           ch->HitPoints.Current, ch->HitPoints.Max,
+           ch->Fatigue.Current, ch->Fatigue.Max );
+  fprintf( fp, "Force        %d %d %d %d\n",
+           ch->Stats.PermFrc, ch->Stats.ModFrc,
+           ch->Mana.Current, ch->Mana.Max );
   fprintf( fp, "Gold         %d\n",     ch->Gold                );
   fprintf( fp, "Bank         %ld\n",    ch->PCData->Bank                );
 
@@ -1448,8 +1455,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                       &x1, &x2, &x3, &x4);
               ch->Stats.PermFrc = x1;
               ch->Stats.ModFrc = x2;
-              ch->Mana = x3;
-              ch->MaxMana = x4;
+              ch->Mana.Current = x3;
+              ch->Mana.Max = x4;
               fMatch = true;
               break;
             }
@@ -1502,21 +1509,21 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               x1=x2=x3=x4=x5=x6=0;
               sscanf( line, "%d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6 );
-              ch->Hit = x1;
-              ch->MaxHit = x2;
-              ch->Move = x5;
-              ch->MaxMove = x6;
+              ch->HitPoints.Current = x1;
+              ch->HitPoints.Max = x2;
+              ch->Fatigue.Current = x5;
+              ch->Fatigue.Max = x6;
 
               if ( x4 >= 100 )
                 {
                   ch->Stats.PermFrc = GetRandomNumberFromRange( 1 , 20 );
-                  ch->MaxMana = x4;
-                  ch->Mana     = x4;
+                  ch->Mana.Max = x4;
+                  ch->Mana.Current = x4;
                 }
               else if ( x4 >= 10 )
                 {
                   ch->Stats.PermFrc = 1;
-                  ch->MaxMana = x4;
+                  ch->Mana.Max = x4;
                 }
 
               fMatch = true;
@@ -1818,12 +1825,14 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               if ( lastplayed != 0 )
                 {
                   int hitgain = ( ( int ) ( current_time - lastplayed ) / 60 );
-                  ch->Hit = urange( 1 , ch->Hit + hitgain , ch->MaxHit );
-                  ch->Move = urange( 1 , ch->Move + hitgain , ch->MaxMove );
+                  ch->HitPoints.Current = urange( 1, ch->HitPoints.Current + hitgain,
+                                                  ch->HitPoints.Max );
+                  ch->Fatigue.Current = urange( 1, ch->Fatigue.Current + hitgain,
+                                                ch->Fatigue.Max );
 
                   if ( IsJedi( ch ) )
 		    {
-		      ch->Mana = urange( 0 , ch->Mana + hitgain , ch->MaxMana );
+		      ch->Mana.Current = urange( 0, ch->Mana.Current + hitgain, ch->Mana.Max );
 		    }
 
                   ImproveMentalState( ch , hitgain );

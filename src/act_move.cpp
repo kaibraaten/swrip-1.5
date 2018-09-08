@@ -666,7 +666,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           else
             move = 1;
 
-          if ( ch->Mount->Move < move )
+          if ( ch->Mount->Fatigue.Current < move )
             {
               ch->Echo( "Your mount is too exhausted.\r\n" );
               return rNONE;
@@ -674,7 +674,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
         }
       else
         {
-          hpmove = 500/( ch->Hit ? ch->Hit : 1 );
+          hpmove = 500/( ch->HitPoints.Current ? ch->HitPoints.Current : 1 );
 
           if ( !IsAffectedBy(ch, AFF_FLYING)
                &&   !IsAffectedBy(ch, AFF_FLOATING) )
@@ -682,7 +682,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           else
             move = 1;
 
-          if ( ch->Move < move )
+          if ( ch->Fatigue.Current < move )
             {
               ch->Echo( "You are too exhausted.\r\n" );
               return rNONE;
@@ -692,9 +692,9 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       SetWaitState( ch, move );
 
       if ( ch->Mount )
-        ch->Mount->Move -= move;
+        ch->Mount->Fatigue.Current -= move;
       else
-        ch->Move -= move;
+        ch->Fatigue.Current -= move;
     }
 
   /*

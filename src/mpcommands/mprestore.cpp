@@ -53,6 +53,6 @@ void do_mp_restore( Character *ch, std::string argument )
       return;
     }
 
-  hp += victim->Hit;
-  victim->Hit = (hp > SHRT_MAX || hp < 0 || hp > victim->MaxHit) ? victim->MaxHit : hp;
+  hp += victim->HitPoints.Current;
+  victim->HitPoints.Current = (hp > SHRT_MAX || hp < 0 || hp > victim->HitPoints.Max) ? victim->HitPoints.Max : hp;
 }

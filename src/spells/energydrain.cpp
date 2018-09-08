@@ -33,17 +33,18 @@ ch_ret spell_energy_drain( int sn, int level, Character *ch, void *vo )
     }
 
   if ( victim->TopLevel <= 2 )
-    dam          = ch->Hit + 1;
+    dam          = ch->HitPoints.Current + 1;
   else
     {
-      victim->Mana      /= 2;
-      victim->Move      /= 2;
-      dam                = RollDice(1, level);
-      ch->Hit           += dam;
+      victim->Mana.Current /= 2;
+      victim->Fatigue.Current /= 2;
+      dam = RollDice(1, level);
+      ch->HitPoints.Current += dam;
     }
 
-  if ( ch->Hit > ch->MaxHit )
-    ch->Hit = ch->MaxHit;
+  if ( ch->HitPoints.Current > ch->HitPoints.Max )
+    ch->HitPoints.Current = ch->HitPoints.Max;
+  
   if ( IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch) )
     dam -= (int) (dam / 4);
 

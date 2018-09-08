@@ -1295,23 +1295,23 @@ void DisplayPrompt(Descriptor *d)
               break;
 
             case 'h':
-              the_stat = ch->Hit;
+              the_stat = ch->HitPoints.Current;
               break;
 
             case 'H':
-              the_stat = ch->MaxHit;
+              the_stat = ch->HitPoints.Max;
               break;
 
             case 'm':
               if ( IsImmortal(ch) || IsJedi( ch ) )
-                the_stat = ch->Mana;
+                the_stat = ch->Mana.Current;
               else
                 the_stat = 0;
               break;
 
             case 'M':
               if ( IsImmortal(ch) || IsJedi( ch ) )
-                the_stat = ch->MaxMana;
+                the_stat = ch->Mana.Max;
               else
                 the_stat = 0;
               break;
@@ -1334,11 +1334,11 @@ void DisplayPrompt(Descriptor *d)
               break;
 
             case 'v':
-              the_stat = ch->Move;
+              the_stat = ch->Fatigue.Current;
               break;
 
             case 'V':
-              the_stat = ch->MaxMove;
+              the_stat = ch->Fatigue.Max;
               break;
 
             case 'g':

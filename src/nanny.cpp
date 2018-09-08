@@ -734,23 +734,24 @@ static void NannyReadMotd( Descriptor *d, std::string argument )
       }
 
       ch->TopLevel = 1;
-      ch->Hit        = ch->MaxHit;
-      ch->Hit     += RaceTable[ch->Race].Hit;
-      ch->MaxHit += RaceTable[ch->Race].Hit;
-      ch->Move       = ch->MaxMove;
-      ch->Gold     = NEW_CHARACTER_START_CREDITS;
+      
+      ch->HitPoints.Current = ch->HitPoints.Max;
+      ch->HitPoints.Current += RaceTable[ch->Race].Hit;
+      ch->HitPoints.Max += RaceTable[ch->Race].Hit;
+      ch->Fatigue.Current = ch->Fatigue.Max;
+      ch->Gold = NEW_CHARACTER_START_CREDITS;
 
       if ( ch->Stats.PermFrc > 0 )
 	{
-	  ch->MaxMana = 200;
+	  ch->Mana.Max = 200;
 	}
       else
 	{
-	  ch->MaxMana = 0;
+	  ch->Mana.Max = 0;
 	}
 
-      ch->MaxMana += RaceTable[ch->Race].Mana;
-      ch->Mana      = 0;
+      ch->Mana.Max += RaceTable[ch->Race].Mana;
+      ch->Mana.Current = 0;
       sprintf( buf, "%s the %s",ch->Name.c_str(), RaceTable[ch->Race].Name );
       SetCharacterTitle( ch, buf );
 

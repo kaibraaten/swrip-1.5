@@ -917,7 +917,8 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( !StrCmp(chck, "hitprcnt") )
         {
-          return MudProgCompareNumbers(chkchar->Hit/chkchar->MaxHit, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->HitPoints.Current / chkchar->HitPoints.Max,
+                                       opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "inroom") )
@@ -2490,7 +2491,7 @@ void MobProgHitPercentTrigger( Character *mob, Character *ch)
       for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
 	{
 	  if ( ( mprg->type & HITPRCNT_PROG )
-	       && ( ( 100*mob->Hit / mob->MaxHit ) < atoi( mprg->arglist ) ) )
+	       && ( ( 100 * mob->HitPoints.Current / mob->HitPoints.Max ) < atoi( mprg->arglist ) ) )
 	    {
 	      MudProgDriver( mprg->comlist, mob, ch, NULL, NULL, false );
 	      break;

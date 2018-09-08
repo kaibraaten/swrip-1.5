@@ -26,7 +26,7 @@ void do_flee( Character *ch, std::string argument )
       return;
     }
 
-  if ( ch->Move <= 0 )
+  if ( ch->Fatigue.Current <= 0 )
     {
       ch->Echo( "You're too exhausted to flee from combat!\r\n" );
       return;

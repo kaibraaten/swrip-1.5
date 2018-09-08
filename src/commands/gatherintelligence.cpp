@@ -88,20 +88,20 @@ void do_gather_intelligence( Character *ch, std::string argument )
 
       if ( the_chance < 40 )
         {
-          if ( victim->Hit < ((victim->MaxHit)/4) )
+          if ( victim->HitPoints.Current < ( victim->HitPoints.Max / 4) )
             {
               ch->Echo( "Hospital records show that %s has had a very serious injury and has not fully recovered.\r\n", victim->Name.c_str() );
             }
-          else if ( victim->Hit < ((victim->MaxHit)/2) )
+          else if ( victim->HitPoints.Current < ( victim->HitPoints.Max / 2) )
             {
               ch->Echo( "Hospital records show that %s has had a serious injury and has begun to recover.\r\n", victim->Name.c_str() );
             }
-          else if ( victim->Hit < ((victim->MaxHit)) )
+          else if ( victim->HitPoints.Current < victim->HitPoints.Max )
             {
               ch->Echo( "Hospital records show that %s has had a minor injury recently.\r\n",
                         victim->Name.c_str() );
             }
-          else if ( victim->Hit == victim->MaxHit )
+          else if ( victim->HitPoints.Current == victim->HitPoints.Max )
             {
               ch->Echo( "There has been no recently medical history for %s.\r\n",
                         victim->Name.c_str() );
@@ -170,9 +170,9 @@ void do_gather_intelligence( Character *ch, std::string argument )
         {
           if ( IsJedi( victim ) )
             {
-              if ( victim->Mana > 1000 )
+              if ( victim->Mana.Current > 1000 )
                 sprintf( buf, "%s appears to have centered %s attention on studying the Force, and is rumored to excel at its use.", HisHersIts(victim), victim->Name.c_str() );
-              else if ( victim->Mana > 200 )
+              else if ( victim->Mana.Current > 200 )
                 sprintf( buf, "%s appears to have centered %s attention on studying the Force, and is rumored to have some skill.", HisHersIts(victim), victim->Name.c_str() );
               else
                 sprintf( buf, "%s appears to have centered %s attention on studying the Force, and is rumored to have found some minor ability in it.", HisHersIts(victim), victim->Name.c_str() );

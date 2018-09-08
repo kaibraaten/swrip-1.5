@@ -65,7 +65,7 @@ void do_clone( Character *ch, std::string argument )
       
       /* random force change on cloning */
       frc = ch->Stats.PermFrc;
-      mana = ch->Mana;
+      mana = ch->Mana.Current;
 
       /* if character has force, there is a chance of losing force
 	 depending on the magnitude, the lesser force  the greater chance, as
@@ -117,7 +117,7 @@ void do_clone( Character *ch, std::string argument )
 	  SetAbilityLevel( ch, FORCE_ABILITY, 1 );
 	}
 
-      ch->Mana = 100 + 100 * ch->Stats.PermFrc;
+      ch->Mana.Current = 100 + 100 * ch->Stats.PermFrc;
 
       flags   = ch->Flags;
       RemoveBit( ch->Flags, PLR_KILLER );
@@ -158,7 +158,7 @@ void do_clone( Character *ch, std::string argument )
 	  skill_level[FORCE_ABILITY] = frc_level;
 	}
 
-      ch->Mana = 100 + (ch->Stats.PermFrc*100);
+      ch->Mana.Current = 100 + (ch->Stats.PermFrc*100);
 
       if ( !ch->PCData->ClanInfo.ClanName.empty() )
 	{
@@ -182,7 +182,7 @@ void do_clone( Character *ch, std::string argument )
 
       SetAbilityLevel( ch, FORCE_ABILITY, frc_level );
       SetAbilityXP( ch, FORCE_ABILITY, frc_experience );
-      ch->Mana = mana;
+      ch->Mana.Current = mana;
 
       if( ch->PCData->Clones == 2 )
 	{
@@ -199,7 +199,7 @@ void do_clone( Character *ch, std::string argument )
       ch->PCData->Bank = bank;
       ch->Flags = flags;
       ch->PCData->Bestowments = oldbestowments;
-      ch->Hit--;
+      ch->HitPoints.Current--;
     }
   
   CharacterFromRoom( ch );
