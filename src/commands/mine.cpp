@@ -76,13 +76,13 @@ void do_mine( Character *ch, std::string arg )
   int move = (obj->Weight * 50 * (shovel ? 1 : 5)) / umax(1, GetCarryCapacityWeight(ch));
   move = urange( 2, move, 1000 );
 
-  if ( move > ch->Move )
+  if ( move > ch->Fatigue.Current )
     {
       ch->Echo("You don't have the energy to bury something of that size.\r\n");
       return;
     }
 
-  ch->Move -= move;
+  ch->Fatigue.Current -= move;
 
   SetBit( obj->Flags, ITEM_BURRIED );
   SetWaitState( ch, urange( 10, move / 2, 100 ) );

@@ -74,9 +74,9 @@ void do_mstat( Character *ch, std::string arg )
              GetCurrentForce(victim) );
 
   ch->Echo("Hps: %d/%d  Force: %d/%d   Move: %d/%d\r\n",
-	victim->Hit,         victim->MaxHit,
-	victim->Mana,        victim->MaxMana,
-	victim->Move,        victim->MaxMove );
+	victim->HitPoints.Current, victim->HitPoints.Max,
+	victim->Mana.Current, victim->Mana.Max,
+	victim->Fatigue.Current, victim->Fatigue.Max );
 
   if ( !IsNpc( victim ) )
     {

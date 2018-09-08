@@ -63,13 +63,13 @@ void do_bury( Character *ch, std::string arg )
   int move = (obj->Weight * 50 * (shovel ? 1 : 5)) / umax(1, GetCarryCapacityWeight(ch));
   move = urange( 2, move, 1000 );
 
-  if ( move > ch->Move )
+  if ( move > ch->Fatigue.Current )
     {
       ch->Echo( "You don't have the energy to bury something of that size.\r\n" );
       return;
     }
 
-  ch->Move -= move;
+  ch->Fatigue.Current -= move;
 
   Act( AT_ACTION, "You solemnly bury $p...", ch, obj, NULL, TO_CHAR );
   Act( AT_ACTION, "$n solemnly buries $p...", ch, obj, NULL, TO_ROOM );

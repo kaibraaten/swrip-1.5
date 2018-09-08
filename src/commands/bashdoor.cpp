@@ -54,7 +54,7 @@ void do_bashdoor( Character *ch, std::string arg )
         bash_chance = 90;
 
       if ( !IsBitSet( pexit->Flags, EX_BASHPROOF )
-           && ch->Move >= 15
+           && ch->Fatigue.Current >= 15
            && GetRandomPercent() < ( bash_chance + 4 * ( GetCurrentStrength( ch ) - 19 ) ) )
         {
           RemoveBit( pexit->Flags, EX_CLOSED );
@@ -87,7 +87,7 @@ void do_bashdoor( Character *ch, std::string arg )
 		}
             }
 
-          InflictDamage( ch, ch, ( ch->MaxHit / 20 ), gsn_bashdoor );
+          InflictDamage( ch, ch, ( ch->HitPoints.Max / 20 ), gsn_bashdoor );
         }
       else
         {
@@ -95,7 +95,7 @@ void do_bashdoor( Character *ch, std::string arg )
               ch, NULL, keyword.c_str(), TO_CHAR );
           Act(AT_SKILL, "WHAAAAM!!! $n bashes against the $d, but it holds strong.",
               ch, NULL, keyword.c_str(), TO_ROOM );
-          InflictDamage( ch, ch, ( ch->MaxHit / 20 ) + 10, gsn_bashdoor );
+          InflictDamage( ch, ch, ( ch->HitPoints.Max / 20 ) + 10, gsn_bashdoor );
           LearnFromFailure(ch, gsn_bashdoor);
         }
     }
@@ -105,7 +105,7 @@ void do_bashdoor( Character *ch, std::string arg )
           ch, NULL, NULL, TO_CHAR );
       Act(AT_SKILL, "WHAAAAM!!! $n bashes against the wall, but it holds strong.",
           ch, NULL, NULL, TO_ROOM );
-      InflictDamage( ch, ch, ( ch->MaxHit / 20 ) + 10, gsn_bashdoor );
+      InflictDamage( ch, ch, ( ch->HitPoints.Max / 20 ) + 10, gsn_bashdoor );
       LearnFromFailure(ch, gsn_bashdoor);
     }
 

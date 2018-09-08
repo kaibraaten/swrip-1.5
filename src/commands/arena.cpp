@@ -48,9 +48,9 @@ void do_arena(Character *ch, std::string argument)
       sprintf(buf, "%s has joined the blood bath.", ch->Name.c_str());
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
       ch->Echo( "%s", buf );
-      ch->Hit = ch->MaxHit;
-      ch->Mana = ch->MaxMana;
-      ch->Move = ch->MaxMove;
+      ch->HitPoints.Current = ch->HitPoints.Max;
+      ch->Mana.Current = ch->Mana.Max;
+      ch->Fatigue.Current = ch->Fatigue.Max;
     }
 }
 

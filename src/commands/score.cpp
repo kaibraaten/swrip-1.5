@@ -43,10 +43,13 @@ void do_score(Character *ch, std::string argument)
 
   if ( IsJedi( ch ) || IsImmortal(ch) )
     ch->Echo("&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
-              ch->Hit, ch->MaxHit, ch->Move, ch->MaxMove, ch->Mana, ch->MaxMana );
+             ch->HitPoints.Current, ch->HitPoints.Max,
+             ch->Fatigue.Current, ch->Fatigue.Max,
+             ch->Mana.Current, ch->Mana.Max );
   else
     ch->Echo("&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d\r\n",
-              ch->Hit, ch->MaxHit, ch->Move, ch->MaxMove);
+             ch->HitPoints.Current, ch->HitPoints.Max,
+             ch->Fatigue.Current, ch->Fatigue.Max );
 
   ch->Echo("&cStr: &C%2d  &cDex: &C%2d  &cCon: &C%2d  &cInt: &C%2d  &cWis: &C%2d  &cCha: &C%2d  &cLck: &C??  &cFrc: &C??\r\n",
             GetCurrentStrength(ch), GetCurrentDexterity(ch),GetCurrentConstitution(ch),GetCurrentIntelligence(ch),GetCurrentWisdom(ch),GetCurrentCharisma(ch));

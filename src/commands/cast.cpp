@@ -161,7 +161,7 @@ void do_cast( Character *ch, std::string argument )
         }
 
 
-      if ( !IsNpc(ch) && ch->Mana < mana )
+      if ( !IsNpc(ch) && ch->Mana.Current < mana )
         {
           ch->Echo( "The force is not strong enough within you.\r\n" );
           return;
@@ -194,7 +194,7 @@ void do_cast( Character *ch, std::string argument )
           mana = IsNpc(ch) ? 0 : skill->Mana;
 
           if ( GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-            ch->Mana -= mana / 3;
+            ch->Mana.Current -= mana / 3;
         }
 
       SetCharacterColor( AT_MAGIC, ch );
@@ -259,7 +259,7 @@ void do_cast( Character *ch, std::string argument )
                       Act( AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, TO_NOTVICT );
                       LearnFromSuccess( tmp, sn );
 
-                      tmp->Mana -= mana;
+                      tmp->Mana.Current -= mana;
                       tmp->SubState = SUB_NONE;
                       tmp->tempnum = -1;
                       FreeMemory( tmp->dest_buf );
@@ -279,7 +279,7 @@ void do_cast( Character *ch, std::string argument )
               ch->Echo( "There was not enough power for that to succeed...\r\n" );
 
               if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-                ch->Mana -= mana / 2;
+                ch->Mana.Current -= mana / 2;
 
               LearnFromFailure( ch, sn );
               return;
@@ -300,7 +300,7 @@ void do_cast( Character *ch, std::string argument )
           ch->Echo( "You do not have enough anger in you.\r\n" );
 
           if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-            ch->Mana -= mana / 2;
+            ch->Mana.Current -= mana / 2;
 
           return;
         }
@@ -310,7 +310,7 @@ void do_cast( Character *ch, std::string argument )
           ch->Echo( "Your anger and hatred prevent you from focusing.\r\n" );
 
           if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-            ch->Mana -= mana / 2;
+            ch->Mana.Current -= mana / 2;
 
           return;
         }
@@ -370,15 +370,14 @@ void do_cast( Character *ch, std::string argument )
         }
 
       if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-        ch->Mana -= mana / 2;
+        ch->Mana.Current -= mana / 2;
 
       LearnFromFailure( ch, sn );
       return;
     }
   else
     {
-
-      ch->Mana -= mana;
+      ch->Mana.Current -= mana;
 
       /*
        * check for immunity to magic if victim is known...

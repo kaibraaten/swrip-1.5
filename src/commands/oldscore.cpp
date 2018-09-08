@@ -26,8 +26,8 @@ void do_oldscore( Character *ch, std::string argument )
                ch->MobInvis);
 
   ch->Echo("You have %d/%d hit, %d/%d movement.\r\n",
-           ch->Hit,  ch->MaxHit,
-           ch->Move, ch->MaxMove);
+           ch->HitPoints.Current, ch->HitPoints.Max,
+           ch->Fatigue.Current, ch->Fatigue.Max );
 
   ch->Echo("You are carrying %d/%d items with weight %d/%d kg.\r\n",
            ch->CarryNumber, GetCarryCapacityNumber(ch),

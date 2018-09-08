@@ -43,9 +43,9 @@ void do_mpstat( Character *ch, std::string arg )
            ? victim->LongDescr : "(none).\r\n" );
 
   ch->Echo("Hp: %d/%d.  Mana: %d/%d.  Move: %d/%d. \r\n",
-             victim->Hit,         victim->MaxHit,
-             victim->Mana,        victim->MaxMana,
-             victim->Move,        victim->MaxMove );
+             victim->HitPoints.Current, victim->HitPoints.Max,
+             victim->Mana.Current, victim->Mana.Max,
+             victim->Fatigue.Current, victim->Fatigue.Max );
 
   ch->Echo("Lv: %d.  Align: %d.  AC: %d.  Credits: %d.\r\n",
            victim->TopLevel,        victim->Alignment,

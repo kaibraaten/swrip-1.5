@@ -49,9 +49,9 @@ void do_restore( Character *ch, std::string arg )
 
           if ( !IsNpc( vch ) && !IsImmortal( vch ) )
 	    {
-              vch->Hit = vch->MaxHit;
-              vch->Mana = vch->MaxMana;
-              vch->Move = vch->MaxMove;
+              vch->HitPoints.Current = vch->HitPoints.Max;
+              vch->Mana.Current = vch->Mana.Max;
+              vch->Fatigue.Current = vch->Fatigue.Max;
               vch->PCData->Condition[COND_BLOODTHIRST] = (10 + vch->TopLevel);
               UpdatePosition(vch);
               Act( AT_IMMORT, "$n has restored you.", ch, NULL, vch, TO_VICT);
@@ -76,9 +76,9 @@ void do_restore( Character *ch, std::string arg )
           return;
         }
 
-      victim->Hit  = victim->MaxHit;
-      victim->Mana = victim->MaxMana;
-      victim->Move = victim->MaxMove;
+      victim->HitPoints.Current = victim->HitPoints.Max;
+      victim->Fatigue.Current = victim->Fatigue.Max;
+      victim->Mana.Current = victim->Mana.Max;
 
       if ( victim->PCData )
         victim->PCData->Condition[COND_BLOODTHIRST] = (10 + victim->TopLevel);

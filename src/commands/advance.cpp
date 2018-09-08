@@ -79,10 +79,10 @@ void do_advance( Character *ch, std::string argument )
       SetAbilityLevel( victim, ability, 1 );
 
       if ( ability == COMBAT_ABILITY )
-        victim->MaxHit = 500;
+        victim->HitPoints.Max = 500;
 
       if ( ability == FORCE_ABILITY )
-        victim->MaxMana = 0;
+        victim->Mana.Max = 0;
     }
   else
     {

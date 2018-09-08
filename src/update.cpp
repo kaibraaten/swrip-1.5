@@ -327,7 +327,7 @@ void AdvanceLevel( Character *ch, int ability )
 
   if( IsJedi( ch ) && ability == FORCE_ABILITY )
     {
-      ch->MaxMana += 20;
+      ch->Mana.Max += 20;
     }
 
   if ( !IsNpc(ch) )
@@ -456,7 +456,7 @@ static int GainHitPoints( const Character *ch )
       gain *= 2 ;
     }
 
-  return umin(gain, ch->MaxHit - ch->Hit);
+  return umin(gain, ch->HitPoints.Max - ch->HitPoints.Current);
 }
 
 static int GainMana( const Character *ch )
@@ -471,7 +471,7 @@ static int GainMana( const Character *ch )
     {
       if ( !IsJedi( ch ) )
 	{
-	  return (0 - ch->Mana);
+	  return 0 - ch->Mana.Current;
 	}
 
       gain = umin( 5, GetAbilityLevel( ch, FORCE_ABILITY ) / 2 );
@@ -511,7 +511,7 @@ static int GainMana( const Character *ch )
       gain /= 4;
     }
 
-  return umin(gain, ch->MaxMana - ch->Mana);
+  return umin(gain, ch->Mana.Max - ch->Mana.Current);
 }
 
 static int GainMove( const Character *ch )
@@ -568,7 +568,7 @@ static int GainMove( const Character *ch )
       gain /= 4;
     }
 
-  return umin(gain, ch->MaxMove - ch->Move);
+  return umin( gain, ch->Fatigue.Max - ch->Fatigue.Current );
 }
 
 static void GainAddiction( Character *ch )
@@ -1086,7 +1086,7 @@ static void MobileUpdate( void )
         }
 
       /* Flee */
-      if ( ch->Hit < ch->MaxHit / 2
+      if ( ch->HitPoints.Current < ch->HitPoints.Max / 2
            && ( door = (DirectionType)NumberBits( 4 ) ) < DIR_SOMEWHERE
            && ( pexit = GetExit(ch->InRoom,door) ) != NULL
            && pexit->ToRoom
@@ -1419,14 +1419,14 @@ static void CharacterUpdate( void )
 
       if ( ch->Position >= POS_STUNNED )
         {
-          if ( ch->Hit  < ch->MaxHit )
-            ch->Hit  += GainHitPoints(ch);
+          if ( ch->HitPoints.Current  < ch->HitPoints.Max )
+            ch->HitPoints.Current  += GainHitPoints(ch);
 
-          if ( ch->Mana < ch->MaxMana && IsJedi( ch ) )
-            ch->Mana += GainMana(ch);
+          if ( ch->Mana.Current < ch->Mana.Max && IsJedi( ch ) )
+            ch->Mana.Current += GainMana(ch);
 
-          if ( ch->Move < ch->MaxMove )
-            ch->Move += GainMove(ch);
+          if ( ch->Fatigue.Current < ch->Fatigue.Max )
+            ch->Fatigue.Current += GainMove(ch);
         }
 
       if ( ch->Position == POS_STUNNED )
@@ -1743,7 +1743,7 @@ static void CharacterUpdate( void )
 
                   CharacterToRoom( ch, GetRoom( ROOM_PLUOGUS_QUIT ) );
                   ch->Position = POS_RESTING;
-                  ch->Hit = umax ( 1 , ch->Hit );
+                  ch->HitPoints.Current = umax( 1, ch->HitPoints.Current );
                   SaveCharacter( ch );
                   do_quit( ch, "" );
                 }
@@ -2166,10 +2166,11 @@ static void CharacterCheck( void )
                 {
                   if ( GetTrustLevel(ch) < LEVEL_IMMORTAL )
                     {
-		      int dam = GetRandomNumberFromRange( ch->MaxHit / 50 , ch->MaxHit / 30 );
+		      int dam = GetRandomNumberFromRange( ch->HitPoints.Max / 50,
+                                                          ch->HitPoints.Max / 30 );
                       dam = umax( 1, dam );
 
-                      if(  ch->Hit <= 0 )
+                      if( ch->HitPoints.Current <= 0 )
 			{
 			  dam = umin( 10, dam );
 			}
@@ -2202,16 +2203,17 @@ static void CharacterCheck( void )
                     {
                       int dam;
 
-                      if ( ch->Move > 0 )
+                      if ( ch->Fatigue.Current > 0 )
 			{
-			  ch->Move--;
+			  ch->Fatigue.Current--;
 			}
                       else
                         {
-                          dam = GetRandomNumberFromRange( ch->MaxHit / 50, ch->MaxHit / 30 );
+                          dam = GetRandomNumberFromRange( ch->HitPoints.Max / 50,
+                                                          ch->HitPoints.Max / 30 );
                           dam = umax( 1, dam );
 
-                          if( ch->Hit <= 0 )
+                          if( ch->HitPoints.Current <= 0 )
 			    {
 			      dam = umin( 10, dam );
 			    }
@@ -2348,7 +2350,7 @@ static void AggroUpdate( void )
                    && (obj = GetEquipmentOnCharacter( ch, WEAR_WIELD )) != NULL
                    && obj->Value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE
                    && !victim->Fighting
-                   && victim->Hit >= victim->MaxHit )
+                   && victim->HitPoints.Current >= victim->HitPoints.Max )
                 {
                   SetWaitState( ch, SkillTable[gsn_backstab]->Beats );
 

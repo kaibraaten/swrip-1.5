@@ -362,15 +362,15 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       break;
 
     case APPLY_MANA:
-      ch->MaxMana += mod;
+      ch->Mana.Max += mod;
       break;
 
     case APPLY_HIT:
-      ch->MaxHit += mod;
+      ch->HitPoints.Max += mod;
       break;
 
     case APPLY_MOVE:
-      ch->MaxMove += mod;
+      ch->Fatigue.Max += mod;
       break;
 
     case APPLY_GOLD:
@@ -1201,9 +1201,9 @@ void ExtractCharacter( Character *ch, bool fPull )
 
   if (IsBitSet(ch->InRoom->Flags, ROOM_ARENA))
     {
-      ch->Hit = ch->MaxHit;
-      ch->Mana = ch->MaxMana;
-      ch->Move = ch->MaxMove;
+      ch->HitPoints.Current = ch->HitPoints.Max;
+      ch->Mana.Current = ch->Mana.Max;
+      ch->Fatigue.Current = ch->Fatigue.Max;
     }
 
   if ( ch->Mount )

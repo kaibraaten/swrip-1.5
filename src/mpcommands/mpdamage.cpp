@@ -174,17 +174,19 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
    * Hurt the victim.
    * Inform the victim of his new state.
    */
-  victim->Hit -= dam;
+  victim->HitPoints.Current -= dam;
+
   if ( !IsNpc(victim)
        &&   GetTrustLevel(victim) >= LEVEL_IMMORTAL
-       &&   victim->Hit < 1 )
-    victim->Hit = 1;
+       &&   victim->HitPoints.Current < 1 )
+    victim->HitPoints.Current = 1;
 
   if ( !npcvict
        &&   GetTrustLevel(victim) >= LEVEL_IMMORTAL
        &&        GetTrustLevel(ch)     >= LEVEL_IMMORTAL
-       &&   victim->Hit < 1 )
-    victim->Hit = 1;
+       &&   victim->HitPoints.Current < 1 )
+    victim->HitPoints.Current = 1;
+
   UpdatePosition( victim );
 
   switch( victim->Position )
@@ -219,11 +221,13 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
       break;
 
     default:
-      if ( dam > victim->MaxHit / 4 )
+      if ( dam > victim->HitPoints.Max / 4 )
         Act( AT_HURT, "That really did HURT!", victim, 0, 0, TO_CHAR );
-      if ( victim->Hit < victim->MaxHit / 4 )
+
+      if ( victim->HitPoints.Current < victim->HitPoints.Max / 4 )
         Act( AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
              victim, 0, 0, TO_CHAR );
+
       break;
     }
 
@@ -270,7 +274,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
   if ( npcvict && dam > 0 )
     {
       if ( ( IsBitSet(victim->Flags, ACT_WIMPY) && NumberBits( 1 ) == 0
-             &&   victim->Hit < victim->MaxHit / 2 )
+             &&   victim->HitPoints.Current < victim->HitPoints.Max / 2 )
            ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->Master
                   &&     victim->Master->InRoom != victim->InRoom ) )
         {
@@ -281,8 +285,8 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
     }
 
   if ( !npcvict
-       &&   victim->Hit > 0
-       &&   victim->Hit <= victim->Wimpy
+       &&   victim->HitPoints.Current > 0
+       &&   victim->HitPoints.Current <= victim->Wimpy
        &&   victim->Wait == 0 )
     do_flee( victim, "" );
   else

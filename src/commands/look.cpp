@@ -287,7 +287,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
        &&   IsAffectedBy(ch, AFF_DETECT_EVIL)     )
     strcat( buf, "&R(Red Aura)&w "   );
 
-  if ( ( victim->Mana > 10 )
+  if ( ( victim->Fatigue.Current > 10 )
        &&   ( IsAffectedBy( ch , AFF_DETECT_MAGIC ) || IsImmortal( ch ) ) )
     strcat( buf, "&B(Blue Aura)&w "  );
 

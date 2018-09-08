@@ -86,7 +86,7 @@ void do_takedrug( Character *ch, std::string argument )
           af.Duration  = ch->PCData->DrugLevel[drug];
           af.AffectedBy = AFF_POISON;
           AffectToCharacter( ch, &af );
-          ch->Hit = 1;
+          ch->HitPoints.Current = 1;
         }
 
       switch (drug)

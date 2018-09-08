@@ -499,8 +499,8 @@ Character *ReadVendor( FILE *fp )
 	      do_makeshop (mob, vnum1 );
 	      sprintf (buf, mob->LongDescr.c_str(), mob->Owner.c_str());
 	      mob->LongDescr = buf;
-	      mob->Hit = 10000;
-	      mob->MaxHit = 10000;
+	      mob->HitPoints.Current = 10000;
+	      mob->HitPoints.Max = 10000;
 	      return mob;
 	    }
 	  break;

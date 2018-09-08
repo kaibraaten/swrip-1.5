@@ -1,67 +1,88 @@
 -- Sorosuub System Hopper
--- Last saved Monday 13-Aug-2018 22:16:48
+-- Last saved Friday 07-Sep-2018 21:51:09
 
 ShipEntry
 {
+   Type = "Civilian", 
+   Rooms = 
+   {
+      Engine = 0, 
+      Pilotseat = 32153, 
+      Gunseat = 32153, 
+      Last = 32153, 
+      Navseat = 32153, 
+      Hangar = 0, 
+      Entrance = 32153, 
+      First = 32153, 
+      Coseat = 32153, 
+      Cockpit = 32153, 
+   }, 
+   Pilot = "", 
+   PersonalName = "6046", 
    WeaponSystems = 
    {
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
       }, 
       Laser = 
       {
-         Count = 0, 
          State = 0, 
+         Count = 0, 
+      }, 
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 0, 
       }, 
       TractorBeam = 
       {
@@ -87,19 +108,35 @@ ShipEntry
             Current = 0, 
          }, 
       }, 
-      IonCannon = 
+   }, 
+   Shipyard = 203, 
+   Owner = "public", 
+   Defenses = 
+   {
+      Hull = 
       {
-         Count = 0, 
-         State = 0, 
+         Max = 100, 
+         Current = 100, 
+      }, 
+      Shield = 
+      {
+         Max = 10, 
+         Current = 0, 
+      }, 
+      Chaff = 
+      {
+         Max = 0, 
+         Current = 0, 
       }, 
    }, 
-   Description = "", 
-   Guard = false, 
-   Type = "Civilian", 
-   Pilot = "", 
    Name = "Sorosuub System Hopper", 
-   PersonalName = "6046", 
-   Owner = "public", 
+   Instruments = 
+   {
+      AstroArray = 0, 
+      Comm = 0, 
+      Sensor = 0, 
+   }, 
+   Guard = false, 
    Thrusters = 
    {
       Energy = 
@@ -114,60 +151,23 @@ ShipEntry
          Current = 0, 
       }, 
    }, 
-   Rooms = 
+   Position = 
    {
-      First = 32153, 
-      Coseat = 32153, 
-      Engine = 0, 
-      Last = 32153, 
-      Entrance = 32153, 
-      Gunseat = 32153, 
-      Hangar = 0, 
-      Navseat = 32153, 
-      Pilotseat = 32153, 
-      Cockpit = 32153, 
+      X = -279298, 
+      Z = -279235, 
+      Y = -279129, 
    }, 
-   Instruments = 
-   {
-      Comm = 0, 
-      AstroArray = 0, 
-      Sensor = 0, 
-   }, 
-   Defenses = 
-   {
-      Chaff = 
-      {
-         Max = 0, 
-         Current = 0, 
-      }, 
-      Shield = 
-      {
-         Max = 10, 
-         Current = 0, 
-      }, 
-      Hull = 
-      {
-         Max = 100, 
-         Current = 100, 
-      }, 
-   }, 
+   Home = "Yavin", 
+   DockingPorts = 0, 
    Alarm = false, 
+   Location = 203, 
+   CoPilot = "", 
+   LastDock = 203, 
+   Class = "Starfighter", 
+   Description = "", 
+   State = 0, 
    Hyperdrive = 
    {
       Speed = 100, 
    }, 
-   Location = 203, 
-   State = 0, 
-   Position = 
-   {
-      Y = -279129, 
-      X = -279298, 
-      Z = -279235, 
-   }, 
-   Home = "Yavin", 
-   DockingPorts = 0, 
-   Class = "Starfighter", 
-   CoPilot = "", 
-   Shipyard = 203, 
-   LastDock = 203, 
 }

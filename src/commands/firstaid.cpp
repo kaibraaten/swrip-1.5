@@ -71,7 +71,8 @@ void do_first_aid( Character *ch, std::string argument )
     }
 
   --medpac->Value[OVAL_MEDPAC_DOSES];
-  victim->Hit += urange ( 0, heal , victim->MaxHit - victim->Hit );
+  victim->HitPoints.Current += urange ( 0, heal,
+                                        victim->HitPoints.Max - victim->HitPoints.Current );
 
   LearnFromSuccess( ch , gsn_first_aid );
 }

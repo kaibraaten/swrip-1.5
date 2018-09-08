@@ -225,7 +225,7 @@ static void FindGameWinner(void)
           Act(AT_YELLOW,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
           StopFighting( i, true );
 
-          if (i->Hit > 1)
+          if (i->HitPoints.Current > 1)
             {
 	      HallOfFameElement *fame_node = NULL;
 	      char buf[MAX_INPUT_LENGTH];
@@ -263,9 +263,9 @@ static void FindGameWinner(void)
               arena.PeopleChallenged = 0;
             }
 
-          i->Hit = i->MaxHit;
-          i->Mana = i->MaxMana;
-          i->Move = i->MaxMove;
+          i->HitPoints.Current = i->HitPoints.Max;
+          i->Mana.Current = i->Mana.Max;
+          i->Fatigue.Current = i->Fatigue.Max;
           i->Challenged = NULL;
         }
     }
@@ -315,9 +315,9 @@ static void DoEndGame(void)
 
 	  if (i->InRoom && IsBitSet(i->InRoom->Flags, ROOM_ARENA))
 	    {
-	      i->Hit = i->MaxHit;
-	      i->Mana = i->MaxMana;
-	      i->Move = i->MaxMove;
+	      i->HitPoints.Current = i->HitPoints.Max;
+	      i->Mana.Current = i->Mana.Max;
+	      i->Fatigue.Current = i->Fatigue.Max;
 	      i->Challenged = NULL;
 	      StopFighting(i, true);
 	      CharacterFromRoom(i);
@@ -351,7 +351,7 @@ int CharactersInArena(void)
 
       if (i->InRoom && IsBitSet(i->InRoom->Flags, ROOM_ARENA))
         {
-          if (!IsImmortal(i) && i->Hit > 1)
+          if (!IsImmortal(i) && i->HitPoints.Current > 1)
 	    {
 	      num++;
 	    }

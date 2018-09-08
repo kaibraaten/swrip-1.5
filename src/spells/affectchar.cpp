@@ -148,7 +148,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
             {
             case APPLY_HIT:
               if ( ch != victim
-                   && victim->Hit < victim->MaxHit
+                   && victim->HitPoints.Current < victim->HitPoints.Max
                    && af.Modifier > 0
                    && victim->Race != RACE_DROID)
                 {
@@ -158,17 +158,19 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                   ApplyJediBonus(ch);
                 }
 
-              if  ( af.Modifier > 0 && victim->Hit >= victim->MaxHit )
+              if  ( af.Modifier > 0
+                    && victim->HitPoints.Current >= victim->HitPoints.Max )
                 {
                   return rSPELL_FAILED;
                 }
 
-              victim->Hit = urange( 0, victim->Hit + af.Modifier, victim->MaxHit );
+              victim->HitPoints.Current = urange( 0, victim->HitPoints.Current + af.Modifier,
+                                                  victim->HitPoints.Max );
               UpdatePosition( victim );
               break;
 
             case APPLY_MANA:
-              if( af.Modifier > 0 && victim->Mana >= victim->MaxMana )
+              if( af.Modifier > 0 && victim->Mana.Current >= victim->Mana.Max )
                 {
                   return rSPELL_FAILED;
                 }
@@ -181,17 +183,20 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 		  ApplyJediBonus(ch);
                 }
 
-              victim->Mana = urange( 0, victim->Mana + af.Modifier, victim->MaxMana );
+              victim->Mana.Current = urange( 0, victim->Mana.Current + af.Modifier,
+                                             victim->Mana.Max );
               UpdatePosition( victim );
               break;
 
             case APPLY_MOVE:
-              if  ( af.Modifier > 0 && victim->Move >= victim->MaxMove )
+              if  ( af.Modifier > 0
+                    && victim->Fatigue.Current >= victim->Fatigue.Max )
                 {
                   return rSPELL_FAILED;
                 }
 
-              victim->Move = urange( 0, victim->Move + af.Modifier, victim->MaxMove );
+              victim->Fatigue.Current = urange( 0, victim->Fatigue.Current + af.Modifier,
+                                                victim->Fatigue.Max );
               UpdatePosition( victim );
               break;
 

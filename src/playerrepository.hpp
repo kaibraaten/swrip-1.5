@@ -1,6 +1,7 @@
 #ifndef _SWRIP_PLAYERREPOSITORY_HPP_
 #define _SWRIP_PLAYERREPOSITORY_HPP_
 
+#include <string>
 #include <utility/repository.hpp>
 
 class Character;
@@ -19,5 +20,7 @@ protected:
 
 extern PlayerRepository *PlayerCharacters;
 PlayerRepository *NewPlayerRepository();
+
+std::string GetPlayerFilename( const Character *pc );
 
 #endif

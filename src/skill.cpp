@@ -86,7 +86,7 @@ bool CheckSkill( Character *ch, const std::string &command, const std::string &a
     {
       mana = IsNpc(ch) ? 0 : SkillTable[sn]->Mana;
 
-      if ( !IsNpc(ch) && ch->Mana < mana )
+      if ( !IsNpc(ch) && ch->Mana.Current < mana )
 	{
           ch->Echo( "You need to rest before using the Force any more.\r\n" );
           return true;
@@ -197,7 +197,7 @@ bool CheckSkill( Character *ch, const std::string &command, const std::string &a
 
           if ( mana )
             {
-              ch->Mana -= mana/2;
+              ch->Mana.Current -= mana/2;
             }
 
           return true;
@@ -205,7 +205,7 @@ bool CheckSkill( Character *ch, const std::string &command, const std::string &a
 
       if ( mana )
         {
-          ch->Mana -= mana;
+          ch->Mana.Current -= mana;
         }
 
       StartTimer(&time_used);
@@ -254,7 +254,7 @@ bool CheckSkill( Character *ch, const std::string &command, const std::string &a
 
   if ( mana )
     {
-      ch->Mana -= mana;
+      ch->Mana.Current -= mana;
     }
 
   ch->PreviousCommand = ch->LastCommand;    /* haus, for automapping */

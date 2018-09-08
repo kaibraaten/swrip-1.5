@@ -20,7 +20,7 @@ ch_ret spell_harm( int sn, int level, Character *ch, void *vo )
   ApplySithPenalty( ch );
 
 
-  dam = umax(  20, victim->Hit - RollDice(1,4) );
+  dam = umax(  20, victim->HitPoints.Current - RollDice(1,4) );
 
   if ( SaveVsSpellStaff( level, victim ) )
     dam = umin( 50, dam / 4 );

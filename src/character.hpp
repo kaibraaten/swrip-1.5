@@ -65,12 +65,25 @@ public:
   SexType Sex = 0;
   short Race = 0;
   short TopLevel = 0;
-  short Hit = 500;
-  short MaxHit = 500;
-  short Mana = 0;
-  short MaxMana = 0;
-  short Move = 1000;
-  short MaxMove = 1000;
+
+  struct
+  {
+    short Current = 500;
+    short Max = 500;
+  } HitPoints;
+
+  struct
+  {
+    short Current = 0;
+    short Max = 0;
+  } Mana;
+
+  struct
+  {
+    short Current = 1000;
+    short Max = 1000;
+  } Fatigue;
+  
   short NumberOfAttacks = 0;
   int Gold = 0;
   int Flags = 0;

@@ -95,9 +95,9 @@ void do_torture( Character *ch, std::string arg )
            ch, NULL, victim, TO_NOTVICT );
 
       dam = RollDice( GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 80 , 4 );
-      dam = urange( 0, victim->MaxHit-10, dam );
-      victim->Hit -= dam;
-      victim->MaxHit -= dam;
+      dam = urange( 0, victim->HitPoints.Max - 10, dam );
+      victim->HitPoints.Current -= dam;
+      victim->HitPoints.Max -= dam;
 
       victim->Echo("You lose %d permanent hit points." ,dam);
       ch->Echo("They lose %d permanent hit points." , dam);

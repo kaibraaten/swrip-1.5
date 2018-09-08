@@ -380,15 +380,15 @@ static int ParseDiceExpression(const Character *ch, int level, const std::string
 
 	case 'H':
 	case 'h':
-	  return ch->Hit;
+	  return ch->HitPoints.Current;
 
 	case 'M':
 	case 'm':
-	  return ch->Mana;
+	  return ch->Mana.Current;
 
 	case 'V':
 	case 'v':
-	  return ch->Move;
+	  return ch->Fatigue.Current;
 
 	case 'S':
 	case 's':

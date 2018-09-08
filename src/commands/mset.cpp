@@ -598,13 +598,15 @@ void do_mset( Character *ch, std::string argument )
     {
       if ( !CanModifyCharacter( ch, victim ) )
         return;
+
       if ( value < 1 || value > SHRT_MAX )
         {
           ch->Echo("Hp range is 1 to %s hit points.\r\n",
                    PunctuateNumber( SHRT_MAX ).c_str() );
           return;
         }
-      victim->MaxHit = value;
+      
+      victim->HitPoints.Max = value;
       return;
     }
 
@@ -619,7 +621,7 @@ void do_mset( Character *ch, std::string argument )
                    PunctuateNumber( SHRT_MAX ).c_str() );
           return;
         }
-      victim->MaxMana = value;
+      victim->Mana.Max = value;
       return;
     }
 
@@ -633,7 +635,7 @@ void do_mset( Character *ch, std::string argument )
                    PunctuateNumber( SHRT_MAX ).c_str() );
           return;
         }
-      victim->MaxMove = value;
+      victim->Fatigue.Max = value;
       return;
     }
 

@@ -6,7 +6,7 @@ void do_wimpy( Character *ch, std::string arg )
   int wimpy = 0;
 
   if ( arg.empty() )
-    wimpy = (int) ch->MaxHit / 5;
+    wimpy = (int) ch->HitPoints.Max / 5;
   else
     wimpy = std::stoi( arg );
 
@@ -16,7 +16,7 @@ void do_wimpy( Character *ch, std::string arg )
       return;
     }
 
-  if ( wimpy > ch->MaxHit )
+  if ( wimpy > ch->HitPoints.Max )
     {
       ch->Echo("Such cowardice ill becomes you.\r\n");
       return;

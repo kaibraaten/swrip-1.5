@@ -430,8 +430,8 @@ void ShowCharacterCondition( const Character *ch, const Character *victim )
   char buf[MAX_STRING_LENGTH];
   int percent;
 
-  if ( victim->MaxHit > 0 )
-    percent = ( 100 * victim->Hit ) / victim->MaxHit;
+  if ( victim->HitPoints.Max > 0 )
+    percent = ( 100 * victim->HitPoints.Current ) / victim->HitPoints.Max;
   else
     percent = -1;
 

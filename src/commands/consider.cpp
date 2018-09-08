@@ -20,7 +20,7 @@ void do_consider( Character *ch, std::string arg )
     }
 
   diff = ( victim->TopLevel - ch->TopLevel ) * 10;
-  diff += (int) (victim->MaxHit - ch->MaxHit) / 10;
+  diff += (int) (victim->HitPoints.Max - ch->HitPoints.Max) / 10;
 
   if ( diff <= -200)
     msg = "$N looks like a feather!";

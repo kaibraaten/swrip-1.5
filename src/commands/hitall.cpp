@@ -66,7 +66,7 @@ void do_hitall( Character *ch, std::string argument )
       return;
     }
 
-  ch->Move = umax(0, ch->Move - nvict * 3 + nhit);
+  ch->Fatigue.Current = umax(0, ch->Fatigue.Current - nvict * 3 + nhit);
 
   if ( nhit )
     LearnFromSuccess(ch, gsn_hitall);

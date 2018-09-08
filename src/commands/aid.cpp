@@ -45,7 +45,7 @@ void do_aid( Character *ch, std::string argument )
       return;
     }
 
-  if ( victim->Hit <= -400 )
+  if ( victim->HitPoints.Current <= -400 )
     {
       Act( AT_PLAIN, "$N's condition is beyond your aiding ability.", ch,
            NULL, victim, TO_CHAR);
@@ -72,8 +72,8 @@ void do_aid( Character *ch, std::string argument )
   Act( AT_SKILL, "$n aids $N!",  ch, NULL, victim, TO_NOTVICT );
   LearnFromSuccess( ch, gsn_aid );
 
-  if ( victim->Hit < 1 )
-    victim->Hit = 1;
+  if ( victim->HitPoints.Current < 1 )
+    victim->HitPoints.Current = 1;
 
   UpdatePosition( victim );
   Act( AT_SKILL, "$n aids you!", ch, NULL, victim, TO_VICT    );
