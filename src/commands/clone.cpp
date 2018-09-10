@@ -64,7 +64,7 @@ void do_clone( Character *ch, std::string argument )
       CharacterToRoom( ch, GetRoom( ROOM_VNUM_CLONING_CYLINDER ) );
       
       /* random force change on cloning */
-      frc = ch->Stats.PermFrc;
+      frc = ch->PermStats.Frc;
       mana = ch->Mana.Current;
 
       /* if character has force, there is a chance of losing force
@@ -75,13 +75,13 @@ void do_clone( Character *ch, std::string argument )
       if ( ch->Ability.Main == FORCE_ABILITY )
 	low_frc = 1;
 
-      if(ch->Stats.PermFrc > 0)
+      if(ch->PermStats.Frc > 0)
 	{
-	  change = GetRandomNumberFromRange(-2, ch->Stats.PermFrc);
+	  change = GetRandomNumberFromRange(-2, ch->PermStats.Frc);
 	  change = urange( -2 , change , 0 );
-	  change2 = GetRandomNumberFromRange( -1000, ch->Stats.PermFrc );
+	  change2 = GetRandomNumberFromRange( -1000, ch->PermStats.Frc );
 	  change2 = urange(0, change2, 1);
-	  ch->Stats.PermFrc = urange( low_frc, ch->Stats.PermFrc + change + change2, 20);
+	  ch->PermStats.Frc = urange( low_frc, ch->PermStats.Frc + change + change2, 20);
 	}
       else
 	{
@@ -89,7 +89,7 @@ void do_clone( Character *ch, std::string argument )
 
 	  change = GetRandomNumberFromRange(-500, 2);
 	  change = urange( 0, change, 2);
-	  ch->Stats.PermFrc = urange( low_frc, ch->Stats.PermFrc + change, 20);
+	  ch->PermStats.Frc = urange( low_frc, ch->PermStats.Frc + change, 20);
 	}
 
       frc_level = GetAbilityLevel( ch, FORCE_ABILITY );
@@ -98,14 +98,14 @@ void do_clone( Character *ch, std::string argument )
       /* Droids and hunters dont get force. DV */
 
       if (ch->Ability.Main == HUNTING_ABILITY )
-	ch->Stats.PermFrc = low_frc;
+	ch->PermStats.Frc = low_frc;
 
       if (ch->Race == RACE_DROID )
-	ch->Stats.PermFrc = 0;
+	ch->PermStats.Frc = 0;
 
       if(frc > 0)
 	{
-	  if(ch->Stats.PermFrc > 0)
+	  if(ch->PermStats.Frc > 0)
 	    {
 	      SetAbilityXP( ch, FORCE_ABILITY, 500 );
 	      SetAbilityLevel( ch, FORCE_ABILITY, 2 );
@@ -117,7 +117,7 @@ void do_clone( Character *ch, std::string argument )
 	  SetAbilityLevel( ch, FORCE_ABILITY, 1 );
 	}
 
-      ch->Mana.Current = 100 + 100 * ch->Stats.PermFrc;
+      ch->Mana.Current = 100 + 100 * ch->PermStats.Frc;
 
       flags   = ch->Flags;
       RemoveBit( ch->Flags, PLR_KILLER );
@@ -158,7 +158,7 @@ void do_clone( Character *ch, std::string argument )
 	  skill_level[FORCE_ABILITY] = frc_level;
 	}
 
-      ch->Mana.Current = 100 + (ch->Stats.PermFrc*100);
+      ch->Mana.Current = 100 + (ch->PermStats.Frc*100);
 
       if ( !ch->PCData->ClanInfo.ClanName.empty() )
 	{
@@ -178,7 +178,7 @@ void do_clone( Character *ch, std::string argument )
           SaveClone( ch );
         }
       
-      ch->Stats.PermFrc = frc;
+      ch->PermStats.Frc = frc;
 
       SetAbilityLevel( ch, FORCE_ABILITY, frc_level );
       SetAbilityXP( ch, FORCE_ABILITY, frc_experience );

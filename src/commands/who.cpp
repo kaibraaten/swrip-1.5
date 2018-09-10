@@ -275,7 +275,7 @@ void do_who( Character *ch, std::string argument )
 
       race = race_text;
 
-      if (wch->Stats.PermFrc > 0 && (ch->TopLevel >= LEVEL_GREATER) && !IsImmortal(wch))
+      if (wch->PermStats.Frc > 0 && (ch->TopLevel >= LEVEL_GREATER) && !IsImmortal(wch))
         {
           if(IsJedi( wch ))
             force_char = '*';

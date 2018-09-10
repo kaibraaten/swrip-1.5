@@ -56,9 +56,9 @@ void do_train( Character *ch, std::string arg )
 
       if ( !StrCmp( arg, "str" ) || !StrCmp( arg, "strength" ) )
         {
-          if( mob->Stats.PermStr <= ch->Stats.PermStr
-              || ch->Stats.PermStr >= 20 + RaceTable[ch->Race].Stats.ModStr
-              || ch->Stats.PermStr >= 25 )
+          if( mob->PermStats.Str <= ch->PermStats.Str
+              || ch->PermStats.Str >= 20 + RaceTable[ch->Race].Stats.ModStr
+              || ch->PermStats.Str >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already stronger than me.'",
                    mob, NULL, ch, TO_VICT );
@@ -70,9 +70,9 @@ void do_train( Character *ch, std::string arg )
       
       if ( !StrCmp( arg, "dex" ) || !StrCmp( arg, "dexterity" ) )
         {
-          if( mob->Stats.PermDex <= ch->Stats.PermDex
-              || ch->Stats.PermDex >= 20 + RaceTable[ch->Race].Stats.ModDex
-              || ch->Stats.PermDex >= 25 )
+          if( mob->PermStats.Dex <= ch->PermStats.Dex
+              || ch->PermStats.Dex >= 20 + RaceTable[ch->Race].Stats.ModDex
+              || ch->PermStats.Dex >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already more dextrous than me.'",
                    mob, NULL, ch, TO_VICT );
@@ -84,9 +84,9 @@ void do_train( Character *ch, std::string arg )
 
       if ( !StrCmp( arg, "int" ) || !StrCmp( arg, "intelligence" ) )
         {
-          if( mob->Stats.PermInt <= ch->Stats.PermInt
-              || ch->Stats.PermInt >= 20 + RaceTable[ch->Race].Stats.ModInt
-              || ch->Stats.PermInt >= 25 )
+          if( mob->PermStats.Int <= ch->PermStats.Int
+              || ch->PermStats.Int >= 20 + RaceTable[ch->Race].Stats.ModInt
+              || ch->PermStats.Int >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already more educated than me.'",
                    mob, NULL, ch, TO_VICT );
@@ -98,9 +98,9 @@ void do_train( Character *ch, std::string arg )
 
       if ( !StrCmp( arg, "wis" ) || !StrCmp( arg, "wisdom" ) )
         {
-          if( mob->Stats.PermWis <= ch->Stats.PermWis
-              || ch->Stats.PermWis >= 20 + RaceTable[ch->Race].Stats.ModWis
-              || ch->Stats.PermWis >= 25 )
+          if( mob->PermStats.Wis <= ch->PermStats.Wis
+              || ch->PermStats.Wis >= 20 + RaceTable[ch->Race].Stats.ModWis
+              || ch->PermStats.Wis >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already far wiser than me.'",
                    mob, NULL, ch, TO_VICT );
@@ -112,9 +112,9 @@ void do_train( Character *ch, std::string arg )
 
       if ( !StrCmp( arg, "con" ) || !StrCmp( arg, "constitution" ) )
         {
-          if( mob->Stats.PermCon <= ch->Stats.PermCon
-              || ch->Stats.PermCon >= 20 + RaceTable[ch->Race].Stats.ModCon
-              || ch->Stats.PermCon >= 25 )
+          if( mob->PermStats.Con <= ch->PermStats.Con
+              || ch->PermStats.Con >= 20 + RaceTable[ch->Race].Stats.ModCon
+              || ch->PermStats.Con >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already healthier than me.'",
                    mob, NULL, ch, TO_VICT );
@@ -126,9 +126,9 @@ void do_train( Character *ch, std::string arg )
 
       if ( !StrCmp( arg, "cha" ) || !StrCmp( arg, "charisma" ) )
         {
-          if( mob->Stats.PermCha <= ch->Stats.PermCha
-              || ch->Stats.PermCha >= 20 + RaceTable[ch->Race].Stats.ModCha
-              || ch->Stats.PermCha >= 25 )
+          if( mob->PermStats.Cha <= ch->PermStats.Cha
+              || ch->PermStats.Cha >= 20 + RaceTable[ch->Race].Stats.ModCha
+              || ch->PermStats.Cha >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you already are more charming than me.'",
                    mob, NULL, ch, TO_VICT );
@@ -173,7 +173,7 @@ void do_train( Character *ch, std::string arg )
         }
       
       ch->Echo("&GAfter much excercise you feel a little stronger.\r\n");
-      ch->Stats.PermStr++;
+      ch->PermStats.Str++;
       return;
     }
 
@@ -186,7 +186,7 @@ void do_train( Character *ch, std::string arg )
         }
 
       ch->Echo("&GAfter working hard at many challenging tasks you feel a bit more coordinated.\r\n");
-      ch->Stats.PermDex++;
+      ch->PermStats.Dex++;
       return;
     }
 
@@ -199,7 +199,7 @@ void do_train( Character *ch, std::string arg )
         }
 
       ch->Echo("&GAfter much study you feel alot more knowledgeable.\r\n");
-      ch->Stats.PermInt++;
+      ch->PermStats.Int++;
       return;
     }
 
@@ -213,7 +213,7 @@ void do_train( Character *ch, std::string arg )
 
       ch->Echo("&GAfter contemplating several seemingly meaningless events you suddenly\r\n"
                "receive a flash of insight into the workings of the universe.\r\n");
-      ch->Stats.PermWis++;
+      ch->PermStats.Wis++;
       return;
     }
 
@@ -227,7 +227,7 @@ void do_train( Character *ch, std::string arg )
         }
       
       ch->Echo("&GAfter a long, tiring exercise session you feel much healthier than before.\r\n");
-      ch->Stats.PermCon++;
+      ch->PermStats.Con++;
       return;
     }
 
@@ -242,7 +242,7 @@ void do_train( Character *ch, std::string arg )
       
       ch->Echo("&GYou spend some time focusing on how to improve your personality and feel\r\n"
                "much better about yourself and the ways others see you.\r\n");
-      ch->Stats.PermCha++;
+      ch->PermStats.Cha++;
       return;
     }
 }

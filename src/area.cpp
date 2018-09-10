@@ -516,13 +516,13 @@ static void LoadMobiles( Area *tarea, FILE *fp )
 
       if ( letter == 'C' || letter == 'Z' )
 	{
-          pMobIndex->Stats.PermStr       = ReadInt( fp, Log, fBootDb );
-          pMobIndex->Stats.PermInt       = ReadInt( fp, Log, fBootDb );
-          pMobIndex->Stats.PermWis       = ReadInt( fp, Log, fBootDb );
-          pMobIndex->Stats.PermDex       = ReadInt( fp, Log, fBootDb );
-          pMobIndex->Stats.PermCon       = ReadInt( fp, Log, fBootDb );
-          pMobIndex->Stats.PermCha       = ReadInt( fp, Log, fBootDb );
-          pMobIndex->Stats.PermLck       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Stats.Str       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Stats.Int       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Stats.Wis       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Stats.Dex       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Stats.Con       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Stats.Cha       = ReadInt( fp, Log, fBootDb );
+          pMobIndex->Stats.Lck       = ReadInt( fp, Log, fBootDb );
           pMobIndex->Saving.PoisonDeath  = ReadInt( fp, Log, fBootDb );
           pMobIndex->Saving.Wand         = ReadInt( fp, Log, fBootDb );
           pMobIndex->Saving.ParaPetri    = ReadInt( fp, Log, fBootDb );
@@ -560,24 +560,6 @@ static void LoadMobiles( Area *tarea, FILE *fp )
           pMobIndex->Susceptible        = x6;
           pMobIndex->AttackFlags            = x7;
           pMobIndex->DefenseFlags           = x8;
-        }
-      else
-        {
-          pMobIndex->Stats.PermStr  = 10;
-          pMobIndex->Stats.PermDex  = 10;
-          pMobIndex->Stats.PermInt  = 10;
-          pMobIndex->Stats.PermWis  = 10;
-          pMobIndex->Stats.PermCha  = 10;
-          pMobIndex->Stats.PermCon  = 10;
-          pMobIndex->Stats.PermLck  = 10;
-          pMobIndex->Race            = 0;
-          pMobIndex->BodyParts          = 0;
-          pMobIndex->Resistant       = 0;
-          pMobIndex->Immune          = 0;
-          pMobIndex->Susceptible     = 0;
-          pMobIndex->NumberOfAttacks      = 0;
-          pMobIndex->AttackFlags         = 0;
-          pMobIndex->DefenseFlags        = 0;
         }
 
       if ( letter == 'Z' ) /*  STar Wars Reality Complex Mob  */

@@ -27,6 +27,7 @@
 #include "types.hpp"
 #include "constants.hpp"
 #include "mprog.hpp"
+#include "stats.hpp"
 
 class Character
 {
@@ -120,26 +121,8 @@ public:
     short SpellStaff = 0;
   } Saving;
 
-  struct
-  {
-    short PermStr = 10;
-    short PermInt = 10;
-    short PermWis = 10;
-    short PermDex = 10;
-    short PermCon = 10;
-    short PermCha = 10;
-    short PermLck = 10;
-    short PermFrc = 10;
-
-    short ModStr = 0;
-    short ModInt = 0;
-    short ModWis = 0;
-    short ModDex = 0;
-    short ModCon = 0;
-    short ModCha = 0;
-    short ModLck = 0;
-    short ModFrc = 0;
-  } Stats;
+  Stats PermStats;
+  Stats StatMods;
 
   // Player only
 

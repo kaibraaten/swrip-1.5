@@ -429,7 +429,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
            ch->HitPoints.Current, ch->HitPoints.Max,
            ch->Fatigue.Current, ch->Fatigue.Max );
   fprintf( fp, "Force        %d %d %d %d\n",
-           ch->Stats.PermFrc, ch->Stats.ModFrc,
+           ch->PermStats.Frc, ch->StatMods.Frc,
            ch->Mana.Current, ch->Mana.Max );
   fprintf( fp, "Gold         %d\n",     ch->Gold                );
   fprintf( fp, "Bank         %ld\n",    ch->PCData->Bank                );
@@ -665,22 +665,22 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	}
 
       fprintf( fp, "AttrPerm     %d %d %d %d %d %d %d\n",
-               ch->Stats.PermStr,
-               ch->Stats.PermInt,
-               ch->Stats.PermWis,
-               ch->Stats.PermDex,
-               ch->Stats.PermCon,
-               ch->Stats.PermCha,
-               ch->Stats.PermLck );
+               ch->PermStats.Str,
+               ch->PermStats.Int,
+               ch->PermStats.Wis,
+               ch->PermStats.Dex,
+               ch->PermStats.Con,
+               ch->PermStats.Cha,
+               ch->PermStats.Lck );
 
       fprintf( fp, "AttrMod      %d %d %d %d %d %d %d\n",
-               ch->Stats.ModStr,
-               ch->Stats.ModInt,
-               ch->Stats.ModWis,
-               ch->Stats.ModDex,
-               ch->Stats.ModCon,
-               ch->Stats.ModCha,
-               ch->Stats.ModLck );
+               ch->StatMods.Str,
+               ch->StatMods.Int,
+               ch->StatMods.Wis,
+               ch->StatMods.Dex,
+               ch->StatMods.Con,
+               ch->StatMods.Cha,
+               ch->StatMods.Lck );
 
       fprintf( fp, "Condition    %d %d %d %d\n",
                ch->PCData->Condition[0],
@@ -1306,15 +1306,15 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               x1=x2=x3=x4=x5=x6=x7=13;
               sscanf( line, "%d %d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
-              ch->Stats.ModStr = x1;
-              ch->Stats.ModInt = x2;
-              ch->Stats.ModWis = x3;
-              ch->Stats.ModDex = x4;
-              ch->Stats.ModCon = x5;
-              ch->Stats.ModCha = x6;
-              ch->Stats.ModLck = x7;
+              ch->StatMods.Str = x1;
+              ch->StatMods.Int = x2;
+              ch->StatMods.Wis = x3;
+              ch->StatMods.Dex = x4;
+              ch->StatMods.Con = x5;
+              ch->StatMods.Cha = x6;
+              ch->StatMods.Lck = x7;
               if (!x7)
-                ch->Stats.ModLck = 0;
+                ch->StatMods.Lck = 0;
               fMatch = true;
               break;
             }
@@ -1343,17 +1343,17 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               x1=x2=x3=x4=x5=x6=x7=0;
               sscanf( line, "%d %d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
-              ch->Stats.PermStr = x1;
-              ch->Stats.PermInt = x2;
-              ch->Stats.PermWis = x3;
-              ch->Stats.PermDex = x4;
-              ch->Stats.PermCon = x5;
-              ch->Stats.PermCha = x6;
-              ch->Stats.PermLck = x7;
+              ch->PermStats.Str = x1;
+              ch->PermStats.Int = x2;
+              ch->PermStats.Wis = x3;
+              ch->PermStats.Dex = x4;
+              ch->PermStats.Con = x5;
+              ch->PermStats.Cha = x6;
+              ch->PermStats.Lck = x7;
 
               if ( x7 == 0 )
 		{
-		  ch->Stats.PermLck = 13;
+		  ch->PermStats.Lck = 13;
 		}
 
               fMatch = true;
@@ -1447,8 +1447,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               x1=x2=x3=x4=x5=x6=0;
               sscanf( line, "%d %d %d %d",
                       &x1, &x2, &x3, &x4);
-              ch->Stats.PermFrc = x1;
-              ch->Stats.ModFrc = x2;
+              ch->PermStats.Frc = x1;
+              ch->StatMods.Frc = x2;
               ch->Mana.Current = x3;
               ch->Mana.Max = x4;
               fMatch = true;
@@ -1510,13 +1510,13 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
               if ( x4 >= 100 )
                 {
-                  ch->Stats.PermFrc = GetRandomNumberFromRange( 1 , 20 );
+                  ch->PermStats.Frc = GetRandomNumberFromRange( 1 , 20 );
                   ch->Mana.Max = x4;
                   ch->Mana.Current = x4;
                 }
               else if ( x4 >= 10 )
                 {
-                  ch->Stats.PermFrc = 1;
+                  ch->PermStats.Frc = 1;
                   ch->Mana.Max = x4;
                 }
 
@@ -2844,4 +2844,3 @@ static Character *ReadMobile( FILE *fp )
 
   return NULL;
 }
-

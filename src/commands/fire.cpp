@@ -50,7 +50,7 @@ void do_fire(Character *ch, std::string argument )
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel
-    : (int) ( ch->Stats.PermDex*2 + ch->PCData->Learned[gsn_spacecombat]/3
+    : (int) ( ch->PermStats.Dex*2 + ch->PCData->Learned[gsn_spacecombat]/3
               + ch->PCData->Learned[gsn_spacecombat2]/3 + ch->PCData->Learned[gsn_spacecombat3]/3 );
   origthe_chance = the_chance;
 

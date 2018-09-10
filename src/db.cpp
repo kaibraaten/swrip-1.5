@@ -1442,13 +1442,13 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name )
       pMobIndex->Position       = DEFAULT_POSITION;
       pMobIndex->DefaultPosition    = DEFAULT_POSITION;
       pMobIndex->Sex            = SEX_NEUTRAL;
-      pMobIndex->Stats.PermStr               = 10;
-      pMobIndex->Stats.PermDex               = 10;
-      pMobIndex->Stats.PermInt               = 10;
-      pMobIndex->Stats.PermWis               = 10;
-      pMobIndex->Stats.PermCha               = 10;
-      pMobIndex->Stats.PermCon               = 10;
-      pMobIndex->Stats.PermLck               = 10;
+      pMobIndex->Stats.Str               = 10;
+      pMobIndex->Stats.Dex               = 10;
+      pMobIndex->Stats.Int               = 10;
+      pMobIndex->Stats.Wis               = 10;
+      pMobIndex->Stats.Cha               = 10;
+      pMobIndex->Stats.Con               = 10;
+      pMobIndex->Stats.Lck               = 10;
       pMobIndex->Race           = RACE_HUMAN;
     }
   else
@@ -1475,13 +1475,13 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name )
       pMobIndex->Position               = cMobIndex->Position;
       pMobIndex->DefaultPosition    = cMobIndex->DefaultPosition;
       pMobIndex->Sex            = cMobIndex->Sex;
-      pMobIndex->Stats.PermStr               = cMobIndex->Stats.PermStr;
-      pMobIndex->Stats.PermDex               = cMobIndex->Stats.PermDex;
-      pMobIndex->Stats.PermInt               = cMobIndex->Stats.PermInt;
-      pMobIndex->Stats.PermWis               = cMobIndex->Stats.PermWis;
-      pMobIndex->Stats.PermCha               = cMobIndex->Stats.PermCha;
-      pMobIndex->Stats.PermCon               = cMobIndex->Stats.PermCon;
-      pMobIndex->Stats.PermLck               = cMobIndex->Stats.PermLck;
+      pMobIndex->Stats.Str               = cMobIndex->Stats.Str;
+      pMobIndex->Stats.Dex               = cMobIndex->Stats.Dex;
+      pMobIndex->Stats.Int               = cMobIndex->Stats.Int;
+      pMobIndex->Stats.Wis               = cMobIndex->Stats.Wis;
+      pMobIndex->Stats.Cha               = cMobIndex->Stats.Cha;
+      pMobIndex->Stats.Con               = cMobIndex->Stats.Con;
+      pMobIndex->Stats.Lck               = cMobIndex->Stats.Lck;
       pMobIndex->Race           = cMobIndex->Race;
       pMobIndex->BodyParts         = cMobIndex->BodyParts;
       pMobIndex->Resistant              = cMobIndex->Resistant;

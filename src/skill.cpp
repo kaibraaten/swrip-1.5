@@ -285,7 +285,7 @@ void LearnFromSuccess( Character *ch, int sn )
     {
       if ( ch->PCData->Learned[sn] < 50
 	   || ( GetAbilityLevel(ch, FORCE_ABILITY) == 1
-		&& ch->Stats.PermFrc > 0 ) )
+		&& ch->PermStats.Frc > 0 ) )
         {
           GainXP( ch, FORCE_ABILITY, 25 );
         }

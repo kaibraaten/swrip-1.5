@@ -361,10 +361,10 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
         continue;
       if ( install )
         RemoveBit( pMobIndex->Flags, ACT_PROTOTYPE );
-      if ( pMobIndex->Stats.PermStr != 13    ||   pMobIndex->Stats.PermInt   != 13
-           ||   pMobIndex->Stats.PermWis != 13       ||   pMobIndex->Stats.PermDex   != 13
-           ||   pMobIndex->Stats.PermCon != 13       ||   pMobIndex->Stats.PermCha   != 13
-           ||   pMobIndex->Stats.PermLck != 13
+      if ( pMobIndex->Stats.Str != 13    ||   pMobIndex->Stats.Int   != 13
+           ||   pMobIndex->Stats.Wis != 13       ||   pMobIndex->Stats.Dex   != 13
+           ||   pMobIndex->Stats.Con != 13       ||   pMobIndex->Stats.Cha   != 13
+           ||   pMobIndex->Stats.Lck != 13
            ||   pMobIndex->HitRoll  != 0        ||   pMobIndex->DamRoll    != 0
            ||   pMobIndex->Race  != 0
            ||   pMobIndex->AttackFlags       != 0   ||   pMobIndex->DefenseFlags   != 0
@@ -402,13 +402,13 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
       if ( complexmob )
         {
           fprintf( fpout, "%d %d %d %d %d %d %d\n",
-                   pMobIndex->Stats.PermStr,
-                   pMobIndex->Stats.PermInt,
-                   pMobIndex->Stats.PermWis,
-                   pMobIndex->Stats.PermDex,
-                   pMobIndex->Stats.PermCon,
-                   pMobIndex->Stats.PermCha,
-                   pMobIndex->Stats.PermLck );
+                   pMobIndex->Stats.Str,
+                   pMobIndex->Stats.Int,
+                   pMobIndex->Stats.Wis,
+                   pMobIndex->Stats.Dex,
+                   pMobIndex->Stats.Con,
+                   pMobIndex->Stats.Cha,
+                   pMobIndex->Stats.Lck );
           fprintf( fpout, "%d %d %d %d %d\n",
                    pMobIndex->Saving.PoisonDeath,
                    pMobIndex->Saving.Wand,

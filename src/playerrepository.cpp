@@ -8,6 +8,7 @@
 #include "room.hpp"
 #include "descriptor.hpp"
 #include "clan.hpp"
+#include "alias.hpp"
 
 PlayerRepository *PlayerCharacters = nullptr;
 
@@ -53,27 +54,90 @@ void InMemoryPlayerRepository::Save() const
 
 void InMemoryPlayerRepository::PushAbilities( lua_State *L, const Character *pc )
 {
+  lua_pushstring( L, "Abilities" );
+  lua_newtable( L );
 
+  LuaSetfieldNumber( L, "MainAbility", pc->Ability.Main );
+  
+  for( size_t ability = 0; ability < MAX_ABILITY; ++ability )
+    {
+      lua_pushinteger( L, ability );
+      lua_newtable( L );
+
+      LuaSetfieldString( L, "Name", AbilityName[ability] );
+      LuaSetfieldNumber( L, "Level", GetAbilityLevel( pc, ability ) );
+      LuaSetfieldNumber( L, "Experience", GetAbilityXP( pc, ability ) );
+      
+      lua_settable( L, -3 );
+    }
+  
+  lua_settable( L, -3 );
 }
 
 void InMemoryPlayerRepository::PushAliases( lua_State *L, const Character *pc )
 {
+  lua_pushstring( L, "Aliases" );
+  lua_newtable( L );
 
+  for( const Alias *alias : pc->PCData->Aliases() )
+    {
+      LuaSetfieldString( L, "Name", alias->Name );
+      LuaSetfieldString( L, "Value", alias->Command );
+    }
+  
+  lua_settable( L, -3 );
 }
 
 void InMemoryPlayerRepository::PushAddictions( lua_State *L, const Character *pc )
 {
+  lua_pushstring( L, "Addictions" );
+  lua_newtable( L );
 
+  for( size_t drug = 0; drug < GetSpiceTableSize(); ++drug )
+    {
+      lua_pushnumber( L, drug );
+      lua_newtable( L );
+
+      LuaSetfieldString( L, "Name", GetSpiceTypeName(drug) );
+      LuaSetfieldNumber( L, "Level", pc->PCData->Addiction[drug] );
+      
+      lua_settable( L, -3 );
+    }
+  
+  lua_settable( L, -3 );
 }
 
 void InMemoryPlayerRepository::PushDrugLevels( lua_State *L, const Character *pc )
 {
+  lua_pushstring( L, "SpiceLevels" );
+  lua_newtable( L );
 
+  for( size_t drug = 0; drug < GetSpiceTableSize(); ++drug )
+    {
+      lua_pushnumber( L, drug );
+      lua_newtable( L );
+
+      LuaSetfieldString( L, "Name", GetSpiceTypeName( drug ) );
+      LuaSetfieldNumber( L, "Level", pc->PCData->DrugLevel[drug] );
+
+      lua_settable( L, -3 );
+    }
+
+  lua_settable( L, -3 );
 }
 
 void InMemoryPlayerRepository::PushSaves( lua_State *L, const Character *pc )
 {
+  lua_pushstring( L, "SaveVs" );
+  lua_newtable( L );
 
+  LuaSetfieldNumber( L, "PoisonDeath", pc->Saving.PoisonDeath );
+  LuaSetfieldNumber( L, "Wand", pc->Saving.Wand );
+  LuaSetfieldNumber( L, "ParaPetri", pc->Saving.ParaPetri );
+  LuaSetfieldNumber( L, "Breath", pc->Saving.Breath );
+  LuaSetfieldNumber( L, "SpellStaff", pc->Saving.SpellStaff );
+  
+  lua_settable( L, -3 );
 }
 
 void InMemoryPlayerRepository::PushBuildData( lua_State *L, const Character *pc )
@@ -83,12 +147,19 @@ void InMemoryPlayerRepository::PushBuildData( lua_State *L, const Character *pc 
 
 void InMemoryPlayerRepository::PushHelled( lua_State *L, const Character *pc )
 {
+  lua_pushstring( L, "Helled" );
+  lua_newtable( L );
 
+  LuaSetfieldNumber( L, "ReleaseDate", pc->PCData->ReleaseDate );
+  LuaSetfieldString( L, "HelledBy", pc->PCData->HelledBy );
+  
+  lua_settable( L, -3 );
 }
 
 void InMemoryPlayerRepository::PushStats( lua_State *L, const Character *pc )
 {
-
+  LuaPushStats( L, &pc->PermStats, "PermanentStats" );
+  LuaPushStats( L, &pc->StatMods, "StatModifiers" );
 }
 
 void InMemoryPlayerRepository::PushConditions( lua_State *L, const Character *pc )
