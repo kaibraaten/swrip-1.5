@@ -52,6 +52,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "descriptor.hpp"
+#include "script.hpp"
 
 #include <ctime>
 
@@ -3671,6 +3672,78 @@ void ImcSaveCharacter( const Character * ch, FILE * fp )
       fprintf( fp, "IMCignore    %s\n", temp->Name );
 }
 
+void ImcSaveCharacter( lua_State *L, const Character * ch )
+{
+   if( IsNpc( ch ) )
+      return;
+
+   lua_pushstring( L, "IMC" );
+   lua_newtable( L );
+   
+   LuaSetfieldNumber( L, "IMCPerm", IMCPERM( ch ) );
+   LuaSetfieldNumber( L, "IMCFlags", ( long int )IMCFLAG( ch ) );
+
+   if( !IsNullOrEmpty( IMC_LISTEN( ch ) ) )
+     {
+       LuaSetfieldString( L, "IMCListen", IMC_LISTEN( ch ) );
+     }
+   
+   if( !IsNullOrEmpty( IMC_DENY( ch ) ) )
+     {
+       LuaSetfieldString( L, "IMCDeny", IMC_DENY( ch ) );
+     }
+   
+   if( !IsNullOrEmpty( IMC_EMAIL( ch ) ) )
+     {
+       LuaSetfieldString( L, "IMCEmail", IMC_EMAIL( ch ) );
+     }
+   
+   if( !IsNullOrEmpty( IMC_HOMEPAGE( ch ) ) )
+     {
+       LuaSetfieldString( L, "IMCHomepage", IMC_HOMEPAGE( ch ) );
+     }
+   
+   if( IMC_ICQ( ch ) )
+     {
+       LuaSetfieldNumber( L, "IMCICQ", IMC_ICQ( ch ) );
+     }
+   
+   if( !IsNullOrEmpty( IMC_AIM( ch ) ) )
+     {
+       LuaSetfieldString( L, "IMCAIM", IMC_AIM( ch ) );
+     }
+   
+   if( !IsNullOrEmpty( IMC_YAHOO( ch ) ) )
+     {
+       LuaSetfieldString( L, "IMCYahoo", IMC_YAHOO( ch ) );
+     }
+   
+   if( !IsNullOrEmpty( IMC_MSN( ch ) ) )
+     {
+       LuaSetfieldString( L, "IMCMSN", IMC_MSN( ch ) );
+     }
+   
+   if( !IsNullOrEmpty( IMC_COMMENT( ch ) ) )
+     {
+       LuaSetfieldString( L, "IMCComment", IMC_COMMENT( ch ) );
+     }
+
+   {
+     size_t idx = 0;
+     lua_pushstring( L, "Ignore" );
+     lua_newtable( L );
+   
+     for( const IMC_IGNORE *temp = FIRST_IMCIGNORE( ch ); temp; temp = temp->next )
+       {
+         lua_pushinteger( L, ++idx );
+         lua_pushstring( L, temp->Name );
+         lua_settable( L, -3 );
+       }
+     lua_settable( L, -3 ); // IMC_IGNORE
+   }
+   
+   lua_settable( L, -3 );
+}
 void ImcFreeCharacter( Character * ch )
 {
    IMC_IGNORE *ign, *ign_next;
