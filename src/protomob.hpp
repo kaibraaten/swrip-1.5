@@ -4,6 +4,7 @@
 #include "types.hpp"
 #include "constants.hpp"
 #include "mprog.hpp"
+#include "stats.hpp"
 
 class ProtoMobile
 {
@@ -59,18 +60,8 @@ public:
   int             VipFlags = 0;
 
   MProg mprog;
-  
-  struct
-  {
-    short PermStr = 0;
-    short PermInt = 0;
-    short PermWis = 0;
-    short PermDex = 0;
-    short PermCon = 0;
-    short PermCha = 0;
-    short PermLck = 0;
-    short PermFrc = 0;
-  } Stats;
+
+  class Stats Stats;
 
   struct
   {

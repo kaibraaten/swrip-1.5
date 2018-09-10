@@ -51,6 +51,7 @@ Character::Character(class PCData *pcdata, Descriptor *desc)
   : Desc(desc),
     PCData(pcdata),
     Flags(PLR_BLANK | PLR_COMBINE | PLR_PROMPT),
+    PermStats( 10 ),
     pImpl(new Impl())
 {
   desc->Character = this;
@@ -59,41 +60,42 @@ Character::Character(class PCData *pcdata, Descriptor *desc)
 }
 
 Character::Character(ProtoMobile *protoMob)
-  : spec_fun(protoMob->spec_fun),
-    spec_2(protoMob->spec_2),
-    Prototype(protoMob),
-    Name(protoMob->Name),
-    ShortDescr(protoMob->ShortDescr),
-    LongDescr(protoMob->LongDescr),
-    Description(protoMob->Description),
-    Sex(protoMob->Sex),
-    Race(protoMob->Race),
-    TopLevel(NumberFuzzy(protoMob->Level)),
-    NumberOfAttacks(protoMob->NumberOfAttacks),
-    Gold(protoMob->Gold),
-    Flags(protoMob->Flags),
-    AffectedBy(protoMob->AffectedBy),
-    BodyParts(protoMob->BodyParts),
-    Resistant(protoMob->Resistant),
-    Immune(protoMob->Immune),
-    Susceptible(protoMob->Susceptible),
-    AttackFlags(protoMob->AttackFlags),
-    DefenseFlags(protoMob->DefenseFlags),
-    Speaks(protoMob->Speaks),
-    Speaking(protoMob->Speaking),
-    Alignment(protoMob->Alignment),
-    BareNumDie(protoMob->DamNoDice),
-    BareSizeDie(protoMob->DamSizeDice),
-    MobThac0(protoMob->MobThac0),
-    HitRoll(protoMob->HitRoll),
-    DamRoll(protoMob->DamRoll),
-    HitPlus(protoMob->HitPlus),
-    DamPlus(protoMob->DamPlus),
-    Position(protoMob->Position),
-    DefaultPosition(protoMob->DefaultPosition),
-    Height(protoMob->Height),
-    Weight(protoMob->Weight),
-    VipFlags(protoMob->VipFlags),
+  : spec_fun( protoMob->spec_fun ),
+    spec_2( protoMob->spec_2 ),
+    Prototype( protoMob ),
+    Name( protoMob->Name ),
+    ShortDescr( protoMob->ShortDescr ),
+    LongDescr( protoMob->LongDescr ),
+    Description( protoMob->Description ),
+    Sex( protoMob->Sex ),
+    Race( protoMob->Race ),
+    TopLevel( NumberFuzzy( protoMob->Level ) ),
+    NumberOfAttacks( protoMob->NumberOfAttacks),
+    Gold( protoMob->Gold),
+    Flags( protoMob->Flags),
+    AffectedBy( protoMob->AffectedBy),
+    BodyParts( protoMob->BodyParts),
+    Resistant( protoMob->Resistant),
+    Immune( protoMob->Immune),
+    Susceptible( protoMob->Susceptible),
+    AttackFlags( protoMob->AttackFlags),
+    DefenseFlags( protoMob->DefenseFlags),
+    Speaks( protoMob->Speaks),
+    Speaking( protoMob->Speaking),
+    Alignment( protoMob->Alignment),
+    BareNumDie( protoMob->DamNoDice),
+    BareSizeDie( protoMob->DamSizeDice),
+    MobThac0( protoMob->MobThac0),
+    HitRoll( protoMob->HitRoll),
+    DamRoll( protoMob->DamRoll),
+    HitPlus( protoMob->HitPlus),
+    DamPlus( protoMob->DamPlus),
+    Position( protoMob->Position),
+    DefaultPosition( protoMob->DefaultPosition),
+    Height( protoMob->Height),
+    Weight( protoMob->Weight),
+    VipFlags( protoMob->VipFlags),
+    PermStats( protoMob->Stats ),
     pImpl(new Impl())
 {
   Ability.Level.fill(0);
@@ -123,13 +125,6 @@ Character::Character(ProtoMobile *protoMob)
     }
 
   HitPoints.Current = HitPoints.Max;
-  Stats.PermStr = protoMob->Stats.PermStr;
-  Stats.PermDex = protoMob->Stats.PermDex;
-  Stats.PermWis = protoMob->Stats.PermWis;
-  Stats.PermInt = protoMob->Stats.PermInt;
-  Stats.PermCon = protoMob->Stats.PermCon;
-  Stats.PermCha = protoMob->Stats.PermCha;
-  Stats.PermLck = protoMob->Stats.PermLck;
 
   Saving.PoisonDeath = protoMob->Saving.PoisonDeath;
   Saving.Wand        = protoMob->Saving.Wand;
@@ -322,7 +317,7 @@ short GetAge( const Character *ch )
 short GetCurrentStrength( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->Stats.PermStr + ch->Stats.ModStr, max );
+  return urange( 3, ch->PermStats.Str + ch->StatMods.Str, max );
 }
 
 /*
@@ -331,7 +326,7 @@ short GetCurrentStrength( const Character *ch )
 short GetCurrentIntelligence( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->Stats.PermInt + ch->Stats.ModInt, max );
+  return urange( 3, ch->PermStats.Int + ch->StatMods.Int, max );
 }
 
 /*
@@ -340,7 +335,7 @@ short GetCurrentIntelligence( const Character *ch )
 short GetCurrentWisdom( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->Stats.PermWis + ch->Stats.ModWis, max );
+  return urange( 3, ch->PermStats.Wis + ch->StatMods.Wis, max );
 }
 
 /*
@@ -349,7 +344,7 @@ short GetCurrentWisdom( const Character *ch )
 short GetCurrentDexterity( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->Stats.PermDex + ch->Stats.ModDex, max );
+  return urange( 3, ch->PermStats.Dex + ch->StatMods.Dex, max );
 }
 
 /*
@@ -358,7 +353,7 @@ short GetCurrentDexterity( const Character *ch )
 short GetCurrentConstitution( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->Stats.PermCon + ch->Stats.ModCon, max );
+  return urange( 3, ch->PermStats.Con + ch->StatMods.Con, max );
 }
 
 /*
@@ -367,7 +362,7 @@ short GetCurrentConstitution( const Character *ch )
 short GetCurrentCharisma( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->Stats.PermCha + ch->Stats.ModCha, max );
+  return urange( 3, ch->PermStats.Cha + ch->StatMods.Cha, max );
 }
 
 /*
@@ -376,7 +371,7 @@ short GetCurrentCharisma( const Character *ch )
 short GetCurrentLuck( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->Stats.PermLck + ch->Stats.ModLck, max );
+  return urange( 3, ch->PermStats.Lck + ch->StatMods.Lck, max );
 }
 
 short GetCurrentForce( const Character *ch )
@@ -393,7 +388,7 @@ short GetCurrentForce( const Character *ch )
       max  = 25;
     }
 
-  return urange( 0 , ch->Stats.PermFrc + ch->Stats.ModFrc, max );
+  return urange( 0 , ch->PermStats.Frc + ch->StatMods.Frc, max );
 }
 
 /*
@@ -1042,13 +1037,7 @@ void FixCharacterStats( Character *ch )
   ch->Mana.Current        = umax( 1, ch->Mana.Current );
   ch->Fatigue.Current     = umax( 1, ch->Fatigue.Current );
   ch->ArmorClass          = 100;
-  ch->Stats.ModStr        = 0;
-  ch->Stats.ModDex        = 0;
-  ch->Stats.ModWis        = 0;
-  ch->Stats.ModInt        = 0;
-  ch->Stats.ModCon        = 0;
-  ch->Stats.ModCha        = 0;
-  ch->Stats.ModLck        = 0;
+  ch->StatMods = Stats();
   ch->DamRoll              = 0;
   ch->HitRoll              = 0;
   ch->Alignment = urange( -1000, ch->Alignment, 1000 );

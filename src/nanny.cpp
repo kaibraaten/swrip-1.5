@@ -653,33 +653,33 @@ static void NannyReadMotd( Descriptor *d, std::string argument )
       Object *obj = nullptr;
       int iLang = 0;
 
-      ch->Stats.PermLck = GetRandomNumberFromRange(6, 20);
-      ch->Stats.PermFrc = GetRandomNumberFromRange(-800, 20);
+      ch->PermStats.Lck = GetRandomNumberFromRange(6, 20);
+      ch->PermStats.Frc = GetRandomNumberFromRange(-800, 20);
       ch->AffectedBy    = RaceTable[ch->Race].Affected;
-      ch->Stats.PermLck += RaceTable[ch->Race].Stats.ModLck;
-      ch->Stats.PermFrc += RaceTable[ch->Race].Stats.ModFrc;
+      ch->PermStats.Lck += RaceTable[ch->Race].Stats.ModLck;
+      ch->PermStats.Frc += RaceTable[ch->Race].Stats.ModFrc;
 
       if ( ch->Ability.Main == FORCE_ABILITY )
 	{
-	  ch->Stats.PermFrc = urange( 1 , ch->Stats.PermFrc , 20 );
+	  ch->PermStats.Frc = urange( 1 , ch->PermStats.Frc , 20 );
 	}
       else
 	{
-	  ch->Stats.PermFrc = urange( 0 , ch->Stats.PermFrc , 20 );
+	  ch->PermStats.Frc = urange( 0 , ch->PermStats.Frc , 20 );
 	}
 
       /* Hunters do not recieve force */
 
       if ( ch->Ability.Main == HUNTING_ABILITY )
 	{
-	  ch->Stats.PermFrc = 0;
+	  ch->PermStats.Frc = 0;
 	}
 
       /* Droids do not recieve force */
 
       if( IsDroid(ch) )
 	{
-	  ch->Stats.PermFrc = 0;
+	  ch->PermStats.Frc = 0;
 	}
 
       for ( iLang = 0; LanguageArray[iLang] != LANG_UNKNOWN; iLang++ )
@@ -741,7 +741,7 @@ static void NannyReadMotd( Descriptor *d, std::string argument )
       ch->Fatigue.Current = ch->Fatigue.Max;
       ch->Gold = NEW_CHARACTER_START_CREDITS;
 
-      if ( ch->Stats.PermFrc > 0 )
+      if ( ch->PermStats.Frc > 0 )
 	{
 	  ch->Mana.Max = 200;
 	}
@@ -1046,23 +1046,23 @@ static void AskForStats( Descriptor *d )
   Character *ch = d->Character;
   char buf[MAX_STRING_LENGTH];
   
-  ch->Stats.PermStr = GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->Stats.PermInt = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->Stats.PermWis = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->Stats.PermDex = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->Stats.PermCon = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->Stats.PermCha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->PermStats.Str = GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->PermStats.Int = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->PermStats.Wis = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->PermStats.Dex = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->PermStats.Con = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->PermStats.Cha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
 
-  ch->Stats.PermStr       += RaceTable[ch->Race].Stats.ModStr;
-  ch->Stats.PermInt       += RaceTable[ch->Race].Stats.ModInt;
-  ch->Stats.PermWis       += RaceTable[ch->Race].Stats.ModWis;
-  ch->Stats.PermDex       += RaceTable[ch->Race].Stats.ModDex;
-  ch->Stats.PermCon       += RaceTable[ch->Race].Stats.ModCon;
-  ch->Stats.PermCha       += RaceTable[ch->Race].Stats.ModCha;
+  ch->PermStats.Str       += RaceTable[ch->Race].Stats.ModStr;
+  ch->PermStats.Int       += RaceTable[ch->Race].Stats.ModInt;
+  ch->PermStats.Wis       += RaceTable[ch->Race].Stats.ModWis;
+  ch->PermStats.Dex       += RaceTable[ch->Race].Stats.ModDex;
+  ch->PermStats.Con       += RaceTable[ch->Race].Stats.ModCon;
+  ch->PermStats.Cha       += RaceTable[ch->Race].Stats.ModCha;
 
   sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n",
-           ch->Stats.PermStr, ch->Stats.PermInt, ch->Stats.PermWis,
-           ch->Stats.PermDex, ch->Stats.PermCon, ch->Stats.PermCha) ;
+           ch->PermStats.Str, ch->PermStats.Int, ch->PermStats.Wis,
+           ch->PermStats.Dex, ch->PermStats.Con, ch->PermStats.Cha) ;
 
   d->WriteToBuffer( buf, 0 );
   d->WriteToBuffer( "\r\nAre these stats OK, (Y/N)? ", 0 );

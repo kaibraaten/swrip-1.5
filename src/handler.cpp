@@ -309,31 +309,31 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       break;
 
     case APPLY_STR:
-      ch->Stats.ModStr += mod;
+      ch->StatMods.Str += mod;
       break;
 
     case APPLY_DEX:
-      ch->Stats.ModDex += mod;
+      ch->StatMods.Dex += mod;
       break;
 
     case APPLY_INT:
-      ch->Stats.ModInt += mod;
+      ch->StatMods.Int += mod;
       break;
 
     case APPLY_WIS:
-      ch->Stats.ModWis += mod;
+      ch->StatMods.Wis += mod;
       break;
 
     case APPLY_CON:
-      ch->Stats.ModCon += mod;
+      ch->StatMods.Con += mod;
       break;
 
     case APPLY_CHA:
-      ch->Stats.ModCha += mod;
+      ch->StatMods.Cha += mod;
       break;
 
     case APPLY_LCK:
-      ch->Stats.ModLck += mod;
+      ch->StatMods.Lck += mod;
       break;
 
     case APPLY_SEX:

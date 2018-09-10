@@ -183,7 +183,7 @@ static int GetMaxCombatLevel( const Character *ch )
     }
 
   level += RaceTable[ch->Race].AbilityMod[COMBAT_ABILITY];
-  level += ch->Stats.PermCon + ch->Stats.PermDex + ch->Stats.PermStr;
+  level += ch->PermStats.Con + ch->PermStats.Dex + ch->PermStats.Str;
 
   return urange( 1, level, MAX_ABILITY_LEVEL );
 }
@@ -211,7 +211,7 @@ static int GetMaxPilotingLevel( const Character *ch )
     level = 25;
 
   level += RaceTable[ch->Race].AbilityMod[PILOTING_ABILITY];
-  level += ch->Stats.PermDex * 2;
+  level += ch->PermStats.Dex * 2;
 
   return urange( 1, level, MAX_ABILITY_LEVEL );
 }
@@ -227,7 +227,7 @@ static int GetMaxEngineeringLevel( const Character *ch )
     level = 20;
 
   level += RaceTable[ch->Race].AbilityMod[ENGINEERING_ABILITY];
-  level += ch->Stats.PermInt * 2;
+  level += ch->PermStats.Int * 2;
 
   return urange( 1, level, MAX_ABILITY_LEVEL );
 }
@@ -261,7 +261,7 @@ static int GetMaxSmugglingLevel( const Character *ch )
     level = 50;
 
   level += RaceTable[ch->Race].AbilityMod[SMUGGLING_ABILITY];
-  level += ch->Stats.PermLck * 2;
+  level += ch->PermStats.Lck * 2;
 
   return urange( 1, level, MAX_ABILITY_LEVEL );
 }
@@ -280,7 +280,7 @@ static int GetMaxLeadershipLevel( const Character *ch )
     level = 50;
 
   level += RaceTable[ch->Race].AbilityMod[LEADERSHIP_ABILITY];
-  level += ch->Stats.PermWis + ch->Stats.PermCha + ch->Stats.PermInt;
+  level += ch->PermStats.Wis + ch->PermStats.Cha + ch->PermStats.Int;
 
   return urange( 1, level, MAX_ABILITY_LEVEL );
 }
@@ -299,7 +299,7 @@ static int GetMaxDiplomacyLevel( const Character *ch )
     level = 50;
 
   level += RaceTable[ch->Race].AbilityMod[DIPLOMACY_ABILITY];
-  level += ch->Stats.PermCha * 3;
+  level += ch->PermStats.Cha * 3;
 
   return urange( 1, level, MAX_ABILITY_LEVEL );
 }
@@ -313,7 +313,7 @@ static int GetMaxForceLevel( const Character *ch )
       level = 20;
     }
 
-  level += ch->Stats.PermFrc * 5;
+  level += ch->PermStats.Frc * 5;
 
   return level;
 }

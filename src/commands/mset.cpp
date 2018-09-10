@@ -221,10 +221,10 @@ void do_mset( Character *ch, std::string argument )
           return;
         }
 
-      victim->Stats.PermStr = value;
+      victim->PermStats.Str = value;
 
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->Stats.PermStr = value;
+        victim->Prototype->Stats.Str = value;
 
       return;
     }
@@ -240,10 +240,10 @@ void do_mset( Character *ch, std::string argument )
           return;
         }
 
-      victim->Stats.PermInt = value;
+      victim->PermStats.Int = value;
 
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->Stats.PermInt = value;
+        victim->Prototype->Stats.Int = value;
 
       return;
     }
@@ -259,10 +259,10 @@ void do_mset( Character *ch, std::string argument )
           return;
         }
 
-      victim->Stats.PermWis = value;
+      victim->PermStats.Wis = value;
 
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->Stats.PermWis = value;
+        victim->Prototype->Stats.Wis = value;
 
       return;
     }
@@ -278,10 +278,10 @@ void do_mset( Character *ch, std::string argument )
           return;
         }
 
-      victim->Stats.PermDex = value;
+      victim->PermStats.Dex = value;
 
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->Stats.PermDex = value;
+        victim->Prototype->Stats.Dex = value;
 
       return;
     }
@@ -297,10 +297,10 @@ void do_mset( Character *ch, std::string argument )
           return;
         }
 
-      victim->Stats.PermCon = value;
+      victim->PermStats.Con = value;
 
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->Stats.PermCon = value;
+        victim->Prototype->Stats.Con = value;
 
       return;
     }
@@ -316,10 +316,10 @@ void do_mset( Character *ch, std::string argument )
           return;
         }
 
-      victim->Stats.PermCha = value;
+      victim->PermStats.Cha = value;
 
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->Stats.PermCha = value;
+        victim->Prototype->Stats.Cha = value;
 
       return;
     }
@@ -335,10 +335,10 @@ void do_mset( Character *ch, std::string argument )
           return;
         }
 
-      victim->Stats.PermLck = value;
+      victim->PermStats.Lck = value;
 
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->Stats.PermLck = value;
+        victim->Prototype->Stats.Lck = value;
 
       return;
     }
@@ -353,9 +353,9 @@ void do_mset( Character *ch, std::string argument )
           ch->Echo("Frc range is %d to %d.\r\n", minattr, 20 );
           return;
         }
-      victim->Stats.PermFrc = value;
+      victim->PermStats.Frc = value;
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->Stats.PermFrc = value;
+        victim->Prototype->Stats.Frc = value;
       return;
     }
 

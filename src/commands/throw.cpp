@@ -259,7 +259,7 @@ void do_throw( Character *ch, std::string argument )
       if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_throw] )
         {
           LearnFromSuccess( ch, gsn_throw );
-          global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( obj->Weight*2 , (obj->Weight*2 + ch->Stats.PermStr) ), TYPE_HIT );
+          global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( obj->Weight*2 , (obj->Weight*2 + ch->PermStats.Str) ), TYPE_HIT );
         }
       else
         {

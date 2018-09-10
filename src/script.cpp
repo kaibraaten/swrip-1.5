@@ -1,12 +1,17 @@
-#include <stdio.h>
+#include <cstdio>
 #include "mud.hpp"
 #include "script.hpp"
 #include "log.hpp"
+#include "stats.hpp"
+#include "object.hpp"
+#include "character.hpp"
+#include "skill.hpp"
 
 lua_State *LuaMasterState;
 
 static void SetLuaPath( lua_State * );
 static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx );
+static void LuaPushOneAffect( lua_State *L, const Affect *affect, int idx );
 
 lua_State *CreateLuaState( void )
 {
@@ -372,10 +377,62 @@ void LuaLoadCurrentAndMax( lua_State *L, const std::string &key, int *current, i
   lua_pop( L, 1 );
 }
 
+static void LuaPushOneAffect( lua_State *L, const Affect *affect, int idx )
+{
+  const Skill *skill = GetSkill( affect->Type );
+  
+  if( affect->Type >= 0 && skill == nullptr )
+    {
+      return;
+    }
+  
+  lua_pushinteger( L, ++idx );
+  lua_newtable( L );
+
+  LuaSetfieldNumber( L, "Duration", affect->Duration );
+  LuaSetfieldNumber( L, "Location", affect->Location );
+  LuaSetfieldNumber( L, "Modifier", affect->Modifier );
+
+  if( affect->Type >= 0 && affect->Type < TYPE_PERSONAL )
+    {
+      LuaSetfieldString( L, "Skill", skill->Name );
+    }
+  else
+    {
+      LuaSetfieldNumber( L, "Type", affect->Type );
+    }
+  
+  if( affect->AffectedBy )
+    {
+      for(size_t x = 0; x < MAX_BIT; ++x )
+        {
+          if( IsBitSet( affect->AffectedBy, 1 << x ) )
+            {
+              LuaSetfieldString( L, "AffectedBy", AffectFlags[x] );
+              break;
+            }
+        }
+    }
+
+  lua_settable( L, -3 );
+}
+
 void LuaPushAffects( lua_State *L, const std::list<Affect*> &affects,
                      const std::string &key )
 {
+  if( !affects.empty() )
+    {
+      int idx = 0;
+      lua_pushstring( L, "Affects" );
+      lua_newtable( L );
 
+      for ( const Affect *affect : affects )
+        {
+          LuaPushOneAffect( L, affect, ++idx );
+        }
+
+      lua_settable( L, -3 );
+    }
 }
 
 void LuaPushObjects( lua_State *L, const std::list<Object*> &objects,
@@ -388,4 +445,26 @@ void LuaPushMobiles( lua_State *L, const std::list<Character*> &mobiles,
                      const std::string &key )
 {
 
+}
+
+void LuaPushStats( lua_State *L, const Stats *stats, const std::string &key )
+{
+  lua_pushstring( L, key.c_str() );
+  lua_newtable( L );
+
+  LuaSetfieldNumber( L, "Strength", stats->Str );
+  LuaSetfieldNumber( L, "Intelligence", stats->Int );
+  LuaSetfieldNumber( L, "Wisdom", stats->Wis );
+  LuaSetfieldNumber( L, "Dexterity", stats->Dex );
+  LuaSetfieldNumber( L, "Constitution", stats->Con );
+  LuaSetfieldNumber( L, "Charisma", stats->Cha );
+  LuaSetfieldNumber( L, "Luck", stats->Lck );
+  LuaSetfieldNumber( L, "Force", stats->Frc );
+  
+  lua_settable( L, -3 );
+}
+
+void LuaLoadStats( lua_State *L, Stats *stats, const std::string &key )
+{
+  
 }

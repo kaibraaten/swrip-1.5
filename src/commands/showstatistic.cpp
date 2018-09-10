@@ -46,23 +46,23 @@ void do_showstatistic( Character *ch, std::string argument )
   Character *raceCh = new Character(new PCData(), desc);
   raceCh->TopLevel = 1;
   raceCh->InRoom = GetRoom( ROOM_VNUM_LIMBO );
-  raceCh->Stats.PermStr = 20;
-  raceCh->Stats.PermInt = 20;
-  raceCh->Stats.PermWis = 20;
-  raceCh->Stats.PermDex = 20;
-  raceCh->Stats.PermCon = 20;
-  raceCh->Stats.PermCha = 20;
-  raceCh->Stats.PermLck = 3;
+  raceCh->PermStats.Str = 20;
+  raceCh->PermStats.Int = 20;
+  raceCh->PermStats.Wis = 20;
+  raceCh->PermStats.Dex = 20;
+  raceCh->PermStats.Con = 20;
+  raceCh->PermStats.Cha = 20;
+  raceCh->PermStats.Lck = 3;
 
   if( chk_race )
     {
       raceCh->Race = raceIndex;
-      raceCh->Stats.PermStr       += race->Stats.ModStr;
-      raceCh->Stats.PermInt       += race->Stats.ModInt;
-      raceCh->Stats.PermWis       += race->Stats.ModWis;
-      raceCh->Stats.PermDex       += race->Stats.ModDex;
-      raceCh->Stats.PermCon       += race->Stats.ModCon;
-      raceCh->Stats.PermCha       += race->Stats.ModCha;
+      raceCh->PermStats.Str       += race->Stats.ModStr;
+      raceCh->PermStats.Int       += race->Stats.ModInt;
+      raceCh->PermStats.Wis       += race->Stats.ModWis;
+      raceCh->PermStats.Dex       += race->Stats.ModDex;
+      raceCh->PermStats.Con       += race->Stats.ModCon;
+      raceCh->PermStats.Cha       += race->Stats.ModCha;
     }
   else
     {
@@ -74,8 +74,8 @@ void do_showstatistic( Character *ch, std::string argument )
     {
       ch->Echo("&R%s Statistics\r\n", race->Name );
       ch->Echo("&cStr: &C%d  &cWis: &C%d  &cInt: &C%d  &cDex: &C%d  &cCon: &C%d  &cCha: &C%d\r\n",
-               raceCh->Stats.PermStr, raceCh->Stats.PermWis, raceCh->Stats.PermInt,
-               raceCh->Stats.PermDex, raceCh->Stats.PermCon, raceCh->Stats.PermCha );
+               raceCh->PermStats.Str, raceCh->PermStats.Wis, raceCh->PermStats.Int,
+               raceCh->PermStats.Dex, raceCh->PermStats.Con, raceCh->PermStats.Cha );
       ch->Echo("                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );
 
       for( iC = 0; iC < MAX_ABILITY; iC++ )
@@ -122,12 +122,12 @@ void do_showstatistic( Character *ch, std::string argument )
             }
           
           raceCh->Race = iR;
-          raceCh->Stats.PermStr = 20 + RaceTable[raceCh->Race].Stats.ModStr;
-          raceCh->Stats.PermInt = 20 + RaceTable[raceCh->Race].Stats.ModInt;
-          raceCh->Stats.PermWis = 20 + RaceTable[raceCh->Race].Stats.ModWis;
-          raceCh->Stats.PermDex = 20 + RaceTable[raceCh->Race].Stats.ModDex;
-          raceCh->Stats.PermCon = 20 + RaceTable[raceCh->Race].Stats.ModCon;
-          raceCh->Stats.PermCha = 20 + RaceTable[raceCh->Race].Stats.ModCha;
+          raceCh->PermStats.Str = 20 + RaceTable[raceCh->Race].Stats.ModStr;
+          raceCh->PermStats.Int = 20 + RaceTable[raceCh->Race].Stats.ModInt;
+          raceCh->PermStats.Wis = 20 + RaceTable[raceCh->Race].Stats.ModWis;
+          raceCh->PermStats.Dex = 20 + RaceTable[raceCh->Race].Stats.ModDex;
+          raceCh->PermStats.Con = 20 + RaceTable[raceCh->Race].Stats.ModCon;
+          raceCh->PermStats.Cha = 20 + RaceTable[raceCh->Race].Stats.ModCha;
           sprintf( buf, "\r\n&c%-20s &B| &C", RaceTable[iR].Name );
 
           for( iC2 = 0; iC2 < FORCE_ABILITY; iC2++ )

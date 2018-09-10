@@ -86,6 +86,7 @@ class BadName;
 class timerset;
 class MPROG_ACT_LIST;
 class MPROG_DATA;
+class Stats;
 
 /*
  * Function types.

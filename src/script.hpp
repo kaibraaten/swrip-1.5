@@ -49,6 +49,8 @@ void LuaPushMobiles( lua_State *L, const std::list<Character*> &mobiles,
                      const std::string &key = "Mobiles" );
 void LuaPushVector3( lua_State *L, const Vector3 *v, const std::string &key );
 void LuaLoadVector3( lua_State *L, Vector3 *vec, const std::string &key );
+void LuaPushStats( lua_State *L, const Stats *stats, const std::string &key );
+void LuaLoadStats( lua_State *L, Stats *stats, const std::string &key );
 void LuaPushCurrentAndMax( lua_State *L, const std::string &key, int current, int max );
 void LuaLoadCurrentAndMax( lua_State *L, const std::string &key, int *current, int *max );
 
