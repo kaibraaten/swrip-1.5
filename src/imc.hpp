@@ -52,4 +52,7 @@ void ImcFreeCharacter( Character * ch );
 void ImcLoop( void );
 socket_t ImcGetSocket( SiteInfo* );
 
+struct lua_State;
+void ImcSaveCharacter( lua_State *L, const Character *ch );
+
 #endif

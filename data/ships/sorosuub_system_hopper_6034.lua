@@ -1,59 +1,28 @@
 -- Sorosuub System Hopper
--- Last saved Friday 07-Sep-2018 21:51:09
+-- Last saved Monday 10-Sep-2018 21:35:42
 
 ShipEntry
 {
+   State = 0, 
+   Type = "Civilian", 
+   Shipyard = 203, 
    Pilot = "", 
-   Instruments = 
+   PersonalName = "6034", 
+   CoPilot = "", 
+   Description = "", 
+   DockingPorts = 0, 
+   Hyperdrive = 
    {
-      AstroArray = 0, 
-      Comm = 0, 
-      Sensor = 0, 
+      Speed = 100, 
    }, 
    Guard = false, 
-   Position = 
-   {
-      X = 755520, 
-      Y = 755859, 
-      Z = 75184, 
-   }, 
-   PersonalName = "6034", 
-   LastDock = 203, 
-   Class = "Starfighter", 
-   Rooms = 
-   {
-      Pilotseat = 32159, 
-      Engine = 0, 
-      Coseat = 32159, 
-      Hangar = 0, 
-      Navseat = 32159, 
-      Entrance = 32159, 
-      First = 32159, 
-      Last = 32159, 
-      Gunseat = 32159, 
-      Cockpit = 32159, 
-   }, 
-   Owner = "public", 
-   Defenses = 
-   {
-      Chaff = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
-      Shield = 
-      {
-         Current = 0, 
-         Max = 10, 
-      }, 
-      Hull = 
-      {
-         Current = 100, 
-         Max = 100, 
-      }, 
-   }, 
    WeaponSystems = 
    {
+      TractorBeam = 
+      {
+         Strength = 0, 
+         State = 1, 
+      }, 
       IonCannon = 
       {
          State = 0, 
@@ -63,77 +32,53 @@ ShipEntry
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
-         }, 
-      }, 
-      TractorBeam = 
-      {
-         State = 1, 
-         Strength = 0, 
-      }, 
-      Tube = 
-      {
-         Torpedoes = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         State = 0, 
-         Rockets = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         Missiles = 
-         {
-            Current = 0, 
-            Max = 0, 
+            RoomVnum = 0, 
          }, 
       }, 
       Laser = 
@@ -141,33 +86,88 @@ ShipEntry
          State = 0, 
          Count = 0, 
       }, 
+      Tube = 
+      {
+         State = 0, 
+         Missiles = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+      }, 
    }, 
-   Hyperdrive = 
+   Rooms = 
    {
-      Speed = 100, 
+      Coseat = 32159, 
+      Last = 32159, 
+      Entrance = 32159, 
+      Cockpit = 32159, 
+      Navseat = 32159, 
+      Pilotseat = 32159, 
+      Hangar = 0, 
+      First = 32159, 
+      Gunseat = 32159, 
+      Engine = 0, 
    }, 
-   State = 0, 
-   Alarm = false, 
+   LastDock = 203, 
+   Class = "Starfighter", 
+   Defenses = 
+   {
+      Hull = 
+      {
+         Max = 100, 
+         Current = 100, 
+      }, 
+      Shield = 
+      {
+         Max = 10, 
+         Current = 0, 
+      }, 
+      Chaff = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+   }, 
    Thrusters = 
    {
       Maneuver = 35, 
       Energy = 
       {
-         Current = 2000, 
          Max = 2000, 
+         Current = 2000, 
       }, 
       Speed = 
       {
-         Current = 0, 
          Max = 65, 
+         Current = 0, 
       }, 
    }, 
-   Home = "Merchant Asteroid", 
-   Location = 203, 
-   Description = "", 
-   DockingPorts = 0, 
-   CoPilot = "", 
-   Type = "Civilian", 
-   Shipyard = 203, 
+   Position = 
+   {
+      Z = 75184, 
+      Y = 755859, 
+      X = 755520, 
+   }, 
+   Instruments = 
+   {
+      AstroArray = 0, 
+      Comm = 0, 
+      Sensor = 0, 
+   }, 
    Name = "Sorosuub System Hopper", 
+   Home = "Merchant Asteroid", 
+   Alarm = false, 
+   Location = 203, 
+   Owner = "public", 
 }

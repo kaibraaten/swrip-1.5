@@ -9,6 +9,9 @@
 #include "descriptor.hpp"
 #include "clan.hpp"
 #include "alias.hpp"
+#include "log.hpp"
+#include "board.hpp"
+#include "skill.hpp"
 
 PlayerRepository *PlayerCharacters = nullptr;
 
@@ -164,27 +167,95 @@ void InMemoryPlayerRepository::PushStats( lua_State *L, const Character *pc )
 
 void InMemoryPlayerRepository::PushConditions( lua_State *L, const Character *pc )
 {
+  lua_pushstring( L, "Conditions" );
+  lua_newtable( L );
 
+  for( size_t idx = 0; idx < pc->PCData->Condition.size(); ++idx )
+    {
+      lua_pushinteger( L, idx );
+      lua_newtable( L );
+      static const std::array<const char * const, MAX_CONDS> ConditionNames = { "drunk", "full", "thirst", "bloodthirst" };
+
+      LuaSetfieldString( L, "Type", ConditionNames[idx] );
+      LuaSetfieldNumber( L, "Level", pc->PCData->Condition[idx] );
+      
+      lua_settable( L, -3 );
+    }
+  
+  lua_settable( L, -3 );
 }
 
 void InMemoryPlayerRepository::PushSkills( lua_State *L, const Character *pc )
 {
+  lua_pushstring( L, "Skills" );
+  lua_newtable( L );
 
+  for( int sn = 1; sn < TopSN; ++sn )
+    {
+      const Skill *skill = SkillTable[sn];
+
+      if( !skill->Name.empty() && pc->PCData->Learned[sn] > 0)
+        {
+          lua_pushnumber( L, sn );
+          lua_newtable( L );
+
+          LuaSetfieldString( L, "Type", SkillTypeName[skill->Type] );
+          LuaSetfieldString( L, "Name", skill->Name );
+          LuaSetfieldNumber( L, "Level", pc->PCData->Learned[sn] );
+          
+          lua_settable( L, -3 );
+        }
+    }
+  
+  lua_settable( L, -3 );
 }
 
 void InMemoryPlayerRepository::PushComments( lua_State *L, const Character *pc )
 {
+  lua_pushstring( L, "Comments" );
+  lua_newtable( L );
+  size_t idx = 0;
+  
+  for( const Note *note : pc->PCData->Comments() )
+    {
+      lua_pushnumber( L, ++idx );
+      lua_newtable( L );
 
+      LuaSetfieldString( L, "Sender", note->Sender );
+      LuaSetfieldString( L, "Date", note->Date );
+      LuaSetfieldString( L, "To", note->ToList );
+      LuaSetfieldString( L, "Subject", note->Subject );
+      LuaSetfieldString( L, "Text", note->Text );
+
+      lua_settable( L, -3 );
+    }
+
+  lua_settable( L, -3 );
 }
 
 void InMemoryPlayerRepository::PushKilledData( lua_State *L, const Character *pc )
 {
+  lua_pushstring( L, "Killed" );
+  lua_newtable( L );
+  size_t idx = 0;
+  
+  for( const KilledData &killed : pc->PCData->Killed )
+    {
+      lua_pushnumber( L, ++idx );
+      lua_newtable( L );
 
+      LuaSetfieldNumber( L, "Vnum", killed.Vnum );
+      LuaSetfieldNumber( L, "Count", killed.Count );
+      
+      lua_settable( L, -3 );
+    }
+  
+  lua_settable( L, -3 );
 }
 
 void InMemoryPlayerRepository::PushImcData( lua_State *L, const Character *pc )
 {
-
+  ImcSaveCharacter( L, pc );
 }
 
 void InMemoryPlayerRepository::PushGuildData( lua_State *L, const Character *pc )
