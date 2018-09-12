@@ -35,7 +35,7 @@ Edit the `startup` script in the top directory and change `port=7000` into whate
 
 Type `./startup` and pray.
 
-Log into the game with your favorite mud client, and create a character. You'll need to finish newbie school in order to save your character. After successfully saving, quit the game. Enter the `data/players/first_letter_of_your_character_name` and open the save file. Locate the `Level = 2` variable, and change to `Level = 105`. Save and exit editor. You can now enter the game, and you will be top level admin. Yay.
+Log into the game with your favorite mud client, and create a character. You'll need to finish newbie school in order to save your character. After successfully saving, quit the game. Enter the `data/players/first_letter_of_your_character_name` directory and open the save file. Locate the `Level = 2` variable, and change to `Level = 105`. Save and exit editor. You can now enter the game, and you will be top level admin. Yay.
 
 I'll probably simplify this process at some point.
 
