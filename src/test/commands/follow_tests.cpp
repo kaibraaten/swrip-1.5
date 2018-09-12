@@ -6,6 +6,7 @@
 #include "protomob.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "exit.hpp"
 
 class MockLogger : public Logger
 {
