@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <cstdio>
 #include "mud.hpp"
 #include "script.hpp"
@@ -6,6 +7,8 @@
 #include "object.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "protoobject.hpp"
+#include "room.hpp"
 
 lua_State *LuaMasterState;
 
@@ -386,13 +389,25 @@ static void LuaPushOneAffect( lua_State *L, const Affect *affect, int idx )
       return;
     }
   
-  lua_pushinteger( L, ++idx );
+  lua_pushinteger( L, idx );
   lua_newtable( L );
 
   LuaSetfieldNumber( L, "Duration", affect->Duration );
   LuaSetfieldNumber( L, "Location", affect->Location );
-  LuaSetfieldNumber( L, "Modifier", affect->Modifier );
 
+  if( affect->Location >= 0 && affect->Location < static_cast<int>( AffectTypes.size() ) )
+    {
+      LuaSetfieldString( L, "AffectType", AffectTypes[affect->Location] );
+    }
+  
+  LuaSetfieldNumber( L, "Modifier",
+                     (affect->Location == APPLY_WEAPONSPELL
+                      || affect->Location == APPLY_WEARSPELL
+                      || affect->Location == APPLY_REMOVESPELL
+                      || affect->Location == APPLY_STRIPSN)
+                     && IS_VALID_SN(affect->Modifier)
+                     ? SkillTable[affect->Modifier]->Slot : affect->Modifier );
+  
   if( affect->Type >= 0 && affect->Type < TYPE_PERSONAL )
     {
       LuaSetfieldString( L, "Skill", skill->Name );
@@ -435,10 +450,236 @@ void LuaPushAffects( lua_State *L, const std::list<Affect*> &affects,
     }
 }
 
+void LuaPushExtraDescriptions( lua_State *L, const std::list<ExtraDescription*> &extras )
+{
+  lua_pushstring( L, "ExtraDescriptions" );
+  lua_newtable( L );
+  size_t idx = 0;
+  
+  for( const ExtraDescription *ed : extras )
+    {
+      lua_pushinteger( L, ++idx );
+      lua_newtable( L );
+
+      LuaSetfieldString( L, "Keyword", ed->Keyword );
+      LuaSetfieldString( L, "Description", ed->Description );
+
+      lua_settable( L, -3 );
+    }
+
+  lua_settable( L, -3 );
+}
+
+void LuaPushOvalues( lua_State *L, const std::array<int, MAX_OVAL> values )
+{
+  lua_pushstring( L, "ObjectValues" );
+  lua_newtable( L );
+
+  for( size_t i = 0; i < values.size(); ++i )
+    {
+      lua_pushinteger( L, i );
+      lua_pushinteger( L, values[i] );
+      lua_settable( L, -3 );
+    }
+
+  lua_settable( L, -3 );
+}
+
+static void LuaPushObject( lua_State *L, const Object *obj, size_t idx )
+{
+  /*
+   * Castrate storage characters.
+   */
+  if ( obj->ItemType == ITEM_KEY && !IS_OBJ_STAT(obj, ITEM_CLANOBJECT ))
+    {
+      return;
+    }
+
+  /*
+   * Catch deleted objects                                      -Thoric
+   */
+  if ( IsObjectExtracted(obj) )
+    {
+      return;
+    }
+
+  /*
+   * Do NOT save prototype items!                               -Thoric
+   */
+  if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
+    {
+      return;
+    }
+  
+  lua_pushinteger( L, idx );
+  lua_newtable( L );
+  const ProtoObject *proto = obj->Prototype;
+
+  LuaSetfieldNumber( L, "Vnum", proto->Vnum );
+  
+  if( obj->Count > 1 )
+    {
+      LuaSetfieldNumber( L, "Count", obj->Count );
+    }
+
+  if( StrCmp( obj->Name, proto->Name ) != 0 )
+    {
+      LuaSetfieldString( L, "Name", obj->Name );
+    }
+
+  if( StrCmp( obj->ShortDescr, proto->ShortDescr ) != 0 )
+    {
+      LuaSetfieldString( L, "ShortDescription", obj->ShortDescr );
+    }
+
+  if( StrCmp( obj->Description, proto->Description ) != 0 )
+    {
+      LuaSetfieldString( L, "Description", obj->Description );
+    }
+
+  if( StrCmp( obj->ActionDescription, proto->ActionDescription ) != 0 )
+    {
+      LuaSetfieldString( L, "ActionDescription", obj->ActionDescription );
+    }
+
+  if( obj->InRoom != nullptr )
+    {
+      LuaSetfieldNumber( L, "InRoom", obj->InRoom->Vnum );
+    }
+
+  if( obj->Flags != proto->Flags )
+    {
+      LuaPushFlags( L, obj->Flags, ObjectFlags, "Flags" );
+    }
+
+  if( obj->WearFlags != proto->WearFlags )
+    {
+      LuaPushFlags( L, obj->WearFlags, WearFlags, "WearFlags" );
+    }
+
+  if( obj->ItemType != proto->ItemType )
+    {
+      LuaSetfieldString( L, "ItemType", ObjectTypes[obj->ItemType] );
+    }
+
+  if( obj->Weight != proto->Weight )
+    {
+      LuaSetfieldNumber( L, "Weight", obj->Weight );
+    }
+
+  if( obj->Cost != proto->Cost )
+    {
+      LuaSetfieldNumber( L, "Cost", obj->Cost );
+    }
+
+  if( std::any_of( std::cbegin( obj->Value ), std::cend( obj->Value ),
+                   [](const auto v) { return v != 0; } ) )
+    {
+      LuaPushOvalues( L, obj->Value );
+    }
+  
+  if( obj->Level != 0 )
+    {
+      LuaSetfieldNumber( L, "Level", obj->Level );
+    }
+
+  if( obj->Timer != 0 )
+    {
+      LuaSetfieldNumber( L, "Timer", obj->Timer );
+    }
+
+  int wear_loc = -1;
+
+  for( size_t wear = 0; wear < MAX_WEAR; wear++ )
+    {
+      for ( size_t x = 0; x < MAX_LAYERS; x++ )
+        {
+          if ( obj == save_equipment[wear][x] )
+            {
+              wear_loc = wear;
+              break;
+            }
+          else if ( !save_equipment[wear][x] )
+            {
+              break;
+            }
+        }
+    }
+
+  if( wear_loc != -1 )
+    {
+      LuaSetfieldNumber( L, "WearLocation", wear_loc );
+    }
+
+  switch ( obj->ItemType )
+    {
+    case ITEM_PILL: /* was down there with staff and wand, wrongly - Scryn */
+    case ITEM_POTION:
+      if ( IS_VALID_SN(obj->Value[OVAL_PILL_SPELL1]) )
+        {
+          LuaSetfieldString( L, "Spell1",
+                             SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name );
+        }
+
+      if ( IS_VALID_SN(obj->Value[OVAL_PILL_SPELL2]) )
+        {
+          LuaSetfieldString( L, "Spell2",
+                             SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name );
+        }
+
+      if ( IS_VALID_SN(obj->Value[OVAL_PILL_SPELL3]) )
+        {
+          LuaSetfieldString( L, "Spell3",
+                             SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name );
+        }
+      break;
+
+    case ITEM_DEVICE:
+      if ( IS_VALID_SN(obj->Value[OVAL_DEVICE_SPELL]) )
+        {
+          LuaSetfieldString( L, "Spell3",
+                             SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name );
+        }
+      break;
+
+    case ITEM_SALVE:
+      if ( IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL1]) )
+        {
+          LuaSetfieldString( L, "Spell4",
+                             SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name );
+        }
+
+      if ( IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL2]) )
+        {
+          LuaSetfieldString( L, "Spell5",
+                             SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name );
+        }
+
+      break;
+
+    default:
+      break;
+    }
+
+  LuaPushAffects( L, obj->Affects(), "Affects" );
+  LuaPushExtraDescriptions( L, obj->ExtraDescriptions() );
+  LuaPushObjects( L, obj->Objects(), "Contents" );  
+  lua_settable( L, -3 );
+}
+
 void LuaPushObjects( lua_State *L, const std::list<Object*> &objects,
                      const std::string &key )
 {
+  lua_pushstring( L, key.c_str() );
+  lua_newtable( L );
+  size_t idx = 0;
 
+  for( const Object *obj : objects )
+    {
+      LuaPushObject( L, obj, ++idx );
+    }
+  
+  lua_settable( L, -3 );
 }
 
 void LuaPushMobiles( lua_State *L, const std::list<Character*> &mobiles,

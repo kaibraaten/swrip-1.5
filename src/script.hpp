@@ -53,6 +53,8 @@ void LuaPushStats( lua_State *L, const Stats *stats, const std::string &key );
 void LuaLoadStats( lua_State *L, Stats *stats, const std::string &key );
 void LuaPushCurrentAndMax( lua_State *L, const std::string &key, int current, int max );
 void LuaLoadCurrentAndMax( lua_State *L, const std::string &key, int *current, int *max );
+void LuaPushOvalues( lua_State *L, const std::array<int, MAX_OVAL> values );
+void LuaPushExtraDescriptions( lua_State *L, const std::list<ExtraDescription*> &extras );
 
 #define PushCurrentAndMax( L, key, structure ) LuaPushCurrentAndMax( (L), (key), (structure.Current), (structure.Max) )
 #define LoadCurrentAndMax( L, key, structure ) LuaLoadCurrentAndMax( (L), (key), (&structure.Current), (&structure.Max) )
