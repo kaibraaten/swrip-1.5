@@ -3,7 +3,7 @@
 Before I say anything else, I need to make it clear that I do **_not_** recommend using this code in its current state.
 
 ## What am I looking at?
-This project is a refactored version of SWRiP 1.0.1. The original code is a prime example of legacy code, with lots of global variables without any kind of access control, everything can be changed freely from anywhere, more code duplication than you can shake your fist at, poorly named variables, functions and structs, unclear structure and architecture, etc. Even minor changes or additions make require little changes in a dozen unrelated places all over the codebase. In short, it's the kind of code that no sane person would touch with a ten foot pole.
+This project is a refactored version of SWRiP 1.0.1. The original code is a prime example of legacy code, with lots of global variables without any kind of access control, everything can be changed freely from anywhere, more code duplication than you can shake your fist at, poorly named variables, functions and structs, unclear structure and architecture, etc. Even minor changes or additions require little changes in a dozen unrelated places all over the codebase. In short, it's the kind of code that no sane person would touch with a ten foot pole.
 
 ## Why would you do this to yourself?
 Being a computer science student with a special interest in clean code, cleaning up this mess is a perfect project for me. Identify poor code, and turn it into good (or at least better) code. I'm not saying it'll ever be high quality code, but I've already learned a lot from this project. In particular, I've felt how much tight coupling can hurt.
