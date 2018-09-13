@@ -209,7 +209,6 @@ Ship *GetShipInRoom( const Room *room, const std::string &name );
 void TransferShip( Ship *ship , vnum_t destination );
 bool IsShipAutoflying( const Ship *ship );
 bool CheckPilot( const Character *ch, const Ship *ship );
-std::string GetShipFilename( const Ship *ship );
 bool ShipNameAndPersonalnameComboIsUnique( const std::string &name,
                                            const std::string &personalname );
 void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData);

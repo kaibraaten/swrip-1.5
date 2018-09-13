@@ -8,6 +8,7 @@
 #include "script.hpp"
 #include "turret.hpp"
 
+#define SHIP_DIR DATA_DIR "ships/"
 ShipRepository *Ships = nullptr;
 
 static void ExecuteShipFile( const std::string &filePath, void *userData );
@@ -875,4 +876,24 @@ static void ExecuteShipFile( const std::string &filePath, void *userData )
 ShipRepository *NewShipRepository()
 {
   return new LuaShipRepository();
+}
+
+std::string GetShipFilename( const Ship *ship )
+{
+  char buffer[MAX_STRING_LENGTH];
+  char fullName[MAX_STRING_LENGTH];
+
+  if( ship->PersonalName.empty()
+      || !StrCmp( ship->Name, ship->PersonalName ) )
+    {
+      sprintf( fullName, "%s", ship->Name.c_str() );
+    }
+  else
+    {
+      sprintf( fullName, "%s %s", ship->Name.c_str(), ship->PersonalName.c_str() );
+    }
+
+  sprintf( buffer, "%s%s", SHIP_DIR, ConvertToLuaFilename( fullName ).c_str() );
+
+  return buffer;
 }

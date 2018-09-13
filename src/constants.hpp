@@ -1952,7 +1952,6 @@ enum
 #define PLAYER_DIR      DATA_DIR "players/"   /* Player files                 */
 #define BACKUP_DIR      DATA_DIR "backup/"    /* Backup Player files          */
 #define GOD_DIR         DATA_DIR "gods/"      /* God Info Dir                 */
-#define SHIP_DIR        DATA_DIR "ships/"
 #define SPACE_DIR       DATA_DIR "space/"
 #define PLANET_DIR      DATA_DIR "planets/"
 #define GUARD_DIR       PLANET_DIR
@@ -1966,7 +1965,6 @@ enum
 #define LOG_DIR         "./log/"
 
 #define AREA_LIST       "area.lst"      /* List of areas                */
-#define BAN_LIST        DATA_DIR "banned.lua"       /* List of bans                 */
 #define GOD_LIST        "gods.lst"      /* List of gods                 */
 #define GUARD_LIST      "guard.lst"
 #define SHUTDOWN_FILE   "shutdown.txt"          /* For 'shutdown'        */

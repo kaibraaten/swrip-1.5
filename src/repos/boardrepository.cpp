@@ -3,7 +3,7 @@
 #include "script.hpp"
 #include "constants.hpp"
 
-#define BOARD_DIR       DATA_DIR "boards/"
+#define BOARD_DIR DATA_DIR "boards/"
 
 BoardRepository *Boards = nullptr;
 

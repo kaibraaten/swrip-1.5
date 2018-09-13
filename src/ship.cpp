@@ -2152,26 +2152,6 @@ long GetRentalPrice(const Ship *ship)
   return GetShipValue(ship) / 100;
 }
 
-std::string GetShipFilename( const Ship *ship )
-{
-  char buffer[MAX_STRING_LENGTH];
-  char fullName[MAX_STRING_LENGTH];
-  
-  if( ship->PersonalName.empty()
-      || !StrCmp( ship->Name, ship->PersonalName ) )
-    {
-      sprintf( fullName, "%s", ship->Name.c_str() );
-    }
-  else
-    {
-      sprintf( fullName, "%s %s", ship->Name.c_str(), ship->PersonalName.c_str() );
-    }
-
-  sprintf( buffer, "%s%s", SHIP_DIR, ConvertToLuaFilename( fullName ).c_str() );
-
-  return buffer;
-}
-
 void ResetShip( Ship *ship )
 {
   ship->State = SHIP_READY;

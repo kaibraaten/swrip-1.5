@@ -4,6 +4,8 @@
 #include "script.hpp"
 #include "constants.hpp"
 
+#define BAN_LIST DATA_DIR "banned.lua"
+
 BanRepository *Bans = NULL;
 
 //////////////////////////////////////////////////////

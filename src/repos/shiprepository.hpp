@@ -14,5 +14,6 @@ public:
 
 extern ShipRepository *Ships;
 ShipRepository *NewShipRepository();
+std::string GetShipFilename( const Ship *ship );
 
 #endif
