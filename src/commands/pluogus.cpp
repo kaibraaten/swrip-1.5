@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "shuttle.hpp"
+#include "repos/shuttlerepository.hpp"
 
 static constexpr int MAX_STOPS_TO_DISPLAY = 4;
 

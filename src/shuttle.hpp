@@ -26,7 +26,6 @@
 #include <list>
 #include <vector>
 #include <string>
-#include <utility/repository.hpp>
 #include "types.hpp"
 #include "constants.hpp"
 
@@ -111,28 +110,13 @@ void ShuttleUpdate();
 Shuttle *NewShuttle(const std::string &name);
 bool ExtractShuttle( Shuttle *shuttle );
 bool InsertShuttle( Shuttle *shuttle, Room *room );
-void PermanentlyDestroyShuttle( Shuttle *shuttle );
 void ShowShuttlesToCharacter( const std::list<Shuttle*> &shuttles, Character *ch );
 Shuttle *GetShuttleInRoom( const Room *room, const std::string &name );
 Shuttle *GetShuttleFromEntrance( vnum_t vnum );
 ShuttleStop *AllocateShuttleStop( void );
-std::string GetShuttleFilename( const Shuttle *shuttle );
 
 DECLARE_CMD_FUN( do_showshuttle );
 DECLARE_CMD_FUN( do_makeshuttle );
 DECLARE_CMD_FUN( do_setshuttle  );
-
-class ShuttleRepository : public Ceris::Repository<Shuttle*>
-{
-public:
-  virtual void Load() = 0;
-  virtual void Save() const = 0;
-  virtual void Save(const Shuttle *shuttle) const = 0;
-
-  virtual Shuttle *FindByName(const std::string &name) const = 0;
-};
-
-extern ShuttleRepository *Shuttles;
-ShuttleRepository *NewShuttleRepository();
 
 #endif

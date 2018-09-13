@@ -21,6 +21,7 @@
 #include "repos/clanrepository.hpp"
 #include "repos/planetrepository.hpp"
 #include "repos/spaceobjectrepository.hpp"
+#include "repos/shuttlerepository.hpp"
 
 void do_test( Character *ch, std::string argument )
 {

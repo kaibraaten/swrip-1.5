@@ -1,8 +1,9 @@
 #include "mud.hpp"
 #include "shuttle.hpp"
 #include "character.hpp"
+#include "repos/shuttlerepository.hpp"
 
-void do_showshuttle (Character *ch, std::string argument)
+void do_showshuttle( Character *ch, std::string argument )
 {
   const Shuttle *shuttle = Shuttles->FindByName(argument);
 

@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "shuttle.hpp"
 #include "character.hpp"
+#include "repos/shuttlerepository.hpp"
 
 void do_makeshuttle (Character *ch, std::string argument)
 {

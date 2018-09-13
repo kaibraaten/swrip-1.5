@@ -6,6 +6,7 @@
 #include "mud.hpp"
 #include "shuttle.hpp"
 #include "character.hpp"
+#include "repos/shuttlerepository.hpp"
 
 void do_setshuttle( Character *ch, std::string argument )
 {
@@ -123,7 +124,7 @@ void do_setshuttle( Character *ch, std::string argument )
     }
   else if (!StrCmp(arg2, "remove"))
     {
-      PermanentlyDestroyShuttle(shuttle);
+      Shuttles->DeleteFromStorage(shuttle);
       ch->Echo("Shuttle Removed.\r\n");
       return;
     }
