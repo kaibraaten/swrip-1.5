@@ -615,6 +615,7 @@ _OBJ =  act_comm.o \
 	$(REPOSDIR)/badnamerepository.o \
 	$(REPOSDIR)/banrepository.o \
 	$(REPOSDIR)/boardrepository.o \
+	$(REPOSDIR)/bountyrepository.o \
 	$(REPOSDIR)/helprepository.o \
 	$(REPOSDIR)/playerrepository.o \
 	$(REPOSDIR)/shiprepository.o \

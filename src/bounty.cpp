@@ -23,37 +23,8 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "bounty.hpp"
-#include "script.hpp"
 #include "pcdata.hpp"
-
-#define BOUNTY_LIST   DATA_DIR "bounties.lua"
-
-BountyRepository *Bounties = nullptr;
-
-static void _PushBounty( const Bounty *bounty, lua_State *L)
-{
-  static int idx = 0;
-  lua_pushinteger( L, ++idx );
-  lua_newtable( L );
-
-  LuaSetfieldString( L, "Target", bounty->Target );
-  LuaSetfieldNumber( L, "Reward", bounty->Reward );
-  LuaSetfieldString( L, "Poster", bounty->Poster );
-
-  lua_settable( L, -3 );
-}
-
-static void PushBounties( lua_State *L, const void *userData )
-{
-  lua_newtable( L );
-
-  for(const Bounty *bounty : Bounties->Entities())
-    {
-      _PushBounty(bounty, L);
-    }
-
-  lua_setglobal( L, "bounties" );
-}
+#include "repos/bountyrepository.hpp"
 
 bool IsBountyOn( const Character *victim )
 {
@@ -63,48 +34,6 @@ bool IsBountyOn( const Character *victim )
 Bounty *GetBounty( const std::string &name )
 {
   return Bounties->Find([name](const auto &bounty){ return StrCmp(name, bounty->Target) == 0; });
-}
-
-static int L_BountyEntry( lua_State *L )
-{
-  const char *target = NULL;
-  const char *poster = NULL;
-  long reward = 0;
-  int idx = lua_gettop( L );
-  luaL_checktype( L, 1, LUA_TTABLE );
-
-  lua_getfield( L, idx, "Target" );
-  lua_getfield( L, idx, "Reward" );
-  lua_getfield( L, idx, "Poster" );
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      target = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      reward = lua_tointeger( L, idx );
-      reward = reward <= 0 ? 5000 : reward;
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      poster = lua_tostring( L, idx );
-    }
-
-  if( !IsNullOrEmpty( target ) && !IsNullOrEmpty( poster ) )
-    {
-      Bounty *bounty = new Bounty();
-      Bounties->Add(bounty);
-
-      bounty->Target = target;
-      bounty->Reward = reward;
-      bounty->Poster = poster;
-    }
-
-  lua_pop( L, lua_gettop( L ) - 1 );
-  return 0;
 }
 
 void AddBounty( const Character *ch , const Character *victim , long amount )
@@ -215,27 +144,3 @@ void ClaimBounty( Character *ch, const Character *victim )
 
   RemoveBounty(bounty);
 }
-
-/////////////////////////////////////////////////////
-class LuaBountyRepository : public BountyRepository
-{
-public:
-  void Load() override;
-  void Save() const override;
-};
-
-void LuaBountyRepository::Save() const
-{
-  LuaSaveDataFile( BOUNTY_LIST, PushBounties, "bounties", NULL );
-}
-
-void LuaBountyRepository::Load()
-{
-  LuaLoadDataFile( BOUNTY_LIST, L_BountyEntry, "BountyEntry" );
-}
-
-BountyRepository *NewBountyRepository()
-{
-  return new LuaBountyRepository();
-}
-

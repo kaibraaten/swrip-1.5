@@ -3,6 +3,7 @@
 #include "clan.hpp"
 #include "bounty.hpp"
 #include "pcdata.hpp"
+#include "repos/bountyrepository.hpp"
 
 void do_bounties( Character *ch, std::string argument )
 {
