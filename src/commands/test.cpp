@@ -17,6 +17,7 @@
 #include "repos/shiprepository.hpp"
 #include "repos/badnamerepository.hpp"
 #include "repos/banrepository.hpp"
+#include "repos/boardrepository.hpp"
 
 void do_test( Character *ch, std::string argument )
 {

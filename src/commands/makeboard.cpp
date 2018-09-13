@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "board.hpp"
 #include "character.hpp"
+#include "repos/boardrepository.hpp"
 
 void do_makeboard( Character *ch, std::string argument )
 {

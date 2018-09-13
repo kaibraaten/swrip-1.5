@@ -31,7 +31,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
-#include "playerrepository.hpp"
+#include "repos/playerrepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"

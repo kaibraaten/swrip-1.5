@@ -2,6 +2,7 @@
 #include "board.hpp"
 #include "character.hpp"
 #include "log.hpp"
+#include "repos/boardrepository.hpp"
 
 void do_boards( Character *ch, std::string argument )
 {

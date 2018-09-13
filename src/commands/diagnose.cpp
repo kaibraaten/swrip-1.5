@@ -4,7 +4,7 @@
 #include "mud.hpp"
 #include "grub.hpp"
 #include "character.hpp"
-#include "playerrepository.hpp"
+#include "repos/playerrepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"

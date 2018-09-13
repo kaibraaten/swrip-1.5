@@ -3,7 +3,7 @@
 #include "reset.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
-#include "playerrepository.hpp"
+#include "repos/playerrepository.hpp"
 
 /*
  * A complicated to use command as it currently exists.         -Thoric

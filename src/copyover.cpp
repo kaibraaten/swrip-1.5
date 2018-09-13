@@ -38,7 +38,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
-#include "playerrepository.hpp"
+#include "repos/playerrepository.hpp"
 #include "systemdata.hpp"
 #include "race.hpp"
 

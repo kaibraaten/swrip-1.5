@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "pcdata.hpp"
-#include "playerrepository.hpp"
+#include "repos/playerrepository.hpp"
 #include "descriptor.hpp"
 #include "race.hpp"
 

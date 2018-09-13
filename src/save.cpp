@@ -52,7 +52,7 @@
 #include "systemdata.hpp"
 #include "alias.hpp"
 #include "race.hpp"
-#include "playerrepository.hpp"
+#include "repos/playerrepository.hpp"
 
 /*
  * Increment with every major format change.

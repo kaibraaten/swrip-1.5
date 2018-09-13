@@ -51,6 +51,8 @@
 #include "repos/playerrepository.hpp"
 #include "repos/shiprepository.hpp"
 #include "repos/helprepository.hpp"
+#include "repos/boardrepository.hpp"
+#include "repos/banrepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
@@ -58,7 +60,6 @@
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 #include "exit.hpp"
-#include "repos/banrepository.hpp"
 
 /*
  * Globals.
