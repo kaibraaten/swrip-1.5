@@ -39,6 +39,7 @@
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 #include "race.hpp"
+#include "repos/banrepository.hpp"
 
 using NannyFun = std::function<void(Descriptor*, std::string)>;
 

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "ban.hpp"
+#include "repos/banrepository.hpp"
 
 void do_ban( Character *ch, std::string argument )
 {

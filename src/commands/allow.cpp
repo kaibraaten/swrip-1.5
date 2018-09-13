@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "ban.hpp"
 #include "character.hpp"
+#include "repos/banrepository.hpp"
 
 void do_allow( Character *ch, std::string argument )
 {

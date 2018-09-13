@@ -58,6 +58,7 @@
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 #include "exit.hpp"
+#include "repos/banrepository.hpp"
 
 /*
  * Globals.

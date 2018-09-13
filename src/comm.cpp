@@ -46,6 +46,7 @@
 #include "protomob.hpp"
 #include "descriptor.hpp"
 #include "systemdata.hpp"
+#include "repos/banrepository.hpp"
 
 /*
  * Socket and TCP/IP stuff.
