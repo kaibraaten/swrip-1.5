@@ -47,6 +47,7 @@
 #include "badname.hpp"
 #include "ban.hpp"
 #include "log.hpp"
+#include "repos/badnamerepository.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/shiprepository.hpp"
 #include "repos/helprepository.hpp"

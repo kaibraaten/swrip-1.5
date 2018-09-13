@@ -612,6 +612,7 @@ _OBJ =  act_comm.o \
 	$(MPDIR)/mpslay.o \
 	$(MPDIR)/mptransfer.o \
 	$(MPDIR)/mpwithdraw.o \
+	$(REPOSDIR)/badnamerepository.o \
 	$(REPOSDIR)/helprepository.o \
 	$(REPOSDIR)/playerrepository.o \
 	$(REPOSDIR)/shiprepository.o \
