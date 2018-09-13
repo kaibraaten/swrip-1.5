@@ -22,7 +22,7 @@ Exactly where we go from there is not decided yet. But it will not be adding new
 * cd into `src`
 * Type `make`
 
-If the linker complains that it can't find _-lgmock_, and you're absolutely certain you have install the Google Mock development files, it's possible you have an older version of Google Mock that doesn't use a library (it's purely in header files). If so, remove references to _-lgmock_ from the Makefiles in all test directories.
+If the linker complains that it can't find _-lgmock_, and you're absolutely certain you have installed the Google Mock development files, it's possible you have an older version of Google Mock that doesn't use a library (it's purely in header files). If so, remove references to _-lgmock_ from the Makefiles in all test directories.
 
 If the compiler (or possibly even linker) complains that it can't find lua.h, and you're absolutely sure you've installed the Lua development files, it's possible that your system has the headers in a different location than mine. If so you'll need to add this location to the header and/or library path in the Makefile. How to find the files and how to add the path is beyond this document.
 
