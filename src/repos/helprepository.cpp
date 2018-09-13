@@ -24,7 +24,7 @@ void LuaHelpFileRepository::Load()
 }
 
 void LuaHelpFileRepository::Save() const
-  {
+{
   LuaSaveDataFile( HELP_DATA_FILE, PushHelps, "helps", NULL );
 }
 
