@@ -8670,7 +8670,7 @@ porcine       mammal      rodent       avis         reptile      amphibian \
 fish          crustacean  insect       spirit       magical      horse \
 animal        humanoid    monster      god\
  \
-See also: ACTFLAGS, SPECFUNCS, BODYPARTS, SAVINGTHROWS, RIS, \
+See also: ACTFLAGS, SPECFUNCS, SAVINGTHROWS, RIS, \
           ATTACKS, LANGUAGES, DEFENSES, MSTAT, MCREATE, MMENU.\
  \
 ", 
@@ -9251,20 +9251,6 @@ HelpEntry
 This skill wards off incoming attacks, taking no damage from them.  Use of\
 the skill is automatic once you have practice it.  You must be wielding a\
 lightsaber to parry.\
-", 
-}
-
-HelpEntry
-{
-   Level = 101, 
-   Keyword = "PART BODYPARTS XFLAGS", 
-   Text = "Misc body parts:\
-HEAD     ARMS    LEGS   HEART        BRAINS      GUTS        HANDS   FEET\
-FINGERS  EAR     EYE    LONG_TONGUE  EYESTALKS   TENTACLES   FINS    WINGS\
-TAIL     SCALES\
-\
-Used for attacking:\
-CLAWS    HORNS   TUSKS  TAILATTACK   SHARPSCALES\
 ", 
 }
 

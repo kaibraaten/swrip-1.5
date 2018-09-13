@@ -144,7 +144,7 @@ void do_mset( Character *ch, std::string argument )
       ch->Echo("  credits hp force move align race\r\n");
       ch->Echo("  hitroll damroll armor affected level\r\n");
       ch->Echo("  thirst drunk full blood flags\r\n");
-      ch->Echo("  pos defpos part (see BODYPARTS)\r\n");
+      ch->Echo("  pos defpos\r\n");
       ch->Echo("  sav1 sav2 sav4 sav4 sav5 (see SAVINGTHROWS)\r\n");
       ch->Echo("  resistant immune susceptible (see RIS)\r\n");
       ch->Echo("  attack defense NumberOfAttacks\r\n");
@@ -1377,36 +1377,6 @@ void do_mset( Character *ch, std::string argument )
       if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
 	  victim->Prototype->Susceptible = victim->Susceptible;
 
-      return;
-    }
-
-  if ( !StrCmp( arg2, "part" ) )
-    {
-      if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
-        {
-          ch->Echo("You can only modify a mobile's parts.\r\n");
-          return;
-        }
-      if ( !CanModifyCharacter( ch, victim ) )
-        return;
-      
-      if ( argument.empty() )
-        {
-          ch->Echo("Usage: mset <victim> part <flag> [flag]...\r\n");
-          return;
-        }
-      
-      while ( !argument.empty() )
-        {
-          argument = OneArgument( argument, arg3 );
-          value = GetBodyPartFlag( arg3 );
-          if ( value < 0 || static_cast<size_t>(value) >= MAX_BIT )
-            ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
-          else
-            ToggleBit( victim->BodyParts, 1 << value );
-        }
-      if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->BodyParts = victim->BodyParts;
       return;
     }
 

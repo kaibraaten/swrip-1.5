@@ -2732,42 +2732,6 @@ const std::array<const char * const, MAX_BIT> TriggerFlags =
     "_31"
   };
 
-const std::array<const char * const, MAX_BIT> PartFlags =
-  {
-    "head",
-    "arms",
-    "legs",
-    "heart",
-    "brains",
-    "guts",
-    "hands",
-    "feet",
-    "fingers",
-    "ear",
-    "eye",
-    "long_tongue",
-    "eyestalks",
-    "tentacles",
-    "fins",
-    "wings",
-    "tail",
-    "scales",
-    "claws",
-    "fangs",
-    "horns",
-    "tusks",
-    "tailattack",
-    "sharpscales",
-    "beak",
-    "haunches",
-    "hooves",
-    "paws",
-    "forelegs",
-    "feathers",
-    "_30",
-    "_31"
-  };
-
 const std::array<const char * const, MAX_BIT> DefenseFlags =
   {
     "parry",
@@ -3319,11 +3283,6 @@ int GetResistanceFlag(const std::string &flag)
 int GetTrapTriggerFlag(const std::string &flag)
 {
   return GetInArray( flag, TriggerFlags, StrCmp );
-}
-
-int GetBodyPartFlag(const std::string &flag)
-{
-  return GetInArray( flag, PartFlags, StrCmp );
 }
 
 int GetAttackFlag(const std::string &flag)

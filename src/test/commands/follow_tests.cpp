@@ -77,7 +77,7 @@ TEST_F(FollowTests, FollowCommandMakesLeaderFollowersMaster)
 {
   do_follow(_follower, "leader");
 
-  EXPECT_EQ(_leader, _follower->Master);
+  EXPECT_EQ(_follower->Master, _leader);
 }
 
 TEST_F(FollowTests, FollowSelfMakesMasterNull)
@@ -86,14 +86,14 @@ TEST_F(FollowTests, FollowSelfMakesMasterNull)
 
   do_follow(_follower, "self");
 
-  EXPECT_EQ(nullptr, _follower->Master);
+  EXPECT_EQ(_follower->Master, nullptr);
 }
 
 TEST_F(FollowTests, FollowNonexistantCharacterDoesNothing)
 {
   do_follow(_follower, "foobarbaz");
 
-  EXPECT_EQ(nullptr, _follower->Master);
+  EXPECT_EQ(_follower->Master, nullptr);
 }
 
 TEST_F(FollowTests, MasterIsFollowedIntoNewRoom)
@@ -102,6 +102,6 @@ TEST_F(FollowTests, MasterIsFollowedIntoNewRoom)
 
   do_north(_leader, "");
 
-  EXPECT_EQ(_leader->InRoom, _follower->InRoom);
-  EXPECT_EQ(_toRoom, _follower->InRoom);
+  EXPECT_EQ(_follower->InRoom, _leader->InRoom);
+  EXPECT_EQ(_follower->InRoom, _toRoom);
 }

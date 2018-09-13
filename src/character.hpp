@@ -89,7 +89,6 @@ public:
   int Gold = 0;
   int Flags = 0;
   int AffectedBy = 0;
-  int BodyParts = 0;
   int Resistant = 0;
   int Immune = 0;
   int Susceptible = 0;

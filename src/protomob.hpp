@@ -42,7 +42,6 @@ public:
   short           NumberOfAttacks = 0;
   int             Gold = 0;
   int             exp = 0;
-  int             BodyParts = 0;
   int             Resistant = 0;
   int             Immune = 0;
   int             Susceptible = 0;

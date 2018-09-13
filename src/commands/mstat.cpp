@@ -203,8 +203,6 @@ void do_mstat( Character *ch, std::string arg )
                victim->spec_2 ? LookupSpecial( victim->spec_2 ) : "" );
     }
 
-  ch->Echo("Body Parts : %s\r\n",
-           FlagString(victim->BodyParts, PartFlags).c_str() );
   ch->Echo("Resistant  : %s\r\n",
            FlagString(victim->Resistant, RisFlags).c_str() );
   ch->Echo("Immune     : %s\r\n",

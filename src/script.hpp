@@ -13,6 +13,7 @@ extern "C" {
 }
 #endif
 
+#include <functional>
 #include <list>
 #include <string>
 #include <array>
@@ -55,6 +56,8 @@ void LuaPushCurrentAndMax( lua_State *L, const std::string &key, int current, in
 void LuaLoadCurrentAndMax( lua_State *L, const std::string &key, int *current, int *max );
 void LuaPushOvalues( lua_State *L, const std::array<int, MAX_OVAL> values );
 void LuaPushExtraDescriptions( lua_State *L, const std::list<ExtraDescription*> &extras );
+void LuaPushCharacter( lua_State *L, const Character *ch,
+                       std::function<void(lua_State*, const Character*)> pushExtra );
 
 #define PushCurrentAndMax( L, key, structure ) LuaPushCurrentAndMax( (L), (key), (structure.Current), (structure.Max) )
 #define LoadCurrentAndMax( L, key, structure ) LuaLoadCurrentAndMax( (L), (key), (&structure.Current), (&structure.Max) )

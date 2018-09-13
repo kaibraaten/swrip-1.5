@@ -359,10 +359,14 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
     {
       if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
+
       if ( install )
         RemoveBit( pMobIndex->Flags, ACT_PROTOTYPE );
-      if ( pMobIndex->Stats.Str != 13    ||   pMobIndex->Stats.Int   != 13
-           ||   pMobIndex->Stats.Wis != 13       ||   pMobIndex->Stats.Dex   != 13
+
+      if ( pMobIndex->Stats.Str != 13
+           ||   pMobIndex->Stats.Int   != 13
+           ||   pMobIndex->Stats.Wis != 13
+           ||   pMobIndex->Stats.Dex   != 13
            ||   pMobIndex->Stats.Con != 13       ||   pMobIndex->Stats.Cha   != 13
            ||   pMobIndex->Stats.Lck != 13
            ||   pMobIndex->HitRoll  != 0        ||   pMobIndex->DamRoll    != 0
@@ -370,7 +374,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
            ||   pMobIndex->AttackFlags       != 0   ||   pMobIndex->DefenseFlags   != 0
            ||   pMobIndex->Height        != 0   ||   pMobIndex->Weight     != 0
            ||   pMobIndex->Speaks        != 0   ||   pMobIndex->Speaking   != 0
-           ||   pMobIndex->BodyParts        != 0   ||   pMobIndex->NumberOfAttacks != 0
+           ||   pMobIndex->NumberOfAttacks != 0
            ||   pMobIndex->VipFlags !=0 )
         complexmob = true;
       else
@@ -425,7 +429,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
           fprintf( fpout, "%d %d %d %d %d %d %d %d\n",
                    pMobIndex->HitRoll,
                    pMobIndex->DamRoll,
-                   pMobIndex->BodyParts,
+                   0, //pMobIndex->BodyParts,
                    pMobIndex->Resistant,
                    pMobIndex->Immune,
                    pMobIndex->Susceptible,

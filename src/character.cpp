@@ -74,7 +74,6 @@ Character::Character(ProtoMobile *protoMob)
     Gold( protoMob->Gold),
     Flags( protoMob->Flags),
     AffectedBy( protoMob->AffectedBy),
-    BodyParts( protoMob->BodyParts),
     Resistant( protoMob->Resistant),
     Immune( protoMob->Immune),
     Susceptible( protoMob->Susceptible),

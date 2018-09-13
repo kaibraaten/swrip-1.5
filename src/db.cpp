@@ -1483,7 +1483,6 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name )
       pMobIndex->Stats.Con               = cMobIndex->Stats.Con;
       pMobIndex->Stats.Lck               = cMobIndex->Stats.Lck;
       pMobIndex->Race           = cMobIndex->Race;
-      pMobIndex->BodyParts         = cMobIndex->BodyParts;
       pMobIndex->Resistant              = cMobIndex->Resistant;
       pMobIndex->Immune         = cMobIndex->Immune;
       pMobIndex->Susceptible    = cMobIndex->Susceptible;

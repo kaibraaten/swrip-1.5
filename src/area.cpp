@@ -554,7 +554,6 @@ static void LoadMobiles( Area *tarea, FILE *fp )
 
           pMobIndex->HitRoll            = x1;
           pMobIndex->DamRoll            = x2;
-          pMobIndex->BodyParts             = x3;
           pMobIndex->Resistant          = x4;
           pMobIndex->Immune             = x5;
           pMobIndex->Susceptible        = x6;

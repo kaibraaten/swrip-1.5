@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cstdio>
+#include <cassert>
 #include "mud.hpp"
 #include "script.hpp"
 #include "log.hpp"
@@ -9,8 +10,10 @@
 #include "skill.hpp"
 #include "protoobject.hpp"
 #include "room.hpp"
+#include "race.hpp"
+#include "protomob.hpp"
 
-lua_State *LuaMasterState;
+lua_State *LuaMasterState = nullptr;
 
 static void SetLuaPath( lua_State * );
 static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx );
@@ -682,10 +685,76 @@ void LuaPushObjects( lua_State *L, const std::list<Object*> &objects,
   lua_settable( L, -3 );
 }
 
+static void LuaPushMobile( lua_State *L, const Character *mob )
+{
+  assert( IsNpc( mob ) );
+  const ProtoMobile *proto = mob->Prototype;
+
+  LuaSetfieldString( L, "CharacterType", "Mobile" );  
+  LuaPushFlags( L, mob->Flags, MobFlags, "Flags" );
+  
+  if( StrCmp( mob->ShortDescr, proto->ShortDescr ) != 0 )
+    {
+      LuaSetfieldString( L, "ShortDescription", mob->ShortDescr );
+    }
+
+  if( StrCmp( mob->LongDescr, proto->LongDescr ) != 0 )
+    {
+      LuaSetfieldString( L, "LongDescription", mob->LongDescr );
+    }
+
+  if( mob->spec_fun != nullptr && mob->spec_fun != proto->spec_fun )
+    {
+
+    }
+
+  if( mob->spec_2 != nullptr && mob->spec_2 != proto->spec_2 )
+    {
+
+    }
+
+  if( mob->NumberOfAttacks != proto->NumberOfAttacks )
+    {
+      LuaSetfieldNumber( L, "NumberOfAttacks", mob->NumberOfAttacks );
+    }
+
+  if( mob->AttackFlags != proto->AttackFlags )
+    {
+      LuaPushFlags( L, mob->AttackFlags, AttackFlags, "AttackFlags" );
+    }
+
+  if( mob->DefenseFlags != proto->DefenseFlags )
+    {
+      LuaPushFlags( L, mob->DefenseFlags, DefenseFlags, "DefenseFlags" );
+    }
+
+  if( mob->Alignment != proto->Alignment )
+    {
+      LuaSetfieldNumber( L, "Alignment", mob->Alignment );
+    }
+
+  if( mob->ArmorClass != proto->ArmorClass )
+    {
+      LuaSetfieldNumber( L, "ArmorClass", mob->ArmorClass );
+    }
+}
+
 void LuaPushMobiles( lua_State *L, const std::list<Character*> &mobiles,
                      const std::string &key )
 {
+  lua_pushstring( L, key.c_str() );
+  lua_newtable( L );
+  size_t idx = 0;
 
+  for( const Character *mob : mobiles )
+    {
+      lua_pushinteger( L, ++idx );
+      lua_newtable( L );
+      LuaPushCharacter( L, mob, LuaPushMobile );
+      lua_settable( L, -3 );
+    }
+  
+  lua_settable( L, -3 );
 }
 
 void LuaPushStats( lua_State *L, const Stats *stats, const std::string &key )
@@ -708,4 +777,94 @@ void LuaPushStats( lua_State *L, const Stats *stats, const std::string &key )
 void LuaLoadStats( lua_State *L, Stats *stats, const std::string &key )
 {
   
+}
+
+static void LuaPushCharacterAbilities( lua_State *L, const Character *ch )
+{
+  lua_pushstring( L, "Abilities" );
+  lua_newtable( L );
+
+  LuaSetfieldNumber( L, "MainAbility", ch->Ability.Main );
+
+  for( size_t ability = 0; ability < MAX_ABILITY; ++ability )
+    {
+      lua_pushinteger( L, ability );
+      lua_newtable( L );
+
+      LuaSetfieldString( L, "Name", AbilityName[ability] );
+      LuaSetfieldNumber( L, "Level", GetAbilityLevel( ch, ability ) );
+      LuaSetfieldNumber( L, "Experience", GetAbilityXP( ch, ability ) );
+
+      lua_settable( L, -3 );
+    }
+
+  lua_settable( L, -3 );
+}
+
+static void LuaPushCharacterSaves( lua_State *L, const Character *ch )
+{
+  lua_pushstring( L, "SaveVs" );
+  lua_newtable( L );
+
+  LuaSetfieldNumber( L, "PoisonDeath", ch->Saving.PoisonDeath );
+  LuaSetfieldNumber( L, "Wand", ch->Saving.Wand );
+  LuaSetfieldNumber( L, "ParaPetri", ch->Saving.ParaPetri );
+  LuaSetfieldNumber( L, "Breath", ch->Saving.Breath );
+  LuaSetfieldNumber( L, "SpellStaff", ch->Saving.SpellStaff );
+
+  lua_settable( L, -3 );
+}
+
+static void LuaPushCharacterStats( lua_State *L, const Character *ch )
+{
+  LuaPushStats( L, &ch->PermStats, "PermanentStats" );
+  LuaPushStats( L, &ch->StatMods, "StatModifiers" );
+}
+
+void LuaPushCharacter( lua_State *L, const Character *ch,
+                       std::function<void(lua_State*, const Character*)> pushExtra )
+{
+  // NOT a fan of this cast, but it can't be avoided.
+  DeEquipCharacter( const_cast<Character*>( ch ) );
+
+  LuaSetfieldString( L, "Name", ch->Name );
+  LuaSetfieldString( L, "Description", ch->Description );
+  LuaSetfieldString( L, "Gender",
+                     ch->Sex == SEX_MALE ? "Male" : ch->Sex == SEX_FEMALE ? "Female" : "Neutral" );
+  LuaSetfieldString( L, "Race", RaceTable[ch->Race].Name );
+  LuaSetfieldNumber( L, "Speaks", ch->Speaks );
+  LuaSetfieldNumber( L, "Speaking", ch->Speaking );
+  LuaSetfieldNumber( L, "Level", ch->TopLevel );
+  LuaSetfieldNumber( L, "Trust", ch->Trust );
+  LuaSetfieldNumber( L, "InRoom",
+                     ch->InRoom == GetRoom( ROOM_VNUM_LIMBO ) && ch->WasInRoom
+                     ? ch->WasInRoom->Vnum : ch->InRoom->Vnum );
+  PushCurrentAndMax( L, "HitPoints", ch->HitPoints );
+  PushCurrentAndMax( L, "ForcePoints", ch->Mana );
+  PushCurrentAndMax( L, "Fatigue", ch->Fatigue );
+  LuaSetfieldNumber( L, "Credits", ch->Gold );
+  LuaSetfieldString( L, "Position",
+                     PositionName[ch->Position == POS_FIGHTING ? POS_STANDING : ch->Position] );
+  LuaSetfieldNumber( L, "HitRoll", ch->HitRoll );
+  LuaSetfieldNumber( L, "DamRoll", ch->DamRoll );
+  LuaSetfieldNumber( L, "Wimpy", ch->Wimpy );
+  LuaSetfieldNumber( L, "MentalState", ch->MentalState );
+
+  LuaPushFlags( L, ch->AffectedBy, AffectFlags, "AffectedBy" );
+  LuaPushFlags( L, ch->Deaf, ChannelNames, "IgnoreChannels" );
+  LuaPushFlags( L, ch->Resistant, RisFlags, "Resistant" );
+  LuaPushFlags( L, ch->Immune, RisFlags, "Immune" );
+  LuaPushFlags( L, ch->Susceptible, RisFlags, "Susceptible" );
+
+  LuaPushCharacterAbilities( L, ch );
+  LuaPushCharacterSaves( L, ch ); // ch->Saving.PoisonDeath etc
+  LuaPushCharacterStats( L, ch );
+
+  LuaPushAffects( L, ch->Affects() );
+  LuaPushObjects( L, ch->Objects() );
+  
+  pushExtra( L, ch );
+
+  // NOT a fan of this cast, but it can't be avoided.
+  ReEquipCharacter( const_cast<Character*>( ch ) );
 }
