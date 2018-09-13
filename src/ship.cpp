@@ -37,6 +37,7 @@
 #include "room.hpp"
 #include "exit.hpp"
 #include "repos/shiprepository.hpp"
+#include "repos/spaceobjectrepository.hpp"
 
 static int baycount = 0;
 

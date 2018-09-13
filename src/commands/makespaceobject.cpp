@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "spaceobject.hpp"
 #include "character.hpp"
+#include "repos/spaceobjectrepository.hpp"
 
 void do_makespaceobject( Character *ch, std::string argument )
 {

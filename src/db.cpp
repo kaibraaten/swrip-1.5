@@ -56,6 +56,7 @@
 #include "repos/bountyrepository.hpp"
 #include "repos/clanrepository.hpp"
 #include "repos/planetrepository.hpp"
+#include "repos/spaceobjectrepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
@@ -72,12 +73,6 @@ Wizard *first_wiz = NULL;
 Wizard *last_wiz = NULL;
 
 time_t last_restore_all_time = 0;
-
-Shop *FirstShop = NULL;
-Shop *LastShop = NULL;
-
-RepairShop *FirstRepairShop = NULL;
-RepairShop *LastRepairShop = NULL;
 
 TeleportData *FirstTeleport = NULL;
 TeleportData *LastTeleport = NULL;

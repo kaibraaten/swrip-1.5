@@ -6,6 +6,7 @@
 #include "spaceobject.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "repos/spaceobjectrepository.hpp"
 
 void do_calculate(Character *ch, std::string argument )
 {

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "spaceobject.hpp"
+#include "repos/spaceobjectrepository.hpp"
 
 void do_setspaceobject( Character *ch, std::string argument )
 {

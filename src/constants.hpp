@@ -1952,7 +1952,6 @@ enum
 #define PLAYER_DIR      DATA_DIR "players/"   /* Player files                 */
 #define BACKUP_DIR      DATA_DIR "backup/"    /* Backup Player files          */
 #define GOD_DIR         DATA_DIR "gods/"      /* God Info Dir                 */
-#define SPACE_DIR       DATA_DIR "space/"
 #define BUILD_DIR       DATA_DIR "building/"  /* Online building save dir     */
 #define VENDOR_DIR      DATA_DIR "vendor/"
 #define STOREROOM_DIR   DATA_DIR "storeroom/"

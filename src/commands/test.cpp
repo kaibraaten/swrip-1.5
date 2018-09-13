@@ -20,6 +20,7 @@
 #include "repos/boardrepository.hpp"
 #include "repos/clanrepository.hpp"
 #include "repos/planetrepository.hpp"
+#include "repos/spaceobjectrepository.hpp"
 
 void do_test( Character *ch, std::string argument )
 {

@@ -7,6 +7,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "repos/shiprepository.hpp"
+#include "repos/spaceobjectrepository.hpp"
 
 static bool LeaveHyperspaceIfDocked(Ship *dockedShip, void *userData);
 

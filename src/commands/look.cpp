@@ -17,6 +17,7 @@
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 #include "exit.hpp"
+#include "repos/spaceobjectrepository.hpp"
 
 struct UserData
 {

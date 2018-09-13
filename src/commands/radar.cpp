@@ -7,6 +7,7 @@
 #include "spaceobject.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "repos/spaceobjectrepository.hpp"
 
 struct ShowShipData
 {
