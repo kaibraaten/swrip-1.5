@@ -99,7 +99,6 @@ public:
   short Alignment = 0;
   short BareNumDie = 1;
   short BareSizeDie = 4;
-  short MobThac0 = 0;
   short HitRoll = 0;
   short DamRoll = 0;
   short HitPlus = 0;

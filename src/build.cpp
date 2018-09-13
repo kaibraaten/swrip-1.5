@@ -390,8 +390,9 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
                complexmob ? 'Z' : 'S'           );
       /* C changed to Z for swreality vip_flags  */
 
-      fprintf( fpout, "%d %d %d ",      pMobIndex->Level,
-               pMobIndex->MobThac0,
+      fprintf( fpout, "%d %d %d ",
+               pMobIndex->Level,
+               0, //pMobIndex->MobThac0,
                pMobIndex->ArmorClass                    );
       fprintf( fpout, "%dd%d+%d ",      pMobIndex->HitNoDice,
                pMobIndex->HitSizeDice,

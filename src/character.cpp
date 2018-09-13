@@ -84,7 +84,6 @@ Character::Character(ProtoMobile *protoMob)
     Alignment( protoMob->Alignment),
     BareNumDie( protoMob->DamNoDice),
     BareSizeDie( protoMob->DamSizeDice),
-    MobThac0( protoMob->MobThac0),
     HitRoll( protoMob->HitRoll),
     DamRoll( protoMob->DamRoll),
     HitPlus( protoMob->HitPlus),

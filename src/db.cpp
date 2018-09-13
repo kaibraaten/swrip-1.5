@@ -1462,7 +1462,6 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, const std::string &name )
       pMobIndex->spec_2         = cMobIndex->spec_2;
       pMobIndex->Alignment              = cMobIndex->Alignment;
       pMobIndex->Level          = cMobIndex->Level;
-      pMobIndex->MobThac0               = cMobIndex->MobThac0;
       pMobIndex->ArmorClass             = cMobIndex->ArmorClass;
       pMobIndex->HitNoDice              = cMobIndex->HitNoDice;
       pMobIndex->HitSizeDice    = cMobIndex->HitSizeDice;

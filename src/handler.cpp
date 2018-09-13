@@ -2149,7 +2149,6 @@ void CleanMobile( ProtoMobile *mob )
   mob->Flags       = 0;
   mob->AffectedBy     = 0;
   mob->Alignment         = 0;
-  mob->MobThac0        = 0;
   mob->ArmorClass               = 0;
   mob->HitNoDice       = 0;
   mob->HitSizeDice = 0;

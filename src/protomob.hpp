@@ -31,7 +31,6 @@ public:
   int             Flags = 0;
   int             AffectedBy = 0;
   short           Alignment = 0;
-  short           MobThac0 = 0;               /* Unused */
   short           ArmorClass = 0;
   short           HitNoDice = 0;
   short           HitSizeDice = 0;

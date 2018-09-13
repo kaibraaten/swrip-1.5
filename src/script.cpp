@@ -705,12 +705,12 @@ static void LuaPushMobile( lua_State *L, const Character *mob )
 
   if( mob->spec_fun != nullptr && mob->spec_fun != proto->spec_fun )
     {
-
+      LuaSetfieldString( L, "SpecialFunction1", LookupSpecial( mob->spec_fun ) );
     }
 
   if( mob->spec_2 != nullptr && mob->spec_2 != proto->spec_2 )
     {
-
+      LuaSetfieldString( L, "SpecialFunction2", LookupSpecial( mob->spec_2 ) );
     }
 
   if( mob->NumberOfAttacks != proto->NumberOfAttacks )

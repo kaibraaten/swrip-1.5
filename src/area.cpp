@@ -484,7 +484,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
       letter                     = ReadChar( fp, Log, fBootDb );
       pMobIndex->Level           = ReadInt( fp, Log, fBootDb );
 
-      pMobIndex->MobThac0        = ReadInt( fp, Log, fBootDb );
+      /*pMobIndex->MobThac0 = */   ReadInt( fp, Log, fBootDb );
       pMobIndex->ArmorClass      = ReadInt( fp, Log, fBootDb );
       pMobIndex->HitNoDice       = ReadInt( fp, Log, fBootDb );
       /* 'd'            */         ReadChar( fp, Log, fBootDb );
