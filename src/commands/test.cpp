@@ -19,6 +19,7 @@
 #include "repos/banrepository.hpp"
 #include "repos/boardrepository.hpp"
 #include "repos/clanrepository.hpp"
+#include "repos/planetrepository.hpp"
 
 void do_test( Character *ch, std::string argument )
 {

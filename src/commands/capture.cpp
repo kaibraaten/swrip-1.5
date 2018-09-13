@@ -6,11 +6,12 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "repos/planetrepository.hpp"
 
 struct UserData
 {
-  Planet *planet;
-  bool PlanetIsProtected;
+  Planet *planet = nullptr;
+  bool PlanetIsProtected = false;
 };
 
 static bool CheckIfProtectingPlanet(Ship *ship, void *userData);

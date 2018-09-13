@@ -3,6 +3,7 @@
 #include "planet.hpp"
 #include "area.hpp"
 #include "room.hpp"
+#include "repos/planetrepository.hpp"
 
 void do_aset( Character *ch, std::string argument )
 {

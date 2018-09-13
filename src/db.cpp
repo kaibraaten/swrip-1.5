@@ -55,6 +55,7 @@
 #include "repos/banrepository.hpp"
 #include "repos/bountyrepository.hpp"
 #include "repos/clanrepository.hpp"
+#include "repos/planetrepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"

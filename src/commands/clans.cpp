@@ -3,6 +3,7 @@
 #include "planet.hpp"
 #include "character.hpp"
 #include "repos/clanrepository.hpp"
+#include "repos/planetrepository.hpp"
 
 void do_clans( Character *ch, std::string argument )
 {

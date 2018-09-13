@@ -1953,8 +1953,6 @@ enum
 #define BACKUP_DIR      DATA_DIR "backup/"    /* Backup Player files          */
 #define GOD_DIR         DATA_DIR "gods/"      /* God Info Dir                 */
 #define SPACE_DIR       DATA_DIR "space/"
-#define PLANET_DIR      DATA_DIR "planets/"
-#define GUARD_DIR       PLANET_DIR
 #define BUILD_DIR       DATA_DIR "building/"  /* Online building save dir     */
 #define VENDOR_DIR      DATA_DIR "vendor/"
 #define STOREROOM_DIR   DATA_DIR "storeroom/"

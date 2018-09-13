@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "spaceobject.hpp"
 #include "planet.hpp"
+#include "repos/planetrepository.hpp"
 
 void do_showplanet( Character *ch, std::string argument )
 {

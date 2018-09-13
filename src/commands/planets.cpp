@@ -3,6 +3,7 @@
 #include "clan.hpp"
 #include "planet.hpp"
 #include "area.hpp"
+#include "repos/planetrepository.hpp"
 
 static bool ShowEntry( const Planet *planet, const Character *ch );
 

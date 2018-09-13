@@ -48,6 +48,7 @@
 #include "exit.hpp"
 #include "repos/shiprepository.hpp"
 #include "repos/clanrepository.hpp"
+#include "repos/planetrepository.hpp"
 
 /*
  * Local functions.

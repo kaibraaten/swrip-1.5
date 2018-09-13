@@ -3,6 +3,7 @@
 #include "clan.hpp"
 #include "spaceobject.hpp"
 #include "planet.hpp"
+#include "repos/planetrepository.hpp"
 
 void do_setplanet( Character *ch, std::string argument )
 {

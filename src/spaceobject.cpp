@@ -28,6 +28,7 @@
 #include "ship.hpp"
 #include "planet.hpp"
 #include "log.hpp"
+#include "repos/planetrepository.hpp"
 
 SpaceobjectRepository *Spaceobjects = nullptr;
 
