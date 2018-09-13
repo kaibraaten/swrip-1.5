@@ -26,7 +26,6 @@
 #include <string>
 #include <array>
 #include <utility/vector3.hpp>
-#include <utility/repository.hpp>
 #include "types.hpp"
 #include "constants.hpp"
 
@@ -214,16 +213,5 @@ std::string GetShipFilename( const Ship *ship );
 bool ShipNameAndPersonalnameComboIsUnique( const std::string &name,
                                            const std::string &personalname );
 void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData);
-
-class ShipRepository : public Ceris::Repository<Ship*>
-{
-public:
-  virtual void Save(const Ship *entity) const = 0;
-  virtual void Save() const = 0;
-  virtual void Load() = 0;
-};
-
-extern ShipRepository *Ships;
-ShipRepository *NewShipRepository();
 
 #endif

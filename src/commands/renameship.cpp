@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "clan.hpp"
 #include "room.hpp"
+#include "repos/shiprepository.hpp"
 
 void do_renameship( Character *ch, std::string argument )
 {

@@ -46,6 +46,7 @@
 #include "systemdata.hpp"
 #include "race.hpp"
 #include "exit.hpp"
+#include "repos/shiprepository.hpp"
 
 /*
  * Local functions.

@@ -4,6 +4,7 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "repos/shiprepository.hpp"
 
 void do_clansellship(Character *ch, std::string argument )
 {

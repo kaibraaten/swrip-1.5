@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "ship.hpp"
 #include "character.hpp"
+#include "repos/shiprepository.hpp"
 
 void do_shutdown( Character *ch, std::string argument )
 {

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "repos/shiprepository.hpp"
 
 void do_reboot( Character *ch, std::string argument )
 {

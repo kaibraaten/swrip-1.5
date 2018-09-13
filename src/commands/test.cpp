@@ -14,6 +14,7 @@
 #include "badname.hpp"
 #include "ban.hpp"
 #include "arena.hpp"
+#include "repos/shiprepository.hpp"
 
 void do_test( Character *ch, std::string argument )
 {

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "turret.hpp"
 #include "character.hpp"
+#include "repos/shiprepository.hpp"
 
 void do_makeship( Character *ch, std::string argument )
 {

@@ -23,7 +23,7 @@ SPECDIR = special
 REPOSDIR = repos
 
 WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wredundant-decls -Wshadow -Wno-unused-parameter -Wno-char-subscripts -Wno-write-strings -Wno-long-long -Wextra -Wno-implicit-fallthrough
-CXXFLAGS = -std=c++14 -fPIC -g3 -MMD -I. -I$(REPOSDIR) -I$(LIBDIR) $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
+CXXFLAGS = -std=c++14 -fPIC -g3 -MMD -I. -I$(LIBDIR) $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
 LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility -L$(LIBDIR)/colorparser -lcolorparser -Wl,-rpath,./src/$(LIBDIR)/colorparser $(LUA_LIBS) -L. -lswrip -Wl,-rpath,./src
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
@@ -613,6 +613,7 @@ _OBJ =  act_comm.o \
 	$(MPDIR)/mptransfer.o \
 	$(MPDIR)/mpwithdraw.o \
 	$(REPOSDIR)/playerrepository.o \
+	$(REPOSDIR)/shiprepository.o \
 	$(SPECDIR)/auth.o \
 	$(SPECDIR)/clanguard.o \
 	$(SPECDIR)/customsalcohol.o \
