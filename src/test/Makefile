@@ -21,6 +21,7 @@ $(ODIR)/%.o:	%.cpp
 		$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 -include $(ODIR)/*.d
+-include $(ODIR)/commands/*.d
 
 clean:
-		-rm -f $(BINARY) *~  $(ODIR)/*.o $(ODIR)/*.d
+		-rm -f $(BINARY) *~  $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/commands/*.o $(ODIR)/commands/*.d

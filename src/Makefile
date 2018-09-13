@@ -1,4 +1,5 @@
 BINARY = swrip
+
 LIB_EXT = so
 LIBNAME = libswrip.$(LIB_EXT)
 
@@ -7,19 +8,22 @@ WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wredundan
 #Comment out the next line if your system doesn't have dlsym functionality.
 USE_DLSYM = -DSWRIP_USE_DLSYM
 
-ifeq ($(shell echo $$LUA_COMPAT),5.1)
-LUA_CFLAGS = -I/usr/include/lua-5.1
-LUA_LIBS = -llua-5.1 -lm -ldl
-else
 LUA_CFLAGS =
 LUA_LIBS = -llua -lm -ldl
-endif
 
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
+
 LIBDIR = libs
 TESTDIR = test
-CXXFLAGS = -std=c++14 -fPIC -g3 -MMD -I. -I$(LIBDIR) $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
+CMDDIR = commands
+MPDIR = mpcommands
+SPELLDIR = spells
+SPECDIR = special
+REPOSDIR = repos
+
+WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wredundant-decls -Wshadow -Wno-unused-parameter -Wno-char-subscripts -Wno-write-strings -Wno-long-long -Wextra -Wno-implicit-fallthrough
+CXXFLAGS = -std=c++14 -fPIC -g3 -MMD -I. -I$(REPOSDIR) -I$(LIBDIR) $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
 LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility -L$(LIBDIR)/colorparser -lcolorparser -Wl,-rpath,./src/$(LIBDIR)/colorparser $(LUA_LIBS) -L. -lswrip -Wl,-rpath,./src
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
@@ -40,11 +44,6 @@ ifdef USE_DLSYM
 LDFLAGS += -ldl
 LDFLAGS += -rdynamic
 endif
-
-CMDDIR = commands
-MPDIR = mpcommands
-SPELLDIR = spells
-SPECDIR = special
 
 ODIR = obj
 _BINOBJ = main.o
@@ -91,7 +90,6 @@ _OBJ =  act_comm.o \
 	object.o \
 	pcdata.o \
 	planet.o \
-	playerrepository.o \
 	protomob.o \
 	protoobject.o \
 	reset.o \
@@ -614,6 +612,7 @@ _OBJ =  act_comm.o \
 	$(MPDIR)/mpslay.o \
 	$(MPDIR)/mptransfer.o \
 	$(MPDIR)/mpwithdraw.o \
+	$(REPOSDIR)/playerrepository.o \
 	$(SPECDIR)/auth.o \
 	$(SPECDIR)/clanguard.o \
 	$(SPECDIR)/customsalcohol.o \
@@ -708,6 +707,7 @@ $(ODIR)/%.o:	%.cpp
 -include $(ODIR)/$(MPDIR)/*.d
 -include $(ODIR)/$(SPELLDIR)/*.d
 -include $(ODIR)/$(SPECDIR)/*.d
+-include $(ODIR)/$(REPOSDIR)/*.d
 
 clean:
-		-rm -f ../$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d $(ODIR)/$(MPDIR)/*.o $(ODIR)/$(MPDIR)/*.d $(ODIR)/$(SPELLDIR)/*.o $(ODIR)/$(SPELLDIR)/*.d ../core.* $(ODIR)/$(SPECDIR)/*.o $(ODIR)/$(SPECDIR)/*.d *.so *.a
+		-rm -f ../$(BINARY) *~ $(ODIR)/*.o $(ODIR)/*.d $(ODIR)/$(CMDDIR)/*.o $(ODIR)/$(CMDDIR)/*.d $(ODIR)/$(MPDIR)/*.o $(ODIR)/$(MPDIR)/*.d $(ODIR)/$(SPELLDIR)/*.o $(ODIR)/$(SPELLDIR)/*.d ../core.* $(ODIR)/$(SPECDIR)/*.o $(ODIR)/$(SPECDIR)/*.d $(ODIR)/$(REPOSDIR)/*.o $(ODIR)/$(REPOSDIR)/*.d  *.so *.a

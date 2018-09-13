@@ -130,7 +130,7 @@ int SwripMain(int argc, char *argv[])
   atexit( ExecuteOnExit );
 #ifdef SWRIP_USE_DLSYM
 #ifdef _WIN32
-  SysData.DlHandle = LoadLibraryA("swr.exe");
+  SysData.DlHandle = LoadLibraryA("swrip.exe");
 
   if( !SysData.DlHandle )
     {
