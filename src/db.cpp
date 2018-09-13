@@ -49,6 +49,7 @@
 #include "log.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/shiprepository.hpp"
+#include "repos/helprepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"

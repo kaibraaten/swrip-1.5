@@ -3,6 +3,7 @@
 #include "editor.hpp"
 #include "help.hpp"
 #include "log.hpp"
+#include "repos/helprepository.hpp"
 
 /*
  * Help editor                                                  -Thoric

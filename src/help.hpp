@@ -22,7 +22,7 @@
 #ifndef _SWRIP_HELP_HPP_
 #define _SWRIP_HELP_HPP_
 
-#include <utility/repository.hpp>
+#include <string>
 #include "types.hpp"
 
 class HelpFile
@@ -33,33 +33,6 @@ public:
   std::string Text;
 };
 
-struct CompareHelpFile
-{
-  bool operator()(const HelpFile *pHelp, const HelpFile *tHelp) const
-  {
-    const char *lhs = pHelp->Keyword[0]=='\'' ? pHelp->Keyword.c_str() + 1 : pHelp->Keyword.c_str();
-    const char *rhs = tHelp->Keyword[0]=='\'' ? tHelp->Keyword.c_str() + 1 : tHelp->Keyword.c_str();
-    int match = StrCmp(lhs, rhs);
-
-    if(match < 0 || (match == 0 && pHelp->Level > tHelp->Level))
-      {
-        return true;
-      }
-    else
-      {
-        return false;
-      }
-  }
-};
-
-class HelpFileRepository : public Ceris::Repository<HelpFile*, CompareHelpFile>
-{
-public:
-  virtual void Load() = 0;
-  virtual void Save() const = 0;
-};
-
-extern HelpFileRepository *HelpFiles;
 extern std::string HelpGreeting;
 
 HelpFile *GetHelpFile( const Character *ch, std::string argument );
@@ -74,7 +47,5 @@ void SetHelpFileKeyword( HelpFile *help, const std::string &keyword );
 
 std::string GetHelpFileText( const HelpFile *help );
 void SetHelpFileText( HelpFile *help, const std::string &text );
-
-HelpFileRepository *NewHelpFileRepository();
 
 #endif

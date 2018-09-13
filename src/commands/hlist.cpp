@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "help.hpp"
+#include "repos/helprepository.hpp"
 
 /*
  * Show help topics in a level range                            -Thoric

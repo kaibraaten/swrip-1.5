@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "help.hpp"
 #include "character.hpp"
+#include "repos/helprepository.hpp"
 
 static short str_similarity( const std::string &astr, const std::string &bstr );
 static void similar_help_files(Character *ch, const std::string &argument);

@@ -1,10 +1,11 @@
 #include "help.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
-#include "playerrepository.hpp"
+#include "repos/playerrepository.hpp"
 #include "character.hpp"
 #include "shop.hpp"
 #include "systemdata.hpp"
+#include "repos/helprepository.hpp"
 
 void do_memory( Character *ch, std::string argument )
 {

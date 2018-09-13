@@ -2,6 +2,7 @@
 #include "help.hpp"
 #include "log.hpp"
 #include "character.hpp"
+#include "repos/helprepository.hpp"
 
 void do_hset( Character *ch, std::string argument )
 {
