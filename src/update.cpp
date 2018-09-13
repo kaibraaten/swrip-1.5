@@ -47,6 +47,7 @@
 #include "race.hpp"
 #include "exit.hpp"
 #include "repos/shiprepository.hpp"
+#include "repos/clanrepository.hpp"
 
 /*
  * Local functions.

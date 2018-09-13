@@ -9,6 +9,7 @@
 #include "protomob.hpp"
 #include "systemdata.hpp"
 #include "race.hpp"
+#include "repos/clanrepository.hpp"
 
 void do_mset( Character *ch, std::string argument )
 {

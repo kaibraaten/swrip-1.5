@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
+#include "repos/clanrepository.hpp"
 
 static bool IsGuildNameAcceptable( const std::string &name );
 

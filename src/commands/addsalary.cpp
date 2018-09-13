@@ -29,8 +29,6 @@ void do_addsalary( Character *ch, std::string argument )
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
 
-  int salary = std::stoi(arg2);
-
   if ( arg.empty() )
     {
       ch->Echo( "Assign a salary to whom?\r\n" );
@@ -63,6 +61,8 @@ void do_addsalary( Character *ch, std::string argument )
       return;
     }
 
+  int salary = atoi(arg2.c_str());
+  
   if ( salary < 0 )
     {
       ch->Echo( "Salary must be positive!\r\n" );

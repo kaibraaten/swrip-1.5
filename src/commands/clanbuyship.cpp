@@ -5,6 +5,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "repos/shiprepository.hpp"
+#include "repos/clanrepository.hpp"
 
 void do_clanbuyship(Character *ch, std::string argument )
 {

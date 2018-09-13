@@ -4,6 +4,7 @@
 #include "turret.hpp"
 #include "clan.hpp"
 #include "repos/shiprepository.hpp"
+#include "repos/clanrepository.hpp"
 
 static bool room_is_in_use( const Ship *ship, vnum_t room_vnum );
 

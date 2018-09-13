@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "pcdata.hpp"
+#include "repos/clanrepository.hpp"
 
 void do_appoint( Character *ch , std::string argument )
 {

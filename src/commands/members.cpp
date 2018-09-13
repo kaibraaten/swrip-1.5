@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "character.hpp"
+#include "repos/clanrepository.hpp"
 
 void do_members( Character *ch, std::string argument )
 {

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "ship.hpp"
+#include "repos/clanrepository.hpp"
 
 struct UpdateOwnerNameData
 {
@@ -158,7 +159,6 @@ void do_setclan( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      char oldFilename[MAX_STRING_LENGTH] = { '\0' };
       struct UpdateOwnerNameData data;
 
       data.OldName = clan->Name;
@@ -172,8 +172,6 @@ void do_setclan( Character *ch, std::string argument )
 
       ForEachShip(UpdateOwnerName, &data);
 
-      sprintf( oldFilename, "%s%s", CLAN_DIR,
-               ConvertToLuaFilename( clan->Name ).c_str() );
       unlink( GetClanFilename( clan ).c_str() );
 
       clan->Name = argument;

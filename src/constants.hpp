@@ -1956,7 +1956,6 @@ enum
 #define PLANET_DIR      DATA_DIR "planets/"
 #define GUARD_DIR       PLANET_DIR
 #define BUILD_DIR       DATA_DIR "building/"  /* Online building save dir     */
-#define CLAN_DIR        DATA_DIR "clans/"
 #define VENDOR_DIR      DATA_DIR "vendor/"
 #define STOREROOM_DIR   DATA_DIR "storeroom/"
 #define PROG_DIR        "./doc/mudprogs/"     /* MUDProg files                */

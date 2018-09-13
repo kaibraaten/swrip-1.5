@@ -37,8 +37,16 @@ void do_clan_withdraw( Character *ch, std::string argument )
     }
 
   clan = ch->PCData->ClanInfo.Clan;
-  amount = std::stoi( argument );
 
+  try
+    {
+      amount = std::stoi( argument );
+    }
+  catch( const std::invalid_argument &ex )
+    {
+      amount = 0;
+    }
+  
   if ( amount == 0 )
     {
       ch->Echo( "How much would you like to withdraw?\r\n" );

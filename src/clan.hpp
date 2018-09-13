@@ -2,16 +2,8 @@
 #define _SWRIP_CLAN_HPP_
 
 #include <list>
-#include <utility/repository.hpp>
 #include "types.hpp"
-
-class ClanRepository : public Ceris::Repository<Clan*>
-{
-public:
-  virtual void Load() = 0;
-  virtual void Save() const = 0;
-  virtual void Save(const Clan*) const = 0;
-};
+#include "constants.hpp"
 
 class Clan
 {
@@ -70,8 +62,6 @@ public:
   time_t LastActivity = 0;
 };
 
-extern ClanRepository *Clans;
-
 #define GUILD_PRICE 100000
 
 void SaveClanStoreroom( Character *ch, const Clan *clan );
@@ -83,8 +73,6 @@ Clan *AllocateClan( void );
 void FreeClan( Clan *clan );
 void AssignGuildToMainclan(Clan *guild);
 void AssignGuildToMainclan( Clan *guild, Clan *mainClan );
-std::string GetClanFilename( const Clan *clan );
 bool IsBountyHuntersGuild(const std::string &clanName);
-ClanRepository *NewClanRepository();
 
 #endif /* include guard*/

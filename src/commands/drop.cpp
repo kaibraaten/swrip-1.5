@@ -5,6 +5,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "systemdata.hpp"
+#include "repos/clanrepository.hpp"
 
 static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 
@@ -241,4 +242,3 @@ static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch)
       SaveClanStoreroom(ch, clan);
     }
 }
-
