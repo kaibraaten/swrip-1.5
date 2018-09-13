@@ -446,14 +446,13 @@ static void LoadRooms( lua_State *L, Shuttle *shuttle )
     {
       int sub_idx = lua_gettop( L );
       const int topAtStart = sub_idx;
-      int elementsToPop = 0;
       luaL_checktype( L, 1, LUA_TTABLE );
 
       lua_getfield( L, sub_idx, "First" );
       lua_getfield( L, sub_idx, "Last" );
       lua_getfield( L, sub_idx, "Entrance" );
 
-      elementsToPop = lua_gettop( L ) - topAtStart;
+      const int elementsToPop = lua_gettop( L ) - topAtStart;
 
       if( !lua_isnil( L, ++sub_idx ) )
 	{

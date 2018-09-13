@@ -49,6 +49,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "social.hpp"
+#include "repos/socialrepository.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "descriptor.hpp"

@@ -57,6 +57,7 @@
 #include "repos/clanrepository.hpp"
 #include "repos/planetrepository.hpp"
 #include "repos/spaceobjectrepository.hpp"
+#include "repos/socialrepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"

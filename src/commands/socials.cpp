@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "social.hpp"
 #include "character.hpp"
+#include "repos/socialrepository.hpp"
 
 void do_socials( Character *ch, std::string argument )
 {
