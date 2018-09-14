@@ -2,6 +2,7 @@
 #include "shop.hpp"
 #include "character.hpp"
 #include "protomob.hpp"
+#include "repos/shoprepository.hpp"
 
 void do_makerepair( Character *ch, std::string argument )
 {

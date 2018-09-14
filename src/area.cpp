@@ -16,6 +16,7 @@
 #include "systemdata.hpp"
 #include "race.hpp"
 #include "exit.hpp"
+#include "repos/shoprepository.hpp"
 
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];

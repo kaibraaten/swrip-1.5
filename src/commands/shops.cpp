@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "shop.hpp"
 #include "character.hpp"
+#include "repos/shoprepository.hpp"
 
 void do_shops( Character *ch, std::string argument )
 {

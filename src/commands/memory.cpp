@@ -6,6 +6,7 @@
 #include "shop.hpp"
 #include "systemdata.hpp"
 #include "repos/helprepository.hpp"
+#include "repos/shoprepository.hpp"
 
 void do_memory( Character *ch, std::string argument )
 {

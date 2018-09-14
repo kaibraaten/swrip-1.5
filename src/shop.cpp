@@ -46,9 +46,6 @@
 #include "protoobject.hpp"
 #include "protomob.hpp"
 
-ShopRepository *Shops = nullptr;
-RepairShopRepository *RepairShops = nullptr;
-
 #define COST_EQUATION  (int) (cost*CostEquation( obj ))
 
 Shop::Shop()
@@ -585,25 +582,4 @@ void SaveVendor( Character *ch )
     }
 
   ReEquipCharacter( ch );
-}
-
-///////////////////////////////////////////////////////////
-class InMemoryShopRepository : public ShopRepository
-{
-
-};
-
-class InMemoryRepairShopRepository : public RepairShopRepository
-{
-
-};
-
-ShopRepository *NewShopRepository()
-{
-  return new InMemoryShopRepository();
-}
-
-RepairShopRepository *NewRepairShopRepository()
-{
-  return new InMemoryRepairShopRepository();
 }
