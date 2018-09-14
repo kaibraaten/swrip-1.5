@@ -5,6 +5,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
+#include "repos/objectrepository.hpp"
 
 static void trunc1(char *s, size_t len);
 

@@ -32,6 +32,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "repos/playerrepository.hpp"
+#include "repos/objectrepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"

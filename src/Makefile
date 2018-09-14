@@ -619,6 +619,7 @@ _OBJ =  act_comm.o \
 	$(REPOSDIR)/clanrepository.o \
 	$(REPOSDIR)/descriptorrepository.o \
 	$(REPOSDIR)/helprepository.o \
+	$(REPOSDIR)/objectrepository.o \
 	$(REPOSDIR)/planetrepository.o \
 	$(REPOSDIR)/playerrepository.o \
 	$(REPOSDIR)/shiprepository.o \

@@ -4,8 +4,6 @@
 #include "constants.hpp"
 #include "log.hpp"
 
-ObjectRepository *Objects = nullptr;
-
 struct Object::Impl
 {
   std::list<ExtraDescription*> ExtraDescriptions;
@@ -266,15 +264,4 @@ void Object::Remove(Object *object)
 const std::list<Object*> &Object::Objects() const
 {
   return pImpl->Objects;
-}
-
-///////////////////////////////////////////////////////
-class InMemoryObjectRepository : public ObjectRepository
-{
-
-};
-
-ObjectRepository *NewObjectRepository()
-{
-  return new InMemoryObjectRepository();
 }

@@ -3,7 +3,6 @@
 
 #include <array>
 #include <string>
-#include <utility/repository.hpp>
 #include "types.hpp"
 #include "constants.hpp"
 #include "mprog.hpp"
@@ -55,17 +54,5 @@ private:
   struct Impl;
   Impl *pImpl = nullptr;
 };
-
-class ObjectRepository : public Ceris::Repository<Object*>
-{
-public:
-
-protected:
-  ObjectRepository() = default;
-};
-
-extern ObjectRepository *Objects;
-
-ObjectRepository *NewObjectRepository();
 
 #endif

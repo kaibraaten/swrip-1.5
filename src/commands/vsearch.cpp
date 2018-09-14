@@ -3,6 +3,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "repos/objectrepository.hpp"
 
 void do_vsearch( Character *ch, std::string arg )
 {

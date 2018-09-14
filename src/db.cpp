@@ -61,6 +61,7 @@
 #include "repos/shuttlerepository.hpp"
 #include "repos/shoprepository.hpp"
 #include "repos/descriptorrepository.hpp"
+#include "repos/objectrepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"

@@ -53,6 +53,7 @@
 #include "alias.hpp"
 #include "race.hpp"
 #include "repos/playerrepository.hpp"
+#include "repos/objectrepository.hpp"
 
 /*
  * Increment with every major format change.

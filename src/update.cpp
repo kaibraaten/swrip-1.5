@@ -50,6 +50,7 @@
 #include "repos/clanrepository.hpp"
 #include "repos/planetrepository.hpp"
 #include "repos/descriptorrepository.hpp"
+#include "repos/objectrepository.hpp"
 
 /*
  * Local functions.
