@@ -32,6 +32,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "descriptor.hpp"
+#include "repos/descriptorrepository.hpp"
 
 /*
  * Global variables.

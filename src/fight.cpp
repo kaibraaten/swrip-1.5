@@ -45,6 +45,7 @@
 #include "systemdata.hpp"
 #include "exit.hpp"
 #include "repos/shiprepository.hpp"
+#include "repos/descriptorrepository.hpp"
 
 extern Character *gch_prev;
 

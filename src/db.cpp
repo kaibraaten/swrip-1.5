@@ -60,6 +60,7 @@
 #include "repos/socialrepository.hpp"
 #include "repos/shuttlerepository.hpp"
 #include "repos/shoprepository.hpp"
+#include "repos/descriptorrepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"

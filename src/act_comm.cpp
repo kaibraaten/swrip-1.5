@@ -32,6 +32,7 @@
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 #include "race.hpp"
+#include "repos/descriptorrepository.hpp"
 
 std::string DrunkSpeech( const std::string &argument, Character *ch )
 {

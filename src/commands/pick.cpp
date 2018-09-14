@@ -7,6 +7,7 @@
 #include "object.hpp"
 #include "descriptor.hpp"
 #include "exit.hpp"
+#include "repos/descriptorrepository.hpp"
 
 void do_pick( Character *ch, std::string arg )
 {

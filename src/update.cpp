@@ -49,6 +49,7 @@
 #include "repos/shiprepository.hpp"
 #include "repos/clanrepository.hpp"
 #include "repos/planetrepository.hpp"
+#include "repos/descriptorrepository.hpp"
 
 /*
  * Local functions.

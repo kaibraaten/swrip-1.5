@@ -6,6 +6,7 @@
 #include "pcdata.hpp"
 #include "descriptor.hpp"
 #include "race.hpp"
+#include "repos/descriptorrepository.hpp"
 
 /*
  * New do_who with WHO REQUEST, clan, race and homepage support.  -Thoric

@@ -41,6 +41,7 @@
 #include "repos/playerrepository.hpp"
 #include "systemdata.hpp"
 #include "race.hpp"
+#include "repos/descriptorrepository.hpp"
 
 #ifdef _WIN32
 #include <process.h>

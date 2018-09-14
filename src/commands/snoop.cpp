@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 #include "descriptor.hpp"
+#include "repos/descriptorrepository.hpp"
 
 void do_snoop( Character *ch, std::string arg )
 {

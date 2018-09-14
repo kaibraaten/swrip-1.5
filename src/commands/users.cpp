@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "descriptor.hpp"
+#include "repos/descriptorrepository.hpp"
 
 void do_users( Character *ch, std::string arg )
 {

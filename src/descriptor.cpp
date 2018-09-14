@@ -6,8 +6,7 @@
 #include "room.hpp"
 #include "pcdata.hpp"
 #include "systemdata.hpp"
-
-DescriptorRepository *Descriptors = nullptr;
+#include "repos/descriptorrepository.hpp"
 
 /*
  * Socket and TCP/IP stuff.
@@ -510,15 +509,4 @@ void NullDescriptor::ReadFromBuffer()
 bool NullDescriptor::Read()
 {
   return true;
-}
-
-///////////////////////////////////////////////////////////
-class InMemoryDescriptorRepository : public DescriptorRepository
-{
-
-};
-
-DescriptorRepository *NewDescriptorRepository()
-{
-  return new InMemoryDescriptorRepository();
 }

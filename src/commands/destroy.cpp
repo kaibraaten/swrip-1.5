@@ -6,6 +6,7 @@
 #include "character.hpp"
 #include "area.hpp"
 #include "descriptor.hpp"
+#include "repos/descriptorrepository.hpp"
 
 static void CloseDescriptorIfHalfwayLoggedIn(const std::string &name);
 static void ExtractVictim(Character *victim);

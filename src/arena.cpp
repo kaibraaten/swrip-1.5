@@ -40,6 +40,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "descriptor.hpp"
+#include "repos/descriptorrepository.hpp"
 
 Arena arena;
 

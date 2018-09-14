@@ -47,6 +47,7 @@
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 #include "repos/banrepository.hpp"
+#include "repos/descriptorrepository.hpp"
 
 /*
  * Socket and TCP/IP stuff.

@@ -50,6 +50,7 @@
 #include "character.hpp"
 #include "social.hpp"
 #include "repos/socialrepository.hpp"
+#include "repos/descriptorrepository.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "descriptor.hpp"

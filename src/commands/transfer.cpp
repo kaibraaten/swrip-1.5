@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "room.hpp"
 #include "descriptor.hpp"
+#include "repos/descriptorrepository.hpp"
 
 void do_transfer( Character *ch, std::string argument )
 {

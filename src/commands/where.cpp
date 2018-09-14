@@ -3,6 +3,7 @@
 #include "area.hpp"
 #include "room.hpp"
 #include "descriptor.hpp"
+#include "repos/descriptorrepository.hpp"
 
 void do_where( Character *ch, std::string arg )
 {

@@ -8,6 +8,7 @@
 #include "mud.hpp"
 #include "descriptor.hpp"
 #include "systemdata.hpp"
+#include "repos/descriptorrepository.hpp"
 
 extern FILE *fpArea;
 extern char strArea[];

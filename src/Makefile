@@ -617,6 +617,7 @@ _OBJ =  act_comm.o \
 	$(REPOSDIR)/boardrepository.o \
 	$(REPOSDIR)/bountyrepository.o \
 	$(REPOSDIR)/clanrepository.o \
+	$(REPOSDIR)/descriptorrepository.o \
 	$(REPOSDIR)/helprepository.o \
 	$(REPOSDIR)/planetrepository.o \
 	$(REPOSDIR)/playerrepository.o \

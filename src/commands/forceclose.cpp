@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "descriptor.hpp"
+#include "repos/descriptorrepository.hpp"
 
 void do_forceclose( Character *ch, std::string arg )
 {
