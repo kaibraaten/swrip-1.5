@@ -29,16 +29,16 @@ public:
   std::string Description;
   std::string ActionDescription;
   vnum_t            Vnum = INVALID_VNUM;
-  short             Level = 0;
+  int             Level = 0;
   ItemTypes         ItemType = 0;
   int               Flags = 0;
   int               WearFlags = 0;
-  short             Count = 0;
-  short             Weight = 0;
+  int             Count = 0;
+  int             Weight = 0;
   int               Cost = 0;
   std::array<int, MAX_OVAL> Value;
   int               Serial = 0;
-  short             Layers = 0;
+  int             Layers = 0;
   int               Rent = 0;                   /* Unused */
 
   MProg mprog;

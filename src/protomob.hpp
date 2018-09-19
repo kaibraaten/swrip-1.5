@@ -24,21 +24,21 @@ public:
   std::string LongDescr;
   std::string Description;
   vnum_t          Vnum = INVALID_VNUM;
-  short           Count = 0;
-  short           Killed = 0;
+  int           Count = 0;
+  int           Killed = 0;
   SexType         Sex = 0;
-  short           Level = 0;
+  int           Level = 0;
   int             Flags = 0;
   int             AffectedBy = 0;
-  short           Alignment = 0;
-  short           ArmorClass = 0;
-  short           HitNoDice = 0;
-  short           HitSizeDice = 0;
-  short           HitPlus = 0;
-  short           DamNoDice = 0;
-  short           DamSizeDice = 0;
-  short           DamPlus = 0;
-  short           NumberOfAttacks = 0;
+  int           Alignment = 0;
+  int           ArmorClass = 0;
+  int           HitNoDice = 0;
+  int           HitSizeDice = 0;
+  int           HitPlus = 0;
+  int           DamNoDice = 0;
+  int           DamSizeDice = 0;
+  int           DamPlus = 0;
+  int           NumberOfAttacks = 0;
   int             Gold = 0;
   int             exp = 0;
   int             Resistant = 0;
@@ -50,11 +50,11 @@ public:
   int             Speaking = 0;
   PositionType    Position = 0;
   PositionType    DefaultPosition = 0;
-  short           Height = 0;
-  short           Weight = 0;
-  short           Race = 0;
-  short           HitRoll = 0;
-  short           DamRoll = 0;
+  int           Height = 0;
+  int           Weight = 0;
+  int           Race = 0;
+  int           HitRoll = 0;
+  int           DamRoll = 0;
   int             VipFlags = 0;
 
   MProg mprog;
@@ -63,11 +63,11 @@ public:
 
   struct
   {
-    short PoisonDeath = 0;
-    short Wand = 0;
-    short ParaPetri = 0;
-    short Breath = 0;
-    short SpellStaff = 0;
+    int PoisonDeath = 0;
+    int Wand = 0;
+    int ParaPetri = 0;
+    int Breath = 0;
+    int SpellStaff = 0;
   } Saving;
 };
 

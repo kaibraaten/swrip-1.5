@@ -34,6 +34,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "descriptor.hpp"
+#include "repos/playerrepository.hpp"
 
 static void RemoveComment( Character *ch, Character *victim, Note *pnote );
 
@@ -56,7 +57,7 @@ static void RemoveComment( Character *ch, Character *victim, Note *pnote )
   /*
    * Rewrite entire list.
    */
-  SaveCharacter(victim);
+  PlayerCharacters->Save(victim);
 }
 
 void do_comment( Character *ch, std::string argument )
@@ -341,7 +342,7 @@ void do_comment( Character *ch, std::string argument )
       ch->PCData->Note = NULL;
       victim->PCData->Add(pnote);
 
-      SaveCharacter(victim);
+      PlayerCharacters->Save(victim);
 
       ch->Echo( "Ok.\r\n");
       return;

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "pcdata.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_induct( Character *ch, std::string argument )
 {
@@ -90,7 +91,7 @@ void do_induct( Character *ch, std::string argument )
   Act( AT_MAGIC, "You induct $N into $t", ch, clan->Name.c_str(), victim, TO_CHAR );
   Act( AT_MAGIC, "$n inducts $N into $t", ch, clan->Name.c_str(), victim, TO_NOTVICT );
   Act( AT_MAGIC, "$n inducts you into $t", ch, clan->Name.c_str(), victim, TO_VICT );
-  SaveCharacter( victim );
+  PlayerCharacters->Save( victim );
 }
 
 

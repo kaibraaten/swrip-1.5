@@ -3,6 +3,7 @@
 #include "ship.hpp"
 #include "character.hpp"
 #include "repos/shiprepository.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_shutdown( Character *ch, std::string argument )
 {
@@ -27,9 +28,13 @@ void do_shutdown( Character *ch, std::string argument )
   if ( StrCmp(argument, "nosave") )
     {
       for ( vch = FirstCharacter; vch; vch = vch->Next )
-        if ( !IsNpc( vch ) )
-          SaveCharacter( vch );
-
+        {
+          if ( !IsNpc( vch ) )
+            {
+              PlayerCharacters->Save( vch );
+            }
+        }
+  
       Ships->Save();
     }
 

@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "room.hpp"
 #include "race.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_save( Character *ch, std::string argument )
 {
@@ -29,7 +30,7 @@ void do_save( Character *ch, std::string argument )
       return;
     }
 
-  SaveCharacter( ch );
+  PlayerCharacters->Save( ch );
   SaveHome (ch );
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )

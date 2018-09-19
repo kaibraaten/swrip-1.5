@@ -40,12 +40,12 @@ public:
   int               WearFlags = 0;
   int               BlasterSetting = 0;
   WearLocation      WearLoc = WEAR_NONE;
-  short             Weight = 1;
+  int             Weight = 1;
   int               Cost = 0;
-  short             Level = 0;
-  short             Timer = 0;
+  int             Level = 0;
+  int             Timer = 0;
   std::array<int, MAX_OVAL> Value;
-  short             Count = 1;          /* support for object grouping */
+  int             Count = 1;          /* support for object grouping */
   int               Serial = 0;         /* serial number               */
 
   MProg mprog;

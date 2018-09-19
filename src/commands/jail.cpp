@@ -6,6 +6,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_jail( Character *ch, std::string argument )
 {
@@ -164,7 +165,7 @@ void do_jail( Character *ch, std::string argument )
   victim->Echo("Whoops. You broke too many laws.\r\n"
                "You shall remain in jail for %d %s%s.\r\n", jail_time,
                (h_d ? "hour" : "day"), (jail_time == 1 ? "" : "s"));
-  SaveCharacter(victim);        /* used to save ch, fixed by Thoric 09/17/96 */
+  PlayerCharacters->Save(victim);
 
   LearnFromSuccess( ch , gsn_jail );
 }

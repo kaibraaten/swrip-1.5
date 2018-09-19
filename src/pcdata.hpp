@@ -65,10 +65,10 @@ public:
     } VnumRanges;
   } Build;
 
-  short WizInvis = 0;       /* wizinvis level */
-  short MinSnoop = 0;      /* minimum snoop level */
+  int WizInvis = 0;       /* wizinvis level */
+  int MinSnoop = 0;      /* minimum snoop level */
   std::array<int, MAX_CONDS> Condition;
-  std::array<short, MAX_SKILL> Learned;
+  std::array<int, MAX_SKILL> Learned;
   std::list<KilledData> Killed;
   int AuthState = 0;
   time_t ReleaseDate = 0;   /* Auto-helling.. Altrag */
@@ -80,8 +80,8 @@ public:
   std::string SubPrompt;      /* Substate prompt */
   bool OpenedTourney = false;
 
-  std::array<short, 10> Addiction;
-  std::array<short, 10> DrugLevel;
+  std::array<int, 10> Addiction;
+  std::array<int, 10> DrugLevel;
   int WantedFlags = 0;
   long Bank = 0;
   bool WhoCloak = false;
@@ -90,9 +90,9 @@ public:
   int BetAmount = 0;
 
   Character *Pet = NULL;
-  std::string Target;
+  std::string AliasFocus;
   class Note *Note = nullptr;
-  short Clones = 0;
+  int Clones = 0;
   int Played = 0;
   time_t Logon = 0;
   time_t SaveTime = 0;

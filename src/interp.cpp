@@ -113,9 +113,9 @@ static std::string ParseTarget( const Character *ch, std::string oldstring )
 
       ++str;
 
-      if ( *str == '$' && !ch->PCData->Target.empty() )
+      if ( *str == '$' && !ch->PCData->AliasFocus.empty() )
         {
-          char *i = CopyString(ch->PCData->Target);
+          char *i = CopyString(ch->PCData->AliasFocus);
           ++str;
 
           while ( ( *point = *i ) != '\0' )
@@ -292,7 +292,7 @@ void Interpret( Character *ch, std::string argument )
 	  argument = GetMultiCommand( ch->Desc, argument );
 	}
 
-      if ( !IsNpc(ch) && ch->PCData && !ch->PCData->Target.empty() )
+      if ( !IsNpc(ch) && ch->PCData && !ch->PCData->AliasFocus.empty() )
 	{
           if( strchr(argument.c_str(), '$') != nullptr)
             {

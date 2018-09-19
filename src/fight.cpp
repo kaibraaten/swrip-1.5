@@ -46,6 +46,7 @@
 #include "exit.hpp"
 #include "repos/shiprepository.hpp"
 #include "repos/descriptorrepository.hpp"
+#include "repos/playerrepository.hpp"
 
 extern Character *gch_prev;
 
@@ -2028,7 +2029,10 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
           BoostEconomy( victim->InRoom->Area, victim->Gold );
 
       if ( IsBitSet( SysData.SaveFlags, SV_KILL ) )
-        SaveCharacter( ch );
+        {
+          PlayerCharacters->Save( ch );
+        }
+      
       return rVICT_DIED;
     }
 
@@ -2557,7 +2561,7 @@ void RawKill( Character *killer, Character *victim )
           int x, y;
 
           quitting_char = victim;
-          SaveCharacter( victim );
+          PlayerCharacters->Save( victim );
           saving_char = NULL;
           ExtractCharacter( victim, true );
           for ( x = 0; x < MAX_WEAR; x++ )

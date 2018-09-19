@@ -1,9 +1,10 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "object.hpp"
 #include "protomob.hpp"
 #include "systemdata.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_give( Character *ch, std::string argument )
 {
@@ -76,10 +77,10 @@ void do_give( Character *ch, std::string argument )
       MobProgBribeTrigger( victim, ch, amount );
 
       if ( IsBitSet( SysData.SaveFlags, SV_GIVE ) && !CharacterDiedRecently(ch) )
-        SaveCharacter(ch);
+        PlayerCharacters->Save(ch);
 
       if ( IsBitSet( SysData.SaveFlags, SV_RECEIVE ) && !CharacterDiedRecently(victim) )
-        SaveCharacter(victim);
+        PlayerCharacters->Save(victim);
 
       return;
     }
@@ -152,9 +153,9 @@ void do_give( Character *ch, std::string argument )
   MobProgGiveTrigger( victim, ch, obj );
 
   if ( IsBitSet( SysData.SaveFlags, SV_GIVE ) && !CharacterDiedRecently(ch) )
-    SaveCharacter(ch);
+    PlayerCharacters->Save(ch);
 
   if ( IsBitSet( SysData.SaveFlags, SV_RECEIVE ) && !CharacterDiedRecently(victim) )
-    SaveCharacter(victim);
+    PlayerCharacters->Save(victim);
 }
 

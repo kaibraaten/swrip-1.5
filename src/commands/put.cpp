@@ -5,6 +5,7 @@
 #include "object.hpp"
 #include "systemdata.hpp"
 #include "repos/clanrepository.hpp"
+#include "repos/playerrepository.hpp"
 
 static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 
@@ -149,7 +150,7 @@ void do_put( Character *ch, std::string argument )
 
       if ( save_char )
         {
-          SaveCharacter( ch );
+          PlayerCharacters->Save( ch );
 
           if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
             SaveHome (ch );
@@ -234,7 +235,7 @@ void do_put( Character *ch, std::string argument )
 
       if ( save_char )
         {
-          SaveCharacter( ch );
+          PlayerCharacters->Save( ch );
 
           if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
             SaveHome (ch );

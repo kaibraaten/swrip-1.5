@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_hell( Character *ch, std::string argument )
 {
@@ -91,5 +92,5 @@ void do_hell( Character *ch, std::string argument )
   victim->Echo( "The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for %d %s%s.\r\n", hell_time,
                 (h_d ? "hour" : "day"), (hell_time == 1 ? "" : "s"));
-  SaveCharacter(victim);
+  PlayerCharacters->Save(victim);
 }

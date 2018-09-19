@@ -40,6 +40,7 @@
 #include "systemdata.hpp"
 #include "race.hpp"
 #include "repos/banrepository.hpp"
+#include "repos/playerrepository.hpp"
 
 using NannyFun = std::function<void(Descriptor*, std::string)>;
 
@@ -193,7 +194,7 @@ static void NannyGetName( Descriptor *d, std::string argument )
       return;
     }
 
-  fOld = LoadCharacter( d, argument, true );
+  fOld = PlayerCharacters->Load( d, argument, true );
 
   if ( !d->Character )
     {
@@ -275,12 +276,13 @@ static void NannyGetName( Descriptor *d, std::string argument )
     }
   else
     {
-      if (IsBadName(ch->Name)) {
-	d->WriteToBuffer( "\r\nThat name is unacceptable, please choose another.\r\n", 0);
-	d->WriteToBuffer( "Name: ",0);
-	d->ConnectionState = CON_GET_NAME;
-	return;
-      }
+      if (IsBadName(ch->Name))
+        {
+          d->WriteToBuffer( "\r\nThat name is unacceptable, please choose another.\r\n", 0);
+          d->WriteToBuffer( "Name: ",0);
+          d->ConnectionState = CON_GET_NAME;
+          return;
+        }
 
       d->WriteToBuffer( "\r\nI don't recognize your name, you must be new here.\r\n\r\n", 0 );
       sprintf( buf, "Did I get that right, %s (Y/N)? ", argument.c_str() );
@@ -341,7 +343,7 @@ static void NannyGetOldPassword( Descriptor *d, std::string argument )
   sprintf( buf, "%s", ch->Name.c_str() );
   d->Character->Desc = NULL;
   FreeCharacter( d->Character );
-  LoadCharacter( d, buf, false );
+  PlayerCharacters->Load( d, buf, false );
   ch = d->Character;
   sprintf( log_buf, "%s@%s has connected.", ch->Name.c_str(), d->Remote.Hostname.c_str() );
 

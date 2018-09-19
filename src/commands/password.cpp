@@ -4,6 +4,7 @@
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "systemdata.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_password( Character *ch, std::string argument )
 {
@@ -42,8 +43,10 @@ void do_password( Character *ch, std::string argument )
   ch->PCData->Password = EncodeString( arg2 );
 
   if ( IsBitSet(SysData.SaveFlags, SV_PASSCHG) )
-    SaveCharacter( ch );
-
+    {
+      PlayerCharacters->Save( ch );
+    }
+  
   ch->Echo("Ok.\r\n");
 }
 

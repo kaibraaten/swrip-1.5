@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_freeze( Character *ch, std::string argument )
 {
@@ -44,7 +45,7 @@ void do_freeze( Character *ch, std::string argument )
       victim->Echo( "You can't do ANYthing!\r\n" );
       ch->Echo( "FREEZE set.\r\n" );
     }
-
-  SaveCharacter( victim );
+  
+  PlayerCharacters->Save( victim );
 }
 

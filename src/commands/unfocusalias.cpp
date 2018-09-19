@@ -10,12 +10,12 @@ void do_unfocusalias(Character *ch, std::string argument)
       return;
     }
 
-  if ( ch->PCData->Target.empty() )
+  if ( ch->PCData->AliasFocus.empty() )
     {
       ch->Echo("Your alias focus is not defined at the moment.\r\n");
       return;
     }
 
   ch->Echo("You remove your current alias focus.\r\n");
-  ch->PCData->Target.erase();
+  ch->PCData->AliasFocus.erase();
 }

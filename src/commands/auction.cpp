@@ -5,6 +5,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "systemdata.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_auction(Character *ch, std::string argument)
 {
@@ -122,7 +123,7 @@ void do_auction(Character *ch, std::string argument)
           ObjectToCharacter (auction->Item, auction->Seller);
 
           if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
-	    SaveCharacter(auction->Seller);
+	    PlayerCharacters->Save(auction->Seller);
 
           auction->Item = NULL;
 
@@ -192,7 +193,7 @@ void do_auction(Character *ch, std::string argument)
           ch->Gold -= newbet; /* substract the gold - important :) */
 
           if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
-            SaveCharacter(ch);
+            PlayerCharacters->Save(ch);
 
           auction->Buyer = ch;
           auction->Bet   = newbet;
@@ -271,7 +272,7 @@ void do_auction(Character *ch, std::string argument)
 	  ObjectFromCharacter (obj);
 
 	  if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
-	    SaveCharacter(ch);
+	    PlayerCharacters->Save(ch);
 
 	  auction->Item = obj;
 	  auction->Bet = 0;

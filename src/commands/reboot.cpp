@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "repos/shiprepository.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_reboot( Character *ch, std::string argument )
 {
@@ -33,9 +34,15 @@ void do_reboot( Character *ch, std::string argument )
 
   /* Save all characters before booting. */
   if ( StrCmp(argument, "nosave") )
-    for ( vch = FirstCharacter; vch; vch = vch->Next )
-      if ( !IsNpc( vch ) )
-        SaveCharacter( vch );
+    {
+      for ( vch = FirstCharacter; vch; vch = vch->Next )
+        {
+          if ( !IsNpc( vch ) )
+            {
+              PlayerCharacters->Save( vch );
+            }
+        }
+    }
 
   Ships->Save();
   mud_down = true;

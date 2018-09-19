@@ -87,7 +87,7 @@ void do_copyover( Character * ch, std::string argument )
 
           fprintf( fp, "%d %d %s %s %s\n", cur_desc, 0,
                    och->Name.c_str(), d->Remote.HostIP.c_str(), d->Remote.Hostname.c_str() );
-          SaveCharacter( och );
+          PlayerCharacters->Save( och );
           WriteToDescriptor( d->Socket, buf, 0 );
         }
     }
@@ -168,7 +168,7 @@ void RecoverFromCopyover( void )
       d->ConnectionState = CON_COPYOVER_RECOVER; /* negative so CloseDescriptor will cut them off */
 
       /* Now, find the pfile */
-      fOld = LoadCharacter( d, name, false );
+      fOld = PlayerCharacters->Load( d, name, false );
 
       if( !fOld )               /* Player file not found?! */
         {

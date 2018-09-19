@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "pcdata.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_resign( Character *ch, std::string argument )
 {
@@ -55,6 +56,6 @@ void do_resign( Character *ch, std::string argument )
   ch->Echo("You lose %ld diplomacy experience.\r\n", xp_actually_lost );
 
   ch->PCData->Bestowments.erase();
-  SaveCharacter( ch );
+  PlayerCharacters->Save( ch );
 }
 

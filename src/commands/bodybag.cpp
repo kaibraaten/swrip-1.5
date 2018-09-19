@@ -4,6 +4,7 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "repos/objectrepository.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_bodybag( Character *ch, std::string arg )
 {
@@ -38,7 +39,7 @@ void do_bodybag( Character *ch, std::string arg )
           ObjectFromRoom(obj);
           obj = ObjectToCharacter(obj, ch);
           obj->Timer = -1;
-          SaveCharacter( ch );
+          PlayerCharacters->Save( ch );
         }
     }
 

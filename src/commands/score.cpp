@@ -192,11 +192,11 @@ void do_score(Character *ch, std::string argument)
 
   if ( !IsNpc(ch) )
     {
-      if ( !ch->PCData->Target.empty() )
+      if ( !ch->PCData->AliasFocus.empty() )
 	{
           sprintf( buf,
                    "&cYour current alias focus is : &C%s.\r\n",
-                   ch->PCData->Target.c_str());
+                   ch->PCData->AliasFocus.c_str());
           ch->Echo(buf);
         }
       else

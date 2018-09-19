@@ -48,6 +48,7 @@
 #include "systemdata.hpp"
 #include "repos/banrepository.hpp"
 #include "repos/descriptorrepository.hpp"
+#include "repos/playerrepository.hpp"
 
 /*
  * Socket and TCP/IP stuff.
@@ -429,7 +430,7 @@ static void GameLoop( void )
               if ( d->Character
                    && ( d->ConnectionState == CON_PLAYING
                         ||   d->ConnectionState == CON_EDITING ) )
-                SaveCharacter( d->Character );
+                PlayerCharacters->Save( d->Character );
 
               d->OutTop = 0;
               CloseDescriptor( d, true );
@@ -479,7 +480,7 @@ static void GameLoop( void )
                       if ( d->Character
                            && ( d->ConnectionState == CON_PLAYING
                                 ||   d->ConnectionState == CON_EDITING ) )
-                        SaveCharacter( d->Character );
+                        PlayerCharacters->Save( d->Character );
 
                       d->OutTop     = 0;
                       CloseDescriptor( d, false );
@@ -547,7 +548,8 @@ static void GameLoop( void )
                   if ( d->Character
                        && ( d->ConnectionState == CON_PLAYING
                             ||   d->ConnectionState == CON_EDITING ) )
-                    SaveCharacter( d->Character );
+                    PlayerCharacters->Save( d->Character );
+
                   d->OutTop     = 0;
                   CloseDescriptor( d, false );
                 }

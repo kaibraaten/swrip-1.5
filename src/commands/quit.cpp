@@ -3,6 +3,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_quit( Character *ch, std::string argument )
 {
@@ -65,7 +66,7 @@ void do_quit( Character *ch, std::string argument )
 
   sprintf( log_buf, "%s has quit.", ch->Name.c_str() );
   quitting_char = ch;
-  SaveCharacter( ch );
+  PlayerCharacters->Save( ch );
   SaveHome(ch);
 
   if ( ch->PCData->Pet )

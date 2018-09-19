@@ -3,13 +3,13 @@
 
 #include <string>
 #include <utility/repository.hpp>
-
-class Character;
+#include "types.hpp"
 
 class PlayerRepository : public Ceris::Repository<Character*>
 {
 public:
   virtual void Load() = 0;
+  virtual bool Load( Descriptor *d, const std::string &name, bool preload ) = 0;
   virtual void Save() const = 0;
   virtual void Save(const Character *pc) const = 0;
 

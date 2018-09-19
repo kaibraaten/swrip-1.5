@@ -10,6 +10,7 @@
 #include "systemdata.hpp"
 #include "race.hpp"
 #include "repos/clanrepository.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_mset( Character *ch, std::string argument )
 {
@@ -678,7 +679,7 @@ void do_mset( Character *ch, std::string argument )
       victim->PCData->Password = EncodeString( arg3 );
 
       if ( IsBitSet(SysData.SaveFlags, SV_PASSCHG) )
-        SaveCharacter( victim );
+        PlayerCharacters->Save( victim );
 
       ch->Echo("Ok.\r\n");
       victim->Echo("Your password has been changed by %s.\r\n", ch->Name.c_str() );
@@ -845,7 +846,7 @@ void do_mset( Character *ch, std::string argument )
           victim->PCData->ClanInfo.Clan = NULL;
           ch->Echo("Removed from clan.\r\nBe sure to remove any bestowments they have been given.\r\n");
           Clans->Save(clan);
-	  SaveCharacter( victim );
+	  PlayerCharacters->Save( victim );
           return;
         }
 
@@ -863,7 +864,7 @@ void do_mset( Character *ch, std::string argument )
       ch->Echo("Done.\r\n" );
       UpdateClanMember( victim );
       Clans->Save(clan);
-      SaveCharacter( victim );
+      PlayerCharacters->Save( victim );
       return;
     }
 

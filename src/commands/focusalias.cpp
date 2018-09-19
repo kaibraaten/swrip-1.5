@@ -18,10 +18,10 @@ void do_focusalias( Character *ch, std::string arg )
   if ( arg.empty() )
     {
 
-      if ( !ch->PCData->Target.empty() )
+      if ( !ch->PCData->AliasFocus.empty() )
         {
           ch->Echo( "Your current alias focus is : %s\r\n",
-                    ch->PCData->Target.c_str());
+                    ch->PCData->AliasFocus.c_str());
           return;
         }
 
@@ -32,12 +32,12 @@ void do_focusalias( Character *ch, std::string arg )
     {
       SetTarget( ch, arg );
       ch->Echo( "Your new alias focus is : %s\r\n",
-                ch->PCData->Target.c_str());
+                ch->PCData->AliasFocus.c_str());
       return;
     }
 }
 
 static void SetTarget( Character *ch, const std::string &target )
 {
-  ch->PCData->Target = target;
+  ch->PCData->AliasFocus = target;
 }

@@ -43,11 +43,11 @@ public:
   std::string Description;
   vnum_t            Vnum = INVALID_VNUM;
   int               Flags = 0;
-  short             Light = 0;
+  int             Light = 0;
   SectorType Sector = 0;
   vnum_t            TeleVnum = INVALID_VNUM;
-  short             TeleDelay = 0;
-  short             Tunnel = 0;              /* max people that will fit */
+  int             TeleDelay = 0;
+  int             Tunnel = 0;              /* max people that will fit */
 
   MProg mprog;
 

@@ -172,9 +172,9 @@ public:
 class Affect
 {
 public:
-  short Type = 0;
-  short Duration = 0;
-  short Location = 0;
+  int Type = 0;
+  int Duration = 0;
+  int Location = 0;
   int Modifier = 0;
   int AffectedBy = 0;
 };
@@ -187,7 +187,7 @@ class SmaugAffect
 public:
   SmaugAffect *Next = nullptr;
   std::string Duration;
-  short Location = 0;
+  int Location = 0;
   std::string Modifier;
   int AffectedBy = 0;
 };
@@ -388,6 +388,7 @@ extern const std::array<const char * const, MAX_LOG> CmdLogName;
 extern const std::array<const char * const, MAX_SHIP_TYPE> ShipTypes;
 extern const std::array<const char * const, MAX_SHIP_CLASS> ShipClasses;
 extern const std::array<const char * const, MAX_BIT> ChannelNames;
+extern const std::array<const char * const, MAX_CONDS> ConditionNames;
 
 /*
  * Global variables.
@@ -1164,7 +1165,8 @@ int GetCmdLog(const std::string &txt);
 ShipClass GetShipClass(const std::string &txt);
 ShipType GetShipType(const std::string &txt);
 int GetShipFlag(const std::string &txt);
-  
+int GetCondition(const std::string &conditionName );
+
 /* nanny.c */
 void Nanny( Descriptor *d, std::string argument );
 
@@ -1383,9 +1385,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
 int ParseDice( const Character *ch, int level, const std::string &exp );
 
 /* save.c */
-void SaveCharacter( Character *ch );
 void SaveClone( Character *ch );
-bool LoadCharacter( Descriptor *d, const std::string &name, bool preload );
 void SetAlarm( long seconds );
 void WriteObject( const Character *ch, const Object *obj, FILE *fp,
                   int iNest, short os_type );

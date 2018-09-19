@@ -5,6 +5,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "object.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_pricevendor( Character *ch, std::string argument )
 {
@@ -54,7 +55,7 @@ void do_pricevendor( Character *ch, std::string argument )
       do_look(ch, "auto");
       ch->Echo("The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for 24 Hours.\r\n");
-      SaveCharacter(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
+      PlayerCharacters->Save(ch);
       Log->Info("%s just tried to abuse the vendor bug!", ch->Name.c_str());
       return;
     }

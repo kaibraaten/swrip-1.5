@@ -51,6 +51,7 @@
 #include "repos/planetrepository.hpp"
 #include "repos/descriptorrepository.hpp"
 #include "repos/objectrepository.hpp"
+#include "repos/playerrepository.hpp"
 
 /*
  * Local functions.
@@ -1749,13 +1750,13 @@ static void CharacterUpdate( void )
                   CharacterToRoom( ch, GetRoom( ROOM_PLUOGUS_QUIT ) );
                   ch->Position = POS_RESTING;
                   ch->HitPoints.Current = umax( 1, ch->HitPoints.Current );
-                  SaveCharacter( ch );
+                  PlayerCharacters->Save( ch );
                   do_quit( ch, "" );
                 }
               else if ( ch == ch_save && IsBitSet( SysData.SaveFlags, SV_AUTO )
 			&& ++save_count < 10 )   /* save max of 10 per tick */
 		{
-		  SaveCharacter( ch );
+		  PlayerCharacters->Save( ch );
 		}
             }
         }
@@ -2813,7 +2814,7 @@ void RebootCheck( time_t reset )
 	{
 	  if ( !IsNpc(vch) )
 	    {
-	      SaveCharacter(vch);
+	      PlayerCharacters->Save(vch);
 	    }
 	}
 
@@ -2905,8 +2906,8 @@ static void AuctionUpdate( void )
 
           if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
             {
-              SaveCharacter( auction->Buyer );
-              SaveCharacter( auction->Seller );
+              PlayerCharacters->Save( auction->Buyer );
+              PlayerCharacters->Save( auction->Seller );
             }
         }
       else /* not sold */
@@ -2951,7 +2952,7 @@ static void AuctionUpdate( void )
 
           if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
 	    {
-	      SaveCharacter( auction->Seller );
+	      PlayerCharacters->Save( auction->Seller );
 	    }
         }
 

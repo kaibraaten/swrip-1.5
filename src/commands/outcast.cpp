@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "pcdata.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_outcast( Character *ch, std::string arg )
 {
@@ -88,6 +89,6 @@ void do_outcast( Character *ch, std::string arg )
        ch, clan->Name.c_str(), victim, TO_VICT );
 
   victim->PCData->Bestowments.erase();
-  SaveCharacter( victim );      /* clan gets saved when pfile is saved */
+  PlayerCharacters->Save( victim );      /* clan gets saved when pfile is saved */
 }
 

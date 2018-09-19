@@ -2,6 +2,7 @@
 #include "character.hpp"
 #include "clan.hpp"
 #include "pcdata.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_empower( Character *ch , std::string argument )
 {
@@ -145,5 +146,5 @@ void do_empower( Character *ch , std::string argument )
       ch->Echo(     "none:        removes bestowed abilities\r\n" );
     }
 
-  SaveCharacter( victim );      /* clan gets saved when pfile is saved */
+  PlayerCharacters->Save( victim );      /* clan gets saved when pfile is saved */
 }

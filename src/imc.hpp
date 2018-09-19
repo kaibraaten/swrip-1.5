@@ -54,5 +54,6 @@ socket_t ImcGetSocket( SiteInfo* );
 
 struct lua_State;
 void ImcSaveCharacter( lua_State *L, const Character *ch );
+void ImcLoadCharacter( lua_State *L, Character *ch );
 
 #endif

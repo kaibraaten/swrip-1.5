@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "pcdata.hpp"
+#include "repos/playerrepository.hpp"
 
 #define RESTORE_INTERVAL 21600
 
@@ -40,7 +41,7 @@ void do_restore( Character *ch, std::string arg )
 
       last_restore_all_time    = current_time;
       ch->PCData->RestoreTime = current_time;
-      SaveCharacter( ch );
+      PlayerCharacters->Save( ch );
       ch->Echo("Ok.\r\n");
 
       for ( vch = FirstCharacter; vch; vch = vch_next )

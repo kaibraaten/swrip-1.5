@@ -64,28 +64,28 @@ public:
   std::string LongDescr;
   std::string Description;
   SexType Sex = 0;
-  short Race = 0;
-  short TopLevel = 0;
+  int Race = 0;
+  int TopLevel = 0;
 
   struct
   {
-    short Current = 500;
-    short Max = 500;
+    int Current = 500;
+    int Max = 500;
   } HitPoints;
 
   struct
   {
-    short Current = 0;
-    short Max = 0;
+    int Current = 0;
+    int Max = 0;
   } Mana;
 
   struct
   {
-    short Current = 1000;
-    short Max = 1000;
+    int Current = 1000;
+    int Max = 1000;
   } Fatigue;
   
-  short NumberOfAttacks = 0;
+  int NumberOfAttacks = 0;
   int Gold = 0;
   int Flags = 0;
   int AffectedBy = 0;
@@ -96,27 +96,27 @@ public:
   int DefenseFlags = 0;
   int Speaks = LANG_COMMON;
   int Speaking = LANG_COMMON;
-  short Alignment = 0;
-  short BareNumDie = 1;
-  short BareSizeDie = 4;
-  short HitRoll = 0;
-  short DamRoll = 0;
-  short HitPlus = 0;
-  short DamPlus = 0;
+  int Alignment = 0;
+  int BareNumDie = 1;
+  int BareSizeDie = 4;
+  int HitRoll = 0;
+  int DamRoll = 0;
+  int HitPlus = 0;
+  int DamPlus = 0;
   PositionType Position = POS_STANDING;
   PositionType DefaultPosition = POS_STANDING;
-  short Height = 72;
-  short Weight = 180;
-  short ArmorClass = 100;
+  int Height = 72;
+  int Weight = 180;
+  int ArmorClass = 100;
   int VipFlags = 0;
 
   struct
   {
-    short PoisonDeath = 0;
-    short Wand = 0;
-    short ParaPetri = 0;
-    short Breath = 0;
-    short SpellStaff = 0;
+    int PoisonDeath = 0;
+    int Wand = 0;
+    int ParaPetri = 0;
+    int Breath = 0;
+    int SpellStaff = 0;
   } Saving;
 
   Stats PermStats;
@@ -155,23 +155,23 @@ public:
   void *spare_ptr = NULL;
   int tempnum = 0;
   struct Editor * Editor = NULL;
-  short NumFighting = 0;
+  int NumFighting = 0;
   CharacterSubState SubState = SUB_NONE;
-  short Trust = 0;
-  short IdleTimer = 0;
-  short Wait = 0;
+  int Trust = 0;
+  int IdleTimer = 0;
+  int Wait = 0;
   int CarryWeight = 0;
   int CarryNumber = 0;
-  short Wimpy = 0;
+  int Wimpy = 0;
   int Deaf = 0;
-  short MentalState = 0;           /* simplified */
-  short EmotionalState = 0;        /* simplified */
+  int MentalState = 0;           /* simplified */
+  int EmotionalState = 0;        /* simplified */
   vnum_t ReTran = INVALID_VNUM;
   vnum_t ReGoto = INVALID_VNUM;
-  short MobInvis = 0;
-  short BackupWait = 0;       /* reinforcements */
+  int MobInvis = 0;
+  int BackupWait = 0;       /* reinforcements */
   vnum_t BackupMob = INVALID_VNUM;     /* reinforcements */
-  short WasStunned = 0;
+  int WasStunned = 0;
   std::string MobClan;    /* for spec_clan_guard.. set by postguard */
   Room *BuzzedHome = NULL;
   Room *BuzzedFromRoom = NULL;
@@ -180,7 +180,7 @@ public:
   int BetAmount = 0;
   std::string Owner;
   Room *Home = NULL;
-  short CmdRecurse = 0;
+  int CmdRecurse = 0;
   Object *On = NULL;
   Character *Pet = NULL;
 
@@ -193,7 +193,7 @@ public:
 
   struct
   {
-    short Main = 0;
+    int Main = 0;
     std::array<short, MAX_ABILITY> Level;
     std::array<long, MAX_ABILITY> Experience;
   } Ability;

@@ -3,6 +3,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "systemdata.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_empty( Character *ch, std::string argument )
 {
@@ -98,7 +99,7 @@ void do_empty( Character *ch, std::string argument )
               Act( AT_ACTION, "$n empties $p.", ch, obj, NULL, TO_ROOM );
 
               if ( IsBitSet( SysData.SaveFlags, SV_DROP ) )
-                SaveCharacter( ch );
+                PlayerCharacters->Save( ch );
             }
           else
             {
@@ -142,7 +143,7 @@ void do_empty( Character *ch, std::string argument )
 
               if ( !dest->CarriedBy
                    &&    IsBitSet( SysData.SaveFlags, SV_PUT ) )
-                SaveCharacter( ch );
+                PlayerCharacters->Save( ch );
             }
           else
             {

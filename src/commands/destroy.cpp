@@ -7,6 +7,7 @@
 #include "area.hpp"
 #include "descriptor.hpp"
 #include "repos/descriptorrepository.hpp"
+#include "repos/playerrepository.hpp"
 
 static void CloseDescriptorIfHalfwayLoggedIn(const std::string &name);
 static void ExtractVictim(Character *victim);
@@ -132,7 +133,7 @@ static void CloseDescriptorIfHalfwayLoggedIn(const std::string &name)
 static void ExtractVictim(Character *victim)
 {
   quitting_char = victim;
-  SaveCharacter( victim );
+  PlayerCharacters->Save( victim );
   saving_char = NULL;
   ExtractCharacter( victim, true );
 

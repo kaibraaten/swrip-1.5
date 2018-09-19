@@ -3,6 +3,7 @@
 #include "clan.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_clan_donate( Character *ch, std::string argument )
 {
@@ -49,6 +50,6 @@ void do_clan_donate( Character *ch, std::string argument )
 
   clan->Funds += amount;
   ch->Gold -= amount;
-  SaveCharacter( ch );
+  PlayerCharacters->Save( ch );
 }
 

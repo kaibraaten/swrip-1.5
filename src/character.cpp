@@ -39,6 +39,7 @@
 #include "systemdata.hpp"
 #include "alias.hpp"
 #include "race.hpp"
+#include "repos/playerrepository.hpp"
 
 struct Character::Impl
 {
@@ -573,8 +574,10 @@ void EquipCharacter( Character *ch, Object *obj, WearLocation iWear )
       ObjProgZapTrigger( ch, obj);
 
       if ( IsBitSet(SysData.SaveFlags, SV_ZAPDROP) && !CharacterDiedRecently(ch) )
-        SaveCharacter( ch );
-
+        {
+          PlayerCharacters->Save( ch );
+        }
+      
       return;
     }
 

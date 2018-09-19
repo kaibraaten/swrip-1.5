@@ -5,6 +5,7 @@
 #include "object.hpp"
 #include "systemdata.hpp"
 #include "repos/clanrepository.hpp"
+#include "repos/playerrepository.hpp"
 
 static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 static void get_obj( Character *ch, Object *obj, Object *container );
@@ -109,7 +110,7 @@ void do_get( Character *ch, std::string argument )
 
           if ( IsBitSet( SysData.SaveFlags, SV_GET ) )
             {
-              SaveCharacter( ch );
+              PlayerCharacters->Save( ch );
 
               if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
                 SaveHome (ch );
@@ -158,7 +159,7 @@ void do_get( Character *ch, std::string argument )
                       if ( IsBitSet(SysData.SaveFlags, SV_GET)
                            &&  !CharacterDiedRecently(ch) )
                         {
-                          SaveCharacter( ch );
+                          PlayerCharacters->Save( ch );
 
                           if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
                             SaveHome (ch );
@@ -181,7 +182,7 @@ void do_get( Character *ch, std::string argument )
             }
           else if ( IsBitSet( SysData.SaveFlags, SV_GET ) )
 	    {
-	      SaveCharacter( ch );
+	      PlayerCharacters->Save( ch );
 
 	      if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
 		SaveHome (ch );
@@ -263,7 +264,7 @@ void do_get( Character *ch, std::string argument )
 
           if ( IsBitSet( SysData.SaveFlags, SV_GET ) )
             {
-	      SaveCharacter( ch );
+	      PlayerCharacters->Save( ch );
 
               if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
                 SaveHome (ch );
@@ -338,7 +339,7 @@ void do_get( Character *ch, std::string argument )
 
           if ( found && IsBitSet( SysData.SaveFlags, SV_GET ) )
             {
-              SaveCharacter( ch );
+              PlayerCharacters->Save( ch );
 
               if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
                 {

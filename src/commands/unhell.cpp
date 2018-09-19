@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "repos/playerrepository.hpp"
 
 void do_unhell( Character *ch, std::string arg )
 {
@@ -49,5 +50,5 @@ void do_unhell( Character *ch, std::string arg )
   MOBtrigger = false;
   Act( AT_MAGIC, "$n appears in a cloud of godly light.", victim, NULL, ch, TO_NOTVICT );
   victim->PCData->ReleaseDate = 0;
-  SaveCharacter(victim);
+  PlayerCharacters->Save(victim);
 }

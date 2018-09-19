@@ -40,8 +40,9 @@ static int GetInArray(const std::string &name, const char * const * array,
   return -1;
 }
 
+template<size_t N>
 static int GetInArray(const std::string &name,
-                      const std::array<const char * const, MAX_BIT> &array,
+                      const std::array<const char * const, N> &array,
                       int (*compare_string)(const std::string&, const std::string&))
 {
   for( size_t x = 0; x < array.size(); ++x )
@@ -3536,3 +3537,16 @@ int GetChannelBit(const std::string &name)
   return GetInArray( name, ChannelNames, StrCmp );
 }
 #endif
+
+const std::array<const char * const, MAX_CONDS> ConditionNames =
+  {
+   "drunk",
+   "full",
+   "thirst",
+   "bloodthirst"
+  };
+
+int GetCondition( const std::string &conditionName )
+{
+  return GetInArray( conditionName, ConditionNames, StrCmp );
+}
