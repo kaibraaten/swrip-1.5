@@ -81,4 +81,7 @@ important to coders.
   day, but probably not...
 
 * Data saved as Lua scripts for better human readability and more robust
-  loading and saving.
+  loading and saving. Furthermore, all C++ code handling the reading and
+  writing is in the respective Repository classes in the sr/repos
+  directory. Except the functions in src/script.cpp that are general enough
+  that they can be used by multiple repositories.
