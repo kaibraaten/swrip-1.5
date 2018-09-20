@@ -51,8 +51,8 @@ void do_mpgain( Character *ch, std::string argument )
       return;
     }
 
-  ability = std::stoi(arg2);
-  xp = std::stoi(arg3);
+  ability = ToLong(arg2);
+  xp = ToLong(arg3);
 
   if( ability < 0 || ability >= MAX_ABILITY )
     {

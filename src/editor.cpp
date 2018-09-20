@@ -915,7 +915,7 @@ static void EditorList( Character *ch, Editor *edd, char *cargument )
 
   if( !arg1.empty() && IsNumber(arg1) )
     {
-      from = std::stoi(arg1);
+      from = ToLong(arg1);
     }
   else
     {
@@ -926,7 +926,7 @@ static void EditorList( Character *ch, Editor *edd, char *cargument )
 
   if( !arg1.empty() && IsNumber(arg1) )
     {
-      to = std::stoi(arg1);
+      to = ToLong(arg1);
     }
   else
     {

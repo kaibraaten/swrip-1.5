@@ -23,7 +23,7 @@ void do_trust( Character *ch, std::string argument )
       return;
     }
 
-  if ( ( level = std::stoi( arg2 ) ) < 0 || level > MAX_LEVEL )
+  if ( ( level = ToLong( arg2 ) ) < 0 || level > MAX_LEVEL )
     {
       ch->Echo("Level must be 0 (reset) or 1 to %d.\r\n", MAX_LEVEL);
       return;

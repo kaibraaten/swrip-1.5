@@ -44,7 +44,7 @@ void do_ban( Character *ch, std::string argument )
 
       for(auto b : Bans->Entities())
         {
-          if ( bnum == std::stoi(arg) )
+          if ( bnum == ToLong(arg) )
             {
               pban = b;
               found = true;
@@ -78,13 +78,13 @@ void do_ban( Character *ch, std::string argument )
               return;
             }
 
-          if ( std::stoi(arg) < 1 || std::stoi(arg) > LEVEL_IMPLEMENTOR )
+          if ( ToLong(arg) < 1 || ToLong(arg) > LEVEL_IMPLEMENTOR )
             {
               ch->Echo("Level range: 1 - %d.\r\n", LEVEL_IMPLEMENTOR);
               return;
             }
 
-	  pban->Level = std::stoi(arg);
+	  pban->Level = ToLong(arg);
           ch->Echo( "Ban level set.\r\n" );
         }
       else if ( !StrCmp(arg, "newban") )

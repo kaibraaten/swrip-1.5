@@ -24,7 +24,7 @@ void do_get( Character *ch, std::string argument )
 
   if ( IsNumber(arg1) )
     {
-      number = std::stoi(arg1);
+      number = ToLong(arg1);
 
       if ( number < 1 )
         {

@@ -33,12 +33,12 @@ void do_olist( Character *ch, std::string argument )
       if ( arg1.empty() )
         lrange = tarea->VnumRanges.Object.First;     /* here.            -Thoric */
       else
-        lrange = std::stoi( arg1 );
+        lrange = ToLong( arg1 );
 
       if ( arg2.empty() )
         trange = tarea->VnumRanges.Object.Last;
       else
-        trange = std::stoi(arg2);
+        trange = ToLong(arg2);
 
       if ((lrange < tarea->VnumRanges.Object.First || trange > tarea->VnumRanges.Object.Last)
           &&   GetTrustLevel( ch ) < LEVEL_GREATER )
@@ -49,8 +49,8 @@ void do_olist( Character *ch, std::string argument )
     }
   else
     {
-      lrange = ( IsNumber( arg1 ) ? std::stoi( arg1 ) : 1 );
-      trange = ( IsNumber( arg2 ) ? std::stoi( arg2 ) : 3 );
+      lrange = ( IsNumber( arg1 ) ? ToLong( arg1 ) : 1 );
+      trange = ( IsNumber( arg2 ) ? ToLong( arg2 ) : 3 );
     }
 
   for ( vnum = lrange; vnum <= trange; vnum++ )

@@ -21,7 +21,7 @@ void do_ocreate( Character *ch, std::string argument )
 
   argument = OneArgument( argument, arg );
 
-  vnum = IsNumber( arg ) ? std::stoi( arg ) : INVALID_VNUM;
+  vnum = IsNumber( arg ) ? ToLong( arg ) : INVALID_VNUM;
 
   if ( vnum == INVALID_VNUM || argument.empty() )
     {
@@ -36,7 +36,7 @@ void do_ocreate( Character *ch, std::string argument )
     }
 
   OneArgument( argument, arg2 );
-  cvnum = std::stoi( arg2 );
+  cvnum = ToLong( arg2 );
 
   if ( cvnum != INVALID_VNUM )
     argument = OneArgument( argument, arg2 );

@@ -21,7 +21,7 @@ void do_mp_withdraw( Character *ch, std::string arg )
       return;
     }
 
-  gold = std::stoi( arg );
+  gold = ToLong( arg );
 
   if ( ch->Gold < 1000000000 && gold < 1000000000 && ch->InRoom
        &&   EconomyHas( ch->InRoom->Area, gold ) )

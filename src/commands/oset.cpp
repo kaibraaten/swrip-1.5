@@ -205,7 +205,7 @@ void do_oset( Character *ch, std::string argument )
     FreeMemory(ch->dest_buf);
 
   SeparateOneObjectFromGroup( obj );
-  value = std::stoi( arg3 );
+  value = ToLong( arg3 );
 
   if ( !StrCmp( arg2, "value0" ) || !StrCmp( arg2, "v0" ) )
     {
@@ -622,7 +622,7 @@ void do_oset( Character *ch, std::string argument )
       else
         {
           argument = OneArgument( argument, arg3 );
-          value = std::stoi( arg3 );
+          value = ToLong( arg3 );
         }
 
       Affect *paf = new Affect();
@@ -651,7 +651,7 @@ void do_oset( Character *ch, std::string argument )
           return;
         }
 
-      loc = std::stoi( argument );
+      loc = ToLong( argument );
 
       if ( loc < 1 )
         {

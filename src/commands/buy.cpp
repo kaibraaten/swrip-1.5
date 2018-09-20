@@ -116,7 +116,7 @@ void do_buy( Character *ch, std::string argument )
 
       if ( IsNumber( arg ) )
         {
-          noi = std::stoi( arg );
+          noi = ToLong( arg );
           argument = OneArgument( argument, arg );
 
           if ( noi > mnoi )
@@ -134,7 +134,7 @@ void do_buy( Character *ch, std::string argument )
         {
           int onum = 0;
           bool ofound = false;
-          int oref = std::stoi(arg.substr(1));
+          int oref = strtol( arg.substr(1).c_str(), nullptr, 10 );
 
           for(Object *iter : Reverse(keeper->Objects()))
             {

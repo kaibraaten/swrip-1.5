@@ -129,8 +129,8 @@ void do_sset( Character *ch, std::string argument )
 
   if ( GetTrustLevel(ch) > LEVEL_GREATER
        && ((arg1[0] == 'h' && IsNumber( arg1.substr( 1 ) )
-            && (sn=std::stoi(arg1.substr( 1 )))>=0)
-           ||  (IsNumber(arg1) && (sn=std::stoi(arg1)) >= 0)) )
+            && (sn=ToLong(arg1.substr( 1 )))>=0)
+           ||  (IsNumber(arg1) && (sn=ToLong(arg1)) >= 0)) )
     {
       Skill *skill = nullptr;
 
@@ -157,21 +157,21 @@ void do_sset( Character *ch, std::string argument )
 
       if ( !StrCmp( arg2, "difficulty" ) )
         {
-          skill->Difficulty = std::stoi( argument );
+          skill->Difficulty = ToLong( argument );
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "participants" ) )
         {
-          skill->Participants = std::stoi( argument );
+          skill->Participants = ToLong( argument );
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "alignment" ) )
         {
-          skill->Alignment = std::stoi( argument );
+          skill->Alignment = ToLong( argument );
           ch->Echo("Ok.\r\n");
           return;
         }
@@ -306,49 +306,49 @@ void do_sset( Character *ch, std::string argument )
 
       if ( !StrCmp( arg2, "minpos" ) )
         {
-          skill->Position = (PositionType)urange( POS_DEAD, std::stoi( argument ), POS_DRAG );
+          skill->Position = (PositionType)urange( POS_DEAD, ToLong( argument ), POS_DRAG );
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "minlevel" ) )
         {
-          skill->Level = urange( 1, std::stoi( argument ), MAX_ABILITY_LEVEL );
+          skill->Level = urange( 1, ToLong( argument ), MAX_ABILITY_LEVEL );
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "slot" ) )
         {
-          skill->Slot = urange( 0, std::stoi( argument ), SHRT_MAX );
+          skill->Slot = urange( 0, ToLong( argument ), SHRT_MAX );
           ch->Echo("Ok.\r\n");
           return;
         }
       
       if ( !StrCmp( arg2, "mana" ) )
         {
-          skill->Mana = urange( 0, std::stoi( argument ), 2000 );
+          skill->Mana = urange( 0, ToLong( argument ), 2000 );
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "beats" ) )
         {
-          skill->Beats = urange( 0, std::stoi( argument ), 120 );
+          skill->Beats = urange( 0, ToLong( argument ), 120 );
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "guild" ) )
         {
-          skill->Guild = std::stoi( argument );
+          skill->Guild = ToLong( argument );
           ch->Echo("Ok.\r\n");
           return;
         }
 
       if ( !StrCmp( arg2, "value" ) )
         {
-          skill->Value = std::stoi( argument );
+          skill->Value = ToLong( argument );
           ch->Echo("Ok.\r\n");
           return;
         }
@@ -364,7 +364,7 @@ void do_sset( Character *ch, std::string argument )
         {
           SmaugAffect *aff = skill->Affects;
           SmaugAffect *aff_next;
-          int num = std::stoi( argument );
+          int num = ToLong( argument );
           int cnt = 1;
 
           if ( !aff )
@@ -456,7 +456,7 @@ void do_sset( Character *ch, std::string argument )
 
       if ( !StrCmp( arg2, "level" ) )
         {
-          skill->Level = urange( 1, std::stoi( argument ), MAX_ABILITY_LEVEL );
+          skill->Level = urange( 1, ToLong( argument ), MAX_ABILITY_LEVEL );
           ch->Echo("Ok.\r\n");
           return;
         }
@@ -694,7 +694,7 @@ void do_sset( Character *ch, std::string argument )
       return;
     }
 
-  value = std::stoi( argument );
+  value = ToLong( argument );
 
   if ( value < 0 || value > 100 )
     {

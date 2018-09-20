@@ -31,12 +31,12 @@ void do_mlist( Character *ch, std::string argument )
       if ( arg1.empty() )
 	lrange = tarea->VnumRanges.Mob.First;
       else
-        lrange = std::stoi( arg1 );
+        lrange = ToLong( arg1 );
 
       if ( arg2.empty() )
         trange = tarea->VnumRanges.Mob.Last;
       else
-        trange = std::stoi( arg2 );
+        trange = ToLong( arg2 );
 
       if ( ( lrange < tarea->VnumRanges.Mob.First || trange > tarea->VnumRanges.Mob.Last )
            && GetTrustLevel( ch ) < LEVEL_GREATER )
@@ -47,8 +47,8 @@ void do_mlist( Character *ch, std::string argument )
     }
   else
     {
-      lrange = ( IsNumber( arg1 ) ? std::stoi( arg1 ) : 1 );
-      trange = ( IsNumber( arg2 ) ? std::stoi( arg2 ) : 1 );
+      lrange = ( IsNumber( arg1 ) ? ToLong( arg1 ) : 1 );
+      trange = ( IsNumber( arg2 ) ? ToLong( arg2 ) : 1 );
     }
 
   for ( vnum = lrange; vnum <= trange; vnum++ )

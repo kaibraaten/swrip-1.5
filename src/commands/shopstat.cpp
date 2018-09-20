@@ -15,7 +15,7 @@ void do_shopstat( Character *ch, std::string argument )
       return;
     }
 
-  vnum = std::stoi( argument );
+  vnum = ToLong( argument );
 
   if ( (mob = GetProtoMobile(vnum)) == NULL )
     {

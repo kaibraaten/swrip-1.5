@@ -44,7 +44,7 @@ void do_mpoload( Character *ch, std::string argument )
           return;
         }
 
-      level = std::stoi( arg2 );
+      level = ToLong( arg2 );
 
       if ( level < 0 || level > GetTrustLevel( ch ) )
         {
@@ -55,7 +55,7 @@ void do_mpoload( Character *ch, std::string argument )
       /*
        * New feature from Thoric.
        */
-      timer = std::stoi( argument );
+      timer = ToLong( argument );
 
       if ( timer < 0 )
         {
@@ -64,7 +64,7 @@ void do_mpoload( Character *ch, std::string argument )
         }
     }
 
-  if ( ( pObjIndex = GetProtoObject( std::stoi( arg1 ) ) ) == NULL )
+  if ( ( pObjIndex = GetProtoObject( ToLong( arg1 ) ) ) == NULL )
     {
       ProgBug( "Mpoload - Bad vnum arg", ch );
       return;

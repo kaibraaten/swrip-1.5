@@ -301,7 +301,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
           return;
         }
 
-      first_list = std::stoi(arg_passed);
+      first_list = strtol(arg_passed.c_str(), nullptr, 10);
 
       if (first_list)
         {
@@ -405,7 +405,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
       else if ( IsNumber( arg_passed ) )
         {
           fAll = false;
-          anum = std::stoi( arg_passed );
+          anum = ToLong( arg_passed );
         }
       else
         {
@@ -526,7 +526,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
 
       if ( IsNumber( arg2 ) )
         {
-          anum = std::stoi( arg2 );
+          anum = ToLong( arg2 );
         }
       else
         {
@@ -1006,7 +1006,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
           return;
         }
 
-      anum = std::stoi( arg_passed );
+      anum = strtol( arg_passed.c_str(), nullptr, 10);
       _IsNoteTo _isNoteTo(ch);
 
       for(Note *note : board->Notes())

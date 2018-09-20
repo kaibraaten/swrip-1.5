@@ -28,7 +28,7 @@ void do_owhere( Character *ch, std::string argument )
     }
 
   if ( IsNumber(arg) )
-    vnum = std::stoi(arg);
+    vnum = ToLong(arg);
 
   for( const Object *obj : Objects->Entities() )
     {

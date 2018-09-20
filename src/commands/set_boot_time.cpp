@@ -39,13 +39,13 @@ void do_set_boot_time( Character *ch, std::string argument)
 
       now_time = localtime(&current_time);
 
-      if ( (now_time->tm_hour = std::stoi(arg)) < 0 || now_time->tm_hour > 23 )
+      if ( (now_time->tm_hour = ToLong(arg)) < 0 || now_time->tm_hour > 23 )
         {
           ch->Echo("Valid range for hour is 0 to 23.\r\n");
           return;
 	}
 
-      if ( (now_time->tm_min = std::stoi(arg1)) < 0 || now_time->tm_min > 59 )
+      if ( (now_time->tm_min = ToLong(arg1)) < 0 || now_time->tm_min > 59 )
         {
           ch->Echo("Valid range for minute is 0 to 59.\r\n");
           return;
@@ -55,7 +55,7 @@ void do_set_boot_time( Character *ch, std::string argument)
 
       if ( !arg.empty() && IsNumber(arg) )
         {
-          if ( (now_time->tm_mday = std::stoi(arg)) < 1 || now_time->tm_mday > 31 )
+          if ( (now_time->tm_mday = ToLong(arg)) < 1 || now_time->tm_mday > 31 )
             {
               ch->Echo("Valid range for day is 1 to 31.\r\n");
               return;
@@ -65,7 +65,7 @@ void do_set_boot_time( Character *ch, std::string argument)
 
 	  if ( arg.empty() && IsNumber(arg) )
             {
-              if ( (now_time->tm_mon = std::stoi(arg)) < 1 || now_time->tm_mon > 12 )
+              if ( (now_time->tm_mon = ToLong(arg)) < 1 || now_time->tm_mon > 12 )
                 {
                   ch->Echo("Valid range for month is 1 to 12.\r\n");
                   return;
@@ -74,7 +74,7 @@ void do_set_boot_time( Character *ch, std::string argument)
               now_time->tm_mon--;
               argument = OneArgument(argument, arg);
 
-	      if ( (now_time->tm_year = std::stoi(arg) - 1900) < 0
+	      if ( (now_time->tm_year = ToLong(arg) - 1900) < 0
                    || now_time->tm_year > 199 )
                 {
                   ch->Echo("Valid range for year is 1900 to 2099.\r\n");
@@ -119,13 +119,13 @@ void do_set_boot_time( Character *ch, std::string argument)
           return;
         }
 
-      if ( std::stoi(arg1) < 0 || std::stoi(arg1) > 1)
+      if ( ToLong(arg1) < 0 || ToLong(arg1) > 1)
         {
           ch->Echo("Value for manual must be 0 (off) or 1 (on)\r\n");
           return;
         }
 
-      set_boot_time->Manual = std::stoi(arg1);
+      set_boot_time->Manual = ToLong(arg1);
       ch->Echo("Manual bit set to %s\r\n", arg1.c_str());
       check = true;
       GenerateRebootString();

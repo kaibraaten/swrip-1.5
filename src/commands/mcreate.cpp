@@ -20,7 +20,7 @@ void do_mcreate( Character *ch, std::string argument )
 
   argument = OneArgument( argument, arg );
 
-  vnum = IsNumber( arg ) ? std::stoi( arg ) : -1;
+  vnum = IsNumber( arg ) ? ToLong( arg ) : -1;
 
   if ( vnum == -1 || argument.empty() )
     {
@@ -35,7 +35,7 @@ void do_mcreate( Character *ch, std::string argument )
     }
 
   OneArgument( argument, arg2 );
-  cvnum = std::stoi( arg2 );
+  cvnum = ToLong( arg2 );
 
   if ( cvnum != 0 )
     argument = OneArgument( argument, arg2 );

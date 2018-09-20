@@ -213,7 +213,7 @@ void do_comment( Character *ch, std::string argument )
       else if ( IsNumber( argument ) )
 	{
 	  fAll = false;
-	  anum = std::stoi( argument );
+	  anum = ToLong( argument );
 	}
       else
 	{
@@ -380,7 +380,7 @@ void do_comment( Character *ch, std::string argument )
           return;
         }
 
-      anum = std::stoi( argument );
+      anum = ToLong( argument );
       noteNumber = 0;
 
       for(Note *pnote : victim->PCData->Comments())

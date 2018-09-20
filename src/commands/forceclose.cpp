@@ -11,7 +11,7 @@ void do_forceclose( Character *ch, std::string arg )
       return;
     }
 
-  int desc = std::stoi( arg );
+  int desc = ToLong( arg );
 
   for ( Descriptor *d : Descriptors->Entities() )
     {

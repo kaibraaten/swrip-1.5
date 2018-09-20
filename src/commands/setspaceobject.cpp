@@ -57,7 +57,7 @@ void do_setspaceobject( Character *ch, std::string argument )
       else if( arg2.size() == strlen( option ) + 1 )
 	{
 	  const char *numBuf = arg2.c_str() + strlen( option );
-	  size_t siteNum = std::stoi( numBuf );
+	  size_t siteNum = ToLong( numBuf );
 
 	  if( siteNum >= MAX_LANDINGSITE )
 	    {
@@ -89,7 +89,7 @@ void do_setspaceobject( Character *ch, std::string argument )
       else if( arg2.size() == strlen( option ) + 1 )
         {
           const char *numBuf = arg2.c_str() + strlen( option );
-          size_t siteNum = std::stoi( numBuf );
+          size_t siteNum = ToLong( numBuf );
 
           if( siteNum >= MAX_LANDINGSITE )
             {
@@ -99,7 +99,7 @@ void do_setspaceobject( Character *ch, std::string argument )
           else
             {
               LandingSite *site = &spaceobject->LandingSites[siteNum];
-	      vnum_t vnum = std::stoi( argument );
+	      vnum_t vnum = ToLong( argument );
 
 	      if( !GetRoom( vnum ) && vnum != INVALID_VNUM )
 		{
@@ -129,7 +129,7 @@ void do_setspaceobject( Character *ch, std::string argument )
       else if( arg2.size() == strlen( option ) + 1 )
         {
           const char *numBuf = arg2.c_str() + strlen( option );
-          size_t siteNum = std::stoi( numBuf );
+          size_t siteNum = ToLong( numBuf );
 
           if( siteNum >= MAX_LANDINGSITE )
             {
@@ -154,7 +154,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
       if( IsNumber(argument) )
         {
-          sotype = (SpaceobjectType) std::stoi( argument );
+          sotype = (SpaceobjectType) ToLong( argument );
         }
       else
         {
@@ -182,7 +182,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "xpos" ) )
     {
-      spaceobject->Position.x = std::stoi( argument );
+      spaceobject->Position.x = ToLong( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -190,7 +190,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "ypos" ) )
     {
-      spaceobject->Position.y = std::stoi( argument );
+      spaceobject->Position.y = ToLong( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -198,7 +198,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "zpos" ) )
     {
-      spaceobject->Position.z = std::stoi( argument );
+      spaceobject->Position.z = ToLong( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -206,7 +206,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "gravity" ) )
     {
-      spaceobject->Gravity = std::stoi( argument );
+      spaceobject->Gravity = ToLong( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -214,7 +214,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "hx" ) )
     {
-      spaceobject->Heading.x = std::stoi( argument );
+      spaceobject->Heading.x = ToLong( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -222,7 +222,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "hy" ) )
     {
-      spaceobject->Heading.y = std::stoi( argument );
+      spaceobject->Heading.y = ToLong( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -230,7 +230,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "hz" ) )
     {
-      spaceobject->Heading.z = std::stoi( argument );
+      spaceobject->Heading.z = ToLong( argument );
       ch->Echo("Done.\r\n");
       Spaceobjects->Save(spaceobject);
       return;
@@ -238,7 +238,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "speed" ) )
     {
-      int speed = std::stoi( argument );
+      int speed = ToLong( argument );
 
       if( speed < 0 )
 	{

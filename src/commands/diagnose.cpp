@@ -72,11 +72,11 @@ void do_diagnose( Character *ch, std::string argument )
         }
       else
         {
-          match = std::stoi(arg2);
+          match = ToLong(arg2);
         }
       
-      int lo = !arg3.empty() ? std::stoi(arg3) : 0;
-      int hi = !arg4.empty() ? std::stoi(arg4) : MAX_VNUM;
+      int lo = !arg3.empty() ? ToLong(arg3) : 0;
+      int hi = !arg4.empty() ? ToLong(arg4) : MAX_VNUM;
 
       ch->Echo("\r\nRoom Vnums\r\n");
       
@@ -107,7 +107,7 @@ void do_diagnose( Character *ch, std::string argument )
   if (!StrCmp(arg1, "of"))
     {
       if ( !arg2.empty() )
-        num = std::stoi(arg2);
+        num = ToLong(arg2);
 
       if (num > DIAG_MAX_SIZE  || num < 1)
         {
@@ -200,7 +200,7 @@ void do_diagnose( Character *ch, std::string argument )
       int zero_num     = -1;                       /* num of lines requested */
 
       if( !arg2.empty() )
-        zero_num = std::stoi(arg2);
+        zero_num = ToLong(arg2);
 
       for (cou = 0; cou < MAX_KEY_HASH; cou++)     /* loop thru ObjectIndexHash */
         if ( ObjectIndexHash[cou] )
@@ -305,10 +305,10 @@ void do_diagnose( Character *ch, std::string argument )
           return;
         }
 
-      dis_num = umin( std::stoi(arg2), DIAG_MAX_SIZE );
-      race_num = std::stoi(arg3);
-      vnum1 = std::stoi(arg4);
-      vnum2 = std::stoi(arg5);
+      dis_num = umin( ToLong(arg2), DIAG_MAX_SIZE );
+      race_num = ToLong(arg3);
+      vnum1 = ToLong(arg4);
+      vnum2 = ToLong(arg5);
       ch->Echo("\r\n");
 
       for (cou = 0; cou < MAX_KEY_HASH; cou++)

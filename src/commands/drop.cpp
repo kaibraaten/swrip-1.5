@@ -20,7 +20,7 @@ void do_drop( Character *ch, std::string argument )
 
   if ( IsNumber(arg) )
     {
-      number = std::stoi(arg);
+      number = ToLong(arg);
 
       if ( number < 1 )
         {

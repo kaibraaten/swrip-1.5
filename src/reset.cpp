@@ -222,7 +222,7 @@ Room *FindRoom( const Character *ch, const std::string &arg, Room *pRoom )
     }
   else
     {
-      pRoom = GetRoom(stoi(arg));
+      pRoom = GetRoom( strtol( arg.c_str(), nullptr, 10 ) );
     }
 
   if ( !pRoom )
@@ -551,10 +551,10 @@ void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
       int start = 0, end = 0;
 
       argument = OneArgument(argument, arg);
-      start = IsNumber(arg) ? std::stoi(arg) : -1;
+      start = IsNumber(arg) ? ToLong(arg) : -1;
 
       argument = OneArgument(argument, arg);
-      end = IsNumber(arg) ? std::stoi(arg) : -1;
+      end = IsNumber(arg) ? ToLong(arg) : -1;
 
       ListResets(ch, pArea, aRoom, start, end);
       return;
@@ -648,7 +648,7 @@ void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      num = std::stoi(arg);
+      num = strtol( arg.c_str(), nullptr, 10 );
 
       if ( (reset = FindReset(pArea, aRoom, num)) == NULL )
         {
@@ -679,8 +679,8 @@ void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
         }
 
       argument = OneArgument(argument, arg);
-      start = IsNumber(arg) ? std::stoi(arg) : -1;
-      end   = IsNumber(arg) ? std::stoi(arg) : -1;
+      start = IsNumber(arg) ? ToLong(arg) : -1;
+      end   = IsNumber(arg) ? ToLong(arg) : -1;
       num = 0;
 
       for ( pReset = pArea->FirstReset; pReset; pReset = reset )
@@ -738,7 +738,7 @@ void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      iarg = std::stoi(arg);
+      iarg = strtol( arg.c_str(), nullptr, 10 );
 
       for ( pReset = pArea->FirstReset; pReset; pReset = pReset->Next )
         {
@@ -769,7 +769,9 @@ void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      if ( !(pMob = GetProtoMobile(std::stoi(arg))) )
+      pMob = GetProtoMobile( strtol( arg.c_str(), nullptr, 10 ) );
+      
+      if ( pMob == nullptr )
         {
           ch->Echo( "Mobile does not exist.\r\n" );
           return;
@@ -788,7 +790,7 @@ void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
         }
       else
 	{
-	  num = std::stoi(arg);
+	  num = strtol( arg.c_str(), nullptr, 10 );
 	}
 
       if ( !(pRoom = FindRoom(ch, argument, aRoom)) )
@@ -812,7 +814,9 @@ void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      if ( !(pObj = GetProtoObject(std::stoi(arg))) )
+      pObj = GetProtoObject( strtol( arg.c_str(), nullptr, 10 ) );
+      
+      if ( pObj == nullptr )
         {
           ch->Echo( "Object does not exist.\r\n" );
           return;
@@ -841,8 +845,9 @@ void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
 	    }
 
           argument = OneArgument(argument, arg);
+          vnum = strtol( arg.c_str(), nullptr, 10 );
 
-          if ( (vnum = std::stoi(arg)) < 1 )
+          if ( vnum < 1 )
 	    {
 	      vnum = 1;
 	    }
@@ -869,8 +874,9 @@ void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
 	      reset = reset->Next;	    }
 
           argument = OneArgument(argument, arg);
-
-          if ( (vnum = std::stoi(arg)) < 1 )
+          vnum = strtol( arg.c_str(), nullptr, 10 );
+          
+          if ( vnum < 1 )
 	    {
 	      vnum = 1;
 	    }
@@ -918,8 +924,9 @@ void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
             }
 
           argument = OneArgument(argument, arg);
-
-          if ( (vnum = std::stoi(arg)) < 1 )
+          vnum = strtol( arg.c_str(), nullptr, 10 );
+          
+          if ( vnum < 1 )
 	    {
 	      vnum = 1;
 	    }
@@ -949,7 +956,9 @@ void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
               return;
             }
 
-          if ( (vnum = std::stoi(arg)) < 1 )
+          vnum = strtol( arg.c_str(), nullptr, 10 );
+          
+          if ( vnum < 1 )
 	    {
 	      vnum = 1;
 	    }
@@ -1005,9 +1014,9 @@ void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
 
       argument = OneArgument(argument, oname);
       argument = OneArgument(argument, arg);
-      num = IsNumber(arg) ? std::stoi(arg) : -1;
+      num = IsNumber(arg) ? ToLong(arg) : -1;
       argument = OneArgument(argument, arg);
-      chrg = IsNumber(arg) ? std::stoi(arg) : -1;
+      chrg = IsNumber(arg) ? ToLong(arg) : -1;
       isobj = IsName(argument, "obj");
 
       if ( isobj == IsName(argument, "room") )
@@ -1025,7 +1034,7 @@ void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom )
         {
           if ( IsNumber(oname) && !isobj )
             {
-              vnum = std::stoi(oname);
+              vnum = ToLong(oname);
 
               if ( !GetRoom(vnum) )
                 {

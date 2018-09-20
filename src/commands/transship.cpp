@@ -28,7 +28,7 @@ void do_transship(Character *ch, std::string argument )
       return;
     }
 
-  arg3 = std::stoi( arg2 );
+  arg3 = ToLong( arg2 );
 
   if ( arg1.empty() || arg2.empty() )
     {

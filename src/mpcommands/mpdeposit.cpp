@@ -21,7 +21,7 @@ void do_mp_deposit( Character *ch, std::string arg )
       return;
     }
 
-  gold = std::stoi( arg );
+  gold = ToLong( arg );
 
   if ( gold <= ch->Gold && ch->InRoom )
     {

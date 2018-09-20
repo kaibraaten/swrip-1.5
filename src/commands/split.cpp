@@ -19,7 +19,7 @@ void do_split( Character *ch, std::string arg )
       return;
     }
 
-  amount = std::stoi( arg );
+  amount = ToLong( arg );
 
   if ( amount < 0 )
     {

@@ -14,8 +14,8 @@ void do_oassign( Character *ch, std::string argument )
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
 
-  vnum_t o_lo = std::stoi( arg2 );
-  vnum_t o_hi = std::stoi( arg3 );
+  vnum_t o_lo = ToLong( arg2 );
+  vnum_t o_hi = ToLong( arg3 );
 
   if ( arg1.empty() || o_lo < 0 || o_hi < 0 )
     {

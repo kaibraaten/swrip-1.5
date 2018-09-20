@@ -810,10 +810,10 @@ Reset *ParseReset( const Area *tarea, std::string argument, const Character *ch 
   argument = OneArgument( argument, arg3 );
   argument = OneArgument( argument, arg4 );
 
-  int val1 = std::stoi( arg2 );
-  int val2 = std::stoi( arg3 );
-  int val3 = std::stoi( arg4 );
-  
+  int val1 = strtol( arg2.c_str(), nullptr, 10 );
+  int val2 = strtol( arg3.c_str(), nullptr, 10 );
+  int val3 = strtol( arg4.c_str(), nullptr, 10 );
+    
   if ( arg1.empty() )
     {
       ch->Echo( "Reset commands: mob obj give equip door rand trap hide.\r\n" );
@@ -951,7 +951,7 @@ Reset *ParseReset( const Area *tarea, std::string argument, const Character *ch 
       
       extra = umax(val3, 0);
       argument = OneArgument(argument, arg4);
-      val3 = (IsNumber(argument) ? std::stoi(arg4) : 0);
+      val3 = (IsNumber(argument) ? strtol( arg4.c_str(), nullptr, 10 ) : 0);
 
       if ( val3 < 0 )
         {

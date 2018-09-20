@@ -40,7 +40,7 @@ void do_minvoke( Character *ch, std::string arg )
     }
   else
     {
-      vnum = std::stoi( arg );
+      vnum = ToLong( arg );
     }
 
   if ( GetTrustLevel(ch) < LEVEL_CREATOR )

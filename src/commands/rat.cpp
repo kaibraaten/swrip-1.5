@@ -20,8 +20,8 @@ void do_rat( Character *ch, std::string argument )
       return;
     }
 
-  Start = std::stoi( arg1 );
-  End = std::stoi( arg2 );
+  Start = ToLong( arg1 );
+  End = ToLong( arg2 );
 
   if ( Start < MIN_VNUM || End < Start || Start > End || Start == End || End > MAX_VNUM )
     {

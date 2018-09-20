@@ -7,7 +7,7 @@
 
 void do_aset( Character *ch, std::string argument )
 {
-  Area *tarea = NULL;
+  Area *tarea = nullptr;
   std::string arg1;
   std::string arg2;
   std::string arg3;
@@ -16,7 +16,7 @@ void do_aset( Character *ch, std::string argument )
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
-  value = std::stoi( argument );
+  value = strtol( argument.c_str(), nullptr, 10 );
 
   if ( arg1.empty() || arg2.empty() )
     {

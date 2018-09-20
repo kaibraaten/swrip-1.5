@@ -40,7 +40,7 @@ void do_slookup( Character *ch, std::string arg )
 
       if ( arg[0] == 'h' && IsNumber( arg.substr( 1 ) ) )
 	{
-	  sn = std::stoi(arg.substr( 1 ) );
+	  sn = ToLong(arg.substr( 1 ) );
 
 	  if ( !IS_VALID_HERB(sn) )
 	    {
@@ -52,7 +52,7 @@ void do_slookup( Character *ch, std::string arg )
 	}
       else if ( IsNumber(arg) )
 	{
-	  sn = std::stoi(arg);
+	  sn = ToLong(arg);
 
 	  if ( (skill=GetSkill(sn)) == NULL )
 	    {

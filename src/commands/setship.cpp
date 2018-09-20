@@ -105,7 +105,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "firstroom" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -136,7 +136,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "lastroom" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -177,7 +177,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "cockpit" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -206,7 +206,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "pilotseat" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -235,7 +235,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "coseat" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -264,7 +264,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "navseat" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -293,7 +293,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "gunseat" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -322,7 +322,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "entrance" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -351,7 +351,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "turret1" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -386,7 +386,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "turret2" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -421,7 +421,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "turret3" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -462,7 +462,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "turret4" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -504,7 +504,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "turret5" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -545,7 +545,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "turret6" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -586,7 +586,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "turret7" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -627,7 +627,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "turret8" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -668,7 +668,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "turret9" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -709,7 +709,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "turret0" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -750,16 +750,16 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "hangar" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
-      if (roomindex == NULL && std::stoi(argument) != 0 )
+      if (roomindex == NULL && ToLong(argument) != 0 )
 	{
           ch->Echo("That room doesn't exist.\r\n");
           return;
         }
 
-      if (( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last ) && (std::stoi(argument) != 0 ))
+      if (( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last ) && (ToLong(argument) != 0 ))
         {
           ch->Echo("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n");
           return;
@@ -785,7 +785,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "engineroom" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -814,7 +814,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "shipyard" ) )
     {
-      tempnum = std::stoi(argument);
+      tempnum = ToLong(argument);
       roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
@@ -892,7 +892,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "dockingports" ) )
     {
-      ship->DockingPorts = urange( -1, std::stoi(argument) , 20 );
+      ship->DockingPorts = urange( -1, ToLong(argument) , 20 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -900,7 +900,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "guard" ) )
     {
-      ship->Guard = urange( -1, std::stoi(argument) , 1 );
+      ship->Guard = urange( -1, ToLong(argument) , 1 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -908,7 +908,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "manuever" ) )
     {
-      ship->Thrusters.Maneuver = urange( 0, std::stoi(argument) , 250 );
+      ship->Thrusters.Maneuver = urange( 0, ToLong(argument) , 250 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -917,9 +917,9 @@ void do_setship( Character *ch, std::string argument )
   if ( !StrCmp( arg2, "lasers" ) )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
-        ship->WeaponSystems.Laser.Count = urange( 0, std::stoi(argument), 20 );
+        ship->WeaponSystems.Laser.Count = urange( 0, ToLong(argument), 20 );
       else
-        ship->WeaponSystems.Laser.Count = urange( 0, std::stoi(argument), 10 );
+        ship->WeaponSystems.Laser.Count = urange( 0, ToLong(argument), 10 );
 
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
@@ -929,9 +929,9 @@ void do_setship( Character *ch, std::string argument )
   if ( !StrCmp( arg2, "ions" ) )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
-        ship->WeaponSystems.IonCannon.Count = urange( 0, std::stoi(argument), 20 );
+        ship->WeaponSystems.IonCannon.Count = urange( 0, ToLong(argument), 20 );
       else
-        ship->WeaponSystems.IonCannon.Count = urange( 0, std::stoi(argument), 10 );
+        ship->WeaponSystems.IonCannon.Count = urange( 0, ToLong(argument), 10 );
 
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
@@ -940,7 +940,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "class" ) )
     {
-      ship->Class = (ShipClass)urange( 0, std::stoi(argument) , WALKER );
+      ship->Class = (ShipClass)urange( 0, ToLong(argument) , WALKER );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -948,7 +948,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "missiles" ) )
     {
-      ship->WeaponSystems.Tube.Missiles.Current = ship->WeaponSystems.Tube.Missiles.Max = urange( 0, std::stoi(argument) , 255 );
+      ship->WeaponSystems.Tube.Missiles.Current = ship->WeaponSystems.Tube.Missiles.Max = urange( 0, ToLong(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -956,7 +956,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "torpedos" ) )
     {
-      ship->WeaponSystems.Tube.Torpedoes.Current = ship->WeaponSystems.Tube.Torpedoes.Max = urange( 0, std::stoi(argument) , 255 );
+      ship->WeaponSystems.Tube.Torpedoes.Current = ship->WeaponSystems.Tube.Torpedoes.Max = urange( 0, ToLong(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -964,7 +964,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "rockets" ) )
     {
-      ship->WeaponSystems.Tube.Rockets.Current = ship->WeaponSystems.Tube.Rockets.Max = urange( 0, std::stoi(argument) , 255 );
+      ship->WeaponSystems.Tube.Rockets.Current = ship->WeaponSystems.Tube.Rockets.Max = urange( 0, ToLong(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -973,9 +973,9 @@ void do_setship( Character *ch, std::string argument )
   if ( !StrCmp( arg2, "speed" ) )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
-        ship->Thrusters.Speed.Max = urange( 0, std::stoi(argument), 255 );
+        ship->Thrusters.Speed.Max = urange( 0, ToLong(argument), 255 );
       else
-        ship->Thrusters.Speed.Max = urange( 0, std::stoi(argument), 150 );
+        ship->Thrusters.Speed.Max = urange( 0, ToLong(argument), 150 );
 
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
@@ -984,7 +984,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "tractorbeam" ) )
     {
-      ship->WeaponSystems.TractorBeam.Strength = urange( 0, std::stoi(argument) , 255 );
+      ship->WeaponSystems.TractorBeam.Strength = urange( 0, ToLong(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -992,7 +992,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "hyperspeed" ) )
     {
-      ship->Hyperdrive.Speed = urange( 0, std::stoi(argument) , 255 );
+      ship->Hyperdrive.Speed = urange( 0, ToLong(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -1001,9 +1001,9 @@ void do_setship( Character *ch, std::string argument )
   if ( !StrCmp( arg2, "shield" ) )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
-        ship->Defenses.Shield.Max = urange( 0, std::stoi(argument) , SHRT_MAX );
+        ship->Defenses.Shield.Max = urange( 0, ToLong(argument) , SHRT_MAX );
       else
-        ship->Defenses.Shield.Max = urange( 0, std::stoi(argument) , 1000 );
+        ship->Defenses.Shield.Max = urange( 0, ToLong(argument) , 1000 );
 
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
@@ -1014,11 +1014,11 @@ void do_setship( Character *ch, std::string argument )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
         {
-          ship->Defenses.Hull.Current = ship->Defenses.Hull.Max = urange( 1, std::stoi(argument) , SHRT_MAX );
+          ship->Defenses.Hull.Current = ship->Defenses.Hull.Max = urange( 1, ToLong(argument) , SHRT_MAX );
         }
       else
         {
-          ship->Defenses.Hull.Current = ship->Defenses.Hull.Max = urange( 1, std::stoi(argument) , 20000 );
+          ship->Defenses.Hull.Current = ship->Defenses.Hull.Max = urange( 1, ToLong(argument) , 20000 );
         }
 
       ch->Echo("Done.\r\n");
@@ -1028,7 +1028,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "energy" ) )
     {
-      ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max = urange( 1, std::stoi(argument), SHRT_MAX );
+      ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max = urange( 1, ToLong(argument), SHRT_MAX );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -1036,7 +1036,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "sensor" ) )
     {
-      ship->Instruments.Sensor = urange( 0, std::stoi(argument) , 255 );
+      ship->Instruments.Sensor = urange( 0, ToLong(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -1044,7 +1044,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "astroarray" ) )
     {
-      ship->Instruments.AstroArray = urange( 0, std::stoi(argument) , 255 );
+      ship->Instruments.AstroArray = urange( 0, ToLong(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -1052,7 +1052,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "comm" ) )
     {
-      ship->Instruments.Comm = urange( 0, std::stoi(argument) , 255 );
+      ship->Instruments.Comm = urange( 0, ToLong(argument) , 255 );
       ch->Echo("Done.\r\n");
       Ships->Save(ship);
       return;
@@ -1062,11 +1062,11 @@ void do_setship( Character *ch, std::string argument )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
         {
-          ship->Defenses.Chaff.Current = ship->Defenses.Chaff.Max = urange( 0, std::stoi(argument) , 255 );
+          ship->Defenses.Chaff.Current = ship->Defenses.Chaff.Max = urange( 0, ToLong(argument) , 255 );
         }
       else
 	{
-          ship->Defenses.Chaff.Current = ship->Defenses.Chaff.Max = urange( 0, std::stoi(argument) , 25 );
+          ship->Defenses.Chaff.Current = ship->Defenses.Chaff.Max = urange( 0, ToLong(argument) , 25 );
         }
 
       ch->Echo("Done.\r\n");

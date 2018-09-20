@@ -57,7 +57,9 @@ void do_advance( Character *ch, std::string argument )
       return;
     }
 
-  if ( ( level = std::stoi( arg2 ) ) < 1 || level > MAX_ABILITY_LEVEL )
+  level = strtol( arg2.c_str(), nullptr, 10 );
+  
+  if ( level < 1 || level > MAX_ABILITY_LEVEL )
     {
       ch->Echo( "Level must be 1 to %d.\r\n", MAX_ABILITY_LEVEL );
       return;

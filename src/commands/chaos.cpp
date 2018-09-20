@@ -12,15 +12,15 @@ void do_chaos(Character *ch, std::string argument)
   /*Usage: chaos lo hi start_delay cost/lev length*/
 
   argument = OneArgument(argument, lolimit);
-  arena.MinLevel = std::stoi(lolimit);
+  arena.MinLevel = ToLong(lolimit);
   argument = OneArgument(argument, hilimit);
-  arena.MaxLevel = std::stoi(hilimit);
+  arena.MaxLevel = ToLong(hilimit);
   argument = OneArgument(argument, start_delay);
-  arena.StartTime = std::stoi(start_delay);
+  arena.StartTime = ToLong(start_delay);
   argument = OneArgument(argument, length);
-  arena.GameLength = std::stoi(length);
+  arena.GameLength = ToLong(length);
   OneArgument(argument, purse);
-  arena.ArenaPot = std::stoi(purse);
+  arena.ArenaPot = ToLong(purse);
 
   ch->Echo("LowLim %d HiLim %d Delay %d Length %d\r\n", arena.MinLevel,
            arena.MaxLevel, arena.StartTime, arena.GameLength);

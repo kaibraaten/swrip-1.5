@@ -26,7 +26,7 @@ void do_clan_donate( Character *ch, std::string argument )
     }
 
   clan = ch->PCData->ClanInfo.Clan;
-  amount = std::stoi( argument );
+  amount = ToLong( argument );
 
   if ( amount == 0 )
     {

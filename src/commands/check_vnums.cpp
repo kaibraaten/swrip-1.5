@@ -49,8 +49,8 @@ void do_check_vnums( Character *ch, std::string argument )
       return;
     }
 
-  low_range = std::stoi(arg2);
-  high_range = std::stoi(argument);
+  low_range = ToLong(arg2);
+  high_range = ToLong(argument);
 
   if (low_range < MIN_VNUM || low_range > MAX_VNUM )
     {

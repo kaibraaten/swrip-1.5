@@ -50,7 +50,7 @@ void do_rpedit( Character *ch, std::string argument )
   SmashTilde( argument );
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
-  int value = std::stoi( arg2 );
+  int value = ToLong( arg2 );
 
   if ( arg1.empty() )
     {

@@ -5,7 +5,7 @@
 
 void do_bset( Character *ch, std::string argument )
 {
-  Board *board = NULL;
+  Board *board = nullptr;
   std::string arg1;
   std::string arg2;
   int value = 0;
@@ -22,11 +22,10 @@ void do_bset( Character *ch, std::string argument )
       return;
     }
 
-  value = std::stoi( argument );
-
+  value = strtol( argument.c_str(), nullptr, 10 );
   board = GetBoard( arg1 );
 
-  if( !board )
+  if( board == nullptr )
     {
       ch->Echo( "Board not found.\r\n" );
       return;

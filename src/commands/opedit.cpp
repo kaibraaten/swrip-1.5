@@ -59,7 +59,7 @@ void do_opedit( Character *ch, std::string argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
-  int value = std::stoi( arg3 );
+  int value = ToLong( arg3 );
 
   if ( arg1.empty() || arg2.empty() )
     {

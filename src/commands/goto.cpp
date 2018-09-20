@@ -23,7 +23,7 @@ void do_goto( Character *ch, std::string argument )
 
   if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
-      vnum = std::stoi( arg );
+      vnum = ToLong( arg );
       
       if ( vnum < 0 || GetRoom( vnum ) )
         {
@@ -68,7 +68,7 @@ void do_goto( Character *ch, std::string argument )
   if ( GetTrustLevel( ch ) < LEVEL_GREATER
        && !IsName( "intergoto", ch->PCData->Bestowments) )
     {
-      vnum = std::stoi( arg );
+      vnum = ToLong( arg );
 
       if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {

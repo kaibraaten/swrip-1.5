@@ -29,7 +29,7 @@ void do_restrict( Character *ch, std::string argument )
     }
   else
     {
-      level = std::stoi( arg2 );
+      level = ToLong( arg2 );
     }
 
   level = umax( umin( GetTrustLevel( ch ), level ), 0 );

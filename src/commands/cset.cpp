@@ -109,7 +109,7 @@ void do_cset( Character *ch, std::string argument )
       return;
     }
 
-  level = (short) std::stoi(argument);
+  level = (short) ToLong(argument);
 
   if (!StringPrefix( arg, "savefrequency" ) )
     {

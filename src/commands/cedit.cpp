@@ -133,7 +133,7 @@ void do_cedit( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "level" ) )
     {
-      int level = std::stoi( argument );
+      int level = strtol( argument.c_str(), nullptr, 10 );
 
       if ( level < 0 || level > GetTrustLevel(ch) )
         {

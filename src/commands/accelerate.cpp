@@ -79,7 +79,7 @@ void do_accelerate( Character *ch, std::string argument )
       return;
     }
 
-  if ( ship->Thrusters.Energy.Current < abs((std::stoi(argument)-abs(ship->Thrusters.Speed.Current))/10) )
+  if ( ship->Thrusters.Energy.Current < abs((strtol( argument.c_str(), nullptr, 10 ) - abs(ship->Thrusters.Speed.Current))/10) )
     {
       ch->Echo("&RTheres not enough fuel!\r\n");
       return;
@@ -112,7 +112,7 @@ void do_accelerate( Character *ch, std::string argument )
       return;
     }
 
-  change = std::stoi(argument);
+  change = strtol( argument.c_str(), nullptr, 10 );
 
   Act( AT_PLAIN, "$n manipulates the ships controls.", ch,
        NULL, argument.c_str() , TO_ROOM );

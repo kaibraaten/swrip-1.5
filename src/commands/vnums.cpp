@@ -15,10 +15,10 @@ void do_vnums( Character *ch, std::string argument )
 
   if ( !arg1.empty() )
     {
-      low = std::stoi(arg1);
+      low = ToLong(arg1);
 
       if ( !arg2.empty() )
-        high = std::stoi(arg2);
+        high = ToLong(arg2);
     }
 
   ShowVnums( ch, low, high, true, true, " *", "" );

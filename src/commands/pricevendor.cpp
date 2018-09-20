@@ -68,7 +68,7 @@ void do_pricevendor( Character *ch, std::string argument )
 
   if ( (obj  = GetCarriedObject( vendor, arg1 )) != NULL)
     {
-      obj->Cost = std::stoi (arg2);
+      obj->Cost = ToLong (arg2);
       ch->Echo("The price has been changed\r\n");
       SaveVendor(vendor);
       return;

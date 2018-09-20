@@ -48,7 +48,7 @@ void do_hell( Character *ch, std::string argument )
       return;
     }
 
-  hell_time = std::stoi(arg);
+  hell_time = ToLong(arg);
 
   if ( hell_time <= 0 )
     {

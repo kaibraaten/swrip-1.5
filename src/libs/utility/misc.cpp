@@ -324,3 +324,9 @@ std::string PunctuateNumber( long number )
 
   return TrimString( buffer, ' ' );
 }
+
+long ToLong( const std::string str )
+{
+  int result = strtol( str.c_str(), nullptr, 10 );
+  return result;
+}

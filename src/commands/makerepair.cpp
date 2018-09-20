@@ -12,7 +12,7 @@ void do_makerepair( Character *ch, std::string argument )
       return;
     }
 
-  vnum_t vnum = std::stoi( argument );
+  vnum_t vnum = ToLong( argument );
   ProtoMobile *mob = GetProtoMobile(vnum);
   
   if ( mob == nullptr )

@@ -207,10 +207,10 @@ void do_mset( Character *ch, std::string argument )
       maxattr = 25;
     }
 
-  value = IsNumber( arg3 ) ? std::stoi( arg3 ) : -1;
+  value = IsNumber( arg3 ) ? ToLong( arg3 ) : -1;
 
-  if ( std::stoi(arg3) < -1 && value == -1 )
-    value = std::stoi(arg3);
+  if ( ToLong(arg3) < -1 && value == -1 )
+    value = ToLong(arg3);
 
   if ( !StrCmp( arg2, "str" ) )
     {
@@ -461,7 +461,7 @@ void do_mset( Character *ch, std::string argument )
         return;
       value = GetNpcRace( arg3 );
       if ( value < 0 )
-        value = std::stoi( arg3 );
+        value = ToLong( arg3 );
       if ( !IsNpc(victim) && (value < 0 || value >= MAX_RACE) )
         {
           ch->Echo("Race range is 0 to %d.\n", MAX_RACE-1 );

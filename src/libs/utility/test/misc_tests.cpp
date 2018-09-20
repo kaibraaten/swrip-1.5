@@ -109,3 +109,44 @@ TEST_F(MiscTests, PunctuateNumber)
   EXPECT_EQ("-5", PunctuateNumber(-5));
   EXPECT_EQ("-5,000", PunctuateNumber(-5000));
 }
+
+TEST_F(MiscTests, ToLong_InvalidArgumentDoesNotThrowException)
+{
+  EXPECT_NO_THROW
+    (
+     {
+       std::string invalidArgument = "This is an invalid argument.";
+       ToLong( invalidArgument );
+     }
+     );
+}
+
+TEST_F(MiscTests, ToLong_ReturnsCorrectResult)
+{
+  EXPECT_EQ( ToLong( "123" ), 123 );
+}
+
+TEST_F(MiscTests, ToLong_CanContainLeadingSpaces)
+{
+  EXPECT_EQ( ToLong( "   123" ), 123 );
+}
+
+TEST_F(MiscTests, ToLong_CanHavePositiveSign)
+{
+  EXPECT_EQ( ToLong( "+123" ), 123 );
+}
+
+TEST_F(MiscTests, ToLong_CanHaveNegativeSign)
+{
+  EXPECT_EQ( ToLong( "-123" ), -123 );
+}
+
+TEST_F(MiscTests, ToLong_TrailingGarbageIsIgnored)
+{
+  EXPECT_EQ( ToLong( "123lolbar" ), 123 );
+}
+
+TEST_F(MiscTests, ToLong_EmptyArgumentReturnsZero)
+{
+  EXPECT_EQ( ToLong( "" ), 0 );
+}

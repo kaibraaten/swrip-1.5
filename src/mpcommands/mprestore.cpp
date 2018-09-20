@@ -44,7 +44,7 @@ void do_mp_restore( Character *ch, std::string argument )
       return;
     }
 
-  hp = std::stoi(arg2);
+  hp = ToLong(arg2);
 
   if( hp < 0 || hp > 32000 )
     {

@@ -57,7 +57,7 @@ void do_mp_damage( Character *ch, std::string argument )
       return;
     }
 
-  dam = std::stoi(arg2);
+  dam = ToLong(arg2);
 
   if( dam < 0 || dam > SHRT_MAX )
     {

@@ -24,7 +24,7 @@ void do_repairset( Character *ch, std::string argument )
       return;
     }
 
-  vnum = std::stoi( arg1 );
+  vnum = ToLong( arg1 );
 
   if ( (mob = GetProtoMobile(vnum)) == NULL )
     {
@@ -42,7 +42,7 @@ void do_repairset( Character *ch, std::string argument )
     }
 
   repair = mob->RepairShop;
-  value = std::stoi( argument );
+  value = ToLong( argument );
 
   if ( !StrCmp( arg2, "fix0" ) )
     {

@@ -39,7 +39,7 @@ void do_fuel(Character *ch, std::string argument )
       return;
     }
 
-  amount = std::stoi(arg1);
+  amount = ToLong(arg1);
 
   if(fuelSource->Thrusters.Energy.Current <= amount)
     {

@@ -42,7 +42,7 @@ void do_addbounty( Character *ch, std::string argument )
   if ( argument.empty() )
     amount = 0;
   else
-    amount = std::stoi(argument);
+    amount = strtol( argument.c_str(), nullptr, 10 );
 
   if ( amount < MINIMUM_BOUNTY )
     {

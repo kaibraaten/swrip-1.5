@@ -143,7 +143,7 @@ void do_redit( Character *ch, std::string argument )
           return;
         }
 
-      location->Tunnel = urange( 0, std::stoi(argument), 1000 );
+      location->Tunnel = urange( 0, ToLong(argument), 1000 );
       ch->Echo("Done.\r\n");
       return;
     }
@@ -265,7 +265,7 @@ void do_redit( Character *ch, std::string argument )
           return;
         }
 
-      location->TeleDelay = std::stoi( argument );
+      location->TeleDelay = ToLong( argument );
       ch->Echo("Done.\r\n");
       return;
     }
@@ -282,7 +282,7 @@ void do_redit( Character *ch, std::string argument )
 
         }
 
-      televnum = std::stoi( argument );
+      televnum = ToLong( argument );
 
       if( !GetRoom( televnum ) )
 	{
@@ -344,7 +344,7 @@ void do_redit( Character *ch, std::string argument )
 
       if ( arg2[0] == '#' )
         {
-	  edir = (DirectionType) std::stoi( arg2.substr( 1 ) );
+	  edir = (DirectionType) ToLong( arg2.substr( 1 ) );
           xit = GetExitNumber( location, edir );
         }
       else
@@ -353,7 +353,7 @@ void do_redit( Character *ch, std::string argument )
           xit = GetExit( location, edir );
         }
 
-      keyvnum = std::stoi( arg3 );
+      keyvnum = ToLong( arg3 );
 
       if ( !xit )
         {
@@ -379,7 +379,7 @@ void do_redit( Character *ch, std::string argument )
 
       if ( arg2[0] == '#' )
         {
-          edir = (DirectionType)std::stoi( arg2.substr( 1 ) );
+          edir = (DirectionType)ToLong( arg2.substr( 1 ) );
           xit = GetExitNumber( location, edir );
         }
       else
@@ -416,7 +416,7 @@ void do_redit( Character *ch, std::string argument )
 
       if ( arg2[0] == '#' )
         {
-          edir = (DirectionType)std::stoi( arg2.substr( 1 ) );
+          edir = (DirectionType)ToLong( arg2.substr( 1 ) );
           xit = GetExitNumber( location, edir );
         }
       else
@@ -491,7 +491,7 @@ void do_redit( Character *ch, std::string argument )
 	  break;
 
         case '#':
-	  edir = (DirectionType)std::stoi(arg2.substr(1));
+	  edir = (DirectionType)ToLong(arg2.substr(1));
 	  numnotdir = true;
 	  break;
         }
@@ -499,7 +499,7 @@ void do_redit( Character *ch, std::string argument )
       if ( arg3.empty() )
         evnum = INVALID_VNUM;
       else
-        evnum = std::stoi( arg3 );
+        evnum = ToLong( arg3 );
 
       if ( numnotdir )
         {
@@ -584,7 +584,7 @@ void do_redit( Character *ch, std::string argument )
 
       if ( !arg3.empty() )
         {
-          xit->Flags = std::stoi( arg3 );
+          xit->Flags = ToLong( arg3 );
         }
       
       if ( !argument.empty() )
@@ -592,7 +592,7 @@ void do_redit( Character *ch, std::string argument )
 	  vnum_t ekey = INVALID_VNUM;
 
           OneArgument( argument, arg3 );
-          ekey = std::stoi( arg3 );
+          ekey = ToLong( arg3 );
 
           if ( ekey != 0 || arg3[0] == '0' )
             {
@@ -642,7 +642,7 @@ void do_redit( Character *ch, std::string argument )
 
         case '#':
           numnotdir = true;
-          edir = (DirectionType)std::stoi( arg2.substr( 1 ) );
+          edir = (DirectionType)ToLong( arg2.substr( 1 ) );
           break;
 
         case '+':
@@ -724,7 +724,7 @@ void do_redit( Character *ch, std::string argument )
 
       if ( arg2[0] == '#' )
         {
-          edir = (DirectionType)std::stoi( arg2.substr( 1 ) );
+          edir = (DirectionType)ToLong( arg2.substr( 1 ) );
           xit = GetExitNumber( location, edir );
         }
       else
@@ -735,7 +735,7 @@ void do_redit( Character *ch, std::string argument )
 
       if ( xit )
         {
-          xit->Distance = urange( 1, std::stoi(argument), 50 );
+          xit->Distance = urange( 1, ToLong(argument), 50 );
           ch->Echo("Done.\r\n");
           return;
         }
@@ -757,7 +757,7 @@ void do_redit( Character *ch, std::string argument )
 
       if ( arg2[0] == '#' )
         {
-          edir = (DirectionType) std::stoi( arg2.substr( 1 ) );
+          edir = (DirectionType) ToLong( arg2.substr( 1 ) );
           xit = GetExitNumber( location, edir );
         }
       else

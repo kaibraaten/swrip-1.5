@@ -51,7 +51,7 @@ void do_delay( Character *ch, std::string argument )
       return;
     }
 
-  delay = std::stoi( arg );
+  delay = ToLong( arg );
   
   if ( delay < 1 )
     {

@@ -648,7 +648,7 @@ Object *GetCarriedObject( const Character *ch, const std::string &argument )
 
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     {
-      vnum = std::stoi( arg );
+      vnum = strtol( arg.c_str(), nullptr, 10 );
     }
 
   for(Object *obj : Reverse(ch->Objects()))
@@ -710,8 +710,10 @@ Object *GetWornObject( const Character *ch, const std::string &argument )
   int number = NumberArgument( argument, arg );
 
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
-    vnum = std::stoi( arg );
-
+    {
+      vnum = strtol( arg.c_str(), nullptr, 10 );
+    }
+  
   for(Object *obj : Reverse(ch->Objects()))
     if ( obj->WearLoc != WEAR_NONE
          &&   CanSeeObject( ch, obj )

@@ -14,8 +14,8 @@ void do_massign( Character *ch, std::string argument )
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
 
-  vnum_t m_lo = std::stoi( arg2 );
-  vnum_t m_hi = std::stoi( arg3 );
+  vnum_t m_lo = ToLong( arg2 );
+  vnum_t m_hi = ToLong( arg3 );
 
   if ( arg1.empty() || m_lo < 0 || m_hi < 0 )
     {

@@ -1298,7 +1298,7 @@ Character *GetCharacterInRoom( const Character *ch, std::string argument )
     return (Character*)ch;
 
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
-    vnum = std::stoi( arg );
+    vnum = ToLong( arg );
 
   int count  = 0;
 
@@ -1359,7 +1359,7 @@ Character *GetCharacterAnywhere( const Character *ch, std::string argument )
    * Allow reference by vnum for saints+                        -Thoric
    */
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
-    vnum = std::stoi( arg );
+    vnum = ToLong( arg );
 
   /* check the room for an exact match */
   for(Character *wch : ch->InRoom->Characters())
@@ -1573,7 +1573,7 @@ Object *GetObjectAnywhere( const Character *ch, std::string argument )
    * Allow reference by vnum for saints+                        -Thoric
    */
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
-    vnum = std::stoi( arg );
+    vnum = ToLong( arg );
 
   count = 0;
 

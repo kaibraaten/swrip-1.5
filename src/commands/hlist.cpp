@@ -19,11 +19,11 @@ void do_hlist( Character *ch, std::string argument )
 
   if ( !arg.empty() )
     {
-      min = urange( minlimit, std::stoi(arg), maxlimit );
+      min = urange( minlimit, ToLong(arg), maxlimit );
 
       if ( !argument.empty() )
 	{
-	  max = urange( min, std::stoi(argument), maxlimit );
+	  max = urange( min, ToLong(argument), maxlimit );
 	}
       else
 	{

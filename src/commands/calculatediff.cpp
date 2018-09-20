@@ -84,9 +84,9 @@ void do_calculate_diff(Character *ch, std::string argument )
       return;
     }
 
-  ship->Jump.x = ship->Position.x + std::stoi(arg1);
-  ship->Jump.y = ship->Position.y + std::stoi(arg2);
-  ship->Jump.z = ship->Position.z + std::stoi(arg3);
+  ship->Jump.x = ship->Position.x + strtol( arg1.c_str(), nullptr, 10 );
+  ship->Jump.y = ship->Position.y + strtol( arg2.c_str(), nullptr, 10 );
+  ship->Jump.z = ship->Position.z + strtol( arg3.c_str(), nullptr, 10 );
 
   Spaceobject *spaceobject = ship->CurrentJump;
 

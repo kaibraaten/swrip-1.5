@@ -31,12 +31,12 @@ void do_rgrub( Character *ch, std::string argument )
         }
       else
         {
-          match = std::stoi(arg2);
+          match = ToLong(arg2);
         }
       
       hit_cou = 0;                                 /* number of vnums found */
-      lo = !arg3.empty() ? std::stoi(arg3) : 0;
-      hi = !arg4.empty() ? std::stoi(arg4) : MAX_VNUM;
+      lo = !arg3.empty() ? ToLong(arg3) : 0;
+      hi = !arg4.empty() ? ToLong(arg4) : MAX_VNUM;
 
       ch->Echo("\r\nRoom Vnums\r\n");
 

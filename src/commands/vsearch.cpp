@@ -18,7 +18,7 @@ void do_vsearch( Character *ch, std::string arg )
     }
 
   SetCharacterColor( AT_PLAIN, ch );
-  argi = std::stoi(arg);
+  argi = ToLong(arg);
 
   if (argi < MIN_VNUM && argi > MAX_VNUM)
     {

@@ -40,7 +40,7 @@ void do_shiptrack( Character *ch, std::string argument)
 
   if( !StrCmp( arg, "dist" ) )
     {
-      ship->tcount = std::stoi(arg1);
+      ship->tcount = ToLong(arg1);
       ch->Echo("&RJump distance set!\r\n");
       return;
     }
@@ -61,7 +61,7 @@ void do_shiptrack( Character *ch, std::string argument)
           return;
         }
 
-      SetVector( &head, std::stoi(arg1), std::stoi(arg2), std::stoi(arg3) );
+      SetVector( &head, ToLong(arg1), ToLong(arg2), ToLong(arg3) );
       sprintf( buf, "%.0f %.0f %.0f", ship->Position.x + head.x,
                ship->Position.y + head.y, ship->Position.z + head.z );
 

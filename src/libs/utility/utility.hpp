@@ -204,6 +204,7 @@ int RollDice( int number, int size );
 /* misc stuff */
 int Interpolate( int level, int value_00, int value_32 );
 char *StripColorCodes( char *text );
+long ToLong( const std::string str );
 
 /*
  * Takes a number such as 1234567890

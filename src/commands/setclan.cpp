@@ -52,7 +52,7 @@ void do_setclan( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "enlistroom1" ) )
     {
-      clan->EnlistRoom1 = std::stoi( argument );
+      clan->EnlistRoom1 = ToLong( argument );
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -60,7 +60,7 @@ void do_setclan( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "enlistroom2" ) )
     {
-      clan->EnlistRoom2 = std::stoi( argument );
+      clan->EnlistRoom2 = ToLong( argument );
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -121,7 +121,7 @@ void do_setclan( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "board" ) )
     {
-      clan->Board = std::stoi( argument );
+      clan->Board = ToLong( argument );
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -129,7 +129,7 @@ void do_setclan( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "funds" ) )
     {
-      clan->Funds = std::stoi( argument );
+      clan->Funds = ToLong( argument );
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -137,7 +137,7 @@ void do_setclan( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "storage" ) )
     {
-      clan->Storeroom = std::stoi( argument );
+      clan->Storeroom = ToLong( argument );
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;
@@ -145,7 +145,7 @@ void do_setclan( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "jail" ) )
     {
-      clan->Jail = std::stoi( argument );
+      clan->Jail = ToLong( argument );
       ch->Echo("Done.\r\n");
       Clans->Save(clan);
       return;

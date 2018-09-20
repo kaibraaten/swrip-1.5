@@ -8,7 +8,7 @@ void do_wimpy( Character *ch, std::string arg )
   if ( arg.empty() )
     wimpy = (int) ch->HitPoints.Max / 5;
   else
-    wimpy = std::stoi( arg );
+    wimpy = ToLong( arg );
 
   if ( wimpy < 0 )
     {

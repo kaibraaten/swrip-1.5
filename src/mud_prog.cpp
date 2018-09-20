@@ -3481,7 +3481,7 @@ Character *GetCharacterInRoomMudProg( Character *ch, std::string argument )
 
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     {
-      vnum = std::stoi( arg );
+      vnum = ToLong( arg );
     }
 
   count  = 0;

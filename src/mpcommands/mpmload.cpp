@@ -25,7 +25,7 @@ void do_mpmload( Character *ch, std::string arg )
       return;
     }
 
-  if ( ( pMobIndex = GetProtoMobile( std::stoi( arg ) ) ) == NULL )
+  if ( ( pMobIndex = GetProtoMobile( ToLong( arg ) ) ) == NULL )
     {
       ProgBug( "Mpmload - Bad mob vnum", ch );
       return;

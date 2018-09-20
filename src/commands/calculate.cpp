@@ -112,7 +112,7 @@ void do_calculate(Character *ch, std::string argument )
       ship->CurrentJump = GetSpaceobject( arg1 );
 
       if ( !arg2.empty() )
-        distance = std::stoi(arg2);
+        distance = strtol( arg2.c_str(), nullptr, 10 );
 
       if( ship->CurrentJump )
         {
@@ -122,7 +122,10 @@ void do_calculate(Character *ch, std::string argument )
     }
   else if( !arg2.empty() && !arg3.empty() )
     {
-      SetVector( &ship->Jump, std::stoi(arg1), std::stoi(arg2), std::stoi(arg3) );
+      SetVector( &ship->Jump,
+                 strtol( arg1.c_str(), nullptr, 10 ),
+                 strtol( arg2.c_str(), nullptr, 10 ),
+                 strtol( arg3.c_str(), nullptr, 10 ) );
       found = true;
     }
   else

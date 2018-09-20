@@ -93,11 +93,11 @@ void do_who( Character *ch, std::string argument )
               switch ( ++nNumber )
                 {
                 case 1:
-                  iLevelLower = std::stoi( arg );
+                  iLevelLower = ToLong( arg );
                   break;
 
                 case 2:
-                  iLevelUpper = std::stoi( arg );
+                  iLevelUpper = ToLong( arg );
                   break;
 
                 default:

@@ -23,7 +23,7 @@ void do_mpfind( Character *ch, std::string argument )
       return;
     }
 
-  int disp_limit = std::stoi(arg1);
+  int disp_limit = ToLong(arg1);
   disp_limit = umax(0, disp_limit);
 
   if ( StrCmp(arg2, "mud") )
@@ -37,8 +37,8 @@ void do_mpfind( Character *ch, std::string argument )
         }
       else
         {
-          lo_vnum = urange(MIN_VNUM, std::stoi(arg2), MAX_VNUM);
-          hi_vnum = urange(MIN_VNUM, std::stoi(arg3), MAX_VNUM);
+          lo_vnum = urange(MIN_VNUM, ToLong(arg2), MAX_VNUM);
+          hi_vnum = urange(MIN_VNUM, ToLong(arg3), MAX_VNUM);
 
           if ( lo_vnum > hi_vnum )
             {

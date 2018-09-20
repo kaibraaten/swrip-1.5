@@ -41,7 +41,7 @@ void do_clan_withdraw( Character *ch, std::string argument )
 
   try
     {
-      amount = std::stoi( argument );
+      amount = ToLong( argument );
     }
   catch( const std::invalid_argument &ex )
     {

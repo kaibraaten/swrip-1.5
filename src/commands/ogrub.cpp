@@ -88,7 +88,7 @@ void do_ogrub (Character *ch, std::string argument)
 
   if ( IsNumber(arg1) )        /* first arg is number of display lines   */
     {
-      dis_num = std::stoi(arg1);
+      dis_num = ToLong(arg1);
     }
   else
     {

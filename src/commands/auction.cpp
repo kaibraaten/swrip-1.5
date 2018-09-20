@@ -243,7 +243,7 @@ void do_auction(Character *ch, std::string argument)
       return;
     }
 
-  if ( std::stoi(arg2) < 0 )
+  if ( ToLong(arg2) < 0 )
     {
       ch->Echo("You can't auction something for less than 0 credits!\r\n");
       return;
@@ -280,7 +280,7 @@ void do_auction(Character *ch, std::string argument)
 	  auction->Seller = ch;
 	  auction->Pulse = PULSE_AUCTION;
 	  auction->Going = 0;
-	  auction->Starting = std::stoi(arg2);
+	  auction->Starting = ToLong(arg2);
 
 	  if (auction->Starting > 0)
 	    auction->Bet = auction->Starting;

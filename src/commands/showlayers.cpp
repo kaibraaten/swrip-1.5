@@ -24,7 +24,7 @@ void do_showlayers( Character *ch, std::string arg )
       return;
     }
 
-  display_limit = std::stoi(arg);
+  display_limit = ToLong(arg);
   ch->Echo("      Vnum      Wear Layer   Description \r\n");
 
   for (hash = 0; hash < MAX_KEY_HASH; hash++) /* loop thru ObjectIndexHash */

@@ -32,7 +32,7 @@ void do_give( Character *ch, std::string argument )
   if ( IsNumber( arg1 ) )
     {
       /* 'give NNNN coins victim' */
-      int amount = std::stoi(arg1);
+      int amount = ToLong(arg1);
 
       if ( amount <= 0
            || ( StrCmp( arg2, "credits" ) && StrCmp( arg2, "credit" ) ) )

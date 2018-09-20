@@ -15,8 +15,8 @@ void do_rassign( Character *ch, std::string argument )
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
 
-  vnum_t r_lo = std::stoi( arg2 );
-  vnum_t r_hi = std::stoi( arg3 );
+  vnum_t r_lo = ToLong( arg2 );
+  vnum_t r_hi = ToLong( arg3 );
 
   if ( arg1.empty() || r_lo < 0 || r_hi < 0 )
     {

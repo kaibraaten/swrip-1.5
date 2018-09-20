@@ -105,7 +105,7 @@ void do_jail( Character *ch, std::string argument )
       return;
     }
 
-  jail_time = std::stoi(arg);
+  jail_time = ToLong(arg);
 
   if ( jail_time < 0 )
     {

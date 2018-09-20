@@ -23,7 +23,7 @@ void do_shopset( Character *ch, std::string argument )
       return;
     }
 
-  vnum = std::stoi( arg1 );
+  vnum = ToLong( arg1 );
 
   if ( (mob = GetProtoMobile(vnum)) == NULL )
     {
@@ -41,7 +41,7 @@ void do_shopset( Character *ch, std::string argument )
     }
 
   shop = mob->Shop;
-  value = std::stoi( argument );
+  value = ToLong( argument );
 
   if ( !StrCmp( arg2, "buy0" ) )
     {

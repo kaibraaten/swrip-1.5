@@ -135,7 +135,7 @@ void do_repairship(Character *ch, std::string argument )
       Turret *turret = NULL;
 
       argument = OneArgument( argument, number_string );
-      turret_number = std::stoi( number_string );
+      turret_number = ToLong( number_string );
 
       if( turret_number < 1 || turret_number > MAX_NUMBER_OF_TURRETS_IN_SHIP )
 	{

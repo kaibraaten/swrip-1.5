@@ -92,7 +92,7 @@ void do_setplanet( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "base_value" ) )
     {
-      planet->BaseValue = std::stoi( argument );
+      planet->BaseValue = ToLong( argument );
       ch->Echo("Done.\r\n");
       Planets->Save(planet);
       return;

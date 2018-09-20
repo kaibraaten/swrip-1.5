@@ -53,7 +53,7 @@ void do_hset( Character *ch, std::string argument )
 
   if ( !StrCmp( arg1, "level" ) )
     {
-      SetHelpFileLevel( pHelp, std::stoi( arg2 ) );
+      SetHelpFileLevel( pHelp, ToLong( arg2 ) );
       ch->Echo("Done.\r\n");
       return;
     }

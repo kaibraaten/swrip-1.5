@@ -46,7 +46,7 @@ void do_mp_open_passage( Character *ch, std::string argument )
       return;
     }
 
-  fromRoomVnum = std::stoi(arg1);
+  fromRoomVnum = ToLong(arg1);
 
   if( ( fromRoom = GetRoom( fromRoomVnum ) )  ==NULL)
     {
@@ -60,7 +60,7 @@ void do_mp_open_passage( Character *ch, std::string argument )
       return;
     }
 
-  targetRoomVnum = std::stoi(arg2);
+  targetRoomVnum = ToLong(arg2);
 
   if( ( targetRoom = GetRoom( targetRoomVnum ) )  ==NULL)
     {
@@ -74,7 +74,7 @@ void do_mp_open_passage( Character *ch, std::string argument )
       return;
     }
 
-  exit_num = (DirectionType) std::stoi(arg3);
+  exit_num = (DirectionType) ToLong(arg3);
 
   if( exit_num < DIR_NORTH || exit_num > MAX_DIR )
     {

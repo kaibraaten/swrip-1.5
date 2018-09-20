@@ -53,7 +53,7 @@ void do_setshuttle( Character *ch, std::string argument )
       return;
     }
 
-  value = IsNumber( argument ) ? std::stoi( argument ) : -1;
+  value = IsNumber( argument ) ? ToLong( argument ) : -1;
 
   if (!StrCmp(arg2, "firstroom"))
     {
@@ -158,7 +158,7 @@ void do_setshuttle( Character *ch, std::string argument )
 	      return;
 	    }
 
-	  value = IsNumber( arg1 ) ? std::stoi( arg1 ) : -1;
+	  value = IsNumber( arg1 ) ? ToLong( arg1 ) : -1;
           size_t pos = value - 1;
 
           if( pos < shuttle->Stops().size() )
@@ -179,7 +179,7 @@ void do_setshuttle( Character *ch, std::string argument )
 	    }
 	  else if (!StrCmp(arg2, "room"))
 	    {
-	      value = IsNumber( argument ) ? std::stoi( argument ) : -1;
+	      value = IsNumber( argument ) ? ToLong( argument ) : -1;
 	      stop->RoomVnum = value;
 	    }
 	  else if (!StrCmp(arg2, "remove"))

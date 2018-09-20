@@ -15,7 +15,7 @@ void do_repairstat( Character *ch, std::string argument )
       return;
     }
 
-  vnum = std::stoi( argument );
+  vnum = ToLong( argument );
 
   if ( (mob = GetProtoMobile(vnum)) == NULL )
     {

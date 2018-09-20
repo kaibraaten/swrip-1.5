@@ -91,19 +91,26 @@ void RealEchoToRoom( short color, const Room *room, const std::string &text, boo
 
 Room *FindLocation( const Character *ch, const std::string &arg )
 {
-  const Character *victim = NULL;
-  const Object *obj = NULL;
-
   if ( IsNumber(arg) )
-    return GetRoom( stoi( arg ) );
+    {
+      return GetRoom( strtol( arg.c_str(), nullptr, 10 ) );
+    }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) != NULL )
-    return victim->InRoom;
+  const Character *victim = GetCharacterAnywhere( ch, arg );
+  
+  if ( victim != nullptr )
+    {
+      return victim->InRoom;
+    }
 
-  if ( ( obj = GetObjectAnywhere( ch, arg ) ) != NULL )
-    return obj->InRoom;
-
-  return NULL;
+  const Object *obj = GetObjectAnywhere( ch, arg );
+  
+  if ( obj != nullptr )
+    {
+      return obj->InRoom;
+    }
+  
+  return nullptr;
 }
 
 void GenerateRebootString()

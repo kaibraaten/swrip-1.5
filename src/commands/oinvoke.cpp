@@ -35,7 +35,7 @@ void do_oinvoke( Character *ch, std::string argument )
           return;
         }
 
-      level = std::stoi( arg2 );
+      level = ToLong( arg2 );
 
       if ( level < 0 || level > GetTrustLevel( ch ) )
 	{
@@ -69,7 +69,7 @@ void do_oinvoke( Character *ch, std::string argument )
         }
     }
   else
-    vnum = std::stoi( arg1 );
+    vnum = ToLong( arg1 );
 
   if ( GetTrustLevel(ch) < LEVEL_CREATOR )
     {

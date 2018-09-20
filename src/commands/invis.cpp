@@ -14,7 +14,7 @@ void do_invis( Character *ch, std::string arg )
           return;
         }
 
-      level = std::stoi( arg );
+      level = ToLong( arg );
 
       if ( level < 2 || level > ch->TopLevel)
         {

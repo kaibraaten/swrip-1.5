@@ -36,7 +36,7 @@ void do_bribe( Character *ch, std::string argument )
       return;
     }
 
-  amount = std::stoi( argument );
+  amount = strtol( argument.c_str(), nullptr, 10 );
 
   if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )
     {

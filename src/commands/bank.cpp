@@ -43,7 +43,7 @@ void do_bank( Character *ch, std::string argument )
 
   if ( !arg2.empty() )
     {
-      amount = std::stoi(arg2);
+      amount = strtol( arg2.c_str(), nullptr, 10 );
     }
   
   if ( !StringPrefix( arg1 , "deposit" ) )
