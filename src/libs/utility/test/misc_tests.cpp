@@ -121,6 +121,11 @@ TEST_F(MiscTests, ToLong_InvalidArgumentDoesNotThrowException)
      );
 }
 
+TEST_F(MiscTests, ToLong_InvalidArgumentReturnsZero)
+{
+  EXPECT_EQ( ToLong( "This is an invalid argument." ), 0 );
+}
+
 TEST_F(MiscTests, ToLong_ReturnsCorrectResult)
 {
   EXPECT_EQ( ToLong( "123" ), 123 );
