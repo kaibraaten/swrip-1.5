@@ -13,7 +13,7 @@ $
 #FLAGS
 2
 
-#ECONOMY 0 42255975
+#ECONOMY 0 42215975
 
 #MOBILES
 #1
@@ -23,7 +23,7 @@ Puff the Fractal Dragon is here, contemplating a higher reality.
 ~
 ~
 3 4194856 1000 Z
-50 20 -30 5d10+30550 4d10+200
+50 0 -30 5d10+30550 4d10+200
 10000 0
 8 8 2
 13 13 13 13 13 13 13
@@ -65,7 +65,7 @@ This demon is clearly something that you don't want to mess with...
 It appears to be very agile, and very strong.  
 ~
 1073741827 40 -1000 Z
-50 1 -300 5d10+31550 1d2+2
+50 0 -300 5d10+31550 1d2+2
 10000 0
 8 8 0
 10 10 10 10 10 10 10
@@ -116,7 +116,7 @@ The supermob is here.  He looks busy as hell.
 How clever he looks!
 ~
 10493953 4259882 -1000 Z
-105 1 -162 21d10+1050 10d4+2
+105 0 -162 21d10+1050 10d4+2
 10000 0
 8 8 0
 10 10 10 10 10 10 10
@@ -163,7 +163,7 @@ its tasks.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 7 0 0 0 0 0
+0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #6
 Rosie O'Donnel~

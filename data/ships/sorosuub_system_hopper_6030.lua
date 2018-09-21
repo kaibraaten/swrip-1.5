@@ -1,102 +1,30 @@
 -- Sorosuub System Hopper
--- Last saved Thursday 13-Sep-2018 11:56:11
+-- Last saved Friday 21-Sep-2018 13:46:52
 
 ShipEntry
 {
-   CoPilot = "", 
-   Owner = "public", 
-   State = 0, 
-   Name = "Sorosuub System Hopper", 
-   Pilot = "", 
-   Guard = false, 
-   PersonalName = "6030", 
-   Shipyard = 28613, 
-   Location = 28613, 
-   Alarm = false, 
-   Instruments = 
-   {
-      AstroArray = 0, 
-      Comm = 0, 
-      Sensor = 0, 
-   }, 
-   Position = 
-   {
-      Z = -3, 
-      Y = -200002, 
-      X = -1499993, 
-   }, 
-   Rooms = 
-   {
-      Last = 32155, 
-      Pilotseat = 32155, 
-      Entrance = 32155, 
-      Navseat = 32155, 
-      First = 32155, 
-      Cockpit = 32155, 
-      Hangar = 0, 
-      Coseat = 32155, 
-      Engine = 0, 
-      Gunseat = 32155, 
-   }, 
-   Thrusters = 
-   {
-      Energy = 
-      {
-         Current = 2000, 
-         Max = 2000, 
-      }, 
-      Maneuver = 35, 
-      Speed = 
-      {
-         Current = 0, 
-         Max = 65, 
-      }, 
-   }, 
-   Home = "Yavin IV", 
    Defenses = 
    {
-      Hull = 
+      Shield = 
       {
-         Current = 100, 
-         Max = 100, 
+         Max = 10, 
+         Current = 0, 
       }, 
       Chaff = 
       {
-         Current = 0, 
          Max = 0, 
-      }, 
-      Shield = 
-      {
          Current = 0, 
-         Max = 10, 
+      }, 
+      Hull = 
+      {
+         Max = 100, 
+         Current = 100, 
       }, 
    }, 
+   Type = "Civilian", 
+   Pilot = "", 
    WeaponSystems = 
    {
-      Tube = 
-      {
-         Missiles = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         State = 0, 
-         Rockets = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-      }, 
-      TractorBeam = 
-      {
-         Strength = 0, 
-         State = 1, 
-      }, 
       IonCannon = 
       {
          Count = 0, 
@@ -106,6 +34,30 @@ ShipEntry
       {
          Count = 0, 
          State = 0, 
+      }, 
+      Tube = 
+      {
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         State = 0, 
+         Missiles = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+      }, 
+      TractorBeam = 
+      {
+         Strength = 0, 
+         State = 1, 
       }, 
       Turrets = 
       {
@@ -161,13 +113,61 @@ ShipEntry
          }, 
       }, 
    }, 
-   DockingPorts = 0, 
-   Class = "Starfighter", 
-   Description = "", 
+   Guard = false, 
+   Thrusters = 
+   {
+      Speed = 
+      {
+         Max = 65, 
+         Current = 0, 
+      }, 
+      Energy = 
+      {
+         Max = 2000, 
+         Current = 2000, 
+      }, 
+      Maneuver = 35, 
+   }, 
+   Shipyard = 28613, 
+   PersonalName = "6030", 
    Hyperdrive = 
    {
       Speed = 100, 
    }, 
-   Type = "Civilian", 
+   Owner = "public", 
+   Alarm = false, 
+   Location = 28613, 
    LastDock = 28613, 
+   Instruments = 
+   {
+      Comm = 0, 
+      AstroArray = 0, 
+      Sensor = 0, 
+   }, 
+   Position = 
+   {
+      Y = -200002, 
+      Z = -3, 
+      X = -1499993, 
+   }, 
+   Name = "Sorosuub System Hopper", 
+   Home = "Yavin IV", 
+   DockingPorts = 0, 
+   Class = "Starfighter", 
+   Rooms = 
+   {
+      Engine = 0, 
+      Hangar = 0, 
+      Gunseat = 32155, 
+      Coseat = 32155, 
+      Last = 32155, 
+      Pilotseat = 32155, 
+      Cockpit = 32155, 
+      Entrance = 32155, 
+      Navseat = 32155, 
+      First = 32155, 
+   }, 
+   State = 0, 
+   CoPilot = "", 
+   Description = "", 
 }

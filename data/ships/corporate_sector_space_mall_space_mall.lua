@@ -1,39 +1,36 @@
 -- Corporate Sector Space Mall
--- Last saved Thursday 13-Sep-2018 11:56:11
+-- Last saved Friday 21-Sep-2018 13:46:52
 
 ShipEntry
 {
-   Description = "", 
-   DockingPorts = 0, 
-   Class = "Capital Ship", 
-   Guard = false, 
-   Shipyard = 45, 
-   Type = "Civilian", 
-   PersonalName = "Space Mall", 
-   Owner = "Corporate Sector", 
    CoPilot = "", 
-   LastDock = 45, 
-   State = 1, 
-   Instruments = 
-   {
-      Comm = 0, 
-      AstroArray = 0, 
-      Sensor = 0, 
-   }, 
-   Alarm = false, 
+   Pilot = "", 
    Rooms = 
    {
-      Hangar = 7300, 
-      Pilotseat = 7350, 
+      Engine = 0, 
+      Entrance = 7350, 
+      Last = 7350, 
       Coseat = 7350, 
+      Navseat = 7350, 
+      Pilotseat = 7350, 
+      Hangar = 7300, 
+      Cockpit = 7350, 
       First = 7300, 
       Gunseat = 7350, 
-      Engine = 0, 
-      Last = 7350, 
-      Cockpit = 7350, 
-      Entrance = 7350, 
-      Navseat = 7350, 
    }, 
+   Position = 
+   {
+      X = 916, 
+      Y = -771, 
+      Z = -2903, 
+   }, 
+   Alarm = false, 
+   Name = "Corporate Sector Space Mall", 
+   Owner = "Corporate Sector", 
+   DockingPorts = 0, 
+   Guard = false, 
+   PersonalName = "Space Mall", 
+   Home = "corperate", 
    Defenses = 
    {
       Hull = 
@@ -41,76 +38,101 @@ ShipEntry
          Max = 20000, 
          Current = 20000, 
       }, 
-      Chaff = 
-      {
-         Max = 0, 
-         Current = 0, 
-      }, 
       Shield = 
       {
          Max = 1000, 
          Current = 1000, 
       }, 
+      Chaff = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
    }, 
+   Description = "", 
+   State = 1, 
+   Instruments = 
+   {
+      AstroArray = 0, 
+      Comm = 0, 
+      Sensor = 0, 
+   }, 
+   Class = "Capital Ship", 
+   Thrusters = 
+   {
+      Energy = 
+      {
+         Max = 20000, 
+         Current = 20000, 
+      }, 
+      Speed = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+      Maneuver = 0, 
+   }, 
+   Hyperdrive = 
+   {
+      Speed = 255, 
+   }, 
+   Location = 0, 
+   Shipyard = 45, 
+   LastDock = 45, 
    WeaponSystems = 
    {
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
-      }, 
-      IonCannon = 
-      {
-         State = 0, 
-         Count = 0, 
       }, 
       Tube = 
       {
@@ -124,17 +146,22 @@ ShipEntry
             Max = 10, 
             Current = 10, 
          }, 
-         State = 0, 
          Torpedoes = 
          {
             Max = 0, 
             Current = 2, 
          }, 
+         State = 0, 
       }, 
       TractorBeam = 
       {
-         State = 0, 
          Strength = 0, 
+         State = 0, 
+      }, 
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 0, 
       }, 
       Laser = 
       {
@@ -142,32 +169,5 @@ ShipEntry
          Count = 10, 
       }, 
    }, 
-   Hyperdrive = 
-   {
-      Speed = 255, 
-   }, 
-   Thrusters = 
-   {
-      Maneuver = 0, 
-      Energy = 
-      {
-         Max = 20000, 
-         Current = 20000, 
-      }, 
-      Speed = 
-      {
-         Max = 0, 
-         Current = 0, 
-      }, 
-   }, 
-   Name = "Corporate Sector Space Mall", 
-   Position = 
-   {
-      Z = 4459, 
-      X = 4234, 
-      Y = -4524, 
-   }, 
-   Home = "corperate", 
-   Location = 0, 
-   Pilot = "", 
+   Type = "Civilian", 
 }

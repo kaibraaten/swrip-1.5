@@ -355,8 +355,14 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
 
   /* save mobiles */
   fprintf( fpout, "#MOBILES\n" );
+
   for ( vnum = tarea->VnumRanges.Mob.First; vnum <= tarea->VnumRanges.Mob.Last; vnum++ )
     {
+      if( vnum == INVALID_VNUM )
+        {
+          continue;
+        }
+      
       if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
 
@@ -460,6 +466,11 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
   fprintf( fpout, "#OBJECTS\n" );
   for ( vnum = tarea->VnumRanges.Object.First; vnum <= tarea->VnumRanges.Object.Last; vnum++ )
     {
+      if( vnum == INVALID_VNUM )
+        {
+          continue;
+        }
+      
       if ( (pObjIndex = GetProtoObject( vnum )) == NULL )
         continue;
 
@@ -572,6 +583,11 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
 
   for ( vnum = tarea->VnumRanges.Room.First; vnum <= tarea->VnumRanges.Room.Last; vnum++ )
     {
+      if( vnum == INVALID_VNUM )
+        {
+          continue;
+        }
+      
       if ( (room = GetRoom( vnum )) == NULL )
         continue;
 
@@ -689,10 +705,17 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
   fprintf( fpout, "#SHOPS\n" );
   for ( vnum = tarea->VnumRanges.Mob.First; vnum <= tarea->VnumRanges.Mob.Last; vnum++ )
     {
+      if( vnum == INVALID_VNUM )
+        {
+          continue;
+        }
+      
       if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
+
       if ( (pShop = pMobIndex->Shop) == NULL )
         continue;
+
       fprintf( fpout, " %ld   %2d %2d %2d %2d %2d   %3d %3d",
                pShop->Keeper,
                pShop->BuyType[0],
@@ -713,10 +736,17 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
   fprintf( fpout, "#REPAIRS\n" );
   for ( vnum = tarea->VnumRanges.Mob.First; vnum <= tarea->VnumRanges.Mob.Last; vnum++ )
     {
+      if( vnum == INVALID_VNUM )
+        {
+          continue;
+        }
+      
       if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
+
       if ( (pRepair = pMobIndex->RepairShop) == NULL )
         continue;
+
       fprintf( fpout, " %ld   %2d %2d %2d         %3d %3d",
                pRepair->Keeper,
                pRepair->FixType[0],
@@ -735,6 +765,11 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
   fprintf( fpout, "#SPECIALS\n" );
   for ( vnum = tarea->VnumRanges.Mob.First; vnum <= tarea->VnumRanges.Mob.Last; vnum++ )
     {
+      if( vnum == INVALID_VNUM )
+        {
+          continue;
+        }
+      
       if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
       if ( pMobIndex->spec_fun )

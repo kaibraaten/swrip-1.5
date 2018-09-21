@@ -5,7 +5,7 @@
 #include "area.hpp"
 #include "repos/planetrepository.hpp"
 
-static bool ShowEntry( const Planet *planet, const Character *ch );
+static void ShowEntry( const Planet *planet, const Character *ch );
 
 void do_planets( Character *ch, std::string argument )
 {
@@ -25,7 +25,7 @@ void do_planets( Character *ch, std::string argument )
     }
 }
 
-static bool ShowEntry( const Planet *planet, const Character *ch )
+static void ShowEntry( const Planet *planet, const Character *ch )
 {
   ch->Echo("&g--------------------------------------------------------------------------------&w\r\n" );
   ch->Echo("&wPlanet: &G%-15s   &wGoverned By: &G%s %s\r\n",
@@ -48,7 +48,5 @@ static bool ShowEntry( const Planet *planet, const Character *ch )
 
       ch->Echo("\r\n" );
     }
-
-  return true;
 }
 

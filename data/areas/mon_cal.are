@@ -13,7 +13,7 @@ $
 #FLAGS
 1
 
-#ECONOMY 0 187437355
+#ECONOMY 0 187437353
 
 #MOBILES
 #21000
@@ -29,7 +29,7 @@ A elderly saint wearing only a dark robe wanders here.
 18 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 262143 1 0
-0 0 2047 0 3156992 0 0 263
+0 0 0 0 3156992 0 0 263
 0 0 0 0 0 0 0 0
 #21001
 Anakiem shopkeeper~
@@ -44,7 +44,7 @@ Anakiem the shopkeeper stands here.
 18 18 18 18 13 13 18
 0 0 0 0 0
 15 0 0 0 16777248 16777251 6
-34 4 2047 0 3156992 0 48 3
+34 4 0 0 3156992 0 48 3
 0 0 0 0 0 0 0 0
 > speech_prog corusca~
 smile
@@ -68,7 +68,7 @@ Torval the repir tech works on armor.
 18 18 18 18 13 13 18
 0 0 0 0 0
 2 0 0 0 16777253 5 5
-0 0 2047 0 3156992 0 32 3
+0 0 0 0 3156992 0 32 3
 0 0 0 0 0 0 0 0
 > rand_prog 10 ~
 mpecho You hear loud bangs as Torval hammers out dents in the
@@ -92,7 +92,7 @@ The Rodian spice dealer stands behind the counter.
 18 18 18 18 13 13 18
 0 0 0 0 0
 1 0 0 0 35 3 6
-0 0 2047 0 3156992 0 48 3
+0 0 0 0 3156992 0 48 3
 0 0 0 0 0 0 0 0
 #21004
 Shuttleee~
@@ -107,7 +107,7 @@ The Shuttleee sits here.
 18 18 18 18 13 13 18
 0 0 0 0 0
 1 0 0 0 3 3 6
-0 0 2047 0 3156992 0 48 3
+0 0 0 0 3156992 0 48 3
 0 0 0 0 0 0 0 0
 #21006
 guildmaster~
@@ -122,7 +122,7 @@ The skill teacher awaits a student.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 3
-0 0 2047 1048594 3072 33 1054784 2
+0 0 0 1048594 3072 33 1054784 2
 0 0 0 0 0 0 0 0
 #21007
 Mon Calamrian doll~
@@ -137,7 +137,7 @@ A Calamrian doll hangs limply here.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 2047 0 4194303 0 0 0
+0 0 0 0 4194303 0 0 0
 0 0 0 0 0 0 0 0
 #21009
 Ship builder~
@@ -152,7 +152,7 @@ A Builder offers you his selection of Mon made ships.
 13 18 18 18 13 13 18
 0 0 0 0 0
 0 0 0 0 1 1 5
-0 0 2047 0 3156992 0 32 0
+0 0 0 0 3156992 0 32 0
 0 0 0 0 0 0 0 0
 #21010
 waitress~
@@ -167,7 +167,7 @@ The cute Calamrian waitress awaits your order.
 18 18 18 18 18 18 18
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 2047 0 3156992 0 0 0
+0 0 0 0 3156992 0 0 0
 0 0 0 0 0 0 0 0
 #21011
 printer~
@@ -182,7 +182,7 @@ A thin Calamrian printer sits behind a stack of papers.
 18 18 18 18 13 13 18
 0 0 0 0 0
 0 0 0 0 33 1 3
-0 0 2047 0 3156992 0 0 0
+0 0 0 0 3156992 0 0 0
 0 0 0 0 0 0 0 0
 #21012
 Shuttleer father~
@@ -198,7 +198,7 @@ The Guild's Shuttleer meditates here.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 5
-0 0 2047 0 2100224 0 0 0
+0 0 0 0 2100224 0 0 0
 0 0 0 0 0 0 0 0
 #21013
 Monei bartender~
@@ -213,7 +213,7 @@ Monei the bartender stands behind his counter.
 13 18 18 18 13 13 18
 0 0 0 0 0
 0 0 0 0 16777249 33 5
-0 0 2047 0 3156992 0 48 3
+0 0 0 0 3156992 0 48 3
 0 0 0 0 0 0 0 0
 > all_greet_prog 100~
 Say Pull up a chair and have a drink, we only live once ya know.
@@ -236,7 +236,7 @@ Joyta, Mon Calamarian Jewler~
 13 18 18 18 13 13 18
 0 0 0 0 0
 0 0 0 0 16777249 1 0
-0 0 2047 0 3156992 0 32 0
+0 0 0 0 3156992 0 32 0
 0 0 0 0 0 0 0 0
 > rand_prog 5 ~
 Yell Come in , I've got the best Jewlery in the Galexy!
@@ -268,7 +268,7 @@ Rax the armourer is here fitting a Mon Calamrian  helm.
 13 18 18 18 13 13 18
 0 0 0 0 0
 0 0 0 0 16777249 33 5
-0 0 2047 0 3156992 0 32 3
+0 0 0 0 3156992 0 32 3
 0 0 0 0 0 0 0 0
 > all_greet_prog 100~
 Say Welcome $n Heard you were in town.
@@ -288,7 +288,7 @@ The weaponsmith Bonta, labors over a lengthy blade.
 13 18 18 18 13 13 18
 0 0 0 0 0
 0 0 0 0 16777249 33 5
-0 0 2047 0 3156992 0 32 0
+0 0 0 0 3156992 0 32 0
 0 0 0 0 0 0 0 0
 > all_greet_prog 100~
 Say Welcome to my shop care to buy a weapon?
@@ -308,7 +308,7 @@ The postmaster sorts the day's mail.
 13 18 18 18 13 13 18
 0 0 0 0 0
 0 0 0 0 1 1 3
-0 0 2047 0 3156992 0 0 0
+0 0 0 0 3156992 0 0 0
 0 0 0 0 0 0 0 0
 #21018
 chef~
@@ -323,7 +323,7 @@ A chef Wannie greets you.
 13 18 18 18 13 13 18
 0 0 0 0 0
 0 0 0 0 16777249 33 3
-0 0 2047 0 3156992 0 32 0
+0 0 0 0 3156992 0 32 0
 0 0 0 0 0 0 0 0
 > all_greet_prog 100~
 Say Hello just step right up and get my galexy famous barbecue.
@@ -345,7 +345,7 @@ The Mon Calamarian baker is here, covered with seaweed flour.
 13 18 18 18 13 13 18
 0 0 0 0 0
 0 0 0 0 16777249 33 3
-0 0 2047 0 3156992 0 32 0
+0 0 0 0 3156992 0 32 0
 0 0 0 0 0 0 0 0
 > all_greet_prog 100~
 say Welcome to my shop when you want to buy just yell!
@@ -367,7 +367,7 @@ A young Mon Calamarian girl smiles as you enter.
 13 18 18 18 13 13 18
 0 0 0 0 0
 0 0 0 0 16777249 33 3
-20 20 2047 0 3156992 0 32 0
+20 20 0 0 3156992 0 32 0
 0 0 0 0 0 0 0 0
 > all_greet_prog 100~
 say Hello, can I intrest you in anything?
@@ -393,7 +393,7 @@ Lokist tailor~
 18 18 18 18 13 13 18
 0 0 0 0 0
 0 0 0 0 16777249 33 6
-0 0 2047 0 3156992 0 48 3
+0 0 0 0 3156992 0 48 3
 0 0 0 0 0 0 0 0
 #21022
 bantha keeper~
@@ -408,7 +408,7 @@ The bantha keeper tends to his animals.
 13 18 18 18 13 13 18
 0 0 0 0 0
 0 0 0 0 1 1 6
-0 0 2047 0 3156992 0 48 3
+0 0 0 0 3156992 0 48 3
 0 0 0 0 0 0 0 0
 #21023
 thief master~
@@ -423,7 +423,7 @@ A master thief is here to demonstrate the ways of thievery.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 2047 0 3156992 0 576 524290
+0 0 0 0 3156992 0 576 524290
 0 0 0 0 0 0 0 0
 #21025
 hotel keeper~
@@ -438,7 +438,7 @@ The hotel keeper stands here, looking rather gruff.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 16777249 33 4
-0 0 2047 0 3156992 0 48 3
+0 0 0 0 3156992 0 48 3
 0 0 0 0 0 0 0 0
 > bribe_prog 200~
 if inroom($i) == 21069
@@ -478,7 +478,7 @@ A pensive sage mulls over new Jedi's .
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 5
-0 0 2047 0 3156992 0 0 0
+0 0 0 0 3156992 0 0 0
 0 0 0 0 0 0 0 0
 #21029
 storekeeper~
@@ -493,7 +493,7 @@ A large man stands here, selling equipment for adventurers.
 25 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 934015 934015 4
-0 0 2047 0 3156992 0 0 3
+0 0 0 0 3156992 0 0 3
 0 0 0 0 0 0 0 0
 #21031
 man ranger~
@@ -508,7 +508,7 @@ The ranger Shuttleer demonstrates combat maneuvers.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 5
-0 0 2047 0 3156992 0 0 0
+0 0 0 0 3156992 0 0 0
 0 0 0 0 0 0 0 0
 #21034
 woman Shuttleer~
@@ -523,7 +523,7 @@ A robed woman is here, Shuttleing initiate officers.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 4
-0 0 2047 0 3156992 0 0 0
+0 0 0 0 3156992 0 0 0
 0 0 0 0 0 0 0 0
 #21035
 man Shuttleer~
@@ -538,7 +538,7 @@ A giant man stands here, waiting to Shuttle young warriors.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 5
-0 0 2047 0 3156992 0 0 0
+0 0 0 0 3156992 0 0 0
 0 0 0 0 0 0 0 0
 #21037
 guard man~
@@ -553,7 +553,7 @@ A Mon Calamrian guard patrols the streets of the city.
 16 13 13 16 13 13 13
 0 0 0 0 0
 0 0 0 0 16777249 33 3
-2 2 2047 0 3072 0 0 3
+2 2 0 0 3072 0 0 3
 32 0 0 0 0 0 0 0
 #21041
 guard~
@@ -568,7 +568,7 @@ A tired guard is here.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 2
-0 0 2047 0 0 0 0 0
+0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #21043
 E-web guard~
@@ -583,7 +583,7 @@ A E-Web guard stares out over the area.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 2
-0 0 2047 0 0 0 0 2
+0 0 0 0 0 0 0 2
 0 0 0 0 0 0 0 0
 #21044
 executioner~
@@ -598,7 +598,7 @@ A executioner stands silently before you.
 18 18 18 18 18 15 18
 0 0 0 0 0
 0 0 0 0 1 1 4
-0 0 2047 0 2100224 0 0 3
+0 0 0 0 2100224 0 0 3
 0 0 0 0 0 0 0 0
 #21045
 dog stray~
@@ -613,7 +613,7 @@ A stray Mosny dog noses along the street.
 13 13 13 13 13 13 13
 0 0 0 0 0
 30 0 0 0 1634468353 513 0
-0 0 1725 0 0 0 0 2
+0 0 0 0 0 0 0 2
 0 0 0 0 0 0 0 0
 #21052
 thief figure~
@@ -628,7 +628,7 @@ A strange figure lurks furtively.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 16777248 1 2
-0 0 2047 2048 0 0 0 0
+0 0 0 2048 0 0 0 0
 0 0 0 0 0 0 0 0
 > greet_prog 29~
 mpecho From behind the shadows you can feel somone lighten your pockets.
@@ -651,7 +651,7 @@ He eyes you warily and holds out a tin cup in supplication...
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 2047 0 0 0 0 0
+0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 > all_greet_prog 100~
 if name($n) == dog stray
@@ -700,7 +700,7 @@ appear as though they could rend even the toughest of flesh.
 13 13 13 13 13 13 13
 0 0 0 0 0
 78 0 0 0 513 512 2
-0 0 296125 0 0 0 1 2
+0 0 0 0 0 0 1 2
 0 0 0 0 0 0 0 0
 #21057
 bantha~
@@ -717,7 +717,7 @@ She appears ready to serve anyone.
 13 13 13 13 13 13 13
 0 0 0 0 0
 86 0 0 0 262656 374272 2
-0 0 67261 2 0 2048 32 2
+0 0 0 2 0 2048 32 2
 0 0 0 0 0 0 0 0
 #21058
 dewback~
@@ -735,7 +735,7 @@ move tirelessly for days. dewbacks are scarse here...mostly for pets.
 13 13 13 13 13 13 13
 0 0 0 0 0
 86 0 0 0 395675 373248 2
-0 0 67261 2 0 2048 32 2
+0 0 0 2 0 2048 32 2
 0 0 0 0 0 0 0 0
 #21059
 teke lizard~
@@ -751,7 +751,7 @@ The teke lizard appears frightened out of its mind...
 13 13 13 13 13 13 13
 0 0 0 0 0
 74 0 0 0 513 512 2
-0 0 67261 0 0 2048 0 0
+0 0 0 0 0 2048 0 0
 0 0 0 0 0 0 0 0
 #21060
 dog~
@@ -767,7 +767,7 @@ The Mon Calmarian mutt constantly sniffs the ground, searching for its prey.
 13 13 13 13 13 13 13
 0 0 0 0 0
 73 0 0 0 395987 2688 2
-0 0 67261 0 0 2048 0 2
+0 0 0 0 0 2048 0 2
 0 0 0 0 0 0 0 0
 #21061
 guard man~
@@ -782,7 +782,7 @@ A heavy guard walks the wall of the city.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 3
-2 2 2047 0 3072 0 0 1
+2 2 0 0 3072 0 0 1
 0 0 0 0 0 0 0 0
 #21062
 guard~
@@ -797,7 +797,7 @@ A Docking bay guard tends the western Docking bay.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 2
-2 2 2047 0 3072 0 0 0
+2 2 0 0 3072 0 0 0
 32 0 0 0 0 0 0 0
 > time_prog 6~
 un w
@@ -822,7 +822,7 @@ A Docking bay guard tends the outer Docking bay.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 2
-2 2 2047 0 3072 0 0 3
+2 2 0 0 3072 0 0 3
 0 0 0 0 0 0 0 0
 > time_prog 6~
 un e
@@ -846,7 +846,7 @@ A Docking bay guard tends the north Docking bay.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 2
-2 2 2047 0 3072 0 0 3
+2 2 0 0 3072 0 0 3
 32 0 0 0 0 0 0 0
 > time_prog 6~
 un n
@@ -870,7 +870,7 @@ A Docking bay guard tends the outer Docking bay.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 2
-2 2 2047 0 3072 0 0 1
+2 2 0 0 3072 0 0 1
 0 0 0 0 0 0 0 0
 > time_prog 20~
 close s
@@ -895,7 +895,7 @@ A guard of watches you as you move by.
 16 13 13 16 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 3
-2 2 2047 0 3072 0 0 3
+2 2 0 0 3072 0 0 3
 32 0 0 0 0 0 0 0
 > time_prog 6~
 un e
@@ -919,7 +919,7 @@ A guard of the city stands here.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 2
-2 2 2047 1059840 3072 0 0 3
+2 2 0 1059840 3072 0 0 3
 0 0 0 0 0 0 0 0
 > time_prog 6~
 un w
@@ -943,7 +943,7 @@ A guard of the city stands at the ready.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 2
-2 2 2047 0 3072 0 0 0
+2 2 0 0 3072 0 0 0
 32 0 0 0 0 0 0 0
 > time_prog 6~
 un s
@@ -967,7 +967,7 @@ An guard keeps vigilant watch here.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 2
-2 2 2047 0 3072 0 0 3
+2 2 0 0 3072 0 0 3
 0 0 0 0 0 0 0 0
 > time_prog 6~
 un n
@@ -994,7 +994,7 @@ wondering what it carries.
 13 13 13 13 13 13 13
 0 0 0 0 0
 86 0 0 0 390727 374272 2
-0 0 67261 0 0 0 0 0
+0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #21071
 E-Web Guard~
@@ -1009,7 +1009,7 @@ A E-Web guard peers over the area.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 3
-2 2 2047 0 3072 0 0 0
+2 2 0 0 3072 0 0 0
 0 0 0 0 0 0 0 0
 #21073
 Key~
@@ -1185,7 +1185,7 @@ scanner enterance~
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 2
-0 0 2047 1059840 3072 0 0 3
+0 0 0 1059840 3072 0 0 3
 0 0 0 0 0 0 0 0
 #21084
 Greeting Protocol Droid~
@@ -1380,7 +1380,7 @@ A proud man stands here, deliberating over his theories.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 47 0 3156992 0 0 0
+0 0 0 0 3156992 0 0 0
 0 0 0 0 0 0 0 0
 #21433
 guard sleeping~
@@ -1416,7 +1416,7 @@ A Mon Calamrian Secretary sits here doing important things.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 16777249 33 0
-0 0 9 0 4194303 0 0 0
+0 0 0 0 4194303 0 0 0
 0 0 0 0 0 0 0 0
 > speech_prog hi hello~
 Say Please state your emergency, I'm busy here.
@@ -1467,7 +1467,7 @@ A TK-71 cooking droid~
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 33 33 2
-0 0 2047 1059840 3072 0 0 3
+0 0 0 1059840 3072 0 0 3
 0 0 0 0 0 0 0 0
 #21437
 sleeping shop ~
@@ -1505,7 +1505,7 @@ elite officer hyko~
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 16777249 32 2
-6 6 2047 0 3072 0 0 0
+6 6 0 0 3072 0 0 0
 32 0 0 0 0 0 0 0
 > all_greet_prog 100~
 Say &z Hey if your not supposed to be here, leave before

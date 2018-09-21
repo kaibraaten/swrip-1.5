@@ -135,13 +135,13 @@ void LuaPlanetRepository::LuaPushAreas( lua_State *L, const Planet *planet )
 {
   if( !planet->Areas().empty() )
     {
-      int idx = 1;
+      int idx = 0;
       lua_pushstring( L, "Areas" );
       lua_newtable( L );
 
       for(const Area *area : planet->Areas())
         {
-          lua_pushinteger( L, idx );
+          lua_pushinteger( L, ++idx );
           lua_pushstring( L, area->Filename.c_str() );
           lua_settable( L, -3 );
         }

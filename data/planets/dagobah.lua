@@ -4,7 +4,7 @@
 PlanetEntry
 {
    PopulationSupport = 0, 
-   Name = "dagobah", 
+   Name = "Dagobah", 
    Spaceobject = "Dagobah", 
    BaseValue = 0, 
    Areas = 

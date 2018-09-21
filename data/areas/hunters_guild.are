@@ -13,7 +13,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 14560142
+#ECONOMY 0 14559142
 
 #MOBILES
 #6600
@@ -680,18 +680,6 @@ quarters on the second floor, the upper hallway, and the roof entrance.
 0 12 1
 D10
 ~
-sanctuary~
-526336 -1 6624
-D10
-~
-Roof~
-524288 -1 6634
-D10
-~
-Prison~
-526336 -1 6638
-D10
-~
 1st Floor~
 524288 -1 6602
 D10
@@ -702,6 +690,18 @@ D10
 ~
 3rd Floor~
 524288 -1 6610
+D10
+~
+Prison~
+526336 -1 6638
+D10
+~
+Roof~
+524288 -1 6634
+D10
+~
+sanctuary~
+526336 -1 6624
 S
 #6607
 Quarter's Hallway~
@@ -978,12 +978,12 @@ D2
 0 -1 6606
 D10
 ~
-Freezer~
-526336 -1 6627
-D10
-~
 Burn~
 526336 -1 6629
+D10
+~
+Freezer~
+526336 -1 6627
 > entry_prog 100~
 if clan($n) == The Assassins Guild
 else

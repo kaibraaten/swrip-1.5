@@ -862,8 +862,6 @@ static void LuaPushCharacterAbilities( lua_State *L, const Character *ch )
   lua_pushstring( L, "Abilities" );
   lua_newtable( L );
 
-  LuaSetfieldNumber( L, "MainAbility", ch->Ability.Main );
-
   for( size_t ability = 0; ability < MAX_ABILITY; ++ability )
     {
       lua_pushinteger( L, ability );
@@ -1029,13 +1027,13 @@ static void LoadAbility( lua_State *L, Character *ch, size_t ability )
                   {
                     SetAbilityLevel( ch, ability, level );
                   });
-  
+
   LuaGetfieldInt( L, "Experience",
                   [ch, ability](const int xp)
                   {
                     SetAbilityXP( ch, ability, xp );
                   });
-  
+
   LuaGetfieldBool( L, "IsMain",
                    [ch, ability](const bool isMain)
                    {
@@ -1389,13 +1387,14 @@ void LuaLoadCharacter( lua_State *L, Character *ch,
   LuaLoadCharacterAbilities( L, ch );
   LuaLoadCharacterSaves( L, ch );
   LuaLoadCharacterStats( L, ch );
+
   auto affects = LuaLoadAffects( L, "Affects" );
 
   for( Affect *aff : affects )
     {
       ch->Add( aff );
     }
-
+  
   auto objects = LuaLoadObjects( L, "Inventory" );
 
   for( Object *obj : objects )
@@ -1412,6 +1411,6 @@ void LuaLoadCharacter( lua_State *L, Character *ch,
           EquipCharacter( ch, obj, obj->WearLoc );
         }
     }
-  
+
   loadExtra( L, ch );
 }

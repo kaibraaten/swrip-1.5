@@ -13,7 +13,7 @@ $
 #FLAGS
 3 3
 
-#ECONOMY 0 496059470
+#ECONOMY 0 496058750
 
 #MOBILES
 #10340
@@ -159,7 +159,7 @@ You are pretty sure you can best him in regards to combat.
 13 13 13 13 13 13 0
 0 0 0 0 44
 85 0 0 0 131072 131073 0
-0 0 3 0 2048 0 0 0
+0 0 0 0 2048 0 0 0
 0 0 0 0 0 0 0 0
 > death_prog 85~
 if level($n) >= 6
@@ -301,13 +301,13 @@ wait for your lessons to begin. Any reason to hear her speak the tongues
 foreign to your ears.
 ~
 1048579 4194472 0 Z
-5 16 5 1000d1+0 1d6+3
+5 0 5 1000d1+0 1d6+3
 50 0
 8 8 2
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 -66324353 -66062209 0
-0 0 3 0 1059840 0 0 0
+0 0 0 0 1059840 0 0 0
 0 0 0 0 0 0 0 0
 > all_greet_prog 100~
 if ispc($n)

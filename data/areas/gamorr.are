@@ -13,7 +13,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 100007619
+#ECONOMY 0 99993599
 
 #MOBILES
 #28000
@@ -142,7 +142,7 @@ A Gurda Beast is prowling around in the mountain shadows.
 13 13 13 13 13 13 13
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 2 198657 0 0 0 2 0
+0 2 0 0 0 0 2 0
 0 0 0 0 0 0 0 0
 > all_greet_prog 100~
 get baby

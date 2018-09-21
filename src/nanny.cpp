@@ -647,7 +647,7 @@ static void NannyReadMotd( Descriptor *d, std::string argument )
   Character *ch = d->Character;
   char buf[MAX_STRING_LENGTH];
 
-  d->WriteToBuffer( "\r\nWelcome to SWRiP 1.5\r\n\r\n", 0 );
+  d->WriteToBuffer( "\r\n&YWelcome to SWRiP 1.5&d\r\n\r\n" );
   AddCharacter( ch );
   d->ConnectionState      = CON_PLAYING;
 
