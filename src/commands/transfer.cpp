@@ -27,7 +27,6 @@ void do_transfer( Character *ch, std::string argument )
           if ( d->ConnectionState == CON_PLAYING
                && d->Character != ch
                && d->Character->InRoom
-               && d->NewState != 2
                && CanSeeCharacter( ch, d->Character ) )
             {
               char buf[MAX_STRING_LENGTH] = {'\0'};

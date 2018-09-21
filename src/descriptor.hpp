@@ -32,17 +32,13 @@ public:
     short Port = 0;
   } Remote;
   
-  socket_t  Socket = INVALID_SOCKET;
+  socket_t Socket = INVALID_SOCKET;
   short ConnectionState = 0;
-  short     Idle = 0;
-  bool      fCommand = false;
-  char      InComm[MAX_INPUT_LENGTH] = {'\0'};
-  //char     *OutBuffer  = nullptr;
-  //unsigned  long OutSize = 0;
-  //int       OutTop = 0;
+  short Idle = 0;
+  bool fCommand = false;
+  char InComm[MAX_INPUT_LENGTH] = {'\0'};
   std::ostringstream OutBuffer;
   unsigned char PreviousColor = 0;
-  int           NewState = 0;
   
 private:
   struct Impl;

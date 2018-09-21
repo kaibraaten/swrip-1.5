@@ -154,40 +154,6 @@ static void NannyGetName( Descriptor *d, std::string argument )
       return;
     }
 
-  if ( !StrCmp( argument, "New" ) )
-    {
-      if (d->NewState == 0)
-	{
-	  /* New player */
-	  /* Don't allow new players if DENY_NEW_PLAYERS is true */
-	  if (SysData.DenyNewPlayers == true)
-	    {
-	      sprintf( buf, "The mud is currently preparing for a reboot.\r\n" );
-	      d->WriteToBuffer( buf, 0 );
-	      sprintf( buf, "New players are not accepted during this time.\r\n" );
-	      d->WriteToBuffer( buf, 0 );
-	      sprintf( buf, "Please try again in a few minutes.\r\n" );
-	      d->WriteToBuffer( buf, 0 );
-	      CloseDescriptor( d, false );
-	    }
-
-	  sprintf( buf, "\r\nChoosing a name is one of the most important parts of this game...\r\n"
-                       "Make sure to pick a name appropriate to the character you are going\r\n"
-                       "to role play, and be sure that it suits our Star Wars theme.\r\n"
-                       "If the name you select is not acceptable, you will be asked to choose\r\n"
- "another one.\r\n\r\nPlease choose a name for your character: ");
-	  d->WriteToBuffer( buf, 0 );
-	  d->NewState++;
-	  d->ConnectionState = CON_GET_NAME;
-	  return;
-	}
-      else
-	{
-	  d->WriteToBuffer( "Illegal name, try another.\r\nName: ", 0);
-	  return;
-	}
-    }
-
   if ( d->CheckPlaying( argument, false ) == BERR )
     {
       d->WriteToBuffer( "Name: ", 0 );
@@ -225,13 +191,6 @@ static void NannyGetName( Descriptor *d, std::string argument )
       sprintf( log_buf, "Denying access to %s@%s.", argument.c_str(), d->Remote.Hostname.c_str() );
       Log->LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
 
-      if (d->NewState != 0)
-	{
-	  d->WriteToBuffer( "That name is already taken. Please choose another: ", 0 );
-	  d->ConnectionState = CON_GET_NAME;
-	  return;
-	}
-
       d->WriteToBuffer( "You are denied access.\r\n", 0 );
       CloseDescriptor( d, false );
       return;
@@ -261,13 +220,6 @@ static void NannyGetName( Descriptor *d, std::string argument )
 
   if ( fOld )
     {
-      if (d->NewState != 0)
-	{
-	  d->WriteToBuffer( "That name is already taken. Please choose another: ", 0 );
-	  d->ConnectionState = CON_GET_NAME;
-	  return;
-	}
-
       /* Old player */
       d->WriteToBuffer( "Password: ", 0 );
       d->WriteToBuffer( echo_off_str, 0 );
