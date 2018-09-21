@@ -1173,7 +1173,7 @@ void Nanny( Descriptor *d, std::string argument );
 /* comm.cpp */
 void DisplayPrompt(Descriptor *d);
 void CloseDescriptor( Descriptor *dclose, bool force );
-bool WriteToDescriptor( socket_t desc, const std::string &txt, int length );
+bool WriteToDescriptor( socket_t desc, const std::string &txt, int length = 0 );
 void SetCharacterColor( short AType, const Character *ch );
 void Act( short AType, const std::string &format, Character *ch,
           const void *arg1, const void *arg2, int type );

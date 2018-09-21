@@ -1,6 +1,7 @@
 #ifndef _SWRIP_DESCRIPTOR_HPP_
 #define _SWRIP_DESCRIPTOR_HPP_
 
+#include <sstream>
 #include <utility/os.hpp>
 #include "constants.hpp"
 
@@ -36,9 +37,10 @@ public:
   short     Idle = 0;
   bool      fCommand = false;
   char      InComm[MAX_INPUT_LENGTH] = {'\0'};
-  char     *OutBuffer  = nullptr;
-  unsigned  long OutSize = 0;
-  int       OutTop = 0;
+  //char     *OutBuffer  = nullptr;
+  //unsigned  long OutSize = 0;
+  //int       OutTop = 0;
+  std::ostringstream OutBuffer;
   unsigned char PreviousColor = 0;
   int           NewState = 0;
   

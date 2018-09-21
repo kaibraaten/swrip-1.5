@@ -27,63 +27,22 @@ Descriptor::Descriptor(socket_t desc)
 {
   Socket = desc;
   ConnectionState = CON_GET_NAME;
-  OutSize = 2000;
   PreviousColor = 0x07;
-
-  AllocateMemory( OutBuffer, char, OutSize );
 }
 
 Descriptor::~Descriptor()
 {
-  FreeMemory(OutBuffer);
   delete pImpl;
 }
 
 void Descriptor::WriteToBuffer(const std::string &txt, size_t length)
 {
-  /*
-   * Find length in case caller didn't.
-   */
-  if ( length <= 0 )
+  if( OutBuffer.str().empty() && !fCommand )
     {
-      length = txt.size();
-    }
-  
-  /*
-   * Initial \r\n if needed.
-   */
-  if ( OutTop == 0 && !fCommand )
-    {
-      OutBuffer[0]      = '\n';
-      OutBuffer[1]      = '\r';
-      OutTop = 2;
+      OutBuffer << "\r\n";
     }
 
-  /*
-   * Expand the buffer as needed.
-   */
-  while ( OutTop + length >= OutSize )
-    {
-      if (OutSize > SHRT_MAX)
-        {
-          /* empty buffer */
-          OutTop = 0;
-          Log->Bug("Buffer overflow. Closing (%s).",
-                   Character ? Character->Name.c_str() : "???" );
-          CloseDescriptor(this, true);
-          return;
-        }
-
-      OutSize *= 2;
-      ReAllocateMemory( OutBuffer, char, OutSize );
-    }
-
-  /*
-   * Copy.
-   */
-  strncpy( OutBuffer + OutTop, txt.c_str(), length );
-  OutTop += length;
-  OutBuffer[OutTop] = '\0';
+  OutBuffer << txt;
 }
 
 bool Descriptor::CheckReconnect( const std::string &name, bool fConn )
@@ -234,43 +193,6 @@ bool Descriptor::FlushBuffer(bool fPrompt)
     ShowCharacterCondition( ch, ch->Fighting->Who );
 
   /*
-   * If buffer has more than 4K inside, spit out .5K at a time   -Thoric
-   */
-  if ( !mud_down && OutTop > 4096 )
-    {
-      memcpy( buf, OutBuffer, 512 );
-      memmove( OutBuffer, OutBuffer + 512, OutTop - 512 );
-      OutTop -= 512;
-
-      if ( SnoopBy )
-        {
-          char snoopbuf[MAX_INPUT_LENGTH] = {'\0'};
-          buf[512] = '\0';
-
-          if ( Character && !Character->Name.empty() )
-            {
-              if (Original && !Original->Name.empty())
-                sprintf( snoopbuf, "%s (%s)", Character->Name.c_str(), Original->Name.c_str() );
-              else
-                sprintf( snoopbuf, "%s", Character->Name.c_str());
-
-              SnoopBy->WriteToBuffer( snoopbuf );
-            }
-
-          SnoopBy->WriteToBuffer( "% ", 2 );
-          SnoopBy->WriteToBuffer( buf );
-        }
-
-      if ( !WriteToDescriptor( Socket, buf, 512 ) )
-        {
-          OutTop = 0;
-          return false;
-        }
-
-      return true;
-    }
-
-  /*
    * Bust a prompt.
    */
   if ( fPrompt && !mud_down && ConnectionState == CON_PLAYING )
@@ -290,9 +212,11 @@ bool Descriptor::FlushBuffer(bool fPrompt)
   /*
    * Short-circuit if nothing to write.
    */
-  if ( OutTop == 0 )
-    return true;
-
+  if( OutBuffer.str().empty() )
+    {
+      return true;
+    }
+  
   /*
    * Snoop-o-rama.
    */
@@ -311,22 +235,16 @@ bool Descriptor::FlushBuffer(bool fPrompt)
         }
 
       SnoopBy->WriteToBuffer( "% ", 2 );
-      SnoopBy->WriteToBuffer( OutBuffer, OutTop );
+      SnoopBy->WriteToBuffer( OutBuffer.str() );
     }
 
   /*
    * OS-dependent output.
    */
-  OutTop = 0;
+  bool success = WriteToDescriptor( Socket, OutBuffer.str() );
   
-  if ( !WriteToDescriptor( Socket, OutBuffer, OutTop ) )
-    {
-      return false;
-    }
-  else
-    {
-      return true;
-    }
+  OutBuffer.str( "" );
+  return success;
 }
 
 bool Descriptor::Read()
@@ -342,7 +260,7 @@ bool Descriptor::Read()
     {
       Log->Info( "%s input overflow!", Remote.Hostname.c_str() );
       WriteToDescriptor( Socket,
-                         "\r\n*** PUT A LID ON IT!!! ***\r\n", 0 );
+                         "\r\n*** PUT A LID ON IT!!! ***\r\n" );
       return false;
     }
 
@@ -410,7 +328,7 @@ void Descriptor::ReadFromBuffer()
     {
       if ( k >= 254 )
         {
-          WriteToDescriptor( Socket, "Line too long.\r\n", 0 );
+          WriteToDescriptor( Socket, "Line too long.\r\n" );
 
           pImpl->InBuffer[i]   = '\n';
           pImpl->InBuffer[i+1] = '\0';
@@ -445,7 +363,7 @@ void Descriptor::ReadFromBuffer()
           if ( ++pImpl->Repeat >= 100 )
             {
               WriteToDescriptor( Socket,
-                                 "\r\n*** PUT A LID ON IT!!! ***\r\n", 0 );
+                                 "\r\n*** PUT A LID ON IT!!! ***\r\n" );
             }
         }
     }

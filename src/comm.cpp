@@ -432,7 +432,7 @@ static void GameLoop( void )
                         ||   d->ConnectionState == CON_EDITING ) )
                 PlayerCharacters->Save( d->Character );
 
-              d->OutTop = 0;
+              d->OutBuffer.str( "" );
               CloseDescriptor( d, true );
               continue;
             }
@@ -457,7 +457,7 @@ static void GameLoop( void )
                 {
                   WriteToDescriptor( d->Socket,
                                      "Idle timeout... disconnecting.\r\n", 0 );
-                  d->OutTop = 0;
+                  d->OutBuffer.str( "" );
                   CloseDescriptor( d, true );
                   continue;
                 }
@@ -482,7 +482,7 @@ static void GameLoop( void )
                                 ||   d->ConnectionState == CON_EDITING ) )
                         PlayerCharacters->Save( d->Character );
 
-                      d->OutTop     = 0;
+                      d->OutBuffer.str( "" );
                       CloseDescriptor( d, false );
                       continue;
                     }
@@ -540,7 +540,7 @@ static void GameLoop( void )
       
       for(Descriptor *d : outputDescriptors)
         {
-          if ( ( d->fCommand || d->OutTop > 0 )
+          if ( ( d->fCommand || !d->OutBuffer.str().empty() )
                &&   FD_ISSET(d->Socket, &out_set) )
             {
               if ( !d->FlushBuffer( true ) )
@@ -550,7 +550,7 @@ static void GameLoop( void )
                             ||   d->ConnectionState == CON_EDITING ) )
                     PlayerCharacters->Save( d->Character );
 
-                  d->OutTop     = 0;
+                  d->OutBuffer.str( "" );
                   CloseDescriptor( d, false );
                 }
             }
@@ -739,7 +739,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
   bool DoNotUnlink = false;
 
   /* flush outbuf */
-  if ( !force && dclose->OutTop > 0 )
+  if ( !force && !dclose->OutBuffer.str().empty() )
     dclose->FlushBuffer( false );
 
   /* say bye to whoever's snooping this descriptor */
