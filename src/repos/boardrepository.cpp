@@ -52,73 +52,18 @@ void LuaBoardRepository::Save(const Board *board) const
 
 void LuaBoardRepository::LoadNote( lua_State *L, Board *board )
 {
-  int idx = lua_gettop( L );
-  const int topAtStart = idx;
-  int topAfterGets = 0;
   Note *note = new Note();
 
-  lua_getfield( L, idx, "Sender" );
-  lua_getfield( L, idx, "Date" );
-  lua_getfield( L, idx, "ToList" );
-  lua_getfield( L, idx, "Subject" );
-  lua_getfield( L, idx, "Voting" );
-  lua_getfield( L, idx, "YesVotes" );
-  lua_getfield( L, idx, "NoVotes" );
-  lua_getfield( L, idx, "Abstentions" );
-  lua_getfield( L, idx, "Text" );
+  LuaGetfieldString( L, "Sender", &note->Sender );
+  LuaGetfieldString( L, "Date", &note->Date );
+  LuaGetfieldString( L, "ToList", &note->ToList );
+  LuaGetfieldString( L, "Subject", &note->Subject );
+  LuaGetfieldBool( L, "Voting", &note->Voting );
+  LuaGetfieldString( L, "YesVotes", &note->YesVotes );
+  LuaGetfieldString( L, "NoVotes", &note->NoVotes );
+  LuaGetfieldString( L, "Abstentions", &note->Abstentions );
+  LuaGetfieldString( L, "Text", &note->Text );
 
-  topAfterGets = lua_gettop( L );
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      note->Sender = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      note->Date = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      note->ToList = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      note->Subject = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      note->Voting = lua_toboolean( L, idx );
-    }
-  else
-    {
-      note->Voting = false;
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      note->YesVotes = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      note->NoVotes = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      note->Abstentions = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      note->Text = lua_tostring( L, idx );
-    }
-
-  lua_pop( L, topAfterGets - topAtStart );
   board->Add(note);
 }
 
@@ -143,83 +88,23 @@ void LuaBoardRepository::LoadNotes( lua_State *L, Board *board )
 
 int LuaBoardRepository::L_BoardEntry( lua_State *L )
 {
-  int idx = lua_gettop( L );
-  const int topAtStart = idx;
-  int topAfterGets = 0;
-  luaL_checktype( L, 1, LUA_TTABLE );
-
   Board *board = new Board();
-  lua_getfield( L, idx, "Name" );
-  lua_getfield( L, idx, "BoardObjectVnum" );
-  lua_getfield( L, idx, "MinReadLevel" );
-  lua_getfield( L, idx, "MinPostLevel" );
-  lua_getfield( L, idx, "MinRemoveLevel" );
-  lua_getfield( L, idx, "MaxPosts" );
-  lua_getfield( L, idx, "Type" );
-  lua_getfield( L, idx, "ReadGroup" );
-  lua_getfield( L, idx, "PostGroup" );
-  lua_getfield( L, idx, "ExtraReaders" );
-  lua_getfield( L, idx, "ExtraRemovers");
 
-  topAfterGets = lua_gettop( L );
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      board->Name = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      board->BoardObject = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      board->MinReadLevel = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      board->MinPostLevel = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      board->MinRemoveLevel = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      board->MaxPosts = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      const char *typeName = lua_tostring( L, idx );
-      board->Type = !StrCmp( typeName, "mail" ) ? BOARD_MAIL : BOARD_NOTE;
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      board->ReadGroup = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      board->PostGroup = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      board->ExtraReaders = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      board->ExtraRemovers = lua_tostring( L, idx );
-    }
-
-  lua_pop( L, topAfterGets - topAtStart );
+  LuaGetfieldString( L, "Name", &board->Name );
+  LuaGetfieldLong( L, "BoardObjectVnum", &board->BoardObject );
+  LuaGetfieldInt( L, "MinReadLevel", &board->MinReadLevel );
+  LuaGetfieldInt( L, "MinPostLevel", &board->MinPostLevel );
+  LuaGetfieldInt( L, "MinRemoveLevel", &board->MinRemoveLevel );
+  LuaGetfieldInt( L, "MaxPosts", &board->MaxPosts );
+  LuaGetfieldString( L, "Type",
+                     [board](const std::string &typeName)
+                     {
+                       board->Type = !StrCmp( typeName, "mail" ) ? BOARD_MAIL : BOARD_NOTE;
+                     });
+  LuaGetfieldString( L, "ReadGroup", &board->ReadGroup );
+  LuaGetfieldString( L, "PostGroup", &board->PostGroup );
+  LuaGetfieldString( L, "ExtraReaders", &board->ExtraReaders );
+  LuaGetfieldString( L, "ExtraRemovers", &board->ExtraRemovers );
 
   LoadNotes( L, board );
 

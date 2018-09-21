@@ -143,57 +143,21 @@ void LuaClanRepository::PushClan( lua_State *L, const void *userData )
 
 void LuaClanRepository::LoadOneMember( lua_State *L, Clan *clan )
 {
-  int idx = lua_gettop( L );
-  const int topAtStart = idx;
   ClanMember *member = new ClanMember();
 
-  lua_getfield( L, idx, "Name" );
-  lua_getfield( L, idx, "MemberSince" );
-  lua_getfield( L, idx, "Ability" );
-  lua_getfield( L, idx, "Level" );
-  lua_getfield( L, idx, "Kills" );
-  lua_getfield( L, idx, "Deaths" );
-  lua_getfield( L, idx, "LastActivity" );
-
-  const int elementsToPop = lua_gettop( L ) - topAtStart;
-  
-  if( !lua_isnil( L, ++idx ) )
-    {
-      member->Name = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      member->Since = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      member->Ability = GetAbility( lua_tostring( L, idx ) );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      member->Level = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      member->Kills = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      member->Deaths = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      member->LastActivity = lua_tointeger( L, idx );
-    }
+  LuaGetfieldString( L, "Name", &member->Name );
+  LuaGetfieldLong( L, "MemberSince", &member->Since );
+  LuaGetfieldString( L, "Ability",
+                     [member](const std::string &abilityName)
+                     {
+                       member->Ability = GetAbility( abilityName );
+                     });
+  LuaGetfieldInt( L, "Level", &member->Level );
+  LuaGetfieldInt( L, "Kills", &member->Kills );
+  LuaGetfieldInt( L, "Deaths", &member->Deaths );
+  LuaGetfieldLong( L, "LastActivity", &member->LastActivity );
 
   clan->Add(member);
-  lua_pop( L, elementsToPop );
 }
 
 void LuaClanRepository::LoadMembers( lua_State *L, Clan *clan )
@@ -223,132 +187,40 @@ void LuaClanRepository::LoadStoreroom( lua_State *L, Clan *clan )
 
 int LuaClanRepository::L_ClanEntry( lua_State *L )
 {
-  int idx = lua_gettop( L );
-  const int topAtStart = idx;
-  int topAfterGets = 0;
-  Clan *clan = NULL;
-  luaL_checktype( L, 1, LUA_TTABLE );
+  std::string clanName;
+  LuaGetfieldString( L, "Name", &clanName );
 
-  lua_getfield( L, idx, "Name" );
-  lua_getfield( L, idx, "MainClan" );
-  lua_getfield( L, idx, "Description" );
-  lua_getfield( L, idx, "PlayerKills" );
-  lua_getfield( L, idx, "PlayerDeaths" );
-  lua_getfield( L, idx, "MobKills" );
-  lua_getfield( L, idx, "MobDeaths" );
-  lua_getfield( L, idx, "Type" );
-  lua_getfield( L, idx, "BoardVnum" );
-  lua_getfield( L, idx, "StoreroomVnum" );
-  lua_getfield( L, idx, "Funds" );
-  lua_getfield( L, idx, "JailVnum" );
-  lua_getfield( L, idx, "EnlistRoom1Vnum" );
-  lua_getfield( L, idx, "EnlistRoom2Vnum" );
-  lua_getfield( L, idx, "Leader" );
-  lua_getfield( L, idx, "Number1" );
-  lua_getfield( L, idx, "Number2" );
-  lua_getfield( L, idx, "FoundationDate" );
-
-  topAfterGets = lua_gettop( L );
-
-  if( !lua_isnil( L, ++idx ) )
+  Clan *clan = nullptr;
+  
+  if( !clanName.empty() )
     {
       clan = AllocateClan();
-      clan->Name = lua_tostring( L, idx );
+      clan->Name = clanName;
       Log->Info( "Loading %s", clan->Name.c_str() );
     }
   else
     {
       Log->Bug( "%s: Found clan without name!", __FUNCTION__ );
-      lua_pop( L, topAfterGets - topAtStart );
       return 0;
     }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->tmpstr = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->Description = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->PlayerKills = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->PlayerDeaths = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->MobKills = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->MobDeaths = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->Type = (ClanType) lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->Board = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->Storeroom = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->Funds = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->Jail = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->EnlistRoom1 = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->EnlistRoom2 = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->Leadership.Leader = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->Leadership.Number1 = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->Leadership.Number2 = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->FoundationDate = lua_tointeger( L, idx );
-    }
-
-  lua_pop( L, topAfterGets - topAtStart );
+  
+  LuaGetfieldString( L, "MainClan", &clan->tmpstr );
+  LuaGetfieldString( L, "Description", &clan->Description );
+  LuaGetfieldInt( L, "PlayerKills", &clan->PlayerKills );
+  LuaGetfieldInt( L, "PlayerDeaths", &clan->PlayerDeaths );
+  LuaGetfieldInt( L, "MobKills", &clan->MobKills );
+  LuaGetfieldInt( L, "MobDeaths", &clan->MobDeaths );
+  LuaGetfieldInt( L, "Type", &clan->Type );
+  LuaGetfieldLong( L, "BoardVnum", &clan->Board );
+  LuaGetfieldLong( L, "StoreroomVnum", &clan->Storeroom );
+  LuaGetfieldLong( L, "Funds", &clan->Funds );
+  LuaGetfieldLong( L, "JailVnum", &clan->Jail );
+  LuaGetfieldLong( L, "EnlistRoom1Vnum", &clan->EnlistRoom1 );
+  LuaGetfieldLong( L, "EnlistRoom2Vnum", &clan->EnlistRoom2 );
+  LuaGetfieldString( L, "Leader", &clan->Leadership.Leader );
+  LuaGetfieldString( L, "Number1", &clan->Leadership.Number1 );
+  LuaGetfieldString( L, "Number2", &clan->Leadership.Number2 );
+  LuaGetfieldLong( L, "FoundationDate", &clan->FoundationDate );
 
   Clans->Add( clan );
   LoadMembers( L, clan );

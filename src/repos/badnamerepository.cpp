@@ -64,20 +64,10 @@ void LuaBadNameRepository::PushBadNames( lua_State *L, const void *ud )
 
 int LuaBadNameRepository::L_BadNameEntry( lua_State *L )
 {
-  int idx = lua_gettop( L );
-  const int topAtStart = idx;
-  int elementsToPop = 0;
-  luaL_checktype( L, 1, LUA_TTABLE );
-
-  lua_getfield( L, idx, "Name" );
-
-  elementsToPop = lua_gettop( L ) - topAtStart;
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      AddBadName( lua_tostring( L, idx ) );
-    }
-
-  lua_pop( L, elementsToPop );
+  LuaGetfieldString( L, "Name",
+                     [](const std::string &name)
+                     {
+                       AddBadName( name );
+                     });
   return 0;
 }

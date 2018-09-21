@@ -35,10 +35,10 @@ public:
   std::string ExtraReaders;         /* Can give read rights to players */
   std::string ExtraRemovers;        /* Can give remove rights to players */
   vnum_t BoardObject = INVALID_VNUM;             /* Vnum of board object            */
-  short MinReadLevel = 0;        /* Minimum level to read a note    */
-  short MinPostLevel = 0;        /* Minimum level to post a note    */
-  short MinRemoveLevel = 0;      /* Minimum level to remove a note  */
-  short MaxPosts = 0;             /* Maximum amount of notes allowed */
+  int MinReadLevel = 0;        /* Minimum level to read a note    */
+  int MinPostLevel = 0;        /* Minimum level to post a note    */
+  int MinRemoveLevel = 0;      /* Minimum level to remove a note  */
+  int MaxPosts = 0;             /* Maximum amount of notes allowed */
   int Type = BOARD_NOTE;                  /* Normal board or mail board? */
 
 private:

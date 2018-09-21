@@ -64,33 +64,10 @@ void LuaBanRepository::PushBans( lua_State *L, const void *ud )
 
 int LuaBanRepository::L_BanEntry( lua_State *L )
 {
-  int idx = lua_gettop( L );
-  const int topAtStart = idx;
-  luaL_checktype( L, 1, LUA_TTABLE );
-
-  lua_getfield( L, idx, "Site" );
-  lua_getfield( L, idx, "BanTime" );
-  lua_getfield( L, idx, "Level" );
-
-  int elementsToPop = lua_gettop( L ) - topAtStart;
   std::shared_ptr<Ban> ban = std::make_shared<Ban>();
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ban->Site = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ban->BanTime = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ban->Level = lua_tointeger( L, idx );
-    }
-
-  lua_pop( L, elementsToPop );
+  LuaGetfieldString( L, "Site", &ban->Site );
+  LuaGetfieldString( L, "BanTime", &ban->BanTime );
+  LuaGetfieldInt( L, "Level", &ban->Level );
   Bans->Add(ban);
   return 0;
 }
