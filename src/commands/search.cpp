@@ -6,15 +6,13 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "object.hpp"
+#include "exit.hpp"
 
-void do_search( Character *ch, std::string argument )
+void do_search( Character *ch, std::string arg )
 {
-#pragma message("Implement this when Object stores contained Objects in std::list.")
-#if 0
-  char arg[MAX_INPUT_LENGTH];
   Object *obj = NULL;
   Object *container = NULL;
-  Object *startobj = NULL;
+  std::list<Object*> searchList;
   int percent = 0;
   DirectionType door = DIR_INVALID;
   bool found = false;
@@ -34,9 +32,7 @@ void do_search( Character *ch, std::string argument )
           return;
         }
 
-      argument = OneArgument( argument, arg );
-
-      if ( !IsNullOrEmpty( arg ) && (door = GetDirection( arg )) == -1 )
+      if ( !arg.empty() && (door = GetDirection( arg )) == -1 )
         {
           container = GetObjectHere( ch, arg );
 
@@ -72,7 +68,7 @@ void do_search( Character *ch, std::string argument )
           return;
         }
 
-      strcpy( arg, (const char*)ch->dest_buf );
+      arg = static_cast<const char*>( ch->dest_buf );
       FreeMemory( ch->dest_buf );
       break;
 
@@ -85,33 +81,31 @@ void do_search( Character *ch, std::string argument )
 
   ch->SubState = SUB_NONE;
 
-  if ( IsNullOrEmpty( arg ) )
+  if ( arg.empty() )
     {
-      startobj = ch->InRoom->FirstContent;
+      searchList = ch->InRoom->Objects();
     }
   else
     {
-      if ( (door = GetDirection( arg )) != -1 )
-        {
-          startobj = NULL;
-        }
-      else
+      door = GetDirection( arg );
+      
+      if ( door == DIR_INVALID )
         {
           container = GetObjectHere( ch, arg );
 
-          if ( !container )
+          if ( container == nullptr )
             {
               ch->Echo("You can't find that here.\r\n");
               return;
             }
 
-          startobj = container->FirstContent;
+          searchList = container->Objects();
         }
     }
 
   found = false;
 
-  if ( (!startobj && door == -1) || IsNpc(ch) )
+  if ( (searchList.empty() && door == DIR_INVALID) || IsNpc(ch) )
     {
       ch->Echo("You find nothing.\r\n");
       LearnFromFailure( ch, gsn_search );
@@ -129,8 +123,9 @@ void do_search( Character *ch, std::string argument )
            && IsBitSet( pexit->Flags, EX_xSEARCHABLE )
            && percent < (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_search]) )
         {
-          Act( AT_SKILL, "Your search reveals the $d!", ch, NULL, pexit->Keyword, TO_CHAR );
-          Act( AT_SKILL, "$n finds the $d!", ch, NULL, pexit->Keyword, TO_ROOM );
+          Act( AT_SKILL, "Your search reveals the $d!",
+               ch, nullptr, pexit->Keyword.c_str(), TO_CHAR );
+          Act( AT_SKILL, "$n finds the $d!", ch, nullptr, pexit->Keyword.c_str(), TO_ROOM );
           RemoveBit( pexit->Flags, EX_SECRET );
           LearnFromSuccess( ch, gsn_search );
           return;
@@ -138,11 +133,12 @@ void do_search( Character *ch, std::string argument )
     }
   else
     {
-      for ( obj = startobj; obj; obj = obj->NextContent )
+      for( Object *hiddenObject : searchList )
         {
           if ( IS_OBJ_STAT( obj, ITEM_HIDDEN )
                && percent < ch->PCData->Learned[gsn_search] )
             {
+              obj = hiddenObject;
               found = true;
               break;
             }
@@ -161,5 +157,4 @@ void do_search( Character *ch, std::string argument )
   Act( AT_SKILL, "Your search reveals $p!", ch, obj, NULL, TO_CHAR );
   Act( AT_SKILL, "$n finds $p!", ch, obj, NULL, TO_ROOM );
   LearnFromSuccess( ch, gsn_search );
-#endif
 }
