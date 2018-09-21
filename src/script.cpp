@@ -18,7 +18,6 @@ lua_State *LuaMasterState = nullptr;
 
 static void SetLuaPath( lua_State * );
 static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx );
-static void LuaPushOneAffect( lua_State *L, const Affect *affect, int idx );
 
 lua_State *CreateLuaState( void )
 {
@@ -395,7 +394,7 @@ void LuaLoadCurrentAndMax( lua_State *L, const std::string &key, int *current, i
   lua_pop( L, 1 );
 }
 
-static void LuaPushOneAffect( lua_State *L, const Affect *affect, int idx )
+static void LuaPushCharacterAffect( lua_State *L, const Affect *affect, int idx )
 {
   const Skill *skill = GetSkill( affect->Type );
   
@@ -415,13 +414,7 @@ static void LuaPushOneAffect( lua_State *L, const Affect *affect, int idx )
       LuaSetfieldString( L, "AffectType", AffectTypes[affect->Location] );
     }
   
-  LuaSetfieldNumber( L, "Modifier",
-                     (affect->Location == APPLY_WEAPONSPELL
-                      || affect->Location == APPLY_WEARSPELL
-                      || affect->Location == APPLY_REMOVESPELL
-                      || affect->Location == APPLY_STRIPSN)
-                     && IS_VALID_SN(affect->Modifier)
-                     ? SkillTable[affect->Modifier]->Slot : affect->Modifier );
+  LuaSetfieldNumber( L, "Modifier", affect->Modifier );
   
   if( affect->Type >= 0 && affect->Type < TYPE_PERSONAL )
     {
@@ -447,8 +440,61 @@ static void LuaPushOneAffect( lua_State *L, const Affect *affect, int idx )
   lua_settable( L, -3 );
 }
 
-void LuaPushAffects( lua_State *L, const std::list<Affect*> &affects,
-                     const std::string &key )
+static void LuaPushObjectAffect( lua_State *L, const Affect *affect, int idx )
+{
+  const Skill *skill = GetSkill( affect->Type );
+
+  if( affect->Type >= 0 && skill == nullptr )
+    {
+      return;
+    }
+
+  lua_pushinteger( L, idx );
+  lua_newtable( L );
+
+  LuaSetfieldNumber( L, "Duration", affect->Duration );
+  LuaSetfieldNumber( L, "Location", affect->Location );
+
+  if( affect->Location >= 0 && affect->Location < static_cast<int>( AffectTypes.size() ) )
+    {
+      LuaSetfieldString( L, "AffectType", AffectTypes[affect->Location] );
+    }
+
+  LuaSetfieldNumber( L, "Modifier",
+                     (affect->Location == APPLY_WEAPONSPELL
+                      || affect->Location == APPLY_WEARSPELL
+                      || affect->Location == APPLY_REMOVESPELL
+                      || affect->Location == APPLY_STRIPSN)
+                     && IS_VALID_SN(affect->Modifier)
+                     ? SkillTable[affect->Modifier]->Slot : affect->Modifier );
+
+  if( affect->Type >= 0 && affect->Type < TopSN )
+    {
+      LuaSetfieldString( L, "Skill", skill->Name );
+    }
+  else
+    {
+      LuaSetfieldNumber( L, "Type", affect->Type );
+    }
+
+  if( affect->AffectedBy )
+    {
+      for(size_t x = 0; x < MAX_BIT; ++x )
+        {
+          if( IsBitSet( affect->AffectedBy, 1 << x ) )
+            {
+              LuaSetfieldString( L, "AffectedBy", AffectFlags[x] );
+              break;
+            }
+        }
+    }
+
+  lua_settable( L, -3 );
+}
+
+static void LuaPushAffects( lua_State *L, const std::list<Affect*> &affects,
+                            const std::string &key,
+                            std::function<void(lua_State*, const Affect*, int)> pushOneAffect)
 {
   if( !affects.empty() )
     {
@@ -458,11 +504,23 @@ void LuaPushAffects( lua_State *L, const std::list<Affect*> &affects,
 
       for ( const Affect *affect : affects )
         {
-          LuaPushOneAffect( L, affect, ++idx );
+          pushOneAffect( L, affect, ++idx );
         }
 
       lua_settable( L, -3 );
     }
+}
+
+void LuaPushCharacterAffects( lua_State *L, const std::list<Affect*> &affects,
+                              const std::string &key )
+{
+  LuaPushAffects( L, affects, key, LuaPushCharacterAffect );
+}
+
+void LuaPushObjectAffects( lua_State *L, const std::list<Affect*> &affects,
+                           const std::string &key )
+{
+  LuaPushAffects( L, affects, key, LuaPushObjectAffect );
 }
 
 void LuaPushExtraDescriptions( lua_State *L, const std::list<ExtraDescription*> &extras )
@@ -727,7 +785,7 @@ static void LuaPushObject( lua_State *L, const Object *obj, size_t idx )
       break;
     }
 
-  LuaPushAffects( L, obj->Affects(), "Affects" );
+  LuaPushObjectAffects( L, obj->Affects(), "Affects" );
   LuaPushExtraDescriptions( L, obj->ExtraDescriptions() );
   LuaPushObjects( L, obj->Objects(), "Contents" );  
   lua_settable( L, -3 );
@@ -936,7 +994,7 @@ void LuaPushCharacter( lua_State *L, const Character *ch,
   LuaPushCharacterSaves( L, ch ); // ch->Saving.PoisonDeath etc
   LuaPushCharacterStats( L, ch );
 
-  LuaPushAffects( L, ch->Affects() );
+  LuaPushCharacterAffects( L, ch->Affects() );
   LuaPushObjects( L, ch->Objects(), "Inventory" );
   
   pushExtra( L, ch );
@@ -1098,14 +1156,15 @@ static void LuaLoadCharacterStats( lua_State *L, Character *ch )
   LuaLoadStats( L, &ch->StatMods, "StatModifiers" );
 }
 
-static Affect *LuaLoadOneAffect( lua_State *L )
+static Affect *LuaLoadCharacterAffect( lua_State *L )
 {
   Affect affect;
-  
+
   LuaGetfieldInt( L, "Duration", &affect.Duration );
   LuaGetfieldInt( L, "Location", &affect.Location );
   LuaGetfieldInt( L, "Modifier", &affect.Modifier );
-
+  LuaGetfieldInt( L, "Type", &affect.Type );
+  
   bool error = false;
   LuaGetfieldString( L, "Skill",
                      [&affect, &error](const std::string &skillName)
@@ -1116,15 +1175,15 @@ static Affect *LuaLoadOneAffect( lua_State *L )
                          {
                            sn = LookupHerb( skillName );
 
-                           if ( sn < 0 )
+                           if ( sn >= 0 )
+                             {
+                               sn += TYPE_HERB;
+                             }
+                           else
                              {
                                Log->Bug( "%s (%d): unknown skill %s.",
                                          __FUNCTION__, __LINE__, skillName.c_str() );
                                error = true;
-                             }
-                           else
-                             {
-                               sn += TYPE_HERB;
                              }
                          }
 
@@ -1137,11 +1196,56 @@ static Affect *LuaLoadOneAffect( lua_State *L )
     }
 
   affect.AffectedBy = LuaLoadFlags( L, "AffectedBy" );
+
+  return new Affect( affect );
+}
+
+static Affect *LuaLoadObjectAffect( lua_State *L )
+{
+  Affect affect;
+  
+  LuaGetfieldInt( L, "Duration", &affect.Duration );
+  LuaGetfieldInt( L, "Location", &affect.Location );
+  LuaGetfieldInt( L, "Modifier", &affect.Modifier );
+  LuaGetfieldInt( L, "Type", &affect.Type );
+  
+  bool error = false;
+  LuaGetfieldString( L, "Skill",
+                     [&affect, &error](const std::string &skillName)
+                     {
+                       int sn = LookupSkill( skillName );
+
+                       if ( sn < 0 )
+                         {
+                           Log->Bug( "%s (%d): unknown skill %s.",
+                                     __FUNCTION__, __LINE__, skillName.c_str() );
+                           error = true;
+                         }
+                       else
+                         {
+                           affect.Type = sn;
+                         }
+                     });
+
+  if( error )
+    {
+      return nullptr;
+    }
+
+  affect.AffectedBy = LuaLoadFlags( L, "AffectedBy" );
+
+  if ( affect.Location == APPLY_WEAPONSPELL
+       || affect.Location == APPLY_WEARSPELL
+       || affect.Location == APPLY_REMOVESPELL )
+    {
+      affect.Modifier = SkillNumberFromSlot( affect.Modifier );
+    }
   
   return new Affect( affect );
 }
 
-std::list<Affect*> LuaLoadAffects( lua_State *L, const std::string &key )
+static std::list<Affect*> LuaLoadAffects( lua_State *L, const std::string &key,
+                                          std::function<Affect*(lua_State*)> loadOneAffect)
 {
   std::list<Affect*> affects;
   int idx = lua_gettop( L );
@@ -1153,7 +1257,7 @@ std::list<Affect*> LuaLoadAffects( lua_State *L, const std::string &key )
 
       while( lua_next( L, -2 ) )
         {
-          Affect *affect = LuaLoadOneAffect( L );
+          Affect *affect = loadOneAffect( L );
 
           if( affect != nullptr )
             {
@@ -1166,6 +1270,16 @@ std::list<Affect*> LuaLoadAffects( lua_State *L, const std::string &key )
 
   lua_pop( L, 1 );
   return affects;
+}
+
+std::list<Affect*> LuaLoadCharacterAffects( lua_State *L, const std::string &key )
+{
+  return LuaLoadAffects( L, key, LuaLoadCharacterAffect );
+}
+
+std::list<Affect*> LuaLoadObjectAffects( lua_State *L, const std::string &key )
+{
+  return LuaLoadAffects( L, key, LuaLoadObjectAffect );
 }
 
 static void ConvertSpellNameToOvalue( lua_State *L, const std::string &key,
@@ -1255,17 +1369,10 @@ static Object *LuaLoadObject( lua_State *L )
   LuaLoadOvalues( L, obj->Value );
   LuaLoadObjectSpells( L, obj );
   
-  std::list<Affect*> affects = LuaLoadAffects( L, "Affects" );
+  std::list<Affect*> affects = LuaLoadObjectAffects( L, "Affects" );
 
   for( Affect *affect : affects )
     {
-      if ( affect->Location == APPLY_WEAPONSPELL
-           || affect->Location == APPLY_WEARSPELL
-           || affect->Location == APPLY_REMOVESPELL )
-        {
-          affect->Modifier = SkillNumberFromSlot( affect->Modifier );
-        }
-
       obj->Add( affect );
     }
 
@@ -1388,7 +1495,7 @@ void LuaLoadCharacter( lua_State *L, Character *ch,
   LuaLoadCharacterSaves( L, ch );
   LuaLoadCharacterStats( L, ch );
 
-  auto affects = LuaLoadAffects( L, "Affects" );
+  auto affects = LuaLoadCharacterAffects( L, "Affects" );
 
   for( Affect *aff : affects )
     {

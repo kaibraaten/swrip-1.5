@@ -74,9 +74,12 @@ void LuaPushFlags( lua_State *L, unsigned long flags,
 unsigned int LuaLoadFlags( lua_State *L, const std::string &key );
 void LuaPushSmaugAffects( lua_State *L, const SmaugAffect *affectList );
 SmaugAffect *LuaLoadSmaugAffects( lua_State *L );
-void LuaPushAffects( lua_State *L, const std::list<Affect*> &affects,
-                     const std::string &key = "Affects" );
-std::list<Affect*> LuaLoadAffects( lua_State *L, const std::string &key = "Affects" );
+void LuaPushCharacterAffects( lua_State *L, const std::list<Affect*> &affects,
+                              const std::string &key = "Affects" );
+void LuaPushObjectAffects( lua_State *L, const std::list<Affect*> &affects,
+                           const std::string &key = "Affects" );
+std::list<Affect*> LuaLoadCharacterAffects( lua_State *L, const std::string &key = "Affects" );
+std::list<Affect*> LuaLoadObjectAffects( lua_State *L, const std::string &key = "Affects" );
 void LuaPushObjects( lua_State *L, const std::list<Object*> &objects,
                      const std::string &key = "Objects" );
 std::list<Object*> LuaLoadObjects( lua_State *L, const std::string &key = "Objects" );
