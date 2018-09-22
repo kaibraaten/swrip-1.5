@@ -9,11 +9,11 @@ class Command
 {
 public:
   std::string Name;
-  CmdFun  *Function = nullptr;
+  CmdFun *Function = nullptr;
   std::string FunctionName;
   PositionType Position = 0;
-  short    Level = 0;
-  int      Log = 0;
+  int Level = 0;
+  int Log = 0;
   timerset *UseRec = nullptr;
 };
 

@@ -77,47 +77,21 @@ void LuaPlanetRepository::LoadPlanetAreas( lua_State *L, Planet *planet )
 
 int LuaPlanetRepository::L_PlanetEntry( lua_State *L )
 {
-  int idx = lua_gettop( L );
-  const int topAtStart = idx;
-  int topAfterGets = 0;
-  luaL_checktype( L, 1, LUA_TTABLE );
-
   Planet *planet = new Planet();
 
-  lua_getfield( L, idx, "Name" );
-  lua_getfield( L, idx, "BaseValue" );
-  lua_getfield( L, idx, "PopulationSupport" );
-  lua_getfield( L, idx, "Spaceobject" );
-  lua_getfield( L, idx, "GovernedBy" );
-
-  topAfterGets = lua_gettop( L );
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      planet->Name = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      planet->BaseValue = lua_tonumber( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      planet->PopularSupport = lua_tonumber( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      planet->Spaceobject = GetSpaceobject( lua_tostring( L, idx ) );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      planet->GovernedBy = GetClan( lua_tostring( L, idx ) );
-      }
-
-  lua_pop( L, topAfterGets - topAtStart );
+  LuaGetfieldString( L, "Name", &planet->Name );
+  LuaGetfieldLong( L, "BaseValue", &planet->BaseValue );
+  LuaGetfieldDouble( L, "PopulationSupport", &planet->PopularSupport );
+  LuaGetfieldString( L, "Spaceobject",
+                     [planet](const std::string &name)
+                     {
+                       planet->Spaceobject = GetSpaceobject( name );
+                     });
+  LuaGetfieldString( L, "GovernedBy",
+                     [planet](const std::string &name)
+                     {
+                       planet->GovernedBy = GetClan( name );
+                     });
 
   planet->Flags = LuaLoadFlags( L, "Flags" );
   LoadPlanetAreas( L, planet );

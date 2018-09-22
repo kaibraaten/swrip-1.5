@@ -20,7 +20,7 @@ public:
   Clan *GovernedBy = nullptr;
   int Population = 0;
   int Flags = 0;
-  float PopularSupport = 0.0;
+  double PopularSupport = 0.0;
 
 private:
   struct Impl;

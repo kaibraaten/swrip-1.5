@@ -226,33 +226,9 @@ static void LoadInstruments( lua_State *L, Ship *ship )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int sub_idx = lua_gettop( L );
-      const int topAtStart = sub_idx;
-      int elementsToPop = 0;
-      luaL_checktype( L, 1, LUA_TTABLE );
-
-      lua_getfield( L, sub_idx, "AstroArray" );
-      lua_getfield( L, sub_idx, "Comm" );
-      lua_getfield( L, sub_idx, "Sensor" );
-
-      elementsToPop = lua_gettop( L ) - topAtStart;
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Instruments.AstroArray = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Instruments.Comm = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Instruments.Sensor = lua_tointeger( L, sub_idx );
-        }
-
-      lua_pop( L, elementsToPop );
+      LuaGetfieldInt( L, "AstroArray", &ship->Instruments.AstroArray );
+      LuaGetfieldInt( L, "Comm", &ship->Instruments.Comm );
+      LuaGetfieldInt( L, "Sensor", &ship->Instruments.Sensor );
     }
 
   lua_pop( L, 1 );
@@ -265,30 +241,14 @@ static void LoadThrusters( lua_State *L, Ship *ship )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int sub_idx = lua_gettop( L );
-      const int topAtStart = sub_idx;
-      int elementsToPop = 0;
-      luaL_checktype( L, 1, LUA_TTABLE );
-
-      lua_getfield( L, sub_idx, "Maneuver" );
-
-      elementsToPop = lua_gettop( L ) - topAtStart;
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Thrusters.Maneuver = lua_tointeger( L, sub_idx );
-        }
-
-      lua_pop( L, elementsToPop );
-
+      LuaGetfieldInt( L, "Maneuver", &ship->Thrusters.Maneuver );
       LoadCurrentAndMax( L, "Speed", ship->Thrusters.Speed );
       ship->Thrusters.Speed.Current = 0;
-
       LoadCurrentAndMax( L, "Energy", ship->Thrusters.Energy );
     }
 
   lua_pop( L, 1 );
-  }
+}
 
 static void LoadHyperdrive( lua_State *L, Ship *ship )
 {
@@ -297,20 +257,7 @@ static void LoadHyperdrive( lua_State *L, Ship *ship )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int sub_idx = lua_gettop( L );
-      const int topAtStart = sub_idx;
-      int elementsToPop = 0;
-      luaL_checktype( L, 1, LUA_TTABLE );
-
-      lua_getfield( L, sub_idx, "Speed" );
-      elementsToPop = lua_gettop( L ) - topAtStart;
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Hyperdrive.Speed = lua_tointeger( L, sub_idx );
-        }
-
-      lua_pop( L, elementsToPop );
+      LuaGetfieldInt( L, "Speed", &ship->Hyperdrive.Speed );
     }
 
   lua_pop( L, 1 );
@@ -323,21 +270,7 @@ static void LoadTube( lua_State *L, Ship *ship )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int sub_idx = lua_gettop( L );
-      const int topAtStart = sub_idx;
-      int elementsToPop = 0;
-      luaL_checktype( L, 1, LUA_TTABLE );
-
-      lua_getfield( L, sub_idx, "State" );
-      elementsToPop = lua_gettop( L ) - topAtStart;
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->WeaponSystems.Tube.State = lua_tointeger( L, sub_idx );
-        }
-
-      lua_pop( L, elementsToPop );
-
+      LuaGetfieldInt( L, "State", &ship->WeaponSystems.Tube.State );
       LoadCurrentAndMax( L, "Missiles", ship->WeaponSystems.Tube.Missiles );
       LoadCurrentAndMax( L, "Rockets", ship->WeaponSystems.Tube.Rockets );
       LoadCurrentAndMax( L, "Torpedoes", ship->WeaponSystems.Tube.Torpedoes );
@@ -353,26 +286,8 @@ static void LoadLaser( lua_State *L, Ship *ship )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int sub_idx = lua_gettop( L );
-      const int topAtStart = sub_idx;
-      int elementsToPop = 0;
-      luaL_checktype( L, 1, LUA_TTABLE );
-
-      lua_getfield( L, sub_idx, "Count" );
-      lua_getfield( L, sub_idx, "State" );
-      elementsToPop = lua_gettop( L ) - topAtStart;
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->WeaponSystems.Laser.Count = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->WeaponSystems.Laser.State = lua_tointeger( L, sub_idx );
-        }
-
-      lua_pop( L, elementsToPop );
+      LuaGetfieldInt( L, "Count", &ship->WeaponSystems.Laser.Count );
+      LuaGetfieldInt( L, "State", &ship->WeaponSystems.Laser.State );
     }
 
   lua_pop( L, 1 );
@@ -385,26 +300,8 @@ static void LoadIonCannon( lua_State *L, Ship *ship )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int sub_idx = lua_gettop( L );
-      const int topAtStart = sub_idx;
-      int elementsToPop = 0;
-      luaL_checktype( L, 1, LUA_TTABLE );
-
-      lua_getfield( L, sub_idx, "Count" );
-      lua_getfield( L, sub_idx, "State" );
-      elementsToPop = lua_gettop( L ) - topAtStart;
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->WeaponSystems.IonCannon.Count = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->WeaponSystems.IonCannon.State = lua_tointeger( L, sub_idx );
-        }
-
-      lua_pop( L, elementsToPop );
+      LuaGetfieldInt( L, "Count", &ship->WeaponSystems.IonCannon.Count );
+      LuaGetfieldInt( L, "State", &ship->WeaponSystems.IonCannon.State );
     }
 
   lua_pop( L, 1 );
@@ -417,26 +314,8 @@ static void LoadTractorBeam( lua_State *L, Ship *ship )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int sub_idx = lua_gettop( L );
-      const int topAtStart = sub_idx;
-      int elementsToPop = 0;
-      luaL_checktype( L, 1, LUA_TTABLE );
-
-      lua_getfield( L, sub_idx, "Strength" );
-      lua_getfield( L, sub_idx, "State" );
-      elementsToPop = lua_gettop( L ) - topAtStart;
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->WeaponSystems.TractorBeam.Strength = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->WeaponSystems.TractorBeam.State = lua_tointeger( L, sub_idx );
-        }
-
-      lua_pop( L, elementsToPop );
+      LuaGetfieldInt( L, "Strength", &ship->WeaponSystems.TractorBeam.Strength );
+      LuaGetfieldInt( L, "State", &ship->WeaponSystems.TractorBeam.State );
     }
 
   lua_pop( L, 1 );
@@ -501,75 +380,16 @@ static void LoadRooms( lua_State *L, Ship *ship )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int sub_idx = lua_gettop( L );
-      const int topAtStart = sub_idx;
-      int elementsToPop = 0;
-luaL_checktype( L, 1, LUA_TTABLE );
-
-      lua_getfield( L, sub_idx, "First" );
-      lua_getfield( L, sub_idx, "Last" );
-      lua_getfield( L, sub_idx, "Cockpit" );
-      lua_getfield( L, sub_idx, "Entrance" );
-      lua_getfield( L, sub_idx, "Hangar" );
-      lua_getfield( L, sub_idx, "Engine" );
-      lua_getfield( L, sub_idx, "Navseat" );
-      lua_getfield( L, sub_idx, "Pilotseat" );
-      lua_getfield( L, sub_idx, "Coseat" );
-      lua_getfield( L, sub_idx, "Gunseat" );
-
-      elementsToPop = lua_gettop( L ) - topAtStart;
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Rooms.First = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Rooms.Last = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Rooms.Cockpit = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Rooms.Entrance = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Rooms.Hangar = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Rooms.Engine = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Rooms.Navseat = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Rooms.Pilotseat = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Rooms.Coseat = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          ship->Rooms.Gunseat = lua_tointeger( L, sub_idx );
-        }
-
-      lua_pop( L, elementsToPop );
+      LuaGetfieldLong( L, "First", &ship->Rooms.First );
+      LuaGetfieldLong( L, "Last", &ship->Rooms.Last );
+      LuaGetfieldLong( L, "Cockpit", &ship->Rooms.Cockpit );
+      LuaGetfieldLong( L, "Entrance", &ship->Rooms.Entrance );
+      LuaGetfieldLong( L, "Hangar", &ship->Rooms.Hangar );
+      LuaGetfieldLong( L, "Engine", &ship->Rooms.Engine );
+      LuaGetfieldLong( L, "Navseat", &ship->Rooms.Navseat );
+      LuaGetfieldLong( L, "Pilotseat", &ship->Rooms.Pilotseat );
+      LuaGetfieldLong( L, "Coseat", &ship->Rooms.Coseat );
+      LuaGetfieldLong( L, "Gunseat", &ship->Rooms.Gunseat );
     }
 
   lua_pop( L, 1 );
@@ -577,113 +397,32 @@ luaL_checktype( L, 1, LUA_TTABLE );
 
 static int L_ShipEntry( lua_State *L )
 {
-  int idx = lua_gettop( L );
-  const int topAtStart = idx;
-  int elementsToPop = 0;
-  luaL_checktype( L, 1, LUA_TTABLE );
-
   Ship *ship = new Ship();
 
-  lua_getfield( L, idx, "Name" );
-  lua_getfield( L, idx, "PersonalName" );
-  lua_getfield( L, idx, "Description" );
-  lua_getfield( L, idx, "Owner" );
-  lua_getfield( L, idx, "Pilot" );
-  lua_getfield( L, idx, "CoPilot" );
-  lua_getfield( L, idx, "Class" );
-  lua_getfield( L, idx, "Shipyard" );
-  lua_getfield( L, idx, "Location" );
-  lua_getfield( L, idx, "LastDock" );
-  lua_getfield( L, idx, "Type" );
-  lua_getfield( L, idx, "State" );
-  lua_getfield( L, idx, "Alarm" );
-  lua_getfield( L, idx, "DockingPorts" );
-  lua_getfield( L, idx, "Guard" );
-  lua_getfield( L, idx, "Home" );
-
-  elementsToPop = lua_gettop( L ) - topAtStart;
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->Name = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->PersonalName = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->Description = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->Owner = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->Pilot = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->CoPilot = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->Class = GetShipClass( lua_tostring( L, idx ) );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->Shipyard = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->Location = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->LastDock = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->Type = GetShipType( lua_tostring( L, idx ) );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->State = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->Alarm = lua_toboolean( L, idx );
-      }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->DockingPorts = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->Guard = lua_toboolean( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      ship->Home = lua_tostring( L, idx );
-    }
-
-  lua_pop( L, elementsToPop );
+  LuaGetfieldString( L, "Name", &ship->Name );
+  LuaGetfieldString( L, "PersonalName", &ship->PersonalName );
+  LuaGetfieldString( L, "Description", &ship->Description );
+  LuaGetfieldString( L, "Owner", &ship->Owner );
+  LuaGetfieldString( L, "Pilot", &ship->Pilot );
+  LuaGetfieldString( L, "CoPilot", &ship->CoPilot );
+  LuaGetfieldString( L, "Class",
+                     [ship](const std::string &className)
+                     {
+                       ship->Class = GetShipClass( className );
+                     });
+  LuaGetfieldLong( L, "Shipyard", &ship->Shipyard );
+  LuaGetfieldLong( L, "Location", &ship->Location );
+  LuaGetfieldLong( L, "LastDock", &ship->LastDock );
+  LuaGetfieldString( L, "Type",
+                     [ship](const std::string typeName)
+                     {
+                       ship->Type = GetShipType( typeName );
+                     });
+  LuaGetfieldInt( L, "State", &ship->State );
+  LuaGetfieldBool( L, "Alarm", &ship->Alarm );
+  LuaGetfieldInt( L, "DockingPorts", &ship->DockingPorts );
+  LuaGetfieldBool( L, "Guard", &ship->Guard );
+  LuaGetfieldString( L, "Home", &ship->Home );
 
   LuaLoadVector3( L, &ship->Position, "Position" );
   LoadInstruments( L, ship );

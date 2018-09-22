@@ -120,77 +120,55 @@ static void _SaveCommands(const OldRepository *repo)
 
 static int L_CommandEntry( lua_State *L )
 {
-  int idx = 0;
-  Command *newCommand = NULL;
-  luaL_checktype( L, 1, LUA_TTABLE );
-  idx = lua_gettop( L );
+  std::string name;
+  LuaGetfieldString( L, "Name", &name );
 
-  lua_getfield( L, idx, "Name" );
-  lua_getfield( L, idx, "Function" );
-  lua_getfield( L, idx, "Position" );
-  lua_getfield( L, idx, "Level" );
-  lua_getfield( L, idx, "Log" );
-
-  newCommand = AllocateCommand();
-
-  if( !lua_isnil( L, ++idx ) )
+  if( name.empty() )
     {
-      newCommand->Name = lua_tostring( L, idx );
+      return 0;
     }
+  
+  Command *newCommand = AllocateCommand();
+  newCommand->Name = name;
+  
+  LuaGetfieldString( L, "Function",
+                     [newCommand](const std::string &symbolName)
+                     {
+                       newCommand->Function = GetSkillFunction( symbolName );
 
-  if( !lua_isnil( L, ++idx ) )
-    {
-      const char *symbolName = lua_tostring( L, idx );
+                       if( newCommand->Function != skill_notfound )
+                         {
+                           newCommand->FunctionName = symbolName;
+                         }
+                     });
+  LuaGetfieldString( L, "Position",
+                     [newCommand](const std::string &positionName)
+                     {
+                       PositionType position = GetPosition( positionName );
 
-      newCommand->Function = GetSkillFunction( symbolName );
+                       if( position == (PositionType)-1 )
+                         {
+                           position = POS_DEAD;
+                         }
 
-      if( newCommand->Function != skill_notfound )
-	{
-	  newCommand->FunctionName = symbolName;
-	}
-    }
+                       newCommand->Position = position;
+                     });
+  LuaGetfieldInt( L, "Level", &newCommand->Level );
+  newCommand->Level = newCommand->Level > MAX_LEVEL ? MAX_LEVEL : newCommand->Level;
+  LuaGetfieldString( L, "Log",
+                     [newCommand](const std::string &logTypeName)
+                     {
+                       int logType = GetCmdLog( logTypeName );
 
-  if( !lua_isnil( L, ++idx ) )
-    {
-      PositionType position = GetPosition( lua_tostring( L, idx ) );
+                       if( logType == -1 )
+                         {
+                           logType = LOG_NORMAL;
+                         }
 
-      if( position == (PositionType)-1 )
-	{
-	  position = POS_DEAD;
-	}
+                       newCommand->Log = logType;
+                     });
 
-      newCommand->Position = position;
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      newCommand->Level = lua_tointeger( L, idx );
-      newCommand->Level = newCommand->Level > MAX_LEVEL ? MAX_LEVEL : newCommand->Level;
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      int logType = GetCmdLog( lua_tostring( L, idx ) );
-
-      if( logType == -1 )
-	{
-	  logType = LOG_NORMAL;
-	}
-
-      newCommand->Log = logType;
-    }
-
-  lua_pop( L, lua_gettop( L ) - 1 );
-
-  if( newCommand->Name.empty() )
-    {
-      FreeCommand( newCommand );
-    }
-  else
-    {
-      AddCommand( newCommand );
-    }
-
+  AddCommand( newCommand );
   return 0;
 }
 

@@ -123,27 +123,9 @@ void LuaSpaceobjectRepository::PushSpaceobject( lua_State *L, const void *userDa
 
 void LuaSpaceobjectRepository::LoadLandingSite( lua_State *L, LandingSite *site )
 {
-  int idx = lua_gettop( L );
-  lua_getfield( L, idx, "Name" );
-  lua_getfield( L, idx, "DockVnum" );
-  lua_getfield( L, idx, "IsSecret" );
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      site->LocationName = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      site->Dock = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      site->IsSecret = lua_tointeger( L, idx ) != 0 ? true : false;
-    }
-
-  lua_pop( L, 3 );
+  LuaGetfieldString( L, "Name", &site->LocationName );
+  LuaGetfieldLong( L, "DockVnum", &site->Dock );
+  LuaGetfieldBool( L, "IsSecret", &site->IsSecret );
 }
 
 void LuaSpaceobjectRepository::LoadLandingSites( lua_State *L, Spaceobject *spaceobj )
@@ -169,93 +151,68 @@ void LuaSpaceobjectRepository::LoadLandingSites( lua_State *L, Spaceobject *spac
 
 int LuaSpaceobjectRepository::L_SpaceobjectEntry( lua_State *L )
 {
-  int idx = lua_gettop( L );
-  const int topAtStart = idx;
-  int topAfterGets = 0;
-  Spaceobject *spaceobj = NULL;
+  std::string name;
+  LuaGetfieldString( L, "Name", &name );
 
-  luaL_checktype( L, 1, LUA_TTABLE );
-
-  lua_getfield( L, idx, "Name" );
-  lua_getfield( L, idx, "Planet" );
-  lua_getfield( L, idx, "Type" );
-  lua_getfield( L, idx, "Speed" );
-  lua_getfield( L, idx, "Gravity" );
-  lua_getfield( L, idx, "IsSimulator" );
-  topAfterGets = lua_gettop( L );
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      spaceobj = new Spaceobject();
-      spaceobj->Name = lua_tostring( L, idx );
-    }
-  else
+  if( name.empty() )
     {
       Log->Bug( "%s: Name not found.", __FUNCTION__ );
-      lua_pop( L, topAfterGets - topAtStart );
       return 0;
     }
 
-  if( !lua_isnil( L, ++idx ) )
-    {
-      std::string planetName = lua_tostring( L, idx );
-      spaceobj->Planet = Planets->FindByName( planetName );
+  Spaceobject *spaceobj = new Spaceobject();
+  spaceobj->Name = name;
+  
+  LuaGetfieldString( L, "Planet",
+                     [spaceobj](const std::string &planetName)
+                     {
+                       spaceobj->Planet = Planets->FindByName( planetName );
 
-      if( !spaceobj->Planet )
-        {
-          Log->Bug( "%s: Unknown planet name '%s' for spaceobject %s.",
-               __FUNCTION__, planetName.c_str(), spaceobj->Name.c_str() );
-        }
-    }
+                       if( spaceobj->Planet == nullptr )
+                         {
+                           Log->Bug( "%s: Unknown planet name '%s' for spaceobject %s.",
+                                     __FUNCTION__, planetName.c_str(), spaceobj->Name.c_str() );
+                         }
+                     });
+  LuaGetfieldString( L, "Type",
+                     [spaceobj](const std::string &typeName)
+                     {
+                       SpaceobjectType type = GetSpaceobjectType( typeName );
 
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SpaceobjectType type = GetSpaceobjectType( lua_tostring( L, idx ) );
-
-      if( type >= SPACE_SUN && type <= SPACE_OBJ )
-        {
-          spaceobj->Type = type;
-        }
-      else
-        {
-          Log->Bug( "%s: SpaceobjectType out of range: %d", __FUNCTION__, type );
-        }
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      int speed = lua_tointeger( L, idx );
-
-      if( speed >= 0 )
-        {
-          spaceobj->Speed = speed;
-        }
-      else
-        {
-          Log->Bug( "%s: Invalid speed %d", __FUNCTION__, speed );
-        }
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      int gravity = lua_tointeger( L, idx );
-
-      if( gravity >= 0 )
-        {
-          spaceobj->Gravity = gravity;
-        }
-      else
-        {
-          Log->Bug( "%s: Invalid speed %d", __FUNCTION__, gravity );
-        }
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      spaceobj->IsSimulator = lua_toboolean( L, idx );
-    }
-
-  lua_pop( L, topAfterGets - topAtStart );
+                       if( type >= SPACE_SUN && type <= SPACE_OBJ )
+                         {
+                           spaceobj->Type = type;
+                         }
+                       else
+                         {
+                           Log->Bug( "%s: SpaceobjectType out of range: %d", __FUNCTION__, type );
+                         }
+                     });
+  LuaGetfieldInt( L, "Speed",
+                  [spaceobj](const int speed)
+                  {
+                    if( speed >= 0 )
+                      {
+                        spaceobj->Speed = speed;
+                      }
+                    else
+                      {
+                        Log->Bug( "%s: Invalid speed %d", __FUNCTION__, speed );
+                      }
+                  });
+  LuaGetfieldInt( L, "Gravity",
+                  [spaceobj](const int gravity)
+                  {
+                    if( gravity >= 0 )
+                      {
+                        spaceobj->Gravity = gravity;
+                      }
+                    else
+                      {
+                        Log->Bug( "%s: Invalid gravity %d", __FUNCTION__, gravity );
+                      }
+                  });
+  LuaGetfieldBool( L, "IsSimulator", &spaceobj->IsSimulator );
 
   LuaLoadVector3( L, &spaceobj->Position, "Position" );
   LuaLoadVector3( L, &spaceobj->Heading, "Heading" );

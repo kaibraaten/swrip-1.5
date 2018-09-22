@@ -1,26 +1,26 @@
 -- Coruscant
--- Last saved Friday 21-Sep-2018 22:27:19
+-- Last saved Saturday 22-Sep-2018 21:36:39
 
 PlanetEntry
 {
-   BaseValue = 0, 
-   Name = "Coruscant", 
+   Areas = 
+   {
+      [1] = "coruscant_streets.are", 
+      [2] = "corus_jail.are", 
+      [3] = "corus_pt2.are", 
+      [4] = "grand_towers.are", 
+      [5] = "grand_towers_suites.are", 
+      [6] = "manarai_spaceport.are", 
+      [7] = "senate.are", 
+      [8] = "monument_plaza.are", 
+   }, 
    Spaceobject = "Coruscant", 
+   PopulationSupport = 0, 
    Flags = 
    {
       [0] = "NoCapture", 
    }, 
    GovernedBy = "The Empire", 
-   Areas = 
-   {
-      [1] = "corus_jail.are", 
-      [2] = "corus_pt2.are", 
-      [3] = "grand_towers.are", 
-      [4] = "grand_towers_suites.are", 
-      [5] = "manarai_spaceport.are", 
-      [6] = "senate.are", 
-      [7] = "monument_plaza.are", 
-      [8] = "coruscant_streets.are", 
-   }, 
-   PopulationSupport = 0, 
+   Name = "Coruscant", 
+   BaseValue = 0, 
 }

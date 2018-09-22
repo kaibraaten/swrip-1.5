@@ -364,36 +364,11 @@ int CharactersInArena(void)
 
 static int L_HallOfFameEntry( lua_State *L )
 {
-  HallOfFameElement *fameNode = NULL;
-  int idx = lua_gettop( L );
-  const int topAtStart = idx;
-  int elementsToPop = 0;
-  luaL_checktype( L, 1, LUA_TTABLE );
+  HallOfFameElement *fameNode = new HallOfFameElement();
 
-  lua_getfield( L, idx, "Name" );
-  lua_getfield( L, idx, "Date" );
-  lua_getfield( L, idx, "Award" );
-
-  elementsToPop = lua_gettop( L ) - topAtStart;
-
-  fameNode = new HallOfFameElement();
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      fameNode->Name = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      fameNode->Date = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      fameNode->Award = lua_tointeger( L, idx );
-    }
-
-  lua_pop( L, elementsToPop );
+  LuaGetfieldString( L, "Name", &fameNode->Name );
+  LuaGetfieldLong( L, "Date", &fameNode->Date );
+  LuaGetfieldInt( L, "Award", &fameNode->Award );
 
   fameNode->Next = FameList;
   FameList = fameNode;

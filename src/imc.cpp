@@ -175,7 +175,7 @@ do                            \
       }                          \
   } while(0)
 
-#define IMCSTRALLOC strdup
+#define IMCSTRALLOC CopyString
 #define IMCSTRFREE IMCDISPOSE
 
 /* double-linked list handling macros -Thoric ( From the Smaug codebase ) */
@@ -3781,116 +3781,87 @@ void ImcLoadCharacter( lua_State *L, Character *ch )
 
   if( !lua_isnil( L, ++outerIdx ) )
     {
-      int idx = lua_gettop( L );
-      const int topAtStart = idx;
+      LuaGetfieldInt( L, "IMCPerm", &IMCPERM( ch ) );
+      LuaGetfieldLong( L, "IMCFlags", &IMCFLAG( ch ) );
+      imc_char_login( ch );
+      LuaGetfieldString( L, "IMCListen",
+                         [ch](const std::string &listenString)
+                         {
+                           IMC_LISTEN( ch ) = IMCSTRALLOC( listenString );
 
-      lua_getfield( L, idx, "IMCPerm" );
-      lua_getfield( L, idx, "IMCFlags" );
-      lua_getfield( L, idx, "IMCListen" );
-      lua_getfield( L, idx, "IMCDeny" );
-      lua_getfield( L, idx, "IMCEmail" );
-      lua_getfield( L, idx, "IMCHomepage" );
-      lua_getfield( L, idx, "IMCICQ" );
-      lua_getfield( L, idx, "IMCAIM" );
-      lua_getfield( L, idx, "IMCYahoo" );
-      lua_getfield( L, idx, "IMCMSN" );
-      lua_getfield( L, idx, "IMCComment" );
-      
-      const int elementsToPop = lua_gettop( L ) - topAtStart;
+                           if( IMC_LISTEN( ch ) != NULL && this_imcmud->state == IMC_ONLINE )
+                             {
+                               const char *channels = IMC_LISTEN( ch );
 
-      if( !lua_isnil( L, ++idx ) )
-        {
-          IMCPERM( ch ) = lua_tointeger( L, idx );
-        }
-
-      if( !lua_isnil( L, ++idx ) )
-        {
-          IMCFLAG( ch ) = lua_tointeger( L, idx );
-          imc_char_login( ch );
-        }
-
-      if( !lua_isnil( L, ++idx ) )
-        {
-          IMC_LISTEN( ch ) = IMCSTRALLOC( lua_tostring( L, idx ) );
-
-          if( IMC_LISTEN( ch ) != NULL && this_imcmud->state == IMC_ONLINE )
-            {
-              const char *channels = IMC_LISTEN( ch );
-
-              while( !IsNullOrEmpty( channels ) )
-                {
-                  char arg[SMST] = {'\0'};
-                  channels = imcOneArgument( channels, arg );
-                  IMC_CHANNEL *channel = imc_findchannel( arg );
+                               while( !IsNullOrEmpty( channels ) )
+                                 {
+                                   char arg[SMST] = {'\0'};
+                                   channels = imcOneArgument( channels, arg );
+                                   IMC_CHANNEL *channel = imc_findchannel( arg );
                   
-                  if( channel == nullptr
-                      || IMCPERM( ch ) < channel->level )
-                    {
-                      imc_removename( &IMC_LISTEN( ch ), arg );
-                    }
-                }
-            }
-        }
+                                   if( channel == nullptr
+                                       || IMCPERM( ch ) < channel->level )
+                                     {
+                                       imc_removename( &IMC_LISTEN( ch ), arg );
+                                     }
+                                 }
+                             }
+                         });
       
-      if( !lua_isnil( L, ++idx ) )
-        {
-          IMC_DENY( ch ) = IMCSTRALLOC( lua_tostring( L, idx ) );
+      LuaGetfieldString( L, "IMCDeny",
+                         [ch](const std::string &deny)
+                         {
+                           IMC_DENY( ch ) = IMCSTRALLOC( deny );
 
-          if( IMC_DENY( ch ) != NULL && this_imcmud->state == IMC_ONLINE )
-            {
-              const char *channels = IMC_DENY( ch );
+                           if( IMC_DENY( ch ) != NULL && this_imcmud->state == IMC_ONLINE )
+                             {
+                               const char *channels = IMC_DENY( ch );
 
-              while( !IsNullOrEmpty( channels ) )
-                {
-                  char arg[SMST] = {'\0'};
-                  channels = imcOneArgument( channels, arg );
-                  IMC_CHANNEL *channel = imc_findchannel( arg );
+                               while( !IsNullOrEmpty( channels ) )
+                                 {
+                                   char arg[SMST] = {'\0'};
+                                   channels = imcOneArgument( channels, arg );
+                                   IMC_CHANNEL *channel = imc_findchannel( arg );
                   
-                  if( channel == nullptr
-                      || IMCPERM( ch ) < channel->level )
-                    {
-                      imc_removename( &IMC_DENY( ch ), arg );
-                    }
-                }
-            }
-        }
-
-      if( !lua_isnil( L, ++idx ) )
-        {
-          IMC_EMAIL( ch ) = IMCSTRALLOC( lua_tostring( L, idx ) );
-        }
-
-      if( !lua_isnil( L, ++idx ) )
-        {
-          IMC_HOMEPAGE( ch ) = IMCSTRALLOC( lua_tostring( L, idx ) );
-        }
-
-      if( !lua_isnil( L, ++idx ) )
-        {
-          IMC_ICQ( ch ) = lua_tointeger( L, idx );
-        }
-
-      if( !lua_isnil( L, ++idx ) )
-        {
-          IMC_AIM( ch ) = IMCSTRALLOC( lua_tostring( L, idx ) );
-        }
-
-      if( !lua_isnil( L, ++idx ) )
-        {
-          IMC_YAHOO( ch ) = IMCSTRALLOC( lua_tostring( L, idx ) );
-        }
-
-      if( !lua_isnil( L, ++idx ) )
-        {
-          IMC_MSN( ch ) = IMCSTRALLOC( lua_tostring( L, idx ) );
-        }
-
-      if( !lua_isnil( L, ++idx ) )
-        {
-          IMC_COMMENT( ch ) = IMCSTRALLOC( lua_tostring( L, idx ) );
-        }
-
-      lua_pop( L, elementsToPop );
+                                   if( channel == nullptr
+                                       || IMCPERM( ch ) < channel->level )
+                                     {
+                                       imc_removename( &IMC_DENY( ch ), arg );
+                                     }
+                                 }
+                             }
+                         });
+      LuaGetfieldString( L, "IMCEmail",
+                         [ch](const std::string &email)
+                         {
+                           IMC_EMAIL( ch ) = IMCSTRALLOC( email );
+                         });
+      LuaGetfieldString( L, "IMCHomepage",
+                         [ch](const std::string &homepage)
+                         {
+                           IMC_HOMEPAGE( ch ) = IMCSTRALLOC( homepage );
+                         });
+      LuaGetfieldInt( L, "IMCICQ", &IMC_ICQ( ch ) );
+      LuaGetfieldString( L, "IMCAIM",
+                         [ch](const std::string &aim)
+                         {
+                           IMC_AIM( ch ) = IMCSTRALLOC( aim );
+                         });
+      LuaGetfieldString( L, "IMCYahoo",
+                         [ch](const std::string &yahoo)
+                         {
+                           IMC_YAHOO( ch ) = IMCSTRALLOC( yahoo );
+                         });
+      LuaGetfieldString( L, "IMCMSN",
+                         [ch](const std::string &msn)
+                         {
+                           IMC_MSN( ch ) = IMCSTRALLOC( msn );
+                         });
+      LuaGetfieldString( L, "IMCComment",
+                         [ch](const std::string &comment)
+                         {
+                           IMC_COMMENT( ch ) = IMCSTRALLOC( comment );
+                         });
 
       ImcLoadIgnores( L, ch );
     }

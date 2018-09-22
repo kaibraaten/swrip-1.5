@@ -2,6 +2,7 @@
 #include "shuttle.hpp"
 #include "script.hpp"
 #include "mud.hpp"
+#include "log.hpp"
 
 #define SHUTTLE_DIR     DATA_DIR "shuttles/"
 
@@ -64,7 +65,7 @@ void LuaShuttleRepository::Load()
   ForEachLuaFileInDir( SHUTTLE_DIR, ExecuteShuttleFile, NULL );
 }
 
-void LuaShuttleRepository:: PushStop( lua_State *L, const ShuttleStop *stop, const int idx )
+void LuaShuttleRepository::PushStop( lua_State *L, const ShuttleStop *stop, const int idx )
 {
   lua_pushinteger( L, idx );
   lua_newtable( L );
@@ -75,7 +76,7 @@ void LuaShuttleRepository:: PushStop( lua_State *L, const ShuttleStop *stop, con
   lua_settable( L, -3 );
 }
 
-void LuaShuttleRepository:: PushStops( lua_State *L, const Shuttle *shuttle )
+void LuaShuttleRepository::PushStops( lua_State *L, const Shuttle *shuttle )
 {
   int idx = 0;
   lua_pushstring( L, "Stops" );
@@ -89,7 +90,7 @@ void LuaShuttleRepository:: PushStops( lua_State *L, const Shuttle *shuttle )
   lua_settable( L, -3 );
 }
 
-void LuaShuttleRepository:: PushRooms( lua_State *L, const Shuttle *shuttle )
+void LuaShuttleRepository::PushRooms( lua_State *L, const Shuttle *shuttle )
 {
   lua_pushstring( L, "Rooms" );
   lua_newtable( L );
@@ -101,7 +102,7 @@ void LuaShuttleRepository:: PushRooms( lua_State *L, const Shuttle *shuttle )
   lua_settable( L, -3 );
 }
 
-void LuaShuttleRepository:: PushShuttle( lua_State *L, const void *userData )
+void LuaShuttleRepository::PushShuttle( lua_State *L, const void *userData )
 {
   const Shuttle *shuttle = (const Shuttle*) userData;
   lua_pushinteger( L, 1 );
@@ -127,71 +128,32 @@ void LuaShuttleRepository:: PushShuttle( lua_State *L, const void *userData )
   lua_setglobal( L, "shuttle" );
 }
 
-void LuaShuttleRepository:: LoadRooms( lua_State *L, Shuttle *shuttle )
+void LuaShuttleRepository::LoadRooms( lua_State *L, Shuttle *shuttle )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Rooms" );
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int sub_idx = lua_gettop( L );
-      const int topAtStart = sub_idx;
-      luaL_checktype( L, 1, LUA_TTABLE );
-
-      lua_getfield( L, sub_idx, "First" );
-      lua_getfield( L, sub_idx, "Last" );
-      lua_getfield( L, sub_idx, "Entrance" );
-
-      const int elementsToPop = lua_gettop( L ) - topAtStart;
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          shuttle->Rooms.First = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          shuttle->Rooms.Last = lua_tointeger( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          shuttle->Rooms.Entrance = lua_tointeger( L, sub_idx );
-        }
-
-      lua_pop( L, elementsToPop );
+      LuaGetfieldLong( L, "First", &shuttle->Rooms.First );
+      LuaGetfieldLong( L, "Last", &shuttle->Rooms.Last );
+      LuaGetfieldLong( L, "Entrance", &shuttle->Rooms.Entrance );
     }
 
   lua_pop( L, 1 );
 }
 
-void LuaShuttleRepository:: LoadStop( lua_State *L, Shuttle *shuttle )
+void LuaShuttleRepository::LoadStop( lua_State *L, Shuttle *shuttle )
 {
-  int idx = lua_gettop( L );
-  const int topAtStart = idx;
-  int elementsToPop = 0;
   ShuttleStop *stop = new ShuttleStop();
 
-  lua_getfield( L, idx, "Name" );
-  lua_getfield( L, idx, "RoomVnum" );
+  LuaGetfieldString( L, "Name", &stop->Name );
+  LuaGetfieldLong( L, "RoomVnum", &stop->RoomVnum );
 
-  elementsToPop = lua_gettop( L ) - topAtStart;
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      stop->Name = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      stop->RoomVnum = lua_tointeger( L, idx );
-    }
-
-  lua_pop( L, elementsToPop );
   shuttle->Add(stop);
-  }
+}
 
-void LuaShuttleRepository:: LoadStops( lua_State *L, Shuttle *shuttle )
+void LuaShuttleRepository::LoadStops( lua_State *L, Shuttle *shuttle )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Stops" );
@@ -212,62 +174,33 @@ void LuaShuttleRepository:: LoadStops( lua_State *L, Shuttle *shuttle )
 
 int LuaShuttleRepository::L_ShuttleEntry( lua_State *L )
 {
-  int idx = lua_gettop( L );
-  const int topAtStart = idx;
-  int elementsToPop = 0;
-  luaL_checktype( L, 1, LUA_TTABLE );
-
   Shuttle *shuttle = new Shuttle();
-  lua_getfield( L, idx, "Name" );
-  lua_getfield( L, idx, "Delay" );
-  lua_getfield( L, idx, "CurrentDelay" );
-  lua_getfield( L, idx, "CurrentStop" );
-  lua_getfield( L, idx, "Type" );
+  LuaGetfieldString( L, "Name", &shuttle->Name );
+  LuaGetfieldInt( L, "Delay", &shuttle->Delay );
+  LuaGetfieldInt( L, "CurrentDelay", &shuttle->CurrentDelay );
+  LuaGetfieldInt( L, "CurrentStop", &shuttle->CurrentNumber );
+  LuaGetfieldString( L, "Type",
+                     [shuttle](const std::string &shuttleTypeName)
+                     {
+                       if( !StrCmp( shuttleTypeName, "Turbocar" ) )
+                         {
+                           shuttle->Type = SHUTTLE_TURBOCAR;
+                         }
+                       else if( !StrCmp( shuttleTypeName, "Space" ) )
+                         {
+                           shuttle->Type = SHUTTLE_SPACE;
+                         }
+                       else if( !StrCmp( shuttleTypeName, "Hyperspace" ) )
+                         {
+                           shuttle->Type = SHUTTLE_HYPERSPACE;
+                         }
+                       else
+                         {
+                           Log->Bug( "%s:%d: LuaShuttleRepository::%s() - Invalid shuttle type: %s",
+                                     __FILE__, __LINE__, __FUNCTION__, shuttleTypeName.c_str() );
+                         }
+                     });
 
-  elementsToPop = lua_gettop( L ) - topAtStart;
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      shuttle->Name = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      shuttle->Delay = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      shuttle->CurrentDelay = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      shuttle->CurrentNumber = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      const char *shuttleTypeName = lua_tostring( L, idx );
-      int shuttleType = SHUTTLE_HYPERSPACE;
-
-      if( !StrCmp( shuttleTypeName, "Turbocar" ) )
-        {
-          shuttleType = SHUTTLE_TURBOCAR;
-        }
-      else if( !StrCmp( shuttleTypeName, "Space" ) )
-        {
-          shuttleType = SHUTTLE_SPACE;
-        }
-      else if( !StrCmp( shuttleTypeName, "Hyperspace" ) )
-        {
-          shuttleType = SHUTTLE_HYPERSPACE;
-        }
-
-      shuttle->Type = shuttleType;
-    }
-
-  lua_pop( L, elementsToPop );
   LoadRooms( L, shuttle );
   LoadStops( L, shuttle );
 
@@ -291,7 +224,7 @@ int LuaShuttleRepository::L_ShuttleEntry( lua_State *L )
   return 0;
 }
 
-void LuaShuttleRepository:: ExecuteShuttleFile( const std::string &filePath, void *userData )
+void LuaShuttleRepository::ExecuteShuttleFile( const std::string &filePath, void *userData )
 {
   LuaLoadDataFile( filePath, L_ShuttleEntry, "ShuttleEntry" );
 }

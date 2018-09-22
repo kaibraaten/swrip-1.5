@@ -45,177 +45,33 @@ static void PushSystemData( lua_State *L, const void *userData )
 
 static int L_SystemDataEntry( lua_State *L )
 {
-  int idx = lua_gettop( L );
-  luaL_checktype( L, 1, LUA_TTABLE );
-
-  lua_getfield( L, idx, "AllTimeMaxPlayers" );
-  lua_getfield( L, idx, "AllTimeMaxPlayersTime" );
-  lua_getfield( L, idx, "NoNameResolving" );
-  lua_getfield( L, idx, "WaitForAuth" );
-  lua_getfield( L, idx, "ReadAllMail" );
-  lua_getfield( L, idx, "ReadMailFree" );
-  lua_getfield( L, idx, "WriteMailFree" );
-  lua_getfield( L, idx, "TakeOthersMail" );
-  lua_getfield( L, idx, "BuildChannelLevel" );
-  lua_getfield( L, idx, "LogChannelLevel" );
-  lua_getfield( L, idx, "ModifyProto" );
-  lua_getfield( L, idx, "OverridePrivateFlag" );
-  lua_getfield( L, idx, "MsetPlayer" );
-  lua_getfield( L, idx, "StunModPvP" );
-  lua_getfield( L, idx, "StunRegular" );
-  lua_getfield( L, idx, "DamModPvP" );
-  lua_getfield( L, idx, "DamModPvE" );
-  lua_getfield( L, idx, "DamModEvP" );
-  lua_getfield( L, idx, "DamModEvE" );
-  lua_getfield( L, idx, "ForcePc" );
-  lua_getfield( L, idx, "SaveFlags" );
-  lua_getfield( L, idx, "SaveFrequency" );
-  lua_getfield( L, idx, "DisableHunger" );
-  lua_getfield( L, idx, "CanChooseJedi" );
-  lua_getfield( L, idx, "PermaDeath" );
-  lua_getfield( L, idx, "ExtendedRaceSelection" );
-  lua_getfield( L, idx, "AllowMultiplaying" );
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.MaxPlayersEver = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.TimeOfMaxPlayersEver = lua_tostring( L, idx );
-    }
-  else
-    {
-      SysData.TimeOfMaxPlayersEver = "(not recorded)";
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.NoNameResolving = lua_toboolean( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.NewPlayersMustWaitForAuth = lua_toboolean( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.ReadAllMail = lua_tointeger( L, idx );
-      }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.ReadMailFree = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.WriteMailFree = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.TakeOthersMail = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.LevelOfBuildChannel = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.LevelOfLogChannel = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.LevelToModifyProto = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.LevelToOverridePrivateFlag = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.LevelToMsetPlayers = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.StunModPlrVsPlr = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.StunRegular = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.DamagePlrVsPlr = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.DamagePlrVsMob = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.DamageMobVsPlr = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.DamageMobVsMob = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.LevelToForcePlayers = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.SaveFlags = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.SaveFrequency = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.DisableHunger = lua_toboolean( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.CanChooseJedi = lua_toboolean( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.PermaDeath = lua_toboolean( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.ExtendedRaceSelection = lua_toboolean( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SysData.AllowMultiplaying = lua_toboolean( L, idx );
-    }
-
-  lua_pop( L, lua_gettop( L ) - 1 );
+  LuaGetfieldInt( L, "AllTimeMaxPlayers", &SysData.MaxPlayersEver );
+  LuaGetfieldString( L, "AllTimeMaxPlayersTime", &SysData.TimeOfMaxPlayersEver );
+  LuaGetfieldBool( L, "NoNameResolving", &SysData.NoNameResolving );
+  LuaGetfieldBool( L, "WaitForAuth", &SysData.NewPlayersMustWaitForAuth );
+  LuaGetfieldInt( L, "ReadAllMail", &SysData.ReadAllMail );
+  LuaGetfieldInt( L, "ReadMailFree", &SysData.ReadMailFree );
+  LuaGetfieldInt( L, "WriteMailFree", &SysData.WriteMailFree );
+  LuaGetfieldInt( L, "TakeOthersMail", &SysData.TakeOthersMail );
+  LuaGetfieldInt( L, "BuildChannelLevel", &SysData.LevelOfBuildChannel );
+  LuaGetfieldInt( L, "LogChannelLevel", &SysData.LevelOfLogChannel );
+  LuaGetfieldInt( L, "ModifyProto", &SysData.LevelToModifyProto );
+  LuaGetfieldInt( L, "OverridePrivateFlag", &SysData.LevelToOverridePrivateFlag );
+  LuaGetfieldInt( L, "MsetPlayer", &SysData.LevelToMsetPlayers );
+  LuaGetfieldInt( L, "StunModPvP", &SysData.StunModPlrVsPlr );
+  LuaGetfieldInt( L, "StunRegular", &SysData.StunRegular );
+  LuaGetfieldInt( L, "DamModPvP", &SysData.DamagePlrVsPlr );
+  LuaGetfieldInt( L, "DamModPvE", &SysData.DamagePlrVsMob );
+  LuaGetfieldInt( L, "DamModEvP", &SysData.DamageMobVsPlr );
+  LuaGetfieldInt( L, "DamModEvE", &SysData.DamageMobVsMob );
+  LuaGetfieldInt( L, "ForcePc", &SysData.LevelToForcePlayers );
+  LuaGetfieldInt( L, "SaveFlags", &SysData.SaveFlags );
+  LuaGetfieldInt( L, "SaveFrequency", &SysData.SaveFrequency );
+  LuaGetfieldBool( L, "DisableHunger", &SysData.DisableHunger );
+  LuaGetfieldBool( L, "CanChooseJedi", &SysData.CanChooseJedi );
+  LuaGetfieldBool( L, "PermaDeath", &SysData.PermaDeath );
+  LuaGetfieldBool( L, "ExtendedRaceSelection", &SysData.ExtendedRaceSelection );
+  LuaGetfieldBool( L, "AllowMultiplaying", &SysData.AllowMultiplaying );
 
   return 0;
 }

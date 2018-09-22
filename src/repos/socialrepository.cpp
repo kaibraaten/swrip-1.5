@@ -86,77 +86,30 @@ void LuaSocialRepository::PushSocialTable( lua_State *L, const void *userData )
 
 int LuaSocialRepository::L_SocialEntry( lua_State *L )
 {
-  luaL_checktype( L, 1, LUA_TTABLE );
-  int idx = lua_gettop( L );
-  const int topAtStart = idx;
-  Social *social = new Social();
+  Social social;
 
-  lua_getfield( L, idx, "Name" );
-  lua_getfield( L, idx, "CharNoArg" );
-  lua_getfield( L, idx, "OthersNoArg" );
-  lua_getfield( L, idx, "CharFound" );
-  lua_getfield( L, idx, "OthersFound" );
-  lua_getfield( L, idx, "VictimFound" );
-  lua_getfield( L, idx, "CharAuto" );
-  lua_getfield( L, idx, "OthersAuto" );
+  LuaGetfieldString( L, "Name", &social.Name );
+  LuaGetfieldString( L, "CharNoArg", &social.CharNoArg );
+  LuaGetfieldString( L, "OthersNoArg", &social.OthersNoArg );
+  LuaGetfieldString( L, "CharFound", &social.CharFound );
+  LuaGetfieldString( L, "OthersFound", &social.OthersFound );
+  LuaGetfieldString( L, "VictimFound", &social.VictimFound );
+  LuaGetfieldString( L, "CharAuto", &social.CharAuto );
+  LuaGetfieldString( L, "OthersAuto", &social.OthersAuto );
 
-  const int elementsToPop = lua_gettop( L ) - topAtStart;
-  
-  if( !lua_isnil( L, ++idx ) )
-    {
-      social->Name = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      social->CharNoArg = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      social->OthersNoArg = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      social->CharFound = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      social->OthersFound = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      social->VictimFound = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      social->CharAuto = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      social->OthersAuto = lua_tostring( L, idx );
-    }
-
-  lua_pop( L, elementsToPop );
-
-  if ( social->Name.empty() )
+  if ( social.Name.empty() )
     {
       Log->Bug( "%s: Name not found", __FUNCTION__ );
-      FreeSocial( social );
     }
-  else if ( social->CharNoArg.empty() )
+  else if ( social.CharNoArg.empty() )
     {
-      Log->Bug( "%s: CharNoArg not found", __FUNCTION__ );
-      FreeSocial( social );
+      Log->Bug( "%s: CharNoArg not found for social %s",
+                __FUNCTION__, social.Name.c_str() );
     }
   else
     {
-      Socials->Add(social);
+      Social *newSocial = new Social( social );
+      Socials->Add(newSocial);
     }
 
   return 0;

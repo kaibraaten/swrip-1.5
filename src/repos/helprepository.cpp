@@ -51,50 +51,26 @@ bool CompareHelpFile::operator()(const HelpFile *pHelp, const HelpFile *tHelp) c
 
 static int L_HelpEntry( lua_State *L )
 {
-  int idx = 0;
-  HelpFile *help = NULL;
-  const char *keyword = NULL;
-  short level = 0;
+  std::string keyword;
+  int level = 0;
+  
+  LuaGetfieldString( L, "Keyword", &keyword );
+  LuaGetfieldInt( L, "Level", &level );
+  
+  HelpFile *help = AllocateHelpFile( keyword, level );
 
-  luaL_checktype( L, 1, LUA_TTABLE );
-  idx = lua_gettop( L );
+  LuaGetfieldString( L, "Text",
+                     [help](const std::string &text)
+                     {
+                       SetHelpFileText( help, text );
+                     });
 
-  lua_getfield( L, idx, "Keyword" );
-  lua_getfield( L, idx, "Level" );
-  lua_getfield( L, idx, "Text" );
-
-  if( !lua_isnil( L, ++idx ) )
+  if( !StrCmp( GetHelpFileKeyword( help ), "greeting" ) )
     {
-      keyword = lua_tostring( L, idx );
-      }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      level = lua_tointeger( L, idx );
+      HelpGreeting = GetHelpFileText( help );
     }
 
-  help = AllocateHelpFile( keyword, level );
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      SetHelpFileText( help, lua_tostring( L, idx ) );
-    }
-
-  lua_pop( L, lua_gettop( L ) - 1 );
-
-  if( help->Keyword.empty() )
-    {
-      FreeHelpFile( help );
-    }
-  else
-    {
-      if( !StrCmp( GetHelpFileKeyword( help ), "greeting" ) )
-        {
-          HelpGreeting = GetHelpFileText( help );
-        }
-
-      HelpFiles->Add( help );
-    }
+  HelpFiles->Add( help );
 
   return 0;
 }
