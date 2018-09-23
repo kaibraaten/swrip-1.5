@@ -1121,3 +1121,109 @@ void LoadHerbs()
 {
   LuaLoadDataFile( HERB_DATA_FILE, L_HerbEntry, "HerbEntry" );
 }
+
+void ASSIGN_GSN( short &gsn, const std::string &skill )
+{
+  gsn = LookupSkill( skill );
+  
+  if( gsn == -1 )
+    {
+      fprintf( stderr, "ASSIGN_GSN: Skill %s not found.\n", skill.c_str() );
+    }
+}
+
+bool IS_VALID_SN( int sn )
+{
+  return sn >= 0
+    && sn < MAX_SKILL
+            && SkillTable[sn] != nullptr
+            && !SkillTable[sn]->Name.empty();
+}
+
+bool IS_VALID_HERB( int sn )
+{
+  return sn >= 0
+    && sn < MAX_HERB
+            && HerbTable[sn] != nullptr
+            && !HerbTable[sn]->Name.empty();
+}
+
+bool SPELL_FLAG( const Skill *skill, size_t flag )
+{
+  return IsBitSet( skill->Flags, flag );
+}
+
+long SPELL_DAMAGE( const Skill *skill )
+{
+  return skill->Flags & 7;
+}
+
+long SPELL_ACTION( const Skill *skill )
+{
+  return skill->Flags >> 3 & 7;
+}
+
+long SPELL_CLASS( const Skill *skill )
+{
+  return skill->Flags >> 6 & 7;
+}
+
+long SPELL_POWER( const Skill *skill )
+{
+  return skill->Flags >> 9 & 3;
+}
+
+void SET_SDAM( Skill *skill, int val )
+{
+  skill->Flags = (skill->Flags & SDAM_MASK) + (val & 7);
+}
+
+void SET_SACT( Skill *skill, int val )
+{
+  skill->Flags = (skill->Flags & SACT_MASK) + ((val & 7) << 3);
+}
+
+void SET_SCLA( Skill *skill, int val )
+{
+  skill->Flags = (skill->Flags & SCLA_MASK) + ((val & 7) << 6);
+}
+
+void SET_SPOW( Skill *skill, int val )
+{
+  skill->Flags = (skill->Flags & SPOW_MASK) + ((val & 3) << 9);
+}
+
+bool IS_FIRE( int dt )
+{
+  return IS_VALID_SN(dt) && SPELL_DAMAGE(SkillTable[dt]) == SD_FIRE;
+}
+
+bool IS_COLD( int dt )
+{
+  return IS_VALID_SN(dt) && SPELL_DAMAGE(SkillTable[dt]) == SD_COLD;
+}
+
+bool IS_ACID( int dt )
+{
+  return IS_VALID_SN(dt) && SPELL_DAMAGE(SkillTable[dt]) == SD_ACID;
+}
+
+bool IS_ELECTRICITY( int dt )
+{
+  return IS_VALID_SN(dt) && SPELL_DAMAGE(SkillTable[dt]) == SD_ELECTRICITY;
+}
+
+bool IS_ENERGY( int dt )
+{
+  return IS_VALID_SN(dt) && SPELL_DAMAGE(SkillTable[dt]) == SD_ENERGY;
+}
+
+bool IS_DRAIN( int dt )
+{
+  return IS_VALID_SN(dt) && SPELL_DAMAGE(SkillTable[dt]) == SD_DRAIN;
+}
+
+bool IS_POISON( int dt )
+{
+  return IS_VALID_SN(dt) && SPELL_DAMAGE(SkillTable[dt]) == SD_POISON;
+}

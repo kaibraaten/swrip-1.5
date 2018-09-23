@@ -222,51 +222,28 @@ extern short gsn_first_weapon;
 extern short gsn_first_tongue;
 extern short gsn_TopSN;
 
-#define ASSIGN_GSN(gsn, skill)                                  \
-  do                                                            \
-    {                                                           \
-      if ( ((gsn) = LookupSkill((skill))) == -1 )		\
-	fprintf( stderr, "ASSIGN_GSN: Skill %s not found.\n",   \
-		 (skill) );                                     \
-    } while(0)
-
-#define IS_VALID_SN(sn)         ( (sn) >=0 && (sn) < MAX_SKILL  \
-				  && SkillTable[(sn)]          \
-                                  && !SkillTable[(sn)]->Name.empty() )
-
-#define IS_VALID_HERB(sn)       ( (sn) >=0 && (sn) < MAX_HERB   \
-				  && HerbTable[(sn)]           \
-                                  && !HerbTable[(sn)]->Name.empty() )
-
-#define SPELL_FLAG(skill, flag) ( IsBitSet((skill)->Flags, (flag)) )
-#define SPELL_DAMAGE(skill)     ( ((skill)->Flags     ) & 7 )
-#define SPELL_ACTION(skill)     ( ((skill)->Flags >> 3) & 7 )
-#define SPELL_CLASS(skill)      ( ((skill)->Flags >> 6) & 7 )
-#define SPELL_POWER(skill)      ( ((skill)->Flags >> 9) & 3 )
-#define SET_SDAM(skill, val)    ( (skill)->Flags =  ((skill)->Flags & SDAM_MASK) + ((val) & 7) )
-#define SET_SACT(skill, val)    ( (skill)->Flags =  ((skill)->Flags & SACT_MASK) + (((val) & 7) << 3) )
-#define SET_SCLA(skill, val)    ( (skill)->Flags =  ((skill)->Flags & SCLA_MASK) + (((val) & 7) << 6) )
-#define SET_SPOW(skill, val)    ( (skill)->Flags =  ((skill)->Flags & SPOW_MASK) + (((val) & 3) << 9) )
+void ASSIGN_GSN( short &gsn, const std::string &skill );
+bool IS_VALID_SN( int sn );
+bool IS_VALID_HERB( int sn );
+bool SPELL_FLAG( const Skill *skill, size_t flag );
+long SPELL_DAMAGE( const Skill *skill );
+long SPELL_ACTION( const Skill *skill );
+long SPELL_CLASS( const Skill *skill );
+long SPELL_POWER( const Skill *skill );
+void SET_SDAM( Skill *skill, int val );
+void SET_SACT( Skill *skill, int val );
+void SET_SCLA( Skill *skill, int val );
+void SET_SPOW( Skill *skill, int val );
 
 /* RIS by gsn lookups. -- Altrag.
    Will need to add some || stuff for spells that need a special GSN. */
-
-#define IS_FIRE(dt)             ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_FIRE )
-#define IS_COLD(dt)             ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_COLD )
-#define IS_ACID(dt)             ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_ACID )
-#define IS_ELECTRICITY(dt)      ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_ELECTRICITY )
-#define IS_ENERGY(dt)           ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_ENERGY )
-
-#define IS_DRAIN(dt)            ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_DRAIN )
-
-#define IS_POISON(dt)           ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_POISON )
+bool IS_FIRE( int dt );
+bool IS_COLD( int dt );
+bool IS_ACID( int dt );
+bool IS_ELECTRICITY( int dt );
+bool IS_ENERGY( int dt );
+bool IS_DRAIN( int dt );
+bool IS_POISON( int dt );
 
 bool CheckSkill( Character *ch, const std::string &command, const std::string &argument );
 void LearnFromSuccess( Character *ch, int sn );
