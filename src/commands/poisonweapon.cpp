@@ -51,7 +51,7 @@ void do_poison_weapon( Character *ch, std::string arg )
       return;
     }
 
-  if ( IS_OBJ_STAT( obj, ITEM_POISONED ) )
+  if ( IsBitSet( obj->Flags, ITEM_POISONED ) )
     {
       ch->Echo("That weapon is already poisoned.\r\n");
       return;
@@ -125,11 +125,11 @@ void do_poison_weapon( Character *ch, std::string arg )
   /* Set an object timer.  Don't want proliferation of poisoned weapons */
   obj->Timer = 10 + GetAbilityLevel( ch, HUNTING_ABILITY );
 
-  if ( IS_OBJ_STAT( obj, ITEM_BLESS ) )
-    if ( IS_OBJ_STAT( obj, ITEM_BLESS ) )
+  if ( IsBitSet( obj->Flags, ITEM_BLESS ) )
+    if ( IsBitSet( obj->Flags, ITEM_BLESS ) )
       obj->Timer *= 2;
 
-  if ( IS_OBJ_STAT( obj, ITEM_MAGIC ) )
+  if ( IsBitSet( obj->Flags, ITEM_MAGIC ) )
     obj->Timer *= 2;
 
   /* WHAT?  All of that, just for that one bit?  How lame. ;) */

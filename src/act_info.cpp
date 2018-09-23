@@ -97,39 +97,39 @@ std::string FormatObjectToCharacter( const Object *obj, const Character *ch, boo
 {
   std::ostringstream buf;
 
-  if ( IS_OBJ_STAT(obj, ITEM_INVIS) )
+  if ( IsBitSet( obj->Flags, ITEM_INVIS) )
     {
       buf << "(Invis) ";
     }
 
   if ( ( IsAffectedBy(ch, AFF_DETECT_MAGIC) || IsImmortal(ch) )
-       && IS_OBJ_STAT(obj, ITEM_MAGIC) )
+       && IsBitSet( obj->Flags, ITEM_MAGIC) )
     {
       buf << "&B(Blue Aura)&w ";
     }
 
-  if ( IS_OBJ_STAT(obj, ITEM_GLOW) )
+  if ( IsBitSet( obj->Flags, ITEM_GLOW) )
     {    
       buf << "(Glowing) ";
     }
 
-  if ( IS_OBJ_STAT(obj, ITEM_HUM) )
+  if ( IsBitSet( obj->Flags, ITEM_HUM) )
     {
       buf << "(Humming) ";
     }
 
-  if ( IS_OBJ_STAT(obj, ITEM_HIDDEN) )
+  if ( IsBitSet( obj->Flags, ITEM_HIDDEN) )
     {
       buf << "(Hidden) ";
     }
 
-  if ( IS_OBJ_STAT(obj, ITEM_BURRIED) )
+  if ( IsBitSet( obj->Flags, ITEM_BURRIED) )
     {
       buf << "(Burried) ";
     }
 
   if ( IsImmortal(ch)
-       && IS_OBJ_STAT(obj, ITEM_PROTOTYPE) )
+       && IsBitSet( obj->Flags, ITEM_PROTOTYPE) )
     {
       buf << "(PROTO) ";
     }

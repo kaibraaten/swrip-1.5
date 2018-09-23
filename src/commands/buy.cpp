@@ -177,7 +177,7 @@ void do_buy( Character *ch, std::string argument )
           return;
         }
 
-      if ( !IS_OBJ_STAT( obj, ITEM_INVENTORY ) && ( noi > 1 ) )
+      if ( !IsBitSet( obj->Flags, ITEM_INVENTORY ) && ( noi > 1 ) )
         {
           Interpret( keeper, "laugh" );
           Act( AT_TELL, "$n tells you 'I don't have enough of those in stock"
@@ -218,7 +218,7 @@ void do_buy( Character *ch, std::string argument )
 
       if ( noi == 1 )
         {
-          if ( !IS_OBJ_STAT( obj, ITEM_INVENTORY ) || ( keeper->Home != NULL ) )
+          if ( !IsBitSet( obj->Flags, ITEM_INVENTORY ) || ( keeper->Home != NULL ) )
             SeparateOneObjectFromGroup( obj );
 
           Act( AT_ACTION, "$n buys $p.", ch, obj, NULL, TO_ROOM );
@@ -249,7 +249,7 @@ void do_buy( Character *ch, std::string argument )
           Act( AT_ACTION, "$n puts some credits into a large safe.", keeper, NULL, NULL, TO_ROOM );
         }
 
-      if ( IS_OBJ_STAT( obj, ITEM_INVENTORY ) && ( keeper->Home == NULL ) )
+      if ( IsBitSet( obj->Flags, ITEM_INVENTORY ) && ( keeper->Home == NULL ) )
         {
           Object *buy_obj = CreateObject( obj->Prototype, obj->Level );
 

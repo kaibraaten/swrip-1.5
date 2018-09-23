@@ -1293,8 +1293,9 @@ static void AddObjectReset( Area *pArea, char cm, const Object *obj, int v2, int
 
   /* Only add hide for in-room objects that are hidden and cant be moved, as
      hide is an update reset, not a load-only reset. */
-  if ( cm == 'O' && IS_OBJ_STAT(obj, ITEM_HIDDEN) &&
-       !IsBitSet(obj->WearFlags, ITEM_TAKE) )
+  if ( cm == 'O'
+       && IsBitSet( obj->Flags, ITEM_HIDDEN )
+       && !IsBitSet(obj->WearFlags, ITEM_TAKE) )
     {
       AddReset(pArea, 'H', 1, 0, 0, 0);
     }
@@ -1803,7 +1804,7 @@ void ResetArea( Area *pArea )
                    !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
                    !to_obj->InRoom ||
                    to_obj->InRoom->Area != pArea ||
-                   IS_OBJ_STAT(to_obj, ITEM_HIDDEN) )
+                   IsBitSet( to_obj->Flags, ITEM_HIDDEN ) )
 		{
 		  break;
 		}

@@ -2629,9 +2629,9 @@ static void CheckObjectAlignmentZapping( Character *ch )
           continue;
         }
 
-      if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL) && IsEvil(ch) )
-           || ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD) && IsGood(ch) )
-           || ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IsNeutral(ch) ) )
+      if ( ( IsBitSet( obj->Flags, ITEM_ANTI_EVIL) && IsEvil(ch) )
+           || ( IsBitSet( obj->Flags, ITEM_ANTI_GOOD) && IsGood(ch) )
+           || ( IsBitSet( obj->Flags, ITEM_ANTI_NEUTRAL) && IsNeutral(ch) ) )
         {
           Act( AT_MAGIC, "You are zapped by $p.", ch, obj, NULL, TO_CHAR );
           Act( AT_MAGIC, "$n is zapped by $p.",   ch, obj, NULL, TO_ROOM );

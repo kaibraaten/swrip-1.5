@@ -14,7 +14,7 @@ bool spec_janitor( Character *ch )
                                             [](const auto obj)
                                             {
                                               return IsBitSet(obj->WearFlags, ITEM_TAKE)
-                                                && !IS_OBJ_STAT(obj, ITEM_BURRIED)
+                                                && !IsBitSet(obj->Flags, ITEM_BURRIED)
                                                 && (obj->ItemType == ITEM_DRINK_CON
                                                     || obj->ItemType == ITEM_TRASH
                                                     || obj->Cost < 10

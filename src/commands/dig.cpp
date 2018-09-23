@@ -138,7 +138,7 @@ void do_dig( Character *ch, std::string arg )
       obj = *i;
       
       /* twice as hard to find something without a shovel */
-      if ( IS_OBJ_STAT( obj, ITEM_BURRIED )
+      if ( IsBitSet( obj->Flags, ITEM_BURRIED )
            &&  (GetRandomPercent() * (shovel ? 1 : 2)) <
            (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]) )
         {

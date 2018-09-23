@@ -51,8 +51,8 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
 
       if (obj)
         {
-          if ( IS_OBJ_STAT(obj, ITEM_INVIS)
-               ||   Chance(ch, 40 + level / 10))
+          if ( IsBitSet( obj->Flags, ITEM_INVIS )
+               || Chance(ch, 40 + level / 10))
             {
               FailedCasting( skill, ch, NULL, NULL );
               return rSPELL_FAILED;

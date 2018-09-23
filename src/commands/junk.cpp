@@ -26,7 +26,7 @@ void do_junk( Character *ch, std::string arg )
 
   SeparateOneObjectFromGroup(obj);
 
-  if ( !CAN_WEAR(obj, ITEM_TAKE) )
+  if ( !IsBitSet(obj->WearFlags, ITEM_TAKE) )
     {
       Act( AT_PLAIN, "$p is not an acceptable item.", ch, obj, 0, TO_CHAR );
       return;

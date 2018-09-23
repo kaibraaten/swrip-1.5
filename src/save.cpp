@@ -677,7 +677,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
   /*
    * Castrate storage characters.
    */
-  if ( obj->ItemType == ITEM_KEY && !IS_OBJ_STAT(obj, ITEM_CLANOBJECT ))
+  if ( obj->ItemType == ITEM_KEY && !IsBitSet( obj->Flags, ITEM_CLANOBJECT ))
     {
       return;
     }
@@ -693,7 +693,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
   /*
    * Do NOT save prototype items!                               -Thoric
    */
-  if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
+  if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
     {
       return;
     }

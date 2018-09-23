@@ -75,7 +75,7 @@ void do_open( Character *ch, std::string argument )
     {
       if ( obj->ItemType != ITEM_CONTAINER )
         {
-          if( CAN_WEAR(obj, ITEM_WEAR_OVER) )
+          if( IsBitSet( obj->WearFlags, ITEM_WEAR_OVER ) )
             {
               obj->Value[2] = 0;
               Act( AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR );

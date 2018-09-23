@@ -442,4 +442,6 @@ bool HasPermanentSneak( const Character *ch );
 
 unsigned int GetKillTrackCount(const Character *ch);
 
+bool IS_OUTSIDE( const Character *ch );
+
 #endif

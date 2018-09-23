@@ -103,7 +103,7 @@ void do_oinvoke( Character *ch, std::string argument )
 
   obj = CreateObject( pObjIndex, level );
 
-  if ( CAN_WEAR(obj, ITEM_TAKE) )
+  if ( IsBitSet( obj->WearFlags, ITEM_TAKE ) )
     {
       obj = ObjectToCharacter( obj, ch );
     }

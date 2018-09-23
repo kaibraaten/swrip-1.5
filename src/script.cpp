@@ -614,7 +614,7 @@ static void LuaPushObject( lua_State *L, const Object *obj, size_t idx )
   /*
    * Castrate storage characters.
    */
-  if ( obj->ItemType == ITEM_KEY && !IS_OBJ_STAT(obj, ITEM_CLANOBJECT ))
+  if ( obj->ItemType == ITEM_KEY && !IsBitSet( obj->Flags, ITEM_CLANOBJECT ))
     {
       return;
     }
@@ -630,7 +630,7 @@ static void LuaPushObject( lua_State *L, const Object *obj, size_t idx )
   /*
    * Do NOT save prototype items!                               -Thoric
    */
-  if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
+  if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
     {
       return;
     }

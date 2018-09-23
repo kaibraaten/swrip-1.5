@@ -73,8 +73,12 @@ void do_mpoload( Character *ch, std::string argument )
   obj = CreateObject( pObjIndex, level );
   obj->Timer = timer;
 
-  if ( CAN_WEAR(obj, ITEM_TAKE) )
-    ObjectToCharacter( obj, ch );
+  if ( IsBitSet( obj->WearFlags, ITEM_TAKE ) )
+    {
+      ObjectToCharacter( obj, ch );
+    }
   else
-    ObjectToRoom( obj, ch->InRoom );
+    {
+      ObjectToRoom( obj, ch->InRoom );
+    }
 }

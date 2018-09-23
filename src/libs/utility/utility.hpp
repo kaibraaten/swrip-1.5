@@ -4,6 +4,7 @@
 #include <functional>
 #include <vector>
 #include <string>
+#include <bitset>
 #include <cstdio>
 #include <cstdlib>
 #include <cstdarg>
@@ -30,9 +31,18 @@
 /*
  * Utility macros.
  */
-#define CharToLowercase(c)                ((char) tolower((int)(c)))
-#define CharToUppercase(c)                ((char) toupper((int)(c)))
+char CharToLowercase( char c );
+char CharToUppercase( char c );
+
+#define SetBit(var, bit)       ((var) |= (bit))
+#define RemoveBit(var, bit)    ((var) &= ~(bit))
+#define ToggleBit(var, bit)    ((var) ^= (bit))
+
+bool IsBitSet( unsigned long flags, size_t bit );
+
+/*
 #define IsBitSet(flag, bit)       ((flag) & (bit))
+*/
 #define SetBit(var, bit)       ((var) |= (bit))
 #define RemoveBit(var, bit)    ((var) &= ~(bit))
 #define ToggleBit(var, bit)    ((var) ^= (bit))

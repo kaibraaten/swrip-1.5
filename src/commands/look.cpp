@@ -735,7 +735,7 @@ static void look_under( Character *ch, const std::string &what, bool doexaprog )
   Act( AT_PLAIN, "$n lifts $p and looks beneath it:", ch, obj, NULL, TO_ROOM );
   obj->Count = count;
 
-  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
+  if ( IsBitSet( obj->Flags, ITEM_COVERING ) )
     {
       ShowObjectListToCharacter( obj->Objects(), ch, true, true );
     }

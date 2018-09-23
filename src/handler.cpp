@@ -792,7 +792,7 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
   int wear_loc = obj->WearLoc;
   int Flags = obj->Flags;
 
-  if (IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
+  if (IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
     {
       if (!IsImmortal( ch )
           && (IsNpc(ch) && !IsBitSet(ch->Flags, ACT_PROTOTYPE)) )
@@ -872,7 +872,7 @@ void ObjectFromCharacter( Object *obj )
 
   ch->Remove(obj);
 
-  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && !obj->Objects().empty() )
+  if ( IsBitSet( obj->Flags, ITEM_COVERING ) && !obj->Objects().empty() )
     EmptyObjectContents( obj, NULL, NULL );
 
   obj->InRoom   = NULL;
@@ -987,7 +987,7 @@ void ObjectFromRoom( Object *obj )
 
   in_room->Remove(obj);
 
-  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && !obj->Objects().empty() )
+  if ( IsBitSet( obj->Flags, ITEM_COVERING ) && !obj->Objects().empty() )
     EmptyObjectContents( obj, NULL, obj->InRoom );
 
   if (obj->ItemType == ITEM_FIRE)
@@ -1089,7 +1089,7 @@ void ObjectFromObject( Object *obj )
 
   obj_from->Remove(obj);
 
-  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && !obj->Objects().empty() )
+  if ( IsBitSet( obj->Flags, ITEM_COVERING ) && !obj->Objects().empty() )
     EmptyObjectContents( obj, obj->InObject, NULL );
 
   obj->InObject       = NULL;
@@ -1680,7 +1680,7 @@ Object *FindObject( Character *ch, std::string argument, bool carryonly )
           return NULL;
         }
 
-      if ( !IS_OBJ_STAT(container, ITEM_COVERING )
+      if ( !IsBitSet( container->Flags, ITEM_COVERING )
            &&    IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->Name.c_str(), TO_CHAR );
@@ -1690,7 +1690,7 @@ Object *FindObject( Character *ch, std::string argument, bool carryonly )
       obj = GetObjectInList( ch, arg1, container->Objects() );
 
       if ( !obj )
-        Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
+        Act( AT_PLAIN, IsBitSet( container->Flags, ITEM_COVERING) ?
              "I see nothing like that beneath $p." :
              "I see nothing like that in $p.",
              ch, container, NULL, TO_CHAR );
@@ -2765,4 +2765,3 @@ void EconomizeMobileGold( Character *mob )
       LowerEconomy( tarea, mob->Gold );
     }
 }
-

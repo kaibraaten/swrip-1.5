@@ -1045,8 +1045,8 @@ static void MobileUpdate( void )
 
           for(Object *obj : ch->InRoom->Objects())
             {
-              if ( CAN_WEAR(obj, ITEM_TAKE) && obj->Cost > max
-                   && !IS_OBJ_STAT( obj, ITEM_BURRIED ) )
+              if ( IsBitSet( obj->WearFlags, ITEM_TAKE) && obj->Cost > max
+                   && !IsBitSet( obj->Flags, ITEM_BURRIED ) )
                 {
                   obj_best = obj;
                   max      = obj->Cost;
@@ -1895,7 +1895,7 @@ static void ObjectUpdate( void )
         }
 
       /* don't let inventory decay */
-      if ( IS_OBJ_STAT(obj, ITEM_INVENTORY) )
+      if ( IsBitSet( obj->Flags, ITEM_INVENTORY ) )
 	{
 	  continue;
 	}
@@ -2042,7 +2042,7 @@ static void ObjectUpdate( void )
         }
       else if ( obj->InRoom
                 && !obj->InRoom->Characters().empty()
-                && !IS_OBJ_STAT( obj, ITEM_BURRIED ) )
+                && !IsBitSet( obj->Flags, ITEM_BURRIED ) )
         {
           rch = obj->InRoom->Characters().front();
           Act( AT_TEMP, message, rch, obj, NULL, TO_ROOM );

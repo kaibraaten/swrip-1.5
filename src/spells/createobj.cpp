@@ -42,12 +42,15 @@ ch_ret spell_create_obj( int sn, int level, Character *ch, void *vo )
       FailedCasting( skill, ch, NULL, NULL );
       return rNONE;
     }
+
   obj->Timer = !skill->Dice.empty() ? ParseDice( ch, level, skill->Dice ) : 0;
   SuccessfulCasting( skill, ch, NULL, obj );
-  if ( CAN_WEAR(obj, ITEM_TAKE) )
+
+  if ( IsBitSet( obj->WearFlags, ITEM_TAKE ) )
     ObjectToCharacter( obj, ch );
   else
     ObjectToRoom( obj, ch->InRoom );
+
   return rNONE;
 }
 

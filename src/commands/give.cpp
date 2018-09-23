@@ -137,7 +137,7 @@ void do_give( Character *ch, std::string argument )
         }
     }
 
-  if (IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) && !CharacterCanTakePrototype( victim ) )
+  if (IsBitSet( obj->Flags, ITEM_PROTOTYPE ) && !CharacterCanTakePrototype( victim ) )
     {
       Act( AT_PLAIN, "You cannot give that to $N!", ch, NULL, victim, TO_CHAR );
       return;

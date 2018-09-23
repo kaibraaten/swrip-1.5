@@ -20,7 +20,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 
   if ( obj )
     {
-      if ( !IS_OBJ_STAT(obj, ITEM_INVIS) )
+      if ( !IsBitSet( obj->Flags, ITEM_INVIS ) )
         return rSPELL_FAILED;
 
       RemoveBit(obj->Flags, ITEM_INVIS);

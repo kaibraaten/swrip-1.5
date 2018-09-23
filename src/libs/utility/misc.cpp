@@ -330,3 +330,18 @@ long ToLong( const std::string str )
   int result = strtol( str.c_str(), nullptr, 10 );
   return result;
 }
+
+char CharToLowercase( char c )
+{
+  return static_cast<char>( tolower(static_cast<int>( c ) ) );
+}
+
+char CharToUppercase( char c )
+{
+  return static_cast<char>( toupper(static_cast<int>( c ) ) );
+}
+
+bool IsBitSet( unsigned long flags, size_t bit )
+{
+  return flags & bit;
+}

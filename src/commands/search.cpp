@@ -135,7 +135,7 @@ void do_search( Character *ch, std::string arg )
     {
       for( Object *hiddenObject : searchList )
         {
-          if ( IS_OBJ_STAT( obj, ITEM_HIDDEN )
+          if ( IsBitSet( obj->Flags, ITEM_HIDDEN )
                && percent < ch->PCData->Learned[gsn_search] )
             {
               obj = hiddenObject;

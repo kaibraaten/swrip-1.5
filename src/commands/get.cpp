@@ -210,7 +210,7 @@ void do_get( Character *ch, std::string argument )
       switch ( container->ItemType )
         {
         default:
-          if ( !IS_OBJ_STAT( container, ITEM_COVERING ) )
+          if ( !IsBitSet( container->Flags, ITEM_COVERING ) )
 	    {
               ch->Echo( "That's not a container.\r\n" );
               return;
@@ -231,7 +231,7 @@ void do_get( Character *ch, std::string argument )
           break;
         }
 
-      if ( !IS_OBJ_STAT(container, ITEM_COVERING )
+      if ( !IsBitSet( container->Flags, ITEM_COVERING )
            && IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           Act( AT_PLAIN, "The $d is closed.",
@@ -247,7 +247,7 @@ void do_get( Character *ch, std::string argument )
 
           if ( obj == nullptr )
             {
-              Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
+              Act( AT_PLAIN, IsBitSet( container->Flags, ITEM_COVERING) ?
                    "I see nothing like that beneath the $T." :
                    "I see nothing like that in the $T.",
                    ch, NULL, arg2.c_str(), TO_CHAR );
@@ -317,12 +317,12 @@ void do_get( Character *ch, std::string argument )
           if ( !found )
             {
               if ( fAll )
-                Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
+                Act( AT_PLAIN, IsBitSet( container->Flags, ITEM_COVERING) ?
                      "I see nothing beneath the $T." :
                      "I see nothing in the $T.",
                      ch, NULL, arg2.c_str(), TO_CHAR );
               else
-                Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
+                Act( AT_PLAIN, IsBitSet( container->Flags, ITEM_COVERING) ?
                      "I see nothing like that beneath the $T." :
                      "I see nothing like that in the $T.",
                      ch, NULL, arg2.c_str(), TO_CHAR );
@@ -359,14 +359,14 @@ static void get_obj( Character *ch, Object *obj, Object *container )
 {
   int weight = 0;
 
-  if ( !CAN_WEAR(obj, ITEM_TAKE)
+  if ( !IsBitSet( obj->WearFlags, ITEM_TAKE )
        && (ch->TopLevel < SysData.LevelToGetObjectsWithoutTakeFlag )  )
     {
       ch->Echo( "You can't take that.\r\n" );
       return;
     }
 
-  if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE )
+  if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE )
        &&  !CharacterCanTakePrototype( ch ) )
     {
       ch->Echo( "A godly force prevents you from getting close to it.\r\n" );
@@ -380,7 +380,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
       return;
     }
 
-  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
+  if ( IsBitSet( obj->Flags, ITEM_COVERING ) )
     weight = obj->Weight;
   else
     weight = GetObjectWeight( obj );
@@ -394,10 +394,10 @@ static void get_obj( Character *ch, Object *obj, Object *container )
 
   if ( container )
     {
-      Act( AT_ACTION, IS_OBJ_STAT(container, ITEM_COVERING) ?
+      Act( AT_ACTION, IsBitSet( container->Flags, ITEM_COVERING) ?
            "You get $p from beneath $P." : "You get $p from $P",
            ch, obj, container, TO_CHAR );
-      Act( AT_ACTION, IS_OBJ_STAT(container, ITEM_COVERING) ?
+      Act( AT_ACTION, IsBitSet( container->Flags, ITEM_COVERING) ?
            "$n gets $p from beneath $P." : "$n gets $p from $P",
            ch, obj, container, TO_ROOM );
       ObjectFromObject( obj );

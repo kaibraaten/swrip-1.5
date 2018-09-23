@@ -27,7 +27,7 @@ void do_bury( Character *ch, std::string arg )
 
   SeparateOneObjectFromGroup(obj);
 
-  if ( !CAN_WEAR(obj, ITEM_TAKE) )
+  if ( !IsBitSet( obj->WearFlags, ITEM_TAKE) )
     {
       Act( AT_PLAIN, "You cannot bury $p.", ch, obj, 0, TO_CHAR );
       return;

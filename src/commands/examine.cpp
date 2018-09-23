@@ -229,7 +229,7 @@ void do_examine( Character *ch, std::string arg )
               }
           }
 
-          if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
+          if ( IsBitSet( obj->Flags, ITEM_COVERING ) )
             break;
 
           ch->Echo( "When you look inside, you see:\r\n" );
@@ -267,7 +267,7 @@ void do_examine( Character *ch, std::string arg )
           }
 
         case ITEM_CONTAINER:
-          if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
+          if ( IsBitSet( obj->Flags, ITEM_COVERING ) )
             break;
 
         case ITEM_DRINK_CON:
@@ -277,7 +277,7 @@ void do_examine( Character *ch, std::string arg )
           break;
         }
 
-      if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
+      if ( IsBitSet( obj->Flags, ITEM_COVERING ) )
         {
           sprintf( buf, "under %s noprog", arg.c_str() );
           do_look( ch, buf );

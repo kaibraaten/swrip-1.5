@@ -206,8 +206,8 @@ void MakeCorpse( Character *ch )
     {
       ObjectFromCharacter( obj );
 
-      if ( IS_OBJ_STAT( obj, ITEM_INVENTORY )
-           || IS_OBJ_STAT( obj, ITEM_DEATHROT ) )
+      if ( IsBitSet( obj->Flags, ITEM_INVENTORY )
+           || IsBitSet( obj->Flags, ITEM_DEATHROT ) )
 	{
 	  ExtractObject( obj );
 	}

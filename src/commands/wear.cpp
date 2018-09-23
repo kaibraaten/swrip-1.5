@@ -92,7 +92,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     {
       bit = wear_bit;
 
-      if ( !CAN_WEAR(obj, 1 << bit) )
+      if ( !IsBitSet( obj->WearFlags, 1 << bit) )
         {
           if ( fReplace )
             {
@@ -120,7 +120,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     {
       for ( bit = -1, tmp = 1; tmp < 31; tmp++ )
         {
-          if ( CAN_WEAR(obj, 1 << tmp) )
+          if ( IsBitSet( obj->WearFlags, 1 << tmp) )
             {
               bit = tmp;
               break;
@@ -143,7 +143,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
       switch (ch->Race)
 	{
 	default:
-	  if ( !IS_OBJ_STAT(obj, ITEM_HUMAN_SIZE) )
+	  if ( !IsBitSet( obj->Flags, ITEM_HUMAN_SIZE ) )
 	    {
 	      check_size = true;
 	    }
@@ -151,7 +151,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 	  break;
 
 	case RACE_HUTT:
-	  if ( !IS_OBJ_STAT(obj, ITEM_HUTT_SIZE) )
+	  if ( !IsBitSet( obj->Flags, ITEM_HUTT_SIZE ) )
 	    {
 	      check_size = true;
 	    }
@@ -162,7 +162,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 	case RACE_MON_CALAMARI:
 	case RACE_QUARREN:
 	case RACE_WOOKIEE:
-	  if ( !IS_OBJ_STAT(obj, ITEM_LARGE_SIZE) )
+	  if ( !IsBitSet( obj->Flags, ITEM_LARGE_SIZE ) )
 	    {
 	      check_size = true;
 	    }
@@ -173,7 +173,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 	case RACE_EWOK:
 	case RACE_JAWA:
 	case RACE_SULLUSTAN:
-	  if ( !IS_OBJ_STAT(obj, ITEM_SMALL_SIZE) )
+	  if ( !IsBitSet( obj->Flags, ITEM_SMALL_SIZE) )
 	    {
 	      check_size = true;
 	    }
@@ -197,7 +197,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           return;
         }
 
-      if ( IS_OBJ_STAT(obj, ITEM_HUTT_SIZE) )
+      if ( IsBitSet( obj->Flags, ITEM_HUTT_SIZE) )
         {
           Act( AT_MAGIC, "That item is too big for you.", ch, NULL, NULL, TO_CHAR );
           Act( AT_ACTION, "$n tries to use $p, but it is too big.",
@@ -205,7 +205,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           return;
 	}
 
-      if ( IS_OBJ_STAT(obj, ITEM_LARGE_SIZE) || IS_OBJ_STAT(obj, ITEM_HUMAN_SIZE) )
+      if ( IsBitSet( obj->Flags, ITEM_LARGE_SIZE) || IsBitSet( obj->Flags, ITEM_HUMAN_SIZE) )
         {
           Act( AT_MAGIC, "That item is the wrong size for you.", ch, NULL, NULL, TO_CHAR );
           Act( AT_ACTION, "$n tries to use $p, but can't.",
@@ -213,7 +213,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           return;
         }
 
-      if ( IS_OBJ_STAT(obj, ITEM_SMALL_SIZE) )
+      if ( IsBitSet( obj->Flags, ITEM_SMALL_SIZE) )
         {
           Act( AT_MAGIC, "That item is too small for you.", ch, NULL, NULL, TO_CHAR );
           Act( AT_ACTION, "$n tries to use $p, but it is too small.",

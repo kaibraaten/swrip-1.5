@@ -306,27 +306,13 @@ public:
         }                                                               \
     } while(0)
 
-
-/*
- * Character macros.
- */
-#define IS_OUTSIDE(ch)          (!IsBitSet(                               \
-                                         (ch)->InRoom->Flags,     \
-                                         ROOM_INDOORS) && !IsBitSet(      \
-                                                                  (ch)->InRoom->Flags, \
-                                                                  ROOM_SPACECRAFT) )
-
-#define EXIT(ch, door)          ( GetExit( (ch)->InRoom, door ) )
-
-#define CAN_GO(ch, door)        (EXIT((ch),(door))                      \
-                                 && (EXIT((ch),(door))->ToRoom != NULL) \
-                                 && !IsBitSet(EXIT((ch), (door))->Flags, EX_CLOSED))
-
-/*
- * Object macros.
- */
-#define CAN_WEAR(obj, part)     (IsBitSet((obj)->WearFlags,  (part)))
-#define IS_OBJ_STAT(obj, stat)  (IsBitSet((obj)->Flags, (stat)))
+template<typename T>
+bool CAN_GO( T thing, DirectionType door )
+{
+  return GetExit( thing->InRoom, door )
+    && GetExit( thing->InRoom, door )->ToRoom != nullptr
+    && !IsBitSet( GetExit( thing->InRoom, door)->Flags, EX_CLOSED);
+}
 
 /*
  * Global constants.

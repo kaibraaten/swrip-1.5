@@ -169,8 +169,8 @@ void do_fill( Character *ch, std::string argument )
           
           if (dest_item == ITEM_CONTAINER)
             {
-              if ( !CAN_WEAR(source, ITEM_TAKE)
-                   ||   (IS_OBJ_STAT( source, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
+              if ( !IsBitSet( source->WearFlags, ITEM_TAKE)
+                   ||   (IsBitSet( source->Flags, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
                    ||    ch->CarryWeight + GetObjectWeight(source) > GetCarryCapacityWeight(ch)
                    ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->Count)
                    > obj->Value[OVAL_CONTAINER_CAPACITY] )
@@ -254,8 +254,8 @@ void do_fill( Character *ch, std::string argument )
         {
         default:        /* put something in container */
           if ( !source->InRoom /* disallow inventory items */
-               ||   !CAN_WEAR(source, ITEM_TAKE)
-               ||   (IS_OBJ_STAT( source, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
+               ||   !IsBitSet( source->WearFlags, ITEM_TAKE)
+               ||   (IsBitSet( source->Flags, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
                ||    ch->CarryWeight + GetObjectWeight(source) > GetCarryCapacityWeight(ch)
                ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->Count)
                > obj->Value[OVAL_CONTAINER_CAPACITY] )
@@ -330,8 +330,8 @@ void do_fill( Character *ch, std::string argument )
 
           for(Object *otmp : contents)
             {
-              if ( !CAN_WEAR(otmp, ITEM_TAKE)
-                   ||   (IS_OBJ_STAT( otmp, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
+              if ( !IsBitSet( otmp->WearFlags, ITEM_TAKE )
+                   ||   (IsBitSet( otmp->Flags, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
 		   ||    ch->CarryNumber + otmp->Count > GetCarryCapacityNumber(ch)
                    ||    ch->CarryWeight + GetObjectWeight(otmp) > GetCarryCapacityWeight(ch)
                    ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->Count)

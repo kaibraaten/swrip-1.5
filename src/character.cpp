@@ -554,9 +554,9 @@ void EquipCharacter( Character *ch, Object *obj, WearLocation iWear )
 
   SeparateOneObjectFromGroup(obj);    /* just in case */
 
-  if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IsEvil(ch)    )
-       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IsGood(ch)    )
-       ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IsNeutral(ch) ) )
+  if ( ( IsBitSet( obj->Flags, ITEM_ANTI_EVIL)    && IsEvil(ch)    )
+       ||   ( IsBitSet( obj->Flags, ITEM_ANTI_GOOD)    && IsGood(ch)    )
+       ||   ( IsBitSet( obj->Flags, ITEM_ANTI_NEUTRAL) && IsNeutral(ch) ) )
     {
       /*
        * Thanks to Morgenes for the bug fix here!
@@ -971,7 +971,7 @@ bool CanSeeObject( const Character *ch, const Object *obj )
   if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT) )
     return true;
 
-  if ( IS_OBJ_STAT( obj, ITEM_BURRIED ) )
+  if ( IsBitSet( obj->Flags, ITEM_BURRIED ) )
     return false;
 
   if ( IsAffectedBy( ch, AFF_TRUESIGHT ) )
@@ -980,7 +980,7 @@ bool CanSeeObject( const Character *ch, const Object *obj )
   if ( IsAffectedBy( ch, AFF_BLIND ) )
     return false;
 
-  if ( IS_OBJ_STAT(obj, ITEM_HIDDEN) )
+  if ( IsBitSet( obj->Flags, ITEM_HIDDEN) )
     return false;
 
   if ( obj->ItemType == ITEM_LIGHT && obj->Value[OVAL_LIGHT_POWER] != 0 )
@@ -989,7 +989,7 @@ bool CanSeeObject( const Character *ch, const Object *obj )
   if ( IsRoomDark( ch->InRoom ) && !IsAffectedBy(ch, AFF_INFRARED) )
     return false;
 
-  if ( IS_OBJ_STAT(obj, ITEM_INVIS) && !IsAffectedBy(ch, AFF_DETECT_INVIS) )
+  if ( IsBitSet( obj->Flags, ITEM_INVIS) && !IsAffectedBy(ch, AFF_DETECT_INVIS) )
     return false;
 
   return true;
@@ -1000,7 +1000,7 @@ bool CanSeeObject( const Character *ch, const Object *obj )
  */
 bool CanDropObject( const Character *ch, const Object *obj )
 {
-  if ( !IS_OBJ_STAT(obj, ITEM_NODROP) )
+  if ( !IsBitSet( obj->Flags, ITEM_NODROP) )
     return true;
 
   if ( !IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL )
@@ -1683,4 +1683,10 @@ Object *GetFirstObjectOfType(const Character *ch, ItemTypes type)
               {
                 return obj->ItemType == type;
               });
+}
+
+bool IS_OUTSIDE( const Character *ch )
+{
+  return !IsBitSet(ch->InRoom->Flags, ROOM_INDOORS)
+    && !IsBitSet( ch->InRoom->Flags, ROOM_SPACECRAFT);
 }

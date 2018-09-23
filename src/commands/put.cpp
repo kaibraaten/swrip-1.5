@@ -66,7 +66,7 @@ void do_put( Character *ch, std::string argument )
   if ( !container->CarriedBy && IsBitSet( SysData.SaveFlags, SV_PUT ) )
     save_char = true;
 
-  if ( IS_OBJ_STAT(container, ITEM_COVERING) )
+  if ( IsBitSet( container->Flags, ITEM_COVERING ) )
     {
       if ( ch->CarryWeight + container->Weight > GetCarryCapacityWeight( ch ) )
         {
@@ -112,8 +112,8 @@ void do_put( Character *ch, std::string argument )
           return;
         }
 
-      if ( (IS_OBJ_STAT(container, ITEM_COVERING)
-            &&   (GetObjectWeight( obj ) / obj->Count)
+      if ( (IsBitSet( container->Flags, ITEM_COVERING )
+            && (GetObjectWeight( obj ) / obj->Count)
             > ((GetObjectWeight( container ) / container->Count)
                -   container->Weight)) )
         {
@@ -140,10 +140,10 @@ void do_put( Character *ch, std::string argument )
 
       int count = obj->Count;
       obj->Count = 1;
-      Act( AT_ACTION, IS_OBJ_STAT( container, ITEM_COVERING )
+      Act( AT_ACTION, IsBitSet( container->Flags, ITEM_COVERING )
            ? "$n hides $p beneath $P." : "$n puts $p in $P.",
            ch, obj, container, TO_ROOM );
-      Act( AT_ACTION, IS_OBJ_STAT( container, ITEM_COVERING )
+      Act( AT_ACTION, IsBitSet( container->Flags, ITEM_COVERING )
            ? "You hide $p beneath $P." : "You put $p in $P.",
 	   ch, obj, container, TO_CHAR );
       obj->Count = count;

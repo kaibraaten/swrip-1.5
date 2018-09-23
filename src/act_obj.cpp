@@ -35,13 +35,13 @@ short GetObjectResistance( const Object *obj )
   short resist = NumberFuzzy(MAX_ITEM_IMPACT);
 
   /* magical items are more resistant */
-  if ( IS_OBJ_STAT( obj, ITEM_MAGIC ) )
+  if ( IsBitSet( obj->Flags, ITEM_MAGIC ) )
     resist += NumberFuzzy(12);
   /* blessed objects should have a little bonus */
-  if ( IS_OBJ_STAT( obj, ITEM_BLESS ) )
+  if ( IsBitSet( obj->Flags, ITEM_BLESS ) )
     resist += NumberFuzzy(5);
   /* lets make store inventory pretty tough */
-  if ( IS_OBJ_STAT( obj, ITEM_INVENTORY ) )
+  if ( IsBitSet( obj->Flags, ITEM_INVENTORY ) )
     resist += 20;
 
   /* okay... let's add some bonus/penalty for item level... */
@@ -156,7 +156,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
 
   if ( IsBitSet( obj->InRoom->Flags, ROOM_NOFLOOR )
        &&   CAN_GO( obj, DIR_DOWN )
-       &&   !IS_OBJ_STAT( obj, ITEM_MAGIC ) )
+       &&   !IsBitSet( obj->Flags, ITEM_MAGIC ) )
     {
 
       pexit = GetExit( obj->InRoom, DIR_DOWN );
@@ -276,7 +276,7 @@ bool RemoveObject( Character *ch, WearLocation iWear, bool fReplace )
   if ( !fReplace )
     return false;
 
-  if ( IS_OBJ_STAT(obj, ITEM_NOREMOVE) )
+  if ( IsBitSet( obj->Flags, ITEM_NOREMOVE) )
     {
       Act( AT_PLAIN, "You can't remove $p.", ch, obj, NULL, TO_CHAR );
       return false;
