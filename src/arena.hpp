@@ -1,6 +1,7 @@
 #ifndef _SWRIP_ARENA_HPP_
 #define _SWRIP_ARENA_HPP_
 
+#include <list>
 #include <string>
 #include <ctime>
 
@@ -31,11 +32,10 @@ public:
   std::string Name;
   time_t Date = 0;
   int Award = 0;
-  HallOfFameElement *Next = nullptr;
 };
 
 extern Arena arena;
-extern HallOfFameElement *FameList;
+extern std::list<HallOfFameElement*> FameList;
 
 void StartArena( void );
 void LoadHallOfFame( void );

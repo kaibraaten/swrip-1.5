@@ -6,7 +6,7 @@
 
 void do_ahall(Character *ch, std::string argument)
 {
-  if (!FameList)
+  if ( FameList.empty() )
     {
       ch->Echo("No-one is in the Hall of Fame.\r\n");
       return;
@@ -25,7 +25,7 @@ void do_ahall(Character *ch, std::string argument)
            "&B---------------------------------",
            "&B---------------------------------");
 
-  for (HallOfFameElement *fame_node = FameList; fame_node; fame_node = fame_node->Next)
+  for (const HallOfFameElement *fame_node : FameList )
     {
       char site[MAX_INPUT_LENGTH];
         

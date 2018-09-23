@@ -43,6 +43,7 @@
 #include "repos/descriptorrepository.hpp"
 
 Arena arena;
+std::list<HallOfFameElement*> FameList;
 
 #define ARENA_FIRST_ROOM 29
 #define ARENA_LAST_ROOM  43
@@ -57,8 +58,6 @@ static void StartGame(void);
 static void SilentEnd(void);
 static void FindBetWinners(Character *winner);
 static void ResetBets(void);
-
-struct HallOfFameElement *FameList = NULL;
 
 void StartArena(void)
 {
@@ -254,8 +253,7 @@ static void FindGameWinner(void)
               fame_node->Name = i->Name;
               fame_node->Date = time(0);
               fame_node->Award = (arena.ArenaPot/2);
-              fame_node->Next = FameList;
-              FameList = fame_node;
+              FameList.push_front( fame_node );
 
               SaveHallOfFame();
               FindBetWinners(i);
@@ -370,8 +368,7 @@ static int L_HallOfFameEntry( lua_State *L )
   LuaGetfieldLong( L, "Date", &fameNode->Date );
   LuaGetfieldInt( L, "Award", &fameNode->Award );
 
-  fameNode->Next = FameList;
-  FameList = fameNode;
+  FameList.push_front( fameNode );
       
   return 0;
 }
@@ -396,10 +393,9 @@ static void PushFameElement( lua_State *L, const struct HallOfFameElement *fame 
 
 static void PushHallOfFame( lua_State *L, const void *userData )
 {
-  const struct HallOfFameElement *fameElement = NULL;
   lua_newtable( L );
 
-  for( fameElement = FameList; fameElement; fameElement = fameElement->Next )
+  for( const HallOfFameElement *fameElement : FameList )
     {
       PushFameElement( L, fameElement );
     }
