@@ -69,15 +69,15 @@
 
 #define MAX_PROG_NEST   20
 
-bool MOBtrigger;
+bool MOBtrigger = false;
 
 /*
  *  Mudprogram additions
  */
-Character *supermob;
-struct act_prog_data *room_act_list;
-struct act_prog_data *obj_act_list;
-struct act_prog_data *mob_act_list;
+Character *supermob = nullptr;
+std::list<act_prog_data*> room_act_list;
+std::list<act_prog_data*> obj_act_list;
+std::list<act_prog_data*> mob_act_list;
 
 /*
  * Local function prototypes
@@ -2300,20 +2300,14 @@ static void mprog_time_check( Character *mob, Character *actor, Object *obj,
 
 static void MobileActAdd( Character *mob )
 {
-  struct act_prog_data *runner;
-
-  for ( runner = mob_act_list; runner; runner = runner->Next )
+  if( Find( room_act_list, [mob](const auto runner){ return runner->vo == mob; } ) != nullptr )
     {
-      if ( runner->vo == mob )
-	{
-	  return;
-	}
+      return;
     }
 
-  runner = new act_prog_data();
+  act_prog_data *runner = new act_prog_data();
   runner->vo = mob;
-  runner->Next = mob_act_list;
-  mob_act_list = runner;
+  mob_act_list.push_front( runner );
 }
 
 /* The triggers.. These are really basic, and since most appear only
@@ -3280,28 +3274,21 @@ void ProgBug( const std::string &str, const Character *mob )
 
 static void RoomActAdd( Room *room )
 {
-  struct act_prog_data *runner;
-
-  for ( runner = room_act_list; runner; runner = runner->Next )
+  if( Find( room_act_list, [room](const auto runner){ return runner->vo == room; } ) != nullptr )
     {
-      if ( runner->vo == room )
-	{
-	  return;
-	}
+      return;
     }
 
-  runner = new act_prog_data();
+  act_prog_data *runner = new act_prog_data();
   runner->vo = room;
-  runner->Next = room_act_list;
-  room_act_list = runner;
+  room_act_list.push_front( runner );
 }
 
 void RoomActUpdate( void )
 {
-  struct act_prog_data *runner;
-
-  while ( (runner = room_act_list) != NULL )
+  while ( !room_act_list.empty() )
     {
+      act_prog_data *runner = room_act_list.front();
       Room *room = (Room*)runner->vo;
 
       std::list<MPROG_ACT_LIST*> actLists(room->mprog.ActLists());
@@ -3320,35 +3307,28 @@ void RoomActUpdate( void )
         }
 
       room->mprog.mpactnum = 0;
-      room_act_list = runner->Next;
+      room_act_list.remove( runner );
       delete runner;
     }
 }
 
 static void ObjectActAdd( Object *obj )
 {
-  struct act_prog_data *runner;
-
-  for ( runner = obj_act_list; runner; runner = runner->Next )
+  if( Find( room_act_list, [obj](const auto runner){ return runner->vo == obj; } ) != nullptr )
     {
-      if ( runner->vo == obj )
-	{
-	  return;
-	}
+      return;
     }
-
-  runner = new act_prog_data();
+  
+  act_prog_data *runner = new act_prog_data();
   runner->vo = obj;
-  runner->Next = obj_act_list;
-  obj_act_list = runner;
+  obj_act_list.push_front( runner );
 }
 
 void ObjectActUpdate( void )
 {
-  struct act_prog_data *runner;
-
-  while ( (runner = obj_act_list) != NULL )
+  while ( !obj_act_list.empty() )
     {
+      act_prog_data *runner = obj_act_list.front();
       Object *obj = (Object*)runner->vo;
 
       std::list<MPROG_ACT_LIST*> actLists(obj->mprog.ActLists());
@@ -3363,7 +3343,7 @@ void ObjectActUpdate( void )
         }
 
       obj->mprog.mpactnum = 0;
-      obj_act_list = runner->Next;
+      obj_act_list.remove( runner );
       delete runner;
     }
 }

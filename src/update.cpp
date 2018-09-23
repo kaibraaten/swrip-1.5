@@ -2256,12 +2256,12 @@ static void AggroUpdate( void )
   Character *ch = NULL;
   Character *victim = NULL;
   Character *wch_next = NULL;
-  struct act_prog_data *apdtmp = NULL;
 
   /* check mobprog act queue */
-  while ( (apdtmp = mob_act_list) != NULL )
+  while ( !mob_act_list.empty() )
     {
-      Character *wch = (Character*)mob_act_list->vo;
+      act_prog_data *apdtmp = mob_act_list.front();
+      Character *wch = (Character*)apdtmp->vo;
 
       if ( !CharacterDiedRecently(wch) && wch->mprog.mpactnum > 0 )
         {
@@ -2288,7 +2288,7 @@ static void AggroUpdate( void )
           wch->mprog.mpactnum = 0;
         }
 
-      mob_act_list = apdtmp->Next;
+      mob_act_list.remove( apdtmp );
       delete apdtmp;
     }
 

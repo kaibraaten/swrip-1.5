@@ -18,9 +18,9 @@ public:
   void InsertBefore(size_t position, MPROG_DATA *prog);
   void Remove(MPROG_DATA *prog);
 
-  int             mpactnum = 0;
-  short           mpscriptpos = 0;
-  int             progtypes = 0;
+  int mpactnum = 0;
+  short mpscriptpos = 0;
+  int progtypes = 0;
 
 private:
   struct Impl;
@@ -30,7 +30,6 @@ private:
 /* Mob program structures */
 struct act_prog_data
 {
-  struct act_prog_data *Next = nullptr;
   void                 *vo = nullptr;
 };
 
@@ -52,7 +51,7 @@ struct MPROG_DATA
 };
 
 extern bool MOBtrigger;
-extern struct act_prog_data *mob_act_list;
+extern std::list<act_prog_data*> mob_act_list;
 extern Character *supermob;
 
 void RoomActUpdate( void );
