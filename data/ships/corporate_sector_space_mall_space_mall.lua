@@ -1,82 +1,70 @@
 -- Corporate Sector Space Mall
--- Last saved Saturday 22-Sep-2018 21:36:49
+-- Last saved Sunday 23-Sep-2018 17:29:16
 
 ShipEntry
 {
    Thrusters = 
    {
       Maneuver = 0, 
-      Speed = 
-      {
-         Max = 0, 
-         Current = 0, 
-      }, 
       Energy = 
       {
-         Max = 20000, 
          Current = 20000, 
+         Max = 20000, 
+      }, 
+      Speed = 
+      {
+         Current = 0, 
+         Max = 0, 
       }, 
    }, 
+   Name = "Corporate Sector Space Mall", 
+   PersonalName = "Space Mall", 
+   Class = "Capital Ship", 
+   Type = "Civilian", 
+   Location = 0, 
+   Home = "corperate", 
    Owner = "Corporate Sector", 
-   Description = "", 
-   Pilot = "", 
-   Hyperdrive = 
-   {
-      Speed = 255, 
-   }, 
-   Instruments = 
-   {
-      Sensor = 0, 
-      Comm = 0, 
-      AstroArray = 0, 
-   }, 
-   State = 1, 
    Guard = false, 
+   CoPilot = "", 
+   DockingPorts = 0, 
    Rooms = 
    {
       Engine = 0, 
-      Last = 7350, 
       Cockpit = 7350, 
-      Coseat = 7350, 
-      Navseat = 7350, 
-      Pilotseat = 7350, 
-      Hangar = 7300, 
-      Entrance = 7350, 
       Gunseat = 7350, 
       First = 7300, 
+      Coseat = 7350, 
+      Hangar = 7300, 
+      Navseat = 7350, 
+      Last = 7350, 
+      Entrance = 7350, 
+      Pilotseat = 7350, 
    }, 
-   Class = "Capital Ship", 
-   Name = "Corporate Sector Space Mall", 
    Position = 
    {
-      X = 916, 
-      Z = -2903, 
-      Y = -771, 
+      X = 2394, 
+      Y = -3256, 
+      Z = -4721, 
    }, 
    Defenses = 
    {
       Shield = 
       {
-         Max = 1000, 
          Current = 1000, 
+         Max = 1000, 
       }, 
       Hull = 
       {
-         Max = 20000, 
          Current = 20000, 
+         Max = 20000, 
       }, 
       Chaff = 
       {
-         Max = 0, 
          Current = 0, 
+         Max = 0, 
       }, 
    }, 
-   Type = "Civilian", 
-   Home = "corperate", 
-   PersonalName = "Space Mall", 
-   Location = 0, 
-   Shipyard = 45, 
-   DockingPorts = 0, 
+   Description = "", 
    WeaponSystems = 
    {
       TractorBeam = 
@@ -84,90 +72,102 @@ ShipEntry
          State = 0, 
          Strength = 0, 
       }, 
-      Turrets = 
-      {
-         [1] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [2] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [3] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [4] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [5] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [6] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [7] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [8] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [9] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [0] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-      }, 
       Tube = 
       {
-         State = 0, 
          Rockets = 
          {
-            Max = 0, 
             Current = 4, 
+            Max = 0, 
+         }, 
+         State = 0, 
+         Missiles = 
+         {
+            Current = 10, 
+            Max = 10, 
          }, 
          Torpedoes = 
          {
-            Max = 0, 
             Current = 2, 
+            Max = 0, 
          }, 
-         Missiles = 
-         {
-            Max = 10, 
-            Current = 10, 
-         }, 
-      }, 
-      IonCannon = 
-      {
-         Count = 0, 
-         State = 0, 
       }, 
       Laser = 
       {
          Count = 10, 
          State = 0, 
       }, 
+      IonCannon = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      Turrets = 
+      {
+         [1] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [2] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [3] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [4] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [5] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [6] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [7] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [8] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [9] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [0] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+      }, 
+   }, 
+   LastDock = 45, 
+   Hyperdrive = 
+   {
+      Speed = 255, 
+   }, 
+   Instruments = 
+   {
+      AstroArray = 0, 
+      Sensor = 0, 
+      Comm = 0, 
    }, 
    Alarm = false, 
-   LastDock = 45, 
-   CoPilot = "", 
+   Pilot = "", 
+   State = 1, 
+   Shipyard = 45, 
 }

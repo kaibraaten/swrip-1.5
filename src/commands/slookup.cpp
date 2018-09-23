@@ -24,7 +24,7 @@ void do_slookup( Character *ch, std::string arg )
       for ( sn = 0; sn < TopSN && SkillTable[sn] && !SkillTable[sn]->Name.empty(); sn++ )
 	{
           ch->Echo("Sn: %4d Slot: %4d Skill/spell: '%-20s' Damtype: %s\r\n",
-                   sn, SkillTable[sn]->Slot, SkillTable[sn]->Name,
+                   sn, SkillTable[sn]->Slot, SkillTable[sn]->Name.c_str(),
                    GetSpellDamageName(SPELL_DAMAGE( SkillTable[sn] )) );
 	}
     }
@@ -119,7 +119,7 @@ void do_slookup( Character *ch, std::string arg )
                skill->SkillFunction || skill->SpellFunction ? skill->FunctionName.c_str() : "(none set)");
 
       ch->Echo("Dammsg: %s\r\nWearoff: %s\n",
-               skill->Messages.NounDamage,
+               skill->Messages.NounDamage.c_str(),
                !skill->Messages.WearOff.empty() ? skill->Messages.WearOff.c_str() : "(none set)" );
 
       if ( !skill->Dice.empty() )

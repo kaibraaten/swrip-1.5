@@ -610,7 +610,7 @@ int SkillNumberFromSlot( int slot )
 /*
  * Sort the skill table with qsort
  */
-void SortSkillTable( void )
+void SortSkillTable()
 {
   Log->Info( "Sorting skill table..." );
   qsort( &SkillTable[1], TopSN-1, sizeof( Skill * ),
@@ -826,7 +826,7 @@ static void PushSkillTable( lua_State *L, const void *userData )
   lua_setglobal( L, "skills" );
 }
 
-void SaveSkills( void )
+void SaveSkills()
 {
   LuaSaveDataFile( SKILL_DATA_FILE, PushSkillTable, "skills", NULL );
 }
@@ -869,21 +869,8 @@ static void LoadSkillTeachers( lua_State *L, Skill *skill )
 
 static void LoadBasicMessages( lua_State *L, Skill *skill )
 {
-  int idx = lua_gettop( L );
-  lua_getfield( L, idx, "NounDamage" );
-  lua_getfield( L, idx, "WearOff" );
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Messages.NounDamage = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Messages.WearOff = lua_tostring( L, idx );
-    }
-
-  lua_pop( L, 2 );
+  LuaGetfieldString( L, "NounDamage", &skill->Messages.NounDamage );
+  LuaGetfieldString( L, "WearOff", &skill->Messages.WearOff );
 }
 
 static void LoadSuccessMessages( lua_State *L, Skill *skill )
@@ -893,28 +880,9 @@ static void LoadSuccessMessages( lua_State *L, Skill *skill )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int sub_idx = lua_gettop( L );
-
-      lua_getfield( L, sub_idx, "ToCaster" );
-      lua_getfield( L, sub_idx, "ToVictim" );
-      lua_getfield( L, sub_idx, "ToRoom" );
-
-      if( !lua_isnil( L, ++sub_idx ) )
-	{
-	  skill->Messages.Success.ToCaster = lua_tostring( L, sub_idx );
-	}
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          skill->Messages.Success.ToVictim = lua_tostring( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          skill->Messages.Success.ToRoom = lua_tostring( L, sub_idx );
-        }
-
-      lua_pop( L, 3 );
+      LuaGetfieldString( L, "ToCaster", &skill->Messages.Success.ToCaster );
+      LuaGetfieldString( L, "ToVictim", &skill->Messages.Success.ToVictim );
+      LuaGetfieldString( L, "ToRoom", &skill->Messages.Success.ToRoom );
     }
   else
     {
@@ -931,28 +899,9 @@ static void LoadFailureMessages( lua_State *L, Skill *skill )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int sub_idx = lua_gettop( L );
-
-      lua_getfield( L, sub_idx, "ToCaster" );
-      lua_getfield( L, sub_idx, "ToVictim" );
-      lua_getfield( L, sub_idx, "ToRoom" );
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          skill->Messages.Failure.ToCaster = lua_tostring( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          skill->Messages.Failure.ToVictim = lua_tostring( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          skill->Messages.Failure.ToRoom = lua_tostring( L, sub_idx );
-        }
-
-      lua_pop( L, 3 );
+      LuaGetfieldString( L, "ToCaster", &skill->Messages.Failure.ToCaster );
+      LuaGetfieldString( L, "ToVictim", &skill->Messages.Failure.ToVictim );
+      LuaGetfieldString( L, "ToRoom", &skill->Messages.Failure.ToRoom );
     }
 
   lua_pop( L, 1 );
@@ -965,28 +914,9 @@ static void LoadVictimDeathMessages( lua_State *L, Skill *skill )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int sub_idx = lua_gettop( L );
-
-      lua_getfield( L, sub_idx, "ToCaster" );
-      lua_getfield( L, sub_idx, "ToVictim" );
-      lua_getfield( L, sub_idx, "ToRoom" );
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          skill->Messages.VictimDeath.ToCaster = lua_tostring( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          skill->Messages.VictimDeath.ToVictim = lua_tostring( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          skill->Messages.VictimDeath.ToRoom = lua_tostring( L, sub_idx );
-        }
-
-      lua_pop( L, 3 );
+      LuaGetfieldString( L, "ToCaster", &skill->Messages.VictimDeath.ToCaster );
+      LuaGetfieldString( L, "ToVictim", &skill->Messages.VictimDeath.ToVictim );
+      LuaGetfieldString( L, "ToRoom", &skill->Messages.VictimDeath.ToRoom );
     }
 
   lua_pop( L, 1 );
@@ -999,28 +929,9 @@ static void LoadVictimImmuneMessages( lua_State *L, Skill *skill )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int sub_idx = lua_gettop( L );
-
-      lua_getfield( L, sub_idx, "ToCaster" );
-      lua_getfield( L, sub_idx, "ToVictim" );
-      lua_getfield( L, sub_idx, "ToRoom" );
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          skill->Messages.VictimImmune.ToCaster = lua_tostring( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          skill->Messages.VictimImmune.ToVictim = lua_tostring( L, sub_idx );
-        }
-
-      if( !lua_isnil( L, ++sub_idx ) )
-        {
-          skill->Messages.VictimImmune.ToRoom = lua_tostring( L, sub_idx );
-        }
-
-      lua_pop( L, 3 );
+      LuaGetfieldString( L, "ToCaster", &skill->Messages.VictimImmune.ToCaster );
+      LuaGetfieldString( L, "ToVictim", &skill->Messages.VictimImmune.ToVictim );
+      LuaGetfieldString( L, "ToRoom", &skill->Messages.VictimImmune.ToRoom );
     }
 
   lua_pop( L, 1 );
@@ -1063,155 +974,94 @@ static int L_SkillEntry( lua_State *L )
 
 static Skill *LoadSkillOrHerb( lua_State *L )
 {
-  int idx = lua_gettop( L );
-  Skill *skill = NULL;
-  luaL_checktype( L, 1, LUA_TTABLE );
+  std::string skillName;
+  LuaGetfieldString( L, "Name", &skillName );
 
-  lua_getfield( L, idx, "Name" );
-  lua_getfield( L, idx, "Ability" );
-  lua_getfield( L, idx, "Position" );
-  lua_getfield( L, idx, "Type" );
-  lua_getfield( L, idx, "Function" );
-  lua_getfield( L, idx, "Target" );
-  lua_getfield( L, idx, "Slot" );
-  lua_getfield( L, idx, "Mana" );
-  lua_getfield( L, idx, "Beats" );
-  lua_getfield( L, idx, "Level" );
-  lua_getfield( L, idx, "Dice" );
-  lua_getfield( L, idx, "Value" );
-  lua_getfield( L, idx, "Saves" );
-  lua_getfield( L, idx, "Difficulty" );
-  lua_getfield( L, idx, "Participants" );
-  lua_getfield( L, idx, "Alignment" );
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill = new Skill();
-      skill->UseRec = new timerset();
-      skill->Name = lua_tostring( L, idx );
-    }
-  else
+  if( skillName.empty() )
     {
       Log->Bug( "%s: Found skill without name", __FUNCTION__ );
-      return NULL;
+      return nullptr;
     }
+  
+  Skill *skill = new Skill();
+  skill->UseRec = new timerset();
+  skill->Name = skillName;
 
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Guild = GetAbility( lua_tostring( L, idx ) );
+  LuaGetfieldString( L, "Ability",
+                     [skill](const std::string &abilityName)
+                     {
+                       skill->Guild = GetAbility( abilityName );
 
-      if( skill->Guild >= MAX_ABILITY )
-	{
-	  skill->Guild = ABILITY_NONE;
-	}
-    }
+                       if( skill->Guild >= MAX_ABILITY )
+                         {
+                           skill->Guild = ABILITY_NONE;
+                         }
+                     });
+  LuaGetfieldString( L, "Position",
+                     [skill](const std::string &posName)
+                     {
+                       skill->Position = GetPosition( posName );
 
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Position = GetPosition( lua_tostring( L, idx ) );
+                       if( skill->Position < POS_DEAD || skill->Position >= MAX_POSITION )
+                         {
+                           skill->Position = DEFAULT_POSITION;
+                         }
+                     });
+  LuaGetfieldString( L, "Type",
+                     [skill](const std::string &typeName)
+                     {
+                       skill->Type = GetSkillType( typeName );
 
-      if( skill->Position < POS_DEAD || skill->Position >= MAX_POSITION )
-	{
-	  skill->Position = DEFAULT_POSITION;
-	}
-    }
+                       if( skill->Type < SKILL_UNKNOWN || skill->Type > SKILL_HERB )
+                         {
+                           Log->Bug( "%s: Invalid skill type: %d", __FUNCTION__, skill->Type );
+                           skill->Type = SKILL_UNKNOWN;
+                         }
+                     });
+  LuaGetfieldString( L, "Function",
+                     [skill](const std::string &funName)
+                     {
+                       SpellFun *spellfun = GetSpellFunction( funName );
+                       CmdFun *dofun = GetSkillFunction( funName );
 
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Type = GetSkillType( lua_tostring( L, idx ) );
+                       if( spellfun != spell_notfound
+                           && !StringPrefix( "spell_", funName ) )
+                         {
+                           skill->SpellFunction = spellfun;
+                           skill->FunctionName = funName;
+                         }
+                       else if( dofun != skill_notfound
+                                && !StringPrefix( "do_", funName ) )
+                         {
+                           skill->SkillFunction = dofun;
+                           skill->FunctionName = funName;
+                         }
+                       else
+                         {
+                           Log->Bug( "%s: unknown skill/spell code %s",
+                                     __FUNCTION__, funName.c_str() );
+                         }
+                     });
+  LuaGetfieldString( L, "Target",
+                     [skill](const std::string &targetName)
+                     {
+                       skill->Target = (SkillTargetType)GetSpellTarget( targetName );
 
-      if( skill->Type < SKILL_UNKNOWN || skill->Type > SKILL_HERB )
-	{
-	  Log->Bug( "%s: Invalid skill type: %d", __FUNCTION__, skill->Type );
-	  skill->Type = SKILL_UNKNOWN;
-	}
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      const char *funName = lua_tostring( L, idx );
-      SpellFun *spellfun = NULL;
-      CmdFun *dofun = NULL;
-
-      if( ( spellfun = GetSpellFunction( funName ) ) != spell_notfound
-	  && !StringPrefix( "spell_", funName ) )
-	{
-	  skill->SpellFunction = spellfun;
-	  skill->FunctionName = funName;
-	}
-      else if( ( dofun = GetSkillFunction( funName ) ) != skill_notfound
-	       && !StringPrefix( "do_", funName ) )
-	{
-	  skill->SkillFunction = dofun;
-	  skill->FunctionName = funName;
-	}
-      else
-	{
-	  Log->Bug( "%s: unknown skill/spell code %s", __FUNCTION__, funName );
-	}
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Target = (SkillTargetType)GetSpellTarget( lua_tostring( L, idx ) );
-
-      if( skill->Target < TAR_IGNORE || skill->Target > TAR_OBJ_INV )
-	{
-	  skill->Target = TAR_IGNORE;
-	}
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Slot = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Mana = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Beats = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Level = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Dice = lua_tostring( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Value = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Saves = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Difficulty = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Participants = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      skill->Alignment = lua_tointeger( L, idx );
-    }
-
-  lua_pop( L, lua_gettop( L ) - 1 );
+                       if( skill->Target < TAR_IGNORE || skill->Target > TAR_OBJ_INV )
+                         {
+                           skill->Target = TAR_IGNORE;
+                         }
+                     });
+  LuaGetfieldInt( L, "Slot", &skill->Slot );
+  LuaGetfieldInt( L, "Mana", &skill->Mana );
+  LuaGetfieldInt( L, "Beats", &skill->Beats );
+  LuaGetfieldInt( L, "Level", &skill->Level );
+  LuaGetfieldString( L, "Dice", &skill->Dice );
+  LuaGetfieldInt( L, "Value", &skill->Value );
+  LuaGetfieldInt( L, "Saves", &skill->Saves );
+  LuaGetfieldInt( L, "Difficulty", &skill->Difficulty );
+  LuaGetfieldInt( L, "Participants", &skill->Participants );
+  LuaGetfieldInt( L, "Alignment", &skill->Alignment );
 
   skill->Flags = LuaLoadFlags( L, "Flags" ); 
   LoadSkillTeachers( L, skill );
@@ -1239,7 +1089,7 @@ static int L_HerbEntry( lua_State *L )
   return 0;
 }
 
-void LoadSkills( void )
+void LoadSkills()
 {
   LuaLoadDataFile( SKILL_DATA_FILE, L_SkillEntry, "SkillEntry" );
 }
@@ -1262,12 +1112,12 @@ static void PushHerbTable( lua_State *L, const void *userData )
   lua_setglobal( L, "herbs" );
 }
 
-void SaveHerbs( void )
+void SaveHerbs()
 {
   LuaSaveDataFile( HERB_DATA_FILE, PushHerbTable, "herbs", NULL );
 }
 
-void LoadHerbs( void )
+void LoadHerbs()
 {
   LuaLoadDataFile( HERB_DATA_FILE, L_HerbEntry, "HerbEntry" );
 }

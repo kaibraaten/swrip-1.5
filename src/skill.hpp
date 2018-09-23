@@ -16,16 +16,16 @@ class Skill
 {
 public:
   std::string Name;                   /* Name of skill                */
-  SpellFun  *SpellFunction = nullptr;              /* Spell pointer (for spells)   */
-  CmdFun    *SkillFunction = nullptr;              /* Skill pointer (for skills)   */
+  SpellFun *SpellFunction = nullptr;              /* Spell pointer (for spells)   */
+  CmdFun *SkillFunction = nullptr;              /* Skill pointer (for skills)   */
   std::string FunctionName;
   SkillTargetType Target = 0;                 /* Legal targets                */
   PositionType Position = 0;       /* Position for caster / user   */
-  short      Slot = 0;                   /* Slot for #OBJECT loading     */
-  short      Mana = 0;               /* Minimum mana used            */
-  short      Beats = 0;                  /* Rounds required to use skill */
-  short      Guild = 0;                  /* Which guild the skill belongs to */
-  short      Level = 0;              /* Minimum level to be able to cast */
+  int Slot = 0;                   /* Slot for #OBJECT loading     */
+  int Mana = 0;               /* Minimum mana used            */
+  int Beats = 0;                  /* Rounds required to use skill */
+  int Guild = 0;                  /* Which guild the skill belongs to */
+  int Level = 0;              /* Minimum level to be able to cast */
   SkillType Type = 0;                   /* Spell/Skill/Weapon/Tongue    */
   unsigned int Flags = 0;                  /* extra stuff                  */
 
@@ -44,14 +44,14 @@ public:
   } Messages;
 
   std::string Dice;                   /* Dice roll                    */
-  int        Value = 0;                  /* Misc value                   */
-  char       Saves = 0;                  /* What saving spell applies    */
-  char       Difficulty = 0;             /* Difficulty of casting/learning */
+  int Value = 0;                  /* Misc value                   */
+  int Saves = 0;                  /* What saving spell applies    */
+  int Difficulty = 0;             /* Difficulty of casting/learning */
   SmaugAffect *Affects = nullptr;                /* Spell affects, if any        */
   std::string Teachers;               /* Skill requires a special teacher */
-  char       Participants = 0;           /* # of required participants   */
+  int Participants = 0;           /* # of required participants   */
   timerset *UseRec = nullptr; /* Usage record                 */
-  int        Alignment = 0;              /* for jedi powers */
+  int Alignment = 0;              /* for jedi powers */
 };
 
 extern const std::array<const char * const, SKILLTYPE_MAX> SkillTypeName;
@@ -280,12 +280,11 @@ int BSearchSkill( const std::string &name, int first, int top );
 int BSearchSkillExact( const std::string &name, int first, int top );
 int ChBSearchSkill( const Character *ch, const std::string &name, int first, int top );
 Skill *GetSkill( int sn );
-
 SkillType GetSkillType(const std::string &skilltype);
-void LoadSkills( void );
-void SaveSkills( void );
-void SortSkillTable( void );
-void LoadHerbs( void );
-void SaveHerbs( void );
+void LoadSkills();
+void SaveSkills();
+void SortSkillTable();
+void LoadHerbs();
+void SaveHerbs();
 
 #endif
