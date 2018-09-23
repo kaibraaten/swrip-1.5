@@ -21,7 +21,6 @@ void do_radar( Character *ch, std::string argument )
 {
   int the_chance = 0;
   Ship *ship = NULL;
-  Missile *missile = NULL;
   struct ShowShipData showShipData;
 
   if ( ( ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
@@ -129,7 +128,7 @@ void do_radar( Character *ch, std::string argument )
   ForEachShip(ShowShipIfInRadarRange, &showShipData);
   ch->Echo("\r\n");
 
-  for ( missile = FirstMissile; missile; missile = missile->Next )
+  for ( const Missile *missile : Missiles )
     {
       if( GetMissileDistanceToShip( missile, ship ) < 50*(ship->Instruments.Sensor+10)*2)
         {

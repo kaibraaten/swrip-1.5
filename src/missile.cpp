@@ -26,8 +26,7 @@
 #include "ship.hpp"
 #include "character.hpp"
 
-Missile *FirstMissile = NULL;
-Missile *LastMissile = NULL;
+std::list<Missile*> Missiles;
 
 void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missiletype )
 {
@@ -49,7 +48,7 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missi
     }
 
   Missile *missile = new Missile();
-  LINK( missile, FirstMissile, LastMissile, Next, Previous );
+  Missiles.push_back(missile);
 
   missile->Target = target;
   missile->FiredFrom = ship;
@@ -90,12 +89,12 @@ void ExtractMissile( Missile *missile )
       return;
     }
 
-  UNLINK( missile, FirstMissile, LastMissile, Next, Previous );
+  Missiles.remove( missile );
 
   delete missile;
 }
 
-bool UpdateMissile( Missile *missile, void *unused )
+void UpdateMissile( Missile *missile )
 {
   Ship *ship = missile->FiredFrom;
   Ship *target = missile->Target;
@@ -147,7 +146,7 @@ bool UpdateMissile( Missile *missile, void *unused )
 	      ExtractMissile( missile );
 	    }
 
-	  return true;
+	  return;
 	}
       else
 	{
@@ -156,7 +155,7 @@ bool UpdateMissile( Missile *missile, void *unused )
 	  if (missile->Age >= 50)
 	    {
 	      ExtractMissile( missile );
-	      return true;
+	      return;
 	    }
 	}
     }
@@ -170,6 +169,5 @@ bool UpdateMissile( Missile *missile, void *unused )
 	}
     }
 
-  return true;
+  return;
 }
-

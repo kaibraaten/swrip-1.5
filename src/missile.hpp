@@ -1,19 +1,17 @@
 #ifndef _SWRIP_MISSILE_HPP_
 #define _SWRIP_MISSILE_HPP_
 
+#include <list>
 #include <utility/vector3.hpp>
 
 #include "types.hpp"
 #include "constants.hpp"
 
-extern Missile *FirstMissile;
-extern Missile *LastMissile;
+extern std::list<Missile*> Missiles;
 
 class Missile
 {
 public:
-  Missile *Next = nullptr;
-  Missile *Previous = nullptr;
   struct Spaceobject *Spaceobject = nullptr;
   Ship *Target = nullptr;
   Ship *FiredFrom = nullptr;
@@ -25,7 +23,7 @@ public:
   Vector3 Heading;
 };
 
-bool UpdateMissile( Missile *missile, void *unused );
+void UpdateMissile( Missile *missile );
 void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missiletype );
 void ExtractMissile( Missile *missile );
 

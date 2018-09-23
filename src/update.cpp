@@ -2631,7 +2631,7 @@ void UpdateHandler( void )
     {
       pulse_ship = PULSE_SPACE / 10;
       SpaceobjectUpdate();
-      ForEach( Missile, FirstMissile, Next, UpdateMissile, NULL );
+      for_each( std::begin(Missiles), std::end(Missiles), UpdateMissile);
       UpdateShipMovement();
     }
 
