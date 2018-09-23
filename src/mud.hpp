@@ -176,7 +176,6 @@ public:
 class SmaugAffect
 {
 public:
-  SmaugAffect *Next = nullptr;
   std::string Duration;
   int Location = 0;
   std::string Modifier;

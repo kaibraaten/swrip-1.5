@@ -10,7 +10,6 @@
  */
 ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
 {
-  SmaugAffect *saf = nullptr;
   Skill *skill = GetSkill(sn);
   Character *victim = (Character *) vo;
   bool groupsp = false;
@@ -18,7 +17,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
   bool hitchar = false, hitroom = false, hitvict = false;
   ch_ret retcode = rNONE;
 
-  if ( !skill->Affects )
+  if ( skill->Affects.empty() )
     {
       Log->Bug( "spell_affect has no affects sn %d", sn );
       return rNONE;
@@ -68,7 +67,9 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
           return rSPELL_FAILED;
         }
 
-      if ( (saf = skill->Affects) && !saf->Next
+      const SmaugAffect *saf = skill->Affects.front();
+      
+      if ( saf != nullptr && skill->Affects.size() == 1
            && saf->Location == APPLY_STRIPSN
            && !IsAffected( victim, ParseDice(ch, level, saf->Modifier) ) )
         {

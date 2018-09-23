@@ -27,7 +27,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  affects = skill->Affects ? true : false;
+  affects = !skill->Affects.empty();
 
   if ( !skill->Messages.Success.ToCaster.empty() )
     {

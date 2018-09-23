@@ -362,31 +362,21 @@ void do_sset( Character *ch, std::string argument )
 
       if ( !StrCmp( arg2, "rmaffect" ) )
         {
-          SmaugAffect *aff = skill->Affects;
-          SmaugAffect *aff_next;
           int num = ToLong( argument );
           int cnt = 1;
 
-          if ( !aff )
+          if ( skill->Affects.empty() )
             {
               ch->Echo("This spell has no special affects to remove.\r\n");
               return;
             }
 
-	  if ( num == 1 )
+          for ( SmaugAffect *affect : skill->Affects )
             {
-              skill->Affects = aff->Next;
-              delete aff;
-              ch->Echo("Removed.\r\n");
-              return;
-            }
-
-          for ( ; aff; aff = aff->Next )
-            {
-              if ( ++cnt == num && (aff_next=aff->Next) != NULL )
+              if ( ++cnt == num )
                 {
-                  aff->Next = aff_next->Next;
-                  delete aff_next;
+                  skill->Affects.remove( affect );
+                  delete affect;
                   ch->Echo("Removed.\r\n");
                   return;
                 }
@@ -448,8 +438,7 @@ void do_sset( Character *ch, std::string argument )
           aff->Location = loc;
           aff->Modifier = modifier;
           aff->AffectedBy = bit;
-          aff->Next = skill->Affects;
-          skill->Affects = aff;
+          skill->Affects.push_front( aff );
           ch->Echo("Ok.\r\n");
           return;
         }

@@ -15,7 +15,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
       StripAffect( victim, sn );
     }
   
-  for ( SmaugAffect *saf = skill->Affects; saf; saf = saf->Next )
+  for ( const SmaugAffect *saf : skill->Affects )
     {
       if ( saf->Location >= REVERSE_APPLY )
         {

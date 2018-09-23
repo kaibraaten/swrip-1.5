@@ -35,7 +35,6 @@ void do_slookup( Character *ch, std::string arg )
     }
   else
     {
-      const SmaugAffect *aff;
       int cnt = 0;
 
       if ( arg[0] == 'h' && IsNumber( arg.substr( 1 ) ) )
@@ -134,9 +133,9 @@ void do_slookup( Character *ch, std::string arg )
       if ( skill->UseRec->NumberOfTimesUsed )
 	SendTimer(skill->UseRec, ch);
 
-      for ( aff = skill->Affects; aff; aff = aff->Next )
+      for ( const SmaugAffect *aff : skill->Affects )
 	{
-	  if ( aff == skill->Affects )
+	  if ( aff == skill->Affects.front() )
             ch->Echo("\r\n");
 
 	  sprintf( buf, "Affect %d", ++cnt );
@@ -181,7 +180,7 @@ void do_slookup( Character *ch, std::string arg )
 	  strcat( buf, "\r\n" );
           ch->Echo(buf);
 
-	  if ( !aff->Next )
+	  if ( aff == skill->Affects.back() )
             ch->Echo("\r\n");
 	}
 

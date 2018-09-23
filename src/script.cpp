@@ -265,9 +265,9 @@ static SmaugAffect *LuaLoadOneSmaugAffect( lua_State *L )
   return affect;
 }
 
-SmaugAffect *LuaLoadSmaugAffects( lua_State *L )
+std::list<SmaugAffect*> LuaLoadSmaugAffects( lua_State *L )
 {
-  SmaugAffect *firstInList = NULL;
+  std::list<SmaugAffect*> affectList;
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Affects" );
 
@@ -278,15 +278,14 @@ SmaugAffect *LuaLoadSmaugAffects( lua_State *L )
       while( lua_next( L, -2 ) )
         {
 	  SmaugAffect *affect = LuaLoadOneSmaugAffect( L );
-	  affect->Next = firstInList;
-	  firstInList = affect;
+	  affectList.push_front( affect );
           lua_pop( L, 1 );
         }
     }
 
   lua_pop( L, 1 );
 
-  return firstInList;
+  return affectList;
 }
 
 static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx )
@@ -324,16 +323,15 @@ static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int 
   lua_settable( L, -3 );
 }
 
-void LuaPushSmaugAffects( lua_State *L, const SmaugAffect *affectList )
+void LuaPushSmaugAffects( lua_State *L, const std::list<SmaugAffect*> &affectList )
 {
-  if( affectList )
+  if( !affectList.empty() )
     {
-      const SmaugAffect *affect = NULL;
       int idx = 0;
       lua_pushstring( L, "Affects" );
       lua_newtable( L );
 
-      for ( affect = affectList; affect; affect = affect->Next )
+      for ( const SmaugAffect *affect : affectList )
 	{
 	  LuaPushOneSmaugAffect( L, affect, ++idx );
 	}
