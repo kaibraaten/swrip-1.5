@@ -19,8 +19,6 @@ public:
   virtual void ReadFromBuffer();
   virtual bool Read();
 
-  Descriptor *Next = nullptr;
-  Descriptor *Previous = nullptr;
   class Character *Character = nullptr;
   class Character *Original = nullptr;
   Descriptor *SnoopBy = nullptr;
