@@ -157,15 +157,6 @@ public:
 extern bool mud_down;
 extern bool fBootDb;
 
-class Storeroom
-{
-public:
-  Storeroom       *Next = nullptr;
-  Storeroom       *Previous = nullptr;
-  vnum_t           Vnum = INVALID_VNUM;
-  class Room *Room = nullptr;
-};
-
 /*
  * An affect.
  */

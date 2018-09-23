@@ -57,7 +57,6 @@ class HourMinSec;
 class Weather;
 class Bounty;
 class Planet;
-class Storeroom;
 class Spaceobject;
 class Ship;
 class Turret;
