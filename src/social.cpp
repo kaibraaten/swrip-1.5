@@ -1,4 +1,5 @@
 #include <cctype>
+#include <utility/random.hpp>
 #include "social.hpp"
 #include "mud.hpp"
 #include "character.hpp"

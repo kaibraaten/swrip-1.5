@@ -1,4 +1,5 @@
 #include <cstring>
+#include <utility/random.hpp>
 #include "vector3_aux.hpp"
 #include "mud.hpp"
 #include "ship.hpp"

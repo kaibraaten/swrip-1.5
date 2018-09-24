@@ -1,3 +1,4 @@
+#include <utility/random.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
@@ -5,7 +6,7 @@
 ch_ret spell_harm( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
-  int dam;
+  int dam = 0;
   Skill *skill = GetSkill(sn);
 
   if ( IsBitSet( victim->Immune, RIS_MAGIC ) )

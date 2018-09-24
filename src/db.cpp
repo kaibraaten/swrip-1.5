@@ -24,6 +24,7 @@
 #include <cstring>
 #include <cctype>
 #include <cstdarg>
+#include <utility/random.hpp>
 #include "mud.hpp"
 #include "arena.hpp"
 #include "ship.hpp"
@@ -382,13 +383,6 @@ void BootDatabase( bool fCopyOver )
   for ( int wear = 0; wear < MAX_WEAR; wear++ )
     for ( int x = 0; x < MAX_LAYERS; x++ )
       save_equipment[wear][x] = NULL;
-
-  /*
-   * Init random number generator.
-   */
-  Log->Boot("Initializing random number generator");
-  InitMM();
-  srand( time(0) );
 
   /*
    * Set time and weather.

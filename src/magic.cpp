@@ -22,6 +22,7 @@
 #include <cctype>
 #include <cstring>
 #include <strings.h>
+#include <utility/random.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"

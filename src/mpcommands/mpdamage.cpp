@@ -1,4 +1,5 @@
 #include <cassert>
+#include <utility/random.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"

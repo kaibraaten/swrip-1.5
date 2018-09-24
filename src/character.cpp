@@ -23,6 +23,7 @@
 #include <cstring>
 #include <cassert>
 #include <utility/algorithms.hpp>
+#include <utility/random.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "editor.hpp"

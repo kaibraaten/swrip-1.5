@@ -1,3 +1,4 @@
+#include <utility/random.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "pcdata.hpp"

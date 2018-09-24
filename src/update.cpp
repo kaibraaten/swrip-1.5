@@ -24,6 +24,7 @@
 #include <cstring>
 #include <ctime>
 #include <cmath>
+#include <utility/random.hpp>
 #include "mud.hpp"
 #include "arena.hpp"
 #include "ship.hpp"

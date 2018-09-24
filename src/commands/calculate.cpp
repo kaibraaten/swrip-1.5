@@ -1,3 +1,4 @@
+#include <utility/random.hpp>
 #include "character.hpp"
 #include "vector3_aux.hpp"
 #include "ship.hpp"

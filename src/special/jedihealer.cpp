@@ -1,3 +1,4 @@
+#include <utility/random.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
@@ -57,9 +58,7 @@ bool spec_jedi_healer( Character *ch )
       Act( AT_MAGIC, "$n pauses and concentrates for a moment.", ch, NULL, NULL, TO_ROOM );
       spell_smaug( LookupSkill( "refresh" ), ch->TopLevel, ch, victim );
       return true;
-
     }
 
   return false;
 }
-

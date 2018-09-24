@@ -1,6 +1,7 @@
 #include <cstring>
 #include <cctype>
 #include <utility/algorithms.hpp>
+#include <utility/random.hpp>
 #include "area.hpp"
 #include "mud.hpp"
 #include "shop.hpp"

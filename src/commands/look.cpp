@@ -1,6 +1,7 @@
 #include <cstring>
 #include <cctype>
 #include <utility/algorithms.hpp>
+#include <utility/random.hpp>
 #include "mud.hpp"
 #include "vector3_aux.hpp"
 #include "ship.hpp"

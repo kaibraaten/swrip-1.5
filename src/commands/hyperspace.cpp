@@ -1,3 +1,4 @@
+#include <utility/random.hpp>
 #include "ship.hpp"
 #include "vector3_aux.hpp"
 #include "mud.hpp"

@@ -1,7 +1,7 @@
 TESTDIR = test
 ODIR = obj
 _OBJ = bet.o event.o file_io.o linkedlist.o misc.o os_posix.o \
-	oldrepository.o repositorybase.o sha256.o string_handling.o \
+	oldrepository.o random.o repositorybase.o sha256.o string_handling.o \
 	time_fun.o vector3.o
 OBJ  = $(patsubst %,$(ODIR)/%,$(_OBJ))
 

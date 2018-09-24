@@ -25,6 +25,7 @@
 #include <strings.h>
 #include <ctime>
 #include <cctype>
+#include <utility/random.hpp>
 #include "mud.hpp"
 #include "ship.hpp"
 #include "character.hpp"

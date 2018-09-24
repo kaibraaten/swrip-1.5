@@ -1,6 +1,7 @@
 #include <cstring>
 #include <strings.h>
 #include <cctype>
+#include <utility/random.hpp>
 #include "constants.hpp"
 #include "skill.hpp"
 #include "mud.hpp"

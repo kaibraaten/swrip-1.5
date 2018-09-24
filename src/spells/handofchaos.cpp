@@ -1,10 +1,11 @@
+#include <utility/random.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 
 ch_ret spell_hand_of_chaos( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
-  int dam;
+  int dam = 0;
 
   level       = umax(0, level);
   dam         = level*GetRandomNumberFromRange( 1, 7 )+9;

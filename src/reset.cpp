@@ -35,6 +35,7 @@
 #include <cctype>
 #include <cassert>
 #include <utility/algorithms.hpp>
+#include <utility/random.hpp>
 #include "reset.hpp"
 #include "mud.hpp"
 #include "character.hpp"

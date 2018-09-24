@@ -202,15 +202,6 @@ void ForEachLuaFileInDir( const char *pathToDir,
 			  void *userData );
 std::string ConvertToLuaFilename( const std::string &name );
 
-/* Random number stuff */
-void InitMM( void );
-int NumberFuzzy( int number );
-int GetRandomNumberFromRange( int from, int to );
-int GetRandomPercent( void );
-int GetRandomDoor( void );
-int NumberBits( int width );
-int RollDice( int number, int size );
-
 /* misc stuff */
 int Interpolate( int level, int value_00, int value_32 );
 char *StripColorCodes( char *text );

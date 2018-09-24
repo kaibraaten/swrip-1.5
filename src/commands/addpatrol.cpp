@@ -1,4 +1,5 @@
-#include <string.h>
+#include <utility/random.hpp>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"

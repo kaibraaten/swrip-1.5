@@ -1,3 +1,4 @@
+#include <utility/random.hpp>
 #include "turret.hpp"
 #include "character.hpp"
 #include "ship.hpp"

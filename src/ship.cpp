@@ -22,6 +22,7 @@
 
 #include <cassert>
 #include <utility/algorithms.hpp>
+#include <utility/random.hpp>
 #include "ship.hpp"
 #include "mud.hpp"
 #include "vector3_aux.hpp"

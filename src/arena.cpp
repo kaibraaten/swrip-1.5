@@ -33,6 +33,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <ctime>
+#include <utility/random.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "arena.hpp"

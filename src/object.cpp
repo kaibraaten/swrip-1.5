@@ -1,3 +1,4 @@
+#include <utility/random.hpp>
 #include "object.hpp"
 #include "mud.hpp"
 #include "protoobject.hpp"

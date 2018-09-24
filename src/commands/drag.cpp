@@ -1,3 +1,4 @@
+#include <utility/random.hpp>
 #include "ship.hpp"
 #include "mud.hpp"
 #include "character.hpp"

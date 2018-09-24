@@ -24,6 +24,7 @@
 #include <cstring>
 #include <ctime>
 #include <cassert>
+#include <utility/random.hpp>
 #include "track.hpp"
 #include "mud.hpp"
 #include "character.hpp"

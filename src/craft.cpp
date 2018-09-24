@@ -23,6 +23,7 @@
 #include <cassert>
 #include <cstring>
 #include <utility/event.hpp>
+#include <utility/random.hpp>
 #include "mud.hpp"
 #include "craft.hpp"
 #include "constants.hpp"

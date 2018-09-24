@@ -4,9 +4,9 @@
 #include <cstdlib>
 #include <cctype>
 #include <clocale>
-#ifndef __SASC
 #include <monetary.h>
-#endif
+
+#include "random.hpp"
 
 int umin( int check, int ncheck )
 {
@@ -84,131 +84,6 @@ std::string Scramble( const std::string &strToScamble, int modifier )
 
   arg[position-1] = '\0';
   return arg;
-}
-
-/*
- * I've gotten too many bad reports on OS-supplied random number generators.
- * This is the Mitchell-Moore algorithm from Knuth Volume II.
- * Best to leave the constants alone unless you've read Knuth.
- * -- Furey
- */
-static int rgiState[2+55];
-
-void InitMM( void )
-{
-  int *piState = &rgiState[2];
-  int iState = 0;
-
-  piState[-2] = 55 - 55;
-  piState[-1] = 55 - 24;
-
-  piState[0]  = ((int) time(0) ) & ((1 << 30) - 1);
-  piState[1]  = 1;
-
-  for ( iState = 2; iState < 55; iState++ )
-  {
-    piState[iState] = (piState[iState-1] + piState[iState-2])
-      & ((1 << 30) - 1);
-  }
-}
-
-static int number_mm( void )
-{
-  int *piState = &rgiState[2];
-  int iState1 = piState[-2];
-  int iState2 = piState[-1];
-  int iRand = (piState[iState1] + piState[iState2]) & ((1 << 30) - 1);
-
-  piState[iState1]    = iRand;
-
-  if ( ++iState1 == 55 )
-    iState1 = 0;
-
-  if ( ++iState2 == 55 )
-    iState2 = 0;
-
-  piState[-2]         = iState1;
-  piState[-1]         = iState2;
-  return iRand >> 6;
-}
-
-int NumberBits( int width )
-{
-  return number_mm() & ( ( 1 << width ) - 1 );
-}
-
-/*
- * Roll some dice.                                              -Thoric
- */
-int RollDice( int number, int size )
-{
-  int idice = 0;
-  int sum = 0;
-
-  switch ( size )
-  {
-    case 0:
-      return 0;
-
-    case 1:
-      return number;
-  }
-
-  for ( idice = 0, sum = 0; idice < number; idice++ )
-    sum += GetRandomNumberFromRange( 1, size );
-
-  return sum;
-}
-
-/*
- * Stick a little fuzz on a number.
- */
-int NumberFuzzy( int number )
-{
-  switch ( NumberBits( 2 ) )
-  {
-    case 0:
-      number -= 1;
-      break;
-
-    case 3:
-      number += 1;
-      break;
-  }
-
-  return umax( 1, number );
-}
-
-/*
- * Generate a random number.
- */
-int GetRandomNumberFromRange( int from, int to )
-{
-  if ( ( to = to - from + 1 ) <= 1 )
-    return from;
-
-  return (number_mm() % to) + from;
-}
-
-/*
- * Generate a percentile roll.
- */
-int GetRandomPercent( void )
-{
-  return number_mm() % 100;
-}
-
-/*
- * Generate a random door.
- */
-int GetRandomDoor( void )
-{
-  int door = 0;
-
-  while ( ( door = number_mm() & (16-1) ) > 9 )
-    ;
-
-  return door;
 }
 
 std::string FlagString( int bitvector, const char * const flagarray[] )

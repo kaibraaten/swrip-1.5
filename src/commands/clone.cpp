@@ -1,5 +1,6 @@
 #include <array>
 #include <cstring>
+#include <utility/random.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"

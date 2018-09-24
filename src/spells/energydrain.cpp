@@ -1,3 +1,4 @@
+#include <utility/random.hpp>
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
@@ -9,8 +10,8 @@
 ch_ret spell_energy_drain( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
-  int dam;
-  int drain_chance;
+  int dam = 0;
+  int drain_chance = 0;
   Skill *skill = GetSkill(sn);
 
   if ( IsBitSet( victim->Immune, RIS_MAGIC ) )
