@@ -339,7 +339,7 @@ static bool CheckSkillLevel( const CraftingSession *session )
 
   if( GetRandomPercent() >= the_chance )
     {
-      ch->Echo( "&RYou can't figure out what to do.d\r\n" );
+      ch->Echo( "&RYou can't figure out what to do.&d\r\n" );
       LearnFromFailure( ch, session->Recipe->Skill );
       return false;
     }
@@ -522,4 +522,9 @@ void AddAbortCraftingHandler( CraftingSession *session, void *userData,
                               void (*handler)(void*, AbortCraftingEventArgs* ))
 {
   AddEventHandler( session->OnAbort, userData, (EventHandler)handler );
+}
+
+bool IsCrafting( const Character *ch )
+{
+  return ch->PCData->CraftingSession != nullptr;
 }

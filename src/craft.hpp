@@ -126,4 +126,6 @@ void AddAbortCraftingHandler( CraftingSession *session, void *userData,
 
 void StartCrafting( CraftingSession* );
 
+bool IsCrafting( const Character *ch );
+
 #endif /* include guard */
