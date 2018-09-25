@@ -5,7 +5,7 @@ CXXFLAGS = -std=c++14 -g3 -MMD -I. -I.. -I../libs  $(WFLAGS)
 LDFLAGS = -L.. -L../libs/utility -Wl,-rpath,.. -Wl,-rpath,../libs/utility -L../libs/colorparser -Wl,-rpath,../libs/colorparser  -lm -lz -lgtest -lgmock -lutility -lcolorparser -lswrip -llua -ldl
 
 ODIR = obj
-_OBJ = main.o arraydatatests.o alias_tests.o flag_tests.o commands/follow_tests.o
+_OBJ = main.o arraydatatests.o alias_tests.o craft_tests.o flag_tests.o commands/follow_tests.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 

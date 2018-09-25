@@ -24,14 +24,14 @@ void do_makecontainer( Character *ch, std::string argument )
 {
   static const CraftingMaterial materials[] =
     {
-      { ITEM_FABRIC, CRAFTFLAG_EXTRACT },
-      { ITEM_THREAD, CRAFTFLAG_NONE },
-      { ITEM_NONE,   CRAFTFLAG_NONE }
+     { ITEM_FABRIC, { Flag::Crafting::Extract } },
+     { ITEM_THREAD, {} },
+     { ITEM_NONE,   {} }
     };
 
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makecontainer, materials,
-                                             10, OBJ_VNUM_CRAFTING_CONTAINER,
-					     CRAFTFLAG_NEED_WORKSHOP );
+                                             10, GetProtoObject( OBJ_VNUM_CRAFTING_CONTAINER ),
+					     { Flag::Crafting::NeedsWorkshop } );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
   UserData *ud = new UserData();
 

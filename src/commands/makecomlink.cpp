@@ -37,15 +37,15 @@ static CraftRecipe *MakeCraftRecipe( void )
 {
   static const CraftingMaterial materials[] =
     {
-      { ITEM_TOOLKIT,  CRAFTFLAG_NONE },
-      { ITEM_OVEN,     CRAFTFLAG_NONE },
-      { ITEM_CIRCUIT,  CRAFTFLAG_EXTRACT },
-      { ITEM_CRYSTAL,  CRAFTFLAG_EXTRACT },
-      { ITEM_NONE,     CRAFTFLAG_NONE }
+     { ITEM_TOOLKIT,  {} },
+     { ITEM_OVEN,     {} },
+     { ITEM_CIRCUIT,  { Flag::Crafting::Extract } },
+     { ITEM_CRYSTAL,  { Flag::Crafting::Extract } },
+     { ITEM_NONE,     {} }
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makecomlink, materials,
-					     10, OBJ_VNUM_CRAFTING_COMLINK,
-					     CRAFTFLAG_NEED_WORKSHOP );
+					     10, GetProtoObject( OBJ_VNUM_CRAFTING_COMLINK ),
+					     { Flag::Crafting::NeedsWorkshop } );
 
   return recipe;
 }

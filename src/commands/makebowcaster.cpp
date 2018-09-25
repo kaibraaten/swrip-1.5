@@ -42,19 +42,19 @@ static CraftRecipe *CreateMakeBowcasterCraftRecipe()
 {
   static const CraftingMaterial materials[] =
     {
-      { ITEM_TOOLKIT,    CRAFTFLAG_NONE },
-      { ITEM_OVEN,       CRAFTFLAG_NONE },
-      { ITEM_DURAPLAST,  CRAFTFLAG_EXTRACT },
-      { ITEM_OIL,        CRAFTFLAG_EXTRACT },
-      { ITEM_TINDER,     CRAFTFLAG_EXTRACT },
-      { ITEM_CROSSBOW,   CRAFTFLAG_EXTRACT },
-      { ITEM_LENS,       CRAFTFLAG_EXTRACT | CRAFTFLAG_OPTIONAL },
-      { ITEM_BOLT,       CRAFTFLAG_EXTRACT | CRAFTFLAG_OPTIONAL },
-      { ITEM_NONE,       CRAFTFLAG_NONE }
+     { ITEM_TOOLKIT,    {} },
+     { ITEM_OVEN,       {} },
+     { ITEM_DURAPLAST,  { Flag::Crafting::Extract } },
+     { ITEM_OIL,        { Flag::Crafting::Extract } },
+     { ITEM_TINDER,     { Flag::Crafting::Extract } },
+     { ITEM_CROSSBOW,   { Flag::Crafting::Extract } },
+     { ITEM_LENS,       { Flag::Crafting::Extract, Flag::Crafting::Optional } },
+     { ITEM_BOLT,       { Flag::Crafting::Extract, Flag::Crafting::Optional } },
+     { ITEM_NONE,       {} }
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makebowcaster, materials,
-					     25, OBJ_VNUM_CRAFTING_BOWCASTER,
-					     CRAFTFLAG_NEED_WORKSHOP );
+					     25, GetProtoObject( OBJ_VNUM_CRAFTING_BOWCASTER ),
+					     { Flag::Crafting::NeedsWorkshop } );
 
   return recipe;
 }

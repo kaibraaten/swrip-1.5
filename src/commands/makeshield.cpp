@@ -41,16 +41,16 @@ static CraftRecipe *MakeCraftRecipe( void )
 {
   static const struct CraftingMaterial materials[] =
     {
-      { ITEM_TOOLKIT,         CRAFTFLAG_NONE },
-      { ITEM_BATTERY,         CRAFTFLAG_EXTRACT },
-      { ITEM_SUPERCONDUCTOR,  CRAFTFLAG_EXTRACT },
-      { ITEM_CIRCUIT,         CRAFTFLAG_EXTRACT },
-      { ITEM_CRYSTAL,         CRAFTFLAG_EXTRACT },
-      { ITEM_NONE,            CRAFTFLAG_NONE }
+     { ITEM_TOOLKIT,         {} },
+     { ITEM_BATTERY,         { Flag::Crafting::Extract } },
+     { ITEM_SUPERCONDUCTOR,  { Flag::Crafting::Extract } },
+     { ITEM_CIRCUIT,         { Flag::Crafting::Extract } },
+     { ITEM_CRYSTAL,         { Flag::Crafting::Extract } },
+     { ITEM_NONE,            {} }
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makeshield, materials,
-					     20, OBJ_VNUM_CRAFTING_SHIELD,
-					     CRAFTFLAG_NEED_WORKSHOP );
+					     20, GetProtoObject( OBJ_VNUM_CRAFTING_SHIELD ),
+					     { Flag::Crafting::NeedsWorkshop } );
 
   return recipe;
 }

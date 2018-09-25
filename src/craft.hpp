@@ -22,14 +22,25 @@
 #ifndef _SWRIP_CRAFT_HPP_
 #define _SWRIP_CRAFT_HPP_
 
+#include <initializer_list>
+#include <bitset>
+#include <cstddef>
 #include "types.hpp"
 #include "constants.hpp"
 
-#define CRAFTFLAG_NONE           0
-#define CRAFTFLAG_EXTRACT        BV00
-#define CRAFTFLAG_OPTIONAL       BV01
-#define CRAFTFLAG_NEED_WORKSHOP  BV02
-#define CRAFTFLAG_NEED_REFINERY  BV03
+namespace Flag
+{
+  namespace Crafting
+  {
+    enum : size_t
+      {
+       Extract,
+       Optional,
+       NeedsWorkshop,
+       NeedsRefinery
+      };
+  }
+}
 
 class CraftRecipe;
 class CraftingMaterial;
@@ -86,12 +97,15 @@ public:
 class CraftingMaterial
 {
 public:
+  CraftingMaterial() = default;
+  CraftingMaterial( ItemTypes type, std::initializer_list<size_t> flagBits );
+
   ItemTypes ItemType = ITEM_NONE;
-  long Flags = 0;
+  std::bitset<Flag::MAX> Flags;
 };
 
 CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial*, int duration,
-				  vnum_t protoObject, long flags );
+				  ProtoObject *protoObject, std::initializer_list<size_t> flags );
 void FreeCraftRecipe( CraftRecipe* );
 CraftingSession *AllocateCraftingSession( CraftRecipe*, Character *engineer,
 					  const std::string &commandArgument );

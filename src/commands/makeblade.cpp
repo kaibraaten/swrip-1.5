@@ -23,16 +23,16 @@ void do_makeblade( Character *ch, std::string argument )
 {
   static const struct CraftingMaterial materials[] =
     {
-      { ITEM_TOOLKIT,    CRAFTFLAG_NONE },
-      { ITEM_OVEN,       CRAFTFLAG_NONE },
-      { ITEM_DURASTEEL,  CRAFTFLAG_EXTRACT },
-      { ITEM_BATTERY,    CRAFTFLAG_EXTRACT },
-      { ITEM_STAFF,      CRAFTFLAG_EXTRACT | CRAFTFLAG_OPTIONAL },
-      { ITEM_NONE,       CRAFTFLAG_NONE },
+     { ITEM_TOOLKIT,    {} },
+     { ITEM_OVEN,       {} },
+     { ITEM_DURASTEEL,  { Flag::Crafting::Extract } },
+     { ITEM_BATTERY,    { Flag::Crafting::Extract } },
+     { ITEM_STAFF,      { Flag::Crafting::Extract, Flag::Crafting::Optional } },
+     { ITEM_NONE,       {} }
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makeblade, materials,
-                                             25, OBJ_VNUM_CRAFTING_BLADE,
-					     CRAFTFLAG_NEED_WORKSHOP );
+                                             25, GetProtoObject( OBJ_VNUM_CRAFTING_BLADE ),
+					     { Flag::Crafting::NeedsWorkshop } );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
   UserData *data = new UserData();
 

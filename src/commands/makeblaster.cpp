@@ -25,20 +25,20 @@ void do_makeblaster( Character *ch, std::string argument )
 {
   static const struct CraftingMaterial materials[] =
     {
-      { ITEM_TOOLKIT,         CRAFTFLAG_NONE },
-      { ITEM_OVEN,            CRAFTFLAG_NONE },
-      { ITEM_DURAPLAST,       CRAFTFLAG_EXTRACT },
-      { ITEM_BATTERY,         CRAFTFLAG_EXTRACT },
-      { ITEM_SUPERCONDUCTOR,  CRAFTFLAG_EXTRACT },
-      { ITEM_CIRCUIT,         CRAFTFLAG_EXTRACT },
-      { ITEM_AMMO,            CRAFTFLAG_EXTRACT | CRAFTFLAG_OPTIONAL },
-      { ITEM_SCOPE,           CRAFTFLAG_EXTRACT | CRAFTFLAG_OPTIONAL },
-      { ITEM_LENS,            CRAFTFLAG_EXTRACT | CRAFTFLAG_OPTIONAL },
-      { ITEM_NONE,            CRAFTFLAG_NONE },
+     { ITEM_TOOLKIT,         {} },
+     { ITEM_OVEN,            {} },
+     { ITEM_DURAPLAST,       { Flag::Crafting::Extract } },
+     { ITEM_BATTERY,         { Flag::Crafting::Extract } },
+     { ITEM_SUPERCONDUCTOR,  { Flag::Crafting::Extract } },
+     { ITEM_CIRCUIT,         { Flag::Crafting::Extract } },
+     { ITEM_AMMO,            { Flag::Crafting::Extract, Flag::Crafting::Optional } },
+     { ITEM_SCOPE,           { Flag::Crafting::Extract, Flag::Crafting::Optional } },
+     { ITEM_LENS,            { Flag::Crafting::Extract, Flag::Crafting::Optional } },
+     { ITEM_NONE,            {} },
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makeblaster, materials,
-                                             25, OBJ_VNUM_CRAFTING_BLASTER,
-					     CRAFTFLAG_NEED_WORKSHOP );
+                                             25, GetProtoObject( OBJ_VNUM_CRAFTING_BLASTER ),
+					     { Flag::Crafting::NeedsWorkshop } );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
   UserData *data = new UserData();
 

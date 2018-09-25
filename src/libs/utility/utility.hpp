@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <bitset>
+#include <initializer_list>
 #include <cstdio>
 #include <cstdlib>
 #include <cstdarg>
@@ -39,13 +40,6 @@ char CharToUppercase( char c );
 #define ToggleBit(var, bit)    ((var) ^= (bit))
 
 bool IsBitSet( unsigned long flags, size_t bit );
-
-/*
-#define IsBitSet(flag, bit)       ((flag) & (bit))
-*/
-#define SetBit(var, bit)       ((var) |= (bit))
-#define RemoveBit(var, bit)    ((var) &= ~(bit))
-#define ToggleBit(var, bit)    ((var) ^= (bit))
 
 /*
  * Memory allocation macros.
@@ -206,6 +200,19 @@ std::string ConvertToLuaFilename( const std::string &name );
 int Interpolate( int level, int value_00, int value_32 );
 char *StripColorCodes( char *text );
 long ToLong( const std::string str );
+
+template<size_t N>
+std::bitset<N> CreateBitSet( std::initializer_list<size_t> args )
+{
+  std::bitset<N> bs;
+
+  for( size_t bit : args )
+    {
+      bs.set( bit );
+    }
+
+  return bs;
+}
 
 /*
  * Takes a number such as 1234567890

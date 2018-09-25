@@ -42,12 +42,12 @@ static CraftRecipe *MakeCraftRecipe( void )
 {
   static const struct CraftingMaterial materials[] =
     {
-      { ITEM_RAWSPICE, CRAFTFLAG_EXTRACT },
-      { ITEM_NONE,      CRAFTFLAG_NONE }
+     { ITEM_RAWSPICE, { Flag::Crafting::Extract } },
+     { ITEM_NONE,     {} }
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_spice_refining, materials,
-					     10, OBJ_VNUM_CRAFTING_SPICE,
-					     CRAFTFLAG_NEED_REFINERY );
+					     10, GetProtoObject( OBJ_VNUM_CRAFTING_SPICE ),
+					     { Flag::Crafting::NeedsRefinery } );
 
   return recipe;
 }

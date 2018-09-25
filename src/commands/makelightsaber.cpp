@@ -28,20 +28,20 @@ void do_makelightsaber( Character *ch, std::string argument )
 {
   static const struct CraftingMaterial materials[] =
     {
-      { ITEM_TOOLKIT,        CRAFTFLAG_NONE },
-      { ITEM_OVEN,           CRAFTFLAG_NONE },
-      { ITEM_LENS,           CRAFTFLAG_EXTRACT },
-      { ITEM_CRYSTAL,        CRAFTFLAG_EXTRACT },
-      { ITEM_MIRROR,         CRAFTFLAG_EXTRACT },
-      { ITEM_DURAPLAST,      CRAFTFLAG_EXTRACT },
-      { ITEM_BATTERY,        CRAFTFLAG_EXTRACT },
-      { ITEM_CIRCUIT,        CRAFTFLAG_EXTRACT },
-      { ITEM_SUPERCONDUCTOR, CRAFTFLAG_EXTRACT },
-      { ITEM_NONE,           CRAFTFLAG_NONE },
+     { ITEM_TOOLKIT,        {} },
+     { ITEM_OVEN,           {} },
+     { ITEM_LENS,           { Flag::Crafting::Extract } },
+     { ITEM_CRYSTAL,        { Flag::Crafting::Extract } },
+     { ITEM_MIRROR,         { Flag::Crafting::Extract } },
+     { ITEM_DURAPLAST,      { Flag::Crafting::Extract } },
+     { ITEM_BATTERY,        { Flag::Crafting::Extract } },
+     { ITEM_CIRCUIT,        { Flag::Crafting::Extract } },
+     { ITEM_SUPERCONDUCTOR, { Flag::Crafting::Extract } },
+     { ITEM_NONE,           {} }
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_lightsaber_crafting, materials,
-					     25, OBJ_VNUM_CRAFTING_LIGHTSABER,
-					     CRAFTFLAG_NONE );
+					     25, GetProtoObject( OBJ_VNUM_CRAFTING_LIGHTSABER ),
+					     {} );
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
   UserData *data = new UserData();
 

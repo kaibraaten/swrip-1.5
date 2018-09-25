@@ -41,8 +41,8 @@ public:
   int Skill = 0;
   const CraftingMaterial *Materials = nullptr;
   int Duration = 0;
-  vnum_t Prototype = INVALID_VNUM;
-  long Flags = 0;
+  ProtoObject *Prototype = nullptr;
+  std::bitset<MAX_BIT> Flags;
 };
 
 class FoundMaterial
@@ -86,6 +86,14 @@ static FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *eventArgs );
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args );
 
+CraftingMaterial::CraftingMaterial( ItemTypes type,
+                                    std::initializer_list<size_t> flagBits )
+  : ItemType( type ),
+    Flags( CreateBitSet<MAX_BIT>( flagBits ) )
+{
+
+}
+
 void do_craftingengine( Character *ch, std::string argument )
 {
   assert(!IsNpc(ch));
@@ -118,7 +126,7 @@ static void AfterDelay( CraftingSession *session )
   bool hasMaterials = CheckMaterials( session, true );
   int level = ch->PCData->Learned[recipe->Skill];
   Object *object = NULL;
-  ProtoObject *proto = GetProtoObject( recipe->Prototype );
+  ProtoObject *proto = recipe->Prototype;
   std::string itemType = GetItemTypeNameExtended( proto->ItemType, proto->Value[OVAL_WEAPON_TYPE] );
   SetObjectStatsEventArgs eventArgs;
   FinishedCraftingEventArgs finishedCraftingEventArgs;
@@ -129,7 +137,7 @@ static void AfterDelay( CraftingSession *session )
     {
       ch->Echo( "&RYou hold up your newly created %s.\r\n", itemType.c_str() );
       ch->Echo( "&RIt suddenly dawns upon you that you have created the most useless\r\n" );
-      ch->Echo( "&R%s you've ever seen. You quickly hide your mistake...&w\r\n", itemType);
+      ch->Echo( "&R%s you've ever seen. You quickly hide your mistake...&d\r\n", itemType);
       LearnFromFailure( ch, recipe->Skill );
       FreeCraftingSession( session );
       return;
@@ -160,7 +168,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
   long xpgain = 0;
   Skill *skill = GetSkill( data->Recipe->Skill );
 
-  ch->Echo( "&GYou finish your work and hold up your newly created %s.&w\r\n",
+  ch->Echo( "&GYou finish your work and hold up your newly created %s.&d\r\n",
             itemType.c_str());
   sprintf( actBuf, "$n finishes making $s new %s.", itemType.c_str() );
   Act( AT_PLAIN, actBuf, ch, NULL, NULL, TO_ROOM );
@@ -180,17 +188,17 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
 {
   Character *ch = GetEngineer( args->CraftingSession );
 
-  if( IsBitSet( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_WORKSHOP )
+  if( args->CraftingSession->Recipe->Flags.test( Flag::Crafting::NeedsWorkshop )
       && !IsBitSet( ch->InRoom->Flags, ROOM_FACTORY ) )
     {
-      ch->Echo( "&RYou need to be in a factory or workshop to do that.\r\n" );
+      ch->Echo( "&RYou need to be in a factory or workshop to do that.&d\r\n" );
       args->AbortSession = true;
     }
 
-  if( IsBitSet( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_REFINERY )
+  if( args->CraftingSession->Recipe->Flags.test( Flag::Crafting::NeedsRefinery )
       && !IsBitSet( ch->InRoom->Flags, ROOM_REFINERY ) )
     {
-      ch->Echo( "&RYou need to be in a refinery to do that.\r\n" );
+      ch->Echo( "&RYou need to be in a refinery to do that.&d\r\n" );
       args->AbortSession = true;
     }
 }
@@ -203,7 +211,7 @@ static void AbortSession( CraftingSession *session )
   ch->SubState = SUB_NONE;
   abortEventArgs.CraftingSession = session;
 
-  ch->Echo( "&RYou are interrupted and fail to finish your work.&w\r\n");
+  ch->Echo( "&RYou are interrupted and fail to finish your work.&d\r\n");
 
   RaiseEvent( session->OnAbort, &abortEventArgs );
 
@@ -216,7 +224,8 @@ Character *GetEngineer( const CraftingSession *session )
 }
 
 CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, int duration,
-				  vnum_t prototypeObject, long flags )
+				  ProtoObject *prototypeObject,
+                                  std::initializer_list<size_t> flagBits )
 {
   CraftRecipe *recipe = new CraftRecipe();
 
@@ -224,7 +233,7 @@ CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, 
   recipe->Materials  = materialList;
   recipe->Duration   = duration;
   recipe->Prototype  = prototypeObject;
-  recipe->Flags      = flags;
+  recipe->Flags      = CreateBitSet<MAX_BIT>( flagBits );
 
   if( !GetSkill( recipe->Skill ) )
     {
@@ -232,10 +241,10 @@ CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, 
                 __FILE__, __LINE__, __FUNCTION__, recipe->Skill );
     }
 
-  if( !GetProtoObject( recipe->Prototype ) )
+  if( recipe->Prototype == nullptr )
     {
-      Log->Bug( "%s:%d %s(): Bad ProtoObject %d",
-                __FILE__, __LINE__, __FUNCTION__, recipe->Prototype );
+      Log->Bug( "%s:%d %s(): Bad ProtoObject",
+                __FILE__, __LINE__, __FUNCTION__ );
     }
 
   return recipe;
@@ -330,7 +339,7 @@ static bool CheckSkillLevel( const CraftingSession *session )
 
   if( GetRandomPercent() >= the_chance )
     {
-      ch->Echo( "&RYou can't figure out what to do.\r\n" );
+      ch->Echo( "&RYou can't figure out what to do.d\r\n" );
       LearnFromFailure( ch, session->Recipe->Skill );
       return false;
     }
@@ -372,9 +381,9 @@ void StartCrafting( CraftingSession *session )
       return;
     }
 
-  obj = GetProtoObject( session->Recipe->Prototype );
+  obj = session->Recipe->Prototype;
 
-  ch->Echo( "&GYou begin the long process of creating %s.\r\n",
+  ch->Echo( "&GYou begin the long process of creating %s.&d\r\n",
             AOrAn( GetItemTypeNameExtended( obj->ItemType, obj->Value[OVAL_WEAPON_TYPE] ) ).c_str() );
 
   Act( AT_PLAIN, "$n takes $s tools and some material and begins to work.",
@@ -408,7 +417,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
 	  args.Object = obj;
 	  args.KeepFinding = false;
 
-	  if( IsBitSet( material->Material.Flags, CRAFTFLAG_EXTRACT ) )
+          if( material->Material.Flags.test( Flag::Crafting::Extract ) )
 	    {
 	      SeparateOneObjectFromGroup( obj );
 	      ObjectFromCharacter( obj );
@@ -425,13 +434,13 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
   while( material->Material.ItemType != ITEM_NONE )
     {
       if( !material->Found
-	  && !IsBitSet( material->Material.Flags, CRAFTFLAG_OPTIONAL ) )
+	  && !material->Material.Flags.test( Flag::Crafting::Optional ) )
 	{
-	  ProtoObject *proto = GetProtoObject( session->Recipe->Prototype );
+	  ProtoObject *proto = session->Recipe->Prototype;
           std::string itemTypeName = GetItemTypeNameExtended( material->Material.ItemType, 0 );
 	  ReplaceChar( itemTypeName, '_', ' ' );
 	  foundAll = false;
-	  ch->Echo( "&RYou need %s to complete the %s.\r\n",
+	  ch->Echo( "&RYou need %s to complete the %s.&d\r\n",
                     AOrAn( itemTypeName ).c_str(),
                     GetItemTypeNameExtended( proto->ItemType, proto->Value[OVAL_WEAPON_TYPE] ).c_str() );
 	}

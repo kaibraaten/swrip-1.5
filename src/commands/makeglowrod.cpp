@@ -40,16 +40,16 @@ static CraftRecipe *MakeCraftRecipe( void )
 {
   static const struct CraftingMaterial materials[] =
     {
-      { ITEM_TOOLKIT,   CRAFTFLAG_NONE },
-      { ITEM_BATTERY,   CRAFTFLAG_EXTRACT },
-      { ITEM_CIRCUIT,   CRAFTFLAG_EXTRACT },
-      { ITEM_CHEMICAL,  CRAFTFLAG_EXTRACT },
-      { ITEM_LENS,      CRAFTFLAG_EXTRACT },
-      { ITEM_NONE,      CRAFTFLAG_NONE }
+     { ITEM_TOOLKIT,   {} },
+     { ITEM_BATTERY,   { Flag::Crafting::Extract } },
+     { ITEM_CIRCUIT,   { Flag::Crafting::Extract } },
+     { ITEM_CHEMICAL,  { Flag::Crafting::Extract } },
+     { ITEM_LENS,      { Flag::Crafting::Extract } },
+     { ITEM_NONE,      {} }
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makeglowrod, materials,
-					     10, OBJ_VNUM_CRAFTING_GLOWROD,
-					     CRAFTFLAG_NEED_WORKSHOP );
+					     10, GetProtoObject( OBJ_VNUM_CRAFTING_GLOWROD ),
+					     { Flag::Crafting::NeedsWorkshop } );
 
   return recipe;
 }

@@ -71,6 +71,11 @@
 //#define MAX_BIT 32
 static constexpr size_t MAX_BIT = 32;
 
+namespace Flag
+{
+  constexpr size_t MAX = 32;
+}
+
 #define MAX_LAYERS       8      /* maximum clothing layers */
 #define MAX_NEST       100      /* maximum container nesting */
 

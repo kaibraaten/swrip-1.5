@@ -1,4 +1,5 @@
-#include <string.h>
+#include <cstring>
+#include <utility/utility.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "craft.hpp"
@@ -40,13 +41,13 @@ static CraftRecipe *CreateMakeArmorRecipe( void )
 {
   static const struct CraftingMaterial materials[] =
     {
-      { ITEM_THREAD, CRAFTFLAG_NONE },
-      { ITEM_FABRIC, CRAFTFLAG_EXTRACT },
-      { ITEM_NONE, CRAFTFLAG_NONE }
+     { ITEM_THREAD, {} },
+     { ITEM_FABRIC, { Flag::Crafting::Extract } },
+     { ITEM_NONE, {} }
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makearmor, materials,
-					     15, OBJ_VNUM_CRAFTING_ARMOR,
-					     CRAFTFLAG_NEED_WORKSHOP );
+					     15, GetProtoObject( OBJ_VNUM_CRAFTING_ARMOR ),
+					     { Flag::Crafting::NeedsWorkshop } );
 
   return recipe;
 }

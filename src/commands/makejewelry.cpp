@@ -42,15 +42,15 @@ static CraftRecipe *MakeCraftRecipe( void )
 {
   static const struct CraftingMaterial materials[] =
     {
-      { ITEM_TOOLKIT,     CRAFTFLAG_NONE },
-      { ITEM_OVEN,        CRAFTFLAG_NONE },
-      { ITEM_RARE_METAL,  CRAFTFLAG_EXTRACT },
-      { ITEM_CRYSTAL,     CRAFTFLAG_EXTRACT | CRAFTFLAG_OPTIONAL },
-      { ITEM_NONE,        CRAFTFLAG_NONE }
+     { ITEM_TOOLKIT,     {} },
+     { ITEM_OVEN,        {} },
+     { ITEM_RARE_METAL,  { Flag::Crafting::Extract } },
+     { ITEM_CRYSTAL,     { Flag::Crafting::Extract, Flag::Crafting::Optional } },
+     { ITEM_NONE,        {} }
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_makejewelry, materials,
-					     15, OBJ_VNUM_CRAFTING_ARMOR,
-					     CRAFTFLAG_NEED_WORKSHOP );
+					     15, GetProtoObject( OBJ_VNUM_CRAFTING_ARMOR ),
+					     { Flag::Crafting::NeedsWorkshop } );
 
   return recipe;
 }

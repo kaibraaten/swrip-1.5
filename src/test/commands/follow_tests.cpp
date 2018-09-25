@@ -4,25 +4,16 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "protomob.hpp"
-#include "log.hpp"
+#include "fakelogger.hpp"
 #include "room.hpp"
 #include "exit.hpp"
-
-class MockLogger : public Logger
-{
-public:
-  void Bug(const char *str, ...) override { }
-  void Boot(const char *str, ...) override { }
-  void LogStringPlus( const std::string &str, short log_type, short level ) override { }
-  void Info( const char *fmt, ... ) override { }
-};
 
 class FollowTests : public ::testing::Test
 {
 protected:
   void SetUp() override
   {
-    Log = new MockLogger();
+    Log = new FakeLogger();
     _protomob = MakeMobile(1, INVALID_VNUM, "Foo");
     _follower = new Character(_protomob);
     _follower->Name = "Follower";

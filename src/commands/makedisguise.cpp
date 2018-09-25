@@ -37,14 +37,14 @@ static CraftRecipe *MakeCraftRecipe( void )
 {
   static const struct CraftingMaterial materials[] =
     {
-      { ITEM_THREAD,      CRAFTFLAG_NONE },
-      { ITEM_DIS_FABRIC,  CRAFTFLAG_EXTRACT },
-      { ITEM_HAIR,        CRAFTFLAG_EXTRACT },
-      { ITEM_NONE,        CRAFTFLAG_NONE }
+     { ITEM_THREAD,      {} },
+     { ITEM_DIS_FABRIC,  { Flag::Crafting::Extract } },
+     { ITEM_HAIR,        { Flag::Crafting::Extract } },
+     { ITEM_NONE,        {} }
     };
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_disguise, materials,
-					     25, OBJ_VNUM_CRAFTING_DISGUISE,
-					     CRAFTFLAG_NEED_WORKSHOP );
+					     25, GetProtoObject( OBJ_VNUM_CRAFTING_DISGUISE ),
+					     { Flag::Crafting::NeedsWorkshop } );
 
   return recipe;
 }
