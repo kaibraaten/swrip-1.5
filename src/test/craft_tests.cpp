@@ -20,7 +20,7 @@ class NotRandomGenerator : public RandomGenerator
 public:
   long GetRandomNumber( long min, long max ) override
   {
-    return max;
+    return (min + max) / 2;
   }
 
   long GetRandomPercent() override
@@ -162,7 +162,7 @@ TEST_F(CraftTests, When_CheckArgumentsHandler_Fails_SessionNotStarted)
 
 static void DoNothing_CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *e )
 {
-
+  // Intentionally empty
 }
 
 TEST_F(CraftTests, When_CheckArgumentsHandler_Succeeds_SessionIsStarted)
@@ -181,7 +181,7 @@ TEST_F(CraftTests, When_CheckArgumentsHandler_Succeeds_SessionIsStarted)
 
 static void DoNothing_InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *e )
 {
-
+  // Intentionally empty
 }
 
 TEST_F(CraftTests, When_InterpretArgumentsHandler_Succeeds_SessionIsStarted)
@@ -192,6 +192,32 @@ TEST_F(CraftTests, When_InterpretArgumentsHandler_Succeeds_SessionIsStarted)
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   AddInterpretArgumentsCraftingHandler( session, nullptr,
                                         DoNothing_InterpretArgumentsHandler );
+
+  StartCrafting( session );
+
+  EXPECT_TRUE( IsCrafting( _engineer ) );
+}
+
+TEST_F(CraftTests, WhenUnskilled_SessionNotStarted)
+{
+  const CraftingMaterial material;
+  _engineer->PCData->Learned[gsn_mycraftingskill] = 0;
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+
+  StartCrafting( session );
+
+  EXPECT_FALSE( IsCrafting( _engineer ) );
+}
+
+TEST_F(CraftTests, WhenSkilled_SessionIsStarted)
+{
+  const CraftingMaterial material;
+  _engineer->PCData->Learned[gsn_mycraftingskill] = 100;
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
 
   StartCrafting( session );
 
