@@ -204,7 +204,7 @@ int LuaClanRepository::L_ClanEntry( lua_State *L )
       return 0;
     }
   
-  LuaGetfieldString( L, "MainClan", &clan->tmpstr );
+  LuaGetfieldString( L, "MainClan", &clan->MainClanName );
   LuaGetfieldString( L, "Description", &clan->Description );
   LuaGetfieldInt( L, "PlayerKills", &clan->PlayerKills );
   LuaGetfieldInt( L, "PlayerDeaths", &clan->PlayerDeaths );

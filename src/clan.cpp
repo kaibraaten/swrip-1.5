@@ -99,8 +99,8 @@ Clan *GetClan( const std::string &name )
 
 void AssignGuildToMainclan(Clan *guild)
 {
-  Clan *mainClan = GetClan(guild->tmpstr);
-  AssignGuildToMainclan(guild, mainClan);
+  Clan *mainClan = GetClan( guild->MainClanName );
+  AssignGuildToMainclan( guild, mainClan );
 }
 
 void AssignGuildToMainclan( Clan *guild, Clan *mainClan )

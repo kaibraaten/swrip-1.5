@@ -73,9 +73,9 @@ void do_makeguild( Character *ch, std::string argument )
   guild = AllocateClan();
   Clans->Add(guild);
 
-  guild->Name               = argument;
-  guild->Leadership.Leader  = ch->Name;
-  guild->tmpstr             = mainClan->Name;
+  guild->Name = argument;
+  guild->Leadership.Leader = ch->Name;
+  guild->MainClanName = mainClan->Name;
   guild->FoundationDate = current_time;
 
   Clans->Add(guild);

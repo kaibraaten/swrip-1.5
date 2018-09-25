@@ -35,7 +35,7 @@ public:
   vnum_t Jail = INVALID_VNUM;
   vnum_t EnlistRoom1 = INVALID_VNUM;
   vnum_t EnlistRoom2 = INVALID_VNUM;
-  std::string tmpstr;
+  std::string MainClanName;
   time_t FoundationDate = 0;
   
   struct
