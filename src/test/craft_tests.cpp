@@ -146,7 +146,7 @@ static void Failing_CheckRequirementsHandler( void *userData, CheckRequirementsE
   e->AbortSession = true;
 }
 
-TEST_F(CraftTests, When_CheckArgumentsHandler_Fails_SessionNotStarted)
+TEST_F(CraftTests, When_CheckRequirementsHandler_Fails_SessionNotStarted)
 {
   const CraftingMaterial material;
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
@@ -222,4 +222,59 @@ TEST_F(CraftTests, WhenSkilled_SessionIsStarted)
   StartCrafting( session );
 
   EXPECT_TRUE( IsCrafting( _engineer ) );
+}
+
+static void Counting_AbortCraftingHandler( void *userData, AbortCraftingEventArgs *e )
+{
+  int *callCounter = static_cast<int*>( userData );
+  ++(*callCounter);
+}
+
+TEST_F(CraftTests, WhenUnskilled_AbortCraftingHandler_IsCalledExactlyOnce)
+{
+  int callCounter = 0;
+  const CraftingMaterial material;
+  _engineer->PCData->Learned[gsn_mycraftingskill] = 0;
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  AddAbortCraftingHandler( session, &callCounter,
+                           Counting_AbortCraftingHandler );
+
+  StartCrafting( session );
+
+  EXPECT_EQ( callCounter, 1 );
+}
+
+TEST_F(CraftTests, When_InterpretArgumentsHandler_Fails_AbortCraftingHandler_IsCalledExactlyOnce)
+{
+  const CraftingMaterial material;
+  int callCounter = 0;
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  AddInterpretArgumentsCraftingHandler( session, nullptr,
+                                        Failing_InterpretArgumentsHandler );
+  AddAbortCraftingHandler( session, &callCounter,
+                           Counting_AbortCraftingHandler );
+  StartCrafting( session );
+
+  EXPECT_EQ( callCounter, 1 );
+}
+
+TEST_F(CraftTests, When_CheckRequirementsHandler_Fails_AbortCraftingHandler_IsCalledExactlyOnce)
+{
+  int callCounter = 0;
+  const CraftingMaterial material;
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  AddCheckRequirementsCraftingHandler( session, nullptr,
+                                       Failing_CheckRequirementsHandler );
+  AddAbortCraftingHandler( session, &callCounter,
+                           Counting_AbortCraftingHandler );
+
+  StartCrafting( session );
+
+  EXPECT_EQ( callCounter, 1 );
 }
