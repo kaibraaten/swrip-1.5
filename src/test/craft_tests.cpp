@@ -16,6 +16,9 @@
 #include "log.hpp"
 #include "fakelogger.hpp"
 #include "area.hpp"
+#include "repos/objectrepository.hpp"
+#include "repos/skillrepository.hpp"
+#include "skill.hpp"
 
 constexpr short gsn_mycraftingskill = 0;
 
@@ -38,12 +41,50 @@ public:
   }
 };
 
-class CraftTests : public ::testing::Test
+class FakeObjectRepository : public ObjectRepository
 {
+
+};
+
+class FakeSkillRepository : public SkillRepository
+{
+public:
+  FakeSkillRepository()
+  {
+    _myCraftingSkill.UseRec = new timerset();
+    _myCraftingSkill.Name = "makesomething";
+    SkillTable[gsn_mycraftingskill] = &_myCraftingSkill;
+  }
+
+  ~FakeSkillRepository()
+  {
+    delete _myCraftingSkill.UseRec;
+    SkillTable[gsn_mycraftingskill] = nullptr;
+  }
+  
+  Skill *GetSkill( int sn ) override
+  {
+    return sn == gsn_mycraftingskill ? &_myCraftingSkill : nullptr;
+  }
+
+  int LookupSkill( const std::string &name ) override
+  {
+    return !StrCmp( name, _myCraftingSkill.Name ) ? gsn_mycraftingskill : -1;
+  }
+  
+private:
+  Skill _myCraftingSkill;
+};
+
+class CraftTests : public ::testing::Test
+{  
 protected:
   void SetUp() override
   {
     Log = new FakeLogger();
+    Objects = new FakeObjectRepository();
+    Skills = new FakeSkillRepository();
+    
     SetRandomGenerator( new NotRandomGenerator() );
     
     _resultantObject = new ProtoObject( 1 );
@@ -52,6 +93,8 @@ protected:
     _location = new Room();
     _area = new Area();
     _location->Area = _area;
+    SetBit( _location->Flags, ROOM_FACTORY );
+    SetBit( _location->Flags, ROOM_REFINERY );
     
     _engineer = new Character( new PCData(), new NullDescriptor() );
     _engineer->PCData->Learned[gsn_mycraftingskill] = 100;
@@ -73,6 +116,12 @@ protected:
 
     delete _area;
     _area = nullptr;
+
+    delete Skills;
+    Skills = nullptr;
+    
+    delete Objects;
+    Objects = nullptr;
     
     delete Log;
     Log = nullptr;
@@ -437,5 +486,154 @@ TEST_F(CraftTests, WhenMissingOptionalMaterials_SessionIsStarted)
   for( Object *obj : objects )
     {
       delete obj;
+    }
+}
+
+TEST_F(CraftTests, WhenWorkshopRequired_IfNotInWorkshop_SessionNotStarted)
+{
+  const CraftingMaterial material;
+
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, { Flag::Crafting::NeedsWorkshop } );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  RemoveBit( _engineer->InRoom->Flags, ROOM_FACTORY );
+  
+  StartCrafting( session );
+
+  EXPECT_FALSE( IsCrafting( _engineer ) );
+}
+
+TEST_F(CraftTests, WhenWorkshopRequired_IfInWorkshop_SessionIsStarted)
+{
+  const CraftingMaterial material;
+
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, { Flag::Crafting::NeedsWorkshop } );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  SetBit( _engineer->InRoom->Flags, ROOM_FACTORY );
+
+  StartCrafting( session );
+
+  EXPECT_TRUE( IsCrafting( _engineer ) );
+
+  FreeCraftingSession( _engineer->PCData->CraftingSession );
+}
+
+TEST_F(CraftTests, WhenRefineryRequired_IfNotInRefinery_SessionNotStarted)
+{
+  const CraftingMaterial material;
+
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, { Flag::Crafting::NeedsRefinery } );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  RemoveBit( _engineer->InRoom->Flags, ROOM_REFINERY );
+
+  StartCrafting( session );
+
+  EXPECT_FALSE( IsCrafting( _engineer ) );
+}
+
+TEST_F(CraftTests, WhenRefineryRequired_IfInRefinery_SessionIsStarted)
+{
+  const CraftingMaterial material;
+
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, { Flag::Crafting::NeedsRefinery } );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  SetBit( _engineer->InRoom->Flags, ROOM_REFINERY );
+
+  StartCrafting( session );
+
+  EXPECT_TRUE( IsCrafting( _engineer ) );
+
+  FreeCraftingSession( _engineer->PCData->CraftingSession );
+}
+
+TEST_F(CraftTests, AfterStartCrafting_CharacterHas_DoFunTimer)
+{
+  const CraftingMaterial material;
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  StartCrafting( session );
+
+  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
+
+  EXPECT_NE( timer, nullptr );
+
+  if( timer != nullptr )
+    {
+      ExtractTimer( _engineer, timer );
+    }
+
+  if( IsCrafting( _engineer ) )
+    {
+      FreeCraftingSession( _engineer->PCData->CraftingSession );
+    }
+}
+
+TEST_F(CraftTests, AfterStartCrafting_CharacterHas_Correct_DoFunTimer)
+{
+  const CraftingMaterial material;
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  StartCrafting( session );
+
+  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
+
+  EXPECT_EQ( timer->DoFun, do_craftingengine );
+
+  if( timer != nullptr )
+    {
+      ExtractTimer( _engineer, timer );
+    }
+
+  if( IsCrafting( _engineer ) )
+    {
+      FreeCraftingSession( _engineer->PCData->CraftingSession );
+    }
+}
+
+TEST_F(CraftTests, AfterStartCrafting_CharacterIsCrafting)
+{
+  const CraftingMaterial material;
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  StartCrafting( session );
+
+  EXPECT_TRUE( IsCrafting( _engineer ) );
+  
+  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
+
+  if( timer != nullptr )
+    {
+      ExtractTimer( _engineer, timer );
+    }
+
+  if( IsCrafting( _engineer ) )
+    {
+      FreeCraftingSession( _engineer->PCData->CraftingSession );
+    }
+}
+
+TEST_F(CraftTests, AfterCallback_CharacterNoLongerCrafting)
+{
+  const CraftingMaterial material;
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  StartCrafting( session );
+  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
+  _engineer->SubState = timer->Value;
+  
+  timer->DoFun( _engineer, "" );
+
+  EXPECT_FALSE( IsCrafting( _engineer ) );
+  
+  if( timer != nullptr )
+    {
+      ExtractTimer( _engineer, timer );
     }
 }

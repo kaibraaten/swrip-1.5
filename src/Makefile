@@ -625,6 +625,7 @@ _OBJ =  act_comm.o \
 	$(REPOSDIR)/shiprepository.o \
 	$(REPOSDIR)/shoprepository.o \
 	$(REPOSDIR)/shuttlerepository.o \
+	$(REPOSDIR)/skillrepository.o \
 	$(REPOSDIR)/socialrepository.o \
 	$(REPOSDIR)/spaceobjectrepository.o \
 	$(SPECDIR)/auth.o \

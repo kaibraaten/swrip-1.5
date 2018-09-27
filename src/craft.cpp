@@ -34,6 +34,7 @@
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
+#include "repos/skillrepository.hpp"
 
 class CraftRecipe
 {
@@ -166,7 +167,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
   std::string itemType = GetItemTypeNameExtended( eventArgs->Object->ItemType, eventArgs->Object->Value[OVAL_WEAPON_TYPE] );
   char actBuf[MAX_STRING_LENGTH];
   long xpgain = 0;
-  Skill *skill = GetSkill( data->Recipe->Skill );
+  Skill *skill = Skills->GetSkill( data->Recipe->Skill );
 
   ch->Echo( "&GYou finish your work and hold up your newly created %s.&d\r\n",
             itemType.c_str());
@@ -235,7 +236,7 @@ CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, 
   recipe->Prototype  = prototypeObject;
   recipe->Flags      = CreateBitSet<MAX_BIT>( flagBits );
 
-  if( !GetSkill( recipe->Skill ) )
+  if( Skills->GetSkill( recipe->Skill ) == nullptr )
     {
       Log->Bug( "%s:%d %s(): Bad Skill %d",
                 __FILE__, __LINE__, __FUNCTION__, recipe->Skill );

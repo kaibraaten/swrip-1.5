@@ -11,6 +11,7 @@
 #include "log.hpp"
 #include "room.hpp"
 #include "protomob.hpp"
+#include "repos/skillrepository.hpp"
 
 int TopSN = 0;
 int TopHerb = 0;
@@ -282,7 +283,7 @@ void LearnFromSuccess( Character *ch, int sn )
       return;
     }
 
-  if ( sn == LookupSkill( "meditate" ) && !IsJedi( ch ) )
+  if ( sn == Skills->LookupSkill( "meditate" ) && !IsJedi( ch ) )
     {
       if ( ch->PCData->Learned[sn] < 50
 	   || ( GetAbilityLevel(ch, FORCE_ABILITY) == 1
@@ -366,7 +367,7 @@ int ChLookupSkill( const Character *ch, const std::string &name )
 {
   if ( IsNpc(ch) )
     {
-      return LookupSkill( name );
+      return Skills->LookupSkill( name );
     }
 
   for ( int sn = 0; sn < TopSN; sn++ )
@@ -1125,7 +1126,7 @@ void LoadHerbs()
 
 void ASSIGN_GSN( short &gsn, const std::string &skill )
 {
-  gsn = LookupSkill( skill );
+  gsn = Skills->LookupSkill( skill );
   
   if( gsn == -1 )
     {

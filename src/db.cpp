@@ -63,6 +63,7 @@
 #include "repos/shoprepository.hpp"
 #include "repos/descriptorrepository.hpp"
 #include "repos/objectrepository.hpp"
+#include "repos/skillrepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
@@ -1746,4 +1747,5 @@ void AllocateRepositories(void)
   RepairShops = NewRepairShopRepository();
   Descriptors = NewDescriptorRepository();
   Objects = NewObjectRepository();
+  Skills = NewSkillRepository();
 }
