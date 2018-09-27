@@ -1,7 +1,11 @@
 #include <string>
+#include <vector>
+#include <cassert>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include <utility/random.hpp>
+#include <utility/algorithms.hpp>
+#include "object.hpp"
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
@@ -74,11 +78,56 @@ protected:
     Log = nullptr;
   }
 
+  std::list<Object*> MakeMaterials() const
+  {
+    std::list<Object*> output;
+    
+    for( const auto &m : _materials )
+      {
+        if( m.ItemType == ITEM_NONE )
+          {
+            continue;
+          }
+        
+        ProtoObject *proto = new ProtoObject( GetNewVnum() );
+        proto->ItemType = m.ItemType;
+        Object *obj = AllocateObject( proto, 100 );
+        output.push_back( obj );
+
+        assert( obj->ItemType == obj->Prototype->ItemType );
+      }
+
+    return output;
+  }
+
+  vnum_t GetNewVnum() const
+  {
+    return ++_lastVnum;
+  }
+  
   Character *_engineer = nullptr;
   ProtoObject *_resultantObject = nullptr;
   Room *_location = nullptr;
   Area *_area = nullptr;
+  static const std::vector<CraftingMaterial> _materials;
+  static vnum_t _lastVnum;
 };
+
+vnum_t CraftTests::_lastVnum = INVALID_VNUM;
+
+const std::vector<CraftingMaterial> CraftTests::_materials =
+  {
+   { ITEM_TOOLKIT,        {} },
+   { ITEM_OVEN,           {} },
+   { ITEM_LENS,           { Flag::Crafting::Extract } },
+   { ITEM_CRYSTAL,        { Flag::Crafting::Extract } },
+   { ITEM_MIRROR,         { Flag::Crafting::Extract } },
+   { ITEM_DURAPLAST,      { Flag::Crafting::Extract } },
+   { ITEM_BATTERY,        { Flag::Crafting::Extract } },
+   { ITEM_CIRCUIT,        { Flag::Crafting::Extract } },
+   { ITEM_SUPERCONDUCTOR, { Flag::Crafting::Extract } },
+   { ITEM_NONE,           {} }
+  };
 
 static void Counting_InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *e )
 {
@@ -177,6 +226,8 @@ TEST_F(CraftTests, When_CheckArgumentsHandler_Succeeds_SessionIsStarted)
   StartCrafting( session );
 
   EXPECT_TRUE( IsCrafting( _engineer ) );
+
+  FreeCraftingSession( _engineer->PCData->CraftingSession );
 }
 
 static void DoNothing_InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *e )
@@ -196,6 +247,8 @@ TEST_F(CraftTests, When_InterpretArgumentsHandler_Succeeds_SessionIsStarted)
   StartCrafting( session );
 
   EXPECT_TRUE( IsCrafting( _engineer ) );
+
+  FreeCraftingSession( _engineer->PCData->CraftingSession );
 }
 
 TEST_F(CraftTests, WhenUnskilled_SessionNotStarted)
@@ -222,6 +275,8 @@ TEST_F(CraftTests, WhenSkilled_SessionIsStarted)
   StartCrafting( session );
 
   EXPECT_TRUE( IsCrafting( _engineer ) );
+
+  FreeCraftingSession( _engineer->PCData->CraftingSession );
 }
 
 static void Counting_AbortCraftingHandler( void *userData, AbortCraftingEventArgs *e )
@@ -277,4 +332,110 @@ TEST_F(CraftTests, When_CheckRequirementsHandler_Fails_AbortCraftingHandler_IsCa
   StartCrafting( session );
 
   EXPECT_EQ( callCounter, 1 );
+}
+
+TEST_F(CraftTests, WhenMissingAllMaterials_SessionNotStarted)
+{
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, _materials.data(), 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+
+  StartCrafting( session );
+
+  EXPECT_FALSE( IsCrafting( _engineer ) );
+}
+
+TEST_F(CraftTests, WhenMissingSomeMaterials_SessionNotStarted)
+{
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, _materials.data(), 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+
+  auto objects = MakeMaterials();
+  int i = 0;
+  for( Object *obj : objects )
+    {
+      if( ++i % 2 == 0 )
+        {
+          ObjectToCharacter( obj, _engineer );
+        }
+    }
+  
+  StartCrafting( session );
+
+  EXPECT_FALSE( IsCrafting( _engineer ) );
+
+  for( Object *obj : objects )
+    {
+      delete obj;
+    }
+}
+
+TEST_F(CraftTests, WhenHasAllMaterials_SessionIsStarted)
+{
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, _materials.data(), 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+
+  auto objects = MakeMaterials();
+  
+  for( Object *obj : objects )
+    {
+      ObjectToCharacter( obj, _engineer );
+    }
+
+  StartCrafting( session );
+
+  EXPECT_TRUE( IsCrafting( _engineer ) );
+
+  FreeCraftingSession( _engineer->PCData->CraftingSession );
+  
+  for( Object *obj : objects )
+    {
+      delete obj;
+    }
+}
+
+TEST_F(CraftTests, WhenMissingOptionalMaterials_SessionIsStarted)
+{
+  auto materials = _materials;
+
+  int i = 0;
+  for( auto m : materials )
+    {
+      if( i % 2 == 0 )
+        {
+          m.Flags.reset( Flag::Crafting::Optional );
+        }
+    }
+  
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, materials.data(), 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+
+  auto objects = MakeMaterials();
+
+  for( Object *obj : objects )
+    {
+      if( find_if( std::begin(materials), std::end(materials),
+                   [obj](const auto m)
+                   {
+                     return m.Flags.test( Flag::Crafting::Optional )
+                       && m.ItemType == obj->ItemType;
+                   }) == std::end(materials))
+        {
+          ObjectToCharacter( obj, _engineer );
+        }
+    }
+
+  StartCrafting( session );
+
+  EXPECT_TRUE( IsCrafting( _engineer ) );
+
+  FreeCraftingSession( _engineer->PCData->CraftingSession );
+  
+  for( Object *obj : objects )
+    {
+      delete obj;
+    }
 }
