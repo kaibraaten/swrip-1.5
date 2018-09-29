@@ -1,7 +1,7 @@
 #include <string>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include <utility/cevent.hpp>
+#include <utility/event.hpp>
 
 class EventTests : public ::testing::Test
 {
@@ -17,15 +17,6 @@ protected:
   }
 };
 
-TEST_F(EventTests, CreateEvent_ReturnsNonNull)
-{
-  event_t *event = nullptr;
-
-  event = CreateEvent();
-  
-  EXPECT_NE(event, nullptr);
-}
-
 static void addOneToUserdata(void *userdata, void *eventargs)
 {
   int *counter = static_cast<int*>(userdata);
@@ -34,23 +25,23 @@ static void addOneToUserdata(void *userdata, void *eventargs)
 
 TEST_F(EventTests, AddedEventIsRaisedExactlyOnce)
 {
-  event_t *event = CreateEvent();
+  Ceris::Event<void*> event;
   int counter = 0;
-  AddEventHandler(event, &counter, addOneToUserdata);
+  event.Add( &counter, addOneToUserdata);
 
-  RaiseEvent(event, nullptr);
+  event( nullptr );
 
   EXPECT_EQ(1, counter);
 }
 
 TEST_F(EventTests, RemovedEventIsNeverRaised)
 {
-  event_t *event = CreateEvent();
+  Ceris::Event<void*> event;
   int counter = 0;
-  AddEventHandler(event, &counter, addOneToUserdata);
-  RemoveEventHandler(event, &counter, addOneToUserdata);
+  event.Add( &counter, addOneToUserdata);
+  event.Remove( &counter, addOneToUserdata);
   
-  RaiseEvent(event, nullptr);
+  event( nullptr );
 
   EXPECT_EQ(0, counter);
 }
@@ -60,60 +51,59 @@ struct EventArgs
   bool WasPassedAlong = false;
 };
 
-static void EventArgsArePassedAlong_eventHandler(void *userdata, void *eventargs)
+static void EventArgsArePassedAlong_eventHandler(void *userdata, EventArgs *args)
 {
-  if(eventargs != nullptr)
+  if(args != nullptr)
     {
-      EventArgs *args = static_cast<EventArgs*>(eventargs);
       args->WasPassedAlong = true;
     }
 }
 
 TEST_F(EventTests, EventArgsArePassedAlong)
 {
-  event_t *event = CreateEvent();
+  Ceris::Event<EventArgs*> event;
   EventArgs args;
-  AddEventHandler(event, nullptr, EventArgsArePassedAlong_eventHandler);
+  event.Add( EventArgsArePassedAlong_eventHandler);
 
-  RaiseEvent(event, &args);
+  event( &args );
 
   EXPECT_TRUE(args.WasPassedAlong);
 }
 
 TEST_F(EventTests, AllHandlersWithSameUserdataAreRemovedTogether)
 {
-  event_t *event = CreateEvent();
+  Ceris::Event<void*> event;
   int counter = 0;
-  AddEventHandler(event, &counter, addOneToUserdata);
-  AddEventHandler(event, &counter, addOneToUserdata);
-  AddEventHandler(event, &counter, addOneToUserdata);
-  RemoveEventHandler(event, &counter, addOneToUserdata);
+  event.Add( &counter, addOneToUserdata);
+  event.Add( &counter, addOneToUserdata);
+  event.Add( &counter, addOneToUserdata);
+  event.Remove( &counter, addOneToUserdata);
 
-  RaiseEvent(event, nullptr);
+  event( nullptr );
 
   EXPECT_EQ(0, counter);
 }
 
 TEST_F(EventTests, IdenticalHandlersCannotBeAdded)
 {
-  event_t *event = CreateEvent();
+  Ceris::Event<void*> event;
   int counter = 0;
-  AddEventHandler(event, &counter, addOneToUserdata);
-  AddEventHandler(event, &counter, addOneToUserdata);
-  AddEventHandler(event, &counter, addOneToUserdata);
+  event.Add( &counter, addOneToUserdata);
+  event.Add( &counter, addOneToUserdata);
+  event.Add( &counter, addOneToUserdata);
   
-  RaiseEvent(event, nullptr);
+  event( nullptr );
 
   EXPECT_EQ(1, counter);
 }
 
 TEST_F(EventTests, NullUserdataWorks)
 {
-  event_t *event = CreateEvent();
+  Ceris::Event<EventArgs*> event;
   EventArgs args;
-  AddEventHandler(event, nullptr, EventArgsArePassedAlong_eventHandler);
+  event.Add( EventArgsArePassedAlong_eventHandler);
 
-  RaiseEvent(event, &args);
+  event( &args );
 
   EXPECT_TRUE(args.WasPassedAlong);
 }
@@ -139,12 +129,12 @@ static void eh3(void *ud, void *args)
 TEST_F(EventTests, OnOneUserDataWithMultipleHandlerFuns_AddAreDispatched)
 {
   int userdata = 0;
-  event_t *event = CreateEvent();
-  AddEventHandler(event, &userdata, eh1);
-  AddEventHandler(event, &userdata, eh2);
-  AddEventHandler(event, &userdata, eh3);
+  Ceris::Event<void*> event;
+  event.Add( &userdata, eh1 );
+  event.Add( &userdata, eh2 );
+  event.Add( &userdata, eh3 );
 
-  RaiseEvent(event, nullptr);
+  event( nullptr );
 
   EXPECT_EQ(3, userdata);
 }
@@ -174,14 +164,14 @@ static void eh6(void *ud, void *args)
 TEST_F(EventTests, OnOneUserDataWithMultipleHandlerFuns_CorrectOneIsRemoved)
 {
   unsigned long bits = 0;
-  event_t *event = CreateEvent();
-  AddEventHandler(event, &bits, eh4);
-  AddEventHandler(event, &bits, eh5);
-  AddEventHandler(event, &bits, eh6);
-  RemoveEventHandler(event, &bits, eh5);
-  RaiseEvent(event, nullptr);
+  Ceris::Event<void*> event;
+  event.Add( &bits, eh4 );
+  event.Add( &bits, eh5 );
+  event.Add( &bits, eh6 );
+  event.Remove( &bits, eh5 );
+  event( nullptr );
 
-  EXPECT_TRUE(bits & EH4);
-  EXPECT_FALSE(bits & EH5);
-  EXPECT_TRUE(bits & EH6);
+  EXPECT_TRUE( bits & EH4 );
+  EXPECT_FALSE( bits & EH5 );
+  EXPECT_TRUE( bits & EH6 );
 }

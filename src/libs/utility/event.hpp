@@ -54,6 +54,9 @@ public:
   // Subscribe to the event using a non-member function as eventhandler.
   void Add( void *userdata, void (*)( void*, EventArgsT ) );
 
+  // Subscribe to the event using a non-member function as eventhandler.
+  void Add( void (*)( void*, EventArgsT ) );
+  
   // Unsubscribe all eventhandlers for a specific subscriber. Both member
   // and non-member functions are unsubscribed.
   template< typename T >
@@ -261,12 +264,18 @@ void Event< EventArgsT >::Add( T *instance,
 
 template< typename EventArgsT >
 void Event< EventArgsT >::Add( void *userdata,
-				  void (*fun)( void*, EventArgsT ) )
+                               void (*fun)( void*, EventArgsT ) )
 {
   if( Find( userdata, fun ) == _Handlers.end() )
     {
       _Handlers.insert( std::make_pair( userdata, new GlobalFunctionHandler<EventArgsT>( userdata, fun ) ) );
     }
+}
+
+template< typename EventArgsT >
+void Event< EventArgsT >::Add( void (*fun)( void*, EventArgsT ) )
+{
+  Add( nullptr, fun );
 }
 
 template< typename EventArgsT >
