@@ -80,7 +80,7 @@ TEST_F(EventTests, EventArgsArePassedAlong)
   EXPECT_TRUE(args.WasPassedAlong);
 }
 
-TEST_F(EventTests, AllHandlersWithSameUserdataAreRemovedOneAtATime)
+TEST_F(EventTests, AllHandlersWithSameUserdataAreRemovedTogether)
 {
   event_t *event = CreateEvent();
   int counter = 0;
@@ -91,10 +91,10 @@ TEST_F(EventTests, AllHandlersWithSameUserdataAreRemovedOneAtATime)
 
   RaiseEvent(event, nullptr);
 
-  EXPECT_EQ(2, counter);
+  EXPECT_EQ(0, counter);
 }
 
-TEST_F(EventTests, IdenticalHandlersCanBeAdded)
+TEST_F(EventTests, IdenticalHandlersCannotBeAdded)
 {
   event_t *event = CreateEvent();
   int counter = 0;
@@ -104,7 +104,7 @@ TEST_F(EventTests, IdenticalHandlersCanBeAdded)
   
   RaiseEvent(event, nullptr);
 
-  EXPECT_EQ(3, counter);
+  EXPECT_EQ(1, counter);
 }
 
 TEST_F(EventTests, NullUserdataWorks)
