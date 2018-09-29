@@ -22,6 +22,28 @@
 
 constexpr short gsn_mycraftingskill = 0;
 
+static void CleanupCharacter( Character *ch )
+{
+  Timer *timer = GetTimerPointer( ch, TIMER_CMD_FUN );
+
+  if( timer != nullptr )
+    {
+      ExtractTimer( ch, timer );
+    }
+
+  while( !ch->Objects().empty() )
+    {
+      Object *obj = ch->Objects().front();
+      ObjectFromCharacter( obj );
+      delete obj;
+    }
+
+  if( IsCrafting( ch ) )
+    {
+      FreeCraftingSession( ch->PCData->CraftingSession );
+    }
+}
+
 class NotRandomGenerator : public RandomGenerator
 {
 public:
@@ -104,6 +126,7 @@ protected:
 
   void TearDown() override
   {
+    CleanupCharacter( _engineer );
     delete _engineer->Desc;
     delete _engineer;
     _engineer = nullptr;
@@ -178,7 +201,8 @@ const std::vector<CraftingMaterial> CraftTests::_materials =
    { ITEM_NONE,           {} }
   };
 
-static void Counting_InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *e )
+template<typename EventArgs>
+static void Counting_EventHandler( void *userData, EventArgs *e )
 {
   int *callCounter = static_cast<int*>( userData );
   ++(*callCounter);
@@ -192,17 +216,11 @@ TEST_F(CraftTests, InterpretArgumentsHandler_IsCalledExactlyOnce)
                                              _resultantObject, {} );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   AddInterpretArgumentsCraftingHandler( session, &callCounter,
-                                        Counting_InterpretArgumentsHandler );
+                                        Counting_EventHandler );
 
   StartCrafting( session );
 
   EXPECT_EQ( callCounter, 1 );
-}
-
-static void Counting_CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *e )
-{
-  int *callCounter = static_cast<int*>( userData );
-  ++(*callCounter);
 }
 
 TEST_F(CraftTests, CheckRequirementsHandler_IsCalledExactlyOnce)
@@ -213,14 +231,15 @@ TEST_F(CraftTests, CheckRequirementsHandler_IsCalledExactlyOnce)
                                              _resultantObject, {} );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   AddCheckRequirementsCraftingHandler( session, &callCounter,
-                                       Counting_CheckRequirementsHandler );
+                                       Counting_EventHandler );
 
   StartCrafting( session );
 
   EXPECT_EQ( callCounter, 1 );
 }
 
-static void Failing_InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *e )
+template<typename EventArgs>
+static void Failing_EventHandler( void *userData, EventArgs *e )
 {
   e->AbortSession = true;
 }
@@ -232,16 +251,11 @@ TEST_F(CraftTests, When_InterpretArgumentsHandler_Fails_SessionNotStarted)
                                              _resultantObject, {} );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   AddInterpretArgumentsCraftingHandler( session, nullptr,
-                                        Failing_InterpretArgumentsHandler );
+                                        Failing_EventHandler );
 
   StartCrafting( session );
 
   EXPECT_FALSE( IsCrafting( _engineer ) );
-}
-
-static void Failing_CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *e )
-{
-  e->AbortSession = true;
 }
 
 TEST_F(CraftTests, When_CheckRequirementsHandler_Fails_SessionNotStarted)
@@ -251,14 +265,15 @@ TEST_F(CraftTests, When_CheckRequirementsHandler_Fails_SessionNotStarted)
                                              _resultantObject, {} );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   AddCheckRequirementsCraftingHandler( session, nullptr,
-                                       Failing_CheckRequirementsHandler );
+                                       Failing_EventHandler );
 
   StartCrafting( session );
 
   EXPECT_FALSE( IsCrafting( _engineer ) );
 }
 
-static void DoNothing_CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *e )
+template<typename EventArgs>
+static void DoNothing_EventHandler( void *userData, EventArgs *e )
 {
   // Intentionally empty
 }
@@ -270,18 +285,11 @@ TEST_F(CraftTests, When_CheckArgumentsHandler_Succeeds_SessionIsStarted)
                                              _resultantObject, {} );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   AddCheckRequirementsCraftingHandler( session, nullptr,
-                                       DoNothing_CheckRequirementsHandler );
+                                       DoNothing_EventHandler );
 
   StartCrafting( session );
 
   EXPECT_TRUE( IsCrafting( _engineer ) );
-
-  FreeCraftingSession( _engineer->PCData->CraftingSession );
-}
-
-static void DoNothing_InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *e )
-{
-  // Intentionally empty
 }
 
 TEST_F(CraftTests, When_InterpretArgumentsHandler_Succeeds_SessionIsStarted)
@@ -291,13 +299,11 @@ TEST_F(CraftTests, When_InterpretArgumentsHandler_Succeeds_SessionIsStarted)
                                              _resultantObject, {} );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   AddInterpretArgumentsCraftingHandler( session, nullptr,
-                                        DoNothing_InterpretArgumentsHandler );
+                                        DoNothing_EventHandler );
 
   StartCrafting( session );
 
   EXPECT_TRUE( IsCrafting( _engineer ) );
-
-  FreeCraftingSession( _engineer->PCData->CraftingSession );
 }
 
 TEST_F(CraftTests, WhenUnskilled_SessionNotStarted)
@@ -324,14 +330,6 @@ TEST_F(CraftTests, WhenSkilled_SessionIsStarted)
   StartCrafting( session );
 
   EXPECT_TRUE( IsCrafting( _engineer ) );
-
-  FreeCraftingSession( _engineer->PCData->CraftingSession );
-}
-
-static void Counting_AbortCraftingHandler( void *userData, AbortCraftingEventArgs *e )
-{
-  int *callCounter = static_cast<int*>( userData );
-  ++(*callCounter);
 }
 
 TEST_F(CraftTests, WhenUnskilled_AbortCraftingHandler_IsCalledExactlyOnce)
@@ -343,7 +341,7 @@ TEST_F(CraftTests, WhenUnskilled_AbortCraftingHandler_IsCalledExactlyOnce)
                                              _resultantObject, {} );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   AddAbortCraftingHandler( session, &callCounter,
-                           Counting_AbortCraftingHandler );
+                           Counting_EventHandler );
 
   StartCrafting( session );
 
@@ -358,9 +356,9 @@ TEST_F(CraftTests, When_InterpretArgumentsHandler_Fails_AbortCraftingHandler_IsC
                                              _resultantObject, {} );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   AddInterpretArgumentsCraftingHandler( session, nullptr,
-                                        Failing_InterpretArgumentsHandler );
+                                        Failing_EventHandler );
   AddAbortCraftingHandler( session, &callCounter,
-                           Counting_AbortCraftingHandler );
+                           Counting_EventHandler );
   StartCrafting( session );
 
   EXPECT_EQ( callCounter, 1 );
@@ -374,9 +372,9 @@ TEST_F(CraftTests, When_CheckRequirementsHandler_Fails_AbortCraftingHandler_IsCa
                                              _resultantObject, {} );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   AddCheckRequirementsCraftingHandler( session, nullptr,
-                                       Failing_CheckRequirementsHandler );
+                                       Failing_EventHandler );
   AddAbortCraftingHandler( session, &callCounter,
-                           Counting_AbortCraftingHandler );
+                           Counting_EventHandler );
 
   StartCrafting( session );
 
@@ -413,11 +411,6 @@ TEST_F(CraftTests, WhenMissingSomeMaterials_SessionNotStarted)
   StartCrafting( session );
 
   EXPECT_FALSE( IsCrafting( _engineer ) );
-
-  for( Object *obj : objects )
-    {
-      delete obj;
-    }
 }
 
 TEST_F(CraftTests, WhenHasAllMaterials_SessionIsStarted)
@@ -436,13 +429,6 @@ TEST_F(CraftTests, WhenHasAllMaterials_SessionIsStarted)
   StartCrafting( session );
 
   EXPECT_TRUE( IsCrafting( _engineer ) );
-
-  FreeCraftingSession( _engineer->PCData->CraftingSession );
-  
-  for( Object *obj : objects )
-    {
-      delete obj;
-    }
 }
 
 TEST_F(CraftTests, WhenMissingOptionalMaterials_SessionIsStarted)
@@ -480,13 +466,6 @@ TEST_F(CraftTests, WhenMissingOptionalMaterials_SessionIsStarted)
   StartCrafting( session );
 
   EXPECT_TRUE( IsCrafting( _engineer ) );
-
-  FreeCraftingSession( _engineer->PCData->CraftingSession );
-  
-  for( Object *obj : objects )
-    {
-      delete obj;
-    }
 }
 
 TEST_F(CraftTests, WhenWorkshopRequired_IfNotInWorkshop_SessionNotStarted)
@@ -515,8 +494,6 @@ TEST_F(CraftTests, WhenWorkshopRequired_IfInWorkshop_SessionIsStarted)
   StartCrafting( session );
 
   EXPECT_TRUE( IsCrafting( _engineer ) );
-
-  FreeCraftingSession( _engineer->PCData->CraftingSession );
 }
 
 TEST_F(CraftTests, WhenRefineryRequired_IfNotInRefinery_SessionNotStarted)
@@ -545,8 +522,6 @@ TEST_F(CraftTests, WhenRefineryRequired_IfInRefinery_SessionIsStarted)
   StartCrafting( session );
 
   EXPECT_TRUE( IsCrafting( _engineer ) );
-
-  FreeCraftingSession( _engineer->PCData->CraftingSession );
 }
 
 TEST_F(CraftTests, AfterStartCrafting_CharacterHas_DoFunTimer)
@@ -560,16 +535,6 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterHas_DoFunTimer)
   Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
 
   EXPECT_NE( timer, nullptr );
-
-  if( timer != nullptr )
-    {
-      ExtractTimer( _engineer, timer );
-    }
-
-  if( IsCrafting( _engineer ) )
-    {
-      FreeCraftingSession( _engineer->PCData->CraftingSession );
-    }
 }
 
 TEST_F(CraftTests, AfterStartCrafting_CharacterHas_Correct_DoFunTimer)
@@ -583,16 +548,6 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterHas_Correct_DoFunTimer)
   Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
 
   EXPECT_EQ( timer->DoFun, do_craftingengine );
-
-  if( timer != nullptr )
-    {
-      ExtractTimer( _engineer, timer );
-    }
-
-  if( IsCrafting( _engineer ) )
-    {
-      FreeCraftingSession( _engineer->PCData->CraftingSession );
-    }
 }
 
 TEST_F(CraftTests, AfterStartCrafting_CharacterIsCrafting)
@@ -604,18 +559,6 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterIsCrafting)
   StartCrafting( session );
 
   EXPECT_TRUE( IsCrafting( _engineer ) );
-  
-  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
-
-  if( timer != nullptr )
-    {
-      ExtractTimer( _engineer, timer );
-    }
-
-  if( IsCrafting( _engineer ) )
-    {
-      FreeCraftingSession( _engineer->PCData->CraftingSession );
-    }
 }
 
 TEST_F(CraftTests, AfterCallback_CharacterNoLongerCrafting)
@@ -631,9 +574,62 @@ TEST_F(CraftTests, AfterCallback_CharacterNoLongerCrafting)
   timer->DoFun( _engineer, "" );
 
   EXPECT_FALSE( IsCrafting( _engineer ) );
-  
-  if( timer != nullptr )
-    {
-      ExtractTimer( _engineer, timer );
-    }
+}
+
+static bool HasObjectInstanceOf( const Character *ch, const ProtoObject *proto )
+{
+  return Find( ch->Objects(),
+               [proto](const auto obj)
+               {
+                 return obj->Prototype == proto;
+               });
+}
+
+TEST_F(CraftTests, AfterCallback_CharacterReceivedObject)
+{
+  const CraftingMaterial material;
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  StartCrafting( session );
+  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
+  _engineer->SubState = timer->Value;
+
+  timer->DoFun( _engineer, "" );
+
+  EXPECT_TRUE( HasObjectInstanceOf( _engineer, _resultantObject ) );
+}
+
+TEST_F(CraftTests, AfterCallback_SetObjectStatsEventHandler_IsCalledExactlyOnce)
+{
+  int callCounter = 0;
+  const CraftingMaterial material;
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  AddSetObjectStatsCraftingHandler( session, &callCounter, Counting_EventHandler );
+  StartCrafting( session );
+  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
+  _engineer->SubState = timer->Value;
+
+  timer->DoFun( _engineer, "" );
+
+  EXPECT_EQ( callCounter, 1 );
+}
+
+TEST_F(CraftTests, AfterCallback_FinishedCraftingEventHandler_IsCalledExactlyOnce)
+{
+  int callCounter = 0;
+  const CraftingMaterial material;
+  CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
+                                             _resultantObject, {} );
+  CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
+  AddFinishedCraftingHandler( session, &callCounter, Counting_EventHandler );
+  StartCrafting( session );
+  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
+  _engineer->SubState = timer->Value;
+
+  timer->DoFun( _engineer, "" );
+
+  EXPECT_EQ( callCounter, 1 );
 }
