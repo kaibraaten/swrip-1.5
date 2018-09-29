@@ -73,10 +73,10 @@ private:
   Event &operator=( const Event& );
   Event( const Event& );
 
-  typedef std::multimap< void*, HandlerFunctionBase<EventArgsT>* > HandlerContainer;
+  using HandlerContainer = std::multimap< void*, HandlerFunctionBase<EventArgsT>* >;
   template< typename T >
-  typename HandlerContainer::const_iterator Find( T *instance, void ( T::*memFn )( EventArgsT ) ) const;
-  typename HandlerContainer::const_iterator Find( void *userdata, std::function<void( void*, EventArgsT )> fun ) const;
+  auto Find( T *instance, void ( T::*memFn )( EventArgsT ) ) const;
+  auto Find( void *userdata, std::function<void( void*, EventArgsT )> fun ) const;
   HandlerContainer _Handlers;
 };
 
@@ -143,7 +143,7 @@ void MemberFunctionHandler< T, EventArgsT >::Call( const EventArgsT &args )
 template< typename T, typename EventArgsT >
 bool MemberFunctionHandler< T, EventArgsT >::Equals( const HandlerFunctionBase< EventArgsT > *rhv ) const
 {
-  const MemberFunctionHandler< T, EventArgsT > *h2 = dynamic_cast<const MemberFunctionHandler< T, EventArgsT >* >( rhv );
+  const auto h2 = dynamic_cast<const MemberFunctionHandler< T, EventArgsT >* >( rhv );
 
   if( !h2 )
     {
@@ -172,8 +172,7 @@ private:
 };
 
 template< typename EventArgsT >
-GlobalFunctionHandler< EventArgsT >::GlobalFunctionHandler( void *ud,
-							    Func memFn )
+GlobalFunctionHandler< EventArgsT >::GlobalFunctionHandler( void *ud, Func memFn )
   : _UserData( ud ),
     _Function( memFn )
 {
@@ -189,7 +188,7 @@ void GlobalFunctionHandler< EventArgsT >::Call( const EventArgsT &args )
 template< typename EventArgsT >
 bool GlobalFunctionHandler< EventArgsT >::Equals( const HandlerFunctionBase< EventArgsT > *rhv ) const
 {
-  const GlobalFunctionHandler< EventArgsT > *h2 = dynamic_cast<const GlobalFunctionHandler< EventArgsT >* >( rhv );
+  const auto h2 = dynamic_cast<const GlobalFunctionHandler< EventArgsT >* >( rhv );
 
   if( !h2 )
     {
@@ -211,21 +210,19 @@ Event< EventArgsT >::Event()
 template< typename EventArgsT >
 Event< EventArgsT >::~Event()
 {
-  for( typename HandlerContainer::iterator i = _Handlers.begin();
-       i != _Handlers.end(); ++i )
+  for( auto &pair : _Handlers )
     {
-      delete i->second;
+      delete pair.second;
     }
 }
 
 template< typename EventArgsT >
 template< typename T >
-typename std::multimap< void*, HandlerFunctionBase<EventArgsT>* >::const_iterator Event< EventArgsT >::Find( T *instance, void ( T::*memFn )( EventArgsT ) ) const
+auto Event< EventArgsT >::Find( T *instance, void ( T::*memFn )( EventArgsT ) ) const
 {
   MemberFunctionHandler< T, EventArgsT > handler( instance, memFn );
 
-  for( typename HandlerContainer::const_iterator i = _Handlers.begin();
-       i != _Handlers.end(); ++i )
+  for( auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i )
     {
       if( handler.Equals( i->second ) )
 	{
@@ -237,12 +234,11 @@ typename std::multimap< void*, HandlerFunctionBase<EventArgsT>* >::const_iterato
 }
 
 template< typename EventArgsT >
-typename std::multimap< void*, HandlerFunctionBase<EventArgsT>* >::const_iterator Event< EventArgsT >::Find( void *userdata, std::function<void( void*, EventArgsT )> fun ) const
+auto Event< EventArgsT >::Find( void *userdata, std::function<void( void*, EventArgsT )> fun ) const
 {
   GlobalFunctionHandler< EventArgsT > handler( userdata, fun );
 
-  for( typename HandlerContainer::const_iterator i = _Handlers.begin();
-       i != _Handlers.end(); ++i )
+  for( auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i )
     {
       if( handler.Equals( i->second ) )
         {
@@ -255,12 +251,11 @@ typename std::multimap< void*, HandlerFunctionBase<EventArgsT>* >::const_iterato
 
 template< typename EventArgsT >
 template< typename T >
-void Event< EventArgsT >::Add( T *instance,
-                               void ( T::*memFn )( EventArgsT ) )
+void Event< EventArgsT >::Add( T *instance, void ( T::*memFn )( EventArgsT ) )
 {
   if( Find( instance, memFn ) == _Handlers.end() )
     {
-      _Handlers.insert( std::make_pair( instance, new MemberFunctionHandler< T, EventArgsT >( instance, memFn ) ) );
+      _Handlers.insert( { instance, new MemberFunctionHandler<T, EventArgsT>( instance, memFn ) } );
     }
 }
 
@@ -270,7 +265,7 @@ void Event< EventArgsT >::Add( void *userdata,
 {
   if( Find( userdata, fun ) == _Handlers.end() )
     {
-      _Handlers.insert( std::make_pair( userdata, new GlobalFunctionHandler<EventArgsT>( userdata, fun ) ) );
+      _Handlers.insert( { userdata, new GlobalFunctionHandler<EventArgsT>( userdata, fun ) } );
     }
 }
 
@@ -293,11 +288,9 @@ template< typename EventArgsT >
 void Event< EventArgsT >::Remove( void *userdata,
 				  std::function<void( void*, EventArgsT )> fun )
 {
-  HandlerContainer tmp = _Handlers;
   GlobalFunctionHandler< EventArgsT > handler( userdata, fun );
 
-  for( typename HandlerContainer::iterator i = _Handlers.begin();
-       i != _Handlers.end(); ++i )
+  for( auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i )
     {
       if( handler.Equals( i->second ) )
         {
@@ -309,14 +302,11 @@ void Event< EventArgsT >::Remove( void *userdata,
 
 template< typename EventArgsT >
 template< typename T >
-void Event< EventArgsT >::Remove( T *instance,
-				  void ( T::*memFn )( EventArgsT ) )
+void Event< EventArgsT >::Remove( T *instance, void ( T::*memFn )( EventArgsT ) )
 {
-  HandlerContainer tmp = _Handlers;
   MemberFunctionHandler< T, EventArgsT > handler( instance, memFn );
 
-  for( typename HandlerContainer::iterator i = _Handlers.begin();
-       i != _Handlers.end(); ++i )
+  for( auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i )
     {
       if( handler.Equals( i->second ) )
         {
@@ -332,9 +322,9 @@ void Event< EventArgsT >::operator()( const EventArgsT &args ) const
   // Use a copy so it's safe for handlers to unregister during dispatch
   HandlerContainer tmp = _Handlers;
 
-  for(typename HandlerContainer::iterator i = tmp.begin(); i != tmp.end(); ++i)
+  for( auto p : tmp )
     {
-      i->second->Exec( args );
+      p.second->Exec( args );
     }
 }
 
