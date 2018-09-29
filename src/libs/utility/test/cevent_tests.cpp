@@ -1,7 +1,7 @@
 #include <string>
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include <utility/event.hpp>
+#include <utility/cevent.hpp>
 
 class EventTests : public ::testing::Test
 {

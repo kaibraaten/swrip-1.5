@@ -23,8 +23,8 @@
   OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef _CERIS_EVENT_HPP_
-#define _CERIS_EVENT_HPP_
+#ifndef _CERIS_CEVENT_HPP_
+#define _CERIS_CEVENT_HPP_
 
 struct event_t;
 typedef void (*EventHandler)( void *userdata, void *eventargs );

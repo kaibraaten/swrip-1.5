@@ -5,7 +5,7 @@ CXXFLAGS = -std=c++14 -g3 -MMD -I. -I../..  $(WFLAGS)
 LDFLAGS = -L.. -Wl,-rpath,.. -lm -lz -lgtest -lgmock -lutility -ldl
 
 ODIR = obj
-_OBJ = main.o algorithms_tests.o bet_tests.o event_tests.o misc_tests.o string_handling_tests.o
+_OBJ = main.o algorithms_tests.o bet_tests.o cevent_tests.o misc_tests.o string_handling_tests.o
 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
