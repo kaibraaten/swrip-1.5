@@ -22,7 +22,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cstring>
-#include <utility/cevent.hpp>
+#include <utility/event.hpp>
 #include <utility/random.hpp>
 #include "mud.hpp"
 #include "craft.hpp"
@@ -57,12 +57,12 @@ public:
 class CraftingSession
 {
 public:
-  event_t *OnInterpretArguments = nullptr;
-  event_t *OnCheckRequirements = nullptr;
-  event_t *OnMaterialFound = nullptr;
-  event_t *OnSetObjectStats = nullptr;
-  event_t *OnFinishedCrafting = nullptr;
-  event_t *OnAbort = nullptr;
+  Ceris::Event<InterpretArgumentsEventArgs*> OnInterpretArguments;
+  Ceris::Event<CheckRequirementsEventArgs*> OnCheckRequirements;
+  Ceris::Event<MaterialFoundEventArgs*> OnMaterialFound;
+  Ceris::Event<SetObjectStatsEventArgs*> OnSetObjectStats;
+  Ceris::Event<FinishedCraftingEventArgs*> OnFinishedCrafting;
+  Ceris::Event<AbortCraftingEventArgs*> OnAbort;
 
   Character *Engineer = nullptr;
   CraftRecipe *Recipe = nullptr;
@@ -148,13 +148,13 @@ static void AfterDelay( CraftingSession *session )
 
   eventArgs.CraftingSession = session;
   eventArgs.Object = object;
-  RaiseEvent( session->OnSetObjectStats, &eventArgs );
+  session->OnSetObjectStats( &eventArgs );
 
   object = ObjectToCharacter( object, ch );
 
   finishedCraftingEventArgs.CraftingSession = session;
   finishedCraftingEventArgs.Object = object;
-  RaiseEvent( session->OnFinishedCrafting, &finishedCraftingEventArgs );
+  session->OnFinishedCrafting( &finishedCraftingEventArgs );
 
   FreeCraftingSession( session );
 }
@@ -214,7 +214,7 @@ static void AbortSession( CraftingSession *session )
 
   ch->Echo( "&RYou are interrupted and fail to finish your work.&d\r\n");
 
-  RaiseEvent( session->OnAbort, &abortEventArgs );
+  session->OnAbort( &abortEventArgs );
 
   FreeCraftingSession( session );
 }
@@ -290,13 +290,6 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
 					  const std::string &commandArgument )
 {
   CraftingSession *session = new CraftingSession();
-  session->OnInterpretArguments = CreateEvent();
-  session->OnCheckRequirements = CreateEvent();
-  session->OnMaterialFound = CreateEvent();
-  session->OnSetObjectStats = CreateEvent();
-  session->OnFinishedCrafting = CreateEvent();
-  session->OnAbort = CreateEvent();
-
   FinishedCraftingUserData *finishedCraftingUserData = new FinishedCraftingUserData();
   finishedCraftingUserData->Recipe = recipe;
   AddFinishedCraftingHandler( session, finishedCraftingUserData, FinishedCraftingHandler );
@@ -315,13 +308,6 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
 
 void FreeCraftingSession( CraftingSession *session )
 {
-  DestroyEvent( session->OnInterpretArguments );
-  DestroyEvent( session->OnCheckRequirements );
-  DestroyEvent( session->OnMaterialFound );
-  DestroyEvent( session->OnSetObjectStats );
-  DestroyEvent( session->OnFinishedCrafting );
-  DestroyEvent( session->OnAbort );
-
   FreeCraftRecipe( session->Recipe );
   delete[] session->FoundMaterials;
 
@@ -362,11 +348,11 @@ void StartCrafting( CraftingSession *session )
   checkRequirementsEventArgs.CraftingSession = session;
   checkRequirementsEventArgs.AbortSession = false;
 
-  RaiseEvent( session->OnInterpretArguments, &interpretArgumentsEventArgs );
+  session->OnInterpretArguments( &interpretArgumentsEventArgs );
 
   if( !interpretArgumentsEventArgs.AbortSession )
     {
-      RaiseEvent( session->OnCheckRequirements, &checkRequirementsEventArgs );
+      session->OnCheckRequirements( &checkRequirementsEventArgs );
     }
 
   if( interpretArgumentsEventArgs.AbortSession
@@ -377,7 +363,7 @@ void StartCrafting( CraftingSession *session )
       AbortCraftingEventArgs abortEventArgs;
       abortEventArgs.CraftingSession = session;
 
-      RaiseEvent( session->OnAbort, &abortEventArgs );
+      session->OnAbort( &abortEventArgs );
       FreeCraftingSession( session );
       return;
     }
@@ -425,7 +411,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
 	      ExtractObject( obj );
 	    }
 
-	  RaiseEvent( session->OnMaterialFound, &args );
+	  session->OnMaterialFound( &args );
 	  material->KeepFinding = args.KeepFinding;
 	}
     }
@@ -492,37 +478,37 @@ static std::string GetItemTypeNameExtended( ItemTypes itemType, int extraInfo )
 void AddInterpretArgumentsCraftingHandler( CraftingSession *session, void *userData,
                                            void (*handler)(void*, InterpretArgumentsEventArgs* ))
 {
-  AddEventHandler( session->OnInterpretArguments, userData, (EventHandler)handler );
+  session->OnInterpretArguments.Add( userData, handler );
 }
 
 void AddCheckRequirementsCraftingHandler( CraftingSession *session, void *userData,
                                           void (*handler)(void*, CheckRequirementsEventArgs* ))
 {
-  AddEventHandler( session->OnCheckRequirements, userData, (EventHandler)handler );
+  session->OnCheckRequirements.Add( userData, handler );
 }
 
 void AddMaterialFoundCraftingHandler( CraftingSession *session, void *userData,
                                       void (*handler)(void*, MaterialFoundEventArgs* ))
 {
-  AddEventHandler( session->OnMaterialFound, userData, (EventHandler)handler );
+  session->OnMaterialFound.Add( userData, handler );
 }
 
 void AddSetObjectStatsCraftingHandler( CraftingSession *session, void *userData,
                                        void (*handler)(void*, SetObjectStatsEventArgs* ))
 {
-  AddEventHandler( session->OnSetObjectStats, userData, (EventHandler)handler );
+  session->OnSetObjectStats.Add( userData, handler );
 }
 
 void AddFinishedCraftingHandler( CraftingSession *session, void *userData,
                                  void (*handler)(void*, FinishedCraftingEventArgs* ))
 {
-  AddEventHandler( session->OnFinishedCrafting, userData, (EventHandler)handler );
+  session->OnFinishedCrafting.Add( userData, handler );
 }
 
 void AddAbortCraftingHandler( CraftingSession *session, void *userData,
                               void (*handler)(void*, AbortCraftingEventArgs* ))
 {
-  AddEventHandler( session->OnAbort, userData, (EventHandler)handler );
+  session->OnAbort.Add( userData, handler );
 }
 
 bool IsCrafting( const Character *ch )
