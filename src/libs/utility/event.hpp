@@ -27,6 +27,7 @@
 #define _CERIS_EVENT_HPP_
 
 #include <map>
+#include <functional>
 
 namespace Ceris {
 
@@ -52,10 +53,10 @@ public:
   void Add( T *subscriber, void ( T::*memFn )( EventArgsT ) );
 
   // Subscribe to the event using a non-member function as eventhandler.
-  void Add( void *userdata, void (*)( void*, EventArgsT ) );
+  void Add( void *userdata, std::function<void( void*, EventArgsT )> fun );
 
   // Subscribe to the event using a non-member function as eventhandler.
-  void Add( void (*)( void*, EventArgsT ) );
+  void Add( std::function<void( void*, EventArgsT )> fun );
   
   // Unsubscribe all eventhandlers for a specific subscriber. Both member
   // and non-member functions are unsubscribed.
@@ -66,7 +67,7 @@ public:
   void Remove( void *subscriber );
 
   // Unsubscribe a non-member function eventhandler.
-  void Remove( void *userdata, void (*)( void*, EventArgsT ) );
+  void Remove( void *userdata, std::function<void ( void*, EventArgsT )> fun );
 
 private:
   Event &operator=( const Event& );
@@ -75,7 +76,7 @@ private:
   typedef std::multimap< void*, HandlerFunctionBase<EventArgsT>* > HandlerContainer;
   template< typename T >
   typename HandlerContainer::const_iterator Find( T *instance, void ( T::*memFn )( EventArgsT ) ) const;
-  typename HandlerContainer::const_iterator Find( void *userdata, void (*)( void*, EventArgsT ) ) const;
+  typename HandlerContainer::const_iterator Find( void *userdata, std::function<void( void*, EventArgsT )> fun ) const;
   HandlerContainer _Handlers;
 };
 
@@ -159,7 +160,7 @@ template< typename EventArgsT >
 class GlobalFunctionHandler : public HandlerFunctionBase< EventArgsT >
 {
 public:
-  typedef void (*Func )( void *userdata, EventArgsT args );
+  using Func = std::function<void(void*, EventArgsT)>;
   GlobalFunctionHandler( void *userdata, Func memFn );
   bool Equals( const HandlerFunctionBase< EventArgsT >* ) const;
 
@@ -182,7 +183,7 @@ GlobalFunctionHandler< EventArgsT >::GlobalFunctionHandler( void *ud,
 template< typename EventArgsT >
 void GlobalFunctionHandler< EventArgsT >::Call( const EventArgsT &args )
 {
-  (*_Function)( _UserData, args );
+  _Function( _UserData, args );
 }
 
 template< typename EventArgsT >
@@ -195,7 +196,8 @@ bool GlobalFunctionHandler< EventArgsT >::Equals( const HandlerFunctionBase< Eve
       return false;
     }
 
-  return _UserData == h2->_UserData && _Function == h2->_Function;
+  return _UserData == h2->_UserData
+    && *_Function.template target<void(*)(void*, EventArgsT)>() == *h2->_Function.template target<void(*)(void*, EventArgsT)>();
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -235,7 +237,7 @@ typename std::multimap< void*, HandlerFunctionBase<EventArgsT>* >::const_iterato
 }
 
 template< typename EventArgsT >
-typename std::multimap< void*, HandlerFunctionBase<EventArgsT>* >::const_iterator Event< EventArgsT >::Find( void *userdata, void (*fun)( void*, EventArgsT ) ) const
+typename std::multimap< void*, HandlerFunctionBase<EventArgsT>* >::const_iterator Event< EventArgsT >::Find( void *userdata, std::function<void( void*, EventArgsT )> fun ) const
 {
   GlobalFunctionHandler< EventArgsT > handler( userdata, fun );
 
@@ -254,7 +256,7 @@ typename std::multimap< void*, HandlerFunctionBase<EventArgsT>* >::const_iterato
 template< typename EventArgsT >
 template< typename T >
 void Event< EventArgsT >::Add( T *instance,
-				  void ( T::*memFn )( EventArgsT ) )
+                               void ( T::*memFn )( EventArgsT ) )
 {
   if( Find( instance, memFn ) == _Handlers.end() )
     {
@@ -264,7 +266,7 @@ void Event< EventArgsT >::Add( T *instance,
 
 template< typename EventArgsT >
 void Event< EventArgsT >::Add( void *userdata,
-                               void (*fun)( void*, EventArgsT ) )
+                               std::function<void( void*, EventArgsT )> fun )
 {
   if( Find( userdata, fun ) == _Handlers.end() )
     {
@@ -273,7 +275,7 @@ void Event< EventArgsT >::Add( void *userdata,
 }
 
 template< typename EventArgsT >
-void Event< EventArgsT >::Add( void (*fun)( void*, EventArgsT ) )
+void Event< EventArgsT >::Add( std::function<void( void*, EventArgsT )> fun )
 {
   Add( nullptr, fun );
 }
@@ -289,7 +291,7 @@ void Event< EventArgsT >::Remove( void *thingy )
 
 template< typename EventArgsT >
 void Event< EventArgsT >::Remove( void *userdata,
-				  void (*fun)( void*, EventArgsT ) )
+				  std::function<void( void*, EventArgsT )> fun )
 {
   HandlerContainer tmp = _Handlers;
   GlobalFunctionHandler< EventArgsT > handler( userdata, fun );
