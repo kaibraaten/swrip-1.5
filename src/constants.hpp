@@ -1619,6 +1619,7 @@ enum
  * Exit flags.
  * Used in #ROOMS.
  */
+/*
 #define EX_ISDOOR       BV00
 #define EX_CLOSED       BV01
 #define EX_LOCKED       BV02
@@ -1628,7 +1629,7 @@ enum
 #define EX_FLY          BV06
 #define EX_CLIMB        BV07
 #define EX_DIG          BV08
-#define EX_RES1         BV09  /* are these res[1-4] important? */
+#define EX_RES1         BV09
 #define EX_NOPASSDOOR   BV10
 #define EX_HIDDEN       BV11
 #define EX_PASSAGE      BV12
@@ -1646,6 +1647,7 @@ enum
 #define EX_NOMOB        BV24
 #define EX_WINDOW       BV25
 #define EX_xLOOK        BV26
+*/
 
 /*
  * Sector types.

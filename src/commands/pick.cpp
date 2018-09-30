@@ -57,7 +57,7 @@ void do_pick( Character *ch, std::string arg )
       /*        Room *to_room; */ /* Unused */
       Exit *pexit_rev = nullptr;
 
-      if ( !IsBitSet(pexit->Flags, EX_CLOSED) )
+      if ( !pexit->Flags.test( Flag::Exit::Closed ) )
         {
           ch->Echo("It's not closed.\r\n");
           return;
@@ -69,13 +69,13 @@ void do_pick( Character *ch, std::string arg )
           return;
         }
       
-      if ( !IsBitSet(pexit->Flags, EX_LOCKED) )
+      if ( !pexit->Flags.test( Flag::Exit::Locked ) )
         {
           ch->Echo("It's already unlocked.\r\n");
           return;
         }
 
-      if ( IsBitSet(pexit->Flags, EX_PICKPROOF) )
+      if ( pexit->Flags.test( Flag::Exit::PickProof ) )
         {
           ch->Echo("You failed.\r\n");
           LearnFromFailure( ch, gsn_pick_lock );
@@ -90,7 +90,7 @@ void do_pick( Character *ch, std::string arg )
 	  return;
         }
 
-      RemoveBit(pexit->Flags, EX_LOCKED);
+      pexit->Flags.reset( Flag::Exit::Locked );
       ch->Echo("*Click*\r\n");
       Act( AT_ACTION, "$n picks the $d.",
            ch, NULL, pexit->Keyword.c_str(), TO_ROOM );
@@ -100,7 +100,7 @@ void do_pick( Character *ch, std::string arg )
       if ( ( pexit_rev = pexit->ReverseExit ) != NULL
            && pexit_rev->ToRoom == ch->InRoom )
         {
-          RemoveBit( pexit_rev->Flags, EX_LOCKED );
+          pexit_rev->Flags.reset( Flag::Exit::Locked );
         }
 
       CheckRoomForTraps( ch, TRAP_PICK | TrapDoor[pexit->Direction] );

@@ -392,33 +392,33 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
    * Exit is only a "window", there is no way to travel in that direction
    * unless it's a door with a window in it             -Thoric
    */
-  if ( IsBitSet( pexit->Flags, EX_WINDOW )
-       &&  !IsBitSet( pexit->Flags, EX_ISDOOR ) )
+  if ( pexit->Flags.test( Flag::Exit::Window )
+       && !pexit->Flags.test( Flag::Exit::IsDoor ) )
     {
       ch->Echo( "Alas, you cannot go that way.\r\n" );
       return rNONE;
     }
 
-  if (  IsBitSet(pexit->Flags, EX_PORTAL)
+  if ( pexit->Flags.test( Flag::Exit::Portal )
         && IsNpc(ch) )
     {
       Act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
-  if ( IsBitSet(pexit->Flags, EX_NOMOB)
+  if ( pexit->Flags.test( Flag::Exit::NoMob )
        && IsNpc(ch) && !IsBitSet(ch->Flags, ACT_SCAVENGER) )
     {
       Act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
-  if ( IsBitSet(pexit->Flags, EX_CLOSED)
+  if ( pexit->Flags.test( Flag::Exit::Closed )
        && (!IsAffectedBy(ch, AFF_PASS_DOOR)
-           ||   IsBitSet(pexit->Flags, EX_NOPASSDOOR)) )
+           || pexit->Flags.test( Flag::Exit::NoPassdoor ) ) )
     {
-      if ( !IsBitSet( pexit->Flags, EX_SECRET )
-           &&   !IsBitSet( pexit->Flags, EX_DIG ) )
+      if ( !pexit->Flags.test( Flag::Exit::Secret )
+           && !pexit->Flags.test( Flag::Exit::Dig ) )
         {
           if ( drunk )
             {
@@ -511,8 +511,8 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       int move = 0;
 
       if ( in_room->Sector == SECT_AIR
-           ||   to_room->Sector == SECT_AIR
-           ||   IsBitSet( pexit->Flags, EX_FLY ) )
+           || to_room->Sector == SECT_AIR
+           || pexit->Flags.test( Flag::Exit::Fly ) )
         {
           if ( ch->Mount && !IsAffectedBy( ch->Mount, AFF_FLYING ) )
             {
@@ -573,7 +573,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
             }
         }
 
-      if ( IsBitSet( pexit->Flags, EX_CLIMB ) )
+      if ( pexit->Flags.test( Flag::Exit::Climb ) )
         {
           bool found = false;
 
@@ -1078,7 +1078,7 @@ Exit *FindDoor( Character *ch, const std::string &arg, bool quiet )
     {
       for(Exit *xit : ch->InRoom->Exits())
         {
-          if ( (quiet || IsBitSet(xit->Flags, EX_ISDOOR))
+          if ( (quiet || xit->Flags.test( Flag::Exit::IsDoor ))
                && !xit->Keyword.empty()
                && NiftyIsName( arg, xit->Keyword ) )
 	    {
@@ -1104,13 +1104,13 @@ Exit *FindDoor( Character *ch, const std::string &arg, bool quiet )
   if ( quiet )
     return pexit;
 
-  if ( IsBitSet(pexit->Flags, EX_SECRET) )
+  if ( pexit->Flags.test( Flag::Exit::Secret ) )
     {
       Act( AT_PLAIN, "You see no $T here.", ch, NULL, arg.c_str(), TO_CHAR );
       return NULL;
     }
 
-  if ( !IsBitSet(pexit->Flags, EX_ISDOOR) )
+  if ( !pexit->Flags.test( Flag::Exit::IsDoor ) )
     {
       ch->Echo( "You can't do that.\r\n" );
       return NULL;
@@ -1119,26 +1119,30 @@ Exit *FindDoor( Character *ch, const std::string &arg, bool quiet )
   return pexit;
 }
 
-void SetBExitFlag( Exit *pexit, int flag )
+void SetBExitFlag( Exit *pexit, size_t flag )
 {
-  Exit *pexit_rev = nullptr;
+  pexit->Flags.set( flag );
 
-  SetBit(pexit->Flags, flag);
-
-  if ( (pexit_rev = pexit->ReverseExit) != NULL
+  Exit *pexit_rev = pexit->ReverseExit;
+  
+  if ( pexit_rev != nullptr
        && pexit_rev != pexit )
-    SetBit( pexit_rev->Flags, flag );
+    {
+      pexit_rev->Flags.set( flag );
+    }
 }
 
-void RemoveBExitFlag( Exit *pexit, int flag )
+void RemoveBExitFlag( Exit *pexit, size_t flag )
 {
-  Exit *pexit_rev = nullptr;
+  pexit->Flags.reset( flag );
 
-  RemoveBit(pexit->Flags, flag);
+  Exit *pexit_rev = pexit->ReverseExit;
 
-  if ( (pexit_rev = pexit->ReverseExit) != NULL
+  if ( pexit_rev != nullptr
        && pexit_rev != pexit )
-    RemoveBit( pexit_rev->Flags, flag );
+    {
+      pexit_rev->Flags.reset( flag );
+    }
 }
 
 /*

@@ -84,7 +84,7 @@ void do_mp_open_passage( Character *ch, std::string argument )
 
   if( (pexit = GetExit( fromRoom, exit_num )) != NULL )
     {
-      if( !IsBitSet( pexit->Flags, EX_PASSAGE) )
+      if( !pexit->Flags.test( Flag::Exit::Passage ) )
         return;
 
       ProgBug( "MpOpenPassage - Exit exists", ch );
@@ -93,5 +93,5 @@ void do_mp_open_passage( Character *ch, std::string argument )
 
   pexit = MakeExit( fromRoom, targetRoom, exit_num );
   pexit->Key                    = -1;
-  pexit->Flags              = EX_PASSAGE;
+  pexit->Flags.set( Flag::Exit::Passage );
 }

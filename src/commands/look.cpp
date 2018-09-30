@@ -849,7 +849,7 @@ static void look_in( Character *ch, const std::string &what, bool doexaprog )
       for(const Exit *pexit : ch->InRoom->Exits())
 	{
 	  if ( pexit->Direction == DIR_PORTAL
-	       &&   IsBitSet(pexit->Flags, EX_PORTAL) )
+	       && pexit->Flags.test( Flag::Exit::Portal ) )
 	    {
 	      Room *original = NULL;
 
@@ -903,10 +903,10 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 {
   if ( !pexit->Keyword.empty() )
     {
-      if ( IsBitSet(pexit->Flags, EX_CLOSED)
-	   && !IsBitSet(pexit->Flags, EX_WINDOW) )
+      if ( pexit->Flags.test( Flag::Exit::Closed )
+	   && !pexit->Flags.test( Flag::Exit::Window ) )
 	{
-	  if ( IsBitSet(pexit->Flags, EX_SECRET)
+	  if ( pexit->Flags.test( Flag::Exit::Secret )
 	       && door != DIR_INVALID )
 	    {
               ch->Echo("Nothing special there.\r\n");
@@ -920,7 +920,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	  return;
 	}
 
-      if ( IsBitSet( pexit->Flags, EX_BASHED ) )
+      if ( pexit->Flags.test( Flag::Exit::Bashed ) )
 	{
 	  Act(AT_RED, "The $d has been bashed from its hinges!",
 	      ch, NULL, pexit->Keyword.c_str(), TO_CHAR);
@@ -941,12 +941,12 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
    */
   if ( pexit->ToRoom
        && ( IsAffectedBy( ch, AFF_SCRYING )
-	    || IsBitSet( pexit->Flags, EX_xLOOK )
+	    || pexit->Flags.test( Flag::Exit::CanLook )
 	    || GetTrustLevel(ch) >= LEVEL_IMMORTAL ) )
     {
       Room *original = NULL;
 
-      if ( !IsBitSet( pexit->Flags, EX_xLOOK )
+      if ( !pexit->Flags.test( Flag::Exit::CanLook )
 	   && GetTrustLevel( ch ) < LEVEL_IMMORTAL )
 	{
 	  SetCharacterColor( AT_MAGIC, ch );

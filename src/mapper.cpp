@@ -44,7 +44,7 @@ struct map_type
   int vnum;
   /* Recursive depth this coord was found at */
   int depth;
-  int info;
+  unsigned long info;
   bool CanSeeCharacter;
 };
 
@@ -208,7 +208,7 @@ static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int 
       /* Fill in exit */
       map[exitx][exity].depth = depth;
       map[exitx][exity].vnum = pExit->ToRoom->Vnum;
-      map[exitx][exity].info = pExit->Flags;
+      map[exitx][exity].info = pExit->Flags.to_ulong();
       /* sprintf( buf, "%c", map_chars[door] ); */
       map[exitx][exity].mapch = map_chars[door];
 

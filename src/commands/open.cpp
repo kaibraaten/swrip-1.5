@@ -23,25 +23,25 @@ void do_open( Character *ch, std::string argument )
     {
       Exit *pexit_rev = NULL;
 
-      if ( !IsBitSet(pexit->Flags, EX_ISDOOR) )
+      if ( !pexit->Flags.test( Flag::Exit::IsDoor ) )
         {
           ch->Echo("You can't do that.\r\n");
 	  return;
 	}
 
-      if ( !IsBitSet(pexit->Flags, EX_CLOSED) )
+      if ( !pexit->Flags.test( Flag::Exit::Closed ) )
         {
           ch->Echo("It's already open.\r\n");
 	  return;
 	}
 
-      if (  IsBitSet(pexit->Flags, EX_LOCKED) )
+      if ( pexit->Flags.test( Flag::Exit::Locked ) )
         {
           ch->Echo("It's locked.\r\n");
           return;
 	}
 
-      if ( !IsBitSet(pexit->Flags, EX_SECRET)
+      if ( !pexit->Flags.test( Flag::Exit::Secret )
            || NiftyIsName( arg, pexit->Keyword ) )
         {
           Act( AT_ACTION, "$n opens the $d.",
@@ -59,7 +59,7 @@ void do_open( Character *ch, std::string argument )
 		}
             }
 
-          RemoveBExitFlag( pexit, EX_CLOSED );
+          RemoveBExitFlag( pexit, Flag::Exit::Closed );
 	  door = pexit->Direction;
 
           if ( door >= TRAP_N && door <= TRAP_SW )

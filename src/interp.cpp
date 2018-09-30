@@ -427,13 +427,13 @@ void Interpret( Character *ch, std::string argument )
 
           /* check for an auto-matic exit command */
           if ( ( pexit = FindDoor( ch, command, true ) ) != NULL
-               && IsBitSet( pexit->Flags, EX_xAUTO ) )
+               && pexit->Flags.test( Flag::Exit::Auto ) )
             {
-              if ( IsBitSet( pexit->Flags, EX_CLOSED )
+              if ( pexit->Flags.test( Flag::Exit::Closed )
                    && ( !IsAffectedBy( ch, AFF_PASS_DOOR )
-                       || IsBitSet( pexit->Flags, EX_NOPASSDOOR ) ) )
+                        || pexit->Flags.test( Flag::Exit::NoPassdoor ) ) )
                 {
-                  if ( !IsBitSet( pexit->Flags, EX_SECRET ) )
+                  if ( !pexit->Flags.test( Flag::Exit::Secret ) )
 		    {
 		      Act( AT_PLAIN, "The $d is closed.",
                            ch, NULL, pexit->Keyword.c_str(), TO_CHAR );

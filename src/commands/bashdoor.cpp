@@ -36,7 +36,7 @@ void do_bashdoor( Character *ch, std::string arg )
       int bash_chance = 0;
       std::string keyword;
 
-      if ( !IsBitSet( pexit->Flags, EX_CLOSED ) )
+      if ( !pexit->Flags.test( Flag::Exit::Closed ) )
         {
           ch->Echo( "Calm down. It is already open.\r\n" );
           return;
@@ -44,7 +44,7 @@ void do_bashdoor( Character *ch, std::string arg )
 
       SetWaitState( ch, SkillTable[gsn_bashdoor]->Beats );
 
-      if ( IsBitSet( pexit->Flags, EX_SECRET ) )
+      if ( pexit->Flags.test( Flag::Exit::Secret ) )
         keyword = "wall";
       else
         keyword = pexit->Keyword;
@@ -54,16 +54,18 @@ void do_bashdoor( Character *ch, std::string arg )
       else
         bash_chance = 90;
 
-      if ( !IsBitSet( pexit->Flags, EX_BASHPROOF )
+      if ( !pexit->Flags.test( Flag::Exit::BashProof )
            && ch->Fatigue.Current >= 15
            && GetRandomPercent() < ( bash_chance + 4 * ( GetCurrentStrength( ch ) - 19 ) ) )
         {
-          RemoveBit( pexit->Flags, EX_CLOSED );
+          pexit->Flags.reset( Flag::Exit::Closed );
 
-          if ( IsBitSet( pexit->Flags, EX_LOCKED ) )
-            RemoveBit( pexit->Flags, EX_LOCKED );
+          if ( pexit->Flags.test( Flag::Exit::Locked ) )
+            {
+              pexit->Flags.reset( Flag::Exit::Locked );
+            }
 
-          SetBit( pexit->Flags, EX_BASHED );
+          pexit->Flags.set( Flag::Exit::Bashed );
           Act(AT_SKILL, "Crash! You bashed open the $d!",
 	      ch, NULL, keyword.c_str(), TO_CHAR );
           Act(AT_SKILL, "$n bashes open the $d!",
@@ -74,12 +76,14 @@ void do_bashdoor( Character *ch, std::string arg )
                && (pexit_rev = pexit->ReverseExit) != NULL
                && pexit_rev->ToRoom == ch->InRoom )
             {
-              RemoveBit( pexit_rev->Flags, EX_CLOSED );
+              pexit_rev->Flags.reset( Flag::Exit::Closed );
 
-              if ( IsBitSet( pexit_rev->Flags, EX_LOCKED ) )
-                RemoveBit( pexit_rev->Flags, EX_LOCKED );
+              if ( pexit_rev->Flags.test( Flag::Exit::Locked ) )
+                {
+                  pexit_rev->Flags.reset( Flag::Exit::Locked );
+                }
 
-              SetBit( pexit_rev->Flags, EX_BASHED );
+              pexit_rev->Flags.set( Flag::Exit::Bashed );
 
               for(Character *rch : to_room->Characters())
                 {

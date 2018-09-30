@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "room.hpp"
@@ -23,23 +23,23 @@ void do_exits( Character *ch, std::string argument )
   for ( const Exit *pexit : ch->InRoom->Exits() )
     {
       if ( pexit->ToRoom
-           &&  !IsBitSet(pexit->Flags, EX_HIDDEN) )
+           && !pexit->Flags.test( Flag::Exit::Hidden ) )
         {
           found = true;
 
           if ( !fAuto )
             {
-              if ( IsBitSet(pexit->Flags, EX_CLOSED) )
+              if ( pexit->Flags.test( Flag::Exit::Closed ) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - (closed)\r\n",
                            Capitalize( GetDirectionName(pexit->Direction) ).c_str() );
                 }
-              else if ( IsBitSet(pexit->Flags, EX_WINDOW) )
+              else if ( pexit->Flags.test( Flag::Exit::Window ) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - (window)\r\n",
 			   Capitalize( GetDirectionName(pexit->Direction) ).c_str() );
                 }
-              else if ( IsBitSet(pexit->Flags, EX_xAUTO) )
+              else if ( pexit->Flags.test( Flag::Exit::Auto ) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - %s\r\n",
                            Capitalize( pexit->Keyword ).c_str(),
@@ -48,11 +48,13 @@ void do_exits( Character *ch, std::string argument )
                            : pexit->ToRoom->Name.c_str() );
                 }
               else
-                sprintf( buf + strlen(buf), "%-5s - %s\r\n",
-                         Capitalize( GetDirectionName(pexit->Direction) ).c_str(),
-                         IsRoomDark( pexit->ToRoom )
-                         ?  "Too dark to tell"
-                         : pexit->ToRoom->Name.c_str() );
+                {
+                  sprintf( buf + strlen(buf), "%-5s - %s\r\n",
+                           Capitalize( GetDirectionName(pexit->Direction) ).c_str(),
+                           IsRoomDark( pexit->ToRoom )
+                           ?  "Too dark to tell"
+                           : pexit->ToRoom->Name.c_str() );
+                }
             }
           else
             {

@@ -1017,11 +1017,11 @@ static void LoadRooms( Area *tarea, FILE *fp )
                   switch ( locks )
                     {
                     case 1:
-                      pexit->Flags = EX_ISDOOR;
+                      pexit->Flags = CreateBitSet<Flag::MAX>( { Flag::Exit::IsDoor } );
                       break;
 
                     case 2:
-                      pexit->Flags = EX_ISDOOR | EX_PICKPROOF;
+                      pexit->Flags = CreateBitSet<Flag::MAX>( { Flag::Exit::IsDoor, Flag::Exit::PickProof } );
                       break;
 
                     default:

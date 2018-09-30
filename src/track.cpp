@@ -71,7 +71,7 @@ static bool IsValidEdge( const Room *room, DirectionType door )
   if ( pexit
        &&  (to_room = pexit->ToRoom) != NULL
 #ifndef TRACK_THROUGH_DOORS
-       &&  !IsBitSet( pexit->Flags, EX_CLOSED )
+       &&  !pexit->Flags.test( Flag::Exit::Closed )
 #endif
        &&  !IS_MARKED( to_room ) )
     {
@@ -393,7 +393,7 @@ void HuntVictim( Character *ch )
 
           if ( ( pexit = GetExit(ch->InRoom, ret) ) == NULL
                || !pexit->ToRoom
-               || IsBitSet(pexit->Flags, EX_CLOSED)
+               || pexit->Flags.test( Flag::Exit::Closed )
                || IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB) )
 	    {
 	      continue;
@@ -461,7 +461,7 @@ static bool MobSnipe( Character *ch, Character *victim )
 	  continue;
 	}
 
-      if ( IsBitSet( pexit->Flags, EX_CLOSED ) )
+      if ( pexit->Flags.test( Flag::Exit::Closed ) )
 	{
 	  continue;
 	}
@@ -470,7 +470,7 @@ static bool MobSnipe( Character *ch, Character *victim )
 
       for ( dist = 0; dist <= max_dist; dist++ )
         {
-          if ( IsBitSet( pexit->Flags, EX_CLOSED ) )
+          if ( pexit->Flags.test( Flag::Exit::Closed ) )
 	    {
 	      break;
 	    }

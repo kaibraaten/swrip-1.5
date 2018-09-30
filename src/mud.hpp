@@ -296,14 +296,6 @@ public:
         }                                                               \
     } while(0)
 
-template<typename T>
-bool CAN_GO( T thing, DirectionType door )
-{
-  return GetExit( thing->InRoom, door )
-    && GetExit( thing->InRoom, door )->ToRoom != nullptr
-    && !IsBitSet( GetExit( thing->InRoom, door)->Flags, EX_CLOSED);
-}
-
 /*
  * Global constants.
  */
@@ -347,7 +339,7 @@ extern const std::array<const char * const, MAX_BIT> TriggerFlags;
 extern const std::array<const char * const, MAX_BIT> DefenseFlags;
 extern const std::array<const char * const, MAX_BIT> AttackFlags;
 extern const std::array<const char * const, MAX_BIT> AreaFlags;
-extern const std::array<const char * const, MAX_BIT> ExitFlags;
+extern const std::array<const char * const, Flag::MAX> ExitFlags;
 extern const std::array<const char * const, MAX_BIT> mprog_flags;
 extern const std::array<const char * const, MAX_BIT> SaveFlags;
 extern const std::array<const char * const, MAX_BIT> ShipFlags;
@@ -1047,8 +1039,8 @@ std::string FormatObjectToCharacter( const Object *obj, const Character *ch, boo
 void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
                                 bool fShort, bool fShowNothing );
 /* act_move.c */
-void SetBExitFlag( Exit *pexit, int flag );
-void RemoveBExitFlag( Exit *pexit, int flag );
+void SetBExitFlag( Exit *pexit, size_t flag );
+void RemoveBExitFlag( Exit *pexit, size_t flag );
 Room *GenerateExit( Room *in_room, Exit **pexit );
 void ClearVirtualRooms( void );
 Exit *FindDoor( Character *ch, const std::string &arg, bool quiet );

@@ -16,13 +16,13 @@ void do_lock( Character *ch, std::string arg )
 
   if ( ( pexit = FindDoor( ch, arg, true ) ) != NULL )
     {
-      if ( !IsBitSet(pexit->Flags, EX_ISDOOR) )
+      if ( !pexit->Flags.test( Flag::Exit::IsDoor ) )
         {
           ch->Echo("You can't do that.\r\n");
           return;
 	}
 
-      if ( !IsBitSet(pexit->Flags, EX_CLOSED) )
+      if ( !pexit->Flags.test( Flag::Exit::Closed ) )
         {
           ch->Echo("It's not closed.\r\n");
 	  return;
@@ -40,20 +40,20 @@ void do_lock( Character *ch, std::string arg )
 	  return;
 	}
 
-      if ( IsBitSet(pexit->Flags, EX_LOCKED) )
+      if ( pexit->Flags.test( Flag::Exit::Locked ) )
         {
           ch->Echo("It's already locked.\r\n");
 	  return;
 	}
 
-      if ( !IsBitSet(pexit->Flags, EX_SECRET)
+      if ( !pexit->Flags.test( Flag::Exit::Secret )
            || ( !pexit->Keyword.empty()
                 && NiftyIsName( arg, pexit->Keyword )) )
         {
           ch->Echo("*Click*\r\n");
 	  Act( AT_ACTION, "$n locks the $d.",
 	       ch, NULL, pexit->Keyword.c_str(), TO_ROOM );
-          SetBExitFlag( pexit, EX_LOCKED );
+          SetBExitFlag( pexit, Flag::Exit::Locked );
           return;
         }
     }

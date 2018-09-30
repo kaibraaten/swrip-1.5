@@ -120,14 +120,14 @@ void do_search( Character *ch, std::string arg )
       Exit *pexit = nullptr;
 
       if ( (pexit = GetExit( ch->InRoom, door )) != NULL
-           && IsBitSet( pexit->Flags, EX_SECRET )
-           && IsBitSet( pexit->Flags, EX_xSEARCHABLE )
+           && pexit->Flags.test( Flag::Exit::Secret )
+           && pexit->Flags.test( Flag::Exit::Searchable )
            && percent < (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_search]) )
         {
           Act( AT_SKILL, "Your search reveals the $d!",
                ch, nullptr, pexit->Keyword.c_str(), TO_CHAR );
           Act( AT_SKILL, "$n finds the $d!", ch, nullptr, pexit->Keyword.c_str(), TO_ROOM );
-          RemoveBit( pexit->Flags, EX_SECRET );
+          pexit->Flags.reset( Flag::Exit::Secret );
           LearnFromSuccess( ch, gsn_search );
           return;
         }

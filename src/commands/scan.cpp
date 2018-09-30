@@ -56,9 +56,9 @@ void do_scan( Character *ch, std::string argument )
 
   for ( dist = 1; dist <= max_dist; )
     {
-      if ( IsBitSet( pexit->Flags, EX_CLOSED ) )
+      if ( pexit->Flags.test( Flag::Exit::Closed ) )
         {
-          if ( IsBitSet( pexit->Flags, EX_SECRET ) )
+          if ( pexit->Flags.test( Flag::Exit::Secret ) )
             Act( AT_GREY, "Your view $t is blocked by a wall.", ch,
                  GetDirectionName(dir), NULL, TO_CHAR );
           else

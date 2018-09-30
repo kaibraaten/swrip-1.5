@@ -34,6 +34,7 @@
 #include <cstring>
 #include <cctype>
 #include <cassert>
+#include <cmath>
 #include <utility/algorithms.hpp>
 #include <utility/random.hpp>
 #include "reset.hpp"
@@ -1367,14 +1368,14 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
         {
           int state = 0;
 
-          if ( !IsBitSet( pexit->Flags, EX_ISDOOR ) )
+          if ( !pexit->Flags.test( Flag::Exit::IsDoor ) )
 	    {
 	      continue;
 	    }
 
-          if ( IsBitSet( pexit->Flags, EX_CLOSED ) )
+          if ( pexit->Flags.test( Flag::Exit::Closed ) )
             {
-              if ( IsBitSet( pexit->Flags, EX_LOCKED ) )
+              if ( pexit->Flags.test( Flag::Exit::Locked ) )
 		{
 		  state = 2;
 		}
@@ -1454,6 +1455,70 @@ static int GenerateItemLevel( const Area *pArea, const ProtoObject *pObjIndex )
   return olevel;
 }
 
+struct BitSetter
+{
+public:
+  void SetTarget( int *flags )
+  {
+    _legacyTarget = flags;
+    _mode = Mode::Legacy;
+  }
+
+  void SetTarget( std::bitset<Flag::MAX> *flags )
+  {
+    _modernTarget = flags;
+    _mode = Mode::Modern;
+  }
+
+  void Set( int bit )
+  {
+    if( _mode == Mode::Legacy )
+      {
+        SetBit( *_legacyTarget, bit );
+      }
+    else
+      {
+        (*_modernTarget).set( DecimalToBit( bit ) );
+      }
+  }
+
+  void Remove( int bit )
+  {
+    if( _mode == Mode::Legacy )
+      {
+        RemoveBit( *_legacyTarget, bit );
+      }
+    else
+      {
+        (*_modernTarget).reset( DecimalToBit( bit ) );
+      }
+  }
+
+  void Toggle( int bit )
+  {
+    if( _mode == Mode::Legacy )
+      {
+        ToggleBit( *_legacyTarget, bit );
+      }
+    else
+      {
+        (*_modernTarget).flip( DecimalToBit( bit ) );
+      }
+  }
+  
+private:
+  enum class Mode { NotSet, Legacy, Modern };
+
+  size_t DecimalToBit( int dec )
+  {
+    return log( dec ) / log( 2 );
+  }
+  
+  Mode _mode = Mode::NotSet;
+  int *_legacyTarget = nullptr;
+  std::bitset<Flag::MAX> *_modernTarget = nullptr;
+};
+
 /*
  * Reset one area.
  */
@@ -1473,7 +1538,7 @@ void ResetArea( Area *pArea )
   Exit *pexit = NULL;
   Object *to_obj = NULL;
   int level = 0;
-  int *plc = 0;
+  BitSetter bitsetter;
 
   if ( !pArea->FirstReset )
     {
@@ -1851,7 +1916,7 @@ void ResetArea( Area *pArea )
 		    break;
 		  }
 
-                plc = &pexit->Flags;
+                bitsetter.SetTarget( &pexit->Flags );
               }
 
               break;
@@ -1871,7 +1936,7 @@ void ResetArea( Area *pArea )
                   continue;
                 }
 
-              plc = &pRoomIndex->Flags;
+              bitsetter.SetTarget( &pRoomIndex->Flags );
               break;
 
             case BIT_RESET_OBJECT:
@@ -1908,7 +1973,7 @@ void ResetArea( Area *pArea )
                   to_obj = obj;
                 }
 
-              plc = &to_obj->Flags;
+              bitsetter.SetTarget( &to_obj->Flags );
               break;
 
             case BIT_RESET_MOBILE:
@@ -1917,7 +1982,7 @@ void ResetArea( Area *pArea )
 		  continue;
 		}
 
-              plc = &mob->AffectedBy;
+              bitsetter.SetTarget( &mob->AffectedBy );
               break;
 
             default:
@@ -1928,15 +1993,15 @@ void ResetArea( Area *pArea )
 
           if ( IsBitSet(pReset->Arg2, BIT_RESET_SET) )
 	    {
-	      SetBit(*plc, pReset->Arg3);
+              bitsetter.Set( pReset->Arg3 );
 	    }
           else if ( IsBitSet(pReset->Arg2, BIT_RESET_TOGGLE) )
 	    {
-	      ToggleBit(*plc, pReset->Arg3);
+	      bitsetter.Toggle( pReset->Arg3 );
 	    }
           else
 	    {
-	      RemoveBit(*plc, pReset->Arg3);
+	      bitsetter.Remove( pReset->Arg3 );
 	    }
 
           break;
@@ -1964,27 +2029,29 @@ void ResetArea( Area *pArea )
           switch( pReset->Arg3 )
             {
             case 0:
-              RemoveBit( pexit->Flags, EX_CLOSED );
-              RemoveBit( pexit->Flags, EX_LOCKED );
+              pexit->Flags.reset( Flag::Exit::Closed );
+              pexit->Flags.reset( Flag::Exit::Locked );
               break;
 
             case 1:
-              SetBit( pexit->Flags, EX_CLOSED );
-              RemoveBit( pexit->Flags, EX_LOCKED );
+              pexit->Flags.set( Flag::Exit::Closed );
+              pexit->Flags.reset( Flag::Exit::Locked );
 
-              if ( IsBitSet( pexit->Flags, EX_xSEARCHABLE ) )
+              if ( pexit->Flags.test( Flag::Exit::Searchable ) )
 		{
-		  SetBit( pexit->Flags, EX_SECRET );
+                  pexit->Flags.set( Flag::Exit::Secret );
 		}
               break;
 
             case 2:
-              SetBit( pexit->Flags, EX_CLOSED );
-              SetBit( pexit->Flags, EX_LOCKED );
+              pexit->Flags.set( Flag::Exit::Closed );
+              pexit->Flags.set( Flag::Exit::Locked );
 
-              if ( IsBitSet( pexit->Flags, EX_xSEARCHABLE ) )
-                SetBit( pexit->Flags, EX_SECRET );
-
+              if ( pexit->Flags.test( Flag::Exit::Searchable ) )
+                {
+                  pexit->Flags.set( Flag::Exit::Secret );
+                }
+              
               break;
 
             }

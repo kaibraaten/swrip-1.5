@@ -9,7 +9,7 @@ void do_enter( Character *ch, std::string argument )
     {
       for(Exit *ex : ch->InRoom->Exits())
 	{
-	  if ( IsBitSet( ex->Flags, EX_xENTER ) )
+	  if ( ex->Flags.test( Flag::Exit::CanEnter ) )
 	    {
 	      MoveCharacter( ch, ex );
 	      return;
@@ -22,7 +22,7 @@ void do_enter( Character *ch, std::string argument )
 
   Exit *pexit = FindDoor( ch, argument, true );
 
-  if ( pexit && IsBitSet( pexit->Flags, EX_xENTER ) )
+  if ( pexit && pexit->Flags.test( Flag::Exit::CanEnter ) )
     {
       MoveCharacter( ch, pexit );
       return;

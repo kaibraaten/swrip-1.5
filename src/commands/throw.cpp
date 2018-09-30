@@ -89,13 +89,13 @@ void do_throw( Character *ch, std::string argument )
     {
       if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
 	{
-          ch->Echo("Are you expecting to throw it through a wall?!\r\n");
+          ch->Echo("Are you expecting to throw it through a wall?\r\n");
           return;
         }
 
-      if ( IsBitSet( pexit->Flags, EX_CLOSED ) )
+      if ( pexit->Flags.test( Flag::Exit::Closed ) )
         {
-          ch->Echo("Are you expecting to throw it through a door?!\r\n");
+          ch->Echo("Are you expecting to throw it through a door?\r\n");
           return;
         }
 

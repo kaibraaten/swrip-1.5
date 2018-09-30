@@ -436,9 +436,9 @@ void do_redit( Character *ch, std::string argument )
           sprintf( buf, "Flags for exit direction: %d  Keywords: %s  Key: %ld\r\n[ ",
                    xit->Direction, xit->Keyword.c_str(), xit->Key );
 
-          for (size_t bit = 0; bit <= MAX_BIT; ++bit)
+          for (size_t bit = 0; bit <= Flag::MAX; ++bit)
             {
-              if (IsBitSet(xit->Flags, 1 << bit))
+              if ( xit->Flags.test( bit ) )
                 {
                   strcat( buf, ExitFlags[bit] );
                   strcat( buf, " " );
@@ -458,7 +458,7 @@ void do_redit( Character *ch, std::string argument )
           if (value < 0)
             ch->Echo("Unknown flag: %s\r\n", arg2.c_str() );
           else
-            ToggleBit( xit->Flags, 1 << value );
+            xit->Flags.flip( value );
         }
 
       return;

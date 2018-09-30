@@ -16,13 +16,13 @@ void do_unlock( Character *ch, std::string arg )
 
   if ( ( pexit = FindDoor( ch, arg, true ) ) != NULL )
     {
-      if ( !IsBitSet(pexit->Flags, EX_ISDOOR) )
+      if ( !pexit->Flags.test( Flag::Exit::IsDoor ) )
         {
           ch->Echo("You can't do that.\r\n");
 	  return;
 	}
 
-      if ( !IsBitSet(pexit->Flags, EX_CLOSED) )
+      if ( !pexit->Flags.test( Flag::Exit::Closed ) )
         {
           ch->Echo("It's not closed.\r\n");
           return;
@@ -40,19 +40,19 @@ void do_unlock( Character *ch, std::string arg )
 	  return;
 	}
 
-      if ( !IsBitSet(pexit->Flags, EX_LOCKED) )
+      if ( !pexit->Flags.test( Flag::Exit::Locked ) )
         {
           ch->Echo("It's already unlocked.\r\n");
 	  return;
 	}
 
-      if ( !IsBitSet(pexit->Flags, EX_SECRET)
+      if ( !pexit->Flags.test( Flag::Exit::Secret )
            || NiftyIsName( arg, pexit->Keyword ) )
         {
           ch->Echo("*Click*\r\n");
           Act( AT_ACTION, "$n unlocks the $d.",
 	       ch, NULL, pexit->Keyword.c_str(), TO_ROOM );
-	  RemoveBExitFlag( pexit, EX_LOCKED );
+	  RemoveBExitFlag( pexit, Flag::Exit::Locked );
           return;
         }
     }

@@ -2869,7 +2869,7 @@ const std::array<const char * const, MAX_WEAR - 1> WearLocations =
     "over"
   };
 
-const std::array<const char * const, MAX_BIT> ExitFlags =
+const std::array<const char * const, Flag::MAX> ExitFlags =
   {
     "IsDoor",
     "Closed",

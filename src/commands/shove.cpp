@@ -234,9 +234,9 @@ void do_shove( Character *ch, std::string argument )
 
       nogo = true;
     }
-  else if ( IsBitSet(pexit->Flags, EX_CLOSED)
+  else if ( pexit->Flags.test( Flag::Exit::Closed )
 	    && (!IsAffectedBy(victim, AFF_PASS_DOOR)
-		|| IsBitSet(pexit->Flags, EX_NOPASSDOOR)) )
+		|| pexit->Flags.test( Flag::Exit::NoPassdoor ) ) )
     {
       nogo = true;
     }

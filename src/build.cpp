@@ -630,22 +630,27 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
 
       for(const Exit *xit : room->Exits())
         {
-          if ( IsBitSet(xit->Flags, EX_PORTAL) ) /* don't fold portals */
-            continue;
-
+          if ( xit->Flags.test( Flag::Exit::Portal ) ) /* don't fold portals */
+            {
+              continue;
+            }
+          
           fprintf( fpout, "D%d\n", xit->Direction );
           fprintf( fpout, "%s~\n", StripCarriageReturn( xit->Description ).c_str() );
           fprintf( fpout, "%s~\n", StripCarriageReturn( xit->Keyword ).c_str() );
 
+          std::bitset<Flag::MAX> flags = xit->Flags;
+          flags.reset( Flag::Exit::Bashed );
+          
 	  if ( xit->Distance > 1 )
             fprintf( fpout, "%d %ld %ld %d\n",
-		     xit->Flags & ~EX_BASHED,
+		     static_cast<int>(xit->Flags.to_ulong()),
                      xit->Key,
                      xit->Vnum,
                      xit->Distance );
           else
             fprintf( fpout, "%d %ld %ld\n",
-		     xit->Flags & ~EX_BASHED,
+		     static_cast<int>(xit->Flags.to_ulong()),
                      xit->Key,
                      xit->Vnum );
         }
@@ -1010,7 +1015,7 @@ Reset *ParseReset( const Area *tarea, std::string argument, const Character *ch 
         }
       
       if ( (pexit = GetExit(room, (DirectionType)val2)) == NULL
-           ||   !IsBitSet( pexit->Flags, EX_ISDOOR ) )
+           || !pexit->Flags.test( Flag::Exit::IsDoor ) )
         {
           ch->Echo( "Reset: DOOR: no such door\r\n" );
           return NULL;

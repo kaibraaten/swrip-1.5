@@ -24,13 +24,13 @@ void do_close( Character *ch, std::string argument )
       /* 'close door' */
       Exit *pexit_rev = NULL;
 
-      if ( !IsBitSet(pexit->Flags, EX_ISDOOR) )
+      if ( !pexit->Flags.test( Flag::Exit::IsDoor ) )
         {
 	  ch->Echo( "You can't do that.\r\n" );
 	  return;
 	}
 
-      if ( IsBitSet(pexit->Flags, EX_CLOSED) )
+      if ( pexit->Flags.test( Flag::Exit::Closed ) )
         {
 	  ch->Echo( "It's already closed.\r\n" );
 	  return;
@@ -43,7 +43,7 @@ void do_close( Character *ch, std::string argument )
       if ( ( pexit_rev = pexit->ReverseExit ) != NULL
            && pexit_rev->ToRoom == ch->InRoom )
         {
-          SetBit( pexit_rev->Flags, EX_CLOSED );
+          pexit_rev->Flags.set( Flag::Exit::Closed );
 
           for(Character *rch : pexit->ToRoom->Characters())
 	    {
@@ -52,9 +52,11 @@ void do_close( Character *ch, std::string argument )
 	    }
         }
 
-      SetBExitFlag( pexit, EX_CLOSED );
+      SetBExitFlag( pexit, Flag::Exit::Closed );
 
-      if ( (door=pexit->Direction) > DIR_INVALID && door < DIR_SOMEWHERE )
+      door = pexit->Direction;
+      
+      if ( door > DIR_INVALID && door < DIR_SOMEWHERE )
 	{
 	  CheckRoomForTraps( ch, TrapDoor[door]);
 	}

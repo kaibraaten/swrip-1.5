@@ -888,32 +888,32 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   door = pexit->Direction;
 
-  if ( IsBitSet( pexit->Flags, EX_WINDOW )
-       && !IsBitSet( pexit->Flags, EX_ISDOOR ) )
+  if ( pexit->Flags.test( Flag::Exit::Window )
+       && !pexit->Flags.test( Flag::Exit::IsDoor ) )
     {
       ch->Echo( "Alas, you cannot go that way.\r\n" );
       return rNONE;
     }
 
-  if ( IsBitSet(pexit->Flags, EX_PORTAL)
+  if ( pexit->Flags.test( Flag::Exit::Portal )
        && IsNpc(ch) )
     {
       Act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
-  if ( IsBitSet(pexit->Flags, EX_NOMOB)
+  if ( pexit->Flags.test( Flag::Exit::NoMob )
        && IsNpc(ch) )
     {
       Act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
-  if ( IsBitSet(pexit->Flags, EX_CLOSED)
-       && (IsBitSet(pexit->Flags, EX_NOPASSDOOR)) )
+  if ( pexit->Flags.test( Flag::Exit::Closed )
+       && pexit->Flags.test( Flag::Exit::NoPassdoor ) )
     {
-      if ( !IsBitSet( pexit->Flags, EX_SECRET )
-           &&   !IsBitSet( pexit->Flags, EX_DIG ) )
+      if ( !pexit->Flags.test( Flag::Exit::Secret )
+           && !pexit->Flags.test( Flag::Exit::Dig ) )
         {
           if ( drunk )
             {
@@ -1002,7 +1002,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
       if ( in_room->Sector == SECT_AIR
            || to_room->Sector == SECT_AIR
-           || IsBitSet( pexit->Flags, EX_FLY ) )
+           || pexit->Flags.test( Flag::Exit::Fly ) )
         {
           if ( ship->Class > CLOUD_CAR )
             {
@@ -1024,7 +1024,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
             }
         }
 
-      if ( IsBitSet( pexit->Flags, EX_CLIMB ) )
+      if ( pexit->Flags.test( Flag::Exit::Climb ) )
         {
           if ( ship->Class < CLOUD_CAR )
             {

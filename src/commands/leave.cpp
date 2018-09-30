@@ -9,7 +9,7 @@ void do_leave( Character *ch, std::string argument )
     {
       for ( Exit *ex : ch->InRoom->Exits() )
 	{
-	  if ( IsBitSet( ex->Flags, EX_xLEAVE ) )
+	  if ( ex->Flags.test( Flag::Exit::CanLeave ) )
 	    {
 	      MoveCharacter( ch, ex );
 	      return;
@@ -22,7 +22,7 @@ void do_leave( Character *ch, std::string argument )
 
   Exit *pexit = FindDoor( ch, argument, true );
   
-  if ( pexit && IsBitSet( pexit->Flags, EX_xLEAVE ) )
+  if ( pexit && pexit->Flags.test( Flag::Exit::CanLeave ) )
     {
       MoveCharacter( ch, pexit );
       return;

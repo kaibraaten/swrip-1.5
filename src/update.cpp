@@ -1069,7 +1069,7 @@ static void MobileUpdate( void )
            && ( door = (DirectionType)NumberBits( 5 ) ) < DIR_SOMEWHERE
            && ( pexit = GetExit(ch->InRoom, door) ) != NULL
            && pexit->ToRoom
-           && !IsBitSet(pexit->Flags, EX_CLOSED)
+           && !pexit->Flags.test( Flag::Exit::Closed )
            && !IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB)
            && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
                 ||   pexit->ToRoom->Area == ch->InRoom->Area ) )
@@ -1097,7 +1097,7 @@ static void MobileUpdate( void )
            && ( door = (DirectionType)NumberBits( 4 ) ) < DIR_SOMEWHERE
            && ( pexit = GetExit(ch->InRoom,door) ) != NULL
            && pexit->ToRoom
-           && !IsBitSet(pexit->Flags, EX_CLOSED)
+           && !pexit->Flags.test( Flag::Exit::Closed )
            && !IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB) )
         {
           bool found = false;
@@ -2133,7 +2133,7 @@ static void CharacterCheck( void )
                    && ( door = (DirectionType)NumberBits( 4 ) ) < DIR_SOMEWHERE
                    && ( pexit = GetExit(ch->InRoom, door) ) != NULL
                    && pexit->ToRoom
-                   && !IsBitSet(pexit->Flags, EX_CLOSED)
+                   && !pexit->Flags.test( Flag::Exit::Closed )
                    && !IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB)
                    && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
                         || pexit->ToRoom->Area == ch->InRoom->Area ) )
@@ -2713,7 +2713,7 @@ void RemovePortal( Object *portal )
                                  std::end(fromRoom->Exits()),
                                  [](auto ex)
                                  {
-                                   return IsBitSet(ex->Flags, EX_PORTAL);
+                                   return ex->Flags.test( Flag::Exit::Portal );
                                  });
 
   if(exitIter != std::end(fromRoom->Exits()))
@@ -2960,4 +2960,3 @@ static void AuctionUpdate( void )
       auction->Item = NULL;
     }
 }
-

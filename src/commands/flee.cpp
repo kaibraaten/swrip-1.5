@@ -46,7 +46,7 @@ void do_flee( Character *ch, std::string argument )
 
       if ( ( pexit = GetExit(was_in, door) ) == NULL
            ||   !pexit->ToRoom
-           || ( IsBitSet(pexit->Flags, EX_CLOSED)
+           || ( pexit->Flags.test( Flag::Exit::Closed )
                 &&   !IsAffectedBy( ch, AFF_PASS_DOOR ) )
            || ( IsNpc(ch)
                 &&   IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB) ) )

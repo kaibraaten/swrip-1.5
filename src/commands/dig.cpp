@@ -39,8 +39,8 @@ void do_dig( Character *ch, std::string arg )
 
           if ( pexit != nullptr )
             {
-              if ( !IsBitSet(pexit->Flags, EX_DIG)
-                   && !IsBitSet(pexit->Flags, EX_CLOSED) )
+              if ( !pexit->Flags.test( Flag::Exit::Dig )
+                   && !pexit->Flags.test( Flag::Exit::Closed ) )
                 {
                   ch->Echo( "There is no need to dig out that exit.\r\n" );
                   return;
@@ -110,14 +110,14 @@ void do_dig( Character *ch, std::string arg )
       Exit *pexit = FindDoor(ch, arg, true);
       
       if ( pexit != nullptr
-           && IsBitSet( pexit->Flags, EX_DIG )
-           && IsBitSet( pexit->Flags, EX_CLOSED ) )
+           && pexit->Flags.test( Flag::Exit::Dig )
+           && pexit->Flags.test( Flag::Exit::Closed ) )
         {
           /* 4 times harder to dig open a passage without a shovel */
           if ( (GetRandomPercent() * (shovel ? 1 : 4)) <
                (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]) )
             {
-              RemoveBit( pexit->Flags, EX_CLOSED );
+              pexit->Flags.reset( Flag::Exit::Closed );
               ch->Echo( "You dig open a passageway!\r\n" );
               Act( AT_PLAIN, "$n digs open a passageway!", ch, NULL, NULL, TO_ROOM );
               LearnFromSuccess( ch, gsn_dig );

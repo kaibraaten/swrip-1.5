@@ -9,7 +9,7 @@ void do_climb( Character *ch, std::string argument )
     {
       for(Exit *ex : ch->InRoom->Exits())
 	{
-	  if ( IsBitSet( ex->Flags, EX_xCLIMB ) )
+	  if ( ex->Flags.test( Flag::Exit::CanClimb ) )
 	    {
 	      MoveCharacter( ch, ex );
 	      return;
@@ -22,7 +22,7 @@ void do_climb( Character *ch, std::string argument )
 
   Exit *pexit = FindDoor( ch, argument, true );
 
-  if ( pexit && IsBitSet( pexit->Flags, EX_xCLIMB ) )
+  if ( pexit && pexit->Flags.test( Flag::Exit::CanClimb ) )
     {
       MoveCharacter( ch, pexit );
       return;
