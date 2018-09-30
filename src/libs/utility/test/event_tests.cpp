@@ -23,7 +23,7 @@ static void addOneToUserdata(void *userdata, void *eventargs)
   (*counter)++;
 }
 
-TEST_F(EventTests, AddedEventIsRaisedExactlyOnce)
+TEST_F(EventTests, Glb_AddedEventIsRaisedExactlyOnce)
 {
   Ceris::Event<void*> event;
   int counter = 0;
@@ -34,7 +34,32 @@ TEST_F(EventTests, AddedEventIsRaisedExactlyOnce)
   EXPECT_EQ(1, counter);
 }
 
-TEST_F(EventTests, RemovedEventIsNeverRaised)
+struct CounterEventArgs
+{
+  int Counter = 0;
+};
+
+struct Observer
+{
+  void CounterEventHandler( CounterEventArgs *args )
+  {
+    ++args->Counter;
+  }
+};
+
+TEST_F(EventTests, Mbr_AddedEventIsRaisedExactlyOnce)
+{
+  Ceris::Event<CounterEventArgs*> event;
+  Observer observer;
+  event.Add( &observer, &Observer::CounterEventHandler );
+
+  CounterEventArgs eventArgs;
+  event( &eventArgs );
+
+  EXPECT_EQ( 1, eventArgs.Counter );
+}
+
+TEST_F(EventTests, Glb_RemovedEventIsNeverRaised)
 {
   Ceris::Event<void*> event;
   int counter = 0;
@@ -44,6 +69,19 @@ TEST_F(EventTests, RemovedEventIsNeverRaised)
   event( nullptr );
 
   EXPECT_EQ(0, counter);
+}
+
+TEST_F(EventTests, Mbr_RemovedEventIsNeverRaised)
+{
+  Ceris::Event<CounterEventArgs*> event;
+  Observer observer;
+  event.Add( &observer, &Observer::CounterEventHandler );
+  event.Remove( &observer, &Observer::CounterEventHandler );
+  
+  CounterEventArgs eventArgs;
+  event( &eventArgs );
+
+  EXPECT_EQ( 0, eventArgs.Counter );
 }
 
 struct EventArgs
@@ -59,7 +97,7 @@ static void EventArgsArePassedAlong_eventHandler(void *userdata, EventArgs *args
     }
 }
 
-TEST_F(EventTests, EventArgsArePassedAlong)
+TEST_F(EventTests, Glb_EventArgsArePassedAlong)
 {
   Ceris::Event<EventArgs*> event;
   EventArgs args;
@@ -70,7 +108,7 @@ TEST_F(EventTests, EventArgsArePassedAlong)
   EXPECT_TRUE(args.WasPassedAlong);
 }
 
-TEST_F(EventTests, AllHandlersWithSameUserdataAreRemovedTogether)
+TEST_F(EventTests, Glb_AllHandlersWithSameUserdataAreRemovedTogether)
 {
   Ceris::Event<void*> event;
   int counter = 0;
@@ -84,7 +122,7 @@ TEST_F(EventTests, AllHandlersWithSameUserdataAreRemovedTogether)
   EXPECT_EQ(0, counter);
 }
 
-TEST_F(EventTests, IdenticalHandlersCannotBeAdded)
+TEST_F(EventTests, Glb_IdenticalHandlersCannotBeAdded)
 {
   Ceris::Event<void*> event;
   int counter = 0;
@@ -97,7 +135,7 @@ TEST_F(EventTests, IdenticalHandlersCannotBeAdded)
   EXPECT_EQ(1, counter);
 }
 
-TEST_F(EventTests, NullUserdataWorks)
+TEST_F(EventTests, Glb_NullUserdataWorks)
 {
   Ceris::Event<EventArgs*> event;
   EventArgs args;
@@ -126,7 +164,7 @@ static void eh3(void *ud, void *args)
   (*counter)++;
 }
 
-TEST_F(EventTests, OnOneUserDataWithMultipleHandlerFuns_AddAreDispatched)
+TEST_F(EventTests, Glb_OnOneUserDataWithMultipleHandlerFuns_AddAreDispatched)
 {
   int userdata = 0;
   Ceris::Event<void*> event;
@@ -161,7 +199,7 @@ static void eh6(void *ud, void *args)
   (*mask) |= EH6;
 }
 
-TEST_F(EventTests, OnOneUserDataWithMultipleHandlerFuns_CorrectOneIsRemoved)
+TEST_F(EventTests, Glb_OnOneUserDataWithMultipleHandlerFuns_CorrectOneIsRemoved)
 {
   unsigned long bits = 0;
   Ceris::Event<void*> event;
