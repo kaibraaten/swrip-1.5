@@ -45,6 +45,16 @@ struct Observer
   {
     ++args->Counter;
   }
+
+  void CounterEventHandler2( CounterEventArgs *args )
+  {
+    ++args->Counter;
+  }
+
+  void CounterEventHandler3( CounterEventArgs *args )
+  {
+    ++args->Counter;
+  }
 };
 
 TEST_F(EventTests, Mbr_AddedEventIsRaisedExactlyOnce)
@@ -135,6 +145,20 @@ TEST_F(EventTests, Glb_IdenticalHandlersCannotBeAdded)
   EXPECT_EQ(1, counter);
 }
 
+TEST_F(EventTests, Mbr_IdenticalHandlersCannotBeAdded)
+{
+  Ceris::Event<CounterEventArgs*> event;
+  Observer observer;
+  event.Add( &observer, &Observer::CounterEventHandler );
+  event.Add( &observer, &Observer::CounterEventHandler );
+  event.Add( &observer, &Observer::CounterEventHandler );
+  
+  CounterEventArgs eventArgs;
+  event( &eventArgs );
+
+  EXPECT_EQ( eventArgs.Counter, 1 );
+}
+
 TEST_F(EventTests, Glb_NullUserdataWorks)
 {
   Ceris::Event<EventArgs*> event;
@@ -164,7 +188,7 @@ static void eh3(void *ud, void *args)
   (*counter)++;
 }
 
-TEST_F(EventTests, Glb_OnOneUserDataWithMultipleHandlerFuns_AddAreDispatched)
+TEST_F(EventTests, Glb_OnOneUserDataWithMultipleHandlerFuns_AllAreDispatched)
 {
   int userdata = 0;
   Ceris::Event<void*> event;
@@ -175,6 +199,20 @@ TEST_F(EventTests, Glb_OnOneUserDataWithMultipleHandlerFuns_AddAreDispatched)
   event( nullptr );
 
   EXPECT_EQ(3, userdata);
+}
+
+TEST_F(EventTests, Mbr_OnOneObserverWithMultipleHandlerFuns_AllAreDispatched)
+{
+  Ceris::Event<CounterEventArgs*> event;
+  Observer observer;
+  event.Add( &observer, &Observer::CounterEventHandler );
+  event.Add( &observer, &Observer::CounterEventHandler2 );
+  event.Add( &observer, &Observer::CounterEventHandler3 );
+  
+  CounterEventArgs eventArgs;
+  event( &eventArgs );
+
+  EXPECT_EQ( eventArgs.Counter, 3 );
 }
 
 const unsigned long EH4 = 1 << 4;
@@ -212,4 +250,39 @@ TEST_F(EventTests, Glb_OnOneUserDataWithMultipleHandlerFuns_CorrectOneIsRemoved)
   EXPECT_TRUE( bits & EH4 );
   EXPECT_FALSE( bits & EH5 );
   EXPECT_TRUE( bits & EH6 );
+}
+
+TEST_F(EventTests, Gbl_LambdaWorks)
+{
+  int counter = 0;
+  Ceris::Event<void*> event;
+  event.Add( [&counter](void*, void*)
+             {
+               ++counter;
+             });
+
+  event( nullptr );
+
+  EXPECT_EQ( counter, 1 );
+}
+
+class MyFunctor
+{
+public:
+  MyFunctor( int &c ) : _counter( c ) { }
+  void operator()( void*, void* ) { ++_counter; }
+  
+private:
+  int &_counter;
+};
+
+TEST_F(EventTests, Gbl_FunctorWorks)
+{
+  int counter = 0;
+  Ceris::Event<void*> event;
+  event.Add( MyFunctor( counter ) );
+
+  event( nullptr );
+
+  EXPECT_EQ( counter, 1 );
 }
