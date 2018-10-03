@@ -26,6 +26,8 @@
 #ifndef _SWRIP_OS_WIN32_HPP_
 #define _SWRIP_OS_WIN32_HPP_
 
+#if defined(_WIN32)
+
 #include <io.h>
 #include <winsock2.h>
 #include <windows.h>
@@ -70,5 +72,6 @@ struct timezone
 
 int gettimeofday( struct timeval*, struct timezone* );
 
+#endif
 #endif /* include guard */
 

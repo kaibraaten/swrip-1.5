@@ -23,6 +23,7 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#if defined(_WIN32)
 #include <cstdio>
 #include <ctime>
 #include "os.hpp"
@@ -125,3 +126,4 @@ int SetNonBlockingSocket( socket_t sock )
   unsigned long optval = 1;
   return ioctlsocket( sock, FIONBIO, &optval );
 }
+#endif

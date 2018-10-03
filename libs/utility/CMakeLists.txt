@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8.9)
 project(utility)
+include_directories(../)
 set(CMAKE_BUILD_TYPE Debug)
 set(GCC_WARNING_FLAGS "-Wall -Wshadow -Wformat-security -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Werror -Wwrite-strings -Wextra -Wno-char-subscripts")
 set(GCC_STD_FLAG "-std=c++14")
