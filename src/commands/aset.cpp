@@ -242,16 +242,13 @@ void do_aset( Character *ch, std::string argument )
           argument = OneArgument( argument, arg3 );
           value = GetAreaFlag( arg3 );
 	  
-          if ( value < 0 || static_cast<size_t>(value) > MAX_BIT )
+          if ( value < 0 || static_cast<size_t>(value) > Flag::MAX )
             {
               ch->Echo( "Unknown flag: %s\r\n", arg3.c_str() );
             }
           else
             {
-              if ( IsBitSet( tarea->Flags, 1 << value ) )
-                RemoveBit( tarea->Flags, 1 << value );
-              else
-                SetBit( tarea->Flags, 1 << value );
+              tarea->Flags.flip( value );
             }
         }
 

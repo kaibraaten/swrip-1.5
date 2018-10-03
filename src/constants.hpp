@@ -1865,11 +1865,6 @@ enum
 #define AREA_DELETED   BV00
 #define AREA_LOADED    BV01
 
-/* Area flags - Narn Mar/96 */
-#define AFLAG_NOPKILL  BV00
-
-#define AFLAG_CHANGED  BV02
-
 /*
  * Liquids.
  */

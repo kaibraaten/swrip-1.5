@@ -347,9 +347,10 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
 
   if ( tarea->ResetFrequency )
     fprintf( fpout, "#FLAGS\n%d %d\n\n",
-             tarea->Flags, tarea->ResetFrequency );
+             static_cast<int>( tarea->Flags.to_ulong() ), tarea->ResetFrequency );
   else
-    fprintf( fpout, "#FLAGS\n%d\n\n", tarea->Flags );
+    fprintf( fpout, "#FLAGS\n%d\n\n",
+             static_cast<int>( tarea->Flags.to_ulong() ) );
 
   fprintf( fpout, "#ECONOMY %d %d\n\n", tarea->HighEconomy, tarea->LowEconomy );
 

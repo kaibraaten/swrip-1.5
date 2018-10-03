@@ -1,9 +1,23 @@
 #ifndef _SWRIP_AREA_HPP_
 #define _SWRIP_AREA_HPP_
 
+#include <bitset>
 #include <string>
 #include "types.hpp"
 #include "constants.hpp"
+
+namespace Flag
+{
+  namespace Area
+  {
+    enum : size_t
+      {
+       NoPkill,
+       _01,
+       Changed
+      };
+  }
+}
 
 class Area
 {
@@ -19,7 +33,7 @@ public:
   Area *PreviousOnPlanet = nullptr;
   std::string Name;
   std::string Filename;
-  int Flags = 0;
+  std::bitset<Flag::MAX> Flags;
   short Status = 0;
   short Age = 0;
   short NumberOfPlayers = 0;

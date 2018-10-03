@@ -1067,8 +1067,10 @@ void EchoToAll( short AT_COLOR, const std::string &argument, short tar );
 void GenerateRebootString();
 
   /* const.c */
+std::string FlagString( const std::bitset<Flag::MAX> &flags,
+                        const std::array<const char * const, Flag::MAX> &nameArray);
 std::string FlagString(int bitvector,
-                       const std::array<const char * const, MAX_BIT> &nameArray);
+                       const std::array<const char * const, Flag::MAX> &nameArray);
 int GetSaveFlag(const std::string &txt);
 const char *GetDirectionName( DirectionType dir );
 DirectionType GetReverseDirection( DirectionType dir );

@@ -56,6 +56,12 @@ static int GetInArray(const std::string &name,
   return -1;
 }
 
+std::string FlagString( const std::bitset<Flag::MAX> &flags,
+                        const std::array<const char * const, Flag::MAX> &nameArray)
+{
+  return FlagString( static_cast<int>( flags.to_ulong() ), nameArray.data() );
+}
+
 std::string FlagString(int bitvector,
                        const std::array<const char * const, MAX_BIT> &nameArray)
 {
