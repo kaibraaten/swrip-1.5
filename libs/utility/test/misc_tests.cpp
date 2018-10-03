@@ -71,7 +71,8 @@ TEST_F(MiscTests, FlagString)
 
 TEST_F(MiscTests, StripColorCodes_StripsForeground)
 {
-  char *input = "&WYo &gman!&G";
+  char input[1024];
+  sprintf(input, "&WYo &gman!&G");
   const std::string expected = "Yo man!";
 
   const std::string actual = StripColorCodes(input);
@@ -81,7 +82,8 @@ TEST_F(MiscTests, StripColorCodes_StripsForeground)
 
 TEST_F(MiscTests, StripColorCodes_StripsBackground)
 {
-  char *input = "^WYo ^xman!^G";
+  char input[1024];
+  sprintf(input, "^WYo ^xman!^G");
   const std::string expected = "Yo man!";
 
   const std::string actual = StripColorCodes(input);
@@ -91,7 +93,8 @@ TEST_F(MiscTests, StripColorCodes_StripsBackground)
 
 TEST_F(MiscTests, StripColorCodes_StripsMixOfForeAndBackground)
 {
-  char *input = "^WYo ^xma&Bn!^G";
+  char input[1024];
+  sprintf(input, "^WYo ^xma&Bn!^G");
   const std::string expected = "Yo man!";
 
   const std::string actual = StripColorCodes(input);
