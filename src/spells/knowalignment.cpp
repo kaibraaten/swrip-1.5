@@ -5,8 +5,8 @@
 ch_ret spell_know_alignment( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
-  char *msg;
-  int ap;
+  const char *msg = nullptr;
+  int ap = 0;
   Skill *skill = GetSkill(sn);
 
   if ( !victim )

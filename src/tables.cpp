@@ -24,6 +24,7 @@
 #include <cstdio>
 #include <cstring>
 #include <strings.h>
+#include <dlfcn.h>
 #include <cctype>
 #include "mud.hpp"
 #include "skill.hpp"

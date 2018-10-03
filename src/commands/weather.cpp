@@ -4,7 +4,7 @@
 
 void do_weather( Character *ch, std::string argument )
 {
-  static char * const sky_look[] =
+  static const char * const sky_look[] =
     {
       "cloudless",
       "cloudy",

@@ -265,7 +265,7 @@ void do_examine( Character *ch, std::string arg )
                 break;
               }
           }
-
+          
         case ITEM_CONTAINER:
           if ( IsBitSet( obj->Flags, ITEM_COVERING ) )
             break;

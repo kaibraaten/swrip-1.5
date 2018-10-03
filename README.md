@@ -17,6 +17,7 @@ Exactly where we go from there is not decided yet. But it will not be adding new
 * A version of GCC supporting C++14.
 * Lua 5.3
 * Google Test and Google Mock
+* cmake (not sure of version)
 
 ## Compiling
 * cd into `src`

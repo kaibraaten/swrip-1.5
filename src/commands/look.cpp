@@ -38,7 +38,7 @@ static void show_visible_affects_to_char( Character *victim, Character *ch );
 static void show_exit_to_char( Character *ch, Exit *pexit, short door );
 static void show_no_arg( Character *ch, bool is_auto );
 
-static char *get_sex( Character *ch );
+static const char *get_sex( Character *ch );
 static void look_under( Character *ch, const std::string &what, bool doexaprog );
 static void look_in( Character *ch, const std::string &what, bool doexaprog );
 static bool requirements_are_met( Character *ch );
@@ -690,7 +690,7 @@ static void show_visible_affects_to_char( Character *victim, Character *ch )
     }
 }
 
-static char *get_sex( Character *ch )
+static const char *get_sex( Character *ch )
 {
   switch( ch->Sex )
     {

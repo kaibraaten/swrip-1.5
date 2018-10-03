@@ -1863,8 +1863,8 @@ const char *GetAffectLocationName( int location )
  */
 ch_ret SpringTrap( Character *ch, Object *obj )
 {
-  int dam;
-  char *txt;
+  int dam = 0;
+  const char *txt = nullptr;
   char buf[MAX_STRING_LENGTH];
   int typ = obj->Value[OVAL_TRAP_TYPE];
   int lev = obj->Value[OVAL_TRAP_STRENGTH];

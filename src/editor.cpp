@@ -99,7 +99,7 @@ struct Editor
  */
 
 /* funcs to manipulate editor datas */
-static EditorLine *MakeNewLine( char *str );
+static EditorLine *MakeNewLine( const char *str );
 static void DiscardEditData( Editor *edd );
 static Editor *CloneEditData( Editor *edd );
 static Editor *StringToEditData( const std::string &str, short max_size );
@@ -122,13 +122,13 @@ static void EditorGotoLine( Character *ch, Editor *edd, char *argument );
 static void EditorList( Character *ch, Editor *edd, char *argument );
 static void EditorAbort( Character *ch, Editor *edd, char *argument );
 static void EditorEscapedCommand( Character *ch, Editor *edd, char *argument );
-static void EditorSave( Character *ch, Editor *edd, char *argument );
+static void EditorSave( Character *ch, Editor *edd, const char *argument );
 
 /****************************************************************************
  * Edit_data manipulation functions
  */
 
-static EditorLine *MakeNewLine( char *str )
+static EditorLine *MakeNewLine( const char *str )
 {
   short size = 0;
 
@@ -981,7 +981,7 @@ static void EditorEscapedCommand( Character *ch, Editor *edd, char *argument )
     }
 }
 
-static void EditorSave( Character *ch, Editor *edd, char *argument )
+static void EditorSave( Character *ch, Editor *edd, const char *argument )
 {
   Descriptor *d = ch->Desc;
 

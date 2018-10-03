@@ -40,7 +40,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
   Room *room = NULL,  *to_room = NULL;
   Exit *pexit = NULL, *pexit_rev = NULL;
   DirectionType edir = DIR_INVALID;
-  char *txt = NULL;
+  const char *txt = NULL;
   bool isup = IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 
   switch( obj->ItemType )

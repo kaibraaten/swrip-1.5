@@ -882,9 +882,9 @@ void SetCharacterColor( short AType, const Character *ch )
 static std::string ActString(const std::string &format, Character *to, Character *ch,
                              const void *arg1, const void *arg2)
 {
-  static char * const he_she  [] = { "it",  "he",  "she" };
-  static char * const him_her [] = { "it",  "him", "her" };
-  static char * const his_her [] = { "its", "his", "her" };
+  static const char * const he_she  [] = { "it",  "he",  "she" };
+  static const char * const him_her [] = { "it",  "him", "her" };
+  static const char * const his_her [] = { "its", "his", "her" };
   char buf[MAX_STRING_LENGTH] = {'\0'};
   std::string fname;
   char *point = buf;

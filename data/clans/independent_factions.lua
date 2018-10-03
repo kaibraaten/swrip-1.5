@@ -1,20 +1,20 @@
 -- Independent Factions
--- Last saved Sunday 23-Sep-2018 17:28:35
+-- Last saved Wednesday 03-Oct-2018 13:12:54
 
 ClanEntry
 {
    MobKills = 0, 
-   Number2 = "", 
+   Type = 0, 
    MobDeaths = 0, 
+   PlayerKills = 0, 
+   Funds = 0, 
+   PlayerDeaths = 0, 
+   FoundationDate = 0, 
+   Number2 = "", 
+   Leader = "", 
    Members = 
    {
    }, 
-   Type = 0, 
-   PlayerKills = 0, 
-   FoundationDate = 0, 
-   Name = "Independent Factions", 
    Number1 = "", 
-   Leader = "", 
-   Funds = 0, 
-   PlayerDeaths = 0, 
+   Name = "Independent Factions", 
 }

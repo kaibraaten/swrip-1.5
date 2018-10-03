@@ -5,14 +5,14 @@
 #include "object.hpp"
 #include "protomob.hpp"
 
-static void appraise_all( Character *ch, Character *keeper, char *fixstr );
+static void appraise_all( Character *ch, Character *keeper, const char *fixstr );
 
 void do_appraise( Character *ch, std::string arg )
 {
   char buf[MAX_STRING_LENGTH];
   Object *obj = nullptr;
   int cost = 0;
-  char *fixstr = nullptr;
+  const char *fixstr = nullptr;
 
   if ( arg.empty() )
     {
@@ -74,7 +74,7 @@ void do_appraise( Character *ch, std::string arg )
          NULL, keeper, TO_CHAR );
 }
 
-static void appraise_all( Character *ch, Character *keeper, char *fixstr )
+static void appraise_all( Character *ch, Character *keeper, const char *fixstr )
 {
   char buf[MAX_STRING_LENGTH], *pbuf=buf;
   int cost = 0, total=0;

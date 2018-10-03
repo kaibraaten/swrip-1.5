@@ -1190,9 +1190,9 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor,
 			     Object *obj, void *vo, Character *rndm )
 {
-  static char *he_she[] = { "it",  "he",  "she" };
-  static char *him_her[] = { "it",  "him", "her" };
-  static char *his_her[] = { "its", "his", "her" };
+  static const char *he_she[] = { "it",  "he",  "she" };
+  static const char *him_her[] = { "it",  "him", "her" };
+  static const char *his_her[] = { "its", "his", "her" };
   Character   *vict = (Character *) vo;
   Object    *v_obj = (Object  *) vo;
 

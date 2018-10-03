@@ -1,50 +1,91 @@
 -- X-wing
--- Last saved Sunday 23-Sep-2018 17:29:16
+-- Last saved Wednesday 03-Oct-2018 13:12:54
 
 ShipEntry
 {
-   Home = "Gamorr", 
-   Owner = "", 
-   Guard = false, 
-   Location = 6100, 
-   Pilot = "", 
    CoPilot = "", 
+   Shipyard = 203, 
    DockingPorts = 0, 
-   LastDock = 6100, 
-   Alarm = false, 
+   Description = "", 
    Rooms = 
    {
-      Entrance = 32151, 
-      Gunseat = 32151, 
-      Pilotseat = 32151, 
       Navseat = 32151, 
-      Hangar = 0, 
-      Coseat = 32151, 
+      Engine = 0, 
+      Entrance = 32151, 
       Last = 32151, 
+      Coseat = 32151, 
       Cockpit = 32151, 
       First = 32151, 
-      Engine = 0, 
+      Hangar = 0, 
+      Gunseat = 32151, 
+      Pilotseat = 32151, 
    }, 
+   Location = 6100, 
+   Thrusters = 
+   {
+      Speed = 
+      {
+         Max = 150, 
+         Current = 0, 
+      }, 
+      Energy = 
+      {
+         Max = 6000, 
+         Current = 6000, 
+      }, 
+      Maneuver = 110, 
+   }, 
+   Owner = "", 
    Defenses = 
    {
-      Hull = 
-      {
-         Current = 1500, 
-         Max = 1500, 
-      }, 
       Shield = 
       {
-         Current = 0, 
          Max = 150, 
+         Current = 0, 
       }, 
       Chaff = 
       {
-         Current = 25, 
          Max = 25, 
+         Current = 25, 
+      }, 
+      Hull = 
+      {
+         Max = 1500, 
+         Current = 1500, 
       }, 
    }, 
+   State = 0, 
    WeaponSystems = 
    {
+      Laser = 
+      {
+         State = 0, 
+         Count = 2, 
+      }, 
+      Tube = 
+      {
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Missiles = 
+         {
+            Max = 8, 
+            Current = 0, 
+         }, 
+         State = 0, 
+         Torpedoes = 
+         {
+            Max = 4, 
+            Current = 0, 
+         }, 
+      }, 
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 2, 
+      }, 
       Turrets = 
       {
          [1] = 
@@ -98,76 +139,35 @@ ShipEntry
             RoomVnum = 0, 
          }, 
       }, 
-      Tube = 
-      {
-         Missiles = 
-         {
-            Current = 0, 
-            Max = 8, 
-         }, 
-         Rockets = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         State = 0, 
-         Torpedoes = 
-         {
-            Current = 0, 
-            Max = 4, 
-         }, 
-      }, 
       TractorBeam = 
       {
          State = 0, 
          Strength = 0, 
       }, 
-      IonCannon = 
-      {
-         Count = 2, 
-         State = 0, 
-      }, 
-      Laser = 
-      {
-         Count = 2, 
-         State = 0, 
-      }, 
    }, 
-   Thrusters = 
-   {
-      Speed = 
-      {
-         Current = 0, 
-         Max = 150, 
-      }, 
-      Energy = 
-      {
-         Current = 6000, 
-         Max = 6000, 
-      }, 
-      Maneuver = 110, 
-   }, 
-   State = 0, 
-   Shipyard = 203, 
-   Description = "", 
    Hyperdrive = 
    {
       Speed = 245, 
    }, 
-   Name = "X-wing", 
+   LastDock = 6100, 
+   Type = "Rebel", 
    Class = "Starfighter", 
-   Position = 
-   {
-      Z = 3.311444599312, 
-      Y = 4499995.8700567, 
-      X = 3999997.7865312, 
-   }, 
+   Alarm = false, 
+   Guard = false, 
    Instruments = 
    {
       AstroArray = 130, 
       Sensor = 150, 
       Comm = 150, 
    }, 
+   Position = 
+   {
+      Y = 4499995.8700567, 
+      Z = 3.311444599312, 
+      X = 3999997.7865312, 
+   }, 
+   Name = "X-wing", 
+   Home = "Gamorr", 
+   Pilot = "", 
    PersonalName = "Red 4", 
-   Type = "Rebel", 
 }
