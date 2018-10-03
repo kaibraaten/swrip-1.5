@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 2.8.9)
+project(colorparser)
+set(CMAKE_BUILD_TYPE Debug)
+file(GLOB SOURCES *.cpp)
+add_library(colorparser SHARED ${SOURCES})
+install(TARGETS colorparser DESTINATION /usr/lib)
