@@ -13,6 +13,7 @@ extern "C" {
 }
 #endif
 
+#include <bitset>
 #include <functional>
 #include <list>
 #include <string>
@@ -67,11 +68,17 @@ void LuaSaveDataFile( const std::string &filename,
                       void (*pushData)( lua_State *L, const void* ),
                       const std::string &data, const void *userData );
 void LuaPushFlags(lua_State *L, unsigned long flags,
-                  const std::array<const char * const, MAX_BIT> &nameArray,
+                  const std::array<const char * const, Flag::MAX> &nameArray,
                   const std::string &key);
 void LuaPushFlags( lua_State *L, unsigned long flags,
                    const char * const nameArray[], const std::string &key );
-unsigned int LuaLoadFlags( lua_State *L, const std::string &key );
+void LuaPushFlags(lua_State *L, const std::bitset<Flag::MAX> &flags,
+                  const std::array<const char * const, Flag::MAX> &nameArray,
+                  const std::string &key);
+void LuaPushFlags(lua_State *L, const std::bitset<Flag::MAX> &flags,
+                  const char * const nameArray[], const std::string &key);
+std::bitset<Flag::MAX> LuaLoadFlags( lua_State *L, const std::string &key );
+
 void LuaPushSmaugAffects( lua_State *L, const std::list<SmaugAffect*> &affectList );
 std::list<SmaugAffect*> LuaLoadSmaugAffects( lua_State *L );
 void LuaPushCharacterAffects( lua_State *L, const std::list<Affect*> &affects,

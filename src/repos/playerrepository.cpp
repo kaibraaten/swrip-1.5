@@ -144,7 +144,7 @@ void InMemoryPlayerRepository::PreloadCharacter( lua_State *L, Character *ch )
   LuaGetfieldString( L, "Name", &ch->Name );
   LuaGetfieldInt( L, "Level", &ch->TopLevel );
   LuaGetfieldString( L, "Password", &ch->PCData->Password );
-  ch->Flags = LuaLoadFlags( L, "Flags" );
+  ch->Flags = LuaLoadFlags( L, "Flags" ).to_ulong();
 }
 
 void InMemoryPlayerRepository::LoadPlayerData( lua_State *L, Character *ch )
@@ -193,9 +193,9 @@ void InMemoryPlayerRepository::LoadPlayerData( lua_State *L, Character *ch )
                       }
                   });
 
-  ch->Flags = LuaLoadFlags( L, "Flags" );
-  ch->PCData->Flags = LuaLoadFlags( L, "PcFlags" );
-  ch->PCData->WantedFlags = LuaLoadFlags( L, "Wanted" );
+  ch->Flags = LuaLoadFlags( L, "Flags" ).to_ulong();
+  ch->PCData->Flags = LuaLoadFlags( L, "PcFlags" ).to_ulong();
+  ch->PCData->WantedFlags = LuaLoadFlags( L, "Wanted" ).to_ulong();
 
   std::list<Character*> pet = LuaLoadMobiles( L, "Pets" );
 

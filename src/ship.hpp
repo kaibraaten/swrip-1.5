@@ -25,9 +25,22 @@
 
 #include <string>
 #include <array>
+#include <bitset>
 #include <utility/vector3.hpp>
 #include "types.hpp"
 #include "constants.hpp"
+
+namespace Flag
+{
+  namespace Ship
+  {
+    enum : size_t
+      {
+       Permanent,
+       Prototype
+      };
+  }
+}
 
 class Ship
 {
@@ -51,7 +64,7 @@ public:
   bool Alarm = false;
   int DockingPorts = 0;
   bool Guard = false;
-  int Flags = 0;
+  std::bitset<Flag::MAX> Flags;
   std::string Home;
   
   struct

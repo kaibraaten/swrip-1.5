@@ -192,11 +192,24 @@ void LuaSaveDataFile( const std::string &filename,
   lua_close(L);
 }
 
+void LuaPushFlags(lua_State *L, const std::bitset<Flag::MAX> &flags,
+                  const std::array<const char * const, MAX_BIT> &nameArray,
+                  const std::string &key)
+{
+  LuaPushFlags(L, flags.to_ulong(), nameArray.data(), key);
+}
+
 void LuaPushFlags(lua_State *L, unsigned long flags,
                   const std::array<const char * const, MAX_BIT> &nameArray,
                   const std::string &key)
 {
   LuaPushFlags(L, flags, nameArray.data(), key);
+}
+
+void LuaPushFlags( lua_State *L, const std::bitset<Flag::MAX> &flags,
+                   const char * const nameArray[], const std::string &key )
+{
+  LuaPushFlags(L, flags.to_ulong(), nameArray, key);
 }
 
 void LuaPushFlags( lua_State *L, unsigned long flags,
@@ -223,9 +236,9 @@ void LuaPushFlags( lua_State *L, unsigned long flags,
     }
 }
 
-unsigned int LuaLoadFlags( lua_State *L, const std::string &key )
+std::bitset<Flag::MAX> LuaLoadFlags( lua_State *L, const std::string &key )
 {
-  unsigned int flags = 0;
+  std::bitset<Flag::MAX> flags;
   int idx = lua_gettop( L );
   lua_getfield( L, idx, key.c_str() );
 
@@ -237,9 +250,9 @@ unsigned int LuaLoadFlags( lua_State *L, const std::string &key )
 	{
 	  size_t bit = lua_tointeger( L, -2 );
 
-	  if( bit < MAX_BIT )
+	  if( bit < Flag::MAX )
 	    {
-	      SetBit( flags, 1 << bit );
+              flags.set( bit );
 	    }
 
 	  lua_pop( L, 1 );
@@ -1193,7 +1206,7 @@ static Affect *LuaLoadCharacterAffect( lua_State *L )
       return nullptr;
     }
 
-  affect.AffectedBy = LuaLoadFlags( L, "AffectedBy" );
+  affect.AffectedBy = LuaLoadFlags( L, "AffectedBy" ).to_ulong();
 
   return new Affect( affect );
 }
@@ -1230,7 +1243,7 @@ static Affect *LuaLoadObjectAffect( lua_State *L )
       return nullptr;
     }
 
-  affect.AffectedBy = LuaLoadFlags( L, "AffectedBy" );
+  affect.AffectedBy = LuaLoadFlags( L, "AffectedBy" ).to_ulong();
 
   if ( affect.Location == APPLY_WEAPONSPELL
        || affect.Location == APPLY_WEARSPELL
@@ -1356,12 +1369,12 @@ static Object *LuaLoadObject( lua_State *L )
 
   if( FieldExists( L, "Flags" ) )
     {
-      obj->Flags = LuaLoadFlags( L, "Flags" );
+      obj->Flags = LuaLoadFlags( L, "Flags" ).to_ulong();
     }
 
   if( FieldExists( L, "WearFlags" ) )
     {
-      obj->WearFlags = LuaLoadFlags( L, "WearFlags" );
+      obj->WearFlags = LuaLoadFlags( L, "WearFlags" ).to_ulong();
     }
     
   LuaLoadOvalues( L, obj->Value );
@@ -1483,11 +1496,11 @@ void LuaLoadCharacter( lua_State *L, Character *ch,
   LoadCurrentAndMax( L, "ForcePoints", ch->Mana );
   LoadCurrentAndMax( L, "Fatigue", ch->Fatigue );
 
-  ch->AffectedBy = LuaLoadFlags( L, "AffectFlags" );
-  ch->Deaf = LuaLoadFlags( L, "IgnoreChannels" );
-  ch->Resistant = LuaLoadFlags( L, "Resistant" );
-  ch->Immune = LuaLoadFlags( L, "Immune" );
-  ch->Susceptible = LuaLoadFlags( L, "Susceptible" );
+  ch->AffectedBy = LuaLoadFlags( L, "AffectFlags" ).to_ulong();
+  ch->Deaf = LuaLoadFlags( L, "IgnoreChannels" ).to_ulong();
+  ch->Resistant = LuaLoadFlags( L, "Resistant" ).to_ulong();
+  ch->Immune = LuaLoadFlags( L, "Immune" ).to_ulong();
+  ch->Susceptible = LuaLoadFlags( L, "Susceptible" ).to_ulong();
 
   LuaLoadCharacterAbilities( L, ch );
   LuaLoadCharacterSaves( L, ch );

@@ -1065,7 +1065,7 @@ static Skill *LoadSkillOrHerb( lua_State *L )
   LuaGetfieldInt( L, "Participants", &skill->Participants );
   LuaGetfieldInt( L, "Alignment", &skill->Alignment );
 
-  skill->Flags = LuaLoadFlags( L, "Flags" ); 
+  skill->Flags = LuaLoadFlags( L, "Flags" ).to_ulong(); 
   LoadSkillTeachers( L, skill );
   skill->Affects = LuaLoadSmaugAffects( L );
   LoadSkillMessages( L, skill );

@@ -93,7 +93,7 @@ int LuaPlanetRepository::L_PlanetEntry( lua_State *L )
                        planet->GovernedBy = GetClan( name );
                      });
 
-  planet->Flags = LuaLoadFlags( L, "Flags" );
+  planet->Flags = LuaLoadFlags( L, "Flags" ).to_ulong();
   LoadPlanetAreas( L, planet );
 
   Planets->Add(planet);
