@@ -10,6 +10,11 @@ set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_WARNING_FLAGS} ${GCC_STD_FLAG}")
 #file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true "*.cpp")
 file(GLOB_RECURSE SOURCES "*.cpp")
 list(FILTER SOURCES EXCLUDE REGEX "test\\/")
+list(FILTER SOURCES EXCLUDE REGEX "CMakeFiles\\/")
 add_library(mud SHARED ${SOURCES})
 target_link_libraries(mud ${PROJECT_LINK_LIBS})
 install(TARGETS mud DESTINATION /usr/lib)
+add_custom_command(TARGET mud POST_BUILD
+  COMMAND cmake .
+  COMMAND make
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/test)
