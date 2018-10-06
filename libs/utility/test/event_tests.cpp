@@ -3,6 +3,8 @@
 #include <gmock/gmock.h>
 #include <utility/event.hpp>
 
+using ::testing::_;
+
 class EventTests : public ::testing::Test
 {
 protected:
@@ -34,39 +36,30 @@ TEST_F(EventTests, Glb_AddedEventIsRaisedExactlyOnce)
   EXPECT_EQ(1, counter);
 }
 
-struct CounterEventArgs
-{
-  int Counter = 0;
-};
-
+template<typename EventArgs>
 struct Observer
 {
-  void CounterEventHandler( CounterEventArgs *args )
-  {
-    ++args->Counter;
-  }
+  virtual ~Observer() = default;  
+  virtual void EventHandler1( EventArgs args ) {}
+  virtual void EventHandler2( EventArgs args ) {}
+  virtual void EventHandler3( EventArgs args ) {}
+};
 
-  void CounterEventHandler2( CounterEventArgs *args )
-  {
-    ++args->Counter;
-  }
-
-  void CounterEventHandler3( CounterEventArgs *args )
-  {
-    ++args->Counter;
-  }
+struct MockObserver : public Observer<void*>
+{
+  MOCK_METHOD1(EventHandler1, void(void*));
+  MOCK_METHOD1(EventHandler2, void(void*));
+  MOCK_METHOD1(EventHandler3, void(void*));
 };
 
 TEST_F(EventTests, Mbr_AddedEventIsRaisedExactlyOnce)
 {
-  Ceris::Event<CounterEventArgs*> event;
-  Observer observer;
-  event.Add( &observer, &Observer::CounterEventHandler );
+  Ceris::Event<void*> event;
+  MockObserver observer;
+  EXPECT_CALL(observer, EventHandler1(_)).Times(1);
+  event.Add( &observer, &MockObserver::EventHandler1 );
 
-  CounterEventArgs eventArgs;
-  event( &eventArgs );
-
-  EXPECT_EQ( 1, eventArgs.Counter );
+  event( nullptr );
 }
 
 TEST_F(EventTests, Glb_RemovedEventIsNeverRaised)
@@ -83,15 +76,13 @@ TEST_F(EventTests, Glb_RemovedEventIsNeverRaised)
 
 TEST_F(EventTests, Mbr_RemovedEventIsNeverRaised)
 {
-  Ceris::Event<CounterEventArgs*> event;
-  Observer observer;
-  event.Add( &observer, &Observer::CounterEventHandler );
-  event.Remove( &observer, &Observer::CounterEventHandler );
-  
-  CounterEventArgs eventArgs;
-  event( &eventArgs );
+  Ceris::Event<void*> event;
+  MockObserver observer;
+  EXPECT_CALL(observer, EventHandler1(_)).Times(0);
+  event.Add( &observer, &MockObserver::EventHandler1 );
+  event.Remove( &observer, &MockObserver::EventHandler1 );
 
-  EXPECT_EQ( 0, eventArgs.Counter );
+  event( nullptr );
 }
 
 struct EventArgs
@@ -147,16 +138,14 @@ TEST_F(EventTests, Glb_IdenticalHandlersCannotBeAdded)
 
 TEST_F(EventTests, Mbr_IdenticalHandlersCannotBeAdded)
 {
-  Ceris::Event<CounterEventArgs*> event;
-  Observer observer;
-  event.Add( &observer, &Observer::CounterEventHandler );
-  event.Add( &observer, &Observer::CounterEventHandler );
-  event.Add( &observer, &Observer::CounterEventHandler );
+  Ceris::Event<void*> event;
+  MockObserver observer;
+  EXPECT_CALL( observer, EventHandler1(_) ).Times(1);
+  event.Add( &observer, &MockObserver::EventHandler1 );
+  event.Add( &observer, &MockObserver::EventHandler1 );
+  event.Add( &observer, &MockObserver::EventHandler1 );
   
-  CounterEventArgs eventArgs;
-  event( &eventArgs );
-
-  EXPECT_EQ( eventArgs.Counter, 1 );
+  event( nullptr );
 }
 
 TEST_F(EventTests, Glb_NullUserdataWorks)
@@ -203,16 +192,17 @@ TEST_F(EventTests, Glb_OnOneUserDataWithMultipleHandlerFuns_AllAreDispatched)
 
 TEST_F(EventTests, Mbr_OnOneObserverWithMultipleHandlerFuns_AllAreDispatched)
 {
-  Ceris::Event<CounterEventArgs*> event;
-  Observer observer;
-  event.Add( &observer, &Observer::CounterEventHandler );
-  event.Add( &observer, &Observer::CounterEventHandler2 );
-  event.Add( &observer, &Observer::CounterEventHandler3 );
-  
-  CounterEventArgs eventArgs;
-  event( &eventArgs );
+  Ceris::Event<void*> event;
+  MockObserver observer;
+  EXPECT_CALL( observer, EventHandler1(_) ).Times(1);
+  EXPECT_CALL( observer, EventHandler2(_) ).Times(1);
+  EXPECT_CALL( observer, EventHandler3(_) ).Times(1);
 
-  EXPECT_EQ( eventArgs.Counter, 3 );
+  event.Add( &observer, &MockObserver::EventHandler1 );
+  event.Add( &observer, &MockObserver::EventHandler2 );
+  event.Add( &observer, &MockObserver::EventHandler3 );
+  
+  event( nullptr );
 }
 
 const unsigned long EH4 = 1 << 4;
