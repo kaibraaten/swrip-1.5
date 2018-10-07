@@ -4,6 +4,7 @@
 #include <list>
 #include <string>
 #include <array>
+#include <bitset>
 #include "types.hpp"
 #include "constants.hpp"
 
@@ -28,7 +29,7 @@ public:
   int Guild = 0;                  /* Which guild the skill belongs to */
   int Level = 0;              /* Minimum level to be able to cast */
   SkillType Type = 0;                   /* Spell/Skill/Weapon/Tongue    */
-  unsigned int Flags = 0;                  /* extra stuff                  */
+  std::bitset<Flag::MAX> Flags;                  /* extra stuff                  */
 
   struct
   {

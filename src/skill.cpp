@@ -1065,7 +1065,7 @@ static Skill *LoadSkillOrHerb( lua_State *L )
   LuaGetfieldInt( L, "Participants", &skill->Participants );
   LuaGetfieldInt( L, "Alignment", &skill->Alignment );
 
-  skill->Flags = LuaLoadFlags( L, "Flags" ).to_ulong(); 
+  skill->Flags = LuaLoadFlags( L, "Flags" ); 
   LoadSkillTeachers( L, skill );
   skill->Affects = LuaLoadSmaugAffects( L );
   LoadSkillMessages( L, skill );
@@ -1152,47 +1152,47 @@ bool IS_VALID_HERB( int sn )
 
 bool SPELL_FLAG( const Skill *skill, size_t flag )
 {
-  return IsBitSet( skill->Flags, flag );
+  return skill->Flags.test( flag );
 }
 
 long SPELL_DAMAGE( const Skill *skill )
 {
-  return skill->Flags & 7;
+  return skill->Flags.to_ulong() & 7;
 }
 
 long SPELL_ACTION( const Skill *skill )
 {
-  return skill->Flags >> 3 & 7;
+  return skill->Flags.to_ulong() >> 3 & 7;
 }
 
 long SPELL_CLASS( const Skill *skill )
 {
-  return skill->Flags >> 6 & 7;
+  return skill->Flags.to_ulong() >> 6 & 7;
 }
 
 long SPELL_POWER( const Skill *skill )
 {
-  return skill->Flags >> 9 & 3;
+  return skill->Flags.to_ulong() >> 9 & 3;
 }
 
 void SET_SDAM( Skill *skill, int val )
 {
-  skill->Flags = (skill->Flags & SDAM_MASK) + (val & 7);
+  skill->Flags = (skill->Flags.to_ulong() & SDAM_MASK) + (val & 7);
 }
 
 void SET_SACT( Skill *skill, int val )
 {
-  skill->Flags = (skill->Flags & SACT_MASK) + ((val & 7) << 3);
+  skill->Flags = (skill->Flags.to_ulong() & SACT_MASK) + ((val & 7) << 3);
 }
 
 void SET_SCLA( Skill *skill, int val )
 {
-  skill->Flags = (skill->Flags & SCLA_MASK) + ((val & 7) << 6);
+  skill->Flags = (skill->Flags.to_ulong() & SCLA_MASK) + ((val & 7) << 6);
 }
 
 void SET_SPOW( Skill *skill, int val )
 {
-  skill->Flags = (skill->Flags & SPOW_MASK) + ((val & 3) << 9);
+  skill->Flags = (skill->Flags.to_ulong() & SPOW_MASK) + ((val & 3) << 9);
 }
 
 bool IS_FIRE( int dt )

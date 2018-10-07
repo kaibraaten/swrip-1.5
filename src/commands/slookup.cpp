@@ -80,7 +80,7 @@ void do_slookup( Character *ch, std::string arg )
       ch->Echo("Sn: %4d Slot: %4d %s: %s\r\n",
 	    sn, skill->Slot, SkillTypeName[skill->Type], skill->Name.c_str() );
 
-      if ( skill->Flags )
+      if ( skill->Flags.any() )
 	{
 	  size_t x = 0;
 
@@ -92,7 +92,7 @@ void do_slookup( Character *ch, std::string arg )
 
 	  strcpy( buf, "Flags:" );
 
-	  for ( x = 11; x < 32; x++ )
+	  for ( x = 11; x < Flag::MAX; x++ )
 	    if ( SPELL_FLAG( skill, 1 << x ) )
 	      {
 		strcat( buf, " " );
