@@ -89,7 +89,7 @@ void do_drop( Character *ch, std::string argument )
           ObjectToRoom( CreateMoney( number ), ch->InRoom );
           ch->Echo( "OK.\r\n" );
 
-          if ( IsBitSet( SysData.SaveFlags, SV_DROP ) )
+          if ( SysData.SaveFlags.test( Flag::AutoSave::Drop ) )
             {
               PlayerCharacters->Save( ch );
 
@@ -224,7 +224,7 @@ void do_drop( Character *ch, std::string argument )
         }
     }
 
-  if ( IsBitSet( SysData.SaveFlags, SV_DROP ) )
+  if ( SysData.SaveFlags.test( Flag::AutoSave::Drop ) )
     {
       PlayerCharacters->Save( ch );
 

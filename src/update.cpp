@@ -1754,7 +1754,8 @@ static void CharacterUpdate( void )
                   PlayerCharacters->Save( ch );
                   do_quit( ch, "" );
                 }
-              else if ( ch == ch_save && IsBitSet( SysData.SaveFlags, SV_AUTO )
+              else if ( ch == ch_save
+                        && SysData.SaveFlags.test( Flag::AutoSave::Auto )
 			&& ++save_count < 10 )   /* save max of 10 per tick */
 		{
 		  PlayerCharacters->Save( ch );
@@ -2905,7 +2906,7 @@ static void AuctionUpdate( void )
                                 pay, tax);
           auction->Item = NULL; /* reset item */
 
-          if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
+          if ( SysData.SaveFlags.test( Flag::AutoSave::Auction ) )
             {
               PlayerCharacters->Save( auction->Buyer );
               PlayerCharacters->Save( auction->Seller );
@@ -2951,7 +2952,7 @@ static void AuctionUpdate( void )
 	      auction->Seller->Gold -= tax;
 	    }
 
-          if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
+          if ( SysData.SaveFlags.test( Flag::AutoSave::Auction ) )
 	    {
 	      PlayerCharacters->Save( auction->Seller );
 	    }

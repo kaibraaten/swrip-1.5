@@ -1,11 +1,36 @@
 #ifndef _SWRIP_SYSTEMDATA_HPP_
 #define _SWRIP_SYSTEMDATA_HPP_
 
+#include <bitset>
 #include "constants.hpp"
+
+namespace Flag
+{
+  namespace AutoSave
+  {
+    enum : size_t
+      {
+       Death,
+       Kill,
+       ChangePassword,
+       Drop,
+       Put,
+       Give,
+       Auto,
+       Zap,
+       Auction,
+       Get,
+       Receive,
+       Idle,
+       Backup
+      };
+  }
+}
 
 class SystemData
 {
 public:
+  SystemData();
   void Load();
   void Save() const;
   
@@ -33,7 +58,7 @@ public:
   int LevelToGetObjectsWithoutTakeFlag = LEVEL_GREATER; /* Get objects without take flag */
   int LevelToForcePlayers = LEVEL_GREATER; /* The level at which you can use force on players. */
   int MaxSN = 0;                 /* Max skills */
-  int SaveFlags = SV_DEATH | SV_PASSCHG | SV_AUTO | SV_PUT | SV_DROP | SV_GIVE | SV_AUCTION | SV_ZAPDROP | SV_IDLE;             /* Toggles for saving conditions */
+  std::bitset<Flag::MAX> SaveFlags;
   int SaveFrequency = 0;         /* How old to autosave someone */
   int Port = 7000;
   bool DisableHunger = false;

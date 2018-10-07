@@ -678,9 +678,11 @@ void do_mset( Character *ch, std::string argument )
 
       victim->PCData->Password = EncodeString( arg3 );
 
-      if ( IsBitSet(SysData.SaveFlags, SV_PASSCHG) )
-        PlayerCharacters->Save( victim );
-
+      if ( SysData.SaveFlags.test( Flag::AutoSave::ChangePassword ) )
+        {
+          PlayerCharacters->Save( victim );
+        }
+      
       ch->Echo("Ok.\r\n");
       victim->Echo("Your password has been changed by %s.\r\n", ch->Name.c_str() );
       return;

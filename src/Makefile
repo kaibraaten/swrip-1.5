@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kai/code/swrip
+CMAKE_SOURCE_DIR = /home/kai/code/swrip/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kai/code/swrip
+CMAKE_BINARY_DIR = /home/kai/code/swrip/src
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -126,14 +126,14 @@ install/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/kai/code/swrip && $(CMAKE_COMMAND) -E cmake_progress_start /home/kai/code/swrip/CMakeFiles /home/kai/code/swrip/src/CMakeFiles/progress.marks
-	cd /home/kai/code/swrip && $(MAKE) -f CMakeFiles/Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kai/code/swrip/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kai/code/swrip/src/CMakeFiles /home/kai/code/swrip/src/CMakeFiles/progress.marks
+	$(MAKE) -f CMakeFiles/Makefile2 all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kai/code/swrip/src/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/kai/code/swrip && $(MAKE) -f CMakeFiles/Makefile2 src/clean
+	$(MAKE) -f CMakeFiles/Makefile2 clean
 .PHONY : clean
 
 # The main clean target
@@ -143,32 +143,30 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/kai/code/swrip && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	$(MAKE) -f CMakeFiles/Makefile2 preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/kai/code/swrip && $(MAKE) -f CMakeFiles/Makefile2 src/preinstall
+	$(MAKE) -f CMakeFiles/Makefile2 preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/kai/code/swrip && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-# Convenience name for target.
-src/CMakeFiles/mud.dir/rule:
-	cd /home/kai/code/swrip && $(MAKE) -f CMakeFiles/Makefile2 src/CMakeFiles/mud.dir/rule
-.PHONY : src/CMakeFiles/mud.dir/rule
+#=============================================================================
+# Target rules for targets named mud
 
-# Convenience name for target.
-mud: src/CMakeFiles/mud.dir/rule
-
+# Build rule for target.
+mud: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 mud
 .PHONY : mud
 
 # fast build rule for target.
 mud/fast:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/build
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/build
 .PHONY : mud/fast
 
 act_comm.o: act_comm.cpp.o
@@ -177,7 +175,7 @@ act_comm.o: act_comm.cpp.o
 
 # target to build an object file
 act_comm.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_comm.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_comm.cpp.o
 .PHONY : act_comm.cpp.o
 
 act_comm.i: act_comm.cpp.i
@@ -186,7 +184,7 @@ act_comm.i: act_comm.cpp.i
 
 # target to preprocess a source file
 act_comm.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_comm.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_comm.cpp.i
 .PHONY : act_comm.cpp.i
 
 act_comm.s: act_comm.cpp.s
@@ -195,7 +193,7 @@ act_comm.s: act_comm.cpp.s
 
 # target to generate assembly for a file
 act_comm.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_comm.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_comm.cpp.s
 .PHONY : act_comm.cpp.s
 
 act_info.o: act_info.cpp.o
@@ -204,7 +202,7 @@ act_info.o: act_info.cpp.o
 
 # target to build an object file
 act_info.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_info.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_info.cpp.o
 .PHONY : act_info.cpp.o
 
 act_info.i: act_info.cpp.i
@@ -213,7 +211,7 @@ act_info.i: act_info.cpp.i
 
 # target to preprocess a source file
 act_info.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_info.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_info.cpp.i
 .PHONY : act_info.cpp.i
 
 act_info.s: act_info.cpp.s
@@ -222,7 +220,7 @@ act_info.s: act_info.cpp.s
 
 # target to generate assembly for a file
 act_info.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_info.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_info.cpp.s
 .PHONY : act_info.cpp.s
 
 act_move.o: act_move.cpp.o
@@ -231,7 +229,7 @@ act_move.o: act_move.cpp.o
 
 # target to build an object file
 act_move.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_move.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_move.cpp.o
 .PHONY : act_move.cpp.o
 
 act_move.i: act_move.cpp.i
@@ -240,7 +238,7 @@ act_move.i: act_move.cpp.i
 
 # target to preprocess a source file
 act_move.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_move.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_move.cpp.i
 .PHONY : act_move.cpp.i
 
 act_move.s: act_move.cpp.s
@@ -249,7 +247,7 @@ act_move.s: act_move.cpp.s
 
 # target to generate assembly for a file
 act_move.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_move.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_move.cpp.s
 .PHONY : act_move.cpp.s
 
 act_obj.o: act_obj.cpp.o
@@ -258,7 +256,7 @@ act_obj.o: act_obj.cpp.o
 
 # target to build an object file
 act_obj.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_obj.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_obj.cpp.o
 .PHONY : act_obj.cpp.o
 
 act_obj.i: act_obj.cpp.i
@@ -267,7 +265,7 @@ act_obj.i: act_obj.cpp.i
 
 # target to preprocess a source file
 act_obj.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_obj.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_obj.cpp.i
 .PHONY : act_obj.cpp.i
 
 act_obj.s: act_obj.cpp.s
@@ -276,7 +274,7 @@ act_obj.s: act_obj.cpp.s
 
 # target to generate assembly for a file
 act_obj.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_obj.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_obj.cpp.s
 .PHONY : act_obj.cpp.s
 
 act_wiz.o: act_wiz.cpp.o
@@ -285,7 +283,7 @@ act_wiz.o: act_wiz.cpp.o
 
 # target to build an object file
 act_wiz.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_wiz.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_wiz.cpp.o
 .PHONY : act_wiz.cpp.o
 
 act_wiz.i: act_wiz.cpp.i
@@ -294,7 +292,7 @@ act_wiz.i: act_wiz.cpp.i
 
 # target to preprocess a source file
 act_wiz.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_wiz.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_wiz.cpp.i
 .PHONY : act_wiz.cpp.i
 
 act_wiz.s: act_wiz.cpp.s
@@ -303,7 +301,7 @@ act_wiz.s: act_wiz.cpp.s
 
 # target to generate assembly for a file
 act_wiz.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/act_wiz.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/act_wiz.cpp.s
 .PHONY : act_wiz.cpp.s
 
 alias.o: alias.cpp.o
@@ -312,7 +310,7 @@ alias.o: alias.cpp.o
 
 # target to build an object file
 alias.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/alias.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/alias.cpp.o
 .PHONY : alias.cpp.o
 
 alias.i: alias.cpp.i
@@ -321,7 +319,7 @@ alias.i: alias.cpp.i
 
 # target to preprocess a source file
 alias.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/alias.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/alias.cpp.i
 .PHONY : alias.cpp.i
 
 alias.s: alias.cpp.s
@@ -330,7 +328,7 @@ alias.s: alias.cpp.s
 
 # target to generate assembly for a file
 alias.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/alias.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/alias.cpp.s
 .PHONY : alias.cpp.s
 
 area.o: area.cpp.o
@@ -339,7 +337,7 @@ area.o: area.cpp.o
 
 # target to build an object file
 area.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/area.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/area.cpp.o
 .PHONY : area.cpp.o
 
 area.i: area.cpp.i
@@ -348,7 +346,7 @@ area.i: area.cpp.i
 
 # target to preprocess a source file
 area.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/area.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/area.cpp.i
 .PHONY : area.cpp.i
 
 area.s: area.cpp.s
@@ -357,7 +355,7 @@ area.s: area.cpp.s
 
 # target to generate assembly for a file
 area.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/area.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/area.cpp.s
 .PHONY : area.cpp.s
 
 arena.o: arena.cpp.o
@@ -366,7 +364,7 @@ arena.o: arena.cpp.o
 
 # target to build an object file
 arena.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/arena.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/arena.cpp.o
 .PHONY : arena.cpp.o
 
 arena.i: arena.cpp.i
@@ -375,7 +373,7 @@ arena.i: arena.cpp.i
 
 # target to preprocess a source file
 arena.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/arena.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/arena.cpp.i
 .PHONY : arena.cpp.i
 
 arena.s: arena.cpp.s
@@ -384,7 +382,7 @@ arena.s: arena.cpp.s
 
 # target to generate assembly for a file
 arena.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/arena.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/arena.cpp.s
 .PHONY : arena.cpp.s
 
 badname.o: badname.cpp.o
@@ -393,7 +391,7 @@ badname.o: badname.cpp.o
 
 # target to build an object file
 badname.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/badname.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/badname.cpp.o
 .PHONY : badname.cpp.o
 
 badname.i: badname.cpp.i
@@ -402,7 +400,7 @@ badname.i: badname.cpp.i
 
 # target to preprocess a source file
 badname.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/badname.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/badname.cpp.i
 .PHONY : badname.cpp.i
 
 badname.s: badname.cpp.s
@@ -411,7 +409,7 @@ badname.s: badname.cpp.s
 
 # target to generate assembly for a file
 badname.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/badname.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/badname.cpp.s
 .PHONY : badname.cpp.s
 
 ban.o: ban.cpp.o
@@ -420,7 +418,7 @@ ban.o: ban.cpp.o
 
 # target to build an object file
 ban.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/ban.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/ban.cpp.o
 .PHONY : ban.cpp.o
 
 ban.i: ban.cpp.i
@@ -429,7 +427,7 @@ ban.i: ban.cpp.i
 
 # target to preprocess a source file
 ban.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/ban.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/ban.cpp.i
 .PHONY : ban.cpp.i
 
 ban.s: ban.cpp.s
@@ -438,7 +436,7 @@ ban.s: ban.cpp.s
 
 # target to generate assembly for a file
 ban.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/ban.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/ban.cpp.s
 .PHONY : ban.cpp.s
 
 board.o: board.cpp.o
@@ -447,7 +445,7 @@ board.o: board.cpp.o
 
 # target to build an object file
 board.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/board.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/board.cpp.o
 .PHONY : board.cpp.o
 
 board.i: board.cpp.i
@@ -456,7 +454,7 @@ board.i: board.cpp.i
 
 # target to preprocess a source file
 board.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/board.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/board.cpp.i
 .PHONY : board.cpp.i
 
 board.s: board.cpp.s
@@ -465,7 +463,7 @@ board.s: board.cpp.s
 
 # target to generate assembly for a file
 board.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/board.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/board.cpp.s
 .PHONY : board.cpp.s
 
 bounty.o: bounty.cpp.o
@@ -474,7 +472,7 @@ bounty.o: bounty.cpp.o
 
 # target to build an object file
 bounty.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/bounty.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/bounty.cpp.o
 .PHONY : bounty.cpp.o
 
 bounty.i: bounty.cpp.i
@@ -483,7 +481,7 @@ bounty.i: bounty.cpp.i
 
 # target to preprocess a source file
 bounty.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/bounty.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/bounty.cpp.i
 .PHONY : bounty.cpp.i
 
 bounty.s: bounty.cpp.s
@@ -492,7 +490,7 @@ bounty.s: bounty.cpp.s
 
 # target to generate assembly for a file
 bounty.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/bounty.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/bounty.cpp.s
 .PHONY : bounty.cpp.s
 
 build.o: build.cpp.o
@@ -501,7 +499,7 @@ build.o: build.cpp.o
 
 # target to build an object file
 build.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/build.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/build.cpp.o
 .PHONY : build.cpp.o
 
 build.i: build.cpp.i
@@ -510,7 +508,7 @@ build.i: build.cpp.i
 
 # target to preprocess a source file
 build.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/build.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/build.cpp.i
 .PHONY : build.cpp.i
 
 build.s: build.cpp.s
@@ -519,7 +517,7 @@ build.s: build.cpp.s
 
 # target to generate assembly for a file
 build.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/build.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/build.cpp.s
 .PHONY : build.cpp.s
 
 character.o: character.cpp.o
@@ -528,7 +526,7 @@ character.o: character.cpp.o
 
 # target to build an object file
 character.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/character.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/character.cpp.o
 .PHONY : character.cpp.o
 
 character.i: character.cpp.i
@@ -537,7 +535,7 @@ character.i: character.cpp.i
 
 # target to preprocess a source file
 character.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/character.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/character.cpp.i
 .PHONY : character.cpp.i
 
 character.s: character.cpp.s
@@ -546,7 +544,7 @@ character.s: character.cpp.s
 
 # target to generate assembly for a file
 character.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/character.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/character.cpp.s
 .PHONY : character.cpp.s
 
 clan.o: clan.cpp.o
@@ -555,7 +553,7 @@ clan.o: clan.cpp.o
 
 # target to build an object file
 clan.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/clan.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/clan.cpp.o
 .PHONY : clan.cpp.o
 
 clan.i: clan.cpp.i
@@ -564,7 +562,7 @@ clan.i: clan.cpp.i
 
 # target to preprocess a source file
 clan.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/clan.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/clan.cpp.i
 .PHONY : clan.cpp.i
 
 clan.s: clan.cpp.s
@@ -573,7 +571,7 @@ clan.s: clan.cpp.s
 
 # target to generate assembly for a file
 clan.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/clan.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/clan.cpp.s
 .PHONY : clan.cpp.s
 
 comm.o: comm.cpp.o
@@ -582,7 +580,7 @@ comm.o: comm.cpp.o
 
 # target to build an object file
 comm.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/comm.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/comm.cpp.o
 .PHONY : comm.cpp.o
 
 comm.i: comm.cpp.i
@@ -591,7 +589,7 @@ comm.i: comm.cpp.i
 
 # target to preprocess a source file
 comm.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/comm.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/comm.cpp.i
 .PHONY : comm.cpp.i
 
 comm.s: comm.cpp.s
@@ -600,7 +598,7 @@ comm.s: comm.cpp.s
 
 # target to generate assembly for a file
 comm.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/comm.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/comm.cpp.s
 .PHONY : comm.cpp.s
 
 command.o: command.cpp.o
@@ -609,7 +607,7 @@ command.o: command.cpp.o
 
 # target to build an object file
 command.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/command.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/command.cpp.o
 .PHONY : command.cpp.o
 
 command.i: command.cpp.i
@@ -618,7 +616,7 @@ command.i: command.cpp.i
 
 # target to preprocess a source file
 command.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/command.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/command.cpp.i
 .PHONY : command.cpp.i
 
 command.s: command.cpp.s
@@ -627,7 +625,7 @@ command.s: command.cpp.s
 
 # target to generate assembly for a file
 command.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/command.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/command.cpp.s
 .PHONY : command.cpp.s
 
 commands/aassign.o: commands/aassign.cpp.o
@@ -636,7 +634,7 @@ commands/aassign.o: commands/aassign.cpp.o
 
 # target to build an object file
 commands/aassign.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/aassign.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/aassign.cpp.o
 .PHONY : commands/aassign.cpp.o
 
 commands/aassign.i: commands/aassign.cpp.i
@@ -645,7 +643,7 @@ commands/aassign.i: commands/aassign.cpp.i
 
 # target to preprocess a source file
 commands/aassign.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/aassign.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/aassign.cpp.i
 .PHONY : commands/aassign.cpp.i
 
 commands/aassign.s: commands/aassign.cpp.s
@@ -654,7 +652,7 @@ commands/aassign.s: commands/aassign.cpp.s
 
 # target to generate assembly for a file
 commands/aassign.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/aassign.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/aassign.cpp.s
 .PHONY : commands/aassign.cpp.s
 
 commands/accelerate.o: commands/accelerate.cpp.o
@@ -663,7 +661,7 @@ commands/accelerate.o: commands/accelerate.cpp.o
 
 # target to build an object file
 commands/accelerate.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/accelerate.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/accelerate.cpp.o
 .PHONY : commands/accelerate.cpp.o
 
 commands/accelerate.i: commands/accelerate.cpp.i
@@ -672,7 +670,7 @@ commands/accelerate.i: commands/accelerate.cpp.i
 
 # target to preprocess a source file
 commands/accelerate.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/accelerate.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/accelerate.cpp.i
 .PHONY : commands/accelerate.cpp.i
 
 commands/accelerate.s: commands/accelerate.cpp.s
@@ -681,7 +679,7 @@ commands/accelerate.s: commands/accelerate.cpp.s
 
 # target to generate assembly for a file
 commands/accelerate.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/accelerate.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/accelerate.cpp.s
 .PHONY : commands/accelerate.cpp.s
 
 commands/accept.o: commands/accept.cpp.o
@@ -690,7 +688,7 @@ commands/accept.o: commands/accept.cpp.o
 
 # target to build an object file
 commands/accept.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/accept.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/accept.cpp.o
 .PHONY : commands/accept.cpp.o
 
 commands/accept.i: commands/accept.cpp.i
@@ -699,7 +697,7 @@ commands/accept.i: commands/accept.cpp.i
 
 # target to preprocess a source file
 commands/accept.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/accept.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/accept.cpp.i
 .PHONY : commands/accept.cpp.i
 
 commands/accept.s: commands/accept.cpp.s
@@ -708,7 +706,7 @@ commands/accept.s: commands/accept.cpp.s
 
 # target to generate assembly for a file
 commands/accept.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/accept.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/accept.cpp.s
 .PHONY : commands/accept.cpp.s
 
 commands/addbounty.o: commands/addbounty.cpp.o
@@ -717,7 +715,7 @@ commands/addbounty.o: commands/addbounty.cpp.o
 
 # target to build an object file
 commands/addbounty.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addbounty.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addbounty.cpp.o
 .PHONY : commands/addbounty.cpp.o
 
 commands/addbounty.i: commands/addbounty.cpp.i
@@ -726,7 +724,7 @@ commands/addbounty.i: commands/addbounty.cpp.i
 
 # target to preprocess a source file
 commands/addbounty.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addbounty.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addbounty.cpp.i
 .PHONY : commands/addbounty.cpp.i
 
 commands/addbounty.s: commands/addbounty.cpp.s
@@ -735,7 +733,7 @@ commands/addbounty.s: commands/addbounty.cpp.s
 
 # target to generate assembly for a file
 commands/addbounty.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addbounty.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addbounty.cpp.s
 .PHONY : commands/addbounty.cpp.s
 
 commands/addpatrol.o: commands/addpatrol.cpp.o
@@ -744,7 +742,7 @@ commands/addpatrol.o: commands/addpatrol.cpp.o
 
 # target to build an object file
 commands/addpatrol.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addpatrol.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addpatrol.cpp.o
 .PHONY : commands/addpatrol.cpp.o
 
 commands/addpatrol.i: commands/addpatrol.cpp.i
@@ -753,7 +751,7 @@ commands/addpatrol.i: commands/addpatrol.cpp.i
 
 # target to preprocess a source file
 commands/addpatrol.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addpatrol.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addpatrol.cpp.i
 .PHONY : commands/addpatrol.cpp.i
 
 commands/addpatrol.s: commands/addpatrol.cpp.s
@@ -762,7 +760,7 @@ commands/addpatrol.s: commands/addpatrol.cpp.s
 
 # target to generate assembly for a file
 commands/addpatrol.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addpatrol.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addpatrol.cpp.s
 .PHONY : commands/addpatrol.cpp.s
 
 commands/addpilot.o: commands/addpilot.cpp.o
@@ -771,7 +769,7 @@ commands/addpilot.o: commands/addpilot.cpp.o
 
 # target to build an object file
 commands/addpilot.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addpilot.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addpilot.cpp.o
 .PHONY : commands/addpilot.cpp.o
 
 commands/addpilot.i: commands/addpilot.cpp.i
@@ -780,7 +778,7 @@ commands/addpilot.i: commands/addpilot.cpp.i
 
 # target to preprocess a source file
 commands/addpilot.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addpilot.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addpilot.cpp.i
 .PHONY : commands/addpilot.cpp.i
 
 commands/addpilot.s: commands/addpilot.cpp.s
@@ -789,7 +787,7 @@ commands/addpilot.s: commands/addpilot.cpp.s
 
 # target to generate assembly for a file
 commands/addpilot.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addpilot.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addpilot.cpp.s
 .PHONY : commands/addpilot.cpp.s
 
 commands/addresident.o: commands/addresident.cpp.o
@@ -798,7 +796,7 @@ commands/addresident.o: commands/addresident.cpp.o
 
 # target to build an object file
 commands/addresident.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addresident.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addresident.cpp.o
 .PHONY : commands/addresident.cpp.o
 
 commands/addresident.i: commands/addresident.cpp.i
@@ -807,7 +805,7 @@ commands/addresident.i: commands/addresident.cpp.i
 
 # target to preprocess a source file
 commands/addresident.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addresident.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addresident.cpp.i
 .PHONY : commands/addresident.cpp.i
 
 commands/addresident.s: commands/addresident.cpp.s
@@ -816,7 +814,7 @@ commands/addresident.s: commands/addresident.cpp.s
 
 # target to generate assembly for a file
 commands/addresident.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addresident.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addresident.cpp.s
 .PHONY : commands/addresident.cpp.s
 
 commands/addsalary.o: commands/addsalary.cpp.o
@@ -825,7 +823,7 @@ commands/addsalary.o: commands/addsalary.cpp.o
 
 # target to build an object file
 commands/addsalary.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addsalary.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addsalary.cpp.o
 .PHONY : commands/addsalary.cpp.o
 
 commands/addsalary.i: commands/addsalary.cpp.i
@@ -834,7 +832,7 @@ commands/addsalary.i: commands/addsalary.cpp.i
 
 # target to preprocess a source file
 commands/addsalary.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addsalary.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addsalary.cpp.i
 .PHONY : commands/addsalary.cpp.i
 
 commands/addsalary.s: commands/addsalary.cpp.s
@@ -843,7 +841,7 @@ commands/addsalary.s: commands/addsalary.cpp.s
 
 # target to generate assembly for a file
 commands/addsalary.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/addsalary.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/addsalary.cpp.s
 .PHONY : commands/addsalary.cpp.s
 
 commands/adjusttractorbeam.o: commands/adjusttractorbeam.cpp.o
@@ -852,7 +850,7 @@ commands/adjusttractorbeam.o: commands/adjusttractorbeam.cpp.o
 
 # target to build an object file
 commands/adjusttractorbeam.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/adjusttractorbeam.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/adjusttractorbeam.cpp.o
 .PHONY : commands/adjusttractorbeam.cpp.o
 
 commands/adjusttractorbeam.i: commands/adjusttractorbeam.cpp.i
@@ -861,7 +859,7 @@ commands/adjusttractorbeam.i: commands/adjusttractorbeam.cpp.i
 
 # target to preprocess a source file
 commands/adjusttractorbeam.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/adjusttractorbeam.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/adjusttractorbeam.cpp.i
 .PHONY : commands/adjusttractorbeam.cpp.i
 
 commands/adjusttractorbeam.s: commands/adjusttractorbeam.cpp.s
@@ -870,7 +868,7 @@ commands/adjusttractorbeam.s: commands/adjusttractorbeam.cpp.s
 
 # target to generate assembly for a file
 commands/adjusttractorbeam.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/adjusttractorbeam.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/adjusttractorbeam.cpp.s
 .PHONY : commands/adjusttractorbeam.cpp.s
 
 commands/advance.o: commands/advance.cpp.o
@@ -879,7 +877,7 @@ commands/advance.o: commands/advance.cpp.o
 
 # target to build an object file
 commands/advance.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/advance.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/advance.cpp.o
 .PHONY : commands/advance.cpp.o
 
 commands/advance.i: commands/advance.cpp.i
@@ -888,7 +886,7 @@ commands/advance.i: commands/advance.cpp.i
 
 # target to preprocess a source file
 commands/advance.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/advance.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/advance.cpp.i
 .PHONY : commands/advance.cpp.i
 
 commands/advance.s: commands/advance.cpp.s
@@ -897,7 +895,7 @@ commands/advance.s: commands/advance.cpp.s
 
 # target to generate assembly for a file
 commands/advance.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/advance.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/advance.cpp.s
 .PHONY : commands/advance.cpp.s
 
 commands/affected.o: commands/affected.cpp.o
@@ -906,7 +904,7 @@ commands/affected.o: commands/affected.cpp.o
 
 # target to build an object file
 commands/affected.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/affected.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/affected.cpp.o
 .PHONY : commands/affected.cpp.o
 
 commands/affected.i: commands/affected.cpp.i
@@ -915,7 +913,7 @@ commands/affected.i: commands/affected.cpp.i
 
 # target to preprocess a source file
 commands/affected.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/affected.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/affected.cpp.i
 .PHONY : commands/affected.cpp.i
 
 commands/affected.s: commands/affected.cpp.s
@@ -924,7 +922,7 @@ commands/affected.s: commands/affected.cpp.s
 
 # target to generate assembly for a file
 commands/affected.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/affected.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/affected.cpp.s
 .PHONY : commands/affected.cpp.s
 
 commands/afk.o: commands/afk.cpp.o
@@ -933,7 +931,7 @@ commands/afk.o: commands/afk.cpp.o
 
 # target to build an object file
 commands/afk.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/afk.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/afk.cpp.o
 .PHONY : commands/afk.cpp.o
 
 commands/afk.i: commands/afk.cpp.i
@@ -942,7 +940,7 @@ commands/afk.i: commands/afk.cpp.i
 
 # target to preprocess a source file
 commands/afk.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/afk.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/afk.cpp.i
 .PHONY : commands/afk.cpp.i
 
 commands/afk.s: commands/afk.cpp.s
@@ -951,7 +949,7 @@ commands/afk.s: commands/afk.cpp.s
 
 # target to generate assembly for a file
 commands/afk.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/afk.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/afk.cpp.s
 .PHONY : commands/afk.cpp.s
 
 commands/ahall.o: commands/ahall.cpp.o
@@ -960,7 +958,7 @@ commands/ahall.o: commands/ahall.cpp.o
 
 # target to build an object file
 commands/ahall.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ahall.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ahall.cpp.o
 .PHONY : commands/ahall.cpp.o
 
 commands/ahall.i: commands/ahall.cpp.i
@@ -969,7 +967,7 @@ commands/ahall.i: commands/ahall.cpp.i
 
 # target to preprocess a source file
 commands/ahall.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ahall.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ahall.cpp.i
 .PHONY : commands/ahall.cpp.i
 
 commands/ahall.s: commands/ahall.cpp.s
@@ -978,7 +976,7 @@ commands/ahall.s: commands/ahall.cpp.s
 
 # target to generate assembly for a file
 commands/ahall.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ahall.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ahall.cpp.s
 .PHONY : commands/ahall.cpp.s
 
 commands/aid.o: commands/aid.cpp.o
@@ -987,7 +985,7 @@ commands/aid.o: commands/aid.cpp.o
 
 # target to build an object file
 commands/aid.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/aid.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/aid.cpp.o
 .PHONY : commands/aid.cpp.o
 
 commands/aid.i: commands/aid.cpp.i
@@ -996,7 +994,7 @@ commands/aid.i: commands/aid.cpp.i
 
 # target to preprocess a source file
 commands/aid.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/aid.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/aid.cpp.i
 .PHONY : commands/aid.cpp.i
 
 commands/aid.s: commands/aid.cpp.s
@@ -1005,7 +1003,7 @@ commands/aid.s: commands/aid.cpp.s
 
 # target to generate assembly for a file
 commands/aid.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/aid.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/aid.cpp.s
 .PHONY : commands/aid.cpp.s
 
 commands/alias.o: commands/alias.cpp.o
@@ -1014,7 +1012,7 @@ commands/alias.o: commands/alias.cpp.o
 
 # target to build an object file
 commands/alias.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/alias.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/alias.cpp.o
 .PHONY : commands/alias.cpp.o
 
 commands/alias.i: commands/alias.cpp.i
@@ -1023,7 +1021,7 @@ commands/alias.i: commands/alias.cpp.i
 
 # target to preprocess a source file
 commands/alias.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/alias.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/alias.cpp.i
 .PHONY : commands/alias.cpp.i
 
 commands/alias.s: commands/alias.cpp.s
@@ -1032,7 +1030,7 @@ commands/alias.s: commands/alias.cpp.s
 
 # target to generate assembly for a file
 commands/alias.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/alias.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/alias.cpp.s
 .PHONY : commands/alias.cpp.s
 
 commands/allclantalk.o: commands/allclantalk.cpp.o
@@ -1041,7 +1039,7 @@ commands/allclantalk.o: commands/allclantalk.cpp.o
 
 # target to build an object file
 commands/allclantalk.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/allclantalk.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/allclantalk.cpp.o
 .PHONY : commands/allclantalk.cpp.o
 
 commands/allclantalk.i: commands/allclantalk.cpp.i
@@ -1050,7 +1048,7 @@ commands/allclantalk.i: commands/allclantalk.cpp.i
 
 # target to preprocess a source file
 commands/allclantalk.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/allclantalk.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/allclantalk.cpp.i
 .PHONY : commands/allclantalk.cpp.i
 
 commands/allclantalk.s: commands/allclantalk.cpp.s
@@ -1059,7 +1057,7 @@ commands/allclantalk.s: commands/allclantalk.cpp.s
 
 # target to generate assembly for a file
 commands/allclantalk.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/allclantalk.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/allclantalk.cpp.s
 .PHONY : commands/allclantalk.cpp.s
 
 commands/allow.o: commands/allow.cpp.o
@@ -1068,7 +1066,7 @@ commands/allow.o: commands/allow.cpp.o
 
 # target to build an object file
 commands/allow.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/allow.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/allow.cpp.o
 .PHONY : commands/allow.cpp.o
 
 commands/allow.i: commands/allow.cpp.i
@@ -1077,7 +1075,7 @@ commands/allow.i: commands/allow.cpp.i
 
 # target to preprocess a source file
 commands/allow.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/allow.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/allow.cpp.i
 .PHONY : commands/allow.cpp.i
 
 commands/allow.s: commands/allow.cpp.s
@@ -1086,7 +1084,7 @@ commands/allow.s: commands/allow.cpp.s
 
 # target to generate assembly for a file
 commands/allow.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/allow.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/allow.cpp.s
 .PHONY : commands/allow.cpp.s
 
 commands/allships.o: commands/allships.cpp.o
@@ -1095,7 +1093,7 @@ commands/allships.o: commands/allships.cpp.o
 
 # target to build an object file
 commands/allships.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/allships.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/allships.cpp.o
 .PHONY : commands/allships.cpp.o
 
 commands/allships.i: commands/allships.cpp.i
@@ -1104,7 +1102,7 @@ commands/allships.i: commands/allships.cpp.i
 
 # target to preprocess a source file
 commands/allships.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/allships.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/allships.cpp.i
 .PHONY : commands/allships.cpp.i
 
 commands/allships.s: commands/allships.cpp.s
@@ -1113,7 +1111,7 @@ commands/allships.s: commands/allships.cpp.s
 
 # target to generate assembly for a file
 commands/allships.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/allships.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/allships.cpp.s
 .PHONY : commands/allships.cpp.s
 
 commands/allspeeders.o: commands/allspeeders.cpp.o
@@ -1122,7 +1120,7 @@ commands/allspeeders.o: commands/allspeeders.cpp.o
 
 # target to build an object file
 commands/allspeeders.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/allspeeders.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/allspeeders.cpp.o
 .PHONY : commands/allspeeders.cpp.o
 
 commands/allspeeders.i: commands/allspeeders.cpp.i
@@ -1131,7 +1129,7 @@ commands/allspeeders.i: commands/allspeeders.cpp.i
 
 # target to preprocess a source file
 commands/allspeeders.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/allspeeders.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/allspeeders.cpp.i
 .PHONY : commands/allspeeders.cpp.i
 
 commands/allspeeders.s: commands/allspeeders.cpp.s
@@ -1140,7 +1138,7 @@ commands/allspeeders.s: commands/allspeeders.cpp.s
 
 # target to generate assembly for a file
 commands/allspeeders.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/allspeeders.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/allspeeders.cpp.s
 .PHONY : commands/allspeeders.cpp.s
 
 commands/ammo.o: commands/ammo.cpp.o
@@ -1149,7 +1147,7 @@ commands/ammo.o: commands/ammo.cpp.o
 
 # target to build an object file
 commands/ammo.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ammo.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ammo.cpp.o
 .PHONY : commands/ammo.cpp.o
 
 commands/ammo.i: commands/ammo.cpp.i
@@ -1158,7 +1156,7 @@ commands/ammo.i: commands/ammo.cpp.i
 
 # target to preprocess a source file
 commands/ammo.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ammo.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ammo.cpp.i
 .PHONY : commands/ammo.cpp.i
 
 commands/ammo.s: commands/ammo.cpp.s
@@ -1167,7 +1165,7 @@ commands/ammo.s: commands/ammo.cpp.s
 
 # target to generate assembly for a file
 commands/ammo.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ammo.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ammo.cpp.s
 .PHONY : commands/ammo.cpp.s
 
 commands/ansi.o: commands/ansi.cpp.o
@@ -1176,7 +1174,7 @@ commands/ansi.o: commands/ansi.cpp.o
 
 # target to build an object file
 commands/ansi.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ansi.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ansi.cpp.o
 .PHONY : commands/ansi.cpp.o
 
 commands/ansi.i: commands/ansi.cpp.i
@@ -1185,7 +1183,7 @@ commands/ansi.i: commands/ansi.cpp.i
 
 # target to preprocess a source file
 commands/ansi.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ansi.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ansi.cpp.i
 .PHONY : commands/ansi.cpp.i
 
 commands/ansi.s: commands/ansi.cpp.s
@@ -1194,7 +1192,7 @@ commands/ansi.s: commands/ansi.cpp.s
 
 # target to generate assembly for a file
 commands/ansi.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ansi.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ansi.cpp.s
 .PHONY : commands/ansi.cpp.s
 
 commands/answer.o: commands/answer.cpp.o
@@ -1203,7 +1201,7 @@ commands/answer.o: commands/answer.cpp.o
 
 # target to build an object file
 commands/answer.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/answer.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/answer.cpp.o
 .PHONY : commands/answer.cpp.o
 
 commands/answer.i: commands/answer.cpp.i
@@ -1212,7 +1210,7 @@ commands/answer.i: commands/answer.cpp.i
 
 # target to preprocess a source file
 commands/answer.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/answer.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/answer.cpp.i
 .PHONY : commands/answer.cpp.i
 
 commands/answer.s: commands/answer.cpp.s
@@ -1221,7 +1219,7 @@ commands/answer.s: commands/answer.cpp.s
 
 # target to generate assembly for a file
 commands/answer.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/answer.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/answer.cpp.s
 .PHONY : commands/answer.cpp.s
 
 commands/apply.o: commands/apply.cpp.o
@@ -1230,7 +1228,7 @@ commands/apply.o: commands/apply.cpp.o
 
 # target to build an object file
 commands/apply.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/apply.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/apply.cpp.o
 .PHONY : commands/apply.cpp.o
 
 commands/apply.i: commands/apply.cpp.i
@@ -1239,7 +1237,7 @@ commands/apply.i: commands/apply.cpp.i
 
 # target to preprocess a source file
 commands/apply.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/apply.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/apply.cpp.i
 .PHONY : commands/apply.cpp.i
 
 commands/apply.s: commands/apply.cpp.s
@@ -1248,7 +1246,7 @@ commands/apply.s: commands/apply.cpp.s
 
 # target to generate assembly for a file
 commands/apply.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/apply.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/apply.cpp.s
 .PHONY : commands/apply.cpp.s
 
 commands/appoint.o: commands/appoint.cpp.o
@@ -1257,7 +1255,7 @@ commands/appoint.o: commands/appoint.cpp.o
 
 # target to build an object file
 commands/appoint.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/appoint.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/appoint.cpp.o
 .PHONY : commands/appoint.cpp.o
 
 commands/appoint.i: commands/appoint.cpp.i
@@ -1266,7 +1264,7 @@ commands/appoint.i: commands/appoint.cpp.i
 
 # target to preprocess a source file
 commands/appoint.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/appoint.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/appoint.cpp.i
 .PHONY : commands/appoint.cpp.i
 
 commands/appoint.s: commands/appoint.cpp.s
@@ -1275,7 +1273,7 @@ commands/appoint.s: commands/appoint.cpp.s
 
 # target to generate assembly for a file
 commands/appoint.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/appoint.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/appoint.cpp.s
 .PHONY : commands/appoint.cpp.s
 
 commands/appraise.o: commands/appraise.cpp.o
@@ -1284,7 +1282,7 @@ commands/appraise.o: commands/appraise.cpp.o
 
 # target to build an object file
 commands/appraise.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/appraise.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/appraise.cpp.o
 .PHONY : commands/appraise.cpp.o
 
 commands/appraise.i: commands/appraise.cpp.i
@@ -1293,7 +1291,7 @@ commands/appraise.i: commands/appraise.cpp.i
 
 # target to preprocess a source file
 commands/appraise.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/appraise.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/appraise.cpp.i
 .PHONY : commands/appraise.cpp.i
 
 commands/appraise.s: commands/appraise.cpp.s
@@ -1302,7 +1300,7 @@ commands/appraise.s: commands/appraise.cpp.s
 
 # target to generate assembly for a file
 commands/appraise.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/appraise.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/appraise.cpp.s
 .PHONY : commands/appraise.cpp.s
 
 commands/areas.o: commands/areas.cpp.o
@@ -1311,7 +1309,7 @@ commands/areas.o: commands/areas.cpp.o
 
 # target to build an object file
 commands/areas.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/areas.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/areas.cpp.o
 .PHONY : commands/areas.cpp.o
 
 commands/areas.i: commands/areas.cpp.i
@@ -1320,7 +1318,7 @@ commands/areas.i: commands/areas.cpp.i
 
 # target to preprocess a source file
 commands/areas.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/areas.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/areas.cpp.i
 .PHONY : commands/areas.cpp.i
 
 commands/areas.s: commands/areas.cpp.s
@@ -1329,7 +1327,7 @@ commands/areas.s: commands/areas.cpp.s
 
 # target to generate assembly for a file
 commands/areas.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/areas.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/areas.cpp.s
 .PHONY : commands/areas.cpp.s
 
 commands/arena.o: commands/arena.cpp.o
@@ -1338,7 +1336,7 @@ commands/arena.o: commands/arena.cpp.o
 
 # target to build an object file
 commands/arena.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/arena.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/arena.cpp.o
 .PHONY : commands/arena.cpp.o
 
 commands/arena.i: commands/arena.cpp.i
@@ -1347,7 +1345,7 @@ commands/arena.i: commands/arena.cpp.i
 
 # target to preprocess a source file
 commands/arena.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/arena.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/arena.cpp.i
 .PHONY : commands/arena.cpp.i
 
 commands/arena.s: commands/arena.cpp.s
@@ -1356,7 +1354,7 @@ commands/arena.s: commands/arena.cpp.s
 
 # target to generate assembly for a file
 commands/arena.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/arena.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/arena.cpp.s
 .PHONY : commands/arena.cpp.s
 
 commands/arm.o: commands/arm.cpp.o
@@ -1365,7 +1363,7 @@ commands/arm.o: commands/arm.cpp.o
 
 # target to build an object file
 commands/arm.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/arm.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/arm.cpp.o
 .PHONY : commands/arm.cpp.o
 
 commands/arm.i: commands/arm.cpp.i
@@ -1374,7 +1372,7 @@ commands/arm.i: commands/arm.cpp.i
 
 # target to preprocess a source file
 commands/arm.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/arm.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/arm.cpp.i
 .PHONY : commands/arm.cpp.i
 
 commands/arm.s: commands/arm.cpp.s
@@ -1383,7 +1381,7 @@ commands/arm.s: commands/arm.cpp.s
 
 # target to generate assembly for a file
 commands/arm.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/arm.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/arm.cpp.s
 .PHONY : commands/arm.cpp.s
 
 commands/aset.o: commands/aset.cpp.o
@@ -1392,7 +1390,7 @@ commands/aset.o: commands/aset.cpp.o
 
 # target to build an object file
 commands/aset.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/aset.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/aset.cpp.o
 .PHONY : commands/aset.cpp.o
 
 commands/aset.i: commands/aset.cpp.i
@@ -1401,7 +1399,7 @@ commands/aset.i: commands/aset.cpp.i
 
 # target to preprocess a source file
 commands/aset.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/aset.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/aset.cpp.i
 .PHONY : commands/aset.cpp.i
 
 commands/aset.s: commands/aset.cpp.s
@@ -1410,7 +1408,7 @@ commands/aset.s: commands/aset.cpp.s
 
 # target to generate assembly for a file
 commands/aset.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/aset.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/aset.cpp.s
 .PHONY : commands/aset.cpp.s
 
 commands/ask.o: commands/ask.cpp.o
@@ -1419,7 +1417,7 @@ commands/ask.o: commands/ask.cpp.o
 
 # target to build an object file
 commands/ask.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ask.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ask.cpp.o
 .PHONY : commands/ask.cpp.o
 
 commands/ask.i: commands/ask.cpp.i
@@ -1428,7 +1426,7 @@ commands/ask.i: commands/ask.cpp.i
 
 # target to preprocess a source file
 commands/ask.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ask.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ask.cpp.i
 .PHONY : commands/ask.cpp.i
 
 commands/ask.s: commands/ask.cpp.s
@@ -1437,7 +1435,7 @@ commands/ask.s: commands/ask.cpp.s
 
 # target to generate assembly for a file
 commands/ask.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ask.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ask.cpp.s
 .PHONY : commands/ask.cpp.s
 
 commands/astat.o: commands/astat.cpp.o
@@ -1446,7 +1444,7 @@ commands/astat.o: commands/astat.cpp.o
 
 # target to build an object file
 commands/astat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/astat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/astat.cpp.o
 .PHONY : commands/astat.cpp.o
 
 commands/astat.i: commands/astat.cpp.i
@@ -1455,7 +1453,7 @@ commands/astat.i: commands/astat.cpp.i
 
 # target to preprocess a source file
 commands/astat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/astat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/astat.cpp.i
 .PHONY : commands/astat.cpp.i
 
 commands/astat.s: commands/astat.cpp.s
@@ -1464,7 +1462,7 @@ commands/astat.s: commands/astat.cpp.s
 
 # target to generate assembly for a file
 commands/astat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/astat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/astat.cpp.s
 .PHONY : commands/astat.cpp.s
 
 commands/at.o: commands/at.cpp.o
@@ -1473,7 +1471,7 @@ commands/at.o: commands/at.cpp.o
 
 # target to build an object file
 commands/at.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/at.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/at.cpp.o
 .PHONY : commands/at.cpp.o
 
 commands/at.i: commands/at.cpp.i
@@ -1482,7 +1480,7 @@ commands/at.i: commands/at.cpp.i
 
 # target to preprocess a source file
 commands/at.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/at.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/at.cpp.i
 .PHONY : commands/at.cpp.i
 
 commands/at.s: commands/at.cpp.s
@@ -1491,7 +1489,7 @@ commands/at.s: commands/at.cpp.s
 
 # target to generate assembly for a file
 commands/at.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/at.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/at.cpp.s
 .PHONY : commands/at.cpp.s
 
 commands/auction.o: commands/auction.cpp.o
@@ -1500,7 +1498,7 @@ commands/auction.o: commands/auction.cpp.o
 
 # target to build an object file
 commands/auction.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/auction.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/auction.cpp.o
 .PHONY : commands/auction.cpp.o
 
 commands/auction.i: commands/auction.cpp.i
@@ -1509,7 +1507,7 @@ commands/auction.i: commands/auction.cpp.i
 
 # target to preprocess a source file
 commands/auction.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/auction.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/auction.cpp.i
 .PHONY : commands/auction.cpp.i
 
 commands/auction.s: commands/auction.cpp.s
@@ -1518,7 +1516,7 @@ commands/auction.s: commands/auction.cpp.s
 
 # target to generate assembly for a file
 commands/auction.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/auction.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/auction.cpp.s
 .PHONY : commands/auction.cpp.s
 
 commands/authorize.o: commands/authorize.cpp.o
@@ -1527,7 +1525,7 @@ commands/authorize.o: commands/authorize.cpp.o
 
 # target to build an object file
 commands/authorize.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/authorize.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/authorize.cpp.o
 .PHONY : commands/authorize.cpp.o
 
 commands/authorize.i: commands/authorize.cpp.i
@@ -1536,7 +1534,7 @@ commands/authorize.i: commands/authorize.cpp.i
 
 # target to preprocess a source file
 commands/authorize.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/authorize.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/authorize.cpp.i
 .PHONY : commands/authorize.cpp.i
 
 commands/authorize.s: commands/authorize.cpp.s
@@ -1545,7 +1543,7 @@ commands/authorize.s: commands/authorize.cpp.s
 
 # target to generate assembly for a file
 commands/authorize.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/authorize.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/authorize.cpp.s
 .PHONY : commands/authorize.cpp.s
 
 commands/autopilot.o: commands/autopilot.cpp.o
@@ -1554,7 +1552,7 @@ commands/autopilot.o: commands/autopilot.cpp.o
 
 # target to build an object file
 commands/autopilot.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/autopilot.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/autopilot.cpp.o
 .PHONY : commands/autopilot.cpp.o
 
 commands/autopilot.i: commands/autopilot.cpp.i
@@ -1563,7 +1561,7 @@ commands/autopilot.i: commands/autopilot.cpp.i
 
 # target to preprocess a source file
 commands/autopilot.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/autopilot.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/autopilot.cpp.i
 .PHONY : commands/autopilot.cpp.i
 
 commands/autopilot.s: commands/autopilot.cpp.s
@@ -1572,7 +1570,7 @@ commands/autopilot.s: commands/autopilot.cpp.s
 
 # target to generate assembly for a file
 commands/autopilot.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/autopilot.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/autopilot.cpp.s
 .PHONY : commands/autopilot.cpp.s
 
 commands/autorecharge.o: commands/autorecharge.cpp.o
@@ -1581,7 +1579,7 @@ commands/autorecharge.o: commands/autorecharge.cpp.o
 
 # target to build an object file
 commands/autorecharge.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/autorecharge.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/autorecharge.cpp.o
 .PHONY : commands/autorecharge.cpp.o
 
 commands/autorecharge.i: commands/autorecharge.cpp.i
@@ -1590,7 +1588,7 @@ commands/autorecharge.i: commands/autorecharge.cpp.i
 
 # target to preprocess a source file
 commands/autorecharge.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/autorecharge.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/autorecharge.cpp.i
 .PHONY : commands/autorecharge.cpp.i
 
 commands/autorecharge.s: commands/autorecharge.cpp.s
@@ -1599,7 +1597,7 @@ commands/autorecharge.s: commands/autorecharge.cpp.s
 
 # target to generate assembly for a file
 commands/autorecharge.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/autorecharge.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/autorecharge.cpp.s
 .PHONY : commands/autorecharge.cpp.s
 
 commands/autotrack.o: commands/autotrack.cpp.o
@@ -1608,7 +1606,7 @@ commands/autotrack.o: commands/autotrack.cpp.o
 
 # target to build an object file
 commands/autotrack.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/autotrack.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/autotrack.cpp.o
 .PHONY : commands/autotrack.cpp.o
 
 commands/autotrack.i: commands/autotrack.cpp.i
@@ -1617,7 +1615,7 @@ commands/autotrack.i: commands/autotrack.cpp.i
 
 # target to preprocess a source file
 commands/autotrack.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/autotrack.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/autotrack.cpp.i
 .PHONY : commands/autotrack.cpp.i
 
 commands/autotrack.s: commands/autotrack.cpp.s
@@ -1626,7 +1624,7 @@ commands/autotrack.s: commands/autotrack.cpp.s
 
 # target to generate assembly for a file
 commands/autotrack.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/autotrack.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/autotrack.cpp.s
 .PHONY : commands/autotrack.cpp.s
 
 commands/avtalk.o: commands/avtalk.cpp.o
@@ -1635,7 +1633,7 @@ commands/avtalk.o: commands/avtalk.cpp.o
 
 # target to build an object file
 commands/avtalk.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/avtalk.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/avtalk.cpp.o
 .PHONY : commands/avtalk.cpp.o
 
 commands/avtalk.i: commands/avtalk.cpp.i
@@ -1644,7 +1642,7 @@ commands/avtalk.i: commands/avtalk.cpp.i
 
 # target to preprocess a source file
 commands/avtalk.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/avtalk.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/avtalk.cpp.i
 .PHONY : commands/avtalk.cpp.i
 
 commands/avtalk.s: commands/avtalk.cpp.s
@@ -1653,7 +1651,7 @@ commands/avtalk.s: commands/avtalk.cpp.s
 
 # target to generate assembly for a file
 commands/avtalk.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/avtalk.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/avtalk.cpp.s
 .PHONY : commands/avtalk.cpp.s
 
 commands/awho.o: commands/awho.cpp.o
@@ -1662,7 +1660,7 @@ commands/awho.o: commands/awho.cpp.o
 
 # target to build an object file
 commands/awho.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/awho.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/awho.cpp.o
 .PHONY : commands/awho.cpp.o
 
 commands/awho.i: commands/awho.cpp.i
@@ -1671,7 +1669,7 @@ commands/awho.i: commands/awho.cpp.i
 
 # target to preprocess a source file
 commands/awho.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/awho.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/awho.cpp.i
 .PHONY : commands/awho.cpp.i
 
 commands/awho.s: commands/awho.cpp.s
@@ -1680,7 +1678,7 @@ commands/awho.s: commands/awho.cpp.s
 
 # target to generate assembly for a file
 commands/awho.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/awho.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/awho.cpp.s
 .PHONY : commands/awho.cpp.s
 
 commands/backstab.o: commands/backstab.cpp.o
@@ -1689,7 +1687,7 @@ commands/backstab.o: commands/backstab.cpp.o
 
 # target to build an object file
 commands/backstab.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/backstab.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/backstab.cpp.o
 .PHONY : commands/backstab.cpp.o
 
 commands/backstab.i: commands/backstab.cpp.i
@@ -1698,7 +1696,7 @@ commands/backstab.i: commands/backstab.cpp.i
 
 # target to preprocess a source file
 commands/backstab.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/backstab.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/backstab.cpp.i
 .PHONY : commands/backstab.cpp.i
 
 commands/backstab.s: commands/backstab.cpp.s
@@ -1707,7 +1705,7 @@ commands/backstab.s: commands/backstab.cpp.s
 
 # target to generate assembly for a file
 commands/backstab.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/backstab.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/backstab.cpp.s
 .PHONY : commands/backstab.cpp.s
 
 commands/badname.o: commands/badname.cpp.o
@@ -1716,7 +1714,7 @@ commands/badname.o: commands/badname.cpp.o
 
 # target to build an object file
 commands/badname.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/badname.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/badname.cpp.o
 .PHONY : commands/badname.cpp.o
 
 commands/badname.i: commands/badname.cpp.i
@@ -1725,7 +1723,7 @@ commands/badname.i: commands/badname.cpp.i
 
 # target to preprocess a source file
 commands/badname.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/badname.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/badname.cpp.i
 .PHONY : commands/badname.cpp.i
 
 commands/badname.s: commands/badname.cpp.s
@@ -1734,7 +1732,7 @@ commands/badname.s: commands/badname.cpp.s
 
 # target to generate assembly for a file
 commands/badname.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/badname.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/badname.cpp.s
 .PHONY : commands/badname.cpp.s
 
 commands/balzhur.o: commands/balzhur.cpp.o
@@ -1743,7 +1741,7 @@ commands/balzhur.o: commands/balzhur.cpp.o
 
 # target to build an object file
 commands/balzhur.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/balzhur.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/balzhur.cpp.o
 .PHONY : commands/balzhur.cpp.o
 
 commands/balzhur.i: commands/balzhur.cpp.i
@@ -1752,7 +1750,7 @@ commands/balzhur.i: commands/balzhur.cpp.i
 
 # target to preprocess a source file
 commands/balzhur.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/balzhur.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/balzhur.cpp.i
 .PHONY : commands/balzhur.cpp.i
 
 commands/balzhur.s: commands/balzhur.cpp.s
@@ -1761,7 +1759,7 @@ commands/balzhur.s: commands/balzhur.cpp.s
 
 # target to generate assembly for a file
 commands/balzhur.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/balzhur.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/balzhur.cpp.s
 .PHONY : commands/balzhur.cpp.s
 
 commands/bamfin.o: commands/bamfin.cpp.o
@@ -1770,7 +1768,7 @@ commands/bamfin.o: commands/bamfin.cpp.o
 
 # target to build an object file
 commands/bamfin.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bamfin.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bamfin.cpp.o
 .PHONY : commands/bamfin.cpp.o
 
 commands/bamfin.i: commands/bamfin.cpp.i
@@ -1779,7 +1777,7 @@ commands/bamfin.i: commands/bamfin.cpp.i
 
 # target to preprocess a source file
 commands/bamfin.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bamfin.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bamfin.cpp.i
 .PHONY : commands/bamfin.cpp.i
 
 commands/bamfin.s: commands/bamfin.cpp.s
@@ -1788,7 +1786,7 @@ commands/bamfin.s: commands/bamfin.cpp.s
 
 # target to generate assembly for a file
 commands/bamfin.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bamfin.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bamfin.cpp.s
 .PHONY : commands/bamfin.cpp.s
 
 commands/bamfout.o: commands/bamfout.cpp.o
@@ -1797,7 +1795,7 @@ commands/bamfout.o: commands/bamfout.cpp.o
 
 # target to build an object file
 commands/bamfout.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bamfout.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bamfout.cpp.o
 .PHONY : commands/bamfout.cpp.o
 
 commands/bamfout.i: commands/bamfout.cpp.i
@@ -1806,7 +1804,7 @@ commands/bamfout.i: commands/bamfout.cpp.i
 
 # target to preprocess a source file
 commands/bamfout.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bamfout.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bamfout.cpp.i
 .PHONY : commands/bamfout.cpp.i
 
 commands/bamfout.s: commands/bamfout.cpp.s
@@ -1815,7 +1813,7 @@ commands/bamfout.s: commands/bamfout.cpp.s
 
 # target to generate assembly for a file
 commands/bamfout.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bamfout.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bamfout.cpp.s
 .PHONY : commands/bamfout.cpp.s
 
 commands/ban.o: commands/ban.cpp.o
@@ -1824,7 +1822,7 @@ commands/ban.o: commands/ban.cpp.o
 
 # target to build an object file
 commands/ban.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ban.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ban.cpp.o
 .PHONY : commands/ban.cpp.o
 
 commands/ban.i: commands/ban.cpp.i
@@ -1833,7 +1831,7 @@ commands/ban.i: commands/ban.cpp.i
 
 # target to preprocess a source file
 commands/ban.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ban.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ban.cpp.i
 .PHONY : commands/ban.cpp.i
 
 commands/ban.s: commands/ban.cpp.s
@@ -1842,7 +1840,7 @@ commands/ban.s: commands/ban.cpp.s
 
 # target to generate assembly for a file
 commands/ban.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ban.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ban.cpp.s
 .PHONY : commands/ban.cpp.s
 
 commands/bank.o: commands/bank.cpp.o
@@ -1851,7 +1849,7 @@ commands/bank.o: commands/bank.cpp.o
 
 # target to build an object file
 commands/bank.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bank.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bank.cpp.o
 .PHONY : commands/bank.cpp.o
 
 commands/bank.i: commands/bank.cpp.i
@@ -1860,7 +1858,7 @@ commands/bank.i: commands/bank.cpp.i
 
 # target to preprocess a source file
 commands/bank.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bank.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bank.cpp.i
 .PHONY : commands/bank.cpp.i
 
 commands/bank.s: commands/bank.cpp.s
@@ -1869,7 +1867,7 @@ commands/bank.s: commands/bank.cpp.s
 
 # target to generate assembly for a file
 commands/bank.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bank.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bank.cpp.s
 .PHONY : commands/bank.cpp.s
 
 commands/bash.o: commands/bash.cpp.o
@@ -1878,7 +1876,7 @@ commands/bash.o: commands/bash.cpp.o
 
 # target to build an object file
 commands/bash.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bash.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bash.cpp.o
 .PHONY : commands/bash.cpp.o
 
 commands/bash.i: commands/bash.cpp.i
@@ -1887,7 +1885,7 @@ commands/bash.i: commands/bash.cpp.i
 
 # target to preprocess a source file
 commands/bash.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bash.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bash.cpp.i
 .PHONY : commands/bash.cpp.i
 
 commands/bash.s: commands/bash.cpp.s
@@ -1896,7 +1894,7 @@ commands/bash.s: commands/bash.cpp.s
 
 # target to generate assembly for a file
 commands/bash.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bash.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bash.cpp.s
 .PHONY : commands/bash.cpp.s
 
 commands/bashdoor.o: commands/bashdoor.cpp.o
@@ -1905,7 +1903,7 @@ commands/bashdoor.o: commands/bashdoor.cpp.o
 
 # target to build an object file
 commands/bashdoor.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bashdoor.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bashdoor.cpp.o
 .PHONY : commands/bashdoor.cpp.o
 
 commands/bashdoor.i: commands/bashdoor.cpp.i
@@ -1914,7 +1912,7 @@ commands/bashdoor.i: commands/bashdoor.cpp.i
 
 # target to preprocess a source file
 commands/bashdoor.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bashdoor.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bashdoor.cpp.i
 .PHONY : commands/bashdoor.cpp.i
 
 commands/bashdoor.s: commands/bashdoor.cpp.s
@@ -1923,7 +1921,7 @@ commands/bashdoor.s: commands/bashdoor.cpp.s
 
 # target to generate assembly for a file
 commands/bashdoor.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bashdoor.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bashdoor.cpp.s
 .PHONY : commands/bashdoor.cpp.s
 
 commands/beep.o: commands/beep.cpp.o
@@ -1932,7 +1930,7 @@ commands/beep.o: commands/beep.cpp.o
 
 # target to build an object file
 commands/beep.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/beep.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/beep.cpp.o
 .PHONY : commands/beep.cpp.o
 
 commands/beep.i: commands/beep.cpp.i
@@ -1941,7 +1939,7 @@ commands/beep.i: commands/beep.cpp.i
 
 # target to preprocess a source file
 commands/beep.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/beep.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/beep.cpp.i
 .PHONY : commands/beep.cpp.i
 
 commands/beep.s: commands/beep.cpp.s
@@ -1950,7 +1948,7 @@ commands/beep.s: commands/beep.cpp.s
 
 # target to generate assembly for a file
 commands/beep.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/beep.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/beep.cpp.s
 .PHONY : commands/beep.cpp.s
 
 commands/beg.o: commands/beg.cpp.o
@@ -1959,7 +1957,7 @@ commands/beg.o: commands/beg.cpp.o
 
 # target to build an object file
 commands/beg.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/beg.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/beg.cpp.o
 .PHONY : commands/beg.cpp.o
 
 commands/beg.i: commands/beg.cpp.i
@@ -1968,7 +1966,7 @@ commands/beg.i: commands/beg.cpp.i
 
 # target to preprocess a source file
 commands/beg.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/beg.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/beg.cpp.i
 .PHONY : commands/beg.cpp.i
 
 commands/beg.s: commands/beg.cpp.s
@@ -1977,7 +1975,7 @@ commands/beg.s: commands/beg.cpp.s
 
 # target to generate assembly for a file
 commands/beg.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/beg.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/beg.cpp.s
 .PHONY : commands/beg.cpp.s
 
 commands/berserk.o: commands/berserk.cpp.o
@@ -1986,7 +1984,7 @@ commands/berserk.o: commands/berserk.cpp.o
 
 # target to build an object file
 commands/berserk.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/berserk.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/berserk.cpp.o
 .PHONY : commands/berserk.cpp.o
 
 commands/berserk.i: commands/berserk.cpp.i
@@ -1995,7 +1993,7 @@ commands/berserk.i: commands/berserk.cpp.i
 
 # target to preprocess a source file
 commands/berserk.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/berserk.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/berserk.cpp.i
 .PHONY : commands/berserk.cpp.i
 
 commands/berserk.s: commands/berserk.cpp.s
@@ -2004,7 +2002,7 @@ commands/berserk.s: commands/berserk.cpp.s
 
 # target to generate assembly for a file
 commands/berserk.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/berserk.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/berserk.cpp.s
 .PHONY : commands/berserk.cpp.s
 
 commands/bestow.o: commands/bestow.cpp.o
@@ -2013,7 +2011,7 @@ commands/bestow.o: commands/bestow.cpp.o
 
 # target to build an object file
 commands/bestow.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bestow.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bestow.cpp.o
 .PHONY : commands/bestow.cpp.o
 
 commands/bestow.i: commands/bestow.cpp.i
@@ -2022,7 +2020,7 @@ commands/bestow.i: commands/bestow.cpp.i
 
 # target to preprocess a source file
 commands/bestow.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bestow.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bestow.cpp.i
 .PHONY : commands/bestow.cpp.i
 
 commands/bestow.s: commands/bestow.cpp.s
@@ -2031,7 +2029,7 @@ commands/bestow.s: commands/bestow.cpp.s
 
 # target to generate assembly for a file
 commands/bestow.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bestow.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bestow.cpp.s
 .PHONY : commands/bestow.cpp.s
 
 commands/bestowarea.o: commands/bestowarea.cpp.o
@@ -2040,7 +2038,7 @@ commands/bestowarea.o: commands/bestowarea.cpp.o
 
 # target to build an object file
 commands/bestowarea.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bestowarea.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bestowarea.cpp.o
 .PHONY : commands/bestowarea.cpp.o
 
 commands/bestowarea.i: commands/bestowarea.cpp.i
@@ -2049,7 +2047,7 @@ commands/bestowarea.i: commands/bestowarea.cpp.i
 
 # target to preprocess a source file
 commands/bestowarea.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bestowarea.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bestowarea.cpp.i
 .PHONY : commands/bestowarea.cpp.i
 
 commands/bestowarea.s: commands/bestowarea.cpp.s
@@ -2058,7 +2056,7 @@ commands/bestowarea.s: commands/bestowarea.cpp.s
 
 # target to generate assembly for a file
 commands/bestowarea.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bestowarea.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bestowarea.cpp.s
 .PHONY : commands/bestowarea.cpp.s
 
 commands/bet.o: commands/bet.cpp.o
@@ -2067,7 +2065,7 @@ commands/bet.o: commands/bet.cpp.o
 
 # target to build an object file
 commands/bet.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bet.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bet.cpp.o
 .PHONY : commands/bet.cpp.o
 
 commands/bet.i: commands/bet.cpp.i
@@ -2076,7 +2074,7 @@ commands/bet.i: commands/bet.cpp.i
 
 # target to preprocess a source file
 commands/bet.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bet.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bet.cpp.i
 .PHONY : commands/bet.cpp.i
 
 commands/bet.s: commands/bet.cpp.s
@@ -2085,7 +2083,7 @@ commands/bet.s: commands/bet.cpp.s
 
 # target to generate assembly for a file
 commands/bet.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bet.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bet.cpp.s
 .PHONY : commands/bet.cpp.s
 
 commands/bind.o: commands/bind.cpp.o
@@ -2094,7 +2092,7 @@ commands/bind.o: commands/bind.cpp.o
 
 # target to build an object file
 commands/bind.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bind.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bind.cpp.o
 .PHONY : commands/bind.cpp.o
 
 commands/bind.i: commands/bind.cpp.i
@@ -2103,7 +2101,7 @@ commands/bind.i: commands/bind.cpp.i
 
 # target to preprocess a source file
 commands/bind.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bind.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bind.cpp.i
 .PHONY : commands/bind.cpp.i
 
 commands/bind.s: commands/bind.cpp.s
@@ -2112,7 +2110,7 @@ commands/bind.s: commands/bind.cpp.s
 
 # target to generate assembly for a file
 commands/bind.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bind.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bind.cpp.s
 .PHONY : commands/bind.cpp.s
 
 commands/bio.o: commands/bio.cpp.o
@@ -2121,7 +2119,7 @@ commands/bio.o: commands/bio.cpp.o
 
 # target to build an object file
 commands/bio.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bio.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bio.cpp.o
 .PHONY : commands/bio.cpp.o
 
 commands/bio.i: commands/bio.cpp.i
@@ -2130,7 +2128,7 @@ commands/bio.i: commands/bio.cpp.i
 
 # target to preprocess a source file
 commands/bio.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bio.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bio.cpp.i
 .PHONY : commands/bio.cpp.i
 
 commands/bio.s: commands/bio.cpp.s
@@ -2139,7 +2137,7 @@ commands/bio.s: commands/bio.cpp.s
 
 # target to generate assembly for a file
 commands/bio.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bio.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bio.cpp.s
 .PHONY : commands/bio.cpp.s
 
 commands/board.o: commands/board.cpp.o
@@ -2148,7 +2146,7 @@ commands/board.o: commands/board.cpp.o
 
 # target to build an object file
 commands/board.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/board.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/board.cpp.o
 .PHONY : commands/board.cpp.o
 
 commands/board.i: commands/board.cpp.i
@@ -2157,7 +2155,7 @@ commands/board.i: commands/board.cpp.i
 
 # target to preprocess a source file
 commands/board.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/board.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/board.cpp.i
 .PHONY : commands/board.cpp.i
 
 commands/board.s: commands/board.cpp.s
@@ -2166,7 +2164,7 @@ commands/board.s: commands/board.cpp.s
 
 # target to generate assembly for a file
 commands/board.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/board.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/board.cpp.s
 .PHONY : commands/board.cpp.s
 
 commands/boards.o: commands/boards.cpp.o
@@ -2175,7 +2173,7 @@ commands/boards.o: commands/boards.cpp.o
 
 # target to build an object file
 commands/boards.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/boards.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/boards.cpp.o
 .PHONY : commands/boards.cpp.o
 
 commands/boards.i: commands/boards.cpp.i
@@ -2184,7 +2182,7 @@ commands/boards.i: commands/boards.cpp.i
 
 # target to preprocess a source file
 commands/boards.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/boards.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/boards.cpp.i
 .PHONY : commands/boards.cpp.i
 
 commands/boards.s: commands/boards.cpp.s
@@ -2193,7 +2191,7 @@ commands/boards.s: commands/boards.cpp.s
 
 # target to generate assembly for a file
 commands/boards.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/boards.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/boards.cpp.s
 .PHONY : commands/boards.cpp.s
 
 commands/bodybag.o: commands/bodybag.cpp.o
@@ -2202,7 +2200,7 @@ commands/bodybag.o: commands/bodybag.cpp.o
 
 # target to build an object file
 commands/bodybag.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bodybag.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bodybag.cpp.o
 .PHONY : commands/bodybag.cpp.o
 
 commands/bodybag.i: commands/bodybag.cpp.i
@@ -2211,7 +2209,7 @@ commands/bodybag.i: commands/bodybag.cpp.i
 
 # target to preprocess a source file
 commands/bodybag.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bodybag.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bodybag.cpp.i
 .PHONY : commands/bodybag.cpp.i
 
 commands/bodybag.s: commands/bodybag.cpp.s
@@ -2220,7 +2218,7 @@ commands/bodybag.s: commands/bodybag.cpp.s
 
 # target to generate assembly for a file
 commands/bodybag.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bodybag.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bodybag.cpp.s
 .PHONY : commands/bodybag.cpp.s
 
 commands/bounties.o: commands/bounties.cpp.o
@@ -2229,7 +2227,7 @@ commands/bounties.o: commands/bounties.cpp.o
 
 # target to build an object file
 commands/bounties.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bounties.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bounties.cpp.o
 .PHONY : commands/bounties.cpp.o
 
 commands/bounties.i: commands/bounties.cpp.i
@@ -2238,7 +2236,7 @@ commands/bounties.i: commands/bounties.cpp.i
 
 # target to preprocess a source file
 commands/bounties.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bounties.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bounties.cpp.i
 .PHONY : commands/bounties.cpp.i
 
 commands/bounties.s: commands/bounties.cpp.s
@@ -2247,7 +2245,7 @@ commands/bounties.s: commands/bounties.cpp.s
 
 # target to generate assembly for a file
 commands/bounties.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bounties.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bounties.cpp.s
 .PHONY : commands/bounties.cpp.s
 
 commands/brandish.o: commands/brandish.cpp.o
@@ -2256,7 +2254,7 @@ commands/brandish.o: commands/brandish.cpp.o
 
 # target to build an object file
 commands/brandish.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/brandish.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/brandish.cpp.o
 .PHONY : commands/brandish.cpp.o
 
 commands/brandish.i: commands/brandish.cpp.i
@@ -2265,7 +2263,7 @@ commands/brandish.i: commands/brandish.cpp.i
 
 # target to preprocess a source file
 commands/brandish.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/brandish.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/brandish.cpp.i
 .PHONY : commands/brandish.cpp.i
 
 commands/brandish.s: commands/brandish.cpp.s
@@ -2274,7 +2272,7 @@ commands/brandish.s: commands/brandish.cpp.s
 
 # target to generate assembly for a file
 commands/brandish.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/brandish.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/brandish.cpp.s
 .PHONY : commands/brandish.cpp.s
 
 commands/bribe.o: commands/bribe.cpp.o
@@ -2283,7 +2281,7 @@ commands/bribe.o: commands/bribe.cpp.o
 
 # target to build an object file
 commands/bribe.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bribe.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bribe.cpp.o
 .PHONY : commands/bribe.cpp.o
 
 commands/bribe.i: commands/bribe.cpp.i
@@ -2292,7 +2290,7 @@ commands/bribe.i: commands/bribe.cpp.i
 
 # target to preprocess a source file
 commands/bribe.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bribe.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bribe.cpp.i
 .PHONY : commands/bribe.cpp.i
 
 commands/bribe.s: commands/bribe.cpp.s
@@ -2301,7 +2299,7 @@ commands/bribe.s: commands/bribe.cpp.s
 
 # target to generate assembly for a file
 commands/bribe.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bribe.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bribe.cpp.s
 .PHONY : commands/bribe.cpp.s
 
 commands/bset.o: commands/bset.cpp.o
@@ -2310,7 +2308,7 @@ commands/bset.o: commands/bset.cpp.o
 
 # target to build an object file
 commands/bset.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bset.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bset.cpp.o
 .PHONY : commands/bset.cpp.o
 
 commands/bset.i: commands/bset.cpp.i
@@ -2319,7 +2317,7 @@ commands/bset.i: commands/bset.cpp.i
 
 # target to preprocess a source file
 commands/bset.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bset.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bset.cpp.i
 .PHONY : commands/bset.cpp.i
 
 commands/bset.s: commands/bset.cpp.s
@@ -2328,7 +2326,7 @@ commands/bset.s: commands/bset.cpp.s
 
 # target to generate assembly for a file
 commands/bset.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bset.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bset.cpp.s
 .PHONY : commands/bset.cpp.s
 
 commands/bstat.o: commands/bstat.cpp.o
@@ -2337,7 +2335,7 @@ commands/bstat.o: commands/bstat.cpp.o
 
 # target to build an object file
 commands/bstat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bstat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bstat.cpp.o
 .PHONY : commands/bstat.cpp.o
 
 commands/bstat.i: commands/bstat.cpp.i
@@ -2346,7 +2344,7 @@ commands/bstat.i: commands/bstat.cpp.i
 
 # target to preprocess a source file
 commands/bstat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bstat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bstat.cpp.i
 .PHONY : commands/bstat.cpp.i
 
 commands/bstat.s: commands/bstat.cpp.s
@@ -2355,7 +2353,7 @@ commands/bstat.s: commands/bstat.cpp.s
 
 # target to generate assembly for a file
 commands/bstat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bstat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bstat.cpp.s
 .PHONY : commands/bstat.cpp.s
 
 commands/bug.o: commands/bug.cpp.o
@@ -2364,7 +2362,7 @@ commands/bug.o: commands/bug.cpp.o
 
 # target to build an object file
 commands/bug.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bug.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bug.cpp.o
 .PHONY : commands/bug.cpp.o
 
 commands/bug.i: commands/bug.cpp.i
@@ -2373,7 +2371,7 @@ commands/bug.i: commands/bug.cpp.i
 
 # target to preprocess a source file
 commands/bug.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bug.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bug.cpp.i
 .PHONY : commands/bug.cpp.i
 
 commands/bug.s: commands/bug.cpp.s
@@ -2382,7 +2380,7 @@ commands/bug.s: commands/bug.cpp.s
 
 # target to generate assembly for a file
 commands/bug.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bug.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bug.cpp.s
 .PHONY : commands/bug.cpp.s
 
 commands/bury.o: commands/bury.cpp.o
@@ -2391,7 +2389,7 @@ commands/bury.o: commands/bury.cpp.o
 
 # target to build an object file
 commands/bury.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bury.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bury.cpp.o
 .PHONY : commands/bury.cpp.o
 
 commands/bury.i: commands/bury.cpp.i
@@ -2400,7 +2398,7 @@ commands/bury.i: commands/bury.cpp.i
 
 # target to preprocess a source file
 commands/bury.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bury.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bury.cpp.i
 .PHONY : commands/bury.cpp.i
 
 commands/bury.s: commands/bury.cpp.s
@@ -2409,7 +2407,7 @@ commands/bury.s: commands/bury.cpp.s
 
 # target to generate assembly for a file
 commands/bury.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/bury.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/bury.cpp.s
 .PHONY : commands/bury.cpp.s
 
 commands/buy.o: commands/buy.cpp.o
@@ -2418,7 +2416,7 @@ commands/buy.o: commands/buy.cpp.o
 
 # target to build an object file
 commands/buy.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buy.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buy.cpp.o
 .PHONY : commands/buy.cpp.o
 
 commands/buy.i: commands/buy.cpp.i
@@ -2427,7 +2425,7 @@ commands/buy.i: commands/buy.cpp.i
 
 # target to preprocess a source file
 commands/buy.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buy.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buy.cpp.i
 .PHONY : commands/buy.cpp.i
 
 commands/buy.s: commands/buy.cpp.s
@@ -2436,7 +2434,7 @@ commands/buy.s: commands/buy.cpp.s
 
 # target to generate assembly for a file
 commands/buy.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buy.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buy.cpp.s
 .PHONY : commands/buy.cpp.s
 
 commands/buyhome.o: commands/buyhome.cpp.o
@@ -2445,7 +2443,7 @@ commands/buyhome.o: commands/buyhome.cpp.o
 
 # target to build an object file
 commands/buyhome.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buyhome.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buyhome.cpp.o
 .PHONY : commands/buyhome.cpp.o
 
 commands/buyhome.i: commands/buyhome.cpp.i
@@ -2454,7 +2452,7 @@ commands/buyhome.i: commands/buyhome.cpp.i
 
 # target to preprocess a source file
 commands/buyhome.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buyhome.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buyhome.cpp.i
 .PHONY : commands/buyhome.cpp.i
 
 commands/buyhome.s: commands/buyhome.cpp.s
@@ -2463,7 +2461,7 @@ commands/buyhome.s: commands/buyhome.cpp.s
 
 # target to generate assembly for a file
 commands/buyhome.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buyhome.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buyhome.cpp.s
 .PHONY : commands/buyhome.cpp.s
 
 commands/buyship.o: commands/buyship.cpp.o
@@ -2472,7 +2470,7 @@ commands/buyship.o: commands/buyship.cpp.o
 
 # target to build an object file
 commands/buyship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buyship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buyship.cpp.o
 .PHONY : commands/buyship.cpp.o
 
 commands/buyship.i: commands/buyship.cpp.i
@@ -2481,7 +2479,7 @@ commands/buyship.i: commands/buyship.cpp.i
 
 # target to preprocess a source file
 commands/buyship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buyship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buyship.cpp.i
 .PHONY : commands/buyship.cpp.i
 
 commands/buyship.s: commands/buyship.cpp.s
@@ -2490,7 +2488,7 @@ commands/buyship.s: commands/buyship.cpp.s
 
 # target to generate assembly for a file
 commands/buyship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buyship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buyship.cpp.s
 .PHONY : commands/buyship.cpp.s
 
 commands/buyvendor.o: commands/buyvendor.cpp.o
@@ -2499,7 +2497,7 @@ commands/buyvendor.o: commands/buyvendor.cpp.o
 
 # target to build an object file
 commands/buyvendor.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buyvendor.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buyvendor.cpp.o
 .PHONY : commands/buyvendor.cpp.o
 
 commands/buyvendor.i: commands/buyvendor.cpp.i
@@ -2508,7 +2506,7 @@ commands/buyvendor.i: commands/buyvendor.cpp.i
 
 # target to preprocess a source file
 commands/buyvendor.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buyvendor.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buyvendor.cpp.i
 .PHONY : commands/buyvendor.cpp.i
 
 commands/buyvendor.s: commands/buyvendor.cpp.s
@@ -2517,7 +2515,7 @@ commands/buyvendor.s: commands/buyvendor.cpp.s
 
 # target to generate assembly for a file
 commands/buyvendor.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buyvendor.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buyvendor.cpp.s
 .PHONY : commands/buyvendor.cpp.s
 
 commands/buzz.o: commands/buzz.cpp.o
@@ -2526,7 +2524,7 @@ commands/buzz.o: commands/buzz.cpp.o
 
 # target to build an object file
 commands/buzz.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buzz.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buzz.cpp.o
 .PHONY : commands/buzz.cpp.o
 
 commands/buzz.i: commands/buzz.cpp.i
@@ -2535,7 +2533,7 @@ commands/buzz.i: commands/buzz.cpp.i
 
 # target to preprocess a source file
 commands/buzz.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buzz.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buzz.cpp.i
 .PHONY : commands/buzz.cpp.i
 
 commands/buzz.s: commands/buzz.cpp.s
@@ -2544,7 +2542,7 @@ commands/buzz.s: commands/buzz.cpp.s
 
 # target to generate assembly for a file
 commands/buzz.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/buzz.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/buzz.cpp.s
 .PHONY : commands/buzz.cpp.s
 
 commands/calculate.o: commands/calculate.cpp.o
@@ -2553,7 +2551,7 @@ commands/calculate.o: commands/calculate.cpp.o
 
 # target to build an object file
 commands/calculate.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/calculate.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/calculate.cpp.o
 .PHONY : commands/calculate.cpp.o
 
 commands/calculate.i: commands/calculate.cpp.i
@@ -2562,7 +2560,7 @@ commands/calculate.i: commands/calculate.cpp.i
 
 # target to preprocess a source file
 commands/calculate.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/calculate.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/calculate.cpp.i
 .PHONY : commands/calculate.cpp.i
 
 commands/calculate.s: commands/calculate.cpp.s
@@ -2571,7 +2569,7 @@ commands/calculate.s: commands/calculate.cpp.s
 
 # target to generate assembly for a file
 commands/calculate.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/calculate.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/calculate.cpp.s
 .PHONY : commands/calculate.cpp.s
 
 commands/calculatediff.o: commands/calculatediff.cpp.o
@@ -2580,7 +2578,7 @@ commands/calculatediff.o: commands/calculatediff.cpp.o
 
 # target to build an object file
 commands/calculatediff.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/calculatediff.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/calculatediff.cpp.o
 .PHONY : commands/calculatediff.cpp.o
 
 commands/calculatediff.i: commands/calculatediff.cpp.i
@@ -2589,7 +2587,7 @@ commands/calculatediff.i: commands/calculatediff.cpp.i
 
 # target to preprocess a source file
 commands/calculatediff.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/calculatediff.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/calculatediff.cpp.i
 .PHONY : commands/calculatediff.cpp.i
 
 commands/calculatediff.s: commands/calculatediff.cpp.s
@@ -2598,7 +2596,7 @@ commands/calculatediff.s: commands/calculatediff.cpp.s
 
 # target to generate assembly for a file
 commands/calculatediff.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/calculatediff.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/calculatediff.cpp.s
 .PHONY : commands/calculatediff.cpp.s
 
 commands/capture.o: commands/capture.cpp.o
@@ -2607,7 +2605,7 @@ commands/capture.o: commands/capture.cpp.o
 
 # target to build an object file
 commands/capture.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/capture.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/capture.cpp.o
 .PHONY : commands/capture.cpp.o
 
 commands/capture.i: commands/capture.cpp.i
@@ -2616,7 +2614,7 @@ commands/capture.i: commands/capture.cpp.i
 
 # target to preprocess a source file
 commands/capture.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/capture.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/capture.cpp.i
 .PHONY : commands/capture.cpp.i
 
 commands/capture.s: commands/capture.cpp.s
@@ -2625,7 +2623,7 @@ commands/capture.s: commands/capture.cpp.s
 
 # target to generate assembly for a file
 commands/capture.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/capture.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/capture.cpp.s
 .PHONY : commands/capture.cpp.s
 
 commands/cast.o: commands/cast.cpp.o
@@ -2634,7 +2632,7 @@ commands/cast.o: commands/cast.cpp.o
 
 # target to build an object file
 commands/cast.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cast.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cast.cpp.o
 .PHONY : commands/cast.cpp.o
 
 commands/cast.i: commands/cast.cpp.i
@@ -2643,7 +2641,7 @@ commands/cast.i: commands/cast.cpp.i
 
 # target to preprocess a source file
 commands/cast.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cast.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cast.cpp.i
 .PHONY : commands/cast.cpp.i
 
 commands/cast.s: commands/cast.cpp.s
@@ -2652,7 +2650,7 @@ commands/cast.s: commands/cast.cpp.s
 
 # target to generate assembly for a file
 commands/cast.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cast.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cast.cpp.s
 .PHONY : commands/cast.cpp.s
 
 commands/cedit.o: commands/cedit.cpp.o
@@ -2661,7 +2659,7 @@ commands/cedit.o: commands/cedit.cpp.o
 
 # target to build an object file
 commands/cedit.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cedit.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cedit.cpp.o
 .PHONY : commands/cedit.cpp.o
 
 commands/cedit.i: commands/cedit.cpp.i
@@ -2670,7 +2668,7 @@ commands/cedit.i: commands/cedit.cpp.i
 
 # target to preprocess a source file
 commands/cedit.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cedit.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cedit.cpp.i
 .PHONY : commands/cedit.cpp.i
 
 commands/cedit.s: commands/cedit.cpp.s
@@ -2679,7 +2677,7 @@ commands/cedit.s: commands/cedit.cpp.s
 
 # target to generate assembly for a file
 commands/cedit.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cedit.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cedit.cpp.s
 .PHONY : commands/cedit.cpp.s
 
 commands/chaff.o: commands/chaff.cpp.o
@@ -2688,7 +2686,7 @@ commands/chaff.o: commands/chaff.cpp.o
 
 # target to build an object file
 commands/chaff.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/chaff.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/chaff.cpp.o
 .PHONY : commands/chaff.cpp.o
 
 commands/chaff.i: commands/chaff.cpp.i
@@ -2697,7 +2695,7 @@ commands/chaff.i: commands/chaff.cpp.i
 
 # target to preprocess a source file
 commands/chaff.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/chaff.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/chaff.cpp.i
 .PHONY : commands/chaff.cpp.i
 
 commands/chaff.s: commands/chaff.cpp.s
@@ -2706,7 +2704,7 @@ commands/chaff.s: commands/chaff.cpp.s
 
 # target to generate assembly for a file
 commands/chaff.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/chaff.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/chaff.cpp.s
 .PHONY : commands/chaff.cpp.s
 
 commands/challenge.o: commands/challenge.cpp.o
@@ -2715,7 +2713,7 @@ commands/challenge.o: commands/challenge.cpp.o
 
 # target to build an object file
 commands/challenge.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/challenge.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/challenge.cpp.o
 .PHONY : commands/challenge.cpp.o
 
 commands/challenge.i: commands/challenge.cpp.i
@@ -2724,7 +2722,7 @@ commands/challenge.i: commands/challenge.cpp.i
 
 # target to preprocess a source file
 commands/challenge.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/challenge.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/challenge.cpp.i
 .PHONY : commands/challenge.cpp.i
 
 commands/challenge.s: commands/challenge.cpp.s
@@ -2733,7 +2731,7 @@ commands/challenge.s: commands/challenge.cpp.s
 
 # target to generate assembly for a file
 commands/challenge.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/challenge.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/challenge.cpp.s
 .PHONY : commands/challenge.cpp.s
 
 commands/channels.o: commands/channels.cpp.o
@@ -2742,7 +2740,7 @@ commands/channels.o: commands/channels.cpp.o
 
 # target to build an object file
 commands/channels.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/channels.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/channels.cpp.o
 .PHONY : commands/channels.cpp.o
 
 commands/channels.i: commands/channels.cpp.i
@@ -2751,7 +2749,7 @@ commands/channels.i: commands/channels.cpp.i
 
 # target to preprocess a source file
 commands/channels.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/channels.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/channels.cpp.i
 .PHONY : commands/channels.cpp.i
 
 commands/channels.s: commands/channels.cpp.s
@@ -2760,7 +2758,7 @@ commands/channels.s: commands/channels.cpp.s
 
 # target to generate assembly for a file
 commands/channels.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/channels.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/channels.cpp.s
 .PHONY : commands/channels.cpp.s
 
 commands/chaos.o: commands/chaos.cpp.o
@@ -2769,7 +2767,7 @@ commands/chaos.o: commands/chaos.cpp.o
 
 # target to build an object file
 commands/chaos.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/chaos.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/chaos.cpp.o
 .PHONY : commands/chaos.cpp.o
 
 commands/chaos.i: commands/chaos.cpp.i
@@ -2778,7 +2776,7 @@ commands/chaos.i: commands/chaos.cpp.i
 
 # target to preprocess a source file
 commands/chaos.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/chaos.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/chaos.cpp.i
 .PHONY : commands/chaos.cpp.i
 
 commands/chaos.s: commands/chaos.cpp.s
@@ -2787,7 +2785,7 @@ commands/chaos.s: commands/chaos.cpp.s
 
 # target to generate assembly for a file
 commands/chaos.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/chaos.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/chaos.cpp.s
 .PHONY : commands/chaos.cpp.s
 
 commands/chat.o: commands/chat.cpp.o
@@ -2796,7 +2794,7 @@ commands/chat.o: commands/chat.cpp.o
 
 # target to build an object file
 commands/chat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/chat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/chat.cpp.o
 .PHONY : commands/chat.cpp.o
 
 commands/chat.i: commands/chat.cpp.i
@@ -2805,7 +2803,7 @@ commands/chat.i: commands/chat.cpp.i
 
 # target to preprocess a source file
 commands/chat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/chat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/chat.cpp.i
 .PHONY : commands/chat.cpp.i
 
 commands/chat.s: commands/chat.cpp.s
@@ -2814,7 +2812,7 @@ commands/chat.s: commands/chat.cpp.s
 
 # target to generate assembly for a file
 commands/chat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/chat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/chat.cpp.s
 .PHONY : commands/chat.cpp.s
 
 commands/check_vnums.o: commands/check_vnums.cpp.o
@@ -2823,7 +2821,7 @@ commands/check_vnums.o: commands/check_vnums.cpp.o
 
 # target to build an object file
 commands/check_vnums.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/check_vnums.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/check_vnums.cpp.o
 .PHONY : commands/check_vnums.cpp.o
 
 commands/check_vnums.i: commands/check_vnums.cpp.i
@@ -2832,7 +2830,7 @@ commands/check_vnums.i: commands/check_vnums.cpp.i
 
 # target to preprocess a source file
 commands/check_vnums.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/check_vnums.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/check_vnums.cpp.i
 .PHONY : commands/check_vnums.cpp.i
 
 commands/check_vnums.s: commands/check_vnums.cpp.s
@@ -2841,7 +2839,7 @@ commands/check_vnums.s: commands/check_vnums.cpp.s
 
 # target to generate assembly for a file
 commands/check_vnums.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/check_vnums.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/check_vnums.cpp.s
 .PHONY : commands/check_vnums.cpp.s
 
 commands/circle.o: commands/circle.cpp.o
@@ -2850,7 +2848,7 @@ commands/circle.o: commands/circle.cpp.o
 
 # target to build an object file
 commands/circle.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/circle.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/circle.cpp.o
 .PHONY : commands/circle.cpp.o
 
 commands/circle.i: commands/circle.cpp.i
@@ -2859,7 +2857,7 @@ commands/circle.i: commands/circle.cpp.i
 
 # target to preprocess a source file
 commands/circle.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/circle.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/circle.cpp.i
 .PHONY : commands/circle.cpp.i
 
 commands/circle.s: commands/circle.cpp.s
@@ -2868,7 +2866,7 @@ commands/circle.s: commands/circle.cpp.s
 
 # target to generate assembly for a file
 commands/circle.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/circle.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/circle.cpp.s
 .PHONY : commands/circle.cpp.s
 
 commands/clan_donate.o: commands/clan_donate.cpp.o
@@ -2877,7 +2875,7 @@ commands/clan_donate.o: commands/clan_donate.cpp.o
 
 # target to build an object file
 commands/clan_donate.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clan_donate.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clan_donate.cpp.o
 .PHONY : commands/clan_donate.cpp.o
 
 commands/clan_donate.i: commands/clan_donate.cpp.i
@@ -2886,7 +2884,7 @@ commands/clan_donate.i: commands/clan_donate.cpp.i
 
 # target to preprocess a source file
 commands/clan_donate.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clan_donate.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clan_donate.cpp.i
 .PHONY : commands/clan_donate.cpp.i
 
 commands/clan_donate.s: commands/clan_donate.cpp.s
@@ -2895,7 +2893,7 @@ commands/clan_donate.s: commands/clan_donate.cpp.s
 
 # target to generate assembly for a file
 commands/clan_donate.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clan_donate.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clan_donate.cpp.s
 .PHONY : commands/clan_donate.cpp.s
 
 commands/clan_withdraw.o: commands/clan_withdraw.cpp.o
@@ -2904,7 +2902,7 @@ commands/clan_withdraw.o: commands/clan_withdraw.cpp.o
 
 # target to build an object file
 commands/clan_withdraw.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clan_withdraw.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clan_withdraw.cpp.o
 .PHONY : commands/clan_withdraw.cpp.o
 
 commands/clan_withdraw.i: commands/clan_withdraw.cpp.i
@@ -2913,7 +2911,7 @@ commands/clan_withdraw.i: commands/clan_withdraw.cpp.i
 
 # target to preprocess a source file
 commands/clan_withdraw.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clan_withdraw.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clan_withdraw.cpp.i
 .PHONY : commands/clan_withdraw.cpp.i
 
 commands/clan_withdraw.s: commands/clan_withdraw.cpp.s
@@ -2922,7 +2920,7 @@ commands/clan_withdraw.s: commands/clan_withdraw.cpp.s
 
 # target to generate assembly for a file
 commands/clan_withdraw.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clan_withdraw.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clan_withdraw.cpp.s
 .PHONY : commands/clan_withdraw.cpp.s
 
 commands/clanbuyship.o: commands/clanbuyship.cpp.o
@@ -2931,7 +2929,7 @@ commands/clanbuyship.o: commands/clanbuyship.cpp.o
 
 # target to build an object file
 commands/clanbuyship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clanbuyship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clanbuyship.cpp.o
 .PHONY : commands/clanbuyship.cpp.o
 
 commands/clanbuyship.i: commands/clanbuyship.cpp.i
@@ -2940,7 +2938,7 @@ commands/clanbuyship.i: commands/clanbuyship.cpp.i
 
 # target to preprocess a source file
 commands/clanbuyship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clanbuyship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clanbuyship.cpp.i
 .PHONY : commands/clanbuyship.cpp.i
 
 commands/clanbuyship.s: commands/clanbuyship.cpp.s
@@ -2949,7 +2947,7 @@ commands/clanbuyship.s: commands/clanbuyship.cpp.s
 
 # target to generate assembly for a file
 commands/clanbuyship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clanbuyship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clanbuyship.cpp.s
 .PHONY : commands/clanbuyship.cpp.s
 
 commands/clanfunds.o: commands/clanfunds.cpp.o
@@ -2958,7 +2956,7 @@ commands/clanfunds.o: commands/clanfunds.cpp.o
 
 # target to build an object file
 commands/clanfunds.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clanfunds.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clanfunds.cpp.o
 .PHONY : commands/clanfunds.cpp.o
 
 commands/clanfunds.i: commands/clanfunds.cpp.i
@@ -2967,7 +2965,7 @@ commands/clanfunds.i: commands/clanfunds.cpp.i
 
 # target to preprocess a source file
 commands/clanfunds.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clanfunds.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clanfunds.cpp.i
 .PHONY : commands/clanfunds.cpp.i
 
 commands/clanfunds.s: commands/clanfunds.cpp.s
@@ -2976,7 +2974,7 @@ commands/clanfunds.s: commands/clanfunds.cpp.s
 
 # target to generate assembly for a file
 commands/clanfunds.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clanfunds.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clanfunds.cpp.s
 .PHONY : commands/clanfunds.cpp.s
 
 commands/clans.o: commands/clans.cpp.o
@@ -2985,7 +2983,7 @@ commands/clans.o: commands/clans.cpp.o
 
 # target to build an object file
 commands/clans.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clans.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clans.cpp.o
 .PHONY : commands/clans.cpp.o
 
 commands/clans.i: commands/clans.cpp.i
@@ -2994,7 +2992,7 @@ commands/clans.i: commands/clans.cpp.i
 
 # target to preprocess a source file
 commands/clans.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clans.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clans.cpp.i
 .PHONY : commands/clans.cpp.i
 
 commands/clans.s: commands/clans.cpp.s
@@ -3003,7 +3001,7 @@ commands/clans.s: commands/clans.cpp.s
 
 # target to generate assembly for a file
 commands/clans.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clans.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clans.cpp.s
 .PHONY : commands/clans.cpp.s
 
 commands/clansellship.o: commands/clansellship.cpp.o
@@ -3012,7 +3010,7 @@ commands/clansellship.o: commands/clansellship.cpp.o
 
 # target to build an object file
 commands/clansellship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clansellship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clansellship.cpp.o
 .PHONY : commands/clansellship.cpp.o
 
 commands/clansellship.i: commands/clansellship.cpp.i
@@ -3021,7 +3019,7 @@ commands/clansellship.i: commands/clansellship.cpp.i
 
 # target to preprocess a source file
 commands/clansellship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clansellship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clansellship.cpp.i
 .PHONY : commands/clansellship.cpp.i
 
 commands/clansellship.s: commands/clansellship.cpp.s
@@ -3030,7 +3028,7 @@ commands/clansellship.s: commands/clansellship.cpp.s
 
 # target to generate assembly for a file
 commands/clansellship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clansellship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clansellship.cpp.s
 .PHONY : commands/clansellship.cpp.s
 
 commands/clantalk.o: commands/clantalk.cpp.o
@@ -3039,7 +3037,7 @@ commands/clantalk.o: commands/clantalk.cpp.o
 
 # target to build an object file
 commands/clantalk.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clantalk.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clantalk.cpp.o
 .PHONY : commands/clantalk.cpp.o
 
 commands/clantalk.i: commands/clantalk.cpp.i
@@ -3048,7 +3046,7 @@ commands/clantalk.i: commands/clantalk.cpp.i
 
 # target to preprocess a source file
 commands/clantalk.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clantalk.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clantalk.cpp.i
 .PHONY : commands/clantalk.cpp.i
 
 commands/clantalk.s: commands/clantalk.cpp.s
@@ -3057,7 +3055,7 @@ commands/clantalk.s: commands/clantalk.cpp.s
 
 # target to generate assembly for a file
 commands/clantalk.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clantalk.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clantalk.cpp.s
 .PHONY : commands/clantalk.cpp.s
 
 commands/climb.o: commands/climb.cpp.o
@@ -3066,7 +3064,7 @@ commands/climb.o: commands/climb.cpp.o
 
 # target to build an object file
 commands/climb.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/climb.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/climb.cpp.o
 .PHONY : commands/climb.cpp.o
 
 commands/climb.i: commands/climb.cpp.i
@@ -3075,7 +3073,7 @@ commands/climb.i: commands/climb.cpp.i
 
 # target to preprocess a source file
 commands/climb.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/climb.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/climb.cpp.i
 .PHONY : commands/climb.cpp.i
 
 commands/climb.s: commands/climb.cpp.s
@@ -3084,7 +3082,7 @@ commands/climb.s: commands/climb.cpp.s
 
 # target to generate assembly for a file
 commands/climb.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/climb.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/climb.cpp.s
 .PHONY : commands/climb.cpp.s
 
 commands/clone.o: commands/clone.cpp.o
@@ -3093,7 +3091,7 @@ commands/clone.o: commands/clone.cpp.o
 
 # target to build an object file
 commands/clone.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clone.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clone.cpp.o
 .PHONY : commands/clone.cpp.o
 
 commands/clone.i: commands/clone.cpp.i
@@ -3102,7 +3100,7 @@ commands/clone.i: commands/clone.cpp.i
 
 # target to preprocess a source file
 commands/clone.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clone.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clone.cpp.i
 .PHONY : commands/clone.cpp.i
 
 commands/clone.s: commands/clone.cpp.s
@@ -3111,7 +3109,7 @@ commands/clone.s: commands/clone.cpp.s
 
 # target to generate assembly for a file
 commands/clone.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/clone.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/clone.cpp.s
 .PHONY : commands/clone.cpp.s
 
 commands/close.o: commands/close.cpp.o
@@ -3120,7 +3118,7 @@ commands/close.o: commands/close.cpp.o
 
 # target to build an object file
 commands/close.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/close.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/close.cpp.o
 .PHONY : commands/close.cpp.o
 
 commands/close.i: commands/close.cpp.i
@@ -3129,7 +3127,7 @@ commands/close.i: commands/close.cpp.i
 
 # target to preprocess a source file
 commands/close.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/close.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/close.cpp.i
 .PHONY : commands/close.cpp.i
 
 commands/close.s: commands/close.cpp.s
@@ -3138,7 +3136,7 @@ commands/close.s: commands/close.cpp.s
 
 # target to generate assembly for a file
 commands/close.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/close.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/close.cpp.s
 .PHONY : commands/close.cpp.s
 
 commands/closebay.o: commands/closebay.cpp.o
@@ -3147,7 +3145,7 @@ commands/closebay.o: commands/closebay.cpp.o
 
 # target to build an object file
 commands/closebay.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/closebay.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/closebay.cpp.o
 .PHONY : commands/closebay.cpp.o
 
 commands/closebay.i: commands/closebay.cpp.i
@@ -3156,7 +3154,7 @@ commands/closebay.i: commands/closebay.cpp.i
 
 # target to preprocess a source file
 commands/closebay.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/closebay.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/closebay.cpp.i
 .PHONY : commands/closebay.cpp.i
 
 commands/closebay.s: commands/closebay.cpp.s
@@ -3165,7 +3163,7 @@ commands/closebay.s: commands/closebay.cpp.s
 
 # target to generate assembly for a file
 commands/closebay.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/closebay.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/closebay.cpp.s
 .PHONY : commands/closebay.cpp.s
 
 commands/closehatch.o: commands/closehatch.cpp.o
@@ -3174,7 +3172,7 @@ commands/closehatch.o: commands/closehatch.cpp.o
 
 # target to build an object file
 commands/closehatch.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/closehatch.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/closehatch.cpp.o
 .PHONY : commands/closehatch.cpp.o
 
 commands/closehatch.i: commands/closehatch.cpp.i
@@ -3183,7 +3181,7 @@ commands/closehatch.i: commands/closehatch.cpp.i
 
 # target to preprocess a source file
 commands/closehatch.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/closehatch.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/closehatch.cpp.i
 .PHONY : commands/closehatch.cpp.i
 
 commands/closehatch.s: commands/closehatch.cpp.s
@@ -3192,7 +3190,7 @@ commands/closehatch.s: commands/closehatch.cpp.s
 
 # target to generate assembly for a file
 commands/closehatch.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/closehatch.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/closehatch.cpp.s
 .PHONY : commands/closehatch.cpp.s
 
 commands/cmdtable.o: commands/cmdtable.cpp.o
@@ -3201,7 +3199,7 @@ commands/cmdtable.o: commands/cmdtable.cpp.o
 
 # target to build an object file
 commands/cmdtable.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cmdtable.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cmdtable.cpp.o
 .PHONY : commands/cmdtable.cpp.o
 
 commands/cmdtable.i: commands/cmdtable.cpp.i
@@ -3210,7 +3208,7 @@ commands/cmdtable.i: commands/cmdtable.cpp.i
 
 # target to preprocess a source file
 commands/cmdtable.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cmdtable.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cmdtable.cpp.i
 .PHONY : commands/cmdtable.cpp.i
 
 commands/cmdtable.s: commands/cmdtable.cpp.s
@@ -3219,7 +3217,7 @@ commands/cmdtable.s: commands/cmdtable.cpp.s
 
 # target to generate assembly for a file
 commands/cmdtable.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cmdtable.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cmdtable.cpp.s
 .PHONY : commands/cmdtable.cpp.s
 
 commands/collectgold.o: commands/collectgold.cpp.o
@@ -3228,7 +3226,7 @@ commands/collectgold.o: commands/collectgold.cpp.o
 
 # target to build an object file
 commands/collectgold.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/collectgold.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/collectgold.cpp.o
 .PHONY : commands/collectgold.cpp.o
 
 commands/collectgold.i: commands/collectgold.cpp.i
@@ -3237,7 +3235,7 @@ commands/collectgold.i: commands/collectgold.cpp.i
 
 # target to preprocess a source file
 commands/collectgold.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/collectgold.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/collectgold.cpp.i
 .PHONY : commands/collectgold.cpp.i
 
 commands/collectgold.s: commands/collectgold.cpp.s
@@ -3246,7 +3244,7 @@ commands/collectgold.s: commands/collectgold.cpp.s
 
 # target to generate assembly for a file
 commands/collectgold.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/collectgold.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/collectgold.cpp.s
 .PHONY : commands/collectgold.cpp.s
 
 commands/commands.o: commands/commands.cpp.o
@@ -3255,7 +3253,7 @@ commands/commands.o: commands/commands.cpp.o
 
 # target to build an object file
 commands/commands.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/commands.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/commands.cpp.o
 .PHONY : commands/commands.cpp.o
 
 commands/commands.i: commands/commands.cpp.i
@@ -3264,7 +3262,7 @@ commands/commands.i: commands/commands.cpp.i
 
 # target to preprocess a source file
 commands/commands.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/commands.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/commands.cpp.i
 .PHONY : commands/commands.cpp.i
 
 commands/commands.s: commands/commands.cpp.s
@@ -3273,7 +3271,7 @@ commands/commands.s: commands/commands.cpp.s
 
 # target to generate assembly for a file
 commands/commands.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/commands.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/commands.cpp.s
 .PHONY : commands/commands.cpp.s
 
 commands/compare.o: commands/compare.cpp.o
@@ -3282,7 +3280,7 @@ commands/compare.o: commands/compare.cpp.o
 
 # target to build an object file
 commands/compare.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/compare.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/compare.cpp.o
 .PHONY : commands/compare.cpp.o
 
 commands/compare.i: commands/compare.cpp.i
@@ -3291,7 +3289,7 @@ commands/compare.i: commands/compare.cpp.i
 
 # target to preprocess a source file
 commands/compare.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/compare.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/compare.cpp.i
 .PHONY : commands/compare.cpp.i
 
 commands/compare.s: commands/compare.cpp.s
@@ -3300,7 +3298,7 @@ commands/compare.s: commands/compare.cpp.s
 
 # target to generate assembly for a file
 commands/compare.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/compare.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/compare.cpp.s
 .PHONY : commands/compare.cpp.s
 
 commands/config.o: commands/config.cpp.o
@@ -3309,7 +3307,7 @@ commands/config.o: commands/config.cpp.o
 
 # target to build an object file
 commands/config.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/config.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/config.cpp.o
 .PHONY : commands/config.cpp.o
 
 commands/config.i: commands/config.cpp.i
@@ -3318,7 +3316,7 @@ commands/config.i: commands/config.cpp.i
 
 # target to preprocess a source file
 commands/config.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/config.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/config.cpp.i
 .PHONY : commands/config.cpp.i
 
 commands/config.s: commands/config.cpp.s
@@ -3327,7 +3325,7 @@ commands/config.s: commands/config.cpp.s
 
 # target to generate assembly for a file
 commands/config.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/config.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/config.cpp.s
 .PHONY : commands/config.cpp.s
 
 commands/consider.o: commands/consider.cpp.o
@@ -3336,7 +3334,7 @@ commands/consider.o: commands/consider.cpp.o
 
 # target to build an object file
 commands/consider.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/consider.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/consider.cpp.o
 .PHONY : commands/consider.cpp.o
 
 commands/consider.i: commands/consider.cpp.i
@@ -3345,7 +3343,7 @@ commands/consider.i: commands/consider.cpp.i
 
 # target to preprocess a source file
 commands/consider.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/consider.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/consider.cpp.i
 .PHONY : commands/consider.cpp.i
 
 commands/consider.s: commands/consider.cpp.s
@@ -3354,7 +3352,7 @@ commands/consider.s: commands/consider.cpp.s
 
 # target to generate assembly for a file
 commands/consider.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/consider.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/consider.cpp.s
 .PHONY : commands/consider.cpp.s
 
 commands/copyship.o: commands/copyship.cpp.o
@@ -3363,7 +3361,7 @@ commands/copyship.o: commands/copyship.cpp.o
 
 # target to build an object file
 commands/copyship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/copyship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/copyship.cpp.o
 .PHONY : commands/copyship.cpp.o
 
 commands/copyship.i: commands/copyship.cpp.i
@@ -3372,7 +3370,7 @@ commands/copyship.i: commands/copyship.cpp.i
 
 # target to preprocess a source file
 commands/copyship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/copyship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/copyship.cpp.i
 .PHONY : commands/copyship.cpp.i
 
 commands/copyship.s: commands/copyship.cpp.s
@@ -3381,7 +3379,7 @@ commands/copyship.s: commands/copyship.cpp.s
 
 # target to generate assembly for a file
 commands/copyship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/copyship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/copyship.cpp.s
 .PHONY : commands/copyship.cpp.s
 
 commands/credits.o: commands/credits.cpp.o
@@ -3390,7 +3388,7 @@ commands/credits.o: commands/credits.cpp.o
 
 # target to build an object file
 commands/credits.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/credits.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/credits.cpp.o
 .PHONY : commands/credits.cpp.o
 
 commands/credits.i: commands/credits.cpp.i
@@ -3399,7 +3397,7 @@ commands/credits.i: commands/credits.cpp.i
 
 # target to preprocess a source file
 commands/credits.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/credits.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/credits.cpp.i
 .PHONY : commands/credits.cpp.i
 
 commands/credits.s: commands/credits.cpp.s
@@ -3408,7 +3406,7 @@ commands/credits.s: commands/credits.cpp.s
 
 # target to generate assembly for a file
 commands/credits.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/credits.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/credits.cpp.s
 .PHONY : commands/credits.cpp.s
 
 commands/cset.o: commands/cset.cpp.o
@@ -3417,7 +3415,7 @@ commands/cset.o: commands/cset.cpp.o
 
 # target to build an object file
 commands/cset.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cset.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cset.cpp.o
 .PHONY : commands/cset.cpp.o
 
 commands/cset.i: commands/cset.cpp.i
@@ -3426,7 +3424,7 @@ commands/cset.i: commands/cset.cpp.i
 
 # target to preprocess a source file
 commands/cset.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cset.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cset.cpp.i
 .PHONY : commands/cset.cpp.i
 
 commands/cset.s: commands/cset.cpp.s
@@ -3435,7 +3433,7 @@ commands/cset.s: commands/cset.cpp.s
 
 # target to generate assembly for a file
 commands/cset.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cset.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cset.cpp.s
 .PHONY : commands/cset.cpp.s
 
 commands/cutdoor.o: commands/cutdoor.cpp.o
@@ -3444,7 +3442,7 @@ commands/cutdoor.o: commands/cutdoor.cpp.o
 
 # target to build an object file
 commands/cutdoor.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cutdoor.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cutdoor.cpp.o
 .PHONY : commands/cutdoor.cpp.o
 
 commands/cutdoor.i: commands/cutdoor.cpp.i
@@ -3453,7 +3451,7 @@ commands/cutdoor.i: commands/cutdoor.cpp.i
 
 # target to preprocess a source file
 commands/cutdoor.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cutdoor.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cutdoor.cpp.i
 .PHONY : commands/cutdoor.cpp.i
 
 commands/cutdoor.s: commands/cutdoor.cpp.s
@@ -3462,7 +3460,7 @@ commands/cutdoor.s: commands/cutdoor.cpp.s
 
 # target to generate assembly for a file
 commands/cutdoor.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/cutdoor.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/cutdoor.cpp.s
 .PHONY : commands/cutdoor.cpp.s
 
 commands/decline.o: commands/decline.cpp.o
@@ -3471,7 +3469,7 @@ commands/decline.o: commands/decline.cpp.o
 
 # target to build an object file
 commands/decline.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/decline.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/decline.cpp.o
 .PHONY : commands/decline.cpp.o
 
 commands/decline.i: commands/decline.cpp.i
@@ -3480,7 +3478,7 @@ commands/decline.i: commands/decline.cpp.i
 
 # target to preprocess a source file
 commands/decline.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/decline.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/decline.cpp.i
 .PHONY : commands/decline.cpp.i
 
 commands/decline.s: commands/decline.cpp.s
@@ -3489,7 +3487,7 @@ commands/decline.s: commands/decline.cpp.s
 
 # target to generate assembly for a file
 commands/decline.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/decline.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/decline.cpp.s
 .PHONY : commands/decline.cpp.s
 
 commands/delay.o: commands/delay.cpp.o
@@ -3498,7 +3496,7 @@ commands/delay.o: commands/delay.cpp.o
 
 # target to build an object file
 commands/delay.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/delay.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/delay.cpp.o
 .PHONY : commands/delay.cpp.o
 
 commands/delay.i: commands/delay.cpp.i
@@ -3507,7 +3505,7 @@ commands/delay.i: commands/delay.cpp.i
 
 # target to preprocess a source file
 commands/delay.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/delay.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/delay.cpp.i
 .PHONY : commands/delay.cpp.i
 
 commands/delay.s: commands/delay.cpp.s
@@ -3516,7 +3514,7 @@ commands/delay.s: commands/delay.cpp.s
 
 # target to generate assembly for a file
 commands/delay.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/delay.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/delay.cpp.s
 .PHONY : commands/delay.cpp.s
 
 commands/demote.o: commands/demote.cpp.o
@@ -3525,7 +3523,7 @@ commands/demote.o: commands/demote.cpp.o
 
 # target to build an object file
 commands/demote.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/demote.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/demote.cpp.o
 .PHONY : commands/demote.cpp.o
 
 commands/demote.i: commands/demote.cpp.i
@@ -3534,7 +3532,7 @@ commands/demote.i: commands/demote.cpp.i
 
 # target to preprocess a source file
 commands/demote.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/demote.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/demote.cpp.i
 .PHONY : commands/demote.cpp.i
 
 commands/demote.s: commands/demote.cpp.s
@@ -3543,7 +3541,7 @@ commands/demote.s: commands/demote.cpp.s
 
 # target to generate assembly for a file
 commands/demote.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/demote.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/demote.cpp.s
 .PHONY : commands/demote.cpp.s
 
 commands/deny.o: commands/deny.cpp.o
@@ -3552,7 +3550,7 @@ commands/deny.o: commands/deny.cpp.o
 
 # target to build an object file
 commands/deny.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/deny.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/deny.cpp.o
 .PHONY : commands/deny.cpp.o
 
 commands/deny.i: commands/deny.cpp.i
@@ -3561,7 +3559,7 @@ commands/deny.i: commands/deny.cpp.i
 
 # target to preprocess a source file
 commands/deny.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/deny.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/deny.cpp.i
 .PHONY : commands/deny.cpp.i
 
 commands/deny.s: commands/deny.cpp.s
@@ -3570,7 +3568,7 @@ commands/deny.s: commands/deny.cpp.s
 
 # target to generate assembly for a file
 commands/deny.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/deny.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/deny.cpp.s
 .PHONY : commands/deny.cpp.s
 
 commands/description.o: commands/description.cpp.o
@@ -3579,7 +3577,7 @@ commands/description.o: commands/description.cpp.o
 
 # target to build an object file
 commands/description.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/description.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/description.cpp.o
 .PHONY : commands/description.cpp.o
 
 commands/description.i: commands/description.cpp.i
@@ -3588,7 +3586,7 @@ commands/description.i: commands/description.cpp.i
 
 # target to preprocess a source file
 commands/description.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/description.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/description.cpp.i
 .PHONY : commands/description.cpp.i
 
 commands/description.s: commands/description.cpp.s
@@ -3597,7 +3595,7 @@ commands/description.s: commands/description.cpp.s
 
 # target to generate assembly for a file
 commands/description.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/description.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/description.cpp.s
 .PHONY : commands/description.cpp.s
 
 commands/destroy.o: commands/destroy.cpp.o
@@ -3606,7 +3604,7 @@ commands/destroy.o: commands/destroy.cpp.o
 
 # target to build an object file
 commands/destroy.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/destroy.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/destroy.cpp.o
 .PHONY : commands/destroy.cpp.o
 
 commands/destroy.i: commands/destroy.cpp.i
@@ -3615,7 +3613,7 @@ commands/destroy.i: commands/destroy.cpp.i
 
 # target to preprocess a source file
 commands/destroy.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/destroy.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/destroy.cpp.i
 .PHONY : commands/destroy.cpp.i
 
 commands/destroy.s: commands/destroy.cpp.s
@@ -3624,7 +3622,7 @@ commands/destroy.s: commands/destroy.cpp.s
 
 # target to generate assembly for a file
 commands/destroy.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/destroy.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/destroy.cpp.s
 .PHONY : commands/destroy.cpp.s
 
 commands/detrap.o: commands/detrap.cpp.o
@@ -3633,7 +3631,7 @@ commands/detrap.o: commands/detrap.cpp.o
 
 # target to build an object file
 commands/detrap.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/detrap.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/detrap.cpp.o
 .PHONY : commands/detrap.cpp.o
 
 commands/detrap.i: commands/detrap.cpp.i
@@ -3642,7 +3640,7 @@ commands/detrap.i: commands/detrap.cpp.i
 
 # target to preprocess a source file
 commands/detrap.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/detrap.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/detrap.cpp.i
 .PHONY : commands/detrap.cpp.i
 
 commands/detrap.s: commands/detrap.cpp.s
@@ -3651,7 +3649,7 @@ commands/detrap.s: commands/detrap.cpp.s
 
 # target to generate assembly for a file
 commands/detrap.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/detrap.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/detrap.cpp.s
 .PHONY : commands/detrap.cpp.s
 
 commands/diagnose.o: commands/diagnose.cpp.o
@@ -3660,7 +3658,7 @@ commands/diagnose.o: commands/diagnose.cpp.o
 
 # target to build an object file
 commands/diagnose.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/diagnose.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/diagnose.cpp.o
 .PHONY : commands/diagnose.cpp.o
 
 commands/diagnose.i: commands/diagnose.cpp.i
@@ -3669,7 +3667,7 @@ commands/diagnose.i: commands/diagnose.cpp.i
 
 # target to preprocess a source file
 commands/diagnose.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/diagnose.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/diagnose.cpp.i
 .PHONY : commands/diagnose.cpp.i
 
 commands/diagnose.s: commands/diagnose.cpp.s
@@ -3678,7 +3676,7 @@ commands/diagnose.s: commands/diagnose.cpp.s
 
 # target to generate assembly for a file
 commands/diagnose.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/diagnose.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/diagnose.cpp.s
 .PHONY : commands/diagnose.cpp.s
 
 commands/dig.o: commands/dig.cpp.o
@@ -3687,7 +3685,7 @@ commands/dig.o: commands/dig.cpp.o
 
 # target to build an object file
 commands/dig.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dig.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dig.cpp.o
 .PHONY : commands/dig.cpp.o
 
 commands/dig.i: commands/dig.cpp.i
@@ -3696,7 +3694,7 @@ commands/dig.i: commands/dig.cpp.i
 
 # target to preprocess a source file
 commands/dig.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dig.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dig.cpp.i
 .PHONY : commands/dig.cpp.i
 
 commands/dig.s: commands/dig.cpp.s
@@ -3705,7 +3703,7 @@ commands/dig.s: commands/dig.cpp.s
 
 # target to generate assembly for a file
 commands/dig.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dig.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dig.cpp.s
 .PHONY : commands/dig.cpp.s
 
 commands/disarm.o: commands/disarm.cpp.o
@@ -3714,7 +3712,7 @@ commands/disarm.o: commands/disarm.cpp.o
 
 # target to build an object file
 commands/disarm.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/disarm.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/disarm.cpp.o
 .PHONY : commands/disarm.cpp.o
 
 commands/disarm.i: commands/disarm.cpp.i
@@ -3723,7 +3721,7 @@ commands/disarm.i: commands/disarm.cpp.i
 
 # target to preprocess a source file
 commands/disarm.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/disarm.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/disarm.cpp.i
 .PHONY : commands/disarm.cpp.i
 
 commands/disarm.s: commands/disarm.cpp.s
@@ -3732,7 +3730,7 @@ commands/disarm.s: commands/disarm.cpp.s
 
 # target to generate assembly for a file
 commands/disarm.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/disarm.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/disarm.cpp.s
 .PHONY : commands/disarm.cpp.s
 
 commands/disconnect.o: commands/disconnect.cpp.o
@@ -3741,7 +3739,7 @@ commands/disconnect.o: commands/disconnect.cpp.o
 
 # target to build an object file
 commands/disconnect.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/disconnect.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/disconnect.cpp.o
 .PHONY : commands/disconnect.cpp.o
 
 commands/disconnect.i: commands/disconnect.cpp.i
@@ -3750,7 +3748,7 @@ commands/disconnect.i: commands/disconnect.cpp.i
 
 # target to preprocess a source file
 commands/disconnect.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/disconnect.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/disconnect.cpp.i
 .PHONY : commands/disconnect.cpp.i
 
 commands/disconnect.s: commands/disconnect.cpp.s
@@ -3759,7 +3757,7 @@ commands/disconnect.s: commands/disconnect.cpp.s
 
 # target to generate assembly for a file
 commands/disconnect.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/disconnect.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/disconnect.cpp.s
 .PHONY : commands/disconnect.cpp.s
 
 commands/disguise.o: commands/disguise.cpp.o
@@ -3768,7 +3766,7 @@ commands/disguise.o: commands/disguise.cpp.o
 
 # target to build an object file
 commands/disguise.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/disguise.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/disguise.cpp.o
 .PHONY : commands/disguise.cpp.o
 
 commands/disguise.i: commands/disguise.cpp.i
@@ -3777,7 +3775,7 @@ commands/disguise.i: commands/disguise.cpp.i
 
 # target to preprocess a source file
 commands/disguise.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/disguise.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/disguise.cpp.i
 .PHONY : commands/disguise.cpp.i
 
 commands/disguise.s: commands/disguise.cpp.s
@@ -3786,7 +3784,7 @@ commands/disguise.s: commands/disguise.cpp.s
 
 # target to generate assembly for a file
 commands/disguise.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/disguise.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/disguise.cpp.s
 .PHONY : commands/disguise.cpp.s
 
 commands/dismiss.o: commands/dismiss.cpp.o
@@ -3795,7 +3793,7 @@ commands/dismiss.o: commands/dismiss.cpp.o
 
 # target to build an object file
 commands/dismiss.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dismiss.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dismiss.cpp.o
 .PHONY : commands/dismiss.cpp.o
 
 commands/dismiss.i: commands/dismiss.cpp.i
@@ -3804,7 +3802,7 @@ commands/dismiss.i: commands/dismiss.cpp.i
 
 # target to preprocess a source file
 commands/dismiss.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dismiss.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dismiss.cpp.i
 .PHONY : commands/dismiss.cpp.i
 
 commands/dismiss.s: commands/dismiss.cpp.s
@@ -3813,7 +3811,7 @@ commands/dismiss.s: commands/dismiss.cpp.s
 
 # target to generate assembly for a file
 commands/dismiss.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dismiss.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dismiss.cpp.s
 .PHONY : commands/dismiss.cpp.s
 
 commands/dismount.o: commands/dismount.cpp.o
@@ -3822,7 +3820,7 @@ commands/dismount.o: commands/dismount.cpp.o
 
 # target to build an object file
 commands/dismount.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dismount.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dismount.cpp.o
 .PHONY : commands/dismount.cpp.o
 
 commands/dismount.i: commands/dismount.cpp.i
@@ -3831,7 +3829,7 @@ commands/dismount.i: commands/dismount.cpp.i
 
 # target to preprocess a source file
 commands/dismount.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dismount.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dismount.cpp.i
 .PHONY : commands/dismount.cpp.i
 
 commands/dismount.s: commands/dismount.cpp.s
@@ -3840,7 +3838,7 @@ commands/dismount.s: commands/dismount.cpp.s
 
 # target to generate assembly for a file
 commands/dismount.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dismount.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dismount.cpp.s
 .PHONY : commands/dismount.cpp.s
 
 commands/dmsg.o: commands/dmsg.cpp.o
@@ -3849,7 +3847,7 @@ commands/dmsg.o: commands/dmsg.cpp.o
 
 # target to build an object file
 commands/dmsg.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dmsg.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dmsg.cpp.o
 .PHONY : commands/dmsg.cpp.o
 
 commands/dmsg.i: commands/dmsg.cpp.i
@@ -3858,7 +3856,7 @@ commands/dmsg.i: commands/dmsg.cpp.i
 
 # target to preprocess a source file
 commands/dmsg.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dmsg.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dmsg.cpp.i
 .PHONY : commands/dmsg.cpp.i
 
 commands/dmsg.s: commands/dmsg.cpp.s
@@ -3867,7 +3865,7 @@ commands/dmsg.s: commands/dmsg.cpp.s
 
 # target to generate assembly for a file
 commands/dmsg.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dmsg.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dmsg.cpp.s
 .PHONY : commands/dmsg.cpp.s
 
 commands/dnd.o: commands/dnd.cpp.o
@@ -3876,7 +3874,7 @@ commands/dnd.o: commands/dnd.cpp.o
 
 # target to build an object file
 commands/dnd.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dnd.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dnd.cpp.o
 .PHONY : commands/dnd.cpp.o
 
 commands/dnd.i: commands/dnd.cpp.i
@@ -3885,7 +3883,7 @@ commands/dnd.i: commands/dnd.cpp.i
 
 # target to preprocess a source file
 commands/dnd.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dnd.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dnd.cpp.i
 .PHONY : commands/dnd.cpp.i
 
 commands/dnd.s: commands/dnd.cpp.s
@@ -3894,7 +3892,7 @@ commands/dnd.s: commands/dnd.cpp.s
 
 # target to generate assembly for a file
 commands/dnd.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dnd.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dnd.cpp.s
 .PHONY : commands/dnd.cpp.s
 
 commands/dock.o: commands/dock.cpp.o
@@ -3903,7 +3901,7 @@ commands/dock.o: commands/dock.cpp.o
 
 # target to build an object file
 commands/dock.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dock.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dock.cpp.o
 .PHONY : commands/dock.cpp.o
 
 commands/dock.i: commands/dock.cpp.i
@@ -3912,7 +3910,7 @@ commands/dock.i: commands/dock.cpp.i
 
 # target to preprocess a source file
 commands/dock.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dock.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dock.cpp.i
 .PHONY : commands/dock.cpp.i
 
 commands/dock.s: commands/dock.cpp.s
@@ -3921,7 +3919,7 @@ commands/dock.s: commands/dock.cpp.s
 
 # target to generate assembly for a file
 commands/dock.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/dock.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/dock.cpp.s
 .PHONY : commands/dock.cpp.s
 
 commands/down.o: commands/down.cpp.o
@@ -3930,7 +3928,7 @@ commands/down.o: commands/down.cpp.o
 
 # target to build an object file
 commands/down.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/down.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/down.cpp.o
 .PHONY : commands/down.cpp.o
 
 commands/down.i: commands/down.cpp.i
@@ -3939,7 +3937,7 @@ commands/down.i: commands/down.cpp.i
 
 # target to preprocess a source file
 commands/down.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/down.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/down.cpp.i
 .PHONY : commands/down.cpp.i
 
 commands/down.s: commands/down.cpp.s
@@ -3948,7 +3946,7 @@ commands/down.s: commands/down.cpp.s
 
 # target to generate assembly for a file
 commands/down.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/down.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/down.cpp.s
 .PHONY : commands/down.cpp.s
 
 commands/drag.o: commands/drag.cpp.o
@@ -3957,7 +3955,7 @@ commands/drag.o: commands/drag.cpp.o
 
 # target to build an object file
 commands/drag.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/drag.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/drag.cpp.o
 .PHONY : commands/drag.cpp.o
 
 commands/drag.i: commands/drag.cpp.i
@@ -3966,7 +3964,7 @@ commands/drag.i: commands/drag.cpp.i
 
 # target to preprocess a source file
 commands/drag.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/drag.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/drag.cpp.i
 .PHONY : commands/drag.cpp.i
 
 commands/drag.s: commands/drag.cpp.s
@@ -3975,7 +3973,7 @@ commands/drag.s: commands/drag.cpp.s
 
 # target to generate assembly for a file
 commands/drag.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/drag.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/drag.cpp.s
 .PHONY : commands/drag.cpp.s
 
 commands/draw.o: commands/draw.cpp.o
@@ -3984,7 +3982,7 @@ commands/draw.o: commands/draw.cpp.o
 
 # target to build an object file
 commands/draw.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/draw.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/draw.cpp.o
 .PHONY : commands/draw.cpp.o
 
 commands/draw.i: commands/draw.cpp.i
@@ -3993,7 +3991,7 @@ commands/draw.i: commands/draw.cpp.i
 
 # target to preprocess a source file
 commands/draw.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/draw.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/draw.cpp.i
 .PHONY : commands/draw.cpp.i
 
 commands/draw.s: commands/draw.cpp.s
@@ -4002,7 +4000,7 @@ commands/draw.s: commands/draw.cpp.s
 
 # target to generate assembly for a file
 commands/draw.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/draw.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/draw.cpp.s
 .PHONY : commands/draw.cpp.s
 
 commands/drink.o: commands/drink.cpp.o
@@ -4011,7 +4009,7 @@ commands/drink.o: commands/drink.cpp.o
 
 # target to build an object file
 commands/drink.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/drink.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/drink.cpp.o
 .PHONY : commands/drink.cpp.o
 
 commands/drink.i: commands/drink.cpp.i
@@ -4020,7 +4018,7 @@ commands/drink.i: commands/drink.cpp.i
 
 # target to preprocess a source file
 commands/drink.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/drink.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/drink.cpp.i
 .PHONY : commands/drink.cpp.i
 
 commands/drink.s: commands/drink.cpp.s
@@ -4029,7 +4027,7 @@ commands/drink.s: commands/drink.cpp.s
 
 # target to generate assembly for a file
 commands/drink.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/drink.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/drink.cpp.s
 .PHONY : commands/drink.cpp.s
 
 commands/drive.o: commands/drive.cpp.o
@@ -4038,7 +4036,7 @@ commands/drive.o: commands/drive.cpp.o
 
 # target to build an object file
 commands/drive.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/drive.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/drive.cpp.o
 .PHONY : commands/drive.cpp.o
 
 commands/drive.i: commands/drive.cpp.i
@@ -4047,7 +4045,7 @@ commands/drive.i: commands/drive.cpp.i
 
 # target to preprocess a source file
 commands/drive.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/drive.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/drive.cpp.i
 .PHONY : commands/drive.cpp.i
 
 commands/drive.s: commands/drive.cpp.s
@@ -4056,7 +4054,7 @@ commands/drive.s: commands/drive.cpp.s
 
 # target to generate assembly for a file
 commands/drive.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/drive.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/drive.cpp.s
 .PHONY : commands/drive.cpp.s
 
 commands/drop.o: commands/drop.cpp.o
@@ -4065,7 +4063,7 @@ commands/drop.o: commands/drop.cpp.o
 
 # target to build an object file
 commands/drop.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/drop.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/drop.cpp.o
 .PHONY : commands/drop.cpp.o
 
 commands/drop.i: commands/drop.cpp.i
@@ -4074,7 +4072,7 @@ commands/drop.i: commands/drop.cpp.i
 
 # target to preprocess a source file
 commands/drop.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/drop.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/drop.cpp.i
 .PHONY : commands/drop.cpp.i
 
 commands/drop.s: commands/drop.cpp.s
@@ -4083,7 +4081,7 @@ commands/drop.s: commands/drop.cpp.s
 
 # target to generate assembly for a file
 commands/drop.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/drop.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/drop.cpp.s
 .PHONY : commands/drop.cpp.s
 
 commands/east.o: commands/east.cpp.o
@@ -4092,7 +4090,7 @@ commands/east.o: commands/east.cpp.o
 
 # target to build an object file
 commands/east.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/east.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/east.cpp.o
 .PHONY : commands/east.cpp.o
 
 commands/east.i: commands/east.cpp.i
@@ -4101,7 +4099,7 @@ commands/east.i: commands/east.cpp.i
 
 # target to preprocess a source file
 commands/east.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/east.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/east.cpp.i
 .PHONY : commands/east.cpp.i
 
 commands/east.s: commands/east.cpp.s
@@ -4110,7 +4108,7 @@ commands/east.s: commands/east.cpp.s
 
 # target to generate assembly for a file
 commands/east.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/east.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/east.cpp.s
 .PHONY : commands/east.cpp.s
 
 commands/eat.o: commands/eat.cpp.o
@@ -4119,7 +4117,7 @@ commands/eat.o: commands/eat.cpp.o
 
 # target to build an object file
 commands/eat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/eat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/eat.cpp.o
 .PHONY : commands/eat.cpp.o
 
 commands/eat.i: commands/eat.cpp.i
@@ -4128,7 +4126,7 @@ commands/eat.i: commands/eat.cpp.i
 
 # target to preprocess a source file
 commands/eat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/eat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/eat.cpp.i
 .PHONY : commands/eat.cpp.i
 
 commands/eat.s: commands/eat.cpp.s
@@ -4137,7 +4135,7 @@ commands/eat.s: commands/eat.cpp.s
 
 # target to generate assembly for a file
 commands/eat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/eat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/eat.cpp.s
 .PHONY : commands/eat.cpp.s
 
 commands/echo.o: commands/echo.cpp.o
@@ -4146,7 +4144,7 @@ commands/echo.o: commands/echo.cpp.o
 
 # target to build an object file
 commands/echo.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/echo.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/echo.cpp.o
 .PHONY : commands/echo.cpp.o
 
 commands/echo.i: commands/echo.cpp.i
@@ -4155,7 +4153,7 @@ commands/echo.i: commands/echo.cpp.i
 
 # target to preprocess a source file
 commands/echo.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/echo.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/echo.cpp.i
 .PHONY : commands/echo.cpp.i
 
 commands/echo.s: commands/echo.cpp.s
@@ -4164,7 +4162,7 @@ commands/echo.s: commands/echo.cpp.s
 
 # target to generate assembly for a file
 commands/echo.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/echo.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/echo.cpp.s
 .PHONY : commands/echo.cpp.s
 
 commands/eliteguard.o: commands/eliteguard.cpp.o
@@ -4173,7 +4171,7 @@ commands/eliteguard.o: commands/eliteguard.cpp.o
 
 # target to build an object file
 commands/eliteguard.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/eliteguard.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/eliteguard.cpp.o
 .PHONY : commands/eliteguard.cpp.o
 
 commands/eliteguard.i: commands/eliteguard.cpp.i
@@ -4182,7 +4180,7 @@ commands/eliteguard.i: commands/eliteguard.cpp.i
 
 # target to preprocess a source file
 commands/eliteguard.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/eliteguard.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/eliteguard.cpp.i
 .PHONY : commands/eliteguard.cpp.i
 
 commands/eliteguard.s: commands/eliteguard.cpp.s
@@ -4191,7 +4189,7 @@ commands/eliteguard.s: commands/eliteguard.cpp.s
 
 # target to generate assembly for a file
 commands/eliteguard.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/eliteguard.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/eliteguard.cpp.s
 .PHONY : commands/eliteguard.cpp.s
 
 commands/emote.o: commands/emote.cpp.o
@@ -4200,7 +4198,7 @@ commands/emote.o: commands/emote.cpp.o
 
 # target to build an object file
 commands/emote.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/emote.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/emote.cpp.o
 .PHONY : commands/emote.cpp.o
 
 commands/emote.i: commands/emote.cpp.i
@@ -4209,7 +4207,7 @@ commands/emote.i: commands/emote.cpp.i
 
 # target to preprocess a source file
 commands/emote.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/emote.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/emote.cpp.i
 .PHONY : commands/emote.cpp.i
 
 commands/emote.s: commands/emote.cpp.s
@@ -4218,7 +4216,7 @@ commands/emote.s: commands/emote.cpp.s
 
 # target to generate assembly for a file
 commands/emote.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/emote.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/emote.cpp.s
 .PHONY : commands/emote.cpp.s
 
 commands/empower.o: commands/empower.cpp.o
@@ -4227,7 +4225,7 @@ commands/empower.o: commands/empower.cpp.o
 
 # target to build an object file
 commands/empower.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/empower.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/empower.cpp.o
 .PHONY : commands/empower.cpp.o
 
 commands/empower.i: commands/empower.cpp.i
@@ -4236,7 +4234,7 @@ commands/empower.i: commands/empower.cpp.i
 
 # target to preprocess a source file
 commands/empower.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/empower.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/empower.cpp.i
 .PHONY : commands/empower.cpp.i
 
 commands/empower.s: commands/empower.cpp.s
@@ -4245,7 +4243,7 @@ commands/empower.s: commands/empower.cpp.s
 
 # target to generate assembly for a file
 commands/empower.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/empower.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/empower.cpp.s
 .PHONY : commands/empower.cpp.s
 
 commands/empty.o: commands/empty.cpp.o
@@ -4254,7 +4252,7 @@ commands/empty.o: commands/empty.cpp.o
 
 # target to build an object file
 commands/empty.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/empty.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/empty.cpp.o
 .PHONY : commands/empty.cpp.o
 
 commands/empty.i: commands/empty.cpp.i
@@ -4263,7 +4261,7 @@ commands/empty.i: commands/empty.cpp.i
 
 # target to preprocess a source file
 commands/empty.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/empty.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/empty.cpp.i
 .PHONY : commands/empty.cpp.i
 
 commands/empty.s: commands/empty.cpp.s
@@ -4272,7 +4270,7 @@ commands/empty.s: commands/empty.cpp.s
 
 # target to generate assembly for a file
 commands/empty.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/empty.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/empty.cpp.s
 .PHONY : commands/empty.cpp.s
 
 commands/enter.o: commands/enter.cpp.o
@@ -4281,7 +4279,7 @@ commands/enter.o: commands/enter.cpp.o
 
 # target to build an object file
 commands/enter.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/enter.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/enter.cpp.o
 .PHONY : commands/enter.cpp.o
 
 commands/enter.i: commands/enter.cpp.i
@@ -4290,7 +4288,7 @@ commands/enter.i: commands/enter.cpp.i
 
 # target to preprocess a source file
 commands/enter.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/enter.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/enter.cpp.i
 .PHONY : commands/enter.cpp.i
 
 commands/enter.s: commands/enter.cpp.s
@@ -4299,7 +4297,7 @@ commands/enter.s: commands/enter.cpp.s
 
 # target to generate assembly for a file
 commands/enter.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/enter.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/enter.cpp.s
 .PHONY : commands/enter.cpp.s
 
 commands/equipment.o: commands/equipment.cpp.o
@@ -4308,7 +4306,7 @@ commands/equipment.o: commands/equipment.cpp.o
 
 # target to build an object file
 commands/equipment.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/equipment.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/equipment.cpp.o
 .PHONY : commands/equipment.cpp.o
 
 commands/equipment.i: commands/equipment.cpp.i
@@ -4317,7 +4315,7 @@ commands/equipment.i: commands/equipment.cpp.i
 
 # target to preprocess a source file
 commands/equipment.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/equipment.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/equipment.cpp.i
 .PHONY : commands/equipment.cpp.i
 
 commands/equipment.s: commands/equipment.cpp.s
@@ -4326,7 +4324,7 @@ commands/equipment.s: commands/equipment.cpp.s
 
 # target to generate assembly for a file
 commands/equipment.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/equipment.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/equipment.cpp.s
 .PHONY : commands/equipment.cpp.s
 
 commands/examine.o: commands/examine.cpp.o
@@ -4335,7 +4333,7 @@ commands/examine.o: commands/examine.cpp.o
 
 # target to build an object file
 commands/examine.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/examine.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/examine.cpp.o
 .PHONY : commands/examine.cpp.o
 
 commands/examine.i: commands/examine.cpp.i
@@ -4344,7 +4342,7 @@ commands/examine.i: commands/examine.cpp.i
 
 # target to preprocess a source file
 commands/examine.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/examine.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/examine.cpp.i
 .PHONY : commands/examine.cpp.i
 
 commands/examine.s: commands/examine.cpp.s
@@ -4353,7 +4351,7 @@ commands/examine.s: commands/examine.cpp.s
 
 # target to generate assembly for a file
 commands/examine.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/examine.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/examine.cpp.s
 .PHONY : commands/examine.cpp.s
 
 commands/exits.o: commands/exits.cpp.o
@@ -4362,7 +4360,7 @@ commands/exits.o: commands/exits.cpp.o
 
 # target to build an object file
 commands/exits.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/exits.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/exits.cpp.o
 .PHONY : commands/exits.cpp.o
 
 commands/exits.i: commands/exits.cpp.i
@@ -4371,7 +4369,7 @@ commands/exits.i: commands/exits.cpp.i
 
 # target to preprocess a source file
 commands/exits.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/exits.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/exits.cpp.i
 .PHONY : commands/exits.cpp.i
 
 commands/exits.s: commands/exits.cpp.s
@@ -4380,7 +4378,7 @@ commands/exits.s: commands/exits.cpp.s
 
 # target to generate assembly for a file
 commands/exits.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/exits.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/exits.cpp.s
 .PHONY : commands/exits.cpp.s
 
 commands/fill.o: commands/fill.cpp.o
@@ -4389,7 +4387,7 @@ commands/fill.o: commands/fill.cpp.o
 
 # target to build an object file
 commands/fill.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fill.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fill.cpp.o
 .PHONY : commands/fill.cpp.o
 
 commands/fill.i: commands/fill.cpp.i
@@ -4398,7 +4396,7 @@ commands/fill.i: commands/fill.cpp.i
 
 # target to preprocess a source file
 commands/fill.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fill.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fill.cpp.i
 .PHONY : commands/fill.cpp.i
 
 commands/fill.s: commands/fill.cpp.s
@@ -4407,7 +4405,7 @@ commands/fill.s: commands/fill.cpp.s
 
 # target to generate assembly for a file
 commands/fill.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fill.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fill.cpp.s
 .PHONY : commands/fill.cpp.s
 
 commands/fire.o: commands/fire.cpp.o
@@ -4416,7 +4414,7 @@ commands/fire.o: commands/fire.cpp.o
 
 # target to build an object file
 commands/fire.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fire.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fire.cpp.o
 .PHONY : commands/fire.cpp.o
 
 commands/fire.i: commands/fire.cpp.i
@@ -4425,7 +4423,7 @@ commands/fire.i: commands/fire.cpp.i
 
 # target to preprocess a source file
 commands/fire.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fire.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fire.cpp.i
 .PHONY : commands/fire.cpp.i
 
 commands/fire.s: commands/fire.cpp.s
@@ -4434,7 +4432,7 @@ commands/fire.s: commands/fire.cpp.s
 
 # target to generate assembly for a file
 commands/fire.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fire.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fire.cpp.s
 .PHONY : commands/fire.cpp.s
 
 commands/firstaid.o: commands/firstaid.cpp.o
@@ -4443,7 +4441,7 @@ commands/firstaid.o: commands/firstaid.cpp.o
 
 # target to build an object file
 commands/firstaid.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/firstaid.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/firstaid.cpp.o
 .PHONY : commands/firstaid.cpp.o
 
 commands/firstaid.i: commands/firstaid.cpp.i
@@ -4452,7 +4450,7 @@ commands/firstaid.i: commands/firstaid.cpp.i
 
 # target to preprocess a source file
 commands/firstaid.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/firstaid.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/firstaid.cpp.i
 .PHONY : commands/firstaid.cpp.i
 
 commands/firstaid.s: commands/firstaid.cpp.s
@@ -4461,7 +4459,7 @@ commands/firstaid.s: commands/firstaid.cpp.s
 
 # target to generate assembly for a file
 commands/firstaid.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/firstaid.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/firstaid.cpp.s
 .PHONY : commands/firstaid.cpp.s
 
 commands/fixchar.o: commands/fixchar.cpp.o
@@ -4470,7 +4468,7 @@ commands/fixchar.o: commands/fixchar.cpp.o
 
 # target to build an object file
 commands/fixchar.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fixchar.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fixchar.cpp.o
 .PHONY : commands/fixchar.cpp.o
 
 commands/fixchar.i: commands/fixchar.cpp.i
@@ -4479,7 +4477,7 @@ commands/fixchar.i: commands/fixchar.cpp.i
 
 # target to preprocess a source file
 commands/fixchar.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fixchar.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fixchar.cpp.i
 .PHONY : commands/fixchar.cpp.i
 
 commands/fixchar.s: commands/fixchar.cpp.s
@@ -4488,7 +4486,7 @@ commands/fixchar.s: commands/fixchar.cpp.s
 
 # target to generate assembly for a file
 commands/fixchar.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fixchar.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fixchar.cpp.s
 .PHONY : commands/fixchar.cpp.s
 
 commands/flee.o: commands/flee.cpp.o
@@ -4497,7 +4495,7 @@ commands/flee.o: commands/flee.cpp.o
 
 # target to build an object file
 commands/flee.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/flee.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/flee.cpp.o
 .PHONY : commands/flee.cpp.o
 
 commands/flee.i: commands/flee.cpp.i
@@ -4506,7 +4504,7 @@ commands/flee.i: commands/flee.cpp.i
 
 # target to preprocess a source file
 commands/flee.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/flee.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/flee.cpp.i
 .PHONY : commands/flee.cpp.i
 
 commands/flee.s: commands/flee.cpp.s
@@ -4515,7 +4513,7 @@ commands/flee.s: commands/flee.cpp.s
 
 # target to generate assembly for a file
 commands/flee.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/flee.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/flee.cpp.s
 .PHONY : commands/flee.cpp.s
 
 commands/focusalias.o: commands/focusalias.cpp.o
@@ -4524,7 +4522,7 @@ commands/focusalias.o: commands/focusalias.cpp.o
 
 # target to build an object file
 commands/focusalias.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/focusalias.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/focusalias.cpp.o
 .PHONY : commands/focusalias.cpp.o
 
 commands/focusalias.i: commands/focusalias.cpp.i
@@ -4533,7 +4531,7 @@ commands/focusalias.i: commands/focusalias.cpp.i
 
 # target to preprocess a source file
 commands/focusalias.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/focusalias.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/focusalias.cpp.i
 .PHONY : commands/focusalias.cpp.i
 
 commands/focusalias.s: commands/focusalias.cpp.s
@@ -4542,7 +4540,7 @@ commands/focusalias.s: commands/focusalias.cpp.s
 
 # target to generate assembly for a file
 commands/focusalias.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/focusalias.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/focusalias.cpp.s
 .PHONY : commands/focusalias.cpp.s
 
 commands/foldarea.o: commands/foldarea.cpp.o
@@ -4551,7 +4549,7 @@ commands/foldarea.o: commands/foldarea.cpp.o
 
 # target to build an object file
 commands/foldarea.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/foldarea.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/foldarea.cpp.o
 .PHONY : commands/foldarea.cpp.o
 
 commands/foldarea.i: commands/foldarea.cpp.i
@@ -4560,7 +4558,7 @@ commands/foldarea.i: commands/foldarea.cpp.i
 
 # target to preprocess a source file
 commands/foldarea.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/foldarea.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/foldarea.cpp.i
 .PHONY : commands/foldarea.cpp.i
 
 commands/foldarea.s: commands/foldarea.cpp.s
@@ -4569,7 +4567,7 @@ commands/foldarea.s: commands/foldarea.cpp.s
 
 # target to generate assembly for a file
 commands/foldarea.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/foldarea.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/foldarea.cpp.s
 .PHONY : commands/foldarea.cpp.s
 
 commands/follow.o: commands/follow.cpp.o
@@ -4578,7 +4576,7 @@ commands/follow.o: commands/follow.cpp.o
 
 # target to build an object file
 commands/follow.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/follow.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/follow.cpp.o
 .PHONY : commands/follow.cpp.o
 
 commands/follow.i: commands/follow.cpp.i
@@ -4587,7 +4585,7 @@ commands/follow.i: commands/follow.cpp.i
 
 # target to preprocess a source file
 commands/follow.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/follow.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/follow.cpp.i
 .PHONY : commands/follow.cpp.i
 
 commands/follow.s: commands/follow.cpp.s
@@ -4596,7 +4594,7 @@ commands/follow.s: commands/follow.cpp.s
 
 # target to generate assembly for a file
 commands/follow.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/follow.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/follow.cpp.s
 .PHONY : commands/follow.cpp.s
 
 commands/for.o: commands/for.cpp.o
@@ -4605,7 +4603,7 @@ commands/for.o: commands/for.cpp.o
 
 # target to build an object file
 commands/for.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/for.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/for.cpp.o
 .PHONY : commands/for.cpp.o
 
 commands/for.i: commands/for.cpp.i
@@ -4614,7 +4612,7 @@ commands/for.i: commands/for.cpp.i
 
 # target to preprocess a source file
 commands/for.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/for.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/for.cpp.i
 .PHONY : commands/for.cpp.i
 
 commands/for.s: commands/for.cpp.s
@@ -4623,7 +4621,7 @@ commands/for.s: commands/for.cpp.s
 
 # target to generate assembly for a file
 commands/for.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/for.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/for.cpp.s
 .PHONY : commands/for.cpp.s
 
 commands/force.o: commands/force.cpp.o
@@ -4632,7 +4630,7 @@ commands/force.o: commands/force.cpp.o
 
 # target to build an object file
 commands/force.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/force.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/force.cpp.o
 .PHONY : commands/force.cpp.o
 
 commands/force.i: commands/force.cpp.i
@@ -4641,7 +4639,7 @@ commands/force.i: commands/force.cpp.i
 
 # target to preprocess a source file
 commands/force.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/force.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/force.cpp.i
 .PHONY : commands/force.cpp.i
 
 commands/force.s: commands/force.cpp.s
@@ -4650,7 +4648,7 @@ commands/force.s: commands/force.cpp.s
 
 # target to generate assembly for a file
 commands/force.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/force.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/force.cpp.s
 .PHONY : commands/force.cpp.s
 
 commands/forceclose.o: commands/forceclose.cpp.o
@@ -4659,7 +4657,7 @@ commands/forceclose.o: commands/forceclose.cpp.o
 
 # target to build an object file
 commands/forceclose.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/forceclose.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/forceclose.cpp.o
 .PHONY : commands/forceclose.cpp.o
 
 commands/forceclose.i: commands/forceclose.cpp.i
@@ -4668,7 +4666,7 @@ commands/forceclose.i: commands/forceclose.cpp.i
 
 # target to preprocess a source file
 commands/forceclose.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/forceclose.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/forceclose.cpp.i
 .PHONY : commands/forceclose.cpp.i
 
 commands/forceclose.s: commands/forceclose.cpp.s
@@ -4677,7 +4675,7 @@ commands/forceclose.s: commands/forceclose.cpp.s
 
 # target to generate assembly for a file
 commands/forceclose.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/forceclose.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/forceclose.cpp.s
 .PHONY : commands/forceclose.cpp.s
 
 commands/form_password.o: commands/form_password.cpp.o
@@ -4686,7 +4684,7 @@ commands/form_password.o: commands/form_password.cpp.o
 
 # target to build an object file
 commands/form_password.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/form_password.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/form_password.cpp.o
 .PHONY : commands/form_password.cpp.o
 
 commands/form_password.i: commands/form_password.cpp.i
@@ -4695,7 +4693,7 @@ commands/form_password.i: commands/form_password.cpp.i
 
 # target to preprocess a source file
 commands/form_password.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/form_password.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/form_password.cpp.i
 .PHONY : commands/form_password.cpp.i
 
 commands/form_password.s: commands/form_password.cpp.s
@@ -4704,7 +4702,7 @@ commands/form_password.s: commands/form_password.cpp.s
 
 # target to generate assembly for a file
 commands/form_password.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/form_password.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/form_password.cpp.s
 .PHONY : commands/form_password.cpp.s
 
 commands/fquit.o: commands/fquit.cpp.o
@@ -4713,7 +4711,7 @@ commands/fquit.o: commands/fquit.cpp.o
 
 # target to build an object file
 commands/fquit.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fquit.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fquit.cpp.o
 .PHONY : commands/fquit.cpp.o
 
 commands/fquit.i: commands/fquit.cpp.i
@@ -4722,7 +4720,7 @@ commands/fquit.i: commands/fquit.cpp.i
 
 # target to preprocess a source file
 commands/fquit.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fquit.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fquit.cpp.i
 .PHONY : commands/fquit.cpp.i
 
 commands/fquit.s: commands/fquit.cpp.s
@@ -4731,7 +4729,7 @@ commands/fquit.s: commands/fquit.cpp.s
 
 # target to generate assembly for a file
 commands/fquit.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fquit.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fquit.cpp.s
 .PHONY : commands/fquit.cpp.s
 
 commands/freeze.o: commands/freeze.cpp.o
@@ -4740,7 +4738,7 @@ commands/freeze.o: commands/freeze.cpp.o
 
 # target to build an object file
 commands/freeze.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/freeze.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/freeze.cpp.o
 .PHONY : commands/freeze.cpp.o
 
 commands/freeze.i: commands/freeze.cpp.i
@@ -4749,7 +4747,7 @@ commands/freeze.i: commands/freeze.cpp.i
 
 # target to preprocess a source file
 commands/freeze.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/freeze.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/freeze.cpp.i
 .PHONY : commands/freeze.cpp.i
 
 commands/freeze.s: commands/freeze.cpp.s
@@ -4758,7 +4756,7 @@ commands/freeze.s: commands/freeze.cpp.s
 
 # target to generate assembly for a file
 commands/freeze.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/freeze.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/freeze.cpp.s
 .PHONY : commands/freeze.cpp.s
 
 commands/fuel.o: commands/fuel.cpp.o
@@ -4767,7 +4765,7 @@ commands/fuel.o: commands/fuel.cpp.o
 
 # target to build an object file
 commands/fuel.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fuel.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fuel.cpp.o
 .PHONY : commands/fuel.cpp.o
 
 commands/fuel.i: commands/fuel.cpp.i
@@ -4776,7 +4774,7 @@ commands/fuel.i: commands/fuel.cpp.i
 
 # target to preprocess a source file
 commands/fuel.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fuel.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fuel.cpp.i
 .PHONY : commands/fuel.cpp.i
 
 commands/fuel.s: commands/fuel.cpp.s
@@ -4785,7 +4783,7 @@ commands/fuel.s: commands/fuel.cpp.s
 
 # target to generate assembly for a file
 commands/fuel.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/fuel.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/fuel.cpp.s
 .PHONY : commands/fuel.cpp.s
 
 commands/gatherintelligence.o: commands/gatherintelligence.cpp.o
@@ -4794,7 +4792,7 @@ commands/gatherintelligence.o: commands/gatherintelligence.cpp.o
 
 # target to build an object file
 commands/gatherintelligence.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/gatherintelligence.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/gatherintelligence.cpp.o
 .PHONY : commands/gatherintelligence.cpp.o
 
 commands/gatherintelligence.i: commands/gatherintelligence.cpp.i
@@ -4803,7 +4801,7 @@ commands/gatherintelligence.i: commands/gatherintelligence.cpp.i
 
 # target to preprocess a source file
 commands/gatherintelligence.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/gatherintelligence.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/gatherintelligence.cpp.i
 .PHONY : commands/gatherintelligence.cpp.i
 
 commands/gatherintelligence.s: commands/gatherintelligence.cpp.s
@@ -4812,7 +4810,7 @@ commands/gatherintelligence.s: commands/gatherintelligence.cpp.s
 
 # target to generate assembly for a file
 commands/gatherintelligence.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/gatherintelligence.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/gatherintelligence.cpp.s
 .PHONY : commands/gatherintelligence.cpp.s
 
 commands/get.o: commands/get.cpp.o
@@ -4821,7 +4819,7 @@ commands/get.o: commands/get.cpp.o
 
 # target to build an object file
 commands/get.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/get.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/get.cpp.o
 .PHONY : commands/get.cpp.o
 
 commands/get.i: commands/get.cpp.i
@@ -4830,7 +4828,7 @@ commands/get.i: commands/get.cpp.i
 
 # target to preprocess a source file
 commands/get.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/get.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/get.cpp.i
 .PHONY : commands/get.cpp.i
 
 commands/get.s: commands/get.cpp.s
@@ -4839,7 +4837,7 @@ commands/get.s: commands/get.cpp.s
 
 # target to generate assembly for a file
 commands/get.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/get.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/get.cpp.s
 .PHONY : commands/get.cpp.s
 
 commands/give.o: commands/give.cpp.o
@@ -4848,7 +4846,7 @@ commands/give.o: commands/give.cpp.o
 
 # target to build an object file
 commands/give.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/give.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/give.cpp.o
 .PHONY : commands/give.cpp.o
 
 commands/give.i: commands/give.cpp.i
@@ -4857,7 +4855,7 @@ commands/give.i: commands/give.cpp.i
 
 # target to preprocess a source file
 commands/give.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/give.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/give.cpp.i
 .PHONY : commands/give.cpp.i
 
 commands/give.s: commands/give.cpp.s
@@ -4866,7 +4864,7 @@ commands/give.s: commands/give.cpp.s
 
 # target to generate assembly for a file
 commands/give.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/give.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/give.cpp.s
 .PHONY : commands/give.cpp.s
 
 commands/glance.o: commands/glance.cpp.o
@@ -4875,7 +4873,7 @@ commands/glance.o: commands/glance.cpp.o
 
 # target to build an object file
 commands/glance.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/glance.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/glance.cpp.o
 .PHONY : commands/glance.cpp.o
 
 commands/glance.i: commands/glance.cpp.i
@@ -4884,7 +4882,7 @@ commands/glance.i: commands/glance.cpp.i
 
 # target to preprocess a source file
 commands/glance.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/glance.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/glance.cpp.i
 .PHONY : commands/glance.cpp.i
 
 commands/glance.s: commands/glance.cpp.s
@@ -4893,7 +4891,7 @@ commands/glance.s: commands/glance.cpp.s
 
 # target to generate assembly for a file
 commands/glance.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/glance.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/glance.cpp.s
 .PHONY : commands/glance.cpp.s
 
 commands/gold.o: commands/gold.cpp.o
@@ -4902,7 +4900,7 @@ commands/gold.o: commands/gold.cpp.o
 
 # target to build an object file
 commands/gold.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/gold.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/gold.cpp.o
 .PHONY : commands/gold.cpp.o
 
 commands/gold.i: commands/gold.cpp.i
@@ -4911,7 +4909,7 @@ commands/gold.i: commands/gold.cpp.i
 
 # target to preprocess a source file
 commands/gold.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/gold.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/gold.cpp.i
 .PHONY : commands/gold.cpp.i
 
 commands/gold.s: commands/gold.cpp.s
@@ -4920,7 +4918,7 @@ commands/gold.s: commands/gold.cpp.s
 
 # target to generate assembly for a file
 commands/gold.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/gold.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/gold.cpp.s
 .PHONY : commands/gold.cpp.s
 
 commands/goto.o: commands/goto.cpp.o
@@ -4929,7 +4927,7 @@ commands/goto.o: commands/goto.cpp.o
 
 # target to build an object file
 commands/goto.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/goto.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/goto.cpp.o
 .PHONY : commands/goto.cpp.o
 
 commands/goto.i: commands/goto.cpp.i
@@ -4938,7 +4936,7 @@ commands/goto.i: commands/goto.cpp.i
 
 # target to preprocess a source file
 commands/goto.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/goto.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/goto.cpp.i
 .PHONY : commands/goto.cpp.i
 
 commands/goto.s: commands/goto.cpp.s
@@ -4947,7 +4945,7 @@ commands/goto.s: commands/goto.cpp.s
 
 # target to generate assembly for a file
 commands/goto.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/goto.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/goto.cpp.s
 .PHONY : commands/goto.cpp.s
 
 commands/gouge.o: commands/gouge.cpp.o
@@ -4956,7 +4954,7 @@ commands/gouge.o: commands/gouge.cpp.o
 
 # target to build an object file
 commands/gouge.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/gouge.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/gouge.cpp.o
 .PHONY : commands/gouge.cpp.o
 
 commands/gouge.i: commands/gouge.cpp.i
@@ -4965,7 +4963,7 @@ commands/gouge.i: commands/gouge.cpp.i
 
 # target to preprocess a source file
 commands/gouge.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/gouge.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/gouge.cpp.i
 .PHONY : commands/gouge.cpp.i
 
 commands/gouge.s: commands/gouge.cpp.s
@@ -4974,7 +4972,7 @@ commands/gouge.s: commands/gouge.cpp.s
 
 # target to generate assembly for a file
 commands/gouge.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/gouge.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/gouge.cpp.s
 .PHONY : commands/gouge.cpp.s
 
 commands/group.o: commands/group.cpp.o
@@ -4983,7 +4981,7 @@ commands/group.o: commands/group.cpp.o
 
 # target to build an object file
 commands/group.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/group.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/group.cpp.o
 .PHONY : commands/group.cpp.o
 
 commands/group.i: commands/group.cpp.i
@@ -4992,7 +4990,7 @@ commands/group.i: commands/group.cpp.i
 
 # target to preprocess a source file
 commands/group.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/group.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/group.cpp.i
 .PHONY : commands/group.cpp.i
 
 commands/group.s: commands/group.cpp.s
@@ -5001,7 +4999,7 @@ commands/group.s: commands/group.cpp.s
 
 # target to generate assembly for a file
 commands/group.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/group.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/group.cpp.s
 .PHONY : commands/group.cpp.s
 
 commands/grub.o: commands/grub.cpp.o
@@ -5010,7 +5008,7 @@ commands/grub.o: commands/grub.cpp.o
 
 # target to build an object file
 commands/grub.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/grub.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/grub.cpp.o
 .PHONY : commands/grub.cpp.o
 
 commands/grub.i: commands/grub.cpp.i
@@ -5019,7 +5017,7 @@ commands/grub.i: commands/grub.cpp.i
 
 # target to preprocess a source file
 commands/grub.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/grub.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/grub.cpp.i
 .PHONY : commands/grub.cpp.i
 
 commands/grub.s: commands/grub.cpp.s
@@ -5028,7 +5026,7 @@ commands/grub.s: commands/grub.cpp.s
 
 # target to generate assembly for a file
 commands/grub.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/grub.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/grub.cpp.s
 .PHONY : commands/grub.cpp.s
 
 commands/gtell.o: commands/gtell.cpp.o
@@ -5037,7 +5035,7 @@ commands/gtell.o: commands/gtell.cpp.o
 
 # target to build an object file
 commands/gtell.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/gtell.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/gtell.cpp.o
 .PHONY : commands/gtell.cpp.o
 
 commands/gtell.i: commands/gtell.cpp.i
@@ -5046,7 +5044,7 @@ commands/gtell.i: commands/gtell.cpp.i
 
 # target to preprocess a source file
 commands/gtell.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/gtell.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/gtell.cpp.i
 .PHONY : commands/gtell.cpp.i
 
 commands/gtell.s: commands/gtell.cpp.s
@@ -5055,7 +5053,7 @@ commands/gtell.s: commands/gtell.cpp.s
 
 # target to generate assembly for a file
 commands/gtell.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/gtell.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/gtell.cpp.s
 .PHONY : commands/gtell.cpp.s
 
 commands/guard.o: commands/guard.cpp.o
@@ -5064,7 +5062,7 @@ commands/guard.o: commands/guard.cpp.o
 
 # target to build an object file
 commands/guard.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/guard.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/guard.cpp.o
 .PHONY : commands/guard.cpp.o
 
 commands/guard.i: commands/guard.cpp.i
@@ -5073,7 +5071,7 @@ commands/guard.i: commands/guard.cpp.i
 
 # target to preprocess a source file
 commands/guard.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/guard.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/guard.cpp.i
 .PHONY : commands/guard.cpp.i
 
 commands/guard.s: commands/guard.cpp.s
@@ -5082,7 +5080,7 @@ commands/guard.s: commands/guard.cpp.s
 
 # target to generate assembly for a file
 commands/guard.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/guard.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/guard.cpp.s
 .PHONY : commands/guard.cpp.s
 
 commands/hail.o: commands/hail.cpp.o
@@ -5091,7 +5089,7 @@ commands/hail.o: commands/hail.cpp.o
 
 # target to build an object file
 commands/hail.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hail.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hail.cpp.o
 .PHONY : commands/hail.cpp.o
 
 commands/hail.i: commands/hail.cpp.i
@@ -5100,7 +5098,7 @@ commands/hail.i: commands/hail.cpp.i
 
 # target to preprocess a source file
 commands/hail.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hail.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hail.cpp.i
 .PHONY : commands/hail.cpp.i
 
 commands/hail.s: commands/hail.cpp.s
@@ -5109,7 +5107,7 @@ commands/hail.s: commands/hail.cpp.s
 
 # target to generate assembly for a file
 commands/hail.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hail.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hail.cpp.s
 .PHONY : commands/hail.cpp.s
 
 commands/hedit.o: commands/hedit.cpp.o
@@ -5118,7 +5116,7 @@ commands/hedit.o: commands/hedit.cpp.o
 
 # target to build an object file
 commands/hedit.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hedit.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hedit.cpp.o
 .PHONY : commands/hedit.cpp.o
 
 commands/hedit.i: commands/hedit.cpp.i
@@ -5127,7 +5125,7 @@ commands/hedit.i: commands/hedit.cpp.i
 
 # target to preprocess a source file
 commands/hedit.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hedit.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hedit.cpp.i
 .PHONY : commands/hedit.cpp.i
 
 commands/hedit.s: commands/hedit.cpp.s
@@ -5136,7 +5134,7 @@ commands/hedit.s: commands/hedit.cpp.s
 
 # target to generate assembly for a file
 commands/hedit.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hedit.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hedit.cpp.s
 .PHONY : commands/hedit.cpp.s
 
 commands/hell.o: commands/hell.cpp.o
@@ -5145,7 +5143,7 @@ commands/hell.o: commands/hell.cpp.o
 
 # target to build an object file
 commands/hell.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hell.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hell.cpp.o
 .PHONY : commands/hell.cpp.o
 
 commands/hell.i: commands/hell.cpp.i
@@ -5154,7 +5152,7 @@ commands/hell.i: commands/hell.cpp.i
 
 # target to preprocess a source file
 commands/hell.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hell.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hell.cpp.i
 .PHONY : commands/hell.cpp.i
 
 commands/hell.s: commands/hell.cpp.s
@@ -5163,7 +5161,7 @@ commands/hell.s: commands/hell.cpp.s
 
 # target to generate assembly for a file
 commands/hell.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hell.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hell.cpp.s
 .PHONY : commands/hell.cpp.s
 
 commands/help.o: commands/help.cpp.o
@@ -5172,7 +5170,7 @@ commands/help.o: commands/help.cpp.o
 
 # target to build an object file
 commands/help.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/help.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/help.cpp.o
 .PHONY : commands/help.cpp.o
 
 commands/help.i: commands/help.cpp.i
@@ -5181,7 +5179,7 @@ commands/help.i: commands/help.cpp.i
 
 # target to preprocess a source file
 commands/help.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/help.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/help.cpp.i
 .PHONY : commands/help.cpp.i
 
 commands/help.s: commands/help.cpp.s
@@ -5190,7 +5188,7 @@ commands/help.s: commands/help.cpp.s
 
 # target to generate assembly for a file
 commands/help.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/help.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/help.cpp.s
 .PHONY : commands/help.cpp.s
 
 commands/hide.o: commands/hide.cpp.o
@@ -5199,7 +5197,7 @@ commands/hide.o: commands/hide.cpp.o
 
 # target to build an object file
 commands/hide.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hide.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hide.cpp.o
 .PHONY : commands/hide.cpp.o
 
 commands/hide.i: commands/hide.cpp.i
@@ -5208,7 +5206,7 @@ commands/hide.i: commands/hide.cpp.i
 
 # target to preprocess a source file
 commands/hide.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hide.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hide.cpp.i
 .PHONY : commands/hide.cpp.i
 
 commands/hide.s: commands/hide.cpp.s
@@ -5217,7 +5215,7 @@ commands/hide.s: commands/hide.cpp.s
 
 # target to generate assembly for a file
 commands/hide.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hide.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hide.cpp.s
 .PHONY : commands/hide.cpp.s
 
 commands/hijack.o: commands/hijack.cpp.o
@@ -5226,7 +5224,7 @@ commands/hijack.o: commands/hijack.cpp.o
 
 # target to build an object file
 commands/hijack.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hijack.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hijack.cpp.o
 .PHONY : commands/hijack.cpp.o
 
 commands/hijack.i: commands/hijack.cpp.i
@@ -5235,7 +5233,7 @@ commands/hijack.i: commands/hijack.cpp.i
 
 # target to preprocess a source file
 commands/hijack.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hijack.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hijack.cpp.i
 .PHONY : commands/hijack.cpp.i
 
 commands/hijack.s: commands/hijack.cpp.s
@@ -5244,7 +5242,7 @@ commands/hijack.s: commands/hijack.cpp.s
 
 # target to generate assembly for a file
 commands/hijack.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hijack.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hijack.cpp.s
 .PHONY : commands/hijack.cpp.s
 
 commands/hitall.o: commands/hitall.cpp.o
@@ -5253,7 +5251,7 @@ commands/hitall.o: commands/hitall.cpp.o
 
 # target to build an object file
 commands/hitall.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hitall.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hitall.cpp.o
 .PHONY : commands/hitall.cpp.o
 
 commands/hitall.i: commands/hitall.cpp.i
@@ -5262,7 +5260,7 @@ commands/hitall.i: commands/hitall.cpp.i
 
 # target to preprocess a source file
 commands/hitall.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hitall.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hitall.cpp.i
 .PHONY : commands/hitall.cpp.i
 
 commands/hitall.s: commands/hitall.cpp.s
@@ -5271,7 +5269,7 @@ commands/hitall.s: commands/hitall.cpp.s
 
 # target to generate assembly for a file
 commands/hitall.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hitall.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hitall.cpp.s
 .PHONY : commands/hitall.cpp.s
 
 commands/hlist.o: commands/hlist.cpp.o
@@ -5280,7 +5278,7 @@ commands/hlist.o: commands/hlist.cpp.o
 
 # target to build an object file
 commands/hlist.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hlist.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hlist.cpp.o
 .PHONY : commands/hlist.cpp.o
 
 commands/hlist.i: commands/hlist.cpp.i
@@ -5289,7 +5287,7 @@ commands/hlist.i: commands/hlist.cpp.i
 
 # target to preprocess a source file
 commands/hlist.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hlist.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hlist.cpp.i
 .PHONY : commands/hlist.cpp.i
 
 commands/hlist.s: commands/hlist.cpp.s
@@ -5298,7 +5296,7 @@ commands/hlist.s: commands/hlist.cpp.s
 
 # target to generate assembly for a file
 commands/hlist.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hlist.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hlist.cpp.s
 .PHONY : commands/hlist.cpp.s
 
 commands/holylight.o: commands/holylight.cpp.o
@@ -5307,7 +5305,7 @@ commands/holylight.o: commands/holylight.cpp.o
 
 # target to build an object file
 commands/holylight.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/holylight.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/holylight.cpp.o
 .PHONY : commands/holylight.cpp.o
 
 commands/holylight.i: commands/holylight.cpp.i
@@ -5316,7 +5314,7 @@ commands/holylight.i: commands/holylight.cpp.i
 
 # target to preprocess a source file
 commands/holylight.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/holylight.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/holylight.cpp.i
 .PHONY : commands/holylight.cpp.i
 
 commands/holylight.s: commands/holylight.cpp.s
@@ -5325,7 +5323,7 @@ commands/holylight.s: commands/holylight.cpp.s
 
 # target to generate assembly for a file
 commands/holylight.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/holylight.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/holylight.cpp.s
 .PHONY : commands/holylight.cpp.s
 
 commands/homepage.o: commands/homepage.cpp.o
@@ -5334,7 +5332,7 @@ commands/homepage.o: commands/homepage.cpp.o
 
 # target to build an object file
 commands/homepage.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/homepage.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/homepage.cpp.o
 .PHONY : commands/homepage.cpp.o
 
 commands/homepage.i: commands/homepage.cpp.i
@@ -5343,7 +5341,7 @@ commands/homepage.i: commands/homepage.cpp.i
 
 # target to preprocess a source file
 commands/homepage.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/homepage.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/homepage.cpp.i
 .PHONY : commands/homepage.cpp.i
 
 commands/homepage.s: commands/homepage.cpp.s
@@ -5352,7 +5350,7 @@ commands/homepage.s: commands/homepage.cpp.s
 
 # target to generate assembly for a file
 commands/homepage.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/homepage.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/homepage.cpp.s
 .PHONY : commands/homepage.cpp.s
 
 commands/hset.o: commands/hset.cpp.o
@@ -5361,7 +5359,7 @@ commands/hset.o: commands/hset.cpp.o
 
 # target to build an object file
 commands/hset.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hset.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hset.cpp.o
 .PHONY : commands/hset.cpp.o
 
 commands/hset.i: commands/hset.cpp.i
@@ -5370,7 +5368,7 @@ commands/hset.i: commands/hset.cpp.i
 
 # target to preprocess a source file
 commands/hset.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hset.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hset.cpp.i
 .PHONY : commands/hset.cpp.i
 
 commands/hset.s: commands/hset.cpp.s
@@ -5379,7 +5377,7 @@ commands/hset.s: commands/hset.cpp.s
 
 # target to generate assembly for a file
 commands/hset.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hset.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hset.cpp.s
 .PHONY : commands/hset.cpp.s
 
 commands/hyperspace.o: commands/hyperspace.cpp.o
@@ -5388,7 +5386,7 @@ commands/hyperspace.o: commands/hyperspace.cpp.o
 
 # target to build an object file
 commands/hyperspace.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hyperspace.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hyperspace.cpp.o
 .PHONY : commands/hyperspace.cpp.o
 
 commands/hyperspace.i: commands/hyperspace.cpp.i
@@ -5397,7 +5395,7 @@ commands/hyperspace.i: commands/hyperspace.cpp.i
 
 # target to preprocess a source file
 commands/hyperspace.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hyperspace.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hyperspace.cpp.i
 .PHONY : commands/hyperspace.cpp.i
 
 commands/hyperspace.s: commands/hyperspace.cpp.s
@@ -5406,7 +5404,7 @@ commands/hyperspace.s: commands/hyperspace.cpp.s
 
 # target to generate assembly for a file
 commands/hyperspace.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/hyperspace.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/hyperspace.cpp.s
 .PHONY : commands/hyperspace.cpp.s
 
 commands/i103.o: commands/i103.cpp.o
@@ -5415,7 +5413,7 @@ commands/i103.o: commands/i103.cpp.o
 
 # target to build an object file
 commands/i103.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/i103.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/i103.cpp.o
 .PHONY : commands/i103.cpp.o
 
 commands/i103.i: commands/i103.cpp.i
@@ -5424,7 +5422,7 @@ commands/i103.i: commands/i103.cpp.i
 
 # target to preprocess a source file
 commands/i103.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/i103.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/i103.cpp.i
 .PHONY : commands/i103.cpp.i
 
 commands/i103.s: commands/i103.cpp.s
@@ -5433,7 +5431,7 @@ commands/i103.s: commands/i103.cpp.s
 
 # target to generate assembly for a file
 commands/i103.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/i103.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/i103.cpp.s
 .PHONY : commands/i103.cpp.s
 
 commands/i104.o: commands/i104.cpp.o
@@ -5442,7 +5440,7 @@ commands/i104.o: commands/i104.cpp.o
 
 # target to build an object file
 commands/i104.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/i104.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/i104.cpp.o
 .PHONY : commands/i104.cpp.o
 
 commands/i104.i: commands/i104.cpp.i
@@ -5451,7 +5449,7 @@ commands/i104.i: commands/i104.cpp.i
 
 # target to preprocess a source file
 commands/i104.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/i104.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/i104.cpp.i
 .PHONY : commands/i104.cpp.i
 
 commands/i104.s: commands/i104.cpp.s
@@ -5460,7 +5458,7 @@ commands/i104.s: commands/i104.cpp.s
 
 # target to generate assembly for a file
 commands/i104.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/i104.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/i104.cpp.s
 .PHONY : commands/i104.cpp.s
 
 commands/i105.o: commands/i105.cpp.o
@@ -5469,7 +5467,7 @@ commands/i105.o: commands/i105.cpp.o
 
 # target to build an object file
 commands/i105.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/i105.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/i105.cpp.o
 .PHONY : commands/i105.cpp.o
 
 commands/i105.i: commands/i105.cpp.i
@@ -5478,7 +5476,7 @@ commands/i105.i: commands/i105.cpp.i
 
 # target to preprocess a source file
 commands/i105.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/i105.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/i105.cpp.i
 .PHONY : commands/i105.cpp.i
 
 commands/i105.s: commands/i105.cpp.s
@@ -5487,7 +5485,7 @@ commands/i105.s: commands/i105.cpp.s
 
 # target to generate assembly for a file
 commands/i105.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/i105.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/i105.cpp.s
 .PHONY : commands/i105.cpp.s
 
 commands/idea.o: commands/idea.cpp.o
@@ -5496,7 +5494,7 @@ commands/idea.o: commands/idea.cpp.o
 
 # target to build an object file
 commands/idea.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/idea.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/idea.cpp.o
 .PHONY : commands/idea.cpp.o
 
 commands/idea.i: commands/idea.cpp.i
@@ -5505,7 +5503,7 @@ commands/idea.i: commands/idea.cpp.i
 
 # target to preprocess a source file
 commands/idea.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/idea.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/idea.cpp.i
 .PHONY : commands/idea.cpp.i
 
 commands/idea.s: commands/idea.cpp.s
@@ -5514,7 +5512,7 @@ commands/idea.s: commands/idea.cpp.s
 
 # target to generate assembly for a file
 commands/idea.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/idea.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/idea.cpp.s
 .PHONY : commands/idea.cpp.s
 
 commands/immortalize.o: commands/immortalize.cpp.o
@@ -5523,7 +5521,7 @@ commands/immortalize.o: commands/immortalize.cpp.o
 
 # target to build an object file
 commands/immortalize.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/immortalize.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/immortalize.cpp.o
 .PHONY : commands/immortalize.cpp.o
 
 commands/immortalize.i: commands/immortalize.cpp.i
@@ -5532,7 +5530,7 @@ commands/immortalize.i: commands/immortalize.cpp.i
 
 # target to preprocess a source file
 commands/immortalize.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/immortalize.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/immortalize.cpp.i
 .PHONY : commands/immortalize.cpp.i
 
 commands/immortalize.s: commands/immortalize.cpp.s
@@ -5541,7 +5539,7 @@ commands/immortalize.s: commands/immortalize.cpp.s
 
 # target to generate assembly for a file
 commands/immortalize.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/immortalize.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/immortalize.cpp.s
 .PHONY : commands/immortalize.cpp.s
 
 commands/immtalk.o: commands/immtalk.cpp.o
@@ -5550,7 +5548,7 @@ commands/immtalk.o: commands/immtalk.cpp.o
 
 # target to build an object file
 commands/immtalk.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/immtalk.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/immtalk.cpp.o
 .PHONY : commands/immtalk.cpp.o
 
 commands/immtalk.i: commands/immtalk.cpp.i
@@ -5559,7 +5557,7 @@ commands/immtalk.i: commands/immtalk.cpp.i
 
 # target to preprocess a source file
 commands/immtalk.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/immtalk.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/immtalk.cpp.i
 .PHONY : commands/immtalk.cpp.i
 
 commands/immtalk.s: commands/immtalk.cpp.s
@@ -5568,7 +5566,7 @@ commands/immtalk.s: commands/immtalk.cpp.s
 
 # target to generate assembly for a file
 commands/immtalk.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/immtalk.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/immtalk.cpp.s
 .PHONY : commands/immtalk.cpp.s
 
 commands/induct.o: commands/induct.cpp.o
@@ -5577,7 +5575,7 @@ commands/induct.o: commands/induct.cpp.o
 
 # target to build an object file
 commands/induct.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/induct.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/induct.cpp.o
 .PHONY : commands/induct.cpp.o
 
 commands/induct.i: commands/induct.cpp.i
@@ -5586,7 +5584,7 @@ commands/induct.i: commands/induct.cpp.i
 
 # target to preprocess a source file
 commands/induct.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/induct.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/induct.cpp.i
 .PHONY : commands/induct.cpp.i
 
 commands/induct.s: commands/induct.cpp.s
@@ -5595,7 +5593,7 @@ commands/induct.s: commands/induct.cpp.s
 
 # target to generate assembly for a file
 commands/induct.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/induct.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/induct.cpp.s
 .PHONY : commands/induct.cpp.s
 
 commands/info.o: commands/info.cpp.o
@@ -5604,7 +5602,7 @@ commands/info.o: commands/info.cpp.o
 
 # target to build an object file
 commands/info.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/info.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/info.cpp.o
 .PHONY : commands/info.cpp.o
 
 commands/info.i: commands/info.cpp.i
@@ -5613,7 +5611,7 @@ commands/info.i: commands/info.cpp.i
 
 # target to preprocess a source file
 commands/info.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/info.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/info.cpp.i
 .PHONY : commands/info.cpp.i
 
 commands/info.s: commands/info.cpp.s
@@ -5622,7 +5620,7 @@ commands/info.s: commands/info.cpp.s
 
 # target to generate assembly for a file
 commands/info.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/info.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/info.cpp.s
 .PHONY : commands/info.cpp.s
 
 commands/installarea.o: commands/installarea.cpp.o
@@ -5631,7 +5629,7 @@ commands/installarea.o: commands/installarea.cpp.o
 
 # target to build an object file
 commands/installarea.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/installarea.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/installarea.cpp.o
 .PHONY : commands/installarea.cpp.o
 
 commands/installarea.i: commands/installarea.cpp.i
@@ -5640,7 +5638,7 @@ commands/installarea.i: commands/installarea.cpp.i
 
 # target to preprocess a source file
 commands/installarea.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/installarea.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/installarea.cpp.i
 .PHONY : commands/installarea.cpp.i
 
 commands/installarea.s: commands/installarea.cpp.s
@@ -5649,7 +5647,7 @@ commands/installarea.s: commands/installarea.cpp.s
 
 # target to generate assembly for a file
 commands/installarea.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/installarea.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/installarea.cpp.s
 .PHONY : commands/installarea.cpp.s
 
 commands/instaroom.o: commands/instaroom.cpp.o
@@ -5658,7 +5656,7 @@ commands/instaroom.o: commands/instaroom.cpp.o
 
 # target to build an object file
 commands/instaroom.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/instaroom.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/instaroom.cpp.o
 .PHONY : commands/instaroom.cpp.o
 
 commands/instaroom.i: commands/instaroom.cpp.i
@@ -5667,7 +5665,7 @@ commands/instaroom.i: commands/instaroom.cpp.i
 
 # target to preprocess a source file
 commands/instaroom.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/instaroom.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/instaroom.cpp.i
 .PHONY : commands/instaroom.cpp.i
 
 commands/instaroom.s: commands/instaroom.cpp.s
@@ -5676,7 +5674,7 @@ commands/instaroom.s: commands/instaroom.cpp.s
 
 # target to generate assembly for a file
 commands/instaroom.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/instaroom.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/instaroom.cpp.s
 .PHONY : commands/instaroom.cpp.s
 
 commands/instazone.o: commands/instazone.cpp.o
@@ -5685,7 +5683,7 @@ commands/instazone.o: commands/instazone.cpp.o
 
 # target to build an object file
 commands/instazone.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/instazone.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/instazone.cpp.o
 .PHONY : commands/instazone.cpp.o
 
 commands/instazone.i: commands/instazone.cpp.i
@@ -5694,7 +5692,7 @@ commands/instazone.i: commands/instazone.cpp.i
 
 # target to preprocess a source file
 commands/instazone.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/instazone.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/instazone.cpp.i
 .PHONY : commands/instazone.cpp.i
 
 commands/instazone.s: commands/instazone.cpp.s
@@ -5703,7 +5701,7 @@ commands/instazone.s: commands/instazone.cpp.s
 
 # target to generate assembly for a file
 commands/instazone.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/instazone.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/instazone.cpp.s
 .PHONY : commands/instazone.cpp.s
 
 commands/inventory.o: commands/inventory.cpp.o
@@ -5712,7 +5710,7 @@ commands/inventory.o: commands/inventory.cpp.o
 
 # target to build an object file
 commands/inventory.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/inventory.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/inventory.cpp.o
 .PHONY : commands/inventory.cpp.o
 
 commands/inventory.i: commands/inventory.cpp.i
@@ -5721,7 +5719,7 @@ commands/inventory.i: commands/inventory.cpp.i
 
 # target to preprocess a source file
 commands/inventory.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/inventory.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/inventory.cpp.i
 .PHONY : commands/inventory.cpp.i
 
 commands/inventory.s: commands/inventory.cpp.s
@@ -5730,7 +5728,7 @@ commands/inventory.s: commands/inventory.cpp.s
 
 # target to generate assembly for a file
 commands/inventory.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/inventory.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/inventory.cpp.s
 .PHONY : commands/inventory.cpp.s
 
 commands/invis.o: commands/invis.cpp.o
@@ -5739,7 +5737,7 @@ commands/invis.o: commands/invis.cpp.o
 
 # target to build an object file
 commands/invis.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/invis.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/invis.cpp.o
 .PHONY : commands/invis.cpp.o
 
 commands/invis.i: commands/invis.cpp.i
@@ -5748,7 +5746,7 @@ commands/invis.i: commands/invis.cpp.i
 
 # target to preprocess a source file
 commands/invis.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/invis.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/invis.cpp.i
 .PHONY : commands/invis.cpp.i
 
 commands/invis.s: commands/invis.cpp.s
@@ -5757,7 +5755,7 @@ commands/invis.s: commands/invis.cpp.s
 
 # target to generate assembly for a file
 commands/invis.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/invis.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/invis.cpp.s
 .PHONY : commands/invis.cpp.s
 
 commands/invite.o: commands/invite.cpp.o
@@ -5766,7 +5764,7 @@ commands/invite.o: commands/invite.cpp.o
 
 # target to build an object file
 commands/invite.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/invite.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/invite.cpp.o
 .PHONY : commands/invite.cpp.o
 
 commands/invite.i: commands/invite.cpp.i
@@ -5775,7 +5773,7 @@ commands/invite.i: commands/invite.cpp.i
 
 # target to preprocess a source file
 commands/invite.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/invite.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/invite.cpp.i
 .PHONY : commands/invite.cpp.i
 
 commands/invite.s: commands/invite.cpp.s
@@ -5784,7 +5782,7 @@ commands/invite.s: commands/invite.cpp.s
 
 # target to generate assembly for a file
 commands/invite.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/invite.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/invite.cpp.s
 .PHONY : commands/invite.cpp.s
 
 commands/jail.o: commands/jail.cpp.o
@@ -5793,7 +5791,7 @@ commands/jail.o: commands/jail.cpp.o
 
 # target to build an object file
 commands/jail.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/jail.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/jail.cpp.o
 .PHONY : commands/jail.cpp.o
 
 commands/jail.i: commands/jail.cpp.i
@@ -5802,7 +5800,7 @@ commands/jail.i: commands/jail.cpp.i
 
 # target to preprocess a source file
 commands/jail.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/jail.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/jail.cpp.i
 .PHONY : commands/jail.cpp.i
 
 commands/jail.s: commands/jail.cpp.s
@@ -5811,7 +5809,7 @@ commands/jail.s: commands/jail.cpp.s
 
 # target to generate assembly for a file
 commands/jail.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/jail.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/jail.cpp.s
 .PHONY : commands/jail.cpp.s
 
 commands/jumpvector.o: commands/jumpvector.cpp.o
@@ -5820,7 +5818,7 @@ commands/jumpvector.o: commands/jumpvector.cpp.o
 
 # target to build an object file
 commands/jumpvector.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/jumpvector.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/jumpvector.cpp.o
 .PHONY : commands/jumpvector.cpp.o
 
 commands/jumpvector.i: commands/jumpvector.cpp.i
@@ -5829,7 +5827,7 @@ commands/jumpvector.i: commands/jumpvector.cpp.i
 
 # target to preprocess a source file
 commands/jumpvector.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/jumpvector.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/jumpvector.cpp.i
 .PHONY : commands/jumpvector.cpp.i
 
 commands/jumpvector.s: commands/jumpvector.cpp.s
@@ -5838,7 +5836,7 @@ commands/jumpvector.s: commands/jumpvector.cpp.s
 
 # target to generate assembly for a file
 commands/jumpvector.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/jumpvector.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/jumpvector.cpp.s
 .PHONY : commands/jumpvector.cpp.s
 
 commands/junk.o: commands/junk.cpp.o
@@ -5847,7 +5845,7 @@ commands/junk.o: commands/junk.cpp.o
 
 # target to build an object file
 commands/junk.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/junk.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/junk.cpp.o
 .PHONY : commands/junk.cpp.o
 
 commands/junk.i: commands/junk.cpp.i
@@ -5856,7 +5854,7 @@ commands/junk.i: commands/junk.cpp.i
 
 # target to preprocess a source file
 commands/junk.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/junk.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/junk.cpp.i
 .PHONY : commands/junk.cpp.i
 
 commands/junk.s: commands/junk.cpp.s
@@ -5865,7 +5863,7 @@ commands/junk.s: commands/junk.cpp.s
 
 # target to generate assembly for a file
 commands/junk.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/junk.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/junk.cpp.s
 .PHONY : commands/junk.cpp.s
 
 commands/kick.o: commands/kick.cpp.o
@@ -5874,7 +5872,7 @@ commands/kick.o: commands/kick.cpp.o
 
 # target to build an object file
 commands/kick.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/kick.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/kick.cpp.o
 .PHONY : commands/kick.cpp.o
 
 commands/kick.i: commands/kick.cpp.i
@@ -5883,7 +5881,7 @@ commands/kick.i: commands/kick.cpp.i
 
 # target to preprocess a source file
 commands/kick.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/kick.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/kick.cpp.i
 .PHONY : commands/kick.cpp.i
 
 commands/kick.s: commands/kick.cpp.s
@@ -5892,7 +5890,7 @@ commands/kick.s: commands/kick.cpp.s
 
 # target to generate assembly for a file
 commands/kick.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/kick.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/kick.cpp.s
 .PHONY : commands/kick.cpp.s
 
 commands/kill.o: commands/kill.cpp.o
@@ -5901,7 +5899,7 @@ commands/kill.o: commands/kill.cpp.o
 
 # target to build an object file
 commands/kill.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/kill.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/kill.cpp.o
 .PHONY : commands/kill.cpp.o
 
 commands/kill.i: commands/kill.cpp.i
@@ -5910,7 +5908,7 @@ commands/kill.i: commands/kill.cpp.i
 
 # target to preprocess a source file
 commands/kill.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/kill.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/kill.cpp.i
 .PHONY : commands/kill.cpp.i
 
 commands/kill.s: commands/kill.cpp.s
@@ -5919,7 +5917,7 @@ commands/kill.s: commands/kill.cpp.s
 
 # target to generate assembly for a file
 commands/kill.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/kill.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/kill.cpp.s
 .PHONY : commands/kill.cpp.s
 
 commands/land.o: commands/land.cpp.o
@@ -5928,7 +5926,7 @@ commands/land.o: commands/land.cpp.o
 
 # target to build an object file
 commands/land.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/land.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/land.cpp.o
 .PHONY : commands/land.cpp.o
 
 commands/land.i: commands/land.cpp.i
@@ -5937,7 +5935,7 @@ commands/land.i: commands/land.cpp.i
 
 # target to preprocess a source file
 commands/land.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/land.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/land.cpp.i
 .PHONY : commands/land.cpp.i
 
 commands/land.s: commands/land.cpp.s
@@ -5946,7 +5944,7 @@ commands/land.s: commands/land.cpp.s
 
 # target to generate assembly for a file
 commands/land.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/land.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/land.cpp.s
 .PHONY : commands/land.cpp.s
 
 commands/languages.o: commands/languages.cpp.o
@@ -5955,7 +5953,7 @@ commands/languages.o: commands/languages.cpp.o
 
 # target to build an object file
 commands/languages.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/languages.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/languages.cpp.o
 .PHONY : commands/languages.cpp.o
 
 commands/languages.i: commands/languages.cpp.i
@@ -5964,7 +5962,7 @@ commands/languages.i: commands/languages.cpp.i
 
 # target to preprocess a source file
 commands/languages.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/languages.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/languages.cpp.i
 .PHONY : commands/languages.cpp.i
 
 commands/languages.s: commands/languages.cpp.s
@@ -5973,7 +5971,7 @@ commands/languages.s: commands/languages.cpp.s
 
 # target to generate assembly for a file
 commands/languages.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/languages.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/languages.cpp.s
 .PHONY : commands/languages.cpp.s
 
 commands/last.o: commands/last.cpp.o
@@ -5982,7 +5980,7 @@ commands/last.o: commands/last.cpp.o
 
 # target to build an object file
 commands/last.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/last.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/last.cpp.o
 .PHONY : commands/last.cpp.o
 
 commands/last.i: commands/last.cpp.i
@@ -5991,7 +5989,7 @@ commands/last.i: commands/last.cpp.i
 
 # target to preprocess a source file
 commands/last.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/last.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/last.cpp.i
 .PHONY : commands/last.cpp.i
 
 commands/last.s: commands/last.cpp.s
@@ -6000,7 +5998,7 @@ commands/last.s: commands/last.cpp.s
 
 # target to generate assembly for a file
 commands/last.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/last.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/last.cpp.s
 .PHONY : commands/last.cpp.s
 
 commands/launch.o: commands/launch.cpp.o
@@ -6009,7 +6007,7 @@ commands/launch.o: commands/launch.cpp.o
 
 # target to build an object file
 commands/launch.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/launch.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/launch.cpp.o
 .PHONY : commands/launch.cpp.o
 
 commands/launch.i: commands/launch.cpp.i
@@ -6018,7 +6016,7 @@ commands/launch.i: commands/launch.cpp.i
 
 # target to preprocess a source file
 commands/launch.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/launch.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/launch.cpp.i
 .PHONY : commands/launch.cpp.i
 
 commands/launch.s: commands/launch.cpp.s
@@ -6027,7 +6025,7 @@ commands/launch.s: commands/launch.cpp.s
 
 # target to generate assembly for a file
 commands/launch.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/launch.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/launch.cpp.s
 .PHONY : commands/launch.cpp.s
 
 commands/leave.o: commands/leave.cpp.o
@@ -6036,7 +6034,7 @@ commands/leave.o: commands/leave.cpp.o
 
 # target to build an object file
 commands/leave.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/leave.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/leave.cpp.o
 .PHONY : commands/leave.cpp.o
 
 commands/leave.i: commands/leave.cpp.i
@@ -6045,7 +6043,7 @@ commands/leave.i: commands/leave.cpp.i
 
 # target to preprocess a source file
 commands/leave.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/leave.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/leave.cpp.i
 .PHONY : commands/leave.cpp.i
 
 commands/leave.s: commands/leave.cpp.s
@@ -6054,7 +6052,7 @@ commands/leave.s: commands/leave.cpp.s
 
 # target to generate assembly for a file
 commands/leave.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/leave.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/leave.cpp.s
 .PHONY : commands/leave.cpp.s
 
 commands/leaveship.o: commands/leaveship.cpp.o
@@ -6063,7 +6061,7 @@ commands/leaveship.o: commands/leaveship.cpp.o
 
 # target to build an object file
 commands/leaveship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/leaveship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/leaveship.cpp.o
 .PHONY : commands/leaveship.cpp.o
 
 commands/leaveship.i: commands/leaveship.cpp.i
@@ -6072,7 +6070,7 @@ commands/leaveship.i: commands/leaveship.cpp.i
 
 # target to preprocess a source file
 commands/leaveship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/leaveship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/leaveship.cpp.i
 .PHONY : commands/leaveship.cpp.i
 
 commands/leaveship.s: commands/leaveship.cpp.s
@@ -6081,7 +6079,7 @@ commands/leaveship.s: commands/leaveship.cpp.s
 
 # target to generate assembly for a file
 commands/leaveship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/leaveship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/leaveship.cpp.s
 .PHONY : commands/leaveship.cpp.s
 
 commands/level.o: commands/level.cpp.o
@@ -6090,7 +6088,7 @@ commands/level.o: commands/level.cpp.o
 
 # target to build an object file
 commands/level.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/level.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/level.cpp.o
 .PHONY : commands/level.cpp.o
 
 commands/level.i: commands/level.cpp.i
@@ -6099,7 +6097,7 @@ commands/level.i: commands/level.cpp.i
 
 # target to preprocess a source file
 commands/level.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/level.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/level.cpp.i
 .PHONY : commands/level.cpp.i
 
 commands/level.s: commands/level.cpp.s
@@ -6108,7 +6106,7 @@ commands/level.s: commands/level.cpp.s
 
 # target to generate assembly for a file
 commands/level.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/level.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/level.cpp.s
 .PHONY : commands/level.cpp.s
 
 commands/light.o: commands/light.cpp.o
@@ -6117,7 +6115,7 @@ commands/light.o: commands/light.cpp.o
 
 # target to build an object file
 commands/light.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/light.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/light.cpp.o
 .PHONY : commands/light.cpp.o
 
 commands/light.i: commands/light.cpp.i
@@ -6126,7 +6124,7 @@ commands/light.i: commands/light.cpp.i
 
 # target to preprocess a source file
 commands/light.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/light.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/light.cpp.i
 .PHONY : commands/light.cpp.i
 
 commands/light.s: commands/light.cpp.s
@@ -6135,7 +6133,7 @@ commands/light.s: commands/light.cpp.s
 
 # target to generate assembly for a file
 commands/light.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/light.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/light.cpp.s
 .PHONY : commands/light.cpp.s
 
 commands/list.o: commands/list.cpp.o
@@ -6144,7 +6142,7 @@ commands/list.o: commands/list.cpp.o
 
 # target to build an object file
 commands/list.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/list.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/list.cpp.o
 .PHONY : commands/list.cpp.o
 
 commands/list.i: commands/list.cpp.i
@@ -6153,7 +6151,7 @@ commands/list.i: commands/list.cpp.i
 
 # target to preprocess a source file
 commands/list.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/list.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/list.cpp.i
 .PHONY : commands/list.cpp.i
 
 commands/list.s: commands/list.cpp.s
@@ -6162,7 +6160,7 @@ commands/list.s: commands/list.cpp.s
 
 # target to generate assembly for a file
 commands/list.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/list.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/list.cpp.s
 .PHONY : commands/list.cpp.s
 
 commands/litterbug.o: commands/litterbug.cpp.o
@@ -6171,7 +6169,7 @@ commands/litterbug.o: commands/litterbug.cpp.o
 
 # target to build an object file
 commands/litterbug.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/litterbug.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/litterbug.cpp.o
 .PHONY : commands/litterbug.cpp.o
 
 commands/litterbug.i: commands/litterbug.cpp.i
@@ -6180,7 +6178,7 @@ commands/litterbug.i: commands/litterbug.cpp.i
 
 # target to preprocess a source file
 commands/litterbug.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/litterbug.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/litterbug.cpp.i
 .PHONY : commands/litterbug.cpp.i
 
 commands/litterbug.s: commands/litterbug.cpp.s
@@ -6189,7 +6187,7 @@ commands/litterbug.s: commands/litterbug.cpp.s
 
 # target to generate assembly for a file
 commands/litterbug.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/litterbug.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/litterbug.cpp.s
 .PHONY : commands/litterbug.cpp.s
 
 commands/loadarea.o: commands/loadarea.cpp.o
@@ -6198,7 +6196,7 @@ commands/loadarea.o: commands/loadarea.cpp.o
 
 # target to build an object file
 commands/loadarea.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/loadarea.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/loadarea.cpp.o
 .PHONY : commands/loadarea.cpp.o
 
 commands/loadarea.i: commands/loadarea.cpp.i
@@ -6207,7 +6205,7 @@ commands/loadarea.i: commands/loadarea.cpp.i
 
 # target to preprocess a source file
 commands/loadarea.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/loadarea.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/loadarea.cpp.i
 .PHONY : commands/loadarea.cpp.i
 
 commands/loadarea.s: commands/loadarea.cpp.s
@@ -6216,7 +6214,7 @@ commands/loadarea.s: commands/loadarea.cpp.s
 
 # target to generate assembly for a file
 commands/loadarea.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/loadarea.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/loadarea.cpp.s
 .PHONY : commands/loadarea.cpp.s
 
 commands/loadup.o: commands/loadup.cpp.o
@@ -6225,7 +6223,7 @@ commands/loadup.o: commands/loadup.cpp.o
 
 # target to build an object file
 commands/loadup.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/loadup.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/loadup.cpp.o
 .PHONY : commands/loadup.cpp.o
 
 commands/loadup.i: commands/loadup.cpp.i
@@ -6234,7 +6232,7 @@ commands/loadup.i: commands/loadup.cpp.i
 
 # target to preprocess a source file
 commands/loadup.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/loadup.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/loadup.cpp.i
 .PHONY : commands/loadup.cpp.i
 
 commands/loadup.s: commands/loadup.cpp.s
@@ -6243,7 +6241,7 @@ commands/loadup.s: commands/loadup.cpp.s
 
 # target to generate assembly for a file
 commands/loadup.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/loadup.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/loadup.cpp.s
 .PHONY : commands/loadup.cpp.s
 
 commands/lock.o: commands/lock.cpp.o
@@ -6252,7 +6250,7 @@ commands/lock.o: commands/lock.cpp.o
 
 # target to build an object file
 commands/lock.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/lock.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/lock.cpp.o
 .PHONY : commands/lock.cpp.o
 
 commands/lock.i: commands/lock.cpp.i
@@ -6261,7 +6259,7 @@ commands/lock.i: commands/lock.cpp.i
 
 # target to preprocess a source file
 commands/lock.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/lock.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/lock.cpp.i
 .PHONY : commands/lock.cpp.i
 
 commands/lock.s: commands/lock.cpp.s
@@ -6270,7 +6268,7 @@ commands/lock.s: commands/lock.cpp.s
 
 # target to generate assembly for a file
 commands/lock.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/lock.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/lock.cpp.s
 .PHONY : commands/lock.cpp.s
 
 commands/log.o: commands/log.cpp.o
@@ -6279,7 +6277,7 @@ commands/log.o: commands/log.cpp.o
 
 # target to build an object file
 commands/log.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/log.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/log.cpp.o
 .PHONY : commands/log.cpp.o
 
 commands/log.i: commands/log.cpp.i
@@ -6288,7 +6286,7 @@ commands/log.i: commands/log.cpp.i
 
 # target to preprocess a source file
 commands/log.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/log.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/log.cpp.i
 .PHONY : commands/log.cpp.i
 
 commands/log.s: commands/log.cpp.s
@@ -6297,7 +6295,7 @@ commands/log.s: commands/log.cpp.s
 
 # target to generate assembly for a file
 commands/log.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/log.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/log.cpp.s
 .PHONY : commands/log.cpp.s
 
 commands/look.o: commands/look.cpp.o
@@ -6306,7 +6304,7 @@ commands/look.o: commands/look.cpp.o
 
 # target to build an object file
 commands/look.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/look.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/look.cpp.o
 .PHONY : commands/look.cpp.o
 
 commands/look.i: commands/look.cpp.i
@@ -6315,7 +6313,7 @@ commands/look.i: commands/look.cpp.i
 
 # target to preprocess a source file
 commands/look.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/look.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/look.cpp.i
 .PHONY : commands/look.cpp.i
 
 commands/look.s: commands/look.cpp.s
@@ -6324,7 +6322,7 @@ commands/look.s: commands/look.cpp.s
 
 # target to generate assembly for a file
 commands/look.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/look.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/look.cpp.s
 .PHONY : commands/look.cpp.s
 
 commands/low_purge.o: commands/low_purge.cpp.o
@@ -6333,7 +6331,7 @@ commands/low_purge.o: commands/low_purge.cpp.o
 
 # target to build an object file
 commands/low_purge.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/low_purge.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/low_purge.cpp.o
 .PHONY : commands/low_purge.cpp.o
 
 commands/low_purge.i: commands/low_purge.cpp.i
@@ -6342,7 +6340,7 @@ commands/low_purge.i: commands/low_purge.cpp.i
 
 # target to preprocess a source file
 commands/low_purge.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/low_purge.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/low_purge.cpp.i
 .PHONY : commands/low_purge.cpp.i
 
 commands/low_purge.s: commands/low_purge.cpp.s
@@ -6351,7 +6349,7 @@ commands/low_purge.s: commands/low_purge.cpp.s
 
 # target to generate assembly for a file
 commands/low_purge.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/low_purge.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/low_purge.cpp.s
 .PHONY : commands/low_purge.cpp.s
 
 commands/mailroom.o: commands/mailroom.cpp.o
@@ -6360,7 +6358,7 @@ commands/mailroom.o: commands/mailroom.cpp.o
 
 # target to build an object file
 commands/mailroom.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mailroom.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mailroom.cpp.o
 .PHONY : commands/mailroom.cpp.o
 
 commands/mailroom.i: commands/mailroom.cpp.i
@@ -6369,7 +6367,7 @@ commands/mailroom.i: commands/mailroom.cpp.i
 
 # target to preprocess a source file
 commands/mailroom.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mailroom.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mailroom.cpp.i
 .PHONY : commands/mailroom.cpp.i
 
 commands/mailroom.s: commands/mailroom.cpp.s
@@ -6378,7 +6376,7 @@ commands/mailroom.s: commands/mailroom.cpp.s
 
 # target to generate assembly for a file
 commands/mailroom.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mailroom.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mailroom.cpp.s
 .PHONY : commands/mailroom.cpp.s
 
 commands/makearmor.o: commands/makearmor.cpp.o
@@ -6387,7 +6385,7 @@ commands/makearmor.o: commands/makearmor.cpp.o
 
 # target to build an object file
 commands/makearmor.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makearmor.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makearmor.cpp.o
 .PHONY : commands/makearmor.cpp.o
 
 commands/makearmor.i: commands/makearmor.cpp.i
@@ -6396,7 +6394,7 @@ commands/makearmor.i: commands/makearmor.cpp.i
 
 # target to preprocess a source file
 commands/makearmor.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makearmor.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makearmor.cpp.i
 .PHONY : commands/makearmor.cpp.i
 
 commands/makearmor.s: commands/makearmor.cpp.s
@@ -6405,7 +6403,7 @@ commands/makearmor.s: commands/makearmor.cpp.s
 
 # target to generate assembly for a file
 commands/makearmor.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makearmor.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makearmor.cpp.s
 .PHONY : commands/makearmor.cpp.s
 
 commands/makeblade.o: commands/makeblade.cpp.o
@@ -6414,7 +6412,7 @@ commands/makeblade.o: commands/makeblade.cpp.o
 
 # target to build an object file
 commands/makeblade.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeblade.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeblade.cpp.o
 .PHONY : commands/makeblade.cpp.o
 
 commands/makeblade.i: commands/makeblade.cpp.i
@@ -6423,7 +6421,7 @@ commands/makeblade.i: commands/makeblade.cpp.i
 
 # target to preprocess a source file
 commands/makeblade.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeblade.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeblade.cpp.i
 .PHONY : commands/makeblade.cpp.i
 
 commands/makeblade.s: commands/makeblade.cpp.s
@@ -6432,7 +6430,7 @@ commands/makeblade.s: commands/makeblade.cpp.s
 
 # target to generate assembly for a file
 commands/makeblade.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeblade.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeblade.cpp.s
 .PHONY : commands/makeblade.cpp.s
 
 commands/makeblaster.o: commands/makeblaster.cpp.o
@@ -6441,7 +6439,7 @@ commands/makeblaster.o: commands/makeblaster.cpp.o
 
 # target to build an object file
 commands/makeblaster.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeblaster.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeblaster.cpp.o
 .PHONY : commands/makeblaster.cpp.o
 
 commands/makeblaster.i: commands/makeblaster.cpp.i
@@ -6450,7 +6448,7 @@ commands/makeblaster.i: commands/makeblaster.cpp.i
 
 # target to preprocess a source file
 commands/makeblaster.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeblaster.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeblaster.cpp.i
 .PHONY : commands/makeblaster.cpp.i
 
 commands/makeblaster.s: commands/makeblaster.cpp.s
@@ -6459,7 +6457,7 @@ commands/makeblaster.s: commands/makeblaster.cpp.s
 
 # target to generate assembly for a file
 commands/makeblaster.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeblaster.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeblaster.cpp.s
 .PHONY : commands/makeblaster.cpp.s
 
 commands/makeboard.o: commands/makeboard.cpp.o
@@ -6468,7 +6466,7 @@ commands/makeboard.o: commands/makeboard.cpp.o
 
 # target to build an object file
 commands/makeboard.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeboard.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeboard.cpp.o
 .PHONY : commands/makeboard.cpp.o
 
 commands/makeboard.i: commands/makeboard.cpp.i
@@ -6477,7 +6475,7 @@ commands/makeboard.i: commands/makeboard.cpp.i
 
 # target to preprocess a source file
 commands/makeboard.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeboard.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeboard.cpp.i
 .PHONY : commands/makeboard.cpp.i
 
 commands/makeboard.s: commands/makeboard.cpp.s
@@ -6486,7 +6484,7 @@ commands/makeboard.s: commands/makeboard.cpp.s
 
 # target to generate assembly for a file
 commands/makeboard.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeboard.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeboard.cpp.s
 .PHONY : commands/makeboard.cpp.s
 
 commands/makebowcaster.o: commands/makebowcaster.cpp.o
@@ -6495,7 +6493,7 @@ commands/makebowcaster.o: commands/makebowcaster.cpp.o
 
 # target to build an object file
 commands/makebowcaster.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makebowcaster.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makebowcaster.cpp.o
 .PHONY : commands/makebowcaster.cpp.o
 
 commands/makebowcaster.i: commands/makebowcaster.cpp.i
@@ -6504,7 +6502,7 @@ commands/makebowcaster.i: commands/makebowcaster.cpp.i
 
 # target to preprocess a source file
 commands/makebowcaster.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makebowcaster.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makebowcaster.cpp.i
 .PHONY : commands/makebowcaster.cpp.i
 
 commands/makebowcaster.s: commands/makebowcaster.cpp.s
@@ -6513,7 +6511,7 @@ commands/makebowcaster.s: commands/makebowcaster.cpp.s
 
 # target to generate assembly for a file
 commands/makebowcaster.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makebowcaster.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makebowcaster.cpp.s
 .PHONY : commands/makebowcaster.cpp.s
 
 commands/makeclan.o: commands/makeclan.cpp.o
@@ -6522,7 +6520,7 @@ commands/makeclan.o: commands/makeclan.cpp.o
 
 # target to build an object file
 commands/makeclan.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeclan.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeclan.cpp.o
 .PHONY : commands/makeclan.cpp.o
 
 commands/makeclan.i: commands/makeclan.cpp.i
@@ -6531,7 +6529,7 @@ commands/makeclan.i: commands/makeclan.cpp.i
 
 # target to preprocess a source file
 commands/makeclan.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeclan.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeclan.cpp.i
 .PHONY : commands/makeclan.cpp.i
 
 commands/makeclan.s: commands/makeclan.cpp.s
@@ -6540,7 +6538,7 @@ commands/makeclan.s: commands/makeclan.cpp.s
 
 # target to generate assembly for a file
 commands/makeclan.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeclan.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeclan.cpp.s
 .PHONY : commands/makeclan.cpp.s
 
 commands/makecomlink.o: commands/makecomlink.cpp.o
@@ -6549,7 +6547,7 @@ commands/makecomlink.o: commands/makecomlink.cpp.o
 
 # target to build an object file
 commands/makecomlink.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makecomlink.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makecomlink.cpp.o
 .PHONY : commands/makecomlink.cpp.o
 
 commands/makecomlink.i: commands/makecomlink.cpp.i
@@ -6558,7 +6556,7 @@ commands/makecomlink.i: commands/makecomlink.cpp.i
 
 # target to preprocess a source file
 commands/makecomlink.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makecomlink.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makecomlink.cpp.i
 .PHONY : commands/makecomlink.cpp.i
 
 commands/makecomlink.s: commands/makecomlink.cpp.s
@@ -6567,7 +6565,7 @@ commands/makecomlink.s: commands/makecomlink.cpp.s
 
 # target to generate assembly for a file
 commands/makecomlink.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makecomlink.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makecomlink.cpp.s
 .PHONY : commands/makecomlink.cpp.s
 
 commands/makecontainer.o: commands/makecontainer.cpp.o
@@ -6576,7 +6574,7 @@ commands/makecontainer.o: commands/makecontainer.cpp.o
 
 # target to build an object file
 commands/makecontainer.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makecontainer.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makecontainer.cpp.o
 .PHONY : commands/makecontainer.cpp.o
 
 commands/makecontainer.i: commands/makecontainer.cpp.i
@@ -6585,7 +6583,7 @@ commands/makecontainer.i: commands/makecontainer.cpp.i
 
 # target to preprocess a source file
 commands/makecontainer.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makecontainer.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makecontainer.cpp.i
 .PHONY : commands/makecontainer.cpp.i
 
 commands/makecontainer.s: commands/makecontainer.cpp.s
@@ -6594,7 +6592,7 @@ commands/makecontainer.s: commands/makecontainer.cpp.s
 
 # target to generate assembly for a file
 commands/makecontainer.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makecontainer.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makecontainer.cpp.s
 .PHONY : commands/makecontainer.cpp.s
 
 commands/makedisguise.o: commands/makedisguise.cpp.o
@@ -6603,7 +6601,7 @@ commands/makedisguise.o: commands/makedisguise.cpp.o
 
 # target to build an object file
 commands/makedisguise.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makedisguise.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makedisguise.cpp.o
 .PHONY : commands/makedisguise.cpp.o
 
 commands/makedisguise.i: commands/makedisguise.cpp.i
@@ -6612,7 +6610,7 @@ commands/makedisguise.i: commands/makedisguise.cpp.i
 
 # target to preprocess a source file
 commands/makedisguise.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makedisguise.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makedisguise.cpp.i
 .PHONY : commands/makedisguise.cpp.i
 
 commands/makedisguise.s: commands/makedisguise.cpp.s
@@ -6621,7 +6619,7 @@ commands/makedisguise.s: commands/makedisguise.cpp.s
 
 # target to generate assembly for a file
 commands/makedisguise.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makedisguise.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makedisguise.cpp.s
 .PHONY : commands/makedisguise.cpp.s
 
 commands/makeglowrod.o: commands/makeglowrod.cpp.o
@@ -6630,7 +6628,7 @@ commands/makeglowrod.o: commands/makeglowrod.cpp.o
 
 # target to build an object file
 commands/makeglowrod.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeglowrod.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeglowrod.cpp.o
 .PHONY : commands/makeglowrod.cpp.o
 
 commands/makeglowrod.i: commands/makeglowrod.cpp.i
@@ -6639,7 +6637,7 @@ commands/makeglowrod.i: commands/makeglowrod.cpp.i
 
 # target to preprocess a source file
 commands/makeglowrod.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeglowrod.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeglowrod.cpp.i
 .PHONY : commands/makeglowrod.cpp.i
 
 commands/makeglowrod.s: commands/makeglowrod.cpp.s
@@ -6648,7 +6646,7 @@ commands/makeglowrod.s: commands/makeglowrod.cpp.s
 
 # target to generate assembly for a file
 commands/makeglowrod.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeglowrod.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeglowrod.cpp.s
 .PHONY : commands/makeglowrod.cpp.s
 
 commands/makegrenade.o: commands/makegrenade.cpp.o
@@ -6657,7 +6655,7 @@ commands/makegrenade.o: commands/makegrenade.cpp.o
 
 # target to build an object file
 commands/makegrenade.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makegrenade.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makegrenade.cpp.o
 .PHONY : commands/makegrenade.cpp.o
 
 commands/makegrenade.i: commands/makegrenade.cpp.i
@@ -6666,7 +6664,7 @@ commands/makegrenade.i: commands/makegrenade.cpp.i
 
 # target to preprocess a source file
 commands/makegrenade.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makegrenade.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makegrenade.cpp.i
 .PHONY : commands/makegrenade.cpp.i
 
 commands/makegrenade.s: commands/makegrenade.cpp.s
@@ -6675,7 +6673,7 @@ commands/makegrenade.s: commands/makegrenade.cpp.s
 
 # target to generate assembly for a file
 commands/makegrenade.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makegrenade.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makegrenade.cpp.s
 .PHONY : commands/makegrenade.cpp.s
 
 commands/makeguild.o: commands/makeguild.cpp.o
@@ -6684,7 +6682,7 @@ commands/makeguild.o: commands/makeguild.cpp.o
 
 # target to build an object file
 commands/makeguild.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeguild.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeguild.cpp.o
 .PHONY : commands/makeguild.cpp.o
 
 commands/makeguild.i: commands/makeguild.cpp.i
@@ -6693,7 +6691,7 @@ commands/makeguild.i: commands/makeguild.cpp.i
 
 # target to preprocess a source file
 commands/makeguild.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeguild.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeguild.cpp.i
 .PHONY : commands/makeguild.cpp.i
 
 commands/makeguild.s: commands/makeguild.cpp.s
@@ -6702,7 +6700,7 @@ commands/makeguild.s: commands/makeguild.cpp.s
 
 # target to generate assembly for a file
 commands/makeguild.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeguild.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeguild.cpp.s
 .PHONY : commands/makeguild.cpp.s
 
 commands/makejewelry.o: commands/makejewelry.cpp.o
@@ -6711,7 +6709,7 @@ commands/makejewelry.o: commands/makejewelry.cpp.o
 
 # target to build an object file
 commands/makejewelry.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makejewelry.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makejewelry.cpp.o
 .PHONY : commands/makejewelry.cpp.o
 
 commands/makejewelry.i: commands/makejewelry.cpp.i
@@ -6720,7 +6718,7 @@ commands/makejewelry.i: commands/makejewelry.cpp.i
 
 # target to preprocess a source file
 commands/makejewelry.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makejewelry.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makejewelry.cpp.i
 .PHONY : commands/makejewelry.cpp.i
 
 commands/makejewelry.s: commands/makejewelry.cpp.s
@@ -6729,7 +6727,7 @@ commands/makejewelry.s: commands/makejewelry.cpp.s
 
 # target to generate assembly for a file
 commands/makejewelry.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makejewelry.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makejewelry.cpp.s
 .PHONY : commands/makejewelry.cpp.s
 
 commands/makelandmine.o: commands/makelandmine.cpp.o
@@ -6738,7 +6736,7 @@ commands/makelandmine.o: commands/makelandmine.cpp.o
 
 # target to build an object file
 commands/makelandmine.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makelandmine.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makelandmine.cpp.o
 .PHONY : commands/makelandmine.cpp.o
 
 commands/makelandmine.i: commands/makelandmine.cpp.i
@@ -6747,7 +6745,7 @@ commands/makelandmine.i: commands/makelandmine.cpp.i
 
 # target to preprocess a source file
 commands/makelandmine.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makelandmine.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makelandmine.cpp.i
 .PHONY : commands/makelandmine.cpp.i
 
 commands/makelandmine.s: commands/makelandmine.cpp.s
@@ -6756,7 +6754,7 @@ commands/makelandmine.s: commands/makelandmine.cpp.s
 
 # target to generate assembly for a file
 commands/makelandmine.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makelandmine.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makelandmine.cpp.s
 .PHONY : commands/makelandmine.cpp.s
 
 commands/makelightsaber.o: commands/makelightsaber.cpp.o
@@ -6765,7 +6763,7 @@ commands/makelightsaber.o: commands/makelightsaber.cpp.o
 
 # target to build an object file
 commands/makelightsaber.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makelightsaber.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makelightsaber.cpp.o
 .PHONY : commands/makelightsaber.cpp.o
 
 commands/makelightsaber.i: commands/makelightsaber.cpp.i
@@ -6774,7 +6772,7 @@ commands/makelightsaber.i: commands/makelightsaber.cpp.i
 
 # target to preprocess a source file
 commands/makelightsaber.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makelightsaber.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makelightsaber.cpp.i
 .PHONY : commands/makelightsaber.cpp.i
 
 commands/makelightsaber.s: commands/makelightsaber.cpp.s
@@ -6783,7 +6781,7 @@ commands/makelightsaber.s: commands/makelightsaber.cpp.s
 
 # target to generate assembly for a file
 commands/makelightsaber.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makelightsaber.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makelightsaber.cpp.s
 .PHONY : commands/makelightsaber.cpp.s
 
 commands/makeplanet.o: commands/makeplanet.cpp.o
@@ -6792,7 +6790,7 @@ commands/makeplanet.o: commands/makeplanet.cpp.o
 
 # target to build an object file
 commands/makeplanet.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeplanet.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeplanet.cpp.o
 .PHONY : commands/makeplanet.cpp.o
 
 commands/makeplanet.i: commands/makeplanet.cpp.i
@@ -6801,7 +6799,7 @@ commands/makeplanet.i: commands/makeplanet.cpp.i
 
 # target to preprocess a source file
 commands/makeplanet.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeplanet.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeplanet.cpp.i
 .PHONY : commands/makeplanet.cpp.i
 
 commands/makeplanet.s: commands/makeplanet.cpp.s
@@ -6810,7 +6808,7 @@ commands/makeplanet.s: commands/makeplanet.cpp.s
 
 # target to generate assembly for a file
 commands/makeplanet.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeplanet.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeplanet.cpp.s
 .PHONY : commands/makeplanet.cpp.s
 
 commands/makerepair.o: commands/makerepair.cpp.o
@@ -6819,7 +6817,7 @@ commands/makerepair.o: commands/makerepair.cpp.o
 
 # target to build an object file
 commands/makerepair.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makerepair.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makerepair.cpp.o
 .PHONY : commands/makerepair.cpp.o
 
 commands/makerepair.i: commands/makerepair.cpp.i
@@ -6828,7 +6826,7 @@ commands/makerepair.i: commands/makerepair.cpp.i
 
 # target to preprocess a source file
 commands/makerepair.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makerepair.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makerepair.cpp.i
 .PHONY : commands/makerepair.cpp.i
 
 commands/makerepair.s: commands/makerepair.cpp.s
@@ -6837,7 +6835,7 @@ commands/makerepair.s: commands/makerepair.cpp.s
 
 # target to generate assembly for a file
 commands/makerepair.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makerepair.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makerepair.cpp.s
 .PHONY : commands/makerepair.cpp.s
 
 commands/makeshield.o: commands/makeshield.cpp.o
@@ -6846,7 +6844,7 @@ commands/makeshield.o: commands/makeshield.cpp.o
 
 # target to build an object file
 commands/makeshield.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeshield.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeshield.cpp.o
 .PHONY : commands/makeshield.cpp.o
 
 commands/makeshield.i: commands/makeshield.cpp.i
@@ -6855,7 +6853,7 @@ commands/makeshield.i: commands/makeshield.cpp.i
 
 # target to preprocess a source file
 commands/makeshield.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeshield.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeshield.cpp.i
 .PHONY : commands/makeshield.cpp.i
 
 commands/makeshield.s: commands/makeshield.cpp.s
@@ -6864,7 +6862,7 @@ commands/makeshield.s: commands/makeshield.cpp.s
 
 # target to generate assembly for a file
 commands/makeshield.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeshield.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeshield.cpp.s
 .PHONY : commands/makeshield.cpp.s
 
 commands/makeship.o: commands/makeship.cpp.o
@@ -6873,7 +6871,7 @@ commands/makeship.o: commands/makeship.cpp.o
 
 # target to build an object file
 commands/makeship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeship.cpp.o
 .PHONY : commands/makeship.cpp.o
 
 commands/makeship.i: commands/makeship.cpp.i
@@ -6882,7 +6880,7 @@ commands/makeship.i: commands/makeship.cpp.i
 
 # target to preprocess a source file
 commands/makeship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeship.cpp.i
 .PHONY : commands/makeship.cpp.i
 
 commands/makeship.s: commands/makeship.cpp.s
@@ -6891,7 +6889,7 @@ commands/makeship.s: commands/makeship.cpp.s
 
 # target to generate assembly for a file
 commands/makeship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeship.cpp.s
 .PHONY : commands/makeship.cpp.s
 
 commands/makeshop.o: commands/makeshop.cpp.o
@@ -6900,7 +6898,7 @@ commands/makeshop.o: commands/makeshop.cpp.o
 
 # target to build an object file
 commands/makeshop.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeshop.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeshop.cpp.o
 .PHONY : commands/makeshop.cpp.o
 
 commands/makeshop.i: commands/makeshop.cpp.i
@@ -6909,7 +6907,7 @@ commands/makeshop.i: commands/makeshop.cpp.i
 
 # target to preprocess a source file
 commands/makeshop.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeshop.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeshop.cpp.i
 .PHONY : commands/makeshop.cpp.i
 
 commands/makeshop.s: commands/makeshop.cpp.s
@@ -6918,7 +6916,7 @@ commands/makeshop.s: commands/makeshop.cpp.s
 
 # target to generate assembly for a file
 commands/makeshop.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeshop.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeshop.cpp.s
 .PHONY : commands/makeshop.cpp.s
 
 commands/makeshuttle.o: commands/makeshuttle.cpp.o
@@ -6927,7 +6925,7 @@ commands/makeshuttle.o: commands/makeshuttle.cpp.o
 
 # target to build an object file
 commands/makeshuttle.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeshuttle.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeshuttle.cpp.o
 .PHONY : commands/makeshuttle.cpp.o
 
 commands/makeshuttle.i: commands/makeshuttle.cpp.i
@@ -6936,7 +6934,7 @@ commands/makeshuttle.i: commands/makeshuttle.cpp.i
 
 # target to preprocess a source file
 commands/makeshuttle.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeshuttle.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeshuttle.cpp.i
 .PHONY : commands/makeshuttle.cpp.i
 
 commands/makeshuttle.s: commands/makeshuttle.cpp.s
@@ -6945,7 +6943,7 @@ commands/makeshuttle.s: commands/makeshuttle.cpp.s
 
 # target to generate assembly for a file
 commands/makeshuttle.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makeshuttle.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makeshuttle.cpp.s
 .PHONY : commands/makeshuttle.cpp.s
 
 commands/makespaceobject.o: commands/makespaceobject.cpp.o
@@ -6954,7 +6952,7 @@ commands/makespaceobject.o: commands/makespaceobject.cpp.o
 
 # target to build an object file
 commands/makespaceobject.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makespaceobject.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makespaceobject.cpp.o
 .PHONY : commands/makespaceobject.cpp.o
 
 commands/makespaceobject.i: commands/makespaceobject.cpp.i
@@ -6963,7 +6961,7 @@ commands/makespaceobject.i: commands/makespaceobject.cpp.i
 
 # target to preprocess a source file
 commands/makespaceobject.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makespaceobject.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makespaceobject.cpp.i
 .PHONY : commands/makespaceobject.cpp.i
 
 commands/makespaceobject.s: commands/makespaceobject.cpp.s
@@ -6972,7 +6970,7 @@ commands/makespaceobject.s: commands/makespaceobject.cpp.s
 
 # target to generate assembly for a file
 commands/makespaceobject.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makespaceobject.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makespaceobject.cpp.s
 .PHONY : commands/makespaceobject.cpp.s
 
 commands/makespice.o: commands/makespice.cpp.o
@@ -6981,7 +6979,7 @@ commands/makespice.o: commands/makespice.cpp.o
 
 # target to build an object file
 commands/makespice.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makespice.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makespice.cpp.o
 .PHONY : commands/makespice.cpp.o
 
 commands/makespice.i: commands/makespice.cpp.i
@@ -6990,7 +6988,7 @@ commands/makespice.i: commands/makespice.cpp.i
 
 # target to preprocess a source file
 commands/makespice.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makespice.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makespice.cpp.i
 .PHONY : commands/makespice.cpp.i
 
 commands/makespice.s: commands/makespice.cpp.s
@@ -6999,7 +6997,7 @@ commands/makespice.s: commands/makespice.cpp.s
 
 # target to generate assembly for a file
 commands/makespice.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makespice.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makespice.cpp.s
 .PHONY : commands/makespice.cpp.s
 
 commands/makewizlist.o: commands/makewizlist.cpp.o
@@ -7008,7 +7006,7 @@ commands/makewizlist.o: commands/makewizlist.cpp.o
 
 # target to build an object file
 commands/makewizlist.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makewizlist.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makewizlist.cpp.o
 .PHONY : commands/makewizlist.cpp.o
 
 commands/makewizlist.i: commands/makewizlist.cpp.i
@@ -7017,7 +7015,7 @@ commands/makewizlist.i: commands/makewizlist.cpp.i
 
 # target to preprocess a source file
 commands/makewizlist.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makewizlist.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makewizlist.cpp.i
 .PHONY : commands/makewizlist.cpp.i
 
 commands/makewizlist.s: commands/makewizlist.cpp.s
@@ -7026,7 +7024,7 @@ commands/makewizlist.s: commands/makewizlist.cpp.s
 
 # target to generate assembly for a file
 commands/makewizlist.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/makewizlist.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/makewizlist.cpp.s
 .PHONY : commands/makewizlist.cpp.s
 
 commands/massign.o: commands/massign.cpp.o
@@ -7035,7 +7033,7 @@ commands/massign.o: commands/massign.cpp.o
 
 # target to build an object file
 commands/massign.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/massign.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/massign.cpp.o
 .PHONY : commands/massign.cpp.o
 
 commands/massign.i: commands/massign.cpp.i
@@ -7044,7 +7042,7 @@ commands/massign.i: commands/massign.cpp.i
 
 # target to preprocess a source file
 commands/massign.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/massign.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/massign.cpp.i
 .PHONY : commands/massign.cpp.i
 
 commands/massign.s: commands/massign.cpp.s
@@ -7053,7 +7051,7 @@ commands/massign.s: commands/massign.cpp.s
 
 # target to generate assembly for a file
 commands/massign.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/massign.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/massign.cpp.s
 .PHONY : commands/massign.cpp.s
 
 commands/masspropaganda.o: commands/masspropaganda.cpp.o
@@ -7062,7 +7060,7 @@ commands/masspropaganda.o: commands/masspropaganda.cpp.o
 
 # target to build an object file
 commands/masspropaganda.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/masspropaganda.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/masspropaganda.cpp.o
 .PHONY : commands/masspropaganda.cpp.o
 
 commands/masspropaganda.i: commands/masspropaganda.cpp.i
@@ -7071,7 +7069,7 @@ commands/masspropaganda.i: commands/masspropaganda.cpp.i
 
 # target to preprocess a source file
 commands/masspropaganda.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/masspropaganda.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/masspropaganda.cpp.i
 .PHONY : commands/masspropaganda.cpp.i
 
 commands/masspropaganda.s: commands/masspropaganda.cpp.s
@@ -7080,7 +7078,7 @@ commands/masspropaganda.s: commands/masspropaganda.cpp.s
 
 # target to generate assembly for a file
 commands/masspropaganda.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/masspropaganda.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/masspropaganda.cpp.s
 .PHONY : commands/masspropaganda.cpp.s
 
 commands/mcreate.o: commands/mcreate.cpp.o
@@ -7089,7 +7087,7 @@ commands/mcreate.o: commands/mcreate.cpp.o
 
 # target to build an object file
 commands/mcreate.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mcreate.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mcreate.cpp.o
 .PHONY : commands/mcreate.cpp.o
 
 commands/mcreate.i: commands/mcreate.cpp.i
@@ -7098,7 +7096,7 @@ commands/mcreate.i: commands/mcreate.cpp.i
 
 # target to preprocess a source file
 commands/mcreate.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mcreate.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mcreate.cpp.i
 .PHONY : commands/mcreate.cpp.i
 
 commands/mcreate.s: commands/mcreate.cpp.s
@@ -7107,7 +7105,7 @@ commands/mcreate.s: commands/mcreate.cpp.s
 
 # target to generate assembly for a file
 commands/mcreate.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mcreate.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mcreate.cpp.s
 .PHONY : commands/mcreate.cpp.s
 
 commands/members.o: commands/members.cpp.o
@@ -7116,7 +7114,7 @@ commands/members.o: commands/members.cpp.o
 
 # target to build an object file
 commands/members.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/members.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/members.cpp.o
 .PHONY : commands/members.cpp.o
 
 commands/members.i: commands/members.cpp.i
@@ -7125,7 +7123,7 @@ commands/members.i: commands/members.cpp.i
 
 # target to preprocess a source file
 commands/members.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/members.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/members.cpp.i
 .PHONY : commands/members.cpp.i
 
 commands/members.s: commands/members.cpp.s
@@ -7134,7 +7132,7 @@ commands/members.s: commands/members.cpp.s
 
 # target to generate assembly for a file
 commands/members.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/members.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/members.cpp.s
 .PHONY : commands/members.cpp.s
 
 commands/memory.o: commands/memory.cpp.o
@@ -7143,7 +7141,7 @@ commands/memory.o: commands/memory.cpp.o
 
 # target to build an object file
 commands/memory.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/memory.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/memory.cpp.o
 .PHONY : commands/memory.cpp.o
 
 commands/memory.i: commands/memory.cpp.i
@@ -7152,7 +7150,7 @@ commands/memory.i: commands/memory.cpp.i
 
 # target to preprocess a source file
 commands/memory.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/memory.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/memory.cpp.i
 .PHONY : commands/memory.cpp.i
 
 commands/memory.s: commands/memory.cpp.s
@@ -7161,7 +7159,7 @@ commands/memory.s: commands/memory.cpp.s
 
 # target to generate assembly for a file
 commands/memory.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/memory.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/memory.cpp.s
 .PHONY : commands/memory.cpp.s
 
 commands/mfind.o: commands/mfind.cpp.o
@@ -7170,7 +7168,7 @@ commands/mfind.o: commands/mfind.cpp.o
 
 # target to build an object file
 commands/mfind.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mfind.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mfind.cpp.o
 .PHONY : commands/mfind.cpp.o
 
 commands/mfind.i: commands/mfind.cpp.i
@@ -7179,7 +7177,7 @@ commands/mfind.i: commands/mfind.cpp.i
 
 # target to preprocess a source file
 commands/mfind.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mfind.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mfind.cpp.i
 .PHONY : commands/mfind.cpp.i
 
 commands/mfind.s: commands/mfind.cpp.s
@@ -7188,7 +7186,7 @@ commands/mfind.s: commands/mfind.cpp.s
 
 # target to generate assembly for a file
 commands/mfind.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mfind.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mfind.cpp.s
 .PHONY : commands/mfind.cpp.s
 
 commands/mine.o: commands/mine.cpp.o
@@ -7197,7 +7195,7 @@ commands/mine.o: commands/mine.cpp.o
 
 # target to build an object file
 commands/mine.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mine.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mine.cpp.o
 .PHONY : commands/mine.cpp.o
 
 commands/mine.i: commands/mine.cpp.i
@@ -7206,7 +7204,7 @@ commands/mine.i: commands/mine.cpp.i
 
 # target to preprocess a source file
 commands/mine.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mine.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mine.cpp.i
 .PHONY : commands/mine.cpp.i
 
 commands/mine.s: commands/mine.cpp.s
@@ -7215,7 +7213,7 @@ commands/mine.s: commands/mine.cpp.s
 
 # target to generate assembly for a file
 commands/mine.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mine.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mine.cpp.s
 .PHONY : commands/mine.cpp.s
 
 commands/minvoke.o: commands/minvoke.cpp.o
@@ -7224,7 +7222,7 @@ commands/minvoke.o: commands/minvoke.cpp.o
 
 # target to build an object file
 commands/minvoke.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/minvoke.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/minvoke.cpp.o
 .PHONY : commands/minvoke.cpp.o
 
 commands/minvoke.i: commands/minvoke.cpp.i
@@ -7233,7 +7231,7 @@ commands/minvoke.i: commands/minvoke.cpp.i
 
 # target to preprocess a source file
 commands/minvoke.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/minvoke.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/minvoke.cpp.i
 .PHONY : commands/minvoke.cpp.i
 
 commands/minvoke.s: commands/minvoke.cpp.s
@@ -7242,7 +7240,7 @@ commands/minvoke.s: commands/minvoke.cpp.s
 
 # target to generate assembly for a file
 commands/minvoke.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/minvoke.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/minvoke.cpp.s
 .PHONY : commands/minvoke.cpp.s
 
 commands/mlist.o: commands/mlist.cpp.o
@@ -7251,7 +7249,7 @@ commands/mlist.o: commands/mlist.cpp.o
 
 # target to build an object file
 commands/mlist.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mlist.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mlist.cpp.o
 .PHONY : commands/mlist.cpp.o
 
 commands/mlist.i: commands/mlist.cpp.i
@@ -7260,7 +7258,7 @@ commands/mlist.i: commands/mlist.cpp.i
 
 # target to preprocess a source file
 commands/mlist.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mlist.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mlist.cpp.i
 .PHONY : commands/mlist.cpp.i
 
 commands/mlist.s: commands/mlist.cpp.s
@@ -7269,7 +7267,7 @@ commands/mlist.s: commands/mlist.cpp.s
 
 # target to generate assembly for a file
 commands/mlist.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mlist.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mlist.cpp.s
 .PHONY : commands/mlist.cpp.s
 
 commands/mount.o: commands/mount.cpp.o
@@ -7278,7 +7276,7 @@ commands/mount.o: commands/mount.cpp.o
 
 # target to build an object file
 commands/mount.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mount.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mount.cpp.o
 .PHONY : commands/mount.cpp.o
 
 commands/mount.i: commands/mount.cpp.i
@@ -7287,7 +7285,7 @@ commands/mount.i: commands/mount.cpp.i
 
 # target to preprocess a source file
 commands/mount.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mount.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mount.cpp.i
 .PHONY : commands/mount.cpp.i
 
 commands/mount.s: commands/mount.cpp.s
@@ -7296,7 +7294,7 @@ commands/mount.s: commands/mount.cpp.s
 
 # target to generate assembly for a file
 commands/mount.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mount.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mount.cpp.s
 .PHONY : commands/mount.cpp.s
 
 commands/mpedit.o: commands/mpedit.cpp.o
@@ -7305,7 +7303,7 @@ commands/mpedit.o: commands/mpedit.cpp.o
 
 # target to build an object file
 commands/mpedit.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mpedit.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mpedit.cpp.o
 .PHONY : commands/mpedit.cpp.o
 
 commands/mpedit.i: commands/mpedit.cpp.i
@@ -7314,7 +7312,7 @@ commands/mpedit.i: commands/mpedit.cpp.i
 
 # target to preprocess a source file
 commands/mpedit.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mpedit.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mpedit.cpp.i
 .PHONY : commands/mpedit.cpp.i
 
 commands/mpedit.s: commands/mpedit.cpp.s
@@ -7323,7 +7321,7 @@ commands/mpedit.s: commands/mpedit.cpp.s
 
 # target to generate assembly for a file
 commands/mpedit.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mpedit.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mpedit.cpp.s
 .PHONY : commands/mpedit.cpp.s
 
 commands/mpfind.o: commands/mpfind.cpp.o
@@ -7332,7 +7330,7 @@ commands/mpfind.o: commands/mpfind.cpp.o
 
 # target to build an object file
 commands/mpfind.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mpfind.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mpfind.cpp.o
 .PHONY : commands/mpfind.cpp.o
 
 commands/mpfind.i: commands/mpfind.cpp.i
@@ -7341,7 +7339,7 @@ commands/mpfind.i: commands/mpfind.cpp.i
 
 # target to preprocess a source file
 commands/mpfind.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mpfind.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mpfind.cpp.i
 .PHONY : commands/mpfind.cpp.i
 
 commands/mpfind.s: commands/mpfind.cpp.s
@@ -7350,7 +7348,7 @@ commands/mpfind.s: commands/mpfind.cpp.s
 
 # target to generate assembly for a file
 commands/mpfind.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mpfind.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mpfind.cpp.s
 .PHONY : commands/mpfind.cpp.s
 
 commands/mpstat.o: commands/mpstat.cpp.o
@@ -7359,7 +7357,7 @@ commands/mpstat.o: commands/mpstat.cpp.o
 
 # target to build an object file
 commands/mpstat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mpstat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mpstat.cpp.o
 .PHONY : commands/mpstat.cpp.o
 
 commands/mpstat.i: commands/mpstat.cpp.i
@@ -7368,7 +7366,7 @@ commands/mpstat.i: commands/mpstat.cpp.i
 
 # target to preprocess a source file
 commands/mpstat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mpstat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mpstat.cpp.i
 .PHONY : commands/mpstat.cpp.i
 
 commands/mpstat.s: commands/mpstat.cpp.s
@@ -7377,7 +7375,7 @@ commands/mpstat.s: commands/mpstat.cpp.s
 
 # target to generate assembly for a file
 commands/mpstat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mpstat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mpstat.cpp.s
 .PHONY : commands/mpstat.cpp.s
 
 commands/mset.o: commands/mset.cpp.o
@@ -7386,7 +7384,7 @@ commands/mset.o: commands/mset.cpp.o
 
 # target to build an object file
 commands/mset.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mset.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mset.cpp.o
 .PHONY : commands/mset.cpp.o
 
 commands/mset.i: commands/mset.cpp.i
@@ -7395,7 +7393,7 @@ commands/mset.i: commands/mset.cpp.i
 
 # target to preprocess a source file
 commands/mset.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mset.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mset.cpp.i
 .PHONY : commands/mset.cpp.i
 
 commands/mset.s: commands/mset.cpp.s
@@ -7404,7 +7402,7 @@ commands/mset.s: commands/mset.cpp.s
 
 # target to generate assembly for a file
 commands/mset.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mset.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mset.cpp.s
 .PHONY : commands/mset.cpp.s
 
 commands/mstat.o: commands/mstat.cpp.o
@@ -7413,7 +7411,7 @@ commands/mstat.o: commands/mstat.cpp.o
 
 # target to build an object file
 commands/mstat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mstat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mstat.cpp.o
 .PHONY : commands/mstat.cpp.o
 
 commands/mstat.i: commands/mstat.cpp.i
@@ -7422,7 +7420,7 @@ commands/mstat.i: commands/mstat.cpp.i
 
 # target to preprocess a source file
 commands/mstat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mstat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mstat.cpp.i
 .PHONY : commands/mstat.cpp.i
 
 commands/mstat.s: commands/mstat.cpp.s
@@ -7431,7 +7429,7 @@ commands/mstat.s: commands/mstat.cpp.s
 
 # target to generate assembly for a file
 commands/mstat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mstat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mstat.cpp.s
 .PHONY : commands/mstat.cpp.s
 
 commands/murder.o: commands/murder.cpp.o
@@ -7440,7 +7438,7 @@ commands/murder.o: commands/murder.cpp.o
 
 # target to build an object file
 commands/murder.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/murder.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/murder.cpp.o
 .PHONY : commands/murder.cpp.o
 
 commands/murder.i: commands/murder.cpp.i
@@ -7449,7 +7447,7 @@ commands/murder.i: commands/murder.cpp.i
 
 # target to preprocess a source file
 commands/murder.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/murder.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/murder.cpp.i
 .PHONY : commands/murder.cpp.i
 
 commands/murder.s: commands/murder.cpp.s
@@ -7458,7 +7456,7 @@ commands/murder.s: commands/murder.cpp.s
 
 # target to generate assembly for a file
 commands/murder.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/murder.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/murder.cpp.s
 .PHONY : commands/murder.cpp.s
 
 commands/music.o: commands/music.cpp.o
@@ -7467,7 +7465,7 @@ commands/music.o: commands/music.cpp.o
 
 # target to build an object file
 commands/music.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/music.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/music.cpp.o
 .PHONY : commands/music.cpp.o
 
 commands/music.i: commands/music.cpp.i
@@ -7476,7 +7474,7 @@ commands/music.i: commands/music.cpp.i
 
 # target to preprocess a source file
 commands/music.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/music.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/music.cpp.i
 .PHONY : commands/music.cpp.i
 
 commands/music.s: commands/music.cpp.s
@@ -7485,7 +7483,7 @@ commands/music.s: commands/music.cpp.s
 
 # target to generate assembly for a file
 commands/music.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/music.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/music.cpp.s
 .PHONY : commands/music.cpp.s
 
 commands/mwhere.o: commands/mwhere.cpp.o
@@ -7494,7 +7492,7 @@ commands/mwhere.o: commands/mwhere.cpp.o
 
 # target to build an object file
 commands/mwhere.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mwhere.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mwhere.cpp.o
 .PHONY : commands/mwhere.cpp.o
 
 commands/mwhere.i: commands/mwhere.cpp.i
@@ -7503,7 +7501,7 @@ commands/mwhere.i: commands/mwhere.cpp.i
 
 # target to preprocess a source file
 commands/mwhere.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mwhere.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mwhere.cpp.i
 .PHONY : commands/mwhere.cpp.i
 
 commands/mwhere.s: commands/mwhere.cpp.s
@@ -7512,7 +7510,7 @@ commands/mwhere.s: commands/mwhere.cpp.s
 
 # target to generate assembly for a file
 commands/mwhere.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/mwhere.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/mwhere.cpp.s
 .PHONY : commands/mwhere.cpp.s
 
 commands/name.o: commands/name.cpp.o
@@ -7521,7 +7519,7 @@ commands/name.o: commands/name.cpp.o
 
 # target to build an object file
 commands/name.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/name.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/name.cpp.o
 .PHONY : commands/name.cpp.o
 
 commands/name.i: commands/name.cpp.i
@@ -7530,7 +7528,7 @@ commands/name.i: commands/name.cpp.i
 
 # target to preprocess a source file
 commands/name.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/name.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/name.cpp.i
 .PHONY : commands/name.cpp.i
 
 commands/name.s: commands/name.cpp.s
@@ -7539,7 +7537,7 @@ commands/name.s: commands/name.cpp.s
 
 # target to generate assembly for a file
 commands/name.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/name.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/name.cpp.s
 .PHONY : commands/name.cpp.s
 
 commands/newbiechat.o: commands/newbiechat.cpp.o
@@ -7548,7 +7546,7 @@ commands/newbiechat.o: commands/newbiechat.cpp.o
 
 # target to build an object file
 commands/newbiechat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/newbiechat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/newbiechat.cpp.o
 .PHONY : commands/newbiechat.cpp.o
 
 commands/newbiechat.i: commands/newbiechat.cpp.i
@@ -7557,7 +7555,7 @@ commands/newbiechat.i: commands/newbiechat.cpp.i
 
 # target to preprocess a source file
 commands/newbiechat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/newbiechat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/newbiechat.cpp.i
 .PHONY : commands/newbiechat.cpp.i
 
 commands/newbiechat.s: commands/newbiechat.cpp.s
@@ -7566,7 +7564,7 @@ commands/newbiechat.s: commands/newbiechat.cpp.s
 
 # target to generate assembly for a file
 commands/newbiechat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/newbiechat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/newbiechat.cpp.s
 .PHONY : commands/newbiechat.cpp.s
 
 commands/newbieset.o: commands/newbieset.cpp.o
@@ -7575,7 +7573,7 @@ commands/newbieset.o: commands/newbieset.cpp.o
 
 # target to build an object file
 commands/newbieset.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/newbieset.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/newbieset.cpp.o
 .PHONY : commands/newbieset.cpp.o
 
 commands/newbieset.i: commands/newbieset.cpp.i
@@ -7584,7 +7582,7 @@ commands/newbieset.i: commands/newbieset.cpp.i
 
 # target to preprocess a source file
 commands/newbieset.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/newbieset.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/newbieset.cpp.i
 .PHONY : commands/newbieset.cpp.i
 
 commands/newbieset.s: commands/newbieset.cpp.s
@@ -7593,7 +7591,7 @@ commands/newbieset.s: commands/newbieset.cpp.s
 
 # target to generate assembly for a file
 commands/newbieset.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/newbieset.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/newbieset.cpp.s
 .PHONY : commands/newbieset.cpp.s
 
 commands/newzones.o: commands/newzones.cpp.o
@@ -7602,7 +7600,7 @@ commands/newzones.o: commands/newzones.cpp.o
 
 # target to build an object file
 commands/newzones.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/newzones.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/newzones.cpp.o
 .PHONY : commands/newzones.cpp.o
 
 commands/newzones.i: commands/newzones.cpp.i
@@ -7611,7 +7609,7 @@ commands/newzones.i: commands/newzones.cpp.i
 
 # target to preprocess a source file
 commands/newzones.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/newzones.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/newzones.cpp.i
 .PHONY : commands/newzones.cpp.i
 
 commands/newzones.s: commands/newzones.cpp.s
@@ -7620,7 +7618,7 @@ commands/newzones.s: commands/newzones.cpp.s
 
 # target to generate assembly for a file
 commands/newzones.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/newzones.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/newzones.cpp.s
 .PHONY : commands/newzones.cpp.s
 
 commands/noemote.o: commands/noemote.cpp.o
@@ -7629,7 +7627,7 @@ commands/noemote.o: commands/noemote.cpp.o
 
 # target to build an object file
 commands/noemote.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/noemote.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/noemote.cpp.o
 .PHONY : commands/noemote.cpp.o
 
 commands/noemote.i: commands/noemote.cpp.i
@@ -7638,7 +7636,7 @@ commands/noemote.i: commands/noemote.cpp.i
 
 # target to preprocess a source file
 commands/noemote.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/noemote.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/noemote.cpp.i
 .PHONY : commands/noemote.cpp.i
 
 commands/noemote.s: commands/noemote.cpp.s
@@ -7647,7 +7645,7 @@ commands/noemote.s: commands/noemote.cpp.s
 
 # target to generate assembly for a file
 commands/noemote.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/noemote.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/noemote.cpp.s
 .PHONY : commands/noemote.cpp.s
 
 commands/nohelps.o: commands/nohelps.cpp.o
@@ -7656,7 +7654,7 @@ commands/nohelps.o: commands/nohelps.cpp.o
 
 # target to build an object file
 commands/nohelps.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/nohelps.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/nohelps.cpp.o
 .PHONY : commands/nohelps.cpp.o
 
 commands/nohelps.i: commands/nohelps.cpp.i
@@ -7665,7 +7663,7 @@ commands/nohelps.i: commands/nohelps.cpp.i
 
 # target to preprocess a source file
 commands/nohelps.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/nohelps.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/nohelps.cpp.i
 .PHONY : commands/nohelps.cpp.i
 
 commands/nohelps.s: commands/nohelps.cpp.s
@@ -7674,7 +7672,7 @@ commands/nohelps.s: commands/nohelps.cpp.s
 
 # target to generate assembly for a file
 commands/nohelps.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/nohelps.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/nohelps.cpp.s
 .PHONY : commands/nohelps.cpp.s
 
 commands/noresolve.o: commands/noresolve.cpp.o
@@ -7683,7 +7681,7 @@ commands/noresolve.o: commands/noresolve.cpp.o
 
 # target to build an object file
 commands/noresolve.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/noresolve.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/noresolve.cpp.o
 .PHONY : commands/noresolve.cpp.o
 
 commands/noresolve.i: commands/noresolve.cpp.i
@@ -7692,7 +7690,7 @@ commands/noresolve.i: commands/noresolve.cpp.i
 
 # target to preprocess a source file
 commands/noresolve.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/noresolve.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/noresolve.cpp.i
 .PHONY : commands/noresolve.cpp.i
 
 commands/noresolve.s: commands/noresolve.cpp.s
@@ -7701,7 +7699,7 @@ commands/noresolve.s: commands/noresolve.cpp.s
 
 # target to generate assembly for a file
 commands/noresolve.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/noresolve.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/noresolve.cpp.s
 .PHONY : commands/noresolve.cpp.s
 
 commands/north.o: commands/north.cpp.o
@@ -7710,7 +7708,7 @@ commands/north.o: commands/north.cpp.o
 
 # target to build an object file
 commands/north.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/north.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/north.cpp.o
 .PHONY : commands/north.cpp.o
 
 commands/north.i: commands/north.cpp.i
@@ -7719,7 +7717,7 @@ commands/north.i: commands/north.cpp.i
 
 # target to preprocess a source file
 commands/north.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/north.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/north.cpp.i
 .PHONY : commands/north.cpp.i
 
 commands/north.s: commands/north.cpp.s
@@ -7728,7 +7726,7 @@ commands/north.s: commands/north.cpp.s
 
 # target to generate assembly for a file
 commands/north.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/north.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/north.cpp.s
 .PHONY : commands/north.cpp.s
 
 commands/northeast.o: commands/northeast.cpp.o
@@ -7737,7 +7735,7 @@ commands/northeast.o: commands/northeast.cpp.o
 
 # target to build an object file
 commands/northeast.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/northeast.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/northeast.cpp.o
 .PHONY : commands/northeast.cpp.o
 
 commands/northeast.i: commands/northeast.cpp.i
@@ -7746,7 +7744,7 @@ commands/northeast.i: commands/northeast.cpp.i
 
 # target to preprocess a source file
 commands/northeast.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/northeast.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/northeast.cpp.i
 .PHONY : commands/northeast.cpp.i
 
 commands/northeast.s: commands/northeast.cpp.s
@@ -7755,7 +7753,7 @@ commands/northeast.s: commands/northeast.cpp.s
 
 # target to generate assembly for a file
 commands/northeast.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/northeast.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/northeast.cpp.s
 .PHONY : commands/northeast.cpp.s
 
 commands/northwest.o: commands/northwest.cpp.o
@@ -7764,7 +7762,7 @@ commands/northwest.o: commands/northwest.cpp.o
 
 # target to build an object file
 commands/northwest.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/northwest.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/northwest.cpp.o
 .PHONY : commands/northwest.cpp.o
 
 commands/northwest.i: commands/northwest.cpp.i
@@ -7773,7 +7771,7 @@ commands/northwest.i: commands/northwest.cpp.i
 
 # target to preprocess a source file
 commands/northwest.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/northwest.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/northwest.cpp.i
 .PHONY : commands/northwest.cpp.i
 
 commands/northwest.s: commands/northwest.cpp.s
@@ -7782,7 +7780,7 @@ commands/northwest.s: commands/northwest.cpp.s
 
 # target to generate assembly for a file
 commands/northwest.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/northwest.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/northwest.cpp.s
 .PHONY : commands/northwest.cpp.s
 
 commands/notell.o: commands/notell.cpp.o
@@ -7791,7 +7789,7 @@ commands/notell.o: commands/notell.cpp.o
 
 # target to build an object file
 commands/notell.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/notell.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/notell.cpp.o
 .PHONY : commands/notell.cpp.o
 
 commands/notell.i: commands/notell.cpp.i
@@ -7800,7 +7798,7 @@ commands/notell.i: commands/notell.cpp.i
 
 # target to preprocess a source file
 commands/notell.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/notell.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/notell.cpp.i
 .PHONY : commands/notell.cpp.i
 
 commands/notell.s: commands/notell.cpp.s
@@ -7809,7 +7807,7 @@ commands/notell.s: commands/notell.cpp.s
 
 # target to generate assembly for a file
 commands/notell.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/notell.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/notell.cpp.s
 .PHONY : commands/notell.cpp.s
 
 commands/noteroom.o: commands/noteroom.cpp.o
@@ -7818,7 +7816,7 @@ commands/noteroom.o: commands/noteroom.cpp.o
 
 # target to build an object file
 commands/noteroom.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/noteroom.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/noteroom.cpp.o
 .PHONY : commands/noteroom.cpp.o
 
 commands/noteroom.i: commands/noteroom.cpp.i
@@ -7827,7 +7825,7 @@ commands/noteroom.i: commands/noteroom.cpp.i
 
 # target to preprocess a source file
 commands/noteroom.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/noteroom.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/noteroom.cpp.i
 .PHONY : commands/noteroom.cpp.i
 
 commands/noteroom.s: commands/noteroom.cpp.s
@@ -7836,7 +7834,7 @@ commands/noteroom.s: commands/noteroom.cpp.s
 
 # target to generate assembly for a file
 commands/noteroom.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/noteroom.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/noteroom.cpp.s
 .PHONY : commands/noteroom.cpp.s
 
 commands/notitle.o: commands/notitle.cpp.o
@@ -7845,7 +7843,7 @@ commands/notitle.o: commands/notitle.cpp.o
 
 # target to build an object file
 commands/notitle.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/notitle.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/notitle.cpp.o
 .PHONY : commands/notitle.cpp.o
 
 commands/notitle.i: commands/notitle.cpp.i
@@ -7854,7 +7852,7 @@ commands/notitle.i: commands/notitle.cpp.i
 
 # target to preprocess a source file
 commands/notitle.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/notitle.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/notitle.cpp.i
 .PHONY : commands/notitle.cpp.i
 
 commands/notitle.s: commands/notitle.cpp.s
@@ -7863,7 +7861,7 @@ commands/notitle.s: commands/notitle.cpp.s
 
 # target to generate assembly for a file
 commands/notitle.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/notitle.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/notitle.cpp.s
 .PHONY : commands/notitle.cpp.s
 
 commands/oassign.o: commands/oassign.cpp.o
@@ -7872,7 +7870,7 @@ commands/oassign.o: commands/oassign.cpp.o
 
 # target to build an object file
 commands/oassign.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/oassign.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/oassign.cpp.o
 .PHONY : commands/oassign.cpp.o
 
 commands/oassign.i: commands/oassign.cpp.i
@@ -7881,7 +7879,7 @@ commands/oassign.i: commands/oassign.cpp.i
 
 # target to preprocess a source file
 commands/oassign.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/oassign.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/oassign.cpp.i
 .PHONY : commands/oassign.cpp.i
 
 commands/oassign.s: commands/oassign.cpp.s
@@ -7890,7 +7888,7 @@ commands/oassign.s: commands/oassign.cpp.s
 
 # target to generate assembly for a file
 commands/oassign.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/oassign.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/oassign.cpp.s
 .PHONY : commands/oassign.cpp.s
 
 commands/ocreate.o: commands/ocreate.cpp.o
@@ -7899,7 +7897,7 @@ commands/ocreate.o: commands/ocreate.cpp.o
 
 # target to build an object file
 commands/ocreate.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ocreate.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ocreate.cpp.o
 .PHONY : commands/ocreate.cpp.o
 
 commands/ocreate.i: commands/ocreate.cpp.i
@@ -7908,7 +7906,7 @@ commands/ocreate.i: commands/ocreate.cpp.i
 
 # target to preprocess a source file
 commands/ocreate.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ocreate.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ocreate.cpp.i
 .PHONY : commands/ocreate.cpp.i
 
 commands/ocreate.s: commands/ocreate.cpp.s
@@ -7917,7 +7915,7 @@ commands/ocreate.s: commands/ocreate.cpp.s
 
 # target to generate assembly for a file
 commands/ocreate.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ocreate.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ocreate.cpp.s
 .PHONY : commands/ocreate.cpp.s
 
 commands/ofind.o: commands/ofind.cpp.o
@@ -7926,7 +7924,7 @@ commands/ofind.o: commands/ofind.cpp.o
 
 # target to build an object file
 commands/ofind.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ofind.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ofind.cpp.o
 .PHONY : commands/ofind.cpp.o
 
 commands/ofind.i: commands/ofind.cpp.i
@@ -7935,7 +7933,7 @@ commands/ofind.i: commands/ofind.cpp.i
 
 # target to preprocess a source file
 commands/ofind.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ofind.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ofind.cpp.i
 .PHONY : commands/ofind.cpp.i
 
 commands/ofind.s: commands/ofind.cpp.s
@@ -7944,7 +7942,7 @@ commands/ofind.s: commands/ofind.cpp.s
 
 # target to generate assembly for a file
 commands/ofind.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ofind.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ofind.cpp.s
 .PHONY : commands/ofind.cpp.s
 
 commands/ogrub.o: commands/ogrub.cpp.o
@@ -7953,7 +7951,7 @@ commands/ogrub.o: commands/ogrub.cpp.o
 
 # target to build an object file
 commands/ogrub.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ogrub.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ogrub.cpp.o
 .PHONY : commands/ogrub.cpp.o
 
 commands/ogrub.i: commands/ogrub.cpp.i
@@ -7962,7 +7960,7 @@ commands/ogrub.i: commands/ogrub.cpp.i
 
 # target to preprocess a source file
 commands/ogrub.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ogrub.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ogrub.cpp.i
 .PHONY : commands/ogrub.cpp.i
 
 commands/ogrub.s: commands/ogrub.cpp.s
@@ -7971,7 +7969,7 @@ commands/ogrub.s: commands/ogrub.cpp.s
 
 # target to generate assembly for a file
 commands/ogrub.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ogrub.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ogrub.cpp.s
 .PHONY : commands/ogrub.cpp.s
 
 commands/oinvoke.o: commands/oinvoke.cpp.o
@@ -7980,7 +7978,7 @@ commands/oinvoke.o: commands/oinvoke.cpp.o
 
 # target to build an object file
 commands/oinvoke.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/oinvoke.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/oinvoke.cpp.o
 .PHONY : commands/oinvoke.cpp.o
 
 commands/oinvoke.i: commands/oinvoke.cpp.i
@@ -7989,7 +7987,7 @@ commands/oinvoke.i: commands/oinvoke.cpp.i
 
 # target to preprocess a source file
 commands/oinvoke.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/oinvoke.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/oinvoke.cpp.i
 .PHONY : commands/oinvoke.cpp.i
 
 commands/oinvoke.s: commands/oinvoke.cpp.s
@@ -7998,7 +7996,7 @@ commands/oinvoke.s: commands/oinvoke.cpp.s
 
 # target to generate assembly for a file
 commands/oinvoke.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/oinvoke.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/oinvoke.cpp.s
 .PHONY : commands/oinvoke.cpp.s
 
 commands/oldscore.o: commands/oldscore.cpp.o
@@ -8007,7 +8005,7 @@ commands/oldscore.o: commands/oldscore.cpp.o
 
 # target to build an object file
 commands/oldscore.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/oldscore.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/oldscore.cpp.o
 .PHONY : commands/oldscore.cpp.o
 
 commands/oldscore.i: commands/oldscore.cpp.i
@@ -8016,7 +8014,7 @@ commands/oldscore.i: commands/oldscore.cpp.i
 
 # target to preprocess a source file
 commands/oldscore.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/oldscore.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/oldscore.cpp.i
 .PHONY : commands/oldscore.cpp.i
 
 commands/oldscore.s: commands/oldscore.cpp.s
@@ -8025,7 +8023,7 @@ commands/oldscore.s: commands/oldscore.cpp.s
 
 # target to generate assembly for a file
 commands/oldscore.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/oldscore.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/oldscore.cpp.s
 .PHONY : commands/oldscore.cpp.s
 
 commands/olist.o: commands/olist.cpp.o
@@ -8034,7 +8032,7 @@ commands/olist.o: commands/olist.cpp.o
 
 # target to build an object file
 commands/olist.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/olist.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/olist.cpp.o
 .PHONY : commands/olist.cpp.o
 
 commands/olist.i: commands/olist.cpp.i
@@ -8043,7 +8041,7 @@ commands/olist.i: commands/olist.cpp.i
 
 # target to preprocess a source file
 commands/olist.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/olist.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/olist.cpp.i
 .PHONY : commands/olist.cpp.i
 
 commands/olist.s: commands/olist.cpp.s
@@ -8052,7 +8050,7 @@ commands/olist.s: commands/olist.cpp.s
 
 # target to generate assembly for a file
 commands/olist.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/olist.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/olist.cpp.s
 .PHONY : commands/olist.cpp.s
 
 commands/ooc.o: commands/ooc.cpp.o
@@ -8061,7 +8059,7 @@ commands/ooc.o: commands/ooc.cpp.o
 
 # target to build an object file
 commands/ooc.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ooc.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ooc.cpp.o
 .PHONY : commands/ooc.cpp.o
 
 commands/ooc.i: commands/ooc.cpp.i
@@ -8070,7 +8068,7 @@ commands/ooc.i: commands/ooc.cpp.i
 
 # target to preprocess a source file
 commands/ooc.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ooc.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ooc.cpp.i
 .PHONY : commands/ooc.cpp.i
 
 commands/ooc.s: commands/ooc.cpp.s
@@ -8079,7 +8077,7 @@ commands/ooc.s: commands/ooc.cpp.s
 
 # target to generate assembly for a file
 commands/ooc.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ooc.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ooc.cpp.s
 .PHONY : commands/ooc.cpp.s
 
 commands/opedit.o: commands/opedit.cpp.o
@@ -8088,7 +8086,7 @@ commands/opedit.o: commands/opedit.cpp.o
 
 # target to build an object file
 commands/opedit.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/opedit.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/opedit.cpp.o
 .PHONY : commands/opedit.cpp.o
 
 commands/opedit.i: commands/opedit.cpp.i
@@ -8097,7 +8095,7 @@ commands/opedit.i: commands/opedit.cpp.i
 
 # target to preprocess a source file
 commands/opedit.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/opedit.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/opedit.cpp.i
 .PHONY : commands/opedit.cpp.i
 
 commands/opedit.s: commands/opedit.cpp.s
@@ -8106,7 +8104,7 @@ commands/opedit.s: commands/opedit.cpp.s
 
 # target to generate assembly for a file
 commands/opedit.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/opedit.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/opedit.cpp.s
 .PHONY : commands/opedit.cpp.s
 
 commands/open.o: commands/open.cpp.o
@@ -8115,7 +8113,7 @@ commands/open.o: commands/open.cpp.o
 
 # target to build an object file
 commands/open.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/open.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/open.cpp.o
 .PHONY : commands/open.cpp.o
 
 commands/open.i: commands/open.cpp.i
@@ -8124,7 +8122,7 @@ commands/open.i: commands/open.cpp.i
 
 # target to preprocess a source file
 commands/open.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/open.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/open.cpp.i
 .PHONY : commands/open.cpp.i
 
 commands/open.s: commands/open.cpp.s
@@ -8133,7 +8131,7 @@ commands/open.s: commands/open.cpp.s
 
 # target to generate assembly for a file
 commands/open.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/open.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/open.cpp.s
 .PHONY : commands/open.cpp.s
 
 commands/openbay.o: commands/openbay.cpp.o
@@ -8142,7 +8140,7 @@ commands/openbay.o: commands/openbay.cpp.o
 
 # target to build an object file
 commands/openbay.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/openbay.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/openbay.cpp.o
 .PHONY : commands/openbay.cpp.o
 
 commands/openbay.i: commands/openbay.cpp.i
@@ -8151,7 +8149,7 @@ commands/openbay.i: commands/openbay.cpp.i
 
 # target to preprocess a source file
 commands/openbay.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/openbay.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/openbay.cpp.i
 .PHONY : commands/openbay.cpp.i
 
 commands/openbay.s: commands/openbay.cpp.s
@@ -8160,7 +8158,7 @@ commands/openbay.s: commands/openbay.cpp.s
 
 # target to generate assembly for a file
 commands/openbay.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/openbay.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/openbay.cpp.s
 .PHONY : commands/openbay.cpp.s
 
 commands/openhatch.o: commands/openhatch.cpp.o
@@ -8169,7 +8167,7 @@ commands/openhatch.o: commands/openhatch.cpp.o
 
 # target to build an object file
 commands/openhatch.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/openhatch.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/openhatch.cpp.o
 .PHONY : commands/openhatch.cpp.o
 
 commands/openhatch.i: commands/openhatch.cpp.i
@@ -8178,7 +8176,7 @@ commands/openhatch.i: commands/openhatch.cpp.i
 
 # target to preprocess a source file
 commands/openhatch.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/openhatch.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/openhatch.cpp.i
 .PHONY : commands/openhatch.cpp.i
 
 commands/openhatch.s: commands/openhatch.cpp.s
@@ -8187,7 +8185,7 @@ commands/openhatch.s: commands/openhatch.cpp.s
 
 # target to generate assembly for a file
 commands/openhatch.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/openhatch.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/openhatch.cpp.s
 .PHONY : commands/openhatch.cpp.s
 
 commands/opfind.o: commands/opfind.cpp.o
@@ -8196,7 +8194,7 @@ commands/opfind.o: commands/opfind.cpp.o
 
 # target to build an object file
 commands/opfind.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/opfind.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/opfind.cpp.o
 .PHONY : commands/opfind.cpp.o
 
 commands/opfind.i: commands/opfind.cpp.i
@@ -8205,7 +8203,7 @@ commands/opfind.i: commands/opfind.cpp.i
 
 # target to preprocess a source file
 commands/opfind.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/opfind.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/opfind.cpp.i
 .PHONY : commands/opfind.cpp.i
 
 commands/opfind.s: commands/opfind.cpp.s
@@ -8214,7 +8212,7 @@ commands/opfind.s: commands/opfind.cpp.s
 
 # target to generate assembly for a file
 commands/opfind.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/opfind.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/opfind.cpp.s
 .PHONY : commands/opfind.cpp.s
 
 commands/opstat.o: commands/opstat.cpp.o
@@ -8223,7 +8221,7 @@ commands/opstat.o: commands/opstat.cpp.o
 
 # target to build an object file
 commands/opstat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/opstat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/opstat.cpp.o
 .PHONY : commands/opstat.cpp.o
 
 commands/opstat.i: commands/opstat.cpp.i
@@ -8232,7 +8230,7 @@ commands/opstat.i: commands/opstat.cpp.i
 
 # target to preprocess a source file
 commands/opstat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/opstat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/opstat.cpp.i
 .PHONY : commands/opstat.cpp.i
 
 commands/opstat.s: commands/opstat.cpp.s
@@ -8241,7 +8239,7 @@ commands/opstat.s: commands/opstat.cpp.s
 
 # target to generate assembly for a file
 commands/opstat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/opstat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/opstat.cpp.s
 .PHONY : commands/opstat.cpp.s
 
 commands/order.o: commands/order.cpp.o
@@ -8250,7 +8248,7 @@ commands/order.o: commands/order.cpp.o
 
 # target to build an object file
 commands/order.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/order.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/order.cpp.o
 .PHONY : commands/order.cpp.o
 
 commands/order.i: commands/order.cpp.i
@@ -8259,7 +8257,7 @@ commands/order.i: commands/order.cpp.i
 
 # target to preprocess a source file
 commands/order.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/order.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/order.cpp.i
 .PHONY : commands/order.cpp.i
 
 commands/order.s: commands/order.cpp.s
@@ -8268,7 +8266,7 @@ commands/order.s: commands/order.cpp.s
 
 # target to generate assembly for a file
 commands/order.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/order.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/order.cpp.s
 .PHONY : commands/order.cpp.s
 
 commands/oset.o: commands/oset.cpp.o
@@ -8277,7 +8275,7 @@ commands/oset.o: commands/oset.cpp.o
 
 # target to build an object file
 commands/oset.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/oset.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/oset.cpp.o
 .PHONY : commands/oset.cpp.o
 
 commands/oset.i: commands/oset.cpp.i
@@ -8286,7 +8284,7 @@ commands/oset.i: commands/oset.cpp.i
 
 # target to preprocess a source file
 commands/oset.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/oset.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/oset.cpp.i
 .PHONY : commands/oset.cpp.i
 
 commands/oset.s: commands/oset.cpp.s
@@ -8295,7 +8293,7 @@ commands/oset.s: commands/oset.cpp.s
 
 # target to generate assembly for a file
 commands/oset.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/oset.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/oset.cpp.s
 .PHONY : commands/oset.cpp.s
 
 commands/ostat.o: commands/ostat.cpp.o
@@ -8304,7 +8302,7 @@ commands/ostat.o: commands/ostat.cpp.o
 
 # target to build an object file
 commands/ostat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ostat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ostat.cpp.o
 .PHONY : commands/ostat.cpp.o
 
 commands/ostat.i: commands/ostat.cpp.i
@@ -8313,7 +8311,7 @@ commands/ostat.i: commands/ostat.cpp.i
 
 # target to preprocess a source file
 commands/ostat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ostat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ostat.cpp.i
 .PHONY : commands/ostat.cpp.i
 
 commands/ostat.s: commands/ostat.cpp.s
@@ -8322,7 +8320,7 @@ commands/ostat.s: commands/ostat.cpp.s
 
 # target to generate assembly for a file
 commands/ostat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ostat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ostat.cpp.s
 .PHONY : commands/ostat.cpp.s
 
 commands/outcast.o: commands/outcast.cpp.o
@@ -8331,7 +8329,7 @@ commands/outcast.o: commands/outcast.cpp.o
 
 # target to build an object file
 commands/outcast.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/outcast.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/outcast.cpp.o
 .PHONY : commands/outcast.cpp.o
 
 commands/outcast.i: commands/outcast.cpp.i
@@ -8340,7 +8338,7 @@ commands/outcast.i: commands/outcast.cpp.i
 
 # target to preprocess a source file
 commands/outcast.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/outcast.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/outcast.cpp.i
 .PHONY : commands/outcast.cpp.i
 
 commands/outcast.s: commands/outcast.cpp.s
@@ -8349,7 +8347,7 @@ commands/outcast.s: commands/outcast.cpp.s
 
 # target to generate assembly for a file
 commands/outcast.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/outcast.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/outcast.cpp.s
 .PHONY : commands/outcast.cpp.s
 
 commands/override.o: commands/override.cpp.o
@@ -8358,7 +8356,7 @@ commands/override.o: commands/override.cpp.o
 
 # target to build an object file
 commands/override.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/override.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/override.cpp.o
 .PHONY : commands/override.cpp.o
 
 commands/override.i: commands/override.cpp.i
@@ -8367,7 +8365,7 @@ commands/override.i: commands/override.cpp.i
 
 # target to preprocess a source file
 commands/override.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/override.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/override.cpp.i
 .PHONY : commands/override.cpp.i
 
 commands/override.s: commands/override.cpp.s
@@ -8376,7 +8374,7 @@ commands/override.s: commands/override.cpp.s
 
 # target to generate assembly for a file
 commands/override.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/override.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/override.cpp.s
 .PHONY : commands/override.cpp.s
 
 commands/owhere.o: commands/owhere.cpp.o
@@ -8385,7 +8383,7 @@ commands/owhere.o: commands/owhere.cpp.o
 
 # target to build an object file
 commands/owhere.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/owhere.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/owhere.cpp.o
 .PHONY : commands/owhere.cpp.o
 
 commands/owhere.i: commands/owhere.cpp.i
@@ -8394,7 +8392,7 @@ commands/owhere.i: commands/owhere.cpp.i
 
 # target to preprocess a source file
 commands/owhere.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/owhere.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/owhere.cpp.i
 .PHONY : commands/owhere.cpp.i
 
 commands/owhere.s: commands/owhere.cpp.s
@@ -8403,7 +8401,7 @@ commands/owhere.s: commands/owhere.cpp.s
 
 # target to generate assembly for a file
 commands/owhere.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/owhere.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/owhere.cpp.s
 .PHONY : commands/owhere.cpp.s
 
 commands/pardon.o: commands/pardon.cpp.o
@@ -8412,7 +8410,7 @@ commands/pardon.o: commands/pardon.cpp.o
 
 # target to build an object file
 commands/pardon.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pardon.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pardon.cpp.o
 .PHONY : commands/pardon.cpp.o
 
 commands/pardon.i: commands/pardon.cpp.i
@@ -8421,7 +8419,7 @@ commands/pardon.i: commands/pardon.cpp.i
 
 # target to preprocess a source file
 commands/pardon.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pardon.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pardon.cpp.i
 .PHONY : commands/pardon.cpp.i
 
 commands/pardon.s: commands/pardon.cpp.s
@@ -8430,7 +8428,7 @@ commands/pardon.s: commands/pardon.cpp.s
 
 # target to generate assembly for a file
 commands/pardon.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pardon.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pardon.cpp.s
 .PHONY : commands/pardon.cpp.s
 
 commands/password.o: commands/password.cpp.o
@@ -8439,7 +8437,7 @@ commands/password.o: commands/password.cpp.o
 
 # target to build an object file
 commands/password.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/password.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/password.cpp.o
 .PHONY : commands/password.cpp.o
 
 commands/password.i: commands/password.cpp.i
@@ -8448,7 +8446,7 @@ commands/password.i: commands/password.cpp.i
 
 # target to preprocess a source file
 commands/password.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/password.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/password.cpp.i
 .PHONY : commands/password.cpp.i
 
 commands/password.s: commands/password.cpp.s
@@ -8457,7 +8455,7 @@ commands/password.s: commands/password.cpp.s
 
 # target to generate assembly for a file
 commands/password.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/password.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/password.cpp.s
 .PHONY : commands/password.cpp.s
 
 commands/peace.o: commands/peace.cpp.o
@@ -8466,7 +8464,7 @@ commands/peace.o: commands/peace.cpp.o
 
 # target to build an object file
 commands/peace.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/peace.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/peace.cpp.o
 .PHONY : commands/peace.cpp.o
 
 commands/peace.i: commands/peace.cpp.i
@@ -8475,7 +8473,7 @@ commands/peace.i: commands/peace.cpp.i
 
 # target to preprocess a source file
 commands/peace.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/peace.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/peace.cpp.i
 .PHONY : commands/peace.cpp.i
 
 commands/peace.s: commands/peace.cpp.s
@@ -8484,7 +8482,7 @@ commands/peace.s: commands/peace.cpp.s
 
 # target to generate assembly for a file
 commands/peace.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/peace.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/peace.cpp.s
 .PHONY : commands/peace.cpp.s
 
 commands/pick.o: commands/pick.cpp.o
@@ -8493,7 +8491,7 @@ commands/pick.o: commands/pick.cpp.o
 
 # target to build an object file
 commands/pick.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pick.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pick.cpp.o
 .PHONY : commands/pick.cpp.o
 
 commands/pick.i: commands/pick.cpp.i
@@ -8502,7 +8500,7 @@ commands/pick.i: commands/pick.cpp.i
 
 # target to preprocess a source file
 commands/pick.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pick.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pick.cpp.i
 .PHONY : commands/pick.cpp.i
 
 commands/pick.s: commands/pick.cpp.s
@@ -8511,7 +8509,7 @@ commands/pick.s: commands/pick.cpp.s
 
 # target to generate assembly for a file
 commands/pick.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pick.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pick.cpp.s
 .PHONY : commands/pick.cpp.s
 
 commands/pickshiplock.o: commands/pickshiplock.cpp.o
@@ -8520,7 +8518,7 @@ commands/pickshiplock.o: commands/pickshiplock.cpp.o
 
 # target to build an object file
 commands/pickshiplock.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pickshiplock.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pickshiplock.cpp.o
 .PHONY : commands/pickshiplock.cpp.o
 
 commands/pickshiplock.i: commands/pickshiplock.cpp.i
@@ -8529,7 +8527,7 @@ commands/pickshiplock.i: commands/pickshiplock.cpp.i
 
 # target to preprocess a source file
 commands/pickshiplock.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pickshiplock.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pickshiplock.cpp.i
 .PHONY : commands/pickshiplock.cpp.i
 
 commands/pickshiplock.s: commands/pickshiplock.cpp.s
@@ -8538,7 +8536,7 @@ commands/pickshiplock.s: commands/pickshiplock.cpp.s
 
 # target to generate assembly for a file
 commands/pickshiplock.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pickshiplock.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pickshiplock.cpp.s
 .PHONY : commands/pickshiplock.cpp.s
 
 commands/placevendor.o: commands/placevendor.cpp.o
@@ -8547,7 +8545,7 @@ commands/placevendor.o: commands/placevendor.cpp.o
 
 # target to build an object file
 commands/placevendor.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/placevendor.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/placevendor.cpp.o
 .PHONY : commands/placevendor.cpp.o
 
 commands/placevendor.i: commands/placevendor.cpp.i
@@ -8556,7 +8554,7 @@ commands/placevendor.i: commands/placevendor.cpp.i
 
 # target to preprocess a source file
 commands/placevendor.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/placevendor.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/placevendor.cpp.i
 .PHONY : commands/placevendor.cpp.i
 
 commands/placevendor.s: commands/placevendor.cpp.s
@@ -8565,7 +8563,7 @@ commands/placevendor.s: commands/placevendor.cpp.s
 
 # target to generate assembly for a file
 commands/placevendor.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/placevendor.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/placevendor.cpp.s
 .PHONY : commands/placevendor.cpp.s
 
 commands/planets.o: commands/planets.cpp.o
@@ -8574,7 +8572,7 @@ commands/planets.o: commands/planets.cpp.o
 
 # target to build an object file
 commands/planets.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/planets.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/planets.cpp.o
 .PHONY : commands/planets.cpp.o
 
 commands/planets.i: commands/planets.cpp.i
@@ -8583,7 +8581,7 @@ commands/planets.i: commands/planets.cpp.i
 
 # target to preprocess a source file
 commands/planets.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/planets.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/planets.cpp.i
 .PHONY : commands/planets.cpp.i
 
 commands/planets.s: commands/planets.cpp.s
@@ -8592,7 +8590,7 @@ commands/planets.s: commands/planets.cpp.s
 
 # target to generate assembly for a file
 commands/planets.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/planets.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/planets.cpp.s
 .PHONY : commands/planets.cpp.s
 
 commands/pluogus.o: commands/pluogus.cpp.o
@@ -8601,7 +8599,7 @@ commands/pluogus.o: commands/pluogus.cpp.o
 
 # target to build an object file
 commands/pluogus.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pluogus.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pluogus.cpp.o
 .PHONY : commands/pluogus.cpp.o
 
 commands/pluogus.i: commands/pluogus.cpp.i
@@ -8610,7 +8608,7 @@ commands/pluogus.i: commands/pluogus.cpp.i
 
 # target to preprocess a source file
 commands/pluogus.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pluogus.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pluogus.cpp.i
 .PHONY : commands/pluogus.cpp.i
 
 commands/pluogus.s: commands/pluogus.cpp.s
@@ -8619,7 +8617,7 @@ commands/pluogus.s: commands/pluogus.cpp.s
 
 # target to generate assembly for a file
 commands/pluogus.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pluogus.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pluogus.cpp.s
 .PHONY : commands/pluogus.cpp.s
 
 commands/poisonweapon.o: commands/poisonweapon.cpp.o
@@ -8628,7 +8626,7 @@ commands/poisonweapon.o: commands/poisonweapon.cpp.o
 
 # target to build an object file
 commands/poisonweapon.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/poisonweapon.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/poisonweapon.cpp.o
 .PHONY : commands/poisonweapon.cpp.o
 
 commands/poisonweapon.i: commands/poisonweapon.cpp.i
@@ -8637,7 +8635,7 @@ commands/poisonweapon.i: commands/poisonweapon.cpp.i
 
 # target to preprocess a source file
 commands/poisonweapon.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/poisonweapon.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/poisonweapon.cpp.i
 .PHONY : commands/poisonweapon.cpp.i
 
 commands/poisonweapon.s: commands/poisonweapon.cpp.s
@@ -8646,7 +8644,7 @@ commands/poisonweapon.s: commands/poisonweapon.cpp.s
 
 # target to generate assembly for a file
 commands/poisonweapon.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/poisonweapon.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/poisonweapon.cpp.s
 .PHONY : commands/poisonweapon.cpp.s
 
 commands/postguard.o: commands/postguard.cpp.o
@@ -8655,7 +8653,7 @@ commands/postguard.o: commands/postguard.cpp.o
 
 # target to build an object file
 commands/postguard.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/postguard.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/postguard.cpp.o
 .PHONY : commands/postguard.cpp.o
 
 commands/postguard.i: commands/postguard.cpp.i
@@ -8664,7 +8662,7 @@ commands/postguard.i: commands/postguard.cpp.i
 
 # target to preprocess a source file
 commands/postguard.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/postguard.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/postguard.cpp.i
 .PHONY : commands/postguard.cpp.i
 
 commands/postguard.s: commands/postguard.cpp.s
@@ -8673,7 +8671,7 @@ commands/postguard.s: commands/postguard.cpp.s
 
 # target to generate assembly for a file
 commands/postguard.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/postguard.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/postguard.cpp.s
 .PHONY : commands/postguard.cpp.s
 
 commands/practice.o: commands/practice.cpp.o
@@ -8682,7 +8680,7 @@ commands/practice.o: commands/practice.cpp.o
 
 # target to build an object file
 commands/practice.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/practice.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/practice.cpp.o
 .PHONY : commands/practice.cpp.o
 
 commands/practice.i: commands/practice.cpp.i
@@ -8691,7 +8689,7 @@ commands/practice.i: commands/practice.cpp.i
 
 # target to preprocess a source file
 commands/practice.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/practice.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/practice.cpp.i
 .PHONY : commands/practice.cpp.i
 
 commands/practice.s: commands/practice.cpp.s
@@ -8700,7 +8698,7 @@ commands/practice.s: commands/practice.cpp.s
 
 # target to generate assembly for a file
 commands/practice.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/practice.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/practice.cpp.s
 .PHONY : commands/practice.cpp.s
 
 commands/pricevendor.o: commands/pricevendor.cpp.o
@@ -8709,7 +8707,7 @@ commands/pricevendor.o: commands/pricevendor.cpp.o
 
 # target to build an object file
 commands/pricevendor.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pricevendor.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pricevendor.cpp.o
 .PHONY : commands/pricevendor.cpp.o
 
 commands/pricevendor.i: commands/pricevendor.cpp.i
@@ -8718,7 +8716,7 @@ commands/pricevendor.i: commands/pricevendor.cpp.i
 
 # target to preprocess a source file
 commands/pricevendor.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pricevendor.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pricevendor.cpp.i
 .PHONY : commands/pricevendor.cpp.i
 
 commands/pricevendor.s: commands/pricevendor.cpp.s
@@ -8727,7 +8725,7 @@ commands/pricevendor.s: commands/pricevendor.cpp.s
 
 # target to generate assembly for a file
 commands/pricevendor.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pricevendor.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pricevendor.cpp.s
 .PHONY : commands/pricevendor.cpp.s
 
 commands/prompt.o: commands/prompt.cpp.o
@@ -8736,7 +8734,7 @@ commands/prompt.o: commands/prompt.cpp.o
 
 # target to build an object file
 commands/prompt.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/prompt.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/prompt.cpp.o
 .PHONY : commands/prompt.cpp.o
 
 commands/prompt.i: commands/prompt.cpp.i
@@ -8745,7 +8743,7 @@ commands/prompt.i: commands/prompt.cpp.i
 
 # target to preprocess a source file
 commands/prompt.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/prompt.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/prompt.cpp.i
 .PHONY : commands/prompt.cpp.i
 
 commands/prompt.s: commands/prompt.cpp.s
@@ -8754,7 +8752,7 @@ commands/prompt.s: commands/prompt.cpp.s
 
 # target to generate assembly for a file
 commands/prompt.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/prompt.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/prompt.cpp.s
 .PHONY : commands/prompt.cpp.s
 
 commands/propaganda.o: commands/propaganda.cpp.o
@@ -8763,7 +8761,7 @@ commands/propaganda.o: commands/propaganda.cpp.o
 
 # target to build an object file
 commands/propaganda.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/propaganda.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/propaganda.cpp.o
 .PHONY : commands/propaganda.cpp.o
 
 commands/propaganda.i: commands/propaganda.cpp.i
@@ -8772,7 +8770,7 @@ commands/propaganda.i: commands/propaganda.cpp.i
 
 # target to preprocess a source file
 commands/propaganda.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/propaganda.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/propaganda.cpp.i
 .PHONY : commands/propaganda.cpp.i
 
 commands/propaganda.s: commands/propaganda.cpp.s
@@ -8781,7 +8779,7 @@ commands/propaganda.s: commands/propaganda.cpp.s
 
 # target to generate assembly for a file
 commands/propaganda.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/propaganda.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/propaganda.cpp.s
 .PHONY : commands/propaganda.cpp.s
 
 commands/pull.o: commands/pull.cpp.o
@@ -8790,7 +8788,7 @@ commands/pull.o: commands/pull.cpp.o
 
 # target to build an object file
 commands/pull.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pull.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pull.cpp.o
 .PHONY : commands/pull.cpp.o
 
 commands/pull.i: commands/pull.cpp.i
@@ -8799,7 +8797,7 @@ commands/pull.i: commands/pull.cpp.i
 
 # target to preprocess a source file
 commands/pull.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pull.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pull.cpp.i
 .PHONY : commands/pull.cpp.i
 
 commands/pull.s: commands/pull.cpp.s
@@ -8808,7 +8806,7 @@ commands/pull.s: commands/pull.cpp.s
 
 # target to generate assembly for a file
 commands/pull.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/pull.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/pull.cpp.s
 .PHONY : commands/pull.cpp.s
 
 commands/punch.o: commands/punch.cpp.o
@@ -8817,7 +8815,7 @@ commands/punch.o: commands/punch.cpp.o
 
 # target to build an object file
 commands/punch.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/punch.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/punch.cpp.o
 .PHONY : commands/punch.cpp.o
 
 commands/punch.i: commands/punch.cpp.i
@@ -8826,7 +8824,7 @@ commands/punch.i: commands/punch.cpp.i
 
 # target to preprocess a source file
 commands/punch.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/punch.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/punch.cpp.i
 .PHONY : commands/punch.cpp.i
 
 commands/punch.s: commands/punch.cpp.s
@@ -8835,7 +8833,7 @@ commands/punch.s: commands/punch.cpp.s
 
 # target to generate assembly for a file
 commands/punch.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/punch.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/punch.cpp.s
 .PHONY : commands/punch.cpp.s
 
 commands/purge.o: commands/purge.cpp.o
@@ -8844,7 +8842,7 @@ commands/purge.o: commands/purge.cpp.o
 
 # target to build an object file
 commands/purge.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/purge.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/purge.cpp.o
 .PHONY : commands/purge.cpp.o
 
 commands/purge.i: commands/purge.cpp.i
@@ -8853,7 +8851,7 @@ commands/purge.i: commands/purge.cpp.i
 
 # target to preprocess a source file
 commands/purge.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/purge.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/purge.cpp.i
 .PHONY : commands/purge.cpp.i
 
 commands/purge.s: commands/purge.cpp.s
@@ -8862,7 +8860,7 @@ commands/purge.s: commands/purge.cpp.s
 
 # target to generate assembly for a file
 commands/purge.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/purge.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/purge.cpp.s
 .PHONY : commands/purge.cpp.s
 
 commands/push.o: commands/push.cpp.o
@@ -8871,7 +8869,7 @@ commands/push.o: commands/push.cpp.o
 
 # target to build an object file
 commands/push.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/push.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/push.cpp.o
 .PHONY : commands/push.cpp.o
 
 commands/push.i: commands/push.cpp.i
@@ -8880,7 +8878,7 @@ commands/push.i: commands/push.cpp.i
 
 # target to preprocess a source file
 commands/push.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/push.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/push.cpp.i
 .PHONY : commands/push.cpp.i
 
 commands/push.s: commands/push.cpp.s
@@ -8889,7 +8887,7 @@ commands/push.s: commands/push.cpp.s
 
 # target to generate assembly for a file
 commands/push.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/push.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/push.cpp.s
 .PHONY : commands/push.cpp.s
 
 commands/put.o: commands/put.cpp.o
@@ -8898,7 +8896,7 @@ commands/put.o: commands/put.cpp.o
 
 # target to build an object file
 commands/put.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/put.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/put.cpp.o
 .PHONY : commands/put.cpp.o
 
 commands/put.i: commands/put.cpp.i
@@ -8907,7 +8905,7 @@ commands/put.i: commands/put.cpp.i
 
 # target to preprocess a source file
 commands/put.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/put.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/put.cpp.i
 .PHONY : commands/put.cpp.i
 
 commands/put.s: commands/put.cpp.s
@@ -8916,7 +8914,7 @@ commands/put.s: commands/put.cpp.s
 
 # target to generate assembly for a file
 commands/put.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/put.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/put.cpp.s
 .PHONY : commands/put.cpp.s
 
 commands/quaff.o: commands/quaff.cpp.o
@@ -8925,7 +8923,7 @@ commands/quaff.o: commands/quaff.cpp.o
 
 # target to build an object file
 commands/quaff.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/quaff.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/quaff.cpp.o
 .PHONY : commands/quaff.cpp.o
 
 commands/quaff.i: commands/quaff.cpp.i
@@ -8934,7 +8932,7 @@ commands/quaff.i: commands/quaff.cpp.i
 
 # target to preprocess a source file
 commands/quaff.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/quaff.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/quaff.cpp.i
 .PHONY : commands/quaff.cpp.i
 
 commands/quaff.s: commands/quaff.cpp.s
@@ -8943,7 +8941,7 @@ commands/quaff.s: commands/quaff.cpp.s
 
 # target to generate assembly for a file
 commands/quaff.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/quaff.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/quaff.cpp.s
 .PHONY : commands/quaff.cpp.s
 
 commands/quit.o: commands/quit.cpp.o
@@ -8952,7 +8950,7 @@ commands/quit.o: commands/quit.cpp.o
 
 # target to build an object file
 commands/quit.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/quit.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/quit.cpp.o
 .PHONY : commands/quit.cpp.o
 
 commands/quit.i: commands/quit.cpp.i
@@ -8961,7 +8959,7 @@ commands/quit.i: commands/quit.cpp.i
 
 # target to preprocess a source file
 commands/quit.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/quit.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/quit.cpp.i
 .PHONY : commands/quit.cpp.i
 
 commands/quit.s: commands/quit.cpp.s
@@ -8970,7 +8968,7 @@ commands/quit.s: commands/quit.cpp.s
 
 # target to generate assembly for a file
 commands/quit.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/quit.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/quit.cpp.s
 .PHONY : commands/quit.cpp.s
 
 commands/radar.o: commands/radar.cpp.o
@@ -8979,7 +8977,7 @@ commands/radar.o: commands/radar.cpp.o
 
 # target to build an object file
 commands/radar.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/radar.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/radar.cpp.o
 .PHONY : commands/radar.cpp.o
 
 commands/radar.i: commands/radar.cpp.i
@@ -8988,7 +8986,7 @@ commands/radar.i: commands/radar.cpp.i
 
 # target to preprocess a source file
 commands/radar.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/radar.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/radar.cpp.i
 .PHONY : commands/radar.cpp.i
 
 commands/radar.s: commands/radar.cpp.s
@@ -8997,7 +8995,7 @@ commands/radar.s: commands/radar.cpp.s
 
 # target to generate assembly for a file
 commands/radar.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/radar.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/radar.cpp.s
 .PHONY : commands/radar.cpp.s
 
 commands/rank.o: commands/rank.cpp.o
@@ -9006,7 +9004,7 @@ commands/rank.o: commands/rank.cpp.o
 
 # target to build an object file
 commands/rank.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rank.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rank.cpp.o
 .PHONY : commands/rank.cpp.o
 
 commands/rank.i: commands/rank.cpp.i
@@ -9015,7 +9013,7 @@ commands/rank.i: commands/rank.cpp.i
 
 # target to preprocess a source file
 commands/rank.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rank.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rank.cpp.i
 .PHONY : commands/rank.cpp.i
 
 commands/rank.s: commands/rank.cpp.s
@@ -9024,7 +9022,7 @@ commands/rank.s: commands/rank.cpp.s
 
 # target to generate assembly for a file
 commands/rank.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rank.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rank.cpp.s
 .PHONY : commands/rank.cpp.s
 
 commands/rassign.o: commands/rassign.cpp.o
@@ -9033,7 +9031,7 @@ commands/rassign.o: commands/rassign.cpp.o
 
 # target to build an object file
 commands/rassign.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rassign.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rassign.cpp.o
 .PHONY : commands/rassign.cpp.o
 
 commands/rassign.i: commands/rassign.cpp.i
@@ -9042,7 +9040,7 @@ commands/rassign.i: commands/rassign.cpp.i
 
 # target to preprocess a source file
 commands/rassign.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rassign.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rassign.cpp.i
 .PHONY : commands/rassign.cpp.i
 
 commands/rassign.s: commands/rassign.cpp.s
@@ -9051,7 +9049,7 @@ commands/rassign.s: commands/rassign.cpp.s
 
 # target to generate assembly for a file
 commands/rassign.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rassign.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rassign.cpp.s
 .PHONY : commands/rassign.cpp.s
 
 commands/rat.o: commands/rat.cpp.o
@@ -9060,7 +9058,7 @@ commands/rat.o: commands/rat.cpp.o
 
 # target to build an object file
 commands/rat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rat.cpp.o
 .PHONY : commands/rat.cpp.o
 
 commands/rat.i: commands/rat.cpp.i
@@ -9069,7 +9067,7 @@ commands/rat.i: commands/rat.cpp.i
 
 # target to preprocess a source file
 commands/rat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rat.cpp.i
 .PHONY : commands/rat.cpp.i
 
 commands/rat.s: commands/rat.cpp.s
@@ -9078,7 +9076,7 @@ commands/rat.s: commands/rat.cpp.s
 
 # target to generate assembly for a file
 commands/rat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rat.cpp.s
 .PHONY : commands/rat.cpp.s
 
 commands/rdelete.o: commands/rdelete.cpp.o
@@ -9087,7 +9085,7 @@ commands/rdelete.o: commands/rdelete.cpp.o
 
 # target to build an object file
 commands/rdelete.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rdelete.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rdelete.cpp.o
 .PHONY : commands/rdelete.cpp.o
 
 commands/rdelete.i: commands/rdelete.cpp.i
@@ -9096,7 +9094,7 @@ commands/rdelete.i: commands/rdelete.cpp.i
 
 # target to preprocess a source file
 commands/rdelete.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rdelete.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rdelete.cpp.i
 .PHONY : commands/rdelete.cpp.i
 
 commands/rdelete.s: commands/rdelete.cpp.s
@@ -9105,7 +9103,7 @@ commands/rdelete.s: commands/rdelete.cpp.s
 
 # target to generate assembly for a file
 commands/rdelete.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rdelete.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rdelete.cpp.s
 .PHONY : commands/rdelete.cpp.s
 
 commands/reboot.o: commands/reboot.cpp.o
@@ -9114,7 +9112,7 @@ commands/reboot.o: commands/reboot.cpp.o
 
 # target to build an object file
 commands/reboot.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reboot.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reboot.cpp.o
 .PHONY : commands/reboot.cpp.o
 
 commands/reboot.i: commands/reboot.cpp.i
@@ -9123,7 +9121,7 @@ commands/reboot.i: commands/reboot.cpp.i
 
 # target to preprocess a source file
 commands/reboot.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reboot.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reboot.cpp.i
 .PHONY : commands/reboot.cpp.i
 
 commands/reboot.s: commands/reboot.cpp.s
@@ -9132,7 +9130,7 @@ commands/reboot.s: commands/reboot.cpp.s
 
 # target to generate assembly for a file
 commands/reboot.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reboot.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reboot.cpp.s
 .PHONY : commands/reboot.cpp.s
 
 commands/recall.o: commands/recall.cpp.o
@@ -9141,7 +9139,7 @@ commands/recall.o: commands/recall.cpp.o
 
 # target to build an object file
 commands/recall.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/recall.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/recall.cpp.o
 .PHONY : commands/recall.cpp.o
 
 commands/recall.i: commands/recall.cpp.i
@@ -9150,7 +9148,7 @@ commands/recall.i: commands/recall.cpp.i
 
 # target to preprocess a source file
 commands/recall.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/recall.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/recall.cpp.i
 .PHONY : commands/recall.cpp.i
 
 commands/recall.s: commands/recall.cpp.s
@@ -9159,7 +9157,7 @@ commands/recall.s: commands/recall.cpp.s
 
 # target to generate assembly for a file
 commands/recall.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/recall.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/recall.cpp.s
 .PHONY : commands/recall.cpp.s
 
 commands/recharge.o: commands/recharge.cpp.o
@@ -9168,7 +9166,7 @@ commands/recharge.o: commands/recharge.cpp.o
 
 # target to build an object file
 commands/recharge.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/recharge.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/recharge.cpp.o
 .PHONY : commands/recharge.cpp.o
 
 commands/recharge.i: commands/recharge.cpp.i
@@ -9177,7 +9175,7 @@ commands/recharge.i: commands/recharge.cpp.i
 
 # target to preprocess a source file
 commands/recharge.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/recharge.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/recharge.cpp.i
 .PHONY : commands/recharge.cpp.i
 
 commands/recharge.s: commands/recharge.cpp.s
@@ -9186,7 +9184,7 @@ commands/recharge.s: commands/recharge.cpp.s
 
 # target to generate assembly for a file
 commands/recharge.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/recharge.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/recharge.cpp.s
 .PHONY : commands/recharge.cpp.s
 
 commands/recho.o: commands/recho.cpp.o
@@ -9195,7 +9193,7 @@ commands/recho.o: commands/recho.cpp.o
 
 # target to build an object file
 commands/recho.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/recho.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/recho.cpp.o
 .PHONY : commands/recho.cpp.o
 
 commands/recho.i: commands/recho.cpp.i
@@ -9204,7 +9202,7 @@ commands/recho.i: commands/recho.cpp.i
 
 # target to preprocess a source file
 commands/recho.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/recho.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/recho.cpp.i
 .PHONY : commands/recho.cpp.i
 
 commands/recho.s: commands/recho.cpp.s
@@ -9213,7 +9211,7 @@ commands/recho.s: commands/recho.cpp.s
 
 # target to generate assembly for a file
 commands/recho.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/recho.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/recho.cpp.s
 .PHONY : commands/recho.cpp.s
 
 commands/redit.o: commands/redit.cpp.o
@@ -9222,7 +9220,7 @@ commands/redit.o: commands/redit.cpp.o
 
 # target to build an object file
 commands/redit.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/redit.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/redit.cpp.o
 .PHONY : commands/redit.cpp.o
 
 commands/redit.i: commands/redit.cpp.i
@@ -9231,7 +9229,7 @@ commands/redit.i: commands/redit.cpp.i
 
 # target to preprocess a source file
 commands/redit.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/redit.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/redit.cpp.i
 .PHONY : commands/redit.cpp.i
 
 commands/redit.s: commands/redit.cpp.s
@@ -9240,7 +9238,7 @@ commands/redit.s: commands/redit.cpp.s
 
 # target to generate assembly for a file
 commands/redit.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/redit.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/redit.cpp.s
 .PHONY : commands/redit.cpp.s
 
 commands/regoto.o: commands/regoto.cpp.o
@@ -9249,7 +9247,7 @@ commands/regoto.o: commands/regoto.cpp.o
 
 # target to build an object file
 commands/regoto.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/regoto.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/regoto.cpp.o
 .PHONY : commands/regoto.cpp.o
 
 commands/regoto.i: commands/regoto.cpp.i
@@ -9258,7 +9256,7 @@ commands/regoto.i: commands/regoto.cpp.i
 
 # target to preprocess a source file
 commands/regoto.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/regoto.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/regoto.cpp.i
 .PHONY : commands/regoto.cpp.i
 
 commands/regoto.s: commands/regoto.cpp.s
@@ -9267,7 +9265,7 @@ commands/regoto.s: commands/regoto.cpp.s
 
 # target to generate assembly for a file
 commands/regoto.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/regoto.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/regoto.cpp.s
 .PHONY : commands/regoto.cpp.s
 
 commands/reinforcements.o: commands/reinforcements.cpp.o
@@ -9276,7 +9274,7 @@ commands/reinforcements.o: commands/reinforcements.cpp.o
 
 # target to build an object file
 commands/reinforcements.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reinforcements.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reinforcements.cpp.o
 .PHONY : commands/reinforcements.cpp.o
 
 commands/reinforcements.i: commands/reinforcements.cpp.i
@@ -9285,7 +9283,7 @@ commands/reinforcements.i: commands/reinforcements.cpp.i
 
 # target to preprocess a source file
 commands/reinforcements.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reinforcements.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reinforcements.cpp.i
 .PHONY : commands/reinforcements.cpp.i
 
 commands/reinforcements.s: commands/reinforcements.cpp.s
@@ -9294,7 +9292,7 @@ commands/reinforcements.s: commands/reinforcements.cpp.s
 
 # target to generate assembly for a file
 commands/reinforcements.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reinforcements.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reinforcements.cpp.s
 .PHONY : commands/reinforcements.cpp.s
 
 commands/reload.o: commands/reload.cpp.o
@@ -9303,7 +9301,7 @@ commands/reload.o: commands/reload.cpp.o
 
 # target to build an object file
 commands/reload.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reload.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reload.cpp.o
 .PHONY : commands/reload.cpp.o
 
 commands/reload.i: commands/reload.cpp.i
@@ -9312,7 +9310,7 @@ commands/reload.i: commands/reload.cpp.i
 
 # target to preprocess a source file
 commands/reload.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reload.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reload.cpp.i
 .PHONY : commands/reload.cpp.i
 
 commands/reload.s: commands/reload.cpp.s
@@ -9321,7 +9319,7 @@ commands/reload.s: commands/reload.cpp.s
 
 # target to generate assembly for a file
 commands/reload.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reload.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reload.cpp.s
 .PHONY : commands/reload.cpp.s
 
 commands/rembounty.o: commands/rembounty.cpp.o
@@ -9330,7 +9328,7 @@ commands/rembounty.o: commands/rembounty.cpp.o
 
 # target to build an object file
 commands/rembounty.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rembounty.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rembounty.cpp.o
 .PHONY : commands/rembounty.cpp.o
 
 commands/rembounty.i: commands/rembounty.cpp.i
@@ -9339,7 +9337,7 @@ commands/rembounty.i: commands/rembounty.cpp.i
 
 # target to preprocess a source file
 commands/rembounty.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rembounty.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rembounty.cpp.i
 .PHONY : commands/rembounty.cpp.i
 
 commands/rembounty.s: commands/rembounty.cpp.s
@@ -9348,7 +9346,7 @@ commands/rembounty.s: commands/rembounty.cpp.s
 
 # target to generate assembly for a file
 commands/rembounty.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rembounty.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rembounty.cpp.s
 .PHONY : commands/rembounty.cpp.s
 
 commands/remove.o: commands/remove.cpp.o
@@ -9357,7 +9355,7 @@ commands/remove.o: commands/remove.cpp.o
 
 # target to build an object file
 commands/remove.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/remove.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/remove.cpp.o
 .PHONY : commands/remove.cpp.o
 
 commands/remove.i: commands/remove.cpp.i
@@ -9366,7 +9364,7 @@ commands/remove.i: commands/remove.cpp.i
 
 # target to preprocess a source file
 commands/remove.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/remove.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/remove.cpp.i
 .PHONY : commands/remove.cpp.i
 
 commands/remove.s: commands/remove.cpp.s
@@ -9375,7 +9373,7 @@ commands/remove.s: commands/remove.cpp.s
 
 # target to generate assembly for a file
 commands/remove.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/remove.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/remove.cpp.s
 .PHONY : commands/remove.cpp.s
 
 commands/rempilot.o: commands/rempilot.cpp.o
@@ -9384,7 +9382,7 @@ commands/rempilot.o: commands/rempilot.cpp.o
 
 # target to build an object file
 commands/rempilot.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rempilot.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rempilot.cpp.o
 .PHONY : commands/rempilot.cpp.o
 
 commands/rempilot.i: commands/rempilot.cpp.i
@@ -9393,7 +9391,7 @@ commands/rempilot.i: commands/rempilot.cpp.i
 
 # target to preprocess a source file
 commands/rempilot.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rempilot.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rempilot.cpp.i
 .PHONY : commands/rempilot.cpp.i
 
 commands/rempilot.s: commands/rempilot.cpp.s
@@ -9402,7 +9400,7 @@ commands/rempilot.s: commands/rempilot.cpp.s
 
 # target to generate assembly for a file
 commands/rempilot.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rempilot.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rempilot.cpp.s
 .PHONY : commands/rempilot.cpp.s
 
 commands/remresident.o: commands/remresident.cpp.o
@@ -9411,7 +9409,7 @@ commands/remresident.o: commands/remresident.cpp.o
 
 # target to build an object file
 commands/remresident.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/remresident.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/remresident.cpp.o
 .PHONY : commands/remresident.cpp.o
 
 commands/remresident.i: commands/remresident.cpp.i
@@ -9420,7 +9418,7 @@ commands/remresident.i: commands/remresident.cpp.i
 
 # target to preprocess a source file
 commands/remresident.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/remresident.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/remresident.cpp.i
 .PHONY : commands/remresident.cpp.i
 
 commands/remresident.s: commands/remresident.cpp.s
@@ -9429,7 +9427,7 @@ commands/remresident.s: commands/remresident.cpp.s
 
 # target to generate assembly for a file
 commands/remresident.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/remresident.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/remresident.cpp.s
 .PHONY : commands/remresident.cpp.s
 
 commands/renameship.o: commands/renameship.cpp.o
@@ -9438,7 +9436,7 @@ commands/renameship.o: commands/renameship.cpp.o
 
 # target to build an object file
 commands/renameship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/renameship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/renameship.cpp.o
 .PHONY : commands/renameship.cpp.o
 
 commands/renameship.i: commands/renameship.cpp.i
@@ -9447,7 +9445,7 @@ commands/renameship.i: commands/renameship.cpp.i
 
 # target to preprocess a source file
 commands/renameship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/renameship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/renameship.cpp.i
 .PHONY : commands/renameship.cpp.i
 
 commands/renameship.s: commands/renameship.cpp.s
@@ -9456,7 +9454,7 @@ commands/renameship.s: commands/renameship.cpp.s
 
 # target to generate assembly for a file
 commands/renameship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/renameship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/renameship.cpp.s
 .PHONY : commands/renameship.cpp.s
 
 commands/repair.o: commands/repair.cpp.o
@@ -9465,7 +9463,7 @@ commands/repair.o: commands/repair.cpp.o
 
 # target to build an object file
 commands/repair.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repair.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repair.cpp.o
 .PHONY : commands/repair.cpp.o
 
 commands/repair.i: commands/repair.cpp.i
@@ -9474,7 +9472,7 @@ commands/repair.i: commands/repair.cpp.i
 
 # target to preprocess a source file
 commands/repair.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repair.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repair.cpp.i
 .PHONY : commands/repair.cpp.i
 
 commands/repair.s: commands/repair.cpp.s
@@ -9483,7 +9481,7 @@ commands/repair.s: commands/repair.cpp.s
 
 # target to generate assembly for a file
 commands/repair.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repair.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repair.cpp.s
 .PHONY : commands/repair.cpp.s
 
 commands/repairset.o: commands/repairset.cpp.o
@@ -9492,7 +9490,7 @@ commands/repairset.o: commands/repairset.cpp.o
 
 # target to build an object file
 commands/repairset.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repairset.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repairset.cpp.o
 .PHONY : commands/repairset.cpp.o
 
 commands/repairset.i: commands/repairset.cpp.i
@@ -9501,7 +9499,7 @@ commands/repairset.i: commands/repairset.cpp.i
 
 # target to preprocess a source file
 commands/repairset.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repairset.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repairset.cpp.i
 .PHONY : commands/repairset.cpp.i
 
 commands/repairset.s: commands/repairset.cpp.s
@@ -9510,7 +9508,7 @@ commands/repairset.s: commands/repairset.cpp.s
 
 # target to generate assembly for a file
 commands/repairset.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repairset.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repairset.cpp.s
 .PHONY : commands/repairset.cpp.s
 
 commands/repairship.o: commands/repairship.cpp.o
@@ -9519,7 +9517,7 @@ commands/repairship.o: commands/repairship.cpp.o
 
 # target to build an object file
 commands/repairship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repairship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repairship.cpp.o
 .PHONY : commands/repairship.cpp.o
 
 commands/repairship.i: commands/repairship.cpp.i
@@ -9528,7 +9526,7 @@ commands/repairship.i: commands/repairship.cpp.i
 
 # target to preprocess a source file
 commands/repairship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repairship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repairship.cpp.i
 .PHONY : commands/repairship.cpp.i
 
 commands/repairship.s: commands/repairship.cpp.s
@@ -9537,7 +9535,7 @@ commands/repairship.s: commands/repairship.cpp.s
 
 # target to generate assembly for a file
 commands/repairship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repairship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repairship.cpp.s
 .PHONY : commands/repairship.cpp.s
 
 commands/repairshops.o: commands/repairshops.cpp.o
@@ -9546,7 +9544,7 @@ commands/repairshops.o: commands/repairshops.cpp.o
 
 # target to build an object file
 commands/repairshops.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repairshops.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repairshops.cpp.o
 .PHONY : commands/repairshops.cpp.o
 
 commands/repairshops.i: commands/repairshops.cpp.i
@@ -9555,7 +9553,7 @@ commands/repairshops.i: commands/repairshops.cpp.i
 
 # target to preprocess a source file
 commands/repairshops.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repairshops.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repairshops.cpp.i
 .PHONY : commands/repairshops.cpp.i
 
 commands/repairshops.s: commands/repairshops.cpp.s
@@ -9564,7 +9562,7 @@ commands/repairshops.s: commands/repairshops.cpp.s
 
 # target to generate assembly for a file
 commands/repairshops.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repairshops.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repairshops.cpp.s
 .PHONY : commands/repairshops.cpp.s
 
 commands/repairstat.o: commands/repairstat.cpp.o
@@ -9573,7 +9571,7 @@ commands/repairstat.o: commands/repairstat.cpp.o
 
 # target to build an object file
 commands/repairstat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repairstat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repairstat.cpp.o
 .PHONY : commands/repairstat.cpp.o
 
 commands/repairstat.i: commands/repairstat.cpp.i
@@ -9582,7 +9580,7 @@ commands/repairstat.i: commands/repairstat.cpp.i
 
 # target to preprocess a source file
 commands/repairstat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repairstat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repairstat.cpp.i
 .PHONY : commands/repairstat.cpp.i
 
 commands/repairstat.s: commands/repairstat.cpp.s
@@ -9591,7 +9589,7 @@ commands/repairstat.s: commands/repairstat.cpp.s
 
 # target to generate assembly for a file
 commands/repairstat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/repairstat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/repairstat.cpp.s
 .PHONY : commands/repairstat.cpp.s
 
 commands/reply.o: commands/reply.cpp.o
@@ -9600,7 +9598,7 @@ commands/reply.o: commands/reply.cpp.o
 
 # target to build an object file
 commands/reply.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reply.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reply.cpp.o
 .PHONY : commands/reply.cpp.o
 
 commands/reply.i: commands/reply.cpp.i
@@ -9609,7 +9607,7 @@ commands/reply.i: commands/reply.cpp.i
 
 # target to preprocess a source file
 commands/reply.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reply.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reply.cpp.i
 .PHONY : commands/reply.cpp.i
 
 commands/reply.s: commands/reply.cpp.s
@@ -9618,7 +9616,7 @@ commands/reply.s: commands/reply.cpp.s
 
 # target to generate assembly for a file
 commands/reply.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reply.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reply.cpp.s
 .PHONY : commands/reply.cpp.s
 
 commands/report.o: commands/report.cpp.o
@@ -9627,7 +9625,7 @@ commands/report.o: commands/report.cpp.o
 
 # target to build an object file
 commands/report.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/report.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/report.cpp.o
 .PHONY : commands/report.cpp.o
 
 commands/report.i: commands/report.cpp.i
@@ -9636,7 +9634,7 @@ commands/report.i: commands/report.cpp.i
 
 # target to preprocess a source file
 commands/report.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/report.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/report.cpp.i
 .PHONY : commands/report.cpp.i
 
 commands/report.s: commands/report.cpp.s
@@ -9645,7 +9643,7 @@ commands/report.s: commands/report.cpp.s
 
 # target to generate assembly for a file
 commands/report.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/report.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/report.cpp.s
 .PHONY : commands/report.cpp.s
 
 commands/request.o: commands/request.cpp.o
@@ -9654,7 +9652,7 @@ commands/request.o: commands/request.cpp.o
 
 # target to build an object file
 commands/request.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/request.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/request.cpp.o
 .PHONY : commands/request.cpp.o
 
 commands/request.i: commands/request.cpp.i
@@ -9663,7 +9661,7 @@ commands/request.i: commands/request.cpp.i
 
 # target to preprocess a source file
 commands/request.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/request.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/request.cpp.i
 .PHONY : commands/request.cpp.i
 
 commands/request.s: commands/request.cpp.s
@@ -9672,7 +9670,7 @@ commands/request.s: commands/request.cpp.s
 
 # target to generate assembly for a file
 commands/request.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/request.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/request.cpp.s
 .PHONY : commands/request.cpp.s
 
 commands/rescue.o: commands/rescue.cpp.o
@@ -9681,7 +9679,7 @@ commands/rescue.o: commands/rescue.cpp.o
 
 # target to build an object file
 commands/rescue.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rescue.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rescue.cpp.o
 .PHONY : commands/rescue.cpp.o
 
 commands/rescue.i: commands/rescue.cpp.i
@@ -9690,7 +9688,7 @@ commands/rescue.i: commands/rescue.cpp.i
 
 # target to preprocess a source file
 commands/rescue.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rescue.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rescue.cpp.i
 .PHONY : commands/rescue.cpp.i
 
 commands/rescue.s: commands/rescue.cpp.s
@@ -9699,7 +9697,7 @@ commands/rescue.s: commands/rescue.cpp.s
 
 # target to generate assembly for a file
 commands/rescue.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rescue.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rescue.cpp.s
 .PHONY : commands/rescue.cpp.s
 
 commands/reset.o: commands/reset.cpp.o
@@ -9708,7 +9706,7 @@ commands/reset.o: commands/reset.cpp.o
 
 # target to build an object file
 commands/reset.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reset.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reset.cpp.o
 .PHONY : commands/reset.cpp.o
 
 commands/reset.i: commands/reset.cpp.i
@@ -9717,7 +9715,7 @@ commands/reset.i: commands/reset.cpp.i
 
 # target to preprocess a source file
 commands/reset.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reset.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reset.cpp.i
 .PHONY : commands/reset.cpp.i
 
 commands/reset.s: commands/reset.cpp.s
@@ -9726,7 +9724,7 @@ commands/reset.s: commands/reset.cpp.s
 
 # target to generate assembly for a file
 commands/reset.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/reset.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/reset.cpp.s
 .PHONY : commands/reset.cpp.s
 
 commands/resetship.o: commands/resetship.cpp.o
@@ -9735,7 +9733,7 @@ commands/resetship.o: commands/resetship.cpp.o
 
 # target to build an object file
 commands/resetship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/resetship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/resetship.cpp.o
 .PHONY : commands/resetship.cpp.o
 
 commands/resetship.i: commands/resetship.cpp.i
@@ -9744,7 +9742,7 @@ commands/resetship.i: commands/resetship.cpp.i
 
 # target to preprocess a source file
 commands/resetship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/resetship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/resetship.cpp.i
 .PHONY : commands/resetship.cpp.i
 
 commands/resetship.s: commands/resetship.cpp.s
@@ -9753,7 +9751,7 @@ commands/resetship.s: commands/resetship.cpp.s
 
 # target to generate assembly for a file
 commands/resetship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/resetship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/resetship.cpp.s
 .PHONY : commands/resetship.cpp.s
 
 commands/resign.o: commands/resign.cpp.o
@@ -9762,7 +9760,7 @@ commands/resign.o: commands/resign.cpp.o
 
 # target to build an object file
 commands/resign.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/resign.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/resign.cpp.o
 .PHONY : commands/resign.cpp.o
 
 commands/resign.i: commands/resign.cpp.i
@@ -9771,7 +9769,7 @@ commands/resign.i: commands/resign.cpp.i
 
 # target to preprocess a source file
 commands/resign.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/resign.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/resign.cpp.i
 .PHONY : commands/resign.cpp.i
 
 commands/resign.s: commands/resign.cpp.s
@@ -9780,7 +9778,7 @@ commands/resign.s: commands/resign.cpp.s
 
 # target to generate assembly for a file
 commands/resign.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/resign.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/resign.cpp.s
 .PHONY : commands/resign.cpp.s
 
 commands/rest.o: commands/rest.cpp.o
@@ -9789,7 +9787,7 @@ commands/rest.o: commands/rest.cpp.o
 
 # target to build an object file
 commands/rest.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rest.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rest.cpp.o
 .PHONY : commands/rest.cpp.o
 
 commands/rest.i: commands/rest.cpp.i
@@ -9798,7 +9796,7 @@ commands/rest.i: commands/rest.cpp.i
 
 # target to preprocess a source file
 commands/rest.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rest.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rest.cpp.i
 .PHONY : commands/rest.cpp.i
 
 commands/rest.s: commands/rest.cpp.s
@@ -9807,7 +9805,7 @@ commands/rest.s: commands/rest.cpp.s
 
 # target to generate assembly for a file
 commands/rest.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rest.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rest.cpp.s
 .PHONY : commands/rest.cpp.s
 
 commands/restore.o: commands/restore.cpp.o
@@ -9816,7 +9814,7 @@ commands/restore.o: commands/restore.cpp.o
 
 # target to build an object file
 commands/restore.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/restore.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/restore.cpp.o
 .PHONY : commands/restore.cpp.o
 
 commands/restore.i: commands/restore.cpp.i
@@ -9825,7 +9823,7 @@ commands/restore.i: commands/restore.cpp.i
 
 # target to preprocess a source file
 commands/restore.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/restore.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/restore.cpp.i
 .PHONY : commands/restore.cpp.i
 
 commands/restore.s: commands/restore.cpp.s
@@ -9834,7 +9832,7 @@ commands/restore.s: commands/restore.cpp.s
 
 # target to generate assembly for a file
 commands/restore.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/restore.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/restore.cpp.s
 .PHONY : commands/restore.cpp.s
 
 commands/restoretime.o: commands/restoretime.cpp.o
@@ -9843,7 +9841,7 @@ commands/restoretime.o: commands/restoretime.cpp.o
 
 # target to build an object file
 commands/restoretime.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/restoretime.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/restoretime.cpp.o
 .PHONY : commands/restoretime.cpp.o
 
 commands/restoretime.i: commands/restoretime.cpp.i
@@ -9852,7 +9850,7 @@ commands/restoretime.i: commands/restoretime.cpp.i
 
 # target to preprocess a source file
 commands/restoretime.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/restoretime.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/restoretime.cpp.i
 .PHONY : commands/restoretime.cpp.i
 
 commands/restoretime.s: commands/restoretime.cpp.s
@@ -9861,7 +9859,7 @@ commands/restoretime.s: commands/restoretime.cpp.s
 
 # target to generate assembly for a file
 commands/restoretime.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/restoretime.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/restoretime.cpp.s
 .PHONY : commands/restoretime.cpp.s
 
 commands/restrict.o: commands/restrict.cpp.o
@@ -9870,7 +9868,7 @@ commands/restrict.o: commands/restrict.cpp.o
 
 # target to build an object file
 commands/restrict.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/restrict.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/restrict.cpp.o
 .PHONY : commands/restrict.cpp.o
 
 commands/restrict.i: commands/restrict.cpp.i
@@ -9879,7 +9877,7 @@ commands/restrict.i: commands/restrict.cpp.i
 
 # target to preprocess a source file
 commands/restrict.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/restrict.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/restrict.cpp.i
 .PHONY : commands/restrict.cpp.i
 
 commands/restrict.s: commands/restrict.cpp.s
@@ -9888,7 +9886,7 @@ commands/restrict.s: commands/restrict.cpp.s
 
 # target to generate assembly for a file
 commands/restrict.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/restrict.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/restrict.cpp.s
 .PHONY : commands/restrict.cpp.s
 
 commands/retire.o: commands/retire.cpp.o
@@ -9897,7 +9895,7 @@ commands/retire.o: commands/retire.cpp.o
 
 # target to build an object file
 commands/retire.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/retire.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/retire.cpp.o
 .PHONY : commands/retire.cpp.o
 
 commands/retire.i: commands/retire.cpp.i
@@ -9906,7 +9904,7 @@ commands/retire.i: commands/retire.cpp.i
 
 # target to preprocess a source file
 commands/retire.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/retire.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/retire.cpp.i
 .PHONY : commands/retire.cpp.i
 
 commands/retire.s: commands/retire.cpp.s
@@ -9915,7 +9913,7 @@ commands/retire.s: commands/retire.cpp.s
 
 # target to generate assembly for a file
 commands/retire.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/retire.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/retire.cpp.s
 .PHONY : commands/retire.cpp.s
 
 commands/retran.o: commands/retran.cpp.o
@@ -9924,7 +9922,7 @@ commands/retran.o: commands/retran.cpp.o
 
 # target to build an object file
 commands/retran.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/retran.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/retran.cpp.o
 .PHONY : commands/retran.cpp.o
 
 commands/retran.i: commands/retran.cpp.i
@@ -9933,7 +9931,7 @@ commands/retran.i: commands/retran.cpp.i
 
 # target to preprocess a source file
 commands/retran.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/retran.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/retran.cpp.i
 .PHONY : commands/retran.cpp.i
 
 commands/retran.s: commands/retran.cpp.s
@@ -9942,7 +9940,7 @@ commands/retran.s: commands/retran.cpp.s
 
 # target to generate assembly for a file
 commands/retran.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/retran.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/retran.cpp.s
 .PHONY : commands/retran.cpp.s
 
 commands/return.o: commands/return.cpp.o
@@ -9951,7 +9949,7 @@ commands/return.o: commands/return.cpp.o
 
 # target to build an object file
 commands/return.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/return.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/return.cpp.o
 .PHONY : commands/return.cpp.o
 
 commands/return.i: commands/return.cpp.i
@@ -9960,7 +9958,7 @@ commands/return.i: commands/return.cpp.i
 
 # target to preprocess a source file
 commands/return.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/return.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/return.cpp.i
 .PHONY : commands/return.cpp.i
 
 commands/return.s: commands/return.cpp.s
@@ -9969,7 +9967,7 @@ commands/return.s: commands/return.cpp.s
 
 # target to generate assembly for a file
 commands/return.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/return.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/return.cpp.s
 .PHONY : commands/return.cpp.s
 
 commands/revert.o: commands/revert.cpp.o
@@ -9978,7 +9976,7 @@ commands/revert.o: commands/revert.cpp.o
 
 # target to build an object file
 commands/revert.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/revert.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/revert.cpp.o
 .PHONY : commands/revert.cpp.o
 
 commands/revert.i: commands/revert.cpp.i
@@ -9987,7 +9985,7 @@ commands/revert.i: commands/revert.cpp.i
 
 # target to preprocess a source file
 commands/revert.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/revert.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/revert.cpp.i
 .PHONY : commands/revert.cpp.i
 
 commands/revert.s: commands/revert.cpp.s
@@ -9996,7 +9994,7 @@ commands/revert.s: commands/revert.cpp.s
 
 # target to generate assembly for a file
 commands/revert.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/revert.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/revert.cpp.s
 .PHONY : commands/revert.cpp.s
 
 commands/rgrub.o: commands/rgrub.cpp.o
@@ -10005,7 +10003,7 @@ commands/rgrub.o: commands/rgrub.cpp.o
 
 # target to build an object file
 commands/rgrub.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rgrub.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rgrub.cpp.o
 .PHONY : commands/rgrub.cpp.o
 
 commands/rgrub.i: commands/rgrub.cpp.i
@@ -10014,7 +10012,7 @@ commands/rgrub.i: commands/rgrub.cpp.i
 
 # target to preprocess a source file
 commands/rgrub.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rgrub.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rgrub.cpp.i
 .PHONY : commands/rgrub.cpp.i
 
 commands/rgrub.s: commands/rgrub.cpp.s
@@ -10023,7 +10021,7 @@ commands/rgrub.s: commands/rgrub.cpp.s
 
 # target to generate assembly for a file
 commands/rgrub.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rgrub.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rgrub.cpp.s
 .PHONY : commands/rgrub.cpp.s
 
 commands/rlist.o: commands/rlist.cpp.o
@@ -10032,7 +10030,7 @@ commands/rlist.o: commands/rlist.cpp.o
 
 # target to build an object file
 commands/rlist.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rlist.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rlist.cpp.o
 .PHONY : commands/rlist.cpp.o
 
 commands/rlist.i: commands/rlist.cpp.i
@@ -10041,7 +10039,7 @@ commands/rlist.i: commands/rlist.cpp.i
 
 # target to preprocess a source file
 commands/rlist.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rlist.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rlist.cpp.i
 .PHONY : commands/rlist.cpp.i
 
 commands/rlist.s: commands/rlist.cpp.s
@@ -10050,7 +10048,7 @@ commands/rlist.s: commands/rlist.cpp.s
 
 # target to generate assembly for a file
 commands/rlist.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rlist.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rlist.cpp.s
 .PHONY : commands/rlist.cpp.s
 
 commands/roster.o: commands/roster.cpp.o
@@ -10059,7 +10057,7 @@ commands/roster.o: commands/roster.cpp.o
 
 # target to build an object file
 commands/roster.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/roster.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/roster.cpp.o
 .PHONY : commands/roster.cpp.o
 
 commands/roster.i: commands/roster.cpp.i
@@ -10068,7 +10066,7 @@ commands/roster.i: commands/roster.cpp.i
 
 # target to preprocess a source file
 commands/roster.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/roster.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/roster.cpp.i
 .PHONY : commands/roster.cpp.i
 
 commands/roster.s: commands/roster.cpp.s
@@ -10077,7 +10075,7 @@ commands/roster.s: commands/roster.cpp.s
 
 # target to generate assembly for a file
 commands/roster.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/roster.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/roster.cpp.s
 .PHONY : commands/roster.cpp.s
 
 commands/rpedit.o: commands/rpedit.cpp.o
@@ -10086,7 +10084,7 @@ commands/rpedit.o: commands/rpedit.cpp.o
 
 # target to build an object file
 commands/rpedit.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rpedit.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rpedit.cpp.o
 .PHONY : commands/rpedit.cpp.o
 
 commands/rpedit.i: commands/rpedit.cpp.i
@@ -10095,7 +10093,7 @@ commands/rpedit.i: commands/rpedit.cpp.i
 
 # target to preprocess a source file
 commands/rpedit.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rpedit.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rpedit.cpp.i
 .PHONY : commands/rpedit.cpp.i
 
 commands/rpedit.s: commands/rpedit.cpp.s
@@ -10104,7 +10102,7 @@ commands/rpedit.s: commands/rpedit.cpp.s
 
 # target to generate assembly for a file
 commands/rpedit.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rpedit.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rpedit.cpp.s
 .PHONY : commands/rpedit.cpp.s
 
 commands/rpfind.o: commands/rpfind.cpp.o
@@ -10113,7 +10111,7 @@ commands/rpfind.o: commands/rpfind.cpp.o
 
 # target to build an object file
 commands/rpfind.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rpfind.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rpfind.cpp.o
 .PHONY : commands/rpfind.cpp.o
 
 commands/rpfind.i: commands/rpfind.cpp.i
@@ -10122,7 +10120,7 @@ commands/rpfind.i: commands/rpfind.cpp.i
 
 # target to preprocess a source file
 commands/rpfind.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rpfind.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rpfind.cpp.i
 .PHONY : commands/rpfind.cpp.i
 
 commands/rpfind.s: commands/rpfind.cpp.s
@@ -10131,7 +10129,7 @@ commands/rpfind.s: commands/rpfind.cpp.s
 
 # target to generate assembly for a file
 commands/rpfind.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rpfind.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rpfind.cpp.s
 .PHONY : commands/rpfind.cpp.s
 
 commands/rpstat.o: commands/rpstat.cpp.o
@@ -10140,7 +10138,7 @@ commands/rpstat.o: commands/rpstat.cpp.o
 
 # target to build an object file
 commands/rpstat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rpstat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rpstat.cpp.o
 .PHONY : commands/rpstat.cpp.o
 
 commands/rpstat.i: commands/rpstat.cpp.i
@@ -10149,7 +10147,7 @@ commands/rpstat.i: commands/rpstat.cpp.i
 
 # target to preprocess a source file
 commands/rpstat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rpstat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rpstat.cpp.i
 .PHONY : commands/rpstat.cpp.i
 
 commands/rpstat.s: commands/rpstat.cpp.s
@@ -10158,7 +10156,7 @@ commands/rpstat.s: commands/rpstat.cpp.s
 
 # target to generate assembly for a file
 commands/rpstat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rpstat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rpstat.cpp.s
 .PHONY : commands/rpstat.cpp.s
 
 commands/rreset.o: commands/rreset.cpp.o
@@ -10167,7 +10165,7 @@ commands/rreset.o: commands/rreset.cpp.o
 
 # target to build an object file
 commands/rreset.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rreset.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rreset.cpp.o
 .PHONY : commands/rreset.cpp.o
 
 commands/rreset.i: commands/rreset.cpp.i
@@ -10176,7 +10174,7 @@ commands/rreset.i: commands/rreset.cpp.i
 
 # target to preprocess a source file
 commands/rreset.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rreset.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rreset.cpp.i
 .PHONY : commands/rreset.cpp.i
 
 commands/rreset.s: commands/rreset.cpp.s
@@ -10185,7 +10183,7 @@ commands/rreset.s: commands/rreset.cpp.s
 
 # target to generate assembly for a file
 commands/rreset.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rreset.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rreset.cpp.s
 .PHONY : commands/rreset.cpp.s
 
 commands/rstat.o: commands/rstat.cpp.o
@@ -10194,7 +10192,7 @@ commands/rstat.o: commands/rstat.cpp.o
 
 # target to build an object file
 commands/rstat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rstat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rstat.cpp.o
 .PHONY : commands/rstat.cpp.o
 
 commands/rstat.i: commands/rstat.cpp.i
@@ -10203,7 +10201,7 @@ commands/rstat.i: commands/rstat.cpp.i
 
 # target to preprocess a source file
 commands/rstat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rstat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rstat.cpp.i
 .PHONY : commands/rstat.cpp.i
 
 commands/rstat.s: commands/rstat.cpp.s
@@ -10212,7 +10210,7 @@ commands/rstat.s: commands/rstat.cpp.s
 
 # target to generate assembly for a file
 commands/rstat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/rstat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/rstat.cpp.s
 .PHONY : commands/rstat.cpp.s
 
 commands/sabotage.o: commands/sabotage.cpp.o
@@ -10221,7 +10219,7 @@ commands/sabotage.o: commands/sabotage.cpp.o
 
 # target to build an object file
 commands/sabotage.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sabotage.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sabotage.cpp.o
 .PHONY : commands/sabotage.cpp.o
 
 commands/sabotage.i: commands/sabotage.cpp.i
@@ -10230,7 +10228,7 @@ commands/sabotage.i: commands/sabotage.cpp.i
 
 # target to preprocess a source file
 commands/sabotage.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sabotage.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sabotage.cpp.i
 .PHONY : commands/sabotage.cpp.i
 
 commands/sabotage.s: commands/sabotage.cpp.s
@@ -10239,7 +10237,7 @@ commands/sabotage.s: commands/sabotage.cpp.s
 
 # target to generate assembly for a file
 commands/sabotage.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sabotage.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sabotage.cpp.s
 .PHONY : commands/sabotage.cpp.s
 
 commands/save.o: commands/save.cpp.o
@@ -10248,7 +10246,7 @@ commands/save.o: commands/save.cpp.o
 
 # target to build an object file
 commands/save.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/save.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/save.cpp.o
 .PHONY : commands/save.cpp.o
 
 commands/save.i: commands/save.cpp.i
@@ -10257,7 +10255,7 @@ commands/save.i: commands/save.cpp.i
 
 # target to preprocess a source file
 commands/save.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/save.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/save.cpp.i
 .PHONY : commands/save.cpp.i
 
 commands/save.s: commands/save.cpp.s
@@ -10266,7 +10264,7 @@ commands/save.s: commands/save.cpp.s
 
 # target to generate assembly for a file
 commands/save.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/save.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/save.cpp.s
 .PHONY : commands/save.cpp.s
 
 commands/savearea.o: commands/savearea.cpp.o
@@ -10275,7 +10273,7 @@ commands/savearea.o: commands/savearea.cpp.o
 
 # target to build an object file
 commands/savearea.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/savearea.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/savearea.cpp.o
 .PHONY : commands/savearea.cpp.o
 
 commands/savearea.i: commands/savearea.cpp.i
@@ -10284,7 +10282,7 @@ commands/savearea.i: commands/savearea.cpp.i
 
 # target to preprocess a source file
 commands/savearea.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/savearea.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/savearea.cpp.i
 .PHONY : commands/savearea.cpp.i
 
 commands/savearea.s: commands/savearea.cpp.s
@@ -10293,7 +10291,7 @@ commands/savearea.s: commands/savearea.cpp.s
 
 # target to generate assembly for a file
 commands/savearea.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/savearea.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/savearea.cpp.s
 .PHONY : commands/savearea.cpp.s
 
 commands/say.o: commands/say.cpp.o
@@ -10302,7 +10300,7 @@ commands/say.o: commands/say.cpp.o
 
 # target to build an object file
 commands/say.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/say.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/say.cpp.o
 .PHONY : commands/say.cpp.o
 
 commands/say.i: commands/say.cpp.i
@@ -10311,7 +10309,7 @@ commands/say.i: commands/say.cpp.i
 
 # target to preprocess a source file
 commands/say.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/say.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/say.cpp.i
 .PHONY : commands/say.cpp.i
 
 commands/say.s: commands/say.cpp.s
@@ -10320,7 +10318,7 @@ commands/say.s: commands/say.cpp.s
 
 # target to generate assembly for a file
 commands/say.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/say.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/say.cpp.s
 .PHONY : commands/say.cpp.s
 
 commands/scan.o: commands/scan.cpp.o
@@ -10329,7 +10327,7 @@ commands/scan.o: commands/scan.cpp.o
 
 # target to build an object file
 commands/scan.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/scan.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/scan.cpp.o
 .PHONY : commands/scan.cpp.o
 
 commands/scan.i: commands/scan.cpp.i
@@ -10338,7 +10336,7 @@ commands/scan.i: commands/scan.cpp.i
 
 # target to preprocess a source file
 commands/scan.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/scan.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/scan.cpp.i
 .PHONY : commands/scan.cpp.i
 
 commands/scan.s: commands/scan.cpp.s
@@ -10347,7 +10345,7 @@ commands/scan.s: commands/scan.cpp.s
 
 # target to generate assembly for a file
 commands/scan.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/scan.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/scan.cpp.s
 .PHONY : commands/scan.cpp.s
 
 commands/scatter.o: commands/scatter.cpp.o
@@ -10356,7 +10354,7 @@ commands/scatter.o: commands/scatter.cpp.o
 
 # target to build an object file
 commands/scatter.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/scatter.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/scatter.cpp.o
 .PHONY : commands/scatter.cpp.o
 
 commands/scatter.i: commands/scatter.cpp.i
@@ -10365,7 +10363,7 @@ commands/scatter.i: commands/scatter.cpp.i
 
 # target to preprocess a source file
 commands/scatter.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/scatter.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/scatter.cpp.i
 .PHONY : commands/scatter.cpp.i
 
 commands/scatter.s: commands/scatter.cpp.s
@@ -10374,7 +10372,7 @@ commands/scatter.s: commands/scatter.cpp.s
 
 # target to generate assembly for a file
 commands/scatter.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/scatter.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/scatter.cpp.s
 .PHONY : commands/scatter.cpp.s
 
 commands/score.o: commands/score.cpp.o
@@ -10383,7 +10381,7 @@ commands/score.o: commands/score.cpp.o
 
 # target to build an object file
 commands/score.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/score.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/score.cpp.o
 .PHONY : commands/score.cpp.o
 
 commands/score.i: commands/score.cpp.i
@@ -10392,7 +10390,7 @@ commands/score.i: commands/score.cpp.i
 
 # target to preprocess a source file
 commands/score.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/score.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/score.cpp.i
 .PHONY : commands/score.cpp.i
 
 commands/score.s: commands/score.cpp.s
@@ -10401,7 +10399,7 @@ commands/score.s: commands/score.cpp.s
 
 # target to generate assembly for a file
 commands/score.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/score.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/score.cpp.s
 .PHONY : commands/score.cpp.s
 
 commands/search.o: commands/search.cpp.o
@@ -10410,7 +10408,7 @@ commands/search.o: commands/search.cpp.o
 
 # target to build an object file
 commands/search.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/search.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/search.cpp.o
 .PHONY : commands/search.cpp.o
 
 commands/search.i: commands/search.cpp.i
@@ -10419,7 +10417,7 @@ commands/search.i: commands/search.cpp.i
 
 # target to preprocess a source file
 commands/search.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/search.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/search.cpp.i
 .PHONY : commands/search.cpp.i
 
 commands/search.s: commands/search.cpp.s
@@ -10428,7 +10426,7 @@ commands/search.s: commands/search.cpp.s
 
 # target to generate assembly for a file
 commands/search.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/search.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/search.cpp.s
 .PHONY : commands/search.cpp.s
 
 commands/sedit.o: commands/sedit.cpp.o
@@ -10437,7 +10435,7 @@ commands/sedit.o: commands/sedit.cpp.o
 
 # target to build an object file
 commands/sedit.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sedit.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sedit.cpp.o
 .PHONY : commands/sedit.cpp.o
 
 commands/sedit.i: commands/sedit.cpp.i
@@ -10446,7 +10444,7 @@ commands/sedit.i: commands/sedit.cpp.i
 
 # target to preprocess a source file
 commands/sedit.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sedit.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sedit.cpp.i
 .PHONY : commands/sedit.cpp.i
 
 commands/sedit.s: commands/sedit.cpp.s
@@ -10455,7 +10453,7 @@ commands/sedit.s: commands/sedit.cpp.s
 
 # target to generate assembly for a file
 commands/sedit.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sedit.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sedit.cpp.s
 .PHONY : commands/sedit.cpp.s
 
 commands/seduce.o: commands/seduce.cpp.o
@@ -10464,7 +10462,7 @@ commands/seduce.o: commands/seduce.cpp.o
 
 # target to build an object file
 commands/seduce.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/seduce.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/seduce.cpp.o
 .PHONY : commands/seduce.cpp.o
 
 commands/seduce.i: commands/seduce.cpp.i
@@ -10473,7 +10471,7 @@ commands/seduce.i: commands/seduce.cpp.i
 
 # target to preprocess a source file
 commands/seduce.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/seduce.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/seduce.cpp.i
 .PHONY : commands/seduce.cpp.i
 
 commands/seduce.s: commands/seduce.cpp.s
@@ -10482,7 +10480,7 @@ commands/seduce.s: commands/seduce.cpp.s
 
 # target to generate assembly for a file
 commands/seduce.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/seduce.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/seduce.cpp.s
 .PHONY : commands/seduce.cpp.s
 
 commands/sell.o: commands/sell.cpp.o
@@ -10491,7 +10489,7 @@ commands/sell.o: commands/sell.cpp.o
 
 # target to build an object file
 commands/sell.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sell.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sell.cpp.o
 .PHONY : commands/sell.cpp.o
 
 commands/sell.i: commands/sell.cpp.i
@@ -10500,7 +10498,7 @@ commands/sell.i: commands/sell.cpp.i
 
 # target to preprocess a source file
 commands/sell.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sell.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sell.cpp.i
 .PHONY : commands/sell.cpp.i
 
 commands/sell.s: commands/sell.cpp.s
@@ -10509,7 +10507,7 @@ commands/sell.s: commands/sell.cpp.s
 
 # target to generate assembly for a file
 commands/sell.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sell.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sell.cpp.s
 .PHONY : commands/sell.cpp.s
 
 commands/sellhome.o: commands/sellhome.cpp.o
@@ -10518,7 +10516,7 @@ commands/sellhome.o: commands/sellhome.cpp.o
 
 # target to build an object file
 commands/sellhome.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sellhome.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sellhome.cpp.o
 .PHONY : commands/sellhome.cpp.o
 
 commands/sellhome.i: commands/sellhome.cpp.i
@@ -10527,7 +10525,7 @@ commands/sellhome.i: commands/sellhome.cpp.i
 
 # target to preprocess a source file
 commands/sellhome.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sellhome.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sellhome.cpp.i
 .PHONY : commands/sellhome.cpp.i
 
 commands/sellhome.s: commands/sellhome.cpp.s
@@ -10536,7 +10534,7 @@ commands/sellhome.s: commands/sellhome.cpp.s
 
 # target to generate assembly for a file
 commands/sellhome.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sellhome.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sellhome.cpp.s
 .PHONY : commands/sellhome.cpp.s
 
 commands/sellship.o: commands/sellship.cpp.o
@@ -10545,7 +10543,7 @@ commands/sellship.o: commands/sellship.cpp.o
 
 # target to build an object file
 commands/sellship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sellship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sellship.cpp.o
 .PHONY : commands/sellship.cpp.o
 
 commands/sellship.i: commands/sellship.cpp.i
@@ -10554,7 +10552,7 @@ commands/sellship.i: commands/sellship.cpp.i
 
 # target to preprocess a source file
 commands/sellship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sellship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sellship.cpp.i
 .PHONY : commands/sellship.cpp.i
 
 commands/sellship.s: commands/sellship.cpp.s
@@ -10563,7 +10561,7 @@ commands/sellship.s: commands/sellship.cpp.s
 
 # target to generate assembly for a file
 commands/sellship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sellship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sellship.cpp.s
 .PHONY : commands/sellship.cpp.s
 
 commands/set_boot_time.o: commands/set_boot_time.cpp.o
@@ -10572,7 +10570,7 @@ commands/set_boot_time.o: commands/set_boot_time.cpp.o
 
 # target to build an object file
 commands/set_boot_time.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/set_boot_time.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/set_boot_time.cpp.o
 .PHONY : commands/set_boot_time.cpp.o
 
 commands/set_boot_time.i: commands/set_boot_time.cpp.i
@@ -10581,7 +10579,7 @@ commands/set_boot_time.i: commands/set_boot_time.cpp.i
 
 # target to preprocess a source file
 commands/set_boot_time.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/set_boot_time.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/set_boot_time.cpp.i
 .PHONY : commands/set_boot_time.cpp.i
 
 commands/set_boot_time.s: commands/set_boot_time.cpp.s
@@ -10590,7 +10588,7 @@ commands/set_boot_time.s: commands/set_boot_time.cpp.s
 
 # target to generate assembly for a file
 commands/set_boot_time.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/set_boot_time.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/set_boot_time.cpp.s
 .PHONY : commands/set_boot_time.cpp.s
 
 commands/setblaster.o: commands/setblaster.cpp.o
@@ -10599,7 +10597,7 @@ commands/setblaster.o: commands/setblaster.cpp.o
 
 # target to build an object file
 commands/setblaster.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setblaster.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setblaster.cpp.o
 .PHONY : commands/setblaster.cpp.o
 
 commands/setblaster.i: commands/setblaster.cpp.i
@@ -10608,7 +10606,7 @@ commands/setblaster.i: commands/setblaster.cpp.i
 
 # target to preprocess a source file
 commands/setblaster.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setblaster.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setblaster.cpp.i
 .PHONY : commands/setblaster.cpp.i
 
 commands/setblaster.s: commands/setblaster.cpp.s
@@ -10617,7 +10615,7 @@ commands/setblaster.s: commands/setblaster.cpp.s
 
 # target to generate assembly for a file
 commands/setblaster.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setblaster.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setblaster.cpp.s
 .PHONY : commands/setblaster.cpp.s
 
 commands/setclan.o: commands/setclan.cpp.o
@@ -10626,7 +10624,7 @@ commands/setclan.o: commands/setclan.cpp.o
 
 # target to build an object file
 commands/setclan.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setclan.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setclan.cpp.o
 .PHONY : commands/setclan.cpp.o
 
 commands/setclan.i: commands/setclan.cpp.i
@@ -10635,7 +10633,7 @@ commands/setclan.i: commands/setclan.cpp.i
 
 # target to preprocess a source file
 commands/setclan.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setclan.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setclan.cpp.i
 .PHONY : commands/setclan.cpp.i
 
 commands/setclan.s: commands/setclan.cpp.s
@@ -10644,7 +10642,7 @@ commands/setclan.s: commands/setclan.cpp.s
 
 # target to generate assembly for a file
 commands/setclan.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setclan.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setclan.cpp.s
 .PHONY : commands/setclan.cpp.s
 
 commands/setplanet.o: commands/setplanet.cpp.o
@@ -10653,7 +10651,7 @@ commands/setplanet.o: commands/setplanet.cpp.o
 
 # target to build an object file
 commands/setplanet.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setplanet.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setplanet.cpp.o
 .PHONY : commands/setplanet.cpp.o
 
 commands/setplanet.i: commands/setplanet.cpp.i
@@ -10662,7 +10660,7 @@ commands/setplanet.i: commands/setplanet.cpp.i
 
 # target to preprocess a source file
 commands/setplanet.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setplanet.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setplanet.cpp.i
 .PHONY : commands/setplanet.cpp.i
 
 commands/setplanet.s: commands/setplanet.cpp.s
@@ -10671,7 +10669,7 @@ commands/setplanet.s: commands/setplanet.cpp.s
 
 # target to generate assembly for a file
 commands/setplanet.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setplanet.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setplanet.cpp.s
 .PHONY : commands/setplanet.cpp.s
 
 commands/setship.o: commands/setship.cpp.o
@@ -10680,7 +10678,7 @@ commands/setship.o: commands/setship.cpp.o
 
 # target to build an object file
 commands/setship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setship.cpp.o
 .PHONY : commands/setship.cpp.o
 
 commands/setship.i: commands/setship.cpp.i
@@ -10689,7 +10687,7 @@ commands/setship.i: commands/setship.cpp.i
 
 # target to preprocess a source file
 commands/setship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setship.cpp.i
 .PHONY : commands/setship.cpp.i
 
 commands/setship.s: commands/setship.cpp.s
@@ -10698,7 +10696,7 @@ commands/setship.s: commands/setship.cpp.s
 
 # target to generate assembly for a file
 commands/setship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setship.cpp.s
 .PHONY : commands/setship.cpp.s
 
 commands/setshuttle.o: commands/setshuttle.cpp.o
@@ -10707,7 +10705,7 @@ commands/setshuttle.o: commands/setshuttle.cpp.o
 
 # target to build an object file
 commands/setshuttle.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setshuttle.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setshuttle.cpp.o
 .PHONY : commands/setshuttle.cpp.o
 
 commands/setshuttle.i: commands/setshuttle.cpp.i
@@ -10716,7 +10714,7 @@ commands/setshuttle.i: commands/setshuttle.cpp.i
 
 # target to preprocess a source file
 commands/setshuttle.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setshuttle.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setshuttle.cpp.i
 .PHONY : commands/setshuttle.cpp.i
 
 commands/setshuttle.s: commands/setshuttle.cpp.s
@@ -10725,7 +10723,7 @@ commands/setshuttle.s: commands/setshuttle.cpp.s
 
 # target to generate assembly for a file
 commands/setshuttle.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setshuttle.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setshuttle.cpp.s
 .PHONY : commands/setshuttle.cpp.s
 
 commands/setspaceobject.o: commands/setspaceobject.cpp.o
@@ -10734,7 +10732,7 @@ commands/setspaceobject.o: commands/setspaceobject.cpp.o
 
 # target to build an object file
 commands/setspaceobject.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setspaceobject.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setspaceobject.cpp.o
 .PHONY : commands/setspaceobject.cpp.o
 
 commands/setspaceobject.i: commands/setspaceobject.cpp.i
@@ -10743,7 +10741,7 @@ commands/setspaceobject.i: commands/setspaceobject.cpp.i
 
 # target to preprocess a source file
 commands/setspaceobject.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setspaceobject.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setspaceobject.cpp.i
 .PHONY : commands/setspaceobject.cpp.i
 
 commands/setspaceobject.s: commands/setspaceobject.cpp.s
@@ -10752,7 +10750,7 @@ commands/setspaceobject.s: commands/setspaceobject.cpp.s
 
 # target to generate assembly for a file
 commands/setspaceobject.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/setspaceobject.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/setspaceobject.cpp.s
 .PHONY : commands/setspaceobject.cpp.s
 
 commands/ships.o: commands/ships.cpp.o
@@ -10761,7 +10759,7 @@ commands/ships.o: commands/ships.cpp.o
 
 # target to build an object file
 commands/ships.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ships.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ships.cpp.o
 .PHONY : commands/ships.cpp.o
 
 commands/ships.i: commands/ships.cpp.i
@@ -10770,7 +10768,7 @@ commands/ships.i: commands/ships.cpp.i
 
 # target to preprocess a source file
 commands/ships.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ships.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ships.cpp.i
 .PHONY : commands/ships.cpp.i
 
 commands/ships.s: commands/ships.cpp.s
@@ -10779,7 +10777,7 @@ commands/ships.s: commands/ships.cpp.s
 
 # target to generate assembly for a file
 commands/ships.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/ships.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/ships.cpp.s
 .PHONY : commands/ships.cpp.s
 
 commands/shiptalk.o: commands/shiptalk.cpp.o
@@ -10788,7 +10786,7 @@ commands/shiptalk.o: commands/shiptalk.cpp.o
 
 # target to build an object file
 commands/shiptalk.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shiptalk.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shiptalk.cpp.o
 .PHONY : commands/shiptalk.cpp.o
 
 commands/shiptalk.i: commands/shiptalk.cpp.i
@@ -10797,7 +10795,7 @@ commands/shiptalk.i: commands/shiptalk.cpp.i
 
 # target to preprocess a source file
 commands/shiptalk.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shiptalk.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shiptalk.cpp.i
 .PHONY : commands/shiptalk.cpp.i
 
 commands/shiptalk.s: commands/shiptalk.cpp.s
@@ -10806,7 +10804,7 @@ commands/shiptalk.s: commands/shiptalk.cpp.s
 
 # target to generate assembly for a file
 commands/shiptalk.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shiptalk.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shiptalk.cpp.s
 .PHONY : commands/shiptalk.cpp.s
 
 commands/shiptrack.o: commands/shiptrack.cpp.o
@@ -10815,7 +10813,7 @@ commands/shiptrack.o: commands/shiptrack.cpp.o
 
 # target to build an object file
 commands/shiptrack.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shiptrack.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shiptrack.cpp.o
 .PHONY : commands/shiptrack.cpp.o
 
 commands/shiptrack.i: commands/shiptrack.cpp.i
@@ -10824,7 +10822,7 @@ commands/shiptrack.i: commands/shiptrack.cpp.i
 
 # target to preprocess a source file
 commands/shiptrack.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shiptrack.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shiptrack.cpp.i
 .PHONY : commands/shiptrack.cpp.i
 
 commands/shiptrack.s: commands/shiptrack.cpp.s
@@ -10833,7 +10831,7 @@ commands/shiptrack.s: commands/shiptrack.cpp.s
 
 # target to generate assembly for a file
 commands/shiptrack.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shiptrack.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shiptrack.cpp.s
 .PHONY : commands/shiptrack.cpp.s
 
 commands/shops.o: commands/shops.cpp.o
@@ -10842,7 +10840,7 @@ commands/shops.o: commands/shops.cpp.o
 
 # target to build an object file
 commands/shops.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shops.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shops.cpp.o
 .PHONY : commands/shops.cpp.o
 
 commands/shops.i: commands/shops.cpp.i
@@ -10851,7 +10849,7 @@ commands/shops.i: commands/shops.cpp.i
 
 # target to preprocess a source file
 commands/shops.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shops.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shops.cpp.i
 .PHONY : commands/shops.cpp.i
 
 commands/shops.s: commands/shops.cpp.s
@@ -10860,7 +10858,7 @@ commands/shops.s: commands/shops.cpp.s
 
 # target to generate assembly for a file
 commands/shops.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shops.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shops.cpp.s
 .PHONY : commands/shops.cpp.s
 
 commands/shopset.o: commands/shopset.cpp.o
@@ -10869,7 +10867,7 @@ commands/shopset.o: commands/shopset.cpp.o
 
 # target to build an object file
 commands/shopset.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shopset.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shopset.cpp.o
 .PHONY : commands/shopset.cpp.o
 
 commands/shopset.i: commands/shopset.cpp.i
@@ -10878,7 +10876,7 @@ commands/shopset.i: commands/shopset.cpp.i
 
 # target to preprocess a source file
 commands/shopset.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shopset.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shopset.cpp.i
 .PHONY : commands/shopset.cpp.i
 
 commands/shopset.s: commands/shopset.cpp.s
@@ -10887,7 +10885,7 @@ commands/shopset.s: commands/shopset.cpp.s
 
 # target to generate assembly for a file
 commands/shopset.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shopset.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shopset.cpp.s
 .PHONY : commands/shopset.cpp.s
 
 commands/shopstat.o: commands/shopstat.cpp.o
@@ -10896,7 +10894,7 @@ commands/shopstat.o: commands/shopstat.cpp.o
 
 # target to build an object file
 commands/shopstat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shopstat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shopstat.cpp.o
 .PHONY : commands/shopstat.cpp.o
 
 commands/shopstat.i: commands/shopstat.cpp.i
@@ -10905,7 +10903,7 @@ commands/shopstat.i: commands/shopstat.cpp.i
 
 # target to preprocess a source file
 commands/shopstat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shopstat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shopstat.cpp.i
 .PHONY : commands/shopstat.cpp.i
 
 commands/shopstat.s: commands/shopstat.cpp.s
@@ -10914,7 +10912,7 @@ commands/shopstat.s: commands/shopstat.cpp.s
 
 # target to generate assembly for a file
 commands/shopstat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shopstat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shopstat.cpp.s
 .PHONY : commands/shopstat.cpp.s
 
 commands/shout.o: commands/shout.cpp.o
@@ -10923,7 +10921,7 @@ commands/shout.o: commands/shout.cpp.o
 
 # target to build an object file
 commands/shout.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shout.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shout.cpp.o
 .PHONY : commands/shout.cpp.o
 
 commands/shout.i: commands/shout.cpp.i
@@ -10932,7 +10930,7 @@ commands/shout.i: commands/shout.cpp.i
 
 # target to preprocess a source file
 commands/shout.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shout.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shout.cpp.i
 .PHONY : commands/shout.cpp.i
 
 commands/shout.s: commands/shout.cpp.s
@@ -10941,7 +10939,7 @@ commands/shout.s: commands/shout.cpp.s
 
 # target to generate assembly for a file
 commands/shout.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shout.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shout.cpp.s
 .PHONY : commands/shout.cpp.s
 
 commands/shove.o: commands/shove.cpp.o
@@ -10950,7 +10948,7 @@ commands/shove.o: commands/shove.cpp.o
 
 # target to build an object file
 commands/shove.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shove.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shove.cpp.o
 .PHONY : commands/shove.cpp.o
 
 commands/shove.i: commands/shove.cpp.i
@@ -10959,7 +10957,7 @@ commands/shove.i: commands/shove.cpp.i
 
 # target to preprocess a source file
 commands/shove.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shove.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shove.cpp.i
 .PHONY : commands/shove.cpp.i
 
 commands/shove.s: commands/shove.cpp.s
@@ -10968,7 +10966,7 @@ commands/shove.s: commands/shove.cpp.s
 
 # target to generate assembly for a file
 commands/shove.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shove.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shove.cpp.s
 .PHONY : commands/shove.cpp.s
 
 commands/showclan.o: commands/showclan.cpp.o
@@ -10977,7 +10975,7 @@ commands/showclan.o: commands/showclan.cpp.o
 
 # target to build an object file
 commands/showclan.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showclan.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showclan.cpp.o
 .PHONY : commands/showclan.cpp.o
 
 commands/showclan.i: commands/showclan.cpp.i
@@ -10986,7 +10984,7 @@ commands/showclan.i: commands/showclan.cpp.i
 
 # target to preprocess a source file
 commands/showclan.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showclan.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showclan.cpp.i
 .PHONY : commands/showclan.cpp.i
 
 commands/showclan.s: commands/showclan.cpp.s
@@ -10995,7 +10993,7 @@ commands/showclan.s: commands/showclan.cpp.s
 
 # target to generate assembly for a file
 commands/showclan.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showclan.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showclan.cpp.s
 .PHONY : commands/showclan.cpp.s
 
 commands/showlayers.o: commands/showlayers.cpp.o
@@ -11004,7 +11002,7 @@ commands/showlayers.o: commands/showlayers.cpp.o
 
 # target to build an object file
 commands/showlayers.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showlayers.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showlayers.cpp.o
 .PHONY : commands/showlayers.cpp.o
 
 commands/showlayers.i: commands/showlayers.cpp.i
@@ -11013,7 +11011,7 @@ commands/showlayers.i: commands/showlayers.cpp.i
 
 # target to preprocess a source file
 commands/showlayers.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showlayers.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showlayers.cpp.i
 .PHONY : commands/showlayers.cpp.i
 
 commands/showlayers.s: commands/showlayers.cpp.s
@@ -11022,7 +11020,7 @@ commands/showlayers.s: commands/showlayers.cpp.s
 
 # target to generate assembly for a file
 commands/showlayers.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showlayers.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showlayers.cpp.s
 .PHONY : commands/showlayers.cpp.s
 
 commands/showplanet.o: commands/showplanet.cpp.o
@@ -11031,7 +11029,7 @@ commands/showplanet.o: commands/showplanet.cpp.o
 
 # target to build an object file
 commands/showplanet.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showplanet.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showplanet.cpp.o
 .PHONY : commands/showplanet.cpp.o
 
 commands/showplanet.i: commands/showplanet.cpp.i
@@ -11040,7 +11038,7 @@ commands/showplanet.i: commands/showplanet.cpp.i
 
 # target to preprocess a source file
 commands/showplanet.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showplanet.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showplanet.cpp.i
 .PHONY : commands/showplanet.cpp.i
 
 commands/showplanet.s: commands/showplanet.cpp.s
@@ -11049,7 +11047,7 @@ commands/showplanet.s: commands/showplanet.cpp.s
 
 # target to generate assembly for a file
 commands/showplanet.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showplanet.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showplanet.cpp.s
 .PHONY : commands/showplanet.cpp.s
 
 commands/showship.o: commands/showship.cpp.o
@@ -11058,7 +11056,7 @@ commands/showship.o: commands/showship.cpp.o
 
 # target to build an object file
 commands/showship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showship.cpp.o
 .PHONY : commands/showship.cpp.o
 
 commands/showship.i: commands/showship.cpp.i
@@ -11067,7 +11065,7 @@ commands/showship.i: commands/showship.cpp.i
 
 # target to preprocess a source file
 commands/showship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showship.cpp.i
 .PHONY : commands/showship.cpp.i
 
 commands/showship.s: commands/showship.cpp.s
@@ -11076,7 +11074,7 @@ commands/showship.s: commands/showship.cpp.s
 
 # target to generate assembly for a file
 commands/showship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showship.cpp.s
 .PHONY : commands/showship.cpp.s
 
 commands/showshuttle.o: commands/showshuttle.cpp.o
@@ -11085,7 +11083,7 @@ commands/showshuttle.o: commands/showshuttle.cpp.o
 
 # target to build an object file
 commands/showshuttle.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showshuttle.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showshuttle.cpp.o
 .PHONY : commands/showshuttle.cpp.o
 
 commands/showshuttle.i: commands/showshuttle.cpp.i
@@ -11094,7 +11092,7 @@ commands/showshuttle.i: commands/showshuttle.cpp.i
 
 # target to preprocess a source file
 commands/showshuttle.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showshuttle.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showshuttle.cpp.i
 .PHONY : commands/showshuttle.cpp.i
 
 commands/showshuttle.s: commands/showshuttle.cpp.s
@@ -11103,7 +11101,7 @@ commands/showshuttle.s: commands/showshuttle.cpp.s
 
 # target to generate assembly for a file
 commands/showshuttle.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showshuttle.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showshuttle.cpp.s
 .PHONY : commands/showshuttle.cpp.s
 
 commands/showspaceobject.o: commands/showspaceobject.cpp.o
@@ -11112,7 +11110,7 @@ commands/showspaceobject.o: commands/showspaceobject.cpp.o
 
 # target to build an object file
 commands/showspaceobject.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showspaceobject.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showspaceobject.cpp.o
 .PHONY : commands/showspaceobject.cpp.o
 
 commands/showspaceobject.i: commands/showspaceobject.cpp.i
@@ -11121,7 +11119,7 @@ commands/showspaceobject.i: commands/showspaceobject.cpp.i
 
 # target to preprocess a source file
 commands/showspaceobject.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showspaceobject.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showspaceobject.cpp.i
 .PHONY : commands/showspaceobject.cpp.i
 
 commands/showspaceobject.s: commands/showspaceobject.cpp.s
@@ -11130,7 +11128,7 @@ commands/showspaceobject.s: commands/showspaceobject.cpp.s
 
 # target to generate assembly for a file
 commands/showspaceobject.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showspaceobject.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showspaceobject.cpp.s
 .PHONY : commands/showspaceobject.cpp.s
 
 commands/showstatistic.o: commands/showstatistic.cpp.o
@@ -11139,7 +11137,7 @@ commands/showstatistic.o: commands/showstatistic.cpp.o
 
 # target to build an object file
 commands/showstatistic.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showstatistic.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showstatistic.cpp.o
 .PHONY : commands/showstatistic.cpp.o
 
 commands/showstatistic.i: commands/showstatistic.cpp.i
@@ -11148,7 +11146,7 @@ commands/showstatistic.i: commands/showstatistic.cpp.i
 
 # target to preprocess a source file
 commands/showstatistic.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showstatistic.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showstatistic.cpp.i
 .PHONY : commands/showstatistic.cpp.i
 
 commands/showstatistic.s: commands/showstatistic.cpp.s
@@ -11157,7 +11155,7 @@ commands/showstatistic.s: commands/showstatistic.cpp.s
 
 # target to generate assembly for a file
 commands/showstatistic.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/showstatistic.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/showstatistic.cpp.s
 .PHONY : commands/showstatistic.cpp.s
 
 commands/shutdown.o: commands/shutdown.cpp.o
@@ -11166,7 +11164,7 @@ commands/shutdown.o: commands/shutdown.cpp.o
 
 # target to build an object file
 commands/shutdown.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shutdown.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shutdown.cpp.o
 .PHONY : commands/shutdown.cpp.o
 
 commands/shutdown.i: commands/shutdown.cpp.i
@@ -11175,7 +11173,7 @@ commands/shutdown.i: commands/shutdown.cpp.i
 
 # target to preprocess a source file
 commands/shutdown.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shutdown.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shutdown.cpp.i
 .PHONY : commands/shutdown.cpp.i
 
 commands/shutdown.s: commands/shutdown.cpp.s
@@ -11184,7 +11182,7 @@ commands/shutdown.s: commands/shutdown.cpp.s
 
 # target to generate assembly for a file
 commands/shutdown.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/shutdown.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/shutdown.cpp.s
 .PHONY : commands/shutdown.cpp.s
 
 commands/silence.o: commands/silence.cpp.o
@@ -11193,7 +11191,7 @@ commands/silence.o: commands/silence.cpp.o
 
 # target to build an object file
 commands/silence.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/silence.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/silence.cpp.o
 .PHONY : commands/silence.cpp.o
 
 commands/silence.i: commands/silence.cpp.i
@@ -11202,7 +11200,7 @@ commands/silence.i: commands/silence.cpp.i
 
 # target to preprocess a source file
 commands/silence.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/silence.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/silence.cpp.i
 .PHONY : commands/silence.cpp.i
 
 commands/silence.s: commands/silence.cpp.s
@@ -11211,7 +11209,7 @@ commands/silence.s: commands/silence.cpp.s
 
 # target to generate assembly for a file
 commands/silence.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/silence.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/silence.cpp.s
 .PHONY : commands/silence.cpp.s
 
 commands/sit.o: commands/sit.cpp.o
@@ -11220,7 +11218,7 @@ commands/sit.o: commands/sit.cpp.o
 
 # target to build an object file
 commands/sit.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sit.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sit.cpp.o
 .PHONY : commands/sit.cpp.o
 
 commands/sit.i: commands/sit.cpp.i
@@ -11229,7 +11227,7 @@ commands/sit.i: commands/sit.cpp.i
 
 # target to preprocess a source file
 commands/sit.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sit.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sit.cpp.i
 .PHONY : commands/sit.cpp.i
 
 commands/sit.s: commands/sit.cpp.s
@@ -11238,7 +11236,7 @@ commands/sit.s: commands/sit.cpp.s
 
 # target to generate assembly for a file
 commands/sit.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sit.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sit.cpp.s
 .PHONY : commands/sit.cpp.s
 
 commands/skin.o: commands/skin.cpp.o
@@ -11247,7 +11245,7 @@ commands/skin.o: commands/skin.cpp.o
 
 # target to build an object file
 commands/skin.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/skin.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/skin.cpp.o
 .PHONY : commands/skin.cpp.o
 
 commands/skin.i: commands/skin.cpp.i
@@ -11256,7 +11254,7 @@ commands/skin.i: commands/skin.cpp.i
 
 # target to preprocess a source file
 commands/skin.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/skin.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/skin.cpp.i
 .PHONY : commands/skin.cpp.i
 
 commands/skin.s: commands/skin.cpp.s
@@ -11265,7 +11263,7 @@ commands/skin.s: commands/skin.cpp.s
 
 # target to generate assembly for a file
 commands/skin.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/skin.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/skin.cpp.s
 .PHONY : commands/skin.cpp.s
 
 commands/sla.o: commands/sla.cpp.o
@@ -11274,7 +11272,7 @@ commands/sla.o: commands/sla.cpp.o
 
 # target to build an object file
 commands/sla.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sla.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sla.cpp.o
 .PHONY : commands/sla.cpp.o
 
 commands/sla.i: commands/sla.cpp.i
@@ -11283,7 +11281,7 @@ commands/sla.i: commands/sla.cpp.i
 
 # target to preprocess a source file
 commands/sla.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sla.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sla.cpp.i
 .PHONY : commands/sla.cpp.i
 
 commands/sla.s: commands/sla.cpp.s
@@ -11292,7 +11290,7 @@ commands/sla.s: commands/sla.cpp.s
 
 # target to generate assembly for a file
 commands/sla.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sla.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sla.cpp.s
 .PHONY : commands/sla.cpp.s
 
 commands/slay.o: commands/slay.cpp.o
@@ -11301,7 +11299,7 @@ commands/slay.o: commands/slay.cpp.o
 
 # target to build an object file
 commands/slay.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/slay.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/slay.cpp.o
 .PHONY : commands/slay.cpp.o
 
 commands/slay.i: commands/slay.cpp.i
@@ -11310,7 +11308,7 @@ commands/slay.i: commands/slay.cpp.i
 
 # target to preprocess a source file
 commands/slay.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/slay.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/slay.cpp.i
 .PHONY : commands/slay.cpp.i
 
 commands/slay.s: commands/slay.cpp.s
@@ -11319,7 +11317,7 @@ commands/slay.s: commands/slay.cpp.s
 
 # target to generate assembly for a file
 commands/slay.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/slay.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/slay.cpp.s
 .PHONY : commands/slay.cpp.s
 
 commands/sleep.o: commands/sleep.cpp.o
@@ -11328,7 +11326,7 @@ commands/sleep.o: commands/sleep.cpp.o
 
 # target to build an object file
 commands/sleep.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sleep.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sleep.cpp.o
 .PHONY : commands/sleep.cpp.o
 
 commands/sleep.i: commands/sleep.cpp.i
@@ -11337,7 +11335,7 @@ commands/sleep.i: commands/sleep.cpp.i
 
 # target to preprocess a source file
 commands/sleep.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sleep.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sleep.cpp.i
 .PHONY : commands/sleep.cpp.i
 
 commands/sleep.s: commands/sleep.cpp.s
@@ -11346,7 +11344,7 @@ commands/sleep.s: commands/sleep.cpp.s
 
 # target to generate assembly for a file
 commands/sleep.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sleep.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sleep.cpp.s
 .PHONY : commands/sleep.cpp.s
 
 commands/slist.o: commands/slist.cpp.o
@@ -11355,7 +11353,7 @@ commands/slist.o: commands/slist.cpp.o
 
 # target to build an object file
 commands/slist.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/slist.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/slist.cpp.o
 .PHONY : commands/slist.cpp.o
 
 commands/slist.i: commands/slist.cpp.i
@@ -11364,7 +11362,7 @@ commands/slist.i: commands/slist.cpp.i
 
 # target to preprocess a source file
 commands/slist.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/slist.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/slist.cpp.i
 .PHONY : commands/slist.cpp.i
 
 commands/slist.s: commands/slist.cpp.s
@@ -11373,7 +11371,7 @@ commands/slist.s: commands/slist.cpp.s
 
 # target to generate assembly for a file
 commands/slist.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/slist.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/slist.cpp.s
 .PHONY : commands/slist.cpp.s
 
 commands/slookup.o: commands/slookup.cpp.o
@@ -11382,7 +11380,7 @@ commands/slookup.o: commands/slookup.cpp.o
 
 # target to build an object file
 commands/slookup.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/slookup.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/slookup.cpp.o
 .PHONY : commands/slookup.cpp.o
 
 commands/slookup.i: commands/slookup.cpp.i
@@ -11391,7 +11389,7 @@ commands/slookup.i: commands/slookup.cpp.i
 
 # target to preprocess a source file
 commands/slookup.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/slookup.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/slookup.cpp.i
 .PHONY : commands/slookup.cpp.i
 
 commands/slookup.s: commands/slookup.cpp.s
@@ -11400,7 +11398,7 @@ commands/slookup.s: commands/slookup.cpp.s
 
 # target to generate assembly for a file
 commands/slookup.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/slookup.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/slookup.cpp.s
 .PHONY : commands/slookup.cpp.s
 
 commands/smalltalk.o: commands/smalltalk.cpp.o
@@ -11409,7 +11407,7 @@ commands/smalltalk.o: commands/smalltalk.cpp.o
 
 # target to build an object file
 commands/smalltalk.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/smalltalk.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/smalltalk.cpp.o
 .PHONY : commands/smalltalk.cpp.o
 
 commands/smalltalk.i: commands/smalltalk.cpp.i
@@ -11418,7 +11416,7 @@ commands/smalltalk.i: commands/smalltalk.cpp.i
 
 # target to preprocess a source file
 commands/smalltalk.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/smalltalk.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/smalltalk.cpp.i
 .PHONY : commands/smalltalk.cpp.i
 
 commands/smalltalk.s: commands/smalltalk.cpp.s
@@ -11427,7 +11425,7 @@ commands/smalltalk.s: commands/smalltalk.cpp.s
 
 # target to generate assembly for a file
 commands/smalltalk.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/smalltalk.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/smalltalk.cpp.s
 .PHONY : commands/smalltalk.cpp.s
 
 commands/smoke.o: commands/smoke.cpp.o
@@ -11436,7 +11434,7 @@ commands/smoke.o: commands/smoke.cpp.o
 
 # target to build an object file
 commands/smoke.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/smoke.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/smoke.cpp.o
 .PHONY : commands/smoke.cpp.o
 
 commands/smoke.i: commands/smoke.cpp.i
@@ -11445,7 +11443,7 @@ commands/smoke.i: commands/smoke.cpp.i
 
 # target to preprocess a source file
 commands/smoke.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/smoke.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/smoke.cpp.i
 .PHONY : commands/smoke.cpp.i
 
 commands/smoke.s: commands/smoke.cpp.s
@@ -11454,7 +11452,7 @@ commands/smoke.s: commands/smoke.cpp.s
 
 # target to generate assembly for a file
 commands/smoke.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/smoke.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/smoke.cpp.s
 .PHONY : commands/smoke.cpp.s
 
 commands/sneak.o: commands/sneak.cpp.o
@@ -11463,7 +11461,7 @@ commands/sneak.o: commands/sneak.cpp.o
 
 # target to build an object file
 commands/sneak.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sneak.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sneak.cpp.o
 .PHONY : commands/sneak.cpp.o
 
 commands/sneak.i: commands/sneak.cpp.i
@@ -11472,7 +11470,7 @@ commands/sneak.i: commands/sneak.cpp.i
 
 # target to preprocess a source file
 commands/sneak.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sneak.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sneak.cpp.i
 .PHONY : commands/sneak.cpp.i
 
 commands/sneak.s: commands/sneak.cpp.s
@@ -11481,7 +11479,7 @@ commands/sneak.s: commands/sneak.cpp.s
 
 # target to generate assembly for a file
 commands/sneak.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sneak.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sneak.cpp.s
 .PHONY : commands/sneak.cpp.s
 
 commands/snipe.o: commands/snipe.cpp.o
@@ -11490,7 +11488,7 @@ commands/snipe.o: commands/snipe.cpp.o
 
 # target to build an object file
 commands/snipe.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/snipe.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/snipe.cpp.o
 .PHONY : commands/snipe.cpp.o
 
 commands/snipe.i: commands/snipe.cpp.i
@@ -11499,7 +11497,7 @@ commands/snipe.i: commands/snipe.cpp.i
 
 # target to preprocess a source file
 commands/snipe.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/snipe.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/snipe.cpp.i
 .PHONY : commands/snipe.cpp.i
 
 commands/snipe.s: commands/snipe.cpp.s
@@ -11508,7 +11506,7 @@ commands/snipe.s: commands/snipe.cpp.s
 
 # target to generate assembly for a file
 commands/snipe.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/snipe.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/snipe.cpp.s
 .PHONY : commands/snipe.cpp.s
 
 commands/snoop.o: commands/snoop.cpp.o
@@ -11517,7 +11515,7 @@ commands/snoop.o: commands/snoop.cpp.o
 
 # target to build an object file
 commands/snoop.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/snoop.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/snoop.cpp.o
 .PHONY : commands/snoop.cpp.o
 
 commands/snoop.i: commands/snoop.cpp.i
@@ -11526,7 +11524,7 @@ commands/snoop.i: commands/snoop.cpp.i
 
 # target to preprocess a source file
 commands/snoop.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/snoop.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/snoop.cpp.i
 .PHONY : commands/snoop.cpp.i
 
 commands/snoop.s: commands/snoop.cpp.s
@@ -11535,7 +11533,7 @@ commands/snoop.s: commands/snoop.cpp.s
 
 # target to generate assembly for a file
 commands/snoop.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/snoop.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/snoop.cpp.s
 .PHONY : commands/snoop.cpp.s
 
 commands/sober.o: commands/sober.cpp.o
@@ -11544,7 +11542,7 @@ commands/sober.o: commands/sober.cpp.o
 
 # target to build an object file
 commands/sober.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sober.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sober.cpp.o
 .PHONY : commands/sober.cpp.o
 
 commands/sober.i: commands/sober.cpp.i
@@ -11553,7 +11551,7 @@ commands/sober.i: commands/sober.cpp.i
 
 # target to preprocess a source file
 commands/sober.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sober.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sober.cpp.i
 .PHONY : commands/sober.cpp.i
 
 commands/sober.s: commands/sober.cpp.s
@@ -11562,7 +11560,7 @@ commands/sober.s: commands/sober.cpp.s
 
 # target to generate assembly for a file
 commands/sober.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sober.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sober.cpp.s
 .PHONY : commands/sober.cpp.s
 
 commands/socials.o: commands/socials.cpp.o
@@ -11571,7 +11569,7 @@ commands/socials.o: commands/socials.cpp.o
 
 # target to build an object file
 commands/socials.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/socials.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/socials.cpp.o
 .PHONY : commands/socials.cpp.o
 
 commands/socials.i: commands/socials.cpp.i
@@ -11580,7 +11578,7 @@ commands/socials.i: commands/socials.cpp.i
 
 # target to preprocess a source file
 commands/socials.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/socials.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/socials.cpp.i
 .PHONY : commands/socials.cpp.i
 
 commands/socials.s: commands/socials.cpp.s
@@ -11589,7 +11587,7 @@ commands/socials.s: commands/socials.cpp.s
 
 # target to generate assembly for a file
 commands/socials.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/socials.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/socials.cpp.s
 .PHONY : commands/socials.cpp.s
 
 commands/south.o: commands/south.cpp.o
@@ -11598,7 +11596,7 @@ commands/south.o: commands/south.cpp.o
 
 # target to build an object file
 commands/south.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/south.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/south.cpp.o
 .PHONY : commands/south.cpp.o
 
 commands/south.i: commands/south.cpp.i
@@ -11607,7 +11605,7 @@ commands/south.i: commands/south.cpp.i
 
 # target to preprocess a source file
 commands/south.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/south.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/south.cpp.i
 .PHONY : commands/south.cpp.i
 
 commands/south.s: commands/south.cpp.s
@@ -11616,7 +11614,7 @@ commands/south.s: commands/south.cpp.s
 
 # target to generate assembly for a file
 commands/south.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/south.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/south.cpp.s
 .PHONY : commands/south.cpp.s
 
 commands/southeast.o: commands/southeast.cpp.o
@@ -11625,7 +11623,7 @@ commands/southeast.o: commands/southeast.cpp.o
 
 # target to build an object file
 commands/southeast.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/southeast.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/southeast.cpp.o
 .PHONY : commands/southeast.cpp.o
 
 commands/southeast.i: commands/southeast.cpp.i
@@ -11634,7 +11632,7 @@ commands/southeast.i: commands/southeast.cpp.i
 
 # target to preprocess a source file
 commands/southeast.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/southeast.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/southeast.cpp.i
 .PHONY : commands/southeast.cpp.i
 
 commands/southeast.s: commands/southeast.cpp.s
@@ -11643,7 +11641,7 @@ commands/southeast.s: commands/southeast.cpp.s
 
 # target to generate assembly for a file
 commands/southeast.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/southeast.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/southeast.cpp.s
 .PHONY : commands/southeast.cpp.s
 
 commands/southwest.o: commands/southwest.cpp.o
@@ -11652,7 +11650,7 @@ commands/southwest.o: commands/southwest.cpp.o
 
 # target to build an object file
 commands/southwest.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/southwest.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/southwest.cpp.o
 .PHONY : commands/southwest.cpp.o
 
 commands/southwest.i: commands/southwest.cpp.i
@@ -11661,7 +11659,7 @@ commands/southwest.i: commands/southwest.cpp.i
 
 # target to preprocess a source file
 commands/southwest.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/southwest.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/southwest.cpp.i
 .PHONY : commands/southwest.cpp.i
 
 commands/southwest.s: commands/southwest.cpp.s
@@ -11670,7 +11668,7 @@ commands/southwest.s: commands/southwest.cpp.s
 
 # target to generate assembly for a file
 commands/southwest.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/southwest.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/southwest.cpp.s
 .PHONY : commands/southwest.cpp.s
 
 commands/spaceobjects.o: commands/spaceobjects.cpp.o
@@ -11679,7 +11677,7 @@ commands/spaceobjects.o: commands/spaceobjects.cpp.o
 
 # target to build an object file
 commands/spaceobjects.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/spaceobjects.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/spaceobjects.cpp.o
 .PHONY : commands/spaceobjects.cpp.o
 
 commands/spaceobjects.i: commands/spaceobjects.cpp.i
@@ -11688,7 +11686,7 @@ commands/spaceobjects.i: commands/spaceobjects.cpp.i
 
 # target to preprocess a source file
 commands/spaceobjects.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/spaceobjects.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/spaceobjects.cpp.i
 .PHONY : commands/spaceobjects.cpp.i
 
 commands/spaceobjects.s: commands/spaceobjects.cpp.s
@@ -11697,7 +11695,7 @@ commands/spaceobjects.s: commands/spaceobjects.cpp.s
 
 # target to generate assembly for a file
 commands/spaceobjects.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/spaceobjects.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/spaceobjects.cpp.s
 .PHONY : commands/spaceobjects.cpp.s
 
 commands/spacetalk.o: commands/spacetalk.cpp.o
@@ -11706,7 +11704,7 @@ commands/spacetalk.o: commands/spacetalk.cpp.o
 
 # target to build an object file
 commands/spacetalk.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/spacetalk.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/spacetalk.cpp.o
 .PHONY : commands/spacetalk.cpp.o
 
 commands/spacetalk.i: commands/spacetalk.cpp.i
@@ -11715,7 +11713,7 @@ commands/spacetalk.i: commands/spacetalk.cpp.i
 
 # target to preprocess a source file
 commands/spacetalk.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/spacetalk.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/spacetalk.cpp.i
 .PHONY : commands/spacetalk.cpp.i
 
 commands/spacetalk.s: commands/spacetalk.cpp.s
@@ -11724,7 +11722,7 @@ commands/spacetalk.s: commands/spacetalk.cpp.s
 
 # target to generate assembly for a file
 commands/spacetalk.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/spacetalk.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/spacetalk.cpp.s
 .PHONY : commands/spacetalk.cpp.s
 
 commands/speak.o: commands/speak.cpp.o
@@ -11733,7 +11731,7 @@ commands/speak.o: commands/speak.cpp.o
 
 # target to build an object file
 commands/speak.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/speak.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/speak.cpp.o
 .PHONY : commands/speak.cpp.o
 
 commands/speak.i: commands/speak.cpp.i
@@ -11742,7 +11740,7 @@ commands/speak.i: commands/speak.cpp.i
 
 # target to preprocess a source file
 commands/speak.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/speak.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/speak.cpp.i
 .PHONY : commands/speak.cpp.i
 
 commands/speak.s: commands/speak.cpp.s
@@ -11751,7 +11749,7 @@ commands/speak.s: commands/speak.cpp.s
 
 # target to generate assembly for a file
 commands/speak.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/speak.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/speak.cpp.s
 .PHONY : commands/speak.cpp.s
 
 commands/specialforces.o: commands/specialforces.cpp.o
@@ -11760,7 +11758,7 @@ commands/specialforces.o: commands/specialforces.cpp.o
 
 # target to build an object file
 commands/specialforces.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/specialforces.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/specialforces.cpp.o
 .PHONY : commands/specialforces.cpp.o
 
 commands/specialforces.i: commands/specialforces.cpp.i
@@ -11769,7 +11767,7 @@ commands/specialforces.i: commands/specialforces.cpp.i
 
 # target to preprocess a source file
 commands/specialforces.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/specialforces.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/specialforces.cpp.i
 .PHONY : commands/specialforces.cpp.i
 
 commands/specialforces.s: commands/specialforces.cpp.s
@@ -11778,7 +11776,7 @@ commands/specialforces.s: commands/specialforces.cpp.s
 
 # target to generate assembly for a file
 commands/specialforces.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/specialforces.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/specialforces.cpp.s
 .PHONY : commands/specialforces.cpp.s
 
 commands/speeders.o: commands/speeders.cpp.o
@@ -11787,7 +11785,7 @@ commands/speeders.o: commands/speeders.cpp.o
 
 # target to build an object file
 commands/speeders.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/speeders.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/speeders.cpp.o
 .PHONY : commands/speeders.cpp.o
 
 commands/speeders.i: commands/speeders.cpp.i
@@ -11796,7 +11794,7 @@ commands/speeders.i: commands/speeders.cpp.i
 
 # target to preprocess a source file
 commands/speeders.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/speeders.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/speeders.cpp.i
 .PHONY : commands/speeders.cpp.i
 
 commands/speeders.s: commands/speeders.cpp.s
@@ -11805,7 +11803,7 @@ commands/speeders.s: commands/speeders.cpp.s
 
 # target to generate assembly for a file
 commands/speeders.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/speeders.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/speeders.cpp.s
 .PHONY : commands/speeders.cpp.s
 
 commands/split.o: commands/split.cpp.o
@@ -11814,7 +11812,7 @@ commands/split.o: commands/split.cpp.o
 
 # target to build an object file
 commands/split.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/split.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/split.cpp.o
 .PHONY : commands/split.cpp.o
 
 commands/split.i: commands/split.cpp.i
@@ -11823,7 +11821,7 @@ commands/split.i: commands/split.cpp.i
 
 # target to preprocess a source file
 commands/split.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/split.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/split.cpp.i
 .PHONY : commands/split.cpp.i
 
 commands/split.s: commands/split.cpp.s
@@ -11832,7 +11830,7 @@ commands/split.s: commands/split.cpp.s
 
 # target to generate assembly for a file
 commands/split.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/split.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/split.cpp.s
 .PHONY : commands/split.cpp.s
 
 commands/sset.o: commands/sset.cpp.o
@@ -11841,7 +11839,7 @@ commands/sset.o: commands/sset.cpp.o
 
 # target to build an object file
 commands/sset.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sset.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sset.cpp.o
 .PHONY : commands/sset.cpp.o
 
 commands/sset.i: commands/sset.cpp.i
@@ -11850,7 +11848,7 @@ commands/sset.i: commands/sset.cpp.i
 
 # target to preprocess a source file
 commands/sset.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sset.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sset.cpp.i
 .PHONY : commands/sset.cpp.i
 
 commands/sset.s: commands/sset.cpp.s
@@ -11859,7 +11857,7 @@ commands/sset.s: commands/sset.cpp.s
 
 # target to generate assembly for a file
 commands/sset.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/sset.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/sset.cpp.s
 .PHONY : commands/sset.cpp.s
 
 commands/stand.o: commands/stand.cpp.o
@@ -11868,7 +11866,7 @@ commands/stand.o: commands/stand.cpp.o
 
 # target to build an object file
 commands/stand.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/stand.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/stand.cpp.o
 .PHONY : commands/stand.cpp.o
 
 commands/stand.i: commands/stand.cpp.i
@@ -11877,7 +11875,7 @@ commands/stand.i: commands/stand.cpp.i
 
 # target to preprocess a source file
 commands/stand.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/stand.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/stand.cpp.i
 .PHONY : commands/stand.cpp.i
 
 commands/stand.s: commands/stand.cpp.s
@@ -11886,7 +11884,7 @@ commands/stand.s: commands/stand.cpp.s
 
 # target to generate assembly for a file
 commands/stand.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/stand.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/stand.cpp.s
 .PHONY : commands/stand.cpp.s
 
 commands/status.o: commands/status.cpp.o
@@ -11895,7 +11893,7 @@ commands/status.o: commands/status.cpp.o
 
 # target to build an object file
 commands/status.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/status.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/status.cpp.o
 .PHONY : commands/status.cpp.o
 
 commands/status.i: commands/status.cpp.i
@@ -11904,7 +11902,7 @@ commands/status.i: commands/status.cpp.i
 
 # target to preprocess a source file
 commands/status.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/status.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/status.cpp.i
 .PHONY : commands/status.cpp.i
 
 commands/status.s: commands/status.cpp.s
@@ -11913,7 +11911,7 @@ commands/status.s: commands/status.cpp.s
 
 # target to generate assembly for a file
 commands/status.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/status.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/status.cpp.s
 .PHONY : commands/status.cpp.s
 
 commands/steal.o: commands/steal.cpp.o
@@ -11922,7 +11920,7 @@ commands/steal.o: commands/steal.cpp.o
 
 # target to build an object file
 commands/steal.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/steal.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/steal.cpp.o
 .PHONY : commands/steal.cpp.o
 
 commands/steal.i: commands/steal.cpp.i
@@ -11931,7 +11929,7 @@ commands/steal.i: commands/steal.cpp.i
 
 # target to preprocess a source file
 commands/steal.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/steal.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/steal.cpp.i
 .PHONY : commands/steal.cpp.i
 
 commands/steal.s: commands/steal.cpp.s
@@ -11940,7 +11938,7 @@ commands/steal.s: commands/steal.cpp.s
 
 # target to generate assembly for a file
 commands/steal.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/steal.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/steal.cpp.s
 .PHONY : commands/steal.cpp.s
 
 commands/study.o: commands/study.cpp.o
@@ -11949,7 +11947,7 @@ commands/study.o: commands/study.cpp.o
 
 # target to build an object file
 commands/study.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/study.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/study.cpp.o
 .PHONY : commands/study.cpp.o
 
 commands/study.i: commands/study.cpp.i
@@ -11958,7 +11956,7 @@ commands/study.i: commands/study.cpp.i
 
 # target to preprocess a source file
 commands/study.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/study.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/study.cpp.i
 .PHONY : commands/study.cpp.i
 
 commands/study.s: commands/study.cpp.s
@@ -11967,7 +11965,7 @@ commands/study.s: commands/study.cpp.s
 
 # target to generate assembly for a file
 commands/study.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/study.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/study.cpp.s
 .PHONY : commands/study.cpp.s
 
 commands/stun.o: commands/stun.cpp.o
@@ -11976,7 +11974,7 @@ commands/stun.o: commands/stun.cpp.o
 
 # target to build an object file
 commands/stun.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/stun.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/stun.cpp.o
 .PHONY : commands/stun.cpp.o
 
 commands/stun.i: commands/stun.cpp.i
@@ -11985,7 +11983,7 @@ commands/stun.i: commands/stun.cpp.i
 
 # target to preprocess a source file
 commands/stun.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/stun.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/stun.cpp.i
 .PHONY : commands/stun.cpp.i
 
 commands/stun.s: commands/stun.cpp.s
@@ -11994,7 +11992,7 @@ commands/stun.s: commands/stun.cpp.s
 
 # target to generate assembly for a file
 commands/stun.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/stun.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/stun.cpp.s
 .PHONY : commands/stun.cpp.s
 
 commands/suicide.o: commands/suicide.cpp.o
@@ -12003,7 +12001,7 @@ commands/suicide.o: commands/suicide.cpp.o
 
 # target to build an object file
 commands/suicide.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/suicide.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/suicide.cpp.o
 .PHONY : commands/suicide.cpp.o
 
 commands/suicide.i: commands/suicide.cpp.i
@@ -12012,7 +12010,7 @@ commands/suicide.i: commands/suicide.cpp.i
 
 # target to preprocess a source file
 commands/suicide.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/suicide.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/suicide.cpp.i
 .PHONY : commands/suicide.cpp.i
 
 commands/suicide.s: commands/suicide.cpp.s
@@ -12021,7 +12019,7 @@ commands/suicide.s: commands/suicide.cpp.s
 
 # target to generate assembly for a file
 commands/suicide.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/suicide.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/suicide.cpp.s
 .PHONY : commands/suicide.cpp.s
 
 commands/switch.o: commands/switch.cpp.o
@@ -12030,7 +12028,7 @@ commands/switch.o: commands/switch.cpp.o
 
 # target to build an object file
 commands/switch.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/switch.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/switch.cpp.o
 .PHONY : commands/switch.cpp.o
 
 commands/switch.i: commands/switch.cpp.i
@@ -12039,7 +12037,7 @@ commands/switch.i: commands/switch.cpp.i
 
 # target to preprocess a source file
 commands/switch.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/switch.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/switch.cpp.i
 .PHONY : commands/switch.cpp.i
 
 commands/switch.s: commands/switch.cpp.s
@@ -12048,7 +12046,7 @@ commands/switch.s: commands/switch.cpp.s
 
 # target to generate assembly for a file
 commands/switch.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/switch.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/switch.cpp.s
 .PHONY : commands/switch.cpp.s
 
 commands/systemtalk.o: commands/systemtalk.cpp.o
@@ -12057,7 +12055,7 @@ commands/systemtalk.o: commands/systemtalk.cpp.o
 
 # target to build an object file
 commands/systemtalk.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/systemtalk.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/systemtalk.cpp.o
 .PHONY : commands/systemtalk.cpp.o
 
 commands/systemtalk.i: commands/systemtalk.cpp.i
@@ -12066,7 +12064,7 @@ commands/systemtalk.i: commands/systemtalk.cpp.i
 
 # target to preprocess a source file
 commands/systemtalk.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/systemtalk.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/systemtalk.cpp.i
 .PHONY : commands/systemtalk.cpp.i
 
 commands/systemtalk.s: commands/systemtalk.cpp.s
@@ -12075,7 +12073,7 @@ commands/systemtalk.s: commands/systemtalk.cpp.s
 
 # target to generate assembly for a file
 commands/systemtalk.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/systemtalk.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/systemtalk.cpp.s
 .PHONY : commands/systemtalk.cpp.s
 
 commands/takedrug.o: commands/takedrug.cpp.o
@@ -12084,7 +12082,7 @@ commands/takedrug.o: commands/takedrug.cpp.o
 
 # target to build an object file
 commands/takedrug.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/takedrug.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/takedrug.cpp.o
 .PHONY : commands/takedrug.cpp.o
 
 commands/takedrug.i: commands/takedrug.cpp.i
@@ -12093,7 +12091,7 @@ commands/takedrug.i: commands/takedrug.cpp.i
 
 # target to preprocess a source file
 commands/takedrug.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/takedrug.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/takedrug.cpp.i
 .PHONY : commands/takedrug.cpp.i
 
 commands/takedrug.s: commands/takedrug.cpp.s
@@ -12102,7 +12100,7 @@ commands/takedrug.s: commands/takedrug.cpp.s
 
 # target to generate assembly for a file
 commands/takedrug.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/takedrug.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/takedrug.cpp.s
 .PHONY : commands/takedrug.cpp.s
 
 commands/tamp.o: commands/tamp.cpp.o
@@ -12111,7 +12109,7 @@ commands/tamp.o: commands/tamp.cpp.o
 
 # target to build an object file
 commands/tamp.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/tamp.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/tamp.cpp.o
 .PHONY : commands/tamp.cpp.o
 
 commands/tamp.i: commands/tamp.cpp.i
@@ -12120,7 +12118,7 @@ commands/tamp.i: commands/tamp.cpp.i
 
 # target to preprocess a source file
 commands/tamp.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/tamp.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/tamp.cpp.i
 .PHONY : commands/tamp.cpp.i
 
 commands/tamp.s: commands/tamp.cpp.s
@@ -12129,7 +12127,7 @@ commands/tamp.s: commands/tamp.cpp.s
 
 # target to generate assembly for a file
 commands/tamp.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/tamp.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/tamp.cpp.s
 .PHONY : commands/tamp.cpp.s
 
 commands/target.o: commands/target.cpp.o
@@ -12138,7 +12136,7 @@ commands/target.o: commands/target.cpp.o
 
 # target to build an object file
 commands/target.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/target.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/target.cpp.o
 .PHONY : commands/target.cpp.o
 
 commands/target.i: commands/target.cpp.i
@@ -12147,7 +12145,7 @@ commands/target.i: commands/target.cpp.i
 
 # target to preprocess a source file
 commands/target.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/target.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/target.cpp.i
 .PHONY : commands/target.cpp.i
 
 commands/target.s: commands/target.cpp.s
@@ -12156,7 +12154,7 @@ commands/target.s: commands/target.cpp.s
 
 # target to generate assembly for a file
 commands/target.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/target.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/target.cpp.s
 .PHONY : commands/target.cpp.s
 
 commands/teach.o: commands/teach.cpp.o
@@ -12165,7 +12163,7 @@ commands/teach.o: commands/teach.cpp.o
 
 # target to build an object file
 commands/teach.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/teach.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/teach.cpp.o
 .PHONY : commands/teach.cpp.o
 
 commands/teach.i: commands/teach.cpp.i
@@ -12174,7 +12172,7 @@ commands/teach.i: commands/teach.cpp.i
 
 # target to preprocess a source file
 commands/teach.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/teach.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/teach.cpp.i
 .PHONY : commands/teach.cpp.i
 
 commands/teach.s: commands/teach.cpp.s
@@ -12183,7 +12181,7 @@ commands/teach.s: commands/teach.cpp.s
 
 # target to generate assembly for a file
 commands/teach.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/teach.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/teach.cpp.s
 .PHONY : commands/teach.cpp.s
 
 commands/tell.o: commands/tell.cpp.o
@@ -12192,7 +12190,7 @@ commands/tell.o: commands/tell.cpp.o
 
 # target to build an object file
 commands/tell.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/tell.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/tell.cpp.o
 .PHONY : commands/tell.cpp.o
 
 commands/tell.i: commands/tell.cpp.i
@@ -12201,7 +12199,7 @@ commands/tell.i: commands/tell.cpp.i
 
 # target to preprocess a source file
 commands/tell.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/tell.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/tell.cpp.i
 .PHONY : commands/tell.cpp.i
 
 commands/tell.s: commands/tell.cpp.s
@@ -12210,7 +12208,7 @@ commands/tell.s: commands/tell.cpp.s
 
 # target to generate assembly for a file
 commands/tell.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/tell.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/tell.cpp.s
 .PHONY : commands/tell.cpp.s
 
 commands/test.o: commands/test.cpp.o
@@ -12219,7 +12217,7 @@ commands/test.o: commands/test.cpp.o
 
 # target to build an object file
 commands/test.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/test.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/test.cpp.o
 .PHONY : commands/test.cpp.o
 
 commands/test.i: commands/test.cpp.i
@@ -12228,7 +12226,7 @@ commands/test.i: commands/test.cpp.i
 
 # target to preprocess a source file
 commands/test.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/test.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/test.cpp.i
 .PHONY : commands/test.cpp.i
 
 commands/test.s: commands/test.cpp.s
@@ -12237,7 +12235,7 @@ commands/test.s: commands/test.cpp.s
 
 # target to generate assembly for a file
 commands/test.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/test.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/test.cpp.s
 .PHONY : commands/test.cpp.s
 
 commands/throw.o: commands/throw.cpp.o
@@ -12246,7 +12244,7 @@ commands/throw.o: commands/throw.cpp.o
 
 # target to build an object file
 commands/throw.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/throw.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/throw.cpp.o
 .PHONY : commands/throw.cpp.o
 
 commands/throw.i: commands/throw.cpp.i
@@ -12255,7 +12253,7 @@ commands/throw.i: commands/throw.cpp.i
 
 # target to preprocess a source file
 commands/throw.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/throw.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/throw.cpp.i
 .PHONY : commands/throw.cpp.i
 
 commands/throw.s: commands/throw.cpp.s
@@ -12264,7 +12262,7 @@ commands/throw.s: commands/throw.cpp.s
 
 # target to generate assembly for a file
 commands/throw.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/throw.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/throw.cpp.s
 .PHONY : commands/throw.cpp.s
 
 commands/time.o: commands/time.cpp.o
@@ -12273,7 +12271,7 @@ commands/time.o: commands/time.cpp.o
 
 # target to build an object file
 commands/time.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/time.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/time.cpp.o
 .PHONY : commands/time.cpp.o
 
 commands/time.i: commands/time.cpp.i
@@ -12282,7 +12280,7 @@ commands/time.i: commands/time.cpp.i
 
 # target to preprocess a source file
 commands/time.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/time.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/time.cpp.i
 .PHONY : commands/time.cpp.i
 
 commands/time.s: commands/time.cpp.s
@@ -12291,7 +12289,7 @@ commands/time.s: commands/time.cpp.s
 
 # target to generate assembly for a file
 commands/time.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/time.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/time.cpp.s
 .PHONY : commands/time.cpp.s
 
 commands/timecmd.o: commands/timecmd.cpp.o
@@ -12300,7 +12298,7 @@ commands/timecmd.o: commands/timecmd.cpp.o
 
 # target to build an object file
 commands/timecmd.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/timecmd.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/timecmd.cpp.o
 .PHONY : commands/timecmd.cpp.o
 
 commands/timecmd.i: commands/timecmd.cpp.i
@@ -12309,7 +12307,7 @@ commands/timecmd.i: commands/timecmd.cpp.i
 
 # target to preprocess a source file
 commands/timecmd.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/timecmd.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/timecmd.cpp.i
 .PHONY : commands/timecmd.cpp.i
 
 commands/timecmd.s: commands/timecmd.cpp.s
@@ -12318,7 +12316,7 @@ commands/timecmd.s: commands/timecmd.cpp.s
 
 # target to generate assembly for a file
 commands/timecmd.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/timecmd.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/timecmd.cpp.s
 .PHONY : commands/timecmd.cpp.s
 
 commands/title.o: commands/title.cpp.o
@@ -12327,7 +12325,7 @@ commands/title.o: commands/title.cpp.o
 
 # target to build an object file
 commands/title.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/title.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/title.cpp.o
 .PHONY : commands/title.cpp.o
 
 commands/title.i: commands/title.cpp.i
@@ -12336,7 +12334,7 @@ commands/title.i: commands/title.cpp.i
 
 # target to preprocess a source file
 commands/title.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/title.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/title.cpp.i
 .PHONY : commands/title.cpp.i
 
 commands/title.s: commands/title.cpp.s
@@ -12345,7 +12343,7 @@ commands/title.s: commands/title.cpp.s
 
 # target to generate assembly for a file
 commands/title.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/title.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/title.cpp.s
 .PHONY : commands/title.cpp.s
 
 commands/toplevel.o: commands/toplevel.cpp.o
@@ -12354,7 +12352,7 @@ commands/toplevel.o: commands/toplevel.cpp.o
 
 # target to build an object file
 commands/toplevel.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/toplevel.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/toplevel.cpp.o
 .PHONY : commands/toplevel.cpp.o
 
 commands/toplevel.i: commands/toplevel.cpp.i
@@ -12363,7 +12361,7 @@ commands/toplevel.i: commands/toplevel.cpp.i
 
 # target to preprocess a source file
 commands/toplevel.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/toplevel.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/toplevel.cpp.i
 .PHONY : commands/toplevel.cpp.i
 
 commands/toplevel.s: commands/toplevel.cpp.s
@@ -12372,7 +12370,7 @@ commands/toplevel.s: commands/toplevel.cpp.s
 
 # target to generate assembly for a file
 commands/toplevel.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/toplevel.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/toplevel.cpp.s
 .PHONY : commands/toplevel.cpp.s
 
 commands/torture.o: commands/torture.cpp.o
@@ -12381,7 +12379,7 @@ commands/torture.o: commands/torture.cpp.o
 
 # target to build an object file
 commands/torture.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/torture.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/torture.cpp.o
 .PHONY : commands/torture.cpp.o
 
 commands/torture.i: commands/torture.cpp.i
@@ -12390,7 +12388,7 @@ commands/torture.i: commands/torture.cpp.i
 
 # target to preprocess a source file
 commands/torture.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/torture.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/torture.cpp.i
 .PHONY : commands/torture.cpp.i
 
 commands/torture.s: commands/torture.cpp.s
@@ -12399,7 +12397,7 @@ commands/torture.s: commands/torture.cpp.s
 
 # target to generate assembly for a file
 commands/torture.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/torture.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/torture.cpp.s
 .PHONY : commands/torture.cpp.s
 
 commands/track.o: commands/track.cpp.o
@@ -12408,7 +12406,7 @@ commands/track.o: commands/track.cpp.o
 
 # target to build an object file
 commands/track.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/track.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/track.cpp.o
 .PHONY : commands/track.cpp.o
 
 commands/track.i: commands/track.cpp.i
@@ -12417,7 +12415,7 @@ commands/track.i: commands/track.cpp.i
 
 # target to preprocess a source file
 commands/track.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/track.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/track.cpp.i
 .PHONY : commands/track.cpp.i
 
 commands/track.s: commands/track.cpp.s
@@ -12426,7 +12424,7 @@ commands/track.s: commands/track.cpp.s
 
 # target to generate assembly for a file
 commands/track.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/track.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/track.cpp.s
 .PHONY : commands/track.cpp.s
 
 commands/tractorbeam.o: commands/tractorbeam.cpp.o
@@ -12435,7 +12433,7 @@ commands/tractorbeam.o: commands/tractorbeam.cpp.o
 
 # target to build an object file
 commands/tractorbeam.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/tractorbeam.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/tractorbeam.cpp.o
 .PHONY : commands/tractorbeam.cpp.o
 
 commands/tractorbeam.i: commands/tractorbeam.cpp.i
@@ -12444,7 +12442,7 @@ commands/tractorbeam.i: commands/tractorbeam.cpp.i
 
 # target to preprocess a source file
 commands/tractorbeam.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/tractorbeam.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/tractorbeam.cpp.i
 .PHONY : commands/tractorbeam.cpp.i
 
 commands/tractorbeam.s: commands/tractorbeam.cpp.s
@@ -12453,7 +12451,7 @@ commands/tractorbeam.s: commands/tractorbeam.cpp.s
 
 # target to generate assembly for a file
 commands/tractorbeam.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/tractorbeam.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/tractorbeam.cpp.s
 .PHONY : commands/tractorbeam.cpp.s
 
 commands/train.o: commands/train.cpp.o
@@ -12462,7 +12460,7 @@ commands/train.o: commands/train.cpp.o
 
 # target to build an object file
 commands/train.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/train.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/train.cpp.o
 .PHONY : commands/train.cpp.o
 
 commands/train.i: commands/train.cpp.i
@@ -12471,7 +12469,7 @@ commands/train.i: commands/train.cpp.i
 
 # target to preprocess a source file
 commands/train.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/train.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/train.cpp.i
 .PHONY : commands/train.cpp.i
 
 commands/train.s: commands/train.cpp.s
@@ -12480,7 +12478,7 @@ commands/train.s: commands/train.cpp.s
 
 # target to generate assembly for a file
 commands/train.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/train.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/train.cpp.s
 .PHONY : commands/train.cpp.s
 
 commands/trajectory.o: commands/trajectory.cpp.o
@@ -12489,7 +12487,7 @@ commands/trajectory.o: commands/trajectory.cpp.o
 
 # target to build an object file
 commands/trajectory.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/trajectory.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/trajectory.cpp.o
 .PHONY : commands/trajectory.cpp.o
 
 commands/trajectory.i: commands/trajectory.cpp.i
@@ -12498,7 +12496,7 @@ commands/trajectory.i: commands/trajectory.cpp.i
 
 # target to preprocess a source file
 commands/trajectory.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/trajectory.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/trajectory.cpp.i
 .PHONY : commands/trajectory.cpp.i
 
 commands/trajectory.s: commands/trajectory.cpp.s
@@ -12507,7 +12505,7 @@ commands/trajectory.s: commands/trajectory.cpp.s
 
 # target to generate assembly for a file
 commands/trajectory.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/trajectory.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/trajectory.cpp.s
 .PHONY : commands/trajectory.cpp.s
 
 commands/trajectoryactual.o: commands/trajectoryactual.cpp.o
@@ -12516,7 +12514,7 @@ commands/trajectoryactual.o: commands/trajectoryactual.cpp.o
 
 # target to build an object file
 commands/trajectoryactual.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/trajectoryactual.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/trajectoryactual.cpp.o
 .PHONY : commands/trajectoryactual.cpp.o
 
 commands/trajectoryactual.i: commands/trajectoryactual.cpp.i
@@ -12525,7 +12523,7 @@ commands/trajectoryactual.i: commands/trajectoryactual.cpp.i
 
 # target to preprocess a source file
 commands/trajectoryactual.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/trajectoryactual.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/trajectoryactual.cpp.i
 .PHONY : commands/trajectoryactual.cpp.i
 
 commands/trajectoryactual.s: commands/trajectoryactual.cpp.s
@@ -12534,7 +12532,7 @@ commands/trajectoryactual.s: commands/trajectoryactual.cpp.s
 
 # target to generate assembly for a file
 commands/trajectoryactual.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/trajectoryactual.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/trajectoryactual.cpp.s
 .PHONY : commands/trajectoryactual.cpp.s
 
 commands/transfer.o: commands/transfer.cpp.o
@@ -12543,7 +12541,7 @@ commands/transfer.o: commands/transfer.cpp.o
 
 # target to build an object file
 commands/transfer.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/transfer.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/transfer.cpp.o
 .PHONY : commands/transfer.cpp.o
 
 commands/transfer.i: commands/transfer.cpp.i
@@ -12552,7 +12550,7 @@ commands/transfer.i: commands/transfer.cpp.i
 
 # target to preprocess a source file
 commands/transfer.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/transfer.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/transfer.cpp.i
 .PHONY : commands/transfer.cpp.i
 
 commands/transfer.s: commands/transfer.cpp.s
@@ -12561,7 +12559,7 @@ commands/transfer.s: commands/transfer.cpp.s
 
 # target to generate assembly for a file
 commands/transfer.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/transfer.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/transfer.cpp.s
 .PHONY : commands/transfer.cpp.s
 
 commands/transship.o: commands/transship.cpp.o
@@ -12570,7 +12568,7 @@ commands/transship.o: commands/transship.cpp.o
 
 # target to build an object file
 commands/transship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/transship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/transship.cpp.o
 .PHONY : commands/transship.cpp.o
 
 commands/transship.i: commands/transship.cpp.i
@@ -12579,7 +12577,7 @@ commands/transship.i: commands/transship.cpp.i
 
 # target to preprocess a source file
 commands/transship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/transship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/transship.cpp.i
 .PHONY : commands/transship.cpp.i
 
 commands/transship.s: commands/transship.cpp.s
@@ -12588,7 +12586,7 @@ commands/transship.s: commands/transship.cpp.s
 
 # target to generate assembly for a file
 commands/transship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/transship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/transship.cpp.s
 .PHONY : commands/transship.cpp.s
 
 commands/trust.o: commands/trust.cpp.o
@@ -12597,7 +12595,7 @@ commands/trust.o: commands/trust.cpp.o
 
 # target to build an object file
 commands/trust.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/trust.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/trust.cpp.o
 .PHONY : commands/trust.cpp.o
 
 commands/trust.i: commands/trust.cpp.i
@@ -12606,7 +12604,7 @@ commands/trust.i: commands/trust.cpp.i
 
 # target to preprocess a source file
 commands/trust.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/trust.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/trust.cpp.i
 .PHONY : commands/trust.cpp.i
 
 commands/trust.s: commands/trust.cpp.s
@@ -12615,7 +12613,7 @@ commands/trust.s: commands/trust.cpp.s
 
 # target to generate assembly for a file
 commands/trust.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/trust.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/trust.cpp.s
 .PHONY : commands/trust.cpp.s
 
 commands/typo.o: commands/typo.cpp.o
@@ -12624,7 +12622,7 @@ commands/typo.o: commands/typo.cpp.o
 
 # target to build an object file
 commands/typo.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/typo.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/typo.cpp.o
 .PHONY : commands/typo.cpp.o
 
 commands/typo.i: commands/typo.cpp.i
@@ -12633,7 +12631,7 @@ commands/typo.i: commands/typo.cpp.i
 
 # target to preprocess a source file
 commands/typo.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/typo.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/typo.cpp.i
 .PHONY : commands/typo.cpp.i
 
 commands/typo.s: commands/typo.cpp.s
@@ -12642,7 +12640,7 @@ commands/typo.s: commands/typo.cpp.s
 
 # target to generate assembly for a file
 commands/typo.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/typo.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/typo.cpp.s
 .PHONY : commands/typo.cpp.s
 
 commands/undock.o: commands/undock.cpp.o
@@ -12651,7 +12649,7 @@ commands/undock.o: commands/undock.cpp.o
 
 # target to build an object file
 commands/undock.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/undock.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/undock.cpp.o
 .PHONY : commands/undock.cpp.o
 
 commands/undock.i: commands/undock.cpp.i
@@ -12660,7 +12658,7 @@ commands/undock.i: commands/undock.cpp.i
 
 # target to preprocess a source file
 commands/undock.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/undock.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/undock.cpp.i
 .PHONY : commands/undock.cpp.i
 
 commands/undock.s: commands/undock.cpp.s
@@ -12669,7 +12667,7 @@ commands/undock.s: commands/undock.cpp.s
 
 # target to generate assembly for a file
 commands/undock.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/undock.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/undock.cpp.s
 .PHONY : commands/undock.cpp.s
 
 commands/unfocusalias.o: commands/unfocusalias.cpp.o
@@ -12678,7 +12676,7 @@ commands/unfocusalias.o: commands/unfocusalias.cpp.o
 
 # target to build an object file
 commands/unfocusalias.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unfocusalias.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unfocusalias.cpp.o
 .PHONY : commands/unfocusalias.cpp.o
 
 commands/unfocusalias.i: commands/unfocusalias.cpp.i
@@ -12687,7 +12685,7 @@ commands/unfocusalias.i: commands/unfocusalias.cpp.i
 
 # target to preprocess a source file
 commands/unfocusalias.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unfocusalias.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unfocusalias.cpp.i
 .PHONY : commands/unfocusalias.cpp.i
 
 commands/unfocusalias.s: commands/unfocusalias.cpp.s
@@ -12696,7 +12694,7 @@ commands/unfocusalias.s: commands/unfocusalias.cpp.s
 
 # target to generate assembly for a file
 commands/unfocusalias.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unfocusalias.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unfocusalias.cpp.s
 .PHONY : commands/unfocusalias.cpp.s
 
 commands/unfoldarea.o: commands/unfoldarea.cpp.o
@@ -12705,7 +12703,7 @@ commands/unfoldarea.o: commands/unfoldarea.cpp.o
 
 # target to build an object file
 commands/unfoldarea.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unfoldarea.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unfoldarea.cpp.o
 .PHONY : commands/unfoldarea.cpp.o
 
 commands/unfoldarea.i: commands/unfoldarea.cpp.i
@@ -12714,7 +12712,7 @@ commands/unfoldarea.i: commands/unfoldarea.cpp.i
 
 # target to preprocess a source file
 commands/unfoldarea.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unfoldarea.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unfoldarea.cpp.i
 .PHONY : commands/unfoldarea.cpp.i
 
 commands/unfoldarea.s: commands/unfoldarea.cpp.s
@@ -12723,7 +12721,7 @@ commands/unfoldarea.s: commands/unfoldarea.cpp.s
 
 # target to generate assembly for a file
 commands/unfoldarea.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unfoldarea.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unfoldarea.cpp.s
 .PHONY : commands/unfoldarea.cpp.s
 
 commands/unhell.o: commands/unhell.cpp.o
@@ -12732,7 +12730,7 @@ commands/unhell.o: commands/unhell.cpp.o
 
 # target to build an object file
 commands/unhell.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unhell.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unhell.cpp.o
 .PHONY : commands/unhell.cpp.o
 
 commands/unhell.i: commands/unhell.cpp.i
@@ -12741,7 +12739,7 @@ commands/unhell.i: commands/unhell.cpp.i
 
 # target to preprocess a source file
 commands/unhell.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unhell.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unhell.cpp.i
 .PHONY : commands/unhell.cpp.i
 
 commands/unhell.s: commands/unhell.cpp.s
@@ -12750,7 +12748,7 @@ commands/unhell.s: commands/unhell.cpp.s
 
 # target to generate assembly for a file
 commands/unhell.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unhell.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unhell.cpp.s
 .PHONY : commands/unhell.cpp.s
 
 commands/unjail.o: commands/unjail.cpp.o
@@ -12759,7 +12757,7 @@ commands/unjail.o: commands/unjail.cpp.o
 
 # target to build an object file
 commands/unjail.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unjail.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unjail.cpp.o
 .PHONY : commands/unjail.cpp.o
 
 commands/unjail.i: commands/unjail.cpp.i
@@ -12768,7 +12766,7 @@ commands/unjail.i: commands/unjail.cpp.i
 
 # target to preprocess a source file
 commands/unjail.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unjail.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unjail.cpp.i
 .PHONY : commands/unjail.cpp.i
 
 commands/unjail.s: commands/unjail.cpp.s
@@ -12777,7 +12775,7 @@ commands/unjail.s: commands/unjail.cpp.s
 
 # target to generate assembly for a file
 commands/unjail.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unjail.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unjail.cpp.s
 .PHONY : commands/unjail.cpp.s
 
 commands/unlock.o: commands/unlock.cpp.o
@@ -12786,7 +12784,7 @@ commands/unlock.o: commands/unlock.cpp.o
 
 # target to build an object file
 commands/unlock.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unlock.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unlock.cpp.o
 .PHONY : commands/unlock.cpp.o
 
 commands/unlock.i: commands/unlock.cpp.i
@@ -12795,7 +12793,7 @@ commands/unlock.i: commands/unlock.cpp.i
 
 # target to preprocess a source file
 commands/unlock.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unlock.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unlock.cpp.i
 .PHONY : commands/unlock.cpp.i
 
 commands/unlock.s: commands/unlock.cpp.s
@@ -12804,7 +12802,7 @@ commands/unlock.s: commands/unlock.cpp.s
 
 # target to generate assembly for a file
 commands/unlock.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unlock.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unlock.cpp.s
 .PHONY : commands/unlock.cpp.s
 
 commands/unsilence.o: commands/unsilence.cpp.o
@@ -12813,7 +12811,7 @@ commands/unsilence.o: commands/unsilence.cpp.o
 
 # target to build an object file
 commands/unsilence.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unsilence.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unsilence.cpp.o
 .PHONY : commands/unsilence.cpp.o
 
 commands/unsilence.i: commands/unsilence.cpp.i
@@ -12822,7 +12820,7 @@ commands/unsilence.i: commands/unsilence.cpp.i
 
 # target to preprocess a source file
 commands/unsilence.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unsilence.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unsilence.cpp.i
 .PHONY : commands/unsilence.cpp.i
 
 commands/unsilence.s: commands/unsilence.cpp.s
@@ -12831,7 +12829,7 @@ commands/unsilence.s: commands/unsilence.cpp.s
 
 # target to generate assembly for a file
 commands/unsilence.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/unsilence.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/unsilence.cpp.s
 .PHONY : commands/unsilence.cpp.s
 
 commands/up.o: commands/up.cpp.o
@@ -12840,7 +12838,7 @@ commands/up.o: commands/up.cpp.o
 
 # target to build an object file
 commands/up.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/up.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/up.cpp.o
 .PHONY : commands/up.cpp.o
 
 commands/up.i: commands/up.cpp.i
@@ -12849,7 +12847,7 @@ commands/up.i: commands/up.cpp.i
 
 # target to preprocess a source file
 commands/up.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/up.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/up.cpp.i
 .PHONY : commands/up.cpp.i
 
 commands/up.s: commands/up.cpp.s
@@ -12858,7 +12856,7 @@ commands/up.s: commands/up.cpp.s
 
 # target to generate assembly for a file
 commands/up.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/up.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/up.cpp.s
 .PHONY : commands/up.cpp.s
 
 commands/use.o: commands/use.cpp.o
@@ -12867,7 +12865,7 @@ commands/use.o: commands/use.cpp.o
 
 # target to build an object file
 commands/use.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/use.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/use.cpp.o
 .PHONY : commands/use.cpp.o
 
 commands/use.i: commands/use.cpp.i
@@ -12876,7 +12874,7 @@ commands/use.i: commands/use.cpp.i
 
 # target to preprocess a source file
 commands/use.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/use.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/use.cpp.i
 .PHONY : commands/use.cpp.i
 
 commands/use.s: commands/use.cpp.s
@@ -12885,7 +12883,7 @@ commands/use.s: commands/use.cpp.s
 
 # target to generate assembly for a file
 commands/use.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/use.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/use.cpp.s
 .PHONY : commands/use.cpp.s
 
 commands/users.o: commands/users.cpp.o
@@ -12894,7 +12892,7 @@ commands/users.o: commands/users.cpp.o
 
 # target to build an object file
 commands/users.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/users.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/users.cpp.o
 .PHONY : commands/users.cpp.o
 
 commands/users.i: commands/users.cpp.i
@@ -12903,7 +12901,7 @@ commands/users.i: commands/users.cpp.i
 
 # target to preprocess a source file
 commands/users.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/users.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/users.cpp.i
 .PHONY : commands/users.cpp.i
 
 commands/users.s: commands/users.cpp.s
@@ -12912,7 +12910,7 @@ commands/users.s: commands/users.cpp.s
 
 # target to generate assembly for a file
 commands/users.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/users.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/users.cpp.s
 .PHONY : commands/users.cpp.s
 
 commands/value.o: commands/value.cpp.o
@@ -12921,7 +12919,7 @@ commands/value.o: commands/value.cpp.o
 
 # target to build an object file
 commands/value.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/value.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/value.cpp.o
 .PHONY : commands/value.cpp.o
 
 commands/value.i: commands/value.cpp.i
@@ -12930,7 +12928,7 @@ commands/value.i: commands/value.cpp.i
 
 # target to preprocess a source file
 commands/value.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/value.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/value.cpp.i
 .PHONY : commands/value.cpp.i
 
 commands/value.s: commands/value.cpp.s
@@ -12939,7 +12937,7 @@ commands/value.s: commands/value.cpp.s
 
 # target to generate assembly for a file
 commands/value.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/value.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/value.cpp.s
 .PHONY : commands/value.cpp.s
 
 commands/vassign.o: commands/vassign.cpp.o
@@ -12948,7 +12946,7 @@ commands/vassign.o: commands/vassign.cpp.o
 
 # target to build an object file
 commands/vassign.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/vassign.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/vassign.cpp.o
 .PHONY : commands/vassign.cpp.o
 
 commands/vassign.i: commands/vassign.cpp.i
@@ -12957,7 +12955,7 @@ commands/vassign.i: commands/vassign.cpp.i
 
 # target to preprocess a source file
 commands/vassign.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/vassign.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/vassign.cpp.i
 .PHONY : commands/vassign.cpp.i
 
 commands/vassign.s: commands/vassign.cpp.s
@@ -12966,7 +12964,7 @@ commands/vassign.s: commands/vassign.cpp.s
 
 # target to generate assembly for a file
 commands/vassign.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/vassign.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/vassign.cpp.s
 .PHONY : commands/vassign.cpp.s
 
 commands/viewskills.o: commands/viewskills.cpp.o
@@ -12975,7 +12973,7 @@ commands/viewskills.o: commands/viewskills.cpp.o
 
 # target to build an object file
 commands/viewskills.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/viewskills.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/viewskills.cpp.o
 .PHONY : commands/viewskills.cpp.o
 
 commands/viewskills.i: commands/viewskills.cpp.i
@@ -12984,7 +12982,7 @@ commands/viewskills.i: commands/viewskills.cpp.i
 
 # target to preprocess a source file
 commands/viewskills.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/viewskills.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/viewskills.cpp.i
 .PHONY : commands/viewskills.cpp.i
 
 commands/viewskills.s: commands/viewskills.cpp.s
@@ -12993,7 +12991,7 @@ commands/viewskills.s: commands/viewskills.cpp.s
 
 # target to generate assembly for a file
 commands/viewskills.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/viewskills.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/viewskills.cpp.s
 .PHONY : commands/viewskills.cpp.s
 
 commands/visible.o: commands/visible.cpp.o
@@ -13002,7 +13000,7 @@ commands/visible.o: commands/visible.cpp.o
 
 # target to build an object file
 commands/visible.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/visible.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/visible.cpp.o
 .PHONY : commands/visible.cpp.o
 
 commands/visible.i: commands/visible.cpp.i
@@ -13011,7 +13009,7 @@ commands/visible.i: commands/visible.cpp.i
 
 # target to preprocess a source file
 commands/visible.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/visible.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/visible.cpp.i
 .PHONY : commands/visible.cpp.i
 
 commands/visible.s: commands/visible.cpp.s
@@ -13020,7 +13018,7 @@ commands/visible.s: commands/visible.cpp.s
 
 # target to generate assembly for a file
 commands/visible.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/visible.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/visible.cpp.s
 .PHONY : commands/visible.cpp.s
 
 commands/vnums.o: commands/vnums.cpp.o
@@ -13029,7 +13027,7 @@ commands/vnums.o: commands/vnums.cpp.o
 
 # target to build an object file
 commands/vnums.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/vnums.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/vnums.cpp.o
 .PHONY : commands/vnums.cpp.o
 
 commands/vnums.i: commands/vnums.cpp.i
@@ -13038,7 +13036,7 @@ commands/vnums.i: commands/vnums.cpp.i
 
 # target to preprocess a source file
 commands/vnums.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/vnums.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/vnums.cpp.i
 .PHONY : commands/vnums.cpp.i
 
 commands/vnums.s: commands/vnums.cpp.s
@@ -13047,7 +13045,7 @@ commands/vnums.s: commands/vnums.cpp.s
 
 # target to generate assembly for a file
 commands/vnums.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/vnums.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/vnums.cpp.s
 .PHONY : commands/vnums.cpp.s
 
 commands/vsearch.o: commands/vsearch.cpp.o
@@ -13056,7 +13054,7 @@ commands/vsearch.o: commands/vsearch.cpp.o
 
 # target to build an object file
 commands/vsearch.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/vsearch.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/vsearch.cpp.o
 .PHONY : commands/vsearch.cpp.o
 
 commands/vsearch.i: commands/vsearch.cpp.i
@@ -13065,7 +13063,7 @@ commands/vsearch.i: commands/vsearch.cpp.i
 
 # target to preprocess a source file
 commands/vsearch.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/vsearch.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/vsearch.cpp.i
 .PHONY : commands/vsearch.cpp.i
 
 commands/vsearch.s: commands/vsearch.cpp.s
@@ -13074,7 +13072,7 @@ commands/vsearch.s: commands/vsearch.cpp.s
 
 # target to generate assembly for a file
 commands/vsearch.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/vsearch.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/vsearch.cpp.s
 .PHONY : commands/vsearch.cpp.s
 
 commands/wake.o: commands/wake.cpp.o
@@ -13083,7 +13081,7 @@ commands/wake.o: commands/wake.cpp.o
 
 # target to build an object file
 commands/wake.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wake.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wake.cpp.o
 .PHONY : commands/wake.cpp.o
 
 commands/wake.i: commands/wake.cpp.i
@@ -13092,7 +13090,7 @@ commands/wake.i: commands/wake.cpp.i
 
 # target to preprocess a source file
 commands/wake.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wake.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wake.cpp.i
 .PHONY : commands/wake.cpp.i
 
 commands/wake.s: commands/wake.cpp.s
@@ -13101,7 +13099,7 @@ commands/wake.s: commands/wake.cpp.s
 
 # target to generate assembly for a file
 commands/wake.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wake.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wake.cpp.s
 .PHONY : commands/wake.cpp.s
 
 commands/wartalk.o: commands/wartalk.cpp.o
@@ -13110,7 +13108,7 @@ commands/wartalk.o: commands/wartalk.cpp.o
 
 # target to build an object file
 commands/wartalk.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wartalk.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wartalk.cpp.o
 .PHONY : commands/wartalk.cpp.o
 
 commands/wartalk.i: commands/wartalk.cpp.i
@@ -13119,7 +13117,7 @@ commands/wartalk.i: commands/wartalk.cpp.i
 
 # target to preprocess a source file
 commands/wartalk.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wartalk.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wartalk.cpp.i
 .PHONY : commands/wartalk.cpp.i
 
 commands/wartalk.s: commands/wartalk.cpp.s
@@ -13128,7 +13126,7 @@ commands/wartalk.s: commands/wartalk.cpp.s
 
 # target to generate assembly for a file
 commands/wartalk.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wartalk.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wartalk.cpp.s
 .PHONY : commands/wartalk.cpp.s
 
 commands/wear.o: commands/wear.cpp.o
@@ -13137,7 +13135,7 @@ commands/wear.o: commands/wear.cpp.o
 
 # target to build an object file
 commands/wear.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wear.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wear.cpp.o
 .PHONY : commands/wear.cpp.o
 
 commands/wear.i: commands/wear.cpp.i
@@ -13146,7 +13144,7 @@ commands/wear.i: commands/wear.cpp.i
 
 # target to preprocess a source file
 commands/wear.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wear.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wear.cpp.i
 .PHONY : commands/wear.cpp.i
 
 commands/wear.s: commands/wear.cpp.s
@@ -13155,7 +13153,7 @@ commands/wear.s: commands/wear.cpp.s
 
 # target to generate assembly for a file
 commands/wear.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wear.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wear.cpp.s
 .PHONY : commands/wear.cpp.s
 
 commands/weather.o: commands/weather.cpp.o
@@ -13164,7 +13162,7 @@ commands/weather.o: commands/weather.cpp.o
 
 # target to build an object file
 commands/weather.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/weather.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/weather.cpp.o
 .PHONY : commands/weather.cpp.o
 
 commands/weather.i: commands/weather.cpp.i
@@ -13173,7 +13171,7 @@ commands/weather.i: commands/weather.cpp.i
 
 # target to preprocess a source file
 commands/weather.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/weather.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/weather.cpp.i
 .PHONY : commands/weather.cpp.i
 
 commands/weather.s: commands/weather.cpp.s
@@ -13182,7 +13180,7 @@ commands/weather.s: commands/weather.cpp.s
 
 # target to generate assembly for a file
 commands/weather.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/weather.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/weather.cpp.s
 .PHONY : commands/weather.cpp.s
 
 commands/west.o: commands/west.cpp.o
@@ -13191,7 +13189,7 @@ commands/west.o: commands/west.cpp.o
 
 # target to build an object file
 commands/west.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/west.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/west.cpp.o
 .PHONY : commands/west.cpp.o
 
 commands/west.i: commands/west.cpp.i
@@ -13200,7 +13198,7 @@ commands/west.i: commands/west.cpp.i
 
 # target to preprocess a source file
 commands/west.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/west.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/west.cpp.i
 .PHONY : commands/west.cpp.i
 
 commands/west.s: commands/west.cpp.s
@@ -13209,7 +13207,7 @@ commands/west.s: commands/west.cpp.s
 
 # target to generate assembly for a file
 commands/west.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/west.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/west.cpp.s
 .PHONY : commands/west.cpp.s
 
 commands/where.o: commands/where.cpp.o
@@ -13218,7 +13216,7 @@ commands/where.o: commands/where.cpp.o
 
 # target to build an object file
 commands/where.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/where.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/where.cpp.o
 .PHONY : commands/where.cpp.o
 
 commands/where.i: commands/where.cpp.i
@@ -13227,7 +13225,7 @@ commands/where.i: commands/where.cpp.i
 
 # target to preprocess a source file
 commands/where.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/where.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/where.cpp.i
 .PHONY : commands/where.cpp.i
 
 commands/where.s: commands/where.cpp.s
@@ -13236,7 +13234,7 @@ commands/where.s: commands/where.cpp.s
 
 # target to generate assembly for a file
 commands/where.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/where.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/where.cpp.s
 .PHONY : commands/where.cpp.s
 
 commands/who.o: commands/who.cpp.o
@@ -13245,7 +13243,7 @@ commands/who.o: commands/who.cpp.o
 
 # target to build an object file
 commands/who.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/who.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/who.cpp.o
 .PHONY : commands/who.cpp.o
 
 commands/who.i: commands/who.cpp.i
@@ -13254,7 +13252,7 @@ commands/who.i: commands/who.cpp.i
 
 # target to preprocess a source file
 commands/who.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/who.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/who.cpp.i
 .PHONY : commands/who.cpp.i
 
 commands/who.s: commands/who.cpp.s
@@ -13263,7 +13261,7 @@ commands/who.s: commands/who.cpp.s
 
 # target to generate assembly for a file
 commands/who.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/who.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/who.cpp.s
 .PHONY : commands/who.cpp.s
 
 commands/whois.o: commands/whois.cpp.o
@@ -13272,7 +13270,7 @@ commands/whois.o: commands/whois.cpp.o
 
 # target to build an object file
 commands/whois.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/whois.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/whois.cpp.o
 .PHONY : commands/whois.cpp.o
 
 commands/whois.i: commands/whois.cpp.i
@@ -13281,7 +13279,7 @@ commands/whois.i: commands/whois.cpp.i
 
 # target to preprocess a source file
 commands/whois.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/whois.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/whois.cpp.i
 .PHONY : commands/whois.cpp.i
 
 commands/whois.s: commands/whois.cpp.s
@@ -13290,7 +13288,7 @@ commands/whois.s: commands/whois.cpp.s
 
 # target to generate assembly for a file
 commands/whois.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/whois.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/whois.cpp.s
 .PHONY : commands/whois.cpp.s
 
 commands/wimpy.o: commands/wimpy.cpp.o
@@ -13299,7 +13297,7 @@ commands/wimpy.o: commands/wimpy.cpp.o
 
 # target to build an object file
 commands/wimpy.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wimpy.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wimpy.cpp.o
 .PHONY : commands/wimpy.cpp.o
 
 commands/wimpy.i: commands/wimpy.cpp.i
@@ -13308,7 +13306,7 @@ commands/wimpy.i: commands/wimpy.cpp.i
 
 # target to preprocess a source file
 commands/wimpy.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wimpy.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wimpy.cpp.i
 .PHONY : commands/wimpy.cpp.i
 
 commands/wimpy.s: commands/wimpy.cpp.s
@@ -13317,7 +13315,7 @@ commands/wimpy.s: commands/wimpy.cpp.s
 
 # target to generate assembly for a file
 commands/wimpy.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wimpy.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wimpy.cpp.s
 .PHONY : commands/wimpy.cpp.s
 
 commands/wizhelp.o: commands/wizhelp.cpp.o
@@ -13326,7 +13324,7 @@ commands/wizhelp.o: commands/wizhelp.cpp.o
 
 # target to build an object file
 commands/wizhelp.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wizhelp.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wizhelp.cpp.o
 .PHONY : commands/wizhelp.cpp.o
 
 commands/wizhelp.i: commands/wizhelp.cpp.i
@@ -13335,7 +13333,7 @@ commands/wizhelp.i: commands/wizhelp.cpp.i
 
 # target to preprocess a source file
 commands/wizhelp.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wizhelp.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wizhelp.cpp.i
 .PHONY : commands/wizhelp.cpp.i
 
 commands/wizhelp.s: commands/wizhelp.cpp.s
@@ -13344,7 +13342,7 @@ commands/wizhelp.s: commands/wizhelp.cpp.s
 
 # target to generate assembly for a file
 commands/wizhelp.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wizhelp.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wizhelp.cpp.s
 .PHONY : commands/wizhelp.cpp.s
 
 commands/wizlist.o: commands/wizlist.cpp.o
@@ -13353,7 +13351,7 @@ commands/wizlist.o: commands/wizlist.cpp.o
 
 # target to build an object file
 commands/wizlist.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wizlist.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wizlist.cpp.o
 .PHONY : commands/wizlist.cpp.o
 
 commands/wizlist.i: commands/wizlist.cpp.i
@@ -13362,7 +13360,7 @@ commands/wizlist.i: commands/wizlist.cpp.i
 
 # target to preprocess a source file
 commands/wizlist.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wizlist.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wizlist.cpp.i
 .PHONY : commands/wizlist.cpp.i
 
 commands/wizlist.s: commands/wizlist.cpp.s
@@ -13371,7 +13369,7 @@ commands/wizlist.s: commands/wizlist.cpp.s
 
 # target to generate assembly for a file
 commands/wizlist.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wizlist.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wizlist.cpp.s
 .PHONY : commands/wizlist.cpp.s
 
 commands/wizlock.o: commands/wizlock.cpp.o
@@ -13380,7 +13378,7 @@ commands/wizlock.o: commands/wizlock.cpp.o
 
 # target to build an object file
 commands/wizlock.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wizlock.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wizlock.cpp.o
 .PHONY : commands/wizlock.cpp.o
 
 commands/wizlock.i: commands/wizlock.cpp.i
@@ -13389,7 +13387,7 @@ commands/wizlock.i: commands/wizlock.cpp.i
 
 # target to preprocess a source file
 commands/wizlock.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wizlock.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wizlock.cpp.i
 .PHONY : commands/wizlock.cpp.i
 
 commands/wizlock.s: commands/wizlock.cpp.s
@@ -13398,7 +13396,7 @@ commands/wizlock.s: commands/wizlock.cpp.s
 
 # target to generate assembly for a file
 commands/wizlock.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/wizlock.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/wizlock.cpp.s
 .PHONY : commands/wizlock.cpp.s
 
 commands/yell.o: commands/yell.cpp.o
@@ -13407,7 +13405,7 @@ commands/yell.o: commands/yell.cpp.o
 
 # target to build an object file
 commands/yell.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/yell.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/yell.cpp.o
 .PHONY : commands/yell.cpp.o
 
 commands/yell.i: commands/yell.cpp.i
@@ -13416,7 +13414,7 @@ commands/yell.i: commands/yell.cpp.i
 
 # target to preprocess a source file
 commands/yell.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/yell.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/yell.cpp.i
 .PHONY : commands/yell.cpp.i
 
 commands/yell.s: commands/yell.cpp.s
@@ -13425,7 +13423,7 @@ commands/yell.s: commands/yell.cpp.s
 
 # target to generate assembly for a file
 commands/yell.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/yell.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/yell.cpp.s
 .PHONY : commands/yell.cpp.s
 
 commands/zap.o: commands/zap.cpp.o
@@ -13434,7 +13432,7 @@ commands/zap.o: commands/zap.cpp.o
 
 # target to build an object file
 commands/zap.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/zap.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/zap.cpp.o
 .PHONY : commands/zap.cpp.o
 
 commands/zap.i: commands/zap.cpp.i
@@ -13443,7 +13441,7 @@ commands/zap.i: commands/zap.cpp.i
 
 # target to preprocess a source file
 commands/zap.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/zap.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/zap.cpp.i
 .PHONY : commands/zap.cpp.i
 
 commands/zap.s: commands/zap.cpp.s
@@ -13452,7 +13450,7 @@ commands/zap.s: commands/zap.cpp.s
 
 # target to generate assembly for a file
 commands/zap.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/zap.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/zap.cpp.s
 .PHONY : commands/zap.cpp.s
 
 commands/zones.o: commands/zones.cpp.o
@@ -13461,7 +13459,7 @@ commands/zones.o: commands/zones.cpp.o
 
 # target to build an object file
 commands/zones.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/zones.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/zones.cpp.o
 .PHONY : commands/zones.cpp.o
 
 commands/zones.i: commands/zones.cpp.i
@@ -13470,7 +13468,7 @@ commands/zones.i: commands/zones.cpp.i
 
 # target to preprocess a source file
 commands/zones.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/zones.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/zones.cpp.i
 .PHONY : commands/zones.cpp.i
 
 commands/zones.s: commands/zones.cpp.s
@@ -13479,7 +13477,7 @@ commands/zones.s: commands/zones.cpp.s
 
 # target to generate assembly for a file
 commands/zones.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/commands/zones.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/commands/zones.cpp.s
 .PHONY : commands/zones.cpp.s
 
 comments.o: comments.cpp.o
@@ -13488,7 +13486,7 @@ comments.o: comments.cpp.o
 
 # target to build an object file
 comments.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/comments.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/comments.cpp.o
 .PHONY : comments.cpp.o
 
 comments.i: comments.cpp.i
@@ -13497,7 +13495,7 @@ comments.i: comments.cpp.i
 
 # target to preprocess a source file
 comments.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/comments.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/comments.cpp.i
 .PHONY : comments.cpp.i
 
 comments.s: comments.cpp.s
@@ -13506,7 +13504,7 @@ comments.s: comments.cpp.s
 
 # target to generate assembly for a file
 comments.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/comments.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/comments.cpp.s
 .PHONY : comments.cpp.s
 
 const.o: const.cpp.o
@@ -13515,7 +13513,7 @@ const.o: const.cpp.o
 
 # target to build an object file
 const.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/const.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/const.cpp.o
 .PHONY : const.cpp.o
 
 const.i: const.cpp.i
@@ -13524,7 +13522,7 @@ const.i: const.cpp.i
 
 # target to preprocess a source file
 const.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/const.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/const.cpp.i
 .PHONY : const.cpp.i
 
 const.s: const.cpp.s
@@ -13533,7 +13531,7 @@ const.s: const.cpp.s
 
 # target to generate assembly for a file
 const.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/const.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/const.cpp.s
 .PHONY : const.cpp.s
 
 copyover.o: copyover.cpp.o
@@ -13542,7 +13540,7 @@ copyover.o: copyover.cpp.o
 
 # target to build an object file
 copyover.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/copyover.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/copyover.cpp.o
 .PHONY : copyover.cpp.o
 
 copyover.i: copyover.cpp.i
@@ -13551,7 +13549,7 @@ copyover.i: copyover.cpp.i
 
 # target to preprocess a source file
 copyover.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/copyover.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/copyover.cpp.i
 .PHONY : copyover.cpp.i
 
 copyover.s: copyover.cpp.s
@@ -13560,7 +13558,7 @@ copyover.s: copyover.cpp.s
 
 # target to generate assembly for a file
 copyover.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/copyover.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/copyover.cpp.s
 .PHONY : copyover.cpp.s
 
 craft.o: craft.cpp.o
@@ -13569,7 +13567,7 @@ craft.o: craft.cpp.o
 
 # target to build an object file
 craft.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/craft.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/craft.cpp.o
 .PHONY : craft.cpp.o
 
 craft.i: craft.cpp.i
@@ -13578,7 +13576,7 @@ craft.i: craft.cpp.i
 
 # target to preprocess a source file
 craft.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/craft.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/craft.cpp.i
 .PHONY : craft.cpp.i
 
 craft.s: craft.cpp.s
@@ -13587,7 +13585,7 @@ craft.s: craft.cpp.s
 
 # target to generate assembly for a file
 craft.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/craft.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/craft.cpp.s
 .PHONY : craft.cpp.s
 
 db.o: db.cpp.o
@@ -13596,7 +13594,7 @@ db.o: db.cpp.o
 
 # target to build an object file
 db.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/db.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/db.cpp.o
 .PHONY : db.cpp.o
 
 db.i: db.cpp.i
@@ -13605,7 +13603,7 @@ db.i: db.cpp.i
 
 # target to preprocess a source file
 db.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/db.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/db.cpp.i
 .PHONY : db.cpp.i
 
 db.s: db.cpp.s
@@ -13614,7 +13612,7 @@ db.s: db.cpp.s
 
 # target to generate assembly for a file
 db.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/db.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/db.cpp.s
 .PHONY : db.cpp.s
 
 descriptor.o: descriptor.cpp.o
@@ -13623,7 +13621,7 @@ descriptor.o: descriptor.cpp.o
 
 # target to build an object file
 descriptor.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/descriptor.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/descriptor.cpp.o
 .PHONY : descriptor.cpp.o
 
 descriptor.i: descriptor.cpp.i
@@ -13632,7 +13630,7 @@ descriptor.i: descriptor.cpp.i
 
 # target to preprocess a source file
 descriptor.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/descriptor.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/descriptor.cpp.i
 .PHONY : descriptor.cpp.i
 
 descriptor.s: descriptor.cpp.s
@@ -13641,7 +13639,7 @@ descriptor.s: descriptor.cpp.s
 
 # target to generate assembly for a file
 descriptor.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/descriptor.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/descriptor.cpp.s
 .PHONY : descriptor.cpp.s
 
 editor.o: editor.cpp.o
@@ -13650,7 +13648,7 @@ editor.o: editor.cpp.o
 
 # target to build an object file
 editor.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/editor.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/editor.cpp.o
 .PHONY : editor.cpp.o
 
 editor.i: editor.cpp.i
@@ -13659,7 +13657,7 @@ editor.i: editor.cpp.i
 
 # target to preprocess a source file
 editor.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/editor.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/editor.cpp.i
 .PHONY : editor.cpp.i
 
 editor.s: editor.cpp.s
@@ -13668,7 +13666,7 @@ editor.s: editor.cpp.s
 
 # target to generate assembly for a file
 editor.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/editor.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/editor.cpp.s
 .PHONY : editor.cpp.s
 
 fight.o: fight.cpp.o
@@ -13677,7 +13675,7 @@ fight.o: fight.cpp.o
 
 # target to build an object file
 fight.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/fight.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/fight.cpp.o
 .PHONY : fight.cpp.o
 
 fight.i: fight.cpp.i
@@ -13686,7 +13684,7 @@ fight.i: fight.cpp.i
 
 # target to preprocess a source file
 fight.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/fight.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/fight.cpp.i
 .PHONY : fight.cpp.i
 
 fight.s: fight.cpp.s
@@ -13695,7 +13693,7 @@ fight.s: fight.cpp.s
 
 # target to generate assembly for a file
 fight.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/fight.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/fight.cpp.s
 .PHONY : fight.cpp.s
 
 fslogger.o: fslogger.cpp.o
@@ -13704,7 +13702,7 @@ fslogger.o: fslogger.cpp.o
 
 # target to build an object file
 fslogger.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/fslogger.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/fslogger.cpp.o
 .PHONY : fslogger.cpp.o
 
 fslogger.i: fslogger.cpp.i
@@ -13713,7 +13711,7 @@ fslogger.i: fslogger.cpp.i
 
 # target to preprocess a source file
 fslogger.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/fslogger.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/fslogger.cpp.i
 .PHONY : fslogger.cpp.i
 
 fslogger.s: fslogger.cpp.s
@@ -13722,7 +13720,7 @@ fslogger.s: fslogger.cpp.s
 
 # target to generate assembly for a file
 fslogger.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/fslogger.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/fslogger.cpp.s
 .PHONY : fslogger.cpp.s
 
 grub.o: grub.cpp.o
@@ -13731,7 +13729,7 @@ grub.o: grub.cpp.o
 
 # target to build an object file
 grub.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/grub.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/grub.cpp.o
 .PHONY : grub.cpp.o
 
 grub.i: grub.cpp.i
@@ -13740,7 +13738,7 @@ grub.i: grub.cpp.i
 
 # target to preprocess a source file
 grub.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/grub.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/grub.cpp.i
 .PHONY : grub.cpp.i
 
 grub.s: grub.cpp.s
@@ -13749,7 +13747,7 @@ grub.s: grub.cpp.s
 
 # target to generate assembly for a file
 grub.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/grub.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/grub.cpp.s
 .PHONY : grub.cpp.s
 
 handler.o: handler.cpp.o
@@ -13758,7 +13756,7 @@ handler.o: handler.cpp.o
 
 # target to build an object file
 handler.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/handler.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/handler.cpp.o
 .PHONY : handler.cpp.o
 
 handler.i: handler.cpp.i
@@ -13767,7 +13765,7 @@ handler.i: handler.cpp.i
 
 # target to preprocess a source file
 handler.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/handler.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/handler.cpp.i
 .PHONY : handler.cpp.i
 
 handler.s: handler.cpp.s
@@ -13776,7 +13774,7 @@ handler.s: handler.cpp.s
 
 # target to generate assembly for a file
 handler.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/handler.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/handler.cpp.s
 .PHONY : handler.cpp.s
 
 help.o: help.cpp.o
@@ -13785,7 +13783,7 @@ help.o: help.cpp.o
 
 # target to build an object file
 help.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/help.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/help.cpp.o
 .PHONY : help.cpp.o
 
 help.i: help.cpp.i
@@ -13794,7 +13792,7 @@ help.i: help.cpp.i
 
 # target to preprocess a source file
 help.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/help.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/help.cpp.i
 .PHONY : help.cpp.i
 
 help.s: help.cpp.s
@@ -13803,7 +13801,7 @@ help.s: help.cpp.s
 
 # target to generate assembly for a file
 help.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/help.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/help.cpp.s
 .PHONY : help.cpp.s
 
 imc.o: imc.cpp.o
@@ -13812,7 +13810,7 @@ imc.o: imc.cpp.o
 
 # target to build an object file
 imc.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/imc.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/imc.cpp.o
 .PHONY : imc.cpp.o
 
 imc.i: imc.cpp.i
@@ -13821,7 +13819,7 @@ imc.i: imc.cpp.i
 
 # target to preprocess a source file
 imc.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/imc.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/imc.cpp.i
 .PHONY : imc.cpp.i
 
 imc.s: imc.cpp.s
@@ -13830,7 +13828,7 @@ imc.s: imc.cpp.s
 
 # target to generate assembly for a file
 imc.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/imc.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/imc.cpp.s
 .PHONY : imc.cpp.s
 
 interp.o: interp.cpp.o
@@ -13839,7 +13837,7 @@ interp.o: interp.cpp.o
 
 # target to build an object file
 interp.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/interp.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/interp.cpp.o
 .PHONY : interp.cpp.o
 
 interp.i: interp.cpp.i
@@ -13848,7 +13846,7 @@ interp.i: interp.cpp.i
 
 # target to preprocess a source file
 interp.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/interp.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/interp.cpp.i
 .PHONY : interp.cpp.i
 
 interp.s: interp.cpp.s
@@ -13857,7 +13855,7 @@ interp.s: interp.cpp.s
 
 # target to generate assembly for a file
 interp.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/interp.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/interp.cpp.s
 .PHONY : interp.cpp.s
 
 magic.o: magic.cpp.o
@@ -13866,7 +13864,7 @@ magic.o: magic.cpp.o
 
 # target to build an object file
 magic.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/magic.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/magic.cpp.o
 .PHONY : magic.cpp.o
 
 magic.i: magic.cpp.i
@@ -13875,7 +13873,7 @@ magic.i: magic.cpp.i
 
 # target to preprocess a source file
 magic.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/magic.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/magic.cpp.i
 .PHONY : magic.cpp.i
 
 magic.s: magic.cpp.s
@@ -13884,7 +13882,7 @@ magic.s: magic.cpp.s
 
 # target to generate assembly for a file
 magic.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/magic.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/magic.cpp.s
 .PHONY : magic.cpp.s
 
 makeobjs.o: makeobjs.cpp.o
@@ -13893,7 +13891,7 @@ makeobjs.o: makeobjs.cpp.o
 
 # target to build an object file
 makeobjs.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/makeobjs.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/makeobjs.cpp.o
 .PHONY : makeobjs.cpp.o
 
 makeobjs.i: makeobjs.cpp.i
@@ -13902,7 +13900,7 @@ makeobjs.i: makeobjs.cpp.i
 
 # target to preprocess a source file
 makeobjs.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/makeobjs.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/makeobjs.cpp.i
 .PHONY : makeobjs.cpp.i
 
 makeobjs.s: makeobjs.cpp.s
@@ -13911,7 +13909,7 @@ makeobjs.s: makeobjs.cpp.s
 
 # target to generate assembly for a file
 makeobjs.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/makeobjs.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/makeobjs.cpp.s
 .PHONY : makeobjs.cpp.s
 
 mapper.o: mapper.cpp.o
@@ -13920,7 +13918,7 @@ mapper.o: mapper.cpp.o
 
 # target to build an object file
 mapper.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mapper.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mapper.cpp.o
 .PHONY : mapper.cpp.o
 
 mapper.i: mapper.cpp.i
@@ -13929,7 +13927,7 @@ mapper.i: mapper.cpp.i
 
 # target to preprocess a source file
 mapper.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mapper.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mapper.cpp.i
 .PHONY : mapper.cpp.i
 
 mapper.s: mapper.cpp.s
@@ -13938,7 +13936,7 @@ mapper.s: mapper.cpp.s
 
 # target to generate assembly for a file
 mapper.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mapper.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mapper.cpp.s
 .PHONY : mapper.cpp.s
 
 misc.o: misc.cpp.o
@@ -13947,7 +13945,7 @@ misc.o: misc.cpp.o
 
 # target to build an object file
 misc.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/misc.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/misc.cpp.o
 .PHONY : misc.cpp.o
 
 misc.i: misc.cpp.i
@@ -13956,7 +13954,7 @@ misc.i: misc.cpp.i
 
 # target to preprocess a source file
 misc.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/misc.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/misc.cpp.i
 .PHONY : misc.cpp.i
 
 misc.s: misc.cpp.s
@@ -13965,7 +13963,7 @@ misc.s: misc.cpp.s
 
 # target to generate assembly for a file
 misc.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/misc.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/misc.cpp.s
 .PHONY : misc.cpp.s
 
 missile.o: missile.cpp.o
@@ -13974,7 +13972,7 @@ missile.o: missile.cpp.o
 
 # target to build an object file
 missile.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/missile.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/missile.cpp.o
 .PHONY : missile.cpp.o
 
 missile.i: missile.cpp.i
@@ -13983,7 +13981,7 @@ missile.i: missile.cpp.i
 
 # target to preprocess a source file
 missile.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/missile.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/missile.cpp.i
 .PHONY : missile.cpp.i
 
 missile.s: missile.cpp.s
@@ -13992,7 +13990,7 @@ missile.s: missile.cpp.s
 
 # target to generate assembly for a file
 missile.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/missile.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/missile.cpp.s
 .PHONY : missile.cpp.s
 
 mpcommands/mpapply.o: mpcommands/mpapply.cpp.o
@@ -14001,7 +13999,7 @@ mpcommands/mpapply.o: mpcommands/mpapply.cpp.o
 
 # target to build an object file
 mpcommands/mpapply.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpapply.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpapply.cpp.o
 .PHONY : mpcommands/mpapply.cpp.o
 
 mpcommands/mpapply.i: mpcommands/mpapply.cpp.i
@@ -14010,7 +14008,7 @@ mpcommands/mpapply.i: mpcommands/mpapply.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpapply.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpapply.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpapply.cpp.i
 .PHONY : mpcommands/mpapply.cpp.i
 
 mpcommands/mpapply.s: mpcommands/mpapply.cpp.s
@@ -14019,7 +14017,7 @@ mpcommands/mpapply.s: mpcommands/mpapply.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpapply.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpapply.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpapply.cpp.s
 .PHONY : mpcommands/mpapply.cpp.s
 
 mpcommands/mpapplyb.o: mpcommands/mpapplyb.cpp.o
@@ -14028,7 +14026,7 @@ mpcommands/mpapplyb.o: mpcommands/mpapplyb.cpp.o
 
 # target to build an object file
 mpcommands/mpapplyb.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpapplyb.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpapplyb.cpp.o
 .PHONY : mpcommands/mpapplyb.cpp.o
 
 mpcommands/mpapplyb.i: mpcommands/mpapplyb.cpp.i
@@ -14037,7 +14035,7 @@ mpcommands/mpapplyb.i: mpcommands/mpapplyb.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpapplyb.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpapplyb.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpapplyb.cpp.i
 .PHONY : mpcommands/mpapplyb.cpp.i
 
 mpcommands/mpapplyb.s: mpcommands/mpapplyb.cpp.s
@@ -14046,7 +14044,7 @@ mpcommands/mpapplyb.s: mpcommands/mpapplyb.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpapplyb.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpapplyb.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpapplyb.cpp.s
 .PHONY : mpcommands/mpapplyb.cpp.s
 
 mpcommands/mpasound.o: mpcommands/mpasound.cpp.o
@@ -14055,7 +14053,7 @@ mpcommands/mpasound.o: mpcommands/mpasound.cpp.o
 
 # target to build an object file
 mpcommands/mpasound.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpasound.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpasound.cpp.o
 .PHONY : mpcommands/mpasound.cpp.o
 
 mpcommands/mpasound.i: mpcommands/mpasound.cpp.i
@@ -14064,7 +14062,7 @@ mpcommands/mpasound.i: mpcommands/mpasound.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpasound.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpasound.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpasound.cpp.i
 .PHONY : mpcommands/mpasound.cpp.i
 
 mpcommands/mpasound.s: mpcommands/mpasound.cpp.s
@@ -14073,7 +14071,7 @@ mpcommands/mpasound.s: mpcommands/mpasound.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpasound.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpasound.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpasound.cpp.s
 .PHONY : mpcommands/mpasound.cpp.s
 
 mpcommands/mpat.o: mpcommands/mpat.cpp.o
@@ -14082,7 +14080,7 @@ mpcommands/mpat.o: mpcommands/mpat.cpp.o
 
 # target to build an object file
 mpcommands/mpat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpat.cpp.o
 .PHONY : mpcommands/mpat.cpp.o
 
 mpcommands/mpat.i: mpcommands/mpat.cpp.i
@@ -14091,7 +14089,7 @@ mpcommands/mpat.i: mpcommands/mpat.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpat.cpp.i
 .PHONY : mpcommands/mpat.cpp.i
 
 mpcommands/mpat.s: mpcommands/mpat.cpp.s
@@ -14100,7 +14098,7 @@ mpcommands/mpat.s: mpcommands/mpat.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpat.cpp.s
 .PHONY : mpcommands/mpat.cpp.s
 
 mpcommands/mpclosepassage.o: mpcommands/mpclosepassage.cpp.o
@@ -14109,7 +14107,7 @@ mpcommands/mpclosepassage.o: mpcommands/mpclosepassage.cpp.o
 
 # target to build an object file
 mpcommands/mpclosepassage.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpclosepassage.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpclosepassage.cpp.o
 .PHONY : mpcommands/mpclosepassage.cpp.o
 
 mpcommands/mpclosepassage.i: mpcommands/mpclosepassage.cpp.i
@@ -14118,7 +14116,7 @@ mpcommands/mpclosepassage.i: mpcommands/mpclosepassage.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpclosepassage.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpclosepassage.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpclosepassage.cpp.i
 .PHONY : mpcommands/mpclosepassage.cpp.i
 
 mpcommands/mpclosepassage.s: mpcommands/mpclosepassage.cpp.s
@@ -14127,7 +14125,7 @@ mpcommands/mpclosepassage.s: mpcommands/mpclosepassage.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpclosepassage.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpclosepassage.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpclosepassage.cpp.s
 .PHONY : mpcommands/mpclosepassage.cpp.s
 
 mpcommands/mpdamage.o: mpcommands/mpdamage.cpp.o
@@ -14136,7 +14134,7 @@ mpcommands/mpdamage.o: mpcommands/mpdamage.cpp.o
 
 # target to build an object file
 mpcommands/mpdamage.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpdamage.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpdamage.cpp.o
 .PHONY : mpcommands/mpdamage.cpp.o
 
 mpcommands/mpdamage.i: mpcommands/mpdamage.cpp.i
@@ -14145,7 +14143,7 @@ mpcommands/mpdamage.i: mpcommands/mpdamage.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpdamage.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpdamage.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpdamage.cpp.i
 .PHONY : mpcommands/mpdamage.cpp.i
 
 mpcommands/mpdamage.s: mpcommands/mpdamage.cpp.s
@@ -14154,7 +14152,7 @@ mpcommands/mpdamage.s: mpcommands/mpdamage.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpdamage.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpdamage.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpdamage.cpp.s
 .PHONY : mpcommands/mpdamage.cpp.s
 
 mpcommands/mpdeposit.o: mpcommands/mpdeposit.cpp.o
@@ -14163,7 +14161,7 @@ mpcommands/mpdeposit.o: mpcommands/mpdeposit.cpp.o
 
 # target to build an object file
 mpcommands/mpdeposit.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpdeposit.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpdeposit.cpp.o
 .PHONY : mpcommands/mpdeposit.cpp.o
 
 mpcommands/mpdeposit.i: mpcommands/mpdeposit.cpp.i
@@ -14172,7 +14170,7 @@ mpcommands/mpdeposit.i: mpcommands/mpdeposit.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpdeposit.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpdeposit.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpdeposit.cpp.i
 .PHONY : mpcommands/mpdeposit.cpp.i
 
 mpcommands/mpdeposit.s: mpcommands/mpdeposit.cpp.s
@@ -14181,7 +14179,7 @@ mpcommands/mpdeposit.s: mpcommands/mpdeposit.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpdeposit.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpdeposit.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpdeposit.cpp.s
 .PHONY : mpcommands/mpdeposit.cpp.s
 
 mpcommands/mpdream.o: mpcommands/mpdream.cpp.o
@@ -14190,7 +14188,7 @@ mpcommands/mpdream.o: mpcommands/mpdream.cpp.o
 
 # target to build an object file
 mpcommands/mpdream.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpdream.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpdream.cpp.o
 .PHONY : mpcommands/mpdream.cpp.o
 
 mpcommands/mpdream.i: mpcommands/mpdream.cpp.i
@@ -14199,7 +14197,7 @@ mpcommands/mpdream.i: mpcommands/mpdream.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpdream.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpdream.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpdream.cpp.i
 .PHONY : mpcommands/mpdream.cpp.i
 
 mpcommands/mpdream.s: mpcommands/mpdream.cpp.s
@@ -14208,7 +14206,7 @@ mpcommands/mpdream.s: mpcommands/mpdream.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpdream.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpdream.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpdream.cpp.s
 .PHONY : mpcommands/mpdream.cpp.s
 
 mpcommands/mpecho.o: mpcommands/mpecho.cpp.o
@@ -14217,7 +14215,7 @@ mpcommands/mpecho.o: mpcommands/mpecho.cpp.o
 
 # target to build an object file
 mpcommands/mpecho.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpecho.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpecho.cpp.o
 .PHONY : mpcommands/mpecho.cpp.o
 
 mpcommands/mpecho.i: mpcommands/mpecho.cpp.i
@@ -14226,7 +14224,7 @@ mpcommands/mpecho.i: mpcommands/mpecho.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpecho.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpecho.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpecho.cpp.i
 .PHONY : mpcommands/mpecho.cpp.i
 
 mpcommands/mpecho.s: mpcommands/mpecho.cpp.s
@@ -14235,7 +14233,7 @@ mpcommands/mpecho.s: mpcommands/mpecho.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpecho.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpecho.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpecho.cpp.s
 .PHONY : mpcommands/mpecho.cpp.s
 
 mpcommands/mpechoaround.o: mpcommands/mpechoaround.cpp.o
@@ -14244,7 +14242,7 @@ mpcommands/mpechoaround.o: mpcommands/mpechoaround.cpp.o
 
 # target to build an object file
 mpcommands/mpechoaround.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpechoaround.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpechoaround.cpp.o
 .PHONY : mpcommands/mpechoaround.cpp.o
 
 mpcommands/mpechoaround.i: mpcommands/mpechoaround.cpp.i
@@ -14253,7 +14251,7 @@ mpcommands/mpechoaround.i: mpcommands/mpechoaround.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpechoaround.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpechoaround.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpechoaround.cpp.i
 .PHONY : mpcommands/mpechoaround.cpp.i
 
 mpcommands/mpechoaround.s: mpcommands/mpechoaround.cpp.s
@@ -14262,7 +14260,7 @@ mpcommands/mpechoaround.s: mpcommands/mpechoaround.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpechoaround.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpechoaround.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpechoaround.cpp.s
 .PHONY : mpcommands/mpechoaround.cpp.s
 
 mpcommands/mpechoat.o: mpcommands/mpechoat.cpp.o
@@ -14271,7 +14269,7 @@ mpcommands/mpechoat.o: mpcommands/mpechoat.cpp.o
 
 # target to build an object file
 mpcommands/mpechoat.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpechoat.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpechoat.cpp.o
 .PHONY : mpcommands/mpechoat.cpp.o
 
 mpcommands/mpechoat.i: mpcommands/mpechoat.cpp.i
@@ -14280,7 +14278,7 @@ mpcommands/mpechoat.i: mpcommands/mpechoat.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpechoat.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpechoat.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpechoat.cpp.i
 .PHONY : mpcommands/mpechoat.cpp.i
 
 mpcommands/mpechoat.s: mpcommands/mpechoat.cpp.s
@@ -14289,7 +14287,7 @@ mpcommands/mpechoat.s: mpcommands/mpechoat.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpechoat.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpechoat.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpechoat.cpp.s
 .PHONY : mpcommands/mpechoat.cpp.s
 
 mpcommands/mpforce.o: mpcommands/mpforce.cpp.o
@@ -14298,7 +14296,7 @@ mpcommands/mpforce.o: mpcommands/mpforce.cpp.o
 
 # target to build an object file
 mpcommands/mpforce.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpforce.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpforce.cpp.o
 .PHONY : mpcommands/mpforce.cpp.o
 
 mpcommands/mpforce.i: mpcommands/mpforce.cpp.i
@@ -14307,7 +14305,7 @@ mpcommands/mpforce.i: mpcommands/mpforce.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpforce.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpforce.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpforce.cpp.i
 .PHONY : mpcommands/mpforce.cpp.i
 
 mpcommands/mpforce.s: mpcommands/mpforce.cpp.s
@@ -14316,7 +14314,7 @@ mpcommands/mpforce.s: mpcommands/mpforce.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpforce.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpforce.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpforce.cpp.s
 .PHONY : mpcommands/mpforce.cpp.s
 
 mpcommands/mpgain.o: mpcommands/mpgain.cpp.o
@@ -14325,7 +14323,7 @@ mpcommands/mpgain.o: mpcommands/mpgain.cpp.o
 
 # target to build an object file
 mpcommands/mpgain.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpgain.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpgain.cpp.o
 .PHONY : mpcommands/mpgain.cpp.o
 
 mpcommands/mpgain.i: mpcommands/mpgain.cpp.i
@@ -14334,7 +14332,7 @@ mpcommands/mpgain.i: mpcommands/mpgain.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpgain.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpgain.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpgain.cpp.i
 .PHONY : mpcommands/mpgain.cpp.i
 
 mpcommands/mpgain.s: mpcommands/mpgain.cpp.s
@@ -14343,7 +14341,7 @@ mpcommands/mpgain.s: mpcommands/mpgain.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpgain.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpgain.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpgain.cpp.s
 .PHONY : mpcommands/mpgain.cpp.s
 
 mpcommands/mpgoto.o: mpcommands/mpgoto.cpp.o
@@ -14352,7 +14350,7 @@ mpcommands/mpgoto.o: mpcommands/mpgoto.cpp.o
 
 # target to build an object file
 mpcommands/mpgoto.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpgoto.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpgoto.cpp.o
 .PHONY : mpcommands/mpgoto.cpp.o
 
 mpcommands/mpgoto.i: mpcommands/mpgoto.cpp.i
@@ -14361,7 +14359,7 @@ mpcommands/mpgoto.i: mpcommands/mpgoto.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpgoto.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpgoto.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpgoto.cpp.i
 .PHONY : mpcommands/mpgoto.cpp.i
 
 mpcommands/mpgoto.s: mpcommands/mpgoto.cpp.s
@@ -14370,7 +14368,7 @@ mpcommands/mpgoto.s: mpcommands/mpgoto.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpgoto.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpgoto.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpgoto.cpp.s
 .PHONY : mpcommands/mpgoto.cpp.s
 
 mpcommands/mpinvis.o: mpcommands/mpinvis.cpp.o
@@ -14379,7 +14377,7 @@ mpcommands/mpinvis.o: mpcommands/mpinvis.cpp.o
 
 # target to build an object file
 mpcommands/mpinvis.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpinvis.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpinvis.cpp.o
 .PHONY : mpcommands/mpinvis.cpp.o
 
 mpcommands/mpinvis.i: mpcommands/mpinvis.cpp.i
@@ -14388,7 +14386,7 @@ mpcommands/mpinvis.i: mpcommands/mpinvis.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpinvis.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpinvis.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpinvis.cpp.i
 .PHONY : mpcommands/mpinvis.cpp.i
 
 mpcommands/mpinvis.s: mpcommands/mpinvis.cpp.s
@@ -14397,7 +14395,7 @@ mpcommands/mpinvis.s: mpcommands/mpinvis.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpinvis.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpinvis.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpinvis.cpp.s
 .PHONY : mpcommands/mpinvis.cpp.s
 
 mpcommands/mpjunk.o: mpcommands/mpjunk.cpp.o
@@ -14406,7 +14404,7 @@ mpcommands/mpjunk.o: mpcommands/mpjunk.cpp.o
 
 # target to build an object file
 mpcommands/mpjunk.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpjunk.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpjunk.cpp.o
 .PHONY : mpcommands/mpjunk.cpp.o
 
 mpcommands/mpjunk.i: mpcommands/mpjunk.cpp.i
@@ -14415,7 +14413,7 @@ mpcommands/mpjunk.i: mpcommands/mpjunk.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpjunk.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpjunk.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpjunk.cpp.i
 .PHONY : mpcommands/mpjunk.cpp.i
 
 mpcommands/mpjunk.s: mpcommands/mpjunk.cpp.s
@@ -14424,7 +14422,7 @@ mpcommands/mpjunk.s: mpcommands/mpjunk.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpjunk.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpjunk.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpjunk.cpp.s
 .PHONY : mpcommands/mpjunk.cpp.s
 
 mpcommands/mpkill.o: mpcommands/mpkill.cpp.o
@@ -14433,7 +14431,7 @@ mpcommands/mpkill.o: mpcommands/mpkill.cpp.o
 
 # target to build an object file
 mpcommands/mpkill.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpkill.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpkill.cpp.o
 .PHONY : mpcommands/mpkill.cpp.o
 
 mpcommands/mpkill.i: mpcommands/mpkill.cpp.i
@@ -14442,7 +14440,7 @@ mpcommands/mpkill.i: mpcommands/mpkill.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpkill.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpkill.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpkill.cpp.i
 .PHONY : mpcommands/mpkill.cpp.i
 
 mpcommands/mpkill.s: mpcommands/mpkill.cpp.s
@@ -14451,7 +14449,7 @@ mpcommands/mpkill.s: mpcommands/mpkill.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpkill.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpkill.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpkill.cpp.s
 .PHONY : mpcommands/mpkill.cpp.s
 
 mpcommands/mpmload.o: mpcommands/mpmload.cpp.o
@@ -14460,7 +14458,7 @@ mpcommands/mpmload.o: mpcommands/mpmload.cpp.o
 
 # target to build an object file
 mpcommands/mpmload.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpmload.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpmload.cpp.o
 .PHONY : mpcommands/mpmload.cpp.o
 
 mpcommands/mpmload.i: mpcommands/mpmload.cpp.i
@@ -14469,7 +14467,7 @@ mpcommands/mpmload.i: mpcommands/mpmload.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpmload.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpmload.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpmload.cpp.i
 .PHONY : mpcommands/mpmload.cpp.i
 
 mpcommands/mpmload.s: mpcommands/mpmload.cpp.s
@@ -14478,7 +14476,7 @@ mpcommands/mpmload.s: mpcommands/mpmload.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpmload.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpmload.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpmload.cpp.s
 .PHONY : mpcommands/mpmload.cpp.s
 
 mpcommands/mpnothing.o: mpcommands/mpnothing.cpp.o
@@ -14487,7 +14485,7 @@ mpcommands/mpnothing.o: mpcommands/mpnothing.cpp.o
 
 # target to build an object file
 mpcommands/mpnothing.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpnothing.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpnothing.cpp.o
 .PHONY : mpcommands/mpnothing.cpp.o
 
 mpcommands/mpnothing.i: mpcommands/mpnothing.cpp.i
@@ -14496,7 +14494,7 @@ mpcommands/mpnothing.i: mpcommands/mpnothing.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpnothing.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpnothing.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpnothing.cpp.i
 .PHONY : mpcommands/mpnothing.cpp.i
 
 mpcommands/mpnothing.s: mpcommands/mpnothing.cpp.s
@@ -14505,7 +14503,7 @@ mpcommands/mpnothing.s: mpcommands/mpnothing.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpnothing.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpnothing.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpnothing.cpp.s
 .PHONY : mpcommands/mpnothing.cpp.s
 
 mpcommands/mpoload.o: mpcommands/mpoload.cpp.o
@@ -14514,7 +14512,7 @@ mpcommands/mpoload.o: mpcommands/mpoload.cpp.o
 
 # target to build an object file
 mpcommands/mpoload.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpoload.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpoload.cpp.o
 .PHONY : mpcommands/mpoload.cpp.o
 
 mpcommands/mpoload.i: mpcommands/mpoload.cpp.i
@@ -14523,7 +14521,7 @@ mpcommands/mpoload.i: mpcommands/mpoload.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpoload.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpoload.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpoload.cpp.i
 .PHONY : mpcommands/mpoload.cpp.i
 
 mpcommands/mpoload.s: mpcommands/mpoload.cpp.s
@@ -14532,7 +14530,7 @@ mpcommands/mpoload.s: mpcommands/mpoload.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpoload.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpoload.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpoload.cpp.s
 .PHONY : mpcommands/mpoload.cpp.s
 
 mpcommands/mpopenpassage.o: mpcommands/mpopenpassage.cpp.o
@@ -14541,7 +14539,7 @@ mpcommands/mpopenpassage.o: mpcommands/mpopenpassage.cpp.o
 
 # target to build an object file
 mpcommands/mpopenpassage.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpopenpassage.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpopenpassage.cpp.o
 .PHONY : mpcommands/mpopenpassage.cpp.o
 
 mpcommands/mpopenpassage.i: mpcommands/mpopenpassage.cpp.i
@@ -14550,7 +14548,7 @@ mpcommands/mpopenpassage.i: mpcommands/mpopenpassage.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpopenpassage.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpopenpassage.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpopenpassage.cpp.i
 .PHONY : mpcommands/mpopenpassage.cpp.i
 
 mpcommands/mpopenpassage.s: mpcommands/mpopenpassage.cpp.s
@@ -14559,7 +14557,7 @@ mpcommands/mpopenpassage.s: mpcommands/mpopenpassage.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpopenpassage.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpopenpassage.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpopenpassage.cpp.s
 .PHONY : mpcommands/mpopenpassage.cpp.s
 
 mpcommands/mppurge.o: mpcommands/mppurge.cpp.o
@@ -14568,7 +14566,7 @@ mpcommands/mppurge.o: mpcommands/mppurge.cpp.o
 
 # target to build an object file
 mpcommands/mppurge.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mppurge.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mppurge.cpp.o
 .PHONY : mpcommands/mppurge.cpp.o
 
 mpcommands/mppurge.i: mpcommands/mppurge.cpp.i
@@ -14577,7 +14575,7 @@ mpcommands/mppurge.i: mpcommands/mppurge.cpp.i
 
 # target to preprocess a source file
 mpcommands/mppurge.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mppurge.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mppurge.cpp.i
 .PHONY : mpcommands/mppurge.cpp.i
 
 mpcommands/mppurge.s: mpcommands/mppurge.cpp.s
@@ -14586,7 +14584,7 @@ mpcommands/mppurge.s: mpcommands/mppurge.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mppurge.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mppurge.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mppurge.cpp.s
 .PHONY : mpcommands/mppurge.cpp.s
 
 mpcommands/mprestore.o: mpcommands/mprestore.cpp.o
@@ -14595,7 +14593,7 @@ mpcommands/mprestore.o: mpcommands/mprestore.cpp.o
 
 # target to build an object file
 mpcommands/mprestore.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mprestore.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mprestore.cpp.o
 .PHONY : mpcommands/mprestore.cpp.o
 
 mpcommands/mprestore.i: mpcommands/mprestore.cpp.i
@@ -14604,7 +14602,7 @@ mpcommands/mprestore.i: mpcommands/mprestore.cpp.i
 
 # target to preprocess a source file
 mpcommands/mprestore.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mprestore.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mprestore.cpp.i
 .PHONY : mpcommands/mprestore.cpp.i
 
 mpcommands/mprestore.s: mpcommands/mprestore.cpp.s
@@ -14613,7 +14611,7 @@ mpcommands/mprestore.s: mpcommands/mprestore.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mprestore.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mprestore.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mprestore.cpp.s
 .PHONY : mpcommands/mprestore.cpp.s
 
 mpcommands/mpslay.o: mpcommands/mpslay.cpp.o
@@ -14622,7 +14620,7 @@ mpcommands/mpslay.o: mpcommands/mpslay.cpp.o
 
 # target to build an object file
 mpcommands/mpslay.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpslay.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpslay.cpp.o
 .PHONY : mpcommands/mpslay.cpp.o
 
 mpcommands/mpslay.i: mpcommands/mpslay.cpp.i
@@ -14631,7 +14629,7 @@ mpcommands/mpslay.i: mpcommands/mpslay.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpslay.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpslay.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpslay.cpp.i
 .PHONY : mpcommands/mpslay.cpp.i
 
 mpcommands/mpslay.s: mpcommands/mpslay.cpp.s
@@ -14640,7 +14638,7 @@ mpcommands/mpslay.s: mpcommands/mpslay.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpslay.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpslay.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpslay.cpp.s
 .PHONY : mpcommands/mpslay.cpp.s
 
 mpcommands/mptransfer.o: mpcommands/mptransfer.cpp.o
@@ -14649,7 +14647,7 @@ mpcommands/mptransfer.o: mpcommands/mptransfer.cpp.o
 
 # target to build an object file
 mpcommands/mptransfer.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mptransfer.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mptransfer.cpp.o
 .PHONY : mpcommands/mptransfer.cpp.o
 
 mpcommands/mptransfer.i: mpcommands/mptransfer.cpp.i
@@ -14658,7 +14656,7 @@ mpcommands/mptransfer.i: mpcommands/mptransfer.cpp.i
 
 # target to preprocess a source file
 mpcommands/mptransfer.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mptransfer.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mptransfer.cpp.i
 .PHONY : mpcommands/mptransfer.cpp.i
 
 mpcommands/mptransfer.s: mpcommands/mptransfer.cpp.s
@@ -14667,7 +14665,7 @@ mpcommands/mptransfer.s: mpcommands/mptransfer.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mptransfer.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mptransfer.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mptransfer.cpp.s
 .PHONY : mpcommands/mptransfer.cpp.s
 
 mpcommands/mpwithdraw.o: mpcommands/mpwithdraw.cpp.o
@@ -14676,7 +14674,7 @@ mpcommands/mpwithdraw.o: mpcommands/mpwithdraw.cpp.o
 
 # target to build an object file
 mpcommands/mpwithdraw.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpwithdraw.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpwithdraw.cpp.o
 .PHONY : mpcommands/mpwithdraw.cpp.o
 
 mpcommands/mpwithdraw.i: mpcommands/mpwithdraw.cpp.i
@@ -14685,7 +14683,7 @@ mpcommands/mpwithdraw.i: mpcommands/mpwithdraw.cpp.i
 
 # target to preprocess a source file
 mpcommands/mpwithdraw.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpwithdraw.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpwithdraw.cpp.i
 .PHONY : mpcommands/mpwithdraw.cpp.i
 
 mpcommands/mpwithdraw.s: mpcommands/mpwithdraw.cpp.s
@@ -14694,7 +14692,7 @@ mpcommands/mpwithdraw.s: mpcommands/mpwithdraw.cpp.s
 
 # target to generate assembly for a file
 mpcommands/mpwithdraw.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mpcommands/mpwithdraw.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mpcommands/mpwithdraw.cpp.s
 .PHONY : mpcommands/mpwithdraw.cpp.s
 
 mprog.o: mprog.cpp.o
@@ -14703,7 +14701,7 @@ mprog.o: mprog.cpp.o
 
 # target to build an object file
 mprog.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mprog.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mprog.cpp.o
 .PHONY : mprog.cpp.o
 
 mprog.i: mprog.cpp.i
@@ -14712,7 +14710,7 @@ mprog.i: mprog.cpp.i
 
 # target to preprocess a source file
 mprog.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mprog.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mprog.cpp.i
 .PHONY : mprog.cpp.i
 
 mprog.s: mprog.cpp.s
@@ -14721,7 +14719,7 @@ mprog.s: mprog.cpp.s
 
 # target to generate assembly for a file
 mprog.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mprog.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mprog.cpp.s
 .PHONY : mprog.cpp.s
 
 mud_prog.o: mud_prog.cpp.o
@@ -14730,7 +14728,7 @@ mud_prog.o: mud_prog.cpp.o
 
 # target to build an object file
 mud_prog.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mud_prog.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mud_prog.cpp.o
 .PHONY : mud_prog.cpp.o
 
 mud_prog.i: mud_prog.cpp.i
@@ -14739,7 +14737,7 @@ mud_prog.i: mud_prog.cpp.i
 
 # target to preprocess a source file
 mud_prog.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mud_prog.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mud_prog.cpp.i
 .PHONY : mud_prog.cpp.i
 
 mud_prog.s: mud_prog.cpp.s
@@ -14748,7 +14746,7 @@ mud_prog.s: mud_prog.cpp.s
 
 # target to generate assembly for a file
 mud_prog.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/mud_prog.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/mud_prog.cpp.s
 .PHONY : mud_prog.cpp.s
 
 nanny.o: nanny.cpp.o
@@ -14757,7 +14755,7 @@ nanny.o: nanny.cpp.o
 
 # target to build an object file
 nanny.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/nanny.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/nanny.cpp.o
 .PHONY : nanny.cpp.o
 
 nanny.i: nanny.cpp.i
@@ -14766,7 +14764,7 @@ nanny.i: nanny.cpp.i
 
 # target to preprocess a source file
 nanny.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/nanny.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/nanny.cpp.i
 .PHONY : nanny.cpp.i
 
 nanny.s: nanny.cpp.s
@@ -14775,7 +14773,7 @@ nanny.s: nanny.cpp.s
 
 # target to generate assembly for a file
 nanny.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/nanny.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/nanny.cpp.s
 .PHONY : nanny.cpp.s
 
 object.o: object.cpp.o
@@ -14784,7 +14782,7 @@ object.o: object.cpp.o
 
 # target to build an object file
 object.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/object.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/object.cpp.o
 .PHONY : object.cpp.o
 
 object.i: object.cpp.i
@@ -14793,7 +14791,7 @@ object.i: object.cpp.i
 
 # target to preprocess a source file
 object.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/object.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/object.cpp.i
 .PHONY : object.cpp.i
 
 object.s: object.cpp.s
@@ -14802,7 +14800,7 @@ object.s: object.cpp.s
 
 # target to generate assembly for a file
 object.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/object.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/object.cpp.s
 .PHONY : object.cpp.s
 
 pcdata.o: pcdata.cpp.o
@@ -14811,7 +14809,7 @@ pcdata.o: pcdata.cpp.o
 
 # target to build an object file
 pcdata.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/pcdata.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/pcdata.cpp.o
 .PHONY : pcdata.cpp.o
 
 pcdata.i: pcdata.cpp.i
@@ -14820,7 +14818,7 @@ pcdata.i: pcdata.cpp.i
 
 # target to preprocess a source file
 pcdata.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/pcdata.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/pcdata.cpp.i
 .PHONY : pcdata.cpp.i
 
 pcdata.s: pcdata.cpp.s
@@ -14829,7 +14827,7 @@ pcdata.s: pcdata.cpp.s
 
 # target to generate assembly for a file
 pcdata.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/pcdata.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/pcdata.cpp.s
 .PHONY : pcdata.cpp.s
 
 planet.o: planet.cpp.o
@@ -14838,7 +14836,7 @@ planet.o: planet.cpp.o
 
 # target to build an object file
 planet.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/planet.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/planet.cpp.o
 .PHONY : planet.cpp.o
 
 planet.i: planet.cpp.i
@@ -14847,7 +14845,7 @@ planet.i: planet.cpp.i
 
 # target to preprocess a source file
 planet.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/planet.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/planet.cpp.i
 .PHONY : planet.cpp.i
 
 planet.s: planet.cpp.s
@@ -14856,7 +14854,7 @@ planet.s: planet.cpp.s
 
 # target to generate assembly for a file
 planet.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/planet.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/planet.cpp.s
 .PHONY : planet.cpp.s
 
 protomob.o: protomob.cpp.o
@@ -14865,7 +14863,7 @@ protomob.o: protomob.cpp.o
 
 # target to build an object file
 protomob.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/protomob.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/protomob.cpp.o
 .PHONY : protomob.cpp.o
 
 protomob.i: protomob.cpp.i
@@ -14874,7 +14872,7 @@ protomob.i: protomob.cpp.i
 
 # target to preprocess a source file
 protomob.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/protomob.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/protomob.cpp.i
 .PHONY : protomob.cpp.i
 
 protomob.s: protomob.cpp.s
@@ -14883,7 +14881,7 @@ protomob.s: protomob.cpp.s
 
 # target to generate assembly for a file
 protomob.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/protomob.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/protomob.cpp.s
 .PHONY : protomob.cpp.s
 
 protoobject.o: protoobject.cpp.o
@@ -14892,7 +14890,7 @@ protoobject.o: protoobject.cpp.o
 
 # target to build an object file
 protoobject.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/protoobject.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/protoobject.cpp.o
 .PHONY : protoobject.cpp.o
 
 protoobject.i: protoobject.cpp.i
@@ -14901,7 +14899,7 @@ protoobject.i: protoobject.cpp.i
 
 # target to preprocess a source file
 protoobject.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/protoobject.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/protoobject.cpp.i
 .PHONY : protoobject.cpp.i
 
 protoobject.s: protoobject.cpp.s
@@ -14910,7 +14908,7 @@ protoobject.s: protoobject.cpp.s
 
 # target to generate assembly for a file
 protoobject.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/protoobject.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/protoobject.cpp.s
 .PHONY : protoobject.cpp.s
 
 repos/badnamerepository.o: repos/badnamerepository.cpp.o
@@ -14919,7 +14917,7 @@ repos/badnamerepository.o: repos/badnamerepository.cpp.o
 
 # target to build an object file
 repos/badnamerepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/badnamerepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/badnamerepository.cpp.o
 .PHONY : repos/badnamerepository.cpp.o
 
 repos/badnamerepository.i: repos/badnamerepository.cpp.i
@@ -14928,7 +14926,7 @@ repos/badnamerepository.i: repos/badnamerepository.cpp.i
 
 # target to preprocess a source file
 repos/badnamerepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/badnamerepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/badnamerepository.cpp.i
 .PHONY : repos/badnamerepository.cpp.i
 
 repos/badnamerepository.s: repos/badnamerepository.cpp.s
@@ -14937,7 +14935,7 @@ repos/badnamerepository.s: repos/badnamerepository.cpp.s
 
 # target to generate assembly for a file
 repos/badnamerepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/badnamerepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/badnamerepository.cpp.s
 .PHONY : repos/badnamerepository.cpp.s
 
 repos/banrepository.o: repos/banrepository.cpp.o
@@ -14946,7 +14944,7 @@ repos/banrepository.o: repos/banrepository.cpp.o
 
 # target to build an object file
 repos/banrepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/banrepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/banrepository.cpp.o
 .PHONY : repos/banrepository.cpp.o
 
 repos/banrepository.i: repos/banrepository.cpp.i
@@ -14955,7 +14953,7 @@ repos/banrepository.i: repos/banrepository.cpp.i
 
 # target to preprocess a source file
 repos/banrepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/banrepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/banrepository.cpp.i
 .PHONY : repos/banrepository.cpp.i
 
 repos/banrepository.s: repos/banrepository.cpp.s
@@ -14964,7 +14962,7 @@ repos/banrepository.s: repos/banrepository.cpp.s
 
 # target to generate assembly for a file
 repos/banrepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/banrepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/banrepository.cpp.s
 .PHONY : repos/banrepository.cpp.s
 
 repos/boardrepository.o: repos/boardrepository.cpp.o
@@ -14973,7 +14971,7 @@ repos/boardrepository.o: repos/boardrepository.cpp.o
 
 # target to build an object file
 repos/boardrepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/boardrepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/boardrepository.cpp.o
 .PHONY : repos/boardrepository.cpp.o
 
 repos/boardrepository.i: repos/boardrepository.cpp.i
@@ -14982,7 +14980,7 @@ repos/boardrepository.i: repos/boardrepository.cpp.i
 
 # target to preprocess a source file
 repos/boardrepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/boardrepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/boardrepository.cpp.i
 .PHONY : repos/boardrepository.cpp.i
 
 repos/boardrepository.s: repos/boardrepository.cpp.s
@@ -14991,7 +14989,7 @@ repos/boardrepository.s: repos/boardrepository.cpp.s
 
 # target to generate assembly for a file
 repos/boardrepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/boardrepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/boardrepository.cpp.s
 .PHONY : repos/boardrepository.cpp.s
 
 repos/bountyrepository.o: repos/bountyrepository.cpp.o
@@ -15000,7 +14998,7 @@ repos/bountyrepository.o: repos/bountyrepository.cpp.o
 
 # target to build an object file
 repos/bountyrepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/bountyrepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/bountyrepository.cpp.o
 .PHONY : repos/bountyrepository.cpp.o
 
 repos/bountyrepository.i: repos/bountyrepository.cpp.i
@@ -15009,7 +15007,7 @@ repos/bountyrepository.i: repos/bountyrepository.cpp.i
 
 # target to preprocess a source file
 repos/bountyrepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/bountyrepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/bountyrepository.cpp.i
 .PHONY : repos/bountyrepository.cpp.i
 
 repos/bountyrepository.s: repos/bountyrepository.cpp.s
@@ -15018,7 +15016,7 @@ repos/bountyrepository.s: repos/bountyrepository.cpp.s
 
 # target to generate assembly for a file
 repos/bountyrepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/bountyrepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/bountyrepository.cpp.s
 .PHONY : repos/bountyrepository.cpp.s
 
 repos/clanrepository.o: repos/clanrepository.cpp.o
@@ -15027,7 +15025,7 @@ repos/clanrepository.o: repos/clanrepository.cpp.o
 
 # target to build an object file
 repos/clanrepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/clanrepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/clanrepository.cpp.o
 .PHONY : repos/clanrepository.cpp.o
 
 repos/clanrepository.i: repos/clanrepository.cpp.i
@@ -15036,7 +15034,7 @@ repos/clanrepository.i: repos/clanrepository.cpp.i
 
 # target to preprocess a source file
 repos/clanrepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/clanrepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/clanrepository.cpp.i
 .PHONY : repos/clanrepository.cpp.i
 
 repos/clanrepository.s: repos/clanrepository.cpp.s
@@ -15045,7 +15043,7 @@ repos/clanrepository.s: repos/clanrepository.cpp.s
 
 # target to generate assembly for a file
 repos/clanrepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/clanrepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/clanrepository.cpp.s
 .PHONY : repos/clanrepository.cpp.s
 
 repos/descriptorrepository.o: repos/descriptorrepository.cpp.o
@@ -15054,7 +15052,7 @@ repos/descriptorrepository.o: repos/descriptorrepository.cpp.o
 
 # target to build an object file
 repos/descriptorrepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/descriptorrepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/descriptorrepository.cpp.o
 .PHONY : repos/descriptorrepository.cpp.o
 
 repos/descriptorrepository.i: repos/descriptorrepository.cpp.i
@@ -15063,7 +15061,7 @@ repos/descriptorrepository.i: repos/descriptorrepository.cpp.i
 
 # target to preprocess a source file
 repos/descriptorrepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/descriptorrepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/descriptorrepository.cpp.i
 .PHONY : repos/descriptorrepository.cpp.i
 
 repos/descriptorrepository.s: repos/descriptorrepository.cpp.s
@@ -15072,7 +15070,7 @@ repos/descriptorrepository.s: repos/descriptorrepository.cpp.s
 
 # target to generate assembly for a file
 repos/descriptorrepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/descriptorrepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/descriptorrepository.cpp.s
 .PHONY : repos/descriptorrepository.cpp.s
 
 repos/helprepository.o: repos/helprepository.cpp.o
@@ -15081,7 +15079,7 @@ repos/helprepository.o: repos/helprepository.cpp.o
 
 # target to build an object file
 repos/helprepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/helprepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/helprepository.cpp.o
 .PHONY : repos/helprepository.cpp.o
 
 repos/helprepository.i: repos/helprepository.cpp.i
@@ -15090,7 +15088,7 @@ repos/helprepository.i: repos/helprepository.cpp.i
 
 # target to preprocess a source file
 repos/helprepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/helprepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/helprepository.cpp.i
 .PHONY : repos/helprepository.cpp.i
 
 repos/helprepository.s: repos/helprepository.cpp.s
@@ -15099,7 +15097,7 @@ repos/helprepository.s: repos/helprepository.cpp.s
 
 # target to generate assembly for a file
 repos/helprepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/helprepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/helprepository.cpp.s
 .PHONY : repos/helprepository.cpp.s
 
 repos/objectrepository.o: repos/objectrepository.cpp.o
@@ -15108,7 +15106,7 @@ repos/objectrepository.o: repos/objectrepository.cpp.o
 
 # target to build an object file
 repos/objectrepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/objectrepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/objectrepository.cpp.o
 .PHONY : repos/objectrepository.cpp.o
 
 repos/objectrepository.i: repos/objectrepository.cpp.i
@@ -15117,7 +15115,7 @@ repos/objectrepository.i: repos/objectrepository.cpp.i
 
 # target to preprocess a source file
 repos/objectrepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/objectrepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/objectrepository.cpp.i
 .PHONY : repos/objectrepository.cpp.i
 
 repos/objectrepository.s: repos/objectrepository.cpp.s
@@ -15126,7 +15124,7 @@ repos/objectrepository.s: repos/objectrepository.cpp.s
 
 # target to generate assembly for a file
 repos/objectrepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/objectrepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/objectrepository.cpp.s
 .PHONY : repos/objectrepository.cpp.s
 
 repos/planetrepository.o: repos/planetrepository.cpp.o
@@ -15135,7 +15133,7 @@ repos/planetrepository.o: repos/planetrepository.cpp.o
 
 # target to build an object file
 repos/planetrepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/planetrepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/planetrepository.cpp.o
 .PHONY : repos/planetrepository.cpp.o
 
 repos/planetrepository.i: repos/planetrepository.cpp.i
@@ -15144,7 +15142,7 @@ repos/planetrepository.i: repos/planetrepository.cpp.i
 
 # target to preprocess a source file
 repos/planetrepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/planetrepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/planetrepository.cpp.i
 .PHONY : repos/planetrepository.cpp.i
 
 repos/planetrepository.s: repos/planetrepository.cpp.s
@@ -15153,7 +15151,7 @@ repos/planetrepository.s: repos/planetrepository.cpp.s
 
 # target to generate assembly for a file
 repos/planetrepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/planetrepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/planetrepository.cpp.s
 .PHONY : repos/planetrepository.cpp.s
 
 repos/playerrepository.o: repos/playerrepository.cpp.o
@@ -15162,7 +15160,7 @@ repos/playerrepository.o: repos/playerrepository.cpp.o
 
 # target to build an object file
 repos/playerrepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/playerrepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/playerrepository.cpp.o
 .PHONY : repos/playerrepository.cpp.o
 
 repos/playerrepository.i: repos/playerrepository.cpp.i
@@ -15171,7 +15169,7 @@ repos/playerrepository.i: repos/playerrepository.cpp.i
 
 # target to preprocess a source file
 repos/playerrepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/playerrepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/playerrepository.cpp.i
 .PHONY : repos/playerrepository.cpp.i
 
 repos/playerrepository.s: repos/playerrepository.cpp.s
@@ -15180,7 +15178,7 @@ repos/playerrepository.s: repos/playerrepository.cpp.s
 
 # target to generate assembly for a file
 repos/playerrepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/playerrepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/playerrepository.cpp.s
 .PHONY : repos/playerrepository.cpp.s
 
 repos/shiprepository.o: repos/shiprepository.cpp.o
@@ -15189,7 +15187,7 @@ repos/shiprepository.o: repos/shiprepository.cpp.o
 
 # target to build an object file
 repos/shiprepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/shiprepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/shiprepository.cpp.o
 .PHONY : repos/shiprepository.cpp.o
 
 repos/shiprepository.i: repos/shiprepository.cpp.i
@@ -15198,7 +15196,7 @@ repos/shiprepository.i: repos/shiprepository.cpp.i
 
 # target to preprocess a source file
 repos/shiprepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/shiprepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/shiprepository.cpp.i
 .PHONY : repos/shiprepository.cpp.i
 
 repos/shiprepository.s: repos/shiprepository.cpp.s
@@ -15207,7 +15205,7 @@ repos/shiprepository.s: repos/shiprepository.cpp.s
 
 # target to generate assembly for a file
 repos/shiprepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/shiprepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/shiprepository.cpp.s
 .PHONY : repos/shiprepository.cpp.s
 
 repos/shoprepository.o: repos/shoprepository.cpp.o
@@ -15216,7 +15214,7 @@ repos/shoprepository.o: repos/shoprepository.cpp.o
 
 # target to build an object file
 repos/shoprepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/shoprepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/shoprepository.cpp.o
 .PHONY : repos/shoprepository.cpp.o
 
 repos/shoprepository.i: repos/shoprepository.cpp.i
@@ -15225,7 +15223,7 @@ repos/shoprepository.i: repos/shoprepository.cpp.i
 
 # target to preprocess a source file
 repos/shoprepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/shoprepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/shoprepository.cpp.i
 .PHONY : repos/shoprepository.cpp.i
 
 repos/shoprepository.s: repos/shoprepository.cpp.s
@@ -15234,7 +15232,7 @@ repos/shoprepository.s: repos/shoprepository.cpp.s
 
 # target to generate assembly for a file
 repos/shoprepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/shoprepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/shoprepository.cpp.s
 .PHONY : repos/shoprepository.cpp.s
 
 repos/shuttlerepository.o: repos/shuttlerepository.cpp.o
@@ -15243,7 +15241,7 @@ repos/shuttlerepository.o: repos/shuttlerepository.cpp.o
 
 # target to build an object file
 repos/shuttlerepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/shuttlerepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/shuttlerepository.cpp.o
 .PHONY : repos/shuttlerepository.cpp.o
 
 repos/shuttlerepository.i: repos/shuttlerepository.cpp.i
@@ -15252,7 +15250,7 @@ repos/shuttlerepository.i: repos/shuttlerepository.cpp.i
 
 # target to preprocess a source file
 repos/shuttlerepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/shuttlerepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/shuttlerepository.cpp.i
 .PHONY : repos/shuttlerepository.cpp.i
 
 repos/shuttlerepository.s: repos/shuttlerepository.cpp.s
@@ -15261,7 +15259,7 @@ repos/shuttlerepository.s: repos/shuttlerepository.cpp.s
 
 # target to generate assembly for a file
 repos/shuttlerepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/shuttlerepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/shuttlerepository.cpp.s
 .PHONY : repos/shuttlerepository.cpp.s
 
 repos/skillrepository.o: repos/skillrepository.cpp.o
@@ -15270,7 +15268,7 @@ repos/skillrepository.o: repos/skillrepository.cpp.o
 
 # target to build an object file
 repos/skillrepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/skillrepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/skillrepository.cpp.o
 .PHONY : repos/skillrepository.cpp.o
 
 repos/skillrepository.i: repos/skillrepository.cpp.i
@@ -15279,7 +15277,7 @@ repos/skillrepository.i: repos/skillrepository.cpp.i
 
 # target to preprocess a source file
 repos/skillrepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/skillrepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/skillrepository.cpp.i
 .PHONY : repos/skillrepository.cpp.i
 
 repos/skillrepository.s: repos/skillrepository.cpp.s
@@ -15288,7 +15286,7 @@ repos/skillrepository.s: repos/skillrepository.cpp.s
 
 # target to generate assembly for a file
 repos/skillrepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/skillrepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/skillrepository.cpp.s
 .PHONY : repos/skillrepository.cpp.s
 
 repos/socialrepository.o: repos/socialrepository.cpp.o
@@ -15297,7 +15295,7 @@ repos/socialrepository.o: repos/socialrepository.cpp.o
 
 # target to build an object file
 repos/socialrepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/socialrepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/socialrepository.cpp.o
 .PHONY : repos/socialrepository.cpp.o
 
 repos/socialrepository.i: repos/socialrepository.cpp.i
@@ -15306,7 +15304,7 @@ repos/socialrepository.i: repos/socialrepository.cpp.i
 
 # target to preprocess a source file
 repos/socialrepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/socialrepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/socialrepository.cpp.i
 .PHONY : repos/socialrepository.cpp.i
 
 repos/socialrepository.s: repos/socialrepository.cpp.s
@@ -15315,7 +15313,7 @@ repos/socialrepository.s: repos/socialrepository.cpp.s
 
 # target to generate assembly for a file
 repos/socialrepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/socialrepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/socialrepository.cpp.s
 .PHONY : repos/socialrepository.cpp.s
 
 repos/spaceobjectrepository.o: repos/spaceobjectrepository.cpp.o
@@ -15324,7 +15322,7 @@ repos/spaceobjectrepository.o: repos/spaceobjectrepository.cpp.o
 
 # target to build an object file
 repos/spaceobjectrepository.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/spaceobjectrepository.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/spaceobjectrepository.cpp.o
 .PHONY : repos/spaceobjectrepository.cpp.o
 
 repos/spaceobjectrepository.i: repos/spaceobjectrepository.cpp.i
@@ -15333,7 +15331,7 @@ repos/spaceobjectrepository.i: repos/spaceobjectrepository.cpp.i
 
 # target to preprocess a source file
 repos/spaceobjectrepository.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/spaceobjectrepository.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/spaceobjectrepository.cpp.i
 .PHONY : repos/spaceobjectrepository.cpp.i
 
 repos/spaceobjectrepository.s: repos/spaceobjectrepository.cpp.s
@@ -15342,7 +15340,7 @@ repos/spaceobjectrepository.s: repos/spaceobjectrepository.cpp.s
 
 # target to generate assembly for a file
 repos/spaceobjectrepository.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/repos/spaceobjectrepository.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/repos/spaceobjectrepository.cpp.s
 .PHONY : repos/spaceobjectrepository.cpp.s
 
 reset.o: reset.cpp.o
@@ -15351,7 +15349,7 @@ reset.o: reset.cpp.o
 
 # target to build an object file
 reset.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/reset.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/reset.cpp.o
 .PHONY : reset.cpp.o
 
 reset.i: reset.cpp.i
@@ -15360,7 +15358,7 @@ reset.i: reset.cpp.i
 
 # target to preprocess a source file
 reset.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/reset.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/reset.cpp.i
 .PHONY : reset.cpp.i
 
 reset.s: reset.cpp.s
@@ -15369,7 +15367,7 @@ reset.s: reset.cpp.s
 
 # target to generate assembly for a file
 reset.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/reset.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/reset.cpp.s
 .PHONY : reset.cpp.s
 
 room.o: room.cpp.o
@@ -15378,7 +15376,7 @@ room.o: room.cpp.o
 
 # target to build an object file
 room.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/room.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/room.cpp.o
 .PHONY : room.cpp.o
 
 room.i: room.cpp.i
@@ -15387,7 +15385,7 @@ room.i: room.cpp.i
 
 # target to preprocess a source file
 room.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/room.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/room.cpp.i
 .PHONY : room.cpp.i
 
 room.s: room.cpp.s
@@ -15396,7 +15394,7 @@ room.s: room.cpp.s
 
 # target to generate assembly for a file
 room.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/room.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/room.cpp.s
 .PHONY : room.cpp.s
 
 save.o: save.cpp.o
@@ -15405,7 +15403,7 @@ save.o: save.cpp.o
 
 # target to build an object file
 save.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/save.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/save.cpp.o
 .PHONY : save.cpp.o
 
 save.i: save.cpp.i
@@ -15414,7 +15412,7 @@ save.i: save.cpp.i
 
 # target to preprocess a source file
 save.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/save.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/save.cpp.i
 .PHONY : save.cpp.i
 
 save.s: save.cpp.s
@@ -15423,7 +15421,7 @@ save.s: save.cpp.s
 
 # target to generate assembly for a file
 save.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/save.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/save.cpp.s
 .PHONY : save.cpp.s
 
 script.o: script.cpp.o
@@ -15432,7 +15430,7 @@ script.o: script.cpp.o
 
 # target to build an object file
 script.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/script.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/script.cpp.o
 .PHONY : script.cpp.o
 
 script.i: script.cpp.i
@@ -15441,7 +15439,7 @@ script.i: script.cpp.i
 
 # target to preprocess a source file
 script.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/script.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/script.cpp.i
 .PHONY : script.cpp.i
 
 script.s: script.cpp.s
@@ -15450,7 +15448,7 @@ script.s: script.cpp.s
 
 # target to generate assembly for a file
 script.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/script.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/script.cpp.s
 .PHONY : script.cpp.s
 
 ship.o: ship.cpp.o
@@ -15459,7 +15457,7 @@ ship.o: ship.cpp.o
 
 # target to build an object file
 ship.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/ship.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/ship.cpp.o
 .PHONY : ship.cpp.o
 
 ship.i: ship.cpp.i
@@ -15468,7 +15466,7 @@ ship.i: ship.cpp.i
 
 # target to preprocess a source file
 ship.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/ship.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/ship.cpp.i
 .PHONY : ship.cpp.i
 
 ship.s: ship.cpp.s
@@ -15477,7 +15475,7 @@ ship.s: ship.cpp.s
 
 # target to generate assembly for a file
 ship.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/ship.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/ship.cpp.s
 .PHONY : ship.cpp.s
 
 shop.o: shop.cpp.o
@@ -15486,7 +15484,7 @@ shop.o: shop.cpp.o
 
 # target to build an object file
 shop.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/shop.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/shop.cpp.o
 .PHONY : shop.cpp.o
 
 shop.i: shop.cpp.i
@@ -15495,7 +15493,7 @@ shop.i: shop.cpp.i
 
 # target to preprocess a source file
 shop.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/shop.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/shop.cpp.i
 .PHONY : shop.cpp.i
 
 shop.s: shop.cpp.s
@@ -15504,7 +15502,7 @@ shop.s: shop.cpp.s
 
 # target to generate assembly for a file
 shop.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/shop.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/shop.cpp.s
 .PHONY : shop.cpp.s
 
 shuttle.o: shuttle.cpp.o
@@ -15513,7 +15511,7 @@ shuttle.o: shuttle.cpp.o
 
 # target to build an object file
 shuttle.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/shuttle.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/shuttle.cpp.o
 .PHONY : shuttle.cpp.o
 
 shuttle.i: shuttle.cpp.i
@@ -15522,7 +15520,7 @@ shuttle.i: shuttle.cpp.i
 
 # target to preprocess a source file
 shuttle.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/shuttle.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/shuttle.cpp.i
 .PHONY : shuttle.cpp.i
 
 shuttle.s: shuttle.cpp.s
@@ -15531,7 +15529,7 @@ shuttle.s: shuttle.cpp.s
 
 # target to generate assembly for a file
 shuttle.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/shuttle.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/shuttle.cpp.s
 .PHONY : shuttle.cpp.s
 
 skill.o: skill.cpp.o
@@ -15540,7 +15538,7 @@ skill.o: skill.cpp.o
 
 # target to build an object file
 skill.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/skill.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/skill.cpp.o
 .PHONY : skill.cpp.o
 
 skill.i: skill.cpp.i
@@ -15549,7 +15547,7 @@ skill.i: skill.cpp.i
 
 # target to preprocess a source file
 skill.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/skill.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/skill.cpp.i
 .PHONY : skill.cpp.i
 
 skill.s: skill.cpp.s
@@ -15558,7 +15556,7 @@ skill.s: skill.cpp.s
 
 # target to generate assembly for a file
 skill.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/skill.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/skill.cpp.s
 .PHONY : skill.cpp.s
 
 skills.o: skills.cpp.o
@@ -15567,7 +15565,7 @@ skills.o: skills.cpp.o
 
 # target to build an object file
 skills.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/skills.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/skills.cpp.o
 .PHONY : skills.cpp.o
 
 skills.i: skills.cpp.i
@@ -15576,7 +15574,7 @@ skills.i: skills.cpp.i
 
 # target to preprocess a source file
 skills.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/skills.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/skills.cpp.i
 .PHONY : skills.cpp.i
 
 skills.s: skills.cpp.s
@@ -15585,7 +15583,7 @@ skills.s: skills.cpp.s
 
 # target to generate assembly for a file
 skills.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/skills.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/skills.cpp.s
 .PHONY : skills.cpp.s
 
 social.o: social.cpp.o
@@ -15594,7 +15592,7 @@ social.o: social.cpp.o
 
 # target to build an object file
 social.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/social.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/social.cpp.o
 .PHONY : social.cpp.o
 
 social.i: social.cpp.i
@@ -15603,7 +15601,7 @@ social.i: social.cpp.i
 
 # target to preprocess a source file
 social.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/social.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/social.cpp.i
 .PHONY : social.cpp.i
 
 social.s: social.cpp.s
@@ -15612,7 +15610,7 @@ social.s: social.cpp.s
 
 # target to generate assembly for a file
 social.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/social.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/social.cpp.s
 .PHONY : social.cpp.s
 
 spaceobject.o: spaceobject.cpp.o
@@ -15621,7 +15619,7 @@ spaceobject.o: spaceobject.cpp.o
 
 # target to build an object file
 spaceobject.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spaceobject.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spaceobject.cpp.o
 .PHONY : spaceobject.cpp.o
 
 spaceobject.i: spaceobject.cpp.i
@@ -15630,7 +15628,7 @@ spaceobject.i: spaceobject.cpp.i
 
 # target to preprocess a source file
 spaceobject.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spaceobject.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spaceobject.cpp.i
 .PHONY : spaceobject.cpp.i
 
 spaceobject.s: spaceobject.cpp.s
@@ -15639,7 +15637,7 @@ spaceobject.s: spaceobject.cpp.s
 
 # target to generate assembly for a file
 spaceobject.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spaceobject.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spaceobject.cpp.s
 .PHONY : spaceobject.cpp.s
 
 special.o: special.cpp.o
@@ -15648,7 +15646,7 @@ special.o: special.cpp.o
 
 # target to build an object file
 special.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special.cpp.o
 .PHONY : special.cpp.o
 
 special.i: special.cpp.i
@@ -15657,7 +15655,7 @@ special.i: special.cpp.i
 
 # target to preprocess a source file
 special.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special.cpp.i
 .PHONY : special.cpp.i
 
 special.s: special.cpp.s
@@ -15666,7 +15664,7 @@ special.s: special.cpp.s
 
 # target to generate assembly for a file
 special.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special.cpp.s
 .PHONY : special.cpp.s
 
 special/auth.o: special/auth.cpp.o
@@ -15675,7 +15673,7 @@ special/auth.o: special/auth.cpp.o
 
 # target to build an object file
 special/auth.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/auth.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/auth.cpp.o
 .PHONY : special/auth.cpp.o
 
 special/auth.i: special/auth.cpp.i
@@ -15684,7 +15682,7 @@ special/auth.i: special/auth.cpp.i
 
 # target to preprocess a source file
 special/auth.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/auth.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/auth.cpp.i
 .PHONY : special/auth.cpp.i
 
 special/auth.s: special/auth.cpp.s
@@ -15693,7 +15691,7 @@ special/auth.s: special/auth.cpp.s
 
 # target to generate assembly for a file
 special/auth.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/auth.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/auth.cpp.s
 .PHONY : special/auth.cpp.s
 
 special/clanguard.o: special/clanguard.cpp.o
@@ -15702,7 +15700,7 @@ special/clanguard.o: special/clanguard.cpp.o
 
 # target to build an object file
 special/clanguard.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/clanguard.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/clanguard.cpp.o
 .PHONY : special/clanguard.cpp.o
 
 special/clanguard.i: special/clanguard.cpp.i
@@ -15711,7 +15709,7 @@ special/clanguard.i: special/clanguard.cpp.i
 
 # target to preprocess a source file
 special/clanguard.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/clanguard.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/clanguard.cpp.i
 .PHONY : special/clanguard.cpp.i
 
 special/clanguard.s: special/clanguard.cpp.s
@@ -15720,7 +15718,7 @@ special/clanguard.s: special/clanguard.cpp.s
 
 # target to generate assembly for a file
 special/clanguard.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/clanguard.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/clanguard.cpp.s
 .PHONY : special/clanguard.cpp.s
 
 special/customsalcohol.o: special/customsalcohol.cpp.o
@@ -15729,7 +15727,7 @@ special/customsalcohol.o: special/customsalcohol.cpp.o
 
 # target to build an object file
 special/customsalcohol.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/customsalcohol.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/customsalcohol.cpp.o
 .PHONY : special/customsalcohol.cpp.o
 
 special/customsalcohol.i: special/customsalcohol.cpp.i
@@ -15738,7 +15736,7 @@ special/customsalcohol.i: special/customsalcohol.cpp.i
 
 # target to preprocess a source file
 special/customsalcohol.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/customsalcohol.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/customsalcohol.cpp.i
 .PHONY : special/customsalcohol.cpp.i
 
 special/customsalcohol.s: special/customsalcohol.cpp.s
@@ -15747,7 +15745,7 @@ special/customsalcohol.s: special/customsalcohol.cpp.s
 
 # target to generate assembly for a file
 special/customsalcohol.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/customsalcohol.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/customsalcohol.cpp.s
 .PHONY : special/customsalcohol.cpp.s
 
 special/customssmut.o: special/customssmut.cpp.o
@@ -15756,7 +15754,7 @@ special/customssmut.o: special/customssmut.cpp.o
 
 # target to build an object file
 special/customssmut.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/customssmut.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/customssmut.cpp.o
 .PHONY : special/customssmut.cpp.o
 
 special/customssmut.i: special/customssmut.cpp.i
@@ -15765,7 +15763,7 @@ special/customssmut.i: special/customssmut.cpp.i
 
 # target to preprocess a source file
 special/customssmut.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/customssmut.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/customssmut.cpp.i
 .PHONY : special/customssmut.cpp.i
 
 special/customssmut.s: special/customssmut.cpp.s
@@ -15774,7 +15772,7 @@ special/customssmut.s: special/customssmut.cpp.s
 
 # target to generate assembly for a file
 special/customssmut.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/customssmut.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/customssmut.cpp.s
 .PHONY : special/customssmut.cpp.s
 
 special/customsspice.o: special/customsspice.cpp.o
@@ -15783,7 +15781,7 @@ special/customsspice.o: special/customsspice.cpp.o
 
 # target to build an object file
 special/customsspice.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/customsspice.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/customsspice.cpp.o
 .PHONY : special/customsspice.cpp.o
 
 special/customsspice.i: special/customsspice.cpp.i
@@ -15792,7 +15790,7 @@ special/customsspice.i: special/customsspice.cpp.i
 
 # target to preprocess a source file
 special/customsspice.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/customsspice.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/customsspice.cpp.i
 .PHONY : special/customsspice.cpp.i
 
 special/customsspice.s: special/customsspice.cpp.s
@@ -15801,7 +15799,7 @@ special/customsspice.s: special/customsspice.cpp.s
 
 # target to generate assembly for a file
 special/customsspice.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/customsspice.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/customsspice.cpp.s
 .PHONY : special/customsspice.cpp.s
 
 special/customsweapons.o: special/customsweapons.cpp.o
@@ -15810,7 +15808,7 @@ special/customsweapons.o: special/customsweapons.cpp.o
 
 # target to build an object file
 special/customsweapons.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/customsweapons.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/customsweapons.cpp.o
 .PHONY : special/customsweapons.cpp.o
 
 special/customsweapons.i: special/customsweapons.cpp.i
@@ -15819,7 +15817,7 @@ special/customsweapons.i: special/customsweapons.cpp.i
 
 # target to preprocess a source file
 special/customsweapons.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/customsweapons.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/customsweapons.cpp.i
 .PHONY : special/customsweapons.cpp.i
 
 special/customsweapons.s: special/customsweapons.cpp.s
@@ -15828,7 +15826,7 @@ special/customsweapons.s: special/customsweapons.cpp.s
 
 # target to generate assembly for a file
 special/customsweapons.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/customsweapons.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/customsweapons.cpp.s
 .PHONY : special/customsweapons.cpp.s
 
 special/darkjedi.o: special/darkjedi.cpp.o
@@ -15837,7 +15835,7 @@ special/darkjedi.o: special/darkjedi.cpp.o
 
 # target to build an object file
 special/darkjedi.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/darkjedi.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/darkjedi.cpp.o
 .PHONY : special/darkjedi.cpp.o
 
 special/darkjedi.i: special/darkjedi.cpp.i
@@ -15846,7 +15844,7 @@ special/darkjedi.i: special/darkjedi.cpp.i
 
 # target to preprocess a source file
 special/darkjedi.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/darkjedi.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/darkjedi.cpp.i
 .PHONY : special/darkjedi.cpp.i
 
 special/darkjedi.s: special/darkjedi.cpp.s
@@ -15855,7 +15853,7 @@ special/darkjedi.s: special/darkjedi.cpp.s
 
 # target to generate assembly for a file
 special/darkjedi.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/darkjedi.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/darkjedi.cpp.s
 .PHONY : special/darkjedi.cpp.s
 
 special/fido.o: special/fido.cpp.o
@@ -15864,7 +15862,7 @@ special/fido.o: special/fido.cpp.o
 
 # target to build an object file
 special/fido.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/fido.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/fido.cpp.o
 .PHONY : special/fido.cpp.o
 
 special/fido.i: special/fido.cpp.i
@@ -15873,7 +15871,7 @@ special/fido.i: special/fido.cpp.i
 
 # target to preprocess a source file
 special/fido.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/fido.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/fido.cpp.i
 .PHONY : special/fido.cpp.i
 
 special/fido.s: special/fido.cpp.s
@@ -15882,7 +15880,7 @@ special/fido.s: special/fido.cpp.s
 
 # target to generate assembly for a file
 special/fido.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/fido.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/fido.cpp.s
 .PHONY : special/fido.cpp.s
 
 special/guardian.o: special/guardian.cpp.o
@@ -15891,7 +15889,7 @@ special/guardian.o: special/guardian.cpp.o
 
 # target to build an object file
 special/guardian.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/guardian.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/guardian.cpp.o
 .PHONY : special/guardian.cpp.o
 
 special/guardian.i: special/guardian.cpp.i
@@ -15900,7 +15898,7 @@ special/guardian.i: special/guardian.cpp.i
 
 # target to preprocess a source file
 special/guardian.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/guardian.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/guardian.cpp.i
 .PHONY : special/guardian.cpp.i
 
 special/guardian.s: special/guardian.cpp.s
@@ -15909,7 +15907,7 @@ special/guardian.s: special/guardian.cpp.s
 
 # target to generate assembly for a file
 special/guardian.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/guardian.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/guardian.cpp.s
 .PHONY : special/guardian.cpp.s
 
 special/janitor.o: special/janitor.cpp.o
@@ -15918,7 +15916,7 @@ special/janitor.o: special/janitor.cpp.o
 
 # target to build an object file
 special/janitor.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/janitor.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/janitor.cpp.o
 .PHONY : special/janitor.cpp.o
 
 special/janitor.i: special/janitor.cpp.i
@@ -15927,7 +15925,7 @@ special/janitor.i: special/janitor.cpp.i
 
 # target to preprocess a source file
 special/janitor.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/janitor.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/janitor.cpp.i
 .PHONY : special/janitor.cpp.i
 
 special/janitor.s: special/janitor.cpp.s
@@ -15936,7 +15934,7 @@ special/janitor.s: special/janitor.cpp.s
 
 # target to generate assembly for a file
 special/janitor.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/janitor.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/janitor.cpp.s
 .PHONY : special/janitor.cpp.s
 
 special/jedi.o: special/jedi.cpp.o
@@ -15945,7 +15943,7 @@ special/jedi.o: special/jedi.cpp.o
 
 # target to build an object file
 special/jedi.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/jedi.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/jedi.cpp.o
 .PHONY : special/jedi.cpp.o
 
 special/jedi.i: special/jedi.cpp.i
@@ -15954,7 +15952,7 @@ special/jedi.i: special/jedi.cpp.i
 
 # target to preprocess a source file
 special/jedi.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/jedi.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/jedi.cpp.i
 .PHONY : special/jedi.cpp.i
 
 special/jedi.s: special/jedi.cpp.s
@@ -15963,7 +15961,7 @@ special/jedi.s: special/jedi.cpp.s
 
 # target to generate assembly for a file
 special/jedi.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/jedi.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/jedi.cpp.s
 .PHONY : special/jedi.cpp.s
 
 special/jedihealer.o: special/jedihealer.cpp.o
@@ -15972,7 +15970,7 @@ special/jedihealer.o: special/jedihealer.cpp.o
 
 # target to build an object file
 special/jedihealer.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/jedihealer.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/jedihealer.cpp.o
 .PHONY : special/jedihealer.cpp.o
 
 special/jedihealer.i: special/jedihealer.cpp.i
@@ -15981,7 +15979,7 @@ special/jedihealer.i: special/jedihealer.cpp.i
 
 # target to preprocess a source file
 special/jedihealer.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/jedihealer.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/jedihealer.cpp.i
 .PHONY : special/jedihealer.cpp.i
 
 special/jedihealer.s: special/jedihealer.cpp.s
@@ -15990,7 +15988,7 @@ special/jedihealer.s: special/jedihealer.cpp.s
 
 # target to generate assembly for a file
 special/jedihealer.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/jedihealer.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/jedihealer.cpp.s
 .PHONY : special/jedihealer.cpp.s
 
 special/newbiepilot.o: special/newbiepilot.cpp.o
@@ -15999,7 +15997,7 @@ special/newbiepilot.o: special/newbiepilot.cpp.o
 
 # target to build an object file
 special/newbiepilot.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/newbiepilot.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/newbiepilot.cpp.o
 .PHONY : special/newbiepilot.cpp.o
 
 special/newbiepilot.i: special/newbiepilot.cpp.i
@@ -16008,7 +16006,7 @@ special/newbiepilot.i: special/newbiepilot.cpp.i
 
 # target to preprocess a source file
 special/newbiepilot.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/newbiepilot.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/newbiepilot.cpp.i
 .PHONY : special/newbiepilot.cpp.i
 
 special/newbiepilot.s: special/newbiepilot.cpp.s
@@ -16017,7 +16015,7 @@ special/newbiepilot.s: special/newbiepilot.cpp.s
 
 # target to generate assembly for a file
 special/newbiepilot.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/newbiepilot.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/newbiepilot.cpp.s
 .PHONY : special/newbiepilot.cpp.s
 
 special/poison.o: special/poison.cpp.o
@@ -16026,7 +16024,7 @@ special/poison.o: special/poison.cpp.o
 
 # target to build an object file
 special/poison.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/poison.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/poison.cpp.o
 .PHONY : special/poison.cpp.o
 
 special/poison.i: special/poison.cpp.i
@@ -16035,7 +16033,7 @@ special/poison.i: special/poison.cpp.i
 
 # target to preprocess a source file
 special/poison.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/poison.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/poison.cpp.i
 .PHONY : special/poison.cpp.i
 
 special/poison.s: special/poison.cpp.s
@@ -16044,7 +16042,7 @@ special/poison.s: special/poison.cpp.s
 
 # target to generate assembly for a file
 special/poison.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/poison.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/poison.cpp.s
 .PHONY : special/poison.cpp.s
 
 special/police.o: special/police.cpp.o
@@ -16053,7 +16051,7 @@ special/police.o: special/police.cpp.o
 
 # target to build an object file
 special/police.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/police.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/police.cpp.o
 .PHONY : special/police.cpp.o
 
 special/police.i: special/police.cpp.i
@@ -16062,7 +16060,7 @@ special/police.i: special/police.cpp.i
 
 # target to preprocess a source file
 special/police.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/police.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/police.cpp.i
 .PHONY : special/police.cpp.i
 
 special/police.s: special/police.cpp.s
@@ -16071,7 +16069,7 @@ special/police.s: special/police.cpp.s
 
 # target to generate assembly for a file
 special/police.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/police.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/police.cpp.s
 .PHONY : special/police.cpp.s
 
 special/policeattack.o: special/policeattack.cpp.o
@@ -16080,7 +16078,7 @@ special/policeattack.o: special/policeattack.cpp.o
 
 # target to build an object file
 special/policeattack.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/policeattack.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/policeattack.cpp.o
 .PHONY : special/policeattack.cpp.o
 
 special/policeattack.i: special/policeattack.cpp.i
@@ -16089,7 +16087,7 @@ special/policeattack.i: special/policeattack.cpp.i
 
 # target to preprocess a source file
 special/policeattack.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/policeattack.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/policeattack.cpp.i
 .PHONY : special/policeattack.cpp.i
 
 special/policeattack.s: special/policeattack.cpp.s
@@ -16098,7 +16096,7 @@ special/policeattack.s: special/policeattack.cpp.s
 
 # target to generate assembly for a file
 special/policeattack.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/policeattack.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/policeattack.cpp.s
 .PHONY : special/policeattack.cpp.s
 
 special/policefine.o: special/policefine.cpp.o
@@ -16107,7 +16105,7 @@ special/policefine.o: special/policefine.cpp.o
 
 # target to build an object file
 special/policefine.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/policefine.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/policefine.cpp.o
 .PHONY : special/policefine.cpp.o
 
 special/policefine.i: special/policefine.cpp.i
@@ -16116,7 +16114,7 @@ special/policefine.i: special/policefine.cpp.i
 
 # target to preprocess a source file
 special/policefine.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/policefine.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/policefine.cpp.i
 .PHONY : special/policefine.cpp.i
 
 special/policefine.s: special/policefine.cpp.s
@@ -16125,7 +16123,7 @@ special/policefine.s: special/policefine.cpp.s
 
 # target to generate assembly for a file
 special/policefine.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/policefine.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/policefine.cpp.s
 .PHONY : special/policefine.cpp.s
 
 special/policejail.o: special/policejail.cpp.o
@@ -16134,7 +16132,7 @@ special/policejail.o: special/policejail.cpp.o
 
 # target to build an object file
 special/policejail.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/policejail.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/policejail.cpp.o
 .PHONY : special/policejail.cpp.o
 
 special/policejail.i: special/policejail.cpp.i
@@ -16143,7 +16141,7 @@ special/policejail.i: special/policejail.cpp.i
 
 # target to preprocess a source file
 special/policejail.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/policejail.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/policejail.cpp.i
 .PHONY : special/policejail.cpp.i
 
 special/policejail.s: special/policejail.cpp.s
@@ -16152,7 +16150,7 @@ special/policejail.s: special/policejail.cpp.s
 
 # target to generate assembly for a file
 special/policejail.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/policejail.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/policejail.cpp.s
 .PHONY : special/policejail.cpp.s
 
 special/policeundercover.o: special/policeundercover.cpp.o
@@ -16161,7 +16159,7 @@ special/policeundercover.o: special/policeundercover.cpp.o
 
 # target to build an object file
 special/policeundercover.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/policeundercover.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/policeundercover.cpp.o
 .PHONY : special/policeundercover.cpp.o
 
 special/policeundercover.i: special/policeundercover.cpp.i
@@ -16170,7 +16168,7 @@ special/policeundercover.i: special/policeundercover.cpp.i
 
 # target to preprocess a source file
 special/policeundercover.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/policeundercover.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/policeundercover.cpp.i
 .PHONY : special/policeundercover.cpp.i
 
 special/policeundercover.s: special/policeundercover.cpp.s
@@ -16179,7 +16177,7 @@ special/policeundercover.s: special/policeundercover.cpp.s
 
 # target to generate assembly for a file
 special/policeundercover.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/policeundercover.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/policeundercover.cpp.s
 .PHONY : special/policeundercover.cpp.s
 
 special/rebeltrooper.o: special/rebeltrooper.cpp.o
@@ -16188,7 +16186,7 @@ special/rebeltrooper.o: special/rebeltrooper.cpp.o
 
 # target to build an object file
 special/rebeltrooper.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/rebeltrooper.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/rebeltrooper.cpp.o
 .PHONY : special/rebeltrooper.cpp.o
 
 special/rebeltrooper.i: special/rebeltrooper.cpp.i
@@ -16197,7 +16195,7 @@ special/rebeltrooper.i: special/rebeltrooper.cpp.i
 
 # target to preprocess a source file
 special/rebeltrooper.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/rebeltrooper.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/rebeltrooper.cpp.i
 .PHONY : special/rebeltrooper.cpp.i
 
 special/rebeltrooper.s: special/rebeltrooper.cpp.s
@@ -16206,7 +16204,7 @@ special/rebeltrooper.s: special/rebeltrooper.cpp.s
 
 # target to generate assembly for a file
 special/rebeltrooper.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/rebeltrooper.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/rebeltrooper.cpp.s
 .PHONY : special/rebeltrooper.cpp.s
 
 special/stormtrooper.o: special/stormtrooper.cpp.o
@@ -16215,7 +16213,7 @@ special/stormtrooper.o: special/stormtrooper.cpp.o
 
 # target to build an object file
 special/stormtrooper.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/stormtrooper.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/stormtrooper.cpp.o
 .PHONY : special/stormtrooper.cpp.o
 
 special/stormtrooper.i: special/stormtrooper.cpp.i
@@ -16224,7 +16222,7 @@ special/stormtrooper.i: special/stormtrooper.cpp.i
 
 # target to preprocess a source file
 special/stormtrooper.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/stormtrooper.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/stormtrooper.cpp.i
 .PHONY : special/stormtrooper.cpp.i
 
 special/stormtrooper.s: special/stormtrooper.cpp.s
@@ -16233,7 +16231,7 @@ special/stormtrooper.s: special/stormtrooper.cpp.s
 
 # target to generate assembly for a file
 special/stormtrooper.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/stormtrooper.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/stormtrooper.cpp.s
 .PHONY : special/stormtrooper.cpp.s
 
 special/thief.o: special/thief.cpp.o
@@ -16242,7 +16240,7 @@ special/thief.o: special/thief.cpp.o
 
 # target to build an object file
 special/thief.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/thief.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/thief.cpp.o
 .PHONY : special/thief.cpp.o
 
 special/thief.i: special/thief.cpp.i
@@ -16251,7 +16249,7 @@ special/thief.i: special/thief.cpp.i
 
 # target to preprocess a source file
 special/thief.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/thief.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/thief.cpp.i
 .PHONY : special/thief.cpp.i
 
 special/thief.s: special/thief.cpp.s
@@ -16260,7 +16258,7 @@ special/thief.s: special/thief.cpp.s
 
 # target to generate assembly for a file
 special/thief.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/special/thief.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/special/thief.cpp.s
 .PHONY : special/thief.cpp.s
 
 spells/affect.o: spells/affect.cpp.o
@@ -16269,7 +16267,7 @@ spells/affect.o: spells/affect.cpp.o
 
 # target to build an object file
 spells/affect.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/affect.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/affect.cpp.o
 .PHONY : spells/affect.cpp.o
 
 spells/affect.i: spells/affect.cpp.i
@@ -16278,7 +16276,7 @@ spells/affect.i: spells/affect.cpp.i
 
 # target to preprocess a source file
 spells/affect.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/affect.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/affect.cpp.i
 .PHONY : spells/affect.cpp.i
 
 spells/affect.s: spells/affect.cpp.s
@@ -16287,7 +16285,7 @@ spells/affect.s: spells/affect.cpp.s
 
 # target to generate assembly for a file
 spells/affect.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/affect.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/affect.cpp.s
 .PHONY : spells/affect.cpp.s
 
 spells/affectchar.o: spells/affectchar.cpp.o
@@ -16296,7 +16294,7 @@ spells/affectchar.o: spells/affectchar.cpp.o
 
 # target to build an object file
 spells/affectchar.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/affectchar.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/affectchar.cpp.o
 .PHONY : spells/affectchar.cpp.o
 
 spells/affectchar.i: spells/affectchar.cpp.i
@@ -16305,7 +16303,7 @@ spells/affectchar.i: spells/affectchar.cpp.i
 
 # target to preprocess a source file
 spells/affectchar.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/affectchar.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/affectchar.cpp.i
 .PHONY : spells/affectchar.cpp.i
 
 spells/affectchar.s: spells/affectchar.cpp.s
@@ -16314,7 +16312,7 @@ spells/affectchar.s: spells/affectchar.cpp.s
 
 # target to generate assembly for a file
 spells/affectchar.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/affectchar.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/affectchar.cpp.s
 .PHONY : spells/affectchar.cpp.s
 
 spells/areaattack.o: spells/areaattack.cpp.o
@@ -16323,7 +16321,7 @@ spells/areaattack.o: spells/areaattack.cpp.o
 
 # target to build an object file
 spells/areaattack.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/areaattack.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/areaattack.cpp.o
 .PHONY : spells/areaattack.cpp.o
 
 spells/areaattack.i: spells/areaattack.cpp.i
@@ -16332,7 +16330,7 @@ spells/areaattack.i: spells/areaattack.cpp.i
 
 # target to preprocess a source file
 spells/areaattack.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/areaattack.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/areaattack.cpp.i
 .PHONY : spells/areaattack.cpp.i
 
 spells/areaattack.s: spells/areaattack.cpp.s
@@ -16341,7 +16339,7 @@ spells/areaattack.s: spells/areaattack.cpp.s
 
 # target to generate assembly for a file
 spells/areaattack.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/areaattack.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/areaattack.cpp.s
 .PHONY : spells/areaattack.cpp.s
 
 spells/attack.o: spells/attack.cpp.o
@@ -16350,7 +16348,7 @@ spells/attack.o: spells/attack.cpp.o
 
 # target to build an object file
 spells/attack.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/attack.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/attack.cpp.o
 .PHONY : spells/attack.cpp.o
 
 spells/attack.i: spells/attack.cpp.i
@@ -16359,7 +16357,7 @@ spells/attack.i: spells/attack.cpp.i
 
 # target to preprocess a source file
 spells/attack.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/attack.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/attack.cpp.i
 .PHONY : spells/attack.cpp.i
 
 spells/attack.s: spells/attack.cpp.s
@@ -16368,7 +16366,7 @@ spells/attack.s: spells/attack.cpp.s
 
 # target to generate assembly for a file
 spells/attack.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/attack.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/attack.cpp.s
 .PHONY : spells/attack.cpp.s
 
 spells/blacklightning.o: spells/blacklightning.cpp.o
@@ -16377,7 +16375,7 @@ spells/blacklightning.o: spells/blacklightning.cpp.o
 
 # target to build an object file
 spells/blacklightning.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/blacklightning.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/blacklightning.cpp.o
 .PHONY : spells/blacklightning.cpp.o
 
 spells/blacklightning.i: spells/blacklightning.cpp.i
@@ -16386,7 +16384,7 @@ spells/blacklightning.i: spells/blacklightning.cpp.i
 
 # target to preprocess a source file
 spells/blacklightning.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/blacklightning.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/blacklightning.cpp.i
 .PHONY : spells/blacklightning.cpp.i
 
 spells/blacklightning.s: spells/blacklightning.cpp.s
@@ -16395,7 +16393,7 @@ spells/blacklightning.s: spells/blacklightning.cpp.s
 
 # target to generate assembly for a file
 spells/blacklightning.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/blacklightning.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/blacklightning.cpp.s
 .PHONY : spells/blacklightning.cpp.s
 
 spells/blindness.o: spells/blindness.cpp.o
@@ -16404,7 +16402,7 @@ spells/blindness.o: spells/blindness.cpp.o
 
 # target to build an object file
 spells/blindness.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/blindness.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/blindness.cpp.o
 .PHONY : spells/blindness.cpp.o
 
 spells/blindness.i: spells/blindness.cpp.i
@@ -16413,7 +16411,7 @@ spells/blindness.i: spells/blindness.cpp.i
 
 # target to preprocess a source file
 spells/blindness.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/blindness.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/blindness.cpp.i
 .PHONY : spells/blindness.cpp.i
 
 spells/blindness.s: spells/blindness.cpp.s
@@ -16422,7 +16420,7 @@ spells/blindness.s: spells/blindness.cpp.s
 
 # target to generate assembly for a file
 spells/blindness.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/blindness.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/blindness.cpp.s
 .PHONY : spells/blindness.cpp.s
 
 spells/causecritical.o: spells/causecritical.cpp.o
@@ -16431,7 +16429,7 @@ spells/causecritical.o: spells/causecritical.cpp.o
 
 # target to build an object file
 spells/causecritical.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/causecritical.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/causecritical.cpp.o
 .PHONY : spells/causecritical.cpp.o
 
 spells/causecritical.i: spells/causecritical.cpp.i
@@ -16440,7 +16438,7 @@ spells/causecritical.i: spells/causecritical.cpp.i
 
 # target to preprocess a source file
 spells/causecritical.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/causecritical.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/causecritical.cpp.i
 .PHONY : spells/causecritical.cpp.i
 
 spells/causecritical.s: spells/causecritical.cpp.s
@@ -16449,7 +16447,7 @@ spells/causecritical.s: spells/causecritical.cpp.s
 
 # target to generate assembly for a file
 spells/causecritical.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/causecritical.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/causecritical.cpp.s
 .PHONY : spells/causecritical.cpp.s
 
 spells/causelight.o: spells/causelight.cpp.o
@@ -16458,7 +16456,7 @@ spells/causelight.o: spells/causelight.cpp.o
 
 # target to build an object file
 spells/causelight.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/causelight.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/causelight.cpp.o
 .PHONY : spells/causelight.cpp.o
 
 spells/causelight.i: spells/causelight.cpp.i
@@ -16467,7 +16465,7 @@ spells/causelight.i: spells/causelight.cpp.i
 
 # target to preprocess a source file
 spells/causelight.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/causelight.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/causelight.cpp.i
 .PHONY : spells/causelight.cpp.i
 
 spells/causelight.s: spells/causelight.cpp.s
@@ -16476,7 +16474,7 @@ spells/causelight.s: spells/causelight.cpp.s
 
 # target to generate assembly for a file
 spells/causelight.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/causelight.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/causelight.cpp.s
 .PHONY : spells/causelight.cpp.s
 
 spells/causeserious.o: spells/causeserious.cpp.o
@@ -16485,7 +16483,7 @@ spells/causeserious.o: spells/causeserious.cpp.o
 
 # target to build an object file
 spells/causeserious.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/causeserious.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/causeserious.cpp.o
 .PHONY : spells/causeserious.cpp.o
 
 spells/causeserious.i: spells/causeserious.cpp.i
@@ -16494,7 +16492,7 @@ spells/causeserious.i: spells/causeserious.cpp.i
 
 # target to preprocess a source file
 spells/causeserious.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/causeserious.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/causeserious.cpp.i
 .PHONY : spells/causeserious.cpp.i
 
 spells/causeserious.s: spells/causeserious.cpp.s
@@ -16503,7 +16501,7 @@ spells/causeserious.s: spells/causeserious.cpp.s
 
 # target to generate assembly for a file
 spells/causeserious.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/causeserious.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/causeserious.cpp.s
 .PHONY : spells/causeserious.cpp.s
 
 spells/charmperson.o: spells/charmperson.cpp.o
@@ -16512,7 +16510,7 @@ spells/charmperson.o: spells/charmperson.cpp.o
 
 # target to build an object file
 spells/charmperson.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/charmperson.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/charmperson.cpp.o
 .PHONY : spells/charmperson.cpp.o
 
 spells/charmperson.i: spells/charmperson.cpp.i
@@ -16521,7 +16519,7 @@ spells/charmperson.i: spells/charmperson.cpp.i
 
 # target to preprocess a source file
 spells/charmperson.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/charmperson.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/charmperson.cpp.i
 .PHONY : spells/charmperson.cpp.i
 
 spells/charmperson.s: spells/charmperson.cpp.s
@@ -16530,7 +16528,7 @@ spells/charmperson.s: spells/charmperson.cpp.s
 
 # target to generate assembly for a file
 spells/charmperson.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/charmperson.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/charmperson.cpp.s
 .PHONY : spells/charmperson.cpp.s
 
 spells/createmob.o: spells/createmob.cpp.o
@@ -16539,7 +16537,7 @@ spells/createmob.o: spells/createmob.cpp.o
 
 # target to build an object file
 spells/createmob.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/createmob.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/createmob.cpp.o
 .PHONY : spells/createmob.cpp.o
 
 spells/createmob.i: spells/createmob.cpp.i
@@ -16548,7 +16546,7 @@ spells/createmob.i: spells/createmob.cpp.i
 
 # target to preprocess a source file
 spells/createmob.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/createmob.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/createmob.cpp.i
 .PHONY : spells/createmob.cpp.i
 
 spells/createmob.s: spells/createmob.cpp.s
@@ -16557,7 +16555,7 @@ spells/createmob.s: spells/createmob.cpp.s
 
 # target to generate assembly for a file
 spells/createmob.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/createmob.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/createmob.cpp.s
 .PHONY : spells/createmob.cpp.s
 
 spells/createobj.o: spells/createobj.cpp.o
@@ -16566,7 +16564,7 @@ spells/createobj.o: spells/createobj.cpp.o
 
 # target to build an object file
 spells/createobj.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/createobj.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/createobj.cpp.o
 .PHONY : spells/createobj.cpp.o
 
 spells/createobj.i: spells/createobj.cpp.i
@@ -16575,7 +16573,7 @@ spells/createobj.i: spells/createobj.cpp.i
 
 # target to preprocess a source file
 spells/createobj.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/createobj.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/createobj.cpp.i
 .PHONY : spells/createobj.cpp.i
 
 spells/createobj.s: spells/createobj.cpp.s
@@ -16584,7 +16582,7 @@ spells/createobj.s: spells/createobj.cpp.s
 
 # target to generate assembly for a file
 spells/createobj.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/createobj.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/createobj.cpp.s
 .PHONY : spells/createobj.cpp.s
 
 spells/cureblindness.o: spells/cureblindness.cpp.o
@@ -16593,7 +16591,7 @@ spells/cureblindness.o: spells/cureblindness.cpp.o
 
 # target to build an object file
 spells/cureblindness.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/cureblindness.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/cureblindness.cpp.o
 .PHONY : spells/cureblindness.cpp.o
 
 spells/cureblindness.i: spells/cureblindness.cpp.i
@@ -16602,7 +16600,7 @@ spells/cureblindness.i: spells/cureblindness.cpp.i
 
 # target to preprocess a source file
 spells/cureblindness.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/cureblindness.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/cureblindness.cpp.i
 .PHONY : spells/cureblindness.cpp.i
 
 spells/cureblindness.s: spells/cureblindness.cpp.s
@@ -16611,7 +16609,7 @@ spells/cureblindness.s: spells/cureblindness.cpp.s
 
 # target to generate assembly for a file
 spells/cureblindness.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/cureblindness.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/cureblindness.cpp.s
 .PHONY : spells/cureblindness.cpp.s
 
 spells/curepoison.o: spells/curepoison.cpp.o
@@ -16620,7 +16618,7 @@ spells/curepoison.o: spells/curepoison.cpp.o
 
 # target to build an object file
 spells/curepoison.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/curepoison.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/curepoison.cpp.o
 .PHONY : spells/curepoison.cpp.o
 
 spells/curepoison.i: spells/curepoison.cpp.i
@@ -16629,7 +16627,7 @@ spells/curepoison.i: spells/curepoison.cpp.i
 
 # target to preprocess a source file
 spells/curepoison.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/curepoison.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/curepoison.cpp.i
 .PHONY : spells/curepoison.cpp.i
 
 spells/curepoison.s: spells/curepoison.cpp.s
@@ -16638,7 +16636,7 @@ spells/curepoison.s: spells/curepoison.cpp.s
 
 # target to generate assembly for a file
 spells/curepoison.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/curepoison.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/curepoison.cpp.s
 .PHONY : spells/curepoison.cpp.s
 
 spells/detectpoison.o: spells/detectpoison.cpp.o
@@ -16647,7 +16645,7 @@ spells/detectpoison.o: spells/detectpoison.cpp.o
 
 # target to build an object file
 spells/detectpoison.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/detectpoison.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/detectpoison.cpp.o
 .PHONY : spells/detectpoison.cpp.o
 
 spells/detectpoison.i: spells/detectpoison.cpp.i
@@ -16656,7 +16654,7 @@ spells/detectpoison.i: spells/detectpoison.cpp.i
 
 # target to preprocess a source file
 spells/detectpoison.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/detectpoison.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/detectpoison.cpp.i
 .PHONY : spells/detectpoison.cpp.i
 
 spells/detectpoison.s: spells/detectpoison.cpp.s
@@ -16665,7 +16663,7 @@ spells/detectpoison.s: spells/detectpoison.cpp.s
 
 # target to generate assembly for a file
 spells/detectpoison.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/detectpoison.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/detectpoison.cpp.s
 .PHONY : spells/detectpoison.cpp.s
 
 spells/dispelevil.o: spells/dispelevil.cpp.o
@@ -16674,7 +16672,7 @@ spells/dispelevil.o: spells/dispelevil.cpp.o
 
 # target to build an object file
 spells/dispelevil.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/dispelevil.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/dispelevil.cpp.o
 .PHONY : spells/dispelevil.cpp.o
 
 spells/dispelevil.i: spells/dispelevil.cpp.i
@@ -16683,7 +16681,7 @@ spells/dispelevil.i: spells/dispelevil.cpp.i
 
 # target to preprocess a source file
 spells/dispelevil.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/dispelevil.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/dispelevil.cpp.i
 .PHONY : spells/dispelevil.cpp.i
 
 spells/dispelevil.s: spells/dispelevil.cpp.s
@@ -16692,7 +16690,7 @@ spells/dispelevil.s: spells/dispelevil.cpp.s
 
 # target to generate assembly for a file
 spells/dispelevil.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/dispelevil.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/dispelevil.cpp.s
 .PHONY : spells/dispelevil.cpp.s
 
 spells/dispelmagic.o: spells/dispelmagic.cpp.o
@@ -16701,7 +16699,7 @@ spells/dispelmagic.o: spells/dispelmagic.cpp.o
 
 # target to build an object file
 spells/dispelmagic.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/dispelmagic.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/dispelmagic.cpp.o
 .PHONY : spells/dispelmagic.cpp.o
 
 spells/dispelmagic.i: spells/dispelmagic.cpp.i
@@ -16710,7 +16708,7 @@ spells/dispelmagic.i: spells/dispelmagic.cpp.i
 
 # target to preprocess a source file
 spells/dispelmagic.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/dispelmagic.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/dispelmagic.cpp.i
 .PHONY : spells/dispelmagic.cpp.i
 
 spells/dispelmagic.s: spells/dispelmagic.cpp.s
@@ -16719,7 +16717,7 @@ spells/dispelmagic.s: spells/dispelmagic.cpp.s
 
 # target to generate assembly for a file
 spells/dispelmagic.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/dispelmagic.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/dispelmagic.cpp.s
 .PHONY : spells/dispelmagic.cpp.s
 
 spells/dream.o: spells/dream.cpp.o
@@ -16728,7 +16726,7 @@ spells/dream.o: spells/dream.cpp.o
 
 # target to build an object file
 spells/dream.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/dream.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/dream.cpp.o
 .PHONY : spells/dream.cpp.o
 
 spells/dream.i: spells/dream.cpp.i
@@ -16737,7 +16735,7 @@ spells/dream.i: spells/dream.cpp.i
 
 # target to preprocess a source file
 spells/dream.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/dream.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/dream.cpp.i
 .PHONY : spells/dream.cpp.i
 
 spells/dream.s: spells/dream.cpp.s
@@ -16746,7 +16744,7 @@ spells/dream.s: spells/dream.cpp.s
 
 # target to generate assembly for a file
 spells/dream.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/dream.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/dream.cpp.s
 .PHONY : spells/dream.cpp.s
 
 spells/earthquake.o: spells/earthquake.cpp.o
@@ -16755,7 +16753,7 @@ spells/earthquake.o: spells/earthquake.cpp.o
 
 # target to build an object file
 spells/earthquake.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/earthquake.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/earthquake.cpp.o
 .PHONY : spells/earthquake.cpp.o
 
 spells/earthquake.i: spells/earthquake.cpp.i
@@ -16764,7 +16762,7 @@ spells/earthquake.i: spells/earthquake.cpp.i
 
 # target to preprocess a source file
 spells/earthquake.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/earthquake.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/earthquake.cpp.i
 .PHONY : spells/earthquake.cpp.i
 
 spells/earthquake.s: spells/earthquake.cpp.s
@@ -16773,7 +16771,7 @@ spells/earthquake.s: spells/earthquake.cpp.s
 
 # target to generate assembly for a file
 spells/earthquake.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/earthquake.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/earthquake.cpp.s
 .PHONY : spells/earthquake.cpp.s
 
 spells/energydrain.o: spells/energydrain.cpp.o
@@ -16782,7 +16780,7 @@ spells/energydrain.o: spells/energydrain.cpp.o
 
 # target to build an object file
 spells/energydrain.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/energydrain.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/energydrain.cpp.o
 .PHONY : spells/energydrain.cpp.o
 
 spells/energydrain.i: spells/energydrain.cpp.i
@@ -16791,7 +16789,7 @@ spells/energydrain.i: spells/energydrain.cpp.i
 
 # target to preprocess a source file
 spells/energydrain.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/energydrain.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/energydrain.cpp.i
 .PHONY : spells/energydrain.cpp.i
 
 spells/energydrain.s: spells/energydrain.cpp.s
@@ -16800,7 +16798,7 @@ spells/energydrain.s: spells/energydrain.cpp.s
 
 # target to generate assembly for a file
 spells/energydrain.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/energydrain.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/energydrain.cpp.s
 .PHONY : spells/energydrain.cpp.s
 
 spells/farsight.o: spells/farsight.cpp.o
@@ -16809,7 +16807,7 @@ spells/farsight.o: spells/farsight.cpp.o
 
 # target to build an object file
 spells/farsight.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/farsight.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/farsight.cpp.o
 .PHONY : spells/farsight.cpp.o
 
 spells/farsight.i: spells/farsight.cpp.i
@@ -16818,7 +16816,7 @@ spells/farsight.i: spells/farsight.cpp.i
 
 # target to preprocess a source file
 spells/farsight.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/farsight.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/farsight.cpp.i
 .PHONY : spells/farsight.cpp.i
 
 spells/farsight.s: spells/farsight.cpp.s
@@ -16827,7 +16825,7 @@ spells/farsight.s: spells/farsight.cpp.s
 
 # target to generate assembly for a file
 spells/farsight.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/farsight.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/farsight.cpp.s
 .PHONY : spells/farsight.cpp.s
 
 spells/fireball.o: spells/fireball.cpp.o
@@ -16836,7 +16834,7 @@ spells/fireball.o: spells/fireball.cpp.o
 
 # target to build an object file
 spells/fireball.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/fireball.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/fireball.cpp.o
 .PHONY : spells/fireball.cpp.o
 
 spells/fireball.i: spells/fireball.cpp.i
@@ -16845,7 +16843,7 @@ spells/fireball.i: spells/fireball.cpp.i
 
 # target to preprocess a source file
 spells/fireball.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/fireball.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/fireball.cpp.i
 .PHONY : spells/fireball.cpp.i
 
 spells/fireball.s: spells/fireball.cpp.s
@@ -16854,7 +16852,7 @@ spells/fireball.s: spells/fireball.cpp.s
 
 # target to generate assembly for a file
 spells/fireball.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/fireball.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/fireball.cpp.s
 .PHONY : spells/fireball.cpp.s
 
 spells/flamestrike.o: spells/flamestrike.cpp.o
@@ -16863,7 +16861,7 @@ spells/flamestrike.o: spells/flamestrike.cpp.o
 
 # target to build an object file
 spells/flamestrike.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/flamestrike.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/flamestrike.cpp.o
 .PHONY : spells/flamestrike.cpp.o
 
 spells/flamestrike.i: spells/flamestrike.cpp.i
@@ -16872,7 +16870,7 @@ spells/flamestrike.i: spells/flamestrike.cpp.i
 
 # target to preprocess a source file
 spells/flamestrike.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/flamestrike.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/flamestrike.cpp.i
 .PHONY : spells/flamestrike.cpp.i
 
 spells/flamestrike.s: spells/flamestrike.cpp.s
@@ -16881,7 +16879,7 @@ spells/flamestrike.s: spells/flamestrike.cpp.s
 
 # target to generate assembly for a file
 spells/flamestrike.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/flamestrike.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/flamestrike.cpp.s
 .PHONY : spells/flamestrike.cpp.s
 
 spells/handofchaos.o: spells/handofchaos.cpp.o
@@ -16890,7 +16888,7 @@ spells/handofchaos.o: spells/handofchaos.cpp.o
 
 # target to build an object file
 spells/handofchaos.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/handofchaos.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/handofchaos.cpp.o
 .PHONY : spells/handofchaos.cpp.o
 
 spells/handofchaos.i: spells/handofchaos.cpp.i
@@ -16899,7 +16897,7 @@ spells/handofchaos.i: spells/handofchaos.cpp.i
 
 # target to preprocess a source file
 spells/handofchaos.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/handofchaos.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/handofchaos.cpp.i
 .PHONY : spells/handofchaos.cpp.i
 
 spells/handofchaos.s: spells/handofchaos.cpp.s
@@ -16908,7 +16906,7 @@ spells/handofchaos.s: spells/handofchaos.cpp.s
 
 # target to generate assembly for a file
 spells/handofchaos.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/handofchaos.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/handofchaos.cpp.s
 .PHONY : spells/handofchaos.cpp.s
 
 spells/harm.o: spells/harm.cpp.o
@@ -16917,7 +16915,7 @@ spells/harm.o: spells/harm.cpp.o
 
 # target to build an object file
 spells/harm.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/harm.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/harm.cpp.o
 .PHONY : spells/harm.cpp.o
 
 spells/harm.i: spells/harm.cpp.i
@@ -16926,7 +16924,7 @@ spells/harm.i: spells/harm.cpp.i
 
 # target to preprocess a source file
 spells/harm.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/harm.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/harm.cpp.i
 .PHONY : spells/harm.cpp.i
 
 spells/harm.s: spells/harm.cpp.s
@@ -16935,7 +16933,7 @@ spells/harm.s: spells/harm.cpp.s
 
 # target to generate assembly for a file
 spells/harm.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/harm.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/harm.cpp.s
 .PHONY : spells/harm.cpp.s
 
 spells/identify.o: spells/identify.cpp.o
@@ -16944,7 +16942,7 @@ spells/identify.o: spells/identify.cpp.o
 
 # target to build an object file
 spells/identify.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/identify.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/identify.cpp.o
 .PHONY : spells/identify.cpp.o
 
 spells/identify.i: spells/identify.cpp.i
@@ -16953,7 +16951,7 @@ spells/identify.i: spells/identify.cpp.i
 
 # target to preprocess a source file
 spells/identify.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/identify.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/identify.cpp.i
 .PHONY : spells/identify.cpp.i
 
 spells/identify.s: spells/identify.cpp.s
@@ -16962,7 +16960,7 @@ spells/identify.s: spells/identify.cpp.s
 
 # target to generate assembly for a file
 spells/identify.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/identify.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/identify.cpp.s
 .PHONY : spells/identify.cpp.s
 
 spells/invis.o: spells/invis.cpp.o
@@ -16971,7 +16969,7 @@ spells/invis.o: spells/invis.cpp.o
 
 # target to build an object file
 spells/invis.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/invis.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/invis.cpp.o
 .PHONY : spells/invis.cpp.o
 
 spells/invis.i: spells/invis.cpp.i
@@ -16980,7 +16978,7 @@ spells/invis.i: spells/invis.cpp.i
 
 # target to preprocess a source file
 spells/invis.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/invis.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/invis.cpp.i
 .PHONY : spells/invis.cpp.i
 
 spells/invis.s: spells/invis.cpp.s
@@ -16989,7 +16987,7 @@ spells/invis.s: spells/invis.cpp.s
 
 # target to generate assembly for a file
 spells/invis.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/invis.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/invis.cpp.s
 .PHONY : spells/invis.cpp.s
 
 spells/knowalignment.o: spells/knowalignment.cpp.o
@@ -16998,7 +16996,7 @@ spells/knowalignment.o: spells/knowalignment.cpp.o
 
 # target to build an object file
 spells/knowalignment.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/knowalignment.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/knowalignment.cpp.o
 .PHONY : spells/knowalignment.cpp.o
 
 spells/knowalignment.i: spells/knowalignment.cpp.i
@@ -17007,7 +17005,7 @@ spells/knowalignment.i: spells/knowalignment.cpp.i
 
 # target to preprocess a source file
 spells/knowalignment.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/knowalignment.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/knowalignment.cpp.i
 .PHONY : spells/knowalignment.cpp.i
 
 spells/knowalignment.s: spells/knowalignment.cpp.s
@@ -17016,7 +17014,7 @@ spells/knowalignment.s: spells/knowalignment.cpp.s
 
 # target to generate assembly for a file
 spells/knowalignment.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/knowalignment.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/knowalignment.cpp.s
 .PHONY : spells/knowalignment.cpp.s
 
 spells/lightningbolt.o: spells/lightningbolt.cpp.o
@@ -17025,7 +17023,7 @@ spells/lightningbolt.o: spells/lightningbolt.cpp.o
 
 # target to build an object file
 spells/lightningbolt.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/lightningbolt.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/lightningbolt.cpp.o
 .PHONY : spells/lightningbolt.cpp.o
 
 spells/lightningbolt.i: spells/lightningbolt.cpp.i
@@ -17034,7 +17032,7 @@ spells/lightningbolt.i: spells/lightningbolt.cpp.i
 
 # target to preprocess a source file
 spells/lightningbolt.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/lightningbolt.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/lightningbolt.cpp.i
 .PHONY : spells/lightningbolt.cpp.i
 
 spells/lightningbolt.s: spells/lightningbolt.cpp.s
@@ -17043,7 +17041,7 @@ spells/lightningbolt.s: spells/lightningbolt.cpp.s
 
 # target to generate assembly for a file
 spells/lightningbolt.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/lightningbolt.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/lightningbolt.cpp.s
 .PHONY : spells/lightningbolt.cpp.s
 
 spells/objinv.o: spells/objinv.cpp.o
@@ -17052,7 +17050,7 @@ spells/objinv.o: spells/objinv.cpp.o
 
 # target to build an object file
 spells/objinv.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/objinv.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/objinv.cpp.o
 .PHONY : spells/objinv.cpp.o
 
 spells/objinv.i: spells/objinv.cpp.i
@@ -17061,7 +17059,7 @@ spells/objinv.i: spells/objinv.cpp.i
 
 # target to preprocess a source file
 spells/objinv.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/objinv.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/objinv.cpp.i
 .PHONY : spells/objinv.cpp.i
 
 spells/objinv.s: spells/objinv.cpp.s
@@ -17070,7 +17068,7 @@ spells/objinv.s: spells/objinv.cpp.s
 
 # target to generate assembly for a file
 spells/objinv.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/objinv.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/objinv.cpp.s
 .PHONY : spells/objinv.cpp.s
 
 spells/poison.o: spells/poison.cpp.o
@@ -17079,7 +17077,7 @@ spells/poison.o: spells/poison.cpp.o
 
 # target to build an object file
 spells/poison.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/poison.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/poison.cpp.o
 .PHONY : spells/poison.cpp.o
 
 spells/poison.i: spells/poison.cpp.i
@@ -17088,7 +17086,7 @@ spells/poison.i: spells/poison.cpp.i
 
 # target to preprocess a source file
 spells/poison.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/poison.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/poison.cpp.i
 .PHONY : spells/poison.cpp.i
 
 spells/poison.s: spells/poison.cpp.s
@@ -17097,7 +17095,7 @@ spells/poison.s: spells/poison.cpp.s
 
 # target to generate assembly for a file
 spells/poison.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/poison.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/poison.cpp.s
 .PHONY : spells/poison.cpp.s
 
 spells/possess.o: spells/possess.cpp.o
@@ -17106,7 +17104,7 @@ spells/possess.o: spells/possess.cpp.o
 
 # target to build an object file
 spells/possess.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/possess.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/possess.cpp.o
 .PHONY : spells/possess.cpp.o
 
 spells/possess.i: spells/possess.cpp.i
@@ -17115,7 +17113,7 @@ spells/possess.i: spells/possess.cpp.i
 
 # target to preprocess a source file
 spells/possess.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/possess.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/possess.cpp.i
 .PHONY : spells/possess.cpp.i
 
 spells/possess.s: spells/possess.cpp.s
@@ -17124,7 +17122,7 @@ spells/possess.s: spells/possess.cpp.s
 
 # target to generate assembly for a file
 spells/possess.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/possess.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/possess.cpp.s
 .PHONY : spells/possess.cpp.s
 
 spells/removeinvis.o: spells/removeinvis.cpp.o
@@ -17133,7 +17131,7 @@ spells/removeinvis.o: spells/removeinvis.cpp.o
 
 # target to build an object file
 spells/removeinvis.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/removeinvis.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/removeinvis.cpp.o
 .PHONY : spells/removeinvis.cpp.o
 
 spells/removeinvis.i: spells/removeinvis.cpp.i
@@ -17142,7 +17140,7 @@ spells/removeinvis.i: spells/removeinvis.cpp.i
 
 # target to preprocess a source file
 spells/removeinvis.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/removeinvis.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/removeinvis.cpp.i
 .PHONY : spells/removeinvis.cpp.i
 
 spells/removeinvis.s: spells/removeinvis.cpp.s
@@ -17151,7 +17149,7 @@ spells/removeinvis.s: spells/removeinvis.cpp.s
 
 # target to generate assembly for a file
 spells/removeinvis.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/removeinvis.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/removeinvis.cpp.s
 .PHONY : spells/removeinvis.cpp.s
 
 spells/removetrap.o: spells/removetrap.cpp.o
@@ -17160,7 +17158,7 @@ spells/removetrap.o: spells/removetrap.cpp.o
 
 # target to build an object file
 spells/removetrap.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/removetrap.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/removetrap.cpp.o
 .PHONY : spells/removetrap.cpp.o
 
 spells/removetrap.i: spells/removetrap.cpp.i
@@ -17169,7 +17167,7 @@ spells/removetrap.i: spells/removetrap.cpp.i
 
 # target to preprocess a source file
 spells/removetrap.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/removetrap.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/removetrap.cpp.i
 .PHONY : spells/removetrap.cpp.i
 
 spells/removetrap.s: spells/removetrap.cpp.s
@@ -17178,7 +17176,7 @@ spells/removetrap.s: spells/removetrap.cpp.s
 
 # target to generate assembly for a file
 spells/removetrap.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/removetrap.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/removetrap.cpp.s
 .PHONY : spells/removetrap.cpp.s
 
 spells/scorchingsurge.o: spells/scorchingsurge.cpp.o
@@ -17187,7 +17185,7 @@ spells/scorchingsurge.o: spells/scorchingsurge.cpp.o
 
 # target to build an object file
 spells/scorchingsurge.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/scorchingsurge.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/scorchingsurge.cpp.o
 .PHONY : spells/scorchingsurge.cpp.o
 
 spells/scorchingsurge.i: spells/scorchingsurge.cpp.i
@@ -17196,7 +17194,7 @@ spells/scorchingsurge.i: spells/scorchingsurge.cpp.i
 
 # target to preprocess a source file
 spells/scorchingsurge.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/scorchingsurge.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/scorchingsurge.cpp.i
 .PHONY : spells/scorchingsurge.cpp.i
 
 spells/scorchingsurge.s: spells/scorchingsurge.cpp.s
@@ -17205,7 +17203,7 @@ spells/scorchingsurge.s: spells/scorchingsurge.cpp.s
 
 # target to generate assembly for a file
 spells/scorchingsurge.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/scorchingsurge.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/scorchingsurge.cpp.s
 .PHONY : spells/scorchingsurge.cpp.s
 
 spells/shockinggrasp.o: spells/shockinggrasp.cpp.o
@@ -17214,7 +17212,7 @@ spells/shockinggrasp.o: spells/shockinggrasp.cpp.o
 
 # target to build an object file
 spells/shockinggrasp.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/shockinggrasp.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/shockinggrasp.cpp.o
 .PHONY : spells/shockinggrasp.cpp.o
 
 spells/shockinggrasp.i: spells/shockinggrasp.cpp.i
@@ -17223,7 +17221,7 @@ spells/shockinggrasp.i: spells/shockinggrasp.cpp.i
 
 # target to preprocess a source file
 spells/shockinggrasp.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/shockinggrasp.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/shockinggrasp.cpp.i
 .PHONY : spells/shockinggrasp.cpp.i
 
 spells/shockinggrasp.s: spells/shockinggrasp.cpp.s
@@ -17232,7 +17230,7 @@ spells/shockinggrasp.s: spells/shockinggrasp.cpp.s
 
 # target to generate assembly for a file
 spells/shockinggrasp.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/shockinggrasp.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/shockinggrasp.cpp.s
 .PHONY : spells/shockinggrasp.cpp.s
 
 spells/sleep.o: spells/sleep.cpp.o
@@ -17241,7 +17239,7 @@ spells/sleep.o: spells/sleep.cpp.o
 
 # target to build an object file
 spells/sleep.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/sleep.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/sleep.cpp.o
 .PHONY : spells/sleep.cpp.o
 
 spells/sleep.i: spells/sleep.cpp.i
@@ -17250,7 +17248,7 @@ spells/sleep.i: spells/sleep.cpp.i
 
 # target to preprocess a source file
 spells/sleep.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/sleep.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/sleep.cpp.i
 .PHONY : spells/sleep.cpp.i
 
 spells/sleep.s: spells/sleep.cpp.s
@@ -17259,7 +17257,7 @@ spells/sleep.s: spells/sleep.cpp.s
 
 # target to generate assembly for a file
 spells/sleep.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/sleep.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/sleep.cpp.s
 .PHONY : spells/sleep.cpp.s
 
 spells/smaug.o: spells/smaug.cpp.o
@@ -17268,7 +17266,7 @@ spells/smaug.o: spells/smaug.cpp.o
 
 # target to build an object file
 spells/smaug.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/smaug.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/smaug.cpp.o
 .PHONY : spells/smaug.cpp.o
 
 spells/smaug.i: spells/smaug.cpp.i
@@ -17277,7 +17275,7 @@ spells/smaug.i: spells/smaug.cpp.i
 
 # target to preprocess a source file
 spells/smaug.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/smaug.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/smaug.cpp.i
 .PHONY : spells/smaug.cpp.i
 
 spells/smaug.s: spells/smaug.cpp.s
@@ -17286,7 +17284,7 @@ spells/smaug.s: spells/smaug.cpp.s
 
 # target to generate assembly for a file
 spells/smaug.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/smaug.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/smaug.cpp.s
 .PHONY : spells/smaug.cpp.s
 
 spells/ventriloquate.o: spells/ventriloquate.cpp.o
@@ -17295,7 +17293,7 @@ spells/ventriloquate.o: spells/ventriloquate.cpp.o
 
 # target to build an object file
 spells/ventriloquate.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/ventriloquate.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/ventriloquate.cpp.o
 .PHONY : spells/ventriloquate.cpp.o
 
 spells/ventriloquate.i: spells/ventriloquate.cpp.i
@@ -17304,7 +17302,7 @@ spells/ventriloquate.i: spells/ventriloquate.cpp.i
 
 # target to preprocess a source file
 spells/ventriloquate.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/ventriloquate.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/ventriloquate.cpp.i
 .PHONY : spells/ventriloquate.cpp.i
 
 spells/ventriloquate.s: spells/ventriloquate.cpp.s
@@ -17313,7 +17311,7 @@ spells/ventriloquate.s: spells/ventriloquate.cpp.s
 
 # target to generate assembly for a file
 spells/ventriloquate.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/ventriloquate.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/ventriloquate.cpp.s
 .PHONY : spells/ventriloquate.cpp.s
 
 spells/weaken.o: spells/weaken.cpp.o
@@ -17322,7 +17320,7 @@ spells/weaken.o: spells/weaken.cpp.o
 
 # target to build an object file
 spells/weaken.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/weaken.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/weaken.cpp.o
 .PHONY : spells/weaken.cpp.o
 
 spells/weaken.i: spells/weaken.cpp.i
@@ -17331,7 +17329,7 @@ spells/weaken.i: spells/weaken.cpp.i
 
 # target to preprocess a source file
 spells/weaken.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/weaken.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/weaken.cpp.i
 .PHONY : spells/weaken.cpp.i
 
 spells/weaken.s: spells/weaken.cpp.s
@@ -17340,7 +17338,7 @@ spells/weaken.s: spells/weaken.cpp.s
 
 # target to generate assembly for a file
 spells/weaken.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/spells/weaken.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/spells/weaken.cpp.s
 .PHONY : spells/weaken.cpp.s
 
 systemdata.o: systemdata.cpp.o
@@ -17349,7 +17347,7 @@ systemdata.o: systemdata.cpp.o
 
 # target to build an object file
 systemdata.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/systemdata.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/systemdata.cpp.o
 .PHONY : systemdata.cpp.o
 
 systemdata.i: systemdata.cpp.i
@@ -17358,7 +17356,7 @@ systemdata.i: systemdata.cpp.i
 
 # target to preprocess a source file
 systemdata.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/systemdata.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/systemdata.cpp.i
 .PHONY : systemdata.cpp.i
 
 systemdata.s: systemdata.cpp.s
@@ -17367,7 +17365,7 @@ systemdata.s: systemdata.cpp.s
 
 # target to generate assembly for a file
 systemdata.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/systemdata.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/systemdata.cpp.s
 .PHONY : systemdata.cpp.s
 
 tables.o: tables.cpp.o
@@ -17376,7 +17374,7 @@ tables.o: tables.cpp.o
 
 # target to build an object file
 tables.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/tables.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/tables.cpp.o
 .PHONY : tables.cpp.o
 
 tables.i: tables.cpp.i
@@ -17385,7 +17383,7 @@ tables.i: tables.cpp.i
 
 # target to preprocess a source file
 tables.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/tables.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/tables.cpp.i
 .PHONY : tables.cpp.i
 
 tables.s: tables.cpp.s
@@ -17394,7 +17392,7 @@ tables.s: tables.cpp.s
 
 # target to generate assembly for a file
 tables.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/tables.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/tables.cpp.s
 .PHONY : tables.cpp.s
 
 track.o: track.cpp.o
@@ -17403,7 +17401,7 @@ track.o: track.cpp.o
 
 # target to build an object file
 track.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/track.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/track.cpp.o
 .PHONY : track.cpp.o
 
 track.i: track.cpp.i
@@ -17412,7 +17410,7 @@ track.i: track.cpp.i
 
 # target to preprocess a source file
 track.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/track.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/track.cpp.i
 .PHONY : track.cpp.i
 
 track.s: track.cpp.s
@@ -17421,7 +17419,7 @@ track.s: track.cpp.s
 
 # target to generate assembly for a file
 track.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/track.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/track.cpp.s
 .PHONY : track.cpp.s
 
 turret.o: turret.cpp.o
@@ -17430,7 +17428,7 @@ turret.o: turret.cpp.o
 
 # target to build an object file
 turret.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/turret.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/turret.cpp.o
 .PHONY : turret.cpp.o
 
 turret.i: turret.cpp.i
@@ -17439,7 +17437,7 @@ turret.i: turret.cpp.i
 
 # target to preprocess a source file
 turret.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/turret.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/turret.cpp.i
 .PHONY : turret.cpp.i
 
 turret.s: turret.cpp.s
@@ -17448,7 +17446,7 @@ turret.s: turret.cpp.s
 
 # target to generate assembly for a file
 turret.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/turret.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/turret.cpp.s
 .PHONY : turret.cpp.s
 
 update.o: update.cpp.o
@@ -17457,7 +17455,7 @@ update.o: update.cpp.o
 
 # target to build an object file
 update.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/update.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/update.cpp.o
 .PHONY : update.cpp.o
 
 update.i: update.cpp.i
@@ -17466,7 +17464,7 @@ update.i: update.cpp.i
 
 # target to preprocess a source file
 update.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/update.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/update.cpp.i
 .PHONY : update.cpp.i
 
 update.s: update.cpp.s
@@ -17475,7 +17473,7 @@ update.s: update.cpp.s
 
 # target to generate assembly for a file
 update.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/update.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/update.cpp.s
 .PHONY : update.cpp.s
 
 vector3_aux.o: vector3_aux.cpp.o
@@ -17484,7 +17482,7 @@ vector3_aux.o: vector3_aux.cpp.o
 
 # target to build an object file
 vector3_aux.cpp.o:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/vector3_aux.cpp.o
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/vector3_aux.cpp.o
 .PHONY : vector3_aux.cpp.o
 
 vector3_aux.i: vector3_aux.cpp.i
@@ -17493,7 +17491,7 @@ vector3_aux.i: vector3_aux.cpp.i
 
 # target to preprocess a source file
 vector3_aux.cpp.i:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/vector3_aux.cpp.i
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/vector3_aux.cpp.i
 .PHONY : vector3_aux.cpp.i
 
 vector3_aux.s: vector3_aux.cpp.s
@@ -17502,7 +17500,7 @@ vector3_aux.s: vector3_aux.cpp.s
 
 # target to generate assembly for a file
 vector3_aux.cpp.s:
-	cd /home/kai/code/swrip && $(MAKE) -f src/CMakeFiles/mud.dir/build.make src/CMakeFiles/mud.dir/vector3_aux.cpp.s
+	$(MAKE) -f CMakeFiles/mud.dir/build.make CMakeFiles/mud.dir/vector3_aux.cpp.s
 .PHONY : vector3_aux.cpp.s
 
 # Help Target
@@ -19455,6 +19453,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/kai/code/swrip && $(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	$(CMAKE_COMMAND) -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -108,7 +108,7 @@ void do_get( Character *ch, std::string argument )
           if ( CharacterDiedRecently(ch) )
             return;
 
-          if ( IsBitSet( SysData.SaveFlags, SV_GET ) )
+          if ( SysData.SaveFlags.test( Flag::AutoSave::Get ) )
             {
               PlayerCharacters->Save( ch );
 
@@ -156,8 +156,8 @@ void do_get( Character *ch, std::string argument )
                        || ch->CarryWeight >= GetCarryCapacityWeight( ch )
                        || (number && cnt >= number) )
                     {
-                      if ( IsBitSet(SysData.SaveFlags, SV_GET)
-                           &&  !CharacterDiedRecently(ch) )
+                      if ( SysData.SaveFlags.test( Flag::AutoSave::Get )
+                           && !CharacterDiedRecently(ch) )
                         {
                           PlayerCharacters->Save( ch );
 
@@ -180,7 +180,7 @@ void do_get( Character *ch, std::string argument )
               else
                 Act( AT_PLAIN, "I see no $T here.", ch, NULL, chk.c_str(), TO_CHAR );
             }
-          else if ( IsBitSet( SysData.SaveFlags, SV_GET ) )
+          else if ( SysData.SaveFlags.test( Flag::AutoSave::Get ) )
 	    {
 	      PlayerCharacters->Save( ch );
 
@@ -262,7 +262,7 @@ void do_get( Character *ch, std::string argument )
           if ( CharacterDiedRecently(ch) )
             return;
 
-          if ( IsBitSet( SysData.SaveFlags, SV_GET ) )
+          if ( SysData.SaveFlags.test( Flag::AutoSave::Get ) )
             {
 	      PlayerCharacters->Save( ch );
 
@@ -337,7 +337,7 @@ void do_get( Character *ch, std::string argument )
               return;
             }
 
-          if ( found && IsBitSet( SysData.SaveFlags, SV_GET ) )
+          if ( found && SysData.SaveFlags.test( Flag::AutoSave::Get ) )
             {
               PlayerCharacters->Save( ch );
 

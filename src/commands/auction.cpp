@@ -122,9 +122,11 @@ void do_auction(Character *ch, std::string argument)
           TalkAuction (buf);
           ObjectToCharacter (auction->Item, auction->Seller);
 
-          if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
-	    PlayerCharacters->Save(auction->Seller);
-
+          if ( SysData.SaveFlags.test( Flag::AutoSave::Auction ) )
+            {
+              PlayerCharacters->Save(auction->Seller);
+            }
+            
           auction->Item = NULL;
 
           if (auction->Buyer != NULL && auction->Buyer != auction->Seller) /* return money to the buyer */
@@ -192,9 +194,11 @@ void do_auction(Character *ch, std::string argument)
 
           ch->Gold -= newbet; /* substract the gold - important :) */
 
-          if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
-            PlayerCharacters->Save(ch);
-
+          if ( SysData.SaveFlags.test( Flag::AutoSave::Auction ) )
+            {
+              PlayerCharacters->Save(ch);
+            }
+          
           auction->Buyer = ch;
           auction->Bet   = newbet;
           auction->Going = 0;
@@ -271,9 +275,11 @@ void do_auction(Character *ch, std::string argument)
 	  SeparateOneObjectFromGroup(obj);
 	  ObjectFromCharacter (obj);
 
-	  if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
-	    PlayerCharacters->Save(ch);
-
+	  if ( SysData.SaveFlags.test( Flag::AutoSave::Auction ) )
+            {
+              PlayerCharacters->Save(ch);
+            }
+            
 	  auction->Item = obj;
 	  auction->Bet = 0;
 	  auction->Buyer = ch;

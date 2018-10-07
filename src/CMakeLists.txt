@@ -18,3 +18,6 @@ add_custom_command(TARGET mud POST_BUILD
   COMMAND cmake .
   COMMAND make
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/test)
+add_custom_command(TARGET mud POST_BUILD
+  COMMAND ./test
+  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/test)

@@ -1,3 +1,4 @@
+#include "mud.hpp"
 #include "systemdata.hpp"
 #include "script.hpp"
 #define SYSTEMDATA_FILE DATA_DIR "sysdata.lua"
@@ -33,13 +34,14 @@ static void PushSystemData( lua_State *L, const void *userData )
   LuaSetfieldNumber( L, "DamModEvP", SysData.DamageMobVsPlr );
   LuaSetfieldNumber( L, "DamModEvE", SysData.DamageMobVsMob );
   LuaSetfieldNumber( L, "ForcePc", SysData.LevelToForcePlayers );
-  LuaSetfieldNumber( L, "SaveFlags", SysData.SaveFlags );
   LuaSetfieldNumber( L, "SaveFrequency", SysData.SaveFrequency );
   LuaSetfieldBoolean( L, "DisableHunger", SysData.DisableHunger );
   LuaSetfieldBoolean( L, "CanChooseJedi", SysData.CanChooseJedi );
   LuaSetfieldBoolean( L, "ExtendedRaceSelection", SysData.ExtendedRaceSelection );
   LuaSetfieldBoolean( L, "PermaDeath", SysData.PermaDeath );
   LuaSetfieldBoolean( L, "AllowMultiplaying", SysData.AllowMultiplaying );
+
+  LuaPushFlags( L, SysData.SaveFlags, SaveFlags, "SaveFlags" );
   lua_setglobal( L, "systemdata" );
 }
 
@@ -65,7 +67,6 @@ static int L_SystemDataEntry( lua_State *L )
   LuaGetfieldInt( L, "DamModEvP", &SysData.DamageMobVsPlr );
   LuaGetfieldInt( L, "DamModEvE", &SysData.DamageMobVsMob );
   LuaGetfieldInt( L, "ForcePc", &SysData.LevelToForcePlayers );
-  LuaGetfieldInt( L, "SaveFlags", &SysData.SaveFlags );
   LuaGetfieldInt( L, "SaveFrequency", &SysData.SaveFrequency );
   LuaGetfieldBool( L, "DisableHunger", &SysData.DisableHunger );
   LuaGetfieldBool( L, "CanChooseJedi", &SysData.CanChooseJedi );
@@ -73,7 +74,28 @@ static int L_SystemDataEntry( lua_State *L )
   LuaGetfieldBool( L, "ExtendedRaceSelection", &SysData.ExtendedRaceSelection );
   LuaGetfieldBool( L, "AllowMultiplaying", &SysData.AllowMultiplaying );
 
+  if( FieldExists( L, "SaveFlags" ) )
+    {
+      SysData.SaveFlags = LuaLoadFlags( L, "SaveFlags" );
+    }
+  
   return 0;
+}
+
+SystemData::SystemData()
+  : SaveFlags( CreateBitSet<Flag::MAX>({
+                                        Flag::AutoSave::Death,
+                                        Flag::AutoSave::ChangePassword,
+                                        Flag::AutoSave::Auto,
+                                        Flag::AutoSave::Put,
+                                        Flag::AutoSave::Drop,
+                                        Flag::AutoSave::Give,
+                                        Flag::AutoSave::Auction,
+                                        Flag::AutoSave::Zap,
+                                        Flag::AutoSave::Idle
+      } ) )
+{
+
 }
 
 void SystemData::Load()

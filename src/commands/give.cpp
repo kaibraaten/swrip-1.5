@@ -76,12 +76,18 @@ void do_give( Character *ch, std::string argument )
       ch->Echo( "OK.\r\n");
       MobProgBribeTrigger( victim, ch, amount );
 
-      if ( IsBitSet( SysData.SaveFlags, SV_GIVE ) && !CharacterDiedRecently(ch) )
-        PlayerCharacters->Save(ch);
+      if ( SysData.SaveFlags.test( Flag::AutoSave::Give )
+           && !CharacterDiedRecently(ch) )
+        {
+          PlayerCharacters->Save(ch);
+        }
 
-      if ( IsBitSet( SysData.SaveFlags, SV_RECEIVE ) && !CharacterDiedRecently(victim) )
-        PlayerCharacters->Save(victim);
-
+      if ( SysData.SaveFlags.test( Flag::AutoSave::Receive )
+           && !CharacterDiedRecently(victim) )
+        {
+          PlayerCharacters->Save(victim);
+        }
+      
       return;
     }
 
@@ -152,10 +158,16 @@ void do_give( Character *ch, std::string argument )
 
   MobProgGiveTrigger( victim, ch, obj );
 
-  if ( IsBitSet( SysData.SaveFlags, SV_GIVE ) && !CharacterDiedRecently(ch) )
-    PlayerCharacters->Save(ch);
-
-  if ( IsBitSet( SysData.SaveFlags, SV_RECEIVE ) && !CharacterDiedRecently(victim) )
-    PlayerCharacters->Save(victim);
+  if ( SysData.SaveFlags.test( Flag::AutoSave::Give )
+       && !CharacterDiedRecently(ch) )
+    {
+      PlayerCharacters->Save(ch);
+    }
+  
+  if ( SysData.SaveFlags.test( Flag::AutoSave::Receive )
+       && !CharacterDiedRecently(victim) )
+    {
+      PlayerCharacters->Save(victim);
+    }
 }
 

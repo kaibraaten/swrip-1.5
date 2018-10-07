@@ -210,7 +210,7 @@ void SaveClone( Character *ch )
   /*
    * Auto-backup pfile (can cause lag with high disk access situtations
    */
-  if ( IsBitSet( SysData.SaveFlags, SV_BACKUP ) )
+  if ( SysData.SaveFlags.test( Flag::AutoSave::Backup ) )
     {
       sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->Name[0]),
                Capitalize( ch->Name ).c_str() );

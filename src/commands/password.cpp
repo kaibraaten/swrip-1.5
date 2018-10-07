@@ -42,7 +42,7 @@ void do_password( Character *ch, std::string argument )
    */
   ch->PCData->Password = EncodeString( arg2 );
 
-  if ( IsBitSet(SysData.SaveFlags, SV_PASSCHG) )
+  if ( SysData.SaveFlags.test( Flag::AutoSave::ChangePassword ) )
     {
       PlayerCharacters->Save( ch );
     }

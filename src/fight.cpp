@@ -2029,7 +2029,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         if( victim->InRoom && victim->InRoom->Area )
           BoostEconomy( victim->InRoom->Area, victim->Gold );
 
-      if ( IsBitSet( SysData.SaveFlags, SV_KILL ) )
+      if ( SysData.SaveFlags.test( Flag::AutoSave::Kill ) )
         {
           PlayerCharacters->Save( ch );
         }

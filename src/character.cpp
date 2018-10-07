@@ -574,7 +574,8 @@ void EquipCharacter( Character *ch, Object *obj, WearLocation iWear )
       ObjectToRoom( obj, ch->InRoom );
       ObjProgZapTrigger( ch, obj);
 
-      if ( IsBitSet(SysData.SaveFlags, SV_ZAPDROP) && !CharacterDiedRecently(ch) )
+      if ( SysData.SaveFlags.test( Flag::AutoSave::Zap )
+           && !CharacterDiedRecently(ch) )
         {
           PlayerCharacters->Save( ch );
         }

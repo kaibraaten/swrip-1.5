@@ -63,9 +63,12 @@ void do_put( Character *ch, std::string argument )
 
   bool save_char = false;
   
-  if ( !container->CarriedBy && IsBitSet( SysData.SaveFlags, SV_PUT ) )
-    save_char = true;
-
+  if ( !container->CarriedBy
+       && SysData.SaveFlags.test( Flag::AutoSave::Put ) )
+    {
+      save_char = true;
+    }
+  
   if ( IsBitSet( container->Flags, ITEM_COVERING ) )
     {
       if ( ch->CarryWeight + container->Weight > GetCarryCapacityWeight( ch ) )

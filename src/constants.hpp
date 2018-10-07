@@ -821,23 +821,6 @@ enum
 #define PART_FEATHERS             BV29
 
 /*
- * Autosave flags
- */
-#define SV_DEATH                  BV00
-#define SV_KILL                   BV01
-#define SV_PASSCHG                BV02
-#define SV_DROP                   BV03
-#define SV_PUT                    BV04
-#define SV_GIVE                   BV05
-#define SV_AUTO                   BV06
-#define SV_ZAPDROP                BV07
-#define SV_AUCTION                BV08
-#define SV_GET                    BV09
-#define SV_RECEIVE                BV10
-#define SV_IDLE                   BV11
-#define SV_BACKUP                 BV12
-
-/*
  * Pipe flags
  */
 #define PIPE_TAMPED               BV01

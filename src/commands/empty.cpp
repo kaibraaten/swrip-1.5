@@ -98,8 +98,10 @@ void do_empty( Character *ch, std::string argument )
               Act( AT_ACTION, "You empty $p.", ch, obj, NULL, TO_CHAR );
               Act( AT_ACTION, "$n empties $p.", ch, obj, NULL, TO_ROOM );
 
-              if ( IsBitSet( SysData.SaveFlags, SV_DROP ) )
-                PlayerCharacters->Save( ch );
+              if ( SysData.SaveFlags.test( Flag::AutoSave::Drop ) )
+                {
+                  PlayerCharacters->Save( ch );
+                }
             }
           else
             {
@@ -142,8 +144,10 @@ void do_empty( Character *ch, std::string argument )
               Act( AT_ACTION, "$n empties $p into $P.", ch, obj, dest, TO_ROOM );
 
               if ( !dest->CarriedBy
-                   &&    IsBitSet( SysData.SaveFlags, SV_PUT ) )
-                PlayerCharacters->Save( ch );
+                   && SysData.SaveFlags.test( Flag::AutoSave::Put ) )
+                {
+                  PlayerCharacters->Save( ch );
+                }
             }
           else
             {
