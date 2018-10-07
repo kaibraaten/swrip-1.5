@@ -77,8 +77,8 @@ void do_empty( Character *ch, std::string argument )
 
       if ( arg2.empty() )
         {
-          if ( IsBitSet( ch->InRoom->Flags, ROOM_NODROP )
-               || ( !IsNpc(ch) &&  IsBitSet( ch->Flags, PLR_LITTERBUG ) ) )
+          if ( ch->InRoom->Flags.test( Flag::Room::NoDrop )
+               || ( !IsNpc(ch) && IsBitSet( ch->Flags, PLR_LITTERBUG ) ) )
             {
               SetCharacterColor( AT_MAGIC, ch );
               ch->Echo( "A magical force stops you!\r\n" );
@@ -87,7 +87,7 @@ void do_empty( Character *ch, std::string argument )
               return;
             }
 
-          if ( IsBitSet( ch->InRoom->Flags, ROOM_NODROPALL ) )
+          if ( ch->InRoom->Flags.test( Flag::Room::NoDropAll ) )
             {
               ch->Echo( "You can't seem to do that here...\r\n" );
               return;

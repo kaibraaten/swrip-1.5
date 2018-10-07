@@ -306,7 +306,7 @@ void ViolenceUpdate( void )
 
       ch_ret retcode = rNONE;
 
-      if ( IsBitSet(ch->InRoom->Flags, ROOM_SAFE ) )
+      if ( ch->InRoom->Flags.test( Flag::Room::Safe ) )
         {
           Log->Info( "ViolenceUpdate: %s fighting %s in a SAFE room.",
                      ch->Name.c_str(), victim->Name.c_str() );
@@ -1339,7 +1339,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
   /* weapon spells      -Thoric */
   if ( wield != nullptr
        && !IsBitSet(victim->Immune, RIS_MAGIC)
-       && !IsBitSet(victim->InRoom->Flags, ROOM_NO_MAGIC) )
+       && !victim->InRoom->Flags.test( Flag::Room::NoMagic ) )
     {
       for(const Affect *aff : wield->Prototype->Affects())
         {
@@ -1733,13 +1733,13 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
     }
 
   if ( !IsNpc(victim)
-       &&   ( victim->TopLevel >= LEVEL_IMMORTAL
-              ||     IsBitSet(victim->InRoom->Flags,ROOM_ARENA) )
-       &&   victim->HitPoints.Current < 1 )
+       && ( victim->TopLevel >= LEVEL_IMMORTAL
+            || IsInArena( victim ) )
+       && victim->HitPoints.Current < 1 )
     {
       victim->HitPoints.Current = 1;
       
-      if (IsBitSet(victim->InRoom->Flags, ROOM_ARENA) )
+      if ( IsInArena( victim ) )
         {
           char buf[MAX_STRING_LENGTH];
           CharacterFromRoom(victim);
@@ -2095,7 +2095,7 @@ bool IsSafe( const Character *ch, const Character *victim )
   if ( GetFightingOpponent( ch ) == ch )
     return false;
 
-  if ( IsBitSet( victim->InRoom->Flags, ROOM_SAFE ) )
+  if ( victim->InRoom->Flags.test( Flag::Room::Safe ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       ch->Echo( "You'll have to do that elsewhere.\r\n" );
@@ -2498,8 +2498,8 @@ void RawKill( Character *killer, Character *victim )
 
           room->Name = "An Empty Apartment";
 
-          RemoveBit( room->Flags , ROOM_PLR_HOME );
-          SetBit( room->Flags , ROOM_EMPTY_HOME );
+          room->Flags.reset( Flag::Room::PlayerHome );
+          room->Flags.set( Flag::Room::EmptyHome );
 
           FoldArea( room->Area, room->Area->Filename, false );
         }
@@ -3049,7 +3049,7 @@ static bool SprintForCover( Character *ch )
            || ( pexit->Flags.test( Flag::Exit::Closed )
                 && !IsAffectedBy( ch, AFF_PASS_DOOR ) )
            || ( IsNpc(ch)
-                && IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB) ) )
+                && pexit->ToRoom->Flags.test( Flag::Room::NoMob ) ) )
         {
           continue;
         }

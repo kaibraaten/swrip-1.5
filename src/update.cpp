@@ -994,7 +994,7 @@ static void MobileUpdate( void )
           continue;
         }
 
-      if ( IsBitSet(ch->InRoom->Flags, ROOM_SAFE )
+      if ( ch->InRoom->Flags.test( Flag::Room::Safe )
            && IsBitSet(ch->Flags, ACT_AGGRESSIVE) )
 	{
 	  do_emote( ch, "glares around and snarls." );
@@ -1070,7 +1070,7 @@ static void MobileUpdate( void )
            && ( pexit = GetExit(ch->InRoom, door) ) != NULL
            && pexit->ToRoom
            && !pexit->Flags.test( Flag::Exit::Closed )
-           && !IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB)
+           && !pexit->ToRoom->Flags.test( Flag::Room::NoMob )
            && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
                 ||   pexit->ToRoom->Area == ch->InRoom->Area ) )
         {
@@ -1098,7 +1098,7 @@ static void MobileUpdate( void )
            && ( pexit = GetExit(ch->InRoom,door) ) != NULL
            && pexit->ToRoom
            && !pexit->Flags.test( Flag::Exit::Closed )
-           && !IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB) )
+           && !pexit->ToRoom->Flags.test( Flag::Room::NoMob ) )
         {
           bool found = false;
 
@@ -2135,7 +2135,7 @@ static void CharacterCheck( void )
                    && ( pexit = GetExit(ch->InRoom, door) ) != NULL
                    && pexit->ToRoom
                    && !pexit->Flags.test( Flag::Exit::Closed )
-                   && !IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB)
+                   && !pexit->ToRoom->Flags.test( Flag::Room::NoMob )
                    && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
                         || pexit->ToRoom->Area == ch->InRoom->Area ) )
                 {
@@ -2309,7 +2309,7 @@ static void AggroUpdate( void )
 
       if ( !IsBitSet(ch->Flags, ACT_AGGRESSIVE)
            || IsBitSet(ch->Flags, ACT_MOUNTED)
-           || IsBitSet(ch->InRoom->Flags, ROOM_SAFE ) )
+           || ch->InRoom->Flags.test( Flag::Room::Safe ) )
 	{
 	  continue;
 	}

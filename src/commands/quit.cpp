@@ -41,7 +41,7 @@ void do_quit( Character *ch, std::string argument )
     }
 
   if ( !IsImmortal(ch) && ch->InRoom
-       && !IsBitSet( ch->InRoom->Flags, ROOM_HOTEL )
+       && !ch->InRoom->Flags.test( Flag::Room::Hotel )
        && IsAuthed(ch) )
     {
       ch->Echo("You may not quit here.\r\n");

@@ -986,15 +986,15 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( !fall )
     {
-      if ( IsBitSet( to_room->Flags, ROOM_INDOORS )
-           || IsBitSet( to_room->Flags, ROOM_SPACECRAFT )
+      if ( to_room->Flags.test( Flag::Room::Indoors )
+           || to_room->Flags.test( Flag::Room::Spacecraft )
            || to_room->Sector == SECT_INSIDE )
         {
           ch->Echo( "You can't drive indoors!\r\n" );
           return rNONE;
         }
 
-      if ( IsBitSet( to_room->Flags, ROOM_NO_DRIVING ) )
+      if ( to_room->Flags.test( Flag::Room::NoDrive ) )
         {
           ch->Echo( "You can't take a vehicle through there!\r\n" );
           return rNONE;

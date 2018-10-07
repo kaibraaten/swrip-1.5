@@ -36,8 +36,8 @@ void do_awho(Character *ch, std::string argument)
 
   for ( tch = FirstCharacter; tch; tch = tch->Next )
     {
-      if (tch->InRoom && IsBitSet(tch->InRoom->Flags, ROOM_ARENA)
-          && (tch->TopLevel < LEVEL_IMMORTAL))
+      if ( IsInArena( tch )
+          && tch->TopLevel < LEVEL_IMMORTAL )
         {
           tch->Echo( "&W%s\r\n", tch->Name.c_str());
         }

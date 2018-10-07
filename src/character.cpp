@@ -1468,7 +1468,7 @@ void FreeCharacter( Character *ch )
 
 bool IsInArena( const Character *ch )
 {
-  return IsBitSet( ch->InRoom->Flags, ROOM_ARENA ) ? true : false;
+  return ch->InRoom->Flags.test( Flag::Room::Arena );
 }
 
 void ApplyJediBonus( Character *ch )
@@ -1689,6 +1689,6 @@ Object *GetFirstObjectOfType(const Character *ch, ItemTypes type)
 
 bool IS_OUTSIDE( const Character *ch )
 {
-  return !IsBitSet(ch->InRoom->Flags, ROOM_INDOORS)
-    && !IsBitSet( ch->InRoom->Flags, ROOM_SPACECRAFT);
+  return !ch->InRoom->Flags.test( Flag::Room::Indoors )
+    && !ch->InRoom->Flags.test( Flag::Room::Spacecraft );
 }

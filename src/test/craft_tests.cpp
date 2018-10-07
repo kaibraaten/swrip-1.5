@@ -115,8 +115,7 @@ protected:
     _location = new Room();
     _area = new Area();
     _location->Area = _area;
-    SetBit( _location->Flags, ROOM_FACTORY );
-    SetBit( _location->Flags, ROOM_REFINERY );
+    _location->Flags = CreateBitSet<Flag::MAX>( { Flag::Room::Factory, Flag::Room::Refinery } );
     
     _engineer = new Character( new PCData(), new NullDescriptor() );
     _engineer->PCData->Learned[gsn_mycraftingskill] = 100;
@@ -475,7 +474,7 @@ TEST_F(CraftTests, WhenWorkshopRequired_IfNotInWorkshop_SessionNotStarted)
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
                                              _resultantObject, { Flag::Crafting::NeedsWorkshop } );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
-  RemoveBit( _engineer->InRoom->Flags, ROOM_FACTORY );
+  _engineer->InRoom->Flags.reset( Flag::Room::Factory );
   
   StartCrafting( session );
 
@@ -489,7 +488,7 @@ TEST_F(CraftTests, WhenWorkshopRequired_IfInWorkshop_SessionIsStarted)
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
                                              _resultantObject, { Flag::Crafting::NeedsWorkshop } );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
-  SetBit( _engineer->InRoom->Flags, ROOM_FACTORY );
+  _engineer->InRoom->Flags.set( Flag::Room::Factory );
 
   StartCrafting( session );
 
@@ -503,7 +502,7 @@ TEST_F(CraftTests, WhenRefineryRequired_IfNotInRefinery_SessionNotStarted)
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
                                              _resultantObject, { Flag::Crafting::NeedsRefinery } );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
-  RemoveBit( _engineer->InRoom->Flags, ROOM_REFINERY );
+  _engineer->InRoom->Flags.reset( Flag::Room::Refinery );
 
   StartCrafting( session );
 
@@ -517,7 +516,7 @@ TEST_F(CraftTests, WhenRefineryRequired_IfInRefinery_SessionIsStarted)
   CraftRecipe *recipe = AllocateCraftRecipe( gsn_mycraftingskill, &material, 0,
                                              _resultantObject, { Flag::Crafting::NeedsRefinery } );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
-  SetBit( _engineer->InRoom->Flags, ROOM_REFINERY );
+  _engineer->InRoom->Flags.set( Flag::Room::Refinery );
 
   StartCrafting( session );
 

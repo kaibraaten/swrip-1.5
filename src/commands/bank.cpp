@@ -28,7 +28,7 @@ void do_bank( Character *ch, std::string argument )
 
   if ( !HasComlink( ch ) )
     {
-      if (!ch->InRoom || !IsBitSet(ch->InRoom->Flags, ROOM_BANK) )
+      if (!ch->InRoom->Flags.test( Flag::Room::Bank ) )
 	{
           ch->Echo( "You must be in a bank or have a comlink to do that!\r\n" );
           return;

@@ -237,19 +237,19 @@ void do_redit( Character *ch, std::string argument )
       while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg2 );
-          value = GetRoomFlag( arg2 );
+          size_t bit = GetRoomFlag( arg2 );
 
-          if ( value < 0 || value > 31 )
+          if ( bit >= Flag::MAX )
             {
               ch->Echo( "Unknown flag: %s\r\n", arg2.c_str() );
             }
-          else if ( 1 << value == ROOM_PLR_HOME && GetTrustLevel(ch) < LEVEL_IMPLEMENTOR )
+          else if ( bit == Flag::Room::PlayerHome && GetTrustLevel(ch) < LEVEL_IMPLEMENTOR )
             {
               ch->Echo("If you want to build a player home use the 'empty_home' flag instead.\r\n");
             }
           else
             {
-              ToggleBit( location->Flags, 1 << value );
+              location->Flags.flip( bit );
             }
         }
 

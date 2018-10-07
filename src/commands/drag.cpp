@@ -59,8 +59,8 @@ void do_drag( Character *ch, std::string argument )
 
   exit_dir = GetDirection( arg2 );
 
-  if ( IsBitSet(victim->InRoom->Flags, ROOM_SAFE)
-       &&   GetTimer( victim, TIMER_SHOVEDRAG ) <= 0)
+  if ( victim->InRoom->Flags.test( Flag::Room::Safe )
+       && GetTimer( victim, TIMER_SHOVEDRAG ) <= 0)
     {
       ch->Echo("That character cannot be dragged right now.\r\n");
       return;

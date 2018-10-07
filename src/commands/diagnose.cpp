@@ -88,7 +88,7 @@ void do_diagnose( Character *ch, std::string argument )
 		{
 		  if (pRoom->Vnum >= lo && pRoom->Vnum <= hi)
 		    {
-		      if ( match == (match & pRoom->Flags)
+		      if ( match == (match & static_cast<int>(pRoom->Flags.to_ulong()))
 			   && hit_cou < DIAG_RF_MAX_SIZE)
 			vnum[hit_cou++] = pRoom->Vnum;
 		    }

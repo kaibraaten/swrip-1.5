@@ -26,7 +26,7 @@ bool spec_guardian( Character *ch )
 
   if ( victim )
     {
-      if( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
+      if( ch->InRoom->Flags.test( Flag::Room::Safe ) )
         {
           sprintf( buf, "%s is a %s! As well as a COWARD!",
                    victim->Name.c_str(), crime );

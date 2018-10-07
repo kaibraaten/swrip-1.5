@@ -22,7 +22,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
   ApplySithPenalty( ch );
 
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
+  if ( ch->InRoom->Flags.test( Flag::Room::Safe ) )
     {
       FailedCasting( skill, ch, NULL, NULL );
       return rSPELL_FAILED;

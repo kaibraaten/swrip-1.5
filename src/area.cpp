@@ -175,17 +175,20 @@ void FixAreaExits( Area *tarea )
         }
 
       if ( !fexit )
-        SetBit( pRoomIndex->Flags, ROOM_NO_MOB );
+        {
+          pRoomIndex->Flags.set( Flag::Room::NoMob );
+        }
     }
-
 
   for ( vnum_t rnum = tarea->VnumRanges.Room.First; rnum <= tarea->VnumRanges.Room.Last; rnum++ )
     {
-      const Room *pRoomIndex = nullptr;
+      const Room *pRoomIndex = GetRoom( rnum );
       
-      if ( (pRoomIndex = GetRoom( rnum )) == NULL )
-        continue;
-
+      if ( pRoomIndex == nullptr )
+        {
+          continue;
+        }
+      
       for(Exit *pexit : pRoomIndex->Exits())
         {
           if ( pexit->ToRoom && !pexit->ReverseExit )

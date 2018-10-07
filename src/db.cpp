@@ -769,7 +769,7 @@ static void FixExits( void )
 
           if ( !fexit )
             {
-              SetBit( pRoomIndex->Flags, ROOM_NO_MOB );
+              pRoomIndex->Flags.set( Flag::Room::NoMob );
             }
         }
     }
@@ -1330,14 +1330,14 @@ Room *MakeRoom( vnum_t vnum )
 {
   Room *pRoomIndex = new Room();
 
-  pRoomIndex->Vnum              = vnum;
-  pRoomIndex->Name              = "Floating in a void";
-  pRoomIndex->Flags                = ROOM_PROTOTYPE;
-  pRoomIndex->Sector               = SECT_INSIDE;
+  pRoomIndex->Vnum = vnum;
+  pRoomIndex->Name = "Floating in a void";
+  pRoomIndex->Flags = CreateBitSet<Flag::MAX>( { Flag::Room::Prototype } );
+  pRoomIndex->Sector = SECT_INSIDE;
 
-  int iHash                 = vnum % MAX_KEY_HASH;
-  pRoomIndex->Next      = RoomIndexHash[iHash];
-  RoomIndexHash[iHash]        = pRoomIndex;
+  int iHash = vnum % MAX_KEY_HASH;
+  pRoomIndex->Next = RoomIndexHash[iHash];
+  RoomIndexHash[iHash] = pRoomIndex;
   top_room++;
 
   return pRoomIndex;

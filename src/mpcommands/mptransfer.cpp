@@ -95,7 +95,7 @@ void do_mptransfer( Character *ch, std::string argument )
 
   /* If victim not in area's level range, do not transfer */
   if ( !InHardRange( victim, location->Area )
-       &&   !IsBitSet( location->Flags, ROOM_PROTOTYPE ) )
+       && location->Flags.test( Flag::Room::Prototype ) )
     return;
 
   if ( victim->Fighting )

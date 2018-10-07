@@ -24,11 +24,13 @@
 #define _SWRIP_TRACK_HPP_
 
 #include "types.hpp"
+#include "room.hpp"
 
 #define BFS_ERROR          -1
 #define BFS_ALREADY_THERE  -2
 #define BFS_NO_PATH        -3
-#define BFS_MARK         BV01
+
+constexpr size_t BFSMark = Flag::Room::Reserved;
 
 int FindFirstStep(Room *src, Room *target, int maxdist );
 void FoundPrey( Character *ch, Character *victim );

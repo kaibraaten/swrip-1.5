@@ -19,7 +19,7 @@ void do_tell( Character *ch, std::string argument )
       return;
     }
 
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_SILENCE ) )
+  if ( ch->InRoom->Flags.test( Flag::Room::Silence ) )
     {
       ch->Echo("You can't do that here.\r\n");
       return;
@@ -119,7 +119,7 @@ void do_tell( Character *ch, std::string argument )
     }
 
   if ( (!IsImmortal(ch) && !IsAwake(victim) )
-       || (!IsNpc(victim)&&IsBitSet(victim->InRoom->Flags, ROOM_SILENCE ) ) )
+       || (!IsNpc(victim) && victim->InRoom->Flags.test( Flag::Room::Silence ) ) )
     {
       Act( AT_PLAIN, "$E can't hear you.", ch, nullptr, victim, TO_CHAR );
       return;
@@ -163,7 +163,7 @@ void do_tell( Character *ch, std::string argument )
   victim->Position = position;
   victim->Reply = ch;
 
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
+  if ( ch->InRoom->Flags.test( Flag::Room::LogSpeech ) )
     {
       sprintf( buf, "%s: %s (tell to) %s.",
                IsNpc( ch ) ? ch->ShortDescr.c_str() : ch->Name.c_str(),

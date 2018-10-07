@@ -32,7 +32,7 @@ void do_arena(Character *ch, std::string argument)
       return;
     }
 
-  if(IsBitSet(ch->InRoom->Flags, ROOM_ARENA))
+  if( IsInArena( ch ) )
     {
       ch->Echo("You are in the arena already\r\n");
     }

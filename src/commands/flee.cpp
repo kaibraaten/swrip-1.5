@@ -41,15 +41,15 @@ void do_flee( Character *ch, std::string argument )
 
   for ( attempt = 0; attempt < 8; attempt++ )
     {
-
       door = (DirectionType)GetRandomDoor();
-
-      if ( ( pexit = GetExit(was_in, door) ) == NULL
-           ||   !pexit->ToRoom
+      pexit = GetExit( was_in, door );
+      
+      if ( pexit == nullptr
+           || pexit->ToRoom == nullptr
            || ( pexit->Flags.test( Flag::Exit::Closed )
-                &&   !IsAffectedBy( ch, AFF_PASS_DOOR ) )
+                && !IsAffectedBy( ch, AFF_PASS_DOOR ) )
            || ( IsNpc(ch)
-                &&   IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB) ) )
+                && pexit->ToRoom->Flags.test( Flag::Room::NoMob ) ) )
         continue;
 
       if ( !HasPermanentSneak(ch) )

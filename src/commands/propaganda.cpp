@@ -46,7 +46,7 @@ void do_propaganda( Character *ch, std::string arg1 )
       return;
     }
 
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
+  if ( ch->InRoom->Flags.test( Flag::Room::Safe ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       ch->Echo("This isn't a good place to do that.\r\n");

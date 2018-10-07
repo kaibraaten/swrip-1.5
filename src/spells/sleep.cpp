@@ -43,9 +43,9 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
     tmp = level;
 
   if ( IsAffectedBy(victim, AFF_SLEEP)
-       ||       (sleep_chance=ModifySavingThrowBasedOnResistance(victim, tmp, RIS_SLEEP)) == 1000
-       ||  (victim != ch && IsBitSet(victim->InRoom->Flags, ROOM_SAFE))
-       ||   SaveVsSpellStaff( sleep_chance, victim ) )
+       || (sleep_chance=ModifySavingThrowBasedOnResistance(victim, tmp, RIS_SLEEP)) == 1000
+       || (victim != ch && victim->InRoom->Flags.test( Flag::Room::Safe ) )
+       || SaveVsSpellStaff( sleep_chance, victim ) )
     {
       FailedCasting( skill, ch, victim, NULL );
       if ( ch == victim )

@@ -1531,43 +1531,6 @@ enum
 #define ROOM_VNUM_CLONING_CYLINDER     10000
 #define ROOM_VNUM_CLONING_PAY_COUNTER  10001
 #define ROOM_VNUM_CLONING_CLINIC       10002
-/*
- * Room flags.
- * Used in #ROOMS.
- */
-
-#define ROOM_DARK           BV00
-/* BV01 now reserved for track  BV01  and hunt */
-#define ROOM_NO_MOB         BV02
-#define ROOM_INDOORS        BV03
-#define ROOM_CAN_LAND       BV04
-#define ROOM_CAN_FLY        BV05
-#define ROOM_NO_DRIVING     BV06
-#define ROOM_NO_MAGIC       BV07
-#define ROOM_BANK           BV08
-#define ROOM_PRIVATE        BV09
-#define ROOM_SAFE           BV10
-
-#define ROOM_PET_SHOP       BV12
-#define ROOM_ARENA          BV13
-#define ROOM_DONATION       BV14
-#define ROOM_NODROPALL      BV15
-#define ROOM_SILENCE        BV16
-#define ROOM_LOGSPEECH      BV17
-#define ROOM_NODROP         BV18
-#define ROOM_CLANSTOREROOM  BV19
-#define ROOM_PLR_HOME       BV20
-#define ROOM_EMPTY_HOME     BV21
-#define ROOM_TELEPORT       BV22
-#define ROOM_HOTEL          BV23
-#define ROOM_NOFLOOR        BV24
-#define ROOM_REFINERY       BV25
-#define ROOM_FACTORY        BV26
-#define ROOM_RECRUIT        BV27
-#define ROOM_PLR_SHOP       BV28
-#define ROOM_SPACECRAFT     BV29
-#define ROOM_PROTOTYPE      BV30
-#define ROOM_AUCTION        BV31
 
 /*
  * Directions.

@@ -7,7 +7,7 @@
 
 void do_list( Character *ch, std::string argument )
 {
-  if ( IsBitSet(ch->InRoom->Flags, ROOM_PET_SHOP) )
+  if ( ch->InRoom->Flags.test( Flag::Room::PetShop ) )
     {
       const Room *pRoomIndexNext = GetRoom( ch->InRoom->Vnum + 1 );
 

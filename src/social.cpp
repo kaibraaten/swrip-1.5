@@ -93,7 +93,7 @@ bool CheckSocial( Character *ch, const std::string &command, const std::string &
           switch ( NumberBits( 4 ) )
             {
             case 0:
-              if ( !IsBitSet(ch->InRoom->Flags, ROOM_SAFE )
+              if ( !ch->InRoom->Flags.test( Flag::Room::Safe )
                    && IsEvil(ch) )
                 {
                   if ( !StrCmp( social->Name, "slap" ) || !StrCmp( social->Name, "punch" ) )

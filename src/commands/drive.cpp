@@ -62,7 +62,7 @@ void do_drive( Character *ch, std::string argument )
           return;
         }
 
-      if ( IsBitSet( target->InRoom->Flags, ROOM_INDOORS )
+      if ( target->InRoom->Flags.test( Flag::Room::Indoors )
            || target->InRoom->Sector == SECT_INSIDE )
         {
           ch->Echo( "You can't drive indoors!\r\n" );
@@ -104,7 +104,7 @@ void do_drive( Character *ch, std::string argument )
           return;
         }
 
-      if ( IsBitSet( target->InRoom->Flags, ROOM_INDOORS )
+      if ( target->InRoom->Flags.test( Flag::Room::Indoors )
            || target->InRoom->Sector == SECT_INSIDE )
         {
           ch->Echo( "You can't drive indoors!\r\n" );

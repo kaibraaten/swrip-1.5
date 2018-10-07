@@ -162,8 +162,8 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
 {
   Character *ch = GetEngineer( eventArgs->CraftingSession );
 
-  if ( !IsBitSet( ch->InRoom->Flags, ROOM_SAFE )
-       || !IsBitSet( ch->InRoom->Flags, ROOM_SILENCE ))
+  if ( !ch->InRoom->Flags.test( Flag::Room::Safe )
+       || !ch->InRoom->Flags.test( Flag::Room::Silence ) )
     {
       ch->Echo("&RYou need to be in a quiet, peaceful place to craft a lightsaber.&w\r\n" );
       eventArgs->AbortSession = true;

@@ -151,7 +151,7 @@ static void StartGame(void)
 	      continue;
 	    }
 
-	  if (i->InRoom && IsBitSet(i->InRoom->Flags, ROOM_ARENA))
+	  if ( IsInArena( i ) )
 	    {
 	      i->Echo("\r\nThe floor falls out from below, dropping you in the arena.\r\n");
 	      CharacterFromRoom(i);
@@ -217,7 +217,7 @@ static void FindGameWinner(void)
 	  continue;
 	}
 
-      if (i->InRoom && IsBitSet(i->InRoom->Flags,ROOM_ARENA)
+      if( IsInArena( i )
           && !IsImmortal(i))
         {
           CharacterFromRoom(i);
@@ -313,7 +313,7 @@ static void DoEndGame(void)
 	      continue;
 	    }
 
-	  if (i->InRoom && IsBitSet(i->InRoom->Flags, ROOM_ARENA))
+	  if ( IsInArena( i ) )
 	    {
 	      i->HitPoints.Current = i->HitPoints.Max;
 	      i->Mana.Current = i->Mana.Max;
@@ -349,7 +349,7 @@ int CharactersInArena(void)
 	  continue;
 	}
 
-      if (i->InRoom && IsBitSet(i->InRoom->Flags, ROOM_ARENA))
+      if ( IsInArena( i ) )
         {
           if (!IsImmortal(i) && i->HitPoints.Current > 1)
 	    {

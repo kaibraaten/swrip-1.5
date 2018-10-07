@@ -72,9 +72,11 @@ obj_ret DamageObject( Object *obj )
   Character *ch = obj->CarriedBy;
   obj_ret objcode = rNONE;
 
-  if (ch && ch->InRoom && IsBitSet(ch->InRoom->Flags,ROOM_ARENA))
-    return objcode;
-
+  if( ch != nullptr && IsInArena( ch ) )
+    {
+      return objcode;
+    }
+  
   SeparateOneObjectFromGroup( obj );
   
   if ( ch )
@@ -155,11 +157,10 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
       return;
     }
 
-  if ( IsBitSet( obj->InRoom->Flags, ROOM_NOFLOOR )
-       &&   CAN_GO( obj, DIR_DOWN )
-       &&   !IsBitSet( obj->Flags, ITEM_MAGIC ) )
+  if ( obj->InRoom->Flags.test( Flag::Room::NoFloor )
+       && CAN_GO( obj, DIR_DOWN )
+       && !IsBitSet( obj->Flags, ITEM_MAGIC ) )
     {
-
       pexit = GetExit( obj->InRoom, DIR_DOWN );
       to_room = pexit->ToRoom;
 
@@ -194,11 +195,9 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
           Act( AT_PLAIN, "$p falls from above...", ch, obj, NULL, TO_CHAR );
         }
 
-      if (!IsBitSet( obj->InRoom->Flags, ROOM_NOFLOOR ) && through )
+      if ( !obj->InRoom->Flags.test( Flag::Room::NoFloor )
+           && through )
         {
-          /*            int dam = (int)9.81*sqrt(fall_count*2/9.81)*obj->weight/2;
-           */
-
           int dam = fall_count * obj->Weight / 2;
 
           /* Damage players */

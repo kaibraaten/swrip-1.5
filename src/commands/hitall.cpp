@@ -13,7 +13,7 @@ void do_hitall( Character *ch, std::string argument )
   short nhit = 0;
   short percent = 0;
 
-  if ( IsBitSet(ch->InRoom->Flags, ROOM_SAFE) )
+  if ( ch->InRoom->Flags.test( Flag::Room::Safe ) )
     {
       ch->Echo("You cannot do that here.\r\n");
       return;

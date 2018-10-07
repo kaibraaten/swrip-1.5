@@ -1593,7 +1593,7 @@ void ResetArea( Area *pArea )
           {
             Room *pRoomPrev = GetRoom(pReset->Arg3 - 1);
 
-            if ( pRoomPrev && IsBitSet(pRoomPrev->Flags, ROOM_PET_SHOP) )
+            if ( pRoomPrev && pRoomPrev->Flags.test( Flag::Room::PetShop ) )
 	      {
 		SetBit(mob->Flags, ACT_PET);
 	      }
@@ -2138,7 +2138,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
             mob = NULL;
 
           if ( (room = GetRoom(pReset->Arg3-1)) &&
-               IsBitSet(room->Flags, ROOM_PET_SHOP) )
+               room->Flags.test( Flag::Room::PetShop ) )
             strcat( buf, " (pet)\r\n" );
           else
             strcat( buf, "\r\n" );

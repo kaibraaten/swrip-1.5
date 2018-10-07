@@ -759,13 +759,13 @@ static void NannyReadMotd( Descriptor *d, std::string argument )
 	}
     }
   else if ( ch->InRoom && !IsImmortal( ch )
-	    && !IsBitSet( ch->InRoom->Flags, ROOM_SPACECRAFT )
+	    && !ch->InRoom->Flags.test( Flag::Room::Spacecraft )
 	    && ch->InRoom != GetRoom(ROOM_VNUM_HELL) )
     {
       CharacterToRoom( ch, ch->InRoom );
     }
   else if ( ch->InRoom && !IsImmortal( ch )
-	    && IsBitSet( ch->InRoom->Flags, ROOM_SPACECRAFT )
+	    && ch->InRoom->Flags.test( Flag::Room::Spacecraft )
 	    && ch->InRoom != GetRoom(ROOM_VNUM_HELL) )
     {
       ForEachShip(PutCharacterInCorrectShip, ch);

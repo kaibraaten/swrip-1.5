@@ -9,7 +9,8 @@ void do_remresident(Character *ch, std::string argument )
 
   home = ch->InRoom;
 
-  if ( !IsBitSet(home->Flags, ROOM_PLR_HOME) || home != ch->PlayerHome )
+  if ( !home->Flags.test( Flag::Room::PlayerHome )
+       || home != ch->PlayerHome )
     {
       ch->Echo("&RThis isn't your home!\r\n");
       return;

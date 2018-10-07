@@ -41,7 +41,7 @@ void do_emote( Character *ch, std::string argument )
 
   ch->Flags = mobflags;
 
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
+  if ( ch->InRoom->Flags.test( Flag::Room::LogSpeech ) )
     {
       char logbuf[MAX_STRING_LENGTH];
       sprintf( logbuf, "%s %s (emote)",

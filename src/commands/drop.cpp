@@ -44,7 +44,7 @@ void do_drop( Character *ch, std::string argument )
   if ( HasMentalStateToFindObject(ch) )
     return;
 
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_NODROP )
+  if ( ch->InRoom->Flags.test( Flag::Room::NoDrop )
        || ( !IsNpc(ch) && IsBitSet( ch->Flags, PLR_LITTERBUG )) )
     {
       SetCharacterColor( AT_MAGIC, ch );
@@ -93,11 +93,15 @@ void do_drop( Character *ch, std::string argument )
             {
               PlayerCharacters->Save( ch );
 
-              if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
-                SaveHome (ch );
-
-              if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
-                SaveStoreroom( ch->InRoom );
+              if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+                {
+                  SaveHome (ch );
+                }
+              
+              if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+                {
+                  SaveStoreroom( ch->InRoom );
+                }
             }
 
 	  return;
@@ -133,7 +137,7 @@ void do_drop( Character *ch, std::string argument )
         return;
 
       /* Clan storeroom saving */
-      if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM) )
+      if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
         {
           for(const Clan *clan : Clans->Entities())
             {
@@ -158,7 +162,7 @@ void do_drop( Character *ch, std::string argument )
         chk = arg.size() > 4 ? arg.substr(4) : "";
 
       /* 'drop all' or 'drop all.obj' */
-      if ( IsBitSet( ch->InRoom->Flags, ROOM_NODROPALL ) )
+      if ( ch->InRoom->Flags.test( Flag::Room::NoDropAll ) )
         {
           ch->Echo( "You can't seem to do that here...\r\n" );
           return;
@@ -205,7 +209,7 @@ void do_drop( Character *ch, std::string argument )
 	    }
         }
 
-      if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM) )
+      if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
         {
           for(const Clan *clan : Clans->Entities())
             {
@@ -228,11 +232,15 @@ void do_drop( Character *ch, std::string argument )
     {
       PlayerCharacters->Save( ch );
 
-      if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
-        SaveHome (ch );
-
-      if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
-        SaveStoreroom( ch->InRoom );
+      if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+        {
+          SaveHome (ch );
+        }
+      
+      if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+        {
+          SaveStoreroom( ch->InRoom );
+        }
     } /* duping protector */
 }
 

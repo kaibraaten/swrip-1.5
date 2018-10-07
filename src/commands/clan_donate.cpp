@@ -16,13 +16,11 @@ void do_clan_donate( Character *ch, std::string argument )
       return;
     }
 
-  if ( !HasComlink( ch ) )
+  if ( !HasComlink( ch )
+       && !ch->InRoom->Flags.test( Flag::Room::Bank ) )
     {
-      if (!ch->InRoom || !IsBitSet(ch->InRoom->Flags, ROOM_BANK) )
-        {
-          ch->Echo( "You must be in a bank or have a comlink to do that!\r\n" );
-          return;
-        }
+      ch->Echo( "You must be in a bank or have a comlink to do that!\r\n" );
+      return;
     }
 
   clan = ch->PCData->ClanInfo.Clan;

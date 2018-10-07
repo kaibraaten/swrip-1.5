@@ -37,7 +37,7 @@ void do_cast( Character *ch, std::string argument )
 	  return;
         }
 
-      if ( IsBitSet( ch->InRoom->Flags, ROOM_NO_MAGIC ) )
+      if ( ch->InRoom->Flags.test( Flag::Room::NoMagic ) )
         {
           SetCharacterColor( AT_MAGIC, ch );
           ch->Echo( "You failed.\r\n" );

@@ -97,7 +97,7 @@ void do_hail( Character *ch , std::string argument )
       return;
     }
 
-  if ( IsBitSet( ch->InRoom->Flags , ROOM_INDOORS ) )
+  if ( ch->InRoom->Flags.test( Flag::Room::Indoors ) )
     {
       ch->Echo( "You'll have to go outside to do that!\r\n" );
       return;
@@ -109,7 +109,7 @@ void do_hail( Character *ch , std::string argument )
       return;
     }
 
-  if ( IsBitSet( ch->InRoom->Flags , ROOM_SPACECRAFT ) )
+  if ( ch->InRoom->Flags.test( Flag::Room::Spacecraft ) )
     {
       ch->Echo( "You can't do that on spacecraft!\r\n" );
       return;
@@ -140,7 +140,7 @@ void do_hail( Character *ch , std::string argument )
 
       if ( room != NULL )
         {
-          if ( IsBitSet(room->Flags , ROOM_HOTEL ) )
+          if ( room->Flags.test( Flag::Room::Hotel ) )
             break;
           else
             room = NULL;

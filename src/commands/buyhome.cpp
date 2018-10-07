@@ -7,9 +7,6 @@ void do_buyhome( Character *ch, std::string argument )
 {
   const int houseCost = 100000;
   
-  if ( !ch->InRoom )
-    return;
-
   if ( IsNpc(ch) || !ch->PCData )
     return;
 
@@ -25,12 +22,12 @@ void do_buyhome( Character *ch, std::string argument )
     {
       if ( room->Area == pArea )
         {
-          ch->Echo( "&RThis area isn't installed yet!\r\n&w" );
+          ch->Echo( "&RThis area isn't installed yet!\r\n&d" );
 	  return;
         }
     }
 
-  if ( !IsBitSet( room->Flags, ROOM_EMPTY_HOME ) )
+  if ( !room->Flags.test( Flag::Room::EmptyHome ) )
     {
       ch->Echo( "&RThis room isn't for sale!\r\n&d" );
       return;
@@ -53,8 +50,8 @@ void do_buyhome( Character *ch, std::string argument )
 
   ch->Gold -= houseCost;
 
-  RemoveBit( room->Flags , ROOM_EMPTY_HOME );
-  SetBit( room->Flags , ROOM_PLR_HOME );
+  room->Flags.reset( Flag::Room::EmptyHome );
+  room->Flags.set( Flag::Room::PlayerHome );
 
   FoldArea( room->Area, room->Area->Filename, false );
 

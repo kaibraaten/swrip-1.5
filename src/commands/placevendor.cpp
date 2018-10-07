@@ -41,7 +41,7 @@ void do_placevendor (Character *ch, std::string argument)
       return;
     }
 
-  if (!IsBitSet(ch->InRoom->Flags, ROOM_PLR_SHOP) )
+  if ( !ch->InRoom->Flags.test( Flag::Room::PlayerShop ) )
     {
       ch->Echo("You need to find a free shop.\r\n");
       return;

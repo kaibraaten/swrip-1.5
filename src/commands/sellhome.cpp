@@ -28,8 +28,8 @@ void do_sellhome( Character *ch, std::string argument )
 
   room->Name = "An Empty Apartment";
   ch->Gold += sellHomeCreditReturn;
-  RemoveBit(room->Flags,ROOM_PLR_HOME);
-  SetBit(room->Flags,ROOM_EMPTY_HOME);
+  room->Flags.reset( Flag::Room::PlayerHome );
+  room->Flags.set( Flag::Room::EmptyHome );
   FoldArea(room->Area,room->Area->Filename,false);
   ch->PlayerHome = NULL;
   do_save(ch,"");

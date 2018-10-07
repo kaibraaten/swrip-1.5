@@ -155,7 +155,7 @@ static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int 
   map[x][y].mapch = 'O';
   map[x][y].vnum = pRoom->Vnum;
   map[x][y].depth = depth;
-  map[x][y].info = pRoom->Flags;
+  map[x][y].info = pRoom->Flags.to_ulong();
   map[x][y].CanSeeCharacter = IsRoomDark( pRoom );
 
   /* Limit recursion */

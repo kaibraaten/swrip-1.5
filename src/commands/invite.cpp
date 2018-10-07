@@ -7,7 +7,8 @@ void do_invite(Character *ch, std::string argument )
   Room *home = ch->InRoom;
   Character *victim = nullptr;
 
-  if ( !IsBitSet(home->Flags,ROOM_PLR_HOME) || home != ch->PlayerHome )
+  if ( !home->Flags.test( Flag::Room::PlayerHome )
+       || home != ch->PlayerHome )
     {
       ch->Echo("&RThis isn't your home!\r\n");
       return;

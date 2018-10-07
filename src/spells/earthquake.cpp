@@ -13,7 +13,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
   ch_ret retcode = rNONE;
   Skill *skill = GetSkill(sn);
 
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
+  if ( ch->InRoom->Flags.test( Flag::Room::Safe ) )
     {
       FailedCasting( skill, ch, NULL, NULL );
       return rSPELL_FAILED;

@@ -2,9 +2,53 @@
 #define _SWRIP_ROOM_HPP_
 
 #include <list>
+#include <string>
+#include <bitset>
 #include "types.hpp"
 #include "constants.hpp"
 #include "mprog.hpp"
+
+namespace Flag
+{
+  namespace Room
+  {
+    enum : size_t
+      {
+       Dark,
+       Reserved, /* BV01 now reserved for track  BV01  and hunt */
+       NoMob,
+       Indoors,
+       CanLand,
+       CanFly,
+       NoDrive,
+       NoMagic,
+       Bank,
+       Private,
+       Safe,
+       _11,
+       PetShop,
+       Arena,
+       Donation,
+       NoDropAll,
+       Silence,
+       LogSpeech,
+       NoDrop,
+       ClanStoreroom,
+       PlayerHome,
+       EmptyHome,
+       Teleport,
+       Hotel,
+       NoFloor,
+       Refinery,
+       Factory,
+       Recruit,
+       PlayerShop,
+       Spacecraft,
+       Prototype,
+       Auction
+      };
+  }
+}
 
 class Room
 {
@@ -36,18 +80,18 @@ public:
   void Remove(ExtraDescription *extraDescription);
   const std::list<ExtraDescription*> &ExtraDescriptions() const;
   
-  Room  *Next = nullptr;
-  Room  *NextSort = nullptr;
-  struct Area        *Area = nullptr;
+  Room *Next = nullptr;
+  Room *NextSort = nullptr;
+  struct Area *Area = nullptr;
   std::string Name;
   std::string Description;
-  vnum_t            Vnum = INVALID_VNUM;
-  int               Flags = 0;
-  int             Light = 0;
+  vnum_t Vnum = INVALID_VNUM;
+  std::bitset<Flag::MAX> Flags;
+  int Light = 0;
   SectorType Sector = 0;
-  vnum_t            TeleVnum = INVALID_VNUM;
-  int             TeleDelay = 0;
-  int             Tunnel = 0;              /* max people that will fit */
+  vnum_t TeleVnum = INVALID_VNUM;
+  int TeleDelay = 0;
+  int Tunnel = 0;              /* max people that will fit */
 
   MProg mprog;
 

@@ -43,13 +43,13 @@ void do_buzz(Character *ch, std::string arg)
 
   Room *home = exitdat->ToRoom;
 
-  if ( IsBitSet(home->Flags,ROOM_EMPTY_HOME) )
+  if ( home->Flags.test( Flag::Room::EmptyHome ) )
     {
       ch->Echo("&RThat home isn't owned by anyone.\r\n");
       return;
     }
 
-  if ( !IsBitSet(home->Flags,ROOM_PLR_HOME) )
+  if ( !home->Flags.test( Flag::Room::PlayerHome ) )
     {
       ch->Echo("&RThat isn't a home.\r\n");
       return;

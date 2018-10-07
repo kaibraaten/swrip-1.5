@@ -166,10 +166,10 @@ void do_throw( Character *ch, std::string argument )
           CharacterFromRoom( ch );
           CharacterToRoom( ch, was_in_room );
 
-          if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
+          if ( ch->InRoom->Flags.test( Flag::Room::Safe ) )
             {
               SetCharacterColor( AT_MAGIC, ch );
-              ch->Echo("You'll have to do that elswhere.\r\n");
+              ch->Echo("You'll have to do that elsewhere.\r\n");
               return;
             }
 

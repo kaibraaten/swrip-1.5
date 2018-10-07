@@ -201,7 +201,7 @@ Exit *GetExitNumber( const Room *room, short count )
  */
 bool CharacterFallIfNoFloor( Character *ch, int fall )
 {
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_NOFLOOR )
+  if ( ch->InRoom->Flags.test( Flag::Room::NoFloor )
        && CAN_GO(ch, DIR_DOWN)
        && (!IsAffectedBy( ch, AFF_FLYING )
            || ( ch->Mount && !IsAffectedBy( ch->Mount, AFF_FLYING ) ) ) )

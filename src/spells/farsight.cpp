@@ -24,12 +24,12 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
   saving = GetRandomPercent();
 
   if ( ( victim = GetCharacterAnywhere( ch, spell_target_name ) ) == NULL
-       ||   victim == ch
-       ||   !victim->InRoom
-       ||   IsBitSet(victim->InRoom->Flags, ROOM_PRIVATE)
-       ||   IsBitSet(victim->InRoom->Flags, ROOM_PROTOTYPE)
-       ||       (IsNpc(victim) && IsBitSet(victim->Flags, ACT_PROTOTYPE))
-       ||  (IsNpc(victim) && SaveVsSpellStaff( level, victim ))
+       || victim == ch
+       || !victim->InRoom
+       || victim->InRoom->Flags.test( Flag::Room::Private )
+       || victim->InRoom->Flags.test( Flag::Room::Prototype )
+       || (IsNpc(victim) && IsBitSet(victim->Flags, ACT_PROTOTYPE))
+       || (IsNpc(victim) && SaveVsSpellStaff( level, victim ))
        || saving <= 50 )
     {
       FailedCasting( skill, ch, victim, NULL );

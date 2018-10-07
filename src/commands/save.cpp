@@ -33,9 +33,11 @@ void do_save( Character *ch, std::string argument )
   PlayerCharacters->Save( ch );
   SaveHome (ch );
 
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
-    SaveStoreroom( ch->InRoom );
-
+  if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+    {
+      SaveStoreroom( ch->InRoom );
+    }
+  
   saving_char = NULL;
   ch->Echo("Ok.\r\n");
 }

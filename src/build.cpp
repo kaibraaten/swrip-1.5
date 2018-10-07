@@ -595,7 +595,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
       if ( install )
         {
           /* remove prototype flag from room */
-          RemoveBit( room->Flags, ROOM_PROTOTYPE );
+          room->Flags.reset( Flag::Room::Prototype );
           
           /* purge room of (prototyped) mobiles */
           std::list<Character*> charactersToExtract = Filter(room->Characters(),
@@ -621,13 +621,13 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
       fprintf( fpout, "%s~\n",  room->Name.c_str()                      );
       fprintf( fpout, "%s~\n",  StripCarriageReturn( room->Description ).c_str()   );
       if ( (room->TeleDelay > 0 && room->TeleVnum > 0) || room->Tunnel > 0 )
-        fprintf( fpout, "0 %d %d %d %ld %d\n",   room->Flags,
+        fprintf( fpout, "0 %d %d %d %ld %d\n", static_cast<int>(room->Flags.to_ulong()),
                  room->Sector,
                  room->TeleDelay,
                  room->TeleVnum,
                  room->Tunnel           );
       else
-        fprintf( fpout, "0 %d %d\n", room->Flags, room->Sector );
+        fprintf( fpout, "0 %d %d\n", static_cast<int>(room->Flags.to_ulong()), room->Sector );
 
       for(const Exit *xit : room->Exits())
         {

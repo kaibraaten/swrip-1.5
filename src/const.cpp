@@ -2095,7 +2095,7 @@ const char * const RoomSents[SECT_MAX][25] =
 const std::array<const char * const, MAX_BIT> RoomFlags =
   {
     "Dark",
-    "Reserved",
+    "_Reserved",
     "NoMob",
     "Indoors",
     "CanLand",
@@ -2107,7 +2107,7 @@ const std::array<const char * const, MAX_BIT> RoomFlags =
     "Safe",
     "_11",
     "PetShop",
-    "Aena",
+    "Arena",
     "Donation",
     "NoDropAll",
     "Silence",

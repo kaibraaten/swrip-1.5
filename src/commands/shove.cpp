@@ -50,7 +50,7 @@ void do_shove( Character *ch, std::string argument )
 
   exit_dir = GetDirection( arg2 );
 
-  if ( IsBitSet(victim->InRoom->Flags, ROOM_SAFE)
+  if ( victim->InRoom->Flags.test( Flag::Room::Safe )
        && GetTimer(victim, TIMER_SHOVEDRAG) <= 0 )
     {
       ch->Echo("That character cannot be shoved right now.\r\n");
@@ -284,7 +284,7 @@ void do_shove( Character *ch, std::string argument )
 
   SetWaitState(ch, 12);
 
-  if ( IsBitSet(ch->InRoom->Flags, ROOM_SAFE)
+  if ( ch->InRoom->Flags.test( Flag::Room::Safe )
        && GetTimer(ch, TIMER_SHOVEDRAG) <= 0 )
     {
       AddTimerToCharacter( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_PAUSE );

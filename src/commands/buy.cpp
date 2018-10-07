@@ -22,7 +22,7 @@ void do_buy( Character *ch, std::string argument )
       return;
     }
 
-  if ( IsBitSet(ch->InRoom->Flags, ROOM_PET_SHOP) )
+  if ( ch->InRoom->Flags.test( Flag::Room::PetShop ) )
     {
       char buf[MAX_STRING_LENGTH];
       Character *pet = nullptr;

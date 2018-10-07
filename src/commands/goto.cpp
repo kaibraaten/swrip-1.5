@@ -85,7 +85,7 @@ void do_goto( Character *ch, std::string argument )
 
       if ( ( ch->InRoom->Vnum < pArea->VnumRanges.Room.First
 	     || ch->InRoom->Vnum > pArea->VnumRanges.Room.Last )
-	   && !IsBitSet(ch->InRoom->Flags , ROOM_HOTEL) )
+	   && !ch->InRoom->Flags.test( Flag::Room::Hotel ) )
         {
           ch->Echo( "Builders can only use goto from a hotel or in their zone.\r\n" );
           return;

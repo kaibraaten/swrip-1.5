@@ -42,7 +42,7 @@ void do_beg( Character *ch, std::string argument )
       return;
     }
 
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
+  if ( ch->InRoom->Flags.test( Flag::Room::Safe ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       ch->Echo( "This isn't a good place to do that.\r\n" );

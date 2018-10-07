@@ -124,10 +124,10 @@ void ExplodeRoom( Object *obj, Character *xch, Room *room )
 
 void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
 {
-  if ( IsBitSet( room->Flags, BFS_MARK ) )
+  if ( room->Flags.test( BFSMark ) )
     return;
 
-  SetBit( room->Flags , BFS_MARK );
+  room->Flags.set( BFSMark );
 
   std::list<Character*> copyOfCharacterList(room->Characters());
 
@@ -192,12 +192,12 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
 
 void ExplodeRoom_2( Room *room , int blast )
 {
-  if ( !IsBitSet( room->Flags, BFS_MARK ) )
+  if ( !room->Flags.test( BFSMark ) )
     {
       return;
     }
 
-  RemoveBit( room->Flags , BFS_MARK );
+  room->Flags.reset( BFSMark );
 
   if ( blast > 0 )
     {
@@ -480,7 +480,7 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       /* spell cast upon wear/removal of an object      -Thoric */
     case APPLY_WEARSPELL:
     case APPLY_REMOVESPELL:
-      if ( IsBitSet(ch->InRoom->Flags, ROOM_NO_MAGIC)
+      if ( ch->InRoom->Flags.test( Flag::Room::NoMagic )
            || IsBitSet(ch->Immune, RIS_MAGIC)
            || saving_char == ch               /* so save/quit doesn't trigger */
            || loading_char == ch )    /* so loading doesn't trigger */
@@ -759,16 +759,16 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
     ++ch->InRoom->Light;
 
   if ( !IsNpc(ch)
-       &&    IsBitSet(ch->InRoom->Flags, ROOM_SAFE)
-       &&    GetTimer(ch, TIMER_SHOVEDRAG) <= 0 )
+       && ch->InRoom->Flags.test( Flag::Room::Safe )
+       && GetTimer(ch, TIMER_SHOVEDRAG) <= 0 )
     AddTimerToCharacter( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_NONE );  /*-30 Seconds-*/
 
   /*
    * Delayed Teleport rooms                                     -Thoric
    * Should be the last thing checked in this function
    */
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_TELEPORT )
-       &&        ch->InRoom->TeleDelay > 0 )
+  if ( ch->InRoom->Flags.test( Flag::Room::Teleport )
+       && ch->InRoom->TeleDelay > 0 )
     {
       for ( const TeleportData *tele = FirstTeleport; tele; tele = tele->Next )
         if ( tele->FromRoom == pRoomIndex )
@@ -1201,7 +1201,7 @@ void ExtractCharacter( Character *ch, bool fPull )
 
   StopFighting( ch, true );
 
-  if (IsBitSet(ch->InRoom->Flags, ROOM_ARENA))
+  if ( IsInArena( ch ) )
     {
       ch->HitPoints.Current = ch->HitPoints.Max;
       ch->Mana.Current = ch->Mana.Max;
@@ -1731,7 +1731,7 @@ bool IsRoomDark( const Room *pRoomIndex )
   if ( pRoomIndex->Light > 0 )
     return false;
 
-  if ( IsBitSet(pRoomIndex->Flags, ROOM_DARK) )
+  if ( pRoomIndex->Flags.test( Flag::Room::Dark ) )
     return true;
 
   if ( pRoomIndex->Sector == SECT_INSIDE
@@ -1753,12 +1753,14 @@ bool IsRoomPrivate( const Character *ch, const Room *pRoomIndex )
   assert(ch != nullptr);
   assert(pRoomIndex != nullptr);
 
-  if ( IsBitSet(pRoomIndex->Flags, ROOM_PLR_HOME) && ch->PlayerHome != pRoomIndex)
+  if ( pRoomIndex->Flags.test( Flag::Room::PlayerHome )
+       && ch->PlayerHome != pRoomIndex)
     return true;
 
   size_t count = pRoomIndex->Characters().size();
 
-  if ( IsBitSet(pRoomIndex->Flags, ROOM_PRIVATE) && count >= 2 )
+  if ( pRoomIndex->Flags.test( Flag::Room::Private )
+       && count >= 2 )
     return true;
 
   return false;

@@ -206,12 +206,17 @@ void do_pick( Character *ch, std::string arg )
                             || IsAffectedBy(victim->Switched, AFF_POSSESS) ) )
                 victim = victim->Switched;
 
-              if ( !IsAwake(victim) || IsBitSet(victim->InRoom->Flags,ROOM_SILENCE) )
-                continue;
-
+              if ( !IsAwake(victim)
+                   || victim->InRoom->Flags.test( Flag::Room::Silence ) )
+                {
+                  continue;
+                }
+              
               if ( d->ConnectionState == CON_EDITING )
-                continue;
-
+                {
+                  continue;
+                }
+              
               victim->Echo("&R[Alarm] Attempt to pick %s.\r\n",ship->Name);
             }
           return;
@@ -256,7 +261,8 @@ void do_pick( Character *ch, std::string arg )
                             || IsAffectedBy(victim->Switched, AFF_POSSESS) ) )
                 victim = victim->Switched;
 
-              if ( !IsAwake(victim) || IsBitSet(victim->InRoom->Flags,ROOM_SILENCE) )
+              if ( !IsAwake(victim)
+                   || victim->InRoom->Flags.test( Flag::Room::Silence ) )
                 continue;
 
               if ( d->ConnectionState == CON_EDITING )

@@ -222,7 +222,7 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
       return;
     }
 
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_SILENCE ) )
+  if ( ch->InRoom->Flags.test( Flag::Room::Silence ) )
     {
       ch->Echo( "You can't do that here.\r\n" );
       return;
@@ -357,7 +357,7 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
       break;
     }
 
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
+  if ( ch->InRoom->Flags.test( Flag::Room::LogSpeech ) )
     {
       sprintf( buf2, "%s: %s (%s)", IsNpc( ch ) ? ch->ShortDescr.c_str() : ch->Name.c_str(),
                argument, verb.c_str() );
@@ -400,9 +400,11 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
           if ( channel == CHANNEL_AVTALK && !IsAvatar(och) )
             continue;
 
-          if ( IsBitSet( vch->InRoom->Flags, ROOM_SILENCE ) )
-            continue;
-
+          if( vch->InRoom->Flags.test( Flag::Room::Silence ) )
+            {
+              continue;
+            }
+          
           if ( channel == CHANNEL_YELL || channel == CHANNEL_SHOUT )
             {
               if ( ch->InRoom != och->InRoom )
@@ -660,8 +662,10 @@ void TalkAuction(const std::string &argument)
     {
       Character *original = d->Original ? d->Original : d->Character; /* if switched */
 
-      if ((d->ConnectionState == CON_PLAYING) && !IsBitSet(original->Deaf,CHANNEL_AUCTION)
-          && !IsBitSet(original->InRoom->Flags, ROOM_SILENCE) && IsAuthed(original))
+      if ((d->ConnectionState == CON_PLAYING)
+          && !IsBitSet(original->Deaf,CHANNEL_AUCTION)
+          && !original->InRoom->Flags.test( Flag::Room::Silence )
+          && IsAuthed(original))
 	{
 	  Act( AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR );
 	}

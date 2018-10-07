@@ -65,7 +65,7 @@ void do_get( Character *ch, std::string argument )
       return;
     }
 
-  if ( ch->InRoom && IsBitSet(ch->InRoom->Flags, ROOM_PLR_HOME)
+  if ( ch->InRoom->Flags.test( Flag::Room::PlayerHome )
        && GetTrustLevel(ch) < LEVEL_SUB_IMPLEM )
     {
       if ( !ch->PlayerHome || ch->PlayerHome->Vnum != ch->InRoom->Vnum )
@@ -112,11 +112,15 @@ void do_get( Character *ch, std::string argument )
             {
               PlayerCharacters->Save( ch );
 
-              if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
-                SaveHome (ch );
-
-              if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
-                SaveStoreroom( ch->InRoom );
+              if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+                {
+                  SaveHome (ch );
+                }
+              
+              if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+                {
+                  SaveStoreroom( ch->InRoom );
+                }
 	    }
         }
       else
@@ -161,11 +165,15 @@ void do_get( Character *ch, std::string argument )
                         {
                           PlayerCharacters->Save( ch );
 
-                          if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
-                            SaveHome (ch );
-
-			  if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
-                            SaveStoreroom( ch->InRoom );
+                          if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+                            {
+                              SaveHome (ch );
+                            }
+                          
+			  if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+                            {
+                              SaveStoreroom( ch->InRoom );
+                            }
                         }
 
                       return;
@@ -184,11 +192,15 @@ void do_get( Character *ch, std::string argument )
 	    {
 	      PlayerCharacters->Save( ch );
 
-	      if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
-		SaveHome (ch );
-
-	      if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
-		SaveStoreroom( ch->InRoom );
+	      if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
+                {
+                  SaveHome (ch );
+                }
+              
+	      if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
+                {
+                  SaveStoreroom( ch->InRoom );
+                }
 	    }
         }
     }
@@ -266,10 +278,10 @@ void do_get( Character *ch, std::string argument )
             {
 	      PlayerCharacters->Save( ch );
 
-              if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
+              if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
                 SaveHome (ch );
 
-              if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
+              if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
                 SaveStoreroom( ch->InRoom );
             }
         }
@@ -341,12 +353,12 @@ void do_get( Character *ch, std::string argument )
             {
               PlayerCharacters->Save( ch );
 
-              if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
+              if( ch->InRoom->Flags.test( Flag::Room::PlayerHome ) )
                 {
                   SaveHome( ch );
                 }
 
-              if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
+              if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
                 {
                   SaveStoreroom( ch->InRoom );
                 }
@@ -410,7 +422,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
     }
 
   
-  if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
+  if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom )
        && (container == NULL || container->CarriedBy == NULL) )
     {
       for(const Clan *clan : Clans->Entities())

@@ -17,7 +17,7 @@ void do_bet(Character *ch, std::string argument)
       return;
     }
 
-  if (IsBitSet(ch->InRoom->Flags, ROOM_ARENA))
+  if ( IsInArena( ch ) )
     {
       ch->Echo("Arena players can not make bets.");
       return;
@@ -46,7 +46,7 @@ void do_bet(Character *ch, std::string argument)
     {
       ch->Echo("That doesn't make much sense, does it?\r\n");
     }
-  else if(ch->InRoom && !(IsBitSet(ch->BettedOn->InRoom->Flags, ROOM_ARENA)))
+  else if( IsInArena( ch ) )
     {
       ch->Echo("Sorry that person is not in the arena.\r\n");
     }

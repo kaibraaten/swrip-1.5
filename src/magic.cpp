@@ -781,7 +781,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
       return rERROR;
     }
 
-  if ( IsBitSet( ch->InRoom->Flags, ROOM_NO_MAGIC ) )
+  if ( ch->InRoom->Flags.test( Flag::Room::NoMagic ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       ch->Echo( "Nothing seems to happen...\r\n" );

@@ -150,7 +150,7 @@ void do_hijack( Character *ch, std::string argument )
           if ( !IsNpc( victim ) && victim->Switched )
             continue;
 
-          if ( !IsAwake(victim) || IsBitSet(victim->InRoom->Flags,ROOM_SILENCE) )
+          if ( !IsAwake(victim) || victim->InRoom->Flags.test( Flag::Room::Silence ) )
             continue;
 
           victim->Echo("&R[Alarm] %s has been hijacked!\r\n", ship->Name.c_str());

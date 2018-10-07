@@ -1422,7 +1422,7 @@ void LoadStorerooms( void )
               return;
             }
 
-          if ( !IsBitSet( storeroom->Flags, ROOM_CLANSTOREROOM ) )
+          if ( !storeroom->Flags.test( Flag::Room::ClanStoreroom ) )
             {
               sprintf( buf, "%s%ld", STOREROOM_DIR, storeroom->Vnum );
               remove( buf );
