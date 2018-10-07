@@ -114,7 +114,7 @@ void do_setplanet( Character *ch, std::string argument )
 	{
           if ( !StrCmp( farg, "nocapture" ) )
             {
-              ToggleBit( planet->Flags, PLANET_NOCAPTURE );
+              planet->Flags.flip( Flag::Planet::NoCapture );
             }
           else
             {

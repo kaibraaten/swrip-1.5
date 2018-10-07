@@ -3,6 +3,19 @@
 
 #include <string>
 #include <list>
+#include <bitset>
+#include "constants.hpp"
+
+namespace Flag
+{
+  namespace Planet
+  {
+    enum : size_t
+      {
+       NoCapture
+      };
+  }
+}
 
 class Planet
 {
@@ -19,7 +32,7 @@ public:
   long BaseValue = 0;
   Clan *GovernedBy = nullptr;
   int Population = 0;
-  int Flags = 0;
+  std::bitset<Flag::MAX> Flags;
   double PopularSupport = 0.0;
 
 private:

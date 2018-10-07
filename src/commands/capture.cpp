@@ -68,7 +68,7 @@ void do_capture( Character *ch , std::string argument )
         }
     }
 
-  if ( IsBitSet( planet->Flags, PLANET_NOCAPTURE ) )
+  if ( planet->Flags.test( Flag::Planet::NoCapture ) )
     {
       ch->Echo( "This planet cannot be captured.\r\n" );
       return;
