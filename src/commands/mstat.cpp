@@ -151,7 +151,7 @@ void do_mstat( Character *ch, std::string arg )
       ch->Echo("Pcflags: %s\r\n",
                FlagString(victim->PCData->Flags, PcFlags).c_str() );
       ch->Echo("Wanted flags: %s\r\n",
-               FlagString(victim->PCData->WantedFlags, WantedFlags).c_str() );
+               FlagString(victim->PCData->WantedOn, WantedFlags).c_str() );
     }
 
   ch->Echo("Affected by: %s\r\n",

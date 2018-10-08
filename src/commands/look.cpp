@@ -1010,7 +1010,8 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   if ( !ch->Desc->Original )
     {
-      if ((GetTrustLevel(ch) >= LEVEL_IMMORTAL) && (IsBitSet(ch->PCData->Flags, PCFLAG_ROOM)))
+      if (GetTrustLevel(ch) >= LEVEL_IMMORTAL
+          && ch->PCData->Flags.test( Flag::PCData::ShowRoomFlags ) )
 	{
 	  SetCharacterColor(AT_PURPLE, ch);
           ch->Echo("{%d:%s}", ch->InRoom->Vnum, ch->InRoom->Area->Filename.c_str());

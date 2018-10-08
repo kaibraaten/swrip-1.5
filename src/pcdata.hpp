@@ -3,9 +3,33 @@
 
 #include <array>
 #include <list>
+#include <bitset>
 #include "types.hpp"
 #include "constants.hpp"
 #include "imc.hpp"
+
+namespace Flag
+{
+  namespace PCData
+  {
+    enum : size_t
+      {
+       _01,
+       _02,
+       Unauthed,
+       NoRecall,
+       NoIntro,
+       Gag,
+       Retired,
+       Guest,
+       NoSummon,
+       _09,
+       NoTitle,
+       ShowRoomFlags,
+       DoNotDisturb,
+      };
+  }
+}
 
 class PCData
 {
@@ -40,16 +64,16 @@ public:
   std::string Rank;
   std::string Title;
 
-  std::string Bestowments;    /* Special bestowed commands       */
-  int Flags = 0;            /* Whether the player is deadly and whatever else we add.      */
+  std::string Bestowments;      /* Special bestowed commands          */
+  std::bitset<Flag::MAX> Flags; /* Whether the player is deadly and whatever else we add */
 
-  int PKills = 0;         /* Number of pkills on behalf of clan */
-  int PDeaths = 0;        /* Number of times pkilled (legally)  */
-  int MKills = 0;         /* Number of mobs killed                   */
-  int MDeaths = 0;        /* Number of deaths due to mobs       */
-  int IllegalPk = 0;     /* Number of illegal pk's committed   */
+  int PKills = 0;               /* Number of pkills on behalf of clan */
+  int PDeaths = 0;              /* Number of times pkilled (legally)  */
+  int MKills = 0;               /* Number of mobs killed              */
+  int MDeaths = 0;              /* Number of deaths due to mobs       */
+  int IllegalPk = 0;            /* Number of illegal pk's committed   */
 
-  long RestoreTime = 0;     /* The last time the char did a restore all */
+  long RestoreTime = 0;         /* The last time the char did a restore all */
 
   struct
   {
@@ -82,7 +106,7 @@ public:
 
   std::array<int, 10> Addiction;
   std::array<int, 10> DrugLevel;
-  int WantedFlags = 0;
+  std::bitset<Flag::MAX> WantedOn;
   long Bank = 0;
   bool WhoCloak = false;
 
@@ -103,5 +127,7 @@ private:
   struct Impl;
   Impl *pImpl = nullptr;
 };
+
+extern const std::array<const char * const, Flag::MAX> PcFlags;
 
 #endif

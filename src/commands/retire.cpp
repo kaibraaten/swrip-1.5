@@ -38,7 +38,7 @@ void do_retire( Character *ch, std::string arg )
 
   if ( IsRetiredImmortal( victim ) )
     {
-      RemoveBit( victim->PCData->Flags, PCFLAG_RETIRED );
+      victim->PCData->Flags.reset( Flag::PCData::Retired );
       ch->Echo( "%s returns from retirement.\r\n",
                 victim->Name.c_str() );
       victim->Echo( "%s brings you back from retirement.\r\n",
@@ -46,7 +46,7 @@ void do_retire( Character *ch, std::string arg )
     }
   else
     {
-      SetBit( victim->PCData->Flags, PCFLAG_RETIRED );
+      victim->PCData->Flags.set( Flag::PCData::Retired );
       ch->Echo( "%s is now a retired immortal.\r\n", victim->Name.c_str() );
       victim->Echo( "Courtesy of %s, you are now a retired immortal.\r\n",
                     ch->Name.c_str() );

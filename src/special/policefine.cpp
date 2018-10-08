@@ -20,21 +20,23 @@ bool spec_police_fine( Character *ch )
 
   for(Character *victim : potentialCriminals)
     {
-      for (size_t vip = 0 ; vip < MAX_BIT ; vip++ )
-        if ( IsBitSet ( ch->VipFlags , 1 << vip ) &&  IsBitSet( victim->PCData->WantedFlags , 1 << vip) )
-          {
-            char buf[MAX_STRING_LENGTH];
-            sprintf( buf , "Hey you're wanted on %s!", WantedFlags[vip] );
-            do_say( ch , buf );
-            Act( AT_ACTION, "$n fines $N an enormous amount of money.", ch, NULL, victim, TO_NOTVICT );
-            Act( AT_ACTION, "$n fines you an enourmous amount of money.",   ch, NULL, victim, TO_VICT    );
-            if( victim->InRoom && victim->InRoom->Area )
-              BoostEconomy( victim->InRoom->Area, (victim->Gold)/2 );
-            victim->Gold /= 2;
-	    RemoveBit( victim->PCData->WantedFlags , 1 << vip );
-            return true;
-          }
+      for (size_t vip = 0; vip < Flag::MAX; vip++ )
+        {
+          if( ch->VipFlags.test( vip ) && victim->PCData->WantedOn.test( vip ) )
+            {
+              char buf[MAX_STRING_LENGTH];
+              sprintf( buf , "Hey you're wanted on %s!", WantedFlags[vip] );
+              do_say( ch , buf );
+              Act( AT_ACTION, "$n fines $N an enormous amount of money.", ch, NULL, victim, TO_NOTVICT );
+              Act( AT_ACTION, "$n fines you an enourmous amount of money.",   ch, NULL, victim, TO_VICT    );
+              if( victim->InRoom && victim->InRoom->Area )
+                BoostEconomy( victim->InRoom->Area, (victim->Gold)/2 );
 
+              victim->Gold /= 2;
+              victim->PCData->WantedOn.reset( vip );
+              return true;
+            }
+        }
     }
 
   return false;

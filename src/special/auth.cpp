@@ -21,14 +21,14 @@ bool spec_auth( Character *ch )
         }
 
       if ( IsNpc(victim)
-           || !IsBitSet(victim->PCData->Flags, PCFLAG_UNAUTHED)
+           || !victim->PCData->Flags.test( Flag::PCData::Unauthed )
            || victim->PCData->AuthState == 2 )
         {
           continue;
         }
       
       victim->PCData->AuthState = 3;
-      RemoveBit(victim->PCData->Flags, PCFLAG_UNAUTHED);
+      victim->PCData->Flags.reset( Flag::PCData::Unauthed );
 
       victim->PCData->AuthedBy = ch->Name;
       char buf[MAX_STRING_LENGTH];

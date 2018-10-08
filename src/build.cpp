@@ -382,7 +382,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
            ||   pMobIndex->Height        != 0   ||   pMobIndex->Weight     != 0
            ||   pMobIndex->Speaks        != 0   ||   pMobIndex->Speaking   != 0
            ||   pMobIndex->NumberOfAttacks != 0
-           ||   pMobIndex->VipFlags !=0 )
+           ||   pMobIndex->VipFlags.any() )
         complexmob = true;
       else
         complexmob = false;
@@ -444,7 +444,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
                    pMobIndex->AttackFlags,
                    pMobIndex->DefenseFlags );
           fprintf( fpout, "%d 0 0 0 0 0 0 0\n",
-                   pMobIndex->VipFlags );
+                   static_cast<int>( pMobIndex->VipFlags.to_ulong() ) );
         }
       
       if ( !pMobIndex->mprog.MudProgs().empty() )

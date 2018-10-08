@@ -22,27 +22,27 @@ bool spec_police( Character *ch )
 
   for(Character *victim : potentialCriminals)
     {
-      for (size_t vip = 0 ; vip < MAX_BIT ; vip++ )
+      for (size_t vip = 0 ; vip < Flag::MAX; vip++ )
         {
-          if ( IsBitSet ( ch->VipFlags , 1 << vip )
-               && IsBitSet( victim->PCData->WantedFlags , 1 << vip) )
+          if ( ch->VipFlags.test( vip )
+               && victim->PCData->WantedOn.test( vip ) )
             {
               Room *jail = nullptr;
               char buf[MAX_STRING_LENGTH];
               
               sprintf( buf , "Hey you're wanted on %s!", WantedFlags[vip] );
               do_say( ch , buf );
-              RemoveBit( victim->PCData->WantedFlags , 1 << vip );
+              victim->PCData->WantedOn.reset( vip );
 
               if ( ch->TopLevel >= victim->TopLevel )
                 {
                   HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
                 }
-              else if( 1 << vip == VIP_ADARI )
+              else if( vip == Flag::Wanted::Adari )
                 {
                   jail = GetRoom( ROOM_JAIL_ADARI );
                 }
-              else if( 1 << vip == VIP_MON_CALAMARI )
+              else if( vip == Flag::Wanted::MonCalamari )
                 {
                   switch ( GetRandomNumberFromRange(1,4) )
                     {
@@ -78,7 +78,7 @@ bool spec_police( Character *ch )
 
               if ( jail )
                 {
-                  RemoveBit( victim->PCData->WantedFlags , 1 << vip );
+                  victim->PCData->WantedOn.reset( vip );
                   Act( AT_ACTION, "$n ushers $N off to jail.", ch, NULL, victim, TO_NOTVICT );
                   Act( AT_ACTION, "$n escorts you to jail.",   ch, NULL, victim, TO_VICT    );
                   CharacterFromRoom( victim );

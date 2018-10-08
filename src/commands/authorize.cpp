@@ -45,7 +45,7 @@ void do_authorize( Character *ch, std::string argument )
   if ( arg2.empty() || !StrCmp( arg2, "accept" ) || !StrCmp( arg2, "yes" ))
     {
       victim->PCData->AuthState = 3;
-      RemoveBit(victim->PCData->Flags, PCFLAG_UNAUTHED);
+      victim->PCData->Flags.reset( Flag::PCData::Unauthed );
 
       victim->PCData->AuthedBy = ch->Name;
       sprintf( buf, "%s authorized %s", ch->Name.c_str(),

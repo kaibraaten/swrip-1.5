@@ -14,7 +14,7 @@ void do_disguise( Character *ch, std::string argument )
   if ( IsNpc(ch) )
     return;
 
-  if ( IsBitSet( ch->PCData->Flags, PCFLAG_NOTITLE ))
+  if( ch->PCData->Flags.test( Flag::PCData::NoTitle ) )
     {
       ch->Echo( "You try but the Force resists you.\r\n" );
       return;

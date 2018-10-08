@@ -30,15 +30,15 @@ void do_notitle( Character *ch, std::string arg )
       return;
     }
 
-  if ( IsBitSet(victim->PCData->Flags, PCFLAG_NOTITLE) )
+  if ( victim->PCData->Flags.test( Flag::PCData::NoTitle ) )
     {
-      RemoveBit(victim->PCData->Flags, PCFLAG_NOTITLE);
+      victim->PCData->Flags.reset( Flag::PCData::NoTitle );
       victim->Echo("You can set your own title again.\r\n");
       ch->Echo("NOTITLE removed.\r\n");
     }
   else
     {
-      SetBit(victim->PCData->Flags, PCFLAG_NOTITLE);
+      victim->PCData->Flags.set( Flag::PCData::NoTitle );
       SetCharacterTitle( victim, victim->Name );
       victim->Echo("You can't set your own title!\r\n");
       ch->Echo("NOTITLE set.\r\n");

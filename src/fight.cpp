@@ -2148,13 +2148,11 @@ static void ApplyWantedFlags( Character *ch, const Character *victim )
 
   if ( IsNpc(victim) && !IsNpc( ch ) )
     {
-      int x = 0;
-
-      for ( x = 0; x < 32; x++ )
+      for ( size_t x = 0; x < Flag::MAX; x++ )
         {
-          if ( IsBitSet(victim->VipFlags, 1 << x ) )
+          if ( victim->VipFlags.test( x ) )
             {
-              SetBit(ch->PCData->WantedFlags, 1 << x );
+              ch->PCData->WantedOn.set( x );
               ch->Echo( "&YYou are now wanted on %s.&w\r\n", WantedFlags[x] );
             }
         }
@@ -2897,13 +2895,13 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
   punct = (dampc <= 30) ? '.' : '!';
 
   if ( dam == 0
-       && !IsNpc(ch) && IsBitSet(ch->PCData->Flags, PCFLAG_GAG ) )
+       && !IsNpc(ch) && ch->PCData->Flags.test( Flag::PCData::Gag ) )
     {
       gcflag = true;
     }
 
   if ( dam == 0
-       && !IsNpc(victim) && IsBitSet(victim->PCData->Flags, PCFLAG_GAG ) )
+       && !IsNpc(victim) && victim->PCData->Flags.test( Flag::PCData::Gag ) )
     {
       gvflag = true;
     }

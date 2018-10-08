@@ -22,6 +22,7 @@
 #ifndef _SWRIP_CHARACTER_HPP_
 #define _SWRIP_CHARACTER_HPP_
 
+#include <bitset>
 #include <list>
 #include <array>
 #include "types.hpp"
@@ -108,7 +109,7 @@ public:
   int Height = 72;
   int Weight = 180;
   int ArmorClass = 100;
-  int VipFlags = 0;
+  std::bitset<Flag::MAX> VipFlags;
 
   struct
   {

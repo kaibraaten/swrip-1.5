@@ -194,8 +194,8 @@ void InMemoryPlayerRepository::LoadPlayerData( lua_State *L, Character *ch )
                   });
 
   ch->Flags = LuaLoadFlags( L, "Flags" ).to_ulong();
-  ch->PCData->Flags = LuaLoadFlags( L, "PcFlags" ).to_ulong();
-  ch->PCData->WantedFlags = LuaLoadFlags( L, "Wanted" ).to_ulong();
+  ch->PCData->Flags = LuaLoadFlags( L, "PcFlags" );
+  ch->PCData->WantedOn = LuaLoadFlags( L, "Wanted" );
 
   std::list<Character*> pet = LuaLoadMobiles( L, "Pets" );
 
@@ -609,7 +609,7 @@ void InMemoryPlayerRepository::PushPlayerData( lua_State *L, const Character *pc
 
   LuaPushFlags( L, pc->Flags, PlayerFlags, "Flags" );
   LuaPushFlags( L, pc->PCData->Flags, PcFlags, "PcFlags" );
-  LuaPushFlags( L, pc->PCData->WantedFlags, WantedFlags, "Wanted" );
+  LuaPushFlags( L, pc->PCData->WantedOn, WantedFlags, "Wanted" );
 
   if( pc->PCData->Pet != nullptr )
     {

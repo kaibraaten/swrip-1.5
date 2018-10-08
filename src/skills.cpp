@@ -186,13 +186,13 @@ bool CheckParry( Character *ch, Character *victim )
     }
 
   if ( !IsNpc(victim)
-       && !IsBitSet( victim->PCData->Flags, PCFLAG_GAG) ) /*SB*/
+       && !victim->PCData->Flags.test( Flag::PCData::Gag ) )
     {
       Act( AT_SKILL, "You parry $n's attack.",  ch, NULL, victim, TO_VICT    );
     }
 
   if ( !IsNpc(ch)
-       && !IsBitSet( ch->PCData->Flags, PCFLAG_GAG) )  /* SB */
+       && !ch->PCData->Flags.test( Flag::PCData::Gag ) )
     {
       Act( AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR    );
     }
@@ -235,12 +235,14 @@ bool CheckDodge( Character *ch, Character *victim )
       return false;
     }
 
-  if ( !IsNpc(victim) && !IsBitSet( victim->PCData->Flags, PCFLAG_GAG) )
+  if ( !IsNpc(victim)
+       && !victim->PCData->Flags.test( Flag::PCData::Gag ) )
     {
       Act( AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, TO_VICT    );
     }
 
-  if ( !IsNpc(ch) && !IsBitSet( ch->PCData->Flags, PCFLAG_GAG) )
+  if ( !IsNpc(ch)
+       && !ch->PCData->Flags.test( Flag::PCData::Gag ) )
     {
       Act( AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR    );
     }

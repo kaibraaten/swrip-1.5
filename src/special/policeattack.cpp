@@ -20,14 +20,14 @@ bool spec_police_attack( Character *ch )
 
   for(Character *victim : potentialCriminals)  
     {
-      for (size_t vip = 0 ; vip < MAX_BIT ; vip++ )
+      for (size_t vip = 0; vip < Flag::MAX; vip++ )
         {
-          if ( IsBitSet ( ch->VipFlags , 1 << vip ) &&  IsBitSet( victim->PCData->WantedFlags , 1 << vip) )
+          if( ch->VipFlags.test( vip ) && victim->PCData->WantedOn.test( vip ) )
             {
               char buf[MAX_STRING_LENGTH];
               sprintf( buf , "Hey you're wanted on %s!", WantedFlags[vip] );
               do_say( ch , buf );
-              RemoveBit( victim->PCData->WantedFlags , 1 << vip );
+              victim->PCData->WantedOn.reset( vip );
               HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
               return true;
             }

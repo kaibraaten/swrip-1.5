@@ -17,7 +17,7 @@ void do_config( Character *ch, std::string arg )
                 ? "[+FLEE     ] You flee if you get attacked.\r\n"
                 : "[-flee     ] You fight back if you get attacked.\r\n");                
 
-      ch->Echo( "%s", IsBitSet(ch->PCData->Flags, PCFLAG_NORECALL)
+      ch->Echo( "%s", ch->PCData->Flags.test( Flag::PCData::NoRecall )
                 ? "[+NORECALL ] You fight to the death, link-dead or not.\r\n"
                 : "[-norecall ] You try to recall if fighting link-dead.\r\n");                
 
@@ -37,7 +37,7 @@ void do_config( Character *ch, std::string arg )
                 ? "[+AUTOCRED ] You automatically split credits from kills in groups.\r\n"
                 : "[-autocred ] You don't automatically split credits from kills in groups.\r\n");
 
-      ch->Echo( "%s", IsBitSet(ch->PCData->Flags, PCFLAG_GAG)
+      ch->Echo( "%s", ch->PCData->Flags.test( Flag::PCData::Gag )
                 ? "[+GAG      ] You see only necessary battle text.\r\n"
                 : "[-gag      ] You see full battle text.\r\n");
 
@@ -53,7 +53,7 @@ void do_config( Character *ch, std::string arg )
                 ? "[+COMBINE  ] You see object lists in combined format.\r\n"
                 : "[-combine  ] You see object lists in single format.\r\n");
 
-      ch->Echo( "%s", IsBitSet(ch->PCData->Flags, PCFLAG_NOINTRO)
+      ch->Echo( "%s", ch->PCData->Flags.test( Flag::PCData::NoIntro )
                 ? "[+NOINTRO  ] You don't see the ascii intro screen on login.\r\n"
                 : "[-nointro  ] You see the ascii intro screen on login.\r\n");
 
@@ -74,7 +74,7 @@ void do_config( Character *ch, std::string arg )
                 ? "[+SHOVEDRAG] You allow yourself to be shoved and dragged around.\r\n"
                 : "[-shovedrag] You'd rather not be shoved or dragged around.\r\n");
 
-      ch->Echo( "%s", IsBitSet( ch->PCData->Flags, PCFLAG_NOSUMMON )
+      ch->Echo( "%s", ch->PCData->Flags.test( Flag::PCData::NoSummon )
                 ? "[+NOSUMMON ] You do not allow other players to summon you.\r\n"
                 : "[-nosummon ] You allow other players to summon you.\r\n");
 
@@ -88,12 +88,12 @@ void do_config( Character *ch, std::string arg )
                   : "[-vnum     ] You do not see the VNUM of a room.\r\n");
 
       if ( IsImmortal( ch ) )
-        ch->Echo( "%s", IsBitSet(ch->Flags, PLR_AUTOMAP)    /* maps */
+        ch->Echo( "%s", IsBitSet(ch->Flags, PLR_AUTOMAP)
                   ? "[+MAP      ] You can see the MAP of a room.\r\n"
                   : "[-map      ] You do not see the MAP of a room.\r\n");
 
-      if ( IsImmortal( ch) )             /* Added 10/16 by Kuran of SWR */
-        ch->Echo( "%s", IsBitSet(ch->PCData->Flags, PCFLAG_ROOM)
+      if ( IsImmortal( ch) )
+        ch->Echo( "%s", ch->PCData->Flags.test( Flag::PCData::ShowRoomFlags )
                   ? "[+ROOMFLAGS] You will see room flags.\r\n"
                   : "[-roomflags] You will not see room flags.\r\n");
 
@@ -183,16 +183,26 @@ void do_config( Character *ch, std::string arg )
       else
         {
           if ( !StringPrefix( option, "norecall" ) )
-	    bit = PCFLAG_NORECALL;
+            {
+              bit = Flag::PCData::NoRecall;
+            }
           else if ( !StringPrefix( option, "nointro"  ) )
-	    bit = PCFLAG_NOINTRO;
+            {
+              bit = Flag::PCData::NoIntro;
+            }
           else if ( !StringPrefix( option, "nosummon" ) )
-	    bit = PCFLAG_NOSUMMON;
+            {
+              bit = Flag::PCData::NoSummon;
+            }
           else if ( !StringPrefix( option, "gag"      ) )
-	    bit = PCFLAG_GAG;
-          else if ( !StringPrefix( option, "roomflags")
+            {
+              bit = Flag::PCData::Gag;
+            }
+          else if ( !StringPrefix( option, "showroomflags")
                     && (IsImmortal(ch)))
-	    bit = PCFLAG_ROOM;
+            {
+              bit = Flag::PCData::ShowRoomFlags;
+            }
           else
             {
               ch->Echo( "Config which option?\r\n" );
@@ -200,10 +210,14 @@ void do_config( Character *ch, std::string arg )
             }
 
           if ( fSet )
-            SetBit(ch->PCData->Flags, bit);
+            {
+              ch->PCData->Flags.set( bit );
+            }
           else
-            RemoveBit(ch->PCData->Flags, bit);
-
+            {
+              ch->PCData->Flags.reset( bit );
+            }
+          
           ch->Echo( "Ok.\r\n" );
           return;
         }

@@ -744,7 +744,7 @@ static void NannyReadMotd( Descriptor *d, std::string argument )
 	{
 	  CharacterToRoom( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
 	  ch->PCData->AuthState = 1;
-	  SetBit(ch->PCData->Flags, PCFLAG_UNAUTHED);
+          ch->PCData->Flags.set( Flag::PCData::Unauthed );
 	}
     }
   else if ( !IsImmortal(ch) && ch->PCData->ReleaseDate > current_time )

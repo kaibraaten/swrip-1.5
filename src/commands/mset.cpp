@@ -1099,12 +1099,12 @@ void do_mset( Character *ch, std::string argument )
       while ( !argument.empty() )
         {
           argument = OneArgument( argument, arg3 );
-          value = GetWantedFlag( arg3 );
+          size_t bit = GetWantedFlag( arg3 );
 
-          if ( value < 0 || value > 31 )
+          if ( bit >= Flag::MAX )
             ch->Echo("Unknown flag: %s\r\n", arg3.c_str() );
           else
-            ToggleBit( victim->PCData->WantedFlags, 1 << value );
+            victim->PCData->WantedOn.flip( bit );
         }
       return;
     }

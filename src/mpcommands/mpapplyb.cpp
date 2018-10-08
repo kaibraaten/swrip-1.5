@@ -61,7 +61,7 @@ void do_mpapplyb( Character *ch, std::string argument )
 
     case 3:
       victim->Echo("The gods permit you to enter the Star Wars Reality.\r\n");
-      RemoveBit(victim->PCData->Flags, PCFLAG_UNAUTHED);
+      victim->PCData->Flags.reset( Flag::PCData::Unauthed );
 
       if ( victim->Fighting )
         StopFighting( victim, true );

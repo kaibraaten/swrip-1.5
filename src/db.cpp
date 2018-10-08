@@ -48,6 +48,7 @@
 #include "badname.hpp"
 #include "ban.hpp"
 #include "log.hpp"
+#include "pcdata.hpp"
 #include "repos/badnamerepository.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/shiprepository.hpp"
@@ -1184,10 +1185,10 @@ void MakeWizlist( void )
 
               fclose( gfp );
 
-              if ( IsBitSet( iflags, PCFLAG_RETIRED ) )
+              if ( IsBitSet( iflags, 1 << Flag::PCData::Retired ) )
                 ilevel = MAX_LEVEL - 4;
 
-              if ( IsBitSet( iflags, PCFLAG_GUEST ) )
+              if ( IsBitSet( iflags, 1 << Flag::PCData::Guest ) )
                 ilevel = MAX_LEVEL - 4;
 
               AddToWizList( dentry->d_name, ilevel );

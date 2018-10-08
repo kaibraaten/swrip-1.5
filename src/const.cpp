@@ -24,6 +24,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "race.hpp"
+#include "pcdata.hpp"
 
 static int GetInArray(const std::string &name, const char * const * array,
                       size_t sz,
@@ -2595,7 +2596,7 @@ const std::array<const char * const, MAX_BIT> PlayerFlags =
     "afk"
   };
 
-const std::array<const char * const, MAX_BIT> PcFlags =
+const std::array<const char * const, Flag::MAX> PcFlags =
   {
     "_00",
     "Deadly",
@@ -2608,7 +2609,7 @@ const std::array<const char * const, MAX_BIT> PcFlags =
     "NoSummon",
     "_09",
     "NoTitled",
-    "Room",
+    "ShowRoomFlags",
     "_12",
     "_13",
     "_14",

@@ -74,6 +74,34 @@ static constexpr size_t MAX_BIT = 32;
 namespace Flag
 {
   constexpr size_t MAX = 32;
+
+  namespace Wanted
+  {
+    enum :size_t
+      {
+       Coruscant,
+       Kashyyyk,
+       Ryloth,
+       _03,
+       _04,
+       MonCalamari,
+       Honoghr,
+       Gamorr,
+       Tatooine,
+       Adari,
+       Byss,
+       Endor,
+       _12,
+       _13,
+       _14,
+       _15,
+       Corellia,
+       Hoth,
+       _18,
+       _19,
+       Kuat
+      };
+  }
 }
 
 #define MAX_LAYERS       8      /* maximum clothing layers */
@@ -625,25 +653,6 @@ enum
 #define ACT_PROTOTYPE        BV30           /* A prototype mob      */
 #define ACT_UNUSED_31        BV31
 /* 20 acts */
-
-/* bits for vip flags */
-
-#define VIP_CORUSCANT        BV00
-#define VIP_KASHYYYK         BV01
-#define VIP_RYLOTH           BV02
-
-#define VIP_MON_CALAMARI     BV05
-#define VIP_HONOGHR          BV06
-#define VIP_GAMORR           BV07
-#define VIP_TATOOINE         BV08
-#define VIP_ADARI            BV09
-#define VIP_BYSS             BV10
-#define VIP_ENDOR            BV11
-
-#define VIP_CORELLIA         BV16
-#define VIP_HOTH             BV17
-
-#define VIP_KUAT             BV20
 
 #define ROOM_JAIL_MON_CALAMARI_1  21148
 #define ROOM_JAIL_MON_CALAMARI_2  21149
@@ -1737,21 +1746,6 @@ enum
 #define PLR_AUTOGOLD       BV29
 #define PLR_AUTOMAP        BV30
 #define PLR_AFK            BV31
-
-/* Bits for pc_data->flags. */
-#define PCFLAG_R1        BV00
-
-#define PCFLAG_UNAUTHED  BV02
-#define PCFLAG_NORECALL  BV03
-#define PCFLAG_NOINTRO   BV04
-#define PCFLAG_GAG       BV05
-#define PCFLAG_RETIRED   BV06
-#define PCFLAG_GUEST     BV07
-#define PCFLAG_NOSUMMON  BV08
-
-#define PCFLAG_NOTITLE   BV10
-#define PCFLAG_ROOM      BV11
-#define PCFLAG_DND       BV12
 
 /* TimerType */
 enum

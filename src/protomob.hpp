@@ -1,6 +1,7 @@
 #ifndef _SWRIP_PROTOMOB_HPP_
 #define _SWRIP_PROTOMOB_HPP_
 
+#include <bitset>
 #include "types.hpp"
 #include "constants.hpp"
 #include "mprog.hpp"
@@ -55,7 +56,7 @@ public:
   int           Race = 0;
   int           HitRoll = 0;
   int           DamRoll = 0;
-  int             VipFlags = 0;
+  std::bitset<Flag::MAX> VipFlags;
 
   MProg mprog;
 

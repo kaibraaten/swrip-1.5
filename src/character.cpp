@@ -1227,7 +1227,7 @@ bool IsDrunk( const Character *ch )
 
 bool IsRetiredImmortal( const Character *ch )
 {
-  return !IsNpc( ch ) && IsBitSet( ch->PCData->Flags, PCFLAG_RETIRED );
+  return !IsNpc( ch ) && ch->PCData->Flags.test( Flag::PCData::Retired );
 }
 
 bool IsAuthed( const Character *ch )
@@ -1237,7 +1237,7 @@ bool IsAuthed( const Character *ch )
       return true;
     }
 
-  return !IsBitSet( ch->PCData->Flags, PCFLAG_UNAUTHED);
+  return !ch->PCData->Flags.test( Flag::PCData::Unauthed );
 }
 
 bool IsWaitingForAuth( const Character *ch )
@@ -1245,7 +1245,7 @@ bool IsWaitingForAuth( const Character *ch )
   return !IsNpc( ch )
     && ch->Desc
     && ch->PCData->AuthState == 1
-    && IsBitSet(ch->PCData->Flags, PCFLAG_UNAUTHED);
+    && ch->PCData->Flags.test( Flag::PCData::Unauthed );
 }
 
 #define DISGUISE(ch)            ((!NiftyIsName((ch)->Name, (ch)->PCData->Title)) ? 1 : 0)
@@ -1317,7 +1317,7 @@ void ResetPlayerOnDeath( Character *ch )
   ch->PCData->Addiction.fill(0);
   ch->PCData->DrugLevel.fill(0);
 
-  ch->PCData->WantedFlags = 0;
+  ch->PCData->WantedOn.reset();
   ch->PCData->JailVnum = INVALID_VNUM;
 }
 

@@ -332,7 +332,6 @@ extern const std::array<const char * const, MAX_BIT> AffectFlags;
 extern const std::array<const char * const, MAX_BIT> WantedFlags;
 extern const std::array<const char * const, MAX_BIT> PlanetFlags;
 extern const std::array<const char * const, MAX_BIT> PlayerFlags;
-extern const std::array<const char * const, MAX_BIT> PcFlags;
 extern const std::array<const char * const, MAX_BIT> TrapFlags;
 extern const std::array<const char * const, MAX_BIT> RisFlags;
 extern const std::array<const char * const, MAX_BIT> TriggerFlags;

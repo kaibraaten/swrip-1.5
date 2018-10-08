@@ -6,14 +6,14 @@ void do_dnd( Character *ch, std::string argument )
 {
   if ( !IsNpc(ch) && ch->PCData )
     {
-      if ( IsBitSet(ch->PCData->Flags, PCFLAG_DND) )
+      if ( ch->PCData->Flags.test( Flag::PCData::DoNotDisturb ) )
 	{
-	  RemoveBit(ch->PCData->Flags, PCFLAG_DND);
+          ch->PCData->Flags.reset( Flag::PCData::DoNotDisturb );
 	  ch->Echo( "Your 'do not disturb' flag is now off.\r\n" );
 	}
       else
 	{
-	  SetBit(ch->PCData->Flags, PCFLAG_DND);
+          ch->PCData->Flags.set( Flag::PCData::DoNotDisturb );
 	  ch->Echo( "Your 'do not disturb' flag is now on.\r\n" );
 	}
     }

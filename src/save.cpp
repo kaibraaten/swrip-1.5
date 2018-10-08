@@ -465,9 +465,10 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 
       fprintf( fp, "\n");
 
-      if ( ch->PCData->WantedFlags )
+      if ( ch->PCData->WantedOn.any() )
 	{
-	  fprintf( fp, "Wanted       %d\n",       ch->PCData->WantedFlags );
+	  fprintf( fp, "Wanted       %d\n",
+                   static_cast<int>( ch->PCData->WantedOn.to_ulong() ) );
 	}
 
       if ( IsImmortal( ch ) || ch->PCData->Build.Area )
@@ -498,7 +499,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "Clan         %s~\n",      ch->PCData->ClanInfo.Clan->Name.c_str()   );
 	}
 
-      fprintf( fp, "Flags        %d\n", ch->PCData->Flags       );
+      fprintf( fp, "Flags        %d\n", static_cast<int>( ch->PCData->Flags.to_ulong() ) );
 
       if ( ch->PCData->ReleaseDate > current_time )
 	{

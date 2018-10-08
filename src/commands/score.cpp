@@ -235,7 +235,7 @@ void do_score(Character *ch, std::string argument)
 
   ch->Echo("\r\n");
   ch->Echo("&cWANTED ON: &C%s\r\n",
-        FlagString(ch->PCData->WantedFlags, WantedFlags).c_str() );
+           FlagString(ch->PCData->WantedOn, WantedFlags).c_str() );
 
   if ( !ch->PCData->Bestowments.empty() )
     ch->Echo( "&cYou are bestowed with the command(s): &C%s.\r\n",
