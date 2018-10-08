@@ -794,42 +794,6 @@ enum
 /* 21 def's */
 
 /*
- * Body parts
- */
-#define PART_HEAD                 BV00
-#define PART_ARMS                 BV01
-#define PART_LEGS                 BV02
-#define PART_HEART                BV03
-#define PART_BRAINS               BV04
-#define PART_GUTS                 BV05
-#define PART_HANDS                BV06
-#define PART_FEET                 BV07
-#define PART_FINGERS              BV08
-#define PART_EAR                  BV09
-#define PART_EYE                  BV10
-#define PART_LONG_TONGUE          BV11
-#define PART_EYESTALKS            BV12
-#define PART_TENTACLES            BV13
-#define PART_FINS                 BV14
-#define PART_WINGS                BV15
-#define PART_TAIL                 BV16
-#define PART_SCALES               BV17
-/* for combat */
-#define PART_CLAWS                BV18
-#define PART_FANGS                BV19
-#define PART_HORNS                BV20
-#define PART_TUSKS                BV21
-#define PART_TAILATTACK           BV22
-#define PART_SHARPSCALES          BV23
-#define PART_BEAK                 BV24
-
-#define PART_HAUNCH               BV25
-#define PART_HOOVES               BV26
-#define PART_PAWS                 BV27
-#define PART_FORELEGS             BV28
-#define PART_FEATHERS             BV29
-
-/*
  * Pipe flags
  */
 #define PIPE_TAMPED               BV01
@@ -1564,40 +1528,6 @@ enum
 
 #define MAX_DIR     DIR_SOUTHWEST   /* max for normal walking */
 #define DIR_PORTAL  DIR_SOMEWHERE   /* portal direction       */
-
-/*
- * Exit flags.
- * Used in #ROOMS.
- */
-/*
-#define EX_ISDOOR       BV00
-#define EX_CLOSED       BV01
-#define EX_LOCKED       BV02
-#define EX_SECRET       BV03
-#define EX_SWIM         BV04
-#define EX_PICKPROOF    BV05
-#define EX_FLY          BV06
-#define EX_CLIMB        BV07
-#define EX_DIG          BV08
-#define EX_RES1         BV09
-#define EX_NOPASSDOOR   BV10
-#define EX_HIDDEN       BV11
-#define EX_PASSAGE      BV12
-#define EX_PORTAL       BV13
-#define EX_RES2         BV14
-#define EX_RES3         BV15
-#define EX_xCLIMB       BV16
-#define EX_xENTER       BV17
-#define EX_xLEAVE       BV18
-#define EX_xAUTO        BV19
-#define EX_RES4         BV20
-#define EX_xSEARCHABLE  BV21
-#define EX_BASHED       BV22
-#define EX_BASHPROOF    BV23
-#define EX_NOMOB        BV24
-#define EX_WINDOW       BV25
-#define EX_xLOOK        BV26
-*/
 
 /*
  * Sector types.
