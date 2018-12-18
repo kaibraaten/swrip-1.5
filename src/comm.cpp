@@ -84,17 +84,20 @@ int            maxdesc = 0;
 /*
  * Other local functions (OS-independent).
  */
-static void StopIdling( Character *ch );
-static void GameLoop( void );
+static void StopIdling(Character *ch);
+static void GameLoop();
 static void NewDescriptor( socket_t new_desc );
-static void ExecuteOnExit( void );
+static void ExecuteOnExit();
 static void CaughtAlarm( int dummy );
 static bool CheckBadSocket( socket_t desc );
 static void AcceptNewSocket( socket_t ctrl );
 static std::string ActString(const std::string &format, Character *to, Character *ch,
                              const void *arg1, const void *arg2);
+static void HandleSocketInput();
+static void HandleSocketOutput();
+static void Sleep(timeval &last_time);
 
-static void ExecuteOnExit( void )
+static void ExecuteOnExit()
 {
   /*FreeMemory( SysData.mccp_buf );*/
 
@@ -396,11 +399,9 @@ static void AcceptNewSocket( socket_t ctrl )
     }
 }
 
-static void GameLoop( void )
+static void GameLoop()
 {
-  struct timeval last_time;
-  char cmdline[MAX_INPUT_LENGTH] = {'\0'};
-
+  timeval last_time;
   signal( SIGPIPE, SIG_IGN );
   signal( SIGALRM, CaughtAlarm );
 
@@ -411,140 +412,83 @@ static void GameLoop( void )
   while ( !mud_down )
     {
       AcceptNewSocket( control  );
+      HandleSocketInput();
+      UpdateHandler();
+      ImcLoop();
+      HandleSocketOutput();
+      Sleep(last_time);
+    }
+}
 
-      /*
-       * Kick out descriptors with raised exceptions
-       * or have been idle, then check for input.
-       */
-      std::list<Descriptor*> inputDescriptors(Descriptors->Entities());
+static void HandleSocketInput()
+{
+  /*
+   * Kick out descriptors with raised exceptions
+   * or have been idle, then check for input.
+   */
+  std::list<Descriptor*> inputDescriptors(Descriptors->Entities());
 
-      for(Descriptor *d : inputDescriptors)
+  for(Descriptor *d : inputDescriptors)
+    {
+      d->Idle++;    /* make it so a descriptor can idle out */
+
+      if ( FD_ISSET( d->Socket, &exc_set ) )
         {
-          d->Idle++;    /* make it so a descriptor can idle out */
+          FD_CLR( d->Socket, &in_set  );
+          FD_CLR( d->Socket, &out_set );
 
-          if ( FD_ISSET( d->Socket, &exc_set ) )
+          if ( d->Character
+               && ( d->ConnectionState == CON_PLAYING
+                    ||   d->ConnectionState == CON_EDITING ) )
             {
-              FD_CLR( d->Socket, &in_set  );
-              FD_CLR( d->Socket, &out_set );
-
-              if ( d->Character
-                   && ( d->ConnectionState == CON_PLAYING
-                        ||   d->ConnectionState == CON_EDITING ) )
-                PlayerCharacters->Save( d->Character );
-
+              PlayerCharacters->Save( d->Character );
+            }
+          
+          d->OutBuffer.str( "" );
+          CloseDescriptor( d, true );
+          continue;
+        }
+      else if (( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : false) &&
+               ( d->Idle > 7200 ) && !IsBitSet(d->Character->Flags, PLR_AFK)) /* 30 minutes  */
+        {
+          if( (d->Character && d->Character->InRoom) ? d->Character->TopLevel <= LEVEL_IMMORTAL : false)
+            {
+              WriteToDescriptor( d->Socket,
+                                 "Idle 30 Minutes. Activating AFK Flag\r\n", 0 );
+              SetBit(d->Character->Flags, PLR_AFK);
+              Act(AT_GREY,"$n is now afk due to idle time.", d->Character, NULL, NULL, TO_ROOM);
+              continue;
+            }
+        }
+      else if (( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true) &&
+               ( (!d->Character && d->Idle > 360)              /* 2 mins */
+                 ||   ( d->ConnectionState != CON_PLAYING && d->Idle > 1200) /* 5 mins */
+                 ||     d->Idle > 28800 ))                             /* 2 hrs  */
+        {
+          if( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true)
+            {
+              WriteToDescriptor( d->Socket,
+                                 "Idle timeout... disconnecting.\r\n", 0 );
               d->OutBuffer.str( "" );
               CloseDescriptor( d, true );
               continue;
             }
-          else if (( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : false) &&
-                   ( d->Idle > 7200 ) && !IsBitSet(d->Character->Flags, PLR_AFK))                /* 30 minutes  */
-            {
-              if( (d->Character && d->Character->InRoom) ? d->Character->TopLevel <= LEVEL_IMMORTAL : false)
-                {
-                  WriteToDescriptor( d->Socket,
-                                     "Idle 30 Minutes. Activating AFK Flag\r\n", 0 );
-                  SetBit(d->Character->Flags, PLR_AFK);
-                  Act(AT_GREY,"$n is now afk due to idle time.", d->Character, NULL, NULL, TO_ROOM);
-                  continue;
-                }
-            }
-          else if (( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true) &&
-                   ( (!d->Character && d->Idle > 360)              /* 2 mins */
-                     ||   ( d->ConnectionState != CON_PLAYING && d->Idle > 1200) /* 5 mins */
-                     ||     d->Idle > 28800 ))                             /* 2 hrs  */
-            {
-              if( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true)
-                {
-                  WriteToDescriptor( d->Socket,
-                                     "Idle timeout... disconnecting.\r\n", 0 );
-                  d->OutBuffer.str( "" );
-                  CloseDescriptor( d, true );
-                  continue;
-                }
-            }
-          else
-            {
-              d->fCommand   = false;
-
-              if ( FD_ISSET( d->Socket, &in_set ) )
-                {
-                  d->Idle = 0;
-
-                  if ( d->Character )
-                    d->Character->IdleTimer = 0;
-
-                  if ( !d->Read() )
-                    {
-                      FD_CLR( d->Socket, &out_set );
-
-                      if ( d->Character
-                           && ( d->ConnectionState == CON_PLAYING
-                                ||   d->ConnectionState == CON_EDITING ) )
-                        PlayerCharacters->Save( d->Character );
-
-                      d->OutBuffer.str( "" );
-                      CloseDescriptor( d, false );
-                      continue;
-                    }
-                }
-
-              if ( d->Character && d->Character->Wait > 0 )
-                {
-                  --d->Character->Wait;
-                  continue;
-                }
-
-              d->ReadFromBuffer();
-
-              if ( !IsNullOrEmpty( d->InComm ) )
-                {
-                  d->fCommand       = true;
-                  StopIdling( d->Character );
-
-                  strcpy( cmdline, d->InComm );
-                  d->InComm[0] = '\0';
-
-                  if ( d->Character )
-                    SetCurrentGlobalCharacter( d->Character );
-
-                  switch( d->ConnectionState )
-                    {
-                    default:
-                      Nanny( d, cmdline );
-                      break;
-
-                    case CON_PLAYING:
-                      d->Character->CmdRecurse = 0;
-                      Interpret( d->Character, cmdline );
-                      break;
-
-                    case CON_EDITING:
-                      EditBuffer( d->Character, cmdline );
-                      break;
-                    }
-                }
-            }
         }
-
-      /*
-       * Autonomous game motion.
-       */
-      UpdateHandler();
-
-      ImcLoop();
-
-      /*
-       * Output.
-       */
-      std::list<Descriptor*> outputDescriptors(Descriptors->Entities());
-      
-      for(Descriptor *d : outputDescriptors)
+      else
         {
-          if ( ( d->fCommand || !d->OutBuffer.str().empty() )
-               &&   FD_ISSET(d->Socket, &out_set) )
+          d->fCommand   = false;
+
+          if ( FD_ISSET( d->Socket, &in_set ) )
             {
-              if ( !d->FlushBuffer( true ) )
+              d->Idle = 0;
+
+              if ( d->Character )
+                d->Character->IdleTimer = 0;
+
+              if ( !d->Read() )
                 {
+                  FD_CLR( d->Socket, &out_set );
+
                   if ( d->Character
                        && ( d->ConnectionState == CON_PLAYING
                             ||   d->ConnectionState == CON_EDITING ) )
@@ -552,60 +496,129 @@ static void GameLoop( void )
 
                   d->OutBuffer.str( "" );
                   CloseDescriptor( d, false );
+                  continue;
+                }
+            }
+
+          if ( d->Character && d->Character->Wait > 0 )
+            {
+              --d->Character->Wait;
+              continue;
+            }
+
+          d->ReadFromBuffer();
+
+          if ( !IsNullOrEmpty( d->InComm ) )
+            {
+              char cmdline[MAX_INPUT_LENGTH] = {'\0'};
+              d->fCommand       = true;
+              StopIdling( d->Character );
+
+              strcpy( cmdline, d->InComm );
+              d->InComm[0] = '\0';
+
+              if ( d->Character )
+                SetCurrentGlobalCharacter( d->Character );
+
+              switch( d->ConnectionState )
+                {
+                default:
+                  Nanny( d, cmdline );
+                  break;
+
+                case CON_PLAYING:
+                  d->Character->CmdRecurse = 0;
+                  Interpret( d->Character, cmdline );
+                  break;
+
+                case CON_EDITING:
+                  EditBuffer( d->Character, cmdline );
+                  break;
                 }
             }
         }
+    }
+}
 
-      /*
-       * Synchronize to a clock.
-       * Sleep( last_time + 1/PULSE_PER_SECOND - now ).
-       * Careful here of signed versus unsigned arithmetic.
-       */
-      struct timeval now_time;
-      gettimeofday( &now_time, NULL );
-      long usecDelta = ((int) last_time.tv_usec) - ((int) now_time.tv_usec)
-        + 1000000 / PULSE_PER_SECOND;
-      long secDelta = ((int) last_time.tv_sec ) - ((int) now_time.tv_sec );
+static void HandleSocketOutput()
+{
+  /*
+   * Output.
+   */
+  std::list<Descriptor*> outputDescriptors(Descriptors->Entities());
 
-      while ( usecDelta < 0 )
+  for(Descriptor *d : outputDescriptors)
+    {
+      if ( ( d->fCommand || !d->OutBuffer.str().empty() )
+           &&   FD_ISSET(d->Socket, &out_set) )
         {
-          usecDelta += 1000000;
-          secDelta  -= 1;
-        }
-
-      while ( usecDelta >= 1000000 )
-        {
-          usecDelta -= 1000000;
-          secDelta  += 1;
-        }
-
-      if ( secDelta > 0 || ( secDelta == 0 && usecDelta > 0 ) )
-        {
-          struct timeval stall_time;
-          int result = 0;
-#ifdef _WIN32
-          fd_set dummy_set;
-          FD_ZERO( &dummy_set );
-          FD_SET( control, &dummy_set );
-#endif
-          stall_time.tv_usec = usecDelta;
-          stall_time.tv_sec  = secDelta;
-
-#if defined(_WIN32)
-          result = select( 0, NULL, NULL, &dummy_set, &stall_time );
-#else
-          result = select( 0, NULL, NULL, NULL, &stall_time );
-#endif
-          if ( result == SOCKET_ERROR )
+          if ( !d->FlushBuffer( true ) )
             {
-              perror( "game_loop: select: stall" );
-              exit( 1 );
+              if ( d->Character
+                   && ( d->ConnectionState == CON_PLAYING
+                        ||   d->ConnectionState == CON_EDITING ) )
+                {
+                  PlayerCharacters->Save( d->Character );
+                }
+              
+              d->OutBuffer.str( "" );
+              CloseDescriptor( d, false );
             }
         }
-
-      gettimeofday( &last_time, NULL );
-      current_time = (time_t) last_time.tv_sec;
     }
+}
+
+/*
+ * Synchronize to a clock.
+ * Sleep( last_time + 1/PULSE_PER_SECOND - now ).
+ * Careful here of signed versus unsigned arithmetic.
+ */
+static void Sleep(timeval &last_time)
+{
+  timeval now_time;
+  gettimeofday( &now_time, NULL );
+  long usecDelta = ((int) last_time.tv_usec) - ((int) now_time.tv_usec)
+    + 1000000 / PULSE_PER_SECOND;
+  long secDelta = ((int) last_time.tv_sec ) - ((int) now_time.tv_sec );
+
+  while ( usecDelta < 0 )
+    {
+      usecDelta += 1000000;
+      secDelta  -= 1;
+    }
+
+  while ( usecDelta >= 1000000 )
+    {
+      usecDelta -= 1000000;
+      secDelta  += 1;
+    }
+
+  if ( secDelta > 0 || ( secDelta == 0 && usecDelta > 0 ) )
+    {
+      timeval stall_time;
+      int result = 0;
+#ifdef _WIN32
+      fd_set dummy_set;
+      FD_ZERO( &dummy_set );
+      FD_SET( control, &dummy_set );
+#endif
+      stall_time.tv_usec = usecDelta;
+      stall_time.tv_sec  = secDelta;
+
+#if defined(_WIN32)
+      result = select( 0, NULL, NULL, &dummy_set, &stall_time );
+#else
+      result = select( 0, NULL, NULL, NULL, &stall_time );
+#endif
+      if ( result == SOCKET_ERROR )
+        {
+          perror( "game_loop: select: stall" );
+          exit( 1 );
+        }
+    }
+
+  gettimeofday( &last_time, NULL );
+  current_time = (time_t) last_time.tv_sec;
 }
 
 static void NewDescriptor( socket_t new_desc )
@@ -670,7 +683,7 @@ static void NewDescriptor( socket_t new_desc )
   if ( !SysData.NoNameResolving )
     {
       from = gethostbyaddr( (char *) &sock.sin_addr,
-			    sizeof(sock.sin_addr), AF_INET );
+                            sizeof(sock.sin_addr), AF_INET );
     }
   else
     {
@@ -683,7 +696,7 @@ static void NewDescriptor( socket_t new_desc )
                          {
                            return (StringPrefix(b->Site, dnew->Remote.Hostname) == 0
                                    || StringSuffix(b->Site , dnew->Remote.Hostname) == 0)
-                           && b->Level >= LEVEL_IMPLEMENTOR;
+                             && b->Level >= LEVEL_IMPLEMENTOR;
                          });
 
   if(pban != nullptr)
@@ -693,7 +706,7 @@ static void NewDescriptor( socket_t new_desc )
       SetAlarm( 0 );
       return;
     }
-  
+
   /*
    * Init descriptor data.
    */
@@ -722,7 +735,7 @@ static void NewDescriptor( socket_t new_desc )
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
       SysData.Save();
     }
-  
+
   SetAlarm(0);
 }
 
@@ -814,7 +827,7 @@ bool WriteToDescriptor( socket_t desc, const std::string &orig, int length )
     {
       length = txt.size();
     }
-  
+
   for ( int iStart = 0; iStart < length; iStart += nWrite )
     {
       int nBlock = umin( length - iStart, 4096 );
@@ -860,14 +873,14 @@ void SetCharacterColor( short AType, const Character *ch )
   if ( !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI) )
     {
       if ( AType == 7 )
-	{
-	  strcpy( buf, "\033[m" );
-	}
+        {
+          strcpy( buf, "\033[m" );
+        }
       else
-	{
-	  sprintf(buf, "\033[0;%d;%s%dm", (AType & 8) == 8,
-		  (AType > 15 ? "5;" : ""), (AType & 7)+30);
-	}
+        {
+          sprintf(buf, "\033[0;%d;%s%dm", (AType & 8) == 8,
+                  (AType > 15 ? "5;" : ""), (AType & 7)+30);
+        }
 
       ch->Desc->WriteToBuffer( buf );
     }
@@ -946,7 +959,7 @@ static std::string ActString(const std::string &format, Character *to, Character
                 {
                   i = he_she[urange(SEX_NEUTRAL, ch->Sex, SEX_FEMALE)];
                 }
-              
+
               break;
 
             case 'E':
@@ -960,7 +973,7 @@ static std::string ActString(const std::string &format, Character *to, Character
                 {
                   i = he_she[urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
                 }
-              
+
               break;
 
             case 'm':
@@ -974,7 +987,7 @@ static std::string ActString(const std::string &format, Character *to, Character
                 {
                   i = him_her[urange(SEX_NEUTRAL,  ch->Sex, SEX_FEMALE)];
                 }
-              
+
               break;
 
             case 'M':
@@ -988,7 +1001,7 @@ static std::string ActString(const std::string &format, Character *to, Character
                 {
                   i = him_her[urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
                 }
-              
+
               break;
 
             case 's':
@@ -1002,7 +1015,7 @@ static std::string ActString(const std::string &format, Character *to, Character
                 {
                   i = his_her[urange(SEX_NEUTRAL,  ch->Sex, SEX_FEMALE)];
                 }
-              
+
               break;
 
             case 'S':
@@ -1038,9 +1051,9 @@ static std::string ActString(const std::string &format, Character *to, Character
 
             case 'd':
               if ( IsNullOrEmpty( (const char*) arg2 ) )
-		{
-		  i = "door";
-		}
+                {
+                  i = "door";
+                }
               else
                 {
                   OneArgument(std::string((char *) arg2), fname);
@@ -1053,11 +1066,11 @@ static std::string ActString(const std::string &format, Character *to, Character
 
       ++str;
       const char *i_ptr = i.c_str();
-      
+
       while ( (*point = *i_ptr) != '\0' )
-	{
-	  ++point, ++i_ptr;
-	}
+        {
+          ++point, ++i_ptr;
+        }
     }
 
   strcpy(point, "\r\n");
@@ -1123,7 +1136,7 @@ void Act( short AType, const std::string &format, Character *ch, const void *arg
         {
           RoomProgActTrigger(txt, to->InRoom, ch, (Object *)arg1, (void *)arg2);
         }
-      
+
       std::list<Object*> objectsToTrigger = Filter(to->InRoom->Objects(),
                                                    [](auto to_obj)
                                                    {
@@ -1152,7 +1165,7 @@ void Act( short AType, const std::string &format, Character *ch, const void *arg
   for(Character *person : charactersInRoom)
     {
       to = person;
-      
+
       if (((!to || !to->Desc)
            && (  IsNpc(to) && !IsBitSet(to->Prototype->mprog.progtypes, ACT_PROG) ))
           ||   !IsAwake(to) )
@@ -1183,7 +1196,7 @@ void Act( short AType, const std::string &format, Character *ch, const void *arg
           SetCharacterColor(AType, to);
           to->Echo("%s", txt.c_str());
         }
-      
+
       if (MOBtrigger)
         {
           /* Note: use original string, not string with ANSI. -- Alty */
@@ -1203,7 +1216,7 @@ static std::string DefaultPrompt( const Character *ch )
     {
       buf << "&pForce:&P$m/&p$M  &pAlign:&P$a\r\n";
     }
-  
+
   buf << "&BHealth:&C$h&B/$H  &BMovement:&C$v&B/$V";
   buf << "&C >&w";
 
@@ -1221,7 +1234,7 @@ void DisplayPrompt(Descriptor *d)
   char *pbuf = buf;
   int the_stat = 0;
   const char variableMarker = '$';
-  
+
   assert(ch != nullptr);
 
   if ( !IsNpc(ch) && ch->SubState != SUB_NONE && !ch->PCData->SubPrompt.empty() )
@@ -1237,7 +1250,7 @@ void DisplayPrompt(Descriptor *d)
     {
       prompt = ch->PCData->Prompt.c_str();
     }
-  
+
   if ( ansi )
     {
       strcpy(pbuf, "\033[m");
@@ -1275,7 +1288,7 @@ void DisplayPrompt(Descriptor *d)
         default:
           Log->Bug( "Display_prompt: bad command char '%c'.", *(prompt-1) );
           break;
-          
+
         case variableMarker:
           *pbuf = '\0';
           the_stat = 0x80000000;
@@ -1369,7 +1382,7 @@ void DisplayPrompt(Descriptor *d)
 
             case 'I':
               the_stat = (IsNpc(ch) ? (IsBitSet(ch->Flags, ACT_MOBINVIS) ? ch->MobInvis : 0)
-                      : (IsBitSet(ch->Flags, PLR_WIZINVIS) ? ch->PCData->WizInvis : 0));
+                          : (IsBitSet(ch->Flags, PLR_WIZINVIS) ? ch->PCData->WizInvis : 0));
               break;
             }
 
