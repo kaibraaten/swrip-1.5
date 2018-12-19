@@ -24,6 +24,7 @@
 #include <cstring>
 #include <ctime>
 #include <cmath>
+#include <cassert>
 #include <utility/random.hpp>
 #include "mud.hpp"
 #include "arena.hpp"
@@ -62,6 +63,7 @@ static int GainMana( const Character *ch );
 static int GainMove( const Character *ch );
 static void GainAddiction( Character *ch );
 static void MobileUpdate();
+static void UpdateDruggedPlayers();
 static void WeatherUpdate();
 static void TaxUpdate();
 static void CharacterUpdate();
@@ -91,20 +93,20 @@ Character *timechar = NULL;
 
 const char * const corpse_descs[] =
   {
-    "The corpse of %s will soon be gone.",
-    "The corpse of %s lies here.",
-    "The corpse of %s lies here.",
-    "The corpse of %s lies here.",
-    "The corpse of %s lies here."
+   "The corpse of %s will soon be gone.",
+   "The corpse of %s lies here.",
+   "The corpse of %s lies here.",
+   "The corpse of %s lies here.",
+   "The corpse of %s lies here."
   };
 
 const char * const d_corpse_descs[] =
   {
-    "The shattered remains %s will soon be gone.",
-    "The shattered remains %s are here.",
-    "The shattered remains %s are here.",
-    "The shattered remains %s are here.",
-    "The shattered remains %s are here."
+   "The shattered remains %s will soon be gone.",
+   "The shattered remains %s are here.",
+   "The shattered remains %s are here.",
+   "The shattered remains %s are here.",
+   "The shattered remains %s are here."
   };
 
 /*
@@ -419,38 +421,38 @@ static int GainHitPoints( const Character *ch )
       switch ( ch->Position )
         {
         case POS_DEAD:
-	  return 0;
+          return 0;
 
         case POS_MORTAL:
-	  return -25;
+          return -25;
 
         case POS_INCAP:
-	  return -20;
+          return -20;
 
         case POS_STUNNED:
-	  return GetCurrentConstitution(ch) * 2;
+          return GetCurrentConstitution(ch) * 2;
 
         case POS_SLEEPING:
-	  gain += GetCurrentConstitution(ch) * 1.5;
-	  break;
+          gain += GetCurrentConstitution(ch) * 1.5;
+          break;
 
         case POS_RESTING:
-	  gain += GetCurrentConstitution(ch);
-	  break;
+          gain += GetCurrentConstitution(ch);
+          break;
 
-	default:
-	  break;
+        default:
+          break;
         }
 
       if ( ch->PCData->Condition[COND_FULL] == 0 )
-	{
-	  gain /= 2;
-	}
+        {
+          gain /= 2;
+        }
 
       if ( ch->PCData->Condition[COND_THIRST] == 0 )
-	{
-	  gain /= 2;
-	}
+        {
+          gain /= 2;
+        }
     }
 
   if ( IsAffectedBy(ch, AFF_POISON) )
@@ -477,40 +479,40 @@ static int GainMana( const Character *ch )
   else
     {
       if ( !IsJedi( ch ) )
-	{
-	  return 0 - ch->Mana.Current;
-	}
+        {
+          return 0 - ch->Mana.Current;
+        }
 
       gain = umin( 5, GetAbilityLevel( ch, FORCE_ABILITY ) / 2 );
 
       if ( ch->Position < POS_SLEEPING )
-	{
-	  return 0;
-	}
+        {
+          return 0;
+        }
 
       switch ( ch->Position )
         {
         case POS_SLEEPING:
-	  gain += GetCurrentIntelligence(ch) * 3;
-	  break;
+          gain += GetCurrentIntelligence(ch) * 3;
+          break;
 
         case POS_RESTING:
-	  gain += GetCurrentIntelligence(ch) * 1.5;
-	  break;
+          gain += GetCurrentIntelligence(ch) * 1.5;
+          break;
 
-	default:
-	  break;
+        default:
+          break;
         }
 
       if ( ch->PCData->Condition[COND_FULL]   == 0 )
-	{
-	  gain /= 2;
-	}
+        {
+          gain /= 2;
+        }
 
       if ( ch->PCData->Condition[COND_THIRST] == 0 )
-	{
-	  gain /= 2;
-	}
+        {
+          gain /= 2;
+        }
     }
 
   if ( IsAffectedBy( ch, AFF_POISON ) )
@@ -536,38 +538,38 @@ static int GainMove( const Character *ch )
       switch ( ch->Position )
         {
         case POS_DEAD:
-	  return 0;
+          return 0;
 
         case POS_MORTAL:
-	  return -1;
+          return -1;
 
         case POS_INCAP:
-	  return -1;
+          return -1;
 
         case POS_STUNNED:
-	  return 1;
+          return 1;
 
         case POS_SLEEPING:
-	  gain += GetCurrentDexterity(ch) * 2;
-	  break;
+          gain += GetCurrentDexterity(ch) * 2;
+          break;
 
         case POS_RESTING:
-	  gain += GetCurrentDexterity(ch);
-	  break;
+          gain += GetCurrentDexterity(ch);
+          break;
 
-	default:
-	  break;
+        default:
+          break;
         }
 
       if ( ch->PCData->Condition[COND_FULL] == 0 )
-	{
-	  gain /= 2;
-	}
+        {
+          gain /= 2;
+        }
 
       if ( ch->PCData->Condition[COND_THIRST] == 0 )
-	{
-	  gain /= 2;
-	}
+        {
+          gain /= 2;
+        }
     }
 
   if ( IsAffectedBy(ch, AFF_POISON) )
@@ -585,19 +587,19 @@ static void GainAddiction( Character *ch )
   for ( drug=0 ; drug <= 9 ; drug ++ )
     {
       if ( ch->PCData->Addiction[drug] < ch->PCData->DrugLevel[drug] )
-	{
-	  ch->PCData->Addiction[drug]++;
-	}
+        {
+          ch->PCData->Addiction[drug]++;
+        }
 
       if ( ch->PCData->Addiction[drug] > ch->PCData->DrugLevel[drug]+150 )
         {
-	  Affect af;
+          Affect af;
 
           switch (ch->PCData->Addiction[drug])
             {
             default:
-	      break;
-	      
+              break;
+
             case SPICE_GLITTERSTIM:
               if ( !IsAffectedBy( ch, AFF_BLIND ) )
                 {
@@ -608,8 +610,8 @@ static void GainAddiction( Character *ch )
                   af.AffectedBy = AFF_BLIND;
                   AffectToCharacter( ch, &af );
                 }
-	      break;
-	      
+              break;
+
             case SPICE_CARSANUM:
               if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
                 {
@@ -620,8 +622,8 @@ static void GainAddiction( Character *ch )
                   af.AffectedBy = AFF_WEAKEN;
                   AffectToCharacter( ch, &af );
                 }
-	      break;
-	      
+              break;
+
             case SPICE_RYLL:
               if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
                 {
@@ -632,8 +634,8 @@ static void GainAddiction( Character *ch )
                   af.AffectedBy = AFF_WEAKEN;
                   AffectToCharacter( ch, &af );
                 }
-	      break;
-	      
+              break;
+
             case SPICE_ANDRIS:
               if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
                 {
@@ -644,7 +646,7 @@ static void GainAddiction( Character *ch )
                   af.AffectedBy = AFF_WEAKEN;
                   AffectToCharacter( ch, &af );
                 }
-	      break;
+              break;
             }
         }
 
@@ -677,17 +679,17 @@ static void GainAddiction( Character *ch )
         }
 
       if ( ch->PCData->DrugLevel[drug] > 1 )
-	{
-	  ch->PCData->DrugLevel[drug] -=2;
-	}
+        {
+          ch->PCData->DrugLevel[drug] -=2;
+        }
       else if ( ch->PCData->DrugLevel[drug] > 0 )
-	{
-	  ch->PCData->DrugLevel[drug] -=1;
-	}
+        {
+          ch->PCData->DrugLevel[drug] -=1;
+        }
       else if ( ch->PCData->Addiction[drug] > 0 && ch->PCData->DrugLevel[drug] <= 0 )
-	{
-	  ch->PCData->Addiction[drug]--;
-	}
+        {
+          ch->PCData->Addiction[drug]--;
+        }
     }
 }
 
@@ -738,10 +740,10 @@ void GainCondition( Character *ch, int iCond, int value )
 
         case COND_DRUNK:
           if ( condition != 0 )
-	    {
-	      SetCharacterColor( AT_SOBER, ch );
-	      ch->Echo( "You are sober.\r\n" );
-	    }
+            {
+              SetCharacterColor( AT_SOBER, ch );
+              ch->Echo( "You are sober.\r\n" );
+            }
 
           retcode = rNONE;
           break;
@@ -769,9 +771,9 @@ void GainCondition( Character *ch, int iCond, int value )
               ch->Echo( "You are really hungry.\r\n" );
 
               if ( NumberBits(1) == 0 )
-		{
-		  WorsenMentalState( ch, 1 );
-		}
+                {
+                  WorsenMentalState( ch, 1 );
+                }
             }
           break;
 
@@ -786,10 +788,10 @@ void GainCondition( Character *ch, int iCond, int value )
 
         case COND_DRUNK:
           if ( condition != 0 )
-	    {
-	      SetCharacterColor( AT_SOBER, ch );
-	      ch->Echo( "You are feeling a little less light headed.\r\n" );
-	    }
+            {
+              SetCharacterColor( AT_SOBER, ch );
+              ch->Echo( "You are feeling a little less light headed.\r\n" );
+            }
           break;
         }
     }
@@ -842,6 +844,241 @@ void GainCondition( Character *ch, int iCond, int value )
     }
 }
 
+static void UpdateDruggedPlayers()
+{
+  for (Character *ch = LastCharacter; ch; ch = gch_prev)
+    {
+      SetCurrentGlobalCharacter( ch );
+      gch_prev = ch->Previous;
+
+      if ( !IsNpc(ch) )
+        {
+          PerformRandomDrunkBehavior(ch);
+          SufferHalucinations(ch);
+        }
+    }
+}
+
+static bool IsAnimatedCorpse(const Character *ch)
+{
+  return IsNpc(ch) && ch->Prototype->Vnum == MOB_VNUM_ANIMATED_CORPSE;
+}
+
+static void CleanUpAnimatedCorpse(Character *ch)
+{
+  assert(IsAnimatedCorpse(ch));
+
+  if(!ch->InRoom->Characters().empty())
+    {
+      Act(AT_MAGIC, "$n returns to the dust from whence $e came.",
+          ch, NULL, NULL, TO_ROOM);
+    }
+
+  ExtractCharacter(ch, true);
+}
+
+static bool IsHunting(const Character *ch)
+{
+  return IsNpc(ch) && !IsBitSet( ch->Flags, ACT_RUNNING )
+    && !IsBitSet( ch->Flags, ACT_SENTINEL )
+    && !ch->Fighting && ch->HHF.Hunting;
+}
+
+static void UpdateHunt(Character *ch)
+{
+  assert(IsHunting(ch));
+
+  if (  ch->TopLevel < 20 )
+    {
+      SetWaitState( ch, 6 * PULSE_PER_SECOND );
+    }
+  else if (  ch->TopLevel < 40 )
+    {
+      SetWaitState( ch, 5 * PULSE_PER_SECOND );
+    }
+  else if (  ch->TopLevel < 60 )
+    {
+      SetWaitState( ch, 4 * PULSE_PER_SECOND );
+    }
+  else if (  ch->TopLevel < 80 )
+    {
+      SetWaitState( ch, 3 * PULSE_PER_SECOND );
+    }
+  else if (  ch->TopLevel < 100 )
+    {
+      SetWaitState( ch, 2 * PULSE_PER_SECOND );
+    }
+  else
+    {
+      SetWaitState( ch, 1 * PULSE_PER_SECOND );
+    }
+
+  HuntVictim( ch );
+}
+
+static bool IsSentinelWhoIsReadyToReturn(const Character *ch)
+{
+  return IsNpc(ch)
+    && !ch->Fighting && !ch->HHF.Hunting
+    && !IsBitSet( ch->Flags, ACT_RUNNING)
+    && ch->WasSentinel && ch->Position >= POS_STANDING;
+}
+
+static void ReturnSentinelToHome(Character *ch)
+{
+  assert(IsSentinelWhoIsReadyToReturn(ch));
+
+  Act( AT_ACTION, "$n leaves.", ch, NULL, NULL, TO_ROOM );
+  CharacterFromRoom( ch );
+  CharacterToRoom( ch , ch->WasSentinel );
+  Act( AT_ACTION, "$n arrives.", ch, NULL, NULL, TO_ROOM );
+  SetBit( ch->Flags , ACT_SENTINEL );
+  ch->WasSentinel = NULL;
+}
+
+static bool NpcShouldNotBeUpdated(const Character *ch)
+{
+  return IsNpc(ch)
+    && (!ch->InRoom
+        || IsAffectedBy(ch, AFF_CHARM)
+        || IsAffectedBy(ch, AFF_PARALYSIS));
+}
+
+static bool IsReadyToPerformSpecFun(const Character *ch)
+{
+  return IsNpc(ch)
+    && !IsBitSet( ch->Flags, ACT_RUNNING )
+    && ch->spec_fun != nullptr;
+}
+
+static bool TryPerformSpecFun(Character *ch)
+{
+  assert(IsReadyToPerformSpecFun(ch));
+
+  return ch->spec_fun(ch);
+}
+
+static bool IsReadyToPerformSpecFun2(const Character *ch)
+{
+  return IsNpc(ch)
+    && !IsBitSet( ch->Flags, ACT_RUNNING )
+    && ch->spec_2 != nullptr;
+}
+
+static bool TryPerformSpecFun2(Character *ch)
+{
+  assert(IsReadyToPerformSpecFun2(ch));
+
+  return ch->spec_2(ch);
+}
+
+static bool MobHasScriptTrigger(const Character *ch)
+{
+  return IsNpc(ch)
+    && IsBitSet( ch->Prototype->mprog.progtypes, SCRIPT_PROG );
+}
+
+static bool MobShouldScavenge(const Character *ch)
+{
+  return IsNpc(ch)
+    && IsBitSet(ch->Flags, ACT_SCAVENGER)
+    && !ch->InRoom->Objects().empty()
+    && NumberBits( 2 ) == 0;
+}
+
+static void PerformScavenging(Character *ch)
+{
+  Object *obj_best = NULL;
+  int max = 1;
+
+  for(Object *obj : ch->InRoom->Objects())
+    {
+      if ( IsBitSet( obj->WearFlags, ITEM_TAKE)
+           && obj->Cost > max
+           && !IsBitSet( obj->Flags, ITEM_BURRIED ) )
+        {
+          obj_best = obj;
+          max = obj->Cost;
+        }
+    }
+
+  if ( obj_best )
+    {
+      ObjectFromRoom( obj_best );
+      ObjectToCharacter( obj_best, ch );
+      Act( AT_ACTION, "$n gets $p.", ch, obj_best, NULL, TO_ROOM );
+    }
+}
+
+static bool MobShouldWander(const Character *ch, DirectionType door)
+{
+  const Exit *pexit = GetExit(ch->InRoom, door);
+
+  return IsNpc(ch)
+    && !IsBitSet(ch->Flags, ACT_RUNNING)
+    && !IsBitSet(ch->Flags, ACT_SENTINEL)
+    && !IsBitSet(ch->Flags, ACT_PROTOTYPE)
+    && pexit != NULL
+    && !pexit->Flags.test( Flag::Exit::Closed )
+    && !pexit->ToRoom->Flags.test( Flag::Room::NoMob )
+    && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
+         || pexit->ToRoom->Area == ch->InRoom->Area );
+}
+
+static bool MobShouldFlee(const Character *ch, DirectionType door)
+{
+  const Exit *pexit = GetExit(ch->InRoom, door);
+  
+  return ch->HitPoints.Current < ch->HitPoints.Max / 2
+    && door < DIR_SOMEWHERE
+              && pexit != nullptr
+              && pexit->ToRoom
+    && !pexit->Flags.test( Flag::Exit::Closed )
+    && !pexit->ToRoom->Flags.test( Flag::Room::NoMob );
+}
+
+static void PerformFlee(Character *ch, DirectionType door)
+{
+  bool found = false;
+  
+  for(Character *rch : ch->InRoom->Characters())
+    {
+      if ( IsFearing(ch, rch) )
+        {
+          char buf[MAX_STRING_LENGTH];
+                  
+          switch( NumberBits(2) )
+            {
+            case 0:
+              sprintf( buf, "Get away from me, %s!", rch->Name.c_str() );
+              break;
+
+            case 1:
+              sprintf( buf, "Leave me be, %s!", rch->Name.c_str() );
+              break;
+
+            case 2:
+              sprintf( buf, "%s is trying to kill me! Help!", rch->Name.c_str() );
+              break;
+
+            case 3:
+              sprintf( buf, "Someone save me from %s!", rch->Name.c_str() );
+              break;
+            }
+
+          do_yell( ch, buf );
+          found = true;
+          break;
+        }
+    }
+
+  if ( found )
+    {
+      const Exit *pexit = GetExit(ch->InRoom, door);
+      MoveCharacter( ch, pexit );
+    }
+}
+
 /*
  * Mob autonomous action.
  * This function takes 25% to 35% of ALL Mud cpu time.
@@ -856,111 +1093,63 @@ static void MobileUpdate()
 
       if ( !IsNpc(ch) )
         {
-          PerformRandomDrunkBehavior(ch);
-          SufferHalucinations(ch);
           continue;
         }
 
-      if ( !ch->InRoom
-           || IsAffectedBy(ch, AFF_CHARM)
-           || IsAffectedBy(ch, AFF_PARALYSIS) )
-	{
-	  continue;
-	}
-
-      /* Clean up 'animated corpses' that are not charmed' - Scryn */
-
-      if ( ch->Prototype->Vnum == MOB_VNUM_ANIMATED_CORPSE && !IsAffectedBy(ch, AFF_CHARM) )
+      if ( NpcShouldNotBeUpdated(ch) )
         {
-          if(!ch->InRoom->Characters().empty())
-	    {
-	      Act(AT_MAGIC, "$n returns to the dust from whence $e came.",
-		  ch, NULL, NULL, TO_ROOM);
-	    }
-
-          if(IsNpc(ch)) /* Guard against purging switched? */
-	    {
-	      ExtractCharacter(ch, true);
-	    }
-
           continue;
         }
 
-      if ( !IsBitSet( ch->Flags, ACT_RUNNING )
-           && !IsBitSet( ch->Flags, ACT_SENTINEL )
-           && !ch->Fighting && ch->HHF.Hunting )
+      if ( IsAnimatedCorpse(ch) && !IsAffectedBy(ch, AFF_CHARM) )
         {
-          if (  ch->TopLevel < 20 )
-	    {
-	      SetWaitState( ch, 6 * PULSE_PER_SECOND );
-	    }
-          else if (  ch->TopLevel < 40 )
-	    {
-	      SetWaitState( ch, 5 * PULSE_PER_SECOND );
-	    }
-          else if (  ch->TopLevel < 60 )
-	    {
-	      SetWaitState( ch, 4 * PULSE_PER_SECOND );
-	    }
-          else if (  ch->TopLevel < 80 )
-	    {
-	      SetWaitState( ch, 3 * PULSE_PER_SECOND );
-	    }
-          else if (  ch->TopLevel < 100 )
-	    {
-	      SetWaitState( ch, 2 * PULSE_PER_SECOND );
-	    }
-          else
-	    {
-	      SetWaitState( ch, 1 * PULSE_PER_SECOND );
-	    }
-
-          HuntVictim( ch );
+          CleanUpAnimatedCorpse(ch);
           continue;
         }
-      else if ( !ch->Fighting && !ch->HHF.Hunting
-                && !IsBitSet( ch->Flags, ACT_RUNNING)
-                && ch->WasSentinel && ch->Position >= POS_STANDING )
+
+      if ( IsHunting(ch) )
         {
-          Act( AT_ACTION, "$n leaves.", ch, NULL, NULL, TO_ROOM );
-          CharacterFromRoom( ch );
-          CharacterToRoom( ch , ch->WasSentinel );
-          Act( AT_ACTION, "$n arrives.", ch, NULL, NULL, TO_ROOM );
-          SetBit( ch->Flags , ACT_SENTINEL );
-          ch->WasSentinel = NULL;
+          UpdateHunt(ch);
+          continue;
+        }
+      else if ( IsSentinelWhoIsReadyToReturn(ch) )
+        {
+          ReturnSentinelToHome(ch);
         }
 
       /* Examine call for special procedure */
-      if ( !IsBitSet( ch->Flags, ACT_RUNNING )
-           && ch->spec_fun )
+      if ( IsReadyToPerformSpecFun(ch) )
         {
-          if ( (*ch->spec_fun) ( ch ) )
-	    {
-	      continue;
-	    }
+          bool specFunWasPerformed = TryPerformSpecFun(ch);
+
+          if ( specFunWasPerformed )
+            {
+              continue;
+            }
 
           if ( CharacterDiedRecently(ch) )
-	    {
-	      continue;
-	    }
+            {
+              continue;
+            }
         }
 
-      if ( !IsBitSet( ch->Flags, ACT_RUNNING )
-           && ch->spec_2 )
+      if ( IsReadyToPerformSpecFun2(ch) )
         {
-          if ( (*ch->spec_2) ( ch ) )
-	    {
-	      continue;
-	    }
+          bool specFun2WasPerformed = TryPerformSpecFun2(ch);
+
+          if ( specFun2WasPerformed )
+            {
+              continue;
+            }
 
           if ( CharacterDiedRecently(ch) )
-	    {
-	      continue;
-	    }
+            {
+              continue;
+            }
         }
 
       /* Check for mudprogram script on mob */
-      if ( IsBitSet( ch->Prototype->mprog.progtypes, SCRIPT_PROG ) )
+      if ( MobHasScriptTrigger(ch) )
         {
           MobProgScriptTrigger( ch );
           continue;
@@ -974,25 +1163,25 @@ static void MobileUpdate()
 
       /* That's all for sleeping / busy monster */
       if ( ch->Position != POS_STANDING )
-	{
-	  continue;
-	}
+        {
+          continue;
+        }
 
       if ( IsBitSet(ch->Flags, ACT_MOUNTED ) )
         {
           if ( IsBitSet(ch->Flags, ACT_AGGRESSIVE) )
-	    {
-	      do_emote( ch, "snarls and growls." );
-	    }
+            {
+              do_emote( ch, "snarls and growls." );
+            }
 
           continue;
         }
 
       if ( ch->InRoom->Flags.test( Flag::Room::Safe )
            && IsBitSet(ch->Flags, ACT_AGGRESSIVE) )
-	{
-	  do_emote( ch, "glares around and snarls." );
-	}
+        {
+          do_emote( ch, "glares around and snarls." );
+        }
 
       /* MOBprogram random trigger */
       if ( ch->InRoom->Area->NumberOfPlayers > 0 )
@@ -1000,75 +1189,48 @@ static void MobileUpdate()
           MobProgRandomTrigger( ch );
 
           if ( CharacterDiedRecently(ch) )
-	    {
-	      continue;
-	    }
+            {
+              continue;
+            }
 
           if ( ch->Position < POS_STANDING )
-	    {
-	      continue;
-	    }
+            {
+              continue;
+            }
         }
 
       /* MOBprogram hour trigger: do something for an hour */
       MobProgHourTrigger(ch);
 
       if ( CharacterDiedRecently(ch) )
-	{
-	  continue;
-	}
+        {
+          continue;
+        }
 
       RoomProgHourTrigger(ch);
 
       if ( CharacterDiedRecently(ch) )
-	{
-	  continue;
-	}
+        {
+          continue;
+        }
 
       if ( ch->Position < POS_STANDING )
-	{
-	  continue;
-	}
+        {
+          continue;
+        }
 
       /* Scavenge */
-      if ( IsBitSet(ch->Flags, ACT_SCAVENGER)
-           && !ch->InRoom->Objects().empty()
-           && NumberBits( 2 ) == 0 )
+      if ( MobShouldScavenge(ch) )
         {
-          Object *obj_best = NULL;
-          int max = 1;
-
-          for(Object *obj : ch->InRoom->Objects())
-            {
-              if ( IsBitSet( obj->WearFlags, ITEM_TAKE) && obj->Cost > max
-                   && !IsBitSet( obj->Flags, ITEM_BURRIED ) )
-                {
-                  obj_best = obj;
-                  max      = obj->Cost;
-                }
-            }
-
-          if ( obj_best )
-            {
-              ObjectFromRoom( obj_best );
-              ObjectToCharacter( obj_best, ch );
-              Act( AT_ACTION, "$n gets $p.", ch, obj_best, NULL, TO_ROOM );
-            }
+          PerformScavenging(ch);
         }
 
       DirectionType door = (DirectionType)NumberBits( 5 );
-      const Exit *pexit = GetExit(ch->InRoom, door);
-      
+
       /* Wander */
-      if ( !IsBitSet(ch->Flags, ACT_RUNNING)
-           && !IsBitSet(ch->Flags, ACT_SENTINEL)
-           && !IsBitSet(ch->Flags, ACT_PROTOTYPE)
-           && pexit != NULL
-           && !pexit->Flags.test( Flag::Exit::Closed )
-           && !pexit->ToRoom->Flags.test( Flag::Room::NoMob )
-           && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
-                || pexit->ToRoom->Area == ch->InRoom->Area ) )
+      if ( MobShouldWander(ch, door) )
         {
+          const Exit *pexit = GetExit(ch->InRoom, door);
           ch_ret retcode = MoveCharacter( ch, pexit );
 
           /* If ch changes position due
@@ -1076,62 +1238,23 @@ static void MobileUpdate()
              movement via MOBProgs,
              continue - Kahn */
           if ( CharacterDiedRecently(ch) )
-	    {
-	      continue;
-	    }
+            {
+              continue;
+            }
 
           if ( retcode != rNONE || IsBitSet(ch->Flags, ACT_SENTINEL)
                || ch->Position < POS_STANDING )
-	    {
-	      continue;
-	    }
+            {
+              continue;
+            }
         }
 
+      door = (DirectionType)NumberBits( 4 );
+
       /* Flee */
-      if ( ch->HitPoints.Current < ch->HitPoints.Max / 2
-           && ( door = (DirectionType)NumberBits( 4 ) ) < DIR_SOMEWHERE
-           && ( pexit = GetExit(ch->InRoom,door) ) != NULL
-           && pexit->ToRoom
-           && !pexit->Flags.test( Flag::Exit::Closed )
-           && !pexit->ToRoom->Flags.test( Flag::Room::NoMob ) )
+      if ( MobShouldFlee(ch, door) )
         {
-          bool found = false;
-
-          for(Character *rch : ch->InRoom->Characters())
-            {
-              if ( IsFearing(ch, rch) )
-                {
-                  char buf[MAX_STRING_LENGTH];
-                  
-                  switch( NumberBits(2) )
-                    {
-                    case 0:
-                      sprintf( buf, "Get away from me, %s!", rch->Name.c_str() );
-                      break;
-
-                    case 1:
-                      sprintf( buf, "Leave me be, %s!", rch->Name.c_str() );
-                      break;
-
-                    case 2:
-                      sprintf( buf, "%s is trying to kill me! Help!", rch->Name.c_str() );
-                      break;
-
-                    case 3:
-                      sprintf( buf, "Someone save me from %s!", rch->Name.c_str() );
-                      break;
-                    }
-
-                  do_yell( ch, buf );
-                  found = true;
-                  break;
-                }
-            }
-
-          if ( found )
-	    {
-	      MoveCharacter( ch, pexit );
-	    }
+          PerformFlee(ch, door);
         }
     }
 }
@@ -1172,9 +1295,9 @@ static void TaxUpdate( void )
       /* Interest */
       if ( d->Character != nullptr
            && d->ConnectionState == CON_PLAYING )
-	{
-	  d->Character->PCData->Bank *= 1.0071428571428571;
-	}
+        {
+          d->Character->PCData->Bank *= 1.0071428571428571;
+        }
 
       if ( ( d->ConnectionState == CON_PLAYING )
            && ( d->Character->PCData->ClanInfo.Salary > 0 )
@@ -1257,9 +1380,9 @@ static void WeatherUpdate( void )
                && d->Character->InRoom->Sector != SECT_UNDERWATER
                && d->Character->InRoom->Sector != SECT_OCEANFLOOR
                && d->Character->InRoom->Sector != SECT_UNDERGROUND )
-	    {
-	      Act( AT_TEMP, buf, d->Character, 0, 0, TO_CHAR );
-	    }
+            {
+              Act( AT_TEMP, buf, d->Character, 0, 0, TO_CHAR );
+            }
         }
 
       buf[0] = '\0';
@@ -1357,9 +1480,9 @@ static void WeatherUpdate( void )
           if ( d->ConnectionState == CON_PLAYING
                &&   IS_OUTSIDE(d->Character)
                &&   IsAwake(d->Character) )
-	    {
-	      Act( AT_TEMP, buf, d->Character, 0, 0, TO_CHAR );
-	    }
+            {
+              Act( AT_TEMP, buf, d->Character, 0, 0, TO_CHAR );
+            }
         }
     }
 }
@@ -1407,13 +1530,13 @@ static void CharacterUpdate( void )
       if ( !IsNpc(ch)
            && IsAuthed(ch)
            && current_time - ch->PCData->SaveTime > ( SysData.SaveFrequency * 60 ) )
-	{
-	  ch_save = ch;
-	}
+        {
+          ch_save = ch;
+        }
       else
-	{
-	  ch_save = NULL;
-	}
+        {
+          ch_save = NULL;
+        }
 
       if ( ch->Alignment < -1000 )
         ch->Alignment = -1000;
@@ -1455,49 +1578,49 @@ static void CharacterUpdate( void )
                   Act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_CHAR );
 
                   if ( obj->Serial == cur_obj )
-		    {
-		      global_objcode = rOBJ_EXPIRED;
-		    }
+                    {
+                      global_objcode = rOBJ_EXPIRED;
+                    }
 
                   ExtractObject( obj );
                 }
             }
 
           if ( ch->PCData->Condition[COND_DRUNK] > 8 )
-	    {
-	      WorsenMentalState( ch, ch->PCData->Condition[COND_DRUNK]/8 );
-	    }
+            {
+              WorsenMentalState( ch, ch->PCData->Condition[COND_DRUNK]/8 );
+            }
 
           if ( ch->PCData->Condition[COND_FULL] > 1 )
             {
               switch( ch->Position )
                 {
                 case POS_SLEEPING:
-		  ImproveMentalState( ch, 4 );
-		  break;
+                  ImproveMentalState( ch, 4 );
+                  break;
 
                 case POS_RESTING:
-		  ImproveMentalState( ch, 3 );
-		  break;
+                  ImproveMentalState( ch, 3 );
+                  break;
 
                 case POS_SITTING:
                 case POS_MOUNTED:
-		  ImproveMentalState( ch, 2 );
-		  break;
+                  ImproveMentalState( ch, 2 );
+                  break;
 
                 case POS_STANDING:
-		  ImproveMentalState( ch, 1 );
-		  break;
+                  ImproveMentalState( ch, 1 );
+                  break;
 
                 case POS_FIGHTING:
                   if ( NumberBits(2) == 0 )
-		    {
-		      ImproveMentalState( ch, 1 );
-		    }
+                    {
+                      ImproveMentalState( ch, 1 );
+                    }
                   break;
 
-		default:
-		  break;
+                default:
+                  break;
                 }
             }
 
@@ -1506,32 +1629,32 @@ static void CharacterUpdate( void )
               switch( ch->Position )
                 {
                 case POS_SLEEPING:
-		  ImproveMentalState( ch, 5 );
-		  break;
+                  ImproveMentalState( ch, 5 );
+                  break;
 
                 case POS_RESTING:
-		  ImproveMentalState( ch, 3 );
-		  break;
+                  ImproveMentalState( ch, 3 );
+                  break;
 
                 case POS_SITTING:
                 case POS_MOUNTED:
-		  ImproveMentalState( ch, 2 );
-		  break;
+                  ImproveMentalState( ch, 2 );
+                  break;
 
                 case POS_STANDING:
-		  ImproveMentalState( ch, 1 );
-		  break;
+                  ImproveMentalState( ch, 1 );
+                  break;
 
                 case POS_FIGHTING:
                   if ( NumberBits(2) == 0 )
-		    {
-		      ImproveMentalState( ch, 1 );
-		    }
+                    {
+                      ImproveMentalState( ch, 1 );
+                    }
 
                   break;
 
-		default:
-		  break;
+                default:
+                  break;
                 }
             }
 
@@ -1539,27 +1662,27 @@ static void CharacterUpdate( void )
           GainCondition( ch, COND_FULL,   -1 );
 
           if ( ch->InRoom )
-	    {
-	      switch( ch->InRoom->Sector )
-		{
-		default:
-		  GainCondition( ch, COND_THIRST, -1 );
-		  break;
+            {
+              switch( ch->InRoom->Sector )
+                {
+                default:
+                  GainCondition( ch, COND_THIRST, -1 );
+                  break;
 
-		case SECT_DESERT:
-		  GainCondition( ch, COND_THIRST, -2 );
-		  break;
+                case SECT_DESERT:
+                  GainCondition( ch, COND_THIRST, -2 );
+                  break;
 
-		case SECT_UNDERWATER:
-		case SECT_OCEANFLOOR:
-		  if ( NumberBits(1) == 0 )
-		    {
-		      GainCondition( ch, COND_THIRST, -1 );
-		    }
+                case SECT_UNDERWATER:
+                case SECT_OCEANFLOOR:
+                  if ( NumberBits(1) == 0 )
+                    {
+                      GainCondition( ch, COND_THIRST, -1 );
+                    }
 
-		  break;
-		}
-	    }
+                  break;
+                }
+            }
         }
 
       if ( !CharacterDiedRecently(ch) )
@@ -1574,71 +1697,71 @@ static void CharacterUpdate( void )
               Act( AT_POISON, "$n shivers and suffers.", ch, NULL, NULL, TO_ROOM );
               Act( AT_POISON, "You shiver and suffer.", ch, NULL, NULL, TO_CHAR );
               ch->MentalState = urange( 20, ch->MentalState
-                                         + 4 , 100 );
+                                        + 4 , 100 );
               InflictDamage( ch, ch, 6, gsn_poison );
             }
           else if ( ch->Position == POS_INCAP )
-	    {
-	      InflictDamage( ch, ch, 1, TYPE_UNDEFINED );
-	    }
-	  else if ( ch->Position == POS_MORTAL )
-	    {
-	      InflictDamage( ch, ch, 4, TYPE_UNDEFINED );
-	    }
+            {
+              InflictDamage( ch, ch, 1, TYPE_UNDEFINED );
+            }
+          else if ( ch->Position == POS_MORTAL )
+            {
+              InflictDamage( ch, ch, 4, TYPE_UNDEFINED );
+            }
 
           if ( CharacterDiedRecently(ch) )
-	    {
-	      continue;
-	    }
+            {
+              continue;
+            }
 
           if ( ch->MentalState >= 30 )
-	    {
-	      switch( (ch->MentalState+5) / 10 )
-		{
-		case 3:
-		  ch->Echo( "You feel feverish.\r\n" );
-		  Act( AT_ACTION, "$n looks kind of out of it.", ch, NULL, NULL, TO_ROOM );
-		  break;
+            {
+              switch( (ch->MentalState+5) / 10 )
+                {
+                case 3:
+                  ch->Echo( "You feel feverish.\r\n" );
+                  Act( AT_ACTION, "$n looks kind of out of it.", ch, NULL, NULL, TO_ROOM );
+                  break;
 
-		case 4:
-		  ch->Echo( "You do not feel well at all.\r\n" );
-		  Act( AT_ACTION, "$n doesn't look too good.", ch, NULL, NULL, TO_ROOM );
-		  break;
+                case 4:
+                  ch->Echo( "You do not feel well at all.\r\n" );
+                  Act( AT_ACTION, "$n doesn't look too good.", ch, NULL, NULL, TO_ROOM );
+                  break;
 
-		case 5:
-		  ch->Echo( "You need help!\r\n" );
-		  Act( AT_ACTION, "$n looks like $e could use your help.", ch, NULL, NULL, TO_ROOM );
-		  break;
+                case 5:
+                  ch->Echo( "You need help!\r\n" );
+                  Act( AT_ACTION, "$n looks like $e could use your help.", ch, NULL, NULL, TO_ROOM );
+                  break;
 
-		case 6:
-		  ch->Echo( "Seekest thou a cleric.\r\n" );
-		  Act( AT_ACTION, "Someone should fetch a healer for $n.",
+                case 6:
+                  ch->Echo( "Seekest thou a cleric.\r\n" );
+                  Act( AT_ACTION, "Someone should fetch a healer for $n.",
                        ch, NULL, NULL, TO_ROOM );
-		  break;
+                  break;
 
-		case 7:
-		  ch->Echo( "You feel reality slipping away...\r\n" );
-		  Act( AT_ACTION, "$n doesn't appear to be aware of what's going on.",
+                case 7:
+                  ch->Echo( "You feel reality slipping away...\r\n" );
+                  Act( AT_ACTION, "$n doesn't appear to be aware of what's going on.",
                        ch, NULL, NULL, TO_ROOM );
-		  break;
+                  break;
 
-		case 8:
-		  ch->Echo( "You begin to understand... everything.\r\n" );
-		  Act( AT_ACTION, "$n starts ranting like a madman!", ch, NULL, NULL, TO_ROOM );
-		  break;
+                case 8:
+                  ch->Echo( "You begin to understand... everything.\r\n" );
+                  Act( AT_ACTION, "$n starts ranting like a madman!", ch, NULL, NULL, TO_ROOM );
+                  break;
 
-		case 9:
-		  ch->Echo( "You are ONE with the universe.\r\n" );
-		  Act( AT_ACTION, "$n is ranting on about 'the answer', 'ONE' and other mumbo-jumbo...", ch, NULL, NULL, TO_ROOM );
-		  break;
+                case 9:
+                  ch->Echo( "You are ONE with the universe.\r\n" );
+                  Act( AT_ACTION, "$n is ranting on about 'the answer', 'ONE' and other mumbo-jumbo...", ch, NULL, NULL, TO_ROOM );
+                  break;
 
-		case 10:
-		  ch->Echo( "You feel the end is near.\r\n" );
-		  Act( AT_ACTION, "$n is muttering and ranting in tongues...",
+                case 10:
+                  ch->Echo( "You feel the end is near.\r\n" );
+                  Act( AT_ACTION, "$n is muttering and ranting in tongues...",
                        ch, NULL, NULL, TO_ROOM );
-		  break;
-		}
-	    }
+                  break;
+                }
+            }
 
           if ( ch->MentalState <= -30 )
             switch( (int)(( abs( ch->MentalState ) + 5 ) / 10) )
@@ -1649,13 +1772,13 @@ static void CharacterUpdate( void )
                     if ( (ch->Position == POS_STANDING
                           || ch->Position < POS_FIGHTING)
                          && GetRandomPercent()+10 < abs(ch->MentalState) )
-		      {
-			do_sleep( ch, "" );
-		      }
+                      {
+                        do_sleep( ch, "" );
+                      }
                     else
-		      {
-			ch->Echo( "You're barely conscious.\r\n" );
-		      }
+                      {
+                        ch->Echo( "You're barely conscious.\r\n" );
+                      }
                   }
                 break;
 
@@ -1665,13 +1788,13 @@ static void CharacterUpdate( void )
                     if ( (ch->Position == POS_STANDING
                           || ch->Position < POS_FIGHTING)
                          && (GetRandomPercent()+20) < abs(ch->MentalState) )
-		      {
-			do_sleep( ch, "" );
-		      }
+                      {
+                        do_sleep( ch, "" );
+                      }
                     else
-		      {
-			ch->Echo( "You can barely keep your eyes open.\r\n" );
-		      }
+                      {
+                        ch->Echo( "You can barely keep your eyes open.\r\n" );
+                      }
                   }
                 break;
 
@@ -1680,49 +1803,49 @@ static void CharacterUpdate( void )
                   {
                     if ( ch->Position < POS_SITTING
                          &&  (GetRandomPercent()+30) < abs(ch->MentalState) )
-		      {
-			do_sleep( ch, "" );
-		      }
+                      {
+                        do_sleep( ch, "" );
+                      }
                     else
-		      {
-			ch->Echo( "You're extremely drowsy.\r\n" );
-		      }
+                      {
+                        ch->Echo( "You're extremely drowsy.\r\n" );
+                      }
                   }
                 break;
 
               case 7:
                 if ( ch->Position > POS_RESTING )
-		  {
-		    ch->Echo( "You feel very unmotivated.\r\n" );
-		  }
+                  {
+                    ch->Echo( "You feel very unmotivated.\r\n" );
+                  }
                 break;
 
               case 6:
                 if ( ch->Position > POS_RESTING )
-		  {
-		    ch->Echo( "You feel sedated.\r\n" );
-		  }
-		break;
+                  {
+                    ch->Echo( "You feel sedated.\r\n" );
+                  }
+                break;
 
               case 5:
                 if ( ch->Position > POS_RESTING )
-		  {
-		    ch->Echo( "You feel sleepy.\r\n" );
-		  }
+                  {
+                    ch->Echo( "You feel sleepy.\r\n" );
+                  }
                 break;
 
               case 4:
                 if ( ch->Position > POS_RESTING )
-		  {
-		    ch->Echo( "You feel tired.\r\n" );
-		  }
+                  {
+                    ch->Echo( "You feel tired.\r\n" );
+                  }
                 break;
 
               case 3:
                 if ( ch->Position > POS_RESTING )
-		  {
-		    ch->Echo( "You could use a rest.\r\n" );
-		  }
+                  {
+                    ch->Echo( "You could use a rest.\r\n" );
+                  }
                 break;
               }
 
@@ -1731,9 +1854,9 @@ static void CharacterUpdate( void )
               --ch->BackupWait;
 
               if ( ch->BackupWait == 0 )
-		{
-		  AddReinforcements( ch );
-		}
+                {
+                  AddReinforcements( ch );
+                }
             }
 
           if ( !IsNpc (ch) )
@@ -1741,9 +1864,9 @@ static void CharacterUpdate( void )
               if ( ++ch->IdleTimer > 15 && !ch->Desc )
                 {
                   if ( ch->InRoom )
-		    {
-		      CharacterFromRoom( ch );
-		    }
+                    {
+                      CharacterFromRoom( ch );
+                    }
 
                   CharacterToRoom( ch, GetRoom( ROOM_PLUOGUS_QUIT ) );
                   ch->Position = POS_RESTING;
@@ -1753,10 +1876,10 @@ static void CharacterUpdate( void )
                 }
               else if ( ch == ch_save
                         && SysData.SaveFlags.test( Flag::AutoSave::Auto )
-			&& ++save_count < 10 )   /* save max of 10 per tick */
-		{
-		  PlayerCharacters->Save( ch );
-		}
+                        && ++save_count < 10 )   /* save max of 10 per tick */
+                {
+                  PlayerCharacters->Save( ch );
+                }
             }
         }
     }
@@ -1781,25 +1904,25 @@ static void ObjectUpdate( void )
       SetCurrentGlobalObject( obj );
 
       if ( obj->CarriedBy )
-	{
-	  ObjProgRandomTrigger( obj );
-	}
+        {
+          ObjProgRandomTrigger( obj );
+        }
       else if( obj->InRoom && obj->InRoom->Area->NumberOfPlayers > 0 )
-	{
-	  ObjProgRandomTrigger( obj );
-	}
+        {
+          ObjProgRandomTrigger( obj );
+        }
 
       if( IsObjectExtracted(obj) )
-	{
-	  continue;
-	}
+        {
+          continue;
+        }
 
       if ( obj->ItemType == ITEM_WEAPON && obj->CarriedBy
-	   && ( obj->WearLoc == WEAR_WIELD || obj->WearLoc == WEAR_DUAL_WIELD )
-	   && obj->Value[OVAL_WEAPON_TYPE] != WEAPON_BLASTER
-	   && obj->Value[OVAL_WEAPON_CHARGE] > 0
-	   && obj->Value[OVAL_WEAPON_TYPE] != WEAPON_BOWCASTER
-	   && obj->Value[OVAL_WEAPON_TYPE] != WEAPON_FORCE_PIKE)
+           && ( obj->WearLoc == WEAR_WIELD || obj->WearLoc == WEAR_DUAL_WIELD )
+           && obj->Value[OVAL_WEAPON_TYPE] != WEAPON_BLASTER
+           && obj->Value[OVAL_WEAPON_CHARGE] > 0
+           && obj->Value[OVAL_WEAPON_TYPE] != WEAPON_BOWCASTER
+           && obj->Value[OVAL_WEAPON_TYPE] != WEAPON_FORCE_PIKE)
         {
           obj->Value[OVAL_WEAPON_CHARGE]--;
 
@@ -1827,31 +1950,31 @@ static void ObjectUpdate( void )
                   RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT );
                 }
               else if ( IsBitSet( obj->Value[OVAL_PIPE_FLAGS], PIPE_HOT ) )
-		{
-		  RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_HOT );
-		}
-	      else
-		{
-		  if ( IsBitSet( obj->Value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT ) )
-		    {
-		      RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT );
-		      RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
-		    }
-		  else
-		    {
-		      SetBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
-		    }
-		}
+                {
+                  RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_HOT );
+                }
+              else
+                {
+                  if ( IsBitSet( obj->Value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT ) )
+                    {
+                      RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT );
+                      RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
+                    }
+                  else
+                    {
+                      SetBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
+                    }
+                }
 
               if ( !IsBitSet( obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
-		{
-		  SetBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH );
-		}
+                {
+                  SetBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH );
+                }
             }
           else
-	    {
-	      RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_HOT );
-	    }
+            {
+              RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_HOT );
+            }
         }
 
       /* Corpse decay (npc corpses decay at 8 times the rate of pc corpses) - Narn */
@@ -1861,9 +1984,9 @@ static void ObjectUpdate( void )
           short timerfrac = umax(1, obj->Timer - 1);
 
           if ( obj->ItemType == ITEM_CORPSE_PC )
-	    {
-	      timerfrac = (int)(obj->Timer / 8 + 1);
-	    }
+            {
+              timerfrac = (int)(obj->Timer / 8 + 1);
+            }
 
           if ( obj->Timer > 0 && obj->Value[OVAL_CORPSE_DECAY] > timerfrac )
             {
@@ -1879,15 +2002,15 @@ static void ObjectUpdate( void )
               obj->Value[OVAL_CORPSE_DECAY] = timerfrac;
 
               if ( obj->ItemType == ITEM_DROID_CORPSE )
-		{
-		  sprintf( buf, d_corpse_descs[ umin( timerfrac - 1, 4 ) ],
-			   bufptr.c_str() );
-		}
+                {
+                  sprintf( buf, d_corpse_descs[ umin( timerfrac - 1, 4 ) ],
+                           bufptr.c_str() );
+                }
               else
-		{
-		  sprintf( buf, corpse_descs[ umin( timerfrac - 1, 4 ) ],
-			   Capitalize( bufptr ).c_str() );
-		}
+                {
+                  sprintf( buf, corpse_descs[ umin( timerfrac - 1, 4 ) ],
+                           Capitalize( bufptr ).c_str() );
+                }
 
               obj->Description = buf;
             }
@@ -1895,18 +2018,18 @@ static void ObjectUpdate( void )
 
       /* don't let inventory decay */
       if ( IsBitSet( obj->Flags, ITEM_INVENTORY ) )
-	{
-	  continue;
-	}
+        {
+          continue;
+        }
 
       if ( obj->ItemType == ITEM_GRENADE && obj->CarriedBy)
         {
           wield = GetEquipmentOnCharacter( obj->CarriedBy, WEAR_HOLD );
 
           if( wield == obj )
-	    {
-	      continue;
-	    }
+            {
+              continue;
+            }
         }
 
       if ( obj->Timer > 0 && obj->Timer < 5 && obj->ItemType == ITEM_ARMOR )
@@ -2078,16 +2201,16 @@ static void CharacterCheck( void )
       CharacterFallIfNoFloor(ch, 0);
 
       if ( CharacterDiedRecently( ch ) )
-	{
-	  continue;
-	}
+        {
+          continue;
+        }
 
       if ( IsNpc( ch ) )
         {
           if ( cnt != 0 )
-	    {
-	      continue;
-	    }
+            {
+              continue;
+            }
 
           /* running mobs       -Thoric */
           if ( IsBitSet(ch->Flags, ACT_RUNNING) )
@@ -2103,27 +2226,27 @@ static void CharacterCheck( void )
               if ( ch->spec_fun )
                 {
                   if ( ch->spec_fun( ch ) )
-		    {
-		      continue;
-		    }
+                    {
+                      continue;
+                    }
 
                   if ( CharacterDiedRecently(ch) )
-		    {
-		      continue;
-		    }
+                    {
+                      continue;
+                    }
                 }
 
               if ( ch->spec_2 )
                 {
                   if ( (*ch->spec_2) ( ch ) )
-		    {
-		      continue;
-		    }
+                    {
+                      continue;
+                    }
 
                   if ( CharacterDiedRecently(ch) )
-		    {
-		      continue;
-		    }
+                    {
+                      continue;
+                    }
                 }
 
               if ( !IsBitSet(ch->Flags, ACT_SENTINEL)
@@ -2139,15 +2262,15 @@ static void CharacterCheck( void )
                   retcode = MoveCharacter( ch, pexit );
 
                   if ( CharacterDiedRecently(ch) )
-		    {
-		      continue;
-		    }
+                    {
+                      continue;
+                    }
 
                   if ( retcode != rNONE || IsBitSet(ch->Flags, ACT_SENTINEL)
                        || ch->Position < POS_STANDING )
-		    {
-		      continue;
-		    }
+                    {
+                      continue;
+                    }
                 }
             }
 
@@ -2171,19 +2294,19 @@ static void CharacterCheck( void )
                 {
                   if ( GetTrustLevel(ch) < LEVEL_IMMORTAL )
                     {
-		      int dam = GetRandomNumberFromRange( ch->HitPoints.Max / 50,
+                      int dam = GetRandomNumberFromRange( ch->HitPoints.Max / 50,
                                                           ch->HitPoints.Max / 30 );
                       dam = umax( 1, dam );
 
                       if( ch->HitPoints.Current <= 0 )
-			{
-			  dam = umin( 10, dam );
-			}
+                        {
+                          dam = umin( 10, dam );
+                        }
 
                       if ( NumberBits(3) == 0 )
-			{
-			  ch->Echo( "You cough and choke as you try to breathe water!\r\n" );
-			}
+                        {
+                          ch->Echo( "You cough and choke as you try to breathe water!\r\n" );
+                        }
 
                       InflictDamage( ch, ch, dam, TYPE_UNDEFINED );
                     }
@@ -2191,9 +2314,9 @@ static void CharacterCheck( void )
             }
 
           if ( CharacterDiedRecently( ch ) )
-	    {
-	      continue;
-	    }
+            {
+              continue;
+            }
 
           if ( ch->InRoom
                && (( ch->InRoom->Sector == SECT_WATER_NOSWIM )
@@ -2209,9 +2332,9 @@ static void CharacterCheck( void )
                       int dam;
 
                       if ( ch->Fatigue.Current > 0 )
-			{
-			  ch->Fatigue.Current--;
-			}
+                        {
+                          ch->Fatigue.Current--;
+                        }
                       else
                         {
                           dam = GetRandomNumberFromRange( ch->HitPoints.Max / 50,
@@ -2219,14 +2342,14 @@ static void CharacterCheck( void )
                           dam = umax( 1, dam );
 
                           if( ch->HitPoints.Current <= 0 )
-			    {
-			      dam = umin( 10, dam );
-			    }
+                            {
+                              dam = umin( 10, dam );
+                            }
 
                           if ( NumberBits(3) == 0 )
-			    {
-			      ch->Echo( "Struggling with exhaustion, you choke on a mouthful of water.\r\n" );
-			    }
+                            {
+                              ch->Echo( "Struggling with exhaustion, you choke on a mouthful of water.\r\n" );
+                            }
 
                           InflictDamage( ch, ch, dam, TYPE_UNDEFINED );
                         }
@@ -2269,15 +2392,15 @@ static void AggroUpdate( void )
           for(MPROG_ACT_LIST *tmp_act : actLists)
             {
               if ( tmp_act->obj && IsObjectExtracted(tmp_act->obj) )
-		{
-		  tmp_act->obj = NULL;
-		}
+                {
+                  tmp_act->obj = NULL;
+                }
 
               if ( tmp_act->ch && !CharacterDiedRecently(tmp_act->ch) )
-		{
-		  MobProgWordlistCheck( tmp_act->buf, wch, tmp_act->ch,
-					tmp_act->obj, tmp_act->vo, ACT_PROG );
-		}
+                {
+                  MobProgWordlistCheck( tmp_act->buf, wch, tmp_act->ch,
+                                        tmp_act->obj, tmp_act->vo, ACT_PROG );
+                }
 
               wch->mprog.Remove(tmp_act);
               FreeMemory(tmp_act->buf);
@@ -2300,16 +2423,16 @@ static void AggroUpdate( void )
            || IsAffectedBy(ch, AFF_CHARM)
            || !IsAwake(ch)
            || ( IsBitSet(ch->Flags, ACT_WIMPY) ) )
-	{
-	  continue;
-	}
+        {
+          continue;
+        }
 
       if ( !IsBitSet(ch->Flags, ACT_AGGRESSIVE)
            || IsBitSet(ch->Flags, ACT_MOUNTED)
            || ch->InRoom->Flags.test( Flag::Room::Safe ) )
-	{
-	  continue;
-	}
+        {
+          continue;
+        }
 
       std::list<Character*> charactersInRoom(ch->InRoom->Characters());
 
@@ -2325,14 +2448,14 @@ static void AggroUpdate( void )
                || wch->TopLevel >= LEVEL_IMMORTAL
                || !wch->InRoom
                || !CanSeeCharacter( ch, wch ) )
-	    {
-	      continue;
-	    }
+            {
+              continue;
+            }
 
           if ( IsBitSet(wch->Flags, ACT_AGGRESSIVE) )
-	    {
-	      continue;
-	    }
+            {
+              continue;
+            }
 
           victim = wch;
 
@@ -2343,9 +2466,9 @@ static void AggroUpdate( void )
             }
 
           if ( GetTimer(victim, TIMER_RECENTFIGHT) > 0 )
-	    {
-	      continue;
-	    }
+            {
+              continue;
+            }
 
           if ( IsNpc(ch) && IsBitSet(ch->AttackFlags, ATCK_BACKSTAB ) )
             {
@@ -2424,17 +2547,17 @@ static void PerformRandomDrunkBehavior( Character *ch )
       CheckSocial( ch, "fart", "" );
     }
   else if ( drunk > (10+(GetCurrentConstitution(ch)/5))
-	    && GetRandomPercent() < ( 2 * drunk / 18 ) )
+            && GetRandomPercent() < ( 2 * drunk / 18 ) )
     {
       char name[MAX_STRING_LENGTH];
 
       for(Character *vch : ch->InRoom->Characters())
-	{
-	  if ( GetRandomPercent() < 10 )
-	    {
-	      rvch = vch;
-	    }
-	}
+        {
+          if ( GetRandomPercent() < 10 )
+            {
+              rvch = vch;
+            }
+        }
 
       strcpy(name, rvch ? rvch->Name.c_str() : "");
       CheckSocial( ch, "puke", name);
@@ -2454,84 +2577,84 @@ static void SufferHalucinations( Character *ch )
         {
         default:
         case 1:
-	  t = "You feel very restless... you can't sit still.\r\n";
-	  break;
+          t = "You feel very restless... you can't sit still.\r\n";
+          break;
 
         case 2:
-	  t = "You're tingling all over.\r\n";
-	  break;
+          t = "You're tingling all over.\r\n";
+          break;
 
         case 3:
-	  t = "Your skin is crawling.\r\n";
-	  break;
+          t = "Your skin is crawling.\r\n";
+          break;
 
         case 4:
-	  t = "You suddenly feel that something is terribly wrong.\r\n";
-	  break;
+          t = "You suddenly feel that something is terribly wrong.\r\n";
+          break;
 
         case 5:
-	  t = "Those damn little jawas keep laughing at you!\r\n";
-	  break;
+          t = "Those damn little jawas keep laughing at you!\r\n";
+          break;
 
         case 6:
-	  t = "You can hear your mother crying...\r\n";
-	  break;
+          t = "You can hear your mother crying...\r\n";
+          break;
 
         case 7:
-	  t = "Have you been here before, or not? You're not sure...\r\n";
-	  break;
+          t = "Have you been here before, or not? You're not sure...\r\n";
+          break;
 
         case 8:
-	  t = "Painful childhood memories flash through your mind.\r\n";
-	  break;
+          t = "Painful childhood memories flash through your mind.\r\n";
+          break;
 
         case 9:
-	  t = "You hear someone call your name in the distance...\r\n";
-	  break;
+          t = "You hear someone call your name in the distance...\r\n";
+          break;
 
         case 10:
-	  t = "Your head is pulsating... you can't think straight.\r\n";
-	  break;
+          t = "Your head is pulsating... you can't think straight.\r\n";
+          break;
 
         case 11:
-	  t = "The ground... seems to be squirming...\r\n";
-	  break;
+          t = "The ground... seems to be squirming...\r\n";
+          break;
 
         case 12:
-	  t = "You're not quite sure what is real anymore.\r\n";
-	  break;
+          t = "You're not quite sure what is real anymore.\r\n";
+          break;
 
         case 13:
-	  t = "It's all a dream... or is it?\r\n";
-	  break;
+          t = "It's all a dream... or is it?\r\n";
+          break;
 
         case 14:
-	  t = "They're coming to get you... coming to take you away...\r\n";
-	  break;
+          t = "They're coming to get you... coming to take you away...\r\n";
+          break;
 
         case 15:
-	  t = "You begin to feel all powerful!\r\n";
-	  break;
+          t = "You begin to feel all powerful!\r\n";
+          break;
 
         case 16:
-	  t = "You're light as air... the heavens are yours for the taking.\r\n";
-	  break;
+          t = "You're light as air... the heavens are yours for the taking.\r\n";
+          break;
 
         case 17:
-	  t = "Your whole life flashes by... and your future...\r\n";
-	  break;
+          t = "Your whole life flashes by... and your future...\r\n";
+          break;
 
         case 18:
-	  t = "You are everywhere and everything... you know all and are all!\r\n";
-	  break;
+          t = "You are everywhere and everything... you know all and are all!\r\n";
+          break;
 
         case 19:
-	  t = "You feel immortal!\r\n";
-	  break;
+          t = "You feel immortal!\r\n";
+          break;
 
         case 20:
-	  t = "Ahh... the power of a Supreme Entity... what to do...\r\n";
-	  break;
+          t = "Ahh... the power of a Supreme Entity... what to do...\r\n";
+          break;
         }
 
       ch->Echo(t);
@@ -2610,6 +2733,7 @@ void UpdateHandler()
     {
       pulse_mobile = PULSE_MOBILE;
       MobileUpdate();
+      UpdateDruggedPlayers();
     }
 
   if ( --pulse_space <= 0 )
@@ -2666,19 +2790,19 @@ void UpdateHandler()
   if(arena.InStartArena || arena.PeopleChallenged)
     {
       if( --pulse_StartArena <= 0)
-	{
-	  pulse_StartArena = PULSE_ARENA;
-	  StartArena();
-	}
+        {
+          pulse_StartArena = PULSE_ARENA;
+          StartArena();
+        }
     }
 
   if(arena.PeopleIsInArena)
     {
       if(( --pulse_arena <= 0) || (CharactersInArena()==1))
-	{
-	  pulse_arena = PULSE_ARENA;
-	  UpdateArena();
-	}
+        {
+          pulse_arena = PULSE_ARENA;
+          UpdateArena();
+        }
     }
 
   TeleportUpdate();
@@ -2764,12 +2888,12 @@ void RebootCheck( time_t reset )
   if ( !init || reset >= current_time )
     {
       for ( trun = timesize-1; trun >= 0; trun-- )
-	{
-	  if ( reset >= current_time+times[trun] )
-	    {
-	      break;
-	    }
-	}
+        {
+          if ( reset >= current_time+times[trun] )
+            {
+              break;
+            }
+        }
 
       init = true;
       return;
@@ -2807,15 +2931,15 @@ void RebootCheck( time_t reset )
         }
 
       EchoToAll(AT_YELLOW, "You are forced from these realms by a strong "
-                  "presence\r\nas life here is reconstructed.", ECHOTAR_ALL);
+                "presence\r\nas life here is reconstructed.", ECHOTAR_ALL);
 
       for ( vch = FirstCharacter; vch; vch = vch->Next )
-	{
-	  if ( !IsNpc(vch) )
-	    {
-	      PlayerCharacters->Save(vch);
-	    }
-	}
+        {
+          if ( !IsNpc(vch) )
+            {
+              PlayerCharacters->Save(vch);
+            }
+        }
 
       Ships->Save();
 
@@ -2828,9 +2952,9 @@ void RebootCheck( time_t reset )
       EchoToAll(AT_YELLOW, tmsg[trun], ECHOTAR_ALL);
 
       if ( trun <= 5 )
-	{
-	  SysData.DenyNewPlayers = true;
-	}
+        {
+          SysData.DenyNewPlayers = true;
+        }
 
       --trun;
       return;
@@ -2849,15 +2973,15 @@ static void AuctionUpdate( void )
     case 1 : /* going once */
     case 2 : /* going twice */
       if (auction->Bet > auction->Starting)
-	{
-	  sprintf(buf, "%s: going %s for %d.", auction->Item->ShortDescr.c_str(),
+        {
+          sprintf(buf, "%s: going %s for %d.", auction->Item->ShortDescr.c_str(),
                   ((auction->Going == 1) ? "once" : "twice"), auction->Bet);
-	}
+        }
       else
-	{
-	  sprintf(buf, "%s: going %s (bid not received yet).", auction->Item->ShortDescr.c_str(),
+        {
+          sprintf(buf, "%s: going %s (bid not received yet).", auction->Item->ShortDescr.c_str(),
                   ((auction->Going == 1) ? "once" : "twice"));
-	}
+        }
 
       TalkAuction(buf);
       break;
@@ -2891,9 +3015,9 @@ static void AuctionUpdate( void )
               ObjectToRoom( auction->Item, auction->Buyer->InRoom );
             }
           else
-	    {
-	      ObjectToCharacter( auction->Item, auction->Buyer );
-	    }
+            {
+              ObjectToCharacter( auction->Item, auction->Buyer );
+            }
 
           pay = (int)auction->Bet * 0.9;
           tax = (int)auction->Bet * 0.1;
@@ -2912,12 +3036,12 @@ static void AuctionUpdate( void )
       else /* not sold */
         {
           sprintf (buf, "No bids received for %s - object has been removed from auction\r\n.",
-		   auction->Item->ShortDescr.c_str());
+                   auction->Item->ShortDescr.c_str());
           TalkAuction(buf);
           Act(AT_ACTION, "The auctioneer appears before you to return $p to you.",
-               auction->Seller,auction->Item,NULL,TO_CHAR);
+              auction->Seller,auction->Item,NULL,TO_CHAR);
           Act(AT_ACTION, "The auctioneer appears before $n to return $p to $m.",
-               auction->Seller,auction->Item,NULL,TO_ROOM);
+              auction->Seller,auction->Item,NULL,TO_ROOM);
 
           if ( (auction->Seller->CarryWeight
                 + GetObjectWeight( auction->Item ))
@@ -2932,27 +3056,27 @@ static void AuctionUpdate( void )
               ObjectToRoom( auction->Item, auction->Seller->InRoom );
             }
           else
-	    {
-	      ObjectToCharacter (auction->Item,auction->Seller);
-	    }
+            {
+              ObjectToCharacter (auction->Item,auction->Seller);
+            }
 
           tax = (int)auction->Item->Cost * 0.05;
           BoostEconomy( auction->Seller->InRoom->Area, tax );
           auction->Seller->Echo( "The auctioneer charges you an auction fee of %d.\r\n", tax );
 
           if ((auction->Seller->Gold - tax) < 0)
-	    {
-	      auction->Seller->Gold = 0;
-	    }
+            {
+              auction->Seller->Gold = 0;
+            }
           else
-	    {
-	      auction->Seller->Gold -= tax;
-	    }
+            {
+              auction->Seller->Gold -= tax;
+            }
 
           if ( SysData.SaveFlags.test( Flag::AutoSave::Auction ) )
-	    {
-	      PlayerCharacters->Save( auction->Seller );
-	    }
+            {
+              PlayerCharacters->Save( auction->Seller );
+            }
         }
 
       auction->Item = NULL;
