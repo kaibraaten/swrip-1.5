@@ -751,7 +751,7 @@ bool HasMentalStateToFindObject( const Character *ch )
 {
   int ms = ch->MentalState;
   int drunk = IsNpc(ch) ? 0 : ch->PCData->Condition[COND_DRUNK];
-  const char *t = NULL;
+  std::string t;
 
   /*
    * we're going to be nice and let nothing weird happen unless

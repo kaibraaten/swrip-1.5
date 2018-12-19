@@ -559,7 +559,7 @@ void do_oset( Character *ch, std::string argument )
       ch->SubState = SUB_OBJ_LONG;
       ch->dest_buf = obj;
       StartEditing( ch, obj->Description );
-      SetEditorDescription( ch, "Object %d (%s) long description",
+      SetEditorDescription( ch, "Object %ld (%s) long description",
 			    obj->Prototype->Vnum, obj->Name.c_str() );
       return;
     }
@@ -739,7 +739,7 @@ void do_oset( Character *ch, std::string argument )
       ch->SubState = SUB_OBJ_EXTRA;
       ch->dest_buf = ed;
       StartEditing( ch, ed->Description );
-      SetEditorDescription( ch, "Object %d (%s) extra description: %s",
+      SetEditorDescription( ch, "Object %ld (%s) extra description: %s",
 			    obj->Prototype->Vnum, obj->Name.c_str(), arg3.c_str() );
       return;
     }
@@ -778,7 +778,7 @@ void do_oset( Character *ch, std::string argument )
       ch->SubState = SUB_OBJ_EXTRA;
       ch->dest_buf = ed;
       StartEditing( ch, ed->Description );
-      SetEditorDescription( ch, "Object %d (%s) description",
+      SetEditorDescription( ch, "Object %ld (%s) description",
                             obj->Prototype->Vnum, obj->Name.c_str() );
       return;
     }
@@ -884,15 +884,13 @@ void do_oset( Character *ch, std::string argument )
 
           if ( value < 0 )
             {
-              size_t x = 0;
-
               ch->Echo("Unknown weapon type.\r\n");
               ch->Echo("\r\nChoices:\r\n");
               ch->Echo("   ");
 
-              for( x = 0; x < GetWeaponTableSize(); ++x )
+              for( size_t x = 0; x < GetWeaponTableSize(); ++x )
                 {
-                  ch->Echo(GetWeaponTypeName( x ));
+                  ch->Echo("%s", GetWeaponTypeName( x ));
                 }
 
               ch->Echo("\r\n");
@@ -933,15 +931,13 @@ void do_oset( Character *ch, std::string argument )
 
           if ( value < 0 )
             {
-              size_t x = 0;
-
               ch->Echo("Unknown spice type.\r\n");
               ch->Echo("\r\nChoices:\r\n");
               ch->Echo("   ");
 
-              for( x = 0; x < GetSpiceTableSize(); ++x )
+              for( size_t x = 0; x < GetSpiceTableSize(); ++x )
                 {
-                  ch->Echo(GetSpiceTypeName( x ));
+                  ch->Echo("%s", GetSpiceTypeName( x ));
                 }
 
               ch->Echo("\r\n");
@@ -959,15 +955,13 @@ void do_oset( Character *ch, std::string argument )
 
           if ( value < 0 )
             {
-              size_t x = 0;
-
               ch->Echo("Unknown gem type.\r\n");
               ch->Echo("\r\nChoices:\r\n");
               ch->Echo("   ");
 
-              for( x = 0; x < GetCrystalTableSize(); ++x )
+              for( size_t x = 0; x < GetCrystalTableSize(); ++x )
                 {
-                  ch->Echo(GetCrystalTypeName( x ));
+                  ch->Echo("%s", GetCrystalTypeName( x ));
                 }
 
               ch->Echo("\r\n");

@@ -74,7 +74,7 @@ void do_mpfind( Character *ch, std::string argument )
 
           if ( tot_vnum && ++disp_cou <= disp_limit)
             {
-              ch->Echo("%5d %5d %5d\r\n", disp_cou, i, tot_vnum);
+              ch->Echo("%5d %5ld %5d\r\n", disp_cou, i, tot_vnum);
             }
         }
     }

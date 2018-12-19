@@ -35,7 +35,7 @@ void do_buyhome( Character *ch, std::string argument )
 
   if ( ch->Gold < houseCost )
     {
-      ch->Echo( "&RThis room costs %d credits you don't have enough!\r\n&d" );
+      ch->Echo( "&RThis room costs %d credits you don't have enough!\r\n&d", houseCost );
       return;
     }
 

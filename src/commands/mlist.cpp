@@ -56,7 +56,7 @@ void do_mlist( Character *ch, std::string argument )
       if ( (mob = GetProtoMobile( vnum )) == NULL )
         continue;
 
-      ch->Echo("%5d) %-20s '%s'\r\n", vnum,
+      ch->Echo("%5ld) %-20s '%s'\r\n", vnum,
                mob->Name.c_str(),
                mob->ShortDescr.c_str() );
     }

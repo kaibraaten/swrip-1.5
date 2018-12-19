@@ -38,19 +38,19 @@ void do_rstat( Character *ch, std::string argument )
     {
       location = ch->InRoom;
 
-      ch->Echo("Exits for room '%s.' vnum %d\r\n",
+      ch->Echo("Exits for room '%s.' vnum %ld\r\n",
                location->Name.c_str(),
                location->Vnum );
       cnt = 0;
 
       for(const Exit *pexit : location->Exits())
         {
-          ch->Echo("%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum: %d  Distance: %d\r\n",
+          ch->Echo("%2d) %2s to %-5ld.  Key: %ld  Flags: %lu  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %ld  Exit's RoomVnum: %ld  Distance: %d\r\n",
                    ++cnt,
                    dir_text[pexit->Direction],
                    pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
                    pexit->Key,
-                   pexit->Flags,
+                   pexit->Flags.to_ulong(),
                    pexit->Keyword.c_str(),
                    !pexit->Description.empty() ? pexit->Description.c_str() : "(none).\r\n",
                    pexit->ReverseExit ? pexit->ReverseExit->Vnum : 0,
@@ -87,7 +87,7 @@ void do_rstat( Character *ch, std::string argument )
            location->Area ? location->Area->Name.c_str() : "None????",
            location->Area ? location->Area->Filename.c_str() : "None????" );
 
-  ch->Echo("Vnum: %d  Sector: %s  Light: %d  TeleDelay: %d  TeleVnum: %d  Tunnel: %d\r\n",
+  ch->Echo("Vnum: %ld  Sector: %s  Light: %d  TeleDelay: %d  TeleVnum: %ld  Tunnel: %d\r\n",
            location->Vnum,
            SectorNames[location->Sector][0],
            location->Light,
@@ -146,12 +146,12 @@ void do_rstat( Character *ch, std::string argument )
 
   for(const Exit *pexit : location->Exits())
     {
-      ch->Echo("%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
+      ch->Echo("%2d) %-2s to %-5ld.  Key: %ld  Flags: %lu  Keywords: %s.\r\n",
                ++cnt,
                dir_text[pexit->Direction],
                pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
                pexit->Key,
-               pexit->Flags,
+               pexit->Flags.to_ulong(),
                !pexit->Keyword.empty() ? pexit->Keyword.c_str() : "(none)" );
     }
 }

@@ -49,7 +49,7 @@ void do_rassign( Character *ch, std::string argument )
   victim->PCData->Build.VnumRanges.Room.Last = r_hi;
   AssignAreaTo( victim );        /* Put back by Thoric on 02/07/96 */
   ch->Echo("Done.\r\n");
-  victim->Echo("%s has assigned you the room range %d - %d.\r\n",
+  victim->Echo("%s has assigned you the room range %ld - %ld.\r\n",
                ch->Name.c_str(), r_lo, r_hi );
   AssignAreaTo( victim );
 

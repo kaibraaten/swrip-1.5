@@ -81,12 +81,12 @@ void do_score(Character *ch, std::string argument)
         {
           ch->Echo("&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
                    Capitalize(AbilityName[ability]).c_str(),
-                   GetAbilityLevel( ch, ability ), GetAbilityXP( ch, ability ) );
+                   GetAbilityLevel( ch, ability ) );
         }
     }
 
   ch->Echo("&C----------------------------------------------------------------------------\r\n");
-  ch->Echo("&cCREDITS: &C%-10d   &cBANK: &C%-10d    &cPkills: &C%-5.5d   &cMkills: &C%-5.5d\r\n",
+  ch->Echo("&cCREDITS: &C%-10d   &cBANK: &C%-10ld    &cPkills: &C%-5.5d   &cMkills: &C%-5.5d\r\n",
             ch->Gold, ch->PCData->Bank, ch->PCData->PKills, ch->PCData->MKills);
 
   ch->Echo("&cWeight: &C%5.5d &c(&Cmax %7.7d&c)    Items: &C%5.5d &c(&Cmax %5.5d&c)\r\n",
@@ -144,7 +144,7 @@ void do_score(Character *ch, std::string argument)
       break;
     }
 
-  ch->Echo(buf);
+  ch->Echo("%s", buf);
 
   if (!IsNpc(ch) && ch->PCData->Condition[COND_DRUNK] > 10)
     ch->Echo("&CYou are drunk.\r\n");
@@ -197,7 +197,7 @@ void do_score(Character *ch, std::string argument)
           sprintf( buf,
                    "&cYour current alias focus is : &C%s.\r\n",
                    ch->PCData->AliasFocus.c_str());
-          ch->Echo(buf);
+          ch->Echo("%s", buf);
         }
       else
         ch->Echo("&cYou have no current target.\r\n");
@@ -228,8 +228,7 @@ void do_score(Character *ch, std::string argument)
              ||  (IsNpc(ch) && !ch->Speaking) )
           SetCharacterColor( AT_RED, ch );
 	
-        ch->Echo(LanguageNames[iLang]);
-        ch->Echo(" ");
+        ch->Echo("%s ", LanguageNames[iLang]);
         SetCharacterColor( AT_SCORE, ch );
       }
 
@@ -258,16 +257,16 @@ void do_score(Character *ch, std::string argument)
       ch->Echo("&cIMMORTAL DATA:  Wizinvis [&C%s&c]  Wizlevel (&C%d&c)\r\n",
                 IsBitSet(ch->Flags, PLR_WIZINVIS) ? "X" : " ", ch->PCData->WizInvis );
       ch->Echo("&cBamfin:  &C%s\r\n", !ch->PCData->BamfIn.empty()
-                ? ch->PCData->BamfIn.c_str() : "%s appears in a swirling mist.",
-               ch->Name.c_str());
+               ? ch->PCData->BamfIn.c_str()
+               : FormatString("%s appears in a swirling mist.", ch->Name.c_str()).c_str());
       ch->Echo("&cBamfout: &C%s\r\n", !ch->PCData->BamfOut.empty()
-               ? ch->PCData->BamfOut.c_str() : "%s leaves in a swirling mist.",
-               ch->Name.c_str());
+               ? ch->PCData->BamfOut.c_str()
+               : FormatString("%s leaves in a swirling mist.", ch->Name.c_str()).c_str());
 
       /* Area Loaded info - Scryn 8/11*/
       if (ch->PCData->Build.Area)
         {
-          ch->Echo("&cVnums:   Room (&C%-5.5d &c- &C%-5.5d&c)   Object (&C%-5.5d &c- &C%-5.5d&c)   Mob (&C%-5.5d &c- &C%-5.5d&c)\r\n",
+          ch->Echo("&cVnums:   Room (&C%-5.5ld &c- &C%-5.5ld&c)   Object (&C%-5.5ld &c- &C%-5.5ld&c)   Mob (&C%-5.5ld &c- &C%-5.5ld&c)\r\n",
                     ch->PCData->Build.Area->VnumRanges.Room.First, ch->PCData->Build.Area->VnumRanges.Room.Last,
                     ch->PCData->Build.Area->VnumRanges.Object.First, ch->PCData->Build.Area->VnumRanges.Object.Last,
                     ch->PCData->Build.Area->VnumRanges.Mob.First, ch->PCData->Build.Area->VnumRanges.Mob.Last);

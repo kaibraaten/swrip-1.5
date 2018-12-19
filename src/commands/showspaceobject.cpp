@@ -4,7 +4,6 @@
 
 static void showspaceobject( Character *ch, const Spaceobject *spaceobject )
 {
-  size_t siteNum = 0;
   ch->Echo("Space object: %s\r\n", spaceobject->Name.c_str());
   ch->Echo("Is simulator: %s\r\n", spaceobject->IsSimulator ? "Yes" : "No");
   ch->Echo("Type:         %s (%d)\r\n",
@@ -16,10 +15,10 @@ static void showspaceobject( Character *ch, const Spaceobject *spaceobject )
   ch->Echo("Gravity:      %d\r\n", spaceobject->Gravity);
   ch->Echo("Landing sites:\r\n" );
 
-  for( siteNum = 0; siteNum < MAX_LANDINGSITE; ++siteNum )
+  for( size_t siteNum = 0; siteNum < MAX_LANDINGSITE; ++siteNum )
     {
       const LandingSite *site = &spaceobject->LandingSites[siteNum];
-      ch->Echo("    %cDock %d: %5d (%s)\r\n",
+      ch->Echo("    %cDock %lu: %5ld (%s)\r\n",
                site->IsSecret ? '-' : ' ', siteNum, site->Dock, site->LocationName.c_str() );
     }
 }

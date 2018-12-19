@@ -1063,7 +1063,7 @@ void ShowFile( const Character *ch, const std::string &filename )
           buf[num++] = '\n';
           buf[num++] = '\r';
           buf[num  ] = '\0';
-          ch->Echo( buf );
+          ch->Echo( "%s", buf );
           num = 0;
         }
     }
@@ -1694,8 +1694,8 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
       else if ( !shownl )
           continue;
 
-      ch->Echo( "%-22s| Rooms: %10d - %-10d"
-                " Objs: %10d - %-10d Mobs: %10d - %-10d%s\r\n",
+      ch->Echo( "%-22s| Rooms: %10ld - %-10ld"
+                " Objs: %10ld - %-10ld Mobs: %10ld - %-10ld%s\r\n",
                 (!pArea->Filename.empty() ? pArea->Filename.c_str() : "(invalid)"),
                 pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
                 pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,

@@ -26,7 +26,7 @@ void do_opstat( Character *ch, std::string arg )
       return;
     }
 
-  ch->Echo("Name: %s.  Vnum: %d.\r\n",
+  ch->Echo("Name: %s.  Vnum: %ld.\r\n",
              obj->Name.c_str(), obj->Prototype->Vnum );
 
   ch->Echo("Short description: %s.\r\n",

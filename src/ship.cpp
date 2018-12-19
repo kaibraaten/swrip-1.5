@@ -425,8 +425,8 @@ static void LandShip( Ship *ship, const std::string &arg )
       xp =  (GetRequiredXpForLevel( GetAbilityLevel(ch, PILOTING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel(ch, PILOTING_ABILITY)));
       xp = umin( GetShipValue( ship ) , xp );
       GainXP( ch, PILOTING_ABILITY, xp );
-      ch->Echo( "&WYou gain %ld points of flight experience!\r\n",
-                umin( GetShipValue( ship ) , xp ) );
+      ch->Echo( "&WYou gain %d points of flight experience!\r\n",
+                umin( GetShipValue( ship ), xp ) );
       ship->Ch = NULL;
     }
 

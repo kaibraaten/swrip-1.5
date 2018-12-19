@@ -46,7 +46,7 @@ void do_destroy( Character *ch, std::string victimName )
       char godDataPath[256];
       
       SetCharacterColor( AT_RED, ch );
-      ch->Echo( "Player destroyed. Pfile saved in backup directory.\r\n", ch );
+      ch->Echo("Player destroyed. Pfile saved in backup directory.\r\n");
       sprintf( godDataPath, "%s%s", GOD_DIR, Capitalize(victimName).c_str() );
 
       if ( remove( godDataPath ) == 0 )

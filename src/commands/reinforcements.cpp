@@ -71,7 +71,7 @@ void do_reinforcements( Character *ch, std::string arg )
 
   ch->Echo("&GYour reinforcements are on the way.\r\n");
   credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 50;
-  ch->Echo("It cost you %d credits.\r\n", credits);
+  ch->Echo("It cost you %ld credits.\r\n", credits);
   ch->Gold -= umin( credits , ch->Gold );
 
   LearnFromSuccess( ch, gsn_reinforcements );

@@ -824,11 +824,7 @@ static char *imc_mudof( const char *src )
     * In strict ISO C++ strchr takes non-const string as first argument,
     * resulting in error on some compilers.
     */
-#ifdef __cplusplus
    if( !( person = strchr( (char*) src, '@' ) ) )
-#else
-   if( !( person = strchr( src, '@' ) ) )
-#endif
       strncpy( mud, src, SMST );
    else
       strncpy( mud, person + 1, SMST );
@@ -7820,11 +7816,7 @@ static const char *imc_send_social( Character * ch, const char *argument, int te
       * In strict ISO C++ strchr takes non-const string as first argument,
       * resulting in error on some compilers.
       */
-#ifdef __cplusplus
      if( !( ps = strchr( (char*) argument, '@' ) ) )
-#else
-      if( !( ps = strchr( argument, '@' ) ) )
-#endif
       {
          imc_to_char( "You need to specify a person@mud for a target.\r\n", ch );
          return "";

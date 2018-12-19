@@ -15,7 +15,7 @@ void do_repairshops( Character *ch, std::string argument )
 
   for(const RepairShop *repair : RepairShops->Entities())
     {
-      ch->Echo("Keeper: %5d Profit: %3d Type: %d Open: %2d Close: %2d Fix: %2d %2d %2d\r\n",
+      ch->Echo("Keeper: %5ld Profit: %3d Type: %d Open: %2d Close: %2d Fix: %2d %2d %2d\r\n",
                repair->Keeper,       repair->ProfitFix, repair->ShopType,
                repair->BusinessHours.Open,   repair->BusinessHours.Close,
                repair->FixType[0], repair->FixType[1], repair->FixType[2] );

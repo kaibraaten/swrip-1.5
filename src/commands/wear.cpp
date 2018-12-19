@@ -109,7 +109,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 		default:
                   sprintf( buf, "You cannot wear that on your %s.\r\n",
                            WearFlags[bit] );
-                  ch->Echo(buf);
+                  ch->Echo("%s", buf);
                 }
             }
 

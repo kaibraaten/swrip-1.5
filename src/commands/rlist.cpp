@@ -6,11 +6,11 @@
 
 void do_rlist( Character *ch, std::string argument )
 {
-  Room *room = NULL;
+  const Room *room = NULL;
   vnum_t vnum = INVALID_VNUM;
   std::string arg1;
   std::string arg2;
-  Area *tarea = ch->PCData->Build.Area;
+  const Area *tarea = ch->PCData->Build.Area;
   vnum_t lrange = INVALID_VNUM;
   vnum_t trange = INVALID_VNUM;
 
@@ -54,6 +54,6 @@ void do_rlist( Character *ch, std::string argument )
       if ( (room = GetRoom( vnum )) == NULL )
         continue;
 
-      ch->Echo("&w%5d) %s\r\n", vnum, room->Name.c_str() );
+      ch->Echo("&w%5ld) %s\r\n", vnum, room->Name.c_str() );
     }
 }

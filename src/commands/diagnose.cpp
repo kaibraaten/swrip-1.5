@@ -130,7 +130,7 @@ void do_diagnose( Character *ch, std::string argument )
       ch->Echo("\r\nObject Frequencies\r\n");  /* send results to char */
 
       for (cou = 0; cou < num && freq[cou]; cou++)
-        ch->Echo("%3d%8d%8d\r\n", cou+1,freq[cou]->Vnum,freq[cou]->Count);
+        ch->Echo("%3d%8ld%8d\r\n", cou+1,freq[cou]->Vnum,freq[cou]->Count);
 
       delete[] freq;
       return;
@@ -318,7 +318,7 @@ void do_diagnose( Character *ch, std::string argument )
               {
                 if ( pm->Vnum >= vnum1 && pm->Vnum <= vnum2
                      &&   pm->Race == race_num && dis_cou++ < dis_num )
-                  ch->Echo( "%5d %s\r\n", pm->Vnum, pm->Name.c_str() );
+                  ch->Echo( "%5ld %s\r\n", pm->Vnum, pm->Name.c_str() );
               }
         }
       return;

@@ -50,7 +50,7 @@ void do_slist( Character *ch, std::string argument )
         }
 
       SetCharacterColor( AT_CYAN, ch );
-      ch->Echo(skn);
+      ch->Echo("%s", skn);
 
       for (i=lowlev; i <= hilev; i++)
         {

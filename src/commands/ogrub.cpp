@@ -110,7 +110,7 @@ void do_ogrub (Character *ch, std::string argument)
       if ( op_num >= MAX_NUM_OPS )
         {
           ch->Echo("Sorry. You have entered more than %d operands.\r\n",
-                   MAX_NUM_OPS, MAX_NUM_OPS );
+                   MAX_NUM_OPS );
           return;
         }
 

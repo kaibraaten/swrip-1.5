@@ -96,5 +96,5 @@ void do_unlock( Character *ch, std::string arg )
       return;
     }
 
-  ch->Echo("You see no %s here.\r\n", arg );
+  ch->Echo("You see no %s here.\r\n", arg.c_str());
 }

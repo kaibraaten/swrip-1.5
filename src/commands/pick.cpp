@@ -217,7 +217,7 @@ void do_pick( Character *ch, std::string arg )
                   continue;
                 }
               
-              victim->Echo("&R[Alarm] Attempt to pick %s.\r\n",ship->Name);
+              victim->Echo("&R[Alarm] Attempt to pick %s.\r\n", ship->Name.c_str());
             }
           return;
         }

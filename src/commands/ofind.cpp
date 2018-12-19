@@ -24,7 +24,7 @@ void do_ofind( Character *ch, std::string arg )
       if ( fAll || NiftyIsName( arg, pObjIndex->Name ) )
         {
           nMatch++;
-          ch->Echo("[%5d] %s\r\n",
+          ch->Echo("[%5ld] %s\r\n",
                    pObjIndex->Vnum, Capitalize( pObjIndex->ShortDescr ).c_str() );
         }
 

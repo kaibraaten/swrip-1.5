@@ -44,6 +44,6 @@ void do_timecmd( Character *ch, std::string argument )
   SetCharacterColor(AT_PLAIN, ch);
   ch->Echo("Timing complete.\r\n");
   SubtractTimes(&etime, &start_time);
-  ch->Echo("Timing took %d.%06d seconds.\r\n",
+  ch->Echo("Timing took %ld.%06ld seconds.\r\n",
            etime.tv_sec, etime.tv_usec );
 }

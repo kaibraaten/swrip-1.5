@@ -917,7 +917,7 @@ void do_mset( Character *ch, std::string argument )
       ch->SubState = SUB_MOB_DESC;
       ch->dest_buf = victim;
       StartEditing( ch, victim->Description );
-      SetEditorDescription( ch, "Mobile %d (%s) description",
+      SetEditorDescription( ch, "Mobile %ld (%s) description",
 			    victim->Prototype->Vnum, victim->Name.c_str() );
       return;
     }

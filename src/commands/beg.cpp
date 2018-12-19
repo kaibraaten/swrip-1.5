@@ -126,7 +126,7 @@ void do_beg( Character *ch, std::string argument )
   xp = umin( amount*10 , ( GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  )  );
   xp = umin( xp , ComputeXP( ch, victim ) );
   GainXP( ch, SMUGGLING_ABILITY, xp );
-  ch->Echo( "&WYou gain %ld smuggling experience points!\r\n", xp );
+  ch->Echo( "&WYou gain %d smuggling experience points!\r\n", xp );
   Act( AT_ACTION, "$N gives $n some money.",  ch, NULL, victim, TO_NOTVICT );
   Act( AT_ACTION, "You give $n some money.", ch, NULL, victim, TO_VICT    );
 }

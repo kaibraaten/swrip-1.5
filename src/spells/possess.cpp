@@ -82,7 +82,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   victim->Desc        = ch->Desc;
   ch->Desc            = NULL;
   ch->Switched        = victim;
-  victim->Echo(buf);
+  victim->Echo("%s", buf);
 
   return rNONE;
 }

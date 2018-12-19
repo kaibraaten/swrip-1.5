@@ -22,6 +22,10 @@
 #ifndef _SWRIP_CHARACTER_HPP_
 #define _SWRIP_CHARACTER_HPP_
 
+#ifndef __GNUC__
+#define __attribute__(a)
+#endif
+
 #include <bitset>
 #include <list>
 #include <array>
@@ -39,7 +43,7 @@ public:
   
   virtual ~Character();
 
-  virtual void Echo(const char *fmt, ...) const;
+  virtual void Echo(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));
   virtual void Echo(const std::string &txt) const;
   
   const std::list<Affect*> &Affects() const;

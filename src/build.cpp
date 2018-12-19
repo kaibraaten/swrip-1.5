@@ -885,7 +885,7 @@ Reset *ParseReset( const Area *tarea, std::string argument, const Character *ch 
     }
   else if ( val1 < MIN_VNUM || val1 > MAX_VNUM )
     {
-      ch->Echo( "Reset: value out of range. Must be between %ld and %s.\r\n",
+      ch->Echo( "Reset: value out of range. Must be between %d and %s.\r\n",
                 MIN_VNUM, PunctuateNumber( MAX_VNUM ).c_str() );
       return NULL;
     }

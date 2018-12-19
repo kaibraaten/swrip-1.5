@@ -2418,7 +2418,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
         }
 
       if ( start == -1 || num >= start )
-        ch->Echo(buf);
+        ch->Echo("%s", buf);
 
       if ( end != -1 && num >= end )
         break;

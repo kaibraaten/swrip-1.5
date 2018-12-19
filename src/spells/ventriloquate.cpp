@@ -24,7 +24,7 @@ ch_ret spell_ventriloquate( int sn, int level, Character *ch, void *vo )
       if ( !IsName( speaker, vch->Name ) )
 	{
 	  SetCharacterColor( AT_SAY, vch );
-          vch->Echo(SaveVsSpellStaff( level, vch ) ? buf2 : buf1);
+          vch->Echo("%s", SaveVsSpellStaff( level, vch ) ? buf2 : buf1);
 	}
     }
 

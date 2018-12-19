@@ -449,7 +449,7 @@ static bool MobSnipe( Character *ch, Character *victim )
   DirectionType dir = DIR_INVALID;
   short dist = 0;
   short max_dist = 3;
-  Exit *pexit = NULL;
+  const Exit *pexit = NULL;
   Room *was_in_room = NULL;
   Room *to_room = NULL;
   char buf[MAX_STRING_LENGTH];

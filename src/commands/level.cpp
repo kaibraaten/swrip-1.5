@@ -28,7 +28,7 @@ void do_level( Character *ch, std::string argument )
 	{
           ch->Echo("%-15s   Level: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
                    Capitalize(AbilityName[ability]).c_str(),
-                   GetAbilityLevel( ch, ability ), GetAbilityXP( ch, ability ) );
+                   GetAbilityLevel( ch, ability ) );
 	}
     }
 }

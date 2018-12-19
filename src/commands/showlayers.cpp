@@ -33,7 +33,7 @@ void do_showlayers( Character *ch, std::string arg )
         if (pObj->Layers > 0)
           {
             if (++cou <= display_limit)
-              ch->Echo("%4d&R&w %5d&R&w %9d&R&w %5d&R&w   %s&R&w\r\n",
+              ch->Echo("%4d&R&w %5ld&R&w %9d&R&w %5d&R&w   %s&R&w\r\n",
                        cou, pObj->Vnum, pObj->WearFlags, pObj->Layers,
                        pObj->ShortDescr.c_str());
           }

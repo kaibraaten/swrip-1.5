@@ -24,8 +24,8 @@ void do_setspaceobject( Character *ch, std::string argument )
       ch->Echo("Usage: setspaceobject <spaceobject> <field> <values>\r\n");
       ch->Echo("\r\nField being one of:\r\n");
       ch->Echo("name type simulator\r\n");
-      ch->Echo("xpos ypos zpos gravity secret%d-%d\r\n", 0, MAX_LANDINGSITE - 1 );
-      ch->Echo("location%d-%d dock%d-%d\r\n", 0, MAX_LANDINGSITE - 1, 0, MAX_LANDINGSITE -1 );
+      ch->Echo("xpos ypos zpos gravity secret%d-%lu\r\n", 0, MAX_LANDINGSITE - 1 );
+      ch->Echo("location%d-%lu dock%d-%lu\r\n", 0, MAX_LANDINGSITE - 1, 0, MAX_LANDINGSITE -1 );
       return;
     }
 
@@ -50,7 +50,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
       if( !StrCmp( option, arg2 ) )
 	{
-          ch->Echo("Range is %s%d to %s%d.\r\n",
+          ch->Echo("Range is %s%d to %s%lu.\r\n",
                    option, 0, option, MAX_LANDINGSITE - 1 );
 	  return;
 	}
@@ -61,7 +61,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
 	  if( siteNum >= MAX_LANDINGSITE )
 	    {
-              ch->Echo("Range is %s%d to %s%d.\r\n",
+              ch->Echo("Range is %s%d to %s%lu.\r\n",
                        option, 0, option, MAX_LANDINGSITE - 1 );
 	    }
 	  else
@@ -82,7 +82,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
       if( !StrCmp( option, arg2 ) )
         {
-          ch->Echo("Range is %s%d to %s%d.\r\n",
+          ch->Echo("Range is %s%d to %s%lu.\r\n",
                    option, 0, option, MAX_LANDINGSITE - 1 );
           return;
         }
@@ -93,7 +93,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
           if( siteNum >= MAX_LANDINGSITE )
             {
-              ch->Echo("Range is %s%d to %s%d.\r\n",
+              ch->Echo("Range is %s%d to %s%lu.\r\n",
                        option, 0, option, MAX_LANDINGSITE - 1 );
             }
           else
@@ -103,7 +103,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
 	      if( !GetRoom( vnum ) && vnum != INVALID_VNUM )
 		{
-                  ch->Echo("&RVnum %d doesn't exist.&d\r\n", vnum );
+                  ch->Echo("&RVnum %ld doesn't exist.&d\r\n", vnum );
 		  return;
 		}
 
@@ -122,7 +122,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
       if( !StrCmp( option, arg2 ) )
         {
-          ch->Echo("Range is %s%d to %s%d.\r\n",
+          ch->Echo("Range is %s%d to %s%lu.\r\n",
                    option, 0, option, MAX_LANDINGSITE - 1 );
           return;
         }
@@ -133,7 +133,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 
           if( siteNum >= MAX_LANDINGSITE )
             {
-              ch->Echo("Range is %s%d to %s%d.\r\n",
+              ch->Echo("Range is %s%d to %s%lu.\r\n",
                        option, 0, option, MAX_LANDINGSITE - 1 );
             }
           else

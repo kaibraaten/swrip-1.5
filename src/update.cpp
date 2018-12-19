@@ -61,17 +61,17 @@ static int GainHitPoints( const Character *ch );
 static int GainMana( const Character *ch );
 static int GainMove( const Character *ch );
 static void GainAddiction( Character *ch );
-static void MobileUpdate( void );
-static void WeatherUpdate( void );
-static void TaxUpdate( void );
-static void CharacterUpdate( void );
-static void ObjectUpdate( void );
-static void AggroUpdate( void );
-static void CharacterCheck( void );
+static void MobileUpdate();
+static void WeatherUpdate();
+static void TaxUpdate();
+static void CharacterUpdate();
+static void ObjectUpdate();
+static void AggroUpdate();
+static void CharacterCheck();
 static void PerformRandomDrunkBehavior( Character *ch );
 static void SufferHalucinations( Character *ch );
-static void AuctionUpdate( void );
-static void TeleportUpdate( void );
+static void AuctionUpdate();
+static void TeleportUpdate();
 
 static int GetMaxCombatLevel( const Character *ch );
 static int GetMaxPilotingLevel( const Character *ch );
@@ -846,16 +846,10 @@ void GainCondition( Character *ch, int iCond, int value )
  * Mob autonomous action.
  * This function takes 25% to 35% of ALL Mud cpu time.
  */
-static void MobileUpdate( void )
+static void MobileUpdate()
 {
-  char buf[MAX_STRING_LENGTH];
-  Character *ch = NULL;
-  Exit *pexit = NULL;
-  DirectionType door = DIR_INVALID;
-  ch_ret retcode = rNONE;
-
   /* Examine all mobs. */
-  for ( ch = LastCharacter; ch; ch = gch_prev )
+  for (Character *ch = LastCharacter; ch; ch = gch_prev)
     {
       SetCurrentGlobalCharacter( ch );
       gch_prev = ch->Previous;
@@ -1062,19 +1056,20 @@ static void MobileUpdate( void )
             }
         }
 
+      DirectionType door = (DirectionType)NumberBits( 5 );
+      const Exit *pexit = GetExit(ch->InRoom, door);
+      
       /* Wander */
       if ( !IsBitSet(ch->Flags, ACT_RUNNING)
            && !IsBitSet(ch->Flags, ACT_SENTINEL)
            && !IsBitSet(ch->Flags, ACT_PROTOTYPE)
-           && ( door = (DirectionType)NumberBits( 5 ) ) < DIR_SOMEWHERE
-           && ( pexit = GetExit(ch->InRoom, door) ) != NULL
-           && pexit->ToRoom
+           && pexit != NULL
            && !pexit->Flags.test( Flag::Exit::Closed )
            && !pexit->ToRoom->Flags.test( Flag::Room::NoMob )
            && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
-                ||   pexit->ToRoom->Area == ch->InRoom->Area ) )
+                || pexit->ToRoom->Area == ch->InRoom->Area ) )
         {
-          retcode = MoveCharacter( ch, pexit, 0 );
+          ch_ret retcode = MoveCharacter( ch, pexit, 0 );
 
           /* If ch changes position due
              to it's or someother mob's
@@ -1106,6 +1101,8 @@ static void MobileUpdate( void )
             {
               if ( IsFearing(ch, rch) )
                 {
+                  char buf[MAX_STRING_LENGTH];
+                  
                   switch( NumberBits(2) )
                     {
                     case 0:
@@ -1133,7 +1130,7 @@ static void MobileUpdate( void )
 
           if ( found )
 	    {
-	      retcode = MoveCharacter( ch, pexit, 0 );
+	      MoveCharacter( ch, pexit, 0 );
 	    }
         }
     }
@@ -2451,7 +2448,7 @@ static void SufferHalucinations( Character *ch )
   if ( ch->MentalState >= 30
        && NumberBits(5 - (ch->MentalState >= 50) - (ch->MentalState >= 75)) == 0 )
     {
-      const char *t;
+      std::string t;
 
       switch( GetRandomNumberFromRange( 1, umin(20, (ch->MentalState+5) / 5)) )
         {
@@ -2574,7 +2571,7 @@ static void TeleportUpdate( void )
  * Called once per pulse from game loop.
  * Random times to defeat tick-timing clients and players.
  */
-void UpdateHandler( void )
+void UpdateHandler()
 {
   static int pulse_taxes;
   static int pulse_area;
@@ -2697,7 +2694,7 @@ void UpdateHandler( void )
       SetCharacterColor(AT_PLAIN, timechar);
       timechar->Echo( "Update timing complete.\r\n" );
       SubtractTimes(&etime, &start_time);
-      timechar->Echo( "Timing took %d.%06d seconds.\r\n",
+      timechar->Echo( "Timing took %ld.%06ld seconds.\r\n",
                       etime.tv_sec, etime.tv_usec );
       timechar = NULL;
     }

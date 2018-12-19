@@ -177,11 +177,11 @@ void ShowClanMembers( const Character *ch, const Clan *clan, const std::string &
               members++;
               ch->Echo( "%3d  %-15s %-17s %9d %9d %19s\r\n",
                         member->Level,
-                        Capitalize(member->Name ),
+                        Capitalize(member->Name ).c_str(),
                         AbilityName[member->Ability],
                         member->Kills,
                         member->Deaths,
-                        FormatDate( &member->Since ) );
+                        FormatDate( &member->Since ).c_str() );
 	    }
         }
       else
@@ -193,11 +193,11 @@ void ShowClanMembers( const Character *ch, const Clan *clan, const std::string &
                   members++;
                   ch->Echo( "%3d  %-15s %-17s %9d %9d %19s\r\n",
                             member->Level,
-                            Capitalize(member->Name ),
+                            Capitalize(member->Name ).c_str(),
                             AbilityName[member->Ability],
                             member->Kills,
                             member->Deaths,
-                            FormatDate( &member->Since ) );
+                            FormatDate( &member->Since ).c_str() );
                 }
             }
         }
@@ -209,11 +209,11 @@ void ShowClanMembers( const Character *ch, const Clan *clan, const std::string &
 	  members++;
 	  ch->Echo( "%3d  %-15s %-17s %9d %9d %19s\r\n",
                     member->Level,
-                    Capitalize(member->Name),
+                    Capitalize(member->Name).c_str(),
                     AbilityName[member->Ability],
                     member->Kills,
                     member->Deaths,
-                    FormatDate( &member->Since ) );
+                    FormatDate( &member->Since ).c_str() );
 	}
     }
 

@@ -6,7 +6,7 @@ static const char *GetClanType(const Clan *const clan);
 
 void do_showclan( Character *ch, std::string argument )
 {
-  Clan *clan = nullptr;
+  const Clan *clan = nullptr;
 
   if ( IsNpc( ch ) )
     {
@@ -42,8 +42,8 @@ void do_showclan( Character *ch, std::string argument )
            clan->PlayerDeaths );
   ch->Echo("MKills: %6d    MDeaths: %6d\r\n", clan->MobKills, clan->MobDeaths );
   ch->Echo("Type: %d\r\n", clan->Type );
-  ch->Echo("Members: %3d\r\n", clan->Members().size());
-  ch->Echo("Board: %5d   Jail: %5d\r\n", clan->Board, clan->Jail);
+  ch->Echo("Members: %3lu\r\n", clan->Members().size());
+  ch->Echo("Board: %5ld   Jail: %5ld\r\n", clan->Board, clan->Jail);
   ch->Echo("Funds: %ld\r\n", clan->Funds );
   ch->Echo("Enlist Room 1: %ld  Enlist Room 2: %ld\r\n",
            clan->EnlistRoom1, clan->EnlistRoom2 );

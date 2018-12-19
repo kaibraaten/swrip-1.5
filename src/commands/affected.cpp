@@ -80,7 +80,7 @@ void do_affected( Character *ch, std::string argument )
 		  ch->Echo( "(%5d)   ", paf->Duration );
 		}
 
-	      ch->Echo( "%s\r\n", skill->Name );
+	      ch->Echo( "%s\r\n", skill->Name.c_str() );
 	    }
 	}
     }

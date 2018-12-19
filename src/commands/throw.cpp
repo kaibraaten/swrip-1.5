@@ -15,7 +15,7 @@ void do_throw( Character *ch, std::string argument )
   std::string arg2;
   std::string arg3;
   DirectionType dir = DIR_INVALID;
-  Exit *pexit = NULL;
+  const Exit *pexit = NULL;
   Room *was_in_room = NULL;
   Room *to_room = NULL;
   Character *victim = NULL;
@@ -56,7 +56,7 @@ void do_throw( Character *ch, std::string argument )
 
   if ( !obj || !NiftyIsNamePrefix( arg, obj->Name ) )
     {
-      ch->Echo("You don't seem to be holding or wielding %s.\r\n", arg );
+      ch->Echo("You don't seem to be holding or wielding %s.\r\n", arg.c_str() );
       return;
     }
 

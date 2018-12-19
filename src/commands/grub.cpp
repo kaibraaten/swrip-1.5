@@ -348,7 +348,7 @@ static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num)
               title_sw = true;
             }
           if ( tot_match <= dis_num )         /* print record if applicable */
-            ch->Echo("%-12s %2hd %c %2s %c %3s %3s %5hd %11ld %-15s %6lu %c\r\n",
+            ch->Echo("%-12s %2hd %c %2s %c %3s %3s %5ld %11ld %-15s %6lu %c\r\n",
                      r.name, r.level, sex_map[(unsigned char) r.sex],
                      race_map[(unsigned char) r.race],
                      class_map[(unsigned char) r.pclass],

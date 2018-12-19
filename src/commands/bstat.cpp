@@ -38,7 +38,7 @@ void do_bstat( Character *ch, std::string arg )
           boardType = "*** Invalid ***";
         }
   
-  ch->Echo( "%-12s Vnum: %5d Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %d Type: %s\r\n",
+  ch->Echo( "%-12s Vnum: %5ld Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %lu Type: %s\r\n",
             board->Name.c_str(),   board->BoardObject,
             board->MinReadLevel,      board->MinPostLevel,
             board->MinRemoveLevel, board->MaxPosts,

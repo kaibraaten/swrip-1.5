@@ -38,7 +38,7 @@ void do_showshuttle( Character *ch, std::string argument )
             shuttle->Type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
   ch->Echo("Delay: %d\r\n", shuttle->Delay );
 
-  ch->Echo("Start Room: %d\tEnd Room: %d\t\tEntrance: %d\r\n",
+  ch->Echo("Start Room: %ld\tEnd Room: %ld\t\tEntrance: %ld\r\n",
        shuttle->Rooms.First, shuttle->Rooms.Last,
        shuttle->Rooms.Entrance);
 
@@ -49,6 +49,6 @@ void do_showshuttle( Character *ch, std::string argument )
   for(const ShuttleStop *stop : shuttle->Stops())
     {
       ch->Echo("\tStop # %d\r\n", ++count );
-      ch->Echo("\t\tStop Name: %s (%d)\r\n", stop->Name.c_str(), stop->RoomVnum );
+      ch->Echo("\t\tStop Name: %s (%ld)\r\n", stop->Name.c_str(), stop->RoomVnum );
     }
 }

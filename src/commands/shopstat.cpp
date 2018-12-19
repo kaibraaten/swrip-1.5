@@ -5,8 +5,8 @@
 
 void do_shopstat( Character *ch, std::string argument )
 {
-  Shop *shop = nullptr;
-  ProtoMobile *mob = nullptr;
+  const Shop *shop = nullptr;
+  const ProtoMobile *mob = nullptr;
   vnum_t vnum = INVALID_VNUM;
 
   if ( argument.empty() )
@@ -31,7 +31,7 @@ void do_shopstat( Character *ch, std::string argument )
 
   shop = mob->Shop;
 
-  ch->Echo("Keeper: %d  %s\r\n", shop->Keeper, mob->ShortDescr.c_str() );
+  ch->Echo("Keeper: %ld  %s\r\n", shop->Keeper, mob->ShortDescr.c_str() );
   ch->Echo("buy0 [%s]  buy1 [%s]  buy2 [%s]  buy3 [%s]  buy4 [%s]\r\n",
            ObjectTypes[shop->BuyType[0]],
            ObjectTypes[shop->BuyType[1]],

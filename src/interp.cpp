@@ -516,7 +516,7 @@ void SendTimer(struct timerset *vtime, Character *ch)
   carry = (vtime->TotalTime.tv_sec % vtime->NumberOfTimesUsed) * 1000000;
   ntime.tv_usec = (vtime->TotalTime.tv_usec + carry) / vtime->NumberOfTimesUsed;
   ch->Echo("Has been used %d times this boot.\r\n", vtime->NumberOfTimesUsed);
-  ch->Echo("Time (in secs): min %d.%0.6d; avg: %d.%0.6d; max %d.%0.6d\r\n",
+  ch->Echo("Time (in secs): min %ld.%06ld; avg: %ld.%06ld; max %ld.%06ld\r\n",
            vtime->MinTime.tv_sec, vtime->MinTime.tv_usec, ntime.tv_sec,
            ntime.tv_usec, vtime->MaxTime.tv_sec, vtime->MaxTime.tv_usec);
 }

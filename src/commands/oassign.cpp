@@ -45,7 +45,7 @@ void do_oassign( Character *ch, std::string argument )
   victim->PCData->Build.VnumRanges.Object.Last = o_hi;
   AssignAreaTo( victim );
   ch->Echo("Done.\r\n");
-  victim->Echo("%s has assigned you the object vnum range %d - %d.\r\n",
+  victim->Echo("%s has assigned you the object vnum range %ld - %ld.\r\n",
                ch->Name.c_str(), o_lo, o_hi );
 }
 

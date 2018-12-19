@@ -89,7 +89,7 @@ void do_info(Character *ch, std::string argument )
   ch->Echo("Max Hull: %d  ", target->Defenses.Hull.Max );
   ch->Echo("Max Shields: %d   Max Energy(fuel): %d\r\n",
            target->Defenses.Shield.Max, target->Thrusters.Energy.Max );
-  ch->Echo("Maximum Speed: %d   Hyperspeed: %d  Value: %d\r\n",
+  ch->Echo("Maximum Speed: %d   Hyperspeed: %d  Value: %ld\r\n",
            target->Thrusters.Speed.Max, target->Hyperdrive.Speed, GetShipValue( target ));
 
   Act( AT_PLAIN, "$n checks various gages and displays on the control panel.",

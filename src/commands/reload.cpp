@@ -9,7 +9,7 @@
 void do_reload( Character *ch, std::string arg )
 {
   Ship *ship = nullptr;
-  short price = 0;
+  long price = 0;
 
   if ( arg.empty() )
     {

@@ -52,7 +52,7 @@ void do_whois( Character *ch, std::string argument)
                 victim->Sex == SEX_MALE ? "male" :
                 victim->Sex == SEX_FEMALE ? "female" : "neutral",
                 NpcRace[victim->Race]);
-      ch->Echo(" in room %d.\r\n",
+      ch->Echo(" in room %ld.\r\n",
                 victim->InRoom->Vnum);
     }
   else
@@ -132,7 +132,7 @@ void do_whois( Character *ch, std::string argument)
             strcat(buf2, " notell");
 
           strcat(buf2, ".\r\n");
-          ch->Echo(buf2);
+          ch->Echo("%s", buf2);
         }
 
       if ( victim->Desc && !victim->Desc->Remote.Hostname.empty() )
@@ -146,7 +146,7 @@ void do_whois( Character *ch, std::string argument)
             }
 
 	  strcat( buf2, "\r\n" );
-          ch->Echo(buf2);
+          ch->Echo("%s", buf2);
         }
 
       if (GetTrustLevel(ch) >= LEVEL_GREATER
@@ -154,7 +154,7 @@ void do_whois( Character *ch, std::string argument)
           && victim->PCData )
         {
           sprintf (buf2, "Email: %s\r\n" , victim->PCData->Email.c_str() );
-          ch->Echo(buf2);
+          ch->Echo("%s", buf2);
         }
     }
 }

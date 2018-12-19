@@ -11,7 +11,7 @@ void do_rpstat( Character *ch, std::string argument )
       return;
     }
 
-  ch->Echo("Name: %s.  Vnum: %d.\r\n",
+  ch->Echo("Name: %s.  Vnum: %ld.\r\n",
            ch->InRoom->Name.c_str(), ch->InRoom->Vnum );
 
   for(const MPROG_DATA *mprg : ch->InRoom->mprog.MudProgs())

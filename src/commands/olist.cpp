@@ -6,13 +6,8 @@
 
 void do_olist( Character *ch, std::string argument )
 {
-  ProtoObject *obj = NULL;
-  vnum_t vnum = INVALID_VNUM;
-  Area *tarea = NULL;
   std::string arg1;
   std::string arg2;
-  int lrange = 0;
-  int trange = 0;
 
   /*
    * Greater+ can list out of assigned range - Tri (mlist/rlist as well)
@@ -24,10 +19,13 @@ void do_olist( Character *ch, std::string argument )
       return;
     }
 
-  tarea = ch->PCData->Build.Area;
+  const Area *tarea = ch->PCData->Build.Area;
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
+  int lrange = 0;
+  int trange = 0;
+  
   if ( tarea )
     {
       if ( arg1.empty() )
@@ -53,12 +51,16 @@ void do_olist( Character *ch, std::string argument )
       trange = ( IsNumber( arg2 ) ? ToLong( arg2 ) : 3 );
     }
 
-  for ( vnum = lrange; vnum <= trange; vnum++ )
+  for (vnum_t vnum = lrange; vnum <= trange; ++vnum)
     {
-      if ( (obj = GetProtoObject( vnum )) == NULL )
-        continue;
-
-      ch->Echo("%5d) %-20s (%s)\r\n", vnum,
+      const ProtoObject *obj = GetProtoObject( vnum );
+      
+      if ( obj == nullptr )
+        {
+          continue;
+        }
+      
+      ch->Echo("%5ld) %-20s (%s)\r\n", vnum,
                obj->Name.c_str(),
                obj->ShortDescr.c_str() );
     }

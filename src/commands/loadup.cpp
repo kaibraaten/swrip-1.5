@@ -126,7 +126,7 @@ void do_loadup( Character *ch, std::string argument )
       d->Character->ReTran    = old_room_vnum;
       d->Character              = NULL;
       delete d;
-      ch->Echo("Player %s loaded from room %d.\r\n",
+      ch->Echo("Player %s loaded from room %ld.\r\n",
                Capitalize( name ).c_str(), old_room_vnum );
       sprintf(buf, "%s appears from nowhere, eyes glazed over.\r\n",
               Capitalize( name ).c_str() );

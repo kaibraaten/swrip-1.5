@@ -75,7 +75,7 @@ void do_opfind( Character *ch, std::string argument )
 
           if ( tot_vnum && ++disp_cou <= disp_limit)
             {
-              ch->Echo("%5d %5d %5d\r\n", disp_cou, i, tot_vnum);
+              ch->Echo("%5d %5ld %5d\r\n", disp_cou, i, tot_vnum);
             }
         }
     }
@@ -102,10 +102,10 @@ static void opfind_help (Character *ch)
   ch->Echo( "opfind 20 901 969 if isnpc \r\n"
             "   Search all obj progs in Olympus (vnums 901 thru 969)\r\n"
             "   and display all objects that contain the text \"if isnpc\".\r\n"
-            "   Display a maximum of 20 lines.\r\n\r\n", ch );
+            "   Display a maximum of 20 lines.\r\n\r\n");
   ch->Echo("Example:\r\n");
   ch->Echo( "opfind 100 mud mpslay \r\n"
             "   Search all obj progs in the entire mud\r\n"
             "   and display all objects that contain the text \"mpslay\".\r\n"
-            "   Display a maximum of 100 lines.\r\n\r\n", ch );
+            "   Display a maximum of 100 lines.\r\n\r\n");
 }

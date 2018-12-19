@@ -50,7 +50,7 @@ void do_track( Character *ch, std::string arg )
 
     case BFS_NO_PATH:
       sprintf(buf, "You can't sense a trail from here.\r\n" );
-      ch->Echo(buf);
+      ch->Echo("%s", buf);
       LearnFromFailure( ch, gsn_track );
       break;
 

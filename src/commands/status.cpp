@@ -68,7 +68,7 @@ void do_status(Character *ch, std::string argument )
            target->Thrusters.Energy.Max );
   ch->Echo("&OLaser Condition:&Y %s  &OCurrent Target:&Y %s\r\n",
            target->WeaponSystems.Laser.State == LASER_DAMAGED ? "Damaged" : "Good",
-           target->WeaponSystems.Target ? target->WeaponSystems.Target->Name : "none");
+           target->WeaponSystems.Target ? target->WeaponSystems.Target->Name.c_str() : "none");
 
   for( size_t turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {

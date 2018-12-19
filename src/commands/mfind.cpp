@@ -27,7 +27,7 @@ void do_mfind( Character *ch, std::string argument )
       if ( fAll || NiftyIsName( arg, pMobIndex->Name ) )
 	{
 	  nMatch++;
-          ch->Echo("[%5d] %s\r\n",
+          ch->Echo("[%5ld] %s\r\n",
                    pMobIndex->Vnum, Capitalize( pMobIndex->ShortDescr ).c_str() );
 	}
 

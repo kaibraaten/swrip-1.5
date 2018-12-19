@@ -32,19 +32,11 @@
 #include <climits>
 #include <utility/utility.hpp>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #if defined(_WIN32)
 #define ZLIB_WINAPI 1
 #endif
 
 #include <zlib.h>
-
-#ifdef __cplusplus
-}
-#endif
 
 #include <cmath>
 
@@ -1040,13 +1032,13 @@ void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
 /* act_move.c */
 void SetBExitFlag( Exit *pexit, size_t flag );
 void RemoveBExitFlag( Exit *pexit, size_t flag );
-Room *GenerateExit( Room *in_room, Exit **pexit );
+Room *GenerateExit( Room *in_room, const Exit **pexit );
 void ClearVirtualRooms( void );
 Exit *FindDoor( Character *ch, const std::string &arg, bool quiet );
 Exit *GetExit( const Room *room, DirectionType dir );
 Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum );
 Exit *GetExitNumber( const Room *room, short count );
-ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall = 0 );
+ch_ret MoveCharacter( Character *ch, const Exit *pexit, int fall = 0 );
 void Teleport( Character *ch, vnum_t room, int flags );
 bool CharacterFallIfNoFloor( Character *ch, int fall );
 

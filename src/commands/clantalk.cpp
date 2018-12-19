@@ -5,13 +5,13 @@ void do_clantalk( Character *ch, std::string argument )
 {
   if (!IsAuthed(ch))
     {
-      ch->Echo("Huh?\r\n", ch);
+      ch->Echo("Huh?\r\n");
       return;
     }
 
   if ( !IsClanned( ch ) )
     {
-      ch->Echo( "Huh?\r\n", ch );
+      ch->Echo("Huh?\r\n");
       return;
     }
 

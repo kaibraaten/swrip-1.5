@@ -43,7 +43,7 @@ void do_vsearch( Character *ch, std::string arg )
                  obj->Level, GetObjectShortDescription(obj).c_str(),
                  PERS( in_obj->CarriedBy, ch ).c_str() );
       else
-        ch->Echo("[%2d] [%-5d] %s in %s.\r\n", obj_counter,
+        ch->Echo("[%2d] [%-5ld] %s in %s.\r\n", obj_counter,
                  in_obj->InRoom ? in_obj->InRoom->Vnum : 0,
                  GetObjectShortDescription(obj).c_str(),
                  in_obj->InRoom == nullptr ?

@@ -34,13 +34,13 @@ void do_mpstat( Character *ch, std::string arg )
       return;
     }
 
-  ch->Echo("Name: %s.  Vnum: %d.\r\n",
+  ch->Echo("Name: %s.  Vnum: %ld.\r\n",
            victim->Name.c_str(), victim->Prototype->Vnum );
 
   ch->Echo("Short description: %s.\r\nLong  description: %s",
            victim->ShortDescr.c_str(),
            !victim->LongDescr.empty()
-           ? victim->LongDescr : "(none).\r\n" );
+           ? victim->LongDescr.c_str() : "(none).\r\n" );
 
   ch->Echo("Hp: %d/%d.  Mana: %d/%d.  Move: %d/%d. \r\n",
              victim->HitPoints.Current, victim->HitPoints.Max,

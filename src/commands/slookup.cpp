@@ -100,7 +100,7 @@ void do_slookup( Character *ch, std::string arg )
 	      }
 
 	  strcat( buf, "\r\n" );
-          ch->Echo(buf);
+          ch->Echo("%s", buf);
 	}
 
       ch->Echo("Saves: %s\r\n", GetSpellSavesName( skill->Saves ) );
@@ -178,7 +178,7 @@ void do_slookup( Character *ch, std::string arg )
 	    strcat( buf, " (affects caster only)" );
 
 	  strcat( buf, "\r\n" );
-          ch->Echo(buf);
+          ch->Echo("%s", buf);
 
 	  if ( aff == skill->Affects.back() )
             ch->Echo("\r\n");
@@ -236,7 +236,7 @@ void do_slookup( Character *ch, std::string arg )
 	{
 	  sprintf(buf, "Ability: %s (%d)   Align: %4d   lvl: %3d\r\n",
 		  AbilityName[skill->Guild], skill->Guild, skill->Alignment, skill->Level );
-          ch->Echo(buf);
+          ch->Echo("%s", buf);
 	}
 
       ch->Echo("\r\n");

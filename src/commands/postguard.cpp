@@ -31,7 +31,7 @@ void do_postguard( Character *ch, std::string argument )
 
       if ( ch->Gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 30 )
         {
-          ch->Echo("&RYou dont have enough credits.\r\n", ch );
+          ch->Echo("&RYou dont have enough credits.\r\n");
           return;
         }
 

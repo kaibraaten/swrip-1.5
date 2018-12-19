@@ -102,7 +102,7 @@ void do_auction(Character *ch, std::string argument)
       else
         {
           SetCharacterColor( AT_LBLUE, ch );
-          ch->Echo( "\r\nThere is nothing being auctioned right now. What would you like to auction?\r\n", ch );
+          ch->Echo( "\r\nThere is nothing being auctioned right now. What would you like to auction?\r\n" );
           return;
         }
     }

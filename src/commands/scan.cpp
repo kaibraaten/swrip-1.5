@@ -12,7 +12,7 @@ void do_scan( Character *ch, std::string argument )
 {
   Room *was_in_room = NULL;
   Room *to_room = NULL;
-  Exit *pexit = NULL;
+  const Exit *pexit = NULL;
   DirectionType dir = DIR_INVALID;
   short dist = 0;
   short max_dist = 5;

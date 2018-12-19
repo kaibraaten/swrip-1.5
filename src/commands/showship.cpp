@@ -6,7 +6,7 @@
 
 void do_showship( Character *ch, std::string argument )
 {
-  Ship *ship = NULL;
+  const Ship *ship = NULL;
 
   if ( IsNpc( ch ) )
     {
@@ -39,20 +39,20 @@ void do_showship( Character *ch, std::string argument )
   ch->Echo( "Current Jump Destination: %s  Jump Point: %s\r\n",
             ship->CurrentJump ? ship->CurrentJump->Name.c_str() : "(null)",
             ship->LastSystem ? ship->LastSystem->Name.c_str() : "(null)" );
-  ch->Echo( "Firstroom: %d   Lastroom: %d",
+  ch->Echo( "Firstroom: %ld   Lastroom: %ld",
             ship->Rooms.First,
             ship->Rooms.Last);
-  ch->Echo( "Cockpit: %d   Entrance: %d   Hangar: %d   Engineroom: %d\r\n",
+  ch->Echo( "Cockpit: %ld   Entrance: %ld   Hangar: %ld   Engineroom: %ld\r\n",
             ship->Rooms.Cockpit,
             ship->Rooms.Entrance,
             ship->Rooms.Hangar,
             ship->Rooms.Engine);
-  ch->Echo( "Pilotseat: %d   Coseat: %d   Navseat: %d  Gunseat: %d\r\n",
+  ch->Echo( "Pilotseat: %ld   Coseat: %ld   Navseat: %ld  Gunseat: %ld\r\n",
             ship->Rooms.Pilotseat,
             ship->Rooms.Coseat,
             ship->Rooms.Navseat,
             ship->Rooms.Gunseat);
-  ch->Echo( "Location: %d   Lastdoc: %d   Shipyard: %d\r\n",
+  ch->Echo( "Location: %ld   Lastdoc: %ld   Shipyard: %ld\r\n",
             ship->Location,
             ship->LastDock,
             ship->Shipyard);
@@ -74,7 +74,7 @@ void do_showship( Character *ch, std::string argument )
 
       if ( IsTurretInstalled( turret ) )
 	{
-          ch->Echo("Turret %s: %d  Condition: %s\r\n",
+          ch->Echo("Turret %s: %ld  Condition: %s\r\n",
                    literal_number[turret_num],
                    GetTurretRoom( turret ),
                    IsTurretDamaged( turret ) ? "Damaged" : "Good");

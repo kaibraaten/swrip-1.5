@@ -203,7 +203,7 @@ void do_cedit( Character *ch, std::string argument )
         }
 
       ch->Echo( "Minimum position for %s changed from %s",
-                command->Name, PositionName[command->Position] );
+                command->Name.c_str(), PositionName[command->Position] );
       command->Position = position;
       ch->Echo( " to %s.\r\n", PositionName[command->Position] );
       ch->Echo( "Done.\r\n" );

@@ -138,7 +138,7 @@ static void AfterDelay( CraftingSession *session )
     {
       ch->Echo( "&RYou hold up your newly created %s.\r\n", itemType.c_str() );
       ch->Echo( "&RIt suddenly dawns upon you that you have created the most useless\r\n" );
-      ch->Echo( "&R%s you've ever seen. You quickly hide your mistake...&d\r\n", itemType);
+      ch->Echo( "&R%s you've ever seen. You quickly hide your mistake...&d\r\n", itemType.c_str());
       LearnFromFailure( ch, recipe->Skill );
       FreeCraftingSession( session );
       return;
@@ -178,7 +178,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
                  GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild ) + 1)
                  - GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild ) ) );
   GainXP(ch, skill->Guild, xpgain );
-  ch->Echo( "You gain %d %s experience.", xpgain, AbilityName[skill->Guild] );
+  ch->Echo( "You gain %ld %s experience.", xpgain, AbilityName[skill->Guild] );
 
   LearnFromSuccess( ch, data->Recipe->Skill );
 

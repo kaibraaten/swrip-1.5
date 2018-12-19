@@ -27,21 +27,21 @@ void do_ahall(Character *ch, std::string argument)
 
   for (const HallOfFameElement *fame_node : FameList )
     {
-      char site[MAX_INPUT_LENGTH];
+      std::string site;
         
       if (fame_node->Date)
         {
           char *timestr = asctime(localtime(&(fame_node->Date)));
           *(timestr + 10) = 0;
-          strcpy(site, timestr);
+          site = timestr;
         }
       else
         {
-          strcpy(site, "Unknown");
+          site = "Unknown";
         }
 
       ch->Echo("&W%-23.23s  &R%-13.13s  &Y%-16d\r\n",
-               fame_node->Name, site, fame_node->Award);
+               fame_node->Name.c_str(), site.c_str(), fame_node->Award);
     }
 }
 

@@ -82,7 +82,7 @@ void do_hell( Character *ch, std::string argument )
 
   victim->PCData->ReleaseDate = mktime(tms);
   victim->PCData->HelledBy = ch->Name;
-  ch->Echo( "%s will be released from hell at %24.24s.\r\n", victim->Name,
+  ch->Echo( "%s will be released from hell at %24.24s.\r\n", victim->Name.c_str(),
             ctime(&victim->PCData->ReleaseDate));
   Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", victim, NULL, ch, TO_NOTVICT);
   CharacterFromRoom(victim);

@@ -15,7 +15,7 @@ void do_snipe( Character *ch, std::string argument )
   DirectionType dir = DIR_INVALID;
   short dist = 0;
   short max_dist = 1;
-  Exit *pexit = NULL;
+  const Exit *pexit = NULL;
   Room *was_in_room = NULL;
   Room *to_room = NULL;
   Character *victim = NULL;

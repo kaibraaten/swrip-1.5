@@ -38,7 +38,7 @@ void do_viewskills( Character *ch, std::string arg )
 
           sprintf( buf, "%20s %3d%% ", SkillTable[sn]->Name.c_str(),
                    victim->PCData->Learned[sn]);
-          ch->Echo(buf);
+          ch->Echo("%s", buf);
 
           if ( ++col % 3 == 0 )
             ch->Echo("\r\n");

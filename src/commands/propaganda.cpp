@@ -88,7 +88,7 @@ void do_propaganda( Character *ch, std::string arg1 )
     {
       sprintf( buf, "You speak to them about the evils of %s",
                planet->GovernedBy ? planet->GovernedBy->Name.c_str() : "their current leaders" );
-      ch->Echo( buf );
+      ch->Echo( "%s", buf );
       Act( AT_ACTION, "$n speaks about the planets organization.\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n tells $N about the evils of their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
     }

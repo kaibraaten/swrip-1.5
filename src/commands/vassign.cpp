@@ -54,7 +54,7 @@ void do_vassign( Character *ch, std::string argument )
 
   AssignAreaTo( victim );
   ch->Echo("Done.\r\n");
-  victim->Echo("%s has assigned you the vnum range %d - %d.\r\n",
+  victim->Echo("%s has assigned you the vnum range %ld - %ld.\r\n",
                ch->Name.c_str(), r_lo, r_hi );
   AssignAreaTo( victim );        /* Put back by Thoric on 02/07/96 */
 

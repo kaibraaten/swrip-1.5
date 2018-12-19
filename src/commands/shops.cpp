@@ -15,7 +15,7 @@ void do_shops( Character *ch, std::string argument )
 
   for(const Shop *shop : Shops->Entities())
     {
-      ch->Echo("Keeper: %5d Buy: %3d Sell: %3d Open: %2d Close: %2d Buy: %2d %2d %2d %2d %2d\r\n",
+      ch->Echo("Keeper: %5ld Buy: %3d Sell: %3d Open: %2d Close: %2d Buy: %2d %2d %2d %2d %2d\r\n",
                shop->Keeper,       shop->ProfitBuy, shop->ProfitSell,
                shop->BusinessHours.Open,   shop->BusinessHours.Close,
                shop->BuyType[0], shop->BuyType[1],

@@ -23,7 +23,7 @@ void do_mwhere( Character *ch, std::string arg )
            &&   NiftyIsName( arg, victim->Name ) )
         {
           found = true;
-          ch->Echo("[%5d] %-28s [%5d] %s\r\n",
+          ch->Echo("[%5ld] %-28s [%5ld] %s\r\n",
                    victim->Prototype->Vnum,
                    victim->ShortDescr.c_str(),
                    victim->InRoom->Vnum,

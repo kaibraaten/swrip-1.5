@@ -9,7 +9,7 @@ void do_gold(Character * ch, std::string argument)
 
   if( !IsNpc(ch) )
     {
-      ch->Echo( ", and %d credits in the bank", ch->PCData->Bank );
+      ch->Echo( ", and %ld credits in the bank", ch->PCData->Bank );
     }
   
   ch->Echo( ".\r\n" );

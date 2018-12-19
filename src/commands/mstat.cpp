@@ -53,11 +53,11 @@ void do_mstat( Character *ch, std::string arg )
               ctime(&victim->PCData->ReleaseDate),
               victim->PCData->HelledBy.c_str());
 
-  ch->Echo("Vnum: %d   Sex: %s   Room: %d   Count: %d  Killed: %d\r\n",
-             IsNpc(victim) ? victim->Prototype->Vnum : 0,
-             victim->Sex == SEX_MALE    ? "male"   :
-             victim->Sex == SEX_FEMALE  ? "female" : "neutral",
-             victim->InRoom == NULL    ?        0 : victim->InRoom->Vnum,
+  ch->Echo("Vnum: %ld   Sex: %s   Room: %ld   Count: %d  Killed: %d\r\n",
+             IsNpc(victim) ? victim->Prototype->Vnum : INVALID_VNUM,
+             victim->Sex == SEX_MALE ? "male"   :
+             victim->Sex == SEX_FEMALE ? "female" : "neutral",
+             victim->InRoom == NULL ? INVALID_VNUM : victim->InRoom->Vnum,
              IsNpc(victim) ? victim->Prototype->Count : 1,
              IsNpc(victim) ? victim->Prototype->Killed
              : victim->PCData->MDeaths + victim->PCData->PDeaths
@@ -171,16 +171,14 @@ void do_mstat( Character *ch, std::string arg )
 	      SetCharacterColor( AT_RED, ch );
 	    }
 
-          ch->Echo(LanguageNames[x]);
-          ch->Echo(" ");
+          ch->Echo("%s ", LanguageNames[x]);
           SetCharacterColor( AT_PLAIN, ch );
         }
       else if ( IsBitSet(LanguageArray[x], victim->Speaking)
                 || (IsNpc(victim) && !victim->Speaking) )
         {
           SetCharacterColor( AT_PINK, ch );
-          ch->Echo(LanguageNames[x]);
-          ch->Echo(" ");
+          ch->Echo("%s ", LanguageNames[x]);
           SetCharacterColor( AT_PLAIN, ch );
         }
     }

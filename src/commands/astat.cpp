@@ -7,7 +7,7 @@
 
 void do_astat( Character *ch, std::string argument )
 {
-  Area *tarea = nullptr;
+  const Area *tarea = nullptr;
   bool proto = false;
   bool found= false;
   std::string filename;
@@ -84,13 +84,13 @@ void do_astat( Character *ch, std::string argument )
              tarea->Age,
              tarea->NumberOfPlayers );
  ch->Echo( "Area flags: %s\r\n", FlagString(tarea->Flags, AreaFlags).c_str() );
- ch->Echo( "low_room: %5d  hi_room: %d\r\n",
+ ch->Echo( "low_room: %5ld  hi_room: %ld\r\n",
              tarea->VnumRanges.Room.First,
 	     tarea->VnumRanges.Room.Last );
- ch->Echo( "low_obj : %5d  hi_obj : %d\r\n",
+ ch->Echo( "low_obj : %5ld  hi_obj : %ld\r\n",
              tarea->VnumRanges.Object.First,
              tarea->VnumRanges.Object.Last );
- ch->Echo( "low_mob : %5d  hi_mob : %d\r\n",
+ ch->Echo( "low_mob : %5ld  hi_mob : %ld\r\n",
              tarea->VnumRanges.Mob.First,
              tarea->VnumRanges.Mob.Last );
  ch->Echo( "soft range: %d - %d.  hard range: %d - %d.\r\n",

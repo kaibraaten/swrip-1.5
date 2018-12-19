@@ -33,12 +33,16 @@
 #ifndef _SWRIP_EDITOR_HPP_
 #define _SWRIP_EDITOR_HPP_
 
+#ifndef __GNUC__
+#define __attribute__(a)
+#endif
+
 #include "types.hpp"
 
 void StartEditing( Character *ch, const std::string &data );
 void StopEditing( Character *ch );
 void EditBuffer( Character *ch, std::string argument );
 char *CopyBuffer( Character *ch );
-void SetEditorDescription( Character *ch, const char *desc_fmt, ... );
+void SetEditorDescription( Character *ch, const char *desc_fmt, ... ) __attribute__((format(printf, 2, 3)));
 
 #endif

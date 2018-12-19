@@ -32,7 +32,7 @@ static void ShowEntry( const Planet *planet, const Character *ch )
            planet->Name.c_str(),
            planet->GovernedBy ? planet->GovernedBy->Name.c_str() : "",
            planet->Flags.test( Flag::Planet::NoCapture ) ? "(permanent)" : "" );
-  ch->Echo("&WValue: &O%-10ld&W/&O%-10d   ",
+  ch->Echo("&WValue: &O%-10ld&W/&O%-10ld   ",
            GetTaxes(planet) , planet->BaseValue);
   ch->Echo("&WPopulation: &O%-5d   &W Pop Support: &R%.1f\r\n",
            planet->Population , planet->PopularSupport );

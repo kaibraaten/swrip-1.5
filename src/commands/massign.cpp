@@ -45,7 +45,7 @@ void do_massign( Character *ch, std::string argument )
   victim->PCData->Build.VnumRanges.Mob.Last = m_hi;
   AssignAreaTo( victim );
   ch->Echo("Done.\r\n");
-  victim->Echo("%s has assigned you the monster vnum range %d - %d.\r\n",
+  victim->Echo("%s has assigned you the monster vnum range %ld - %ld.\r\n",
                ch->Name.c_str(), m_lo, m_hi );
 }
 

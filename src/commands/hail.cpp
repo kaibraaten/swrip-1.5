@@ -164,7 +164,7 @@ void do_hail( Character *ch , std::string argument )
   CharacterFromRoom( ch );
   CharacterToRoom( ch, room );
 
-  ch->Echo( "A speederbike picks you up and drives you to a safe location.\r\nYou pay the driver %d credits.\r\n", gold );
+  ch->Echo( "A speederbike picks you up and drives you to a safe location.\r\nYou pay the driver %ld credits.\r\n", gold );
 
   Act( AT_ACTION, "$n $T", ch, NULL, "arrives on a speederbike, gets off and pays the driver before it leaves.",  TO_ROOM );
 

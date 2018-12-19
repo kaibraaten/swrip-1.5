@@ -31,7 +31,7 @@ void do_bodybag( Character *ch, std::string arg )
            && (obj->Prototype->Vnum == OBJ_VNUM_CORPSE_PC ) )
         {
           found = true;
-          ch->Echo( "Bagging body: [%5d] %-28s [%5d] %s\r\n",
+          ch->Echo( "Bagging body: [%5ld] %-28s [%5ld] %s\r\n",
                     obj->Prototype->Vnum,
                     obj->ShortDescr.c_str(),
                     obj->InRoom->Vnum,

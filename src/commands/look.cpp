@@ -35,7 +35,7 @@ static void show_char_to_char_0( Character *victim, Character *ch );
 static void show_char_to_char_1( Character *victim, Character *ch );
 static void show_ships_to_char( const Room *room, const Character *ch );
 static void show_visible_affects_to_char( Character *victim, Character *ch );
-static void show_exit_to_char( Character *ch, Exit *pexit, short door );
+static void show_exit_to_char( Character *ch, const Exit *pexit, short door );
 static void show_no_arg( Character *ch, bool is_auto );
 
 static const char *get_sex( Character *ch );
@@ -49,7 +49,7 @@ void do_look( Character *ch, std::string argument )
   std::string arg1;
   std::string arg2;
   std::string arg3;
-  Exit *pexit = NULL;
+  const Exit *pexit = NULL;
   Character *victim = NULL;
   std::string pdesc;
   bool doexaprog = false;
@@ -308,7 +308,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
        && !victim->LongDescr.empty() )
     {
       strcat( buf, victim->LongDescr.c_str() );
-      ch->Echo(buf);
+      ch->Echo("%s", buf);
       show_visible_affects_to_char( victim, ch );
       return;
     }
@@ -542,7 +542,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
 
   strcat( buf, "\r\n" );
   buf[0] = CharToUppercase(buf[0]);
-  ch->Echo(buf);
+  ch->Echo("%s", buf);
   show_visible_affects_to_char( victim, ch );
 }
 
@@ -592,7 +592,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
                   found = true;
                 }
 
-              ch->Echo(WhereName[iWear]);
+              ch->Echo("%s", WhereName[iWear]);
               ch->Echo(FormatObjectToCharacter( obj, ch, true ));
               ch->Echo("\r\n");
             }
@@ -600,7 +600,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
     }
   else
     {
-      ch->Echo(WhereName[WEAR_OVER]);
+      ch->Echo("%s", WhereName[WEAR_OVER]);
       ch->Echo(FormatObjectToCharacter( obj, ch, true ));
       ch->Echo("\r\n");
     }
@@ -899,7 +899,7 @@ static void look_in( Character *ch, const std::string &what, bool doexaprog )
     }
 }
 
-static void show_exit_to_char( Character *ch, Exit *pexit, short door )
+static void show_exit_to_char( Character *ch, const Exit *pexit, short door )
 {
   if ( !pexit->Keyword.empty() )
     {
@@ -1014,7 +1014,7 @@ static void show_no_arg( Character *ch, bool is_auto )
           && ch->PCData->Flags.test( Flag::PCData::ShowRoomFlags ) )
 	{
 	  SetCharacterColor(AT_PURPLE, ch);
-          ch->Echo("{%d:%s}", ch->InRoom->Vnum, ch->InRoom->Area->Filename.c_str());
+          ch->Echo("{%ld:%s}", ch->InRoom->Vnum, ch->InRoom->Area->Filename.c_str());
 
 	  SetCharacterColor(AT_CYAN, ch);
           ch->Echo("[%s]", FlagString(ch->InRoom->Flags, RoomFlags ).c_str() );

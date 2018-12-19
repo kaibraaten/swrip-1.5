@@ -32,7 +32,7 @@ void do_examine( Character *ch, std::string arg )
 
           if (numberOfPosts > 0)
             {
-              ch->Echo( "There are about %d notes posted here.Type 'note list' to list them.\r\n",
+              ch->Echo( "There are %lu notes posted here.Type 'note list' to list them.\r\n",
                         numberOfPosts );
             }
           else

@@ -31,7 +31,7 @@ void do_elite_guard( Character *ch, std::string arg )
 
       if ( ch->Gold < GetAbilityLevel(ch, LEADERSHIP_ABILITY) * 200 )
         {
-          ch->Echo( "&RYou don't have enough credits.\r\n", ch );
+          ch->Echo( "&RYou don't have enough credits.\r\n" );
           return;
         }
 

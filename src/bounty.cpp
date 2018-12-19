@@ -119,7 +119,7 @@ void ClaimBounty( Character *ch, const Character *victim )
       else if ( !IsNpc(ch) )
         {
           SetBit(ch->Flags, PLR_KILLER );
-          ch->Echo( "You are now wanted for the murder of %s.\r\n", victim->Name );
+          ch->Echo( "You are now wanted for the murder of %s.\r\n", victim->Name.c_str() );
         }
 
       return;

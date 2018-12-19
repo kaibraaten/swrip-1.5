@@ -323,7 +323,7 @@ void ShowShuttlesToCharacter( const std::list<Shuttle*> &shuttles, Character *ch
   for(const Shuttle *shuttle : shuttles)
     {
       SetCharacterColor( AT_SHIP, ch );
-      ch->Echo( "%-35s", shuttle->Name );
+      ch->Echo( "%-35s", shuttle->Name.c_str() );
 
       if(++column % NUMBER_OF_COLUMNS == 0)
         {

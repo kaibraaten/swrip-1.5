@@ -41,7 +41,7 @@ void do_ostat( Character *ch, std::string arg )
   if ( !pdesc.empty() )
     ch->Echo(pdesc);
 
-  ch->Echo("Vnum: %d.  Type: %s.  Count: %d  Gcount: %d\r\n",
+  ch->Echo("Vnum: %ld.  Type: %s.  Count: %d  Gcount: %d\r\n",
            obj->Prototype->Vnum, GetItemTypeName( obj ), obj->Prototype->Count,
            obj->Count );
 
@@ -64,7 +64,7 @@ void do_ostat( Character *ch, std::string arg )
   ch->Echo("Cost: %d.  Rent: %d.  Timer: %d.  Level: %d.\r\n",
              obj->Cost, obj->Prototype->Rent, obj->Timer, obj->Level );
 
-  ch->Echo("In room: %d.  In object: %s.  Carried by: %s.  Wear_loc: %d.\r\n",
+  ch->Echo("In room: %ld.  In object: %s.  Carried by: %s.  Wear_loc: %d.\r\n",
            obj->InRoom == NULL ? 0 : obj->InRoom->Vnum,
            obj->InObject == NULL ? "(none)" : obj->InObject->ShortDescr.c_str(),
            obj->CarriedBy == NULL ? "(none)" : obj->CarriedBy->Name.c_str(),

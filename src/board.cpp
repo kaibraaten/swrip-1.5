@@ -872,7 +872,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
       if ( text.empty() )
         text = "The disk is blank.\r\n";
 
-      ch->Echo("%s", text);
+      ch->Echo("%s", text.c_str());
       return;
     }
   else if ( !StrCmp( arg, "post" ) )
@@ -1129,7 +1129,7 @@ void CountMailMessages(const Character *ch)
 
   if ( cnt != 0)
     {
-      ch->Echo("You have %d mail messages waiting.\r\n", cnt);
+      ch->Echo("You have %lu mail messages waiting.\r\n", cnt);
     }
 }
 

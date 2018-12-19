@@ -1,3 +1,4 @@
+#include <memory>
 #include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
@@ -42,8 +43,9 @@ void do_showstatistic( Character *ch, std::string argument )
       return;
     }
 
-  Descriptor *desc = new NullDescriptor();
-  Character *raceCh = new Character(new PCData(), desc);
+  std::shared_ptr<Descriptor> desc = std::make_shared<NullDescriptor>();
+  std::shared_ptr<Character> raceCh = std::make_shared<Character>(new PCData(), desc.get());
+  
   raceCh->TopLevel = 1;
   raceCh->InRoom = GetRoom( ROOM_VNUM_LIMBO );
   raceCh->PermStats.Str = 20;
@@ -97,20 +99,20 @@ void do_showstatistic( Character *ch, std::string argument )
                 continue;
 
               if( iC2 == SMUGGLING_ABILITY )
-                sprintf( buf2, "%-3d+ &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );
+                sprintf( buf2, "%-3d+ &B| &C", GetMaxAbilityLevel( raceCh.get(), iC2 ) );
               else
-                sprintf( buf2, "%-3d &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );
+                sprintf( buf2, "%-3d &B| &C", GetMaxAbilityLevel( raceCh.get(), iC2 ) );
 
               strcat( buf, buf2 );
             }
 
-          ch->Echo(buf);
+          ch->Echo("%s", buf);
         }
     }
   else
     {
       sprintf( buf, "&R%s Statistics\r\n", Capitalize(AbilityName[pclass]).c_str());
-      ch->Echo(buf);
+      ch->Echo("%s", buf);
 
       ch->Echo("                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );
 
@@ -133,17 +135,14 @@ void do_showstatistic( Character *ch, std::string argument )
           for( iC2 = 0; iC2 < FORCE_ABILITY; iC2++ )
             {
               if( iC2 == SMUGGLING_ABILITY )
-                sprintf( buf2, "%-3d+ &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );
+                sprintf( buf2, "%-3d+ &B| &C", GetMaxAbilityLevel( raceCh.get(), iC2 ) );
               else
-                sprintf( buf2, "%-3d &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );
+                sprintf( buf2, "%-3d &B| &C", GetMaxAbilityLevel( raceCh.get(), iC2 ) );
 
               strcat( buf, buf2 );
             }
 
-          ch->Echo(buf);
+          ch->Echo("%s", buf);
         }
     }
-
-  delete raceCh;
-  delete desc;
 }

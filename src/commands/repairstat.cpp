@@ -31,7 +31,7 @@ void do_repairstat( Character *ch, std::string argument )
 
   repair = mob->RepairShop;
 
-  ch->Echo("Keeper: %d  %s\r\n", repair->Keeper, mob->ShortDescr.c_str() );
+  ch->Echo("Keeper: %ld  %s\r\n", repair->Keeper, mob->ShortDescr.c_str() );
   ch->Echo("fix0 [%s]  fix1 [%s]  fix2 [%s]\r\n",
              ObjectTypes[repair->FixType[0]],
              ObjectTypes[repair->FixType[1]],

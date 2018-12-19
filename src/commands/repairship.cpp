@@ -153,7 +153,7 @@ void do_repairship(Character *ch, std::string argument )
 	}
 
       ResetTurret( turret );
-      ch->Echo("&GLaser Turret %d repaired.\r\n", turret_number );
+      ch->Echo("&GLaser Turret %ld repaired.\r\n", turret_number );
     }
 
   Act( AT_PLAIN, "$n finishes the repairs.", ch,

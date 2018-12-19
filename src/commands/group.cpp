@@ -12,7 +12,7 @@ void do_group( Character *ch, std::string arg )
       Character *gch = NULL;
 
       SetCharacterColor( AT_GREEN, ch );
-      ch->Echo( "%s's group:\r\n", PERS(ch, ch) );
+      ch->Echo( "%s's group:\r\n", PERS(ch, ch).c_str() );
 
       for ( gch = FirstCharacter; gch; gch = gch->Next )
         {

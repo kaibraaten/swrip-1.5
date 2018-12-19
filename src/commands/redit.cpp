@@ -129,7 +129,7 @@ void do_redit( Character *ch, std::string argument )
       ch->SubState = SUB_ROOM_DESC;
       ch->dest_buf = location;
       StartEditing( ch, location->Description );
-      SetEditorDescription( ch, "Room %d (%s) description",
+      SetEditorDescription( ch, "Room %ld (%s) description",
                             location->Vnum, location->Name.c_str() );
       return;
     }
@@ -168,7 +168,7 @@ void do_redit( Character *ch, std::string argument )
       ch->SubState = SUB_ROOM_EXTRA;
       ch->dest_buf = ed;
       StartEditing( ch, ed->Description );
-      SetEditorDescription( ch, "Room %d (%s) extra description: %s",
+      SetEditorDescription( ch, "Room %ld (%s) extra description: %s",
                             location->Vnum, location->Name.c_str(), argument.c_str() );
       return;
     }
@@ -446,7 +446,7 @@ void do_redit( Character *ch, std::string argument )
             }
 
           strcat( buf, "]\r\n" );
-          ch->Echo(buf);
+          ch->Echo("%s", buf);
           return;
         }
 

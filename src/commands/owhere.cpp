@@ -72,7 +72,7 @@ void do_owhere( Character *ch, std::string argument )
             }
 
           sprintf(buf+strlen(buf), "&R&w\r\n");
-          ch->Echo(buf);
+          ch->Echo("%s", buf);
         }
       else if ( outer_obj->InRoom )
         {
@@ -90,7 +90,7 @@ void do_owhere( Character *ch, std::string argument )
             }
 
           sprintf(buf+strlen(buf), "&R&w\r\n");
-          ch->Echo(buf);
+          ch->Echo("%s", buf);
         }
     }
 

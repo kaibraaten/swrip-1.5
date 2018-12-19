@@ -132,7 +132,7 @@ void do_steal( Character *ch, std::string argument )
 	  xp = umin( amount*10 , ( GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY ) + 1 ) - GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY))  ) / 35  );
 	  xp = umin( xp , ComputeXP( ch, victim ) );
 	  GainXP( ch, SMUGGLING_ABILITY, xp );
-          ch->Echo("&WYou gain %ld smuggling experience!\r\n", xp );
+          ch->Echo("&WYou gain %d smuggling experience!\r\n", xp );
 	}
 
       return;
@@ -195,7 +195,7 @@ void do_steal( Character *ch, std::string argument )
       xp = umin( obj->Cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );
       xp = umin( xp , ComputeXP( ch, victim ) );
       GainXP( ch, SMUGGLING_ABILITY, xp );
-      ch->Echo("&WYou gain %ld smuggling experience!\r\n", xp );
+      ch->Echo("&WYou gain %d smuggling experience!\r\n", xp );
     }
 
   SeparateOneObjectFromGroup( obj );

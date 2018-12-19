@@ -77,6 +77,6 @@ void do_aassign( Character *ch, std::string argument )
     }
   
   ch->PCData->Build.Area = tarea;
-  ch->Echo( "Assigning you: %s\r\n", tarea->Name );
+  ch->Echo( "Assigning you: %s\r\n", tarea->Name.c_str() );
 }
 

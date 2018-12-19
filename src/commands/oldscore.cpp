@@ -51,13 +51,13 @@ void do_oldscore( Character *ch, std::string argument )
 
   ch->Echo("Wimpy set to %d hit points.\r\n", ch->Wimpy );
 
-  if ( !IsNpc(ch) && ch->PCData->Condition[COND_DRUNK]   > 10 )
+  if ( !IsNpc(ch) && ch->PCData->Condition[COND_DRUNK] > 10 )
     ch->Echo("You are drunk.\r\n");
 
   if ( !IsNpc(ch) && ch->PCData->Condition[COND_THIRST] ==  0 )
     ch->Echo("You are thirsty.\r\n");
 
-  if ( !IsNpc(ch) && ch->PCData->Condition[COND_FULL]   ==  0 )
+  if ( !IsNpc(ch) && ch->PCData->Condition[COND_FULL] ==  0 )
     ch->Echo("You are hungry.\r\n");
 
   switch( ch->MentalState / 10 )
@@ -291,15 +291,18 @@ void do_oldscore( Character *ch, std::string argument )
                IsBitSet( ch->Flags, PLR_WIZINVIS ) ? "ON" : "OFF" );
 
       if ( ch->PCData->Build.VnumRanges.Room.First && ch->PCData->Build.VnumRanges.Room.Last )
-        ch->Echo("Room Range: %d - %d\r\n", ch->PCData->Build.VnumRanges.Room.First,
+        ch->Echo("Room Range: %ld - %ld\r\n",
+                 ch->PCData->Build.VnumRanges.Room.First,
                  ch->PCData->Build.VnumRanges.Room.Last       );
 
       if ( ch->PCData->Build.VnumRanges.Object.First && ch->PCData->Build.VnumRanges.Object.Last )
-        ch->Echo("Obj Range : %d - %d\r\n", ch->PCData->Build.VnumRanges.Object.First,
+        ch->Echo("Obj Range : %ld - %ld\r\n",
+                 ch->PCData->Build.VnumRanges.Object.First,
                  ch->PCData->Build.VnumRanges.Object.Last       );
 
       if ( ch->PCData->Build.VnumRanges.Mob.First && ch->PCData->Build.VnumRanges.Mob.Last )
-        ch->Echo("Mob Range : %d - %d\r\n", ch->PCData->Build.VnumRanges.Mob.First,
+        ch->Echo("Mob Range : %ld - %ld\r\n",
+                 ch->PCData->Build.VnumRanges.Mob.First,
                  ch->PCData->Build.VnumRanges.Mob.Last       );
     }
 }

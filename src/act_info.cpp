@@ -397,7 +397,7 @@ void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
 	  ch->Echo( "     " );
 	}
 
-      ch->Echo( prgpstrShow[iShow] );
+      ch->Echo( "%s", prgpstrShow[iShow] );
 
       if ( prgnShow[iShow] != 1 )
 	{

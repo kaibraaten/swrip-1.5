@@ -227,7 +227,7 @@ bool CharacterFallIfNoFloor( Character *ch, int fall )
 /*
  * create a 'virtual' room                                      -Thoric
  */
-Room *GenerateExit( Room *in_room, Exit **pexit )
+Room *GenerateExit( Room *in_room, const Exit **pexit )
 {
   Exit *xit = NULL, *bxit = NULL;
   Exit *orig_exit = (Exit *) *pexit;
@@ -327,7 +327,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
   return room;
 }
 
-ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
+ch_ret MoveCharacter( Character *ch, const Exit *pexit, int fall )
 {
   Room *in_room = nullptr;
   Room *to_room = nullptr;

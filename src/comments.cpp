@@ -236,8 +236,7 @@ void do_comment( Character *ch, std::string argument )
                         pnote->Date.c_str(),
                         pnote->ToList.c_str());
 
-              ch->Echo( pnote->Text.c_str() );
-              /* Act( AT_ACTION, "$n reads a note.", ch, NULL, NULL, TO_ROOM ); */
+              ch->Echo( pnote->Text );
               return;
             }
         }

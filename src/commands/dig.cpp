@@ -63,7 +63,7 @@ void do_dig( Character *ch, std::string arg )
               return;
 
             case SECT_AIR:
-              ch->Echo( "What? In the air?!\r\n", ch );
+              ch->Echo("What? In the air?!\r\n");
               return;
 
 	    default:

@@ -33,7 +33,7 @@ void do_boards( Character *ch, std::string argument )
           boardType = "*** Invalid ***";
         }
       
-      ch->Echo( "%-16s Vnum: %5d Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %d Type: %s\r\n",
+      ch->Echo( "%-16s Vnum: %5ld Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %lu Type: %s\r\n",
                 board->Name.c_str(), board->BoardObject,
                 board->MinReadLevel,    board->MinPostLevel,
                 board->MinRemoveLevel, board->MaxPosts, board->Notes().size(),

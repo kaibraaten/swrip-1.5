@@ -38,7 +38,7 @@ void do_seduce( Character *ch, std::string arg )
     {
       ch->Echo("You failed.\r\n");
       sprintf(buf, "%s failed to seduce you.", ch->Name.c_str());
-      victim->Echo(buf);
+      victim->Echo("%s", buf);
       global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
       return;
     }
