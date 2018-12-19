@@ -223,9 +223,8 @@ int SwripMain(int argc, char *argv[])
   /*
    * Run the game.
    */
-  sprintf(log_buf,"PID: %d",getpid());
   bootup = true;
-  Log->Info(log_buf);
+  Log->Info("PID: %d", getpid());
 
   Log->Info( "Starting IMC2" );
   ImcStartup( false, imcsocket, fCopyOver );
@@ -240,8 +239,7 @@ int SwripMain(int argc, char *argv[])
       control  = InitializeSocket( SysData.Port   );
     }
 
-  sprintf( log_buf, "SWRiP 1.5 ready on port %d.", SysData.Port );
-  Log->Info( log_buf );
+  Log->Info("SWRiP 1.5 ready on port %d.", SysData.Port);
   bootup = false;
   GameLoop();
   closesocket( control );
@@ -920,7 +918,7 @@ static std::string ActString(const std::string &format, Character *to, Character
       if ( !arg2 && *str >= 'A' && *str <= 'Z' )
         {
           Log->Bug( "%s: missing arg2 for code %c:", __FUNCTION__, *str );
-          Log->Bug( "%s", format );
+          Log->Bug( "%s", format.c_str() );
           i = " <@@@> ";
         }
       else

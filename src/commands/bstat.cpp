@@ -33,7 +33,7 @@ void do_bstat( Character *ch, std::string arg )
         }
       else
         {
-          Log->Bug("%s: Board %s/%d has invalid type %d",
+          Log->Bug("%s: Board %s/%ld has invalid type %d",
                    __FUNCTION__, board->Name.c_str(), board->BoardObject, board->Type);
           boardType = "*** Invalid ***";
         }

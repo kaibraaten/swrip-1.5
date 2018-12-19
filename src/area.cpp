@@ -514,8 +514,8 @@ static void LoadMobiles( Area *tarea, FILE *fp )
 
       if ( letter != 'S' && letter != 'C' && letter != 'Z' )
         {
-          Log->Bug( "%s: vnum %d: letter '%c' not Z, S or C.", __FUNCTION__, vnum,
-               letter );
+          Log->Bug( "%s: vnum %ld: letter '%c' not Z, S or C.", __FUNCTION__, vnum,
+                    letter );
           ShutdownMud( "bad mob data" );
           exit( 1 );
         }
@@ -689,8 +689,6 @@ static void LoadObjects( Area *tarea, FILE *fp )
       pObjIndex->Description  = ReadStringToTilde( fp, Log, fBootDb );
       pObjIndex->ActionDescription  = ReadStringToTilde( fp, Log, fBootDb );
 
-      /* Commented out by Narn, Apr/96 to allow item short descs like
-         Bonecrusher and Oblivion */
       pObjIndex->Description[0] = CharToUppercase(pObjIndex->Description[0]);
 
       ln = ReadLine( fp, Log, fBootDb );
@@ -988,8 +986,8 @@ static void LoadRooms( Area *tarea, FILE *fp )
 
               if ( door < DIR_NORTH || door > DIR_SOMEWHERE )
                 {
-                  Log->Bug( "%s: vnum %d has bad door number %d.", __FUNCTION__, vnum,
-                       door );
+                  Log->Bug( "%s: vnum %ld has bad door number %d.", __FUNCTION__, vnum,
+                            door );
 
                   if ( fBootDb )
                     exit( 1 );
@@ -1048,8 +1046,8 @@ static void LoadRooms( Area *tarea, FILE *fp )
             }
           else
             {
-              Log->Bug( "%s: vnum %d has flag '%c' not 'DES'.", __FUNCTION__, vnum,
-                   letter );
+              Log->Bug( "%s: vnum %ld has flag '%c' not 'DES'.", __FUNCTION__, vnum,
+                        letter );
               ShutdownMud( "Room flag not DES" );
               exit( 1 );
             }
@@ -1156,7 +1154,7 @@ static void LoadSpecials( Area *tarea, FILE *fp )
 
               if ( pMobIndex->spec_fun == 0 )
                 {
-                  Log->Bug( "%s: 'M': vnum %d.", __FUNCTION__, pMobIndex->Vnum );
+                  Log->Bug( "%s: 'M': vnum %ld.", __FUNCTION__, pMobIndex->Vnum );
                   exit( 1 );
                 }
             }
@@ -1264,7 +1262,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
 
   if ( ( letter = ReadChar( fp, Log, fBootDb ) ) != '>' )
     {
-      Log->Bug( "%s: vnum %d MUDPROG char", __FUNCTION__, pMobIndex->Vnum );
+      Log->Bug( "%s: vnum %ld MUDPROG char", __FUNCTION__, pMobIndex->Vnum );
       exit( 1 );
     }
 
@@ -1278,7 +1276,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
       switch ( mprg->type )
         {
         case ERROR_PROG:
-	  Log->Bug( "%s: vnum %d MUDPROG type.", __FUNCTION__, pMobIndex->Vnum );
+	  Log->Bug( "%s: vnum %ld MUDPROG type.", __FUNCTION__, pMobIndex->Vnum );
           exit( 1 );
           break;
 
@@ -1302,7 +1300,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
               break;
 
             default:
-              Log->Bug( "%s: vnum %d bad MUDPROG.", __FUNCTION__, pMobIndex->Vnum );
+              Log->Bug( "%s: vnum %ld bad MUDPROG.", __FUNCTION__, pMobIndex->Vnum );
               exit( 1 );
               break;
             }
@@ -1322,7 +1320,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
 
   if ( ( letter = ReadChar( fp, Log, fBootDb ) ) != '>' )
     {
-      Log->Bug( "%s: vnum %d OBJPROG char", __FUNCTION__, pObjIndex->Vnum );
+      Log->Bug( "%s: vnum %ld OBJPROG char", __FUNCTION__, pObjIndex->Vnum );
       exit( 1 );
     }
 
@@ -1336,7 +1334,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
       switch ( mprg->type )
         {
         case ERROR_PROG:
-          Log->Bug( "%s: vnum %d OBJPROG type.", __FUNCTION__, pObjIndex->Vnum );
+          Log->Bug( "%s: vnum %ld OBJPROG type.", __FUNCTION__, pObjIndex->Vnum );
           exit( 1 );
           break;
 
@@ -1360,7 +1358,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
               break;
 
             default:
-              Log->Bug( "%s: vnum %d bad OBJPROG.", __FUNCTION__, pObjIndex->Vnum );
+              Log->Bug( "%s: vnum %ld bad OBJPROG.", __FUNCTION__, pObjIndex->Vnum );
               exit( 1 );
               break;
             }
@@ -1376,12 +1374,12 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
 
 static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
 {
-  char        letter = 0;
-  bool        done = false;
+  char letter = 0;
+  bool done = false;
 
   if ( ( letter = ReadChar( fp, Log, fBootDb ) ) != '>' )
     {
-      Log->Bug( "%s: vnum %d ROOMPROG char", __FUNCTION__, pRoomIndex->Vnum );
+      Log->Bug( "%s: vnum %ld ROOMPROG char", __FUNCTION__, pRoomIndex->Vnum );
       exit( 1 );
     }
 
@@ -1395,7 +1393,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
       switch ( mprg->type )
         {
         case ERROR_PROG:
-          Log->Bug( "%s: vnum %d ROOMPROG type.", __FUNCTION__, pRoomIndex->Vnum );
+          Log->Bug( "%s: vnum %ld ROOMPROG type.", __FUNCTION__, pRoomIndex->Vnum );
           exit( 1 );
           break;
 
@@ -1419,7 +1417,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
               break;
 
             default:
-              Log->Bug( "%s: vnum %d bad ROOMPROG.", __FUNCTION__, pRoomIndex->Vnum );
+              Log->Bug( "%s: vnum %ld bad ROOMPROG.", __FUNCTION__, pRoomIndex->Vnum );
               exit( 1 );
               break;
             }
@@ -1582,7 +1580,7 @@ void CloseArea( Area *pArea )
 
           if ( !rid->Characters().empty() )
             {
-              Log->Bug( "CloseArea: room with people #%d", rid->Vnum );
+              Log->Bug( "CloseArea: room with people #%ld", rid->Vnum );
 
               std::list<Character*> copyOfCharacterList(rid->Characters());
 
@@ -1600,7 +1598,7 @@ void CloseArea( Area *pArea )
 
           if ( !rid->Objects().empty() )
             {
-              Log->Bug( "CloseArea: room with contents #%d", rid->Vnum );
+              Log->Bug( "CloseArea: room with contents #%ld", rid->Vnum );
 
               std::list<Object*> objectsInRoom(rid->Objects());
 
@@ -1650,7 +1648,7 @@ void CloseArea( Area *pArea )
                   break;
 
               if ( !trid )
-                Log->Bug( "Close_area: rid not in hash list %d", rid->Vnum );
+                Log->Bug( "Close_area: room not in hash list %ld", rid->Vnum );
               else
                 trid->Next = rid->Next;
             }
@@ -1701,7 +1699,7 @@ void CloseArea( Area *pArea )
                   break;
 
               if ( !tmid )
-                Log->Bug( "Close_area: mid not in hash list %s", mid->Vnum );
+                Log->Bug( "Close_area: mid not in hash list %ld", mid->Vnum );
               else
                 tmid->Next = mid->Next;
             }
@@ -1754,8 +1752,9 @@ void CloseArea( Area *pArea )
               for ( toid = ObjectIndexHash[icnt]; toid; toid = toid->Next )
                 if ( toid->Next == oid )
                   break;
+              
               if ( !toid )
-                Log->Bug( "Close_area: oid not in hash list %s", oid->Vnum );
+                Log->Bug( "Close_area: oid not in hash list %ld", oid->Vnum );
               else
                 toid->Next = oid->Next;
             }

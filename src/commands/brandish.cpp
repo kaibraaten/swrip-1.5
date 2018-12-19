@@ -86,7 +86,7 @@ void do_brandish( Character *ch, std::string argument )
 
           if ( retcode == rCHAR_DIED || retcode == rBOTH_DIED )
             {
-              Log->Bug( "do_brandish: char died", 0 );
+              Log->Bug( "do_brandish: char died" );
               return;
             }
         }

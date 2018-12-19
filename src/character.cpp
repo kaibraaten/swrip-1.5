@@ -246,7 +246,7 @@ void SetAbilityXP( Character *ch, short ability, long xp )
 
   if( xp < 0 )
     {
-      Log->Bug( "%s: negative value %d invalid", __FUNCTION__, xp );
+      Log->Bug( "%s: negative value %ld invalid", __FUNCTION__, xp );
       return;
     }
 
@@ -544,7 +544,7 @@ void EquipCharacter( Character *ch, Object *obj, WearLocation iWear )
   if ( otmp != nullptr
        &&  (otmp->Prototype->Layers == 0 || obj->Prototype->Layers == 0) )
     {
-      Log->Bug( "%s: %s %s (%d) already has %s (%ld) equipped on wear location %d.",
+      Log->Bug( "%s: %s %s (%ld) already has %s (%ld) equipped on wear location %d.",
                 __FUNCTION__,
                 IsNpc(ch) ? "Mob" : "Player",
                 ch->Name.c_str(), IsNpc(ch) ? ch->Prototype->Vnum : INVALID_VNUM,
@@ -1509,7 +1509,7 @@ void SetCharacterTitle( Character *ch, const std::string &title )
 {
   if ( IsNpc(ch) )
     {
-      Log->Bug( "Set_title: NPC.", 0 );
+      Log->Bug( "Set_title: NPC." );
       return;
     }
 

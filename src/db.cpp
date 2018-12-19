@@ -985,7 +985,7 @@ ProtoMobile *GetProtoMobile( vnum_t vnum )
 
   if ( fBootDb )
     {
-      Log->Bug( "%s: bad vnum %d.", __FUNCTION__, vnum );
+      Log->Bug( "%s: bad vnum %ld.", __FUNCTION__, vnum );
     }
 
   return NULL;
@@ -998,17 +998,21 @@ ProtoMobile *GetProtoMobile( vnum_t vnum )
 ProtoObject *GetProtoObject( vnum_t vnum )
 {
   assert(vnum > 0);
-  ProtoObject *pObjIndex;
 
-  for ( pObjIndex  = ObjectIndexHash[vnum % MAX_KEY_HASH];
-        pObjIndex;
-        pObjIndex  = pObjIndex->Next )
-    if ( pObjIndex->Vnum == vnum )
-      return pObjIndex;
-
+  for ( ProtoObject *pObjIndex = ObjectIndexHash[vnum % MAX_KEY_HASH];
+        pObjIndex; pObjIndex = pObjIndex->Next )
+    {
+      if ( pObjIndex->Vnum == vnum )
+        {
+          return pObjIndex;
+        }
+    }
+  
   if ( fBootDb )
-    Log->Bug( "%s: bad vnum %d.", __FUNCTION__, vnum );
-
+    {
+      Log->Bug( "%s: bad vnum %ld.", __FUNCTION__, vnum );
+    }
+  
   return NULL;
 }
 
@@ -1028,7 +1032,7 @@ Room *GetRoom( vnum_t vnum )
       return pRoomIndex;
 
   if ( fBootDb )
-    Log->Bug( "%s: bad vnum %d.", __FUNCTION__, vnum );
+    Log->Bug( "%s: bad vnum %ld.", __FUNCTION__, vnum );
 
   return NULL;
 }
@@ -1566,7 +1570,7 @@ static void LoadBuildList( void )
               continue;
             }
 
-          Log->Info( buf );
+          Log->Info("%s", buf);
           badfile = false;
           rlow=rhi=olow=ohi=mlow=mhi=0;
 

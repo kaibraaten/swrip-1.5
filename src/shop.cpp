@@ -410,7 +410,7 @@ Character *ReadVendor( FILE *fp )
 		}
             }
 
-          Log->Bug("Fread_mobile: No index data for vnum %d", vnum );
+          Log->Bug("Fread_mobile: No index data for vnum %ld", vnum );
           return NULL;
         }
     }

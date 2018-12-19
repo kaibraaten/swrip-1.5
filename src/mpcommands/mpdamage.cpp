@@ -106,30 +106,23 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
     {
       if ( IS_FIRE(dt) )
         dam = ModifyDamageBasedOnResistance(victim, dam, RIS_FIRE);
-      else
-        if ( IS_COLD(dt) )
-          dam = ModifyDamageBasedOnResistance(victim, dam, RIS_COLD);
-        else
-          if ( IS_ACID(dt) )
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ACID);
-          else
-            if ( IS_ELECTRICITY(dt) )
-              dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ELECTRICITY);
-            else
-              if ( IS_ENERGY(dt) )
-                dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ENERGY);
-              else
-                if ( dt == gsn_poison )
-                  dam = ModifyDamageBasedOnResistance(victim, dam, RIS_POISON);
-                else
-                  if ( dt == (TYPE_HIT + 7) || dt == (TYPE_HIT + 8) )
-                    dam = ModifyDamageBasedOnResistance(victim, dam, RIS_BLUNT);
-                  else
-                    if ( dt == (TYPE_HIT + 2) || dt == (TYPE_HIT + 11) )
-                      dam = ModifyDamageBasedOnResistance(victim, dam, RIS_PIERCE);
-                    else
-                      if ( dt == (TYPE_HIT + 1) || dt == (TYPE_HIT + 3) )
-                        dam = ModifyDamageBasedOnResistance(victim, dam, RIS_SLASH);
+      else if ( IS_COLD(dt) )
+        dam = ModifyDamageBasedOnResistance(victim, dam, RIS_COLD);
+      else if ( IS_ACID(dt) )
+        dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ACID);
+      else if ( IS_ELECTRICITY(dt) )
+        dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ELECTRICITY);
+      else if ( IS_ENERGY(dt) )
+        dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ENERGY);
+      else if ( dt == gsn_poison )
+        dam = ModifyDamageBasedOnResistance(victim, dam, RIS_POISON);
+      else if ( dt == (TYPE_HIT + 7) || dt == (TYPE_HIT + 8) )
+        dam = ModifyDamageBasedOnResistance(victim, dam, RIS_BLUNT);
+      else if ( dt == (TYPE_HIT + 2) || dt == (TYPE_HIT + 11) )
+        dam = ModifyDamageBasedOnResistance(victim, dam, RIS_PIERCE);
+      else if ( dt == (TYPE_HIT + 1) || dt == (TYPE_HIT + 3) )
+        dam = ModifyDamageBasedOnResistance(victim, dam, RIS_SLASH);
+
       if ( dam < 0 )
         dam = 0;
     }
@@ -147,8 +140,6 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
 
       if ( dam < 0 )
         dam = 0;
-
-      /* dam_message( ch, victim, dam, dt ); */
     }
 
   /*
@@ -243,7 +234,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
                    victim->Name.c_str(),
                    (IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str()),
 		   victim->InRoom->Vnum );
-          Log->Info( log_buf );
+          Log->Info( "%s", log_buf );
           ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
         }
       

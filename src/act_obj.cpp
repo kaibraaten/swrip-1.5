@@ -151,7 +151,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
 
   if (fall_count > 30)
     {
-      Log->Bug( "object falling in loop more than 30 times", 0 );
+      Log->Bug( "object falling in loop more than 30 times" );
       ExtractObject(obj);
       fall_count = 0;
       return;
@@ -298,7 +298,7 @@ std::string GetObjectShortDescription( const Object *obj )
 {
   if ( obj->Count > 1 )
     {
-      return FormatString( "%s (%d)", obj->ShortDescr, obj->Count );
+      return FormatString( "%s (%d)", obj->ShortDescr.c_str(), obj->Count );
     }
 
   return obj->ShortDescr;

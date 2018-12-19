@@ -1967,7 +1967,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
                    victim->Name.c_str(),
                    (IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str()),
                    victim->InRoom->Vnum );
-          Log->Info( log_buf );
+          Log->Info("%s", log_buf);
           ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
 
         }

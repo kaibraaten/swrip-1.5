@@ -219,7 +219,7 @@ void SaveClone( Character *ch )
 
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
     {
-      Log->Bug( "Save_char_obj: fopen", 0 );
+      Log->Bug( "Save_char_obj: fopen" );
       perror( strsave );
     }
   else
@@ -1001,7 +1001,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
             {
               if ( !fNest || !fVnum )
                 {
-                  Log->Bug( "Fread_obj: incomplete object.", 0 );
+                  Log->Bug( "Fread_obj: incomplete object." );
                   delete obj;
                   return;
                 }
@@ -1047,7 +1047,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
                     {
                       if ( !room )
                         {
-                          Log->Bug( "Fread_obj: Corpse without room", 0);
+                          Log->Bug("Fread_obj: Corpse without room");
                           room = GetRoom(ROOM_VNUM_LIMBO);
                         }
 
@@ -1197,7 +1197,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
               if ( ( obj->Prototype = GetProtoObject( vnum ) ) == NULL )
                 {
                   fVnum = false;
-                  Log->Bug( "Fread_obj: bad vnum %d.", vnum );
+                  Log->Bug( "Fread_obj: bad vnum %ld.", vnum );
                 }
               else
                 {
@@ -1225,7 +1225,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
       if ( !fMatch )
         {
           Log->Bug( "Fread_obj: no match." );
-          Log->Bug( word );
+          Log->Bug( "%s", word );
           ReadToEndOfLine( fp,Log, fBootDb );
 
           while( !obj->ExtraDescriptions().empty() )
@@ -1449,8 +1449,8 @@ void LoadStorerooms( void )
 
               if ( letter != '#' )
                 {
-                  Log->Bug( "LoadStorerooms: # not found.", 0 );
-                  Log->Bug( de->d_name, 0 );
+                  Log->Bug( "LoadStorerooms: # not found." );
+                  Log->Bug( "%s", de->d_name );
                   break;
                 }
 
@@ -1466,8 +1466,8 @@ void LoadStorerooms( void )
 		}
 	      else
 		{
-		  Log->Bug( "LoadStorerooms: bad section.", 0 );
-		  Log->Bug( de->d_name, 0 );
+		  Log->Bug( "LoadStorerooms: bad section." );
+		  Log->Bug( "%s", de->d_name );
 		  break;
 		}
             }
@@ -1503,13 +1503,13 @@ void SaveStoreroom( const Room *room )
   char strsave[MAX_INPUT_LENGTH];
   FILE *fp = NULL;
 
-  sprintf( strsave, "%s%ld",STOREROOM_DIR, room->Vnum );
+  sprintf( strsave, "%s%ld", STOREROOM_DIR, room->Vnum );
 
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
     {
       perror( strsave );
-      Log->Bug( "Save_storeroom: fopen", 0 );
-      Log->Bug( strsave, 0 );
+      Log->Bug( "Save_storeroom: fopen" );
+      Log->Bug( "%s", strsave );
 
     }
   else
@@ -1567,7 +1567,7 @@ void LoadVendors( void )
 
               if ( letter != '#' )
                 {
-                  Log->Bug( "Load_vendor: # not found.", 0 );
+                  Log->Bug( "Load_vendor: # not found." );
                   break;
                 }
 

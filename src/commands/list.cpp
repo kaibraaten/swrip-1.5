@@ -13,7 +13,7 @@ void do_list( Character *ch, std::string argument )
 
       if ( !pRoomIndexNext )
         {
-          Log->Bug( "Do_list: bad pet shop at vnum %d.", ch->InRoom->Vnum );
+          Log->Bug( "Do_list: bad pet shop at vnum %ld.", ch->InRoom->Vnum );
           ch->Echo("You can't do that here.\r\n");
           return;
         }

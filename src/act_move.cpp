@@ -208,7 +208,7 @@ bool CharacterFallIfNoFloor( Character *ch, int fall )
     {
       if ( fall > 80 )
         {
-          Log->Bug( "Falling (in a loop?) more than 80 rooms: vnum %d", ch->InRoom->Vnum );
+          Log->Bug( "Falling (in a loop?) more than 80 rooms: vnum %ld", ch->InRoom->Vnum );
           CharacterFromRoom( ch );
           CharacterToRoom( ch, GetRoom( WhereHome(ch) ) );
           fall = 0;
@@ -1169,7 +1169,7 @@ void Teleport( Character *ch, vnum_t room, int flags )
   
   if ( !pRoomIndex )
     {
-      Log->Bug( "%s: bad room vnum %d", __FUNCTION__, room );
+      Log->Bug( "%s: bad room vnum %ld", __FUNCTION__, room );
       return;
     }
 

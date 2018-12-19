@@ -371,13 +371,13 @@ char *CopyBuffer( Character *ch )
 
   if ( !ch )
     {
-      Log->Bug( "CopyBuffer: null ch", 0 );
+      Log->Bug( "CopyBuffer: null ch" );
       return CopyString( "" );
     }
 
   if ( !ch->Editor )
     {
-      Log->Bug( "CopyBuffer: null editor", 0 );
+      Log->Bug( "CopyBuffer: null editor" );
       return CopyString( "" );
     }
 

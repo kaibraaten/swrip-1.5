@@ -1144,7 +1144,7 @@ void EchoToShip( int color, const Ship *ship, const std::string &argument )
 
   for ( roomVnum = ship->Rooms.First ; roomVnum <= ship->Rooms.Last ;roomVnum++ )
     {
-      Room *room = GetRoom( roomVnum );
+      const Room *room = GetRoom( roomVnum );
 
       if( room )
 	{
@@ -1152,7 +1152,7 @@ void EchoToShip( int color, const Ship *ship, const std::string &argument )
 	}
       else
 	{
-	  Log->Bug( "%s:%d %s(): Ship '%s (%s)' has invalid room vnum %d",
+	  Log->Bug( "%s:%d %s(): Ship '%s (%s)' has invalid room vnum %ld",
                     __FILE__, __LINE__, __FUNCTION__,
                     ship->Name.c_str(), ship->PersonalName.c_str(), roomVnum );
 	}

@@ -48,7 +48,7 @@ void do_mpapplyb( Character *ch, std::string argument )
       sprintf( log_buf, "%s@%s new %s applying for authorization...",
                victim->Name.c_str(), victim->Desc->Remote.Hostname.c_str(),
                RaceTable[victim->Race].Name);
-      Log->Info( log_buf );
+      Log->Info( "%s", log_buf );
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
       AddTimerToCharacter(victim, TIMER_APPLIED, 10, NULL, SUB_NONE);
       victim->PCData->AuthState = 1;

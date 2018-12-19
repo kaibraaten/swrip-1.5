@@ -1132,7 +1132,7 @@ static void LuaLoadCharacterAbilities( lua_State *L, Character *ch )
             }
           else
             {
-              Log->Bug( "%s:%d : %s() : Error loading %s: Ability %d out of range.",
+              Log->Bug( "%s:%d : %s() : Error loading %s: Ability %lu out of range.",
                         __FILE__, __LINE__, __FUNCTION__,
                         ch->Name.c_str(), ability );
             }
@@ -1335,7 +1335,7 @@ static Object *LuaLoadObject( lua_State *L )
 
   if( proto == nullptr )
     {
-      Log->Bug( "%s:%d %s : Unknown vnum %d",
+      Log->Bug( "%s:%d %s : Unknown vnum %ld",
                 __FILE__, __LINE__, __FUNCTION__, vnum );
       return nullptr;
     }

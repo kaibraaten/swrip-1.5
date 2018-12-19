@@ -53,7 +53,7 @@ void do_makeguild( Character *ch, std::string argument )
   if( !mainClan )
     {
       ch->Echo("&RSomething when wrong. Contact the administration.&d\r\n" );
-      Log->Bug( "%d: Main clan %s does not exist.", __FUNCTION__,
+      Log->Bug( "%s: Main clan %s does not exist.", __FUNCTION__,
                 !StrCmp( faction, "imperial" ) ? BADGUY_CLAN
                 : !StrCmp( faction, "rebel" ) ? GOODGUY_CLAN : INDEPENDENT_CLAN );
       return;

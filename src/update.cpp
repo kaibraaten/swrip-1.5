@@ -1069,7 +1069,7 @@ static void MobileUpdate()
            && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
                 || pexit->ToRoom->Area == ch->InRoom->Area ) )
         {
-          ch_ret retcode = MoveCharacter( ch, pexit, 0 );
+          ch_ret retcode = MoveCharacter( ch, pexit );
 
           /* If ch changes position due
              to it's or someother mob's
@@ -1130,7 +1130,7 @@ static void MobileUpdate()
 
           if ( found )
 	    {
-	      MoveCharacter( ch, pexit, 0 );
+	      MoveCharacter( ch, pexit );
 	    }
         }
     }
@@ -2136,7 +2136,7 @@ static void CharacterCheck( void )
                    && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
                         || pexit->ToRoom->Area == ch->InRoom->Area ) )
                 {
-                  retcode = MoveCharacter( ch, pexit, 0 );
+                  retcode = MoveCharacter( ch, pexit );
 
                   if ( CharacterDiedRecently(ch) )
 		    {
@@ -2731,7 +2731,7 @@ void RemovePortal( Object *portal )
 
   if ( ( toRoom = pexit->ToRoom ) == NULL )
     {
-      Log->Bug( "RemovePortal: toRoom is NULL", 0 );
+      Log->Bug( "RemovePortal: toRoom is NULL" );
     }
 
   ExtractExit( fromRoom, pexit );

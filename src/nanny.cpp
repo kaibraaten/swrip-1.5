@@ -172,12 +172,12 @@ static void NannyGetName( Descriptor *d, std::string argument )
     }
 
   ch = d->Character;
-  
+
   auto pban = Bans->Find([d, ch](const auto &b)
                          {
                            return (StringPrefix(b->Site, d->Remote.Hostname) == 0
                                    || StringSuffix(b->Site, d->Remote.Hostname) == 0 )
-                           && b->Level >= ch->TopLevel;
+                             && b->Level >= ch->TopLevel;
                          });
 
   if(pban != nullptr)
@@ -211,12 +211,12 @@ static void NannyGetName( Descriptor *d, std::string argument )
   else
     {
       if ( wizlock && !IsImmortal(ch) )
-	{
-	  d->WriteToBuffer( "The game is wizlocked. Only immortals can connect now.\r\n", 0 );
-	  d->WriteToBuffer( "Please try back later.\r\n", 0 );
-	  CloseDescriptor( d, false );
-	  return;
-	}
+        {
+          d->WriteToBuffer( "The game is wizlocked. Only immortals can connect now.\r\n", 0 );
+          d->WriteToBuffer( "Please try back later.\r\n", 0 );
+          CloseDescriptor( d, false );
+          return;
+        }
     }
 
   if ( fOld )
@@ -274,9 +274,9 @@ static void NannyGetOldPassword( Descriptor *d, std::string argument )
   if ( chk == BERR )
     {
       if ( d->Character && d->Character->Desc )
-	{
-	  d->Character->Desc = NULL;
-	}
+        {
+          d->Character->Desc = NULL;
+        }
 
       CloseDescriptor( d, false );
       return;
@@ -328,8 +328,8 @@ static void NannyConfirmNewName( Descriptor *d, std::string argument )
     {
     case 'y': case 'Y':
       sprintf( buf, "\r\nMake sure to use a password that won't be easily guessed by someone else."
-	       "\r\nPick a good password for %s: %s",
-	       ch->Name.c_str(), echo_off_str );
+               "\r\nPick a good password for %s: %s",
+               ch->Name.c_str(), echo_off_str );
       d->WriteToBuffer( buf, 0 );
       d->ConnectionState = CON_GET_NEW_PASSWORD;
       break;
@@ -402,12 +402,12 @@ static void NannyGetNewSex( Descriptor *d, std::string argument )
     case 'm':
     case 'M':
       ch->Sex = SEX_MALE;
-    break;
+      break;
 
     case 'f':
     case 'F':
       ch->Sex = SEX_FEMALE;
-    break;
+      break;
 
     default:
       d->WriteToBuffer( "That's not a sex.\r\n", 0 );
@@ -424,7 +424,7 @@ static void NannyGetNewRace( Descriptor *d, std::string argument )
   std::string arg;
   Character *ch = d->Character;
   int iRace = 0;
-  
+
   argument = OneArgument(argument, arg);
 
   if (!StrCmp( arg, "help") )
@@ -444,14 +444,14 @@ static void NannyGetNewRace( Descriptor *d, std::string argument )
   for ( iRace = 0; iRace < MAX_RACE; iRace++ )
     {
       const Race *race = &RaceTable[iRace];
-      
+
       if ( toupper( arg[0] ) == toupper( race->Name[0] )
-	   && !StringPrefix( arg, race->Name )
-	   && RaceIsAvailableToPlayers( race ) )
-	{
-	  ch->Race = iRace;
-	  break;
-	}
+           && !StringPrefix( arg, race->Name )
+           && RaceIsAvailableToPlayers( race ) )
+        {
+          ch->Race = iRace;
+          break;
+        }
     }
 
   if ( iRace == MAX_RACE || iRace == RACE_GOD
@@ -493,11 +493,11 @@ static void NannyGetNewClass( Descriptor *d, std::string argument )
   for ( iClass = 0; iClass < MAX_ABILITY; iClass++ )
     {
       if ( toupper(arg[0]) == toupper(AbilityName[iClass][0])
-	   && !StringPrefix( arg, AbilityName[iClass] ) )
-	{
-	  ch->Ability.Main = iClass;
-	  break;
-	}
+           && !StringPrefix( arg, AbilityName[iClass] ) )
+        {
+          ch->Ability.Main = iClass;
+          break;
+        }
     }
 
   if ( iClass == MAX_ABILITY
@@ -616,81 +616,81 @@ static void NannyReadMotd( Descriptor *d, std::string argument )
       ch->PermStats.Frc += RaceTable[ch->Race].Stats.ModFrc;
 
       if ( ch->Ability.Main == FORCE_ABILITY )
-	{
-	  ch->PermStats.Frc = urange( 1 , ch->PermStats.Frc , 20 );
-	}
+        {
+          ch->PermStats.Frc = urange( 1 , ch->PermStats.Frc , 20 );
+        }
       else
-	{
-	  ch->PermStats.Frc = urange( 0 , ch->PermStats.Frc , 20 );
-	}
+        {
+          ch->PermStats.Frc = urange( 0 , ch->PermStats.Frc , 20 );
+        }
 
       /* Hunters do not recieve force */
 
       if ( ch->Ability.Main == HUNTING_ABILITY )
-	{
-	  ch->PermStats.Frc = 0;
-	}
+        {
+          ch->PermStats.Frc = 0;
+        }
 
       /* Droids do not recieve force */
 
       if( IsDroid(ch) )
-	{
-	  ch->PermStats.Frc = 0;
-	}
+        {
+          ch->PermStats.Frc = 0;
+        }
 
       for ( iLang = 0; LanguageArray[iLang] != LANG_UNKNOWN; iLang++ )
-	{
-	  if ( LanguageArray[iLang] == RaceTable[ch->Race].Language )
-	    {
-	      break;
-	    }
-	}
+        {
+          if ( LanguageArray[iLang] == RaceTable[ch->Race].Language )
+            {
+              break;
+            }
+        }
 
       if ( LanguageArray[iLang] == LANG_UNKNOWN )
-	{
-	  Log->Bug( "Nanny: invalid racial language." );
-	}
+        {
+          Log->Bug( "Nanny: invalid racial language." );
+        }
       else
-	{
-	  if ( (iLang = LookupSkill( LanguageNames[iLang] )) < 0 )
-	    {
-	      Log->Bug( "Nanny: cannot find racial language." );
-	    }
-	  else
-	    {
-	      ch->PCData->Learned[iLang] = 100;
-	      ch->Speaking  =  RaceTable[ch->Race].Language;
+        {
+          if ( (iLang = LookupSkill( LanguageNames[iLang] )) < 0 )
+            {
+              Log->Bug( "Nanny: cannot find racial language." );
+            }
+          else
+            {
+              ch->PCData->Learned[iLang] = 100;
+              ch->Speaking  =  RaceTable[ch->Race].Language;
 
-	      if ( ch->Race == RACE_QUARREN
-		   && (iLang = LookupSkill( "quarren" )) >= 0 )
-		{
-		  ch->PCData->Learned[iLang] = 100;
-		  SetBit( ch->Speaks , LANG_QUARREN );
-		}
+              if ( ch->Race == RACE_QUARREN
+                   && (iLang = LookupSkill( "quarren" )) >= 0 )
+                {
+                  ch->PCData->Learned[iLang] = 100;
+                  SetBit( ch->Speaks , LANG_QUARREN );
+                }
 
-	      if ( ch->Race == RACE_MON_CALAMARI
-		   && (iLang = LookupSkill( "common" )) >= 0 )
-		{
-		  ch->PCData->Learned[iLang] = 100;
-		}
-	    }
-	}
+              if ( ch->Race == RACE_MON_CALAMARI
+                   && (iLang = LookupSkill( "common" )) >= 0 )
+                {
+                  ch->PCData->Learned[iLang] = 100;
+                }
+            }
+        }
 
       ch->Resistant           += RaceTable[ch->Race].Resistant;
       ch->Susceptible     += RaceTable[ch->Race].Susceptible;
 
       {
-	int ability;
+        int ability;
 
-	for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
-	  {
-	    SetAbilityLevel( ch, ability, 1 );
-	    SetAbilityXP( ch, ability, 0 );
-	  }
+        for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
+          {
+            SetAbilityLevel( ch, ability, 1 );
+            SetAbilityXP( ch, ability, 0 );
+          }
       }
 
       ch->TopLevel = 1;
-      
+
       ch->HitPoints.Current = ch->HitPoints.Max;
       ch->HitPoints.Current += RaceTable[ch->Race].Hit;
       ch->HitPoints.Max += RaceTable[ch->Race].Hit;
@@ -698,13 +698,13 @@ static void NannyReadMotd( Descriptor *d, std::string argument )
       ch->Gold = NEW_CHARACTER_START_CREDITS;
 
       if ( ch->PermStats.Frc > 0 )
-	{
-	  ch->Mana.Max = 200;
-	}
+        {
+          ch->Mana.Max = 200;
+        }
       else
-	{
-	  ch->Mana.Max = 0;
-	}
+        {
+          ch->Mana.Max = 0;
+        }
 
       ch->Mana.Max += RaceTable[ch->Race].Mana;
       ch->Mana.Current = 0;
@@ -712,7 +712,7 @@ static void NannyReadMotd( Descriptor *d, std::string argument )
       SetCharacterTitle( ch, buf );
 
       /* Added by Narn.  Start new characters with autoexit and autgold
-	 already turned on.  Very few people don't use those. */
+         already turned on.  Very few people don't use those. */
       SetBit( ch->Flags, PLR_AUTOGOLD );
       SetBit( ch->Flags, PLR_AUTOEXIT );
 
@@ -736,37 +736,37 @@ static void NannyReadMotd( Descriptor *d, std::string argument )
         }
 
       if ( !SysData.NewPlayersMustWaitForAuth )
-	{
-	  CharacterToRoom( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
-	  ch->PCData->AuthState = 3;
-	}
+        {
+          CharacterToRoom( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
+          ch->PCData->AuthState = 3;
+        }
       else
-	{
-	  CharacterToRoom( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
-	  ch->PCData->AuthState = 1;
+        {
+          CharacterToRoom( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
+          ch->PCData->AuthState = 1;
           ch->PCData->Flags.set( Flag::PCData::Unauthed );
-	}
+        }
     }
   else if ( !IsImmortal(ch) && ch->PCData->ReleaseDate > current_time )
     {
       if ( ch->PCData->JailVnum )
-	{
-	  CharacterToRoom( ch, GetRoom(ch->PCData->JailVnum));
-	}
+        {
+          CharacterToRoom( ch, GetRoom(ch->PCData->JailVnum));
+        }
       else
-	{
-	  CharacterToRoom( ch, GetRoom(ROOM_VNUM_HELL) );
-	}
+        {
+          CharacterToRoom( ch, GetRoom(ROOM_VNUM_HELL) );
+        }
     }
   else if ( ch->InRoom && !IsImmortal( ch )
-	    && !ch->InRoom->Flags.test( Flag::Room::Spacecraft )
-	    && ch->InRoom != GetRoom(ROOM_VNUM_HELL) )
+            && !ch->InRoom->Flags.test( Flag::Room::Spacecraft )
+            && ch->InRoom != GetRoom(ROOM_VNUM_HELL) )
     {
       CharacterToRoom( ch, ch->InRoom );
     }
   else if ( ch->InRoom && !IsImmortal( ch )
-	    && ch->InRoom->Flags.test( Flag::Room::Spacecraft )
-	    && ch->InRoom != GetRoom(ROOM_VNUM_HELL) )
+            && ch->InRoom->Flags.test( Flag::Room::Spacecraft )
+            && ch->InRoom != GetRoom(ROOM_VNUM_HELL) )
     {
       ForEachShip(PutCharacterInCorrectShip, ch);
     }
@@ -793,76 +793,76 @@ static void NannyReadMotd( Descriptor *d, std::string argument )
       std::list<Object*> objectsToExtract(storeroom->Objects());
 
       for(Object *obj : objectsToExtract)
-	{
-	  ExtractObject( obj );
-	}
+        {
+          ExtractObject( obj );
+        }
 
       sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->Name[0]),
-	       Capitalize( ch->Name ).c_str() );
+               Capitalize( ch->Name ).c_str() );
       if ( ( fph = fopen( filename, "r" ) ) != NULL )
-	{
-	  RoomProgSetSupermob(storeroom);
+        {
+          RoomProgSetSupermob(storeroom);
 
-	  for ( ; ; )
-	    {
-	      char letter = ReadChar( fph, Log, fBootDb );
+          for ( ; ; )
+            {
+              char letter = ReadChar( fph, Log, fBootDb );
 
-	      if ( letter == '*' )
-		{
-		  ReadToEndOfLine( fph, Log, fBootDb );
-		  continue;
-		}
+              if ( letter == '*' )
+                {
+                  ReadToEndOfLine( fph, Log, fBootDb );
+                  continue;
+                }
 
-	      if ( letter != '#' )
-		{
-		  Log->Bug( "Load_plr_home: # not found." );
-		  Log->Bug( ch->Name.c_str() );
-		  break;
-		}
+              if ( letter != '#' )
+                {
+                  Log->Bug( "Load_plr_home: # not found." );
+                  Log->Bug( "%s", ch->Name.c_str() );
+                  break;
+                }
 
-	      const char *word = ReadWord( fph, Log, fBootDb );
+              const char *word = ReadWord( fph, Log, fBootDb );
 
-	      if ( !StrCmp( word, "OBJECT" ) )     /* Objects      */
-		{
-		  ReadObject  ( supermob, fph, OS_CARRY );
-		}
-	      else
-		if ( !StrCmp( word, "END"    ) )   /* Done         */
-		  {
-		    break;
-		  }
-		else
-		  {
-		    Log->Bug( "Load_plr_home: bad section." );
-		    Log->Bug( ch->Name.c_str() );
-		    break;
-		  }
-	    }
+              if ( !StrCmp( word, "OBJECT" ) )     /* Objects      */
+                {
+                  ReadObject  ( supermob, fph, OS_CARRY );
+                }
+              else
+                if ( !StrCmp( word, "END"    ) )   /* Done         */
+                  {
+                    break;
+                  }
+                else
+                  {
+                    Log->Bug( "Load_plr_home: bad section." );
+                    Log->Bug( "%s", ch->Name.c_str() );
+                    break;
+                  }
+            }
 
-	  fclose( fph );
+          fclose( fph );
 
           std::list<Object*> carriedBySupermob(supermob->Objects());
 
           for(Object *tobj : carriedBySupermob)
-	    {
-	      ObjectFromCharacter( tobj );
+            {
+              ObjectFromCharacter( tobj );
 
-	      if( tobj->ItemType != ITEM_MONEY )
-		{
-		  ObjectToRoom( tobj, storeroom );
-		}
-	    }
+              if( tobj->ItemType != ITEM_MONEY )
+                {
+                  ObjectToRoom( tobj, storeroom );
+                }
+            }
 
-	  ReleaseSupermob();
-	}
+          ReleaseSupermob();
+        }
     }
 
   if ( ch->PCData->Pet )
     {
       Act( AT_ACTION, "$n returns with $s master.",
-	   ch->PCData->Pet, NULL, ch, TO_NOTVICT );
+           ch->PCData->Pet, NULL, ch, TO_NOTVICT );
       Act( AT_ACTION, "$N returns with you.",
-	   ch, NULL, ch->PCData->Pet, TO_CHAR );
+           ch, NULL, ch->PCData->Pet, TO_CHAR );
     }
 
   ch->PCData->Logon = current_time;
@@ -921,13 +921,13 @@ static void AskForRace( Descriptor *d )
   int columns = 0;
   char buf[MAX_STRING_LENGTH] = { '\0' };
   char buf2[MAX_STRING_LENGTH];
-  
+
   d->WriteToBuffer( "\r\nYou may choose from the following races, or type showstat [race] to learn more:\r\n", 0 );
 
   for ( iRace = 0; iRace < MAX_RACE; iRace++ )
     {
       const Race *race = &RaceTable[iRace];
-      
+
       if ( iRace == RACE_GOD || !RaceIsAvailableToPlayers( race ) )
         {
           continue;
@@ -938,17 +938,17 @@ static void AskForRace( Descriptor *d )
           sprintf( buf2, "%-20s", race->Name );
           strcat( buf, buf2 );
 
-	  if( ++columns % 3 == 0 )
-	    {
-	      strcat( buf, "\r\n" );
-	    }
-	  
+          if( ++columns % 3 == 0 )
+            {
+              strcat( buf, "\r\n" );
+            }
+
           d->WriteToBuffer( buf, 0 );
           buf[0] = '\0';
         }
     }
 
-   if( columns % 3 != 0 )
+  if( columns % 3 != 0 )
     {
       strcat( buf, "\r\n" );
     }
@@ -963,7 +963,7 @@ static void AskForClass( Descriptor *d )
   char buf2[MAX_STRING_LENGTH];
   int iClass = 0;
   int columns = 0;
-  
+
   d->WriteToBuffer( "\r\nPlease choose a main ability from the following classes:\r\n", 0 );
 
   for ( iClass = 0; iClass < MAX_ABILITY; iClass++ )
@@ -1001,7 +1001,7 @@ static void AskForStats( Descriptor *d )
 {
   Character *ch = d->Character;
   char buf[MAX_STRING_LENGTH];
-  
+
   ch->PermStats.Str = GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
   ch->PermStats.Int = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
   ch->PermStats.Wis = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
@@ -1028,7 +1028,7 @@ static void FinalizeCharacter( Descriptor *d )
 {
   Character *ch = d->Character;
   int ability = 0;
-  
+
   sprintf( log_buf, "%s@%s new %s.",
            ch->Name.c_str(), d->Remote.Hostname.c_str(),
            RaceTable[ch->Race].Name);
@@ -1045,4 +1045,3 @@ static void FinalizeCharacter( Descriptor *d )
   ch->TopLevel = 0;
   ch->Position = POS_STANDING;
 }
-

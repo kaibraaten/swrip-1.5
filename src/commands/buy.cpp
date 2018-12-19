@@ -36,7 +36,7 @@ void do_buy( Character *ch, std::string argument )
 
       if ( !pRoomIndexNext )
         {
-          Log->Bug( "Do_buy: bad pet shop at vnum %d.", ch->InRoom->Vnum );
+          Log->Bug( "Do_buy: bad pet shop at vnum %ld.", ch->InRoom->Vnum );
           ch->Echo( "Sorry, you can't buy that here.\r\n" );
           return;
         }

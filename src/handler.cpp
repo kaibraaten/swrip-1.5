@@ -1115,7 +1115,7 @@ void ExtractObject( Object *obj )
 
   if ( IsObjectExtracted(obj) )
     {
-      Log->Bug( "ExtractObject: obj %d already extracted!", obj->Prototype->Vnum );
+      Log->Bug( "ExtractObject: obj %ld already extracted!", obj->Prototype->Vnum );
       return;
     }
 

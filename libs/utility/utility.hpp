@@ -1,6 +1,10 @@
 #ifndef _SWR_UTILITY_HPP_
 #define _SWR_UTILITY_HPP_
 
+#ifndef __GNUC__
+#define __attribute__(a)
+#endif
+
 #include <functional>
 #include <vector>
 #include <string>
@@ -178,7 +182,7 @@ std::string TrimString( const std::string &str, char junk  = ' ');
 std::string Scramble( const std::string &argument, int modifier );
 bool IsNullOrEmpty( const char *str );
 std::string CenterString( const std::string &txt, size_t totalWidth, char pad );
-std::string FormatString( const char *fmt, ... );
+std::string FormatString( const char *fmt, ... ) __attribute__((format(printf, 1, 2)));
 std::vector<char> CreateFmtBuffer( const char *fmt, va_list va );
 std::vector<char> StringToVector(const std::string&);
 

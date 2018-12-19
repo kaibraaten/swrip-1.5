@@ -217,7 +217,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 	}
       else
 	{
-	  Log->Bug( "PullOrPush: door: no direction flag set.", 0 );
+	  Log->Bug( "PullOrPush: door: no direction flag set." );
 	  return;
 	}
 

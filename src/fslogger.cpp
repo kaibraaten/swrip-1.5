@@ -57,7 +57,7 @@ void FileSystemLogger::Bug( const char *str, ... )
         }
 
       sprintf( buf, "[*****] FILE: %s LINE: %d", strArea, iLine );
-      Log->Info( buf );
+      Log->Info("%s", buf);
 
       if ( stat( SHUTDOWN_FILE, &fst ) != -1 )  /* file exists */
         {
@@ -76,7 +76,7 @@ void FileSystemLogger::Bug( const char *str, ... )
   vsprintf( buf + strlen(buf), str, param );
   va_end(param);
 
-  Log->Info( buf );
+  Log->Info( "%s", buf );
 
   if ( ( fp = fopen( BUG_FILE, "a" ) ) != NULL )
     {
@@ -95,7 +95,7 @@ void FileSystemLogger::Boot(const char *str, ...)
   va_start(param, str);
   vsprintf( buf+strlen(buf), str, param );
   va_end(param);
-  Log->Info( buf );
+  Log->Info( "%s", buf );
 
   if ( ( fp = fopen( BOOTLOG_FILE, "a" ) ) != NULL )
     {

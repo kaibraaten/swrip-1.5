@@ -52,8 +52,8 @@ Object::Object(ProtoObject *pObjIndex, int level)
   switch ( obj->ItemType )
     {
     default:
-      Log->Bug( "%s: vnum %d bad type.", __FUNCTION__, pObjIndex->Vnum );
-      Log->Bug( "------------------------>     ", obj->ItemType );
+      Log->Bug( "%s: vnum %ld bad type.", __FUNCTION__, pObjIndex->Vnum );
+      Log->Bug( "------------------------>  %d", obj->ItemType );
       break;
 
     case ITEM_FIGHTERCOMP:

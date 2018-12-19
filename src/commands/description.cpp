@@ -13,7 +13,7 @@ void do_description( Character *ch, std::string argument )
 
   if ( !ch->Desc )
     {
-      Log->Bug( "do_description: no descriptor", 0 );
+      Log->Bug( "do_description: no descriptor" );
       return;
     }
 

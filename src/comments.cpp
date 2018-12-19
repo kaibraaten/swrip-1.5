@@ -42,7 +42,7 @@ static void RemoveComment( Character *ch, Character *victim, Note *pnote )
 {
   if ( IsNpc( victim ) )
     {
-      Log->Bug( "comment remove: NPC", 0 );
+      Log->Bug( "comment remove: NPC" );
       return;
     }
 
@@ -96,15 +96,17 @@ void do_comment( Character *ch, std::string argument )
     case SUB_WRITING_NOTE:
       if ( !ch->PCData->Note )
         {
-          Log->Bug( "do_comment: note got lost?", 0 );
+          Log->Bug( "do_comment: note got lost?" );
           ch->Echo( "Your note got lost!\r\n" );
           StopEditing(ch);
           return;
         }
 
       if ( ch->dest_buf != ch->PCData->Note )
-        Log->Bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote", 0 );
-
+        {
+          Log->Bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote" );
+        }
+      
       ch->PCData->Note->Text = CopyBuffer( ch );
       StopEditing( ch );
       return;
