@@ -368,7 +368,7 @@ static void AcceptNewSocket( socket_t ctrl )
   maxdesc = ctrl;
   newdesc = 0;
 
-  for ( Descriptor *d : Descriptors->Entities() )
+  for ( Descriptor *d : Descriptors )
     {
       maxdesc = umax( maxdesc, d->Socket );
       FD_SET( d->Socket, &in_set  );
@@ -758,7 +758,7 @@ void CloseDescriptor( Descriptor *dclose, bool force )
     dclose->SnoopBy->WriteToBuffer( "Your victim has left the game.\r\n" );
 
   /* stop snooping everyone else */
-  for ( Descriptor *d : Descriptors->Entities())
+  for ( Descriptor *d : Descriptors )
     if ( d->SnoopBy == dclose )
       d->SnoopBy = NULL;
 

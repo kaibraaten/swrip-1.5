@@ -1789,7 +1789,7 @@ PFUN( imc_recv_emote )
       level = IMCPERM_IMM;
     }
   
-  for(const Descriptor *d : Descriptors->Entities())
+  for(const Descriptor *d : Descriptors)
     {
       Character *ch = nullptr;
       
@@ -1900,7 +1900,7 @@ static void imc_display_channel( IMC_CHANNEL * c, const char *from, char *txt, i
    else
       sprintf( buf, c->socformat, txt );
 
-   for(const Descriptor *d : Descriptors->Entities())
+   for(const Descriptor *d : Descriptors)
    {
      Character *ch = d->Original ? d->Original : d->Character;
 
@@ -2031,7 +2031,7 @@ static const char *get_local_chanwho( IMC_CHANNEL * c )
    sprintf( buf, "The following people are listening to %s on %s:\r\n\r\n",
              c->local_name, this_imcmud->localname );
 
-   for(const Descriptor *d : Descriptors->Entities())
+   for(const Descriptor *d : Descriptors)
    {
      Character *person = d->Original ? d->Original : d->Character;
 
@@ -2317,7 +2317,7 @@ static char *imc_assemble_who( void )
   char tail[LGST];
   static char master[LGST];  /* The final result that gets returned */
 
-  for(const Descriptor *d : Descriptors->Entities())
+  for(const Descriptor *d : Descriptors)
     {
       Character *person = d->Original ? d->Original : d->Character;
 
@@ -2353,7 +2353,7 @@ static char *imc_assemble_who( void )
 
   imm = false;
 
-  for(const Descriptor *d : Descriptors->Entities())
+  for(const Descriptor *d : Descriptors)
     {
       Character *person = d->Original ? d->Original : d->Character;
 

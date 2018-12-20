@@ -117,7 +117,7 @@ void ShuttleUpdate( void )
 {
   char buf[MSL];
 
-  for(Shuttle *shuttle : Shuttles->Entities())
+  for(Shuttle *shuttle : Shuttles)
     {
       /* No Stops? Make sure we ignore */
       if (shuttle->Stops().empty())

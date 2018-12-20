@@ -1271,7 +1271,7 @@ void WriteCorpses( const Character *ch, std::string name )
     }
 
   /* Go by vnum, less chance of screwups. -- Altrag */
-  for( const Object *corpse : Objects->Entities() )
+  for( const Object *corpse : Objects )
     {
       if ( corpse->Prototype->Vnum == OBJ_VNUM_CORPSE_PC
 	   && corpse->InRoom != NULL && corpse->Value[OVAL_CORPSE_SKINNED] != 1

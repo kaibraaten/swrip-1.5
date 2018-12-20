@@ -1285,7 +1285,7 @@ static void MobileUpdate()
 
 static void TaxUpdate()
 {
-  for(const Planet *planet : Planets->Entities())
+  for(const Planet *planet : Planets)
     {
       Clan *clan = planet->GovernedBy;
 
@@ -1295,7 +1295,7 @@ static void TaxUpdate()
 
           if ( numberOfSubclans > 0)
             {
-              for(Clan *guild : Clans->Entities())
+              for(Clan *guild : Clans)
                 {
                   guild->Funds += GetTaxes(planet) / 1440 / numberOfSubclans;
                   Clans->Save(guild);
@@ -1317,7 +1317,7 @@ static void TaxUpdate()
 
 static void ApplyBankInterest()
 {
-  for ( const Character *ch : PlayerCharacters->Entities() )
+  for ( const Character *ch : PlayerCharacters)
     {
       /* Interest */
       ch->PCData->Bank *= 1.0071428571428571;
@@ -1328,7 +1328,7 @@ static void ApplyBankInterest()
 
 static void PaySalaries()
 {
-  for ( const Character *ch : PlayerCharacters->Entities() )
+  for ( const Character *ch : PlayerCharacters)
     {
       auto clanInfo = ch->PCData->ClanInfo;
       
@@ -1403,7 +1403,7 @@ static void WeatherUpdate()
 
   if ( !IsNullOrEmpty( buf ) )
     {
-      for ( Character *ch : PlayerCharacters->Entities() )
+      for ( Character *ch : PlayerCharacters)
         {
           if ( IS_OUTSIDE(ch)
                && IsAwake(ch)
@@ -1506,7 +1506,7 @@ static void WeatherUpdate()
 
   if ( !IsNullOrEmpty( buf ) )
     {
-      for ( Character *ch : PlayerCharacters->Entities() )
+      for ( Character *ch : PlayerCharacters)
         {
           if ( IS_OUTSIDE(ch)
                && IsAwake(ch) )
@@ -1534,7 +1534,7 @@ static void AutosavePlayerCharacters()
 {
   short save_count = 0;
   
-  for(const Character *ch : PlayerCharacters->Entities())
+  for(const Character *ch : PlayerCharacters)
     {      
       if(SysData.SaveFlags.test( Flag::AutoSave::Auto )
          && IsAuthed(ch)
@@ -1548,7 +1548,7 @@ static void AutosavePlayerCharacters()
 
 static void KickOutLinkdeadCharacters()
 {
-  for(Character *ch : PlayerCharacters->Entities())
+  for(Character *ch : PlayerCharacters)
     {
       if ( ++ch->IdleTimer > 15 && !ch->Desc )
         {
@@ -1568,7 +1568,7 @@ static void KickOutLinkdeadCharacters()
 
 static void GainAddictionsForPlayerCharacters()
 {
-  for(Character *ch : PlayerCharacters->Entities())
+  for(Character *ch : PlayerCharacters)
     {
       GainAddiction(ch);
     }
@@ -1576,7 +1576,7 @@ static void GainAddictionsForPlayerCharacters()
 
 static void WorsenMentalStateForPlayerCharacters()
 {
-  for(Character *ch : PlayerCharacters->Entities())
+  for(Character *ch : PlayerCharacters)
     {
       if ( ch->TopLevel < LEVEL_IMMORTAL && ch->PCData->Condition[COND_DRUNK] > 8 )
         {
@@ -1587,7 +1587,7 @@ static void WorsenMentalStateForPlayerCharacters()
 
 static void ImproveConditionIfNotThirsty()
 {
-  for(Character *ch : PlayerCharacters->Entities())
+  for(Character *ch : PlayerCharacters)
     {
       if ( ch->PCData->Condition[COND_THIRST] > 1 )
         {
@@ -1627,7 +1627,7 @@ static void ImproveConditionIfNotThirsty()
 
 static void ImproveConditionIfNotHungry()
 {
-  for(Character *ch : PlayerCharacters->Entities())
+  for(Character *ch : PlayerCharacters)
     {
       if (ch->PCData->Condition[COND_FULL] > 1)
         {
@@ -1666,7 +1666,7 @@ static void ImproveConditionIfNotHungry()
 
 static void TickdownLightSources()
 {
-  for(Character *ch : PlayerCharacters->Entities())
+  for(Character *ch : PlayerCharacters)
     {
       if (ch->TopLevel < LEVEL_IMMORTAL)
         {
@@ -1696,7 +1696,7 @@ static void TickdownLightSources()
 
 static void SoberUp()
 {
-  for(Character *ch : PlayerCharacters->Entities())
+  for(Character *ch : PlayerCharacters)
     {
       GainCondition( ch, COND_DRUNK, -1 );
     }
@@ -1704,7 +1704,7 @@ static void SoberUp()
 
 static void IncreaseHunger()
 {
-  for(Character *ch : PlayerCharacters->Entities())
+  for(Character *ch : PlayerCharacters)
     {
       if (ch->TopLevel < LEVEL_IMMORTAL)
         {
@@ -1715,7 +1715,7 @@ static void IncreaseHunger()
 
 static void IncreaseThirst()
 {
-  for(Character *ch : PlayerCharacters->Entities())
+  for(Character *ch : PlayerCharacters)
     {
       if (ch->TopLevel < LEVEL_IMMORTAL
           && ch->InRoom != nullptr )

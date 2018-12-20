@@ -99,7 +99,7 @@ bool Descriptor::CheckReconnect( const std::string &name, bool fConn )
 
 bool Descriptor::CheckMultiplaying( const std::string &name )
 {
-  for ( Descriptor *dold : Descriptors->Entities() )
+  for ( Descriptor *dold : Descriptors )
     {
       if ( dold != this
            && ( dold->Character || dold->Original )
@@ -129,7 +129,7 @@ bool Descriptor::CheckMultiplaying( const std::string &name )
 
 unsigned char Descriptor::CheckPlaying( const std::string &name, bool kick )
 {
-  for ( Descriptor *dold : Descriptors->Entities() )
+  for ( Descriptor *dold : Descriptors )
     {
       if ( dold != this
            && ( dold->Character || dold->Original )

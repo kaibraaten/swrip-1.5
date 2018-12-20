@@ -29,6 +29,8 @@
 #include <list>
 #include <set>
 #include <algorithm>
+#include <iterator>
+#include <memory>
 
 namespace Ceris
 {
@@ -63,16 +65,6 @@ namespace Ceris
 
     Repository(const Repository&) = delete;
     Repository &operator=(const Repository&) = delete;
-
-    auto begin() const
-    {
-      return Entities().begin();
-    }
-
-    auto end() const
-    {
-      return Entities().end();
-    }
     
   protected:
     Repository();
@@ -160,6 +152,78 @@ namespace Ceris
   {
     // Default implementation no-op
   }
+}
+
+template<typename T>
+auto begin(const Ceris::Repository<T> *repo)
+{
+  return repo->Entities().begin();
+}
+
+template<typename T>
+auto end(const Ceris::Repository<T> *repo)
+{
+  return repo->Entities().end();
+}
+
+template<typename T>
+auto begin(const Ceris::Repository<T> &repo)
+{
+  return repo.Entities().begin();
+}
+
+template<typename T>
+auto end(const Ceris::Repository<T> &repo)
+{
+  return repo.Entities().end();
+}
+
+template<typename T>
+auto begin(std::shared_ptr<Ceris::Repository<T>> repo)
+{
+  return repo->Entities().begin();
+}
+
+template<typename T>
+auto end(std::shared_ptr<Ceris::Repository<T>> repo)
+{
+  return repo->Entities().end();
+}
+
+template<typename T>
+auto cbegin(const Ceris::Repository<T> *repo)
+{
+  return repo->Entities().cbegin();
+}
+
+template<typename T>
+auto cend(const Ceris::Repository<T> *repo)
+{
+  return repo->Entities().cend();
+}
+
+template<typename T>
+auto cbegin(const Ceris::Repository<T> &repo)
+{
+  return repo.Entities().cbegin();
+}
+
+template<typename T>
+auto cend(const Ceris::Repository<T> &repo)
+{
+  return repo.Entities().cend();
+}
+
+template<typename T>
+auto cbegin(std::shared_ptr<Ceris::Repository<T>> repo)
+{
+  return repo->Entities().cbegin();
+}
+
+template<typename T>
+auto cend(std::shared_ptr<Ceris::Repository<T>> repo)
+{
+  return repo->Entities().cend();
 }
 
 #endif

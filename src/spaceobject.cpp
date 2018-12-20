@@ -28,9 +28,9 @@
 #include "planet.hpp"
 #include "repos/spaceobjectrepository.hpp"
 
-void SpaceobjectUpdate( void )
+void SpaceobjectUpdate()
 {
-  for(Spaceobject *spaceobj : Spaceobjects->Entities())
+  for(Spaceobject *spaceobj : Spaceobjects)
     {
       MoveSpaceobject( spaceobj );
 

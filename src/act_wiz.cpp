@@ -45,7 +45,7 @@ void EchoToAll( short AT_COLOR, const std::string &argument, short tar )
   if ( argument.empty() )
     return;
 
-  for ( Descriptor *d : Descriptors->Entities() )
+  for ( Descriptor *d : Descriptors )
     {
       /* Added showing echoes to players who are editing, so they won't
          miss out on important info like upcoming reboots. --Narn */

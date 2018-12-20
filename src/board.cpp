@@ -1119,7 +1119,7 @@ void CountMailMessages(const Character *ch)
 {
   size_t cnt = 0;
 
-  for(const Board *board : Boards->Entities())
+  for(const Board *board : Boards)
     {
       if ( board->Type == BOARD_MAIL && CanRead(ch, board) )
 	{

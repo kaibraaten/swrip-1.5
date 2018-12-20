@@ -368,7 +368,7 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
       AppendToFile( LOG_FILE, buf2 );
     }
 
-  for(Descriptor *d : Descriptors->Entities())
+  for(Descriptor *d : Descriptors)
     {
       Character *och = d->Original ? d->Original : d->Character;
       Character *vch = d->Character;
@@ -512,7 +512,7 @@ void ToChannel( const std::string &argument, int channel, const std::string &ver
 
   sprintf(buf, "%s: %s\r\n", verb.c_str(), argument.c_str() );
 
-  for ( Descriptor *d : Descriptors->Entities() )
+  for ( Descriptor *d : Descriptors )
     {
       Character *och = d->Original ? d->Original : d->Character;
       Character *vch = d->Character;
@@ -662,7 +662,7 @@ void TalkAuction(const std::string &argument)
 
   sprintf (buf,"Auction: %s", argument.c_str()); /* last %s to reset color */
 
-  for (Descriptor *d : Descriptors->Entities())
+  for (Descriptor *d : Descriptors )
     {
       Character *original = d->Original ? d->Original : d->Character; /* if switched */
 

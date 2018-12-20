@@ -111,11 +111,11 @@ static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun )
     }
 }
 
-void UpdateShipMovement( void )
+void UpdateShipMovement()
 {
   char buf[MAX_STRING_LENGTH];
 
-  for(Ship *ship : Ships->Entities())
+  for(Ship *ship : Ships)
     {
       if ( ship->Spaceobject == nullptr )
 	{
@@ -167,7 +167,7 @@ void UpdateShipMovement( void )
 	  continue;
 	}
 
-      for(Spaceobject *spaceobj : Spaceobjects->Entities())
+      for(Spaceobject *spaceobj : Spaceobjects)
         {
           if ( spaceobj->Type == SPACE_SUN
 	       && WillCollideWithSun( ship, spaceobj ) )
@@ -192,7 +192,7 @@ void UpdateShipMovement( void )
         }
     }
 
-  for(Ship *ship : Ships->Entities())
+  for(Ship *ship : Ships)
     {
       if ( IsShipInHyperspace( ship ) )
         {
@@ -219,7 +219,7 @@ void UpdateShipMovement( void )
 
           ship->Count++;
 
-          for(const Spaceobject *spaceobj : Spaceobjects->Entities())
+          for(const Spaceobject *spaceobj : Spaceobjects)
 	    {
 	      if( CaughtInGravity( ship, spaceobj ) )
 		{
@@ -299,7 +299,7 @@ void UpdateShipMovement( void )
 
                   bool found = false;
 
-                  for(Spaceobject *spaceobj : Spaceobjects->Entities())
+                  for(Spaceobject *spaceobj : Spaceobjects)
 		    {
 		      if( IsSpaceobjectInRange( ship, spaceobj ) )
 			{
@@ -490,8 +490,8 @@ static void ApproachLandingSite( Ship *ship, const std::string &arg)
   bool found = false;
   Ship *target = NULL;
 
-  for(std::list<Spaceobject*>::const_iterator i = Spaceobjects->Entities().cbegin();
-      i != Spaceobjects->Entities().cend(); ++i)
+  for(std::list<Spaceobject*>::const_iterator i = cbegin(Spaceobjects);
+      i != cend(Spaceobjects); ++i)
     {
       spaceobj = *i;
 
@@ -611,7 +611,7 @@ static void LaunchShip( Ship *ship )
     }
   else
     {
-      for(Ship *docked : Ships->Entities())
+      for(Ship *docked : Ships)
         {
           CopyPositionToDockedShips(ship, docked);
         }
@@ -785,7 +785,7 @@ bool CheckHostile( Ship *ship )
       return false;
     }
 
-  for(Ship *target : Ships->Entities())
+  for(Ship *target : Ships)
     {
       if( !IsShipInCombatRange( ship, target ) )
         continue;
@@ -1193,7 +1193,7 @@ void RechargeShips( void )
       baycount = 0;
     }
 
-  for(Ship *ship : Ships->Entities())
+  for(Ship *ship : Ships)
     {
       if ( ship->Class == SHIP_PLATFORM )
 	{
@@ -1429,7 +1429,7 @@ void ShipUpdate( void )
   int too_close = 0, target_too_close = 0;
   int recharge = 0;
 
-  for(Ship *ship : Ships->Entities())
+  for(Ship *ship : Ships)
     {
       if ( ship->Spaceobject
 	   && ship->Thrusters.Energy.Current > 0
@@ -1573,7 +1573,7 @@ void ShipUpdate( void )
         {
           too_close = ship->Thrusters.Speed.Current + 50;
 
-          for(const Spaceobject *spaceobj : Spaceobjects->Entities())
+          for(const Spaceobject *spaceobj : Spaceobjects)
 	    {
 	      if( GetShipDistanceToSpaceobject( ship, spaceobj ) < too_close )
 		{
@@ -1584,7 +1584,7 @@ void ShipUpdate( void )
 		}
 	    }
 
-          for(Ship *target : Ships->Entities())
+          for(Ship *target : Ships)
             {
               if( (target->Docked && target->Docked == ship) || (ship->Docked &&  ship->Docked == target ) )
 		{
@@ -1669,7 +1669,7 @@ void UpdateSpaceCombat(void)
   char buf[MAX_STRING_LENGTH];
   int too_close = 0, target_too_close = 0;
 
-  for(Ship *ship : Ships->Entities())
+  for(Ship *ship : Ships)
     {
       if( ship->WeaponSystems.Target && IsShipAutoflying(ship) )
 	{
@@ -1755,7 +1755,7 @@ void UpdateSpaceCombat(void)
 		    }
 
                   /* auto assist ships */
-                  for(Ship *assistingShip : Ships->Entities())
+                  for(Ship *assistingShip : Ships)
                     {
                       if( IsShipInCombatRange( ship, assistingShip ) )
 			{
@@ -1958,7 +1958,7 @@ void UpdateSpaceCombat(void)
 
 void EchoToDockedShip( int color, const Ship *ship, const std::string &argument )
 {
-  for(const Ship *dockedShip : Ships->Entities())
+  for(const Ship *dockedShip : Ships)
     {
       if( dockedShip->Docked == ship)
         {
@@ -2249,7 +2249,7 @@ void EchoToNearbyShips( int color, const Ship *ship, const std::string &argument
       return;
     }
 
-  for(const Ship *target : Ships->Entities())
+  for(const Ship *target : Ships)
     {
       if( !IsShipInCombatRange( ship, target ) )
         {
@@ -2300,7 +2300,7 @@ Ship *GetShipAnywhere( const std::string &name )
 {
   Ship *foundShip = NULL;
 
-  for(Ship *ship : Ships->Entities())
+  for(Ship *ship : Ships)
     {
       if( !StrCmp( name, ship->PersonalName )
           || !StrCmp( name, ship->Name ) )
@@ -2340,7 +2340,7 @@ Ship *GetShipInRange( const std::string &name, const Ship *eShip)
       return NULL;
     }
 
-  for(Ship *ship : Ships->Entities())
+  for(Ship *ship : Ships)
     {
       if( !IsShipInCombatRange( eShip, ship ) )
 	{
@@ -2369,7 +2369,7 @@ Ship *GetShipInRange( const std::string &name, const Ship *eShip)
     {
       count = 0;
 
-      for(Ship *ship : Ships->Entities())
+      for(Ship *ship : Ships)
         {
           if( !IsShipInCombatRange( eShip, ship ) )
             {
@@ -2542,8 +2542,8 @@ bool CanDock( const Ship *ship )
       count++;
     }
 
-  count = count_if(Ships->Entities().begin(), Ships->Entities().end(),
-                   [ship](const auto &dockedShip) { return dockedShip->Docked == ship; });
+  count = Count(Ships->Entities(),
+                [ship](const auto &dockedShip) { return dockedShip->Docked == ship; });
 
   if ( ship->DockingPorts && count >= (size_t)ship->DockingPorts )
     {
@@ -2851,7 +2851,7 @@ void DestroyShip( Ship *ship, Character *killer )
         }
     }
 
-  for(Ship *lship : Ships->Entities())
+  for(Ship *lship : Ships)
     {
       if ( ship->Rooms.Hangar == INVALID_VNUM
            || lship->Location != ship->Rooms.Hangar)
@@ -2937,7 +2937,7 @@ bool ShipNameAndPersonalnameComboIsUnique( const std::string &name,
 
 void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData)
 {
-  for(Ship *ship : Ships->Entities())
+  for(Ship *ship : Ships)
     {
       bool keepGoing = callback(ship, userData);
 

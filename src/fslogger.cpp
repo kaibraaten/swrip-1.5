@@ -152,7 +152,7 @@ void FileSystemLogger::LogStringPlus( const std::string &str, short log_type, sh
 
   if (lognone)
     {
-      for ( const Descriptor *d : Descriptors->Entities() )
+      for ( const Descriptor *d : Descriptors )
         {
           Character *och = d->Original ? d->Original : d->Character;
           Character *vch = d->Character;
