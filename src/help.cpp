@@ -27,12 +27,12 @@
 
 std::string HelpGreeting;
 
-HelpFile *GetHelpFile( const Character *ch, std::string argument )
+std::shared_ptr<HelpFile> GetHelpFile( const Character *ch, std::string argument )
 {
   std::string argall;
   std::string argone;
   std::string argnew;
-  HelpFile *foundHelpfile = NULL;
+  std::shared_ptr<HelpFile> foundHelpfile;
   int lev = 0;
 
   if ( argument.empty() )
@@ -65,7 +65,7 @@ HelpFile *GetHelpFile( const Character *ch, std::string argument )
       argall += argone;
     }
 
-  for(HelpFile *pHelp : HelpFiles->Entities())
+  for(const auto &pHelp : HelpFiles->Entities())
     {
       if ( GetHelpFileLevel( pHelp ) > GetTrustLevel( ch ) )
 	{
@@ -87,9 +87,9 @@ HelpFile *GetHelpFile( const Character *ch, std::string argument )
   return foundHelpfile;
 }
 
-HelpFile *AllocateHelpFile( const std::string &keyword, short level )
+std::shared_ptr<HelpFile> AllocateHelpFile( const std::string &keyword, short level )
 {
-  HelpFile *help = new HelpFile();
+  std::shared_ptr<HelpFile> help = std::make_shared<HelpFile>();
   
   SetHelpFileKeyword( help, keyword );
   SetHelpFileText( help, "" );
@@ -98,17 +98,12 @@ HelpFile *AllocateHelpFile( const std::string &keyword, short level )
   return help;
 }
 
-void FreeHelpFile( HelpFile *help )
-{
-  delete help;
-}
-
-short GetHelpFileLevel( const HelpFile *help )
+short GetHelpFileLevel( const std::shared_ptr<HelpFile> &help )
 {
   return help->Level;
 }
 
-void SetHelpFileLevel( HelpFile *help, short level )
+void SetHelpFileLevel( const std::shared_ptr<HelpFile> &help, short level )
 {
   if( level >= -1 && level <= MAX_LEVEL )
     {
@@ -121,22 +116,22 @@ void SetHelpFileLevel( HelpFile *help, short level )
     }
 }
 
-std::string GetHelpFileKeyword( const HelpFile *help )
+std::string GetHelpFileKeyword( const std::shared_ptr<HelpFile> &help )
 {
   return help->Keyword;
 }
 
-void SetHelpFileKeyword( HelpFile *help, const std::string &keyword )
+void SetHelpFileKeyword( const std::shared_ptr<HelpFile> &help, const std::string &keyword )
 {
   help->Keyword = keyword;
 }
 
-std::string GetHelpFileText( const HelpFile *help )
+std::string GetHelpFileText( const std::shared_ptr<HelpFile> &help )
 {
   return help->Text;
 }
 
-void SetHelpFileText( HelpFile *help, const std::string &text )
+void SetHelpFileText( const std::shared_ptr<HelpFile> &help, const std::string &text )
 {
   help->Text = text;
 }
