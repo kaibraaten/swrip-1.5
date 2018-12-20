@@ -26,6 +26,7 @@
 #include <cmath>
 #include <cassert>
 #include <utility/random.hpp>
+#include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "arena.hpp"
 #include "ship.hpp"
@@ -66,6 +67,8 @@ static void MobileUpdate();
 static void UpdateDruggedPlayers();
 static void WeatherUpdate();
 static void TaxUpdate();
+static void ApplyBankInterest();
+static void PaySalaries();
 static void CharacterUpdate();
 static void ObjectUpdate();
 static void AggroUpdate();
@@ -387,16 +390,14 @@ void GainXP( Character *ch, short ability, long gain )
 
 long LoseXP( Character *ch, short ability, long loss )
 {
-  int current_exp = 0;
-  int new_exp = 0;
-  int actual_loss = 0;
-
   if ( IsNpc(ch) )
-    return 0;
-
-  current_exp = GetAbilityXP( ch, ability );
-  actual_loss = umax( loss, 0 );
-  new_exp = current_exp - actual_loss;
+    {
+      return 0;
+    }
+  
+  int current_exp = GetAbilityXP( ch, ability );
+  int actual_loss = umax( loss, 0 );
+  int new_exp = current_exp - actual_loss;
 
   SetAbilityXP( ch, ability, new_exp );
 
@@ -580,6 +581,62 @@ static int GainMove( const Character *ch )
   return umin( gain, ch->Fatigue.Max - ch->Fatigue.Current );
 }
 
+static void AffectCharacterWithGlitterstim(Character *ch, int drug)
+{
+  if ( !IsAffectedBy( ch, AFF_BLIND ) )
+    {
+      Affect af;
+      af.Type       = gsn_blindness;
+      af.Location   = APPLY_AC;
+      af.Modifier   = 10;
+      af.Duration   = ch->PCData->Addiction[drug];
+      af.AffectedBy = AFF_BLIND;
+      AffectToCharacter( ch, &af );
+    }
+}
+
+static void AffectCharacterWithCarsanum(Character *ch, int drug)
+{
+  if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
+    {
+      Affect af;
+      af.Type       = -1;
+      af.Location   = APPLY_DAMROLL;
+      af.Modifier   = -10;
+      af.Duration   = ch->PCData->Addiction[drug];
+      af.AffectedBy = AFF_WEAKEN;
+      AffectToCharacter( ch, &af );
+    }
+}
+
+static void AffectCharacterWithRyll(Character *ch, int drug)
+{
+  if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
+    {
+      Affect af;
+      af.Type       = -1;
+      af.Location   = APPLY_DEX;
+      af.Modifier   = -5;
+      af.Duration   = ch->PCData->Addiction[drug];
+      af.AffectedBy = AFF_WEAKEN;
+      AffectToCharacter( ch, &af );
+    }
+}
+
+static void AffectCharacterWithAndris(Character *ch, int drug)
+{
+  if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
+    {
+      Affect af;
+      af.Type       = -1;
+      af.Location   = APPLY_CON;
+      af.Modifier   = -5;
+      af.Duration   = ch->PCData->Addiction[drug];
+      af.AffectedBy = AFF_WEAKEN;
+      AffectToCharacter( ch, &af );
+    }
+}
+
 static void GainAddiction( Character *ch )
 {
   short drug = 0;
@@ -601,51 +658,19 @@ static void GainAddiction( Character *ch )
               break;
 
             case SPICE_GLITTERSTIM:
-              if ( !IsAffectedBy( ch, AFF_BLIND ) )
-                {
-                  af.Type       = gsn_blindness;
-                  af.Location   = APPLY_AC;
-                  af.Modifier   = 10;
-                  af.Duration   = ch->PCData->Addiction[drug];
-                  af.AffectedBy = AFF_BLIND;
-                  AffectToCharacter( ch, &af );
-                }
+              AffectCharacterWithGlitterstim(ch, drug);
               break;
 
             case SPICE_CARSANUM:
-              if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
-                {
-                  af.Type       = -1;
-                  af.Location   = APPLY_DAMROLL;
-                  af.Modifier   = -10;
-                  af.Duration   = ch->PCData->Addiction[drug];
-                  af.AffectedBy = AFF_WEAKEN;
-                  AffectToCharacter( ch, &af );
-                }
+              AffectCharacterWithCarsanum(ch, drug);
               break;
 
             case SPICE_RYLL:
-              if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
-                {
-                  af.Type       = -1;
-                  af.Location   = APPLY_DEX;
-                  af.Modifier   = -5;
-                  af.Duration   = ch->PCData->Addiction[drug];
-                  af.AffectedBy = AFF_WEAKEN;
-                  AffectToCharacter( ch, &af );
-                }
+              AffectCharacterWithRyll(ch, drug);
               break;
 
             case SPICE_ANDRIS:
-              if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
-                {
-                  af.Type       = -1;
-                  af.Location   = APPLY_CON;
-                  af.Modifier   = -5;
-                  af.Duration   = ch->PCData->Addiction[drug];
-                  af.AffectedBy = AFF_WEAKEN;
-                  AffectToCharacter( ch, &af );
-                }
+              AffectCharacterWithAndris(ch, drug);
               break;
             }
         }
@@ -695,9 +720,6 @@ static void GainAddiction( Character *ch )
 
 void GainCondition( Character *ch, int iCond, int value )
 {
-  int condition = 0;
-  ch_ret retcode = rNONE;
-
   if ( value == 0
        || IsNpc(ch)
        || IsImmortal( ch )
@@ -711,9 +733,11 @@ void GainCondition( Character *ch, int iCond, int value )
       return;
     }
 
-  condition                    = ch->PCData->Condition[iCond];
+  int condition = ch->PCData->Condition[iCond];
   ch->PCData->Condition[iCond] = urange( 0, condition + value, 48 );
 
+  ch_ret retcode = rNONE;
+  
   if ( ch->PCData->Condition[iCond] == 0 )
     {
       switch ( iCond )
@@ -1006,7 +1030,7 @@ static void PerformScavenging(Character *ch)
     {
       ObjectFromRoom( obj_best );
       ObjectToCharacter( obj_best, ch );
-      Act( AT_ACTION, "$n gets $p.", ch, obj_best, NULL, TO_ROOM );
+      Act( AT_ACTION, "$n gets $p.", ch, obj_best, nullptr, TO_ROOM );
     }
 }
 
@@ -1018,7 +1042,7 @@ static bool MobShouldWander(const Character *ch, DirectionType door)
     && !IsBitSet(ch->Flags, ACT_RUNNING)
     && !IsBitSet(ch->Flags, ACT_SENTINEL)
     && !IsBitSet(ch->Flags, ACT_PROTOTYPE)
-    && pexit != NULL
+    && pexit != nullptr
     && !pexit->Flags.test( Flag::Exit::Closed )
     && !pexit->ToRoom->Flags.test( Flag::Room::NoMob )
     && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
@@ -1045,24 +1069,24 @@ static void PerformFlee(Character *ch, DirectionType door)
     {
       if ( IsFearing(ch, rch) )
         {
-          char buf[MAX_STRING_LENGTH];
+          std::string buf;
                   
           switch( NumberBits(2) )
             {
             case 0:
-              sprintf( buf, "Get away from me, %s!", rch->Name.c_str() );
+              buf = FormatString( "Get away from me, %s!", rch->Name.c_str() );
               break;
 
             case 1:
-              sprintf( buf, "Leave me be, %s!", rch->Name.c_str() );
+              buf = FormatString( "Leave me be, %s!", rch->Name.c_str() );
               break;
 
             case 2:
-              sprintf( buf, "%s is trying to kill me! Help!", rch->Name.c_str() );
+              buf = FormatString( "%s is trying to kill me! Help!", rch->Name.c_str() );
               break;
 
             case 3:
-              sprintf( buf, "Someone save me from %s!", rch->Name.c_str() );
+              buf = FormatString( "Someone save me from %s!", rch->Name.c_str() );
               break;
             }
 
@@ -1259,7 +1283,7 @@ static void MobileUpdate()
     }
 }
 
-static void TaxUpdate( void )
+static void TaxUpdate()
 {
   for(const Planet *planet : Planets->Entities())
     {
@@ -1289,23 +1313,31 @@ static void TaxUpdate( void )
           Planets->Save(planet);
         }
     }
+}
 
-  for ( const Descriptor *d : Descriptors->Entities() )
+static void ApplyBankInterest()
+{
+  for ( const Character *ch : PlayerCharacters->Entities() )
     {
       /* Interest */
-      if ( d->Character != nullptr
-           && d->ConnectionState == CON_PLAYING )
-        {
-          d->Character->PCData->Bank *= 1.0071428571428571;
-        }
+      ch->PCData->Bank *= 1.0071428571428571;
+    }
+}
 
-      if ( ( d->ConnectionState == CON_PLAYING )
-           && ( d->Character->PCData->ClanInfo.Salary > 0 )
-           && ( d->Character->PCData->ClanInfo.Clan )
-           && ( d->Character->PCData->ClanInfo.Clan->Funds >= d->Character->PCData->ClanInfo.Salary ) )
+#include "repos/playerrepository.hpp"
+
+static void PaySalaries()
+{
+  for ( const Character *ch : PlayerCharacters->Entities() )
+    {
+      auto clanInfo = ch->PCData->ClanInfo;
+      
+      if ( clanInfo.Salary > 0
+           && clanInfo.Clan
+           && clanInfo.Clan->Funds >= clanInfo.Salary )
         {
-          d->Character->PCData->Bank += d->Character->PCData->ClanInfo.Salary;
-          d->Character->PCData->ClanInfo.Clan->Funds -= d->Character->PCData->ClanInfo.Salary;
+          ch->PCData->Bank += clanInfo.Salary;
+          clanInfo.Clan->Funds -= clanInfo.Salary;
         }
     }
 }
@@ -1313,7 +1345,7 @@ static void TaxUpdate( void )
 /*
  * Update the weather.
  */
-static void WeatherUpdate( void )
+static void WeatherUpdate()
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
   int diff = 0;
@@ -1371,17 +1403,16 @@ static void WeatherUpdate( void )
 
   if ( !IsNullOrEmpty( buf ) )
     {
-      for(const Descriptor *d : Descriptors->Entities())
+      for ( Character *ch : PlayerCharacters->Entities() )
         {
-          if ( d->ConnectionState == CON_PLAYING
-               && IS_OUTSIDE(d->Character)
-               && IsAwake(d->Character)
-               && d->Character->InRoom
-               && d->Character->InRoom->Sector != SECT_UNDERWATER
-               && d->Character->InRoom->Sector != SECT_OCEANFLOOR
-               && d->Character->InRoom->Sector != SECT_UNDERGROUND )
+          if ( IS_OUTSIDE(ch)
+               && IsAwake(ch)
+               && ch->InRoom != nullptr
+               && ch->InRoom->Sector != SECT_UNDERWATER
+               && ch->InRoom->Sector != SECT_OCEANFLOOR
+               && ch->InRoom->Sector != SECT_UNDERGROUND )
             {
-              Act( AT_TEMP, buf, d->Character, 0, 0, TO_CHAR );
+              Act( AT_TEMP, buf, ch, 0, 0, TO_CHAR );
             }
         }
 
@@ -1475,14 +1506,266 @@ static void WeatherUpdate( void )
 
   if ( !IsNullOrEmpty( buf ) )
     {
-      for(const Descriptor *d : Descriptors->Entities())
+      for ( Character *ch : PlayerCharacters->Entities() )
         {
-          if ( d->ConnectionState == CON_PLAYING
-               &&   IS_OUTSIDE(d->Character)
-               &&   IsAwake(d->Character) )
+          if ( IS_OUTSIDE(ch)
+               && IsAwake(ch) )
             {
-              Act( AT_TEMP, buf, d->Character, 0, 0, TO_CHAR );
+              Act( AT_TEMP, buf, ch, nullptr, nullptr, TO_CHAR );
             }
+        }
+    }
+}
+
+static void SanitizeAlignment(Character *ch)
+{
+  if ( ch->Alignment < -1000 )
+    {
+      ch->Alignment = -1000;
+    }
+  
+  if ( ch->Alignment > 1000 )
+    {
+      ch->Alignment = 1000;
+    }
+}
+
+static void AutosavePlayerCharacters()
+{
+  short save_count = 0;
+  
+  for(const Character *ch : PlayerCharacters->Entities())
+    {      
+      if(SysData.SaveFlags.test( Flag::AutoSave::Auto )
+         && IsAuthed(ch)
+         && current_time - ch->PCData->SaveTime > ( SysData.SaveFrequency * 60 )
+         &&  ++save_count < 10 ) // save max of 10 per tick
+        {
+          PlayerCharacters->Save( ch );
+        }
+    }
+}
+
+static void KickOutLinkdeadCharacters()
+{
+  for(Character *ch : PlayerCharacters->Entities())
+    {
+      if ( ++ch->IdleTimer > 15 && !ch->Desc )
+        {
+          if ( ch->InRoom )
+            {
+              CharacterFromRoom( ch );
+            }
+
+          CharacterToRoom( ch, GetRoom( ROOM_PLUOGUS_QUIT ) );
+          ch->Position = POS_RESTING;
+          ch->HitPoints.Current = umax( 1, ch->HitPoints.Current );
+          PlayerCharacters->Save( ch );
+          do_quit( ch, "" );
+        }
+    }
+}
+
+static void GainAddictionsForPlayerCharacters()
+{
+  for(Character *ch : PlayerCharacters->Entities())
+    {
+      GainAddiction(ch);
+    }
+}
+
+static void WorsenMentalStateForPlayerCharacters()
+{
+  for(Character *ch : PlayerCharacters->Entities())
+    {
+      if ( ch->TopLevel < LEVEL_IMMORTAL && ch->PCData->Condition[COND_DRUNK] > 8 )
+        {
+          WorsenMentalState(ch, ch->PCData->Condition[COND_DRUNK] / 8);
+        }
+    }
+}
+
+static void ImproveConditionIfNotThirsty()
+{
+  for(Character *ch : PlayerCharacters->Entities())
+    {
+      if ( ch->PCData->Condition[COND_THIRST] > 1 )
+        {
+          switch( ch->Position )
+            {
+            case POS_SLEEPING:
+              ImproveMentalState( ch, 5 );
+              break;
+
+            case POS_RESTING:
+              ImproveMentalState( ch, 3 );
+              break;
+              
+            case POS_SITTING:
+            case POS_MOUNTED:
+              ImproveMentalState( ch, 2 );
+              break;
+
+            case POS_STANDING:
+              ImproveMentalState( ch, 1 );
+              break;
+
+            case POS_FIGHTING:
+              if ( NumberBits(2) == 0 )
+                {
+                  ImproveMentalState( ch, 1 );
+                }
+              
+              break;
+
+            default:
+              break;
+            }
+        }
+    }
+}
+
+static void ImproveConditionIfNotHungry()
+{
+  for(Character *ch : PlayerCharacters->Entities())
+    {
+      if (ch->PCData->Condition[COND_FULL] > 1)
+        {
+          switch( ch->Position )
+            {
+            case POS_SLEEPING:
+              ImproveMentalState( ch, 4 );
+              break;
+
+            case POS_RESTING:
+              ImproveMentalState( ch, 3 );
+              break;
+
+            case POS_SITTING:
+            case POS_MOUNTED:
+              ImproveMentalState( ch, 2 );
+              break;
+
+            case POS_STANDING:
+              ImproveMentalState( ch, 1 );
+              break;
+
+            case POS_FIGHTING:
+              if ( NumberBits(2) == 0 )
+                {
+                  ImproveMentalState( ch, 1 );
+                }
+              break;
+
+            default:
+              break;
+            }
+        }
+    }
+}
+
+static void TickdownLightSources()
+{
+  for(Character *ch : PlayerCharacters->Entities())
+    {
+      if (ch->TopLevel < LEVEL_IMMORTAL)
+        {
+          Object *obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT );
+
+          if (obj != nullptr
+              && obj->ItemType == ITEM_LIGHT
+              && obj->Value[OVAL_LIGHT_POWER] > 0 )
+            {
+              if ( --obj->Value[OVAL_LIGHT_POWER] == 0 && ch->InRoom )
+                {
+                  ch->InRoom->Light -= obj->Count;
+                  Act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_ROOM );
+                  Act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_CHAR );
+
+                  if ( obj->Serial == cur_obj )
+                    {
+                      global_objcode = rOBJ_EXPIRED;
+                    }
+
+                  ExtractObject( obj );
+                }
+            }
+        }
+    }
+}
+
+static void SoberUp()
+{
+  for(Character *ch : PlayerCharacters->Entities())
+    {
+      GainCondition( ch, COND_DRUNK, -1 );
+    }
+}
+
+static void IncreaseHunger()
+{
+  for(Character *ch : PlayerCharacters->Entities())
+    {
+      if (ch->TopLevel < LEVEL_IMMORTAL)
+        {
+          GainCondition( ch, COND_FULL, -1 );
+        }
+    }
+}
+
+static void IncreaseThirst()
+{
+  for(Character *ch : PlayerCharacters->Entities())
+    {
+      if (ch->TopLevel < LEVEL_IMMORTAL
+          && ch->InRoom != nullptr )
+        {
+          switch( ch->InRoom->Sector )
+            {
+            default:
+              GainCondition( ch, COND_THIRST, -1 );
+              break;
+
+            case SECT_DESERT:
+              GainCondition( ch, COND_THIRST, -2 );
+              break;
+
+            case SECT_UNDERWATER:
+            case SECT_OCEANFLOOR:
+              if ( NumberBits(1) == 0 )
+                {
+                  GainCondition( ch, COND_THIRST, -1 );
+                }
+
+              break;
+            }
+        }
+    }
+}
+
+static void PlayerCharacterUpdate()
+{
+  KickOutLinkdeadCharacters();
+  GainAddictionsForPlayerCharacters();
+  WorsenMentalStateForPlayerCharacters();
+  TickdownLightSources();
+  ImproveConditionIfNotHungry();
+  ImproveConditionIfNotThirsty();
+  SoberUp();
+  IncreaseHunger();
+  IncreaseThirst();
+  AutosavePlayerCharacters();
+}
+
+static void CheckReinforcementArrival(Character *ch)
+{
+  if ( ch->BackupWait > 0 )
+    {
+      --ch->BackupWait;
+
+      if ( ch->BackupWait == 0 )
+        {
+          AddReinforcements( ch );
         }
     }
 }
@@ -1491,15 +1774,12 @@ static void WeatherUpdate( void )
  * Update all chars, including mobs.
  * This function is performance sensitive.
  */
-static void CharacterUpdate( void )
+static void CharacterUpdate()
 {
   Character *ch = NULL;
 
   for ( ch = LastCharacter; ch; ch = gch_prev )
     {
-      Character *ch_save = NULL;
-      short save_count = 0;
-
       gch_prev = ch->Previous;
       SetCurrentGlobalCharacter( ch );
 
@@ -1524,25 +1804,7 @@ static void CharacterUpdate( void )
       if( CharacterDiedRecently(ch) )
         continue;
 
-      /*
-       * See if player should be auto-saved.
-       */
-      if ( !IsNpc(ch)
-           && IsAuthed(ch)
-           && current_time - ch->PCData->SaveTime > ( SysData.SaveFrequency * 60 ) )
-        {
-          ch_save = ch;
-        }
-      else
-        {
-          ch_save = NULL;
-        }
-
-      if ( ch->Alignment < -1000 )
-        ch->Alignment = -1000;
-
-      if ( ch->Alignment > 1000 )
-        ch->Alignment = 1000;
+      SanitizeAlignment(ch);
 
       if ( ch->Position >= POS_STUNNED )
         {
@@ -1558,132 +1820,6 @@ static void CharacterUpdate( void )
 
       if ( ch->Position == POS_STUNNED )
         UpdatePosition( ch );
-
-      if ( ch->PCData )
-        GainAddiction( ch );
-
-
-      if ( !IsNpc(ch) && ch->TopLevel < LEVEL_IMMORTAL )
-        {
-          Object *obj = NULL;
-
-          if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
-               && obj->ItemType == ITEM_LIGHT
-               && obj->Value[OVAL_LIGHT_POWER] > 0 )
-            {
-              if ( --obj->Value[OVAL_LIGHT_POWER] == 0 && ch->InRoom )
-                {
-                  ch->InRoom->Light -= obj->Count;
-                  Act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_ROOM );
-                  Act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_CHAR );
-
-                  if ( obj->Serial == cur_obj )
-                    {
-                      global_objcode = rOBJ_EXPIRED;
-                    }
-
-                  ExtractObject( obj );
-                }
-            }
-
-          if ( ch->PCData->Condition[COND_DRUNK] > 8 )
-            {
-              WorsenMentalState( ch, ch->PCData->Condition[COND_DRUNK]/8 );
-            }
-
-          if ( ch->PCData->Condition[COND_FULL] > 1 )
-            {
-              switch( ch->Position )
-                {
-                case POS_SLEEPING:
-                  ImproveMentalState( ch, 4 );
-                  break;
-
-                case POS_RESTING:
-                  ImproveMentalState( ch, 3 );
-                  break;
-
-                case POS_SITTING:
-                case POS_MOUNTED:
-                  ImproveMentalState( ch, 2 );
-                  break;
-
-                case POS_STANDING:
-                  ImproveMentalState( ch, 1 );
-                  break;
-
-                case POS_FIGHTING:
-                  if ( NumberBits(2) == 0 )
-                    {
-                      ImproveMentalState( ch, 1 );
-                    }
-                  break;
-
-                default:
-                  break;
-                }
-            }
-
-          if ( ch->PCData->Condition[COND_THIRST] > 1 )
-            {
-              switch( ch->Position )
-                {
-                case POS_SLEEPING:
-                  ImproveMentalState( ch, 5 );
-                  break;
-
-                case POS_RESTING:
-                  ImproveMentalState( ch, 3 );
-                  break;
-
-                case POS_SITTING:
-                case POS_MOUNTED:
-                  ImproveMentalState( ch, 2 );
-                  break;
-
-                case POS_STANDING:
-                  ImproveMentalState( ch, 1 );
-                  break;
-
-                case POS_FIGHTING:
-                  if ( NumberBits(2) == 0 )
-                    {
-                      ImproveMentalState( ch, 1 );
-                    }
-
-                  break;
-
-                default:
-                  break;
-                }
-            }
-
-          GainCondition( ch, COND_DRUNK,  -1 );
-          GainCondition( ch, COND_FULL,   -1 );
-
-          if ( ch->InRoom )
-            {
-              switch( ch->InRoom->Sector )
-                {
-                default:
-                  GainCondition( ch, COND_THIRST, -1 );
-                  break;
-
-                case SECT_DESERT:
-                  GainCondition( ch, COND_THIRST, -2 );
-                  break;
-
-                case SECT_UNDERWATER:
-                case SECT_OCEANFLOOR:
-                  if ( NumberBits(1) == 0 )
-                    {
-                      GainCondition( ch, COND_THIRST, -1 );
-                    }
-
-                  break;
-                }
-            }
-        }
 
       if ( !CharacterDiedRecently(ch) )
         {
@@ -1849,38 +1985,7 @@ static void CharacterUpdate( void )
                 break;
               }
 
-          if ( ch->BackupWait > 0 )
-            {
-              --ch->BackupWait;
-
-              if ( ch->BackupWait == 0 )
-                {
-                  AddReinforcements( ch );
-                }
-            }
-
-          if ( !IsNpc (ch) )
-            {
-              if ( ++ch->IdleTimer > 15 && !ch->Desc )
-                {
-                  if ( ch->InRoom )
-                    {
-                      CharacterFromRoom( ch );
-                    }
-
-                  CharacterToRoom( ch, GetRoom( ROOM_PLUOGUS_QUIT ) );
-                  ch->Position = POS_RESTING;
-                  ch->HitPoints.Current = umax( 1, ch->HitPoints.Current );
-                  PlayerCharacters->Save( ch );
-                  do_quit( ch, "" );
-                }
-              else if ( ch == ch_save
-                        && SysData.SaveFlags.test( Flag::AutoSave::Auto )
-                        && ++save_count < 10 )   /* save max of 10 per tick */
-                {
-                  PlayerCharacters->Save( ch );
-                }
-            }
+          CheckReinforcementArrival(ch);
         }
     }
 }
@@ -1889,7 +1994,7 @@ static void CharacterUpdate( void )
  * Update all objs.
  * This function is performance sensitive.
  */
-static void ObjectUpdate( void )
+static void ObjectUpdate()
 {
   Object *wield = NULL;
   short AT_TEMP = 0;
@@ -2182,18 +2287,14 @@ static void ObjectUpdate( void )
  * Function to check important stuff happening to a player
  * This function should take about 5% of mud cpu time
  */
-static void CharacterCheck( void )
+static void CharacterCheck()
 {
-  Character *ch = NULL;
-  Character *ch_next = NULL;
   static int cnt = 0;
 
   cnt = (cnt+1) % 2;
 
-  for ( ch = FirstCharacter; ch; ch = ch_next )
+  for ( Character *ch = FirstCharacter, *ch_next = nullptr; ch; ch = ch_next )
     {
-      Exit *pexit = NULL;
-      DirectionType door = DIR_INVALID;
       int retcode = rNONE;
 
       SetCurrentGlobalCharacter(ch);
@@ -2249,10 +2350,13 @@ static void CharacterCheck( void )
                     }
                 }
 
+              DirectionType door = (DirectionType)NumberBits( 4 );
+              const Exit *pexit = GetExit(ch->InRoom, door);
+              
               if ( !IsBitSet(ch->Flags, ACT_SENTINEL)
                    && !IsBitSet(ch->Flags, ACT_PROTOTYPE)
-                   && ( door = (DirectionType)NumberBits( 4 ) ) < DIR_SOMEWHERE
-                   && ( pexit = GetExit(ch->InRoom, door) ) != NULL
+                   && door < DIR_SOMEWHERE
+                   && pexit != nullptr
                    && pexit->ToRoom
                    && !pexit->Flags.test( Flag::Exit::Closed )
                    && !pexit->ToRoom->Flags.test( Flag::Room::NoMob )
@@ -2266,7 +2370,8 @@ static void CharacterCheck( void )
                       continue;
                     }
 
-                  if ( retcode != rNONE || IsBitSet(ch->Flags, ACT_SENTINEL)
+                  if ( retcode != rNONE
+                       || IsBitSet(ch->Flags, ACT_SENTINEL)
                        || ch->Position < POS_STANDING )
                     {
                       continue;
@@ -2329,15 +2434,13 @@ static void CharacterCheck( void )
                 {
                   if ( !IsImmortal( ch ) )
                     {
-                      int dam;
-
                       if ( ch->Fatigue.Current > 0 )
                         {
                           ch->Fatigue.Current--;
                         }
                       else
                         {
-                          dam = GetRandomNumberFromRange( ch->HitPoints.Max / 50,
+                          int dam = GetRandomNumberFromRange( ch->HitPoints.Max / 50,
                                                           ch->HitPoints.Max / 30 );
                           dam = umax( 1, dam );
 
@@ -2360,6 +2463,40 @@ static void CharacterCheck( void )
     }
 }
 
+static bool WeaponCanBackstab(const Object *obj)
+{
+  return obj->Value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE
+    || obj->Value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE;
+}
+
+static bool PerformBackstab(Character *ch, Character *victim)
+{
+  const Object *obj = GetEquipmentOnCharacter( ch, WEAR_WIELD );
+
+  if ( !ch->Mount
+       && obj != nullptr
+       && WeaponCanBackstab(obj)
+       && !victim->Fighting
+       && victim->HitPoints.Current >= victim->HitPoints.Max )
+    {
+      SetWaitState( ch, SkillTable[gsn_backstab]->Beats );
+
+      if ( !IsAwake(victim)
+           || GetRandomPercent() + 5 < ch->TopLevel )
+        {
+          global_retcode = HitMultipleTimes( ch, victim, gsn_backstab );
+          return true;
+        }
+      else
+        {
+          global_retcode = InflictDamage( ch, victim, 0, gsn_backstab );
+          return true;
+        }
+    }
+
+  return true;
+}
+
 /*
  * Aggress.
  *
@@ -2368,17 +2505,9 @@ static void CharacterCheck( void )
  *         aggress on some random PC
  *
  * This function should take 5% to 10% of ALL mud cpu time.
- * Unfortunately, checking on each PC move is too tricky,
- *   because we don't the mob to just attack the first PC
- *   who leads the party into the room.
- *
  */
-static void AggroUpdate( void )
+static void AggroUpdate()
 {
-  Character *ch = NULL;
-  Character *victim = NULL;
-  Character *wch_next = NULL;
-
   /* check mobprog act queue */
   while ( !mob_act_list.empty() )
     {
@@ -2414,7 +2543,7 @@ static void AggroUpdate( void )
       delete apdtmp;
     }
 
-  for( ch = FirstCharacter; ch; ch = wch_next )
+  for( Character *ch = FirstCharacter, *wch_next = nullptr; ch; ch = wch_next )
     {
       wch_next = ch->Next;
 
@@ -2422,19 +2551,15 @@ static void AggroUpdate( void )
            || ch->Fighting
            || IsAffectedBy(ch, AFF_CHARM)
            || !IsAwake(ch)
-           || ( IsBitSet(ch->Flags, ACT_WIMPY) ) )
-        {
-          continue;
-        }
-
-      if ( !IsBitSet(ch->Flags, ACT_AGGRESSIVE)
+           || IsBitSet(ch->Flags, ACT_WIMPY)
+           || !IsBitSet(ch->Flags, ACT_AGGRESSIVE)
            || IsBitSet(ch->Flags, ACT_MOUNTED)
            || ch->InRoom->Flags.test( Flag::Room::Safe ) )
         {
           continue;
         }
 
-      std::list<Character*> charactersInRoom(ch->InRoom->Characters());
+      std::list<Character*> charactersInRoom(RandomizeOrder(ch->InRoom->Characters()));
 
       for(Character *wch : charactersInRoom)
         {
@@ -2457,13 +2582,7 @@ static void AggroUpdate( void )
               continue;
             }
 
-          victim = wch;
-
-          if ( !victim )
-            {
-              Log->Bug( "%s: null victim.", __FUNCTION__ );
-              continue;
-            }
+          Character *victim = wch;
 
           if ( GetTimer(victim, TIMER_RECENTFIGHT) > 0 )
             {
@@ -2472,27 +2591,11 @@ static void AggroUpdate( void )
 
           if ( IsNpc(ch) && IsBitSet(ch->AttackFlags, ATCK_BACKSTAB ) )
             {
-              Object *obj = NULL;
+              bool backstabPerformed = PerformBackstab(ch, victim);
 
-              if ( !ch->Mount
-                   && (obj = GetEquipmentOnCharacter( ch, WEAR_WIELD )) != NULL
-                   && obj->Value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE
-                   && !victim->Fighting
-                   && victim->HitPoints.Current >= victim->HitPoints.Max )
+              if(backstabPerformed)
                 {
-                  SetWaitState( ch, SkillTable[gsn_backstab]->Beats );
-
-                  if ( !IsAwake(victim)
-                       || GetRandomPercent() + 5 < ch->TopLevel )
-                    {
-                      global_retcode = HitMultipleTimes( ch, victim, gsn_backstab );
-                      continue;
-                    }
-                  else
-                    {
-                      global_retcode = InflictDamage( ch, victim, 0, gsn_backstab );
-                      continue;
-                    }
+                  continue;
                 }
             }
 
@@ -2507,7 +2610,7 @@ static void AggroUpdate( void )
  */
 static void PerformRandomDrunkBehavior( Character *ch )
 {
-  Character *rvch = NULL;
+  Character *rvch = nullptr;
   short drunk = 0;
   PositionType position = POS_DEAD;
 
@@ -2549,8 +2652,6 @@ static void PerformRandomDrunkBehavior( Character *ch )
   else if ( drunk > (10+(GetCurrentConstitution(ch)/5))
             && GetRandomPercent() < ( 2 * drunk / 18 ) )
     {
-      char name[MAX_STRING_LENGTH];
-
       for(Character *vch : ch->InRoom->Characters())
         {
           if ( GetRandomPercent() < 10 )
@@ -2559,7 +2660,7 @@ static void PerformRandomDrunkBehavior( Character *ch )
             }
         }
 
-      strcpy(name, rvch ? rvch->Name.c_str() : "");
+      std::string name = rvch != nullptr ? rvch->Name : "";
       CheckSocial( ch, "puke", name);
     }
 
@@ -2661,17 +2762,14 @@ static void SufferHalucinations( Character *ch )
     }
 }
 
-static void TeleportUpdate( void )
+static void TeleportUpdate()
 {
-  TeleportData *tele = NULL;
-  TeleportData *tele_next = NULL;
-
   if ( !FirstTeleport )
     {
       return;
     }
 
-  for ( tele = FirstTeleport; tele; tele = tele_next )
+  for ( TeleportData *tele = FirstTeleport, *tele_next = nullptr; tele; tele = tele_next )
     {
       tele_next = tele->Next;
 
@@ -2727,6 +2825,8 @@ void UpdateHandler()
     {
       pulse_taxes = PULSE_TAXES ;
       TaxUpdate();
+      ApplyBankInterest();
+      PaySalaries();
     }
 
   if ( --pulse_mobile <= 0 )
@@ -2770,6 +2870,7 @@ void UpdateHandler()
 
       WeatherUpdate();
       CharacterUpdate();
+      PlayerCharacterUpdate();
       ObjectUpdate();
       ClearVirtualRooms();
     }
@@ -2827,7 +2928,7 @@ void UpdateHandler()
 void RemovePortal( Object *portal )
 {
   Room *fromRoom = portal->InRoom;
-  Room *toRoom = NULL;
+  const Room *toRoom = NULL;
   Character *ch = NULL;
   Exit *pexit = NULL;
 
@@ -2962,16 +3063,17 @@ void RebootCheck( time_t reset )
 }
 
 /* the auction update*/
-static void AuctionUpdate( void )
+static void AuctionUpdate()
 {
   int tax = 0;
   int pay = 0;
   char buf[MAX_STRING_LENGTH];
-
+  enum { GoingOnce = 1, GoingTwice = 2, Sold = 3 };
+  
   switch (++auction->Going) /* increase the going state */
     {
-    case 1 : /* going once */
-    case 2 : /* going twice */
+    case GoingOnce:
+    case GoingTwice:
       if (auction->Bet > auction->Starting)
         {
           sprintf(buf, "%s: going %s for %d.", auction->Item->ShortDescr.c_str(),
@@ -2986,7 +3088,7 @@ static void AuctionUpdate( void )
       TalkAuction(buf);
       break;
 
-    case 3 : /* SOLD! */
+    case Sold:
       if (!auction->Buyer && auction->Bet)
         {
           Log->Bug( "Auction code reached SOLD, with NULL buyer, but %d gold bid", auction->Bet );
