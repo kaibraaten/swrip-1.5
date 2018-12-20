@@ -64,6 +64,16 @@ namespace Ceris
     Repository(const Repository&) = delete;
     Repository &operator=(const Repository&) = delete;
 
+    auto begin() const
+    {
+      return Entities().begin();
+    }
+
+    auto end() const
+    {
+      return Entities().end();
+    }
+    
   protected:
     Repository();
     virtual void OnAdded(T &entity);

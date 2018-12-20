@@ -45,13 +45,17 @@ std::string DrunkSpeech( const std::string &argument, Character *ch )
   char *txt1 = NULL;
 
   if ( IsNpc( ch ) || !ch->PCData )
-    return argument.c_str();
-
+    {
+      return argument;
+    }
+  
   drunk = ch->PCData->Condition[COND_DRUNK];
 
   if ( drunk <= 0 )
-    return argument;
-
+    {
+      return argument;
+    }
+  
   if ( argument.empty() )
     {
       Log->Bug( "%s: NULL argument", __FUNCTION__ );

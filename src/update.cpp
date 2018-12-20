@@ -3077,12 +3077,12 @@ static void AuctionUpdate()
       if (auction->Bet > auction->Starting)
         {
           sprintf(buf, "%s: going %s for %d.", auction->Item->ShortDescr.c_str(),
-                  ((auction->Going == 1) ? "once" : "twice"), auction->Bet);
+                  ((auction->Going == GoingOnce) ? "once" : "twice"), auction->Bet);
         }
       else
         {
           sprintf(buf, "%s: going %s (bid not received yet).", auction->Item->ShortDescr.c_str(),
-                  ((auction->Going == 1) ? "once" : "twice"));
+                  ((auction->Going == GoingOnce) ? "once" : "twice"));
         }
 
       TalkAuction(buf);

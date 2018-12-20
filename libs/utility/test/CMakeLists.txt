@@ -13,6 +13,7 @@ set(SOURCES
   event_tests.cpp
   main.cpp
   misc_tests.cpp
+  repository_tests.cpp
   string_handling_tests.cpp)
 add_executable(test ${SOURCES})
 target_link_libraries(test ${PROJECT_LINK_LIBS})
