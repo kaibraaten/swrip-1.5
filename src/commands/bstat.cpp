@@ -5,7 +5,7 @@
 
 void do_bstat( Character *ch, std::string arg )
 {
-  Board *board = NULL;
+  std::shared_ptr<Board> board;
 
   if ( arg.empty() )
     {

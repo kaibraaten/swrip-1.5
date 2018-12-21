@@ -74,10 +74,10 @@ private:
   const Character *ch;
 };
 
-static void RemoveNote( Board *board, Note *pnote );
-static bool CanRemove( const Character *ch, const Board *board );
-static bool CanRead( const Character *ch, const Board *board );
-static bool CanPost( const Character *ch, const Board *board );
+static void RemoveNote( const std::shared_ptr<Board> &board, Note *pnote );
+static bool CanRemove( const Character *ch, const std::shared_ptr<Board> &board );
+static bool CanRead( const Character *ch, const std::shared_ptr<Board> &board );
+static bool CanPost( const Character *ch, const std::shared_ptr<Board> &board );
 static Object *FindQuill( const Character *ch );
 
 //////////////////////////////////////////////////////////////
@@ -88,14 +88,14 @@ struct Board::Impl
 
 //////////////////////////////////////////////////////////////
 Board::Board()
-  : pImpl(new Impl())
+  : pImpl(std::make_unique<Impl>())
 {
 
 }
 
 Board::~Board()
 {
-  delete pImpl;
+
 }
 
 void Board::Add(Note *note)
@@ -115,7 +115,7 @@ const std::list<Note*> &Board::Notes() const
 
 //////////////////////////////////////////////////////////////
 
-static bool CanRemove( const Character *ch, const Board *board )
+static bool CanRemove( const Character *ch, const std::shared_ptr<Board> &board )
 {
   /* If your trust is high enough, you can remove it. */
   if ( GetTrustLevel( ch ) >= board->MinRemoveLevel )
@@ -130,7 +130,7 @@ static bool CanRemove( const Character *ch, const Board *board )
   return false;
 }
 
-static bool CanRead( const Character *ch, const Board *board )
+static bool CanRead( const Character *ch, const std::shared_ptr<Board> &board )
 {
   /* If your trust is high enough, you can read it. */
   if ( GetTrustLevel( ch ) >= board->MinReadLevel )
@@ -160,7 +160,7 @@ static bool CanRead( const Character *ch, const Board *board )
   return false;
 }
 
-static bool CanPost( const Character *ch, const Board *board )
+static bool CanPost( const Character *ch, const std::shared_ptr<Board> &board )
 {
   /* If your trust is high enough, you can post. */
   if ( GetTrustLevel( ch ) >= board->MinPostLevel )
@@ -182,12 +182,12 @@ static bool CanPost( const Character *ch, const Board *board )
   return false;
 }
 
-Board *GetBoardFromObject( const Object *obj )
+std::shared_ptr<Board> GetBoardFromObject( const Object *obj )
 {
   return Boards->Find([obj](const auto &board)
-                          {
-                            return board->BoardObject == obj->Prototype->Vnum;
-                          });
+                      {
+                        return board->BoardObject == obj->Prototype->Vnum;
+                      });
 }
 
 void AttachNote( Character *ch )
@@ -200,7 +200,7 @@ void AttachNote( Character *ch )
 
   Note *pnote = new Note();
   pnote->Sender = ch->Name;
-  ch->PCData->Note     = pnote;
+  ch->PCData->Note = pnote;
 }
 
 void FreeNote( Note *pnote )
@@ -208,7 +208,7 @@ void FreeNote( Note *pnote )
   delete pnote;
 }
 
-static void RemoveNote( Board *board, Note *pnote )
+static void RemoveNote( const std::shared_ptr<Board> &board, Note *pnote )
 {
   assert(board != nullptr);
   assert(pnote != nullptr);
@@ -218,10 +218,9 @@ static void RemoveNote( Board *board, Note *pnote )
    */
   board->Remove(pnote);
 
-  FreeNote( pnote );
+  FreeNote(pnote);
   Boards->Save(board);
 }
-
 
 static Object *FindQuill( const Character *ch )
 {
@@ -246,7 +245,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
   std::string arg;
-  Board *board = NULL;
+  std::shared_ptr<Board> board;
   int anum = 0;
   int first_list = 0;
   Object *quill = NULL, *paper = NULL, *tmpobj = NULL;
@@ -643,7 +642,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
           return;
         }
 
-      if (GetTrustLevel (ch) < SysData.WriteMailFree)
+      if (GetTrustLevel(ch) < SysData.WriteMailFree)
         {
           quill = FindQuill( ch );
 
@@ -1119,7 +1118,7 @@ void CountMailMessages(const Character *ch)
 {
   size_t cnt = 0;
 
-  for(const Board *board : Boards)
+  for(const auto &board : Boards)
     {
       if ( board->Type == BOARD_MAIL && CanRead(ch, board) )
 	{
@@ -1133,11 +1132,11 @@ void CountMailMessages(const Character *ch)
     }
 }
 
-Board *FindBoardHere( const Character *ch )
+std::shared_ptr<Board> FindBoardHere( const Character *ch )
 {
   for(const Object *obj : ch->InRoom->Objects())
     {
-      Board *board = GetBoardFromObject(obj);
+      std::shared_ptr<Board> board = GetBoardFromObject(obj);
       
       if ( board != nullptr )
 	{
@@ -1148,20 +1147,15 @@ Board *FindBoardHere( const Character *ch )
   return nullptr;
 }
 
-Board *GetBoard( const std::string &name )
+std::shared_ptr<Board> GetBoard( const std::string &name )
 {
   return Boards->Find([name](const auto &board){ return StrCmp(board->Name, name) == 0; });
 }
 
-Board *AllocateBoard(const std::string &name)
+std::shared_ptr<Board> AllocateBoard(const std::string &name)
 {
-  Board *board = new Board();
+  std::shared_ptr<Board> board = std::make_shared<Board>();
   board->Name = ToLower(name);
 
   return board;
-}
-
-void FreeBoard(Board *board)
-{
-  delete board;
 }

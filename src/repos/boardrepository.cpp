@@ -5,9 +5,9 @@
 
 #define BOARD_DIR DATA_DIR "boards/"
 
-BoardRepository *Boards = nullptr;
+std::shared_ptr<BoardRepository> Boards;
 
-std::string GetBoardFilename( const Board *board )
+std::string GetBoardFilename( const std::shared_ptr<Board> &board )
 {
   char fullPath[MAX_STRING_LENGTH];
   sprintf( fullPath, "%s%s", BOARD_DIR, ConvertToLuaFilename( board->Name ).c_str() );
@@ -21,14 +21,14 @@ class LuaBoardRepository : public BoardRepository
 public:
   void Load() override;
   void Save() const override;
-  void Save(const Board *board) const override;
+  void Save(const std::shared_ptr<Board> &board) const override;
 
 private:
-  static void LoadNote( lua_State *L, Board *board );
-  static void LoadNotes( lua_State *L, Board *board );
+  static void LoadNote( lua_State *L, const std::shared_ptr<Board> &board );
+  static void LoadNotes( lua_State *L, const std::shared_ptr<Board> &board );
   static int L_BoardEntry( lua_State *L );
   static void ExecuteBoardFile( const std::string &filePath, void *userData );
-  static void PushNotes( lua_State *L, const Board *board );
+  static void PushNotes( lua_State *L, const std::shared_ptr<Board> &board );
   static void PushBoard( lua_State *L, const void *userData );
 };
 
@@ -39,18 +39,18 @@ void LuaBoardRepository::Load()
 
 void LuaBoardRepository::Save() const
 {
-  for(const Board *board : Boards->Entities())
+  for(const auto &board : Boards)
     {
       Save(board);
     }
 }
 
-void LuaBoardRepository::Save(const Board *board) const
+void LuaBoardRepository::Save(const std::shared_ptr<Board> &board) const
 {
-  LuaSaveDataFile( GetBoardFilename( board ), PushBoard, "board", board );
+  LuaSaveDataFile( GetBoardFilename( board ), PushBoard, "board", &board );
 }
 
-void LuaBoardRepository::LoadNote( lua_State *L, Board *board )
+void LuaBoardRepository::LoadNote( lua_State *L, const std::shared_ptr<Board> &board )
 {
   Note *note = new Note();
 
@@ -67,7 +67,7 @@ void LuaBoardRepository::LoadNote( lua_State *L, Board *board )
   board->Add(note);
 }
 
-void LuaBoardRepository::LoadNotes( lua_State *L, Board *board )
+void LuaBoardRepository::LoadNotes( lua_State *L, const std::shared_ptr<Board> &board )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Notes" );
@@ -88,7 +88,7 @@ void LuaBoardRepository::LoadNotes( lua_State *L, Board *board )
 
 int LuaBoardRepository::L_BoardEntry( lua_State *L )
 {
-  Board *board = new Board();
+  std::shared_ptr<Board> board = std::make_shared<Board>();
 
   LuaGetfieldString( L, "Name", &board->Name );
   LuaGetfieldLong( L, "BoardObjectVnum", &board->BoardObject );
@@ -117,7 +117,7 @@ void LuaBoardRepository::ExecuteBoardFile( const std::string &filePath, void *us
   LuaLoadDataFile( filePath, L_BoardEntry, "BoardEntry" );
 }
 
-void LuaBoardRepository::PushNotes( lua_State *L, const Board *board )
+void LuaBoardRepository::PushNotes( lua_State *L, const std::shared_ptr<Board> &board )
 {
   if(!board->Notes().empty())
     {
@@ -150,7 +150,7 @@ void LuaBoardRepository::PushNotes( lua_State *L, const Board *board )
 
 void LuaBoardRepository::PushBoard( lua_State *L, const void *userData )
 {
-  const Board *board = (const Board*) userData;
+  const std::shared_ptr<Board> board = *static_cast<const std::shared_ptr<Board>*>(userData);
   lua_pushinteger( L, 1 );
   lua_newtable( L );
 
@@ -172,7 +172,7 @@ void LuaBoardRepository::PushBoard( lua_State *L, const void *userData )
 }
 
 ////////////////////////////////////
-BoardRepository *NewBoardRepository()
+std::shared_ptr<BoardRepository> NewBoardRepository()
 {
-  return new LuaBoardRepository();
+  return std::make_shared<LuaBoardRepository>();
 }

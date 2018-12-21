@@ -1,6 +1,7 @@
 #ifndef _SWRIP_BOARD_HPP_
 #define _SWRIP_BOARD_HPP_
 
+#include <memory>
 #include <list>
 #include "types.hpp"
 #include "constants.hpp"
@@ -43,14 +44,13 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl = nullptr;
+  std::unique_ptr<Impl> pImpl;
 };
 
-Board *AllocateBoard(const std::string &name);
-void FreeBoard(Board *board);
-Board *GetBoardFromObject( const Object *obj );
-Board *FindBoardHere( const Character *ch );
-Board *GetBoard( const std::string &name );
+std::shared_ptr<Board> AllocateBoard(const std::string &name);
+std::shared_ptr<Board> GetBoardFromObject( const Object *obj );
+std::shared_ptr<Board> FindBoardHere( const Character *ch );
+std::shared_ptr<Board> GetBoard( const std::string &name );
 void FreeNote( Note *pnote );
 void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL );
 void AttachNote(Character *ch);

@@ -14,7 +14,7 @@ void do_boards( Character *ch, std::string argument )
 
   SetCharacterColor( AT_NOTE, ch );
 
-  for(const Board *board : Boards->Entities())
+  for(const auto &board : Boards)
     {
       const char *boardType = nullptr;
 

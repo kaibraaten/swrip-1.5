@@ -5,7 +5,7 @@
 
 void do_bset( Character *ch, std::string argument )
 {
-  Board *board = nullptr;
+  std::shared_ptr<Board> board;
   std::string arg1;
   std::string arg2;
   int value = 0;
