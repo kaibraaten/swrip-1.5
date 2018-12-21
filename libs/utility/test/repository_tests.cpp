@@ -48,3 +48,36 @@ TEST_F(RepositoryTests, WorksWithRangedLoop)
   // Assert
   EXPECT_NE(dummy, 0);
 }
+
+struct MyStruct
+{
+  int Dummy = 0;
+};
+
+struct CompareMyStruct
+{
+  bool operator()(const std::shared_ptr<MyStruct> &lhv,
+                  const std::shared_ptr<MyStruct> &rhv) const
+  {
+    return lhv->Dummy < rhv->Dummy;
+  }
+};
+
+using MyStructRepoBase = Ceris::Repository<std::shared_ptr<MyStruct>, CompareMyStruct>;
+
+class MyStructRepo : public MyStructRepoBase
+{
+
+};
+
+TEST_F(RepositoryTests, BeginAndEndWorkWhenRepoStoredInSharedPtr)
+{
+  // Arrange
+  std::shared_ptr<MyStructRepo> repo = std::make_shared<MyStructRepo>();
+
+  // Act/assert (the fact that it compiles is considered success).
+  for(std::shared_ptr<MyStruct> myObj : repo)
+    {
+      ++myObj->Dummy;
+    }
+}
