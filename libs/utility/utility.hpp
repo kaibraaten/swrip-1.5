@@ -128,7 +128,7 @@ do                                                              \
    (link)->next->prev        = (link)->prev;                 \
   } while(0)
 
-#define ForEach( ListType, head, next, callbackFunction, userData )     \
+#define DikuForEach( ListType, head, next, callbackFunction, userData )     \
   do {                                                                  \
     ListType *tmpNext;                                                  \
     ListType *element;                                                  \

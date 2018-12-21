@@ -52,4 +52,10 @@ size_t Count(const Container &container, UnaryPredicate pred)
   return count_if(std::begin(container), std::end(container), pred);
 }
 
+template<typename Container, typename UnaryFunction>
+void ForEach(const Container &container, UnaryFunction func)
+{
+  for_each(std::begin(container), std::end(container), func);
+}
+
 #endif

@@ -6,7 +6,9 @@
 #include <string>
 #include "types.hpp"
 
-class BanRepository : public Ceris::Repository<std::shared_ptr<Ban>>
+using BanRepositoryBase = Ceris::Repository<std::shared_ptr<Ban>>;
+  
+class BanRepository : public BanRepositoryBase
 {
 public:
   virtual bool Contains(const std::string&) const = 0;
@@ -14,8 +16,8 @@ public:
   virtual void Save() const = 0;
 };
 
-extern BanRepository *Bans;
+extern std::shared_ptr<BanRepository> Bans;
 
-BanRepository *NewBanRepository();
+std::shared_ptr<BanRepository> NewBanRepository();
 
 #endif

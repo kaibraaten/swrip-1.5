@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <utility/algorithms.hpp>
 #include "banrepository.hpp"
 #include "ban.hpp"
 #include "script.hpp"
@@ -6,7 +7,7 @@
 
 #define BAN_LIST DATA_DIR "banned.lua"
 
-BanRepository *Bans = NULL;
+std::shared_ptr<BanRepository> Bans;
 
 //////////////////////////////////////////////////////
 class LuaBanRepository : public BanRepository
@@ -54,10 +55,9 @@ void LuaBanRepository::PushBan(std::shared_ptr<Ban> ban, lua_State *L)
 void LuaBanRepository::PushBans( lua_State *L, const void *ud )
 {
   lua_newtable( L );
-  const std::list<std::shared_ptr<Ban>> &bans = Bans->Entities();
 
-  for_each(bans.begin(), bans.end(),
-           [&L](const auto ban) { PushBan(ban, L); });
+  ForEach(Bans->Entities(),
+          [&L](const auto ban) { PushBan(ban, L); });
 
   lua_setglobal( L, "bans" );
 }
@@ -72,7 +72,7 @@ int LuaBanRepository::L_BanEntry( lua_State *L )
   return 0;
 }
 
-BanRepository *NewBanRepository()
+std::shared_ptr<BanRepository> NewBanRepository()
 {
-  return new LuaBanRepository();
+  return std::make_shared<LuaBanRepository>();
 }
