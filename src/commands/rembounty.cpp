@@ -4,7 +4,7 @@
 
 void do_rembounty( Character *ch, std::string argument )
 {
-  Bounty *bounty = GetBounty( argument );
+  std::shared_ptr<Bounty> bounty = GetBounty( argument );
 
   if ( bounty != NULL )
     {

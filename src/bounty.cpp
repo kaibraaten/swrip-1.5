@@ -31,7 +31,7 @@ bool IsBountyOn( const Character *victim )
   return GetBounty(victim->Name) != NULL;
 }
 
-Bounty *GetBounty( const std::string &name )
+std::shared_ptr<Bounty> GetBounty( const std::string &name )
 {
   return Bounties->Find([name](const auto &bounty){ return StrCmp(name, bounty->Target) == 0; });
 }
@@ -39,12 +39,11 @@ Bounty *GetBounty( const std::string &name )
 void AddBounty( const Character *ch , const Character *victim , long amount )
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
-  Character *echoTo = nullptr;
-  Bounty *bounty = GetBounty(victim->Name);
+  std::shared_ptr<Bounty> bounty = GetBounty(victim->Name);
 
   if (bounty == nullptr)
     {
-      bounty = new Bounty();
+      bounty = std::make_shared<Bounty>();
       Bounties->Add(bounty);
 
       bounty->Target = victim->Name;
@@ -59,7 +58,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
            ch->Name.c_str(), amount, victim->Name.c_str() );
   ch->Echo("%s", buf);
 
-  for (echoTo = LastCharacter; echoTo; echoTo = echoTo->Previous)
+  for (const Character *echoTo = LastCharacter; echoTo; echoTo = echoTo->Previous)
     {
       if(((IsClanned(ch) && IsBountyHuntersGuild(ch->PCData->ClanInfo.Clan->Name))
           || IsImmortal(echoTo))
@@ -70,17 +69,14 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
     }
 }
 
-void RemoveBounty( Bounty *bounty )
+void RemoveBounty(std::shared_ptr<Bounty> bounty )
 {
   Bounties->Remove(bounty);
-  delete bounty;
-
   Bounties->Save();
 }
 
 void ClaimBounty( Character *ch, const Character *victim )
 {
-  Bounty *bounty = NULL;
   long xp = 0;
   char buf[MAX_STRING_LENGTH];
 
@@ -89,7 +85,7 @@ void ClaimBounty( Character *ch, const Character *victim )
       return;
     }
 
-  bounty = GetBounty( victim->Name );
+  std::shared_ptr<Bounty> bounty = GetBounty( victim->Name );
 
   if ( ch == victim )
     {

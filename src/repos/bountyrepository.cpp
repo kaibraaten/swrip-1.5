@@ -4,7 +4,7 @@
 
 #define BOUNTY_LIST DATA_DIR "bounties.lua"
 
-BountyRepository *Bounties = nullptr;
+std::shared_ptr<BountyRepository> Bounties;
 
 /////////////////////////////////////////////////////
 class LuaBountyRepository : public BountyRepository
@@ -14,7 +14,7 @@ public:
   void Save() const override;
 
 private:
-  static void PushBounty( const Bounty *bounty, lua_State *L);
+  static void PushBounty( const std::shared_ptr<Bounty> &bounty, lua_State *L);
   static void PushBounties( lua_State *L, const void *userData );
   static int L_BountyEntry( lua_State *L );
 };
@@ -29,12 +29,12 @@ void LuaBountyRepository::Load()
   LuaLoadDataFile( BOUNTY_LIST, L_BountyEntry, "BountyEntry" );
 }
 
-BountyRepository *NewBountyRepository()
+std::shared_ptr<BountyRepository> NewBountyRepository()
 {
-  return new LuaBountyRepository();
+  return std::make_shared<LuaBountyRepository>();
 }
 
-void LuaBountyRepository::PushBounty( const Bounty *bounty, lua_State *L)
+void LuaBountyRepository::PushBounty( const std::shared_ptr<Bounty> &bounty, lua_State *L)
 {
   static int idx = 0;
   lua_pushinteger( L, ++idx );
@@ -51,7 +51,7 @@ void LuaBountyRepository::PushBounties( lua_State *L, const void *userData )
 {
   lua_newtable( L );
 
-  for(const Bounty *bounty : Bounties->Entities())
+  for(const auto &bounty : Bounties)
     {
       PushBounty(bounty, L);
     }
@@ -75,7 +75,7 @@ int LuaBountyRepository::L_BountyEntry( lua_State *L )
   
   if( !target.empty() && !poster.empty() )
     {
-      Bounty *bounty = new Bounty();
+      std::shared_ptr<Bounty> bounty = std::make_shared<Bounty>();
 
       bounty->Target = target;
       bounty->Reward = reward;

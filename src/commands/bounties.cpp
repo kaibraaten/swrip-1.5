@@ -20,7 +20,7 @@ void do_bounties( Character *ch, std::string argument )
 
   if( Bounties->Count() > 0)
     {
-      for(const Bounty *bounty : Bounties->Entities())
+      for(const auto &bounty : Bounties)
         {
           SetCharacterColor( AT_RED, ch );
           ch->Echo( "%-26s   %-14ld %-20s\r\n",
@@ -33,4 +33,3 @@ void do_bounties( Character *ch, std::string argument )
       ch->Echo( "There are no bounties set at this time.\r\n" );
     }
 }
-

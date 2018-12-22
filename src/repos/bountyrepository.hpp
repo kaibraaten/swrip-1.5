@@ -1,17 +1,18 @@
 #ifndef _SWRIP_BOUNTYREPOSITORY_HPP_
 #define _SWRIP_BOUNTYREPOSITORY_HPP_
 
+#include <memory>
 #include <utility/repository.hpp>
 #include "types.hpp"
 
-class BountyRepository : public Ceris::Repository<Bounty*>
+class BountyRepository : public Ceris::Repository<std::shared_ptr<Bounty>>
 {
 public:
   virtual void Load() = 0;
   virtual void Save() const = 0;
 };
 
-extern BountyRepository *Bounties;
-BountyRepository *NewBountyRepository();
+extern std::shared_ptr<BountyRepository> Bounties;
+std::shared_ptr<BountyRepository> NewBountyRepository();
 
 #endif
