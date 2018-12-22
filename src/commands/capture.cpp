@@ -18,7 +18,7 @@ static bool CheckIfProtectingPlanet(Ship *ship, void *userData);
 
 void do_capture( Character *ch , std::string argument )
 {
-  Clan *clan = nullptr;
+  std::shared_ptr<Clan> clan;
   Planet *planet = nullptr;
   float support = 0.0;
   int pCount = 0;
@@ -108,7 +108,7 @@ void do_capture( Character *ch , std::string argument )
 static bool CheckIfProtectingPlanet(Ship *ship, void *userData)
 {
   struct UserData *data = (struct UserData*)userData;
-  Clan *sClan = GetClan(ship->Owner);
+  std::shared_ptr<Clan> sClan = GetClan(ship->Owner);
 
   if( !ship->Spaceobject )
     return true;

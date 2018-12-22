@@ -53,7 +53,7 @@ void do_setplanet( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "governed_by" ) )
     {
-      Clan *clan = GetClan( argument );
+      std::shared_ptr<Clan> clan = GetClan( argument );
 
       if ( clan )
         {

@@ -6,7 +6,7 @@
 
 void do_resign( Character *ch, std::string argument )
 {
-  Clan *clan = NULL;
+  std::shared_ptr<Clan> clan;
   long xp_to_lose = 0;
   long xp_actually_lost = 0;
 

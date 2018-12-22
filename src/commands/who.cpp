@@ -54,7 +54,7 @@ void do_who( Character *ch, std::string argument )
   bool fShowHomepage = false;
   bool fClanMatch = false;
   bool NullCh = false;
-  Clan *pClan = NULL;
+  std::shared_ptr<Clan> pClan;
   FILE *whoout = NULL;
   Descriptor *desc = nullptr;
   std::list<WhoData> immortals;
@@ -325,7 +325,7 @@ void do_who( Character *ch, std::string argument )
 		 && ch->PCData->ClanInfo.Clan == wch->PCData->ClanInfo.Clan )
 		|| IsGreater( ch ) ) )
         {
-          Clan *pclan = wch->PCData->ClanInfo.Clan;
+          std::shared_ptr<Clan> pclan = wch->PCData->ClanInfo.Clan;
 
           clan_name = " (" ;
 

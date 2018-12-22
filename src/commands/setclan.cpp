@@ -16,7 +16,7 @@ void do_setclan( Character *ch, std::string argument )
 {
   std::string arg1;
   std::string arg2;
-  Clan *clan = NULL;
+  std::shared_ptr<Clan> clan;
 
   if ( IsNpc( ch ) )
     {
@@ -76,7 +76,7 @@ void do_setclan( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "addguild" ) )
     {
-      Clan *guild = GetClan( argument );
+      std::shared_ptr<Clan> guild = GetClan( argument );
 
       if ( !guild )
         {

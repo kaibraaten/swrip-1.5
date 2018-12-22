@@ -236,7 +236,7 @@ void InMemoryPlayerRepository::LoadGuildData( lua_State *L, Character *ch )
       if( !lua_isnil( L, ++idx ) )
         {
           std::string guildName = lua_tostring( L, idx );
-          Clan *guild = GetClan( guildName );
+          std::shared_ptr<Clan> guild = GetClan( guildName );
 
           if( guild != nullptr )
             {

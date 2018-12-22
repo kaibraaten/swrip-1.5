@@ -189,7 +189,7 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   PositionType position = 0;
-  Clan *clan = NULL;
+  std::shared_ptr<Clan> clan;
 
   if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL && channel != CHANNEL_IMMTALK && channel != CHANNEL_OOC
        && channel != CHANNEL_ASK && channel != CHANNEL_NEWBIE && channel != CHANNEL_AVTALK
@@ -700,7 +700,7 @@ bool CharacterKnowsLanguage( const Character *ch, int language, const Character 
       if ( IsNpc(ch) || IsNpc(cch) )
         return true;
       if ( ch->PCData->ClanInfo.Clan == cch->PCData->ClanInfo.Clan
-	   && ch->PCData->ClanInfo.Clan != NULL )
+	   && ch->PCData->ClanInfo.Clan != nullptr )
         return true;
     }
   if ( !IsNpc( ch ) )

@@ -50,7 +50,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "owner" ) )
     {
-      Clan *clan = NULL;
+      std::shared_ptr<Clan> clan;
 
       if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
         {

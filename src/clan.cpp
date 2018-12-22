@@ -34,37 +34,37 @@
 //////////////////////////////////////////////////////////////
 struct Clan::Impl
 {
-  std::list<Clan*> Subclans;
+  std::list<std::shared_ptr<Clan>> Subclans;
   std::list<ClanMember*> Members;
 };
 
 //////////////////////////////////////////////////////////////
 Clan::Clan()
-  : pImpl(new Impl())
+  : pImpl(std::make_unique<Impl>())
 {
 
 }
 
 Clan::~Clan()
 {
-  delete pImpl;
+
 }
 
-void Clan::Add(Clan *guild)
+void Clan::Add(const std::shared_ptr<Clan> &guild)
 {
   pImpl->Subclans.push_back(guild);
 
   guild->Type = CLAN_GUILD;
-  guild->MainClan = this;
+  guild->MainClan = GetClan(this->Name);
 }
 
-void Clan::Remove(Clan *guild)
+void Clan::Remove(const std::shared_ptr<Clan> &guild)
 {
   pImpl->Subclans.remove(guild);
   guild->MainClan = nullptr;
 }
 
-const std::list<Clan*> &Clan::Subclans() const
+const std::list<std::shared_ptr<Clan>> &Clan::Subclans() const
 {
   return pImpl->Subclans;
 }
@@ -89,7 +89,7 @@ const std::list<ClanMember*> &Clan::Members() const
 /*
  * Get pointer to clan structure from clan name.
  */
-Clan *GetClan( const std::string &name )
+std::shared_ptr<Clan> GetClan( const std::string &name )
 {
   return Clans->Find([name](const auto &clan)
                      {
@@ -97,13 +97,14 @@ Clan *GetClan( const std::string &name )
                      });
 }
 
-void AssignGuildToMainclan(Clan *guild)
+void AssignGuildToMainclan(const std::shared_ptr<Clan> &guild)
 {
-  Clan *mainClan = GetClan( guild->MainClanName );
+  std::shared_ptr<Clan> mainClan = GetClan( guild->MainClanName );
   AssignGuildToMainclan( guild, mainClan );
 }
 
-void AssignGuildToMainclan( Clan *guild, Clan *mainClan )
+void AssignGuildToMainclan(const std::shared_ptr<Clan> &guild,
+                           const std::shared_ptr<Clan> &mainClan )
 {
   if ( mainClan )
     {
@@ -126,11 +127,12 @@ static int LessName(const ClanMember *lhv, const ClanMember *rhv)
   return StrCmp(lhv->Name, rhv->Name);
 }
 
-void ShowClanMembers( const Character *ch, const Clan *clan, const std::string &format )
+void ShowClanMembers(const Character *ch, const std::shared_ptr<Clan> &clan,
+                     const std::string &format )
 {
   int members = 0;
 
-  assert(clan != NULL);
+  assert(clan != nullptr);
 
   ch->Echo( "\r\nMembers of %s\r\n", clan->Name.c_str() );
   ch->Echo( "------------------------------------------------------------------------------\r\n" );
@@ -229,7 +231,7 @@ void RemoveClanMember( const Character *ch )
       return;
     }
 
-  Clan *clan = ch->PCData->ClanInfo.Clan;
+  std::shared_ptr<Clan> clan = ch->PCData->ClanInfo.Clan;
 
   if(clan != nullptr)
     {
@@ -256,7 +258,7 @@ void UpdateClanMember( const Character *ch )
       return;
     }
 
-  Clan *clan = ch->PCData->ClanInfo.Clan;
+  std::shared_ptr<Clan> clan = ch->PCData->ClanInfo.Clan;
 
   if( clan != nullptr )
     {
@@ -286,15 +288,9 @@ void UpdateClanMember( const Character *ch )
     }
 }
 
-Clan *AllocateClan( void )
+std::shared_ptr<Clan> AllocateClan()
 {
-  Clan *clan = new Clan();
-  return clan;
-}
-
-void FreeClan( Clan *clan )
-{
-  delete clan;
+  return std::make_shared<Clan>();
 }
 
 bool IsBountyHuntersGuild(const std::string &clanName)

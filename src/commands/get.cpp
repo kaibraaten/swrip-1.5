@@ -7,7 +7,7 @@
 #include "repos/clanrepository.hpp"
 #include "repos/playerrepository.hpp"
 
-static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
+static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch);
 static void get_obj( Character *ch, Object *obj, Object *container );
 
 void do_get( Character *ch, std::string argument )
@@ -425,7 +425,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom )
        && (container == NULL || container->CarriedBy == NULL) )
     {
-      for(const Clan *clan : Clans->Entities())
+      for(const auto &clan : Clans)
         {
           SaveStoreroomForOwnerClan(clan, ch);
         }
@@ -453,7 +453,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   ObjProgGetTrigger(ch, obj);
 }
 
-static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch)
+static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch)
 {
   if ( clan->Storeroom == ch->InRoom->Vnum )
     {

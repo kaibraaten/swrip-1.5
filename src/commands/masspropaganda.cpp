@@ -13,7 +13,7 @@ void do_mass_propaganda( Character *ch, std::string argument )
   std::string arg1;
   Character *victim = NULL;
   Planet *planet = NULL;
-  Clan *clan = NULL;
+  std::shared_ptr<Clan> clan;
   int percent = 0;
 
   if ( IsNpc(ch) || !IsClanned( ch ) || !ch->InRoom->Area->Planet )

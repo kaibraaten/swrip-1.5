@@ -10,8 +10,8 @@ static bool IsGuildNameAcceptable( const std::string &name );
 void do_makeguild( Character *ch, std::string argument )
 {
   std::string faction;
-  Clan *guild = NULL;
-  Clan *mainClan = NULL;
+  std::shared_ptr<Clan> guild;
+  std::shared_ptr<Clan> mainClan;
   argument = OneArgument( argument, faction );
   
   if ( faction.empty() || argument.empty() )

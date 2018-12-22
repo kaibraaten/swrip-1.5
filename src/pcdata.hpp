@@ -1,6 +1,7 @@
 #ifndef _SWRIP_PCDATA_HPP_
 #define _SWRIP_PCDATA_HPP_
 
+#include <memory>
 #include <array>
 #include <list>
 #include <bitset>
@@ -49,7 +50,7 @@ public:
 
   struct
   {
-    class Clan *Clan = NULL;
+    std::shared_ptr<class Clan> Clan;
     std::string ClanName;
     int Salary = 0;
     long SalaryDate = 0;

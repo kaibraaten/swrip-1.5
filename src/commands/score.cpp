@@ -242,7 +242,7 @@ void do_score(Character *ch, std::string argument)
 
   if ( IsClanned( ch ) )
     {
-      const Clan *clan = ch->PCData->ClanInfo.Clan;
+      std::shared_ptr<Clan> clan = ch->PCData->ClanInfo.Clan;
 
       ch->Echo("&C----------------------------------------------------------------------------\r\n");
       ch->Echo("&cORGANIZATION: &C%-35s &cSALARY: &C%-10d    &cPkills/Deaths: &C%3.3d&c/&C%3.3d",

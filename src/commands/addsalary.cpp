@@ -14,7 +14,7 @@ void do_addsalary( Character *ch, std::string argument )
       return;
     }
 
-  Clan *clan = ch->PCData->ClanInfo.Clan;
+  std::shared_ptr<Clan> clan = ch->PCData->ClanInfo.Clan;
 
   if ( (!ch->PCData->Bestowments.empty()
         && IsName("salary", ch->PCData->Bestowments))

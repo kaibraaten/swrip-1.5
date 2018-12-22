@@ -438,7 +438,7 @@ static int L_ShipEntry( lua_State *L )
 
 static void ReadyShipAfterLoad( Ship *ship )
 {
-  Clan *clan = NULL;
+  std::shared_ptr<Clan> clan;
   Room *room = NULL;
 
   if (!IsShipDisabled( ship ))

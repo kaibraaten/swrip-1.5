@@ -7,22 +7,22 @@
 
 #define CLAN_DIR DATA_DIR "clans/"
 
-ClanRepository *Clans = nullptr;
+std::shared_ptr<ClanRepository> Clans;
 
 class LuaClanRepository : public ClanRepository
 {
 public:
   void Load() override;
   void Save() const override;
-  void Save(const Clan*) const override;
+  void Save(const std::shared_ptr<Clan>&) const override;
 
 private:
   static void PushMember( lua_State *L, const ClanMember *member, int idx );
-  static void PushMembers( lua_State *L, const Clan *clan );
+  static void PushMembers( lua_State *L, const std::shared_ptr<Clan> &clan );
   static void PushClan( lua_State *L, const void *userData );
-  static void LoadOneMember( lua_State *L, Clan *clan );
-  static void LoadMembers( lua_State *L, Clan *clan );
-  static void LoadStoreroom( lua_State *L, Clan *clan );
+  static void LoadOneMember( lua_State *L, const std::shared_ptr<Clan> &clan );
+  static void LoadMembers( lua_State *L, const std::shared_ptr<Clan> &clan );
+  static void LoadStoreroom( lua_State *L, const std::shared_ptr<Clan> &clan );
   static int L_ClanEntry( lua_State *L );
   static void ExecuteClanFile( const std::string &filePath, void *userData );
 };
@@ -31,7 +31,7 @@ void LuaClanRepository::Load()
 {
   ForEachLuaFileInDir( CLAN_DIR, ExecuteClanFile, NULL );
 
-  for(Clan *clan : Clans->Entities())
+  for(const auto &clan : Clans)
     {
       AssignGuildToMainclan(clan);
     }
@@ -39,15 +39,15 @@ void LuaClanRepository::Load()
 
 void LuaClanRepository::Save() const
 {
-  for(const Clan *clan : Entities())
+  for(const auto &clan : Entities())
     {
       Save(clan);
     }
 }
 
-void LuaClanRepository::Save(const Clan *clan) const
+void LuaClanRepository::Save(const std::shared_ptr<Clan> &clan) const
 {
-  LuaSaveDataFile( GetClanFilename( clan ), PushClan, "clan", clan );
+  LuaSaveDataFile( GetClanFilename( clan ), PushClan, "clan", &clan );
 }
 
 void LuaClanRepository::PushMember( lua_State *L, const ClanMember *member, int idx )
@@ -65,7 +65,7 @@ void LuaClanRepository::PushMember( lua_State *L, const ClanMember *member, int 
   lua_settable( L, -3 );
 }
 
-void LuaClanRepository::PushMembers( lua_State *L, const Clan *clan )
+void LuaClanRepository::PushMembers( lua_State *L, const std::shared_ptr<Clan> &clan )
 {
   int idx = 0;
   lua_pushstring( L, "Members" );
@@ -81,7 +81,7 @@ void LuaClanRepository::PushMembers( lua_State *L, const Clan *clan )
 
 void LuaClanRepository::PushClan( lua_State *L, const void *userData )
 {
-  const Clan *clan = (const Clan*) userData;
+  const std::shared_ptr<Clan> clan = *static_cast<const std::shared_ptr<Clan>*>(userData);
   static int idx = 0;
   lua_pushinteger( L, ++idx );
   lua_newtable( L );
@@ -141,7 +141,7 @@ void LuaClanRepository::PushClan( lua_State *L, const void *userData )
   lua_setglobal( L, "clan" );
 }
 
-void LuaClanRepository::LoadOneMember( lua_State *L, Clan *clan )
+void LuaClanRepository::LoadOneMember( lua_State *L, const std::shared_ptr<Clan> &clan )
 {
   ClanMember *member = new ClanMember();
 
@@ -160,7 +160,7 @@ void LuaClanRepository::LoadOneMember( lua_State *L, Clan *clan )
   clan->Add(member);
 }
 
-void LuaClanRepository::LoadMembers( lua_State *L, Clan *clan )
+void LuaClanRepository::LoadMembers( lua_State *L, const std::shared_ptr<Clan> &clan )
 {
   int idx = lua_gettop( L );
 
@@ -180,7 +180,7 @@ void LuaClanRepository::LoadMembers( lua_State *L, Clan *clan )
   lua_pop( L, 1 );
 }
 
-void LuaClanRepository::LoadStoreroom( lua_State *L, Clan *clan )
+void LuaClanRepository::LoadStoreroom( lua_State *L, const std::shared_ptr<Clan> &clan )
 {
 
 }
@@ -190,19 +190,15 @@ int LuaClanRepository::L_ClanEntry( lua_State *L )
   std::string clanName;
   LuaGetfieldString( L, "Name", &clanName );
 
-  Clan *clan = nullptr;
-  
-  if( !clanName.empty() )
-    {
-      clan = AllocateClan();
-      clan->Name = clanName;
-      Log->Info( "Loading %s", clan->Name.c_str() );
-    }
-  else
+  if( clanName.empty() )
     {
       Log->Bug( "%s: Found clan without name!", __FUNCTION__ );
       return 0;
     }
+
+  std::shared_ptr<Clan> clan = AllocateClan();
+  clan->Name = clanName;
+  Log->Info( "Loading %s", clan->Name.c_str() );
   
   LuaGetfieldString( L, "MainClan", &clan->MainClanName );
   LuaGetfieldString( L, "Description", &clan->Description );
@@ -234,7 +230,7 @@ void LuaClanRepository::ExecuteClanFile( const std::string &filePath, void *user
   LuaLoadDataFile( filePath, L_ClanEntry, "ClanEntry" );
 }
 
-std::string GetClanFilename( const Clan *clan )
+std::string GetClanFilename( const std::shared_ptr<Clan> &clan )
 {
   char fullPath[MAX_STRING_LENGTH];
   sprintf( fullPath, "%s%s", CLAN_DIR, ConvertToLuaFilename( clan->Name ).c_str() );
@@ -242,15 +238,15 @@ std::string GetClanFilename( const Clan *clan )
   return fullPath;
 }
 
-ClanRepository *NewClanRepository()
+std::shared_ptr<ClanRepository> NewClanRepository()
 {
-  return new LuaClanRepository();
+  return std::make_shared<LuaClanRepository>();
 }
 
 /*
  * Save items in a clan storage room                    -Scryn & Thoric
  */
-void SaveClanStoreroom( Character *ch, const Clan *clan )
+void SaveClanStoreroom( Character *ch, const std::shared_ptr<Clan> &clan )
 {
   // See original implementation here:
   /*

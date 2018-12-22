@@ -11,7 +11,7 @@ void do_roster( Character *ch, std::string argument )
       return;
     }
 
-  const Clan *clan = ch->PCData->ClanInfo.Clan;
+  std::shared_ptr<Clan> clan = ch->PCData->ClanInfo.Clan;
 
   if( StrCmp(ch->Name, clan->Leadership.Leader )
       && StrCmp(ch->Name, clan->Leadership.Number1 )

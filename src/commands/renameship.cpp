@@ -8,7 +8,7 @@
 void do_renameship( Character *ch, std::string argument )
 {
   Ship *ship = nullptr;
-  const Clan *clan = nullptr;
+  std::shared_ptr<Clan> clan;
   
   if ( (ship = GetShipFromCockpit( ch->InRoom->Vnum ) ) == NULL)
     {

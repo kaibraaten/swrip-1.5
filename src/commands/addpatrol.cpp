@@ -9,7 +9,7 @@
 void do_add_patrol( Character *ch , std::string argument )
 {
   int the_chance, credits;
-  Clan *clan = NULL;
+  std::shared_ptr<Clan> clan;
   
   if ( IsNpc( ch ) || !ch->PCData )
     return;

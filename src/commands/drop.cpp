@@ -8,7 +8,7 @@
 #include "repos/clanrepository.hpp"
 #include "repos/playerrepository.hpp"
 
-static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
+static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch);
 
 void do_drop( Character *ch, std::string argument )
 {
@@ -139,7 +139,7 @@ void do_drop( Character *ch, std::string argument )
       /* Clan storeroom saving */
       if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
         {
-          for(const Clan *clan : Clans->Entities())
+          for(const auto &clan : Clans)
             {
               SaveStoreroomForOwnerClan(clan, ch);
             }
@@ -211,7 +211,7 @@ void do_drop( Character *ch, std::string argument )
 
       if ( ch->InRoom->Flags.test( Flag::Room::ClanStoreroom ) )
         {
-          for(const Clan *clan : Clans->Entities())
+          for(const auto &clan : Clans)
             {
               SaveStoreroomForOwnerClan(clan, ch);
             }
@@ -244,7 +244,7 @@ void do_drop( Character *ch, std::string argument )
     } /* duping protector */
 }
 
-static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch)
+static void SaveStoreroomForOwnerClan(const std::shared_ptr<Clan> &clan, Character *ch)
 {
   if ( clan->Storeroom == ch->InRoom->Vnum )
     {

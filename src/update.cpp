@@ -1287,7 +1287,7 @@ static void TaxUpdate()
 {
   for(const Planet *planet : Planets)
     {
-      Clan *clan = planet->GovernedBy;
+      std::shared_ptr<Clan> clan = planet->GovernedBy;
 
       if ( clan != NULL )
         {
@@ -1295,7 +1295,7 @@ static void TaxUpdate()
 
           if ( numberOfSubclans > 0)
             {
-              for(Clan *guild : Clans)
+              for(const auto &guild : Clans)
                 {
                   guild->Funds += GetTaxes(planet) / 1440 / numberOfSubclans;
                   Clans->Save(guild);

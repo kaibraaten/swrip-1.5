@@ -13,7 +13,7 @@ void do_members( Character *ch, std::string argument )
 
   if( !StrCmp( argument, "all" ) )
     {
-      for(const Clan *clan : Clans->Entities())
+      for(const auto &clan : Clans)
 	{
 	  ShowClanMembers( ch, clan );
 	}
@@ -21,7 +21,7 @@ void do_members( Character *ch, std::string argument )
       return;
     }
 
-  const Clan *clan = GetClan(argument);
+  std::shared_ptr<Clan> clan = GetClan(argument);
 
   if(clan != nullptr)
     {

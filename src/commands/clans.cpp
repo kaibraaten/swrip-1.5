@@ -9,7 +9,7 @@ void do_clans( Character *ch, std::string argument )
 {
   int count = 0;
 
-  for(const Clan *clan : Clans->Entities())
+  for(const auto &clan : Clans)
     {
       int pCount = 0;
       int support = 0;
@@ -54,7 +54,7 @@ void do_clans( Character *ch, std::string argument )
         {
           ch->Echo( "  &z&wGuilds               Leader\r\n");
 
-          for(const Clan *guild : clan->Subclans())
+          for(const auto &guild : clan->Subclans())
             {
               ch->Echo( "  &O%-20s %-10s\r\n",
                         guild->Name.c_str(), guild->Leadership.Leader.c_str() );

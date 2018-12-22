@@ -2204,7 +2204,7 @@ void ResetShip( Ship *ship )
 #ifndef NODEATHSHIP
   if ( StrCmp("Trainer", ship->Owner) && StrCmp("Public",ship->Owner) && ship->Type != MOB_SHIP )
     {
-      Clan *clan = NULL;
+      std::shared_ptr<Clan> clan;
 
       if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
         {
