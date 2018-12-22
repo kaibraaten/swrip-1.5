@@ -23,6 +23,7 @@
 #ifndef _SWRIP_SHUTTLE_HPP_
 #define _SWRIP_SHUTTLE_HPP_
 
+#include <memory>
 #include <list>
 #include <vector>
 #include <string>
@@ -62,14 +63,13 @@ public:
   Shuttle();
   virtual ~Shuttle();
 
-  void Add(ShuttleStop *stop);
-  void Remove(ShuttleStop *stop);
-  const std::vector<ShuttleStop*> &Stops() const;
+  void Add(std::shared_ptr<ShuttleStop> stop);
+  void Remove(std::shared_ptr<ShuttleStop> stop);
+  const std::vector<std::shared_ptr<ShuttleStop>> &Stops() const;
   
   Room *InRoom = nullptr;
 
-  /* HOTBOOT info, save vnum of current, then loop through on load to find it */
-  ShuttleStop *CurrentStop() const;
+  std::shared_ptr<ShuttleStop> CurrentStop() const;
   int CurrentNumber = -1;
 
   int State = SHUTTLE_STATE_LANDED;
@@ -93,7 +93,7 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl = nullptr;
+  std::unique_ptr<Impl> pImpl;
 };
 
 #ifndef MSL
@@ -107,13 +107,13 @@ private:
 /* Function prototypes */
 
 void ShuttleUpdate();
-Shuttle *NewShuttle(const std::string &name);
-bool ExtractShuttle( Shuttle *shuttle );
-bool InsertShuttle( Shuttle *shuttle, Room *room );
-void ShowShuttlesToCharacter( const std::list<Shuttle*> &shuttles, Character *ch );
-Shuttle *GetShuttleInRoom( const Room *room, const std::string &name );
-Shuttle *GetShuttleFromEntrance( vnum_t vnum );
-ShuttleStop *AllocateShuttleStop( void );
+std::shared_ptr<Shuttle> NewShuttle(const std::string &name);
+bool ExtractShuttle( std::shared_ptr<Shuttle> shuttle );
+bool InsertShuttle( std::shared_ptr<Shuttle> shuttle, Room *room );
+void ShowShuttlesToCharacter( const std::list<std::shared_ptr<Shuttle>> &shuttles, Character *ch );
+std::shared_ptr<Shuttle> GetShuttleInRoom( const Room *room, const std::string &name );
+std::shared_ptr<Shuttle> GetShuttleFromEntrance( vnum_t vnum );
+std::shared_ptr<ShuttleStop> AllocateShuttleStop();
 
 DECLARE_CMD_FUN( do_showshuttle );
 DECLARE_CMD_FUN( do_makeshuttle );

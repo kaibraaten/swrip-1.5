@@ -9,7 +9,7 @@ void do_leaveship( Character *ch, std::string argument )
   Room *fromroom = NULL;
   Room *toroom = NULL;
   Ship *ship = NULL;
-  Shuttle * shuttle = NULL;
+  std::shared_ptr<Shuttle> shuttle;
 
   fromroom = ch->InRoom;
 

@@ -5,7 +5,7 @@
 
 void do_showshuttle( Character *ch, std::string argument )
 {
-  const Shuttle *shuttle = Shuttles->FindByName(argument);
+  std::shared_ptr<Shuttle> shuttle = Shuttles->FindByName(argument);
 
   if ( shuttle == nullptr )
     {
@@ -20,7 +20,7 @@ void do_showshuttle( Character *ch, std::string argument )
       ch->Echo("No such shuttle.\r\nValid shuttles:\r\n");
       SetCharacterColor( AT_SHIP, ch );
 
-      for(const Shuttle *s : Shuttles->Entities())
+      for(std::shared_ptr<Shuttle> s : Shuttles)
         {
           ch->Echo( "Shuttle Name: %s - %s\r\n", s->Name.c_str(),
                     s->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
@@ -46,7 +46,7 @@ void do_showshuttle( Character *ch, std::string argument )
 
   int count = 0;
   
-  for(const ShuttleStop *stop : shuttle->Stops())
+  for(std::shared_ptr<ShuttleStop> stop : shuttle->Stops())
     {
       ch->Echo("\tStop # %d\r\n", ++count );
       ch->Echo("\t\tStop Name: %s (%ld)\r\n", stop->Name.c_str(), stop->RoomVnum );

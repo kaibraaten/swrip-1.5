@@ -6,35 +6,35 @@
 
 #define SHUTTLE_DIR     DATA_DIR "shuttles/"
 
-ShuttleRepository *Shuttles = nullptr;
+std::shared_ptr<ShuttleRepository> Shuttles;
 
 class LuaShuttleRepository : public ShuttleRepository
 {
 public:
   void Load() override;
   void Save() const override;
-  void Save(const Shuttle *shuttle) const override;
-  Shuttle *FindByName(const std::string &name) const override;
-  void DeleteFromStorage( Shuttle *shuttle ) override;
+  void Save(std::shared_ptr<Shuttle> shuttle) const override;
+  std::shared_ptr<Shuttle> FindByName(const std::string &name) const override;
+  void DeleteFromStorage(std::shared_ptr<Shuttle> shuttle) override;
 
 private:
-  static void PushStop( lua_State *L, const ShuttleStop *stop, const int idx );
-  static void PushStops( lua_State *L, const Shuttle *shuttle );
-  static void PushRooms( lua_State *L, const Shuttle *shuttle );
+  static void PushStop( lua_State *L, std::shared_ptr<ShuttleStop> stop, const int idx );
+  static void PushStops( lua_State *L, std::shared_ptr<Shuttle> shuttle );
+  static void PushRooms( lua_State *L, std::shared_ptr<Shuttle> shuttle );
   static void PushShuttle( lua_State *L, const void *userData );
-  static void LoadRooms( lua_State *L, Shuttle *shuttle );
-  static void LoadStop( lua_State *L, Shuttle *shuttle );
-  static void LoadStops( lua_State *L, Shuttle *shuttle );
+  static void LoadRooms( lua_State *L, std::shared_ptr<Shuttle> shuttle );
+  static void LoadStop( lua_State *L, std::shared_ptr<Shuttle> shuttle );
+  static void LoadStops( lua_State *L, std::shared_ptr<Shuttle> shuttle );
   static int L_ShuttleEntry( lua_State *L );
   static void ExecuteShuttleFile( const std::string &filePath, void *userData );
 };
 
-Shuttle *LuaShuttleRepository::FindByName(const std::string &name) const
+std::shared_ptr<Shuttle> LuaShuttleRepository::FindByName(const std::string &name) const
 {
-  Shuttle *shuttle = Find([name](const auto &s)
-                          {
-                            return StrCmp(name, s->Name) == 0;
-                          });
+  auto shuttle = Find([name](const auto &s)
+                      {
+                        return StrCmp(name, s->Name) == 0;
+                      });
 
   if(shuttle == nullptr)
     {
@@ -47,14 +47,14 @@ Shuttle *LuaShuttleRepository::FindByName(const std::string &name) const
   return shuttle;
 }
 
-void LuaShuttleRepository::Save(const Shuttle *shuttle) const
+void LuaShuttleRepository::Save(std::shared_ptr<Shuttle> shuttle) const
 {
-  LuaSaveDataFile( GetShuttleFilename( shuttle ), PushShuttle, "shuttle", shuttle );
+  LuaSaveDataFile( GetShuttleFilename( shuttle ), PushShuttle, "shuttle", &shuttle );
 }
 
 void LuaShuttleRepository::Save() const
 {
-  for(const Shuttle *shuttle : Shuttles->Entities())
+  for(auto shuttle : Shuttles)
     {
       Save(shuttle);
     }
@@ -62,10 +62,11 @@ void LuaShuttleRepository::Save() const
 
 void LuaShuttleRepository::Load()
 {
-  ForEachLuaFileInDir( SHUTTLE_DIR, ExecuteShuttleFile, NULL );
+  ForEachLuaFileInDir( SHUTTLE_DIR, ExecuteShuttleFile, nullptr );
 }
 
-void LuaShuttleRepository::PushStop( lua_State *L, const ShuttleStop *stop, const int idx )
+void LuaShuttleRepository::PushStop( lua_State *L, std::shared_ptr<ShuttleStop> stop,
+                                     const int idx )
 {
   lua_pushinteger( L, idx );
   lua_newtable( L );
@@ -76,13 +77,13 @@ void LuaShuttleRepository::PushStop( lua_State *L, const ShuttleStop *stop, cons
   lua_settable( L, -3 );
 }
 
-void LuaShuttleRepository::PushStops( lua_State *L, const Shuttle *shuttle )
+void LuaShuttleRepository::PushStops( lua_State *L, std::shared_ptr<Shuttle> shuttle )
 {
   int idx = 0;
   lua_pushstring( L, "Stops" );
   lua_newtable( L );
 
-  for(const ShuttleStop *stop : shuttle->Stops())
+  for(auto stop : shuttle->Stops())
     {
       PushStop( L, stop, ++idx );
     }
@@ -90,7 +91,7 @@ void LuaShuttleRepository::PushStops( lua_State *L, const Shuttle *shuttle )
   lua_settable( L, -3 );
 }
 
-void LuaShuttleRepository::PushRooms( lua_State *L, const Shuttle *shuttle )
+void LuaShuttleRepository::PushRooms( lua_State *L, std::shared_ptr<Shuttle> shuttle )
 {
   lua_pushstring( L, "Rooms" );
   lua_newtable( L );
@@ -104,11 +105,11 @@ void LuaShuttleRepository::PushRooms( lua_State *L, const Shuttle *shuttle )
 
 void LuaShuttleRepository::PushShuttle( lua_State *L, const void *userData )
 {
-  const Shuttle *shuttle = (const Shuttle*) userData;
+  std::shared_ptr<Shuttle> shuttle = *static_cast<const std::shared_ptr<Shuttle>*>(userData);
   lua_pushinteger( L, 1 );
   lua_newtable( L );
 
-   LuaSetfieldString( L, "Name", shuttle->Name );
+  LuaSetfieldString( L, "Name", shuttle->Name );
   LuaSetfieldNumber( L, "Delay", shuttle->Delay );
   LuaSetfieldNumber( L, "CurrentDelay", shuttle->CurrentDelay );
 
@@ -128,7 +129,7 @@ void LuaShuttleRepository::PushShuttle( lua_State *L, const void *userData )
   lua_setglobal( L, "shuttle" );
 }
 
-void LuaShuttleRepository::LoadRooms( lua_State *L, Shuttle *shuttle )
+void LuaShuttleRepository::LoadRooms( lua_State *L, std::shared_ptr<Shuttle> shuttle )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Rooms" );
@@ -143,9 +144,9 @@ void LuaShuttleRepository::LoadRooms( lua_State *L, Shuttle *shuttle )
   lua_pop( L, 1 );
 }
 
-void LuaShuttleRepository::LoadStop( lua_State *L, Shuttle *shuttle )
+void LuaShuttleRepository::LoadStop( lua_State *L, std::shared_ptr<Shuttle> shuttle )
 {
-  ShuttleStop *stop = new ShuttleStop();
+  std::shared_ptr<ShuttleStop> stop = std::make_shared<ShuttleStop>();
 
   LuaGetfieldString( L, "Name", &stop->Name );
   LuaGetfieldLong( L, "RoomVnum", &stop->RoomVnum );
@@ -153,7 +154,7 @@ void LuaShuttleRepository::LoadStop( lua_State *L, Shuttle *shuttle )
   shuttle->Add(stop);
 }
 
-void LuaShuttleRepository::LoadStops( lua_State *L, Shuttle *shuttle )
+void LuaShuttleRepository::LoadStops( lua_State *L, std::shared_ptr<Shuttle> shuttle )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Stops" );
@@ -174,7 +175,7 @@ void LuaShuttleRepository::LoadStops( lua_State *L, Shuttle *shuttle )
 
 int LuaShuttleRepository::L_ShuttleEntry( lua_State *L )
 {
-  Shuttle *shuttle = new Shuttle();
+  std::shared_ptr<Shuttle> shuttle = std::make_shared<Shuttle>();
   LuaGetfieldString( L, "Name", &shuttle->Name );
   LuaGetfieldInt( L, "Delay", &shuttle->Delay );
   LuaGetfieldInt( L, "CurrentDelay", &shuttle->CurrentDelay );
@@ -229,25 +230,21 @@ void LuaShuttleRepository::ExecuteShuttleFile( const std::string &filePath, void
   LuaLoadDataFile( filePath, L_ShuttleEntry, "ShuttleEntry" );
 }
 
-void LuaShuttleRepository::DeleteFromStorage( Shuttle *shuttle )
+void LuaShuttleRepository::DeleteFromStorage( std::shared_ptr<Shuttle> shuttle )
 {
-  char buf[MAX_STRING_LENGTH];
   Shuttles->Remove(shuttle);
-  sprintf(buf, "%s/%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ).c_str() );
-  unlink(buf);
-  delete shuttle;
+  std::string buf = GetShuttleFilename(shuttle);
+  unlink(buf.c_str());
 }
 
 ///////////////////////////////////////
 
-std::string GetShuttleFilename( const Shuttle *shuttle )
+std::string GetShuttleFilename( std::shared_ptr<Shuttle> shuttle )
 {
-  char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ).c_str() );
-  return fullPath;
+  return FormatString( "%s%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ).c_str() );
 }
 
-ShuttleRepository *NewShuttleRepository()
+std::shared_ptr<ShuttleRepository> NewShuttleRepository()
 {
-  return new LuaShuttleRepository();
+  return std::make_shared<LuaShuttleRepository>();
 }

@@ -6,7 +6,7 @@
 
 static constexpr int MAX_STOPS_TO_DISPLAY = 4;
 
-static void OutputShuttle(const Character *ch, const Shuttle *shuttle);
+static void OutputShuttle(const Character *ch, std::shared_ptr<Shuttle> shuttle);
 
 void do_pluogus( Character *ch, std::string argument )
 {
@@ -16,7 +16,7 @@ void do_pluogus( Character *ch, std::string argument )
       return;
     }
 
-  const Shuttle *shuttle = Shuttles->FindByName("Serin Pluogus");
+  std::shared_ptr<Shuttle> shuttle = Shuttles->FindByName("Serin Pluogus");
 
   if (shuttle != nullptr)
     {
@@ -33,7 +33,7 @@ void do_pluogus( Character *ch, std::string argument )
     }
 }
 
-static void OutputShuttle(const Character *ch, const Shuttle *shuttle)
+static void OutputShuttle(const Character *ch, std::shared_ptr<Shuttle> shuttle)
 {
   assert(shuttle != nullptr);
   
@@ -46,7 +46,7 @@ static void OutputShuttle(const Character *ch, const Shuttle *shuttle)
   SetCharacterColor(AT_SHIP, ch);
   ch->Echo("%s Schedule Information:\r\n", shuttle->Name.c_str() );
 
-  const ShuttleStop *stop = shuttle->CurrentStop();
+  std::shared_ptr<ShuttleStop> stop = shuttle->CurrentStop();
 
   /* current port */
   if ( shuttle->State == SHUTTLE_STATE_LANDING || shuttle->State == SHUTTLE_STATE_LANDED )

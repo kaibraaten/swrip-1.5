@@ -9,7 +9,7 @@ void do_board( Character *ch, std::string argument )
   Room *toroom = nullptr;
   Ship *ship = nullptr;
   std::string name;
-  Shuttle *shuttle = nullptr;
+  std::shared_ptr<Shuttle> shuttle;
 
   if ( argument.empty() )
     {
@@ -26,7 +26,6 @@ void do_board( Character *ch, std::string argument )
 
   if ( ( ship = GetShipInRoom( ch->InRoom , argument ) ) != NULL )
     {
-
       if ( ( toroom = GetRoom( ship->Rooms.Entrance ) ) == NULL )
         {
           ch->Echo("&RThat ship has no entrance!\r\n");

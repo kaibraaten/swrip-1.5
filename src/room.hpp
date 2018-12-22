@@ -1,6 +1,7 @@
 #ifndef _SWRIP_ROOM_HPP_
 #define _SWRIP_ROOM_HPP_
 
+#include <memory>
 #include <list>
 #include <string>
 #include <bitset>
@@ -60,9 +61,9 @@ public:
   void Remove(Ship *ship);
   const std::list<Ship*> &Ships() const;
 
-  void Add(Shuttle *shuttle);
-  void Remove(Shuttle *shuttle);
-  const std::list<Shuttle*> &Shuttles() const;
+  void Add(std::shared_ptr<Shuttle> shuttle);
+  void Remove(std::shared_ptr<Shuttle> shuttle);
+  const std::list<std::shared_ptr<Shuttle>> &Shuttles() const;
 
   void Add(Exit *xit);
   void Remove(Exit *xit);
