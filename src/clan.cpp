@@ -35,7 +35,7 @@
 struct Clan::Impl
 {
   std::list<std::shared_ptr<Clan>> Subclans;
-  std::list<ClanMember*> Members;
+  std::list<std::shared_ptr<ClanMember>> Members;
 };
 
 //////////////////////////////////////////////////////////////
@@ -69,17 +69,17 @@ const std::list<std::shared_ptr<Clan>> &Clan::Subclans() const
   return pImpl->Subclans;
 }
 
-void Clan::Add(ClanMember *member)
+void Clan::Add(const std::shared_ptr<ClanMember> &member)
 {
   pImpl->Members.push_back(member);
 }
 
-void Clan::Remove(ClanMember *member)
+void Clan::Remove(const std::shared_ptr<ClanMember> &member)
 {
   pImpl->Members.remove(member);
 }
 
-const std::list<ClanMember*> &Clan::Members() const
+const std::list<std::shared_ptr<ClanMember>> &Clan::Members() const
 {
   return pImpl->Members;
 }
@@ -112,17 +112,20 @@ void AssignGuildToMainclan(const std::shared_ptr<Clan> &guild,
     }
 }
 
-static int MoreKillsThan(const ClanMember *lhv, const ClanMember *rhv)
+static int MoreKillsThan(const std::shared_ptr<ClanMember> &lhv,
+                         const std::shared_ptr<ClanMember> &rhv)
 {
   return lhv->Kills > rhv->Kills ? -1 : lhv->Kills < rhv->Kills ? 1 : 0;
 }
 
-static int MoreDeathsThan(const ClanMember *lhv, const ClanMember *rhv)
+static int MoreDeathsThan(const std::shared_ptr<ClanMember> &lhv,
+                          const std::shared_ptr<ClanMember> &rhv)
 {
   return lhv->Deaths > rhv->Deaths ? -1 : lhv->Deaths < rhv->Deaths ? 1 : 0;
 }
 
-static int LessName(const ClanMember *lhv, const ClanMember *rhv)
+static int LessName(const std::shared_ptr<ClanMember> &lhv,
+                    const std::shared_ptr<ClanMember> &rhv)
 {
   return StrCmp(lhv->Name, rhv->Name);
 }
@@ -149,9 +152,9 @@ void ShowClanMembers(const Character *ch, const std::shared_ptr<Clan> &clan,
           || !StrCmp( format, "deaths" )
           || !StrCmp( format, "alpha" ))
         {
-          std::list<const ClanMember*> sortedList;
+          std::list<std::shared_ptr<ClanMember>> sortedList;
 
-          for( const ClanMember *member : clan->Members() )
+          for( const auto &member : clan->Members() )
             {
               if( StrCmp( member->Name, clan->Leadership.Leader ) != 0
                   && StrCmp( member->Name, clan->Leadership.Number1 ) != 0
@@ -174,12 +177,12 @@ void ShowClanMembers(const Character *ch, const std::shared_ptr<Clan> &clan,
               sortedList.sort(LessName);
             }
 
-          for(const ClanMember *member : sortedList)
+          for(const auto &member : sortedList)
             {
               members++;
               ch->Echo( "%3d  %-15s %-17s %9d %9d %19s\r\n",
                         member->Level,
-                        Capitalize(member->Name ).c_str(),
+                        Capitalize(member->Name).c_str(),
                         AbilityName[member->Ability],
                         member->Kills,
                         member->Deaths,
@@ -188,7 +191,7 @@ void ShowClanMembers(const Character *ch, const std::shared_ptr<Clan> &clan,
         }
       else
         {
-          for(const ClanMember *member : clan->Members())
+          for(const auto &member : clan->Members())
             {
               if( !StringPrefix( format, member->Name ) )
                 {
@@ -206,7 +209,7 @@ void ShowClanMembers(const Character *ch, const std::shared_ptr<Clan> &clan,
     }
   else
     {
-      for(const ClanMember *member : clan->Members())
+      for(const auto &member : clan->Members())
 	{
 	  members++;
 	  ch->Echo( "%3d  %-15s %-17s %9d %9d %19s\r\n",
@@ -236,16 +239,15 @@ void RemoveClanMember( const Character *ch )
   if(clan != nullptr)
     {
       std::string name = ch->Name;
-      ClanMember *member = Find(clan->Members(),
-                                [name](const auto m)
-                                {
-                                  return StrCmp(m->Name, name) == 0;
-                                });
+      std::shared_ptr<ClanMember> member = Find(clan->Members(),
+                                                [name](const auto m)
+                                                {
+                                                  return StrCmp(m->Name, name) == 0;
+                                                });
       
       if( member != nullptr )
 	{
           clan->Remove(member);
-	  delete member;
 	  Clans->Save( ch->PCData->ClanInfo.Clan );
 	}
     }
@@ -263,15 +265,15 @@ void UpdateClanMember( const Character *ch )
   if( clan != nullptr )
     {
       std::string name = ch->Name;
-      ClanMember *member = Find(clan->Members(),
-                                [name](const auto m)
-                                {
-                                  return StrCmp(m->Name, name) == 0;
-                                });
+      std::shared_ptr<ClanMember> member = Find(clan->Members(),
+                                                [name](const auto m)
+                                                {
+                                                  return StrCmp(m->Name, name) == 0;
+                                                });
 
       if( member == nullptr )
 	{
-          member = new ClanMember();
+          member = std::make_shared<ClanMember>();
 	  member->Name = ch->Name;
 	  member->Since = current_time;
 

@@ -17,7 +17,7 @@ public:
   void Save(const std::shared_ptr<Clan>&) const override;
 
 private:
-  static void PushMember( lua_State *L, const ClanMember *member, int idx );
+  static void PushMember( lua_State *L, const std::shared_ptr<ClanMember> &member, int idx );
   static void PushMembers( lua_State *L, const std::shared_ptr<Clan> &clan );
   static void PushClan( lua_State *L, const void *userData );
   static void LoadOneMember( lua_State *L, const std::shared_ptr<Clan> &clan );
@@ -50,7 +50,9 @@ void LuaClanRepository::Save(const std::shared_ptr<Clan> &clan) const
   LuaSaveDataFile( GetClanFilename( clan ), PushClan, "clan", &clan );
 }
 
-void LuaClanRepository::PushMember( lua_State *L, const ClanMember *member, int idx )
+void LuaClanRepository::PushMember( lua_State *L,
+                                    const std::shared_ptr<ClanMember> &member,
+                                    int idx )
 {
   lua_pushinteger( L, idx );
   lua_newtable( L );
@@ -71,7 +73,7 @@ void LuaClanRepository::PushMembers( lua_State *L, const std::shared_ptr<Clan> &
   lua_pushstring( L, "Members" );
   lua_newtable( L );
 
-  for(const ClanMember *member : clan->Members() )
+  for(const auto &member : clan->Members() )
     {
       PushMember( L, member, ++idx );
     }
@@ -143,7 +145,7 @@ void LuaClanRepository::PushClan( lua_State *L, const void *userData )
 
 void LuaClanRepository::LoadOneMember( lua_State *L, const std::shared_ptr<Clan> &clan )
 {
-  ClanMember *member = new ClanMember();
+  std::shared_ptr<ClanMember> member = std::make_shared<ClanMember>();
 
   LuaGetfieldString( L, "Name", &member->Name );
   LuaGetfieldLong( L, "MemberSince", &member->Since );

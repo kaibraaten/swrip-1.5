@@ -16,9 +16,9 @@ public:
   void Add(const std::shared_ptr<Clan> &clan);
   void Remove(const std::shared_ptr<Clan> &clan);
 
-  const std::list<ClanMember*> &Members() const;
-  void Add(ClanMember *member);
-  void Remove(ClanMember *member);
+  const std::list<std::shared_ptr<ClanMember>> &Members() const;
+  void Add(const std::shared_ptr<ClanMember> &member);
+  void Remove(const std::shared_ptr<ClanMember> &member);
 
   std::shared_ptr<Clan> MainClan;
   std::string Name;           /* Clan name                            */
