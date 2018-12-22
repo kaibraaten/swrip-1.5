@@ -17,7 +17,7 @@ void do_makeplanet( Character *ch, std::string argument )
       return;
     }
 
-  Planet *planet = new Planet();
+  std::shared_ptr<Planet> planet = std::make_shared<Planet>();
   planet->Name = argument;
   Planets->Add(planet);
 }

@@ -66,17 +66,19 @@ void do_aset( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "planet" ) )
     {
-      Planet *planet = Planets->FindByName(argument);
+      std::shared_ptr<Planet> planet = Planets->FindByName(argument);
 
       if (planet)
         {
           if (tarea->Planet)
             {
-              Planet *old_planet = tarea->Planet;
+              std::shared_ptr<Planet> old_planet = tarea->Planet;
               old_planet->Remove(tarea);
+              tarea->Planet = nullptr;
             }
 
           planet->Add(tarea);
+          tarea->Planet = planet;
           Planets->Save(planet);
         }
 

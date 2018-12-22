@@ -10,7 +10,7 @@
 
 struct UserData
 {
-  Planet *planet = nullptr;
+  std::shared_ptr<Planet> planet;
   bool PlanetIsProtected = false;
 };
 
@@ -19,7 +19,7 @@ static bool CheckIfProtectingPlanet(Ship *ship, void *userData);
 void do_capture( Character *ch , std::string argument )
 {
   std::shared_ptr<Clan> clan;
-  Planet *planet = nullptr;
+  std::shared_ptr<Planet> planet;
   float support = 0.0;
   int pCount = 0;
   char buf[MAX_STRING_LENGTH];
@@ -80,7 +80,7 @@ void do_capture( Character *ch , std::string argument )
       return;
     }
 
-  for( const Planet *cPlanet : Planets->Entities())
+  for( auto cPlanet : Planets )
     {
       if ( clan == cPlanet->GovernedBy )
         {
@@ -107,7 +107,7 @@ void do_capture( Character *ch , std::string argument )
 
 static bool CheckIfProtectingPlanet(Ship *ship, void *userData)
 {
-  struct UserData *data = (struct UserData*)userData;
+  UserData *data = (UserData*)userData;
   std::shared_ptr<Clan> sClan = GetClan(ship->Owner);
 
   if( !ship->Spaceobject )

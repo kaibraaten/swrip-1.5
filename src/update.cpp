@@ -1285,7 +1285,7 @@ static void MobileUpdate()
 
 static void TaxUpdate()
 {
-  for(const Planet *planet : Planets)
+  for(auto planet : Planets)
     {
       std::shared_ptr<Clan> clan = planet->GovernedBy;
 

@@ -28,7 +28,7 @@ void do_setplanet( Character *ch, std::string argument )
       return;
     }
 
-  Planet *planet = Planets->FindByName(arg1);
+  std::shared_ptr<Planet> planet = Planets->FindByName(arg1);
 
   if ( !planet )
     {

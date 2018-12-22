@@ -20,7 +20,7 @@ void do_clans( Character *ch, std::string argument )
           continue;
         }
 
-      for(const Planet *planet : Planets->Entities())
+      for(auto planet : Planets)
         {
           if ( clan == planet->GovernedBy )
             {

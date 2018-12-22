@@ -11,7 +11,7 @@ void do_propaganda( Character *ch, std::string arg1 )
 {
   char buf[MAX_STRING_LENGTH];
   Character *victim = NULL;
-  Planet *planet = NULL;
+  std::shared_ptr<Planet> planet;
   std::shared_ptr<Clan> clan;
 
   if ( IsNpc(ch) || !ch->InRoom->Area->Planet )

@@ -38,9 +38,9 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl;
+  std::unique_ptr<Impl> pImpl;
 };
 
-long GetTaxes( const Planet *planet );
+long GetTaxes( std::shared_ptr<Planet> planet );
 
 #endif

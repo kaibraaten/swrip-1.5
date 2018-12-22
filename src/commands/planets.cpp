@@ -5,11 +5,11 @@
 #include "area.hpp"
 #include "repos/planetrepository.hpp"
 
-static void ShowEntry( const Planet *planet, const Character *ch );
+static void ShowEntry( std::shared_ptr<Planet> planet, const Character *ch );
 
 void do_planets( Character *ch, std::string argument )
 {
-  for(const Planet *planet : Planets->Entities())
+  for(auto planet : Planets)
     {
       ShowEntry(planet, ch);
     }
@@ -25,7 +25,7 @@ void do_planets( Character *ch, std::string argument )
     }
 }
 
-static void ShowEntry( const Planet *planet, const Character *ch )
+static void ShowEntry( std::shared_ptr<Planet> planet, const Character *ch )
 {
   ch->Echo("&g--------------------------------------------------------------------------------&w\r\n" );
   ch->Echo("&wPlanet: &G%-15s   &wGoverned By: &G%s %s\r\n",

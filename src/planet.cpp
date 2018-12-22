@@ -37,14 +37,14 @@ struct Planet::Impl
 
 /////////////////////////////////////////////////////
 Planet::Planet()
-  : pImpl(new Impl())
+  : pImpl(std::make_unique<Impl>())
 {
   
 }
 
 Planet::~Planet()
 {
-  delete pImpl;
+
 }
 
 const std::list<Area*> &Planet::Areas() const
@@ -57,7 +57,6 @@ void Planet::Add(Area *area)
   assert(area->Planet == nullptr);
   
   pImpl->Areas.push_back(area);
-  area->Planet = this;
 }
 
 void Planet::Remove(Area *area)
@@ -70,7 +69,7 @@ void Planet::Remove(Area *area)
 
 ////////////////////////////////////////////////////
 
-long GetTaxes( const Planet *planet )
+long GetTaxes( std::shared_ptr<Planet> planet )
 {
   long gain = planet->BaseValue;
   gain += planet->BaseValue * planet->PopularSupport / 100;

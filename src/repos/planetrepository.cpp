@@ -7,37 +7,36 @@
 #include "spaceobject.hpp"
 
 #define PLANET_DIR      DATA_DIR "planets/"
-//#define GUARD_DIR       PLANET_DIR
 
-PlanetRepository *Planets = nullptr;
+std::shared_ptr<PlanetRepository> Planets;
 
 class LuaPlanetRepository : public PlanetRepository
 {
 public:
   void Load() override;
   void Save() const override;
-  void Save(const Planet *planet) const override;
-  Planet *FindByName(const std::string &name) const override;
+  void Save(std::shared_ptr<Planet> planet) const override;
+  std::shared_ptr<Planet> FindByName(const std::string &name) const override;
 
 private:
-  static void LoadPlanetAreas( lua_State *L, Planet *planet );
+  static void LoadPlanetAreas( lua_State *L, std::shared_ptr<Planet> planet );
   static int L_PlanetEntry( lua_State *L );
   static void LoadPlanet( const std::string &filePath, void *userData );
-  static void LuaPushAreas( lua_State *L, const Planet *planet );
+  static void LuaPushAreas( lua_State *L, std::shared_ptr<Planet> planet );
   static void PushPlanet( lua_State *L, const void *userData );
 };
 
 void LuaPlanetRepository::Save() const
 {
-  for(const Planet *planet : Entities())
+  for(auto planet : Entities())
     {
       Save(planet);
     }
 }
 
-void LuaPlanetRepository::Save(const Planet *planet) const
+void LuaPlanetRepository::Save(std::shared_ptr<Planet> planet) const
 {
-  LuaSaveDataFile( GetPlanetFilename( planet ), PushPlanet, "planet", planet );
+  LuaSaveDataFile( GetPlanetFilename( planet ), PushPlanet, "planet", &planet );
 }
 
 void LuaPlanetRepository::Load()
@@ -45,12 +44,12 @@ void LuaPlanetRepository::Load()
   ForEachLuaFileInDir( PLANET_DIR, LoadPlanet, NULL );
 }
 
-Planet *LuaPlanetRepository::FindByName(const std::string &name) const
+std::shared_ptr<Planet> LuaPlanetRepository::FindByName(const std::string &name) const
 {
   return Find([name](const auto &planet){ return StrCmp(name, planet->Name) == 0; });
 }
 
-void LuaPlanetRepository::LoadPlanetAreas( lua_State *L, Planet *planet )
+void LuaPlanetRepository::LoadPlanetAreas( lua_State *L, std::shared_ptr<Planet> planet )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Areas" );
@@ -66,6 +65,7 @@ void LuaPlanetRepository::LoadPlanetAreas( lua_State *L, Planet *planet )
           if( area )
             {
               planet->Add(area);
+              area->Planet = planet;
             }
 
           lua_pop( L, 1 );
@@ -77,7 +77,7 @@ void LuaPlanetRepository::LoadPlanetAreas( lua_State *L, Planet *planet )
 
 int LuaPlanetRepository::L_PlanetEntry( lua_State *L )
 {
-  Planet *planet = new Planet();
+  std::shared_ptr<Planet> planet = std::make_shared<Planet>();
 
   LuaGetfieldString( L, "Name", &planet->Name );
   LuaGetfieldLong( L, "BaseValue", &planet->BaseValue );
@@ -105,7 +105,7 @@ void LuaPlanetRepository::LoadPlanet( const std::string &filePath, void *userDat
   LuaLoadDataFile( filePath, L_PlanetEntry, "PlanetEntry" );
 }
 
-void LuaPlanetRepository::LuaPushAreas( lua_State *L, const Planet *planet )
+void LuaPlanetRepository::LuaPushAreas( lua_State *L, std::shared_ptr<Planet> planet )
 {
   if( !planet->Areas().empty() )
     {
@@ -126,7 +126,7 @@ void LuaPlanetRepository::LuaPushAreas( lua_State *L, const Planet *planet )
 
 void LuaPlanetRepository::PushPlanet( lua_State *L, const void *userData )
 {
-  const Planet *planet = (const Planet*) userData;
+  std::shared_ptr<Planet> planet = *static_cast<const std::shared_ptr<Planet>*>(userData);
   static int idx = 0;
   lua_pushinteger( L, ++idx );
   lua_newtable( L );
@@ -153,14 +153,12 @@ void LuaPlanetRepository::PushPlanet( lua_State *L, const void *userData )
 
 ////////////////////////////////////////////////////////////////
 
-PlanetRepository *NewPlanetRepository()
+std::shared_ptr<PlanetRepository> NewPlanetRepository()
 {
-  return new LuaPlanetRepository();
+  return std::make_shared<LuaPlanetRepository>();
 }
 
-std::string GetPlanetFilename( const Planet *planet )
+std::string GetPlanetFilename( std::shared_ptr<Planet> planet )
 {
-  char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s", PLANET_DIR, ConvertToLuaFilename( planet->Name ).c_str() );
-  return fullPath;
+  return FormatString( "%s%s", PLANET_DIR, ConvertToLuaFilename( planet->Name ).c_str() );
 }
