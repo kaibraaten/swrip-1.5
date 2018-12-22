@@ -1,28 +1,83 @@
 -- Sorosuub System Hopper
--- Last saved Wednesday 03-Oct-2018 13:12:54
+-- Last saved Saturday 22-Dec-2018 23:20:37
 
 ShipEntry
 {
+   Home = "Corellia", 
+   Position = 
+   {
+      X = 4299047, 
+      Y = 907, 
+      Z = 2301203, 
+   }, 
+   Hyperdrive = 
+   {
+      Speed = 100, 
+   }, 
+   Shipyard = 203, 
+   Rooms = 
+   {
+      Last = 32158, 
+      Cockpit = 32158, 
+      Coseat = 32158, 
+      Engine = 0, 
+      Navseat = 32158, 
+      First = 32158, 
+      Pilotseat = 32158, 
+      Gunseat = 32158, 
+      Entrance = 32158, 
+      Hangar = 0, 
+   }, 
+   Owner = "public", 
+   Name = "Sorosuub System Hopper", 
+   Defenses = 
+   {
+      Chaff = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+      Shield = 
+      {
+         Max = 10, 
+         Current = 0, 
+      }, 
+      Hull = 
+      {
+         Max = 100, 
+         Current = 100, 
+      }, 
+   }, 
    WeaponSystems = 
    {
       Tube = 
       {
          Missiles = 
          {
-            Current = 0, 
             Max = 0, 
-         }, 
-         Torpedoes = 
-         {
             Current = 0, 
-            Max = 0, 
          }, 
          Rockets = 
          {
-            Current = 0, 
             Max = 0, 
+            Current = 0, 
          }, 
          State = 0, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+      }, 
+      IonCannon = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         State = 1, 
+         Strength = 0, 
       }, 
       Turrets = 
       {
@@ -77,97 +132,42 @@ ShipEntry
             State = 0, 
          }, 
       }, 
-      IonCannon = 
-      {
-         Count = 0, 
-         State = 0, 
-      }, 
-      TractorBeam = 
-      {
-         State = 1, 
-         Strength = 0, 
-      }, 
       Laser = 
       {
          Count = 0, 
          State = 0, 
       }, 
    }, 
-   Description = "", 
-   Defenses = 
-   {
-      Shield = 
-      {
-         Current = 0, 
-         Max = 10, 
-      }, 
-      Chaff = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
-      Hull = 
-      {
-         Current = 100, 
-         Max = 100, 
-      }, 
-   }, 
-   CoPilot = "", 
-   State = 0, 
-   Alarm = false, 
-   Name = "Sorosuub System Hopper", 
-   Position = 
-   {
-      Z = 2301203, 
-      Y = 907, 
-      X = 4299047, 
-   }, 
-   DockingPorts = 0, 
-   Rooms = 
-   {
-      Entrance = 32158, 
-      Navseat = 32158, 
-      Gunseat = 32158, 
-      Pilotseat = 32158, 
-      First = 32158, 
-      Coseat = 32158, 
-      Last = 32158, 
-      Engine = 0, 
-      Hangar = 0, 
-      Cockpit = 32158, 
-   }, 
-   LastDock = 203, 
-   Home = "Corellia", 
-   PersonalName = "6033", 
    Thrusters = 
    {
+      Maneuver = 35, 
       Energy = 
       {
-         Current = 2000, 
          Max = 2000, 
+         Current = 2000, 
       }, 
       Speed = 
       {
-         Current = 0, 
          Max = 65, 
+         Current = 0, 
       }, 
-      Maneuver = 35, 
    }, 
-   Instruments = 
-   {
-      Comm = 0, 
-      Sensor = 0, 
-      AstroArray = 0, 
-   }, 
-   Hyperdrive = 
-   {
-      Speed = 100, 
-   }, 
-   Shipyard = 203, 
-   Class = "Starfighter", 
-   Owner = "public", 
-   Type = "Civilian", 
-   Location = 203, 
    Guard = false, 
    Pilot = "", 
+   Alarm = false, 
+   DockingPorts = 0, 
+   Type = "Civilian", 
+   State = 0, 
+   Location = 203, 
+   LastDock = 203, 
+   PersonalName = "6033", 
+   Instruments = 
+   {
+      AstroArray = 0, 
+      Comm = 0, 
+      Sensor = 0, 
+   }, 
+   Description = "", 
+   CoPilot = "", 
+   Class = "Starfighter", 
 }

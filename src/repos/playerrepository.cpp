@@ -107,6 +107,9 @@ bool InMemoryPlayerRepository::Load( Descriptor *d, const std::string &name, boo
     }
   else
     {
+      Character *ch = new Character(new PCData(), d);
+      ch->Name = Capitalize(name);
+      ImcInitializeCharacter( ch );
       loading_char = nullptr;
       return false;
     }
@@ -135,7 +138,7 @@ bool InMemoryPlayerRepository::Load( Descriptor *d, const std::string &name, boo
     }
   
   lua_close( L );
-
+  loading_char = nullptr;
   return found;
 }
 

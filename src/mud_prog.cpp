@@ -129,7 +129,7 @@ static char *MudProgNextCommand( char *clist )
 {
   char *pointer = clist;
 
-  while ( *pointer != '\n' && !IsNullOrEmpty( pointer ) )
+  while ( *pointer != '\n' && *pointer != '\r' && !IsNullOrEmpty( pointer ) )
     pointer++;
 
   if ( *pointer == '\r' )
@@ -138,6 +138,12 @@ static char *MudProgNextCommand( char *clist )
   if ( *pointer == '\n' )
     *pointer++ = '\0';
 
+  if ( *pointer == '\r' )
+    *pointer++ = '\0';
+
+  if ( *pointer == '\n' )
+    *pointer++ = '\0';
+  
   return pointer;
 }
 
@@ -1991,17 +1997,12 @@ static int MudProgDoCommand( char *cmnd, Character *mob, Character *actor,
 			     Object *obj, void *vo, Character *rndm,
 			     bool ignore, bool ignore_ors )
 {
-  std::string firstword;
-  std::string ifcheck;
-  char buf[ MAX_INPUT_LENGTH ];
-  char tmp[ MAX_INPUT_LENGTH ];
-  char *point = NULL, *str = NULL, *i = NULL;
-  int validif = 0;
-
   /* Isolate the first word of the line, it gives us a clue what
      we want to do. */
-  ifcheck = OneArgument( cmnd, firstword );
-
+  std::string firstword;
+  std::string ifcheck = OneArgument( cmnd, firstword );
+  int validif = 0;
+  
   if ( !StrCmp( firstword, "if" ) )
     {
       /* Ok, we found an if.  According to the boolean 'ignore', either
@@ -2063,8 +2064,9 @@ static int MudProgDoCommand( char *cmnd, Character *mob, Character *actor,
   if ( !StrCmp( firstword, "break" ) )
     return BERR;
 
-  point   = buf;
-  str     = cmnd;
+  char buf[MAX_INPUT_LENGTH] = {'\0'};
+  char *point = buf;
+  const char *str = cmnd;
 
   /* This chunk of code taken from mprog_process_cmnd. */
   while ( !IsNullOrEmpty( str ) )
@@ -2076,12 +2078,15 @@ static int MudProgDoCommand( char *cmnd, Character *mob, Character *actor,
         }
 
       str++;
+      char tmp[MAX_INPUT_LENGTH] = {'\0'};
       MudProgTranslate( *str, tmp, mob, actor, obj, vo, rndm );
-      i = tmp;
+      const char *i = tmp;
       ++str;
 
       while ( ( *point = *i ) != '\0' )
-        ++point, ++i;
+        {
+          ++point, ++i;
+        }
     }
 
   *point = '\0';

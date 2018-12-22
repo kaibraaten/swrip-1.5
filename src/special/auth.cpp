@@ -12,7 +12,7 @@ bool spec_auth( Character *ch )
       
       if ( !IsNpc(victim) && pObjIndex != nullptr )
         {
-          if ( !HasDiploma(ch) )
+          if ( !HasDiploma(victim) )
             {
               Object *obj = CreateObject( pObjIndex, 1 );
               obj = ObjectToCharacter( obj, victim );

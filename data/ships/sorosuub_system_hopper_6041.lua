@@ -1,39 +1,37 @@
 -- Sorosuub System Hopper
--- Last saved Wednesday 03-Oct-2018 13:12:54
+-- Last saved Saturday 22-Dec-2018 23:20:37
 
 ShipEntry
 {
-   Type = "Civilian", 
    Home = "Byss ", 
-   Location = 203, 
-   Alarm = false, 
-   DockingPorts = 0, 
-   PersonalName = "6041", 
-   Guard = false, 
-   CoPilot = "verazo", 
-   Description = "", 
+   Position = 
+   {
+      X = 100, 
+      Y = 150, 
+      Z = 75, 
+   }, 
+   Hyperdrive = 
+   {
+      Speed = 100, 
+   }, 
+   Shipyard = 203, 
    Rooms = 
    {
-      Coseat = 32166, 
       Last = 32166, 
-      First = 32166, 
-      Navseat = 32166, 
-      Gunseat = 32166, 
       Cockpit = 32166, 
-      Entrance = 32166, 
+      Coseat = 32166, 
       Engine = 0, 
-      Hangar = 0, 
+      Navseat = 32166, 
+      First = 32166, 
       Pilotseat = 32166, 
+      Gunseat = 32166, 
+      Entrance = 32166, 
+      Hangar = 0, 
    }, 
-   Name = "Sorosuub System Hopper", 
    Owner = "public", 
+   Name = "Sorosuub System Hopper", 
    Defenses = 
    {
-      Hull = 
-      {
-         Max = 100, 
-         Current = 100, 
-      }, 
       Chaff = 
       {
          Max = 2, 
@@ -44,52 +42,42 @@ ShipEntry
          Max = 10, 
          Current = 0, 
       }, 
-   }, 
-   Position = 
-   {
-      Y = 150, 
-      X = 100, 
-      Z = 75, 
-   }, 
-   Pilot = "pilot", 
-   LastDock = 203, 
-   Shipyard = 203, 
-   Thrusters = 
-   {
-      Maneuver = 35, 
-      Speed = 
+      Hull = 
       {
-         Max = 65, 
-         Current = 0, 
+         Max = 100, 
+         Current = 100, 
       }, 
-      Energy = 
-      {
-         Max = 3000, 
-         Current = 3000, 
-      }, 
-   }, 
-   Instruments = 
-   {
-      AstroArray = 0, 
-      Comm = 0, 
-      Sensor = 0, 
-   }, 
-   Class = "Starfighter", 
-   Hyperdrive = 
-   {
-      Speed = 100, 
    }, 
    WeaponSystems = 
    {
-      Laser = 
+      Tube = 
       {
+         Missiles = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
          State = 0, 
-         Count = 1, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
       }, 
       IonCannon = 
       {
-         State = 0, 
          Count = 0, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         State = 1, 
+         Strength = 0, 
       }, 
       Turrets = 
       {
@@ -144,30 +132,42 @@ ShipEntry
             State = 0, 
          }, 
       }, 
-      Tube = 
+      Laser = 
       {
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Missiles = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
+         Count = 1, 
          State = 0, 
       }, 
-      TractorBeam = 
+   }, 
+   Thrusters = 
+   {
+      Maneuver = 35, 
+      Energy = 
       {
-         Strength = 0, 
-         State = 1, 
+         Max = 3000, 
+         Current = 3000, 
+      }, 
+      Speed = 
+      {
+         Max = 65, 
+         Current = 0, 
       }, 
    }, 
+   Guard = false, 
+   Pilot = "pilot", 
+   Alarm = false, 
+   DockingPorts = 0, 
+   Type = "Civilian", 
    State = 0, 
+   Location = 203, 
+   LastDock = 203, 
+   PersonalName = "6041", 
+   Instruments = 
+   {
+      AstroArray = 0, 
+      Comm = 0, 
+      Sensor = 0, 
+   }, 
+   Description = "", 
+   CoPilot = "verazo", 
+   Class = "Starfighter", 
 }
