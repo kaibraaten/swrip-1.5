@@ -484,8 +484,8 @@ static void LoadMobiles( Area *tarea, FILE *fp )
 
       pMobIndex->Flags           = ReadInt( fp, Log, fBootDb ) | ACT_NPC;
       pMobIndex->AffectedBy     = ReadInt( fp, Log, fBootDb );
-      pMobIndex->Shop           = NULL;
-      pMobIndex->RepairShop           = NULL;
+      pMobIndex->Shop.reset();
+      pMobIndex->RepairShop.reset();
       pMobIndex->Alignment       = ReadInt( fp, Log, fBootDb );
       letter                     = ReadChar( fp, Log, fBootDb );
       pMobIndex->Level           = ReadInt( fp, Log, fBootDb );
@@ -1069,7 +1069,7 @@ static void LoadShops( Area *tarea, FILE *fp )
     {
       ProtoMobile *pMobIndex = NULL;
       int iTrade = 0;
-      Shop *pShop = new Shop();
+      std::shared_ptr<Shop> pShop = std::make_shared<Shop>();
 
       pShop->Keeper             = ReadInt( fp, Log, fBootDb );
 
@@ -1102,7 +1102,7 @@ static void LoadRepairs( Area *tarea, FILE *fp )
     {
       ProtoMobile *pMobIndex;
       int iFix;
-      RepairShop *rShop = new RepairShop();
+      std::shared_ptr<RepairShop> rShop = std::make_shared<RepairShop>();
       rShop->Keeper             = ReadInt( fp, Log, fBootDb );
 
       if ( rShop->Keeper == INVALID_VNUM )
@@ -1131,9 +1131,9 @@ static void LoadSpecials( Area *tarea, FILE *fp )
   for ( ; ; )
     {
       ProtoMobile *pMobIndex;
-      char letter;
+      char letter = ReadChar(fp, Log, fBootDb);
 
-      switch ( letter = ReadChar( fp, Log, fBootDb ) )
+      switch (letter)
         {
         default:
           Log->Bug( "%s: letter '%c' not *MS.", __FUNCTION__, letter );
@@ -1667,13 +1667,11 @@ void CloseArea( Area *pArea )
           if ( mid->Shop )
             {
               Shops->Remove(mid->Shop);
-              delete mid->Shop;
             }
 
           if ( mid->RepairShop )
             {
               RepairShops->Remove(mid->RepairShop);
-              delete mid->RepairShop;
             }
 
           std::list<MPROG_DATA*> mobProgs(mid->mprog.MudProgs());

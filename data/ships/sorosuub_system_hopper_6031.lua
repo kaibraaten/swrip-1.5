@@ -1,27 +1,125 @@
 -- Sorosuub System Hopper
--- Last saved Sunday 23-Dec-2018 21:25:58
+-- Last saved Sunday 23-Dec-2018 21:44:51
 
 ShipEntry
 {
-   Type = "Civilian", 
-   Pilot = "", 
-   State = 0, 
-   Name = "Sorosuub System Hopper", 
-   Home = "Adari", 
-   CoPilot = "", 
-   Rooms = 
+   Description = "", 
+   Alarm = false, 
+   Position = 
    {
-      Last = 32156, 
-      Entrance = 32156, 
-      Navseat = 32156, 
-      Cockpit = 32156, 
-      First = 32156, 
-      Pilotseat = 32156, 
-      Hangar = 0, 
-      Engine = 0, 
-      Gunseat = 32156, 
-      Coseat = 32156, 
+      X = -276002, 
+      Y = -1032456, 
+      Z = -31794, 
    }, 
+   Name = "Sorosuub System Hopper", 
+   Type = "Civilian", 
+   Class = "Starfighter", 
+   Guard = false, 
+   Thrusters = 
+   {
+      Maneuver = 35, 
+      Energy = 
+      {
+         Max = 2000, 
+         Current = 2000, 
+      }, 
+      Speed = 
+      {
+         Max = 65, 
+         Current = 0, 
+      }, 
+   }, 
+   WeaponSystems = 
+   {
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 0, 
+      }, 
+      Tube = 
+      {
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Missiles = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         State = 1, 
+         Strength = 0, 
+      }, 
+      Turrets = 
+      {
+         [1] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [2] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [3] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [4] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [5] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [6] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [7] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [8] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [9] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [0] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+      }, 
+      Laser = 
+      {
+         State = 0, 
+         Count = 0, 
+      }, 
+   }, 
+   State = 0, 
    Owner = "public", 
    Defenses = 
    {
@@ -41,133 +139,35 @@ ShipEntry
          Current = 0, 
       }, 
    }, 
-   DockingPorts = 0, 
-   Location = 32050, 
-   PersonalName = "6031", 
-   Instruments = 
-   {
-      Comm = 0, 
-      AstroArray = 0, 
-      Sensor = 0, 
-   }, 
-   WeaponSystems = 
-   {
-      IonCannon = 
-      {
-         State = 0, 
-         Count = 0, 
-      }, 
-      Tube = 
-      {
-         State = 0, 
-         Missiles = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-      }, 
-      Turrets = 
-      {
-         [1] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [2] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [3] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [4] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [5] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [6] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [7] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [8] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [9] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [0] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-      }, 
-      TractorBeam = 
-      {
-         Strength = 0, 
-         State = 1, 
-      }, 
-      Laser = 
-      {
-         State = 0, 
-         Count = 0, 
-      }, 
-   }, 
+   CoPilot = "", 
    Hyperdrive = 
    {
       Speed = 100, 
    }, 
-   Description = "", 
-   Alarm = false, 
+   Rooms = 
+   {
+      Pilotseat = 32156, 
+      Hangar = 0, 
+      Last = 32156, 
+      Cockpit = 32156, 
+      Gunseat = 32156, 
+      Coseat = 32156, 
+      Navseat = 32156, 
+      Entrance = 32156, 
+      Engine = 0, 
+      First = 32156, 
+   }, 
+   Instruments = 
+   {
+      AstroArray = 0, 
+      Sensor = 0, 
+      Comm = 0, 
+   }, 
+   Location = 32050, 
+   DockingPorts = 0, 
    LastDock = 32050, 
-   Thrusters = 
-   {
-      Speed = 
-      {
-         Max = 65, 
-         Current = 0, 
-      }, 
-      Energy = 
-      {
-         Max = 2000, 
-         Current = 2000, 
-      }, 
-      Maneuver = 35, 
-   }, 
-   Position = 
-   {
-      X = -276002, 
-      Y = -1032456, 
-      Z = -31794, 
-   }, 
-   Class = "Starfighter", 
-   Guard = false, 
+   PersonalName = "6031", 
+   Home = "Adari", 
    Shipyard = 32050, 
+   Pilot = "", 
 }

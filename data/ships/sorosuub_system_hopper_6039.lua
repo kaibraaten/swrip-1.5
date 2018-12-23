@@ -1,73 +1,33 @@
 -- Sorosuub System Hopper
--- Last saved Sunday 23-Dec-2018 21:25:58
+-- Last saved Sunday 23-Dec-2018 21:44:51
 
 ShipEntry
 {
+   Description = "", 
+   Alarm = false, 
    Position = 
    {
-      Z = 2438, 
       X = 5504576, 
       Y = 2000663, 
+      Z = 2438, 
    }, 
-   Instruments = 
-   {
-      Sensor = 0, 
-      AstroArray = 0, 
-      Comm = 0, 
-   }, 
-   LastDock = 3060, 
-   Owner = "public", 
-   PersonalName = "6039", 
-   Rooms = 
-   {
-      Last = 32164, 
-      Pilotseat = 32164, 
-      First = 32164, 
-      Coseat = 32164, 
-      Entrance = 32164, 
-      Engine = 0, 
-      Cockpit = 32164, 
-      Gunseat = 32164, 
-      Hangar = 0, 
-      Navseat = 32164, 
-   }, 
-   Shipyard = 3060, 
-   Location = 3060, 
+   Name = "Sorosuub System Hopper", 
    Type = "Civilian", 
-   Defenses = 
-   {
-      Shield = 
-      {
-         Current = 0, 
-         Max = 10, 
-      }, 
-      Hull = 
-      {
-         Current = 100, 
-         Max = 100, 
-      }, 
-      Chaff = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
-   }, 
-   CoPilot = "", 
-   Pilot = "", 
-   Home = "Corperate Sector - Quilim", 
+   Class = "Starfighter", 
+   Guard = false, 
    Thrusters = 
    {
+      Maneuver = 35, 
       Energy = 
       {
-         Current = 2000, 
          Max = 2000, 
+         Current = 2000, 
       }, 
       Speed = 
       {
-         Current = 0, 
          Max = 65, 
+         Current = 0, 
       }, 
-      Maneuver = 35, 
    }, 
    WeaponSystems = 
    {
@@ -76,29 +36,29 @@ ShipEntry
          State = 0, 
          Count = 0, 
       }, 
-      Laser = 
-      {
-         State = 0, 
-         Count = 0, 
-      }, 
       Tube = 
       {
-         Missiles = 
+         Torpedoes = 
          {
-            Current = 0, 
             Max = 0, 
+            Current = 0, 
          }, 
          Rockets = 
          {
-            Current = 0, 
             Max = 0, 
+            Current = 0, 
+         }, 
+         Missiles = 
+         {
+            Max = 0, 
+            Current = 0, 
          }, 
          State = 0, 
-         Torpedoes = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
+      }, 
+      TractorBeam = 
+      {
+         State = 1, 
+         Strength = 0, 
       }, 
       Turrets = 
       {
@@ -153,21 +113,61 @@ ShipEntry
             RoomVnum = 0, 
          }, 
       }, 
-      TractorBeam = 
+      Laser = 
       {
-         State = 1, 
-         Strength = 0, 
+         State = 0, 
+         Count = 0, 
       }, 
    }, 
-   Description = "", 
-   Guard = false, 
    State = 0, 
-   DockingPorts = 0, 
+   Owner = "public", 
+   Defenses = 
+   {
+      Hull = 
+      {
+         Max = 100, 
+         Current = 100, 
+      }, 
+      Shield = 
+      {
+         Max = 10, 
+         Current = 0, 
+      }, 
+      Chaff = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+   }, 
+   CoPilot = "", 
    Hyperdrive = 
    {
       Speed = 100, 
    }, 
-   Alarm = false, 
-   Class = "Starfighter", 
-   Name = "Sorosuub System Hopper", 
+   Rooms = 
+   {
+      Pilotseat = 32164, 
+      Hangar = 0, 
+      Last = 32164, 
+      Cockpit = 32164, 
+      Gunseat = 32164, 
+      Coseat = 32164, 
+      Navseat = 32164, 
+      Entrance = 32164, 
+      Engine = 0, 
+      First = 32164, 
+   }, 
+   Instruments = 
+   {
+      AstroArray = 0, 
+      Sensor = 0, 
+      Comm = 0, 
+   }, 
+   Location = 3060, 
+   DockingPorts = 0, 
+   LastDock = 3060, 
+   PersonalName = "6039", 
+   Home = "Corperate Sector - Quilim", 
+   Shipyard = 3060, 
+   Pilot = "", 
 }

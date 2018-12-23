@@ -13,7 +13,7 @@ void do_shops( Character *ch, std::string argument )
 
   SetCharacterColor( AT_NOTE, ch );
 
-  for(const Shop *shop : Shops->Entities())
+  for(auto shop : Shops)
     {
       ch->Echo("Keeper: %5ld Buy: %3d Sell: %3d Open: %2d Close: %2d Buy: %2d %2d %2d %2d %2d\r\n",
                shop->Keeper,       shop->ProfitBuy, shop->ProfitSell,

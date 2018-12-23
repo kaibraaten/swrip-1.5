@@ -309,8 +309,8 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
   Room *room = NULL;
   ProtoMobile *pMobIndex = NULL;
   ProtoObject *pObjIndex = NULL;
-  const Shop *pShop = NULL;
-  const RepairShop *pRepair = NULL;
+  std::shared_ptr<Shop> pShop;
+  std::shared_ptr<RepairShop> pRepair;
   char buf[MAX_STRING_LENGTH];
   FILE *fpout = NULL;
   vnum_t vnum = INVALID_VNUM;

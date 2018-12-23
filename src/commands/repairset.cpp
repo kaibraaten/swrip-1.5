@@ -5,7 +5,7 @@
 
 void do_repairset( Character *ch, std::string argument )
 {
-  RepairShop *repair = nullptr;
+  std::shared_ptr<RepairShop> repair;
   ProtoMobile *mob = nullptr;
   ProtoMobile *mob2 = nullptr;
   std::string arg1;

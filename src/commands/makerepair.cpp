@@ -30,7 +30,7 @@ void do_makerepair( Character *ch, std::string argument )
       return;
     }
 
-  RepairShop *repair = new RepairShop();
+  std::shared_ptr<RepairShop> repair = std::make_shared<RepairShop>();
 
   repair->Keeper = vnum;
   repair->ProfitFix = 100;

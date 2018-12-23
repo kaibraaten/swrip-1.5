@@ -1,8 +1,8 @@
 #include "shoprepository.hpp"
 #include "shop.hpp"
 
-ShopRepository *Shops = nullptr;
-RepairShopRepository *RepairShops = nullptr;
+std::shared_ptr<ShopRepository> Shops;
+std::shared_ptr<RepairShopRepository> RepairShops;
 
 class InMemoryShopRepository : public ShopRepository
 {
@@ -14,12 +14,12 @@ class InMemoryRepairShopRepository : public RepairShopRepository
 
 };
 
-ShopRepository *NewShopRepository()
+std::shared_ptr<ShopRepository> NewShopRepository()
 {
-  return new InMemoryShopRepository();
+  return std::make_shared<InMemoryShopRepository>();
 }
 
-RepairShopRepository *NewRepairShopRepository()
+std::shared_ptr<RepairShopRepository> NewRepairShopRepository()
 {
-  return new InMemoryRepairShopRepository();
+  return std::make_shared<InMemoryRepairShopRepository>();
 }

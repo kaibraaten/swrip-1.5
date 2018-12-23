@@ -1,6 +1,7 @@
 #ifndef _SWRIP_SHOPREPOSITORY_HPP_
 #define _SWRIP_SHOPREPOSITORY_HPP_
 
+#include <memory>
 #include <utility/repository.hpp>
 #include "types.hpp"
 
@@ -13,26 +14,30 @@ struct CompareShop
   }
 };
 
-class ShopRepository : public Ceris::Repository<Shop*, CompareShop<Shop*>>
+using ShopRepositoryBase = Ceris::Repository<std::shared_ptr<Shop>, CompareShop<std::shared_ptr<Shop>>>;
+
+class ShopRepository : public ShopRepositoryBase
 {
 public:
 
 protected:
-  ShopRepository() { }
+  ShopRepository() = default;
 };
 
-class RepairShopRepository : public Ceris::Repository<RepairShop*, CompareShop<RepairShop*>>
+using RepairShopRepositoryBase = Ceris::Repository<std::shared_ptr<RepairShop>, CompareShop<std::shared_ptr<RepairShop>>>;
+
+class RepairShopRepository : public RepairShopRepositoryBase
 {
 public:
 
-  protected:
-  RepairShopRepository() { }
+protected:
+  RepairShopRepository() = default;
 };
 
-extern ShopRepository *Shops;
-extern RepairShopRepository *RepairShops;
+extern std::shared_ptr<ShopRepository> Shops;
+extern std::shared_ptr<RepairShopRepository> RepairShops;
 
-ShopRepository *NewShopRepository();
-RepairShopRepository *NewRepairShopRepository();
+std::shared_ptr<ShopRepository> NewShopRepository();
+std::shared_ptr<RepairShopRepository> NewRepairShopRepository();
 
 #endif
