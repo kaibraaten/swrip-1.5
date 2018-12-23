@@ -10,7 +10,7 @@ void do_socials( Character *ch, std::string argument )
 
   SetCharacterColor( AT_PLAIN, ch );
 
-  for(const Social *social : Socials->Entities())
+  for(auto social : Socials->Entities())
     {
       ch->Echo("%-12s", social->Name.c_str() );
       

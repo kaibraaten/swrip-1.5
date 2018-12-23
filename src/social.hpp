@@ -17,7 +17,6 @@ public:
   std::string OthersAuto;
 };
 
-void FreeSocial( Social *social );
 bool CheckSocial( Character *ch, const std::string &command, const std::string &argument );
 
 #endif

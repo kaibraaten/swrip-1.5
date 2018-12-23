@@ -7,9 +7,9 @@
 
 #define SOCIAL_DATA_FILE     DATA_DIR "socials.lua"
 
-SocialRepository *Socials = nullptr;
+std::shared_ptr<SocialRepository> Socials;
 
-bool CompareSocial::operator()(const Social *lhs, const Social *rhs) const
+bool CompareSocial::operator()(std::shared_ptr<Social> lhs, std::shared_ptr<Social> rhs) const
 {
   return StrCmp(lhs->Name, rhs->Name) < 0;
 }
@@ -19,11 +19,11 @@ class LuaSocialRepository : public SocialRepository
 public:
   void Save() const override;
   void Load() override;
-  Social *FindByName(const std::string &name) const override;
+  std::shared_ptr<Social> FindByName(const std::string &name) const override;
 
 private:
   static void PushSocialTable( lua_State *L, const void *userData );
-  static void PushSocial( lua_State *L, const Social *social );
+  static void PushSocial( lua_State *L, std::shared_ptr<Social> social );
   static int L_SocialEntry( lua_State *L );
 };
 
@@ -34,12 +34,12 @@ void LuaSocialRepository::Load()
 
 void LuaSocialRepository::Save() const
 {
-  LuaSaveDataFile( SOCIAL_DATA_FILE, PushSocialTable, "socials", NULL );
+  LuaSaveDataFile( SOCIAL_DATA_FILE, PushSocialTable, "socials", nullptr );
 }
 
-Social *LuaSocialRepository::FindByName(const std::string &name) const
+std::shared_ptr<Social> LuaSocialRepository::FindByName(const std::string &name) const
 {
-  Social *social = Find([name](const auto &s){ return StrCmp(name, s->Name) == 0; });
+  auto social = Find([name](const auto &s){ return StrCmp(name, s->Name) == 0; });
 
   if(social == nullptr)
     {
@@ -49,7 +49,7 @@ Social *LuaSocialRepository::FindByName(const std::string &name) const
   return social;
 }
 
-void LuaSocialRepository::PushSocial( lua_State *L, const Social *social )
+void LuaSocialRepository::PushSocial( lua_State *L, std::shared_ptr<Social> social )
 {
   static int idx = 0;
   lua_pushinteger( L, ++idx );
@@ -71,7 +71,7 @@ void LuaSocialRepository::PushSocialTable( lua_State *L, const void *userData )
 {
   lua_newtable( L );
 
-  for(const Social *social : Socials->Entities())
+  for(auto social : Socials)
     {
       if ( social->Name.empty() )
         {
@@ -86,37 +86,36 @@ void LuaSocialRepository::PushSocialTable( lua_State *L, const void *userData )
 
 int LuaSocialRepository::L_SocialEntry( lua_State *L )
 {
-  Social social;
+  std::shared_ptr<Social> social = std::make_shared<Social>();
 
-  LuaGetfieldString( L, "Name", &social.Name );
-  LuaGetfieldString( L, "CharNoArg", &social.CharNoArg );
-  LuaGetfieldString( L, "OthersNoArg", &social.OthersNoArg );
-  LuaGetfieldString( L, "CharFound", &social.CharFound );
-  LuaGetfieldString( L, "OthersFound", &social.OthersFound );
-  LuaGetfieldString( L, "VictimFound", &social.VictimFound );
-  LuaGetfieldString( L, "CharAuto", &social.CharAuto );
-  LuaGetfieldString( L, "OthersAuto", &social.OthersAuto );
+  LuaGetfieldString( L, "Name", &social->Name );
+  LuaGetfieldString( L, "CharNoArg", &social->CharNoArg );
+  LuaGetfieldString( L, "OthersNoArg", &social->OthersNoArg );
+  LuaGetfieldString( L, "CharFound", &social->CharFound );
+  LuaGetfieldString( L, "OthersFound", &social->OthersFound );
+  LuaGetfieldString( L, "VictimFound", &social->VictimFound );
+  LuaGetfieldString( L, "CharAuto", &social->CharAuto );
+  LuaGetfieldString( L, "OthersAuto", &social->OthersAuto );
 
-  if ( social.Name.empty() )
+  if ( social->Name.empty() )
     {
       Log->Bug( "%s: Name not found", __FUNCTION__ );
     }
-  else if ( social.CharNoArg.empty() )
+  else if ( social->CharNoArg.empty() )
     {
       Log->Bug( "%s: CharNoArg not found for social %s",
-                __FUNCTION__, social.Name.c_str() );
+                __FUNCTION__, social->Name.c_str() );
     }
   else
     {
-      Social *newSocial = new Social( social );
-      Socials->Add(newSocial);
+      Socials->Add(social);
     }
 
   return 0;
 }
 
 /////////////////////////////////////////////////
-SocialRepository *NewSocialRepository()
+std::shared_ptr<SocialRepository> NewSocialRepository()
 {
-  return new LuaSocialRepository();
+  return std::make_shared<LuaSocialRepository>();
 }

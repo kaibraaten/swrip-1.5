@@ -8,7 +8,7 @@
  */
 void do_sedit( Character *ch, std::string argument )
 {
-  Social *social = nullptr;
+  std::shared_ptr<Social> social;
   std::string arg1;
   std::string arg2;
 
@@ -51,7 +51,7 @@ void do_sedit( Character *ch, std::string argument )
           return;
         }
 
-      social = new Social();
+      social = std::make_shared<Social>();
       social->Name = arg1;
       social->CharNoArg = "You " + arg1 + ".";
       Socials->Add(social);
@@ -83,7 +83,6 @@ void do_sedit( Character *ch, std::string argument )
   if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( arg2, "delete" ) )
     {
       Socials->Remove(social);
-      FreeSocial( social );
       ch->Echo("Deleted.\r\n");
       return;
     }

@@ -35,6 +35,7 @@
 #define _BSD_SOURCE
 #endif
 
+#include <memory>
 #include <cstdarg>
 #include <cstdio>
 #include <cstdlib>
@@ -7587,7 +7588,7 @@ static const char *imc_GetSocial( Character * ch, const char *sname, const char 
 {
    static char socname[LGST];
    int i = 0;
-   SOCIAL_DATA *social;
+   std::shared_ptr<Social> social;
    static char lcSocName[LGST];
 
    socname[0] = '\0';
