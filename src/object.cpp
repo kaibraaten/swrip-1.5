@@ -13,7 +13,7 @@ struct Object::Impl
 };
 
 Object::Object()
-  : pImpl(new Impl())
+  : pImpl(std::unique_ptr<Impl>())
 {
   Value.fill(0);
 }
@@ -217,7 +217,7 @@ Object::Object(ProtoObject *pObjIndex, int level)
 
 Object::~Object()
 {
-  delete pImpl;
+
 }
 
 void Object::Add(ExtraDescription *extraDescription)

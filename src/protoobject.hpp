@@ -1,6 +1,7 @@
 #ifndef _SWRIP_PROTOOBJECT_HPP_
 #define _SWRIP_PROTOOBJECT_HPP_
 
+#include <memory>
 #include <list>
 #include <array>
 #include "types.hpp"
@@ -45,7 +46,7 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl = nullptr;
+  std::unique_ptr<Impl> pImpl;
 };
 
 #endif

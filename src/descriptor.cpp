@@ -23,7 +23,7 @@ struct Descriptor::Impl
 };
 
 Descriptor::Descriptor(socket_t desc)
-  : pImpl(new Impl())
+  : pImpl(std::make_unique<Impl>())
 {
   Socket = desc;
   ConnectionState = CON_GET_NAME;
@@ -32,7 +32,7 @@ Descriptor::Descriptor(socket_t desc)
 
 Descriptor::~Descriptor()
 {
-  delete pImpl;
+
 }
 
 void Descriptor::WriteToBuffer(const std::string &txt, size_t length)

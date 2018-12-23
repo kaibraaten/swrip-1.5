@@ -1,6 +1,7 @@
 #ifndef _SWRIP_MPROG_HPP_
 #define _SWRIP_MPROG_HPP_
 
+#include <memory>
 #include <list>
 #include "types.hpp"
 
@@ -24,7 +25,7 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl;
+  std::unique_ptr<Impl> pImpl;
 };
 
 /* Mob program structures */

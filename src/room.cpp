@@ -17,14 +17,14 @@ struct Room::Impl
 };
 
 Room::Room()
-  : pImpl(new Impl())
+  : pImpl(std::make_unique<Impl>())
 {
 
 }
 
 Room::~Room()
 {
-  delete pImpl;
+
 }
 
 void Room::Add(Ship *ship)

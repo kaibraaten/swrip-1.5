@@ -8,14 +8,14 @@ struct ProtoObject::Impl
 
 ProtoObject::ProtoObject(vnum_t vnum)
   : Vnum(vnum),
-    pImpl(new Impl())
+    pImpl(std::make_unique<Impl>())
 {
   Value.fill(0);
 }
 
 ProtoObject::~ProtoObject()
 {
-  delete pImpl;
+
 }
 
 void ProtoObject::Add(ExtraDescription *extraDescription)

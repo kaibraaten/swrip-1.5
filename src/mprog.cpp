@@ -9,14 +9,14 @@ struct MProg::Impl
 
 ////////////////////////////////////////////////////////
 MProg::MProg()
-  : pImpl(new Impl())
+  : pImpl(std::make_unique<Impl>())
 {
 
 }
 
 MProg::~MProg()
 {
-  delete pImpl;
+
 }
 
 const std::list<MPROG_ACT_LIST*> &MProg::ActLists() const
