@@ -1,6 +1,7 @@
 #ifndef _SWRIP_MISSILE_HPP_
 #define _SWRIP_MISSILE_HPP_
 
+#include <memory>
 #include <list>
 #include <utility/vector3.hpp>
 
@@ -12,7 +13,7 @@ extern std::list<Missile*> Missiles;
 class Missile
 {
 public:
-  struct Spaceobject *Spaceobject = nullptr;
+  std::shared_ptr<class Spaceobject> Spaceobject;
   Ship *Target = nullptr;
   Ship *FiredFrom = nullptr;
   std::string FiredBy;

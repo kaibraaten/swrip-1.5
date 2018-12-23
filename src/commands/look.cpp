@@ -1079,7 +1079,7 @@ static void LookThroughShipWindow(Character *ch, const Ship *ship)
     {
       SetCharacterColor(  AT_GREEN, ch );
 
-      for(const Spaceobject *spaceobject : Spaceobjects->Entities())
+      for(auto spaceobject : Spaceobjects)
         {
           if ( IsSpaceobjectInRange( ship, spaceobject) )
             {

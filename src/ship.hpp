@@ -23,6 +23,7 @@
 #ifndef _SWRIP_SHIPS_HPP_
 #define _SWRIP_SHIPS_HPP_
 
+#include <memory>
 #include <string>
 #include <array>
 #include <bitset>
@@ -148,7 +149,7 @@ public:
 
    /* Runtime state, not persisted */
   Room *InRoom = nullptr;
-  struct Spaceobject *Spaceobject = nullptr;
+  std::shared_ptr<class Spaceobject> Spaceobject;
   std::string LandingDestination;
   int Hyperdistance = 0;
   int OriginalHyperdistance = 0;
@@ -168,13 +169,13 @@ public:
   Vector3 OriginPosition;
   long Collision = 0;
   Ship *TractoredBy = nullptr;
-  struct Spaceobject *CurrentJump = nullptr;
-  struct Spaceobject *LastSystem = nullptr;
+  std::shared_ptr<class Spaceobject> CurrentJump;
+  std::shared_ptr<class Spaceobject> LastSystem;
   bool Autopilot = false;
   bool OpenTube = false;
   Ship *Docked = nullptr;
   Character *Ch = nullptr;
-  struct Spaceobject *InOrbitOf = nullptr;
+  std::shared_ptr<class Spaceobject> InOrbitOf;
   int Count = 0;
 };
 
@@ -186,8 +187,8 @@ bool IsShipInHyperspace( const Ship *ship );
 bool IsShipDisabled( const Ship *ship );
 bool IsShipInCombatRange( const Ship *ship, const Ship *target );
 bool IsMissileInRange( const Ship *ship, const Missile *missile );
-bool IsSpaceobjectInRange( const Ship *ship, const Spaceobject *object );
-bool IsSpaceobjectInCaptureRange( const Ship *ship, const Spaceobject *object );
+bool IsSpaceobjectInRange( const Ship *ship, std::shared_ptr<Spaceobject> object );
+bool IsSpaceobjectInCaptureRange( const Ship *ship, std::shared_ptr<Spaceobject> object );
 bool CheckHostile( Ship *ship );
 Ship *GetShipAnywhere( const std::string &name );
 Ship *GetShipFromEntrance( vnum_t vnum );
@@ -216,8 +217,8 @@ long GetRentalPrice(const Ship *ship);
 bool RentShip( Character *ch, const Ship *ship );
 void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaulter);
 void DestroyShip( Ship *ship, Character *killer );
-void ShipToSpaceobject( Ship *ship, Spaceobject *spaceobject );
-void ShipFromSpaceobject( Ship *ship, Spaceobject *spaceobject);
+void ShipToSpaceobject( Ship *ship, std::shared_ptr<Spaceobject> spaceobject );
+void ShipFromSpaceobject( Ship *ship, std::shared_ptr<Spaceobject> spaceobject);
 Ship *GetShipInRoom( const Room *room, const std::string &name );
 void TransferShip( Ship *ship , vnum_t destination );
 bool IsShipAutoflying( const Ship *ship );

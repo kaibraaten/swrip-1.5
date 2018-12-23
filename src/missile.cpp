@@ -30,7 +30,7 @@ std::list<Missile*> Missiles;
 
 void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missiletype )
 {
-  Spaceobject *spaceobject = NULL;
+  std::shared_ptr<Spaceobject> spaceobject;
 
   if ( ship  == NULL )
     {

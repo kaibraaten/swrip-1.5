@@ -8,7 +8,7 @@ void do_setspaceobject( Character *ch, std::string argument )
 {
   std::string arg1;
   std::string arg2;
-  Spaceobject *spaceobject = nullptr;
+  std::shared_ptr<Spaceobject> spaceobject;
 
   if ( IsNpc( ch ) )
     {

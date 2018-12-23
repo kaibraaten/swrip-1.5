@@ -76,7 +76,7 @@ void do_calculate(Character *ch, std::string argument )
       ch->Echo("&wPossible destinations:\r\n");
       SetCharacterColor( AT_RED, ch );
       
-      for(const Spaceobject *spaceobject : Spaceobjects->Entities())
+      for(auto spaceobject : Spaceobjects)
 	{
 	  if ( spaceobject->Type <= SPACE_SUN && !(spaceobject->IsSimulator && !IsGreater(ch)))
             {
@@ -87,7 +87,7 @@ void do_calculate(Character *ch, std::string argument )
       ch->Echo( "\r\n" );
       SetCharacterColor( AT_NOTE, ch );
 
-      for(const Spaceobject *spaceobject : Spaceobjects->Entities())
+      for(auto spaceobject : Spaceobjects)
 	{
 	  if ( spaceobject->Type == SPACE_PLANET
                && !(spaceobject->IsSimulator && (!IsGreater(ch))) )
@@ -135,7 +135,7 @@ void do_calculate(Character *ch, std::string argument )
       return;
     }
 
-  Spaceobject *spaceobject = ship->CurrentJump;
+  std::shared_ptr<Spaceobject> spaceobject = ship->CurrentJump;
 
   if ( !found )
     {
@@ -164,7 +164,7 @@ void do_calculate(Character *ch, std::string argument )
   ship->Jump.y += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
   ship->Jump.z += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
 
-  for(const Spaceobject *spaceobj : Spaceobjects->Entities())
+  for(auto spaceobj : Spaceobjects)
     {
       if ( !spaceobj->IsSimulator && distance && !spaceobj->Name.empty()
            && GetDistanceBetweenVectors( &ship->Jump, &spaceobj->Position ) < spaceobj->Gravity * 4 )
@@ -176,7 +176,7 @@ void do_calculate(Character *ch, std::string argument )
         }
     }
   
-  for(Spaceobject *spaceobj : Spaceobjects->Entities())
+  for(auto spaceobj : Spaceobjects)
     {
       if( IsSpaceobjectInRange( ship, spaceobj ) )
         {

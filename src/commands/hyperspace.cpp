@@ -17,7 +17,7 @@ void do_hyperspace(Character *ch, std::string argument )
   int the_chance = 0;
   Vector3 tmp;
   Ship *ship = NULL;
-  Spaceobject *spaceobject = NULL;
+  std::shared_ptr<Spaceobject> spaceobject;
   char buf[MAX_STRING_LENGTH] = { '\0' };
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
@@ -118,7 +118,7 @@ void do_hyperspace(Character *ch, std::string argument )
         }
       else
         {
-          for(Spaceobject *spaceobj : Spaceobjects->Entities())
+          for(auto spaceobj : Spaceobjects)
             {
               if( IsSpaceobjectInRange( ship, spaceobj ) )
                 {
@@ -172,7 +172,7 @@ void do_hyperspace(Character *ch, std::string argument )
       return;
     }
 
-  for(const Spaceobject *spaceobj : Spaceobjects->Entities())
+  for(auto spaceobj : Spaceobjects)
     {
       if( GetShipDistanceToSpaceobject( ship,  spaceobj ) < 100 + ( spaceobj->Gravity * 5 ) )
         {

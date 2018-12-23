@@ -73,7 +73,7 @@ void do_setplanet( Character *ch, std::string argument )
     {
       if ( (planet->Spaceobject = GetSpaceobject(argument)) )
         {
-          Spaceobject *spaceobject = planet->Spaceobject;
+          std::shared_ptr<Spaceobject> spaceobject = planet->Spaceobject;
 
           if (spaceobject != NULL)
 	    {

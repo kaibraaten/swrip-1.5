@@ -70,7 +70,7 @@ void do_radar( Character *ch, std::string argument )
   Act( AT_PLAIN, "$n checks the radar.", ch, NULL, argument.c_str(), TO_ROOM );
   SetCharacterColor(  AT_RED, ch );
 
-  for(const Spaceobject *spaceobj : Spaceobjects->Entities())
+  for(auto spaceobj : Spaceobjects)
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->Type == SPACE_SUN
@@ -88,7 +88,7 @@ void do_radar( Character *ch, std::string argument )
 
   SetCharacterColor(  AT_LBLUE, ch );
 
-  for(const Spaceobject *spaceobj : Spaceobjects->Entities())
+  for(auto spaceobj : Spaceobjects)
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->Type == SPACE_PLANET
@@ -107,7 +107,7 @@ void do_radar( Character *ch, std::string argument )
   ch->Echo("\r\n");
   SetCharacterColor(  AT_WHITE, ch );
 
-  for(const Spaceobject *spaceobj : Spaceobjects->Entities())
+  for(auto spaceobj : Spaceobjects)
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->Type > SPACE_PLANET

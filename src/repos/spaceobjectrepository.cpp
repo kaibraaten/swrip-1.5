@@ -8,43 +8,43 @@
 
 #define SPACE_DIR       DATA_DIR "space/"
 
-SpaceobjectRepository *Spaceobjects = nullptr;
+std::shared_ptr<SpaceobjectRepository> Spaceobjects;
 
 class LuaSpaceobjectRepository : public SpaceobjectRepository
 {
 public:
   void Load() override;
   void Save() const override;
-  void Save(const Spaceobject *spaceobject) const override;
+  void Save(std::shared_ptr<Spaceobject> spaceobject) const override;
 
 private:
   static bool LandingSiteIsBlank( const LandingSite *site );
   static void PushOneSite( lua_State *L, const LandingSite *site, int idx );
-  static void PushLandingSites( lua_State *L, const Spaceobject *spaceobj );
+  static void PushLandingSites( lua_State *L, std::shared_ptr<Spaceobject> spaceobj );
   static void PushSpaceobject( lua_State *L, const void *userData );
   static void LoadLandingSite( lua_State *L, LandingSite *site );
-  static void LoadLandingSites( lua_State *L, Spaceobject *spaceobj );
+  static void LoadLandingSites( lua_State *L, std::shared_ptr<Spaceobject> spaceobj );
   static int L_SpaceobjectEntry( lua_State *L );
   static void ExecuteSpaceobjectFile( const std::string &filePath, void *userData );
 };
 
 void LuaSpaceobjectRepository::Load()
 {
-  ForEachLuaFileInDir( SPACE_DIR, ExecuteSpaceobjectFile, (void*)"SpaceobjectEntry" );
+  ForEachLuaFileInDir( SPACE_DIR, ExecuteSpaceobjectFile, nullptr );
 }
 
 void LuaSpaceobjectRepository::Save() const
 {
-  for(const Spaceobject *spaceobject : Spaceobjects->Entities())
+  for(auto spaceobject : Entities())
     {
       Save(spaceobject);
     }
 }
 
-void LuaSpaceobjectRepository::Save(const Spaceobject *spaceobject) const
+void LuaSpaceobjectRepository::Save(std::shared_ptr<Spaceobject> spaceobject) const
 {
   LuaSaveDataFile( GetSpaceobjectFilename( spaceobject ),
-                   PushSpaceobject, "spaceobject", spaceobject );
+                   PushSpaceobject, "spaceobject", &spaceobject );
 }
 
 bool LuaSpaceobjectRepository::LandingSiteIsBlank( const LandingSite *site )
@@ -64,7 +64,8 @@ void LuaSpaceobjectRepository::PushOneSite( lua_State *L, const LandingSite *sit
   lua_settable( L, -3 );
 }
 
-void LuaSpaceobjectRepository::PushLandingSites( lua_State *L, const Spaceobject *spaceobj )
+void LuaSpaceobjectRepository::PushLandingSites( lua_State *L,
+                                                 std::shared_ptr<Spaceobject> spaceobj )
 {
   lua_pushstring( L, "LandingSites" );
   lua_newtable( L );
@@ -84,7 +85,7 @@ void LuaSpaceobjectRepository::PushLandingSites( lua_State *L, const Spaceobject
 
 void LuaSpaceobjectRepository::PushSpaceobject( lua_State *L, const void *userData )
 {
-  const Spaceobject *spaceobj = (const Spaceobject*) userData;
+  std::shared_ptr<Spaceobject> spaceobj = *static_cast<const std::shared_ptr<Spaceobject>*>(userData);
   static int idx = 0;
   lua_pushinteger( L, ++idx );
   lua_newtable( L );
@@ -128,7 +129,7 @@ void LuaSpaceobjectRepository::LoadLandingSite( lua_State *L, LandingSite *site 
   LuaGetfieldBool( L, "IsSecret", &site->IsSecret );
 }
 
-void LuaSpaceobjectRepository::LoadLandingSites( lua_State *L, Spaceobject *spaceobj )
+void LuaSpaceobjectRepository::LoadLandingSites( lua_State *L, std::shared_ptr<Spaceobject> spaceobj )
 {
   int idx = lua_gettop( L );
 
@@ -160,7 +161,7 @@ int LuaSpaceobjectRepository::L_SpaceobjectEntry( lua_State *L )
       return 0;
     }
 
-  Spaceobject *spaceobj = new Spaceobject();
+  std::shared_ptr<Spaceobject> spaceobj = std::make_shared<Spaceobject>();
   spaceobj->Name = name;
   
   LuaGetfieldString( L, "Planet",
@@ -229,15 +230,12 @@ void LuaSpaceobjectRepository::ExecuteSpaceobjectFile( const std::string &filePa
 }
 
 ///////////////////////////////////////////////
-SpaceobjectRepository *NewSpaceobjectRepository()
+std::shared_ptr<SpaceobjectRepository> NewSpaceobjectRepository()
 {
-  return new LuaSpaceobjectRepository();
+  return std::make_shared<LuaSpaceobjectRepository>();
 }
 
-std::string GetSpaceobjectFilename( const Spaceobject *spaceobject )
+std::string GetSpaceobjectFilename( std::shared_ptr<Spaceobject> spaceobject )
 {
-  char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s", SPACE_DIR, ConvertToLuaFilename( spaceobject->Name ).c_str() );
-  return fullPath;
+  return FormatString( "%s%s", SPACE_DIR, ConvertToLuaFilename( spaceobject->Name ).c_str() );
 }
-

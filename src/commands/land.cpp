@@ -16,7 +16,7 @@ void do_land( Character *ch, std::string argument )
   Ship *ship = NULL;
   Ship *target = NULL;
   char buf[MAX_STRING_LENGTH];
-  Spaceobject *spaceobj = NULL;
+  std::shared_ptr<Spaceobject> spaceobj;
   bool found = false;
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
@@ -112,7 +112,7 @@ void do_land( Character *ch, std::string argument )
       SetCharacterColor(  AT_CYAN, ch );
       ch->Echo( "Land where?\r\n\r\nChoices: " );
 
-      for(std::list<Spaceobject*>::const_iterator i = Spaceobjects->Entities().cbegin();
+      for(std::list<std::shared_ptr<Spaceobject>>::const_iterator i = Spaceobjects->Entities().cbegin();
           i != Spaceobjects->Entities().cend(); ++i)
         {
           spaceobj = *i;
@@ -143,7 +143,7 @@ void do_land( Character *ch, std::string argument )
       return;
     }
 
-  for(std::list<Spaceobject*>::const_iterator i = Spaceobjects->Entities().cbegin();
+  for(std::list<std::shared_ptr<Spaceobject>>::const_iterator i = Spaceobjects->Entities().cbegin();
       i != Spaceobjects->Entities().cend(); ++i)
     {
       spaceobj = *i;

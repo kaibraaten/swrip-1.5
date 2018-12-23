@@ -9,7 +9,7 @@ void do_spaceobjects( Character *ch, std::string argument )
 
   SetCharacterColor( AT_RED, ch );
 
-  for(const Spaceobject *spaceobject : Spaceobjects->Entities())
+  for(auto spaceobject : Spaceobjects)
     {
       if( spaceobject->Type > SPACE_SUN )
         continue;
@@ -23,7 +23,7 @@ void do_spaceobjects( Character *ch, std::string argument )
   ch->Echo("\r\n" );
   SetCharacterColor( AT_NOTE, ch );
 
-  for(const Spaceobject *spaceobject : Spaceobjects->Entities())
+  for(auto spaceobject : Spaceobjects)
     {
       if( spaceobject->Type != SPACE_PLANET )
 	continue;

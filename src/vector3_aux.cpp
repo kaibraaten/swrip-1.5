@@ -80,7 +80,7 @@ bool IsShipFacingShip( const Ship * const ship,
 }
 
 bool IsShipFacingSpaceobject( const Ship * const ship,
-				 const Spaceobject * const target )
+                              std::shared_ptr<Spaceobject> target )
 {
   return IsShipFacing( ship, &target->Position );
 }
@@ -122,7 +122,7 @@ void SetShipCourseTowardsShip( Ship * const ship,
 }
 
 void SetShipCourseTowardsSpaceobject( Ship * const ship,
-				     const Spaceobject * const target )
+                                      std::shared_ptr<Spaceobject> target )
 {
   SetShipCourse( ship, &target->Position );
 }
@@ -146,7 +146,7 @@ void AlignShipTrajectory( Ship * const ship,
   CopyVector( &ship->Heading, &target->Heading );
 }
 
-void MoveSpaceobject( Spaceobject * const spaceobj )
+void MoveSpaceobject( std::shared_ptr<Spaceobject> spaceobj )
 {
   HandleMovement( &spaceobj->Position, &spaceobj->Heading, spaceobj->Speed );
 }
@@ -168,7 +168,7 @@ double GetShipDistanceToShip( const Ship * const ship,
 }
 
 double GetShipDistanceToSpaceobject( const Ship * const ship,
-				     const Spaceobject * const spaceobject )
+				     std::shared_ptr<Spaceobject> spaceobject )
 {
   return GetDistanceBetweenVectors( &ship->Position, &spaceobject->Position );
 }

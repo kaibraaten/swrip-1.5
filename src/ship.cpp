@@ -46,13 +46,13 @@ static void ApproachLandingSite( Ship *ship, const std::string &arg );
 static void LandShip( Ship *ship, const std::string &arg );
 static void LaunchShip( Ship *ship );
 static void MakeDebris( const Ship *ship );
-static bool CaughtInGravity( const Ship *ship, const Spaceobject *space);
-static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun );
-static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun );
+static bool CaughtInGravity( const Ship *ship, std::shared_ptr<Spaceobject> space);
+static bool WillCollideWithSun( const Ship *ship, std::shared_ptr<Spaceobject> sun );
+static void EvadeCollisionWithSun( Ship *ship, std::shared_ptr<Spaceobject> sun );
 static bool ShipHasState( const Ship *ship, ShipState state );
 static void DockShip( Character *ch, Ship *ship );
 
-static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun )
+static bool WillCollideWithSun( const Ship *ship, std::shared_ptr<Spaceobject> sun )
 {
   if ( GetShipDistanceToSpaceobject( ship, sun ) < 10 )
     {
@@ -85,7 +85,7 @@ bool IsShipDisabled( const Ship *ship )
   return ShipHasState( ship, SHIP_DISABLED );
 }
 
-static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun )
+static void EvadeCollisionWithSun( Ship *ship, std::shared_ptr<Spaceobject> sun )
 {
   ship->Heading.x = 10 * ship->Position.x;
   ship->Heading.y = 10 * ship->Position.y;
@@ -167,7 +167,7 @@ void UpdateShipMovement()
 	  continue;
 	}
 
-      for(Spaceobject *spaceobj : Spaceobjects)
+      for(auto spaceobj : Spaceobjects)
         {
           if ( spaceobj->Type == SPACE_SUN
 	       && WillCollideWithSun( ship, spaceobj ) )
@@ -219,7 +219,7 @@ void UpdateShipMovement()
 
           ship->Count++;
 
-          for(const Spaceobject *spaceobj : Spaceobjects)
+          for(auto spaceobj : Spaceobjects)
 	    {
 	      if( CaughtInGravity( ship, spaceobj ) )
 		{
@@ -299,7 +299,7 @@ void UpdateShipMovement()
 
                   bool found = false;
 
-                  for(Spaceobject *spaceobj : Spaceobjects)
+                  for(auto spaceobj : Spaceobjects)
 		    {
 		      if( IsSpaceobjectInRange( ship, spaceobj ) )
 			{
@@ -484,13 +484,13 @@ static void LandShip( Ship *ship, const std::string &arg )
 
 static void ApproachLandingSite( Ship *ship, const std::string &arg)
 {
-  Spaceobject *spaceobj = NULL;
+  std::shared_ptr<Spaceobject> spaceobj;
   char buf[MAX_STRING_LENGTH];
   std::string landingSiteName;
   bool found = false;
   Ship *target = NULL;
 
-  for(std::list<Spaceobject*>::const_iterator i = cbegin(Spaceobjects);
+  for(std::list<std::shared_ptr<Spaceobject>>::const_iterator i = cbegin(Spaceobjects);
       i != cend(Spaceobjects); ++i)
     {
       spaceobj = *i;
@@ -547,7 +547,7 @@ static void CopyPositionToDockedShips(const Ship *ship, Ship *docked)
 static void LaunchShip( Ship *ship )
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
-  Spaceobject *spaceobject = GetSpaceobjectFromDockVnum( ship->Location );
+  std::shared_ptr<Spaceobject> spaceobject = GetSpaceobjectFromDockVnum( ship->Location );
   int plusminus = 0;
 
   ShipToSpaceobject( ship, spaceobject );
@@ -1573,7 +1573,7 @@ void ShipUpdate( void )
         {
           too_close = ship->Thrusters.Speed.Current + 50;
 
-          for(const Spaceobject *spaceobj : Spaceobjects)
+          for(auto spaceobj : Spaceobjects)
 	    {
 	      if( GetShipDistanceToSpaceobject( ship, spaceobj ) < too_close )
 		{
@@ -2013,19 +2013,19 @@ bool IsMissileInRange( const Ship *ship, const Missile *missile )
     && GetMissileDistanceToShip( missile, ship ) < 5000;
 }
 
-bool IsSpaceobjectInRange( const Ship *ship, const Spaceobject *object )
+bool IsSpaceobjectInRange( const Ship *ship, std::shared_ptr<Spaceobject> object )
 {
   return object && ship && ship->Spaceobject
     && GetShipDistanceToSpaceobject( ship, object ) < 100000;
 }
 
-bool IsSpaceobjectInCaptureRange( const Ship *ship, const Spaceobject *object )
+bool IsSpaceobjectInCaptureRange( const Ship *ship, std::shared_ptr<Spaceobject> object )
 {
   return object && ship
     && GetShipDistanceToSpaceobject( ship, object ) < 10000;
 }
 
-static bool CaughtInGravity( const Ship *ship, const Spaceobject *object )
+static bool CaughtInGravity( const Ship *ship, std::shared_ptr<Spaceobject> object )
 {
   return object && ship
     && GetDistanceBetweenVectors( &object->Position, &ship->HyperPosition ) < object->Gravity * 5;
@@ -2491,7 +2491,7 @@ Ship *GetShipFromHangar( vnum_t vnum )
   return Ships->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Hangar; });
 }
 
-void ShipToSpaceobject( Ship *ship, Spaceobject *spaceobject )
+void ShipToSpaceobject( Ship *ship, std::shared_ptr<Spaceobject> spaceobject )
 {
   if( ship != nullptr && spaceobject != nullptr )
     {
@@ -2499,7 +2499,7 @@ void ShipToSpaceobject( Ship *ship, Spaceobject *spaceobject )
     }
 }
 
-void ShipFromSpaceobject( Ship *ship, Spaceobject *spaceobject )
+void ShipFromSpaceobject( Ship *ship, std::shared_ptr<Spaceobject> spaceobject )
 {
   if( ship != nullptr && spaceobject != nullptr )
     {

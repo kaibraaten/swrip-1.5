@@ -26,6 +26,7 @@
 #ifndef _SWRIP_VECTOR3_AUX_HPP_
 #define _SWRIP_VECTOR3_AUX_HPP_
 
+#include <memory>
 #include <utility/vector3.hpp>
 #include "types.hpp"
 
@@ -39,10 +40,10 @@
  * }
  */
 bool IsShipFacingShip( const Ship * const ship,
-			  const Ship * const target );
+                       const Ship * const target );
 
 bool IsShipFacingSpaceobject( const Ship * const ship,
-				 const Spaceobject * const spaceobject );
+                              std::shared_ptr<Spaceobject> spaceobject );
 
 /*
  * Flip the trajectory to head the opposite way (180 degrees).
@@ -61,15 +62,15 @@ void TurnShip180( Ship * const ship );
  * Etc, etc...
  */
 void SetShipCourse( Ship * const ship,
-                      const Vector3 * const destination );
+                    const Vector3 * const destination );
 
 void SetShipCourseTowardsShip( Ship * const ship,
-			      const Ship * const target );
+                               const Ship * const target );
 
 void SetShipCourseTowardsSpaceobject( Ship * const ship,
-				     const Spaceobject * const spaceobject );
+                                      std::shared_ptr<Spaceobject> spaceobject );
 void SetMissileCourseTowardsShip( Missile * const m,
-				 const Ship * const target );
+                                  const Ship * const target );
 
 /*
  * High-level function to align a ship's trajectory with another's.
@@ -83,12 +84,12 @@ void AlignShipTrajectory( Ship * const ship,
  */
 void MoveShip( Ship * const ship );
 void MoveMissile( Missile * const m );
-void MoveSpaceobject( Spaceobject * const spaceobj );
+void MoveSpaceobject( std::shared_ptr<Spaceobject> spaceobj );
 
 double GetShipDistanceToShip( const Ship * const ship,
 			      const Ship * const target );
 double GetShipDistanceToSpaceobject( const Ship * const ship,
-				     const Spaceobject * const spaceobject );
+				     std::shared_ptr<Spaceobject> spaceobject );
 double GetMissileDistanceToShip( const Missile * const m,
 				 const Ship * const s );
 void RandomizeVector( Vector3 * const vec, int from, int to );

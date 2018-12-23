@@ -89,14 +89,14 @@ void do_calculate_diff(Character *ch, std::string argument )
   ship->Jump.y = ship->Position.y + strtol( arg2.c_str(), nullptr, 10 );
   ship->Jump.z = ship->Position.z + strtol( arg3.c_str(), nullptr, 10 );
 
-  Spaceobject *spaceobject = ship->CurrentJump;
+  std::shared_ptr<Spaceobject> spaceobject = ship->CurrentJump;
 
   RandomizeVector( &ship->Jump, ship->Instruments.AstroArray - 300, 300 - ship->Instruments.AstroArray );
   ship->Jump.x += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
   ship->Jump.y += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
   ship->Jump.z += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
 
-  for(const Spaceobject *spaceobj : Spaceobjects->Entities())
+  for(auto spaceobj : Spaceobjects)
     {
       if ( !spaceobj->IsSimulator && distance && !spaceobj->Name.empty()
            && GetDistanceBetweenVectors( &ship->Jump, &spaceobj->Position ) < spaceobj->Gravity * 4 )
@@ -108,7 +108,7 @@ void do_calculate_diff(Character *ch, std::string argument )
         }
     }
 
-  for(Spaceobject *iter : Spaceobjects->Entities())
+  for(auto iter : Spaceobjects)
     {
       if( IsSpaceobjectInRange( ship, iter ) )
         {

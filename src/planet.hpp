@@ -28,7 +28,7 @@ public:
   void Add(Area *area);
   void Remove(Area *area);
   
-  struct Spaceobject *Spaceobject = nullptr;
+  std::shared_ptr<class Spaceobject> Spaceobject;
   std::string Name;
   long BaseValue = 0;
   std::shared_ptr<Clan> GovernedBy;
