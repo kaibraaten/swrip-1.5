@@ -70,7 +70,7 @@ void do_who( Character *ch, std::string argument )
     {
       NullCh = true;
       desc = new NullDescriptor();
-      ch = new Character(new PCData(), desc);
+      ch = new Character(std::make_unique<PCData>(), desc);
       ch->TopLevel = 1;
       ch->InRoom = GetRoom( ROOM_VNUM_LIMBO );
     }

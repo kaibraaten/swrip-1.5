@@ -26,6 +26,7 @@
 #define __attribute__(a)
 #endif
 
+#include <memory>
 #include <bitset>
 #include <list>
 #include <array>
@@ -38,7 +39,7 @@ class Character
 {
 public:
   Character() = delete;
-  Character(class PCData *pcdata, Descriptor *desc);
+  Character(std::unique_ptr<class PCData> pcdata, Descriptor *desc);
   Character(ProtoMobile *protoMob);
   
   virtual ~Character();
@@ -63,7 +64,7 @@ public:
   SpecFun *spec_2 = NULL;
   ProtoMobile *Prototype = NULL;
   Descriptor *Desc = NULL;
-  class PCData *PCData = NULL;
+  std::unique_ptr<class PCData> PCData;
   std::string Name;
   std::string ShortDescr;
   std::string LongDescr;
@@ -205,7 +206,7 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl = nullptr;
+  std::unique_ptr<Impl> pImpl;
 };
 
 bool IsWizVis( const Character *ch, const Character *victim );

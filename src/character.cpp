@@ -49,12 +49,12 @@ struct Character::Impl
   std::list<Timer*> Timers;
 };
 
-Character::Character(class PCData *pcdata, Descriptor *desc)
+Character::Character(std::unique_ptr<class PCData> pcdata, Descriptor *desc)
   : Desc(desc),
-    PCData(pcdata),
+    PCData(std::move(pcdata)),
     Flags(PLR_BLANK | PLR_COMBINE | PLR_PROMPT),
     PermStats( 10 ),
-    pImpl(new Impl())
+    pImpl(std::make_unique<Impl>())
 {
   desc->Character = this;
   Ability.Level.fill(0);
@@ -96,7 +96,7 @@ Character::Character(ProtoMobile *protoMob)
     Weight( protoMob->Weight),
     VipFlags( protoMob->VipFlags),
     PermStats( protoMob->Stats ),
-    pImpl(new Impl())
+    pImpl(std::make_unique<Impl>())
 {
   Ability.Level.fill(0);
   Ability.Experience.fill(0);
@@ -135,12 +135,7 @@ Character::Character(ProtoMobile *protoMob)
 
 Character::~Character()
 {
-  if(PCData != NULL)
-    {
-      delete PCData;
-    }
 
-  delete pImpl;
 }
 
 void Character::Echo(const std::string &txt) const
