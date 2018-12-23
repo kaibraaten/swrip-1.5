@@ -5,7 +5,7 @@
 
 struct PCData::Impl
 {
-  std::list<Alias*> Aliases;
+  std::list<std::shared_ptr<Alias>> Aliases;
   std::list<std::shared_ptr<class Note>> Comments;
 };
 
@@ -25,23 +25,20 @@ PCData::PCData()
 
 PCData::~PCData()
 {
-  for(Alias *alias : Aliases())
-    {
-      FreeAlias(alias);
-    }
+
 }
 
-const std::list<Alias*> &PCData::Aliases() const
+const std::list<std::shared_ptr<Alias>> &PCData::Aliases() const
 {
   return pImpl->Aliases;
 }
 
-void PCData::Add(Alias *alias)
+void PCData::Add(std::shared_ptr<Alias> alias)
 {
   pImpl->Aliases.push_back(alias);
 }
 
-void PCData::Remove(Alias *alias)
+void PCData::Remove(std::shared_ptr<Alias> alias)
 {
   pImpl->Aliases.remove(alias);
 }

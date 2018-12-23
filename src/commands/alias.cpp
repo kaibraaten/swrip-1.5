@@ -24,7 +24,7 @@ void do_alias( Character *ch, std::string argument )
 
       ch->Echo( "%-20s What it does\r\n", "Alias" );
 
-      for(const Alias *alias : ch->PCData->Aliases())
+      for(auto alias : ch->PCData->Aliases())
         {
           ch->Echo( "%-20s %s\r\n", alias->Name.c_str(), alias->Command.c_str() );
         }
@@ -34,12 +34,11 @@ void do_alias( Character *ch, std::string argument )
 
   if (argument.empty())
     {
-      Alias *alias = FindAlias(ch, arg);
+      auto alias = FindAlias(ch, arg);
 
       if (alias != nullptr)
         {
 	  UnlinkAlias( ch, alias );
-	  FreeAlias( alias );
           ch->Echo("Deleted Alias.\r\n");
         }
       else
@@ -50,7 +49,7 @@ void do_alias( Character *ch, std::string argument )
       return;
     }
   
-  Alias *alias = FindAlias(ch, arg);
+  auto alias = FindAlias(ch, arg);
 
   if (alias == nullptr)
     {

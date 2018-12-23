@@ -1,79 +1,74 @@
 -- Imperial Shipyard
--- Last saved Sunday 23-Dec-2018 01:38:49
+-- Last saved Sunday 23-Dec-2018 21:25:58
 
 ShipEntry
 {
-   State = 1, 
-   Alarm = false, 
-   Shipyard = 45, 
-   CoPilot = "", 
-   LastDock = 45, 
-   Owner = "The Empire", 
-   Thrusters = 
-   {
-      Speed = 
-      {
-         Max = 255, 
-         Current = 0, 
-      }, 
-      Maneuver = 0, 
-      Energy = 
-      {
-         Max = -5536, 
-         Current = -5536, 
-      }, 
-   }, 
-   Location = 0, 
-   DockingPorts = 0, 
-   Guard = true, 
-   Pilot = "", 
-   Type = "Imperial", 
-   Class = "Platform", 
-   Hyperdrive = 
-   {
-      Speed = 0, 
-   }, 
-   Rooms = 
-   {
-      Hangar = 32000, 
-      Entrance = 32000, 
-      Cockpit = 32049, 
-      Pilotseat = 32049, 
-      Last = 32049, 
-      Gunseat = 32049, 
-      Coseat = 32049, 
-      First = 32000, 
-      Navseat = 32049, 
-      Engine = 0, 
-   }, 
-   Name = "Imperial Shipyard", 
    Position = 
    {
+      Z = -2000, 
       X = 2000, 
       Y = 2000, 
-      Z = -2000, 
    }, 
+   Instruments = 
+   {
+      Sensor = 255, 
+      AstroArray = 0, 
+      Comm = 255, 
+   }, 
+   LastDock = 45, 
+   Owner = "The Empire", 
+   PersonalName = "Imperial Shipyard", 
+   Rooms = 
+   {
+      Last = 32049, 
+      Pilotseat = 32049, 
+      First = 32000, 
+      Coseat = 32049, 
+      Entrance = 32000, 
+      Engine = 0, 
+      Cockpit = 32049, 
+      Gunseat = 32049, 
+      Hangar = 32000, 
+      Navseat = 32049, 
+   }, 
+   Shipyard = 45, 
+   Location = 0, 
+   Type = "Imperial", 
    Defenses = 
    {
+      Shield = 
+      {
+         Current = 0, 
+         Max = 10000, 
+      }, 
       Hull = 
       {
-         Max = -25536, 
          Current = -25536, 
+         Max = -25536, 
       }, 
       Chaff = 
       {
-         Max = 25, 
          Current = 25, 
-      }, 
-      Shield = 
-      {
-         Max = 10000, 
-         Current = 0, 
+         Max = 25, 
       }, 
    }, 
+   CoPilot = "", 
+   Pilot = "", 
    Home = "Byss", 
-   Description = "", 
-   PersonalName = "Imperial Shipyard", 
+   Thrusters = 
+   {
+      Energy = 
+      {
+         Current = -5536, 
+         Max = -5536, 
+      }, 
+      Speed = 
+      {
+         Current = 0, 
+         Max = 255, 
+      }, 
+      Maneuver = 0, 
+   }, 
    WeaponSystems = 
    {
       IonCannon = 
@@ -81,93 +76,98 @@ ShipEntry
          State = 0, 
          Count = 20, 
       }, 
-      Turrets = 
-      {
-         [1] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [2] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [3] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [4] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [5] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [6] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [7] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [8] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [9] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [0] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-      }, 
-      Tube = 
-      {
-         State = 0, 
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Missiles = 
-         {
-            Max = 100, 
-            Current = 100, 
-         }, 
-         Rockets = 
-         {
-            Max = 50, 
-            Current = 50, 
-         }, 
-      }, 
       Laser = 
       {
          State = 0, 
          Count = 20, 
       }, 
+      Tube = 
+      {
+         Missiles = 
+         {
+            Current = 100, 
+            Max = 100, 
+         }, 
+         Rockets = 
+         {
+            Current = 50, 
+            Max = 50, 
+         }, 
+         State = 0, 
+         Torpedoes = 
+         {
+            Current = 0, 
+            Max = 0, 
+         }, 
+      }, 
+      Turrets = 
+      {
+         [1] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [2] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [3] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [4] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [5] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [6] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [7] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [8] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [9] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [0] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+      }, 
       TractorBeam = 
       {
-         Strength = 255, 
          State = 0, 
+         Strength = 255, 
       }, 
    }, 
-   Instruments = 
+   Description = "", 
+   Guard = true, 
+   State = 1, 
+   DockingPorts = 0, 
+   Hyperdrive = 
    {
-      Comm = 255, 
-      AstroArray = 0, 
-      Sensor = 255, 
+      Speed = 0, 
    }, 
+   Alarm = false, 
+   Class = "Platform", 
+   Name = "Imperial Shipyard", 
 }

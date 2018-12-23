@@ -27,6 +27,8 @@
 #ifndef _SWRIP_ALIAS_HPP_
 #define _SWRIP_ALIAS_HPP_
 
+#include <string>
+#include <memory>
 #include "types.hpp"
 
 class Alias
@@ -40,10 +42,9 @@ DECLARE_CMD_FUN( do_alias );
 
 void FreeAliases( Character *ch );
 bool CheckAlias( Character *ch, const std::string &command, const std::string &argument );
-Alias *FindAlias( const Character *ch, const std::string &argument );
-Alias *AllocateAlias( const std::string &name, const std::string &command );
-void FreeAlias( Alias* );
-void AddAlias( Character *ch, Alias *alias );
-void UnlinkAlias( Character *ch, Alias *alias );
+std::shared_ptr<Alias> FindAlias( const Character *ch, const std::string &argument );
+std::shared_ptr<Alias> AllocateAlias( const std::string &name, const std::string &command );
+void AddAlias( Character *ch, std::shared_ptr<Alias> alias );
+void UnlinkAlias( Character *ch, std::shared_ptr<Alias> alias );
 
 #endif

@@ -438,7 +438,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "Prompt       %s~\n",      ch->PCData->Prompt.c_str()      );
 	}
 
-      for(const Alias *alias : ch->PCData->Aliases())
+      for(auto alias : ch->PCData->Aliases())
         {
           if(alias->Name.empty() || alias->Command.empty())
 	    {

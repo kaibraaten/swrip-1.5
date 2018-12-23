@@ -38,9 +38,9 @@ public:
   PCData();
   virtual ~PCData();
 
-  const std::list<Alias*> &Aliases() const;
-  void Add(Alias *alias);
-  void Remove(Alias *alias);
+  const std::list<std::shared_ptr<Alias>> &Aliases() const;
+  void Add(std::shared_ptr<Alias> alias);
+  void Remove(std::shared_ptr<Alias> alias);
 
   const std::list<std::shared_ptr<class Note>> &Comments() const;
   void Add(std::shared_ptr<class Note> comment);

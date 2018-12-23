@@ -497,7 +497,7 @@ void InMemoryPlayerRepository::LoadAliases( lua_State *L, Character *ch )
 
           if( !alias.Name.empty() && !alias.Command.empty() )
             {
-              ch->PCData->Add( new Alias(alias) );
+              ch->PCData->Add( std::make_shared<Alias>(alias) );
             }
         }
     }
@@ -637,7 +637,7 @@ void InMemoryPlayerRepository::PushAliases( lua_State *L, const Character *pc )
   lua_pushstring( L, "Aliases" );
   lua_newtable( L );
 
-  for( const Alias *alias : pc->PCData->Aliases() )
+  for( auto alias : pc->PCData->Aliases() )
     {
       LuaSetfieldString( L, "Name", alias->Name );
       LuaSetfieldString( L, "Value", alias->Command );
