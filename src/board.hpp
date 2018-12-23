@@ -26,9 +26,9 @@ public:
   Board();
   virtual ~Board();
 
-  const std::list<Note*> &Notes() const;
-  void Add(Note *note);
-  void Remove(Note *note);
+  const std::list<std::shared_ptr<Note>> &Notes() const;
+  void Add(std::shared_ptr<Note> note);
+  void Remove(std::shared_ptr<Note> note);
   
   std::string Name;             /* Filename to save notes to       */
   std::string ReadGroup;            /* Can restrict a board to a       */
@@ -51,7 +51,6 @@ std::shared_ptr<Board> AllocateBoard(const std::string &name);
 std::shared_ptr<Board> GetBoardFromObject( const Object *obj );
 std::shared_ptr<Board> FindBoardHere( const Character *ch );
 std::shared_ptr<Board> GetBoard( const std::string &name );
-void FreeNote( Note *pnote );
 void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL );
 void AttachNote(Character *ch);
 void CountMailMessages(const Character *ch);

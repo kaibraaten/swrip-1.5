@@ -1,173 +1,173 @@
 -- Sorosuub System Hopper
--- Last saved Sunday 23-Dec-2018 01:38:19
+-- Last saved Sunday 23-Dec-2018 01:38:49
 
 ShipEntry
 {
+   Alarm = false, 
+   Class = "Starfighter", 
+   Position = 
+   {
+      X = -1499993, 
+      Z = -3, 
+      Y = -200002, 
+   }, 
+   Shipyard = 28613, 
+   LastDock = 28613, 
+   State = 0, 
+   Type = "Civilian", 
+   Name = "Sorosuub System Hopper", 
+   Thrusters = 
+   {
+      Speed = 
+      {
+         Current = 0, 
+         Max = 65, 
+      }, 
+      Maneuver = 35, 
+      Energy = 
+      {
+         Current = 2000, 
+         Max = 2000, 
+      }, 
+   }, 
+   Home = "Yavin IV", 
+   Hyperdrive = 
+   {
+      Speed = 100, 
+   }, 
+   Location = 28613, 
+   Owner = "public", 
+   DockingPorts = 0, 
    Guard = false, 
+   Rooms = 
+   {
+      Entrance = 32155, 
+      Pilotseat = 32155, 
+      Navseat = 32155, 
+      Hangar = 0, 
+      Gunseat = 32155, 
+      Cockpit = 32155, 
+      Coseat = 32155, 
+      First = 32155, 
+      Last = 32155, 
+      Engine = 0, 
+   }, 
    Defenses = 
    {
+      Hull = 
+      {
+         Current = 100, 
+         Max = 100, 
+      }, 
       Chaff = 
       {
-         Max = 0, 
          Current = 0, 
+         Max = 0, 
       }, 
       Shield = 
       {
-         Max = 10, 
          Current = 0, 
-      }, 
-      Hull = 
-      {
-         Max = 100, 
-         Current = 100, 
+         Max = 10, 
       }, 
    }, 
    Description = "", 
-   Owner = "public", 
-   Position = 
-   {
-      Y = -200002, 
-      X = -1499993, 
-      Z = -3, 
-   }, 
    CoPilot = "", 
-   LastDock = 28613, 
-   Name = "Sorosuub System Hopper", 
-   Rooms = 
-   {
-      Engine = 0, 
-      Hangar = 0, 
-      Navseat = 32155, 
-      Cockpit = 32155, 
-      Pilotseat = 32155, 
-      Last = 32155, 
-      Gunseat = 32155, 
-      Coseat = 32155, 
-      First = 32155, 
-      Entrance = 32155, 
-   }, 
-   DockingPorts = 0, 
-   State = 0, 
-   Class = "Starfighter", 
-   Instruments = 
-   {
-      Sensor = 0, 
-      AstroArray = 0, 
-      Comm = 0, 
-   }, 
-   Location = 28613, 
-   Alarm = false, 
-   Pilot = "", 
-   Type = "Civilian", 
-   Home = "Yavin IV", 
    WeaponSystems = 
    {
-      IonCannon = 
+      Tube = 
       {
-         Count = 0, 
-         State = 0, 
-      }, 
-      Laser = 
-      {
-         Count = 0, 
+         Missiles = 
+         {
+            Current = 0, 
+            Max = 0, 
+         }, 
+         Torpedoes = 
+         {
+            Current = 0, 
+            Max = 0, 
+         }, 
+         Rockets = 
+         {
+            Current = 0, 
+            Max = 0, 
+         }, 
          State = 0, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
+      }, 
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 0, 
+      }, 
+      Laser = 
+      {
+         State = 0, 
+         Count = 0, 
       }, 
       TractorBeam = 
       {
-         Strength = 0, 
          State = 1, 
+         Strength = 0, 
       }, 
-      Tube = 
-      {
-         Missiles = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         State = 0, 
-      }, 
+   }, 
+   Instruments = 
+   {
+      Comm = 0, 
+      AstroArray = 0, 
+      Sensor = 0, 
    }, 
    PersonalName = "6030", 
-   Shipyard = 28613, 
-   Thrusters = 
-   {
-      Energy = 
-      {
-         Max = 2000, 
-         Current = 2000, 
-      }, 
-      Maneuver = 35, 
-      Speed = 
-      {
-         Max = 65, 
-         Current = 0, 
-      }, 
-   }, 
-   Hyperdrive = 
-   {
-      Speed = 100, 
-   }, 
+   Pilot = "", 
 }

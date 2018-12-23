@@ -53,7 +53,7 @@ public:
 
   }
 
-  bool operator()(const Note *pnote) const
+  bool operator()(std::shared_ptr<Note> pnote) const
   {
     if ( !StrCmp( ch->Name, pnote->Sender ) )
       return true;
@@ -74,7 +74,7 @@ private:
   const Character *ch;
 };
 
-static void RemoveNote( const std::shared_ptr<Board> &board, Note *pnote );
+static void RemoveNote( const std::shared_ptr<Board> &board, std::shared_ptr<Note> pnote );
 static bool CanRemove( const Character *ch, const std::shared_ptr<Board> &board );
 static bool CanRead( const Character *ch, const std::shared_ptr<Board> &board );
 static bool CanPost( const Character *ch, const std::shared_ptr<Board> &board );
@@ -83,7 +83,7 @@ static Object *FindQuill( const Character *ch );
 //////////////////////////////////////////////////////////////
 struct Board::Impl
 {
-  std::list<Note*> Notes;
+  std::list<std::shared_ptr<Note>> Notes;
 };
 
 //////////////////////////////////////////////////////////////
@@ -98,17 +98,17 @@ Board::~Board()
 
 }
 
-void Board::Add(Note *note)
+void Board::Add(std::shared_ptr<Note> note)
 {
   pImpl->Notes.push_back(note);
 }
 
-void Board::Remove(Note *note)
+void Board::Remove(std::shared_ptr<Note> note)
 {
   pImpl->Notes.remove(note);
 }
 
-const std::list<Note*> &Board::Notes() const
+const std::list<std::shared_ptr<Note>> &Board::Notes() const
 {
   return pImpl->Notes;
 }
@@ -198,17 +198,12 @@ void AttachNote( Character *ch )
   if ( ch->PCData->Note )
     return;
 
-  Note *pnote = new Note();
+  std::shared_ptr<Note> pnote = std::make_shared<Note>();
   pnote->Sender = ch->Name;
   ch->PCData->Note = pnote;
 }
 
-void FreeNote( Note *pnote )
-{
-  delete pnote;
-}
-
-static void RemoveNote( const std::shared_ptr<Board> &board, Note *pnote )
+static void RemoveNote( const std::shared_ptr<Board> &board, std::shared_ptr<Note> pnote )
 {
   assert(board != nullptr);
   assert(pnote != nullptr);
@@ -217,8 +212,6 @@ static void RemoveNote( const std::shared_ptr<Board> &board, Note *pnote )
    * Remove note from linked list.
    */
   board->Remove(pnote);
-
-  FreeNote(pnote);
   Boards->Save(board);
 }
 
@@ -323,7 +316,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
           SetCharacterColor( AT_NOTE, ch );
           _IsNoteTo _isNoteTo(ch);
 
-          for(const Note *note : board->Notes())
+          for(auto note : board->Notes())
             {
               count++;
 
@@ -352,7 +345,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
 
           if (IS_MAIL) /* SB Mail check for Brit */
             {
-              bool mfound = Find(board->Notes(), _IsNoteTo(ch));
+              bool mfound = Find(board->Notes(), _IsNoteTo(ch)) ? true : false;
 
               if ( !mfound && GetTrustLevel(ch) < SysData.ReadAllMail )
                 {
@@ -363,7 +356,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
 
           _IsNoteTo _isNoteTo(ch);
 
-          for(const Note *note : board->Notes())
+          for(auto note : board->Notes())
             {
               if (_isNoteTo( note ) || GetTrustLevel(ch) > SysData.ReadAllMail)
                 {
@@ -419,7 +412,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
           int counter = 0;
           bool wasfound = false;
 
-          for(const Note *note : board->Notes())
+          for(auto note : board->Notes())
             {
               counter++;
 
@@ -461,7 +454,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
           bool wasfound = false;
           _IsNoteTo _isNoteTo(ch);
 
-          for(const Note *note : board->Notes())
+          for(auto note : board->Notes())
             {
               if (_isNoteTo(note) || GetTrustLevel(ch) > SysData.ReadAllMail)
                 {
@@ -507,7 +500,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
       std::string arg2;
       int counter = 0;
       bool found = false;
-      Note *note = nullptr;
+      std::shared_ptr<Note> note;
       arg_passed = OneArgument( arg_passed, arg2 );
       board = FindBoardHere( ch );
 
@@ -535,7 +528,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
 
       counter = 1;
 
-      for(std::list<Note*>::const_iterator i = board->Notes().begin();
+      for(std::list<std::shared_ptr<Note>>::const_iterator i = board->Notes().begin();
           i != board->Notes().end(); ++i)
         {
           note = *i;
@@ -939,7 +932,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
       
       char *strtime                     = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
-      Note *note = new Note();
+      std::shared_ptr<Note> note = std::make_shared<Note>();
       note->Date = strtime;
 
       note->Text = GetExtraDescription( "_text_", extraDescriptions );
@@ -1008,7 +1001,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
       anum = strtol( arg_passed.c_str(), nullptr, 10);
       _IsNoteTo _isNoteTo(ch);
 
-      for(Note *note : board->Notes())
+      for(auto note : board->Notes())
         {
           if (IS_MAIL && ((_isNoteTo(note))
                           || GetTrustLevel(ch) >= SysData.TakeOthersMail))

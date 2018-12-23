@@ -42,9 +42,9 @@ public:
   void Add(Alias *alias);
   void Remove(Alias *alias);
 
-  const std::list<class Note*> &Comments() const;
-  void Add(class Note *comment);
-  void Remove(class Note *comment);
+  const std::list<std::shared_ptr<class Note>> &Comments() const;
+  void Add(std::shared_ptr<class Note> comment);
+  void Remove(std::shared_ptr<class Note> comment);
   
   std::string Password;
 
@@ -116,7 +116,7 @@ public:
 
   Character *Pet = NULL;
   std::string AliasFocus;
-  class Note *Note = nullptr;
+  std::shared_ptr<class Note> Note;
   int Clones = 0;
   int Played = 0;
   time_t Logon = 0;
@@ -126,7 +126,7 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl = nullptr;
+  std::unique_ptr<Impl> pImpl;
 };
 
 extern const std::array<const char * const, Flag::MAX> PcFlags;

@@ -1440,7 +1440,7 @@ void FreeCharacter( Character *ch )
     {
       if ( ch->PCData->Note )
         {
-          FreeNote( ch->PCData->Note );
+          ch->PCData->Note.reset();
         }
 
       if( ch->PCData->CraftingSession )
@@ -1450,7 +1450,7 @@ void FreeCharacter( Character *ch )
 
       while(!ch->PCData->Comments().empty())
         {
-          FreeNote(ch->PCData->Comments().front());
+          ch->PCData->Remove(ch->PCData->Comments().front());
         }
 
       FreeAliases( ch );

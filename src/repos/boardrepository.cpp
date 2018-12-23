@@ -52,7 +52,7 @@ void LuaBoardRepository::Save(const std::shared_ptr<Board> &board) const
 
 void LuaBoardRepository::LoadNote( lua_State *L, const std::shared_ptr<Board> &board )
 {
-  Note *note = new Note();
+  std::shared_ptr<Note> note = std::make_shared<Note>();
 
   LuaGetfieldString( L, "Sender", &note->Sender );
   LuaGetfieldString( L, "Date", &note->Date );
@@ -125,7 +125,7 @@ void LuaBoardRepository::PushNotes( lua_State *L, const std::shared_ptr<Board> &
       lua_pushstring( L, "Notes" );
       lua_newtable( L );
 
-      for(const Note *note : board->Notes())
+      for(auto note : board->Notes())
         {
           ++idx;
           lua_pushinteger( L, idx );

@@ -314,7 +314,7 @@ void InMemoryPlayerRepository::LoadComments( lua_State *L, Character *ch )
 
       while( lua_next( L, -2 ) )
         {
-          Note *note = new Note();
+          std::shared_ptr<Note> note = std::make_shared<Note>();
           LuaGetfieldString( L, "Sender", &note->Sender );
           LuaGetfieldString( L, "Date", &note->Date );
           LuaGetfieldString( L, "To", &note->ToList );
@@ -750,7 +750,7 @@ void InMemoryPlayerRepository::PushComments( lua_State *L, const Character *pc )
   lua_newtable( L );
   size_t idx = 0;
   
-  for( const Note *note : pc->PCData->Comments() )
+  for( auto note : pc->PCData->Comments() )
     {
       lua_pushnumber( L, ++idx );
       lua_newtable( L );
