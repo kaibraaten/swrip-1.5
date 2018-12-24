@@ -22,6 +22,7 @@
 #ifndef _SWRIP_MUD_HPP_
 #define _SWRIP_MUD_HPP_
 
+#include <memory>
 #include <algorithm>
 #include <array>
 #include <list>
@@ -1157,7 +1158,7 @@ Character *AllocateMobile( ProtoMobile *pMobIndex );
 Character *CreateMobile( ProtoMobile *pMobIndex );
 Object *CreateObject( ProtoObject *pObjIndex, int level );
 Object *AllocateObject( ProtoObject *pObjIndex, int level );
-std::string GetExtraDescription( const std::string &name, const std::list<ExtraDescription*> &extras);
+std::string GetExtraDescription( const std::string &name, const std::list<std::shared_ptr<ExtraDescription>> &extras);
 ProtoMobile *GetProtoMobile( vnum_t vnum );
 ProtoObject *GetProtoObject( vnum_t vnum );
 Room *GetRoom( vnum_t vnum );
@@ -1183,11 +1184,11 @@ bool CanModifyCharacter( const Character *ch, const Character *mob );
 
 bool CanMedit( const Character *ch, const ProtoMobile *mob );
 void FreeReset( Area *are, Reset *res );
-ExtraDescription *SetRExtra( Room *room, const std::string &keywords );
+std::shared_ptr<ExtraDescription> SetRExtra( Room *room, const std::string &keywords );
 bool DelRExtra( Room *room, const std::string &keywords );
-ExtraDescription *SetOExtra( Object *obj, const std::string &keywords );
+std::shared_ptr<ExtraDescription> SetOExtra( Object *obj, const std::string &keywords );
 bool DelOExtra( Object *obj, const std::string &keywords );
-ExtraDescription *SetOExtraProto( ProtoObject *obj, const std::string &keywords );
+std::shared_ptr<ExtraDescription> SetOExtraProto( ProtoObject *obj, const std::string &keywords );
 bool DelOExtraProto( ProtoObject *obj, const std::string &keywords );
 Reset *ParseReset( const Area *tarea, std::string argument, const Character *ch );
 

@@ -534,13 +534,13 @@ void LuaPushObjectAffects( lua_State *L, const std::list<Affect*> &affects,
   LuaPushAffects( L, affects, key, LuaPushObjectAffect );
 }
 
-void LuaPushExtraDescriptions( lua_State *L, const std::list<ExtraDescription*> &extras )
+void LuaPushExtraDescriptions( lua_State *L, const std::list<std::shared_ptr<ExtraDescription>> &extras )
 {
   lua_pushstring( L, "ExtraDescriptions" );
   lua_newtable( L );
   size_t idx = 0;
   
-  for( const ExtraDescription *ed : extras )
+  for( auto ed : extras )
     {
       lua_pushinteger( L, ++idx );
       lua_newtable( L );
@@ -554,9 +554,9 @@ void LuaPushExtraDescriptions( lua_State *L, const std::list<ExtraDescription*> 
   lua_settable( L, -3 );
 }
 
-std::list<ExtraDescription*> LuaLoadExtraDescriptions( lua_State *L )
+std::list<std::shared_ptr<ExtraDescription>> LuaLoadExtraDescriptions( lua_State *L )
 {
-  std::list<ExtraDescription*> extraDescriptions;
+  std::list<std::shared_ptr<ExtraDescription>> extraDescriptions;
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "ExtraDescriptions" );
 
@@ -566,7 +566,7 @@ std::list<ExtraDescription*> LuaLoadExtraDescriptions( lua_State *L )
 
       while( lua_next( L, -2 ) )
         {
-          ExtraDescription *ed = new ExtraDescription();
+          auto ed = std::make_shared<ExtraDescription>();
           LuaGetfieldString( L, "Keyword", &ed->Keyword );
           LuaGetfieldString( L, "Description", &ed->Description );
           extraDescriptions.push_back( ed );
@@ -1387,9 +1387,9 @@ static Object *LuaLoadObject( lua_State *L )
       obj->Add( affect );
     }
 
-  std::list<ExtraDescription*> extraDescriptions = LuaLoadExtraDescriptions( L );
+  auto extraDescriptions = LuaLoadExtraDescriptions( L );
 
-  for( ExtraDescription *extra : extraDescriptions )
+  for( auto extra : extraDescriptions )
     {
       obj->Add(extra);
     }

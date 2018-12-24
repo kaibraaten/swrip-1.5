@@ -175,9 +175,9 @@ void FreeReset( Area *are, Reset *res )
   delete res;
 }
 
-ExtraDescription *SetRExtra( Room *room, const std::string &keywords )
+std::shared_ptr<ExtraDescription> SetRExtra( Room *room, const std::string &keywords )
 {
-  ExtraDescription *ed = nullptr;
+  std::shared_ptr<ExtraDescription> ed;
   bool found = false;
 
   for(auto i = std::begin(room->ExtraDescriptions());
@@ -194,7 +194,7 @@ ExtraDescription *SetRExtra( Room *room, const std::string &keywords )
 
   if ( !found )
     {
-      ed = new ExtraDescription();
+      ed = std::make_shared<ExtraDescription>();
       room->Add(ed);
       ed->Keyword = keywords;
       top_ed++;
@@ -205,7 +205,7 @@ ExtraDescription *SetRExtra( Room *room, const std::string &keywords )
 
 bool DelRExtra( Room *room, const std::string &keywords )
 {
-  ExtraDescription *rmed = nullptr;
+  std::shared_ptr<ExtraDescription> rmed;
   bool found = false;
 
   for(auto i = std::begin(room->ExtraDescriptions());
@@ -224,21 +224,21 @@ bool DelRExtra( Room *room, const std::string &keywords )
     return false;
 
   room->Remove(rmed);
-  delete rmed;
   top_ed--;
   return true;
 }
 
-ExtraDescription *SetOExtra( Object *obj, const std::string &keywords )
+std::shared_ptr<ExtraDescription> SetOExtra( Object *obj, const std::string &keywords )
 {
-  ExtraDescription *ed = Find(obj->ExtraDescriptions(),
-                              [keywords](auto descr)
-                              {
-                                return IsName(keywords, descr->Keyword);
-                              });
+  auto ed = Find(obj->ExtraDescriptions(),
+                 [keywords](auto descr)
+                 {
+                   return IsName(keywords, descr->Keyword);
+                 });
+
   if ( ed == nullptr )
     {
-      ed = new ExtraDescription();
+      ed = std::make_shared<ExtraDescription>();
       obj->Add(ed);
       ed->Keyword = keywords;
       top_ed++;
@@ -249,11 +249,11 @@ ExtraDescription *SetOExtra( Object *obj, const std::string &keywords )
 
 bool DelOExtra( Object *obj, const std::string &keywords )
 {
-  ExtraDescription *rmed = Find(obj->ExtraDescriptions(),
-                                [keywords](auto ed)
-                                {
-                                  return IsName( keywords, ed->Keyword );
-                                });
+  auto rmed = Find(obj->ExtraDescriptions(),
+                   [keywords](auto ed)
+                   {
+                     return IsName( keywords, ed->Keyword );
+                   });
 
   if ( rmed == nullptr )
     {
@@ -261,21 +261,21 @@ bool DelOExtra( Object *obj, const std::string &keywords )
     }
 
   obj->Remove(rmed);
-  delete rmed;
   top_ed--;
   return true;
 }
 
-ExtraDescription *SetOExtraProto( ProtoObject *obj, const std::string &keywords )
+std::shared_ptr<ExtraDescription> SetOExtraProto( ProtoObject *obj, const std::string &keywords )
 {
-  ExtraDescription *ed = Find(obj->ExtraDescriptions(),
-                              [keywords](auto extra)
-                              {
-                                return IsName( keywords, extra->Keyword );
-                              });
+  auto ed = Find(obj->ExtraDescriptions(),
+                 [keywords](auto extra)
+                 {
+                   return IsName( keywords, extra->Keyword );
+                 });
+  
   if ( ed == nullptr )
     {
-      ed = new ExtraDescription();
+      ed = std::make_shared<ExtraDescription>();
       obj->Add(ed);
       ed->Keyword = keywords;
       top_ed++;
@@ -286,11 +286,11 @@ ExtraDescription *SetOExtraProto( ProtoObject *obj, const std::string &keywords 
 
 bool DelOExtraProto( ProtoObject *obj, const std::string &keywords )
 {
-  ExtraDescription *rmed = Find(obj->ExtraDescriptions(),
-                                [keywords](auto ed)
-                                {
-                                  return IsName( keywords, ed->Keyword );
-                                });
+  auto rmed = Find(obj->ExtraDescriptions(),
+                   [keywords](auto ed)
+                   {
+                     return IsName( keywords, ed->Keyword );
+                   });
 
   if ( rmed == nullptr )
     {
@@ -298,7 +298,6 @@ bool DelOExtraProto( ProtoObject *obj, const std::string &keywords )
     }
 
   obj->Remove(rmed);
-  delete rmed;
   top_ed--;
   return true;
 }
@@ -548,7 +547,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
                pObjIndex->Rent ? pObjIndex->Rent :
                (int) (pObjIndex->Cost / 10)             );
 
-      for ( const ExtraDescription *ed : pObjIndex->ExtraDescriptions() )
+      for ( auto ed : pObjIndex->ExtraDescriptions() )
         fprintf( fpout, "E\n%s~\n%s~\n",
                  ed->Keyword.c_str(), StripCarriageReturn( ed->Description ).c_str() );
 
@@ -656,7 +655,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
                      xit->Vnum );
         }
 
-      for(const ExtraDescription *ed : room->ExtraDescriptions())
+      for(auto ed : room->ExtraDescriptions())
         {
           fprintf( fpout, "E\n%s~\n%s~\n",
                    ed->Keyword.c_str(), StripCarriageReturn( ed->Description ).c_str());

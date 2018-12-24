@@ -1146,11 +1146,10 @@ void ExtractObject( Object *obj )
       delete paf;
     }
 
-  std::list<ExtraDescription*> extraDescriptions(obj->ExtraDescriptions());
+  auto extraDescriptions = obj->ExtraDescriptions();
 
-  for(ExtraDescription *ed : extraDescriptions)
+  for(auto ed : extraDescriptions)
     {
-      delete ed;
       obj->Remove(ed);
     }
     
@@ -2062,12 +2061,11 @@ void CleanRoom( Room *room )
   room->Name.erase();
   room->Description.erase();
 
-  std::list<ExtraDescription*> extraDescriptions(room->ExtraDescriptions());
+  std::list<std::shared_ptr<ExtraDescription>> extraDescriptions(room->ExtraDescriptions());
   
-  for(ExtraDescription *ed : extraDescriptions)
+  for(auto ed : extraDescriptions)
     {
       room->Remove(ed);
-      delete ed;
       top_ed--;
     }
 
@@ -2111,11 +2109,10 @@ void CleanObject( ProtoObject *obj )
       top_affect--;
     }
 
-  std::list<ExtraDescription*> extraDescriptions(obj->ExtraDescriptions());
+  std::list<std::shared_ptr<ExtraDescription>> extraDescriptions(obj->ExtraDescriptions());
 
-  for(ExtraDescription *ed : obj->ExtraDescriptions())
+  for(auto ed : obj->ExtraDescriptions())
     {
-      delete ed;
       top_ed--;
       obj->Remove(ed);
     }

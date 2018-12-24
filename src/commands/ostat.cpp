@@ -82,7 +82,7 @@ void do_ostat( Character *ch, std::string arg )
       std::ostringstream buf;
       ch->Echo("Primary description keywords:   '");
 
-      for(const ExtraDescription *ed : obj->Prototype->ExtraDescriptions())
+      for(auto ed : obj->Prototype->ExtraDescriptions())
         {
           buf << ed->Keyword << " ";
         }
@@ -97,7 +97,7 @@ void do_ostat( Character *ch, std::string arg )
 
       ch->Echo("Secondary description keywords: '");
 
-      for(const ExtraDescription *ed : obj->ExtraDescriptions())
+      for(auto ed : obj->ExtraDescriptions())
         {
           buf << ed->Keyword << " ";
         }

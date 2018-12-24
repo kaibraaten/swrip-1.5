@@ -2,7 +2,7 @@
 
 struct ProtoObject::Impl
 {
-  std::list<ExtraDescription*> ExtraDescriptions;
+  std::list<std::shared_ptr<ExtraDescription>> ExtraDescriptions;
   std::list<Affect*> Affects;
 };
 
@@ -18,17 +18,17 @@ ProtoObject::~ProtoObject()
 
 }
 
-void ProtoObject::Add(ExtraDescription *extraDescription)
+void ProtoObject::Add(std::shared_ptr<ExtraDescription> extraDescription)
 {
   pImpl->ExtraDescriptions.push_back(extraDescription);
 }
 
-void ProtoObject::Remove(ExtraDescription *extraDescription)
+void ProtoObject::Remove(std::shared_ptr<ExtraDescription> extraDescription)
 {
   pImpl->ExtraDescriptions.remove(extraDescription);
 }
 
-const std::list<ExtraDescription*> &ProtoObject::ExtraDescriptions() const
+const std::list<std::shared_ptr<ExtraDescription>> &ProtoObject::ExtraDescriptions() const
 {
   return pImpl->ExtraDescriptions;
 }

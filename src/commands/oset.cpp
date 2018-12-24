@@ -16,7 +16,7 @@ void do_oset( Character *ch, std::string argument )
   char buf[MAX_STRING_LENGTH];
   char outbuf[MAX_STRING_LENGTH];
   Object *obj = NULL, *tmpobj = NULL;
-  ExtraDescription *ed = NULL;
+  std::shared_ptr<ExtraDescription> ed;
   bool lockobj = false;
   std::string origarg = argument;
   int value = 0, tmp = 0;
@@ -52,7 +52,7 @@ void do_oset( Character *ch, std::string argument )
        * the object and index-object lists, searching through the
        * extra_descr lists for a matching pointer...
        */
-      ed  = (ExtraDescription*)ch->dest_buf;
+      ed  = *static_cast<std::shared_ptr<ExtraDescription>*>(ch->dest_buf);
       ed->Description = CopyBuffer( ch );
       tmpobj = (Object*)ch->spare_ptr;
       StopEditing( ch );
@@ -737,7 +737,7 @@ void do_oset( Character *ch, std::string argument )
         ch->spare_ptr = NULL;
 
       ch->SubState = SUB_OBJ_EXTRA;
-      ch->dest_buf = ed;
+      ch->dest_buf = &ed;
       StartEditing( ch, ed->Description );
       SetEditorDescription( ch, "Object %ld (%s) extra description: %s",
 			    obj->Prototype->Vnum, obj->Name.c_str(), arg3.c_str() );
@@ -776,7 +776,7 @@ void do_oset( Character *ch, std::string argument )
         ch->spare_ptr = NULL;
 
       ch->SubState = SUB_OBJ_EXTRA;
-      ch->dest_buf = ed;
+      ch->dest_buf = &ed;
       StartEditing( ch, ed->Description );
       SetEditorDescription( ch, "Object %ld (%s) description",
                             obj->Prototype->Vnum, obj->Name.c_str() );

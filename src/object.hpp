@@ -15,9 +15,9 @@ public:
   Object(ProtoObject *protoObj, int level);
   virtual ~Object();
 
-  const std::list<ExtraDescription*> &ExtraDescriptions() const;
-  void Add(ExtraDescription *extraDescription);
-  void Remove(ExtraDescription *extraDescription);
+  const std::list<std::shared_ptr<ExtraDescription>> &ExtraDescriptions() const;
+  void Add(std::shared_ptr<ExtraDescription> extraDescription);
+  void Remove(std::shared_ptr<ExtraDescription> extraDescription);
 
   const std::list<Affect*> &Affects() const;
   void Add(Affect *affect);

@@ -13,7 +13,7 @@ struct Room::Impl
   std::list<Exit*> Exits;
   std::list<Character*> Characters;
   std::list<Object*> Objects;
-  std::list<ExtraDescription*> ExtraDescriptions;
+  std::list<std::shared_ptr<ExtraDescription>> ExtraDescriptions;
 };
 
 Room::Room()
@@ -121,17 +121,17 @@ const std::list<Object*> &Room::Objects() const
   return pImpl->Objects;
 }
 
-void Room::Add(ExtraDescription *extraDescription)
+void Room::Add(std::shared_ptr<ExtraDescription> extraDescription)
 {
   pImpl->ExtraDescriptions.push_back(extraDescription);
 }
 
-void Room::Remove(ExtraDescription *extraDescription)
+void Room::Remove(std::shared_ptr<ExtraDescription> extraDescription)
 {
   pImpl->ExtraDescriptions.remove(extraDescription);
 }
 
-const std::list<ExtraDescription*> &Room::ExtraDescriptions() const
+const std::list<std::shared_ptr<ExtraDescription>> &Room::ExtraDescriptions() const
 {
   return pImpl->ExtraDescriptions;
 }

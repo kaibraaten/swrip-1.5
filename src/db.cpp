@@ -951,9 +951,9 @@ Object *CreateObject( ProtoObject *proto, int level )
  * Get an extra description from a list.
  */
 std::string GetExtraDescription( const std::string &name,
-                                 const std::list<ExtraDescription*> &extras )
+                                 const std::list<std::shared_ptr<ExtraDescription>> &extras )
 {
-  for(const ExtraDescription *ed : extras)
+  for(auto ed : extras)
     {
       if ( IsName( name, ed->Keyword ) )
         {
@@ -1390,9 +1390,9 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
       pObjIndex->Weight         = cObjIndex->Weight;
       pObjIndex->Cost           = cObjIndex->Cost;
 
-      for(ExtraDescription *ced : cObjIndex->ExtraDescriptions() )
+      for(auto ced : cObjIndex->ExtraDescriptions() )
         {
-          ExtraDescription *ed = new ExtraDescription();
+          auto ed = std::make_shared<ExtraDescription>();
           ed->Keyword           = ced->Keyword;
           ed->Description               = ced->Description;
           pObjIndex->Add(ed);

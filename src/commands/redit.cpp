@@ -17,7 +17,7 @@ void do_redit( Character *ch, std::string argument )
   char buf[MAX_STRING_LENGTH];
   Room *location = NULL;
   Room *tmp = NULL;
-  ExtraDescription *ed = NULL;
+  std::shared_ptr<ExtraDescription> ed;
   Exit *xit = NULL, *texit = NULL;
   int value = 0;
   DirectionType edir = DIR_INVALID;
@@ -50,7 +50,7 @@ void do_redit( Character *ch, std::string argument )
       return;
 
     case SUB_ROOM_EXTRA:
-      ed = (ExtraDescription*)ch->dest_buf;
+      ed = *static_cast<std::shared_ptr<ExtraDescription>*>(ch->dest_buf);
 
       if ( !ed )
         {
@@ -166,7 +166,7 @@ void do_redit( Character *ch, std::string argument )
         ch->tempnum = SUB_NONE;
 
       ch->SubState = SUB_ROOM_EXTRA;
-      ch->dest_buf = ed;
+      ch->dest_buf = &ed;
       StartEditing( ch, ed->Description );
       SetEditorDescription( ch, "Room %ld (%s) extra description: %s",
                             location->Vnum, location->Name.c_str(), argument.c_str() );

@@ -77,9 +77,9 @@ public:
   void Remove(Object *object);
   const std::list<Object*> &Objects() const;
 
-  void Add(ExtraDescription *extraDescription);
-  void Remove(ExtraDescription *extraDescription);
-  const std::list<ExtraDescription*> &ExtraDescriptions() const;
+  void Add(std::shared_ptr<ExtraDescription> extraDescription);
+  void Remove(std::shared_ptr<ExtraDescription> extraDescription);
+  const std::list<std::shared_ptr<ExtraDescription>> &ExtraDescriptions() const;
   
   Room *Next = nullptr;
   Room *NextSort = nullptr;

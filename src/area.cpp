@@ -742,7 +742,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
 
           else if ( letter == 'E' )
             {
-              ExtraDescription *ed = new ExtraDescription();
+              std::shared_ptr<ExtraDescription> ed = std::make_shared<ExtraDescription>();
               ed->Keyword               = ReadStringToTilde( fp, Log, fBootDb );
               ed->Description           = ReadStringToTilde( fp, Log, fBootDb );
               pObjIndex->Add(ed);
@@ -1033,7 +1033,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
             }
           else if ( letter == 'E' )
             {
-              ExtraDescription *ed = new ExtraDescription();
+              std::shared_ptr<ExtraDescription> ed = std::make_shared<ExtraDescription>();
               ed->Keyword               = ReadStringToTilde( fp, Log, fBootDb );
               ed->Description           = ReadStringToTilde( fp, Log, fBootDb );
               pRoomIndex->Add(ed);
@@ -1608,12 +1608,11 @@ void CloseArea( Area *pArea )
                 }
             }
 
-          std::list<ExtraDescription*> extrasInRoom(rid->ExtraDescriptions());
+          std::list<std::shared_ptr<ExtraDescription>> extrasInRoom(rid->ExtraDescriptions());
 
-          for(ExtraDescription *eed : extrasInRoom)
+          for(auto eed : extrasInRoom)
             {
               rid->Remove(eed);
-              delete eed;
             }
 
           std::list<MPROG_ACT_LIST*> mprogActLists(rid->mprog.ActLists());
@@ -1713,12 +1712,11 @@ void CloseArea( Area *pArea )
                || oid->Vnum > pArea->VnumRanges.Object.Last )
             continue;
 
-          std::list<ExtraDescription*> extraDescrs(oid->ExtraDescriptions());
+          std::list<std::shared_ptr<ExtraDescription>> extraDescrs(oid->ExtraDescriptions());
           
-          for ( ExtraDescription *eed : extraDescrs )
+          for ( auto eed : extraDescrs )
             {
               oid->Remove(eed);
-              delete eed;
             }
 
           std::list<Affect*> affects(oid->Affects());

@@ -1,19 +1,59 @@
 -- Sorosuub System Hopper
--- Last saved Sunday 23-Dec-2018 22:21:19
+-- Last saved Monday 24-Dec-2018 09:44:58
 
 ShipEntry
 {
+   Thrusters = 
+   {
+      Maneuver = 35, 
+      Energy = 
+      {
+         Max = 3000, 
+         Current = 3000, 
+      }, 
+      Speed = 
+      {
+         Max = 65, 
+         Current = 0, 
+      }, 
+   }, 
+   Position = 
+   {
+      Y = 150, 
+      X = 100, 
+      Z = 75, 
+   }, 
+   Owner = "public", 
+   Home = "Byss ", 
+   LastDock = 203, 
+   State = 0, 
+   Location = 203, 
+   Shipyard = 203, 
+   Rooms = 
+   {
+      Navseat = 32166, 
+      Gunseat = 32166, 
+      Coseat = 32166, 
+      Hangar = 0, 
+      Engine = 0, 
+      Last = 32166, 
+      Cockpit = 32166, 
+      Entrance = 32166, 
+      Pilotseat = 32166, 
+      First = 32166, 
+   }, 
+   Alarm = false, 
    Defenses = 
    {
-      Hull = 
-      {
-         Max = 100, 
-         Current = 100, 
-      }, 
       Shield = 
       {
          Max = 10, 
          Current = 0, 
+      }, 
+      Hull = 
+      {
+         Max = 100, 
+         Current = 100, 
       }, 
       Chaff = 
       {
@@ -21,34 +61,22 @@ ShipEntry
          Current = 2, 
       }, 
    }, 
-   LastDock = 203, 
-   Name = "Sorosuub System Hopper", 
    DockingPorts = 0, 
-   Owner = "public", 
-   Description = "", 
-   Location = 203, 
-   Guard = false, 
-   State = 0, 
-   Home = "Byss ", 
-   Rooms = 
+   Hyperdrive = 
    {
-      Hangar = 0, 
-      Navseat = 32166, 
-      Pilotseat = 32166, 
-      Entrance = 32166, 
-      Coseat = 32166, 
-      Engine = 0, 
-      Gunseat = 32166, 
-      Cockpit = 32166, 
-      First = 32166, 
-      Last = 32166, 
+      Speed = 100, 
    }, 
    WeaponSystems = 
    {
+      TractorBeam = 
+      {
+         State = 1, 
+         Strength = 0, 
+      }, 
       IonCannon = 
       {
-         Count = 0, 
          State = 0, 
+         Count = 0, 
       }, 
       Turrets = 
       {
@@ -103,14 +131,13 @@ ShipEntry
             RoomVnum = 0, 
          }, 
       }, 
-      TractorBeam = 
+      Laser = 
       {
-         State = 1, 
-         Strength = 0, 
+         State = 0, 
+         Count = 1, 
       }, 
       Tube = 
       {
-         State = 0, 
          Torpedoes = 
          {
             Max = 0, 
@@ -126,48 +153,21 @@ ShipEntry
             Max = 0, 
             Current = 0, 
          }, 
-      }, 
-      Laser = 
-      {
-         Count = 1, 
          State = 0, 
-      }, 
-   }, 
-   Type = "Civilian", 
-   Class = "Starfighter", 
-   Alarm = false, 
-   Thrusters = 
-   {
-      Maneuver = 35, 
-      Speed = 
-      {
-         Max = 65, 
-         Current = 0, 
-      }, 
-      Energy = 
-      {
-         Max = 3000, 
-         Current = 3000, 
       }, 
    }, 
    Instruments = 
    {
       Sensor = 0, 
-      Comm = 0, 
       AstroArray = 0, 
+      Comm = 0, 
    }, 
-   Position = 
-   {
-      Z = 75, 
-      Y = 150, 
-      X = 100, 
-   }, 
-   PersonalName = "6041", 
+   Class = "Starfighter", 
+   Guard = false, 
+   Description = "", 
+   Name = "Sorosuub System Hopper", 
    CoPilot = "verazo", 
-   Shipyard = 203, 
    Pilot = "pilot", 
-   Hyperdrive = 
-   {
-      Speed = 100, 
-   }, 
+   Type = "Civilian", 
+   PersonalName = "6041", 
 }

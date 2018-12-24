@@ -7,7 +7,7 @@
 
 struct Object::Impl
 {
-  std::list<ExtraDescription*> ExtraDescriptions;
+  std::list<std::shared_ptr<ExtraDescription>> ExtraDescriptions;
   std::list<Affect*> Affects;
   std::list<Object*> Objects;
 };
@@ -220,17 +220,17 @@ Object::~Object()
 
 }
 
-void Object::Add(ExtraDescription *extraDescription)
+void Object::Add(std::shared_ptr<ExtraDescription> extraDescription)
 {
   pImpl->ExtraDescriptions.push_back(extraDescription);
 }
 
-void Object::Remove(ExtraDescription *extraDescription)
+void Object::Remove(std::shared_ptr<ExtraDescription> extraDescription)
 {
   pImpl->ExtraDescriptions.remove(extraDescription);
 }
 
-const std::list<ExtraDescription*> &Object::ExtraDescriptions() const
+const std::list<std::shared_ptr<ExtraDescription>> &Object::ExtraDescriptions() const
 {
   return pImpl->ExtraDescriptions;
 }

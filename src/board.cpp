@@ -242,7 +242,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
   int anum = 0;
   int first_list = 0;
   Object *quill = NULL, *paper = NULL, *tmpobj = NULL;
-  ExtraDescription *ed = NULL;
+  std::shared_ptr<ExtraDescription> ed;
 
   if ( IsNpc(ch) )
     return;
@@ -267,7 +267,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
           return;
         }
 
-      ed = (ExtraDescription*)ch->dest_buf;
+      ed = *static_cast<std::shared_ptr<ExtraDescription>*>(ch->dest_buf);
       ed->Description = CopyBuffer( ch );
       StopEditing( ch );
       return;
@@ -681,7 +681,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
           paper->Value[OVAL_PAPER_0] = 1;
           ed = SetOExtra(paper, "_text_");
           ch->SubState = SUB_WRITING_NOTE;
-          ch->dest_buf = ed;
+          ch->dest_buf = &ed;
 
           if ( GetTrustLevel(ch) < SysData.WriteMailFree )
 	    {

@@ -891,7 +891,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
 	}
     }
 
-  for(const ExtraDescription *ed : obj->ExtraDescriptions())
+  for(auto ed : obj->ExtraDescriptions())
     {
       fprintf( fp, "ExtraDescr   %s~ %s~\n",
 	       ed->Keyword.c_str(), ed->Description.c_str() );
@@ -989,7 +989,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
           if ( !StrCmp( word, "ExtraDescr" ) )
             {
-              ExtraDescription *ed = new ExtraDescription();
+              auto ed = std::make_shared<ExtraDescription>();
 
               ed->Keyword = ReadStringToTilde( fp,Log, fBootDb );
               ed->Description = ReadStringToTilde( fp,Log, fBootDb );
@@ -1230,9 +1230,8 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
           while( !obj->ExtraDescriptions().empty() )
             {
-              ExtraDescription *ed = obj->ExtraDescriptions().front();
+              auto ed = obj->ExtraDescriptions().front();
               obj->Remove(ed);
-              delete ed;
             }
 
           while( !obj->Affects().empty() )

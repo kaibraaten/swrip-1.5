@@ -13,6 +13,7 @@ extern "C" {
 }
 #endif
 
+#include <memory>
 #include <bitset>
 #include <functional>
 #include <list>
@@ -100,8 +101,8 @@ void LuaLoadStats( lua_State *L, Stats *stats, const std::string &key );
 void LuaPushCurrentAndMax( lua_State *L, const std::string &key, int current, int max );
 void LuaLoadCurrentAndMax( lua_State *L, const std::string &key, int *current, int *max );
 void LuaPushOvalues( lua_State *L, const std::array<int, MAX_OVAL> values );
-void LuaPushExtraDescriptions( lua_State *L, const std::list<ExtraDescription*> &extras );
-std::list<ExtraDescription*> LuaLoadExtraDescriptions( lua_State *L );
+void LuaPushExtraDescriptions( lua_State *L, const std::list<std::shared_ptr<ExtraDescription>> &extras );
+std::list<std::shared_ptr<ExtraDescription>> LuaLoadExtraDescriptions( lua_State *L );
 void LuaPushCharacter( lua_State *L, const Character *ch,
                        std::function<void(lua_State*, const Character*)> pushExtra );
 void LuaLoadCharacter( lua_State *L, Character *ch,
