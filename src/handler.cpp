@@ -2133,14 +2133,13 @@ void CleanMobile( ProtoMobile *mob )
   mob->RepairShop    = NULL;
   mob->mprog.progtypes        = 0;
 
-  std::list<MPROG_DATA*> mobProgs(mob->mprog.MudProgs());
+  auto mobProgs(mob->mprog.MudProgs());
   
-  for(MPROG_DATA *mprog : mobProgs)
+  for(auto mprog : mobProgs)
     {
       mob->mprog.Remove(mprog);
       FreeMemory( mprog->arglist );
       FreeMemory( mprog->comlist );
-      delete mprog;
     }
 
   mob->Count     = 0;

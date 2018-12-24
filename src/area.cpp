@@ -1266,7 +1266,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
       exit( 1 );
     }
 
-  MPROG_DATA *mprg = new MPROG_DATA();
+  std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
   pMobIndex->mprog.Add(mprg);
 
   while ( !done )
@@ -1290,7 +1290,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
           switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
-              mprg = new MPROG_DATA();
+              mprg = std::make_shared<MPROG_DATA>();
               pMobIndex->mprog.Add(mprg);
               break;
 
@@ -1324,7 +1324,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
       exit( 1 );
     }
 
-  MPROG_DATA *mprg = new MPROG_DATA();
+  std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
   pObjIndex->mprog.Add(mprg);
 
   while ( !done )
@@ -1348,7 +1348,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
           switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
-              mprg = new MPROG_DATA();
+              mprg = std::make_shared<MPROG_DATA>();
               pObjIndex->mprog.Add(mprg);
               break;
 
@@ -1383,7 +1383,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
       exit( 1 );
     }
 
-  MPROG_DATA *mprg = new MPROG_DATA();
+  std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
   pRoomIndex->mprog.Add(mprg);
 
   while ( !done )
@@ -1407,7 +1407,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
           switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
-              mprg = new MPROG_DATA();
+              mprg = std::make_shared<MPROG_DATA>();
               pRoomIndex->mprog.Add(mprg);
               break;
               
@@ -1615,23 +1615,21 @@ void CloseArea( Area *pArea )
               rid->Remove(eed);
             }
 
-          std::list<MPROG_ACT_LIST*> mprogActLists(rid->mprog.ActLists());
+          auto mprogActLists(rid->mprog.ActLists());
 
-          for(MPROG_ACT_LIST *mpact : mprogActLists)
+          for(auto mpact : mprogActLists)
             {
               rid->mprog.Remove(mpact);
               FreeMemory( mpact->buf );
-              delete mpact;
             }
 
-          std::list<MPROG_DATA*> roomProgs(rid->mprog.MudProgs());
+          auto roomProgs(rid->mprog.MudProgs());
 
-          for(MPROG_DATA *mprog : roomProgs)
+          for(auto mprog : roomProgs)
             {
               rid->mprog.Remove(mprog);
 	      FreeMemory( mprog->arglist );
               FreeMemory( mprog->comlist );
-              delete mprog;
             }
 
           if ( rid == RoomIndexHash[icnt] )
@@ -1673,14 +1671,13 @@ void CloseArea( Area *pArea )
               RepairShops->Remove(mid->RepairShop);
             }
 
-          std::list<MPROG_DATA*> mobProgs(mid->mprog.MudProgs());
+          auto mobProgs(mid->mprog.MudProgs());
 
-          for(MPROG_DATA *mprog : mobProgs)
+          for(auto mprog : mobProgs)
             {
               mid->mprog.Remove(mprog);
               FreeMemory(mprog->arglist);
               FreeMemory(mprog->comlist);
-              delete mprog;
             }
 
           if ( mid == MobIndexHash[icnt] )
@@ -1727,14 +1724,13 @@ void CloseArea( Area *pArea )
               delete paf;
             }
 
-          std::list<MPROG_DATA*> objProgs(oid->mprog.MudProgs());
+          auto objProgs(oid->mprog.MudProgs());
 
-          for(MPROG_DATA *mprog : objProgs)
+          for(auto mprog : objProgs)
             {
               oid->mprog.Remove(mprog);
               FreeMemory(mprog->arglist);
               FreeMemory(mprog->comlist);
-              delete mprog;
             }
 
           if ( oid == ObjectIndexHash[icnt] )

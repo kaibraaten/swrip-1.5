@@ -51,7 +51,7 @@ void do_mpstat( Character *ch, std::string arg )
            victim->TopLevel,        victim->Alignment,
            GetArmorClass( victim ),    victim->Gold);
 
-  for(const MPROG_DATA *mprg : victim->Prototype->mprog.MudProgs())
+  for(auto mprg : victim->Prototype->mprog.MudProgs())
     {
       ch->Echo(">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),

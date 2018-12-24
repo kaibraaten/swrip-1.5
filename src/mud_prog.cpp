@@ -76,9 +76,9 @@ bool MOBtrigger = false;
  *  Mudprogram additions
  */
 Character *supermob = nullptr;
-std::list<act_prog_data*> room_act_list;
-std::list<act_prog_data*> obj_act_list;
-std::list<act_prog_data*> mob_act_list;
+static std::list<std::shared_ptr<act_prog_data>> room_act_list;
+static std::list<std::shared_ptr<act_prog_data>> obj_act_list;
+std::list<std::shared_ptr<act_prog_data>> mob_act_list;
 
 /*
  * Local function prototypes
@@ -112,7 +112,7 @@ static void RoomActAdd( Room *room );
  * Local function code and brief comments.
  */
 
-void InitializeSupermob( void )
+void InitializeSupermob()
 {
   Room *office = NULL;
 
@@ -2183,7 +2183,7 @@ static bool MudProgKeywordCheck( const char *argu, const char *argl )
 void MobProgWordlistCheck( const std::string &arg, Character *mob, Character *actor,
                            Object *obj, void *vo, int type )
 {
-  for(MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
+  for(auto mprg : mob->Prototype->mprog.MudProgs())
     {
       if ( mprg->type & type )
 	{
@@ -2267,7 +2267,7 @@ void MobProgWordlistCheck( const std::string &arg, Character *mob, Character *ac
 void MobProgPercentCheck( Character *mob, Character *actor, Object *obj,
                           void *vo, int type)
 {
-  for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
+  for(auto mprg : mob->Prototype->mprog.MudProgs())
     {
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
@@ -2283,7 +2283,7 @@ void MobProgPercentCheck( Character *mob, Character *actor, Object *obj,
 static void mprog_time_check( Character *mob, Character *actor, Object *obj,
 			      void *vo, int type)
 {
-  for(MPROG_DATA * mprg : mob->Prototype->mprog.MudProgs())
+  for(auto mprg : mob->Prototype->mprog.MudProgs())
     {
       bool trigger_time = ( time_info.Hour == atoi( mprg->arglist ) );
 
@@ -2311,7 +2311,7 @@ static void MobileActAdd( Character *mob )
       return;
     }
 
-  act_prog_data *runner = new act_prog_data();
+  std::shared_ptr<act_prog_data> runner = std::make_shared<act_prog_data>();
   runner->vo = mob;
   mob_act_list.push_front( runner );
 }
@@ -2338,7 +2338,7 @@ void MobProgActTrigger( const std::string &buf, Character *mob, Character *ch,
       bool found = false;
       
       /* make sure this is a matching trigger */
-      for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
+      for(auto mprg : mob->Prototype->mprog.MudProgs())
 	{
 	  if ( mprg->type & ACT_PROG
 	       && MudProgKeywordCheck( buf.c_str(), mprg->arglist ) )
@@ -2353,7 +2353,7 @@ void MobProgActTrigger( const std::string &buf, Character *mob, Character *ch,
           return;
         }
       
-      MPROG_ACT_LIST *tmp_act = new MPROG_ACT_LIST();
+      std::shared_ptr<MPROG_ACT_LIST> tmp_act = std::make_shared<MPROG_ACT_LIST>();
       
       mob->mprog.Add(tmp_act);
       
@@ -2384,7 +2384,7 @@ void MobProgBribeTrigger( Character *mob, Character *ch, int amount )
       obj = ObjectToCharacter( obj, mob );
       mob->Gold -= amount;
 
-      for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
+      for(auto mprg : mob->Prototype->mprog.MudProgs())
 	{
 	  if ( ( mprg->type & BRIBE_PROG )
 	       && ( amount >= atoi( mprg->arglist ) ) )
@@ -2435,7 +2435,7 @@ void MobProgGiveTrigger( Character *mob, Character *ch, Object *obj )
 	  return;
 	}
 
-      for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
+      for(auto mprg : mob->Prototype->mprog.MudProgs())
         {
           std::string buf;
           OneArgument( mprg->arglist, buf );
@@ -2488,7 +2488,7 @@ void MobProgHitPercentTrigger( Character *mob, Character *ch)
   if ( IsNpc( mob )
        && ( mob->Prototype->mprog.progtypes & HITPRCNT_PROG ) )
     {
-      for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
+      for(auto mprg : mob->Prototype->mprog.MudProgs())
 	{
 	  if ( ( mprg->type & HITPRCNT_PROG )
 	       && ( ( 100 * mob->HitPoints.Current / mob->HitPoints.Max ) < atoi( mprg->arglist ) ) )
@@ -2538,7 +2538,7 @@ void MobProgScriptTrigger( Character *mob )
 {
   if ( mob->Prototype->mprog.progtypes & SCRIPT_PROG)
     {
-      for(const MPROG_DATA *mprg : mob->Prototype->mprog.MudProgs())
+      for(auto mprg : mob->Prototype->mprog.MudProgs())
 	{
 	  if ( ( mprg->type & SCRIPT_PROG ) )
 	    {
@@ -2609,7 +2609,7 @@ static bool ObjProgPercentCheck( Character *mob, Character *actor, Object *obj,
 {
   bool executed = false;
 
-  for(MPROG_DATA *mprg : obj->Prototype->mprog.MudProgs())
+  for(auto mprg : obj->Prototype->mprog.MudProgs())
     {
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
@@ -2863,7 +2863,7 @@ void ObjProgActTrigger( const std::string &buf, Object *mobj, Character *ch,
 {
   if ( mobj->Prototype->mprog.progtypes & ACT_PROG )
     {
-      MPROG_ACT_LIST *tmp_act = new MPROG_ACT_LIST();
+      std::shared_ptr<MPROG_ACT_LIST> tmp_act = std::make_shared<MPROG_ACT_LIST>();
 
       mobj->mprog.Add(tmp_act);
 
@@ -2879,7 +2879,7 @@ void ObjProgActTrigger( const std::string &buf, Object *mobj, Character *ch,
 static void ObjProgWordlistCheck( const std::string &arg, Character *mob, Character *actor,
 				  Object *obj, void *vo, int type, Object *iobj )
 {
-  for(MPROG_DATA *mprg : iobj->Prototype->mprog.MudProgs())
+  for(auto mprg : iobj->Prototype->mprog.MudProgs())
     {
       if ( mprg->type & type )
 	{
@@ -2993,7 +2993,7 @@ static void RoomProgPercentCheck( Character *mob, Character *actor, Object *obj,
   if(!mob->InRoom)
     return;
 
-  for(MPROG_DATA *mprg : mob->InRoom->mprog.MudProgs())
+  for(auto mprg : mob->InRoom->mprog.MudProgs())
     {
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
@@ -3020,7 +3020,7 @@ void RoomProgActTrigger( const std::string &buf, Room *room, Character *ch,
 {
   if ( room->mprog.progtypes & ACT_PROG )
     {
-      MPROG_ACT_LIST *tmp_act = new MPROG_ACT_LIST();
+      std::shared_ptr<MPROG_ACT_LIST> tmp_act = std::make_shared<MPROG_ACT_LIST>();
 
       tmp_act->buf = CopyString(buf);
       tmp_act->ch = ch;
@@ -3125,7 +3125,7 @@ static void RoomProgWordlistCheck(const char *arg, Character *mob, Character *ac
       room = actor->InRoom;
     }
 
-  for(MPROG_DATA *mprg : room->mprog.MudProgs())
+  for(auto mprg : room->mprog.MudProgs())
     {
       if ( mprg->type & type )
 	{
@@ -3212,9 +3212,9 @@ static void RoomProgWordlistCheck(const char *arg, Character *mob, Character *ac
 static void rprog_time_check( Character *mob, Character *actor, Object *obj,
 			      void *vo, int type )
 {
-  Room * room = (Room *) vo;
+  Room *room = (Room *) vo;
 
-  for(MPROG_DATA *mprg : room->mprog.MudProgs())
+  for(auto mprg : room->mprog.MudProgs())
     {
       bool trigger_time = ( time_info.Hour == atoi( mprg->arglist ) );
 
@@ -3285,7 +3285,7 @@ static void RoomActAdd( Room *room )
       return;
     }
 
-  act_prog_data *runner = new act_prog_data();
+  std::shared_ptr<act_prog_data> runner = std::make_shared<act_prog_data>();
   runner->vo = room;
   room_act_list.push_front( runner );
 }
@@ -3294,12 +3294,12 @@ void RoomActUpdate( void )
 {
   while ( !room_act_list.empty() )
     {
-      act_prog_data *runner = room_act_list.front();
+      std::shared_ptr<act_prog_data> runner = room_act_list.front();
       Room *room = (Room*)runner->vo;
 
-      std::list<MPROG_ACT_LIST*> actLists(room->mprog.ActLists());
+      auto actLists(room->mprog.ActLists());
 
-      for(MPROG_ACT_LIST *mpact : actLists)
+      for(auto mpact : actLists)
         {
           if ( mpact->ch->InRoom == room )
 	    {
@@ -3309,12 +3309,10 @@ void RoomActUpdate( void )
 
           room->mprog.Remove(mpact);
           FreeMemory(mpact->buf);
-          delete mpact;
         }
 
       room->mprog.mpactnum = 0;
       room_act_list.remove( runner );
-      delete runner;
     }
 }
 
@@ -3325,7 +3323,7 @@ static void ObjectActAdd( Object *obj )
       return;
     }
   
-  act_prog_data *runner = new act_prog_data();
+  std::shared_ptr<act_prog_data> runner = std::make_shared<act_prog_data>();
   runner->vo = obj;
   obj_act_list.push_front( runner );
 }
@@ -3334,23 +3332,21 @@ void ObjectActUpdate( void )
 {
   while ( !obj_act_list.empty() )
     {
-      act_prog_data *runner = obj_act_list.front();
+      std::shared_ptr<act_prog_data> runner = obj_act_list.front();
       Object *obj = (Object*)runner->vo;
 
-      std::list<MPROG_ACT_LIST*> actLists(obj->mprog.ActLists());
+      auto actLists(obj->mprog.ActLists());
 
-      for(MPROG_ACT_LIST *mpact : actLists)
+      for(auto mpact : actLists)
         {
           ObjProgWordlistCheck(mpact->buf, supermob, mpact->ch, mpact->obj,
                                mpact->vo, ACT_PROG, obj);
           obj->mprog.Remove(mpact);
           FreeMemory(mpact->buf);
-          delete mpact;
         }
 
       obj->mprog.mpactnum = 0;
       obj_act_list.remove( runner );
-      delete runner;
     }
 }
 

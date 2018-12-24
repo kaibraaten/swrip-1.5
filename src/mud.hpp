@@ -1174,9 +1174,9 @@ bool DeleteObject( ProtoObject *obj );
 bool DeleteMobile( ProtoMobile *mob );
 
 /* build.c */
-void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::string &argument );
-void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::string &argument );
-void WriteAreaList( void );
+void EditMobProg( Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument );
+void EditRoomProg( Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument );
+void WriteAreaList();
 
 bool CanModifyRoom( const Character *ch, const Room *room );
 bool CanModifyObject( const Character *ch, const Object *obj  );

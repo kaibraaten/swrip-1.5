@@ -10,14 +10,14 @@ class MProg
 public:
   MProg();
   ~MProg();
-  const std::list<MPROG_ACT_LIST*> &ActLists() const;
-  void Add(MPROG_ACT_LIST *mal);
-  void Remove(MPROG_ACT_LIST *mal);
+  const std::list<std::shared_ptr<MPROG_ACT_LIST>> &ActLists() const;
+  void Add(std::shared_ptr<MPROG_ACT_LIST> mal);
+  void Remove(std::shared_ptr<MPROG_ACT_LIST> mal);
 
-  const std::list<MPROG_DATA*> &MudProgs() const;
-  void Add(MPROG_DATA *prog);
-  void InsertBefore(size_t position, MPROG_DATA *prog);
-  void Remove(MPROG_DATA *prog);
+  const std::list<std::shared_ptr<MPROG_DATA>> &MudProgs() const;
+  void Add(std::shared_ptr<MPROG_DATA> prog);
+  void InsertBefore(size_t position, std::shared_ptr<MPROG_DATA> prog);
+  void Remove(std::shared_ptr<MPROG_DATA> prog);
 
   int mpactnum = 0;
   short mpscriptpos = 0;
@@ -31,7 +31,7 @@ private:
 /* Mob program structures */
 struct act_prog_data
 {
-  void                 *vo = nullptr;
+  void *vo = nullptr;
 };
 
 struct MPROG_ACT_LIST
@@ -52,14 +52,14 @@ struct MPROG_DATA
 };
 
 extern bool MOBtrigger;
-extern std::list<act_prog_data*> mob_act_list;
+extern std::list<std::shared_ptr<act_prog_data>> mob_act_list;
 extern Character *supermob;
 
-void RoomActUpdate( void );
-void ObjectActUpdate( void );
+void RoomActUpdate();
+void ObjectActUpdate();
 void ProgBug( const std::string &str, const Character *mob );
-void InitializeSupermob( void );
-void ReleaseSupermob( void );
+void InitializeSupermob();
+void ReleaseSupermob();
 void MobProgWordlistCheck( const std::string &arg, Character *mob,
                            Character* actor, Object* object,
                            void* vo, int type );

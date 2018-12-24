@@ -43,7 +43,7 @@ void do_mpedit( Character *ch, std::string argument )
         }
 
       {
-        MPROG_DATA *mprog = (MPROG_DATA*)ch->dest_buf;
+        std::shared_ptr<MPROG_DATA> mprog = *static_cast<std::shared_ptr<MPROG_DATA>*>(ch->dest_buf);
 
         if ( mprog->comlist )
           FreeMemory( mprog->comlist );
@@ -110,7 +110,7 @@ void do_mpedit( Character *ch, std::string argument )
       return;
     }
 
-  const std::list<MPROG_DATA*> &mobProgs = victim->Prototype->mprog.MudProgs();
+  const auto &mobProgs = victim->Prototype->mprog.MudProgs();
   
   SetCharacterColor( AT_GREEN, ch );
 
@@ -124,7 +124,7 @@ void do_mpedit( Character *ch, std::string argument )
 
       int cnt = 0;
 
-      for(const MPROG_DATA *mprg : mobProgs)
+      for(auto mprg : mobProgs)
         {
           ch->Echo("%d>%s %s\r\n%s\r\n",
                    ++cnt,
@@ -171,14 +171,14 @@ void do_mpedit( Character *ch, std::string argument )
 
       int cnt = 0;
 
-      for(MPROG_DATA *mprg : mobProgs)
+      for(auto mprg : mobProgs)
         {
           if ( ++cnt == value )
             {
               EditMobProg( ch, mprg, mptype, argument );
               victim->Prototype->mprog.progtypes = 0;
 
-              for(MPROG_DATA *inner : mobProgs)
+              for(auto inner : mobProgs)
                 {
                   victim->Prototype->mprog.progtypes |= inner->type;
                 }
@@ -211,7 +211,7 @@ void do_mpedit( Character *ch, std::string argument )
       bool found = false;
       int mptype = 0;
 
-      for(const MPROG_DATA *mprg : mobProgs)
+      for(auto mprg : mobProgs)
         {
           if ( ++cnt == value )
             {
@@ -241,11 +241,10 @@ void do_mpedit( Character *ch, std::string argument )
 
       assert(!result.empty());
       
-      MPROG_DATA *progToDelete = result.front();
+      std::shared_ptr<MPROG_DATA> progToDelete = result.front();
       victim->Prototype->mprog.Remove(progToDelete);
       FreeMemory( progToDelete->arglist );
       FreeMemory( progToDelete->comlist );
-      delete progToDelete;
       
       if ( num <= 1 )
         {
@@ -288,7 +287,7 @@ void do_mpedit( Character *ch, std::string argument )
 
       if(!result.empty())
         {
-          MPROG_DATA *mprg = new MPROG_DATA();
+          std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
           victim->Prototype->mprog.progtypes |= ( 1 << mptype );
           EditMobProg( ch, mprg, mptype, argument );
           victim->Prototype->mprog.InsertBefore(value, mprg);
@@ -311,7 +310,7 @@ void do_mpedit( Character *ch, std::string argument )
           return;
         }
 
-      MPROG_DATA *mprg = new MPROG_DATA();
+      std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
 
       victim->Prototype->mprog.Add(mprg);
       victim->Prototype->mprog.progtypes     |= ( 1 << mptype );

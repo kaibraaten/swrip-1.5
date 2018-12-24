@@ -448,7 +448,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
       
       if ( !pMobIndex->mprog.MudProgs().empty() )
         {
-          for(const MPROG_DATA *mprog : pMobIndex->mprog.MudProgs())
+          for(auto mprog : pMobIndex->mprog.MudProgs())
             {
               fprintf( fpout, "> %s %s~\n%s~\n",
                        MobProgTypeToName( mprog->type ),
@@ -562,7 +562,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
 
       if ( !pObjIndex->mprog.MudProgs().empty() )
         {
-          for(const MPROG_DATA *mprog : pObjIndex->mprog.MudProgs())
+          for(auto mprog : pObjIndex->mprog.MudProgs())
             {
               fprintf( fpout, "> %s %s~\n%s~\n",
                        MobProgTypeToName( mprog->type ),
@@ -663,7 +663,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
       
       if ( !room->mprog.MudProgs().empty() )
         {
-          for(const MPROG_DATA *mprog : room->mprog.MudProgs())
+          for(auto mprog : room->mprog.MudProgs())
             {
               fprintf( fpout, "> %s %s~\n%s~\n",
                        MobProgTypeToName( mprog->type ),
@@ -1117,7 +1117,8 @@ Reset *ParseReset( const Area *tarea, std::string argument, const Character *ch 
     return MakeReset( letter, extra, val1, val3, val2 );
 }
 
-void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::string &argument )
+void EditMobProg( Character *ch, std::shared_ptr<MPROG_DATA> mprg,
+                  int mptype, const std::string &argument )
 {
   if ( mptype != -1 )
     {
@@ -1132,7 +1133,7 @@ void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::string
     }
 
   ch->SubState = SUB_MPROG_EDIT;
-  ch->dest_buf = mprg;
+  ch->dest_buf = &mprg;
 
   if ( !mprg->comlist )
     {
@@ -1146,7 +1147,8 @@ void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::string
 /*
  * RoomProg Support
  */
-void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::string &argument )
+void EditRoomProg( Character *ch, std::shared_ptr<MPROG_DATA> mprg,
+                   int mptype, const std::string &argument )
 {
   if ( mptype != -1 )
     {
@@ -1161,7 +1163,7 @@ void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::strin
     }
 
   ch->SubState = SUB_MPROG_EDIT;
-  ch->dest_buf = mprg;
+  ch->dest_buf = &mprg;
 
   if(!mprg->comlist)
     {

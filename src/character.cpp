@@ -1452,10 +1452,9 @@ void FreeCharacter( Character *ch )
       ImcFreeCharacter( ch );
     }
 
-  for(MPROG_ACT_LIST *mpact : ch->mprog.ActLists())
+  for(auto mpact : ch->mprog.ActLists())
     {
       FreeMemory( mpact->buf );
-      delete mpact;
     }
   
   delete ch;

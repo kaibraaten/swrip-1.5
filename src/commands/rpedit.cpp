@@ -39,7 +39,7 @@ void do_rpedit( Character *ch, std::string argument )
         }
 
       {
-        MPROG_DATA *mprog = (MPROG_DATA*)ch->dest_buf;
+        std::shared_ptr<MPROG_DATA> mprog = *static_cast<std::shared_ptr<MPROG_DATA>*>(ch->dest_buf);
 
         mprog->comlist = CopyBuffer( ch );
         StopEditing( ch );
@@ -83,7 +83,7 @@ void do_rpedit( Character *ch, std::string argument )
           return;
         }
 
-      for(const MPROG_DATA *mprg : ch->InRoom->mprog.MudProgs())
+      for(auto mprg : ch->InRoom->mprog.MudProgs())
         {
           ch->Echo("%d>%s %s\r\n%s\r\n",
                    ++cnt,
@@ -130,14 +130,14 @@ void do_rpedit( Character *ch, std::string argument )
 
       int cnt = 0;
 
-      for(MPROG_DATA *mprg : ch->InRoom->mprog.MudProgs())
+      for(auto mprg : ch->InRoom->mprog.MudProgs())
         {
           if ( ++cnt == value )
             {
 	      EditMobProg( ch, mprg, mptype, argument );
               ch->InRoom->mprog.progtypes = 0;
 
-              for(const MPROG_DATA *innerProg : ch->InRoom->mprog.MudProgs())
+              for(auto innerProg : ch->InRoom->mprog.MudProgs())
                 {
                   ch->InRoom->mprog.progtypes |= innerProg->type;
                 }
@@ -170,7 +170,7 @@ void do_rpedit( Character *ch, std::string argument )
       bool found = false;
       int mptype = 0;
       
-      for ( const MPROG_DATA *mprg : ch->InRoom->mprog.MudProgs())
+      for (auto mprg : ch->InRoom->mprog.MudProgs())
         {
           if ( ++cnt == value )
             {
@@ -202,13 +202,12 @@ void do_rpedit( Character *ch, std::string argument )
 
       assert(!result.empty());
 
-      MPROG_DATA *progToDelete = result.front();
+      std::shared_ptr<MPROG_DATA> progToDelete = result.front();
 
       ch->InRoom->mprog.Remove(progToDelete);
       
       FreeMemory( progToDelete->arglist );
       FreeMemory( progToDelete->comlist );
-      delete progToDelete;
 
       if ( num <= 1 )
         {
@@ -252,7 +251,7 @@ void do_rpedit( Character *ch, std::string argument )
 
       if(!result.empty())
 	{
-          MPROG_DATA *mprg = new MPROG_DATA();
+          std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
           ch->InRoom->mprog.progtypes |= ( 1 << mptype );
           EditMobProg( ch, mprg, mptype, argument );
           ch->InRoom->mprog.InsertBefore(value, mprg);
@@ -275,7 +274,7 @@ void do_rpedit( Character *ch, std::string argument )
           return;
         }
 
-      MPROG_DATA *mprg = new MPROG_DATA();
+      std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
 
       ch->InRoom->mprog.Add(mprg);
       ch->InRoom->mprog.progtypes |= ( 1 << mptype );

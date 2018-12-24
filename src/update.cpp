@@ -2511,14 +2511,14 @@ static void AggroUpdate()
   /* check mobprog act queue */
   while ( !mob_act_list.empty() )
     {
-      act_prog_data *apdtmp = mob_act_list.front();
+      std::shared_ptr<act_prog_data> apdtmp = mob_act_list.front();
       Character *wch = (Character*)apdtmp->vo;
 
       if ( !CharacterDiedRecently(wch) && wch->mprog.mpactnum > 0 )
         {
-          std::list<MPROG_ACT_LIST*> actLists(wch->mprog.ActLists());
+          auto actLists(wch->mprog.ActLists());
 
-          for(MPROG_ACT_LIST *tmp_act : actLists)
+          for(auto tmp_act : actLists)
             {
               if ( tmp_act->obj && IsObjectExtracted(tmp_act->obj) )
                 {
@@ -2533,14 +2533,12 @@ static void AggroUpdate()
 
               wch->mprog.Remove(tmp_act);
               FreeMemory(tmp_act->buf);
-              delete tmp_act;
             }
 
           wch->mprog.mpactnum = 0;
         }
 
       mob_act_list.remove( apdtmp );
-      delete apdtmp;
     }
 
   for( Character *ch = FirstCharacter, *wch_next = nullptr; ch; ch = wch_next )
