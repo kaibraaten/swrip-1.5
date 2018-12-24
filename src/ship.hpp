@@ -186,7 +186,7 @@ bool CanDock( const Ship *ship );
 bool IsShipInHyperspace( const Ship *ship );
 bool IsShipDisabled( const Ship *ship );
 bool IsShipInCombatRange( const Ship *ship, const Ship *target );
-bool IsMissileInRange( const Ship *ship, const Missile *missile );
+bool IsMissileInRange( const Ship *ship, std::shared_ptr<Missile> missile );
 bool IsSpaceobjectInRange( const Ship *ship, std::shared_ptr<Spaceobject> object );
 bool IsSpaceobjectInCaptureRange( const Ship *ship, std::shared_ptr<Spaceobject> object );
 bool CheckHostile( Ship *ship );

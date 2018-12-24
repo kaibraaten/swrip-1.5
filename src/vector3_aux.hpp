@@ -69,7 +69,7 @@ void SetShipCourseTowardsShip( Ship * const ship,
 
 void SetShipCourseTowardsSpaceobject( Ship * const ship,
                                       std::shared_ptr<Spaceobject> spaceobject );
-void SetMissileCourseTowardsShip( Missile * const m,
+void SetMissileCourseTowardsShip( std::shared_ptr<Missile> m,
                                   const Ship * const target );
 
 /*
@@ -83,14 +83,14 @@ void AlignShipTrajectory( Ship * const ship,
  * Calculate new position based on heading and speed.
  */
 void MoveShip( Ship * const ship );
-void MoveMissile( Missile * const m );
+void MoveMissile( std::shared_ptr<Missile> m );
 void MoveSpaceobject( std::shared_ptr<Spaceobject> spaceobj );
 
 double GetShipDistanceToShip( const Ship * const ship,
 			      const Ship * const target );
 double GetShipDistanceToSpaceobject( const Ship * const ship,
 				     std::shared_ptr<Spaceobject> spaceobject );
-double GetMissileDistanceToShip( const Missile * const m,
+double GetMissileDistanceToShip( std::shared_ptr<Missile> m,
 				 const Ship * const s );
 void RandomizeVector( Vector3 * const vec, int from, int to );
 

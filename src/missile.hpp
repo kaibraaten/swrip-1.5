@@ -8,7 +8,7 @@
 #include "types.hpp"
 #include "constants.hpp"
 
-extern std::list<Missile*> Missiles;
+extern std::list<std::shared_ptr<Missile>> Missiles;
 
 class Missile
 {
@@ -24,8 +24,8 @@ public:
   Vector3 Heading;
 };
 
-void UpdateMissile( Missile *missile );
+void UpdateMissile( std::shared_ptr<Missile> missile );
 void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missiletype );
-void ExtractMissile( Missile *missile );
+void ExtractMissile( std::shared_ptr<Missile> missile );
 
 #endif /* include guard */

@@ -20,13 +20,14 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <cassert>
 #include "missile.hpp"
 #include "mud.hpp"
 #include "vector3_aux.hpp"
 #include "ship.hpp"
 #include "character.hpp"
 
-std::list<Missile*> Missiles;
+std::list<std::shared_ptr<Missile>> Missiles;
 
 void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missiletype )
 {
@@ -47,7 +48,7 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missi
       return;
     }
 
-  Missile *missile = new Missile();
+  std::shared_ptr<Missile> missile = std::make_shared<Missile>();
   Missiles.push_back(missile);
 
   missile->Target = target;
@@ -82,19 +83,13 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missi
   missile->Spaceobject = spaceobject;
 }
 
-void ExtractMissile( Missile *missile )
+void ExtractMissile( std::shared_ptr<Missile> missile )
 {
-  if ( missile == NULL )
-    {
-      return;
-    }
-
+  assert(missile != nullptr);
   Missiles.remove( missile );
-
-  delete missile;
 }
 
-void UpdateMissile( Missile *missile )
+void UpdateMissile( std::shared_ptr<Missile> missile )
 {
   Ship *ship = missile->FiredFrom;
   Ship *target = missile->Target;
@@ -168,6 +163,4 @@ void UpdateMissile( Missile *missile )
 	  ExtractMissile( missile );
 	}
     }
-
-  return;
 }

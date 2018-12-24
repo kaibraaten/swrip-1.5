@@ -129,7 +129,7 @@ void do_radar( Character *ch, std::string argument )
   ForEachShip(ShowShipIfInRadarRange, &showShipData);
   ch->Echo("\r\n");
 
-  for ( const Missile *missile : Missiles )
+  for ( auto missile : Missiles )
     {
       if( GetMissileDistanceToShip( missile, ship ) < 50*(ship->Instruments.Sensor+10)*2)
         {

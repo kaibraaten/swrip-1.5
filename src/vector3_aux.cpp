@@ -127,7 +127,7 @@ void SetShipCourseTowardsSpaceobject( Ship * const ship,
   SetShipCourse( ship, &target->Position );
 }
 
-void SetMissileCourseTowardsShip( Missile * const missile,
+void SetMissileCourseTowardsShip( std::shared_ptr<Missile> missile,
 				 const Ship * const target )
 {
   missile->Heading.x = target->Position.x - missile->Position.x;
@@ -156,7 +156,7 @@ void MoveShip( Ship * const ship )
   HandleMovement( &ship->Position, &ship->Heading, ship->Thrusters.Speed.Current );
 }
 
-void MoveMissile( Missile * const missile )
+void MoveMissile( std::shared_ptr<Missile> missile )
 {
   HandleMovement( &missile->Position, &missile->Heading, missile->Speed );
 }
@@ -173,7 +173,7 @@ double GetShipDistanceToSpaceobject( const Ship * const ship,
   return GetDistanceBetweenVectors( &ship->Position, &spaceobject->Position );
 }
 
-double GetMissileDistanceToShip( const Missile * const missile,
+double GetMissileDistanceToShip( std::shared_ptr<Missile> missile,
 				 const Ship * const target )
 {
   return GetDistanceBetweenVectors( &missile->Position, &target->Position );

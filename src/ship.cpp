@@ -2007,7 +2007,7 @@ bool IsShipInCombatRange( const Ship *ship, const Ship *target )
   return false;
 }
 
-bool IsMissileInRange( const Ship *ship, const Missile *missile )
+bool IsMissileInRange( const Ship *ship, std::shared_ptr<Missile> missile )
 {
   return missile && ship && ship->Spaceobject
     && GetMissileDistanceToShip( missile, ship ) < 5000;
