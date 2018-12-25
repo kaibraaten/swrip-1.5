@@ -53,7 +53,18 @@ int cur_obj_serial = 0;
 bool cur_obj_extracted = false;
 obj_ret global_objcode = rNONE;
 
-static std::deque<Object*> ExtractedObjectQueue;
+static std::list<Object*> ExtractedObjectQueue;
+
+class ExtractedCharacter
+{
+public:
+  class Character *Character = nullptr;
+  Room *InRoom = nullptr;
+  ch_ret RetCode = rNONE;
+  bool Extract = false;
+};
+
+static std::list<std::shared_ptr<ExtractedCharacter>> ExtractedCharacterQueue;
 
 static Object *GroupObject( Object *obj1, Object *obj2 );
 
@@ -2262,13 +2273,13 @@ void QueueExtractedObject( Object *obj )
  */
 void CleanObjectQueue()
 {
-  while ( !ExtractedObjectQueue.empty() )
+  for(Object *obj : ExtractedObjectQueue)
     {
-      Object *obj = ExtractedObjectQueue.front();
-      ExtractedObjectQueue.pop_front();
       delete obj;
       --cur_qobjs;
     }
+
+  ExtractedObjectQueue.clear();
 }
 
 /*
@@ -2287,16 +2298,14 @@ void SetCurrentGlobalCharacter( Character *ch )
  */
 bool CharacterDiedRecently( const Character *ch )
 {
-  ExtractedCharacter *ccd;
-
   if ( ch == cur_char && cur_char_died )
     return true;
 
-  for (ccd = extracted_char_queue; ccd; ccd = ccd->Next )
-    if ( ccd->Character == ch )
-      return true;
-
-  return false;
+  return Find(ExtractedCharacterQueue,
+              [ch](const auto &ccd)
+              {
+                return ccd->Character == ch;
+              }) != nullptr;
 }
 
 /*
@@ -2305,19 +2314,18 @@ bool CharacterDiedRecently( const Character *ch )
 void QueueExtractedCharacter( Character *ch, bool extract )
 {
   assert(ch != nullptr);
-  ExtractedCharacter *ccd = new ExtractedCharacter();
+  std::shared_ptr<ExtractedCharacter> ccd = std::make_shared<ExtractedCharacter>();
 
-  ccd->Character                       = ch;
-  ccd->InRoom                     = ch->InRoom;
-  ccd->Extract          = extract;
+  ccd->Character = ch;
+  ccd->InRoom = ch->InRoom;
+  ccd->Extract = extract;
 
   if ( ch == cur_char )
-    ccd->RetCode                = global_retcode;
+    ccd->RetCode = global_retcode;
   else
-    ccd->RetCode                = rCHAR_DIED;
+    ccd->RetCode = rCHAR_DIED;
 
-  ccd->Next                     = extracted_char_queue;
-  extracted_char_queue  = ccd;
+  ExtractedCharacterQueue.push_back(ccd);
   cur_qchars++;
 }
 
@@ -2326,16 +2334,17 @@ void QueueExtractedCharacter( Character *ch, bool extract )
  */
 void CleanCharacterQueue()
 {
-  for ( ExtractedCharacter *ccd = extracted_char_queue; ccd; ccd = extracted_char_queue )
+  for(auto ccd : ExtractedCharacterQueue)
     {
-      extracted_char_queue = ccd->Next;
-
       if ( ccd->Extract )
-        FreeCharacter( ccd->Character );
-
-      delete ccd;
+        {
+          FreeCharacter( ccd->Character );
+        }
+      
       --cur_qchars;
     }
+
+  ExtractedCharacterQueue.clear();
 }
 
 /*

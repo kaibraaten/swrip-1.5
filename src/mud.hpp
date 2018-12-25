@@ -201,16 +201,6 @@ public:
   short TimesKilled = 0;
 };
 
-class ExtractedCharacter
-{
-public:
-  ExtractedCharacter *Next = nullptr;
-  class Character *Character = nullptr;
-  Room *InRoom = nullptr;
-  ch_ret RetCode = rNONE;
-  bool Extract = false;
-};
-
 class KilledData
 {
 public:
@@ -389,7 +379,6 @@ extern Character       *LastCharacter;
 
 extern TeleportData    *FirstTeleport;
 extern TeleportData    *LastTeleport;
-extern ExtractedCharacter *extracted_char_queue;
 extern Object          *save_equipment[MAX_WEAR][MAX_LAYERS];
 extern Character       *quitting_char;
 extern Character       *loading_char;

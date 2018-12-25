@@ -1,46 +1,37 @@
 -- Imperial Shipyard
--- Last saved Tuesday 25-Dec-2018 20:18:06
+-- Last saved Tuesday 25-Dec-2018 21:16:57
 
 ShipEntry
 {
-   LastDock = 45, 
-   Type = "Imperial", 
-   Thrusters = 
-   {
-      Energy = 
-      {
-         Max = -5536, 
-         Current = -5536, 
-      }, 
-      Maneuver = 0, 
-      Speed = 
-      {
-         Max = 255, 
-         Current = 0, 
-      }, 
-   }, 
-   Pilot = "", 
-   Location = 0, 
-   Position = 
-   {
-      Z = -2000, 
-      X = 2000, 
-      Y = 2000, 
-   }, 
+   Class = "Platform", 
+   Description = "", 
    State = 1, 
-   Home = "Byss", 
+   LastDock = 45, 
+   Shipyard = 45, 
+   CoPilot = "", 
+   Name = "Imperial Shipyard", 
+   Alarm = false, 
    Rooms = 
    {
-      Pilotseat = 32049, 
-      Gunseat = 32049, 
-      Navseat = 32049, 
       Coseat = 32049, 
+      Entrance = 32000, 
       Hangar = 32000, 
+      Pilotseat = 32049, 
       First = 32000, 
+      Last = 32049, 
+      Navseat = 32049, 
+      Gunseat = 32049, 
       Engine = 0, 
       Cockpit = 32049, 
-      Entrance = 32000, 
-      Last = 32049, 
+   }, 
+   Guard = true, 
+   Pilot = "", 
+   DockingPorts = 0, 
+   Instruments = 
+   {
+      Comm = 255, 
+      Sensor = 255, 
+      AstroArray = 0, 
    }, 
    Defenses = 
    {
@@ -49,43 +40,19 @@ ShipEntry
          Max = 25, 
          Current = 25, 
       }, 
-      Hull = 
-      {
-         Max = -25536, 
-         Current = -25536, 
-      }, 
       Shield = 
       {
          Max = 10000, 
          Current = 0, 
       }, 
+      Hull = 
+      {
+         Max = -25536, 
+         Current = -25536, 
+      }, 
    }, 
    WeaponSystems = 
    {
-      IonCannon = 
-      {
-         Count = 20, 
-         State = 0, 
-      }, 
-      Tube = 
-      {
-         Missiles = 
-         {
-            Max = 100, 
-            Current = 100, 
-         }, 
-         Rockets = 
-         {
-            Max = 50, 
-            Current = 50, 
-         }, 
-         State = 0, 
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-      }, 
       Turrets = 
       {
          [1] = 
@@ -139,9 +106,23 @@ ShipEntry
             RoomVnum = 0, 
          }, 
       }, 
-      Laser = 
+      Tube = 
       {
-         Count = 20, 
+         Rockets = 
+         {
+            Max = 50, 
+            Current = 50, 
+         }, 
+         Missiles = 
+         {
+            Max = 100, 
+            Current = 100, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
          State = 0, 
       }, 
       TractorBeam = 
@@ -149,25 +130,44 @@ ShipEntry
          Strength = 255, 
          State = 0, 
       }, 
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 20, 
+      }, 
+      Laser = 
+      {
+         State = 0, 
+         Count = 20, 
+      }, 
    }, 
    Hyperdrive = 
    {
       Speed = 0, 
    }, 
-   Instruments = 
+   Thrusters = 
    {
-      AstroArray = 0, 
-      Comm = 255, 
-      Sensor = 255, 
+      Energy = 
+      {
+         Max = -5536, 
+         Current = -5536, 
+      }, 
+      Speed = 
+      {
+         Max = 255, 
+         Current = 0, 
+      }, 
+      Maneuver = 0, 
    }, 
-   Owner = "The Empire", 
+   Location = 0, 
+   Position = 
+   {
+      Z = -2000, 
+      X = 2000, 
+      Y = 2000, 
+   }, 
    PersonalName = "Imperial Shipyard", 
-   Guard = true, 
-   CoPilot = "", 
-   Description = "", 
-   Class = "Platform", 
-   Name = "Imperial Shipyard", 
-   DockingPorts = 0, 
-   Shipyard = 45, 
-   Alarm = false, 
+   Owner = "The Empire", 
+   Home = "Byss", 
+   Type = "Imperial", 
 }

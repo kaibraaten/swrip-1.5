@@ -34,7 +34,6 @@ class Area;
 class Auction;
 class Ban;
 class Race;
-class ExtractedCharacter;
 class Character;
 class HuntHateFear;
 class Fight;

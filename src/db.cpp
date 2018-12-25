@@ -85,8 +85,6 @@ time_t last_restore_all_time = 0;
 TeleportData *FirstTeleport = NULL;
 TeleportData *LastTeleport = NULL;
 
-ExtractedCharacter *extracted_char_queue = NULL;
-
 Character *FirstCharacter = NULL;
 Character *LastCharacter = NULL;
 char log_buf[2*MAX_INPUT_LENGTH];
