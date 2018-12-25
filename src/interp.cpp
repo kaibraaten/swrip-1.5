@@ -224,7 +224,7 @@ void Interpret( Character *ch, std::string argument )
 
   std::string command;
   char logline[MAX_INPUT_LENGTH];
-  Timer *timer = NULL;
+  std::shared_ptr<Timer> timer;
   Command *cmd = NULL;
   int loglvl = 0;
   bool found = false;

@@ -80,8 +80,8 @@ void LuaPushFlags(lua_State *L, const std::bitset<Flag::MAX> &flags,
                   const char * const nameArray[], const std::string &key);
 std::bitset<Flag::MAX> LuaLoadFlags( lua_State *L, const std::string &key );
 
-void LuaPushSmaugAffects( lua_State *L, const std::list<SmaugAffect*> &affectList );
-std::list<SmaugAffect*> LuaLoadSmaugAffects( lua_State *L );
+void LuaPushSmaugAffects( lua_State *L, const std::list<std::shared_ptr<SmaugAffect>> &affectList );
+std::list<std::shared_ptr<SmaugAffect>> LuaLoadSmaugAffects( lua_State *L );
 void LuaPushCharacterAffects( lua_State *L, const std::list<std::shared_ptr<Affect>> &affects,
                               const std::string &key = "Affects" );
 void LuaPushObjectAffects( lua_State *L, const std::list<std::shared_ptr<Affect>> &affects,

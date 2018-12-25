@@ -46,7 +46,7 @@ struct Character::Impl
 {
   std::list<std::shared_ptr<Affect>> Affects;
   std::list<Object*> Objects;
-  std::list<Timer*> Timers;
+  std::list<std::shared_ptr<Timer>> Timers;
 };
 
 Character::Character(std::unique_ptr<class PCData> pcdata, Descriptor *desc)
@@ -193,17 +193,17 @@ void Character::Remove(Object *object)
   object->CarriedBy = nullptr;
 }
 
-const std::list<Timer*> &Character::Timers() const
+const std::list<std::shared_ptr<Timer>> &Character::Timers() const
 {
   return pImpl->Timers;
 }
 
-void Character::Add(Timer *timer)
+void Character::Add(std::shared_ptr<Timer> timer)
 {
   pImpl->Timers.push_back(timer);
 }
 
-void Character::Remove(Timer *timer)
+void Character::Remove(std::shared_ptr<Timer> timer)
 {
   pImpl->Timers.remove(timer);
 }

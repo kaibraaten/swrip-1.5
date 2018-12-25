@@ -1,6 +1,7 @@
 #ifndef _SWRIP_SKILL_HPP_
 #define _SWRIP_SKILL_HPP_
 
+#include <memory>
 #include <list>
 #include <string>
 #include <array>
@@ -49,7 +50,7 @@ public:
   int Value = 0;                  /* Misc value                   */
   int Saves = 0;                  /* What saving spell applies    */
   int Difficulty = 0;             /* Difficulty of casting/learning */
-  std::list<SmaugAffect*> Affects;                /* Spell affects, if any        */
+  std::list<std::shared_ptr<SmaugAffect>> Affects;                /* Spell affects, if any        */
   std::string Teachers;               /* Skill requires a special teacher */
   int Participants = 0;           /* # of required participants   */
   timerset *UseRec = nullptr; /* Usage record                 */

@@ -55,9 +55,9 @@ public:
   void Add(Object *object);
   void Remove(Object *object);
 
-  const std::list<Timer*> &Timers() const;
-  void Add(Timer *timer);
-  void Remove(Timer *timer);
+  const std::list<std::shared_ptr<Timer>> &Timers() const;
+  void Add(std::shared_ptr<Timer> timer);
+  void Remove(std::shared_ptr<Timer> timer);
   
   // Player AND mob
   SpecFun *spec_fun = NULL;

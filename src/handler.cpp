@@ -2344,32 +2344,21 @@ void CleanCharacterQueue()
  */
 void AddTimerToCharacter( Character *ch, short type, short count, CmdFun *fun, int value )
 {
-  Timer *timer = nullptr;
-
-  for(Timer *iter : ch->Timers())
-    {
-      if ( iter->Type == type )
-        {
-          timer = iter;
-          timer->Count  = count;
-          timer->DoFun = fun;
-          timer->Value     = value;
-          break;
-        }
-    }
+  auto timer = GetTimerPointer(ch, type);
   
   if ( !timer )
     {
-      timer = new Timer();
-      timer->Count = count;
-      timer->Type = type;
-      timer->DoFun = fun;
-      timer->Value = value;
+      timer = std::make_shared<Timer>();
       ch->Add(timer);
     }
+
+  timer->Count = count;
+  timer->Type = type;
+  timer->DoFun = fun;
+  timer->Value = value;
 }
 
-Timer *GetTimerPointer( const Character *ch, short type )
+std::shared_ptr<Timer> GetTimerPointer( const Character *ch, short type )
 {
   return Find(ch->Timers(),
               [type](auto timer)
@@ -2380,26 +2369,22 @@ Timer *GetTimerPointer( const Character *ch, short type )
 
 short GetTimer( const Character *ch, short type )
 {
-  Timer *timer = GetTimerPointer( ch, type );
+  std::shared_ptr<Timer> timer = GetTimerPointer( ch, type );
 
-  if ( timer != nullptr )
-    return timer->Count;
-  else
-    return 0;
+  return timer != nullptr ? timer->Count : 0;
 }
 
-void ExtractTimer( Character *ch, Timer *timer )
+void ExtractTimer( Character *ch, std::shared_ptr<Timer> timer )
 {
   assert(ch != nullptr);
   assert(timer != nullptr);
 
   ch->Remove(timer);
-  delete timer;
 }
 
 void RemoveTimer( Character *ch, short type )
 {
-  Timer *timer = GetTimerPointer(ch, type);
+  std::shared_ptr<Timer> timer = GetTimerPointer(ch, type);
 
   if ( timer != nullptr )
     {

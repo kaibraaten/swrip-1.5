@@ -133,7 +133,7 @@ void do_slookup( Character *ch, std::string arg )
       if ( skill->UseRec->NumberOfTimesUsed )
 	SendTimer(skill->UseRec, ch);
 
-      for ( const SmaugAffect *aff : skill->Affects )
+      for ( auto aff : skill->Affects )
 	{
 	  if ( aff == skill->Affects.front() )
             ch->Echo("\r\n");

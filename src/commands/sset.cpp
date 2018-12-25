@@ -371,12 +371,11 @@ void do_sset( Character *ch, std::string argument )
               return;
             }
 
-          for ( SmaugAffect *affect : skill->Affects )
+          for ( auto affect : skill->Affects )
             {
               if ( ++cnt == num )
                 {
                   skill->Affects.remove( affect );
-                  delete affect;
                   ch->Echo("Removed.\r\n");
                   return;
                 }
@@ -396,7 +395,7 @@ void do_sset( Character *ch, std::string argument )
           std::string duration;
           std::string bitvector;
           int loc = 0, bit = 0, tmpbit = 0;
-          SmaugAffect *aff = nullptr;
+          std::shared_ptr<SmaugAffect> aff;
 
           argument = OneArgument( argument, location );
           argument = OneArgument( argument, modifier );
@@ -426,7 +425,7 @@ void do_sset( Character *ch, std::string argument )
                 bit |= (1 << tmpbit);
             }
 
-          aff = new SmaugAffect();
+          aff = std::make_shared<SmaugAffect>();
 
           if ( !StrCmp( duration, "0" ) )
             duration.erase();

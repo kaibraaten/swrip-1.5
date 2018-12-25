@@ -169,9 +169,9 @@ void StartFearing( Character *ch, Character *victim )
 
 static void ExpireCommandCallbackTimers(Character *ch)
 {
-  std::list<Timer*> characterTimers(ch->Timers());
+  auto characterTimers(ch->Timers());
 
-  for(Timer *timer : characterTimers)
+  for(auto timer : characterTimers)
     {
       if ( --timer->Count <= 0 )
         {

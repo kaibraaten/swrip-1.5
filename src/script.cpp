@@ -17,9 +17,9 @@
 lua_State *LuaMasterState = nullptr;
 
 static void SetLuaPath( lua_State * );
-static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx );
+static void LuaPushOneSmaugAffect( lua_State *L, std::shared_ptr<SmaugAffect> affect, int idx );
 
-lua_State *CreateLuaState( void )
+lua_State *CreateLuaState()
 {
   lua_State *L = luaL_newstate();
   luaL_openlibs( L );
@@ -264,9 +264,9 @@ std::bitset<Flag::MAX> LuaLoadFlags( lua_State *L, const std::string &key )
   return flags;
 }
 
-static SmaugAffect *LuaLoadOneSmaugAffect( lua_State *L )
+static std::shared_ptr<SmaugAffect> LuaLoadOneSmaugAffect( lua_State *L )
 {
-  SmaugAffect *affect = new SmaugAffect();
+  std::shared_ptr<SmaugAffect> affect = std::make_shared<SmaugAffect>();
   LuaGetfieldString( L, "Duration", &affect->Duration );
   LuaGetfieldString( L, "Modifier", &affect->Modifier );
   LuaGetfieldInt( L, "Location", &affect->Location );
@@ -278,9 +278,9 @@ static SmaugAffect *LuaLoadOneSmaugAffect( lua_State *L )
   return affect;
 }
 
-std::list<SmaugAffect*> LuaLoadSmaugAffects( lua_State *L )
+std::list<std::shared_ptr<SmaugAffect>> LuaLoadSmaugAffects( lua_State *L )
 {
-  std::list<SmaugAffect*> affectList;
+  std::list<std::shared_ptr<SmaugAffect>> affectList;
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Affects" );
 
@@ -290,7 +290,7 @@ std::list<SmaugAffect*> LuaLoadSmaugAffects( lua_State *L )
 
       while( lua_next( L, -2 ) )
         {
-	  SmaugAffect *affect = LuaLoadOneSmaugAffect( L );
+	  auto affect = LuaLoadOneSmaugAffect( L );
 	  affectList.push_front( affect );
           lua_pop( L, 1 );
         }
@@ -301,7 +301,7 @@ std::list<SmaugAffect*> LuaLoadSmaugAffects( lua_State *L )
   return affectList;
 }
 
-static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx )
+static void LuaPushOneSmaugAffect( lua_State *L, std::shared_ptr<SmaugAffect> affect, int idx )
 {
   lua_pushinteger( L, ++idx );
   lua_newtable( L );
@@ -336,7 +336,7 @@ static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int 
   lua_settable( L, -3 );
 }
 
-void LuaPushSmaugAffects( lua_State *L, const std::list<SmaugAffect*> &affectList )
+void LuaPushSmaugAffects( lua_State *L, const std::list<std::shared_ptr<SmaugAffect>> &affectList )
 {
   if( !affectList.empty() )
     {
@@ -344,7 +344,7 @@ void LuaPushSmaugAffects( lua_State *L, const std::list<SmaugAffect*> &affectLis
       lua_pushstring( L, "Affects" );
       lua_newtable( L );
 
-      for ( const SmaugAffect *affect : affectList )
+      for (auto affect : affectList)
 	{
 	  LuaPushOneSmaugAffect( L, affect, ++idx );
 	}
