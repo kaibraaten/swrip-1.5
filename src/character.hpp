@@ -146,7 +146,7 @@ public:
   Character *Previous = NULL;
   Character *Master = NULL;
   Character *Leader = NULL;
-  Fight *Fighting = NULL;
+  std::unique_ptr<Fight> Fighting;
   Character *Reply = NULL;
   Character *Switched = NULL;
   Character *Mount = NULL;

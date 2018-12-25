@@ -195,10 +195,10 @@ class Fight
 {
 public:
   Character *Who = nullptr;
-  long        Xp = 0;
-  short      Align = 0;
-  short      Duration = 0;
-  short      TimesKilled = 0;
+  long Xp = 0;
+  short Align = 0;
+  short Duration = 0;
+  short TimesKilled = 0;
 };
 
 class ExtractedCharacter
@@ -207,8 +207,8 @@ public:
   ExtractedCharacter *Next = nullptr;
   class Character *Character = nullptr;
   Room *InRoom = nullptr;
-  ch_ret             RetCode = rNONE;
-  bool               Extract = false;
+  ch_ret RetCode = rNONE;
+  bool Extract = false;
 };
 
 class KilledData

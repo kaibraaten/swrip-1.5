@@ -2272,8 +2272,6 @@ void UpdatePosition( Character *victim )
  */
 void StartFighting( Character *ch, Character *victim )
 {
-  Fight *fight = NULL;
-
   if ( ch->Fighting )
     {
       Log->Bug( "%s: %s -> %s (already fighting %s)",
@@ -2292,16 +2290,15 @@ void StartFighting( Character *ch, Character *victim )
       return;
     }
 
-  fight = new Fight();
-  fight->Who     = victim;
-  fight->Xp      = ComputeXP( ch, victim );
-  fight->Align = ComputeNewAlignment( ch, victim );
+  ch->Fighting = std::make_unique<Fight>();
+  ch->Fighting->Who = victim;
+  ch->Fighting->Xp = ComputeXP( ch, victim );
+  ch->Fighting->Align = ComputeNewAlignment( ch, victim );
 
   if ( !IsNpc(ch) && IsNpc(victim) )
-    fight->TimesKilled = TimesKilled(ch, victim);
+    ch->Fighting->TimesKilled = TimesKilled(ch, victim);
 
   ch->NumFighting = 1;
-  ch->Fighting = fight;
   ch->Position = POS_FIGHTING;
   victim->NumFighting++;
 
@@ -2333,12 +2330,12 @@ void FreeFight( Character *ch )
   if ( ch->Fighting )
     {
       if ( !CharacterDiedRecently(ch->Fighting->Who) )
-        --ch->Fighting->Who->NumFighting;
-
-      delete ch->Fighting;
+        {
+          --ch->Fighting->Who->NumFighting;
+        }
     }
 
-  ch->Fighting = NULL;
+  ch->Fighting.reset();
 
   if ( ch->Mount )
     ch->Position = POS_MOUNTED;
