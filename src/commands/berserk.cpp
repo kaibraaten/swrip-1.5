@@ -7,7 +7,6 @@
 void do_berserk( Character *ch, std::string argument )
 {
   short percent = 0;
-  Affect af;
 
   if ( !ch->Fighting )
     {
@@ -31,17 +30,18 @@ void do_berserk( Character *ch, std::string argument )
       return;
     }
 
-  af.Type = gsn_berserk;
+  std::shared_ptr<Affect> af = std::make_shared<Affect>();
+  af->Type = gsn_berserk;
   /* Hmmm.. 10-20 combat rounds at level 50.. good enough for most mobs,
      and if not they can always go berserk again.. shrug.. maybe even
      too high. -- Altrag */
-  af.Duration = GetRandomNumberFromRange(ch->TopLevel/5, ch->TopLevel*2/5);
+  af->Duration = GetRandomNumberFromRange(ch->TopLevel / 5, ch->TopLevel * 2 / 5);
   /* Hmm.. you get stronger when yer really enraged.. mind over matter
      type thing.. */
-  af.Location  = APPLY_STR;
-  af.Modifier  = 1;
-  af.AffectedBy = AFF_BERSERK;
-  AffectToCharacter(ch, &af);
+  af->Location  = APPLY_STR;
+  af->Modifier  = 1;
+  af->AffectedBy = AFF_BERSERK;
+  AffectToCharacter(ch, af);
   ch->Echo( "You start to lose control..\r\n" );
   LearnFromSuccess(ch, gsn_berserk);
 }

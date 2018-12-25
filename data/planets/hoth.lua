@@ -1,5 +1,5 @@
 -- Hoth
--- Last saved Monday 24-Dec-2018 22:50:49
+-- Last saved Tuesday 25-Dec-2018 13:08:54
 
 PlanetEntry
 {
@@ -7,13 +7,13 @@ PlanetEntry
    {
       [1] = "hoth.are", 
    }, 
-   Name = "Hoth", 
-   PopulationSupport = 0, 
    BaseValue = 0, 
+   PopulationSupport = 0, 
+   Name = "Hoth", 
+   Spaceobject = "Hoth", 
+   GovernedBy = "The Rebel Alliance", 
    Flags = 
    {
       [0] = "NoCapture", 
    }, 
-   GovernedBy = "The Rebel Alliance", 
-   Spaceobject = "Hoth", 
 }

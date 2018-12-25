@@ -246,7 +246,7 @@ static void ApplySkillAffect( Character *ch, int sn, int mod )
 /*
  * Apply or remove an affect to a character.
  */
-void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
+void ModifyAffect( Character *ch, std::shared_ptr<Affect> paf, bool fAdd )
 {
   Object *wield = NULL;
   int mod = paf->Modifier;
@@ -628,12 +628,12 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
 /*
  * Give an affect to a char.
  */
-void AffectToCharacter( Character *ch, Affect *paf )
+void AffectToCharacter( Character *ch, std::shared_ptr<Affect> paf )
 {
   assert(ch != nullptr);
   assert(paf != nullptr);
 
-  Affect *paf_new = new Affect();
+  std::shared_ptr<Affect> paf_new = std::make_shared<Affect>();
 
   ch->Add(paf_new);
   paf_new->Type        = paf->Type;
@@ -648,7 +648,7 @@ void AffectToCharacter( Character *ch, Affect *paf )
 /*
  * Remove an affect from a char.
  */
-void RemoveAffect( Character *ch, Affect *paf )
+void RemoveAffect( Character *ch, std::shared_ptr<Affect> paf )
 {
   if ( ch->Affects().empty() )
     {
@@ -658,7 +658,6 @@ void RemoveAffect( Character *ch, Affect *paf )
 
   ModifyAffect( ch, paf, false );
   ch->Remove(paf);
-  delete paf;
 }
 
 /*
@@ -666,13 +665,13 @@ void RemoveAffect( Character *ch, Affect *paf )
  */
 void StripAffect( Character *ch, int sn )
 {
-  std::list<Affect*> affectsToRemove = Filter(ch->Affects(),
-                                              [sn](const auto affect)
-                                              {
-                                                return affect->Type == sn;
-                                              });
+  auto affectsToRemove = Filter(ch->Affects(),
+                                [sn](const auto affect)
+                                {
+                                  return affect->Type == sn;
+                                });
 
-  for(Affect *affect : affectsToRemove)
+  for(auto affect : affectsToRemove)
     {
       RemoveAffect( ch, affect );
     }
@@ -683,9 +682,9 @@ void StripAffect( Character *ch, int sn )
  * Limitations put in place by Thoric, they may be high... but at least
  * they're there :)
  */
-void JoinAffect( Character *ch, Affect *paf )
+void JoinAffect( Character *ch, std::shared_ptr<Affect> paf )
 {
-  for(Affect *paf_old : ch->Affects())
+  for(auto paf_old : ch->Affects())
     {
       if ( paf_old->Type == paf->Type )
 	{
@@ -1138,12 +1137,11 @@ void ExtractObject( Object *obj )
       ExtractObject( obj_content );
     }
   
-  std::list<Affect*> affects(obj->Affects());
+  auto affects(obj->Affects());
 
-  for(Affect *paf : affects)
+  for(auto paf : affects)
     {
       obj->Remove(paf);
-      delete paf;
     }
 
   auto extraDescriptions = obj->ExtraDescriptions();
@@ -2100,12 +2098,11 @@ void CleanObject( ProtoObject *obj )
 
   obj->Value.fill(0);
 
-  std::list<Affect*> affects(obj->Affects());
+  auto affects(obj->Affects());
 
-  for(Affect *paf : affects)
+  for(auto paf : affects)
     {
       obj->Remove(paf);
-      delete paf;
       top_affect--;
     }
 
@@ -2166,7 +2163,7 @@ void CleanMobile( ProtoMobile *mob )
 /*
  * Show an affect verbosely to a character                      -Thoric
  */
-void ShowAffectToCharacter( const Character *ch, const Affect *paf )
+void ShowAffectToCharacter( const Character *ch, std::shared_ptr<Affect> paf )
 {
   assert(paf != nullptr);
 

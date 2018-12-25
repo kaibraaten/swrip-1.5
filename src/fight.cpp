@@ -197,11 +197,11 @@ static void ExpireCommandCallbackTimers(Character *ch)
 
 static void RemoveExpiredAffects(Character *ch)
 {
-  std::list<Affect*> affects(ch->Affects());
+  auto affects(ch->Affects());
 
   for(auto affectIter = std::begin(affects); affectIter != std::end(affects); ++affectIter)
     {
-      Affect *paf = *affectIter;
+      std::shared_ptr<Affect> paf = *affectIter;
 
       if ( paf->Duration > 0 )
         {
@@ -213,7 +213,7 @@ static void RemoveExpiredAffects(Character *ch)
         }
       else
         {
-          Affect *paf_next = nullptr;
+          std::shared_ptr<Affect> paf_next;
           auto nextIter = affectIter;
           ++nextIter;
 
@@ -1164,13 +1164,13 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
 
               if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
                 {
-                  Affect af;
-                  af.Type       = gsn_stun;
-                  af.Location   = APPLY_AC;
-                  af.Modifier   = 20;
-                  af.Duration   = 7;
-                  af.AffectedBy = AFF_PARALYSIS;
-                  AffectToCharacter( victim, &af );
+                  std::shared_ptr<Affect> af = std::make_shared<Affect>();
+                  af->Type       = gsn_stun;
+                  af->Location   = APPLY_AC;
+                  af->Modifier   = 20;
+                  af->Duration   = 7;
+                  af->AffectedBy = AFF_PARALYSIS;
+                  AffectToCharacter( victim, af );
                   UpdatePosition( victim );
 
                   if ( IsNpc(victim) )
@@ -1341,7 +1341,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
        && !IsBitSet(victim->Immune, RIS_MAGIC)
        && !victim->InRoom->Flags.test( Flag::Room::NoMagic ) )
     {
-      for(const Affect *aff : wield->Prototype->Affects())
+      for(auto aff : wield->Prototype->Affects())
         {
           if ( aff->Location == APPLY_WEAPONSPELL
                && IS_VALID_SN(aff->Modifier)
@@ -1358,7 +1358,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           return retcode;
         }
 
-      for(const Affect *aff : wield->Affects())
+      for(auto aff : wield->Affects())
         {
           if ( aff->Location == APPLY_WEAPONSPELL
                && IS_VALID_SN(aff->Modifier)
@@ -1773,14 +1773,14 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
        && !IsBitSet( victim->Immune, RIS_POISON )
        && !SaveVsPoisonDeath( GetAbilityLevel( ch, COMBAT_ABILITY ), victim ) )
     {
-      Affect af;
+      std::shared_ptr<Affect> af = std::make_shared<Affect>();
 
-      af.Type       = gsn_poison;
-      af.Duration   = 20;
-      af.Location   = APPLY_STR;
-      af.Modifier   = -2;
-      af.AffectedBy = AFF_POISON;
-      JoinAffect( victim, &af );
+      af->Type       = gsn_poison;
+      af->Duration   = 20;
+      af->Location   = APPLY_STR;
+      af->Modifier   = -2;
+      af->AffectedBy = AFF_POISON;
+      JoinAffect( victim, af );
       ch->MentalState = urange( 20, ch->MentalState + 2, 100 );
     }
 

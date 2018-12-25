@@ -5,7 +5,7 @@
 ch_ret spell_blindness( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
-  Affect af;
+  std::shared_ptr<Affect> af = std::make_shared<Affect>();
   int tmp = 0;
   Skill *skill = GetSkill(sn);
 
@@ -27,12 +27,12 @@ ch_ret spell_blindness( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  af.Type      = sn;
-  af.Location  = APPLY_HITROLL;
-  af.Modifier  = -4;
-  af.Duration  = (1 + (level / 3)) * DUR_CONV;
-  af.AffectedBy = AFF_BLIND;
-  AffectToCharacter( victim, &af );
+  af->Type      = sn;
+  af->Location  = APPLY_HITROLL;
+  af->Modifier  = -4;
+  af->Duration  = (1 + (level / 3)) * DUR_CONV;
+  af->AffectedBy = AFF_BLIND;
+  AffectToCharacter( victim, af );
   SetCharacterColor( AT_MAGIC, victim );
   victim->Echo("You are blinded!\r\n");
 

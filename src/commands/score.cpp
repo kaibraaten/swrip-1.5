@@ -281,9 +281,9 @@ void do_score(Character *ch, std::string argument)
       ch->Echo("&C----------------------------------------------------------------------------\r\n");
       ch->Echo("&cAFFECT DATA:                            &C");
 
-      for(const Affect *paf : ch->Affects())
+      for(auto paf : ch->Affects())
         {
-          const Skill *sktmp = GetSkill(paf->Type);
+          auto sktmp = GetSkill(paf->Type);
           
           if ( sktmp == nullptr )
             continue;

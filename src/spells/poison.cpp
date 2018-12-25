@@ -4,7 +4,7 @@
 ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
-  Affect af;
+  std::shared_ptr<Affect> af = std::make_shared<Affect>();
   int poison_chance;
   bool first = true;
 
@@ -21,18 +21,20 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
   if ( IsAffectedBy( victim, AFF_POISON ) )
     first = false;
 
-  af.Type      = sn;
-  af.Duration  = level * DUR_CONV;
-  af.Location  = APPLY_STR;
-  af.Modifier  = -2;
-  af.AffectedBy = AFF_POISON;
-  JoinAffect( victim, &af );
+  af->Type      = sn;
+  af->Duration  = level * DUR_CONV;
+  af->Location  = APPLY_STR;
+  af->Modifier  = -2;
+  af->AffectedBy = AFF_POISON;
+  JoinAffect( victim, af );
   SetCharacterColor( AT_MAGIC, victim );
   victim->Echo("You feel very sick.\r\n");
   victim->MentalState = urange( 20, victim->MentalState
                                  + (first ? 5 : 0), 100 );
+
   if ( ch != victim )
     ch->Echo("Ok.\r\n");
+
   return rNONE;
 }
 

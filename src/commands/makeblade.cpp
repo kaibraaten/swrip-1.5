@@ -102,7 +102,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   weapon->ShortDescr = ud->ItemName;
   weapon->Description = Capitalize( weapon->ShortDescr + " was left here." );
 
-  Affect *backstab = new Affect();
+  auto backstab = std::make_shared<Affect>();
   backstab->Type               = -1;
   backstab->Duration           = -1;
   backstab->Location           = GetAffectType( "backstab" );
@@ -112,7 +112,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 
   if ( !ud->HasStaff )
     {
-      Affect *hitroll = new Affect();
+      auto hitroll = std::make_shared<Affect>();
       hitroll->Type               = -1;
       hitroll->Duration           = -1;
       hitroll->Location           = GetAffectType( "hitroll" );

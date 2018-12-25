@@ -8,7 +8,7 @@ extern std::string spell_target_name;
 
 ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
 {
-  Affect af;
+  std::shared_ptr<Affect> af = std::make_shared<Affect>();
   int retcode = rNONE;
   int sleep_chance = 0;
   int tmp = 0;
@@ -58,12 +58,13 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
           return retcode;
         }
     }
-  af.Type      = sn;
-  af.Duration  = (4 + level) * DUR_CONV;
-  af.Location  = APPLY_NONE;
-  af.Modifier  = 0;
-  af.AffectedBy = AFF_SLEEP;
-  JoinAffect( victim, &af );
+  
+  af->Type      = sn;
+  af->Duration  = (4 + level) * DUR_CONV;
+  af->Location  = APPLY_NONE;
+  af->Modifier  = 0;
+  af->AffectedBy = AFF_SLEEP;
+  JoinAffect( victim, af );
 
   /* Added by Narn at the request of Dominus. */
   if ( !IsNpc( victim ) )

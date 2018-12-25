@@ -4,7 +4,7 @@
 
 ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 {
-  Affect af;
+  std::shared_ptr<Affect> af = std::make_shared<Affect>();
   Skill *skill = GetSkill(sn);
   Character *victim = (Character *) vo;
   int aff_chance = 0;
@@ -15,7 +15,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
       StripAffect( victim, sn );
     }
   
-  for ( const SmaugAffect *saf : skill->Affects )
+  for ( auto saf : skill->Affects )
     {
       if ( saf->Location >= REVERSE_APPLY )
         {
@@ -27,8 +27,8 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
         }
       
       /* Check if char has this bitvector already */
-      if ( (af.AffectedBy = saf->AffectedBy) != 0
-           && IsAffectedBy( victim, af.AffectedBy )
+      if ( (af->AffectedBy = saf->AffectedBy) != 0
+           && IsAffectedBy( victim, af->AffectedBy )
            && !SPELL_FLAG( skill, SF_ACCUMULATIVE ) )
         {
           continue;
@@ -37,14 +37,14 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
       /*
        * necessary for StripAffect to work properly...
        */
-      switch ( af.AffectedBy )
+      switch ( af->AffectedBy )
         {
         default:
-	  af.Type = sn;
+	  af->Type = sn;
 	  break;
 
         case AFF_POISON:
-	  af.Type = gsn_poison;
+	  af->Type = gsn_poison;
           ch->Echo("You feel the hatred grow within you!\r\n");
           ch->Alignment = ch->Alignment - 100;
           ch->Alignment = urange( -1000, ch->Alignment, 1000 );
@@ -82,15 +82,15 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
           break;
 
         case AFF_BLIND:
-	  af.Type = gsn_blindness;
+	  af->Type = gsn_blindness;
 	  break;
 
         case AFF_INVISIBLE:
-	  af.Type = gsn_invis;
+	  af->Type = gsn_invis;
 	  break;
 
         case AFF_SLEEP:
-	  af.Type = gsn_sleep;
+	  af->Type = gsn_sleep;
           aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_SLEEP );
 
           if ( victim->Race == RACE_DROID )
@@ -112,7 +112,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
           break;
 
         case AFF_CHARM:
-	  af.Type = gsn_charm_person;
+	  af->Type = gsn_charm_person;
           aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_CHARM );
 
 	  if ( victim->Race == RACE_DROID )
@@ -134,22 +134,22 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
           break;
 
         case AFF_POSSESS:
-	  af.Type = gsn_possess;
+	  af->Type = gsn_possess;
           break;
         }
 
-      af.Duration  = ParseDice(ch, level, saf->Duration);
-      af.Modifier  = ParseDice(ch, level, saf->Modifier);
-      af.Location  = saf->Location % REVERSE_APPLY;
+      af->Duration  = ParseDice(ch, level, saf->Duration);
+      af->Modifier  = ParseDice(ch, level, saf->Modifier);
+      af->Location  = saf->Location % REVERSE_APPLY;
 
-      if ( af.Duration == 0 )
+      if ( af->Duration == 0 )
         {
-          switch( af.Location )
+          switch( af->Location )
             {
             case APPLY_HIT:
               if ( ch != victim
                    && victim->HitPoints.Current < victim->HitPoints.Max
-                   && af.Modifier > 0
+                   && af->Modifier > 0
                    && victim->Race != RACE_DROID)
                 {
                   ch->Echo("The noble Jedi use their powers to help others!\r\n");
@@ -158,19 +158,19 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                   ApplyJediBonus(ch);
                 }
 
-              if  ( af.Modifier > 0
+              if  ( af->Modifier > 0
                     && victim->HitPoints.Current >= victim->HitPoints.Max )
                 {
                   return rSPELL_FAILED;
                 }
 
-              victim->HitPoints.Current = urange( 0, victim->HitPoints.Current + af.Modifier,
+              victim->HitPoints.Current = urange( 0, victim->HitPoints.Current + af->Modifier,
                                                   victim->HitPoints.Max );
               UpdatePosition( victim );
               break;
 
             case APPLY_MANA:
-              if( af.Modifier > 0 && victim->Mana.Current >= victim->Mana.Max )
+              if( af->Modifier > 0 && victim->Mana.Current >= victim->Mana.Max )
                 {
                   return rSPELL_FAILED;
                 }
@@ -183,35 +183,35 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 		  ApplyJediBonus(ch);
                 }
 
-              victim->Mana.Current = urange( 0, victim->Mana.Current + af.Modifier,
+              victim->Mana.Current = urange( 0, victim->Mana.Current + af->Modifier,
                                              victim->Mana.Max );
               UpdatePosition( victim );
               break;
 
             case APPLY_MOVE:
-              if  ( af.Modifier > 0
+              if  ( af->Modifier > 0
                     && victim->Fatigue.Current >= victim->Fatigue.Max )
                 {
                   return rSPELL_FAILED;
                 }
 
-              victim->Fatigue.Current = urange( 0, victim->Fatigue.Current + af.Modifier,
+              victim->Fatigue.Current = urange( 0, victim->Fatigue.Current + af->Modifier,
                                                 victim->Fatigue.Max );
               UpdatePosition( victim );
               break;
 
             default:
-              ModifyAffect( victim, &af, true );
+              ModifyAffect( victim, af, true );
               break;
             }
         }
       else if ( SPELL_FLAG( skill, SF_ACCUMULATIVE ) )
         {
-          JoinAffect( victim, &af );
+          JoinAffect( victim, af );
         }
       else
         {
-          AffectToCharacter( victim, &af );
+          AffectToCharacter( victim, af );
         }
     }
   

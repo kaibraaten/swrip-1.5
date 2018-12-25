@@ -1,5 +1,5 @@
 -- Coruscant
--- Last saved Monday 24-Dec-2018 22:50:49
+-- Last saved Tuesday 25-Dec-2018 13:08:54
 
 PlanetEntry
 {
@@ -14,13 +14,13 @@ PlanetEntry
       [7] = "senate.are", 
       [8] = "monument_plaza.are", 
    }, 
-   Name = "Coruscant", 
-   PopulationSupport = 0, 
    BaseValue = 0, 
+   PopulationSupport = 0, 
+   Name = "Coruscant", 
+   Spaceobject = "Coruscant", 
+   GovernedBy = "The Empire", 
    Flags = 
    {
       [0] = "NoCapture", 
    }, 
-   GovernedBy = "The Empire", 
-   Spaceobject = "Coruscant", 
 }

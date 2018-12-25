@@ -13,16 +13,27 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
   int vnum = skill->Value;
   Character *mob;
   ProtoMobile *mi;
-  Affect af;
+  std::shared_ptr<Affect> af = std::make_shared<Affect>();
 
   /* set maximum mob level */
   switch( SPELL_POWER(skill) )
     {
     default:
-    case SP_NONE:        lvl = 20;      break;
-    case SP_MINOR:       lvl = 5;       break;
-    case SP_GREATER: lvl = level/2; break;
-    case SP_MAJOR:       lvl = level;   break;
+    case SP_NONE:
+      lvl = 20;
+      break;
+
+    case SP_MINOR:
+      lvl = 5;
+      break;
+
+    case SP_GREATER:
+      lvl = level / 2;
+      break;
+
+    case SP_MAJOR:
+      lvl = level;
+      break;
     }
 
   /*
@@ -51,12 +62,11 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
   SuccessfulCasting( skill, ch, mob, NULL );
   CharacterToRoom( mob, ch->InRoom );
   StartFollowing( mob, ch );
-  af.Type      = sn;
-  af.Duration  = (NumberFuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;
-  af.Location  = 0;
-  af.Modifier  = 0;
-  af.AffectedBy = AFF_CHARM;
-  AffectToCharacter( mob, &af );
+  af->Type      = sn;
+  af->Duration  = (NumberFuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;
+  af->Location  = 0;
+  af->Modifier  = 0;
+  af->AffectedBy = AFF_CHARM;
+  AffectToCharacter( mob, af );
   return rNONE;
 }
-

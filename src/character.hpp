@@ -47,9 +47,9 @@ public:
   virtual void Echo(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));
   virtual void Echo(const std::string &txt) const;
   
-  const std::list<Affect*> &Affects() const;
-  void Add(Affect *affect);
-  void Remove(Affect *affect);
+  const std::list<std::shared_ptr<Affect>> &Affects() const;
+  void Add(std::shared_ptr<Affect> affect);
+  void Remove(std::shared_ptr<Affect> affect);
 
   const std::list<Object*> &Objects() const;
   void Add(Object *object);

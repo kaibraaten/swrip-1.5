@@ -551,7 +551,7 @@ void FoldArea( Area *tarea, const std::string &filename, bool install )
         fprintf( fpout, "E\n%s~\n%s~\n",
                  ed->Keyword.c_str(), StripCarriageReturn( ed->Description ).c_str() );
 
-      for(const Affect *paf : pObjIndex->Affects())
+      for(auto paf : pObjIndex->Affects())
         fprintf( fpout, "A\n%d %d\n", paf->Location,
                  ((paf->Location == APPLY_WEAPONSPELL
                    || paf->Location == APPLY_WEARSPELL

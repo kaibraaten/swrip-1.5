@@ -55,7 +55,7 @@ void do_affected( Character *ch, std::string argument )
     {
       ch->Echo( "\r\n" );
 
-      for(const Affect *paf : ch->Affects())
+      for(auto paf : ch->Affects())
 	{
           Skill *skill = GetSkill(paf->Type);
           

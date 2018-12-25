@@ -8,7 +8,7 @@
 struct Object::Impl
 {
   std::list<std::shared_ptr<ExtraDescription>> ExtraDescriptions;
-  std::list<Affect*> Affects;
+  std::list<std::shared_ptr<Affect>> Affects;
   std::list<Object*> Objects;
 };
 
@@ -235,17 +235,17 @@ const std::list<std::shared_ptr<ExtraDescription>> &Object::ExtraDescriptions() 
   return pImpl->ExtraDescriptions;
 }
 
-const std::list<Affect*> &Object::Affects() const
+const std::list<std::shared_ptr<Affect>> &Object::Affects() const
 {
   return pImpl->Affects;
 }
 
-void Object::Add(Affect *affect)
+void Object::Add(std::shared_ptr<Affect> affect)
 {
   pImpl->Affects.push_back(affect);
 }
 
-void Object::Remove(Affect *affect)
+void Object::Remove(std::shared_ptr<Affect> affect)
 {
   pImpl->Affects.remove(affect);
 }

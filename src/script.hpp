@@ -82,12 +82,12 @@ std::bitset<Flag::MAX> LuaLoadFlags( lua_State *L, const std::string &key );
 
 void LuaPushSmaugAffects( lua_State *L, const std::list<SmaugAffect*> &affectList );
 std::list<SmaugAffect*> LuaLoadSmaugAffects( lua_State *L );
-void LuaPushCharacterAffects( lua_State *L, const std::list<Affect*> &affects,
+void LuaPushCharacterAffects( lua_State *L, const std::list<std::shared_ptr<Affect>> &affects,
                               const std::string &key = "Affects" );
-void LuaPushObjectAffects( lua_State *L, const std::list<Affect*> &affects,
+void LuaPushObjectAffects( lua_State *L, const std::list<std::shared_ptr<Affect>> &affects,
                            const std::string &key = "Affects" );
-std::list<Affect*> LuaLoadCharacterAffects( lua_State *L, const std::string &key = "Affects" );
-std::list<Affect*> LuaLoadObjectAffects( lua_State *L, const std::string &key = "Affects" );
+std::list<std::shared_ptr<Affect>> LuaLoadCharacterAffects( lua_State *L, const std::string &key = "Affects" );
+std::list<std::shared_ptr<Affect>> LuaLoadObjectAffects( lua_State *L, const std::string &key = "Affects" );
 void LuaPushObjects( lua_State *L, const std::list<Object*> &objects,
                      const std::string &key = "Objects" );
 std::list<Object*> LuaLoadObjects( lua_State *L, const std::string &key = "Objects" );

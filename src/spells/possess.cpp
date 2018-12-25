@@ -9,7 +9,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = nullptr;
   char buf[MAX_STRING_LENGTH];
-  Affect af;
+  std::shared_ptr<Affect> af = std::make_shared<Affect>();
   Skill *skill = GetSkill(sn);
 
   if (ch->Desc->Original)
@@ -68,12 +68,12 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   ch->Alignment = urange( -1000, ch->Alignment, 1000 );
   ApplySithPenalty( ch );
 
-  af.Type      = sn;
-  af.Duration  = 20 + (GetAbilityLevel( ch, FORCE_ABILITY ) - victim->TopLevel) / 2;
-  af.Location  = 0;
-  af.Modifier  = 0;
-  af.AffectedBy = AFF_POSSESS;
-  AffectToCharacter( victim, &af );
+  af->Type      = sn;
+  af->Duration  = 20 + (GetAbilityLevel( ch, FORCE_ABILITY ) - victim->TopLevel) / 2;
+  af->Location  = 0;
+  af->Modifier  = 0;
+  af->AffectedBy = AFF_POSSESS;
+  AffectToCharacter( victim, af );
 
   sprintf(buf, "You have possessed %s!\r\n", victim->ShortDescr.c_str());
 

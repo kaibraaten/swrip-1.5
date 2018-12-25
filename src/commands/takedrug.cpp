@@ -5,13 +5,137 @@
 #include "pcdata.hpp"
 #include "object.hpp"
 
+static bool HasTakenOverdose(const Character *ch, int drug)
+{
+  return ch->PCData->DrugLevel[drug] >= 255
+    || ch->PCData->DrugLevel[drug] > ch->PCData->Addiction[drug] + 100;
+}
+
+static void ApplyOverdose(Character *ch, int drug)
+{
+  ch->MentalState = urange( 20, ch->MentalState + 5, 100 );
+  std::shared_ptr<Affect> af = std::make_shared<Affect>();
+  af->Type      = gsn_poison;
+  af->Location  = APPLY_INT;
+  af->Modifier  = -5;
+  af->Duration  = ch->PCData->DrugLevel[drug];
+  af->AffectedBy = AFF_POISON;
+  AffectToCharacter( ch, af );
+  ch->HitPoints.Current = 1;
+}
+
+static void ApplyLumni(Character *ch, int spiceGrade)
+{
+  int sn = LookupSkill("sanctuary");
+
+  if ( sn < MAX_SKILL && !IsAffectedBy( ch, AFF_SANCTUARY ) )
+    {
+      std::shared_ptr<Affect> af = std::make_shared<Affect>();
+      af->Type      = sn;
+      af->Location  = APPLY_NONE;
+      af->Modifier  = 0;
+      af->Duration  = urange( 1, ch->PCData->DrugLevel[SPICE_LUMNI]
+                              - ch->PCData->Addiction[SPICE_LUMNI],
+                              spiceGrade );
+      af->AffectedBy = AFF_SANCTUARY;
+      AffectToCharacter( ch, af );
+    }
+}
+
+static void ApplyGlitterstim(Character *ch, int spiceGrade)
+{
+  int sn = LookupSkill("true sight");
+
+  if ( sn < MAX_SKILL && !IsAffectedBy( ch, AFF_TRUESIGHT ) )
+    {
+      std::shared_ptr<Affect> af = std::make_shared<Affect>();
+      af->Type      = sn;
+      af->Location  = APPLY_AC;
+      af->Modifier  = -10;
+      af->Duration  = urange( 1, ch->PCData->DrugLevel[SPICE_GLITTERSTIM]
+                              - ch->PCData->Addiction[SPICE_GLITTERSTIM],
+                              spiceGrade );
+      af->AffectedBy = AFF_TRUESIGHT;
+      AffectToCharacter( ch, af );
+    }
+}
+
+static void ApplyCarsanum(Character *ch, int spiceGrade)
+{
+  int sn = LookupSkill("heightened awareness");
+
+  if ( sn < MAX_SKILL && !IsAffectedBy( ch, AFF_SANCTUARY ) )
+    {
+      std::shared_ptr<Affect> af = std::make_shared<Affect>();
+      af->Type      = sn;
+      af->Location  = APPLY_NONE;
+      af->Modifier  = 0;
+      af->Duration  = urange( 1, ch->PCData->DrugLevel[SPICE_CARSANUM]
+                              - ch->PCData->Addiction[SPICE_CARSANUM],
+                              spiceGrade );
+      af->AffectedBy = AFF_DETECT_HIDDEN;
+      AffectToCharacter( ch, af );
+    }
+}
+
+static void ApplyRyll(Character *ch, int spiceGrade)
+{
+  std::shared_ptr<Affect> af = std::make_shared<Affect>();
+  af->Type      = -1;
+  af->Location  = APPLY_CON;
+  af->Modifier  = 4;
+  af->Duration  = urange( 1, 2 * (ch->PCData->DrugLevel[SPICE_RYLL]
+                                  - ch->PCData->Addiction[SPICE_RYLL]),
+                          2 * spiceGrade );
+  af->AffectedBy = AFF_NONE;
+  AffectToCharacter( ch, af );
+
+  af = std::make_shared<Affect>();
+  af->Type      = -1;
+  af->Location  = APPLY_IMMUNE;
+  af->Modifier  = RIS_POISON;
+  af->Duration  = urange( 1, 2 * (ch->PCData->DrugLevel[SPICE_RYLL]
+                                  - ch->PCData->Addiction[SPICE_RYLL]),
+                          2 * spiceGrade );
+  af->AffectedBy = AFF_NONE;
+  AffectToCharacter( ch, af );
+
+  af = std::make_shared<Affect>();
+  af->Type      = -1;
+  af->Location  = APPLY_HIT;
+  af->Modifier  = 10;
+  af->Duration = urange( 1, 2 * (ch->PCData->DrugLevel[SPICE_RYLL]
+                                 - ch->PCData->Addiction[SPICE_RYLL]),
+                         2 * spiceGrade );
+  af->AffectedBy = AFF_NONE;
+  AffectToCharacter( ch, af );
+}
+
+static void ApplyAndris(Character *ch, int spiceGrade)
+{
+  std::shared_ptr<Affect> af = std::make_shared<Affect>();
+  af->Type      = -1;
+  af->Location  = APPLY_PARRY;
+  af->Modifier  = 50;
+  af->Duration = urange( 1, 2 * (ch->PCData->DrugLevel[SPICE_ANDRIS]
+                                 - ch->PCData->Addiction[SPICE_ANDRIS]),
+                        2 * spiceGrade );
+  af->AffectedBy = AFF_NONE;
+  AffectToCharacter( ch, af );
+
+  af = std::make_shared<Affect>();
+  af->Type      = -1;
+  af->Location  = APPLY_DEX;
+  af->Modifier  = 2;
+  af->Duration = urange( 1, 2 * (ch->PCData->DrugLevel[SPICE_ANDRIS]
+                                 - ch->PCData->Addiction[SPICE_ANDRIS]),
+                        2 * spiceGrade );
+  af->AffectedBy = AFF_NONE;
+  AffectToCharacter( ch, af );
+}
+
 void do_takedrug( Character *ch, std::string argument )
 {
-  Object *obj = NULL;
-  Affect af;
-  int drug = 0;
-  int sn = 0;
-
   if ( argument.empty() )
     {
       ch->Echo("Use what?\r\n");
@@ -24,9 +148,13 @@ void do_takedrug( Character *ch, std::string argument )
       return;
     }
 
-  if ( (obj = FindObject(ch, argument, true)) == NULL )
-    return;
-
+  Object *obj = FindObject(ch, argument, true);
+  
+  if ( obj == nullptr )
+    {
+      return;
+    }
+  
   if ( obj->ItemType == ITEM_DEVICE )
     {
       ch->Echo("Try holding it first.\r\n");
@@ -70,109 +198,39 @@ void do_takedrug( Character *ch, std::string argument )
           return;
         }
 
-      drug = obj->Value[OVAL_SPICE_TYPE];
+      int drug = obj->Value[OVAL_SPICE_TYPE];
       SetWaitState( ch, PULSE_PER_SECOND/4 );
       GainCondition( ch, COND_THIRST, 1 );
       ch->PCData->DrugLevel[drug] = umin(ch->PCData->DrugLevel[drug] + obj->Value[OVAL_SPICE_GRADE] , 255);
 
-      if ( ch->PCData->DrugLevel[drug] >=255
-	   || ch->PCData->DrugLevel[drug] > ( ch->PCData->Addiction[drug]+100 ) )
+      if ( HasTakenOverdose(ch, drug) )
         {
           Act( AT_POISON, "$n sputters and gags.", ch, NULL, NULL, TO_ROOM );
           Act( AT_POISON, "You feel sick. You may have taken too much.", ch, NULL, NULL, TO_CHAR );
-          ch->MentalState = urange( 20, ch->MentalState + 5, 100 );
-          af.Type      = gsn_poison;
-          af.Location  = APPLY_INT;
-          af.Modifier  = -5;
-          af.Duration  = ch->PCData->DrugLevel[drug];
-          af.AffectedBy = AFF_POISON;
-          AffectToCharacter( ch, &af );
-          ch->HitPoints.Current = 1;
+          ApplyOverdose(ch, drug);
         }
 
       switch (drug)
         {
         default:
         case SPICE_GLITTERSTIM:
-          sn=LookupSkill("true sight");
-
-          if ( sn < MAX_SKILL && !IsAffectedBy( ch, AFF_TRUESIGHT ) )
-            {
-              af.Type      = sn;
-              af.Location  = APPLY_AC;
-              af.Modifier  = -10;
-              af.Duration  = urange( 1, ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug] ,obj->Value[1] );
-              af.AffectedBy = AFF_TRUESIGHT;
-              AffectToCharacter( ch, &af );
-            }
+          ApplyGlitterstim(ch, obj->Value[OVAL_SPICE_GRADE]);
           break;
 
         case SPICE_CARSANUM:
-          sn=LookupSkill("heightened awareness");
-
-          if ( sn < MAX_SKILL && !IsAffectedBy( ch, AFF_SANCTUARY ) )
-            {
-              af.Type      = sn;
-              af.Location  = APPLY_NONE;
-              af.Modifier  = 0;
-              af.Duration  = urange( 1, ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug] ,obj->Value[1] );
-              af.AffectedBy = AFF_DETECT_HIDDEN;
-              AffectToCharacter( ch, &af );
-            }
+          ApplyCarsanum(ch, obj->Value[OVAL_SPICE_GRADE]);
           break;
 
 	case SPICE_LUMNI:
-          sn=LookupSkill("sanctuary");
-
-          if ( sn < MAX_SKILL && !IsAffectedBy( ch, AFF_SANCTUARY ) )
-            {
-              af.Type      = sn;
-              af.Location  = APPLY_NONE;
-              af.Modifier  = 0;
-              af.Duration  = urange( 1, ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug] ,obj->Value[1] );
-              af.AffectedBy = AFF_SANCTUARY;
-              AffectToCharacter( ch, &af );
-            }
+          ApplyLumni(ch, obj->Value[OVAL_SPICE_GRADE]);
           break;
 
         case SPICE_RYLL:
-          af.Type      = -1;
-          af.Location  = APPLY_CON;
-          af.Modifier  = 4;
-          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->Value[1] );
-          af.AffectedBy = AFF_NONE;
-          AffectToCharacter( ch, &af );
-
-          af.Type      = -1;
-          af.Location  = APPLY_IMMUNE;
-          af.Modifier  = RIS_POISON;
-          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->Value[1] );
-          af.AffectedBy = AFF_NONE;
-          AffectToCharacter( ch, &af );
-
-          af.Type      = -1;
-          af.Location  = APPLY_HIT;
-          af.Modifier  = 10;
-          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->Value[1] );
-          af.AffectedBy = AFF_NONE;
-          AffectToCharacter( ch, &af );
+          ApplyRyll(ch, obj->Value[OVAL_SPICE_GRADE]);
           break;
 
         case SPICE_ANDRIS:
-          af.Type      = -1;
-          af.Location  = APPLY_PARRY;
-          af.Modifier  = 50;
-          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->Value[1] );
-          af.AffectedBy = AFF_NONE;
-	  AffectToCharacter( ch, &af );
-
-          af.Type      = -1;
-          af.Location  = APPLY_DEX;
-          af.Modifier  = 2;
-          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->Value[1] );
-          af.AffectedBy = AFF_NONE;
-          AffectToCharacter( ch, &af );
-
+          ApplyAndris(ch, obj->Value[OVAL_SPICE_GRADE]);
           break;
         }
     }

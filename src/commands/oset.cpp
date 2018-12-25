@@ -625,7 +625,7 @@ void do_oset( Character *ch, std::string argument )
           value = ToLong( arg3 );
         }
 
-      Affect *paf = new Affect();
+      std::shared_ptr<Affect> paf = std::make_shared<Affect>();
       paf->Type         = -1;
       paf->Duration             = -1;
       paf->Location             = loc;
@@ -665,12 +665,11 @@ void do_oset( Character *ch, std::string argument )
         {
           ProtoObject *pObjIndex = obj->Prototype;
 
-          for(Affect *paf : pObjIndex->Affects())
+          for(auto paf : pObjIndex->Affects())
             {
               if ( ++count == loc )
                 {
                   pObjIndex->Remove(paf);
-                  delete paf;
                   ch->Echo("Removed.\r\n");
                   --top_affect;
                   return;
@@ -682,12 +681,11 @@ void do_oset( Character *ch, std::string argument )
         }
       else
         {
-          for(Affect *paf : obj->Affects())
+          for(auto paf : obj->Affects())
             {
               if ( ++count == loc )
                 {
                   obj->Remove(paf);
-                  delete paf;
                   ch->Echo("Removed.\r\n");
                   --top_affect;
                   return;

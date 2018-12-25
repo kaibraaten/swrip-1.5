@@ -19,9 +19,9 @@ public:
   void Add(std::shared_ptr<ExtraDescription> extraDescription);
   void Remove(std::shared_ptr<ExtraDescription> extraDescription);
 
-  const std::list<Affect*> &Affects() const;
-  void Add(Affect *affect);
-  void Remove(Affect *affect);
+  const std::list<std::shared_ptr<Affect>> &Affects() const;
+  void Add(std::shared_ptr<Affect> affect);
+  void Remove(std::shared_ptr<Affect> affect);
   
   ProtoObject   *Next = nullptr;
   ProtoObject   *NextSort = nullptr;

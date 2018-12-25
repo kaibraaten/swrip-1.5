@@ -721,7 +721,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
 
           if ( letter == 'A' )
             {
-              Affect *paf = new Affect();
+              std::shared_ptr<Affect> paf = std::make_shared<Affect>();
 
               paf->Type         = -1;
               paf->Duration             = -1;
@@ -1716,12 +1716,11 @@ void CloseArea( Area *pArea )
               oid->Remove(eed);
             }
 
-          std::list<Affect*> affects(oid->Affects());
+          auto affects(oid->Affects());
 
-          for(Affect *paf : affects)
+          for(auto paf : affects)
             {
               oid->Remove(paf);
-              delete paf;
             }
 
           auto objProgs(oid->mprog.MudProgs());

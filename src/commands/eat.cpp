@@ -89,8 +89,6 @@ void do_eat( Character *ch, std::string argument )
             ||   (foodcond < 4 && GetRandomNumberFromRange( 0, foodcond + 1 ) == 0) )
         {
           /* The food was poisoned! */
-          Affect af;
-
           if ( obj->Value[OVAL_FOOD_POISON] != 0 )
             {
               Act( AT_POISON, "$n chokes and gags.", ch, NULL, NULL, TO_ROOM );
@@ -104,12 +102,13 @@ void do_eat( Character *ch, std::string argument )
               ch->MentalState = urange( 15, ch->MentalState + 5, 100 );
             }
 
-          af.Type       = gsn_poison;
-          af.Duration   = 2 * obj->Value[OVAL_FOOD_SATISFACTION] * (obj->Value[OVAL_FOOD_POISON] > 0 ? obj->Value[OVAL_FOOD_POISON] : 1);
-          af.Location   = APPLY_NONE;
-          af.Modifier   = 0;
-          af.AffectedBy = AFF_POISON;
-          JoinAffect( ch, &af );
+          std::shared_ptr<Affect> af = std::make_shared<Affect>();
+          af->Type       = gsn_poison;
+          af->Duration   = 2 * obj->Value[OVAL_FOOD_SATISFACTION] * (obj->Value[OVAL_FOOD_POISON] > 0 ? obj->Value[OVAL_FOOD_POISON] : 1);
+          af->Location   = APPLY_NONE;
+          af->Modifier   = 0;
+          af->AffectedBy = AFF_POISON;
+          JoinAffect( ch, af );
         }
       break;
 

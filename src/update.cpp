@@ -585,13 +585,13 @@ static void AffectCharacterWithGlitterstim(Character *ch, int drug)
 {
   if ( !IsAffectedBy( ch, AFF_BLIND ) )
     {
-      Affect af;
-      af.Type       = gsn_blindness;
-      af.Location   = APPLY_AC;
-      af.Modifier   = 10;
-      af.Duration   = ch->PCData->Addiction[drug];
-      af.AffectedBy = AFF_BLIND;
-      AffectToCharacter( ch, &af );
+      std::shared_ptr<Affect> af = std::make_shared<Affect>();
+      af->Type       = gsn_blindness;
+      af->Location   = APPLY_AC;
+      af->Modifier   = 10;
+      af->Duration   = ch->PCData->Addiction[drug];
+      af->AffectedBy = AFF_BLIND;
+      AffectToCharacter( ch, af );
     }
 }
 
@@ -599,13 +599,13 @@ static void AffectCharacterWithCarsanum(Character *ch, int drug)
 {
   if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
     {
-      Affect af;
-      af.Type       = -1;
-      af.Location   = APPLY_DAMROLL;
-      af.Modifier   = -10;
-      af.Duration   = ch->PCData->Addiction[drug];
-      af.AffectedBy = AFF_WEAKEN;
-      AffectToCharacter( ch, &af );
+      std::shared_ptr<Affect> af = std::make_shared<Affect>();
+      af->Type       = -1;
+      af->Location   = APPLY_DAMROLL;
+      af->Modifier   = -10;
+      af->Duration   = ch->PCData->Addiction[drug];
+      af->AffectedBy = AFF_WEAKEN;
+      AffectToCharacter( ch, af );
     }
 }
 
@@ -613,13 +613,13 @@ static void AffectCharacterWithRyll(Character *ch, int drug)
 {
   if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
     {
-      Affect af;
-      af.Type       = -1;
-      af.Location   = APPLY_DEX;
-      af.Modifier   = -5;
-      af.Duration   = ch->PCData->Addiction[drug];
-      af.AffectedBy = AFF_WEAKEN;
-      AffectToCharacter( ch, &af );
+      std::shared_ptr<Affect> af = std::make_shared<Affect>();
+      af->Type       = -1;
+      af->Location   = APPLY_DEX;
+      af->Modifier   = -5;
+      af->Duration   = ch->PCData->Addiction[drug];
+      af->AffectedBy = AFF_WEAKEN;
+      AffectToCharacter( ch, af );
     }
 }
 
@@ -627,13 +627,13 @@ static void AffectCharacterWithAndris(Character *ch, int drug)
 {
   if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
     {
-      Affect af;
-      af.Type       = -1;
-      af.Location   = APPLY_CON;
-      af.Modifier   = -5;
-      af.Duration   = ch->PCData->Addiction[drug];
-      af.AffectedBy = AFF_WEAKEN;
-      AffectToCharacter( ch, &af );
+      std::shared_ptr<Affect> af = std::make_shared<Affect>();
+      af->Type       = -1;
+      af->Location   = APPLY_CON;
+      af->Modifier   = -5;
+      af->Duration   = ch->PCData->Addiction[drug];
+      af->AffectedBy = AFF_WEAKEN;
+      AffectToCharacter( ch, af );
     }
 }
 
@@ -650,8 +650,6 @@ static void GainAddiction( Character *ch )
 
       if ( ch->PCData->Addiction[drug] > ch->PCData->DrugLevel[drug]+150 )
         {
-          Affect af;
-
           switch (ch->PCData->Addiction[drug])
             {
             default:

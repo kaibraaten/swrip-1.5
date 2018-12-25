@@ -106,11 +106,11 @@ void do_ostat( Character *ch, std::string arg )
       ch->Echo("%s'.\r\n", output.c_str());
     }
 
-  for ( const Affect *paf : obj->Affects() )
+  for ( auto paf : obj->Affects() )
     ch->Echo("Affects %s by %d. (extra)\r\n",
              GetAffectLocationName( paf->Location ), paf->Modifier );
 
-  for ( const Affect *paf : obj->Prototype->Affects() )
+  for ( auto paf : obj->Prototype->Affects() )
     ch->Echo("Affects %s by %d.\r\n",
                GetAffectLocationName( paf->Location ), paf->Modifier );
 }

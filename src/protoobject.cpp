@@ -3,7 +3,7 @@
 struct ProtoObject::Impl
 {
   std::list<std::shared_ptr<ExtraDescription>> ExtraDescriptions;
-  std::list<Affect*> Affects;
+  std::list<std::shared_ptr<Affect>> Affects;
 };
 
 ProtoObject::ProtoObject(vnum_t vnum)
@@ -33,17 +33,17 @@ const std::list<std::shared_ptr<ExtraDescription>> &ProtoObject::ExtraDescriptio
   return pImpl->ExtraDescriptions;
 }
 
-const std::list<Affect*> &ProtoObject::Affects() const
+const std::list<std::shared_ptr<Affect>> &ProtoObject::Affects() const
 {
   return pImpl->Affects;
 }
 
-void ProtoObject::Add(Affect *affect)
+void ProtoObject::Add(std::shared_ptr<Affect> affect)
 {
   pImpl->Affects.push_back(affect);
 }
 
-void ProtoObject::Remove(Affect *affect)
+void ProtoObject::Remove(std::shared_ptr<Affect> affect)
 {
   pImpl->Affects.remove(affect);
 }

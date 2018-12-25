@@ -7,9 +7,9 @@
 ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
-  Affect af;
-  int charm_chance;
-  char buf[MAX_STRING_LENGTH];
+  std::shared_ptr<Affect> af = std::make_shared<Affect>();
+  int charm_chance = 0;
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   Skill *skill = GetSkill(sn);
 
   if ( victim == ch )
@@ -49,12 +49,12 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
     StopFollowing( victim );
 
   StartFollowing( victim, ch );
-  af.Type      = sn;
-  af.Duration  = (NumberFuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;
-  af.Location  = 0;
-  af.Modifier  = 0;
-  af.AffectedBy = AFF_CHARM;
-  AffectToCharacter( victim, &af );
+  af->Type      = sn;
+  af->Duration  = (NumberFuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;
+  af->Location  = 0;
+  af->Modifier  = 0;
+  af->AffectedBy = AFF_CHARM;
+  AffectToCharacter( victim, af );
   Act( AT_MAGIC, "Isn't $n just so nice?", ch, NULL, victim, TO_VICT );
   Act( AT_MAGIC, "$N's eyes glaze over...", ch, NULL, victim, TO_ROOM );
 

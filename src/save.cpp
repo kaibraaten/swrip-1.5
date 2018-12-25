@@ -599,7 +599,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
         }
     }
 
-  for(const Affect *paf : ch->Affects())
+  for(auto paf : ch->Affects())
     {
       if ( paf->Type >= 0 && (skill=GetSkill(paf->Type)) == NULL )
 	{
@@ -854,7 +854,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
       break;
     }
 
-  for ( const Affect *paf : obj->Affects() )
+  for ( auto paf : obj->Affects() )
     {
       /*
        * Save extra object affects                              -Thoric
@@ -929,7 +929,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
         case 'A':
           if ( !StrCmp( word, "Affect" ) || !StrCmp( word, "AffectData" ) )
             {
-              Affect *paf = new Affect();
+              std::shared_ptr<Affect> paf = std::make_shared<Affect>();
               int pafmod = 0;
 
               if ( !StrCmp( word, "Affect" ) )
@@ -1236,9 +1236,8 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
           while( !obj->Affects().empty() )
             {
-              Affect *paf = obj->Affects().front();
+              std::shared_ptr<Affect> paf = obj->Affects().front();
               obj->Remove(paf);
-              delete paf;
             }
 
           delete obj;

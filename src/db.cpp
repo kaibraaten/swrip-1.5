@@ -1399,9 +1399,9 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
           top_ed++;
         }
 
-      for(const Affect *cpaf : cObjIndex->Affects())
+      for(auto cpaf : cObjIndex->Affects())
         {
-          Affect *paf = new Affect();
+          std::shared_ptr<Affect> paf = std::make_shared<Affect>();
           paf->Type         = cpaf->Type;
           paf->Duration     = cpaf->Duration;
           paf->Location     = cpaf->Location;
