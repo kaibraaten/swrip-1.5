@@ -112,29 +112,17 @@ bool IsFearing( const Character *ch, const Character *victim )
 
 void StopHunting( Character *ch )
 {
-  if ( ch->HHF.Hunting )
-    {
-      delete ch->HHF.Hunting;
-      ch->HHF.Hunting = NULL;
-    }
+  ch->HHF.Hunting.reset();
 }
 
 void StopHating( Character *ch )
 {
-  if ( ch->HHF.Hating )
-    {
-      delete ch->HHF.Hating;
-      ch->HHF.Hating = NULL;
-    }
+  ch->HHF.Hating.reset();
 }
 
 void StopFearing( Character *ch )
 {
-  if ( ch->HHF.Fearing )
-    {
-      delete ch->HHF.Fearing;
-      ch->HHF.Fearing = NULL;
-    }
+  ch->HHF.Fearing.reset();
 }
 
 void StartHunting( Character *ch, Character *victim )
@@ -142,7 +130,7 @@ void StartHunting( Character *ch, Character *victim )
   if ( ch->HHF.Hunting )
     StopHunting( ch );
 
-  ch->HHF.Hunting = new HuntHateFear();
+  ch->HHF.Hunting = std::make_unique<HuntHateFear>();
   ch->HHF.Hunting->Name = victim->Name;
   ch->HHF.Hunting->Who  = victim;
 }
@@ -152,7 +140,7 @@ void StartHating( Character *ch, Character *victim )
   if ( ch->HHF.Hating )
     StopHating( ch );
 
-  ch->HHF.Hating = new HuntHateFear();
+  ch->HHF.Hating = std::make_unique<HuntHateFear>();
   ch->HHF.Hating->Name = victim->Name;
   ch->HHF.Hating->Who  = victim;
 }
@@ -162,7 +150,7 @@ void StartFearing( Character *ch, Character *victim )
   if ( ch->HHF.Fearing )
     StopFearing( ch );
 
-  ch->HHF.Fearing = new HuntHateFear();
+  ch->HHF.Fearing = std::make_unique<HuntHateFear>();
   ch->HHF.Fearing->Name = victim->Name;
   ch->HHF.Fearing->Who  = victim;
 }

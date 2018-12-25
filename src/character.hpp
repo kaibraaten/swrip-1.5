@@ -192,9 +192,9 @@ public:
 
   struct
   {
-    HuntHateFear *Hunting = NULL;
-    HuntHateFear *Fearing = NULL;
-    HuntHateFear *Hating = NULL;
+    std::unique_ptr<HuntHateFear> Hunting;
+    std::unique_ptr<HuntHateFear> Fearing;
+    std::unique_ptr<HuntHateFear> Hating;
   } HHF;
 
   struct

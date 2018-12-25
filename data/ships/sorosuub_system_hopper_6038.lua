@@ -1,113 +1,117 @@
 -- Sorosuub System Hopper
--- Last saved Tuesday 25-Dec-2018 20:00:36
+-- Last saved Tuesday 25-Dec-2018 20:06:45
 
 ShipEntry
 {
-   Position = 
-   {
-      X = 238, 
-      Y = 288, 
-      Z = 213, 
-   }, 
-   State = 0, 
+   Alarm = false, 
    Class = "Starfighter", 
-   Thrusters = 
+   State = 0, 
+   Rooms = 
    {
-      Maneuver = 35, 
-      Energy = 
-      {
-         Current = 2000, 
-         Max = 2000, 
-      }, 
-      Speed = 
-      {
-         Current = 0, 
-         Max = 65, 
-      }, 
+      Hangar = 0, 
+      Entrance = 32163, 
+      Last = 32163, 
+      Gunseat = 32163, 
+      Pilotseat = 32163, 
+      Coseat = 32163, 
+      First = 32163, 
+      Engine = 0, 
+      Cockpit = 32163, 
+      Navseat = 32163, 
    }, 
    Name = "Sorosuub System Hopper", 
-   Shipyard = 203, 
-   Home = "Kinyen", 
+   Description = "", 
+   Location = 203, 
+   CoPilot = "", 
+   Pilot = "", 
+   LastDock = 203, 
+   Instruments = 
+   {
+      Comm = 0, 
+      Sensor = 0, 
+      AstroArray = 0, 
+   }, 
+   Owner = "public", 
    WeaponSystems = 
    {
+      Laser = 
+      {
+         State = 0, 
+         Count = 0, 
+      }, 
       Tube = 
       {
          Rockets = 
          {
-            Current = 0, 
             Max = 0, 
+            Current = 0, 
          }, 
          Torpedoes = 
          {
-            Current = 0, 
             Max = 0, 
+            Current = 0, 
          }, 
          Missiles = 
          {
-            Current = 0, 
             Max = 0, 
+            Current = 0, 
          }, 
          State = 0, 
-      }, 
-      IonCannon = 
-      {
-         State = 0, 
-         Count = 0, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [2] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [3] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [4] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [5] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [6] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [7] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [8] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [9] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [0] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
       }, 
-      Laser = 
+      IonCannon = 
       {
          State = 0, 
          Count = 0, 
@@ -118,56 +122,52 @@ ShipEntry
          State = 1, 
       }, 
    }, 
-   Owner = "public", 
-   Instruments = 
-   {
-      AstroArray = 0, 
-      Comm = 0, 
-      Sensor = 0, 
-   }, 
-   Rooms = 
-   {
-      Coseat = 32163, 
-      Engine = 0, 
-      Pilotseat = 32163, 
-      Last = 32163, 
-      Cockpit = 32163, 
-      First = 32163, 
-      Gunseat = 32163, 
-      Hangar = 0, 
-      Entrance = 32163, 
-      Navseat = 32163, 
-   }, 
-   LastDock = 203, 
-   Defenses = 
-   {
-      Hull = 
-      {
-         Current = 100, 
-         Max = 100, 
-      }, 
-      Chaff = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
-      Shield = 
-      {
-         Current = 0, 
-         Max = 10, 
-      }, 
-   }, 
-   DockingPorts = 0, 
-   CoPilot = "", 
-   Type = "Civilian", 
    Hyperdrive = 
    {
       Speed = 100, 
    }, 
-   Pilot = "", 
-   Alarm = false, 
+   DockingPorts = 0, 
+   Home = "Kinyen", 
    PersonalName = "6038", 
-   Description = "", 
+   Position = 
+   {
+      Y = 288, 
+      Z = 213, 
+      X = 238, 
+   }, 
+   Thrusters = 
+   {
+      Speed = 
+      {
+         Max = 65, 
+         Current = 0, 
+      }, 
+      Maneuver = 35, 
+      Energy = 
+      {
+         Max = 2000, 
+         Current = 2000, 
+      }, 
+   }, 
+   Shipyard = 203, 
    Guard = false, 
-   Location = 203, 
+   Defenses = 
+   {
+      Hull = 
+      {
+         Max = 100, 
+         Current = 100, 
+      }, 
+      Chaff = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+      Shield = 
+      {
+         Max = 10, 
+         Current = 0, 
+      }, 
+   }, 
+   Type = "Civilian", 
 }

@@ -1,51 +1,44 @@
 -- Sorosuub System Hopper
--- Last saved Tuesday 25-Dec-2018 20:00:36
+-- Last saved Tuesday 25-Dec-2018 20:06:45
 
 ShipEntry
 {
-   Owner = "public", 
-   LastDock = 203, 
-   PersonalName = "6033", 
-   Position = 
+   Alarm = false, 
+   Class = "Starfighter", 
+   State = 0, 
+   Rooms = 
    {
-      Y = 907, 
-      Z = 2301203, 
-      X = 4299047, 
+      Hangar = 0, 
+      Entrance = 32158, 
+      Last = 32158, 
+      Gunseat = 32158, 
+      Pilotseat = 32158, 
+      Coseat = 32158, 
+      First = 32158, 
+      Engine = 0, 
+      Cockpit = 32158, 
+      Navseat = 32158, 
    }, 
+   Name = "Sorosuub System Hopper", 
+   Description = "", 
+   Location = 203, 
+   CoPilot = "", 
+   Pilot = "", 
+   LastDock = 203, 
    Instruments = 
    {
-      AstroArray = 0, 
       Comm = 0, 
       Sensor = 0, 
+      AstroArray = 0, 
    }, 
-   CoPilot = "", 
-   Thrusters = 
-   {
-      Maneuver = 35, 
-      Speed = 
-      {
-         Max = 65, 
-         Current = 0, 
-      }, 
-      Energy = 
-      {
-         Max = 2000, 
-         Current = 2000, 
-      }, 
-   }, 
-   Shipyard = 203, 
-   Name = "Sorosuub System Hopper", 
-   Class = "Starfighter", 
-   DockingPorts = 0, 
-   Hyperdrive = 
-   {
-      Speed = 100, 
-   }, 
-   Type = "Civilian", 
-   Pilot = "", 
-   Guard = false, 
+   Owner = "public", 
    WeaponSystems = 
    {
+      Laser = 
+      {
+         State = 0, 
+         Count = 0, 
+      }, 
       Tube = 
       {
          Rockets = 
@@ -53,7 +46,6 @@ ShipEntry
             Max = 0, 
             Current = 0, 
          }, 
-         State = 0, 
          Torpedoes = 
          {
             Max = 0, 
@@ -64,15 +56,6 @@ ShipEntry
             Max = 0, 
             Current = 0, 
          }, 
-      }, 
-      IonCannon = 
-      {
-         Count = 0, 
-         State = 0, 
-      }, 
-      Laser = 
-      {
-         Count = 0, 
          State = 0, 
       }, 
       Turrets = 
@@ -128,12 +111,46 @@ ShipEntry
             State = 0, 
          }, 
       }, 
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 0, 
+      }, 
       TractorBeam = 
       {
          Strength = 0, 
          State = 1, 
       }, 
    }, 
+   Hyperdrive = 
+   {
+      Speed = 100, 
+   }, 
+   DockingPorts = 0, 
+   Home = "Corellia", 
+   PersonalName = "6033", 
+   Position = 
+   {
+      Y = 907, 
+      Z = 2301203, 
+      X = 4299047, 
+   }, 
+   Thrusters = 
+   {
+      Speed = 
+      {
+         Max = 65, 
+         Current = 0, 
+      }, 
+      Maneuver = 35, 
+      Energy = 
+      {
+         Max = 2000, 
+         Current = 2000, 
+      }, 
+   }, 
+   Shipyard = 203, 
+   Guard = false, 
    Defenses = 
    {
       Hull = 
@@ -152,22 +169,5 @@ ShipEntry
          Current = 0, 
       }, 
    }, 
-   Home = "Corellia", 
-   Rooms = 
-   {
-      First = 32158, 
-      Engine = 0, 
-      Cockpit = 32158, 
-      Hangar = 0, 
-      Entrance = 32158, 
-      Pilotseat = 32158, 
-      Gunseat = 32158, 
-      Last = 32158, 
-      Navseat = 32158, 
-      Coseat = 32158, 
-   }, 
-   Location = 203, 
-   Description = "", 
-   State = 0, 
-   Alarm = false, 
+   Type = "Civilian", 
 }
