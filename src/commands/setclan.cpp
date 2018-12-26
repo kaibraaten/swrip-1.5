@@ -10,7 +10,7 @@ struct UpdateOwnerNameData
   std::string NewName;
 };
 
-static bool UpdateOwnerName(Ship *ship, void *userData);
+static bool UpdateOwnerName(std::shared_ptr<Ship> ship, void *userData);
 
 void do_setclan( Character *ch, std::string argument )
 {
@@ -159,7 +159,7 @@ void do_setclan( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      struct UpdateOwnerNameData data;
+      UpdateOwnerNameData data;
 
       data.OldName = clan->Name;
       data.NewName = argument;
@@ -192,9 +192,9 @@ void do_setclan( Character *ch, std::string argument )
   do_setclan( ch, "" );
 }
 
-static bool UpdateOwnerName(Ship *ship, void *userData)
+static bool UpdateOwnerName(std::shared_ptr<Ship> ship, void *userData)
 {
-  struct UpdateOwnerNameData *data = (struct UpdateOwnerNameData*)userData;
+  UpdateOwnerNameData *data = (UpdateOwnerNameData*)userData;
 
   if( !StrCmp( ship->Owner, data->OldName ) )
     {

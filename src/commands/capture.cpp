@@ -14,7 +14,7 @@ struct UserData
   bool PlanetIsProtected = false;
 };
 
-static bool CheckIfProtectingPlanet(Ship *ship, void *userData);
+static bool CheckIfProtectingPlanet(std::shared_ptr<Ship> ship, void *userData);
 
 void do_capture( Character *ch , std::string argument )
 {
@@ -105,7 +105,7 @@ void do_capture( Character *ch , std::string argument )
   Planets->Save(planet);
 }
 
-static bool CheckIfProtectingPlanet(Ship *ship, void *userData)
+static bool CheckIfProtectingPlanet(std::shared_ptr<Ship> ship, void *userData)
 {
   UserData *data = (UserData*)userData;
   std::shared_ptr<Clan> sClan = GetClan(ship->Owner);

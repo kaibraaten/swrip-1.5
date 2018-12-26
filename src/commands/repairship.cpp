@@ -11,7 +11,7 @@
 void do_repairship(Character *ch, std::string argument )
 {
   int the_chance = 0, change = 0;
-  Ship *ship = NULL;
+  std::shared_ptr<Ship> ship;
 
   switch( ch->SubState )
     {

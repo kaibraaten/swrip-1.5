@@ -16,7 +16,7 @@ void do_drag( Character *ch, std::string argument )
   bool nogo = false;
   int drag_chance = 0;
   Room *fromroom = nullptr;
-  Ship *ship = nullptr;
+  std::shared_ptr<Ship> ship;
 
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );

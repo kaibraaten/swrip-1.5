@@ -6,8 +6,8 @@
 
 void do_info(Character *ch, std::string argument )
 {
-  Ship *ship = nullptr;
-  Ship *target = nullptr;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> target;
   bool fromafar = true;
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )

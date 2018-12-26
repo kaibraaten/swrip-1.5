@@ -15,7 +15,7 @@ void do_calculate_diff(Character *ch, std::string argument )
   std::string arg2;
   std::string arg3;
   int the_chance = 0, distance = 0;
-  Ship *ship = nullptr;
+  std::shared_ptr<Ship> ship;
 
   argument = OneArgument( argument , arg1);
   argument = OneArgument( argument , arg2);

@@ -22,15 +22,15 @@
 
 struct UserData
 {
-  const Character *ch;
-  const Ship *ship;
+  const Character *ch = nullptr;
+  std::shared_ptr<Ship> ship;
 };
 
 /* Locals */
 void show_char_to_char( const std::list<Character*> &list, Character *ch );
 
-static void LookThroughShipWindow(Character *ch, const Ship *ship);
-static bool ShowShipIfInVincinity(Ship *target, void *userData);
+static void LookThroughShipWindow(Character *ch, std::shared_ptr<Ship> ship);
+static bool ShowShipIfInVincinity(std::shared_ptr<Ship> target, void *userData);
 static void show_char_to_char_0( Character *victim, Character *ch );
 static void show_char_to_char_1( Character *victim, Character *ch );
 static void show_ships_to_char( const Room *room, const Character *ch );
@@ -624,7 +624,7 @@ static void show_ships_to_char( const Room *room, const Character *ch )
   const int NUMBER_OF_COLUMNS = 2;
   int column = 0;
   
-  for(const Ship *ship : room->Ships())
+  for(auto ship : room->Ships())
     {
       SetCharacterColor( AT_SHIP, ch );      
       ch ->Echo("%-35s", ship->Name.c_str() );
@@ -1041,7 +1041,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   if ( !is_auto )
     {
-      Ship *ship = GetShipFromCockpit(ch->InRoom->Vnum);
+      std::shared_ptr<Ship> ship = GetShipFromCockpit(ch->InRoom->Vnum);
 
       if ( ship )
 	{
@@ -1050,7 +1050,7 @@ static void show_no_arg( Character *ch, bool is_auto )
     }
 }
 
-static void LookThroughShipWindow(Character *ch, const Ship *ship)
+static void LookThroughShipWindow(Character *ch, std::shared_ptr<Ship> ship)
 {
   SetCharacterColor(  AT_WHITE, ch );
   ch->Echo("\r\nThrough the transparisteel windows you see:\r\n" );
@@ -1093,11 +1093,11 @@ static void LookThroughShipWindow(Character *ch, const Ship *ship)
     }
 }
 
-static bool ShowShipIfInVincinity(Ship *target, void *userData)
+static bool ShowShipIfInVincinity(std::shared_ptr<Ship> target, void *userData)
 {
-  struct UserData *data = (struct UserData*)userData;
+  const UserData *data = (UserData*)userData;
   const Character *ch = data->ch;
-  const Ship *ship = data->ship;
+  std::shared_ptr<Ship> ship = data->ship;
 
   if ( target != ship && target->Spaceobject )
     {

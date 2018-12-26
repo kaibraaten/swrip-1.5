@@ -9,10 +9,11 @@
 #include "turret.hpp"
 
 #define SHIP_DIR DATA_DIR "ships/"
-ShipRepository *Ships = nullptr;
+
+std::shared_ptr<ShipRepository> Ships;
 
 static void ExecuteShipFile( const std::string &filePath, void *userData );
-static void ReadyShipAfterLoad( Ship *ship );
+static void ReadyShipAfterLoad( std::shared_ptr<Ship> ship );
 static void PushShip( lua_State *L, const void *userData );
 
 /**********************************************
@@ -22,24 +23,24 @@ static void PushShip( lua_State *L, const void *userData );
 class LuaShipRepository : public ShipRepository
 {
 public:
-  void Save(const Ship *entity) const override;
+  void Save(std::shared_ptr<Ship> entity) const override;
   void Save() const override;
   void Load() override;
 };
 
-void LuaShipRepository::Save(const Ship *ship) const
+void LuaShipRepository::Save(std::shared_ptr<Ship> ship) const
 {
   if( ship->Class == SHIP_DEBRIS )
     {
       return;
     }
 
-  LuaSaveDataFile( GetShipFilename( ship ), PushShip, "ship", ship );
+  LuaSaveDataFile( GetShipFilename( ship ), PushShip, "ship", &ship );
 }
 
 void LuaShipRepository::Save() const
 {
-  for(Ship *ship : Entities())
+  for(auto ship : Entities())
     {
       Save(ship);
     }
@@ -47,10 +48,10 @@ void LuaShipRepository::Save() const
 
 void LuaShipRepository::Load()
 {
-  ForEachLuaFileInDir( SHIP_DIR, ExecuteShipFile, NULL );
+  ForEachLuaFileInDir( SHIP_DIR, ExecuteShipFile, nullptr );
 }
 
-static void PushInstruments( lua_State *L, const Ship *ship )
+static void PushInstruments( lua_State *L, std::shared_ptr<Ship> ship )
 {
   lua_pushstring( L, "Instruments" );
   lua_newtable( L );
@@ -62,7 +63,7 @@ static void PushInstruments( lua_State *L, const Ship *ship )
   lua_settable( L, -3 );
 }
 
-static void PushThrusters( lua_State *L, const Ship *ship )
+static void PushThrusters( lua_State *L, std::shared_ptr<Ship> ship )
 {
   lua_pushstring( L, "Thrusters" );
   lua_newtable( L );
@@ -74,7 +75,7 @@ static void PushThrusters( lua_State *L, const Ship *ship )
   lua_settable( L, -3 );
 }
 
-static void PushHyperdrive( lua_State *L, const Ship *ship )
+static void PushHyperdrive( lua_State *L, std::shared_ptr<Ship> ship )
 {
   lua_pushstring( L, "Hyperdrive" );
   lua_newtable( L );
@@ -84,7 +85,7 @@ static void PushHyperdrive( lua_State *L, const Ship *ship )
   lua_settable( L, -3 );
 }
 
-static void PushTube( lua_State *L, const Ship *ship )
+static void PushTube( lua_State *L, std::shared_ptr<Ship> ship )
 {
   lua_pushstring( L, "Tube" );
   lua_newtable( L );
@@ -97,7 +98,7 @@ static void PushTube( lua_State *L, const Ship *ship )
   lua_settable( L, -3 );
 }
 
-static void PushLaser( lua_State *L, const Ship *ship )
+static void PushLaser( lua_State *L, std::shared_ptr<Ship> ship )
 {
   lua_pushstring( L, "Laser" );
   lua_newtable( L );
@@ -106,7 +107,7 @@ static void PushLaser( lua_State *L, const Ship *ship )
   lua_settable( L, -3 );
 }
 
-static void PushIonCannon( lua_State *L, const Ship *ship )
+static void PushIonCannon( lua_State *L, std::shared_ptr<Ship> ship )
 {
   lua_pushstring( L, "IonCannon" );
   lua_newtable( L );
@@ -115,7 +116,7 @@ static void PushIonCannon( lua_State *L, const Ship *ship )
   lua_settable( L, -3 );
 }
 
-static void PushTractorBeam( lua_State *L, const Ship *ship )
+static void PushTractorBeam( lua_State *L, std::shared_ptr<Ship> ship )
 {
   lua_pushstring( L, "TractorBeam" );
   lua_newtable( L );
@@ -124,8 +125,7 @@ static void PushTractorBeam( lua_State *L, const Ship *ship )
   lua_settable( L, -3 );
 }
 
-static void PushTurrets(lua_State *L,
-                        const std::array<class Turret*, MAX_NUMBER_OF_TURRETS_IN_SHIP> &turrets)
+static void PushTurrets(lua_State *L, const std::vector<Turret*> &turrets)
 {
   lua_pushstring( L, "Turrets" );
   lua_newtable( L );
@@ -138,7 +138,7 @@ static void PushTurrets(lua_State *L,
   lua_settable( L, -3 );
 }
 
-static void PushWeaponSystems( lua_State *L, const Ship *ship )
+static void PushWeaponSystems( lua_State *L, std::shared_ptr<Ship> ship )
 {
   lua_pushstring( L, "WeaponSystems" );
   lua_newtable( L );
@@ -152,7 +152,7 @@ static void PushWeaponSystems( lua_State *L, const Ship *ship )
   lua_settable( L, -3 );
 }
 
-static void PushDefenses( lua_State *L, const Ship *ship )
+static void PushDefenses( lua_State *L, std::shared_ptr<Ship> ship )
 {
   lua_pushstring( L, "Defenses" );
   lua_newtable( L );
@@ -164,7 +164,7 @@ static void PushDefenses( lua_State *L, const Ship *ship )
   lua_settable( L, -3 );
 }
 
-static void PushRooms( lua_State *L, const Ship *ship )
+static void PushRooms( lua_State *L, std::shared_ptr<Ship> ship )
 {
   lua_pushstring( L, "Rooms" );
   lua_newtable( L );
@@ -185,7 +185,7 @@ static void PushRooms( lua_State *L, const Ship *ship )
 
 static void PushShip( lua_State *L, const void *userData )
 {
-  const Ship *ship = (const Ship*) userData;
+  std::shared_ptr<Ship> ship = *static_cast<const std::shared_ptr<Ship>*>(userData);
   lua_pushinteger( L, 1 );
   lua_newtable( L );
 
@@ -219,7 +219,7 @@ static void PushShip( lua_State *L, const void *userData )
   lua_setglobal( L, "ship" );
 }
 
-static void LoadInstruments( lua_State *L, Ship *ship )
+static void LoadInstruments( lua_State *L, std::shared_ptr<Ship> ship )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Instruments" );
@@ -234,7 +234,7 @@ static void LoadInstruments( lua_State *L, Ship *ship )
   lua_pop( L, 1 );
 }
 
-static void LoadThrusters( lua_State *L, Ship *ship )
+static void LoadThrusters( lua_State *L, std::shared_ptr<Ship> ship )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Thrusters" );
@@ -250,7 +250,7 @@ static void LoadThrusters( lua_State *L, Ship *ship )
   lua_pop( L, 1 );
 }
 
-static void LoadHyperdrive( lua_State *L, Ship *ship )
+static void LoadHyperdrive( lua_State *L, std::shared_ptr<Ship> ship )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Hyperdrive" );
@@ -263,7 +263,7 @@ static void LoadHyperdrive( lua_State *L, Ship *ship )
   lua_pop( L, 1 );
 }
 
-static void LoadTube( lua_State *L, Ship *ship )
+static void LoadTube( lua_State *L, std::shared_ptr<Ship> ship )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Tube" );
@@ -279,7 +279,7 @@ static void LoadTube( lua_State *L, Ship *ship )
   lua_pop( L, 1 );
 }
 
-static void LoadLaser( lua_State *L, Ship *ship )
+static void LoadLaser( lua_State *L, std::shared_ptr<Ship> ship )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Laser" );
@@ -293,7 +293,7 @@ static void LoadLaser( lua_State *L, Ship *ship )
   lua_pop( L, 1 );
 }
 
-static void LoadIonCannon( lua_State *L, Ship *ship )
+static void LoadIonCannon( lua_State *L, std::shared_ptr<Ship> ship )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "IonCannon" );
@@ -307,7 +307,7 @@ static void LoadIonCannon( lua_State *L, Ship *ship )
   lua_pop( L, 1 );
 }
 
-static void LoadTractorBeam( lua_State *L, Ship *ship )
+static void LoadTractorBeam( lua_State *L, std::shared_ptr<Ship> ship )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "TractorBeam" );
@@ -321,7 +321,7 @@ static void LoadTractorBeam( lua_State *L, Ship *ship )
   lua_pop( L, 1 );
 }
 
-static void LoadTurrets( lua_State *L, Ship *ship )
+static void LoadTurrets( lua_State *L, std::shared_ptr<Ship> ship )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Turrets" );
@@ -341,7 +341,7 @@ static void LoadTurrets( lua_State *L, Ship *ship )
   lua_pop( L, 1 );
 }
 
-static void LoadWeaponSystems( lua_State *L, Ship *ship )
+static void LoadWeaponSystems( lua_State *L, std::shared_ptr<Ship> ship )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "WeaponSystems" );
@@ -358,7 +358,7 @@ static void LoadWeaponSystems( lua_State *L, Ship *ship )
   lua_pop( L, 1 );
   }
 
-static void LoadDefenses( lua_State *L, Ship *ship )
+static void LoadDefenses( lua_State *L, std::shared_ptr<Ship> ship )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Defenses" );
@@ -373,7 +373,7 @@ static void LoadDefenses( lua_State *L, Ship *ship )
   lua_pop( L, 1 );
 }
 
-static void LoadRooms( lua_State *L, Ship *ship )
+static void LoadRooms( lua_State *L, std::shared_ptr<Ship> ship )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Rooms" );
@@ -397,7 +397,7 @@ static void LoadRooms( lua_State *L, Ship *ship )
 
 static int L_ShipEntry( lua_State *L )
 {
-  Ship *ship = new Ship();
+  std::shared_ptr<Ship> ship = std::make_shared<Ship>();
 
   LuaGetfieldString( L, "Name", &ship->Name );
   LuaGetfieldString( L, "PersonalName", &ship->PersonalName );
@@ -436,7 +436,7 @@ static int L_ShipEntry( lua_State *L )
   return 0;
 }
 
-static void ReadyShipAfterLoad( Ship *ship )
+static void ReadyShipAfterLoad( std::shared_ptr<Ship> ship )
 {
   std::shared_ptr<Clan> clan;
   Room *room = NULL;
@@ -612,27 +612,27 @@ static void ExecuteShipFile( const std::string &filePath, void *userData )
 
 ///////////////////////////////////////////
 
-ShipRepository *NewShipRepository()
+std::shared_ptr<ShipRepository> NewShipRepository()
 {
-  return new LuaShipRepository();
+  return std::make_shared<LuaShipRepository>();
 }
 
-std::string GetShipFilename( const Ship *ship )
+std::string GetShipFilename( std::shared_ptr<Ship> ship )
 {
-  char buffer[MAX_STRING_LENGTH];
-  char fullName[MAX_STRING_LENGTH];
+  std::string buffer;
+  std::string fullName;
 
   if( ship->PersonalName.empty()
       || !StrCmp( ship->Name, ship->PersonalName ) )
     {
-      sprintf( fullName, "%s", ship->Name.c_str() );
+      fullName = FormatString( "%s", ship->Name.c_str() );
     }
   else
     {
-      sprintf( fullName, "%s %s", ship->Name.c_str(), ship->PersonalName.c_str() );
+      fullName = FormatString( "%s %s", ship->Name.c_str(), ship->PersonalName.c_str() );
     }
 
-  sprintf( buffer, "%s%s", SHIP_DIR, ConvertToLuaFilename( fullName ).c_str() );
+  buffer = FormatString( "%s%s", SHIP_DIR, ConvertToLuaFilename( fullName ).c_str() );
 
   return buffer;
 }

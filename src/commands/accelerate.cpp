@@ -10,7 +10,7 @@ void do_accelerate( Character *ch, std::string argument )
 {
   int the_chance = 0;
   int change = 0;
-  Ship *ship = nullptr;
+  std::shared_ptr<Ship> ship;
   char buf[MAX_STRING_LENGTH] = { '\0' };
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
@@ -125,7 +125,7 @@ void do_accelerate( Character *ch, std::string argument )
       EchoToCockpit( AT_YELLOW , ship , "The ship begins to accelerate.");
       EchoToDockedShip( AT_YELLOW , ship, "The hull groans at an increase in speed." );
       sprintf( buf, "%s begins to speed up." , ship->Name.c_str() );
-      EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
+      EchoToNearbyShips( AT_ORANGE, ship, buf );
     }
 
   if ( change < ship->Thrusters.Speed.Current )
@@ -134,7 +134,7 @@ void do_accelerate( Character *ch, std::string argument )
       EchoToCockpit( AT_YELLOW , ship , "The ship begins to slow down.");
       EchoToDockedShip( AT_YELLOW , ship, "The hull groans as the ship slows." );
       sprintf( buf, "%s begins to slow down." , ship->Name.c_str() );
-      EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
+      EchoToNearbyShips( AT_ORANGE, ship, buf );
     }
 
   ship->Thrusters.Energy.Current -= abs((change-abs(ship->Thrusters.Speed.Current))/10);

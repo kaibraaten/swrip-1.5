@@ -10,8 +10,8 @@ void do_override(Character *ch, std::string argument )
   std::string arg;
   std::string arg2;
   char buf[MAX_STRING_LENGTH];
-  Ship *ship = nullptr;
-  Ship *eShip = nullptr;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> eShip;
 
   argument = OneArgument( argument, arg );
   arg2 = argument;
@@ -96,7 +96,7 @@ void do_override(Character *ch, std::string argument )
       ch->Echo("&GBays Close. Confirmed.\r\n");
       EchoToCockpit( AT_YELLOW , eShip , "Bays Open");
       sprintf( buf ,"%s's bay doors close." , eShip->Name.c_str() );
-      EchoToNearbyShips( AT_YELLOW, eShip, buf , NULL );
+      EchoToNearbyShips( AT_YELLOW, eShip, buf );
       return;
     }
 
@@ -106,7 +106,7 @@ void do_override(Character *ch, std::string argument )
       ch->Echo("&GBreaking Thrusters. Confirmed.\r\n");
       EchoToCockpit( AT_GREY , eShip , "Breaking thrusters fire and the ship stops.");
       sprintf( buf ,"%s decelerates." , eShip->Name.c_str() );
-      EchoToNearbyShips( AT_GREY, eShip, buf , NULL );
+      EchoToNearbyShips( AT_GREY, eShip, buf );
       return;
     }
 
@@ -135,7 +135,7 @@ void do_override(Character *ch, std::string argument )
           ch, NULL, argument.c_str(), TO_ROOM);
       eShip->BayOpen = true;
       sprintf( buf ,"%s's bay doors open." , eShip->Name.c_str() );
-      EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+      EchoToNearbyShips( AT_YELLOW, ship, buf );
       return;
     }
 

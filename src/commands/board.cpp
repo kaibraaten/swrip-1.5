@@ -7,7 +7,7 @@
 void do_board( Character *ch, std::string argument )
 {
   Room *toroom = nullptr;
-  Ship *ship = nullptr;
+  std::shared_ptr<Ship> ship;
   std::string name;
   std::shared_ptr<Shuttle> shuttle;
 

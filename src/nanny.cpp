@@ -578,7 +578,7 @@ static void NannyPressEnter( Descriptor *d, std::string argument )
   d->ConnectionState = CON_READ_MOTD;
 }
 
-static bool PutCharacterInCorrectShip(Ship *ship, void *userData)
+static bool PutCharacterInCorrectShip(std::shared_ptr<Ship> ship, void *userData)
 {
   Character *ch = (Character*)userData;
 

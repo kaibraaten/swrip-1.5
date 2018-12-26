@@ -1,173 +1,173 @@
 -- Imperator-class Star Destroyer
--- Last saved Tuesday 25-Dec-2018 21:16:57
+-- Last saved Wednesday 26-Dec-2018 21:15:59
 
 ShipEntry
 {
+   Position = 
+   {
+      X = 1000, 
+      Z = -1000, 
+      Y = 5001500, 
+   }, 
+   Pilot = "", 
+   DockingPorts = 0, 
+   Shipyard = 32050, 
+   Name = "Imperator-class Star Destroyer", 
    Class = "Capital Ship", 
    Description = "", 
    State = 1, 
    LastDock = 32050, 
-   Shipyard = 32050, 
-   CoPilot = "", 
-   Name = "Imperator-class Star Destroyer", 
-   Alarm = false, 
-   Rooms = 
-   {
-      Coseat = 677, 
-      Entrance = 600, 
-      Hangar = 600, 
-      Pilotseat = 675, 
-      First = 600, 
-      Last = 699, 
-      Navseat = 673, 
-      Gunseat = 674, 
-      Engine = 629, 
-      Cockpit = 699, 
-   }, 
-   Guard = true, 
-   Pilot = "", 
-   DockingPorts = 0, 
-   Instruments = 
-   {
-      Comm = 11, 
-      Sensor = 250, 
-      AstroArray = 200, 
-   }, 
+   Owner = "The Empire", 
+   Home = "Byss", 
+   PersonalName = "Dark Hand", 
+   Type = "Imperial", 
    Defenses = 
    {
+      Hull = 
+      {
+         Current = 20000, 
+         Max = 20000, 
+      }, 
       Chaff = 
       {
-         Max = 25, 
          Current = 25, 
+         Max = 25, 
       }, 
       Shield = 
       {
-         Max = 1000, 
          Current = 1000, 
+         Max = 1000, 
       }, 
-      Hull = 
-      {
-         Max = 20000, 
-         Current = 20000, 
-      }, 
+   }, 
+   Rooms = 
+   {
+      Cockpit = 699, 
+      Pilotseat = 675, 
+      Engine = 629, 
+      Entrance = 600, 
+      Hangar = 600, 
+      Gunseat = 674, 
+      Navseat = 673, 
+      Coseat = 677, 
+      Last = 699, 
+      First = 600, 
    }, 
    WeaponSystems = 
    {
-      Turrets = 
-      {
-         [1] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [2] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [3] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [4] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [5] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [6] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [7] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [8] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [9] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [0] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-      }, 
       Tube = 
       {
-         Rockets = 
-         {
-            Max = 10, 
-            Current = 10, 
-         }, 
+         State = 0, 
          Missiles = 
          {
-            Max = 50, 
             Current = 50, 
+            Max = 50, 
          }, 
          Torpedoes = 
          {
-            Max = 0, 
             Current = 0, 
+            Max = 0, 
          }, 
-         State = 0, 
+         Rockets = 
+         {
+            Current = 10, 
+            Max = 10, 
+         }, 
       }, 
       TractorBeam = 
       {
          Strength = 150, 
          State = 0, 
       }, 
-      IonCannon = 
+      Turrets = 
       {
-         State = 0, 
-         Count = 10, 
+         [1] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [2] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [3] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [4] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [5] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [6] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [7] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [8] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [9] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [0] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
       }, 
       Laser = 
       {
          State = 0, 
          Count = 0, 
       }, 
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 10, 
+      }, 
    }, 
    Hyperdrive = 
    {
       Speed = 255, 
    }, 
+   Location = 0, 
    Thrusters = 
    {
       Energy = 
       {
-         Max = 30000, 
          Current = 30000, 
-      }, 
-      Speed = 
-      {
-         Max = 85, 
-         Current = 0, 
+         Max = 30000, 
       }, 
       Maneuver = 0, 
+      Speed = 
+      {
+         Current = 0, 
+         Max = 85, 
+      }, 
    }, 
-   Location = 0, 
-   Position = 
+   Instruments = 
    {
-      Z = -1000, 
-      X = 1000, 
-      Y = 5001500, 
+      AstroArray = 200, 
+      Comm = 11, 
+      Sensor = 250, 
    }, 
-   PersonalName = "Dark Hand", 
-   Owner = "The Empire", 
-   Home = "Byss", 
-   Type = "Imperial", 
+   CoPilot = "", 
+   Guard = true, 
+   Alarm = false, 
 }

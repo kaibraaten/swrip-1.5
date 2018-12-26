@@ -12,8 +12,8 @@ void do_launch( Character *ch, std::string argument )
 {
   int the_chance = 0;
   long price = 0;
-  Ship *ship = NULL;
-  char buf[MAX_STRING_LENGTH];
+  std::shared_ptr<Ship> ship;
+  char buf[MAX_STRING_LENGTH]= {'\0'};
   Room *room = NULL;
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )

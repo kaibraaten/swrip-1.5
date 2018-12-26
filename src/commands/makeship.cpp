@@ -6,7 +6,6 @@
 
 void do_makeship( Character *ch, std::string argument )
 {
-  Ship *ship = NULL;
   std::string arg;
 
   argument = OneArgument( argument, arg );
@@ -23,7 +22,7 @@ void do_makeship( Character *ch, std::string argument )
       return;
     }
   
-  ship = new Ship();
+  std::shared_ptr<Ship> ship = std::make_shared<Ship>();
 
   ship->Name = arg;
   ship->PersonalName = argument;

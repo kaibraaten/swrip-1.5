@@ -2374,7 +2374,7 @@ void StopFighting( Character *ch, bool fBoth )
     }
 }
 
-static bool RemoveShipOwner(Ship *ship, void *userData)
+static bool RemoveShipOwner(std::shared_ptr<Ship> ship, void *userData)
 {
   const Character *victim = (Character*)userData;
 

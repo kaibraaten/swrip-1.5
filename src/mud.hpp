@@ -993,7 +993,7 @@ DECLARE_SPEC_FUN( spec_newbie_pilot );
  */
 
 /* copyover.c */
-void RecoverFromCopyover( void );
+void RecoverFromCopyover();
 
 bool IsNameAcceptable( const std::string &name );
 std::string DrunkSpeech( const std::string &argument, Character *ch );
@@ -1023,7 +1023,7 @@ void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
 void SetBExitFlag( Exit *pexit, size_t flag );
 void RemoveBExitFlag( Exit *pexit, size_t flag );
 Room *GenerateExit( Room *in_room, const Exit **pexit );
-void ClearVirtualRooms( void );
+void ClearVirtualRooms();
 Exit *FindDoor( Character *ch, const std::string &arg, bool quiet );
 Exit *GetExit( const Room *room, DirectionType dir );
 Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum );

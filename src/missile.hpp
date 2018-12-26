@@ -14,8 +14,8 @@ class Missile
 {
 public:
   std::shared_ptr<class Spaceobject> Spaceobject;
-  Ship *Target = nullptr;
-  Ship *FiredFrom = nullptr;
+  std::shared_ptr<Ship> Target;
+  std::shared_ptr<Ship> FiredFrom;
   std::string FiredBy;
   MissileType Type = 0;
   short Age = 0;
@@ -25,7 +25,8 @@ public:
 };
 
 void UpdateMissile( std::shared_ptr<Missile> missile );
-void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missiletype );
+void NewMissile( std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target,
+                 Character *firedBy, MissileType missiletype );
 void ExtractMissile( std::shared_ptr<Missile> missile );
 
 #endif /* include guard */

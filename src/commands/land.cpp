@@ -13,8 +13,8 @@
 void do_land( Character *ch, std::string argument )
 {
   int the_chance = 0;
-  Ship *ship = NULL;
-  Ship *target = NULL;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> target;
   char buf[MAX_STRING_LENGTH];
   std::shared_ptr<Spaceobject> spaceobj;
   bool found = false;
@@ -222,7 +222,7 @@ void do_land( Character *ch, std::string argument )
       Act( AT_PLAIN, "$n begins the landing sequence.", ch,
            NULL, argument.c_str(), TO_ROOM );
       sprintf( buf, "%s begins its landing sequence.", ship->Name.c_str() );
-      EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+      EchoToNearbyShips( AT_YELLOW, ship, buf );
       EchoToDockedShip( AT_YELLOW , ship, "The ship begins to enter the atmosphere." );
 
       EchoToShip( AT_YELLOW , ship , "The ship slowly begins its landing approach.");

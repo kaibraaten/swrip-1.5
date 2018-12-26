@@ -5,7 +5,7 @@
 
 void do_closehatch(Character *ch, std::string argument )
 {
-  Ship *ship = nullptr;
+  std::shared_ptr<Ship> ship;
   char buf[MAX_STRING_LENGTH];
 
   if ( argument.empty() || !StrCmp(argument,"hatch") )

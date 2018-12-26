@@ -10,13 +10,13 @@
 #include "repos/shiprepository.hpp"
 #include "repos/spaceobjectrepository.hpp"
 
-static bool LeaveHyperspaceIfDocked(Ship *dockedShip, void *userData);
+static bool LeaveHyperspaceIfDocked(std::shared_ptr<Ship> dockedShip, void *userData);
 
 void do_hyperspace(Character *ch, std::string argument )
 {
   int the_chance = 0;
   Vector3 tmp;
-  Ship *ship = NULL;
+  std::shared_ptr<Ship> ship;
   std::shared_ptr<Spaceobject> spaceobject;
   char buf[MAX_STRING_LENGTH] = { '\0' };
 
@@ -140,7 +140,7 @@ void do_hyperspace(Character *ch, std::string argument )
           EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
           sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
                    ship->Name.c_str(), ship->Position.x, ship->Position.y, ship->Position.z );
-          EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+          EchoToNearbyShips( AT_YELLOW, ship, buf );
           ship->State = SHIP_READY;
           ship->Home = ship->Spaceobject->Name;
 
@@ -149,7 +149,7 @@ void do_hyperspace(Character *ch, std::string argument )
               Ships->Save(ship);
             }
 
-          ForEachShip(LeaveHyperspaceIfDocked, ship);
+          ForEachShip(LeaveHyperspaceIfDocked, &ship);
           return;
         }
     }
@@ -213,7 +213,7 @@ void do_hyperspace(Character *ch, std::string argument )
     }
 
   sprintf( buf ,"%s enters hyperspace." , ship->Name.c_str() );
-  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+  EchoToNearbyShips( AT_YELLOW, ship, buf );
 
   ship->LastSystem = ship->Spaceobject;
   ShipFromSpaceobject( ship , ship->Spaceobject );
@@ -244,9 +244,9 @@ void do_hyperspace(Character *ch, std::string argument )
     LearnFromSuccess( ch, gsn_capitalships );
 }
 
-static bool LeaveHyperspaceIfDocked(Ship *dockedShip, void *userData)
+static bool LeaveHyperspaceIfDocked(std::shared_ptr<Ship> dockedShip, void *userData)
 {
-  const Ship *ship = (Ship*)userData;
+  std::shared_ptr<Ship> ship = *static_cast<const std::shared_ptr<Ship>*>(userData);
 
   if ( dockedShip->Docked == ship )
     {
@@ -258,7 +258,7 @@ static bool LeaveHyperspaceIfDocked(Ship *dockedShip, void *userData)
       sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
                dockedShip->Name.c_str(), dockedShip->Position.x,
                dockedShip->Position.y, dockedShip->Position.z );
-      EchoToNearbyShips( AT_YELLOW, dockedShip, buf, NULL );
+      EchoToNearbyShips( AT_YELLOW, dockedShip, buf );
       dockedShip->Home = ship->Home;
 
       if ( StrCmp("Public", dockedShip->Owner) )

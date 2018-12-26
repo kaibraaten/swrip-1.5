@@ -10,8 +10,8 @@
 void do_undock(Character *ch, std::string argument)
 {
   int the_chance = 0;
-  Ship *ship = NULL;
-  Ship *eShip = NULL;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> eShip;
 
   if ( ( ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {

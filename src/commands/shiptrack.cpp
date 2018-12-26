@@ -7,7 +7,7 @@
 
 void do_shiptrack( Character *ch, std::string argument)
 {
-  Ship *ship = nullptr;
+  std::shared_ptr<Ship> ship;
   std::shared_ptr<Spaceobject> spaceobject;
   std::string arg;
   std::string arg1;

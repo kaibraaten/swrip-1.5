@@ -81,7 +81,7 @@ struct SpaceobjectSearch
   std::shared_ptr<Spaceobject> spaceobject;
 };
 
-static bool FindSpaceobjectFromHangar(Ship *ship, void *userData)
+static bool FindSpaceobjectFromHangar(std::shared_ptr<Ship> ship, void *userData)
 {
   SpaceobjectSearch *data = (SpaceobjectSearch*)userData;
 

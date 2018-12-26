@@ -8,7 +8,7 @@
 
 struct Room::Impl
 {
-  std::list<Ship*> Ships;
+  std::list<std::shared_ptr<Ship>> Ships;
   std::list<std::shared_ptr<Shuttle>> Shuttles;
   std::list<Exit*> Exits;
   std::list<Character*> Characters;
@@ -27,19 +27,19 @@ Room::~Room()
 
 }
 
-void Room::Add(Ship *ship)
+void Room::Add(std::shared_ptr<Ship> ship)
 {
   pImpl->Ships.push_back(ship);
   ship->InRoom = this;
 }
 
-void Room::Remove(Ship *ship)
+void Room::Remove(std::shared_ptr<Ship> ship)
 {
   pImpl->Ships.remove(ship);
   ship->InRoom = nullptr;
 }
 
-const std::list<Ship*> &Room::Ships() const
+const std::list<std::shared_ptr<Ship>> &Room::Ships() const
 {
   return pImpl->Ships;
 }

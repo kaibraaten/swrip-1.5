@@ -15,7 +15,7 @@ void do_calculate(Character *ch, std::string argument )
   std::string arg2;
   std::string arg3;
   int the_chance = 0, distance = 0;
-  Ship *ship = NULL;
+  std::shared_ptr<Ship> ship;
   bool found = false;
 
   argument = OneArgument( argument, arg1);

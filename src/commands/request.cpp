@@ -12,8 +12,8 @@ void do_request( Character *ch, std::string arg )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
   int the_chance = 0;
-  Ship *ship = NULL;
-  Ship *eShip = NULL;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> eShip;
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
@@ -105,6 +105,6 @@ void do_request( Character *ch, std::string arg )
        ch, nullptr, arg.c_str(), TO_ROOM);
   eShip->BayOpen = true;
   sprintf( buf ,"%s's bay doors open.", eShip->Name.c_str() );
-  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+  EchoToNearbyShips( AT_YELLOW, ship, buf );
 }
 

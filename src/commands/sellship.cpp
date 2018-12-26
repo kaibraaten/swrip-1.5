@@ -6,7 +6,7 @@
 void do_sellship(Character *ch, std::string argument )
 {
   long price = 0;
-  Ship *ship = nullptr;
+  std::shared_ptr<Ship> ship;
 
   ship = GetShipInRoom( ch->InRoom, argument );
 

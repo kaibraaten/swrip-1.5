@@ -6,7 +6,7 @@
 
 void do_resetship( Character *ch, std::string argument )
 {
-  Ship *ship = GetShipAnywhere( argument );
+  std::shared_ptr<Ship> ship = GetShipAnywhere( argument );
 
   if (ship == NULL)
     {

@@ -9,7 +9,7 @@
 void do_buyship(Character *ch, std::string argument)
 {
   long price = 0;
-  Ship *ship = NULL;
+  std::shared_ptr<Ship> ship;
 
   if ( IsNpc(ch) )
     {

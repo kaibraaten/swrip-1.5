@@ -2,23 +2,23 @@
 #include "ship.hpp"
 #include "character.hpp"
 
-static bool ShowShipTerse(Ship *ship, void *userData);
-static bool ShowShipVerbose(Ship *ship, void *userData);
+static bool ShowShipTerse(std::shared_ptr<Ship> ship, void *userData);
+static bool ShowShipVerbose(std::shared_ptr<Ship> ship, void *userData);
 
 struct UserData
 {
-  Character *ch;
-  bool unowned;
-  bool mobship;
-  bool checkowner;
-  int type;
-  int count;
+  Character *ch = nullptr;
+  bool unowned = false;
+  bool mobship = false;
+  bool checkowner = false;
+  int type = 0;
+  int count = 0;
   std::string argument;
 };
 
 void do_allships( Character *ch, std::string argument )
 {
-  struct UserData data;
+  UserData data;
   data.ch = ch;
   data.unowned = false;
   data.mobship = false;
@@ -76,11 +76,11 @@ void do_allships( Character *ch, std::string argument )
     }
 }
 
-static bool ShowShipVerbose(Ship *ship, void *userData)
+static bool ShowShipVerbose(std::shared_ptr<Ship> ship, void *userData)
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
   int shipType = ship->Type;
-  struct UserData *data = (struct UserData*)userData;
+  UserData *data = (UserData*)userData;
 
   if ( ship->Class > SHIP_PLATFORM )
     {
@@ -145,7 +145,7 @@ static bool ShowShipVerbose(Ship *ship, void *userData)
   return true;
 }
 
-static bool ShowShipTerse(Ship *ship, void *userData)
+static bool ShowShipTerse(std::shared_ptr<Ship> ship, void *userData)
 {
   Character *ch = (Character*) userData;
   char buf[MAX_STRING_LENGTH];

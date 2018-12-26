@@ -57,9 +57,9 @@ public:
   Room();
   virtual ~Room();
 
-  void Add(Ship *ship);
-  void Remove(Ship *ship);
-  const std::list<Ship*> &Ships() const;
+  void Add(std::shared_ptr<Ship> ship);
+  void Remove(std::shared_ptr<Ship> ship);
+  const std::list<std::shared_ptr<Ship>> &Ships() const;
 
   void Add(std::shared_ptr<Shuttle> shuttle);
   void Remove(std::shared_ptr<Shuttle> shuttle);

@@ -1,39 +1,26 @@
 -- Sorosuub System Hopper
--- Last saved Tuesday 25-Dec-2018 21:16:57
+-- Last saved Wednesday 26-Dec-2018 21:15:59
 
 ShipEntry
 {
    Position = 
    {
-      Y = 160, 
       X = 160, 
       Z = -160, 
-   }, 
-   CoPilot = "", 
-   State = 0, 
-   Instruments = 
-   {
-      Comm = 0, 
-      AstroArray = 0, 
-      Sensor = 0, 
-   }, 
-   Description = "", 
-   Rooms = 
-   {
-      Gunseat = 32165, 
-      Cockpit = 32165, 
-      Entrance = 32165, 
-      Engine = 0, 
-      Navseat = 32165, 
-      Coseat = 32165, 
-      Pilotseat = 32165, 
-      Hangar = 0, 
-      Last = 32165, 
-      First = 32165, 
+      Y = 160, 
    }, 
    Pilot = "", 
-   Guard = false, 
-   Alarm = false, 
+   DockingPorts = 0, 
+   Shipyard = 203, 
+   Name = "Sorosuub System Hopper", 
+   Class = "Starfighter", 
+   Description = "", 
+   State = 0, 
+   LastDock = 203, 
+   Owner = "public", 
+   Home = "Asteroid 1234", 
+   PersonalName = "6040", 
+   Type = "Civilian", 
    Defenses = 
    {
       Hull = 
@@ -52,38 +39,30 @@ ShipEntry
          Max = 10, 
       }, 
    }, 
-   Name = "Sorosuub System Hopper", 
-   Hyperdrive = 
+   Rooms = 
    {
-      Speed = 100, 
+      Cockpit = 32165, 
+      Pilotseat = 32165, 
+      Engine = 0, 
+      Entrance = 32165, 
+      Hangar = 0, 
+      Gunseat = 32165, 
+      Navseat = 32165, 
+      Coseat = 32165, 
+      Last = 32165, 
+      First = 32165, 
    }, 
-   Thrusters = 
-   {
-      Maneuver = 35, 
-      Speed = 
-      {
-         Current = 0, 
-         Max = 65, 
-      }, 
-      Energy = 
-      {
-         Current = 2000, 
-         Max = 2000, 
-      }, 
-   }, 
-   Class = "Starfighter", 
-   Home = "Asteroid 1234", 
-   LastDock = 203, 
    WeaponSystems = 
    {
       Tube = 
       {
-         Torpedoes = 
+         State = 0, 
+         Missiles = 
          {
             Current = 0, 
             Max = 0, 
          }, 
-         Missiles = 
+         Torpedoes = 
          {
             Current = 0, 
             Max = 0, 
@@ -93,81 +72,102 @@ ShipEntry
             Current = 0, 
             Max = 0, 
          }, 
-         State = 0, 
       }, 
-      Laser = 
+      TractorBeam = 
       {
-         Count = 0, 
-         State = 0, 
-      }, 
-      IonCannon = 
-      {
-         Count = 0, 
-         State = 0, 
+         Strength = 0, 
+         State = 1, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [2] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [3] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [4] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [5] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [6] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [7] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [8] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [9] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [0] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
       }, 
-      TractorBeam = 
+      Laser = 
       {
-         State = 1, 
-         Strength = 0, 
+         State = 0, 
+         Count = 0, 
+      }, 
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 0, 
       }, 
    }, 
+   Hyperdrive = 
+   {
+      Speed = 100, 
+   }, 
    Location = 203, 
-   PersonalName = "6040", 
-   Type = "Civilian", 
-   Owner = "public", 
-   DockingPorts = 0, 
-   Shipyard = 203, 
+   Thrusters = 
+   {
+      Energy = 
+      {
+         Current = 2000, 
+         Max = 2000, 
+      }, 
+      Maneuver = 35, 
+      Speed = 
+      {
+         Current = 0, 
+         Max = 65, 
+      }, 
+   }, 
+   Instruments = 
+   {
+      AstroArray = 0, 
+      Comm = 0, 
+      Sensor = 0, 
+   }, 
+   CoPilot = "", 
+   Guard = false, 
+   Alarm = false, 
 }

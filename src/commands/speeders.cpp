@@ -11,8 +11,8 @@ struct UserData
   int count;
 };
 
-static bool ShowIfPilotable(Ship *ship, void *userData);
-static bool ShowIfInRoom(Ship *ship, void *userData);
+static bool ShowIfPilotable(std::shared_ptr<Ship> ship, void *userData);
+static bool ShowIfInRoom(std::shared_ptr<Ship> ship, void *userData);
 
 void do_speeders( Character *ch, std::string argument )
 {
@@ -46,9 +46,9 @@ void do_speeders( Character *ch, std::string argument )
     }
 }
 
-static bool ShowIfPilotable(Ship *ship, void *userData)
+static bool ShowIfPilotable(std::shared_ptr<Ship> ship, void *userData)
 {
-  struct UserData *data = (struct UserData*) userData;
+  UserData *data = (UserData*) userData;
   const Character *ch = data->ch;
   char buf[MAX_STRING_LENGTH];
 
@@ -91,7 +91,7 @@ static bool ShowIfPilotable(Ship *ship, void *userData)
   return true;
 }
 
-static bool ShowIfInRoom(Ship *ship, void *userData)
+static bool ShowIfInRoom(std::shared_ptr<Ship> ship, void *userData)
 {
   struct UserData *data = (struct UserData*) userData;
   const Character *ch = data->ch;

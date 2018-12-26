@@ -10,9 +10,9 @@
 void do_rempilot( Character *ch, std::string argument )
 {
   int the_chance = 0;
-  Ship *ship = NULL;
+  std::shared_ptr<Ship> ship;
 
-  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
+  if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
       ch->Echo("&RYou must be in the cockpit of a ship to do that!\r\n");
       return;

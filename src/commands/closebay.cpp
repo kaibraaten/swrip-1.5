@@ -5,7 +5,7 @@
 
 void do_closebay( Character *ch, std::string argument )
 {
-  Ship *ship = nullptr;
+  std::shared_ptr<Ship> ship;
   char buf[MAX_STRING_LENGTH];
 
   if ( GetShipFromPilotSeat(ch->InRoom->Vnum) == NULL
@@ -39,5 +39,5 @@ void do_closebay( Character *ch, std::string argument )
   EchoToCockpit( AT_YELLOW , ship, "Bay Doors close");
   ch->Echo("You close the bay doors.");
   sprintf( buf ,"%s's bay doors close." , ship->Name.c_str() );
-  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+  EchoToNearbyShips( AT_YELLOW, ship, buf );
 }

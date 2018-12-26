@@ -29,7 +29,8 @@
 
 std::list<std::shared_ptr<Missile>> Missiles;
 
-void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missiletype )
+void NewMissile( std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target,
+                 Character *firedBy, MissileType missiletype )
 {
   std::shared_ptr<Spaceobject> spaceobject;
 
@@ -91,8 +92,8 @@ void ExtractMissile( std::shared_ptr<Missile> missile )
 
 void UpdateMissile( std::shared_ptr<Missile> missile )
 {
-  Ship *ship = missile->FiredFrom;
-  Ship *target = missile->Target;
+  std::shared_ptr<Ship> ship = missile->FiredFrom;
+  std::shared_ptr<Ship> target = missile->Target;
 
   if ( target->Spaceobject && IsMissileInRange( ship, missile ) )
     {
@@ -115,7 +116,7 @@ void UpdateMissile( std::shared_ptr<Missile> missile )
 			  "A loud explosion shakes thee ship violently!" );
 	      sprintf( buf, "You see a small explosion as %s is hit by a missile",
                        target->Name.c_str() );
-	      EchoToNearbyShips( AT_ORANGE, target, buf, ship );
+	      EchoToNearbyShips( AT_ORANGE, target, buf, {ship} );
 
 	      for ( ch = FirstCharacter; ch; ch = ch->Next )
 		{

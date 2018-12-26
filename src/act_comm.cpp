@@ -440,8 +440,8 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
 
           if ( channel == CHANNEL_SHIP || channel == CHANNEL_SPACE || channel == CHANNEL_SYSTEM )
             {
-              Ship *ship = GetShipFromCockpit( ch->InRoom->Vnum );
-              Ship *target = nullptr;
+              std::shared_ptr<Ship> ship = GetShipFromCockpit( ch->InRoom->Vnum );
+              std::shared_ptr<Ship> target;
 
               if ( !ship )
                 continue;
@@ -471,8 +471,10 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
             }
 
           position              = vch->Position;
+
           if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL )
             vch->Position       = POS_STANDING;
+
           if ( !CharacterKnowsLanguage( vch, ch->Speaking, ch ) &&
                (!IsNpc(ch) || ch->Speaking != 0)   &&
                ( channel != CHANNEL_NEWBIE &&

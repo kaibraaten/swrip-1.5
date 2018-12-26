@@ -12,8 +12,8 @@
 void do_fire(Character *ch, std::string argument )
 {
   int the_chance = 0, origthe_chance = 0;
-  Ship *ship = NULL;
-  Ship *target = NULL;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> target;
   char buf[MAX_STRING_LENGTH];
   bool is_turret = false;
 
@@ -140,7 +140,7 @@ void do_fire(Character *ch, std::string argument )
           if(ship->Class > SHIP_PLATFORM)
             EchoToRoom(AT_ORANGE, ship->InRoom, buf);
           else
-            EchoToNearbyShips( AT_ORANGE , ship , buf , target );
+            EchoToNearbyShips( AT_ORANGE, ship, buf, { target } );
 
           return;
         }
@@ -150,7 +150,7 @@ void do_fire(Character *ch, std::string argument )
       if(ship->Class > SHIP_PLATFORM)
         EchoToRoom(AT_ORANGE, ship->InRoom, buf);
       else
-        EchoToNearbyShips( AT_ORANGE, ship, buf, target );
+        EchoToNearbyShips( AT_ORANGE, ship, buf, { target } );
 
       sprintf( buf , "You are hit by lasers from %s!", ship->Name.c_str());
       EchoToCockpit( AT_BLOOD , target , buf );
@@ -264,7 +264,7 @@ void do_fire(Character *ch, std::string argument )
           if(ship->Class > SHIP_PLATFORM)
             EchoToRoom(AT_ORANGE, ship->InRoom, buf);
           else
-            EchoToNearbyShips( AT_ORANGE , ship , buf , target );
+            EchoToNearbyShips( AT_ORANGE, ship, buf, { target } );
 
           return;
         }
@@ -275,7 +275,7 @@ void do_fire(Character *ch, std::string argument )
       if(ship->Class > SHIP_PLATFORM)
         EchoToRoom(AT_ORANGE, ship->InRoom, buf);
       else
-        EchoToNearbyShips( AT_ORANGE , ship , buf , target );
+        EchoToNearbyShips( AT_ORANGE, ship, buf, { target } );
 
       sprintf( buf, "You are engulfed by ion energy from %s!",
                ship->Name.c_str());
@@ -404,7 +404,7 @@ void do_fire(Character *ch, std::string argument )
       if(ship->Class > SHIP_PLATFORM)
         EchoToRoom(AT_ORANGE, ship->InRoom, buf);
       else
-        EchoToNearbyShips( AT_ORANGE , ship , buf , target );
+        EchoToNearbyShips( AT_ORANGE, ship, buf, { target } );
 
       LearnFromSuccess( ch, gsn_weaponsystems );
 
@@ -517,7 +517,7 @@ void do_fire(Character *ch, std::string argument )
         }
       else
         {
-          EchoToNearbyShips( AT_ORANGE , ship , buf , target );
+          EchoToNearbyShips( AT_ORANGE, ship, buf, { target } );
         }
       
       LearnFromSuccess( ch, gsn_weaponsystems );
@@ -633,7 +633,7 @@ void do_fire(Character *ch, std::string argument )
         }
       else
         {
-          EchoToNearbyShips( AT_ORANGE , ship , buf , target );
+          EchoToNearbyShips( AT_ORANGE, ship, buf, { target } );
         }
       
       LearnFromSuccess( ch, gsn_weaponsystems );
@@ -724,7 +724,7 @@ void do_fire(Character *ch, std::string argument )
 	      if(ship->Class > SHIP_PLATFORM)
 		EchoToRoom(AT_ORANGE, ship->InRoom, buf);
 	      else
-		EchoToNearbyShips( AT_ORANGE , ship , buf , target );
+		EchoToNearbyShips( AT_ORANGE, ship, buf, { target } );
 
 	      LearnFromFailure( ch, gsn_spacecombat );
 	      LearnFromFailure( ch, gsn_spacecombat2 );
@@ -738,7 +738,7 @@ void do_fire(Character *ch, std::string argument )
 	  if(ship->Class > SHIP_PLATFORM)
 	    EchoToRoom(AT_ORANGE, ship->InRoom, buf);
 	  else
-	    EchoToNearbyShips( AT_ORANGE, ship, buf, target );
+	    EchoToNearbyShips( AT_ORANGE, ship, buf, { target } );
 
 	  sprintf( buf , "You are hit by turbolasers from %s!",
                    ship->Name.c_str());

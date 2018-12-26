@@ -42,17 +42,17 @@
 
 static int baycount = 0;
 
-static void ApproachLandingSite( Ship *ship, const std::string &arg );
-static void LandShip( Ship *ship, const std::string &arg );
-static void LaunchShip( Ship *ship );
-static void MakeDebris( const Ship *ship );
-static bool CaughtInGravity( const Ship *ship, std::shared_ptr<Spaceobject> space);
-static bool WillCollideWithSun( const Ship *ship, std::shared_ptr<Spaceobject> sun );
-static void EvadeCollisionWithSun( Ship *ship, std::shared_ptr<Spaceobject> sun );
-static bool ShipHasState( const Ship *ship, ShipState state );
-static void DockShip( Character *ch, Ship *ship );
+static void ApproachLandingSite( std::shared_ptr<Ship> ship, const std::string &arg );
+static void LandShip( std::shared_ptr<Ship> ship, const std::string &arg );
+static void LaunchShip( std::shared_ptr<Ship> ship );
+static void MakeDebris( std::shared_ptr<Ship> ship );
+static bool CaughtInGravity( std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> space);
+static bool WillCollideWithSun( std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> sun );
+static void EvadeCollisionWithSun( std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> sun );
+static bool ShipHasState( std::shared_ptr<Ship> ship, ShipState state );
+static void DockShip( Character *ch, std::shared_ptr<Ship> ship );
 
-static bool WillCollideWithSun( const Ship *ship, std::shared_ptr<Spaceobject> sun )
+static bool WillCollideWithSun( std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> sun )
 {
   if ( GetShipDistanceToSpaceobject( ship, sun ) < 10 )
     {
@@ -62,7 +62,7 @@ static bool WillCollideWithSun( const Ship *ship, std::shared_ptr<Spaceobject> s
   return false;
 }
 
-static bool ShipHasState( const Ship *ship, ShipState state )
+static bool ShipHasState( std::shared_ptr<Ship> ship, ShipState state )
 {
   return ship->State == state;
 }
@@ -71,21 +71,21 @@ Ship::Ship()
 {
   for( size_t turretNum = 0; turretNum < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turretNum )
     {
-      WeaponSystems.Turrets[turretNum] = AllocateTurret( this );
+      WeaponSystems.Turrets[turretNum] = AllocateTurret( Class );
     }
 }
 
-bool IsShipInHyperspace( const Ship *ship )
+bool IsShipInHyperspace( std::shared_ptr<Ship> ship )
 {
   return ShipHasState( ship, SHIP_HYPERSPACE );
 }
 
-bool IsShipDisabled( const Ship *ship )
+bool IsShipDisabled( std::shared_ptr<Ship> ship )
 {
   return ShipHasState( ship, SHIP_DISABLED );
 }
 
-static void EvadeCollisionWithSun( Ship *ship, std::shared_ptr<Spaceobject> sun )
+static void EvadeCollisionWithSun( std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> sun )
 {
   ship->Heading.x = 10 * ship->Position.x;
   ship->Heading.y = 10 * ship->Position.y;
@@ -115,7 +115,7 @@ void UpdateShipMovement()
 {
   char buf[MAX_STRING_LENGTH];
 
-  for(Ship *ship : Ships)
+  for(auto ship : Ships)
     {
       if ( ship->Spaceobject == nullptr )
 	{
@@ -184,7 +184,7 @@ void UpdateShipMovement()
                   EchoToCockpit( AT_YELLOW, ship, buf);
                   sprintf( buf, "%s begins orbiting %s.",
                            ship->Name.c_str(), spaceobj->Name.c_str());
-                  EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
+                  EchoToNearbyShips( AT_ORANGE, ship, buf );
                   ship->InOrbitOf = spaceobj;
                   ship->Thrusters.Speed.Current = 0;
                 }
@@ -192,7 +192,7 @@ void UpdateShipMovement()
         }
     }
 
-  for(Ship *ship : Ships)
+  for(auto ship : Ships)
     {
       if ( IsShipInHyperspace( ship ) )
         {
@@ -238,7 +238,7 @@ void UpdateShipMovement()
 		  CopyVector( &ship->Position, &ship->HyperPosition );
 		  ShipToSpaceobject( ship, ship->CurrentJump );
 		  ship->CurrentJump = NULL;
-		  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+		  EchoToNearbyShips( AT_YELLOW, ship, buf );
 		  ship->State = SHIP_READY;
 		  ship->Home = ship->Spaceobject->Name;
 		}
@@ -264,7 +264,7 @@ void UpdateShipMovement()
                   CopyVector( &ship->HyperPosition, &ship->Position );
                   ShipToSpaceobject( ship, ship->CurrentJump );
                   ship->CurrentJump = NULL;
-                  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+                  EchoToNearbyShips( AT_YELLOW, ship, buf );
                   ship->State = SHIP_READY;
                   ship->Home = ship->Spaceobject->Name;
                 }
@@ -288,7 +288,7 @@ void UpdateShipMovement()
                   CopyVector( &ship->Position, &ship->HyperPosition );
                   ShipToSpaceobject( ship, ship->CurrentJump );
                   ship->CurrentJump = NULL;
-                  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+                  EchoToNearbyShips( AT_YELLOW, ship, buf );
                   ship->State = SHIP_READY;
                   ship->Home = ship->Spaceobject->Name;
 
@@ -343,7 +343,7 @@ void UpdateShipMovement()
 
       if( ship->Docked )
         {
-          Ship *docked = ship->Docked;
+          std::shared_ptr<Ship> docked = ship->Docked;
           CopyVector( &ship->Position, &docked->Position );
           CopyVector( &ship->HyperPosition, &docked->HyperPosition );
           CopyVector( &ship->OriginPosition, &docked->OriginPosition );
@@ -380,9 +380,9 @@ void UpdateShipMovement()
     }
 }
 
-static void LandShip( Ship *ship, const std::string &arg )
+static void LandShip( std::shared_ptr<Ship> ship, const std::string &arg )
 {
-  Ship *target = NULL;
+  std::shared_ptr<Ship> target;
   char buf[MAX_STRING_LENGTH] = {'\0'};
   vnum_t destination = INVALID_VNUM;
   Character *ch = NULL;
@@ -415,7 +415,7 @@ static void LandShip( Ship *ship, const std::string &arg )
   EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Pilotseat), "Landing sequence complete.");
   EchoToShip( AT_YELLOW , ship , "You feel a slight thud as the ship sets down on the ground.");
   sprintf( buf ,"%s disapears from your scanner." , ship->Name.c_str()  );
-  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+  EchoToNearbyShips( AT_YELLOW, ship, buf );
 
   if( ship->Ch && ship->Ch->Desc )
     {
@@ -482,13 +482,13 @@ static void LandShip( Ship *ship, const std::string &arg )
   Ships->Save(ship);
 }
 
-static void ApproachLandingSite( Ship *ship, const std::string &arg)
+static void ApproachLandingSite( std::shared_ptr<Ship> ship, const std::string &arg)
 {
   std::shared_ptr<Spaceobject> spaceobj;
   char buf[MAX_STRING_LENGTH];
   std::string landingSiteName;
   bool found = false;
-  Ship *target = NULL;
+  std::shared_ptr<Ship> target;
 
   for(std::list<std::shared_ptr<Spaceobject>>::const_iterator i = cbegin(Spaceobjects);
       i != cend(Spaceobjects); ++i)
@@ -533,10 +533,10 @@ static void ApproachLandingSite( Ship *ship, const std::string &arg)
   sprintf( buf, "Approaching %s.", landingSiteName.c_str() );
   EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Pilotseat), buf);
   sprintf( buf, "%s begins its approach to %s.", ship->Name.c_str(), landingSiteName.c_str() );
-  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+  EchoToNearbyShips( AT_YELLOW, ship, buf );
 }
 
-static void CopyPositionToDockedShips(const Ship *ship, Ship *docked)
+static void CopyPositionToDockedShips(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> docked)
 {
   if (docked->LastDock == ship->Rooms.Hangar)
     {
@@ -544,7 +544,7 @@ static void CopyPositionToDockedShips(const Ship *ship, Ship *docked)
     }
 }
 
-static void LaunchShip( Ship *ship )
+static void LaunchShip( std::shared_ptr<Ship> ship )
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
   std::shared_ptr<Spaceobject> spaceobject = GetSpaceobjectFromDockVnum( ship->Location );
@@ -611,7 +611,7 @@ static void LaunchShip( Ship *ship )
     }
   else
     {
-      for(Ship *docked : Ships)
+      for(auto docked : Ships)
         {
           CopyPositionToDockedShips(ship, docked);
         }
@@ -627,12 +627,12 @@ static void LaunchShip( Ship *ship )
   EchoToShip( AT_YELLOW , ship , "The ship leaves the platform far behind as it flies into space." );
   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
 	   ship->Name.c_str(), ship->Position.x, ship->Position.y, ship->Position.z );
-  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
+  EchoToNearbyShips( AT_YELLOW, ship, buf );
   sprintf( buf, "%s lifts off into space.", ship->Name.c_str() );
   EchoToRoom( AT_YELLOW , GetRoom(ship->LastDock) , buf );
 }
 
-static void MakeDebris( const Ship *ship )
+static void MakeDebris( std::shared_ptr<Ship> ship )
 {
   char buf[MAX_STRING_LENGTH];
   int turret_num = 0;
@@ -642,7 +642,7 @@ static void MakeDebris( const Ship *ship )
       return;
     }
 
-  Ship *debris = new Ship();
+  std::shared_ptr<Ship> debris = std::make_shared<Ship>();
   Ships->Add(debris);
 
   debris->Type        = SHIP_CIVILIAN;
@@ -671,7 +671,7 @@ static void MakeDebris( const Ship *ship )
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
       FreeTurret(debris->WeaponSystems.Turrets[turret_num]);
-      debris->WeaponSystems.Turrets[turret_num] = CopyTurret( ship->WeaponSystems.Turrets[turret_num], debris );
+      debris->WeaponSystems.Turrets[turret_num] = CopyTurret( ship->WeaponSystems.Turrets[turret_num], debris->Class );
     }
 
   strcpy( buf, "Debris of a " );
@@ -685,7 +685,7 @@ static void MakeDebris( const Ship *ship )
   CopyVector( &debris->Heading, &ship->Heading );
 }
 
-static void DockShip( Character *ch, Ship *ship )
+static void DockShip( Character *ch, std::shared_ptr<Ship> ship )
 {
   if ( ship->DockingState == SHIP_DISABLED )
     {
@@ -734,7 +734,7 @@ static void DockShip( Character *ch, Ship *ship )
     }
 }
 
-void TransferShip(Ship *ship, vnum_t destination)
+void TransferShip(std::shared_ptr<Ship> ship, vnum_t destination)
 {
   vnum_t origShipyard = INVALID_VNUM;
 
@@ -764,7 +764,7 @@ void TransferShip(Ship *ship, vnum_t destination)
   Ships->Save(ship);
 }
 
-void TargetShip( Ship *ship, Ship *target )
+void TargetShip( std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target )
 {
   char buf[MAX_STRING_LENGTH];
 
@@ -775,17 +775,17 @@ void TargetShip( Ship *ship, Ship *target )
   EchoToCockpit( AT_BLOOD, ship, buf );
 }
 
-bool CheckHostile( Ship *ship )
+bool CheckHostile( std::shared_ptr<Ship> ship )
 {
   long distance = -1;
-  Ship *enemy = NULL;
+  std::shared_ptr<Ship> enemy;
 
   if ( !IsShipAutoflying(ship) || ship->Class == SHIP_DEBRIS )
     {
       return false;
     }
 
-  for(Ship *target : Ships)
+  for(auto target : Ships)
     {
       if( !IsShipInCombatRange( ship, target ) )
         continue;
@@ -842,7 +842,7 @@ bool CheckHostile( Ship *ship )
   return false;
 }
 
-ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
+ch_ret DriveShip( Character *ch, std::shared_ptr<Ship> ship, Exit *pexit, int fall )
 {
   Room *in_room = NULL;
   Room *to_room = NULL;
@@ -1138,7 +1138,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   return retcode;
 }
 
-void EchoToShip( int color, const Ship *ship, const std::string &argument )
+void EchoToShip( int color, std::shared_ptr<Ship> ship, const std::string &argument )
 {
   vnum_t roomVnum = INVALID_VNUM;
 
@@ -1159,7 +1159,7 @@ void EchoToShip( int color, const Ship *ship, const std::string &argument )
     }
 }
 
-bool IsShipAutoflying( const Ship *ship )
+bool IsShipAutoflying( std::shared_ptr<Ship> ship )
 {
   if (!ship)
     {
@@ -1179,7 +1179,7 @@ bool IsShipAutoflying( const Ship *ship )
   return false;
 }
 
-void RechargeShips( void )
+void RechargeShips()
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
   bool closeem = false;
@@ -1193,7 +1193,7 @@ void RechargeShips( void )
       baycount = 0;
     }
 
-  for(Ship *ship : Ships)
+  for(auto ship : Ships)
     {
       if ( ship->Class == SHIP_PLATFORM )
 	{
@@ -1215,7 +1215,7 @@ void RechargeShips( void )
           ship->WeaponSystems.IonCannon.State = LASER_READY;
         }
 
-      for(const Turret *turret : ship->WeaponSystems.Turrets)
+      for(auto turret : ship->WeaponSystems.Turrets)
 	{
 	  ship->Thrusters.Energy.Current -= GetTurretEnergyDraw( turret );
 	}
@@ -1260,7 +1260,7 @@ void RechargeShips( void )
               if (ship->WeaponSystems.Target && ship->WeaponSystems.Laser.State != LASER_DAMAGED )
                 {
                   int the_chance = 75;
-                  Ship *target = ship->WeaponSystems.Target;
+                  std::shared_ptr<Ship> target = ship->WeaponSystems.Target;
                   int shots = 0, guns = 0;
                   int whichguns = 0;
 
@@ -1308,7 +1308,7 @@ void RechargeShips( void )
                                   EchoToCockpit( AT_ORANGE , target , buf );
                                   sprintf( buf, "Weaponsfire from %s barely misses %s.",
                                            ship->Name.c_str() , target->Name.c_str() );
-                                  EchoToNearbyShips( AT_ORANGE , target , buf , NULL );
+                                  EchoToNearbyShips( AT_ORANGE, target, buf );
                                 }
                               else
                                 {
@@ -1316,7 +1316,7 @@ void RechargeShips( void )
                                     {
                                       sprintf( buf, "Laserfire from %s hits %s.",
                                                ship->Name.c_str(), target->Name.c_str() );
-                                      EchoToNearbyShips( AT_ORANGE , target , buf , NULL );
+                                      EchoToNearbyShips( AT_ORANGE, target, buf );
                                       sprintf( buf, "You are hit by lasers from %s!",
                                                ship->Name.c_str());
                                       EchoToCockpit( AT_BLOOD, target, buf );
@@ -1339,7 +1339,7 @@ void RechargeShips( void )
                                     {
                                       sprintf( buf, "Blue plasma from %s engulfs %s.",
                                                ship->Name.c_str(), target->Name.c_str() );
-                                      EchoToNearbyShips( AT_ORANGE , target , buf , NULL );
+                                      EchoToNearbyShips( AT_ORANGE, target, buf );
                                       sprintf( buf , "You are engulfed by ion energy from %s!" , ship->Name.c_str());
                                       EchoToCockpit( AT_BLOOD , target , buf );
                                       EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
@@ -1362,7 +1362,7 @@ void RechargeShips( void )
                                         {
                                           sprintf( buf, "Laserfire from %s hits %s.",
 						   ship->Name.c_str(), target->Name.c_str() );
-                                          EchoToNearbyShips( AT_ORANGE, target, buf , NULL );
+                                          EchoToNearbyShips( AT_ORANGE, target, buf );
                                           sprintf( buf, "You are hit by lasers from %s!",
 						   ship->Name.c_str());
                                           EchoToCockpit( AT_BLOOD, target, buf );
@@ -1384,7 +1384,7 @@ void RechargeShips( void )
                                         {
                                           sprintf( buf, "Ion energy from %s hits %s.",
                                                    ship->Name.c_str(), target->Name.c_str() );
-                                          EchoToNearbyShips( AT_ORANGE , target , buf , NULL );
+                                          EchoToNearbyShips( AT_ORANGE, target, buf );
                                           sprintf( buf, "You are hit by an ion cannon from %s!",
                                                    ship->Name.c_str());
                                           EchoToCockpit( AT_BLOOD , target , buf );
@@ -1423,13 +1423,13 @@ void RechargeShips( void )
     }
 }
 
-void ShipUpdate( void )
+void ShipUpdate()
 {
   char buf[MAX_STRING_LENGTH];
   int too_close = 0, target_too_close = 0;
   int recharge = 0;
 
-  for(Ship *ship : Ships)
+  for(auto ship : Ships)
     {
       if ( ship->Spaceobject
 	   && ship->Thrusters.Energy.Current > 0
@@ -1584,7 +1584,7 @@ void ShipUpdate( void )
 		}
 	    }
 
-          for(Ship *target : Ships)
+          for(auto target : Ships)
             {
               if( (target->Docked && target->Docked == ship) || (ship->Docked &&  ship->Docked == target ) )
 		{
@@ -1636,11 +1636,11 @@ void ShipUpdate( void )
             }
         }
 
-      for(Turret *turret : ship->WeaponSystems.Turrets)
+      for(auto turret : ship->WeaponSystems.Turrets)
 	{
 	  if ( TurretHasTarget( turret ) && ship->Class <= SHIP_PLATFORM)
 	    {
-	      const Ship *turret_target = GetTurretTarget( turret );
+	      const std::shared_ptr<Ship> turret_target = GetTurretTarget( turret );
 
 	      sprintf( buf, "%s   %.0f %.0f %.0f", turret_target->Name.c_str(),
 		       turret_target->Position.x, turret_target->Position.y,
@@ -1664,12 +1664,12 @@ void ShipUpdate( void )
     }
 }
 
-void UpdateSpaceCombat(void)
+void UpdateSpaceCombat()
 {
   char buf[MAX_STRING_LENGTH];
   int too_close = 0, target_too_close = 0;
 
-  for(Ship *ship : Ships)
+  for(auto ship : Ships)
     {
       if( ship->WeaponSystems.Target && IsShipAutoflying(ship) )
 	{
@@ -1686,7 +1686,7 @@ void UpdateSpaceCombat(void)
 	  && ship->WeaponSystems.Target
 	  && ship->Class < SHIP_PLATFORM )
         {
-          Ship *target = ship->WeaponSystems.Target;
+          std::shared_ptr<Ship> target = ship->WeaponSystems.Target;
           too_close = ship->Thrusters.Speed.Current + 10;
           target_too_close = too_close + target->Thrusters.Speed.Current;
 
@@ -1746,7 +1746,7 @@ void UpdateSpaceCombat(void)
                 {
                   int the_chance = 50;
                   MissileType projectiles = INVALID_MISSILE_TYPE;
-                  Ship *target = NULL;
+                  std::shared_ptr<Ship> target;
 
                   if ( !ship->WeaponSystems.Target->WeaponSystems.Target
 		       && IsShipAutoflying(ship->WeaponSystems.Target))
@@ -1755,7 +1755,7 @@ void UpdateSpaceCombat(void)
 		    }
 
                   /* auto assist ships */
-                  for(Ship *assistingShip : Ships)
+                  for(auto assistingShip : Ships)
                     {
                       if( IsShipInCombatRange( ship, assistingShip ) )
 			{
@@ -1871,7 +1871,7 @@ void UpdateSpaceCombat(void)
                               EchoToCockpit( AT_BLOOD , target , buf );
                               sprintf( buf, "%s fires a projectile towards %s.",
 				       ship->Name.c_str(), target->Name.c_str() );
-                              EchoToNearbyShips( AT_ORANGE , target , buf , NULL );
+                              EchoToNearbyShips( AT_ORANGE, target, buf );
 
 			      if ( ship->Class == CAPITAL_SHIP || ship->Class == SHIP_PLATFORM )
 				{
@@ -1956,9 +1956,9 @@ void UpdateSpaceCombat(void)
     }
 }
 
-void EchoToDockedShip( int color, const Ship *ship, const std::string &argument )
+void EchoToDockedShip( int color, std::shared_ptr<Ship> ship, const std::string &argument )
 {
-  for(const Ship *dockedShip : Ships)
+  for(auto dockedShip : Ships)
     {
       if( dockedShip->Docked == ship)
         {
@@ -1967,11 +1967,9 @@ void EchoToDockedShip( int color, const Ship *ship, const std::string &argument 
     }
 }
 
-void EchoToCockpit( int color, const Ship *ship, const std::string &argument )
+void EchoToCockpit( int color, std::shared_ptr<Ship> ship, const std::string &argument )
 {
-  vnum_t room = INVALID_VNUM;
-
-  for ( room = ship->Rooms.First; room <= ship->Rooms.Last;room++ )
+  for ( vnum_t room = ship->Rooms.First; room <= ship->Rooms.Last;room++ )
     {
       if ( room == ship->Rooms.Cockpit || room == ship->Rooms.Navseat
            || room == ship->Rooms.Pilotseat || room == ship->Rooms.Coseat
@@ -1992,7 +1990,7 @@ void EchoToCockpit( int color, const Ship *ship, const std::string &argument )
     }
 }
 
-bool IsShipInCombatRange( const Ship *ship, const Ship *target )
+bool IsShipInCombatRange( std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target )
 {
   if (target && ship && target != ship )
     {
@@ -2007,31 +2005,31 @@ bool IsShipInCombatRange( const Ship *ship, const Ship *target )
   return false;
 }
 
-bool IsMissileInRange( const Ship *ship, std::shared_ptr<Missile> missile )
+bool IsMissileInRange( std::shared_ptr<Ship> ship, std::shared_ptr<Missile> missile )
 {
   return missile && ship && ship->Spaceobject
     && GetMissileDistanceToShip( missile, ship ) < 5000;
 }
 
-bool IsSpaceobjectInRange( const Ship *ship, std::shared_ptr<Spaceobject> object )
+bool IsSpaceobjectInRange( std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> object )
 {
   return object && ship && ship->Spaceobject
     && GetShipDistanceToSpaceobject( ship, object ) < 100000;
 }
 
-bool IsSpaceobjectInCaptureRange( const Ship *ship, std::shared_ptr<Spaceobject> object )
+bool IsSpaceobjectInCaptureRange( std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> object )
 {
   return object && ship
     && GetShipDistanceToSpaceobject( ship, object ) < 10000;
 }
 
-static bool CaughtInGravity( const Ship *ship, std::shared_ptr<Spaceobject> object )
+static bool CaughtInGravity( std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> object )
 {
   return object && ship
     && GetDistanceBetweenVectors( &object->Position, &ship->HyperPosition ) < object->Gravity * 5;
 }
 
-long int GetShipValue( const Ship *ship )
+long int GetShipValue( std::shared_ptr<Ship> ship )
 {
   long int price = 0;
 
@@ -2126,7 +2124,7 @@ long int GetShipValue( const Ship *ship )
       price += 1000 * ship->WeaponSystems.Tube.Rockets.Current;
     }
 
-  for(const Turret *turret : ship->WeaponSystems.Turrets)
+  for(auto turret : ship->WeaponSystems.Turrets)
     {
       if( IsTurretInstalled( turret ) )
 	{
@@ -2149,12 +2147,12 @@ long int GetShipValue( const Ship *ship )
   return price;
 }
 
-long GetRentalPrice(const Ship *ship)
+long GetRentalPrice(std::shared_ptr<Ship> ship)
 {
   return GetShipValue(ship) / 100;
 }
 
-void ResetShip( Ship *ship )
+void ResetShip( std::shared_ptr<Ship> ship )
 {
   ship->State = SHIP_READY;
   ship->Docking = SHIP_READY;
@@ -2182,7 +2180,7 @@ void ResetShip( Ship *ship )
   ship->Defenses.Hull.Current = ship->Defenses.Hull.Max;
   ship->Defenses.Shield.Current = 0;
 
-  for(Turret *turret : ship->WeaponSystems.Turrets)
+  for(auto turret : ship->WeaponSystems.Turrets)
     {
       ResetTurret( turret );
     }
@@ -2241,34 +2239,34 @@ void ResetShip( Ship *ship )
   Ships->Save(ship);
 }
 
-void EchoToNearbyShips( int color, const Ship *ship, const std::string &argument,
-			const Ship *ignore )
+void EchoToNearbyShips( int color, std::shared_ptr<Ship> ship, const std::string &argument,
+			std::list<std::shared_ptr<Ship>> ignore )
 {
   if (!ship->Spaceobject)
     {
       return;
     }
 
-  for(const Ship *target : Ships)
+  for(auto target : Ships)
     {
       if( !IsShipInCombatRange( ship, target ) )
         {
           continue;
         }
 
-      if (target != ship && target != ignore
+      if (target != ship && !Contains(ignore, target)
           && GetShipDistanceToShip( ship, target ) < 100 * (target->Instruments.Sensor + 10) * ((ship->Class == SHIP_DEBRIS ? 2 : ship->Class) + 1))
         {
-          EchoToCockpit( color , target , argument );
+          EchoToCockpit( color, target, argument );
         }
     }
 }
 
-Ship *GetShipInRoom( const Room *room, const std::string &name )
+std::shared_ptr<Ship> GetShipInRoom( const Room *room, const std::string &name )
 {
   assert(room != nullptr);
 
-  for(Ship *ship : room->Ships())
+  for(auto ship : room->Ships())
     {
       if( !StrCmp( name, ship->PersonalName )
           || !StrCmp( name, ship->Name ) )
@@ -2277,7 +2275,7 @@ Ship *GetShipInRoom( const Room *room, const std::string &name )
         }
     }
 
-  for(Ship *ship : room->Ships())
+  for(auto ship : room->Ships())
     {
       if( !ship->PersonalName.empty() && NiftyIsNamePrefix( name, ship->PersonalName ) )
         {
@@ -2296,11 +2294,11 @@ Ship *GetShipInRoom( const Room *room, const std::string &name )
 /*
  * Get pointer to ship structure from ship name.
  */
-Ship *GetShipAnywhere( const std::string &name )
+std::shared_ptr<Ship> GetShipAnywhere( const std::string &name )
 {
-  Ship *foundShip = NULL;
+  std::shared_ptr<Ship> foundShip;
 
-  for(Ship *ship : Ships)
+  for(auto ship : Ships)
     {
       if( !StrCmp( name, ship->PersonalName )
           || !StrCmp( name, ship->Name ) )
@@ -2328,19 +2326,19 @@ Ship *GetShipAnywhere( const std::string &name )
 /*
  * Checks if ship is in a spaceobject and returns pointer if it is.
  */
-Ship *GetShipInRange( const std::string &name, const Ship *eShip)
+std::shared_ptr<Ship> GetShipInRange( const std::string &name, std::shared_ptr<Ship> eShip)
 {
   std::string arg;
   int number = NumberArgument( name, arg );
   int count = 0;
-  Ship *foundShip = NULL;
+  std::shared_ptr<Ship> foundShip;
 
   if ( eShip == NULL )
     {
       return NULL;
     }
 
-  for(Ship *ship : Ships)
+  for(auto ship : Ships)
     {
       if( !IsShipInCombatRange( eShip, ship ) )
 	{
@@ -2369,7 +2367,7 @@ Ship *GetShipInRange( const std::string &name, const Ship *eShip)
     {
       count = 0;
 
-      for(Ship *ship : Ships)
+      for(auto ship : Ships)
         {
           if( !IsShipInCombatRange( eShip, ship ) )
             {
@@ -2406,7 +2404,7 @@ Ship *GetShipInRange( const std::string &name, const Ship *eShip)
 /*
  * Get pointer to ship structure from cockpit, turret, or entrance ramp vnum.
  */
-Ship *GetShipFromCockpit( vnum_t vnum )
+std::shared_ptr<Ship> GetShipFromCockpit( vnum_t vnum )
 {
   return Ships->Find([vnum](const auto &ship)
                      {
@@ -2437,27 +2435,27 @@ Ship *GetShipFromCockpit( vnum_t vnum )
                      });
 }
 
-Ship *GetShipFromPilotSeat( vnum_t vnum )
+std::shared_ptr<Ship> GetShipFromPilotSeat( vnum_t vnum )
 {
   return Ships->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Pilotseat; });
 }
 
-Ship *GetShipFromCoSeat( vnum_t vnum )
+std::shared_ptr<Ship> GetShipFromCoSeat( vnum_t vnum )
 {
   return Ships->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Coseat; });
 }
 
-Ship *GetShipFromNavSeat( vnum_t vnum )
+std::shared_ptr<Ship> GetShipFromNavSeat( vnum_t vnum )
 {
   return Ships->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Navseat; });
 }
 
-Ship *GetShipFromGunSeat( vnum_t vnum )
+std::shared_ptr<Ship> GetShipFromGunSeat( vnum_t vnum )
 {
   return Ships->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Gunseat; });
 }
 
-Ship *GetShipFromEngine( vnum_t vnum )
+std::shared_ptr<Ship> GetShipFromEngine( vnum_t vnum )
 {
   return Ships->Find([vnum](const auto &ship)
                      {
@@ -2466,32 +2464,29 @@ Ship *GetShipFromEngine( vnum_t vnum )
                      });
 }
 
-Ship *GetShipFromTurret( vnum_t vnum )
+std::shared_ptr<Ship> GetShipFromTurret( vnum_t vnum )
 {
   return Ships->Find([vnum](const auto &ship)
                      {
-                       for(const Turret *turret : ship->WeaponSystems.Turrets)
-                         {
-                           if(vnum == GetTurretRoom(turret))
-                             {
-                               return true;
-                             }
-                         }
-                       return false;
+                       return Find(ship->WeaponSystems.Turrets,
+                                   [vnum](const auto &turret)
+                                   {
+                                     return vnum == GetTurretRoom(turret);
+                                   }) != nullptr;
                      });
 }
 
-Ship *GetShipFromEntrance( vnum_t vnum )
+std::shared_ptr<Ship> GetShipFromEntrance( vnum_t vnum )
 {
   return Ships->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Entrance; });
 }
 
-Ship *GetShipFromHangar( vnum_t vnum )
+std::shared_ptr<Ship> GetShipFromHangar( vnum_t vnum )
 {
   return Ships->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Hangar; });
 }
 
-void ShipToSpaceobject( Ship *ship, std::shared_ptr<Spaceobject> spaceobject )
+void ShipToSpaceobject( std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> spaceobject )
 {
   if( ship != nullptr && spaceobject != nullptr )
     {
@@ -2499,7 +2494,7 @@ void ShipToSpaceobject( Ship *ship, std::shared_ptr<Spaceobject> spaceobject )
     }
 }
 
-void ShipFromSpaceobject( Ship *ship, std::shared_ptr<Spaceobject> spaceobject )
+void ShipFromSpaceobject( std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> spaceobject )
 {
   if( ship != nullptr && spaceobject != nullptr )
     {
@@ -2507,7 +2502,7 @@ void ShipFromSpaceobject( Ship *ship, std::shared_ptr<Spaceobject> spaceobject )
     }
 }
 
-bool IsShipRental( const Character *ch, const Ship *ship )
+bool IsShipRental( const Character *ch, std::shared_ptr<Ship> ship )
 {
   if ( !StrCmp("Public",ship->Owner) )
     {
@@ -2527,7 +2522,7 @@ bool IsShipRental( const Character *ch, const Ship *ship )
   return false;
 }
 
-bool CanDock( const Ship *ship )
+bool CanDock( std::shared_ptr<Ship> ship )
 {
   size_t count = 0;
   size_t ports = 0;
@@ -2542,8 +2537,11 @@ bool CanDock( const Ship *ship )
       count++;
     }
 
-  count = Count(Ships->Entities(),
-                [ship](const auto &dockedShip) { return dockedShip->Docked == ship; });
+  count += Count(Ships->Entities(),
+                 [ship](const auto &dockedShip)
+                 {
+                   return dockedShip->Docked == ship;
+                 });
 
   if ( ship->DockingPorts && count >= (size_t)ship->DockingPorts )
     {
@@ -2563,7 +2561,7 @@ bool CanDock( const Ship *ship )
   return true;
 }
 
-bool CheckPilot( const Character *ch, const Ship *ship )
+bool CheckPilot( const Character *ch, std::shared_ptr<Ship> ship )
 {
   if ( !StrCmp(ch->Name,ship->Owner)
        || !StrCmp(ch->Name,ship->Pilot)
@@ -2650,7 +2648,7 @@ bool CheckPilot( const Character *ch, const Ship *ship )
   return false;
 }
 
-bool ExtractShip( Ship *ship )
+bool ExtractShip( std::shared_ptr<Ship> ship )
 {
   Room *room = ship->InRoom;
 
@@ -2662,7 +2660,8 @@ bool ExtractShip( Ship *ship )
   return true;
 }
 
-void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaulter )
+void DamageShip( std::shared_ptr<Ship> ship, int min, int max,
+                 Character *ch, std::shared_ptr<Ship> assaulter )
 {
   short ionFactor = 1;
   int dmg = 0;
@@ -2726,7 +2725,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
           ship->WeaponSystems.Laser.State = LASER_DAMAGED;
         }
 
-      for(Turret *turret : ship->WeaponSystems.Turrets)
+      for(auto turret : ship->WeaponSystems.Turrets)
 	{
 	  if ( GetRandomNumberFromRange(1, 100) <= 5 * ionFactor && !IsTurretDamaged( turret ) )
 	    {
@@ -2780,7 +2779,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
     }
 }
 
-void DestroyShip( Ship *ship, Character *killer )
+void DestroyShip( std::shared_ptr<Ship> ship, Character *killer )
 {
   char buf[MAX_STRING_LENGTH];
 
@@ -2790,7 +2789,7 @@ void DestroyShip( Ship *ship, Character *killer )
     }
 
   sprintf( buf , "%s explodes in a blinding flash of light!", ship->Name.c_str() );
-  EchoToNearbyShips( AT_WHITE + AT_BLINK, ship, buf, NULL );
+  EchoToNearbyShips( AT_WHITE + AT_BLINK, ship, buf );
   EchoToShip( AT_WHITE + AT_BLINK, ship, "A blinding flash of light burns your eyes...");
   EchoToShip( AT_WHITE, ship, "But before you have a chance to scream...\r\nYou are ripped apart as your spacecraft explodes...");
 
@@ -2841,9 +2840,9 @@ void DestroyShip( Ship *ship, Character *killer )
                 }
             }
 
-          std::list<Object*> objectsToExtract(room->Objects());
+          auto objectsToExtract(room->Objects());
 
-          for(Object *robj : objectsToExtract)
+          for(auto robj : objectsToExtract)
             {
               SeparateOneObjectFromGroup( robj );
               ExtractObject( robj );
@@ -2851,7 +2850,7 @@ void DestroyShip( Ship *ship, Character *killer )
         }
     }
 
-  for(Ship *lship : Ships)
+  for(auto lship : Ships)
     {
       if ( ship->Rooms.Hangar == INVALID_VNUM
            || lship->Location != ship->Rooms.Hangar)
@@ -2882,7 +2881,7 @@ void DestroyShip( Ship *ship, Character *killer )
   ResetShip(ship);
 }
 
-bool ShipToRoom(Ship *ship, vnum_t vnum )
+bool ShipToRoom(std::shared_ptr<Ship> ship, vnum_t vnum )
 {
   Room *shipto = NULL;
 
@@ -2895,7 +2894,7 @@ bool ShipToRoom(Ship *ship, vnum_t vnum )
   return true;
 }
 
-bool RentShip( Character *ch, const Ship *ship )
+bool RentShip( Character *ch, std::shared_ptr<Ship> ship )
 {
   long price = 0;
 
@@ -2920,11 +2919,11 @@ bool RentShip( Character *ch, const Ship *ship )
 bool ShipNameAndPersonalnameComboIsUnique( const std::string &name,
                                            const std::string &personalname )
 {
-  const Ship *existingShip = Ships->Find([name, personalname](const auto &ship)
-                                         {
-                                           return StrCmp(ship->Name, name) == 0
-                                             && StrCmp(ship->PersonalName, personalname) == 0;
-                                         });
+  auto existingShip = Ships->Find([name, personalname](const auto &ship)
+                                  {
+                                    return StrCmp(ship->Name, name) == 0
+                                      && StrCmp(ship->PersonalName, personalname) == 0;
+                                  });
   bool nameIsUnique = false;
 
   if(existingShip == nullptr)
@@ -2935,9 +2934,9 @@ bool ShipNameAndPersonalnameComboIsUnique( const std::string &name,
   return nameIsUnique;
 }
 
-void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData)
+void ForEachShip(std::function<bool(std::shared_ptr<Ship>, void*)> callback, void *userData)
 {
-  for(Ship *ship : Ships)
+  for(auto ship : Ships)
     {
       bool keepGoing = callback(ship, userData);
 

@@ -30,27 +30,27 @@ class Turret
 public:
   vnum_t RoomVnum = INVALID_VNUM;
   int WeaponState = LASER_READY;
-  Ship *Target = nullptr;
-  Ship *Owner = nullptr;
+  std::shared_ptr<Ship> Target;
+  ShipClass OwnerClass;
 };
 
-Turret *AllocateTurret( Ship *owner )
+Turret *AllocateTurret( ShipClass ownerClass )
 {
   Turret *turret = new Turret();
-  turret->Owner = owner;
+  turret->OwnerClass = ownerClass;
   ResetTurret( turret );
 
   return turret;
 }
 
-Turret *CopyTurret( const Turret *old_turret, Ship *owner_of_new_turret )
+Turret *CopyTurret( const Turret *old_turret, ShipClass ownerClassOfNewTurret )
 {
-  Turret *new_turret = AllocateTurret( owner_of_new_turret );
+  Turret *new_turret = AllocateTurret( ownerClassOfNewTurret );
 
   SetTurretRoom( new_turret, old_turret->RoomVnum );
   new_turret->WeaponState = old_turret->WeaponState;
   SetTurretTarget( new_turret, old_turret->Target );
-  new_turret->Owner = old_turret->Owner;
+  new_turret->OwnerClass = old_turret->OwnerClass;
 
   return new_turret;
 }
@@ -83,7 +83,7 @@ bool IsTurretReady( const Turret *turret )
 
 bool IsTurretRecharging( const Turret *turret )
 {
-  return turret->WeaponState > (int)turret->Owner->Class;
+  return turret->WeaponState > turret->OwnerClass;
 }
 
 void FireTurret( Turret *turret )
@@ -112,12 +112,12 @@ void ClearTurretTarget( Turret *turret )
   turret->Target = 0;
 }
 
-void SetTurretTarget( Turret *turret, Ship *target )
+void SetTurretTarget( Turret *turret, std::shared_ptr<Ship> target )
 {
   turret->Target = target;
 }
 
-Ship *GetTurretTarget( const Turret *turret )
+std::shared_ptr<Ship> GetTurretTarget( const Turret *turret )
 {
   return turret->Target;
 }

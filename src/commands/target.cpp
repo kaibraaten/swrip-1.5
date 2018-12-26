@@ -9,13 +9,14 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-static void SynchronizeTargetWithDockedShips(const Ship *ship, Ship *target);
+static void SynchronizeTargetWithDockedShips(std::shared_ptr<Ship> ship,
+                                             std::shared_ptr<Ship> target);
 
 void do_target(Character *ch, std::string arg )
 {
   int the_chance = 0;
-  Ship *ship = NULL;
-  Ship *target = NULL;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> target;
   char buf[MAX_STRING_LENGTH] = { '\0' };
   bool is_turret = false;
 
@@ -198,15 +199,15 @@ void do_target(Character *ch, std::string arg )
 
 struct UserData
 {
-  const Ship *ship;
-  Ship *target;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> target;
 };
 
-static bool SetSameTargetAsMothership(Ship *dockedShip, void *userData)
+static bool SetSameTargetAsMothership(std::shared_ptr<Ship> dockedShip, void *userData)
 {
   struct UserData *data = (struct UserData*)userData;
-  const Ship *ship = data->ship;
-  Ship *target = data->target;
+  std::shared_ptr<Ship> ship = data->ship;
+  std::shared_ptr<Ship> target = data->target;
 
   if( dockedShip->Docked == ship )
     {
@@ -216,9 +217,10 @@ static bool SetSameTargetAsMothership(Ship *dockedShip, void *userData)
   return true;
 }
 
-static void SynchronizeTargetWithDockedShips(const Ship *ship, Ship *target)
+static void SynchronizeTargetWithDockedShips(std::shared_ptr<Ship> ship,
+                                             std::shared_ptr<Ship> target)
 {
-  struct UserData data;
+  UserData data;
   data.ship = ship;
   data.target = target;
   ForEachShip(SetSameTargetAsMothership, &data);

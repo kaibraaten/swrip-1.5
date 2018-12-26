@@ -9,7 +9,7 @@
 void do_guard( Character *ch, std::string argument )
 {
   int the_chance = 0;
-  Ship *ship = NULL;
+  std::shared_ptr<Ship> ship;
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {

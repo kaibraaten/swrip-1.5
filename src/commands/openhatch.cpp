@@ -5,8 +5,8 @@
 
 void do_openhatch(Character *ch, std::string argument )
 {
-  Ship *ship = nullptr;
-  char buf[MAX_STRING_LENGTH];
+  std::shared_ptr<Ship> ship;
+  char buf[MAX_STRING_LENGTH] = {'\0'};
 
   if ( argument.empty() || !StrCmp(argument,"hatch") )
     {

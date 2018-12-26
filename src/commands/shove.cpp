@@ -64,7 +64,7 @@ void do_shove( Character *ch, std::string argument )
       if (!StrCmp( arg2, "in" ))
         {
 	  Room *to_room = NULL;
-	  Ship *ship = NULL;
+	  std::shared_ptr<Ship> ship;
 
           if ( argument.empty() )
             {
@@ -149,7 +149,7 @@ void do_shove( Character *ch, std::string argument )
         {
 	  Room *to_room = NULL;
           Room *fromroom = ch->InRoom;
-	  Ship *ship = GetShipFromEntrance(fromroom->Vnum);
+	  std::shared_ptr<Ship> ship = GetShipFromEntrance(fromroom->Vnum);
 
           if ( !ship )
             {
