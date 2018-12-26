@@ -1,22 +1,22 @@
-cmake_minimum_required(VERSION 2.8.9)
-project(test)
-include_directories(../..)
-set(PROJECT_LINK_LIBS libutility.so libgtest.so libgmock.so libpthread.so)
-link_directories(../)
-set(CMAKE_BUILD_TYPE Debug)
-set(GCC_WARNING_FLAGS "-Wall -Wshadow -Wformat-security -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Werror -Wwrite-strings -Wextra -Wno-char-subscripts -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-unused-result")
-set(GCC_STD_FLAG "-std=c++14")
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_WARNING_FLAGS} ${GCC_STD_FLAG}")
-set(SOURCES
+cmake_minimum_required(VERSION 3.11)
+include(GoogleTest)
+enable_testing()
+add_executable(utility_tests
   algorithms_tests.cpp
   bet_tests.cpp
   event_tests.cpp
   main.cpp
   misc_tests.cpp
   repository_tests.cpp
-  string_handling_tests.cpp)
-add_executable(test ${SOURCES})
-target_link_libraries(test ${PROJECT_LINK_LIBS})
-add_custom_command(TARGET test POST_BUILD
-    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/test
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+  string_handling_tests.cpp
+  )
+target_compile_features(utility_tests PRIVATE cxx_std_14)
+target_compile_options(utility_tests
+  PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>
+  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /DGTEST_LINKED_AS_SHARED_LIBRARY=1 /wd4996 /wd6262 /wd26451 /wd4267 /wd4244 /wd4018 /we4805 /we4305>
+  )
+target_link_libraries(utility_tests gtest_main gmock utility)
+gtest_discover_tests(utility_tests)
+add_custom_command(TARGET utility_tests
+  POST_BUILD
+  COMMAND ctest)

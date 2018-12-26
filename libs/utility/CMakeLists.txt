@@ -1,22 +1,22 @@
-cmake_minimum_required(VERSION 2.8.9)
-project(utility)
-include_directories(../)
+cmake_minimum_required(VERSION 3.11)
 set(CMAKE_BUILD_TYPE Debug)
-set(GCC_WARNING_FLAGS "-Wall -Wshadow -Wformat-security -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Werror -Wwrite-strings -Wextra -Wno-char-subscripts")
-set(GCC_STD_FLAG "-std=c++14")
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_WARNING_FLAGS} ${GCC_STD_FLAG}")
-set(SOURCES
-  bet.cpp
-  file_io.cpp
-  linkedlist.cpp
-  misc.cpp
-  oldrepository.cpp
-  os_posix.cpp
-  os_win32.cpp
-  random.cpp
-  repositorybase.cpp
-  sha256.cpp
-  string_handling.cpp
-  time_fun.cpp
-  vector3.cpp)
-add_library(utility SHARED ${SOURCES})
+add_library(utility SHARED
+  src/bet.cpp
+  src/file_io.cpp
+  src/linkedlist.cpp
+  src/misc.cpp
+  src/oldrepository.cpp
+  src/os_posix.cpp
+  src/os_win32.cpp
+  src/random.cpp
+  src/repositorybase.cpp
+  src/sha256.cpp
+  src/string_handling.cpp
+  src/time_fun.cpp
+  src/vector3.cpp
+  )
+target_compile_features(utility PUBLIC cxx_std_14)
+target_compile_options(utility
+  PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>
+  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /wd4996 /wd6262 /wd26451 /wd4267 /wd4244 /wd4018 /we4805 /we4305>
+)

@@ -62,7 +62,6 @@
 *.exe
 *.out
 *.app
-swrip
 cpptest
 ctest
 
