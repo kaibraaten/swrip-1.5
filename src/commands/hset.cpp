@@ -6,7 +6,7 @@
 
 void do_hset( Character *ch, std::string argument )
 {
-  HelpFile *pHelp = NULL;
+  std::shared_ptr<HelpFile> pHelp;
   std::string arg1;
   std::string arg2;
 
@@ -46,7 +46,6 @@ void do_hset( Character *ch, std::string argument )
   if ( !StrCmp( arg1, "remove" ) )
     {
       HelpFiles->Remove(pHelp);
-      FreeHelpFile( pHelp );
       ch->Echo("Removed.\r\n");
       return;
     }

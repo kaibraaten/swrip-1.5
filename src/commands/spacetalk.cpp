@@ -5,7 +5,7 @@
 
 void do_spacetalk( Character *ch, std::string argument )
 {
-  Ship *ship = GetShipFromCockpit(ch->InRoom->Vnum);
+  std::shared_ptr<Ship> ship = GetShipFromCockpit(ch->InRoom->Vnum);
 
   if ( !ship )
     {

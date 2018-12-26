@@ -8,7 +8,8 @@
 void do_adjusttractorbeam(Character *ch, std::string argument )
 {
   char buf[MAX_INPUT_LENGTH];
-  Ship *ship = nullptr, *eShip = nullptr;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> eShip;
 
   if (  (ship = GetShipFromCoSeat(ch->InRoom->Vnum))  == NULL )
     {

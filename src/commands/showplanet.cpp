@@ -18,7 +18,7 @@ void do_showplanet( Character *ch, std::string argument )
       return;
     }
 
-  const Planet *planet = Planets->FindByName(argument);
+  std::shared_ptr<Planet> planet = Planets->FindByName(argument);
 
   if ( planet == nullptr )
     {

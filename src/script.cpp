@@ -17,9 +17,9 @@
 lua_State *LuaMasterState = nullptr;
 
 static void SetLuaPath( lua_State * );
-static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx );
+static void LuaPushOneSmaugAffect( lua_State *L, std::shared_ptr<SmaugAffect> affect, int idx );
 
-lua_State *CreateLuaState( void )
+lua_State *CreateLuaState()
 {
   lua_State *L = luaL_newstate();
   luaL_openlibs( L );
@@ -264,9 +264,9 @@ std::bitset<Flag::MAX> LuaLoadFlags( lua_State *L, const std::string &key )
   return flags;
 }
 
-static SmaugAffect *LuaLoadOneSmaugAffect( lua_State *L )
+static std::shared_ptr<SmaugAffect> LuaLoadOneSmaugAffect( lua_State *L )
 {
-  SmaugAffect *affect = new SmaugAffect();
+  std::shared_ptr<SmaugAffect> affect = std::make_shared<SmaugAffect>();
   LuaGetfieldString( L, "Duration", &affect->Duration );
   LuaGetfieldString( L, "Modifier", &affect->Modifier );
   LuaGetfieldInt( L, "Location", &affect->Location );
@@ -278,9 +278,9 @@ static SmaugAffect *LuaLoadOneSmaugAffect( lua_State *L )
   return affect;
 }
 
-std::list<SmaugAffect*> LuaLoadSmaugAffects( lua_State *L )
+std::list<std::shared_ptr<SmaugAffect>> LuaLoadSmaugAffects( lua_State *L )
 {
-  std::list<SmaugAffect*> affectList;
+  std::list<std::shared_ptr<SmaugAffect>> affectList;
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Affects" );
 
@@ -290,7 +290,7 @@ std::list<SmaugAffect*> LuaLoadSmaugAffects( lua_State *L )
 
       while( lua_next( L, -2 ) )
         {
-	  SmaugAffect *affect = LuaLoadOneSmaugAffect( L );
+	  auto affect = LuaLoadOneSmaugAffect( L );
 	  affectList.push_front( affect );
           lua_pop( L, 1 );
         }
@@ -301,7 +301,7 @@ std::list<SmaugAffect*> LuaLoadSmaugAffects( lua_State *L )
   return affectList;
 }
 
-static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx )
+static void LuaPushOneSmaugAffect( lua_State *L, std::shared_ptr<SmaugAffect> affect, int idx )
 {
   lua_pushinteger( L, ++idx );
   lua_newtable( L );
@@ -336,7 +336,7 @@ static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int 
   lua_settable( L, -3 );
 }
 
-void LuaPushSmaugAffects( lua_State *L, const std::list<SmaugAffect*> &affectList )
+void LuaPushSmaugAffects( lua_State *L, const std::list<std::shared_ptr<SmaugAffect>> &affectList )
 {
   if( !affectList.empty() )
     {
@@ -344,7 +344,7 @@ void LuaPushSmaugAffects( lua_State *L, const std::list<SmaugAffect*> &affectLis
       lua_pushstring( L, "Affects" );
       lua_newtable( L );
 
-      for ( const SmaugAffect *affect : affectList )
+      for (auto affect : affectList)
 	{
 	  LuaPushOneSmaugAffect( L, affect, ++idx );
 	}
@@ -405,7 +405,7 @@ void LuaLoadCurrentAndMax( lua_State *L, const std::string &key, int *current, i
   lua_pop( L, 1 );
 }
 
-static void LuaPushCharacterAffect( lua_State *L, const Affect *affect, int idx )
+static void LuaPushCharacterAffect( lua_State *L, std::shared_ptr<Affect> affect, int idx )
 {
   const Skill *skill = GetSkill( affect->Type );
   
@@ -451,7 +451,7 @@ static void LuaPushCharacterAffect( lua_State *L, const Affect *affect, int idx 
   lua_settable( L, -3 );
 }
 
-static void LuaPushObjectAffect( lua_State *L, const Affect *affect, int idx )
+static void LuaPushObjectAffect( lua_State *L, std::shared_ptr<Affect> affect, int idx )
 {
   const Skill *skill = GetSkill( affect->Type );
 
@@ -503,9 +503,9 @@ static void LuaPushObjectAffect( lua_State *L, const Affect *affect, int idx )
   lua_settable( L, -3 );
 }
 
-static void LuaPushAffects( lua_State *L, const std::list<Affect*> &affects,
+static void LuaPushAffects( lua_State *L, const std::list<std::shared_ptr<Affect>> &affects,
                             const std::string &key,
-                            std::function<void(lua_State*, const Affect*, int)> pushOneAffect)
+                            std::function<void(lua_State*, std::shared_ptr<Affect>, int)> pushOneAffect)
 {
   if( !affects.empty() )
     {
@@ -513,7 +513,7 @@ static void LuaPushAffects( lua_State *L, const std::list<Affect*> &affects,
       lua_pushstring( L, "Affects" );
       lua_newtable( L );
 
-      for ( const Affect *affect : affects )
+      for ( auto affect : affects )
         {
           pushOneAffect( L, affect, ++idx );
         }
@@ -522,25 +522,25 @@ static void LuaPushAffects( lua_State *L, const std::list<Affect*> &affects,
     }
 }
 
-void LuaPushCharacterAffects( lua_State *L, const std::list<Affect*> &affects,
+void LuaPushCharacterAffects( lua_State *L, const std::list<std::shared_ptr<Affect>> &affects,
                               const std::string &key )
 {
   LuaPushAffects( L, affects, key, LuaPushCharacterAffect );
 }
 
-void LuaPushObjectAffects( lua_State *L, const std::list<Affect*> &affects,
+void LuaPushObjectAffects( lua_State *L, const std::list<std::shared_ptr<Affect>> &affects,
                            const std::string &key )
 {
   LuaPushAffects( L, affects, key, LuaPushObjectAffect );
 }
 
-void LuaPushExtraDescriptions( lua_State *L, const std::list<ExtraDescription*> &extras )
+void LuaPushExtraDescriptions( lua_State *L, const std::list<std::shared_ptr<ExtraDescription>> &extras )
 {
   lua_pushstring( L, "ExtraDescriptions" );
   lua_newtable( L );
   size_t idx = 0;
   
-  for( const ExtraDescription *ed : extras )
+  for( auto ed : extras )
     {
       lua_pushinteger( L, ++idx );
       lua_newtable( L );
@@ -554,9 +554,9 @@ void LuaPushExtraDescriptions( lua_State *L, const std::list<ExtraDescription*> 
   lua_settable( L, -3 );
 }
 
-std::list<ExtraDescription*> LuaLoadExtraDescriptions( lua_State *L )
+std::list<std::shared_ptr<ExtraDescription>> LuaLoadExtraDescriptions( lua_State *L )
 {
-  std::list<ExtraDescription*> extraDescriptions;
+  std::list<std::shared_ptr<ExtraDescription>> extraDescriptions;
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "ExtraDescriptions" );
 
@@ -566,7 +566,7 @@ std::list<ExtraDescription*> LuaLoadExtraDescriptions( lua_State *L )
 
       while( lua_next( L, -2 ) )
         {
-          ExtraDescription *ed = new ExtraDescription();
+          auto ed = std::make_shared<ExtraDescription>();
           LuaGetfieldString( L, "Keyword", &ed->Keyword );
           LuaGetfieldString( L, "Description", &ed->Description );
           extraDescriptions.push_back( ed );
@@ -1167,7 +1167,7 @@ static void LuaLoadCharacterStats( lua_State *L, Character *ch )
   LuaLoadStats( L, &ch->StatMods, "StatModifiers" );
 }
 
-static Affect *LuaLoadCharacterAffect( lua_State *L )
+static std::shared_ptr<Affect> LuaLoadCharacterAffect( lua_State *L )
 {
   Affect affect;
 
@@ -1208,10 +1208,10 @@ static Affect *LuaLoadCharacterAffect( lua_State *L )
 
   affect.AffectedBy = LuaLoadFlags( L, "AffectedBy" ).to_ulong();
 
-  return new Affect( affect );
+  return std::make_shared<Affect>( affect );
 }
 
-static Affect *LuaLoadObjectAffect( lua_State *L )
+static std::shared_ptr<Affect> LuaLoadObjectAffect( lua_State *L )
 {
   Affect affect;
   
@@ -1252,13 +1252,13 @@ static Affect *LuaLoadObjectAffect( lua_State *L )
       affect.Modifier = SkillNumberFromSlot( affect.Modifier );
     }
   
-  return new Affect( affect );
+  return std::make_shared<Affect>( affect );
 }
 
-static std::list<Affect*> LuaLoadAffects( lua_State *L, const std::string &key,
-                                          std::function<Affect*(lua_State*)> loadOneAffect)
+static std::list<std::shared_ptr<Affect>> LuaLoadAffects( lua_State *L, const std::string &key,
+                                                          std::function<std::shared_ptr<Affect>(lua_State*)> loadOneAffect)
 {
-  std::list<Affect*> affects;
+  std::list<std::shared_ptr<Affect>> affects;
   int idx = lua_gettop( L );
   lua_getfield( L, idx, key.c_str() );
 
@@ -1268,7 +1268,7 @@ static std::list<Affect*> LuaLoadAffects( lua_State *L, const std::string &key,
 
       while( lua_next( L, -2 ) )
         {
-          Affect *affect = loadOneAffect( L );
+          std::shared_ptr<Affect> affect = loadOneAffect( L );
 
           if( affect != nullptr )
             {
@@ -1283,12 +1283,12 @@ static std::list<Affect*> LuaLoadAffects( lua_State *L, const std::string &key,
   return affects;
 }
 
-std::list<Affect*> LuaLoadCharacterAffects( lua_State *L, const std::string &key )
+std::list<std::shared_ptr<Affect>> LuaLoadCharacterAffects( lua_State *L, const std::string &key )
 {
   return LuaLoadAffects( L, key, LuaLoadCharacterAffect );
 }
 
-std::list<Affect*> LuaLoadObjectAffects( lua_State *L, const std::string &key )
+std::list<std::shared_ptr<Affect>> LuaLoadObjectAffects( lua_State *L, const std::string &key )
 {
   return LuaLoadAffects( L, key, LuaLoadObjectAffect );
 }
@@ -1380,16 +1380,16 @@ static Object *LuaLoadObject( lua_State *L )
   LuaLoadOvalues( L, obj->Value );
   LuaLoadObjectSpells( L, obj );
   
-  std::list<Affect*> affects = LuaLoadObjectAffects( L, "Affects" );
+  auto affects = LuaLoadObjectAffects( L, "Affects" );
 
-  for( Affect *affect : affects )
+  for( auto affect : affects )
     {
       obj->Add( affect );
     }
 
-  std::list<ExtraDescription*> extraDescriptions = LuaLoadExtraDescriptions( L );
+  auto extraDescriptions = LuaLoadExtraDescriptions( L );
 
-  for( ExtraDescription *extra : extraDescriptions )
+  for( auto extra : extraDescriptions )
     {
       obj->Add(extra);
     }
@@ -1508,14 +1508,14 @@ void LuaLoadCharacter( lua_State *L, Character *ch,
 
   auto affects = LuaLoadCharacterAffects( L, "Affects" );
 
-  for( Affect *aff : affects )
+  for( auto aff : affects )
     {
       ch->Add( aff );
     }
   
   auto objects = LuaLoadObjects( L, "Inventory" );
 
-  for( Object *obj : objects )
+  for( auto obj : objects )
     {
       int tmpWearLoc = obj->WearLoc;
       obj->WearLoc = WEAR_NONE;

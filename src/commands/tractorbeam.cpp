@@ -11,8 +11,8 @@
 void do_tractorbeam( Character *ch, std::string arg )
 {
   int the_chance = 0;
-  Ship *ship = NULL;
-  Ship *target = NULL;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> target;
   char buf[MAX_STRING_LENGTH] = {'\0'};
 
   switch( ch->SubState )

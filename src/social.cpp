@@ -9,16 +9,11 @@
 #include "protomob.hpp"
 #include "repos/socialrepository.hpp"
 
-void FreeSocial( Social *social )
-{
-  delete social;
-}
-
 bool CheckSocial( Character *ch, const std::string &command, const std::string &argument )
 {
   std::string arg;
   Character *victim = NULL;
-  Social *social = Socials->FindByName(command);
+  std::shared_ptr<Social> social = Socials->FindByName(command);
 
   if (social == nullptr)
     {

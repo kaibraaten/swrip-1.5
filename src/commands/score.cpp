@@ -242,7 +242,7 @@ void do_score(Character *ch, std::string argument)
 
   if ( IsClanned( ch ) )
     {
-      const Clan *clan = ch->PCData->ClanInfo.Clan;
+      std::shared_ptr<Clan> clan = ch->PCData->ClanInfo.Clan;
 
       ch->Echo("&C----------------------------------------------------------------------------\r\n");
       ch->Echo("&cORGANIZATION: &C%-35s &cSALARY: &C%-10d    &cPkills/Deaths: &C%3.3d&c/&C%3.3d",
@@ -281,9 +281,9 @@ void do_score(Character *ch, std::string argument)
       ch->Echo("&C----------------------------------------------------------------------------\r\n");
       ch->Echo("&cAFFECT DATA:                            &C");
 
-      for(const Affect *paf : ch->Affects())
+      for(auto paf : ch->Affects())
         {
-          const Skill *sktmp = GetSkill(paf->Type);
+          auto sktmp = GetSkill(paf->Type);
           
           if ( sktmp == nullptr )
             continue;

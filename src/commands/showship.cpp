@@ -6,7 +6,7 @@
 
 void do_showship( Character *ch, std::string argument )
 {
-  const Ship *ship = NULL;
+  std::shared_ptr<Ship> ship;
 
   if ( IsNpc( ch ) )
     {

@@ -8,7 +8,6 @@
 void do_stun( Character *ch, std::string argument )
 {
   Character *victim = NULL;
-  Affect af;
   int stun_chance = 0;
   bool fail = false;
 
@@ -71,12 +70,13 @@ void do_stun( Character *ch, std::string argument )
 
       if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
         {
-          af.Type      = gsn_stun;
-          af.Location  = APPLY_AC;
-          af.Modifier  = 20;
-	  af.Duration  = 3;
-          af.AffectedBy = AFF_PARALYSIS;
-          AffectToCharacter( victim, &af );
+          std::shared_ptr<Affect> af = std::make_shared<Affect>();
+          af->Type      = gsn_stun;
+          af->Location  = APPLY_AC;
+          af->Modifier  = 20;
+	  af->Duration  = 3;
+          af->AffectedBy = AFF_PARALYSIS;
+          AffectToCharacter( victim, af );
           UpdatePosition( victim );
         }
     }

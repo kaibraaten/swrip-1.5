@@ -1,6 +1,7 @@
 #ifndef _SWRIP_AREA_HPP_
 #define _SWRIP_AREA_HPP_
 
+#include <memory>
 #include <bitset>
 #include <string>
 #include "types.hpp"
@@ -28,7 +29,7 @@ public:
   Area *PreviousSort = nullptr;
   Reset *FirstReset = nullptr;
   Reset *LastReset = nullptr;
-  class Planet *Planet = nullptr;
+  std::shared_ptr<class Planet> Planet;
   Area *NextOnPlanet = nullptr;
   Area *PreviousOnPlanet = nullptr;
   std::string Name;

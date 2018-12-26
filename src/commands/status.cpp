@@ -11,8 +11,8 @@
 void do_status(Character *ch, std::string argument )
 {
   int the_chance = 0;
-  Ship *ship = NULL;
-  Ship *target = NULL;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> target;
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
@@ -75,7 +75,7 @@ void do_status(Character *ch, std::string argument )
       static const char * const literal_number[MAX_NUMBER_OF_TURRETS_IN_SHIP] =
 	{ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
       const Turret *turret = target->WeaponSystems.Turrets[turret_num];
-      const Ship *turret_target = TurretHasTarget( turret ) ? GetTurretTarget( turret ) : NULL;
+      const std::shared_ptr<Ship> turret_target = TurretHasTarget( turret ) ? GetTurretTarget( turret ) : NULL;
       const std::string turret_target_name = turret_target ? turret_target->Name : "none";
       const char *turret_status = IsTurretDamaged( turret ) ? "Damaged" : "Good";
 

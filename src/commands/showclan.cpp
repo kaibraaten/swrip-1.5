@@ -2,11 +2,11 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-static const char *GetClanType(const Clan *const clan);
+static const char *GetClanType(const std::shared_ptr<Clan> &clan);
 
 void do_showclan( Character *ch, std::string argument )
 {
-  const Clan *clan = nullptr;
+  std::shared_ptr<Clan> clan;
 
   if ( IsNpc( ch ) )
     {
@@ -49,7 +49,7 @@ void do_showclan( Character *ch, std::string argument )
            clan->EnlistRoom1, clan->EnlistRoom2 );
 }
 
-static const char *GetClanType(const Clan *const clan)
+static const char *GetClanType(const std::shared_ptr<Clan> &clan)
 {
   return clan->Type == CLAN_GUILD ? "Guild" : "Organization";
 }

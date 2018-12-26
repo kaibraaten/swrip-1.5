@@ -45,13 +45,17 @@ std::string DrunkSpeech( const std::string &argument, Character *ch )
   char *txt1 = NULL;
 
   if ( IsNpc( ch ) || !ch->PCData )
-    return argument.c_str();
-
+    {
+      return argument;
+    }
+  
   drunk = ch->PCData->Condition[COND_DRUNK];
 
   if ( drunk <= 0 )
-    return argument;
-
+    {
+      return argument;
+    }
+  
   if ( argument.empty() )
     {
       Log->Bug( "%s: NULL argument", __FUNCTION__ );
@@ -185,7 +189,7 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   PositionType position = 0;
-  Clan *clan = NULL;
+  std::shared_ptr<Clan> clan;
 
   if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL && channel != CHANNEL_IMMTALK && channel != CHANNEL_OOC
        && channel != CHANNEL_ASK && channel != CHANNEL_NEWBIE && channel != CHANNEL_AVTALK
@@ -364,7 +368,7 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
       AppendToFile( LOG_FILE, buf2 );
     }
 
-  for(Descriptor *d : Descriptors->Entities())
+  for(Descriptor *d : Descriptors)
     {
       Character *och = d->Original ? d->Original : d->Character;
       Character *vch = d->Character;
@@ -436,8 +440,8 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
 
           if ( channel == CHANNEL_SHIP || channel == CHANNEL_SPACE || channel == CHANNEL_SYSTEM )
             {
-              Ship *ship = GetShipFromCockpit( ch->InRoom->Vnum );
-              Ship *target = nullptr;
+              std::shared_ptr<Ship> ship = GetShipFromCockpit( ch->InRoom->Vnum );
+              std::shared_ptr<Ship> target;
 
               if ( !ship )
                 continue;
@@ -467,8 +471,10 @@ void TalkChannel( Character *ch, const std::string &text, int channel, const std
             }
 
           position              = vch->Position;
+
           if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL )
             vch->Position       = POS_STANDING;
+
           if ( !CharacterKnowsLanguage( vch, ch->Speaking, ch ) &&
                (!IsNpc(ch) || ch->Speaking != 0)   &&
                ( channel != CHANNEL_NEWBIE &&
@@ -508,7 +514,7 @@ void ToChannel( const std::string &argument, int channel, const std::string &ver
 
   sprintf(buf, "%s: %s\r\n", verb.c_str(), argument.c_str() );
 
-  for ( Descriptor *d : Descriptors->Entities() )
+  for ( Descriptor *d : Descriptors )
     {
       Character *och = d->Original ? d->Original : d->Character;
       Character *vch = d->Character;
@@ -658,7 +664,7 @@ void TalkAuction(const std::string &argument)
 
   sprintf (buf,"Auction: %s", argument.c_str()); /* last %s to reset color */
 
-  for (Descriptor *d : Descriptors->Entities())
+  for (Descriptor *d : Descriptors )
     {
       Character *original = d->Original ? d->Original : d->Character; /* if switched */
 
@@ -696,7 +702,7 @@ bool CharacterKnowsLanguage( const Character *ch, int language, const Character 
       if ( IsNpc(ch) || IsNpc(cch) )
         return true;
       if ( ch->PCData->ClanInfo.Clan == cch->PCData->ClanInfo.Clan
-	   && ch->PCData->ClanInfo.Clan != NULL )
+	   && ch->PCData->ClanInfo.Clan != nullptr )
         return true;
     }
   if ( !IsNpc( ch ) )

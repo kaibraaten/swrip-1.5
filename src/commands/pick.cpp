@@ -14,7 +14,7 @@ void do_pick( Character *ch, std::string arg )
 {
   Object *obj = NULL;
   Exit *pexit = NULL;
-  Ship *ship = NULL;
+  std::shared_ptr<Ship> ship;
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {

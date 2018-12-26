@@ -22,6 +22,7 @@
 #ifndef _SWRIP_HELP_HPP_
 #define _SWRIP_HELP_HPP_
 
+#include <memory>
 #include <string>
 #include "types.hpp"
 
@@ -35,17 +36,16 @@ public:
 
 extern std::string HelpGreeting;
 
-HelpFile *GetHelpFile( const Character *ch, std::string argument );
-HelpFile *AllocateHelpFile( const std::string &keyword, short level );
-void FreeHelpFile( HelpFile *help );
+std::shared_ptr<HelpFile> GetHelpFile( const Character *ch, std::string argument );
+std::shared_ptr<HelpFile> AllocateHelpFile( const std::string &keyword, short level );
 
-short GetHelpFileLevel( const HelpFile *help );
-void SetHelpFileLevel( HelpFile *help, short level );
+short GetHelpFileLevel( const std::shared_ptr<HelpFile> &help );
+void SetHelpFileLevel( const std::shared_ptr<HelpFile> &help, short level );
 
-std::string GetHelpFileKeyword( const HelpFile *help );
-void SetHelpFileKeyword( HelpFile *help, const std::string &keyword );
+std::string GetHelpFileKeyword( const std::shared_ptr<HelpFile> &help );
+void SetHelpFileKeyword( const std::shared_ptr<HelpFile> &help, const std::string &keyword );
 
-std::string GetHelpFileText( const HelpFile *help );
-void SetHelpFileText( HelpFile *help, const std::string &text );
+std::string GetHelpFileText( const std::shared_ptr<HelpFile> &help );
+void SetHelpFileText( const std::shared_ptr<HelpFile> &help, const std::string &text );
 
 #endif

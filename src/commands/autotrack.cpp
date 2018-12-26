@@ -8,7 +8,7 @@
 
 void do_autotrack( Character *ch, std::string argument )
 {
-  Ship *ship = nullptr;
+  std::shared_ptr<Ship> ship;
   int the_chance = 0;
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )

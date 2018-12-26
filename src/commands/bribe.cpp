@@ -11,8 +11,8 @@ void do_bribe( Character *ch, std::string argument )
 {
   std::string arg1;
   Character *victim = NULL;
-  Planet *planet = NULL;
-  Clan *clan = NULL;
+  std::shared_ptr<Planet> planet;
+  std::shared_ptr<Clan> clan;
   int percent = 0;
   int amount = 0;
 

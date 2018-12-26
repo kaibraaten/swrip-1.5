@@ -9,7 +9,7 @@ bool spec_clan_guard( Character *ch )
   if ( !IsAwake(ch) || ch->Fighting )
     return false;
 
-  const Clan *clan = GetClan(ch->Name);
+  std::shared_ptr<Clan> clan = GetClan(ch->Name);
   std::list<Character*> charactersToActOn(ch->InRoom->Characters());
 
   for(Character *victim : charactersToActOn)

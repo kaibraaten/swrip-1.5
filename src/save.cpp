@@ -438,7 +438,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "Prompt       %s~\n",      ch->PCData->Prompt.c_str()      );
 	}
 
-      for(const Alias *alias : ch->PCData->Aliases())
+      for(auto alias : ch->PCData->Aliases())
         {
           if(alias->Name.empty() || alias->Command.empty())
 	    {
@@ -599,7 +599,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
         }
     }
 
-  for(const Affect *paf : ch->Affects())
+  for(auto paf : ch->Affects())
     {
       if ( paf->Type >= 0 && (skill=GetSkill(paf->Type)) == NULL )
 	{
@@ -854,7 +854,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
       break;
     }
 
-  for ( const Affect *paf : obj->Affects() )
+  for ( auto paf : obj->Affects() )
     {
       /*
        * Save extra object affects                              -Thoric
@@ -891,7 +891,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, s
 	}
     }
 
-  for(const ExtraDescription *ed : obj->ExtraDescriptions())
+  for(auto ed : obj->ExtraDescriptions())
     {
       fprintf( fp, "ExtraDescr   %s~ %s~\n",
 	       ed->Keyword.c_str(), ed->Description.c_str() );
@@ -929,7 +929,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
         case 'A':
           if ( !StrCmp( word, "Affect" ) || !StrCmp( word, "AffectData" ) )
             {
-              Affect *paf = new Affect();
+              std::shared_ptr<Affect> paf = std::make_shared<Affect>();
               int pafmod = 0;
 
               if ( !StrCmp( word, "Affect" ) )
@@ -989,7 +989,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
           if ( !StrCmp( word, "ExtraDescr" ) )
             {
-              ExtraDescription *ed = new ExtraDescription();
+              auto ed = std::make_shared<ExtraDescription>();
 
               ed->Keyword = ReadStringToTilde( fp,Log, fBootDb );
               ed->Description = ReadStringToTilde( fp,Log, fBootDb );
@@ -1230,16 +1230,14 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
           while( !obj->ExtraDescriptions().empty() )
             {
-              ExtraDescription *ed = obj->ExtraDescriptions().front();
+              auto ed = obj->ExtraDescriptions().front();
               obj->Remove(ed);
-              delete ed;
             }
 
           while( !obj->Affects().empty() )
             {
-              Affect *paf = obj->Affects().front();
+              std::shared_ptr<Affect> paf = obj->Affects().front();
               obj->Remove(paf);
-              delete paf;
             }
 
           delete obj;
@@ -1271,7 +1269,7 @@ void WriteCorpses( const Character *ch, std::string name )
     }
 
   /* Go by vnum, less chance of screwups. -- Altrag */
-  for( const Object *corpse : Objects->Entities() )
+  for( const Object *corpse : Objects )
     {
       if ( corpse->Prototype->Vnum == OBJ_VNUM_CORPSE_PC
 	   && corpse->InRoom != NULL && corpse->Value[OVAL_CORPSE_SKINNED] != 1

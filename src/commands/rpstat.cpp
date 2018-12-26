@@ -14,7 +14,7 @@ void do_rpstat( Character *ch, std::string argument )
   ch->Echo("Name: %s.  Vnum: %ld.\r\n",
            ch->InRoom->Name.c_str(), ch->InRoom->Vnum );
 
-  for(const MPROG_DATA *mprg : ch->InRoom->mprog.MudProgs())
+  for(auto mprg : ch->InRoom->mprog.MudProgs())
     {
       ch->Echo(">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),

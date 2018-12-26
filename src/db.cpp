@@ -85,8 +85,6 @@ time_t last_restore_all_time = 0;
 TeleportData *FirstTeleport = NULL;
 TeleportData *LastTeleport = NULL;
 
-ExtractedCharacter *extracted_char_queue = NULL;
-
 Character *FirstCharacter = NULL;
 Character *LastCharacter = NULL;
 char log_buf[2*MAX_INPUT_LENGTH];
@@ -951,9 +949,9 @@ Object *CreateObject( ProtoObject *proto, int level )
  * Get an extra description from a list.
  */
 std::string GetExtraDescription( const std::string &name,
-                                 const std::list<ExtraDescription*> &extras )
+                                 const std::list<std::shared_ptr<ExtraDescription>> &extras )
 {
-  for(const ExtraDescription *ed : extras)
+  for(auto ed : extras)
     {
       if ( IsName( name, ed->Keyword ) )
         {
@@ -1390,18 +1388,18 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, const std::string &name )
       pObjIndex->Weight         = cObjIndex->Weight;
       pObjIndex->Cost           = cObjIndex->Cost;
 
-      for(ExtraDescription *ced : cObjIndex->ExtraDescriptions() )
+      for(auto ced : cObjIndex->ExtraDescriptions() )
         {
-          ExtraDescription *ed = new ExtraDescription();
+          auto ed = std::make_shared<ExtraDescription>();
           ed->Keyword           = ced->Keyword;
           ed->Description               = ced->Description;
           pObjIndex->Add(ed);
           top_ed++;
         }
 
-      for(const Affect *cpaf : cObjIndex->Affects())
+      for(auto cpaf : cObjIndex->Affects())
         {
-          Affect *paf = new Affect();
+          std::shared_ptr<Affect> paf = std::make_shared<Affect>();
           paf->Type         = cpaf->Type;
           paf->Duration     = cpaf->Duration;
           paf->Location     = cpaf->Location;

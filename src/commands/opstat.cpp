@@ -32,7 +32,7 @@ void do_opstat( Character *ch, std::string arg )
   ch->Echo("Short description: %s.\r\n",
              obj->ShortDescr.c_str() );
 
-  for(const MPROG_DATA *mprg : obj->Prototype->mprog.MudProgs())
+  for(auto mprg : obj->Prototype->mprog.MudProgs())
     {
       ch->Echo(">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),

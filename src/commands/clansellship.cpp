@@ -10,8 +10,8 @@
 void do_clansellship(Character *ch, std::string argument )
 {
   long price = 0;
-  Ship *ship = NULL;
-  Clan *clan = NULL;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Clan> clan;
 
   if ( IsNpc(ch) )
     {

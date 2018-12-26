@@ -112,7 +112,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   strcat( buf, " was carelessly misplaced here." );
   blaster->Description = Capitalize( buf );
 
-  Affect *hitroll = new Affect();
+  auto hitroll = std::make_shared<Affect>();
   hitroll->Type       = -1;
   hitroll->Duration   = -1;
   hitroll->Location   = GetAffectType( "hitroll" );
@@ -120,7 +120,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   blaster->Add(hitroll);
   ++top_affect;
 
-  Affect *damroll = new Affect();
+  auto damroll = std::make_shared<Affect>();
   damroll->Type      = -1;
   damroll->Duration  = -1;
   damroll->Location  = GetAffectType( "damroll" );
@@ -130,7 +130,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 
   if ( ud->Scope == true )
     {
-      Affect *snipe = new Affect();
+      auto snipe = std::make_shared<Affect>();
       snipe->Type      = -1;
       snipe->Duration  = -1;
       snipe->Location  = GetAffectType( "snipe" );

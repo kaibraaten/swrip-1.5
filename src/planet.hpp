@@ -1,6 +1,7 @@
 #ifndef _SWRIP_PLANET_HPP_
 #define _SWRIP_PLANET_HPP_
 
+#include <memory>
 #include <string>
 #include <list>
 #include <bitset>
@@ -27,19 +28,19 @@ public:
   void Add(Area *area);
   void Remove(Area *area);
   
-  struct Spaceobject *Spaceobject = nullptr;
+  std::shared_ptr<class Spaceobject> Spaceobject;
   std::string Name;
   long BaseValue = 0;
-  Clan *GovernedBy = nullptr;
+  std::shared_ptr<Clan> GovernedBy;
   int Population = 0;
   std::bitset<Flag::MAX> Flags;
   double PopularSupport = 0.0;
 
 private:
   struct Impl;
-  Impl *pImpl;
+  std::unique_ptr<Impl> pImpl;
 };
 
-long GetTaxes( const Planet *planet );
+long GetTaxes( std::shared_ptr<Planet> planet );
 
 #endif

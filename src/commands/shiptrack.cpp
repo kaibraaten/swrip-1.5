@@ -7,8 +7,8 @@
 
 void do_shiptrack( Character *ch, std::string argument)
 {
-  Ship *ship = nullptr;
-  Spaceobject *spaceobject = nullptr;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Spaceobject> spaceobject;
   std::string arg;
   std::string arg1;
   std::string arg2;
@@ -86,7 +86,7 @@ void do_shiptrack( Character *ch, std::string argument)
                  ship->Position.y + head.y, ship->Position.z + head.z );
 
       
-      for(Spaceobject *so : Spaceobjects->Entities())
+      for(auto so : Spaceobjects)
         {
           if( IsSpaceobjectInRange( ship, so))
             {

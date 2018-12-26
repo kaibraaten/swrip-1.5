@@ -75,16 +75,16 @@ void do_bind( Character *ch, std::string argument )
 
 static bool AffParalysis( Character *ch, Character *victim )
 {
-  Affect af;
+  std::shared_ptr<Affect> af = std::make_shared<Affect>();
 
   if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
     {
-      af.Type      = gsn_stun;
-      af.Location  = APPLY_AC;
-      af.Modifier  = 20;
-      af.Duration  = 30;
-      af.AffectedBy = AFF_PARALYSIS;
-      AffectToCharacter( victim, &af );
+      af->Type      = gsn_stun;
+      af->Location  = APPLY_AC;
+      af->Modifier  = 20;
+      af->Duration  = 30;
+      af->AffectedBy = AFF_PARALYSIS;
+      AffectToCharacter( victim, af );
       UpdatePosition( victim );
 
       if ( IsNpc(victim) )

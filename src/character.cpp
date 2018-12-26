@@ -44,17 +44,17 @@
 
 struct Character::Impl
 {
-  std::list<Affect*> Affects;
+  std::list<std::shared_ptr<Affect>> Affects;
   std::list<Object*> Objects;
-  std::list<Timer*> Timers;
+  std::list<std::shared_ptr<Timer>> Timers;
 };
 
-Character::Character(class PCData *pcdata, Descriptor *desc)
+Character::Character(std::unique_ptr<class PCData> pcdata, Descriptor *desc)
   : Desc(desc),
-    PCData(pcdata),
+    PCData(std::move(pcdata)),
     Flags(PLR_BLANK | PLR_COMBINE | PLR_PROMPT),
     PermStats( 10 ),
-    pImpl(new Impl())
+    pImpl(std::make_unique<Impl>())
 {
   desc->Character = this;
   Ability.Level.fill(0);
@@ -96,7 +96,7 @@ Character::Character(ProtoMobile *protoMob)
     Weight( protoMob->Weight),
     VipFlags( protoMob->VipFlags),
     PermStats( protoMob->Stats ),
-    pImpl(new Impl())
+    pImpl(std::make_unique<Impl>())
 {
   Ability.Level.fill(0);
   Ability.Experience.fill(0);
@@ -135,12 +135,7 @@ Character::Character(ProtoMobile *protoMob)
 
 Character::~Character()
 {
-  if(PCData != NULL)
-    {
-      delete PCData;
-    }
 
-  delete pImpl;
 }
 
 void Character::Echo(const std::string &txt) const
@@ -166,17 +161,17 @@ void Character::Echo(const char *fmt, ...) const
     }
 }
 
-const std::list<Affect*> &Character::Affects() const
+const std::list<std::shared_ptr<Affect>> &Character::Affects() const
 {
   return pImpl->Affects;
 }
 
-void Character::Add(Affect *affect)
+void Character::Add(std::shared_ptr<Affect> affect)
 {
   pImpl->Affects.push_back(affect);
 }
 
-void Character::Remove(Affect *affect)
+void Character::Remove(std::shared_ptr<Affect> affect)
 {
   pImpl->Affects.remove(affect);
 }
@@ -198,17 +193,17 @@ void Character::Remove(Object *object)
   object->CarriedBy = nullptr;
 }
 
-const std::list<Timer*> &Character::Timers() const
+const std::list<std::shared_ptr<Timer>> &Character::Timers() const
 {
   return pImpl->Timers;
 }
 
-void Character::Add(Timer *timer)
+void Character::Add(std::shared_ptr<Timer> timer)
 {
   pImpl->Timers.push_back(timer);
 }
 
-void Character::Remove(Timer *timer)
+void Character::Remove(std::shared_ptr<Timer> timer)
 {
   pImpl->Timers.remove(timer);
 }
@@ -499,7 +494,7 @@ bool IsAffected( const Character *ch, int sn )
               [sn](const auto affect)
               {
                 return affect->Type == sn;
-              });
+              }) != nullptr;
 }
 
 bool IsAffectedBy( const Character *ch, int affected_by_bit )
@@ -591,12 +586,16 @@ void EquipCharacter( Character *ch, Object *obj, WearLocation iWear )
   if ( IsBitSet( obj->Flags, ITEM_MAGIC ) || obj->WearLoc == WEAR_FLOATING )
     ch->CarryWeight  -= GetObjectWeight( obj );
 
-  for(Affect *paf : obj->Prototype->Affects())
-    ModifyAffect( ch, paf, true );
-
-  for(Affect *paf : obj->Affects())
-    ModifyAffect( ch, paf, true );
-
+  for(auto paf : obj->Prototype->Affects())
+    {
+      ModifyAffect( ch, paf, true );
+    }
+  
+  for(auto paf : obj->Affects())
+    {
+      ModifyAffect( ch, paf, true );
+    }
+  
   if ( obj->ItemType == ITEM_LIGHT
        && obj->Value[OVAL_LIGHT_POWER] != 0
        && ch->InRoom )
@@ -621,11 +620,11 @@ void UnequipCharacter( Character *ch, Object *obj )
   ch->ArmorClass += GetObjectArmorClass( obj, obj->WearLoc );
   obj->WearLoc  = WEAR_NONE;
 
-  for(Affect *paf : obj->Prototype->Affects())
+  for(auto paf : obj->Prototype->Affects())
     ModifyAffect( ch, paf, false );
 
   if ( obj->CarriedBy )
-    for(Affect *paf : obj->Affects())
+    for(auto paf : obj->Affects())
       ModifyAffect( ch, paf, false );
 
   if ( !obj->CarriedBy )
@@ -1031,7 +1030,7 @@ void FixCharacterStats( Character *ch )
       ObjectFromCharacter( obj );
     }
   
-  for(Affect *aff : ch->Affects())
+  for(auto aff : ch->Affects())
     {
       ModifyAffect( ch, aff, false );
     }
@@ -1055,7 +1054,7 @@ void FixCharacterStats( Character *ch )
   ch->CarryWeight         = 0;
   ch->CarryNumber         = 0;
 
-  for(Affect *aff : ch->Affects())
+  for(auto aff : ch->Affects())
     {
       ModifyAffect( ch, aff, true );
     }
@@ -1440,7 +1439,7 @@ void FreeCharacter( Character *ch )
     {
       if ( ch->PCData->Note )
         {
-          FreeNote( ch->PCData->Note );
+          ch->PCData->Note.reset();
         }
 
       if( ch->PCData->CraftingSession )
@@ -1450,17 +1449,16 @@ void FreeCharacter( Character *ch )
 
       while(!ch->PCData->Comments().empty())
         {
-          FreeNote(ch->PCData->Comments().front());
+          ch->PCData->Remove(ch->PCData->Comments().front());
         }
 
       FreeAliases( ch );
       ImcFreeCharacter( ch );
     }
 
-  for(MPROG_ACT_LIST *mpact : ch->mprog.ActLists())
+  for(auto mpact : ch->mprog.ActLists())
     {
       FreeMemory( mpact->buf );
-      delete mpact;
     }
   
   delete ch;

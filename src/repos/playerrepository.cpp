@@ -107,6 +107,9 @@ bool InMemoryPlayerRepository::Load( Descriptor *d, const std::string &name, boo
     }
   else
     {
+      Character *ch = new Character(std::make_unique<PCData>(), d);
+      ch->Name = Capitalize(name);
+      ImcInitializeCharacter( ch );
       loading_char = nullptr;
       return false;
     }
@@ -135,7 +138,7 @@ bool InMemoryPlayerRepository::Load( Descriptor *d, const std::string &name, boo
     }
   
   lua_close( L );
-
+  loading_char = nullptr;
   return found;
 }
 
@@ -236,7 +239,7 @@ void InMemoryPlayerRepository::LoadGuildData( lua_State *L, Character *ch )
       if( !lua_isnil( L, ++idx ) )
         {
           std::string guildName = lua_tostring( L, idx );
-          Clan *guild = GetClan( guildName );
+          std::shared_ptr<Clan> guild = GetClan( guildName );
 
           if( guild != nullptr )
             {
@@ -311,7 +314,7 @@ void InMemoryPlayerRepository::LoadComments( lua_State *L, Character *ch )
 
       while( lua_next( L, -2 ) )
         {
-          Note *note = new Note();
+          std::shared_ptr<Note> note = std::make_shared<Note>();
           LuaGetfieldString( L, "Sender", &note->Sender );
           LuaGetfieldString( L, "Date", &note->Date );
           LuaGetfieldString( L, "To", &note->ToList );
@@ -494,7 +497,7 @@ void InMemoryPlayerRepository::LoadAliases( lua_State *L, Character *ch )
 
           if( !alias.Name.empty() && !alias.Command.empty() )
             {
-              ch->PCData->Add( new Alias(alias) );
+              ch->PCData->Add( std::make_shared<Alias>(alias) );
             }
         }
     }
@@ -522,7 +525,7 @@ int InMemoryPlayerRepository::L_CharacterEntry( lua_State *L )
   bool preload = lua_toboolean( L, -1 );
   lua_pop( L, 2 );
   
-  Character *ch = new Character(new PCData(), d);
+  Character *ch = new Character(std::make_unique<PCData>(), d);
 
   loading_char = ch;  
   ImcInitializeCharacter( ch );
@@ -634,7 +637,7 @@ void InMemoryPlayerRepository::PushAliases( lua_State *L, const Character *pc )
   lua_pushstring( L, "Aliases" );
   lua_newtable( L );
 
-  for( const Alias *alias : pc->PCData->Aliases() )
+  for( auto alias : pc->PCData->Aliases() )
     {
       LuaSetfieldString( L, "Name", alias->Name );
       LuaSetfieldString( L, "Value", alias->Command );
@@ -747,7 +750,7 @@ void InMemoryPlayerRepository::PushComments( lua_State *L, const Character *pc )
   lua_newtable( L );
   size_t idx = 0;
   
-  for( const Note *note : pc->PCData->Comments() )
+  for( auto note : pc->PCData->Comments() )
     {
       lua_pushnumber( L, ++idx );
       lua_newtable( L );

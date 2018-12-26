@@ -138,12 +138,12 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
 	  break;
         }
 
-      for(const Affect *paf : obj->Prototype->Affects())
+      for(auto paf : obj->Prototype->Affects())
         {
           ShowAffectToCharacter( ch, paf );
         }
 
-      for(const Affect *paf : obj->Affects())
+      for(auto paf : obj->Affects())
         {
           ShowAffectToCharacter( ch, paf );
         }
@@ -185,7 +185,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
               return rNONE;
             }
 
-          for(const Affect *paf : victim->Affects())
+          for(auto paf : victim->Affects())
             {
               const Skill *sktmp = nullptr;
               

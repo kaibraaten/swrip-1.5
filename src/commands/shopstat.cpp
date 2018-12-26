@@ -5,7 +5,7 @@
 
 void do_shopstat( Character *ch, std::string argument )
 {
-  const Shop *shop = nullptr;
+  std::shared_ptr<Shop> shop;
   const ProtoMobile *mob = nullptr;
   vnum_t vnum = INVALID_VNUM;
 

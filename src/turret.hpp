@@ -23,14 +23,15 @@
 #ifndef _SWRIP_TURRET_HPP_
 #define _SWRIP_TURRET_HPP_
 
+#include <memory>
 #include "types.hpp"
 #include "script.hpp"
 
 class Turret;
 
-Turret *AllocateTurret( Ship *owner );
+Turret *AllocateTurret( ShipClass ownerClass );
 void FreeTurret( Turret *turret );
-Turret *CopyTurret( const Turret *old_turret, Ship *owner_of_new_turret );
+Turret *CopyTurret( const Turret *old_turret, ShipClass ownerClassOfNewTurret );
 
 bool IsTurretInstalled( const Turret *turret );
 
@@ -46,8 +47,8 @@ bool IsTurretRecharging( const Turret *turret );
 void FireTurret( Turret *turret );
 
 void ClearTurretTarget( Turret *turret );
-void SetTurretTarget( Turret *turret, Ship *target );
-Ship *GetTurretTarget( const Turret *turret );
+void SetTurretTarget( Turret *turret, std::shared_ptr<Ship> target );
+std::shared_ptr<Ship> GetTurretTarget( const Turret *turret );
 bool TurretHasTarget( const Turret *turret );
 
 void SetTurretRoom( Turret *turret, vnum_t room_vnum );

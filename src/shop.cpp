@@ -78,7 +78,7 @@ Character *FindKeeper( const Character *ch )
 Character *FindKeeperQ( const Character *ch, bool message )
 {
   Character *keeper = nullptr;
-  const Shop *pShop = nullptr;
+  std::shared_ptr<Shop> pShop;
 
   for(auto i = std::begin(ch->InRoom->Characters()); i != std::end(ch->InRoom->Characters()); ++i)
     {
@@ -143,7 +143,7 @@ Character *FindKeeperQ( const Character *ch, bool message )
 Character *FindFixer( const Character *ch )
 {
   Character *keeper = NULL;
-  const RepairShop *rShop = NULL;
+  std::shared_ptr<RepairShop> rShop;
 
   for(auto i = std::begin(ch->InRoom->Characters()); i != std::end(ch->InRoom->Characters()); ++i)
     {
@@ -187,7 +187,7 @@ Character *FindFixer( const Character *ch )
 
 int GetObjectCost( const Character *ch, const Character *keeper, const Object *obj, bool fBuy )
 {
-  const Shop *pShop = NULL;
+  std::shared_ptr<Shop> pShop;
   int cost = 0;
   bool richcustomer = false;
   int profitmod = 0;
@@ -275,7 +275,7 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
 
 int GetRepairCost( const Character *keeper, const Object *obj )
 {
-  const RepairShop *rShop = NULL;
+  std::shared_ptr<RepairShop> rShop;
   int cost = 0;
   int itype = 0;
   bool found = false;

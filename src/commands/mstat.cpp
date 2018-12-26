@@ -212,9 +212,9 @@ void do_mstat( Character *ch, std::string arg )
   ch->Echo("Defenses   : %s\r\n",
            FlagString(victim->DefenseFlags, DefenseFlags).c_str() );
 
-  for(const Affect *paf : victim->Affects())
+  for(auto paf : victim->Affects())
     {
-      const Skill *skill = GetSkill(paf->Type);
+      auto skill = GetSkill(paf->Type);
       
       if ( skill != nullptr )
 	{

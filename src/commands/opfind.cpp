@@ -66,7 +66,7 @@ void do_opfind( Character *ch, std::string argument )
         {
           int tot_vnum = 0;
 
-          for(const MPROG_DATA *pProg : obj->mprog.MudProgs())
+          for(auto pProg : obj->mprog.MudProgs())
             {
               tot_vnum += CountStringOccurances(pProg->comlist, argument);
             }

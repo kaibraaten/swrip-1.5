@@ -5,7 +5,7 @@
 
 void do_repairstat( Character *ch, std::string argument )
 {
-  RepairShop *repair = nullptr;
+  std::shared_ptr<RepairShop> repair;
   ProtoMobile *mob = nullptr;
   vnum_t vnum = INVALID_VNUM;
 

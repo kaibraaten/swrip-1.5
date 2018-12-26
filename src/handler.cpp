@@ -53,7 +53,18 @@ int cur_obj_serial = 0;
 bool cur_obj_extracted = false;
 obj_ret global_objcode = rNONE;
 
-static std::deque<Object*> ExtractedObjectQueue;
+static std::list<Object*> ExtractedObjectQueue;
+
+class ExtractedCharacter
+{
+public:
+  class Character *Character = nullptr;
+  Room *InRoom = nullptr;
+  ch_ret RetCode = rNONE;
+  bool Extract = false;
+};
+
+static std::list<std::shared_ptr<ExtractedCharacter>> ExtractedCharacterQueue;
 
 static Object *GroupObject( Object *obj1, Object *obj2 );
 
@@ -246,7 +257,7 @@ static void ApplySkillAffect( Character *ch, int sn, int mod )
 /*
  * Apply or remove an affect to a character.
  */
-void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
+void ModifyAffect( Character *ch, std::shared_ptr<Affect> paf, bool fAdd )
 {
   Object *wield = NULL;
   int mod = paf->Modifier;
@@ -628,12 +639,12 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
 /*
  * Give an affect to a char.
  */
-void AffectToCharacter( Character *ch, Affect *paf )
+void AffectToCharacter( Character *ch, std::shared_ptr<Affect> paf )
 {
   assert(ch != nullptr);
   assert(paf != nullptr);
 
-  Affect *paf_new = new Affect();
+  std::shared_ptr<Affect> paf_new = std::make_shared<Affect>();
 
   ch->Add(paf_new);
   paf_new->Type        = paf->Type;
@@ -648,7 +659,7 @@ void AffectToCharacter( Character *ch, Affect *paf )
 /*
  * Remove an affect from a char.
  */
-void RemoveAffect( Character *ch, Affect *paf )
+void RemoveAffect( Character *ch, std::shared_ptr<Affect> paf )
 {
   if ( ch->Affects().empty() )
     {
@@ -658,7 +669,6 @@ void RemoveAffect( Character *ch, Affect *paf )
 
   ModifyAffect( ch, paf, false );
   ch->Remove(paf);
-  delete paf;
 }
 
 /*
@@ -666,13 +676,13 @@ void RemoveAffect( Character *ch, Affect *paf )
  */
 void StripAffect( Character *ch, int sn )
 {
-  std::list<Affect*> affectsToRemove = Filter(ch->Affects(),
-                                              [sn](const auto affect)
-                                              {
-                                                return affect->Type == sn;
-                                              });
+  auto affectsToRemove = Filter(ch->Affects(),
+                                [sn](const auto affect)
+                                {
+                                  return affect->Type == sn;
+                                });
 
-  for(Affect *affect : affectsToRemove)
+  for(auto affect : affectsToRemove)
     {
       RemoveAffect( ch, affect );
     }
@@ -683,9 +693,9 @@ void StripAffect( Character *ch, int sn )
  * Limitations put in place by Thoric, they may be high... but at least
  * they're there :)
  */
-void JoinAffect( Character *ch, Affect *paf )
+void JoinAffect( Character *ch, std::shared_ptr<Affect> paf )
 {
-  for(Affect *paf_old : ch->Affects())
+  for(auto paf_old : ch->Affects())
     {
       if ( paf_old->Type == paf->Type )
 	{
@@ -1138,19 +1148,17 @@ void ExtractObject( Object *obj )
       ExtractObject( obj_content );
     }
   
-  std::list<Affect*> affects(obj->Affects());
+  auto affects(obj->Affects());
 
-  for(Affect *paf : affects)
+  for(auto paf : affects)
     {
       obj->Remove(paf);
-      delete paf;
     }
 
-  std::list<ExtraDescription*> extraDescriptions(obj->ExtraDescriptions());
+  auto extraDescriptions = obj->ExtraDescriptions();
 
-  for(ExtraDescription *ed : extraDescriptions)
+  for(auto ed : extraDescriptions)
     {
-      delete ed;
       obj->Remove(ed);
     }
     
@@ -2062,12 +2070,11 @@ void CleanRoom( Room *room )
   room->Name.erase();
   room->Description.erase();
 
-  std::list<ExtraDescription*> extraDescriptions(room->ExtraDescriptions());
+  std::list<std::shared_ptr<ExtraDescription>> extraDescriptions(room->ExtraDescriptions());
   
-  for(ExtraDescription *ed : extraDescriptions)
+  for(auto ed : extraDescriptions)
     {
       room->Remove(ed);
-      delete ed;
       top_ed--;
     }
 
@@ -2102,20 +2109,18 @@ void CleanObject( ProtoObject *obj )
 
   obj->Value.fill(0);
 
-  std::list<Affect*> affects(obj->Affects());
+  auto affects(obj->Affects());
 
-  for(Affect *paf : affects)
+  for(auto paf : affects)
     {
       obj->Remove(paf);
-      delete paf;
       top_affect--;
     }
 
-  std::list<ExtraDescription*> extraDescriptions(obj->ExtraDescriptions());
+  std::list<std::shared_ptr<ExtraDescription>> extraDescriptions(obj->ExtraDescriptions());
 
-  for(ExtraDescription *ed : obj->ExtraDescriptions())
+  for(auto ed : obj->ExtraDescriptions())
     {
-      delete ed;
       top_ed--;
       obj->Remove(ed);
     }
@@ -2136,14 +2141,13 @@ void CleanMobile( ProtoMobile *mob )
   mob->RepairShop    = NULL;
   mob->mprog.progtypes        = 0;
 
-  std::list<MPROG_DATA*> mobProgs(mob->mprog.MudProgs());
+  auto mobProgs(mob->mprog.MudProgs());
   
-  for(MPROG_DATA *mprog : mobProgs)
+  for(auto mprog : mobProgs)
     {
       mob->mprog.Remove(mprog);
       FreeMemory( mprog->arglist );
       FreeMemory( mprog->comlist );
-      delete mprog;
     }
 
   mob->Count     = 0;
@@ -2170,7 +2174,7 @@ void CleanMobile( ProtoMobile *mob )
 /*
  * Show an affect verbosely to a character                      -Thoric
  */
-void ShowAffectToCharacter( const Character *ch, const Affect *paf )
+void ShowAffectToCharacter( const Character *ch, std::shared_ptr<Affect> paf )
 {
   assert(paf != nullptr);
 
@@ -2269,13 +2273,13 @@ void QueueExtractedObject( Object *obj )
  */
 void CleanObjectQueue()
 {
-  while ( !ExtractedObjectQueue.empty() )
+  for(Object *obj : ExtractedObjectQueue)
     {
-      Object *obj = ExtractedObjectQueue.front();
-      ExtractedObjectQueue.pop_front();
       delete obj;
       --cur_qobjs;
     }
+
+  ExtractedObjectQueue.clear();
 }
 
 /*
@@ -2294,16 +2298,14 @@ void SetCurrentGlobalCharacter( Character *ch )
  */
 bool CharacterDiedRecently( const Character *ch )
 {
-  ExtractedCharacter *ccd;
-
   if ( ch == cur_char && cur_char_died )
     return true;
 
-  for (ccd = extracted_char_queue; ccd; ccd = ccd->Next )
-    if ( ccd->Character == ch )
-      return true;
-
-  return false;
+  return Find(ExtractedCharacterQueue,
+              [ch](const auto &ccd)
+              {
+                return ccd->Character == ch;
+              }) != nullptr;
 }
 
 /*
@@ -2312,19 +2314,18 @@ bool CharacterDiedRecently( const Character *ch )
 void QueueExtractedCharacter( Character *ch, bool extract )
 {
   assert(ch != nullptr);
-  ExtractedCharacter *ccd = new ExtractedCharacter();
+  std::shared_ptr<ExtractedCharacter> ccd = std::make_shared<ExtractedCharacter>();
 
-  ccd->Character                       = ch;
-  ccd->InRoom                     = ch->InRoom;
-  ccd->Extract          = extract;
+  ccd->Character = ch;
+  ccd->InRoom = ch->InRoom;
+  ccd->Extract = extract;
 
   if ( ch == cur_char )
-    ccd->RetCode                = global_retcode;
+    ccd->RetCode = global_retcode;
   else
-    ccd->RetCode                = rCHAR_DIED;
+    ccd->RetCode = rCHAR_DIED;
 
-  ccd->Next                     = extracted_char_queue;
-  extracted_char_queue  = ccd;
+  ExtractedCharacterQueue.push_back(ccd);
   cur_qchars++;
 }
 
@@ -2333,16 +2334,17 @@ void QueueExtractedCharacter( Character *ch, bool extract )
  */
 void CleanCharacterQueue()
 {
-  for ( ExtractedCharacter *ccd = extracted_char_queue; ccd; ccd = extracted_char_queue )
+  for(auto ccd : ExtractedCharacterQueue)
     {
-      extracted_char_queue = ccd->Next;
-
       if ( ccd->Extract )
-        FreeCharacter( ccd->Character );
-
-      delete ccd;
+        {
+          FreeCharacter( ccd->Character );
+        }
+      
       --cur_qchars;
     }
+
+  ExtractedCharacterQueue.clear();
 }
 
 /*
@@ -2351,32 +2353,21 @@ void CleanCharacterQueue()
  */
 void AddTimerToCharacter( Character *ch, short type, short count, CmdFun *fun, int value )
 {
-  Timer *timer = nullptr;
-
-  for(Timer *iter : ch->Timers())
-    {
-      if ( iter->Type == type )
-        {
-          timer = iter;
-          timer->Count  = count;
-          timer->DoFun = fun;
-          timer->Value     = value;
-          break;
-        }
-    }
+  auto timer = GetTimerPointer(ch, type);
   
   if ( !timer )
     {
-      timer = new Timer();
-      timer->Count = count;
-      timer->Type = type;
-      timer->DoFun = fun;
-      timer->Value = value;
+      timer = std::make_shared<Timer>();
       ch->Add(timer);
     }
+
+  timer->Count = count;
+  timer->Type = type;
+  timer->DoFun = fun;
+  timer->Value = value;
 }
 
-Timer *GetTimerPointer( const Character *ch, short type )
+std::shared_ptr<Timer> GetTimerPointer( const Character *ch, short type )
 {
   return Find(ch->Timers(),
               [type](auto timer)
@@ -2387,26 +2378,22 @@ Timer *GetTimerPointer( const Character *ch, short type )
 
 short GetTimer( const Character *ch, short type )
 {
-  Timer *timer = GetTimerPointer( ch, type );
+  std::shared_ptr<Timer> timer = GetTimerPointer( ch, type );
 
-  if ( timer != nullptr )
-    return timer->Count;
-  else
-    return 0;
+  return timer != nullptr ? timer->Count : 0;
 }
 
-void ExtractTimer( Character *ch, Timer *timer )
+void ExtractTimer( Character *ch, std::shared_ptr<Timer> timer )
 {
   assert(ch != nullptr);
   assert(timer != nullptr);
 
   ch->Remove(timer);
-  delete timer;
 }
 
 void RemoveTimer( Character *ch, short type )
 {
-  Timer *timer = GetTimerPointer(ch, type);
+  std::shared_ptr<Timer> timer = GetTimerPointer(ch, type);
 
   if ( timer != nullptr )
     {

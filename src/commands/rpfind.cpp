@@ -66,7 +66,7 @@ void do_rpfind( Character *ch, std::string argument )   /* Gorog */
         {
           int tot_vnum = 0;
 
-          for(const MPROG_DATA *pProg : pRoom->mprog.MudProgs())
+          for(auto pProg : pRoom->mprog.MudProgs())
             {
               tot_vnum += CountStringOccurances(pProg->comlist, argument);
             }

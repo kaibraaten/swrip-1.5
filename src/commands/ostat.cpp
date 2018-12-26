@@ -82,7 +82,7 @@ void do_ostat( Character *ch, std::string arg )
       std::ostringstream buf;
       ch->Echo("Primary description keywords:   '");
 
-      for(const ExtraDescription *ed : obj->Prototype->ExtraDescriptions())
+      for(auto ed : obj->Prototype->ExtraDescriptions())
         {
           buf << ed->Keyword << " ";
         }
@@ -97,7 +97,7 @@ void do_ostat( Character *ch, std::string arg )
 
       ch->Echo("Secondary description keywords: '");
 
-      for(const ExtraDescription *ed : obj->ExtraDescriptions())
+      for(auto ed : obj->ExtraDescriptions())
         {
           buf << ed->Keyword << " ";
         }
@@ -106,11 +106,11 @@ void do_ostat( Character *ch, std::string arg )
       ch->Echo("%s'.\r\n", output.c_str());
     }
 
-  for ( const Affect *paf : obj->Affects() )
+  for ( auto paf : obj->Affects() )
     ch->Echo("Affects %s by %d. (extra)\r\n",
              GetAffectLocationName( paf->Location ), paf->Modifier );
 
-  for ( const Affect *paf : obj->Prototype->Affects() )
+  for ( auto paf : obj->Prototype->Affects() )
     ch->Echo("Affects %s by %d.\r\n",
                GetAffectLocationName( paf->Location ), paf->Modifier );
 }

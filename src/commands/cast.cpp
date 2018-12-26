@@ -229,7 +229,7 @@ void do_cast( Character *ch, std::string argument )
       if ( skill->Participants > 1 )
         {
           int cnt = 1;
-          Timer *t = nullptr;
+          std::shared_ptr<Timer> t;
 
           for(Character *tmp : ch->InRoom->Characters())
             {

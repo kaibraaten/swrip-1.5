@@ -39,7 +39,7 @@ void do_hlist( Character *ch, std::string argument )
   SetCharacterColor( AT_GREEN, ch );
   ch->Echo("Help Topics in level range %d to %d:\r\n\r\n", min, max );
 
-  for(const HelpFile *help : HelpFiles->Entities())
+  for(const auto &help : HelpFiles->Entities())
     {
       if ( GetHelpFileLevel( help ) >= min && GetHelpFileLevel( help ) <= max )
 	{

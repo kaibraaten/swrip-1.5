@@ -36,9 +36,9 @@
 #include "descriptor.hpp"
 #include "repos/playerrepository.hpp"
 
-static void RemoveComment( Character *ch, Character *victim, Note *pnote );
+static void RemoveComment( Character *ch, Character *victim, std::shared_ptr<Note> pnote );
 
-static void RemoveComment( Character *ch, Character *victim, Note *pnote )
+static void RemoveComment( Character *ch, Character *victim, std::shared_ptr<Note> pnote )
 {
   if ( IsNpc( victim ) )
     {
@@ -52,7 +52,6 @@ static void RemoveComment( Character *ch, Character *victim, Note *pnote )
    * Remove comment from linked list.
    */
   victim->PCData->Remove(pnote);
-  FreeNote(pnote);
 
   /*
    * Rewrite entire list.
@@ -102,7 +101,7 @@ void do_comment( Character *ch, std::string argument )
           return;
         }
 
-      if ( ch->dest_buf != ch->PCData->Note )
+      if ( ch->dest_buf != &ch->PCData->Note )
         {
           Log->Bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote" );
         }
@@ -162,7 +161,7 @@ void do_comment( Character *ch, std::string argument )
           return;
         }
 
-      for(const Note *pnote : victim->PCData->Comments())
+      for(auto pnote : victim->PCData->Comments())
         {
           noteNumber++;
           ch->Echo( "%2d) %-10s [%s] %s\r\n",
@@ -225,7 +224,7 @@ void do_comment( Character *ch, std::string argument )
 
       noteNumber = 0;
 
-      for(const Note *pnote : victim->PCData->Comments())
+      for(auto pnote : victim->PCData->Comments())
         {
           noteNumber++;
 
@@ -251,7 +250,7 @@ void do_comment( Character *ch, std::string argument )
     {
       AttachNote( ch );
       ch->SubState = SUB_WRITING_NOTE;
-      ch->dest_buf = ch->PCData->Note;
+      ch->dest_buf = &ch->PCData->Note;
       StartEditing( ch, ch->PCData->Note->Text );
       SetEditorDescription( ch, "Player comment" );
       return;
@@ -275,13 +274,7 @@ void do_comment( Character *ch, std::string argument )
 
   if ( !StrCmp( arg, "clear" ) )
     {
-      if ( ch->PCData->Note != nullptr )
-        {
-          delete ch->PCData->Note;
-        }
-
-      ch->PCData->Note = nullptr;
-
+      ch->PCData->Note.reset();
       ch->Echo( "Ok.\r\n" );
       return;
     }
@@ -339,7 +332,7 @@ void do_comment( Character *ch, std::string argument )
       strtime[strlen(strtime)-1]        = '\0';
       ch->PCData->Note->Date = strtime;
 
-      Note *pnote = ch->PCData->Note;
+      std::shared_ptr<Note> pnote = ch->PCData->Note;
       ch->PCData->Note = NULL;
       victim->PCData->Add(pnote);
 
@@ -384,7 +377,7 @@ void do_comment( Character *ch, std::string argument )
       anum = ToLong( argument );
       noteNumber = 0;
 
-      for(Note *pnote : victim->PCData->Comments())
+      for(auto pnote : victim->PCData->Comments())
         {
           noteNumber++;
 
@@ -408,7 +401,7 @@ void do_comment( Character *ch, std::string argument )
   ch->Echo( "Huh? Type 'help comment' for usage.\r\n" );
 }
 
-static void WriteToFile(const Note *pnote, FILE *fp)
+static void WriteToFile(std::shared_ptr<Note> pnote, FILE *fp)
 {
   fprintf( fp,"#COMMENT\n" );
   fprintf( fp,"sender       %s~\n",pnote->Sender.c_str());
@@ -422,7 +415,7 @@ void WriteComments( const Character *ch, FILE *fp )
 {
   assert(ch->PCData != NULL);
 
-  for(const Note *note : ch->PCData->Comments())
+  for(auto note : ch->PCData->Comments())
     {
       WriteToFile(note, fp);
     }
@@ -451,7 +444,7 @@ void ReadComment( Character *ch, FILE *fp )
 
       ungetc( letter, fp );
 
-      Note *pnote = new Note();
+      std::shared_ptr<Note> pnote = std::make_shared<Note>();
 
       if ( StrCmp( ReadWord( fp, Log, fBootDb ), "sender" ) )
         break;

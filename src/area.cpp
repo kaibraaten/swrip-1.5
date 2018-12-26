@@ -484,8 +484,8 @@ static void LoadMobiles( Area *tarea, FILE *fp )
 
       pMobIndex->Flags           = ReadInt( fp, Log, fBootDb ) | ACT_NPC;
       pMobIndex->AffectedBy     = ReadInt( fp, Log, fBootDb );
-      pMobIndex->Shop           = NULL;
-      pMobIndex->RepairShop           = NULL;
+      pMobIndex->Shop.reset();
+      pMobIndex->RepairShop.reset();
       pMobIndex->Alignment       = ReadInt( fp, Log, fBootDb );
       letter                     = ReadChar( fp, Log, fBootDb );
       pMobIndex->Level           = ReadInt( fp, Log, fBootDb );
@@ -721,7 +721,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
 
           if ( letter == 'A' )
             {
-              Affect *paf = new Affect();
+              std::shared_ptr<Affect> paf = std::make_shared<Affect>();
 
               paf->Type         = -1;
               paf->Duration             = -1;
@@ -742,7 +742,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
 
           else if ( letter == 'E' )
             {
-              ExtraDescription *ed = new ExtraDescription();
+              std::shared_ptr<ExtraDescription> ed = std::make_shared<ExtraDescription>();
               ed->Keyword               = ReadStringToTilde( fp, Log, fBootDb );
               ed->Description           = ReadStringToTilde( fp, Log, fBootDb );
               pObjIndex->Add(ed);
@@ -1033,7 +1033,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
             }
           else if ( letter == 'E' )
             {
-              ExtraDescription *ed = new ExtraDescription();
+              std::shared_ptr<ExtraDescription> ed = std::make_shared<ExtraDescription>();
               ed->Keyword               = ReadStringToTilde( fp, Log, fBootDb );
               ed->Description           = ReadStringToTilde( fp, Log, fBootDb );
               pRoomIndex->Add(ed);
@@ -1069,7 +1069,7 @@ static void LoadShops( Area *tarea, FILE *fp )
     {
       ProtoMobile *pMobIndex = NULL;
       int iTrade = 0;
-      Shop *pShop = new Shop();
+      std::shared_ptr<Shop> pShop = std::make_shared<Shop>();
 
       pShop->Keeper             = ReadInt( fp, Log, fBootDb );
 
@@ -1102,7 +1102,7 @@ static void LoadRepairs( Area *tarea, FILE *fp )
     {
       ProtoMobile *pMobIndex;
       int iFix;
-      RepairShop *rShop = new RepairShop();
+      std::shared_ptr<RepairShop> rShop = std::make_shared<RepairShop>();
       rShop->Keeper             = ReadInt( fp, Log, fBootDb );
 
       if ( rShop->Keeper == INVALID_VNUM )
@@ -1131,9 +1131,9 @@ static void LoadSpecials( Area *tarea, FILE *fp )
   for ( ; ; )
     {
       ProtoMobile *pMobIndex;
-      char letter;
+      char letter = ReadChar(fp, Log, fBootDb);
 
-      switch ( letter = ReadChar( fp, Log, fBootDb ) )
+      switch (letter)
         {
         default:
           Log->Bug( "%s: letter '%c' not *MS.", __FUNCTION__, letter );
@@ -1266,7 +1266,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
       exit( 1 );
     }
 
-  MPROG_DATA *mprg = new MPROG_DATA();
+  std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
   pMobIndex->mprog.Add(mprg);
 
   while ( !done )
@@ -1290,7 +1290,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
           switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
-              mprg = new MPROG_DATA();
+              mprg = std::make_shared<MPROG_DATA>();
               pMobIndex->mprog.Add(mprg);
               break;
 
@@ -1324,7 +1324,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
       exit( 1 );
     }
 
-  MPROG_DATA *mprg = new MPROG_DATA();
+  std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
   pObjIndex->mprog.Add(mprg);
 
   while ( !done )
@@ -1348,7 +1348,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
           switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
-              mprg = new MPROG_DATA();
+              mprg = std::make_shared<MPROG_DATA>();
               pObjIndex->mprog.Add(mprg);
               break;
 
@@ -1383,7 +1383,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
       exit( 1 );
     }
 
-  MPROG_DATA *mprg = new MPROG_DATA();
+  std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
   pRoomIndex->mprog.Add(mprg);
 
   while ( !done )
@@ -1407,7 +1407,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
           switch ( letter = ReadChar( fp, Log, fBootDb ) )
             {
             case '>':
-              mprg = new MPROG_DATA();
+              mprg = std::make_shared<MPROG_DATA>();
               pRoomIndex->mprog.Add(mprg);
               break;
               
@@ -1608,31 +1608,28 @@ void CloseArea( Area *pArea )
                 }
             }
 
-          std::list<ExtraDescription*> extrasInRoom(rid->ExtraDescriptions());
+          std::list<std::shared_ptr<ExtraDescription>> extrasInRoom(rid->ExtraDescriptions());
 
-          for(ExtraDescription *eed : extrasInRoom)
+          for(auto eed : extrasInRoom)
             {
               rid->Remove(eed);
-              delete eed;
             }
 
-          std::list<MPROG_ACT_LIST*> mprogActLists(rid->mprog.ActLists());
+          auto mprogActLists(rid->mprog.ActLists());
 
-          for(MPROG_ACT_LIST *mpact : mprogActLists)
+          for(auto mpact : mprogActLists)
             {
               rid->mprog.Remove(mpact);
               FreeMemory( mpact->buf );
-              delete mpact;
             }
 
-          std::list<MPROG_DATA*> roomProgs(rid->mprog.MudProgs());
+          auto roomProgs(rid->mprog.MudProgs());
 
-          for(MPROG_DATA *mprog : roomProgs)
+          for(auto mprog : roomProgs)
             {
               rid->mprog.Remove(mprog);
 	      FreeMemory( mprog->arglist );
               FreeMemory( mprog->comlist );
-              delete mprog;
             }
 
           if ( rid == RoomIndexHash[icnt] )
@@ -1667,23 +1664,20 @@ void CloseArea( Area *pArea )
           if ( mid->Shop )
             {
               Shops->Remove(mid->Shop);
-              delete mid->Shop;
             }
 
           if ( mid->RepairShop )
             {
               RepairShops->Remove(mid->RepairShop);
-              delete mid->RepairShop;
             }
 
-          std::list<MPROG_DATA*> mobProgs(mid->mprog.MudProgs());
+          auto mobProgs(mid->mprog.MudProgs());
 
-          for(MPROG_DATA *mprog : mobProgs)
+          for(auto mprog : mobProgs)
             {
               mid->mprog.Remove(mprog);
               FreeMemory(mprog->arglist);
               FreeMemory(mprog->comlist);
-              delete mprog;
             }
 
           if ( mid == MobIndexHash[icnt] )
@@ -1715,30 +1709,27 @@ void CloseArea( Area *pArea )
                || oid->Vnum > pArea->VnumRanges.Object.Last )
             continue;
 
-          std::list<ExtraDescription*> extraDescrs(oid->ExtraDescriptions());
+          std::list<std::shared_ptr<ExtraDescription>> extraDescrs(oid->ExtraDescriptions());
           
-          for ( ExtraDescription *eed : extraDescrs )
+          for ( auto eed : extraDescrs )
             {
               oid->Remove(eed);
-              delete eed;
             }
 
-          std::list<Affect*> affects(oid->Affects());
+          auto affects(oid->Affects());
 
-          for(Affect *paf : affects)
+          for(auto paf : affects)
             {
               oid->Remove(paf);
-              delete paf;
             }
 
-          std::list<MPROG_DATA*> objProgs(oid->mprog.MudProgs());
+          auto objProgs(oid->mprog.MudProgs());
 
-          for(MPROG_DATA *mprog : objProgs)
+          for(auto mprog : objProgs)
             {
               oid->mprog.Remove(mprog);
               FreeMemory(mprog->arglist);
               FreeMemory(mprog->comlist);
-              delete mprog;
             }
 
           if ( oid == ObjectIndexHash[icnt] )

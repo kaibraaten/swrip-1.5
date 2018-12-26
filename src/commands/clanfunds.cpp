@@ -19,7 +19,7 @@ void do_clanfunds( Character *ch, std::string argument )
       return;
     }
 
-  const Clan *clan = ch->PCData->ClanInfo.Clan;
+  std::shared_ptr<Clan> clan = ch->PCData->ClanInfo.Clan;
 
   if ( clan->Funds == 0 )
     {

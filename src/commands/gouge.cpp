@@ -7,7 +7,6 @@
 void do_gouge( Character *ch, std::string argument )
 {
   Character *victim = NULL;
-  Affect af;
   short dam = 0;
   int percent = 0;
 
@@ -46,12 +45,13 @@ void do_gouge( Character *ch, std::string argument )
         {
           if ( !IsAffectedBy( victim, AFF_BLIND ) )
             {
-              af.Type       = gsn_blindness;
-              af.Location   = APPLY_HITROLL;
-              af.Modifier   = -6;
-              af.Duration   = 3 + (GetAbilityLevel(ch, COMBAT_ABILITY ) / 20);
-              af.AffectedBy = AFF_BLIND;
-              AffectToCharacter( victim, &af );
+              std::shared_ptr<Affect> af = std::make_shared<Affect>();
+              af->Type       = gsn_blindness;
+              af->Location   = APPLY_HITROLL;
+              af->Modifier   = -6;
+              af->Duration   = 3 + (GetAbilityLevel(ch, COMBAT_ABILITY ) / 20);
+              af->AffectedBy = AFF_BLIND;
+              AffectToCharacter( victim, af );
               Act( AT_SKILL, "You can't see a thing!", victim, NULL, NULL, TO_CHAR );
             }
 

@@ -373,10 +373,10 @@ static bool go_read( const Character *ch, int dis_num, int op_num, int sor_ind,
       r.n[OAVG]   = (po->ItemType == ITEM_WEAPON) ?
         (po->Value[1] + po->Value[2])/2 : 0;
 
-      for(const Affect *pa : px->Affects())
+      for(auto pa : px->Affects())
         go_accum_aff (&r, pa->Location, pa->Modifier);
 
-      for(const Affect *pa : po->Affects())
+      for(auto pa : po->Affects())
         go_accum_aff (&r, pa->Location, pa->Modifier);
 
       res = or_sw ? go_eval_or(ch, &r, op_num) : go_eval_and(ch, &r, op_num);

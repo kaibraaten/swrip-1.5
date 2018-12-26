@@ -822,7 +822,7 @@ void do_mset( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "clan" ) )
     {
-      Clan *clan;
+      std::shared_ptr<Clan> clan;
 
       if ( GetTrustLevel( ch ) < LEVEL_GREATER )
         {

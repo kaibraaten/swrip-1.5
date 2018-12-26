@@ -24,7 +24,7 @@ constexpr short gsn_mycraftingskill = 0;
 
 static void CleanupCharacter( Character *ch )
 {
-  Timer *timer = GetTimerPointer( ch, TIMER_CMD_FUN );
+  auto timer = GetTimerPointer( ch, TIMER_CMD_FUN );
 
   if( timer != nullptr )
     {
@@ -117,7 +117,7 @@ protected:
     _location->Area = _area;
     _location->Flags = CreateBitSet<Flag::MAX>( { Flag::Room::Factory, Flag::Room::Refinery } );
     
-    _engineer = new Character( new PCData(), new NullDescriptor() );
+    _engineer = new Character(std::make_unique<PCData>(), new NullDescriptor() );
     _engineer->PCData->Learned[gsn_mycraftingskill] = 100;
 
     CharacterToRoom( _engineer, _location );
@@ -531,7 +531,7 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterHas_DoFunTimer)
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   StartCrafting( session );
 
-  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
+  auto timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
 
   EXPECT_NE( timer, nullptr );
 }
@@ -544,7 +544,7 @@ TEST_F(CraftTests, AfterStartCrafting_CharacterHas_Correct_DoFunTimer)
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   StartCrafting( session );
 
-  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
+  auto timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
 
   EXPECT_EQ( timer->DoFun, do_craftingengine );
 }
@@ -567,7 +567,7 @@ TEST_F(CraftTests, AfterCallback_CharacterNoLongerCrafting)
                                              _resultantObject, {} );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   StartCrafting( session );
-  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
+  auto timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
   _engineer->SubState = timer->Value;
   
   timer->DoFun( _engineer, "" );
@@ -591,7 +591,7 @@ TEST_F(CraftTests, AfterCallback_CharacterReceivedObject)
                                              _resultantObject, {} );
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   StartCrafting( session );
-  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
+  auto timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
   _engineer->SubState = timer->Value;
 
   timer->DoFun( _engineer, "" );
@@ -608,7 +608,7 @@ TEST_F(CraftTests, AfterCallback_SetObjectStatsEventHandler_IsCalledExactlyOnce)
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   AddSetObjectStatsCraftingHandler( session, &callCounter, Counting_EventHandler );
   StartCrafting( session );
-  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
+  auto timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
   _engineer->SubState = timer->Value;
 
   timer->DoFun( _engineer, "" );
@@ -625,7 +625,7 @@ TEST_F(CraftTests, AfterCallback_FinishedCraftingEventHandler_IsCalledExactlyOnc
   CraftingSession *session = AllocateCraftingSession( recipe, _engineer, "" );
   AddFinishedCraftingHandler( session, &callCounter, Counting_EventHandler );
   StartCrafting( session );
-  Timer *timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
+  auto timer = GetTimerPointer( _engineer, TIMER_CMD_FUN );
   _engineer->SubState = timer->Value;
 
   timer->DoFun( _engineer, "" );

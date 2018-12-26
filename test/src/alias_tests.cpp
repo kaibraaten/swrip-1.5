@@ -13,7 +13,7 @@ class AliasTests : public ::testing::Test
 protected:
   void SetUp() override
   {
-    _testCharacter = new Character(new PCData(), new NullDescriptor());
+    _testCharacter = new Character(std::make_unique<PCData>(), new NullDescriptor());
     ProtoMobile *protoMob = MakeMobile(1, INVALID_VNUM, "Foo");
     _testNpc = new Character(protoMob);
   }
@@ -37,18 +37,16 @@ protected:
 
 TEST_F(AliasTests, AllocateAlias)
 {
-  Alias *target = AllocateAlias(_expectedAliasName, _expectedCommand);
+  auto target = AllocateAlias(_expectedAliasName, _expectedCommand);
 
   ASSERT_NE(target, nullptr);
   EXPECT_EQ(_expectedAliasName, target->Name);
   EXPECT_EQ(_expectedCommand, target->Command);
-
-  FreeAlias(target);
 }
 
 TEST_F(AliasTests, AddAlias)
 {
-  Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
+  auto alias = AllocateAlias(_expectedAliasName, _expectedCommand);
   size_t expectedNumberOfAliases = _testCharacter->PCData->Aliases().size() + 1;
   
   AddAlias(_testCharacter, alias);
@@ -58,8 +56,8 @@ TEST_F(AliasTests, AddAlias)
 
 TEST_F(AliasTests, AddAliasAllowsNoDuplicates)
 {
-  Alias *alias1 = AllocateAlias(_expectedAliasName, _expectedCommand);
-  Alias *alias2 = AllocateAlias(_expectedAliasName, _expectedCommand);
+  auto alias1 = AllocateAlias(_expectedAliasName, _expectedCommand);
+  auto alias2 = AllocateAlias(_expectedAliasName, _expectedCommand);
   size_t expectedNumberOfAliases = _testCharacter->PCData->Aliases().size() + 1;
 
   AddAlias(_testCharacter, alias1);
@@ -70,49 +68,36 @@ TEST_F(AliasTests, AddAliasAllowsNoDuplicates)
 
 TEST_F(AliasTests, AddAliasIgnoresNpcs)
 {
-  Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
+  auto alias = AllocateAlias(_expectedAliasName, _expectedCommand);
 
   AddAlias(_testNpc, alias);
 
   // No asserts because we'd get a segfault if test failed.
-
-  FreeAlias(alias);
 }
 
 TEST_F(AliasTests, UnlinkAliasRemovesAlias)
 {
-  Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
+  auto alias = AllocateAlias(_expectedAliasName, _expectedCommand);
   AddAlias(_testCharacter, alias);
   size_t expectedNumberOfAliases = _testCharacter->PCData->Aliases().size() - 1;
 
   UnlinkAlias(_testCharacter, alias);
 
   EXPECT_EQ(expectedNumberOfAliases, _testCharacter->PCData->Aliases().size());
-
-  FreeAlias(alias);
 }
 
 TEST_F(AliasTests, UnlinkAliasIgnoresNpcs)
 {
-  Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
+  auto alias = AllocateAlias(_expectedAliasName, _expectedCommand);
 
   UnlinkAlias(_testNpc, alias);
-
-  // No asserts because we'd get a segfault if test failed.
-
-  FreeAlias(alias);
-}
-
-TEST_F(AliasTests, FreeAliasesIgnoresNpcs)
-{
-  FreeAliases(_testNpc);
 
   // No asserts because we'd get a segfault if test failed.
 }
 
 TEST_F(AliasTests, FreeAliasesClearsList)
 {
-  Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
+  auto alias = AllocateAlias(_expectedAliasName, _expectedCommand);
   AddAlias(_testCharacter, alias);
 
   FreeAliases(_testCharacter);
@@ -122,20 +107,20 @@ TEST_F(AliasTests, FreeAliasesClearsList)
 
 TEST_F(AliasTests, FindAliasFindsTheAlias)
 {
-  Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
+  auto alias = AllocateAlias(_expectedAliasName, _expectedCommand);
   AddAlias(_testCharacter, alias);
 
-  bool found = FindAlias(_testCharacter, _expectedAliasName);
+  bool found = FindAlias(_testCharacter, _expectedAliasName) ? true : false;
 
   EXPECT_TRUE(found);
 }
 
 TEST_F(AliasTests, FindAliasDoesNotFindNonexistentAlias)
 {
-  Alias *alias = AllocateAlias(_expectedAliasName, _expectedCommand);
+  auto alias = AllocateAlias(_expectedAliasName, _expectedCommand);
   AddAlias(_testCharacter, alias);
 
-  bool found = FindAlias(_testCharacter, "does_not_exist");
+  bool found = FindAlias(_testCharacter, "does_not_exist") ? true : false;
 
   EXPECT_FALSE(found);
 }

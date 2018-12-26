@@ -6,12 +6,10 @@
 
 void do_leaveship( Character *ch, std::string argument )
 {
-  Room *fromroom = NULL;
   Room *toroom = NULL;
-  Ship *ship = NULL;
-  Shuttle * shuttle = NULL;
-
-  fromroom = ch->InRoom;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Shuttle> shuttle;
+  Room *fromroom = ch->InRoom;
 
   if  ( (ship = GetShipFromEntrance(fromroom->Vnum)) != NULL )
     {

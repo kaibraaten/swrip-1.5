@@ -9,7 +9,7 @@
 void do_autorecharge(Character *ch, std::string argument )
 {
   int the_chance = 0;
-  Ship *ship = nullptr;
+  std::shared_ptr<Ship> ship;
   int recharge = 0;
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )

@@ -1,6 +1,7 @@
 #ifndef _SWRIP_SPACEOBJECT_HPP_
 #define _SWRIP_SPACEOBJECT_HPP_
 
+#include <memory>
 #include <array>
 #include <string>
 #include "constants.hpp"
@@ -18,7 +19,7 @@ public:
 class Spaceobject
 {
 public:
-  class Planet *Planet = nullptr;
+  std::shared_ptr<class Planet> Planet;
   std::string Name;
   SpaceobjectType Type = 0;
   Vector3      Position;
@@ -30,11 +31,11 @@ public:
   std::array<LandingSite, MAX_LANDINGSITE> LandingSites;
 };
 
-Spaceobject *GetSpaceobject( const std::string &name );
-Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum );
-void SpaceobjectUpdate( void );
-const LandingSite *GetLandingSiteFromVnum( const Spaceobject *spaceobj, vnum_t vnum );
-const LandingSite *GetLandingSiteFromLocationName(const Spaceobject *spaceobj,
+std::shared_ptr<Spaceobject> GetSpaceobject( const std::string &name );
+std::shared_ptr<Spaceobject> GetSpaceobjectFromDockVnum( vnum_t vnum );
+void SpaceobjectUpdate();
+const LandingSite *GetLandingSiteFromVnum( std::shared_ptr<Spaceobject> spaceobj, vnum_t vnum );
+const LandingSite *GetLandingSiteFromLocationName(std::shared_ptr<Spaceobject> spaceobj,
                                                   const std::string &name);
 
 #endif

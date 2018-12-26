@@ -1,6 +1,7 @@
 #ifndef _SWRIP_DESCRIPTOR_HPP_
 #define _SWRIP_DESCRIPTOR_HPP_
 
+#include <memory>
 #include <sstream>
 #include <utility/os.hpp>
 #include "constants.hpp"
@@ -40,7 +41,7 @@ public:
   
 private:
   struct Impl;
-  Impl *pImpl = nullptr;
+  std::unique_ptr<Impl> pImpl;
 };
 
 class NullDescriptor : public Descriptor

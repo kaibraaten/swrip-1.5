@@ -1,6 +1,7 @@
 #ifndef _SWRIP_BOARD_HPP_
 #define _SWRIP_BOARD_HPP_
 
+#include <memory>
 #include <list>
 #include "types.hpp"
 #include "constants.hpp"
@@ -25,9 +26,9 @@ public:
   Board();
   virtual ~Board();
 
-  const std::list<Note*> &Notes() const;
-  void Add(Note *note);
-  void Remove(Note *note);
+  const std::list<std::shared_ptr<Note>> &Notes() const;
+  void Add(std::shared_ptr<Note> note);
+  void Remove(std::shared_ptr<Note> note);
   
   std::string Name;             /* Filename to save notes to       */
   std::string ReadGroup;            /* Can restrict a board to a       */
@@ -43,15 +44,13 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl = nullptr;
+  std::unique_ptr<Impl> pImpl;
 };
 
-Board *AllocateBoard(const std::string &name);
-void FreeBoard(Board *board);
-Board *GetBoardFromObject( const Object *obj );
-Board *FindBoardHere( const Character *ch );
-Board *GetBoard( const std::string &name );
-void FreeNote( Note *pnote );
+std::shared_ptr<Board> AllocateBoard(const std::string &name);
+std::shared_ptr<Board> GetBoardFromObject( const Object *obj );
+std::shared_ptr<Board> FindBoardHere( const Character *ch );
+std::shared_ptr<Board> GetBoard( const std::string &name );
 void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL );
 void AttachNote(Character *ch);
 void CountMailMessages(const Character *ch);

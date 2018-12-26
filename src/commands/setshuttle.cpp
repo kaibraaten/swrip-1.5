@@ -34,7 +34,7 @@ void do_setshuttle( Character *ch, std::string argument )
       return;
     }
 
-  Shuttle *shuttle = Shuttles->FindByName(arg1);
+  std::shared_ptr<Shuttle> shuttle = Shuttles->FindByName(arg1);
 
   if (shuttle == nullptr)
     {
@@ -42,7 +42,7 @@ void do_setshuttle( Character *ch, std::string argument )
       ch->Echo("No such shuttle.\r\nValid shuttles:\r\n");
       SetCharacterColor( AT_YELLOW, ch );
 
-      for(const Shuttle *s : Shuttles->Entities())
+      for(std::shared_ptr<Shuttle> s : Shuttles)
 	{
           ch->Echo( "Shuttle Name: %s - %s\r\n", s->Name.c_str(),
                     s->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
@@ -130,7 +130,7 @@ void do_setshuttle( Character *ch, std::string argument )
     }
   else if (!StrCmp(arg2, "stop"))
     {
-      ShuttleStop *stop = nullptr;
+      std::shared_ptr<ShuttleStop> stop;
       argument = OneArgument(argument, arg1);
 
       if ( arg1.empty() || argument.empty() )
@@ -185,7 +185,6 @@ void do_setshuttle( Character *ch, std::string argument )
 	  else if (!StrCmp(arg2, "remove"))
 	    {
               shuttle->Remove(stop);
-	      delete stop;
               ch->Echo("Stop removed.\r\n");
 	      return;
 	    }

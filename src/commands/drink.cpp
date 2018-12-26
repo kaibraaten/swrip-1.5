@@ -138,17 +138,17 @@ void do_drink( Character *ch, std::string argument )
       if ( obj->Value[OVAL_DRINK_CON_POISON_STRENGTH] > 0 )
         {
           /* The drink was poisoned! */
-          Affect af;
+          std::shared_ptr<Affect> af = std::make_shared<Affect>();
 
           Act( AT_POISON, "$n sputters and gags.", ch, NULL, NULL, TO_ROOM );
           Act( AT_POISON, "You sputter and gag.", ch, NULL, NULL, TO_CHAR );
           ch->MentalState = urange( 20, ch->MentalState + 5, 100 );
-          af.Type       = gsn_poison;
-          af.Duration   = 3 * obj->Value[OVAL_DRINK_CON_POISON_STRENGTH];
-          af.Location   = APPLY_NONE;
-          af.Modifier   = 0;
-          af.AffectedBy = AFF_POISON;
-          JoinAffect( ch, &af );
+          af->Type       = gsn_poison;
+          af->Duration   = 3 * obj->Value[OVAL_DRINK_CON_POISON_STRENGTH];
+          af->Location   = APPLY_NONE;
+          af->Modifier   = 0;
+          af->AffectedBy = AFF_POISON;
+          JoinAffect( ch, af );
         }
 
       obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] -= 1;

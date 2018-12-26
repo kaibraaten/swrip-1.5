@@ -9,7 +9,7 @@ static void similar_help_files(Character *ch, const std::string &argument);
 
 void do_help( Character *ch, std::string argument )
 {
-  HelpFile *pHelp = NULL;
+  std::shared_ptr<HelpFile> pHelp;
   std::string help_text;
 
   if ( argument.empty() )
@@ -75,7 +75,7 @@ static void similar_help_files(Character *ch, const std::string &argument)
 
   ch->Echo( "&C&BSimilar Help Files:\r\n" );
 
-  for(const HelpFile *pHelp : HelpFiles->Entities())
+  for(const auto &pHelp : HelpFiles->Entities())
     {
       std::string extension = GetHelpFileKeyword( pHelp );
 
@@ -107,7 +107,7 @@ static void similar_help_files(Character *ch, const std::string &argument)
       return;
     }
 
-  for(const HelpFile *pHelp : HelpFiles->Entities())
+  for(const auto &pHelp : HelpFiles->Entities())
     {
       std::string extension = GetHelpFileKeyword( pHelp );
 

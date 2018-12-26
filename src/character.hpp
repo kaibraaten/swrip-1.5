@@ -26,6 +26,7 @@
 #define __attribute__(a)
 #endif
 
+#include <memory>
 #include <bitset>
 #include <list>
 #include <array>
@@ -38,7 +39,7 @@ class Character
 {
 public:
   Character() = delete;
-  Character(class PCData *pcdata, Descriptor *desc);
+  Character(std::unique_ptr<class PCData> pcdata, Descriptor *desc);
   Character(ProtoMobile *protoMob);
   
   virtual ~Character();
@@ -46,24 +47,24 @@ public:
   virtual void Echo(const char *fmt, ...) const __attribute__((format(printf, 2, 3)));
   virtual void Echo(const std::string &txt) const;
   
-  const std::list<Affect*> &Affects() const;
-  void Add(Affect *affect);
-  void Remove(Affect *affect);
+  const std::list<std::shared_ptr<Affect>> &Affects() const;
+  void Add(std::shared_ptr<Affect> affect);
+  void Remove(std::shared_ptr<Affect> affect);
 
   const std::list<Object*> &Objects() const;
   void Add(Object *object);
   void Remove(Object *object);
 
-  const std::list<Timer*> &Timers() const;
-  void Add(Timer *timer);
-  void Remove(Timer *timer);
+  const std::list<std::shared_ptr<Timer>> &Timers() const;
+  void Add(std::shared_ptr<Timer> timer);
+  void Remove(std::shared_ptr<Timer> timer);
   
   // Player AND mob
   SpecFun *spec_fun = NULL;
   SpecFun *spec_2 = NULL;
   ProtoMobile *Prototype = NULL;
   Descriptor *Desc = NULL;
-  class PCData *PCData = NULL;
+  std::unique_ptr<class PCData> PCData;
   std::string Name;
   std::string ShortDescr;
   std::string LongDescr;
@@ -145,7 +146,7 @@ public:
   Character *Previous = NULL;
   Character *Master = NULL;
   Character *Leader = NULL;
-  Fight *Fighting = NULL;
+  std::unique_ptr<Fight> Fighting;
   Character *Reply = NULL;
   Character *Switched = NULL;
   Character *Mount = NULL;
@@ -191,9 +192,9 @@ public:
 
   struct
   {
-    HuntHateFear *Hunting = NULL;
-    HuntHateFear *Fearing = NULL;
-    HuntHateFear *Hating = NULL;
+    std::unique_ptr<HuntHateFear> Hunting;
+    std::unique_ptr<HuntHateFear> Fearing;
+    std::unique_ptr<HuntHateFear> Hating;
   } HHF;
 
   struct
@@ -205,7 +206,7 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl = nullptr;
+  std::unique_ptr<Impl> pImpl;
 };
 
 bool IsWizVis( const Character *ch, const Character *victim );

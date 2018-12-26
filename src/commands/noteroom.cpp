@@ -5,7 +5,7 @@
 
 void do_noteroom( Character *ch, std::string argument )
 {
-  Board *board = nullptr;
+  std::shared_ptr<Board> board;
   std::string arg;
   std::string arg_passed = argument;
 

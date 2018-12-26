@@ -112,29 +112,17 @@ bool IsFearing( const Character *ch, const Character *victim )
 
 void StopHunting( Character *ch )
 {
-  if ( ch->HHF.Hunting )
-    {
-      delete ch->HHF.Hunting;
-      ch->HHF.Hunting = NULL;
-    }
+  ch->HHF.Hunting.reset();
 }
 
 void StopHating( Character *ch )
 {
-  if ( ch->HHF.Hating )
-    {
-      delete ch->HHF.Hating;
-      ch->HHF.Hating = NULL;
-    }
+  ch->HHF.Hating.reset();
 }
 
 void StopFearing( Character *ch )
 {
-  if ( ch->HHF.Fearing )
-    {
-      delete ch->HHF.Fearing;
-      ch->HHF.Fearing = NULL;
-    }
+  ch->HHF.Fearing.reset();
 }
 
 void StartHunting( Character *ch, Character *victim )
@@ -142,7 +130,7 @@ void StartHunting( Character *ch, Character *victim )
   if ( ch->HHF.Hunting )
     StopHunting( ch );
 
-  ch->HHF.Hunting = new HuntHateFear();
+  ch->HHF.Hunting = std::make_unique<HuntHateFear>();
   ch->HHF.Hunting->Name = victim->Name;
   ch->HHF.Hunting->Who  = victim;
 }
@@ -152,7 +140,7 @@ void StartHating( Character *ch, Character *victim )
   if ( ch->HHF.Hating )
     StopHating( ch );
 
-  ch->HHF.Hating = new HuntHateFear();
+  ch->HHF.Hating = std::make_unique<HuntHateFear>();
   ch->HHF.Hating->Name = victim->Name;
   ch->HHF.Hating->Who  = victim;
 }
@@ -162,16 +150,16 @@ void StartFearing( Character *ch, Character *victim )
   if ( ch->HHF.Fearing )
     StopFearing( ch );
 
-  ch->HHF.Fearing = new HuntHateFear();
+  ch->HHF.Fearing = std::make_unique<HuntHateFear>();
   ch->HHF.Fearing->Name = victim->Name;
   ch->HHF.Fearing->Who  = victim;
 }
 
 static void ExpireCommandCallbackTimers(Character *ch)
 {
-  std::list<Timer*> characterTimers(ch->Timers());
+  auto characterTimers(ch->Timers());
 
-  for(Timer *timer : characterTimers)
+  for(auto timer : characterTimers)
     {
       if ( --timer->Count <= 0 )
         {
@@ -197,11 +185,11 @@ static void ExpireCommandCallbackTimers(Character *ch)
 
 static void RemoveExpiredAffects(Character *ch)
 {
-  std::list<Affect*> affects(ch->Affects());
+  auto affects(ch->Affects());
 
   for(auto affectIter = std::begin(affects); affectIter != std::end(affects); ++affectIter)
     {
-      Affect *paf = *affectIter;
+      std::shared_ptr<Affect> paf = *affectIter;
 
       if ( paf->Duration > 0 )
         {
@@ -213,7 +201,7 @@ static void RemoveExpiredAffects(Character *ch)
         }
       else
         {
-          Affect *paf_next = nullptr;
+          std::shared_ptr<Affect> paf_next;
           auto nextIter = affectIter;
           ++nextIter;
 
@@ -1164,13 +1152,13 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
 
               if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
                 {
-                  Affect af;
-                  af.Type       = gsn_stun;
-                  af.Location   = APPLY_AC;
-                  af.Modifier   = 20;
-                  af.Duration   = 7;
-                  af.AffectedBy = AFF_PARALYSIS;
-                  AffectToCharacter( victim, &af );
+                  std::shared_ptr<Affect> af = std::make_shared<Affect>();
+                  af->Type       = gsn_stun;
+                  af->Location   = APPLY_AC;
+                  af->Modifier   = 20;
+                  af->Duration   = 7;
+                  af->AffectedBy = AFF_PARALYSIS;
+                  AffectToCharacter( victim, af );
                   UpdatePosition( victim );
 
                   if ( IsNpc(victim) )
@@ -1341,7 +1329,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
        && !IsBitSet(victim->Immune, RIS_MAGIC)
        && !victim->InRoom->Flags.test( Flag::Room::NoMagic ) )
     {
-      for(const Affect *aff : wield->Prototype->Affects())
+      for(auto aff : wield->Prototype->Affects())
         {
           if ( aff->Location == APPLY_WEAPONSPELL
                && IS_VALID_SN(aff->Modifier)
@@ -1358,7 +1346,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           return retcode;
         }
 
-      for(const Affect *aff : wield->Affects())
+      for(auto aff : wield->Affects())
         {
           if ( aff->Location == APPLY_WEAPONSPELL
                && IS_VALID_SN(aff->Modifier)
@@ -1773,14 +1761,14 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
        && !IsBitSet( victim->Immune, RIS_POISON )
        && !SaveVsPoisonDeath( GetAbilityLevel( ch, COMBAT_ABILITY ), victim ) )
     {
-      Affect af;
+      std::shared_ptr<Affect> af = std::make_shared<Affect>();
 
-      af.Type       = gsn_poison;
-      af.Duration   = 20;
-      af.Location   = APPLY_STR;
-      af.Modifier   = -2;
-      af.AffectedBy = AFF_POISON;
-      JoinAffect( victim, &af );
+      af->Type       = gsn_poison;
+      af->Duration   = 20;
+      af->Location   = APPLY_STR;
+      af->Modifier   = -2;
+      af->AffectedBy = AFF_POISON;
+      JoinAffect( victim, af );
       ch->MentalState = urange( 20, ch->MentalState + 2, 100 );
     }
 
@@ -2284,8 +2272,6 @@ void UpdatePosition( Character *victim )
  */
 void StartFighting( Character *ch, Character *victim )
 {
-  Fight *fight = NULL;
-
   if ( ch->Fighting )
     {
       Log->Bug( "%s: %s -> %s (already fighting %s)",
@@ -2304,16 +2290,15 @@ void StartFighting( Character *ch, Character *victim )
       return;
     }
 
-  fight = new Fight();
-  fight->Who     = victim;
-  fight->Xp      = ComputeXP( ch, victim );
-  fight->Align = ComputeNewAlignment( ch, victim );
+  ch->Fighting = std::make_unique<Fight>();
+  ch->Fighting->Who = victim;
+  ch->Fighting->Xp = ComputeXP( ch, victim );
+  ch->Fighting->Align = ComputeNewAlignment( ch, victim );
 
   if ( !IsNpc(ch) && IsNpc(victim) )
-    fight->TimesKilled = TimesKilled(ch, victim);
+    ch->Fighting->TimesKilled = TimesKilled(ch, victim);
 
   ch->NumFighting = 1;
-  ch->Fighting = fight;
   ch->Position = POS_FIGHTING;
   victim->NumFighting++;
 
@@ -2345,12 +2330,12 @@ void FreeFight( Character *ch )
   if ( ch->Fighting )
     {
       if ( !CharacterDiedRecently(ch->Fighting->Who) )
-        --ch->Fighting->Who->NumFighting;
-
-      delete ch->Fighting;
+        {
+          --ch->Fighting->Who->NumFighting;
+        }
     }
 
-  ch->Fighting = NULL;
+  ch->Fighting.reset();
 
   if ( ch->Mount )
     ch->Position = POS_MOUNTED;
@@ -2389,7 +2374,7 @@ void StopFighting( Character *ch, bool fBoth )
     }
 }
 
-static bool RemoveShipOwner(Ship *ship, void *userData)
+static bool RemoveShipOwner(std::shared_ptr<Ship> ship, void *userData)
 {
   const Character *victim = (Character*)userData;
 

@@ -28,7 +28,7 @@ void do_setplanet( Character *ch, std::string argument )
       return;
     }
 
-  Planet *planet = Planets->FindByName(arg1);
+  std::shared_ptr<Planet> planet = Planets->FindByName(arg1);
 
   if ( !planet )
     {
@@ -53,7 +53,7 @@ void do_setplanet( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "governed_by" ) )
     {
-      Clan *clan = GetClan( argument );
+      std::shared_ptr<Clan> clan = GetClan( argument );
 
       if ( clan )
         {
@@ -73,7 +73,7 @@ void do_setplanet( Character *ch, std::string argument )
     {
       if ( (planet->Spaceobject = GetSpaceobject(argument)) )
         {
-          Spaceobject *spaceobject = planet->Spaceobject;
+          std::shared_ptr<Spaceobject> spaceobject = planet->Spaceobject;
 
           if (spaceobject != NULL)
 	    {

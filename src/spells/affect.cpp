@@ -67,7 +67,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
           return rSPELL_FAILED;
         }
 
-      const SmaugAffect *saf = skill->Affects.front();
+      auto saf = skill->Affects.front();
       
       if ( saf != nullptr && skill->Affects.size() == 1
            && saf->Location == APPLY_STRIPSN

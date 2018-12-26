@@ -23,7 +23,7 @@ struct Descriptor::Impl
 };
 
 Descriptor::Descriptor(socket_t desc)
-  : pImpl(new Impl())
+  : pImpl(std::make_unique<Impl>())
 {
   Socket = desc;
   ConnectionState = CON_GET_NAME;
@@ -32,7 +32,7 @@ Descriptor::Descriptor(socket_t desc)
 
 Descriptor::~Descriptor()
 {
-  delete pImpl;
+
 }
 
 void Descriptor::WriteToBuffer(const std::string &txt, size_t length)
@@ -99,7 +99,7 @@ bool Descriptor::CheckReconnect( const std::string &name, bool fConn )
 
 bool Descriptor::CheckMultiplaying( const std::string &name )
 {
-  for ( Descriptor *dold : Descriptors->Entities() )
+  for ( Descriptor *dold : Descriptors )
     {
       if ( dold != this
            && ( dold->Character || dold->Original )
@@ -129,7 +129,7 @@ bool Descriptor::CheckMultiplaying( const std::string &name )
 
 unsigned char Descriptor::CheckPlaying( const std::string &name, bool kick )
 {
-  for ( Descriptor *dold : Descriptors->Entities() )
+  for ( Descriptor *dold : Descriptors )
     {
       if ( dold != this
            && ( dold->Character || dold->Original )

@@ -22,6 +22,7 @@
 #ifndef _SWRIP_MUD_HPP_
 #define _SWRIP_MUD_HPP_
 
+#include <memory>
 #include <algorithm>
 #include <array>
 #include <list>
@@ -194,20 +195,10 @@ class Fight
 {
 public:
   Character *Who = nullptr;
-  long        Xp = 0;
-  short      Align = 0;
-  short      Duration = 0;
-  short      TimesKilled = 0;
-};
-
-class ExtractedCharacter
-{
-public:
-  ExtractedCharacter *Next = nullptr;
-  class Character *Character = nullptr;
-  Room *InRoom = nullptr;
-  ch_ret             RetCode = rNONE;
-  bool               Extract = false;
+  long Xp = 0;
+  short Align = 0;
+  short Duration = 0;
+  short TimesKilled = 0;
 };
 
 class KilledData
@@ -388,7 +379,6 @@ extern Character       *LastCharacter;
 
 extern TeleportData    *FirstTeleport;
 extern TeleportData    *LastTeleport;
-extern ExtractedCharacter *extracted_char_queue;
 extern Object          *save_equipment[MAX_WEAR][MAX_LAYERS];
 extern Character       *quitting_char;
 extern Character       *loading_char;
@@ -1003,7 +993,7 @@ DECLARE_SPEC_FUN( spec_newbie_pilot );
  */
 
 /* copyover.c */
-void RecoverFromCopyover( void );
+void RecoverFromCopyover();
 
 bool IsNameAcceptable( const std::string &name );
 std::string DrunkSpeech( const std::string &argument, Character *ch );
@@ -1033,7 +1023,7 @@ void ShowObjectListToCharacter( const std::list<Object*> &list, Character *ch,
 void SetBExitFlag( Exit *pexit, size_t flag );
 void RemoveBExitFlag( Exit *pexit, size_t flag );
 Room *GenerateExit( Room *in_room, const Exit **pexit );
-void ClearVirtualRooms( void );
+void ClearVirtualRooms();
 Exit *FindDoor( Character *ch, const std::string &arg, bool quiet );
 Exit *GetExit( const Room *room, DirectionType dir );
 Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum );
@@ -1157,7 +1147,7 @@ Character *AllocateMobile( ProtoMobile *pMobIndex );
 Character *CreateMobile( ProtoMobile *pMobIndex );
 Object *CreateObject( ProtoObject *pObjIndex, int level );
 Object *AllocateObject( ProtoObject *pObjIndex, int level );
-std::string GetExtraDescription( const std::string &name, const std::list<ExtraDescription*> &extras);
+std::string GetExtraDescription( const std::string &name, const std::list<std::shared_ptr<ExtraDescription>> &extras);
 ProtoMobile *GetProtoMobile( vnum_t vnum );
 ProtoObject *GetProtoObject( vnum_t vnum );
 Room *GetRoom( vnum_t vnum );
@@ -1173,9 +1163,9 @@ bool DeleteObject( ProtoObject *obj );
 bool DeleteMobile( ProtoMobile *mob );
 
 /* build.c */
-void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::string &argument );
-void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, const std::string &argument );
-void WriteAreaList( void );
+void EditMobProg( Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument );
+void EditRoomProg( Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument );
+void WriteAreaList();
 
 bool CanModifyRoom( const Character *ch, const Room *room );
 bool CanModifyObject( const Character *ch, const Object *obj  );
@@ -1183,11 +1173,11 @@ bool CanModifyCharacter( const Character *ch, const Character *mob );
 
 bool CanMedit( const Character *ch, const ProtoMobile *mob );
 void FreeReset( Area *are, Reset *res );
-ExtraDescription *SetRExtra( Room *room, const std::string &keywords );
+std::shared_ptr<ExtraDescription> SetRExtra( Room *room, const std::string &keywords );
 bool DelRExtra( Room *room, const std::string &keywords );
-ExtraDescription *SetOExtra( Object *obj, const std::string &keywords );
+std::shared_ptr<ExtraDescription> SetOExtra( Object *obj, const std::string &keywords );
 bool DelOExtra( Object *obj, const std::string &keywords );
-ExtraDescription *SetOExtraProto( ProtoObject *obj, const std::string &keywords );
+std::shared_ptr<ExtraDescription> SetOExtraProto( ProtoObject *obj, const std::string &keywords );
 bool DelOExtraProto( ProtoObject *obj, const std::string &keywords );
 Reset *ParseReset( const Area *tarea, std::string argument, const Character *ch );
 
@@ -1249,11 +1239,11 @@ void Trip( Character *ch, Character *victim );
 bool CharacterCanTakePrototype( const Character *ch );
 void Explode( Object *obj );
 long GetRequiredXpForLevel( short level );
-void ModifyAffect( Character *ch, Affect *paf, bool fAdd );
-void AffectToCharacter( Character *ch, Affect *paf );
-void RemoveAffect( Character *ch, Affect *paf );
+void ModifyAffect( Character *ch, std::shared_ptr<Affect> paf, bool fAdd );
+void AffectToCharacter( Character *ch, std::shared_ptr<Affect> paf );
+void RemoveAffect( Character *ch, std::shared_ptr<Affect> paf );
 void StripAffect( Character *ch, int sn );
-void JoinAffect( Character *ch, Affect *paf );
+void JoinAffect( Character *ch, std::shared_ptr<Affect> paf );
 void CharacterFromRoom( Character *ch );
 void CharacterToRoom( Character *ch, Room *pRoomIndex );
 Object *ObjectToCharacter( Object *obj, Character *ch );
@@ -1291,7 +1281,7 @@ ch_ret CheckRoomForTraps( Character *ch, int flag );
 bool IsObjectTrapped( const Object *obj );
 Object *GetTrap( const Object *obj );
 ch_ret SpringTrap( Character *ch, Object *obj );
-void ShowAffectToCharacter( const Character *ch, const Affect *paf );
+void ShowAffectToCharacter( const Character *ch, std::shared_ptr<Affect> paf );
 void SetCurrentGlobalObject( Object *obj );
 bool IsObjectExtracted( const Object *obj );
 void QueueExtractedObject( Object *obj );
@@ -1301,9 +1291,9 @@ bool CharacterDiedRecently( const Character *ch );
 void QueueExtractedCharacter( Character *ch, bool extract );
 void CleanCharacterQueue( void );
 void AddTimerToCharacter( Character *ch, short type, short count, CmdFun *fun, int value );
-Timer *GetTimerPointer( const Character *ch, short type );
+std::shared_ptr<Timer> GetTimerPointer( const Character *ch, short type );
 short GetTimer( const Character *ch, short type );
-void ExtractTimer( Character *ch, Timer *timer );
+void ExtractTimer( Character *ch, std::shared_ptr<Timer> timer );
 void RemoveTimer( Character *ch, short type );
 bool InSoftRange( const Character *ch, const Area *tarea );
 bool InHardRange( const Character *ch, const Area *tarea );

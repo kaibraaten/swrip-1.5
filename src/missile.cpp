@@ -20,17 +20,19 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <cassert>
 #include "missile.hpp"
 #include "mud.hpp"
 #include "vector3_aux.hpp"
 #include "ship.hpp"
 #include "character.hpp"
 
-std::list<Missile*> Missiles;
+std::list<std::shared_ptr<Missile>> Missiles;
 
-void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missiletype )
+void NewMissile( std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target,
+                 Character *firedBy, MissileType missiletype )
 {
-  Spaceobject *spaceobject = NULL;
+  std::shared_ptr<Spaceobject> spaceobject;
 
   if ( ship  == NULL )
     {
@@ -47,7 +49,7 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missi
       return;
     }
 
-  Missile *missile = new Missile();
+  std::shared_ptr<Missile> missile = std::make_shared<Missile>();
   Missiles.push_back(missile);
 
   missile->Target = target;
@@ -82,22 +84,16 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missi
   missile->Spaceobject = spaceobject;
 }
 
-void ExtractMissile( Missile *missile )
+void ExtractMissile( std::shared_ptr<Missile> missile )
 {
-  if ( missile == NULL )
-    {
-      return;
-    }
-
+  assert(missile != nullptr);
   Missiles.remove( missile );
-
-  delete missile;
 }
 
-void UpdateMissile( Missile *missile )
+void UpdateMissile( std::shared_ptr<Missile> missile )
 {
-  Ship *ship = missile->FiredFrom;
-  Ship *target = missile->Target;
+  std::shared_ptr<Ship> ship = missile->FiredFrom;
+  std::shared_ptr<Ship> target = missile->Target;
 
   if ( target->Spaceobject && IsMissileInRange( ship, missile ) )
     {
@@ -120,7 +116,7 @@ void UpdateMissile( Missile *missile )
 			  "A loud explosion shakes thee ship violently!" );
 	      sprintf( buf, "You see a small explosion as %s is hit by a missile",
                        target->Name.c_str() );
-	      EchoToNearbyShips( AT_ORANGE, target, buf, ship );
+	      EchoToNearbyShips( AT_ORANGE, target, buf, {ship} );
 
 	      for ( ch = FirstCharacter; ch; ch = ch->Next )
 		{
@@ -168,6 +164,4 @@ void UpdateMissile( Missile *missile )
 	  ExtractMissile( missile );
 	}
     }
-
-  return;
 }

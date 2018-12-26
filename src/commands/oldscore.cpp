@@ -263,7 +263,7 @@ void do_oldscore( Character *ch, std::string argument )
     {
       ch->Echo("You are affected by:\r\n");
 
-      for(const Affect *paf : ch->Affects())
+      for(auto paf : ch->Affects())
         {
           const Skill *skill = GetSkill(paf->Type);
           

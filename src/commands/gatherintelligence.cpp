@@ -14,7 +14,7 @@ void do_gather_intelligence( Character *ch, std::string argument )
   Character *victim = NULL;
   char buf[MAX_STRING_LENGTH] = {'\0'};
   int percent = 0, the_chance = 0;
-  Planet *planet = NULL;
+  std::shared_ptr<Planet> planet;
 
   if( argument.empty() )
     {

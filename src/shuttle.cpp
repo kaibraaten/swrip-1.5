@@ -34,32 +34,27 @@
 ///////////////////////////////////////////////////////////
 struct Shuttle::Impl
 {
-  std::vector<ShuttleStop*> Stops;
+  std::vector<std::shared_ptr<ShuttleStop>> Stops;
 };
 
 ///////////////////////////////////////////////////////////
 Shuttle::Shuttle()
-  : pImpl(new Impl())
+  : pImpl(std::make_unique<Impl>())
 {
 
 }
 
 Shuttle::~Shuttle()
 {
-  for(ShuttleStop *stop : Stops())
-    {
-      delete stop;
-    }
-  
-  delete pImpl;
+
 }
 
-void Shuttle::Add(ShuttleStop *stop)
+void Shuttle::Add(std::shared_ptr<ShuttleStop> stop)
 {
   pImpl->Stops.push_back(stop);
 }
 
-void Shuttle::Remove(ShuttleStop *stop)
+void Shuttle::Remove(std::shared_ptr<ShuttleStop> stop)
 {
   auto pos = find(std::begin(pImpl->Stops), std::end(pImpl->Stops), stop);
 
@@ -69,14 +64,14 @@ void Shuttle::Remove(ShuttleStop *stop)
     }
 }
 
-const std::vector<ShuttleStop*> &Shuttle::Stops() const
+const std::vector<std::shared_ptr<ShuttleStop>> &Shuttle::Stops() const
 {
   return pImpl->Stops;
 }
 
-ShuttleStop *Shuttle::CurrentStop() const
+std::shared_ptr<ShuttleStop> Shuttle::CurrentStop() const
 {
-  ShuttleStop *stop = nullptr;
+  std::shared_ptr<ShuttleStop> stop;
   
   if(CurrentNumber >= 0)
     {
@@ -90,22 +85,20 @@ ShuttleStop *Shuttle::CurrentStop() const
 
 ///////////////////////////////////////////////////////////
 
-ShuttleStop *AllocateShuttleStop( void )
+std::shared_ptr<ShuttleStop> AllocateShuttleStop()
 {
-  ShuttleStop *stop = new ShuttleStop();
-  return stop;
+  return std::make_shared<ShuttleStop>();
 }
 
-static Shuttle *AllocateShuttle( void )
+static std::shared_ptr<Shuttle> AllocateShuttle()
 {
-  Shuttle *shuttle = new Shuttle();
-  return shuttle;
+  return std::make_shared<Shuttle>();
 }
 
-Shuttle *NewShuttle(const std::string &name)
+std::shared_ptr<Shuttle> NewShuttle(const std::string &name)
 {
-  Shuttle *shuttle   = AllocateShuttle();
-  shuttle->Name      = name;
+  std::shared_ptr<Shuttle> shuttle = AllocateShuttle();
+  shuttle->Name = name;
 
   Shuttles->Add(shuttle);
   Shuttles->Save(shuttle);
@@ -113,11 +106,11 @@ Shuttle *NewShuttle(const std::string &name)
   return shuttle;
 }
 
-void ShuttleUpdate( void )
+void ShuttleUpdate()
 {
-  char buf[MSL];
-
-  for(Shuttle *shuttle : Shuttles->Entities())
+  std::string buf;
+  
+  for(auto shuttle : Shuttles)
     {
       /* No Stops? Make sure we ignore */
       if (shuttle->Stops().empty())
@@ -160,23 +153,21 @@ void ShuttleUpdate( void )
                */
               if ( shuttle->Type == SHUTTLE_TURBOCAR )
 		{
-		  sprintf( buf,
-                           "An electronic voice says, 'Preparing for departure.'\r\n"
-                           "It continues, 'Next stop, %s'",
-                           shuttle->CurrentStop()->Name.c_str());
+                  buf = FormatString("An electronic voice says, 'Preparing for departure.'\r\n"
+                                     "It continues, 'Next stop, %s'",
+                                     shuttle->CurrentStop()->Name.c_str());
 		}
               else
 		{
-		  sprintf( buf,
-                           "An electronic voice says, 'Preparing for launch.'\r\n"
-                           "It continues, 'Next stop, %s'",
-                           shuttle->CurrentStop()->Name.c_str());
+                  buf = FormatString("An electronic voice says, 'Preparing for launch.'\r\n"
+                                     "It continues, 'Next stop, %s'",
+                                     shuttle->CurrentStop()->Name.c_str());
 		}
 
               for (room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
                 {
                   Room *iRoom = GetRoom(room);
-                  EchoToRoom( AT_CYAN, iRoom , buf );
+                  EchoToRoom( AT_CYAN, iRoom, buf );
 
 		  if( room == shuttle->Rooms.Entrance )
 		    {
@@ -191,18 +182,18 @@ void ShuttleUpdate( void )
 
               if (shuttle->Type != SHUTTLE_TURBOCAR)
 		{
-		  sprintf(buf, "The hatch on %s closes and it begins to launch.",
-                          shuttle->Name.c_str() );
+		  buf = FormatString( "The hatch on %s closes and it begins to launch.",
+                                      shuttle->Name.c_str() );
 		}
               else
 		{
-		  sprintf(buf, "%s speeds out of the station.",
-                          shuttle->Name.c_str() );
+		  buf = FormatString( "%s speeds out of the station.",
+                                      shuttle->Name.c_str() );
 		}
 
               if(shuttle->InRoom != nullptr)
                 {
-                  EchoToRoom( AT_YELLOW , shuttle->InRoom , buf );
+                  EchoToRoom( AT_YELLOW, shuttle->InRoom, buf );
                 }
               else
                 {
@@ -241,7 +232,7 @@ void ShuttleUpdate( void )
               for (room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
 		{
 		  EchoToRoom( AT_YELLOW, GetRoom(room),
-				"The ship lurches slightly as it comes out of hyperspace.");
+                              "The ship lurches slightly as it comes out of hyperspace.");
 		}
 
               shuttle->State = SHUTTLE_STATE_LANDING;
@@ -255,19 +246,16 @@ void ShuttleUpdate( void )
                * The hatch opens.
                */
 
-
-              /* action_desc */
-              sprintf( buf,
-                       "An electronic voice says, 'Welcome to %s'\r\n"
-                       "It continues, 'Please exit through the %s. Enjoy your stay.'",
-                       shuttle->CurrentStop()->Name.c_str(),
-                       shuttle->Type == SHUTTLE_TURBOCAR ? "doors" : "main ramp" );
+              buf = FormatString("An electronic voice says, 'Welcome to %s'\r\n"
+                                 "It continues, 'Please exit through the %s. Enjoy your stay.'",
+                                 shuttle->CurrentStop()->Name.c_str(),
+                                 shuttle->Type == SHUTTLE_TURBOCAR ? "doors" : "main ramp" );
 
               InsertShuttle(shuttle, GetRoom(shuttle->CurrentStop()->RoomVnum));
 
               for (room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
                 {
-                  Room * iRoom = GetRoom(room);
+                  Room *iRoom = GetRoom(room);
                   EchoToRoom( AT_CYAN , iRoom , buf );
 
                   if (shuttle->Type != SHUTTLE_TURBOCAR)
@@ -283,18 +271,18 @@ void ShuttleUpdate( void )
 
               if (shuttle->Type != SHUTTLE_TURBOCAR)
 		{
-		  sprintf(buf, "%s lands on the platform.", shuttle->Name.c_str() );
+		  buf = FormatString( "%s lands on the platform.", shuttle->Name.c_str() );
 		}
               else
 		{
-		  sprintf(buf, "%s arrives at the station.", shuttle->Name.c_str() );
+		  buf = FormatString( "%s arrives at the station.", shuttle->Name.c_str() );
 		}
 
               EchoToRoom( AT_YELLOW , shuttle->InRoom , buf );
 
               if (shuttle->Type != SHUTTLE_TURBOCAR)
                 {
-                  sprintf(buf, "The hatch on %s opens.", shuttle->Name.c_str() );
+                  buf = FormatString( "The hatch on %s opens.", shuttle->Name.c_str() );
                   EchoToRoom( AT_YELLOW , shuttle->InRoom , buf );
                 }
 
@@ -315,12 +303,13 @@ void ShuttleUpdate( void )
     }
 }
 
-void ShowShuttlesToCharacter( const std::list<Shuttle*> &shuttles, Character *ch )
+void ShowShuttlesToCharacter( const std::list<std::shared_ptr<Shuttle>> &shuttles,
+                              Character *ch )
 {
   const int NUMBER_OF_COLUMNS = 2;
   int column = 0;
   
-  for(const Shuttle *shuttle : shuttles)
+  for(auto shuttle : shuttles)
     {
       SetCharacterColor( AT_SHIP, ch );
       ch->Echo( "%-35s", shuttle->Name.c_str() );
@@ -341,7 +330,7 @@ void ShowShuttlesToCharacter( const std::list<Shuttle*> &shuttles, Character *ch
     }
 }
 
-bool ExtractShuttle( Shuttle * shuttle )
+bool ExtractShuttle(std::shared_ptr<Shuttle> shuttle)
 {
   Room *room = NULL;
 
@@ -353,7 +342,7 @@ bool ExtractShuttle( Shuttle * shuttle )
   return true;
 }
 
-bool InsertShuttle( Shuttle *shuttle, Room *room )
+bool InsertShuttle( std::shared_ptr<Shuttle> shuttle, Room *room )
 {
   assert(shuttle != nullptr);
   assert(room != nullptr);
@@ -367,14 +356,14 @@ bool InsertShuttle( Shuttle *shuttle, Room *room )
   return true;
 }
 
-Shuttle *GetShuttleInRoom( const Room *room, const std::string &name )
+std::shared_ptr<Shuttle> GetShuttleInRoom( const Room *room, const std::string &name )
 {
   if (room == nullptr)
     {
       return NULL;
     }
 
-  for(Shuttle *shuttle : room->Shuttles())
+  for(auto shuttle : room->Shuttles())
     {
       if ( !StrCmp( name, shuttle->Name ) )
 	{
@@ -382,7 +371,7 @@ Shuttle *GetShuttleInRoom( const Room *room, const std::string &name )
 	}
     }
 
-  for(Shuttle *shuttle : room->Shuttles())
+  for(auto shuttle : room->Shuttles())
     {
       if ( NiftyIsNamePrefix( name, shuttle->Name ) )
 	{
@@ -393,7 +382,7 @@ Shuttle *GetShuttleInRoom( const Room *room, const std::string &name )
   return nullptr;
 }
 
-Shuttle *GetShuttleFromEntrance( vnum_t vnum )
+std::shared_ptr<Shuttle> GetShuttleFromEntrance( vnum_t vnum )
 {
   return Shuttles->Find([vnum](const auto &s)
                         {

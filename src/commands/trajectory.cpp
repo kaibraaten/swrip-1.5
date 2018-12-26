@@ -14,7 +14,7 @@ void do_trajectory( Character *ch, std::string argument )
   std::string arg3;
   int the_chance = 0;
   Vector3 argvec;
-  Ship *ship = NULL;
+  std::shared_ptr<Ship> ship;
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
@@ -139,7 +139,7 @@ void do_trajectory( Character *ch, std::string argument )
 
   EchoToCockpit( AT_YELLOW ,ship, "The ship begins to turn.\r\n" );
   sprintf( buf, "%s turns altering its present course.", ship->Name.c_str() );
-  EchoToNearbyShips( AT_ORANGE, ship, buf, NULL );
+  EchoToNearbyShips( AT_ORANGE, ship, buf );
 
   if ( ship->Class == FIGHTER_SHIP
        || ( ship->Class == MIDSIZE_SHIP && ship->Thrusters.Maneuver > 50 ) )

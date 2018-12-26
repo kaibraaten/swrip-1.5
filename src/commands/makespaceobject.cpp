@@ -17,7 +17,7 @@ void do_makespaceobject( Character *ch, std::string argument )
       return;
     }
 
-  Spaceobject *spaceobject = new Spaceobject();
+  std::shared_ptr<Spaceobject> spaceobject = std::make_shared<Spaceobject>();
   spaceobject->Name = argument;
   Spaceobjects->Add(spaceobject);
   Spaceobjects->Save(spaceobject);

@@ -7,7 +7,7 @@
 
 void do_clan_withdraw( Character *ch, std::string argument )
 {
-  Clan *clan = NULL;
+  std::shared_ptr<Clan> clan;
   long amount = 0;
 
   if ( !IsClanned( ch ) )

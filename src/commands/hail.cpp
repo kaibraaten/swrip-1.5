@@ -16,8 +16,8 @@ void do_hail( Character *ch , std::string argument )
   std::string arg;
   std::string arg2;
   char buf[MAX_STRING_LENGTH];
-  Ship *ship = nullptr;
-  Ship *target = nullptr;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> target;
 
   argument = OneArgument( argument, arg );
   arg2 = argument;

@@ -33,7 +33,7 @@
 #include "pcdata.hpp"
 #include "alias.hpp"
 
-Alias *FindAlias( const Character *ch, const std::string &argument )
+std::shared_ptr<Alias> FindAlias( const Character *ch, const std::string &argument )
 {
   std::string alias_name;
 
@@ -44,27 +44,22 @@ Alias *FindAlias( const Character *ch, const std::string &argument )
 
   OneArgument(argument, alias_name);
 
-  Alias *alias = Find(ch->PCData->Aliases(),
-                      [alias_name](auto a)
-                      {
-                        return StringPrefix(alias_name, a->Name) == 0;
-                      });
+  auto alias = Find(ch->PCData->Aliases(),
+                    [alias_name](auto a)
+                    {
+                      return StringPrefix(alias_name, a->Name) == 0;
+                    });
 
   return alias;
 }
 
-Alias *AllocateAlias( const std::string &name, const std::string &command )
+std::shared_ptr<Alias> AllocateAlias( const std::string &name, const std::string &command )
 {
-  Alias *alias = new Alias();
+  std::shared_ptr<Alias> alias = std::make_shared<Alias>();
   alias->Name = name;
   alias->Command = command;
 
   return alias;
-}
-
-void FreeAlias( Alias *alias )
-{
-  delete alias;
 }
 
 void FreeAliases( Character *ch )
@@ -78,9 +73,8 @@ void FreeAliases( Character *ch )
 
   while(!ch->PCData->Aliases().empty())
     {
-      Alias *alias = ch->PCData->Aliases().front();
+      auto alias = ch->PCData->Aliases().front();
       ch->PCData->Remove(alias);
-      FreeAlias(alias);
     }
 }
 
@@ -94,7 +88,7 @@ bool CheckAlias( Character *ch, const std::string &command, const std::string &a
       nullarg = false;
     }
 
-  const Alias *alias = FindAlias(ch, command);
+  auto alias = FindAlias(ch, command);
 
   if(alias == nullptr)
     {
@@ -129,7 +123,7 @@ bool CheckAlias( Character *ch, const std::string &command, const std::string &a
   return true;
 }
 
-void AddAlias( Character *ch, Alias *alias )
+void AddAlias( Character *ch, std::shared_ptr<Alias> alias )
 {
   if(IsNpc(ch))
     {
@@ -140,7 +134,7 @@ void AddAlias( Character *ch, Alias *alias )
                             [alias](auto a)
                             {
                               return StrCmp(alias->Name, a->Name) == 0;
-                            });
+                            }) ? true : false;
 
   if( !alreadyExists )
     {
@@ -148,7 +142,7 @@ void AddAlias( Character *ch, Alias *alias )
     }
 }
 
-void UnlinkAlias( Character *ch, Alias *alias )
+void UnlinkAlias( Character *ch, std::shared_ptr<Alias> alias )
 {
   if(IsNpc(ch))
     {

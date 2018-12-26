@@ -1,6 +1,7 @@
 #ifndef _SWRIP_OBJECT_HPP_
 #define _SWRIP_OBJECT_HPP_
 
+#include <memory>
 #include <array>
 #include <string>
 #include "types.hpp"
@@ -14,13 +15,13 @@ public:
   Object(ProtoObject *protoObj, int level);
   virtual ~Object();
 
-  const std::list<ExtraDescription*> &ExtraDescriptions() const;
-  void Add(ExtraDescription *extraDescription);
-  void Remove(ExtraDescription *extraDescription);
+  const std::list<std::shared_ptr<ExtraDescription>> &ExtraDescriptions() const;
+  void Add(std::shared_ptr<ExtraDescription> extraDescription);
+  void Remove(std::shared_ptr<ExtraDescription> extraDescription);
 
-  const std::list<Affect*> &Affects() const;
-  void Add(Affect *affect);
-  void Remove(Affect *affect);
+  const std::list<std::shared_ptr<Affect>> &Affects() const;
+  void Add(std::shared_ptr<Affect> affect);
+  void Remove(std::shared_ptr<Affect> affect);
 
   void Add(Object *object);
   void Remove(Object *object);
@@ -52,7 +53,7 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl = nullptr;
+  std::unique_ptr<Impl> pImpl;
 };
 
 #endif

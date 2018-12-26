@@ -9,7 +9,7 @@ void do_empower( Character *ch , std::string argument )
   std::string arg;
   std::string arg2;
   Character *victim = NULL;
-  Clan *clan = NULL;
+  std::shared_ptr<Clan> clan;
 
   if ( IsNpc( ch ) )
     {

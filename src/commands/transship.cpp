@@ -9,7 +9,7 @@ void do_transship(Character *ch, std::string argument )
   std::string arg2;
   vnum_t arg3 = 0;
   vnum_t origShipyard = INVALID_VNUM;
-  Ship *ship = nullptr;
+  std::shared_ptr<Ship> ship;
 
   if ( IsNpc( ch ) )
     {

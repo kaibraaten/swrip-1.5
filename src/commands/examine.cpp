@@ -8,7 +8,7 @@ void do_examine( Character *ch, std::string arg )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
   Object *obj = nullptr;
-  Board *board = nullptr;
+  std::shared_ptr<Board> board;
   short dam = 0;
 
   if ( arg.empty() )

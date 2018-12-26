@@ -2,11 +2,12 @@
 #include "badname.hpp"
 #include "script.hpp"
 
-BadNameRepository *BadNames = nullptr;
+std::shared_ptr<BadNameRepository> BadNames;
 
 #define BADNAME_FILE DATA_DIR "badnames.lua"
 
-bool CompareBadName::operator()(const BadName *lhs, const BadName *rhs)
+bool CompareBadName::operator()(const std::shared_ptr<BadName> &lhs,
+                                const std::shared_ptr<BadName> &rhs)
 {
   return StrCmp(lhs->Name, rhs->Name) < 0;
 }
@@ -18,10 +19,9 @@ public:
   void Save() const override;
 
 private:
-  static void PushBadName( lua_State *L, const BadName *badName );
+  static void PushBadName( lua_State *L, const std::shared_ptr<BadName> &badName );
   static void PushBadNames( lua_State *L, const void *ud );
-  static int L_BadNameEntry( lua_State *L );
-  
+  static int L_BadNameEntry( lua_State *L );  
 };
 
 void LuaBadNameRepository::Load()
@@ -34,12 +34,12 @@ void LuaBadNameRepository::Save() const
   LuaSaveDataFile( BADNAME_FILE, PushBadNames, "badnames", NULL );
 }
 
-BadNameRepository *NewBadNameRepository()
+std::shared_ptr<BadNameRepository> NewBadNameRepository()
 {
-  return new LuaBadNameRepository();
+  return std::make_shared<LuaBadNameRepository>();
 }
 
-void LuaBadNameRepository::PushBadName( lua_State *L, const BadName *badName )
+void LuaBadNameRepository::PushBadName( lua_State *L, const std::shared_ptr<BadName> &badName )
 {
   static int idx = 0;
   lua_pushinteger( L, ++idx );
@@ -54,7 +54,7 @@ void LuaBadNameRepository::PushBadNames( lua_State *L, const void *ud )
 {
   lua_newtable( L );
 
-  for(const BadName *badName : BadNames->Entities())
+  for(const std::shared_ptr<BadName> &badName : BadNames)
     {
       PushBadName(L, badName);
     }

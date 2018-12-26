@@ -23,9 +23,13 @@
 #ifndef _SWRIP_SHIPS_HPP_
 #define _SWRIP_SHIPS_HPP_
 
+#include <functional>
+#include <memory>
 #include <string>
 #include <array>
 #include <bitset>
+#include <list>
+#include <vector>
 #include <utility/vector3.hpp>
 #include "types.hpp"
 #include "constants.hpp"
@@ -114,11 +118,11 @@ public:
     {
       int Strength = 0;
       int State = LASER_READY;
-      Ship *Tractoring = nullptr; /* Not persisted */
+      std::shared_ptr<Ship> Tractoring; /* Not persisted */
     } TractorBeam;
     
-    Ship *Target = nullptr; /* Not persisted */
-    std::array<Turret*, MAX_NUMBER_OF_TURRETS_IN_SHIP> Turrets;
+    std::shared_ptr<Ship> Target; /* Not persisted */
+    std::vector<Turret*> Turrets = std::vector<Turret*>(MAX_NUMBER_OF_TURRETS_IN_SHIP);
   } WeaponSystems;
 
   struct
@@ -148,7 +152,7 @@ public:
 
    /* Runtime state, not persisted */
   Room *InRoom = nullptr;
-  struct Spaceobject *Spaceobject = nullptr;
+  std::shared_ptr<class Spaceobject> Spaceobject;
   std::string LandingDestination;
   int Hyperdistance = 0;
   int OriginalHyperdistance = 0;
@@ -167,63 +171,65 @@ public:
   Vector3 HyperPosition;
   Vector3 OriginPosition;
   long Collision = 0;
-  Ship *TractoredBy = nullptr;
-  struct Spaceobject *CurrentJump = nullptr;
-  struct Spaceobject *LastSystem = nullptr;
+  std::shared_ptr<Ship> TractoredBy;
+  std::shared_ptr<class Spaceobject> CurrentJump;
+  std::shared_ptr<class Spaceobject> LastSystem;
   bool Autopilot = false;
   bool OpenTube = false;
-  Ship *Docked = nullptr;
+  std::shared_ptr<Ship> Docked;
   Character *Ch = nullptr;
-  struct Spaceobject *InOrbitOf = nullptr;
+  std::shared_ptr<class Spaceobject> InOrbitOf;
   int Count = 0;
 };
 
-ch_ret DriveShip( Character *ch, Ship *ship, Exit *exit, int fall );
-void ResetShip( Ship *ship );
-void EchoToDockedShip( int color, const Ship *ship, const std::string &argument );
-bool CanDock( const Ship *ship );
-bool IsShipInHyperspace( const Ship *ship );
-bool IsShipDisabled( const Ship *ship );
-bool IsShipInCombatRange( const Ship *ship, const Ship *target );
-bool IsMissileInRange( const Ship *ship, const Missile *missile );
-bool IsSpaceobjectInRange( const Ship *ship, const Spaceobject *object );
-bool IsSpaceobjectInCaptureRange( const Ship *ship, const Spaceobject *object );
-bool CheckHostile( Ship *ship );
-Ship *GetShipAnywhere( const std::string &name );
-Ship *GetShipFromEntrance( vnum_t vnum );
-Ship *GetShipFromHangar( vnum_t vnum );
-Ship *GetShipFromCockpit( vnum_t vnum );
-Ship *GetShipFromNavSeat( vnum_t vnum );
-Ship *GetShipFromCoSeat( vnum_t vnum );
-Ship *GetShipFromPilotSeat( vnum_t vnum );
-Ship *GetShipFromGunSeat( vnum_t vnum );
-Ship *GetShipFromTurret( vnum_t vnum );
-Ship *GetShipFromEngine( vnum_t vnum );
-Ship *GetShipInRange( const std::string &name, const Ship *eShip );
-void UpdateShipMovement( void );
-void RechargeShips( void );
-void ShipUpdate( void );
-void UpdateSpaceCombat(void);
-bool IsShipRental( const Character *ch, const Ship *ship );
-void EchoToShip( int color, const Ship *ship, const std::string &argument );
-void EchoToCockpit( int color, const Ship *ship, const std::string &argument );
-void EchoToNearbyShips( int color, const Ship *ship, const std::string &argument,
-                        const Ship *ignore );
-bool ExtractShip( Ship *ship );
-bool ShipToRoom( Ship *ship, vnum_t vnum );
-long GetShipValue( const Ship *ship );
-long GetRentalPrice(const Ship *ship);
-bool RentShip( Character *ch, const Ship *ship );
-void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaulter);
-void DestroyShip( Ship *ship, Character *killer );
-void ShipToSpaceobject( Ship *ship, Spaceobject *spaceobject );
-void ShipFromSpaceobject( Ship *ship, Spaceobject *spaceobject);
-Ship *GetShipInRoom( const Room *room, const std::string &name );
-void TransferShip( Ship *ship , vnum_t destination );
-bool IsShipAutoflying( const Ship *ship );
-bool CheckPilot( const Character *ch, const Ship *ship );
+ch_ret DriveShip( Character *ch, std::shared_ptr<Ship> ship, Exit *exit, int fall );
+void ResetShip( std::shared_ptr<Ship> ship );
+void EchoToDockedShip( int color, std::shared_ptr<Ship> ship, const std::string &argument );
+bool CanDock( std::shared_ptr<Ship> ship );
+bool IsShipInHyperspace( std::shared_ptr<Ship> ship );
+bool IsShipDisabled( std::shared_ptr<Ship> ship );
+bool IsShipInCombatRange( std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target );
+bool IsMissileInRange( std::shared_ptr<Ship> ship, std::shared_ptr<Missile> missile );
+bool IsSpaceobjectInRange( std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> object );
+bool IsSpaceobjectInCaptureRange(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> object);
+bool CheckHostile( std::shared_ptr<Ship> ship );
+std::shared_ptr<Ship> GetShipAnywhere( const std::string &name );
+std::shared_ptr<Ship> GetShipFromEntrance( vnum_t vnum );
+std::shared_ptr<Ship> GetShipFromHangar( vnum_t vnum );
+std::shared_ptr<Ship> GetShipFromCockpit( vnum_t vnum );
+std::shared_ptr<Ship> GetShipFromNavSeat( vnum_t vnum );
+std::shared_ptr<Ship> GetShipFromCoSeat( vnum_t vnum );
+std::shared_ptr<Ship> GetShipFromPilotSeat( vnum_t vnum );
+std::shared_ptr<Ship> GetShipFromGunSeat( vnum_t vnum );
+std::shared_ptr<Ship> GetShipFromTurret( vnum_t vnum );
+std::shared_ptr<Ship> GetShipFromEngine( vnum_t vnum );
+std::shared_ptr<Ship> GetShipInRange( const std::string &name, std::shared_ptr<Ship> eShip );
+void UpdateShipMovement();
+void RechargeShips();
+void ShipUpdate();
+void UpdateSpaceCombat();
+bool IsShipRental( const Character *ch, std::shared_ptr<Ship> ship );
+void EchoToShip( int color, std::shared_ptr<Ship> ship, const std::string &argument );
+void EchoToCockpit( int color, std::shared_ptr<Ship> ship, const std::string &argument );
+void EchoToNearbyShips( int color, std::shared_ptr<Ship> ship, const std::string &argument,
+                        std::list<std::shared_ptr<Ship>> ignore = {} );
+bool ExtractShip( std::shared_ptr<Ship> ship );
+bool ShipToRoom( std::shared_ptr<Ship> ship, vnum_t vnum );
+long GetShipValue( std::shared_ptr<Ship> ship );
+long GetRentalPrice(std::shared_ptr<Ship> ship);
+bool RentShip( Character *ch, std::shared_ptr<Ship> ship );
+void DamageShip( std::shared_ptr<Ship> ship, int min, int max, Character *ch,
+                 std::shared_ptr<Ship> assaulter);
+void DestroyShip( std::shared_ptr<Ship> ship, Character *killer );
+void ShipToSpaceobject( std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> spaceobject );
+void ShipFromSpaceobject( std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> spaceobject);
+std::shared_ptr<Ship> GetShipInRoom( const Room *room, const std::string &name );
+void TransferShip( std::shared_ptr<Ship> ship , vnum_t destination );
+bool IsShipAutoflying( std::shared_ptr<Ship> ship );
+bool CheckPilot( const Character *ch, std::shared_ptr<Ship> ship );
 bool ShipNameAndPersonalnameComboIsUnique( const std::string &name,
                                            const std::string &personalname );
-void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData);
+void ForEachShip(std::function<bool(std::shared_ptr<Ship>, void*)> callback,
+                 void *userData);
 
 #endif

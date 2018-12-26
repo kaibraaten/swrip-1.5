@@ -44,7 +44,7 @@ void do_showstatistic( Character *ch, std::string argument )
     }
 
   std::shared_ptr<Descriptor> desc = std::make_shared<NullDescriptor>();
-  std::shared_ptr<Character> raceCh = std::make_shared<Character>(new PCData(), desc.get());
+  std::shared_ptr<Character> raceCh = std::make_shared<Character>(std::make_unique<PCData>(), desc.get());
   
   raceCh->TopLevel = 1;
   raceCh->InRoom = GetRoom( ROOM_VNUM_LIMBO );

@@ -5,7 +5,7 @@
 
 void do_makeshuttle (Character *ch, std::string argument)
 {
-  Shuttle *shuttle = nullptr;
+  std::shared_ptr<Shuttle> shuttle;
 
   if ( argument.empty() )
     {
@@ -26,4 +26,3 @@ void do_makeshuttle (Character *ch, std::string argument)
   else
     ch->Echo("&GShuttle failed to create.&d\r\n" );
 }
-

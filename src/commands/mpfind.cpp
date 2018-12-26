@@ -65,7 +65,7 @@ void do_mpfind( Character *ch, std::string argument )
         {
           int tot_vnum = 0;
 
-          for(const MPROG_DATA *pProg : pMob->mprog.MudProgs())
+          for(auto pProg : pMob->mprog.MudProgs())
             {
               tot_vnum += CountStringOccurances(pProg->comlist, argument);
             }

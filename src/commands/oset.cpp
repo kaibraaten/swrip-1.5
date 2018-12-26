@@ -16,7 +16,7 @@ void do_oset( Character *ch, std::string argument )
   char buf[MAX_STRING_LENGTH];
   char outbuf[MAX_STRING_LENGTH];
   Object *obj = NULL, *tmpobj = NULL;
-  ExtraDescription *ed = NULL;
+  std::shared_ptr<ExtraDescription> ed;
   bool lockobj = false;
   std::string origarg = argument;
   int value = 0, tmp = 0;
@@ -52,7 +52,7 @@ void do_oset( Character *ch, std::string argument )
        * the object and index-object lists, searching through the
        * extra_descr lists for a matching pointer...
        */
-      ed  = (ExtraDescription*)ch->dest_buf;
+      ed  = *static_cast<std::shared_ptr<ExtraDescription>*>(ch->dest_buf);
       ed->Description = CopyBuffer( ch );
       tmpobj = (Object*)ch->spare_ptr;
       StopEditing( ch );
@@ -625,7 +625,7 @@ void do_oset( Character *ch, std::string argument )
           value = ToLong( arg3 );
         }
 
-      Affect *paf = new Affect();
+      std::shared_ptr<Affect> paf = std::make_shared<Affect>();
       paf->Type         = -1;
       paf->Duration             = -1;
       paf->Location             = loc;
@@ -665,12 +665,11 @@ void do_oset( Character *ch, std::string argument )
         {
           ProtoObject *pObjIndex = obj->Prototype;
 
-          for(Affect *paf : pObjIndex->Affects())
+          for(auto paf : pObjIndex->Affects())
             {
               if ( ++count == loc )
                 {
                   pObjIndex->Remove(paf);
-                  delete paf;
                   ch->Echo("Removed.\r\n");
                   --top_affect;
                   return;
@@ -682,12 +681,11 @@ void do_oset( Character *ch, std::string argument )
         }
       else
         {
-          for(Affect *paf : obj->Affects())
+          for(auto paf : obj->Affects())
             {
               if ( ++count == loc )
                 {
                   obj->Remove(paf);
-                  delete paf;
                   ch->Echo("Removed.\r\n");
                   --top_affect;
                   return;
@@ -737,7 +735,7 @@ void do_oset( Character *ch, std::string argument )
         ch->spare_ptr = NULL;
 
       ch->SubState = SUB_OBJ_EXTRA;
-      ch->dest_buf = ed;
+      ch->dest_buf = &ed;
       StartEditing( ch, ed->Description );
       SetEditorDescription( ch, "Object %ld (%s) extra description: %s",
 			    obj->Prototype->Vnum, obj->Name.c_str(), arg3.c_str() );
@@ -776,7 +774,7 @@ void do_oset( Character *ch, std::string argument )
         ch->spare_ptr = NULL;
 
       ch->SubState = SUB_OBJ_EXTRA;
-      ch->dest_buf = ed;
+      ch->dest_buf = &ed;
       StartEditing( ch, ed->Description );
       SetEditorDescription( ch, "Object %ld (%s) description",
                             obj->Prototype->Vnum, obj->Name.c_str() );

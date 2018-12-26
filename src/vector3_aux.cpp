@@ -68,19 +68,19 @@
 #include "ship.hpp"
 #include "missile.hpp"
 
-static bool IsShipFacing( const Ship * const ship,
-                          const Vector3 * const target );
+static bool IsShipFacing(std::shared_ptr<Ship> ship,
+                         const Vector3 * const target);
 static void HandleMovement( Vector3 * const pos,
                             const Vector3 * const head, const int speed );
 
-bool IsShipFacingShip( const Ship * const ship,
-			  const Ship * const target )
+bool IsShipFacingShip(std::shared_ptr<Ship> ship,
+                      std::shared_ptr<Ship> target)
 {
   return IsShipFacing( ship, &target->Position );
 }
 
-bool IsShipFacingSpaceobject( const Ship * const ship,
-				 const Spaceobject * const target )
+bool IsShipFacingSpaceobject( std::shared_ptr<Ship> ship,
+                              std::shared_ptr<Spaceobject> target )
 {
   return IsShipFacing( ship, &target->Position );
 }
@@ -88,7 +88,7 @@ bool IsShipFacingSpaceobject( const Ship * const ship,
 /*
  * Flip the trajectory to head the opposite way (180 degrees).
  */
-void TurnShip180( Ship * const ship )
+void TurnShip180( std::shared_ptr<Ship> ship )
 {
   ship->Heading.x *= -1;
   ship->Heading.y *= -1;
@@ -106,8 +106,8 @@ void TurnShip180( Ship * const ship )
  *
  * Etc, etc...
  */
-void SetShipCourse( Ship * const ship,
-		      const Vector3 * const destination )
+void SetShipCourse( std::shared_ptr<Ship> ship,
+                    const Vector3 * const destination )
 {
   ship->Heading.x = destination->x - ship->Position.x;
   ship->Heading.y = destination->y - ship->Position.y;
@@ -115,20 +115,20 @@ void SetShipCourse( Ship * const ship,
   NormalizeVector( &ship->Heading );
 }
 
-void SetShipCourseTowardsShip( Ship * const ship,
-			      const Ship * const target )
+void SetShipCourseTowardsShip( std::shared_ptr<Ship> ship,
+                               std::shared_ptr<Ship> target )
 {
   SetShipCourse( ship, &target->Position );
 }
 
-void SetShipCourseTowardsSpaceobject( Ship * const ship,
-				     const Spaceobject * const target )
+void SetShipCourseTowardsSpaceobject( std::shared_ptr<Ship> ship,
+                                      std::shared_ptr<Spaceobject> target )
 {
   SetShipCourse( ship, &target->Position );
 }
 
-void SetMissileCourseTowardsShip( Missile * const missile,
-				 const Ship * const target )
+void SetMissileCourseTowardsShip( std::shared_ptr<Missile> missile,
+                                  std::shared_ptr<Ship> target )
 {
   missile->Heading.x = target->Position.x - missile->Position.x;
   missile->Heading.y = target->Position.y - missile->Position.y;
@@ -140,41 +140,41 @@ void SetMissileCourseTowardsShip( Missile * const missile,
  * High-level function to align a ship's trajectory with another's.
  * Useful for grouped ships, docked ships, etc.
  */
-void AlignShipTrajectory( Ship * const ship,
-			 const Ship * const target )
+void AlignShipTrajectory( std::shared_ptr<Ship> ship,
+                          std::shared_ptr<Ship> target )
 {
   CopyVector( &ship->Heading, &target->Heading );
 }
 
-void MoveSpaceobject( Spaceobject * const spaceobj )
+void MoveSpaceobject( std::shared_ptr<Spaceobject> spaceobj )
 {
   HandleMovement( &spaceobj->Position, &spaceobj->Heading, spaceobj->Speed );
 }
 
-void MoveShip( Ship * const ship )
+void MoveShip( std::shared_ptr<Ship> ship )
 {
   HandleMovement( &ship->Position, &ship->Heading, ship->Thrusters.Speed.Current );
 }
 
-void MoveMissile( Missile * const missile )
+void MoveMissile( std::shared_ptr<Missile> missile )
 {
   HandleMovement( &missile->Position, &missile->Heading, missile->Speed );
 }
 
-double GetShipDistanceToShip( const Ship * const ship,
-			      const Ship * const target )
+double GetShipDistanceToShip( std::shared_ptr<Ship> ship,
+			      std::shared_ptr<Ship> target )
 {
   return GetDistanceBetweenVectors( &ship->Position, &target->Position );
 }
 
-double GetShipDistanceToSpaceobject( const Ship * const ship,
-				     const Spaceobject * const spaceobject )
+double GetShipDistanceToSpaceobject( std::shared_ptr<Ship> ship,
+				     std::shared_ptr<Spaceobject> spaceobject )
 {
   return GetDistanceBetweenVectors( &ship->Position, &spaceobject->Position );
 }
 
-double GetMissileDistanceToShip( const Missile * const missile,
-				 const Ship * const target )
+double GetMissileDistanceToShip( std::shared_ptr<Missile> missile,
+				 std::shared_ptr<Ship> target )
 {
   return GetDistanceBetweenVectors( &missile->Position, &target->Position );
 }
@@ -218,7 +218,7 @@ static void HandleMovement( Vector3 * const pos,
  *   ... your code here
  * }
  */
-static bool IsShipFacing( const Ship * const ship,
+static bool IsShipFacing( std::shared_ptr<Ship> ship,
                           const Vector3 * const target )
 {
   Vector3 h, d;

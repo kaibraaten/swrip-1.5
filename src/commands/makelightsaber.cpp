@@ -116,7 +116,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   strcat( buf, " ignites with a hum and a soft glow." );
   lightsaber->ActionDescription = buf;
 
-  Affect *hitroll = new Affect();
+  auto hitroll = std::make_shared<Affect>();
   hitroll->Type               = -1;
   hitroll->Duration           = -1;
   hitroll->Location           = GetAffectType( "hitroll" );
@@ -124,7 +124,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   lightsaber->Add(hitroll);
   ++top_affect;
 
-  Affect *parry = new Affect();
+  auto parry = std::make_shared<Affect>();
   parry->Type               = -1;
   parry->Duration           = -1;
   parry->Location           = GetAffectType( "parry" );

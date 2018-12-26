@@ -8,7 +8,8 @@
 void do_drive( Character *ch, std::string argument )
 {
   DirectionType dir = DIR_INVALID;
-  Ship *ship = nullptr, *target = nullptr;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> target;
   std::string arg;
   std::string arg2;
   char buf[MAX_INPUT_LENGTH];

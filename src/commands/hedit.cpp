@@ -10,7 +10,7 @@
  */
 void do_hedit( Character *ch, std::string argument )
 {
-  HelpFile *pHelp = NULL;
+  std::shared_ptr<HelpFile> pHelp;
 
   if ( !ch->Desc )
     {
@@ -23,7 +23,7 @@ void do_hedit( Character *ch, std::string argument )
       break;
 
     case SUB_HELP_EDIT:
-      pHelp = (HelpFile*) ch->dest_buf;
+      pHelp = *static_cast<std::shared_ptr<HelpFile>*>(ch->dest_buf);
 
       if ( !pHelp )
         {
@@ -47,7 +47,7 @@ void do_hedit( Character *ch, std::string argument )
     }
 
   ch->SubState = SUB_HELP_EDIT;
-  ch->dest_buf = pHelp;
+  ch->dest_buf = &pHelp;
   StartEditing( ch, GetHelpFileText( pHelp ) );
   SetEditorDescription( ch, "Help file: %s", GetHelpFileKeyword( pHelp ).c_str() );
 }

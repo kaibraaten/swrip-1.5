@@ -5,7 +5,7 @@
 
 void do_shopset( Character *ch, std::string argument )
 {
-  Shop *shop = nullptr;
+  std::shared_ptr<Shop> shop;
   ProtoMobile *mob = nullptr, *mob2 = nullptr;
   std::string arg1;
   std::string arg2;

@@ -1,13 +1,15 @@
-cmake_minimum_required(VERSION 2.8.9)
-project(colorparser)
+cmake_minimum_required(VERSION 3.11)
+include_directories(include/colorparser)
 set(CMAKE_BUILD_TYPE Debug)
-set(GCC_WARNING_FLAGS "-Wall -Wshadow -Wformat-security -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Werror -Wwrite-strings -Wextra -Wno-char-subscripts")
-set(GCC_STD_FLAG "-std=c++14")
-set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_WARNING_FLAGS} ${GCC_STD_FLAG}")
-set(SOURCES
-  colorparser.cpp
-  passthrough.cpp
-  smaug2ansi.cpp
-  smaug2html.cpp
-  smaug_stripper.cpp)
-add_library(colorparser SHARED ${SOURCES})
+set(COLORPARSER_SOURCES
+  src/colorparser.cpp
+  src/passthrough.cpp
+  src/smaug2ansi.cpp
+  src/smaug2html.cpp
+  src/smaug_stripper.cpp)
+add_library(colorparser SHARED ${COLORPARSER_SOURCES})
+target_compile_features(colorparser PUBLIC cxx_std_14)
+target_compile_options(colorparser
+  PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>
+  PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /wd4996 /wd6262 /wd26451 /wd4267 /wd4244 /wd4018 /we4805 /we4305>
+  )

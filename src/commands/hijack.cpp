@@ -9,9 +9,9 @@
 void do_hijack( Character *ch, std::string argument )
 {
   int the_chance = 0;
-  Ship *ship = NULL;
-  char buf[MAX_STRING_LENGTH];
-  char buf2[MAX_STRING_LENGTH];
+  std::shared_ptr<Ship> ship;
+  char buf[MAX_STRING_LENGTH] = {'\0'};
+  char buf2[MAX_STRING_LENGTH] = {'\0'};
   Character *p = NULL, *p_prev = NULL, *victim = NULL;
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )

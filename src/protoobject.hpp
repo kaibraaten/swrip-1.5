@@ -1,6 +1,7 @@
 #ifndef _SWRIP_PROTOOBJECT_HPP_
 #define _SWRIP_PROTOOBJECT_HPP_
 
+#include <memory>
 #include <list>
 #include <array>
 #include "types.hpp"
@@ -14,13 +15,13 @@ public:
   ProtoObject(vnum_t vnum);
   virtual ~ProtoObject();
 
-  const std::list<ExtraDescription*> &ExtraDescriptions() const;
-  void Add(ExtraDescription *extraDescription);
-  void Remove(ExtraDescription *extraDescription);
+  const std::list<std::shared_ptr<ExtraDescription>> &ExtraDescriptions() const;
+  void Add(std::shared_ptr<ExtraDescription> extraDescription);
+  void Remove(std::shared_ptr<ExtraDescription> extraDescription);
 
-  const std::list<Affect*> &Affects() const;
-  void Add(Affect *affect);
-  void Remove(Affect *affect);
+  const std::list<std::shared_ptr<Affect>> &Affects() const;
+  void Add(std::shared_ptr<Affect> affect);
+  void Remove(std::shared_ptr<Affect> affect);
   
   ProtoObject   *Next = nullptr;
   ProtoObject   *NextSort = nullptr;
@@ -45,7 +46,7 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl = nullptr;
+  std::unique_ptr<Impl> pImpl;
 };
 
 #endif

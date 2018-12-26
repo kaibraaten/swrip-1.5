@@ -7,14 +7,14 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-static bool ship_was_in_range( Ship *ship, Ship *target );
+static bool ship_was_in_range( std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target );
 
 void do_jumpvector( Character *ch, std::string argument )
 {
   int the_chance = 0;
   Vector3 projected;
-  Ship *ship = NULL;
-  Ship *target = NULL;
+  std::shared_ptr<Ship> ship;
+  std::shared_ptr<Ship> target;
   char buf[MAX_STRING_LENGTH];
   int num = GetRandomNumberFromRange( 1, 16 );
   float randnum = 1.0/(float) num;
@@ -91,7 +91,7 @@ void do_jumpvector( Character *ch, std::string argument )
   LearnFromSuccess( ch, gsn_jumpvector );
 }
 
-static bool ship_was_in_range( Ship *ship, Ship *target )
+static bool ship_was_in_range( std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target )
 {
   return target && ship && target != ship
     && GetShipDistanceToShip( ship, target ) < 100*(ship->Instruments.Sensor+10)*((target->Class == SHIP_DEBRIS ? 2 : target->Class)+3);

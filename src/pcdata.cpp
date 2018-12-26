@@ -5,12 +5,12 @@
 
 struct PCData::Impl
 {
-  std::list<Alias*> Aliases;
-  std::list<class Note*> Comments;
+  std::list<std::shared_ptr<Alias>> Aliases;
+  std::list<std::shared_ptr<class Note>> Comments;
 };
 
 PCData::PCData()
-  : pImpl(new Impl())
+  : pImpl(std::make_unique<Impl>())
 {
   Condition.fill(0);
   Condition[COND_THIRST]  = 48;
@@ -25,43 +25,35 @@ PCData::PCData()
 
 PCData::~PCData()
 {
-  for(Alias *alias : Aliases())
-    {
-      FreeAlias(alias);
-    }
 
-  for(class Note *comment : Comments())
-    {
-      FreeNote(comment);
-    }
 }
 
-const std::list<Alias*> &PCData::Aliases() const
+const std::list<std::shared_ptr<Alias>> &PCData::Aliases() const
 {
   return pImpl->Aliases;
 }
 
-void PCData::Add(Alias *alias)
+void PCData::Add(std::shared_ptr<Alias> alias)
 {
   pImpl->Aliases.push_back(alias);
 }
 
-void PCData::Remove(Alias *alias)
+void PCData::Remove(std::shared_ptr<Alias> alias)
 {
   pImpl->Aliases.remove(alias);
 }
 
-const std::list<Note*> &PCData::Comments() const
+const std::list<std::shared_ptr<Note>> &PCData::Comments() const
 {
   return pImpl->Comments;
 }
 
-void PCData::Add(class Note *comment)
+void PCData::Add(std::shared_ptr<class Note> comment)
 {
   pImpl->Comments.push_back(comment);
 }
 
-void PCData::Remove(class Note *comment)
+void PCData::Remove(std::shared_ptr<class Note> comment)
 {
   pImpl->Comments.remove(comment);
 }

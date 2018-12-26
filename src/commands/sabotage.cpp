@@ -11,7 +11,7 @@
 void do_sabotage( Character *ch, std::string arg )
 {
   int the_chance = 0, change = 0;
-  Ship *ship = NULL;
+  std::shared_ptr<Ship> ship;
 
   switch( ch->SubState )
     {

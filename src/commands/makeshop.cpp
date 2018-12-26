@@ -30,7 +30,7 @@ void do_makeshop( Character *ch, std::string argument )
       return;
     }
 
-  Shop *shop = new Shop();
+  std::shared_ptr<Shop> shop = std::make_shared<Shop>();
 
   shop->Keeper = vnum;
   shop->ProfitBuy = 120;

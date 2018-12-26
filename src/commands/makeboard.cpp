@@ -5,8 +5,6 @@
 
 void do_makeboard( Character *ch, std::string argument )
 {
-  Board *board = NULL;
-
   if ( argument.empty() )
     {
       ch->Echo("Usage: makeboard <name>\r\n");
@@ -20,8 +18,6 @@ void do_makeboard( Character *ch, std::string argument )
     }
   
   SmashTilde( argument );
-  board = AllocateBoard(argument);
+  std::shared_ptr<Board> board = AllocateBoard(argument);
   Boards->Add(board);
 }
-
-

@@ -8,7 +8,7 @@
 
 void do_reload( Character *ch, std::string arg )
 {
-  Ship *ship = nullptr;
+  std::shared_ptr<Ship> ship;
   long price = 0;
 
   if ( arg.empty() )

@@ -17,7 +17,7 @@ void do_makeclan( Character *ch, std::string argument )
       return;
     }
 
-  Clan *clan = AllocateClan();
+  std::shared_ptr<Clan> clan = AllocateClan();
   clan->Name = argument;
   Clans->Add(clan);
   Clans->Save( clan );

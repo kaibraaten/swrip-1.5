@@ -1,6 +1,7 @@
 #ifndef _SWRIP_ROOM_HPP_
 #define _SWRIP_ROOM_HPP_
 
+#include <memory>
 #include <list>
 #include <string>
 #include <bitset>
@@ -56,13 +57,13 @@ public:
   Room();
   virtual ~Room();
 
-  void Add(Ship *ship);
-  void Remove(Ship *ship);
-  const std::list<Ship*> &Ships() const;
+  void Add(std::shared_ptr<Ship> ship);
+  void Remove(std::shared_ptr<Ship> ship);
+  const std::list<std::shared_ptr<Ship>> &Ships() const;
 
-  void Add(Shuttle *shuttle);
-  void Remove(Shuttle *shuttle);
-  const std::list<Shuttle*> &Shuttles() const;
+  void Add(std::shared_ptr<Shuttle> shuttle);
+  void Remove(std::shared_ptr<Shuttle> shuttle);
+  const std::list<std::shared_ptr<Shuttle>> &Shuttles() const;
 
   void Add(Exit *xit);
   void Remove(Exit *xit);
@@ -76,9 +77,9 @@ public:
   void Remove(Object *object);
   const std::list<Object*> &Objects() const;
 
-  void Add(ExtraDescription *extraDescription);
-  void Remove(ExtraDescription *extraDescription);
-  const std::list<ExtraDescription*> &ExtraDescriptions() const;
+  void Add(std::shared_ptr<ExtraDescription> extraDescription);
+  void Remove(std::shared_ptr<ExtraDescription> extraDescription);
+  const std::list<std::shared_ptr<ExtraDescription>> &ExtraDescriptions() const;
   
   Room *Next = nullptr;
   Room *NextSort = nullptr;
@@ -97,7 +98,7 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl = nullptr;
+  std::unique_ptr<Impl> pImpl;
 };
 
 #endif

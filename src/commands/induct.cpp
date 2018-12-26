@@ -8,7 +8,7 @@ void do_induct( Character *ch, std::string argument )
 {
   std::string arg;
   Character *victim = NULL;
-  Clan *clan = NULL;
+  std::shared_ptr<Clan> clan;
 
   if ( IsNpc( ch ) || !IsClanned( ch ) )
     {
@@ -54,7 +54,7 @@ void do_induct( Character *ch, std::string argument )
 
   if ( IsClanned( victim ) )
     {
-      Clan *victimClan = victim->PCData->ClanInfo.Clan;
+      std::shared_ptr<Clan> victimClan = victim->PCData->ClanInfo.Clan;
 
       if ( victimClan->Type == CLAN_GUILD )
         {

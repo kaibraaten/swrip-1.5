@@ -26,6 +26,7 @@
 #ifndef _SWRIP_VECTOR3_AUX_HPP_
 #define _SWRIP_VECTOR3_AUX_HPP_
 
+#include <memory>
 #include <utility/vector3.hpp>
 #include "types.hpp"
 
@@ -38,16 +39,15 @@
  *   ... your code here
  * }
  */
-bool IsShipFacingShip( const Ship * const ship,
-			  const Ship * const target );
+bool IsShipFacingShip(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target);
 
-bool IsShipFacingSpaceobject( const Ship * const ship,
-				 const Spaceobject * const spaceobject );
+bool IsShipFacingSpaceobject(std::shared_ptr<Ship> ship,
+                             std::shared_ptr<Spaceobject> spaceobject);
 
 /*
  * Flip the trajectory to head the opposite way (180 degrees).
  */
-void TurnShip180( Ship * const ship );
+void TurnShip180(std::shared_ptr<Ship> ship);
 
 /*
  * Set a new course towards another space object's position.
@@ -60,37 +60,35 @@ void TurnShip180( Ship * const ship );
  *
  * Etc, etc...
  */
-void SetShipCourse( Ship * const ship,
-                      const Vector3 * const destination );
+void SetShipCourse(std::shared_ptr<Ship> ship,
+                   const Vector3 * const destination);
 
-void SetShipCourseTowardsShip( Ship * const ship,
-			      const Ship * const target );
+void SetShipCourseTowardsShip(std::shared_ptr<Ship> ship,
+                              std::shared_ptr<Ship> target);
 
-void SetShipCourseTowardsSpaceobject( Ship * const ship,
-				     const Spaceobject * const spaceobject );
-void SetMissileCourseTowardsShip( Missile * const m,
-				 const Ship * const target );
+void SetShipCourseTowardsSpaceobject(std::shared_ptr<Ship> ship,
+                                     std::shared_ptr<Spaceobject> spaceobject);
+void SetMissileCourseTowardsShip(std::shared_ptr<Missile> m,
+                                 std::shared_ptr<Ship> target);
 
 /*
  * High-level function to align a ship's trajectory with another's.
  * Useful for grouped ships, docked ships, etc.
  */
-void AlignShipTrajectory( Ship * const ship,
-                         const Ship * const target );
+void AlignShipTrajectory(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target);
 
 /*
  * Calculate new position based on heading and speed.
  */
-void MoveShip( Ship * const ship );
-void MoveMissile( Missile * const m );
-void MoveSpaceobject( Spaceobject * const spaceobj );
+void MoveShip(std::shared_ptr<Ship> ship);
+void MoveMissile( std::shared_ptr<Missile> m);
+void MoveSpaceobject( std::shared_ptr<Spaceobject> spaceobj);
 
-double GetShipDistanceToShip( const Ship * const ship,
-			      const Ship * const target );
-double GetShipDistanceToSpaceobject( const Ship * const ship,
-				     const Spaceobject * const spaceobject );
-double GetMissileDistanceToShip( const Missile * const m,
-				 const Ship * const s );
+double GetShipDistanceToShip(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target);
+double GetShipDistanceToSpaceobject(std::shared_ptr<Ship> ship,
+                                    std::shared_ptr<Spaceobject> spaceobject);
+double GetMissileDistanceToShip(std::shared_ptr<Missile> m,
+                                std::shared_ptr<Ship> s);
 void RandomizeVector( Vector3 * const vec, int from, int to );
 
 #endif /* include guard */

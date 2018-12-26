@@ -104,7 +104,7 @@ void do_rstat( Character *ch, std::string argument )
       std::ostringstream outbuf;
       ch->Echo("Extra description keywords: '");
 
-      for(const ExtraDescription *ed : location->ExtraDescriptions())
+      for(auto ed : location->ExtraDescriptions())
         {
           outbuf << ed->Keyword << " ";
         }

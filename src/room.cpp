@@ -8,55 +8,55 @@
 
 struct Room::Impl
 {
-  std::list<Ship*> Ships;
-  std::list<Shuttle*> Shuttles;
+  std::list<std::shared_ptr<Ship>> Ships;
+  std::list<std::shared_ptr<Shuttle>> Shuttles;
   std::list<Exit*> Exits;
   std::list<Character*> Characters;
   std::list<Object*> Objects;
-  std::list<ExtraDescription*> ExtraDescriptions;
+  std::list<std::shared_ptr<ExtraDescription>> ExtraDescriptions;
 };
 
 Room::Room()
-  : pImpl(new Impl())
+  : pImpl(std::make_unique<Impl>())
 {
 
 }
 
 Room::~Room()
 {
-  delete pImpl;
+
 }
 
-void Room::Add(Ship *ship)
+void Room::Add(std::shared_ptr<Ship> ship)
 {
   pImpl->Ships.push_back(ship);
   ship->InRoom = this;
 }
 
-void Room::Remove(Ship *ship)
+void Room::Remove(std::shared_ptr<Ship> ship)
 {
   pImpl->Ships.remove(ship);
   ship->InRoom = nullptr;
 }
 
-const std::list<Ship*> &Room::Ships() const
+const std::list<std::shared_ptr<Ship>> &Room::Ships() const
 {
   return pImpl->Ships;
 }
 
-void Room::Add(Shuttle *shuttle)
+void Room::Add(std::shared_ptr<Shuttle> shuttle)
 {
   pImpl->Shuttles.push_back(shuttle);
   shuttle->InRoom = this;
 }
 
-void Room::Remove(Shuttle *shuttle)
+void Room::Remove(std::shared_ptr<Shuttle> shuttle)
 {
   pImpl->Shuttles.remove(shuttle);
   shuttle->InRoom = nullptr;
 }
 
-const std::list<Shuttle*> &Room::Shuttles() const
+const std::list<std::shared_ptr<Shuttle>> &Room::Shuttles() const
 {
   return pImpl->Shuttles;
 }
@@ -121,17 +121,17 @@ const std::list<Object*> &Room::Objects() const
   return pImpl->Objects;
 }
 
-void Room::Add(ExtraDescription *extraDescription)
+void Room::Add(std::shared_ptr<ExtraDescription> extraDescription)
 {
   pImpl->ExtraDescriptions.push_back(extraDescription);
 }
 
-void Room::Remove(ExtraDescription *extraDescription)
+void Room::Remove(std::shared_ptr<ExtraDescription> extraDescription)
 {
   pImpl->ExtraDescriptions.remove(extraDescription);
 }
 
-const std::list<ExtraDescription*> &Room::ExtraDescriptions() const
+const std::list<std::shared_ptr<ExtraDescription>> &Room::ExtraDescriptions() const
 {
   return pImpl->ExtraDescriptions;
 }

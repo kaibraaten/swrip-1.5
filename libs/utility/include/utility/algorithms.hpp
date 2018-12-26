@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <iterator>
+#include <vector>
 
 template<typename Container, typename UnaryPredicate>
 auto Filter(const Container &original, UnaryPredicate pred)
@@ -20,6 +21,15 @@ auto Reverse(const Container &original)
 {
   Container reversed(std::rbegin(original), std::rend(original));
   return reversed;
+}
+
+template<typename Container>
+auto RandomizeOrder(const Container &original)
+{
+  std::vector<typename Container::value_type> vec(std::begin(original), std::end(original));
+  std::random_shuffle(std::begin(vec), std::end(vec));
+  Container randomized(std::begin(vec), std::end(vec));
+  return randomized;
 }
 
 template<typename Container, typename UnaryPredicate>
@@ -40,6 +50,12 @@ template<typename Container, typename UnaryPredicate>
 size_t Count(const Container &container, UnaryPredicate pred)
 {
   return count_if(std::begin(container), std::end(container), pred);
+}
+
+template<typename Container, typename UnaryFunction>
+void ForEach(const Container &container, UnaryFunction func)
+{
+  for_each(std::begin(container), std::end(container), func);
 }
 
 #endif

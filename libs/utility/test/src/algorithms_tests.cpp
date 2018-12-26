@@ -195,3 +195,27 @@ TEST_F(AlgorithmsTests, Contains_FalseIfNotFound)
 
   EXPECT_FALSE( found );
 }
+
+TEST_F(AlgorithmsTests, RandomizeOrder_SameLengthAsOriginal)
+{
+  // Arrange
+  std::list<int> original { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+  // Act
+  std::list<int> randomized = RandomizeOrder(original);
+
+  // Assert
+  EXPECT_EQ(randomized.size(), original.size());
+}
+
+TEST_F(AlgorithmsTests, RandomizeOrder_DifferentOrderThanOriginal)
+{
+  // Arrange
+  std::list<int> original { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+
+  // Act
+  std::list<int> randomized = RandomizeOrder(original);
+
+  // Assert
+  EXPECT_NE(randomized, original);
+}

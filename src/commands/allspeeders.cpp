@@ -2,17 +2,17 @@
 #include "ship.hpp"
 #include "character.hpp"
 
-static bool ShowShip(Ship *ship, void *userData);
+static bool ShowShip(std::shared_ptr<Ship> ship, void *userData);
 
 struct UserData
 {
-  Character *ch;
-  int count;
+  Character *ch = nullptr;
+  int count = 0;
 };
 
 void do_allspeeders( Character *ch, std::string argument )
 {
-  struct UserData data;
+  UserData data;
   data.ch = ch;
   data.count = 0;
 
@@ -29,9 +29,9 @@ void do_allspeeders( Character *ch, std::string argument )
     }
 }
 
-static bool ShowShip(Ship *ship, void *userData)
+static bool ShowShip(std::shared_ptr<Ship> ship, void *userData)
 {
-  struct UserData *data = (struct UserData*)userData;
+  UserData *data = (UserData*)userData;
   char buf[MAX_STRING_LENGTH] = { '\0' };
 
   if ( ship->Class <= SHIP_PLATFORM )

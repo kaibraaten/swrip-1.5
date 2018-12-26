@@ -6,13 +6,13 @@
 #include "repos/shiprepository.hpp"
 #include "repos/clanrepository.hpp"
 
-static bool room_is_in_use( const Ship *ship, vnum_t room_vnum );
+static bool room_is_in_use( std::shared_ptr<Ship> ship, vnum_t room_vnum );
 
 void do_setship( Character *ch, std::string argument )
 {
   std::string arg1;
   std::string arg2;
-  Ship *ship = NULL;
+  std::shared_ptr<Ship> ship;
   int tempnum = 0;
   Room *roomindex = NULL;
 
@@ -50,7 +50,7 @@ void do_setship( Character *ch, std::string argument )
 
   if ( !StrCmp( arg2, "owner" ) )
     {
-      Clan *clan = NULL;
+      std::shared_ptr<Clan> clan;
 
       if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
         {
@@ -1085,7 +1085,7 @@ void do_setship( Character *ch, std::string argument )
   do_setship( ch, "" );
 }
 
-static bool room_is_in_use( const Ship *ship, vnum_t room_vnum )
+static bool room_is_in_use( std::shared_ptr<Ship> ship, vnum_t room_vnum )
 {
   if( room_vnum == ship->Rooms.Hangar
       || room_vnum == ship->Rooms.Entrance

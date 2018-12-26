@@ -3,12 +3,12 @@
 #include "mud.hpp"
 #include "room.hpp"
 
-static Ship *GetFuelTarget(const Ship *fuelSource);
+static std::shared_ptr<Ship> GetFuelTarget(std::shared_ptr<Ship> fuelSource);
 
 void do_fuel(Character *ch, std::string argument )
 {
-  Ship *fuelSource = NULL;
-  Ship *fuelTarget = NULL;
+  std::shared_ptr<Ship> fuelSource;
+  std::shared_ptr<Ship> fuelTarget;
   int amount = 0;
   std::string arg1;
   char buf[MAX_STRING_LENGTH] = { '\0' };
@@ -71,13 +71,13 @@ void do_fuel(Character *ch, std::string argument )
 
 struct UserData
 {
-  const Ship *fuelSource;
-  Ship *fuelTarget;
+  std::shared_ptr<Ship> fuelSource;
+  std::shared_ptr<Ship> fuelTarget;
 };
 
-static bool FindDockedShip(Ship *fuelTarget, void *userData)
+static bool FindDockedShip(std::shared_ptr<Ship> fuelTarget, void *userData)
 {
-  struct UserData *data = (struct UserData*)userData;
+  UserData *data = (UserData*)userData;
 
   if( fuelTarget->Docked == data->fuelSource )
     {
@@ -88,9 +88,9 @@ static bool FindDockedShip(Ship *fuelTarget, void *userData)
   return true;
 }
 
-static Ship *GetFuelTarget(const Ship *fuelSource)
+static std::shared_ptr<Ship> GetFuelTarget(std::shared_ptr<Ship> fuelSource)
 {
-  Ship *fuelTarget = NULL;
+  std::shared_ptr<Ship> fuelTarget;
 
   if( fuelSource->Docked != NULL )
     {
@@ -98,7 +98,7 @@ static Ship *GetFuelTarget(const Ship *fuelSource)
     }
   else
     {
-      struct UserData data;
+      UserData data;
       data.fuelSource = fuelSource;
       data.fuelTarget = NULL;
       ForEachShip(FindDockedShip, &data);

@@ -9,7 +9,7 @@
 void do_special_forces( Character *ch, std::string argument )
 {
   int the_chance = 0, credits = 0;
-  Clan *clan = NULL;
+  std::shared_ptr<Clan> clan;
   
   if ( IsNpc( ch ) )
     return;

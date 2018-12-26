@@ -10,7 +10,7 @@
 void do_addpilot(Character *ch, std::string argument )
 {
   int the_chance = 0;
-  Ship *ship = GetShipFromCockpit(ch->InRoom->Vnum);
+  std::shared_ptr<Ship> ship = GetShipFromCockpit(ch->InRoom->Vnum);
   
   if ( ship == nullptr )
     {

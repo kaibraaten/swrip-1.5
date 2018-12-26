@@ -1,6 +1,7 @@
 #ifndef _SWRIP_PCDATA_HPP_
 #define _SWRIP_PCDATA_HPP_
 
+#include <memory>
 #include <array>
 #include <list>
 #include <bitset>
@@ -37,19 +38,19 @@ public:
   PCData();
   virtual ~PCData();
 
-  const std::list<Alias*> &Aliases() const;
-  void Add(Alias *alias);
-  void Remove(Alias *alias);
+  const std::list<std::shared_ptr<Alias>> &Aliases() const;
+  void Add(std::shared_ptr<Alias> alias);
+  void Remove(std::shared_ptr<Alias> alias);
 
-  const std::list<class Note*> &Comments() const;
-  void Add(class Note *comment);
-  void Remove(class Note *comment);
+  const std::list<std::shared_ptr<class Note>> &Comments() const;
+  void Add(std::shared_ptr<class Note> comment);
+  void Remove(std::shared_ptr<class Note> comment);
   
   std::string Password;
 
   struct
   {
-    class Clan *Clan = NULL;
+    std::shared_ptr<class Clan> Clan;
     std::string ClanName;
     int Salary = 0;
     long SalaryDate = 0;
@@ -115,7 +116,7 @@ public:
 
   Character *Pet = NULL;
   std::string AliasFocus;
-  class Note *Note = nullptr;
+  std::shared_ptr<class Note> Note;
   int Clones = 0;
   int Played = 0;
   time_t Logon = 0;
@@ -125,7 +126,7 @@ public:
 
 private:
   struct Impl;
-  Impl *pImpl = nullptr;
+  std::unique_ptr<Impl> pImpl;
 };
 
 extern const std::array<const char * const, Flag::MAX> PcFlags;

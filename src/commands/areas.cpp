@@ -10,7 +10,7 @@ void do_areas( Character *ch, std::string argument )
   ch->Echo("\r\n   Author    |             Area                     | Recommended |  Enforced\r\n");
   ch->Echo("-------------+--------------------------------------+-------------+-----------\r\n");
 
-  ForEach( Area, FirstArea, Next, ShowArea, ch );
+  DikuForEach( Area, FirstArea, Next, ShowArea, ch );
 }
 
 static bool ShowArea( const Area *area, const Character *ch )

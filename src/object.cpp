@@ -7,13 +7,13 @@
 
 struct Object::Impl
 {
-  std::list<ExtraDescription*> ExtraDescriptions;
-  std::list<Affect*> Affects;
+  std::list<std::shared_ptr<ExtraDescription>> ExtraDescriptions;
+  std::list<std::shared_ptr<Affect>> Affects;
   std::list<Object*> Objects;
 };
 
 Object::Object()
-  : pImpl(new Impl())
+  : pImpl(std::unique_ptr<Impl>())
 {
   Value.fill(0);
 }
@@ -217,35 +217,35 @@ Object::Object(ProtoObject *pObjIndex, int level)
 
 Object::~Object()
 {
-  delete pImpl;
+
 }
 
-void Object::Add(ExtraDescription *extraDescription)
+void Object::Add(std::shared_ptr<ExtraDescription> extraDescription)
 {
   pImpl->ExtraDescriptions.push_back(extraDescription);
 }
 
-void Object::Remove(ExtraDescription *extraDescription)
+void Object::Remove(std::shared_ptr<ExtraDescription> extraDescription)
 {
   pImpl->ExtraDescriptions.remove(extraDescription);
 }
 
-const std::list<ExtraDescription*> &Object::ExtraDescriptions() const
+const std::list<std::shared_ptr<ExtraDescription>> &Object::ExtraDescriptions() const
 {
   return pImpl->ExtraDescriptions;
 }
 
-const std::list<Affect*> &Object::Affects() const
+const std::list<std::shared_ptr<Affect>> &Object::Affects() const
 {
   return pImpl->Affects;
 }
 
-void Object::Add(Affect *affect)
+void Object::Add(std::shared_ptr<Affect> affect)
 {
   pImpl->Affects.push_back(affect);
 }
 
-void Object::Remove(Affect *affect)
+void Object::Remove(std::shared_ptr<Affect> affect)
 {
   pImpl->Affects.remove(affect);
 }

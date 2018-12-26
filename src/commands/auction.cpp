@@ -72,12 +72,12 @@ void do_auction(Character *ch, std::string argument)
 	      break;
             }
 
-          for(const Affect *paf : obj->Prototype->Affects())
+          for(auto paf : obj->Prototype->Affects())
             {
               ShowAffectToCharacter( ch, paf );
             }
 
-          for(const Affect *paf : obj->Affects())
+          for(auto paf : obj->Affects())
             {
               ShowAffectToCharacter( ch, paf );
             }

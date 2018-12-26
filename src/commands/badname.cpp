@@ -14,7 +14,7 @@ void do_badname( Character *ch, std::string argument )
       int currentColumn = 0;
       const int numberOfColumns = 4;
 
-      for(const BadName *badname : BadNames->Entities())
+      for(const std::shared_ptr<BadName> badname : BadNames)
         {
           ch->Echo( "%-19s", badname->Name.c_str() );
 
