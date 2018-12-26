@@ -71,3 +71,8 @@ CMakeCache.txt
 Makefile
 cmake_install.cmake
 core.*
+*.cmake
+googletest-build
+googletest-download
+googletest-src
+Testing

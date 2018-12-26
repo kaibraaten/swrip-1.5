@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.11)
-project(colorparser)
+include_directories(include/colorparser)
 set(CMAKE_BUILD_TYPE Debug)
 set(COLORPARSER_SOURCES
   src/colorparser.cpp

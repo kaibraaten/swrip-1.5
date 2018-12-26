@@ -2,13 +2,13 @@ cmake_minimum_required(VERSION 3.11)
 include(GoogleTest)
 enable_testing()
 add_executable(utility_tests
-  algorithms_tests.cpp
-  bet_tests.cpp
-  event_tests.cpp
-  main.cpp
-  misc_tests.cpp
-  repository_tests.cpp
-  string_handling_tests.cpp
+  src/algorithms_tests.cpp
+  src/bet_tests.cpp
+  src/event_tests.cpp
+  src/main.cpp
+  src/misc_tests.cpp
+  src/repository_tests.cpp
+  src/string_handling_tests.cpp
   )
 target_compile_features(utility_tests PRIVATE cxx_std_14)
 target_compile_options(utility_tests
