@@ -1,43 +1,21 @@
 -- X-wing
--- Last saved Friday 28-Dec-2018 02:44:03
+-- Last saved Friday 28-Dec-2018 02:45:46
 
 ShipEntry
 {
-   Alarm = false, 
-   Location = 6100, 
-   Home = "Gamorr", 
+   Class = "Starfighter", 
    Pilot = "", 
-   Instruments = 
-   {
-      Comm = 150, 
-      AstroArray = 130, 
-      Sensor = 150, 
-   }, 
-   Owner = "", 
-   Name = "X-wing", 
-   Rooms = 
-   {
-      First = 32151, 
-      Gunseat = 32151, 
-      Hangar = 0, 
-      Pilotseat = 32151, 
-      Navseat = 32151, 
-      Entrance = 32151, 
-      Cockpit = 32151, 
-      Coseat = 32151, 
-      Engine = 0, 
-      Last = 32151, 
-   }, 
-   State = 0, 
-   Description = "", 
+   DockingPorts = 0, 
    LastDock = 6100, 
+   Position = 
+   {
+      X = 3999997.7865312, 
+      Y = 4499995.8700567, 
+      Z = 3.311444599312, 
+   }, 
+   Shipyard = 203, 
    Defenses = 
    {
-      Hull = 
-      {
-         Max = 1500, 
-         Current = 1500, 
-      }, 
       Shield = 
       {
          Max = 150, 
@@ -48,8 +26,41 @@ ShipEntry
          Max = 25, 
          Current = 25, 
       }, 
+      Hull = 
+      {
+         Max = 1500, 
+         Current = 1500, 
+      }, 
    }, 
-   DockingPorts = 0, 
+   State = 0, 
+   Guard = false, 
+   Description = "", 
+   Rooms = 
+   {
+      Gunseat = 32151, 
+      First = 32151, 
+      Entrance = 32151, 
+      Cockpit = 32151, 
+      Navseat = 32151, 
+      Pilotseat = 32151, 
+      Coseat = 32151, 
+      Hangar = 0, 
+      Last = 32151, 
+      Engine = 0, 
+   }, 
+   Owner = "", 
+   Home = "Gamorr", 
+   Hyperdrive = 
+   {
+      Speed = 245, 
+   }, 
+   Instruments = 
+   {
+      Comm = 150, 
+      AstroArray = 130, 
+      Sensor = 150, 
+   }, 
+   Alarm = false, 
    Thrusters = 
    {
       Energy = 
@@ -64,110 +75,99 @@ ShipEntry
       }, 
       Maneuver = 110, 
    }, 
-   Type = "Rebel", 
+   Location = 6100, 
    WeaponSystems = 
    {
-      Laser = 
+      IonCannon = 
       {
+         State = 0, 
          Count = 2, 
-         State = 0, 
-      }, 
-      TractorBeam = 
-      {
-         State = 0, 
-         Strength = 0, 
       }, 
       Tube = 
       {
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 4, 
+            Current = 0, 
+         }, 
          Missiles = 
          {
             Max = 8, 
             Current = 0, 
          }, 
          State = 0, 
-         Torpedoes = 
-         {
-            Max = 4, 
-            Current = 0, 
-         }, 
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
+      }, 
+      Laser = 
+      {
+         State = 0, 
+         Count = 2, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
       }, 
-      IonCannon = 
+      TractorBeam = 
       {
-         Count = 2, 
+         Strength = 0, 
          State = 0, 
       }, 
    }, 
-   CoPilot = "", 
-   Position = 
-   {
-      Z = 3.311444599312, 
-      X = 3999997.7865312, 
-      Y = 4499995.8700567, 
-   }, 
-   Shipyard = 203, 
-   Hyperdrive = 
-   {
-      Speed = 245, 
-   }, 
-   Class = "Starfighter", 
-   Guard = false, 
    PersonalName = "Red 4", 
+   Type = "Rebel", 
+   Name = "X-wing", 
+   CoPilot = "", 
 }

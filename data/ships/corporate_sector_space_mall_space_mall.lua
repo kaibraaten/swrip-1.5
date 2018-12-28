@@ -1,43 +1,21 @@
 -- Corporate Sector Space Mall
--- Last saved Friday 28-Dec-2018 02:44:03
+-- Last saved Friday 28-Dec-2018 02:45:46
 
 ShipEntry
 {
-   Alarm = false, 
-   Location = 0, 
-   Home = "corperate", 
+   Class = "Capital Ship", 
    Pilot = "", 
-   Instruments = 
-   {
-      Comm = 0, 
-      AstroArray = 0, 
-      Sensor = 0, 
-   }, 
-   Owner = "Corporate Sector", 
-   Name = "Corporate Sector Space Mall", 
-   Rooms = 
-   {
-      First = 7300, 
-      Gunseat = 7350, 
-      Hangar = 7300, 
-      Pilotseat = 7350, 
-      Navseat = 7350, 
-      Entrance = 7350, 
-      Cockpit = 7350, 
-      Coseat = 7350, 
-      Engine = 0, 
-      Last = 7350, 
-   }, 
-   State = 1, 
-   Description = "", 
+   DockingPorts = 0, 
    LastDock = 45, 
+   Position = 
+   {
+      X = -1780, 
+      Y = 1354, 
+      Z = -3479, 
+   }, 
+   Shipyard = 45, 
    Defenses = 
    {
-      Hull = 
-      {
-         Max = 20000, 
-         Current = 20000, 
-      }, 
       Shield = 
       {
          Max = 1000, 
@@ -48,8 +26,41 @@ ShipEntry
          Max = 0, 
          Current = 0, 
       }, 
+      Hull = 
+      {
+         Max = 20000, 
+         Current = 20000, 
+      }, 
    }, 
-   DockingPorts = 0, 
+   State = 1, 
+   Guard = false, 
+   Description = "", 
+   Rooms = 
+   {
+      Gunseat = 7350, 
+      First = 7300, 
+      Entrance = 7350, 
+      Cockpit = 7350, 
+      Navseat = 7350, 
+      Pilotseat = 7350, 
+      Coseat = 7350, 
+      Hangar = 7300, 
+      Last = 7350, 
+      Engine = 0, 
+   }, 
+   Owner = "Corporate Sector", 
+   Home = "corperate", 
+   Hyperdrive = 
+   {
+      Speed = 255, 
+   }, 
+   Instruments = 
+   {
+      Comm = 0, 
+      AstroArray = 0, 
+      Sensor = 0, 
+   }, 
+   Alarm = false, 
    Thrusters = 
    {
       Energy = 
@@ -64,110 +75,99 @@ ShipEntry
       }, 
       Maneuver = 0, 
    }, 
-   Type = "Civilian", 
+   Location = 0, 
    WeaponSystems = 
    {
-      Laser = 
-      {
-         Count = 10, 
-         State = 0, 
-      }, 
-      TractorBeam = 
+      IonCannon = 
       {
          State = 0, 
-         Strength = 0, 
+         Count = 0, 
       }, 
       Tube = 
       {
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 4, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 2, 
+         }, 
          Missiles = 
          {
             Max = 10, 
             Current = 10, 
          }, 
          State = 0, 
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 2, 
-         }, 
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 4, 
-         }, 
+      }, 
+      Laser = 
+      {
+         State = 0, 
+         Count = 10, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
       }, 
-      IonCannon = 
+      TractorBeam = 
       {
-         Count = 0, 
+         Strength = 0, 
          State = 0, 
       }, 
    }, 
-   CoPilot = "", 
-   Position = 
-   {
-      Z = -3479, 
-      X = -1780, 
-      Y = 1354, 
-   }, 
-   Shipyard = 45, 
-   Hyperdrive = 
-   {
-      Speed = 255, 
-   }, 
-   Class = "Capital Ship", 
-   Guard = false, 
    PersonalName = "Space Mall", 
+   Type = "Civilian", 
+   Name = "Corporate Sector Space Mall", 
+   CoPilot = "", 
 }

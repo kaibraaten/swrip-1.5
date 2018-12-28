@@ -667,7 +667,7 @@ if(WIN32)
   set(BUILD_SHARED_LIBS ON)
   add_subdirectory(libs/3rdparty/lua)
 else()
-  target_link_libraries(swrip utility colorparser lua stdc++fs)
+  target_link_libraries(swrip utility colorparser lua stdc++fs dl)
 endif()
 
 target_compile_features(mud PUBLIC cxx_std_17)

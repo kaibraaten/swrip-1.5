@@ -1,36 +1,36 @@
 -- Sorosuub System Hopper
--- Last saved Friday 28-Dec-2018 02:44:03
+-- Last saved Friday 28-Dec-2018 02:45:46
 
 ShipEntry
 {
-   Alarm = false, 
-   Location = 203, 
-   Home = "Byss ", 
-   Pilot = "pilot", 
-   Instruments = 
+   Hyperdrive = 
    {
-      Comm = 0, 
-      AstroArray = 0, 
-      Sensor = 0, 
+      Speed = 100, 
    }, 
-   Owner = "public", 
-   Name = "Sorosuub System Hopper", 
+   CoPilot = "verazo", 
+   Position = 
+   {
+      Y = 150, 
+      Z = 75, 
+      X = 100, 
+   }, 
+   Guard = false, 
+   Description = "", 
    Rooms = 
    {
+      Pilotseat = 32166, 
+      Hangar = 0, 
+      Cockpit = 32166, 
+      Entrance = 32166, 
+      Last = 32166, 
+      Navseat = 32166, 
       First = 32166, 
       Gunseat = 32166, 
-      Hangar = 0, 
-      Pilotseat = 32166, 
-      Navseat = 32166, 
-      Entrance = 32166, 
-      Cockpit = 32166, 
       Coseat = 32166, 
       Engine = 0, 
-      Last = 32166, 
    }, 
-   State = 0, 
-   Description = "", 
-   LastDock = 203, 
+   PersonalName = "6041", 
+   Owner = "public", 
    Defenses = 
    {
       Hull = 
@@ -38,38 +38,50 @@ ShipEntry
          Max = 100, 
          Current = 100, 
       }, 
-      Shield = 
-      {
-         Max = 10, 
-         Current = 0, 
-      }, 
       Chaff = 
       {
          Max = 2, 
          Current = 2, 
       }, 
+      Shield = 
+      {
+         Max = 10, 
+         Current = 0, 
+      }, 
    }, 
-   DockingPorts = 0, 
+   LastDock = 203, 
+   Alarm = false, 
+   State = 0, 
    Thrusters = 
    {
-      Energy = 
-      {
-         Max = 3000, 
-         Current = 3000, 
-      }, 
       Speed = 
       {
          Max = 65, 
          Current = 0, 
       }, 
+      Energy = 
+      {
+         Max = 3000, 
+         Current = 3000, 
+      }, 
       Maneuver = 35, 
    }, 
-   Type = "Civilian", 
+   Instruments = 
+   {
+      Comm = 0, 
+      Sensor = 0, 
+      AstroArray = 0, 
+   }, 
+   Class = "Starfighter", 
+   Location = 203, 
+   DockingPorts = 0, 
+   Pilot = "pilot", 
+   Name = "Sorosuub System Hopper", 
    WeaponSystems = 
    {
-      Laser = 
+      IonCannon = 
       {
-         Count = 1, 
+         Count = 0, 
          State = 0, 
       }, 
       TractorBeam = 
@@ -79,13 +91,12 @@ ShipEntry
       }, 
       Tube = 
       {
-         Missiles = 
+         Torpedoes = 
          {
             Max = 0, 
             Current = 0, 
          }, 
-         State = 0, 
-         Torpedoes = 
+         Missiles = 
          {
             Max = 0, 
             Current = 0, 
@@ -95,79 +106,68 @@ ShipEntry
             Max = 0, 
             Current = 0, 
          }, 
+         State = 0, 
+      }, 
+      Laser = 
+      {
+         Count = 1, 
+         State = 0, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
       }, 
-      IonCannon = 
-      {
-         Count = 0, 
-         State = 0, 
-      }, 
    }, 
-   CoPilot = "verazo", 
-   Position = 
-   {
-      Z = 75, 
-      X = 100, 
-      Y = 150, 
-   }, 
+   Type = "Civilian", 
    Shipyard = 203, 
-   Hyperdrive = 
-   {
-      Speed = 100, 
-   }, 
-   Class = "Starfighter", 
-   Guard = false, 
-   PersonalName = "6041", 
+   Home = "Byss ", 
 }

@@ -1,101 +1,59 @@
 -- Imperator-class Star Destroyer
--- Last saved Friday 28-Dec-2018 02:44:03
+-- Last saved Friday 28-Dec-2018 02:45:46
 
 ShipEntry
 {
-   Alarm = false, 
-   Location = 0, 
-   Home = "Byss", 
-   Pilot = "", 
-   Instruments = 
+   Class = "Capital Ship", 
+   Thrusters = 
    {
-      Comm = 11, 
-      AstroArray = 200, 
-      Sensor = 250, 
+      Speed = 
+      {
+         Current = 0, 
+         Max = 85, 
+      }, 
+      Maneuver = 0, 
+      Energy = 
+      {
+         Current = 30000, 
+         Max = 30000, 
+      }, 
    }, 
-   Owner = "The Empire", 
-   Name = "Imperator-class Star Destroyer", 
-   Rooms = 
-   {
-      First = 600, 
-      Gunseat = 674, 
-      Hangar = 600, 
-      Pilotseat = 675, 
-      Navseat = 673, 
-      Entrance = 600, 
-      Cockpit = 699, 
-      Coseat = 677, 
-      Engine = 629, 
-      Last = 699, 
-   }, 
-   State = 1, 
-   Description = "", 
-   LastDock = 32050, 
    Defenses = 
    {
       Hull = 
       {
-         Max = 20000, 
          Current = 20000, 
+         Max = 20000, 
       }, 
       Shield = 
       {
-         Max = 1000, 
          Current = 1000, 
+         Max = 1000, 
       }, 
       Chaff = 
       {
-         Max = 25, 
          Current = 25, 
+         Max = 25, 
       }, 
-   }, 
-   DockingPorts = 0, 
-   Thrusters = 
-   {
-      Energy = 
-      {
-         Max = 30000, 
-         Current = 30000, 
-      }, 
-      Speed = 
-      {
-         Max = 85, 
-         Current = 0, 
-      }, 
-      Maneuver = 0, 
    }, 
    Type = "Imperial", 
+   Location = 0, 
+   Rooms = 
+   {
+      Entrance = 600, 
+      Last = 699, 
+      First = 600, 
+      Hangar = 600, 
+      Navseat = 673, 
+      Engine = 629, 
+      Pilotseat = 675, 
+      Gunseat = 674, 
+      Cockpit = 699, 
+      Coseat = 677, 
+   }, 
+   Pilot = "", 
    WeaponSystems = 
    {
-      Laser = 
-      {
-         Count = 0, 
-         State = 0, 
-      }, 
-      TractorBeam = 
-      {
-         State = 0, 
-         Strength = 150, 
-      }, 
-      Tube = 
-      {
-         Missiles = 
-         {
-            Max = 50, 
-            Current = 50, 
-         }, 
-         State = 0, 
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Rockets = 
-         {
-            Max = 10, 
-            Current = 10, 
-         }, 
-      }, 
       Turrets = 
       {
          [1] = 
@@ -149,25 +107,67 @@ ShipEntry
             State = 0, 
          }, 
       }, 
+      Laser = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
       IonCannon = 
       {
          Count = 10, 
          State = 0, 
       }, 
+      TractorBeam = 
+      {
+         Strength = 150, 
+         State = 0, 
+      }, 
+      Tube = 
+      {
+         Rockets = 
+         {
+            Current = 10, 
+            Max = 10, 
+         }, 
+         Torpedoes = 
+         {
+            Current = 0, 
+            Max = 0, 
+         }, 
+         Missiles = 
+         {
+            Current = 50, 
+            Max = 50, 
+         }, 
+         State = 0, 
+      }, 
    }, 
-   CoPilot = "", 
+   DockingPorts = 0, 
+   Hyperdrive = 
+   {
+      Speed = 255, 
+   }, 
+   Instruments = 
+   {
+      AstroArray = 200, 
+      Sensor = 250, 
+      Comm = 11, 
+   }, 
    Position = 
    {
       Z = -1000, 
       X = 1000, 
       Y = 5001500, 
    }, 
+   Description = "", 
+   Owner = "The Empire", 
    Shipyard = 32050, 
-   Hyperdrive = 
-   {
-      Speed = 255, 
-   }, 
-   Class = "Capital Ship", 
+   Home = "Byss", 
    Guard = true, 
+   Alarm = false, 
+   LastDock = 32050, 
+   State = 1, 
+   CoPilot = "", 
+   Name = "Imperator-class Star Destroyer", 
    PersonalName = "Dark Hand", 
 }
