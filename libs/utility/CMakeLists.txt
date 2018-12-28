@@ -24,5 +24,7 @@ target_compile_options(utility
 )
 if(WIN32)
   target_link_libraries(utility WS2_32)
+else()
+  target_link_libraries(utility stdc++fs)
 endif()
 add_subdirectory(test)

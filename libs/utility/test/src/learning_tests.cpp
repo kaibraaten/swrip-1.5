@@ -11,8 +11,9 @@ TEST(LearningTests, LoopFiles)
     size_t counter = 0;
 
     // Act
-    for(auto &direnty : fs::directory_iterator("."))
+    for(const auto &entry : fs::directory_iterator("."))
     {
+      auto path = entry.path();
         ++counter;
     }
 

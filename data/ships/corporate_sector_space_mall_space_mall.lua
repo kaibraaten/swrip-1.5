@@ -1,82 +1,100 @@
 -- Corporate Sector Space Mall
--- Last saved Wednesday 26-Dec-2018 21:15:59
+-- Last saved Friday 28-Dec-2018 02:44:03
 
 ShipEntry
 {
-   Position = 
-   {
-      X = -1780, 
-      Z = -3479, 
-      Y = 1354, 
-   }, 
-   Pilot = "", 
-   DockingPorts = 0, 
-   Shipyard = 45, 
-   Name = "Corporate Sector Space Mall", 
-   Class = "Capital Ship", 
-   Description = "", 
-   State = 1, 
-   LastDock = 45, 
-   Owner = "Corporate Sector", 
+   Alarm = false, 
+   Location = 0, 
    Home = "corperate", 
-   PersonalName = "Space Mall", 
-   Type = "Civilian", 
+   Pilot = "", 
+   Instruments = 
+   {
+      Comm = 0, 
+      AstroArray = 0, 
+      Sensor = 0, 
+   }, 
+   Owner = "Corporate Sector", 
+   Name = "Corporate Sector Space Mall", 
+   Rooms = 
+   {
+      First = 7300, 
+      Gunseat = 7350, 
+      Hangar = 7300, 
+      Pilotseat = 7350, 
+      Navseat = 7350, 
+      Entrance = 7350, 
+      Cockpit = 7350, 
+      Coseat = 7350, 
+      Engine = 0, 
+      Last = 7350, 
+   }, 
+   State = 1, 
+   Description = "", 
+   LastDock = 45, 
    Defenses = 
    {
       Hull = 
       {
-         Current = 20000, 
          Max = 20000, 
-      }, 
-      Chaff = 
-      {
-         Current = 0, 
-         Max = 0, 
+         Current = 20000, 
       }, 
       Shield = 
       {
-         Current = 1000, 
          Max = 1000, 
+         Current = 1000, 
+      }, 
+      Chaff = 
+      {
+         Max = 0, 
+         Current = 0, 
       }, 
    }, 
-   Rooms = 
+   DockingPorts = 0, 
+   Thrusters = 
    {
-      Cockpit = 7350, 
-      Pilotseat = 7350, 
-      Engine = 0, 
-      Entrance = 7350, 
-      Hangar = 7300, 
-      Gunseat = 7350, 
-      Navseat = 7350, 
-      Coseat = 7350, 
-      Last = 7350, 
-      First = 7300, 
+      Energy = 
+      {
+         Max = 20000, 
+         Current = 20000, 
+      }, 
+      Speed = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+      Maneuver = 0, 
    }, 
+   Type = "Civilian", 
    WeaponSystems = 
    {
-      Tube = 
+      Laser = 
       {
+         Count = 10, 
          State = 0, 
-         Missiles = 
-         {
-            Current = 10, 
-            Max = 10, 
-         }, 
-         Torpedoes = 
-         {
-            Current = 2, 
-            Max = 0, 
-         }, 
-         Rockets = 
-         {
-            Current = 4, 
-            Max = 0, 
-         }, 
       }, 
       TractorBeam = 
       {
-         Strength = 0, 
          State = 0, 
+         Strength = 0, 
+      }, 
+      Tube = 
+      {
+         Missiles = 
+         {
+            Max = 10, 
+            Current = 10, 
+         }, 
+         State = 0, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 2, 
+         }, 
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 4, 
+         }, 
       }, 
       Turrets = 
       {
@@ -131,43 +149,25 @@ ShipEntry
             State = 0, 
          }, 
       }, 
-      Laser = 
-      {
-         State = 0, 
-         Count = 10, 
-      }, 
       IonCannon = 
       {
-         State = 0, 
          Count = 0, 
+         State = 0, 
       }, 
    }, 
+   CoPilot = "", 
+   Position = 
+   {
+      Z = -3479, 
+      X = -1780, 
+      Y = 1354, 
+   }, 
+   Shipyard = 45, 
    Hyperdrive = 
    {
       Speed = 255, 
    }, 
-   Location = 0, 
-   Thrusters = 
-   {
-      Energy = 
-      {
-         Current = 20000, 
-         Max = 20000, 
-      }, 
-      Maneuver = 0, 
-      Speed = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
-   }, 
-   Instruments = 
-   {
-      AstroArray = 0, 
-      Comm = 0, 
-      Sensor = 0, 
-   }, 
-   CoPilot = "", 
+   Class = "Capital Ship", 
    Guard = false, 
-   Alarm = false, 
+   PersonalName = "Space Mall", 
 }
