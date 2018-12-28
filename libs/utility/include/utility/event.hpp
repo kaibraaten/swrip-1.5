@@ -26,6 +26,7 @@
 #ifndef _CERIS_EVENT_HPP_
 #define _CERIS_EVENT_HPP_
 
+#include <memory>
 #include <map>
 #include <functional>
 
@@ -42,9 +43,9 @@ template< typename EventArgsT >
 class Event
 {
 public:
-  Event();
-  ~Event();
-
+  Event() = default;
+  ~Event() = default;
+  
   // Dispatch event notification to subscribers.
   void operator()( const EventArgsT &args ) const;
 
@@ -69,11 +70,11 @@ public:
   // Unsubscribe a non-member function eventhandler.
   void Remove( void *userdata, std::function<void ( void*, EventArgsT )> fun );
 
-private:
-  Event &operator=( const Event& );
-  Event( const Event& );
+  Event &operator=( const Event& ) = delete;
+  Event( const Event& ) = delete;
 
-  using HandlerContainer = std::multimap< void*, HandlerFunctionBase<EventArgsT>* >;
+private:
+  using HandlerContainer = std::multimap< void*, std::shared_ptr<HandlerFunctionBase<EventArgsT>> >;
   template< typename T >
   auto Find( T *instance, void ( T::*memFn )( EventArgsT ) ) const;
   auto Find( void *userdata, std::function<void( void*, EventArgsT )> fun ) const;
@@ -87,19 +88,13 @@ template< typename EventArgsT >
 class HandlerFunctionBase
 {
 public:
-  virtual ~HandlerFunctionBase();
+  virtual ~HandlerFunctionBase() = default;
   void Exec( const EventArgsT &args );
-  virtual bool Equals( const HandlerFunctionBase* ) const = 0;
+  virtual bool Equals( const std::shared_ptr<HandlerFunctionBase>& ) const = 0;
 
 private:
   virtual void Call( const EventArgsT &args ) = 0;
 };
-
-template< typename EventArgsT >
-HandlerFunctionBase< EventArgsT >::~HandlerFunctionBase()
-{
-
-}
 
 template< typename EventArgsT >
 void HandlerFunctionBase< EventArgsT >::Exec( const EventArgsT &a )
@@ -116,7 +111,7 @@ class MemberFunctionHandler : public HandlerFunctionBase< EventArgsT >
 public:
   typedef void ( T::*MemberFunc )( EventArgsT );
   MemberFunctionHandler( T *instance, MemberFunc memFn );
-  bool Equals( const HandlerFunctionBase<EventArgsT> * ) const;
+  bool Equals( const std::shared_ptr<HandlerFunctionBase<EventArgsT>>& ) const;
 
 private:
   void Call( const EventArgsT &args );
@@ -141,9 +136,9 @@ void MemberFunctionHandler< T, EventArgsT >::Call( const EventArgsT &args )
 }
 
 template< typename T, typename EventArgsT >
-bool MemberFunctionHandler< T, EventArgsT >::Equals( const HandlerFunctionBase< EventArgsT > *rhv ) const
+bool MemberFunctionHandler< T, EventArgsT >::Equals( const std::shared_ptr<HandlerFunctionBase< EventArgsT >> &rhv ) const
 {
-  const auto h2 = dynamic_cast<const MemberFunctionHandler< T, EventArgsT >* >( rhv );
+  const auto h2 = std::dynamic_pointer_cast<MemberFunctionHandler< T, EventArgsT >>( rhv );
 
   if( !h2 )
     {
@@ -162,7 +157,7 @@ class GlobalFunctionHandler : public HandlerFunctionBase< EventArgsT >
 public:
   using Func = std::function<void(void*, EventArgsT)>;
   GlobalFunctionHandler( void *userdata, Func memFn );
-  bool Equals( const HandlerFunctionBase< EventArgsT >* ) const;
+  bool Equals( const std::shared_ptr<HandlerFunctionBase< EventArgsT >>& ) const;
 
 private:
   void Call( const EventArgsT &args );
@@ -186,9 +181,9 @@ void GlobalFunctionHandler< EventArgsT >::Call( const EventArgsT &args )
 }
 
 template< typename EventArgsT >
-bool GlobalFunctionHandler< EventArgsT >::Equals( const HandlerFunctionBase< EventArgsT > *rhv ) const
+bool GlobalFunctionHandler< EventArgsT >::Equals( const std::shared_ptr<HandlerFunctionBase< EventArgsT >> &rhv ) const
 {
-  const auto h2 = dynamic_cast<const GlobalFunctionHandler< EventArgsT >* >( rhv );
+  const auto h2 = std::dynamic_pointer_cast<GlobalFunctionHandler< EventArgsT > >( rhv );
 
   if( !h2 )
     {
@@ -201,20 +196,6 @@ bool GlobalFunctionHandler< EventArgsT >::Equals( const HandlerFunctionBase< Eve
 
 ///////////////////////////////////////////////////////////////////////////////
 // Event
-template< typename EventArgsT >
-Event< EventArgsT >::Event()
-{
-
-}
-
-template< typename EventArgsT >
-Event< EventArgsT >::~Event()
-{
-  for( auto &pair : _Handlers )
-    {
-      delete pair.second;
-    }
-}
 
 template< typename EventArgsT >
 template< typename T >
@@ -255,7 +236,7 @@ void Event< EventArgsT >::Add( T *instance, void ( T::*memFn )( EventArgsT ) )
 {
   if( Find( instance, memFn ) == _Handlers.end() )
     {
-      _Handlers.insert( { instance, new MemberFunctionHandler<T, EventArgsT>( instance, memFn ) } );
+      _Handlers.insert( { instance, std::make_shared<MemberFunctionHandler<T, EventArgsT>>( instance, memFn ) } );
     }
 }
 
@@ -265,7 +246,7 @@ void Event< EventArgsT >::Add( void *userdata,
 {
   if( Find( userdata, fun ) == _Handlers.end() )
     {
-      _Handlers.insert( { userdata, new GlobalFunctionHandler<EventArgsT>( userdata, fun ) } );
+      _Handlers.insert( { userdata, std::make_shared<GlobalFunctionHandler<EventArgsT>>( userdata, fun ) } );
     }
 }
 
