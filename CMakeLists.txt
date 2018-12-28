@@ -9,15 +9,14 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 enable_testing()
 
-add_executable(swrip bootstrap/main.cpp)
-target_link_libraries(swrip mud)
+add_executable(swrip $<TARGET_OBJECTS:mud> bootstrap/main.cpp)
 target_compile_features(swrip PRIVATE cxx_std_17)
 target_compile_options(swrip
   PRIVATE $<$<CXX_COMPILER_ID:GNU>:-DHAVE_ZLIB -DHAVE_UNAME -Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>
   PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /wd4996 /wd6262 /wd26451>
   )
 
-add_library(mud SHARED
+add_library(mud OBJECT
   src/act_comm.cpp
 src/act_info.cpp
 src/act_move.cpp
@@ -663,12 +662,12 @@ src/spells/weaken.cpp
   )
 
 if(WIN32)
-  target_link_libraries(mud utility colorparser lua WS2_32)
+  target_link_libraries(swrip utility colorparser lua WS2_32)
   include_directories(libs/3rdparty/lua)
   set(BUILD_SHARED_LIBS ON)
   add_subdirectory(libs/3rdparty/lua)
 else()
-  target_link_libraries(mud utility colorparser lua stdc++fs)
+  target_link_libraries(swrip utility colorparser lua stdc++fs)
 endif()
 
 target_compile_features(mud PUBLIC cxx_std_17)

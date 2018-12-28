@@ -18,7 +18,7 @@
 int TopSN = 0;
 int TopHerb = 0;
 
-DllExport std::array<Skill*, MAX_SKILL> SkillTable;
+std::array<Skill*, MAX_SKILL> SkillTable;
 std::array<Skill*, MAX_SKILL> HerbTable;
 
 extern std::string spell_target_name;       /* from magic.c */

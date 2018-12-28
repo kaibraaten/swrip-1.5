@@ -6,7 +6,6 @@
 #include <string>
 #include <array>
 #include <bitset>
-#include <utility/os.hpp>
 #include "types.hpp"
 #include "constants.hpp"
 
@@ -59,7 +58,7 @@ public:
 };
 
 extern const std::array<const char * const, SKILLTYPE_MAX> SkillTypeName;
-extern DllImport std::array<Skill*, MAX_SKILL> SkillTable;
+extern std::array<Skill*, MAX_SKILL> SkillTable;
 extern std::array<Skill*, MAX_SKILL> HerbTable;
 extern int TopSN;
 extern int TopHerb;

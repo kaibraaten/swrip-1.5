@@ -2,7 +2,6 @@
 #define _SWRIP_SKILLREPOSITORY_HPP_
 
 #include <string>
-#include <utility/os.hpp>
 #include <utility/repository.hpp>
 #include "types.hpp"
 
@@ -16,7 +15,7 @@ protected:
   SkillRepository() = default;
 };
 
-extern DllImport SkillRepository *Skills;
+extern SkillRepository *Skills;
 SkillRepository *NewSkillRepository();
 
 #endif

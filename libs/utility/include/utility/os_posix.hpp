@@ -45,8 +45,6 @@
 #include <dlfcn.h>
 #endif
 
-#include <dirent.h>
-
 static const int INVALID_SOCKET = -1;
 static const int SOCKET_ERROR = -1;
 #define GETERROR errno
@@ -54,8 +52,6 @@ static const int SOCKET_ERROR = -1;
 typedef int socket_t;
 typedef char sockbuf_t;
 
-#define DllImport
-#define DllExport
 
 #endif /* include guard */
 

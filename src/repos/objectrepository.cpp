@@ -1,6 +1,6 @@
 #include "objectrepository.hpp"
 
-DllExport ObjectRepository *Objects = nullptr;
+ObjectRepository *Objects = nullptr;
 
 class InMemoryObjectRepository : public ObjectRepository
 {

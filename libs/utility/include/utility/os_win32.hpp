@@ -36,7 +36,6 @@
 
 #ifdef _MSC_VER
 using ssize_t = int;
-//#define snprintf _snprintf
 #define strncasecmp strnicmp
 #define strcasecmp stricmp
 #endif
@@ -45,23 +44,14 @@ typedef SOCKET socket_t;
 
 typedef int socklen_t;
 #define GETERROR WSAGetLastError()
-//#define EWOULDBLOCK WSAEWOULDBLOCK
-//#define EADDRINUSE WSAEADDRINUSE
-//#define ETIMEDOUT WSAETIMEDOUT
-//#define ECONNRESET WSAECONNRESET
-//#define EMSGSIZE WSAEMSGSIZE
-//#define EHOSTUNREACH WSAEHOSTUNREACH
-//#define ENETUNREACH WSAENETRESET
 #undef EPIPE
 #undef EINVAL
 #define EPIPE WSAENOTCONN
 #define EINVAL WSAEINVAL
-//#define ECONNREFUSED WSAECONNABORTED
 #undef EINTR
 #undef EMFILE
 #define EINTR WSAEINTR
 #define EMFILE WSAEMFILE 
-//#define EINPROGRESS WSAEINPROGRESS
 using sockbuf_t = char;
 
 // Telnet commands
@@ -72,9 +62,6 @@ using sockbuf_t = char;
 
 // Telnet options
 #define TELOPT_ECHO 1
-
-#define DllImport __declspec(dllimport)
-#define DllExport __declspec(dllexport)
 
 struct timezone 
 {

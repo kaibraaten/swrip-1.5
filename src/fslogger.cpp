@@ -14,7 +14,7 @@
 extern FILE *fpArea;
 extern char strArea[];
 
-DllExport Logger *Log = nullptr;
+Logger *Log = nullptr;
 
 class FileSystemLogger : public Logger
 {
