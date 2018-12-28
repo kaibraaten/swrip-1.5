@@ -29,21 +29,24 @@ private:
 };
 
 /* Mob program structures */
-struct act_prog_data
+class act_prog_data
 {
+public:
   void *vo = nullptr;
 };
 
-struct MPROG_ACT_LIST
+class MPROG_ACT_LIST
 {
+public:
   char *buf = nullptr;
   Character *ch = nullptr;
   Object *obj = nullptr;
   void *vo = nullptr;
 };
 
-struct MPROG_DATA
+class MPROG_DATA
 {
+public:
   int         type = 0;
   bool        triggered = false;
   int         resetdelay = 0;

@@ -7,7 +7,7 @@ std::shared_ptr<BadNameRepository> BadNames;
 #define BADNAME_FILE DATA_DIR "badnames.lua"
 
 bool CompareBadName::operator()(const std::shared_ptr<BadName> &lhs,
-                                const std::shared_ptr<BadName> &rhs)
+                                const std::shared_ptr<BadName> &rhs) const
 {
   return StrCmp(lhs->Name, rhs->Name) < 0;
 }

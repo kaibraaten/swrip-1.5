@@ -4,8 +4,9 @@
 #include <cstdlib>
 #include <cctype>
 #include <clocale>
+#ifndef _WIN32
 #include <monetary.h>
-
+#endif
 #include "random.hpp"
 
 int umin( int check, int ncheck )
@@ -192,15 +193,19 @@ char *StripColorCodes( char *text )
 
 std::string PunctuateNumber( long number )
 {
+#ifdef _WIN32
+    return std::to_string(number);
+#else
   char buffer[1024];
 
   setlocale( LC_MONETARY, "en_US" );
   strfmon( buffer, 1024, "%!#0.0n", (double)number );
 
   return TrimString( buffer, ' ' );
+#endif
 }
 
-long ToLong( const std::string str )
+long ToLong( const std::string &str )
 {
   int result = strtol( str.c_str(), nullptr, 10 );
   return result;

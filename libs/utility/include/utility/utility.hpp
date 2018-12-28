@@ -194,15 +194,15 @@ char *ReadStringToTilde( FILE *fp, Logger *log, bool fBootDb );
 void ReadToEndOfLine( FILE *fp, Logger *log, bool fBootDb);
 char *ReadWord( FILE *fp, Logger *log, bool fBootDb );
 char *ReadLine( FILE *fp, Logger *log, bool fBootDb );
-void ForEachLuaFileInDir( const char *pathToDir,
-                          std::function<void(const std::string&, void*)> doOnFile,
+void ForEachLuaFileInDir( const std::string &pathToDir,
+                          const std::function<void(const std::string&, void*)> &doOnFile,
 			  void *userData );
 std::string ConvertToLuaFilename( const std::string &name );
 
 /* misc stuff */
 int Interpolate( int level, int value_00, int value_32 );
 char *StripColorCodes( char *text );
-long ToLong( const std::string str );
+long ToLong( const std::string &str );
 
 template<size_t N>
 std::bitset<N> CreateBitSet( std::initializer_list<size_t> args )

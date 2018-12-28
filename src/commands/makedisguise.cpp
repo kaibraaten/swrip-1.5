@@ -35,7 +35,7 @@ void do_makedisguise( Character *ch, std::string argument )
 
 static CraftRecipe *MakeCraftRecipe( void )
 {
-  static const struct CraftingMaterial materials[] =
+  static const CraftingMaterial materials[] =
     {
      { ITEM_THREAD,      {} },
      { ITEM_DIS_FABRIC,  { Flag::Crafting::Extract } },

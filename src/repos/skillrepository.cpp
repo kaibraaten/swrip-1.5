@@ -1,7 +1,7 @@
 #include "skillrepository.hpp"
 #include "skill.hpp"
 
-SkillRepository *Skills = nullptr;
+DllExport SkillRepository *Skills = nullptr;
 
 class TransitionarySkillRepository : public SkillRepository
 {

@@ -34,10 +34,10 @@
 
 #include <cstdio>
 
-void OsSetup( void );
-void OsCleanup( void );
-int SetNonBlockingSocket( socket_t sock );
-FILE *OpenLogFile(void);
+void OsSetup();
+void OsCleanup();
+int SetNonBlockingSocket(socket_t sock);
+FILE *OpenLogFile();
 
 #endif /* include guard */
 

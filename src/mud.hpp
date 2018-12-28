@@ -33,11 +33,9 @@
 #include <climits>
 #include <utility/utility.hpp>
 
-#if defined(_WIN32)
-#define ZLIB_WINAPI 1
-#endif
-
+#ifdef HAVE_ZLIB
 #include <zlib.h>
+#endif
 
 #include <cmath>
 
@@ -252,9 +250,9 @@ public:
   }
   
   int            NumberOfTimesUsed = 0;
-  class timeval TotalTime;
-  class timeval MinTime;
-  class timeval MaxTime;
+  timeval TotalTime;
+  timeval MinTime;
+  timeval MaxTime;
 };
 
 class Auction

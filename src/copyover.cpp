@@ -103,7 +103,7 @@ void do_copyover( Character * ch, std::string argument )
   sprintf( buf2, "%d", control );
 
 #ifdef _WIN32
-  sprintf(filename, "\"%s\"", SysData.exe_filename.c_str());
+  sprintf(filename, "\"%s\"", "swrip");
 #else
   sprintf(filename, "%s", "./swrip");
 #define _execl execl

@@ -30,10 +30,7 @@ bool spec_stormtrooper( Character *ch )
                                      || NiftyIsName( "republic", victim->PCData->ClanInfo.Clan->Name ))));
                   });
 
-  random_shuffle(std::begin(rebels),
-                 std::end(rebels));
-  
-  for(Character *victim : rebels)
+  for(Character *victim : RandomizeOrder(rebels))
     {
       do_yell( ch, "Die Rebel Scum!" );
       HitMultipleTimes( ch, victim, TYPE_UNDEFINED );

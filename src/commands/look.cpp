@@ -1087,7 +1087,7 @@ static void LookThroughShipWindow(Character *ch, std::shared_ptr<Ship> ship)
             }
         }
       
-      struct UserData data { ch: ch, ship: ship };
+      struct UserData data { ch, ship };
       ForEachShip(ShowShipIfInVincinity, &data);
       ch->Echo("\r\n");
     }

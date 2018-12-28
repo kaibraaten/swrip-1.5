@@ -19,49 +19,49 @@
 using STRING_COMPARATOR = std::function<int(const std::string&, const std::string&)>;
 using STRING_TOKENIZER = std::function<std::string(const std::string&, std::string&)>;
 
-static std::string GetNextChunk( std::string &str, const char c );
-static std::string OneArgument2( const std::string &argument, std::string &arg_first );
+static std::string GetNextChunk(std::string &str, const char c);
+static std::string OneArgument2(const std::string &argument, std::string &arg_first);
 static int IsName2(const std::string&, const std::string&);
 static int IsName2Prefix(const std::string&, const std::string&);
 static int IsNameInternal(const std::string&, const std::string&,
-                          STRING_COMPARATOR, STRING_TOKENIZER );
+    STRING_COMPARATOR, STRING_TOKENIZER);
 static int NiftyIsNameInternal(const std::string&, const std::string&,
-                               STRING_COMPARATOR, STRING_TOKENIZER );
+    STRING_COMPARATOR, STRING_TOKENIZER);
 
 /*
  * See if a string is one of the names of an object.
  */
-static int IsNameInternal( const std::string &str, const std::string &namelist,
-                           STRING_COMPARATOR compare_string,
-                           STRING_TOKENIZER tokenize_string )
+static int IsNameInternal(const std::string &str, const std::string &namelist,
+    STRING_COMPARATOR compare_string,
+    STRING_TOKENIZER tokenize_string)
 {
-  std::string name;
-  std::string tmp = namelist;
+    std::string name;
+    std::string tmp = namelist;
 
-  for ( ; ; )
+    for (; ; )
     {
-      tmp = tokenize_string( tmp, name );
+        tmp = tokenize_string(tmp, name);
 
-      if ( name.empty() )
+        if (name.empty())
         {
-          return false;
+            return false;
         }
 
-      if ( !compare_string( str, name ) )
+        if (!compare_string(str, name))
         {
-          return true;
+            return true;
         }
     }
 }
 
 int IsName(const std::string &str, const std::string &namelist)
 {
-  return IsNameInternal( str, namelist, StrCmp, OneArgument );
+    return IsNameInternal(str, namelist, StrCmp, OneArgument);
 }
 
 int IsNamePrefix(const std::string &str, const std::string &namelist)
 {
-  return IsNameInternal( str, namelist, StringPrefix, OneArgument );
+    return IsNameInternal(str, namelist, StringPrefix, OneArgument);
 }
 
 /*
@@ -70,63 +70,63 @@ int IsNamePrefix(const std::string &str, const std::string &namelist)
  */
 static int IsName2(const std::string &str, const std::string &namelist)
 {
-  return IsNameInternal( str, namelist, StrCmp, OneArgument2 );
+    return IsNameInternal(str, namelist, StrCmp, OneArgument2);
 }
 
 static int IsName2Prefix(const std::string &str, const std::string &namelist)
 {
-  return IsNameInternal( str, namelist, StringPrefix, OneArgument2 );
+    return IsNameInternal(str, namelist, StringPrefix, OneArgument2);
 }
 
 /*                                                              -Thoric
  * Checks if str is a name in namelist supporting multiple keywords
  */
 static int NiftyIsNameInternal(const std::string &str, const std::string &namelist,
-                               STRING_COMPARATOR compare_string,
-                               STRING_TOKENIZER tokenize_string )
+    STRING_COMPARATOR compare_string,
+    STRING_TOKENIZER tokenize_string)
 {
-  if(str.empty())
+    if (str.empty())
     {
-      return false;
+        return false;
     }
 
-  std::string tmp = str;
-  std::string name;
+    std::string tmp = str;
+    std::string name;
 
-  for ( ; ; )
+    for (; ; )
     {
-      tmp = tokenize_string( tmp, name );
+        tmp = tokenize_string(tmp, name);
 
-      if ( name.empty() )
+        if (name.empty())
         {
-          return true;
+            return true;
         }
 
-      if ( !compare_string( name, namelist ) )
+        if (!compare_string(name, namelist))
         {
-          return false;
+            return false;
         }
     }
 }
 
 int NiftyIsName(const std::string &str, const std::string &namelist)
 {
-  return NiftyIsNameInternal( str, namelist, IsName2, OneArgument2 );
+    return NiftyIsNameInternal(str, namelist, IsName2, OneArgument2);
 }
 
 int NiftyIsNamePrefix(const std::string &str, const std::string &namelist)
 {
-  return NiftyIsNameInternal( str, namelist, IsName2Prefix, OneArgument2 );
+    return NiftyIsNameInternal(str, namelist, IsName2Prefix, OneArgument2);
 }
 
 /*
  * Removes the tildes from a string.
  * Used for player-entered strings that go into disk files.
  */
-std::string SmashTilde( std::string &str )
+std::string SmashTilde(std::string &str)
 {
-  ReplaceChar( str, '~', '-' );
-  return str;
+    ReplaceChar(str, '~', '-');
+    return str;
 }
 
 /*
@@ -137,9 +137,9 @@ std::string SmashTilde( std::string &str )
 int StrCmp(const std::string &first, const std::string &second)
 {
 #ifdef HAVE_STRCASECMP
-  return strcasecmp( first.c_str(), second.c_str() );
+    return strcasecmp(first.c_str(), second.c_str());
 #else
-  return strcmp( ToUpper( first ).c_str(), ToUpper( second ).c_str() );
+    return strcmp(ToUpper(first).c_str(), ToUpper(second).c_str());
 #endif
 }
 
@@ -148,17 +148,17 @@ int StrCmp(const std::string &first, const std::string &second)
  * Return true if astr not a prefix of bstr
  *   (compatibility with historical functions).
  */
-int StringPrefix( const std::string &needle, const std::string &haystack )
+int StringPrefix(const std::string &needle, const std::string &haystack)
 {
-  int match = 1;
+    int match = 1;
 
-  if( haystack.size() >= needle.size()
-      && !StrCmp( needle, haystack.substr( 0, needle.size() ) ) )
+    if (haystack.size() >= needle.size()
+        && !StrCmp(needle, haystack.substr(0, needle.size())))
     {
-      match = 0;
+        match = 0;
     }
 
-  return match;
+    return match;
 }
 
 /*
@@ -166,24 +166,24 @@ int StringPrefix( const std::string &needle, const std::string &haystack )
  * Returns true is astr not part of bstr.
  *   (compatibility with historical functions).
  */
-int StringInfix( const std::string &needle,
-                 const std::string &haystackRef )
+int StringInfix(const std::string &needle,
+    const std::string &haystackRef)
 {
-  std::string haystack = haystackRef;
-  int match = 1;
+    std::string haystack = haystackRef;
+    int match = 1;
 
-  while( !haystack.empty() )
+    while (!haystack.empty())
     {
-      std::string token = GetNextChunk( haystack, ' ' );
+        std::string token = GetNextChunk(haystack, ' ');
 
-      if( !StringPrefix( needle, token ) )
+        if (!StringPrefix(needle, token))
         {
-          match = 0;
-          break;
+            match = 0;
+            break;
         }
     }
 
-  return match;
+    return match;
 }
 
 /*
@@ -193,109 +193,109 @@ int StringInfix( const std::string &needle,
  */
 int StringSuffix(const std::string &astr, const std::string &bstr)
 {
-  int sstr1 = astr.size();
-  int sstr2 = bstr.size();
-  const char *bstr_ptr = bstr.c_str();
+    int sstr1 = astr.size();
+    int sstr2 = bstr.size();
+    const char *bstr_ptr = bstr.c_str();
 
-  if ( sstr1 <= sstr2 && !StrCmp( astr, bstr_ptr + sstr2 - sstr1 ) )
-    return false;
-  else
-    return true;
+    if (sstr1 <= sstr2 && !StrCmp(astr, bstr_ptr + sstr2 - sstr1))
+        return false;
+    else
+        return true;
 }
 
 /*
  * Returns an initial-capped string.
  * Rewritten by FearItself@AvP
  */
-std::string Capitalize( const std::string &argument )
+std::string Capitalize(const std::string &argument)
 {
-  char buf[MAX_STRING_LENGTH];
-  const char *str = argument.c_str();
-  char *dest = buf;
-  enum { Normal, Color } state = Normal;
-  bool bFirst = true;
-  char c = 0;
+    char buf[MAX_STRING_LENGTH];
+    const char *str = argument.c_str();
+    char *dest = buf;
+    enum { Normal, Color } state = Normal;
+    bool bFirst = true;
+    char c = 0;
 
-  while( (c = *str++) )
+    while ((c = *str++))
     {
-      if( state == Normal )
+        if (state == Normal)
         {
-          if( c == '&' || c == '^' )
+            if (c == '&' || c == '^')
             {
-              state = Color;
+                state = Color;
             }
-          else if( isalpha( (int) c ) )
+            else if (isalpha((int)c))
             {
-              c = bFirst ? toupper( (int) c ) : c;
-              bFirst = false;
+                c = bFirst ? toupper((int)c) : c;
+                bFirst = false;
             }
         }
-      else
+        else
         {
-          state = Normal;
+            state = Normal;
         }
 
-      *dest++ = c;
+        *dest++ = c;
     }
 
-  *dest = c;
+    *dest = c;
 
-  return buf;
+    return buf;
 }
 
-std::string ToLower( std::string str )
+std::string ToLower(std::string str)
 {
-  transform( str.begin(), str.end(), str.begin(), tolower );
-  return str;
+    transform(str.begin(), str.end(), str.begin(), tolower);
+    return str;
 }
 
-std::string ToUpper( std::string str )
+std::string ToUpper(std::string str)
 {
-  transform( str.begin(), str.end(), str.begin(), toupper );
-  return str;
+    transform(str.begin(), str.end(), str.begin(), toupper);
+    return str;
 }
 
 /*
  * Returns true or false if a letter is a vowel                 -Thoric
  */
-static bool isavowel( char letter )
+static bool isavowel(char letter)
 {
-  char c = tolower( (int)letter );
+    char c = tolower((int)letter);
 
-  if ( c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' )
-    return true;
-  else
-    return false;
+    if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u')
+        return true;
+    else
+        return false;
 }
 
 /*
  * Shove either "a " or "an " onto the beginning of a string    -Thoric
  */
-std::string AOrAn( const std::string &str )
+std::string AOrAn(const std::string &str)
 {
-  std::string temp;
+    std::string temp;
 
-  if ( isavowel(str[0])
-       || ( str.size() > 1 && tolower((int)str[0]) == 'y'
-            && !isavowel(str[1])) )
+    if (isavowel(str[0])
+        || (str.size() > 1 && tolower((int)str[0]) == 'y'
+            && !isavowel(str[1])))
     {
-      temp = "an ";
+        temp = "an ";
     }
-  else
+    else
     {
-      temp = "a ";
+        temp = "a ";
     }
 
-  return temp + str;
+    return temp + str;
 }
 
-void ReplaceChar( std::string &buf, char replace, char with )
+void ReplaceChar(std::string &buf, char replace, char with)
 {
-  for( size_t i = 0; i < buf.size(); ++i )
+    for (size_t i = 0; i < buf.size(); ++i)
     {
-      if( buf[i] == replace )
+        if (buf[i] == replace)
         {
-          buf[i] = with;
+            buf[i] = with;
         }
     }
 }
@@ -303,48 +303,46 @@ void ReplaceChar( std::string &buf, char replace, char with )
 /*
  * Return true if an argument is completely numeric.
  */
-bool IsNumber( const std::string &arg )
+bool IsNumber(const std::string &arg)
 {
-  if (arg.empty())
-    return false;
-
-  for (char letter : arg)
-    {
-      if ( !isdigit((int) letter)
-           && letter != '.'
-           && letter != ','
-           && letter != '+'
-           && letter != '-' )
+    if (arg.empty())
         return false;
+
+    for (char letter : arg)
+    {
+        if (!isdigit((int)letter)
+            && letter != '.'
+            && letter != ','
+            && letter != '+'
+            && letter != '-')
+            return false;
     }
 
-  return true;
+    return true;
 }
 
 /*
  * Given a string like 14.foo, return 14 and 'foo'
  */
-int NumberArgument( const std::string &orig_argument, std::string &arg )
+int NumberArgument(const std::string &orig_argument, std::string &arg)
 {
-  char *pdot = NULL;
-  int number = 0;
-  char argument[MAX_STRING_LENGTH];
-  sprintf( argument, "%s", orig_argument.c_str() );
+    char argument[MAX_STRING_LENGTH];
+    sprintf(argument, "%s", orig_argument.c_str());
 
-  for ( pdot = argument; *pdot != '\0'; pdot++ )
+    for (char *pdot = argument; *pdot != '\0'; pdot++)
     {
-      if ( *pdot == '.' )
+        if (*pdot == '.')
         {
-          *pdot = '\0';
-          number = atoi( argument );
-          *pdot = '.';
-          arg = pdot + 1;
-          return number;
+            *pdot = '\0';
+            const int number = strtol(argument, nullptr, 10);
+            *pdot = '.';
+            arg = pdot + 1;
+            return number;
         }
     }
 
-  arg = argument;
-  return 1;
+    arg = argument;
+    return 1;
 }
 
 /*
@@ -354,166 +352,126 @@ int NumberArgument( const std::string &orig_argument, std::string &arg )
  * arg_first: The first token.
  * returns  : The rest of the string after arg_first
  */
-std::string OneArgument( const std::string &argument, std::string &arg_first )
+std::string OneArgument(const std::string &argument, std::string &arg_first)
 {
-  std::string::const_iterator argp = argument.begin();
-  arg_first.erase();
+    std::string::const_iterator argp = argument.begin();
+    arg_first.erase();
 
-  while( argp != argument.end() && isspace( *argp ) )
-    ++argp;
+    while (argp != argument.end() && isspace(*argp))
+        ++argp;
 
-  char cEnd = ' ';
+    char cEnd = ' ';
 
-  if( *argp == '\'' || *argp == '"' )
-    cEnd = *argp++;
+    if (*argp == '\'' || *argp == '"')
+        cEnd = *argp++;
 
-  while( argp != argument.end() )
+    while (argp != argument.end())
     {
-      if( *argp == cEnd )
+        if (*argp == cEnd)
         {
-          ++argp;
-          break;
+            ++argp;
+            break;
         }
 
-      arg_first.append( 1, *argp );
-      ++argp;
+        arg_first.append(1, *argp);
+        ++argp;
     }
 
-  while( argp != argument.end() && isspace( *argp ) )
-    ++argp;
+    while (argp != argument.end() && isspace(*argp))
+        ++argp;
 
-  return std::string( argp, argument.end() );
+    return std::string(argp, argument.end());
 }
 
 std::vector<char> StringToVector(const std::string &original)
 {
-  return std::vector<char>(original.c_str(),
-                           original.c_str() + original.size() + 1);
+    return std::vector<char>(original.c_str(),
+        original.c_str() + original.size() + 1);
 }
 
 /*
  * Pick off one argument from a string and return the rest.
  * Understands quotes.  Delimiters = { ' ', '-' }
  */
-#if 0
-static std::string OneArgument2( const std::string &orig_argument,
-                                 std::string &orig_arg_first )
+static std::string OneArgument2(const std::string &argument, std::string &arg_first)
 {
-  char cEnd = ' ';
-  short count = 0;
-  std::vector<char> v_argument = StringToVector(orig_argument);
-  std::vector<char> v_arg_first = StringToVector(orig_arg_first);
-  const char *argument = &v_argument[0];
-  char *arg_first = &v_arg_first[0];
+    std::string::const_iterator argp = argument.begin();
+    arg_first.erase();
 
-  while ( isspace((int) *argument) )
-    argument++;
+    while (argp != argument.end() && isspace(*argp))
+        ++argp;
 
-  if ( *argument == '\'' || *argument == '"' )
-    cEnd = *argument++;
+    char cEnd = ' ';
 
-  while ( *argument != '\0' || ++count >= 255 )
+    if (*argp == '\'' || *argp == '"')
+        cEnd = *argp++;
+
+    while (argp != argument.end())
     {
-      if ( *argument == cEnd || *argument == '-' )
+        if (*argp == cEnd || *argp == '-')
         {
-          argument++;
-          break;
+            ++argp;
+            break;
         }
 
-      *arg_first = *argument;
-      arg_first++;
-      argument++;
+        arg_first.append(1, *argp);
+        ++argp;
     }
 
-  *arg_first = '\0';
+    while (argp != argument.end() && isspace(*argp))
+        ++argp;
 
-  while ( isspace((int) *argument) )
-    argument++;
-
-  orig_arg_first = arg_first;
-  return argument;
-}
-#endif
-
-static std::string OneArgument2( const std::string &argument, std::string &arg_first )
-{
-  std::string::const_iterator argp = argument.begin();
-  arg_first.erase();
-
-  while( argp != argument.end() && isspace( *argp ) )
-    ++argp;
-
-  char cEnd = ' ';
-
-  if( *argp == '\'' || *argp == '"' )
-    cEnd = *argp++;
-
-  while( argp != argument.end() )
-    {
-      if( *argp == cEnd || *argp == '-' )
-        {
-          ++argp;
-          break;
-        }
-
-      arg_first.append( 1, *argp );
-      ++argp;
-    }
-
-  while( argp != argument.end() && isspace( *argp ) )
-    ++argp;
-
-  return std::string( argp, argument.end() );
+    return std::string(argp, argument.end());
 }
 
 /*
  * Remove carriage returns from a line
  */
-std::string StripCarriageReturn( const std::string &arg)
+std::string StripCarriageReturn(const std::string &arg)
 {
-  char newstr[MAX_STRING_LENGTH] = {'\0'};
-  int i = 0, j = 0;
-  const char *str = arg.c_str();
+    char newstr[MAX_STRING_LENGTH] = { '\0' };
+    int i = 0, j = 0;
+    const char *str = arg.c_str();
 
-  for ( i = j = 0; str[i] != '\0'; i++ )
+    for (i = j = 0; str[i] != '\0'; i++)
     {
-      if ( str[i] != '\r' )
+        if (str[i] != '\r')
         {
-          newstr[j++] = str[i];
+            newstr[j++] = str[i];
         }
     }
 
-  newstr[j] = '\0';
-  return newstr;
+    newstr[j] = '\0';
+    return newstr;
 }
 
 /*
  * Removes the tildes from a line, except if it's the last character.
  */
-std::string SmushTilde( std::string &orig_str )
+std::string SmushTilde(std::string &orig_str)
 {
-  std::vector<char> v_str = StringToVector(orig_str);
-  char *str = &v_str[0];
-  char *strptr = str;
-  size_t len = strlen( str );
-  char last = len != 0 ? strptr[len-1] : '\0';
+    std::vector<char> v_str = StringToVector(orig_str);
+    char *str = &v_str[0];
+    char *strptr = str;
+    size_t len = strlen(str);
+    char last = len != 0 ? strptr[len - 1] : '\0';
 
-  for ( ; *str != '\0'; str++ )
+    for (; *str != '\0'; str++)
     {
-      if ( *str == '~' )
-        *str = '-';
+        if (*str == '~')
+            *str = '-';
     }
 
-  if ( len )
-    strptr[len-1] = last;
+    if (len)
+        strptr[len - 1] = last;
 
-  orig_str = str;
-  return orig_str;
+    orig_str = str;
+    return orig_str;
 }
 
-std::string EncodeString( const std::string &str )
+std::string EncodeString(const std::string &str)
 {
-  return sha256_crypt( str );
+    return sha256_crypt(str);
 }
 
 /*
@@ -521,40 +479,40 @@ std::string EncodeString( const std::string &str )
  */
 char *CopyString(const std::string &str)
 {
-  static char *ret = NULL;
-  AllocateMemory( ret, char, strlen( str.c_str() ) + 1 );
-  strcpy( ret, str.c_str() );
-  return ret;
+    static char *ret = NULL;
+    AllocateMemory(ret, char, strlen(str.c_str()) + 1);
+    strcpy(ret, str.c_str());
+    return ret;
 }
 
-std::string TrimStringStart( const std::string &str, char junk )
+std::string TrimStringStart(const std::string &str, char junk)
 {
-  const auto strBegin = str.find_first_not_of(junk);
+    const auto strBegin = str.find_first_not_of(junk);
 
-  if (strBegin == std::string::npos)
-    return ""; // no content
+    if (strBegin == std::string::npos)
+        return ""; // no content
 
-  return str.substr(strBegin);
+    return str.substr(strBegin);
 }
 
-std::string TrimStringEnd( const std::string &str, char junk )
+std::string TrimStringEnd(const std::string &str, char junk)
 {
-  const auto strEnd = str.find_last_not_of(junk);
+    const auto strEnd = str.find_last_not_of(junk);
 
-  return str.substr(0, strEnd + 1);
+    return str.substr(0, strEnd + 1);
 }
 
-std::string TrimString( const std::string &str, char junk )
+std::string TrimString(const std::string &str, char junk)
 {
-  const auto strBegin = str.find_first_not_of(junk);
+    const auto strBegin = str.find_first_not_of(junk);
 
-  if (strBegin == std::string::npos)
-    return ""; // no content
+    if (strBegin == std::string::npos)
+        return ""; // no content
 
-  const auto strEnd = str.find_last_not_of(junk);
-  const auto strRange = strEnd - strBegin + 1;
+    const auto strEnd = str.find_last_not_of(junk);
+    const auto strRange = strEnd - strBegin + 1;
 
-  return str.substr(strBegin, strRange);
+    return str.substr(strBegin, strRange);
 }
 
 /*
@@ -567,22 +525,22 @@ std::string TrimString( const std::string &str, char junk )
  * null, I return NULL (meaning no match was found). StringInfix returns
  * false (meaning a match was found).  *grumble*
  */
-static const char *str_str( const char *astr, const char *bstr )
+static const char *str_str(const char *astr, const char *bstr)
 {
-  int sstr1, sstr2, ichar;
-  char c0;
+    int sstr1, sstr2, ichar;
+    char c0;
 
-  if ( ( c0 = CharToLowercase(bstr[0]) ) == '\0' )
+    if ((c0 = CharToLowercase(bstr[0])) == '\0')
+        return NULL;
+
+    sstr1 = strlen(astr);
+    sstr2 = strlen(bstr);
+
+    for (ichar = 0; ichar <= sstr1 - sstr2; ichar++)
+        if (c0 == CharToLowercase(astr[ichar]) && !StringPrefix(bstr, astr + ichar))
+            return (astr + ichar);
+
     return NULL;
-
-  sstr1 = strlen(astr);
-  sstr2 = strlen(bstr);
-
-  for ( ichar = 0; ichar <= sstr1 - sstr2; ichar++ )
-    if ( c0 == CharToLowercase(astr[ichar]) && !StringPrefix(bstr, astr+ichar) )
-      return (astr+ichar);
-
-  return NULL;
 }
 
 /*
@@ -591,164 +549,164 @@ static const char *str_str( const char *astr, const char *bstr )
  */
 int CountStringOccurances(const std::string &source, const std::string &target)
 {
-  const char *psource = source.c_str();
-  const char *ptarget = target.c_str();
-  const char *ptemp = psource;
-  int count=0;
+    const char *psource = source.c_str();
+    const char *ptarget = target.c_str();
+    const char *ptemp = psource;
+    int count = 0;
 
-  while ( (ptemp = str_str(ptemp, ptarget)) )
+    while ((ptemp = str_str(ptemp, ptarget)))
     {
-      ptemp++;
-      count++;
+        ptemp++;
+        count++;
     }
 
-  return count;
+    return count;
 }
 
-bool IsNullOrEmpty( const char *str )
+bool IsNullOrEmpty(const char *str)
 {
-  return str == nullptr || str[0] == '\0';
+    return str == nullptr || str[0] == '\0';
 }
 
-static std::string GetNextChunk( std::string &str, const char c )
+static std::string GetNextChunk(std::string &str, const char c)
 {
-  std::string::size_type pos = str.find( c );
-  std::string line = str.substr( 0, pos );
+    std::string::size_type pos = str.find(c);
+    std::string line = str.substr(0, pos);
 
-  if( pos == std::string::npos )
+    if (pos == std::string::npos)
     {
-      str.erase();
+        str.erase();
     }
-  else
+    else
     {
-      str.erase( 0, pos + 1 );
+        str.erase(0, pos + 1);
     }
 
-  return line;
+    return line;
 }
 
-std::vector< char > CreateFmtBuffer( const char *fmt, va_list va )
+std::vector< char > CreateFmtBuffer(const char *fmt, va_list va)
 {
-  va_list va_tmp;
-  va_copy( va_tmp, va );
-  std::vector< char > buf( vsnprintf( 0, 0, fmt, va_tmp ) + 1 );
-  va_end( va_tmp );
+    va_list va_tmp;
+    va_copy(va_tmp, va);
+    std::vector< char > buf(vsnprintf(0, 0, fmt, va_tmp) + 1);
+    va_end(va_tmp);
 
-  vsnprintf( &buf[0], buf.size(), fmt, va );
+    vsnprintf(&buf[0], buf.size(), fmt, va);
 
-  return buf;
+    return buf;
 }
 
-std::string FormatString( const char *fmt, ... )
+std::string FormatString(const char *fmt, ...)
 {
-  va_list va;
-  va_start( va, fmt );
-  std::vector< char > buf = CreateFmtBuffer( fmt, va );
-  va_end( va );
+    va_list va;
+    va_start(va, fmt);
+    std::vector< char > buf = CreateFmtBuffer(fmt, va);
+    va_end(va);
 
-  return &buf[0];
+    return &buf[0];
 }
 
-std::string CenterString( const std::string &txt, size_t width, char pad )
+std::string CenterString(const std::string &txt, size_t width, char pad)
 {
-  std::ostringstream output;
+    std::ostringstream output;
 
-  output << std::string( width / 2 - txt.size() / 2, pad );
-  output << txt;
-  output << std::string( width - output.str().size(), pad );
+    output << std::string(width / 2 - txt.size() / 2, pad);
+    output << txt;
+    output << std::string(width - output.str().size(), pad);
 
-  return output.str();
+    return output.str();
 }
 
-static char *grab_word( char *argument, char *arg_first )
+static char *grab_word(char *argument, char *arg_first)
 {
-  char cEnd = ' ';
-  short count = 0;
+    char cEnd = ' ';
+    short count = 0;
 
-  while ( isspace((int)*argument) )
-    argument++;
+    while (isspace((int)*argument))
+        argument++;
 
-  if ( *argument == '\'' || *argument == '"' )
-    cEnd = *argument++;
+    if (*argument == '\'' || *argument == '"')
+        cEnd = *argument++;
 
-  while ( *argument != '\0' || ++count >= 255 )
+    while (*argument != '\0' || ++count >= 255)
     {
-      if ( *argument == cEnd )
+        if (*argument == cEnd)
         {
-          argument++;
-          break;
+            argument++;
+            break;
         }
 
-      *arg_first++ = *argument++;
+        *arg_first++ = *argument++;
     }
 
-  *arg_first = '\0';
+    *arg_first = '\0';
 
-  while ( isspace((int)*argument) )
-    argument++;
+    while (isspace((int)*argument))
+        argument++;
 
-  return argument;
+    return argument;
 }
 
 std::string WordWrap(const std::string &stl_txt, unsigned short wrap)
 {
-  std::vector<char> txt = StringToVector(stl_txt);
-  char buf[MAX_STRING_LENGTH] = {'\0'};
-  char *bufp = buf;
+    std::vector<char> txt = StringToVector(stl_txt);
+    char buf[MAX_STRING_LENGTH] = { '\0' };
+    char *bufp = buf;
 
-  if ( !txt.empty() )
+    if (!txt.empty())
     {
-      char line[MAX_STRING_LENGTH] = {'\0'};
-      char temp[MAX_STRING_LENGTH] = {'\0'};
-      char *ptr = &txt[0];
+        char line[MAX_STRING_LENGTH] = { '\0' };
+        char temp[MAX_STRING_LENGTH] = { '\0' };
+        char *ptr = &txt[0];
 
-      ++bufp;
-      line[0] = '\0';
+        ++bufp;
+        line[0] = '\0';
 
-      while ( *ptr )
+        while (*ptr)
         {
-          size_t ln = strlen( line );
-          ptr = grab_word( ptr, temp );
-          size_t x = strlen( temp );
+            size_t ln = strlen(line);
+            ptr = grab_word(ptr, temp);
+            size_t x = strlen(temp);
 
-          if ( (ln + x + 1) < wrap )
+            if ((ln + x + 1) < wrap)
             {
-              if ( ln > 0 && line[ln-1] == '.' )
+                if (ln > 0 && line[ln - 1] == '.')
                 {
-                  strcat( line, "  " );
+                    strcat(line, "  ");
                 }
-              else
+                else
                 {
-                  strcat( line, " " );
-                }
-
-              strcat( line, temp );
-              const char *p = strchr( line, '\n' );
-
-              if ( !p )
-                {
-                  p = strchr( line, '\r' );
+                    strcat(line, " ");
                 }
 
-              if ( p )
+                strcat(line, temp);
+                const char *p = strchr(line, '\n');
+
+                if (!p)
                 {
-                  strcat( buf, line );
-                  line[0] = '\0';
+                    p = strchr(line, '\r');
+                }
+
+                if (p)
+                {
+                    strcat(buf, line);
+                    line[0] = '\0';
                 }
             }
-          else
+            else
             {
-              strcat( line, "\r\n" );
-              strcat( buf, line );
-              strcpy( line, temp );
+                strcat(line, "\r\n");
+                strcat(buf, line);
+                strcpy(line, temp);
             }
         }
 
-      if ( line[0] != '\0' )
+        if (line[0] != '\0')
         {
-          strcat( buf, line );
+            strcat(buf, line);
         }
     }
 
-  return bufp;
+    return bufp;
 }

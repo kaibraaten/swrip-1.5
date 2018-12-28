@@ -23,7 +23,10 @@
 #include <functional>
 #include <cctype>
 #include <cstring>
+
+#ifndef _WIN32
 #include <arpa/telnet.h>
+#endif
 
 #include <utility/random.hpp>
 #include "mud.hpp"
@@ -281,8 +284,7 @@ static void NannyGetOldPassword( Descriptor *d, std::string argument )
       CloseDescriptor( d, false );
       return;
     }
-
-  if ( chk == true )
+  else if ( chk == 1 )
     {
       return;
     }

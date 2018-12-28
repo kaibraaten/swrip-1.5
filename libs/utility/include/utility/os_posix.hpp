@@ -27,23 +27,19 @@
 #define _SWRIP_OS_POSIX_HPP_
 
 #include <netinet/in.h>
-
-#ifdef __sun__
-
-#else
 #include <sys/cdefs.h>
-#endif
 
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/time.h>
 #include <sys/stat.h>
 #include <arpa/inet.h>
+#include <arpa/telnet.h>
 #include <netdb.h>
 #include <fcntl.h>
-#include <signal.h>
+#include <csignal>
 #include <unistd.h>
-#include <errno.h>
+#include <cerrno>
 
 #ifdef SWRIP_USE_DLSYM
 #include <dlfcn.h>
@@ -57,6 +53,9 @@ static const int SOCKET_ERROR = -1;
 #define closesocket close
 typedef int socket_t;
 typedef char sockbuf_t;
+
+#define DllImport
+#define DllExport
 
 #endif /* include guard */
 

@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iterator>
 #include <vector>
+#include <random>
 
 template<typename Container, typename UnaryPredicate>
 auto Filter(const Container &original, UnaryPredicate pred)
@@ -27,7 +28,9 @@ template<typename Container>
 auto RandomizeOrder(const Container &original)
 {
   std::vector<typename Container::value_type> vec(std::begin(original), std::end(original));
-  std::random_shuffle(std::begin(vec), std::end(vec));
+  std::random_device rng;
+  std::mt19937 urng(rng());
+  std::shuffle(std::begin(vec), std::end(vec), urng);
   Container randomized(std::begin(vec), std::end(vec));
   return randomized;
 }

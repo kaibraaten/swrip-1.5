@@ -3,15 +3,9 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "log.hpp"
-#include "room.hpp"
 #include "pcdata.hpp"
 #include "systemdata.hpp"
 #include "repos/descriptorrepository.hpp"
-
-/*
- * Socket and TCP/IP stuff.
- */
-#include <arpa/telnet.h>
 
 static const char go_ahead_str[] = { (const char)IAC, (const char)GA, '\0' };
 
@@ -45,7 +39,7 @@ void Descriptor::WriteToBuffer(const std::string &txt, size_t length)
   OutBuffer << txt;
 }
 
-bool Descriptor::CheckReconnect( const std::string &name, bool fConn )
+unsigned char Descriptor::CheckReconnect( const std::string &name, bool fConn )
 {
   for ( class Character *ch = FirstCharacter; ch; ch = ch->Next )
     {
@@ -90,11 +84,11 @@ bool Descriptor::CheckReconnect( const std::string &name, bool fConn )
               ConnectionState = CON_PLAYING;
             }
 
-          return true;
+          return 1;
         }
     }
 
-  return false;
+  return 0;
 }
 
 bool Descriptor::CheckMultiplaying( const std::string &name )
@@ -399,9 +393,9 @@ void NullDescriptor::WriteToBuffer(const std::string &txt, size_t len)
 
 }
 
-bool NullDescriptor::CheckReconnect(const std::string &name, bool fConn )
+unsigned char NullDescriptor::CheckReconnect(const std::string &name, bool fConn )
 {
-  return false;
+  return 0;
 }
 
 unsigned char NullDescriptor::CheckPlaying(const std::string &name, bool kick )

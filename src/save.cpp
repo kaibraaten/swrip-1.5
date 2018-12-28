@@ -21,7 +21,7 @@
  ****************************************************************************/
 
 #ifdef __STRICT_ANSI__
-/* To include the prototype for fchmod() */
+ /* To include the prototype for fchmod() */
 #define _DEFAULT_SOURCE
 
 #if defined(__NetBSD__)
@@ -31,6 +31,9 @@
 /* To include the prototype for fileno() */
 #define _POSIX_SOURCE
 #endif
+
+#include <filesystem>
+namespace fs = std::filesystem;
 
 #include <cassert>
 #include <cstring>
@@ -60,9 +63,9 @@
  */
 #define SAVEVERSION     3
 
-/*
- * Array to keep track of equipment temporarily.                -Thoric
- */
+ /*
+  * Array to keep track of equipment temporarily.                -Thoric
+  */
 Object *save_equipment[MAX_WEAR][8];
 Character *quitting_char = NULL;
 Character *loading_char = NULL;
@@ -82,33 +85,33 @@ static Object *rgObjNest[MAX_NEST];
 /*
  * Local functions.
  */
-static bool HasAnyOvalues( const Object *obj );
-static void WriteCharacter( const Character *ch, FILE *fp );
+static bool HasAnyOvalues(const Object *obj);
+static void WriteCharacter(const Character *ch, FILE *fp);
 
-void SaveHome( Character *ch )
+void SaveHome(Character *ch)
 {
-  if ( ch->PlayerHome )
+    if (ch->PlayerHome)
     {
-      FILE *fp = NULL;
-      char filename[256];
-      short templvl = 0;
+        FILE *fp = NULL;
+        char filename[256];
+        short templvl = 0;
 
-      sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->Name[0]),
-               Capitalize( ch->Name ).c_str() );
+        sprintf(filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->Name[0]),
+            Capitalize(ch->Name).c_str());
 
-      if ( ( fp = fopen( filename, "w" ) ) )
+        if ((fp = fopen(filename, "w")))
         {
-          templvl = ch->TopLevel;
-          ch->TopLevel = LEVEL_AVATAR;           /* make sure EQ doesn't get lost */
+            templvl = ch->TopLevel;
+            ch->TopLevel = LEVEL_AVATAR;           /* make sure EQ doesn't get lost */
 
-          for(const Object *obj : Reverse(ch->PlayerHome->Objects()))
-	    {
-	      WriteObject(ch, obj, fp, 0, OS_CARRY );
-	    }
+            for (const Object *obj : Reverse(ch->PlayerHome->Objects()))
+            {
+                WriteObject(ch, obj, fp, 0, OS_CARRY);
+            }
 
-          fprintf( fp, "#END\n" );
-          ch->TopLevel = templvl;
-          fclose( fp );
+            fprintf(fp, "#END\n");
+            ch->TopLevel = templvl;
+            fclose(fp);
         }
     }
 }
@@ -117,1480 +120,1475 @@ void SaveHome( Character *ch )
  * Un-equip character before saving to ensure proper    -Thoric
  * stats are saved in case of changes to or removal of EQ
  */
-void DeEquipCharacter( Character *ch )
+void DeEquipCharacter(Character *ch)
 {
-  for ( int x = 0; x < MAX_WEAR; x++ )
+    for (int x = 0; x < MAX_WEAR; x++)
     {
-      for ( int y = 0; y < MAX_LAYERS; y++ )
-	{
-	  save_equipment[x][y] = NULL;
-	}
+        for (int y = 0; y < MAX_LAYERS; y++)
+        {
+            save_equipment[x][y] = NULL;
+        }
     }
 
-  for ( Object *obj : ch->Objects() )
+    for (Object *obj : ch->Objects())
     {
-      if ( obj->WearLoc > WEAR_NONE && obj->WearLoc < MAX_WEAR )
-	{
-          int x = 0;
-          
-	  for ( x = 0; x < MAX_LAYERS; x++ )
-	    {
-	      if ( !save_equipment[obj->WearLoc][x] )
-		{
-		  save_equipment[obj->WearLoc][x] = obj;
-		  break;
-		}
-	    }
+        if (obj->WearLoc > WEAR_NONE && obj->WearLoc < MAX_WEAR)
+        {
+            int x = 0;
 
-	  if ( x == MAX_LAYERS )
-	    {
-	      Log->Bug( "%s had on more than %d layers of clothing in one location (%d): %s",
-		   ch->Name.c_str(), MAX_LAYERS, obj->WearLoc, obj->Name.c_str() );
-	    }
+            for (x = 0; x < MAX_LAYERS; x++)
+            {
+                if (!save_equipment[obj->WearLoc][x])
+                {
+                    save_equipment[obj->WearLoc][x] = obj;
+                    break;
+                }
+            }
 
-	  UnequipCharacter(ch, obj);
-	}
+            if (x == MAX_LAYERS)
+            {
+                Log->Bug("%s had on more than %d layers of clothing in one location (%d): %s",
+                    ch->Name.c_str(), MAX_LAYERS, obj->WearLoc, obj->Name.c_str());
+            }
+
+            UnequipCharacter(ch, obj);
+        }
     }
 }
 
 /*
  * Re-equip character                                   -Thoric
  */
-void ReEquipCharacter( Character *ch )
+void ReEquipCharacter(Character *ch)
 {
-  int x = 0;
-  int y = 0;
+    int x = 0;
+    int y = 0;
 
-  for ( x = 0; x < MAX_WEAR; x++ )
+    for (x = 0; x < MAX_WEAR; x++)
     {
-      for ( y = 0; y < MAX_LAYERS; y++ )
-	{
-	  if ( save_equipment[x][y] != NULL )
-	    {
-	      if ( quitting_char != ch )
-		{
-		  EquipCharacter(ch, save_equipment[x][y], (WearLocation)x);
-		}
+        for (y = 0; y < MAX_LAYERS; y++)
+        {
+            if (save_equipment[x][y] != NULL)
+            {
+                if (quitting_char != ch)
+                {
+                    EquipCharacter(ch, save_equipment[x][y], (WearLocation)x);
+                }
 
-	      save_equipment[x][y] = NULL;
-	    }
-	  else
-	    {
-	      break;
-	    }
-	}
+                save_equipment[x][y] = NULL;
+            }
+            else
+            {
+                break;
+            }
+        }
     }
 }
 
-void SaveClone( Character *ch )
+void SaveClone(Character *ch)
 {
-  assert(ch != nullptr);
+    assert(ch != nullptr);
 
-  char strsave[MAX_INPUT_LENGTH];
-  char strback[MAX_INPUT_LENGTH];
-  FILE *fp = NULL;
+    char strsave[MAX_INPUT_LENGTH];
+    char strback[MAX_INPUT_LENGTH];
+    FILE *fp = NULL;
 
-  if ( IsNpc(ch) || !IsAuthed(ch) )
+    if (IsNpc(ch) || !IsAuthed(ch))
     {
-      return;
+        return;
     }
 
-  if ( ch->Desc && ch->Desc->Original )
+    if (ch->Desc && ch->Desc->Original)
     {
-      ch = ch->Desc->Original;
+        ch = ch->Desc->Original;
     }
 
-  DeEquipCharacter( ch );
-  ch->PCData->Clones++;
+    DeEquipCharacter(ch);
+    ch->PCData->Clones++;
 
-  ch->PCData->SaveTime = current_time;
-  sprintf( strsave, "%s%c/%s.clone", PLAYER_DIR, tolower(ch->Name[0]),
-           Capitalize( ch->Name ).c_str() );
+    ch->PCData->SaveTime = current_time;
+    sprintf(strsave, "%s%c/%s.clone", PLAYER_DIR, tolower(ch->Name[0]),
+        Capitalize(ch->Name).c_str());
 
-  /*
-   * Auto-backup pfile (can cause lag with high disk access situtations
-   */
-  if ( SysData.SaveFlags.test( Flag::AutoSave::Backup ) )
+    /*
+     * Auto-backup pfile (can cause lag with high disk access situtations
+     */
+    if (SysData.SaveFlags.test(Flag::AutoSave::Backup))
     {
-      sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->Name[0]),
-               Capitalize( ch->Name ).c_str() );
-      rename( strsave, strback );
+        sprintf(strback, "%s%c/%s", BACKUP_DIR, tolower(ch->Name[0]),
+            Capitalize(ch->Name).c_str());
+        rename(strsave, strback);
     }
 
-  if ( ( fp = fopen( strsave, "w" ) ) == NULL )
+    if ((fp = fopen(strsave, "w")) == NULL)
     {
-      Log->Bug( "Save_char_obj: fopen" );
-      perror( strsave );
+        Log->Bug("Save_char_obj: fopen");
+        perror(strsave);
     }
-  else
+    else
     {
-      WriteCharacter( ch, fp );
+        WriteCharacter(ch, fp);
 
-      if ( ch->PCData && !ch->PCData->Comments().empty() )
-	{
-	  WriteComments( ch, fp );
-	}
+        if (ch->PCData && !ch->PCData->Comments().empty())
+        {
+            WriteComments(ch, fp);
+        }
 
-      fprintf( fp, "#END\n" );
-      fclose( fp );
+        fprintf(fp, "#END\n");
+        fclose(fp);
     }
 
-  ch->PCData->Clones--;
-  ReEquipCharacter( ch );
+    ch->PCData->Clones--;
+    ReEquipCharacter(ch);
 
-  WriteCorpses(ch, "");
-  quitting_char = NULL;
-  saving_char   = NULL;
+    WriteCorpses(ch, "");
+    quitting_char = NULL;
+    saving_char = NULL;
 }
 
 /*
  * Write the char.
  */
-static void WriteCharacter( const Character *ch, FILE *fp )
+static void WriteCharacter(const Character *ch, FILE *fp)
 {
-  int sn = 0;
-  int drug = 0;
-  const Skill *skill = NULL;
+    int sn = 0;
+    int drug = 0;
+    const Skill *skill = NULL;
 
-  fprintf( fp, "#%s\n", IsNpc(ch) ? "MOB" : "PLAYER"           );
+    fprintf(fp, "#%s\n", IsNpc(ch) ? "MOB" : "PLAYER");
 
-  fprintf( fp, "Version      %d\n",   SAVEVERSION               );
-  fprintf( fp, "Name         %s~\n",    ch->Name.c_str()                );
+    fprintf(fp, "Version      %d\n", SAVEVERSION);
+    fprintf(fp, "Name         %s~\n", ch->Name.c_str());
 
-  if ( !ch->ShortDescr.empty() )
+    if (!ch->ShortDescr.empty())
     {
-      fprintf( fp, "ShortDescr   %s~\n",  ch->ShortDescr.c_str() );
+        fprintf(fp, "ShortDescr   %s~\n", ch->ShortDescr.c_str());
     }
 
-  if ( !ch->LongDescr.empty() )
+    if (!ch->LongDescr.empty())
     {
-      fprintf( fp, "LongDescr    %s~\n",  ch->LongDescr.c_str()  );
+        fprintf(fp, "LongDescr    %s~\n", ch->LongDescr.c_str());
     }
 
-  if ( !ch->Description.empty() )
+    if (!ch->Description.empty())
     {
-      fprintf( fp, "Description  %s~\n",  ch->Description.c_str() );
+        fprintf(fp, "Description  %s~\n", ch->Description.c_str());
     }
 
-  fprintf( fp, "Sex          %d\n",     ch->Sex                 );
-  fprintf( fp, "Race         %d\n",     ch->Race                );
-  fprintf( fp, "MainAbility  %d\n",     ch->Ability.Main        );
-  fprintf( fp, "Languages    %d %d\n", ch->Speaks, ch->Speaking );
-  fprintf( fp, "Toplevel     %d\n",     ch->TopLevel           );
+    fprintf(fp, "Sex          %d\n", ch->Sex);
+    fprintf(fp, "Race         %d\n", ch->Race);
+    fprintf(fp, "MainAbility  %d\n", ch->Ability.Main);
+    fprintf(fp, "Languages    %d %d\n", ch->Speaks, ch->Speaking);
+    fprintf(fp, "Toplevel     %d\n", ch->TopLevel);
 
-  if ( ch->Trust )
+    if (ch->Trust)
     {
-      fprintf( fp, "Trust        %d\n",   ch->Trust               );
+        fprintf(fp, "Trust        %d\n", ch->Trust);
     }
 
-  fprintf( fp, "Played       %d\n",
-           ch->PCData->Played + (int) (current_time - ch->PCData->Logon)                );
-  fprintf( fp, "Room         %ld\n",
-           (  ch->InRoom == GetRoom( ROOM_VNUM_LIMBO )
-              && ch->WasInRoom )
-           ? ch->WasInRoom->Vnum
-           : ch->InRoom->Vnum );
+    fprintf(fp, "Played       %d\n",
+        ch->PCData->Played + (int)(current_time - ch->PCData->Logon));
+    fprintf(fp, "Room         %ld\n",
+        (ch->InRoom == GetRoom(ROOM_VNUM_LIMBO)
+            && ch->WasInRoom)
+        ? ch->WasInRoom->Vnum
+        : ch->InRoom->Vnum);
 
-  if ( ch->PlayerHome != NULL )
+    if (ch->PlayerHome != NULL)
     {
-      fprintf( fp, "PlrHome      %ld\n",          ch->PlayerHome->Vnum );
+        fprintf(fp, "PlrHome      %ld\n", ch->PlayerHome->Vnum);
     }
 
-  fprintf( fp, "HpManaMove   %d %d 0 0 %d %d\n",
-           ch->HitPoints.Current, ch->HitPoints.Max,
-           ch->Fatigue.Current, ch->Fatigue.Max );
-  fprintf( fp, "Force        %d %d %d %d\n",
-           ch->PermStats.Frc, ch->StatMods.Frc,
-           ch->Mana.Current, ch->Mana.Max );
-  fprintf( fp, "Gold         %d\n",     ch->Gold                );
-  fprintf( fp, "Bank         %ld\n",    ch->PCData->Bank                );
+    fprintf(fp, "HpManaMove   %d %d 0 0 %d %d\n",
+        ch->HitPoints.Current, ch->HitPoints.Max,
+        ch->Fatigue.Current, ch->Fatigue.Max);
+    fprintf(fp, "Force        %d %d %d %d\n",
+        ch->PermStats.Frc, ch->StatMods.Frc,
+        ch->Mana.Current, ch->Mana.Max);
+    fprintf(fp, "Gold         %d\n", ch->Gold);
+    fprintf(fp, "Bank         %ld\n", ch->PCData->Bank);
 
-  {
-    int ability;
-    for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-      fprintf( fp, "Ability        %d %d %ld\n",
-               ability, GetAbilityLevel( ch, ability ), GetAbilityXP( ch, ability ) );
-  }
-
-  fprintf( fp, "Clones         %d\n",   ch->PCData->Clones              );
-  fprintf( fp, "Salary_time         %ld\n",     ch->PCData->ClanInfo.SalaryDate );
-  fprintf( fp, "Salary         %d\n",   ch->PCData->ClanInfo.Salary );
-  fprintf( fp, "Jailvnum         %ld\n", ch->PCData->JailVnum   );
-
-  if ( ch->Flags )
     {
-      fprintf( fp, "Act          %d\n", ch->Flags                   );
+        int ability;
+        for (ability = 0; ability < MAX_ABILITY; ability++)
+            fprintf(fp, "Ability        %d %d %ld\n",
+                ability, GetAbilityLevel(ch, ability), GetAbilityXP(ch, ability));
     }
 
-  if ( ch->AffectedBy )
+    fprintf(fp, "Clones         %d\n", ch->PCData->Clones);
+    fprintf(fp, "Salary_time         %ld\n", ch->PCData->ClanInfo.SalaryDate);
+    fprintf(fp, "Salary         %d\n", ch->PCData->ClanInfo.Salary);
+    fprintf(fp, "Jailvnum         %ld\n", ch->PCData->JailVnum);
+
+    if (ch->Flags)
     {
-      fprintf( fp, "AffectedBy   %d\n",   ch->AffectedBy         );
+        fprintf(fp, "Act          %d\n", ch->Flags);
     }
 
-  fprintf( fp, "Position     %d\n",
-           ch->Position == POS_FIGHTING ? POS_STANDING : ch->Position );
-
-  fprintf( fp, "SavingThrows %d %d %d %d %d\n",
-           ch->Saving.PoisonDeath,
-           ch->Saving.Wand,
-           ch->Saving.ParaPetri,
-           ch->Saving.Breath,
-           ch->Saving.SpellStaff                       );
-  fprintf( fp, "Alignment    %d\n",     ch->Alignment           );
-  fprintf( fp, "Hitroll      %d\n",     ch->HitRoll             );
-  fprintf( fp, "Damroll      %d\n",     ch->DamRoll             );
-  fprintf( fp, "Armor        %d\n",     ch->ArmorClass          );
-
-  if ( ch->Wimpy )
+    if (ch->AffectedBy)
     {
-      fprintf( fp, "Wimpy        %d\n",   ch->Wimpy               );
+        fprintf(fp, "AffectedBy   %d\n", ch->AffectedBy);
     }
 
-  if ( ch->Deaf )
+    fprintf(fp, "Position     %d\n",
+        ch->Position == POS_FIGHTING ? POS_STANDING : ch->Position);
+
+    fprintf(fp, "SavingThrows %d %d %d %d %d\n",
+        ch->Saving.PoisonDeath,
+        ch->Saving.Wand,
+        ch->Saving.ParaPetri,
+        ch->Saving.Breath,
+        ch->Saving.SpellStaff);
+    fprintf(fp, "Alignment    %d\n", ch->Alignment);
+    fprintf(fp, "Hitroll      %d\n", ch->HitRoll);
+    fprintf(fp, "Damroll      %d\n", ch->DamRoll);
+    fprintf(fp, "Armor        %d\n", ch->ArmorClass);
+
+    if (ch->Wimpy)
     {
-      fprintf( fp, "Deaf         %d\n",   ch->Deaf                );
+        fprintf(fp, "Wimpy        %d\n", ch->Wimpy);
     }
 
-  if ( ch->Resistant )
+    if (ch->Deaf)
     {
-      fprintf( fp, "Resistant    %d\n",   ch->Resistant           );
+        fprintf(fp, "Deaf         %d\n", ch->Deaf);
     }
 
-  if ( ch->Immune )
+    if (ch->Resistant)
     {
-      fprintf( fp, "Immune       %d\n",   ch->Immune              );
+        fprintf(fp, "Resistant    %d\n", ch->Resistant);
     }
 
-  if ( ch->Susceptible )
+    if (ch->Immune)
     {
-      fprintf( fp, "Susceptible  %d\n",   ch->Susceptible         );
+        fprintf(fp, "Immune       %d\n", ch->Immune);
     }
 
-  if ( ch->PCData && ch->PCData->RestoreTime )
+    if (ch->Susceptible)
     {
-      fprintf( fp, "Restore_time %ld\n",ch->PCData->RestoreTime );
+        fprintf(fp, "Susceptible  %d\n", ch->Susceptible);
     }
 
-  if ( ch->MentalState != -10 )
+    if (ch->PCData && ch->PCData->RestoreTime)
     {
-      fprintf( fp, "Mentalstate  %d\n",   ch->MentalState        );
+        fprintf(fp, "Restore_time %ld\n", ch->PCData->RestoreTime);
     }
 
-  if ( IsNpc(ch) )
+    if (ch->MentalState != -10)
     {
-      fprintf( fp, "Vnum         %ld\n", ch->Prototype->Vnum    );
-      fprintf( fp, "Mobinvis     %d\n", ch->MobInvis            );
+        fprintf(fp, "Mentalstate  %d\n", ch->MentalState);
     }
-  else
+
+    if (IsNpc(ch))
     {
-      fprintf( fp, "Password     %s~\n", ch->PCData->Password.c_str() );
-      fprintf( fp, "Lastplayed   %d\n", (int)current_time );
+        fprintf(fp, "Vnum         %ld\n", ch->Prototype->Vnum);
+        fprintf(fp, "Mobinvis     %d\n", ch->MobInvis);
+    }
+    else
+    {
+        fprintf(fp, "Password     %s~\n", ch->PCData->Password.c_str());
+        fprintf(fp, "Lastplayed   %d\n", (int)current_time);
 
-      if ( !ch->PCData->BamfIn.empty() )
-	{
-	  fprintf( fp, "Bamfin       %s~\n",      ch->PCData->BamfIn.c_str()      );
-	}
-
-      if ( !ch->PCData->Email.empty() )
-	{
-	  fprintf( fp, "Email       %s~\n",       ch->PCData->Email.c_str()       );
-	}
-
-      if ( !ch->PCData->BamfOut.empty() )
-	{
-	  fprintf( fp, "Bamfout      %s~\n",      ch->PCData->BamfOut.c_str()     );
-	}
-
-      if ( !ch->PCData->Rank.empty() )
-	{
-	  fprintf( fp, "Rank         %s~\n",      ch->PCData->Rank.c_str()        );
-	}
-
-      if ( !ch->PCData->Bestowments.empty() )
-	{
-	  fprintf( fp, "Bestowments  %s~\n",      ch->PCData->Bestowments.c_str() );
-	}
-
-      fprintf( fp, "Title        %s~\n",        ch->PCData->Title.c_str()       );
-
-      if ( !ch->PCData->HomePage.empty() )
-	{
-	  fprintf( fp, "Homepage     %s~\n",      ch->PCData->HomePage.c_str()    );
-	}
-
-      if ( !ch->PCData->Bio.empty() )
-	{
-	  fprintf( fp, "Bio          %s~\n",      ch->PCData->Bio.c_str()         );
-	}
-
-      if ( !ch->PCData->AuthedBy.empty() )
-	{
-	  fprintf( fp, "AuthedBy     %s~\n",      ch->PCData->AuthedBy.c_str()   );
-	}
-
-      if ( ch->PCData->MinSnoop )
-	{
-	  fprintf( fp, "Minsnoop     %d\n",       ch->PCData->MinSnoop   );
-	}
-
-      if ( !ch->PCData->Prompt.empty() )
-	{
-	  fprintf( fp, "Prompt       %s~\n",      ch->PCData->Prompt.c_str()      );
-	}
-
-      for(auto alias : ch->PCData->Aliases())
+        if (!ch->PCData->BamfIn.empty())
         {
-          if(alias->Name.empty() || alias->Command.empty())
-	    {
-	      continue;
-	    }
-
-          fprintf( fp, "Alias        %s~ %s~\n", alias->Name.c_str(), alias->Command.c_str() );
+            fprintf(fp, "Bamfin       %s~\n", ch->PCData->BamfIn.c_str());
         }
 
-      fprintf( fp, "Addiction   ");
-
-      for ( drug = 0 ; drug <=9 ; drug++ )
-	{
-	  fprintf( fp, " %d",     ch->PCData->Addiction[drug] );
-	}
-
-      fprintf( fp, "\n");
-      fprintf( fp, "Druglevel   ");
-
-      for ( drug = 0 ; drug < 10 ; drug++ )
-	{
-	  fprintf( fp, " %d",     ch->PCData->DrugLevel[drug] );
-	}
-
-      fprintf( fp, "\n");
-
-      if ( ch->PCData->WantedOn.any() )
-	{
-	  fprintf( fp, "Wanted       %d\n",
-                   static_cast<int>( ch->PCData->WantedOn.to_ulong() ) );
-	}
-
-      if ( IsImmortal( ch ) || ch->PCData->Build.Area )
+        if (!ch->PCData->Email.empty())
         {
-          fprintf( fp, "WizInvis     %d\n", ch->PCData->WizInvis );
-
-          if ( ch->PCData->Build.VnumRanges.Room.First && ch->PCData->Build.VnumRanges.Room.Last )
-	    {
-	      fprintf( fp, "RoomRange    %ld %ld\n", ch->PCData->Build.VnumRanges.Room.First,
-		       ch->PCData->Build.VnumRanges.Room.Last );
-	    }
-
-          if ( ch->PCData->Build.VnumRanges.Object.First && ch->PCData->Build.VnumRanges.Object.Last )
-	    {
-	      fprintf( fp, "ObjRange     %ld %ld\n", ch->PCData->Build.VnumRanges.Object.First,
-		       ch->PCData->Build.VnumRanges.Object.Last );
-	    }
-
-          if ( ch->PCData->Build.VnumRanges.Mob.First && ch->PCData->Build.VnumRanges.Mob.Last )
-	    {
-	      fprintf( fp, "MobRange     %ld %ld\n", ch->PCData->Build.VnumRanges.Mob.First,
-		       ch->PCData->Build.VnumRanges.Mob.Last );
-	    }
+            fprintf(fp, "Email       %s~\n", ch->PCData->Email.c_str());
         }
 
-      if ( ch->PCData->ClanInfo.Clan != nullptr )
-	{
-	  fprintf( fp, "Clan         %s~\n",      ch->PCData->ClanInfo.Clan->Name.c_str()   );
-	}
-
-      fprintf( fp, "Flags        %d\n", static_cast<int>( ch->PCData->Flags.to_ulong() ) );
-
-      if ( ch->PCData->ReleaseDate > current_time )
-	{
-	  fprintf( fp, "Helled       %d %s~\n",
-		   (int)ch->PCData->ReleaseDate, ch->PCData->HelledBy.c_str() );
-	}
-
-      if ( ch->PCData->PKills )
-	{
-	  fprintf( fp, "PKills       %d\n",       ch->PCData->PKills      );
-	}
-
-      if ( ch->PCData->PDeaths )
-	{
-	  fprintf( fp, "PDeaths      %d\n",       ch->PCData->PDeaths     );
-	}
-
-      if ( !ch->PCData->AliasFocus.empty() )
-	{
-	  fprintf( fp, "Targ %s~\n",      ch->PCData->AliasFocus.c_str()      );
-	}
-
-      if ( GetTimer( ch , TIMER_PKILLED)
-           && ( GetTimer( ch , TIMER_PKILLED) > 0 ) )
-	{
-	  fprintf( fp, "PTimer       %d\n",     GetTimer(ch, TIMER_PKILLED));
-	}
-
-      fprintf( fp, "MKills       %d\n", ch->PCData->MKills      );
-      fprintf( fp, "MDeaths      %d\n", ch->PCData->MDeaths     );
-
-      if ( ch->PCData->IllegalPk )
-	{
-	  fprintf( fp, "IllegalPK    %d\n",       ch->PCData->IllegalPk  );
-	}
-
-      fprintf( fp, "AttrPerm     %d %d %d %d %d %d %d\n",
-               ch->PermStats.Str,
-               ch->PermStats.Int,
-               ch->PermStats.Wis,
-               ch->PermStats.Dex,
-               ch->PermStats.Con,
-               ch->PermStats.Cha,
-               ch->PermStats.Lck );
-
-      fprintf( fp, "AttrMod      %d %d %d %d %d %d %d\n",
-               ch->StatMods.Str,
-               ch->StatMods.Int,
-               ch->StatMods.Wis,
-               ch->StatMods.Dex,
-               ch->StatMods.Con,
-               ch->StatMods.Cha,
-               ch->StatMods.Lck );
-
-      fprintf( fp, "Condition    %d %d %d %d\n",
-               ch->PCData->Condition[0],
-               ch->PCData->Condition[1],
-               ch->PCData->Condition[2],
-               ch->PCData->Condition[3] );
-
-      if ( ch->Desc && !ch->Desc->Remote.Hostname.empty() )
-	{
-	  fprintf( fp, "Site         %s\n", ch->Desc->Remote.Hostname.c_str() );
-	}
-      else
-	{
-	  fprintf( fp, "Site         (Link-Dead)\n" );
-	}
-
-      for ( sn = 1; sn < TopSN; sn++ )
+        if (!ch->PCData->BamfOut.empty())
         {
-          if ( !SkillTable[sn]->Name.empty() && ch->PCData->Learned[sn] > 0 )
-	    {
-	      switch( SkillTable[sn]->Type )
-		{
-		default:
-		  fprintf( fp, "Skill        %d '%s'\n",
-			   ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str() );
-		  break;
+            fprintf(fp, "Bamfout      %s~\n", ch->PCData->BamfOut.c_str());
+        }
 
-		case SKILL_SPELL:
-		  fprintf( fp, "Spell        %d '%s'\n",
-			   ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str() );
-		  break;
+        if (!ch->PCData->Rank.empty())
+        {
+            fprintf(fp, "Rank         %s~\n", ch->PCData->Rank.c_str());
+        }
 
-		case SKILL_WEAPON:
-		  fprintf( fp, "Weapon       %d '%s'\n",
-			   ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str() );
-		  break;
+        if (!ch->PCData->Bestowments.empty())
+        {
+            fprintf(fp, "Bestowments  %s~\n", ch->PCData->Bestowments.c_str());
+        }
 
-		case SKILL_TONGUE:
-		  fprintf( fp, "Tongue       %d '%s'\n",
-			   ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str() );
-		  break;
-		}
-	    }
+        fprintf(fp, "Title        %s~\n", ch->PCData->Title.c_str());
+
+        if (!ch->PCData->HomePage.empty())
+        {
+            fprintf(fp, "Homepage     %s~\n", ch->PCData->HomePage.c_str());
+        }
+
+        if (!ch->PCData->Bio.empty())
+        {
+            fprintf(fp, "Bio          %s~\n", ch->PCData->Bio.c_str());
+        }
+
+        if (!ch->PCData->AuthedBy.empty())
+        {
+            fprintf(fp, "AuthedBy     %s~\n", ch->PCData->AuthedBy.c_str());
+        }
+
+        if (ch->PCData->MinSnoop)
+        {
+            fprintf(fp, "Minsnoop     %d\n", ch->PCData->MinSnoop);
+        }
+
+        if (!ch->PCData->Prompt.empty())
+        {
+            fprintf(fp, "Prompt       %s~\n", ch->PCData->Prompt.c_str());
+        }
+
+        for (auto alias : ch->PCData->Aliases())
+        {
+            if (alias->Name.empty() || alias->Command.empty())
+            {
+                continue;
+            }
+
+            fprintf(fp, "Alias        %s~ %s~\n", alias->Name.c_str(), alias->Command.c_str());
+        }
+
+        fprintf(fp, "Addiction   ");
+
+        for (drug = 0; drug <= 9; drug++)
+        {
+            fprintf(fp, " %d", ch->PCData->Addiction[drug]);
+        }
+
+        fprintf(fp, "\n");
+        fprintf(fp, "Druglevel   ");
+
+        for (drug = 0; drug < 10; drug++)
+        {
+            fprintf(fp, " %d", ch->PCData->DrugLevel[drug]);
+        }
+
+        fprintf(fp, "\n");
+
+        if (ch->PCData->WantedOn.any())
+        {
+            fprintf(fp, "Wanted       %d\n",
+                static_cast<int>(ch->PCData->WantedOn.to_ulong()));
+        }
+
+        if (IsImmortal(ch) || ch->PCData->Build.Area)
+        {
+            fprintf(fp, "WizInvis     %d\n", ch->PCData->WizInvis);
+
+            if (ch->PCData->Build.VnumRanges.Room.First && ch->PCData->Build.VnumRanges.Room.Last)
+            {
+                fprintf(fp, "RoomRange    %ld %ld\n", ch->PCData->Build.VnumRanges.Room.First,
+                    ch->PCData->Build.VnumRanges.Room.Last);
+            }
+
+            if (ch->PCData->Build.VnumRanges.Object.First && ch->PCData->Build.VnumRanges.Object.Last)
+            {
+                fprintf(fp, "ObjRange     %ld %ld\n", ch->PCData->Build.VnumRanges.Object.First,
+                    ch->PCData->Build.VnumRanges.Object.Last);
+            }
+
+            if (ch->PCData->Build.VnumRanges.Mob.First && ch->PCData->Build.VnumRanges.Mob.Last)
+            {
+                fprintf(fp, "MobRange     %ld %ld\n", ch->PCData->Build.VnumRanges.Mob.First,
+                    ch->PCData->Build.VnumRanges.Mob.Last);
+            }
+        }
+
+        if (ch->PCData->ClanInfo.Clan != nullptr)
+        {
+            fprintf(fp, "Clan         %s~\n", ch->PCData->ClanInfo.Clan->Name.c_str());
+        }
+
+        fprintf(fp, "Flags        %d\n", static_cast<int>(ch->PCData->Flags.to_ulong()));
+
+        if (ch->PCData->ReleaseDate > current_time)
+        {
+            fprintf(fp, "Helled       %d %s~\n",
+                (int)ch->PCData->ReleaseDate, ch->PCData->HelledBy.c_str());
+        }
+
+        if (ch->PCData->PKills)
+        {
+            fprintf(fp, "PKills       %d\n", ch->PCData->PKills);
+        }
+
+        if (ch->PCData->PDeaths)
+        {
+            fprintf(fp, "PDeaths      %d\n", ch->PCData->PDeaths);
+        }
+
+        if (!ch->PCData->AliasFocus.empty())
+        {
+            fprintf(fp, "Targ %s~\n", ch->PCData->AliasFocus.c_str());
+        }
+
+        if (GetTimer(ch, TIMER_PKILLED)
+            && (GetTimer(ch, TIMER_PKILLED) > 0))
+        {
+            fprintf(fp, "PTimer       %d\n", GetTimer(ch, TIMER_PKILLED));
+        }
+
+        fprintf(fp, "MKills       %d\n", ch->PCData->MKills);
+        fprintf(fp, "MDeaths      %d\n", ch->PCData->MDeaths);
+
+        if (ch->PCData->IllegalPk)
+        {
+            fprintf(fp, "IllegalPK    %d\n", ch->PCData->IllegalPk);
+        }
+
+        fprintf(fp, "AttrPerm     %d %d %d %d %d %d %d\n",
+            ch->PermStats.Str,
+            ch->PermStats.Int,
+            ch->PermStats.Wis,
+            ch->PermStats.Dex,
+            ch->PermStats.Con,
+            ch->PermStats.Cha,
+            ch->PermStats.Lck);
+
+        fprintf(fp, "AttrMod      %d %d %d %d %d %d %d\n",
+            ch->StatMods.Str,
+            ch->StatMods.Int,
+            ch->StatMods.Wis,
+            ch->StatMods.Dex,
+            ch->StatMods.Con,
+            ch->StatMods.Cha,
+            ch->StatMods.Lck);
+
+        fprintf(fp, "Condition    %d %d %d %d\n",
+            ch->PCData->Condition[0],
+            ch->PCData->Condition[1],
+            ch->PCData->Condition[2],
+            ch->PCData->Condition[3]);
+
+        if (ch->Desc && !ch->Desc->Remote.Hostname.empty())
+        {
+            fprintf(fp, "Site         %s\n", ch->Desc->Remote.Hostname.c_str());
+        }
+        else
+        {
+            fprintf(fp, "Site         (Link-Dead)\n");
+        }
+
+        for (sn = 1; sn < TopSN; sn++)
+        {
+            if (!SkillTable[sn]->Name.empty() && ch->PCData->Learned[sn] > 0)
+            {
+                switch (SkillTable[sn]->Type)
+                {
+                default:
+                    fprintf(fp, "Skill        %d '%s'\n",
+                        ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str());
+                    break;
+
+                case SKILL_SPELL:
+                    fprintf(fp, "Spell        %d '%s'\n",
+                        ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str());
+                    break;
+
+                case SKILL_WEAPON:
+                    fprintf(fp, "Weapon       %d '%s'\n",
+                        ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str());
+                    break;
+
+                case SKILL_TONGUE:
+                    fprintf(fp, "Tongue       %d '%s'\n",
+                        ch->PCData->Learned[sn], SkillTable[sn]->Name.c_str());
+                    break;
+                }
+            }
         }
     }
 
-  for(auto paf : ch->Affects())
+    for (auto paf : ch->Affects())
     {
-      if ( paf->Type >= 0 && (skill=GetSkill(paf->Type)) == NULL )
-	{
-	  continue;
-	}
+        if (paf->Type >= 0 && (skill = GetSkill(paf->Type)) == NULL)
+        {
+            continue;
+        }
 
-      if ( paf->Type >= 0 && paf->Type < TYPE_PERSONAL )
-	{
-	  fprintf( fp, "AffectData   '%s' %3d %3d %3d %10d\n",
-		   skill->Name.c_str(),
-		   paf->Duration,
-		   paf->Modifier,
-		   paf->Location,
-		   paf->AffectedBy
-		   );
-	}
-      else
-	{
-	  fprintf( fp, "Affect       %3d %3d %3d %3d %10d\n",
-		   paf->Type,
-		   paf->Duration,
-		   paf->Modifier,
-		   paf->Location,
-		   paf->AffectedBy
-		   );
-	}
+        if (paf->Type >= 0 && paf->Type < TYPE_PERSONAL)
+        {
+            fprintf(fp, "AffectData   '%s' %3d %3d %3d %10d\n",
+                skill->Name.c_str(),
+                paf->Duration,
+                paf->Modifier,
+                paf->Location,
+                paf->AffectedBy
+            );
+        }
+        else
+        {
+            fprintf(fp, "Affect       %3d %3d %3d %3d %10d\n",
+                paf->Type,
+                paf->Duration,
+                paf->Modifier,
+                paf->Location,
+                paf->AffectedBy
+            );
+        }
     }
 
-  for_each(ch->PCData->Killed.begin(), ch->PCData->Killed.end(),
-           [fp](auto killed) { fprintf( fp, "Killed       %ld %d\n",
-                                        killed.Vnum,
-                                        killed.Count ); });
+    for_each(ch->PCData->Killed.begin(), ch->PCData->Killed.end(),
+        [fp](auto killed) { fprintf(fp, "Killed       %ld %d\n",
+            killed.Vnum,
+            killed.Count); });
 
-  ImcSaveCharacter( ch, fp );
+    ImcSaveCharacter(ch, fp);
 
-  fprintf( fp, "End\n\n" );
+    fprintf(fp, "End\n\n");
 }
 
-static bool HasAnyOvalues( const Object *obj )
+static bool HasAnyOvalues(const Object *obj)
 {
-  int oval = 0;
+    int oval = 0;
 
-  for( oval = 0; oval < MAX_OVAL; ++oval )
+    for (oval = 0; oval < MAX_OVAL; ++oval)
     {
-      if( obj->Value[oval] != 0 )
-	{
-	  return true;
-	}
+        if (obj->Value[oval] != 0)
+        {
+            return true;
+        }
     }
 
-  return false;
+    return false;
 }
 
 /*
  * Write an object and its contents.
  */
-void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, short os_type )
+void WriteObject(const Character *ch, const Object *obj, FILE *fp, int iNest, short os_type)
 {
-  short wear = 0, wear_loc = 0, x = 0;
+    short wear = 0, wear_loc = 0, x = 0;
 
-  if ( iNest >= MAX_NEST )
+    if (iNest >= MAX_NEST)
     {
-      Log->Bug( "WriteObject: iNest hit MAX_NEST %d", iNest );
-      return;
+        Log->Bug("WriteObject: iNest hit MAX_NEST %d", iNest);
+        return;
     }
 
-  /*
-   * Slick recursion to write lists backwards,
-   *   so loading them will load in forwards order.
-   */
-  for(const Object *content : Reverse(obj->Objects()))
+    /*
+     * Slick recursion to write lists backwards,
+     *   so loading them will load in forwards order.
+     */
+    for (const Object *content : Reverse(obj->Objects()))
     {
-      WriteObject( ch, content, fp, iNest, OS_CARRY );
+        WriteObject(ch, content, fp, iNest, OS_CARRY);
     }
 
-  /*
-   * Castrate storage characters.
-   */
-  if ( obj->ItemType == ITEM_KEY && !IsBitSet( obj->Flags, ITEM_CLANOBJECT ))
+    /*
+     * Castrate storage characters.
+     */
+    if (obj->ItemType == ITEM_KEY && !IsBitSet(obj->Flags, ITEM_CLANOBJECT))
     {
-      return;
+        return;
     }
 
-  /*
-   * Catch deleted objects                                      -Thoric
-   */
-  if ( IsObjectExtracted(obj) )
+    /*
+     * Catch deleted objects                                      -Thoric
+     */
+    if (IsObjectExtracted(obj))
     {
-      return;
+        return;
     }
 
-  /*
-   * Do NOT save prototype items!                               -Thoric
-   */
-  if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
+    /*
+     * Do NOT save prototype items!                               -Thoric
+     */
+    if (IsBitSet(obj->Flags, ITEM_PROTOTYPE))
     {
-      return;
+        return;
     }
 
-  /* Corpse saving. -- Altrag */
-  fprintf( fp, (os_type == OS_CORPSE ? "#CORPSE\n" : "#OBJECT\n") );
+    /* Corpse saving. -- Altrag */
+    fprintf(fp, (os_type == OS_CORPSE ? "#CORPSE\n" : "#OBJECT\n"));
 
-  if ( iNest )
+    if (iNest)
     {
-      fprintf( fp, "Nest         %d\n",   iNest                );
+        fprintf(fp, "Nest         %d\n", iNest);
     }
 
-  if ( obj->Count > 1 )
+    if (obj->Count > 1)
     {
-      fprintf( fp, "Count        %d\n",   obj->Count           );
+        fprintf(fp, "Count        %d\n", obj->Count);
     }
 
-  if ( StrCmp( obj->Name, obj->Prototype->Name ) )
+    if (StrCmp(obj->Name, obj->Prototype->Name))
     {
-      fprintf( fp, "Name         %s~\n",  obj->Name.c_str()            );
+        fprintf(fp, "Name         %s~\n", obj->Name.c_str());
     }
 
-  if ( StrCmp( obj->ShortDescr, obj->Prototype->ShortDescr ) )
+    if (StrCmp(obj->ShortDescr, obj->Prototype->ShortDescr))
     {
-      fprintf( fp, "ShortDescr   %s~\n",  obj->ShortDescr.c_str()     );
+        fprintf(fp, "ShortDescr   %s~\n", obj->ShortDescr.c_str());
     }
 
-  if ( StrCmp( obj->Description, obj->Prototype->Description ) )
+    if (StrCmp(obj->Description, obj->Prototype->Description))
     {
-      fprintf( fp, "Description  %s~\n",  obj->Description.c_str()     );
+        fprintf(fp, "Description  %s~\n", obj->Description.c_str());
     }
 
-  if ( StrCmp( obj->ActionDescription, obj->Prototype->ActionDescription ) )
+    if (StrCmp(obj->ActionDescription, obj->Prototype->ActionDescription))
     {
-      fprintf( fp, "ActionDesc   %s~\n",  obj->ActionDescription.c_str()     );
+        fprintf(fp, "ActionDesc   %s~\n", obj->ActionDescription.c_str());
     }
 
-  fprintf( fp, "Vnum         %ld\n",     obj->Prototype->Vnum );
+    fprintf(fp, "Vnum         %ld\n", obj->Prototype->Vnum);
 
-  if ( os_type == OS_CORPSE && obj->InRoom )
+    if (os_type == OS_CORPSE && obj->InRoom)
     {
-      fprintf( fp, "Room         %ld\n",   obj->InRoom->Vnum  );
+        fprintf(fp, "Room         %ld\n", obj->InRoom->Vnum);
     }
 
-  if ( obj->Flags != obj->Prototype->Flags )
+    if (obj->Flags != obj->Prototype->Flags)
     {
-      fprintf( fp, "ExtraFlags   %d\n",   obj->Flags     );
+        fprintf(fp, "ExtraFlags   %d\n", obj->Flags);
     }
 
-  if ( obj->WearFlags != obj->Prototype->WearFlags )
+    if (obj->WearFlags != obj->Prototype->WearFlags)
     {
-      fprintf( fp, "WearFlags    %d\n",   obj->WearFlags      );
+        fprintf(fp, "WearFlags    %d\n", obj->WearFlags);
     }
 
-  wear_loc = -1;
+    wear_loc = -1;
 
-  for ( wear = 0; wear < MAX_WEAR; wear++ )
+    for (wear = 0; wear < MAX_WEAR; wear++)
     {
-      for ( x = 0; x < MAX_LAYERS; x++ )
-	{
-	  if ( obj == save_equipment[wear][x] )
-	    {
-	      wear_loc = wear;
-	      break;
-	    }
-	  else if ( !save_equipment[wear][x] )
-	    {
-	      break;
-	    }
-	}
+        for (x = 0; x < MAX_LAYERS; x++)
+        {
+            if (obj == save_equipment[wear][x])
+            {
+                wear_loc = wear;
+                break;
+            }
+            else if (!save_equipment[wear][x])
+            {
+                break;
+            }
+        }
     }
 
-  if ( wear_loc != -1 )
+    if (wear_loc != -1)
     {
-      fprintf( fp, "WearLoc      %d\n",   wear_loc             );
+        fprintf(fp, "WearLoc      %d\n", wear_loc);
     }
 
-  if ( obj->ItemType != obj->Prototype->ItemType )
+    if (obj->ItemType != obj->Prototype->ItemType)
     {
-      fprintf( fp, "ItemType     %d\n",   obj->ItemType       );
+        fprintf(fp, "ItemType     %d\n", obj->ItemType);
     }
 
-  if ( obj->Weight != obj->Prototype->Weight )
+    if (obj->Weight != obj->Prototype->Weight)
     {
-      fprintf( fp, "Weight       %d\n",   obj->Weight                  );
+        fprintf(fp, "Weight       %d\n", obj->Weight);
     }
 
-  if ( obj->Level )
+    if (obj->Level)
     {
-      fprintf( fp, "Level        %d\n",   obj->Level                   );
+        fprintf(fp, "Level        %d\n", obj->Level);
     }
 
-  if ( obj->Timer )
+    if (obj->Timer)
     {
-      fprintf( fp, "Timer        %d\n",   obj->Timer                   );
+        fprintf(fp, "Timer        %d\n", obj->Timer);
     }
 
-  if ( obj->Cost != obj->Prototype->Cost )
+    if (obj->Cost != obj->Prototype->Cost)
     {
-      fprintf( fp, "Cost         %d\n",   obj->Cost                    );
+        fprintf(fp, "Cost         %d\n", obj->Cost);
     }
 
-  if( HasAnyOvalues( obj ) )
+    if (HasAnyOvalues(obj))
     {
-      fprintf( fp, "Values       %d %d %d %d %d %d\n",
-	       obj->Value[0], obj->Value[1], obj->Value[2],
-	       obj->Value[3], obj->Value[4], obj->Value[5]     );
+        fprintf(fp, "Values       %d %d %d %d %d %d\n",
+            obj->Value[0], obj->Value[1], obj->Value[2],
+            obj->Value[3], obj->Value[4], obj->Value[5]);
     }
 
-  switch ( obj->ItemType )
+    switch (obj->ItemType)
     {
     case ITEM_PILL: /* was down there with staff and wand, wrongly - Scryn */
     case ITEM_POTION:
-      if ( IS_VALID_SN(obj->Value[OVAL_PILL_SPELL1]) )
-	{
-	  fprintf( fp, "Spell 1      '%s'\n",
-		   SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name.c_str() );
-	}
+        if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL1]))
+        {
+            fprintf(fp, "Spell 1      '%s'\n",
+                SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name.c_str());
+        }
 
-      if ( IS_VALID_SN(obj->Value[OVAL_PILL_SPELL2]) )
-	{
-	  fprintf( fp, "Spell 2      '%s'\n",
-		   SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name.c_str() );
-	}
+        if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL2]))
+        {
+            fprintf(fp, "Spell 2      '%s'\n",
+                SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name.c_str());
+        }
 
-      if ( IS_VALID_SN(obj->Value[OVAL_PILL_SPELL3]) )
-	{
-	  fprintf( fp, "Spell 3      '%s'\n",
-		   SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name.c_str() );
-	}
-      break;
+        if (IS_VALID_SN(obj->Value[OVAL_PILL_SPELL3]))
+        {
+            fprintf(fp, "Spell 3      '%s'\n",
+                SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name.c_str());
+        }
+        break;
 
     case ITEM_DEVICE:
-      if ( IS_VALID_SN(obj->Value[OVAL_DEVICE_SPELL]) )
-	{
-	  fprintf( fp, "Spell 3      '%s'\n",
-		   SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name.c_str() );
-	}
-      break;
+        if (IS_VALID_SN(obj->Value[OVAL_DEVICE_SPELL]))
+        {
+            fprintf(fp, "Spell 3      '%s'\n",
+                SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name.c_str());
+        }
+        break;
 
     case ITEM_SALVE:
-      if ( IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL1]) )
-	{
-	  fprintf( fp, "Spell 4      '%s'\n",
-		   SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name.c_str() );
-	}
+        if (IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL1]))
+        {
+            fprintf(fp, "Spell 4      '%s'\n",
+                SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name.c_str());
+        }
 
-      if ( IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL2]) )
-	{
-	  fprintf( fp, "Spell 5      '%s'\n",
-		   SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name.c_str() );
-	}
+        if (IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL2]))
+        {
+            fprintf(fp, "Spell 5      '%s'\n",
+                SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name.c_str());
+        }
 
-      break;
+        break;
 
     default:
-      break;
+        break;
     }
 
-  for ( auto paf : obj->Affects() )
+    for (auto paf : obj->Affects())
     {
-      /*
-       * Save extra object affects                              -Thoric
-       */
-      if ( paf->Type < 0 || paf->Type >= TopSN )
+        /*
+         * Save extra object affects                              -Thoric
+         */
+        if (paf->Type < 0 || paf->Type >= TopSN)
         {
-          fprintf( fp, "Affect       %d %d %d %d %d\n",
-                   paf->Type,
-                   paf->Duration,
-                   ((paf->Location == APPLY_WEAPONSPELL
-                     || paf->Location == APPLY_WEARSPELL
-                     || paf->Location == APPLY_REMOVESPELL
-                     || paf->Location == APPLY_STRIPSN)
+            fprintf(fp, "Affect       %d %d %d %d %d\n",
+                paf->Type,
+                paf->Duration,
+                ((paf->Location == APPLY_WEAPONSPELL
+                    || paf->Location == APPLY_WEARSPELL
+                    || paf->Location == APPLY_REMOVESPELL
+                    || paf->Location == APPLY_STRIPSN)
                     && IS_VALID_SN(paf->Modifier))
-                   ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
-                   paf->Location,
-                   paf->AffectedBy
-                   );
+                ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
+                paf->Location,
+                paf->AffectedBy
+            );
         }
-      else
-	{
-	  fprintf( fp, "AffectData   '%s' %d %d %d %d\n",
-		   SkillTable[paf->Type]->Name.c_str(),
-		   paf->Duration,
-		   ((paf->Location == APPLY_WEAPONSPELL
-		     || paf->Location == APPLY_WEARSPELL
-		     || paf->Location == APPLY_REMOVESPELL
-		     || paf->Location == APPLY_STRIPSN)
-		    && IS_VALID_SN(paf->Modifier))
-		   ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
-		   paf->Location,
-		   paf->AffectedBy
-		   );
-	}
+        else
+        {
+            fprintf(fp, "AffectData   '%s' %d %d %d %d\n",
+                SkillTable[paf->Type]->Name.c_str(),
+                paf->Duration,
+                ((paf->Location == APPLY_WEAPONSPELL
+                    || paf->Location == APPLY_WEARSPELL
+                    || paf->Location == APPLY_REMOVESPELL
+                    || paf->Location == APPLY_STRIPSN)
+                    && IS_VALID_SN(paf->Modifier))
+                ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
+                paf->Location,
+                paf->AffectedBy
+            );
+        }
     }
 
-  for(auto ed : obj->ExtraDescriptions())
+    for (auto ed : obj->ExtraDescriptions())
     {
-      fprintf( fp, "ExtraDescr   %s~ %s~\n",
-	       ed->Keyword.c_str(), ed->Description.c_str() );
+        fprintf(fp, "ExtraDescr   %s~ %s~\n",
+            ed->Keyword.c_str(), ed->Description.c_str());
     }
 
-  fprintf( fp, "End\n\n" );
+    fprintf(fp, "End\n\n");
 
-  for(const Object *content : Reverse(obj->Objects()))
+    for (const Object *content : Reverse(obj->Objects()))
     {
-      WriteObject( ch, content, fp, iNest + 1, OS_CARRY );
+        WriteObject(ch, content, fp, iNest + 1, OS_CARRY);
     }
 }
 
-void ReadObject( Character *ch, FILE *fp, short os_type )
+void ReadObject(Character *ch, FILE *fp, short os_type)
 {
-  int iNest = 0;
-  bool fNest = true; /* Yes, these should             */
-  bool fVnum = true; /* indeed be initialized as true */
-  Room *room = NULL;
+    int iNest = 0;
+    bool fNest = true; /* Yes, these should             */
+    bool fVnum = true; /* indeed be initialized as true */
+    Room *room = NULL;
 
-  Object *obj = new Object();
+    Object *obj = new Object();
 
-  for ( ; ; )
+    for (; ; )
     {
-      const char *word = feof( fp ) ? "End" : ReadWord( fp,Log, fBootDb );
-      bool fMatch = false;
+        const char *word = feof(fp) ? "End" : ReadWord(fp, Log, fBootDb);
+        bool fMatch = false;
 
-      switch ( CharToUppercase(word[0]) )
+        switch (CharToUppercase(word[0]))
         {
         case '*':
-          fMatch = true;
-          ReadToEndOfLine( fp,Log, fBootDb );
-          break;
+            fMatch = true;
+            ReadToEndOfLine(fp, Log, fBootDb);
+            break;
 
         case 'A':
-          if ( !StrCmp( word, "Affect" ) || !StrCmp( word, "AffectData" ) )
+            if (!StrCmp(word, "Affect") || !StrCmp(word, "AffectData"))
             {
-              std::shared_ptr<Affect> paf = std::make_shared<Affect>();
-              int pafmod = 0;
+                std::shared_ptr<Affect> paf = std::make_shared<Affect>();
+                int pafmod = 0;
 
-              if ( !StrCmp( word, "Affect" ) )
+                if (!StrCmp(word, "Affect"))
                 {
-                  paf->Type = ReadInt( fp,Log, fBootDb );
+                    paf->Type = ReadInt(fp, Log, fBootDb);
                 }
-              else
+                else
                 {
-                  int sn = LookupSkill( ReadWord( fp,Log, fBootDb ) );
+                    int sn = LookupSkill(ReadWord(fp, Log, fBootDb));
 
-                  if ( sn < 0 )
-		    {
-		      Log->Bug( "%s (%d): unknown skill sn %d.",
-			   __FUNCTION__, __LINE__, sn );
-		    }
-                  else
-		    {
-		      paf->Type = sn;
-		    }
+                    if (sn < 0)
+                    {
+                        Log->Bug("%s (%d): unknown skill sn %d.",
+                            __FUNCTION__, __LINE__, sn);
+                    }
+                    else
+                    {
+                        paf->Type = sn;
+                    }
                 }
 
-              paf->Duration     = ReadInt( fp,Log, fBootDb );
-              pafmod            = ReadInt( fp,Log, fBootDb );
-              paf->Location     = ReadInt( fp,Log, fBootDb );
-              paf->AffectedBy   = ReadInt( fp,Log, fBootDb );
+                paf->Duration = ReadInt(fp, Log, fBootDb);
+                pafmod = ReadInt(fp, Log, fBootDb);
+                paf->Location = ReadInt(fp, Log, fBootDb);
+                paf->AffectedBy = ReadInt(fp, Log, fBootDb);
 
-              if ( paf->Location == APPLY_WEAPONSPELL
-                   || paf->Location == APPLY_WEARSPELL
-                   || paf->Location == APPLY_REMOVESPELL )
-		{
-		  paf->Modifier = SkillNumberFromSlot( pafmod );
-		}
-              else
-		{
-		  paf->Modifier = pafmod;
-		}
+                if (paf->Location == APPLY_WEAPONSPELL
+                    || paf->Location == APPLY_WEARSPELL
+                    || paf->Location == APPLY_REMOVESPELL)
+                {
+                    paf->Modifier = SkillNumberFromSlot(pafmod);
+                }
+                else
+                {
+                    paf->Modifier = pafmod;
+                }
 
-              obj->Add(paf);
-              fMatch                            = true;
-              break;
+                obj->Add(paf);
+                fMatch = true;
+                break;
             }
 
-          KEY( "Actiondesc",    obj->ActionDescription,       ReadStringToTilde( fp,Log, fBootDb ) );
-          break;
+            KEY("Actiondesc", obj->ActionDescription, ReadStringToTilde(fp, Log, fBootDb));
+            break;
 
         case 'C':
-          KEY( "Cost",  obj->Cost,              ReadInt( fp,Log, fBootDb ) );
-          KEY( "Count", obj->Count,             ReadInt( fp,Log, fBootDb ) );
-          break;
+            KEY("Cost", obj->Cost, ReadInt(fp, Log, fBootDb));
+            KEY("Count", obj->Count, ReadInt(fp, Log, fBootDb));
+            break;
 
         case 'D':
-          KEY( "Description",   obj->Description,       ReadStringToTilde( fp,Log, fBootDb ) );
-          break;
+            KEY("Description", obj->Description, ReadStringToTilde(fp, Log, fBootDb));
+            break;
 
         case 'E':
-          KEY( "ExtraFlags",    obj->Flags,       ReadInt( fp,Log, fBootDb ) );
+            KEY("ExtraFlags", obj->Flags, ReadInt(fp, Log, fBootDb));
 
-          if ( !StrCmp( word, "ExtraDescr" ) )
+            if (!StrCmp(word, "ExtraDescr"))
             {
-              auto ed = std::make_shared<ExtraDescription>();
+                auto ed = std::make_shared<ExtraDescription>();
 
-              ed->Keyword = ReadStringToTilde( fp,Log, fBootDb );
-              ed->Description = ReadStringToTilde( fp,Log, fBootDb );
-              obj->Add(ed);
-              fMatch = true;
+                ed->Keyword = ReadStringToTilde(fp, Log, fBootDb);
+                ed->Description = ReadStringToTilde(fp, Log, fBootDb);
+                obj->Add(ed);
+                fMatch = true;
             }
 
-          if ( !StrCmp( word, "End" ) )
+            if (!StrCmp(word, "End"))
             {
-              if ( !fNest || !fVnum )
+                if (!fNest || !fVnum)
                 {
-                  Log->Bug( "Fread_obj: incomplete object." );
-                  delete obj;
-                  return;
+                    Log->Bug("Fread_obj: incomplete object.");
+                    delete obj;
+                    return;
                 }
-              else
+                else
                 {
-                  short wear_loc = obj->WearLoc;
+                    short wear_loc = obj->WearLoc;
 
-                  if ( obj->Name.empty() )
-                    obj->Name = obj->Prototype->Name;
+                    if (obj->Name.empty())
+                        obj->Name = obj->Prototype->Name;
 
-                  if ( obj->Description.empty() )
-                    obj->Description = obj->Prototype->Description;
+                    if (obj->Description.empty())
+                        obj->Description = obj->Prototype->Description;
 
-                  if ( obj->ShortDescr.empty() )
-                    obj->ShortDescr = obj->Prototype->ShortDescr;
+                    if (obj->ShortDescr.empty())
+                        obj->ShortDescr = obj->Prototype->ShortDescr;
 
-                  if ( obj->ActionDescription.empty() )
-                    obj->ActionDescription = obj->Prototype->ActionDescription;
+                    if (obj->ActionDescription.empty())
+                        obj->ActionDescription = obj->Prototype->ActionDescription;
 
-                  Objects->Add(obj);
-                  obj->Prototype->Count += obj->Count;
+                    Objects->Add(obj);
+                    obj->Prototype->Count += obj->Count;
 
-                  if ( !obj->Serial )
+                    if (!obj->Serial)
                     {
-                      cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
-                      obj->Serial = obj->Prototype->Serial = cur_obj_serial;
+                        cur_obj_serial = umax((cur_obj_serial + 1) & (BV30 - 1), 1);
+                        obj->Serial = obj->Prototype->Serial = cur_obj_serial;
                     }
 
-                  if ( fNest )
-                    rgObjNest[iNest] = obj;
+                    if (fNest)
+                        rgObjNest[iNest] = obj;
 
-                  numobjsloaded += obj->Count;
-                  ++physicalobjects;
+                    numobjsloaded += obj->Count;
+                    ++physicalobjects;
 
-                  if ( file_ver > 1 || obj->WearLoc < -1
-                       || obj->WearLoc >= MAX_WEAR )
-		    {
-		      obj->WearLoc = WEAR_NONE;
-		    }
-
-                  /* Corpse saving. -- Altrag */
-                  if ( os_type == OS_CORPSE )
+                    if (file_ver > 1 || obj->WearLoc < -1
+                        || obj->WearLoc >= MAX_WEAR)
                     {
-                      if ( !room )
+                        obj->WearLoc = WEAR_NONE;
+                    }
+
+                    /* Corpse saving. -- Altrag */
+                    if (os_type == OS_CORPSE)
+                    {
+                        if (!room)
                         {
-                          Log->Bug("Fread_obj: Corpse without room");
-                          room = GetRoom(ROOM_VNUM_LIMBO);
+                            Log->Bug("Fread_obj: Corpse without room");
+                            room = GetRoom(ROOM_VNUM_LIMBO);
                         }
 
-                      obj = ObjectToRoom( obj, room );
+                        obj = ObjectToRoom(obj, room);
                     }
-                  else if ( iNest == 0 || rgObjNest[iNest] == NULL )
+                    else if (iNest == 0 || rgObjNest[iNest] == NULL)
                     {
-                      int slot = 0;
-                      bool reslot = false;
+                        int slot = 0;
+                        bool reslot = false;
 
-                      if ( file_ver > 1
-                           && wear_loc > -1
-                           && wear_loc < MAX_WEAR )
+                        if (file_ver > 1
+                            && wear_loc > -1
+                            && wear_loc < MAX_WEAR)
                         {
-                          int x = 0;
+                            int x = 0;
 
-                          for ( x = 0; x < MAX_LAYERS; x++ )
-			    {
-			      if ( !save_equipment[wear_loc][x] )
-				{
-				  save_equipment[wear_loc][x] = obj;
-				  slot = x;
-				  reslot = true;
-				  break;
-				}
-			    }
+                            for (x = 0; x < MAX_LAYERS; x++)
+                            {
+                                if (!save_equipment[wear_loc][x])
+                                {
+                                    save_equipment[wear_loc][x] = obj;
+                                    slot = x;
+                                    reslot = true;
+                                    break;
+                                }
+                            }
 
-                          if ( x == MAX_LAYERS )
-			    {
-			      Log->Bug( "Fread_obj: too many layers %d", wear_loc );
-			    }
+                            if (x == MAX_LAYERS)
+                            {
+                                Log->Bug("Fread_obj: too many layers %d", wear_loc);
+                            }
                         }
 
-                      obj = ObjectToCharacter( obj, ch );
+                        obj = ObjectToCharacter(obj, ch);
 
-                      if ( reslot )
-			{
-			  save_equipment[wear_loc][slot] = obj;
-			}
-                    }
-                  else
-                    {
-                      if ( rgObjNest[iNest-1] )
+                        if (reslot)
                         {
-                          SeparateOneObjectFromGroup( rgObjNest[iNest-1] );
-                          obj = ObjectToObject( obj, rgObjNest[iNest-1] );
+                            save_equipment[wear_loc][slot] = obj;
                         }
-                      else
-			{
-			  Log->Bug( "Fread_obj: nest layer missing %d", iNest-1 );
-			}
+                    }
+                    else
+                    {
+                        if (rgObjNest[iNest - 1])
+                        {
+                            SeparateOneObjectFromGroup(rgObjNest[iNest - 1]);
+                            obj = ObjectToObject(obj, rgObjNest[iNest - 1]);
+                        }
+                        else
+                        {
+                            Log->Bug("Fread_obj: nest layer missing %d", iNest - 1);
+                        }
                     }
 
-                  if ( fNest )
-		    {
-		      rgObjNest[iNest] = obj;
-		    }
+                    if (fNest)
+                    {
+                        rgObjNest[iNest] = obj;
+                    }
 
-                  return;
+                    return;
                 }
             }
-          break;
+            break;
 
         case 'I':
-          KEY( "ItemType",      obj->ItemType,         (ItemTypes)ReadInt( fp,Log, fBootDb ) );
-          break;
+            KEY("ItemType", obj->ItemType, (ItemTypes)ReadInt(fp, Log, fBootDb));
+            break;
 
         case 'L':
-          KEY( "Level", obj->Level,             ReadInt( fp,Log, fBootDb ) );
-          break;
+            KEY("Level", obj->Level, ReadInt(fp, Log, fBootDb));
+            break;
 
         case 'N':
-          KEY( "Name",  obj->Name,              ReadStringToTilde( fp,Log, fBootDb ) );
+            KEY("Name", obj->Name, ReadStringToTilde(fp, Log, fBootDb));
 
-          if ( !StrCmp( word, "Nest" ) )
+            if (!StrCmp(word, "Nest"))
             {
-              iNest = ReadInt( fp,Log, fBootDb );
+                iNest = ReadInt(fp, Log, fBootDb);
 
-              if ( iNest < 0 || iNest >= MAX_NEST )
+                if (iNest < 0 || iNest >= MAX_NEST)
                 {
-                  Log->Bug( "Fread_obj: bad nest %d.", iNest );
-                  iNest = 0;
-                  fNest = false;
+                    Log->Bug("Fread_obj: bad nest %d.", iNest);
+                    iNest = 0;
+                    fNest = false;
                 }
 
-              fMatch = true;
+                fMatch = true;
             }
-          break;
+            break;
 
         case 'R':
-          KEY( "Room", room, GetRoom(ReadInt(fp,Log, fBootDb)) );
+            KEY("Room", room, GetRoom(ReadInt(fp, Log, fBootDb)));
 
         case 'S':
-          KEY( "ShortDescr",    obj->ShortDescr,       ReadStringToTilde( fp,Log, fBootDb ) );
+            KEY("ShortDescr", obj->ShortDescr, ReadStringToTilde(fp, Log, fBootDb));
 
-          if ( !StrCmp( word, "Spell" ) )
+            if (!StrCmp(word, "Spell"))
             {
-              int iValue = ReadInt( fp,Log, fBootDb );
-              int sn     = LookupSkill( ReadWord( fp,Log, fBootDb ) );
+                int iValue = ReadInt(fp, Log, fBootDb);
+                int sn = LookupSkill(ReadWord(fp, Log, fBootDb));
 
-              if ( iValue < 0 || iValue > 5 )
-		{
-		  Log->Bug( "Fread_obj: bad iValue %d.", iValue );
-		}
-              else if ( sn < 0 )
-		{
-		  Log->Bug( "%s (%d): unknown skill sn %d.",
-		       __FUNCTION__, __LINE__, sn );
-		}
-              else
-		{
-		  obj->Value[iValue] = sn;
-		}
+                if (iValue < 0 || iValue > 5)
+                {
+                    Log->Bug("Fread_obj: bad iValue %d.", iValue);
+                }
+                else if (sn < 0)
+                {
+                    Log->Bug("%s (%d): unknown skill sn %d.",
+                        __FUNCTION__, __LINE__, sn);
+                }
+                else
+                {
+                    obj->Value[iValue] = sn;
+                }
 
-              fMatch = true;
-              break;
+                fMatch = true;
+                break;
             }
 
-          break;
+            break;
 
         case 'T':
-          KEY( "Timer", obj->Timer,             ReadInt( fp,Log, fBootDb ) );
-          break;
+            KEY("Timer", obj->Timer, ReadInt(fp, Log, fBootDb));
+            break;
 
         case 'V':
-          if ( !StrCmp( word, "Values" ) )
+            if (!StrCmp(word, "Values"))
             {
-              int x1 = 0, x2 = 0, x3 = 0, x4 = 0, x5 = 0, x6 = 0;
-              const char *ln = ReadLine( fp,Log, fBootDb );
+                int x1 = 0, x2 = 0, x3 = 0, x4 = 0, x5 = 0, x6 = 0;
+                const char *ln = ReadLine(fp, Log, fBootDb);
 
-              sscanf( ln, "%d %d %d %d %d %d", &x1, &x2, &x3, &x4, &x5, &x6 );
+                sscanf(ln, "%d %d %d %d %d %d", &x1, &x2, &x3, &x4, &x5, &x6);
 
-              obj->Value[0]     = x1;
-              obj->Value[1]     = x2;
-              obj->Value[2]     = x3;
-              obj->Value[3]     = x4;
-              obj->Value[4]     = x5;
-              obj->Value[5]     = x6;
-              fMatch            = true;
-              break;
+                obj->Value[0] = x1;
+                obj->Value[1] = x2;
+                obj->Value[2] = x3;
+                obj->Value[3] = x4;
+                obj->Value[4] = x5;
+                obj->Value[5] = x6;
+                fMatch = true;
+                break;
             }
 
-          if ( !StrCmp( word, "Vnum" ) )
+            if (!StrCmp(word, "Vnum"))
             {
-              vnum_t vnum = ReadInt( fp,Log, fBootDb );
+                vnum_t vnum = ReadInt(fp, Log, fBootDb);
 
-              if ( ( obj->Prototype = GetProtoObject( vnum ) ) == NULL )
+                if ((obj->Prototype = GetProtoObject(vnum)) == NULL)
                 {
-                  fVnum = false;
-                  Log->Bug( "Fread_obj: bad vnum %ld.", vnum );
+                    fVnum = false;
+                    Log->Bug("Fread_obj: bad vnum %ld.", vnum);
                 }
-              else
+                else
                 {
-                  fVnum = true;
-                  obj->Cost = obj->Prototype->Cost;
-                  obj->Weight = obj->Prototype->Weight;
-                  obj->ItemType = obj->Prototype->ItemType;
-                  obj->WearFlags = obj->Prototype->WearFlags;
-                  obj->Flags = obj->Prototype->Flags;
+                    fVnum = true;
+                    obj->Cost = obj->Prototype->Cost;
+                    obj->Weight = obj->Prototype->Weight;
+                    obj->ItemType = obj->Prototype->ItemType;
+                    obj->WearFlags = obj->Prototype->WearFlags;
+                    obj->Flags = obj->Prototype->Flags;
                 }
 
-              fMatch = true;
-              break;
+                fMatch = true;
+                break;
             }
-          break;
+            break;
 
         case 'W':
-          KEY( "WearFlags",     obj->WearFlags,        ReadInt( fp,Log, fBootDb ) );
-          KEY( "WearLoc",       obj->WearLoc,          (WearLocation)ReadInt( fp,Log, fBootDb ) );
-          KEY( "Weight",        obj->Weight,            ReadInt( fp,Log, fBootDb ) );
-          break;
+            KEY("WearFlags", obj->WearFlags, ReadInt(fp, Log, fBootDb));
+            KEY("WearLoc", obj->WearLoc, (WearLocation)ReadInt(fp, Log, fBootDb));
+            KEY("Weight", obj->Weight, ReadInt(fp, Log, fBootDb));
+            break;
 
         }
 
-      if ( !fMatch )
+        if (!fMatch)
         {
-          Log->Bug( "Fread_obj: no match." );
-          Log->Bug( "%s", word );
-          ReadToEndOfLine( fp,Log, fBootDb );
+            Log->Bug("Fread_obj: no match.");
+            Log->Bug("%s", word);
+            ReadToEndOfLine(fp, Log, fBootDb);
 
-          while( !obj->ExtraDescriptions().empty() )
+            while (!obj->ExtraDescriptions().empty())
             {
-              auto ed = obj->ExtraDescriptions().front();
-              obj->Remove(ed);
+                auto ed = obj->ExtraDescriptions().front();
+                obj->Remove(ed);
             }
 
-          while( !obj->Affects().empty() )
+            while (!obj->Affects().empty())
             {
-              std::shared_ptr<Affect> paf = obj->Affects().front();
-              obj->Remove(paf);
+                std::shared_ptr<Affect> paf = obj->Affects().front();
+                obj->Remove(paf);
             }
 
-          delete obj;
-          return;
+            delete obj;
+            return;
         }
     }
 }
 
-void SetAlarm( long seconds )
+void SetAlarm(long seconds)
 {
-  alarm( seconds );
+#ifndef _WIN32
+    alarm(seconds);
+#endif
 }
 
-void WriteCorpses( const Character *ch, std::string name )
+void WriteCorpses(const Character *ch, std::string name)
 {
-  FILE *fp = NULL;
+    FILE *fp = NULL;
 
-  /* Name and ch support so that we dont have to have a char to save their
-     corpses.. (ie: decayed corpses while offline) */
-  if ( ch && IsNpc(ch) )
+    /* Name and ch support so that we dont have to have a char to save their
+       corpses.. (ie: decayed corpses while offline) */
+    if (ch && IsNpc(ch))
     {
-      Log->Bug( "Write_corpses: writing NPC corpse." );
-      return;
+        Log->Bug("Write_corpses: writing NPC corpse.");
+        return;
     }
 
-  if ( ch )
+    if (ch)
     {
-      name = ch->Name;
+        name = ch->Name;
     }
 
-  /* Go by vnum, less chance of screwups. -- Altrag */
-  for( const Object *corpse : Objects )
+    /* Go by vnum, less chance of screwups. -- Altrag */
+    for (const Object *corpse : Objects)
     {
-      if ( corpse->Prototype->Vnum == OBJ_VNUM_CORPSE_PC
-	   && corpse->InRoom != NULL && corpse->Value[OVAL_CORPSE_SKINNED] != 1
-	   && !StrCmp(corpse->ShortDescr.c_str() + 14, name) )
-	{
-	  if ( !fp )
-	    {
-	      char buf[127];
-
-	      sprintf(buf, "%s%s", CORPSE_DIR, Capitalize(name).c_str());
-
-	      if ( !(fp = fopen(buf, "w")) )
-		{
-		  Log->Bug( "Write_corpses: Cannot open file." );
-		  perror(buf);
-		  return;
-		}
-	    }
-
-	  WriteObject(ch, corpse, fp, 0, OS_CORPSE);
-	}
-    }
-
-  if ( fp )
-    {
-      fprintf(fp, "#END\n\n");
-      fclose(fp);
-    }
-  else
-    {
-      char buf[127];
-
-      sprintf(buf, "%s%s", CORPSE_DIR, Capitalize(name).c_str());
-      remove(buf);
-    }
-}
-
-void LoadCorpses( void )
-{
-  DIR *dp = NULL;
-  struct dirent *de = NULL;
-
-  if ( !(dp = opendir(CORPSE_DIR)) )
-    {
-      Log->Bug( "%s: can't open CORPSE_DIR", __FUNCTION__ );
-      perror(CORPSE_DIR);
-      return;
-    }
-
-  falling = 1; /* Arbitrary, must be >0 though. */
-
-  while ( (de = readdir(dp)) != NULL )
-    {
-      if ( de->d_name[0] != '.' )
+        if (corpse->Prototype->Vnum == OBJ_VNUM_CORPSE_PC
+            && corpse->InRoom != NULL && corpse->Value[OVAL_CORPSE_SKINNED] != 1
+            && !StrCmp(corpse->ShortDescr.c_str() + 14, name))
         {
-          sprintf(strArea, "%s%s", CORPSE_DIR, de->d_name );
-          fprintf(stderr, "Corpse -> %s\n", strArea);
-
-          if ( !(fpArea = fopen(strArea, "r")) )
+            if (!fp)
             {
-              perror(strArea);
-              continue;
-            }
+                char buf[127];
 
-          for ( ; ; )
-            {
-              const char *word;
-              char letter = ReadChar( fpArea,Log, fBootDb );
+                sprintf(buf, "%s%s", CORPSE_DIR, Capitalize(name).c_str());
 
-              if ( letter == '*' )
+                if (!(fp = fopen(buf, "w")))
                 {
-                  ReadToEndOfLine(fpArea,Log, fBootDb);
-                  continue;
-                }
-
-              if ( letter != '#' )
-                {
-                  Log->Bug( "%s: # not found.", __FUNCTION__ );
-                  break;
-                }
-
-              word = ReadWord( fpArea,Log, fBootDb );
-
-              if ( !StrCmp(word, "CORPSE" ) )
-		{
-		  ReadObject( NULL, fpArea, OS_CORPSE );
-		}
-              else if ( !StrCmp(word, "OBJECT" ) )
-		{
-		  ReadObject( NULL, fpArea, OS_CARRY );
-		}
-              else if ( !StrCmp( word, "END" ) )
-		{
-		  break;
-		}
-              else
-                {
-                  Log->Bug( "%s: bad section.", __FUNCTION__ );
-                  break;
+                    Log->Bug("Write_corpses: Cannot open file.");
+                    perror(buf);
+                    return;
                 }
             }
 
-          fclose(fpArea);
+            WriteObject(ch, corpse, fp, 0, OS_CORPSE);
         }
     }
 
-  fpArea = NULL;
-  strcpy(strArea, "$");
-  closedir(dp);
-  falling = 0;
+    if (fp)
+    {
+        fprintf(fp, "#END\n\n");
+        fclose(fp);
+    }
+    else
+    {
+        char buf[127];
+
+        sprintf(buf, "%s%s", CORPSE_DIR, Capitalize(name).c_str());
+        remove(buf);
+    }
 }
 
-void LoadStorerooms( void )
+void LoadCorpses()
 {
-  DIR *dp = NULL;
-  struct dirent *de = NULL;
-  char buf[MAX_INPUT_LENGTH];
-
-  if ( !(dp = opendir(STOREROOM_DIR)) )
+    try
     {
-      Log->Bug( "Load_storeroom: can't open STOREROOM_DIR" );
-      perror(STOREROOM_DIR);
-      return;
-    }
+        falling = 1; /* Arbitrary, must be >0 though. */
 
-  falling = 1;
-
-  while ( (de = readdir(dp)) != NULL )
-    {
-      if ( de->d_name[0] != '.' )
+        for(const auto &entry : fs::directory_iterator(CORPSE_DIR))
         {
-          sprintf(strArea, "%s%s", STOREROOM_DIR, de->d_name );
-          fprintf(stderr, "Storeroom -> %s\n", strArea);
+            const char *filename = entry.path().filename().string().c_str();
 
-          if ( !(fpArea = fopen(strArea, "r")) )
+            if (filename[0] != '.')
             {
-              perror(strArea);
-              continue;
-            }
+                sprintf(strArea, "%s%s", CORPSE_DIR, filename);
+                fprintf(stderr, "Corpse -> %s\n", strArea);
+                fpArea = fopen(strArea, "r");
 
-          Room *storeroom = GetRoom(atoi(de->d_name));
-
-          if( !storeroom )
-            {
-              fpArea = NULL;
-              strcpy(strArea, "$");
-              closedir(dp);
-              falling = 0;
-              return;
-            }
-
-          if ( !storeroom->Flags.test( Flag::Room::ClanStoreroom ) )
-            {
-              sprintf( buf, "%s%ld", STOREROOM_DIR, storeroom->Vnum );
-              remove( buf );
-            }
-
-          RoomProgSetSupermob(storeroom);
-
-          for ( int iNest = 0; iNest < MAX_NEST; iNest++ )
-	    {
-	      rgObjNest[iNest] = NULL;
-	    }
-
-          for ( ; ; )
-            {
-              const char *word = NULL;
-              char letter = ReadChar( fpArea,Log, fBootDb );
-
-              if ( letter == '*' )
+                if (fpArea == nullptr)
                 {
-                  ReadToEndOfLine( fpArea,Log, fBootDb );
-                  continue;
+                    perror(strArea);
+                    continue;
                 }
 
-              if ( letter != '#' )
+                for (; ; )
                 {
-                  Log->Bug( "LoadStorerooms: # not found." );
-                  Log->Bug( "%s", de->d_name );
-                  break;
+                    const char letter = ReadChar(fpArea, Log, fBootDb);
+
+                    if (letter == '*')
+                    {
+                        ReadToEndOfLine(fpArea, Log, fBootDb);
+                        continue;
+                    }
+
+                    if (letter != '#')
+                    {
+                        Log->Bug("%s: # not found.", __FUNCTION__);
+                        break;
+                    }
+
+                    const char *word = ReadWord(fpArea, Log, fBootDb);
+
+                    if (!StrCmp(word, "CORPSE"))
+                    {
+                        ReadObject(nullptr, fpArea, OS_CORPSE);
+                    }
+                    else if (!StrCmp(word, "OBJECT"))
+                    {
+                        ReadObject(nullptr, fpArea, OS_CARRY);
+                    }
+                    else if (!StrCmp(word, "END"))
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Log->Bug("%s: bad section.", __FUNCTION__);
+                        break;
+                    }
                 }
 
-              word = ReadWord( fpArea,Log, fBootDb );
-
-              if ( !StrCmp( word, "OBJECT" ) ) /* Objects      */
-		{
-		  ReadObject( supermob, fpArea, OS_CARRY );
-		}
-              else if ( !StrCmp( word, "END"    ) )       /* Done         */
-		{
-                  break;
-		}
-	      else
-		{
-		  Log->Bug( "LoadStorerooms: bad section." );
-		  Log->Bug( "%s", de->d_name );
-		  break;
-		}
+                fclose(fpArea);
             }
-
-          fclose( fpArea );
-
-          std::list<Object*> carriedBySupermob(supermob->Objects());
-
-          for(Object *tobj : carriedBySupermob)
-            {
-              ObjectFromCharacter( tobj );
-
-              if( tobj->ItemType != ITEM_MONEY )
-		{
-		  ObjectToRoom( tobj, storeroom );
-		}
-            }
-
-          ReleaseSupermob();
         }
     }
+    catch(const fs::filesystem_error &ex)
+    {
+        Log->Bug("%s: can't open CORPSE_DIR", __FUNCTION__);
+        perror(CORPSE_DIR);
+    }
 
-  fpArea = NULL;
-  strcpy(strArea, "$");
-  closedir(dp);
-  falling = 0;
+    fpArea = nullptr;
+    strcpy(strArea, "$");
+    falling = 0;
 }
 
-void SaveStoreroom( const Room *room )
+void LoadStorerooms()
 {
-  assert(room != nullptr);
-
-  char strsave[MAX_INPUT_LENGTH];
-  FILE *fp = NULL;
-
-  sprintf( strsave, "%s%ld", STOREROOM_DIR, room->Vnum );
-
-  if ( ( fp = fopen( strsave, "w" ) ) == NULL )
+    try
     {
-      perror( strsave );
-      Log->Bug( "Save_storeroom: fopen" );
-      Log->Bug( "%s", strsave );
+        char buf[MAX_INPUT_LENGTH];
+        falling = 1;
 
-    }
-  else
-    {
-      fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);
-
-      for(const Object *obj : room->Objects())
-	{
-	  WriteObject(NULL, obj, fp, 0, OS_CARRY );
-	}
-
-      fprintf( fp, "#END\n" );
-      fclose( fp );
-    }
-}
-
-void LoadVendors( void )
-{
-  DIR *dp = NULL;
-  Character *mob = NULL;
-  struct dirent *de = NULL;
-
-  if ( !(dp = opendir(VENDOR_DIR)) )
-    {
-      Log->Bug( "Load_vendors: can't open VENDOR_DIR" );
-      perror(VENDOR_DIR);
-      return;
-    }
-
-  falling = 1;
-
-  while ( (de = readdir(dp)) != NULL )
-    {
-      if ( de->d_name[0] != '.' )
+        for(const auto &entry : fs::directory_iterator(STOREROOM_DIR))
         {
-          sprintf(strArea, "%s%s", VENDOR_DIR, de->d_name );
-          fprintf(stderr, "Vendor -> %s\n", strArea);
+            const char *filename = entry.path().filename().string().c_str();
 
-          if ( !(fpArea = fopen(strArea, "r")) )
+            if (filename[0] != '.')
             {
-              perror(strArea);
-              continue;
-            }
+                sprintf(strArea, "%s%s", STOREROOM_DIR, filename);
+                fprintf(stderr, "Storeroom -> %s\n", strArea);
 
-          for ( ; ; )
-            {
-              const char *word = NULL;
-	      char letter = ReadChar( fpArea,Log, fBootDb );
-
-              if ( letter == '*' )
+                if (!(fpArea = fopen(strArea, "r")))
                 {
-                  ReadToEndOfLine(fpArea,Log, fBootDb);
-                  continue;
+                    perror(strArea);
+                    continue;
                 }
 
-              if ( letter != '#' )
+                Room *storeroom = GetRoom(atoi(filename));
+
+                if (!storeroom)
                 {
-                  Log->Bug( "Load_vendor: # not found." );
-                  break;
+                    fpArea = NULL;
+                    strcpy(strArea, "$");
+                    falling = 0;
+                    return;
                 }
 
-              word = ReadWord( fpArea,Log, fBootDb );
+                if (!storeroom->Flags.test(Flag::Room::ClanStoreroom))
+                {
+                    sprintf(buf, "%s%ld", STOREROOM_DIR, storeroom->Vnum);
+                    remove(buf);
+                }
 
-              if ( !StrCmp(word, "VENDOR" ) )
-		{
-		  mob = ReadVendor( fpArea );
-		}
-              else if ( !StrCmp(word, "OBJECT" ) )
-		{
-		  ReadObject( mob, fpArea, OS_CARRY );
-		}
-              else if ( !StrCmp( word, "END" ) )
-		{
-		  break;
-		}
+                RoomProgSetSupermob(storeroom);
+
+                for (int iNest = 0; iNest < MAX_NEST; iNest++)
+                {
+                    rgObjNest[iNest] = nullptr;
+                }
+
+                for (; ; )
+                {
+                    const char letter = ReadChar(fpArea, Log, fBootDb);
+
+                    if (letter == '*')
+                    {
+                        ReadToEndOfLine(fpArea, Log, fBootDb);
+                        continue;
+                    }
+
+                    if (letter != '#')
+                    {
+                        Log->Bug("LoadStorerooms: # not found.");
+                        Log->Bug("%s", filename);
+                        break;
+                    }
+
+                    const char *word = ReadWord(fpArea, Log, fBootDb);
+
+                    if (!StrCmp(word, "OBJECT")) /* Objects      */
+                    {
+                        ReadObject(supermob, fpArea, OS_CARRY);
+                    }
+                    else if (!StrCmp(word, "END"))       /* Done         */
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Log->Bug("LoadStorerooms: bad section.");
+                        Log->Bug("%s", filename);
+                        break;
+                    }
+                }
+
+                fclose(fpArea);
+
+                std::list<Object*> carriedBySupermob(supermob->Objects());
+
+                for (Object *tobj : carriedBySupermob)
+                {
+                    ObjectFromCharacter(tobj);
+
+                    if (tobj->ItemType != ITEM_MONEY)
+                    {
+                        ObjectToRoom(tobj, storeroom);
+                    }
+                }
+
+                ReleaseSupermob();
             }
-
-          fclose(fpArea);
         }
     }
+    catch(const fs::filesystem_error &ex)
+    {
+        Log->Bug("Load_storeroom: can't open STOREROOM_DIR");
+        perror(STOREROOM_DIR);
+    }
 
-  fpArea = NULL;
-  strcpy(strArea, "$");
-  closedir(dp);
-  falling = 0;
+    fpArea = NULL;
+    strcpy(strArea, "$");
+    falling = 0;
+}
+
+void SaveStoreroom(const Room *room)
+{
+    assert(room != nullptr);
+
+    char strsave[MAX_INPUT_LENGTH];
+    FILE *fp = NULL;
+
+    sprintf(strsave, "%s%ld", STOREROOM_DIR, room->Vnum);
+
+    if ((fp = fopen(strsave, "w")) == NULL)
+    {
+        perror(strsave);
+        Log->Bug("Save_storeroom: fopen");
+        Log->Bug("%s", strsave);
+
+    }
+    else
+    {
+        for (const Object *obj : room->Objects())
+        {
+            WriteObject(nullptr, obj, fp, 0, OS_CARRY);
+        }
+
+        fprintf(fp, "#END\n");
+        fclose(fp);
+    }
+}
+
+void LoadVendors()
+{
+    try
+    {
+        Character *mob = NULL;
+        falling = 1;
+
+        for(const auto &entry : fs::directory_iterator(VENDOR_DIR))
+        {
+            const char *filename = entry.path().filename().string().c_str();
+
+            if (filename[0] != '.')
+            {
+                sprintf(strArea, "%s%s", VENDOR_DIR, filename);
+                fprintf(stderr, "Vendor -> %s\n", strArea);
+                fpArea = fopen(strArea, "r");
+
+                if (fpArea == nullptr)
+                {
+                    perror(strArea);
+                    continue;
+                }
+
+                for (; ; )
+                {
+                    const char letter = ReadChar(fpArea, Log, fBootDb);
+
+                    if (letter == '*')
+                    {
+                        ReadToEndOfLine(fpArea, Log, fBootDb);
+                        continue;
+                    }
+
+                    if (letter != '#')
+                    {
+                        Log->Bug("Load_vendor: # not found.");
+                        break;
+                    }
+
+                    const char *word = ReadWord(fpArea, Log, fBootDb);
+
+                    if (!StrCmp(word, "VENDOR"))
+                    {
+                        mob = ReadVendor(fpArea);
+                    }
+                    else if (!StrCmp(word, "OBJECT"))
+                    {
+                        ReadObject(mob, fpArea, OS_CARRY);
+                    }
+                    else if (!StrCmp(word, "END"))
+                    {
+                        break;
+                    }
+                }
+
+                fclose(fpArea);
+            }
+        }
+    }
+    catch(const fs::filesystem_error &ex)
+    {
+        Log->Bug("Load_vendors: can't open VENDOR_DIR");
+        perror(VENDOR_DIR);
+    }
+
+    fpArea = NULL;
+    strcpy(strArea, "$");
+    falling = 0;
 }

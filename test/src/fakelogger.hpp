@@ -2,7 +2,7 @@
 #define _SWRIP_TEST_FAKELOGGER_HPP_
 
 #include <string>
-#include "log.hpp"
+#include <utility/logger.hpp>
 
 class FakeLogger : public Logger
 {

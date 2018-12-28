@@ -11,9 +11,9 @@ enable_testing()
 
 add_executable(swrip bootstrap/main.cpp)
 target_link_libraries(swrip mud)
-target_compile_features(swrip PRIVATE cxx_std_14)
+target_compile_features(swrip PRIVATE cxx_std_17)
 target_compile_options(swrip
-  PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>
+  PRIVATE $<$<CXX_COMPILER_ID:GNU>:-DHAVE_ZLIB -DHAVE_UNAME -Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>
   PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /wd4996 /wd6262 /wd26451>
   )
 
@@ -661,20 +661,22 @@ src/spells/smaug.cpp
 src/spells/ventriloquate.cpp
 src/spells/weaken.cpp
   )
+
 if(WIN32)
   target_link_libraries(mud utility colorparser lua WS2_32)
+  include_directories(libs/3rdparty/lua)
+  set(BUILD_SHARED_LIBS ON)
+  add_subdirectory(libs/3rdparty/lua)
 else()
   target_link_libraries(mud utility colorparser lua)
 endif()
-target_compile_features(mud PUBLIC cxx_std_14)
+
+target_compile_features(mud PUBLIC cxx_std_17)
 target_compile_options(mud
   PRIVATE $<$<CXX_COMPILER_ID:GNU>:-Werror -Wall -Wformat-security -Wshadow -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Wextra -Wno-unused-parameter -Wno-implicit-fallthrough -Wno-sign-compare -Wno-write-strings -Wno-format-truncation>
   PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/D_CRT_SECURE_NO_WARNINGS /D_CRT_NONSTDC_NO_DEPRECATE /wd4996 /wd6262 /wd26451 /wd4267 /wd4244 /wd4018 /we4805 /we4305>
   )
 
-if(WIN32)
-    set(BUILD_SHARED_LIBS ON)
-endif()
 configure_file(${CMAKE_SOURCE_DIR}/cmake/GoogleTest-CMakeLists.txt.in ${CMAKE_BINARY_DIR}/googletest-download/CMakeLists.txt)
 execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
   RESULT_VARIABLE result

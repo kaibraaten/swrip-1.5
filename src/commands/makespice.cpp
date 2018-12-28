@@ -38,9 +38,9 @@ void do_makespice( Character *ch, std::string argument )
   StartCrafting( session );
 }
 
-static CraftRecipe *MakeCraftRecipe( void )
+static CraftRecipe *MakeCraftRecipe()
 {
-  static const struct CraftingMaterial materials[] =
+  static const CraftingMaterial materials[] =
     {
      { ITEM_RAWSPICE, { Flag::Crafting::Extract } },
      { ITEM_NONE,     {} }

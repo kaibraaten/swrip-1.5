@@ -1,6 +1,7 @@
 #ifndef _SWRIP_OBJECTREPOSITORY_HPP_
 #define _SWRIP_OBJECTREPOSITORY_HPP_
 
+#include <utility/os.hpp>
 #include <utility/repository.hpp>
 #include "types.hpp"
 
@@ -12,7 +13,7 @@ protected:
   ObjectRepository() = default;
 };
 
-extern ObjectRepository *Objects;
+extern DllImport ObjectRepository *Objects;
 
 ObjectRepository *NewObjectRepository();
 

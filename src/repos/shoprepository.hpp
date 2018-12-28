@@ -8,7 +8,7 @@
 template<typename T>
 struct CompareShop
 {
-  bool operator()(const T lhs, const T rhs)
+  bool operator()(const T lhs, const T rhs) const
   {
     return lhs->Keeper < rhs->Keeper;
   }

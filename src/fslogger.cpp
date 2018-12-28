@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <cstdarg>
 #include <cstring>
+#include <ctime>
 #include <sys/stat.h>
 #include "constants.hpp"
 #include "log.hpp"
@@ -13,7 +14,7 @@
 extern FILE *fpArea;
 extern char strArea[];
 
-Logger *Log = nullptr;
+DllExport Logger *Log = nullptr;
 
 class FileSystemLogger : public Logger
 {
@@ -194,4 +195,3 @@ Logger *NewLogger()
 {
   return new FileSystemLogger();
 }
-

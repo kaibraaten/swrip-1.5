@@ -20,7 +20,9 @@
  ****************************************************************************/
 
 #include <cstring>
+#ifndef _WIN32
 #include <strings.h>
+#endif
 #include <cctype>
 #include <cassert>
 #include "character.hpp"

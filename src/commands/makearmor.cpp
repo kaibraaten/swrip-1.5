@@ -39,7 +39,7 @@ void do_makearmor( Character *ch, std::string argument )
 
 static CraftRecipe *CreateMakeArmorRecipe( void )
 {
-  static const struct CraftingMaterial materials[] =
+  static const CraftingMaterial materials[] =
     {
      { ITEM_THREAD, {} },
      { ITEM_FABRIC, { Flag::Crafting::Extract } },

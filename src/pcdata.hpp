@@ -121,7 +121,7 @@ public:
   int Played = 0;
   time_t Logon = 0;
   time_t SaveTime = 0;
-  struct CraftingSession *CraftingSession = NULL;
+  class CraftingSession *CraftingSession = NULL;
   IMC_CHARDATA *imcchardata = NULL;
 
 private:

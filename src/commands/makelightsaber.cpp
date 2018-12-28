@@ -26,7 +26,7 @@ static void FreeUserData( struct UserData *ud );
 
 void do_makelightsaber( Character *ch, std::string argument )
 {
-  static const struct CraftingMaterial materials[] =
+  static const CraftingMaterial materials[] =
     {
      { ITEM_TOOLKIT,        {} },
      { ITEM_OVEN,           {} },

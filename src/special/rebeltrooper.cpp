@@ -25,10 +25,7 @@ bool spec_rebel_trooper( Character *ch )
                                   && NiftyIsName( "empire" , victim->PCData->ClanInfo.Clan->Name )));
                      });
 
-  random_shuffle(std::begin(imperials),
-                 std::end(imperials));
-  
-  for(Character *victim : imperials)
+  for(Character *victim : RandomizeOrder(imperials))
     {
       do_yell( ch, "Long live the Rebel Alliance!" );
       HitMultipleTimes( ch, victim, TYPE_UNDEFINED );

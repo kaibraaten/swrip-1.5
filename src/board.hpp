@@ -13,7 +13,7 @@ public:
   std::string Date;
   std::string ToList;
   std::string Subject;
-  bool Voting = false;
+  int Voting = 0;
   std::string YesVotes;
   std::string NoVotes;
   std::string Abstentions;

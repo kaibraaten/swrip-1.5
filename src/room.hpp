@@ -83,7 +83,7 @@ public:
   
   Room *Next = nullptr;
   Room *NextSort = nullptr;
-  struct Area *Area = nullptr;
+  class Area *Area = nullptr;
   std::string Name;
   std::string Description;
   vnum_t Vnum = INVALID_VNUM;

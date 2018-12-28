@@ -1,15 +1,12 @@
-#include <cstdio>
-#include <cstdlib>
-#include <cerrno>
-#include <cstring>
+#ifndef _WIN32
 #include "os.hpp"
 
-void OsSetup( void )
+void OsSetup()
 {
 
 }
 
-void OsCleanup( void )
+void OsCleanup()
 {
 
 }
@@ -18,3 +15,4 @@ int SetNonBlockingSocket( socket_t sock )
 {
   return fcntl( sock, F_SETFL, O_NONBLOCK );
 }
+#endif

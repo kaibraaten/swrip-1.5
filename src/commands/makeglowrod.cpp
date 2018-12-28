@@ -38,7 +38,7 @@ void do_makeglowrod( Character *ch, std::string argument )
 
 static CraftRecipe *MakeCraftRecipe( void )
 {
-  static const struct CraftingMaterial materials[] =
+  static const CraftingMaterial materials[] =
     {
      { ITEM_TOOLKIT,   {} },
      { ITEM_BATTERY,   { Flag::Crafting::Extract } },

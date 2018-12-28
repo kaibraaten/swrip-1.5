@@ -13,7 +13,7 @@ public:
   virtual ~Descriptor();
 
   virtual void WriteToBuffer(const std::string &txt, size_t len = 0);
-  virtual bool CheckReconnect(const std::string &name, bool fConn );
+  virtual unsigned char CheckReconnect(const std::string &name, bool fConn );
   virtual unsigned char CheckPlaying(const std::string &name, bool kick );
   virtual bool CheckMultiplaying(const std::string &name );
   virtual bool FlushBuffer(bool fPrompt);
@@ -50,7 +50,7 @@ public:
   NullDescriptor();
   
   void WriteToBuffer(const std::string &txt, size_t len = 0) override;
-  bool CheckReconnect(const std::string &name, bool fConn ) override;
+  unsigned char CheckReconnect(const std::string &name, bool fConn ) override;
   unsigned char CheckPlaying(const std::string &name, bool kick ) override;
   bool CheckMultiplaying(const std::string &name ) override;
   bool FlushBuffer(bool fPrompt) override;

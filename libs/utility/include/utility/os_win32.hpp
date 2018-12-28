@@ -35,8 +35,8 @@
 #include <sys/stat.h>
 
 #ifdef _MSC_VER
-typedef int ssize_t;
-#define snprintf _snprintf
+using ssize_t = int;
+//#define snprintf _snprintf
 #define strncasecmp strnicmp
 #define strcasecmp stricmp
 #endif
@@ -45,32 +45,44 @@ typedef SOCKET socket_t;
 
 typedef int socklen_t;
 #define GETERROR WSAGetLastError()
-#define EWOULDBLOCK WSAEWOULDBLOCK
-#define EADDRINUSE WSAEADDRINUSE
-#define ETIMEDOUT WSAETIMEDOUT
-#define ECONNRESET WSAECONNRESET
-#define EMSGSIZE WSAEMSGSIZE
-#define EHOSTUNREACH WSAEHOSTUNREACH
-#define ENETUNREACH WSAENETRESET
+//#define EWOULDBLOCK WSAEWOULDBLOCK
+//#define EADDRINUSE WSAEADDRINUSE
+//#define ETIMEDOUT WSAETIMEDOUT
+//#define ECONNRESET WSAECONNRESET
+//#define EMSGSIZE WSAEMSGSIZE
+//#define EHOSTUNREACH WSAEHOSTUNREACH
+//#define ENETUNREACH WSAENETRESET
 #undef EPIPE
 #undef EINVAL
 #define EPIPE WSAENOTCONN
 #define EINVAL WSAEINVAL
-#define ECONNREFUSED WSAECONNABORTED
+//#define ECONNREFUSED WSAECONNABORTED
 #undef EINTR
 #undef EMFILE
 #define EINTR WSAEINTR
 #define EMFILE WSAEMFILE 
-#define EINPROGRESS WSAEINPROGRESS
-typedef char sockbuf_t;
+//#define EINPROGRESS WSAEINPROGRESS
+using sockbuf_t = char;
+
+// Telnet commands
+#define IAC 255
+#define WONT 252
+#define WILL 251
+#define GA 249
+
+// Telnet options
+#define TELOPT_ECHO 1
+
+#define DllImport __declspec(dllimport)
+#define DllExport __declspec(dllexport)
 
 struct timezone 
 {
-  int  tz_minuteswest; /* minutes W of Greenwich */
-  int  tz_dsttime;     /* type of dst correction */
+  int tz_minuteswest; /* minutes W of Greenwich */
+  int tz_dsttime;     /* type of dst correction */
 };
 
-int gettimeofday( struct timeval*, struct timezone* );
+int gettimeofday(struct timeval*, struct timezone*);
 
 #endif
 #endif /* include guard */

@@ -1,8 +1,9 @@
 #include <cstring>
 #include <cstdlib>
 #include <cstdarg>
+#ifdef HAVE_UNAME
 #include <sys/utsname.h>
-
+#endif
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
@@ -25,6 +26,7 @@
 
 void do_test( Character *ch, std::string argument )
 {
+#ifdef HAVE_UNAME
   if( !StrCmp( argument, "uname" ) )
     {
       struct utsname buf;
@@ -45,6 +47,7 @@ void do_test( Character *ch, std::string argument )
 
       return;
     }
+#endif
 
   if( !StrCmp( argument, "saveclans" ) )
     {
