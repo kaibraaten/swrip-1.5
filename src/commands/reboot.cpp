@@ -18,7 +18,7 @@ void do_reboot( Character *ch, std::string argument )
       return;
     }
 
-  if ( auction->Item )
+  if ( OngoingAuction->Item )
     {
       do_auction( ch, "stop");
     }

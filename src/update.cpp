@@ -2878,9 +2878,9 @@ void UpdateHandler()
       RebootCheck(0);
     }
 
-  if ( auction->Item && --auction->Pulse <= 0 )
+  if ( OngoingAuction->Item && --OngoingAuction->Pulse <= 0 )
     {
-      auction->Pulse = PULSE_AUCTION;
+      OngoingAuction->Pulse = PULSE_AUCTION;
       AuctionUpdate();
     }
 
@@ -3012,18 +3012,18 @@ void RebootCheck( time_t reset )
     {
       Character *vch = NULL;
 
-      if ( auction->Item )
+      if ( OngoingAuction->Item )
         {
           sprintf(buf, "Sale of %s has been stopped by mud.",
-                  auction->Item->ShortDescr.c_str());
+                  OngoingAuction->Item->ShortDescr.c_str());
           TalkAuction(buf);
-          ObjectToCharacter(auction->Item, auction->Seller);
-          auction->Item = NULL;
+          ObjectToCharacter(OngoingAuction->Item, OngoingAuction->Seller);
+          OngoingAuction->Item = NULL;
 
-          if ( auction->Buyer && auction->Buyer != auction->Seller )
+          if ( OngoingAuction->Buyer && OngoingAuction->Buyer != OngoingAuction->Seller )
             {
-              auction->Buyer->Gold += auction->Bet;
-              auction->Buyer->Echo("Your money has been returned.\r\n");
+              OngoingAuction->Buyer->Gold += OngoingAuction->Bet;
+              OngoingAuction->Buyer->Echo("Your money has been returned.\r\n");
             }
         }
 
@@ -3066,117 +3066,117 @@ static void AuctionUpdate()
   char buf[MAX_STRING_LENGTH];
   enum { GoingOnce = 1, GoingTwice = 2, Sold = 3 };
   
-  switch (++auction->Going) /* increase the going state */
+  switch (++OngoingAuction->Going) /* increase the going state */
     {
     case GoingOnce:
     case GoingTwice:
-      if (auction->Bet > auction->Starting)
+      if (OngoingAuction->Bet > OngoingAuction->Starting)
         {
-          sprintf(buf, "%s: going %s for %d.", auction->Item->ShortDescr.c_str(),
-                  ((auction->Going == GoingOnce) ? "once" : "twice"), auction->Bet);
+          sprintf(buf, "%s: going %s for %d.", OngoingAuction->Item->ShortDescr.c_str(),
+                  ((OngoingAuction->Going == GoingOnce) ? "once" : "twice"), OngoingAuction->Bet);
         }
       else
         {
-          sprintf(buf, "%s: going %s (bid not received yet).", auction->Item->ShortDescr.c_str(),
-                  ((auction->Going == GoingOnce) ? "once" : "twice"));
+          sprintf(buf, "%s: going %s (bid not received yet).", OngoingAuction->Item->ShortDescr.c_str(),
+                  ((OngoingAuction->Going == GoingOnce) ? "once" : "twice"));
         }
 
       TalkAuction(buf);
       break;
 
     case Sold:
-      if (!auction->Buyer && auction->Bet)
+      if (!OngoingAuction->Buyer && OngoingAuction->Bet)
         {
-          Log->Bug( "Auction code reached SOLD, with NULL buyer, but %d gold bid", auction->Bet );
-          auction->Bet = 0;
+          Log->Bug( "Auction code reached SOLD, with NULL buyer, but %d gold bid", OngoingAuction->Bet );
+          OngoingAuction->Bet = 0;
         }
 
-      if (auction->Bet > 0 && auction->Buyer != auction->Seller)
+      if (OngoingAuction->Bet > 0 && OngoingAuction->Buyer != OngoingAuction->Seller)
         {
           sprintf (buf, "%s sold to %s for %d.",
-                   auction->Item->ShortDescr.c_str(),
-                   IsNpc(auction->Buyer) ? auction->Buyer->ShortDescr.c_str() : auction->Buyer->Name.c_str(),
-                   auction->Bet);
+                   OngoingAuction->Item->ShortDescr.c_str(),
+                   IsNpc(OngoingAuction->Buyer) ? OngoingAuction->Buyer->ShortDescr.c_str() : OngoingAuction->Buyer->Name.c_str(),
+                   OngoingAuction->Bet);
           TalkAuction(buf);
 
           Act(AT_ACTION, "The auctioneer materializes before you, and hands you $p.",
-              auction->Buyer, auction->Item, NULL, TO_CHAR);
+              OngoingAuction->Buyer, OngoingAuction->Item, NULL, TO_CHAR);
           Act(AT_ACTION, "The auctioneer materializes before $n, and hands $m $p.",
-              auction->Buyer, auction->Item, NULL, TO_ROOM);
+              OngoingAuction->Buyer, OngoingAuction->Item, NULL, TO_ROOM);
 
-          if ( (auction->Buyer->CarryWeight
-                + GetObjectWeight( auction->Item ))
-               > GetCarryCapacityWeight( auction->Buyer ) )
+          if ( (OngoingAuction->Buyer->CarryWeight
+                + GetObjectWeight( OngoingAuction->Item ))
+               > GetCarryCapacityWeight( OngoingAuction->Buyer ) )
             {
-              Act( AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", auction->Buyer, auction->Item, NULL, TO_CHAR );
-              Act( AT_PLAIN, "$n is carrying too much to also carry $p, and $e drops it.", auction->Buyer, auction->Item, NULL, TO_ROOM );
-              ObjectToRoom( auction->Item, auction->Buyer->InRoom );
+              Act( AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", OngoingAuction->Buyer, OngoingAuction->Item, NULL, TO_CHAR );
+              Act( AT_PLAIN, "$n is carrying too much to also carry $p, and $e drops it.", OngoingAuction->Buyer, OngoingAuction->Item, NULL, TO_ROOM );
+              ObjectToRoom( OngoingAuction->Item, OngoingAuction->Buyer->InRoom );
             }
           else
             {
-              ObjectToCharacter( auction->Item, auction->Buyer );
+              ObjectToCharacter( OngoingAuction->Item, OngoingAuction->Buyer );
             }
 
-          pay = (int)auction->Bet * 0.9;
-          tax = (int)auction->Bet * 0.1;
-          BoostEconomy( auction->Seller->InRoom->Area, tax );
-          auction->Seller->Gold += pay; /* give him the money, tax 10 % */
-          auction->Buyer->Echo( "The auctioneer pays you %d gold, charging an auction fee of %d.\r\n",
+          pay = (int)OngoingAuction->Bet * 0.9;
+          tax = (int)OngoingAuction->Bet * 0.1;
+          BoostEconomy( OngoingAuction->Seller->InRoom->Area, tax );
+          OngoingAuction->Seller->Gold += pay; /* give him the money, tax 10 % */
+          OngoingAuction->Buyer->Echo( "The auctioneer pays you %d gold, charging an auction fee of %d.\r\n",
                                 pay, tax);
-          auction->Item = NULL; /* reset item */
+          OngoingAuction->Item = NULL; /* reset item */
 
           if ( SysData.SaveFlags.test( Flag::AutoSave::Auction ) )
             {
-              PlayerCharacters->Save( auction->Buyer );
-              PlayerCharacters->Save( auction->Seller );
+              PlayerCharacters->Save( OngoingAuction->Buyer );
+              PlayerCharacters->Save( OngoingAuction->Seller );
             }
         }
       else /* not sold */
         {
           sprintf (buf, "No bids received for %s - object has been removed from auction\r\n.",
-                   auction->Item->ShortDescr.c_str());
+                   OngoingAuction->Item->ShortDescr.c_str());
           TalkAuction(buf);
           Act(AT_ACTION, "The auctioneer appears before you to return $p to you.",
-              auction->Seller,auction->Item,NULL,TO_CHAR);
+              OngoingAuction->Seller,OngoingAuction->Item,NULL,TO_CHAR);
           Act(AT_ACTION, "The auctioneer appears before $n to return $p to $m.",
-              auction->Seller,auction->Item,NULL,TO_ROOM);
+              OngoingAuction->Seller,OngoingAuction->Item,NULL,TO_ROOM);
 
-          if ( (auction->Seller->CarryWeight
-                + GetObjectWeight( auction->Item ))
-               > GetCarryCapacityWeight( auction->Seller ) )
+          if ( (OngoingAuction->Seller->CarryWeight
+                + GetObjectWeight( OngoingAuction->Item ))
+               > GetCarryCapacityWeight( OngoingAuction->Seller ) )
             {
               Act( AT_PLAIN, "You drop $p as it is just too much to carry"
-                   " with everything else you're carrying.", auction->Seller,
-                   auction->Item, NULL, TO_CHAR );
+                   " with everything else you're carrying.", OngoingAuction->Seller,
+                   OngoingAuction->Item, NULL, TO_CHAR );
               Act( AT_PLAIN, "$n drops $p as it is too much extra weight"
-                   " for $m with everything else.", auction->Seller,
-                   auction->Item, NULL, TO_ROOM );
-              ObjectToRoom( auction->Item, auction->Seller->InRoom );
+                   " for $m with everything else.", OngoingAuction->Seller,
+                   OngoingAuction->Item, NULL, TO_ROOM );
+              ObjectToRoom( OngoingAuction->Item, OngoingAuction->Seller->InRoom );
             }
           else
             {
-              ObjectToCharacter (auction->Item,auction->Seller);
+              ObjectToCharacter (OngoingAuction->Item,OngoingAuction->Seller);
             }
 
-          tax = (int)auction->Item->Cost * 0.05;
-          BoostEconomy( auction->Seller->InRoom->Area, tax );
-          auction->Seller->Echo( "The auctioneer charges you an auction fee of %d.\r\n", tax );
+          tax = (int)OngoingAuction->Item->Cost * 0.05;
+          BoostEconomy( OngoingAuction->Seller->InRoom->Area, tax );
+          OngoingAuction->Seller->Echo( "The auctioneer charges you an auction fee of %d.\r\n", tax );
 
-          if ((auction->Seller->Gold - tax) < 0)
+          if ((OngoingAuction->Seller->Gold - tax) < 0)
             {
-              auction->Seller->Gold = 0;
+              OngoingAuction->Seller->Gold = 0;
             }
           else
             {
-              auction->Seller->Gold -= tax;
+              OngoingAuction->Seller->Gold -= tax;
             }
 
           if ( SysData.SaveFlags.test( Flag::AutoSave::Auction ) )
             {
-              PlayerCharacters->Save( auction->Seller );
+              PlayerCharacters->Save( OngoingAuction->Seller );
             }
         }
 
-      auction->Item = NULL;
+      OngoingAuction->Item = NULL;
     }
 }

@@ -27,7 +27,7 @@ void do_auction(Character *ch, std::string argument)
       return;
     }
 
-  if ( ( time_info.Hour > 18 || time_info.Hour < 9 ) && auction->Item == NULL )
+  if ( ( time_info.Hour > 18 || time_info.Hour < 9 ) && OngoingAuction->Item == NULL )
     {
       SetCharacterColor ( AT_LBLUE, ch );
       ch->Echo( "\r\nThe auctioneer has retired for the evening.\r\n" );
@@ -36,14 +36,14 @@ void do_auction(Character *ch, std::string argument)
 
   if ( arg1.empty() )
     {
-      if (auction->Item != NULL)
+      if (OngoingAuction->Item != NULL)
         {
-          obj = auction->Item;
+          obj = OngoingAuction->Item;
           SetCharacterColor( AT_BLUE, ch );
           
           /* show item data here */
-          if (auction->Bet > 0)
-            ch->Echo( "Current bid on this item is %d credits.\r\n",auction->Bet );
+          if (OngoingAuction->Bet > 0)
+            ch->Echo( "Current bid on this item is %d credits.\r\n",OngoingAuction->Bet );
           else
             ch->Echo("No bids on this item have been received.\r\n");
 
@@ -92,9 +92,9 @@ void do_auction(Character *ch, std::string argument)
           if (IsImmortal(ch))
             {
               ch->Echo( "Seller: %s.  Bidder: %s.  Round: %d.\r\n",
-                        auction->Seller->Name.c_str(), auction->Buyer->Name.c_str(),
-                        (auction->Going + 1));
-              ch->Echo( "Time left in round: %d.\r\n", auction->Pulse );
+                        OngoingAuction->Seller->Name.c_str(), OngoingAuction->Buyer->Name.c_str(),
+                        (OngoingAuction->Going + 1));
+              ch->Echo( "Time left in round: %d.\r\n", OngoingAuction->Pulse );
             }
 
           return;
@@ -109,7 +109,7 @@ void do_auction(Character *ch, std::string argument)
 
   if ( IsImmortal(ch) && !StrCmp(arg1,"stop"))
     {
-      if (auction->Item == NULL)
+      if (OngoingAuction->Item == NULL)
         {
           ch->Echo("There is no auction to stop.\r\n");
           return;
@@ -118,21 +118,21 @@ void do_auction(Character *ch, std::string argument)
         {
           SetCharacterColor( AT_LBLUE, ch );
           sprintf (buf,"Sale of %s has been stopped by an Immortal.",
-                   auction->Item->ShortDescr.c_str());
+                   OngoingAuction->Item->ShortDescr.c_str());
           TalkAuction (buf);
-          ObjectToCharacter (auction->Item, auction->Seller);
+          ObjectToCharacter (OngoingAuction->Item, OngoingAuction->Seller);
 
           if ( SysData.SaveFlags.test( Flag::AutoSave::Auction ) )
             {
-              PlayerCharacters->Save(auction->Seller);
+              PlayerCharacters->Save(OngoingAuction->Seller);
             }
             
-          auction->Item = NULL;
+          OngoingAuction->Item = NULL;
 
-          if (auction->Buyer != NULL && auction->Buyer != auction->Seller) /* return money to the buyer */
+          if (OngoingAuction->Buyer != NULL && OngoingAuction->Buyer != OngoingAuction->Seller) /* return money to the buyer */
             {
-              auction->Buyer->Gold += auction->Bet;
-              auction->Buyer->Echo("Your money has been returned.\r\n");
+              OngoingAuction->Buyer->Gold += OngoingAuction->Bet;
+              OngoingAuction->Buyer->Echo("Your money has been returned.\r\n");
             }
           
           return;
@@ -141,11 +141,11 @@ void do_auction(Character *ch, std::string argument)
 
   if (!StrCmp(arg1,"bid") )
     {
-      if (auction->Item != NULL)
+      if (OngoingAuction->Item != NULL)
         {
           int newbet = 0;
 
-          if ( ch == auction->Seller)
+          if ( ch == OngoingAuction->Seller)
             {
               ch->Echo("You can't bid on your own item!\r\n");
               return;
@@ -157,9 +157,9 @@ void do_auction(Character *ch, std::string argument)
               return;
             }
 
-          newbet = ParseBet(auction->Bet, argument);
+          newbet = ParseBet(OngoingAuction->Bet, argument);
 
-          if (newbet < auction->Starting)
+          if (newbet < OngoingAuction->Starting)
             {
               ch->Echo("You must place a bid that is higher than the starting bid.\r\n");
               return;
@@ -168,7 +168,7 @@ void do_auction(Character *ch, std::string argument)
           /* to avoid slow auction, use a bigger amount than 100 if the bet
              is higher up - changed to 100 for our high economy
 	  */
-          if (newbet < (auction->Bet + 100))
+          if (newbet < (OngoingAuction->Bet + 100))
             {
 	      ch->Echo("You must at least bid 100 credits over the current bid.\r\n");
               return;
@@ -189,8 +189,8 @@ void do_auction(Character *ch, std::string argument)
           /* the actual bet is OK! */
 
           /* return the gold to the last buyer, if one exists */
-          if (auction->Buyer != NULL && auction->Buyer != auction->Seller)
-            auction->Buyer->Gold += auction->Bet;
+          if (OngoingAuction->Buyer != NULL && OngoingAuction->Buyer != OngoingAuction->Seller)
+            OngoingAuction->Buyer->Gold += OngoingAuction->Bet;
 
           ch->Gold -= newbet; /* substract the gold - important :) */
 
@@ -199,12 +199,12 @@ void do_auction(Character *ch, std::string argument)
               PlayerCharacters->Save(ch);
             }
           
-          auction->Buyer = ch;
-          auction->Bet   = newbet;
-          auction->Going = 0;
-          auction->Pulse = PULSE_AUCTION; /* start the auction over again */
+          OngoingAuction->Buyer = ch;
+          OngoingAuction->Bet   = newbet;
+          OngoingAuction->Going = 0;
+          OngoingAuction->Pulse = PULSE_AUCTION; /* start the auction over again */
 
-          sprintf (buf,"A bid of %d credits has been received on %s.\r\n",newbet,auction->Item->ShortDescr.c_str());
+          sprintf (buf,"A bid of %d credits has been received on %s.\r\n",newbet,OngoingAuction->Item->ShortDescr.c_str());
           TalkAuction (buf);
           return;
         }
@@ -237,7 +237,7 @@ void do_auction(Character *ch, std::string argument)
 
   if ( arg2.empty() )
     {
-      auction->Starting = 0;
+      OngoingAuction->Starting = 0;
       arg2 = "0";
     }
 
@@ -253,7 +253,7 @@ void do_auction(Character *ch, std::string argument)
       return;
     }
 
-  if (auction->Item == NULL)
+  if (OngoingAuction->Item == NULL)
     {
       switch (obj->ItemType)
 	{
@@ -280,24 +280,24 @@ void do_auction(Character *ch, std::string argument)
               PlayerCharacters->Save(ch);
             }
             
-	  auction->Item = obj;
-	  auction->Bet = 0;
-	  auction->Buyer = ch;
-	  auction->Seller = ch;
-	  auction->Pulse = PULSE_AUCTION;
-	  auction->Going = 0;
-	  auction->Starting = ToLong(arg2);
+	  OngoingAuction->Item = obj;
+	  OngoingAuction->Bet = 0;
+	  OngoingAuction->Buyer = ch;
+	  OngoingAuction->Seller = ch;
+	  OngoingAuction->Pulse = PULSE_AUCTION;
+	  OngoingAuction->Going = 0;
+	  OngoingAuction->Starting = ToLong(arg2);
 
-	  if (auction->Starting > 0)
-	    auction->Bet = auction->Starting;
+	  if (OngoingAuction->Starting > 0)
+	    OngoingAuction->Bet = OngoingAuction->Starting;
 
-	  sprintf (buf, "A new item is being auctioned: %s at %d credits.", obj->ShortDescr.c_str(), auction->Starting);
+	  sprintf (buf, "A new item is being auctioned: %s at %d credits.", obj->ShortDescr.c_str(), OngoingAuction->Starting);
 	  TalkAuction (buf);
 	}
     }
   else
     {
-      Act(AT_TELL, "Try again later - $p is being auctioned right now!",ch,auction->Item,NULL,TO_CHAR);
+      Act(AT_TELL, "Try again later - $p is being auctioned right now!",ch,OngoingAuction->Item,NULL,TO_CHAR);
       SetWaitState( ch, 1.5 * PULSE_VIOLENCE );
       return;
     }

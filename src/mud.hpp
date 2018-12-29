@@ -375,7 +375,7 @@ extern bool             fLogAll;
 extern char             log_buf[];
 extern TimeInfo   time_info;
 extern Weather     weather_info;
-extern Auction         *auction;
+extern std::unique_ptr<Auction> OngoingAuction;
 extern ProtoMobile *MobIndexHash[MAX_KEY_HASH];
 extern ProtoObject *ObjectIndexHash[MAX_KEY_HASH];
 extern Room *RoomIndexHash[MAX_KEY_HASH];

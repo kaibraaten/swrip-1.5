@@ -107,7 +107,7 @@ int nummobsloaded = 0;
 int numobjsloaded = 0;
 int physicalobjects = 0;
 
-Auction *auction = NULL;
+std::unique_ptr<Auction> OngoingAuction;
 
 /* criminals */
 short gsn_torture;
@@ -387,7 +387,7 @@ void BootDatabase(bool fCopyOver)
     quitting_char = NULL;
     loading_char = NULL;
     saving_char = NULL;
-    auction = new Auction();
+    OngoingAuction = std::make_unique<Auction>();
 
     for (int wear = 0; wear < MAX_WEAR; wear++)
         for (int x = 0; x < MAX_LAYERS; x++)
