@@ -32,282 +32,282 @@
 
 namespace Ceris {
 
-// Forward declaration needed by Event.
-template< typename EventArgsT >
-class HandlerFunctionBase;
+    // Forward declaration needed by Event.
+    template< typename EventArgsT >
+    class HandlerFunctionBase;
 
-///////////////////////////////////////////////////////////////////////////////
-// Event
+    ///////////////////////////////////////////////////////////////////////////////
+    // Event
 
-template< typename EventArgsT >
-class Event
-{
-public:
-  Event() = default;
-  ~Event() = default;
-  
-  // Dispatch event notification to subscribers.
-  void operator()( const EventArgsT &args ) const;
-
-  // Subscribe to the event using a member function as eventhandler.
-  template< typename T >
-  void Add( T *subscriber, void ( T::*memFn )( EventArgsT ) );
-
-  // Subscribe to the event using a non-member function as eventhandler.
-  void Add( void *userdata, std::function<void( void*, EventArgsT )> fun );
-
-  // Subscribe to the event using a non-member function as eventhandler.
-  void Add( std::function<void( void*, EventArgsT )> fun );
-  
-  // Unsubscribe all eventhandlers for a specific subscriber. Both member
-  // and non-member functions are unsubscribed.
-  template< typename T >
-  void Remove( T *subscriber, void ( T::*memFn )( EventArgsT ) );
-
-  // Unsubscribe all member function eventhandlers for a subscriber.
-  void Remove( void *subscriber );
-
-  // Unsubscribe a non-member function eventhandler.
-  void Remove( void *userdata, std::function<void ( void*, EventArgsT )> fun );
-
-  Event &operator=( const Event& ) = delete;
-  Event( const Event& ) = delete;
-
-private:
-  using HandlerContainer = std::multimap< void*, std::shared_ptr<HandlerFunctionBase<EventArgsT>> >;
-  template< typename T >
-  auto Find( T *instance, void ( T::*memFn )( EventArgsT ) ) const;
-  auto Find( void *userdata, std::function<void( void*, EventArgsT )> fun ) const;
-  HandlerContainer _Handlers;
-};
-
-///////////////////////////////////////////////////////////////////////////////
-// HandlerFunctionBase
-
-template< typename EventArgsT >
-class HandlerFunctionBase
-{
-public:
-  virtual ~HandlerFunctionBase() = default;
-  void Exec( const EventArgsT &args );
-  virtual bool Equals( const std::shared_ptr<HandlerFunctionBase>& ) const = 0;
-
-private:
-  virtual void Call( const EventArgsT &args ) = 0;
-};
-
-template< typename EventArgsT >
-void HandlerFunctionBase< EventArgsT >::Exec( const EventArgsT &a )
-{
-  Call( a );
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// MemberFunctionHandler
-
-template< typename T, typename EventArgsT >
-class MemberFunctionHandler : public HandlerFunctionBase< EventArgsT >
-{
-public:
-  typedef void ( T::*MemberFunc )( EventArgsT );
-  MemberFunctionHandler( T *instance, MemberFunc memFn );
-  bool Equals( const std::shared_ptr<HandlerFunctionBase<EventArgsT>>& ) const;
-
-private:
-  void Call( const EventArgsT &args );
-
-  T *_Instance;
-  MemberFunc _Function;
-};
-
-template< typename T, typename EventArgsT >
-MemberFunctionHandler< T, EventArgsT >::MemberFunctionHandler(T *instance,
-							      MemberFunc memFn)
-  : _Instance( instance ),
-    _Function( memFn )
-{
-
-}
-
-template< typename T, typename EventArgsT >
-void MemberFunctionHandler< T, EventArgsT >::Call( const EventArgsT &args )
-{
-  ( _Instance->*_Function )( args );
-}
-
-template< typename T, typename EventArgsT >
-bool MemberFunctionHandler< T, EventArgsT >::Equals( const std::shared_ptr<HandlerFunctionBase< EventArgsT >> &rhv ) const
-{
-  const auto h2 = std::dynamic_pointer_cast<MemberFunctionHandler< T, EventArgsT >>( rhv );
-
-  if( !h2 )
+    template< typename EventArgsT >
+    class Event
     {
-      return false;
+    public:
+        Event() = default;
+        ~Event() = default;
+
+        // Dispatch event notification to subscribers.
+        void operator()(const EventArgsT &args) const;
+
+        // Subscribe to the event using a member function as eventhandler.
+        template< typename T >
+        void Add(T *subscriber, void (T::*memFn)(EventArgsT));
+
+        // Subscribe to the event using a non-member function as eventhandler.
+        void Add(void *userdata, std::function<void(void*, EventArgsT)> fun);
+
+        // Subscribe to the event using a non-member function as eventhandler.
+        void Add(std::function<void(void*, EventArgsT)> fun);
+
+        // Unsubscribe all eventhandlers for a specific subscriber. Both member
+        // and non-member functions are unsubscribed.
+        template< typename T >
+        void Remove(T *subscriber, void (T::*memFn)(EventArgsT));
+
+        // Unsubscribe all member function eventhandlers for a subscriber.
+        void Remove(void *subscriber);
+
+        // Unsubscribe a non-member function eventhandler.
+        void Remove(void *userdata, std::function<void(void*, EventArgsT)> fun);
+
+        Event &operator=(const Event&) = delete;
+        Event(const Event&) = delete;
+
+    private:
+        using HandlerContainer = std::multimap< void*, std::shared_ptr<HandlerFunctionBase<EventArgsT>> >;
+        template< typename T >
+        auto Find(T *instance, void (T::*memFn)(EventArgsT)) const;
+        auto Find(void *userdata, std::function<void(void*, EventArgsT)> fun) const;
+        HandlerContainer _Handlers;
+    };
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // HandlerFunctionBase
+
+    template< typename EventArgsT >
+    class HandlerFunctionBase
+    {
+    public:
+        virtual ~HandlerFunctionBase() = default;
+        void Exec(const EventArgsT &args);
+        virtual bool Equals(const std::shared_ptr<HandlerFunctionBase>&) const = 0;
+
+    private:
+        virtual void Call(const EventArgsT &args) = 0;
+    };
+
+    template< typename EventArgsT >
+    void HandlerFunctionBase< EventArgsT >::Exec(const EventArgsT &a)
+    {
+        Call(a);
     }
 
-  return _Instance == h2->_Instance && _Function == h2->_Function;
-}
+    ///////////////////////////////////////////////////////////////////////////////
+    // MemberFunctionHandler
 
-///////////////////////////////////////////////////////////////////////////////
-// GlobalFunctionHandler
-
-template< typename EventArgsT >
-class GlobalFunctionHandler : public HandlerFunctionBase< EventArgsT >
-{
-public:
-  using Func = std::function<void(void*, EventArgsT)>;
-  GlobalFunctionHandler( void *userdata, Func memFn );
-  bool Equals( const std::shared_ptr<HandlerFunctionBase< EventArgsT >>& ) const;
-
-private:
-  void Call( const EventArgsT &args );
-
-  void *_UserData;
-  Func _Function;
-};
-
-template< typename EventArgsT >
-GlobalFunctionHandler< EventArgsT >::GlobalFunctionHandler( void *ud, Func memFn )
-  : _UserData( ud ),
-    _Function( memFn )
-{
-
-}
-
-template< typename EventArgsT >
-void GlobalFunctionHandler< EventArgsT >::Call( const EventArgsT &args )
-{
-  _Function( _UserData, args );
-}
-
-template< typename EventArgsT >
-bool GlobalFunctionHandler< EventArgsT >::Equals( const std::shared_ptr<HandlerFunctionBase< EventArgsT >> &rhv ) const
-{
-  const auto h2 = std::dynamic_pointer_cast<GlobalFunctionHandler< EventArgsT > >( rhv );
-
-  if( !h2 )
+    template< typename T, typename EventArgsT >
+    class MemberFunctionHandler : public HandlerFunctionBase< EventArgsT >
     {
-      return false;
+    public:
+        typedef void (T::*MemberFunc)(EventArgsT);
+        MemberFunctionHandler(T *instance, MemberFunc memFn);
+        bool Equals(const std::shared_ptr<HandlerFunctionBase<EventArgsT>>&) const;
+
+    private:
+        void Call(const EventArgsT &args);
+
+        T *_Instance;
+        MemberFunc _Function;
+    };
+
+    template< typename T, typename EventArgsT >
+    MemberFunctionHandler< T, EventArgsT >::MemberFunctionHandler(T *instance,
+        MemberFunc memFn)
+        : _Instance(instance),
+        _Function(memFn)
+    {
+
     }
 
-  return _UserData == h2->_UserData
-    && *_Function.template target<void(*)(void*, EventArgsT)>() == *h2->_Function.template target<void(*)(void*, EventArgsT)>();
-}
-
-///////////////////////////////////////////////////////////////////////////////
-// Event
-
-template< typename EventArgsT >
-template< typename T >
-auto Event< EventArgsT >::Find( T *instance, void ( T::*memFn )( EventArgsT ) ) const
-{
-  MemberFunctionHandler< T, EventArgsT > handler( instance, memFn );
-
-  for( auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i )
+    template< typename T, typename EventArgsT >
+    void MemberFunctionHandler< T, EventArgsT >::Call(const EventArgsT &args)
     {
-      if( handler.Equals( i->second ) )
-	{
-	  return i;
-	}
+        (_Instance->*_Function)(args);
     }
 
-  return _Handlers.end();
-}
-
-template< typename EventArgsT >
-auto Event< EventArgsT >::Find( void *userdata, std::function<void( void*, EventArgsT )> fun ) const
-{
-  GlobalFunctionHandler< EventArgsT > handler( userdata, fun );
-
-  for( auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i )
+    template< typename T, typename EventArgsT >
+    bool MemberFunctionHandler< T, EventArgsT >::Equals(const std::shared_ptr<HandlerFunctionBase< EventArgsT >> &rhv) const
     {
-      if( handler.Equals( i->second ) )
+        const auto h2 = std::dynamic_pointer_cast<MemberFunctionHandler< T, EventArgsT >>(rhv);
+
+        if (!h2)
         {
-          return i;
+            return false;
+        }
+
+        return _Instance == h2->_Instance && _Function == h2->_Function;
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // GlobalFunctionHandler
+
+    template< typename EventArgsT >
+    class GlobalFunctionHandler : public HandlerFunctionBase< EventArgsT >
+    {
+    public:
+        using Func = std::function<void(void*, EventArgsT)>;
+        GlobalFunctionHandler(void *userdata, Func memFn);
+        bool Equals(const std::shared_ptr<HandlerFunctionBase< EventArgsT >>&) const;
+
+    private:
+        void Call(const EventArgsT &args);
+
+        void *_UserData;
+        Func _Function;
+    };
+
+    template< typename EventArgsT >
+    GlobalFunctionHandler< EventArgsT >::GlobalFunctionHandler(void *ud, Func memFn)
+        : _UserData(ud),
+        _Function(memFn)
+    {
+
+    }
+
+    template< typename EventArgsT >
+    void GlobalFunctionHandler< EventArgsT >::Call(const EventArgsT &args)
+    {
+        _Function(_UserData, args);
+    }
+
+    template< typename EventArgsT >
+    bool GlobalFunctionHandler< EventArgsT >::Equals(const std::shared_ptr<HandlerFunctionBase< EventArgsT >> &rhv) const
+    {
+        const auto h2 = std::dynamic_pointer_cast<GlobalFunctionHandler< EventArgsT >>(rhv);
+
+        if (!h2)
+        {
+            return false;
+        }
+
+        return _UserData == h2->_UserData
+            && *_Function.template target<void(*)(void*, EventArgsT)>() == *h2->_Function.template target<void(*)(void*, EventArgsT)>();
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // Event
+
+    template< typename EventArgsT >
+    template< typename T >
+    auto Event< EventArgsT >::Find(T *instance, void (T::*memFn)(EventArgsT)) const
+    {
+        MemberFunctionHandler< T, EventArgsT > handler(instance, memFn);
+
+        for (auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i)
+        {
+            if (handler.Equals(i->second))
+            {
+                return i;
+            }
+        }
+
+        return _Handlers.end();
+    }
+
+    template< typename EventArgsT >
+    auto Event< EventArgsT >::Find(void *userdata, std::function<void(void*, EventArgsT)> fun) const
+    {
+        GlobalFunctionHandler< EventArgsT > handler(userdata, fun);
+
+        for (auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i)
+        {
+            if (handler.Equals(i->second))
+            {
+                return i;
+            }
+        }
+
+        return _Handlers.end();
+    }
+
+    template< typename EventArgsT >
+    template< typename T >
+    void Event< EventArgsT >::Add(T *instance, void (T::*memFn)(EventArgsT))
+    {
+        if (Find(instance, memFn) == _Handlers.end())
+        {
+            _Handlers.insert({ instance, std::make_shared<MemberFunctionHandler<T, EventArgsT>>(instance, memFn) });
         }
     }
 
-  return _Handlers.end();
-}
-
-template< typename EventArgsT >
-template< typename T >
-void Event< EventArgsT >::Add( T *instance, void ( T::*memFn )( EventArgsT ) )
-{
-  if( Find( instance, memFn ) == _Handlers.end() )
+    template< typename EventArgsT >
+    void Event< EventArgsT >::Add(void *userdata,
+        std::function<void(void*, EventArgsT)> fun)
     {
-      _Handlers.insert( { instance, std::make_shared<MemberFunctionHandler<T, EventArgsT>>( instance, memFn ) } );
-    }
-}
-
-template< typename EventArgsT >
-void Event< EventArgsT >::Add( void *userdata,
-                               std::function<void( void*, EventArgsT )> fun )
-{
-  if( Find( userdata, fun ) == _Handlers.end() )
-    {
-      _Handlers.insert( { userdata, std::make_shared<GlobalFunctionHandler<EventArgsT>>( userdata, fun ) } );
-    }
-}
-
-template< typename EventArgsT >
-void Event< EventArgsT >::Add( std::function<void( void*, EventArgsT )> fun )
-{
-  Add( nullptr, fun );
-}
-
-template< typename EventArgsT >
-void Event< EventArgsT >::Remove( void *thingy )
-{
-  if( thingy )
-    {
-      _Handlers.erase( thingy );
-    }
-}
-
-template< typename EventArgsT >
-void Event< EventArgsT >::Remove( void *userdata,
-				  std::function<void( void*, EventArgsT )> fun )
-{
-  GlobalFunctionHandler< EventArgsT > handler( userdata, fun );
-
-  for( auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i )
-    {
-      if( handler.Equals( i->second ) )
+        if (Find(userdata, fun) == _Handlers.end())
         {
-	  _Handlers.erase( i );
-	  break;
+            _Handlers.insert({ userdata, std::make_shared<GlobalFunctionHandler<EventArgsT>>(userdata, fun) });
         }
     }
-}
 
-template< typename EventArgsT >
-template< typename T >
-void Event< EventArgsT >::Remove( T *instance, void ( T::*memFn )( EventArgsT ) )
-{
-  MemberFunctionHandler< T, EventArgsT > handler( instance, memFn );
-
-  for( auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i )
+    template< typename EventArgsT >
+    void Event< EventArgsT >::Add(std::function<void(void*, EventArgsT)> fun)
     {
-      if( handler.Equals( i->second ) )
+        Add(nullptr, fun);
+    }
+
+    template< typename EventArgsT >
+    void Event< EventArgsT >::Remove(void *thingy)
+    {
+        if (thingy)
         {
-          _Handlers.erase( i );
-	  break;
+            _Handlers.erase(thingy);
         }
     }
-}
 
-template< typename EventArgsT >
-void Event< EventArgsT >::operator()( const EventArgsT &args ) const
-{
-  // Use a copy so it's safe for handlers to unregister during dispatch
-  HandlerContainer tmp = _Handlers;
-
-  for( auto p : tmp )
+    template< typename EventArgsT >
+    void Event< EventArgsT >::Remove(void *userdata,
+        std::function<void(void*, EventArgsT)> fun)
     {
-      p.second->Exec( args );
+        GlobalFunctionHandler< EventArgsT > handler(userdata, fun);
+
+        for (auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i)
+        {
+            if (handler.Equals(i->second))
+            {
+                _Handlers.erase(i);
+                break;
+            }
+        }
     }
-}
+
+    template< typename EventArgsT >
+    template< typename T >
+    void Event< EventArgsT >::Remove(T *instance, void (T::*memFn)(EventArgsT))
+    {
+        MemberFunctionHandler< T, EventArgsT > handler(instance, memFn);
+
+        for (auto i = std::cbegin(_Handlers); i != std::cend(_Handlers); ++i)
+        {
+            if (handler.Equals(i->second))
+            {
+                _Handlers.erase(i);
+                break;
+            }
+        }
+    }
+
+    template< typename EventArgsT >
+    void Event< EventArgsT >::operator()(const EventArgsT &args) const
+    {
+        // Use a copy so it's safe for handlers to unregister during dispatch
+        HandlerContainer tmp = _Handlers;
+
+        for (auto p : tmp)
+        {
+            p.second->Exec(args);
+        }
+    }
 
 }
 

@@ -7,7 +7,7 @@
 struct List;
 struct ListIterator;
 
-List *AllocateList(void);
+List *AllocateList();
 void FreeList(List *list);
 void AddToList(List *list, void *data);
 void AddToListFront(List *list, void *data);

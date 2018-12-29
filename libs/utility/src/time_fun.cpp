@@ -8,46 +8,46 @@
 
 #include "utility.hpp"
 
-struct tm *UpdateTime( struct tm *old_time )
+tm *UpdateTime(tm *old_time)
 {
-  time_t t = mktime(old_time);
-  return localtime(&t);
+    const time_t t = mktime(old_time);
+    return localtime(&t);
 }
 
-void SubtractTimes(struct timeval *etime, struct timeval *start_time)
+void SubtractTimes(timeval *etime, const timeval *start_time)
 {
-  etime->tv_sec -= start_time->tv_sec;
-  etime->tv_usec -= start_time->tv_usec;
+    etime->tv_sec -= start_time->tv_sec;
+    etime->tv_usec -= start_time->tv_usec;
 
-  while ( etime->tv_usec < 0 )
-  {
-    etime->tv_usec += 1000000;
-    etime->tv_sec--;
-  }
+    while (etime->tv_usec < 0)
+    {
+        etime->tv_usec += 1000000;
+        etime->tv_sec--;
+    }
 }
 
-void StartTimer(struct timeval *start_time)
+void StartTimer(timeval *start_time)
 {
-  assert(start_time != nullptr);
-  gettimeofday(start_time, NULL);
+    assert(start_time != nullptr);
+    gettimeofday(start_time, nullptr);
 }
 
-time_t StopTimer(struct timeval *start_time)
+time_t StopTimer(timeval *start_time)
 {
-  struct timeval etime;
+    timeval etime{};
 
-  /* Mark etime before checking start_time, so that we get a better reading. */
-  gettimeofday(&etime, NULL);
+    /* Mark etime before checking start_time, so that we get a better reading. */
+    gettimeofday(&etime, nullptr);
 
-  if ( !start_time || (!start_time->tv_sec && !start_time->tv_usec) )
-  {
-    assert(false);
-    return 0;
-  }
+    if (!start_time || (!start_time->tv_sec && !start_time->tv_usec))
+    {
+        assert(false);
+        return 0;
+    }
 
-  SubtractTimes(&etime, start_time);
+    SubtractTimes(&etime, start_time);
 
-  /* start_time becomes time used */
-  *start_time = etime;
-  return (etime.tv_sec*1000000)+etime.tv_usec;
+    /* start_time becomes time used */
+    *start_time = etime;
+    return (etime.tv_sec * 1000000) + etime.tv_usec;
 }

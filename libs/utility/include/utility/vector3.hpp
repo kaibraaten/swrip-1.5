@@ -26,52 +26,52 @@
 #ifndef _VECTOR3_HPP_
 #define _VECTOR3_HPP_
 
-/*
- * General purpose vector structure in three dimensions.
- */
+ /*
+  * General purpose vector structure in three dimensions.
+  */
 class Vector3
 {
 public:
-  double x = 0;
-  double y = 0;
-  double z = 0;
+    double x = 0;
+    double y = 0;
+    double z = 0;
 };
 
 /*
  * Return the length of a vector
  * Not to be confused with the distance between two vectors!
  */
-double GetVectorLength( const Vector3 * const v );
+double GetVectorLength(const Vector3 * const v);
 
 /*
  * Normalize a vector
  */
-void NormalizeVector( Vector3 * const v );
+void NormalizeVector(Vector3 * const v);
 
 /*
  * Copy vector a vector
  */
-void CopyVector( Vector3 * const to, const Vector3 * const from );
+void CopyVector(Vector3 * const to, const Vector3 * const from);
 
 /*
  * Return the distance between two vectors
  */
-double GetDistanceBetweenVectors( const Vector3 * const a, const Vector3 * const b );
+double GetDistanceBetweenVectors(const Vector3 * const a, const Vector3 * const b);
 
 /*
  * Calculate dot product
  */
-double GetVectorDotProduct( const Vector3 * const a, const Vector3 * const b );
+double GetVectorDotProduct(const Vector3 * const a, const Vector3 * const b);
 
 /*
  * Initialize a vector's member variables.
  */
-void InitializeVector( Vector3 * const v );
+void InitializeVector(Vector3 * const v);
 
 /*
  * Set the coordinates.
  */
 
-void SetVector( Vector3 * const vec, double x, double y, double z );
+void SetVector(Vector3 * const vec, double x, double y, double z);
 
 #endif

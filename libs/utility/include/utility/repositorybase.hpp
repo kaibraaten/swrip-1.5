@@ -39,17 +39,17 @@ struct RepositoryBasePrivateData;
 
 struct RepositoryBase
 {
-  void (*AddEntity)(struct RepositoryBase *self, void *entity);
-  void (*RemoveEntity)(struct RepositoryBase *self, void *entity);
-  const List* (*GetEntities)(const struct RepositoryBase *self);
-  EntityLoader LoadEntities;
-  EntitySaver SaveEntities;
+    void(*AddEntity)(struct RepositoryBase *self, void *entity);
+    void(*RemoveEntity)(struct RepositoryBase *self, void *entity);
+    const List* (*GetEntities)(const struct RepositoryBase *self);
+    EntityLoader LoadEntities;
+    EntitySaver SaveEntities;
 
-  struct RepositoryBasePrivateData *_data;
+    struct RepositoryBasePrivateData *_data;
 };
 
 void InitRepositoryBase(struct RepositoryBase *self,
-                        EntityLoader loadFunc,
-                        EntitySaver saveFunc);
+    EntityLoader loadFunc,
+    EntitySaver saveFunc);
 
 #endif

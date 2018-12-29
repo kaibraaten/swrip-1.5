@@ -63,10 +63,10 @@ using sockbuf_t = char;
 // Telnet options
 #define TELOPT_ECHO 1
 
-struct timezone 
+struct timezone
 {
-  int tz_minuteswest; /* minutes W of Greenwich */
-  int tz_dsttime;     /* type of dst correction */
+    int tz_minuteswest; /* minutes W of Greenwich */
+    int tz_dsttime;     /* type of dst correction */
 };
 
 int gettimeofday(struct timeval*, struct timezone*);
