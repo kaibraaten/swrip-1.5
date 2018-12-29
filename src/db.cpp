@@ -64,12 +64,30 @@ namespace fs = std::filesystem;
 #include "systemdata.hpp"
 #include "exit.hpp"
 
- /*
-  * Globals.
-  */
+/*
+ * Globals.
+ */
 
-Wizard *first_wiz = NULL;
-Wizard *last_wiz = NULL;
+ /*
+  * Structure used to build wizlist
+  */
+class Wizard
+{
+public:
+    Wizard(const std::string &name, short level) : Name(name), Level(level) { }
+    std::string Name;
+    short Level = 0;
+};
+
+struct CompareWizard
+{
+    bool operator()(const Wizard &lhv, const Wizard &rhv) const
+    {
+        return lhv.Level > rhv.Level;
+    }
+};
+
+std::set<Wizard, CompareWizard> Wizards;
 
 time_t last_restore_all_time = 0;
 
@@ -1097,39 +1115,7 @@ static void SortExits(Room *room)
 #ifdef DEBUG
         Log->Info("Adding to wizlist...");
 #endif
-
-        Wizard *wiz = new Wizard();
-        wiz->Name = name;
-        wiz->Level = level;
-
-        if (!first_wiz)
-        {
-            first_wiz = wiz;
-            last_wiz = wiz;
-            return;
-        }
-
-        /* insert sort, of sorts */
-        for (Wizard *tmp = first_wiz; tmp; tmp = tmp->Next)
-        {
-            if (level > tmp->Level)
-            {
-                if (!tmp->Last)
-                    first_wiz = wiz;
-                else
-                    tmp->Last->Next = wiz;
-
-                wiz->Last = tmp->Last;
-                wiz->Next = tmp;
-                tmp->Last = wiz;
-                return;
-            }
-        }
-
-        wiz->Last = last_wiz;
-        wiz->Next = NULL;
-        last_wiz->Next = wiz;
-        last_wiz = wiz;
+        Wizards.insert(Wizard(name, level));
     }
 
     /*
@@ -1137,12 +1123,11 @@ static void SortExits(Room *room)
      */
     void MakeWizlist()
     {
-        first_wiz = nullptr;
-        last_wiz = nullptr;
+        Wizards.clear();
 
         try
         {
-            for(const auto &entry : fs::directory_iterator(GOD_DIR))
+            for (const auto &entry : fs::directory_iterator(GOD_DIR))
             {
                 const auto &path = entry.path();
                 std::string filename = path.filename().string();
@@ -1180,7 +1165,7 @@ static void SortExits(Room *room)
                 }
             }
         }
-        catch(const fs::filesystem_error &ex)
+        catch (const fs::filesystem_error &ex)
         {
             Log->Bug("%s: Couldn't open god directory: %s", __FUNCTION__, ex.what());
             return;
@@ -1191,11 +1176,11 @@ static void SortExits(Room *room)
         int ilevel = 65535;
         char buf[MAX_STRING_LENGTH] = { '\0' };
 
-        for (Wizard *wiz = first_wiz; wiz; wiz = wiz->Next)
+        for(const auto &wiz : Wizards)
         {
-            if (wiz->Level > LEVEL_AVATAR)
+            if (wiz.Level > LEVEL_AVATAR)
             {
-                if (wiz->Level < ilevel)
+                if (wiz.Level < ilevel)
                 {
                     if (buf[0])
                     {
@@ -1204,7 +1189,7 @@ static void SortExits(Room *room)
                     }
 
                     ToWizFile("");
-                    ilevel = wiz->Level;
+                    ilevel = wiz.Level;
 
                     switch (ilevel)
                     {
@@ -1230,14 +1215,14 @@ static void SortExits(Room *room)
                     }
                 }
 
-                if (strlen(buf) + wiz->Name.size() > 76)
+                if (strlen(buf) + wiz.Name.size() > 76)
                 {
                     ToWizFile(buf);
                     buf[0] = '\0';
                 }
 
                 strcat(buf, " ");
-                strcat(buf, wiz->Name.c_str());
+                strcat(buf, wiz.Name.c_str());
 
                 if (strlen(buf) > 70)
                 {
@@ -1248,16 +1233,11 @@ static void SortExits(Room *room)
         }
 
         if (buf[0])
-            ToWizFile(buf);
-
-        for (Wizard *wiz = first_wiz, *wiznext = nullptr; wiz; wiz = wiznext)
         {
-            wiznext = wiz->Next;
-            delete wiz;
+            ToWizFile(buf);
         }
 
-        first_wiz = nullptr;
-        last_wiz = nullptr;
+        Wizards.clear();
     }
 
     /*************************************************************/
@@ -1637,7 +1617,7 @@ static void SortExits(Room *room)
                 }
             }
         }
-        catch(const fs::filesystem_error &ex)
+        catch (const fs::filesystem_error &ex)
         {
             Log->Bug("%s: Could not open god dir: %s", __FUNCTION__, ex.what());
         }

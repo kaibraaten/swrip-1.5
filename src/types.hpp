@@ -73,7 +73,6 @@ class Skill;
 class Social;
 class Command;
 class KilledData;
-class Wizard;
 class ClanMember;
 class ClanMemberList;
 class Shuttle;

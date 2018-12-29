@@ -70,18 +70,6 @@ public:
 };
 
 /*
- * Structure used to build wizlist
- */
-class Wizard
-{
-public:
-  Wizard *Next = nullptr;
-  Wizard *Last = nullptr;
-  std::string Name;
-  short   Level = 0;
-};
-
-/*
  * Attribute bonus structures.
  */
 class StrengthBonusType
