@@ -25,139 +25,138 @@
 #include "vector3_aux.hpp"
 #include "spaceobject.hpp"
 #include "ship.hpp"
-#include "planet.hpp"
 #include "repos/spaceobjectrepository.hpp"
 
 void SpaceobjectUpdate()
 {
-  for(auto spaceobj : Spaceobjects)
+    for (const auto &spaceobj : Spaceobjects)
     {
-      MoveSpaceobject( spaceobj );
+        MoveSpaceobject(spaceobj);
 
-      if( spaceobj->Position.x > MAX_COORD )
-        spaceobj->Position.x = -MAX_COORD_S;
+        if (spaceobj->Position.x > MAX_COORD)
+            spaceobj->Position.x = -MAX_COORD_S;
 
-      if( spaceobj->Position.y > MAX_COORD )
-        spaceobj->Position.y = -MAX_COORD_S;
+        if (spaceobj->Position.y > MAX_COORD)
+            spaceobj->Position.y = -MAX_COORD_S;
 
-      if( spaceobj->Position.z > MAX_COORD )
-        spaceobj->Position.z = -MAX_COORD_S;
+        if (spaceobj->Position.z > MAX_COORD)
+            spaceobj->Position.z = -MAX_COORD_S;
 
-      if( spaceobj->Position.x < -MAX_COORD )
-        spaceobj->Position.x = MAX_COORD_S;
+        if (spaceobj->Position.x < -MAX_COORD)
+            spaceobj->Position.x = MAX_COORD_S;
 
-      if( spaceobj->Position.y < -MAX_COORD )
-        spaceobj->Position.y = MAX_COORD_S;
+        if (spaceobj->Position.y < -MAX_COORD)
+            spaceobj->Position.y = MAX_COORD_S;
 
-      if( spaceobj->Position.z < -MAX_COORD )
-        spaceobj->Position.z = MAX_COORD_S;
+        if (spaceobj->Position.z < -MAX_COORD)
+            spaceobj->Position.z = MAX_COORD_S;
     }
 }
 
 /*
  * Get pointer to space structure from spaceobject name.
  */
-std::shared_ptr<Spaceobject> GetSpaceobject( const std::string &name )
+std::shared_ptr<Spaceobject> GetSpaceobject(const std::string &name)
 {
-  auto spaceobject = Spaceobjects->Find([name](const auto &so)
-                                        {
-                                          return StrCmp(name, so->Name) == 0;
-                                        });
-
-  if(spaceobject == nullptr)
+    auto spaceobject = Spaceobjects->Find([name](const auto &so)
     {
-      spaceobject = Spaceobjects->Find([name](const auto &so)
-                                       {
-                                         return StringPrefix(name, so->Name) == 0;
-                                       });
+        return StrCmp(name, so->Name) == 0;
+    });
+
+    if (spaceobject == nullptr)
+    {
+        spaceobject = Spaceobjects->Find([name](const auto &so)
+        {
+            return StringPrefix(name, so->Name) == 0;
+        });
     }
 
-  return spaceobject;
+    return spaceobject;
 }
 
 struct SpaceobjectSearch
 {
-  vnum_t vnum;
-  std::shared_ptr<Spaceobject> spaceobject;
+    vnum_t vnum;
+    std::shared_ptr<Spaceobject> spaceobject;
 };
 
 static bool FindSpaceobjectFromHangar(std::shared_ptr<Ship> ship, void *userData)
 {
-  SpaceobjectSearch *data = (SpaceobjectSearch*)userData;
+    SpaceobjectSearch *data = (SpaceobjectSearch*)userData;
 
-  if ( data->vnum == ship->Rooms.Hangar )
+    if (data->vnum == ship->Rooms.Hangar)
     {
-      if( ship->BayOpen )
+        if (ship->BayOpen)
         {
-          data->spaceobject = ship->Spaceobject;
-          return false;
+            data->spaceobject = ship->Spaceobject;
+            return false;
         }
     }
 
-  return true;
+    return true;
 }
 
 /*
  * Get pointer to space structure from the dock vnun.
  */
-std::shared_ptr<Spaceobject> GetSpaceobjectFromDockVnum( vnum_t vnum )
+std::shared_ptr<Spaceobject> GetSpaceobjectFromDockVnum(vnum_t vnum)
 {
-  auto spaceobject = Spaceobjects->Find([vnum](const auto &so)
-                                        {
-                                          return GetLandingSiteFromVnum(so, vnum) != nullptr;
-                                        });
-
-  if(spaceobject != nullptr)
+    auto spaceobject = Spaceobjects->Find([vnum](const auto &so)
     {
-      return spaceobject;
+        return GetLandingSiteFromVnum(so, vnum) != nullptr;
+    });
+
+    if (spaceobject != nullptr)
+    {
+        return spaceobject;
     }
 
-  SpaceobjectSearch data;
-  data.vnum = vnum;
-  data.spaceobject = NULL;
-  ForEachShip(FindSpaceobjectFromHangar, &data);
+    SpaceobjectSearch data;
+    data.vnum = vnum;
+    data.spaceobject = NULL;
+    ForEachShip(FindSpaceobjectFromHangar, &data);
 
-  if(data.spaceobject != NULL)
+    if (data.spaceobject != NULL)
     {
-      return data.spaceobject;
+        return data.spaceobject;
     }
-  else
+    else
     {
-      return NULL;
+        return NULL;
     }
 }
 
-const LandingSite *GetLandingSiteFromVnum( std::shared_ptr<Spaceobject> spaceobj, vnum_t vnum )
+const LandingSite *GetLandingSiteFromVnum(std::shared_ptr<Spaceobject> spaceobj, vnum_t vnum)
 {
-  size_t siteNum = 0;
+    size_t siteNum = 0;
 
-  for( siteNum = 0; siteNum < MAX_LANDINGSITE; ++siteNum )
+    for (siteNum = 0; siteNum < MAX_LANDINGSITE; ++siteNum)
     {
-      const LandingSite *site = &spaceobj->LandingSites[siteNum];
+        const LandingSite *site = &spaceobj->LandingSites[siteNum];
 
-      if( vnum == site->Dock )
+        if (vnum == site->Dock)
         {
-          return site;
+            return site;
         }
     }
 
-  return NULL;
+    return NULL;
 }
 
-const LandingSite *GetLandingSiteFromLocationName( std::shared_ptr<Spaceobject> spaceobj,
-                                                   const std::string &name )
+const LandingSite *GetLandingSiteFromLocationName(std::shared_ptr<Spaceobject> spaceobj,
+    const std::string &name)
 {
-  size_t siteNum = 0;
+    size_t siteNum = 0;
 
-  for( siteNum = 0; siteNum < MAX_LANDINGSITE; ++siteNum )
+    for (siteNum = 0; siteNum < MAX_LANDINGSITE; ++siteNum)
     {
-      const LandingSite *site = &spaceobj->LandingSites[siteNum];
+        const LandingSite *site = &spaceobj->LandingSites[siteNum];
 
-      if ( !StringPrefix( name, site->LocationName ) )
+        if (!StringPrefix(name, site->LocationName))
         {
-          return site;
+            return site;
         }
     }
 
-  return NULL;
+    return NULL;
 }

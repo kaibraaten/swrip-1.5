@@ -26,7 +26,6 @@ namespace fs = std::filesystem;
 #include <ctime>
 #include <cstring>
 #include <cctype>
-#include <cstdarg>
 #include <utility/random.hpp>
 #include "mud.hpp"
 #include "arena.hpp"

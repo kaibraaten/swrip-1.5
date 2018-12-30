@@ -52,7 +52,6 @@
 #include "repos/shiprepository.hpp"
 #include "repos/clanrepository.hpp"
 #include "repos/planetrepository.hpp"
-#include "repos/descriptorrepository.hpp"
 #include "repos/objectrepository.hpp"
 #include "repos/playerrepository.hpp"
 

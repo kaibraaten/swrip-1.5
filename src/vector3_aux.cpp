@@ -60,9 +60,7 @@
  * if( myDouble < 101.0 && myDouble > 99.0 )
  */
 
-#include <cstdio>
 #include <utility/random.hpp>
-#include "mud.hpp"
 #include "vector3_aux.hpp"
 #include "spaceobject.hpp"
 #include "ship.hpp"

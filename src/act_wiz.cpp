@@ -21,12 +21,9 @@
 
 #include <cassert>
 #include <cctype>
-#include <cstring>
 #include <ctime>
 #include "character.hpp"
 #include "mud.hpp"
-#include "reset.hpp"
-#include "shop.hpp"
 #include "area.hpp"
 #include "script.hpp"
 #include "room.hpp"

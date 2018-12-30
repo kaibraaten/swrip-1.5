@@ -21,15 +21,12 @@
  ****************************************************************************/
 
 #include <array>
-#include <cstdio>
-#include <cstring>
-#include <ctime>
 #include "mud.hpp"
 
 struct spec_fun_entry
 {
-  const char *fun_name;
-  SpecFun *fun_ptr;
+  const char *fun_name = nullptr;
+  SpecFun *fun_ptr = nullptr;
 };
 
 static const std::array<const spec_fun_entry, 21> spec_fun_table =

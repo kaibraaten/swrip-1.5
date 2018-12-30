@@ -23,7 +23,6 @@
 #include "object.hpp"
 #include "character.hpp"
 #include "mud.hpp"
-#include "clan.hpp"
 #include "log.hpp"
 #include "room.hpp"
 #include "exit.hpp"

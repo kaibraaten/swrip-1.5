@@ -19,16 +19,12 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <cctype>
-#include <cstring>
-#include <ctime>
 #include <cassert>
 #include <utility/algorithms.hpp>
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
 #include "pcdata.hpp"
-#include "log.hpp"
 #include "repos/clanrepository.hpp"
 
 //////////////////////////////////////////////////////////////

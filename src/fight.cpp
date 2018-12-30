@@ -30,7 +30,6 @@
 #include "mud.hpp"
 #include "ship.hpp"
 #include "character.hpp"
-#include "arena.hpp"
 #include "clan.hpp"
 #include "skill.hpp"
 #include "bounty.hpp"

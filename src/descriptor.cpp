@@ -24,10 +24,7 @@ Descriptor::Descriptor(socket_t desc)
   PreviousColor = 0x07;
 }
 
-Descriptor::~Descriptor()
-{
-
-}
+Descriptor::~Descriptor() = default;
 
 void Descriptor::WriteToBuffer(const std::string &txt, size_t length)
 {

@@ -19,7 +19,6 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <deque>
 #include <cstring>
 #include <cassert>
 #include <utility/algorithms.hpp>
@@ -28,7 +27,6 @@
 #include "mud.hpp"
 #include "track.hpp"
 #include "skill.hpp"
-#include "reset.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"

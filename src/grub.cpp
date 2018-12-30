@@ -13,8 +13,7 @@
  *                      Gorog's Revenge on Unruly Bastards                  *
  ****************************************************************************/
 
-#include <string.h>
-#include <ctype.h>
+#include <cstring>
 #include "grub.hpp"
 #include "mud.hpp"
 

@@ -27,111 +27,111 @@
 
 std::string HelpGreeting;
 
-std::shared_ptr<HelpFile> GetHelpFile( const Character *ch, std::string argument )
+std::shared_ptr<HelpFile> GetHelpFile(const Character *ch, std::string argument)
 {
-  std::string argall;
-  std::string argone;
-  std::string argnew;
-  std::shared_ptr<HelpFile> foundHelpfile;
-  int lev = 0;
+    std::string argall;
+    std::string argone;
+    std::string argnew;
+    std::shared_ptr<HelpFile> foundHelpfile;
+    int lev = 0;
 
-  if ( argument.empty() )
+    if (argument.empty())
     {
-      argument = "summary";
+        argument = "summary";
     }
 
-  if ( isdigit(argument[0]) )
+    if (isdigit(argument[0]))
     {
-      lev = NumberArgument( argument, argnew );
-      argument = argnew;
+        lev = NumberArgument(argument, argnew);
+        argument = argnew;
     }
-  else
+    else
     {
-      lev = -2;
-    }
-
-  /*
-   * Tricky argument handling so 'help a b' doesn't match a.
-   */
-  while ( !argument.empty() )
-    {
-      argument = OneArgument( argument, argone );
-
-      if ( !argall.empty() )
-	{
-          argall += " ";
-	}
-
-      argall += argone;
+        lev = -2;
     }
 
-  for(const auto &pHelp : HelpFiles->Entities())
+    /*
+     * Tricky argument handling so 'help a b' doesn't match a.
+     */
+    while (!argument.empty())
     {
-      if ( GetHelpFileLevel( pHelp ) > GetTrustLevel( ch ) )
-	{
-	  continue;
-	}
+        argument = OneArgument(argument, argone);
 
-      if ( lev != -2 && GetHelpFileLevel( pHelp ) != lev )
-	{
-	  continue;
-	}
+        if (!argall.empty())
+        {
+            argall += " ";
+        }
 
-      if ( IsName( argall, GetHelpFileKeyword( pHelp ) ) )
-	{
-	  foundHelpfile = pHelp;
-          break;
-	}
+        argall += argone;
     }
 
-  return foundHelpfile;
-}
-
-std::shared_ptr<HelpFile> AllocateHelpFile( const std::string &keyword, short level )
-{
-  std::shared_ptr<HelpFile> help = std::make_shared<HelpFile>();
-  
-  SetHelpFileKeyword( help, keyword );
-  SetHelpFileText( help, "" );
-  SetHelpFileLevel( help, level );
-
-  return help;
-}
-
-short GetHelpFileLevel( const std::shared_ptr<HelpFile> &help )
-{
-  return help->Level;
-}
-
-void SetHelpFileLevel( const std::shared_ptr<HelpFile> &help, short level )
-{
-  if( level >= -1 && level <= MAX_LEVEL )
+    for (const auto &pHelp : HelpFiles->Entities())
     {
-      help->Level = level;
+        if (GetHelpFileLevel(pHelp) > GetTrustLevel(ch))
+        {
+            continue;
+        }
+
+        if (lev != -2 && GetHelpFileLevel(pHelp) != lev)
+        {
+            continue;
+        }
+
+        if (IsName(argall, GetHelpFileKeyword(pHelp)))
+        {
+            foundHelpfile = pHelp;
+            break;
+        }
     }
-  else
+
+    return foundHelpfile;
+}
+
+std::shared_ptr<HelpFile> AllocateHelpFile(const std::string &keyword, short level)
+{
+    std::shared_ptr<HelpFile> help = std::make_shared<HelpFile>();
+
+    SetHelpFileKeyword(help, keyword);
+    SetHelpFileText(help, "");
+    SetHelpFileLevel(help, level);
+
+    return help;
+}
+
+short GetHelpFileLevel(const std::shared_ptr<HelpFile> &help)
+{
+    return help->Level;
+}
+
+void SetHelpFileLevel(const std::shared_ptr<HelpFile> &help, short level)
+{
+    if (level >= -1 && level <= MAX_LEVEL)
     {
-      Log->Bug( "%s:%s:%d: Argument level = %d is out of range.",
-                __FUNCTION__, __FILE__, __LINE__, level );
+        help->Level = level;
+    }
+    else
+    {
+        Log->Bug("%s:%s:%d: Argument level = %d is out of range.",
+            __FUNCTION__, __FILE__, __LINE__, level);
     }
 }
 
-std::string GetHelpFileKeyword( const std::shared_ptr<HelpFile> &help )
+std::string GetHelpFileKeyword(const std::shared_ptr<HelpFile> &help)
 {
-  return help->Keyword;
+    return help->Keyword;
 }
 
-void SetHelpFileKeyword( const std::shared_ptr<HelpFile> &help, const std::string &keyword )
+void SetHelpFileKeyword(const std::shared_ptr<HelpFile> &help, const std::string &keyword)
 {
-  help->Keyword = keyword;
+    help->Keyword = keyword;
 }
 
-std::string GetHelpFileText( const std::shared_ptr<HelpFile> &help )
+std::string GetHelpFileText(const std::shared_ptr<HelpFile> &help)
 {
-  return help->Text;
+    return help->Text;
 }
 
-void SetHelpFileText( const std::shared_ptr<HelpFile> &help, const std::string &text )
+void SetHelpFileText(const std::shared_ptr<HelpFile> &help, const std::string &text)
 {
-  help->Text = text;
+    help->Text = text;
 }

@@ -21,7 +21,6 @@
 
 #include <algorithm>
 #include <cassert>
-#include <cstring>
 #include <utility/event.hpp>
 #include <utility/random.hpp>
 #include "mud.hpp"

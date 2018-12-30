@@ -31,7 +31,7 @@ public:
   vnum_t RoomVnum = INVALID_VNUM;
   int WeaponState = LASER_READY;
   std::shared_ptr<Ship> Target;
-  ShipClass OwnerClass;
+  ShipClass OwnerClass = FIGHTER_SHIP;
 };
 
 Turret *AllocateTurret( ShipClass ownerClass )

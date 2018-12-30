@@ -32,7 +32,6 @@
 #include <cctype>
 #include <cstdio>
 #include <cstring>
-#include <cstdarg>
 #include "descriptor.hpp"
 #include "mud.hpp"
 #include "character.hpp"
@@ -40,7 +39,6 @@
 #include "log.hpp"
 #include "repos/playerrepository.hpp"
 #include "systemdata.hpp"
-#include "race.hpp"
 #include "repos/descriptorrepository.hpp"
 
 #ifdef _WIN32

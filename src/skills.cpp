@@ -25,7 +25,6 @@
 #ifndef _WIN32
 #include <strings.h>
 #endif
-#include <ctime>
 #include <cctype>
 #include <utility/random.hpp>
 #include "mud.hpp"

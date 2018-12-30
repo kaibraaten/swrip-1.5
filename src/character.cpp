@@ -27,7 +27,6 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "editor.hpp"
-#include "board.hpp"
 #include "craft.hpp"
 #include "clan.hpp"
 #include "pcdata.hpp"

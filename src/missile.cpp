@@ -32,8 +32,6 @@ std::list<std::shared_ptr<Missile>> Missiles;
 void NewMissile(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target,
     const std::string &firedBy, MissileType missiletype)
 {
-    std::shared_ptr<Spaceobject> spaceobject;
-
     if (ship == NULL)
     {
         return;
@@ -44,7 +42,7 @@ void NewMissile(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target,
         return;
     }
 
-    if ((spaceobject = ship->Spaceobject) == NULL)
+    if (ship->Spaceobject == nullptr)
     {
         return;
     }

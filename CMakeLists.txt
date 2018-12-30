@@ -26,7 +26,6 @@ src/alias.cpp
 src/area.cpp
 src/arena.cpp
 src/badname.cpp
-src/ban.cpp
 src/board.cpp
 src/bounty.cpp
 src/build.cpp

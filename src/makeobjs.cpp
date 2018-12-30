@@ -21,7 +21,6 @@
 
 #include <cstdio>
 #include <cstring>
-#include <ctime>
 #include <cassert>
 #include <utility/random.hpp>
 #include "mud.hpp"

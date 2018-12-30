@@ -44,7 +44,6 @@ namespace fs = std::filesystem;
 #include "shop.hpp"
 #include "clan.hpp"
 #include "skill.hpp"
-#include "area.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
@@ -54,7 +53,6 @@ namespace fs = std::filesystem;
 #include "descriptor.hpp"
 #include "systemdata.hpp"
 #include "alias.hpp"
-#include "race.hpp"
 #include "repos/playerrepository.hpp"
 #include "repos/objectrepository.hpp"
 

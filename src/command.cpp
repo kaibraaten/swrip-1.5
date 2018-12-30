@@ -1,6 +1,4 @@
-#include <ctype.h>
-#include <string.h>
-#include <assert.h>
+#include <cassert>
 #include "command.hpp"
 #include "mud.hpp"
 #include "script.hpp"

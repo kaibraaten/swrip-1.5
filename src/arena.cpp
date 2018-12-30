@@ -31,7 +31,6 @@
 #include <cctype>
 #include <cstdio>
 #include <cstdlib>
-#include <cstring>
 #include <ctime>
 #include <utility/random.hpp>
 #include "character.hpp"
@@ -39,7 +38,6 @@
 #include "arena.hpp"
 #include "script.hpp"
 #include "log.hpp"
-#include "room.hpp"
 #include "descriptor.hpp"
 #include "repos/descriptorrepository.hpp"
 

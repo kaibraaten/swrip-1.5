@@ -20,14 +20,10 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <ctime>
-#include <cstdio>
-#include <cstring>
 #ifndef _WIN32
 #include <strings.h>
 #include <dlfcn.h>
 #endif
-#include <cctype>
 #include "mud.hpp"
 #include "skill.hpp"
 #include "log.hpp"

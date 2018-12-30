@@ -19,7 +19,6 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <vector>
 #include <cstring>
 #include <cctype>
 #include <cassert>
@@ -31,7 +30,6 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
-#include "object.hpp"
 #include "exit.hpp"
 
 static Room *vroom_hash[64];

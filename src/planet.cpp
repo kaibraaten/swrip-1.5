@@ -21,11 +21,6 @@
  ****************************************************************************/
 
 #include <cassert>
-#include <cctype>
-#include <cstring>
-#include "mud.hpp"
-#include "clan.hpp"
-#include "spaceobject.hpp"
 #include "planet.hpp"
 #include "area.hpp"
 
