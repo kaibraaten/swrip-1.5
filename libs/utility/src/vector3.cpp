@@ -26,69 +26,69 @@
 #include <cmath>
 #include "vector3.hpp"
 
-/*
- * Copy vector 'from' into 'to'
- */
-void CopyVector( Vector3 * const to, const Vector3 * const from )
+ /*
+  * Copy vector 'from' into 'to'
+  */
+void CopyVector(Vector3 * const to, const Vector3 * const from)
 {
-  to->x = from->x;
-  to->y = from->y;
-  to->z = from->z;
+    to->x = from->x;
+    to->y = from->y;
+    to->z = from->z;
 }
 
 /*
  * Return the length of a vector
  */
-double GetVectorLength( const Vector3 * const v )
+double GetVectorLength(const Vector3 * const v)
 {
-  return sqrt( v->x * v->x + v->y * v->y + v->z * v->z );
+    return sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
 }
 
 /*
  * Return the distance between two vectors
  */
-double GetDistanceBetweenVectors( const Vector3 * const a, const Vector3 * const b )
+double GetDistanceBetweenVectors(const Vector3 * const a, const Vector3 * const b)
 {
-  return sqrt( ( a->x - b->x ) * ( a->x - b->x )
-	       + ( a->y - b->y ) * ( a->y - b->y )
-	       + ( a->z - b->z ) * ( a->z - b->z ) );
+    return sqrt((a->x - b->x) * (a->x - b->x)
+        + (a->y - b->y) * (a->y - b->y)
+        + (a->z - b->z) * (a->z - b->z));
 }
 
 /*
  * Calculate dot product
  */
-double GetVectorDotProduct( const Vector3 * const a, const Vector3 * const b )
+double GetVectorDotProduct(const Vector3 * const a, const Vector3 * const b)
 {
-  return ( a->x * b->x ) + ( a->y * b->y ) + ( a->z * b->z );
+    return (a->x * b->x) + (a->y * b->y) + (a->z * b->z);
 }
 
 /*
  * Normalize a vector
  */
-void NormalizeVector( Vector3 * const v )
+void NormalizeVector(Vector3 * const v)
 {
-  float magnitude = ( v->x * v->x ) + ( v->y * v->y ) + ( v->z * v->z );
+    double magnitude = (v->x * v->x) + (v->y * v->y) + (v->z * v->z);
 
-  if( magnitude == 0.0 )
-    return;
+    if (magnitude == 0.0)
+        return;
 
-  magnitude = sqrt( magnitude );
-  v->x /= magnitude;
-  v->y /= magnitude;
-  v->z /= magnitude;
+    magnitude = sqrt(magnitude);
+    v->x /= magnitude;
+    v->y /= magnitude;
+    v->z /= magnitude;
 }
 
 /*
  * Initialize a vector's member variables.
  */
-void InitializeVector( Vector3 * const v )
+void InitializeVector(Vector3 * const v)
 {
-  SetVector( v, 0.0, 0.0, 0.0 );
+    SetVector(v, 0.0, 0.0, 0.0);
 }
 
-void SetVector( Vector3 * const vec, double x, double y, double z )
+void SetVector(Vector3 * const vec, double x, double y, double z)
 {
-  vec->x = x;
-  vec->y = y;
-  vec->z = z;
+    vec->x = x;
+    vec->y = y;
+    vec->z = z;
 }

@@ -89,9 +89,9 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
         return 0;
     }
 
-    while (1)
+    while (true)
     {
-        if (c == '.' || isdigit((int)c))
+        if (c == '.' || isdigit(c))
         {
             if (c == '.')
             {
@@ -107,17 +107,23 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
                     exit(EXIT_FAILURE);
                 return number;
             }
+
             if (!decimal)
+            {
                 number = number * 10 + c - '0';
+            }
             else
             {
                 place++;
-                number += pow((double)10, (-1 * place)) * (c - '0');
+                number += pow(10, (-1 * place)) * (c - '0');
             }
+
             c = fgetc(fp);
         }
         else
+        {
             break;
+        }
     }
 
     if (sign)
@@ -475,9 +481,9 @@ void ForEachLuaFileInDir(const std::string &pathToDir, const std::function<void(
 {
     try
     {
-        for(const auto &entry : std::filesystem::directory_iterator(pathToDir.empty() ? "." : pathToDir))
+        for (const auto &entry : std::filesystem::directory_iterator(pathToDir.empty() ? "." : pathToDir))
         {
-            if(!entry.is_regular_file())
+            if (!entry.is_regular_file())
             {
                 continue;
             }
@@ -492,7 +498,7 @@ void ForEachLuaFileInDir(const std::string &pathToDir, const std::function<void(
             doOnFile(path.string(), userData);
         }
     }
-    catch(const std::filesystem::filesystem_error &ex)
+    catch (const std::filesystem::filesystem_error &ex)
     {
         perror(ex.what());
         exit(1);

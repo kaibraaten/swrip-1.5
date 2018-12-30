@@ -25,7 +25,7 @@ UniformDistributionRandomGenerator::UniformDistributionRandomGenerator()
 
 long UniformDistributionRandomGenerator::GetRandomNumber( long min, long max )
 {
-  std::uniform_int_distribution<long> distribution( min, max );
+  const std::uniform_int_distribution<long> distribution( min, max );
   return distribution( _generator );
 }
 

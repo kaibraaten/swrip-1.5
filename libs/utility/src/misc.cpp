@@ -9,112 +9,113 @@
 #endif
 #include "random.hpp"
 
-int umin( int check, int ncheck )
+int umin(int check, int ncheck)
 {
-  return check < ncheck ? check : ncheck;
+    return check < ncheck ? check : ncheck;
 }
 
-int umax( int check, int ncheck )
+int umax(int check, int ncheck)
 {
-  return check > ncheck ? check : ncheck;
+    return check > ncheck ? check : ncheck;
 }
 
-int urange( int mincheck, int check, int maxcheck )
+int urange(int mincheck, int check, int maxcheck)
 {
-  if( check < mincheck )
-    return mincheck;
+    if (check < mincheck)
+        return mincheck;
 
-  if( check > maxcheck )
-    return maxcheck;
+    if (check > maxcheck)
+        return maxcheck;
 
-  return check;
+    return check;
 }
 
-std::string Scramble( const std::string &strToScamble, int modifier )
+std::string Scramble(const std::string &strToScamble, int modifier)
 {
-  char arg[MAX_INPUT_LENGTH];
-  int position = 0;
-  int conversion = 0;
-  const char *argument = strToScamble.c_str();
-  
-  modifier %= GetRandomNumberFromRange( 80, 300 ); /* Bitvectors get way too large #s */
+    char arg[MAX_INPUT_LENGTH];
+    int position = 0;
+    int conversion = 0;
+    const char *argument = strToScamble.c_str();
 
-  for ( position = 0; position < MAX_INPUT_LENGTH; position++ )
-  {
-    if ( argument[position] == '\0' )
-    {
-      arg[position] = '\0';
-      return arg;
-    }
-    else if ( argument[position] >= 'A' && argument[position] <= 'Z' )
-    {
-      conversion = -conversion + position
-	- modifier + argument[position] - 'A';
-      conversion = GetRandomNumberFromRange( conversion - 5, conversion + 5 );
-      while ( conversion > 25 )
-	conversion -= 26;
-      while ( conversion < 0 )
-	conversion += 26;
-      arg[position] = (char)(conversion + 'A');
-    }
-    else if ( argument[position] >= 'a' && argument[position] <= 'z' )
-    {
-      conversion = -conversion + position
-	- modifier + argument[position] - 'a';
-      conversion = GetRandomNumberFromRange( conversion - 5, conversion + 5 );
-      while ( conversion > 25 )
-	conversion -= 26;
-      while ( conversion < 0 )
-	conversion += 26;
-      arg[position] = (char)(conversion + 'a');
-    }
-    else if ( argument[position] >= '0' && argument[position] <= '9' )
-    {
-      conversion = -conversion + position
-	- modifier + argument[position] - '0';
-      conversion = GetRandomNumberFromRange( conversion - 2, conversion + 2 );
-      while ( conversion > 9 )
-	conversion -= 10;
-      while ( conversion < 0 )
-	conversion += 10;
-      arg[position] = (char)(conversion + '0');
-    }
-    else
-      arg[position] = argument[position];
-  }
+    modifier %= GetRandomNumberFromRange(80, 300); /* Bitvectors get way too large #s */
 
-  arg[position-1] = '\0';
-  return arg;
+    for (position = 0; position < MAX_INPUT_LENGTH; position++)
+    {
+        if (argument[position] == '\0')
+        {
+            arg[position] = '\0';
+            return arg;
+        }
+        else if (argument[position] >= 'A' && argument[position] <= 'Z')
+        {
+            conversion = -conversion + position
+                - modifier + argument[position] - 'A';
+            conversion = GetRandomNumberFromRange(conversion - 5, conversion + 5);
+            while (conversion > 25)
+                conversion -= 26;
+            while (conversion < 0)
+                conversion += 26;
+            arg[position] = (char)(conversion + 'A');
+        }
+        else if (argument[position] >= 'a' && argument[position] <= 'z')
+        {
+            conversion = -conversion + position
+                - modifier + argument[position] - 'a';
+            conversion = GetRandomNumberFromRange(conversion - 5, conversion + 5);
+            while (conversion > 25)
+                conversion -= 26;
+            while (conversion < 0)
+                conversion += 26;
+            arg[position] = (char)(conversion + 'a');
+        }
+        else if (argument[position] >= '0' && argument[position] <= '9')
+        {
+            conversion = -conversion + position
+                - modifier + argument[position] - '0';
+            conversion = GetRandomNumberFromRange(conversion - 2, conversion + 2);
+            while (conversion > 9)
+                conversion -= 10;
+            while (conversion < 0)
+                conversion += 10;
+            arg[position] = (char)(conversion + '0');
+        }
+        else
+            arg[position] = argument[position];
+    }
+
+    arg[position - 1] = '\0';
+    return arg;
 }
 
-std::string FlagString( int bitvector, const char * const flagarray[] )
+std::string FlagString(int bitvector, const char * const flagarray[])
 {
-  char buf[MAX_STRING_LENGTH] = { '\0' };
-  int x = 0;
+    char buf[MAX_STRING_LENGTH] = { '\0' };
 
-  for ( x = 0; x < 32; x++ )
+    for (size_t x = 0; x < 32; x++)
     {
-      if ( IsBitSet( bitvector, 1 << x ) )
-	{
-	  strcat( buf, flagarray[x] );
-	  strcat( buf, " " );
-	}
+        if (IsBitSet(bitvector, 1 << x))
+        {
+            strcat(buf, flagarray[x]);
+            strcat(buf, " ");
+        }
     }
 
-  if ( (x=strlen( buf )) > 0 )
+    size_t x = strlen(buf);
+
+    if (x > 0)
     {
-      buf[--x] = '\0';
+        buf[--x] = '\0';
     }
 
-  return buf;
+    return buf;
 }
 
 /*
  * Simple linear interpolation.
  */
-int Interpolate( int level, int value_00, int value_32 )
+int Interpolate(int level, int value_00, int value_32)
 {
-  return value_00 + level * (value_32 - value_00) / 32;
+    return value_00 + level * (value_32 - value_00) / 32;
 }
 
 /*
@@ -134,94 +135,94 @@ int Interpolate( int level, int value_00, int value_32 )
  * - Gavin - ur_gavin@hotmail.com
  * - Unknown Regions - http://ur.lynker.com
  */
-char *StripColorCodes( char *text )
+char *StripColorCodes(char *text)
 {
-  int i = 0, j = 0;
+    int i = 0, j = 0;
 
-  if (!text || text[0] == '\0')
+    if (!text || text[0] == '\0')
     {
-      return NULL;
+        return NULL;
     }
-  else
+    else
     {
-      char *buf;
-      static char done[MAX_INPUT_LENGTH*2];
+        char *buf;
+        static char done[MAX_INPUT_LENGTH * 2];
 
-      done[0] = '\0';
+        done[0] = '\0';
 
-      if ( (buf = (char *)malloc( strlen(text) * sizeof(text) )) == NULL)
-        return text;
+        if ((buf = (char *)malloc(strlen(text) * sizeof(text))) == NULL)
+            return text;
 
-      /* Loop through until you've hit your terminating 0 */
-      while (text[i] != '\0')
+        /* Loop through until you've hit your terminating 0 */
+        while (text[i] != '\0')
         {
-          while (text[i] == '&' || text[i] == '^')
+            while (text[i] == '&' || text[i] == '^')
             {
-              i += 2;
+                i += 2;
             }
-          
-	  if ( text[i] != '\0' )
+
+            if (text[i] != '\0')
             {
-              if ( isspace(text[i]) )
+                if (isspace(text[i]))
                 {
-                  buf[j] = ' ';
-                  i++;
-                  j++;
+                    buf[j] = ' ';
+                    i++;
+                    j++;
                 }
-              else
+                else
                 {
-                  buf[j] = text[i];
-                  i++;
-                  j++;
+                    buf[j] = text[i];
+                    i++;
+                    j++;
                 }
             }
-          else
+            else
             {
-              buf[j] = '\0';
+                buf[j] = '\0';
             }
         }
 
-      buf[j] = '\0';
+        buf[j] = '\0';
 
-      sprintf(done, "%s", buf);
-      buf = (char*)realloc(buf, j*sizeof(char));
-      free( buf);
+        sprintf(done, "%s", buf);
+        buf = (char*)realloc(buf, j * sizeof(char));
+        free(buf);
 
-      return done;
+        return done;
     }
 }
 
-std::string PunctuateNumber( long number )
+std::string PunctuateNumber(long number)
 {
 #ifdef _WIN32
     return std::to_string(number);
 #else
-  char buffer[1024];
+    char buffer[1024];
 
-  setlocale( LC_MONETARY, "en_US" );
-  strfmon( buffer, 1024, "%!#0.0n", (double)number );
+    setlocale(LC_MONETARY, "en_US");
+    strfmon(buffer, 1024, "%!#0.0n", (double)number);
 
-  return TrimString( buffer, ' ' );
+    return TrimString(buffer, ' ');
 #endif
 }
 
-long ToLong( const std::string &str )
+long ToLong(const std::string &str)
 {
-  int result = strtol( str.c_str(), nullptr, 10 );
-  return result;
+    int result = strtol(str.c_str(), nullptr, 10);
+    return result;
 }
 
-char CharToLowercase( char c )
+char CharToLowercase(char c)
 {
-  return static_cast<char>( tolower(static_cast<int>( c ) ) );
+    return static_cast<char>(tolower(static_cast<int>(c)));
 }
 
-char CharToUppercase( char c )
+char CharToUppercase(char c)
 {
-  return static_cast<char>( toupper(static_cast<int>( c ) ) );
+    return static_cast<char>(toupper(static_cast<int>(c)));
 }
 
-bool IsBitSet( unsigned long flags, size_t bit )
+bool IsBitSet(unsigned long flags, size_t bit)
 {
-  return flags & bit;
+    return flags & bit;
 }

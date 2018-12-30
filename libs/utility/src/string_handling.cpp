@@ -193,14 +193,18 @@ int StringInfix(const std::string &needle,
  */
 int StringSuffix(const std::string &astr, const std::string &bstr)
 {
-    int sstr1 = astr.size();
-    int sstr2 = bstr.size();
+    const size_t sstr1 = astr.size();
+    const size_t sstr2 = bstr.size();
     const char *bstr_ptr = bstr.c_str();
 
     if (sstr1 <= sstr2 && !StrCmp(astr, bstr_ptr + sstr2 - sstr1))
+    {
         return false;
+    }
     else
+    {
         return true;
+    }
 }
 
 /*
@@ -527,20 +531,25 @@ std::string TrimString(const std::string &str, char junk)
  */
 static const char *str_str(const char *astr, const char *bstr)
 {
-    int sstr1, sstr2, ichar;
-    char c0;
+    const char c0 = CharToLowercase(bstr[0]);
 
-    if ((c0 = CharToLowercase(bstr[0])) == '\0')
-        return NULL;
+    if (c0 == '\0')
+    {
+        return nullptr;
+    }
 
-    sstr1 = strlen(astr);
-    sstr2 = strlen(bstr);
+    const size_t sstr1 = strlen(astr);
+    const size_t sstr2 = strlen(bstr);
 
-    for (ichar = 0; ichar <= sstr1 - sstr2; ichar++)
+    for (size_t ichar = 0; ichar <= sstr1 - sstr2; ++ichar)
+    {
         if (c0 == CharToLowercase(astr[ichar]) && !StringPrefix(bstr, astr + ichar))
-            return (astr + ichar);
+        {
+            return astr + ichar;
+        }
+    }
 
-    return NULL;
+    return nullptr;
 }
 
 /*
