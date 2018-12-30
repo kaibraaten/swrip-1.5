@@ -76,7 +76,6 @@ void NewMissile(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target,
     }
 
     CopyVector(&missile->Position, &ship->Position);
-    missile->Spaceobject = spaceobject;
 }
 
 void ExtractMissile(std::shared_ptr<Missile> missile)

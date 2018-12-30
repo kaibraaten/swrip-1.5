@@ -6,14 +6,12 @@
 #include <utility/vector3.hpp>
 
 #include "types.hpp"
-#include "constants.hpp"
 
 extern std::list<std::shared_ptr<Missile>> Missiles;
 
 class Missile
 {
 public:
-  std::shared_ptr<class Spaceobject> Spaceobject;
   std::shared_ptr<Ship> Target;
   std::shared_ptr<Ship> FiredFrom;
   std::string FiredBy;
