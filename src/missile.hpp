@@ -26,7 +26,7 @@ public:
 
 void UpdateMissile( std::shared_ptr<Missile> missile );
 void NewMissile( std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target,
-                 Character *firedBy, MissileType missiletype );
+                 const std::string &firedBy, MissileType missiletype );
 void ExtractMissile( std::shared_ptr<Missile> missile );
 
 #endif /* include guard */
