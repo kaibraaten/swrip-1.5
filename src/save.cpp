@@ -1373,7 +1373,7 @@ void LoadCorpses()
             }
         }
     }
-    catch(const fs::filesystem_error &ex)
+    catch(const fs::filesystem_error&)
     {
         Log->Bug("%s: can't open CORPSE_DIR", __FUNCTION__);
         perror(CORPSE_DIR);
@@ -1482,7 +1482,7 @@ void LoadStorerooms()
             }
         }
     }
-    catch(const fs::filesystem_error &ex)
+    catch(const fs::filesystem_error&)
     {
         Log->Bug("Load_storeroom: can't open STOREROOM_DIR");
         perror(STOREROOM_DIR);
@@ -1580,7 +1580,7 @@ void LoadVendors()
             }
         }
     }
-    catch(const fs::filesystem_error &ex)
+    catch(const fs::filesystem_error&)
     {
         Log->Bug("Load_vendors: can't open VENDOR_DIR");
         perror(VENDOR_DIR);

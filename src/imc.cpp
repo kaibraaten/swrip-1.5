@@ -5065,8 +5065,7 @@ static void imc_load_templates( void )
 static socket_t ipv4_connect( void )
 {
    struct sockaddr_in sa;
-   struct hostent *hostp;
-   int desc = INVALID_SOCKET;
+   socket_t desc = INVALID_SOCKET;
 
    memset( &sa, 0, sizeof( sa ) );
    sa.sin_family = AF_INET;
