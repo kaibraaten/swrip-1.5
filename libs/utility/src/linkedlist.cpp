@@ -5,30 +5,30 @@
 
 struct jsw_node
 {
-  void *data;
-  struct jsw_node *next;
-  struct jsw_node *prev;
+    void *data;
+    struct jsw_node *next;
+    struct jsw_node *prev;
 };
 
 struct jsw_list
 {
-  struct jsw_node *head;
-  struct jsw_node *tail;
-  int has_dummy_head;
-  int has_dummy_tail;
-  size_t size;
+    struct jsw_node *head;
+    struct jsw_node *tail;
+    int has_dummy_head;
+    int has_dummy_tail;
+    size_t size;
 };
 
 struct List
 {
-  struct jsw_list *implementation;
+    struct jsw_list *implementation;
 };
 
 struct ListIterator
 {
-  const List *linklist;
-  struct jsw_node *cursor;
-  bool isReverse;
+    const List *linklist;
+    struct jsw_node *cursor;
+    bool isReverse;
 };
 
 static struct jsw_list *new_list(int has_dummy_head, int has_dummy_tail);
@@ -46,41 +46,41 @@ static void destroy_list(struct jsw_list *list, void (destroy_data)(void*));
 */
 static struct jsw_list *new_list(int has_dummy_head, int has_dummy_tail)
 {
-  struct jsw_list *rv = (struct jsw_list*) calloc(1, sizeof *rv);
+    struct jsw_list *rv = (struct jsw_list*) calloc(1, sizeof *rv);
 
-  if (rv != NULL)
+    if (rv != NULL)
     {
-      struct jsw_node *tail = has_dummy_tail ? new_node(NULL, NULL, NULL) : NULL;
+        struct jsw_node *tail = has_dummy_tail ? new_node(NULL, NULL, NULL) : NULL;
 
-      if (has_dummy_tail && tail == NULL)
+        if (has_dummy_tail && tail == NULL)
         {
-          /* Release the list if a dummy couldn't be allocated */
-          free(rv);
-          rv = NULL;
+            /* Release the list if a dummy couldn't be allocated */
+            free(rv);
+            rv = NULL;
         }
-      else
+        else
         {
-          rv->head = has_dummy_head ? new_node(NULL, NULL, tail) : NULL;
+            rv->head = has_dummy_head ? new_node(NULL, NULL, tail) : NULL;
 
-          /* Finish linking the tail to the head */
-          rv->tail = tail;
-          rv->tail->prev = rv->head;
+            /* Finish linking the tail to the head */
+            rv->tail = tail;
+            rv->tail->prev = rv->head;
 
-          rv->has_dummy_head = has_dummy_head;
-          rv->has_dummy_tail = has_dummy_tail;
+            rv->has_dummy_head = has_dummy_head;
+            rv->has_dummy_tail = has_dummy_tail;
 
-          rv->size = 0;
+            rv->size = 0;
 
-          if (has_dummy_head && rv->head == NULL)
+            if (has_dummy_head && rv->head == NULL)
             {
-              /* Release the list if a dummy couldn't be allocated */
-              free(rv);
-              rv = NULL;
+                /* Release the list if a dummy couldn't be allocated */
+                free(rv);
+                rv = NULL;
             }
         }
     }
 
-  return rv;
+    return rv;
 }
 
 /*
@@ -90,25 +90,25 @@ static struct jsw_list *new_list(int has_dummy_head, int has_dummy_tail)
 */
 static struct jsw_node *destroy_node(struct jsw_node *node, void (destroy_data)(void*))
 {
-  struct jsw_node *rv = NULL;
+    struct jsw_node *rv = NULL;
 
-  if (node != NULL)
+    if (node != NULL)
     {
-      /*
-        Save a reference to the next node
-        because we're about to destroy this one
-      */
-      rv = node->next;
+        /*
+          Save a reference to the next node
+          because we're about to destroy this one
+        */
+        rv = node->next;
 
-      if (destroy_data != NULL)
+        if (destroy_data != NULL)
         {
-          destroy_data(node->data);
+            destroy_data(node->data);
         }
 
-      free(node);
+        free(node);
     }
 
-  return rv;
+    return rv;
 }
 
 /*
@@ -117,9 +117,9 @@ static struct jsw_node *destroy_node(struct jsw_node *node, void (destroy_data)(
 */
 static void destroy_list(struct jsw_list *list, void (destroy_data)(void*))
 {
-  while (list->head != NULL)
+    while (list->head != NULL)
     {
-      list->head = destroy_node(list->head, destroy_data);
+        list->head = destroy_node(list->head, destroy_data);
     }
 }
 
@@ -129,33 +129,33 @@ static void destroy_list(struct jsw_list *list, void (destroy_data)(void*))
 */
 static struct jsw_node *insert_after(struct jsw_list *list, struct jsw_node *pos, void *data)
 {
-  struct jsw_node *rv = NULL;
+    struct jsw_node *rv = NULL;
 
-  if (list != NULL && pos != NULL)
+    if (list != NULL && pos != NULL)
     {
-      if (pos != list->tail)
+        if (pos != list->tail)
         {
-          /* Create a new node and set the next link */
-          rv = new_node(data, pos, pos->next);
+            /* Create a new node and set the next link */
+            rv = new_node(data, pos, pos->next);
 
-          if (rv != NULL)
+            if (rv != NULL)
             {
-              if (pos->next != NULL)
+                if (pos->next != NULL)
                 {
-                  pos->next->prev = rv;
+                    pos->next->prev = rv;
                 }
 
-              pos->next = rv;
-              ++list->size;
+                pos->next = rv;
+                ++list->size;
             }
         }
-      else
+        else
         {
-          rv = insert_before(list, pos, data);
+            rv = insert_before(list, pos, data);
         }
     }
 
-  return rv;
+    return rv;
 }
 
 /*
@@ -164,33 +164,33 @@ static struct jsw_node *insert_after(struct jsw_list *list, struct jsw_node *pos
 */
 static struct jsw_node *insert_before(struct jsw_list *list, struct jsw_node *pos, void *data)
 {
-  struct jsw_node *rv = NULL;
+    struct jsw_node *rv = NULL;
 
-  if (list != NULL && pos != NULL)
+    if (list != NULL && pos != NULL)
     {
-      if (pos != list->head)
+        if (pos != list->head)
         {
-          /* Create a new node and set the next link */
-          rv = new_node(data, pos->prev, pos);
+            /* Create a new node and set the next link */
+            rv = new_node(data, pos->prev, pos);
 
-          if (rv != NULL)
+            if (rv != NULL)
             {
-              if (pos->prev != NULL)
+                if (pos->prev != NULL)
                 {
-                  pos->prev->next = rv;
+                    pos->prev->next = rv;
                 }
 
-              pos->prev = rv;
-              ++list->size;
+                pos->prev = rv;
+                ++list->size;
             }
         }
-      else
+        else
         {
-          rv = insert_after(list, pos, data);
+            rv = insert_after(list, pos, data);
         }
     }
 
-  return rv;
+    return rv;
 }
 
 /*
@@ -199,44 +199,44 @@ static struct jsw_node *insert_before(struct jsw_list *list, struct jsw_node *po
 */
 static struct jsw_node *remove_node(struct jsw_list *list, struct jsw_node *pos)
 {
-  struct jsw_node *rv = NULL;
+    struct jsw_node *rv = NULL;
 
-  if (list != NULL && pos != NULL)
+    if (list != NULL && pos != NULL)
     {
-      /* Shift off of the dummies */
-      if (pos == list->head)
+        /* Shift off of the dummies */
+        if (pos == list->head)
         {
-          pos = pos->next;
+            pos = pos->next;
         }
 
-      if (pos == list->tail)
+        if (pos == list->tail)
         {
-          pos = pos->prev;
+            pos = pos->prev;
         }
 
-      if (pos != list->head)
+        if (pos != list->head)
         {
-          /* Remove a non-dummy node */
-          rv = pos;
+            /* Remove a non-dummy node */
+            rv = pos;
 
-          /* Reset the list links if necessary */
-          if (rv->prev != NULL)
+            /* Reset the list links if necessary */
+            if (rv->prev != NULL)
             {
-              rv->prev->next = rv->next;
+                rv->prev->next = rv->next;
             }
 
-          if (rv->next != NULL)
+            if (rv->next != NULL)
             {
-              rv->next->prev = rv->prev;
+                rv->next->prev = rv->prev;
             }
 
-          /* Clean up the old node */
-          rv->prev = rv->next = NULL;
-          --list->size;
+            /* Clean up the old node */
+            rv->prev = rv->next = NULL;
+            --list->size;
         }
     }
 
-  return rv;
+    return rv;
 }
 
 /*
@@ -245,23 +245,23 @@ static struct jsw_node *remove_node(struct jsw_list *list, struct jsw_node *pos)
 */
 static struct jsw_node *insert_sorted(struct jsw_list *list, void *data, Comparator compare)
 {
-  struct jsw_node *rv = NULL;
+    struct jsw_node *rv = NULL;
 
-  if (list != NULL)
+    if (list != NULL)
     {
-      /* Find the sorted position of the new node */
-      struct jsw_node *it = list->head;
+        /* Find the sorted position of the new node */
+        struct jsw_node *it = list->head;
 
-      while (it->next != NULL && compare(it->next->data, data) < 0)
+        while (it->next != NULL && compare(it->next->data, data) < 0)
         {
-          it = it->next;
+            it = it->next;
         }
 
-      /* Delegate the insertion to an existing function */
-      rv = insert_after(list, it, data);
+        /* Delegate the insertion to an existing function */
+        rv = insert_after(list, it, data);
     }
 
-  return rv;
+    return rv;
 }
 
 /*
@@ -270,204 +270,203 @@ static struct jsw_node *insert_sorted(struct jsw_list *list, void *data, Compara
 */
 static struct jsw_node *new_node(void *data, struct jsw_node *prev, struct jsw_node *next)
 {
-  struct jsw_node *rv = (struct jsw_node*) calloc(1, sizeof *rv);
+    struct jsw_node *rv = (struct jsw_node*) calloc(1, sizeof *rv);
 
-  if (rv != NULL)
+    if (rv != NULL)
     {
-      rv->data = data;
-      rv->prev = prev;
-      rv->next = next;
+        rv->data = data;
+        rv->prev = prev;
+        rv->next = next;
     }
 
-  return rv;
+    return rv;
 }
 
 List *AllocateList(void)
 {
-  List *newList = (List*)calloc(1, sizeof(List));
-  newList->implementation = new_list(true, true);
+    List *newList = (List*)calloc(1, sizeof(List));
+    newList->implementation = new_list(true, true);
 
-  return newList;
+    return newList;
 }
 
 void FreeList(List *list)
 {
-  destroy_list(list->implementation, NULL);
-  free(list);
+    destroy_list(list->implementation, NULL);
+    free(list);
 }
 
 void AddToListFront(List *list, void *data)
 {
-  insert_before(list->implementation, list->implementation->head, data);
+    insert_before(list->implementation, list->implementation->head, data);
 }
 
 void AddToListBack(List *list, void *data)
 {
-  insert_after(list->implementation, list->implementation->tail, data);
+    insert_after(list->implementation, list->implementation->tail, data);
 }
 
 void AddToList(List *list, void *data)
 {
-  AddToListBack(list, data);
+    AddToListBack(list, data);
 }
 
 void AddToListSorted(List *list, void *data, Comparator compare)
 {
-  insert_sorted(list->implementation, data, compare);
+    insert_sorted(list->implementation, data, compare);
 }
 
 void RemoveFromList(List *list, void *dataToFind)
 {
-  ListIterator *iterator = AllocateListIterator(list);
+    ListIterator *iterator = AllocateListIterator(list);
 
-  while(ListHasMoreElements(iterator))
+    while (ListHasMoreElements(iterator))
     {
-      void *dataInList = GetListData(iterator);
+        void *dataInList = GetListData(iterator);
 
-      if(dataInList == dataToFind)
+        if (dataInList == dataToFind)
         {
-          RemoveFromListByIterator(iterator);
-          break;
+            RemoveFromListByIterator(iterator);
+            break;
         }
 
-      MoveToNextListElement(iterator);
+        MoveToNextListElement(iterator);
     }
 
-  FreeListIterator(iterator);
+    FreeListIterator(iterator);
 }
 
 ListIterator *AllocateListIterator(const List *list)
 {
-  ListIterator *newIterator = (ListIterator*)calloc(1, sizeof(ListIterator));
-  newIterator->linklist = list;
-  newIterator->cursor = list->implementation->head->next;
+    ListIterator *newIterator = (ListIterator*)calloc(1, sizeof(ListIterator));
+    newIterator->linklist = list;
+    newIterator->cursor = list->implementation->head->next;
 
-  return newIterator;
+    return newIterator;
 }
 
 ListIterator *AllocateListReverseIterator(const List *list)
 {
-  ListIterator *newIterator = AllocateListIterator(list);
-  newIterator->isReverse = true;
-  newIterator->cursor = list->implementation->tail->prev;
+    ListIterator *newIterator = AllocateListIterator(list);
+    newIterator->isReverse = true;
+    newIterator->cursor = list->implementation->tail->prev;
 
-  return newIterator;
+    return newIterator;
 }
 
 void RemoveFromListByIterator(ListIterator *iterator)
 {
-  struct jsw_node *node = NULL;
-  assert(iterator->cursor != NULL);
-  node = remove_node(iterator->linklist->implementation, iterator->cursor);
-  assert(node != NULL);
-  destroy_node(node, NULL);
-  iterator->cursor = NULL;
+    assert(iterator->cursor != NULL);
+    jsw_node *node = remove_node(iterator->linklist->implementation, iterator->cursor);
+    assert(node != NULL);
+    destroy_node(node, NULL);
+    iterator->cursor = NULL;
 }
 
 void FreeListIterator(ListIterator *iterator)
 {
-  free(iterator);
+    free(iterator);
 }
 
 void *GetListData(const ListIterator *iterator)
 {
-  return iterator->cursor->data;
+    return iterator->cursor->data;
 }
 
 void MoveToNextListElement(ListIterator *iterator)
 {
-  if(iterator->isReverse)
+    if (iterator->isReverse)
     {
-      iterator->cursor = iterator->cursor->prev;
+        iterator->cursor = iterator->cursor->prev;
     }
-  else
+    else
     {
-      iterator->cursor = iterator->cursor->next;
+        iterator->cursor = iterator->cursor->next;
     }
 }
 
 bool ListHasMoreElements(const ListIterator *iterator)
 {
-  if(iterator->isReverse)
+    if (iterator->isReverse)
     {
-      return iterator->cursor != iterator->linklist->implementation->head;
+        return iterator->cursor != iterator->linklist->implementation->head;
     }
-  else
+    else
     {
-      return iterator->cursor != iterator->linklist->implementation->tail;
+        return iterator->cursor != iterator->linklist->implementation->tail;
     }
 }
 
 void InsertBefore(ListIterator *iterator, void *data)
 {
-  iterator->cursor = insert_before(iterator->linklist->implementation, iterator->cursor, data);
+    iterator->cursor = insert_before(iterator->linklist->implementation, iterator->cursor, data);
 }
 
 void InsertAfter(ListIterator *iterator, void *data)
 {
-  iterator->cursor = insert_after(iterator->linklist->implementation, iterator->cursor, data);
+    iterator->cursor = insert_after(iterator->linklist->implementation, iterator->cursor, data);
 }
 
 size_t ListSize(const List *list)
 {
-  return list->implementation->size;
+    return list->implementation->size;
 }
 
 void *FindIfInList(const List *list, Predicate predicate, const void *userData)
 {
-  ListIterator *iterator = AllocateListIterator(list);
-  void *result = NULL;
+    ListIterator *iterator = AllocateListIterator(list);
+    void *result = NULL;
 
-  while(ListHasMoreElements(iterator))
+    while (ListHasMoreElements(iterator))
     {
-      void *dataInList = GetListData(iterator);
-      bool match = predicate(dataInList, userData);
+        void *dataInList = GetListData(iterator);
+        bool match = predicate(dataInList, userData);
 
-      if(match)
+        if (match)
         {
-          result = dataInList;
-          break;
+            result = dataInList;
+            break;
         }
 
-      MoveToNextListElement(iterator);
+        MoveToNextListElement(iterator);
     }
 
-  FreeListIterator(iterator);
-  return result;
+    FreeListIterator(iterator);
+    return result;
 }
 
 void ForEachInList(const List *list, ForEachFunc action, void *userData)
 {
-  ListIterator *iterator = AllocateListIterator(list);
+    ListIterator *iterator = AllocateListIterator(list);
 
-  while(ListHasMoreElements(iterator))
+    while (ListHasMoreElements(iterator))
     {
-      void *dataInList = GetListData(iterator);
-      action(dataInList, userData);
-      MoveToNextListElement(iterator);
+        void *dataInList = GetListData(iterator);
+        action(dataInList, userData);
+        MoveToNextListElement(iterator);
     }
 
-  FreeListIterator(iterator);
+    FreeListIterator(iterator);
 }
 
 size_t CountIfInList(const List *list, Predicate predicate, const void *userData)
 {
-  ListIterator *iterator = AllocateListIterator(list);
-  size_t counter = 0;
+    ListIterator *iterator = AllocateListIterator(list);
+    size_t counter = 0;
 
-  while(ListHasMoreElements(iterator))
+    while (ListHasMoreElements(iterator))
     {
-      void *dataInList = GetListData(iterator);
-      bool matchesCriteria = predicate(dataInList, userData);
+        void *dataInList = GetListData(iterator);
+        bool matchesCriteria = predicate(dataInList, userData);
 
-      if(matchesCriteria)
+        if (matchesCriteria)
         {
-          ++counter;
+            ++counter;
         }
 
-      MoveToNextListElement(iterator);
+        MoveToNextListElement(iterator);
     }
 
-  FreeListIterator(iterator);
-  return counter;
+    FreeListIterator(iterator);
+    return counter;
 }

@@ -3,8 +3,8 @@
 #include <cstring>
 #include <cstdlib>
 #include <cctype>
-#include <clocale>
 #ifndef _WIN32
+#include <clocale>
 #include <monetary.h>
 #endif
 #include "random.hpp"
@@ -33,7 +33,7 @@ int urange(int mincheck, int check, int maxcheck)
 std::string Scramble(const std::string &strToScamble, int modifier)
 {
     char arg[MAX_INPUT_LENGTH];
-    int position = 0;
+    int position;
     int conversion = 0;
     const char *argument = strToScamble.c_str();
 

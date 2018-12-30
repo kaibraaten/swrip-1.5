@@ -26,7 +26,6 @@
 #define _CERIS_OLDREPOSITORY_HPP_
 
 #include <functional>
-#include <utility/types.hpp>
 #include <utility/linkedlist.hpp>
 
 struct OldRepository;

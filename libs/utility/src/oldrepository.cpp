@@ -26,14 +26,13 @@ void RemoveEntity(OldRepository *self, void *entity)
 {
 #ifndef NDEBUG
   size_t countBeforeRemove = ListSize(GetEntities(self));
-  size_t countAfterRemove = 0;
   assert(self->Base.RemoveEntity != NULL);
 #endif
 
   self->Base.RemoveEntity(&self->Base, entity);
 
 #ifndef NDEBUG
-  countAfterRemove = ListSize(GetEntities(self));
+  size_t countAfterRemove = ListSize(GetEntities(self));
   assert(countAfterRemove == countBeforeRemove - 1);
 #endif
 }

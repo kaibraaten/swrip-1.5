@@ -228,9 +228,9 @@ std::string Capitalize(const std::string &argument)
             {
                 state = Color;
             }
-            else if (isalpha((int)c))
+            else if (isalpha(c))
             {
-                c = bFirst ? toupper((int)c) : c;
+                c = bFirst ? toupper(c) : c;
                 bFirst = false;
             }
         }
@@ -434,10 +434,10 @@ static std::string OneArgument2(const std::string &argument, std::string &arg_fi
 std::string StripCarriageReturn(const std::string &arg)
 {
     char newstr[MAX_STRING_LENGTH] = { '\0' };
-    int i = 0, j = 0;
+    int j = 0;
     const char *str = arg.c_str();
 
-    for (i = j = 0; str[i] != '\0'; i++)
+    for (int i = 0; str[i] != '\0'; i++)
     {
         if (str[i] != '\r')
         {

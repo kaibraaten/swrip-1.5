@@ -41,7 +41,7 @@ char ReadChar(FILE *fp, Logger *log, bool fBootDb)
         }
 
         c = fgetc(fp);
-    } while (isspace((int)c));
+    } while (isspace(c));
 
     return c;
 }
@@ -70,7 +70,7 @@ float ReadFloat(FILE *fp, Logger *log, bool fBootDb)
             return 0;
         }
         c = fgetc(fp);
-    } while (isspace((int)c));
+    } while (isspace(c));
 
     if (c == '+')
         c = fgetc(fp);
@@ -166,7 +166,7 @@ int ReadInt(FILE *fp, Logger *log, bool fBootDb)
             return 0;
         }
         c = fgetc(fp);
-    } while (isspace((int)c));
+    } while (isspace(c));
 
     if (c == '+')
     {
@@ -246,7 +246,7 @@ char *ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb)
             return CopyString("");
         }
         c = fgetc(fp);
-    } while (isspace((int)c));
+    } while (isspace(c));
 
     if ((*plast++ = c) == '~')
         return CopyString("");
@@ -273,7 +273,6 @@ char *ReadStringToTilde(FILE *fp, Logger *log, bool fBootDb)
 
             *plast = '\0';
             return CopyString(buf);
-            break;
 
         case '\n':
             plast++;  ln++;
@@ -416,7 +415,7 @@ char *ReadWord(FILE *fp, Logger *log, bool fBootDb)
             return word;
         }
         cEnd = fgetc(fp);
-    } while (isspace((int)cEnd));
+    } while (isspace(cEnd));
 
     if (cEnd == '\'' || cEnd == '"')
     {
@@ -468,9 +467,9 @@ char *ReadWord(FILE *fp, Logger *log, bool fBootDb)
  */
 void AppendToFile(const std::string &file, const std::string &str)
 {
-    FILE *fp = NULL;
+    FILE *fp = fopen(file.c_str(), "a");
 
-    if ((fp = fopen(file.c_str(), "a")))
+    if (fp != nullptr)
     {
         fprintf(fp, "%s\n", str.c_str());
         fclose(fp);
@@ -507,11 +506,10 @@ void ForEachLuaFileInDir(const std::string &pathToDir, const std::function<void(
 
 std::string ConvertToLuaFilename(const std::string &name)
 {
-    size_t n = 0;
     char buf[MAX_STRING_LENGTH];
     strcpy(buf, ToLower(name).c_str());
 
-    for (n = 0; n < strlen(buf); ++n)
+    for (size_t n = 0; n < strlen(buf); ++n)
     {
         if (buf[n] == ' ')
         {

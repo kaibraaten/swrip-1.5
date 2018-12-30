@@ -4,14 +4,12 @@
 #include <string>
 
 namespace ColorParser {
-
-class Passthrough
-{
-public:
-  static Passthrough *Instance();
-  std::string Parse( const std::string& );
-};
-
+    class Passthrough
+    {
+    public:
+        static Passthrough *Instance();
+        std::string Parse(const std::string&);
+    };
 }
 
 #endif // include guard

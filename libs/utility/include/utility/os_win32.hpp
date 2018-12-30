@@ -28,11 +28,7 @@
 
 #if defined(_WIN32)
 
-#include <io.h>
 #include <winsock2.h>
-#include <windows.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 
 #ifdef _MSC_VER
 using ssize_t = int;

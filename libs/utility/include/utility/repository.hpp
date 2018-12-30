@@ -28,8 +28,6 @@
 
 #include <list>
 #include <set>
-#include <algorithm>
-#include <iterator>
 #include <memory>
 
 namespace Ceris
