@@ -35,8 +35,6 @@
  /*
   * Utility macros.
   */
-char CharToLowercase(char c);
-char CharToUppercase(char c);
 
 #define SetBit(var, bit)       ((var) |= (bit))
 #define RemoveBit(var, bit)    ((var) &= ~(bit))
@@ -142,6 +140,28 @@ do                                                              \
       }                                                                 \
   } while(0)
 
+/*
+  This function allows the following kinds of bets to be made:
+
+  Absolute bet
+  ============
+
+  bet 14k, bet 50m66, bet 100k
+
+  Relative bet
+  ============
+
+  These bets are calculated relative to the current bet. The '+' symbol adds
+  a certain number of percent to the current bet. The default is 25, so
+  with a current bet of 1000, bet + gives 1250, bet +50 gives 1500 etc.
+  Please note that the number must follow exactly after the +, without any
+  spaces!
+
+  The '*' or 'x' bet multiplies the current bet by the number specified,
+  defaulting to 2. If the current bet is 1000, bet x  gives 2000, bet x10
+  gives 10,000 etc.
+
+*/
 int ParseBet(const int currentbet, const std::string &s);
 
 /**
@@ -196,17 +216,39 @@ B urange(const A &mincheck, const B &check, const C &maxcheck)
 
 /* string_handling.c */
 std::string WordWrap(const std::string &txt, unsigned short wrap);
+
+/**
+ * \brief Return true if an argument is completely numeric.
+ */
 bool IsNumber(const std::string &arg);
+
+/**
+ * \brief Given a string like 14.foo, return 14 and 'foo'.
+ */
 int NumberArgument(const std::string &argument, std::string &arg);
-std::string OneArgument(const std::string&, std::string&);
+
+/**
+ * \brief Pick off one argument from a string and return the rest. Understands quotes.
+ * 
+ * \param argument The original string you want to be chopped up. Will not be modified.
+ * \param arg_first The first argument.
+ * \return The rest of the string after arg_first
+ */
+std::string OneArgument(const std::string &argument, std::string &arg_first);
+
 int IsName(const std::string &str, const std::string &namelist);
 int IsNamePrefix(const std::string &str, const std::string &namelist);
 
-// Returns true if all keywords in str exists in namelist.
+/**
+ * \brief Returns true if all keywords in str exists in namelist.
+ */
 int NiftyIsName(const std::string &str, const std::string &namelist);
 
-// Returns true if the prefix of all keywords in str exists in namelist.
+/**
+ * \brief Returns true if the prefix of all keywords in str exists in namelist.
+ */
 int NiftyIsNamePrefix(const std::string &str, const std::string &namelist);
+
 int StrCmp(const std::string &astr, const std::string &bstr);
 int StringPrefix(const std::string &astr, const std::string &bstr);
 int StringInfix(const std::string &astr, const std::string &bstr);
@@ -256,8 +298,26 @@ std::string ConvertToLuaFilename(const std::string &name);
 /* misc stuff */
 int Interpolate(int level, int value_00, int value_32);
 char *StripColorCodes(char *text);
+char CharToLowercase(char c);
+char CharToUppercase(char c);
+
+/**
+ * \brief Convert a string into a long.
+ * 
+ * Note that if the input isn't a valid number, the function
+ * will return 0.
+ * 
+ * \param str The input string.
+ * \return The numeric representation of the input string.
+ */
 long ToLong(const std::string &str);
 
+/**
+ * \brief Based on a list of bits, create a bitset object.
+ * \tparam N The size of the bitset. Ie, the number of bits.
+ * \param args List of bits. For instance: {0, 5, 7, 23}
+ * \return The newly constructed bitset.
+ */
 template<size_t N>
 std::bitset<N> CreateBitSet(std::initializer_list<size_t> args)
 {
@@ -271,9 +331,10 @@ std::bitset<N> CreateBitSet(std::initializer_list<size_t> args)
     return bs;
 }
 
-/*
- * Takes a number such as 1234567890
- * and returns it as 1,234,567,890
+/**
+ * \brief Takes a number such as 1234567890 and returns it as 1,234,567,890.
+ * \param number The number to punctuate.
+ * \return The punctuated number as a string.
  */
 std::string PunctuateNumber(long number);
 
@@ -283,7 +344,24 @@ void SubtractTimes(timeval *etime, const timeval *start_time);
 void StartTimer(timeval *start_time);
 time_t StopTimer(timeval *start_time);
 
+/**
+ * \brief Create a string of space-separated bit names.
+ * 
+ * The current implementation assumes exactly 32 bits, which means the
+ * flagarray argument must also have at least 32 elements.
+ * 
+ * \param bitvector All the flags packed into an integer.
+ * \param flagarray An array containing the names of each bit.
+ * \return A string such as: "name_of_bit1 name_of_bit7 name_of_bit30"
+ */
 std::string FlagString(int bitvector, const char * const flagarray[]);
+
+
+/**
+ * \brief Append text to a file.
+ * \param file The name of the file.
+ * \param str The text to append.
+ */
 void AppendToFile(const std::string &file, const std::string &str);
 
 #endif /* include guard */

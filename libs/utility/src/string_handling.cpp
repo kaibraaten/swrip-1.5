@@ -304,9 +304,6 @@ void ReplaceChar(std::string &buf, char replace, char with)
     }
 }
 
-/*
- * Return true if an argument is completely numeric.
- */
 bool IsNumber(const std::string &arg)
 {
     if (arg.empty())
@@ -325,9 +322,6 @@ bool IsNumber(const std::string &arg)
     return true;
 }
 
-/*
- * Given a string like 14.foo, return 14 and 'foo'
- */
 int NumberArgument(const std::string &orig_argument, std::string &arg)
 {
     char argument[MAX_STRING_LENGTH];
@@ -349,13 +343,6 @@ int NumberArgument(const std::string &orig_argument, std::string &arg)
     return 1;
 }
 
-/*
- * Pick off one argument from a string and return the rest.
- * Understands quotes.
- * argument : The original string you want to be chopped up. Will not be modified.
- * arg_first: The first token.
- * returns  : The rest of the string after arg_first
- */
 std::string OneArgument(const std::string &argument, std::string &arg_first)
 {
     std::string::const_iterator argp = argument.begin();

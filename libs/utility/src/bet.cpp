@@ -96,28 +96,6 @@ static int advatoi(const std::string &arg)
   return number;
 }
 
-/*
-  This function allows the following kinds of bets to be made:
-
-  Absolute bet
-  ============
-
-  bet 14k, bet 50m66, bet 100k
-
-  Relative bet
-  ============
-
-  These bets are calculated relative to the current bet. The '+' symbol adds
-  a certain number of percent to the current bet. The default is 25, so
-  with a current bet of 1000, bet + gives 1250, bet +50 gives 1500 etc.
-  Please note that the number must follow exactly after the +, without any
-  spaces!
-
-  The '*' or 'x' bet multiplies the current bet by the number specified,
-  defaulting to 2. If the current bet is 1000, bet x  gives 2000, bet x10
-  gives 10,000 etc.
-
-*/
 int ParseBet(const int currentbet, const std::string &arg)
 {
   const char *s = arg.c_str();
