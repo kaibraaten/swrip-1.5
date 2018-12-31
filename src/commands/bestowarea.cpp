@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
@@ -6,80 +6,75 @@
 static void RemoveAreaNames(std::string inp, std::string &out);
 static void ExtractAreaNames(std::string inp, std::string &out);
 
-void do_bestowarea( Character *ch, std::string argument )
+void do_bestowarea(Character *ch, std::string argument)
 {
-  std::string arg;
-  Character *victim = nullptr;
-  int arg_len = 0;
+    std::string arg;
+    Character *victim = nullptr;
 
-  argument = OneArgument( argument, arg );
+    argument = OneArgument(argument, arg);
 
-  if ( GetTrustLevel (ch) < LEVEL_SUB_IMPLEM )
+    if (GetTrustLevel(ch) < LEVEL_SUB_IMPLEM)
     {
-      ch->Echo( "Sorry...\r\n" );
-      return;
+        ch->Echo("Sorry...\r\n");
+        return;
     }
 
-  if ( arg.empty() )
+    if (arg.empty())
     {
-      ch->Echo( "Syntax:\r\n"
-                "bestowarea <victim> <filename>.are\r\n"
-                "bestowarea <victim> none             removes bestowed areas\r\n"
-                "bestowarea <victim> list             lists bestowed areas\r\n"
-                "bestowarea <victim>                  lists bestowed areas\r\n" );
-      return;
+        ch->Echo("Syntax:\r\n"
+            "bestowarea <victim> <filename>.are\r\n"
+            "bestowarea <victim> none             removes bestowed areas\r\n"
+            "bestowarea <victim> list             lists bestowed areas\r\n"
+            "bestowarea <victim>                  lists bestowed areas\r\n");
+        return;
     }
 
-  if ( !(victim = GetCharacterAnywhere( ch, arg )) )
+    if (!(victim = GetCharacterAnywhere(ch, arg)))
     {
-      ch->Echo( "They aren't here.\r\n" );
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( IsNpc( victim ) )
+    if (IsNpc(victim))
     {
-      ch->Echo( "You can't give special abilities to a mob!\r\n" );
-      return;
+        ch->Echo("You can't give special abilities to a mob!\r\n");
+        return;
     }
 
-  if ( GetTrustLevel(victim) < LEVEL_IMMORTAL )
+    if (GetTrustLevel(victim) < LEVEL_IMMORTAL)
     {
-      ch->Echo( "They aren't an immortal.\r\n" );
-      return;
+        ch->Echo("They aren't an immortal.\r\n");
+        return;
     }
 
-  if ( argument.empty() || !StrCmp (argument, "list") )
+    if (argument.empty() || !StrCmp(argument, "list"))
     {
-      std::string buf;
-      ExtractAreaNames(victim->PCData->Bestowments, buf);
-      ch->Echo( "Bestowed areas: %s\r\n", buf.c_str());
-      return;
+        std::string buf;
+        ExtractAreaNames(victim->PCData->Bestowments, buf);
+        ch->Echo("Bestowed areas: %s\r\n", buf.c_str());
+        return;
     }
 
-  if ( !StrCmp (argument, "none") )
+    if (!StrCmp(argument, "none"))
     {
-      std::string buf;
-      RemoveAreaNames(victim->PCData->Bestowments, buf);
-      victim->PCData->Bestowments = buf;
-      ch->Echo( "Done.\r\n" );
-      return;
+        std::string buf;
+        RemoveAreaNames(victim->PCData->Bestowments, buf);
+        victim->PCData->Bestowments = buf;
+        ch->Echo("Done.\r\n");
+        return;
     }
 
-  arg_len = argument.size();
-
-  if ( arg_len < 5
-       || argument[arg_len-4] != '.' || argument[arg_len-3] != 'a'
-       || argument[arg_len-2] != 'r' || argument[arg_len-1] != 'e' )
+    if (!StringEndsWith(argument, ".are"))
     {
-      ch->Echo( "You can only bestow an area name\r\n" );
-      ch->Echo( "E.G. bestow joe sam.are\r\n" );
-      return;
+        ch->Echo("You can only bestow an area name\r\n");
+        ch->Echo("E.G. bestow joe sam.are\r\n");
+        return;
     }
 
-  victim->PCData->Bestowments += " " + argument;
-  victim->Echo( "%s has bestowed on you the area: %s\r\n",
-                ch->Name.c_str(), argument.c_str() );
-  ch->Echo( "Done.\r\n" );
+    victim->PCData->Bestowments += " " + argument;
+    victim->Echo("%s has bestowed on you the area: %s\r\n",
+        ch->Name.c_str(), argument.c_str());
+    ch->Echo("Done.\r\n");
 }
 
 /*
@@ -87,23 +82,23 @@ void do_bestowarea( Character *ch, std::string argument )
  * e.g. "aset joe.are sedit susan.are cset" --> "joe.are susan.are"
  * - Gorog
  */
-static void ExtractAreaNames (std::string inp, std::string &out)
+static void ExtractAreaNames(std::string inp, std::string &out)
 {
-  out.erase();
+    out.erase();
 
-  while( !inp.empty() )
+    while (!inp.empty())
     {
-      std::string segment;
-      inp = OneArgument(inp, segment);
+        std::string segment;
+        inp = OneArgument(inp, segment);
 
-      if ( segment.size() >= 5 && !StringSuffix(".are", segment) )
+        if (segment.size() >= 5 && !StringSuffix(".are", segment))
         {
-          if( !out.empty() )
+            if (!out.empty())
             {
-              out += " ";
+                out += " ";
             }
-          
-          out += segment;
+
+            out += segment;
         }
     }
 }
@@ -115,21 +110,21 @@ static void ExtractAreaNames (std::string inp, std::string &out)
  */
 static void RemoveAreaNames(std::string inp, std::string &out)
 {
-  out.erase();
+    out.erase();
 
-  while( !inp.empty() )
+    while (!inp.empty())
     {
-      std::string segment;
-      inp = OneArgument(inp, segment);
+        std::string segment;
+        inp = OneArgument(inp, segment);
 
-      if ( segment.size() >= 5 && StringSuffix(".are", segment) )
+        if (segment.size() >= 5 && StringSuffix(".are", segment))
         {
-          if( !out.empty() )
+            if (!out.empty())
             {
-              out += " ";
+                out += " ";
             }
 
-          out += segment;
+            out += segment;
         }
     }
 }

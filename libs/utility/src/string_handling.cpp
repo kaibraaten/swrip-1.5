@@ -719,3 +719,8 @@ std::string WordWrap(const std::string &stl_txt, unsigned short wrap)
 
     return bufp;
 }
+
+bool StringEndsWith(const std::string &str, const std::string &ending)
+{
+    return !StringSuffix(ending, str);
+}

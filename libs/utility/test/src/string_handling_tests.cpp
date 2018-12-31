@@ -353,3 +353,16 @@ TEST_F(StringHandlingTests, TrimString)
     EXPECT_EQ(result, "");
   }  
 }
+
+TEST_F(StringHandlingTests, StringEndsWith)
+{
+    /// Arrange
+    const std::string stringToCheck = "Check if with string ends with disaster";
+    const std::string ending = "disaster";
+
+    // Act
+    const bool hadExpectedEnding = StringEndsWith(stringToCheck, ending);
+
+    // Assert
+    EXPECT_TRUE(hadExpectedEnding);
+}

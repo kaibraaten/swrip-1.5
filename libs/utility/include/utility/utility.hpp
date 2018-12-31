@@ -143,9 +143,56 @@ do                                                              \
   } while(0)
 
 int ParseBet(const int currentbet, const std::string &s);
-int umin(int check, int ncheck);
-int umax(int check, int ncheck);
-int urange(int mincheck, int check, int maxcheck);
+
+/**
+ * \brief Return the lesser of two values.
+ * \tparam A 
+ * \tparam B 
+ * \param check The first value to compare.
+ * \param ncheck The second value to compare.
+ * \return The lesser value.
+ */
+template<typename A, typename B>
+auto umin(const A &check, const B &ncheck)
+{
+    return check < ncheck ? check : ncheck;
+}
+
+/**
+ * \brief Return the greater of two values.
+ * \tparam A 
+ * \tparam B 
+ * \param check The first value to compare.
+ * \param ncheck The second value to compare.
+ * \return The greater value.
+ */
+template<typename A, typename B>
+auto umax(const A &check, const B &ncheck)
+{
+    return check > ncheck ? check : ncheck;
+}
+
+/**
+ * \brief "Clip" a value to stay within a certain range.
+ * \tparam A 
+ * \tparam B 
+ * \tparam C 
+ * \param mincheck The minimum value of the range.
+ * \param check The value to "clip".
+ * \param maxcheck The maximum value of the range.
+ * \return The clipped value.
+ */
+template<typename A, typename B, typename C>
+B urange(const A &mincheck, const B &check, const C &maxcheck)
+{
+    if (check < mincheck)
+        return mincheck;
+
+    if (check > maxcheck)
+        return maxcheck;
+
+    return check;
+}
 
 /* string_handling.c */
 std::string WordWrap(const std::string &txt, unsigned short wrap);
@@ -184,6 +231,14 @@ std::string CenterString(const std::string &txt, size_t totalWidth, char pad);
 std::string FormatString(const char *fmt, ...) __attribute__((format(printf, 1, 2)));
 std::vector<char> CreateFmtBuffer(const char *fmt, va_list va);
 std::vector<char> StringToVector(const std::string&);
+
+/**
+ * \brief Check if a string ends with a specified character sequence.
+ * \param str The string to check.
+ * \param ending The character sequence that we want to know if str ends with.
+ * \return true if str ends with ending. 
+ */
+bool StringEndsWith(const std::string &str, const std::string &ending);
 
 /* file_io.c */
 char ReadChar(FILE *fp, Logger *log, bool fBootDb);
