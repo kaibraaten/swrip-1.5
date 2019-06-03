@@ -42,6 +42,9 @@ new features any time soon. It will still be about refactoring.
 
 If you get any errors let me know.
 
+*Tip: Try `make -jn` where `n` is the number of cores on your CPU, for instance
+`make -j4` to speed up compiling considerably.*
+
 ## Running the mud
 Edit the `startup` script in the top directory and change `port=7000` into
 whatever port you want the server to listen on.
