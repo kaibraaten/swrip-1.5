@@ -5079,7 +5079,8 @@ static socket_t ipv4_connect( void )
     */
    if( !inet_aton( this_imcmud->rhost, &sa.sin_addr ) )
    {
-      hostp = gethostbyname( this_imcmud->rhost );
+       hostent *hostp = gethostbyname( this_imcmud->rhost );
+       
       if( !hostp )
       {
          imclog( "%s", "imc_connect_to: Cannot resolve server hostname." );

@@ -1847,9 +1847,9 @@ static void MudProgDriver(char *com_list, Character *mob, Character *actor,
 
         /* Evaluate/execute the command, check what happened. */
         result = MudProgDoCommand(cmnd, mob, actor, obj, vo, rndm,
-            ifstate[iflevel][IN_IF] && !ifstate[iflevel][DO_IF]
-            || ifstate[iflevel][IN_ELSE] && !ifstate[iflevel][DO_ELSE],
-            ignorelevel > 0);
+                                  (ifstate[iflevel][IN_IF] && !ifstate[iflevel][DO_IF])
+                                  || (ifstate[iflevel][IN_ELSE] && !ifstate[iflevel][DO_ELSE]),
+                                  ignorelevel > 0);
 
         /* Script prog support  -Thoric */
         if (single_step)
@@ -3509,7 +3509,7 @@ Character *GetCharacterInRoomMudProg(Character *ch, std::string argument)
     for (Character *rch : ch->InRoom->Characters())
     {
         if (NiftyIsName(arg, rch->Name)
-            || IsNpc(rch) && vnum == rch->Prototype->Vnum)
+            || (IsNpc(rch) && vnum == rch->Prototype->Vnum))
         {
             if (number == 0 && !IsNpc(rch))
             {
