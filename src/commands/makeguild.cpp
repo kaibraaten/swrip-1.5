@@ -93,7 +93,7 @@ void do_makeguild( Character *ch, std::string argument )
 
 static bool IsGuildNameAcceptable( const std::string &name )
 {
-  bool nameIsAvailable = GetClan(name.c_str()) == nullptr;
+  bool nameIsAvailable = GetClan(name) == nullptr;
 
   return nameIsAvailable
     && StringInfix( "Jedi Order", name ) != 0;

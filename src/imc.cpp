@@ -3567,7 +3567,7 @@ bool ImcLoadCharacter( Character * ch, FILE * fp, const std::string &word )
          KEY( "IMCMSN", IMC_MSN( ch ), imcReadLine( fp ) );
          KEY( "IMCHomepage", IMC_HOMEPAGE( ch ), imcReadLine( fp ) );
          KEY( "IMCComment", IMC_COMMENT( ch ), imcReadLine( fp ) );
-         if( !StrCmp( word.c_str(), "IMCFlags" ) )
+         if( !StrCmp(word, "IMCFlags" ) )
          {
             IMCFLAG( ch ) = ReadInt( fp, Log, fBootDb );
             imc_char_login( ch );
@@ -3575,7 +3575,7 @@ bool ImcLoadCharacter( Character * ch, FILE * fp, const std::string &word )
             break;
          }
 
-         if( !StrCmp( word.c_str(), "IMClisten" ) )
+         if( !StrCmp(word, "IMClisten" ) )
          {
             IMC_LISTEN( ch ) = imcReadLine( fp );
             if( IMC_LISTEN( ch ) != NULL && this_imcmud->state == IMC_ONLINE )
@@ -3600,7 +3600,7 @@ bool ImcLoadCharacter( Character * ch, FILE * fp, const std::string &word )
             break;
          }
 
-         if( !StrCmp( word.c_str(), "IMCdeny" ) )
+         if( !StrCmp(word, "IMCdeny" ) )
          {
             IMC_DENY( ch ) = imcReadLine( fp );
             if( IMC_DENY( ch ) != NULL && this_imcmud->state == IMC_ONLINE )
@@ -3625,7 +3625,7 @@ bool ImcLoadCharacter( Character * ch, FILE * fp, const std::string &word )
             break;
          }
 
-         if( !StrCmp( word.c_str(), "IMCignore" ) )
+         if( !StrCmp(word, "IMCignore" ) )
          {
             IMC_IGNORE *temp;
 
