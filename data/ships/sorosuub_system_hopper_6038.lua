@@ -1,9 +1,77 @@
 -- Sorosuub System Hopper
--- Last saved Friday 28-Dec-2018 02:45:46
+-- Last saved Thursday 06-Jun-2019 17:39:23
 
 ShipEntry
 {
-   LastDock = 203, 
+   DockingPorts = 0, 
+   State = 0, 
+   CoPilot = "", 
+   Hyperdrive = 
+   {
+      Speed = 100, 
+   }, 
+   Name = "Sorosuub System Hopper", 
+   Position = 
+   {
+      Y = 288, 
+      Z = 213, 
+      X = 238, 
+   }, 
+   Owner = "public", 
+   Rooms = 
+   {
+      Pilotseat = 32163, 
+      Coseat = 32163, 
+      Cockpit = 32163, 
+      Gunseat = 32163, 
+      Last = 32163, 
+      First = 32163, 
+      Navseat = 32163, 
+      Engine = 0, 
+      Entrance = 32163, 
+      Hangar = 0, 
+   }, 
+   Home = "Kinyen", 
+   Defenses = 
+   {
+      Shield = 
+      {
+         Max = 10, 
+         Current = 0, 
+      }, 
+      Hull = 
+      {
+         Max = 100, 
+         Current = 100, 
+      }, 
+      Chaff = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+   }, 
+   Class = "Starfighter", 
+   Thrusters = 
+   {
+      Maneuver = 35, 
+      Speed = 
+      {
+         Max = 65, 
+         Current = 0, 
+      }, 
+      Energy = 
+      {
+         Max = 2000, 
+         Current = 2000, 
+      }, 
+   }, 
+   Guard = false, 
+   Instruments = 
+   {
+      Comm = 0, 
+      AstroArray = 0, 
+      Sensor = 0, 
+   }, 
    WeaponSystems = 
    {
       TractorBeam = 
@@ -13,13 +81,8 @@ ShipEntry
       }, 
       IonCannon = 
       {
-         Count = 0, 
          State = 0, 
-      }, 
-      Laser = 
-      {
          Count = 0, 
-         State = 0, 
       }, 
       Turrets = 
       {
@@ -81,93 +144,30 @@ ShipEntry
             Max = 0, 
             Current = 0, 
          }, 
-         Missiles = 
+         Rockets = 
          {
             Max = 0, 
             Current = 0, 
          }, 
-         Rockets = 
+         Missiles = 
          {
             Max = 0, 
             Current = 0, 
          }, 
          State = 0, 
       }, 
-   }, 
-   Hyperdrive = 
-   {
-      Speed = 100, 
-   }, 
-   Owner = "public", 
-   Alarm = false, 
-   Rooms = 
-   {
-      Last = 32163, 
-      Hangar = 0, 
-      Pilotseat = 32163, 
-      First = 32163, 
-      Coseat = 32163, 
-      Gunseat = 32163, 
-      Navseat = 32163, 
-      Engine = 0, 
-      Entrance = 32163, 
-      Cockpit = 32163, 
-   }, 
-   State = 0, 
-   Shipyard = 203, 
-   Description = "", 
-   Pilot = "", 
-   Home = "Kinyen", 
-   CoPilot = "", 
-   Position = 
-   {
-      X = 238, 
-      Z = 213, 
-      Y = 288, 
+      Laser = 
+      {
+         State = 0, 
+         Count = 0, 
+      }, 
    }, 
    PersonalName = "6038", 
-   Instruments = 
-   {
-      Sensor = 0, 
-      AstroArray = 0, 
-      Comm = 0, 
-   }, 
-   Thrusters = 
-   {
-      Energy = 
-      {
-         Max = 2000, 
-         Current = 2000, 
-      }, 
-      Speed = 
-      {
-         Max = 65, 
-         Current = 0, 
-      }, 
-      Maneuver = 35, 
-   }, 
-   Name = "Sorosuub System Hopper", 
-   Defenses = 
-   {
-      Hull = 
-      {
-         Max = 100, 
-         Current = 100, 
-      }, 
-      Shield = 
-      {
-         Max = 10, 
-         Current = 0, 
-      }, 
-      Chaff = 
-      {
-         Max = 0, 
-         Current = 0, 
-      }, 
-   }, 
-   Guard = false, 
-   Type = "Civilian", 
+   Pilot = "", 
+   Alarm = false, 
    Location = 203, 
-   Class = "Starfighter", 
-   DockingPorts = 0, 
+   LastDock = 203, 
+   Type = "Civilian", 
+   Shipyard = 203, 
+   Description = "", 
 }

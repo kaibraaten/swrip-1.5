@@ -1,25 +1,27 @@
 -- Sorosuub System Hopper
--- Last saved Friday 28-Dec-2018 02:45:46
+-- Last saved Thursday 06-Jun-2019 17:39:23
 
 ShipEntry
 {
-   Name = "Sorosuub System Hopper", 
-   PersonalName = "6040", 
-   DockingPorts = 0, 
-   State = 0, 
-   Position = 
+   Pilot = "", 
+   Owner = "public", 
+   Location = 203, 
+   CoPilot = "", 
+   Rooms = 
    {
-      Z = -160, 
-      Y = 160, 
-      X = 160, 
+      Pilotseat = 32165, 
+      Cockpit = 32165, 
+      Last = 32165, 
+      Coseat = 32165, 
+      Gunseat = 32165, 
+      Engine = 0, 
+      Entrance = 32165, 
+      Navseat = 32165, 
+      Hangar = 0, 
+      First = 32165, 
    }, 
    Defenses = 
    {
-      Chaff = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
       Shield = 
       {
          Current = 0, 
@@ -30,123 +32,118 @@ ShipEntry
          Current = 100, 
          Max = 100, 
       }, 
+      Chaff = 
+      {
+         Current = 0, 
+         Max = 0, 
+      }, 
    }, 
-   Class = "Starfighter", 
-   Owner = "public", 
+   Name = "Sorosuub System Hopper", 
    Instruments = 
    {
       Comm = 0, 
       Sensor = 0, 
       AstroArray = 0, 
    }, 
+   State = 0, 
+   Position = 
+   {
+      X = 160, 
+      Y = 160, 
+      Z = -160, 
+   }, 
    Thrusters = 
    {
-      Energy = 
-      {
-         Current = 2000, 
-         Max = 2000, 
-      }, 
       Maneuver = 35, 
       Speed = 
       {
          Current = 0, 
          Max = 65, 
       }, 
+      Energy = 
+      {
+         Current = 2000, 
+         Max = 2000, 
+      }, 
    }, 
-   Rooms = 
-   {
-      Pilotseat = 32165, 
-      Coseat = 32165, 
-      Navseat = 32165, 
-      Hangar = 0, 
-      Engine = 0, 
-      Gunseat = 32165, 
-      Entrance = 32165, 
-      Last = 32165, 
-      First = 32165, 
-      Cockpit = 32165, 
-   }, 
-   Home = "Asteroid 1234", 
-   Shipyard = 203, 
-   Location = 203, 
-   Alarm = false, 
-   LastDock = 203, 
-   Description = "", 
-   Type = "Civilian", 
-   Hyperdrive = 
-   {
-      Speed = 100, 
-   }, 
-   Guard = false, 
-   CoPilot = "", 
-   Pilot = "", 
    WeaponSystems = 
    {
       TractorBeam = 
       {
-         State = 1, 
          Strength = 0, 
+         State = 1, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [2] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [3] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [4] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [5] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [6] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [7] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [8] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [9] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [0] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
+      }, 
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 0, 
       }, 
       Laser = 
       {
-         Count = 0, 
          State = 0, 
+         Count = 0, 
       }, 
       Tube = 
       {
+         Rockets = 
+         {
+            Current = 0, 
+            Max = 0, 
+         }, 
+         State = 0, 
          Torpedoes = 
          {
             Current = 0, 
@@ -157,17 +154,20 @@ ShipEntry
             Current = 0, 
             Max = 0, 
          }, 
-         Rockets = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         State = 0, 
-      }, 
-      IonCannon = 
-      {
-         Count = 0, 
-         State = 0, 
       }, 
    }, 
+   Hyperdrive = 
+   {
+      Speed = 100, 
+   }, 
+   Shipyard = 203, 
+   Class = "Starfighter", 
+   Home = "Asteroid 1234", 
+   DockingPorts = 0, 
+   Description = "", 
+   Guard = false, 
+   LastDock = 203, 
+   Type = "Civilian", 
+   Alarm = false, 
+   PersonalName = "6040", 
 }

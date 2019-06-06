@@ -1083,7 +1083,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
         }
         else if (!StrCmp(chck, "clan"))
         {
-            const auto clan = chkchar->PCData->ClanInfo.Clan;
+            const auto clan = IsNpc(chkchar) ? nullptr : chkchar->PCData->ClanInfo.Clan;
 
             if (IsNpc(chkchar) || !clan)
                 return false;
