@@ -45,6 +45,12 @@ Shuttle::Shuttle()
 
 }
 
+Shuttle::~Shuttle()
+{
+
+
+}
+
 void Shuttle::Add(std::shared_ptr<ShuttleStop> stop)
 {
     pImpl->Stops.push_back(stop);

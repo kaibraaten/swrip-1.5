@@ -61,7 +61,7 @@ class Shuttle
 {
 public:
     Shuttle();
-    virtual ~Shuttle() = default;
+    virtual ~Shuttle();
 
     void Add(std::shared_ptr<ShuttleStop> stop);
     void Remove(std::shared_ptr<ShuttleStop> stop);
