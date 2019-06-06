@@ -60,7 +60,7 @@ public:
     int MaxSN = 0;                 /* Max skills */
     std::bitset<Flag::MAX> SaveFlags;
     int SaveFrequency = 0;         /* How old to autosave someone */
-    int Port = 7000;
+    unsigned short Port = 7000;
     bool DisableHunger = false;
     bool CanChooseJedi = false;
     bool PermaDeath = false;

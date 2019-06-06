@@ -48,31 +48,28 @@
 #include "repos/descriptorrepository.hpp"
 #include "repos/playerrepository.hpp"
 
-static const char go_ahead_str[] = { (const char)IAC, (const char)GA, '\0' };
-
-#define MAX_NEST        100
-
+constexpr unsigned short DEFAULT_LISTEN_PORT = 7000;
 bool bootup = false;
 
 /*
  * Global variables.
  */
-int            num_descriptors = 0;
-bool           mud_down = false;       /* Shutdown                     */
-bool           wizlock = false;     /* Game is wizlocked            */
-time_t         boot_time = 0;
-HourMinSec   set_boot_time_struct;
-HourMinSec  *set_boot_time = NULL;
-struct tm     *new_boot_time = NULL;
-struct tm      new_boot_struct;
+int num_descriptors = 0;
+bool mud_down = false;       /* Shutdown                     */
+bool wizlock = false;     /* Game is wizlocked            */
+time_t boot_time = 0;
+HourMinSec set_boot_time_struct;
+HourMinSec *set_boot_time = nullptr;
+tm *new_boot_time = nullptr;
+tm new_boot_struct;
 std::string str_boot_time;
-time_t         current_time = 0;       /* Time of this pulse           */
-socket_t       control = 0;            /* Controlling descriptor       */
-socket_t       newdesc = 0;            /* New descriptor               */
-fd_set         in_set;             /* Set of desc's for reading    */
-fd_set         out_set;            /* Set of desc's for writing    */
-fd_set         exc_set;            /* Set of desc's with errors    */
-int            maxdesc = 0;
+time_t current_time = 0;       /* Time of this pulse           */
+socket_t control = 0;            /* Controlling descriptor       */
+socket_t newdesc = 0;            /* New descriptor               */
+fd_set in_set;             /* Set of desc's for reading    */
+fd_set out_set;            /* Set of desc's for writing    */
+fd_set exc_set;            /* Set of desc's with errors    */
+int maxdesc = 0;
 
 /*
  * Other local functions (OS-independent).
@@ -105,47 +102,9 @@ static void ExecuteOnExit()
     OsCleanup();
 }
 
-int SwripMain(int argc, char *argv[])
+static void InitializeTime()
 {
-    struct timeval now_time;
-    bool fCopyOver = false;
-    socket_t imcsocket = INVALID_SOCKET;
-
-    Log = NewLogger();
-
-    /*
-     * Memory debugging if needed.
-     */
-#if defined(MALLOC_DEBUG)
-    malloc_debug(2);
-#endif
-
-    SysData.NoNameResolving = true;
-    SysData.NewPlayersMustWaitForAuth = true;
-
-    OsSetup();
-    /*AllocateMemory( SysData.mccp_buf, unsigned char, COMPRESS_BUF_SIZE );*/
-
-    atexit(ExecuteOnExit);
-#ifdef SWRIP_USE_DLSYM
-#ifdef _WIN32
-    SysData.DlHandle = LoadLibraryA("swrip.exe");
-
-    if (!SysData.DlHandle)
-    {
-        fprintf(stdout, "Failed opening dl handle to self: %s\n", GetLastError());
-        exit(1);
-    }
-#else
-    SysData.DlHandle = dlopen(NULL, RTLD_LAZY);
-
-    if (!SysData.DlHandle)
-    {
-        fprintf(stdout, "Failed opening dl handle to self: %s\n", dlerror());
-        exit(1);
-    }
-#endif
-#endif
+    timeval now_time;
 
     /*
      * Init time.
@@ -182,11 +141,42 @@ int SwripMain(int argc, char *argv[])
 
     /* Set reboot time string for do_time */
     GenerateRebootString();
+}
 
-    /*
-     * Get the port number.
-     */
-    SysData.Port = 7000;
+int SwripMain(int argc, char *argv[])
+{
+    bool fCopyOver = false;
+    socket_t imcsocket = INVALID_SOCKET;
+
+    Log = NewLogger();
+
+    SysData.NoNameResolving = true;
+    SysData.NewPlayersMustWaitForAuth = true;
+
+    OsSetup();
+
+    atexit(ExecuteOnExit);
+#ifdef SWRIP_USE_DLSYM
+#ifdef _WIN32
+    SysData.DlHandle = LoadLibraryA("swrip.exe");
+
+    if (!SysData.DlHandle)
+    {
+        fprintf(stdout, "Failed opening dl handle to self: %s\n", GetLastError());
+        exit(1);
+    }
+#else
+    SysData.DlHandle = dlopen(NULL, RTLD_LAZY);
+
+    if (!SysData.DlHandle)
+    {
+        fprintf(stdout, "Failed opening dl handle to self: %s\n", dlerror());
+        exit(1);
+    }
+#endif
+#endif
+
+    InitializeTime();
 
     if (argc > 1)
     {
@@ -249,18 +239,18 @@ int SwripMain(int argc, char *argv[])
     return 0;
 }
 
-socket_t InitializeSocket(short port)
+socket_t InitializeSocket(unsigned short port)
 {
-    struct sockaddr_in sa;
+    sockaddr_in sa;
 #ifdef _WIN32
     const char optval = 1;
 #else
     int optval = 1;
 #endif
     socklen_t optlen = sizeof(optval);
-    socket_t fd = 0;
+    socket_t fd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 
-    if ((fd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) == INVALID_SOCKET)
+    if (fd == INVALID_SOCKET)
     {
         perror("Init_socket: socket");
         exit(1);
@@ -275,19 +265,17 @@ socket_t InitializeSocket(short port)
     }
 
 #if defined(SO_DONTLINGER) && !defined(SYSV) && !defined(__sun__)
+    linger ld;
+
+    ld.l_onoff = 1;
+    ld.l_linger = 1000;
+
+    if (setsockopt(fd, SOL_SOCKET, SO_DONTLINGER,
+        (const char*)&ld, sizeof(ld)) == SOCKET_ERROR)
     {
-        struct linger ld;
-
-        ld.l_onoff = 1;
-        ld.l_linger = 1000;
-
-        if (setsockopt(fd, SOL_SOCKET, SO_DONTLINGER,
-            (const char*)&ld, sizeof(ld)) == SOCKET_ERROR)
-        {
-            perror("Init_socket: SO_DONTLINGER");
-            closesocket(fd);
-            exit(1);
-        }
+        perror("Init_socket: SO_DONTLINGER");
+        closesocket(fd);
+        exit(1);
     }
 #endif
 
@@ -317,10 +305,8 @@ socket_t InitializeSocket(short port)
  */
 static void CaughtAlarm(int dummy)
 {
-    char buf[MAX_STRING_LENGTH] = { '\0' };
     Log->Bug("ALARM CLOCK!");
-    strcpy(buf, "Alas, the hideous mandalorian entity known only as 'Lag' rises once more!\r\n");
-    EchoToAll(AT_IMMORT, buf, ECHOTAR_ALL);
+    EchoToAll(AT_IMMORT, "Alas, the hideous mandalorian entity known only as 'Lag' rises once more!\r\n", ECHOTAR_ALL);
 
     if (newdesc)
     {
@@ -333,7 +319,7 @@ static void CaughtAlarm(int dummy)
     closesocket(control);
 
     Log->Info("Normal termination of game.");
-    exit(0);
+    exit(EXIT_SUCCESS);
 }
 
 static bool CheckBadSocket(socket_t desc)
@@ -351,8 +337,7 @@ static bool CheckBadSocket(socket_t desc)
 
 static void AcceptNewSocket(socket_t ctrl)
 {
-    static struct timeval null_time;
-    int result = 0;
+    static timeval null_time;
 
     /*
      * Poll all active descriptors.
@@ -372,12 +357,12 @@ static void AcceptNewSocket(socket_t ctrl)
         FD_SET(d->Socket, &exc_set);
     }
 
-    result = select(maxdesc + 1, &in_set, &out_set, &exc_set, &null_time);
+    int result = select(maxdesc + 1, &in_set, &out_set, &exc_set, &null_time);
 
     if (result == SOCKET_ERROR)
     {
         perror("AcceptNewSocket: select: poll");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
 
     if (FD_ISSET(ctrl, &exc_set))
@@ -401,7 +386,7 @@ static void GameLoop()
     signal(SIGPIPE, SIG_IGN);
     signal(SIGALRM, CaughtAlarm);
 #endif
-    gettimeofday(&last_time, NULL);
+    gettimeofday(&last_time, nullptr);
     current_time = (time_t)last_time.tv_sec;
 
     /* Main loop */
@@ -444,13 +429,13 @@ static void HandleSocketInput()
             CloseDescriptor(d, true);
             continue;
         }
-        else if ((d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : false) &&
-            (d->Idle > 7200) && !IsBitSet(d->Character->Flags, PLR_AFK)) /* 30 minutes  */
+        else if ((d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : false)
+            && d->Idle > 7200 && !IsBitSet(d->Character->Flags, PLR_AFK)) /* 30 minutes  */
         {
             if ((d->Character && d->Character->InRoom) ? d->Character->TopLevel <= LEVEL_IMMORTAL : false)
             {
                 WriteToDescriptor(d->Socket,
-                    "Idle 30 Minutes. Activating AFK Flag\r\n", 0);
+                    "Idle 30 minutes. Activating AFK flag.\r\n", 0);
                 SetBit(d->Character->Flags, PLR_AFK);
                 Act(AT_GREY, "$n is now afk due to idle time.", d->Character, NULL, NULL, TO_ROOM);
                 continue;
@@ -479,7 +464,9 @@ static void HandleSocketInput()
                 d->Idle = 0;
 
                 if (d->Character)
+                {
                     d->Character->IdleTimer = 0;
+                }
 
                 if (!d->Read())
                 {
@@ -488,7 +475,9 @@ static void HandleSocketInput()
                     if (d->Character
                         && (d->ConnectionState == CON_PLAYING
                             || d->ConnectionState == CON_EDITING))
+                    {
                         PlayerCharacters->Save(d->Character);
+                    }
 
                     d->OutBuffer.str("");
                     CloseDescriptor(d, false);
@@ -504,17 +493,18 @@ static void HandleSocketInput()
 
             d->ReadFromBuffer();
 
-            if (!IsNullOrEmpty(d->InComm))
+            if (d->HasInput())
             {
-                char cmdline[MAX_INPUT_LENGTH] = { '\0' };
                 d->fCommand = true;
                 StopIdling(d->Character);
 
-                strcpy(cmdline, d->InComm);
+                std::string cmdline = d->InComm;
                 d->InComm[0] = '\0';
 
                 if (d->Character)
+                {
                     SetCurrentGlobalCharacter(d->Character);
+                }
 
                 switch (d->ConnectionState)
                 {
@@ -619,9 +609,8 @@ static void Sleep(timeval &last_time)
 
 static void NewDescriptor(socket_t new_desc)
 {
-    char buf[MAX_STRING_LENGTH] = { '\0' };
-    struct hostent  *from = nullptr;
-    struct sockaddr_in sock;
+    hostent  *from = nullptr;
+    sockaddr_in sock;
     socket_t desc = 0;
     socklen_t size = 0;
 
@@ -669,9 +658,9 @@ static void NewDescriptor(socket_t new_desc)
     Descriptor *dnew = new Descriptor(desc);
     dnew->Remote.Port = ntohs(sock.sin_port);
 
-    strcpy(buf, inet_ntoa(sock.sin_addr));
+    std::string buf = inet_ntoa(sock.sin_addr);
     sprintf(log_buf, "Sock.sinaddr:  %s, port %hd.",
-        buf, dnew->Remote.Port);
+        buf.c_str(), dnew->Remote.Port);
     Log->LogStringPlus(log_buf, LOG_COMM, SysData.LevelOfLogChannel);
 
     dnew->Remote.HostIP = buf;
@@ -723,8 +712,7 @@ static void NewDescriptor(socket_t new_desc)
 
     if (SysData.MaxPlayersThisBoot > SysData.MaxPlayersEver)
     {
-        sprintf(buf, "%24.24s", ctime(&current_time));
-        SysData.TimeOfMaxPlayersEver = buf;
+        SysData.TimeOfMaxPlayersEver = FormatString("%24.24s", ctime(&current_time));
         SysData.MaxPlayersEver = SysData.MaxPlayersThisBoot;
         sprintf(log_buf, "Broke all-time maximum player record: %d", SysData.MaxPlayersEver);
         Log->LogStringPlus(log_buf, LOG_COMM, SysData.LevelOfLogChannel);
@@ -745,7 +733,6 @@ void FreeDescriptor(Descriptor *d)
 void CloseDescriptor(Descriptor *dclose, bool force)
 {
     Character *ch = nullptr;
-    bool DoNotUnlink = false;
 
     /* flush outbuf */
     if (!force && !dclose->OutBuffer.str().empty())
@@ -795,17 +782,12 @@ void CloseDescriptor(Descriptor *dclose, bool force)
         }
     }
 
-
-    if (!DoNotUnlink)
-    {
-        Descriptors->Remove(dclose);
-    }
+    Descriptors->Remove(dclose);
 
     if (dclose->Socket == maxdesc)
         --maxdesc;
 
     FreeDescriptor(dclose);
-    return;
 }
 
 /*
@@ -827,8 +809,9 @@ bool WriteToDescriptor(socket_t desc, const std::string &orig, int length)
     for (int iStart = 0; iStart < length; iStart += nWrite)
     {
         int nBlock = umin(length - iStart, 4096);
+        nWrite = send(desc, txt.c_str() + iStart, nBlock, 0);
 
-        if ((nWrite = send(desc, txt.c_str() + iStart, nBlock, 0)) == SOCKET_ERROR)
+        if (nWrite == SOCKET_ERROR)
         {
             Log->Bug("Write_to_descriptor: error on socket %d: %s",
                 desc, strerror(GETERROR));
@@ -858,7 +841,7 @@ static void StopIdling(Character *ch)
 
 void SetCharacterColor(short AType, const Character *ch)
 {
-    char buf[16] = { '\0' };
+    std::string buf;
     const Character *och = nullptr;
 
     if (!ch || !ch->Desc)
@@ -870,12 +853,12 @@ void SetCharacterColor(short AType, const Character *ch)
     {
         if (AType == 7)
         {
-            strcpy(buf, "\033[m");
+            buf = "\033[m";
         }
         else
         {
-            sprintf(buf, "\033[0;%d;%s%dm", (AType & 8) == 8,
-                (AType > 15 ? "5;" : ""), (AType & 7) + 30);
+            buf = FormatString("\033[0;%d;%s%dm", (AType & 8) == 8,
+                            (AType > 15 ? "5;" : ""), (AType & 7) + 30);
         }
 
         ch->Desc->WriteToBuffer(buf);
@@ -885,8 +868,10 @@ void SetCharacterColor(short AType, const Character *ch)
 /*
  * The primary output interface for formatted output.
  */
- /* Major overhaul. -- Alty */
-#define NAME(ch)        (IsNpc(ch) ? ch->ShortDescr : ch->Name)
+static std::string NAME(const Character *ch)
+{
+    return IsNpc(ch) ? ch->ShortDescr : ch->Name;
+}
 
 static std::string ActString(const std::string &format, Character *to, Character *ch,
     const void *arg1, const void *arg2)
@@ -1073,7 +1058,6 @@ static std::string ActString(const std::string &format, Character *to, Character
     buf[0] = CharToUppercase(buf[0]);
     return buf;
 }
-#undef NAME
 
 void Act(short AType, const std::string &format, Character *ch, const void *arg1, const void *arg2, int type)
 {
@@ -1223,7 +1207,7 @@ void DisplayPrompt(Descriptor *d)
 {
     const Character *ch = d->Character;
     const Character *och = d->Original ? d->Original : d->Character;
-    const bool ansi = (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI));
+    const bool ansi = !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI);
     std::string promptBuffer;
     const char *prompt = nullptr;
     char buf[MAX_STRING_LENGTH] = { '\0' };
