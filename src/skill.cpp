@@ -271,6 +271,11 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
     return true;
 }
 
+int GetSkillLevel(const Character *ch, short gsn)
+{
+    return IsNpc(ch) ? ch->TopLevel : ch->PCData->Learned[gsn];
+}
+
 void LearnFromSuccess(Character *ch, int sn)
 {
     int adept = 0;

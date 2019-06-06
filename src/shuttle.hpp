@@ -33,67 +33,67 @@
 class ShuttleStop
 {
 public:
-  std::string Name; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
-  vnum_t RoomVnum = INVALID_VNUM;
+    std::string Name; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
+    vnum_t RoomVnum = INVALID_VNUM;
 };
 
 enum _ShuttleState
-  {
+{
     SHUTTLE_STATE_LANDING,
     SHUTTLE_STATE_LANDED,
     SHUTTLE_STATE_TAKINGOFF,
     SHUTTLE_STATE_INSPACE,
     SHUTTLE_STATE_HYPERSPACE_LAUNCH,
     SHUTTLE_STATE_HYPERSPACE_END
-  };
+};
 
 /* ShuttleClass */
 enum
-  {
+{
     SHUTTLE_TURBOCAR, /* Pretty much the same as shuttle EDIT:: Changes messages to be appropriate to ground - Greven*/
     SHUTTLE_SPACE, /* Has some message about taking off and landing */
     SHUTTLE_HYPERSPACE
-  };
+};
 
 using ShuttleClass = int;
 
 class Shuttle
 {
 public:
-  Shuttle();
-  virtual ~Shuttle();
+    Shuttle();
+    virtual ~Shuttle() = default;
 
-  void Add(std::shared_ptr<ShuttleStop> stop);
-  void Remove(std::shared_ptr<ShuttleStop> stop);
-  const std::vector<std::shared_ptr<ShuttleStop>> &Stops() const;
-  
-  Room *InRoom = nullptr;
+    void Add(std::shared_ptr<ShuttleStop> stop);
+    void Remove(std::shared_ptr<ShuttleStop> stop);
+    const std::vector<std::shared_ptr<ShuttleStop>> &Stops() const;
 
-  std::shared_ptr<ShuttleStop> CurrentStop() const;
-  int CurrentNumber = -1;
+    Room *InRoom = nullptr;
 
-  int State = SHUTTLE_STATE_LANDED;
+    std::shared_ptr<ShuttleStop> CurrentStop() const;
+    int CurrentNumber = -1;
 
-  ShuttleClass Type = SHUTTLE_TURBOCAR;
+    int State = SHUTTLE_STATE_LANDED;
 
-  std::string Name;
-  
-  /* Delay Between Stops */
-  int Delay = 2;
-  /* Actual time for delay.. */
-  int CurrentDelay = 2;
+    ShuttleClass Type = SHUTTLE_TURBOCAR;
 
-  /* For echoing any messages */
-  struct
-  {
-    vnum_t First = ROOM_VNUM_LIMBO;
-    vnum_t Last = ROOM_VNUM_LIMBO;
-    vnum_t Entrance = ROOM_VNUM_LIMBO;
-  } Rooms;
+    std::string Name;
+
+    /* Delay Between Stops */
+    int Delay = 2;
+    /* Actual time for delay.. */
+    int CurrentDelay = 2;
+
+    /* For echoing any messages */
+    struct
+    {
+        vnum_t First = ROOM_VNUM_LIMBO;
+        vnum_t Last = ROOM_VNUM_LIMBO;
+        vnum_t Entrance = ROOM_VNUM_LIMBO;
+    } Rooms;
 
 private:
-  struct Impl;
-  std::unique_ptr<Impl> pImpl;
+    struct Impl;
+    std::unique_ptr<Impl> pImpl;
 };
 
 #ifndef MSL
@@ -108,15 +108,15 @@ private:
 
 void ShuttleUpdate();
 std::shared_ptr<Shuttle> NewShuttle(const std::string &name);
-bool ExtractShuttle( std::shared_ptr<Shuttle> shuttle );
-bool InsertShuttle( std::shared_ptr<Shuttle> shuttle, Room *room );
-void ShowShuttlesToCharacter( const std::list<std::shared_ptr<Shuttle>> &shuttles, Character *ch );
-std::shared_ptr<Shuttle> GetShuttleInRoom( const Room *room, const std::string &name );
-std::shared_ptr<Shuttle> GetShuttleFromEntrance( vnum_t vnum );
+bool ExtractShuttle(std::shared_ptr<Shuttle> shuttle);
+bool InsertShuttle(std::shared_ptr<Shuttle> shuttle, Room *room);
+void ShowShuttlesToCharacter(const std::list<std::shared_ptr<Shuttle>> &shuttles, const Character *ch);
+std::shared_ptr<Shuttle> GetShuttleInRoom(const Room *room, const std::string &name);
+std::shared_ptr<Shuttle> GetShuttleFromEntrance(vnum_t vnum);
 std::shared_ptr<ShuttleStop> AllocateShuttleStop();
 
-DECLARE_CMD_FUN( do_showshuttle );
-DECLARE_CMD_FUN( do_makeshuttle );
-DECLARE_CMD_FUN( do_setshuttle  );
+DECLARE_CMD_FUN(do_showshuttle);
+DECLARE_CMD_FUN(do_makeshuttle);
+DECLARE_CMD_FUN(do_setshuttle);
 
 #endif

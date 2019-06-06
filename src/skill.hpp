@@ -18,43 +18,43 @@
 class Skill
 {
 public:
-  std::string Name;                   /* Name of skill                */
-  SpellFun *SpellFunction = nullptr;              /* Spell pointer (for spells)   */
-  CmdFun *SkillFunction = nullptr;              /* Skill pointer (for skills)   */
-  std::string FunctionName;
-  SkillTargetType Target = 0;                 /* Legal targets                */
-  PositionType Position = 0;       /* Position for caster / user   */
-  int Slot = 0;                   /* Slot for #OBJECT loading     */
-  int Mana = 0;               /* Minimum mana used            */
-  int Beats = 0;                  /* Rounds required to use skill */
-  int Guild = 0;                  /* Which guild the skill belongs to */
-  int Level = 0;              /* Minimum level to be able to cast */
-  SkillType Type = 0;                   /* Spell/Skill/Weapon/Tongue    */
-  std::bitset<Flag::MAX> Flags;                  /* extra stuff                  */
-
-  struct
-  {
-    std::string NounDamage;            /* Damage message               */
-    std::string WearOff;                /* Wear off message             */
+    std::string Name;                   /* Name of skill                */
+    SpellFun *SpellFunction = nullptr;              /* Spell pointer (for spells)   */
+    CmdFun *SkillFunction = nullptr;              /* Skill pointer (for skills)   */
+    std::string FunctionName;
+    SkillTargetType Target = 0;                 /* Legal targets                */
+    PositionType Position = 0;       /* Position for caster / user   */
+    int Slot = 0;                   /* Slot for #OBJECT loading     */
+    int Mana = 0;               /* Minimum mana used            */
+    int Beats = 0;                  /* Rounds required to use skill */
+    int Guild = 0;                  /* Which guild the skill belongs to */
+    int Level = 0;              /* Minimum level to be able to cast */
+    SkillType Type = 0;                   /* Spell/Skill/Weapon/Tongue    */
+    std::bitset<Flag::MAX> Flags;                  /* extra stuff                  */
 
     struct
     {
-      std::string ToCaster;
-      std::string ToVictim;
-      std::string ToRoom;
-    } Success, Failure, VictimDeath, VictimImmune;
+        std::string NounDamage;            /* Damage message               */
+        std::string WearOff;                /* Wear off message             */
 
-  } Messages;
+        struct
+        {
+            std::string ToCaster;
+            std::string ToVictim;
+            std::string ToRoom;
+        } Success, Failure, VictimDeath, VictimImmune;
 
-  std::string Dice;                   /* Dice roll                    */
-  int Value = 0;                  /* Misc value                   */
-  int Saves = 0;                  /* What saving spell applies    */
-  int Difficulty = 0;             /* Difficulty of casting/learning */
-  std::list<std::shared_ptr<SmaugAffect>> Affects;                /* Spell affects, if any        */
-  std::string Teachers;               /* Skill requires a special teacher */
-  int Participants = 0;           /* # of required participants   */
-  timerset *UseRec = nullptr; /* Usage record                 */
-  int Alignment = 0;              /* for jedi powers */
+    } Messages;
+
+    std::string Dice;                   /* Dice roll                    */
+    int Value = 0;                  /* Misc value                   */
+    int Saves = 0;                  /* What saving spell applies    */
+    int Difficulty = 0;             /* Difficulty of casting/learning */
+    std::list<std::shared_ptr<SmaugAffect>> Affects;                /* Spell affects, if any        */
+    std::string Teachers;               /* Skill requires a special teacher */
+    int Participants = 0;           /* # of required participants   */
+    timerset *UseRec = nullptr; /* Usage record                 */
+    int Alignment = 0;              /* for jedi powers */
 };
 
 extern const std::array<const char * const, SKILLTYPE_MAX> SkillTypeName;
@@ -225,41 +225,42 @@ extern short gsn_first_weapon;
 extern short gsn_first_tongue;
 extern short gsn_TopSN;
 
-void ASSIGN_GSN( short &gsn, const std::string &skill );
-bool IS_VALID_SN( int sn );
-bool IS_VALID_HERB( int sn );
-bool SPELL_FLAG( const Skill *skill, size_t flag );
-long SPELL_DAMAGE( const Skill *skill );
-long SPELL_ACTION( const Skill *skill );
-long SPELL_CLASS( const Skill *skill );
-long SPELL_POWER( const Skill *skill );
-void SET_SDAM( Skill *skill, int val );
-void SET_SACT( Skill *skill, int val );
-void SET_SCLA( Skill *skill, int val );
-void SET_SPOW( Skill *skill, int val );
+void ASSIGN_GSN(short &gsn, const std::string &skill);
+bool IS_VALID_SN(int sn);
+bool IS_VALID_HERB(int sn);
+bool SPELL_FLAG(const Skill *skill, size_t flag);
+long SPELL_DAMAGE(const Skill *skill);
+long SPELL_ACTION(const Skill *skill);
+long SPELL_CLASS(const Skill *skill);
+long SPELL_POWER(const Skill *skill);
+void SET_SDAM(Skill *skill, int val);
+void SET_SACT(Skill *skill, int val);
+void SET_SCLA(Skill *skill, int val);
+void SET_SPOW(Skill *skill, int val);
 
 /* RIS by gsn lookups. -- Altrag.
    Will need to add some || stuff for spells that need a special GSN. */
-bool IS_FIRE( int dt );
-bool IS_COLD( int dt );
-bool IS_ACID( int dt );
-bool IS_ELECTRICITY( int dt );
-bool IS_ENERGY( int dt );
-bool IS_DRAIN( int dt );
-bool IS_POISON( int dt );
+bool IS_FIRE(int dt);
+bool IS_COLD(int dt);
+bool IS_ACID(int dt);
+bool IS_ELECTRICITY(int dt);
+bool IS_ENERGY(int dt);
+bool IS_DRAIN(int dt);
+bool IS_POISON(int dt);
 
-bool CheckSkill( Character *ch, const std::string &command, const std::string &argument );
-void LearnFromSuccess( Character *ch, int sn );
-void LearnFromFailure( Character *ch, int sn );
+bool CheckSkill(Character *ch, const std::string &command, const std::string &argument);
+void LearnFromSuccess(Character *ch, int sn);
+void LearnFromFailure(Character *ch, int sn);
+int GetSkillLevel(const Character *ch, short gsn);
 
-int ChLookupSkill( const Character *ch, const std::string &name );
-int LookupSkill( const std::string &name );
-int LookupHerb( const std::string &name );
-int SkillNumberFromSlot( int slot );
-int BSearchSkill( const std::string &name, int first, int top );
-int BSearchSkillExact( const std::string &name, int first, int top );
-int ChBSearchSkill( const Character *ch, const std::string &name, int first, int top );
-Skill *GetSkill( int sn );
+int ChLookupSkill(const Character *ch, const std::string &name);
+int LookupSkill(const std::string &name);
+int LookupHerb(const std::string &name);
+int SkillNumberFromSlot(int slot);
+int BSearchSkill(const std::string &name, int first, int top);
+int BSearchSkillExact(const std::string &name, int first, int top);
+int ChBSearchSkill(const Character *ch, const std::string &name, int first, int top);
+Skill *GetSkill(int sn);
 SkillType GetSkillType(const std::string &skilltype);
 void LoadSkills();
 void SaveSkills();

@@ -54,12 +54,7 @@ static void DockShip(Character *ch, std::shared_ptr<Ship> ship);
 
 static bool WillCollideWithSun(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> sun)
 {
-    if (GetShipDistanceToSpaceobject(ship, sun) < 10)
-    {
-        return true;
-    }
-
-    return false;
+    return GetShipDistanceToSpaceobject(ship, sun) < 10;
 }
 
 static bool ShipHasState(std::shared_ptr<Ship> ship, ShipState state)
@@ -414,7 +409,7 @@ static void LandShip(std::shared_ptr<Ship> ship, const std::string &arg)
 
     EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Landing sequence complete.");
     EchoToShip(AT_YELLOW, ship, "You feel a slight thud as the ship sets down on the ground.");
-    sprintf(buf, "%s disapears from your scanner.", ship->Name.c_str());
+    sprintf(buf, "%s disappears from your scanner.", ship->Name.c_str());
     EchoToNearbyShips(AT_YELLOW, ship, buf);
 
     if (ship->Ch && ship->Ch->Desc)
@@ -469,10 +464,7 @@ static void LandShip(std::shared_ptr<Ship> ship, const std::string &arg)
         ship->WeaponSystems.Tube.State = MISSILE_READY;
         ship->WeaponSystems.Laser.State = LASER_READY;
 
-        for (Turret *turret : ship->WeaponSystems.Turrets)
-        {
-            ResetTurret(turret);
-        }
+        ForEach(ship->WeaponSystems.Turrets, ResetTurret);
 
         ship->State = SHIP_LANDED;
 
@@ -490,7 +482,7 @@ static void ApproachLandingSite(std::shared_ptr<Ship> ship, const std::string &a
     bool found = false;
     std::shared_ptr<Ship> target;
 
-    for (std::list<std::shared_ptr<Spaceobject>>::const_iterator i = cbegin(Spaceobjects);
+    for (auto i = cbegin(Spaceobjects);
         i != cend(Spaceobjects); ++i)
     {
         spaceobj = *i;
@@ -504,9 +496,7 @@ static void ApproachLandingSite(std::shared_ptr<Ship> ship, const std::string &a
 
     if (found)
     {
-        size_t siteNum = 0;
-
-        for (siteNum = 0; siteNum < MAX_LANDINGSITE; ++siteNum)
+        for (size_t siteNum = 0; siteNum < MAX_LANDINGSITE; ++siteNum)
         {
             if (!StringPrefix(arg, spaceobj->LandingSites[siteNum].LocationName))
             {
@@ -611,10 +601,10 @@ static void LaunchShip(std::shared_ptr<Ship> ship)
     }
     else
     {
-        for (auto docked : Ships)
+        ForEach(Ships->Entities(), [ship](const auto &docked)
         {
             CopyPositionToDockedShips(ship, docked);
-        }
+        });
     }
 
     ship->Thrusters.Energy.Current -= (100 + 100 * ship->Class);
@@ -1093,7 +1083,7 @@ ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, Exit *pexit, int fal
     }
     else if (ship->Class < OCEAN_SHIP)
     {
-        txt = "flys in";
+        txt = "flies in";
     }
     else if (ship->Class == OCEAN_SHIP)
     {
@@ -1140,9 +1130,7 @@ ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, Exit *pexit, int fal
 
 void EchoToShip(int color, std::shared_ptr<Ship> ship, const std::string &argument)
 {
-    vnum_t roomVnum = INVALID_VNUM;
-
-    for (roomVnum = ship->Rooms.First; roomVnum <= ship->Rooms.Last; roomVnum++)
+    for (vnum_t roomVnum = ship->Rooms.First; roomVnum <= ship->Rooms.Last; roomVnum++)
     {
         const Room *room = GetRoom(roomVnum);
 
@@ -1471,7 +1459,7 @@ void ShipUpdate()
 
         if (ship->State == SHIP_BUSY_3)
         {
-            EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Manuever complete.");
+            EchoToRoom(AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Maneuver complete.");
             ship->State = SHIP_READY;
         }
 

@@ -189,28 +189,17 @@ int GetObjectCost(const Character *ch, const Character *keeper, const Object *ob
 {
     std::shared_ptr<Shop> pShop;
     int cost = 0;
-    bool richcustomer = false;
-    int profitmod = 0;
 
     if (!obj || (pShop = keeper->Prototype->Shop) == NULL)
     {
         return 0;
     }
 
-    if ((ch->Gold + (IsNpc(ch) ? 0 : ch->PCData->Bank)) > (ch->TopLevel * 1000))
-    {
-        richcustomer = true;
-    }
-    else
-    {
-        richcustomer = false;
-    }
+    bool richcustomer = ch->Gold + (IsNpc(ch) ? 0 : ch->PCData->Bank) > ch->TopLevel * 1000;
 
     if (fBuy)
     {
-        cost = (int)(obj->Cost * (80 + umin(ch->TopLevel, LEVEL_AVATAR))) / 100;
-
-        profitmod = 13 - GetCurrentCharisma(ch) + (richcustomer ? 15 : 0)
+        int profitmod = 13 - GetCurrentCharisma(ch) + (richcustomer ? 15 : 0)
             + ((urange(5, ch->TopLevel, LEVEL_AVATAR) - 20) / 2);
         cost = (int)(obj->Cost
             * umax((pShop->ProfitSell + 1), pShop->ProfitBuy + profitmod))
@@ -218,8 +207,7 @@ int GetObjectCost(const Character *ch, const Character *keeper, const Object *ob
     }
     else
     {
-        profitmod = GetCurrentCharisma(ch) - 13 - (richcustomer ? 15 : 0);
-        cost = 0;
+        int profitmod = GetCurrentCharisma(ch) - 13 - (richcustomer ? 15 : 0);
 
         for (int itype = 0; itype < MAX_TRADE; itype++)
         {
@@ -277,7 +265,6 @@ int GetRepairCost(const Character *keeper, const Object *obj)
 {
     std::shared_ptr<RepairShop> rShop;
     int cost = 0;
-    int itype = 0;
     bool found = false;
 
     if (!obj || (rShop = keeper->Prototype->RepairShop) == NULL)
@@ -285,7 +272,7 @@ int GetRepairCost(const Character *keeper, const Object *obj)
         return 0;
     }
 
-    for (itype = 0; itype < MAX_FIX; itype++)
+    for (int itype = 0; itype < MAX_FIX; itype++)
     {
         if (obj->ItemType == rShop->FixType[itype])
         {

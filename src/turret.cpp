@@ -28,145 +28,145 @@
 class Turret
 {
 public:
-  vnum_t RoomVnum = INVALID_VNUM;
-  int WeaponState = LASER_READY;
-  std::shared_ptr<Ship> Target;
-  ShipClass OwnerClass = FIGHTER_SHIP;
+    vnum_t RoomVnum = INVALID_VNUM;
+    int WeaponState = LASER_READY;
+    std::shared_ptr<Ship> Target;
+    ShipClass OwnerClass = FIGHTER_SHIP;
 };
 
-Turret *AllocateTurret( ShipClass ownerClass )
+Turret *AllocateTurret(ShipClass ownerClass)
 {
-  Turret *turret = new Turret();
-  turret->OwnerClass = ownerClass;
-  ResetTurret( turret );
+    auto turret = new Turret();
+    turret->OwnerClass = ownerClass;
+    ResetTurret(turret);
 
-  return turret;
+    return turret;
 }
 
-Turret *CopyTurret( const Turret *old_turret, ShipClass ownerClassOfNewTurret )
+Turret *CopyTurret(const Turret *old_turret, ShipClass ownerClassOfNewTurret)
 {
-  Turret *new_turret = AllocateTurret( ownerClassOfNewTurret );
+    Turret *new_turret = AllocateTurret(ownerClassOfNewTurret);
 
-  SetTurretRoom( new_turret, old_turret->RoomVnum );
-  new_turret->WeaponState = old_turret->WeaponState;
-  SetTurretTarget( new_turret, old_turret->Target );
-  new_turret->OwnerClass = old_turret->OwnerClass;
+    SetTurretRoom(new_turret, old_turret->RoomVnum);
+    new_turret->WeaponState = old_turret->WeaponState;
+    SetTurretTarget(new_turret, old_turret->Target);
+    new_turret->OwnerClass = old_turret->OwnerClass;
 
-  return new_turret;
+    return new_turret;
 }
 
-bool IsTurretInstalled( const Turret *turret )
+bool IsTurretInstalled(const Turret *turret)
 {
-  return GetTurretRoom( turret ) != 0;
+    return GetTurretRoom(turret) != 0;
 }
 
-void FreeTurret( Turret *turret )
+void FreeTurret(Turret *turret)
 {
-  delete turret;
+    delete turret;
 }
 
-void ResetTurret( Turret *turret )
+void ResetTurret(Turret *turret)
 {
-  SetTurretReady( turret );
-  ClearTurretTarget( turret );
+    SetTurretReady(turret);
+    ClearTurretTarget(turret);
 }
 
-void SetTurretReady( Turret *turret )
+void SetTurretReady(Turret *turret)
 {
-  turret->WeaponState = LASER_READY;
+    turret->WeaponState = LASER_READY;
 }
 
-bool IsTurretReady( const Turret *turret )
+bool IsTurretReady(const Turret *turret)
 {
-  return turret->WeaponState == LASER_READY;
+    return turret->WeaponState == LASER_READY;
 }
 
-bool IsTurretRecharging( const Turret *turret )
+bool IsTurretRecharging(const Turret *turret)
 {
-  return turret->WeaponState > turret->OwnerClass;
+    return turret->WeaponState > turret->OwnerClass;
 }
 
-void FireTurret( Turret *turret )
+void FireTurret(Turret *turret)
 {
-  if( TurretHasTarget( turret ) )
+    if (TurretHasTarget(turret))
     {
-      turret->WeaponState++;
+        turret->WeaponState++;
     }
 }
 
-void SetTurretDamaged( Turret *turret )
+void SetTurretDamaged(Turret *turret)
 {
-  if( IsTurretInstalled( turret ) )
+    if (IsTurretInstalled(turret))
     {
-      turret->WeaponState = LASER_DAMAGED;
+        turret->WeaponState = LASER_DAMAGED;
     }
 }
 
-bool IsTurretDamaged( const Turret *turret )
+bool IsTurretDamaged(const Turret *turret)
 {
-  return turret->WeaponState == LASER_DAMAGED;
+    return turret->WeaponState == LASER_DAMAGED;
 }
 
-void ClearTurretTarget( Turret *turret )
+void ClearTurretTarget(Turret *turret)
 {
-  turret->Target = 0;
+    turret->Target = 0;
 }
 
-void SetTurretTarget( Turret *turret, std::shared_ptr<Ship> target )
+void SetTurretTarget(Turret *turret, std::shared_ptr<Ship> target)
 {
-  turret->Target = target;
+    turret->Target = target;
 }
 
-std::shared_ptr<Ship> GetTurretTarget( const Turret *turret )
+std::shared_ptr<Ship> GetTurretTarget(const Turret *turret)
 {
-  return turret->Target;
+    return turret->Target;
 }
 
-bool TurretHasTarget( const Turret *turret )
+bool TurretHasTarget(const Turret *turret)
 {
-  return GetTurretTarget( turret ) != NULL;
+    return GetTurretTarget(turret) != NULL;
 }
 
-void SetTurretRoom( Turret *turret, vnum_t room_vnum )
+void SetTurretRoom(Turret *turret, vnum_t room_vnum)
 {
-  turret->RoomVnum = room_vnum;
+    turret->RoomVnum = room_vnum;
 }
 
-vnum_t GetTurretRoom( const Turret *turret )
+vnum_t GetTurretRoom(const Turret *turret)
 {
-  return turret->RoomVnum;
+    return turret->RoomVnum;
 }
 
-int GetTurretEnergyDraw( const Turret *turret )
+int GetTurretEnergyDraw(const Turret *turret)
 {
-  int draw = 0;
+    int draw = 0;
 
-  if( TurretHasTarget( turret ) )
+    if (TurretHasTarget(turret))
     {
-      draw = turret->WeaponState;
+        draw = turret->WeaponState;
     }
 
-  return draw;
+    return draw;
 }
 
-void PushTurret( lua_State *L, const Turret *turret, const int idx )
+void PushTurret(lua_State *L, const Turret *turret, const int idx)
 {
-  lua_pushinteger( L, idx );
-  lua_newtable( L );
+    lua_pushinteger(L, idx);
+    lua_newtable(L);
 
-  LuaSetfieldNumber( L, "RoomVnum", turret->RoomVnum );
-  LuaSetfieldNumber( L, "State", turret->WeaponState );
-  
-  lua_settable( L, -3 );
+    LuaSetfieldNumber(L, "RoomVnum", turret->RoomVnum);
+    LuaSetfieldNumber(L, "State", turret->WeaponState);
+
+    lua_settable(L, -3);
 }
 
-void LoadTurret( lua_State *L, Turret *turret )
+void LoadTurret(lua_State *L, Turret *turret)
 {
-  LuaGetfieldLong( L, "RoomVnum",
-                   [turret](const vnum_t vnum)
-                   {
-                     SetTurretRoom( turret, vnum );
-                   });
-  LuaGetfieldInt( L, "State", &turret->WeaponState );
+    LuaGetfieldLong(L, "RoomVnum",
+        [turret](const vnum_t vnum)
+    {
+        SetTurretRoom(turret, vnum);
+    });
+    LuaGetfieldInt(L, "State", &turret->WeaponState);
 }
 
