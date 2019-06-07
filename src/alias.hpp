@@ -38,8 +38,6 @@ public:
   std::string Command;
 };
 
-DECLARE_CMD_FUN( do_alias );
-
 void FreeAliases( Character *ch );
 bool CheckAlias( Character *ch, const std::string &command, const std::string &argument );
 std::shared_ptr<Alias> FindAlias( const Character *ch, const std::string &argument );

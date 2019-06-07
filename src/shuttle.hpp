@@ -115,8 +115,4 @@ std::shared_ptr<Shuttle> GetShuttleInRoom(const Room *room, const std::string &n
 std::shared_ptr<Shuttle> GetShuttleFromEntrance(vnum_t vnum);
 std::shared_ptr<ShuttleStop> AllocateShuttleStop();
 
-DECLARE_CMD_FUN(do_showshuttle);
-DECLARE_CMD_FUN(do_makeshuttle);
-DECLARE_CMD_FUN(do_setshuttle);
-
 #endif

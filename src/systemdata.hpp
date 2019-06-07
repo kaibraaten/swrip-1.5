@@ -67,11 +67,6 @@ public:
     bool ExtendedRaceSelection = false;
     bool AllowMultiplaying = false;
 
-#ifdef _WIN32
-    HMODULE DlHandle;
-#else
-    void *DlHandle = nullptr;
-#endif
     unsigned char *MCCP_Buffer = nullptr;
 };
 

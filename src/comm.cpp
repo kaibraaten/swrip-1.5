@@ -89,16 +89,6 @@ static void Sleep(timeval &last_time);
 
 static void ExecuteOnExit()
 {
-    /*FreeMemory( SysData.mccp_buf );*/
-
-#ifdef SWRIP_USE_DLSYM
-#ifdef _WIN32
-    FreeLibrary(SysData.DlHandle);
-#else
-    dlclose(SysData.DlHandle);
-#endif
-#endif
-
     OsCleanup();
 }
 
@@ -156,25 +146,6 @@ int SwripMain(int argc, char *argv[])
     OsSetup();
 
     atexit(ExecuteOnExit);
-#ifdef SWRIP_USE_DLSYM
-#ifdef _WIN32
-    SysData.DlHandle = LoadLibraryA("swrip.exe");
-
-    if (!SysData.DlHandle)
-    {
-        fprintf(stdout, "Failed opening dl handle to self: %s\n", GetLastError());
-        exit(1);
-    }
-#else
-    SysData.DlHandle = dlopen(NULL, RTLD_LAZY);
-
-    if (!SysData.DlHandle)
-    {
-        fprintf(stdout, "Failed opening dl handle to self: %s\n", dlerror());
-        exit(1);
-    }
-#endif
-#endif
 
     InitializeTime();
 
