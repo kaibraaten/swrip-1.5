@@ -13,7 +13,7 @@ $
 #FLAGS
 3 3
 
-#ECONOMY 0 496058750
+#ECONOMY 0 496057670
 
 #MOBILES
 #10340
@@ -681,6 +681,22 @@ A small shuttle is docked here.~
 13 0 0
 0 0 0 0
 1 0 0
+#10323
+practice lightsaber~
+a practice lightsaber~
+A practice lightsaber is here.~
+~
+5 8192 8193
+12 5 4 3 1000 1000
+1 500 50
+#10324
+lightsaber battery~
+a lightsaber battery~
+A lightsaber battery is lying here.~
+~
+65 8192 1
+1000 0 0 0
+1 50 5
 #10414
 student message terminal~
 a student message terminal~

@@ -11,7 +11,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 30680139
+#ECONOMY 0 30440139
 
 #MOBILES
 #31500
@@ -586,6 +586,36 @@ say Hello customer.
 say I have everything you need just type "list"
 ~
 |
+#31900
+Zim the Failed Jedi~
+Zim the Failed Jedi~
+Zim the Failed Jedi stands here before you.
+~
+~
+1107428867 0 0 Z
+100 0 -150 20d10+15000 10d4+2
+0 0
+8 8 1
+25 25 25 25 25 25 25
+0 0 0 0 0
+0 0 0 0 131075 1 0
+20 20 0 0 0 0 48 3
+0 0 0 0 0 0 0 0
+#31999
+lastmob~
+a newly created lastmob~
+Some god abandoned a newly created lastmob here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
 #0
 
 
@@ -834,6 +864,14 @@ Some Grilled Womp Rat is here ready to be snatched up.~
 19 0 1
 4 0 0 0
 1 16 1
+#31999
+lastobject~
+a newly created lastobject~
+Some god dropped a newly created lastobject here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
 #0
 
 
@@ -2330,8 +2368,8 @@ D2
 0 -1 31605
 S
 #31605
-Pathway to controll centre.~
-You are walking down a path to the controll centre. There they watch the activities of vessels from all parts of the galaxy. It is not a very large building but is suitable for its purpose. The ground beneath your feet is hardening as you approach the centre and the air is continuasly heavy and warm.
+Pathway to control centre.~
+You are walking down a path to the control centre. There they watch the activities of vessels from all parts of the galaxy. It is not a very large building but is suitable for its purpose. The ground beneath your feet is hardening as you approach the centre and the air is continuasly heavy and warm.
 ~
 0 0 10
 D0
@@ -2348,8 +2386,8 @@ D3
 0 -1 31606
 S
 #31606
-Pathway to controll centre.~
-You are infront of the controll centre for the Spaceport. Inside this building many descisions are made to decide who should be allowed to land on this planet and not to cause air havoc.
+Pathway to control centre.~
+You are infront of the control centre for the Spaceport. Inside this building many descisions are made to decide who should be allowed to land on this planet and not to cause air havoc.
 ~
 0 0 10
 D1
@@ -2362,8 +2400,8 @@ D3
 0 -1 31607
 S
 #31607
-Infront of the controll centre.~
-You are infron of the doors to the spaceport controll centre. To enter it go to the west. At many times of the year this building is just chaned up and locked. Left here abandonned for the law here is not really kept uptight. The door is of solid wood and  looks very strong.
+Infront of the control centre.~
+You are infron of the doors to the spaceport control centre. To enter it go to the west. At many times of the year this building is just chaned up and locked. Left here abandonned for the law here is not really kept uptight. The door is of solid wood and  looks very strong.
 ~
 0 0 10
 D1
@@ -2376,8 +2414,8 @@ D3
 1 -1 31608
 S
 #31608
-Inside the controll centre.~
-You are in the entrance to the Controll cantre. There are turbolifts moving all around you. The controll tower is on the higher levels but the offices are here on the main level of the building. The ground is hard and seems to be made of stone. The air is crisp and relaxing in here for it is shielded from the twin suns of Tatooine.
+Inside the control centre.~
+You are in the entrance to the Control cantre. There are turbolifts moving all around you. The control tower is on the higher levels but the offices are here on the main level of the building. The ground is hard and seems to be made of stone. The air is crisp and relaxing in here for it is shielded from the twin suns of Tatooine.
 ~
 0 8 0
 D0
@@ -2451,7 +2489,7 @@ D0
 S
 #31613
 Hallway~
-This hallway heads towards the rooms with the generating and computer equiptment of the Controll Centre.
+This hallway heads towards the rooms with the generating and computer equiptment of the Control Centre.
 ~
 0 8 0
 D0
@@ -2475,7 +2513,7 @@ D1
 S
 #31615
 Lobby~
-This is the lobby of the controll senter. In the corner a secratery takes messages and allows passage to the tower.
+This is the lobby of the control senter. In the corner a secratery takes messages and allows passage to the tower.
 ~
 0 8 0
 D1
@@ -2489,7 +2527,7 @@ D4
 S
 #31616
 Tower~
-You are standing in the controll tower. Most of the tower is run by droids and computers. The only living creatures are humans.
+You are standing in the control tower. Most of the tower is run by droids and computers. The only living creatures are humans.
 ~
 0 8 0
 D3
@@ -5682,14 +5720,92 @@ D6
 0 -1 106
 S
 #31899
-Floating in a void~
+In Front Of A Blast Door~
 ~
-0 4 1
+0 8 1
+D2
+~
+~
+0 -1 31900
 S
 #31900
-Floating in a void~
+Living Area~
 ~
-0 4 1
+0 1032 1
+D0
+~
+~
+0 -1 31899
+D1
+~
+~
+0 -1 31901
+D2
+~
+~
+0 -1 31902
+S
+#31901
+Kitchen~
+~
+0 1032 0
+D3
+~
+~
+0 -1 31900
+S
+#31902
+Hallway~
+~
+0 1032 0
+D0
+~
+~
+0 -1 31900
+D1
+~
+~
+0 -1 31903
+D2
+~
+~
+0 -1 31905
+D3
+~
+~
+0 -1 31906
+S
+#31903
+Beds~
+~
+0 8389640 0
+D3
+~
+~
+0 -1 31902
+S
+#31904
+Sparring Area~
+~
+0 8 0
+S
+#31905
+Teacher~
+~
+0 1032 0
+D0
+~
+~
+0 -1 31902
+S
+#31906
+Crafting Area~
+~
+0 67175432 0
+D1
+~
+~
+0 -1 31902
 S
 #31999
 Floating in a void~
@@ -5809,6 +5925,9 @@ M 0 31503 20 31840
 M 1 31532 1 31883
 M 0 328 1 31863
 E 1 55 1 16
+M 1 31900 1 31905
+G 1 10323 1
+G 1 10324 1
 S
 
 
@@ -5817,6 +5936,7 @@ S
  31519   17 15  0  0  0   105 100         1 23    ; Wuher
  31531    0  0  0  0  0   120   0         1 23    ; Wioslea
  31532    0  0  0  0  0   110 100         1 23    ; Gep
+ 31900    0  0  0  0  0   120  90         0 23    ; Zim the Failed Jedi
 0
 
 

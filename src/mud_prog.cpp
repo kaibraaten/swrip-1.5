@@ -1081,6 +1081,21 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
         {
             return IsDroid(chkchar);
         }
+        else if(!StrCmp(chck, "isjedi"))
+        {
+            return IsJedi(chkchar);
+        }
+        else if (!StrCmp(chck, "class"))
+        {
+            if(IsNpc(chkchar))
+            {
+                return false;
+            }
+
+            std::string abilityName = AbilityName[chkchar->Ability.Main];
+
+            return MudProgCompareStrings(abilityName, opr, rval, mob);
+        }
         else if (!StrCmp(chck, "clan"))
         {
             const auto clan = IsNpc(chkchar) ? nullptr : chkchar->PCData->ClanInfo.Clan;

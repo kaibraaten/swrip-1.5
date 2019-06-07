@@ -143,7 +143,7 @@ void Character::Echo(const std::string &txt) const
 
 void Character::Echo(const char *fmt, ...) const
 {
-    if (IsNpc(this))
+    if (IsNpc(this) || Desc == nullptr)
     {
         return;
     }

@@ -808,25 +808,25 @@ enum
 /*
  * Skill/Spell flags    The minimum BV *MUST* be 11!
  */
-#define SF_WATER                  BV11
-#define SF_EARTH                  BV12
-#define SF_AIR                    BV13
-#define SF_ASTRAL                 BV14
-#define SF_AREA                   BV15  /* is an area spell             */
-#define SF_DISTANT                BV16  /* affects something far away   */
-#define SF_REVERSE                BV17
-#define SF_SAVE_HALF_DAMAGE       BV18  /* save for half damage         */
-#define SF_SAVE_NEGATES           BV19  /* save negates affect          */
-#define SF_ACCUMULATIVE           BV20  /* is accumulative              */
-#define SF_RECASTABLE             BV21  /* can be refreshed             */
-#define SF_NOSCRIBE               BV22  /* cannot be scribed            */
-#define SF_NOBREW                 BV23  /* cannot be brewed             */
-#define SF_GROUPSPELL             BV24  /* only affects group members   */
-#define SF_OBJECT                 BV25  /* directed at an object        */
-#define SF_CHARACTER              BV26  /* directed at a character      */
-#define SF_SECRETSKILL            BV27  /* hidden unless learned        */
-#define SF_PKSENSITIVE            BV28  /* much harder for plr vs. plr  */
-#define SF_STOPONFAIL             BV29  /* stops spell on first failure */
+#define SF_WATER                  11
+#define SF_EARTH                  12
+#define SF_AIR                    13
+#define SF_ASTRAL                 14
+#define SF_AREA                   15  /* is an area spell             */
+#define SF_DISTANT                16  /* affects something far away   */
+#define SF_REVERSE                17
+#define SF_SAVE_HALF_DAMAGE       18  /* save for half damage         */
+#define SF_SAVE_NEGATES           19  /* save negates affect          */
+#define SF_ACCUMULATIVE           20  /* is accumulative              */
+#define SF_RECASTABLE             21  /* can be refreshed             */
+#define SF_NOSCRIBE               22  /* cannot be scribed            */
+#define SF_NOBREW                 23  /* cannot be brewed             */
+#define SF_GROUPSPELL             24  /* only affects group members   */
+#define SF_OBJECT                 25  /* directed at an object        */
+#define SF_CHARACTER              26  /* directed at a character      */
+#define SF_SECRETSKILL            27  /* hidden unless learned        */
+#define SF_PKSENSITIVE            28  /* much harder for plr vs. plr  */
+#define SF_STOPONFAIL             29  /* stops spell on first failure */
 
 /* SaveTypes */
 enum
@@ -982,6 +982,7 @@ enum
 
 /* Academy eq */
 #define OBJ_VNUM_SCHOOL_BLADE         10312
+#define OBJ_VNUM_SCHOOL_LIGHTSABER    10323
 #define OBJ_VNUM_SCHOOL_GLOWROD       10311
 #define OBJ_VNUM_SCHOOL_DIPLOMA       10321
 #define OBJ_VNUM_SCHOOL_COMLINK       10424
