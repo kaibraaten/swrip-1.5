@@ -123,9 +123,9 @@ void do_sset( Character *ch, std::string argument )
     }
 
   if ( arg1[0] == 'h' )
-    sn = stoi( arg1.substr( 1 ) );
+    sn = ToLong( arg1.substr( 1 ) );
   else
-    sn = stoi( arg1 );
+    sn = ToLong( arg1 );
 
   if ( GetTrustLevel(ch) > LEVEL_GREATER
        && ((arg1[0] == 'h' && IsNumber( arg1.substr( 1 ) )

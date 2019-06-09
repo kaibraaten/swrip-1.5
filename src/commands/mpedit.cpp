@@ -11,313 +11,312 @@
  */
 void do_mpedit( Character *ch, std::string argument )
 {
-  std::string arg1;
-  std::string arg2;
-  std::string arg3;
-  std::string arg4;
+    std::string arg1;
+    std::string arg2;
+    std::string arg3;
+    std::string arg4;
 
-  if ( IsNpc( ch ) )
+    if ( IsNpc( ch ) )
     {
-      ch->Echo("Mob's can't EditMobProg\r\n");
-      return;
+        ch->Echo("Mob's can't EditMobProg\r\n");
+        return;
     }
 
-  if ( !ch->Desc )
+    if ( !ch->Desc )
     {
-      ch->Echo("You have no descriptor\r\n");
-      return;
+        ch->Echo("You have no descriptor\r\n");
+        return;
     }
 
-  switch( ch->SubState )
+    switch( ch->SubState )
     {
     default:
-      break;
+        break;
 
     case SUB_MPROG_EDIT:
-      if ( !ch->dest_buf )
+        if ( !ch->dest_buf )
         {
-          ch->Echo("Fatal error: report to Thoric.\r\n");
-          Log->Bug( "%s: SUB_MPROG_EDIT: NULL ch->dest_buf", __FUNCTION__ );
-          ch->SubState = SUB_NONE;
-          return;
+            ch->Echo("Fatal error: report to Thoric.\r\n");
+            Log->Bug( "%s: SUB_MPROG_EDIT: NULL ch->dest_buf", __FUNCTION__ );
+            ch->SubState = SUB_NONE;
+            return;
         }
 
-      {
-        std::shared_ptr<MPROG_DATA> mprog = *static_cast<std::shared_ptr<MPROG_DATA>*>(ch->dest_buf);
-
-        if ( mprog->comlist )
-          FreeMemory( mprog->comlist );
-
-        mprog->comlist = CopyBuffer( ch );
-        StopEditing( ch );
-      }
-      return;
-    }
-
-  SmashTilde( argument );
-  argument = OneArgument( argument, arg1 );
-  argument = OneArgument( argument, arg2 );
-  argument = OneArgument( argument, arg3 );
-  int value = ToLong( arg3 );
-
-  if ( arg1.empty() || arg2.empty() )
-    {
-      ch->Echo("Syntax: mpedit <victim> <command> [number] <program> <value>\r\n");
-      ch->Echo("\r\n");
-      ch->Echo("Command being one of:\r\n");
-      ch->Echo("  add delete insert edit list\r\n");
-      ch->Echo("Program being one of:\r\n");
-      ch->Echo("  act speech rand fight hitprcnt greet allgreet\r\n");
-      ch->Echo("  entry give bribe death time hour script\r\n");
-      return;
-    }
-
-  Character *victim = nullptr;
-  
-  if ( GetTrustLevel( ch ) < LEVEL_GREATER )
-    {
-      victim = GetCharacterInRoom( ch, arg1 );
-      
-      if ( victim == nullptr )
         {
-          ch->Echo("They aren't here.\r\n");
-          return;
-	}
+            MPROG_DATA *mprog = static_cast<MPROG_DATA*>(ch->dest_buf);
+
+            if ( mprog->comlist )
+                FreeMemory( mprog->comlist );
+
+            mprog->comlist = CopyBuffer( ch );
+            StopEditing( ch );
+        }
+        return;
     }
-  else
+
+    SmashTilde( argument );
+    argument = OneArgument( argument, arg1 );
+    argument = OneArgument( argument, arg2 );
+    argument = OneArgument( argument, arg3 );
+    int value = ToLong( arg3 );
+
+    if ( arg1.empty() || arg2.empty() )
     {
-      victim = GetCharacterAnywhere( ch, arg1 );
-      
-      if ( victim == nullptr )
+        ch->Echo("Syntax: mpedit <victim> <command> [number] <program> <value>\r\n");
+        ch->Echo("\r\n");
+        ch->Echo("Command being one of:\r\n");
+        ch->Echo("  add delete insert edit list\r\n");
+        ch->Echo("Program being one of:\r\n");
+        ch->Echo("  act speech rand fight hitprcnt greet allgreet\r\n");
+        ch->Echo("  entry give bribe death time hour script\r\n");
+        return;
+    }
+
+    Character *victim = nullptr;
+
+    if ( GetTrustLevel( ch ) < LEVEL_GREATER )
+    {
+        victim = GetCharacterInRoom( ch, arg1 );
+
+        if ( victim == nullptr )
         {
-          ch->Echo("No one like that in all the realms.\r\n");
-          return;
+            ch->Echo("They aren't here.\r\n");
+            return;
+        }
+    }
+    else
+    {
+        victim = GetCharacterAnywhere( ch, arg1 );
+
+        if ( victim == nullptr )
+        {
+            ch->Echo("No one like that in all the realms.\r\n");
+            return;
         }
     }
 
-  if ( GetTrustLevel( ch ) < GetTrustLevel( victim ) || !IsNpc(victim) )
+    if ( GetTrustLevel( ch ) < GetTrustLevel( victim ) || !IsNpc(victim) )
     {
-      ch->Echo("You can't do that!\r\n");
-      return;
+        ch->Echo("You can't do that!\r\n");
+        return;
     }
 
-  if ( !CanModifyCharacter( ch, victim ) )
-    return;
+    if ( !CanModifyCharacter( ch, victim ) )
+        return;
 
-  if ( !IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
+    if ( !IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
     {
-      ch->Echo("A mobile must have a prototype flag to be mpset.\r\n");
-      return;
+        ch->Echo("A mobile must have a prototype flag to be mpset.\r\n");
+        return;
     }
 
-  const auto &mobProgs = victim->Prototype->mprog.MudProgs();
-  
-  SetCharacterColor( AT_GREEN, ch );
+    const auto &mobProgs = victim->Prototype->mprog.MudProgs();
 
-  if ( !StrCmp( arg2, "list" ) )
+    SetCharacterColor( AT_GREEN, ch );
+
+    if ( !StrCmp( arg2, "list" ) )
     {
-      if ( mobProgs.empty() )
+        if ( mobProgs.empty() )
         {
-          ch->Echo("That mobile has no mob programs.\r\n");
-          return;
+            ch->Echo("That mobile has no mob programs.\r\n");
+            return;
         }
 
-      int cnt = 0;
+        int cnt = 0;
 
-      for(auto mprg : mobProgs)
+        for(auto mprg : mobProgs)
         {
-          ch->Echo("%d>%s %s\r\n%s\r\n",
-                   ++cnt,
-                   MobProgTypeToName( mprg->type ),
-                   mprg->arglist,
-                   mprg->comlist );
+            ch->Echo("%d>%s %s\r\n%s\r\n",
+                     ++cnt,
+                     MobProgTypeToName( mprg->type ),
+                     mprg->arglist,
+                     mprg->comlist );
         }
-      
-      return;
+
+        return;
     }
 
-  if ( !StrCmp( arg2, "edit" ) )
+    if ( !StrCmp( arg2, "edit" ) )
     {
-      if ( mobProgs.empty() )
+        if ( mobProgs.empty() )
         {
-          ch->Echo("That mobile has no mob programs.\r\n");
-          return;
+            ch->Echo("That mobile has no mob programs.\r\n");
+            return;
         }
 
-      argument = OneArgument( argument, arg4 );
+        argument = OneArgument( argument, arg4 );
 
-      int mptype = 0;
-      
-      if ( !arg4.empty() )
+        int mptype = 0;
+
+        if ( !arg4.empty() )
         {
-          mptype = GetMudProgFlag( arg4 );
+            mptype = GetMudProgFlag( arg4 );
 
-          if ( mptype == -1 )
+            if ( mptype == -1 )
             {
-              ch->Echo("Unknown program type.\r\n");
-              return;
+                ch->Echo("Unknown program type.\r\n");
+                return;
             }
         }
-      else
+        else
         {
-          mptype = -1;
-        }
-      
-      if ( value < 1 )
-        {
-          ch->Echo("Program not found.\r\n");
-          return;
+            mptype = -1;
         }
 
-      int cnt = 0;
-
-      for(auto mprg : mobProgs)
+        if ( value < 1 )
         {
-          if ( ++cnt == value )
+            ch->Echo("Program not found.\r\n");
+            return;
+        }
+
+        int cnt = 0;
+
+        for(auto mprg : mobProgs)
+        {
+            if ( ++cnt == value )
             {
-              EditMobProg( ch, mprg, mptype, argument );
-              victim->Prototype->mprog.progtypes = 0;
+                EditMobProg( ch, mprg, mptype, argument );
+                victim->Prototype->mprog.progtypes = 0;
 
-              for(auto inner : mobProgs)
+                for(auto inner : mobProgs)
                 {
-                  victim->Prototype->mprog.progtypes |= inner->type;
+                    victim->Prototype->mprog.progtypes |= inner->type;
                 }
-              
-              return;
+
+                return;
             }
         }
 
-      ch->Echo("Program not found.\r\n");
-      return;
+        ch->Echo("Program not found.\r\n");
+        return;
     }
 
-  if ( !StrCmp( arg2, "delete" ) )
+    if ( !StrCmp( arg2, "delete" ) )
     {
-      if ( mobProgs.empty() )
+        if ( mobProgs.empty() )
         {
-          ch->Echo("That mobile has no mob programs.\r\n");
-          return;
+            ch->Echo("That mobile has no mob programs.\r\n");
+            return;
         }
 
-      argument = OneArgument( argument, arg4 );
+        argument = OneArgument( argument, arg4 );
 
-      if ( value < 1 )
+        if ( value < 1 )
         {
-          ch->Echo("Program not found.\r\n");
-          return;
+            ch->Echo("Program not found.\r\n");
+            return;
         }
 
-      int cnt = 0;
-      bool found = false;
-      int mptype = 0;
+        int cnt = 0;
+        bool found = false;
+        int mptype = 0;
 
-      for(auto mprg : mobProgs)
+        for(auto mprg : mobProgs)
         {
-          if ( ++cnt == value )
+            if ( ++cnt == value )
             {
-              mptype = mprg->type;
-              found = true;
-              break;
+                mptype = mprg->type;
+                found = true;
+                break;
             }
         }
 
-      if ( !found )
+        if ( !found )
         {
-          ch->Echo("Program not found.\r\n");
-          return;
+            ch->Echo("Program not found.\r\n");
+            return;
         }
 
-      cnt = 0;
-      int num = count_if(std::begin(mobProgs), std::end(mobProgs),
-                         [mptype](const auto mprg)
-                         {
-                           return IsBitSet(mprg->type, mptype);
-                         });
-      auto result = Filter(mobProgs,
-                           [&cnt, value](auto)
+        cnt = 0;
+        int num = count_if(std::begin(mobProgs), std::end(mobProgs),
+                           [mptype](const auto mprg)
                            {
-                             return (++cnt) == value;
+                               return IsBitSet(mprg->type, mptype);
                            });
+        auto result = Filter(mobProgs,
+                             [&cnt, value](auto)
+                             {
+                                 return (++cnt) == value;
+                             });
 
-      assert(!result.empty());
-      
-      std::shared_ptr<MPROG_DATA> progToDelete = result.front();
-      victim->Prototype->mprog.Remove(progToDelete);
-      FreeMemory( progToDelete->arglist );
-      FreeMemory( progToDelete->comlist );
-      
-      if ( num <= 1 )
+        assert(!result.empty());
+
+        std::shared_ptr<MPROG_DATA> progToDelete = result.front();
+        victim->Prototype->mprog.Remove(progToDelete);
+        FreeMemory( progToDelete->arglist );
+        FreeMemory( progToDelete->comlist );
+
+        if ( num <= 1 )
         {
-          RemoveBit( victim->Prototype->mprog.progtypes, mptype );
+            RemoveBit( victim->Prototype->mprog.progtypes, mptype );
         }
 
-      ch->Echo("Program removed.\r\n");
-      return;
+        ch->Echo("Program removed.\r\n");
+        return;
     }
 
-  if ( !StrCmp( arg2, "insert" ) )
+    if ( !StrCmp( arg2, "insert" ) )
     {
-      if ( mobProgs.empty() )
+        if ( mobProgs.empty() )
         {
-          ch->Echo("That mobile has no mob programs.\r\n");
-          return;
+            ch->Echo("That mobile has no mob programs.\r\n");
+            return;
         }
 
-      argument = OneArgument( argument, arg4 );
-      int mptype = GetMudProgFlag( arg4 );
+        argument = OneArgument( argument, arg4 );
+        int mptype = GetMudProgFlag( arg4 );
 
-      if ( mptype == -1 )
+        if ( mptype == -1 )
         {
-          ch->Echo("Unknown program type.\r\n");
-          return;
+            ch->Echo("Unknown program type.\r\n");
+            return;
         }
 
-      if ( value < 1 )
+        if ( value < 1 )
         {
-          ch->Echo("Program not found.\r\n");
-          return;
+            ch->Echo("Program not found.\r\n");
+            return;
         }
 
-      int cnt = 0;
-      auto result = Filter(mobProgs,
-                           [&cnt, value](auto mprg)
-                           {
-                             return (++cnt) == value;
-                           });
+        int cnt = 0;
+        auto result = Filter(mobProgs,
+                             [&cnt, value](auto mprg)
+                             {
+                                 return (++cnt) == value;
+                             });
 
-      if(!result.empty())
+        if(!result.empty())
         {
-          std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
-          victim->Prototype->mprog.progtypes |= ( 1 << mptype );
-          EditMobProg( ch, mprg, mptype, argument );
-          victim->Prototype->mprog.InsertBefore(value, mprg);
+            std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
+            victim->Prototype->mprog.progtypes |= ( 1 << mptype );
+            EditMobProg( ch, mprg, mptype, argument );
+            victim->Prototype->mprog.InsertBefore(value, mprg);
         }
-      else
+        else
         {
-          ch->Echo("Program not found.\r\n");
+            ch->Echo("Program not found.\r\n");
         }
-      
-      return;
+
+        return;
     }
 
-  if ( !StrCmp( arg2, "add" ) )
+    if ( !StrCmp( arg2, "add" ) )
     {
-      int mptype = GetMudProgFlag( arg3 );
+        int mptype = GetMudProgFlag( arg3 );
 
-      if ( mptype == -1 )
+        if ( mptype == -1 )
         {
-          ch->Echo("Unknown program type.\r\n");
-          return;
+            ch->Echo("Unknown program type.\r\n");
+            return;
         }
 
-      std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
+        std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
 
-      victim->Prototype->mprog.Add(mprg);
-      victim->Prototype->mprog.progtypes     |= ( 1 << mptype );
-      EditMobProg( ch, mprg, mptype, argument );
-      return;
+        victim->Prototype->mprog.Add(mprg);
+        victim->Prototype->mprog.progtypes     |= ( 1 << mptype );
+        EditMobProg( ch, mprg, mptype, argument );
+        return;
     }
 
-  do_mpedit( ch, "" );
+    do_mpedit( ch, "" );
 }
-

@@ -8,279 +8,278 @@
 
 void do_rpedit( Character *ch, std::string argument )
 {
-  std::string arg1;
-  std::string arg2;
-  std::string arg3;
+    std::string arg1;
+    std::string arg2;
+    std::string arg3;
 
-  if ( IsNpc( ch ) )
+    if ( IsNpc( ch ) )
     {
-      ch->Echo("Mob's can't rpedit\r\n");
-      return;
+        ch->Echo("Mob's can't rpedit\r\n");
+        return;
     }
 
-  if ( !ch->Desc )
+    if ( !ch->Desc )
     {
-      ch->Echo("You have no descriptor\r\n");
-      return;
+        ch->Echo("You have no descriptor\r\n");
+        return;
     }
 
-  switch( ch->SubState )
+    switch( ch->SubState )
     {
     default:
-      break;
+        break;
 
     case SUB_MPROG_EDIT:
-      if ( !ch->dest_buf )
-	{
-          ch->Echo("Fatal error: report to Thoric.\r\n");
-          Log->Bug( "%s: SUB_MPROG_EDIT: NULL ch->dest_buf", __FUNCTION__ );
-          ch->SubState = SUB_NONE;
-          return;
+        if ( !ch->dest_buf )
+        {
+            ch->Echo("Fatal error: report to Thoric.\r\n");
+            Log->Bug( "%s: SUB_MPROG_EDIT: NULL ch->dest_buf", __FUNCTION__ );
+            ch->SubState = SUB_NONE;
+            return;
         }
 
-      {
-        std::shared_ptr<MPROG_DATA> mprog = *static_cast<std::shared_ptr<MPROG_DATA>*>(ch->dest_buf);
+        {
+            MPROG_DATA *mprog = static_cast<MPROG_DATA*>(ch->dest_buf);
 
-        mprog->comlist = CopyBuffer( ch );
-        StopEditing( ch );
+            mprog->comlist = CopyBuffer( ch );
+            StopEditing( ch );
+            return;
+        }
+    }
+
+    SmashTilde( argument );
+    argument = OneArgument( argument, arg1 );
+    argument = OneArgument( argument, arg2 );
+    int value = ToLong( arg2 );
+
+    if ( arg1.empty() )
+    {
+        ch->Echo("Syntax: rpedit <command> [number] <program> <value>\r\n");
+        ch->Echo("\r\n");
+        ch->Echo("Command being one of:\r\n");
+        ch->Echo("  add delete insert edit list\r\n");
+        ch->Echo("Program being one of:\r\n");
+        ch->Echo("  act speech rand sleep rest rfight enter\r\n");
+        ch->Echo("  leave death\r\n");
+        ch->Echo("\r\n");
+        ch->Echo("You should be standing in room you wish to edit.\r\n");
         return;
-      }
     }
 
-  SmashTilde( argument );
-  argument = OneArgument( argument, arg1 );
-  argument = OneArgument( argument, arg2 );
-  int value = ToLong( arg2 );
+    if ( !CanModifyRoom( ch, ch->InRoom ) )
+        return;
 
-  if ( arg1.empty() )
+    bool hasMudProgs = !ch->InRoom->mprog.MudProgs().empty();
+
+    SetCharacterColor( AT_GREEN, ch );
+
+    if ( !StrCmp( arg1, "list" ) )
     {
-      ch->Echo("Syntax: rpedit <command> [number] <program> <value>\r\n");
-      ch->Echo("\r\n");
-      ch->Echo("Command being one of:\r\n");
-      ch->Echo("  add delete insert edit list\r\n");
-      ch->Echo("Program being one of:\r\n");
-      ch->Echo("  act speech rand sleep rest rfight enter\r\n");
-      ch->Echo("  leave death\r\n");
-      ch->Echo("\r\n");
-      ch->Echo("You should be standing in room you wish to edit.\r\n");
-      return;
+        int cnt = 0;
+
+        if ( !hasMudProgs )
+        {
+            ch->Echo("This room has no room programs.\r\n");
+            return;
+        }
+
+        for(auto mprg : ch->InRoom->mprog.MudProgs())
+        {
+            ch->Echo("%d>%s %s\r\n%s\r\n",
+                     ++cnt,
+                     MobProgTypeToName( mprg->type ),
+                     mprg->arglist,
+                     mprg->comlist );
+        }
+
+        return;
     }
 
-  if ( !CanModifyRoom( ch, ch->InRoom ) )
-    return;
-
-  bool hasMudProgs = !ch->InRoom->mprog.MudProgs().empty();
-  
-  SetCharacterColor( AT_GREEN, ch );
-
-  if ( !StrCmp( arg1, "list" ) )
+    if ( !StrCmp( arg1, "edit" ) )
     {
-      int cnt = 0;
+        int mptype = -1;
 
-      if ( !hasMudProgs )
+        if ( !hasMudProgs )
         {
-          ch->Echo("This room has no room programs.\r\n");
-          return;
+            ch->Echo("This room has no room programs.\r\n");
+            return;
         }
 
-      for(auto mprg : ch->InRoom->mprog.MudProgs())
+        argument = OneArgument( argument, arg3 );
+
+        if ( !arg3.empty() )
         {
-          ch->Echo("%d>%s %s\r\n%s\r\n",
-                   ++cnt,
-                   MobProgTypeToName( mprg->type ),
-                   mprg->arglist,
-                   mprg->comlist );
-        }
-      
-      return;
-    }
+            mptype = GetMudProgFlag( arg3 );
 
-  if ( !StrCmp( arg1, "edit" ) )
-    {
-      int mptype = -1;
-      
-      if ( !hasMudProgs )
-        {
-          ch->Echo("This room has no room programs.\r\n");
-          return;
-        }
-
-      argument = OneArgument( argument, arg3 );
-
-      if ( !arg3.empty() )
-        {
-          mptype = GetMudProgFlag( arg3 );
-
-	  if ( mptype == -1 )
+            if ( mptype == -1 )
             {
-              ch->Echo("Unknown program type.\r\n");
-              return;
+                ch->Echo("Unknown program type.\r\n");
+                return;
             }
         }
-      else
+        else
         {
-          mptype = -1;
-        }
-      
-      if ( value < 1 )
-        {
-          ch->Echo("Program not found.\r\n");
-          return;
+            mptype = -1;
         }
 
-      int cnt = 0;
-
-      for(auto mprg : ch->InRoom->mprog.MudProgs())
+        if ( value < 1 )
         {
-          if ( ++cnt == value )
+            ch->Echo("Program not found.\r\n");
+            return;
+        }
+
+        int cnt = 0;
+
+        for(auto mprg : ch->InRoom->mprog.MudProgs())
+        {
+            if ( ++cnt == value )
             {
-	      EditMobProg( ch, mprg, mptype, argument );
-              ch->InRoom->mprog.progtypes = 0;
+                EditMobProg( ch, mprg, mptype, argument );
+                ch->InRoom->mprog.progtypes = 0;
 
-              for(auto innerProg : ch->InRoom->mprog.MudProgs())
+                for(auto innerProg : ch->InRoom->mprog.MudProgs())
                 {
-                  ch->InRoom->mprog.progtypes |= innerProg->type;
+                    ch->InRoom->mprog.progtypes |= innerProg->type;
                 }
-              
-              return;
+
+                return;
             }
         }
 
-      ch->Echo("Program not found.\r\n");
-      return;
+        ch->Echo("Program not found.\r\n");
+        return;
     }
 
-  if ( !StrCmp( arg1, "delete" ) )
+    if ( !StrCmp( arg1, "delete" ) )
     {
-      if ( !hasMudProgs )
+        if ( !hasMudProgs )
         {
-          ch->Echo("That room has no room programs.\r\n");
-          return;
+            ch->Echo("That room has no room programs.\r\n");
+            return;
         }
 
-      argument = OneArgument( argument, arg3 );
+        argument = OneArgument( argument, arg3 );
 
-      if ( value < 1 )
+        if ( value < 1 )
         {
-          ch->Echo("Program not found.\r\n");
-          return;
+            ch->Echo("Program not found.\r\n");
+            return;
         }
 
-      int cnt = 0;
-      bool found = false;
-      int mptype = 0;
-      
-      for (auto mprg : ch->InRoom->mprog.MudProgs())
+        int cnt = 0;
+        bool found = false;
+        int mptype = 0;
+
+        for (auto mprg : ch->InRoom->mprog.MudProgs())
         {
-          if ( ++cnt == value )
+            if ( ++cnt == value )
             {
-              mptype = mprg->type;
-              found = true;
-              break;
+                mptype = mprg->type;
+                found = true;
+                break;
             }
         }
 
-      if ( !found )
+        if ( !found )
         {
-          ch->Echo("Program not found.\r\n");
-          return;
+            ch->Echo("Program not found.\r\n");
+            return;
         }
 
-      cnt = 0;
-      int num = count_if(std::begin(ch->InRoom->mprog.MudProgs()),
-                         std::end(ch->InRoom->mprog.MudProgs()),
-                         [mptype](const auto mprg)
-                         {
-                           return IsBitSet(mprg->type, mptype);
-                         });
+        cnt = 0;
+        int num = Count(ch->InRoom->mprog.MudProgs(),
+                        [mptype](const auto mprg)
+                        {
+                            return IsBitSet(mprg->type, mptype);
+                        });
 
-      auto result = Filter(ch->InRoom->mprog.MudProgs(),
-                           [&cnt, value](auto)
-                           {
-                             return (++cnt) == value;
-                           });
+        auto result = Filter(ch->InRoom->mprog.MudProgs(),
+                             [&cnt, value](auto)
+                             {
+                                 return (++cnt) == value;
+                             });
 
-      assert(!result.empty());
+        assert(!result.empty());
 
-      std::shared_ptr<MPROG_DATA> progToDelete = result.front();
+        std::shared_ptr<MPROG_DATA> progToDelete = result.front();
 
-      ch->InRoom->mprog.Remove(progToDelete);
-      
-      FreeMemory( progToDelete->arglist );
-      FreeMemory( progToDelete->comlist );
+        ch->InRoom->mprog.Remove(progToDelete);
 
-      if ( num <= 1 )
+        FreeMemory( progToDelete->arglist );
+        FreeMemory( progToDelete->comlist );
+
+        if ( num <= 1 )
         {
-          RemoveBit( ch->InRoom->mprog.progtypes, mptype );
+            RemoveBit( ch->InRoom->mprog.progtypes, mptype );
         }
-      
-      ch->Echo("Program removed.\r\n");
-      return;
+
+        ch->Echo("Program removed.\r\n");
+        return;
     }
 
-  if ( !StrCmp( arg2, "insert" ) )
+    if ( !StrCmp( arg2, "insert" ) )
     {
-      if ( !hasMudProgs )
+        if ( !hasMudProgs )
         {
-          ch->Echo("That room has no room programs.\r\n");
-          return;
+            ch->Echo("That room has no room programs.\r\n");
+            return;
         }
 
-      argument = OneArgument( argument, arg3 );
-      int mptype = GetMudProgFlag( arg2 );
+        argument = OneArgument( argument, arg3 );
+        int mptype = GetMudProgFlag( arg2 );
 
-      if ( mptype == -1 )
+        if ( mptype == -1 )
         {
-          ch->Echo("Unknown program type.\r\n");
-          return;
+            ch->Echo("Unknown program type.\r\n");
+            return;
         }
 
-      if ( value < 1 )
+        if ( value < 1 )
         {
-          ch->Echo("Program not found.\r\n");
-          return;
+            ch->Echo("Program not found.\r\n");
+            return;
         }
 
-      int cnt = 0;
-      
-      auto result = Filter(ch->InRoom->mprog.MudProgs(),
-                           [&cnt, value](auto mprg)
-                           {
-                             return (++cnt) == value;
-                           });
+        int cnt = 0;
 
-      if(!result.empty())
-	{
-          std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
-          ch->InRoom->mprog.progtypes |= ( 1 << mptype );
-          EditMobProg( ch, mprg, mptype, argument );
-          ch->InRoom->mprog.InsertBefore(value, mprg);
-        }
-      else
+        auto result = Filter(ch->InRoom->mprog.MudProgs(),
+                             [&cnt, value](auto mprg)
+                             {
+                                 return (++cnt) == value;
+                             });
+
+        if(!result.empty())
         {
-          ch->Echo("Program not found.\r\n");
+            std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
+            ch->InRoom->mprog.progtypes |= ( 1 << mptype );
+            EditMobProg( ch, mprg, mptype, argument );
+            ch->InRoom->mprog.InsertBefore(value, mprg);
         }
-      
-      return;
+        else
+        {
+            ch->Echo("Program not found.\r\n");
+        }
+
+        return;
     }
 
-  if ( !StrCmp( arg1, "add" ) )
+    if ( !StrCmp( arg1, "add" ) )
     {
-      int mptype = GetMudProgFlag( arg2 );
+        int mptype = GetMudProgFlag( arg2 );
 
-      if ( mptype == -1 )
+        if ( mptype == -1 )
         {
-          ch->Echo("Unknown program type.\r\n");
-          return;
+            ch->Echo("Unknown program type.\r\n");
+            return;
         }
 
-      std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
+        std::shared_ptr<MPROG_DATA> mprg = std::make_shared<MPROG_DATA>();
 
-      ch->InRoom->mprog.Add(mprg);
-      ch->InRoom->mprog.progtypes |= ( 1 << mptype );
-      EditMobProg( ch, mprg, mptype, argument );
-      return;
+        ch->InRoom->mprog.Add(mprg);
+        ch->InRoom->mprog.progtypes |= ( 1 << mptype );
+        EditMobProg( ch, mprg, mptype, argument );
+        return;
     }
 
-  do_rpedit( ch, "" );
+    do_rpedit( ch, "" );
 }

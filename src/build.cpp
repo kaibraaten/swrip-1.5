@@ -1133,7 +1133,7 @@ void EditMobProg( Character *ch, std::shared_ptr<MPROG_DATA> mprg,
     }
 
   ch->SubState = SUB_MPROG_EDIT;
-  ch->dest_buf = &mprg;
+  ch->dest_buf = mprg.get();
 
   if ( !mprg->comlist )
     {

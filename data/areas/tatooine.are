@@ -11,7 +11,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 30410139
+#ECONOMY 0 30351878
 
 #MOBILES
 #31500
@@ -2295,7 +2295,7 @@ skin, the air is hot and heavy lacking moisture. As the sand blows slowly
 against your face you wish you had something to protect it as shards or
 sand start stinging against your face.
 ~
-0 0 10
+0 0 1
 D0
 ~
 ~
@@ -2320,7 +2320,7 @@ moisture. As the sand blows slowly against your face you wish you had
 something to protect it as shards or sand start stinging against your
 face.
 ~
-0 0 10
+0 0 1
 D0
 ~
 ~
@@ -2340,7 +2340,7 @@ air is hot and heavy lacking moisture. As the sand blows slowly against
 your face you wish you had something to protect it as shards or sand start
 stinging against your face.
 ~
-0 0 10
+0 0 1
 D0
 ~
 ~
@@ -2361,7 +2361,7 @@ moisture. As the sand blows slowly against your face you wish you had
 something to protect it as shards or sand start stinging against your
 face.           
 ~
-0 0 10
+0 0 1
 D0
 ~
 ~
@@ -2379,7 +2379,7 @@ S
 Pathway to control centre.~
 You are walking down a path to the control centre. There they watch the activities of vessels from all parts of the galaxy. It is not a very large building but is suitable for its purpose. The ground beneath your feet is hardening as you approach the centre and the air is continuasly heavy and warm.
 ~
-0 0 10
+0 0 1
 D0
 ~
 ~
@@ -2397,7 +2397,7 @@ S
 Pathway to control centre.~
 You are infront of the control centre for the Spaceport. Inside this building many descisions are made to decide who should be allowed to land on this planet and not to cause air havoc.
 ~
-0 0 10
+0 0 1
 D1
 ~
 ~
@@ -2411,7 +2411,7 @@ S
 Infront of the control centre.~
 You are infron of the doors to the spaceport control centre. To enter it go to the west. At many times of the year this building is just chaned up and locked. Left here abandonned for the law here is not really kept uptight. The door is of solid wood and  looks very strong.
 ~
-0 0 10
+0 0 1
 D1
 ~
 ~
@@ -2578,7 +2578,7 @@ S
 Large pathway through the city~
 You are walking down one of the main roads in Mos Eisely. As you walk by you notice a huge pile of junk where people deposit there goods. The ground you walk on is hard and sharp and the air continues to remain the same, heavy and warm. The air seems to be getting to you with every step you take but you can manage it, after all its only air.
 ~
-0 0 10
+0 0 1
 D0
 ~
 ~
@@ -2605,7 +2605,7 @@ someone is there slaping you. Just keep your head down and hope your
 gogles can withstand the many sand storms this planet has to deal
 with.
 ~
-0 0 10
+0 0 1
 D1
 ~
 ~
@@ -2626,7 +2626,7 @@ places that are around you look interesting and some may be of use.
 There is some active life all around you and it scares you at how
 many dirty people can be in one place. 
 ~
-0 0 10
+0 0 1
 D0
 ~
 ~
@@ -5182,7 +5182,7 @@ S
 Entrance to Dockingbay 94.~
 You are standing infront of the infamous Dockingbay 94. From here Han solo And the milenium falcon escaped with there newly aquired passengers for a trip to Alderaan. There is a large entrance into the Docking bay. All the ground beneath you is made of stone and sand. The air is warm yet lighter here for it is sheltered by the Dockingbay.
 ~
-0 0 10
+0 0 1
 D1
 ~
 ~
@@ -5200,7 +5200,7 @@ S
 Inside the entrance to Dockingbay 92~
 You are standing infront of a large sliding door. When opened you can enter the dockingbay with ease and embark on a ship to go to other places in the galaxy. The door is made of metal and has blaster shcoring all over it from when the imperials chased Han Solo and Chewbacca in a race to capture the droid R2-D2 and return him to Darth Vader. The ground is hard and covered with sand as most of this planet is and the air is rather refreshing.
 ~
-0 0 10
+0 0 1
 D0
 ~
 ~
@@ -5214,7 +5214,7 @@ S
 Inside Dockingbay 92~
 You are standing inside alarge room that can contain a few smaller sized ships or one large ship like the Millenium Falcon. The ground here is covered with sand, but there are patches where you can see the stone floor beneath. The air in here is cool and refreshing and gives you a warm sensation. There are ships comming and leaving here continuasly and make it so that the air smells of fumes and exaust.
 ~
-0 8 10
+0 8 1
 D0
 ~
 ~
@@ -5237,7 +5237,7 @@ outside in the  sun, but smells of ships. On the walls there are blaster
 bolts. Extra tools lay on the ground for  a mechanic that walks around
 here.   
 ~
-0 24 10
+0 24 1
 D1
 ~
 ~
@@ -5728,16 +5728,20 @@ D6
 0 -1 106
 S
 #31899
-In Front Of A Blast Door~
+A Hidden Passage In The Sewers~
 ~
 0 8 1
+D0
+~
+~
+0 -1 31904
 D2
 ~
 ~
 0 -1 31900
 S
 #31900
-Living Area~
+Common Room~
 ~
 0 1032 1
 D0
@@ -5784,7 +5788,7 @@ D3
 0 -1 31906
 S
 #31903
-Beds~
+Sleeping Quarters~
 ~
 0 8389640 0
 D3
@@ -5793,9 +5797,19 @@ D3
 0 -1 31902
 S
 #31904
-Sparring Area~
+Mos Eisley Sewers~
 ~
 0 12 0
+D2
+~
+~
+2048 -1 31899
+> entry_prog 100~
+if isjedi($n)
+  mpechoat $n You sense that the south wall is a hologram.
+endif
+~
+|
 S
 #31905
 Teacher~
@@ -5807,7 +5821,7 @@ D0
 0 -1 31902
 S
 #31906
-Crafting Area~
+Workshop~
 ~
 0 67175432 0
 D1
