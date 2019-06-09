@@ -25,7 +25,8 @@ TEST_F(StringHandlingTests, IsName)
   EXPECT_TRUE(IsName("joe", haystack));
   EXPECT_TRUE(IsName("johnny", haystack));
   EXPECT_TRUE(IsName("jane", haystack));
-
+  EXPECT_TRUE(IsName("joe bob johnny bubba jane", haystack));
+  
   EXPECT_FALSE(IsName("jo", haystack));
   EXPECT_FALSE(IsName("ob jo", haystack));
 }
@@ -37,7 +38,8 @@ TEST_F(StringHandlingTests, IsNamePrefix)
   EXPECT_TRUE(IsNamePrefix("joe", haystack));
   EXPECT_TRUE(IsNamePrefix("john", haystack));
   EXPECT_TRUE(IsNamePrefix("j", haystack));
-
+  EXPECT_TRUE(IsNamePrefix("joe bob johnny bubba jane", haystack));
+  
   EXPECT_FALSE(IsNamePrefix("foobarbaz", haystack));
   EXPECT_FALSE(IsNamePrefix("ob jo", haystack));
 }
@@ -50,6 +52,7 @@ TEST_F(StringHandlingTests, NiftyIsName)
   EXPECT_TRUE(NiftyIsName("joe bob", haystack));
   EXPECT_TRUE(NiftyIsName("joe jane", haystack));
   EXPECT_TRUE(NiftyIsName("jane joe", haystack));
+  EXPECT_TRUE(NiftyIsName("joe bob johnny bubba jane", haystack));
   
   EXPECT_FALSE(NiftyIsName("joe foobarbaz", haystack));
 }
@@ -62,7 +65,8 @@ TEST_F(StringHandlingTests, NiftyIsNamePrefix)
   EXPECT_TRUE(NiftyIsNamePrefix("joe bob", haystack));
   EXPECT_TRUE(NiftyIsNamePrefix("joe jane", haystack));
   EXPECT_TRUE(NiftyIsNamePrefix("jane joe", haystack));
-
+  EXPECT_TRUE(NiftyIsNamePrefix("joe bob johnny bubba jane", haystack));
+  
   EXPECT_TRUE(NiftyIsNamePrefix("j", haystack));
   EXPECT_TRUE(NiftyIsNamePrefix("j b", haystack));
   EXPECT_TRUE(NiftyIsNamePrefix("joh jane", haystack));
@@ -79,6 +83,17 @@ TEST_F(StringHandlingTests, SmashTilde)
   std::string actual = input;
 
   SmashTilde(actual);
+
+  EXPECT_EQ(expected, actual);
+}
+
+TEST_F(StringHandlingTests, SmushTilde)
+{
+  const std::string input = "This~is a st~ring.~";
+  const std::string expected = "This-is a st-ring.~";
+  std::string actual = input;
+
+  SmushTilde(actual);
 
   EXPECT_EQ(expected, actual);
 }

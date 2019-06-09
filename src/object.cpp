@@ -13,13 +13,13 @@ struct Object::Impl
 };
 
 Object::Object()
-  : pImpl(std::unique_ptr<Impl>())
+  : pImpl(std::make_unique<Impl>())
 {
   Value.fill(0);
 }
 
 Object::Object(ProtoObject *pObjIndex, int level)
-  : pImpl(new Impl())
+    : pImpl(std::make_unique<Impl>())
 {
   Value.fill(0);
 

@@ -2000,6 +2000,11 @@ static void ObjectUpdate()
 
     for (Object *obj : copyOfObjectList)
     {
+        if (IsObjectExtracted(obj))
+        {
+            continue;
+        }
+        
         Character *rch = NULL;
         const char *message = NULL;
 

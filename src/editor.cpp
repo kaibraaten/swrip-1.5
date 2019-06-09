@@ -292,8 +292,8 @@ static char *EditDataToString(Editor *edd)
             }
         }
 
-        buf[i++] = '\n';
         buf[i++] = '\r';
+        buf[i++] = '\n';
         used += 2;
         eline = eline->next;
     }
@@ -302,7 +302,7 @@ static char *EditDataToString(Editor *edd)
     used++;
 
     std::string withoutTilde = buf;
-    SmushTilde(withoutTilde);
+    withoutTilde = SmushTilde(withoutTilde);
     char *tmp = CopyString(withoutTilde);
     FreeMemory(buf);
     return tmp;
@@ -990,6 +990,7 @@ static void EditorSave(Character *ch, Editor *edd, const char *argument)
 
     if (!ch->LastCommand)
     {
+        Log->Bug("%s: ch->LastCommand == nullptr", __FUNCTION__);
         return;
     }
 

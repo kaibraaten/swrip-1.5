@@ -56,12 +56,26 @@ static int IsNameInternal(const std::string &str, const std::string &namelist,
 
 int IsName(const std::string &str, const std::string &namelist)
 {
-    return IsNameInternal(str, namelist, StrCmp, OneArgument);
+    if(StrCmp(str, namelist) == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return IsNameInternal(str, namelist, StrCmp, OneArgument);
+    }
 }
 
 int IsNamePrefix(const std::string &str, const std::string &namelist)
 {
-    return IsNameInternal(str, namelist, StringPrefix, OneArgument);
+    if(StrCmp(str, namelist) == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return IsNameInternal(str, namelist, StringPrefix, OneArgument);
+    }
 }
 
 /*
@@ -111,12 +125,26 @@ static int NiftyIsNameInternal(const std::string &str, const std::string &nameli
 
 int NiftyIsName(const std::string &str, const std::string &namelist)
 {
-    return NiftyIsNameInternal(str, namelist, IsName2, OneArgument2);
+    if(StrCmp(str, namelist) == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return NiftyIsNameInternal(str, namelist, IsName2, OneArgument2);
+    }
 }
 
 int NiftyIsNamePrefix(const std::string &str, const std::string &namelist)
 {
-    return NiftyIsNameInternal(str, namelist, IsName2Prefix, OneArgument2);
+    if(StrCmp(str, namelist) == 0)
+    {
+        return true;
+    }
+    else
+    {
+        return NiftyIsNameInternal(str, namelist, IsName2Prefix, OneArgument2);
+    }
 }
 
 /*
@@ -439,8 +467,21 @@ std::string StripCarriageReturn(const std::string &arg)
 /*
  * Removes the tildes from a line, except if it's the last character.
  */
-std::string SmushTilde(std::string &orig_str)
+std::string SmushTilde(std::string &str)
 {
+#if 1
+    size_t positionOfLastCharacter = str.empty() ? 0 : str.size() - 1;
+    
+    for(size_t i = 0; i < str.size(); ++i)
+    {
+        if(str[i] == '~' && i != positionOfLastCharacter)
+        {
+            str[i] = '-';
+        }
+    }
+
+    return str;
+#else
     std::vector<char> v_str = StringToVector(orig_str);
     char *str = &v_str[0];
     char *strptr = str;
@@ -458,6 +499,7 @@ std::string SmushTilde(std::string &orig_str)
 
     orig_str = str;
     return orig_str;
+#endif
 }
 
 std::string EncodeString(const std::string &str)

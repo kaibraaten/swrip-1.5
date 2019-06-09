@@ -13,7 +13,7 @@ $
 #FLAGS
 3 3
 
-#ECONOMY 0 496057670
+#ECONOMY 0 496056590
 
 #MOBILES
 #10340
@@ -689,6 +689,16 @@ A practice lightsaber is here.~
 5 8192 8193
 12 5 4 3 1000 1000
 1 500 50
+E
+practice lightsaber~
+Powered by a synthesized crystal, this weapon works like a real
+lightsaber, only significantly less powerful.
+~
+E
+practice lightsaber~
+Powered by a synthesized crystal, this weapon works like a real
+lightsaber, only significantly less powerful.
+~
 #10324
 lightsaber battery~
 a lightsaber battery~
@@ -697,6 +707,11 @@ A lightsaber battery is lying here.~
 65 8192 1
 1000 0 0 0
 1 50 5
+E
+lightsaber battery~
+This power cell, the size of a fingertip, is
+well suited for powering a lightsaber.
+~
 #10414
 student message terminal~
 a student message terminal~

@@ -11,7 +11,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 30440139
+#ECONOMY 0 30410139
 
 #MOBILES
 #31500
@@ -587,10 +587,18 @@ say I have everything you need just type "list"
 ~
 |
 #31900
-Zim the Failed Jedi~
+zim failed jedi~
 Zim the Failed Jedi~
 Zim the Failed Jedi stands here before you.
 ~
+Zim is a middle-aged male human with silvery stripes in his dark brown hair.
+His stomach is bulging over a leather belt that has a lightsaber hanging from
+it. 
+
+In his younger days, during the Clone Wars, he was an apprentice to a minor
+Jedi Master. Unfortunately Zim never quite had the talent to pass the Jedi
+trials, and when Order 66 was issued, he was somehow overlooked. Since then
+he's been in hiding, seeking to pass on what little he learned. 
 ~
 1107428867 0 0 Z
 100 0 -150 20d10+15000 10d4+2
@@ -5787,7 +5795,7 @@ S
 #31904
 Sparring Area~
 ~
-0 8 0
+0 12 0
 S
 #31905
 Teacher~
