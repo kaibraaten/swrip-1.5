@@ -197,8 +197,8 @@ void MakeCorpse( Character *ch )
 
   /* Added corpse name - make locate easier , other skills */
   corpse->Name = FormatString("corpse %s", name.c_str());
-  corpse->ShortDescr = FormatString(corpse->ShortDescr.c_str(), name);
-  corpse->Description = FormatString(corpse->Description.c_str(), name);
+  corpse->ShortDescr = FormatString(corpse->ShortDescr.c_str(), name.c_str());
+  corpse->Description = FormatString(corpse->Description.c_str(), name.c_str());
 
   std::list<Object*> carriedObjects(ch->Objects());
 
