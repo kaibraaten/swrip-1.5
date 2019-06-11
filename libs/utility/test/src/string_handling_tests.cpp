@@ -395,3 +395,38 @@ TEST_F(StringHandlingTests, StringEndsWith)
     // Assert
     EXPECT_TRUE(hadExpectedEnding);
 }
+
+TEST_F(StringHandlingTests, WordWrapEmptyStringPassedThrough)
+{
+    // Arrange
+    const std::string stringToCheck;
+    const std::string desiredResult;
+    const size_t lineWidth = 79;
+
+    // Act
+    const std::string actual = WordWrap(stringToCheck, lineWidth);
+
+    // Assert
+    EXPECT_EQ(actual, desiredResult);
+}
+
+TEST_F(StringHandlingTests, WordWrapGivesExpectedResult)
+{
+    // Arrange
+    const size_t lineWidth = 79;
+    const std::string stringToCheck = "You walk along a path inside the well known city of Mos Eisley. The ground here is hard yet made fully of sand. As you walk over it it is hot and sharp. The wind blows in your face, sometimes bringing particles of sand into your face stinging you and sometimes getting into your eyes. The air is very warm, heated by the twin suns of the planet. The heat makes the air heavier and harder to breath yet you move on. To the west you see smoke coming from freshly cooked meat and food.";
+    const std::string desiredResult =
+        "You walk along a path inside the well known city of Mos Eisley. The ground\r\n"
+        "here is hard yet made fully of sand. As you walk over it it is hot and sharp.\r\n"
+        "The wind blows in your face, sometimes bringing particles of sand into your\r\n"
+        "face stinging you and sometimes getting into your eyes. The air is very warm,\r\n"
+        "heated by the twin suns of the planet. The heat makes the air heavier and\r\n"
+        "harder to breath yet you move on. To the west you see smoke coming from\r\n"
+        "freshly cooked meat and food.";
+
+    // Act
+    const std::string actual = WordWrap(stringToCheck, lineWidth);
+
+    // Assert
+    EXPECT_EQ(actual, desiredResult);
+}

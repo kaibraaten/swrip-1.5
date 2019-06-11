@@ -11,7 +11,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 30351878
+#ECONOMY 0 30321878
 
 #MOBILES
 #31500
@@ -886,7 +886,10 @@ Some god dropped a newly created lastobject here.~
 #ROOMS
 #31500
 Desert~
-The dunes around you are normal as you walk over the endless amount of sand. The sea of rippling sand still surrounds you with overwhelming greatness. The sand has a reflective shine to it assisted by the sunrays of the heating suns.  You feel enclosed because the dunes tower over you greatly.
+The dunes around you are normal as you walk over the endless amount of sand.
+The sea of rippling sand still surrounds you with overwhelming greatness. The
+sand has a reflective shine to it assisted by the sunrays of the heating suns.
+You feel enclosed because the dunes tower over you greatly.
 ~
 0 0 10
 D0
@@ -900,7 +903,10 @@ D2
 S
 #31501
 Desert~
-You are walking along the soft sand in the desert of Tatooine. Just ahead of you you can see the dune sea developping. Behind you the small city diminishes into only a spot. With every step you take the city becomes smaller and smaller.
+You are walking along the soft sand in the desert of Tatooine. Just ahead of
+you you can see the dune sea developping. Behind you the small city diminishes
+into only a spot. With every step you take the city becomes smaller and
+smaller.
 ~
 0 0 10
 D1
@@ -2377,7 +2383,11 @@ D2
 S
 #31605
 Pathway to control centre.~
-You are walking down a path to the control centre. There they watch the activities of vessels from all parts of the galaxy. It is not a very large building but is suitable for its purpose. The ground beneath your feet is hardening as you approach the centre and the air is continuasly heavy and warm.
+You are walking down a path to the control centre. There they watch the
+activities of vessels from all parts of the galaxy. It is not a very large
+building but is suitable for its purpose. The ground beneath your feet is
+hardening as you approach the centre and the air is continuasly heavy and
+warm.
 ~
 0 0 1
 D0
@@ -2395,7 +2405,9 @@ D3
 S
 #31606
 Pathway to control centre.~
-You are infront of the control centre for the Spaceport. Inside this building many descisions are made to decide who should be allowed to land on this planet and not to cause air havoc.
+You are infront of the control centre for the Spaceport. Inside this building
+many descisions are made to decide who should be allowed to land on this
+planet and not to cause air havoc.
 ~
 0 0 1
 D1
@@ -2409,7 +2421,10 @@ D3
 S
 #31607
 Infront of the control centre.~
-You are infron of the doors to the spaceport control centre. To enter it go to the west. At many times of the year this building is just chaned up and locked. Left here abandonned for the law here is not really kept uptight. The door is of solid wood and  looks very strong.
+You are infron of the doors to the spaceport control centre. To enter it go
+to the west. At many times of the year this building is just chaned up and
+locked. Left here abandonned for the law here is not really kept uptight. The
+door is of solid wood and looks very strong.
 ~
 0 0 1
 D1
@@ -2423,7 +2438,11 @@ D3
 S
 #31608
 Inside the control centre.~
-You are in the entrance to the Control cantre. There are turbolifts moving all around you. The control tower is on the higher levels but the offices are here on the main level of the building. The ground is hard and seems to be made of stone. The air is crisp and relaxing in here for it is shielded from the twin suns of Tatooine.
+You are in the entrance to the Control cantre. There are turbolifts moving
+all around you. The control tower is on the higher levels but the offices are
+here on the main level of the building. The ground is hard and seems to be
+made of stone. The air is crisp and relaxing in here for it is shielded from
+the twin suns of Tatooine.
 ~
 0 8 0
 D0
@@ -2445,7 +2464,9 @@ D3
 S
 #31609
 Hallway.~
-You are in a hallway with doors to executive offices all the way down the hall. There are doors placed on both sides of the hall leading into individual offices.
+You are in a hallway with doors to executive offices all the way down the
+hall. There are doors placed on both sides of the hall leading into individual
+offices.
 ~
 0 8 0
 D2
@@ -2459,7 +2480,11 @@ D3
 S
 #31610
 In the hallway.~
-You walk down a narrow hallway which has not much space to each side. To your sides there are two offices which hold different things. The ground here is made of stone and the illumination is poor as for only one glowpannel remains to light up this entire hallway. The air is relaxing and constantly flooding your lungs for it is a change towards the hot and heavy air outdoors.
+You walk down a narrow hallway which has not much space to each side. To your
+sides there are two offices which hold different things. The ground here is
+made of stone and the illumination is poor as for only one glowpannel remains
+to light up this entire hallway. The air is relaxing and constantly flooding
+your lungs for it is a change towards the hot and heavy air outdoors.
 ~
 0 8 0
 D0
@@ -2477,7 +2502,9 @@ D2
 S
 #31611
 Large confrence room~
-You are in one of the first offices ever built. It is well furnished and decorated. It is used for confrences because of it's size but there are not many conference because of the slackness of law on this planet.
+You are in one of the first offices ever built. It is well furnished and
+decorated. It is used for confrences because of it's size but there are not
+many conference because of the slackness of law on this planet.
 ~
 0 8 0
 D2
@@ -2487,7 +2514,10 @@ D2
 S
 #31612
 Manager's office.~
-This office is a private office for the manager of this facility. It is a rather large office with many vents in it to allow the entrance of crisp air to enter the room. There is a large desk made from oak in the middle of the room stacked up with 3 pieces of paper.
+This office is a private office for the manager of this facility. It is a
+rather large office with many vents in it to allow the entrance of crisp air
+to enter the room. There is a large desk made from oak in the middle of the
+room stacked up with 3 pieces of paper.
 ~
 0 8 0
 D0
@@ -2497,7 +2527,8 @@ D0
 S
 #31613
 Hallway~
-This hallway heads towards the rooms with the generating and computer equiptment of the Control Centre.
+This hallway heads towards the rooms with the generating and computer
+equiptment of the Control Centre.
 ~
 0 8 0
 D0
@@ -2511,7 +2542,8 @@ D3
 S
 #31614
 Generator room~
-This room contains all of the power generating equiptment for the spaceport. The generators and computer systems are all mounted on the walls.
+This room contains all of the power generating equiptment for the spaceport.
+The generators and computer systems are all mounted on the walls.
 ~
 0 8 0
 D1
@@ -2521,7 +2553,8 @@ D1
 S
 #31615
 Lobby~
-This is the lobby of the control senter. In the corner a secratery takes messages and allows passage to the tower.
+This is the lobby of the control senter. In the corner a secratery takes
+messages and allows passage to the tower.
 ~
 0 8 0
 D1
@@ -2535,7 +2568,8 @@ D4
 S
 #31616
 Tower~
-You are standing in the control tower. Most of the tower is run by droids and computers. The only living creatures are humans.
+You are standing in the control tower. Most of the tower is run by droids and
+computers. The only living creatures are humans.
 ~
 0 8 0
 D3
@@ -2549,8 +2583,9 @@ D5
 S
 #31617
 View screen~
-Here you can see the whole spaceport 
-from this large viewing screen. As you peer through it you can see many different species of life from all across the galaxy.
+Here you can see the whole spaceport from this large viewing screen. As you
+peer through it you can see many different species of life from all across the
+galaxy.
 ~
 0 8 0
 D1
@@ -2576,7 +2611,11 @@ D5
 S
 #31653
 Large pathway through the city~
-You are walking down one of the main roads in Mos Eisely. As you walk by you notice a huge pile of junk where people deposit there goods. The ground you walk on is hard and sharp and the air continues to remain the same, heavy and warm. The air seems to be getting to you with every step you take but you can manage it, after all its only air.
+You are walking down one of the main roads in Mos Eisely. As you walk by you
+notice a huge pile of junk where people deposit there goods. The ground you
+walk on is hard and sharp and the air continues to remain the same, heavy and
+warm. The air seems to be getting to you with every step you take but you can
+manage it, after all its only air.
 ~
 0 0 1
 D0
@@ -2665,7 +2704,8 @@ D2
 S
 #31659
 Desert~
-You are on the hard sand of Tatooine. All around you you can see sand for miles unless you look back.
+You are on the hard sand of Tatooine. All around you you can see sand for
+miles unless you look back.
 ~
 0 0 10
 D0
@@ -2693,7 +2733,8 @@ D2
 S
 #31661
 Desert~
-The sand under you is still hard and glowing. Ad you look around all you can see is shinny sand.
+The sand under you is still hard and glowing. Ad you look around all you can
+see is shinny sand.
 ~
 0 0 10
 D2
@@ -2707,7 +2748,8 @@ D3
 S
 #31662
 Desert~
-You walk on the sand of Tatooine. As you walk over it your feet sink into the grounf leabing an everlasting mark.
+You walk on the sand of Tatooine. As you walk over it your feet sink into the
+grounf leabing an everlasting mark.
 ~
 0 0 10
 D1
@@ -2721,7 +2763,8 @@ D3
 S
 #31663
 Desert~
-You are walking on The sand of Tatooine. The sand gradually hardens with every minute ecposed to the sun.
+You are walking on The sand of Tatooine. The sand gradually hardens with
+every minute ecposed to the sun.
 ~
 0 0 10
 D1
@@ -2749,7 +2792,8 @@ D3
 S
 #31665
 Desert~
-You are standing on the great sands og Tatooine. Far away in the distance you cam see the developing sea of sand dunes.
+You are standing on the great sands og Tatooine. Far away in the distance you
+cam see the developing sea of sand dunes.
 ~
 0 0 10
 D1
@@ -2763,7 +2807,8 @@ D3
 S
 #31666
 Desert~
-You are heading towards the great sand dunes, yet it is still a long journey to reach the sand dune sea.
+You are heading towards the great sand dunes, yet it is still a long journey
+to reach the sand dune sea.
 ~
 0 0 10
 D0
@@ -2791,7 +2836,8 @@ D2
 S
 #31668
 Desert~
-You are standing on the hard sand of the planet which has been exposed to harsh sun rays.
+You are standing on the hard sand of the planet which has been exposed to
+harsh sun rays.
 ~
 0 0 10
 D0
@@ -2805,7 +2851,8 @@ D2
 S
 #31669
 Desert~
-The sand under you is continualy getting sogter every step you take toeards the great sea of sand dunes.
+The sand under you is continualy getting sogter every step you take toeards
+the great sea of sand dunes.
 ~
 0 0 10
 D0
@@ -2819,7 +2866,8 @@ D2
 S
 #31670
 Desert~
-You can now clearly make out the sand dunes ahead of you, but, they are still very far away.
+You can now clearly make out the sand dunes ahead of you, but, they are still
+very far away.
 ~
 0 0 10
 D0
@@ -2847,7 +2895,8 @@ D2
 S
 #31672
 Desert~
-You are approaching the sand dunes wuickly now and will be there soon. With every step you take the sand seems to be getting softer and thicker.
+You are approaching the sand dunes wuickly now and will be there soon. With
+every step you take the sand seems to be getting softer and thicker.
 ~
 0 0 10
 D0
@@ -2875,7 +2924,9 @@ D2
 S
 #31674
 Desert~
-You are nearing the bottom of the first sand dune in sight. All of a sudden they seem much bigger than before. They also seem to be growing with every step you take.
+You are nearing the bottom of the first sand dune in sight. All of a sudden
+they seem much bigger than before. They also seem to be growing with every
+step you take.
 ~
 0 0 10
 D0
@@ -2889,7 +2940,8 @@ D2
 S
 #31675
 Desert~
-The great dune sea now seems so vast and enourmous with every step you take, In all dirrections there are sand dunes towering around and over you.
+The great dune sea now seems so vast and enourmous with every step you take,
+In all dirrections there are sand dunes towering around and over you.
 ~
 0 0 10
 D0
@@ -2917,8 +2969,8 @@ D3
 S
 #31677
 Desert~
-You walk endlessly on the sand beneath you. It towers all around and makes you
- feel enclosed.
+You walk endlessly on the sand beneath you. It towers all around and
+makes you feel enclosed.
 ~
 0 0 10
 D1
@@ -2946,7 +2998,8 @@ D3
 S
 #31679
 Desert~
-The sand around you is thick and hot. In the daytime the sunrays make the sand extremely hot.
+The sand around you is thick and hot. In the daytime the sunrays make the
+sand extremely hot.
 ~
 0 0 10
 D1
@@ -2960,7 +3013,8 @@ D3
 S
 #31680
 Desert~
-You are walking on the sand dunes of the great sea. They tower around you in all directions.
+You are walking on the sand dunes of the great sea. They tower around you in
+all directions.
 ~
 0 0 10
 D1
@@ -2974,7 +3028,8 @@ D3
 S
 #31681
 Desert~
-You are walking though the thick sand. It covers your feet and makes you feel enclosed.
+You are walking though the thick sand. It covers your feet and makes you feel
+enclosed.
 ~
 0 0 10
 D1
@@ -3024,7 +3079,8 @@ D2
 S
 #31685
 Desert~
-You are at the step of the first sand dune. You can enter the sand dune sea of Tatooine to the north, the west and the east.
+You are at the step of the first sand dune. You can enter the sand dune sea
+of Tatooine to the north, the west and the east.
 ~
 0 0 10
 D0
@@ -3060,7 +3116,8 @@ D2
 S
 #31687
 Desert~
-All around you are large sand dunes. If you would like to stay out of the sea turn back now.
+All around you are large sand dunes. If you would like to stay out of the sea
+turn back now.
 ~
 0 0 10
 D0
@@ -3074,7 +3131,8 @@ D2
 S
 #31688
 Desert~
-You are inside a small valley of sand dunes. All around you shimmering sand dunes tower over you.
+You are inside a small valley of sand dunes. All around you shimmering sand
+dunes tower over you.
 ~
 0 0 10
 D0
@@ -3088,7 +3146,8 @@ D2
 S
 #31689
 Desert~
-You are now in the great sea. The only thing you will find is this great sea is probably death.
+You are now in the great sea. The only thing you will find is this great sea
+is probably death.
 ~
 0 0 10
 D2
@@ -3102,7 +3161,8 @@ D3
 S
 #31690
 Desert~
-You are standing a vast sand dune which is high enough for you to see clearly across the sea.
+You are standing a vast sand dune which is high enough for you to see clearly
+across the sea.
 ~
 0 0 10
 D1
@@ -3116,7 +3176,8 @@ D3
 S
 #31691
 Desert~
-You are among many sand dunes. All around you the great sand dunes tower over you and you now wonder about being here.
+You are among many sand dunes. All around you the great sand dunes tower over
+you and you now wonder about being here.
 ~
 0 0 10
 D1
@@ -3130,7 +3191,8 @@ D3
 S
 #31692
 Desert~
-The vast sand dunes around you make you feel enclosed. For as far as you can see there is only sand.
+The vast sand dunes around you make you feel enclosed. For as far as you can
+see there is only sand.
 ~
 0 0 10
 D1
@@ -3154,7 +3216,8 @@ D1
 S
 #31694
 Desert~
-You are standing infront of a largly spaced sea of sand dunes which seems never ending.
+You are standing infront of a largly spaced sea of sand dunes which seems
+never ending.
 ~
 0 0 10
 D1
@@ -3168,7 +3231,8 @@ D3
 S
 #31695
 Desert~
-You are leaving any hopes of finding civilization behind. The nly thing you shall find out here is vertain death.
+You are leaving any hopes of finding civilization behind. The nly thing you
+shall find out here is vertain death.
 ~
 0 0 10
 D1
@@ -3182,7 +3246,8 @@ D3
 S
 #31696
 Desert~
-you are looking endlessly at the sand around you. You are but only a small figure compared to the sand surrounding you.
+you are looking endlessly at the sand around you. You are but only a small
+figure compared to the sand surrounding you.
 ~
 0 0 10
 D0
@@ -3200,7 +3265,8 @@ D3
 S
 #31697
 Desert~
-You are on a sand dune. You can glare far out into the dune sea, but, all you can see is sand, sand and more sand.
+You are on a sand dune. You can glare far out into the dune sea, but, all you
+can see is sand, sand and more sand.
 ~
 0 0 10
 D0
@@ -3218,7 +3284,8 @@ D3
 S
 #31698
 Desert~
-You are standing infront of a sand dune. In all directions but the one you came  are sand dunes.
+You are standing infront of a sand dune. In all directions but the one you
+came are sand dunes.
 ~
 0 0 10
 D1
@@ -3232,7 +3299,8 @@ D3
 S
 #31699
 Desert~
-The sand is thicker now that you are on the sand dunes. The great sea is greater than you thought and it might be wise to turn back now.
+The sand is thicker now that you are on the sand dunes. The great sea is
+greater than you thought and it might be wise to turn back now.
 ~
 0 0 10
 D1
@@ -3260,7 +3328,8 @@ D3
 S
 #31701
 Desert~
-You are in the endless sea of sand dunes. All around you all you can see is sand.
+You are in the endless sea of sand dunes. All around you all you can see is
+sand.
 ~
 0 0 10
 D3
@@ -3270,7 +3339,8 @@ D3
 S
 #31702
 Desert~
-You are still in the endless sea of sand dunes. As you peer around yourself it feels hopeless in regards to where you are.
+You are still in the endless sea of sand dunes. As you peer around yourself
+it feels hopeless in regards to where you are.
 ~
 0 0 10
 D0
@@ -3284,7 +3354,8 @@ D2
 S
 #31703
 Desert~
-You are in between many sand dunes. They are around you from every angle and you feel enclosed because of their height.
+You are in between many sand dunes. They are around you from every angle and
+you feel enclosed because of their height.
 ~
 0 0 10
 D0
@@ -3298,7 +3369,8 @@ D2
 S
 #31704
 Desert~
-You are on the side of a sand dune. You look around you and there are still no traces of life.
+You are on the side of a sand dune. You look around you and there are still
+no traces of life.
 ~
 0 0 10
 D0
@@ -3312,7 +3384,8 @@ D2
 S
 #31705
 Desert~
-All around you all you can see is sand. The towering sand dunes are all around you and you cannot figure out where you are.
+All around you all you can see is sand. The towering sand dunes are all
+around you and you cannot figure out where you are.
 ~
 0 0 10
 D2
@@ -3340,7 +3413,9 @@ D3
 S
 #31707
 Desert~
-You are walking on a sand dune. All around you there are sand dunes. They tower high over you until you reach the top of one and start heading back down.
+You are walking on a sand dune. All around you there are sand dunes. They
+tower high over you until you reach the top of one and start heading back
+down.
 ~
 0 0 10
 D0
@@ -3354,7 +3429,8 @@ D2
 S
 #31708
 Desert~
-You are standing on the top of a sand dune. And as you hope for something all you can see is the voyage down the side of yet another sand dune.
+You are standing on the top of a sand dune. And as you hope for something all
+you can see is the voyage down the side of yet another sand dune.
 ~
 0 0 10
 D0
@@ -3372,7 +3448,8 @@ D3
 S
 #31709
 Desert~
-You are heading down the side of a dune. Its size makes you feel tired for it only makes the journey longer.
+You are heading down the side of a dune. Its size makes you feel tired for it
+only makes the journey longer.
 ~
 0 0 10
 D0
@@ -3386,7 +3463,8 @@ D2
 S
 #31710
 Desert~
-You are surrounded by sand dunes and as they tower over you you feel enclosed.
+You are surrounded by sand dunes and as they tower over you you feel
+enclosed.
 ~
 0 0 10
 D2
@@ -3486,7 +3564,8 @@ D1
 S
 #31718
 Desert~
-You are walking on soft sand The sand dunes tower around you from all directions.
+You are walking on soft sand The sand dunes tower around you from all
+directions.
 ~
 0 0 10
 D1
@@ -3514,7 +3593,8 @@ D3
 S
 #31720
 Desert~
-You are on the top edge of a sand dune. As you peer around you there is only sand.
+You are on the top edge of a sand dune. As you peer around you there is only
+sand.
 ~
 0 0 10
 D1
@@ -3528,7 +3608,9 @@ D3
 S
 #31721
 Desert~
-You are standing on the side of the sharply shaped sand dune. You are approaching the bottom once again so that you can continue with your journey.
+You are standing on the side of the sharply shaped sand dune. You are
+approaching the bottom once again so that you can continue with your
+journey.
 ~
 0 0 10
 D0
@@ -3556,7 +3638,8 @@ D2
 S
 #31723
 Desert~
-You are walking on the side of a sand dune. All around you sand dunes tower over you.
+You are walking on the side of a sand dune. All around you sand dunes tower
+over you.
 ~
 0 0 10
 D2
@@ -3598,7 +3681,8 @@ D3
 S
 #31726
 Desert~
-You are standing on the top of a sand dune. You can see what seems to be a palace of some sort in the side of a sand dune just ahead.
+You are standing on the top of a sand dune. You can see what seems to be a
+palace of some sort in the side of a sand dune just ahead.
 ~
 0 0 10
 D1
@@ -3612,7 +3696,8 @@ D3
 S
 #31727
 Desert~
-You are standing infront of what you now recognize as Jabba the Hutt's former home.
+You are standing infront of what you now recognize as Jabba the Hutt's former
+home.
 ~
 0 0 10
 D0
@@ -3640,9 +3725,10 @@ D2
 S
 #31729
 Entrance to Jabba's~
-You are standing in a large opening surrounded by large walls whisch tower around you. It is very dark in here and you can only continue to the north.
+You are standing in a large opening surrounded by large walls whisch tower
+around you. It is very dark in here and you can only continue to the north.
 ~
-0 1 0
+0 8 0
 D0
 ~
 ~
@@ -3654,9 +3740,10 @@ D2
 S
 #31730
 Hallway in Jabba's~
-You are walking down a corridor towards the what seems to be a large room. The air around you is thick and has a foul odor.
+You are walking down a corridor towards the what seems to be a large room.
+The air around you is thick and has a foul odor.
 ~
-0 1 0
+0 8 0
 D0
 ~
 ~
@@ -3668,9 +3755,11 @@ D2
 S
 #31731
 Infront of audience chamber~
-You are standing infront of the large audience chamber. It was designed to hold many people including dancing girls, bands and tables full of people. But, since the Monks took over the palace it has not been used.
+You are standing infront of the large audience chamber. It was designed to
+hold many people including dancing girls, bands and tables full of people.
+But, since the Monks took over the palace it has not been used.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -3690,7 +3779,8 @@ D3
 S
 #31732
 Jabba's former Dais~
-You are standing on Jabba the Hutt's former Dais. It is a very large area which has an exellent view of the audience chamber.
+You are standing on Jabba the Hutt's former Dais. It is a very large area
+which has an exellent view of the audience chamber.
 ~
 0 0 0
 D2
@@ -3700,9 +3790,10 @@ D2
 S
 #31733
 Trapdoor~
-You are standing directly on the trapdoor that was used to feed traitors to the Rancor which was killed by Luke Skywalker.
+You are standing directly on the trapdoor that was used to feed traitors to
+the Rancor which was killed by Luke Skywalker.
 ~
-0 0 0
+0 8 0
 D2
 ~
 ~
@@ -3718,9 +3809,10 @@ D5
 S
 #31734
 Audience chambers~
-You are in the audience chambers of the palace. You can go up the stairs towards some of the living quarters of the Monks.
+You are in the audience chambers of the palace. You can go up the stairs
+towards some of the living quarters of the Monks.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -3736,9 +3828,10 @@ D4
 S
 #31735
 Upper level entrance~
-You are on the upper level of the palace that is now inhabited by mainly boormir monks and spiderwalkers.
+You are on the upper level of the palace that is now inhabited by mainly
+boormir monks and spiderwalkers.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -3750,9 +3843,10 @@ D5
 S
 #31736
 Beside the dais~
-You are standing beside the Dais of the former Jabba the Hutt. From here you cannot see very well but you are very near the Dais.
+You are standing beside the Dais of the former Jabba the Hutt. From here you
+cannot see very well but you are very near the Dais.
 ~
-0 0 0
+0 8 0
 D2
 ~
 ~
@@ -3876,7 +3970,7 @@ S
 Long hallway~
 You are walking down a long, narrow hallway which turns at the end.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -3888,9 +3982,10 @@ D2
 S
 #31747
 Hallway through Jabba's palace~
-You are walking down a hallway. It is old and there is a rather digusting smell all around you.
+You are walking down a hallway. It is old and there is a rather digusting
+smell all around you.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -3902,9 +3997,10 @@ D2
 S
 #31748
 Long hallway in Jabba's~
-You are standing in a hallway. To each side all along the hall there are small individual rooms.
+You are standing in a hallway. To each side all along the hall there are
+small individual rooms.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -3916,9 +4012,10 @@ D2
 S
 #31749
 Long hallway end~
-you are comming to the end of the hallway which curves both to the east and to the west.
+you are comming to the end of the hallway which curves both to the east and
+to the west.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -3930,9 +4027,12 @@ D2
 S
 #31750
 Narrow hallway~
-You are in a small narrow hallway which has a very disgusting odour, not surprising considering what creatures and animals have lived here in the past and even now. The ground is cool and hard full of ripples as if never crafted or taken care of.
+You are in a small narrow hallway which has a very disgusting odour, not
+surprising considering what creatures and animals have lived here in the past
+and even now. The ground is cool and hard full of ripples as if never crafted
+or taken care of.
 ~
-0 0 0
+0 8 0
 D1
 ~
 ~
@@ -3952,9 +4052,12 @@ D4
 S
 #31751
 Hallway facing a dark room~
-You are standing in a hallway facing east. As you look down the hallway at the end you can see different colored lights flashing in the dimniss and the darness. The ground is rough and the air is hot and heavy. Above a burnt out glow pannel lays motionless but you can still see pretty well.
+You are standing in a hallway facing east. As you look down the hallway at
+the end you can see different colored lights flashing in the dimniss and the
+darness. The ground is rough and the air is hot and heavy. Above a burnt out
+glow pannel lays motionless but you can still see pretty well.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -3974,9 +4077,10 @@ D3
 S
 #31752
 Narrow hallway ~
-You are walking down a narrow halway. To each side there are very small rooms which are vacant.
+You are walking down a narrow halway. To each side there are very small rooms
+which are vacant.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -3996,9 +4100,12 @@ D3
 S
 #31753
 A long  hallway ~
-You are walking down a hallway towards a very large opening. It appears not to be guarded or have a door in place. The gound beneath you is hard and full of cracks and uneven places. The air is heavy and hot but nothing that cannot be lived with.
+You are walking down a hallway towards a very large opening. It appears not
+to be guarded or have a door in place. The gound beneath you is hard and full
+of cracks and uneven places. The air is heavy and hot but nothing that cannot
+be lived with.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4018,9 +4125,12 @@ D3
 S
 #31754
 End of hallway before a large room~
-You approach the dark room at the end of the hallway with every step you take. To you sides you continually see  small invacant rooms. The ground beneath your feet is rough and uneven making you feet ache all over. The lighting here is minamal but you can still see down the hall.
+You approach the dark room at the end of the hallway with every step you
+take. To you sides you continually see small invacant rooms. The ground
+beneath your feet is rough and uneven making you feet ache all over. The
+lighting here is minamal but you can still see down the hall.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4040,9 +4150,11 @@ D3
 S
 #31755
 Infront of a large room~
-You are standing in front of a very large room with different sections in it. The entrance used to have doors but as you can see they have been removed for all that remains is the hinges.
+You are standing in front of a very large room with different sections in it.
+The entrance used to have doors but as you can see they have been removed for
+all that remains is the hinges.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4062,9 +4174,13 @@ D3
 S
 #31756
 Brain jar room~
-You stand in a dark room filled with brain jars. Each brain is used to put inside of a spiderwalker. You can go down the rows infront of you. The ground is softer in here as if taken care of, there is not one ripple in the whole surface showing grace and care from the person or people that finished this room.
+You stand in a dark room filled with brain jars. Each brain is used to put
+inside of a spiderwalker. You can go down the rows infront of you. The ground
+is softer in here as if taken care of, there is not one ripple in the whole
+surface showing grace and care from the person or people that finished this
+room.
 ~
-0 1 0
+0 9 0
 D0
 ~
 ~
@@ -4080,9 +4196,12 @@ D3
 S
 #31757
 Brain room~
-All around you there are brains in jars. As you walk by they start "screaming". As they scream the lights on the jars change color indicate that they are not calm at all. In front of you there is a row of containing shelves with jars gently placed on them.
+All around you there are brains in jars. As you walk by they start screaming
+. As they scream the lights on the jars change color indicate that they are
+not calm at all. In front of you there is a row of containing shelves with
+jars gently placed on them.
 ~
-0 1 0
+0 9 0
 D0
 ~
 ~
@@ -4094,9 +4213,12 @@ D3
 S
 #31758
 Brain compartment~
-You are walking down a row. To your sides shelves are filled with brains from all species of the Galaxy. These jars seem to be a bit calmer for there lights are not flaring off when you pass by them. this shows they are mature and prepared to be put into a body of some sort, most likely a spiderwalker.
+You are walking down a row. To your sides shelves are filled with brains from
+all species of the Galaxy. These jars seem to be a bit calmer for there lights
+are not flaring off when you pass by them. this shows they are mature and
+prepared to be put into a body of some sort, most likely a spiderwalker.
 ~
-0 1 0
+0 9 0
 D2
 ~
 ~
@@ -4104,9 +4226,12 @@ D2
 S
 #31759
 Row of jars~
-You are standing in a row with shelves in it. on each shelf jars have been placed carefully to ensure that they are safe and will not fall to the ground and break. The air is crisp and provides stability as you stare longly at the large amounts of jars.
+You are standing in a row with shelves in it. on each shelf jars have been
+placed carefully to ensure that they are safe and will not fall to the ground
+and break. The air is crisp and provides stability as you stare longly at the
+large amounts of jars.
 ~
-0 1 0
+0 9 0
 D2
 ~
 ~
@@ -4114,9 +4239,10 @@ D2
 S
 #31760
 Old room~
-You are standing in small room which was initially designed to home a person. It has a window facing the sun.
+You are standing in small room which was initially designed to home a person.
+It has a window facing the sun.
 ~
-0 0 0
+0 8 0
 D2
 ~
 ~
@@ -4124,9 +4250,10 @@ D2
 S
 #31761
 Dusty old room~
-You are standing in room. It has dust all over it for it has not been used for many many years.
+You are standing in room. It has dust all over it for it has not been used
+for many many years.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4136,7 +4263,7 @@ S
 Large guest room~
 This is a larger room. It was probably designed to hold a larger species.
 ~
-0 0 0
+0 8 0
 D2
 ~
 ~
@@ -4144,9 +4271,11 @@ D2
 S
 #31763
 Old small calibered room~
-The room you are standing in is very small room. It has a window in the corner and an old bedframe in the corner which seems to have been destroyed by small rodents.
+The room you are standing in is very small room. It has a window in the
+corner and an old bedframe in the corner which seems to have been destroyed by
+small rodents.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4154,9 +4283,10 @@ D0
 S
 #31764
 Storage compartment for droids~
-You are standing in an extremely small room that was designed to hold a cleaning droid or two.
+You are standing in an extremely small room that was designed to hold a
+cleaning droid or two.
 ~
-0 0 0
+0 8 0
 D2
 ~
 ~
@@ -4164,9 +4294,10 @@ D2
 S
 #31765
 Large specimen room~
-You are in a large room. It was made for a larger type species. It is used to house and for sleeping. This room has a very disgusting odour
+You are in a large room. It was made for a larger type species. It is used to
+house and for sleeping. This room has a very disgusting odour
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4174,9 +4305,10 @@ D0
 S
 #31766
 Small unused room~
-You are standing in a small room with a window facing the great sand dune sea.
+You are standing in a small room with a window facing the great sand dune
+sea.
 ~
-0 0 0
+0 8 0
 D2
 ~
 ~
@@ -4184,9 +4316,10 @@ D2
 S
 #31767
 Habitated room~
-You are standing in a room which seems to be habitated. There is a small bed in the corner with a window mounted on the wall which looks outside.
+You are standing in a room which seems to be habitated. There is a small bed
+in the corner with a window mounted on the wall which looks outside.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4194,9 +4327,10 @@ D0
 S
 #31768
 Small enclosed room~
-You are in a room of small caliber. You feel enclosed as you look around the room.
+You are in a room of small caliber. You feel enclosed as you look around the
+room.
 ~
-0 0 0
+0 8 0
 D2
 ~
 ~
@@ -4206,7 +4340,7 @@ S
 Unhabitated room~
 You are standing in a bedroom. It is not habitated but could be.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4214,9 +4348,12 @@ D0
 S
 #31770
 Long hallway~
-You walk down a long narrow hallway thats floor is covered with stone and provides discomfort for your feet. To each side you can see some small and large rooms all with different uses. There is a glowpannel above your head barely functioning providing the dimmest of light all over.
+You walk down a long narrow hallway thats floor is covered with stone and
+provides discomfort for your feet. To each side you can see some small and
+large rooms all with different uses. There is a glowpannel above your head
+barely functioning providing the dimmest of light all over.
 ~
-0 0 0
+0 8 0
 D1
 ~
 ~
@@ -4229,9 +4366,11 @@ S
 #31771
 A Hallway passage~
 The hallway you walk down is on an uneven
-surface, it has ripples all along it and provides not much for heat or for comfort. There is no lighting here but you can still see down the gloomy hallway but not always with ease.
+surface, it has ripples all along it and provides not much for heat or for comfort.
+There is no lighting here but you can still see down the gloomy hallway but
+not always with ease.
 ~
-0 0 0
+0 8 0
 D1
 ~
 ~
@@ -4243,9 +4382,12 @@ D3
 S
 #31772
 Dense hallway~
-As you walk down the hallway on a cool stone floor you smeel an odour, a rather unpleasant one, but having been in this palace it isto no surprise that this smeel is located here. The hallway is gloomy and the floor has a rough texture as if never smoothed out.
+As you walk down the hallway on a cool stone floor you smeel an odour, a
+rather unpleasant one, but having been in this palace it isto no surprise that
+this smeel is located here. The hallway is gloomy and the floor has a rough
+texture as if never smoothed out.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4265,9 +4407,12 @@ D3
 S
 #31773
 Long narrowed hallway~
-The ground beneath your feet is made of pure stone, rather cold  at night and still cool in the day the stone is what covers all the palace floores. You can see the end of the hallway just ahead of yourself. Large and without any features. Just a simple stone wall.
+The ground beneath your feet is made of pure stone, rather cold at night and
+still cool in the day the stone is what covers all the palace floores. You can
+see the end of the hallway just ahead of yourself. Large and without any
+features. Just a simple stone wall.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4287,9 +4432,15 @@ D3
 S
 #31774
 Hallway leading to individual rooms~
-The hallway ypou walk down is covered in stone, cold on your feet as you walk over it for it does not preserve heat well. A glow pannel above is burnt out and every once in a while a small burst of electricity comes rippiling through the end of the cables. The air here is dense but not filled with a stench, a rather unusaul thing for this palace. To both sides there are rooms of different caliber. There is a grear stone wall stopping the end of the hall just ahead.
+The hallway ypou walk down is covered in stone, cold on your feet as you walk
+over it for it does not preserve heat well. A glow pannel above is burnt out
+and every once in a while a small burst of electricity comes rippiling through
+the end of the cables. The air here is dense but not filled with a stench, a
+rather unusaul thing for this palace. To both sides there are rooms of
+different caliber. There is a grear stone wall stopping the end of the hall
+just ahead.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4309,9 +4460,11 @@ D3
 S
 #31775
 End of a long hallway~
-You are standing at the end of the hallway. There is a very large stone wall before you covering your way further down the hallway. The stone wall is tthick and rough with different textures all over its surface.
+You are standing at the end of the hallway. There is a very large stone wall
+before you covering your way further down the hallway. The stone wall is
+tthick and rough with different textures all over its surface.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4327,9 +4480,10 @@ D2
 S
 #31776
 Extra small compartment room~
-You are standing in room of very small caliber. It was probabl constructed to hold extra blankets... There are closets all along the walls.
+You are standing in room of very small caliber. It was probabl constructed to
+hold extra blankets... There are closets all along the walls.
 ~
-0 0 0
+0 8 0
 D2
 ~
 ~
@@ -4337,9 +4491,10 @@ D2
 S
 #31777
 Large old room~
-You are in a large room. It was probably used as a sleeping quarter. There is a small bed in the corner which has been chewed away at by a small rodent.
+You are in a large room. It was probably used as a sleeping quarter. There is
+a small bed in the corner which has been chewed away at by a small rodent.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4349,7 +4504,7 @@ S
 Well sized room~
 You are in a well sized room. It was used as a living quarters in the past.
 ~
-0 0 0
+0 8 0
 D2
 ~
 ~
@@ -4357,9 +4512,10 @@ D2
 S
 #31779
 Habitated living quarters~
-You are standing in a living quarters.  It is currently habitated. You can tell because of food on the floor.
+You are standing in a living quarters. It is currently habitated. You can
+tell because of food on the floor.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4369,7 +4525,7 @@ S
 Supply storage~
 You are standing in a small room used to store extra supplies.
 ~
-0 0 0
+0 8 0
 D2
 ~
 ~
@@ -4377,9 +4533,10 @@ D2
 S
 #31781
 Large living quarters~
-You are in a very large room. It was made as a living quaters. There is a large window infront of you.
+You are in a very large room. It was made as a living quaters. There is a
+large window infront of you.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4389,7 +4546,7 @@ S
 Small room~
 You are in a smaller room. It can be used for any pupose.
 ~
-0 0 0
+0 8 0
 D2
 ~
 ~
@@ -4397,9 +4554,10 @@ D2
 S
 #31784
 Large room~
-You are standing in a large room. There is a bed that can hold any species and a large window on the back wall.
+You are standing in a large room. There is a bed that can hold any species
+and a large window on the back wall.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4407,9 +4565,11 @@ D0
 S
 #31788
 Top of staircase~
-You are standing at the top of a staircase. Infront of you there is a long hallway. Along the hallway many prison cells are there because jabba used to use them for keeping people of uninportance.
+You are standing at the top of a staircase. Infront of you there is a long
+hallway. Along the hallway many prison cells are there because jabba used to
+use them for keeping people of uninportance.
 ~
-0 0 0
+0 8 0
 D2
 ~
 ~
@@ -4421,9 +4581,10 @@ D5
 S
 #31789
 Prison hallway~
-You are walking down the hallway. As you walk along you notice that all of the doors have been removed .
+You are walking down the hallway. As you walk along you notice that all of
+the doors have been removed .
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4435,9 +4596,10 @@ D2
 S
 #31790
 Prison hallway~
-You are in the hallway. It ends just up ahead making it a rather short corridor.
+You are in the hallway. It ends just up ahead making it a rather short
+corridor.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4457,9 +4619,10 @@ D3
 S
 #31791
 Prison hallway end~
-You have come to the end of the  hall. A stone wall lays in front of you, preventing you from advancing.
+You have come to the end of the hall. A stone wall lays in front of you,
+preventing you from advancing.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4475,9 +4638,11 @@ D3
 S
 #31792
 Small prison cell~
-You are standing in a prison cell. If you turn back there are metal bars across the wall. All around you the only furniture in this cell is a prison bed.
+You are standing in a prison cell. If you turn back there are metal bars
+across the wall. All around you the only furniture in this cell is a prison
+bed.
 ~
-0 0 0
+0 8 0
 D3
 ~
 ~
@@ -4485,9 +4650,10 @@ D3
 S
 #31793
 Large prison cell~
-You are standing in a large prison cell. This cell was used for larger specimens. It has a toilet and a small bunk in the corner.
+You are standing in a large prison cell. This cell was used for larger
+specimens. It has a toilet and a small bunk in the corner.
 ~
-0 0 0
+0 8 0
 D1
 ~
 ~
@@ -4495,9 +4661,10 @@ D1
 S
 #31794
 Extremmely small cell~
-You are standing in the smallest cell. This cell was used to hold very small specimens of life.
+You are standing in the smallest cell. This cell was used to hold very small
+specimens of life.
 ~
-0 0 0
+0 8 0
 D3
 ~
 ~
@@ -4505,9 +4672,10 @@ D3
 S
 #31795
 Very large prison cell~
-You are standing in a very large prison cell. It scares you to think what was kept in here. There is n awful smell.
+You are standing in a very large prison cell. It scares you to think what was
+kept in here. There is n awful smell.
 ~
-0 0 0
+0 8 0
 D1
 ~
 ~
@@ -4527,9 +4695,11 @@ You get crushed by gate and die(d.t)
 S
 #31798
 Rancor's cage~
-You just slid down the chute into the rancor's former cage. The room is an immense room and has a very foul odour to it. To the north the smaller room lays which the rancor was put when the cage was cleaned.
+You just slid down the chute into the rancor's former cage. The room is an
+immense room and has a very foul odour to it. To the north the smaller room
+lays which the rancor was put when the cage was cleaned.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4543,7 +4713,7 @@ S
 DT~
 EDIT
 ~
-0 0 0
+0 8 0
 D2
 ~
 ~
@@ -4551,9 +4721,10 @@ D2
 S
 #31800
 Hallway to rancor pit~
-You are standing infront of  hallway which leads down into the rancor pit. To the south is the kitchen.to contiue down the hall go east.
+You are standing infront of hallway which leads down into the rancor pit. To
+the south is the kitchen.to contiue down the hall go east.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4569,9 +4740,12 @@ D2
 S
 #31801
 Jabba's palace's kitchen~
-You are standing inside the kitchen that was used to make jabba the hutt's disgusting foods.There is a table in the centre of the room with a cutting board and extra utensils. On the wall there are many shelves and utensils layed everywhere.
+You are standing inside the kitchen that was used to make jabba the hutt's
+disgusting foods.There is a table in the centre of the room with a cutting
+board and extra utensils. On the wall there are many shelves and utensils
+layed everywhere.
 ~
-0 0 0
+0 8 0
 D0
 ~
 ~
@@ -4579,9 +4753,10 @@ D0
 S
 #31802
 Hallway past docking bay~
-You are walking down a hall which passes the docking bay and many living quarters.
+You are walking down a hall which passes the docking bay and many living
+quarters.
 ~
-0 0 0
+0 8 0
 D1
 ~
 ~
@@ -4595,7 +4770,7 @@ S
 Hallway past a room~
 You are standing infront of one of many rooms located on the bottom level.
 ~
-0 0 0
+0 8 0
 D3
 ~
 ~
@@ -4633,7 +4808,10 @@ D5
 S
 #31807
 Desert~
-All around you is sand and shiny dunes piling as high as you can see. As far as you can guess anything could be behind there. The towering sand dunes make you feel scared as you are so small and enclosed by the towering heaps of sand.
+All around you is sand and shiny dunes piling as high as you can see. As far
+as you can guess anything could be behind there. The towering sand dunes make
+you feel scared as you are so small and enclosed by the towering heaps of
+sand.
 ~
 0 0 10
 D1
@@ -4647,7 +4825,9 @@ D3
 S
 #31808
 Deserty path~
-You are walking along the hot sand heated by the twin suns of Tatooine. the ground beaneath you is hardnening gradually as you walk over it or is it just your immagination?
+You are walking along the hot sand heated by the twin suns of Tatooine. the
+ground beaneath you is hardnening gradually as you walk over it or is it just
+your immagination?
 ~
 0 0 10
 D0
@@ -4686,7 +4866,9 @@ D3
 S
 #31810
 Sandy surface~
-You are standing on top of very hard sand, yet mayebe even rock covered with sand. As you look westwards you see the dune sea stop abruptley and plumit downwards. I wonder why.
+You are standing on top of very hard sand, yet mayebe even rock covered with
+sand. As you look westwards you see the dune sea stop abruptley and plumit
+downwards. I wonder why.
 ~
 0 0 10
 D1
@@ -4700,7 +4882,9 @@ D3
 S
 #31811
 Overseeing a small colony.~
-You are standing on the edge of a very steep drop that fals directly into the heart of what looks to be a colony of some sorts. You would not want to fall down this cliff for it is a ways down.
+You are standing on the edge of a very steep drop that fals directly into the
+heart of what looks to be a colony of some sorts. You would not want to fall
+down this cliff for it is a ways down.
 ~
 0 0 10
 D1
@@ -4710,7 +4894,8 @@ D1
 S
 #31812
 Flat area~
-You are walking on one of the only things on this planet. Sand. It is nice in soft but some patches of hardened sand can bee seen all around.
+You are walking on one of the only things on this planet. Sand. It is nice in
+soft but some patches of hardened sand can bee seen all around.
 ~
 0 0 10
 D1
@@ -4724,7 +4909,8 @@ D3
 S
 #31813
 Desert~
-You look about, look from the direction you came, nothing, nothing at all but sand. You wonder how much of this stuff could there possibly be?
+You look about, look from the direction you came, nothing, nothing at all but
+sand. You wonder how much of this stuff could there possibly be?
 ~
 0 0 10
 D1
@@ -4798,7 +4984,7 @@ drastically and terefore makes this place a good one  o stay in for
 long periods of time especially when both suns are up pelting ray  of
 heat onto you. 
 ~
-0 1024 5
+0 1032 5
 D3
 ~
 ~
@@ -5054,7 +5240,10 @@ D4
 S
 #31832
 Entrance~
-You are standing in a simple room. Designed and built with ease this room poseed no problem to the peple that built it. It is extreemly dark in here and bot much is visibly to the plain eye. The ground is cold and stiff and makes your feet feel cold as you walk over it.
+You are standing in a simple room. Designed and built with ease this room
+poseed no problem to the peple that built it. It is extreemly dark in here and
+bot much is visibly to the plain eye. The ground is cold and stiff and makes
+your feet feel cold as you walk over it.
 ~
 0 8 0
 D2
@@ -5068,7 +5257,9 @@ D3
 S
 #31833
 Intersection~
-You are at an intersection. You may go either east or west and explore this vast place. In both directions the small corridors lighten up further down to create
+You are at an intersection. You may go either east or west and explore this
+vast place. In both directions the small corridors lighten up further down to
+create
 ~
 0 8 0
 D0
@@ -5086,7 +5277,10 @@ D3
 S
 #31834
 Hallway~
-You are standing in a think gloomy hallway. Towards the south you can gear the sounds of discussing and occasional laughing. The ground is cool and soft for it is not dried by the everydays syns if Tatooine. The hallway is a Gloomy place and makes you think twice before you do anything.
+You are standing in a think gloomy hallway. Towards the south you can gear
+the sounds of discussing and occasional laughing. The ground is cool and soft
+for it is not dried by the everydays syns if Tatooine. The hallway is a Gloomy
+place and makes you think twice before you do anything.
 ~
 0 8 0
 D1
@@ -5100,7 +5294,9 @@ D2
 S
 #31835
 End of Hallway~
-You reach the end of the small and tight gloomy hallway and see the a few Guardians discussing near a heavily guarder door leading into a large room with someone or something inportant inside of it.
+You reach the end of the small and tight gloomy hallway and see the a few
+Guardians discussing near a heavily guarder door leading into a large room
+with someone or something inportant inside of it.
 ~
 0 8 0
 D0
@@ -5160,7 +5356,9 @@ D3
 S
 #31839
 Hallway~
-You are standing in a hallway leading to a stone wall. At the end of the hall the hallway itself curves toward the south leaving only two way to go, south and back from where you came.
+You are standing in a hallway leading to a stone wall. At the end of the hall
+the hallway itself curves toward the south leaving only two way to go, south
+and back from where you came.
 ~
 0 8 0
 D3
@@ -5170,7 +5368,10 @@ D3
 S
 #31840
 Neighberhood junk pile~
-You are standing on a large pile of junk. People throw things they dont need here just to get rid of it. But for some people this place is where they can get everything they need to start out. Everything from scrap metal to blasters are here waiting for anyone to pick them up.
+You are standing on a large pile of junk. People throw things they dont need
+here just to get rid of it. But for some people this place is where they can
+get everything they need to start out. Everything from scrap metal to blasters
+are here waiting for anyone to pick them up.
 ~
 0 0 10
 D2
@@ -5180,7 +5381,11 @@ D2
 S
 #31841
 Entrance to Dockingbay 94.~
-You are standing infront of the infamous Dockingbay 94. From here Han solo And the milenium falcon escaped with there newly aquired passengers for a trip to Alderaan. There is a large entrance into the Docking bay. All the ground beneath you is made of stone and sand. The air is warm yet lighter here for it is sheltered by the Dockingbay.
+You are standing infront of the infamous Dockingbay 94. From here Han solo
+And the milenium falcon escaped with there newly aquired passengers for a trip
+to Alderaan. There is a large entrance into the Docking bay. All the ground
+beneath you is made of stone and sand. The air is warm yet lighter here for it
+is sheltered by the Dockingbay.
 ~
 0 0 1
 D1
@@ -5198,7 +5403,12 @@ D3
 S
 #31842
 Inside the entrance to Dockingbay 92~
-You are standing infront of a large sliding door. When opened you can enter the dockingbay with ease and embark on a ship to go to other places in the galaxy. The door is made of metal and has blaster shcoring all over it from when the imperials chased Han Solo and Chewbacca in a race to capture the droid R2-D2 and return him to Darth Vader. The ground is hard and covered with sand as most of this planet is and the air is rather refreshing.
+You are standing infront of a large sliding door. When opened you can enter
+the dockingbay with ease and embark on a ship to go to other places in the
+galaxy. The door is made of metal and has blaster shcoring all over it from
+when the imperials chased Han Solo and Chewbacca in a race to capture the
+droid R2-D2 and return him to Darth Vader. The ground is hard and covered with
+sand as most of this planet is and the air is rather refreshing.
 ~
 0 0 1
 D0
@@ -5212,7 +5422,12 @@ D2
 S
 #31843
 Inside Dockingbay 92~
-You are standing inside alarge room that can contain a few smaller sized ships or one large ship like the Millenium Falcon. The ground here is covered with sand, but there are patches where you can see the stone floor beneath. The air in here is cool and refreshing and gives you a warm sensation. There are ships comming and leaving here continuasly and make it so that the air smells of fumes and exaust.
+You are standing inside alarge room that can contain a few smaller sized
+ships or one large ship like the Millenium Falcon. The ground here is covered
+with sand, but there are patches where you can see the stone floor beneath.
+The air in here is cool and refreshing and gives you a warm sensation. There
+are ships comming and leaving here continuasly and make it so that the air
+smells of fumes and exaust.
 ~
 0 8 1
 D0
@@ -5263,7 +5478,11 @@ D3
 S
 #31850
 Back of the Shop~
-There are some small crates scattered along the floor. Most of them are empty but some seem to be filled with cloth and useless items. This room is very dirty and has a rather disturbing smell to it. The ground is smooth and cold being made of stone. The air is fresher in here than most parts of this city and it makes you want to stay here.
+There are some small crates scattered along the floor. Most of them are empty
+but some seem to be filled with cloth and useless items. This room is very
+dirty and has a rather disturbing smell to it. The ground is smooth and cold
+being made of stone. The air is fresher in here than most parts of this city
+and it makes you want to stay here.
 ~
 0 8 0
 D3
@@ -5273,7 +5492,10 @@ D3
 S
 #31851
 Infront of A large keeping area~
-You are standing infront of some large fences. Inside these fences are kept many Rontos the animal that Jawa's ride to go to different areas. There is a rather tall jawa at the gate entry with an Ionization gun ready to shoot any theifs or trespassers.
+You are standing infront of some large fences. Inside these fences are kept
+many Rontos the animal that Jawa's ride to go to different areas. There is a
+rather tall jawa at the gate entry with an Ionization gun ready to shoot any
+theifs or trespassers.
 ~
 0 0 5
 D1
@@ -5287,7 +5509,12 @@ D3
 S
 #31852
 Ronto keeping area.~
-You are standing inside a large pen sourrounded by gates that are filled with Rontos. These Rontos have been trained to a certain degree so iit is not likely that they will try to escape. The ground is rough and is filled with cracks for the weight of these beasts is quite surprising. The sun shines down all day long and makes it warm here but the Rontos have adjusted to the temperature.
+You are standing inside a large pen sourrounded by gates that are filled with
+Rontos. These Rontos have been trained to a certain degree so iit is not
+likely that they will try to escape. The ground is rough and is filled with
+cracks for the weight of these beasts is quite surprising. The sun shines down
+all day long and makes it warm here but the Rontos have adjusted to the
+temperature.
 ~
 0 0 5
 D1
@@ -5297,7 +5524,9 @@ D1
 S
 #31853
 Entrance to the cantina.~
-You are standing in the entrance to the well known Cantina. here some of the fithiest and rechest scum hang around. Watch your step. Mounted on the wall is a droid dector. For here in this cantina they do not serve their kind.
+You are standing in the entrance to the well known Cantina. here some of the
+fithiest and rechest scum hang around. Watch your step. Mounted on the wall is
+a droid dector. For here in this cantina they do not serve their kind.
 ~
 0 12 0
 D0
@@ -5311,7 +5540,10 @@ D2
 S
 #31854
 Interior of the cantina~
-You are facing the bar slowly. With small booths all around filled with people talking. Wuher slowly poors drinks for his costomers being carefull not to get hurt. The floor is poorly covered and the walls filled with blaster marks and od such things from fights and encounters.
+You are facing the bar slowly. With small booths all around filled with
+people talking. Wuher slowly poors drinks for his costomers being carefull not
+to get hurt. The floor is poorly covered and the walls filled with blaster
+marks and od such things from fights and encounters.
 ~
 0 8 0
 D0
@@ -5329,7 +5561,10 @@ D3
 S
 #31855
 Large open way~
-Most of this section is rather empty for it leads the entrance into the Cantina. For the othert part there is a few tables with some stools and chairs but for the most part they are empty as for people seem to have adopted a liking towards the booths.
+Most of this section is rather empty for it leads the entrance into the
+Cantina. For the othert part there is a few tables with some stools and chairs
+but for the most part they are empty as for people seem to have adopted a
+liking towards the booths.
 ~
 0 8 0
 D1
@@ -5369,7 +5604,11 @@ D3
 S
 #31857
 A small booth~
-You are standing inside a small booth. here a table is mounted in the middle with all sorts of seats and chairs aligned around. The table is beat up with holes all over it, vandilised over and over. This booth has less lighting in it for the glowpannel has shorted out and makes it relaxing with the change in temperature from the outdoors.
+You are standing inside a small booth. here a table is mounted in the middle
+with all sorts of seats and chairs aligned around. The table is beat up with
+holes all over it, vandilised over and over. This booth has less lighting in
+it for the glowpannel has shorted out and makes it relaxing with the change in
+temperature from the outdoors.
 ~
 0 8 0
 D1
@@ -5379,7 +5618,11 @@ D1
 S
 #31858
 A large Double booth~
-There are two small booths attached together here making one large booth. This booth is a very well known booth for here Han Solo dried greedo the bounty hunter. There is a large table in the middle of the booth. The seats are dirty and the table even more. There is a hokah on the table but it seems to be stuck to it.
+There are two small booths attached together here making one large booth.
+This booth is a very well known booth for here Han Solo dried greedo the
+bounty hunter. There is a large table in the middle of the booth. The seats
+are dirty and the table even more. There is a hokah on the table but it seems
+to be stuck to it.
 ~
 0 8 0
 D3
@@ -5389,7 +5632,10 @@ D3
 S
 #31859
 A section of the Cantina.~
-This rom is located on the far side of the Cantina located beside one of the small corner booths towards the west. The floor is dirty, filled with blood in some places from a recent fight. The air is full of smoke as people walk around you, some smoking hookas.
+This rom is located on the far side of the Cantina located beside one of the
+small corner booths towards the west. The floor is dirty, filled with blood in
+some places from a recent fight. The air is full of smoke as people walk
+around you, some smoking hookas.
 ~
 0 8 0
 D0
@@ -5417,7 +5663,10 @@ D3
 S
 #31861
 Section of the Cantina.~
-You are standing in an open area filled with tables. To the east the bar stands. Chairs all around filled with different people and different species. The chairs themselves are rather dirty and so most people stand. The smeel here is not too bad but not a beautifull one neither.
+You are standing in an open area filled with tables. To the east the bar
+stands. Chairs all around filled with different people and different species.
+The chairs themselves are rather dirty and so most people stand. The smeel
+here is not too bad but not a beautifull one neither.
 ~
 0 8 0
 D0
@@ -5435,7 +5684,11 @@ D3
 S
 #31862
 A corner booth~
-You are standing in a rather large both in the furthest corner of the Cantina. The table here is ver used yet in good shape compred t the others. The chairs on the other hand are worn down to the nub. The air here is less filthy for many people whom do not want to be bothered by the smoke sit here.
+You are standing in a rather large both in the furthest corner of the
+Cantina. The table here is ver used yet in good shape compred t the others.
+The chairs on the other hand are worn down to the nub. The air here is less
+filthy for many people whom do not want to be bothered by the smoke sit
+here.
 ~
 0 8 0
 D1
@@ -5445,7 +5698,9 @@ D1
 S
 #31863
 Inside the bar~
-You are standing infront of Wuher the man who serves drinks to people here. The beverage machine is very large and complex but seems to be effecient in the way it works. AS he sees you he gets angry..mayebe you should run.
+You are standing infront of Wuher the man who serves drinks to people here.
+The beverage machine is very large and complex but seems to be effecient in
+the way it works. AS he sees you he gets angry..mayebe you should run.
 ~
 0 8 0
 D3
@@ -5486,7 +5741,7 @@ Womp Rat mess. There is a particular smell in here from the mess but
 nothing to be concerned about if you do not stay in this cave for an
 extended period of time.
 ~
-0 0 1
+0 8 1
 D1
 ~
 ~

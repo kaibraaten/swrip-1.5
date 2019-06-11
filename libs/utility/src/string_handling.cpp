@@ -711,7 +711,7 @@ std::string WordWrap(const std::string &stl_txt, unsigned short wrap)
             {
                 if (ln > 0 && line[ln - 1] == '.')
                 {
-                    strcat(line, "  ");
+                    strcat(line, " ");
                 }
                 else
                 {
