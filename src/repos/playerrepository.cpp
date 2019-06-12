@@ -1,4 +1,5 @@
 #include <cassert>
+#include <filesystem>
 #include "playerrepository.hpp"
 #include "character.hpp"
 #include "script.hpp"
@@ -14,6 +15,8 @@
 #include "board.hpp"
 #include "skill.hpp"
 #include "area.hpp"
+
+namespace fs = std::filesystem;
 
 PlayerRepository *PlayerCharacters = nullptr;
 
@@ -842,6 +845,7 @@ void InMemoryPlayerRepository::Save(const Character *pc) const
 
     pc->PCData->SaveTime = current_time;
 
+    fs::rename(GetPlayerFilename(pc).c_str(), GetPlayerBackupFilename(pc->Name).c_str());
     LuaSaveDataFile(GetPlayerFilename(pc),
         &InMemoryPlayerRepository::PushPlayer,
         "character", pc);

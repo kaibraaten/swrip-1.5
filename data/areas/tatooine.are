@@ -11,7 +11,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 30321878
+#ECONOMY 0 30171878
 
 #MOBILES
 #31500
@@ -635,6 +635,36 @@ he's been in hiding, seeking to pass on what little he learned.
 0 0 0 0 131075 1 0
 20 20 0 0 0 0 48 3
 0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+if isjedi($n)
+  if level($n) >= 25
+    say There isn't much more I can teach you, $n. Find Obi-Wan Kenobi.
+    say I hear he's hiding somewhere out in the desert. I never managed to find him myself, though.
+  else
+    if rand(25)
+      say Did you know I sell practice lightsabers? I make them myself, you know.
+      emote beams proudly
+    else
+      say Why did you come here? To learn?
+      say Maybe I can teach you some basics, even if I never completed my own training.
+    endif
+  endif
+else
+  mpechoat $n $I looks you over disapprovingly.
+endif
+~
+> rand_prog 3~
+if rand(33)
+  hiccup
+else
+  if rand(33)
+    say Where did I put that bottle?
+  else
+    mutter
+  endif
+endif
+~
+|
 #31999
 lastmob~
 a newly created lastmob~
@@ -864,7 +894,7 @@ A droid detector is mounted on the wall here.~
 Drink Machine~
 a large drink machine~
 A large and complex drink machine sits here. It is used by Wuher
-to dispense drinks.~
+to dispense drinks.~
 ~
 12 1 0
 0 1 6 11
@@ -901,6 +931,32 @@ Some grilled womp rat is here ready to be snatched up.~
 19 0 1
 4 0 0 0
 1 16 1
+#31525
+hologram projector~
+a hologram projector~
+A hologram projector is here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+E
+hologram projector~
+This projector creates an illusory wall to the north to keep
+this passage hidden.
+~
+#31526
+worn couch~
+a worn couch~
+A worn couch is here.~
+~
+12 0 0
+3 0 3 0
+1 0 0
+E
+worn couch~
+This couch looks very worn out. The seats look like they're made
+out of bantha hide, but you can't be sure.
+~
 #31999
 lastobject~
 a newly created lastobject~
@@ -6148,6 +6204,9 @@ D6
 S
 #31899
 A Hidden Passage In The Sewers~
+This passage looks somewhat cleaner than the reset of the sewer, suggesting
+that someone maintains it. There's no sewage flowing here, rather the ground
+is quite dry.
 ~
 0 8 1
 D0
@@ -6161,6 +6220,8 @@ D2
 S
 #31900
 Common Room~
+This circular area seems to be a simple common room, complete with cheap
+furniture and some faded posters on the walls.
 ~
 0 1032 1
 D0
@@ -6217,6 +6278,10 @@ D3
 S
 #31904
 Mos Eisley Sewers~
+There is a river of sewage flowing at a slow, steady pace. There's a rusty
+catwalk about a meter above it, running along one wall. Old grime is covering
+the walls. There's a nasty smell in the air, making it uncomfortable to
+breath, even for a Gamorrean.
 ~
 0 12 0
 D2
@@ -6369,11 +6434,13 @@ E 1 55 1 16
 M 1 31900 1 31905
 G 1 10323 1
 G 1 10324 1
+O 1 31525 1 31899
+O 1 31526 1 31900
 S
 
 
 #SHOPS
- 31501    1 15  9 13  0   110   0         0 23    ; A large jawa sells water here
+ 31501    1 15  9 13  0   110   0         0 23    ; a large Jawa
  31519   17 15  0  0  0   105 100         1 23    ; Wuher
  31531    0  0  0  0  0   120   0         1 23    ; Wioslea
  31532    0  0  0  0  0   110 100         1 23    ; Gep

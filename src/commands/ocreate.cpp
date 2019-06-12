@@ -4,6 +4,35 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 
+static vnum_t GetNewObjectVnum(const Area *area, const std::string &arg)
+{
+    vnum_t vnum = INVALID_VNUM;
+
+    if(IsNumber(arg))
+    {
+        vnum = ToLong(arg);
+    }
+    else if(!StrCmp(arg, "auto"))
+    {
+        for(vnum_t iter = area->VnumRanges.Object.First;
+            iter <= area->VnumRanges.Object.Last;
+            ++iter)
+        {
+            if(GetProtoObject(iter) == nullptr)
+            {
+                vnum = iter;
+                break;
+            }
+        }
+    }
+    else
+    {
+        vnum = INVALID_VNUM;
+    }
+
+    return vnum;
+}
+
 void do_ocreate( Character *ch, std::string argument )
 {
   std::string arg;
@@ -19,13 +48,21 @@ void do_ocreate( Character *ch, std::string argument )
       return;
     }
 
+  if(ch->PCData->Build.Area == nullptr)
+  {
+      ch->Echo("You must AASSIGN an area first.\r\n");
+      return;
+  }
+
   argument = OneArgument( argument, arg );
 
-  vnum = IsNumber( arg ) ? ToLong( arg ) : INVALID_VNUM;
+  vnum = GetNewObjectVnum(ch->PCData->Build.Area, arg);
 
   if ( vnum == INVALID_VNUM || argument.empty() )
     {
       ch->Echo("Usage: ocreate <vnum> [copy vnum] <item name>\r\n");
+      ch->Echo("\r\n");
+      ch->Echo("Tip: Use \"auto\" for vnum to use the first available vnum in your assigned area.\r\n");
       return;
     }
 
