@@ -2643,6 +2643,7 @@ bool ExtractShip(std::shared_ptr<Ship> ship)
     if (room != nullptr)
     {
         room->Remove(ship);
+        ship->InRoom = nullptr;
     }
 
     return true;
@@ -2879,6 +2880,7 @@ bool ShipToRoom(std::shared_ptr<Ship> ship, vnum_t vnum)
     }
 
     shipto->Add(ship);
+    ship->InRoom = shipto;
     return true;
 }
 

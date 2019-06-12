@@ -361,6 +361,7 @@ bool ExtractShuttle(std::shared_ptr<Shuttle> shuttle)
     if ((room = shuttle->InRoom) != NULL)
     {
         room->Remove(shuttle);
+        shuttle->InRoom = nullptr;
     }
 
     return true;
@@ -377,6 +378,7 @@ bool InsertShuttle(std::shared_ptr<Shuttle> shuttle, Room *room)
     }
 
     room->Add(shuttle);
+    shuttle->InRoom = room;
     return true;
 }
 

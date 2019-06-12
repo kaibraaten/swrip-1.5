@@ -552,6 +552,7 @@ static void ReadyShipAfterLoad( std::shared_ptr<Ship> ship )
             && ship->Class != CAPITAL_SHIP && ship->Class != SHIP_PLATFORM )
     {
       room->Add(ship);
+      ship->InRoom = room;
       ship->Location = ship->LastDock;
     }
 

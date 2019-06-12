@@ -740,6 +740,7 @@ void CharacterFromRoom( Character *ch )
     }
 
   ch->InRoom->Remove(ch);
+  ch->InRoom = nullptr;
 
   if ( !IsNpc(ch)
        && GetTimer( ch, TIMER_SHOVEDRAG ) > 0 )
@@ -756,6 +757,7 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
   Object *obj = nullptr;
 
   pRoomIndex->Add(ch);
+  ch->InRoom = pRoomIndex;
 
   if ( !IsNpc(ch) )
     if ( ++ch->InRoom->Area->NumberOfPlayers > ch->InRoom->Area->MaxPlayers )
@@ -1033,6 +1035,7 @@ Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
     }
 
   pRoomIndex->Add(obj);
+  obj->InRoom = pRoomIndex;
   obj->CarriedBy                               = NULL;
   obj->InObject                                   = NULL;
 
@@ -2564,12 +2567,14 @@ void SplitGroupedObject( Object *obj, int num )
   if ( obj->CarriedBy )
     {
       obj->CarriedBy->Add(rest);
+      rest->CarriedBy = obj->CarriedBy;
       rest->InRoom                     = NULL;
       rest->InObject                      = NULL;
     }
   else if ( obj->InRoom )
     {
       obj->InRoom->Add(rest);
+      rest->InRoom = obj->InRoom;
       rest->CarriedBy                = NULL;
       rest->InObject                    = NULL;
     }

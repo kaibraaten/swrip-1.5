@@ -30,13 +30,11 @@ Room::~Room()
 void Room::Add(std::shared_ptr<Ship> ship)
 {
   pImpl->Ships.push_back(ship);
-  ship->InRoom = this;
 }
 
 void Room::Remove(std::shared_ptr<Ship> ship)
 {
   pImpl->Ships.remove(ship);
-  ship->InRoom = nullptr;
 }
 
 const std::list<std::shared_ptr<Ship>> &Room::Ships() const
@@ -47,13 +45,11 @@ const std::list<std::shared_ptr<Ship>> &Room::Ships() const
 void Room::Add(std::shared_ptr<Shuttle> shuttle)
 {
   pImpl->Shuttles.push_back(shuttle);
-  shuttle->InRoom = this;
 }
 
 void Room::Remove(std::shared_ptr<Shuttle> shuttle)
 {
   pImpl->Shuttles.remove(shuttle);
-  shuttle->InRoom = nullptr;
 }
 
 const std::list<std::shared_ptr<Shuttle>> &Room::Shuttles() const
@@ -90,13 +86,11 @@ const std::list<Exit*> &Room::Exits() const
 void Room::Add(Character *character)
 {
   pImpl->Characters.push_back(character);
-  character->InRoom = this;
 }
 
 void Room::Remove(Character *character)
 {
   pImpl->Characters.remove(character);
-  character->InRoom = nullptr;
 }
 
 const std::list<Character*> &Room::Characters() const
@@ -107,13 +101,11 @@ const std::list<Character*> &Room::Characters() const
 void Room::Add(Object *object)
 {
   pImpl->Objects.push_back(object);
-  object->InRoom = this;
 }
 
 void Room::Remove(Object *object)
 {
   pImpl->Objects.remove(object);
-  object->InRoom = nullptr;
 }
 
 const std::list<Object*> &Room::Objects() const

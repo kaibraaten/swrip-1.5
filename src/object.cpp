@@ -253,13 +253,11 @@ void Object::Remove(std::shared_ptr<Affect> affect)
 void Object::Add(Object *object)
 {
   pImpl->Objects.push_back(object);
-  object->InObject = this;
 }
 
 void Object::Remove(Object *object)
 {
   pImpl->Objects.remove(object);
-  object->InObject = nullptr;
 }
 
 const std::list<Object*> &Object::Objects() const

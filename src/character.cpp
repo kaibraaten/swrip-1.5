@@ -182,13 +182,11 @@ const std::list<Object*> &Character::Objects() const
 void Character::Add(Object *object)
 {
     pImpl->Objects.push_back(object);
-    object->CarriedBy = this;
 }
 
 void Character::Remove(Object *object)
 {
     pImpl->Objects.remove(object);
-    object->CarriedBy = nullptr;
 }
 
 const std::list<std::shared_ptr<Timer>> &Character::Timers() const
