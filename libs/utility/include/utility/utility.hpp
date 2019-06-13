@@ -23,10 +23,10 @@
 /*
  * String and memory management parameters.
  */
-#define MAX_KEY_HASH             2048
-#define MAX_STRING_LENGTH        4096  /* buf */
-#define MAX_INPUT_LENGTH         1024  /* arg */
-#define MAX_INBUF_SIZE           1024
+constexpr auto MAX_KEY_HASH = 2048;
+constexpr auto MAX_STRING_LENGTH = 4096;  /* buf */
+constexpr auto MAX_INPUT_LENGTH = 1024;  /* arg */
+constexpr auto MAX_INBUF_SIZE = 1024;
 
 #if     !defined(BERR)
 #define BERR     255
