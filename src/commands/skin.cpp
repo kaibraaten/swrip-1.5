@@ -54,7 +54,7 @@ void do_skin( Character *ch, std::string argument)
 
   if ( GetProtoObject( OBJ_VNUM_SKIN ) == NULL )
     {
-      Log->Bug( "Vnum %d (OBJ_VNUM_SKIN) not found for do_skin!", OBJ_VNUM_SKIN);
+      Log->Bug( "Vnum %ld (OBJ_VNUM_SKIN) not found for do_skin!", OBJ_VNUM_SKIN);
       return;
     }
 

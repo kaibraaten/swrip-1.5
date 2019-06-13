@@ -59,7 +59,7 @@ static Reset *FindObjectReset(const Character *ch, const Area *pArea,
     const Room *pRoom, const std::string &name);
 static Reset *FindMobileReset(const Character *ch, const Area *pArea,
     const Room *pRoom, const std::string &name);
-static int GenerateItemLevel(const Area *pArea, const ProtoObject *pObjIndex);
+static int GenerateItemLevel(const Area *pArea, std::shared_ptr<ProtoObject> pObjIndex);
 
 static Reset *FindReset(const Area *pArea, const Room *pRoom, int numb)
 {
