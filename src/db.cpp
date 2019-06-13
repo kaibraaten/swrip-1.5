@@ -282,7 +282,7 @@ short gsn_TopSN = 0;
  * Locals.
  */
 ProtoMobile *MobIndexHash[MAX_KEY_HASH];
-ProtoObject *ObjectIndexHash[MAX_KEY_HASH];
+std::shared_ptr<ProtoObject> ObjectIndexHash[MAX_KEY_HASH];
 Room *RoomIndexHash[MAX_KEY_HASH];
 
 int top_affect = 0;
@@ -935,14 +935,14 @@ static void SortExits(Room *room)
     /*
      * Create an instance of an object.
      */
-    Object *AllocateObject(ProtoObject *pObjIndex, int level)
+    Object *AllocateObject(std::shared_ptr<ProtoObject> pObjIndex, int level)
     {
         assert(pObjIndex != nullptr);
         Object *obj = new Object(pObjIndex, level);
         return obj;
     }
 
-    Object *CreateObject(ProtoObject *proto, int level)
+    Object *CreateObject(std::shared_ptr<ProtoObject> proto, int level)
     {
         Object *obj = AllocateObject(proto, level);
         Objects->Add(obj);
@@ -1001,11 +1001,11 @@ static void SortExits(Room *room)
      * Translates obj virtual number to its obj index struct.
      * Hash table lookup.
      */
-    ProtoObject *GetProtoObject(vnum_t vnum)
+    std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum)
     {
         assert(vnum > 0);
 
-        for (ProtoObject *pObjIndex = ObjectIndexHash[vnum % MAX_KEY_HASH];
+        for (std::shared_ptr<ProtoObject> pObjIndex = ObjectIndexHash[vnum % MAX_KEY_HASH];
             pObjIndex; pObjIndex = pObjIndex->Next)
         {
             if (pObjIndex->Vnum == vnum)
@@ -1019,7 +1019,7 @@ static void SortExits(Room *room)
             Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
         }
 
-        return NULL;
+        return nullptr;
     }
 
     /*
@@ -1175,7 +1175,7 @@ static void SortExits(Room *room)
         int ilevel = 65535;
         char buf[MAX_STRING_LENGTH] = { '\0' };
 
-        for(const auto &wiz : Wizards)
+        for (const auto &wiz : Wizards)
         {
             if (wiz.Level > LEVEL_AVATAR)
             {
@@ -1278,7 +1278,7 @@ static void SortExits(Room *room)
     }
 
     /* See comment on DeleteRoom. */
-    bool DeleteObject(ProtoObject *obj)
+    bool DeleteObject(std::shared_ptr<ProtoObject> obj)
     {
         return true;
     }
@@ -1313,9 +1313,9 @@ static void SortExits(Room *room)
      * Create a new INDEX object (for online building)              -Thoric
      * Option to clone an existing index object.
      */
-    ProtoObject *MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name)
+    std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name)
     {
-        ProtoObject *cObjIndex = nullptr;
+        std::shared_ptr<ProtoObject> cObjIndex;
         char buf[MAX_STRING_LENGTH];
 
         if (cvnum > 0)
@@ -1323,7 +1323,7 @@ static void SortExits(Room *room)
             cObjIndex = GetProtoObject(cvnum);
         }
 
-        ProtoObject *pObjIndex = new ProtoObject(vnum);
+        std::shared_ptr<ProtoObject> pObjIndex = std::make_shared<ProtoObject>(vnum);
 
         pObjIndex->Name = name;
 

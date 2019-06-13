@@ -5,114 +5,119 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 
-void do_oinvoke( Character *ch, std::string argument )
+void do_oinvoke(Character *ch, std::string argument)
 {
-  std::string arg1;
-  std::string arg2;
-  ProtoObject *pObjIndex = NULL;
-  Object *obj = NULL;
-  vnum_t vnum = INVALID_VNUM;
-  int level = 0;
+    std::string arg1;
+    std::string arg2;
+    Object *obj = NULL;
+    vnum_t vnum = INVALID_VNUM;
+    int level = 0;
 
-  argument = OneArgument( argument, arg1 );
-  argument = OneArgument( argument, arg2 );
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
 
-  if ( arg1.empty() )
+    if (arg1.empty())
     {
-      ch->Echo("Syntax: oinvoke <vnum> <level>.\r\n");
-      return;
+        ch->Echo("Syntax: oinvoke <vnum> <level>.\r\n");
+        return;
     }
 
-  if ( arg2.empty() )
+    if (arg2.empty())
     {
-      level = GetTrustLevel( ch );
+        level = GetTrustLevel(ch);
     }
-  else
+    else
     {
-      if ( !IsNumber( arg2 ) )
+        if (!IsNumber(arg2))
         {
-          ch->Echo("Syntax: oinvoke <vnum> <level>.\r\n");
-          return;
+            ch->Echo("Syntax: oinvoke <vnum> <level>.\r\n");
+            return;
         }
 
-      level = ToLong( arg2 );
+        level = ToLong(arg2);
 
-      if ( level < 0 || level > GetTrustLevel( ch ) )
-	{
-          ch->Echo("Limited to your trust level.\r\n");
-          return;
+        if (level < 0 || level > GetTrustLevel(ch))
+        {
+            ch->Echo("Limited to your trust level.\r\n");
+            return;
         }
     }
 
-  if ( !IsNumber( arg1 ) )
+    if (!IsNumber(arg1))
     {
-      std::string arg;
-      int  count = NumberArgument( arg1, arg );
+        std::string arg;
+        int  count = NumberArgument(arg1, arg);
 
-      vnum = -1;
+        vnum = -1;
 
-      for ( int hash = 0, cnt = 0; hash < MAX_KEY_HASH; hash++ )
-        for ( pObjIndex = ObjectIndexHash[hash];
-              pObjIndex;
-              pObjIndex = pObjIndex->Next )
-          if ( NiftyIsName( arg, pObjIndex->Name )
-               &&   ++cnt == count )
+        for (int hash = 0, cnt = 0; hash < MAX_KEY_HASH; hash++)
+        {
+            for (std::shared_ptr<ProtoObject> pObjIndex = ObjectIndexHash[hash];
+                pObjIndex;
+                pObjIndex = pObjIndex->Next)
             {
-              vnum = pObjIndex->Vnum;
-              break;
+                if (NiftyIsName(arg, pObjIndex->Name)
+                    && ++cnt == count)
+                {
+                    vnum = pObjIndex->Vnum;
+                    break;
+                }
             }
-
-      if ( vnum == -1 )
-        {
-          ch->Echo("No such object exists.\r\n");
-          return;
-        }
-    }
-  else
-    vnum = ToLong( arg1 );
-
-  if ( GetTrustLevel(ch) < LEVEL_CREATOR )
-    {
-      Area *pArea = nullptr;
-
-      if ( IsNpc(ch) )
-        {
-          ch->Echo("Huh?\r\n");
-          return;
         }
 
-      if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
+        if (vnum == -1)
         {
-          ch->Echo("You must have an assigned area to invoke this object.\r\n");
-	  return;
-        }
-
-      if ( vnum < pArea->VnumRanges.Object.First
-           &&   vnum > pArea->VnumRanges.Object.Last )
-        {
-          ch->Echo("That number is not in your allocated range.\r\n");
-          return;
+            ch->Echo("No such object exists.\r\n");
+            return;
         }
     }
+    else
+        vnum = ToLong(arg1);
 
-  if ( ( pObjIndex = GetProtoObject( vnum ) ) == NULL )
+    if (GetTrustLevel(ch) < LEVEL_CREATOR)
     {
-      ch->Echo("No object has that vnum.\r\n");
-      return;
+        Area *pArea = nullptr;
+
+        if (IsNpc(ch))
+        {
+            ch->Echo("Huh?\r\n");
+            return;
+        }
+
+        if (!ch->PCData || !(pArea = ch->PCData->Build.Area))
+        {
+            ch->Echo("You must have an assigned area to invoke this object.\r\n");
+            return;
+        }
+
+        if (vnum < pArea->VnumRanges.Object.First
+            &&   vnum > pArea->VnumRanges.Object.Last)
+        {
+            ch->Echo("That number is not in your allocated range.\r\n");
+            return;
+        }
     }
 
-  obj = CreateObject( pObjIndex, level );
+    std::shared_ptr<ProtoObject> pObjIndex = GetProtoObject(vnum);
 
-  if ( IsBitSet( obj->WearFlags, ITEM_TAKE ) )
+    if (pObjIndex == nullptr)
     {
-      obj = ObjectToCharacter( obj, ch );
-    }
-  else
-    {
-      obj = ObjectToRoom( obj, ch->InRoom );
-      Act( AT_IMMORT, "$n has created $p!", ch, obj, NULL, TO_ROOM );
+        ch->Echo("No object has that vnum.\r\n");
+        return;
     }
 
-  ch->Echo("Ok.\r\n");
+    obj = CreateObject(pObjIndex, level);
+
+    if (IsBitSet(obj->WearFlags, ITEM_TAKE))
+    {
+        obj = ObjectToCharacter(obj, ch);
+    }
+    else
+    {
+        obj = ObjectToRoom(obj, ch->InRoom);
+        Act(AT_IMMORT, "$n has created $p!", ch, obj, NULL, TO_ROOM);
+    }
+
+    ch->Echo("Ok.\r\n");
 }
 

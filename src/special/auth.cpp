@@ -4,38 +4,38 @@
 #include "room.hpp"
 #include "object.hpp"
 
-bool spec_auth( Character *ch )
+bool spec_auth(Character *ch)
 {
-  for(Character *victim : ch->InRoom->Characters())
+    for (Character *victim : ch->InRoom->Characters())
     {
-      ProtoObject *pObjIndex = GetProtoObject( OBJ_VNUM_SCHOOL_DIPLOMA );
-      
-      if ( !IsNpc(victim) && pObjIndex != nullptr )
+        std::shared_ptr<ProtoObject> pObjIndex = GetProtoObject(OBJ_VNUM_SCHOOL_DIPLOMA);
+
+        if (!IsNpc(victim) && pObjIndex != nullptr)
         {
-          if ( !HasDiploma(victim) )
+            if (!HasDiploma(victim))
             {
-              Object *obj = CreateObject( pObjIndex, 1 );
-              obj = ObjectToCharacter( obj, victim );
-              victim->Echo("&cThe schoolmaster gives you a diploma, and shakes your hand.\r\n&w");
+                Object *obj = CreateObject(pObjIndex, 1);
+                obj = ObjectToCharacter(obj, victim);
+                victim->Echo("&cThe schoolmaster gives you a diploma, and shakes your hand.\r\n&w");
             }
         }
 
-      if ( IsNpc(victim)
-           || !victim->PCData->Flags.test( Flag::PCData::Unauthed )
-           || victim->PCData->AuthState == 2 )
+        if (IsNpc(victim)
+            || !victim->PCData->Flags.test(Flag::PCData::Unauthed)
+            || victim->PCData->AuthState == 2)
         {
-          continue;
+            continue;
         }
-      
-      victim->PCData->AuthState = 3;
-      victim->PCData->Flags.reset( Flag::PCData::Unauthed );
 
-      victim->PCData->AuthedBy = ch->Name;
-      char buf[MAX_STRING_LENGTH];
-      sprintf( buf, "%s authorized %s", ch->Name.c_str(),
-               victim->Name.c_str() );
-      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );
+        victim->PCData->AuthState = 3;
+        victim->PCData->Flags.reset(Flag::PCData::Unauthed);
+
+        victim->PCData->AuthedBy = ch->Name;
+        char buf[MAX_STRING_LENGTH];
+        sprintf(buf, "%s authorized %s", ch->Name.c_str(),
+            victim->Name.c_str());
+        ToChannel(buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel);
     }
 
-  return false;
+    return false;
 }

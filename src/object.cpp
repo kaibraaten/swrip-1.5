@@ -18,7 +18,7 @@ Object::Object()
   Value.fill(0);
 }
 
-Object::Object(ProtoObject *pObjIndex, int level)
+Object::Object(std::shared_ptr<ProtoObject> pObjIndex, int level)
     : pImpl(std::make_unique<Impl>())
 {
   Value.fill(0);

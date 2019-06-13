@@ -371,7 +371,7 @@ static Reset *FindObjectReset(const Character *ch, const Area *pArea,
     {
         std::string arg;
         int cnt = 0, num = NumberArgument(name, arg);
-        ProtoObject *pObjTo = NULL;
+        std::shared_ptr<ProtoObject> pObjTo;
 
         for (reset = pArea->FirstReset; reset; reset = reset->Next)
         {
@@ -487,7 +487,7 @@ void EditReset(Character *ch, std::string argument, Area *pArea, Room *aRoom)
     Reset *reset = NULL;
     ProtoMobile *pMob = NULL;
     Room *pRoom = NULL;
-    ProtoObject *pObj = NULL;
+    std::shared_ptr<ProtoObject> pObj;
     int num = 0;
     vnum_t vnum = INVALID_VNUM;
     std::string origarg = argument;
@@ -1411,7 +1411,7 @@ void WipeResets(Area *pArea, Room *pRoom)
     }
 }
 
-static int GenerateItemLevel(const Area *pArea, const ProtoObject *pObjIndex)
+static int GenerateItemLevel(const Area *pArea, std::shared_ptr<ProtoObject> pObjIndex)
 {
     int olevel = 0;
     int min = umax(pArea->LevelRanges.Soft.Low, 1);
@@ -1532,8 +1532,8 @@ void ResetArea(Area *pArea)
     Object *lastobj = NULL;
     Room *pRoomIndex = NULL;
     ProtoMobile *pMobIndex = NULL;
-    ProtoObject *pObjIndex = NULL;
-    ProtoObject *pObjToIndex = NULL;
+    std::shared_ptr<ProtoObject> pObjIndex;
+    std::shared_ptr<ProtoObject> pObjToIndex;
     Exit *pexit = NULL;
     Object *to_obj = NULL;
     int level = 0;
@@ -1690,7 +1690,7 @@ void ResetArea(Area *pArea)
                 continue;
             }
 
-            if (CountOccurancesOfObjectInList(pObjIndex, pRoomIndex->Objects()) > 0)
+            if (CountOccurrencesOfObjectInList(pObjIndex, pRoomIndex->Objects()) > 0)
             {
                 obj = NULL;
                 lastobj = NULL;
@@ -1738,7 +1738,7 @@ void ResetArea(Area *pArea)
                 if (pArea->NumberOfPlayers > 0 ||
                     !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
                     !to_obj->InRoom ||
-                    CountOccurancesOfObjectInList(pObjIndex, to_obj->Objects()) > 0)
+                    CountOccurrencesOfObjectInList(pObjIndex, to_obj->Objects()) > 0)
                 {
                     obj = NULL;
                     break;
@@ -1839,7 +1839,7 @@ void ResetArea(Area *pArea)
                 }
 
                 if (pArea->NumberOfPlayers > 0 ||
-                    CountOccurancesOfObjectInList(GetProtoObject(OBJ_VNUM_TRAP),
+                    CountOccurrencesOfObjectInList(GetProtoObject(OBJ_VNUM_TRAP),
                         pRoomIndex->Objects()) > 0)
                 {
                     break;
@@ -2086,9 +2086,9 @@ static void ListResets(const Character *ch, const Area *pArea, const Room *pRoom
     Reset *pReset = NULL;
     const Room *room = NULL;
     const ProtoMobile *mob = NULL;
-    const ProtoObject *obj = NULL;
-    const ProtoObject *obj2 = NULL;
-    const ProtoObject *lastobj = NULL;
+    std::shared_ptr<ProtoObject> obj;
+    std::shared_ptr<ProtoObject> obj2;
+    std::shared_ptr<ProtoObject> lastobj;
     const Reset *lo_reset = NULL;
     int num = 0;
     std::string rname;
@@ -2786,7 +2786,7 @@ std::string SPrintReset(const Character *ch, Reset *pReset, short num, bool rlis
     char roomname[1024] = { '\0' };
     char objname[1024] = { '\0' };
     static Room *room = NULL;
-    static ProtoObject *obj = NULL, *obj2 = NULL;
+    static std::shared_ptr<ProtoObject> obj, obj2;
     static ProtoMobile *mob = NULL;
     vnum_t rvnum = INVALID_VNUM;
 
@@ -2909,7 +2909,9 @@ std::string SPrintReset(const Character *ch, Reset *pReset, short num, bool rlis
         break;
 
     case 'P':
-        if ((obj2 = GetProtoObject(pReset->Arg1)) == NULL)
+        obj2 = GetProtoObject(pReset->Arg1);
+
+        if (obj2 == nullptr)
             strcpy(objname, "Object1: *BAD VNUM*");
         else
             strcpy(objname, obj2->Name.c_str());

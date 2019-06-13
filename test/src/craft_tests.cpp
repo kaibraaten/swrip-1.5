@@ -109,7 +109,7 @@ protected:
 
         SetRandomGenerator(new NotRandomGenerator());
 
-        _resultantObject = new ProtoObject(1);
+        _resultantObject = std::make_shared<ProtoObject>(1);
         _resultantObject->Name = "crafted thingy";
 
         _location = new Room();
@@ -130,7 +130,6 @@ protected:
         delete _engineer;
         _engineer = nullptr;
 
-        delete _resultantObject;
         _resultantObject = nullptr;
 
         delete _location;
@@ -160,7 +159,7 @@ protected:
                 continue;
             }
 
-            ProtoObject *proto = new ProtoObject(GetNewVnum());
+            std::shared_ptr<ProtoObject> proto = std::make_shared<ProtoObject>(GetNewVnum());
             proto->ItemType = m.ItemType;
             Object *obj = AllocateObject(proto, 100);
             output.push_back(obj);
@@ -177,7 +176,7 @@ protected:
     }
 
     Character *_engineer = nullptr;
-    ProtoObject *_resultantObject = nullptr;
+    std::shared_ptr<ProtoObject> _resultantObject;
     Room *_location = nullptr;
     Area *_area = nullptr;
     static const std::vector<CraftingMaterial> _materials;
@@ -577,7 +576,7 @@ TEST_F(CraftTests, AfterCallback_CharacterNoLongerCrafting)
     EXPECT_FALSE(IsCrafting(_engineer));
 }
 
-static bool HasObjectInstanceOf(const Character *ch, const ProtoObject *proto)
+static bool HasObjectInstanceOf(const Character *ch, std::shared_ptr<ProtoObject> proto)
 {
     return Find(ch->Objects(),
         [proto](const auto obj)

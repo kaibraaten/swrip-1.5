@@ -10,31 +10,34 @@
  * doesn't list 1,000 lines for each shroud - just one line for the shroud.
  */
 
-void do_showlayers( Character *ch, std::string arg )
+void do_showlayers(Character *ch, std::string arg)
 {
-  ProtoObject *pObj = nullptr;
-  int hash = 0;                                           /* hash counter */
-  int cou = 0;                                        /* display counter */
-  int display_limit = 0;                                  /* display limit */
+    int cou = 0;                                        /* display counter */
 
-  if ( arg.empty() )
+    if (arg.empty())
     {
-      ch->Echo("Syntax:\r\n");
-      ch->Echo("showlayers n  -  display maximum of n lines.\r\n");
-      return;
+        ch->Echo("Syntax:\r\n");
+        ch->Echo("showlayers n  -  display maximum of n lines.\r\n");
+        return;
     }
 
-  display_limit = ToLong(arg);
-  ch->Echo("      Vnum      Wear Layer   Description \r\n");
+    int displayLimit = ToLong(arg);
+    ch->Echo("      Vnum      Wear Layer   Description \r\n");
 
-  for (hash = 0; hash < MAX_KEY_HASH; hash++) /* loop thru ObjectIndexHash */
-    if ( ObjectIndexHash[hash] )
-      for (pObj=ObjectIndexHash[hash]; pObj; pObj=pObj->Next)
-        if (pObj->Layers > 0)
-          {
-            if (++cou <= display_limit)
-              ch->Echo("%4d&R&w %5ld&R&w %9d&R&w %5d&R&w   %s&R&w\r\n",
-                       cou, pObj->Vnum, pObj->WearFlags, pObj->Layers,
-                       pObj->ShortDescr.c_str());
-          }
+    for (int hash = 0; hash < MAX_KEY_HASH; hash++)
+    {
+        if (ObjectIndexHash[hash])
+        {
+            for (std::shared_ptr<ProtoObject> pObj = ObjectIndexHash[hash]; pObj; pObj = pObj->Next)
+            {
+                if (pObj->Layers > 0)
+                {
+                    if (++cou <= displayLimit)
+                        ch->Echo("%4d&R&w %5ld&R&w %9d&R&w %5d&R&w   %s&R&w\r\n",
+                            cou, pObj->Vnum, pObj->WearFlags, pObj->Layers,
+                            pObj->ShortDescr.c_str());
+                }
+            }
+        }
+    }
 }

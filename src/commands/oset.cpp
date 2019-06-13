@@ -668,7 +668,7 @@ void do_oset( Character *ch, std::string argument )
 
         if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
         {
-            ProtoObject *pObjIndex = obj->Prototype;
+            std::shared_ptr<ProtoObject> pObjIndex = obj->Prototype;
 
             for(auto paf : pObjIndex->Affects())
             {

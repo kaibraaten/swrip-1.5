@@ -1512,12 +1512,12 @@ void SetCharacterTitle(Character *ch, const std::string &title)
 
 void AddReinforcements(Character *ch)
 {
-    ProtoMobile *pMobIndex = NULL;
-    Object *blaster = NULL;
-    ProtoObject *pObjIndex = NULL;
+    ProtoMobile *pMobIndex = nullptr;
+    Object *blaster = nullptr;
+    std::shared_ptr<ProtoObject>pObjIndex;
     int multiplier = 1;
 
-    if ((pMobIndex = GetProtoMobile(ch->BackupMob)) == NULL)
+    if ((pMobIndex = GetProtoMobile(ch->BackupMob)) == nullptr)
     {
         return;
     }

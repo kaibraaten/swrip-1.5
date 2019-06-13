@@ -340,7 +340,7 @@ static bool go_read( const Character *ch, int dis_num, int op_num, int sor_ind,
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
         OSTR, ODEX, OCON, OWIS, OINT, OLUCK,
         OSAV0, OSAV1, OSAV2, OSAV3, OSAV4};
-  const ProtoObject  *px = nullptr;
+  std::shared_ptr<ProtoObject> px;
   GO_STRUCT         r;                 /* input (physical record)         */
   GO_STRUCT     a[MAX_DISPLAY_LINES];  /* array of records                */
   GO_STRUCT    *p[MAX_DISPLAY_LINES];  /* array of pointers to records    */

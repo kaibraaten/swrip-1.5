@@ -12,7 +12,7 @@ class Object
 {
 public:
   Object();
-  Object(ProtoObject *protoObj, int level);
+  Object(std::shared_ptr<ProtoObject> protoObj, int level);
   virtual ~Object();
 
   const std::list<std::shared_ptr<ExtraDescription>> &ExtraDescriptions() const;
@@ -29,7 +29,7 @@ public:
   
   Object         *InObject = nullptr;
   Character        *CarriedBy = nullptr;
-  ProtoObject   *Prototype = nullptr;
+  std::shared_ptr<ProtoObject> Prototype;
   Room  *InRoom = nullptr;
   std::string ArmedBy;
   std::string Name;

@@ -2,83 +2,83 @@
 #include "mud.hpp"
 #include "object.hpp"
 
-void do_mpoload( Character *ch, std::string argument )
+void do_mpoload(Character *ch, std::string argument)
 {
-  std::string arg1;
-  std::string arg2;
-  ProtoObject *pObjIndex = nullptr;
-  Object *obj = nullptr;
-  int level = 0;
-  int timer = 0;
+    std::string arg1;
+    std::string arg2;
+    std::shared_ptr<ProtoObject> pObjIndex;
+    Object *obj = nullptr;
+    int level = 0;
+    int timer = 0;
 
-  if ( IsAffectedBy( ch, AFF_CHARM ) )
-    return;
+    if (IsAffectedBy(ch, AFF_CHARM))
+        return;
 
-  if ( !IsNpc( ch ) )
+    if (!IsNpc(ch))
     {
-      ch->Echo("Huh?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 
-  argument = OneArgument( argument, arg1 );
-  argument = OneArgument( argument, arg2 );
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
 
-  if ( arg1.empty() || !IsNumber( arg1 ) )
+    if (arg1.empty() || !IsNumber(arg1))
     {
-      ProgBug( "Mpoload - Bad syntax", ch );
-      return;
+        ProgBug("Mpoload - Bad syntax", ch);
+        return;
     }
 
-  if ( arg2.empty() )
+    if (arg2.empty())
     {
-      level = GetTrustLevel( ch );
+        level = GetTrustLevel(ch);
     }
-  else
+    else
     {
-      /*
-       * New feature from Alander.
-       */
-      if ( !IsNumber( arg2 ) )
+        /*
+         * New feature from Alander.
+         */
+        if (!IsNumber(arg2))
         {
-          ProgBug( "Mpoload - Bad level syntax", ch );
-          return;
+            ProgBug("Mpoload - Bad level syntax", ch);
+            return;
         }
 
-      level = ToLong( arg2 );
+        level = ToLong(arg2);
 
-      if ( level < 0 || level > GetTrustLevel( ch ) )
+        if (level < 0 || level > GetTrustLevel(ch))
         {
-          ProgBug( "Mpoload - Bad level", ch );
-          return;
+            ProgBug("Mpoload - Bad level", ch);
+            return;
         }
 
-      /*
-       * New feature from Thoric.
-       */
-      timer = ToLong( argument );
+        /*
+         * New feature from Thoric.
+         */
+        timer = ToLong(argument);
 
-      if ( timer < 0 )
+        if (timer < 0)
         {
-          ProgBug( "Mpoload - Bad timer", ch );
-          return;
+            ProgBug("Mpoload - Bad timer", ch);
+            return;
         }
     }
 
-  if ( ( pObjIndex = GetProtoObject( ToLong( arg1 ) ) ) == NULL )
+    if ((pObjIndex = GetProtoObject(ToLong(arg1))) == NULL)
     {
-      ProgBug( "Mpoload - Bad vnum arg", ch );
-      return;
+        ProgBug("Mpoload - Bad vnum arg", ch);
+        return;
     }
 
-  obj = CreateObject( pObjIndex, level );
-  obj->Timer = timer;
+    obj = CreateObject(pObjIndex, level);
+    obj->Timer = timer;
 
-  if ( IsBitSet( obj->WearFlags, ITEM_TAKE ) )
+    if (IsBitSet(obj->WearFlags, ITEM_TAKE))
     {
-      ObjectToCharacter( obj, ch );
+        ObjectToCharacter(obj, ch);
     }
-  else
+    else
     {
-      ObjectToRoom( obj, ch->InRoom );
+        ObjectToRoom(obj, ch->InRoom);
     }
 }

@@ -377,7 +377,7 @@ extern TimeInfo   time_info;
 extern Weather     weather_info;
 extern std::unique_ptr<Auction> OngoingAuction;
 extern ProtoMobile *MobIndexHash[MAX_KEY_HASH];
-extern ProtoObject *ObjectIndexHash[MAX_KEY_HASH];
+extern std::shared_ptr<ProtoObject> ObjectIndexHash[MAX_KEY_HASH];
 extern Room *RoomIndexHash[MAX_KEY_HASH];
 
 /*
@@ -1118,21 +1118,21 @@ void BootDatabase(bool fCopyover);
 void AddCharacter(Character *ch);
 Character *AllocateMobile(ProtoMobile *pMobIndex);
 Character *CreateMobile(ProtoMobile *pMobIndex);
-Object *CreateObject(ProtoObject *pObjIndex, int level);
-Object *AllocateObject(ProtoObject *pObjIndex, int level);
+Object *CreateObject(std::shared_ptr<ProtoObject> pObjIndex, int level);
+Object *AllocateObject(std::shared_ptr<ProtoObject> pObjIndex, int level);
 std::string GetExtraDescription(const std::string &name, const std::list<std::shared_ptr<ExtraDescription>> &extras);
 ProtoMobile *GetProtoMobile(vnum_t vnum);
-ProtoObject *GetProtoObject(vnum_t vnum);
+std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum);
 Room *GetRoom(vnum_t vnum);
 Room *MakeRoom(vnum_t vnum);
-ProtoObject *MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name);
+std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name);
 ProtoMobile *MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name);
 Exit *MakeExit(Room *pRoomIndex, Room *to_room, DirectionType door,
     const std::string &keyword = "");
 void RandomizeExits(Room *room, short maxdir);
 void MakeWizlist(void);
 bool DeleteRoom(Room *room);
-bool DeleteObject(ProtoObject *obj);
+bool DeleteObject(std::shared_ptr<ProtoObject> obj);
 bool DeleteMobile(ProtoMobile *mob);
 
 /* build.c */
@@ -1150,8 +1150,8 @@ std::shared_ptr<ExtraDescription> SetRExtra(Room *room, const std::string &keywo
 bool DelRExtra(Room *room, const std::string &keywords);
 std::shared_ptr<ExtraDescription> SetOExtra(Object *obj, const std::string &keywords);
 bool DelOExtra(Object *obj, const std::string &keywords);
-std::shared_ptr<ExtraDescription> SetOExtraProto(ProtoObject *obj, const std::string &keywords);
-bool DelOExtraProto(ProtoObject *obj, const std::string &keywords);
+std::shared_ptr<ExtraDescription> SetOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keywords);
+bool DelOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keywords);
 Reset *ParseReset(const Area *tarea, std::string argument, const Character *ch);
 
 /* fight.c */
@@ -1222,7 +1222,7 @@ void CharacterToRoom(Character *ch, Room *pRoomIndex);
 Object *ObjectToCharacter(Object *obj, Character *ch);
 void ObjectFromCharacter(Object *obj);
 int GetObjectArmorClass(const Object *obj, int iWear);
-int CountOccurancesOfObjectInList(const ProtoObject *protoobj, const std::list<Object*> &list);
+int CountOccurrencesOfObjectInList(std::shared_ptr<ProtoObject> protoobj, const std::list<Object*> &list);
 void ObjectFromRoom(Object *obj);
 Object *ObjectToRoom(Object *obj, Room *pRoomIndex);
 Object *ObjectToObject(Object *obj, Object *obj_to);
@@ -1231,12 +1231,12 @@ void ExtractObject(Object *obj);
 void ExtractExit(Room *room, Exit *pexit);
 void ExtractRoom(Room *room);
 void CleanRoom(Room *room);
-void CleanObject(ProtoObject *obj);
+void CleanObject(std::shared_ptr<ProtoObject> obj);
 void CleanMobile(ProtoMobile *mob);
 void ExtractCharacter(Character *ch, bool fPull);
 Character *GetCharacterInRoom(const Character *ch, std::string argument);
 Character *GetCharacterAnywhere(const Character *ch, std::string argument);
-Object *GetInstanceOfObject(const ProtoObject *pObjIndexData);
+Object *GetInstanceOfObject(std::shared_ptr<ProtoObject> pObjIndexData);
 Object *GetObjectInList(const Character *ch, std::string objName,
     const std::list<Object*> &list);
 Object *GetObjectInListReverse(const Character *ch, std::string objName,

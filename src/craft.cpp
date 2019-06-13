@@ -38,479 +38,478 @@
 class CraftRecipe
 {
 public:
-  int Skill = 0;
-  const CraftingMaterial *Materials = nullptr;
-  int Duration = 0;
-  ProtoObject *Prototype = nullptr;
-  std::bitset<MAX_BIT> Flags;
+    int Skill = 0;
+    const CraftingMaterial *Materials = nullptr;
+    int Duration = 0;
+    std::shared_ptr<ProtoObject> Prototype;
+    std::bitset<MAX_BIT> Flags;
 };
 
 class FoundMaterial
 {
 public:
-  CraftingMaterial Material;
-  bool Found = false;
-  bool KeepFinding = false;
+    CraftingMaterial Material;
+    bool Found = false;
+    bool KeepFinding = false;
 };
 
 class CraftingSession
 {
 public:
-  Ceris::Event<InterpretArgumentsEventArgs*> OnInterpretArguments;
-  Ceris::Event<CheckRequirementsEventArgs*> OnCheckRequirements;
-  Ceris::Event<MaterialFoundEventArgs*> OnMaterialFound;
-  Ceris::Event<SetObjectStatsEventArgs*> OnSetObjectStats;
-  Ceris::Event<FinishedCraftingEventArgs*> OnFinishedCrafting;
-  Ceris::Event<AbortCraftingEventArgs*> OnAbort;
+    Ceris::Event<InterpretArgumentsEventArgs*> OnInterpretArguments;
+    Ceris::Event<CheckRequirementsEventArgs*> OnCheckRequirements;
+    Ceris::Event<MaterialFoundEventArgs*> OnMaterialFound;
+    Ceris::Event<SetObjectStatsEventArgs*> OnSetObjectStats;
+    Ceris::Event<FinishedCraftingEventArgs*> OnFinishedCrafting;
+    Ceris::Event<AbortCraftingEventArgs*> OnAbort;
 
-  Character *Engineer = nullptr;
-  CraftRecipe *Recipe = nullptr;
-  FoundMaterial *FoundMaterials = nullptr;
-  std::string CommandArgument;
+    Character *Engineer = nullptr;
+    CraftRecipe *Recipe = nullptr;
+    FoundMaterial *FoundMaterials = nullptr;
+    std::string CommandArgument;
 };
 
 class FinishedCraftingUserData
 {
 public:
-  CraftRecipe *Recipe = nullptr;
+    CraftRecipe *Recipe = nullptr;
 };
 
-static void AfterDelay( CraftingSession *session );
-static void AbortSession( CraftingSession *session );
-static bool CheckMaterials( CraftingSession *session, bool extract );
-static size_t CountCraftingMaterials( const CraftingMaterial *material );
-static FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials );
-static bool CheckSkillLevel( const CraftingSession *session );
-static std::string GetItemTypeNameExtended( ItemTypes itemType, int extraInfo );
-static FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const Object *obj );
-static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *eventArgs );
-static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args );
+static void AfterDelay(CraftingSession *session);
+static void AbortSession(CraftingSession *session);
+static bool CheckMaterials(CraftingSession *session, bool extract);
+static size_t CountCraftingMaterials(const CraftingMaterial *material);
+static FoundMaterial *AllocateFoundMaterials(const CraftingMaterial *recipeMaterials);
+static bool CheckSkillLevel(const CraftingSession *session);
+static std::string GetItemTypeNameExtended(ItemTypes itemType, int extraInfo);
+static FoundMaterial *GetUnfoundMaterial(const CraftingSession *session, const Object *obj);
+static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *eventArgs);
+static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs *args);
 
-CraftingMaterial::CraftingMaterial( ItemTypes type,
-                                    std::initializer_list<size_t> flagBits )
-  : ItemType( type ),
-    Flags( CreateBitSet<MAX_BIT>( flagBits ) )
+CraftingMaterial::CraftingMaterial(ItemTypes type,
+    std::initializer_list<size_t> flagBits)
+    : ItemType(type),
+    Flags(CreateBitSet<MAX_BIT>(flagBits))
 {
 
 }
 
-void do_craftingengine( Character *ch, std::string argument )
+void do_craftingengine(Character *ch, std::string argument)
 {
-  assert(!IsNpc(ch));
+    assert(!IsNpc(ch));
 
-  CraftingSession *session = ch->PCData->CraftingSession;
+    CraftingSession *session = ch->PCData->CraftingSession;
 
-  assert(session != nullptr);
-  assert(ch->SubState == SUB_PAUSE || ch->SubState == SUB_TIMER_DO_ABORT);
+    assert(session != nullptr);
+    assert(ch->SubState == SUB_PAUSE || ch->SubState == SUB_TIMER_DO_ABORT);
 
-  switch( ch->SubState )
+    switch (ch->SubState)
     {
     default:
-      break;
+        break;
 
     case SUB_PAUSE:
-      AfterDelay( session );
-      break;
+        AfterDelay(session);
+        break;
 
     case SUB_TIMER_DO_ABORT:
-      AbortSession( session );
-      break;
+        AbortSession(session);
+        break;
     }
 }
 
-static void AfterDelay( CraftingSession *session )
+static void AfterDelay(CraftingSession *session)
 {
-  CraftRecipe *recipe = session->Recipe;
-  Character *ch = session->Engineer;
-  int the_chance = ch->PCData->Learned[recipe->Skill];
-  bool hasMaterials = CheckMaterials( session, true );
-  int level = ch->PCData->Learned[recipe->Skill];
-  Object *object = NULL;
-  ProtoObject *proto = recipe->Prototype;
-  std::string itemType = GetItemTypeNameExtended( proto->ItemType, proto->Value[OVAL_WEAPON_TYPE] );
-  SetObjectStatsEventArgs eventArgs;
-  FinishedCraftingEventArgs finishedCraftingEventArgs;
+    CraftRecipe *recipe = session->Recipe;
+    Character *ch = session->Engineer;
+    int the_chance = ch->PCData->Learned[recipe->Skill];
+    bool hasMaterials = CheckMaterials(session, true);
+    int level = ch->PCData->Learned[recipe->Skill];
+    Object *object = NULL;
+    std::shared_ptr<ProtoObject> proto = recipe->Prototype;
+    std::string itemType = GetItemTypeNameExtended(proto->ItemType, proto->Value[OVAL_WEAPON_TYPE]);
+    SetObjectStatsEventArgs eventArgs;
+    FinishedCraftingEventArgs finishedCraftingEventArgs;
 
-  ch->SubState = SUB_NONE;
+    ch->SubState = SUB_NONE;
 
-  if ( GetRandomPercent() > the_chance * 2  || !hasMaterials )
+    if (GetRandomPercent() > the_chance * 2 || !hasMaterials)
     {
-      ch->Echo( "&RYou hold up your newly created %s.\r\n", itemType.c_str() );
-      ch->Echo( "&RIt suddenly dawns upon you that you have created the most useless\r\n" );
-      ch->Echo( "&R%s you've ever seen. You quickly hide your mistake...&d\r\n", itemType.c_str());
-      LearnFromFailure( ch, recipe->Skill );
-      FreeCraftingSession( session );
-      return;
+        ch->Echo("&RYou hold up your newly created %s.\r\n", itemType.c_str());
+        ch->Echo("&RIt suddenly dawns upon you that you have created the most useless\r\n");
+        ch->Echo("&R%s you've ever seen. You quickly hide your mistake...&d\r\n", itemType.c_str());
+        LearnFromFailure(ch, recipe->Skill);
+        FreeCraftingSession(session);
+        return;
     }
 
-  object = CreateObject( proto, level );
+    object = CreateObject(proto, level);
 
-  eventArgs.CraftingSession = session;
-  eventArgs.Object = object;
-  session->OnSetObjectStats( &eventArgs );
+    eventArgs.CraftingSession = session;
+    eventArgs.Object = object;
+    session->OnSetObjectStats(&eventArgs);
 
-  object = ObjectToCharacter( object, ch );
+    object = ObjectToCharacter(object, ch);
 
-  finishedCraftingEventArgs.CraftingSession = session;
-  finishedCraftingEventArgs.Object = object;
-  session->OnFinishedCrafting( &finishedCraftingEventArgs );
+    finishedCraftingEventArgs.CraftingSession = session;
+    finishedCraftingEventArgs.Object = object;
+    session->OnFinishedCrafting(&finishedCraftingEventArgs);
 
-  FreeCraftingSession( session );
+    FreeCraftingSession(session);
 }
 
-static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *eventArgs )
+static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *eventArgs)
 {
-  CraftingSession *session = eventArgs->CraftingSession;
-  FinishedCraftingUserData *data = (FinishedCraftingUserData*) userData;
-  Character *ch = GetEngineer( session );
-  std::string itemType = GetItemTypeNameExtended( eventArgs->Object->ItemType, eventArgs->Object->Value[OVAL_WEAPON_TYPE] );
-  char actBuf[MAX_STRING_LENGTH];
-  long xpgain = 0;
-  Skill *skill = Skills->GetSkill( data->Recipe->Skill );
+    CraftingSession *session = eventArgs->CraftingSession;
+    FinishedCraftingUserData *data = (FinishedCraftingUserData*)userData;
+    Character *ch = GetEngineer(session);
+    std::string itemType = GetItemTypeNameExtended(eventArgs->Object->ItemType, eventArgs->Object->Value[OVAL_WEAPON_TYPE]);
+    char actBuf[MAX_STRING_LENGTH];
+    long xpgain = 0;
+    Skill *skill = Skills->GetSkill(data->Recipe->Skill);
 
-  ch->Echo( "&GYou finish your work and hold up your newly created %s.&d\r\n",
-            itemType.c_str());
-  sprintf( actBuf, "$n finishes making $s new %s.", itemType.c_str() );
-  Act( AT_PLAIN, actBuf, ch, NULL, NULL, TO_ROOM );
+    ch->Echo("&GYou finish your work and hold up your newly created %s.&d\r\n",
+        itemType.c_str());
+    sprintf(actBuf, "$n finishes making $s new %s.", itemType.c_str());
+    Act(AT_PLAIN, actBuf, ch, NULL, NULL, TO_ROOM);
 
-  xpgain = umin( eventArgs->Object->Cost * 100,
-                 GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild ) + 1)
-                 - GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild ) ) );
-  GainXP(ch, skill->Guild, xpgain );
-  ch->Echo( "You gain %ld %s experience.", xpgain, AbilityName[skill->Guild] );
+    xpgain = umin(eventArgs->Object->Cost * 100,
+        GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild) + 1)
+        - GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild)));
+    GainXP(ch, skill->Guild, xpgain);
+    ch->Echo("You gain %ld %s experience.", xpgain, AbilityName[skill->Guild]);
 
-  LearnFromSuccess( ch, data->Recipe->Skill );
+    LearnFromSuccess(ch, data->Recipe->Skill);
 
-  delete data;
+    delete data;
 }
 
-static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args )
+static void CheckRequirementsHandler(void *userData, CheckRequirementsEventArgs *args)
 {
-  Character *ch = GetEngineer( args->CraftingSession );
+    Character *ch = GetEngineer(args->CraftingSession);
 
-  if( args->CraftingSession->Recipe->Flags.test( Flag::Crafting::NeedsWorkshop )
-      && !ch->InRoom->Flags.test( Flag::Room::Factory ) )
+    if (args->CraftingSession->Recipe->Flags.test(Flag::Crafting::NeedsWorkshop)
+        && !ch->InRoom->Flags.test(Flag::Room::Factory))
     {
-      ch->Echo( "&RYou need to be in a factory or workshop to do that.&d\r\n" );
-      args->AbortSession = true;
+        ch->Echo("&RYou need to be in a factory or workshop to do that.&d\r\n");
+        args->AbortSession = true;
     }
 
-  if( args->CraftingSession->Recipe->Flags.test( Flag::Crafting::NeedsRefinery )
-      && !ch->InRoom->Flags.test( Flag::Room::Refinery ) )
+    if (args->CraftingSession->Recipe->Flags.test(Flag::Crafting::NeedsRefinery)
+        && !ch->InRoom->Flags.test(Flag::Room::Refinery))
     {
-      ch->Echo( "&RYou need to be in a refinery to do that.&d\r\n" );
-      args->AbortSession = true;
+        ch->Echo("&RYou need to be in a refinery to do that.&d\r\n");
+        args->AbortSession = true;
     }
 }
 
-static void AbortSession( CraftingSession *session )
+static void AbortSession(CraftingSession *session)
 {
-  Character *ch = session->Engineer;
-  AbortCraftingEventArgs abortEventArgs;
+    Character *ch = session->Engineer;
+    AbortCraftingEventArgs abortEventArgs;
 
-  ch->SubState = SUB_NONE;
-  abortEventArgs.CraftingSession = session;
+    ch->SubState = SUB_NONE;
+    abortEventArgs.CraftingSession = session;
 
-  ch->Echo( "&RYou are interrupted and fail to finish your work.&d\r\n");
+    ch->Echo("&RYou are interrupted and fail to finish your work.&d\r\n");
 
-  session->OnAbort( &abortEventArgs );
+    session->OnAbort(&abortEventArgs);
 
-  FreeCraftingSession( session );
+    FreeCraftingSession(session);
 }
 
-Character *GetEngineer( const CraftingSession *session )
+Character *GetEngineer(const CraftingSession *session)
 {
-  return session->Engineer;
+    return session->Engineer;
 }
 
-CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, int duration,
-				  ProtoObject *prototypeObject,
-                                  std::initializer_list<size_t> flagBits )
+CraftRecipe *AllocateCraftRecipe(int sn, const CraftingMaterial *materialList, int duration,
+    std::shared_ptr<ProtoObject> prototypeObject,
+    std::initializer_list<size_t> flagBits)
 {
-  CraftRecipe *recipe = new CraftRecipe();
+    CraftRecipe *recipe = new CraftRecipe();
 
-  recipe->Skill      = sn;
-  recipe->Materials  = materialList;
-  recipe->Duration   = duration;
-  recipe->Prototype  = prototypeObject;
-  recipe->Flags      = CreateBitSet<MAX_BIT>( flagBits );
+    recipe->Skill = sn;
+    recipe->Materials = materialList;
+    recipe->Duration = duration;
+    recipe->Prototype = prototypeObject;
+    recipe->Flags = CreateBitSet<MAX_BIT>(flagBits);
 
-  if( Skills->GetSkill( recipe->Skill ) == nullptr )
+    if (Skills->GetSkill(recipe->Skill) == nullptr)
     {
-      Log->Bug( "%s:%d %s(): Bad Skill %d",
-                __FILE__, __LINE__, __FUNCTION__, recipe->Skill );
+        Log->Bug("%s:%d %s(): Bad Skill %d",
+            __FILE__, __LINE__, __FUNCTION__, recipe->Skill);
     }
 
-  if( recipe->Prototype == nullptr )
+    if (recipe->Prototype == nullptr)
     {
-      Log->Bug( "%s:%d %s(): Bad ProtoObject",
-                __FILE__, __LINE__, __FUNCTION__ );
+        Log->Bug("%s:%d %s(): Bad ProtoObject",
+            __FILE__, __LINE__, __FUNCTION__);
     }
 
-  return recipe;
+    return recipe;
 }
 
-void FreeCraftRecipe( CraftRecipe *recipe )
+void FreeCraftRecipe(CraftRecipe *recipe)
 {
-  delete recipe;
+    delete recipe;
 }
 
-static size_t CountCraftingMaterials( const CraftingMaterial *material )
+static size_t CountCraftingMaterials(const CraftingMaterial *material)
 {
-  size_t numberOfElements = 0;
+    size_t numberOfElements = 0;
 
-  while( material->ItemType != ITEM_NONE )
+    while (material->ItemType != ITEM_NONE)
     {
-      ++numberOfElements;
-      ++material;
+        ++numberOfElements;
+        ++material;
     }
 
-  ++numberOfElements; /* include ITEM_NONE */
+    ++numberOfElements; /* include ITEM_NONE */
 
-  return numberOfElements;
+    return numberOfElements;
 }
 
-static FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials )
+static FoundMaterial *AllocateFoundMaterials(const CraftingMaterial *recipeMaterials)
 {
-  size_t numberOfElements = CountCraftingMaterials( recipeMaterials );
-  FoundMaterial *foundMaterials = new FoundMaterial[numberOfElements];
+    size_t numberOfElements = CountCraftingMaterials(recipeMaterials);
+    FoundMaterial *foundMaterials = new FoundMaterial[numberOfElements];
 
-  for( size_t i = 0; i < numberOfElements; ++i )
+    for (size_t i = 0; i < numberOfElements; ++i)
     {
-      foundMaterials[i].Material = recipeMaterials[i];
-      foundMaterials[i].Found = false;
-      foundMaterials[i].KeepFinding = false;
+        foundMaterials[i].Material = recipeMaterials[i];
+        foundMaterials[i].Found = false;
+        foundMaterials[i].KeepFinding = false;
     }
 
-  return foundMaterials;
+    return foundMaterials;
 }
 
-CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engineer,
-					  const std::string &commandArgument )
+CraftingSession *AllocateCraftingSession(CraftRecipe *recipe, Character *engineer,
+    const std::string &commandArgument)
 {
-  CraftingSession *session = new CraftingSession();
-  FinishedCraftingUserData *finishedCraftingUserData = new FinishedCraftingUserData();
-  finishedCraftingUserData->Recipe = recipe;
-  AddFinishedCraftingHandler( session, finishedCraftingUserData, FinishedCraftingHandler );
+    CraftingSession *session = new CraftingSession();
+    FinishedCraftingUserData *finishedCraftingUserData = new FinishedCraftingUserData();
+    finishedCraftingUserData->Recipe = recipe;
+    AddFinishedCraftingHandler(session, finishedCraftingUserData, FinishedCraftingHandler);
 
-  session->Engineer = engineer;
-  session->Recipe = recipe;
-  session->FoundMaterials = AllocateFoundMaterials( recipe->Materials );
-  session->CommandArgument = commandArgument;
+    session->Engineer = engineer;
+    session->Recipe = recipe;
+    session->FoundMaterials = AllocateFoundMaterials(recipe->Materials);
+    session->CommandArgument = commandArgument;
 
-  engineer->PCData->CraftingSession = session;
+    engineer->PCData->CraftingSession = session;
 
-  AddCheckRequirementsCraftingHandler( session, NULL, CheckRequirementsHandler );
+    AddCheckRequirementsCraftingHandler(session, NULL, CheckRequirementsHandler);
 
-  return session;
+    return session;
 }
 
-void FreeCraftingSession( CraftingSession *session )
+void FreeCraftingSession(CraftingSession *session)
 {
-  FreeCraftRecipe( session->Recipe );
-  delete[] session->FoundMaterials;
+    FreeCraftRecipe(session->Recipe);
+    delete[] session->FoundMaterials;
 
-  if( session->Engineer )
+    if (session->Engineer)
     {
-      session->Engineer->PCData->CraftingSession = NULL;
+        session->Engineer->PCData->CraftingSession = NULL;
     }
 
-  delete session;
+    delete session;
 }
 
-static bool CheckSkillLevel( const CraftingSession *session )
+static bool CheckSkillLevel(const CraftingSession *session)
 {
-  Character *ch = session->Engineer;
-  int the_chance = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->Learned[session->Recipe->Skill]);
+    Character *ch = session->Engineer;
+    int the_chance = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[session->Recipe->Skill]);
 
-  if( GetRandomPercent() >= the_chance )
+    if (GetRandomPercent() >= the_chance)
     {
-      ch->Echo( "&RYou can't figure out what to do.&d\r\n" );
-      LearnFromFailure( ch, session->Recipe->Skill );
-      return false;
+        ch->Echo("&RYou can't figure out what to do.&d\r\n");
+        LearnFromFailure(ch, session->Recipe->Skill);
+        return false;
     }
 
-  return true;
+    return true;
 }
 
-void StartCrafting( CraftingSession *session )
+void StartCrafting(CraftingSession *session)
 {
-  Character *ch = session->Engineer;
-  ProtoObject *obj = NULL;
-  InterpretArgumentsEventArgs interpretArgumentsEventArgs;
-  CheckRequirementsEventArgs checkRequirementsEventArgs;
+    Character *ch = session->Engineer;
+    InterpretArgumentsEventArgs interpretArgumentsEventArgs;
+    CheckRequirementsEventArgs checkRequirementsEventArgs;
 
-  interpretArgumentsEventArgs.CraftingSession = session;
-  interpretArgumentsEventArgs.CommandArguments = session->CommandArgument;
-  interpretArgumentsEventArgs.AbortSession = false;
+    interpretArgumentsEventArgs.CraftingSession = session;
+    interpretArgumentsEventArgs.CommandArguments = session->CommandArgument;
+    interpretArgumentsEventArgs.AbortSession = false;
 
-  checkRequirementsEventArgs.CraftingSession = session;
-  checkRequirementsEventArgs.AbortSession = false;
+    checkRequirementsEventArgs.CraftingSession = session;
+    checkRequirementsEventArgs.AbortSession = false;
 
-  session->OnInterpretArguments( &interpretArgumentsEventArgs );
+    session->OnInterpretArguments(&interpretArgumentsEventArgs);
 
-  if( !interpretArgumentsEventArgs.AbortSession )
+    if (!interpretArgumentsEventArgs.AbortSession)
     {
-      session->OnCheckRequirements( &checkRequirementsEventArgs );
+        session->OnCheckRequirements(&checkRequirementsEventArgs);
     }
 
-  if( interpretArgumentsEventArgs.AbortSession
-      || checkRequirementsEventArgs.AbortSession
-      || !CheckMaterials( session, false )
-      || !CheckSkillLevel( session ) )
+    if (interpretArgumentsEventArgs.AbortSession
+        || checkRequirementsEventArgs.AbortSession
+        || !CheckMaterials(session, false)
+        || !CheckSkillLevel(session))
     {
-      AbortCraftingEventArgs abortEventArgs;
-      abortEventArgs.CraftingSession = session;
+        AbortCraftingEventArgs abortEventArgs;
+        abortEventArgs.CraftingSession = session;
 
-      session->OnAbort( &abortEventArgs );
-      FreeCraftingSession( session );
-      return;
+        session->OnAbort(&abortEventArgs);
+        FreeCraftingSession(session);
+        return;
     }
 
-  obj = session->Recipe->Prototype;
+    std::shared_ptr<ProtoObject> obj = session->Recipe->Prototype;
 
-  ch->Echo( "&GYou begin the long process of creating %s.&d\r\n",
-            AOrAn( GetItemTypeNameExtended( obj->ItemType, obj->Value[OVAL_WEAPON_TYPE] ) ).c_str() );
+    ch->Echo("&GYou begin the long process of creating %s.&d\r\n",
+        AOrAn(GetItemTypeNameExtended(obj->ItemType, obj->Value[OVAL_WEAPON_TYPE])).c_str());
 
-  Act( AT_PLAIN, "$n takes $s tools and some material and begins to work.",
-       ch, NULL, NULL, TO_ROOM );
-  AddTimerToCharacter( ch, TIMER_CMD_FUN, session->Recipe->Duration, do_craftingengine, SUB_PAUSE );
+    Act(AT_PLAIN, "$n takes $s tools and some material and begins to work.",
+        ch, NULL, NULL, TO_ROOM);
+    AddTimerToCharacter(ch, TIMER_CMD_FUN, session->Recipe->Duration, do_craftingengine, SUB_PAUSE);
 }
 
-static bool CheckMaterials( CraftingSession *session, bool extract )
+static bool CheckMaterials(CraftingSession *session, bool extract)
 {
-  Character *ch = GetEngineer( session );
-  bool foundAll = true;
-  FoundMaterial *material = NULL;
+    Character *ch = GetEngineer(session);
+    bool foundAll = true;
+    FoundMaterial *material = NULL;
 
-  std::list<Object*> carriedObjects(ch->Objects());
+    std::list<Object*> carriedObjects(ch->Objects());
 
-  for(Object *obj : carriedObjects)
+    for (Object *obj : carriedObjects)
     {
-      material = GetUnfoundMaterial( session, obj );
+        material = GetUnfoundMaterial(session, obj);
 
-      if( !material )
-	{
-	  continue;
-	}
+        if (!material)
+        {
+            continue;
+        }
 
-      material->Found = true;
+        material->Found = true;
 
-      if( extract )
-	{
-	  MaterialFoundEventArgs args;
-	  args.CraftingSession = session;
-	  args.Object = obj;
-	  args.KeepFinding = false;
+        if (extract)
+        {
+            MaterialFoundEventArgs args;
+            args.CraftingSession = session;
+            args.Object = obj;
+            args.KeepFinding = false;
 
-          if( material->Material.Flags.test( Flag::Crafting::Extract ) )
-	    {
-	      SeparateOneObjectFromGroup( obj );
-	      ObjectFromCharacter( obj );
-	      ExtractObject( obj );
-	    }
+            if (material->Material.Flags.test(Flag::Crafting::Extract))
+            {
+                SeparateOneObjectFromGroup(obj);
+                ObjectFromCharacter(obj);
+                ExtractObject(obj);
+            }
 
-	  session->OnMaterialFound( &args );
-	  material->KeepFinding = args.KeepFinding;
-	}
+            session->OnMaterialFound(&args);
+            material->KeepFinding = args.KeepFinding;
+        }
     }
 
-  material = session->FoundMaterials;
+    material = session->FoundMaterials;
 
-  while( material->Material.ItemType != ITEM_NONE )
+    while (material->Material.ItemType != ITEM_NONE)
     {
-      if( !material->Found
-	  && !material->Material.Flags.test( Flag::Crafting::Optional ) )
-	{
-	  ProtoObject *proto = session->Recipe->Prototype;
-          std::string itemTypeName = GetItemTypeNameExtended( material->Material.ItemType, 0 );
-	  ReplaceChar( itemTypeName, '_', ' ' );
-	  foundAll = false;
-	  ch->Echo( "&RYou need %s to complete the %s.&d\r\n",
-                    AOrAn( itemTypeName ).c_str(),
-                    GetItemTypeNameExtended( proto->ItemType, proto->Value[OVAL_WEAPON_TYPE] ).c_str() );
-	}
+        if (!material->Found
+            && !material->Material.Flags.test(Flag::Crafting::Optional))
+        {
+            std::shared_ptr<ProtoObject> proto = session->Recipe->Prototype;
+            std::string itemTypeName = GetItemTypeNameExtended(material->Material.ItemType, 0);
+            ReplaceChar(itemTypeName, '_', ' ');
+            foundAll = false;
+            ch->Echo("&RYou need %s to complete the %s.&d\r\n",
+                AOrAn(itemTypeName).c_str(),
+                GetItemTypeNameExtended(proto->ItemType, proto->Value[OVAL_WEAPON_TYPE]).c_str());
+        }
 
-      ++material;
+        ++material;
     }
 
-  delete[] session->FoundMaterials;
-  session->FoundMaterials = AllocateFoundMaterials( session->Recipe->Materials );
+    delete[] session->FoundMaterials;
+    session->FoundMaterials = AllocateFoundMaterials(session->Recipe->Materials);
 
-  return foundAll;
+    return foundAll;
 }
 
-static FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const Object *obj )
+static FoundMaterial *GetUnfoundMaterial(const CraftingSession *session, const Object *obj)
 {
-  FoundMaterial *material = session->FoundMaterials;
+    FoundMaterial *material = session->FoundMaterials;
 
-  while( material->Material.ItemType != ITEM_NONE )
+    while (material->Material.ItemType != ITEM_NONE)
     {
-      if( obj->ItemType == material->Material.ItemType
-	  && ( !material->Found || material->KeepFinding ) )
-	{
-	  return material;
-	}
+        if (obj->ItemType == material->Material.ItemType
+            && (!material->Found || material->KeepFinding))
+        {
+            return material;
+        }
 
-      ++material;
+        ++material;
     }
 
-  return NULL;
+    return nullptr;
 }
 
-static std::string GetItemTypeNameExtended( ItemTypes itemType, int extraInfo )
+static std::string GetItemTypeNameExtended(ItemTypes itemType, int extraInfo)
 {
-  std::string type;
+    std::string type;
 
-  if( itemType == ITEM_WEAPON )
+    if (itemType == ITEM_WEAPON)
     {
-      type = GetWeaponTypeName( extraInfo );
+        type = GetWeaponTypeName(extraInfo);
     }
-  else
+    else
     {
-      type = ObjectTypes[itemType];
+        type = ObjectTypes[itemType];
     }
 
-  return type;
+    return type;
 }
 
-void AddInterpretArgumentsCraftingHandler( CraftingSession *session, void *userData,
-                                           void (*handler)(void*, InterpretArgumentsEventArgs* ))
+void AddInterpretArgumentsCraftingHandler(CraftingSession *session, void *userData,
+    void(*handler)(void*, InterpretArgumentsEventArgs*))
 {
-  session->OnInterpretArguments.Add( userData, handler );
+    session->OnInterpretArguments.Add(userData, handler);
 }
 
-void AddCheckRequirementsCraftingHandler( CraftingSession *session, void *userData,
-                                          void (*handler)(void*, CheckRequirementsEventArgs* ))
+void AddCheckRequirementsCraftingHandler(CraftingSession *session, void *userData,
+    void(*handler)(void*, CheckRequirementsEventArgs*))
 {
-  session->OnCheckRequirements.Add( userData, handler );
+    session->OnCheckRequirements.Add(userData, handler);
 }
 
-void AddMaterialFoundCraftingHandler( CraftingSession *session, void *userData,
-                                      void (*handler)(void*, MaterialFoundEventArgs* ))
+void AddMaterialFoundCraftingHandler(CraftingSession *session, void *userData,
+    void(*handler)(void*, MaterialFoundEventArgs*))
 {
-  session->OnMaterialFound.Add( userData, handler );
+    session->OnMaterialFound.Add(userData, handler);
 }
 
-void AddSetObjectStatsCraftingHandler( CraftingSession *session, void *userData,
-                                       void (*handler)(void*, SetObjectStatsEventArgs* ))
+void AddSetObjectStatsCraftingHandler(CraftingSession *session, void *userData,
+    void(*handler)(void*, SetObjectStatsEventArgs*))
 {
-  session->OnSetObjectStats.Add( userData, handler );
+    session->OnSetObjectStats.Add(userData, handler);
 }
 
-void AddFinishedCraftingHandler( CraftingSession *session, void *userData,
-                                 void (*handler)(void*, FinishedCraftingEventArgs* ))
+void AddFinishedCraftingHandler(CraftingSession *session, void *userData,
+    void(*handler)(void*, FinishedCraftingEventArgs*))
 {
-  session->OnFinishedCrafting.Add( userData, handler );
+    session->OnFinishedCrafting.Add(userData, handler);
 }
 
-void AddAbortCraftingHandler( CraftingSession *session, void *userData,
-                              void (*handler)(void*, AbortCraftingEventArgs* ))
+void AddAbortCraftingHandler(CraftingSession *session, void *userData,
+    void(*handler)(void*, AbortCraftingEventArgs*))
 {
-  session->OnAbort.Add( userData, handler );
+    session->OnAbort.Add(userData, handler);
 }
 
-bool IsCrafting( const Character *ch )
+bool IsCrafting(const Character *ch)
 {
-  return ch->PCData->CraftingSession != nullptr;
+    return ch->PCData->CraftingSession != nullptr;
 }

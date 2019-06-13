@@ -4,65 +4,65 @@
 #include "pcdata.hpp"
 #include "protoobject.hpp"
 
-void do_olist( Character *ch, std::string argument )
+void do_olist(Character *ch, std::string argument)
 {
-  std::string arg1;
-  std::string arg2;
+    std::string arg1;
+    std::string arg2;
 
-  /*
-   * Greater+ can list out of assigned range - Tri (mlist/rlist as well)
-   */
-  if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_CREATOR || !ch->PCData
-       || ( !ch->PCData->Build.Area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
+    /*
+     * Greater+ can list out of assigned range - Tri (mlist/rlist as well)
+     */
+    if (IsNpc(ch) || GetTrustLevel(ch) < LEVEL_CREATOR || !ch->PCData
+        || (!ch->PCData->Build.Area && GetTrustLevel(ch) < LEVEL_GREATER))
     {
-      ch->Echo("You don't have an assigned area.\r\n");
-      return;
+        ch->Echo("You don't have an assigned area.\r\n");
+        return;
     }
 
-  const Area *tarea = ch->PCData->Build.Area;
-  argument = OneArgument( argument, arg1 );
-  argument = OneArgument( argument, arg2 );
+    const Area *tarea = ch->PCData->Build.Area;
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
 
-  int lrange = 0;
-  int trange = 0;
-  
-  if ( tarea )
+    int lrange = 0;
+    int trange = 0;
+
+    if (tarea)
     {
-      if ( arg1.empty() )
-        lrange = tarea->VnumRanges.Object.First;     /* here.            -Thoric */
-      else
-        lrange = ToLong( arg1 );
+        if (arg1.empty())
+            lrange = tarea->VnumRanges.Object.First;     /* here.            -Thoric */
+        else
+            lrange = ToLong(arg1);
 
-      if ( arg2.empty() )
-        trange = tarea->VnumRanges.Object.Last;
-      else
-        trange = ToLong(arg2);
+        if (arg2.empty())
+            trange = tarea->VnumRanges.Object.Last;
+        else
+            trange = ToLong(arg2);
 
-      if ((lrange < tarea->VnumRanges.Object.First || trange > tarea->VnumRanges.Object.Last)
-          &&   GetTrustLevel( ch ) < LEVEL_GREATER )
+        if ((lrange < tarea->VnumRanges.Object.First || trange > tarea->VnumRanges.Object.Last)
+            && GetTrustLevel(ch) < LEVEL_GREATER)
         {
-          ch->Echo("That is out of your vnum range.\r\n");
-          return;
+            ch->Echo("That is out of your vnum range.\r\n");
+            return;
         }
     }
-  else
+    else
     {
-      lrange = ( IsNumber( arg1 ) ? ToLong( arg1 ) : 1 );
-      trange = ( IsNumber( arg2 ) ? ToLong( arg2 ) : 3 );
+        lrange = (IsNumber(arg1) ? ToLong(arg1) : 1);
+        trange = (IsNumber(arg2) ? ToLong(arg2) : 3);
     }
 
-  for (vnum_t vnum = lrange; vnum <= trange; ++vnum)
+    for (vnum_t vnum = lrange; vnum <= trange; ++vnum)
     {
-      const ProtoObject *obj = GetProtoObject( vnum );
-      
-      if ( obj == nullptr )
+        std::shared_ptr<ProtoObject> obj = GetProtoObject(vnum);
+
+        if (obj == nullptr)
         {
-          continue;
+            continue;
         }
-      
-      ch->Echo("%5ld) %-20s (%s)\r\n", vnum,
-               obj->Name.c_str(),
-               obj->ShortDescr.c_str() );
+
+        ch->Echo("%5ld) %-20s (%s)\r\n", vnum,
+            obj->Name.c_str(),
+            obj->ShortDescr.c_str());
     }
 }
 
