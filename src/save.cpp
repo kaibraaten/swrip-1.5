@@ -1459,7 +1459,7 @@ void LoadStorerooms()
                     else
                     {
                         Log->Bug("LoadStorerooms: bad section.");
-                        Log->Bug("%s", filename);
+                        Log->Bug("%s", filename.c_str());
                         break;
                     }
                 }

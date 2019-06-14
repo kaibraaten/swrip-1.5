@@ -23,6 +23,7 @@
 #ifndef _SWRIP_RESET_HPP_
 #define _SWRIP_RESET_HPP_
 
+#include <memory>
 #include <string>
 #include <utility/utility.hpp>
 #include "types.hpp"
