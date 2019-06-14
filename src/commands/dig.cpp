@@ -9,156 +9,156 @@
 #include "object.hpp"
 #include "exit.hpp"
 
-void do_dig( Character *ch, std::string arg )
+void do_dig(Character *ch, std::string arg)
 {
-  switch( ch->SubState )
+    switch (ch->SubState)
     {
     default:
-      if ( IsNpc(ch)  && IsAffectedBy( ch, AFF_CHARM ) )
+        if (IsNpc(ch) && IsAffectedBy(ch, AFF_CHARM))
         {
-          ch->Echo( "You can't concentrate enough for that.\r\n" );
-          return;
+            ch->Echo("You can't concentrate enough for that.\r\n");
+            return;
         }
 
-      if ( ch->Mount )
+        if (ch->Mount)
         {
-          ch->Echo( "You can't do that while mounted.\r\n" );
-          return;
+            ch->Echo("You can't do that while mounted.\r\n");
+            return;
         }
 
-      if ( !arg.empty() )
+        if (!arg.empty())
         {
-          const Exit *pexit = FindDoor(ch, arg, true);
-          
-	  if ( pexit == nullptr
-               && GetDirection(arg) == -1 )
+            std::shared_ptr<Exit> pexit = FindDoor(ch, arg, true);
+
+            if (pexit == nullptr
+                && GetDirection(arg) == -1)
             {
-              ch->Echo( "What direction is that?\r\n" );
-              return;
+                ch->Echo("What direction is that?\r\n");
+                return;
             }
 
-          if ( pexit != nullptr )
+            if (pexit != nullptr)
             {
-              if ( !pexit->Flags.test( Flag::Exit::Dig )
-                   && !pexit->Flags.test( Flag::Exit::Closed ) )
+                if (!pexit->Flags.test(Flag::Exit::Dig)
+                    && !pexit->Flags.test(Flag::Exit::Closed))
                 {
-                  ch->Echo( "There is no need to dig out that exit.\r\n" );
-                  return;
+                    ch->Echo("There is no need to dig out that exit.\r\n");
+                    return;
                 }
             }
         }
-      else
+        else
         {
-          switch( ch->InRoom->Sector )
+            switch (ch->InRoom->Sector)
             {
             case SECT_CITY:
             case SECT_INSIDE:
-              ch->Echo( "The floor is too hard to dig through.\r\n" );
-              return;
+                ch->Echo("The floor is too hard to dig through.\r\n");
+                return;
 
             case SECT_WATER_SWIM:
             case SECT_WATER_NOSWIM:
             case SECT_UNDERWATER:
-              ch->Echo( "You cannot dig here.\r\n" );
-              return;
+                ch->Echo("You cannot dig here.\r\n");
+                return;
 
             case SECT_AIR:
-              ch->Echo("What? In the air?!\r\n");
-              return;
+                ch->Echo("What? In the air?!\r\n");
+                return;
 
-	    default:
-	      break;
+            default:
+                break;
             }
         }
 
-      AddTimerToCharacter( ch, TIMER_CMD_FUN, umin(SkillTable[gsn_dig]->Beats / 10, 3),
-                           do_dig, SUB_PAUSE);
-      ch->dest_buf = CopyString( arg );
-      ch->Echo( "You begin digging...\r\n" );
-      Act( AT_PLAIN, "$n begins digging...", ch, NULL, NULL, TO_ROOM );
-      return;
+        AddTimerToCharacter(ch, TIMER_CMD_FUN, umin(SkillTable[gsn_dig]->Beats / 10, 3),
+            do_dig, SUB_PAUSE);
+        ch->dest_buf = CopyString(arg);
+        ch->Echo("You begin digging...\r\n");
+        Act(AT_PLAIN, "$n begins digging...", ch, NULL, NULL, TO_ROOM);
+        return;
 
     case SUB_PAUSE:
-      if ( !ch->dest_buf )
+        if (!ch->dest_buf)
         {
-          ch->Echo( "Your digging was interrupted!\r\n" );
-	  Act( AT_PLAIN, "$n's digging was interrupted!", ch, NULL, NULL, TO_ROOM );
-          Log->Bug( "do_dig: dest_buf NULL" );
-          return;
+            ch->Echo("Your digging was interrupted!\r\n");
+            Act(AT_PLAIN, "$n's digging was interrupted!", ch, NULL, NULL, TO_ROOM);
+            Log->Bug("do_dig: dest_buf NULL");
+            return;
         }
 
-      arg = static_cast<const char*>( ch->dest_buf );
-      FreeMemory( ch->dest_buf );
-      break;
+        arg = static_cast<const char*>(ch->dest_buf);
+        FreeMemory(ch->dest_buf);
+        break;
 
     case SUB_TIMER_DO_ABORT:
-      FreeMemory( ch->dest_buf );
-      ch->SubState = SUB_NONE;
-      ch->Echo( "You stop digging...\r\n" );
-      Act( AT_PLAIN, "$n stops digging...", ch, NULL, NULL, TO_ROOM );
-      return;
+        FreeMemory(ch->dest_buf);
+        ch->SubState = SUB_NONE;
+        ch->Echo("You stop digging...\r\n");
+        Act(AT_PLAIN, "$n stops digging...", ch, NULL, NULL, TO_ROOM);
+        return;
     }
 
-  ch->SubState = SUB_NONE;
+    ch->SubState = SUB_NONE;
 
-  /* not having a shovel makes it harder to succeed */
-  bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL);
+    /* not having a shovel makes it harder to succeed */
+    bool shovel = GetFirstObjectOfType(ch, ITEM_SHOVEL);
 
-  /* dig out an EX_DIG exit... */
-  if ( !arg.empty() )
+    /* dig out an EX_DIG exit... */
+    if (!arg.empty())
     {
-      Exit *pexit = FindDoor(ch, arg, true);
-      
-      if ( pexit != nullptr
-           && pexit->Flags.test( Flag::Exit::Dig )
-           && pexit->Flags.test( Flag::Exit::Closed ) )
+        std::shared_ptr<Exit> pexit = FindDoor(ch, arg, true);
+
+        if (pexit != nullptr
+            && pexit->Flags.test(Flag::Exit::Dig)
+            && pexit->Flags.test(Flag::Exit::Closed))
         {
-          /* 4 times harder to dig open a passage without a shovel */
-          if ( (GetRandomPercent() * (shovel ? 1 : 4)) <
-               (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]) )
+            /* 4 times harder to dig open a passage without a shovel */
+            if ((GetRandomPercent() * (shovel ? 1 : 4)) <
+                (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]))
             {
-              pexit->Flags.reset( Flag::Exit::Closed );
-              ch->Echo( "You dig open a passageway!\r\n" );
-              Act( AT_PLAIN, "$n digs open a passageway!", ch, NULL, NULL, TO_ROOM );
-              LearnFromSuccess( ch, gsn_dig );
-              return;
+                pexit->Flags.reset(Flag::Exit::Closed);
+                ch->Echo("You dig open a passageway!\r\n");
+                Act(AT_PLAIN, "$n digs open a passageway!", ch, NULL, NULL, TO_ROOM);
+                LearnFromSuccess(ch, gsn_dig);
+                return;
             }
         }
 
-      LearnFromFailure( ch, gsn_dig );
-      ch->Echo( "Your dig did not discover any exit...\r\n" );
-      Act( AT_PLAIN, "$n's dig did not discover any exit...", ch, NULL, NULL, TO_ROOM );
-      return;
+        LearnFromFailure(ch, gsn_dig);
+        ch->Echo("Your dig did not discover any exit...\r\n");
+        Act(AT_PLAIN, "$n's dig did not discover any exit...", ch, NULL, NULL, TO_ROOM);
+        return;
     }
 
-  bool found = false;
-  Object *obj = nullptr;
-  
-  for(auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
+    bool found = false;
+    Object *obj = nullptr;
+
+    for (auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
     {
-      obj = *i;
-      
-      /* twice as hard to find something without a shovel */
-      if ( IsBitSet( obj->Flags, ITEM_BURRIED )
-           &&  (GetRandomPercent() * (shovel ? 1 : 2)) <
-           (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]) )
+        obj = *i;
+
+        /* twice as hard to find something without a shovel */
+        if (IsBitSet(obj->Flags, ITEM_BURRIED)
+            && (GetRandomPercent() * (shovel ? 1 : 2)) <
+            (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]))
         {
-          found = true;
-          break;
+            found = true;
+            break;
         }
     }
 
-  if ( !found )
+    if (!found)
     {
-      ch->Echo( "Your dig uncovered nothing.\r\n" );
-      Act( AT_PLAIN, "$n's dig uncovered nothing.", ch, NULL, NULL, TO_ROOM );
-      LearnFromFailure( ch, gsn_dig );
-      return;
+        ch->Echo("Your dig uncovered nothing.\r\n");
+        Act(AT_PLAIN, "$n's dig uncovered nothing.", ch, NULL, NULL, TO_ROOM);
+        LearnFromFailure(ch, gsn_dig);
+        return;
     }
 
-  SeparateOneObjectFromGroup(obj);
-  RemoveBit( obj->Flags, ITEM_BURRIED );
-  Act( AT_SKILL, "Your dig uncovered $p!", ch, obj, NULL, TO_CHAR );
-  Act( AT_SKILL, "$n's dig uncovered $p!", ch, obj, NULL, TO_ROOM );
-  LearnFromSuccess( ch, gsn_dig );
+    SeparateOneObjectFromGroup(obj);
+    RemoveBit(obj->Flags, ITEM_BURRIED);
+    Act(AT_SKILL, "Your dig uncovered $p!", ch, obj, NULL, TO_CHAR);
+    Act(AT_SKILL, "$n's dig uncovered $p!", ch, obj, NULL, TO_ROOM);
+    LearnFromSuccess(ch, gsn_dig);
 }

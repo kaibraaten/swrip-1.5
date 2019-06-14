@@ -9,72 +9,72 @@
  *
  * the exit must have EX_PASSAGE set
  */
-void do_mp_close_passage( Character *ch, std::string argument )
+void do_mp_close_passage(Character *ch, std::string argument)
 {
-  std::string arg1;
-  std::string arg2;
-  Room *fromRoom = nullptr;
-  vnum_t fromRoomVnum = INVALID_VNUM;
-  DirectionType exit_num = DIR_INVALID;
-  Exit *pexit = nullptr;
+    std::string arg1;
+    std::string arg2;
+    Room *fromRoom = nullptr;
+    vnum_t fromRoomVnum = INVALID_VNUM;
+    DirectionType exit_num = DIR_INVALID;
+    std::shared_ptr<Exit> pexit;
 
-  if ( IsAffectedBy( ch, AFF_CHARM ) )
-    return;
+    if (IsAffectedBy(ch, AFF_CHARM))
+        return;
 
-  if ( !IsNpc( ch ) || ( ch->Desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
+    if (!IsNpc(ch) || (ch->Desc && GetTrustLevel(ch) < LEVEL_IMMORTAL))
     {
-      ch->Echo("Huh?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 
-  argument = OneArgument( argument, arg1 );
-  argument = OneArgument( argument, arg2 );
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
 
-  if ( arg1.empty() || arg2.empty() )
+    if (arg1.empty() || arg2.empty())
     {
-      ProgBug( "MpClosePassage - Bad syntax", ch );
-      return;
+        ProgBug("MpClosePassage - Bad syntax", ch);
+        return;
     }
 
-  if( !IsNumber(arg1) )
+    if (!IsNumber(arg1))
     {
-      ProgBug( "MpClosePassage - Bad syntax", ch );
-      return;
+        ProgBug("MpClosePassage - Bad syntax", ch);
+        return;
     }
 
-  fromRoomVnum = ToLong(arg1);
+    fromRoomVnum = ToLong(arg1);
 
-  if(  (fromRoom = GetRoom( fromRoomVnum ) )  ==NULL)
+    if ((fromRoom = GetRoom(fromRoomVnum)) == NULL)
     {
-      ProgBug( "MpClosePassage - Bad syntax", ch );
-      return;
+        ProgBug("MpClosePassage - Bad syntax", ch);
+        return;
     }
 
-  if( !IsNumber(arg2) )
+    if (!IsNumber(arg2))
     {
-      ProgBug( "MpClosePassage - Bad syntax", ch );
-      return;
+        ProgBug("MpClosePassage - Bad syntax", ch);
+        return;
     }
 
-  exit_num = (DirectionType) ToLong(arg2);
+    exit_num = (DirectionType)ToLong(arg2);
 
-  if( exit_num < DIR_NORTH || exit_num > MAX_DIR )
+    if (exit_num < DIR_NORTH || exit_num > MAX_DIR)
     {
-      ProgBug( "MpClosePassage - Bad syntax", ch );
-      return;
+        ProgBug("MpClosePassage - Bad syntax", ch);
+        return;
     }
 
-  if( ( pexit = GetExit(fromRoom, exit_num) ) == NULL )
+    if ((pexit = GetExit(fromRoom, exit_num)) == NULL)
     {
-      return;    /* already closed, ignore...  so rand_progs */
-      /*                            can close without spam */
+        return;    /* already closed, ignore...  so rand_progs */
+        /*                            can close without spam */
     }
 
-  if( !pexit->Flags.test( Flag::Exit::Passage ) )
+    if (!pexit->Flags.test(Flag::Exit::Passage))
     {
-      ProgBug( "MpClosePassage - Exit not a passage", ch );
-      return;
+        ProgBug("MpClosePassage - Exit not a passage", ch);
+        return;
     }
 
-  ExtractExit( fromRoom, pexit );
+    ExtractExit(fromRoom, pexit);
 }

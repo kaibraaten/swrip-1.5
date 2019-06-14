@@ -3,98 +3,98 @@
 #include "object.hpp"
 #include "exit.hpp"
 
-void do_unlock( Character *ch, std::string arg )
+void do_unlock(Character *ch, std::string arg)
 {
-  Object *obj = NULL;
-  Exit *pexit = NULL;
+    Object *obj = NULL;
+    std::shared_ptr<Exit> pexit;
 
-  if ( arg.empty() )
+    if (arg.empty())
     {
-      ch->Echo("Unlock what?\r\n");
-      return;
+        ch->Echo("Unlock what?\r\n");
+        return;
     }
 
-  if ( ( pexit = FindDoor( ch, arg, true ) ) != NULL )
+    if ((pexit = FindDoor(ch, arg, true)) != NULL)
     {
-      if ( !pexit->Flags.test( Flag::Exit::IsDoor ) )
+        if (!pexit->Flags.test(Flag::Exit::IsDoor))
         {
-          ch->Echo("You can't do that.\r\n");
-	  return;
-	}
+            ch->Echo("You can't do that.\r\n");
+            return;
+        }
 
-      if ( !pexit->Flags.test( Flag::Exit::Closed ) )
+        if (!pexit->Flags.test(Flag::Exit::Closed))
         {
-          ch->Echo("It's not closed.\r\n");
-          return;
-	}
+            ch->Echo("It's not closed.\r\n");
+            return;
+        }
 
-      if ( pexit->Key < 0 )
+        if (pexit->Key < 0)
         {
-          ch->Echo("It can't be unlocked.\r\n");
-	  return;
-	}
+            ch->Echo("It can't be unlocked.\r\n");
+            return;
+        }
 
-      if ( !HasKey( ch, pexit->Key) )
+        if (!HasKey(ch, pexit->Key))
         {
-          ch->Echo("You lack the key.\r\n");
-	  return;
-	}
+            ch->Echo("You lack the key.\r\n");
+            return;
+        }
 
-      if ( !pexit->Flags.test( Flag::Exit::Locked ) )
+        if (!pexit->Flags.test(Flag::Exit::Locked))
         {
-          ch->Echo("It's already unlocked.\r\n");
-	  return;
-	}
+            ch->Echo("It's already unlocked.\r\n");
+            return;
+        }
 
-      if ( !pexit->Flags.test( Flag::Exit::Secret )
-           || NiftyIsName( arg, pexit->Keyword ) )
+        if (!pexit->Flags.test(Flag::Exit::Secret)
+            || NiftyIsName(arg, pexit->Keyword))
         {
-          ch->Echo("*Click*\r\n");
-          Act( AT_ACTION, "$n unlocks the $d.",
-	       ch, NULL, pexit->Keyword.c_str(), TO_ROOM );
-	  RemoveBExitFlag( pexit, Flag::Exit::Locked );
-          return;
+            ch->Echo("*Click*\r\n");
+            Act(AT_ACTION, "$n unlocks the $d.",
+                ch, NULL, pexit->Keyword.c_str(), TO_ROOM);
+            RemoveBExitFlag(pexit, Flag::Exit::Locked);
+            return;
         }
     }
 
-  if ( ( obj = GetObjectHere( ch, arg ) ) != NULL )
+    if ((obj = GetObjectHere(ch, arg)) != NULL)
     {
-      /* 'unlock object' */
-      if ( obj->ItemType != ITEM_CONTAINER )
+        /* 'unlock object' */
+        if (obj->ItemType != ITEM_CONTAINER)
         {
-          ch->Echo("That's not a container.\r\n");
-	  return;
-	}
+            ch->Echo("That's not a container.\r\n");
+            return;
+        }
 
-      if ( !IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
+        if (!IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED))
         {
-          ch->Echo("It's not closed.\r\n");
-	  return;
-	}
+            ch->Echo("It's not closed.\r\n");
+            return;
+        }
 
-      if ( obj->Value[OVAL_CONTAINER_KEY] < 0 )
+        if (obj->Value[OVAL_CONTAINER_KEY] < 0)
         {
-          ch->Echo("It can't be unlocked.\r\n");
-	  return;
-	}
+            ch->Echo("It can't be unlocked.\r\n");
+            return;
+        }
 
-      if ( !HasKey( ch, obj->Value[OVAL_CONTAINER_KEY] ) )
+        if (!HasKey(ch, obj->Value[OVAL_CONTAINER_KEY]))
         {
-          ch->Echo("You lack the key.\r\n");
-          return;
-	}
+            ch->Echo("You lack the key.\r\n");
+            return;
+        }
 
-      if ( !IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_LOCKED) )
+        if (!IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_LOCKED))
         {
-          ch->Echo("It's already unlocked.\r\n");
-	  return;
-	}
+            ch->Echo("It's already unlocked.\r\n");
+            return;
+        }
 
-      RemoveBit(obj->Value[OVAL_CONTAINER_FLAGS], CONT_LOCKED);
-      ch->Echo("*Click*\r\n");
-      Act( AT_ACTION, "$n unlocks $p.", ch, obj, NULL, TO_ROOM );
-      return;
+        RemoveBit(obj->Value[OVAL_CONTAINER_FLAGS], CONT_LOCKED);
+        ch->Echo("*Click*\r\n");
+        Act(AT_ACTION, "$n unlocks $p.", ch, obj, NULL, TO_ROOM);
+        return;
     }
 
-  ch->Echo("You see no %s here.\r\n", arg.c_str());
+    ch->Echo("You see no %s here.\r\n", arg.c_str());
 }

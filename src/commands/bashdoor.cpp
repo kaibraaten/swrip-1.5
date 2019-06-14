@@ -8,7 +8,7 @@
 
 void do_bashdoor( Character *ch, std::string arg )
 {
-  Exit *pexit = NULL;
+    std::shared_ptr<Exit> pexit;
 
   if ( !IsNpc( ch )
        && ch->PCData->Learned[gsn_bashdoor] <= 0  )
@@ -32,7 +32,7 @@ void do_bashdoor( Character *ch, std::string arg )
   if ( ( pexit = FindDoor( ch, arg, false ) ) != NULL )
     {
       Room *to_room = NULL;
-      Exit *pexit_rev = NULL;
+      std::shared_ptr<Exit> pexit_rev;
       int bash_chance = 0;
       std::string keyword;
 

@@ -4,125 +4,125 @@
 #include "object.hpp"
 #include "exit.hpp"
 
-void do_open( Character *ch, std::string argument )
+void do_open(Character *ch, std::string argument)
 {
-  std::string arg;
-  Object *obj = NULL;
-  Exit *pexit = NULL;
-  int door = 0;
+    std::string arg;
+    Object *obj = NULL;
+    std::shared_ptr<Exit> pexit;
+    int door = 0;
 
-  OneArgument( argument, arg );
+    OneArgument(argument, arg);
 
-  if ( arg.empty() )
+    if (arg.empty())
     {
-      do_openhatch( ch , "" );
-      return;
+        do_openhatch(ch, "");
+        return;
     }
 
-  if ( ( pexit = FindDoor( ch, arg, true ) ) != NULL )
+    if ((pexit = FindDoor(ch, arg, true)) != NULL)
     {
-      Exit *pexit_rev = NULL;
+        std::shared_ptr<Exit> pexit_rev;
 
-      if ( !pexit->Flags.test( Flag::Exit::IsDoor ) )
+        if (!pexit->Flags.test(Flag::Exit::IsDoor))
         {
-          ch->Echo("You can't do that.\r\n");
-	  return;
-	}
+            ch->Echo("You can't do that.\r\n");
+            return;
+        }
 
-      if ( !pexit->Flags.test( Flag::Exit::Closed ) )
+        if (!pexit->Flags.test(Flag::Exit::Closed))
         {
-          ch->Echo("It's already open.\r\n");
-	  return;
-	}
+            ch->Echo("It's already open.\r\n");
+            return;
+        }
 
-      if ( pexit->Flags.test( Flag::Exit::Locked ) )
+        if (pexit->Flags.test(Flag::Exit::Locked))
         {
-          ch->Echo("It's locked.\r\n");
-          return;
-	}
+            ch->Echo("It's locked.\r\n");
+            return;
+        }
 
-      if ( !pexit->Flags.test( Flag::Exit::Secret )
-           || NiftyIsName( arg, pexit->Keyword ) )
+        if (!pexit->Flags.test(Flag::Exit::Secret)
+            || NiftyIsName(arg, pexit->Keyword))
         {
-          Act( AT_ACTION, "$n opens the $d.",
-	       ch, NULL, pexit->Keyword.c_str(), TO_ROOM );
-          Act( AT_ACTION, "You open the $d.",
-	       ch, NULL, pexit->Keyword.c_str(), TO_CHAR );
+            Act(AT_ACTION, "$n opens the $d.",
+                ch, NULL, pexit->Keyword.c_str(), TO_ROOM);
+            Act(AT_ACTION, "You open the $d.",
+                ch, NULL, pexit->Keyword.c_str(), TO_CHAR);
 
-          if ( (pexit_rev = pexit->ReverseExit) != NULL
-               && pexit_rev->ToRoom == ch->InRoom )
+            if ((pexit_rev = pexit->ReverseExit) != NULL
+                && pexit_rev->ToRoom == ch->InRoom)
             {
-              for(Character *rch : pexit->ToRoom->Characters())
-		{
-		  Act( AT_ACTION, "The $d opens.",
-		       rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR );
-		}
+                for (Character *rch : pexit->ToRoom->Characters())
+                {
+                    Act(AT_ACTION, "The $d opens.",
+                        rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR);
+                }
             }
 
-          RemoveBExitFlag( pexit, Flag::Exit::Closed );
-	  door = pexit->Direction;
+            RemoveBExitFlag(pexit, Flag::Exit::Closed);
+            door = pexit->Direction;
 
-          if ( door >= TRAP_N && door <= TRAP_SW )
-	    {
-	      CheckRoomForTraps( ch, TrapDoor[door]);
-	    }
+            if (door >= TRAP_N && door <= TRAP_SW)
+            {
+                CheckRoomForTraps(ch, TrapDoor[door]);
+            }
 
-          return;
+            return;
         }
     }
 
-  if ( ( obj = GetObjectHere( ch, arg ) ) != NULL )
+    if ((obj = GetObjectHere(ch, arg)) != NULL)
     {
-      if ( obj->ItemType != ITEM_CONTAINER )
+        if (obj->ItemType != ITEM_CONTAINER)
         {
-          if( IsBitSet( obj->WearFlags, ITEM_WEAR_OVER ) )
+            if (IsBitSet(obj->WearFlags, ITEM_WEAR_OVER))
             {
-              obj->Value[2] = 0;
-              Act( AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR );
-              Act( AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM );
-              CheckObjectForTrap( ch, obj, TRAP_OPEN );
-              return;
+                obj->Value[2] = 0;
+                Act(AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR);
+                Act(AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM);
+                CheckObjectForTrap(ch, obj, TRAP_OPEN);
+                return;
 
             }
 
-          ch->Echo("%s isn't a container.\r\n",
-		     Capitalize( obj->ShortDescr ).c_str() );
-          return;
+            ch->Echo("%s isn't a container.\r\n",
+                Capitalize(obj->ShortDescr).c_str());
+            return;
         }
 
-      if ( !IsBitSet(obj->Value[1], CONT_CLOSED) )
+        if (!IsBitSet(obj->Value[1], CONT_CLOSED))
         {
-          ch->Echo("%s is already open.\r\n",
-                   Capitalize( obj->ShortDescr ).c_str() );
-          return;
+            ch->Echo("%s is already open.\r\n",
+                Capitalize(obj->ShortDescr).c_str());
+            return;
         }
 
-      if ( !IsBitSet(obj->Value[1], CONT_CLOSEABLE) )
+        if (!IsBitSet(obj->Value[1], CONT_CLOSEABLE))
         {
-          ch->Echo("%s cannot be opened or closed.\r\n",
-                   Capitalize( obj->ShortDescr ).c_str() );
-          return;
+            ch->Echo("%s cannot be opened or closed.\r\n",
+                Capitalize(obj->ShortDescr).c_str());
+            return;
         }
 
-      if ( IsBitSet(obj->Value[1], CONT_LOCKED) )
+        if (IsBitSet(obj->Value[1], CONT_LOCKED))
         {
-          ch->Echo("%s is locked.\r\n", Capitalize( obj->ShortDescr ).c_str() );
-          return;
+            ch->Echo("%s is locked.\r\n", Capitalize(obj->ShortDescr).c_str());
+            return;
         }
 
-      RemoveBit(obj->Value[1], CONT_CLOSED);
-      Act( AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR );
-      Act( AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM );
-      CheckObjectForTrap( ch, obj, TRAP_OPEN );
-      return;
+        RemoveBit(obj->Value[1], CONT_CLOSED);
+        Act(AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR);
+        Act(AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM);
+        CheckObjectForTrap(ch, obj, TRAP_OPEN);
+        return;
     }
 
-  if ( !StrCmp(arg , "hatch") )
+    if (!StrCmp(arg, "hatch"))
     {
-      do_openhatch( ch , argument );
-      return;
+        do_openhatch(ch, argument);
+        return;
     }
 
-  do_openhatch( ch, argument );
+    do_openhatch(ch, argument);
 }
 

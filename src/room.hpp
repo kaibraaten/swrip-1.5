@@ -65,9 +65,9 @@ public:
   void Remove(std::shared_ptr<Shuttle> shuttle);
   const std::list<std::shared_ptr<Shuttle>> &Shuttles() const;
 
-  void Add(Exit *xit);
-  void Remove(Exit *xit);
-  const std::list<Exit*> &Exits() const;
+  void Add(std::shared_ptr<Exit> xit);
+  void Remove(std::shared_ptr<Exit> xit);
+  const std::list<std::shared_ptr<Exit>> &Exits() const;
 
   void Add(Character *character);
   void Remove(Character *character);

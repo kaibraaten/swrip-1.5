@@ -18,7 +18,7 @@ void do_redit( Character *ch, std::string argument )
     Room *location = NULL;
     Room *tmp = NULL;
     std::shared_ptr<ExtraDescription> ed;
-    Exit *xit = NULL, *texit = NULL;
+    std::shared_ptr<Exit> xit, texit;
     int value = 0;
     DirectionType edir = DIR_INVALID;
     vnum_t evnum = INVALID_VNUM;
@@ -630,7 +630,7 @@ void do_redit( Character *ch, std::string argument )
      */
     if ( !StrCmp( arg, "bexit" ) )
     {
-        Exit *this_exit = NULL, *rxit = NULL;
+        std::shared_ptr<Exit> this_exit, rxit;
         std::string tmpcmd;
         Room *tmploc = NULL;
         vnum_t vnum = INVALID_VNUM;

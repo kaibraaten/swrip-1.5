@@ -4,70 +4,70 @@
 #include "room.hpp"
 #include "exit.hpp"
 
-void do_exits( Character *ch, std::string argument )
+void do_exits(Character *ch, std::string argument)
 {
-  char buf[MAX_STRING_LENGTH] = {'\0'};
-  bool found = false;
-  bool fAuto = !StrCmp( argument, "auto" );
+    char buf[MAX_STRING_LENGTH] = { '\0' };
+    bool found = false;
+    bool fAuto = !StrCmp(argument, "auto");
 
-  SetCharacterColor( AT_EXITS, ch );
+    SetCharacterColor(AT_EXITS, ch);
 
-  if ( IsBlind( ch ) )
+    if (IsBlind(ch))
     {
-      ch->Echo( "You can't see a thing!\r\n" );
-      return;
+        ch->Echo("You can't see a thing!\r\n");
+        return;
     }
 
-  strcpy( buf, fAuto ? "Exits:" : "Obvious exits:\r\n" );
+    strcpy(buf, fAuto ? "Exits:" : "Obvious exits:\r\n");
 
-  for ( const Exit *pexit : ch->InRoom->Exits() )
+    for (std::shared_ptr<Exit> pexit : ch->InRoom->Exits())
     {
-      if ( pexit->ToRoom
-           && !pexit->Flags.test( Flag::Exit::Hidden ) )
+        if (pexit->ToRoom
+            && !pexit->Flags.test(Flag::Exit::Hidden))
         {
-          found = true;
+            found = true;
 
-          if ( !fAuto )
+            if (!fAuto)
             {
-              if ( pexit->Flags.test( Flag::Exit::Closed ) )
+                if (pexit->Flags.test(Flag::Exit::Closed))
                 {
-                  sprintf( buf + strlen(buf), "%-5s - (closed)\r\n",
-                           Capitalize( GetDirectionName(pexit->Direction) ).c_str() );
+                    sprintf(buf + strlen(buf), "%-5s - (closed)\r\n",
+                        Capitalize(GetDirectionName(pexit->Direction)).c_str());
                 }
-              else if ( pexit->Flags.test( Flag::Exit::Window ) )
+                else if (pexit->Flags.test(Flag::Exit::Window))
                 {
-                  sprintf( buf + strlen(buf), "%-5s - (window)\r\n",
-			   Capitalize( GetDirectionName(pexit->Direction) ).c_str() );
+                    sprintf(buf + strlen(buf), "%-5s - (window)\r\n",
+                        Capitalize(GetDirectionName(pexit->Direction)).c_str());
                 }
-              else if ( pexit->Flags.test( Flag::Exit::Auto ) )
+                else if (pexit->Flags.test(Flag::Exit::Auto))
                 {
-                  sprintf( buf + strlen(buf), "%-5s - %s\r\n",
-                           Capitalize( pexit->Keyword ).c_str(),
-                           IsRoomDark( pexit->ToRoom )
-                           ?  "Too dark to tell"
-                           : pexit->ToRoom->Name.c_str() );
+                    sprintf(buf + strlen(buf), "%-5s - %s\r\n",
+                        Capitalize(pexit->Keyword).c_str(),
+                        IsRoomDark(pexit->ToRoom)
+                        ? "Too dark to tell"
+                        : pexit->ToRoom->Name.c_str());
                 }
-              else
+                else
                 {
-                  sprintf( buf + strlen(buf), "%-5s - %s\r\n",
-                           Capitalize( GetDirectionName(pexit->Direction) ).c_str(),
-                           IsRoomDark( pexit->ToRoom )
-                           ?  "Too dark to tell"
-                           : pexit->ToRoom->Name.c_str() );
+                    sprintf(buf + strlen(buf), "%-5s - %s\r\n",
+                        Capitalize(GetDirectionName(pexit->Direction)).c_str(),
+                        IsRoomDark(pexit->ToRoom)
+                        ? "Too dark to tell"
+                        : pexit->ToRoom->Name.c_str());
                 }
             }
-          else
+            else
             {
-              sprintf( buf + strlen(buf), " %s",
-                       Capitalize( GetDirectionName(pexit->Direction) ).c_str() );
+                sprintf(buf + strlen(buf), " %s",
+                    Capitalize(GetDirectionName(pexit->Direction)).c_str());
             }
         }
     }
 
-  if ( !found )
-    strcat( buf, fAuto ? " none.\r\n" : "None.\r\n" );
-  else if ( fAuto )
-    strcat( buf, ".\r\n" );
+    if (!found)
+        strcat(buf, fAuto ? " none.\r\n" : "None.\r\n");
+    else if (fAuto)
+        strcat(buf, ".\r\n");
 
-  ch->Echo("%s", buf);
+    ch->Echo("%s", buf);
 }

@@ -1363,7 +1363,7 @@ void InstallRoom(Area *pArea, Room *pRoom, bool dodoors)
 
     if (dodoors)
     {
-        for (const Exit *pexit : pRoom->Exits())
+        for (std::shared_ptr<Exit> pexit : pRoom->Exits())
         {
             int state = 0;
 
@@ -1534,7 +1534,7 @@ void ResetArea(Area *pArea)
     ProtoMobile *pMobIndex = NULL;
     std::shared_ptr<ProtoObject> pObjIndex;
     std::shared_ptr<ProtoObject> pObjToIndex;
-    Exit *pexit = NULL;
+    std::shared_ptr<Exit> pexit;
     Object *to_obj = NULL;
     int level = 0;
     BitSetter bitsetter;

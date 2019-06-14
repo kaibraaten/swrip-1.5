@@ -628,7 +628,7 @@ void FoldArea(Area *tarea, const std::string &filename, bool install)
         else
             fprintf(fpout, "0 %d %d\n", static_cast<int>(room->Flags.to_ulong()), room->Sector);
 
-        for (const Exit *xit : room->Exits())
+        for (std::shared_ptr<Exit> xit : room->Exits())
         {
             if (xit->Flags.test(Flag::Exit::Portal)) /* don't fold portals */
             {
@@ -843,7 +843,7 @@ Reset *ParseReset(const Area *tarea, std::string argument, const Character *ch)
     int extra = 0;
     int value = 0;
     Room *room = nullptr;
-    Exit *pexit = nullptr;
+    std::shared_ptr<Exit> pexit;
 
     argument = OneArgument(argument, arg1);
     argument = OneArgument(argument, arg2);

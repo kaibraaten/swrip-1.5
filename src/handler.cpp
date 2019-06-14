@@ -180,7 +180,7 @@ void ExplodeRoom_1(Object *obj, Character *xch, Room *room, int blast)
     }
 
     /* other rooms */
-    for (const Exit *pexit : room->Exits())
+    for (std::shared_ptr<Exit> pexit : room->Exits())
     {
         if (pexit->ToRoom
             && pexit->ToRoom != room)
@@ -210,7 +210,7 @@ void ExplodeRoom_2(Room *room, int blast)
 
     if (blast > 0)
     {
-        for (const Exit *pexit : room->Exits())
+        for (std::shared_ptr<Exit> pexit : room->Exits())
         {
             if (pexit->ToRoom && pexit->ToRoom != room)
             {
@@ -2051,14 +2051,14 @@ Object *GetTrap(const Object *obj)
 /*
  * Remove an exit from a room                                   -Thoric
  */
-void ExtractExit(Room *room, Exit *pexit)
+void ExtractExit(Room *room, std::shared_ptr<Exit> pexit)
 {
     room->Remove(pexit);
 
     if (pexit->ReverseExit)
-        pexit->ReverseExit->ReverseExit = NULL;
-
-    delete pexit;
+    {
+        pexit->ReverseExit->ReverseExit = nullptr;
+    }
 }
 
 /*
@@ -2081,9 +2081,8 @@ void CleanRoom(Room *room)
 
     while (!room->Exits().empty())
     {
-        Exit *pexit = room->Exits().front();
+        std::shared_ptr<Exit> pexit = room->Exits().front();
         room->Remove(pexit);
-        delete pexit;
         top_exit--;
     }
 

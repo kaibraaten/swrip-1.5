@@ -1033,7 +1033,7 @@ static void PerformScavenging(Character *ch)
 
 static bool MobShouldWander(const Character *ch, DirectionType door)
 {
-    const Exit *pexit = GetExit(ch->InRoom, door);
+    std::shared_ptr<Exit> pexit = GetExit(ch->InRoom, door);
 
     return IsNpc(ch)
         && !IsBitSet(ch->Flags, ACT_RUNNING)
@@ -1048,7 +1048,7 @@ static bool MobShouldWander(const Character *ch, DirectionType door)
 
 static bool MobShouldFlee(const Character *ch, DirectionType door)
 {
-    const Exit *pexit = GetExit(ch->InRoom, door);
+    std::shared_ptr<Exit> pexit = GetExit(ch->InRoom, door);
 
     return ch->HitPoints.Current < ch->HitPoints.Max / 2
         && door < DIR_SOMEWHERE
@@ -1095,7 +1095,7 @@ static void PerformFlee(Character *ch, DirectionType door)
 
     if (found)
     {
-        const Exit *pexit = GetExit(ch->InRoom, door);
+        std::shared_ptr<Exit> pexit = GetExit(ch->InRoom, door);
         MoveCharacter(ch, pexit);
     }
 }
@@ -1251,7 +1251,7 @@ static void MobileUpdate()
         /* Wander */
         if (MobShouldWander(ch, door))
         {
-            const Exit *pexit = GetExit(ch->InRoom, door);
+            std::shared_ptr<Exit> pexit = GetExit(ch->InRoom, door);
             ch_ret retcode = MoveCharacter(ch, pexit);
 
             /* If ch changes position due
@@ -2154,17 +2154,16 @@ static void ObjectUpdate()
                 && (obj->WearFlags & ITEM_TAKE))
             {
                 Room *new_room = nullptr;
-                Exit *xit = nullptr;
-                const auto &exitIter = find_if(std::begin(obj->InRoom->Exits()),
-                    std::end(obj->InRoom->Exits()),
+                std::shared_ptr<Exit> xit;
+                const auto &exitIter = Find(obj->InRoom->Exits(),
                     [](auto ex)
                 {
                     return ex->Direction == DIR_DOWN;
                 });
 
-                if (exitIter != std::end(obj->InRoom->Exits()))
+                if (exitIter != nullptr)
                 {
-                    xit = *exitIter;
+                    xit = exitIter;
                 }
                 else
                 {
@@ -2353,7 +2352,7 @@ static void CharacterCheck()
                 }
 
                 DirectionType door = (DirectionType)NumberBits(4);
-                const Exit *pexit = GetExit(ch->InRoom, door);
+                std::shared_ptr<Exit> pexit = GetExit(ch->InRoom, door);
 
                 if (!IsBitSet(ch->Flags, ACT_SENTINEL)
                     && !IsBitSet(ch->Flags, ACT_PROTOTYPE)
@@ -2930,18 +2929,17 @@ void RemovePortal(Object *portal)
     Room *fromRoom = portal->InRoom;
     const Room *toRoom = NULL;
     Character *ch = NULL;
-    Exit *pexit = NULL;
+    std::shared_ptr<Exit> pexit;
 
-    const auto &exitIter = find_if(std::begin(fromRoom->Exits()),
-        std::end(fromRoom->Exits()),
+    const auto &exitIter = Find(fromRoom->Exits(),
         [](auto ex)
     {
         return ex->Flags.test(Flag::Exit::Portal);
     });
 
-    if (exitIter != std::end(fromRoom->Exits()))
+    if (exitIter != nullptr)
     {
-        pexit = *exitIter;
+        pexit = exitIter;
     }
     else
     {

@@ -46,10 +46,7 @@ protected:
         delete _toRoom;
         _toRoom = nullptr;
 
-        delete _sourceExit;
         _sourceExit = nullptr;
-
-        delete _destinationExit;
         _destinationExit = nullptr;
 
         delete Log;
@@ -61,8 +58,8 @@ protected:
     ProtoMobile *_protomob = nullptr;
     Room *_fromRoom = nullptr;
     Room *_toRoom = nullptr;
-    Exit *_sourceExit = nullptr;
-    Exit *_destinationExit = nullptr;
+    std::shared_ptr<Exit> _sourceExit;
+    std::shared_ptr<Exit> _destinationExit;
 };
 
 #ifndef DEACTIVATE_FAILING_TESTS

@@ -73,8 +73,6 @@ void LoadAreaFile(Area *tarea, const std::string &filename)
 
     for (; ; )
     {
-        const char *word;
-
         if (ReadChar(fpArea, Log, fBootDb) != '#')
         {
             Log->Bug("%s", tarea->Filename.c_str());
@@ -82,7 +80,7 @@ void LoadAreaFile(Area *tarea, const std::string &filename)
             exit(1);
         }
 
-        word = ReadWord(fpArea, Log, fBootDb);
+        std::string word = ReadWord(fpArea, Log, fBootDb);
 
         if (word[0] == '$')
         {
@@ -163,7 +161,7 @@ void FixAreaExits(Area *tarea)
         if ((pRoomIndex = GetRoom(rnum)) == NULL)
             continue;
 
-        for (Exit *pexit : pRoomIndex->Exits())
+        for (std::shared_ptr<Exit> pexit : pRoomIndex->Exits())
         {
             fexit = true;
             pexit->ReverseVnum = pRoomIndex->Vnum;
@@ -189,11 +187,12 @@ void FixAreaExits(Area *tarea)
             continue;
         }
 
-        for (Exit *pexit : pRoomIndex->Exits())
+        for (std::shared_ptr<Exit> pexit : pRoomIndex->Exits())
         {
             if (pexit->ToRoom && !pexit->ReverseExit)
             {
-                Exit *rev_exit = GetExitTo(pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum);
+                std::shared_ptr<Exit> rev_exit = GetExitTo(pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum);
+
                 if (rev_exit)
                 {
                     pexit->ReverseExit = rev_exit;
@@ -979,9 +978,6 @@ static void LoadRooms(Area *tarea, FILE *fp)
 
             if (letter == 'D')
             {
-                Exit *pexit;
-                int locks;
-
                 door = (DirectionType)ReadInt(fp, Log, fBootDb);
 
                 if (door < DIR_NORTH || door > DIR_SOMEWHERE)
@@ -997,7 +993,7 @@ static void LoadRooms(Area *tarea, FILE *fp)
                     char *description = ReadStringToTilde(fp, Log, fBootDb);
                     char *keyword = ReadStringToTilde(fp, Log, fBootDb);
 
-                    pexit = MakeExit(pRoomIndex, NULL, door, keyword);
+                    std::shared_ptr<Exit> pexit = MakeExit(pRoomIndex, NULL, door, keyword);
                     FreeMemory(keyword);
 
                     pexit->Description = description;
@@ -1009,7 +1005,7 @@ static void LoadRooms(Area *tarea, FILE *fp)
                     sscanf(ln, "%d %d %d %d",
                         &x1, &x2, &x3, &x4);
 
-                    locks = x1;
+                    int locks = x1;
                     pexit->Key = x2;
                     pexit->Vnum = x3;
                     pexit->Direction = door;
@@ -1563,15 +1559,14 @@ void CloseArea(Area *pArea)
     {
         for (rid = RoomIndexHash[icnt]; rid; rid = rid_next)
         {
-            std::list<Exit*> copyOfExitList(rid->Exits());
+            std::list<std::shared_ptr<Exit>> copyOfExitList(rid->Exits());
             rid_next = rid->Next;
 
-            for (Exit *xit : copyOfExitList)
+            for (std::shared_ptr<Exit> xit : copyOfExitList)
             {
                 if (rid->Area == pArea || xit->ToRoom->Area == pArea)
                 {
                     rid->Remove(xit);
-                    delete xit;
                 }
             }
 

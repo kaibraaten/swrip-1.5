@@ -425,7 +425,7 @@ void Interpret(Character *ch, std::string argument)
             && !CheckSocial(ch, command, argument)
             && !ImcCommandHook(ch, command, argument))
         {
-            Exit *pexit = NULL;
+            std::shared_ptr<Exit> pexit;
 
             /* check for an auto-matic exit command */
             if ((pexit = FindDoor(ch, command, true)) != NULL

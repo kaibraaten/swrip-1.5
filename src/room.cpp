@@ -10,7 +10,7 @@ struct Room::Impl
 {
   std::list<std::shared_ptr<Ship>> Ships;
   std::list<std::shared_ptr<Shuttle>> Shuttles;
-  std::list<Exit*> Exits;
+  std::list<std::shared_ptr<Exit>> Exits;
   std::list<Character*> Characters;
   std::list<Object*> Objects;
   std::list<std::shared_ptr<ExtraDescription>> ExtraDescriptions;
@@ -57,7 +57,7 @@ const std::list<std::shared_ptr<Shuttle>> &Room::Shuttles() const
   return pImpl->Shuttles;
 }
 
-void Room::Add(Exit *xit)
+void Room::Add(std::shared_ptr<Exit> xit)
 {
   pImpl->Exits.push_back(xit);
   pImpl->Exits.sort([](const auto x1, const auto x2)
@@ -73,12 +73,12 @@ void Room::Add(Exit *xit)
                     });
 }
 
-void Room::Remove(Exit *xit)
+void Room::Remove(std::shared_ptr<Exit> xit)
 {
   pImpl->Exits.remove(xit);
 }
 
-const std::list<Exit*> &Room::Exits() const
+const std::list<std::shared_ptr<Exit> > &Room::Exits() const
 {
   return pImpl->Exits;
 }

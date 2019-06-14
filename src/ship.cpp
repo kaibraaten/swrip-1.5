@@ -832,7 +832,7 @@ bool CheckHostile(std::shared_ptr<Ship> ship)
     return false;
 }
 
-ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, Exit *pexit, int fall)
+ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit> pexit, int fall)
 {
     Room *in_room = NULL;
     Room *to_room = NULL;

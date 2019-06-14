@@ -747,9 +747,9 @@ static void FixExits(void)
             pRoomIndex = pRoomIndex->Next)
         {
             bool fexit = false;
-            std::list<Exit*> copyOfExitList(pRoomIndex->Exits());
+            std::list<std::shared_ptr<Exit> > copyOfExitList(pRoomIndex->Exits());
 
-            for (Exit *pexit : copyOfExitList)
+            for (std::shared_ptr<Exit> pexit : copyOfExitList)
             {
                 pexit->ReverseVnum = pRoomIndex->Vnum;
 
@@ -788,11 +788,12 @@ static void FixExits(void)
             pRoomIndex;
             pRoomIndex = pRoomIndex->Next)
         {
-            for (Exit *pexit : pRoomIndex->Exits())
+            for (std::shared_ptr<Exit> pexit : pRoomIndex->Exits())
             {
                 if (pexit->ToRoom && !pexit->ReverseExit)
                 {
-                    Exit *rev_exit = GetExitTo(pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum);
+                    std::shared_ptr<Exit> rev_exit = GetExitTo(pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum);
+
                     if (rev_exit)
                     {
                         pexit->ReverseExit = rev_exit;
@@ -862,854 +863,854 @@ static void SortExits(Room *room)
         else
         {
             exits[x]->Next = exits[x + 1];
-        ]
         }
+    }
 #endif
 }
 
-    void RandomizeExits(Room *room, short maxdir)
+void RandomizeExits(Room *room, short maxdir)
+{
+    int nexits = 0;
+    DirectionType vdirs[MAX_REXITS];
+
+    for (std::shared_ptr<Exit> pexit : room->Exits())
     {
-        int nexits = 0;
-        DirectionType vdirs[MAX_REXITS];
+        vdirs[nexits++] = pexit->Direction;
+    }
 
-        for (Exit *pexit : room->Exits())
-        {
-            vdirs[nexits++] = pexit->Direction;
-        }
-
-        for (int d0 = 0; d0 < nexits; d0++)
-        {
-            if (vdirs[d0] > maxdir)
-                continue;
-
-            int count = 0;
-            int d1 = 0;
-
-            while (vdirs[(d1 = GetRandomNumberFromRange(d0, nexits - 1))] > maxdir
-                || ++count > 5)
-                ;
-
-            if (vdirs[d1] > maxdir)
-                continue;
-
-            DirectionType door = vdirs[d0];
-            vdirs[d0] = vdirs[d1];
-            vdirs[d1] = door;
-        }
+    for (int d0 = 0; d0 < nexits; d0++)
+    {
+        if (vdirs[d0] > maxdir)
+            continue;
 
         int count = 0;
+        int d1 = 0;
 
-        for (Exit *pexit : room->Exits())
+        while (vdirs[(d1 = GetRandomNumberFromRange(d0, nexits - 1))] > maxdir
+            || ++count > 5)
+            ;
+
+        if (vdirs[d1] > maxdir)
+            continue;
+
+        DirectionType door = vdirs[d0];
+        vdirs[d0] = vdirs[d1];
+        vdirs[d1] = door;
+    }
+
+    int count = 0;
+
+    for (std::shared_ptr<Exit> pexit : room->Exits())
+    {
+        pexit->Direction = vdirs[count++];
+    }
+
+    SortExits(room);
+}
+
+/*
+ * Create an instance of a mobile.
+ */
+Character *AllocateMobile(ProtoMobile *pMobIndex)
+{
+    assert(pMobIndex != nullptr);
+
+    Character *mob = new Character(pMobIndex);
+
+    return mob;
+}
+
+Character *CreateMobile(ProtoMobile *proto)
+{
+    Character *mob = AllocateMobile(proto);
+
+    /*
+     * Insert in list.
+     */
+    AddCharacter(mob);
+    proto->Count++;
+    nummobsloaded++;
+    return mob;
+}
+
+/*
+ * Create an instance of an object.
+ */
+Object *AllocateObject(std::shared_ptr<ProtoObject> pObjIndex, int level)
+{
+    assert(pObjIndex != nullptr);
+    Object *obj = new Object(pObjIndex, level);
+    return obj;
+}
+
+Object *CreateObject(std::shared_ptr<ProtoObject> proto, int level)
+{
+    Object *obj = AllocateObject(proto, level);
+    Objects->Add(obj);
+    ++proto->Count;
+    ++numobjsloaded;
+    ++physicalobjects;
+
+    return obj;
+}
+
+/*
+ * Get an extra description from a list.
+ */
+std::string GetExtraDescription(const std::string &name,
+    const std::list<std::shared_ptr<ExtraDescription>> &extras)
+{
+    for (auto ed : extras)
+    {
+        if (IsName(name, ed->Keyword))
         {
-            pexit->Direction = vdirs[count++];
+            return ed->Description;
         }
-
-        SortExits(room);
     }
 
-    /*
-     * Create an instance of a mobile.
-     */
-    Character *AllocateMobile(ProtoMobile *pMobIndex)
+    return "";
+}
+
+/*
+ * Translates mob virtual number to its mob index struct.
+ * Hash table lookup.
+ */
+ProtoMobile *GetProtoMobile(vnum_t vnum)
+{
+    assert(vnum > 0);
+    ProtoMobile *pMobIndex;
+
+    for (pMobIndex = MobIndexHash[vnum % MAX_KEY_HASH];
+        pMobIndex;
+        pMobIndex = pMobIndex->Next)
     {
-        assert(pMobIndex != nullptr);
-
-        Character *mob = new Character(pMobIndex);
-
-        return mob;
-    }
-
-    Character *CreateMobile(ProtoMobile *proto)
-    {
-        Character *mob = AllocateMobile(proto);
-
-        /*
-         * Insert in list.
-         */
-        AddCharacter(mob);
-        proto->Count++;
-        nummobsloaded++;
-        return mob;
-    }
-
-    /*
-     * Create an instance of an object.
-     */
-    Object *AllocateObject(std::shared_ptr<ProtoObject> pObjIndex, int level)
-    {
-        assert(pObjIndex != nullptr);
-        Object *obj = new Object(pObjIndex, level);
-        return obj;
-    }
-
-    Object *CreateObject(std::shared_ptr<ProtoObject> proto, int level)
-    {
-        Object *obj = AllocateObject(proto, level);
-        Objects->Add(obj);
-        ++proto->Count;
-        ++numobjsloaded;
-        ++physicalobjects;
-
-        return obj;
-    }
-
-    /*
-     * Get an extra description from a list.
-     */
-    std::string GetExtraDescription(const std::string &name,
-        const std::list<std::shared_ptr<ExtraDescription>> &extras)
-    {
-        for (auto ed : extras)
+        if (pMobIndex->Vnum == vnum)
         {
-            if (IsName(name, ed->Keyword))
+            return pMobIndex;
+        }
+    }
+
+    if (fBootDb)
+    {
+        Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
+    }
+
+    return NULL;
+}
+
+/*
+ * Translates obj virtual number to its obj index struct.
+ * Hash table lookup.
+ */
+std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum)
+{
+    assert(vnum > 0);
+
+    for (std::shared_ptr<ProtoObject> pObjIndex = ObjectIndexHash[vnum % MAX_KEY_HASH];
+        pObjIndex; pObjIndex = pObjIndex->Next)
+    {
+        if (pObjIndex->Vnum == vnum)
+        {
+            return pObjIndex;
+        }
+    }
+
+    if (fBootDb)
+    {
+        Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
+    }
+
+    return nullptr;
+}
+
+/*
+ * Translates room virtual number to its room index struct.
+ * Hash table lookup.
+ */
+Room *GetRoom(vnum_t vnum)
+{
+    assert(vnum > 0);
+    for (Room *pRoomIndex = RoomIndexHash[vnum % MAX_KEY_HASH];
+        pRoomIndex;
+        pRoomIndex = pRoomIndex->Next)
+        if (pRoomIndex->Vnum == vnum)
+            return pRoomIndex;
+
+    if (fBootDb)
+        Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
+
+    return NULL;
+}
+
+/*
+ * Dump a text file to a player, a line at a time               -Thoric
+ */
+void ShowFile(const Character *ch, const std::string &filename)
+{
+    FILE *fp = nullptr;
+
+    if ((fp = fopen(filename.c_str(), "r")) != NULL)
+    {
+        int num = 0;
+        char buf[MAX_STRING_LENGTH];
+
+        while (!feof(fp))
+        {
+            while ((buf[num] = fgetc(fp)) != (char)EOF
+                && buf[num] != '\n'
+                && buf[num] != '\r'
+                && num < (MAX_STRING_LENGTH - 2))
             {
-                return ed->Description;
+                num++;
             }
-        }
 
-        return "";
-    }
+            int c = fgetc(fp);
 
-    /*
-     * Translates mob virtual number to its mob index struct.
-     * Hash table lookup.
-     */
-    ProtoMobile *GetProtoMobile(vnum_t vnum)
-    {
-        assert(vnum > 0);
-        ProtoMobile *pMobIndex;
+            if ((c != '\n' && c != '\r') || c == buf[num])
+                ungetc(c, fp);
 
-        for (pMobIndex = MobIndexHash[vnum % MAX_KEY_HASH];
-            pMobIndex;
-            pMobIndex = pMobIndex->Next)
-        {
-            if (pMobIndex->Vnum == vnum)
-            {
-                return pMobIndex;
-            }
-        }
-
-        if (fBootDb)
-        {
-            Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
-        }
-
-        return NULL;
-    }
-
-    /*
-     * Translates obj virtual number to its obj index struct.
-     * Hash table lookup.
-     */
-    std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum)
-    {
-        assert(vnum > 0);
-
-        for (std::shared_ptr<ProtoObject> pObjIndex = ObjectIndexHash[vnum % MAX_KEY_HASH];
-            pObjIndex; pObjIndex = pObjIndex->Next)
-        {
-            if (pObjIndex->Vnum == vnum)
-            {
-                return pObjIndex;
-            }
-        }
-
-        if (fBootDb)
-        {
-            Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
-        }
-
-        return nullptr;
-    }
-
-    /*
-     * Translates room virtual number to its room index struct.
-     * Hash table lookup.
-     */
-    Room *GetRoom(vnum_t vnum)
-    {
-        assert(vnum > 0);
-        for (Room *pRoomIndex = RoomIndexHash[vnum % MAX_KEY_HASH];
-            pRoomIndex;
-            pRoomIndex = pRoomIndex->Next)
-            if (pRoomIndex->Vnum == vnum)
-                return pRoomIndex;
-
-        if (fBootDb)
-            Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
-
-        return NULL;
-    }
-
-    /*
-     * Dump a text file to a player, a line at a time               -Thoric
-     */
-    void ShowFile(const Character *ch, const std::string &filename)
-    {
-        FILE *fp = nullptr;
-
-        if ((fp = fopen(filename.c_str(), "r")) != NULL)
-        {
-            int num = 0;
-            char buf[MAX_STRING_LENGTH];
-
-            while (!feof(fp))
-            {
-                while ((buf[num] = fgetc(fp)) != (char)EOF
-                    && buf[num] != '\n'
-                    && buf[num] != '\r'
-                    && num < (MAX_STRING_LENGTH - 2))
-                {
-                    num++;
-                }
-
-                int c = fgetc(fp);
-
-                if ((c != '\n' && c != '\r') || c == buf[num])
-                    ungetc(c, fp);
-
-                buf[num++] = '\n';
-                buf[num++] = '\r';
-                buf[num] = '\0';
-                ch->Echo("%s", buf);
-                num = 0;
-            }
+            buf[num++] = '\n';
+            buf[num++] = '\r';
+            buf[num] = '\0';
+            ch->Echo("%s", buf);
+            num = 0;
         }
     }
+}
 
-    /*
-     * wizlist builder!                                             -Thoric
-     */
-    static void ToWizFile(const std::string &line)
+/*
+ * wizlist builder!                                             -Thoric
+ */
+static void ToWizFile(const std::string &line)
+{
+    char outline[MAX_STRING_LENGTH] = { '\0' };
+
+    if (!line.empty())
     {
-        char outline[MAX_STRING_LENGTH] = { '\0' };
+        int filler = 78 - line.size();
 
-        if (!line.empty())
-        {
-            int filler = 78 - line.size();
+        if (filler < 1)
+            filler = 1;
 
-            if (filler < 1)
-                filler = 1;
+        filler /= 2;
 
-            filler /= 2;
+        for (int xx = 0; xx < filler; xx++)
+            strcat(outline, " ");
 
-            for (int xx = 0; xx < filler; xx++)
-                strcat(outline, " ");
-
-            strcat(outline, line.c_str());
-        }
-
-        strcat(outline, "\r\n");
-        FILE *wfp = fopen(WIZLIST_FILE, "a");
-
-        if (wfp)
-        {
-            fputs(outline, wfp);
-            fclose(wfp);
-        }
+        strcat(outline, line.c_str());
     }
 
-    static void AddToWizList(const std::string &name, int level)
+    strcat(outline, "\r\n");
+    FILE *wfp = fopen(WIZLIST_FILE, "a");
+
+    if (wfp)
     {
+        fputs(outline, wfp);
+        fclose(wfp);
+    }
+}
+
+static void AddToWizList(const std::string &name, int level)
+{
 #ifdef DEBUG
-        Log->Info("Adding to wizlist...");
+    Log->Info("Adding to wizlist...");
 #endif
-        Wizards.insert(Wizard(name, level));
-    }
+    Wizards.insert(Wizard(name, level));
+}
 
-    /*
-     * Wizlist builder                                              -Thoric
-     */
-    void MakeWizlist()
+/*
+ * Wizlist builder                                              -Thoric
+ */
+void MakeWizlist()
+{
+    Wizards.clear();
+
+    try
     {
-        Wizards.clear();
-
-        try
+        for (const auto &entry : fs::directory_iterator(GOD_DIR))
         {
-            for (const auto &entry : fs::directory_iterator(GOD_DIR))
+            const auto &path = entry.path();
+            std::string filename = path.filename().string();
+
+            if (entry.is_regular_file()
+                && filename[0] != '.')
             {
-                const auto &path = entry.path();
-                std::string filename = path.filename().string();
+                FILE *gfp = fopen(path.string().c_str(), "r");
 
-                if (entry.is_regular_file()
-                    && filename[0] != '.')
+                if (gfp)
                 {
-                    FILE *gfp = fopen(path.string().c_str(), "r");
+                    const char *word = feof(gfp) ? "End" : ReadWord(gfp, Log, fBootDb);
+                    int ilevel = ReadInt(gfp, Log, fBootDb);
 
-                    if (gfp)
-                    {
-                        const char *word = feof(gfp) ? "End" : ReadWord(gfp, Log, fBootDb);
-                        int ilevel = ReadInt(gfp, Log, fBootDb);
+                    ReadToEndOfLine(gfp, Log, fBootDb);
+                    word = feof(gfp) ? "End" : ReadWord(gfp, Log, fBootDb);
 
-                        ReadToEndOfLine(gfp, Log, fBootDb);
-                        word = feof(gfp) ? "End" : ReadWord(gfp, Log, fBootDb);
+                    int iflags = 0;
 
-                        int iflags = 0;
+                    if (!StrCmp(word, "Pcflags"))
+                        iflags = ReadInt(gfp, Log, fBootDb);
+                    else
+                        iflags = 0;
 
-                        if (!StrCmp(word, "Pcflags"))
-                            iflags = ReadInt(gfp, Log, fBootDb);
-                        else
-                            iflags = 0;
+                    fclose(gfp);
 
-                        fclose(gfp);
+                    if (IsBitSet(iflags, 1 << Flag::PCData::Retired))
+                        ilevel = MAX_LEVEL - 4;
 
-                        if (IsBitSet(iflags, 1 << Flag::PCData::Retired))
-                            ilevel = MAX_LEVEL - 4;
+                    if (IsBitSet(iflags, 1 << Flag::PCData::Guest))
+                        ilevel = MAX_LEVEL - 4;
 
-                        if (IsBitSet(iflags, 1 << Flag::PCData::Guest))
-                            ilevel = MAX_LEVEL - 4;
-
-                        AddToWizList(filename, ilevel);
-                    }
+                    AddToWizList(filename, ilevel);
                 }
             }
         }
-        catch (const fs::filesystem_error &ex)
-        {
-            Log->Bug("%s: Couldn't open god directory: %s", __FUNCTION__, ex.what());
-            return;
-        }
+    }
+    catch (const fs::filesystem_error &ex)
+    {
+        Log->Bug("%s: Couldn't open god directory: %s", __FUNCTION__, ex.what());
+        return;
+    }
 
-        unlink(WIZLIST_FILE);
-        ToWizFile(" Masters of Star Wars: Rise in Power!");
-        int ilevel = 65535;
-        char buf[MAX_STRING_LENGTH] = { '\0' };
+    unlink(WIZLIST_FILE);
+    ToWizFile(" Masters of Star Wars: Rise in Power!");
+    int ilevel = 65535;
+    char buf[MAX_STRING_LENGTH] = { '\0' };
 
-        for (const auto &wiz : Wizards)
+    for (const auto &wiz : Wizards)
+    {
+        if (wiz.Level > LEVEL_AVATAR)
         {
-            if (wiz.Level > LEVEL_AVATAR)
+            if (wiz.Level < ilevel)
             {
-                if (wiz.Level < ilevel)
-                {
-                    if (buf[0])
-                    {
-                        ToWizFile(buf);
-                        buf[0] = '\0';
-                    }
-
-                    ToWizFile("");
-                    ilevel = wiz.Level;
-
-                    switch (ilevel)
-                    {
-                    case MAX_LEVEL - 0:
-                        ToWizFile(" Implementors ");
-                        break;
-
-                    case MAX_LEVEL - 1:
-                        ToWizFile(" Head Administrator ");
-                        break;
-
-                    case MAX_LEVEL - 2:
-                        ToWizFile(" Administrators ");
-                        break;
-
-                    case MAX_LEVEL - 4:
-                        ToWizFile(" Lower Immortals ");
-                        break;
-
-                    default:
-                        ToWizFile(" Builders");
-                        break;
-                    }
-                }
-
-                if (strlen(buf) + wiz.Name.size() > 76)
+                if (buf[0])
                 {
                     ToWizFile(buf);
                     buf[0] = '\0';
                 }
 
-                strcat(buf, " ");
-                strcat(buf, wiz.Name.c_str());
+                ToWizFile("");
+                ilevel = wiz.Level;
 
-                if (strlen(buf) > 70)
+                switch (ilevel)
                 {
-                    ToWizFile(buf);
-                    buf[0] = '\0';
+                case MAX_LEVEL - 0:
+                    ToWizFile(" Implementors ");
+                    break;
+
+                case MAX_LEVEL - 1:
+                    ToWizFile(" Head Administrator ");
+                    break;
+
+                case MAX_LEVEL - 2:
+                    ToWizFile(" Administrators ");
+                    break;
+
+                case MAX_LEVEL - 4:
+                    ToWizFile(" Lower Immortals ");
+                    break;
+
+                default:
+                    ToWizFile(" Builders");
+                    break;
                 }
             }
-        }
 
-        if (buf[0])
-        {
-            ToWizFile(buf);
-        }
+            if (strlen(buf) + wiz.Name.size() > 76)
+            {
+                ToWizFile(buf);
+                buf[0] = '\0';
+            }
 
-        Wizards.clear();
+            strcat(buf, " ");
+            strcat(buf, wiz.Name.c_str());
+
+            if (strlen(buf) > 70)
+            {
+                ToWizFile(buf);
+                buf[0] = '\0';
+            }
+        }
     }
 
-    /*************************************************************/
-    /* Function to delete a room index.  Called from do_rdelete in build.c
-       Narn, May/96
-    */
-    bool DeleteRoom(Room *room)
+    if (buf[0])
     {
-        int iHash = 0;
-        Room *tmp = nullptr, *prev = nullptr;
-
-        iHash = room->Vnum % MAX_KEY_HASH;
-
-        /* Take the room index out of the hash list. */
-        for (tmp = RoomIndexHash[iHash]; tmp && tmp != room; tmp = tmp->Next)
-        {
-            prev = tmp;
-        }
-
-        if (!tmp)
-        {
-            Log->Bug("%s: room not found", __FUNCTION__);
-            return false;
-        }
-
-        if (prev)
-        {
-            prev->Next = room->Next;
-        }
-        else
-        {
-            RoomIndexHash[iHash] = room->Next;
-        }
-
-        delete room;
-
-        top_room--;
-        return true;
+        ToWizFile(buf);
     }
 
-    /* See comment on DeleteRoom. */
-    bool DeleteObject(std::shared_ptr<ProtoObject> obj)
+    Wizards.clear();
+}
+
+/*************************************************************/
+/* Function to delete a room index.  Called from do_rdelete in build.c
+   Narn, May/96
+*/
+bool DeleteRoom(Room *room)
+{
+    int iHash = 0;
+    Room *tmp = nullptr, *prev = nullptr;
+
+    iHash = room->Vnum % MAX_KEY_HASH;
+
+    /* Take the room index out of the hash list. */
+    for (tmp = RoomIndexHash[iHash]; tmp && tmp != room; tmp = tmp->Next)
     {
-        return true;
+        prev = tmp;
     }
 
-    /* See comment on DeleteRoom. */
-    bool DeleteMobile(ProtoMobile *mob)
+    if (!tmp)
     {
-        return true;
+        Log->Bug("%s: room not found", __FUNCTION__);
+        return false;
     }
 
-    /*
-     * Creat a new room (for online building)                       -Thoric
-     */
-    Room *MakeRoom(vnum_t vnum)
+    if (prev)
     {
-        Room *pRoomIndex = new Room();
-
-        pRoomIndex->Vnum = vnum;
-        pRoomIndex->Name = "Floating in a void";
-        pRoomIndex->Flags = CreateBitSet<Flag::MAX>({ Flag::Room::Prototype });
-        pRoomIndex->Sector = SECT_INSIDE;
-
-        int iHash = vnum % MAX_KEY_HASH;
-        pRoomIndex->Next = RoomIndexHash[iHash];
-        RoomIndexHash[iHash] = pRoomIndex;
-        top_room++;
-
-        return pRoomIndex;
+        prev->Next = room->Next;
+    }
+    else
+    {
+        RoomIndexHash[iHash] = room->Next;
     }
 
-    /*
-     * Create a new INDEX object (for online building)              -Thoric
-     * Option to clone an existing index object.
-     */
-    std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name)
+    delete room;
+
+    top_room--;
+    return true;
+}
+
+/* See comment on DeleteRoom. */
+bool DeleteObject(std::shared_ptr<ProtoObject> obj)
+{
+    return true;
+}
+
+/* See comment on DeleteRoom. */
+bool DeleteMobile(ProtoMobile *mob)
+{
+    return true;
+}
+
+/*
+ * Creat a new room (for online building)                       -Thoric
+ */
+Room *MakeRoom(vnum_t vnum)
+{
+    Room *pRoomIndex = new Room();
+
+    pRoomIndex->Vnum = vnum;
+    pRoomIndex->Name = "Floating in a void";
+    pRoomIndex->Flags = CreateBitSet<Flag::MAX>({ Flag::Room::Prototype });
+    pRoomIndex->Sector = SECT_INSIDE;
+
+    int iHash = vnum % MAX_KEY_HASH;
+    pRoomIndex->Next = RoomIndexHash[iHash];
+    RoomIndexHash[iHash] = pRoomIndex;
+    top_room++;
+
+    return pRoomIndex;
+}
+
+/*
+ * Create a new INDEX object (for online building)              -Thoric
+ * Option to clone an existing index object.
+ */
+std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name)
+{
+    std::shared_ptr<ProtoObject> cObjIndex;
+    char buf[MAX_STRING_LENGTH];
+
+    if (cvnum > 0)
     {
-        std::shared_ptr<ProtoObject> cObjIndex;
+        cObjIndex = GetProtoObject(cvnum);
+    }
+
+    std::shared_ptr<ProtoObject> pObjIndex = std::make_shared<ProtoObject>(vnum);
+
+    pObjIndex->Name = name;
+
+    if (!cObjIndex)
+    {
+        sprintf(buf, "A %s", name.c_str());
+        pObjIndex->ShortDescr = buf;
+        sprintf(buf, "A %s is here.", name.c_str());
+        pObjIndex->Description = buf;
+        pObjIndex->ShortDescr[0] = CharToLowercase(pObjIndex->ShortDescr[0]);
+        pObjIndex->Description[0] = CharToUppercase(pObjIndex->Description[0]);
+        pObjIndex->ItemType = ITEM_TRASH;
+        pObjIndex->Flags = ITEM_PROTOTYPE;
+        pObjIndex->Weight = 1;
+    }
+    else
+    {
+        pObjIndex->ShortDescr = cObjIndex->ShortDescr;
+        pObjIndex->Description = cObjIndex->Description;
+        pObjIndex->ActionDescription = cObjIndex->ActionDescription;
+        pObjIndex->ItemType = cObjIndex->ItemType;
+        pObjIndex->Flags = cObjIndex->Flags | ITEM_PROTOTYPE;
+        pObjIndex->WearFlags = cObjIndex->WearFlags;
+
+        pObjIndex->Weight = cObjIndex->Weight;
+        pObjIndex->Cost = cObjIndex->Cost;
+
+        for (auto ced : cObjIndex->ExtraDescriptions())
+        {
+            auto ed = std::make_shared<ExtraDescription>();
+            ed->Keyword = ced->Keyword;
+            ed->Description = ced->Description;
+            pObjIndex->Add(ed);
+            top_ed++;
+        }
+
+        for (auto cpaf : cObjIndex->Affects())
+        {
+            std::shared_ptr<Affect> paf = std::make_shared<Affect>();
+            paf->Type = cpaf->Type;
+            paf->Duration = cpaf->Duration;
+            paf->Location = cpaf->Location;
+            paf->Modifier = cpaf->Modifier;
+            paf->AffectedBy = cpaf->AffectedBy;
+            pObjIndex->Add(paf);
+            top_affect++;
+        }
+    }
+
+    int iHash = vnum % MAX_KEY_HASH;
+    pObjIndex->Next = ObjectIndexHash[iHash];
+    ObjectIndexHash[iHash] = pObjIndex;
+    top_obj_index++;
+
+    return pObjIndex;
+}
+
+/*
+ * Create a new INDEX mobile (for online building)              -Thoric
+ * Option to clone an existing index mobile.
+ */
+ProtoMobile *MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name)
+{
+    ProtoMobile *cMobIndex = nullptr;
+    char buf[MAX_STRING_LENGTH];
+
+    if (cvnum > 0)
+    {
+        cMobIndex = GetProtoMobile(cvnum);
+    }
+
+    ProtoMobile *pMobIndex = new ProtoMobile(vnum);
+    pMobIndex->Name = name;
+
+    if (!cMobIndex)
+    {
+        sprintf(buf, "A newly created %s", name.c_str());
+        pMobIndex->ShortDescr = buf;
+        sprintf(buf, "Some god abandoned a newly created %s here.\r\n", name.c_str());
+        pMobIndex->LongDescr = buf;
+        pMobIndex->ShortDescr[0] = CharToLowercase(pMobIndex->ShortDescr[0]);
+        pMobIndex->LongDescr[0] = CharToUppercase(pMobIndex->LongDescr[0]);
+        pMobIndex->Flags = ACT_NPC | ACT_PROTOTYPE;
+        pMobIndex->Level = 1;
+        pMobIndex->Position = DEFAULT_POSITION;
+        pMobIndex->DefaultPosition = DEFAULT_POSITION;
+        pMobIndex->Sex = SEX_NEUTRAL;
+        pMobIndex->Stats.Str = 10;
+        pMobIndex->Stats.Dex = 10;
+        pMobIndex->Stats.Int = 10;
+        pMobIndex->Stats.Wis = 10;
+        pMobIndex->Stats.Cha = 10;
+        pMobIndex->Stats.Con = 10;
+        pMobIndex->Stats.Lck = 10;
+        pMobIndex->Race = RACE_HUMAN;
+    }
+    else
+    {
+        pMobIndex->ShortDescr = cMobIndex->ShortDescr;
+        pMobIndex->LongDescr = cMobIndex->LongDescr;
+        pMobIndex->Description = cMobIndex->Description;
+        pMobIndex->Flags = cMobIndex->Flags | ACT_PROTOTYPE;
+        pMobIndex->AffectedBy = cMobIndex->AffectedBy;
+        pMobIndex->spec_fun = cMobIndex->spec_fun;
+        pMobIndex->spec_2 = cMobIndex->spec_2;
+        pMobIndex->Alignment = cMobIndex->Alignment;
+        pMobIndex->Level = cMobIndex->Level;
+        pMobIndex->ArmorClass = cMobIndex->ArmorClass;
+        pMobIndex->HitNoDice = cMobIndex->HitNoDice;
+        pMobIndex->HitSizeDice = cMobIndex->HitSizeDice;
+        pMobIndex->HitPlus = cMobIndex->HitPlus;
+        pMobIndex->DamNoDice = cMobIndex->DamNoDice;
+        pMobIndex->DamSizeDice = cMobIndex->DamSizeDice;
+        pMobIndex->DamPlus = cMobIndex->DamPlus;
+        pMobIndex->Gold = cMobIndex->Gold;
+        pMobIndex->exp = cMobIndex->exp;
+        pMobIndex->Position = cMobIndex->Position;
+        pMobIndex->DefaultPosition = cMobIndex->DefaultPosition;
+        pMobIndex->Sex = cMobIndex->Sex;
+        pMobIndex->Stats.Str = cMobIndex->Stats.Str;
+        pMobIndex->Stats.Dex = cMobIndex->Stats.Dex;
+        pMobIndex->Stats.Int = cMobIndex->Stats.Int;
+        pMobIndex->Stats.Wis = cMobIndex->Stats.Wis;
+        pMobIndex->Stats.Cha = cMobIndex->Stats.Cha;
+        pMobIndex->Stats.Con = cMobIndex->Stats.Con;
+        pMobIndex->Stats.Lck = cMobIndex->Stats.Lck;
+        pMobIndex->Race = cMobIndex->Race;
+        pMobIndex->Resistant = cMobIndex->Resistant;
+        pMobIndex->Immune = cMobIndex->Immune;
+        pMobIndex->Susceptible = cMobIndex->Susceptible;
+        pMobIndex->NumberOfAttacks = cMobIndex->NumberOfAttacks;
+        pMobIndex->AttackFlags = cMobIndex->AttackFlags;
+        pMobIndex->DefenseFlags = cMobIndex->DefenseFlags;
+    }
+
+    int iHash = vnum % MAX_KEY_HASH;
+    pMobIndex->Next = MobIndexHash[iHash];
+    MobIndexHash[iHash] = pMobIndex;
+    top_mob_index++;
+
+    return pMobIndex;
+}
+
+/*
+ * Creates a simple exit with no fields filled but rvnum and optionally
+ * to_room and vnum.                                            -Thoric
+ * Exits are inserted into the linked list based on vdir.
+ */
+std::shared_ptr<Exit> MakeExit(Room *pRoomIndex, Room *to_room, DirectionType door, const std::string &keyword)
+{
+    std::shared_ptr<Exit> pexit = std::make_shared<Exit>();
+    pexit->Direction = door;
+    pexit->ReverseVnum = pRoomIndex->Vnum;
+    pexit->ToRoom = to_room;
+    pexit->Distance = 1;
+    pexit->Keyword = keyword;
+
+    if (to_room)
+    {
+        pexit->Vnum = to_room->Vnum;
+        std::shared_ptr<Exit> texit = GetExitTo(to_room, GetReverseDirection(door), pRoomIndex->Vnum);
+
+        if (texit != nullptr)      /* assign reverse exit pointers */
+        {
+            texit->ReverseExit = pexit;
+            pexit->ReverseExit = texit;
+        }
+    }
+
+    pRoomIndex->Add(pexit);
+    top_exit++;
+    return pexit;
+}
+
+/* Build list of in_progress areas.  Do not load areas.
+ * define AREA_READ if you want it to build area names rather than reading
+ * them out of the area files. -- Altrag */
+static void LoadBuildList()
+{
+    try
+    {
+        FILE *fp;
         char buf[MAX_STRING_LENGTH];
+        char line[81];
+        char word[81];
+        int low, hi;
+        int mlow, mhi, olow, ohi, rlow, rhi;
+        bool badfile = false;
+        int temp;
 
-        if (cvnum > 0)
+        //while (dentry)
+        for (const auto &entry : fs::directory_iterator(GOD_DIR))
         {
-            cObjIndex = GetProtoObject(cvnum);
-        }
+            const std::string filename = entry.path().filename().string();
 
-        std::shared_ptr<ProtoObject> pObjIndex = std::make_shared<ProtoObject>(vnum);
-
-        pObjIndex->Name = name;
-
-        if (!cObjIndex)
-        {
-            sprintf(buf, "A %s", name.c_str());
-            pObjIndex->ShortDescr = buf;
-            sprintf(buf, "A %s is here.", name.c_str());
-            pObjIndex->Description = buf;
-            pObjIndex->ShortDescr[0] = CharToLowercase(pObjIndex->ShortDescr[0]);
-            pObjIndex->Description[0] = CharToUppercase(pObjIndex->Description[0]);
-            pObjIndex->ItemType = ITEM_TRASH;
-            pObjIndex->Flags = ITEM_PROTOTYPE;
-            pObjIndex->Weight = 1;
-        }
-        else
-        {
-            pObjIndex->ShortDescr = cObjIndex->ShortDescr;
-            pObjIndex->Description = cObjIndex->Description;
-            pObjIndex->ActionDescription = cObjIndex->ActionDescription;
-            pObjIndex->ItemType = cObjIndex->ItemType;
-            pObjIndex->Flags = cObjIndex->Flags | ITEM_PROTOTYPE;
-            pObjIndex->WearFlags = cObjIndex->WearFlags;
-
-            pObjIndex->Weight = cObjIndex->Weight;
-            pObjIndex->Cost = cObjIndex->Cost;
-
-            for (auto ced : cObjIndex->ExtraDescriptions())
+            if (filename[0] != '.')
             {
-                auto ed = std::make_shared<ExtraDescription>();
-                ed->Keyword = ced->Keyword;
-                ed->Description = ced->Description;
-                pObjIndex->Add(ed);
-                top_ed++;
-            }
+                sprintf(buf, "%s%s", GOD_DIR, filename.c_str());
 
-            for (auto cpaf : cObjIndex->Affects())
-            {
-                std::shared_ptr<Affect> paf = std::make_shared<Affect>();
-                paf->Type = cpaf->Type;
-                paf->Duration = cpaf->Duration;
-                paf->Location = cpaf->Location;
-                paf->Modifier = cpaf->Modifier;
-                paf->AffectedBy = cpaf->AffectedBy;
-                pObjIndex->Add(paf);
-                top_affect++;
-            }
-        }
-
-        int iHash = vnum % MAX_KEY_HASH;
-        pObjIndex->Next = ObjectIndexHash[iHash];
-        ObjectIndexHash[iHash] = pObjIndex;
-        top_obj_index++;
-
-        return pObjIndex;
-    }
-
-    /*
-     * Create a new INDEX mobile (for online building)              -Thoric
-     * Option to clone an existing index mobile.
-     */
-    ProtoMobile *MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name)
-    {
-        ProtoMobile *cMobIndex = nullptr;
-        char buf[MAX_STRING_LENGTH];
-
-        if (cvnum > 0)
-        {
-            cMobIndex = GetProtoMobile(cvnum);
-        }
-
-        ProtoMobile *pMobIndex = new ProtoMobile(vnum);
-        pMobIndex->Name = name;
-
-        if (!cMobIndex)
-        {
-            sprintf(buf, "A newly created %s", name.c_str());
-            pMobIndex->ShortDescr = buf;
-            sprintf(buf, "Some god abandoned a newly created %s here.\r\n", name.c_str());
-            pMobIndex->LongDescr = buf;
-            pMobIndex->ShortDescr[0] = CharToLowercase(pMobIndex->ShortDescr[0]);
-            pMobIndex->LongDescr[0] = CharToUppercase(pMobIndex->LongDescr[0]);
-            pMobIndex->Flags = ACT_NPC | ACT_PROTOTYPE;
-            pMobIndex->Level = 1;
-            pMobIndex->Position = DEFAULT_POSITION;
-            pMobIndex->DefaultPosition = DEFAULT_POSITION;
-            pMobIndex->Sex = SEX_NEUTRAL;
-            pMobIndex->Stats.Str = 10;
-            pMobIndex->Stats.Dex = 10;
-            pMobIndex->Stats.Int = 10;
-            pMobIndex->Stats.Wis = 10;
-            pMobIndex->Stats.Cha = 10;
-            pMobIndex->Stats.Con = 10;
-            pMobIndex->Stats.Lck = 10;
-            pMobIndex->Race = RACE_HUMAN;
-        }
-        else
-        {
-            pMobIndex->ShortDescr = cMobIndex->ShortDescr;
-            pMobIndex->LongDescr = cMobIndex->LongDescr;
-            pMobIndex->Description = cMobIndex->Description;
-            pMobIndex->Flags = cMobIndex->Flags | ACT_PROTOTYPE;
-            pMobIndex->AffectedBy = cMobIndex->AffectedBy;
-            pMobIndex->spec_fun = cMobIndex->spec_fun;
-            pMobIndex->spec_2 = cMobIndex->spec_2;
-            pMobIndex->Alignment = cMobIndex->Alignment;
-            pMobIndex->Level = cMobIndex->Level;
-            pMobIndex->ArmorClass = cMobIndex->ArmorClass;
-            pMobIndex->HitNoDice = cMobIndex->HitNoDice;
-            pMobIndex->HitSizeDice = cMobIndex->HitSizeDice;
-            pMobIndex->HitPlus = cMobIndex->HitPlus;
-            pMobIndex->DamNoDice = cMobIndex->DamNoDice;
-            pMobIndex->DamSizeDice = cMobIndex->DamSizeDice;
-            pMobIndex->DamPlus = cMobIndex->DamPlus;
-            pMobIndex->Gold = cMobIndex->Gold;
-            pMobIndex->exp = cMobIndex->exp;
-            pMobIndex->Position = cMobIndex->Position;
-            pMobIndex->DefaultPosition = cMobIndex->DefaultPosition;
-            pMobIndex->Sex = cMobIndex->Sex;
-            pMobIndex->Stats.Str = cMobIndex->Stats.Str;
-            pMobIndex->Stats.Dex = cMobIndex->Stats.Dex;
-            pMobIndex->Stats.Int = cMobIndex->Stats.Int;
-            pMobIndex->Stats.Wis = cMobIndex->Stats.Wis;
-            pMobIndex->Stats.Cha = cMobIndex->Stats.Cha;
-            pMobIndex->Stats.Con = cMobIndex->Stats.Con;
-            pMobIndex->Stats.Lck = cMobIndex->Stats.Lck;
-            pMobIndex->Race = cMobIndex->Race;
-            pMobIndex->Resistant = cMobIndex->Resistant;
-            pMobIndex->Immune = cMobIndex->Immune;
-            pMobIndex->Susceptible = cMobIndex->Susceptible;
-            pMobIndex->NumberOfAttacks = cMobIndex->NumberOfAttacks;
-            pMobIndex->AttackFlags = cMobIndex->AttackFlags;
-            pMobIndex->DefenseFlags = cMobIndex->DefenseFlags;
-        }
-
-        int iHash = vnum % MAX_KEY_HASH;
-        pMobIndex->Next = MobIndexHash[iHash];
-        MobIndexHash[iHash] = pMobIndex;
-        top_mob_index++;
-
-        return pMobIndex;
-    }
-
-    /*
-     * Creates a simple exit with no fields filled but rvnum and optionally
-     * to_room and vnum.                                            -Thoric
-     * Exits are inserted into the linked list based on vdir.
-     */
-    Exit *MakeExit(Room *pRoomIndex, Room *to_room, DirectionType door, const std::string &keyword)
-    {
-        Exit *pexit = new Exit();
-        pexit->Direction = door;
-        pexit->ReverseVnum = pRoomIndex->Vnum;
-        pexit->ToRoom = to_room;
-        pexit->Distance = 1;
-        pexit->Keyword = keyword;
-
-        if (to_room)
-        {
-            pexit->Vnum = to_room->Vnum;
-            Exit *texit = GetExitTo(to_room, GetReverseDirection(door), pRoomIndex->Vnum);
-
-            if (texit != nullptr)      /* assign reverse exit pointers */
-            {
-                texit->ReverseExit = pexit;
-                pexit->ReverseExit = texit;
-            }
-        }
-
-        pRoomIndex->Add(pexit);
-        top_exit++;
-        return pexit;
-    }
-
-    /* Build list of in_progress areas.  Do not load areas.
-     * define AREA_READ if you want it to build area names rather than reading
-     * them out of the area files. -- Altrag */
-    static void LoadBuildList()
-    {
-        try
-        {
-            FILE *fp;
-            char buf[MAX_STRING_LENGTH];
-            char line[81];
-            char word[81];
-            int low, hi;
-            int mlow, mhi, olow, ohi, rlow, rhi;
-            bool badfile = false;
-            int temp;
-
-            //while (dentry)
-            for (const auto &entry : fs::directory_iterator(GOD_DIR))
-            {
-                const std::string filename = entry.path().filename().string();
-
-                if (filename[0] != '.')
+                if (!(fp = fopen(buf, "r")))
                 {
-                    sprintf(buf, "%s%s", GOD_DIR, filename.c_str());
+                    Log->Bug("%s: invalid file", __FUNCTION__);
+                    continue;
+                }
+
+                Log->Info("%s", buf);
+                badfile = false;
+                rlow = rhi = olow = ohi = mlow = mhi = 0;
+
+                while (!feof(fp) && !ferror(fp))
+                {
+                    low = 0; hi = 0; word[0] = 0; line[0] = 0;
+
+                    if ((temp = fgetc(fp)) != EOF)
+                        ungetc(temp, fp);
+                    else
+                        break;
+
+                    fgets(line, 80, fp);
+                    sscanf(line, "%s %d %d", word, &low, &hi);
+
+                    if (!StrCmp(word, "Level"))
+                    {
+                        if (low < LEVEL_AVATAR)
+                        {
+                            sprintf(buf, "%s: God file with level %d < %d",
+                                filename.c_str(), low, LEVEL_AVATAR);
+                            badfile = true;
+                        }
+                    }
+                    if (!StrCmp(word, "RoomRange"))
+                        rlow = low, rhi = hi;
+                    else if (!StrCmp(word, "MobRange"))
+                        mlow = low, mhi = hi;
+                    else if (!StrCmp(word, "ObjRange"))
+                        olow = low, ohi = hi;
+                }
+
+                fclose(fp);
+
+                if (rlow && rhi && !badfile)
+                {
+                    sprintf(buf, "%s%s.are", BUILD_DIR, filename.c_str());
 
                     if (!(fp = fopen(buf, "r")))
                     {
-                        Log->Bug("%s: invalid file", __FUNCTION__);
+                        Log->Bug("%s: cannot open area file for read", __FUNCTION__);
                         continue;
                     }
 
-                    Log->Info("%s", buf);
-                    badfile = false;
-                    rlow = rhi = olow = ohi = mlow = mhi = 0;
+                    strcpy(word, ReadWord(fp, Log, fBootDb));
 
-                    while (!feof(fp) && !ferror(fp))
+                    if (word[0] != '#' || StrCmp(&word[1], "AREA"))
                     {
-                        low = 0; hi = 0; word[0] = 0; line[0] = 0;
-
-                        if ((temp = fgetc(fp)) != EOF)
-                            ungetc(temp, fp);
-                        else
-                            break;
-
-                        fgets(line, 80, fp);
-                        sscanf(line, "%s %d %d", word, &low, &hi);
-
-                        if (!StrCmp(word, "Level"))
-                        {
-                            if (low < LEVEL_AVATAR)
-                            {
-                                sprintf(buf, "%s: God file with level %d < %d",
-                                    filename.c_str(), low, LEVEL_AVATAR);
-                                badfile = true;
-                            }
-                        }
-                        if (!StrCmp(word, "RoomRange"))
-                            rlow = low, rhi = hi;
-                        else if (!StrCmp(word, "MobRange"))
-                            mlow = low, mhi = hi;
-                        else if (!StrCmp(word, "ObjRange"))
-                            olow = low, ohi = hi;
+                        sprintf(buf, "%s: %s.are: no #AREA found.",
+                            __FUNCTION__, filename.c_str());
+                        fclose(fp);
+                        continue;
                     }
+
+                    Area *pArea = new Area();
+                    sprintf(buf, "%s.are", filename.c_str());
+                    pArea->Author = filename;
+                    pArea->Filename = buf;
+                    pArea->Name = ReadStringToTilde(fp, Log, fBootDb);
+
+                    sprintf(buf, "{PROTO} %s's area in progress", filename.c_str());
+                    pArea->Name = buf;
 
                     fclose(fp);
-
-                    if (rlow && rhi && !badfile)
-                    {
-                        sprintf(buf, "%s%s.are", BUILD_DIR, filename.c_str());
-
-                        if (!(fp = fopen(buf, "r")))
-                        {
-                            Log->Bug("%s: cannot open area file for read", __FUNCTION__);
-                            continue;
-                        }
-
-                        strcpy(word, ReadWord(fp, Log, fBootDb));
-
-                        if (word[0] != '#' || StrCmp(&word[1], "AREA"))
-                        {
-                            sprintf(buf, "%s: %s.are: no #AREA found.",
-                                __FUNCTION__, filename.c_str());
-                            fclose(fp);
-                            continue;
-                        }
-
-                        Area *pArea = new Area();
-                        sprintf(buf, "%s.are", filename.c_str());
-                        pArea->Author = filename;
-                        pArea->Filename = buf;
-                        pArea->Name = ReadStringToTilde(fp, Log, fBootDb);
-
-                        sprintf(buf, "{PROTO} %s's area in progress", filename.c_str());
-                        pArea->Name = buf;
-
-                        fclose(fp);
-                        pArea->VnumRanges.Room.First = rlow;
-                        pArea->VnumRanges.Room.Last = rhi;
-                        pArea->VnumRanges.Mob.First = mlow;
-                        pArea->VnumRanges.Mob.Last = mhi;
-                        pArea->VnumRanges.Object.First = olow;
-                        pArea->VnumRanges.Object.Last = ohi;
-                        pArea->LevelRanges.Soft.Low = -1;
-                        pArea->LevelRanges.Soft.High = -1;
-                        pArea->LevelRanges.Hard.Low = -1;
-                        pArea->LevelRanges.Hard.High = -1;
-                        LINK(pArea, FirstBuild, LastBuild, Next, Previous);
-                        fprintf(stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld "
-                            "Mobs: %5ld - %-5ld\n",
-                            pArea->Filename.c_str(),
-                            pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
-                            pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,
-                            pArea->VnumRanges.Mob.First, pArea->VnumRanges.Mob.Last);
-                        SortArea(pArea, true);
-                    }
+                    pArea->VnumRanges.Room.First = rlow;
+                    pArea->VnumRanges.Room.Last = rhi;
+                    pArea->VnumRanges.Mob.First = mlow;
+                    pArea->VnumRanges.Mob.Last = mhi;
+                    pArea->VnumRanges.Object.First = olow;
+                    pArea->VnumRanges.Object.Last = ohi;
+                    pArea->LevelRanges.Soft.Low = -1;
+                    pArea->LevelRanges.Soft.High = -1;
+                    pArea->LevelRanges.Hard.Low = -1;
+                    pArea->LevelRanges.Hard.High = -1;
+                    LINK(pArea, FirstBuild, LastBuild, Next, Previous);
+                    fprintf(stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld "
+                        "Mobs: %5ld - %-5ld\n",
+                        pArea->Filename.c_str(),
+                        pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
+                        pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,
+                        pArea->VnumRanges.Mob.First, pArea->VnumRanges.Mob.Last);
+                    SortArea(pArea, true);
                 }
             }
         }
-        catch (const fs::filesystem_error &ex)
-        {
-            Log->Bug("%s: Could not open god dir: %s", __FUNCTION__, ex.what());
-        }
     }
-
-    /*
-     * Display vnums currently assigned to areas            -Altrag & Thoric
-     * Sorted, and flagged if loaded.
-     */
-    void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
-        const std::string &loadst, const std::string &notloadst)
+    catch (const fs::filesystem_error &ex)
     {
-        const Area *pArea = NULL;
-        const Area *first_sort = NULL;
-        int count = 0;
-        int loaded = 0;
-
-        SetCharacterColor(AT_PLAIN, ch);
-
-        if (proto)
-            first_sort = FirstBSort;
-        else
-            first_sort = FirstASort;
-
-        for (pArea = first_sort; pArea; pArea = pArea->NextSort)
-        {
-            if (IsBitSet(pArea->Status, AREA_DELETED))
-                continue;
-
-            if (pArea->VnumRanges.Room.First < low)
-                continue;
-
-            if (pArea->VnumRanges.Room.Last > high)
-                break;
-
-            if (IsBitSet(pArea->Status, AREA_LOADED))
-                loaded++;
-            else if (!shownl)
-                continue;
-
-            ch->Echo("%-22s| Rooms: %10ld - %-10ld"
-                " Objs: %10ld - %-10ld Mobs: %10ld - %-10ld%s\r\n",
-                (!pArea->Filename.empty() ? pArea->Filename.c_str() : "(invalid)"),
-                pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
-                pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,
-                pArea->VnumRanges.Mob.First, pArea->VnumRanges.Mob.Last,
-                IsBitSet(pArea->Status, AREA_LOADED) ? loadst.c_str() : notloadst.c_str());
-            count++;
-        }
-
-        ch->Echo("Areas listed: %d  Loaded: %d\r\n", count, loaded);
+        Log->Bug("%s: Could not open god dir: %s", __FUNCTION__, ex.what());
     }
+}
 
-    /*
-     * Append a string to a file.
-     */
-    void AppendFile(const Character *ch, const std::string &file, const std::string &str)
+/*
+ * Display vnums currently assigned to areas            -Altrag & Thoric
+ * Sorted, and flagged if loaded.
+ */
+void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
+    const std::string &loadst, const std::string &notloadst)
+{
+    const Area *pArea = NULL;
+    const Area *first_sort = NULL;
+    int count = 0;
+    int loaded = 0;
+
+    SetCharacterColor(AT_PLAIN, ch);
+
+    if (proto)
+        first_sort = FirstBSort;
+    else
+        first_sort = FirstASort;
+
+    for (pArea = first_sort; pArea; pArea = pArea->NextSort)
     {
-        FILE *fp;
+        if (IsBitSet(pArea->Status, AREA_DELETED))
+            continue;
 
-        if (IsNpc(ch) || str.empty())
-            return;
+        if (pArea->VnumRanges.Room.First < low)
+            continue;
 
-        if ((fp = fopen(file.c_str(), "a")) == NULL)
-        {
-            ch->Echo("Could not open the file!\n\r");
-        }
-        else
-        {
-            fprintf(fp, "[%5ld] %s: %s\n",
-                ch->InRoom ? ch->InRoom->Vnum : 0, ch->Name.c_str(), str.c_str());
-            fclose(fp);
-        }
+        if (pArea->VnumRanges.Room.Last > high)
+            break;
+
+        if (IsBitSet(pArea->Status, AREA_LOADED))
+            loaded++;
+        else if (!shownl)
+            continue;
+
+        ch->Echo("%-22s| Rooms: %10ld - %-10ld"
+            " Objs: %10ld - %-10ld Mobs: %10ld - %-10ld%s\r\n",
+            (!pArea->Filename.empty() ? pArea->Filename.c_str() : "(invalid)"),
+            pArea->VnumRanges.Room.First, pArea->VnumRanges.Room.Last,
+            pArea->VnumRanges.Object.First, pArea->VnumRanges.Object.Last,
+            pArea->VnumRanges.Mob.First, pArea->VnumRanges.Mob.Last,
+            IsBitSet(pArea->Status, AREA_LOADED) ? loadst.c_str() : notloadst.c_str());
+        count++;
     }
 
-    void AllocateRepositories(void)
+    ch->Echo("Areas listed: %d  Loaded: %d\r\n", count, loaded);
+}
+
+/*
+ * Append a string to a file.
+ */
+void AppendFile(const Character *ch, const std::string &file, const std::string &str)
+{
+    FILE *fp;
+
+    if (IsNpc(ch) || str.empty())
+        return;
+
+    if ((fp = fopen(file.c_str(), "a")) == NULL)
     {
-        Ships = NewShipRepository();
-        HelpFiles = NewHelpFileRepository();
-        BadNames = NewBadNameRepository();
-        Bans = NewBanRepository();
-        Boards = NewBoardRepository();
-        Bounties = NewBountyRepository();
-        Clans = NewClanRepository();
-        CommandRepository = NewCommandRepository();
-        Planets = NewPlanetRepository();
-        Spaceobjects = NewSpaceobjectRepository();
-        Socials = NewSocialRepository();
-        Shuttles = NewShuttleRepository();
-        PlayerCharacters = NewPlayerRepository();
-        Shops = NewShopRepository();
-        RepairShops = NewRepairShopRepository();
-        Descriptors = NewDescriptorRepository();
-        Objects = NewObjectRepository();
-        Skills = NewSkillRepository();
+        ch->Echo("Could not open the file!\n\r");
     }
+    else
+    {
+        fprintf(fp, "[%5ld] %s: %s\n",
+            ch->InRoom ? ch->InRoom->Vnum : 0, ch->Name.c_str(), str.c_str());
+        fclose(fp);
+    }
+}
+
+void AllocateRepositories(void)
+{
+    Ships = NewShipRepository();
+    HelpFiles = NewHelpFileRepository();
+    BadNames = NewBadNameRepository();
+    Bans = NewBanRepository();
+    Boards = NewBoardRepository();
+    Bounties = NewBountyRepository();
+    Clans = NewClanRepository();
+    CommandRepository = NewCommandRepository();
+    Planets = NewPlanetRepository();
+    Spaceobjects = NewSpaceobjectRepository();
+    Socials = NewSocialRepository();
+    Shuttles = NewShuttleRepository();
+    PlayerCharacters = NewPlayerRepository();
+    Shops = NewShopRepository();
+    RepairShops = NewRepairShopRepository();
+    Descriptors = NewDescriptorRepository();
+    Objects = NewObjectRepository();
+    Skills = NewSkillRepository();
+}

@@ -30,391 +30,391 @@
 #include "protoobject.hpp"
 #include "exit.hpp"
 
-/*
- * Function to handle the state changing of a triggerobject (lever)  -Thoric
- */
-void PullOrPush( Character *ch, Object *obj, bool pull )
+ /*
+  * Function to handle the state changing of a triggerobject (lever)  -Thoric
+  */
+void PullOrPush(Character *ch, Object *obj, bool pull)
 {
-  char buf[MAX_STRING_LENGTH];
-  Room *room = NULL,  *to_room = NULL;
-  Exit *pexit = NULL, *pexit_rev = NULL;
-  DirectionType edir = DIR_INVALID;
-  const char *txt = NULL;
-  bool isup = IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
+    char buf[MAX_STRING_LENGTH];
+    Room *room = NULL, *to_room = NULL;
+    std::shared_ptr<Exit> pexit, pexit_rev;
+    DirectionType edir = DIR_INVALID;
+    const char *txt = NULL;
+    bool isup = IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP);
 
-  switch( obj->ItemType )
+    switch (obj->ItemType)
     {
     default:
-      ch->Echo( "You can't %s that!\r\n", pull ? "pull" : "push" );
-      return;
-      break;
+        ch->Echo("You can't %s that!\r\n", pull ? "pull" : "push");
+        return;
+        break;
 
     case ITEM_SWITCH:
     case ITEM_LEVER:
     case ITEM_PULLCHAIN:
-      if ( (!pull && isup) || (pull && !isup) )
+        if ((!pull && isup) || (pull && !isup))
         {
-          ch->Echo( "It is already %s.\r\n", isup ? "up" : "down" );
-          return;
+            ch->Echo("It is already %s.\r\n", isup ? "up" : "down");
+            return;
         }
-      break;
+        break;
 
     case ITEM_BUTTON:
-      if ( (!pull && isup) || (pull & !isup) )
+        if ((!pull && isup) || (pull & !isup))
         {
-          ch->Echo( "It is already %s.\r\n", isup ? "in" : "out" );
-          return;
+            ch->Echo("It is already %s.\r\n", isup ? "in" : "out");
+            return;
         }
-      break;
+        break;
     }
 
-  if( pull && IsBitSet(obj->Prototype->mprog.progtypes,PULL_PROG) )
+    if (pull && IsBitSet(obj->Prototype->mprog.progtypes, PULL_PROG))
     {
-      if ( !IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
-	{
-	  RemoveBit( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
-	}
-
-      ObjProgPullTrigger( ch, obj );
-      return;
-    }
-
-  if( !pull && IsBitSet(obj->Prototype->mprog.progtypes,PUSH_PROG) )
-    {
-      if ( !IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
-	{
-	  SetBit( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
-	}
-
-      ObjProgPushTrigger( ch, obj );
-      return;
-    }
-
-  if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
-    {
-      sprintf( buf, "$n %s $p.", pull ? "pulls" : "pushes" );
-      Act( AT_ACTION, buf,  ch, obj, NULL, TO_ROOM );
-      sprintf( buf, "You %s $p.", pull ? "pull" : "push" );
-      Act( AT_ACTION, buf, ch, obj, NULL, TO_CHAR );
-    }
-
-  if ( !IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
-    {
-      if ( pull )
-	{
-	  RemoveBit( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
-	}
-      else
-	{
-	  SetBit( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
-	}
-    }
-
-  if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORT )
-       || IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL )
-       || IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS ) )
-    {
-      int flags = 0;
-
-      if ( ( room = GetRoom( obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
+        if (!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN))
         {
-          Log->Bug( "PullOrPush: obj points to invalid room %d",
-                    obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
-          return;
+            RemoveBit(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP);
         }
 
-      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_SHOWROOMDESC ) )
-	{
-	  SetBit( flags, TELE_SHOWDESC );
-	}
-
-      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL ) )
-	{
-	  SetBit( flags, TELE_TRANSALL );
-	}
-
-      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS ) )
-	{
-	  SetBit( flags, TELE_TRANSALLPLUS );
-	}
-
-      Teleport( ch, obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION], flags );
-      return;
+        ObjProgPullTrigger(ch, obj);
+        return;
     }
 
-  if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4 )
-       || IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND6 ) )
+    if (!pull && IsBitSet(obj->Prototype->mprog.progtypes, PUSH_PROG))
     {
-      int maxd = 0;
-
-      if ( ( room = GetRoom( obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
+        if (!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN))
         {
-          Log->Bug( "PullOrPush: obj points to invalid room %d",
-                    obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
-          return;
+            SetBit(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP);
         }
 
-      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4 ) )
-        maxd = 3;
-      else
-        maxd = 5;
+        ObjProgPushTrigger(ch, obj);
+        return;
+    }
 
-      RandomizeExits( room, maxd );
+    if (!ObjProgUseTrigger(ch, obj, NULL, NULL, NULL))
+    {
+        sprintf(buf, "$n %s $p.", pull ? "pulls" : "pushes");
+        Act(AT_ACTION, buf, ch, obj, NULL, TO_ROOM);
+        sprintf(buf, "You %s $p.", pull ? "pull" : "push");
+        Act(AT_ACTION, buf, ch, obj, NULL, TO_CHAR);
+    }
 
-      for(const Character *rch : room->Characters())
+    if (!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN))
+    {
+        if (pull)
         {
-          rch->Echo( "You hear a loud rumbling sound.\r\n" );
-          rch->Echo( "Something seems different...\r\n" );
+            RemoveBit(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP);
+        }
+        else
+        {
+            SetBit(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP);
         }
     }
 
-  if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_DOOR ) )
+    if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORT)
+        || IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL)
+        || IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS))
     {
-      room = GetRoom( obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
+        int flags = 0;
 
-      if ( !room )
-	{
-	  room = obj->InRoom;
-	}
-
-      if ( !room )
+        if ((room = GetRoom(obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION])) == NULL)
         {
-          Log->Bug( "PullOrPush: obj points to invalid room %d",
-                    obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
-          return;
+            Log->Bug("PullOrPush: obj points to invalid room %d",
+                obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
+            return;
         }
 
-      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_NORTH ) )
+        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_SHOWROOMDESC))
         {
-          edir = DIR_NORTH;
-          txt = "to the north";
+            SetBit(flags, TELE_SHOWDESC);
         }
-      else if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_SOUTH ) )
-	{
-	  edir = DIR_SOUTH;
-	  txt = "to the south";
-	}
-      else if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_EAST ) )
-	{
-	  edir = DIR_EAST;
-	  txt = "to the east";
-	}
-      else if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_WEST ) )
-	{
-	  edir = DIR_WEST;
-	  txt = "to the west";
-	}
-      else if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_UP ) )
-	{
-	  edir = DIR_UP;
-	  txt = "from above";
-	}
-      else if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_DOWN ) )
-	{
-	  edir = DIR_DOWN;
-	  txt = "from below";
-	}
-      else
-	{
-	  Log->Bug( "PullOrPush: door: no direction flag set." );
-	  return;
-	}
 
-      pexit = GetExit( room, edir );
-
-      if ( !pexit )
+        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL))
         {
-          if ( !IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_PASSAGE ) )
+            SetBit(flags, TELE_TRANSALL);
+        }
+
+        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS))
+        {
+            SetBit(flags, TELE_TRANSALLPLUS);
+        }
+
+        Teleport(ch, obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION], flags);
+        return;
+    }
+
+    if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4)
+        || IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND6))
+    {
+        int maxd = 0;
+
+        if ((room = GetRoom(obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION])) == NULL)
+        {
+            Log->Bug("PullOrPush: obj points to invalid room %d",
+                obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
+            return;
+        }
+
+        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4))
+            maxd = 3;
+        else
+            maxd = 5;
+
+        RandomizeExits(room, maxd);
+
+        for (const Character *rch : room->Characters())
+        {
+            rch->Echo("You hear a loud rumbling sound.\r\n");
+            rch->Echo("Something seems different...\r\n");
+        }
+    }
+
+    if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_DOOR))
+    {
+        room = GetRoom(obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
+
+        if (!room)
+        {
+            room = obj->InRoom;
+        }
+
+        if (!room)
+        {
+            Log->Bug("PullOrPush: obj points to invalid room %d",
+                obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
+            return;
+        }
+
+        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_NORTH))
+        {
+            edir = DIR_NORTH;
+            txt = "to the north";
+        }
+        else if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_SOUTH))
+        {
+            edir = DIR_SOUTH;
+            txt = "to the south";
+        }
+        else if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_EAST))
+        {
+            edir = DIR_EAST;
+            txt = "to the east";
+        }
+        else if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_WEST))
+        {
+            edir = DIR_WEST;
+            txt = "to the west";
+        }
+        else if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_UP))
+        {
+            edir = DIR_UP;
+            txt = "from above";
+        }
+        else if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_DOWN))
+        {
+            edir = DIR_DOWN;
+            txt = "from below";
+        }
+        else
+        {
+            Log->Bug("PullOrPush: door: no direction flag set.");
+            return;
+        }
+
+        pexit = GetExit(room, edir);
+
+        if (!pexit)
+        {
+            if (!IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_PASSAGE))
             {
-              Log->Bug( "PullOrPush: obj points to non-exit %d",
-                        obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
-              return;
+                Log->Bug("PullOrPush: obj points to non-exit %d",
+                    obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION]);
+                return;
             }
 
-          to_room = GetRoom( obj->Value[OVAL_BUTTON_2] );
+            to_room = GetRoom(obj->Value[OVAL_BUTTON_2]);
 
-          if ( !to_room )
+            if (!to_room)
             {
-              Log->Bug( "PullOrPush: dest points to invalid room %d",
-                        obj->Value[OVAL_BUTTON_2] );
-              return;
+                Log->Bug("PullOrPush: dest points to invalid room %d",
+                    obj->Value[OVAL_BUTTON_2]);
+                return;
             }
 
-          pexit = MakeExit( room, to_room, edir );
-          pexit->Key            = -1;
-          top_exit++;
-          Act( AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_CHAR );
-          Act( AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_ROOM );
-          return;
+            pexit = MakeExit(room, to_room, edir);
+            pexit->Key = -1;
+            top_exit++;
+            Act(AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_CHAR);
+            Act(AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_ROOM);
+            return;
         }
 
-      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UNLOCK )
-           && pexit->Flags.test( Flag::Exit::Locked ) )
+        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UNLOCK)
+            && pexit->Flags.test(Flag::Exit::Locked))
         {
-          pexit->Flags.reset( Flag::Exit::Locked );
-          Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
-          Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
+            pexit->Flags.reset(Flag::Exit::Locked);
+            Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR);
+            Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM);
 
-          if ( ( pexit_rev = pexit->ReverseExit ) != NULL
-               && pexit_rev->ToRoom == ch->InRoom )
+            if ((pexit_rev = pexit->ReverseExit) != NULL
+                && pexit_rev->ToRoom == ch->InRoom)
             {
-              pexit_rev->Flags.reset( Flag::Exit::Locked );
+                pexit_rev->Flags.reset(Flag::Exit::Locked);
             }
-          
-          return;
+
+            return;
         }
 
-      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_LOCK )
-           && !pexit->Flags.test( Flag::Exit::Locked ) )
+        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_LOCK)
+            && !pexit->Flags.test(Flag::Exit::Locked))
         {
-          pexit->Flags.set( Flag::Exit::Locked );
-          Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
-          Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
+            pexit->Flags.set(Flag::Exit::Locked);
+            Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR);
+            Act(AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM);
 
-          if ( ( pexit_rev = pexit->ReverseExit ) != NULL
-               &&   pexit_rev->ToRoom == ch->InRoom )
+            if ((pexit_rev = pexit->ReverseExit) != NULL
+                && pexit_rev->ToRoom == ch->InRoom)
             {
-              pexit_rev->Flags.set( Flag::Exit::Locked );
+                pexit_rev->Flags.set(Flag::Exit::Locked);
             }
-          
-          return;
+
+            return;
         }
 
-      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_OPEN   )
-           && pexit->Flags.test( Flag::Exit::Closed ) )
+        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_OPEN)
+            && pexit->Flags.test(Flag::Exit::Closed))
         {
-          pexit->Flags.reset( Flag::Exit::Closed );
+            pexit->Flags.reset(Flag::Exit::Closed);
 
-          for(Character *rch : room->Characters())
-	    {
-	      Act( AT_ACTION, "The $d opens.", rch, NULL, pexit->Keyword.c_str(), TO_CHAR );
-	    }
-
-          if ( ( pexit_rev = pexit->ReverseExit ) != NULL
-               && pexit_rev->ToRoom == ch->InRoom )
+            for (Character *rch : room->Characters())
             {
-              pexit_rev->Flags.reset( Flag::Exit::Closed );
-
-              for(Character *rch : to_room->Characters())
-		{
-		  Act( AT_ACTION, "The $d opens.",
-                       rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR );
-		}
+                Act(AT_ACTION, "The $d opens.", rch, NULL, pexit->Keyword.c_str(), TO_CHAR);
             }
 
-          CheckRoomForTraps( ch, TrapDoor[edir]);
-          return;
+            if ((pexit_rev = pexit->ReverseExit) != NULL
+                && pexit_rev->ToRoom == ch->InRoom)
+            {
+                pexit_rev->Flags.reset(Flag::Exit::Closed);
+
+                for (Character *rch : to_room->Characters())
+                {
+                    Act(AT_ACTION, "The $d opens.",
+                        rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR);
+                }
+            }
+
+            CheckRoomForTraps(ch, TrapDoor[edir]);
+            return;
         }
 
-      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_CLOSE   )
-           && !pexit->Flags.test( Flag::Exit::Closed ) )
+        if (IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_CLOSE)
+            && !pexit->Flags.test(Flag::Exit::Closed))
         {
-          pexit->Flags.set( Flag::Exit::Closed );
+            pexit->Flags.set(Flag::Exit::Closed);
 
-          for(Character *rch : room->Characters())
-	    {
-	      Act( AT_ACTION, "The $d closes.", rch, NULL, pexit->Keyword.c_str(), TO_CHAR );
-	    }
-
-          if ( ( pexit_rev = pexit->ReverseExit ) != NULL
-               && pexit_rev->ToRoom == ch->InRoom )
+            for (Character *rch : room->Characters())
             {
-              pexit_rev->Flags.set( Flag::Exit::Closed );
-
-              for(Character *rch : to_room->Characters())
-		{
-		  Act( AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR );
-		}
+                Act(AT_ACTION, "The $d closes.", rch, NULL, pexit->Keyword.c_str(), TO_CHAR);
             }
 
-          CheckRoomForTraps( ch, TrapDoor[edir]);
-          return;
+            if ((pexit_rev = pexit->ReverseExit) != NULL
+                && pexit_rev->ToRoom == ch->InRoom)
+            {
+                pexit_rev->Flags.set(Flag::Exit::Closed);
+
+                for (Character *rch : to_room->Characters())
+                {
+                    Act(AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->Keyword.c_str(), TO_CHAR);
+                }
+            }
+
+            CheckRoomForTraps(ch, TrapDoor[edir]);
+            return;
         }
     }
 }
 
-void ActionDescription( Character *ch, Object *obj, void *vo )
+void ActionDescription(Character *ch, Object *obj, void *vo)
 {
-  char charbuf[MAX_STRING_LENGTH];
-  char roombuf[MAX_STRING_LENGTH];
-  const char *srcptr = obj->ActionDescription.c_str();
-  char *charptr = charbuf;
-  char *roomptr = roombuf;
-  const char *ichar = NULL;
-  const char *iroom = NULL;
+    char charbuf[MAX_STRING_LENGTH];
+    char roombuf[MAX_STRING_LENGTH];
+    const char *srcptr = obj->ActionDescription.c_str();
+    char *charptr = charbuf;
+    char *roomptr = roombuf;
+    const char *ichar = NULL;
+    const char *iroom = NULL;
 
-  while ( !IsNullOrEmpty( srcptr ) )
+    while (!IsNullOrEmpty(srcptr))
     {
-      if ( *srcptr == '$' )
+        if (*srcptr == '$')
         {
-          srcptr++;
-          switch ( *srcptr )
+            srcptr++;
+            switch (*srcptr)
             {
             case 'e':
-              ichar = "you";
-              iroom = "$e";
-              break;
+                ichar = "you";
+                iroom = "$e";
+                break;
 
             case 'm':
-              ichar = "you";
-              iroom = "$m";
-              break;
+                ichar = "you";
+                iroom = "$m";
+                break;
 
             case 'n':
-              ichar = "you";
-              iroom = "$n";
-              break;
+                ichar = "you";
+                iroom = "$n";
+                break;
 
             case 's':
-              ichar = "your";
-              iroom = "$s";
-              break;
+                ichar = "your";
+                iroom = "$s";
+                break;
 
             default:
-              srcptr--;
-              *charptr++ = *srcptr;
-              *roomptr++ = *srcptr;
-              break;
+                srcptr--;
+                *charptr++ = *srcptr;
+                *roomptr++ = *srcptr;
+                break;
             }
         }
-      else if ( *srcptr == '%' && *++srcptr == 's' )
+        else if (*srcptr == '%' && *++srcptr == 's')
         {
-          ichar = "You";
-          iroom = IsNpc( ch ) ? ch->ShortDescr.c_str() : ch->Name.c_str();
+            ichar = "You";
+            iroom = IsNpc(ch) ? ch->ShortDescr.c_str() : ch->Name.c_str();
         }
-      else
+        else
         {
-          *charptr++ = *srcptr;
-          *roomptr++ = *srcptr;
-          srcptr++;
-          continue;
-        }
-
-      while ( ( *charptr = *ichar ) != '\0' )
-        {
-          charptr++;
-          ichar++;
+            *charptr++ = *srcptr;
+            *roomptr++ = *srcptr;
+            srcptr++;
+            continue;
         }
 
-      while ( ( *roomptr = *iroom ) != '\0' )
+        while ((*charptr = *ichar) != '\0')
         {
-          roomptr++;
-          iroom++;
+            charptr++;
+            ichar++;
         }
-      srcptr++;
+
+        while ((*roomptr = *iroom) != '\0')
+        {
+            roomptr++;
+            iroom++;
+        }
+        srcptr++;
     }
 
-  *charptr = '\0';
-  *roomptr = '\0';
+    *charptr = '\0';
+    *roomptr = '\0';
 
-  switch( obj->ItemType )
+    switch (obj->ItemType)
     {
     case ITEM_DRINK_CON:
-      Act( AT_ACTION, charbuf, ch, obj,
-	   LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, TO_CHAR );
-      Act( AT_ACTION, roombuf, ch, obj,
-	   LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, TO_ROOM );
-      return;
+        Act(AT_ACTION, charbuf, ch, obj,
+            LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, TO_CHAR);
+        Act(AT_ACTION, roombuf, ch, obj,
+            LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, TO_ROOM);
+        return;
 
     case ITEM_ARMOR:
     case ITEM_WEAPON:
@@ -423,12 +423,12 @@ void ActionDescription( Character *ch, Object *obj, void *vo )
     case ITEM_PILL:
     case ITEM_BLOOD:
     case ITEM_FOUNTAIN:
-      Act( AT_ACTION, charbuf, ch, obj, ch, TO_CHAR );
-      Act( AT_ACTION, roombuf, ch, obj, ch, TO_ROOM );
-      return;
+        Act(AT_ACTION, charbuf, ch, obj, ch, TO_CHAR);
+        Act(AT_ACTION, roombuf, ch, obj, ch, TO_ROOM);
+        return;
 
     default:
-      return;
+        return;
     }
 }
 
@@ -438,52 +438,52 @@ void ActionDescription( Character *ch, Object *obj, void *vo )
  */
 int GetColor(const std::string &argument)    /* get color code from command string */
 {
-  std::string color;
-  const char *cptr = NULL;
-  static const char * const color_list =
-    "_bla_red_dgr_bro_dbl_pur_cya_cha_dch_ora_gre_yel_blu_pin_lbl_whi";
-  static const char * const blink_list =
-    "*bla*red*dgr*bro*dbl*pur*cya*cha*dch*ora*gre*yel*blu*pin*lbl*whi";
+    std::string color;
+    const char *cptr = NULL;
+    static const char * const color_list =
+        "_bla_red_dgr_bro_dbl_pur_cya_cha_dch_ora_gre_yel_blu_pin_lbl_whi";
+    static const char * const blink_list =
+        "*bla*red*dgr*bro*dbl*pur*cya*cha*dch*ora*gre*yel*blu*pin*lbl*whi";
 
-  OneArgument(argument, color);
+    OneArgument(argument, color);
 
-  if (color.empty() || ( color[0] != '_' && color[0] !='*' ) )
+    if (color.empty() || (color[0] != '_' && color[0] != '*'))
     {
-      return 0;
+        return 0;
     }
-  
-  if ( (cptr = strstr(color_list, color.c_str())) )
-    {
-      return (cptr - color_list) / 4;
-    }
-  
-  if ( (cptr = strstr(blink_list, color.c_str())) )
-    return (cptr - blink_list) / 4 + AT_BLINK;
 
-  return 0;
+    if ((cptr = strstr(color_list, color.c_str())))
+    {
+        return (cptr - color_list) / 4;
+    }
+
+    if ((cptr = strstr(blink_list, color.c_str())))
+        return (cptr - blink_list) / 4 + AT_BLINK;
+
+    return 0;
 }
 
-static const long VALID_LANGUAGES  = LANG_COMMON
-  | LANG_WOOKIEE | LANG_TWI_LEK | LANG_RODIAN
-  | LANG_HUTT | LANG_MON_CALAMARI | LANG_NOGHRI | LANG_GAMORREAN
-  | LANG_JAWA | LANG_ADARIAN | LANG_EWOK | LANG_VERPINE | LANG_DEFEL
-  | LANG_TRANDOSHAN | LANG_CHADRA_FAN | LANG_QUARREN | LANG_SULLUSTAN
-  | LANG_BARABEL | LANG_FIRRERREO | LANG_BOTHAN | LANG_TOGORIAN
-  | LANG_KUBAZ | LANG_YEVETHAN | LANG_GAND | LANG_DUROS | LANG_COYNITE
-  | LANG_GOTAL | LANG_DEVARONIAN | LANG_FALLEEN | LANG_ITHORIAN
-  | LANG_BINARY;
+static const long VALID_LANGUAGES = LANG_COMMON
+| LANG_WOOKIEE | LANG_TWI_LEK | LANG_RODIAN
+| LANG_HUTT | LANG_MON_CALAMARI | LANG_NOGHRI | LANG_GAMORREAN
+| LANG_JAWA | LANG_ADARIAN | LANG_EWOK | LANG_VERPINE | LANG_DEFEL
+| LANG_TRANDOSHAN | LANG_CHADRA_FAN | LANG_QUARREN | LANG_SULLUSTAN
+| LANG_BARABEL | LANG_FIRRERREO | LANG_BOTHAN | LANG_TOGORIAN
+| LANG_KUBAZ | LANG_YEVETHAN | LANG_GAND | LANG_DUROS | LANG_COYNITE
+| LANG_GOTAL | LANG_DEVARONIAN | LANG_FALLEEN | LANG_ITHORIAN
+| LANG_BINARY;
 
-bool IsValidLanguage( int language )
+bool IsValidLanguage(int language)
 {
-  return VALID_LANGUAGES & language ? true : false;
+    return VALID_LANGUAGES & language ? true : false;
 }
 
-std::string FormatDate( const time_t *date )
+std::string FormatDate(const time_t *date)
 {
-  char buffer[MAX_STRING_LENGTH];
-  struct tm *t = localtime( date );
-  sprintf( buffer, "%02d/%02d-%04d", t->tm_mon + 1, t->tm_mday, t->tm_year + 1900 );
+    char buffer[MAX_STRING_LENGTH];
+    struct tm *t = localtime(date);
+    sprintf(buffer, "%02d/%02d-%04d", t->tm_mon + 1, t->tm_mday, t->tm_year + 1900);
 
-  return buffer;
+    return buffer;
 }
 

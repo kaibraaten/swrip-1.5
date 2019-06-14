@@ -9,153 +9,153 @@
 #include "object.hpp"
 #include "exit.hpp"
 
-void do_search( Character *ch, std::string arg )
+void do_search(Character *ch, std::string arg)
 {
-  Object *obj = NULL;
-  Object *container = NULL;
-  std::list<Object*> searchList;
-  int percent = 0;
-  DirectionType door = DIR_INVALID;
-  bool found = false;
+    Object *obj = NULL;
+    Object *container = NULL;
+    std::list<Object*> searchList;
+    int percent = 0;
+    DirectionType door = DIR_INVALID;
+    bool found = false;
 
-  switch( ch->SubState )
+    switch (ch->SubState)
     {
     default:
-      if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
+        if (IsNpc(ch) && IsAffectedBy(ch, AFF_CHARM))
         {
-          ch->Echo("You can't concentrate enough for that.\r\n");
-          return;
+            ch->Echo("You can't concentrate enough for that.\r\n");
+            return;
         }
 
-      if ( ch->Mount )
+        if (ch->Mount)
         {
-          ch->Echo("You can't do that while mounted.\r\n");
-          return;
+            ch->Echo("You can't do that while mounted.\r\n");
+            return;
         }
 
-      if ( !arg.empty() && (door = GetDirection( arg )) == -1 )
+        if (!arg.empty() && (door = GetDirection(arg)) == -1)
         {
-          container = GetObjectHere( ch, arg );
+            container = GetObjectHere(ch, arg);
 
-          if ( !container )
+            if (!container)
             {
-              ch->Echo("You can't find that here.\r\n");
-              return;
+                ch->Echo("You can't find that here.\r\n");
+                return;
             }
 
-          if ( container->ItemType != ITEM_CONTAINER )
+            if (container->ItemType != ITEM_CONTAINER)
             {
-              ch->Echo("You can't search in that!\r\n");
-              return;
+                ch->Echo("You can't search in that!\r\n");
+                return;
             }
 
-          if ( IsBitSet(container->Value[1], CONT_CLOSED) )
+            if (IsBitSet(container->Value[1], CONT_CLOSED))
             {
-              ch->Echo("It is closed.\r\n");
-              return;
+                ch->Echo("It is closed.\r\n");
+                return;
             }
         }
-      
-      AddTimerToCharacter( ch, TIMER_CMD_FUN, umin(SkillTable[gsn_search]->Beats / 10, 3), do_search, SUB_PAUSE );
-      ch->Echo("You begin your search...\r\n");
-      ch->dest_buf = CopyString( arg );
-      return;
+
+        AddTimerToCharacter(ch, TIMER_CMD_FUN, umin(SkillTable[gsn_search]->Beats / 10, 3), do_search, SUB_PAUSE);
+        ch->Echo("You begin your search...\r\n");
+        ch->dest_buf = CopyString(arg);
+        return;
 
     case SUB_PAUSE:
-      if ( !ch->dest_buf )
+        if (!ch->dest_buf)
         {
-          ch->Echo("Your search was interrupted!\r\n");
-          Log->Bug( "do_search: dest_buf NULL" );
-          return;
+            ch->Echo("Your search was interrupted!\r\n");
+            Log->Bug("do_search: dest_buf NULL");
+            return;
         }
 
-      arg = static_cast<const char*>( ch->dest_buf );
-      FreeMemory( ch->dest_buf );
-      break;
+        arg = static_cast<const char*>(ch->dest_buf);
+        FreeMemory(ch->dest_buf);
+        break;
 
     case SUB_TIMER_DO_ABORT:
-      FreeMemory( ch->dest_buf );
-      ch->SubState = SUB_NONE;
-      ch->Echo("You stop your search...\r\n");
-      return;
+        FreeMemory(ch->dest_buf);
+        ch->SubState = SUB_NONE;
+        ch->Echo("You stop your search...\r\n");
+        return;
     }
 
-  ch->SubState = SUB_NONE;
+    ch->SubState = SUB_NONE;
 
-  if ( arg.empty() )
+    if (arg.empty())
     {
-      searchList = ch->InRoom->Objects();
+        searchList = ch->InRoom->Objects();
     }
-  else
+    else
     {
-      door = GetDirection( arg );
-      
-      if ( door == DIR_INVALID )
+        door = GetDirection(arg);
+
+        if (door == DIR_INVALID)
         {
-          container = GetObjectHere( ch, arg );
+            container = GetObjectHere(ch, arg);
 
-          if ( container == nullptr )
+            if (container == nullptr)
             {
-              ch->Echo("You can't find that here.\r\n");
-              return;
+                ch->Echo("You can't find that here.\r\n");
+                return;
             }
 
-          searchList = container->Objects();
+            searchList = container->Objects();
         }
     }
 
-  found = false;
+    found = false;
 
-  if ( (searchList.empty() && door == DIR_INVALID) || IsNpc(ch) )
+    if ((searchList.empty() && door == DIR_INVALID) || IsNpc(ch))
     {
-      ch->Echo("You find nothing.\r\n");
-      LearnFromFailure( ch, gsn_search );
-      return;
+        ch->Echo("You find nothing.\r\n");
+        LearnFromFailure(ch, gsn_search);
+        return;
     }
 
-  percent = GetRandomPercent();
+    percent = GetRandomPercent();
 
-  if ( door != -1 )
+    if (door != -1)
     {
-      Exit *pexit = nullptr;
+        std::shared_ptr<Exit> pexit;
 
-      if ( (pexit = GetExit( ch->InRoom, door )) != NULL
-           && pexit->Flags.test( Flag::Exit::Secret )
-           && pexit->Flags.test( Flag::Exit::Searchable )
-           && percent < (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_search]) )
+        if ((pexit = GetExit(ch->InRoom, door)) != NULL
+            && pexit->Flags.test(Flag::Exit::Secret)
+            && pexit->Flags.test(Flag::Exit::Searchable)
+            && percent < (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_search]))
         {
-          Act( AT_SKILL, "Your search reveals the $d!",
-               ch, nullptr, pexit->Keyword.c_str(), TO_CHAR );
-          Act( AT_SKILL, "$n finds the $d!", ch, nullptr, pexit->Keyword.c_str(), TO_ROOM );
-          pexit->Flags.reset( Flag::Exit::Secret );
-          LearnFromSuccess( ch, gsn_search );
-          return;
+            Act(AT_SKILL, "Your search reveals the $d!",
+                ch, nullptr, pexit->Keyword.c_str(), TO_CHAR);
+            Act(AT_SKILL, "$n finds the $d!", ch, nullptr, pexit->Keyword.c_str(), TO_ROOM);
+            pexit->Flags.reset(Flag::Exit::Secret);
+            LearnFromSuccess(ch, gsn_search);
+            return;
         }
     }
-  else
+    else
     {
-      for( Object *hiddenObject : searchList )
+        for (Object *hiddenObject : searchList)
         {
-          if ( IsBitSet( obj->Flags, ITEM_HIDDEN )
-               && percent < ch->PCData->Learned[gsn_search] )
+            if (IsBitSet(obj->Flags, ITEM_HIDDEN)
+                && percent < ch->PCData->Learned[gsn_search])
             {
-              obj = hiddenObject;
-              found = true;
-              break;
+                obj = hiddenObject;
+                found = true;
+                break;
             }
         }
     }
-  
-  if ( !found )
+
+    if (!found)
     {
-      ch->Echo("You find nothing.\r\n");
-      LearnFromFailure( ch, gsn_search );
-      return;
+        ch->Echo("You find nothing.\r\n");
+        LearnFromFailure(ch, gsn_search);
+        return;
     }
 
-  SeparateOneObjectFromGroup(obj);
-  RemoveBit( obj->Flags, ITEM_HIDDEN );
-  Act( AT_SKILL, "Your search reveals $p!", ch, obj, NULL, TO_CHAR );
-  Act( AT_SKILL, "$n finds $p!", ch, obj, NULL, TO_ROOM );
-  LearnFromSuccess( ch, gsn_search );
+    SeparateOneObjectFromGroup(obj);
+    RemoveBit(obj->Flags, ITEM_HIDDEN);
+    Act(AT_SKILL, "Your search reveals $p!", ch, obj, NULL, TO_CHAR);
+    Act(AT_SKILL, "$n finds $p!", ch, obj, NULL, TO_ROOM);
+    LearnFromSuccess(ch, gsn_search);
 }

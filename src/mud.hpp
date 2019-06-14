@@ -993,15 +993,15 @@ std::string FormatObjectToCharacter(const Object *obj, const Character *ch, bool
 void ShowObjectListToCharacter(const std::list<Object*> &list, Character *ch,
     bool fShort, bool fShowNothing);
 /* act_move.c */
-void SetBExitFlag(Exit *pexit, size_t flag);
-void RemoveBExitFlag(Exit *pexit, size_t flag);
-Room *GenerateExit(Room *in_room, const Exit **pexit);
+void SetBExitFlag(std::shared_ptr<Exit> pexit, size_t flag);
+void RemoveBExitFlag(std::shared_ptr<Exit> pexit, size_t flag);
+Room *GenerateExit(Room *in_room, std::shared_ptr<Exit> &pexit);
 void ClearVirtualRooms();
-Exit *FindDoor(Character *ch, const std::string &arg, bool quiet);
-Exit *GetExit(const Room *room, DirectionType dir);
-Exit *GetExitTo(const Room *room, DirectionType dir, vnum_t vnum);
-Exit *GetExitNumber(const Room *room, short count);
-ch_ret MoveCharacter(Character *ch, const Exit *pexit, int fall = 0);
+std::shared_ptr<Exit> FindDoor(Character *ch, const std::string &arg, bool quiet);
+std::shared_ptr<Exit> GetExit(const Room *room, DirectionType dir);
+std::shared_ptr<Exit> GetExitTo(const Room *room, DirectionType dir, vnum_t vnum);
+std::shared_ptr<Exit> GetExitNumber(const Room *room, short count);
+ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall = 0);
 void Teleport(Character *ch, vnum_t room, int flags);
 bool CharacterFallIfNoFloor(Character *ch, int fall);
 
@@ -1127,7 +1127,7 @@ Room *GetRoom(vnum_t vnum);
 Room *MakeRoom(vnum_t vnum);
 std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name);
 ProtoMobile *MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name);
-Exit *MakeExit(Room *pRoomIndex, Room *to_room, DirectionType door,
+std::shared_ptr<Exit> MakeExit(Room *pRoomIndex, Room *to_room, DirectionType door,
     const std::string &keyword = "");
 void RandomizeExits(Room *room, short maxdir);
 void MakeWizlist(void);
@@ -1228,7 +1228,7 @@ Object *ObjectToRoom(Object *obj, Room *pRoomIndex);
 Object *ObjectToObject(Object *obj, Object *obj_to);
 void ObjectFromObject(Object *obj);
 void ExtractObject(Object *obj);
-void ExtractExit(Room *room, Exit *pexit);
+void ExtractExit(Room *room, std::shared_ptr<Exit> pexit);
 void ExtractRoom(Room *room);
 void CleanRoom(Room *room);
 void CleanObject(std::shared_ptr<ProtoObject> obj);

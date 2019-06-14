@@ -6,142 +6,142 @@
 #include "room.hpp"
 #include "exit.hpp"
 
-void show_char_to_char( const std::list<Character*> &list, Character *ch );
+void show_char_to_char(const std::list<Character*> &list, Character *ch);
 
-void do_scan( Character *ch, std::string argument )
+void do_scan(Character *ch, std::string argument)
 {
-  Room *was_in_room = NULL;
-  Room *to_room = NULL;
-  const Exit *pexit = NULL;
-  DirectionType dir = DIR_INVALID;
-  short dist = 0;
-  short max_dist = 5;
+    Room *was_in_room = NULL;
+    Room *to_room = NULL;
+    std::shared_ptr<Exit> pexit;
+    DirectionType dir = DIR_INVALID;
+    short dist = 0;
+    short max_dist = 5;
 
-  if ( argument.empty() )
+    if (argument.empty())
     {
-      ch->Echo("Scan in a direction...\r\n");
-      return;
+        ch->Echo("Scan in a direction...\r\n");
+        return;
     }
 
-  if ( ( dir = GetDirection( argument ) ) == -1 )
+    if ((dir = GetDirection(argument)) == -1)
     {
-      ch->Echo("Scan in WHAT direction?\r\n" );
-      return;
+        ch->Echo("Scan in WHAT direction?\r\n");
+        return;
     }
 
-  was_in_room = ch->InRoom;
-  Act( AT_GREY, "Scanning $t...", ch, GetDirectionName(dir), NULL, TO_CHAR );
-  Act( AT_GREY, "$n scans $t.", ch, GetDirectionName(dir), NULL, TO_ROOM );
+    was_in_room = ch->InRoom;
+    Act(AT_GREY, "Scanning $t...", ch, GetDirectionName(dir), NULL, TO_CHAR);
+    Act(AT_GREY, "$n scans $t.", ch, GetDirectionName(dir), NULL, TO_ROOM);
 
-  if ( IsNpc( ch )
-       || ( GetRandomPercent() > ch->PCData->Learned[gsn_scan] ) )
+    if (IsNpc(ch)
+        || (GetRandomPercent() > ch->PCData->Learned[gsn_scan]))
     {
-      Act( AT_GREY, "You stop scanning $t as your vision blurs.", ch,
-           GetDirectionName(dir), NULL, TO_CHAR );
-      LearnFromFailure( ch, gsn_scan );
-      return;
+        Act(AT_GREY, "You stop scanning $t as your vision blurs.", ch,
+            GetDirectionName(dir), NULL, TO_CHAR);
+        LearnFromFailure(ch, gsn_scan);
+        return;
     }
 
-  if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
+    if ((pexit = GetExit(ch->InRoom, dir)) == NULL)
     {
-      Act( AT_GREY, "You can't see $t.", ch, GetDirectionName(dir), NULL, TO_CHAR );
-      return;
+        Act(AT_GREY, "You can't see $t.", ch, GetDirectionName(dir), NULL, TO_CHAR);
+        return;
     }
 
-  if ( ch->TopLevel < 50 )
-    max_dist--;
+    if (ch->TopLevel < 50)
+        max_dist--;
 
-  if ( ch->TopLevel < 20 )
-    max_dist--;
+    if (ch->TopLevel < 20)
+        max_dist--;
 
-  for ( dist = 1; dist <= max_dist; )
+    for (dist = 1; dist <= max_dist; )
     {
-      if ( pexit->Flags.test( Flag::Exit::Closed ) )
+        if (pexit->Flags.test(Flag::Exit::Closed))
         {
-          if ( pexit->Flags.test( Flag::Exit::Secret ) )
-            Act( AT_GREY, "Your view $t is blocked by a wall.", ch,
-                 GetDirectionName(dir), NULL, TO_CHAR );
-          else
-            Act( AT_GREY, "Your view $t is blocked by a door.", ch,
-                 GetDirectionName(dir), NULL, TO_CHAR );
-          break;
+            if (pexit->Flags.test(Flag::Exit::Secret))
+                Act(AT_GREY, "Your view $t is blocked by a wall.", ch,
+                    GetDirectionName(dir), NULL, TO_CHAR);
+            else
+                Act(AT_GREY, "Your view $t is blocked by a door.", ch,
+                    GetDirectionName(dir), NULL, TO_CHAR);
+            break;
         }
 
-      to_room = NULL;
+        to_room = NULL;
 
-      if ( pexit->Distance > 1 )
-        to_room = GenerateExit( ch->InRoom , &pexit );
+        if (pexit->Distance > 1)
+            to_room = GenerateExit(ch->InRoom, pexit);
 
-      if ( to_room == NULL )
-        to_room = pexit->ToRoom;
+        if (to_room == NULL)
+            to_room = pexit->ToRoom;
 
-      if ( IsRoomPrivate( ch, to_room )
-           && GetTrustLevel(ch) < LEVEL_GREATER )
+        if (IsRoomPrivate(ch, to_room)
+            && GetTrustLevel(ch) < LEVEL_GREATER)
         {
-          Act( AT_GREY, "Your view $t is blocked by a private room.", ch,
-               GetDirectionName(dir), NULL, TO_CHAR );
-	  break;
+            Act(AT_GREY, "Your view $t is blocked by a private room.", ch,
+                GetDirectionName(dir), NULL, TO_CHAR);
+            break;
         }
 
-      CharacterFromRoom( ch );
-      CharacterToRoom( ch, to_room );
-      SetCharacterColor( AT_RMNAME, ch );
-      ch->Echo(ch->InRoom->Name);
-      ch->Echo("\r\n");
-      ShowObjectListToCharacter( ch->InRoom->Objects(), ch, false, false );
-      show_char_to_char( ch->InRoom->Characters(), ch );
+        CharacterFromRoom(ch);
+        CharacterToRoom(ch, to_room);
+        SetCharacterColor(AT_RMNAME, ch);
+        ch->Echo(ch->InRoom->Name);
+        ch->Echo("\r\n");
+        ShowObjectListToCharacter(ch->InRoom->Objects(), ch, false, false);
+        show_char_to_char(ch->InRoom->Characters(), ch);
 
-      switch( ch->InRoom->Sector )
+        switch (ch->InRoom->Sector)
         {
         default:
-	  dist++;
-	  break;
+            dist++;
+            break;
 
         case SECT_AIR:
-          if ( GetRandomPercent() < 80 ) dist++;
-	  break;
+            if (GetRandomPercent() < 80) dist++;
+            break;
 
         case SECT_INSIDE:
         case SECT_FIELD:
         case SECT_UNDERGROUND:
-          dist++;
-	  break;
+            dist++;
+            break;
 
         case SECT_FOREST:
         case SECT_CITY:
         case SECT_DESERT:
         case SECT_HILLS:
-          dist += 2;
-	  break;
+            dist += 2;
+            break;
 
         case SECT_WATER_SWIM:
         case SECT_WATER_NOSWIM:
-          dist += 3;
-	  break;
+            dist += 3;
+            break;
 
         case SECT_MOUNTAIN:
         case SECT_UNDERWATER:
         case SECT_OCEANFLOOR:
-          dist += 4;
-	  break;
+            dist += 4;
+            break;
         }
 
-      if ( dist >= max_dist )
+        if (dist >= max_dist)
         {
-          Act( AT_GREY, "Your vision blurs with distance and you see no "
-               "farther $t.", ch, GetDirectionName(dir), NULL, TO_CHAR );
-          break;
+            Act(AT_GREY, "Your vision blurs with distance and you see no "
+                "farther $t.", ch, GetDirectionName(dir), NULL, TO_CHAR);
+            break;
         }
 
-      if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
+        if ((pexit = GetExit(ch->InRoom, dir)) == NULL)
         {
-          Act( AT_GREY, "Your view $t is blocked by a wall.", ch,
-               GetDirectionName(dir), NULL, TO_CHAR );
-          break;
+            Act(AT_GREY, "Your view $t is blocked by a wall.", ch,
+                GetDirectionName(dir), NULL, TO_CHAR);
+            break;
         }
     }
 
-  CharacterFromRoom( ch );
-  CharacterToRoom( ch, was_in_room );
-  LearnFromSuccess( ch, gsn_scan );
+    CharacterFromRoom(ch);
+    CharacterToRoom(ch, was_in_room);
+    LearnFromSuccess(ch, gsn_scan);
 }

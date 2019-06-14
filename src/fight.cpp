@@ -3117,7 +3117,7 @@ static bool SprintForCover(Character *ch)
     {
         Room *was_in = ch->InRoom;
         DirectionType door = (DirectionType)GetRandomDoor();
-        const Exit *pexit = GetExit(was_in, door);
+        std::shared_ptr<Exit> pexit = GetExit(was_in, door);
 
         if (pexit == nullptr
             || !pexit->ToRoom
