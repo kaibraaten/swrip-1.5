@@ -37,9 +37,7 @@ protected:
         delete _follower;
         _follower = nullptr;
 
-        delete _protomob;
         _protomob = nullptr;
-
         _fromRoom = nullptr;
         _toRoom = nullptr;
         _sourceExit = nullptr;
@@ -51,7 +49,7 @@ protected:
 
     Character *_leader = nullptr;
     Character *_follower = nullptr;
-    ProtoMobile *_protomob = nullptr;
+    std::shared_ptr<ProtoMobile> _protomob;
     std::shared_ptr<Room> _fromRoom;
     std::shared_ptr<Room> _toRoom;
     std::shared_ptr<Exit> _sourceExit;

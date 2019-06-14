@@ -138,7 +138,7 @@ bool CanModifyCharacter(const Character *ch, const Character *mob)
     return false;
 }
 
-bool CanMedit(const Character *ch, const ProtoMobile *mob)
+bool CanMedit(const Character *ch, std::shared_ptr<ProtoMobile> mob)
 {
     vnum_t vnum = mob->Vnum;
     Area *pArea = NULL;
@@ -306,7 +306,7 @@ void FoldArea(Area *tarea, const std::string &filename, bool install)
 {
     const Reset *treset = NULL;
     std::shared_ptr<Room> room;
-    ProtoMobile *pMobIndex = NULL;
+    std::shared_ptr<ProtoMobile> pMobIndex;
     std::shared_ptr<ProtoObject> pObjIndex;
     std::shared_ptr<Shop> pShop;
     std::shared_ptr<RepairShop> pRepair;

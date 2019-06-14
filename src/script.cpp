@@ -820,7 +820,7 @@ void LuaPushObjects(lua_State *L, const std::list<Object*> &objects,
 static void LuaPushMobile(lua_State *L, const Character *mob)
 {
     assert(IsNpc(mob));
-    const ProtoMobile *proto = mob->Prototype;
+    auto proto = mob->Prototype;
 
     LuaSetfieldString(L, "CharacterType", "Mobile");
     LuaPushFlags(L, mob->Flags, MobFlags, "Flags");

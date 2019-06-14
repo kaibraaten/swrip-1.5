@@ -46,7 +46,7 @@ static void LoadRepairs(Area *tarea, FILE *fp);
 static void LoadSpecials(Area *tarea, FILE *fp);
 static void LoadRanges(Area *tarea, FILE *fp);
 static int MudProgNameToType(const char* name);
-static void MobProgReadPrograms(FILE* fp, ProtoMobile *pMobIndex);
+static void MobProgReadPrograms(FILE* fp, std::shared_ptr<ProtoMobile> pMobIndex);
 static void ObjProgReadPrograms(FILE* fp, std::shared_ptr<ProtoObject> pObjIndex);
 static void RoomProgReadPrograms(FILE* fp, std::shared_ptr<Room> pRoomIndex);
 
@@ -388,7 +388,7 @@ static void LoadFlags(Area *tarea, FILE *fp)
 
 static void LoadMobiles(Area *tarea, FILE *fp)
 {
-    ProtoMobile *pMobIndex = 0;
+    std::shared_ptr<ProtoMobile> pMobIndex;
     const char *ln = NULL;
     int x1, x2, x3, x4, x5, x6, x7, x8;
 
@@ -459,7 +459,7 @@ static void LoadMobiles(Area *tarea, FILE *fp)
         else
         {
             oldmob = false;
-            pMobIndex = new ProtoMobile(vnum);
+            pMobIndex = std::make_shared<ProtoMobile>(vnum);
         }
 
         fBootDb = tmpBootDb;
@@ -1063,8 +1063,6 @@ static void LoadShops(Area *tarea, FILE *fp)
 {
     for (; ; )
     {
-        ProtoMobile *pMobIndex = NULL;
-        int iTrade = 0;
         std::shared_ptr<Shop> pShop = std::make_shared<Shop>();
 
         pShop->Keeper = ReadInt(fp, Log, fBootDb);
@@ -1072,7 +1070,7 @@ static void LoadShops(Area *tarea, FILE *fp)
         if (pShop->Keeper == INVALID_VNUM)
             break;
 
-        for (iTrade = 0; iTrade < MAX_TRADE; iTrade++)
+        for (int iTrade = 0; iTrade < MAX_TRADE; iTrade++)
             pShop->BuyType[iTrade] = (ItemTypes)ReadInt(fp, Log, fBootDb);
 
         pShop->ProfitBuy = ReadInt(fp, Log, fBootDb);
@@ -1082,7 +1080,7 @@ static void LoadShops(Area *tarea, FILE *fp)
         pShop->BusinessHours.Open = ReadInt(fp, Log, fBootDb);
         pShop->BusinessHours.Close = ReadInt(fp, Log, fBootDb);
         ReadToEndOfLine(fp, Log, fBootDb);
-        pMobIndex = GetProtoMobile(pShop->Keeper);
+        auto pMobIndex = GetProtoMobile(pShop->Keeper);
         pMobIndex->Shop = pShop;
 
         Shops->Add(pShop);
@@ -1096,15 +1094,13 @@ static void LoadRepairs(Area *tarea, FILE *fp)
 {
     for (; ; )
     {
-        ProtoMobile *pMobIndex;
-        int iFix;
         std::shared_ptr<RepairShop> rShop = std::make_shared<RepairShop>();
         rShop->Keeper = ReadInt(fp, Log, fBootDb);
 
         if (rShop->Keeper == INVALID_VNUM)
             break;
 
-        for (iFix = 0; iFix < MAX_FIX; iFix++)
+        for (int iFix = 0; iFix < MAX_FIX; iFix++)
             rShop->FixType[iFix] = (ItemTypes)ReadInt(fp, Log, fBootDb);
 
         rShop->ProfitFix = ReadInt(fp, Log, fBootDb);
@@ -1112,7 +1108,7 @@ static void LoadRepairs(Area *tarea, FILE *fp)
         rShop->BusinessHours.Open = ReadInt(fp, Log, fBootDb);
         rShop->BusinessHours.Close = ReadInt(fp, Log, fBootDb);
         ReadToEndOfLine(fp, Log, fBootDb);
-        pMobIndex = GetProtoMobile(rShop->Keeper);
+        auto pMobIndex = GetProtoMobile(rShop->Keeper);
         pMobIndex->RepairShop = rShop;
 
         RepairShops->Add(rShop);
@@ -1126,7 +1122,7 @@ static void LoadSpecials(Area *tarea, FILE *fp)
 {
     for (; ; )
     {
-        ProtoMobile *pMobIndex;
+        std::shared_ptr<ProtoMobile> pMobIndex;
         char letter = ReadChar(fp, Log, fBootDb);
 
         switch (letter)
@@ -1251,7 +1247,7 @@ static int MudProgNameToType(const char *name)
 /* This procedure is responsible for reading any in_file MUDprograms.
  */
 
-static void MobProgReadPrograms(FILE *fp, ProtoMobile *pMobIndex)
+static void MobProgReadPrograms(FILE *fp, std::shared_ptr<ProtoMobile> pMobIndex)
 {
     char letter = 0;
     bool done = false;
@@ -1513,8 +1509,8 @@ void CloseArea(Area *pArea)
     std::shared_ptr<Room> rid_next;
     std::shared_ptr<ProtoObject> oid;
     std::shared_ptr<ProtoObject> oid_next;
-    ProtoMobile *mid;
-    ProtoMobile *mid_next;
+    std::shared_ptr<ProtoMobile> mid;
+    std::shared_ptr<ProtoMobile> mid_next;
     Reset *ereset;
     Reset *ereset_next;
 
@@ -1677,7 +1673,7 @@ void CloseArea(Area *pArea)
             }
             else
             {
-                ProtoMobile *tmid;
+                std::shared_ptr<ProtoMobile> tmid;
 
                 for (tmid = MobIndexHash[icnt]; tmid; tmid = tmid->Next)
                     if (tmid->Next == mid)
@@ -1688,8 +1684,6 @@ void CloseArea(Area *pArea)
                 else
                     tmid->Next = mid->Next;
             }
-
-            delete mid;
         }
 
         for (oid = ObjectIndexHash[icnt]; oid; oid = oid_next)

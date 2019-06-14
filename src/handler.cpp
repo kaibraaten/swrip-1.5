@@ -2129,7 +2129,7 @@ void CleanObject(std::shared_ptr<ProtoObject> obj)
 /*
  * clean out a mobile (index) (leave list pointers intact )     -Thoric
  */
-void CleanMobile(ProtoMobile *mob)
+void CleanMobile(std::shared_ptr<ProtoMobile> mob)
 {
     mob->Name.erase();
     mob->ShortDescr.erase();

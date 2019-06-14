@@ -272,13 +272,13 @@ static int IfCheckMobInRoom(Character* mob, const std::string &cvar, std::string
 
 static int IfCheckTimesKilled(Character* mob, const std::string &cvar, const std::string &opr, const std::string &rval, const Character* chkchar)
 {
-    ProtoMobile *pMob = nullptr;
+    std::shared_ptr<ProtoMobile> pMob;
 
     if (chkchar)
     {
         pMob = chkchar->Prototype;
     }
-    else if (!(pMob = GetProtoMobile(atoi(cvar.c_str()))))
+    else if ((pMob = GetProtoMobile(atoi(cvar.c_str()))) == nullptr)
     {
         ProgBug("TimesKilled ifcheck: bad vnum", mob);
         return BERR;

@@ -281,7 +281,7 @@ short gsn_TopSN = 0;
 /*
  * Locals.
  */
-ProtoMobile *MobIndexHash[MAX_KEY_HASH];
+std::shared_ptr<ProtoMobile> MobIndexHash[MAX_KEY_HASH];
 std::shared_ptr<ProtoObject> ObjectIndexHash[MAX_KEY_HASH];
 std::shared_ptr<Room> RoomIndexHash[MAX_KEY_HASH];
 
@@ -710,7 +710,7 @@ static void InitializeEconomy(void)
 
     for (tarea = FirstArea; tarea; tarea = tarea->Next)
     {
-        ProtoMobile *mob = NULL;
+        std::shared_ptr<ProtoMobile> mob;
         int idx = 0, gold = 0, rng = 0;
 
         /* skip area if they already got some gold */
@@ -911,7 +911,7 @@ void RandomizeExits(std::shared_ptr<Room> room, short maxdir)
 /*
  * Create an instance of a mobile.
  */
-Character *AllocateMobile(ProtoMobile *pMobIndex)
+Character *AllocateMobile(std::shared_ptr<ProtoMobile> pMobIndex)
 {
     assert(pMobIndex != nullptr);
 
@@ -920,7 +920,7 @@ Character *AllocateMobile(ProtoMobile *pMobIndex)
     return mob;
 }
 
-Character *CreateMobile(ProtoMobile *proto)
+Character *CreateMobile(std::shared_ptr<ProtoMobile> proto)
 {
     Character *mob = AllocateMobile(proto);
 
@@ -975,12 +975,11 @@ std::string GetExtraDescription(const std::string &name,
  * Translates mob virtual number to its mob index struct.
  * Hash table lookup.
  */
-ProtoMobile *GetProtoMobile(vnum_t vnum)
+std::shared_ptr<ProtoMobile> GetProtoMobile(vnum_t vnum)
 {
     assert(vnum > 0);
-    ProtoMobile *pMobIndex;
 
-    for (pMobIndex = MobIndexHash[vnum % MAX_KEY_HASH];
+    for (auto pMobIndex = MobIndexHash[vnum % MAX_KEY_HASH];
         pMobIndex;
         pMobIndex = pMobIndex->Next)
     {
@@ -995,7 +994,7 @@ ProtoMobile *GetProtoMobile(vnum_t vnum)
         Log->Bug("%s: bad vnum %ld.", __FUNCTION__, vnum);
     }
 
-    return NULL;
+    return nullptr;
 }
 
 /*
@@ -1283,7 +1282,7 @@ bool DeleteObject(std::shared_ptr<ProtoObject> obj)
 }
 
 /* See comment on DeleteRoom. */
-bool DeleteMobile(ProtoMobile *mob)
+bool DeleteMobile(std::shared_ptr<ProtoMobile> mob)
 {
     return true;
 }
@@ -1384,9 +1383,9 @@ std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::st
  * Create a new INDEX mobile (for online building)              -Thoric
  * Option to clone an existing index mobile.
  */
-ProtoMobile *MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name)
+std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name)
 {
-    ProtoMobile *cMobIndex = nullptr;
+    std::shared_ptr<ProtoMobile> cMobIndex;
     char buf[MAX_STRING_LENGTH];
 
     if (cvnum > 0)
@@ -1394,7 +1393,7 @@ ProtoMobile *MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name)
         cMobIndex = GetProtoMobile(cvnum);
     }
 
-    ProtoMobile *pMobIndex = new ProtoMobile(vnum);
+    std::shared_ptr<ProtoMobile> pMobIndex = std::make_shared<ProtoMobile>(vnum);
     pMobIndex->Name = name;
 
     if (!cMobIndex)

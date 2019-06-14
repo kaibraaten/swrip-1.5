@@ -673,13 +673,12 @@ static void PushSkillTeachers(lua_State *L, const Skill *skill)
 
         while (!teacherList.empty())
         {
-            const ProtoMobile *mobile = NULL;
             std::string teacher;
             vnum_t vnum = INVALID_VNUM;
 
             teacherList = OneArgument(teacherList, teacher);
             vnum = strtol(teacher.c_str(), nullptr, 10);
-            mobile = GetProtoMobile(vnum);
+            auto mobile = GetProtoMobile(vnum);
 
             if (mobile)
             {

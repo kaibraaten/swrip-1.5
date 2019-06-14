@@ -23,7 +23,6 @@
 #define _SWRIP_MUD_HPP_
 
 #include <memory>
-#include <algorithm>
 #include <array>
 #include <list>
 #include <string>
@@ -376,7 +375,7 @@ extern char             log_buf[];
 extern TimeInfo   time_info;
 extern Weather     weather_info;
 extern std::unique_ptr<Auction> OngoingAuction;
-extern ProtoMobile *MobIndexHash[MAX_KEY_HASH];
+extern std::shared_ptr<ProtoMobile> MobIndexHash[MAX_KEY_HASH];
 extern std::shared_ptr<ProtoObject> ObjectIndexHash[MAX_KEY_HASH];
 extern std::shared_ptr<Room> RoomIndexHash[MAX_KEY_HASH];
 
@@ -1116,24 +1115,24 @@ void AppendFile(const Character *ch, const std::string &file, const std::string 
 void ShowFile(const Character *ch, const std::string &filename);
 void BootDatabase(bool fCopyover);
 void AddCharacter(Character *ch);
-Character *AllocateMobile(ProtoMobile *pMobIndex);
-Character *CreateMobile(ProtoMobile *pMobIndex);
+Character *AllocateMobile(std::shared_ptr<ProtoMobile> pMobIndex);
+Character *CreateMobile(std::shared_ptr<ProtoMobile> pMobIndex);
 Object *CreateObject(std::shared_ptr<ProtoObject> pObjIndex, int level);
 Object *AllocateObject(std::shared_ptr<ProtoObject> pObjIndex, int level);
 std::string GetExtraDescription(const std::string &name, const std::list<std::shared_ptr<ExtraDescription>> &extras);
-ProtoMobile *GetProtoMobile(vnum_t vnum);
+std::shared_ptr<ProtoMobile> GetProtoMobile(vnum_t vnum);
 std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum);
 std::shared_ptr<Room> GetRoom(vnum_t vnum);
 std::shared_ptr<Room> MakeRoom(vnum_t vnum);
 std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name);
-ProtoMobile *MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name);
+std::shared_ptr<ProtoMobile> MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name);
 std::shared_ptr<Exit> MakeExit(std::shared_ptr<Room> pRoomIndex, std::shared_ptr<Room> to_room, DirectionType door,
     const std::string &keyword = "");
 void RandomizeExits(std::shared_ptr<Room> room, short maxdir);
 void MakeWizlist();
 bool DeleteRoom(std::shared_ptr<Room> room);
 bool DeleteObject(std::shared_ptr<ProtoObject> obj);
-bool DeleteMobile(ProtoMobile *mob);
+bool DeleteMobile(std::shared_ptr<ProtoMobile> mob);
 
 /* build.c */
 void EditMobProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
@@ -1144,7 +1143,7 @@ bool CanModifyRoom(const Character *ch, std::shared_ptr<Room> room);
 bool CanModifyObject(const Character *ch, const Object *obj);
 bool CanModifyCharacter(const Character *ch, const Character *mob);
 
-bool CanMedit(const Character *ch, const ProtoMobile *mob);
+bool CanMedit(const Character *ch, std::shared_ptr<ProtoMobile> mob);
 void FreeReset(Area *are, Reset *res);
 std::shared_ptr<ExtraDescription> SetRExtra(std::shared_ptr<Room> room, const std::string &keywords);
 bool DelRExtra(std::shared_ptr<Room> room, const std::string &keywords);
@@ -1231,7 +1230,7 @@ void ExtractObject(Object *obj);
 void ExtractExit(std::shared_ptr<Room> room, std::shared_ptr<Exit> pexit);
 void CleanRoom(std::shared_ptr<Room> room);
 void CleanObject(std::shared_ptr<ProtoObject> obj);
-void CleanMobile(ProtoMobile *mob);
+void CleanMobile(std::shared_ptr<ProtoMobile> mob);
 void ExtractCharacter(Character *ch, bool fPull);
 Character *GetCharacterInRoom(const Character *ch, std::string argument);
 Character *GetCharacterAnywhere(const Character *ch, std::string argument);

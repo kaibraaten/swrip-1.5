@@ -59,7 +59,7 @@ Character::Character(std::unique_ptr<class PCData> pcdata, Descriptor *desc)
     Ability.Experience.fill(0);
 }
 
-Character::Character(ProtoMobile *protoMob)
+Character::Character(std::shared_ptr<ProtoMobile> protoMob)
     : spec_fun(protoMob->spec_fun),
     spec_2(protoMob->spec_2),
     Prototype(protoMob),
@@ -1512,9 +1512,9 @@ void SetCharacterTitle(Character *ch, const std::string &title)
 
 void AddReinforcements(Character *ch)
 {
-    ProtoMobile *pMobIndex = nullptr;
+    std::shared_ptr<ProtoMobile> pMobIndex;
     Object *blaster = nullptr;
-    std::shared_ptr<ProtoObject>pObjIndex;
+    std::shared_ptr<ProtoObject> pObjIndex;
     int multiplier = 1;
 
     if ((pMobIndex = GetProtoMobile(ch->BackupMob)) == nullptr)

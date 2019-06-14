@@ -14,7 +14,7 @@ protected:
   void SetUp() override
   {
     _testCharacter = new Character(std::make_unique<PCData>(), new NullDescriptor());
-    ProtoMobile *protoMob = MakeMobile(1, INVALID_VNUM, "Foo");
+    auto protoMob = MakeMobile(1, INVALID_VNUM, "Foo");
     _testNpc = new Character(protoMob);
   }
 
@@ -24,7 +24,6 @@ protected:
     delete _testCharacter;
     _testCharacter = nullptr;
 
-    delete _testNpc->Prototype;
     delete _testNpc;
     _testNpc = nullptr;
   }

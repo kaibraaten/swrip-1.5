@@ -3,45 +3,45 @@
 #include "character.hpp"
 #include "protomob.hpp"
 
-void do_shopstat( Character *ch, std::string argument )
+void do_shopstat(Character *ch, std::string argument)
 {
-  std::shared_ptr<Shop> shop;
-  const ProtoMobile *mob = nullptr;
-  vnum_t vnum = INVALID_VNUM;
+    std::shared_ptr<Shop> shop;
+    std::shared_ptr<ProtoMobile> mob;
+    vnum_t vnum = INVALID_VNUM;
 
-  if ( argument.empty() )
+    if (argument.empty())
     {
-      ch->Echo("Usage: shopstat <keeper vnum>\r\n");
-      return;
+        ch->Echo("Usage: shopstat <keeper vnum>\r\n");
+        return;
     }
 
-  vnum = ToLong( argument );
+    vnum = ToLong(argument);
 
-  if ( (mob = GetProtoMobile(vnum)) == NULL )
+    if ((mob = GetProtoMobile(vnum)) == NULL)
     {
-      ch->Echo("Mobile not found.\r\n");
-      return;
+        ch->Echo("Mobile not found.\r\n");
+        return;
     }
 
-  if ( !mob->Shop )
+    if (!mob->Shop)
     {
-      ch->Echo("This mobile doesn't keep a shop.\r\n");
-      return;
+        ch->Echo("This mobile doesn't keep a shop.\r\n");
+        return;
     }
 
-  shop = mob->Shop;
+    shop = mob->Shop;
 
-  ch->Echo("Keeper: %ld  %s\r\n", shop->Keeper, mob->ShortDescr.c_str() );
-  ch->Echo("buy0 [%s]  buy1 [%s]  buy2 [%s]  buy3 [%s]  buy4 [%s]\r\n",
-           ObjectTypes[shop->BuyType[0]],
-           ObjectTypes[shop->BuyType[1]],
-           ObjectTypes[shop->BuyType[2]],
-           ObjectTypes[shop->BuyType[3]],
-           ObjectTypes[shop->BuyType[4]] );
-  ch->Echo("Profit:  buy %3d%%  sell %3d%%\r\n",
-           shop->ProfitBuy,
-           shop->ProfitSell );
-  ch->Echo("Hours:   open %2d  close %2d\r\n",
-           shop->BusinessHours.Open,
-           shop->BusinessHours.Close );
+    ch->Echo("Keeper: %ld  %s\r\n", shop->Keeper, mob->ShortDescr.c_str());
+    ch->Echo("buy0 [%s]  buy1 [%s]  buy2 [%s]  buy3 [%s]  buy4 [%s]\r\n",
+        ObjectTypes[shop->BuyType[0]],
+        ObjectTypes[shop->BuyType[1]],
+        ObjectTypes[shop->BuyType[2]],
+        ObjectTypes[shop->BuyType[3]],
+        ObjectTypes[shop->BuyType[4]]);
+    ch->Echo("Profit:  buy %3d%%  sell %3d%%\r\n",
+        shop->ProfitBuy,
+        shop->ProfitSell);
+    ch->Echo("Hours:   open %2d  close %2d\r\n",
+        shop->BusinessHours.Open,
+        shop->BusinessHours.Close);
 }

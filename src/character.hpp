@@ -40,7 +40,7 @@ class Character
 public:
     Character() = delete;
     Character(std::unique_ptr<class PCData> pcdata, Descriptor *desc);
-    Character(ProtoMobile *protoMob);
+    Character(std::shared_ptr<ProtoMobile> protoMob);
 
     virtual ~Character();
 
@@ -62,7 +62,7 @@ public:
     // Player AND mob
     SpecFun *spec_fun = NULL;
     SpecFun *spec_2 = NULL;
-    ProtoMobile *Prototype = NULL;
+    std::shared_ptr<ProtoMobile> Prototype;
     Descriptor *Desc = NULL;
     std::unique_ptr<class PCData> PCData;
     std::string Name;

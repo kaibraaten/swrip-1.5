@@ -445,7 +445,7 @@ static Reset *FindMobileReset(const Character *ch, const Area *pArea,
     {
         std::string arg;
         int cnt = 0, num = NumberArgument(name, arg);
-        ProtoMobile *pMob = NULL;
+        std::shared_ptr<ProtoMobile> pMob;
 
         for (reset = pArea->FirstReset; reset; reset = reset->Next)
         {
@@ -485,7 +485,7 @@ void EditReset(Character *ch, std::string argument, Area *pArea, std::shared_ptr
     std::string arg;
     Reset *pReset = NULL;
     Reset *reset = NULL;
-    ProtoMobile *pMob = NULL;
+    std::shared_ptr<ProtoMobile> pMob;
     std::shared_ptr<Room> pRoom;
     std::shared_ptr<ProtoObject> pObj;
     int num = 0;
@@ -1523,7 +1523,7 @@ void ResetArea(Area *pArea)
     Object *obj = NULL;
     Object *lastobj = NULL;
     std::shared_ptr<Room> pRoomIndex;
-    ProtoMobile *pMobIndex = NULL;
+    std::shared_ptr<ProtoMobile> pMobIndex;
     std::shared_ptr<ProtoObject> pObjIndex;
     std::shared_ptr<ProtoObject> pObjToIndex;
     std::shared_ptr<Exit> pexit;
@@ -2077,7 +2077,7 @@ static void ListResets(const Character *ch, const Area *pArea, std::shared_ptr<R
 {
     Reset *pReset = NULL;
     std::shared_ptr<Room> room;
-    const ProtoMobile *mob = NULL;
+    std::shared_ptr<ProtoMobile> mob;
     std::shared_ptr<ProtoObject> obj;
     std::shared_ptr<ProtoObject> obj2;
     std::shared_ptr<ProtoObject> lastobj;
@@ -2331,7 +2331,7 @@ static void ListResets(const Character *ch, const Area *pArea, std::shared_ptr<R
             case BIT_RESET_MOBILE:
                 if (pReset->Arg1 > 0)
                 {
-                    ProtoMobile *mob2;
+                    std::shared_ptr<ProtoMobile> mob2;
 
                     if (!(mob2 = GetProtoMobile(pReset->Arg1)))
                         rname = "Mobile: *BAD VNUM*";
@@ -2779,7 +2779,7 @@ std::string SPrintReset(const Character *ch, Reset *pReset, short num, bool rlis
     char objname[1024] = { '\0' };
     static std::shared_ptr<Room> room;
     static std::shared_ptr<ProtoObject> obj, obj2;
-    static ProtoMobile *mob = NULL;
+    static std::shared_ptr<ProtoMobile> mob;
     vnum_t rvnum = INVALID_VNUM;
 
     if (ch->InRoom)
