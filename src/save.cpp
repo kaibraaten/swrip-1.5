@@ -911,7 +911,7 @@ void ReadObject(Character *ch, FILE *fp, short os_type)
     int iNest = 0;
     bool fNest = true; /* Yes, these should             */
     bool fVnum = true; /* indeed be initialized as true */
-    Room *room = NULL;
+    std::shared_ptr<Room> room;
 
     Object *obj = new Object();
 
@@ -1393,11 +1393,11 @@ void LoadStorerooms()
 
         for(const auto &entry : fs::directory_iterator(STOREROOM_DIR))
         {
-            const char *filename = entry.path().filename().string().c_str();
+            std::string filename = entry.path().filename().string();
 
             if (filename[0] != '.')
             {
-                sprintf(strArea, "%s%s", STOREROOM_DIR, filename);
+                sprintf(strArea, "%s%s", STOREROOM_DIR, filename.c_str());
                 fprintf(stderr, "Storeroom -> %s\n", strArea);
 
                 if (!(fpArea = fopen(strArea, "r")))
@@ -1406,7 +1406,7 @@ void LoadStorerooms()
                     continue;
                 }
 
-                Room *storeroom = GetRoom(atoi(filename));
+                auto storeroom = GetRoom(atoi(filename.c_str()));
 
                 if (!storeroom)
                 {
@@ -1442,7 +1442,7 @@ void LoadStorerooms()
                     if (letter != '#')
                     {
                         Log->Bug("LoadStorerooms: # not found.");
-                        Log->Bug("%s", filename);
+                        Log->Bug("%s", filename.c_str());
                         break;
                     }
 
@@ -1493,21 +1493,18 @@ void LoadStorerooms()
     falling = 0;
 }
 
-void SaveStoreroom(const Room *room)
+void SaveStoreroom(std::shared_ptr<Room> room)
 {
     assert(room != nullptr);
 
-    char strsave[MAX_INPUT_LENGTH];
     FILE *fp = NULL;
+    std::string strsave = FormatString("%s%ld", STOREROOM_DIR, room->Vnum);
 
-    sprintf(strsave, "%s%ld", STOREROOM_DIR, room->Vnum);
-
-    if ((fp = fopen(strsave, "w")) == NULL)
+    if ((fp = fopen(strsave.c_str(), "w")) == NULL)
     {
-        perror(strsave);
+        perror(strsave.c_str());
         Log->Bug("Save_storeroom: fopen");
-        Log->Bug("%s", strsave);
-
+        Log->Bug("%s", strsave.c_str());
     }
     else
     {

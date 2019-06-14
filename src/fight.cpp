@@ -2574,10 +2574,9 @@ void RawKill(Character *killer, Character *victim)
 
         if (victim->PlayerHome)
         {
-            Room *room = victim->PlayerHome;
+            auto room = victim->PlayerHome;
 
             room->Name = "An Empty Apartment";
-
             room->Flags.reset(Flag::Room::PlayerHome);
             room->Flags.set(Flag::Room::EmptyHome);
 
@@ -2688,7 +2687,7 @@ void RawKill(Character *killer, Character *victim)
     }
     else
     {
-        Room *cloningCylinder = GetRoom(ROOM_VNUM_CLONING_CYLINDER);
+        auto cloningCylinder = GetRoom(ROOM_VNUM_CLONING_CYLINDER);
 
         if (!cloningCylinder)
         {
@@ -3115,7 +3114,7 @@ static bool SprintForCover(Character *ch)
 
     for (int attempt = 0; attempt < 10; attempt++)
     {
-        Room *was_in = ch->InRoom;
+        auto was_in = ch->InRoom;
         DirectionType door = (DirectionType)GetRandomDoor();
         std::shared_ptr<Exit> pexit = GetExit(was_in, door);
 
@@ -3139,7 +3138,7 @@ static bool SprintForCover(Character *ch)
 
         MoveCharacter(ch, pexit, 0);
 
-        Room *now_in = ch->InRoom;
+        auto now_in = ch->InRoom;
 
         if (now_in == was_in)
         {

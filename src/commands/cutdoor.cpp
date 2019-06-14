@@ -40,7 +40,7 @@ void do_cutdoor(Character *ch, std::string arg)
 
     if ((pexit = FindDoor(ch, arg, false)) != NULL)
     {
-        const Room *to_room = nullptr;
+        std::shared_ptr<Room> to_room;
         std::shared_ptr<Exit> pexit_rev;
         int the_chance = 0;
         std::string keyword;

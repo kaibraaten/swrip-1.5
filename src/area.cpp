@@ -48,7 +48,7 @@ static void LoadRanges(Area *tarea, FILE *fp);
 static int MudProgNameToType(const char* name);
 static void MobProgReadPrograms(FILE* fp, ProtoMobile *pMobIndex);
 static void ObjProgReadPrograms(FILE* fp, std::shared_ptr<ProtoObject> pObjIndex);
-static void RoomProgReadPrograms(FILE* fp, Room *pRoomIndex);
+static void RoomProgReadPrograms(FILE* fp, std::shared_ptr<Room> pRoomIndex);
 
 void LoadAreaFile(Area *tarea, const std::string &filename)
 {
@@ -155,13 +155,13 @@ void FixAreaExits(Area *tarea)
 {
     for (vnum_t rnum = tarea->VnumRanges.Room.First; rnum <= tarea->VnumRanges.Room.Last; rnum++)
     {
-        Room *pRoomIndex = nullptr;
+        std::shared_ptr<Room> pRoomIndex;
         bool fexit = false;
 
         if ((pRoomIndex = GetRoom(rnum)) == NULL)
             continue;
 
-        for (std::shared_ptr<Exit> pexit : pRoomIndex->Exits())
+        for (auto pexit : pRoomIndex->Exits())
         {
             fexit = true;
             pexit->ReverseVnum = pRoomIndex->Vnum;
@@ -180,14 +180,14 @@ void FixAreaExits(Area *tarea)
 
     for (vnum_t rnum = tarea->VnumRanges.Room.First; rnum <= tarea->VnumRanges.Room.Last; rnum++)
     {
-        const Room *pRoomIndex = GetRoom(rnum);
+        auto pRoomIndex = GetRoom(rnum);
 
         if (pRoomIndex == nullptr)
         {
             continue;
         }
 
-        for (std::shared_ptr<Exit> pexit : pRoomIndex->Exits())
+        for (auto pexit : pRoomIndex->Exits())
         {
             if (pexit->ToRoom && !pexit->ReverseExit)
             {
@@ -867,8 +867,8 @@ static void LoadResets(Area *tarea, FILE *fp)
 
 static void LoadRooms(Area *tarea, FILE *fp)
 {
-    Room *pRoomIndex;
-    const char *ln;
+    std::shared_ptr<Room> pRoomIndex;
+    const char *ln = nullptr;
 
     if (!tarea)
     {
@@ -931,7 +931,7 @@ static void LoadRooms(Area *tarea, FILE *fp)
         else
         {
             oldroom = false;
-            pRoomIndex = new Room();
+            pRoomIndex = std::make_shared<Room>();
         }
 
         fBootDb = tmpBootDb;
@@ -1368,7 +1368,7 @@ static void ObjProgReadPrograms(FILE *fp, std::shared_ptr<ProtoObject> pObjIndex
 /* This procedure is responsible for reading any in_file ROOMprograms.
  */
 
-static void RoomProgReadPrograms(FILE *fp, Room *pRoomIndex)
+static void RoomProgReadPrograms(FILE *fp, std::shared_ptr<Room> pRoomIndex)
 {
     char letter = 0;
     bool done = false;
@@ -1486,8 +1486,6 @@ void AreaUpdate(void)
          */
         if (pArea->NumberOfPlayers == 0 || pArea->Age >= reset_age)
         {
-            Room *pRoomIndex;
-
             fprintf(stderr, "Resetting: %s\n", pArea->Filename.c_str());
             ResetArea(pArea);
 
@@ -1496,10 +1494,10 @@ void AreaUpdate(void)
             else
                 pArea->Age = GetRandomNumberFromRange(0, reset_age / 5);
 
-            pRoomIndex = GetRoom(ROOM_VNUM_SCHOOL);
+            auto pRoomIndex = GetRoom(ROOM_VNUM_SCHOOL);
 
             if (pRoomIndex != NULL && pArea == pRoomIndex->Area
-                &&   pArea->ResetFrequency == 0)
+                && pArea->ResetFrequency == 0)
                 pArea->Age = 15 - 3;
         }
     }
@@ -1510,9 +1508,9 @@ void AreaUpdate(void)
  */
 void CloseArea(Area *pArea)
 {
-    int icnt;
-    Room *rid;
-    Room *rid_next;
+    int icnt = 0;
+    std::shared_ptr<Room> rid;
+    std::shared_ptr<Room> rid_next;
     std::shared_ptr<ProtoObject> oid;
     std::shared_ptr<ProtoObject> oid_next;
     ProtoMobile *mid;
@@ -1633,7 +1631,7 @@ void CloseArea(Area *pArea)
             }
             else
             {
-                Room *trid;
+                std::shared_ptr<Room> trid;
 
                 for (trid = RoomIndexHash[icnt]; trid; trid = trid->Next)
                     if (trid->Next == rid)
@@ -1644,8 +1642,6 @@ void CloseArea(Area *pArea)
                 else
                     trid->Next = rid->Next;
             }
-
-            delete rid;
         }
 
         for (mid = MobIndexHash[icnt]; mid; mid = mid_next)

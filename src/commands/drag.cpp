@@ -12,10 +12,10 @@ void do_drag(Character *ch, std::string argument)
     DirectionType exit_dir = DIR_INVALID;
     Character *victim = nullptr;
     std::shared_ptr<Exit> pexit;
-    Room *to_room = nullptr;
+    std::shared_ptr<Room> to_room;
     bool nogo = false;
     int drag_chance = 0;
-    Room *fromroom = nullptr;
+    std::shared_ptr<Room> fromroom;
     std::shared_ptr<Ship> ship;
 
     argument = OneArgument(argument, arg);

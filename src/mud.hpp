@@ -223,7 +223,7 @@ class TeleportData
 public:
     TeleportData   *Next = nullptr;
     TeleportData   *Previous = nullptr;
-    Room *FromRoom = nullptr;
+    std::shared_ptr<Room> FromRoom;
     short            TeleportTimer = 0;
 };
 
@@ -351,7 +351,7 @@ extern long long high_galaxy_cash;
 extern long long low_galaxy_cash;
 
 extern Character       *cur_char;
-extern Room            *cur_room;
+extern std::shared_ptr<Room>             cur_room;
 extern bool             cur_char_died;
 extern ch_ret           global_retcode;
 
@@ -378,7 +378,7 @@ extern Weather     weather_info;
 extern std::unique_ptr<Auction> OngoingAuction;
 extern ProtoMobile *MobIndexHash[MAX_KEY_HASH];
 extern std::shared_ptr<ProtoObject> ObjectIndexHash[MAX_KEY_HASH];
-extern Room *RoomIndexHash[MAX_KEY_HASH];
+extern std::shared_ptr<Room> RoomIndexHash[MAX_KEY_HASH];
 
 /*
  * Command functions.
@@ -995,12 +995,12 @@ void ShowObjectListToCharacter(const std::list<Object*> &list, Character *ch,
 /* act_move.c */
 void SetBExitFlag(std::shared_ptr<Exit> pexit, size_t flag);
 void RemoveBExitFlag(std::shared_ptr<Exit> pexit, size_t flag);
-Room *GenerateExit(Room *in_room, std::shared_ptr<Exit> &pexit);
+std::shared_ptr<Room> GenerateExit(std::shared_ptr<Room> in_room, std::shared_ptr<Exit> &pexit);
 void ClearVirtualRooms();
 std::shared_ptr<Exit> FindDoor(Character *ch, const std::string &arg, bool quiet);
-std::shared_ptr<Exit> GetExit(const Room *room, DirectionType dir);
-std::shared_ptr<Exit> GetExitTo(const Room *room, DirectionType dir, vnum_t vnum);
-std::shared_ptr<Exit> GetExitNumber(const Room *room, short count);
+std::shared_ptr<Exit> GetExit(std::shared_ptr<Room> room, DirectionType dir);
+std::shared_ptr<Exit> GetExitTo(std::shared_ptr<Room> room, DirectionType dir, vnum_t vnum);
+std::shared_ptr<Exit> GetExitNumber(std::shared_ptr<Room> room, short count);
 ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall = 0);
 void Teleport(Character *ch, vnum_t room, int flags);
 bool CharacterFallIfNoFloor(Character *ch, int fall);
@@ -1013,10 +1013,10 @@ short GetObjectResistance(const Object *obj);
 void ObjectFallIfNoFloor(Object *obj, bool through);
 
 /* act_wiz.c */
-Room *FindLocation(const Character *ch, const std::string &arg);
-void EchoToRoom(short AT_COLOR, const Room *room, const std::string &argument);
-void EchoToRoomNoNewline(int ecolor, const Room *room, const std::string &argument);
-void RealEchoToRoom(short color, const Room *room, const std::string &text, bool sendNewline);
+std::shared_ptr<Room> FindLocation(const Character *ch, const std::string &arg);
+void EchoToRoom(short AT_COLOR, std::shared_ptr<Room> room, const std::string &argument);
+void EchoToRoomNoNewline(int ecolor, std::shared_ptr<Room> room, const std::string &argument);
+void RealEchoToRoom(short color, std::shared_ptr<Room> room, const std::string &text, bool sendNewline);
 void EchoToAll(short AT_COLOR, const std::string &argument, short tar);
 void GenerateRebootString();
 
@@ -1123,15 +1123,15 @@ Object *AllocateObject(std::shared_ptr<ProtoObject> pObjIndex, int level);
 std::string GetExtraDescription(const std::string &name, const std::list<std::shared_ptr<ExtraDescription>> &extras);
 ProtoMobile *GetProtoMobile(vnum_t vnum);
 std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum);
-Room *GetRoom(vnum_t vnum);
-Room *MakeRoom(vnum_t vnum);
+std::shared_ptr<Room> GetRoom(vnum_t vnum);
+std::shared_ptr<Room> MakeRoom(vnum_t vnum);
 std::shared_ptr<ProtoObject> MakeObject(vnum_t vnum, vnum_t cvnum, const std::string &name);
 ProtoMobile *MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name);
-std::shared_ptr<Exit> MakeExit(Room *pRoomIndex, Room *to_room, DirectionType door,
+std::shared_ptr<Exit> MakeExit(std::shared_ptr<Room> pRoomIndex, std::shared_ptr<Room> to_room, DirectionType door,
     const std::string &keyword = "");
-void RandomizeExits(Room *room, short maxdir);
-void MakeWizlist(void);
-bool DeleteRoom(Room *room);
+void RandomizeExits(std::shared_ptr<Room> room, short maxdir);
+void MakeWizlist();
+bool DeleteRoom(std::shared_ptr<Room> room);
 bool DeleteObject(std::shared_ptr<ProtoObject> obj);
 bool DeleteMobile(ProtoMobile *mob);
 
@@ -1140,14 +1140,14 @@ void EditMobProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, co
 void EditRoomProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
 void WriteAreaList();
 
-bool CanModifyRoom(const Character *ch, const Room *room);
+bool CanModifyRoom(const Character *ch, std::shared_ptr<Room> room);
 bool CanModifyObject(const Character *ch, const Object *obj);
 bool CanModifyCharacter(const Character *ch, const Character *mob);
 
 bool CanMedit(const Character *ch, const ProtoMobile *mob);
 void FreeReset(Area *are, Reset *res);
-std::shared_ptr<ExtraDescription> SetRExtra(Room *room, const std::string &keywords);
-bool DelRExtra(Room *room, const std::string &keywords);
+std::shared_ptr<ExtraDescription> SetRExtra(std::shared_ptr<Room> room, const std::string &keywords);
+bool DelRExtra(std::shared_ptr<Room> room, const std::string &keywords);
 std::shared_ptr<ExtraDescription> SetOExtra(Object *obj, const std::string &keywords);
 bool DelOExtra(Object *obj, const std::string &keywords);
 std::shared_ptr<ExtraDescription> SetOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keywords);
@@ -1183,7 +1183,7 @@ void RawKill(Character *killer, Character *victim);
 void MakeCorpse(Character *ch);
 void MakeBloodstain(Character *ch);
 void MakeScraps(Object *obj);
-void MakeFire(Room *in_room, short timer);
+void MakeFire(std::shared_ptr<Room> in_room, short timer);
 Object *MakeTrap(int v0, int v1, int v2, int v3);
 Object *CreateMoney(int amount);
 
@@ -1218,19 +1218,18 @@ void RemoveAffect(Character *ch, std::shared_ptr<Affect> paf);
 void StripAffect(Character *ch, int sn);
 void JoinAffect(Character *ch, std::shared_ptr<Affect> paf);
 void CharacterFromRoom(Character *ch);
-void CharacterToRoom(Character *ch, Room *pRoomIndex);
+void CharacterToRoom(Character *ch, std::shared_ptr<Room> pRoomIndex);
 Object *ObjectToCharacter(Object *obj, Character *ch);
 void ObjectFromCharacter(Object *obj);
 int GetObjectArmorClass(const Object *obj, int iWear);
 int CountOccurrencesOfObjectInList(std::shared_ptr<ProtoObject> protoobj, const std::list<Object*> &list);
 void ObjectFromRoom(Object *obj);
-Object *ObjectToRoom(Object *obj, Room *pRoomIndex);
+Object *ObjectToRoom(Object *obj, std::shared_ptr<Room> pRoomIndex);
 Object *ObjectToObject(Object *obj, Object *obj_to);
 void ObjectFromObject(Object *obj);
 void ExtractObject(Object *obj);
-void ExtractExit(Room *room, std::shared_ptr<Exit> pexit);
-void ExtractRoom(Room *room);
-void CleanRoom(Room *room);
+void ExtractExit(std::shared_ptr<Room> room, std::shared_ptr<Exit> pexit);
+void CleanRoom(std::shared_ptr<Room> room);
 void CleanObject(std::shared_ptr<ProtoObject> obj);
 void CleanMobile(ProtoMobile *mob);
 void ExtractCharacter(Character *ch, bool fPull);
@@ -1245,8 +1244,8 @@ Object *GetObjectHere(const Character *ch, std::string argument);
 Object *GetObjectAnywhere(const Character *ch, std::string argument);
 int GetObjectCount(const Object *obj);
 int GetObjectWeight(const Object *obj);
-bool IsRoomDark(const Room *pRoomIndex);
-bool IsRoomPrivate(const Character *ch, const Room *pRoomIndex);
+bool IsRoomDark(std::shared_ptr<Room> pRoomIndex);
+bool IsRoomPrivate(const Character *ch, std::shared_ptr<Room> pRoomIndex);
 const char *GetItemTypeName(const Object *obj);
 const char *GetAffectLocationName(int location);
 ch_ret CheckObjectForTrap(Character *ch, const Object *obj, int flag);
@@ -1274,7 +1273,7 @@ bool Chance(const Character *ch, short percent);
 Object *CopyObject(const Object *obj);
 void SplitGroupedObject(Object *obj, int num);
 void SeparateOneObjectFromGroup(Object *obj);
-bool EmptyObjectContents(Object *obj, Object *destobj, Room *destroom);
+bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> destroom);
 Object *FindObject(Character *ch, std::string argument, bool carryonly);
 void BoostEconomy(Area *tarea, int gold);
 void LowerEconomy(Area *tarea, int gold);
@@ -1317,9 +1316,9 @@ void ReadObject(Character *ch, FILE *fp, short os_type);
 void DeEquipCharacter(Character *ch);
 void ReEquipCharacter(Character *ch);
 void SaveHome(Character *ch);
-void SaveStoreroom(const Room *room);
-void LoadStorerooms(void);
-void LoadCorpses(void);
+void SaveStoreroom(std::shared_ptr<Room> room);
+void LoadStorerooms();
+void LoadCorpses();
 void WriteCorpses(const Character *ch, std::string name);
 
 /* special.c */

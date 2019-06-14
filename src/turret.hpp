@@ -29,34 +29,34 @@
 
 class Turret;
 
-Turret *AllocateTurret( ShipClass ownerClass );
-void FreeTurret( Turret *turret );
-Turret *CopyTurret( const Turret *old_turret, ShipClass ownerClassOfNewTurret );
+Turret *AllocateTurret(ShipClass ownerClass);
+void FreeTurret(Turret *turret);
+Turret *CopyTurret(const Turret *old_turret, ShipClass ownerClassOfNewTurret);
 
-bool IsTurretInstalled( const Turret *turret );
+bool IsTurretInstalled(const Turret *turret);
 
-void ResetTurret( Turret *turret );
+void ResetTurret(Turret *turret);
 
-void SetTurretReady( Turret *turret );
-bool IsTurretReady( const Turret *turret );
+void SetTurretReady(Turret *turret);
+bool IsTurretReady(const Turret *turret);
 
-void SetTurretDamaged( Turret *turret );
-bool IsTurretDamaged( const Turret *turret );
+void SetTurretDamaged(Turret *turret);
+bool IsTurretDamaged(const Turret *turret);
 
-bool IsTurretRecharging( const Turret *turret );
-void FireTurret( Turret *turret );
+bool IsTurretRecharging(const Turret *turret);
+void FireTurret(Turret *turret);
 
-void ClearTurretTarget( Turret *turret );
-void SetTurretTarget( Turret *turret, std::shared_ptr<Ship> target );
-std::shared_ptr<Ship> GetTurretTarget( const Turret *turret );
-bool TurretHasTarget( const Turret *turret );
+void ClearTurretTarget(Turret *turret);
+void SetTurretTarget(Turret *turret, std::shared_ptr<Ship> target);
+std::shared_ptr<Ship> GetTurretTarget(const Turret *turret);
+bool TurretHasTarget(const Turret *turret);
 
-void SetTurretRoom( Turret *turret, vnum_t room_vnum );
-vnum_t GetTurretRoom( const Turret *turret );
+void SetTurretRoom(Turret *turret, vnum_t room_vnum);
+vnum_t GetTurretRoom(const Turret *turret);
 
-int GetTurretEnergyDraw( const Turret *turret );
+int GetTurretEnergyDraw(const Turret *turret);
 
-void PushTurret( lua_State *L, const Turret *turret, const int idx );
-void LoadTurret( lua_State *L, Turret *turret );
+void PushTurret(lua_State *L, const Turret *turret, const int idx);
+void LoadTurret(lua_State *L, Turret *turret);
 
 #endif

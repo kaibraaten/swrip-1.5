@@ -10,8 +10,6 @@ void show_char_to_char(const std::list<Character*> &list, Character *ch);
 
 void do_scan(Character *ch, std::string argument)
 {
-    Room *was_in_room = NULL;
-    Room *to_room = NULL;
     std::shared_ptr<Exit> pexit;
     DirectionType dir = DIR_INVALID;
     short dist = 0;
@@ -29,7 +27,7 @@ void do_scan(Character *ch, std::string argument)
         return;
     }
 
-    was_in_room = ch->InRoom;
+    auto was_in_room = ch->InRoom;
     Act(AT_GREY, "Scanning $t...", ch, GetDirectionName(dir), NULL, TO_CHAR);
     Act(AT_GREY, "$n scans $t.", ch, GetDirectionName(dir), NULL, TO_ROOM);
 
@@ -67,12 +65,12 @@ void do_scan(Character *ch, std::string argument)
             break;
         }
 
-        to_room = NULL;
+        std::shared_ptr<Room> to_room;
 
         if (pexit->Distance > 1)
             to_room = GenerateExit(ch->InRoom, pexit);
 
-        if (to_room == NULL)
+        if (to_room == nullptr)
             to_room = pexit->ToRoom;
 
         if (IsRoomPrivate(ch, to_room)

@@ -33,7 +33,7 @@ static void LookThroughShipWindow(Character *ch, std::shared_ptr<Ship> ship);
 static bool ShowShipIfInVincinity(std::shared_ptr<Ship> target, void *userData);
 static void show_char_to_char_0(Character *victim, Character *ch);
 static void show_char_to_char_1(Character *victim, Character *ch);
-static void show_ships_to_char(const Room *room, const Character *ch);
+static void show_ships_to_char(std::shared_ptr<Room> room, const Character *ch);
 static void show_visible_affects_to_char(Character *victim, Character *ch);
 static void show_exit_to_char(Character *ch, std::shared_ptr<Exit> pexit, short door);
 static void show_no_arg(Character *ch, bool is_auto);
@@ -179,10 +179,8 @@ void do_look(Character *ch, std::string argument)
         }
     }
 
-    for (auto i = std::rbegin(ch->InRoom->Objects()); i != std::rend(ch->InRoom->Objects()); ++i)
+    for(auto obj : Reverse(ch->InRoom->Objects()))
     {
-        Object *obj = *i;
-
         if (CanSeeObject(ch, obj))
         {
             const auto objExtraDescriptions(obj->ExtraDescriptions());
@@ -618,7 +616,7 @@ static void show_char_to_char_1(Character *victim, Character *ch)
             LearnFromFailure(ch, gsn_peek);
 }
 
-static void show_ships_to_char(const Room *room, const Character *ch)
+static void show_ships_to_char(std::shared_ptr<Room> room, const Character *ch)
 {
     const int NUMBER_OF_COLUMNS = 2;
     int column = 0;
@@ -850,8 +848,6 @@ static void look_in(Character *ch, const std::string &what, bool doexaprog)
             if (pexit->Direction == DIR_PORTAL
                 && pexit->Flags.test(Flag::Exit::Portal))
             {
-                Room *original = NULL;
-
                 if (IsRoomPrivate(ch, pexit->ToRoom)
                     && GetTrustLevel(ch) < SysData.LevelToOverridePrivateFlag)
                 {
@@ -860,7 +856,7 @@ static void look_in(Character *ch, const std::string &what, bool doexaprog)
                     return;
                 }
 
-                original = ch->InRoom;
+                auto original = ch->InRoom;
                 CharacterFromRoom(ch);
                 CharacterToRoom(ch, pexit->ToRoom);
                 do_look(ch, "auto");
@@ -943,8 +939,6 @@ static void show_exit_to_char(Character *ch, std::shared_ptr<Exit> pexit, short 
             || pexit->Flags.test(Flag::Exit::CanLook)
             || GetTrustLevel(ch) >= LEVEL_IMMORTAL))
     {
-        Room *original = NULL;
-
         if (!pexit->Flags.test(Flag::Exit::CanLook)
             && GetTrustLevel(ch) < LEVEL_IMMORTAL)
         {
@@ -971,11 +965,11 @@ static void show_exit_to_char(Character *ch, std::shared_ptr<Exit> pexit, short 
             return;
         }
 
-        original = ch->InRoom;
+        auto original = ch->InRoom;
 
         if (pexit->Distance > 1)
         {
-            Room *to_room = GenerateExit(ch->InRoom, pexit);
+            std::shared_ptr<Room> to_room = GenerateExit(ch->InRoom, pexit);
 
             if (to_room)
             {
@@ -1056,11 +1050,11 @@ static void LookThroughShipWindow(Character *ch, std::shared_ptr<Ship> ship)
 
     if (ship->Location || ship->State == SHIP_LANDED)
     {
-        Room *to_room = GetRoom(ship->Location);
+        auto to_room = GetRoom(ship->Location);
 
         if (to_room)
         {
-            Room *original = ch->InRoom;
+            auto original = ch->InRoom;
 
             ch->Echo("\r\n");
             CharacterFromRoom(ch);

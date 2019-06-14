@@ -41,7 +41,7 @@ void do_buzz(Character *ch, std::string arg)
         return;
     }
 
-    Room *home = exitdat->ToRoom;
+    auto home = exitdat->ToRoom;
 
     if (home->Flags.test(Flag::Room::EmptyHome))
     {

@@ -63,7 +63,6 @@ void do_shove(Character *ch, std::string argument)
     {
         if (!StrCmp(arg2, "in"))
         {
-            Room *to_room = NULL;
             std::shared_ptr<Ship> ship;
 
             if (argument.empty())
@@ -88,7 +87,7 @@ void do_shove(Character *ch, std::string argument)
                 return;
             }
 
-            to_room = GetRoom(ship->Rooms.Entrance);
+            auto to_room = GetRoom(ship->Rooms.Entrance);
 
             if (to_room)
             {
@@ -147,9 +146,8 @@ void do_shove(Character *ch, std::string argument)
 
         if (!StrCmp(arg2, "out"))
         {
-            Room *to_room = NULL;
-            Room *fromroom = ch->InRoom;
-            std::shared_ptr<Ship> ship = GetShipFromEntrance(fromroom->Vnum);
+            auto fromroom = ch->InRoom;
+            auto ship = GetShipFromEntrance(fromroom->Vnum);
 
             if (!ship)
             {
@@ -182,7 +180,7 @@ void do_shove(Character *ch, std::string argument)
                 return;
             }
 
-            to_room = GetRoom(ship->Location);
+            auto to_room = GetRoom(ship->Location);
 
             if (to_room)
             {

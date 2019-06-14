@@ -421,7 +421,7 @@ Character *ReadVendor(FILE *fp)
     {
         bool fMatch = false;
         vnum_t inroom = 0;
-        Room *pRoomIndex = NULL;
+        std::shared_ptr<Room> pRoomIndex;
 
         word = feof(fp) ? "END" : ReadWord(fp, Log, fBootDb);
 

@@ -1,57 +1,56 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_at( Character *ch, std::string argument )
+void do_at(Character *ch, std::string argument)
 {
-  std::string arg;
-  Room *location = NULL;
-  Room *original = NULL;
-  Character *wch = NULL;
+    std::string arg;
+    std::shared_ptr<Room> location;
+    Character *wch = nullptr;
 
-  argument = OneArgument( argument, arg );
+    argument = OneArgument(argument, arg);
 
-  if ( arg.empty() || argument.empty() )
+    if (arg.empty() || argument.empty())
     {
-      ch->Echo( "At where what?\r\n" );
-      return;
+        ch->Echo("At where what?\r\n");
+        return;
     }
 
-  if ( ( location = FindLocation( ch, arg ) ) == NULL )
+    if ((location = FindLocation(ch, arg)) == NULL)
     {
-      ch->Echo( "No such location.\r\n" );
-      return;
+        ch->Echo("No such location.\r\n");
+        return;
     }
 
-  if ( GetTrustLevel( ch ) < LEVEL_GREATER )
+    if (GetTrustLevel(ch) < LEVEL_GREATER)
     {
-      if ( IsRoomPrivate( ch, location ) )
+        if (IsRoomPrivate(ch, location))
         {
-          ch->Echo( "That room is private right now.\r\n" );
-          return;
+            ch->Echo("That room is private right now.\r\n");
+            return;
         }
     }
 
-  if ( IsRoomPrivate( ch, location ) )
+    if (IsRoomPrivate(ch, location))
     {
-      ch->Echo( "Overriding private flag!\r\n" );
+        ch->Echo("Overriding private flag!\r\n");
     }
 
-  original = ch->InRoom;
-  CharacterFromRoom( ch );
-  CharacterToRoom( ch, location );
-  Interpret( ch, argument );
+    std::shared_ptr<Room> original = ch->InRoom;
+    CharacterFromRoom(ch);
+    CharacterToRoom(ch, location);
+    Interpret(ch, argument);
 
-  /*
-   * See if 'ch' still exists before continuing!
-   * Handles 'at XXXX quit' case.
-   */
-  for ( wch = FirstCharacter; wch; wch = wch->Next )
+    /*
+     * See if 'ch' still exists before continuing!
+     * Handles 'at XXXX quit' case.
+     */
+    for (wch = FirstCharacter; wch; wch = wch->Next)
     {
-      if ( wch == ch )
+        if (wch == ch)
         {
-          CharacterFromRoom( ch );
-          CharacterToRoom( ch, original );
-          break;
+            CharacterFromRoom(ch);
+            CharacterToRoom(ch, original);
+            break;
         }
     }
 }

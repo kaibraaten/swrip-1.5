@@ -8,7 +8,7 @@
 void do_instaroom( Character *ch, std::string argument )
 {
   Area *pArea = NULL;
-  Room *pRoom = NULL;
+  std::shared_ptr<Room> pRoom;
   bool dodoors = false;
   std::string arg;
 

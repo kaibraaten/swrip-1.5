@@ -146,7 +146,7 @@ static void HandleStateTakingOff(const std::shared_ptr<Shuttle> &shuttle)
 
     for (vnum_t room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
     {
-        Room *iRoom = GetRoom(room);
+        auto iRoom = GetRoom(room);
         EchoToRoom(AT_CYAN, iRoom, buf);
 
         if (room == shuttle->Rooms.Entrance)
@@ -238,7 +238,7 @@ static void HandleStateLanding(const std::shared_ptr<Shuttle> &shuttle)
 
     for (vnum_t room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
     {
-        const Room *iRoom = GetRoom(room);
+        auto iRoom = GetRoom(room);
         EchoToRoom(AT_CYAN, iRoom, buf);
 
         if (shuttle->Type != SHUTTLE_TURBOCAR)
@@ -356,7 +356,7 @@ void ShowShuttlesToCharacter(const std::list<std::shared_ptr<Shuttle>> &shuttles
 
 bool ExtractShuttle(std::shared_ptr<Shuttle> shuttle)
 {
-    Room *room = NULL;
+    std::shared_ptr<Room> room;
 
     if ((room = shuttle->InRoom) != NULL)
     {
@@ -367,7 +367,7 @@ bool ExtractShuttle(std::shared_ptr<Shuttle> shuttle)
     return true;
 }
 
-bool InsertShuttle(std::shared_ptr<Shuttle> shuttle, Room *room)
+bool InsertShuttle(std::shared_ptr<Shuttle> shuttle, std::shared_ptr<Room> room)
 {
     assert(shuttle != nullptr);
     assert(room != nullptr);
@@ -382,7 +382,7 @@ bool InsertShuttle(std::shared_ptr<Shuttle> shuttle, Room *room)
     return true;
 }
 
-std::shared_ptr<Shuttle> GetShuttleInRoom(const Room *room, const std::string &name)
+std::shared_ptr<Shuttle> GetShuttleInRoom(std::shared_ptr<Room> room, const std::string &name)
 {
     if (room == nullptr)
     {

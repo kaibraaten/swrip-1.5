@@ -26,7 +26,6 @@
 #include <functional>
 #include <memory>
 #include <string>
-#include <array>
 #include <bitset>
 #include <list>
 #include <vector>
@@ -151,7 +150,7 @@ public:
     } Rooms;
 
     /* Runtime state, not persisted */
-    Room *InRoom = nullptr;
+    std::shared_ptr<Room> InRoom;
     std::shared_ptr<class Spaceobject> Spaceobject;
     std::string LandingDestination;
     int Hyperdistance = 0;
@@ -223,7 +222,7 @@ void DamageShip(std::shared_ptr<Ship> ship, int min, int max, Character *ch,
 void DestroyShip(std::shared_ptr<Ship> ship, Character *killer);
 void ShipToSpaceobject(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> spaceobject);
 void ShipFromSpaceobject(std::shared_ptr<Ship> ship, std::shared_ptr<Spaceobject> spaceobject);
-std::shared_ptr<Ship> GetShipInRoom(const Room *room, const std::string &name);
+std::shared_ptr<Ship> GetShipInRoom(std::shared_ptr<Room> room, const std::string &name);
 void TransferShip(std::shared_ptr<Ship> ship, vnum_t destination);
 bool IsShipAutoflying(std::shared_ptr<Ship> ship);
 bool CheckPilot(const Character *ch, std::shared_ptr<Ship> ship);

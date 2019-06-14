@@ -81,8 +81,8 @@ public:
   void Remove(std::shared_ptr<ExtraDescription> extraDescription);
   const std::list<std::shared_ptr<ExtraDescription>> &ExtraDescriptions() const;
   
-  Room *Next = nullptr;
-  Room *NextSort = nullptr;
+  std::shared_ptr<Room> Next;
+  std::shared_ptr<Room> NextSort;
   class Area *Area = nullptr;
   std::string Name;
   std::string Description;

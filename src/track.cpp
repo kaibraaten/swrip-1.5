@@ -40,8 +40,9 @@ static bool MobSnipe(Character *ch, Character *victim);
    or hidden doors.
 */
 
-struct bfs_queue_struct {
-    Room *room = nullptr;
+struct bfs_queue_struct
+{
+    std::shared_ptr<Room> room;
     DirectionType dir = DIR_INVALID;
     bfs_queue_struct *Next = nullptr;
 };
@@ -51,29 +52,29 @@ static struct bfs_queue_struct *queue_tail = NULL;
 static struct bfs_queue_struct *room_queue = NULL;
 
 /* Utility macros */
-static void MARK(Room *room)
+static void MARK(std::shared_ptr<Room> room)
 {
     room->Flags.set(BFSMark);
 }
 
-static void UNMARK(Room *room)
+static void UNMARK(std::shared_ptr<Room> room)
 {
     room->Flags.reset(BFSMark);
 }
 
-static bool IS_MARKED(const Room *room)
+static bool IS_MARKED(std::shared_ptr<Room> room)
 {
     return room->Flags.test(BFSMark);
 }
 
-static Room *ToRoom(const Room *room, DirectionType door)
+static std::shared_ptr<Room> ToRoom(std::shared_ptr<Room> room, DirectionType door)
 {
     return (GetExit(room, door)->ToRoom);
 }
 
-static bool IsValidEdge(const Room *room, DirectionType door)
+static bool IsValidEdge(std::shared_ptr<Room> room, DirectionType door)
 {
-    const Room *to_room = NULL;
+    std::shared_ptr<Room> to_room;
     std::shared_ptr<Exit> pexit = GetExit(room, door);
 
     if (pexit
@@ -91,9 +92,9 @@ static bool IsValidEdge(const Room *room, DirectionType door)
     }
 }
 
-static void bfs_enqueue(Room *room, DirectionType dir)
+static void bfs_enqueue(std::shared_ptr<Room> room, DirectionType dir)
 {
-    bfs_queue_struct *curr = new bfs_queue_struct();
+    auto curr = new bfs_queue_struct();
     curr->room = room;
     curr->dir = dir;
 
@@ -108,7 +109,7 @@ static void bfs_enqueue(Room *room, DirectionType dir)
     }
 }
 
-static void bfs_dequeue(void)
+static void bfs_dequeue()
 {
     bfs_queue_struct *curr = queue_head;
 
@@ -120,7 +121,7 @@ static void bfs_dequeue(void)
     delete curr;
 }
 
-static void bfs_clear_queue(void)
+static void bfs_clear_queue()
 {
     while (queue_head)
     {
@@ -128,7 +129,7 @@ static void bfs_clear_queue(void)
     }
 }
 
-static void room_enqueue(Room *room)
+static void room_enqueue(std::shared_ptr<Room> room)
 {
     bfs_queue_struct *curr = new bfs_queue_struct();
     curr->room = room;
@@ -137,7 +138,7 @@ static void room_enqueue(Room *room)
     room_queue = curr;
 }
 
-static void CleanRoom_queue(void)
+static void CleanRoom_queue()
 {
     bfs_queue_struct *curr = NULL;
     bfs_queue_struct *curr_next = NULL;
@@ -152,7 +153,7 @@ static void CleanRoom_queue(void)
     room_queue = NULL;
 }
 
-int FindFirstStep(Room *src, Room *target, int maxdist)
+int FindFirstStep(std::shared_ptr<Room> src, std::shared_ptr<Room> target, int maxdist)
 {
     assert(src != nullptr);
     assert(target != nullptr);
@@ -447,8 +448,8 @@ static bool MobSnipe(Character *ch, Character *victim)
     short dist = 0;
     short max_dist = 3;
     std::shared_ptr<Exit> pexit;
-    Room *was_in_room = NULL;
-    Room *to_room = NULL;
+    std::shared_ptr<Room> was_in_room;
+    std::shared_ptr<Room> to_room;
     char buf[MAX_STRING_LENGTH];
     bool pfound = false;
 

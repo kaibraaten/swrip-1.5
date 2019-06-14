@@ -36,7 +36,7 @@
 void PullOrPush(Character *ch, Object *obj, bool pull)
 {
     char buf[MAX_STRING_LENGTH];
-    Room *room = NULL, *to_room = NULL;
+    std::shared_ptr<Room> room, to_room;
     std::shared_ptr<Exit> pexit, pexit_rev;
     DirectionType edir = DIR_INVALID;
     const char *txt = NULL;

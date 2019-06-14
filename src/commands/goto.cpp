@@ -8,8 +8,7 @@
 void do_goto( Character *ch, std::string argument )
 {
   std::string arg;
-  Room *location = NULL;
-  Room *in_room = NULL;
+  std::shared_ptr<Room> location;
   Area *pArea = NULL;
   vnum_t vnum = INVALID_VNUM;
 
@@ -92,7 +91,7 @@ void do_goto( Character *ch, std::string argument )
         }
     }
 
-  in_room = ch->InRoom;
+  auto in_room = ch->InRoom;
 
   if ( ch->Fighting )
     StopFighting( ch, true );

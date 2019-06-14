@@ -10,7 +10,7 @@
 void do_rstat(Character *ch, std::string argument)
 {
     std::string arg;
-    Room *location = nullptr;
+    std::shared_ptr<Room> location;
     int cnt = 0;
     static const char * const dir_text[] = { "n", "e", "s", "w", "u", "d", "ne", "nw", "se", "sw", "?" };
 

@@ -13,7 +13,7 @@ void do_mp_close_passage(Character *ch, std::string argument)
 {
     std::string arg1;
     std::string arg2;
-    Room *fromRoom = nullptr;
+    std::shared_ptr<Room> fromRoom;
     vnum_t fromRoomVnum = INVALID_VNUM;
     DirectionType exit_num = DIR_INVALID;
     std::shared_ptr<Exit> pexit;

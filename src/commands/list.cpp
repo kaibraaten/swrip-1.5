@@ -9,7 +9,7 @@ void do_list( Character *ch, std::string argument )
 {
   if ( ch->InRoom->Flags.test( Flag::Room::PetShop ) )
     {
-      const Room *pRoomIndexNext = GetRoom( ch->InRoom->Vnum + 1 );
+      auto pRoomIndexNext = GetRoom( ch->InRoom->Vnum + 1 );
 
       if ( !pRoomIndexNext )
         {

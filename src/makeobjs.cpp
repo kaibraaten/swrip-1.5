@@ -34,7 +34,7 @@
 /*
  * Make a fire.
  */
-void MakeFire(Room *in_room, short timer)
+void MakeFire(std::shared_ptr<Room> in_room, short timer)
 {
   Object *fire = CreateObject( GetProtoObject( OBJ_VNUM_FIRE ), 0 );
 

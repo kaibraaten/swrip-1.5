@@ -38,7 +38,7 @@
 #include "systemdata.hpp"
 #include "exit.hpp"
 
-bool CanModifyRoom(const Character *ch, const Room *room)
+bool CanModifyRoom(const Character *ch, std::shared_ptr<Room> room)
 {
     vnum_t vnum = room->Vnum;
     Area *pArea;
@@ -175,7 +175,7 @@ void FreeReset(Area *are, Reset *res)
     delete res;
 }
 
-std::shared_ptr<ExtraDescription> SetRExtra(Room *room, const std::string &keywords)
+std::shared_ptr<ExtraDescription> SetRExtra(std::shared_ptr<Room> room, const std::string &keywords)
 {
     std::shared_ptr<ExtraDescription> ed;
     bool found = false;
@@ -203,7 +203,7 @@ std::shared_ptr<ExtraDescription> SetRExtra(Room *room, const std::string &keywo
     return ed;
 }
 
-bool DelRExtra(Room *room, const std::string &keywords)
+bool DelRExtra(std::shared_ptr<Room> room, const std::string &keywords)
 {
     std::shared_ptr<ExtraDescription> rmed;
     bool found = false;
@@ -305,7 +305,7 @@ bool DelOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keyword
 void FoldArea(Area *tarea, const std::string &filename, bool install)
 {
     const Reset *treset = NULL;
-    Room *room = NULL;
+    std::shared_ptr<Room> room;
     ProtoMobile *pMobIndex = NULL;
     std::shared_ptr<ProtoObject> pObjIndex;
     std::shared_ptr<Shop> pShop;
@@ -842,7 +842,7 @@ Reset *ParseReset(const Area *tarea, std::string argument, const Character *ch)
     char letter = '*';
     int extra = 0;
     int value = 0;
-    Room *room = nullptr;
+    std::shared_ptr<Room> room;
     std::shared_ptr<Exit> pexit;
 
     argument = OneArgument(argument, arg1);

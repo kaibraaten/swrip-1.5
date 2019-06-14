@@ -16,8 +16,6 @@ void do_throw(Character *ch, std::string argument)
     std::string arg3;
     DirectionType dir = DIR_INVALID;
     std::shared_ptr<Exit> pexit;
-    Room *was_in_room = NULL;
-    Room *to_room = NULL;
     Character *victim = NULL;
     char buf[MAX_STRING_LENGTH];
 
@@ -25,7 +23,7 @@ void do_throw(Character *ch, std::string argument)
     argument = OneArgument(argument, arg2);
     argument = OneArgument(argument, arg3);
 
-    was_in_room = ch->InRoom;
+    auto was_in_room = ch->InRoom;
 
     if (arg.empty())
     {
@@ -133,7 +131,7 @@ void do_throw(Character *ch, std::string argument)
             break;
         }
 
-        to_room = NULL;
+        std::shared_ptr<Room> to_room;
 
         if (pexit->Distance > 1)
             to_room = GenerateExit(ch->InRoom, pexit);

@@ -103,10 +103,10 @@ static void MudProgSetSupermob(Object *obj);
 static bool ObjProgPercentCheck(Character *mob, Character *actor, Object *obj, void *vo, int type);
 static void RoomProgPercentCheck(Character *mob, Character *actor, Object *obj, void *vo, int type);
 static void RoomProgWordlistCheck(const std::string &arg, Character *mob, Character *actor,
-    Object *obj, void *vo, int type, Room *room);
+    Object *obj, void *vo, int type, std::shared_ptr<Room> room);
 static void MobileActAdd(Character *mob);
 static void ObjectActAdd(Object *obj);
-static void RoomActAdd(Room *room);
+static void RoomActAdd(std::shared_ptr<Room> room);
 
 /***************************************************************************
  * Local function code and brief comments.
@@ -114,10 +114,8 @@ static void RoomActAdd(Room *room);
 
 void InitializeSupermob()
 {
-    Room *office = nullptr;
-
     supermob = CreateMobile(GetProtoMobile(MOB_VNUM_SUPERMOB));
-    office = GetRoom(ROOM_VNUM_POLY);
+    auto office = GetRoom(ROOM_VNUM_POLY);
     CharacterToRoom(supermob, office);
 }
 
@@ -214,7 +212,7 @@ static int IfCheckRandom(const std::string &cvar)
 static int IfCheckEconomy(Character* mob, const std::string &cvar, const std::string &opr, const std::string &rval)
 {
     const int idx = strtol(cvar.c_str(), nullptr, 10);
-    Room *room = nullptr;
+    std::shared_ptr<Room> room;
 
     if (!idx)
     {
@@ -2611,7 +2609,7 @@ void MobProgScriptTrigger(Character *mob)
  */
 void MudProgSetSupermob(Object *obj)
 {
-    Room *room;
+    std::shared_ptr<Room> room;
     Object *in_obj;
     char buf[200];
 
@@ -3020,7 +3018,7 @@ static void ObjProgWordlistCheck(const std::string &arg, Character *mob, Charact
  *  room_prog support starts here
  *
  */
-void RoomProgSetSupermob(Room *room)
+void RoomProgSetSupermob(std::shared_ptr<Room> room)
 {
     char buf[200];
 
@@ -3068,7 +3066,7 @@ static void RoomProgPercentCheck(Character *mob, Character *actor, Object *obj,
   *  Hold on this
   * Unhold. -- Alty
   */
-void RoomProgActTrigger(const std::string &buf, Room *room, Character *ch,
+void RoomProgActTrigger(const std::string &buf, std::shared_ptr<Room> room, Character *ch,
     Object *obj, void *vo)
 {
     if (room->mprog.progtypes & ACT_PROG)
@@ -3171,7 +3169,7 @@ void RoomProgRandomTrigger(Character *ch)
 }
 
 static void RoomProgWordlistCheck(const std::string &arg, Character *mob, Character *actor,
-    Object *obj, void *vo, int type, Room *room)
+    Object *obj, void *vo, int type, std::shared_ptr<Room> room)
 {
     if (actor != nullptr && !CharacterDiedRecently(actor) && actor->InRoom)
     {
@@ -3293,7 +3291,7 @@ void RoomProgTimeTrigger(Character *ch)
     if (ch->InRoom->mprog.progtypes & TIME_PROG)
     {
         RoomProgSetSupermob(ch->InRoom);
-        RoomProgTimeCheck(supermob, nullptr, nullptr, ch->InRoom, TIME_PROG);
+        RoomProgTimeCheck(supermob, nullptr, nullptr, ch->InRoom.get(), TIME_PROG);
         ReleaseSupermob();
     }
 }
@@ -3303,7 +3301,7 @@ void RoomProgHourTrigger(Character *ch)
     if (ch->InRoom->mprog.progtypes & HOUR_PROG)
     {
         RoomProgSetSupermob(ch->InRoom);
-        RoomProgTimeCheck(supermob, nullptr, nullptr, ch->InRoom, HOUR_PROG);
+        RoomProgTimeCheck(supermob, nullptr, nullptr, ch->InRoom.get(), HOUR_PROG);
         ReleaseSupermob();
     }
 }
@@ -3331,24 +3329,24 @@ void ProgBug(const std::string &str, const Character *mob)
 /* Room act prog updates.  Use a separate list cuz we dont really wanna go
    thru 5-10000 rooms every pulse.. can we say lag? -- Alty */
 
-static void RoomActAdd(Room *room)
+static void RoomActAdd(std::shared_ptr<Room> room)
 {
-    if (Find(room_act_list, [room](const auto runner) { return runner->vo == room; }) != nullptr)
+    if (Find(room_act_list, [room](const auto runner) { return runner->room == room; }) != nullptr)
     {
         return;
     }
 
     std::shared_ptr<act_prog_data> runner = std::make_shared<act_prog_data>();
-    runner->vo = room;
+    runner->room = room;
     room_act_list.push_front(runner);
 }
 
-void RoomActUpdate(void)
+void RoomActUpdate()
 {
     while (!room_act_list.empty())
     {
         std::shared_ptr<act_prog_data> runner = room_act_list.front();
-        Room *room = (Room*)runner->vo;
+        std::shared_ptr<Room> room = runner->room;
 
         auto actLists(room->mprog.ActLists());
 

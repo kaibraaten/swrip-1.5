@@ -14,8 +14,8 @@ void do_mp_open_passage(Character *ch, std::string argument)
     std::string arg1;
     std::string arg2;
     std::string arg3;
-    Room *targetRoom = nullptr;
-    Room *fromRoom = nullptr;
+    std::shared_ptr<Room> targetRoom;
+    std::shared_ptr<Room> fromRoom;
     vnum_t targetRoomVnum = INVALID_VNUM;
     vnum_t fromRoomVnum = INVALID_VNUM;
     DirectionType exit_num = DIR_INVALID;

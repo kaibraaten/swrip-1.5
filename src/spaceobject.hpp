@@ -11,31 +11,31 @@ constexpr size_t MAX_LANDINGSITE = 3;
 class LandingSite
 {
 public:
-  std::string LocationName;
-  vnum_t Dock = INVALID_VNUM;
-  bool   IsSecret = false;
+    std::string LocationName;
+    vnum_t Dock = INVALID_VNUM;
+    bool IsSecret = false;
 };
 
 class Spaceobject
 {
 public:
-  std::shared_ptr<class Planet> Planet;
-  std::string Name;
-  SpaceobjectType Type = 0;
-  Vector3      Position;
-  Vector3      Heading;
-  int          Speed = 0;
-  int          Gravity = 0;
-  bool         IsSimulator = false;
+    std::shared_ptr<class Planet> Planet;
+    std::string Name;
+    SpaceobjectType Type = 0;
+    Vector3      Position;
+    Vector3      Heading;
+    int          Speed = 0;
+    int          Gravity = 0;
+    bool         IsSimulator = false;
 
-  std::array<LandingSite, MAX_LANDINGSITE> LandingSites;
+    std::array<LandingSite, MAX_LANDINGSITE> LandingSites;
 };
 
-std::shared_ptr<Spaceobject> GetSpaceobject( const std::string &name );
-std::shared_ptr<Spaceobject> GetSpaceobjectFromDockVnum( vnum_t vnum );
+std::shared_ptr<Spaceobject> GetSpaceobject(const std::string &name);
+std::shared_ptr<Spaceobject> GetSpaceobjectFromDockVnum(vnum_t vnum);
 void SpaceobjectUpdate();
-const LandingSite *GetLandingSiteFromVnum( std::shared_ptr<Spaceobject> spaceobj, vnum_t vnum );
+const LandingSite *GetLandingSiteFromVnum(std::shared_ptr<Spaceobject> spaceobj, vnum_t vnum);
 const LandingSite *GetLandingSiteFromLocationName(std::shared_ptr<Spaceobject> spaceobj,
-                                                  const std::string &name);
+    const std::string &name);
 
 #endif

@@ -3,37 +3,37 @@
 
 /* lets the mobile goto any location it wishes that is not private */
 
-void do_mpgoto( Character *ch, std::string argument )
+void do_mpgoto(Character *ch, std::string argument)
 {
-  std::string arg;
-  Room *location = nullptr;
+    std::string arg;
+    std::shared_ptr<Room> location;
 
-  if ( IsAffectedBy( ch, AFF_CHARM ) )
-    return;
+    if (IsAffectedBy(ch, AFF_CHARM))
+        return;
 
-  if ( !IsNpc( ch ) )
+    if (!IsNpc(ch))
     {
-      ch->Echo("Huh?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 
-  OneArgument( argument, arg );
+    OneArgument(argument, arg);
 
-  if ( arg.empty() )
+    if (arg.empty())
     {
-      ProgBug( "Mpgoto - No argument", ch );
-      return;
+        ProgBug("Mpgoto - No argument", ch);
+        return;
     }
 
-  if ( ( location = FindLocation( ch, arg ) ) == NULL )
+    if ((location = FindLocation(ch, arg)) == NULL)
     {
-      ProgBug( "Mpgoto - No such location", ch );
-      return;
+        ProgBug("Mpgoto - No such location", ch);
+        return;
     }
 
-  if ( ch->Fighting )
-    StopFighting( ch, true );
+    if (ch->Fighting)
+        StopFighting(ch, true);
 
-  CharacterFromRoom( ch );
-  CharacterToRoom( ch, location );
+    CharacterFromRoom(ch);
+    CharacterToRoom(ch, location);
 }

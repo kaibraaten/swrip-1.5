@@ -5,70 +5,70 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_recall( Character *ch, std::string argument )
+void do_recall(Character *ch, std::string argument)
 {
-  Room *location = GetRoom( WhereHome(ch) );
-  Character *opponent = NULL;
+    auto location = GetRoom(WhereHome(ch));
+    Character *opponent = NULL;
 
-  if ( GetTrustLevel( ch ) < LEVEL_IMMORTAL )
+    if (GetTrustLevel(ch) < LEVEL_IMMORTAL)
     {
-      Area *pArea = NULL;
+        Area *pArea = NULL;
 
-      if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
+        if (!ch->PCData || !(pArea = ch->PCData->Build.Area))
         {
-          ch->Echo("Only builders can recall.\r\n");
-          return;
+            ch->Echo("Only builders can recall.\r\n");
+            return;
         }
 
-      if  ( ch->InRoom->Vnum < pArea->VnumRanges.Room.First
-            || ch->InRoom->Vnum > pArea->VnumRanges.Room.Last )
+        if (ch->InRoom->Vnum < pArea->VnumRanges.Room.First
+            || ch->InRoom->Vnum > pArea->VnumRanges.Room.Last)
         {
-          ch->Echo("You can only recall from your assigned area.\r\n");
-          return;
-	}
+            ch->Echo("You can only recall from your assigned area.\r\n");
+            return;
+        }
     }
 
-  if ( !location )
+    if (!location)
     {
-      ch->Echo("You are completely lost.\r\n");
-      return;
+        ch->Echo("You are completely lost.\r\n");
+        return;
     }
 
-  if ( ch->InRoom == location )
+    if (ch->InRoom == location)
     {
-      return;
-    }
-  
-  if ( IsBitSet(ch->AffectedBy, AFF_CURSE) )
-    {
-      ch->Echo("You are cursed and cannot recall!\r\n");
-      return;
+        return;
     }
 
-  if ( ( opponent = GetFightingOpponent( ch ) ) != NULL )
+    if (IsBitSet(ch->AffectedBy, AFF_CURSE))
+    {
+        ch->Echo("You are cursed and cannot recall!\r\n");
+        return;
+    }
+
+    if ((opponent = GetFightingOpponent(ch)) != NULL)
     {
 
-      if ( NumberBits( 1 ) == 0 || ( !IsNpc( opponent ) && NumberBits( 3 ) > 1 ) )
+        if (NumberBits(1) == 0 || (!IsNpc(opponent) && NumberBits(3) > 1))
         {
-          SetWaitState( ch, 4 );
-          ch->Echo("You failed!\r\n" );
-          return;
+            SetWaitState(ch, 4);
+            ch->Echo("You failed!\r\n");
+            return;
         }
 
-      ch->Echo("You recall from combat!\r\n" );
-      StopFighting( ch, true );
+        ch->Echo("You recall from combat!\r\n");
+        StopFighting(ch, true);
     }
 
-  Act( AT_ACTION, "$n disappears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM );
-  CharacterFromRoom( ch );
-  CharacterToRoom( ch, location );
+    Act(AT_ACTION, "$n disappears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM);
+    CharacterFromRoom(ch);
+    CharacterToRoom(ch, location);
 
-  if ( ch->Mount )
+    if (ch->Mount)
     {
-      CharacterFromRoom( ch->Mount );
-      CharacterToRoom( ch->Mount, location );
+        CharacterFromRoom(ch->Mount);
+        CharacterToRoom(ch->Mount, location);
     }
 
-  Act( AT_ACTION, "$n appears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM );
-  do_look( ch, "auto" );
+    Act(AT_ACTION, "$n appears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM);
+    do_look(ch, "auto");
 }

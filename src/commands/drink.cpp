@@ -7,7 +7,7 @@
 #include "room.hpp"
 #include "object.hpp"
 
-static Object *FindFountain(const Room *location);
+static Object *FindFountain(std::shared_ptr<Room> location);
 
 void do_drink( Character *ch, std::string argument )
 {
@@ -158,7 +158,7 @@ void do_drink( Character *ch, std::string argument )
   SetWaitState(ch, PULSE_PER_SECOND );
 }
 
-static Object *FindFountain(const Room *location)
+static Object *FindFountain(std::shared_ptr<Room> location)
 {
   return Find(location->Objects(),
               [](const auto fountain)

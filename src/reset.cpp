@@ -49,19 +49,19 @@
 #include "protomob.hpp"
 #include "exit.hpp"
 
-static bool IsRoomReset(const Reset *pReset, const Room *aRoom, const Area *pArea);
+static bool IsRoomReset(const Reset *pReset, std::shared_ptr<Room> aRoom, const Area *pArea);
 static void AddObjectReset(Area *pArea, char cm, const Object *obj, int v2, int v3);
 static void DeleteReset(Area *pArea, Reset *pReset);
-static Reset *FindReset(const Area *pArea, const Room *pRoom, int num);
+static Reset *FindReset(const Area *pArea, std::shared_ptr<Room> pRoom, int num);
 static void ListResets(const Character *ch, const Area *pArea,
-    const Room *pRoom, int start, int end);
+    std::shared_ptr<Room> pRoom, int start, int end);
 static Reset *FindObjectReset(const Character *ch, const Area *pArea,
-    const Room *pRoom, const std::string &name);
+    std::shared_ptr<Room> pRoom, const std::string &name);
 static Reset *FindMobileReset(const Character *ch, const Area *pArea,
-    const Room *pRoom, const std::string &name);
+    std::shared_ptr<Room> pRoom, const std::string &name);
 static int GenerateItemLevel(const Area *pArea, std::shared_ptr<ProtoObject> pObjIndex);
 
-static Reset *FindReset(const Area *pArea, const Room *pRoom, int numb)
+static Reset *FindReset(const Area *pArea, std::shared_ptr<Room> pRoom, int numb)
 {
     Reset *pReset = NULL;
     int num = 0;
@@ -74,9 +74,9 @@ static Reset *FindReset(const Area *pArea, const Room *pRoom, int numb)
 }
 
 /* This is one loopy function.  Ugh. -- Altrag */
-static bool IsRoomReset(const Reset *pReset, const Room *aRoom, const Area *pArea)
+static bool IsRoomReset(const Reset *pReset, std::shared_ptr<Room> aRoom, const Area *pArea)
 {
-    const Room *pRoom = NULL;
+    std::shared_ptr<Room> pRoom;
     const Reset *reset = NULL;
     int pr = 0;
 
@@ -205,7 +205,7 @@ static bool IsRoomReset(const Reset *pReset, const Room *aRoom, const Area *pAre
     return false;
 }
 
-Room *FindRoom(const Character *ch, const std::string &arg, Room *pRoom)
+std::shared_ptr<Room> FindRoom(const Character *ch, const std::string &arg, std::shared_ptr<Room> pRoom)
 {
     if (pRoom)
     {
@@ -332,7 +332,7 @@ static void DeleteReset(Area *pArea, Reset *pReset)
 #undef DEL_RESET
 
 static Reset *FindObjectReset(const Character *ch, const Area *pArea,
-    const Room *pRoom, const std::string &name)
+    std::shared_ptr<Room> pRoom, const std::string &name)
 {
     Reset *reset = NULL;
 
@@ -410,7 +410,7 @@ static Reset *FindObjectReset(const Character *ch, const Area *pArea,
 }
 
 static Reset *FindMobileReset(const Character *ch, const Area *pArea,
-    const Room *pRoom, const std::string &name)
+    std::shared_ptr<Room> pRoom, const std::string &name)
 {
     Reset *reset = NULL;
 
@@ -480,13 +480,13 @@ static Reset *FindMobileReset(const Character *ch, const Area *pArea,
     return reset;
 }
 
-void EditReset(Character *ch, std::string argument, Area *pArea, Room *aRoom)
+void EditReset(Character *ch, std::string argument, Area *pArea, std::shared_ptr<Room> aRoom)
 {
     std::string arg;
     Reset *pReset = NULL;
     Reset *reset = NULL;
     ProtoMobile *pMob = NULL;
-    Room *pRoom = NULL;
+    std::shared_ptr<Room> pRoom;
     std::shared_ptr<ProtoObject> pObj;
     int num = 0;
     vnum_t vnum = INVALID_VNUM;
@@ -521,14 +521,6 @@ void EditReset(Character *ch, std::string argument, Area *pArea, Room *aRoom)
             ch->Echo("\r\n[room#] will default to the room you are in, if unspecified.\r\n");
         }
 
-        return;
-    }
-
-    if (!StrCmp(arg, "on"))
-    {
-        ch->SubState = SUB_REPEATCMD;
-        ch->dest_buf = (aRoom ? (void *)aRoom : (void *)pArea);
-        ch->Echo("Reset mode on.\r\n");
         return;
     }
 
@@ -1325,7 +1317,7 @@ static void AddObjectReset(Area *pArea, char cm, const Object *obj, int v2, int 
     }
 }
 
-void InstallRoom(Area *pArea, Room *pRoom, bool dodoors)
+void InstallRoom(Area *pArea, std::shared_ptr<Room> pRoom, bool dodoors)
 {
     for (const Character *rch : pRoom->Characters())
     {
@@ -1389,7 +1381,7 @@ void InstallRoom(Area *pArea, Room *pRoom, bool dodoors)
     }
 }
 
-void WipeResets(Area *pArea, Room *pRoom)
+void WipeResets(Area *pArea, std::shared_ptr<Room> pRoom)
 {
     Reset *pReset = NULL;
 
@@ -1530,7 +1522,7 @@ void ResetArea(Area *pArea)
     Character *mob = NULL;
     Object *obj = NULL;
     Object *lastobj = NULL;
-    Room *pRoomIndex = NULL;
+    std::shared_ptr<Room> pRoomIndex;
     ProtoMobile *pMobIndex = NULL;
     std::shared_ptr<ProtoObject> pObjIndex;
     std::shared_ptr<ProtoObject> pObjToIndex;
@@ -1593,7 +1585,7 @@ void ResetArea(Area *pArea)
             mob = CreateMobile(pMobIndex);
 
             {
-                Room *pRoomPrev = GetRoom(pReset->Arg3 - 1);
+                auto pRoomPrev = GetRoom(pReset->Arg3 - 1);
 
                 if (pRoomPrev && pRoomPrev->Flags.test(Flag::Room::PetShop))
                 {
@@ -2080,11 +2072,11 @@ void ResetArea(Area *pArea)
     }
 }
 
-static void ListResets(const Character *ch, const Area *pArea, const Room *pRoom,
+static void ListResets(const Character *ch, const Area *pArea, std::shared_ptr<Room> pRoom,
     int start, int end)
 {
     Reset *pReset = NULL;
-    const Room *room = NULL;
+    std::shared_ptr<Room> room;
     const ProtoMobile *mob = NULL;
     std::shared_ptr<ProtoObject> obj;
     std::shared_ptr<ProtoObject> obj2;
@@ -2785,7 +2777,7 @@ std::string SPrintReset(const Character *ch, Reset *pReset, short num, bool rlis
     char mobname[1024] = { '\0' };
     char roomname[1024] = { '\0' };
     char objname[1024] = { '\0' };
-    static Room *room = NULL;
+    static std::shared_ptr<Room> room;
     static std::shared_ptr<ProtoObject> obj, obj2;
     static ProtoMobile *mob = NULL;
     vnum_t rvnum = INVALID_VNUM;
@@ -2797,10 +2789,10 @@ std::string SPrintReset(const Character *ch, Reset *pReset, short num, bool rlis
 
     if (num == 1)
     {
-        room = NULL;
-        obj = NULL;
-        obj2 = NULL;
-        mob = NULL;
+        room = nullptr;
+        obj = nullptr;
+        obj2 = nullptr;
+        mob = nullptr;
     }
 
     switch (pReset->Command)

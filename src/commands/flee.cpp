@@ -7,8 +7,6 @@
 
 void do_flee(Character *ch, std::string argument)
 {
-    Room *was_in = nullptr;
-    Room *now_in = nullptr;
     DirectionType door = DIR_INVALID;
 
     if (!GetFightingOpponent(ch))
@@ -35,7 +33,7 @@ void do_flee(Character *ch, std::string argument)
     if (ch->Position < POS_FIGHTING)
         return;
 
-    was_in = ch->InRoom;
+    auto was_in = ch->InRoom;
 
     for (int attempt = 0; attempt < 8; attempt++)
     {
@@ -80,7 +78,9 @@ void do_flee(Character *ch, std::string argument)
         if (CharacterDiedRecently(ch))
             return;
 
-        if ((now_in = ch->InRoom) == was_in)
+        auto now_in = ch->InRoom;
+
+        if (now_in == was_in)
             continue;
 
         ch->InRoom = was_in;

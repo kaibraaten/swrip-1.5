@@ -20,8 +20,8 @@ protected:
         _follower->Name = "Follower";
         _leader = new Character(_protomob);
         _leader->Name = "Leader";
-        _fromRoom = new Room();
-        _toRoom = new Room();
+        _fromRoom = std::make_shared<Room>();
+        _toRoom = std::make_shared<Room>();
         _sourceExit = MakeExit(_fromRoom, _toRoom, DIR_NORTH);
         _destinationExit = MakeExit(_toRoom, _fromRoom, DIR_SOUTH);
 
@@ -40,12 +40,8 @@ protected:
         delete _protomob;
         _protomob = nullptr;
 
-        delete _fromRoom;
         _fromRoom = nullptr;
-
-        delete _toRoom;
         _toRoom = nullptr;
-
         _sourceExit = nullptr;
         _destinationExit = nullptr;
 
@@ -56,8 +52,8 @@ protected:
     Character *_leader = nullptr;
     Character *_follower = nullptr;
     ProtoMobile *_protomob = nullptr;
-    Room *_fromRoom = nullptr;
-    Room *_toRoom = nullptr;
+    std::shared_ptr<Room> _fromRoom;
+    std::shared_ptr<Room> _toRoom;
     std::shared_ptr<Exit> _sourceExit;
     std::shared_ptr<Exit> _destinationExit;
 };

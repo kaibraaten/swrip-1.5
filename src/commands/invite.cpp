@@ -4,7 +4,7 @@
 
 void do_invite(Character *ch, std::string argument )
 {
-  Room *home = ch->InRoom;
+  auto home = ch->InRoom;
   Character *victim = nullptr;
 
   if ( !home->Flags.test( Flag::Room::PlayerHome )

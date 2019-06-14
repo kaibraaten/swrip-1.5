@@ -112,7 +112,7 @@ protected:
         _resultantObject = std::make_shared<ProtoObject>(1);
         _resultantObject->Name = "crafted thingy";
 
-        _location = new Room();
+        _location = std::make_shared<Room>();
         _area = new Area();
         _location->Area = _area;
         _location->Flags = CreateBitSet<Flag::MAX>({ Flag::Room::Factory, Flag::Room::Refinery });
@@ -131,8 +131,6 @@ protected:
         _engineer = nullptr;
 
         _resultantObject = nullptr;
-
-        delete _location;
         _location = nullptr;
 
         delete _area;
@@ -177,7 +175,7 @@ protected:
 
     Character *_engineer = nullptr;
     std::shared_ptr<ProtoObject> _resultantObject;
-    Room *_location = nullptr;
+    std::shared_ptr<Room> _location;
     Area *_area = nullptr;
     static const std::vector<CraftingMaterial> _materials;
     static vnum_t _lastVnum;

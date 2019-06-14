@@ -150,10 +150,10 @@ public:
     Character *Reply = NULL;
     Character *Switched = NULL;
     Character *Mount = NULL;
-    Room *InRoom = NULL;
-    Room *WasInRoom = NULL;
-    Room *WasSentinel = NULL;
-    Room *PlayerHome = NULL;
+    std::shared_ptr<Room> InRoom;
+    std::shared_ptr<Room> WasInRoom;
+    std::shared_ptr<Room> WasSentinel;
+    std::shared_ptr<Room> PlayerHome;
     CmdFun *LastCommand = NULL;
     CmdFun *PreviousCommand = NULL;   /* mapping */
     void *dest_buf = NULL;
@@ -179,13 +179,13 @@ public:
     vnum_t BackupMob = INVALID_VNUM;     /* reinforcements */
     int WasStunned = 0;
     std::string MobClan;    /* for spec_clan_guard.. set by postguard */
-    Room *BuzzedHome = NULL;
-    Room *BuzzedFromRoom = NULL;
+    std::shared_ptr<Room> BuzzedHome;
+    std::shared_ptr<Room> BuzzedFromRoom;
     Character *Challenged = NULL;
     Character *BettedOn = NULL;
     int BetAmount = 0;
     std::string Owner;
-    Room *Home = NULL;
+    std::shared_ptr<Room> Home;
     int CmdRecurse = 0;
     Object *On = NULL;
     Character *Pet = NULL;

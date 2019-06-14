@@ -16,8 +16,6 @@ void do_snipe(Character *ch, std::string argument)
     short dist = 0;
     short max_dist = 1;
     std::shared_ptr<Exit> pexit;
-    Room *was_in_room = NULL;
-    Room *to_room = NULL;
     Character *victim = NULL;
     int the_chance = 0;
     char buf[MAX_STRING_LENGTH];
@@ -70,7 +68,7 @@ void do_snipe(Character *ch, std::string argument)
         return;
     }
 
-    was_in_room = ch->InRoom;
+    auto was_in_room = ch->InRoom;
 
     for (dist = 0; dist <= max_dist; dist++)
     {
@@ -80,7 +78,7 @@ void do_snipe(Character *ch, std::string argument)
         if (!pexit->ToRoom)
             break;
 
-        to_room = NULL;
+        std::shared_ptr<Room> to_room;
 
         if (pexit->Distance > 1)
             to_room = GenerateExit(ch->InRoom, pexit);

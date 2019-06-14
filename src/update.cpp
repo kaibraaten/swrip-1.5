@@ -2004,7 +2004,7 @@ static void ObjectUpdate()
         {
             continue;
         }
-        
+
         Character *rch = NULL;
         const char *message = NULL;
 
@@ -2153,7 +2153,6 @@ static void ObjectUpdate()
                 && obj->InRoom->Sector == SECT_AIR
                 && (obj->WearFlags & ITEM_TAKE))
             {
-                Room *new_room = nullptr;
                 std::shared_ptr<Exit> xit;
                 const auto &exitIter = Find(obj->InRoom->Exits(),
                     [](auto ex)
@@ -2170,7 +2169,7 @@ static void ObjectUpdate()
                     continue;
                 }
 
-                new_room = xit->ToRoom;
+                auto new_room = xit->ToRoom;
 
                 if (!obj->InRoom->Characters().empty())
                 {
@@ -2926,8 +2925,7 @@ void UpdateHandler()
 
 void RemovePortal(Object *portal)
 {
-    Room *fromRoom = portal->InRoom;
-    const Room *toRoom = NULL;
+    auto fromRoom = portal->InRoom;
     Character *ch = NULL;
     std::shared_ptr<Exit> pexit;
 
@@ -2952,7 +2950,9 @@ void RemovePortal(Object *portal)
         Log->Bug("RemovePortal: exit in dir %d != DIR_PORTAL", pexit->Direction);
     }
 
-    if ((toRoom = pexit->ToRoom) == NULL)
+    const auto toRoom = pexit->ToRoom;
+
+    if (toRoom == nullptr)
     {
         Log->Bug("RemovePortal: toRoom is NULL");
     }

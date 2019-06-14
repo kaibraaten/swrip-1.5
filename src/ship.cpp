@@ -834,9 +834,6 @@ bool CheckHostile(std::shared_ptr<Ship> ship)
 
 ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit> pexit, int fall)
 {
-    Room *in_room = NULL;
-    Room *to_room = NULL;
-    Room *original = NULL;
     char buf[MAX_STRING_LENGTH];
     const char *txt = NULL;
     const char *dtxt = NULL;
@@ -860,7 +857,8 @@ ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit
         pexit = GetExit(GetRoom(ship->Location), door);
     }
 
-    in_room = GetRoom(ship->Location);
+    auto in_room = GetRoom(ship->Location);
+    std::shared_ptr<Room> to_room;
 
     if (!pexit || (to_room = pexit->ToRoom) == NULL)
     {
@@ -1055,7 +1053,7 @@ ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit
         }
     }
 
-    the_chance = IsNpc(ch) ? ch->TopLevel : (int)(ch->PCData->Learned[gsn_speeders]);
+    the_chance = IsNpc(ch) ? ch->TopLevel : ch->PCData->Learned[gsn_speeders];
 
     if (GetRandomPercent() > the_chance)
     {
@@ -1116,7 +1114,7 @@ ch_ret DriveShip(Character *ch, std::shared_ptr<Ship> ship, std::shared_ptr<Exit
 
     for (Character *rch : charactersInRoom)
     {
-        original = rch->InRoom;
+        auto original = rch->InRoom;
         CharacterFromRoom(rch);
         CharacterToRoom(rch, to_room);
         do_look(rch, "auto");
@@ -1132,7 +1130,7 @@ void EchoToShip(int color, std::shared_ptr<Ship> ship, const std::string &argume
 {
     for (vnum_t roomVnum = ship->Rooms.First; roomVnum <= ship->Rooms.Last; roomVnum++)
     {
-        const Room *room = GetRoom(roomVnum);
+        auto room = GetRoom(roomVnum);
 
         if (room)
         {
@@ -2250,7 +2248,7 @@ void EchoToNearbyShips(int color, std::shared_ptr<Ship> ship, const std::string 
     }
 }
 
-std::shared_ptr<Ship> GetShipInRoom(const Room *room, const std::string &name)
+std::shared_ptr<Ship> GetShipInRoom(std::shared_ptr<Room> room, const std::string &name)
 {
     assert(room != nullptr);
 
@@ -2638,7 +2636,7 @@ bool CheckPilot(const Character *ch, std::shared_ptr<Ship> ship)
 
 bool ExtractShip(std::shared_ptr<Ship> ship)
 {
-    Room *room = ship->InRoom;
+    auto room = ship->InRoom;
 
     if (room != nullptr)
     {
@@ -2803,7 +2801,7 @@ void DestroyShip(std::shared_ptr<Ship> ship, Character *killer)
 
     for (vnum_t roomnum = ship->Rooms.First; roomnum <= ship->Rooms.Last; roomnum++)
     {
-        Room *room = GetRoom(roomnum);
+        auto room = GetRoom(roomnum);
 
         if (room != NULL)
         {
@@ -2872,7 +2870,7 @@ void DestroyShip(std::shared_ptr<Ship> ship, Character *killer)
 
 bool ShipToRoom(std::shared_ptr<Ship> ship, vnum_t vnum)
 {
-    Room *shipto = NULL;
+    std::shared_ptr<Room> shipto;
 
     if ((shipto = GetRoom(vnum)) == NULL)
     {

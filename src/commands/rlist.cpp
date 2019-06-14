@@ -4,56 +4,57 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_rlist( Character *ch, std::string argument )
+void do_rlist(Character *ch, std::string argument)
 {
-  const Room *room = NULL;
-  vnum_t vnum = INVALID_VNUM;
-  std::string arg1;
-  std::string arg2;
-  const Area *tarea = ch->PCData->Build.Area;
-  vnum_t lrange = INVALID_VNUM;
-  vnum_t trange = INVALID_VNUM;
+    vnum_t vnum = INVALID_VNUM;
+    std::string arg1;
+    std::string arg2;
+    const Area *tarea = ch->PCData->Build.Area;
+    vnum_t lrange = INVALID_VNUM;
+    vnum_t trange = INVALID_VNUM;
 
-  if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_AVATAR || !ch->PCData
-       || ( !ch->PCData->Build.Area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
+    if (IsNpc(ch) || GetTrustLevel(ch) < LEVEL_AVATAR || !ch->PCData
+        || (!ch->PCData->Build.Area && GetTrustLevel(ch) < LEVEL_GREATER))
     {
-      ch->Echo("You don't have an assigned area.\r\n");
-      return;
+        ch->Echo("You don't have an assigned area.\r\n");
+        return;
     }
 
-  argument = OneArgument( argument, arg1 );
-  argument = OneArgument( argument, arg2 );
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
 
-  if ( tarea )
+    if (tarea)
     {
-      if ( arg1.empty() )
-	lrange = tarea->VnumRanges.Room.First;     /* here.            -Thoric */
-      else
-        lrange = ToLong( arg1 );
-      
-      if ( arg2.empty() )
-        trange = tarea->VnumRanges.Room.Last;
-      else
-        trange = ToLong(arg2);
+        if (arg1.empty())
+            lrange = tarea->VnumRanges.Room.First;     /* here.            -Thoric */
+        else
+            lrange = ToLong(arg1);
 
-      if ( ( lrange < tarea->VnumRanges.Room.First || trange > tarea->VnumRanges.Room.Last )
-           && GetTrustLevel( ch ) < LEVEL_GREATER )
+        if (arg2.empty())
+            trange = tarea->VnumRanges.Room.Last;
+        else
+            trange = ToLong(arg2);
+
+        if ((lrange < tarea->VnumRanges.Room.First || trange > tarea->VnumRanges.Room.Last)
+            && GetTrustLevel(ch) < LEVEL_GREATER)
         {
-          ch->Echo("That is out of your vnum range.\r\n");
-          return;
+            ch->Echo("That is out of your vnum range.\r\n");
+            return;
         }
     }
-  else
+    else
     {
-      lrange = IsNumber( arg1 ) ? ToLong( arg1 ) : 1;
-      trange = IsNumber( arg2 ) ? ToLong( arg2 ) : 1;
+        lrange = IsNumber(arg1) ? ToLong(arg1) : 1;
+        trange = IsNumber(arg2) ? ToLong(arg2) : 1;
     }
 
-  for ( vnum = lrange; vnum <= trange; vnum++ )
+    for (vnum = lrange; vnum <= trange; vnum++)
     {
-      if ( (room = GetRoom( vnum )) == NULL )
-        continue;
+        auto room = GetRoom(vnum);
 
-      ch->Echo("&w%5ld) %s\r\n", vnum, room->Name.c_str() );
+        if (room == nullptr)
+            continue;
+
+        ch->Echo("&w%5ld) %s\r\n", vnum, room->Name.c_str());
     }
 }

@@ -6,101 +6,101 @@
 /* lets the mobile transfer people.  the all argument transfers
    everyone in the current room to the specified location */
 
-void do_mptransfer( Character *ch, std::string argument )
+void do_mptransfer(Character *ch, std::string argument)
 {
-  std::string arg1;
-  std::string arg2;
-  char buf[MAX_STRING_LENGTH] = {'\0'};
-  Room *location = nullptr;
-  Character *victim = nullptr;
+    std::string arg1;
+    std::string arg2;
+    char buf[MAX_STRING_LENGTH] = { '\0' };
+    std::shared_ptr<Room> location;
+    Character *victim = nullptr;
 
-  if ( IsAffectedBy( ch, AFF_CHARM ) )
-    return;
+    if (IsAffectedBy(ch, AFF_CHARM))
+        return;
 
-  if ( !IsNpc( ch ) )
+    if (!IsNpc(ch))
     {
-      ch->Echo("Huh?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 
-  argument = OneArgument( argument, arg1 );
-  argument = OneArgument( argument, arg2 );
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
 
-  if ( arg1.empty() )
+    if (arg1.empty())
     {
-      ProgBug( "Mptransfer - Bad syntax", ch );
-      return;
+        ProgBug("Mptransfer - Bad syntax", ch);
+        return;
     }
 
-  /* Put in the variable nextinroom to make this work right. -Narn */
-  if ( !StrCmp( arg1, "all" ) )
+    /* Put in the variable nextinroom to make this work right. -Narn */
+    if (!StrCmp(arg1, "all"))
     {
-      std::list<Character*> charactersToTransfer = Filter(ch->InRoom->Characters(),
-                                                          [ch](auto candidate)
-                                                          {
-                                                            return candidate != ch
-                                                              && IsAuthed(candidate)
-                                                              && CanSeeCharacter(ch, candidate);
-                                                          });
-
-      for(Character *transferee : charactersToTransfer)
+        std::list<Character*> charactersToTransfer = Filter(ch->InRoom->Characters(),
+            [ch](auto candidate)
         {
-          sprintf( buf, "%s %s", transferee->Name.c_str(), arg2.c_str() );
-          do_mptransfer( ch, buf );
+            return candidate != ch
+                && IsAuthed(candidate)
+                && CanSeeCharacter(ch, candidate);
+        });
+
+        for (Character *transferee : charactersToTransfer)
+        {
+            sprintf(buf, "%s %s", transferee->Name.c_str(), arg2.c_str());
+            do_mptransfer(ch, buf);
         }
 
-      return;
+        return;
     }
 
-  /*
-   * Thanks to Grodyn for the optional location parameter.
-   */
-  if ( arg2.empty() )
+    /*
+     * Thanks to Grodyn for the optional location parameter.
+     */
+    if (arg2.empty())
     {
-      location = ch->InRoom;
+        location = ch->InRoom;
     }
-  else
+    else
     {
-      if ( ( location = FindLocation( ch, arg2 ) ) == NULL )
+        if ((location = FindLocation(ch, arg2)) == NULL)
         {
-          ProgBug( "Mptransfer - No such location", ch );
-          return;
+            ProgBug("Mptransfer - No such location", ch);
+            return;
         }
 
-      if ( IsRoomPrivate( ch, location ) )
+        if (IsRoomPrivate(ch, location))
         {
-          ProgBug( "Mptransfer - Private room", ch );
-          return;
+            ProgBug("Mptransfer - Private room", ch);
+            return;
         }
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg1 ) ) == NULL )
+    if ((victim = GetCharacterAnywhere(ch, arg1)) == NULL)
     {
-      ProgBug( "Mptransfer - No such person", ch );
-      return;
+        ProgBug("Mptransfer - No such person", ch);
+        return;
     }
 
-  if ( !victim->InRoom )
+    if (!victim->InRoom)
     {
-      ProgBug( "Mptransfer - Victim in Limbo", ch );
-      return;
+        ProgBug("Mptransfer - Victim in Limbo", ch);
+        return;
     }
 
-  if (!IsAuthed(victim) && location->Area != victim->InRoom->Area)
+    if (!IsAuthed(victim) && location->Area != victim->InRoom->Area)
     {
-      ProgBug( "Mptransfer - transferring unauthorized player", ch);
-      return;
+        ProgBug("Mptransfer - transferring unauthorized player", ch);
+        return;
     }
 
 
-  /* If victim not in area's level range, do not transfer */
-  if ( !InHardRange( victim, location->Area )
-       && location->Flags.test( Flag::Room::Prototype ) )
-    return;
+    /* If victim not in area's level range, do not transfer */
+    if (!InHardRange(victim, location->Area)
+        && location->Flags.test(Flag::Room::Prototype))
+        return;
 
-  if ( victim->Fighting )
-    StopFighting( victim, true );
+    if (victim->Fighting)
+        StopFighting(victim, true);
 
-  CharacterFromRoom( victim );
-  CharacterToRoom( victim, location );
+    CharacterFromRoom(victim);
+    CharacterToRoom(victim, location);
 }

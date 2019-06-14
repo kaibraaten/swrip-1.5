@@ -140,8 +140,6 @@ obj_ret DamageObject(Object *obj)
 /* Make objects in rooms that are nofloor fall - Scryn 1/23/96 */
 void ObjectFallIfNoFloor(Object *obj, bool through)
 {
-    std::shared_ptr<Exit> pexit;
-    Room *to_room;
     static int fall_count;
     static bool is_falling; /* Stop loops from the call to ObjectToRoom()  -- Altrag */
 
@@ -160,8 +158,8 @@ void ObjectFallIfNoFloor(Object *obj, bool through)
         && CAN_GO(obj, DIR_DOWN)
         && !IsBitSet(obj->Flags, ITEM_MAGIC))
     {
-        pexit = GetExit(obj->InRoom, DIR_DOWN);
-        to_room = pexit->ToRoom;
+        auto pexit = GetExit(obj->InRoom, DIR_DOWN);
+        auto to_room = pexit->ToRoom;
 
         if (through)
             fall_count++;

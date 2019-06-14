@@ -53,7 +53,7 @@ class Exit
 {
 public:
     std::shared_ptr<Exit> ReverseExit;         /* Reverse exit pointer         */
-    Room *ToRoom = nullptr;              /* Pointer to destination room  */
+    std::shared_ptr<Room> ToRoom;              /* Pointer to destination room  */
     std::string Keyword;                 /* Keywords for exit or door    */
     std::string Description;             /* Description of exit          */
     vnum_t Vnum = INVALID_VNUM;          /* Vnum of room exit leads to   */

@@ -32,12 +32,12 @@
 #include "room.hpp"
 #include "exit.hpp"
 
-static Room *vroom_hash[64];
+static std::shared_ptr<Room> vroom_hash[64];
 
-static void DecorateVirtualRoom(Room *room);
-static void TeleportCharacter(Character *ch, Room *room, bool show);
+static void DecorateVirtualRoom(std::shared_ptr<Room> room);
+static void TeleportCharacter(Character *ch, std::shared_ptr<Room> room, bool show);
 
-static void DecorateVirtualRoom(Room *room)
+static void DecorateVirtualRoom(std::shared_ptr<Room> room)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     char buf2[MAX_STRING_LENGTH] = { '\0' };
@@ -90,29 +90,23 @@ static void DecorateVirtualRoom(Room *room)
 /*
  * Remove any unused virtual rooms                              -Thoric
  */
-void ClearVirtualRooms(void)
+void ClearVirtualRooms()
 {
-    int hash = 0;
-    Room *room = NULL;
-    Room *room_next = NULL;
-    Room *prev = NULL;
-
-    for (hash = 0; hash < 64; hash++)
+    for (auto hash = 0; hash < 64; hash++)
     {
         while (vroom_hash[hash]
             && vroom_hash[hash]->Characters().empty()
             && vroom_hash[hash]->Objects().empty())
         {
-            room = vroom_hash[hash];
+            auto room = vroom_hash[hash];
             vroom_hash[hash] = room->Next;
             CleanRoom(room);
-            delete room;
             --top_vroom;
         }
 
-        prev = NULL;
+        std::shared_ptr<Room> prev, room_next;
 
-        for (room = vroom_hash[hash]; room; room = room_next)
+        for (auto room = vroom_hash[hash]; room; room = room_next)
         {
             room_next = room->Next;
 
@@ -124,7 +118,6 @@ void ClearVirtualRooms(void)
                 }
 
                 CleanRoom(room);
-                delete room;
                 room = nullptr;
                 --top_vroom;
             }
@@ -138,10 +131,10 @@ void ClearVirtualRooms(void)
 }
 
 /*
- * Function to get the equivelant exit of DIR 0-MAXDIR out of linked list.
+ * Function to get the equivalent exit of DIR 0-MAXDIR out of linked list.
  * Made to allow old-style diku-merc exit functions to work.    -Thoric
  */
-std::shared_ptr<Exit> GetExit(const Room *room, DirectionType dir)
+std::shared_ptr<Exit> GetExit(std::shared_ptr<Room> room, DirectionType dir)
 {
     assert(room != nullptr);
 
@@ -159,7 +152,7 @@ std::shared_ptr<Exit> GetExit(const Room *room, DirectionType dir)
 /*
  * Function to get an exit, leading the the specified room
  */
-std::shared_ptr<Exit> GetExitTo(const Room *room, DirectionType dir, vnum_t vnum)
+std::shared_ptr<Exit> GetExitTo(std::shared_ptr<Room> room, DirectionType dir, vnum_t vnum)
 {
     assert(room != nullptr);
 
@@ -177,7 +170,7 @@ std::shared_ptr<Exit> GetExitTo(const Room *room, DirectionType dir, vnum_t vnum
 /*
  * Function to get the nth exit of a room                       -Thoric
  */
-std::shared_ptr<Exit> GetExitNumber(const Room *room, short count)
+std::shared_ptr<Exit> GetExitNumber(std::shared_ptr<Room> room, short count)
 {
     assert(room != nullptr);
 
@@ -225,12 +218,12 @@ bool CharacterFallIfNoFloor(Character *ch, int fall)
 /*
  * create a 'virtual' room                                      -Thoric
  */
-Room *GenerateExit(Room *in_room, std::shared_ptr<Exit> &pexit)
+std::shared_ptr<Room> GenerateExit(std::shared_ptr<Room> in_room, std::shared_ptr<Exit> &pexit)
 {
     std::shared_ptr<Exit> xit, bxit;
     const std::shared_ptr<Exit> orig_exit = pexit;
-    Room *room = NULL;
-    Room *backroom = NULL;
+    std::shared_ptr<Room> room;
+    std::shared_ptr<Room> backroom;
     vnum_t brvnum = INVALID_VNUM;
     vnum_t serial = INVALID_VNUM;
     vnum_t roomnum = INVALID_VNUM;
@@ -284,7 +277,7 @@ Room *GenerateExit(Room *in_room, std::shared_ptr<Exit> &pexit)
 
     if (!found)
     {
-        room = new Room();
+        room = std::make_shared<Room>();
         room->Area = in_room->Area;
         room->Vnum = serial;
         room->TeleVnum = roomnum;
@@ -327,9 +320,6 @@ Room *GenerateExit(Room *in_room, std::shared_ptr<Exit> &pexit)
 
 ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
 {
-    Room *in_room = nullptr;
-    Room *to_room = nullptr;
-    Room *from_room = nullptr;
     char buf[MAX_STRING_LENGTH];
     const char *txt = nullptr;
     const char *dtxt = nullptr;
@@ -358,8 +348,9 @@ ch_ret MoveCharacter(Character *ch, std::shared_ptr<Exit> pexit, int fall)
         return retcode;
     }
 
-    in_room = ch->InRoom;
-    from_room = in_room;
+    auto in_room = ch->InRoom;
+    auto from_room = in_room;
+    std::shared_ptr<Room> to_room;
 
     if (!pexit || (to_room = pexit->ToRoom) == NULL)
     {
@@ -1139,7 +1130,7 @@ void RemoveBExitFlag(std::shared_ptr<Exit> pexit, size_t flag)
 /*
  * teleport a character to another room
  */
-static void TeleportCharacter(Character *ch, Room *room, bool show)
+static void TeleportCharacter(Character *ch, std::shared_ptr<Room> room, bool show)
 {
     if (IsRoomPrivate(ch, room))
         return;
@@ -1155,8 +1146,7 @@ static void TeleportCharacter(Character *ch, Room *room, bool show)
 
 void Teleport(Character *ch, vnum_t room, int flags)
 {
-    Room *pRoomIndex = GetRoom(room);
-    bool show = false;
+    auto pRoomIndex = GetRoom(room);
 
     if (!pRoomIndex)
     {
@@ -1164,10 +1154,7 @@ void Teleport(Character *ch, vnum_t room, int flags)
         return;
     }
 
-    if (IsBitSet(flags, TELE_SHOWDESC))
-        show = true;
-    else
-        show = false;
+    bool show = IsBitSet(flags, TELE_SHOWDESC);
 
     if (!IsBitSet(flags, TELE_TRANSALL))
     {
@@ -1175,7 +1162,7 @@ void Teleport(Character *ch, vnum_t room, int flags)
         return;
     }
 
-    std::list<Character*> copyOfCharacterList(ch->InRoom->Characters());
+    auto copyOfCharacterList(ch->InRoom->Characters());
 
     for (Character *nch : copyOfCharacterList)
     {

@@ -283,7 +283,7 @@ short gsn_TopSN = 0;
  */
 ProtoMobile *MobIndexHash[MAX_KEY_HASH];
 std::shared_ptr<ProtoObject> ObjectIndexHash[MAX_KEY_HASH];
-Room *RoomIndexHash[MAX_KEY_HASH];
+std::shared_ptr<Room> RoomIndexHash[MAX_KEY_HASH];
 
 int top_affect = 0;
 int top_area = 0;
@@ -314,7 +314,7 @@ static void FixExits();
 #if 0
 static int ExitComparator(Exit **xit1, Exit **xit2);
 #endif
-static void SortExits(Room *room);
+static void SortExits(std::shared_ptr<Room> room);
 static void ToWizFile(const std::string &line);
 static void AddToWizList(const std::string &name, int level);
 
@@ -738,18 +738,18 @@ static void InitializeEconomy(void)
  * Has to be done after all rooms are read in.
  * Check for bad reverse exits.
  */
-static void FixExits(void)
+static void FixExits()
 {
     for (int iHash = 0; iHash < MAX_KEY_HASH; iHash++)
     {
-        for (Room *pRoomIndex = RoomIndexHash[iHash];
+        for (auto pRoomIndex = RoomIndexHash[iHash];
             pRoomIndex;
             pRoomIndex = pRoomIndex->Next)
         {
             bool fexit = false;
-            std::list<std::shared_ptr<Exit> > copyOfExitList(pRoomIndex->Exits());
+            auto copyOfExitList(pRoomIndex->Exits());
 
-            for (std::shared_ptr<Exit> pexit : copyOfExitList)
+            for (auto pexit : copyOfExitList)
             {
                 pexit->ReverseVnum = pRoomIndex->Vnum;
 
@@ -784,15 +784,15 @@ static void FixExits(void)
     /* Set all the rexit pointers         -Thoric */
     for (int iHash = 0; iHash < MAX_KEY_HASH; iHash++)
     {
-        for (Room *pRoomIndex = RoomIndexHash[iHash];
+        for (auto pRoomIndex = RoomIndexHash[iHash];
             pRoomIndex;
             pRoomIndex = pRoomIndex->Next)
         {
-            for (std::shared_ptr<Exit> pexit : pRoomIndex->Exits())
+            for (auto pexit : pRoomIndex->Exits())
             {
                 if (pexit->ToRoom && !pexit->ReverseExit)
                 {
-                    std::shared_ptr<Exit> rev_exit = GetExitTo(pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum);
+                    auto rev_exit = GetExitTo(pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum);
 
                     if (rev_exit)
                     {
@@ -826,7 +826,7 @@ static int ExitComparator(Exit **xit1, Exit **xit2)
 #endif
 
 // TODO: Re-implement this.
-static void SortExits(Room *room)
+static void SortExits(std::shared_ptr<Room> room)
 {
 #if 0
     Exit *exits[MAX_REXITS];
@@ -868,7 +868,7 @@ static void SortExits(Room *room)
 #endif
 }
 
-void RandomizeExits(Room *room, short maxdir)
+void RandomizeExits(std::shared_ptr<Room> room, short maxdir)
 {
     int nexits = 0;
     DirectionType vdirs[MAX_REXITS];
@@ -1027,10 +1027,10 @@ std::shared_ptr<ProtoObject> GetProtoObject(vnum_t vnum)
  * Translates room virtual number to its room index struct.
  * Hash table lookup.
  */
-Room *GetRoom(vnum_t vnum)
+std::shared_ptr<Room> GetRoom(vnum_t vnum)
 {
     assert(vnum > 0);
-    for (Room *pRoomIndex = RoomIndexHash[vnum % MAX_KEY_HASH];
+    for (std::shared_ptr<Room> pRoomIndex = RoomIndexHash[vnum % MAX_KEY_HASH];
         pRoomIndex;
         pRoomIndex = pRoomIndex->Next)
         if (pRoomIndex->Vnum == vnum)
@@ -1244,10 +1244,10 @@ void MakeWizlist()
 /* Function to delete a room index.  Called from do_rdelete in build.c
    Narn, May/96
 */
-bool DeleteRoom(Room *room)
+bool DeleteRoom(std::shared_ptr<Room> room)
 {
     int iHash = 0;
-    Room *tmp = nullptr, *prev = nullptr;
+    std::shared_ptr<Room> tmp, prev;
 
     iHash = room->Vnum % MAX_KEY_HASH;
 
@@ -1272,8 +1272,6 @@ bool DeleteRoom(Room *room)
         RoomIndexHash[iHash] = room->Next;
     }
 
-    delete room;
-
     top_room--;
     return true;
 }
@@ -1293,9 +1291,9 @@ bool DeleteMobile(ProtoMobile *mob)
 /*
  * Creat a new room (for online building)                       -Thoric
  */
-Room *MakeRoom(vnum_t vnum)
+std::shared_ptr<Room> MakeRoom(vnum_t vnum)
 {
-    Room *pRoomIndex = new Room();
+    std::shared_ptr<Room> pRoomIndex = std::make_shared<Room>();
 
     pRoomIndex->Vnum = vnum;
     pRoomIndex->Name = "Floating in a void";
@@ -1473,7 +1471,7 @@ ProtoMobile *MakeMobile(vnum_t vnum, vnum_t cvnum, const std::string &name)
  * to_room and vnum.                                            -Thoric
  * Exits are inserted into the linked list based on vdir.
  */
-std::shared_ptr<Exit> MakeExit(Room *pRoomIndex, Room *to_room, DirectionType door, const std::string &keyword)
+std::shared_ptr<Exit> MakeExit(std::shared_ptr<Room> pRoomIndex, std::shared_ptr<Room> to_room, DirectionType door, const std::string &keyword)
 {
     std::shared_ptr<Exit> pexit = std::make_shared<Exit>();
     pexit->Direction = door;

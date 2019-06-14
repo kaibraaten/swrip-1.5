@@ -42,7 +42,7 @@
 extern Character *gch_prev;
 
 Character *cur_char = NULL;
-Room *cur_room = NULL;
+std::shared_ptr<Room>  cur_room;
 bool cur_char_died = false;
 ch_ret global_retcode = rNONE;
 
@@ -57,7 +57,7 @@ class ExtractedCharacter
 {
 public:
     class Character *Character = nullptr;
-    Room *InRoom = nullptr;
+    std::shared_ptr<Room> InRoom;
     ch_ret RetCode = rNONE;
     bool Extract = false;
 };
@@ -66,15 +66,15 @@ static std::list<std::shared_ptr<ExtractedCharacter>> ExtractedCharacterQueue;
 
 static Object *GroupObject(Object *obj1, Object *obj2);
 
-static void ExplodeRoom(Object *obj, Character *xch, Room *room);
-static void ExplodeRoom_1(Object *obj, Character *xch, Room *room, int blast);
-static void ExplodeRoom_2(Room *room, int blast);
+static void ExplodeRoom(Object *obj, Character *xch, std::shared_ptr<Room> room);
+static void ExplodeRoom_1(Object *obj, Character *xch, std::shared_ptr<Room> room, int blast);
+static void ExplodeRoom_2(std::shared_ptr<Room> room, int blast);
 
 void Explode(Object *obj)
 {
     if (!obj->ArmedBy.empty())
     {
-        Room *room = NULL;
+        std::shared_ptr<Room> room;
         Character *xch = NULL;
         bool held = false;
         Object *objcont = obj;
@@ -123,7 +123,7 @@ void Explode(Object *obj)
     MakeScraps(obj);
 }
 
-void ExplodeRoom(Object *obj, Character *xch, Room *room)
+static void ExplodeRoom(Object *obj, Character *xch, std::shared_ptr<Room> room)
 {
     int blast = (int)(obj->Value[OVAL_EXPLOSIVE_MAX_DMG] / 500);
 
@@ -131,7 +131,7 @@ void ExplodeRoom(Object *obj, Character *xch, Room *room)
     ExplodeRoom_2(room, blast);
 }
 
-void ExplodeRoom_1(Object *obj, Character *xch, Room *room, int blast)
+static void ExplodeRoom_1(Object *obj, Character *xch, std::shared_ptr<Room> room, int blast)
 {
     if (room->Flags.test(BFSMark))
         return;
@@ -199,7 +199,7 @@ void ExplodeRoom_1(Object *obj, Character *xch, Room *room, int blast)
     }
 }
 
-void ExplodeRoom_2(Room *room, int blast)
+static void ExplodeRoom_2(std::shared_ptr<Room> room, int blast)
 {
     if (!room->Flags.test(BFSMark))
     {
@@ -750,7 +750,7 @@ void CharacterFromRoom(Character *ch)
 /*
  * Move a char into a room.
  */
-void CharacterToRoom(Character *ch, Room *pRoomIndex)
+void CharacterToRoom(Character *ch, std::shared_ptr<Room> pRoomIndex)
 {
     assert(ch != nullptr);
     assert(pRoomIndex != nullptr);
@@ -993,7 +993,7 @@ int falling = 0;
 
 void ObjectFromRoom(Object *obj)
 {
-    Room *in_room = obj->InRoom;
+    auto in_room = obj->InRoom;
     assert(in_room != nullptr);
 
     in_room->Remove(obj);
@@ -1014,7 +1014,7 @@ void ObjectFromRoom(Object *obj)
 /*
  * Move an obj into a room.
  */
-Object *ObjectToRoom(Object *obj, Room *pRoomIndex)
+Object *ObjectToRoom(Object *obj, std::shared_ptr<Room> pRoomIndex)
 {
     short count = obj->Count;
     short item_type = obj->ItemType;
@@ -1252,7 +1252,7 @@ void ExtractCharacter(Character *ch, bool fPull)
 
     if (!fPull)
     {
-        Room *location = GetRoom(WhereHome(ch));
+        auto location = GetRoom(WhereHome(ch));
 
         if (!location)
             location = GetRoom(ROOM_VNUM_LIMBO);
@@ -1733,7 +1733,7 @@ int GetObjectWeight(const Object *obj)
 /*
  * True if room is dark.
  */
-bool IsRoomDark(const Room *pRoomIndex)
+bool IsRoomDark(std::shared_ptr<Room> pRoomIndex)
 {
     assert(pRoomIndex != nullptr);
 
@@ -1757,7 +1757,7 @@ bool IsRoomDark(const Room *pRoomIndex)
 /*
  * True if room is private.
  */
-bool IsRoomPrivate(const Character *ch, const Room *pRoomIndex)
+bool IsRoomPrivate(const Character *ch, std::shared_ptr<Room> pRoomIndex)
 {
     assert(ch != nullptr);
     assert(pRoomIndex != nullptr);
@@ -2051,7 +2051,7 @@ Object *GetTrap(const Object *obj)
 /*
  * Remove an exit from a room                                   -Thoric
  */
-void ExtractExit(Room *room, std::shared_ptr<Exit> pexit)
+void ExtractExit(std::shared_ptr<Room> room, std::shared_ptr<Exit> pexit)
 {
     room->Remove(pexit);
 
@@ -2064,7 +2064,7 @@ void ExtractExit(Room *room, std::shared_ptr<Exit> pexit)
 /*
  * clean out a room (leave list pointers intact )               -Thoric
  */
-void CleanRoom(Room *room)
+void CleanRoom(std::shared_ptr<Room> room)
 {
     assert(room != nullptr);
 
@@ -2594,7 +2594,7 @@ void SeparateOneObjectFromGroup(Object *obj)
 /*
  * Empty an obj's contents... optionally into another obj, or a room
  */
-bool EmptyObjectContents(Object *obj, Object *destobj, Room *destroom)
+bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> destroom)
 {
     assert(obj != nullptr);
 

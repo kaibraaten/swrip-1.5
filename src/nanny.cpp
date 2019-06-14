@@ -792,9 +792,8 @@ static void NannyReadMotd(Descriptor *d, std::string argument)
     {
         char filename[256];
         FILE *fph = nullptr;
-        Room *storeroom = ch->PlayerHome;
-
-        std::list<Object*> objectsToExtract(storeroom->Objects());
+        auto storeroom = ch->PlayerHome;
+        auto objectsToExtract(storeroom->Objects());
 
         for (Object *obj : objectsToExtract)
         {

@@ -27,49 +27,49 @@
 #include <utility/utility.hpp>
 #include "types.hpp"
 
-/*
- * Reset commands:
- *   '*': comment
- *   'M': read a mobile
- *   'O': read an object
- *   'P': put object in object
- *   'G': give object to mobile
- *   'E': equip object to mobile
- *   'H': hide an object
- *   'B': set a bitvector
- *   'T': trap an object
- *   'D': set state of door
- *   'R': randomize room exits
- *   'S': stop (end of list)
- */
+ /*
+  * Reset commands:
+  *   '*': comment
+  *   'M': read a mobile
+  *   'O': read an object
+  *   'P': put object in object
+  *   'G': give object to mobile
+  *   'E': equip object to mobile
+  *   'H': hide an object
+  *   'B': set a bitvector
+  *   'T': trap an object
+  *   'D': set state of door
+  *   'R': randomize room exits
+  *   'S': stop (end of list)
+  */
 
-/*
- * Area-reset definition.
- */
+  /*
+   * Area-reset definition.
+   */
 class Reset
 {
 public:
-  Reset *Next = nullptr;
-  Reset *Previous = nullptr;
-  char Command = 0;
-  int MiscData = 0;
-  int Arg1 = 0;
-  int Arg2 = 0;
-  int Arg3 = 0;
+    Reset *Next = nullptr;
+    Reset *Previous = nullptr;
+    char Command = 0;
+    int MiscData = 0;
+    int Arg1 = 0;
+    int Arg2 = 0;
+    int Arg3 = 0;
 };
 
 
-Room *FindRoom( const Character *ch, const std::string &argument, Room *pRoom );
-void WipeResets( Area *pArea, Room *pRoom );
-void InstallRoom( Area *pArea, Room *pRoom, bool dodoors );
-void EditReset( Character *ch, std::string argument, Area *pArea, Room *aRoom );
-void ResetArea( Area *pArea );
-std::string SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist );
-Reset *MakeReset( char letter, int extra, int arg1, int arg2, int arg3 );
-Reset *AddReset( Area *tarea, char letter, int extra,
-		  int arg1, int arg2, int arg3 );
-Reset *PlaceReset( Area *tarea, char letter,
-		    int extra, int arg1, int arg2, int arg3 );
-void RenumberPutResets( Area *pArea );
+std::shared_ptr<Room> FindRoom(const Character *ch, const std::string &argument, std::shared_ptr<Room> pRoom);
+void WipeResets(Area *pArea, std::shared_ptr<Room> pRoom);
+void InstallRoom(Area *pArea, std::shared_ptr<Room> pRoom, bool dodoors);
+void EditReset(Character *ch, std::string argument, Area *pArea, std::shared_ptr<Room> aRoom);
+void ResetArea(Area *pArea);
+std::string SPrintReset(const Character *ch, Reset *pReset, short num, bool rlist);
+Reset *MakeReset(char letter, int extra, int arg1, int arg2, int arg3);
+Reset *AddReset(Area *tarea, char letter, int extra,
+    int arg1, int arg2, int arg3);
+Reset *PlaceReset(Area *tarea, char letter,
+    int extra, int arg1, int arg2, int arg3);
+void RenumberPutResets(Area *pArea);
 
 #endif

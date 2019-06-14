@@ -27,10 +27,10 @@ public:
   void Remove(Object *object);
   const std::list<Object*> &Objects() const;
   
-  Object         *InObject = nullptr;
-  Character        *CarriedBy = nullptr;
+  Object *InObject = nullptr;
+  Character *CarriedBy = nullptr;
   std::shared_ptr<ProtoObject> Prototype;
-  Room  *InRoom = nullptr;
+  std::shared_ptr<Room> InRoom;
   std::string ArmedBy;
   std::string Name;
   std::string ShortDescr;

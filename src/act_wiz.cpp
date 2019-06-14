@@ -31,86 +31,86 @@
 #include "descriptor.hpp"
 #include "repos/descriptorrepository.hpp"
 
-/*
- * Global variables.
- */
+ /*
+  * Global variables.
+  */
 std::string reboot_time;
 time_t new_boot_time_t;
 
-void EchoToAll( short AT_COLOR, const std::string &argument, short tar )
+void EchoToAll(short AT_COLOR, const std::string &argument, short tar)
 {
-  if ( argument.empty() )
-    return;
+    if (argument.empty())
+        return;
 
-  for ( Descriptor *d : Descriptors )
+    for (Descriptor *d : Descriptors)
     {
-      /* Added showing echoes to players who are editing, so they won't
-         miss out on important info like upcoming reboots. --Narn */
-      if ( d->ConnectionState == CON_PLAYING || d->ConnectionState == CON_EDITING )
+        /* Added showing echoes to players who are editing, so they won't
+           miss out on important info like upcoming reboots. --Narn */
+        if (d->ConnectionState == CON_PLAYING || d->ConnectionState == CON_EDITING)
         {
-          /* This one is kinda useless except for switched.. */
-          if ( tar == ECHOTAR_PC && IsNpc(d->Character) )
-            continue;
-          else if ( tar == ECHOTAR_IMM && !IsImmortal(d->Character) )
-            continue;
-          
-          SetCharacterColor( AT_COLOR, d->Character );
-          d->Character->Echo( "%s\r\n", argument.c_str() );
+            /* This one is kinda useless except for switched.. */
+            if (tar == ECHOTAR_PC && IsNpc(d->Character))
+                continue;
+            else if (tar == ECHOTAR_IMM && !IsImmortal(d->Character))
+                continue;
+
+            SetCharacterColor(AT_COLOR, d->Character);
+            d->Character->Echo("%s\r\n", argument.c_str());
         }
     }
 }
 
-void EchoToRoom( short AT_COLOR, const Room *room, const std::string &argument )
+void EchoToRoom(short AT_COLOR, std::shared_ptr<Room> room, const std::string &argument)
 {
-  RealEchoToRoom( AT_COLOR, room, argument, true );
+    RealEchoToRoom(AT_COLOR, room, argument, true);
 }
 
-void EchoToRoomNoNewline( int ecolor, const Room *room, const std::string &argument )
+void EchoToRoomNoNewline(int ecolor, std::shared_ptr<Room> room, const std::string &argument)
 {
-  RealEchoToRoom( ecolor, room, argument, false );
+    RealEchoToRoom(ecolor, room, argument, false);
 }
 
-void RealEchoToRoom( short color, const Room *room, const std::string &text, bool sendNewline )
+void RealEchoToRoom(short color, std::shared_ptr<Room> room, const std::string &text, bool sendNewline)
 {
-  assert(room != nullptr);
+    assert(room != nullptr);
 
-  for ( const Character *vic : room->Characters())
+    for (const Character *vic : room->Characters())
     {
-      SetCharacterColor( color, vic );
-      vic->Echo( "%s", text.c_str() );
+        SetCharacterColor(color, vic);
+        vic->Echo("%s", text.c_str());
 
-      if( sendNewline )
-	{
-	  vic->Echo( "\r\n" );
-	}
+        if (sendNewline)
+        {
+            vic->Echo("\r\n");
+        }
     }
 }
 
-Room *FindLocation( const Character *ch, const std::string &arg )
+std::shared_ptr<Room> FindLocation(const Character *ch, const std::string &arg)
 {
-  if ( IsNumber(arg) )
+    if (IsNumber(arg))
     {
-      return GetRoom( strtol( arg.c_str(), nullptr, 10 ) );
+        return GetRoom(strtol(arg.c_str(), nullptr, 10));
     }
 
-  const Character *victim = GetCharacterAnywhere( ch, arg );
-  
-  if ( victim != nullptr )
+    const Character *victim = GetCharacterAnywhere(ch, arg);
+
+    if (victim != nullptr)
     {
-      return victim->InRoom;
+        return victim->InRoom;
     }
 
-  const Object *obj = GetObjectAnywhere( ch, arg );
-  
-  if ( obj != nullptr )
+    const Object *obj = GetObjectAnywhere(ch, arg);
+
+    if (obj != nullptr)
     {
-      return obj->InRoom;
+        return obj->InRoom;
     }
-  
-  return nullptr;
+
+    return nullptr;
 }
 
 void GenerateRebootString()
 {
-  reboot_time = asctime(new_boot_time);
+    reboot_time = asctime(new_boot_time);
 }
