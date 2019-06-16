@@ -90,8 +90,8 @@ std::set<Wizard, CompareWizard> Wizards;
 
 time_t last_restore_all_time = 0;
 
-TeleportData *FirstTeleport = NULL;
-TeleportData *LastTeleport = NULL;
+std::shared_ptr<TeleportData> FirstTeleport;
+std::shared_ptr<TeleportData> LastTeleport;
 
 Character *FirstCharacter = NULL;
 Character *LastCharacter = NULL;

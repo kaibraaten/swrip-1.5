@@ -780,11 +780,11 @@ void CharacterToRoom(Character *ch, std::shared_ptr<Room> pRoomIndex)
     if (ch->InRoom->Flags.test(Flag::Room::Teleport)
         && ch->InRoom->TeleDelay > 0)
     {
-        for (const TeleportData *tele = FirstTeleport; tele; tele = tele->Next)
+        for (auto tele = FirstTeleport; tele; tele = tele->Next)
             if (tele->FromRoom == pRoomIndex)
                 return;
 
-        TeleportData *tele = new TeleportData();
+        std::shared_ptr<TeleportData> tele = std::make_shared<TeleportData>();
         LINK(tele, FirstTeleport, LastTeleport, Next, Previous);
         tele->FromRoom = pRoomIndex;
         tele->TeleportTimer = pRoomIndex->TeleDelay;

@@ -220,10 +220,10 @@ public:
 class TeleportData
 {
 public:
-    TeleportData   *Next = nullptr;
-    TeleportData   *Previous = nullptr;
+    std::shared_ptr<TeleportData> Next;
+    std::shared_ptr<TeleportData> Previous;
     std::shared_ptr<Room> FromRoom;
-    short            TeleportTimer = 0;
+    short TeleportTimer = 0;
 };
 
 class timerset
@@ -362,8 +362,8 @@ extern obj_ret          global_objcode;
 extern Character       *FirstCharacter;
 extern Character       *LastCharacter;
 
-extern TeleportData    *FirstTeleport;
-extern TeleportData    *LastTeleport;
+extern std::shared_ptr<TeleportData> FirstTeleport;
+extern std::shared_ptr<TeleportData> LastTeleport;
 extern Object          *save_equipment[MAX_WEAR][MAX_LAYERS];
 extern Character       *quitting_char;
 extern Character       *loading_char;
