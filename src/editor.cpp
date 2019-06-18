@@ -407,7 +407,6 @@ void StopEditing(Character *ch)
 
 void EditBuffer(Character *ch, std::string argument)
 {
-    Descriptor *d = nullptr;
     Editor *edd = nullptr;
     EditorLine *newline = nullptr;
     std::string cmd;
@@ -415,9 +414,9 @@ void EditBuffer(Character *ch, std::string argument)
     bool cont_line = false;
     char *p = nullptr;
 
-    d = ch->Desc;
+    auto d = ch->Desc;
 
-    if (d == NULL)
+    if (d == nullptr)
     {
         ch->Echo("You have no descriptor.\r\n");
         return;
@@ -984,7 +983,7 @@ static void EditorEscapedCommand(Character *ch, Editor *edd, char *argument)
 
 static void EditorSave(Character *ch, Editor *edd, const char *argument)
 {
-    Descriptor *d = ch->Desc;
+    auto d = ch->Desc;
 
     d->ConnectionState = CON_PLAYING;
 

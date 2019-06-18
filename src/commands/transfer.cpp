@@ -22,7 +22,7 @@ void do_transfer(Character *ch, std::string argument)
 
     if (!StrCmp(arg1, "all"))
     {
-        for (const Descriptor *d : Descriptors->Entities())
+        for (auto d : Descriptors)
         {
             if (d->ConnectionState == CON_PLAYING
                 && d->Character != ch

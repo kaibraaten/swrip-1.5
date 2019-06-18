@@ -117,7 +117,7 @@ protected:
         _location->Area = _area;
         _location->Flags = CreateBitSet<Flag::MAX>({ Flag::Room::Factory, Flag::Room::Refinery });
 
-        _engineer = new Character(std::make_unique<PCData>(), new NullDescriptor());
+        _engineer = new Character(std::make_unique<PCData>(), std::make_shared<NullDescriptor>());
         _engineer->PCData->Learned[gsn_mycraftingskill] = 100;
 
         CharacterToRoom(_engineer, _location);
@@ -126,7 +126,6 @@ protected:
     void TearDown() override
     {
         CleanupCharacter(_engineer);
-        delete _engineer->Desc;
         delete _engineer;
         _engineer = nullptr;
 

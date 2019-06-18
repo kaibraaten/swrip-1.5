@@ -47,7 +47,7 @@ struct Character::Impl
     std::list<std::shared_ptr<Timer>> Timers;
 };
 
-Character::Character(std::unique_ptr<class PCData> pcdata, Descriptor *desc)
+Character::Character(std::unique_ptr<class PCData> pcdata, std::shared_ptr<Descriptor> desc)
     : Desc(desc),
     PCData(std::move(pcdata)),
     Flags(PLR_BLANK | PLR_COMBINE | PLR_PROMPT),

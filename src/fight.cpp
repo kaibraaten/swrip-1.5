@@ -2625,7 +2625,7 @@ void RawKill(Character *killer, Character *victim)
         if (!victim)
         {
             /* Make sure they aren't halfway logged in. */
-            Descriptor *d = Find(Descriptors->Entities(),
+            auto d = Find(Descriptors->Entities(),
                 [&victim](const auto descriptor)
             {
                 return (victim = descriptor->Character) && !IsNpc(victim);

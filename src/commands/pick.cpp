@@ -183,7 +183,7 @@ void do_pick(Character *ch, std::string arg)
             if (!StrCmp("Public", ship->Owner))
                 return;
 
-            for (const Descriptor *d : Descriptors->Entities())
+            for (auto d : Descriptors->Entities())
             {
                 const Character *victim = d->Original ? d->Original : d->Character;
 
@@ -238,7 +238,7 @@ void do_pick(Character *ch, std::string arg)
             if (!StrCmp("Public", ship->Owner))
                 return;
 
-            for (const Descriptor *d : Descriptors->Entities())
+            for (auto d : Descriptors->Entities())
             {
                 const Character *victim = d->Original ? d->Original : d->Character;
 

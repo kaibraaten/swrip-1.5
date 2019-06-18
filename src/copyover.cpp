@@ -67,9 +67,9 @@ void do_copyover(Character * ch, std::string argument)
     sprintf(buf, "%s", "\r\nA Blinding Flash of light starts heading towards you, before you can think it engulfs you!\r\n");
 
     /* For each playing descriptor, save its state */
-    std::list<Descriptor*> descriptors(Descriptors->Entities());
+    auto descriptors(Descriptors->Entities());
 
-    for (Descriptor *d : descriptors)
+    for (auto d : descriptors)
     {
         Character *och = d->Original ? d->Original : d->Character;
 
@@ -117,9 +117,8 @@ void do_copyover(Character * ch, std::string argument)
 }
 
 /* Recover from a copyover - load players */
-void RecoverFromCopyover(void)
+void RecoverFromCopyover()
 {
-    Descriptor *d = NULL;
     FILE *fp = NULL;
     char name[100];
     char host[MAX_STRING_LENGTH];
@@ -150,7 +149,7 @@ void RecoverFromCopyover(void)
             break;
         }
 
-        d = new Descriptor(desc);
+        std::shared_ptr<Descriptor> d = std::make_shared<Descriptor>(desc);
         d->Remote.Hostname = host;
         d->Remote.HostIP = ip;
 

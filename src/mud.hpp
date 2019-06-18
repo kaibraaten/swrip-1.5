@@ -1091,17 +1091,17 @@ int GetShipFlag(const std::string &txt);
 int GetCondition(const std::string &conditionName);
 
 /* nanny.c */
-void Nanny(Descriptor *d, std::string argument);
+void Nanny(std::shared_ptr<Descriptor> d, std::string argument);
 
 /* comm.cpp */
 void DisplayPrompt(Descriptor *d);
-void CloseDescriptor(Descriptor *dclose, bool force);
+void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force);
 bool WriteToDescriptor(socket_t desc, const std::string &txt, int length = 0);
 void SetCharacterColor(short AType, const Character *ch);
 void Act(short AType, const std::string &format, Character *ch,
     const void *arg1, const void *arg2, int type);
 socket_t InitializeSocket(unsigned short port);
-void FreeDescriptor(Descriptor *d);
+void FreeDescriptor(std::shared_ptr<Descriptor> d);
 
 /* comments.c */
 void ReadComment(Character *ch, FILE *fp);

@@ -43,7 +43,7 @@
 bool fLogAll = false;
 
 static std::string ParseTarget(const Character *ch, std::string oldstring);
-static std::string GetMultiCommand(Descriptor *d, std::string argument);
+static std::string GetMultiCommand(std::shared_ptr<Descriptor> d, std::string argument);
 
 /*
  * Character not in position for command?
@@ -145,7 +145,7 @@ static std::string ParseTarget(const Character *ch, std::string oldstring)
     return buf;
 }
 
-static std::string GetMultiCommand(Descriptor *d, std::string argument)
+static std::string GetMultiCommand(std::shared_ptr<Descriptor> d, std::string argument)
 {
     int counter;
     char leftover[MAX_INPUT_LENGTH] = { '\0' };

@@ -320,7 +320,7 @@ static void AcceptNewSocket(socket_t ctrl)
     maxdesc = ctrl;
     newdesc = 0;
 
-    for (Descriptor *d : Descriptors)
+    for (auto d : Descriptors)
     {
         maxdesc = umax(maxdesc, d->Socket);
         FD_SET(d->Socket, &in_set);
@@ -378,9 +378,9 @@ static void HandleSocketInput()
      * Kick out descriptors with raised exceptions
      * or have been idle, then check for input.
      */
-    std::list<Descriptor*> inputDescriptors(Descriptors->Entities());
+    auto inputDescriptors(Descriptors->Entities());
 
-    for (Descriptor *d : inputDescriptors)
+    for (auto d : inputDescriptors)
     {
         d->Idle++;    /* make it so a descriptor can idle out */
 
@@ -502,9 +502,9 @@ static void HandleSocketOutput()
     /*
      * Output.
      */
-    std::list<Descriptor*> outputDescriptors(Descriptors->Entities());
+    auto outputDescriptors(Descriptors->Entities());
 
-    for (Descriptor *d : outputDescriptors)
+    for (auto d : outputDescriptors)
     {
         if ((d->fCommand || !d->OutBuffer.str().empty())
             && FD_ISSET(d->Socket, &out_set))
@@ -626,7 +626,7 @@ static void NewDescriptor(socket_t new_desc)
         return;
     }
 
-    Descriptor *dnew = new Descriptor(desc);
+    auto dnew = std::make_shared<Descriptor>(desc);
     dnew->Remote.Port = ntohs(sock.sin_port);
 
     std::string buf = inet_ntoa(sock.sin_addr);
@@ -694,14 +694,13 @@ static void NewDescriptor(socket_t new_desc)
     SetAlarm(0);
 }
 
-void FreeDescriptor(Descriptor *d)
+void FreeDescriptor(std::shared_ptr<Descriptor> d)
 {
     closesocket(d->Socket);
-    delete d;
     --num_descriptors;
 }
 
-void CloseDescriptor(Descriptor *dclose, bool force)
+void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
 {
     Character *ch = nullptr;
 
@@ -714,7 +713,7 @@ void CloseDescriptor(Descriptor *dclose, bool force)
         dclose->SnoopBy->WriteToBuffer("Your victim has left the game.\r\n");
 
     /* stop snooping everyone else */
-    for (Descriptor *d : Descriptors)
+    for (auto d : Descriptors)
         if (d->SnoopBy == dclose)
             d->SnoopBy = NULL;
 

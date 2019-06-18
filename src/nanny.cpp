@@ -46,7 +46,7 @@
 #include "repos/banrepository.hpp"
 #include "repos/playerrepository.hpp"
 
-using NannyFun = std::function<void(Descriptor*, std::string)>;
+using NannyFun = std::function<void(std::shared_ptr<Descriptor>, std::string)>;
 
 static const char echo_off_str[] = { (const char)IAC, (const char)WILL, TELOPT_ECHO, '\0' };
 static const char echo_on_str[] = { (const char)IAC, (const char)WONT, TELOPT_ECHO, '\0' };
@@ -55,28 +55,28 @@ extern bool wizlock;
 /*
  * Local functions
  */
-static void NannyGetName(Descriptor *d, std::string argument);
-static void NannyGetOldPassword(Descriptor *d, std::string argument);
-static void NannyConfirmNewName(Descriptor *d, std::string argument);
-static void NannyGetNewPassword(Descriptor *d, std::string argument);
-static void NannyConfirmNewPassword(Descriptor *d, std::string argument);
-static void NannyGetNewSex(Descriptor *d, std::string argument);
-static void NannyGetNewRace(Descriptor *d, std::string argument);
-static void NannyGetNewClass(Descriptor *d, std::string argument);
-static void NannyStatsOk(Descriptor *d, std::string argument);
-static void NannyPressEnter(Descriptor *d, std::string argument);
-static void NannyReadMotd(Descriptor *d, std::string argument);
+static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument);
+static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argument);
+static void NannyConfirmNewName(std::shared_ptr<Descriptor> d, std::string argument);
+static void NannyGetNewPassword(std::shared_ptr<Descriptor> d, std::string argument);
+static void NannyConfirmNewPassword(std::shared_ptr<Descriptor> d, std::string argument);
+static void NannyGetNewSex(std::shared_ptr<Descriptor> d, std::string argument);
+static void NannyGetNewRace(std::shared_ptr<Descriptor> d, std::string argument);
+static void NannyGetNewClass(std::shared_ptr<Descriptor> d, std::string argument);
+static void NannyStatsOk(std::shared_ptr<Descriptor> d, std::string argument);
+static void NannyPressEnter(std::shared_ptr<Descriptor> d, std::string argument);
+static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument);
 
-static void AskForGender(Descriptor *d);
-static void AskForRace(Descriptor *d);
-static void AskForClass(Descriptor *d);
-static void AskForStats(Descriptor *d);
-static void FinalizeCharacter(Descriptor *d);
+static void AskForGender(std::shared_ptr<Descriptor> d);
+static void AskForRace(std::shared_ptr<Descriptor> d);
+static void AskForClass(std::shared_ptr<Descriptor> d);
+static void AskForStats(std::shared_ptr<Descriptor> d);
+static void FinalizeCharacter(std::shared_ptr<Descriptor> d);
 
 /*
  * Deal with sockets that haven't logged in yet.
  */
-void Nanny(Descriptor *d, std::string argument)
+void Nanny(std::shared_ptr<Descriptor> d, std::string argument)
 {
     NannyFun nannyFun;
 
@@ -137,7 +137,7 @@ void Nanny(Descriptor *d, std::string argument)
     nannyFun(d, argument);
 }
 
-static void NannyGetName(Descriptor *d, std::string argument)
+static void NannyGetName(std::shared_ptr<Descriptor> d, std::string argument)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     bool fOld = false;
@@ -158,7 +158,7 @@ static void NannyGetName(Descriptor *d, std::string argument)
         return;
     }
 
-    if (d->CheckPlaying(argument, false) == BERR)
+    if (CheckPlaying(d, argument, false) == BERR)
     {
         d->WriteToBuffer("Name: ", 0);
         return;
@@ -200,7 +200,7 @@ static void NannyGetName(Descriptor *d, std::string argument)
         return;
     }
 
-    chk = d->CheckReconnect(argument, false);
+    chk = CheckReconnect(d, argument, false);
 
     if (chk == BERR)
     {
@@ -248,7 +248,7 @@ static void NannyGetName(Descriptor *d, std::string argument)
     }
 }
 
-static void NannyGetOldPassword(Descriptor *d, std::string argument)
+static void NannyGetOldPassword(std::shared_ptr<Descriptor> d, std::string argument)
 {
     Character *ch = d->Character;
     unsigned char chk = 0;
@@ -267,12 +267,12 @@ static void NannyGetOldPassword(Descriptor *d, std::string argument)
 
     d->WriteToBuffer(echo_on_str, 0);
 
-    if (d->CheckPlaying(ch->Name, true))
+    if (CheckPlaying(d, ch->Name, true))
     {
         return;
     }
 
-    chk = d->CheckReconnect(ch->Name, true);
+    chk = CheckReconnect(d, ch->Name, true);
 
     if (chk == BERR)
     {
@@ -289,7 +289,7 @@ static void NannyGetOldPassword(Descriptor *d, std::string argument)
         return;
     }
 
-    if (!SysData.AllowMultiplaying && d->CheckMultiplaying(ch->Name))
+    if (!SysData.AllowMultiplaying && CheckMultiplaying(d, ch->Name))
     {
         CloseDescriptor(d, false);
         return;
@@ -321,7 +321,7 @@ static void NannyGetOldPassword(Descriptor *d, std::string argument)
     }
 }
 
-static void NannyConfirmNewName(Descriptor *d, std::string argument)
+static void NannyConfirmNewName(std::shared_ptr<Descriptor> d, std::string argument)
 {
     char buf[MAX_STRING_LENGTH];
     Character *ch = d->Character;
@@ -351,7 +351,7 @@ static void NannyConfirmNewName(Descriptor *d, std::string argument)
     }
 }
 
-static void NannyGetNewPassword(Descriptor *d, std::string argument)
+static void NannyGetNewPassword(std::shared_ptr<Descriptor> d, std::string argument)
 {
     std::string pwdnew;
     Character *ch = d->Character;
@@ -377,7 +377,7 @@ static void NannyGetNewPassword(Descriptor *d, std::string argument)
     d->ConnectionState = CON_CONFIRM_NEW_PASSWORD;
 }
 
-static void NannyConfirmNewPassword(Descriptor *d, std::string argument)
+static void NannyConfirmNewPassword(std::shared_ptr<Descriptor> d, std::string argument)
 {
     Character *ch = d->Character;
 
@@ -395,7 +395,7 @@ static void NannyConfirmNewPassword(Descriptor *d, std::string argument)
     d->ConnectionState = CON_GET_NEW_RACE;
 }
 
-static void NannyGetNewSex(Descriptor *d, std::string argument)
+static void NannyGetNewSex(std::shared_ptr<Descriptor> d, std::string argument)
 {
     Character *ch = d->Character;
 
@@ -421,7 +421,7 @@ static void NannyGetNewSex(Descriptor *d, std::string argument)
     d->ConnectionState = CON_GET_NEW_CLASS;
 }
 
-static void NannyGetNewRace(Descriptor *d, std::string argument)
+static void NannyGetNewRace(std::shared_ptr<Descriptor> d, std::string argument)
 {
     std::string arg;
     Character *ch = d->Character;
@@ -477,7 +477,7 @@ static void NannyGetNewRace(Descriptor *d, std::string argument)
     }
 }
 
-static void NannyGetNewClass(Descriptor *d, std::string argument)
+static void NannyGetNewClass(std::shared_ptr<Descriptor> d, std::string argument)
 {
     std::string arg;
     Character *ch = d->Character;
@@ -516,7 +516,7 @@ static void NannyGetNewClass(Descriptor *d, std::string argument)
     d->ConnectionState = CON_STATS_OK;
 }
 
-static void NannyStatsOk(Descriptor *d, std::string argument)
+static void NannyStatsOk(std::shared_ptr<Descriptor> d, std::string argument)
 {
     Character *ch = d->Character;
 
@@ -540,7 +540,7 @@ static void NannyStatsOk(Descriptor *d, std::string argument)
     d->ConnectionState = CON_PRESS_ENTER;
 }
 
-static void NannyPressEnter(Descriptor *d, std::string argument)
+static void NannyPressEnter(std::shared_ptr<Descriptor> d, std::string argument)
 {
     Character *ch = d->Character;
 
@@ -597,7 +597,7 @@ static bool PutCharacterInCorrectShip(std::shared_ptr<Ship> ship, void *userData
     return true;
 }
 
-static void NannyReadMotd(Descriptor *d, std::string argument)
+static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
 {
     Character *ch = d->Character;
     char buf[MAX_STRING_LENGTH];
@@ -913,12 +913,12 @@ bool IsNameAcceptable(const std::string &name)
     return true;
 }
 
-static void AskForGender(Descriptor *d)
+static void AskForGender(std::shared_ptr<Descriptor> d)
 {
     d->WriteToBuffer("\r\nWhat is your sex (M/F)? ", 0);
 }
 
-static void AskForRace(Descriptor *d)
+static void AskForRace(std::shared_ptr<Descriptor> d)
 {
     int iRace = 0;
     int columns = 0;
@@ -960,7 +960,7 @@ static void AskForRace(Descriptor *d)
     d->WriteToBuffer(buf, 0);
 }
 
-static void AskForClass(Descriptor *d)
+static void AskForClass(std::shared_ptr<Descriptor> d)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     char buf2[MAX_STRING_LENGTH];
@@ -1000,7 +1000,7 @@ static void AskForClass(Descriptor *d)
     d->WriteToBuffer(buf, 0);
 }
 
-static void AskForStats(Descriptor *d)
+static void AskForStats(std::shared_ptr<Descriptor> d)
 {
     Character *ch = d->Character;
     char buf[MAX_STRING_LENGTH];
@@ -1027,7 +1027,7 @@ static void AskForStats(Descriptor *d)
     d->WriteToBuffer("\r\nAre these stats OK, (Y/N)? ", 0);
 }
 
-static void FinalizeCharacter(Descriptor *d)
+static void FinalizeCharacter(std::shared_ptr<Descriptor> d)
 {
     Character *ch = d->Character;
     int ability = 0;

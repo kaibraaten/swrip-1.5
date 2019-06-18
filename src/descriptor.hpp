@@ -13,9 +13,7 @@ public:
     virtual ~Descriptor();
 
     virtual void WriteToBuffer(const std::string &txt, size_t len = 0);
-    virtual unsigned char CheckReconnect(const std::string &name, bool fConn);
-    virtual unsigned char CheckPlaying(const std::string &name, bool kick);
-    virtual bool CheckMultiplaying(const std::string &name);
+    
     virtual bool FlushBuffer(bool fPrompt);
     virtual void ReadFromBuffer();
     virtual bool Read();
@@ -23,7 +21,7 @@ public:
 
     class Character *Character = nullptr;
     class Character *Original = nullptr;
-    Descriptor *SnoopBy = nullptr;
+    std::shared_ptr<Descriptor> SnoopBy;
 
     struct
     {
@@ -51,13 +49,14 @@ public:
     NullDescriptor();
 
     void WriteToBuffer(const std::string &txt, size_t len = 0) override;
-    unsigned char CheckReconnect(const std::string &name, bool fConn) override;
-    unsigned char CheckPlaying(const std::string &name, bool kick) override;
-    bool CheckMultiplaying(const std::string &name) override;
     bool FlushBuffer(bool fPrompt) override;
     void ReadFromBuffer() override;
     bool Read() override;
     bool HasInput() const override;
 };
+
+unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string &name, bool fConn);
+unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string &name, bool kick);
+bool CheckMultiplaying(std::shared_ptr<Descriptor> d, const std::string &name);
 
 #endif

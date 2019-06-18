@@ -2762,11 +2762,6 @@ static void SufferHallucinations(Character *ch)
 
 static void TeleportUpdate()
 {
-    if (FirstTeleport == nullptr)
-    {
-        return;
-    }
-
     for (std::shared_ptr<TeleportData> tele = FirstTeleport, tele_next; tele; tele = tele_next)
     {
         tele_next = tele->Next;

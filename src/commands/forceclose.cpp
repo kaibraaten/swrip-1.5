@@ -3,32 +3,32 @@
 #include "descriptor.hpp"
 #include "repos/descriptorrepository.hpp"
 
-void do_forceclose( Character *ch, std::string arg )
+void do_forceclose(Character *ch, std::string arg)
 {
-  if ( arg.empty() )
+    if (arg.empty())
     {
-      ch->Echo( "Usage: forceclose <descriptor#>\r\n" );
-      return;
+        ch->Echo("Usage: forceclose <descriptor#>\r\n");
+        return;
     }
 
-  int desc = ToLong( arg );
+    int desc = ToLong(arg);
 
-  for ( Descriptor *d : Descriptors->Entities() )
+    for (auto d : Descriptors->Entities())
     {
-      if ( d->Socket == desc )
+        if (d->Socket == desc)
         {
-          if ( d->Character && GetTrustLevel(d->Character) >= GetTrustLevel(ch) )
+            if (d->Character && GetTrustLevel(d->Character) >= GetTrustLevel(ch))
             {
-              ch->Echo( "They might not like that...\r\n" );
-              return;
+                ch->Echo("They might not like that...\r\n");
+                return;
             }
 
-          CloseDescriptor( d, false );
-          ch->Echo( "Ok.\r\n" );
-          return;
+            CloseDescriptor(d, false);
+            ch->Echo("Ok.\r\n");
+            return;
         }
     }
 
-  ch->Echo( "Not found!\r\n" );
+    ch->Echo("Not found!\r\n");
 }
 

@@ -39,7 +39,7 @@ class Character
 {
 public:
     Character() = delete;
-    Character(std::unique_ptr<class PCData> pcdata, Descriptor *desc);
+    Character(std::unique_ptr<class PCData> pcdata, std::shared_ptr<Descriptor> desc);
     Character(std::shared_ptr<ProtoMobile> protoMob);
 
     virtual ~Character();
@@ -63,7 +63,7 @@ public:
     SpecFun *spec_fun = NULL;
     SpecFun *spec_2 = NULL;
     std::shared_ptr<ProtoMobile> Prototype;
-    Descriptor *Desc = NULL;
+    std::shared_ptr<Descriptor> Desc;
     std::unique_ptr<class PCData> PCData;
     std::string Name;
     std::string ShortDescr;

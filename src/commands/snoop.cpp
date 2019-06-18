@@ -4,76 +4,76 @@
 #include "descriptor.hpp"
 #include "repos/descriptorrepository.hpp"
 
-void do_snoop( Character *ch, std::string arg )
+void do_snoop(Character *ch, std::string arg)
 {
-  Character *victim = NULL;
+    Character *victim = NULL;
 
-  if ( arg.empty() )
+    if (arg.empty())
     {
-      ch->Echo("Snoop whom?\r\n");
-      return;
+        ch->Echo("Snoop whom?\r\n");
+        return;
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    if ((victim = GetCharacterAnywhere(ch, arg)) == NULL)
     {
-      ch->Echo("They aren't here.\r\n");
-      return;
+        ch->Echo("They aren't here.\r\n");
+        return;
     }
 
-  if ( !victim->Desc )
+    if (!victim->Desc)
     {
-      ch->Echo("No descriptor to snoop.\r\n");
-      return;
+        ch->Echo("No descriptor to snoop.\r\n");
+        return;
     }
 
-  if ( victim == ch )
+    if (victim == ch)
     {
-      ch->Echo("Cancelling all snoops.\r\n");
+        ch->Echo("Cancelling all snoops.\r\n");
 
-      for(Descriptor *d : Descriptors->Entities())
+        for (auto d : Descriptors)
         {
-          if ( d->SnoopBy == ch->Desc )
+            if (d->SnoopBy == ch->Desc)
             {
-              d->SnoopBy = NULL;
+                d->SnoopBy = NULL;
             }
         }
-      
-      return;
+
+        return;
     }
 
-  if ( victim->Desc->SnoopBy )
+    if (victim->Desc->SnoopBy)
     {
-      ch->Echo("Busy already.\r\n");
-      return;
+        ch->Echo("Busy already.\r\n");
+        return;
     }
 
-  /*
-   * Minimum snoop level... a secret mset value
-   * makes the snooper think that the victim is already being snooped
-   */
-  if ( GetTrustLevel( victim ) >= GetTrustLevel( ch )
-       ||  (victim->PCData && victim->PCData->MinSnoop > GetTrustLevel( ch )) )
+    /*
+     * Minimum snoop level... a secret mset value
+     * makes the snooper think that the victim is already being snooped
+     */
+    if (GetTrustLevel(victim) >= GetTrustLevel(ch)
+        || (victim->PCData && victim->PCData->MinSnoop > GetTrustLevel(ch)))
     {
-      ch->Echo("Busy already.\r\n");
-      return;
+        ch->Echo("Busy already.\r\n");
+        return;
     }
 
-  if ( ch->Desc )
+    if (ch->Desc)
     {
-      for ( const Descriptor *d = ch->Desc->SnoopBy; d; d = d->SnoopBy )
+        for (auto d = ch->Desc->SnoopBy; d; d = d->SnoopBy)
         {
-          if ( d->Character == victim || d->Original == victim )
+            if (d->Character == victim || d->Original == victim)
             {
-              ch->Echo("No snoop loops.\r\n");
-              return;
+                ch->Echo("No snoop loops.\r\n");
+                return;
             }
         }
     }
 
-  /*  Snoop notification for higher imms, if desired, uncomment this
-      if ( GetTrustLevel(victim) > LEVEL_GREATER && GetTrustLevel(ch) < LEVEL_IMPLEMENTOR )
-      WriteToDescriptor( victim->Desc->descriptor, "\r\nYou feel like someone is watching your every move...\r\n", 0 );
-  */
-  victim->Desc->SnoopBy = ch->Desc;
-  ch->Echo("Ok.\r\n");
+    /*  Snoop notification for higher imms, if desired, uncomment this
+        if ( GetTrustLevel(victim) > LEVEL_GREATER && GetTrustLevel(ch) < LEVEL_IMPLEMENTOR )
+        WriteToDescriptor( victim->Desc->descriptor, "\r\nYou feel like someone is watching your every move...\r\n", 0 );
+    */
+    victim->Desc->SnoopBy = ch->Desc;
+    ch->Echo("Ok.\r\n");
 }

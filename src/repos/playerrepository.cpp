@@ -27,7 +27,7 @@ class InMemoryPlayerRepository : public PlayerRepository
 {
 public:
     void Load() override;
-    bool Load(Descriptor *d, const std::string &name, bool preload) override;
+    bool Load(std::shared_ptr<Descriptor> d, const std::string &name, bool preload) override;
     void Save() const override;
     void Save(const Character *pc) const override;
 
@@ -77,7 +77,7 @@ void InMemoryPlayerRepository::Save() const
 
 }
 
-bool InMemoryPlayerRepository::Load(Descriptor *d, const std::string &name, bool preload)
+bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::string &name, bool preload)
 {
     bool found = false;
     struct stat fst;
@@ -121,7 +121,7 @@ bool InMemoryPlayerRepository::Load(Descriptor *d, const std::string &name, bool
 
     lua_pushcfunction(L, L_CharacterEntry);
     lua_setglobal(L, "CharacterEntry");
-    lua_pushlightuserdata(L, d);
+    lua_pushlightuserdata(L, &d);
     lua_setglobal(L, "descriptor");
     lua_pushboolean(L, preload);
     lua_setglobal(L, "preload");
@@ -526,7 +526,7 @@ int InMemoryPlayerRepository::L_CharacterEntry(lua_State *L)
     assert(lua_islightuserdata(L, -2));
     assert(lua_isboolean(L, -1));
 
-    Descriptor *d = static_cast<Descriptor*>(lua_touserdata(L, -2));
+    auto d = *static_cast<std::shared_ptr<Descriptor>*>(lua_touserdata(L, -2));
     bool preload = lua_toboolean(L, -1);
     lua_pop(L, 2);
 
