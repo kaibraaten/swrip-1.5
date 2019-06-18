@@ -42,7 +42,6 @@ void do_destroy(Character *ch, std::string victimName)
 
     if (rename(oldPath, backupPath) == 0)
     {
-        Area *pArea = nullptr;
         char godDataPath[256];
 
         SetCharacterColor(AT_RED, ch);
@@ -65,7 +64,7 @@ void do_destroy(Character *ch, std::string victimName)
         char areaName[100];
         sprintf(areaName, "%s.are", Capitalize(victimName).c_str());
 
-        for (pArea = FirstBuild; pArea; pArea = pArea->Next)
+        for (auto pArea = FirstBuild; pArea; pArea = pArea->Next)
         {
             if (!StrCmp(pArea->Filename, areaName))
             {

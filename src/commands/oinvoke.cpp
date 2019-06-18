@@ -76,7 +76,7 @@ void do_oinvoke(Character *ch, std::string argument)
 
     if (GetTrustLevel(ch) < LEVEL_CREATOR)
     {
-        Area *pArea = nullptr;
+        std::shared_ptr<Area> pArea;
 
         if (IsNpc(ch))
         {

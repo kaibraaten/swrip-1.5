@@ -9,7 +9,7 @@ void do_rlist(Character *ch, std::string argument)
     vnum_t vnum = INVALID_VNUM;
     std::string arg1;
     std::string arg2;
-    const Area *tarea = ch->PCData->Build.Area;
+    auto tarea = ch->PCData->Build.Area;
     vnum_t lrange = INVALID_VNUM;
     vnum_t trange = INVALID_VNUM;
 

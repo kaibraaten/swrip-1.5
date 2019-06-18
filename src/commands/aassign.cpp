@@ -7,7 +7,7 @@
 
 void do_aassign(Character *ch, std::string argument)
 {
-    Area *tarea = nullptr, *tmp = nullptr;
+    std::shared_ptr<Area> tarea;
 
     if (IsNpc(ch))
     {
@@ -43,7 +43,7 @@ void do_aassign(Character *ch, std::string argument)
         || (IsName(argument, ch->PCData->Bestowments)
             && GetTrustLevel(ch) >= SysData.LevelToModifyProto))
     {
-        for (tmp = FirstArea; tmp; tmp = tmp->Next)
+        for (auto tmp = FirstArea; tmp; tmp = tmp->Next)
         {
             if (!StrCmp(argument, tmp->Filename))
             {
@@ -55,7 +55,7 @@ void do_aassign(Character *ch, std::string argument)
 
     if (!tarea)
     {
-        for (tmp = FirstBuild; tmp; tmp = tmp->Next)
+        for (auto tmp = FirstBuild; tmp; tmp = tmp->Next)
         {
             if (!StrCmp(argument, tmp->Filename))
             {

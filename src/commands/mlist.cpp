@@ -7,7 +7,6 @@
 void do_mlist(Character *ch, std::string argument)
 {
     vnum_t vnum = INVALID_VNUM;
-    Area *tarea = NULL;
     std::string arg1;
     std::string arg2;
     int lrange = 0;
@@ -21,7 +20,7 @@ void do_mlist(Character *ch, std::string argument)
         return;
     }
 
-    tarea = ch->PCData->Build.Area;
+    auto tarea = ch->PCData->Build.Area;
     argument = OneArgument(argument, arg1);
     argument = OneArgument(argument, arg2);
 

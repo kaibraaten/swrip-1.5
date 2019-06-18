@@ -18,7 +18,7 @@ void do_rstat(Character *ch, std::string argument)
 
     if (GetTrustLevel(ch) < LEVEL_IMMORTAL)
     {
-        Area * pArea = NULL;
+        std::shared_ptr<Area> pArea;
 
         if (!ch->PCData || !(pArea = ch->PCData->Build.Area))
         {

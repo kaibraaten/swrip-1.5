@@ -19,7 +19,7 @@ void do_olist(Character *ch, std::string argument)
         return;
     }
 
-    const Area *tarea = ch->PCData->Build.Area;
+    auto tarea = ch->PCData->Build.Area;
     argument = OneArgument(argument, arg1);
     argument = OneArgument(argument, arg2);
 

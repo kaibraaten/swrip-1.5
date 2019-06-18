@@ -24,17 +24,17 @@
 #include "planet.hpp"
 #include "area.hpp"
 
-/////////////////////////////////////////////////////
+ /////////////////////////////////////////////////////
 struct Planet::Impl
 {
-  std::list<Area*> Areas;
+    std::list<std::shared_ptr<Area>> Areas;
 };
 
 /////////////////////////////////////////////////////
 Planet::Planet()
-  : pImpl(std::make_unique<Impl>())
+    : pImpl(std::make_unique<Impl>())
 {
-  
+
 }
 
 Planet::~Planet()
@@ -42,33 +42,33 @@ Planet::~Planet()
 
 }
 
-const std::list<Area*> &Planet::Areas() const
+const std::list<std::shared_ptr<Area> > &Planet::Areas() const
 {
-  return pImpl->Areas;
+    return pImpl->Areas;
 }
 
-void Planet::Add(Area *area)
+void Planet::Add(std::shared_ptr<Area> area)
 {
-  assert(area->Planet == nullptr);
-  
-  pImpl->Areas.push_back(area);
+    assert(area->Planet == nullptr);
+
+    pImpl->Areas.push_back(area);
 }
 
-void Planet::Remove(Area *area)
+void Planet::Remove(std::shared_ptr<Area> area)
 {
-  assert(area->Planet != nullptr);
-  
-  pImpl->Areas.remove(area);
-  area->Planet = nullptr;
+    assert(area->Planet != nullptr);
+
+    pImpl->Areas.remove(area);
+    area->Planet = nullptr;
 }
 
 ////////////////////////////////////////////////////
 
-long GetTaxes( std::shared_ptr<Planet> planet )
+long GetTaxes(std::shared_ptr<Planet> planet)
 {
-  long gain = planet->BaseValue;
-  gain += planet->BaseValue * planet->PopularSupport / 100;
-  gain += umax(0, planet->PopularSupport / 10 * planet->Population);
+    long gain = planet->BaseValue;
+    gain += planet->BaseValue * planet->PopularSupport / 100;
+    gain += umax(0, planet->PopularSupport / 10 * planet->Population);
 
-  return gain;
+    return gain;
 }

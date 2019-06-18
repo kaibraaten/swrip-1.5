@@ -7,7 +7,6 @@
 
 void do_instazone(Character *ch, std::string argument)
 {
-    Area *pArea = NULL;
     int vnum = INVALID_VNUM;
     bool dodoors = false;
 
@@ -23,7 +22,7 @@ void do_instazone(Character *ch, std::string argument)
     else
         dodoors = true;
 
-    pArea = ch->PCData->Build.Area;
+    auto pArea = ch->PCData->Build.Area;
 
     if (pArea->FirstReset)
         WipeResets(pArea, NULL);

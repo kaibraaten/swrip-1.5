@@ -23,15 +23,15 @@ namespace Flag
 class Area
 {
 public:
-    Area *Next = nullptr;
-    Area *Previous = nullptr;
-    Area *NextSort = nullptr;
-    Area *PreviousSort = nullptr;
+    std::shared_ptr<Area> Next;
+    std::shared_ptr<Area> Previous;
+    std::shared_ptr<Area> NextSort;
+    std::shared_ptr<Area> PreviousSort;
     Reset *FirstReset = nullptr;
     Reset *LastReset = nullptr;
     std::shared_ptr<class Planet> Planet;
-    Area *NextOnPlanet = nullptr;
-    Area *PreviousOnPlanet = nullptr;
+    std::shared_ptr<Area> NextOnPlanet;
+    std::shared_ptr<Area> PreviousOnPlanet;
     std::string Name;
     std::string Filename;
     std::bitset<Flag::MAX> Flags;
@@ -73,24 +73,24 @@ public:
     int LowEconomy = 0;
 };
 
-extern Area *FirstArea;
-extern Area *LastArea;
-extern Area *FirstBuild;
-extern Area *LastBuild;
-extern Area *FirstASort;
-extern Area *LastASort;
-extern Area *FirstBSort;
-extern Area *LastBSort;
+extern std::shared_ptr<Area> FirstArea;
+extern std::shared_ptr<Area> LastArea;
+extern std::shared_ptr<Area> FirstBuild;
+extern std::shared_ptr<Area> LastBuild;
+extern std::shared_ptr<Area> FirstASort;
+extern std::shared_ptr<Area> LastASort;
+extern std::shared_ptr<Area> FirstBSort;
+extern std::shared_ptr<Area> LastBSort;
 
-void FixAreaExits(Area *tarea);
-void LoadAreaFile(Area *tarea, const std::string &filename);
-void SortArea(Area *pArea, bool proto);
-Area *GetArea(const std::string &nameOrFile);
-void AreaUpdate(void);
-void CloseArea(Area *pArea);
-void FreeArea(Area *are);
+void FixAreaExits(std::shared_ptr<Area> tarea);
+void LoadAreaFile(std::shared_ptr<Area> tarea, const std::string &filename);
+void SortArea(std::shared_ptr<Area> pArea, bool proto);
+std::shared_ptr<Area> GetArea(const std::string &nameOrFile);
+void AreaUpdate();
+void CloseArea(std::shared_ptr<Area> pArea);
+void FreeArea(std::shared_ptr<Area> are);
 void AssignAreaTo(Character *ch);
-void FoldArea(Area *tarea, const std::string &filename, bool install);
-void CleanResets(Area *tarea);
+void FoldArea(std::shared_ptr<Area> tarea, const std::string &filename, bool install);
+void CleanResets(std::shared_ptr<Area> tarea);
 
 #endif

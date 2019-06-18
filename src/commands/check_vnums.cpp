@@ -4,238 +4,237 @@
 #include "character.hpp"
 
 /* Check to make sure range of vnums is free - Scryn 2/27/96 */
-void do_check_vnums( Character *ch, std::string argument )
+void do_check_vnums(Character *ch, std::string argument)
 {
-  char buf[MAX_STRING_LENGTH];
-  char buf2[MAX_STRING_LENGTH];
-  Area *pArea = nullptr;
-  std::string arg1;
-  std::string arg2;
-  bool room = false, mob = false, obj = false, all = false, area_conflict = false;
-  int low_range = 0, high_range = 0;
+    char buf[MAX_STRING_LENGTH];
+    char buf2[MAX_STRING_LENGTH];
+    std::string arg1;
+    std::string arg2;
+    bool room = false, mob = false, obj = false, all = false, area_conflict = false;
+    int low_range = 0, high_range = 0;
 
-  argument = OneArgument( argument, arg1 );
-  argument = OneArgument( argument, arg2 );
+    argument = OneArgument(argument, arg1);
+    argument = OneArgument(argument, arg2);
 
-  if ( arg1.empty() )
+    if (arg1.empty())
     {
-      ch->Echo("Please specify room, mob, object, or all as your first argument.\r\n");
-      return;
+        ch->Echo("Please specify room, mob, object, or all as your first argument.\r\n");
+        return;
     }
 
-  if(!StrCmp(arg1, "room"))
-    room = true;
-  else if(!StrCmp(arg1, "mob"))
-    mob = true;
-  else if(!StrCmp(arg1, "object"))
-    obj = true;
-  else if(!StrCmp(arg1, "all"))
-    all = true;
-  else
+    if (!StrCmp(arg1, "room"))
+        room = true;
+    else if (!StrCmp(arg1, "mob"))
+        mob = true;
+    else if (!StrCmp(arg1, "object"))
+        obj = true;
+    else if (!StrCmp(arg1, "all"))
+        all = true;
+    else
     {
-      ch->Echo("Please specify room, mob, or object as your first argument.\r\n");
-      return;
+        ch->Echo("Please specify room, mob, or object as your first argument.\r\n");
+        return;
     }
 
-  if( arg2.empty() )
+    if (arg2.empty())
     {
-      ch->Echo("Please specify the low end of the range to be searched.\r\n");
-      return;
+        ch->Echo("Please specify the low end of the range to be searched.\r\n");
+        return;
     }
 
-  if( argument.empty() )
+    if (argument.empty())
     {
-      ch->Echo("Please specify the high end of the range to be searched.\r\n");
-      return;
+        ch->Echo("Please specify the high end of the range to be searched.\r\n");
+        return;
     }
 
-  low_range = ToLong(arg2);
-  high_range = ToLong(argument);
+    low_range = ToLong(arg2);
+    high_range = ToLong(argument);
 
-  if (low_range < MIN_VNUM || low_range > MAX_VNUM )
+    if (low_range < MIN_VNUM || low_range > MAX_VNUM)
     {
-      ch->Echo("Invalid argument for bottom of range.\r\n");
-      return;
+        ch->Echo("Invalid argument for bottom of range.\r\n");
+        return;
     }
 
-  if (high_range < MIN_VNUM || high_range > MAX_VNUM )
+    if (high_range < MIN_VNUM || high_range > MAX_VNUM)
     {
-      ch->Echo("Invalid argument for top of range.\r\n");
-      return;
+        ch->Echo("Invalid argument for top of range.\r\n");
+        return;
     }
 
-  if (high_range < low_range)
+    if (high_range < low_range)
     {
-      ch->Echo("Bottom of range must be below top of range.\r\n");
-      return;
+        ch->Echo("Bottom of range must be below top of range.\r\n");
+        return;
     }
 
-  if (all)
+    if (all)
     {
-      sprintf(buf, "room %d %d", low_range, high_range);
-      do_check_vnums(ch, buf);
-      sprintf(buf, "mob %d %d", low_range, high_range);
-      do_check_vnums(ch, buf);
-      sprintf(buf, "object %d %d", low_range, high_range);
-      do_check_vnums(ch, buf);
-      return;
+        sprintf(buf, "room %d %d", low_range, high_range);
+        do_check_vnums(ch, buf);
+        sprintf(buf, "mob %d %d", low_range, high_range);
+        do_check_vnums(ch, buf);
+        sprintf(buf, "object %d %d", low_range, high_range);
+        do_check_vnums(ch, buf);
+        return;
     }
 
-  SetCharacterColor( AT_PLAIN, ch );
+    SetCharacterColor(AT_PLAIN, ch);
 
-  for ( pArea = FirstASort; pArea; pArea = pArea->NextSort )
+    for (auto pArea = FirstASort; pArea; pArea = pArea->NextSort)
     {
-      area_conflict = false;
+        area_conflict = false;
 
-      if ( IsBitSet( pArea->Status, AREA_DELETED ) )
-        continue;
-      else if (room)
+        if (IsBitSet(pArea->Status, AREA_DELETED))
+            continue;
+        else if (room)
         {
-          if ( low_range < pArea->VnumRanges.Room.First && pArea->VnumRanges.Room.First < high_range )
-            area_conflict = true;
+            if (low_range < pArea->VnumRanges.Room.First && pArea->VnumRanges.Room.First < high_range)
+                area_conflict = true;
 
-          if ( low_range < pArea->VnumRanges.Room.Last && pArea->VnumRanges.Room.Last < high_range )
-            area_conflict = true;
+            if (low_range < pArea->VnumRanges.Room.Last && pArea->VnumRanges.Room.Last < high_range)
+                area_conflict = true;
 
-          if ( ( low_range >= pArea->VnumRanges.Room.First )
-               && ( low_range <= pArea->VnumRanges.Room.Last ) )
-            area_conflict = true;
+            if ((low_range >= pArea->VnumRanges.Room.First)
+                && (low_range <= pArea->VnumRanges.Room.Last))
+                area_conflict = true;
 
-          if ( ( high_range <= pArea->VnumRanges.Room.Last )
-               && ( high_range >= pArea->VnumRanges.Room.First ) )
-            area_conflict = true;
+            if ((high_range <= pArea->VnumRanges.Room.Last)
+                && (high_range >= pArea->VnumRanges.Room.First))
+                area_conflict = true;
         }
 
-      if (mob)
+        if (mob)
         {
-          if ( low_range < pArea->VnumRanges.Mob.First && pArea->VnumRanges.Mob.First < high_range )
-            area_conflict = true;
+            if (low_range < pArea->VnumRanges.Mob.First && pArea->VnumRanges.Mob.First < high_range)
+                area_conflict = true;
 
-	  if ( low_range < pArea->VnumRanges.Mob.Last && pArea->VnumRanges.Mob.Last < high_range )
-            area_conflict = true;
+            if (low_range < pArea->VnumRanges.Mob.Last && pArea->VnumRanges.Mob.Last < high_range)
+                area_conflict = true;
 
-          if ( ( low_range >= pArea->VnumRanges.Mob.First )
-               && ( low_range <= pArea->VnumRanges.Mob.Last ) )
-            area_conflict = true;
+            if ((low_range >= pArea->VnumRanges.Mob.First)
+                && (low_range <= pArea->VnumRanges.Mob.Last))
+                area_conflict = true;
 
-          if ( ( high_range <= pArea->VnumRanges.Mob.Last )
-               && ( high_range >= pArea->VnumRanges.Mob.First ) )
-            area_conflict = true;
+            if ((high_range <= pArea->VnumRanges.Mob.Last)
+                && (high_range >= pArea->VnumRanges.Mob.First))
+                area_conflict = true;
         }
 
-      if (obj)
+        if (obj)
         {
-          if ( low_range < pArea->VnumRanges.Object.First && pArea->VnumRanges.Object.First < high_range )
-            area_conflict = true;
+            if (low_range < pArea->VnumRanges.Object.First && pArea->VnumRanges.Object.First < high_range)
+                area_conflict = true;
 
-          if ( low_range < pArea->VnumRanges.Object.Last && pArea->VnumRanges.Object.Last < high_range )
-            area_conflict = true;
+            if (low_range < pArea->VnumRanges.Object.Last && pArea->VnumRanges.Object.Last < high_range)
+                area_conflict = true;
 
-          if ( ( low_range >= pArea->VnumRanges.Object.First )
-               && ( low_range <= pArea->VnumRanges.Object.Last ) )
-            area_conflict = true;
+            if ((low_range >= pArea->VnumRanges.Object.First)
+                && (low_range <= pArea->VnumRanges.Object.Last))
+                area_conflict = true;
 
-          if ( ( high_range <= pArea->VnumRanges.Object.Last )
-               && ( high_range >= pArea->VnumRanges.Object.First ) )
-            area_conflict = true;
+            if ((high_range <= pArea->VnumRanges.Object.Last)
+                && (high_range >= pArea->VnumRanges.Object.First))
+                area_conflict = true;
         }
 
-      if (area_conflict)
+        if (area_conflict)
         {
-          ch->Echo("Conflict:%-15s| ",
-                   !pArea->Filename.empty() ? pArea->Filename.c_str() : "(invalid)");
+            ch->Echo("Conflict:%-15s| ",
+                !pArea->Filename.empty() ? pArea->Filename.c_str() : "(invalid)");
 
-          if(room)
-            sprintf( buf2, "Rooms: %5ld - %-5ld\r\n", pArea->VnumRanges.Room.First,
-                     pArea->VnumRanges.Room.Last);
+            if (room)
+                sprintf(buf2, "Rooms: %5ld - %-5ld\r\n", pArea->VnumRanges.Room.First,
+                    pArea->VnumRanges.Room.Last);
 
-          if(mob)
-            sprintf( buf2, "Mobs: %5ld - %-5ld\r\n", pArea->VnumRanges.Mob.First,
-                     pArea->VnumRanges.Mob.Last);
+            if (mob)
+                sprintf(buf2, "Mobs: %5ld - %-5ld\r\n", pArea->VnumRanges.Mob.First,
+                    pArea->VnumRanges.Mob.Last);
 
-          if(obj)
-            sprintf( buf2, "Objects: %5ld - %-5ld\r\n", pArea->VnumRanges.Object.First,
-                     pArea->VnumRanges.Object.Last);
+            if (obj)
+                sprintf(buf2, "Objects: %5ld - %-5ld\r\n", pArea->VnumRanges.Object.First,
+                    pArea->VnumRanges.Object.Last);
 
-          ch->Echo("%s", buf2);
+            ch->Echo("%s", buf2);
         }
     }
-  
-  for ( pArea = FirstBSort; pArea; pArea = pArea->NextSort )
+
+    for (auto pArea = FirstBSort; pArea; pArea = pArea->NextSort)
     {
-      area_conflict = false;
+        area_conflict = false;
 
-      if ( IsBitSet( pArea->Status, AREA_DELETED ) )
-        continue;
-      else if (room)
+        if (IsBitSet(pArea->Status, AREA_DELETED))
+            continue;
+        else if (room)
         {
-          if ( low_range < pArea->VnumRanges.Room.First && pArea->VnumRanges.Room.First < high_range )
-            area_conflict = true;
+            if (low_range < pArea->VnumRanges.Room.First && pArea->VnumRanges.Room.First < high_range)
+                area_conflict = true;
 
-          if ( low_range < pArea->VnumRanges.Room.Last && pArea->VnumRanges.Room.Last < high_range )
-            area_conflict = true;
+            if (low_range < pArea->VnumRanges.Room.Last && pArea->VnumRanges.Room.Last < high_range)
+                area_conflict = true;
 
-          if ( ( low_range >= pArea->VnumRanges.Room.First )
-               && ( low_range <= pArea->VnumRanges.Room.Last ) )
-            area_conflict = true;
+            if ((low_range >= pArea->VnumRanges.Room.First)
+                && (low_range <= pArea->VnumRanges.Room.Last))
+                area_conflict = true;
 
-          if ( ( high_range <= pArea->VnumRanges.Room.Last )
-               && ( high_range >= pArea->VnumRanges.Room.First ) )
-            area_conflict = true;
+            if ((high_range <= pArea->VnumRanges.Room.Last)
+                && (high_range >= pArea->VnumRanges.Room.First))
+                area_conflict = true;
         }
 
-      if (mob)
+        if (mob)
         {
-          if ( low_range < pArea->VnumRanges.Mob.First && pArea->VnumRanges.Mob.First < high_range )
-            area_conflict = true;
+            if (low_range < pArea->VnumRanges.Mob.First && pArea->VnumRanges.Mob.First < high_range)
+                area_conflict = true;
 
-          if ( low_range < pArea->VnumRanges.Mob.Last && pArea->VnumRanges.Mob.Last < high_range )
-            area_conflict = true;
+            if (low_range < pArea->VnumRanges.Mob.Last && pArea->VnumRanges.Mob.Last < high_range)
+                area_conflict = true;
 
-          if ( ( low_range >= pArea->VnumRanges.Mob.First )
-               && ( low_range <= pArea->VnumRanges.Mob.Last ) )
-            area_conflict = true;
+            if ((low_range >= pArea->VnumRanges.Mob.First)
+                && (low_range <= pArea->VnumRanges.Mob.Last))
+                area_conflict = true;
 
-          if ( ( high_range <= pArea->VnumRanges.Mob.Last )
-               && ( high_range >= pArea->VnumRanges.Mob.First ) )
-            area_conflict = true;
+            if ((high_range <= pArea->VnumRanges.Mob.Last)
+                && (high_range >= pArea->VnumRanges.Mob.First))
+                area_conflict = true;
         }
 
-      if (obj)
+        if (obj)
         {
-          if ( low_range < pArea->VnumRanges.Object.First && pArea->VnumRanges.Object.First < high_range )
-            area_conflict = true;
+            if (low_range < pArea->VnumRanges.Object.First && pArea->VnumRanges.Object.First < high_range)
+                area_conflict = true;
 
-	  if ( low_range < pArea->VnumRanges.Object.Last && pArea->VnumRanges.Object.Last < high_range )
-            area_conflict = true;
+            if (low_range < pArea->VnumRanges.Object.Last && pArea->VnumRanges.Object.Last < high_range)
+                area_conflict = true;
 
-          if ( ( low_range >= pArea->VnumRanges.Object.First )
-               && ( low_range <= pArea->VnumRanges.Object.Last ) )
-            area_conflict = true;
+            if ((low_range >= pArea->VnumRanges.Object.First)
+                && (low_range <= pArea->VnumRanges.Object.Last))
+                area_conflict = true;
 
-          if ( ( high_range <= pArea->VnumRanges.Object.Last )
-               && ( high_range >= pArea->VnumRanges.Object.First ) )
-            area_conflict = true;
+            if ((high_range <= pArea->VnumRanges.Object.Last)
+                && (high_range >= pArea->VnumRanges.Object.First))
+                area_conflict = true;
         }
 
-      if (area_conflict)
+        if (area_conflict)
         {
-          sprintf(buf, "Conflict:%-15s| ",
-                  !pArea->Filename.empty() ? pArea->Filename.c_str() : "(invalid)");
+            sprintf(buf, "Conflict:%-15s| ",
+                !pArea->Filename.empty() ? pArea->Filename.c_str() : "(invalid)");
 
-          if(room)
-            sprintf( buf2, "Rooms: %5ld - %-5ld\r\n", pArea->VnumRanges.Room.First,
-                     pArea->VnumRanges.Room.Last);
+            if (room)
+                sprintf(buf2, "Rooms: %5ld - %-5ld\r\n", pArea->VnumRanges.Room.First,
+                    pArea->VnumRanges.Room.Last);
 
-          if(mob)
-            sprintf( buf2, "Mobs: %5ld - %-5ld\r\n", pArea->VnumRanges.Mob.First,
-                     pArea->VnumRanges.Mob.Last);
+            if (mob)
+                sprintf(buf2, "Mobs: %5ld - %-5ld\r\n", pArea->VnumRanges.Mob.First,
+                    pArea->VnumRanges.Mob.Last);
 
-          if(obj)
-            sprintf( buf2, "Objects: %5ld - %-5ld\r\n", pArea->VnumRanges.Object.First,
-                     pArea->VnumRanges.Object.Last);
+            if (obj)
+                sprintf(buf2, "Objects: %5ld - %-5ld\r\n", pArea->VnumRanges.Object.First,
+                    pArea->VnumRanges.Object.Last);
 
-          ch->Echo("%s", buf2);
+            ch->Echo("%s", buf2);
         }
     }
 }

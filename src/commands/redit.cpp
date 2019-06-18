@@ -208,7 +208,7 @@ void do_redit(Character *ch, std::string argument)
     if (!StrCmp(arg, "rlist"))
     {
         Reset *pReset = NULL;
-        Area *tarea = location->Area;
+        auto tarea = location->Area;
         short num = 0;
 
         if (!tarea->FirstReset)

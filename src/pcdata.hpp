@@ -78,7 +78,7 @@ public:
 
     struct
     {
-        class Area *Area = NULL;
+        std::shared_ptr<class Area> Area;
 
         struct
         {

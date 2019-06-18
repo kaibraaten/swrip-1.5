@@ -11,115 +11,115 @@ static void ShowMissingHelpsForAreas(const Character *ch);
 
 void do_nohelps(Character *ch, std::string arg)
 {
-  if(!IsImmortal(ch) || IsNpc(ch) )
+    if (!IsImmortal(ch) || IsNpc(ch))
     {
-      ch->Echo("Huh?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 
-  if ( arg.empty() || !StrCmp(arg, "all") )
+    if (arg.empty() || !StrCmp(arg, "all"))
     {
-      do_nohelps(ch, "Commands");
-      ch->Echo("\r\n");
-      do_nohelps(ch, "Skills");
-      ch->Echo("\r\n");
-      do_nohelps(ch, "Areas");
-      ch->Echo("\r\n");
-      return;
+        do_nohelps(ch, "Commands");
+        ch->Echo("\r\n");
+        do_nohelps(ch, "Skills");
+        ch->Echo("\r\n");
+        do_nohelps(ch, "Areas");
+        ch->Echo("\r\n");
+        return;
     }
 
-  if(!StrCmp(arg, "commands") )
+    if (!StrCmp(arg, "commands"))
     {
-      ShowMissingHelpsForCommands(ch);
+        ShowMissingHelpsForCommands(ch);
     }
-  else if(!StrCmp(arg, "skills")
-          || !StrCmp(arg, "spells") )
+    else if (!StrCmp(arg, "skills")
+        || !StrCmp(arg, "spells"))
     {
-      ShowMissingHelpsForSkills(ch);
+        ShowMissingHelpsForSkills(ch);
     }
-  else if(!StrCmp(arg, "areas") )
+    else if (!StrCmp(arg, "areas"))
     {
-      ShowMissingHelpsForAreas(ch);
+        ShowMissingHelpsForAreas(ch);
     }
-  else
+    else
     {
-      ch->Echo("Syntax:  nohelps <all|areas|commands|skills>\r\n");
+        ch->Echo("Syntax:  nohelps <all|areas|commands|skills>\r\n");
     }
 }
 
 static void ShowMissingHelpsForCommands(const Character *ch)
 {
-  const List *commands = GetEntities(CommandRepository);
-  ListIterator *iterator = AllocateListIterator(commands);
-  int col = 0;
-  const int NUM_COLUMNS = 5;
+    const List *commands = GetEntities(CommandRepository);
+    ListIterator *iterator = AllocateListIterator(commands);
+    int col = 0;
+    const int NUM_COLUMNS = 5;
 
-  ch->Echo("&C&YCommands for which there are no help files:\r\n\r\n");
+    ch->Echo("&C&YCommands for which there are no help files:\r\n\r\n");
 
-  while(ListHasMoreElements(iterator))
+    while (ListHasMoreElements(iterator))
     {
-      const Command *command = (const Command*) GetListData(iterator);
-      MoveToNextListElement(iterator);
+        const Command *command = (const Command*)GetListData(iterator);
+        MoveToNextListElement(iterator);
 
-      if(!GetHelpFile(ch, command->Name) )
+        if (!GetHelpFile(ch, command->Name))
         {
-          ch->Echo("&W%-15s", command->Name.c_str());
+            ch->Echo("&W%-15s", command->Name.c_str());
 
-          if ( ++col % NUM_COLUMNS == 0 )
+            if (++col % NUM_COLUMNS == 0)
             {
-              ch->Echo("\r\n");
+                ch->Echo("\r\n");
             }
         }
     }
 
-  ch->Echo("\r\n");
+    ch->Echo("\r\n");
 }
 
 static void ShowMissingHelpsForSkills(const Character *ch)
 {
-  int sn = 0;
-  int col = 0;
-  const int NUM_COLUMNS = 4;
+    int sn = 0;
+    int col = 0;
+    const int NUM_COLUMNS = 4;
 
-  ch->Echo("&CSkills/Spells for which there are no help files:\r\n\r\n");
+    ch->Echo("&CSkills/Spells for which there are no help files:\r\n\r\n");
 
-  for ( sn = 0; sn < TopSN && SkillTable[sn] != nullptr; sn++ )
+    for (sn = 0; sn < TopSN && SkillTable[sn] != nullptr; sn++)
     {
-      const Skill *skill = SkillTable[sn];
-      
-      if( skill == nullptr || !GetHelpFile(ch, skill->Name))
-        {
-          ch->Echo("&W%-20s", skill->Name.c_str());
+        const Skill *skill = SkillTable[sn];
 
-          if ( ++col % NUM_COLUMNS == 0 )
+        if (skill == nullptr || !GetHelpFile(ch, skill->Name))
+        {
+            ch->Echo("&W%-20s", skill->Name.c_str());
+
+            if (++col % NUM_COLUMNS == 0)
             {
-              ch->Echo("\r\n");
+                ch->Echo("\r\n");
             }
         }
     }
 
-  ch->Echo("\r\n");
+    ch->Echo("\r\n");
 }
 
 static void ShowMissingHelpsForAreas(const Character *ch)
 {
-  int col = 0;
-  const int NUM_COLUMNS = 2;
+    int col = 0;
+    const int NUM_COLUMNS = 2;
 
-  ch->Echo("&GAreas for which there are no help files:\r\n\r\n");
+    ch->Echo("&GAreas for which there are no help files:\r\n\r\n");
 
-  for (const Area *tArea = FirstArea; tArea;tArea = tArea->Next)
+    for (auto tArea = FirstArea; tArea; tArea = tArea->Next)
     {
-      if(!GetHelpFile(ch, tArea->Name) )
+        if (!GetHelpFile(ch, tArea->Name))
         {
-          ch->Echo("&W%-35s", tArea->Name.c_str());
+            ch->Echo("&W%-35s", tArea->Name.c_str());
 
-          if ( ++col % NUM_COLUMNS == 0 )
+            if (++col % NUM_COLUMNS == 0)
             {
-              ch->Echo("\r\n");
+                ch->Echo("\r\n");
             }
         }
     }
 
-  ch->Echo("\r\n");
+    ch->Echo("\r\n");
 }

@@ -83,7 +83,7 @@ public:
   
   std::shared_ptr<Room> Next;
   std::shared_ptr<Room> NextSort;
-  class Area *Area = nullptr;
+  std::shared_ptr<class Area> Area;
   std::string Name;
   std::string Description;
   vnum_t Vnum = INVALID_VNUM;

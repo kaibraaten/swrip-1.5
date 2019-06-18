@@ -2401,7 +2401,7 @@ void RemoveTimer(Character *ch, short type)
     }
 }
 
-bool InSoftRange(const Character *ch, const Area *tarea)
+bool InSoftRange(const Character *ch, std::shared_ptr<Area> tarea)
 {
     if (IsImmortal(ch))
         return true;
@@ -2413,7 +2413,7 @@ bool InSoftRange(const Character *ch, const Area *tarea)
         return false;
 }
 
-bool InHardRange(const Character *ch, const Area *tarea)
+bool InHardRange(const Character *ch, std::shared_ptr<Area> tarea)
 {
     if (IsImmortal(ch))
         return true;
@@ -2685,7 +2685,7 @@ bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> des
 /*
  * Add gold to an area's economy                                -Thoric
  */
-void BoostEconomy(Area *tarea, int gold)
+void BoostEconomy(std::shared_ptr<Area> tarea, int gold)
 {
     while (gold >= 1000000000)
     {
@@ -2705,7 +2705,7 @@ void BoostEconomy(Area *tarea, int gold)
 /*
  * Take gold from an area's economy                             -Thoric
  */
-void LowerEconomy(Area *tarea, int gold)
+void LowerEconomy(std::shared_ptr<Area> tarea, int gold)
 {
     while (gold >= 1000000000)
     {
@@ -2725,7 +2725,7 @@ void LowerEconomy(Area *tarea, int gold)
 /*
  * Check to see if economy has at least this much gold             -Thoric
  */
-bool EconomyHas(const Area *tarea, int gold)
+bool EconomyHas(std::shared_ptr<Area> tarea, int gold)
 {
     int hasgold = ((tarea->HighEconomy > 0) ? 1 : 0) * 1000000000
         + tarea->LowEconomy;
@@ -2748,7 +2748,7 @@ void EconomizeMobileGold(Character *mob)
     /* make sure it isn't way too much */
     mob->Gold = umin(mob->Gold, mob->TopLevel * mob->TopLevel * 400);
 
-    Area *tarea = mob->InRoom->Area;
+    auto tarea = mob->InRoom->Area;
     long gold = ((tarea->HighEconomy > 0) ? 1 : 0) * 1000000000 + tarea->LowEconomy;
     mob->Gold = urange(0, mob->Gold, gold / 100);
 

@@ -45,7 +45,7 @@ void do_minvoke(Character *ch, std::string arg)
 
     if (GetTrustLevel(ch) < LEVEL_CREATOR)
     {
-        Area *pArea = nullptr;
+        std::shared_ptr<Area> pArea;
 
         if (IsNpc(ch))
         {

@@ -6,85 +6,43 @@
 #include "log.hpp"
 #include "room.hpp"
 
-void do_reset( Character *ch, std::string argument )
+void do_reset(Character *ch, std::string argument)
 {
-  Area *pArea = NULL;
-  std::string arg;
-  std::string parg = OneArgument(argument, arg);
+    std::shared_ptr<Area> pArea;
+    std::string arg;
+    std::string parg = OneArgument(argument, arg);
 
-  if ( ch->SubState == SUB_REPEATCMD )
+    if (GetTrustLevel(ch) > LEVEL_GREATER)
     {
-      pArea = (Area*)ch->dest_buf;
+        char fname[80];
 
-      if ( pArea && pArea != ch->PCData->Build.Area && pArea != ch->InRoom->Area )
+        sprintf(fname, "%s.are", Capitalize(arg).c_str());
+
+        for (pArea = FirstBuild; pArea; pArea = pArea->Next)
         {
-          Area *tmp = nullptr;
-
-          for ( tmp = FirstBuild; tmp; tmp = tmp->Next )
-	    if ( tmp == pArea )
-              break;
-
-          if ( !tmp )
-            for ( tmp = FirstArea; tmp; tmp = tmp->Next )
-              if ( tmp == pArea )
-                break;
-
-          if ( !tmp )
+            if (!StrCmp(fname, pArea->Filename))
             {
-              ch->Echo("Your area pointer got lost. Reset mode off.\r\n");
-              Log->Bug("do_reset: %s's dest_buf points to invalid area", ch->Name.c_str());
-              ch->SubState = SUB_NONE;
-              FreeMemory(ch->dest_buf);
-              return;
+                argument = parg;
+                break;
             }
         }
 
-      if ( arg.empty() )
-        {
-          ch->Echo("Editing resets for area: %s\r\n", pArea->Name.c_str());
-          return;
-        }
+        if (!pArea)
+            pArea = ch->PCData->Build.Area;
 
-      if ( !StrCmp(arg, "done") || !StrCmp(arg, "off") )
-        {
-          ch->Echo("Reset mode off.\r\n");
-          ch->SubState = SUB_NONE;
-          FreeMemory(ch->dest_buf);
-          return;
-        }
+        if (!pArea)
+            pArea = ch->InRoom->Area;
     }
-
-  if ( !pArea && GetTrustLevel(ch) > LEVEL_GREATER )
+    else
     {
-      char fname[80];
-
-      sprintf(fname, "%s.are", Capitalize(arg).c_str());
-
-      for ( pArea = FirstBuild; pArea; pArea = pArea->Next )
-	{
-	  if ( !StrCmp(fname, pArea->Filename) )
-	    {
-	      argument = parg;
-	      break;
-	    }
-	}
-
-      if ( !pArea )
         pArea = ch->PCData->Build.Area;
-
-      if ( !pArea )
-        pArea = ch->InRoom->Area;
     }
-  else
+
+    if (!pArea)
     {
-      pArea = ch->PCData->Build.Area;
+        ch->Echo("You do not have an assigned area.\r\n");
+        return;
     }
 
-  if ( !pArea )
-    {
-      ch->Echo("You do not have an assigned area.\r\n");
-      return;
-    }
-
-  EditReset(ch, argument, pArea, NULL);
+    EditReset(ch, argument, pArea, NULL);
 }

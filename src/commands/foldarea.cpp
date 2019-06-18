@@ -4,48 +4,47 @@
 #include "area.hpp"
 #include "room.hpp"
 
-void do_foldarea( Character *ch, std::string argument )
+void do_foldarea(Character *ch, std::string argument)
 {
-  Area *tarea = NULL;
-  std::string arg;
-  bool fold_all_areas = false;
-  bool found = false;
+    std::string arg;
+    bool fold_all_areas = false;
+    bool found = false;
 
-  argument = OneArgument( argument, arg );
+    argument = OneArgument(argument, arg);
 
-  if ( arg.empty() )
+    if (arg.empty())
     {
-      ch->Echo( "Usage: foldarea <filename> [remproto]\r\n" );
-      return;
+        ch->Echo("Usage: foldarea <filename> [remproto]\r\n");
+        return;
     }
 
-  if( !StrCmp( arg, "this" ) )
+    if (!StrCmp(arg, "this"))
     {
-      arg = ch->InRoom->Area->Filename;
+        arg = ch->InRoom->Area->Filename;
     }
 
-  fold_all_areas = !StrCmp( arg, "all" );
+    fold_all_areas = !StrCmp(arg, "all");
 
-  for ( tarea = FirstArea; tarea; tarea = tarea->Next )
+    for (auto tarea = FirstArea; tarea; tarea = tarea->Next)
     {
-      if ( !StrCmp( tarea->Filename, arg ) || fold_all_areas )
+        if (!StrCmp(tarea->Filename, arg) || fold_all_areas)
         {
-          if (!StrCmp( argument, "remproto") )
-            FoldArea( tarea, tarea->Filename, true );
-          else
-            FoldArea( tarea, tarea->Filename, false );
+            if (!StrCmp(argument, "remproto"))
+                FoldArea(tarea, tarea->Filename, true);
+            else
+                FoldArea(tarea, tarea->Filename, false);
 
-	  found = true;
+            found = true;
         }
     }
 
-  if( found )
+    if (found)
     {
-      ch->Echo( "Done.\r\n" );
+        ch->Echo("Done.\r\n");
     }
-  else
+    else
     {
-      ch->Echo( "No such area exists.\r\n" );
+        ch->Echo("No such area exists.\r\n");
     }
 }
 

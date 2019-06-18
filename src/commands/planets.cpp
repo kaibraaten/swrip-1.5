@@ -5,48 +5,48 @@
 #include "area.hpp"
 #include "repos/planetrepository.hpp"
 
-static void ShowEntry( std::shared_ptr<Planet> planet, const Character *ch );
+static void ShowEntry(std::shared_ptr<Planet> planet, const Character *ch);
 
-void do_planets( Character *ch, std::string argument )
+void do_planets(Character *ch, std::string argument)
 {
-  for(auto planet : Planets)
+    for (auto planet : Planets)
     {
-      ShowEntry(planet, ch);
+        ShowEntry(planet, ch);
     }
 
-  if (Planets->Count() == 0)
+    if (Planets->Count() == 0)
     {
-      SetCharacterColor( AT_BLOOD, ch);
-      ch->Echo("There are no planets currently formed.\r\n");
+        SetCharacterColor(AT_BLOOD, ch);
+        ch->Echo("There are no planets currently formed.\r\n");
     }
-  else
+    else
     {
-      ch->Echo("&g--------------------------------------------------------------------------------&w\r\n" );
+        ch->Echo("&g--------------------------------------------------------------------------------&w\r\n");
     }
 }
 
-static void ShowEntry( std::shared_ptr<Planet> planet, const Character *ch )
+static void ShowEntry(std::shared_ptr<Planet> planet, const Character *ch)
 {
-  ch->Echo("&g--------------------------------------------------------------------------------&w\r\n" );
-  ch->Echo("&wPlanet: &G%-15s   &wGoverned By: &G%s %s\r\n",
-           planet->Name.c_str(),
-           planet->GovernedBy ? planet->GovernedBy->Name.c_str() : "",
-           planet->Flags.test( Flag::Planet::NoCapture ) ? "(permanent)" : "" );
-  ch->Echo("&WValue: &O%-10ld&W/&O%-10ld   ",
-           GetTaxes(planet) , planet->BaseValue);
-  ch->Echo("&WPopulation: &O%-5d   &W Pop Support: &R%.1f\r\n",
-           planet->Population , planet->PopularSupport );
+    ch->Echo("&g--------------------------------------------------------------------------------&w\r\n");
+    ch->Echo("&wPlanet: &G%-15s   &wGoverned By: &G%s %s\r\n",
+        planet->Name.c_str(),
+        planet->GovernedBy ? planet->GovernedBy->Name.c_str() : "",
+        planet->Flags.test(Flag::Planet::NoCapture) ? "(permanent)" : "");
+    ch->Echo("&WValue: &O%-10ld&W/&O%-10ld   ",
+        GetTaxes(planet), planet->BaseValue);
+    ch->Echo("&WPopulation: &O%-5d   &W Pop Support: &R%.1f\r\n",
+        planet->Population, planet->PopularSupport);
 
-  if ( IsImmortal(ch) )
+    if (IsImmortal(ch))
     {
-      ch->Echo("&WAreas: &G");
+        ch->Echo("&WAreas: &G");
 
-      for(const Area *area : planet->Areas())
-	{
-          ch->Echo("%s, ", area->Filename.c_str() );
-	}
+        for (auto area : planet->Areas())
+        {
+            ch->Echo("%s, ", area->Filename.c_str());
+        }
 
-      ch->Echo("\r\n" );
+        ch->Echo("\r\n");
     }
 }
 

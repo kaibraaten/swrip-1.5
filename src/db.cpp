@@ -704,11 +704,9 @@ void AddCharacter(Character *ch)
  * Go through all areas, and set up initial economy based on mob
  * levels and gold
  */
-static void InitializeEconomy(void)
+static void InitializeEconomy()
 {
-    Area *tarea;
-
-    for (tarea = FirstArea; tarea; tarea = tarea->Next)
+    for (auto tarea = FirstArea; tarea; tarea = tarea->Next)
     {
         std::shared_ptr<ProtoMobile> mob;
         int idx = 0, gold = 0, rng = 0;
@@ -1582,7 +1580,7 @@ static void LoadBuildList()
                         continue;
                     }
 
-                    Area *pArea = new Area();
+                    auto pArea = std::make_shared<Area>();
                     sprintf(buf, "%s.are", filename.c_str());
                     pArea->Author = filename;
                     pArea->Filename = buf;
@@ -1627,8 +1625,7 @@ static void LoadBuildList()
 void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
     const std::string &loadst, const std::string &notloadst)
 {
-    const Area *pArea = NULL;
-    const Area *first_sort = NULL;
+    std::shared_ptr<Area> first_sort;
     int count = 0;
     int loaded = 0;
 
@@ -1639,7 +1636,7 @@ void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool sh
     else
         first_sort = FirstASort;
 
-    for (pArea = first_sort; pArea; pArea = pArea->NextSort)
+    for (auto pArea = first_sort; pArea; pArea = pArea->NextSort)
     {
         if (IsBitSet(pArea->Status, AREA_DELETED))
             continue;

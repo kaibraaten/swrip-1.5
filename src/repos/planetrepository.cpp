@@ -13,152 +13,152 @@ std::shared_ptr<PlanetRepository> Planets;
 class LuaPlanetRepository : public PlanetRepository
 {
 public:
-  void Load() override;
-  void Save() const override;
-  void Save(std::shared_ptr<Planet> planet) const override;
-  std::shared_ptr<Planet> FindByName(const std::string &name) const override;
+    void Load() override;
+    void Save() const override;
+    void Save(std::shared_ptr<Planet> planet) const override;
+    std::shared_ptr<Planet> FindByName(const std::string &name) const override;
 
 private:
-  static void LoadPlanetAreas( lua_State *L, std::shared_ptr<Planet> planet );
-  static int L_PlanetEntry( lua_State *L );
-  static void LoadPlanet( const std::string &filePath, void *userData );
-  static void LuaPushAreas( lua_State *L, std::shared_ptr<Planet> planet );
-  static void PushPlanet( lua_State *L, const void *userData );
+    static void LoadPlanetAreas(lua_State *L, std::shared_ptr<Planet> planet);
+    static int L_PlanetEntry(lua_State *L);
+    static void LoadPlanet(const std::string &filePath, void *userData);
+    static void LuaPushAreas(lua_State *L, std::shared_ptr<Planet> planet);
+    static void PushPlanet(lua_State *L, const void *userData);
 };
 
 void LuaPlanetRepository::Save() const
 {
-  for(auto planet : Entities())
+    for (auto planet : Entities())
     {
-      Save(planet);
+        Save(planet);
     }
 }
 
 void LuaPlanetRepository::Save(std::shared_ptr<Planet> planet) const
 {
-  LuaSaveDataFile( GetPlanetFilename( planet ), PushPlanet, "planet", &planet );
+    LuaSaveDataFile(GetPlanetFilename(planet), PushPlanet, "planet", &planet);
 }
 
 void LuaPlanetRepository::Load()
 {
-  ForEachLuaFileInDir( PLANET_DIR, LoadPlanet, NULL );
+    ForEachLuaFileInDir(PLANET_DIR, LoadPlanet, NULL);
 }
 
 std::shared_ptr<Planet> LuaPlanetRepository::FindByName(const std::string &name) const
 {
-  return Find([name](const auto &planet){ return StrCmp(name, planet->Name) == 0; });
+    return Find([name](const auto &planet) { return StrCmp(name, planet->Name) == 0; });
 }
 
-void LuaPlanetRepository::LoadPlanetAreas( lua_State *L, std::shared_ptr<Planet> planet )
+void LuaPlanetRepository::LoadPlanetAreas(lua_State *L, std::shared_ptr<Planet> planet)
 {
-  int idx = lua_gettop( L );
-  lua_getfield( L, idx, "Areas" );
+    int idx = lua_gettop(L);
+    lua_getfield(L, idx, "Areas");
 
-  if( !lua_isnil( L, ++idx ) )
+    if (!lua_isnil(L, ++idx))
     {
-      lua_pushnil( L );
+        lua_pushnil(L);
 
-      while( lua_next( L, -2 ) )
+        while (lua_next(L, -2))
         {
-          Area *area = GetArea( lua_tostring( L, -1 ) );
+            auto area = GetArea(lua_tostring(L, -1));
 
-          if( area )
+            if (area)
             {
-              planet->Add(area);
-              area->Planet = planet;
+                planet->Add(area);
+                area->Planet = planet;
             }
 
-          lua_pop( L, 1 );
+            lua_pop(L, 1);
         }
     }
 
-  lua_pop( L, 1 );
+    lua_pop(L, 1);
 }
 
-int LuaPlanetRepository::L_PlanetEntry( lua_State *L )
+int LuaPlanetRepository::L_PlanetEntry(lua_State *L)
 {
-  std::shared_ptr<Planet> planet = std::make_shared<Planet>();
+    std::shared_ptr<Planet> planet = std::make_shared<Planet>();
 
-  LuaGetfieldString( L, "Name", &planet->Name );
-  LuaGetfieldLong( L, "BaseValue", &planet->BaseValue );
-  LuaGetfieldDouble( L, "PopulationSupport", &planet->PopularSupport );
-  LuaGetfieldString( L, "Spaceobject",
-                     [planet](const std::string &name)
-                     {
-                       planet->Spaceobject = GetSpaceobject( name );
-                     });
-  LuaGetfieldString( L, "GovernedBy",
-                     [planet](const std::string &name)
-                     {
-                       planet->GovernedBy = GetClan( name );
-                     });
-
-  planet->Flags = LuaLoadFlags( L, "Flags" ).to_ulong();
-  LoadPlanetAreas( L, planet );
-
-  Planets->Add(planet);
-  return 0;
-}
-
-void LuaPlanetRepository::LoadPlanet( const std::string &filePath, void *userData )
-{
-  LuaLoadDataFile( filePath, L_PlanetEntry, "PlanetEntry" );
-}
-
-void LuaPlanetRepository::LuaPushAreas( lua_State *L, std::shared_ptr<Planet> planet )
-{
-  if( !planet->Areas().empty() )
+    LuaGetfieldString(L, "Name", &planet->Name);
+    LuaGetfieldLong(L, "BaseValue", &planet->BaseValue);
+    LuaGetfieldDouble(L, "PopulationSupport", &planet->PopularSupport);
+    LuaGetfieldString(L, "Spaceobject",
+        [planet](const std::string &name)
     {
-      int idx = 0;
-      lua_pushstring( L, "Areas" );
-      lua_newtable( L );
+        planet->Spaceobject = GetSpaceobject(name);
+    });
+    LuaGetfieldString(L, "GovernedBy",
+        [planet](const std::string &name)
+    {
+        planet->GovernedBy = GetClan(name);
+    });
 
-      for(const Area *area : planet->Areas())
+    planet->Flags = LuaLoadFlags(L, "Flags").to_ulong();
+    LoadPlanetAreas(L, planet);
+
+    Planets->Add(planet);
+    return 0;
+}
+
+void LuaPlanetRepository::LoadPlanet(const std::string &filePath, void *userData)
+{
+    LuaLoadDataFile(filePath, L_PlanetEntry, "PlanetEntry");
+}
+
+void LuaPlanetRepository::LuaPushAreas(lua_State *L, std::shared_ptr<Planet> planet)
+{
+    if (!planet->Areas().empty())
+    {
+        int idx = 0;
+        lua_pushstring(L, "Areas");
+        lua_newtable(L);
+
+        for (auto area : planet->Areas())
         {
-          lua_pushinteger( L, ++idx );
-          lua_pushstring( L, area->Filename.c_str() );
-          lua_settable( L, -3 );
+            lua_pushinteger(L, ++idx);
+            lua_pushstring(L, area->Filename.c_str());
+            lua_settable(L, -3);
         }
 
-      lua_settable( L, -3 );
+        lua_settable(L, -3);
     }
 }
 
-void LuaPlanetRepository::PushPlanet( lua_State *L, const void *userData )
+void LuaPlanetRepository::PushPlanet(lua_State *L, const void *userData)
 {
-  std::shared_ptr<Planet> planet = *static_cast<const std::shared_ptr<Planet>*>(userData);
-  static int idx = 0;
-  lua_pushinteger( L, ++idx );
-  lua_newtable( L );
+    std::shared_ptr<Planet> planet = *static_cast<const std::shared_ptr<Planet>*>(userData);
+    static int idx = 0;
+    lua_pushinteger(L, ++idx);
+    lua_newtable(L);
 
-  LuaSetfieldString( L, "Name", planet->Name );
-  LuaSetfieldNumber( L, "BaseValue", planet->BaseValue );
-  LuaSetfieldNumber( L, "PopulationSupport", planet->PopularSupport );
+    LuaSetfieldString(L, "Name", planet->Name);
+    LuaSetfieldNumber(L, "BaseValue", planet->BaseValue);
+    LuaSetfieldNumber(L, "PopulationSupport", planet->PopularSupport);
 
-  if( planet->Spaceobject )
+    if (planet->Spaceobject)
     {
-      LuaSetfieldString( L, "Spaceobject", planet->Spaceobject->Name );
+        LuaSetfieldString(L, "Spaceobject", planet->Spaceobject->Name);
     }
 
-  if( planet->GovernedBy )
+    if (planet->GovernedBy)
     {
-      LuaSetfieldString( L, "GovernedBy", planet->GovernedBy->Name );
+        LuaSetfieldString(L, "GovernedBy", planet->GovernedBy->Name);
     }
 
-  LuaPushFlags( L, planet->Flags, PlanetFlags, "Flags" );
-  LuaPushAreas( L, planet );
+    LuaPushFlags(L, planet->Flags, PlanetFlags, "Flags");
+    LuaPushAreas(L, planet);
 
-  lua_setglobal( L, "planet" );
+    lua_setglobal(L, "planet");
 }
 
 ////////////////////////////////////////////////////////////////
 
 std::shared_ptr<PlanetRepository> NewPlanetRepository()
 {
-  return std::make_shared<LuaPlanetRepository>();
+    return std::make_shared<LuaPlanetRepository>();
 }
 
-std::string GetPlanetFilename( std::shared_ptr<Planet> planet )
+std::string GetPlanetFilename(std::shared_ptr<Planet> planet)
 {
-  return FormatString( "%s%s", PLANET_DIR, ConvertToLuaFilename( planet->Name ).c_str() );
+    return FormatString("%s%s", PLANET_DIR, ConvertToLuaFilename(planet->Name).c_str());
 }

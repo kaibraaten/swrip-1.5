@@ -1144,14 +1144,14 @@ bool CanModifyObject(const Character *ch, const Object *obj);
 bool CanModifyCharacter(const Character *ch, const Character *mob);
 
 bool CanMedit(const Character *ch, std::shared_ptr<ProtoMobile> mob);
-void FreeReset(Area *are, Reset *res);
+void FreeReset(std::shared_ptr<Area> are, Reset *res);
 std::shared_ptr<ExtraDescription> SetRExtra(std::shared_ptr<Room> room, const std::string &keywords);
 bool DelRExtra(std::shared_ptr<Room> room, const std::string &keywords);
 std::shared_ptr<ExtraDescription> SetOExtra(Object *obj, const std::string &keywords);
 bool DelOExtra(Object *obj, const std::string &keywords);
 std::shared_ptr<ExtraDescription> SetOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keywords);
 bool DelOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keywords);
-Reset *ParseReset(const Area *tarea, std::string argument, const Character *ch);
+Reset *ParseReset(std::shared_ptr<Area> tarea, std::string argument, const Character *ch);
 
 /* fight.c */
 ch_ret HitOnce(Character *ch, Character *victim, int dt);
@@ -1266,18 +1266,18 @@ std::shared_ptr<Timer> GetTimerPointer(const Character *ch, short type);
 short GetTimer(const Character *ch, short type);
 void ExtractTimer(Character *ch, std::shared_ptr<Timer> timer);
 void RemoveTimer(Character *ch, short type);
-bool InSoftRange(const Character *ch, const Area *tarea);
-bool InHardRange(const Character *ch, const Area *tarea);
+bool InSoftRange(const Character *ch, std::shared_ptr<Area> tarea);
+bool InHardRange(const Character *ch, std::shared_ptr<Area> tarea);
 bool Chance(const Character *ch, short percent);
 Object *CopyObject(const Object *obj);
 void SplitGroupedObject(Object *obj, int num);
 void SeparateOneObjectFromGroup(Object *obj);
 bool EmptyObjectContents(Object *obj, Object *destobj, std::shared_ptr<Room> destroom);
 Object *FindObject(Character *ch, std::string argument, bool carryonly);
-void BoostEconomy(Area *tarea, int gold);
-void LowerEconomy(Area *tarea, int gold);
+void BoostEconomy(std::shared_ptr<Area> tarea, int gold);
+void LowerEconomy(std::shared_ptr<Area> tarea, int gold);
 void EconomizeMobileGold(Character *mob);
-bool EconomyHas(const Area *tarea, int gold);
+bool EconomyHas(std::shared_ptr<Area> tarea, int gold);
 int CountCharactersOnObject(const Object *obj);
 
 /* interp.c */

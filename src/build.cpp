@@ -41,7 +41,7 @@
 bool CanModifyRoom(const Character *ch, std::shared_ptr<Room> room)
 {
     vnum_t vnum = room->Vnum;
-    Area *pArea;
+    std::shared_ptr<Area> pArea;
 
     if (IsNpc(ch))
         return false;
@@ -65,7 +65,7 @@ bool CanModifyRoom(const Character *ch, std::shared_ptr<Room> room)
 bool CanModifyObject(const Character *ch, const Object *obj)
 {
     vnum_t vnum = obj->Prototype->Vnum;
-    Area *pArea;
+    std::shared_ptr<Area> pArea;
 
     if (IsNpc(ch))
         return false;
@@ -89,7 +89,7 @@ bool CanModifyObject(const Character *ch, const Object *obj)
 bool CanModifyCharacter(const Character *ch, const Character *mob)
 {
     vnum_t vnum = INVALID_VNUM;
-    Area *pArea = NULL;
+    std::shared_ptr<Area> pArea;
 
     if (mob == ch)
     {
@@ -141,7 +141,7 @@ bool CanModifyCharacter(const Character *ch, const Character *mob)
 bool CanMedit(const Character *ch, std::shared_ptr<ProtoMobile> mob)
 {
     vnum_t vnum = mob->Vnum;
-    Area *pArea = NULL;
+    std::shared_ptr<Area> pArea;
 
     if (IsNpc(ch))
     {
@@ -169,7 +169,7 @@ bool CanMedit(const Character *ch, std::shared_ptr<ProtoMobile> mob)
     return false;
 }
 
-void FreeReset(Area *are, Reset *res)
+void FreeReset(std::shared_ptr<Area> are, Reset *res)
 {
     UNLINK(res, are->FirstReset, are->LastReset, Next, Previous);
     delete res;
@@ -302,7 +302,7 @@ bool DelOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keyword
     return true;
 }
 
-void FoldArea(Area *tarea, const std::string &filename, bool install)
+void FoldArea(std::shared_ptr<Area> tarea, const std::string &filename, bool install)
 {
     const Reset *treset = NULL;
     std::shared_ptr<Room> room;
@@ -791,49 +791,28 @@ void FoldArea(Area *tarea, const std::string &filename, bool install)
     fclose(fpout);
 }
 
-void WriteAreaList(void)
+void WriteAreaList()
 {
-    Area *tarea = NULL;
     FILE *fpout = fopen(AREA_DIR AREA_LIST, "w");
 
-    if (!fpout)
+    if (fpout)
+    {
+        for (auto tarea = FirstArea; tarea; tarea = tarea->Next)
+            fprintf(fpout, "%s\n", tarea->Filename.c_str());
+
+        fprintf(fpout, "$\n");
+        fclose(fpout);
+    }
+    else
     {
         Log->Bug("%s: FATAL: cannot open area.lst for writing!\r\n", __FUNCTION__);
-        return;
-    }
-
-    for (tarea = FirstArea; tarea; tarea = tarea->Next)
-        fprintf(fpout, "%s\n", tarea->Filename.c_str());
-
-    fprintf(fpout, "$\n");
-    fclose(fpout);
-}
-
-void AddResetNested(Area *tarea, Object *root)
-{
-    for (Object *obj : root->Objects())
-    {
-        int limit = obj->Prototype->Count;
-
-        if (limit < 1)
-        {
-            limit = 1;
-        }
-
-        AddReset(tarea, 'P', 1, obj->Prototype->Vnum, limit,
-            obj->InObject->Prototype->Vnum);
-
-        if (!obj->Objects().empty())
-        {
-            AddResetNested(tarea, obj);
-        }
     }
 }
 
 /*
  * Parse a reset command string into a reset_data structure
  */
-Reset *ParseReset(const Area *tarea, std::string argument, const Character *ch)
+Reset *ParseReset(std::shared_ptr<Area> tarea, std::string argument, const Character *ch)
 {
     std::string arg1;
     std::string arg2;

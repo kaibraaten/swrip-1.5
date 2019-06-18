@@ -4,7 +4,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 
-static vnum_t GetNewObjectVnum(const Area *area, const std::string &arg)
+static vnum_t GetNewObjectVnum(std::shared_ptr<Area> area, const std::string &arg)
 {
     vnum_t vnum = INVALID_VNUM;
 
@@ -91,7 +91,7 @@ void do_ocreate(Character *ch, std::string argument)
 
     if (GetTrustLevel(ch) <= LEVEL_IMMORTAL)
     {
-        Area *pArea = nullptr;
+        std::shared_ptr<Area> pArea;
 
         if (!ch->PCData || !(pArea = ch->PCData->Build.Area))
         {

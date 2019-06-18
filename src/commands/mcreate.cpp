@@ -53,7 +53,7 @@ void do_mcreate(Character *ch, std::string argument)
 
     if (GetTrustLevel(ch) <= LEVEL_IMMORTAL)
     {
-        Area *pArea;
+        std::shared_ptr<Area> pArea;
 
         if (!ch->PCData || !(pArea = ch->PCData->Build.Area))
         {

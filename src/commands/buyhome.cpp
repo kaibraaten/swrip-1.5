@@ -18,7 +18,7 @@ void do_buyhome(Character *ch, std::string argument)
 
     auto room = ch->InRoom;
 
-    for (const Area *pArea = FirstBSort; pArea; pArea = pArea->NextSort)
+    for (auto pArea = FirstBSort; pArea; pArea = pArea->NextSort)
     {
         if (room->Area == pArea)
         {

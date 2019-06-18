@@ -23,34 +23,34 @@
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];
 
-Area *FirstArea = NULL;
-Area *LastArea = NULL;
-Area *FirstBuild = NULL;
-Area *LastBuild = NULL;
-Area *FirstASort = NULL;
-Area *LastASort = NULL;
-Area *FirstBSort = NULL;
-Area *LastBSort = NULL;
+std::shared_ptr<Area> FirstArea;
+std::shared_ptr<Area> LastArea;
+std::shared_ptr<Area> FirstBuild;
+std::shared_ptr<Area> LastBuild;
+std::shared_ptr<Area> FirstASort;
+std::shared_ptr<Area> LastASort;
+std::shared_ptr<Area> FirstBSort;
+std::shared_ptr<Area> LastBSort;
 
 static void LoadArea(FILE *fp);
-static void LoadAuthor(Area *tarea, FILE *fp);
-static void LoadEconomy(Area *tarea, FILE *fp);
-static void LoadResetMessage(Area *tarea, FILE *fp); /* Rennard */
-static void LoadFlags(Area *tarea, FILE *fp);
-static void LoadMobiles(Area *tarea, FILE *fp);
-static void LoadObjects(Area *tarea, FILE *fp);
-static void LoadResets(Area *tarea, FILE *fp);
-static void LoadRooms(Area *tarea, FILE *fp);
-static void LoadShops(Area *tarea, FILE *fp);
-static void LoadRepairs(Area *tarea, FILE *fp);
-static void LoadSpecials(Area *tarea, FILE *fp);
-static void LoadRanges(Area *tarea, FILE *fp);
+static void LoadAuthor(std::shared_ptr<Area> tarea, FILE *fp);
+static void LoadEconomy(std::shared_ptr<Area> tarea, FILE *fp);
+static void LoadResetMessage(std::shared_ptr<Area> tarea, FILE *fp); /* Rennard */
+static void LoadFlags(std::shared_ptr<Area> tarea, FILE *fp);
+static void LoadMobiles(std::shared_ptr<Area> tarea, FILE *fp);
+static void LoadObjects(std::shared_ptr<Area> tarea, FILE *fp);
+static void LoadResets(std::shared_ptr<Area> tarea, FILE *fp);
+static void LoadRooms(std::shared_ptr<Area> tarea, FILE *fp);
+static void LoadShops(std::shared_ptr<Area> tarea, FILE *fp);
+static void LoadRepairs(std::shared_ptr<Area> tarea, FILE *fp);
+static void LoadSpecials(std::shared_ptr<Area> tarea, FILE *fp);
+static void LoadRanges(std::shared_ptr<Area> tarea, FILE *fp);
 static int MudProgNameToType(const char* name);
 static void MobProgReadPrograms(FILE* fp, std::shared_ptr<ProtoMobile> pMobIndex);
 static void ObjProgReadPrograms(FILE* fp, std::shared_ptr<ProtoObject> pObjIndex);
 static void RoomProgReadPrograms(FILE* fp, std::shared_ptr<Room> pRoomIndex);
 
-void LoadAreaFile(Area *tarea, const std::string &filename)
+void LoadAreaFile(std::shared_ptr<Area> tarea, const std::string &filename)
 {
     char buf[MAX_STRING_LENGTH];
 
@@ -151,7 +151,7 @@ void LoadAreaFile(Area *tarea, const std::string &filename)
     }
 }
 
-void FixAreaExits(Area *tarea)
+void FixAreaExits(std::shared_ptr<Area> tarea)
 {
     for (vnum_t rnum = tarea->VnumRanges.Room.First; rnum <= tarea->VnumRanges.Room.Last; rnum++)
     {
@@ -203,10 +203,10 @@ void FixAreaExits(Area *tarea)
     }
 }
 
-void SortArea(Area *pArea, bool proto)
+void SortArea(std::shared_ptr<Area> pArea, bool proto)
 {
-    Area *area = NULL;
-    Area *first_sort, *last_sort;
+    std::shared_ptr<Area> area;
+    std::shared_ptr<Area> first_sort, last_sort;
     bool found = false;
 
     if (!pArea)
@@ -283,7 +283,7 @@ void SortArea(Area *pArea, bool proto)
 
 static void LoadArea(FILE *fp)
 {
-    Area *pArea = new Area();
+    auto pArea = std::make_shared<Area>();
 
     pArea->Name = ReadStringToTilde(fp, Log, fBootDb);
     pArea->Author = "unknown";
@@ -296,7 +296,7 @@ static void LoadArea(FILE *fp)
     top_area++;
 }
 
-static void LoadAuthor(Area *tarea, FILE *fp)
+static void LoadAuthor(std::shared_ptr<Area> tarea, FILE *fp)
 {
     if (!tarea)
     {
@@ -316,7 +316,7 @@ static void LoadAuthor(Area *tarea, FILE *fp)
     tarea->Author = ReadStringToTilde(fp, Log, fBootDb);
 }
 
-static void LoadEconomy(Area *tarea, FILE *fp)
+static void LoadEconomy(std::shared_ptr<Area> tarea, FILE *fp)
 {
     if (!tarea)
     {
@@ -337,7 +337,7 @@ static void LoadEconomy(Area *tarea, FILE *fp)
     tarea->LowEconomy = ReadInt(fp, Log, fBootDb);
 }
 
-static void LoadResetMessage(Area *tarea, FILE *fp)
+static void LoadResetMessage(std::shared_ptr<Area> tarea, FILE *fp)
 {
     if (!tarea)
     {
@@ -357,7 +357,7 @@ static void LoadResetMessage(Area *tarea, FILE *fp)
     tarea->ResetMessage = ReadStringToTilde(fp, Log, fBootDb);
 }
 
-static void LoadFlags(Area *tarea, FILE *fp)
+static void LoadFlags(std::shared_ptr<Area> tarea, FILE *fp)
 {
     const char *ln = NULL;
     int x1 = 0, x2 = 0;
@@ -386,7 +386,7 @@ static void LoadFlags(Area *tarea, FILE *fp)
         tarea->Age = x2;
 }
 
-static void LoadMobiles(Area *tarea, FILE *fp)
+static void LoadMobiles(std::shared_ptr<Area> tarea, FILE *fp)
 {
     std::shared_ptr<ProtoMobile> pMobIndex;
     const char *ln = NULL;
@@ -597,7 +597,7 @@ static void LoadMobiles(Area *tarea, FILE *fp)
     }
 }
 
-static void LoadObjects(Area *tarea, FILE *fp)
+static void LoadObjects(std::shared_ptr<Area> tarea, FILE *fp)
 {
     if (!tarea)
     {
@@ -619,7 +619,7 @@ static void LoadObjects(Area *tarea, FILE *fp)
         std::shared_ptr<ProtoObject> pObjIndex;
         const char *ln = nullptr;
         int x1 = 0, x2 = 0, x3 = 0, x4 = 0, x5 = 0, x6 = 0;
-        char buf[MAX_STRING_LENGTH] = {'\0'};
+        char buf[MAX_STRING_LENGTH] = { '\0' };
         vnum_t vnum = INVALID_VNUM;
         int iHash = 0;
         bool tmpBootDb = false;
@@ -795,7 +795,7 @@ static void LoadObjects(Area *tarea, FILE *fp)
     }
 }
 
-static void LoadResets(Area *tarea, FILE *fp)
+static void LoadResets(std::shared_ptr<Area> tarea, FILE *fp)
 {
     /*bool not01 = false;*/
     int count = 0;
@@ -865,7 +865,7 @@ static void LoadResets(Area *tarea, FILE *fp)
     RenumberPutResets(tarea);
 }
 
-static void LoadRooms(Area *tarea, FILE *fp)
+static void LoadRooms(std::shared_ptr<Area> tarea, FILE *fp)
 {
     std::shared_ptr<Room> pRoomIndex;
     const char *ln = nullptr;
@@ -1059,7 +1059,7 @@ static void LoadRooms(Area *tarea, FILE *fp)
     }
 }
 
-static void LoadShops(Area *tarea, FILE *fp)
+static void LoadShops(std::shared_ptr<Area> tarea, FILE *fp)
 {
     for (; ; )
     {
@@ -1090,7 +1090,7 @@ static void LoadShops(Area *tarea, FILE *fp)
 /*
  * Load a repair shop section.                                  -Thoric
  */
-static void LoadRepairs(Area *tarea, FILE *fp)
+static void LoadRepairs(std::shared_ptr<Area> tarea, FILE *fp)
 {
     for (; ; )
     {
@@ -1118,7 +1118,7 @@ static void LoadRepairs(Area *tarea, FILE *fp)
 /*
  * Load spec proc declarations.
  */
-static void LoadSpecials(Area *tarea, FILE *fp)
+static void LoadSpecials(std::shared_ptr<Area> tarea, FILE *fp)
 {
     for (; ; )
     {
@@ -1171,7 +1171,7 @@ static void LoadSpecials(Area *tarea, FILE *fp)
 /*
  * Load soft / hard area ranges.
  */
-static void LoadRanges(Area *tarea, FILE *fp)
+static void LoadRanges(std::shared_ptr<Area> tarea, FILE *fp)
 {
     if (!tarea)
     {
@@ -1419,9 +1419,9 @@ static void RoomProgReadPrograms(FILE *fp, std::shared_ptr<Room> pRoomIndex)
     }
 }
 
-Area *GetArea(const std::string &name)
+std::shared_ptr<Area> GetArea(const std::string &name)
 {
-    Area *area = NULL;
+    std::shared_ptr<Area> area;
 
     for (area = FirstArea; area; area = area->Next)
     {
@@ -1437,38 +1437,35 @@ Area *GetArea(const std::string &name)
 /*
  * Repopulate areas periodically.
  */
-void AreaUpdate(void)
+void AreaUpdate()
 {
-    Area *pArea;
-
-    for (pArea = FirstArea; pArea; pArea = pArea->Next)
+    for (auto area = FirstArea; area; area = area->Next)
     {
-        Character *pch;
-        int reset_age = pArea->ResetFrequency ? pArea->ResetFrequency : 15;
+        int reset_age = area->ResetFrequency ? area->ResetFrequency : 15;
 
-        if ((reset_age == -1 && pArea->Age == -1)
-            || ++pArea->Age < (reset_age - 1))
-            continue;
+        if ((reset_age == -1 && area->Age == -1)
+            || ++area->Age < (reset_age - 1))
+            return;
 
         /*
          * Check for PC's.
          */
-        if (pArea->NumberOfPlayers > 0 && pArea->Age == (reset_age - 1))
+        if (area->NumberOfPlayers > 0 && area->Age == (reset_age - 1))
         {
             char buf[MAX_STRING_LENGTH];
 
             /* Rennard */
-            if (!pArea->ResetMessage.empty())
-                sprintf(buf, "%s\r\n", pArea->ResetMessage.c_str());
+            if (!area->ResetMessage.empty())
+                sprintf(buf, "%s\r\n", area->ResetMessage.c_str());
             else
                 strcpy(buf, "You hear some squeaking sounds...\r\n");
 
-            for (pch = FirstCharacter; pch; pch = pch->Next)
+            for (auto pch = FirstCharacter; pch; pch = pch->Next)
             {
                 if (!IsNpc(pch)
                     && IsAwake(pch)
                     && pch->InRoom
-                    &&   pch->InRoom->Area == pArea)
+                    && pch->InRoom->Area == area)
                 {
                     SetCharacterColor(AT_RESET, pch);
                     pch->Echo("%s", buf);
@@ -1480,21 +1477,21 @@ void AreaUpdate(void)
          * Check age and reset.
          * Note: Mud Academy resets every 3 minutes (not 15).
          */
-        if (pArea->NumberOfPlayers == 0 || pArea->Age >= reset_age)
+        if (area->NumberOfPlayers == 0 || area->Age >= reset_age)
         {
-            fprintf(stderr, "Resetting: %s\n", pArea->Filename.c_str());
-            ResetArea(pArea);
+            fprintf(stderr, "Resetting: %s\n", area->Filename.c_str());
+            ResetArea(area);
 
             if (reset_age == -1)
-                pArea->Age = -1;
+                area->Age = -1;
             else
-                pArea->Age = GetRandomNumberFromRange(0, reset_age / 5);
+                area->Age = GetRandomNumberFromRange(0, reset_age / 5);
 
             auto pRoomIndex = GetRoom(ROOM_VNUM_SCHOOL);
 
-            if (pRoomIndex != NULL && pArea == pRoomIndex->Area
-                && pArea->ResetFrequency == 0)
-                pArea->Age = 15 - 3;
+            if (pRoomIndex != NULL && area == pRoomIndex->Area
+                && area->ResetFrequency == 0)
+                area->Age = 15 - 3;
         }
     }
 }
@@ -1502,7 +1499,7 @@ void AreaUpdate(void)
 /*
  * This could have other applications too.. move if needed. -- Altrag
  */
-void CloseArea(Area *pArea)
+void CloseArea(std::shared_ptr<Area> pArea)
 {
     int icnt = 0;
     std::shared_ptr<Room> rid;
@@ -1745,15 +1742,12 @@ void CloseArea(Area *pArea)
 
     UNLINK(pArea, FirstBuild, LastBuild, Next, Previous);
     UNLINK(pArea, FirstASort, LastASort, NextSort, PreviousSort);
-    delete pArea;
 }
 
-void FreeArea(Area *are)
+void FreeArea(std::shared_ptr<Area> are)
 {
     while (are->FirstReset)
         FreeReset(are, are->FirstReset);
-
-    delete are;
 }
 
 void AssignAreaTo(Character *ch)
@@ -1770,15 +1764,14 @@ void AssignAreaTo(Character *ch)
         char buf[MAX_STRING_LENGTH];
         char buf2[MAX_STRING_LENGTH];
         char taf[1024];
-        Area *tmp = nullptr;
         bool created = false;
-        Area *tarea = ch->PCData->Build.Area;
+        std::shared_ptr<Area> tarea = ch->PCData->Build.Area;
 
         sprintf(taf, "%s.are", Capitalize(ch->Name).c_str());
 
         if (tarea == nullptr)
         {
-            for (tmp = FirstBuild; tmp; tmp = tmp->Next)
+            for (auto tmp = FirstBuild; tmp; tmp = tmp->Next)
             {
                 if (!StrCmp(taf, tmp->Filename))
                 {
@@ -1792,7 +1785,7 @@ void AssignAreaTo(Character *ch)
         {
             sprintf(buf, "Creating area entry for %s", ch->Name.c_str());
             Log->LogStringPlus(buf, LOG_NORMAL, ch->TopLevel);
-            tarea = new Area();
+            tarea = std::make_shared<Area>();
             LINK(tarea, FirstBuild, LastBuild, Next, Previous);
             sprintf(buf, "{PROTO} %s's area in progress", ch->Name.c_str());
             tarea->Name = buf;
@@ -1823,18 +1816,16 @@ void AssignAreaTo(Character *ch)
     }
 }
 
-void CleanResets(Area *tarea)
+void CleanResets(std::shared_ptr<Area> tarea)
 {
-    Reset *pReset, *pReset_next;
-
-    for (pReset = tarea->FirstReset; pReset; pReset = pReset_next)
+    for (Reset *pReset = tarea->FirstReset, *pReset_next = nullptr; pReset; pReset = pReset_next)
     {
         pReset_next = pReset->Next;
         delete pReset;
         --top_reset;
     }
 
-    tarea->FirstReset = NULL;
-    tarea->LastReset = NULL;
+    tarea->FirstReset = nullptr;
+    tarea->LastReset = nullptr;
 }
 

@@ -24,9 +24,9 @@ public:
     Planet();
     virtual ~Planet();
 
-    const std::list<Area*> &Areas() const;
-    void Add(Area *area);
-    void Remove(Area *area);
+    const std::list<std::shared_ptr<Area>> &Areas() const;
+    void Add(std::shared_ptr<Area> area);
+    void Remove(std::shared_ptr<Area> area);
 
     std::shared_ptr<class Spaceobject> Spaceobject;
     std::string Name;

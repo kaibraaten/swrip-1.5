@@ -4,63 +4,63 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 
-void do_savearea( Character *ch, std::string argument )
+void do_savearea(Character *ch, std::string argument)
 {
-  Area *tarea = NULL;
-  char filename[256];
+    std::shared_ptr<Area> tarea;
+    char filename[256];
 
-  if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_AVATAR || !ch->PCData
-       ||  ( argument.empty() && !ch->PCData->Build.Area) )
+    if (IsNpc(ch) || GetTrustLevel(ch) < LEVEL_AVATAR || !ch->PCData
+        || (argument.empty() && !ch->PCData->Build.Area))
     {
-      ch->Echo("You don't have an assigned area to save.\r\n");
-      return;
+        ch->Echo("You don't have an assigned area to save.\r\n");
+        return;
     }
 
-  if ( argument.empty() )
+    if (argument.empty())
     {
-      tarea = ch->PCData->Build.Area;
+        tarea = ch->PCData->Build.Area;
     }
-  else
+    else
     {
-      bool found = false;
+        bool found = false;
 
-      if ( GetTrustLevel( ch ) < LEVEL_GREATER )
+        if (GetTrustLevel(ch) < LEVEL_GREATER)
         {
-          ch->Echo("You can only save your own area.\r\n");
-          return;
+            ch->Echo("You can only save your own area.\r\n");
+            return;
         }
 
-      for ( found = false, tarea = FirstBuild; tarea; tarea = tarea->Next )
+        for (found = false, tarea = FirstBuild; tarea; tarea = tarea->Next)
         {
-          if ( !StrCmp( tarea->Filename, argument ) )
+            if (!StrCmp(tarea->Filename, argument))
             {
-              found = true;
-              break;
+                found = true;
+                break;
             }
         }
 
-      if ( !found )
+        if (!found)
         {
-          ch->Echo("Area not found.\r\n");
-          return;
+            ch->Echo("Area not found.\r\n");
+            return;
         }
     }
 
-  if ( !tarea )
+    if (!tarea)
     {
-      ch->Echo("No area to save.\r\n");
-      return;
+        ch->Echo("No area to save.\r\n");
+        return;
     }
 
-  /* Ensure not wiping out their area with save before load - Scryn 8/11 */
-  if ( !IsBitSet(tarea->Status, AREA_LOADED ) )
+    /* Ensure not wiping out their area with save before load - Scryn 8/11 */
+    if (!IsBitSet(tarea->Status, AREA_LOADED))
     {
-      ch->Echo("Your area is not loaded!\r\n");
-      return;
+        ch->Echo("Your area is not loaded!\r\n");
+        return;
     }
 
-  sprintf( filename, "%s%s", BUILD_DIR, tarea->Filename.c_str() );
-  FoldArea( tarea, filename, false );
-  ch->Echo("Done.\r\n");
+    sprintf(filename, "%s%s", BUILD_DIR, tarea->Filename.c_str());
+    FoldArea(tarea, filename, false);
+    ch->Echo("Done.\r\n");
 }
 

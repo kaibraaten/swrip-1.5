@@ -7,7 +7,6 @@
 
 void do_instaroom( Character *ch, std::string argument )
 {
-  Area *pArea = NULL;
   std::shared_ptr<Room> pRoom;
   bool dodoors = false;
   std::string arg;
@@ -26,7 +25,7 @@ void do_instaroom( Character *ch, std::string argument )
   else
     dodoors = true;
 
-  pArea = ch->PCData->Build.Area;
+  auto pArea = ch->PCData->Build.Area;
 
   if ( !(pRoom = FindRoom(ch, arg, NULL)) )
     {
