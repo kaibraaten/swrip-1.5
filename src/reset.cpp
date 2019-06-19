@@ -49,35 +49,34 @@
 #include "protomob.hpp"
 #include "exit.hpp"
 
-static bool IsRoomReset(const Reset *pReset, std::shared_ptr<Room> aRoom, std::shared_ptr<Area> pArea);
+static bool IsRoomReset(std::shared_ptr<Reset> pReset, std::shared_ptr<Room> aRoom, std::shared_ptr<Area> pArea);
 static void AddObjectReset(std::shared_ptr<Area> pArea, char cm, const Object *obj, int v2, int v3);
-static void DeleteReset(std::shared_ptr<Area> pArea, Reset *pReset);
-static Reset *FindReset(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, int num);
+static void DeleteReset(std::shared_ptr<Area> pArea, std::shared_ptr<Reset> pReset);
+static std::shared_ptr<Reset> FindReset(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, int num);
 static void ListResets(const Character *ch, std::shared_ptr<Area> pArea,
     std::shared_ptr<Room> pRoom, int start, int end);
-static Reset *FindObjectReset(const Character *ch, std::shared_ptr<Area> pArea,
+static std::shared_ptr<Reset> FindObjectReset(const Character *ch, std::shared_ptr<Area> pArea,
     std::shared_ptr<Room> pRoom, const std::string &name);
-static Reset *FindMobileReset(const Character *ch, std::shared_ptr<Area> pArea,
+static std::shared_ptr<Reset> FindMobileReset(const Character *ch, std::shared_ptr<Area> pArea,
     std::shared_ptr<Room> pRoom, const std::string &name);
 static int GenerateItemLevel(std::shared_ptr<Area> pArea, std::shared_ptr<ProtoObject> pObjIndex);
 
-static Reset *FindReset(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, int numb)
+static std::shared_ptr<Reset> FindReset(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, int numb)
 {
-    Reset *pReset = NULL;
     int num = 0;
 
-    for (pReset = pArea->FirstReset; pReset; pReset = pReset->Next)
+    for (auto pReset = pArea->FirstReset; pReset; pReset = pReset->Next)
         if (IsRoomReset(pReset, pRoom, pArea) && ++num >= numb)
             return pReset;
 
-    return NULL;
+    return nullptr;
 }
 
 /* This is one loopy function.  Ugh. -- Altrag */
-static bool IsRoomReset(const Reset *pReset, std::shared_ptr<Room> aRoom, std::shared_ptr<Area> pArea)
+static bool IsRoomReset(std::shared_ptr<Reset> pReset, std::shared_ptr<Room> aRoom, std::shared_ptr<Area> pArea)
 {
     std::shared_ptr<Room> pRoom;
-    const Reset *reset = NULL;
+    std::shared_ptr<Reset> reset = nullptr;
     int pr = 0;
 
     if (!aRoom)
@@ -245,14 +244,11 @@ std::shared_ptr<Room> FindRoom(const Character *ch, const std::string &arg, std:
     continue;                                   \
   } while(0)
 
-static void DeleteReset(std::shared_ptr<Area> pArea, Reset *pReset)
+static void DeleteReset(std::shared_ptr<Area> pArea, std::shared_ptr<Reset> pReset)
 {
-    Reset *reset = NULL;
-    Reset *reset_prev = NULL;
-
     if (pReset->Command == 'M')
     {
-        for (reset = pReset->Next; reset; reset = reset->Next)
+        for (std::shared_ptr<Reset> reset = pReset->Next, reset_prev; reset; reset = reset->Next)
         {
             /* Break when a new mob found */
             if (reset->Command == 'M')
@@ -277,7 +273,7 @@ static void DeleteReset(std::shared_ptr<Area> pArea, Reset *pReset)
     else if (pReset->Command == 'O' || pReset->Command == 'P' ||
         pReset->Command == 'G' || pReset->Command == 'E')
     {
-        for (reset = pReset->Next; reset; reset = reset->Next)
+        for (std::shared_ptr<Reset> reset = pReset->Next, reset_prev; reset; reset = reset->Next)
         {
             if (reset->Command == 'T' &&
                 (!reset->Arg3 || reset->Arg3 == pReset->Arg1))
@@ -327,14 +323,13 @@ static void DeleteReset(std::shared_ptr<Area> pArea, Reset *pReset)
     }
 
     UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-    delete pReset;
 }
 #undef DEL_RESET
 
-static Reset *FindObjectReset(const Character *ch, std::shared_ptr<Area> pArea,
+static std::shared_ptr<Reset> FindObjectReset(const Character *ch, std::shared_ptr<Area> pArea,
     std::shared_ptr<Room> pRoom, const std::string &name)
 {
-    Reset *reset = NULL;
+    std::shared_ptr<Reset> reset = nullptr;
 
     if (name.empty())
     {
@@ -409,10 +404,10 @@ static Reset *FindObjectReset(const Character *ch, std::shared_ptr<Area> pArea,
     return reset;
 }
 
-static Reset *FindMobileReset(const Character *ch, std::shared_ptr<Area> pArea,
+static std::shared_ptr<Reset> FindMobileReset(const Character *ch, std::shared_ptr<Area> pArea,
     std::shared_ptr<Room> pRoom, const std::string &name)
 {
-    Reset *reset = NULL;
+    std::shared_ptr<Reset> reset = nullptr;
 
     if (name.empty())
     {
@@ -483,8 +478,8 @@ static Reset *FindMobileReset(const Character *ch, std::shared_ptr<Area> pArea,
 void EditReset(Character *ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom)
 {
     std::string arg;
-    Reset *pReset = NULL;
-    Reset *reset = NULL;
+    std::shared_ptr<Reset> pReset;
+    std::shared_ptr<Reset> reset;
     std::shared_ptr<ProtoMobile> pMob;
     std::shared_ptr<Room> pRoom;
     std::shared_ptr<ProtoObject> pObj;
@@ -597,7 +592,6 @@ void EditReset(Character *ch, std::string argument, std::shared_ptr<Area> pArea,
             pReset->Next->Previous = reset;
         }
 
-        delete pReset;
         ch->Echo("Done.\r\n");
         return;
     }
@@ -612,7 +606,6 @@ void EditReset(Character *ch, std::string argument, std::shared_ptr<Area> pArea,
 
         AddReset(pArea, pReset->Command, pReset->MiscData, pReset->Arg1,
             pReset->Arg2, pReset->Arg3);
-        delete pReset;
         ch->Echo("Done.\r\n");
         return;
     }
@@ -627,7 +620,6 @@ void EditReset(Character *ch, std::string argument, std::shared_ptr<Area> pArea,
 
         PlaceReset(pArea, pReset->Command, pReset->MiscData, pReset->Arg1,
             pReset->Arg2, pReset->Arg3);
-        delete pReset;
         ch->Echo("Done.\r\n");
         return;
     }
@@ -703,7 +695,6 @@ void EditReset(Character *ch, std::string argument, std::shared_ptr<Area> pArea,
                 pArea->LastMobReset = NULL;
             }
 
-            delete pReset;
             top_reset--;
             found = true;
         }
@@ -1389,7 +1380,7 @@ void WipeResets(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom)
         {
             /* Resets always go forward, so we can safely use the previous reset,
                providing it exists, or first_reset if it doesnt.  -- Altrag */
-            Reset *prev = pReset->Previous;
+            auto prev = pReset->Previous;
 
             DeleteReset(pArea, pReset);
             pReset = (prev ? prev->Next : pArea->FirstReset);
@@ -1515,8 +1506,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
 {
     assert(pArea != nullptr);
 
-    Reset *pReset = NULL;
-    Reset *next_reset = NULL;
     Character *mob = NULL;
     Object *obj = NULL;
     Object *lastobj = NULL;
@@ -1534,7 +1523,7 @@ void ResetArea(std::shared_ptr<Area> pArea)
         return;
     }
 
-    for (pReset = pArea->FirstReset; pReset; pReset = next_reset)
+    for (std::shared_ptr<Reset> pReset = pArea->FirstReset, next_reset; pReset; pReset = next_reset)
     {
         next_reset = pReset->Next;
 
@@ -1554,7 +1543,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                 if (!bootup)
                 {
                     UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                    delete pReset;
                 }
 
                 continue;
@@ -1568,7 +1556,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                 if (!bootup)
                 {
                     UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                    delete pReset;
                 }
 
                 continue;
@@ -1617,7 +1604,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                 if (!bootup)
                 {
                     UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                    delete pReset;
                 }
 
                 continue;
@@ -1660,7 +1646,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                 if (!bootup)
                 {
                     UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                    delete pReset;
                 }
 
                 continue;
@@ -1674,7 +1659,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                 if (!bootup)
                 {
                     UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                    delete pReset;
                 }
 
                 continue;
@@ -1703,7 +1687,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                 if (!bootup)
                 {
                     UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                    delete pReset;
                 }
 
                 continue;
@@ -1719,7 +1702,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                     if (!bootup)
                     {
                         UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                        delete pReset;
                     }
 
                     continue;
@@ -1784,7 +1766,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                         if (!bootup)
                         {
                             UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                            delete pReset;
                         }
 
                         continue;
@@ -1822,7 +1803,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                     if (!bootup)
                     {
                         UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                        delete pReset;
                     }
 
                     continue;
@@ -1852,7 +1832,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                     if (!bootup)
                     {
                         UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                        delete pReset;
                     }
 
                     continue;
@@ -1895,7 +1874,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                     if (!bootup)
                     {
                         UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                        delete pReset;
                     }
 
                     continue;
@@ -1922,7 +1900,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                     if (!bootup)
                     {
                         UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                        delete pReset;
                     }
 
                     continue;
@@ -1942,7 +1919,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                         if (!bootup)
                         {
                             UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                            delete pReset;
                         }
 
                         continue;
@@ -2007,7 +1983,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                 if (!bootup)
                 {
                     UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                    delete pReset;
                 }
 
                 continue;
@@ -2058,7 +2033,6 @@ void ResetArea(std::shared_ptr<Area> pArea)
                 if (!bootup)
                 {
                     UNLINK(pReset, pArea->FirstReset, pArea->LastReset, Next, Previous);
-                    delete pReset;
                 }
 
                 continue;
@@ -2073,13 +2047,12 @@ void ResetArea(std::shared_ptr<Area> pArea)
 static void ListResets(const Character *ch, std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom,
     int start, int end)
 {
-    Reset *pReset = NULL;
     std::shared_ptr<Room> room;
     std::shared_ptr<ProtoMobile> mob;
     std::shared_ptr<ProtoObject> obj;
     std::shared_ptr<ProtoObject> obj2;
     std::shared_ptr<ProtoObject> lastobj;
-    const Reset *lo_reset = NULL;
+    std::shared_ptr<Reset> lo_reset;
     int num = 0;
     std::string rname;
     std::string mname;
@@ -2090,7 +2063,7 @@ static void ListResets(const Character *ch, std::shared_ptr<Area> pArea, std::sh
         return;
     }
 
-    for (pReset = pArea->FirstReset; pReset; pReset = pReset->Next)
+    for (auto pReset = pArea->FirstReset; pReset; pReset = pReset->Next)
     {
         char *pbuf = NULL;
         char buf[256];
@@ -2129,11 +2102,15 @@ static void ListResets(const Character *ch, std::shared_ptr<Area> pArea, std::sh
             if (!room)
                 mob = NULL;
 
-            if ((room = GetRoom(pReset->Arg3 - 1)) &&
-                room->Flags.test(Flag::Room::PetShop))
+            if ((room = GetRoom(pReset->Arg3 - 1))
+                && room->Flags.test(Flag::Room::PetShop))
+            {
                 strcat(buf, " (pet)\r\n");
+            }
             else
+            {
                 strcat(buf, "\r\n");
+            }
 
             break;
 
@@ -2207,7 +2184,7 @@ static void ListResets(const Character *ch, std::shared_ptr<Area> pArea, std::sh
             else
             {
                 int iNest;
-                Reset *reset = lo_reset->Next;
+                auto reset = lo_reset->Next;
 
                 for (iNest = 0; iNest < pReset->MiscData; iNest++)
                 {
@@ -2424,7 +2401,7 @@ static void ListResets(const Character *ch, std::shared_ptr<Area> pArea, std::sh
    actually reset, or if they're bugged. */
 void RenumberPutResets(std::shared_ptr<Area> pArea)
 {
-    for (Reset *pReset = pArea->FirstReset, *lastobj = nullptr; pReset; pReset = pReset->Next)
+    for (std::shared_ptr<Reset> pReset = pArea->FirstReset, lastobj; pReset; pReset = pReset->Next)
     {
         switch (pReset->Command)
         {
@@ -2456,9 +2433,9 @@ void RenumberPutResets(std::shared_ptr<Area> pArea)
 /*
  * Create a new reset (for online building)                     -Thoric
  */
-Reset *MakeReset(char letter, int extra, int arg1, int arg2, int arg3)
+std::shared_ptr<Reset> MakeReset(char letter, int extra, int arg1, int arg2, int arg3)
 {
-    Reset *pReset = new Reset();
+    auto pReset = std::make_shared<Reset>();
 
     pReset->Command = letter;
     pReset->MiscData = extra;
@@ -2473,12 +2450,12 @@ Reset *MakeReset(char letter, int extra, int arg1, int arg2, int arg3)
 /*
  * Add a reset to an area                               -Thoric
  */
-Reset *AddReset(std::shared_ptr<Area> tarea, char letter, int extra, int arg1, int arg2, int arg3)
+std::shared_ptr<Reset> AddReset(std::shared_ptr<Area> tarea, char letter, int extra, int arg1, int arg2, int arg3)
 {
     assert(tarea != nullptr);
 
     letter = CharToUppercase(letter);
-    Reset *pReset = MakeReset(letter, extra, arg1, arg2, arg3);
+    auto pReset = MakeReset(letter, extra, arg1, arg2, arg3);
 
     switch (letter)
     {
@@ -2515,14 +2492,14 @@ Reset *AddReset(std::shared_ptr<Area> tarea, char letter, int extra, int arg1, i
 /*
  * Place a reset into an area, insert sorting it                -Thoric
  */
-Reset *PlaceReset(std::shared_ptr<Area> tarea, char letter, int extra, int arg1, int arg2, int arg3)
+std::shared_ptr<Reset> PlaceReset(std::shared_ptr<Area> tarea, char letter, int extra, int arg1, int arg2, int arg3)
 {
     assert(tarea != nullptr);
-    Reset *tmp = NULL;
-    Reset *tmp2 = NULL;
+    std::shared_ptr<Reset> tmp;
+    std::shared_ptr<Reset> tmp2;
 
     letter = CharToUppercase(letter);
-    Reset *pReset = MakeReset(letter, extra, arg1, arg2, arg3);
+    std::shared_ptr<Reset> pReset = MakeReset(letter, extra, arg1, arg2, arg3);
 
     if (letter == 'M')
     {
@@ -2767,7 +2744,7 @@ Reset *PlaceReset(std::shared_ptr<Area> tarea, char letter, int extra, int arg1,
     return pReset;
 }
 
-std::string SPrintReset(const Character *ch, Reset *pReset, short num, bool rlist)
+std::string SPrintReset(const Character *ch, std::shared_ptr<Reset> pReset, short num, bool rlist)
 {
     char buf[MAX_STRING_LENGTH] = { '\0' };
     char mobname[1024] = { '\0' };
@@ -2996,4 +2973,3 @@ std::string SPrintReset(const Character *ch, Reset *pReset, short num, bool rlis
 
     return buf;
 }
-

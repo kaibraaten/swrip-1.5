@@ -169,10 +169,9 @@ bool CanMedit(const Character *ch, std::shared_ptr<ProtoMobile> mob)
     return false;
 }
 
-void FreeReset(std::shared_ptr<Area> are, Reset *res)
+void FreeReset(std::shared_ptr<Area> are, std::shared_ptr<Reset> res)
 {
     UNLINK(res, are->FirstReset, are->LastReset, Next, Previous);
-    delete res;
 }
 
 std::shared_ptr<ExtraDescription> SetRExtra(std::shared_ptr<Room> room, const std::string &keywords)
@@ -304,7 +303,6 @@ bool DelOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keyword
 
 void FoldArea(std::shared_ptr<Area> tarea, const std::string &filename, bool install)
 {
-    const Reset *treset = NULL;
     std::shared_ptr<Room> room;
     std::shared_ptr<ProtoMobile> pMobIndex;
     std::shared_ptr<ProtoObject> pObjIndex;
@@ -683,7 +681,7 @@ void FoldArea(std::shared_ptr<Area> tarea, const std::string &filename, bool ins
 
     /* save resets   */
     fprintf(fpout, "#RESETS\n");
-    for (treset = tarea->FirstReset; treset; treset = treset->Next)
+    for (auto treset = tarea->FirstReset; treset; treset = treset->Next)
     {
         switch (treset->Command) /* extra arg1 arg2 arg3 */
         {
@@ -812,7 +810,7 @@ void WriteAreaList()
 /*
  * Parse a reset command string into a reset_data structure
  */
-Reset *ParseReset(std::shared_ptr<Area> tarea, std::string argument, const Character *ch)
+std::shared_ptr<Reset> ParseReset(std::shared_ptr<Area> tarea, std::string argument, const Character *ch)
 {
     std::string arg1;
     std::string arg2;

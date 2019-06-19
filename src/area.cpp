@@ -817,11 +817,9 @@ static void LoadResets(std::shared_ptr<Area> tarea, FILE *fp)
     {
         if (fBootDb)
         {
-            Reset *rtmp;
-
             Log->Bug("%s: WARNING: resets already exist for this area.", __FUNCTION__);
 
-            for (rtmp = tarea->FirstReset; rtmp; rtmp = rtmp->Next)
+            for (auto rtmp = tarea->FirstReset; rtmp; rtmp = rtmp->Next)
                 ++count;
         }
         else
@@ -1508,8 +1506,6 @@ void CloseArea(std::shared_ptr<Area> pArea)
     std::shared_ptr<ProtoObject> oid_next;
     std::shared_ptr<ProtoMobile> mid;
     std::shared_ptr<ProtoMobile> mid_next;
-    Reset *ereset;
-    Reset *ereset_next;
 
     for (Character *ech = FirstCharacter, *ech_next; ech; ech = ech_next)
     {
@@ -1734,10 +1730,9 @@ void CloseArea(std::shared_ptr<Area> pArea)
         }
     }
 
-    for (ereset = pArea->FirstReset; ereset; ereset = ereset_next)
+    for (std::shared_ptr<Reset> ereset = pArea->FirstReset, ereset_next; ereset; ereset = ereset_next)
     {
         ereset_next = ereset->Next;
-        delete ereset;
     }
 
     UNLINK(pArea, FirstBuild, LastBuild, Next, Previous);
@@ -1818,10 +1813,9 @@ void AssignAreaTo(Character *ch)
 
 void CleanResets(std::shared_ptr<Area> tarea)
 {
-    for (Reset *pReset = tarea->FirstReset, *pReset_next = nullptr; pReset; pReset = pReset_next)
+    for (std::shared_ptr<Reset> pReset = tarea->FirstReset, pReset_next; pReset; pReset = pReset_next)
     {
         pReset_next = pReset->Next;
-        delete pReset;
         --top_reset;
     }
 

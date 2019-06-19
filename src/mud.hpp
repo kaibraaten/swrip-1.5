@@ -1144,14 +1144,14 @@ bool CanModifyObject(const Character *ch, const Object *obj);
 bool CanModifyCharacter(const Character *ch, const Character *mob);
 
 bool CanMedit(const Character *ch, std::shared_ptr<ProtoMobile> mob);
-void FreeReset(std::shared_ptr<Area> are, Reset *res);
+void FreeReset(std::shared_ptr<Area> are, std::shared_ptr<Reset> res);
 std::shared_ptr<ExtraDescription> SetRExtra(std::shared_ptr<Room> room, const std::string &keywords);
 bool DelRExtra(std::shared_ptr<Room> room, const std::string &keywords);
 std::shared_ptr<ExtraDescription> SetOExtra(Object *obj, const std::string &keywords);
 bool DelOExtra(Object *obj, const std::string &keywords);
 std::shared_ptr<ExtraDescription> SetOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keywords);
 bool DelOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keywords);
-Reset *ParseReset(std::shared_ptr<Area> tarea, std::string argument, const Character *ch);
+std::shared_ptr<Reset> ParseReset(std::shared_ptr<Area> tarea, std::string argument, const Character *ch);
 
 /* fight.c */
 ch_ret HitOnce(Character *ch, Character *victim, int dt);

@@ -27,8 +27,10 @@ public:
     std::shared_ptr<Area> Previous;
     std::shared_ptr<Area> NextSort;
     std::shared_ptr<Area> PreviousSort;
-    Reset *FirstReset = nullptr;
-    Reset *LastReset = nullptr;
+    std::shared_ptr<Reset> FirstReset;
+    std::shared_ptr<Reset> LastReset;
+    std::shared_ptr<Reset> LastMobReset;
+    std::shared_ptr<Reset> LastObjectReset;
     std::shared_ptr<class Planet> Planet;
     std::shared_ptr<Area> NextOnPlanet;
     std::shared_ptr<Area> PreviousOnPlanet;
@@ -60,8 +62,7 @@ public:
 
     std::string Author;
     std::string ResetMessage;
-    Reset *LastMobReset = nullptr;
-    Reset *LastObjectReset = nullptr;
+
     short MaxPlayers = 0;
     int MKills = 0;
     int MDeaths = 0;

@@ -50,8 +50,8 @@
 class Reset
 {
 public:
-    Reset *Next = nullptr;
-    Reset *Previous = nullptr;
+    std::shared_ptr<Reset> Next;
+    std::shared_ptr<Reset> Previous;
     char Command = 0;
     int MiscData = 0;
     int Arg1 = 0;
@@ -65,11 +65,11 @@ void WipeResets(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom);
 void InstallRoom(std::shared_ptr<Area> pArea, std::shared_ptr<Room> pRoom, bool dodoors);
 void EditReset(Character *ch, std::string argument, std::shared_ptr<Area> pArea, std::shared_ptr<Room> aRoom);
 void ResetArea(std::shared_ptr<Area> pArea);
-std::string SPrintReset(const Character *ch, Reset *pReset, short num, bool rlist);
-Reset *MakeReset(char letter, int extra, int arg1, int arg2, int arg3);
-Reset *AddReset(std::shared_ptr<Area> tarea, char letter, int extra,
+std::string SPrintReset(const Character *ch, std::shared_ptr<Reset> pReset, short num, bool rlist);
+std::shared_ptr<Reset> MakeReset(char letter, int extra, int arg1, int arg2, int arg3);
+std::shared_ptr<Reset> AddReset(std::shared_ptr<Area> tarea, char letter, int extra,
     int arg1, int arg2, int arg3);
-Reset *PlaceReset(std::shared_ptr<Area> tarea, char letter,
+std::shared_ptr<Reset> PlaceReset(std::shared_ptr<Area> tarea, char letter,
     int extra, int arg1, int arg2, int arg3);
 void RenumberPutResets(std::shared_ptr<Area> pArea);
 
