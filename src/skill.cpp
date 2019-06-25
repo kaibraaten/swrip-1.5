@@ -43,16 +43,19 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
     int top = gsn_first_weapon - 1;
     struct timeval time_used;
     int mana = 0;
+    const Skill *skill = nullptr;
 
     /* bsearch for the skill */
     for (;;)
     {
         sn = (first + top) >> 1;
+        skill = SkillTable[sn];
 
-        if (CharToLowercase(command[0]) == CharToLowercase(SkillTable[sn]->Name[0])
-            && !StringPrefix(command, SkillTable[sn]->Name)
-            && (SkillTable[sn]->SkillFunction || SkillTable[sn]->SpellFunction != spell_null)
-            && (IsNpc(ch) || (ch->PCData->Learned[sn] > 0)))
+        if (CharToLowercase(command[0]) == CharToLowercase(skill->Name[0])
+            && !StringPrefix(command, skill->Name)
+            && skill->SpellFunction != nullptr
+            && skill->SpellFunction != spell_null
+            && GetSkillLevel(ch, sn) > 0)
         {
             break;
         }
@@ -62,7 +65,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
             return false;
         }
 
-        if (StrCmp(command, SkillTable[sn]->Name) < 1)
+        if (StrCmp(command, skill->Name) < 1)
         {
             top = sn - 1;
         }
@@ -86,9 +89,9 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
     }
 
     /* check if mana is required */
-    if (SkillTable[sn]->Mana)
+    if (skill->Mana)
     {
-        mana = IsNpc(ch) ? 0 : SkillTable[sn]->Mana;
+        mana = IsNpc(ch) ? 0 : skill->Mana;
 
         if (!IsNpc(ch) && ch->Mana.Current < mana)
         {
@@ -104,7 +107,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
     /*
      * Is this a real do-fun, or a really a spell?
      */
-    if (!SkillTable[sn]->SkillFunction)
+    if (!skill->SkillFunction)
     {
         ch_ret retcode = rNONE;
         void *vo = NULL;
@@ -113,7 +116,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
 
         spell_target_name = "";
 
-        switch (SkillTable[sn]->Target)
+        switch (skill->Target)
         {
         default:
             Log->Bug("Check_skill: bad target for sn %d.", sn);
@@ -140,7 +143,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
             if (argument.empty()
                 && (victim = GetFightingOpponent(ch)) == NULL)
             {
-                ch->Echo("%s who?\r\n", Capitalize(SkillTable[sn]->Name).c_str());
+                ch->Echo("%s who?\r\n", Capitalize(skill->Name).c_str());
                 return true;
             }
             else if (!argument.empty()
@@ -190,11 +193,10 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
         }
 
         /* waitstate */
-        SetWaitState(ch, SkillTable[sn]->Beats);
+        SetWaitState(ch, skill->Beats);
 
         /* check for failure */
-        if ((GetRandomPercent() + SkillTable[sn]->Difficulty * 5)
-        > (IsNpc(ch) ? 75 : ch->PCData->Learned[sn]))
+        if ((GetRandomPercent() + skill->Difficulty * 5) > (IsNpc(ch) ? 75 : GetSkillLevel(ch, sn)))
         {
             FailedCasting(SkillTable[sn], ch, (Character*)vo, obj);
             LearnFromFailure(ch, sn);
@@ -213,9 +215,9 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
         }
 
         StartTimer(&time_used);
-        retcode = SkillTable[sn]->SpellFunction(sn, ch->TopLevel, ch, vo);
+        retcode = skill->SpellFunction(sn, ch->TopLevel, ch, vo);
         StopTimer(&time_used);
-        UpdateNumberOfTimesUsed(&time_used, SkillTable[sn]->UseRec);
+        UpdateNumberOfTimesUsed(&time_used, skill->UseRec);
 
         if (retcode == rCHAR_DIED || retcode == rERROR)
         {
@@ -237,13 +239,13 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
             LearnFromSuccess(ch, sn);
         }
 
-        if (SkillTable[sn]->Target == TAR_CHAR_OFFENSIVE
+        if (skill->Target == TAR_CHAR_OFFENSIVE
             && victim != ch
             && !CharacterDiedRecently(victim))
         {
-            std::list<Character*> charactersInRoom(ch->InRoom->Characters());
+            auto charactersInRoom(ch->InRoom->Characters());
 
-            for (Character *vch : charactersInRoom)
+            for (auto vch : charactersInRoom)
             {
                 if (victim == vch && !victim->Fighting && victim->Master != ch)
                 {
@@ -262,11 +264,11 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
     }
 
     ch->PreviousCommand = ch->LastCommand;    /* haus, for automapping */
-    ch->LastCommand = SkillTable[sn]->SkillFunction;
+    ch->LastCommand = skill->SkillFunction;
     StartTimer(&time_used);
-    SkillTable[sn]->SkillFunction(ch, argument);
+    skill->SkillFunction(ch, argument);
     StopTimer(&time_used);
-    UpdateNumberOfTimesUsed(&time_used, SkillTable[sn]->UseRec);
+    UpdateNumberOfTimesUsed(&time_used, skill->UseRec);
 
     return true;
 }
