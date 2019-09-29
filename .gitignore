@@ -79,3 +79,5 @@ googletest-build
 googletest-download
 googletest-src
 Testing
+/out/build/x64-Debug/bin
+/out/build/x64-Debug
