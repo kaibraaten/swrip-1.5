@@ -85,21 +85,21 @@ void do_calculate_diff(Character *ch, std::string argument )
       return;
     }
 
-  ship->Jump.x = ship->Position.x + strtol( arg1.c_str(), nullptr, 10 );
-  ship->Jump.y = ship->Position.y + strtol( arg2.c_str(), nullptr, 10 );
-  ship->Jump.z = ship->Position.z + strtol( arg3.c_str(), nullptr, 10 );
+  ship->Jump->x = ship->Position->x + strtol( arg1.c_str(), nullptr, 10 );
+  ship->Jump->y = ship->Position->y + strtol( arg2.c_str(), nullptr, 10 );
+  ship->Jump->z = ship->Position->z + strtol( arg3.c_str(), nullptr, 10 );
 
   std::shared_ptr<Spaceobject> spaceobject = ship->CurrentJump;
 
-  RandomizeVector( &ship->Jump, ship->Instruments.AstroArray - 300, 300 - ship->Instruments.AstroArray );
-  ship->Jump.x += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
-  ship->Jump.y += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
-  ship->Jump.z += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
+  RandomizeVector(ship->Jump, ship->Instruments.AstroArray - 300, 300 - ship->Instruments.AstroArray );
+  ship->Jump->x += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
+  ship->Jump->y += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
+  ship->Jump->z += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
 
   for(auto spaceobj : Spaceobjects)
     {
       if ( !spaceobj->IsSimulator && distance && !spaceobj->Name.empty()
-           && GetDistanceBetweenVectors( &ship->Jump, &spaceobj->Position ) < spaceobj->Gravity * 4 )
+           && GetDistanceBetweenVectors( ship->Jump, spaceobj->Position ) < spaceobj->Gravity * 4)
         {
           EchoToCockpit( AT_RED, ship, "WARNING! Jump coordinates too close to stellar object.");
           EchoToCockpit( AT_RED, ship, "WARNING! Hyperjump NOT set.");
@@ -121,8 +121,7 @@ void do_calculate_diff(Character *ch, std::string argument )
   if( !spaceobject )
     ship->CurrentJump = ship->Spaceobject;
 
-  if( ship->Jump.x > MAX_COORD_S || ship->Jump.y > MAX_COORD_S || ship->Jump.z > MAX_COORD_S ||
-      ship->Jump.x < -MAX_COORD_S || ship->Jump.y < -MAX_COORD_S || ship->Jump.z < -MAX_COORD_S )
+  if(IsBeyondGalaxy(ship->Jump))
     {
       EchoToCockpit( AT_RED, ship, "WARNING! Jump coordinates outside of the known galaxy.");
       EchoToCockpit( AT_RED, ship, "WARNING! Hyperjump NOT set.");
@@ -130,7 +129,7 @@ void do_calculate_diff(Character *ch, std::string argument )
       return;
     }
 
-  ship->Hyperdistance = GetDistanceBetweenVectors( &ship->Position, &ship->Jump ) / 200;
+  ship->Hyperdistance = GetDistanceBetweenVectors(ship->Position, ship->Jump) / 200;
 
   if( ship->Hyperdistance < 100 )
     ship->Hyperdistance = 100;

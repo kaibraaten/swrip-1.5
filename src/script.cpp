@@ -353,7 +353,7 @@ void LuaPushSmaugAffects(lua_State *L, const std::list<std::shared_ptr<SmaugAffe
     }
 }
 
-void LuaPushVector3(lua_State *L, const Vector3 *v, const std::string &key)
+void LuaPushVector3(lua_State *L, std::shared_ptr<Vector3> v, const std::string &key)
 {
     lua_pushstring(L, key.c_str());
     lua_newtable(L);
@@ -365,7 +365,7 @@ void LuaPushVector3(lua_State *L, const Vector3 *v, const std::string &key)
     lua_settable(L, -3);
 }
 
-void LuaLoadVector3(lua_State *L, Vector3 *v, const std::string &key)
+void LuaLoadVector3(lua_State *L, std::shared_ptr<Vector3> v, const std::string &key)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());

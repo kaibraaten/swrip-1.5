@@ -206,7 +206,7 @@ static void PushShip(lua_State *L, const void *userData)
     LuaSetfieldBoolean(L, "Guard", ship->Guard);
     LuaSetfieldString(L, "Home", ship->Home);
 
-    LuaPushVector3(L, &ship->Position, "Position");
+    LuaPushVector3(L, ship->Position, "Position");
     PushInstruments(L, ship);
     PushThrusters(L, ship);
     PushHyperdrive(L, ship);
@@ -424,7 +424,7 @@ static int L_ShipEntry(lua_State *L)
     LuaGetfieldBool(L, "Guard", &ship->Guard);
     LuaGetfieldString(L, "Home", &ship->Home);
 
-    LuaLoadVector3(L, &ship->Position, "Position");
+    LuaLoadVector3(L, ship->Position, "Position");
     LoadInstruments(L, ship);
     LoadThrusters(L, ship);
     LoadHyperdrive(L, ship);
@@ -561,21 +561,20 @@ static void ReadyShipAfterLoad(std::shared_ptr<Ship> ship)
         || ship->Class == CAPITAL_SHIP)
     {
         ShipToSpaceobject(ship, GetSpaceobject(ship->Home));
-        SetVector(&ship->Heading, 1, 1, 1);
+        SetVector(ship->Heading, 1, 1, 1);
 
-        if (ship->Position.x == 0 && ship->Position.y == 0 && ship->Position.z == 0)
+        if (ship->Position->x == 0 && ship->Position->y == 0 && ship->Position->z == 0)
         {
             if (!ship->Home.empty())
             {
                 ShipToSpaceobject(ship, GetSpaceobject(ship->Home));
-                InitializeVector(&ship->Position);
 
                 if (ship->Spaceobject)
                 {
-                    CopyVector(&ship->Position, &ship->Spaceobject->Position);
+                    CopyVector(ship->Position, ship->Spaceobject->Position);
                 }
 
-                RandomizeVector(&ship->Position, -5000, 5000);
+                RandomizeVector(ship->Position, -5000, 5000);
                 ship->State = SHIP_READY;
                 ship->Autopilot = true;
                 ship->AutoRecharge = true;

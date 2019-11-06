@@ -34,7 +34,7 @@
  * To check if a ship is facing a specific position, which can be another
  * ship, a planet, an asteroid, etc.
  *
- * if( ship_is_facing( ship, &target->Position.) )
+ * if( IsShipFacingShip( ship, &target->Position.) )
  * {
  *   ... your code here
  * }
@@ -61,7 +61,7 @@ void TurnShip180(std::shared_ptr<Ship> ship);
  * Etc, etc...
  */
 void SetShipCourse(std::shared_ptr<Ship> ship,
-                   const Vector3 * const destination);
+    std::shared_ptr<Vector3> destination);
 
 void SetShipCourseTowardsShip(std::shared_ptr<Ship> ship,
                               std::shared_ptr<Ship> target);
@@ -81,14 +81,15 @@ void AlignShipTrajectory(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> targe
  * Calculate new position based on heading and speed.
  */
 void MoveShip(std::shared_ptr<Ship> ship);
-void MoveMissile( std::shared_ptr<Missile> m);
-void MoveSpaceobject( std::shared_ptr<Spaceobject> spaceobj);
+void MoveMissile(std::shared_ptr<Missile> m);
+void MoveSpaceobject(std::shared_ptr<Spaceobject> spaceobj);
 
 double GetShipDistanceToShip(std::shared_ptr<Ship> ship, std::shared_ptr<Ship> target);
 double GetShipDistanceToSpaceobject(std::shared_ptr<Ship> ship,
                                     std::shared_ptr<Spaceobject> spaceobject);
 double GetMissileDistanceToShip(std::shared_ptr<Missile> m,
                                 std::shared_ptr<Ship> s);
-void RandomizeVector( Vector3 * const vec, int from, int to );
+void RandomizeVector(std::shared_ptr<Vector3> vec, int from, int to);
+bool IsBeyondGalaxy(std::shared_ptr<Vector3> pos);
 
 #endif /* include guard */

@@ -33,23 +33,23 @@ void SpaceobjectUpdate()
     {
         MoveSpaceobject(spaceobj);
 
-        if (spaceobj->Position.x > MAX_COORD)
-            spaceobj->Position.x = -MAX_COORD_S;
+        if (spaceobj->Position->x > MAX_COORD)
+            spaceobj->Position->x = -MAX_COORD_S;
 
-        if (spaceobj->Position.y > MAX_COORD)
-            spaceobj->Position.y = -MAX_COORD_S;
+        if (spaceobj->Position->y > MAX_COORD)
+            spaceobj->Position->y = -MAX_COORD_S;
 
-        if (spaceobj->Position.z > MAX_COORD)
-            spaceobj->Position.z = -MAX_COORD_S;
+        if (spaceobj->Position->z > MAX_COORD)
+            spaceobj->Position->z = -MAX_COORD_S;
 
-        if (spaceobj->Position.x < -MAX_COORD)
-            spaceobj->Position.x = MAX_COORD_S;
+        if (spaceobj->Position->x < -MAX_COORD)
+            spaceobj->Position->x = MAX_COORD_S;
 
-        if (spaceobj->Position.y < -MAX_COORD)
-            spaceobj->Position.y = MAX_COORD_S;
+        if (spaceobj->Position->y < -MAX_COORD)
+            spaceobj->Position->y = MAX_COORD_S;
 
-        if (spaceobj->Position.z < -MAX_COORD)
-            spaceobj->Position.z = MAX_COORD_S;
+        if (spaceobj->Position->z < -MAX_COORD)
+            spaceobj->Position->z = MAX_COORD_S;
     }
 }
 
@@ -76,7 +76,7 @@ std::shared_ptr<Spaceobject> GetSpaceobject(const std::string &name)
 
 struct SpaceobjectSearch
 {
-    vnum_t vnum;
+    vnum_t vnum = INVALID_VNUM;
     std::shared_ptr<Spaceobject> spaceobject;
 };
 

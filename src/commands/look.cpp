@@ -1098,39 +1098,39 @@ static bool ShowShipIfInVincinity(std::shared_ptr<Ship> target, void *userData)
         {
             ch->Echo("%s    %.0f %.0f %.0f\r\n",
                 target->Name.c_str(),
-                (target->Position.x - ship->Position.x),
-                (target->Position.y - ship->Position.y),
-                (target->Position.z - ship->Position.z));
+                (target->Position->x - ship->Position->x),
+                (target->Position->y - ship->Position->y),
+                (target->Position->z - ship->Position->z));
         }
         else if (GetShipDistanceToShip(target, ship) < 100 * (ship->Instruments.Sensor + 10) * ((target->Class == SHIP_DEBRIS ? 2 : target->Class) + 3))
         {
             if (target->Class == FIGHTER_SHIP)
             {
                 ch->Echo("A small metallic mass    %.0f %.0f %.0f\r\n",
-                    (target->Position.x - ship->Position.x),
-                    (target->Position.y - ship->Position.y),
-                    (target->Position.z - ship->Position.z));
+                    (target->Position->x - ship->Position->x),
+                    (target->Position->y - ship->Position->y),
+                    (target->Position->z - ship->Position->z));
             }
             else if (target->Class == MIDSIZE_SHIP)
             {
                 ch->Echo("A goodsize metallic mass    %.0f %.0f %.0f\r\n",
-                    (target->Position.x - ship->Position.x),
-                    (target->Position.y - ship->Position.y),
-                    (target->Position.z - ship->Position.z));
+                    (target->Position->x - ship->Position->x),
+                    (target->Position->y - ship->Position->y),
+                    (target->Position->z - ship->Position->z));
             }
             else if (target->Class == SHIP_DEBRIS)
             {
                 ch->Echo("scattered metallic reflections    %.0f %.0f %.0f\r\n",
-                    (target->Position.x - ship->Position.x),
-                    (target->Position.y - ship->Position.y),
-                    (target->Position.z - ship->Position.z));
+                    (target->Position->x - ship->Position->x),
+                    (target->Position->y - ship->Position->y),
+                    (target->Position->z - ship->Position->z));
             }
             else if (target->Class >= CAPITAL_SHIP)
             {
                 ch->Echo("A huge metallic mass    %.0f %.0f %.0f\r\n",
-                    (target->Position.x - ship->Position.x),
-                    (target->Position.y - ship->Position.y),
-                    (target->Position.z - ship->Position.z));
+                    (target->Position->x - ship->Position->x),
+                    (target->Position->y - ship->Position->y),
+                    (target->Position->z - ship->Position->z));
             }
             else
             {

@@ -117,13 +117,13 @@ void do_calculate(Character *ch, std::string argument )
 
       if( ship->CurrentJump )
         {
-          CopyVector( &ship->Jump, &ship->CurrentJump->Position );
+          CopyVector(ship->Jump, ship->CurrentJump->Position );
           found = true;
         }
     }
   else if( !arg2.empty() && !arg3.empty() )
     {
-      SetVector( &ship->Jump,
+      SetVector(ship->Jump,
                  strtol( arg1.c_str(), nullptr, 10 ),
                  strtol( arg2.c_str(), nullptr, 10 ),
                  strtol( arg3.c_str(), nullptr, 10 ) );
@@ -140,34 +140,34 @@ void do_calculate(Character *ch, std::string argument )
   if ( !found )
     {
       ch->Echo( "&RYou can't seem to find that spacial object on your charts.\r\n");
-      ship->CurrentJump = NULL;
+      ship->CurrentJump = nullptr;
       return;
     }
 
   if (spaceobject && spaceobject->IsSimulator && (ship->Class != SHIP_TRAINER))
     {
       ch->Echo( "&RYou can't seem to find that stellar object on your charts.\r\n");
-      ship->CurrentJump = NULL;
+      ship->CurrentJump = nullptr;
       return;
     }
 
   if (ship->Class == SHIP_TRAINER && spaceobject && !spaceobject->IsSimulator )
     {
       ch->Echo( "&RYou can't seem to find that stellar object on your charts.\r\n");
-      ship->CurrentJump = NULL;
+      ship->CurrentJump = nullptr;
       return;
     }
 
-  RandomizeVector( &ship->Jump, ship->Instruments.AstroArray - 300, 300 - ship->Instruments.AstroArray );
+  RandomizeVector(ship->Jump, ship->Instruments.AstroArray - 300, 300 - ship->Instruments.AstroArray );
 
-  ship->Jump.x += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
-  ship->Jump.y += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
-  ship->Jump.z += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
+  ship->Jump->x += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
+  ship->Jump->y += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
+  ship->Jump->z += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
 
   for(auto spaceobj : Spaceobjects)
     {
       if ( !spaceobj->IsSimulator && distance && !spaceobj->Name.empty()
-           && GetDistanceBetweenVectors( &ship->Jump, &spaceobj->Position ) < spaceobj->Gravity * 4 )
+           && GetDistanceBetweenVectors( ship->Jump, spaceobj->Position ) < spaceobj->Gravity * 4 )
         {
           EchoToCockpit( AT_RED, ship, "WARNING! Jump coordinates too close to stellar object.");
           EchoToCockpit( AT_RED, ship, "WARNING! Hyperjump NOT set.");
@@ -189,8 +189,7 @@ void do_calculate(Character *ch, std::string argument )
   if( !spaceobject )
     ship->CurrentJump = ship->Spaceobject;
 
-  if( ship->Jump.x > MAX_COORD_S || ship->Jump.y > MAX_COORD_S || ship->Jump.z > MAX_COORD_S ||
-      ship->Jump.x < -MAX_COORD_S || ship->Jump.y < -MAX_COORD_S || ship->Jump.z < -MAX_COORD_S )
+  if(IsBeyondGalaxy(ship->Jump))
     {
       EchoToCockpit( AT_RED, ship, "WARNING! Jump coordinates outside of the known galaxy.");
       EchoToCockpit( AT_RED, ship, "WARNING! Hyperjump NOT set.");
@@ -198,7 +197,7 @@ void do_calculate(Character *ch, std::string argument )
       return;
     }
 
-  ship->Hyperdistance = GetDistanceBetweenVectors( &ship->Position, &ship->Jump ) / 200;
+  ship->Hyperdistance = GetDistanceBetweenVectors(ship->Position, ship->Jump) / 200;
 
   if ( ship->Hyperdistance < 100 )
     ship->Hyperdistance = 100;

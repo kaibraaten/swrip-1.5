@@ -22,11 +22,11 @@ public:
     std::shared_ptr<class Planet> Planet;
     std::string Name;
     SpaceobjectType Type = 0;
-    Vector3      Position;
-    Vector3      Heading;
-    int          Speed = 0;
-    int          Gravity = 0;
-    bool         IsSimulator = false;
+    std::shared_ptr<Vector3> Position;
+    std::shared_ptr<Vector3> Heading;
+    int Speed = 0;
+    int Gravity = 0;
+    bool IsSimulator = false;
 
     std::array<LandingSite, MAX_LANDINGSITE> LandingSites;
 };

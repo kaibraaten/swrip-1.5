@@ -26,6 +26,7 @@
 #ifndef _VECTOR3_HPP_
 #define _VECTOR3_HPP_
 
+#include <memory>
  /*
   * General purpose vector structure in three dimensions.
   */
@@ -41,37 +42,32 @@ public:
  * Return the length of a vector
  * Not to be confused with the distance between two vectors!
  */
-double GetVectorLength(const Vector3 * const v);
+double GetVectorLength(std::shared_ptr<Vector3> v);
 
 /*
  * Normalize a vector
  */
-void NormalizeVector(Vector3 * const v);
+void NormalizeVector(std::shared_ptr<Vector3> v);
 
 /*
  * Copy vector a vector
  */
-void CopyVector(Vector3 * const to, const Vector3 * const from);
+void CopyVector(std::shared_ptr<Vector3> to, std::shared_ptr<Vector3> from);
 
 /*
  * Return the distance between two vectors
  */
-double GetDistanceBetweenVectors(const Vector3 * const a, const Vector3 * const b);
+double GetDistanceBetweenVectors(std::shared_ptr<Vector3> a, std::shared_ptr<Vector3> b);
 
 /*
  * Calculate dot product
  */
-double GetVectorDotProduct(const Vector3 * const a, const Vector3 * const b);
-
-/*
- * Initialize a vector's member variables.
- */
-void InitializeVector(Vector3 * const v);
+double GetVectorDotProduct(std::shared_ptr<Vector3> a, std::shared_ptr<Vector3> b);
 
 /*
  * Set the coordinates.
  */
 
-void SetVector(Vector3 * const vec, double x, double y, double z);
+void SetVector(std::shared_ptr<Vector3> vec, double x, double y, double z);
 
 #endif

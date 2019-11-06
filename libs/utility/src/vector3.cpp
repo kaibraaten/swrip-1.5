@@ -29,7 +29,7 @@
  /*
   * Copy vector 'from' into 'to'
   */
-void CopyVector(Vector3 * const to, const Vector3 * const from)
+void CopyVector(std::shared_ptr<Vector3> to, std::shared_ptr<Vector3> from)
 {
     to->x = from->x;
     to->y = from->y;
@@ -39,7 +39,7 @@ void CopyVector(Vector3 * const to, const Vector3 * const from)
 /*
  * Return the length of a vector
  */
-double GetVectorLength(const Vector3 * const v)
+double GetVectorLength(std::shared_ptr<Vector3> v)
 {
     return sqrt(v->x * v->x + v->y * v->y + v->z * v->z);
 }
@@ -47,7 +47,7 @@ double GetVectorLength(const Vector3 * const v)
 /*
  * Return the distance between two vectors
  */
-double GetDistanceBetweenVectors(const Vector3 * const a, const Vector3 * const b)
+double GetDistanceBetweenVectors(std::shared_ptr<Vector3> a, std::shared_ptr<Vector3> b)
 {
     return sqrt((a->x - b->x) * (a->x - b->x)
         + (a->y - b->y) * (a->y - b->y)
@@ -57,7 +57,7 @@ double GetDistanceBetweenVectors(const Vector3 * const a, const Vector3 * const 
 /*
  * Calculate dot product
  */
-double GetVectorDotProduct(const Vector3 * const a, const Vector3 * const b)
+double GetVectorDotProduct(std::shared_ptr<Vector3> a, std::shared_ptr<Vector3> b)
 {
     return (a->x * b->x) + (a->y * b->y) + (a->z * b->z);
 }
@@ -65,7 +65,7 @@ double GetVectorDotProduct(const Vector3 * const a, const Vector3 * const b)
 /*
  * Normalize a vector
  */
-void NormalizeVector(Vector3 * const v)
+void NormalizeVector(std::shared_ptr<Vector3> v)
 {
     double magnitude = (v->x * v->x) + (v->y * v->y) + (v->z * v->z);
 
@@ -78,15 +78,7 @@ void NormalizeVector(Vector3 * const v)
     v->z /= magnitude;
 }
 
-/*
- * Initialize a vector's member variables.
- */
-void InitializeVector(Vector3 * const v)
-{
-    SetVector(v, 0.0, 0.0, 0.0);
-}
-
-void SetVector(Vector3 * const vec, double x, double y, double z)
+void SetVector(std::shared_ptr<Vector3> vec, double x, double y, double z)
 {
     vec->x = x;
     vec->y = y;
