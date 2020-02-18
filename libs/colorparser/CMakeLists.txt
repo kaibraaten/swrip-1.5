@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.10)
 include_directories(include/colorparser)
 set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
