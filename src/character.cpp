@@ -47,14 +47,12 @@ struct Character::Impl
     std::list<std::shared_ptr<Timer>> Timers;
 };
 
-Character::Character(std::unique_ptr<class PCData> pcdata, std::shared_ptr<Descriptor> desc)
-    : Desc(desc),
-    PCData(std::move(pcdata)),
+Character::Character(std::unique_ptr<class PCData> pcdata)
+    : PCData(std::move(pcdata)),
     Flags(PLR_BLANK | PLR_COMBINE | PLR_PROMPT),
     PermStats(10),
     pImpl(std::make_unique<Impl>())
 {
-    desc->Character = this;
     Ability.Level.fill(0);
     Ability.Experience.fill(0);
 }
@@ -101,7 +99,7 @@ Character::Character(std::shared_ptr<ProtoMobile> protoMob)
 
     for (int ability = 0; ability < MAX_ABILITY; ability++)
     {
-        SetAbilityLevel(this, ability, TopLevel);
+        SetAbilityLevel(ability, TopLevel);
     }
 
     if (protoMob->ArmorClass != 0)
@@ -143,7 +141,7 @@ void Character::Echo(const std::string &txt) const
 
 void Character::Echo(const char *fmt, ...) const
 {
-    if (IsNpc(this) || Desc == nullptr)
+    if (IsNpc() || Desc == nullptr)
     {
         return;
     }
@@ -274,21 +272,23 @@ int GetXPWorth(const Character *ch)
 /*
  * Retrieve a character's trusted level for permission checking.
  */
-short GetTrustLevel(const Character *ch)
+short Character::GetTrustLevel() const
 {
-    if (!ch)
-        return 0;
+    if (Trust != 0)
+        return Trust;
 
-    if (ch->Trust != 0)
-        return ch->Trust;
-
-    if (IsNpc(ch) && ch->TopLevel >= LEVEL_AVATAR)
+    if (IsNpc() && TopLevel >= LEVEL_AVATAR)
         return LEVEL_AVATAR;
 
-    if (ch->TopLevel >= LEVEL_IMMORTAL && IsRetiredImmortal(ch))
+    if (TopLevel >= LEVEL_IMMORTAL && IsRetiredImmortal())
         return LEVEL_IMMORTAL;
 
-    return ch->TopLevel;
+    return TopLevel;
+}
+
+short GetTrustLevel(const Character* ch)
+{
+    return ch->GetTrustLevel();
 }
 
 /*
@@ -467,18 +467,23 @@ short GetAbilityLevel(const Character *ch, short ability)
     return ch->Ability.Level[ability];
 }
 
-void SetAbilityLevel(Character *ch, short ability, int newlevel)
+void Character::SetAbilityLevel(short ability, int newlevel)
 {
-    int maxlevel = IsImmortal(ch) ? 200 : MAX_ABILITY_LEVEL;
+    int maxlevel = IsImmortal() ? 200 : MAX_ABILITY_LEVEL;
 
     if (newlevel >= 0 && newlevel <= maxlevel)
     {
-        ch->Ability.Level[ability] = newlevel;
+        Ability.Level[ability] = newlevel;
     }
     else
     {
         Log->Bug("%s: level out of range: %d", __FUNCTION__, newlevel);
     }
+}
+
+void SetAbilityLevel(Character *ch, short ability, int newlevel)
+{
+    ch->SetAbilityLevel(ability, newlevel);
 }
 
 /*
@@ -702,6 +707,7 @@ Object *GetWornObject(const Character *ch, const std::string &argument)
     if (!ch)
     {
         Log->Bug("%s: null ch", __FUNCTION__);
+        return nullptr;
     }
 
     int number = NumberArgument(argument, arg);
@@ -1149,14 +1155,24 @@ int GetCarryCapacityWeight(const Character *ch)
     return StrengthBonus[GetCurrentStrength(ch)].Carry;
 }
 
-bool IsNpc(const Character *ch)
+bool Character::IsNpc() const
 {
-    return IsBitSet(ch->Flags, ACT_NPC) || !ch->PCData;
+    return IsBitSet(Flags, ACT_NPC) || !PCData;
 }
 
-bool IsImmortal(const Character *ch)
+bool IsNpc(const Character* ch)
 {
-    return GetTrustLevel(ch) >= LEVEL_IMMORTAL;
+    return ch->IsNpc();
+}
+
+bool Character::IsImmortal() const
+{
+    return GetTrustLevel() >= LEVEL_IMMORTAL;
+}
+
+bool IsImmortal(const Character* ch)
+{
+    return ch->IsImmortal();
 }
 
 bool IsGreater(const Character *ch)
@@ -1220,9 +1236,14 @@ bool IsDrunk(const Character *ch)
     return GetRandomPercent() < ch->PCData->Condition[COND_DRUNK];
 }
 
-bool IsRetiredImmortal(const Character *ch)
+bool Character::IsRetiredImmortal() const
 {
-    return !IsNpc(ch) && ch->PCData->Flags.test(Flag::PCData::Retired);
+    return !IsNpc() && PCData->Flags.test(Flag::PCData::Retired);
+}
+
+bool IsRetiredImmortal(const Character* ch)
+{
+    return ch->IsRetiredImmortal();
 }
 
 bool IsAuthed(const Character *ch)

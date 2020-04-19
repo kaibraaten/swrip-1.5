@@ -117,7 +117,8 @@ protected:
         _location->Area = _area;
         _location->Flags = CreateBitSet<Flag::MAX>({ Flag::Room::Factory, Flag::Room::Refinery });
 
-        _engineer = new Character(std::make_unique<PCData>(), std::make_shared<NullDescriptor>());
+        _engineer = new Character(std::make_unique<PCData>());
+        MapCharacterAndDescriptor(_engineer, std::make_shared<NullDescriptor>());
         _engineer->PCData->Learned[gsn_mycraftingskill] = 100;
 
         CharacterToRoom(_engineer, _location);

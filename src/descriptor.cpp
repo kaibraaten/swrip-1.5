@@ -414,3 +414,9 @@ bool NullDescriptor::HasInput() const
 {
     return false;
 }
+
+void MapCharacterAndDescriptor(Character* ch, std::shared_ptr<Descriptor> d)
+{
+    ch->Desc = d;
+    d->Character = ch;
+}

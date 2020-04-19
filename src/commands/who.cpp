@@ -69,7 +69,8 @@ void do_who(Character *ch, std::string argument)
     {
         NullCh = true;
         auto desc = std::make_shared<NullDescriptor>();
-        ch = new Character(std::make_unique<PCData>(), desc);
+        ch = new Character(std::make_unique<PCData>());
+        MapCharacterAndDescriptor(ch, desc);
         ch->TopLevel = 1;
         ch->InRoom = GetRoom(ROOM_VNUM_LIMBO);
     }

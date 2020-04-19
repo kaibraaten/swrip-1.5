@@ -13,7 +13,8 @@ class AliasTests : public ::testing::Test
 protected:
     void SetUp() override
     {
-        _testCharacter = new Character(std::make_unique<PCData>(), std::make_shared<NullDescriptor>());
+        _testCharacter = new Character(std::make_unique<PCData>());
+        MapCharacterAndDescriptor(_testCharacter, std::make_shared<NullDescriptor>());
         auto protoMob = MakeMobile(1, INVALID_VNUM, "Foo");
         _testNpc = new Character(protoMob);
     }

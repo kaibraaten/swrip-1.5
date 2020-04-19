@@ -110,7 +110,8 @@ bool InMemoryPlayerRepository::Load(std::shared_ptr<Descriptor> d, const std::st
     }
     else
     {
-        Character *ch = new Character(std::make_unique<PCData>(), d);
+        Character *ch = new Character(std::make_unique<PCData>());
+        MapCharacterAndDescriptor(ch, d);
         ch->Name = Capitalize(name);
         ImcInitializeCharacter(ch);
         loading_char = nullptr;
@@ -530,8 +531,8 @@ int InMemoryPlayerRepository::L_CharacterEntry(lua_State *L)
     bool preload = lua_toboolean(L, -1);
     lua_pop(L, 2);
 
-    Character *ch = new Character(std::make_unique<PCData>(), d);
-
+    Character *ch = new Character(std::make_unique<PCData>());
+    MapCharacterAndDescriptor(ch, d);
     loading_char = ch;
     ImcInitializeCharacter(ch);
 

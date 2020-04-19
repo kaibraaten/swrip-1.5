@@ -39,7 +39,7 @@ class Character
 {
 public:
     Character() = delete;
-    Character(std::unique_ptr<class PCData> pcdata, std::shared_ptr<Descriptor> desc);
+    Character(std::unique_ptr<class PCData> pcdata);
     Character(std::shared_ptr<ProtoMobile> protoMob);
 
     virtual ~Character();
@@ -58,6 +58,12 @@ public:
     const std::list<std::shared_ptr<Timer>> &Timers() const;
     void Add(std::shared_ptr<Timer> timer);
     void Remove(std::shared_ptr<Timer> timer);
+
+    bool IsNpc() const;
+    bool IsImmortal() const;
+    void SetAbilityLevel(short ability, int newlevel);
+    short GetTrustLevel() const;
+    bool IsRetiredImmortal() const;
 
     // Player AND mob
     SpecFun *spec_fun = NULL;
@@ -290,8 +296,6 @@ Object *GetFirstObjectOfType(const Character *ch, ItemTypes type);
 
 short GetAbilityLevel(const Character *ch, short ability);
 
-void SetAbilityLevel(Character *ch, short ability, int newlevel);
-
 /*
  * Return true if a char is affected by a spell.
  */
@@ -376,8 +380,6 @@ int GetCarryCapacityWeight(const Character *ch);
  */
 int GetCarryCapacityNumber(const Character *ch);
 
-bool IsNpc(const Character *ch);
-
 bool IsImmortal(const Character *ch);
 
 bool IsGreater(const Character *ch);
@@ -449,5 +451,9 @@ bool HasPermanentSneak(const Character *ch);
 unsigned int GetKillTrackCount(const Character *ch);
 
 bool IS_OUTSIDE(const Character *ch);
+
+void SetAbilityLevel(Character* ch, short ability, int newlevel);
+
+bool IsNpc(const Character* ch);
 
 #endif

@@ -7770,7 +7770,7 @@ static char *imc_act_string(const char *format, Character * ch, Character * vic)
 
 static Character *imc_make_skeleton(const char *name)
 {
-    Character *skeleton = new Character(nullptr);
+    Character *skeleton = new Character(std::shared_ptr<ProtoMobile>());
 
     skeleton->Name = name;
     skeleton->ShortDescr = name;

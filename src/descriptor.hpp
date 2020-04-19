@@ -58,5 +58,6 @@ public:
 unsigned char CheckReconnect(std::shared_ptr<Descriptor> d, const std::string &name, bool fConn);
 unsigned char CheckPlaying(std::shared_ptr<Descriptor> d, const std::string &name, bool kick);
 bool CheckMultiplaying(std::shared_ptr<Descriptor> d, const std::string &name);
+void MapCharacterAndDescriptor(Character* ch, std::shared_ptr<Descriptor> d);
 
 #endif
