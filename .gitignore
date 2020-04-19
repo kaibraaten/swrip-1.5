@@ -74,6 +74,7 @@ cmake_install.cmake
 /.vs
 /.vscode
 core.*
+core
 *.cmake
 googletest-build
 googletest-download

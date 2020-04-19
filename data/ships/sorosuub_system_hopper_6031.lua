@@ -1,17 +1,31 @@
 -- Sorosuub System Hopper
--- Last saved Sunday 19-Apr-2020 15:41:01
+-- Last saved Sunday 19-Apr-2020 15:54:16
 
 ShipEntry
 {
-   Pilot = "", 
+   Alarm = false, 
+   Type = "Civilian", 
+   Position = 
+   {
+      Z = -31794, 
+      X = -276002, 
+      Y = -1032456, 
+   }, 
+   Name = "Sorosuub System Hopper", 
+   LastDock = 32050, 
+   State = 0, 
    Class = "Starfighter", 
+   PersonalName = "6031", 
+   DockingPorts = 0, 
+   Description = "", 
+   Instruments = 
+   {
+      AstroArray = 0, 
+      Sensor = 0, 
+      Comm = 0, 
+   }, 
    Defenses = 
    {
-      Shield = 
-      {
-         Max = 10, 
-         Current = 0, 
-      }, 
       Chaff = 
       {
          Max = 0, 
@@ -22,31 +36,49 @@ ShipEntry
          Max = 100, 
          Current = 100, 
       }, 
+      Shield = 
+      {
+         Max = 10, 
+         Current = 0, 
+      }, 
    }, 
-   Type = "Civilian", 
-   PersonalName = "6031", 
-   Owner = "public", 
-   DockingPorts = 0, 
-   State = 0, 
    CoPilot = "", 
-   Alarm = false, 
    Hyperdrive = 
    {
       Speed = 100, 
    }, 
+   Shipyard = 32050, 
    Rooms = 
    {
-      Coseat = 32156, 
+      Pilotseat = 32156, 
+      Gunseat = 32156, 
+      Navseat = 32156, 
+      First = 32156, 
       Last = 32156, 
       Engine = 0, 
-      Pilotseat = 32156, 
-      Navseat = 32156, 
       Entrance = 32156, 
-      Gunseat = 32156, 
+      Coseat = 32156, 
       Hangar = 0, 
-      First = 32156, 
       Cockpit = 32156, 
    }, 
+   Guard = false, 
+   Thrusters = 
+   {
+      Energy = 
+      {
+         Max = 2000, 
+         Current = 2000, 
+      }, 
+      Maneuver = 35, 
+      Speed = 
+      {
+         Max = 65, 
+         Current = 0, 
+      }, 
+   }, 
+   Owner = "public", 
+   Pilot = "", 
+   Location = 32050, 
    Home = "Adari", 
    WeaponSystems = 
    {
@@ -103,71 +135,39 @@ ShipEntry
             State = 0, 
          }, 
       }, 
-      Laser = 
-      {
-         State = 0, 
-         Count = 0, 
-      }, 
       TractorBeam = 
       {
          State = 1, 
          Strength = 0, 
       }, 
+      IonCannon = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      Laser = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
       Tube = 
       {
-         State = 0, 
-         Missiles = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
          Rockets = 
          {
             Max = 0, 
             Current = 0, 
          }, 
-      }, 
-      IonCannon = 
-      {
          State = 0, 
-         Count = 0, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Missiles = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
       }, 
    }, 
-   Thrusters = 
-   {
-      Energy = 
-      {
-         Max = 2000, 
-         Current = 2000, 
-      }, 
-      Maneuver = 35, 
-      Speed = 
-      {
-         Max = 65, 
-         Current = 0, 
-      }, 
-   }, 
-   Name = "Sorosuub System Hopper", 
-   Instruments = 
-   {
-      Comm = 0, 
-      Sensor = 0, 
-      AstroArray = 0, 
-   }, 
-   Position = 
-   {
-      Z = -31794, 
-      Y = -1032456, 
-      X = -276002, 
-   }, 
-   Shipyard = 32050, 
-   Guard = false, 
-   Location = 32050, 
-   LastDock = 32050, 
-   Description = "", 
 }
