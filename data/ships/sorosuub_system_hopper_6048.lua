@@ -1,26 +1,55 @@
 -- Sorosuub System Hopper
--- Last saved Sunday 19-Apr-2020 15:25:15
+-- Last saved Sunday 19-Apr-2020 15:41:01
 
 ShipEntry
 {
-   State = 0, 
-   Type = "Civilian", 
-   Description = "", 
-   Guard = false, 
-   Instruments = 
+   Pilot = "", 
+   Class = "Starfighter", 
+   Defenses = 
    {
-      Sensor = 5, 
-      Comm = 0, 
-      AstroArray = 0, 
+      Shield = 
+      {
+         Max = 10, 
+         Current = 0, 
+      }, 
+      Chaff = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+      Hull = 
+      {
+         Max = 100, 
+         Current = 100, 
+      }, 
    }, 
+   Type = "Civilian", 
+   PersonalName = "6048", 
+   Owner = "public", 
+   DockingPorts = 0, 
+   State = 0, 
+   CoPilot = "", 
    Alarm = false, 
+   Hyperdrive = 
+   {
+      Speed = 100, 
+   }, 
+   Rooms = 
+   {
+      Coseat = 32170, 
+      Last = 32170, 
+      Engine = 0, 
+      Pilotseat = 32170, 
+      Navseat = 32170, 
+      Entrance = 32170, 
+      Gunseat = 32170, 
+      Hangar = 0, 
+      First = 32170, 
+      Cockpit = 32170, 
+   }, 
+   Home = "Tatooine", 
    WeaponSystems = 
    {
-      IonCannon = 
-      {
-         State = 0, 
-         Count = 0, 
-      }, 
       Turrets = 
       {
          [1] = 
@@ -74,100 +103,71 @@ ShipEntry
             State = 0, 
          }, 
       }, 
-      TractorBeam = 
-      {
-         Strength = 0, 
-         State = 1, 
-      }, 
-      Tube = 
-      {
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         State = 0, 
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Missiles = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-      }, 
       Laser = 
       {
          State = 0, 
          Count = 0, 
       }, 
-   }, 
-   CoPilot = "", 
-   Hyperdrive = 
-   {
-      Speed = 100, 
-   }, 
-   DockingPorts = 0, 
-   Name = "Sorosuub System Hopper", 
-   Rooms = 
-   {
-      Pilotseat = 32170, 
-      Engine = 0, 
-      Cockpit = 32170, 
-      Last = 32170, 
-      Hangar = 0, 
-      Coseat = 32170, 
-      Gunseat = 32170, 
-      Entrance = 32170, 
-      Navseat = 32170, 
-      First = 32170, 
-   }, 
-   Defenses = 
-   {
-      Hull = 
+      TractorBeam = 
       {
-         Max = 100, 
-         Current = 100, 
+         State = 1, 
+         Strength = 0, 
       }, 
-      Chaff = 
+      Tube = 
       {
-         Max = 0, 
-         Current = 0, 
+         State = 0, 
+         Missiles = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
       }, 
-      Shield = 
+      IonCannon = 
       {
-         Max = 10, 
-         Current = 0, 
+         State = 0, 
+         Count = 0, 
       }, 
    }, 
-   Pilot = "", 
-   Owner = "public", 
-   Class = "Starfighter", 
-   Position = 
-   {
-      X = 5000002, 
-      Y = -4499998, 
-      Z = 1, 
-   }, 
-   LastDock = 31847, 
    Thrusters = 
    {
-      Speed = 
-      {
-         Max = 65, 
-         Current = 0, 
-      }, 
       Energy = 
       {
          Max = 2000, 
          Current = 2000, 
       }, 
       Maneuver = 35, 
+      Speed = 
+      {
+         Max = 65, 
+         Current = 0, 
+      }, 
    }, 
-   Location = 31847, 
-   Home = "Tatooine", 
+   Name = "Sorosuub System Hopper", 
+   Instruments = 
+   {
+      Comm = 0, 
+      Sensor = 5, 
+      AstroArray = 0, 
+   }, 
+   Position = 
+   {
+      Z = 1, 
+      Y = -4499998, 
+      X = 5000002, 
+   }, 
    Shipyard = 31847, 
-   PersonalName = "6048", 
+   Guard = false, 
+   Location = 31847, 
+   LastDock = 31847, 
+   Description = "", 
 }

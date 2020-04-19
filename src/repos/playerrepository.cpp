@@ -845,7 +845,11 @@ void InMemoryPlayerRepository::Save(const Character *pc) const
 
     pc->PCData->SaveTime = current_time;
 
-    fs::rename(GetPlayerFilename(pc).c_str(), GetPlayerBackupFilename(pc->Name).c_str());
+    if(fs::exists(GetPlayerFilename(pc)))
+    {
+        fs::rename(GetPlayerFilename(pc).c_str(), GetPlayerBackupFilename(pc->Name).c_str());
+    }
+    
     LuaSaveDataFile(GetPlayerFilename(pc),
         &InMemoryPlayerRepository::PushPlayer,
         "character", pc);
