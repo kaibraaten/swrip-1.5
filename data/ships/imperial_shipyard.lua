@@ -1,173 +1,173 @@
 -- Imperial Shipyard
--- Last saved Sunday 19-Apr-2020 15:54:16
+-- Last saved Sunday 19-Apr-2020 15:54:26
 
 ShipEntry
 {
-   PersonalName = "Imperial Shipyard", 
-   Description = "", 
-   Name = "Imperial Shipyard", 
-   Defenses = 
-   {
-      Shield = 
-      {
-         Max = 10000, 
-         Current = 0, 
-      }, 
-      Hull = 
-      {
-         Max = -25536, 
-         Current = -25536, 
-      }, 
-      Chaff = 
-      {
-         Max = 25, 
-         Current = 25, 
-      }, 
-   }, 
-   Owner = "The Empire", 
-   LastDock = 45, 
    Rooms = 
    {
-      Entrance = 32000, 
-      Cockpit = 32049, 
+      Pilotseat = 32049, 
       First = 32000, 
+      Engine = 0, 
       Last = 32049, 
       Hangar = 32000, 
-      Navseat = 32049, 
+      Entrance = 32000, 
+      Cockpit = 32049, 
       Gunseat = 32049, 
       Coseat = 32049, 
-      Engine = 0, 
-      Pilotseat = 32049, 
+      Navseat = 32049, 
    }, 
    Thrusters = 
    {
-      Energy = 
-      {
-         Max = -5536, 
-         Current = -5536, 
-      }, 
+      Maneuver = 0, 
       Speed = 
       {
-         Max = 255, 
          Current = 0, 
+         Max = 255, 
       }, 
-      Maneuver = 0, 
+      Energy = 
+      {
+         Current = -5536, 
+         Max = -5536, 
+      }, 
    }, 
+   Guard = true, 
+   LastDock = 45, 
+   DockingPorts = 0, 
    WeaponSystems = 
    {
+      TractorBeam = 
+      {
+         Strength = 255, 
+         State = 0, 
+      }, 
       IonCannon = 
       {
-         Count = 20, 
          State = 0, 
+         Count = 20, 
       }, 
       Tube = 
       {
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
+         State = 0, 
          Rockets = 
          {
-            Max = 50, 
             Current = 50, 
+            Max = 50, 
+         }, 
+         Torpedoes = 
+         {
+            Current = 0, 
+            Max = 0, 
          }, 
          Missiles = 
          {
-            Max = 100, 
             Current = 100, 
+            Max = 100, 
          }, 
-         State = 0, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
-      }, 
-      TractorBeam = 
-      {
-         State = 0, 
-         Strength = 255, 
       }, 
       Laser = 
       {
-         Count = 20, 
          State = 0, 
+         Count = 20, 
       }, 
    }, 
-   State = 1, 
+   Owner = "The Empire", 
+   Name = "Imperial Shipyard", 
+   Type = "Imperial", 
+   Class = "Platform", 
+   Alarm = false, 
+   Home = "Byss", 
+   Location = 0, 
    Hyperdrive = 
    {
       Speed = 0, 
    }, 
    Position = 
    {
-      Y = 2000, 
       X = 2000, 
+      Y = 2000, 
       Z = -2000, 
    }, 
-   Class = "Platform", 
-   Location = 0, 
-   Home = "Byss", 
+   Shipyard = 45, 
    Instruments = 
    {
       Comm = 255, 
       AstroArray = 0, 
       Sensor = 255, 
    }, 
-   Alarm = false, 
-   Guard = true, 
-   Shipyard = 45, 
-   DockingPorts = 0, 
-   Type = "Imperial", 
-   CoPilot = "", 
+   Defenses = 
+   {
+      Shield = 
+      {
+         Current = 0, 
+         Max = 10000, 
+      }, 
+      Chaff = 
+      {
+         Current = 25, 
+         Max = 25, 
+      }, 
+      Hull = 
+      {
+         Current = -25536, 
+         Max = -25536, 
+      }, 
+   }, 
    Pilot = "", 
+   CoPilot = "", 
+   State = 1, 
+   Description = "", 
+   PersonalName = "Imperial Shipyard", 
 }
