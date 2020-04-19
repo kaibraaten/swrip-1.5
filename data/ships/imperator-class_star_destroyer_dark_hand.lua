@@ -1,10 +1,26 @@
 -- Imperator-class Star Destroyer
--- Last saved Friday 14-Jun-2019 16:21:13
+-- Last saved Sunday 19-Apr-2020 15:25:15
 
 ShipEntry
 {
+   State = 1, 
+   Type = "Imperial", 
+   Description = "", 
+   Guard = true, 
+   Instruments = 
+   {
+      Sensor = 250, 
+      Comm = 11, 
+      AstroArray = 200, 
+   }, 
+   Alarm = false, 
    WeaponSystems = 
    {
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 10, 
+      }, 
       Turrets = 
       {
          [1] = 
@@ -58,33 +74,23 @@ ShipEntry
             State = 0, 
          }, 
       }, 
-      IonCannon = 
-      {
-         Count = 10, 
-         State = 0, 
-      }, 
       TractorBeam = 
       {
-         State = 0, 
          Strength = 150, 
-      }, 
-      Laser = 
-      {
-         Count = 0, 
          State = 0, 
       }, 
       Tube = 
       {
+         Rockets = 
+         {
+            Max = 10, 
+            Current = 10, 
+         }, 
          State = 0, 
          Torpedoes = 
          {
             Max = 0, 
             Current = 0, 
-         }, 
-         Rockets = 
-         {
-            Max = 10, 
-            Current = 10, 
          }, 
          Missiles = 
          {
@@ -92,50 +98,60 @@ ShipEntry
             Current = 50, 
          }, 
       }, 
+      Laser = 
+      {
+         State = 0, 
+         Count = 0, 
+      }, 
+   }, 
+   CoPilot = "", 
+   Hyperdrive = 
+   {
+      Speed = 255, 
+   }, 
+   DockingPorts = 0, 
+   Name = "Imperator-class Star Destroyer", 
+   Rooms = 
+   {
+      Pilotseat = 675, 
+      Engine = 629, 
+      Cockpit = 699, 
+      Last = 699, 
+      Hangar = 600, 
+      Coseat = 677, 
+      Gunseat = 674, 
+      Entrance = 600, 
+      Navseat = 673, 
+      First = 600, 
    }, 
    Defenses = 
    {
-      Shield = 
+      Hull = 
       {
-         Max = 1000, 
-         Current = 1000, 
+         Max = 20000, 
+         Current = 20000, 
       }, 
       Chaff = 
       {
          Max = 25, 
          Current = 25, 
       }, 
-      Hull = 
+      Shield = 
       {
-         Max = 20000, 
-         Current = 20000, 
+         Max = 1000, 
+         Current = 1000, 
       }, 
    }, 
-   Alarm = false, 
-   Description = "", 
+   Pilot = "", 
+   Owner = "The Empire", 
    Class = "Capital Ship", 
-   State = 1, 
-   Location = 0, 
-   Shipyard = 32050, 
-   Rooms = 
+   Position = 
    {
-      Coseat = 677, 
-      Entrance = 600, 
-      Cockpit = 699, 
-      Engine = 629, 
-      First = 600, 
-      Last = 699, 
-      Pilotseat = 675, 
-      Hangar = 600, 
-      Navseat = 673, 
-      Gunseat = 674, 
+      X = 1000, 
+      Y = 5001500, 
+      Z = -1000, 
    }, 
    LastDock = 32050, 
-   PersonalName = "Dark Hand", 
-   Hyperdrive = 
-   {
-      Speed = 255, 
-   }, 
    Thrusters = 
    {
       Speed = 
@@ -143,31 +159,15 @@ ShipEntry
          Max = 85, 
          Current = 0, 
       }, 
-      Maneuver = 0, 
       Energy = 
       {
          Max = 30000, 
          Current = 30000, 
       }, 
+      Maneuver = 0, 
    }, 
-   Pilot = "", 
-   Instruments = 
-   {
-      Sensor = 250, 
-      AstroArray = 200, 
-      Comm = 11, 
-   }, 
+   Location = 0, 
    Home = "Byss", 
-   Position = 
-   {
-      Z = -1000, 
-      Y = 5001500, 
-      X = 1000, 
-   }, 
-   Type = "Imperial", 
-   Guard = true, 
-   Owner = "The Empire", 
-   CoPilot = "", 
-   DockingPorts = 0, 
-   Name = "Imperator-class Star Destroyer", 
+   Shipyard = 32050, 
+   PersonalName = "Dark Hand", 
 }

@@ -22,8 +22,8 @@ public:
     std::shared_ptr<class Planet> Planet;
     std::string Name;
     SpaceobjectType Type = 0;
-    std::shared_ptr<Vector3> Position;
-    std::shared_ptr<Vector3> Heading;
+    std::shared_ptr<Vector3> Position = std::make_shared<Vector3>();
+    std::shared_ptr<Vector3> Heading = std::make_shared<Vector3>();
     int Speed = 0;
     int Gravity = 0;
     bool IsSimulator = false;

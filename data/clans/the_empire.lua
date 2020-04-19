@@ -1,20 +1,20 @@
 -- The Empire
--- Last saved Friday 14-Jun-2019 15:53:25
+-- Last saved Sunday 19-Apr-2020 15:22:55
 
 ClanEntry
 {
-   MobDeaths = 0, 
+   PlayerKills = 0, 
+   Name = "The Empire", 
+   FoundationDate = 0, 
+   PlayerDeaths = 0, 
    Members = 
    {
    }, 
    Type = 0, 
    Leader = "", 
-   Name = "The Empire", 
    Funds = 0, 
-   FoundationDate = 0, 
+   MobDeaths = 0, 
    Number2 = "", 
-   MobKills = 0, 
-   PlayerKills = 0, 
-   PlayerDeaths = 0, 
    Number1 = "", 
+   MobKills = 0, 
 }
