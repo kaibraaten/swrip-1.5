@@ -31,10 +31,10 @@ Exactly where we go from there is not decided yet, but I'm unlikely to add
 new features any time soon. It will still be about refactoring.
 
 ## Requirements
-* A compiler supporting C++17. Clang, GCC 8 and Visual Studio 2017 are known to work.
+* A compiler supporting C++17. Clang, GCC 9, and Visual Studio 2019 are known to work.
 * Lua 5.3 (included in libs/3rdparty directory)
 * Google Test and Google Mock (downloaded automatically)
-* cmake 3.11 or higher.
+* cmake 3.10 or higher.
 
 ## Compiling
 * Type `cmake .` (only needed first time you're compiling)
@@ -63,7 +63,7 @@ I'll probably simplify this process at some point.
 ## Credits
 Below is the history of SWRiP.
 
-Star Wars: Rise in Power 1.5 &copy; 2016-2018 by Kai Braaten
+Star Wars: Rise in Power 1.5 &copy; 2016-2020 by Kai Braaten
 
 Star Wars: Rise in Power 1.0.1 &copy; 2001 by Mark Miller (Darrik Vequir)
 
