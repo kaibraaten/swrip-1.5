@@ -1,173 +1,173 @@
 -- Sorosuub System Hopper
--- Last saved Sunday 19-Apr-2020 15:54:26
+-- Last saved Monday 20-Apr-2020 13:24:27
 
 ShipEntry
 {
+   Shipyard = 3060, 
+   Defenses = 
+   {
+      Chaff = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+      Shield = 
+      {
+         Max = 10, 
+         Current = 0, 
+      }, 
+      Hull = 
+      {
+         Max = 100, 
+         Current = 100, 
+      }, 
+   }, 
+   Home = "Corperate Sector - Quilim", 
+   Owner = "public", 
+   Description = "", 
+   Type = "Civilian", 
+   State = 0, 
+   Instruments = 
+   {
+      AstroArray = 0, 
+      Comm = 0, 
+      Sensor = 0, 
+   }, 
    Rooms = 
    {
-      Pilotseat = 32164, 
-      First = 32164, 
+      Gunseat = 32164, 
       Engine = 0, 
+      Entrance = 32164, 
+      Pilotseat = 32164, 
+      Navseat = 32164, 
+      Cockpit = 32164, 
+      First = 32164, 
+      Coseat = 32164, 
       Last = 32164, 
       Hangar = 0, 
-      Entrance = 32164, 
-      Cockpit = 32164, 
-      Gunseat = 32164, 
-      Coseat = 32164, 
-      Navseat = 32164, 
    }, 
-   Thrusters = 
-   {
-      Maneuver = 35, 
-      Speed = 
-      {
-         Current = 0, 
-         Max = 65, 
-      }, 
-      Energy = 
-      {
-         Current = 2000, 
-         Max = 2000, 
-      }, 
-   }, 
-   Guard = false, 
-   LastDock = 3060, 
-   DockingPorts = 0, 
+   Name = "Sorosuub System Hopper", 
+   Location = 3060, 
    WeaponSystems = 
    {
-      TractorBeam = 
-      {
-         Strength = 0, 
-         State = 1, 
-      }, 
       IonCannon = 
       {
-         State = 0, 
          Count = 0, 
-      }, 
-      Tube = 
-      {
          State = 0, 
-         Rockets = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         Missiles = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
+      }, 
+      TractorBeam = 
+      {
+         State = 1, 
+         Strength = 0, 
+      }, 
+      Laser = 
+      {
+         Count = 0, 
+         State = 0, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [2] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [3] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [4] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [5] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [6] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [7] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [8] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [9] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [0] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
       }, 
-      Laser = 
+      Tube = 
       {
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
          State = 0, 
-         Count = 0, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Missiles = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
       }, 
    }, 
-   Owner = "public", 
-   Name = "Sorosuub System Hopper", 
-   Type = "Civilian", 
-   Class = "Starfighter", 
-   Alarm = false, 
-   Home = "Corperate Sector - Quilim", 
-   Location = 3060, 
    Hyperdrive = 
    {
       Speed = 100, 
    }, 
+   Class = "Starfighter", 
+   Pilot = "", 
+   Alarm = false, 
+   PersonalName = "6039", 
+   CoPilot = "", 
    Position = 
    {
-      X = 5504576, 
       Y = 2000663, 
       Z = 2438, 
+      X = 5504576, 
    }, 
-   Shipyard = 3060, 
-   Instruments = 
+   Guard = false, 
+   Thrusters = 
    {
-      Comm = 0, 
-      AstroArray = 0, 
-      Sensor = 0, 
-   }, 
-   Defenses = 
-   {
-      Shield = 
+      Maneuver = 35, 
+      Speed = 
       {
+         Max = 65, 
          Current = 0, 
-         Max = 10, 
       }, 
-      Chaff = 
+      Energy = 
       {
-         Current = 0, 
-         Max = 0, 
-      }, 
-      Hull = 
-      {
-         Current = 100, 
-         Max = 100, 
+         Max = 2000, 
+         Current = 2000, 
       }, 
    }, 
-   Pilot = "", 
-   CoPilot = "", 
-   State = 0, 
-   Description = "", 
-   PersonalName = "6039", 
+   DockingPorts = 0, 
+   LastDock = 3060, 
 }

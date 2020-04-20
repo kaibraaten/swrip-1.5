@@ -1,21 +1,9 @@
 -- Sorosuub System Hopper
--- Last saved Sunday 19-Apr-2020 15:54:26
+-- Last saved Monday 20-Apr-2020 13:24:27
 
 ShipEntry
 {
-   Rooms = 
-   {
-      Pilotseat = 32154, 
-      First = 32154, 
-      Engine = 0, 
-      Last = 32154, 
-      Hangar = 0, 
-      Entrance = 32154, 
-      Cockpit = 32154, 
-      Gunseat = 32154, 
-      Coseat = 32154, 
-      Navseat = 32154, 
-   }, 
+   DockingPorts = 0, 
    Thrusters = 
    {
       Maneuver = 35, 
@@ -30,30 +18,22 @@ ShipEntry
          Max = 2000, 
       }, 
    }, 
+   State = 0, 
+   Instruments = 
+   {
+      Comm = 0, 
+      AstroArray = 0, 
+      Sensor = 0, 
+   }, 
    Guard = false, 
-   LastDock = 203, 
-   DockingPorts = 0, 
+   Owner = "public", 
+   Description = "", 
    WeaponSystems = 
    {
-      TractorBeam = 
-      {
-         Strength = 0, 
-         State = 1, 
-      }, 
-      IonCannon = 
-      {
-         State = 0, 
-         Count = 0, 
-      }, 
       Tube = 
       {
          State = 0, 
          Rockets = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         Torpedoes = 
          {
             Current = 0, 
             Max = 0, 
@@ -63,92 +43,106 @@ ShipEntry
             Current = 0, 
             Max = 0, 
          }, 
+         Torpedoes = 
+         {
+            Current = 0, 
+            Max = 0, 
+         }, 
+      }, 
+      TractorBeam = 
+      {
+         Strength = 0, 
+         State = 1, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [2] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [3] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [4] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [5] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [6] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [7] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [8] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [9] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [0] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
+      }, 
+      IonCannon = 
+      {
+         Count = 0, 
+         State = 0, 
       }, 
       Laser = 
       {
-         State = 0, 
          Count = 0, 
+         State = 0, 
       }, 
    }, 
-   Owner = "public", 
-   Name = "Sorosuub System Hopper", 
-   Type = "Civilian", 
-   Class = "Starfighter", 
    Alarm = false, 
-   Home = "Hoth", 
    Location = 203, 
-   Hyperdrive = 
+   Class = "Starfighter", 
+   Rooms = 
    {
-      Speed = 100, 
+      Pilotseat = 32154, 
+      Navseat = 32154, 
+      Engine = 0, 
+      First = 32154, 
+      Entrance = 32154, 
+      Gunseat = 32154, 
+      Coseat = 32154, 
+      Last = 32154, 
+      Hangar = 0, 
+      Cockpit = 32154, 
    }, 
-   Position = 
-   {
-      X = -2040, 
-      Y = -174627, 
-      Z = 23445, 
-   }, 
-   Shipyard = 203, 
-   Instruments = 
-   {
-      Comm = 0, 
-      AstroArray = 0, 
-      Sensor = 0, 
-   }, 
+   Pilot = "", 
+   Type = "Civilian", 
    Defenses = 
    {
+      Hull = 
+      {
+         Current = 100, 
+         Max = 100, 
+      }, 
       Shield = 
       {
          Current = 0, 
@@ -159,15 +153,21 @@ ShipEntry
          Current = 0, 
          Max = 0, 
       }, 
-      Hull = 
-      {
-         Current = 100, 
-         Max = 100, 
-      }, 
    }, 
-   Pilot = "", 
-   CoPilot = "", 
-   State = 0, 
-   Description = "", 
+   Hyperdrive = 
+   {
+      Speed = 100, 
+   }, 
    PersonalName = "6044", 
+   Position = 
+   {
+      Z = 23445, 
+      Y = -174627, 
+      X = -2040, 
+   }, 
+   Shipyard = 203, 
+   Home = "Hoth", 
+   LastDock = 203, 
+   CoPilot = "", 
+   Name = "Sorosuub System Hopper", 
 }

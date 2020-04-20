@@ -53,8 +53,8 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
 
         if (CharToLowercase(command[0]) == CharToLowercase(skill->Name[0])
             && !StringPrefix(command, skill->Name)
-            && skill->SpellFunction != nullptr
-            && skill->SpellFunction != spell_null
+            && (skill->SkillFunction != nullptr
+                || skill->SpellFunction != spell_null)
             && GetSkillLevel(ch, sn) > 0)
         {
             break;
@@ -624,7 +624,7 @@ int SkillNumberFromSlot(int slot)
 void SortSkillTable()
 {
     Log->Info("Sorting skill table...");
-    qsort(&SkillTable[1], TopSN - 1, sizeof(Skill *),
+    qsort(&SkillTable[1], TopSN - 1, sizeof(std::shared_ptr<Skill>),
         (int(*)(const void *, const void *)) CompareSkills);
 }
 

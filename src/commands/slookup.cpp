@@ -93,7 +93,7 @@ void do_slookup(Character* ch, std::string arg)
             strcpy(buf, "Flags:");
 
             for (x = 11; x < Flag::MAX; x++)
-                if (SPELL_FLAG(skill, 1 << x))
+                if (SPELL_FLAG(skill, x))
                 {
                     strcat(buf, " ");
                     strcat(buf, SpellFlag[x]);
