@@ -169,6 +169,7 @@ int GetMaxAbilityLevel(const Character *ch, int ability)
 static int GetMaxCombatLevel(const Character *ch)
 {
     int level = 0;
+    int statbonus = ch->PermStats.Con + ch->PermStats.Dex + ch->PermStats.Str;
 
     switch (ch->Ability.Main)
     {
@@ -194,7 +195,13 @@ static int GetMaxCombatLevel(const Character *ch)
     }
 
     level += RaceTable[ch->Race].AbilityMod[COMBAT_ABILITY];
-    level += ch->PermStats.Con + ch->PermStats.Dex + ch->PermStats.Str;
+    level += statbonus;
+
+    if (ch->Ability.Main == FORCE_ABILITY
+        && SysData.BetterJediCombatants)
+    {
+        level = umax(level, 100);
+    }
 
     return urange(1, level, MAX_ABILITY_LEVEL);
 }
