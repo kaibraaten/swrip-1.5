@@ -8,7 +8,7 @@
  */
 ch_ret spell_create_obj(int sn, int level, Character *ch, void *vo)
 {
-    Skill *skill = GetSkill(sn);
+    std::shared_ptr<Skill> skill = GetSkill(sn);
     int lvl = 0;
     int vnum = skill->Value;
     Object *obj = nullptr;

@@ -6,12 +6,12 @@
 /*
  * Generic mob creating spell                                   -Thoric
  */
-ch_ret spell_create_mob(int sn, int level, Character *ch, void *vo)
+ch_ret spell_create_mob(int sn, int level, Character* ch, void* vo)
 {
-    Skill *skill = GetSkill(sn);
+    std::shared_ptr<Skill> skill = GetSkill(sn);
     int lvl;
     int vnum = skill->Value;
-    Character *mob;
+    Character* mob;
     std::shared_ptr<ProtoMobile> mi;
     auto af = std::make_shared<Affect>();
 

@@ -73,29 +73,29 @@ class FakeSkillRepository : public SkillRepository
 public:
     FakeSkillRepository()
     {
-        _myCraftingSkill.UseRec = new timerset();
-        _myCraftingSkill.Name = "makesomething";
-        SkillTable[gsn_mycraftingskill] = &_myCraftingSkill;
+        _myCraftingSkill->UseRec = new timerset();
+        _myCraftingSkill->Name = "makesomething";
+        SkillTable[gsn_mycraftingskill] = _myCraftingSkill;
     }
 
     ~FakeSkillRepository()
     {
-        delete _myCraftingSkill.UseRec;
+        delete _myCraftingSkill->UseRec;
         SkillTable[gsn_mycraftingskill] = nullptr;
     }
 
-    Skill *GetSkill(int sn) override
+    std::shared_ptr<Skill> GetSkill(int sn) override
     {
-        return sn == gsn_mycraftingskill ? &_myCraftingSkill : nullptr;
+        return sn == gsn_mycraftingskill ? _myCraftingSkill : nullptr;
     }
 
     int LookupSkill(const std::string &name) override
     {
-        return !StrCmp(name, _myCraftingSkill.Name) ? gsn_mycraftingskill : -1;
+        return !StrCmp(name, _myCraftingSkill->Name) ? gsn_mycraftingskill : -1;
     }
 
 private:
-    Skill _myCraftingSkill;
+    std::shared_ptr<Skill> _myCraftingSkill = std::make_shared<Skill>();
 };
 
 class CraftTests : public ::testing::Test

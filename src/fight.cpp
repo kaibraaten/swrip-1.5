@@ -200,7 +200,7 @@ static void RemoveExpiredAffects(Character *ch)
                 || paf_next->Type != paf->Type
                 || paf_next->Duration > 0)
             {
-                const Skill *skill = GetSkill(paf->Type);
+                std::shared_ptr<Skill> skill = GetSkill(paf->Type);
 
                 if (paf->Type > 0 && skill && !skill->Messages.WearOff.empty())
                 {
@@ -1278,7 +1278,7 @@ ch_ret HitOnce(Character *ch, Character *victim, int dt)
     {
         if (dt >= 0 && dt < TopSN)
         {
-            Skill *skill = SkillTable[dt];
+            std::shared_ptr<Skill> skill = SkillTable[dt];
             bool found = false;
 
             if (!skill->Messages.VictimImmune.ToCaster.empty())
@@ -1537,7 +1537,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
             if (dt >= 0 && dt < TopSN)
             {
                 bool found = false;
-                Skill *skill = SkillTable[dt];
+                std::shared_ptr<Skill> skill = SkillTable[dt];
 
                 if (!skill->Messages.VictimImmune.ToCaster.empty())
                 {
@@ -1873,7 +1873,7 @@ ch_ret InflictDamage(Character *ch, Character *victim, int dam, int dt)
     case POS_DEAD:
         if (dt >= 0 && dt < TopSN)
         {
-            Skill *skill = SkillTable[dt];
+            std::shared_ptr<Skill> skill = SkillTable[dt];
 
             if (!skill->Messages.VictimDeath.ToCaster.empty())
             {
@@ -2853,12 +2853,12 @@ long ComputeXP(const Character *gch, const Character *victim)
 static void SendDamageMessages(Character *ch, Character *victim, int dam, int dt)
 {
     char buf1[256], buf2[256], buf3[256];
-    const char *vs = NULL;
-    const char *vp = NULL;
-    const char *attack = NULL;
+    const char *vs = nullptr;
+    const char* vp = nullptr;
+    const char *attack = nullptr;
     char punct = '\0';
     short dampc = 0;
-    Skill *skill = NULL;
+    std::shared_ptr<Skill> skill;
     bool gcflag = false;
     bool gvflag = false;
 

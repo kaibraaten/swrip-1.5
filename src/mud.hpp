@@ -1288,13 +1288,13 @@ void UpdateNumberOfTimesUsed(timeval *time_used, timerset *userec);
 
 /* magic.c */
 int ModifySavingThrowBasedOnResistance(const Character *ch, int save_chance, int ris);
-void SuccessfulCasting(Skill *skill, Character *ch,
+void SuccessfulCasting(std::shared_ptr<Skill> skill, Character *ch,
     Character *victim, Object *obj);
-void FailedCasting(Skill *skill, Character *ch,
+void FailedCasting(std::shared_ptr<Skill> skill, Character *ch,
     Character *victim, Object *obj);
 bool IsImmuneToDamageType(const Character *ch, short damtype);
 bool CheckSavingThrow(int sn, int level, const Character *ch, const Character *victim);
-void ImmuneCasting(Skill *skill, Character *ch, Character *victim, Object *obj);
+void ImmuneCasting(std::shared_ptr<Skill> skill, Character *ch, Character *victim, Object *obj);
 void *LocateSpellTargets(Character *ch, const std::string &arg,
     int sn, Character **victim, Object **obj);
 int FindSpell(const Character *ch, const std::string &name, bool know);

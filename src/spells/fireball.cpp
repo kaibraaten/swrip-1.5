@@ -2,10 +2,10 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-ch_ret spell_fireball( int sn, int level, Character *ch, void *vo )
+ch_ret spell_fireball(int sn, int level, Character* ch, void* vo)
 {
-  Character *victim = (Character *) vo;
-  static const short dam_each[] =
+    Character* victim = (Character*)vo;
+    static const short dam_each[] =
     {
       1,
       1,  4,  7, 10, 13,        16, 19, 22, 25, 28,
@@ -16,23 +16,23 @@ ch_ret spell_fireball( int sn, int level, Character *ch, void *vo )
       64, 65, 65, 66, 66, 67, 68, 68, 69, 69,
       70, 71, 71, 72, 72, 73, 73, 74, 75, 75
     };
-  int dam;
+    int dam;
 
-  ch->Echo("You feel the hatred grow within you!\r\n");
-  ch->Alignment = ch->Alignment - 100;
-  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
-  ApplySithPenalty( ch );
+    ch->Echo("You feel the hatred grow within you!\r\n");
+    ch->Alignment = ch->Alignment - 100;
+    ch->Alignment = urange(-1000, ch->Alignment, 1000);
+    ApplySithPenalty(ch);
 
-  level = umin(level, sizeof(dam_each)/sizeof(dam_each[0]) - 1);
-  level = umax(0, level);
-  dam           = GetRandomNumberFromRange( dam_each[level] / 2, dam_each[level] * 2 );
+    level = umin(level, sizeof(dam_each) / sizeof(dam_each[0]) - 1);
+    level = umax(0, level);
+    dam = GetRandomNumberFromRange(dam_each[level] / 2, dam_each[level] * 2);
 
-  if ( SaveVsSpellStaff( level, victim ) )
-    dam /= 2;
+    if (SaveVsSpellStaff(level, victim))
+        dam /= 2;
 
-  if ( IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch) )
-    dam -= (int) (dam / 4);
+    if (IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch))
+        dam -= (int)(dam / 4);
 
-  return InflictDamage( ch, victim, dam, sn );
+    return InflictDamage(ch, victim, dam, sn);
 }
 

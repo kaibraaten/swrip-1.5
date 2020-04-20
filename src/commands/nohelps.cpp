@@ -85,7 +85,7 @@ static void ShowMissingHelpsForSkills(const Character *ch)
 
     for (sn = 0; sn < TopSN && SkillTable[sn] != nullptr; sn++)
     {
-        const Skill *skill = SkillTable[sn];
+        std::shared_ptr<Skill> skill = SkillTable[sn];
 
         if (skill == nullptr || !GetHelpFile(ch, skill->Name))
         {

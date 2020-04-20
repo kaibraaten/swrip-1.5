@@ -4,66 +4,66 @@
 #include "skill.hpp"
 #include "log.hpp"
 
-ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
+ch_ret spell_charm_person(int sn, int level, Character* ch, void* vo)
 {
-  Character *victim = (Character *) vo;
-  std::shared_ptr<Affect> af = std::make_shared<Affect>();
-  int charm_chance = 0;
-  char buf[MAX_STRING_LENGTH] = {'\0'};
-  Skill *skill = GetSkill(sn);
+    Character* victim = (Character*)vo;
+    std::shared_ptr<Affect> af = std::make_shared<Affect>();
+    int charm_chance = 0;
+    char buf[MAX_STRING_LENGTH] = { '\0' };
+    std::shared_ptr<Skill> skill = GetSkill(sn);
 
-  if ( victim == ch )
+    if (victim == ch)
     {
-      ch->Echo("You like yourself even better!\r\n");
-      return rSPELL_FAILED;
+        ch->Echo("You like yourself even better!\r\n");
+        return rSPELL_FAILED;
     }
 
-  if ( IsBitSet( victim->Immune, RIS_MAGIC )
-       ||   IsBitSet( victim->Immune, RIS_CHARM ) )
+    if (IsBitSet(victim->Immune, RIS_MAGIC)
+        || IsBitSet(victim->Immune, RIS_CHARM))
     {
-      ImmuneCasting( skill, ch, victim, NULL );
-      return rSPELL_FAILED;
+        ImmuneCasting(skill, ch, victim, NULL);
+        return rSPELL_FAILED;
     }
 
-  if ( (!IsNpc( victim ) && !IsNpc( ch )) || ch->Race == RACE_DROID )
+    if ((!IsNpc(victim) && !IsNpc(ch)) || ch->Race == RACE_DROID)
     {
-      ch->Echo("I don't think so...\r\n");
-      victim->Echo("You feel as if someone tried to enter your mind but failed..\r\n");
-      return rSPELL_FAILED;
+        ch->Echo("I don't think so...\r\n");
+        victim->Echo("You feel as if someone tried to enter your mind but failed..\r\n");
+        return rSPELL_FAILED;
     }
 
-  charm_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_CHARM );
+    charm_chance = ModifySavingThrowBasedOnResistance(victim, level, RIS_CHARM);
 
-  if ( IsAffectedBy(victim, AFF_CHARM)
-       ||   charm_chance == 1000
-       ||   IsAffectedBy(ch, AFF_CHARM)
-       ||   level < victim->TopLevel
-       ||        IsFollowingInCircle( victim, ch )
-       ||   SaveVsSpellStaff( charm_chance, victim ) )
+    if (IsAffectedBy(victim, AFF_CHARM)
+        || charm_chance == 1000
+        || IsAffectedBy(ch, AFF_CHARM)
+        || level < victim->TopLevel
+        || IsFollowingInCircle(victim, ch)
+        || SaveVsSpellStaff(charm_chance, victim))
     {
-      FailedCasting( skill, ch, victim, NULL );
-      return rSPELL_FAILED;
+        FailedCasting(skill, ch, victim, NULL);
+        return rSPELL_FAILED;
     }
 
-  if ( victim->Master )
-    StopFollowing( victim );
+    if (victim->Master)
+        StopFollowing(victim);
 
-  StartFollowing( victim, ch );
-  af->Type      = sn;
-  af->Duration  = (NumberFuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;
-  af->Location  = 0;
-  af->Modifier  = 0;
-  af->AffectedBy = AFF_CHARM;
-  AffectToCharacter( victim, af );
-  Act( AT_MAGIC, "Isn't $n just so nice?", ch, NULL, victim, TO_VICT );
-  Act( AT_MAGIC, "$N's eyes glaze over...", ch, NULL, victim, TO_ROOM );
+    StartFollowing(victim, ch);
+    af->Type = sn;
+    af->Duration = (NumberFuzzy((level + 1) / 3) + 1) * DUR_CONV;
+    af->Location = 0;
+    af->Modifier = 0;
+    af->AffectedBy = AFF_CHARM;
+    AffectToCharacter(victim, af);
+    Act(AT_MAGIC, "Isn't $n just so nice?", ch, NULL, victim, TO_VICT);
+    Act(AT_MAGIC, "$N's eyes glaze over...", ch, NULL, victim, TO_ROOM);
 
-  if ( ch != victim )
-    ch->Echo("Ok.\r\n");
+    if (ch != victim)
+        ch->Echo("Ok.\r\n");
 
-  sprintf( buf, "%s has charmed %s.", ch->Name.c_str(), victim->Name.c_str());
-  Log->LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
+    sprintf(buf, "%s has charmed %s.", ch->Name.c_str(), victim->Name.c_str());
+    Log->LogStringPlus(buf, LOG_NORMAL, ch->TopLevel);
 
-  return rNONE;
+    return rNONE;
 }
 

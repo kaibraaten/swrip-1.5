@@ -407,7 +407,7 @@ void LuaLoadCurrentAndMax(lua_State *L, const std::string &key, int *current, in
 
 static void LuaPushCharacterAffect(lua_State *L, std::shared_ptr<Affect> affect, int idx)
 {
-    const Skill *skill = GetSkill(affect->Type);
+    std::shared_ptr<Skill> skill = GetSkill(affect->Type);
 
     if (affect->Type >= 0 && skill == nullptr)
     {
@@ -453,7 +453,7 @@ static void LuaPushCharacterAffect(lua_State *L, std::shared_ptr<Affect> affect,
 
 static void LuaPushObjectAffect(lua_State *L, std::shared_ptr<Affect> affect, int idx)
 {
-    const Skill *skill = GetSkill(affect->Type);
+    std::shared_ptr<Skill> skill = GetSkill(affect->Type);
 
     if (affect->Type >= 0 && skill == nullptr)
     {

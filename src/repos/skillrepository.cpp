@@ -1,26 +1,26 @@
 #include "skillrepository.hpp"
 #include "skill.hpp"
 
-SkillRepository *Skills = nullptr;
+SkillRepository* Skills = nullptr;
 
 class TransitionarySkillRepository : public SkillRepository
 {
 public:
-  Skill *GetSkill( int sn ) override;
-  int LookupSkill( const std::string &name ) override;
+    std::shared_ptr<Skill> GetSkill(int sn) override;
+    int LookupSkill(const std::string& name) override;
 };
 
-Skill *TransitionarySkillRepository::GetSkill( int sn )
+std::shared_ptr<Skill> TransitionarySkillRepository::GetSkill(int sn)
 {
-  return ::GetSkill( sn );
+    return ::GetSkill(sn);
 }
 
-int TransitionarySkillRepository::LookupSkill( const std::string &name )
+int TransitionarySkillRepository::LookupSkill(const std::string& name)
 {
-  return ::LookupSkill( name );
+    return ::LookupSkill(name);
 }
 
-SkillRepository *NewSkillRepository()
+SkillRepository* NewSkillRepository()
 {
-  return new TransitionarySkillRepository();
+    return new TransitionarySkillRepository();
 }

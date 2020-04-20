@@ -6,10 +6,10 @@
 
 extern std::string spell_target_name;
 
-ch_ret spell_farsight(int sn, int level, Character *ch, void *vo)
+ch_ret spell_farsight(int sn, int level, Character* ch, void* vo)
 {
-    Character *victim = nullptr;
-    Skill *skill = GetSkill(sn);
+    Character* victim = nullptr;
+    std::shared_ptr<Skill> skill = GetSkill(sn);
     int saving = 0;
 
     /* The spell fails if the victim isn't playing, the victim is the caster,

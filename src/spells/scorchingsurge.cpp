@@ -2,10 +2,10 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-ch_ret spell_scorching_surge( int sn, int level, Character *ch, void *vo )
+ch_ret spell_scorching_surge(int sn, int level, Character* ch, void* vo)
 {
-  Character *victim = (Character *) vo;
-  static const short dam_each[] =
+    Character* victim = (Character*)vo;
+    static const short dam_each[] =
     {
       1,
       1,   2,   3,   4,   5,          6,   8,  10,  12,  14,
@@ -16,27 +16,27 @@ ch_ret spell_scorching_surge( int sn, int level, Character *ch, void *vo )
       132, 134, 136, 138, 140,          142, 144, 146, 148, 150,
       152, 154, 156, 158, 160,          162, 164, 166, 168, 170
     };
-  int dam;
+    int dam;
 
-  ch->Echo("You feel the hatred grow within you!\r\n");
-  ch->Alignment = ch->Alignment - 100;
-  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
-  ApplySithPenalty( ch );
+    ch->Echo("You feel the hatred grow within you!\r\n");
+    ch->Alignment = ch->Alignment - 100;
+    ch->Alignment = urange(-1000, ch->Alignment, 1000);
+    ApplySithPenalty(ch);
 
-  level       = umin(level/2, sizeof(dam_each)/sizeof(dam_each[0]) - 1);
-  level       = umax(0, level);
-  dam         = GetRandomNumberFromRange( dam_each[level] , dam_each[level] * 10 );
+    level = umin(level / 2, sizeof(dam_each) / sizeof(dam_each[0]) - 1);
+    level = umax(0, level);
+    dam = GetRandomNumberFromRange(dam_each[level], dam_each[level] * 10);
 
-  if ( SaveVsSpellStaff( level, victim ) )
-    dam /= 2;
+    if (SaveVsSpellStaff(level, victim))
+        dam /= 2;
 
-  if ( IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch) )
-    dam -= (int) (dam / 4);
+    if (IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch))
+        dam -= (int)(dam / 4);
 
-  Act( AT_MAGIC, "A fiery current lashes through $n's body!",
-       ch, NULL, NULL, TO_ROOM );
-  Act( AT_MAGIC, "A fiery current lashes through your body!",
-       ch, NULL, NULL, TO_CHAR );
-  return InflictDamage( ch, victim, (dam*1.4), sn );
+    Act(AT_MAGIC, "A fiery current lashes through $n's body!",
+        ch, NULL, NULL, TO_ROOM);
+    Act(AT_MAGIC, "A fiery current lashes through your body!",
+        ch, NULL, NULL, TO_CHAR);
+    return InflictDamage(ch, victim, (dam * 1.4), sn);
 }
 

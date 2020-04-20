@@ -18,17 +18,17 @@
 int TopSN = 0;
 int TopHerb = 0;
 
-std::array<Skill*, MAX_SKILL> SkillTable;
-std::array<Skill*, MAX_SKILL> HerbTable;
+std::array<std::shared_ptr<Skill>, MAX_SKILL> SkillTable;
+std::array<std::shared_ptr<Skill>, MAX_SKILL> HerbTable;
 
 extern std::string spell_target_name;       /* from magic.c */
 
-static int CompareSkills(Skill **sk1, Skill **sk2);
+static int CompareSkills(std::shared_ptr<Skill> *sk1, std::shared_ptr<Skill> *sk2);
 static void PushSkillTable(lua_State *L, const void*);
-static void PushSkill(lua_State *L, const Skill *skill);
-static void PushSkillTeachers(lua_State *L, const Skill *skill);
+static void PushSkill(lua_State *L, std::shared_ptr<Skill> skill);
+static void PushSkillTeachers(lua_State *L, std::shared_ptr<Skill> skill);
 static int L_SkillEntry(lua_State *L);
-static Skill *LoadSkillOrHerb(lua_State *L);
+static std::shared_ptr<Skill> LoadSkillOrHerb(lua_State *L);
 static void PushHerbTable(lua_State *L, const void *userData);
 
 /*
@@ -43,7 +43,7 @@ bool CheckSkill(Character *ch, const std::string &command, const std::string &ar
     int top = gsn_first_weapon - 1;
     struct timeval time_used;
     int mana = 0;
-    const Skill *skill = nullptr;
+    std::shared_ptr<Skill> skill;
 
     /* bsearch for the skill */
     for (;;)
@@ -464,7 +464,7 @@ int LookupSkill(const std::string &name)
  * Return a skilltype pointer based on sn                       -Thoric
  * Returns NULL if bad, unused or personal sn.
  */
-Skill *GetSkill(int sn)
+std::shared_ptr<Skill> GetSkill(int sn)
 {
     if (sn >= TYPE_PERSONAL)
     {
@@ -631,10 +631,10 @@ void SortSkillTable()
 /*
  * Function used by qsort to sort skills
  */
-static int CompareSkills(Skill **sk1, Skill **sk2)
+static int CompareSkills(std::shared_ptr<Skill> *sk1, std::shared_ptr<Skill> *sk2)
 {
-    Skill *skill1 = (*sk1);
-    Skill *skill2 = (*sk2);
+    std::shared_ptr<Skill> skill1 = (*sk1);
+    std::shared_ptr<Skill> skill2 = (*sk2);
 
     if (!skill1 && skill2)
     {
@@ -664,7 +664,7 @@ static int CompareSkills(Skill **sk1, Skill **sk2)
     return StrCmp(skill1->Name, skill2->Name);
 }
 
-static void PushSkillTeachers(lua_State *L, const Skill *skill)
+static void PushSkillTeachers(lua_State *L, std::shared_ptr<Skill> skill)
 {
     if (!skill->Teachers.empty())
     {
@@ -694,7 +694,7 @@ static void PushSkillTeachers(lua_State *L, const Skill *skill)
     }
 }
 
-void PushSkillMessages(lua_State *L, const Skill *skill)
+void PushSkillMessages(lua_State *L, std::shared_ptr<Skill> skill)
 {
     lua_pushstring(L, "Messages");
     lua_newtable(L);
@@ -742,7 +742,7 @@ void PushSkillMessages(lua_State *L, const Skill *skill)
     lua_settable(L, -3);
 }
 
-static void PushSkill(lua_State *L, const Skill *skill)
+static void PushSkill(lua_State *L, std::shared_ptr<Skill> skill)
 {
     static int idx = 0;
     lua_pushinteger(L, ++idx);
@@ -825,7 +825,7 @@ static void PushSkillTable(lua_State *L, const void *userData)
 
     for (int sn = 0; sn < TopSN; ++sn)
     {
-        const Skill *skill = SkillTable[sn];
+        std::shared_ptr<Skill> skill = SkillTable[sn];
 
         if (!skill->Name.empty())
         {
@@ -841,7 +841,7 @@ void SaveSkills()
     LuaSaveDataFile(SKILL_DATA_FILE, PushSkillTable, "skills", NULL);
 }
 
-static void LoadSkillTeachers(lua_State *L, Skill *skill)
+static void LoadSkillTeachers(lua_State *L, std::shared_ptr<Skill> skill)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Teachers");
@@ -877,13 +877,13 @@ static void LoadSkillTeachers(lua_State *L, Skill *skill)
     lua_pop(L, 1);
 }
 
-static void LoadBasicMessages(lua_State *L, Skill *skill)
+static void LoadBasicMessages(lua_State *L, std::shared_ptr<Skill> skill)
 {
     LuaGetfieldString(L, "NounDamage", &skill->Messages.NounDamage);
     LuaGetfieldString(L, "WearOff", &skill->Messages.WearOff);
 }
 
-static void LoadSuccessMessages(lua_State *L, Skill *skill)
+static void LoadSuccessMessages(lua_State *L, std::shared_ptr<Skill> skill)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Success");
@@ -902,7 +902,7 @@ static void LoadSuccessMessages(lua_State *L, Skill *skill)
     lua_pop(L, 1);
 }
 
-static void LoadFailureMessages(lua_State *L, Skill *skill)
+static void LoadFailureMessages(lua_State *L, std::shared_ptr<Skill> skill)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Failure");
@@ -917,7 +917,7 @@ static void LoadFailureMessages(lua_State *L, Skill *skill)
     lua_pop(L, 1);
 }
 
-static void LoadVictimDeathMessages(lua_State *L, Skill *skill)
+static void LoadVictimDeathMessages(lua_State *L, std::shared_ptr<Skill> skill)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "VictimDeath");
@@ -932,7 +932,7 @@ static void LoadVictimDeathMessages(lua_State *L, Skill *skill)
     lua_pop(L, 1);
 }
 
-static void LoadVictimImmuneMessages(lua_State *L, Skill *skill)
+static void LoadVictimImmuneMessages(lua_State *L, std::shared_ptr<Skill> skill)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "VictimImmune");
@@ -947,7 +947,7 @@ static void LoadVictimImmuneMessages(lua_State *L, Skill *skill)
     lua_pop(L, 1);
 }
 
-static void LoadSkillMessages(lua_State *L, Skill *skill)
+static void LoadSkillMessages(lua_State *L, std::shared_ptr<Skill> skill)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, "Messages");
@@ -966,7 +966,7 @@ static void LoadSkillMessages(lua_State *L, Skill *skill)
 
 static int L_SkillEntry(lua_State *L)
 {
-    Skill *skill = LoadSkillOrHerb(L);
+    std::shared_ptr<Skill> skill = LoadSkillOrHerb(L);
 
     if (skill)
     {
@@ -982,7 +982,7 @@ static int L_SkillEntry(lua_State *L)
     return 0;
 }
 
-static Skill *LoadSkillOrHerb(lua_State *L)
+static std::shared_ptr<Skill> LoadSkillOrHerb(lua_State *L)
 {
     std::string skillName;
     LuaGetfieldString(L, "Name", &skillName);
@@ -993,7 +993,7 @@ static Skill *LoadSkillOrHerb(lua_State *L)
         return nullptr;
     }
 
-    Skill *skill = new Skill();
+    std::shared_ptr<Skill> skill = std::make_shared<Skill>();
     skill->UseRec = new timerset();
     skill->Name = skillName;
 
@@ -1083,7 +1083,7 @@ static Skill *LoadSkillOrHerb(lua_State *L)
 
 static int L_HerbEntry(lua_State *L)
 {
-    Skill *herb = LoadSkillOrHerb(L);
+    std::shared_ptr<Skill> herb = LoadSkillOrHerb(L);
 
     if (herb)
     {
@@ -1111,7 +1111,7 @@ static void PushHerbTable(lua_State *L, const void *userData)
 
     for (sn = 0; sn < TopHerb; ++sn)
     {
-        const Skill *herb = HerbTable[sn];
+        std::shared_ptr<Skill> herb = HerbTable[sn];
 
         if (!herb->Name.empty())
         {
@@ -1158,47 +1158,47 @@ bool IS_VALID_HERB(int sn)
         && !HerbTable[sn]->Name.empty();
 }
 
-bool SPELL_FLAG(const Skill *skill, size_t flag)
+bool SPELL_FLAG(std::shared_ptr<Skill> skill, size_t flag)
 {
     return skill->Flags.test(flag);
 }
 
-long SPELL_DAMAGE(const Skill *skill)
+long SPELL_DAMAGE(std::shared_ptr<Skill> skill)
 {
     return skill->Flags.to_ulong() & 7;
 }
 
-long SPELL_ACTION(const Skill *skill)
+long SPELL_ACTION(std::shared_ptr<Skill> skill)
 {
     return skill->Flags.to_ulong() >> 3 & 7;
 }
 
-long SPELL_CLASS(const Skill *skill)
+long SPELL_CLASS(std::shared_ptr<Skill> skill)
 {
     return skill->Flags.to_ulong() >> 6 & 7;
 }
 
-long SPELL_POWER(const Skill *skill)
+long SPELL_POWER(std::shared_ptr<Skill> skill)
 {
     return skill->Flags.to_ulong() >> 9 & 3;
 }
 
-void SET_SDAM(Skill *skill, int val)
+void SET_SDAM(std::shared_ptr<Skill> skill, int val)
 {
     skill->Flags = (skill->Flags.to_ulong() & SDAM_MASK) + (val & 7);
 }
 
-void SET_SACT(Skill *skill, int val)
+void SET_SACT(std::shared_ptr<Skill> skill, int val)
 {
     skill->Flags = (skill->Flags.to_ulong() & SACT_MASK) + ((val & 7) << 3);
 }
 
-void SET_SCLA(Skill *skill, int val)
+void SET_SCLA(std::shared_ptr<Skill> skill, int val)
 {
     skill->Flags = (skill->Flags.to_ulong() & SCLA_MASK) + ((val & 7) << 6);
 }
 
-void SET_SPOW(Skill *skill, int val)
+void SET_SPOW(std::shared_ptr<Skill> skill, int val)
 {
     skill->Flags = (skill->Flags.to_ulong() & SPOW_MASK) + ((val & 3) << 9);
 }

@@ -166,7 +166,7 @@ static void FinishedCraftingHandler(void *userData, FinishedCraftingEventArgs *e
     std::string itemType = GetItemTypeNameExtended(eventArgs->Object->ItemType, eventArgs->Object->Value[OVAL_WEAPON_TYPE]);
     char actBuf[MAX_STRING_LENGTH];
     long xpgain = 0;
-    Skill *skill = Skills->GetSkill(data->Recipe->Skill);
+    std::shared_ptr<Skill> skill = Skills->GetSkill(data->Recipe->Skill);
 
     ch->Echo("&GYou finish your work and hold up your newly created %s.&d\r\n",
         itemType.c_str());

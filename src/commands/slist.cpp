@@ -3,96 +3,96 @@
 #include "skill.hpp"
 #include "pcdata.hpp"
 
-void do_slist( Character *ch, std::string argument )
+void do_slist(Character* ch, std::string argument)
 {
-  int sn = 0, i = 0;
-  char skn[MAX_INPUT_LENGTH];
-  char skn2[MAX_INPUT_LENGTH / 2];
-  int lowlev = 1, hilev = MAX_ABILITY_LEVEL;
-  int col = 0;
-  int ability = 0;
-  int filter_ability = GetAbility(argument);
+    int sn = 0, i = 0;
+    char skn[MAX_INPUT_LENGTH];
+    char skn2[MAX_INPUT_LENGTH / 2];
+    int lowlev = 1, hilev = MAX_ABILITY_LEVEL;
+    int col = 0;
+    int ability = 0;
+    int filter_ability = GetAbility(argument);
 
-  if ( IsNpc(ch) )
+    if (IsNpc(ch))
     {
-      return;
+        return;
     }
 
-  SetCharacterColor( AT_CYAN, ch );
-  ch->Echo("SKILL LIST\r\n");
-  ch->Echo("------------------\r\n");
+    SetCharacterColor(AT_CYAN, ch);
+    ch->Echo("SKILL LIST\r\n");
+    ch->Echo("------------------\r\n");
 
-  for ( ability = -1 ; ability < MAX_ABILITY ; ability++ )
+    for (ability = -1; ability < MAX_ABILITY; ability++)
     {
-      if ( ability == FORCE_ABILITY && !IsImmortal(ch) )
+        if (ability == FORCE_ABILITY && !IsImmortal(ch))
         {
-          continue;
+            continue;
         }
 
-      if( ability == COMMANDO_ABILITY )
-	{
-	  continue;
-	}
-
-      if(filter_ability != -1 && filter_ability != ability)
+        if (ability == COMMANDO_ABILITY)
         {
-          continue;
+            continue;
         }
 
-      if ( ability >= 0 )
+        if (filter_ability != -1 && filter_ability != ability)
         {
-          sprintf(skn2, "** %s **", Capitalize( AbilityName[ability] ).c_str() );
-          sprintf(skn, "\r\n\t\t\t  %s \r\n", skn2 );
-	}
-      else
-        {
-          sprintf(skn, "\r\n\t\t\t** General Skills **\r\n" );
+            continue;
         }
 
-      SetCharacterColor( AT_CYAN, ch );
-      ch->Echo("%s", skn);
-
-      for (i=lowlev; i <= hilev; i++)
+        if (ability >= 0)
         {
-          for ( sn = 0; sn < TopSN; sn++ )
+            sprintf(skn2, "** %s **", Capitalize(AbilityName[ability]).c_str());
+            sprintf(skn, "\r\n\t\t\t  %s \r\n", skn2);
+        }
+        else
+        {
+            sprintf(skn, "\r\n\t\t\t** General Skills **\r\n");
+        }
+
+        SetCharacterColor(AT_CYAN, ch);
+        ch->Echo("%s", skn);
+
+        for (i = lowlev; i <= hilev; i++)
+        {
+            for (sn = 0; sn < TopSN; sn++)
             {
-	      const Skill *skill = SkillTable[sn];
+                std::shared_ptr<Skill> skill = SkillTable[sn];
 
-              if ( skill->Name.empty() )
+                if (skill->Name.empty())
                 {
-                  break;
+                    break;
                 }
 
-              if ( skill->Guild != ability)
+                if (skill->Guild != ability)
                 {
-                  continue;
+                    continue;
                 }
 
-              if ( ch->PCData->Learned[sn] == 0
-                   && SPELL_FLAG( skill, SF_SECRETSKILL ) )
+                if (ch->PCData->Learned[sn] == 0
+                    && SPELL_FLAG(skill, SF_SECRETSKILL))
                 {
-                  continue;
+                    continue;
                 }
 
-              if( i == skill->Level )
+                if (i == skill->Level)
                 {
-                  SetCharacterColor( AT_LBLUE, ch );
-                  ch->Echo("(%3d) %-18.18s  ",
-                           i, Capitalize( skill->Name ).c_str() );
+                    SetCharacterColor(AT_LBLUE, ch);
+                    ch->Echo("(%3d) %-18.18s  ",
+                        i, Capitalize(skill->Name).c_str());
 
-                  if ( ++col == 3 )
+                    if (++col == 3)
                     {
-                      ch->Echo("\r\n");
-                      col = 0;
+                        ch->Echo("\r\n");
+                        col = 0;
                     }
                 }
             }
         }
 
-      if ( col != 0 )
-	{
-          ch->Echo("\r\n");
-          col = 0;
+        if (col != 0)
+        {
+            ch->Echo("\r\n");
+            col = 0;
         }
     }
 }

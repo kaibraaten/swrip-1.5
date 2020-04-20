@@ -2,87 +2,87 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_affected( Character *ch, std::string argument )
+void do_affected(Character* ch, std::string argument)
 {
-  if ( IsNpc(ch) )
-    return;
+    if (IsNpc(ch))
+        return;
 
-  if ( !StrCmp( argument, "by" ) )
+    if (!StrCmp(argument, "by"))
     {
-      SetCharacterColor( AT_BLUE, ch );
-      ch->Echo( "\r\nImbued with:\r\n" );
-      SetCharacterColor( AT_SCORE, ch );
-      ch->Echo( "%s\r\n", FlagString( ch->AffectedBy, AffectFlags ).c_str() );
+        SetCharacterColor(AT_BLUE, ch);
+        ch->Echo("\r\nImbued with:\r\n");
+        SetCharacterColor(AT_SCORE, ch);
+        ch->Echo("%s\r\n", FlagString(ch->AffectedBy, AffectFlags).c_str());
 
-      if ( ch->TopLevel >= 20 )
+        if (ch->TopLevel >= 20)
         {
-          ch->Echo( "\r\n" );
+            ch->Echo("\r\n");
 
-          if ( ch->Resistant > 0 )
+            if (ch->Resistant > 0)
             {
-              SetCharacterColor ( AT_BLUE, ch );
-              ch->Echo( "Resistances:  " );
-              SetCharacterColor( AT_SCORE, ch );
-              ch->Echo( "%s\r\n", FlagString(ch->Resistant, RisFlags).c_str() );
+                SetCharacterColor(AT_BLUE, ch);
+                ch->Echo("Resistances:  ");
+                SetCharacterColor(AT_SCORE, ch);
+                ch->Echo("%s\r\n", FlagString(ch->Resistant, RisFlags).c_str());
             }
 
-          if ( ch->Immune > 0 )
+            if (ch->Immune > 0)
             {
-              SetCharacterColor( AT_BLUE, ch );
-              ch->Echo( "Immunities:   " );
-	      SetCharacterColor( AT_SCORE, ch );
-              ch->Echo( "%s\r\n", FlagString(ch->Immune, RisFlags).c_str() );
+                SetCharacterColor(AT_BLUE, ch);
+                ch->Echo("Immunities:   ");
+                SetCharacterColor(AT_SCORE, ch);
+                ch->Echo("%s\r\n", FlagString(ch->Immune, RisFlags).c_str());
             }
 
-          if ( ch->Susceptible > 0 )
+            if (ch->Susceptible > 0)
             {
-              SetCharacterColor( AT_BLUE, ch );
-              ch->Echo( "Suscepts:     " );
-              SetCharacterColor( AT_SCORE, ch );
-              ch->Echo( "%s\r\n", FlagString(ch->Susceptible, RisFlags).c_str() );
+                SetCharacterColor(AT_BLUE, ch);
+                ch->Echo("Suscepts:     ");
+                SetCharacterColor(AT_SCORE, ch);
+                ch->Echo("%s\r\n", FlagString(ch->Susceptible, RisFlags).c_str());
             }
         }
 
-      return;
+        return;
     }
 
-  if ( ch->Affects().empty() )
+    if (ch->Affects().empty())
     {
-      SetCharacterColor( AT_SCORE, ch );
-      ch->Echo( "\r\nNo buffs or debuffs affects you.\r\n" );
+        SetCharacterColor(AT_SCORE, ch);
+        ch->Echo("\r\nNo buffs or debuffs affects you.\r\n");
     }
-  else
+    else
     {
-      ch->Echo( "\r\n" );
+        ch->Echo("\r\n");
 
-      for(auto paf : ch->Affects())
-	{
-          Skill *skill = GetSkill(paf->Type);
-          
-	  if ( skill != nullptr )
-	    {
-	      SetCharacterColor( AT_BLUE, ch );
-	      ch->Echo( "Affected:  " );
-	      SetCharacterColor( AT_SCORE, ch );
+        for (auto paf : ch->Affects())
+        {
+            std::shared_ptr<Skill> skill = GetSkill(paf->Type);
 
-	      if ( ch->TopLevel >= 20 )
-		{
-		  if (paf->Duration < 25 )
-		    {
-		      SetCharacterColor( AT_WHITE, ch );
-		    }
+            if (skill != nullptr)
+            {
+                SetCharacterColor(AT_BLUE, ch);
+                ch->Echo("Affected:  ");
+                SetCharacterColor(AT_SCORE, ch);
 
-		  if (paf->Duration < 6  )
-		    {
-		      SetCharacterColor( AT_WHITE + AT_BLINK, ch );
-		    }
+                if (ch->TopLevel >= 20)
+                {
+                    if (paf->Duration < 25)
+                    {
+                        SetCharacterColor(AT_WHITE, ch);
+                    }
 
-		  ch->Echo( "(%5d)   ", paf->Duration );
-		}
+                    if (paf->Duration < 6)
+                    {
+                        SetCharacterColor(AT_WHITE + AT_BLINK, ch);
+                    }
 
-	      ch->Echo( "%s\r\n", skill->Name.c_str() );
-	    }
-	}
+                    ch->Echo("(%5d)   ", paf->Duration);
+                }
+
+                ch->Echo("%s\r\n", skill->Name.c_str());
+            }
+        }
     }
 }
 

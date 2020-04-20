@@ -58,8 +58,8 @@ public:
 };
 
 extern const std::array<const char * const, SKILLTYPE_MAX> SkillTypeName;
-extern std::array<Skill*, MAX_SKILL> SkillTable;
-extern std::array<Skill*, MAX_SKILL> HerbTable;
+extern std::array<std::shared_ptr<Skill>, MAX_SKILL> SkillTable;
+extern std::array<std::shared_ptr<Skill>, MAX_SKILL> HerbTable;
 extern int TopSN;
 extern int TopHerb;
 extern const std::array<const char * const, SKILLTARGETTYPE_MAX> SpellTargetName;
@@ -228,15 +228,15 @@ extern short gsn_TopSN;
 void ASSIGN_GSN(short &gsn, const std::string &skill);
 bool IS_VALID_SN(int sn);
 bool IS_VALID_HERB(int sn);
-bool SPELL_FLAG(const Skill *skill, size_t flag);
-long SPELL_DAMAGE(const Skill *skill);
-long SPELL_ACTION(const Skill *skill);
-long SPELL_CLASS(const Skill *skill);
-long SPELL_POWER(const Skill *skill);
-void SET_SDAM(Skill *skill, int val);
-void SET_SACT(Skill *skill, int val);
-void SET_SCLA(Skill *skill, int val);
-void SET_SPOW(Skill *skill, int val);
+bool SPELL_FLAG(std::shared_ptr<Skill> skill, size_t flag);
+long SPELL_DAMAGE(std::shared_ptr<Skill> skill);
+long SPELL_ACTION(std::shared_ptr<Skill> skill);
+long SPELL_CLASS(std::shared_ptr<Skill> skill);
+long SPELL_POWER(std::shared_ptr<Skill> skill);
+void SET_SDAM(std::shared_ptr<Skill> skill, int val);
+void SET_SACT(std::shared_ptr<Skill> skill, int val);
+void SET_SCLA(std::shared_ptr<Skill> skill, int val);
+void SET_SPOW(std::shared_ptr<Skill> skill, int val);
 
 /* RIS by gsn lookups. -- Altrag.
    Will need to add some || stuff for spells that need a special GSN. */
@@ -260,7 +260,7 @@ int SkillNumberFromSlot(int slot);
 int BSearchSkill(const std::string &name, int first, int top);
 int BSearchSkillExact(const std::string &name, int first, int top);
 int ChBSearchSkill(const Character *ch, const std::string &name, int first, int top);
-Skill *GetSkill(int sn);
+std::shared_ptr<Skill> GetSkill(int sn);
 SkillType GetSkillType(const std::string &skilltype);
 void LoadSkills();
 void SaveSkills();

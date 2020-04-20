@@ -6,64 +6,64 @@
 
 extern std::string spell_target_name;
 
-ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
+ch_ret spell_remove_trap(int sn, int level, Character* ch, void* vo)
 {
-  Object *obj = nullptr;
-  Object *trap = nullptr;
-  bool found = false;
-  int retcode = rNONE;
-  Skill *skill = GetSkill(sn);
+    Object* obj = nullptr;
+    Object* trap = nullptr;
+    bool found = false;
+    int retcode = rNONE;
+    std::shared_ptr<Skill> skill = GetSkill(sn);
 
-  if ( spell_target_name.empty() )
+    if (spell_target_name.empty())
     {
-      ch->Echo("Remove trap on what?\r\n");
-      return rSPELL_FAILED;
+        ch->Echo("Remove trap on what?\r\n");
+        return rSPELL_FAILED;
     }
 
-  found = false;
+    found = false;
 
-  if ( ch->InRoom->Objects().empty() )
+    if (ch->InRoom->Objects().empty())
     {
-      ch->Echo("You can't find that here.\r\n");
-      return rNONE;
+        ch->Echo("You can't find that here.\r\n");
+        return rNONE;
     }
 
-  for(auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
+    for (auto i = std::begin(ch->InRoom->Objects()); i != std::end(ch->InRoom->Objects()); ++i)
     {
-      obj = *i;
-      
-      if ( CanSeeObject( ch, obj ) && NiftyIsName( spell_target_name, obj->Name ) )
+        obj = *i;
+
+        if (CanSeeObject(ch, obj) && NiftyIsName(spell_target_name, obj->Name))
         {
-          found = true;
-          break;
+            found = true;
+            break;
         }
     }
-  
-  if ( !found )
+
+    if (!found)
     {
-      ch->Echo("You can't find that here.\r\n");
-      return rSPELL_FAILED;
+        ch->Echo("You can't find that here.\r\n");
+        return rSPELL_FAILED;
     }
 
-  if ( (trap = GetTrap( obj )) == NULL )
+    if ((trap = GetTrap(obj)) == NULL)
     {
-      FailedCasting( skill, ch, NULL, NULL );
-      return rSPELL_FAILED;
+        FailedCasting(skill, ch, NULL, NULL);
+        return rSPELL_FAILED;
     }
 
 
-  if ( Chance(ch, 70 + GetCurrentWisdom(ch)) )
+    if (Chance(ch, 70 + GetCurrentWisdom(ch)))
     {
-      ch->Echo("Ooops!\r\n");
-      retcode = SpringTrap(ch, trap);
-      if ( retcode == rNONE )
-        retcode = rSPELL_FAILED;
-      return retcode;
+        ch->Echo("Ooops!\r\n");
+        retcode = SpringTrap(ch, trap);
+        if (retcode == rNONE)
+            retcode = rSPELL_FAILED;
+        return retcode;
     }
 
-  ExtractObject( trap );
+    ExtractObject(trap);
 
-  SuccessfulCasting( skill, ch, NULL, NULL );
-  return rNONE;
+    SuccessfulCasting(skill, ch, NULL, NULL);
+    return rNONE;
 }
 

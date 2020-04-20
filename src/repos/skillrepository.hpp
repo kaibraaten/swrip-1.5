@@ -2,13 +2,14 @@
 #define _SWRIP_SKILLREPOSITORY_HPP_
 
 #include <string>
+#include <memory>
 #include <utility/repository.hpp>
 #include "types.hpp"
 
-class SkillRepository : public Ceris::Repository<Skill*>
+class SkillRepository : public Ceris::Repository<std::shared_ptr<Skill>>
 {
 public:
-  virtual Skill *GetSkill( int sn ) = 0;
+  virtual std::shared_ptr<Skill> GetSkill( int sn ) = 0;
   virtual int LookupSkill( const std::string &name ) = 0;
   
 protected:

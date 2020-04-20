@@ -10,8 +10,6 @@
 void do_slookup(Character* ch, std::string arg)
 {
     char buf[MAX_STRING_LENGTH];
-    int sn = 0;
-    const Skill* skill = NULL;
 
     if (arg.empty())
     {
@@ -21,7 +19,7 @@ void do_slookup(Character* ch, std::string arg)
 
     if (!StrCmp(arg, "all"))
     {
-        for (sn = 0; sn < TopSN && SkillTable[sn] && !SkillTable[sn]->Name.empty(); sn++)
+        for (int sn = 0; sn < TopSN && SkillTable[sn] && !SkillTable[sn]->Name.empty(); sn++)
         {
             ch->Echo("Sn: %4d Slot: %4d Skill/spell: '%-20s' Damtype: %s\r\n",
                 sn, SkillTable[sn]->Slot, SkillTable[sn]->Name.c_str(),
@@ -30,12 +28,14 @@ void do_slookup(Character* ch, std::string arg)
     }
     else if (!StrCmp(arg, "herbs"))
     {
-        for (sn = 0; sn < TopHerb && HerbTable[sn] && !HerbTable[sn]->Name.empty(); sn++)
+        for (int sn = 0; sn < TopHerb && HerbTable[sn] && !HerbTable[sn]->Name.empty(); sn++)
             ch->Echo("%d) %s\r\n", sn, HerbTable[sn]->Name.c_str());
     }
     else
     {
         int cnt = 0;
+        std::shared_ptr<Skill> skill;
+        int sn = 0;
 
         if (arg[0] == 'h' && IsNumber(arg.substr(1)))
         {

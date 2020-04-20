@@ -2,219 +2,219 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
+ch_ret spell_affectchar(int sn, int level, Character* ch, void* vo)
 {
-  std::shared_ptr<Affect> af = std::make_shared<Affect>();
-  Skill *skill = GetSkill(sn);
-  Character *victim = (Character *) vo;
-  int aff_chance = 0;
-  ch_ret retcode = rNONE;
+    std::shared_ptr<Affect> af = std::make_shared<Affect>();
+    std::shared_ptr<Skill> skill = GetSkill(sn);
+    Character* victim = (Character*)vo;
+    int aff_chance = 0;
+    ch_ret retcode = rNONE;
 
-  if ( SPELL_FLAG( skill, SF_RECASTABLE ) )
+    if (SPELL_FLAG(skill, SF_RECASTABLE))
     {
-      StripAffect( victim, sn );
+        StripAffect(victim, sn);
     }
-  
-  for ( auto saf : skill->Affects )
+
+    for (auto saf : skill->Affects)
     {
-      if ( saf->Location >= REVERSE_APPLY )
+        if (saf->Location >= REVERSE_APPLY)
         {
-          victim = ch;
+            victim = ch;
         }
-      else
+        else
         {
-          victim = static_cast<Character*>(vo);
+            victim = static_cast<Character*>(vo);
         }
-      
-      /* Check if char has this bitvector already */
-      if ( (af->AffectedBy = saf->AffectedBy) != 0
-           && IsAffectedBy( victim, af->AffectedBy )
-           && !SPELL_FLAG( skill, SF_ACCUMULATIVE ) )
+
+        /* Check if char has this bitvector already */
+        if ((af->AffectedBy = saf->AffectedBy) != 0
+            && IsAffectedBy(victim, af->AffectedBy)
+            && !SPELL_FLAG(skill, SF_ACCUMULATIVE))
         {
-          continue;
+            continue;
         }
-      
-      /*
-       * necessary for StripAffect to work properly...
-       */
-      switch ( af->AffectedBy )
+
+        /*
+         * necessary for StripAffect to work properly...
+         */
+        switch (af->AffectedBy)
         {
         default:
-	  af->Type = sn;
-	  break;
+            af->Type = sn;
+            break;
 
         case AFF_POISON:
-	  af->Type = gsn_poison;
-          ch->Echo("You feel the hatred grow within you!\r\n");
-          ch->Alignment = ch->Alignment - 100;
-          ch->Alignment = urange( -1000, ch->Alignment, 1000 );
-          ApplySithPenalty( ch );
-          aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_POISON );
+            af->Type = gsn_poison;
+            ch->Echo("You feel the hatred grow within you!\r\n");
+            ch->Alignment = ch->Alignment - 100;
+            ch->Alignment = urange(-1000, ch->Alignment, 1000);
+            ApplySithPenalty(ch);
+            aff_chance = ModifySavingThrowBasedOnResistance(victim, level, RIS_POISON);
 
-          if ( victim->Race == RACE_DROID )
+            if (victim->Race == RACE_DROID)
             {
-              aff_chance = 1000;
+                aff_chance = 1000;
             }
-          
-          if ( aff_chance == 1000 )
-            {
-              retcode = rVICT_IMMUNE;
 
-              if ( SPELL_FLAG(skill, SF_STOPONFAIL) )
+            if (aff_chance == 1000)
+            {
+                retcode = rVICT_IMMUNE;
+
+                if (SPELL_FLAG(skill, SF_STOPONFAIL))
                 {
-                  return retcode;
+                    return retcode;
                 }
-              
-              continue;
+
+                continue;
             }
 
-          if ( SaveVsPoisonDeath( aff_chance, victim ) )
+            if (SaveVsPoisonDeath(aff_chance, victim))
             {
-              if ( SPELL_FLAG(skill, SF_STOPONFAIL) )
+                if (SPELL_FLAG(skill, SF_STOPONFAIL))
                 {
-                  return retcode;
+                    return retcode;
                 }
-              
-              continue;
+
+                continue;
             }
-          
-          victim->MentalState = urange( 30, victim->MentalState + 2, 100 );
-          break;
+
+            victim->MentalState = urange(30, victim->MentalState + 2, 100);
+            break;
 
         case AFF_BLIND:
-	  af->Type = gsn_blindness;
-	  break;
+            af->Type = gsn_blindness;
+            break;
 
         case AFF_INVISIBLE:
-	  af->Type = gsn_invis;
-	  break;
+            af->Type = gsn_invis;
+            break;
 
         case AFF_SLEEP:
-	  af->Type = gsn_sleep;
-          aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_SLEEP );
+            af->Type = gsn_sleep;
+            aff_chance = ModifySavingThrowBasedOnResistance(victim, level, RIS_SLEEP);
 
-          if ( victim->Race == RACE_DROID )
+            if (victim->Race == RACE_DROID)
             {
-              aff_chance = 1000;
+                aff_chance = 1000;
             }
-          
-          if ( aff_chance == 1000 )
+
+            if (aff_chance == 1000)
             {
-              retcode = rVICT_IMMUNE;
-              
-              if ( SPELL_FLAG(skill, SF_STOPONFAIL) )
+                retcode = rVICT_IMMUNE;
+
+                if (SPELL_FLAG(skill, SF_STOPONFAIL))
                 {
-                  return retcode;
+                    return retcode;
                 }
-              
-              continue;
+
+                continue;
             }
-          break;
+            break;
 
         case AFF_CHARM:
-	  af->Type = gsn_charm_person;
-          aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_CHARM );
+            af->Type = gsn_charm_person;
+            aff_chance = ModifySavingThrowBasedOnResistance(victim, level, RIS_CHARM);
 
-	  if ( victim->Race == RACE_DROID )
+            if (victim->Race == RACE_DROID)
             {
-              aff_chance = 1000;
+                aff_chance = 1000;
             }
-          
-          if ( aff_chance == 1000 )
+
+            if (aff_chance == 1000)
             {
-              retcode = rVICT_IMMUNE;
-              
-              if ( SPELL_FLAG(skill, SF_STOPONFAIL) )
+                retcode = rVICT_IMMUNE;
+
+                if (SPELL_FLAG(skill, SF_STOPONFAIL))
                 {
-                  return retcode;
+                    return retcode;
                 }
-              
-              continue;
+
+                continue;
             }
-          break;
+            break;
 
         case AFF_POSSESS:
-	  af->Type = gsn_possess;
-          break;
+            af->Type = gsn_possess;
+            break;
         }
 
-      af->Duration  = ParseDice(ch, level, saf->Duration);
-      af->Modifier  = ParseDice(ch, level, saf->Modifier);
-      af->Location  = saf->Location % REVERSE_APPLY;
+        af->Duration = ParseDice(ch, level, saf->Duration);
+        af->Modifier = ParseDice(ch, level, saf->Modifier);
+        af->Location = saf->Location % REVERSE_APPLY;
 
-      if ( af->Duration == 0 )
+        if (af->Duration == 0)
         {
-          switch( af->Location )
+            switch (af->Location)
             {
             case APPLY_HIT:
-              if ( ch != victim
-                   && victim->HitPoints.Current < victim->HitPoints.Max
-                   && af->Modifier > 0
-                   && victim->Race != RACE_DROID)
+                if (ch != victim
+                    && victim->HitPoints.Current < victim->HitPoints.Max
+                    && af->Modifier > 0
+                    && victim->Race != RACE_DROID)
                 {
-                  ch->Echo("The noble Jedi use their powers to help others!\r\n");
-                  ch->Alignment += 5;
-                  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
-                  ApplyJediBonus(ch);
+                    ch->Echo("The noble Jedi use their powers to help others!\r\n");
+                    ch->Alignment += 5;
+                    ch->Alignment = urange(-1000, ch->Alignment, 1000);
+                    ApplyJediBonus(ch);
                 }
 
-              if  ( af->Modifier > 0
-                    && victim->HitPoints.Current >= victim->HitPoints.Max )
+                if (af->Modifier > 0
+                    && victim->HitPoints.Current >= victim->HitPoints.Max)
                 {
-                  return rSPELL_FAILED;
+                    return rSPELL_FAILED;
                 }
 
-              victim->HitPoints.Current = urange( 0, victim->HitPoints.Current + af->Modifier,
-                                                  victim->HitPoints.Max );
-              UpdatePosition( victim );
-              break;
+                victim->HitPoints.Current = urange(0, victim->HitPoints.Current + af->Modifier,
+                    victim->HitPoints.Max);
+                UpdatePosition(victim);
+                break;
 
             case APPLY_MANA:
-              if( af->Modifier > 0 && victim->Mana.Current >= victim->Mana.Max )
+                if (af->Modifier > 0 && victim->Mana.Current >= victim->Mana.Max)
                 {
-                  return rSPELL_FAILED;
+                    return rSPELL_FAILED;
                 }
 
-              if ( ch != victim && victim->Race != RACE_DROID)
+                if (ch != victim && victim->Race != RACE_DROID)
                 {
-                  ch->Echo("The noble Jedi use their powers to help others!\r\n");
-                  ch->Alignment += 10 ;
-                  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
-		  ApplyJediBonus(ch);
+                    ch->Echo("The noble Jedi use their powers to help others!\r\n");
+                    ch->Alignment += 10;
+                    ch->Alignment = urange(-1000, ch->Alignment, 1000);
+                    ApplyJediBonus(ch);
                 }
 
-              victim->Mana.Current = urange( 0, victim->Mana.Current + af->Modifier,
-                                             victim->Mana.Max );
-              UpdatePosition( victim );
-              break;
+                victim->Mana.Current = urange(0, victim->Mana.Current + af->Modifier,
+                    victim->Mana.Max);
+                UpdatePosition(victim);
+                break;
 
             case APPLY_MOVE:
-              if  ( af->Modifier > 0
-                    && victim->Fatigue.Current >= victim->Fatigue.Max )
+                if (af->Modifier > 0
+                    && victim->Fatigue.Current >= victim->Fatigue.Max)
                 {
-                  return rSPELL_FAILED;
+                    return rSPELL_FAILED;
                 }
 
-              victim->Fatigue.Current = urange( 0, victim->Fatigue.Current + af->Modifier,
-                                                victim->Fatigue.Max );
-              UpdatePosition( victim );
-              break;
+                victim->Fatigue.Current = urange(0, victim->Fatigue.Current + af->Modifier,
+                    victim->Fatigue.Max);
+                UpdatePosition(victim);
+                break;
 
             default:
-              ModifyAffect( victim, af, true );
-              break;
+                ModifyAffect(victim, af, true);
+                break;
             }
         }
-      else if ( SPELL_FLAG( skill, SF_ACCUMULATIVE ) )
+        else if (SPELL_FLAG(skill, SF_ACCUMULATIVE))
         {
-          JoinAffect( victim, af );
+            JoinAffect(victim, af);
         }
-      else
+        else
         {
-          AffectToCharacter( victim, af );
+            AffectToCharacter(victim, af);
         }
     }
-  
-  UpdatePosition( victim );
-  return retcode;
+
+    UpdatePosition(victim);
+    return retcode;
 }

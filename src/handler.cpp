@@ -257,9 +257,9 @@ static void ApplySkillAffect(Character *ch, int sn, int mod)
  */
 void ModifyAffect(Character *ch, std::shared_ptr<Affect> paf, bool fAdd)
 {
-    Object *wield = NULL;
+    Object *wield = nullptr;
     int mod = paf->Modifier;
-    Skill *skill = NULL;
+    std::shared_ptr<Skill> skill;
     ch_ret retcode = rNONE;
 
     if (fAdd)

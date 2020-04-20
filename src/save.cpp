@@ -251,7 +251,7 @@ static void WriteCharacter(const Character *ch, FILE *fp)
 {
     int sn = 0;
     int drug = 0;
-    const Skill *skill = NULL;
+    std::shared_ptr<Skill> skill;
 
     fprintf(fp, "#%s\n", IsNpc(ch) ? "MOB" : "PLAYER");
 

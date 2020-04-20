@@ -732,7 +732,7 @@ void InMemoryPlayerRepository::PushSkills(lua_State *L, const Character *pc)
 
     for (int sn = 1; sn < TopSN; ++sn)
     {
-        const Skill *skill = SkillTable[sn];
+        std::shared_ptr<Skill> skill = SkillTable[sn];
 
         if (!skill->Name.empty() && pc->PCData->Learned[sn] > 0)
         {
