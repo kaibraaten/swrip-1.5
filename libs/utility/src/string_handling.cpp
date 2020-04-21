@@ -753,3 +753,15 @@ bool StringEndsWith(const std::string &str, const std::string &ending)
 {
     return !StringSuffix(ending, str);
 }
+
+void ReplaceAll(std::string &doc, const std::string &original,
+                const std::string &replacement)
+{
+    std::string::size_type pos = 0;
+
+    while( ( pos = doc.find( original, pos ) ) != std::string::npos )
+    {
+        doc.replace( pos, original.size(), replacement );
+        pos += replacement.size();
+    }
+}

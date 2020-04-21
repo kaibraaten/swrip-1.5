@@ -37,7 +37,8 @@ public:
     char InComm[MAX_INPUT_LENGTH] = { '\0' };
     std::ostringstream OutBuffer;
     unsigned char PreviousColor = 0;
-
+    std::string (*ParseColors)(const std::string&);
+    
 private:
     struct Impl;
     std::unique_ptr<Impl> pImpl;

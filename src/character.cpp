@@ -1444,9 +1444,6 @@ void FreeCharacter(Character *ch)
         ExtractTimer(ch, ch->Timers().front());
     }
 
-    if (ch->Editor)
-        StopEditing(ch);
-
     StopHunting(ch);
     StopHating(ch);
     StopFearing(ch);
@@ -1454,6 +1451,11 @@ void FreeCharacter(Character *ch)
 
     if (ch->PCData)
     {
+        if (ch->PCData->TextEditor)
+        {
+            StopEditing(ch);
+        }
+        
         if (ch->PCData->Note)
         {
             ch->PCData->Note.reset();

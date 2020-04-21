@@ -45,24 +45,16 @@ void do_mset( Character *ch, std::string argument )
       break;
 
     case SUB_MOB_DESC:
-      if ( !ch->dest_buf )
+        victim = (Character*)EditorUserData(ch);
+        
+        if ( CharacterDiedRecently(victim) )
         {
-          ch->Echo("Fatal error: report to the administration.\r\n");
-          Log->Bug( "do_mset: sub_mob_desc: NULL ch->dest_buf" );
-          ch->SubState = SUB_NONE;
-          return;
+            ch->Echo("Your victim died!\r\n");
+            StopEditing( ch );
+            return;
         }
 
-      victim = (Character*)ch->dest_buf;
-
-      if ( CharacterDiedRecently(victim) )
-        {
-          ch->Echo("Your victim died!\r\n");
-          StopEditing( ch );
-          return;
-        }
-
-      victim->Description = CopyBuffer( ch );
+      victim->Description = CopyEditBuffer( ch );
 
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         {
@@ -915,10 +907,9 @@ void do_mset( Character *ch, std::string argument )
         ch->tempnum = SUB_NONE;
 
       ch->SubState = SUB_MOB_DESC;
-      ch->dest_buf = victim;
-      StartEditing( ch, victim->Description );
-      SetEditorDescription( ch, "Mobile %ld (%s) description",
-			    victim->Prototype->Vnum, victim->Name.c_str() );
+      StartEditing( ch, victim->Description, victim, do_mset );
+      EditorDescPrintf( ch, "Mobile %ld (%s) description",
+                        victim->Prototype->Vnum, victim->Name.c_str() );
       return;
     }
 

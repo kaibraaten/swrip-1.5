@@ -24,13 +24,12 @@ void do_bio( Character *ch, std::string argument )
 
     case SUB_NONE:
       ch->SubState = SUB_PERSONAL_BIO;
-      ch->dest_buf = ch;
-      StartEditing( ch, ch->PCData->Bio );
-      SetEditorDescription( ch, "Your character biography" );
+      StartEditing( ch, ch->PCData->Bio, nullptr, do_bio );
+      SetEditorDesc( ch, "Your character biography" );
       return;
 
     case SUB_PERSONAL_BIO:
-      ch->PCData->Bio = CopyBuffer( ch );
+      ch->PCData->Bio = CopyEditBuffer( ch );
       StopEditing( ch );
       return;
     }

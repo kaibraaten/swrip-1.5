@@ -92,7 +92,6 @@ std::shared_ptr<HelpFile> AllocateHelpFile(const std::string &keyword, short lev
     std::shared_ptr<HelpFile> help = std::make_shared<HelpFile>();
 
     SetHelpFileKeyword(help, keyword);
-    SetHelpFileText(help, "");
     SetHelpFileLevel(help, level);
 
     return help;
@@ -124,14 +123,4 @@ std::string GetHelpFileKeyword(const std::shared_ptr<HelpFile> &help)
 void SetHelpFileKeyword(const std::shared_ptr<HelpFile> &help, const std::string &keyword)
 {
     help->Keyword = keyword;
-}
-
-std::string GetHelpFileText(const std::shared_ptr<HelpFile> &help)
-{
-    return help->Text;
-}
-
-void SetHelpFileText(const std::shared_ptr<HelpFile> &help, const std::string &text)
-{
-    help->Text = text;
 }

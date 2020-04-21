@@ -101,12 +101,7 @@ void do_comment( Character *ch, std::string argument )
           return;
         }
 
-      if ( ch->dest_buf != &ch->PCData->Note )
-        {
-          Log->Bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote" );
-        }
-      
-      ch->PCData->Note->Text = CopyBuffer( ch );
+      ch->PCData->Note->Text = CopyEditBuffer( ch );
       StopEditing( ch );
       return;
     }
@@ -251,8 +246,8 @@ void do_comment( Character *ch, std::string argument )
       AttachNote( ch );
       ch->SubState = SUB_WRITING_NOTE;
       ch->dest_buf = &ch->PCData->Note;
-      StartEditing( ch, ch->PCData->Note->Text );
-      SetEditorDescription( ch, "Player comment" );
+      StartEditing( ch, ch->PCData->Note->Text, &ch->PCData->Note->Text, do_comment );
+      SetEditorDesc( ch, "Player comment" );
       return;
     }
 

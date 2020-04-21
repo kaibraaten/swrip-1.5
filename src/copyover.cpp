@@ -75,7 +75,7 @@ void do_copyover(Character * ch, std::string argument)
 
         if (!d->Character || d->ConnectionState != CON_PLAYING)  /* drop those logging on */
         {
-            WriteToDescriptor(d->Socket, "\r\nSorry, we are rebooting."
+            WriteToDescriptor(d.get(), "\r\nSorry, we are rebooting."
                 " Come back in a few minutes.\r\n", 0);
             CloseDescriptor(d, false);  /* throw'em out */
         }
@@ -86,7 +86,7 @@ void do_copyover(Character * ch, std::string argument)
             fprintf(fp, "%d %d %s %s %s\n", cur_desc, 0,
                 och->Name.c_str(), d->Remote.HostIP.c_str(), d->Remote.Hostname.c_str());
             PlayerCharacters->Save(och);
-            WriteToDescriptor(d->Socket, buf, 0);
+            WriteToDescriptor(d.get(), buf, 0);
         }
     }
 
@@ -154,7 +154,7 @@ void RecoverFromCopyover()
         d->Remote.HostIP = ip;
 
         /* Write something, and check if it goes error-free */
-        if (!WriteToDescriptor(d->Socket, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0))
+        if (!WriteToDescriptor(d.get(), "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0))
         {
             Log->Bug("RecoverFromCopyover: couldn't write to socket %d", desc);
             FreeDescriptor(d);
@@ -169,14 +169,14 @@ void RecoverFromCopyover()
 
         if (!fOld)               /* Player file not found?! */
         {
-            WriteToDescriptor(d->Socket,
+            WriteToDescriptor(d.get(),
                 "\r\nSomehow, your character was lost in the copyover sorry.\r\n",
                 0);
             CloseDescriptor(d, false);
         }
         else                      /* ok! */
         {
-            WriteToDescriptor(d->Socket, "\r\nCopyover recovery complete.\r\n", 0);
+            WriteToDescriptor(d.get(), "\r\nCopyover recovery complete.\r\n", 0);
 
             /* Just In Case,  Someone said this isn't necassary, but _why_
                do we want to dump someone in limbo? */

@@ -1096,7 +1096,7 @@ void Nanny(std::shared_ptr<Descriptor> d, std::string argument);
 /* comm.cpp */
 void DisplayPrompt(Descriptor *d);
 void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force);
-bool WriteToDescriptor(socket_t desc, const std::string &txt, int length = 0);
+bool WriteToDescriptor(Descriptor *desc, const std::string &txt, int length = 0);
 void SetCharacterColor(short AType, const Character *ch);
 void Act(short AType, const std::string &format, Character *ch,
     const void *arg1, const void *arg2, int type);
@@ -1137,6 +1137,7 @@ bool DeleteMobile(std::shared_ptr<ProtoMobile> mob);
 /* build.c */
 void EditMobProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
 void EditRoomProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
+void EditObjProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg, int mptype, const std::string &argument);
 void WriteAreaList();
 
 bool CanModifyRoom(const Character *ch, std::shared_ptr<Room> room);

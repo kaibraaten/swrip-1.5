@@ -1110,15 +1110,30 @@ void EditMobProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
     }
 
     ch->SubState = SUB_MPROG_EDIT;
-    ch->dest_buf = mprg.get();
 
-    if (!mprg->comlist)
+    StartEditing(ch, mprg->comlist, &mprg->comlist, do_mpedit);
+    SetEditorDesc(ch, "MOBPROG script");
+}
+
+void EditObjProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
+    int mptype, const std::string &argument)
+{
+    if (mptype != -1)
     {
-        mprg->comlist = CopyString("");
+        mprg->type = 1 << mptype;
+
+        if (mprg->arglist)
+        {
+            FreeMemory(mprg->arglist);
+        }
+
+        mprg->arglist = CopyString(argument);
     }
 
-    StartEditing(ch, mprg->comlist);
-    SetEditorDescription(ch, "MOBPROG script");
+    ch->SubState = SUB_MPROG_EDIT;
+
+    StartEditing(ch, mprg->comlist, &mprg->comlist, do_opedit);
+    SetEditorDesc(ch, "OBJPROG script");
 }
 
 /*
@@ -1140,13 +1155,7 @@ void EditRoomProg(Character *ch, std::shared_ptr<MPROG_DATA> mprg,
     }
 
     ch->SubState = SUB_MPROG_EDIT;
-    ch->dest_buf = &mprg;
 
-    if (!mprg->comlist)
-    {
-        mprg->comlist = CopyString("");
-    }
-
-    StartEditing(ch, mprg->comlist);
-    SetEditorDescription(ch, "ROOMPROG script");
+    StartEditing(ch, mprg->comlist, &mprg->comlist, do_rpedit);
+    SetEditorDesc(ch, "ROOMPROG script");
 }

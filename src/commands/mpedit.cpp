@@ -34,21 +34,10 @@ void do_mpedit( Character *ch, std::string argument )
         break;
 
     case SUB_MPROG_EDIT:
-        if ( !ch->dest_buf )
         {
-            ch->Echo("Fatal error: report to Thoric.\r\n");
-            Log->Bug( "%s: SUB_MPROG_EDIT: NULL ch->dest_buf", __FUNCTION__ );
-            ch->SubState = SUB_NONE;
-            return;
-        }
+            std::string *comlist = static_cast<std::string*>(EditorUserData(ch));
 
-        {
-            MPROG_DATA *mprog = static_cast<MPROG_DATA*>(ch->dest_buf);
-
-            if ( mprog->comlist )
-                FreeMemory( mprog->comlist );
-
-            mprog->comlist = CopyBuffer( ch );
+            *comlist = CopyEditBuffer( ch );
             StopEditing( ch );
         }
         return;
@@ -130,7 +119,7 @@ void do_mpedit( Character *ch, std::string argument )
                      ++cnt,
                      MobProgTypeToName( mprg->type ),
                      mprg->arglist,
-                     mprg->comlist );
+                     mprg->comlist.c_str() );
         }
 
         return;
@@ -244,7 +233,6 @@ void do_mpedit( Character *ch, std::string argument )
         std::shared_ptr<MPROG_DATA> progToDelete = result.front();
         victim->Prototype->mprog.Remove(progToDelete);
         FreeMemory( progToDelete->arglist );
-        FreeMemory( progToDelete->comlist );
 
         if ( num <= 1 )
         {

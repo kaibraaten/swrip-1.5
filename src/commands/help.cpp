@@ -32,12 +32,12 @@ void do_help( Character *ch, std::string argument )
       ch->Echo( "%s\r\n", GetHelpFileKeyword( pHelp ).c_str() );
     }
 
-  help_text = GetHelpFileText( pHelp );
+  help_text = pHelp->Text;
 
   /*
    * Strip leading '.' to allow initial blanks.
    */
-  if ( GetHelpFileText( pHelp )[0] == '.' )
+  if ( pHelp->Text[0] == '.' )
     {
       help_text = help_text.substr(1);
     }

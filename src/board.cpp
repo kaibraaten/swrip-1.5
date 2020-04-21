@@ -243,7 +243,8 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
   int first_list = 0;
   Object *quill = NULL, *paper = NULL, *tmpobj = NULL;
   std::shared_ptr<ExtraDescription> ed;
-
+  std::string *noteText = nullptr;
+  
   if ( IsNpc(ch) )
     return;
 
@@ -267,8 +268,8 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
           return;
         }
 
-      ed = *static_cast<std::shared_ptr<ExtraDescription>*>(ch->dest_buf);
-      ed->Description = CopyBuffer( ch );
+      noteText = static_cast<std::string*>(EditorUserData(ch));
+      *noteText = CopyEditBuffer( ch );
       StopEditing( ch );
       return;
     }
@@ -670,7 +671,7 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
 
           paper = ObjectToCharacter(paper, ch);
           EquipCharacter(ch, paper, WEAR_HOLD);
-          Act(AT_MAGIC, "$n grabs a message tisk to record a note.",
+          Act(AT_MAGIC, "$n grabs a message disk to record a note.",
               ch, NULL, NULL, TO_ROOM);
           Act(AT_MAGIC, "You get a message disk to record your note.",
               ch, NULL, NULL, TO_CHAR);
@@ -681,15 +682,14 @@ void OperateOnNote( Character *ch, std::string arg_passed, bool IS_MAIL )
           paper->Value[OVAL_PAPER_0] = 1;
           ed = SetOExtra(paper, "_text_");
           ch->SubState = SUB_WRITING_NOTE;
-          ch->dest_buf = &ed;
 
           if ( GetTrustLevel(ch) < SysData.WriteMailFree )
 	    {
 	      --quill->Value[OVAL_PEN_INK_AMOUNT];
 	    }
 
-          StartEditing( ch, ed->Description );
-	  SetEditorDescription( ch, "Note" );
+          StartEditing( ch, ed->Description, &ed->Description, do_noteroom );
+	  SetEditorDesc( ch, "Note" );
           return;
         }
       else

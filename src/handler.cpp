@@ -2147,7 +2147,6 @@ void CleanMobile(std::shared_ptr<ProtoMobile> mob)
     {
         mob->mprog.Remove(mprog);
         FreeMemory(mprog->arglist);
-        FreeMemory(mprog->comlist);
     }
 
     mob->Count = 0;

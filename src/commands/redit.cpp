@@ -23,7 +23,7 @@ void do_redit(Character *ch, std::string argument)
     DirectionType edir = DIR_INVALID;
     vnum_t evnum = INVALID_VNUM;
     std::string origarg = argument;
-    Room *roomBeingEdited = nullptr;
+    std::string *editedText = nullptr;
 
     if (!ch->Desc)
     {
@@ -36,31 +36,11 @@ void do_redit(Character *ch, std::string argument)
     default:
         break;
 
+        // Both these cases handled the same way.
     case SUB_ROOM_DESC:
-        roomBeingEdited = (Room*)ch->dest_buf;
-
-        if (!roomBeingEdited)
-        {
-            Log->Bug("redit: sub_room_desc: NULL ch->dest_buf");
-            roomBeingEdited = ch->InRoom.get();
-        }
-
-        roomBeingEdited->Description = CopyBuffer(ch);
-        StopEditing(ch);
-        ch->SubState = (CharacterSubState)ch->tempnum;
-        return;
-
     case SUB_ROOM_EXTRA:
-        ed = *static_cast<std::shared_ptr<ExtraDescription>*>(ch->dest_buf);
-
-        if (!ed)
-        {
-            Log->Bug("redit: sub_room_extra: NULL ch->dest_buf");
-            StopEditing(ch);
-            return;
-        }
-
-        ed->Description = CopyBuffer(ch);
+        editedText = static_cast<std::string*>(EditorUserData(ch));
+        *editedText = CopyEditBuffer(ch);
         StopEditing(ch);
         ch->SubState = (CharacterSubState)ch->tempnum;
         return;
@@ -142,10 +122,9 @@ void do_redit(Character *ch, std::string argument)
             ch->tempnum = SUB_NONE;
 
         ch->SubState = SUB_ROOM_DESC;
-        ch->dest_buf = location.get();
-        StartEditing(ch, location->Description);
-        SetEditorDescription(ch, "Room %ld (%s) description",
-            location->Vnum, location->Name.c_str());
+        StartEditing(ch, location->Description, &location->Description, do_redit);
+        EditorDescPrintf(ch, "Room %ld (%s) description",
+                         location->Vnum, location->Name.c_str());
         return;
     }
 
@@ -181,10 +160,9 @@ void do_redit(Character *ch, std::string argument)
             ch->tempnum = SUB_NONE;
 
         ch->SubState = SUB_ROOM_EXTRA;
-        ch->dest_buf = extraDescription.get();
-        StartEditing(ch, extraDescription->Description);
-        SetEditorDescription(ch, "Room %ld (%s) extra description: %s",
-            location->Vnum, location->Name.c_str(), argument.c_str());
+        StartEditing(ch, extraDescription->Description, &extraDescription->Description, do_redit);
+        EditorDescPrintf(ch, "Room %ld (%s) extra description: %s",
+                         location->Vnum, location->Name.c_str(), argument.c_str());
         return;
     }
 

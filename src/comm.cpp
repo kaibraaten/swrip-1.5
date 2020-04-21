@@ -405,7 +405,7 @@ static void HandleSocketInput()
         {
             if ((d->Character && d->Character->InRoom) ? d->Character->TopLevel <= LEVEL_IMMORTAL : false)
             {
-                WriteToDescriptor(d->Socket,
+                WriteToDescriptor(d.get(),
                     "Idle 30 minutes. Activating AFK flag.\r\n", 0);
                 SetBit(d->Character->Flags, PLR_AFK);
                 Act(AT_GREY, "$n is now afk due to idle time.", d->Character, NULL, NULL, TO_ROOM);
@@ -419,7 +419,7 @@ static void HandleSocketInput()
         {
             if (d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true)
             {
-                WriteToDescriptor(d->Socket,
+                WriteToDescriptor(d.get(),
                     "Idle timeout... disconnecting.\r\n", 0);
                 d->OutBuffer.str("");
                 CloseDescriptor(d, true);
@@ -657,7 +657,7 @@ static void NewDescriptor(socket_t new_desc)
 
     if (pban != nullptr)
     {
-        WriteToDescriptor(desc, "Your site has been banned from this Mud.\r\n", 0);
+        WriteToDescriptor(dnew.get(), "Your site has been banned from this Mud.\r\n", 0);
         FreeDescriptor(dnew);
         SetAlarm(0);
         return;
@@ -766,7 +766,7 @@ void CloseDescriptor(std::shared_ptr<Descriptor> dclose, bool force)
  * If this gives errors on very long blocks (like 'ofind all'),
  *   try lowering the max block size.
  */
-bool WriteToDescriptor(socket_t desc, const std::string &orig, int length)
+bool WriteToDescriptor(Descriptor *desc, const std::string &orig, int length)
 {
     std::string txt = ColorParser::Smaug2Ansi(orig);
     ssize_t nWrite = 0;
@@ -779,12 +779,12 @@ bool WriteToDescriptor(socket_t desc, const std::string &orig, int length)
     for (int iStart = 0; iStart < length; iStart += nWrite)
     {
         int nBlock = umin(length - iStart, 4096);
-        nWrite = send(desc, txt.c_str() + iStart, nBlock, 0);
+        nWrite = send(desc->Socket, txt.c_str() + iStart, nBlock, 0);
 
         if (nWrite == SOCKET_ERROR)
         {
             Log->Bug("Write_to_descriptor: error on socket %d: %s",
-                desc, strerror(GETERROR));
+                desc->Socket, strerror(GETERROR));
             perror("Write_to_descriptor");
             return false;
         }

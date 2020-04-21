@@ -94,7 +94,7 @@ static int MudProgDoIfCheck(const std::string &ifcheck, Character *mob, Characte
 static void MudProgTranslate(char ch, char* t, Character *mob,
     Character* actor, Object* obj,
     void* vo, Character* rndm);
-static void MudProgDriver(char* com_list, Character* mob,
+static void MudProgDriver(std::string com_list, Character* mob,
     Character* actor, Object* obj,
     void* vo, bool single_step);
 static bool MudProgKeywordCheck(const std::string &argu, const std::string &argl);
@@ -1737,7 +1737,7 @@ static void MudProgTranslate(char ch, char *t, Character *mob, Character *actor,
  *  This function rewritten by Narn for Realms of Despair, Dec/95.
  *
  */
-static void MudProgDriver(char *com_list, Character *mob, Character *actor,
+static void MudProgDriver(std::string com_list, Character *mob, Character *actor,
     Object *obj, void *vo, bool single_step)
 {
     char tmpcmndlst[MAX_STRING_LENGTH];
@@ -1812,7 +1812,7 @@ static void MudProgDriver(char *com_list, Character *mob, Character *actor,
         }
     }
 
-    strcpy(tmpcmndlst, com_list);
+    strcpy(tmpcmndlst, com_list.c_str());
     command_list = tmpcmndlst;
 
     if (single_step)

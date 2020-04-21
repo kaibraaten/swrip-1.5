@@ -53,7 +53,7 @@ public:
     bool        triggered = false;
     int         resetdelay = 0;
     char       *arglist = nullptr;
-    char       *comlist = nullptr;
+    std::string comlist;
 };
 
 extern bool MOBtrigger;

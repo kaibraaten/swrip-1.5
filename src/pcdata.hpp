@@ -76,6 +76,8 @@ public:
 
     long RestoreTime = 0;         /* The last time the char did a restore all */
 
+    Editor *TextEditor = nullptr;
+    
     struct
     {
         std::shared_ptr<class Area> Area;

@@ -10,45 +10,36 @@
  */
 void do_hedit( Character *ch, std::string argument )
 {
-  std::shared_ptr<HelpFile> pHelp;
-
-  if ( !ch->Desc )
+    std::string *editedText = nullptr;
+    
+    if ( !ch->Desc )
     {
-      return;
+        return;
     }
 
-  switch( ch->SubState )
+    switch( ch->SubState )
     {
     default:
-      break;
+        break;
 
     case SUB_HELP_EDIT:
-      pHelp = *static_cast<std::shared_ptr<HelpFile>*>(ch->dest_buf);
-
-      if ( !pHelp )
-        {
-          Log->Bug( "hedit: sub_help_edit: NULL ch->dest_buf");
-          StopEditing( ch );
-          return;
-        }
-
-      SetHelpFileText( pHelp, CopyBuffer( ch ) );
-      StopEditing( ch );
-      return;
+        editedText = static_cast<std::string*>(EditorUserData(ch));
+        *editedText = CopyEditBuffer( ch );
+        StopEditing( ch );
+        return;
     }
 
-  pHelp = GetHelpFile( ch, argument );
+    std::shared_ptr<HelpFile> pHelp = GetHelpFile( ch, argument );
 
-  if ( !pHelp ) /* new help */
+    if ( !pHelp ) /* new help */
     {
-      int level = GetTrustLevel( ch );
-      pHelp = AllocateHelpFile( argument, level );
-      HelpFiles->Add( pHelp );
+        int level = GetTrustLevel( ch );
+        pHelp = AllocateHelpFile( argument, level );
+        HelpFiles->Add( pHelp );
     }
 
-  ch->SubState = SUB_HELP_EDIT;
-  ch->dest_buf = &pHelp;
-  StartEditing( ch, GetHelpFileText( pHelp ) );
-  SetEditorDescription( ch, "Help file: %s", GetHelpFileKeyword( pHelp ).c_str() );
+    ch->SubState = SUB_HELP_EDIT;
+    ch->dest_buf = pHelp.get();
+    StartEditing( ch, pHelp->Text, &pHelp->Text, do_hedit );
+    EditorDescPrintf( ch, "Help file: %s", GetHelpFileKeyword( pHelp ).c_str() );
 }
-

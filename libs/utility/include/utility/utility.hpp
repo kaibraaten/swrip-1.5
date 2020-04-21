@@ -217,6 +217,9 @@ B urange(const A &mincheck, const B &check, const C &maxcheck)
 /* string_handling.c */
 std::string WordWrap(const std::string &txt, unsigned short wrap);
 
+void ReplaceAll(std::string &doc, const std::string &original,
+                const std::string &replacement);
+    
 /**
  * \brief Return true if an argument is completely numeric.
  */

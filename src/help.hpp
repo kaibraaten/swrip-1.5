@@ -45,7 +45,4 @@ void SetHelpFileLevel( const std::shared_ptr<HelpFile> &help, short level );
 std::string GetHelpFileKeyword( const std::shared_ptr<HelpFile> &help );
 void SetHelpFileKeyword( const std::shared_ptr<HelpFile> &help, const std::string &keyword );
 
-std::string GetHelpFileText( const std::shared_ptr<HelpFile> &help );
-void SetHelpFileText( const std::shared_ptr<HelpFile> &help, const std::string &text );
-
 #endif

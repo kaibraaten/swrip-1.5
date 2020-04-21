@@ -29,13 +29,12 @@ void do_description( Character *ch, std::string argument )
 
     case SUB_NONE:
       ch->SubState = SUB_PERSONAL_DESC;
-      ch->dest_buf = ch;
-      StartEditing( ch, ch->Description );
-      SetEditorDescription( ch, "Your character description" );
+      StartEditing( ch, ch->Description, nullptr, do_description );
+      SetEditorDesc( ch, "Your character description" );
       return;
 
     case SUB_PERSONAL_DESC:
-      ch->Description = CopyBuffer( ch );
+      ch->Description = CopyEditBuffer( ch );
       StopEditing( ch );
       return;
     }

@@ -59,7 +59,7 @@ void do_oset( Character *ch, std::string argument )
         else
             ed = SetOExtra(tmpobj, (char*)ch->dest_buf);
         
-        ed->Description = CopyBuffer( ch );
+        ed->Description = CopyEditBuffer( ch );
         StopEditing( ch );
         ch->dest_buf = tmpobj;
         ch->SubState = (CharacterSubState)ch->tempnum;
@@ -83,7 +83,7 @@ void do_oset( Character *ch, std::string argument )
             return;
         }
 
-        obj->Description = CopyBuffer( ch );
+        obj->Description = CopyEditBuffer( ch );
 
         if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
         {
@@ -563,9 +563,9 @@ void do_oset( Character *ch, std::string argument )
 
         ch->SubState = SUB_OBJ_LONG;
         ch->dest_buf = obj;
-        StartEditing( ch, obj->Description );
-        SetEditorDescription( ch, "Object %ld (%s) long description",
-                              obj->Prototype->Vnum, obj->Name.c_str() );
+        StartEditing( ch, obj->Description, nullptr, do_oset );
+        EditorDescPrintf( ch, "Object %ld (%s) long description",
+                          obj->Prototype->Vnum, obj->Name.c_str() );
         return;
     }
 
@@ -742,9 +742,9 @@ void do_oset( Character *ch, std::string argument )
         ch->SubState = SUB_OBJ_EXTRA;
         ch->spare_ptr = obj;
         ch->dest_buf = (char*)arg3.c_str();
-        StartEditing( ch, ed->Description );
-        SetEditorDescription( ch, "Object %ld (%s) extra description: %s",
-                              obj->Prototype->Vnum, obj->Name.c_str(), arg3.c_str() );
+        StartEditing( ch, ed->Description, nullptr, do_oset );
+        EditorDescPrintf( ch, "Object %ld (%s) extra description: %s",
+                          obj->Prototype->Vnum, obj->Name.c_str(), arg3.c_str() );
         return;
     }
 
@@ -782,9 +782,9 @@ void do_oset( Character *ch, std::string argument )
         ch->SubState = SUB_OBJ_EXTRA;
         ch->spare_ptr = obj;
         ch->dest_buf = (char*)obj->Name.c_str();
-        StartEditing( ch, ed->Description );
-        SetEditorDescription( ch, "Object %ld (%s) description",
-                              obj->Prototype->Vnum, obj->Name.c_str() );
+        StartEditing( ch, ed->Description, nullptr, do_oset );
+        EditorDescPrintf( ch, "Object %ld (%s) description",
+                          obj->Prototype->Vnum, obj->Name.c_str() );
         return;
     }
 

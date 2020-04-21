@@ -166,7 +166,6 @@ public:
     void *dest_buf_2 = NULL;
     void *spare_ptr = NULL;
     int tempnum = 0;
-    class Editor * Editor = NULL;
     int NumFighting = 0;
     CharacterSubState SubState = SUB_NONE;
     int Trust = 0;

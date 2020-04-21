@@ -63,12 +63,12 @@ static int L_HelpEntry( lua_State *L )
   LuaGetfieldString( L, "Text",
                      [help](const std::string &text)
                      {
-                       SetHelpFileText( help, text );
+                       help->Text = text;
                      });
 
   if( !StrCmp( GetHelpFileKeyword( help ), "greeting" ) )
     {
-      HelpGreeting = GetHelpFileText( help );
+      HelpGreeting = help->Text;
     }
 
   HelpFiles->Add( help );
@@ -97,7 +97,7 @@ static void PushHelpFile(lua_State *L, const std::shared_ptr<HelpFile> &help)
 
   LuaSetfieldString( L, "Keyword", GetHelpFileKeyword( help ) );
   LuaSetfieldNumber( L, "Level", GetHelpFileLevel( help ) );
-  LuaSetfieldString( L, "Text", MunchLeadingSpace( GetHelpFileText( help ) ) );
+  LuaSetfieldString( L, "Text", MunchLeadingSpace( help->Text ) );
 
   lua_settable( L, -3 );
 }

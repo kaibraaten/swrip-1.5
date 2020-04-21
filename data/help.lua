@@ -1,10 +1,10 @@
 -- Helps
--- Last saved Sunday 30-Oct-2016 19:30:32
+-- Last saved Tuesday 21-Apr-2020 11:08:01
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "!", 
+   Level = 0, 
    Text = "&CSyntax &W: &Y!\
   \
 &c! repeats the last command you typed.\
@@ -13,538 +13,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
-   Keyword = "'ACUTE AWARENESS' ACUTEAWARENESS", 
-   Text = "&CSyntax &R&W: &YAcuteAwareness\
- \
-&cThis skill adds the ability to detect those who are stealthed for a short\
-period of time.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'ACUTE DAMAGE' ACUTEDAMAGE", 
-   Text = "&CSyntax &R&W: &YAcuteDamage\
- \
-&cThis skill lets you focus your energy into increasing your damage and\
-damroll.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'AFFECT MIND'", 
-   Text = "&CSyntax : &Yfeel 'affect mind' (victim)\
- \
-&cThis attempts to control a person or monster.  If successful, they will\
-follow you for a limited period.  Failure, however, will start a fight\
-(Note, there are many creatures resistant or immune to charm).\
-", 
-}
-
-HelpEntry
-{
-   Level = 0, 
-   Keyword = "'BOUNTY HUNTER'", 
-   Text = "&cBounty hunters are some of the most feared people in the galaxy. \
-Although they cannot roll force, their ability more than makes up for it.\
-Backstab and circle provide an attacking ability to quickly take most of\
-your marks.  Because of this extreme power, only hunters in the guild can\
-practice their offensive skills.  Hunters are not for newbies. \
-  \
-&RAlso see: &PHelp Skin\
-&P          Help Track\
-&P          Help Backstab\
-&P          Help Doorbash\
-&P          Help PoisonWeapon\
-&P          Help Apprehend\
-&P          Help Bind\
-&P          Help AcuteAwareness\
-&P          Help Circle\
-&P          Help SeeMasking\
-&P          Help FocusStrength\
-&P          Help InnerStrength\
-&P          Help HeightenedAccuracy\
-&P          Help Limber\
-&P          Help AcuteDamage\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'CAPITAL SHIPS' MIDSHIPS STARFIGHTERS", 
-   Text = "&CSyntax &W: &YAutomatic\
-  \
-&cThese skills allow you to fly ships of their respective size. \
-Without\
-these skills, you will not be able to move a ship.\
-  \
-&RAlso see&W: &PHelp Ships\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'CURE BLINDNESS'", 
-   Text = ".\
-&CSyntax &W:&Y feel 'cure blindness' <target>\
- \
-&cCures blindness of the target. \
- \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'CURE CRITICAL' 'CURE LIGHT' 'CURE SERIOUS' HEAL", 
-   Text = "&CSyntax &W:&Y feel 'cure light' <target>\
-&CSyntax &W:&Y feel 'cure serious' <target>\
-&CSyntax &W:&Y feel 'cure critical' <target>\
-&CSyntax &W:&Y feel heal <target>\
-  \
-&cHeals the tagert.  The stregnth of the healing depends on the ability, as\
-cure light does very little to heal a wound, wheras \"heal\" can perform \
-miracle healings. \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'CURE POISON'", 
-   Text = ".\
-&CSyntax &W:&Y feel 'cure poison' <target>\
- \
-&cRemoves poison from target's blood.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'DETECT DARKNESS' 'DETECT FORCE' 'DETECT INTENT' 'DETECT MASKING' 'DETECT POISON' 'DETECT TRAPS'", 
-   Text = "&CSyntax &W:&Y feel 'detect <ability>'\
- \
-&CDetect Darkness\
-&cPlaces a red aura around those who follow the ways of evil.\
- \
-&CDetect Force\
-&cPlaces a blue aura around those able to feel the Force.\
- \
-&CDetect Intent\
-Tells the emotions and general alignment of a being. \
- \
-&CDetect Masking\
-&cAllows one to see the invisible\
- \
-&CDetect Poison\
-&cAllows one to detect poisonous objects\
- \
-&CDetect Traps\
-&cAllows one to foresee trapped objects\
- \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'DISPEL DARK'", 
-   Text = ".\
-&CSyntax &W:Y feel 'dispel dark' <target>\
- \
-&cDamages characters aligned with the Dark Side\
- \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'DISPEL FORCE'", 
-   Text = "Syntax : feel \"dispel force\" <target>\
-&G\
-Removes any force affecting the victim.\
-&w\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'DRAIN ESSENCE'", 
-   Text = "Syntax : feel 'drain essence' <victim>\
-&r\
-Drains XP, MANA and HP from victim.\
-User gains HP.\
-&w\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'FOCUS STRENGTH' FOCUSSTRENGTH", 
-   Text = "&CSyntax &R&W: &YFocusStrength\
- \
-&cThis skill allows you to focus your energy, increasing your strength for\
-a period of time. During this time, you can carry more, and hit harder.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'FORCE BLAST WRATH'", 
-   Text = "Syntax : feel 'force blast wrath'\
-\
-Require THREE people and causes heavy damage to all in the room,\
-and then blinds everyone, including casters.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'FORCE BOLT'", 
-   Text = "Syntax : feel 'force bolt' <victim>\
-\
-Sends a bolt of force at the victim.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'FORCE BUBBLE' 'FORCE SHIELD'", 
-   Text = "Syntax : feel 'force bubble'\
-Syntax : feel 'force shield'\
-\
-Creates a force bubble/shield that lowers AC and increase resistance.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'FORCE FUNNEL'", 
-   Text = "Syntax : feel 'force funnel' <victim>\
-\
-Makes victim more susceptable.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'FORCE LIGHTNING'", 
-   Text = "Syntax : feel 'force lightning' <victim>\
-\
-Sends bolts of lightning into victim.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'FORCE SIGHT'", 
-   Text = "Syntax : feel 'force sight'\
-\
-Allows user to see in the dark.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'FORCE SPRAY'", 
-   Text = "Syntax : feel 'force spray' <victim>\
-\
-Cause minor damage to victim.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'GOOD FORTUNE'", 
-   Text = "Syntax : feel 'good fortune' <target>\
-\
-Increase hitroll and improves saving roll against the force.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'GROUP MASKING'", 
-   Text = "Syntax : feel \"group masking\"\
-\
-Masks all those in your group (including you).\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'HAND OF DARKNESS'", 
-   Text = "Syntax : feel 'hand of darkness' <victim>\
-\
-Cause heavy damage to target.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'HEIGHTENED ACCURACY' HEIGHTENEDACCURACY", 
-   Text = "&CSyntax &R&W: &YHeightenedAccuracy\
- \
-&cThis skill allows you to focus your energy to increase your accuracy. It\
-raises your hitroll for a limited period.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'HEIGHTENED AWARENESS'", 
-   Text = "Syntax : feel 'heightened awareness'\
-\
-Allows user to detect characters sneaking around.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'HEIGHTENED STRENGTH' HEIGHTENEDSTRENGTH", 
-   Text = ".\
-Syntax : HeightenedStrength\
- \
- Increase your hitroll for a short time.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'INNER FORTRESS'", 
-   Text = "Syntax : feel 'inner fortress'\
-\
-Improves constitution for a limited period.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'INNER STRENGTH' INNERSTRENGTH", 
-   Text = "&CSyntax &R&W: &YInnerStrength\
- \
-&cThis skill will increase both your constitution and your max hit points\
-for a short period of time.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'INVADE ESSENCE'", 
-   Text = "Syntax : feel 'invade essence' <victim>\
-\
-Causes damage to victim.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'KNOW ESSENCE'", 
-   Text = "Syntax : feel 'know essence' <target>\
-\
-Displays information on target.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'PICK LOCK' PICKLOCK PICK", 
-   Text = "&CSyntax &W:&Y Pick <direction>\
-&c\
-This skill enables you to pick open locked doors.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'PICK SHIP LOCK' PICKSHIP PICKSHIPLOCK", 
-   Text = "&CSyntax &R&W: &YPick &R&W<&YShip&R&W>\
- \
-&cA useful skill if you wish to get into someone's ship. \
- \
-&RNote:&r You need to have &YPick Lock&r practiced at least once, in order\
-for &YPick Ship Lock&r to work.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'POST GUARD' POSTGUARD", 
-   Text = "&CSyntax &W: &YPostGuard \
-  \
-&cThis posts a guard from your clan or organization at your location. \
-These guards will attack other clanned members beside your own. \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'PROTECTION FROM DARKNESS'", 
-   Text = "Syntax : feel 'protection from darkness' <target>\
-\
-Protect users from the darkside for a limited period.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'REMOVE MASKING'", 
-   Text = "Syntax : feel 'remove masking' <victim>\
-\
-Makes victim visible.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'REMOVE TRAP'", 
-   Text = "Syntax : feel 'remove trap' <target>\
-\
-Remove trap.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "RESTORATION", 
-   Text = "Syntax : feel 'restoration'\
-\
-Requires two people to cast and heals one target.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'SCORCHING SURGE'", 
-   Text = "Syntax : feel 'scorching surge' <victim>\
-\
-Cause great harm to victim.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'SHIP MAINTENANCE'", 
-   Text = "&cThis provides you with the ability to &YRepairShip&c. \
-  \
-&RAlso see&W: &PHelp RepairShip, Help Ships \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'SHIP SYSTEMS' STATUS", 
-   Text = "&CSyntax &W: &YStatus \
-&CSyntax &W: &YStatus <ship> \
-  \
-&cThis skill allows you to check your ship's current status.  You can also\
-see the status of other ships during spaceflight, provided they're in\
-range. You must be in either the pilot, copilot, gunner, or navigator's\
-seat.\
-  \
-&RAlso see&W: &PHelp Ships \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'SHOCKING GRASP'", 
-   Text = "Syntax : feel 'shocking grasp' <victim>\
-\
-Send small lightning bolts through victim from your hands.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'SPACE COMBAT 1' 'SPACE COMBAT 2' 'SPACE COMBAT 3'", 
-   Text = "&CSyntax &R&W: &YAutomatic \
-  \
-&R&cThese skills increase the damage you do in ships. They act like\
-enhanced damage, except for ships.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'SPICE REFINING' MAKESPICE", 
-   Text = "&CSyntax &W: &YMakespice &W<&YSpice&W> \
-  \
-&cThis skill allows you to make spice usable for consumption.  You need to\
-be in a refinery to use this.  You also need some unrefined spice for this\
-to work. \
-  \
-&RSee also&W: &PHelp Spice \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'UNRAVEL DEFENSE'", 
-   Text = "Syntax : feel 'unravel defense' <victim>\
-\
-Makes victim more susceptable.\
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
-   Keyword = "'WEAPON SYSTEMS'", 
-   Text = "&CSyntax &W: &YTarget &W<&YShip&W> \
-  \
-&cThis skill allows you to make use of a ship's weapon systems, ie firing\
-and targeting with them. \
-  \
-&RAlso see&W: &PHelp Ships \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
    Keyword = "A", 
+   Level = 1, 
    Text = "&C                       MOVING THROUGHOUT GAME:\
 &W                     ---------------------------\
 &cThe game divided into many rooms which are connected by various \
@@ -571,8 +41,8 @@ NORTHEAST (Ne)  NORTHWEST (Nw)  SOUTHEAST (Se)  SOUTHWEST (Sw)\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "AASSIGN", 
+   Level = 101, 
    Text = "Syntax: aassign <filename>.are  Example:  aassign edo.are\
  \
 AASSIGN temporarily assigns all rooms, objects, and mobiles in the area\
@@ -600,8 +70,8 @@ See BESTOWAREA\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ACCELERATE VELOCITY SPEED", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y Speed (speed)\
 &CSyntax &W:&Y Accelerate (speed) \
 &CSyntax &W:&Y Velocity (speed) \
@@ -612,8 +82,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ACTFLAGS", 
+   Level = 101, 
    Text = "sentinel       Mobile always stays at its post.\
 scavenger      Mobile picks up items of value.\
 aggressive     Mobile attacks players.\
@@ -633,8 +103,30 @@ See MSET.\
 
 HelpEntry
 {
+   Keyword = "'ACUTE AWARENESS' ACUTEAWARENESS", 
    Level = 1, 
+   Text = "&CSyntax &R&W: &YAcuteAwareness\
+ \
+&cThis skill adds the ability to detect those who are stealthed for a short\
+period of time.\
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'ACUTE DAMAGE' ACUTEDAMAGE", 
+   Level = 1, 
+   Text = "&CSyntax &R&W: &YAcuteDamage\
+ \
+&cThis skill lets you focus your energy into increasing your damage and\
+damroll.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "ACUTE_AWARNESS", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YAcute_awarness\
  \
 &cThis skill adds the ability to detect those who are stealthed for a short\
@@ -644,8 +136,8 @@ period of time.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ADARI", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Adari System\
 &CInhabitants &W:&W Adarian\
 &c\
@@ -657,8 +149,8 @@ snow. Its year lasts 409 standard days. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "ADARIAN ADARIANS", 
+   Level = 0, 
    Text = "&COrigin: &YAdari \
  \
 &c     An alien race native to the planet Adari, the Adarians are humanoids\
@@ -682,8 +174,20 @@ with unlimited raw materials in return for their neutrality. \
 
 HelpEntry
 {
-   Level = 105, 
+   Keyword = "'ADD PATROL' ADDPATROL", 
+   Level = 1, 
+   Text = "&CSyntax&R&W : &YAddPatrol \
+ \
+&cThis allows you to call a guard from your clan or organization at your\
+location.  These guards act like posted guards, but will walk around. \
+ \
+", 
+}
+
+HelpEntry
+{
    Keyword = "ADDRESIDENT REMRESIDENT", 
+   Level = 105, 
    Text = "Syntax: addresident <player>\
 Syntax: remresident <player>\
 \
@@ -702,20 +206,8 @@ for payment must be made between the resident and the home owner.\
 
 HelpEntry
 {
-   Level = 1, 
-   Keyword = "'ADD PATROL' ADDPATROL", 
-   Text = "&CSyntax&R&W : &YAddPatrol \
- \
-&cThis allows you to call a guard from your clan or organization at your\
-location.  These guards act like posted guards, but will walk around. \
- \
-", 
-}
-
-HelpEntry
-{
-   Level = 1, 
    Keyword = "ADJUSTTRACTOR", 
+   Level = 1, 
    Text = "&cYour tractorbeam has several settings.\
  \
 &CSyntax: &Yadjusttractor land \
@@ -733,8 +225,8 @@ docked to, including if it is yours! \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ADVANCE", 
+   Level = 101, 
    Text = "Syntax: advance <character> <level>\
 \
 ADVANCE sets a character's level to the specified value.  It is the\
@@ -745,8 +237,8 @@ may also be used to demote characters.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ADVANCEDEXITS", 
+   Level = 101, 
    Text = "SMAUG supports having more than one exit in the same direction,\
 as well as the special direction 'somewhere', represented by a '?'.\
  \
@@ -776,8 +268,8 @@ If a player types 'swim' in the room, they will move to room 3001.\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "ADVENTURE", 
+   Level = -1, 
    Text = ".\
    In our efforts to give credit to everyone who deserves it, we almost\
    forgot to give credit to one of the \"grandfathers\" of computer adventure\
@@ -790,8 +282,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "AF'EL", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Ka'Dedus\
 &CInhabitants &W:&W Defel\
 &c\
@@ -808,8 +300,20 @@ Yards mined Af'El for many of its natural minerals. \
 
 HelpEntry
 {
-   Level = 0, 
+   Keyword = "'AFFECT MIND'", 
+   Level = 1, 
+   Text = "&CSyntax : &Yfeel 'affect mind' (victim)\
+ \
+&cThis attempts to control a person or monster.  If successful, they will\
+follow you for a limited period.  Failure, however, will start a fight\
+(Note, there are many creatures resistant or immune to charm).\
+", 
+}
+
+HelpEntry
+{
    Keyword = "AFFECTED 'AFFECTED BY'", 
+   Level = 0, 
    Text = "&CSyntax:  &Yaffected       &c(abbrevation:  &Yaf&c)\
 &CSyntax:  &Yaffected by    &c(abbreviation: &Yaf by&c)\
  \
@@ -836,8 +340,8 @@ immunities if your character is level 20 or higher. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "AFFECTEDBY AFFECTED_BY", 
+   Level = 101, 
    Text = "The following are affect flags that can be used when osetting an item\
 (with oset <item> affect affected <affect flag>).  These flags can also\
 be used when msetting a mobile (mset <mob name> affected <affect flag>).\
@@ -858,8 +362,8 @@ See also: OSET AFFECTTYPES\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "AFFECTTYPES APPLYTYPES", 
+   Level = 101, 
    Text = "none        strength    dexterity   intelligence  wisdom       constitution\
 sex         level       age         height        weight       mana     \
 hit         move        gold        experience    armor        hitroll\
@@ -882,8 +386,8 @@ See AFFECTEDBY\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "AFK", 
+   Level = 1, 
    Text = "&CSyntax: &Yafk \
 &c\
 The afk command will place an &W[AFK]&c flag beside your name on the who\
@@ -897,8 +401,8 @@ off automatically when you enter any command. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "AID", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YAid &R&W<&YPlayer&R&W> \
  \
 &cThis skill allows you to bring a stunned player back to consciousness.\
@@ -911,8 +415,8 @@ will need to perform &YFirstaid&c to save them.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ALDERAAN", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Alderaan\
 &CInhabitants &W:&W Human, Thranta\
 &c\
@@ -953,8 +457,8 @@ as the New Republic\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ALERTNESS", 
+   Level = 1, 
    Text = "Syntax : feel alertness\
 &G\
 This makes you more alert for a period.\
@@ -964,8 +468,8 @@ This makes you more alert for a period.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ALIAS UNALIAS", 
+   Level = 1, 
    Text = "&CSyntax: &Yalias &w<&Yshortcut&w> <&Ycommand&w>\
 &CSyntax: &Yalias &w<&Yshortcut&w>\
 &c \
@@ -991,8 +495,8 @@ wish to remove.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ALIASFOCUS UNFOCUSALIAS FOCUSALIAS", 
+   Level = 1, 
    Text = "&CSyntax: &Yaliasfocus &W<&YWord&W> \
         &Yunfocusalias \
  \
@@ -1008,8 +512,8 @@ normal conversation. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ALLOW BAN", 
+   Level = 101, 
    Text = "Syntax:  allow <site>\
 Syntax:  ban   <site>\
 Syntax:  ban\
@@ -1035,8 +539,8 @@ all sites within 'foo.edu' are banned as well.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ALLSHIPS ALLSHIP", 
+   Level = 1, 
    Text = "This command will list all the ships in the universe and there current\
 owner or sale price. \
  \
@@ -1046,8 +550,8 @@ Arguments: imperial, rebel, civilian, mob, unowned \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "AMMO AMMUNITION BATTERIES BATTERY CHARGE CHARGES BLASTER BLASTERS", 
+   Level = 1, 
    Text = "&R&CSyntax &R&W: &YAutomatic &R&W<&R&YBlaster&R&W> \
 &R&CSyntax &R&W: &R&YAmmo &R&W<&R&YHolding Battery&R&W> \
 \
@@ -1060,16 +564,16 @@ to be recharged.  To recharge a blaster, you must find an ammunition cell.\
 
 HelpEntry
 {
-   Level = 100, 
    Keyword = "AMOTD", 
+   Level = 100, 
    Text = "No message of the day for avatars.\
 ", 
 }
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "ANSI", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y ansi <on/off> \
 &c\
 The ansi command will either enable or disable ansi colour.  Ansi colour \
@@ -1081,8 +585,8 @@ will work provided your terminal has a compatible mode. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "APPLY", 
+   Level = 0, 
    Text = "&CSyntax &W: &Yapply <item>\
 &c\
 In your travels you may come across various ointments and salves, use\
@@ -1092,8 +596,8 @@ In your travels you may come across various ointments and salves, use\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "APPRAISE", 
+   Level = 1, 
    Text = "&CSyntax:&Y appraise <item>\
         appraise all\
 &c\
@@ -1105,8 +609,8 @@ not, and if so, how much it will cost. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "APPREHEND", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YApprehend &R&W<&YMob&R&W>\
  \
 &YApprehend&c is used by bounty hunters to subdue their prey.  It lets you\
@@ -1118,16 +622,16 @@ force a mob to follow you.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "AQUEST", 
+   Level = 1, 
    Text = "&CSee &PHelp Quest&R&W\
 ", 
 }
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "AREAS COMMANDS SOCIALS", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y areas \
 &CSyntax &W:&Y commands \
 &CSyntax &W:&Y socials \
@@ -1144,8 +648,8 @@ thanks to KaVir for mailing us lots of extra socials)\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ARENA ACCEPT DECLINE CHALLENGE BET AHALL AWHO", 
+   Level = 1, 
    Text = "&Y-&C* &WCode edited by Ulysses&C *&Y-&c \
 The Arena is an area where players can challenge and duel each other, not\
 to the death, but until one submits and cannot fight any longer.  When a\
@@ -1178,8 +682,8 @@ The winner being the last standing.  Commands in Chaos mode:\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ARM", 
+   Level = 1, 
    Text = "&CSyntax &W: &YArm (device)\
 &c\
 Used for arming of various devices (ie grenades) around the galaxy.\
@@ -1190,8 +694,8 @@ Used for arming of various devices (ie grenades) around the galaxy.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "ARMOR", 
+   Level = 0, 
    Text = "Syntax: feel armor <character>\
 &C\
 This power decreases (improves) the armor class of the target character\
@@ -1202,8 +706,8 @@ by 20 points.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ASET", 
+   Level = 101, 
    Text = "Syntax:  aset <area filename> <field> <value>\
  \
 Aset is used to set the following fields for an individual area:\
@@ -1230,8 +734,8 @@ See FOLDAREA, ASTAT, ECONOMY\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ASSASSIN DROID ASSASSINDROIDS ASSASSIN_DROIDS 'ASSASSIN DROIDS'", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Various\
 &c\
     The name given to any number of droid types which are programmed seek\
@@ -1248,8 +752,8 @@ rule as Emperor, after they started to be used against Imperial forces. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ASTAT", 
+   Level = 101, 
    Text = "Syntax:  astat                      (area stats for the area you are in)\
 Syntax:  astat <filename of area>   (area stats for specified area)\
  \
@@ -1281,8 +785,8 @@ See ASET\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ASTROMECH DROID 'ASTROMECH DROIDS'", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Various\
 &c\
      These small droids were designed for use with small starfighters.\
@@ -1296,8 +800,8 @@ many of the best astromech droids, including the R2, R5, and R7 series.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "AT", 
+   Level = 101, 
    Text = "Syntax: at <location> <command>\
 \
 AT executes the given command (which may have arguments) at the given\
@@ -1312,8 +816,8 @@ location).\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ATTACKS", 
+   Level = 101, 
    Text = "bite          claws        tail        sting      punch        kick\
 trip          bash         stun        gouge      backstab     feed\
 drain         firebreath   frostbreath acidbreath lightnbreath gasbreath\
@@ -1327,8 +831,8 @@ See MSET and DEFENSES  (Some are not implemented).\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "AUCTION", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y auction \
 &CSyntax &W:&Y auction <item name> <starting value> \
 &CSyntax &W:&Y auction bid <value> \
@@ -1359,8 +863,8 @@ the auction channel from your screen, type &YCHANNEL -AUCTION. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "AUTH AUTHORIZE AUTHORIZATION", 
+   Level = 101, 
    Text = "Associated help files: authorize\
  \
 Authorize <player> name -- This is the command used to allow a player to\
@@ -1378,8 +882,8 @@ leave the game.\
 
 HelpEntry
 {
-   Level = 102, 
    Keyword = "AUTOPILOT", 
+   Level = 102, 
    Text = "&CSyntax &W:&Y Autopilot\
 &c\
 &YAUTOPILOT&c allows the owner or designated pilots to toggle the ship's\
@@ -1391,8 +895,8 @@ automatically respond to combat situations on it's own.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "AUTORECHARGE", 
+   Level = 1, 
    Text = "&YSyntax &W:&Y Autorecharge\
  \
 This will set your shields to automatically recharge.\
@@ -1403,8 +907,8 @@ This will set your shields to automatically recharge.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "AUTOTRACK", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y Autotrack\
 &c\
 This will set your nav computer to automatically adjust course\
@@ -1416,8 +920,8 @@ to keep you firing on a targeted ship.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "AVATAR AVATARS", 
+   Level = 1, 
    Text = "&c\
 These are players that have shown enough devotion to the mud to\
 attain level 100 in at least one skill area.  \
@@ -1426,8 +930,8 @@ attain level 100 in at least one skill area.  \
 
 HelpEntry
 {
-   Level = 100, 
    Keyword = "AVTALK IMMTALK :", 
+   Level = 100, 
    Text = "&CSyntax &W:&Y immtalk <message>\
 &CSyntax &W:&Y avtalk  <message>\
 &CAbbrevation &W:&Y \": <message>\"\
@@ -1440,8 +944,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "B", 
+   Level = 1, 
    Text = "&C                      COMMANDS FOR VARIOUS ACTIONS \
 &W                    -------------------------------- \
  &YLOOK (l)&c - can used by itself to look at the room you stand in \
@@ -1471,8 +975,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BACKSTAB BS", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YBackstab &R&W<&YName&R&W> \
  \
 &YBackstab &clets you try to attempt to sneak up on your opponent and stab\
@@ -1483,8 +987,8 @@ weapon.  It can only be used to start combat.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BALZHUR", 
+   Level = 101, 
    Text = "Syntax:  balzhur <character>\
  \
 This is an instant demotion of a character to level 2, with the\
@@ -1495,8 +999,8 @@ echo accompanying its execution.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BAMFIN BAMFOUT", 
+   Level = 101, 
    Text = "Syntax: bamfin  <message>\
 Syntax: bamfout <message>\
 \
@@ -1508,8 +1012,8 @@ your own choosing using the BAMFIN and BAMFOUT commands.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BANNED", 
+   Level = 101, 
    Text = "The following sites have been banned:\
 \
 156.29.1.x\
@@ -1519,8 +1023,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BARABEL", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Barab I\
 &c\
    This bipedal race of reptiloids is covered in black scales much like \
@@ -1539,8 +1043,8 @@ respect for the Jedi Knights. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "BASH", 
+   Level = 0, 
    Text = "&CSyntax &W: &YBash\
  \
 &cBash can only be used once a fight has started.  It will inflict \
@@ -1554,8 +1058,8 @@ not tanking. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BEAUTY", 
+   Level = 1, 
    Text = "Syntax : feel beauty <target>\
 &C\
 Increases the charisma of target for a limited period.\
@@ -1565,8 +1069,8 @@ Increases the charisma of target for a limited period.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BEG", 
+   Level = 1, 
    Text = "&CSyntax &W: &YBeg <Mob>\
 &c\
 The beg skill is simply that, begging.  It's useful for gaining small \
@@ -1576,8 +1080,8 @@ amounts of credits for newbies or when you're desperate. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BERSERK", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y berserk\
 &c \
 Going berserk sends your warrior into a frenzied state, increasing its\
@@ -1588,8 +1092,8 @@ you are berserking you cannot flee. \
 
 HelpEntry
 {
-   Level = 102, 
    Keyword = "BESPIN", 
+   Level = 102, 
    Text = "&CSystem &W:&Y Bespin\
 &CInhabitants &W:&W Rawwk, Algae Sack, Human, Ugnaught\
 &c\
@@ -1612,8 +1116,8 @@ year lasts 14 standard years. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BESTOW BESTOWMENTS", 
+   Level = 101, 
    Text = "Syntax:  bestow <victim> command [command] [command] etc\
 Syntax:  bestow <victim> list\
 Syntax:  bestow <victim> none\
@@ -1631,8 +1135,8 @@ Bestow victim none will remove all bestowments.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BESTOWAREA", 
+   Level = 101, 
    Text = "Syntax: bestowarea <victim> <filename>.are\
  \
 This command allows members of the Area Council to bestow area names\
@@ -1655,8 +1159,8 @@ See AASSIGN\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BIND", 
+   Level = 1, 
    Text = "&CSyntax &R&W:&Y Bind&R&W <&YPerson&R&W>\
  \
 &cThis skill ties a person up, keeping them paralyzed for a set number of \
@@ -1668,8 +1172,8 @@ rounds.  However, it only works when that person is stunned. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BLIND GOUGE BLINDNESS", 
+   Level = 1, 
    Text = "&R&cCertain powers and attacks can render a player blind for anywhere from\
 a few rounds, to several hundred rounds.  If you are blinded, you will see\
 only your name on the 'who' list, and will be unable to see neither your\
@@ -1686,8 +1190,8 @@ inventory, equipment, nor your location. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BOARDS", 
+   Level = 101, 
    Text = "Syntax:  boards\
  \
 This command displays statistics on all boards in the game.  Example:\
@@ -1711,8 +1215,8 @@ See BSTAT, BSET\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BODYBAG", 
+   Level = 101, 
    Text = "Syntax:  bodybag <character>\
  \
 Bodybag retrieves all of <character's> corpses and places them into your\
@@ -1724,8 +1228,8 @@ used for performing corpse retrievals and the like.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BOTHAN", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Bothawui\
 &c\
     Furry, bipedal race native to the planet Bothawui and several other \
@@ -1760,8 +1264,8 @@ Bothan involvement. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BOUNTY ADDBOUNTY", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y Addbounty (character) (amount) \
 &CSyntax &W:&Y bounty \
 &c\
@@ -1778,8 +1282,36 @@ Bounty by itself will list all the current unclaimd bounties. \
 
 HelpEntry
 {
-   Level = 1, 
+   Keyword = "'BOUNTY HUNTER'", 
+   Level = 0, 
+   Text = "&cBounty hunters are some of the most feared people in the galaxy. \
+Although they cannot roll force, their ability more than makes up for it.\
+Backstab and circle provide an attacking ability to quickly take most of\
+your marks.  Because of this extreme power, only hunters in the guild can\
+practice their offensive skills.  Hunters are not for newbies. \
+  \
+&RAlso see: &PHelp Skin\
+&P          Help Track\
+&P          Help Backstab\
+&P          Help Doorbash\
+&P          Help PoisonWeapon\
+&P          Help Apprehend\
+&P          Help Bind\
+&P          Help AcuteAwareness\
+&P          Help Circle\
+&P          Help SeeMasking\
+&P          Help FocusStrength\
+&P          Help InnerStrength\
+&P          Help HeightenedAccuracy\
+&P          Help Limber\
+&P          Help AcuteDamage\
+", 
+}
+
+HelpEntry
+{
    Keyword = "BOWCASTERS \"FORCE PIKES\" LIGHTSABERS VIBRO-BLADES VIBRO-BLADE LIGHTSABER \"FORCE PIKE\" BOWCASTER", 
+   Level = 1, 
    Text = "&R&CSyntax &R&W: &R&YAutomatic\
 \
 &R&cThese skills allow you to succesfully wield some of the weapons found\
@@ -1790,8 +1322,8 @@ in the Galaxy. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BRIBE", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YBribe &R&W<&YCitizen&R&W> <&YAmount&R&W> \
  \
 &cIncreases support for your organization through bribery.  Only works on\
@@ -1801,8 +1333,8 @@ planets governed by your group.  Actual number varies with amount bribed.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BSET", 
+   Level = 101, 
    Text = "Syntax:   bset <board filename> <command> <argument>\
 Example:  bset immortal.brd vnum 1200\
  \
@@ -1831,8 +1363,8 @@ See BOARDS\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BSTAT", 
+   Level = 101, 
    Text = "Syntax:  bstat <board filename>\
  \
 BSTAT is used to display the fields of an individual board.\
@@ -1845,8 +1377,8 @@ See BSET\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "BUG IDEA TYPO", 
+   Level = 0, 
    Text = "Syntax: bug <message>\
 Syntax: idea <message>\
 Syntax: typo <message>\
@@ -1858,8 +1390,8 @@ to the mud implementors.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BUILD BUILDING", 
+   Level = 101, 
    Text = "SWreality Building:\
                            TABLE OF CONTENTS\
 ***************************************************************************\
@@ -1883,8 +1415,8 @@ See HELP BUILD1\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BUILD1 BUILDER1 BUILDING1", 
+   Level = 101, 
    Text = "SWReality Building Page 1:\
  \
                         -- ASSIGNING AREAS --\
@@ -1893,29 +1425,29 @@ If you are less than level 102 most of this information is useless to\
 you. You can skip ahead to HELP BUILD2\
 ***************************************************************************\
 \
-ZONES  				Gives you 3 lists of  zones being built, \
-				newly added zones, and permanent zones.\
+ZONES  \9\9\9\9Gives you 3 lists of  zones being built, \
+\9\9\9\9newly added zones, and permanent zones.\
 \
-CHECKVNUM  ALL  <min> <max>	Gives you a list of conflicting mobs\
-				objects and rooms between zonenumbers\
-				<min> and <max>\
+CHECKVNUM  ALL  <min> <max>\9Gives you a list of conflicting mobs\
+\9\9\9\9objects and rooms between zonenumbers\
+\9\9\9\9<min> and <max>\
 \
 VASSIGN <player> <min> <max>    Creates a new area named <playername>.are\
-				and assigns it to the <player>. The vnums\
-				for the rooms, mobs and objects in the \
+\9\9\9\9and assigns it to the <player>. The vnums\
+\9\9\9\9for the rooms, mobs and objects in the \
                                 area will be between <min> and <max>.\
-			\
+\9\9\9\
 ***************************************************************************\
 \
 see HELP BUILD2\
-										  \
+\9\9\9\9\9\9\9\9\9\9  \
 ", 
 }
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BUILD2 BUILDING2 BUILDER2", 
+   Level = 101, 
    Text = "SWReality Building Pg 2:\
                           ROOM BUILDING BASICS\
 ***************************************************************************\
@@ -1935,7 +1467,7 @@ REDIT FLAGS <flag> <flag> ..    Type redit flag by itself fo a flag list.\
 REDIT BEXIT <dir> <room>        Creates a two way exit to <room>\
 REDIT EXFLAGS <flag> <flag>..   Type redit exflags by itself for choices.\
 \
-SAVEAREA			Saves your area .. do this alot :)\
+SAVEAREA\9\9\9Saves your area .. do this alot :)\
 \
 ***************************************************************************\
 \
@@ -1946,8 +1478,8 @@ see HELP BUILD3\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BUILD3", 
+   Level = 101, 
    Text = "SWReality Building Pg 3\
                          MOB BUILDING BASICS\
 ***************************************************************************\
@@ -1987,8 +1519,8 @@ see HELP BUILD4\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "BUILD4", 
+   Level = 101, 
    Text = "SWReality Building Pg 4\
                        OBJECT BUILDING BASICS\
 ***************************************************************************\
@@ -2015,8 +1547,8 @@ SAVEAREA                           Do this alot                      \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BUILDERS BUILDER", 
+   Level = 1, 
    Text = "&c \
 To apply to build for Star Wars: Rise in Power: \
  \
@@ -2036,8 +1568,8 @@ person perespective will be thrown out.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "BUY LIST SELL VALUE", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y buy   <object>\
 &CSyntax &W:&Y buy   <# of object> <object>\
 &CSyntax &W:&Y list\
@@ -2061,8 +1593,8 @@ for. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BUYHOME HOMES HOME \"PLAYER HOME\" ", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y Buyhome (home name)\
 &c\
 This lets you buy one of the many available player homes\
@@ -2073,8 +1605,8 @@ be saved unless there is a crash before you save there.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BUYSHIP SELLSHIP", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y Buyship (ship name)\
 &CSyntax &W:&Y Sellship (ship name)\
 &c\
@@ -2087,8 +1619,8 @@ in.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BUYVENDOR", 
+   Level = 1, 
    Text = "&CSyntax: &Ybuyvendor &w[&Yyes&w]\
 &c\
 From any shop keeper, you can buy a deed to a shop for a fee.  If you\
@@ -2103,8 +1635,8 @@ Current cost for a deed: &W1 Million Credits\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BUZZ INVITE", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y buzz <direction>\
 &CSyntax &W:&Y invite <player>\
 &c\
@@ -2119,8 +1651,8 @@ which the guest will enter.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "BYSS", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Beshqek\
 &CInhabitants &W:&W (Unknown)\
 &c\
@@ -2141,8 +1673,8 @@ normal day of 31 standard hours, and a year which lasts 207 local days. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "C", 
+   Level = 1, 
    Text = "&C                       COMMANDS TO USE WITH OBJECTS\
 &W                     ----------------------------------&C\
   GET - &YGET <object> <container>&c will get an item from a container \
@@ -2168,8 +1700,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CALAMARI", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Calamari\
 &CInhabitants &W:&W Mon Calamari, Quarren, Mermen\
 &c\
@@ -2189,8 +1721,8 @@ standard hours, and its year spans 398 local days. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CALCULATEDIFF", 
+   Level = 1, 
    Text = "&CSyntax &YCalculatediff &W<&Yx&W> <&Yy&W> <&Yz&W>\
 &c\
 This is the same as calculate <x> <y> <z>, except it\
@@ -2204,8 +1736,22 @@ under a planet or sun. \
 
 HelpEntry
 {
-   Level = 0, 
+   Keyword = "'CAPITAL SHIPS' MIDSHIPS STARFIGHTERS", 
+   Level = 1, 
+   Text = "&CSyntax &W: &YAutomatic\
+  \
+&cThese skills allow you to fly ships of their respective size. \
+Without\
+these skills, you will not be able to move a ship.\
+  \
+&RAlso see&W: &PHelp Ships\
+", 
+}
+
+HelpEntry
+{
    Keyword = "CAST FEEL", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y feel <force power> <target>\
 &c\
 Before you can use a force power, you have to practice it.  The more you\
@@ -2229,8 +1775,8 @@ See also the help sections for individual powers. \
 
 HelpEntry
 {
-   Level = 103, 
    Keyword = "CEDIT", 
+   Level = 103, 
    Text = "Syntax:  cedit save\
 Syntax:  cedit <command> create [code]\
 Syntax:  cedit <command> delete\
@@ -2256,8 +1802,8 @@ See RESTRICT\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "CHADRA FAN CHADRA-FAN CHAD CHADRAFAN", 
+   Level = 0, 
    Text = "&COrigin: &YChad \
  \
 &c     The small, quick witted inhabitants of Chad, the Chadra-Fan, \
@@ -2275,8 +1821,8 @@ with technological items. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CHANNELS", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y channels\
 Syntax &W:&Y channels +<channel|all>\
 Syntax &W:&Y channels -<channel|all>\
@@ -2295,8 +1841,8 @@ person may be anywhere, just type &YTELL <name or 0.name> [message]&c.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CHARISMA CHA", 
+   Level = 1, 
    Text = "&cCharisma &Y(CHA)&c represents your character's physical beauty and charm,\
 how pretty your character is.\
  \
@@ -2314,8 +1860,8 @@ how pretty your character is.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "CHAT . MUSIC ASK ANSWER SHOUT YELL OOC", 
+   Level = 0, 
    Text = "&CSyntax&W:&Y chat     <message>\
 &CSyntax&W:&Y music    <message>\
 &CSyntax&W:&Y ask      <message>\
@@ -2348,8 +1894,8 @@ used for real world chatting as opposed to roleplaying. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "CHECK CECKV CHECKVNUMS", 
+   Level = 101, 
    Text = "Syntax: checkvnums all <begin vnum range> <end vnum range>\
  \
 Used to check the specified range of vnums to ensure they are not\
@@ -2371,8 +1917,8 @@ See ASSIGN, ZONES\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CHOKE", 
+   Level = 1, 
    Text = ".\
 Syntax : Feel 'Choke' (victim)\
 &r\
@@ -2383,8 +1929,8 @@ This nasty spell allows you to choke the life from your victim.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'CIRCLE'", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YCircle &R&W<&YTarget&R&W> \
  \
 &YCircle&c is basically a &YBackstab &cin the middle of a fight.  It\
@@ -2394,8 +1940,8 @@ requires a piercing weapon, and can only be used during combat.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'CIVILIAN UPGRADES' CIVILIANUPG", 
+   Level = 1, 
    Text = ".\
 &CCivilian Upgrades:\
  \
@@ -2425,8 +1971,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CIVILIANUPG2", 
+   Level = 1, 
    Text = "&CStarfighter maxes:\
 &c          lasers:&W 4\
 &c  missiles-types:&W 12 missiles, 6 torpedos, or 4 rockets\
@@ -2464,8 +2010,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CLAN CLANS ORGANIZATION ORGANIZATIONS ORGANISATION ORGANISATIONS", 
+   Level = 1, 
    Text = "&CThe following are commands used with clans or organizations:\
  \
 &Yclans &c....... shows a list of organizations. \
@@ -2489,8 +2035,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'CLAN CREATION'", 
+   Level = 1, 
    Text = "&CClan Creation:\
 &c\
 A clan will start out as an rp clan.  It wont exist in the clan list, but\
@@ -2504,8 +2050,8 @@ with it, he or she may ask you to disband. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "CLANTALK", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y clantalk <message>\
 &c\
 Provided that you are in a clan, clantalk will send the message to all\
@@ -2515,8 +2061,8 @@ current members, as well as the deity.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "CLASS CLASSES", 
+   Level = 0, 
    Text = "&cThe old classes have been removed in favor of an ability system that lets\
 you advance in several areas at once.   These ability classes are as\
 follows:\
@@ -2534,8 +2080,8 @@ follows:\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "CLASS_BH", 
+   Level = 0, 
    Text = "Bounty hunters are the most feared people in the galaxy, next to forcers.\
 Although bounty hunters can not roll force, their ability more than makes\
 up for it. Backstab and circle provide an attacking ability to quickly\
@@ -2547,8 +2093,8 @@ inducting people into the guild. The hunters guild is not for the newbie.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "CLASS_COMBAT", 
+   Level = 0, 
    Text = "&cCombat gives you many fighting abilities. It is ideal for someone who\
 just wishes to act the grunt, as a imperial stormtrooper, a rebel ground\
 trooper, or even a black sun basher. With abilities varying from wielding\
@@ -2589,8 +2135,8 @@ leadership levels.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "CLASS_DIPLOMAT", 
+   Level = 0, 
    Text = "Diplomat's also tend to have high leadership levels as well. Diplomat's can\
 'MassPropaganda', which will raise or lower popular support on a planet.\
 'Seduce' will force a person or mob to follow you.   There are not many\
@@ -2600,8 +2146,8 @@ diplomatic skills, but most get all the leadership skills as well.\
 
 HelpEntry
 {
-   Level = 105, 
    Keyword = "CLASS_ENGINEER", 
+   Level = 105, 
    Text = "Engineering is one of the more profitable classes. The ability to make\
 anything from a comlink to armor to a blaster makes you popular with a lot\
 of people, because a master engineer provides better goods than anything\
@@ -2613,8 +2159,8 @@ making item after item. But hey, no pain, no gain!\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "CLASS_LEADER", 
+   Level = 0, 
    Text = "Leadership main's get a few interesting abilities. Not only can they post\
 guards, but they can post *elite* guards, as well as call special\
 forces... a more powerful form of reinforcements.  They also get dominate,\
@@ -2628,8 +2174,8 @@ is in.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "CLASS_PILOTING", 
+   Level = 0, 
    Text = "Piloting is one of the more popular classes. One of the more fun features\
 of the Star Wars Reality codebase is its space system, and especially its\
 space combat. The piloting class gives you not only the best space combat\
@@ -2641,8 +2187,8 @@ to one of the faction clans custom ships.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "CLASS_SMUGGLER", 
+   Level = 0, 
    Text = "The smuggler has many abilities other classes can not get. The ability to\
 pick doors, and even ship hatches, is combined with the ability to hijack\
 other people's ships. This, coupled with the ability to hide from and\
@@ -2652,8 +2198,8 @@ sneak by other players, makes the smuggler a popular choice.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'CLIMB'", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YClimb &R&W<&YDirection&R&W>\
  \
 &cThis skill enables you to climb into and out of rooms that have no floors\
@@ -2663,8 +2209,8 @@ or require it. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CLONES CLONE CLONING", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &Yclone\
 &cCloning is a vital part of your existance.  Since death is permanent, the\
 only way to continue a character is to have a clone.\
@@ -2679,8 +2225,8 @@ only way to continue a character is to have a clone.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "CMDTABLE", 
+   Level = 101, 
    Text = "Syntax: cmdtable\
 \
 Lists all of the commands in the game, and how many times they have been used\
@@ -2690,8 +2236,8 @@ since the last startup.\
 
 HelpEntry
 {
-   Level = 102, 
    Keyword = "CMENU", 
+   Level = 102, 
    Text = "Syntax:  cmenu\
  \
 Invokes an online menu to ease entering 'cset' arguments.  May not be\
@@ -2701,8 +2247,8 @@ fully functional at this time.\
 
 HelpEntry
 {
-   Level = 102, 
    Keyword = "CODETEST", 
+   Level = 102, 
    Text = "void do_openbay( CHAR_DATA *ch, char *argument )\
 { \
   SHIP_DATA *ship;\
@@ -2728,8 +2274,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "COLOUR COLOR COLOURS COLORS PCOLORS", 
+   Level = 0, 
    Text = "&w^xThe foreground special character is:  &&\
 Tokens for && are:\
   &w&&x  -&x Black                    &w &&r  -&r Red (blood)\
@@ -2759,8 +2305,8 @@ See also: HELP PROMPT\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "COMBAT", 
+   Level = 1, 
    Text = "&cYou may choose a fight by finding a mob, and using &YLOOK&c,\
 &YCONSIDER&c, and &YIDENTIFY&c to gauge the difficulty of the opponent. \
 You can &YLOOK <mob>&c to get a look at its equipment and description,\
@@ -2784,8 +2330,8 @@ can be done by using &YFLEE&c. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "COMMANDO CLASS", 
+   Level = 1, 
    Text = "&WCommando Class\
 &c\
 The commando class is a new type of class. It does not have its own levels,\
@@ -2805,8 +2351,8 @@ Darrik Vequir \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "COMMANDO_STATS", 
+   Level = 1, 
    Text = ".        &pCombat  Pilot  Engineer  B.Hunter  Smug.  Diplo.  Leader.\
 &p--Human    &Y110     65       40        1      56     60      60\
 &pWookiee    &Y146     63       50       10      56      4      55\
@@ -2835,8 +2381,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "COMMENT", 
+   Level = 101, 
    Text = "Syntax: comment write\
 Syntax: comment subject <subject>\
 Syntax: comment post <player>\
@@ -2851,8 +2397,8 @@ online (works on link-dead players as well).\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "COMMUNICATION", 
+   Level = 1, 
    Text = "&c\
 There are many channels of communication on Rise in Power: \
  \
@@ -2863,8 +2409,8 @@ wartalk avtalk newbie emote\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "COMPARE", 
+   Level = 0, 
    Text = "&CSyntax:&Y compare <object-1> <object-2>\
 &CSyntax:&Y compare <object>\
  \
@@ -2882,8 +2428,8 @@ object you are currently wearing or wielding of the same type.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CONFIG", 
+   Level = 1, 
    Text = "&CSyntax: &Yconfig + or - &W<&Yoption&W>\
 &c\
 This command configures some of your character behavior.  Typing &YCONFIG&c\
@@ -2910,8 +2456,8 @@ option, &YCONFIG&c turns that option on or off. \
 
 HelpEntry
 {
-   Level = 103, 
    Keyword = "CONFIG +ROOMFLAG", 
+   Level = 103, 
    Text = "Toggling the ROOMFLAG option in config will allow you to see\
 all the flags which are set ON in a room.  It also causes the\
 room number to be displayed to you.  This command is very\
@@ -2922,8 +2468,8 @@ room already has set.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "CONSIDER", 
+   Level = 0, 
    Text = "&CSyntax:&Y consider <character>\
  \
 CONSIDER &ctells you what your chances are of killing a character.\
@@ -2933,8 +2479,8 @@ Of course, it's only a rough estimate.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "CONSTATES", 
+   Level = 101, 
    Text = "State | Description\
 -----------------------------------------------------------\
     0 | Player is playing.\
@@ -2961,8 +2507,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CONSTITUTION CON", 
+   Level = 1, 
    Text = "&CConstitution &Y(CON)&C represents your character's physical stamina, and\
 how well he/she can take a hit.  It's your character's toughness.\
  \
@@ -2982,8 +2528,8 @@ how well he/she can take a hit.  It's your character's toughness.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'CONTAINERS' 'CONTAINER'", 
+   Level = 1, 
    Text = "Containers are almost a necessity in the game.  They are used to carry\
 items, food, and drinks.  They help allow you to sort things, by using two\
 or more types of containers at once.  Corpses use many of the same commands\
@@ -3006,8 +2552,8 @@ the container as possible, until the container is full.\
 
 HelpEntry
 {
-   Level = 100, 
    Keyword = "CONTRA CONTRABAND", 
+   Level = 100, 
    Text = "A contraband flag has been added for objects .. DO NOT SET IT ... it\
 will be added and removed automaticly by customs officers and\
 crimelords etc.  Its purpose is to give experience for smuggling\
@@ -3017,8 +2563,8 @@ illegal goods from planet to planet.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "COORDINATES", 
+   Level = 1, 
    Text = ".\
 Syntax : Calculate (x) (y) (z)\
  \
@@ -3046,8 +2592,8 @@ See also Help Cordinates1, Help Cordinates2 ect.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "COORDINATES COORDINATE CALC CALCULATE \"NAV COMPUTER\"", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y Calculate (x) (y) (z)\
 &c\
 Cordinates are used for Hyperspace jumps into systems\
@@ -3070,8 +2616,8 @@ Calculate <x> <y> <z>\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "COORDINATES1", 
+   Level = 1, 
    Text = "Honoghr System :\
  \
    Nystao Port (Honoghr)  3943 4782 4419 \
@@ -3094,8 +2640,8 @@ Endor Starsystem :\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "COORDINATES2", 
+   Level = 1, 
    Text = "Core Starsystem 11A3 :\
 \
    Small Landing Area (bojklinn)  1000 -1000 -500\
@@ -3114,8 +2660,8 @@ Kashyyyk System :\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "COORDINATES3", 
+   Level = 1, 
    Text = "Corporate Sector I : \
 \
    CF-90 Barricade Runner    (moves)\
@@ -3139,8 +2685,8 @@ Chad Starsystem           None\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CORELLIA", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Corellian\
 &CInhabitants &W:&W Human, Drall, Selonian\
 &c\
@@ -3158,8 +2704,8 @@ ecology, with many large oceans. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CORPSE", 
+   Level = 1, 
    Text = "&cCorpses last approximately 15 minutes after the time of death. \
 Corpse decay will happen even while you are linkdead or after you quit.\
  \
@@ -3170,8 +2716,8 @@ behind as a warning.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CORULAG", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Corulag\
 &CInhabitants &W:&W Human\
 &c\
@@ -3187,8 +2733,8 @@ one of the most cosmopolitan worlds of the Empire. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "CORUSCANT", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Coruscant\
 &CInhabitants &W:&W Human, (Various)\
 &c\
@@ -3229,8 +2775,8 @@ Isard, and the New Republic overcame the threat of the Krytos virus.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "COUNCIL COUNCILS SENATE SENATOR GOVERNMENT GOVERNMENTS POWER", 
+   Level = 1, 
    Text = "There are three levels of government: 1. ORGANIZATIONS: The major player\
 run superpowers are the New Repubic, The Empire, and The Corperate\
 Authority. There are also several small organizations and crime families\
@@ -3255,8 +2801,8 @@ See also ORGANIZATIONS\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "COURSEACTUAL", 
+   Level = 1, 
    Text = "&CSyntax: &YCourseactual &W<&Yx&W> <&Yy&W> <&Yz&W> \
 &c\
 This is the old trajectory/course. It uses the actual \
@@ -3269,8 +2815,8 @@ radar for a planet or sun. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "COYNITE", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Coyn\
 &c\
      The fierce, warrior race which was native to the planet Coyn, the \
@@ -3294,8 +2840,8 @@ the Cradle Law. \
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "CREDITS", 
+   Level = -1, 
    Text = "SWReality 1.0 is an extention of Smaug which was expanded from Merc\
 which was derived from the original Dikumud code.\
  \
@@ -3337,8 +2883,8 @@ more detailed credits. \
 
 HelpEntry
 {
-   Level = 102, 
    Keyword = "CSET", 
+   Level = 102, 
    Text = "Cset is used to set the system's 'control panel' settings.\
 Syntax: cset <field> <level>\
 Fields: save - saves the control panel settings\
@@ -3364,13 +2910,56 @@ Fields: save - saves the control panel settings\
                    receive, auction, zap, death, auction, auto, password)\
         guild_overseer - name of the Overseer of Guilds\
         guild_advisor - name of the Advisor to Guilds\
+        permadeath - toggle permadeath\
+        can_choose_jedi - can pick jedi at chargen\
+        disable_hunger - toggle hunger/thirst system\
+        extended_race_selection - enable huge selection of races\
+        allow_multiplaying - allow multiplaying\
 ", 
 }
 
 HelpEntry
 {
+   Keyword = "'CURE BLINDNESS'", 
    Level = 1, 
+   Text = ".\
+&CSyntax &W:&Y feel 'cure blindness' <target>\
+ \
+&cCures blindness of the target. \
+ \
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'CURE CRITICAL' 'CURE LIGHT' 'CURE SERIOUS' HEAL", 
+   Level = 1, 
+   Text = "&CSyntax &W:&Y feel 'cure light' <target>\
+&CSyntax &W:&Y feel 'cure serious' <target>\
+&CSyntax &W:&Y feel 'cure critical' <target>\
+&CSyntax &W:&Y feel heal <target>\
+  \
+&cHeals the tagert.  The stregnth of the healing depends on the ability, as\
+cure light does very little to heal a wound, wheras \"heal\" can perform \
+miracle healings. \
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'CURE POISON'", 
+   Level = 1, 
+   Text = ".\
+&CSyntax &W:&Y feel 'cure poison' <target>\
+ \
+&cRemoves poison from target's blood.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "D", 
+   Level = 1, 
    Text = "&C                 WEARING AND SELLING EQUIPMENT\
 &W                -------------------------------&Y\
    WEAR <object> - &cyou will wear that piece of equipment \
@@ -3399,8 +2988,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "DAGOBAH", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Dagobah\
 &CInhabitants &W:&W Dragonsnake, Swampslug\
 &c\
@@ -3420,8 +3009,8 @@ long. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "DAMAGE", 
+   Level = 0, 
    Text = "&cWhen one character attacks another, the severity of the damage is shown\
 in the verb used in the damage message.  Here are all the damage verbs\
 listed from least damage to most damage: \
@@ -3440,8 +3029,8 @@ receiving from) your opponent, and not a specific fixed amount.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "DAMTYPES ACTTYPES CLASSTYPES POWERTYPES", 
+   Level = 101, 
    Text = "DAMAGE          ACTION       CLASS         POWER       SAVES\
 none            none         none          none        none\
 fire            create       lunar         minor       poison_death\
@@ -3456,8 +3045,8 @@ drain           change       illusion\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "DATHOMIR", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Quellii\
 &CInhabitants &W:&W Human, Rancor\
 &c\
@@ -3474,8 +3063,8 @@ around three billion credits. It has 3 continents in a vast ocean.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "DEATH DYING", 
+   Level = 0, 
    Text = "&cDeath is now permanent unless you have made a clone.\
  \
 &YNote &C: You lose all posessions upon dying\
@@ -3489,8 +3078,8 @@ Also see: &PHelp Clone&R&W\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "DEBUG DEBUGGING BUGS THORIC CODING SOURCE CODE DEVELOPMENT", 
+   Level = -1, 
    Text = ".-------------=======[ Debugging / Coding Credits ]=======-------------.\
 |                                                                      |\
 |    Most of the extensive debugging and coding of Rise in Power       |\
@@ -3506,8 +3095,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "DEFEL", 
+   Level = 0, 
    Text = "&COrigin: &YAf'El\
  \
 &c     Defel are an alien species that appear as large, red-eyed shadows\
@@ -3527,8 +3116,8 @@ assassins due to their shadowy forms. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "DEFENSES", 
+   Level = 101, 
    Text = "parry        dodge      heal       curelight   cureserious   curecritical\
 dispelmagic  dispelevil sanctuary  fireshield  shockshield   shield\
 bless        stoneskin  teleport   monsum1     monsum2       monsum3\
@@ -3540,8 +3129,8 @@ See MSET and ATTACKS  (Some are not implemented).\
 
 HelpEntry
 {
-   Level = 10, 
    Keyword = "DEITIES DEITY", 
+   Level = 10, 
    Text = "Syntax:  deities\
 Syntax:  deities <deity>\
  \
@@ -3555,8 +3144,8 @@ SEE ALSO:  supplicate, favor, devote.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "DENY DISCONNECT FREEZE", 
+   Level = 101, 
    Text = "Syntax:  deny       <character>\
 Syntax:  disconnect <character>\
 Syntax:  freeze     <character>\
@@ -3576,8 +3165,8 @@ commands at all.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "DEPOSIT WITHDRAW BALANCE BANK", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y BANK (deposit|withdraw|ballance) (amount) \
 &CSyntax &W:&Y BANK transfer (amount) (person) \
 &c\
@@ -3591,8 +3180,8 @@ star wars universe. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "DESTRO DESTROY", 
+   Level = 101, 
    Text = "Syntax:  destroy <character>\
  \
 This command immediately deletes the pfile of the victim, and will\
@@ -3603,8 +3192,35 @@ simultaneously force the character offline if they are connected.\
 
 HelpEntry
 {
-   Level = 0, 
+   Keyword = "'DETECT DARKNESS' 'DETECT FORCE' 'DETECT INTENT' 'DETECT MASKING' 'DETECT POISON' 'DETECT TRAPS'", 
+   Level = 1, 
+   Text = "&CSyntax &W:&Y feel 'detect <ability>'\
+ \
+&CDetect Darkness\
+&cPlaces a red aura around those who follow the ways of evil.\
+ \
+&CDetect Force\
+&cPlaces a blue aura around those able to feel the Force.\
+ \
+&CDetect Intent\
+Tells the emotions and general alignment of a being. \
+ \
+&CDetect Masking\
+&cAllows one to see the invisible\
+ \
+&CDetect Poison\
+&cAllows one to detect poisonous objects\
+ \
+&CDetect Traps\
+&cAllows one to foresee trapped objects\
+ \
+", 
+}
+
+HelpEntry
+{
    Keyword = "DETRAP", 
+   Level = 0, 
    Text = "&CSyntax &R&W: &YDetrap &R&W<&YObject&R&W>\
  \
 &cThis skill allows you to try to disarm a trapped object.  Failure will\
@@ -3614,8 +3230,8 @@ usually set off the trap. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "DEVARONIAN DEVARONIANS", 
+   Level = 0, 
    Text = "&COrigin: &YDevaron&R&W\
  \
 &c     Devaronians come from the temperate world of Devaron.  Although near\
@@ -3634,8 +3250,8 @@ language is low, guttural, and full of snarling consonant. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "DEVARONIAN_STATS", 
+   Level = 0, 
    Text = "&ORace: &YDevaronian\
 &OSpecial Abilities: &YNone\
 &ORestrictions: &YNone\
@@ -3658,8 +3274,8 @@ Lead.&Y      107     57       57        57      57      107     150&O\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "DEXTERITY DEX", 
+   Level = 1, 
    Text = "&CDexterity &Y(dex)&C represents your character's agility and quickness. A\
 common concern with dexterity deals with how many items your character can\
 carry at once in his/her inventory.  For each additional point of\
@@ -3684,8 +3300,8 @@ affects how many things you can carry. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "DIAGNOSE", 
+   Level = 101, 
    Text = "Syntax:  diagnose of 20\
  \
 Diagnose of n - object frequency of top \"n\" objects.  The above example will\
@@ -3695,8 +3311,8 @@ return the 20 most numerous object vnums in the game at that time.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "DICEFORMULAS", 
+   Level = 101, 
    Text = "To make the special SMAUG powers possible, special dice formula handling\
 had to be coded in.  (At least to make it nice).  This dice formula code\
 supports full BEDMAS expressions ( ) ^^ / * + -, plus extra mud related\
@@ -3713,8 +3329,8 @@ See SMAUGSPELLS and SSET.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "DIG DIGGING BURY BURYING", 
+   Level = 0, 
    Text = "&CSyntax &R&W: &YDig\
          Dig &R&W<&YDirection&R&W>\
          &YBury &R&W<&YItem&R&W>\
@@ -3736,8 +3352,8 @@ this skill for storage of items you wish to keep.\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "DIKU", 
+   Level = -1, 
    Text = "Realms of Despair was originally based on the Merc 2.1 code which was\
               based on the orignal DIKUMud code created by:\
 \
@@ -3765,8 +3381,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "DIPLOMACY DIPLOMAT", 
+   Level = 0, 
    Text = "&cThose who choose to be a diplomat also tend to have high leadership\
 abilities as well.  A diplomat's primary skill is mass propaganda, which\
 raises or lowers population support considerably.  Diplomats are needed in\
@@ -3788,8 +3404,8 @@ organization. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "DISARM", 
+   Level = 1, 
    Text = "&R&CSyntax &R&W: &YDisarm\
 \
 &R&cThis skill lets you attempt to remove your opponent's weapon using your\
@@ -3801,8 +3417,8 @@ must also be wielding a weapon.  Can only be used during combat. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "DISGUISE", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YDisguise &R&W<&YTitle&R&W>\
  \
 &cThis skill allows you to change your title to one that does not include\
@@ -3814,8 +3430,31 @@ your name.  Great for impersonating others.\
 
 HelpEntry
 {
-   Level = 101, 
+   Keyword = "'DISPEL DARK'", 
+   Level = 1, 
+   Text = ".\
+&CSyntax &W:Y feel 'dispel dark' <target>\
+ \
+&cDamages characters aligned with the Dark Side\
+ \
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'DISPEL FORCE'", 
+   Level = 1, 
+   Text = "Syntax : feel \"dispel force\" <target>\
+&G\
+Removes any force affecting the victim.\
+&w\
+", 
+}
+
+HelpEntry
+{
    Keyword = "DMESG", 
+   Level = 101, 
    Text = "Syntax: dmesg\
 \
 Displays the contents of the boot log.\
@@ -3825,8 +3464,8 @@ Displays the contents of the boot log.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "DODGE", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y Automatic\
  \
 &cThis skill lets you dodge incoming attacks, taking no damage from them. \
@@ -3836,8 +3475,8 @@ Use and refinement of this skill is automatic once you train in it.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "DOMINATE", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YDominate &R&W<&Ymob&R&W> \
  \
 &cAllows you to overpower a mob, and make them follow you and your\
@@ -3849,8 +3488,8 @@ commands.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "DOORBASH", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YDoorbash &R&W<&YDirection&R&W>\
  \
 &cUseful for getting rid of locked doors, although some doors are bash\
@@ -3860,8 +3499,8 @@ resistant. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "DOORDIRS", 
+   Level = 101, 
    Text = "Here is the order of the exits, and their corresponding values:\
 \
   ---------------------\
@@ -3886,8 +3525,20 @@ See REDIT, RSTAT and RESETCMDS.\
 
 HelpEntry
 {
+   Keyword = "'DRAIN ESSENCE'", 
    Level = 1, 
+   Text = "Syntax : feel 'drain essence' <victim>\
+&r\
+Drains XP, MANA and HP from victim.\
+User gains HP.\
+&w\
+", 
+}
+
+HelpEntry
+{
    Keyword = "DRAW", 
+   Level = 1, 
    Text = "&CSyntax: &Ydraw \
  \
 &cThis will map out the surrounding area and display the results. \
@@ -3899,8 +3550,8 @@ charge. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'DREAM'", 
+   Level = 1, 
    Text = "Syntax:  cast 'dream' <player>  <message>\
  \
 This power enables you to cast a dream or message on a sleeping player.\
@@ -3909,8 +3560,8 @@ This power enables you to cast a dream or message on a sleeping player.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "DROID DROIDS", 
+   Level = 0, 
    Text = "&COrigin: &YVarious \
  \
 &c     Droids are artifically intelligent beings built by various species,\
@@ -3933,8 +3584,8 @@ droids with their own free will, although it is rare.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "DROID_STATS", 
+   Level = 0, 
    Text = "&gRace: &YDroid\
 &gSpecial Abilities:&Y Infrared, Aqua Breath\
 &gRestrictions: &YCombat Penalty\
@@ -3957,8 +3608,8 @@ Lead.&Y      106     56       56        56      56      106     150&g \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "DROID_UPGRADES", 
+   Level = 1, 
    Text = "&BYou are now able to upgrade your droid player for the price of half a\
 million credits per level. There is a maximum of 75 levels able to be\
 added to your droid's memory. Consider it a memory limit. To have this\
@@ -3968,8 +3619,8 @@ done, politely request an admin or above to work with your character.&w \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "DROP GET GIVE PUT TAKE", 
+   Level = 0, 
    Text = "&CSyntax&W:&Y  drop <object> \
          drop <amount>  credits \
 &CSyntax&W:&Y  get  <object> \
@@ -4003,8 +3654,8 @@ Examples:&Y\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'DUAL WIELD'", 
+   Level = 1, 
    Text = "&R&CSyntax &R&W: &YAutomatic\
 \
 &R&cThis skill allows you to wield two weapons simultaneously.  The higher\
@@ -4014,8 +3665,8 @@ the skill, the more times you will use the weapon in your offhand.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "DUG DUGS", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Malastare\
 &c\
      This alien race resembles a small horse, although it is completely \
@@ -4037,8 +3688,8 @@ braggarts. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "DUROS", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Duro\
 &c\
      A humanoid race characterized by their blue skin, red eyes and \
@@ -4067,8 +3718,8 @@ to defend itself if Emperor Palpatine had still been in power. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "DUROS_NAMES", 
+   Level = 0, 
    Text = "Chidee La Maak\
 Lai Nootka\
 Jenssar So Billes \
@@ -4085,8 +3736,8 @@ Hes Glillto\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "E", 
+   Level = 1, 
    Text = "&C                  GROUPING WITH OTHER PLAYERS\
 &W                 -----------------------------&c\
 If another character is following your character, you have the ability \
@@ -4113,8 +3764,8 @@ Group Commands:\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "EARTHQUAKE", 
+   Level = 1, 
    Text = "Syntax : feel earthquake\
 \
 Damages all players in the room on the ground.\
@@ -4123,8 +3774,8 @@ Damages all players in the room on the ground.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "EAT DRINK", 
+   Level = 0, 
    Text = "&CSyntax&W:&Y  drink <object> &c- drink liquid from a drink container)\
 &CSyntax&W:&Y  eat   <object> &c- eat food or a magical pill)\
 &Y         eat   <object> <container> &c- eat from a container)\
@@ -4152,8 +3803,8 @@ problem after a short period of time.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ECHO RECHO", 
+   Level = 101, 
    Text = "Syntax:  echo  <message>\
 Syntax:  recho <message>\
  \
@@ -4167,8 +3818,8 @@ indicating who sent it.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ECOLOR ECOLOUR", 
+   Level = 101, 
    Text = ".\
 The following 16 colors are supported in the commands echo, recho,\
 mpecho, mpechoat and mpechoaround.\
@@ -4211,8 +3862,8 @@ mpe _r                  This is an example of mpecho in red.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ECONOMY", 
+   Level = 101, 
    Text = "Each area will initialize (on bootup of the mud) with a pool of gold based\
 on the area's range and the wealth of each mob in that area.\
  \
@@ -4240,8 +3891,8 @@ See ASET, FOLDAREA\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "EDITOR", 
+   Level = 1, 
    Text = "The SMAUG Editor is used when you're writing mail, notes, your bio,\
 description or other long bodies of text. The commands in the editor are:\
 \
@@ -4263,8 +3914,8 @@ description or other long bodies of text. The commands in the editor are:\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'ELITE GUARD' ELITEGUARD", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YEliteGuard\
  \
 &cThis skill allows you to call an elite guard to your location.  Elite\
@@ -4274,8 +3925,8 @@ guards act like posted guards, but are much stronger and experienced.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "EMOTE SOCIAL ,", 
+   Level = 1, 
    Text = "&CSyntax&W:&Y emote <action>\
 &CExample&W:&Y emote leans forward and glares at Silphion\
 &COutput&W:&Y Darrik leans forward and glares at Silphion.\
@@ -4292,8 +3943,8 @@ And &YTHANK&c.  The acronym for &YEMOTE&c is &Y, <action>&c\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "EMPTY", 
+   Level = 0, 
    Text = "&CSyntax&W:*Y  empty <container> \
 &CSyntax&W:&Y  empty <container> <container> \
 &c\
@@ -4308,8 +3959,8 @@ container into the second container.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ENDOR", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Endor\
 &CInhabitants &W:&W None\
 &c\
@@ -4322,8 +3973,8 @@ of jumps in order to get there. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "ENGINEER ENGINEERING", 
+   Level = 0, 
    Text = "&cThose who choose to be engineers have access to many useful skills, but\
 it is a very tedious job.  They are capable of making extremely powerful\
 weapons as well as armor.  There are few engineers in the galaxy, but\
@@ -4350,8 +4001,8 @@ can use fake signal. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "'ENHANCED DAMAGE'", 
+   Level = 0, 
    Text = "&R&CSyntax &R&W: &YAutomatic \
 \
 &R&cThis skill increases the damage you inflict in combat.  The higher it\
@@ -4361,8 +4012,8 @@ is, the more often you will receive that bonus.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "ENTER LEAVE", 
+   Level = 0, 
    Text = "&CSyntax&W:&Y  enter\
 &CSyntax&W:&Y  leave\
 &c\
@@ -4373,8 +4024,8 @@ you can simply type 'enter' or 'leave' to pass through that exit.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "EQ INV EQUIP EQUIPMENT INVENTORY", 
+   Level = 0, 
    Text = "Syntax: equipment\
 Syntax: inventory\
 \
@@ -4385,8 +4036,8 @@ INVENTORY lists your inventory.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "EQDAMAGE", 
+   Level = 1, 
    Text = "&cWhile in combat, you may notice that your equipment is taking damage. \
 For example, you may see \"Your lifebane gets damaged.\"  Each time this\
 happens, the AC of the item is damaged by one.  If the AC on an item is 5,\
@@ -4402,8 +4053,8 @@ the a blacksmith.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "EWOK EWOKS", 
+   Level = 0, 
    Text = "&COrigin: &YEndor\
  \
 &c     The native race to Endor.  Ewoks grow to be about 1 meter tall and\
@@ -4427,8 +4078,8 @@ musical. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "EXAMINE LOOK", 
+   Level = 0, 
    Text = "&CSyntax&W:&Y look\
 &CSyntax&W:&Y look    <object>\
 &CSyntax&W:&Y look    <character>\
@@ -4448,8 +4099,8 @@ EXAMINE&c is short for &YLOOK container&c \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "EXFLAGS", 
+   Level = 101, 
    Text = "The redit exflags <dir> [flag] ... command accepts the following flags:\
 ISDOOR        | There is a door in that direction\
 CLOSED        | The door is closed\
@@ -4475,8 +4126,8 @@ WINDOW        | Cannot go through this exit (doesn't appear with autoexits)\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "EXITMAKING", 
+   Level = 101, 
    Text = "The 'redit exit' command is used to create, modify and remove exits in a room.\
 For more than one exit in the same direction see ADVANCEDEXITS.\
 \
@@ -4504,8 +4155,8 @@ See EXITTYPES for generating the exit-type value.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "EXITS", 
+   Level = 0, 
    Text = "&CSyntax&W:&Y exits\
 &c\
 Tells you the visible exits of the room you are in.  Not all exits are\
@@ -4516,8 +4167,8 @@ walk in a certain direction and see what you bump into).\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "EXITTYPES", 
+   Level = 101, 
    Text = "These are the currently valid exit-types:\
       0 - Plain exit\
       1 - Door exists         (Required to be closed or locked)\
@@ -4544,8 +4195,8 @@ See EXFLAGS and EXITMAKING.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "EXPERIANCE LEVEL XP EXP", 
+   Level = 0, 
    Text = "&CSyntax&W:&Y  level\
 &c\
 Your character advances in power by gaining experience.  Type &YLEVEL&c to\
@@ -4576,8 +4227,8 @@ advantage over you in combat.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "F", 
+   Level = 1, 
    Text = "&C                        COMMANDS FOR COMBAT\
 &W                       ---------------------&Y\
    KILL <mob> &cyou begin to attack the mob (you need only type once)\
@@ -4606,8 +4257,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'FAKE SIGNAL' FAKE SIGNAL", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YUsed with Request \
  \
 &cFake signal enables you to 'request' a ship to open it's hanger bays,\
@@ -4621,8 +4272,8 @@ even when you do not have a pilot for them.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "FALLEEN", 
+   Level = 0, 
    Text = "&COrigin: &YFalleen \
  \
 &c     The Falleen are reptilian in ancestry, with scales, cold blood, and\
@@ -4639,8 +4290,8 @@ irresistible to the opposite sex. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "FARSIGHT", 
+   Level = 1, 
    Text = "Syntax : feel farsight <victim>\
 \
 Gives a room description of victims location.\
@@ -4649,8 +4300,8 @@ Gives a room description of victims location.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "FATIGUE", 
+   Level = 1, 
    Text = "Syntax : feel fatigue <victim>\
 \
 Makes victim more susceptable.\
@@ -4659,8 +4310,8 @@ Makes victim more susceptable.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "FEEBLENESS", 
+   Level = 1, 
    Text = "Syntax : feel feebleness <victim>\
 \
 Makes victim more susceptable.\
@@ -4669,8 +4320,8 @@ Makes victim more susceptable.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "FILENAMES", 
+   Level = 101, 
    Text = "When naming files, follow this convention:\
 * Areas should have the extension .are (though areas have their own\
 directory, when areasare modified they are moved to the building\
@@ -4689,8 +4340,8 @@ instead.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "FILL", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y fill <drincon>\
 &CSyntax &W:&Y fill <container>\
  \
@@ -4703,8 +4354,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "FIREBALL", 
+   Level = 1, 
    Text = "Syntax : feel fireball <victim>\
 \
 Sends a fireball at victim.\
@@ -4713,8 +4364,8 @@ Sends a fireball at victim.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "FIRRERREO", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Firrerre\
 &c\
    Tall humanoids native to the planet Firrerre, they beings have \
@@ -4735,8 +4386,8 @@ clan affiliations, and a fair amount of Force sensitivity. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'FIRST AID' FIRSTAID MEDPAC", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YFirstAid &R&W<&YPlayer&R&W>\
          &YFirstAid self\
  \
@@ -4749,8 +4400,8 @@ yourself, or another character.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "FIXCHAR", 
+   Level = 0, 
    Text = "Syntax:  fixchar <character>\
  \
 Resets a character's saving throws and mentalstate.  Should probably\
@@ -4760,8 +4411,8 @@ not be done while the character is equipped.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "FLAGPRICES", 
+   Level = 1, 
    Text = "&YOn ships:\
 &BBacta - 100,000\
 &BHotel - 100,000\
@@ -4798,8 +4449,8 @@ to be used at the normal upgrade site for ships.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "FLAMESTRIKE", 
+   Level = 0, 
    Text = "Syntax: feel 'flamestrike' <victim>\
 \
 This power inflicts damage on the victim.\
@@ -4808,8 +4459,8 @@ This power inflicts damage on the victim.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "FLEE RESCUE", 
+   Level = 0, 
    Text = "&R&CSyntax &R&W: &YFlee \
 &R&CSyntax &R&W: &YRescue &R&W<&YPlayer&R&W> \
 \
@@ -4826,8 +4477,8 @@ fighting, or flee, depending on your settings in config.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "FLOAT", 
+   Level = 1, 
    Text = "Syntax: feel 'float' <character>\
  \
 This power enables the target character to float.  It is useful in saving\
@@ -4843,8 +4494,8 @@ begin losing hps <hitpoints>, you should cast float immediately.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "FLY", 
+   Level = 0, 
    Text = "Syntax:  cast 'fly' <character>\
  \
 This power enables the target character to fly.  It is useful in saving\
@@ -4860,8 +4511,19 @@ begin losing hps <hitpoints>, you should cast fly immediately.\
 
 HelpEntry
 {
-   Level = 101, 
+   Keyword = "'FOCUS STRENGTH' FOCUSSTRENGTH", 
+   Level = 1, 
+   Text = "&CSyntax &R&W: &YFocusStrength\
+ \
+&cThis skill allows you to focus your energy, increasing your strength for\
+a period of time. During this time, you can carry more, and hit harder.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "FOLDAREA", 
+   Level = 101, 
    Text = "Syntax:  foldarea <area filename>\
 Syntax:  foldarea all\
 \
@@ -4874,8 +4536,8 @@ See ASET, UNFOLDAREA and INSTALLAREA.\
 
 HelpEntry
 {
-   Level = 105, 
    Keyword = "FOLLOW", 
+   Level = 105, 
    Text = "&CSyntax: &Yfollow &W<&YCharacter/NPC&W>\
 &c\
 'Follow' starts you following another character.  \
@@ -4888,8 +4550,8 @@ To stop following, type 'follow self'. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "FOR", 
+   Level = 101, 
    Text = "Syntax:  for <argument> <command>\
 Syntax:  for <argument> <command> <target>\
  \
@@ -4909,8 +4571,8 @@ every mob in the game.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "FORCE", 
+   Level = 101, 
    Text = "Syntax:  force <victim> <command>\
 Syntax:  force all <command>\
  \
@@ -4928,8 +4590,50 @@ via 'cset' (see 'help cset').\
 
 HelpEntry
 {
+   Keyword = "'FORCE BLAST WRATH'", 
    Level = 1, 
+   Text = "Syntax : feel 'force blast wrath'\
+\
+Require THREE people and causes heavy damage to all in the room,\
+and then blinds everyone, including casters.\
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'FORCE BOLT'", 
+   Level = 1, 
+   Text = "Syntax : feel 'force bolt' <victim>\
+\
+Sends a bolt of force at the victim.\
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'FORCE BUBBLE' 'FORCE SHIELD'", 
+   Level = 1, 
+   Text = "Syntax : feel 'force bubble'\
+Syntax : feel 'force shield'\
+\
+Creates a force bubble/shield that lowers AC and increase resistance.\
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'FORCE FUNNEL'", 
+   Level = 1, 
+   Text = "Syntax : feel 'force funnel' <victim>\
+\
+Makes victim more susceptable.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "'FORCE IMBUE'", 
+   Level = 1, 
    Text = "&bForce Imbue (Dark Side, Light Side) \
  \
 &p&w     Imbue is a sacrificial roleplaying device. It is another way \
@@ -4953,8 +4657,38 @@ two forcers, both players must be of the same alignment. \
 
 HelpEntry
 {
-   Level = 101, 
+   Keyword = "'FORCE LIGHTNING'", 
+   Level = 1, 
+   Text = "Syntax : feel 'force lightning' <victim>\
+\
+Sends bolts of lightning into victim.\
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'FORCE SIGHT'", 
+   Level = 1, 
+   Text = "Syntax : feel 'force sight'\
+\
+Allows user to see in the dark.\
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'FORCE SPRAY'", 
+   Level = 1, 
+   Text = "Syntax : feel 'force spray' <victim>\
+\
+Cause minor damage to victim.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "FORCECLOSE", 
+   Level = 101, 
    Text = "Syntax: forceclose <descriptor>\
 \
 This command will force a certain descriptor to close.\
@@ -4970,8 +4704,8 @@ See USERS, CONSTATES and DISCONNECT.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "FORCERS", 
+   Level = 1, 
    Text = "&cThe entire forcers system has been reset. Force able characters are\
 expected to RP properly. This means Dark Jedi are not out to save the\
 galaxy, and Light Jedi are not murdering fiends. For those of you new to\
@@ -5001,8 +4735,8 @@ the following system. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "FORCE_RP", 
+   Level = 1, 
    Text = "&BLight Jedi RP&c\
  - Jedi may enter any order/clan except the Empire without\
    approval of the Admins\
@@ -5031,8 +4765,8 @@ act without thinking about the consequences before hand. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "FORETHOUGHT", 
+   Level = 1, 
    Text = "Syntax : feel forethought\
 \
 Increases wisdom for a limited period.\
@@ -5041,8 +4775,8 @@ Increases wisdom for a limited period.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "FORMPASS", 
+   Level = 101, 
    Text = "Syntax:  formpass <new password> <character name>\
 Example: formpass temporary Joseph\
                                        \
@@ -5060,8 +4794,8 @@ by someone with access to player files.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "FQUIT", 
+   Level = 101, 
    Text = "Syntax:  fquit <character>\
  \
 Can be used by low-level imms to force a level 1 player to quit the game,\
@@ -5074,8 +4808,8 @@ does not work on any player higher than level 1.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "FRC", 
+   Level = 1, 
    Text = "&CForce stat &Y(FRC)&C represents your character's ability in the force. \
 It stays invisible to players throughout their lifetime.  You never truly\
 know how strong you are in the force.  This is another stat that cannot be\
@@ -5086,8 +4820,8 @@ raised by any trainer. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "G", 
+   Level = 1, 
    Text = "&C                       COMMUNICATION COMMANDS \
 &Y                      ------------------------&Y \
 CHAT message &ceveryone can hear this message \
@@ -5116,8 +4850,8 @@ CLANTALK, ORDERTALK, AND GUILDTALK &cchannels for clans, guilds, and orders\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "GAMORR", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Opoku\
 &CInhabitants &W:&W Gamorrean\
 &c\
@@ -5133,8 +4867,8 @@ powerful females. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "GAMORREAN", 
+   Level = 0, 
    Text = "&COrigin: &YGamorr \
  \
 &c     A pig-like brutish race with green skin and snouts, small horns, and\
@@ -5153,8 +4887,8 @@ hired as bounty hunters on occasion. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "GAND", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Gand\
  \
 &c     A species of sentient life that has developed in the gases of the\
@@ -5182,8 +4916,8 @@ the Gand have certain regenerative properties. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'GATHER INTELLIGENCE' GATHERINTELLIGENCE", 
+   Level = 1, 
    Text = "&CSyntax &W: &YGatherIntelligence <Player> \
  \
 &cThis skill will attempt to retrieve information about a character, such\
@@ -5194,8 +4928,8 @@ It takes time to use, and will only work on players. \
 
 HelpEntry
 {
-   Level = 102, 
    Keyword = "GETCREDITS", 
+   Level = 102, 
    Text = "&CSyntax &W:&Y getcredits\
 &c\
 After a vendor has sold your items, you can claim the money earned by\
@@ -5206,8 +4940,8 @@ someone has actually bought something. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "GLADIATOR DROID 'GLADIATOR DROID'", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Various\
 &c\
      Any droid which is programmed for armed combat in a controlled \
@@ -5221,8 +4955,8 @@ and lawless activities began to get overlooked. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "GLANCE", 
+   Level = 1, 
    Text = "&Csyntax &W:&Y glance\
 &Csyntax &W:&Y glance <victim>\
 &c\
@@ -5237,8 +4971,8 @@ Glance may be abbreviated as &Ygl&c. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "GOLD", 
+   Level = 1, 
    Text = "&Csyntax &W:&Y gold\
  \
 Displays the current total credits you are carrying.\
@@ -5247,8 +4981,18 @@ Displays the current total credits you are carrying.\
 
 HelpEntry
 {
-   Level = 0, 
+   Keyword = "'GOOD FORTUNE'", 
+   Level = 1, 
+   Text = "Syntax : feel 'good fortune' <target>\
+\
+Increase hitroll and improves saving roll against the force.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "GOTAL GOTALS", 
+   Level = 0, 
    Text = "&COrigin: &YAntar Four \
  \
 &c     A Gotal is any member of the intelligent, technologically advanced,\
@@ -5270,8 +5014,8 @@ to remain neutral in galactic conflicts. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "GOTO", 
+   Level = 101, 
    Text = "Syntax: goto <location>\
 \
 GOTO takes you to a location.  The location may be specified as a vnum,\
@@ -5291,8 +5035,8 @@ See REDIT.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "GRAN", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Kinyen\
 &c\
      A race of three-eyed humanoids native to the planet Kinyen, the \
@@ -5321,8 +5065,8 @@ and have developed a healthy trade route with the Herglics. \
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "GREETING", 
+   Level = -1, 
    Text = ".               _________________      ____         __________\
  .       .    /                 |    /    \\    .  |          \\\
      .       /    ______   _____| . /      \\      |    ___    |     .   \
@@ -5358,8 +5102,8 @@ Please enter your name:\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "GRENADES", 
+   Level = 1, 
    Text = "&Csyntax &W:&YArm (grenade)\
 &c\
 This skill allows you to arm grenades, before using them. \
@@ -5371,8 +5115,8 @@ Ussually combined with the throw skill. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "GRIP", 
+   Level = 1, 
    Text = "&cThis skill is automatic, once practiced.  The skill causes you to grip\
 your weapon tightly as someone tries to disarm you, making it far more \
 difficult to successfully disarm you.  This skill will only increase as\
@@ -5383,8 +5127,8 @@ you are engaged in fights where someone is attempting to disarm you. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "GROUP", 
+   Level = 0, 
    Text = "&cGroup members share experience from kills, and may use the &YGTELL&c and\
 &YSPLIT&c commands.  If anyone in your group is attacked, you will \
 automatically join the fight. \
@@ -5398,8 +5142,18 @@ in which case they will both leave your group and stop following you. \
 
 HelpEntry
 {
+   Keyword = "'GROUP MASKING'", 
    Level = 1, 
+   Text = "Syntax : feel \"group masking\"\
+\
+Masks all those in your group (including you).\
+", 
+}
+
+HelpEntry
+{
    Keyword = "GROUPSYNTAX", 
+   Level = 1, 
    Text = "&CSyntax &W:&Ygroup <argument>\
  \
 &YGroup <character>&c adds someone who is following you into your group, \
@@ -5423,8 +5177,8 @@ following  and are ungrouped). \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "GTELL ; REPLY SAY TELL '", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y gtell <message>\
 &CSyntax &W:&Y say   <message>\
 &CSyntax &W:&Y tell  <character> <message>\
@@ -5448,8 +5202,8 @@ immortal players. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "GUARD", 
+   Level = 1, 
    Text = "&CSyntax &YGuard [on/off]\
 &c\
 For capital ships only.  This sets a planetary guarding program. The ship\
@@ -5463,8 +5217,8 @@ will not move from its current location unless under direct control.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "H", 
+   Level = 1, 
    Text = "&C                  COMMANDS FOR GENERAL INFORMATION\
 &W                 -----------------------------------&Y\
   WIZLIST &cshows a list of all the immortals\
@@ -5489,8 +5243,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "HAIL", 
+   Level = 1, 
    Text = "Syntax: hail\
 or:     hail <ship name> <message>\
  \
@@ -5505,8 +5259,18 @@ message is the message you wish to be sent.\
 
 HelpEntry
 {
+   Keyword = "'HAND OF DARKNESS'", 
    Level = 1, 
+   Text = "Syntax : feel 'hand of darkness' <victim>\
+\
+Cause heavy damage to target.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "HAPES", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Hapan\
 &CInhabitants &W:&W Human\
 &c\
@@ -5528,8 +5292,8 @@ on Hapes encompasses 240 local days. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "HARDEN", 
+   Level = 1, 
    Text = "Syntax: feel \"harden\"\
  \
 Improves constitution and hit points for a limited period.\
@@ -5540,8 +5304,8 @@ Dark Jedi Spell\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "HARM", 
+   Level = 1, 
    Text = "Syntax : feel harm <victim>\
 \
 Causes damage to victim.\
@@ -5550,8 +5314,8 @@ Causes damage to victim.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "HEDIT", 
+   Level = 101, 
    Text = "Syntax:  hedit [help topic]\
  \
 This command allows you to edit a help topic.  If the specified help topic\
@@ -5578,8 +5342,8 @@ See HSET, PCOLORS.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "HEIGHTENED", 
+   Level = 101, 
    Text = "|--------------------------------------|--------------------------------------|\
 |                MOVEMENT              |                 GROUP                |\
 | north east west south northeast exit |  follow group gtell ; split          |\
@@ -5609,8 +5373,40 @@ If you are new to the game, type HELP NEWBIE to see a special help series.\
 
 HelpEntry
 {
-   Level = 101, 
+   Keyword = "'HEIGHTENED ACCURACY' HEIGHTENEDACCURACY", 
+   Level = 1, 
+   Text = "&CSyntax &R&W: &YHeightenedAccuracy\
+ \
+&cThis skill allows you to focus your energy to increase your accuracy. It\
+raises your hitroll for a limited period.\
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'HEIGHTENED AWARENESS'", 
+   Level = 1, 
+   Text = "Syntax : feel 'heightened awareness'\
+\
+Allows user to detect characters sneaking around.\
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'HEIGHTENED STRENGTH' HEIGHTENEDSTRENGTH", 
+   Level = 1, 
+   Text = ".\
+Syntax : HeightenedStrength\
+ \
+ Increase your hitroll for a short time.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "HELL UNHELL", 
+   Level = 101, 
    Text = "Syntax: hell <character> <number> <hours or days>\
 Syntax: unhell <character>\
  \
@@ -5629,8 +5425,8 @@ To release a player from hell early, simply \"unhell <character>\".  \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "HELP", 
+   Level = 0, 
    Text = "&cYou may look up help files under many subjects:\
 \
           MOVEMENT                  GROUP\
@@ -5651,48 +5447,48 @@ You can also type hlist to get a list of ALL help topics. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "HELP BUILD5", 
+   Level = 101, 
    Text = "SWreality Building Pg 5\
 ", 
 }
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "HELP BUILD6", 
+   Level = 101, 
    Text = "SWreality Building Pg 6\
 ", 
 }
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "HELP BUILD7", 
+   Level = 101, 
    Text = "SWreality Building Pg 7\
 ", 
 }
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "HELP BUILD8", 
+   Level = 101, 
    Text = "SWreality Building Pg 8\
 ", 
 }
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "HELP BUILD9", 
+   Level = 101, 
    Text = "SWreality Building Pg 9\
 ", 
 }
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "HELPFILE FILE HELPFILES", 
+   Level = 101, 
    Text = "To edit/make a help file there are some basic and yet confusing\
 commands\
 necessary.  So here we go...\
@@ -5705,8 +5501,8 @@ hset save <helpfile>\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "HIJACK", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YHijack\
  \
 &cThis skill lets you \"borrow\" other people's ships.  Must be used in the\
@@ -5716,8 +5512,8 @@ cockpit of a ship. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "HITALL", 
+   Level = 1, 
    Text = "Syntax: hitall\
  \
 ", 
@@ -5725,8 +5521,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "HLIST", 
+   Level = 1, 
    Text = "Syntax: hlist <low level range> <high level range>\
  \
 This command will give you a listing of available help files. The list\
@@ -5747,8 +5543,8 @@ Note - The list of help files is quite extensive, and the command does\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "HOLD REMOVE WEAR WIELD", 
+   Level = 0, 
    Text = "Syntax:  hold   <object>\
 Syntax:  remove <object>\
 Syntax:  remove all\
@@ -5776,8 +5572,8 @@ REMOVE ALL will remove all your equipment and place it into inventory.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "HOLYLIGHT INVIS", 
+   Level = 101, 
    Text = "Syntax: holylight\
 Syntax: invis\
 \
@@ -5800,8 +5596,8 @@ higher level than you.\
 
 HelpEntry
 {
-   Level = 10, 
    Keyword = "HOMEPAGE", 
+   Level = 10, 
    Text = "syntax: homepage <url>\
  \
 example: homepage http://www.idirect.com/test.html\
@@ -5817,8 +5613,8 @@ To remove your homepage setting, type 'homepage clear'.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "HONOGHR", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Honoghr\
 &CInhabitants &W:&W Noghri\
 &c\
@@ -5841,8 +5637,8 @@ could still support life.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "HOTH", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Hoth\
 &CInhabitants &W:&W Wampa, Tauntaun\
 &c\
@@ -5870,8 +5666,8 @@ foodchain. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'HP'", 
+   Level = 1, 
    Text = "This is an abbreviation for hit points.  All classes begin with 20 hp\
 at creation and gain between 6 and 19 hp per gained level, depending on\
 class, race and CON.  Equipment can also add to your total hp.\
@@ -5880,8 +5676,8 @@ class, race and CON.  Equipment can also add to your total hp.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'HRD' 'HUMAN REPLICANT DROID'", 
+   Level = 1, 
    Text = "&pHuman Replicant Droid:\
  \
 &YOnly assassin droids will be allowed to roleplay as HRDs, and even\
@@ -5892,8 +5688,8 @@ and protocol droids and the like will not be allowed to.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "HSET", 
+   Level = 101, 
    Text = "Syntax:  hset  <command> [value] [help topic]\
  save                            Saves all help pages (to help.are)\
  level <level> <help topic>      Sets help topic to specified level\
@@ -5916,8 +5712,8 @@ See also: HEDIT\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "HUMAN HUMANS", 
+   Level = 0, 
    Text = "&GOrigin: &YVarious\
 \
      &gHumans are the most numerous and least unusual of the races. They\
@@ -5935,8 +5731,8 @@ other, almost none look exactly alike.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "HUMAN_STATS HUMAN_STAT", 
+   Level = 0, 
    Text = "&GRace: &YHuman\
 &GSpecial Abilities: &YNone\
 &GRestrictions: &YNone\
@@ -5959,8 +5755,8 @@ Lead.&Y       110     60       60        60      60     110      150\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "HUTT HUTTS", 
+   Level = 0, 
    Text = "&POrigin: &YVarl\
 \
 &p     Hutts resemble large slug-like creatures, having no legs and very\
@@ -5985,8 +5781,8 @@ years old.  Their business philosophy is known as 'Kajidic', which means\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "HUTT_STATS", 
+   Level = 0, 
    Text = "&PRace: &YHutt\
 &PSpecial Abilities:&Y None \
 &PRestrictions: &YCan Only Speak Hutt, Large Size\
@@ -6009,8 +5805,8 @@ Lead.&Y      150     104      104       104     104     150     150&P\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "HYPERSPACE", 
+   Level = 1, 
    Text = ".\
  Syntax :  Calculate <system>/< <x> <y> <z> >\
              Then Hyperspace\
@@ -6029,8 +5825,8 @@ Drops you immediately out of hyperspace. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "I", 
+   Level = 1, 
    Text = "&C               COMMANDS FOR YOUR CHARACTER \
 &W              -----------------------------&Y \
   AFK &cthis adds an 'Away From Keyboard' flag to your name \
@@ -6060,8 +5856,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "IC OOC \"IN CHARACTER\" \" OUT OF CHARACTER\"", 
+   Level = 0, 
    Text = "&C\
 \
 IC - In character - Means that you're not chatting with your friends about\
@@ -6090,8 +5886,8 @@ However Excessive abuse of OOC will result in possibly being silenced.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "IDENTIFY ID", 
+   Level = 1, 
    Text = "&cAny ship can ask for an identify, if it is &YIC&c.  Details will be asked\
 on any pkill, a ship pkill especially, so be prepared to explain why your\
 actions were &YIC&c.\
@@ -6116,8 +5912,8 @@ Example:\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "IFCHECKS", 
+   Level = 101, 
    Text = "VALUE CHECKS                          TRUE/FALSE CHECKS\
 (If check == #/string/vnum)\
 Ifcheck   Question                    Ifcheck       Question\
@@ -6159,8 +5955,8 @@ Also: MPSTAT, RPSTAT, OPSTAT, MPEDIT, RPEDIT, OPEDIT, TRIGGER, MPTRIGGERS,\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "IFCHECKS 2", 
+   Level = 101, 
    Text = "TimesKilled\
 if timeskilled($* OR vnum) == amount\
    - for character checks only, can use any normal mobprog operator\
@@ -6188,8 +5984,8 @@ if otype<place>(type OR value) == amount\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "IFCHECKS2", 
+   Level = 101, 
    Text = "TimesKilled\
 if timeskilled($* OR vnum) == amount\
    - for character checks only, can use any normal mobprog operator\
@@ -6220,8 +6016,8 @@ Also: MPSTAT, RPSTAT, OPSTAT, MPEDIT, RPEDIT, OPEDIT, TRIGGER, MPTRIGGERS,\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ILLUMINATE", 
+   Level = 1, 
    Text = "Syntax : feel illuminate\
 \
 Creates a ball of force light.\
@@ -6230,8 +6026,8 @@ Creates a ball of force light.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "IMMORTALIZE", 
+   Level = 101, 
    Text = "Syntax:  immortalize <character>\
  \
 Used to advance a level 50 character (avatar) to level 51 (the first\
@@ -6242,16 +6038,16 @@ inventory and display to them a pre-written message.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "IMOTD", 
+   Level = 101, 
    Text = "No message of the day for immortals.\
 ", 
 }
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "IMPRANKS", 
+   Level = 1, 
    Text = "&cThese are the Imperial Military's ranks and equivalencies.\
 Yes, we stole this from Sote. \
  \
@@ -6283,8 +6079,8 @@ Yes, we stole this from Sote. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "INDUCT OUTCAST", 
+   Level = 101, 
    Text = "&CSyntax &W:&Y induct  <player>\
          outcast <player>\
 &c\
@@ -6297,8 +6093,8 @@ clan, while outcast will remove them. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "INFILTRATE INFILTRATION", 
+   Level = 1, 
    Text = "Infiltrations by clan members require an ICly issued order by the clan\
 leader and/or the first of your clan. You must have logged proof of this\
 order. \
@@ -6313,8 +6109,8 @@ legality of placing a mole..Contact an Admin.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "INFORMATION", 
+   Level = 1, 
    Text = ".\
 &YSLIST   - &ca command that lists all your powers and skills and the\
           level at which you may practice them. \
@@ -6341,8 +6137,8 @@ DESC    - &cYou may set up a personal description, type DESC to edit. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "INFRAVISION", 
+   Level = 0, 
    Text = "Syntax: feel infravision <character>\
 \
 This power enables the target character to see other players and mobiles\
@@ -6355,8 +6151,29 @@ a dark room.\
 
 HelpEntry
 {
-   Level = 101, 
+   Keyword = "'INNER FORTRESS'", 
+   Level = 1, 
+   Text = "Syntax : feel 'inner fortress'\
+\
+Improves constitution for a limited period.\
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'INNER STRENGTH' INNERSTRENGTH", 
+   Level = 1, 
+   Text = "&CSyntax &R&W: &YInnerStrength\
+ \
+&cThis skill will increase both your constitution and your max hit points\
+for a short period of time.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "INSTALLAREA", 
+   Level = 101, 
    Text = "Syntax:  installarea <area filename> <full area name/title>\
  \
 Installs a prototype area into the mud as a non-prototype area.  The\
@@ -6370,8 +6187,8 @@ Installarea renames the installed area file from 'author.are.file' to\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "INSTAROOM INSTAZONE", 
+   Level = 101, 
    Text = "Syntax:  instaroom\
  \
 Functions the same as instazone, but is room-based instead of area-based.\
@@ -6399,8 +6216,8 @@ See RESET and RESETCMDS.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "INTELLIGENCE INT", 
+   Level = 1, 
    Text = "&CIntelligence &Y(int)&C represents your character's mental capacity.  It\
 is an important factor in learning between combatants.  If a character\
 fights a creature several times, the more intelligent of the two opponents\
@@ -6423,8 +6240,8 @@ will gain an advantage over time. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "INTERROGATION DROID 'INTERROGATION DROID'", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Various\
 &c\
      A spherical droid with a built-in repulsorlift, it has many devices \
@@ -6439,8 +6256,18 @@ Force's base in Yavin IV. \
 
 HelpEntry
 {
+   Keyword = "'INVADE ESSENCE'", 
    Level = 1, 
+   Text = "Syntax : feel 'invade essence' <victim>\
+\
+Causes damage to victim.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "ION IONS 'ION CANNONS'", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y fire ion\
 &c\
 Ion cannons target a ship's shield and other systems,\
@@ -6451,8 +6278,8 @@ disables a ship.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ITEMVALUES", 
+   Level = 101, 
    Text = "In these values, 'sn' is a power number;  a negative value means 'no power'.\
 Item Type |V0         |V1          |V2         |V3         |V4       |V5\
 ----------|-----------|------------|-----------|-----------|---------|-------\
@@ -6483,8 +6310,8 @@ ARMORCLASS, and WEAPONCONDITION.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "ITHORIAN ITHORIANS", 
+   Level = 0, 
    Text = "&COrigin: &YIthor \
  \
      &cThe species name for the aliens commonly referred to as Hammerheads\
@@ -6507,8 +6334,8 @@ preservers. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "JAIL UNJAIL", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y Jail <player> # <days/hours>\
 &CSyntax &W:&Y Unjail\
  \
@@ -6524,8 +6351,8 @@ relogging back into the prison.  This can also be done with &YUNJAIL&c.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "JAWA JAWAS", 
+   Level = 0, 
    Text = "&COrigin: &YTatooine\
  \
   &c     Jawas are smelly, rodent-like creatures but very intelligent. \
@@ -6548,8 +6375,8 @@ date.  \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "JAWA_NAMES", 
+   Level = 0, 
    Text = "Example Jawa Names. These are used in the books, and are not acceptable to\
 be used, just as examples of the common format for Jawa names.\
  \
@@ -6570,8 +6397,8 @@ Akkik\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "JEDIS \"JEDI KNIGHT\" JEDI", 
+   Level = 1, 
    Text = "&CJedi Apprentice:&c\
 A jedi apprentice must have a max force of 25+ and must be inducted by\
 a master. \
@@ -6597,8 +6424,8 @@ These are simply the qualifications to make you eligible.  Read help \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "JUMPVECTOR", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YJumpvector &R&W<&YShip&R&W> \
  \
 &cThis gives you a ships course that has hypered out \
@@ -6611,8 +6438,8 @@ SEE ALSO: &WHELP SHIPTRACK\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "JUNK", 
+   Level = 1, 
    Text = "&CSyntax:  &Yjunk &W<&Yobject&W> \
 &c \
 Junk will remove an object from a room. You can only junk certain items:\
@@ -6627,8 +6454,8 @@ Medpacks \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "KASHYYYK", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Kashyyyk\
 &CInhabitants &W:&W Wookiee, Kroyie\
 &c\
@@ -6650,8 +6477,8 @@ local days. It is located in the Sumitra Sector, and has three moons.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "KESSEL", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Kessel\
 &CInhabitants &W:&W Human, Energy Spider, Bogey\
 &c\
@@ -6679,8 +6506,8 @@ above-ground atmosphere was a frivolous waste of money. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "KICK", 
+   Level = 0, 
    Text = "&R&CSyntax &R&W: &YKick \
 \
 &R&cThis skill allows you to deliver a powerful blow in the form of a kick\
@@ -6691,8 +6518,8 @@ to your opponent.  Can only be used during combat. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "KINYEN", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Farfin\
 &CInhabitants &W:&W Gran\
 &c\
@@ -6703,8 +6530,18 @@ Gran. \
 
 HelpEntry
 {
+   Keyword = "'KNOW ESSENCE'", 
    Level = 1, 
+   Text = "Syntax : feel 'know essence' <target>\
+\
+Displays information on target.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "KUAT", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Kuat\
 &CInhabitants &W:&W Human\
 &c\
@@ -6725,8 +6562,8 @@ Imperial military,and controlled all access to the surface of Kuat. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "KUBAZ", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Kubindi\
 &c\
      An alien race hailing from the planet Kubindi, the Kubaz have dark \
@@ -6755,8 +6592,8 @@ as an additional food source. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "LANGUAGES LANGUAGE LEARN", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y languages\
 &CSyntax &W:&Y language learn <language name>\
  \
@@ -6774,8 +6611,8 @@ you are speaking, you must change that manually. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "LAST", 
+   Level = 101, 
    Text = "&CSyntax &W:&Y last <character>\
 &c\
 Returns the last connected date of the victim.\
@@ -6784,8 +6621,8 @@ Returns the last connected date of the victim.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "LAYERS", 
+   Level = 101, 
    Text = ".\
 &gLayers are currently available on the following wear locations:\
  \
@@ -6812,8 +6649,8 @@ WEAPONTYPES, VARIABLES, ARMORCLASS, LAYERS2, and OMENU.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "LAYERS2", 
+   Level = 101, 
    Text = ".\
 &gLayer Bit Vectors\
 &G|1              |       | \
@@ -6849,8 +6686,8 @@ WEAPONTYPES, VARIABLES, ARMORCLASS, LAYERS, and OMENU.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "LEADERSHIP LEADER", 
+   Level = 0, 
    Text = "&cPlayers that pick leadership as their main get a few interesting\
 abilities.  Not only can they post guards, but they can post *elite*\
 guards, as well as call special forces, a more powerful form of\
@@ -6873,8 +6710,8 @@ areas such as combat and piloting, and stronger in diplomacy.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "LEVERFLAGS SWITCHFLAGS BUTTONFLAGS PULLCHAINFLAGS DIALFLAGS", 
+   Level = 101, 
    Text = "FLAG NAME     |  BITVECTOR  |  DESCRIPTION\
 ----------------------------------------------------------------------\
 UP            |          1  |  Trigger is UP \
@@ -6909,8 +6746,8 @@ See OSET and ITEMVALUES.  * = not yet implemented.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "LIFT STEAL", 
+   Level = 0, 
    Text = "&CSyntax &R&W: &YLift Credits &R&W<&YName&R&W> \
          &YLift &R&W<&YObject&R&W> <&YName&R&W> \
  \
@@ -6920,8 +6757,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "LIMBER", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YLimber\
  \
 &cThis skill lets you focus your energy so you can be more agile.\
@@ -6930,8 +6767,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "LIQUIDTYPES", 
+   Level = 101, 
    Text = ".   &cName                &WColor     &RAlcohol    Food Worth  Liq. Worth\
 1.  &cwater,              &Wclear,        &R0,        &Y1,       &C10 \
 2.  &cbeer,               &Wamber,        &R3,        &Y2,        &C5 \
@@ -6977,8 +6814,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "LITTERBUG", 
+   Level = 101, 
    Text = "Syntax: litterbug <player>\
 \
 Places/removes the litterbug flag, allowing/prohibiting a player from\
@@ -6988,8 +6825,8 @@ dropping any objects.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "LOADUP", 
+   Level = 101, 
    Text = "Syntax: loadup <player>\
 \
 LOADUP allows one to load up a player's character (playing or not), to do\
@@ -7002,8 +6839,8 @@ See FORCE.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "LOG SNOOP", 
+   Level = 101, 
    Text = "Syntax:  log   <character>\
 Syntax:  log   all\
 Syntax:  snoop <character>\
@@ -7031,8 +6868,8 @@ SNOOP yourself to cancel all outstanding snoops.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "LUCK LCK", 
+   Level = 1, 
    Text = "&CLuck &Y(LCK)&C represents your character's chance, and basically how\
 lucky he/she is.  You cannot train this statistic at any trainer.\
 Your luck stat does not show up on your score.\
@@ -7048,8 +6885,8 @@ Your luck stat does not show up on your score.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "MAIL", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y mail list\
 &CSyntax &W:&Y mail read    <number>\
 &CSyntax &W:&Y mail read    all\
@@ -7070,8 +6907,8 @@ pen in your inventory.  Mail can only be addressed to real players, or\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MAKEARMOR", 
+   Level = 1, 
    Text = "&CSyntax &R&W:&Y Makearmor &R&W<&YLocation&R&W> <&YName&R&W> \
 \
 &cThis allows you to create custom armor for yourself and others using some\
@@ -7081,8 +6918,8 @@ material, and a sewing needle. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MAKEBLADE", 
+   Level = 1, 
    Text = "&CSyntax &R&W:&Y Makeblade &R&W<&YName&R&W> \
  \
 &cThis allows you to make a custom vibroblade, using a toolkit, some\
@@ -7092,8 +6929,8 @@ SCRAP durasteel, a battery, and an oven.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MAKEBLASTER", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YMakeblaster &R&W<&YName&R&W> \
  \
 &cThis lets you make a blaster using a toolkit, some duraplast, a battery,\
@@ -7103,8 +6940,8 @@ an oven, some circuitry, and some sort of conductor.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MAKEBOARD", 
+   Level = 101, 
    Text = "Syntax:  makeboard <board filename>\
 Example: makeboard newboard.brd\
  \
@@ -7116,8 +6953,8 @@ See BSET, BSTAT and BOARDS\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MAKECLAN", 
+   Level = 101, 
    Text = "Syntax:  makeclan <clan name>\
 Example: makeclan Retribution\
 \
@@ -7131,8 +6968,8 @@ See SETCLAN, SHOWCLAN\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MAKECOMLINK", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YMakecomlink &R&W<&YLocation&R&W> <&YName&R&W> \
  \
 &cThis skill allows you to make a custom comlink, using a toolkit, a\
@@ -7142,8 +6979,8 @@ battery, some circuitry, and a crystal.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MAKECONTAINER \"MAKE CONTAINER\"", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YMakecontainer &R&W<&YLocation&R&W> <&YName&R&W> \
  \
 &cThis skill is used to make containers that can be worn all over the body.\
@@ -7158,8 +6995,8 @@ layers. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MAKECOUNCIL", 
+   Level = 101, 
    Text = "Syntax:  makecouncil <council name>\
 Example: makecouncil Newbie Council\
  \
@@ -7171,8 +7008,8 @@ See SETCOUNCIL\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MAKEFLASHLIGHT", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YMakeflashlight &R&W<&YName&R&W> \
  \
 &cThis allows you to make a flashlight using a toolkit, a battery, a lens,\
@@ -7182,8 +7019,8 @@ some circuitry, and some chemicals.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MAKEGRENADE", 
+   Level = 1, 
    Text = "&CSyntax&R&W :&Y Makegrenade &R&W<&YName&R&W> \
  \
 &cThis allows you to make a grenade using a toolkit, a drink container, a\
@@ -7193,8 +7030,8 @@ battery, some circuitry, and some chemicals.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MAKEJEWELRY", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YMakejewelry &R&W<&YLocation&R&W> <&YName&R&W>\
  \
 &cThis skill lets you make jewelry from a precious metal.  A toolkit and an\
@@ -7206,8 +7043,8 @@ oven are also needed.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MAKELANDMIND", 
+   Level = 1, 
    Text = "Syntax : makelandmine <mine name>\
 \
 This makes a landmine using a toolkit(reuseable), a drink container, a battery, some\
@@ -7217,8 +7054,8 @@ circuitry and some chemicals.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MAKELANDMINE", 
+   Level = 1, 
    Text = "&CSyntax&R&W : &YMakelandmine&R&W <&YName&R&W> \
  \
 &cThis allows you to make a landmine using a toolkit, a drinking container,\
@@ -7228,8 +7065,8 @@ a battery, some circuitry, and some chemicals.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MAKEREPAIR", 
+   Level = 101, 
    Text = "Syntax:  makerepair <mobvnum>\
  \
 Automatically gives the mobile the ability to repair damaged equipment.\
@@ -7241,8 +7078,8 @@ See REPAIRSET, REPAIRSTAT, REPAIRSHOPS\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MAKESHIELD", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YMakeshield &R&W<&YName&R&W> \
  \
 &cThis skill lets you make an energy shield using a toolkit, a battery,\
@@ -7254,8 +7091,8 @@ some circuitry, a conductor, and a crystal.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MAKESHOP", 
+   Level = 101, 
    Text = "Syntax: makeshop <mobile vnum>\
 \
 Creates a new shop and assigns it to a mobile.\
@@ -7281,8 +7118,8 @@ See SHOPSTAT, SHOPSET, SHOPS and SHOPVALUES\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MAKEWIZLIST", 
+   Level = 101, 
    Text = "Syntax:  makewizlist\
  \
 Used to generate a new wizlist during game operation (a new wizlist\
@@ -7295,8 +7132,8 @@ newly created wizlist.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MASK", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y feel mask\
  \
 &cMasks User for a limited period.\
@@ -7305,8 +7142,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'MASS PROPAGANDA' MASSPROPAGANDA", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YMassPropaganda &R&W<&YCitizen&R&W> \
  \
 &cThis allows you to spread propaganda to all the citizens on a planet\
@@ -7317,8 +7154,8 @@ citizens on the planet)&Y*&c2.5.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MCREATE OCREATE", 
+   Level = 101, 
    Text = "Syntax: mcreate <vnum> <keywords>\
 Syntax: ocreate <vnum> <keywords>\
 \
@@ -7333,16 +7170,16 @@ See MSET or OSET.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'ME I'M A MORON'", 
+   Level = 1, 
    Text = "We all know this, but put up with you anyways!\
 ", 
 }
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MEDITATE", 
+   Level = 1, 
    Text = ".\
 &CSyntax &W:&Y Meditate\
 &c\
@@ -7355,8 +7192,8 @@ allow you to become one with the Force.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MEM MEMORY", 
+   Level = 101, 
    Text = "Syntax:  memory\
  \
 Reports the current counts of objects, mobiles, rooms, etc...\
@@ -7378,8 +7215,8 @@ MaxEver time recorded at:   (date and time max users was reached)\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MENU", 
+   Level = 101, 
    Text = "When in one of the menu systems (RMENU, OMENU, MMENU), to switch from one\
 page to another, type '- <letter>'.  (For example, '- a' will bring you to\
 the first page in the current menu system).\
@@ -7395,8 +7232,8 @@ See RMENU, OMENU, MMENU.\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "MERC FUREY KHAN HATCHET", 
+   Level = -1, 
    Text = "Originally based on the Merc 2.1 code which was created by Furey, \
 Hatchet, and Kahn.\
 This original code base is available as Merc_21.tar.gz via FTP from:\
@@ -7424,8 +7261,8 @@ Merc would like to thank ...\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MFIND OFIND", 
+   Level = 101, 
    Text = "Syntax: mfind <name>\
 Syntax: ofind <name>\
 \
@@ -7437,8 +7274,8 @@ OFIND finds all object types with a particular name.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'MILITARY UPGRADES' MILITARYUPG", 
+   Level = 1, 
    Text = "&CMilitary Upgrades\
  \
 &cshields:    &W100 units for 1m\
@@ -7462,8 +7299,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MILITARYUPG2", 
+   Level = 1, 
    Text = "&CStarfighter maxes:\
 &c          lasers: &W4\
 &c  missiles-types: &W16 missiles, 8 torpedos, or 6 rockets\
@@ -7501,8 +7338,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MINE", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y mine <object>\
  \
 &cAllows you to place a landmine using a shovel.\
@@ -7511,8 +7348,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MINVOKE OINVOKE", 
+   Level = 101, 
    Text = "Syntax:  minvoke <vnum>\
          minvoke <keyword of mob>\
 Syntax:  oinvoke <vnum>\
@@ -7529,11 +7366,11 @@ parameter for the level of the object to be invoked.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MLIST", 
+   Level = 101, 
    Text = "Syntax: mlist\
-      :	mlist <first mob>\
-      :	mlist <first mob> <last mob>\
+      :\9mlist <first mob>\
+      :\9mlist <first mob> <last mob>\
 \
 This command will list all of the prototype mobs in your area, when used \
 with no arguments.  When used with a single argument it will list all \
@@ -7544,8 +7381,8 @@ it will list all mobs including and between the two. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MMENU", 
+   Level = 101, 
    Text = "Syntax: mmenu <mob name> [menu page] (defaults to 'a' if none given)\
 \
 Mmenu will bring you into a menu system of editing mobiles.  To use mmenu,\
@@ -7559,8 +7396,8 @@ See MENU for generic menu commands.\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "MOBPROG MOBPROGRAMS OBJPROG ROOMPROG MUDPROG", 
+   Level = -1, 
    Text = ".\
          The MOBprograms have been contributed by N'Atas-ha.\
 \
@@ -7573,8 +7410,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MOBTRIGGERS MUDTRIGGERS MPTRIGGERS", 
+   Level = 101, 
    Text = "Trigger Optnl Triggering Variable Explanation\
 ------- ----- ------------------- -----------\
 Act      {p}  <keyword / phrase>  [emotes, socials, actions, bamfs]\
@@ -7601,8 +7438,8 @@ For mobs, see also: MPSTAT, MPEDIT, TRIGGER, MPCOMMANDS, IFCHECKS, VARIABLES.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "MON_CALAMARI 'MON CALAMARI'", 
+   Level = 0, 
    Text = "&COrigin&W: &YMon Calamari\
  \
 &c     The Mon Calamari are a bipedal, amphibious species who come from a\
@@ -7625,8 +7462,8 @@ they dreamed of, they met the Empire. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MORON", 
+   Level = 1, 
    Text = "If your reading this you've obviously done something Moronic.\
  \
 So next time take the time to look at things , read room\
@@ -7638,16 +7475,16 @@ moronic.\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "MOTD", 
+   Level = -1, 
    Text = "No message of the day.\
 ", 
 }
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MOTDS", 
+   Level = 101, 
    Text = "The motds are 'messages of the day', and there are several:\
  \
 New characters will see the 'nmotd', containing info relevant only to\
@@ -7671,8 +7508,8 @@ The motds are edited with hedit and saved with hset like all helpfiles.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "MOUNT DISMOUNT", 
+   Level = 0, 
    Text = "&R&CSyntax &R&W: &YMount &R&W<&YMob&R&W>\
 &R&CSyntax &R&W: &YDismount \
 \
@@ -7688,8 +7525,8 @@ to mount immediately.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MOVE", 
+   Level = 1, 
    Text = "&c\
 This discusses the process of moving your character from one place in the \
 game to another.  The common movements are north, east, south, west, up \
@@ -7708,8 +7545,8 @@ with your recovery, and wish to continue adventuring, type &YWAKE or STAND.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MOVEMENT", 
+   Level = 1, 
    Text = "&cThis discusses the process of moving your character from one place in the\
 game to another.  The common movements are north, east, south, west, up \
 down, northeast, southeast, southwest, and northwest.  You may also move \
@@ -7729,8 +7566,8 @@ FLY DRIVE \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPADVANCE", 
+   Level = 101, 
    Text = "Syntax: MPADVANCE <name> <level>\
 \
 Advances the level of a player (not functional in prototype programs).\
@@ -7739,8 +7576,8 @@ Advances the level of a player (not functional in prototype programs).\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPAPPLY MPAPPLYB", 
+   Level = 101, 
    Text = "Syntax:  mpapply <victim>\
 Syntax:  mpapplyb <victim>\
  \
@@ -7755,8 +7592,8 @@ the character will be sent into the actual game.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPASOUND", 
+   Level = 101, 
    Text = "Syntax: MPASOUND <phrase>\
 \
 Displays a phrase to all surrounding rooms.\
@@ -7765,8 +7602,8 @@ Displays a phrase to all surrounding rooms.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPAT", 
+   Level = 101, 
    Text = "Syntax: MPAT <vnum> <command>\
 \
 Lets the mobile perform a command at another location.\
@@ -7775,8 +7612,8 @@ Lets the mobile perform a command at another location.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPCOMMANDS RPCOMMANDS OPCOMMANDS", 
+   Level = 101, 
    Text = "The following commands can be used for Room, Mob and Object progs. The commands\
 listed at the bottom are for mob progs only. A ** indicates command under \
 development. Each command also has its own help file. Type HELP <COMMAND>.\
@@ -7803,8 +7640,8 @@ See also: MPSTAT, RPSTAT, OPSTAT, MPEDIT, RPEDIT, OPEDIT, TRIGGER, MPTRIGGERS,\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPDAMAGE", 
+   Level = 101, 
    Text = "Syntax:  mpdamage <victim> <amount>\
  \
 This command inflicts a specified amount of damage on the victim.\
@@ -7817,8 +7654,8 @@ A mob should _never_ mpdamage itself, at risk of crashing.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPDEPOSIT MPWITHDRAW", 
+   Level = 101, 
    Text = "Syntax:  mpdeposit <amount>\
 Syntax:  mpwithdraw <amount>\
  \
@@ -7839,8 +7676,8 @@ area in which it is located at the time.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPDREAM", 
+   Level = 101, 
    Text = "Syntax: MPDREAM <name> <phrase>\
 Sends a message to a sleeping character.\
 ", 
@@ -7848,8 +7685,8 @@ Sends a message to a sleeping character.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPECHO", 
+   Level = 101, 
    Text = "Syntax: MPECHO <phrase>\
 \
 Displays a phrase to the entire room.\
@@ -7858,8 +7695,8 @@ Displays a phrase to the entire room.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPECHOAROUND", 
+   Level = 101, 
    Text = "Syntax: MPECHOAROUND <name> <phrase>\
 \
 Displays a phrase to all in the room except victim.\
@@ -7869,8 +7706,8 @@ The abbreviation \"mer\" may be used for mpechoaround.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPECHOAT", 
+   Level = 101, 
    Text = "Syntax: MPECHOAT <name> <phrase>\
 \
 Displays a phrase to only the victim.\
@@ -7880,8 +7717,8 @@ The abbreviation \"mea\" may be used for mpechoat.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPEDIT", 
+   Level = 101, 
    Text = "Syntax:  mpedit <mobile> <command> [number]  [program] [arguments]\
 Syntax:  mpedit <mobile> add       <program> <arguments>\
 Syntax:  mpedit <mobile> insert    <number>  <program> <arguments>\
@@ -7902,8 +7739,8 @@ See MPSTAT, TRIGGER, MPTRIGGERS, MPCOMMANDS, IFCHECKS, IFCHECKS2, VARIABLES\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPFORCE", 
+   Level = 101, 
    Text = "Syntax: MPFORCE <name/all>\
 \
 Forces a player/mob to do a command (non-functional on immortals, all will\
@@ -7913,8 +7750,8 @@ only force all in room).\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPGOTO", 
+   Level = 101, 
    Text = "Syntax: MPGOTO <vnum>\
 \
 Goes to any room which is not private.\
@@ -7923,8 +7760,8 @@ Goes to any room which is not private.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPINVIS", 
+   Level = 101, 
    Text = "Syntax:  mpinvis\
 Syntax:  mpinvis <level>\
  \
@@ -7950,8 +7787,8 @@ creature even if it is invisible.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPJUNK", 
+   Level = 101, 
    Text = "Syntax: MPJUNK <name>\
 \
 Destroys an object in inventory/being worn - can be used with all.object .\
@@ -7960,8 +7797,8 @@ Destroys an object in inventory/being worn - can be used with all.object .\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPKILL", 
+   Level = 101, 
    Text = "Syntax: MPKILL <name>\
 \
 Kills a player without using murder.\
@@ -7970,8 +7807,8 @@ Kills a player without using murder.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPMLOAD MPOLOAD", 
+   Level = 101, 
    Text = "Syntax: MPMLOAD <vnum>\
         MPOLOAD <vnum> [<level> timer]\
 \
@@ -7981,8 +7818,8 @@ Loads a mob or object.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPOPENPASSAGE MPCLOSEPASSAGE", 
+   Level = 101, 
    Text = "Syntax: MPOPENPASSAGE <origin> <destination> <direction>\
 \
 Opens a passage to a room (does not affect pre-existing doors)\
@@ -7996,8 +7833,8 @@ not created with mpopenpassage)\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPPKSET", 
+   Level = 101, 
    Text = "Syntax:  mppkset <victim> yes/no\
  \
 This command tells the mob to set the victim to either deadly or\
@@ -8012,8 +7849,8 @@ Mppkset no will set the victim to non-deadly status.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPPRACTICE", 
+   Level = 101, 
    Text = "Syntax:  mppractice <victim> <skill/power/language> <amount>\
  \
 This command will set the victim's percentage of proficiency in the\
@@ -8028,8 +7865,8 @@ fireball, or a level 1 thief in gouge.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPPURGE", 
+   Level = 101, 
    Text = "Syntax: MPPURGE <object/mobile>\
 \
 Purges the room, or a specified object/mobile.\
@@ -8038,8 +7875,8 @@ Purges the room, or a specified object/mobile.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPRESTORE", 
+   Level = 101, 
    Text = "Syntax:  mprestore <victim> <amount>\
  \
 This command restores a specified number of hitpoints to the victim.\
@@ -8048,8 +7885,8 @@ This command restores a specified number of hitpoints to the victim.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPSLAY", 
+   Level = 101, 
    Text = "Syntax:  mpslay <victim>\
  \
 This command orders the mob to slay the victim in cold blood; the\
@@ -8059,8 +7896,8 @@ victim gets no saving throw.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPSTAT", 
+   Level = 101, 
    Text = "Syntax:  mpstat <mob/mobvnum>\
  \
 Mpstat will display all of the mobprograms that have been written for the\
@@ -8073,8 +7910,8 @@ See MPEDIT, TRIGGER, MPTRIGGERS, MPCOMMANDS, IFCHECKS, IFCHECKS2, VARIABLES\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MPTRANSFER", 
+   Level = 101, 
    Text = "Syntax: MPTRANSFER <name/all>\
 \
 Transfers one or all in the room to a specified location.\
@@ -8083,8 +7920,8 @@ Transfers one or all in the room to a specified location.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MRANGE ORANGE", 
+   Level = 101, 
    Text = "These functions, when complete, will function similarly to 'rat', but\
 will be used to manipulate ranges of mobiles and objects instead of\
 rooms.\
@@ -8093,8 +7930,8 @@ rooms.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MSET RSET", 
+   Level = 101, 
    Text = "Syntax: mset <character> <field> <value>\
 Syntax: rset <location>  <field> <value>\
 \
@@ -8118,8 +7955,8 @@ Also see MMENU, RMENU, and OMENU for the menu editing system.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MSTAT OSTAT RSTAT", 
+   Level = 101, 
    Text = "Syntax:  mstat <character/mob or mobvnum>\
 Syntax:  ostat <object/object vnum>\
 Syntax:  rstat \
@@ -8141,8 +7978,8 @@ See MSET OSET and REDIT\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "MULTIPLAYER MULTIPLAYING MULTI MULTIPLAY", 
+   Level = 1, 
    Text = "&rMultiplaying &Ris illegal here in any way, shape, or form.\
 We only allow one character per player.\
  \
@@ -8162,8 +7999,8 @@ characters WILL be slayed. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "MUSE", 
+   Level = 101, 
    Text = "Syntax:  muse <message>\
  \
 Allows you to use the 'muse' channel, which functions the same as all\
@@ -8176,8 +8013,8 @@ See CSET\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "M_ADVHERO_", 
+   Level = -1, 
    Text = "Well done!\
 \
 ", 
@@ -8185,8 +8022,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "M_BALZHUR_", 
+   Level = -1, 
    Text = "Suddenly you are thrust into the stream of the force, and you find yourself\
 without any means of movement, without means of defense, without means of\
 survival.\
@@ -8204,16 +8041,16 @@ punishment is great... \
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "M_GODLVL10_", 
+   Level = -1, 
    Text = "You are all powerful!\
 ", 
 }
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "M_GODLVL1_", 
+   Level = -1, 
    Text = "...Everything begins to fade to black.\
 \
 You feel yourself leaving your body... rising up into the air, you feel\
@@ -8235,8 +8072,8 @@ You feel yourself losing touch with reality... and all goes quiet.\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "M_GODLVL2_", 
+   Level = -1, 
    Text = "...You begin to feel light-headed.\
 \
 Your hands begin to tingle softly...\
@@ -8255,8 +8092,8 @@ You feel much more powerful, eager and inspired!\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "M_GODLVL3_", 
+   Level = -1, 
    Text = "...You feel slightly faint as your head begins to spin.\
 \
 Your hands begin to tingle once more...\
@@ -8282,56 +8119,56 @@ remains always.\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "M_GODLVL4_", 
+   Level = -1, 
    Text = "You suddenly feel much more powerful!\
 ", 
 }
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "M_GODLVL5_", 
+   Level = -1, 
    Text = "You suddenly feel much more powerful!\
 ", 
 }
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "M_GODLVL6_", 
+   Level = -1, 
    Text = "You suddenly feel much more powerful!\
 ", 
 }
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "M_GODLVL7_", 
+   Level = -1, 
    Text = "You suddenly feel much more powerful!\
 ", 
 }
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "M_GODLVL8_", 
-   Text = "You suddenly feel much more powerful!\
-", 
-}
-
-HelpEntry
-{
    Level = -1, 
-   Keyword = "M_GODLVL9_", 
    Text = "You suddenly feel much more powerful!\
 ", 
 }
 
 HelpEntry
 {
-   Level = 1, 
+   Keyword = "M_GODLVL9_", 
+   Level = -1, 
+   Text = "You suddenly feel much more powerful!\
+", 
+}
+
+HelpEntry
+{
    Keyword = "'NAL HUTTA'", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Y'Toub\
 &CInhabitants &W:&W Evocii, t'landa Til, Hutt\
 &c\
@@ -8364,8 +8201,8 @@ missiles exploded in the atmosphere.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "NAME NAMES", 
+   Level = 0, 
    Text = "&c\
 The name of your character is very important.  As we are trying \
 to keep this a Role Play Mud please pick reasonable names. \
@@ -8383,8 +8220,8 @@ name.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'NAR SHADDAA'", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Y'Toub (Nal Hutta's moon-planet)\
 &CInhabitants &W:&W Evocii, Hutt, Human\
 &c\
@@ -8412,8 +8249,8 @@ Hutta. This also results in two periods of night. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "NAVIGATION", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YRadar \
 &CSyntax &R&W: &YCalculate &R&W<&YCoordinates&R&W> \
 &CSyntax &R&W: &YHyperjump\
@@ -8428,8 +8265,8 @@ Course\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "NEW NEWBIE START BEGIN", 
+   Level = 1, 
    Text = "&WPlease make sure you read everything in the academy before you \
 graduate. It will prepare you to play the game. \
 If you get stuck on anything, use the newbie channel and \
@@ -8460,8 +8297,8 @@ although there are some spread around the other planets. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "NEWBIESET", 
+   Level = 101, 
    Text = "Syntax: newbieset <character>\
 \
 NEWBIESET puts the default (i.e. Darkhaven Academy) equipment into the\
@@ -8471,16 +8308,16 @@ character's inventory.  Recipient must be level 5 or lower.\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "NEWS", 
+   Level = -1, 
    Text = "Listing of recent news\
 ", 
 }
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "NEWSPACE", 
+   Level = 1, 
    Text = "&WChanged help files: \
 &cCourse\
 Calculate\
@@ -8515,8 +8352,8 @@ so I wont explain it here. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "NEWZONES", 
+   Level = 101, 
    Text = "Syntax: newzones [low] [high]\
 Lists the vnum range for rooms/mobs/objects in prototype areas that have been\
 loaded.\
@@ -8525,16 +8362,16 @@ loaded.\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "NMOTD", 
+   Level = -1, 
    Text = "Please read the motd.\
 ", 
 }
 
 HelpEntry
 {
-   Level = 100, 
    Keyword = "NOKILL KILL NO", 
+   Level = 100, 
    Text = "A 'nokill' flag has been added for NAMED mobs. It doesn't make sense\
 for some mobs to die and then suddenly be back alive again ( the ones\
 with names as opposed to ones like anonymous stormtroopers etc ).\
@@ -8548,8 +8385,8 @@ use: mset <mob#> flags nokill\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "NORESOLVE", 
+   Level = 101, 
    Text = "Syntax:  noresolve\
  \
 Toggles resolution of incoming player ip's into names.\
@@ -8559,8 +8396,8 @@ Toggles resolution of incoming player ip's into names.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "NORTH SOUTH EAST WEST UP DOWN", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y north or n\
 &CSyntax &W:&Y south or s\
 &CSyntax &W:&Y east or e\
@@ -8574,8 +8411,8 @@ Use these commands to walk in a particular direction.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "NORTHEAST NORTHWEST SOUTHEAST SOUTHWEST", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y northeast or ne\
 &CSyntax &W:&Y northwest or nw\
 &CSyntax &W:&Y southeast or se\
@@ -8587,8 +8424,8 @@ Use these commands to walk in a particular direction.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "NOTE MESSAGE BOARD BOARDS TERMINALS TERMINAL BOARD", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y note list    &W<number>    &COR &W:&Y message list <number>\
 &CSyntax &W:&Y note read    &W<number>    &COR &W:&Y message read <number>\
 &CSyntax &W:&Y note read all            &COR &W:&Y message read all \
@@ -8630,8 +8467,8 @@ Notes now require a blank message disk to record :) \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "NOTITLE NOEMOTE NOTELL SILENCE UNSILENCE", 
+   Level = 101, 
    Text = "Syntax: notitle <character>\
 Syntax: noemote <character>\
 Syntax: notell  <character>\
@@ -8651,8 +8488,8 @@ notitle on the character again to remove each of those restrictions.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "NPCRACES NPC_RACES", 
+   Level = 101, 
    Text = "A mobile may be any of the following races:\
  \
 human         elf         dwarf        halfling     pixie        vampire   \
@@ -8678,8 +8515,8 @@ See also: ACTFLAGS, SPECFUNCS, SAVINGTHROWS, RIS, \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "OBJECTFLAGS", 
+   Level = 101, 
    Text = "Flags that objects can have:\
  \
 Flag          Affect                Flag          Affect\
@@ -8709,8 +8546,8 @@ covering      items inside this are 'covered', use 'look under <object>' to\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "OBJECTS", 
+   Level = 1, 
    Text = "&c To see the objects you currently posess, type &YINVENTORY&c and\
 &YEQUIPMENT. You may &YGET&c or &YDROP&c an item in a room, if you can\
 carry it. \
@@ -8730,8 +8567,8 @@ detailed form of &YLOOK&c. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "OBJECTTYPES", 
+   Level = 101, 
    Text = "Object types listed in bit order:\
  \
   None        Light     Scroll     Wand        Staff       Weapon\
@@ -8754,8 +8591,8 @@ See OSET ITEMVALUES ARMORCLASS.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "OBJTRIGGERS OPTRIGGERS", 
+   Level = 101, 
    Text = "Trigger Optnl Triggering Variable Explanation\
 ------- ----- ------------------- -----------\
 Wear          <percentage>        [when a player wears the object]\
@@ -8781,8 +8618,8 @@ For objects see also: OPSTAT, OPEDIT, TRIGGER, OPCOMMANDS, IFCHECKS, VARIABLES.\
 
 HelpEntry
 {
-   Level = 105, 
    Keyword = "OGRUB", 
+   Level = 105, 
    Text = "Syntax: ogrub <num of lines> <sort order> [keywords] [operands] \
  \
 ogrub 20 level<8 avg>12 \
@@ -8832,8 +8669,8 @@ See Also: HELP OGRUB DATA\
 
 HelpEntry
 {
-   Level = 105, 
    Keyword = "OGRUB DATA", 
+   Level = 105, 
    Text = "Syntax: ogrub <num of lines> <sort order> [keywords] [operands] \
  \
 Here is some reference data you will need in order to use OGRUB. \
@@ -8876,8 +8713,8 @@ See also: HELP OGRUB \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "OLDCHANGES3", 
+   Level = 1, 
    Text = "You can use a number argument in info, target, etc. 2.barloz, for example.\
 Ships will now drop debris after being blown to pieces. \
 Actions will no longer be seen if a person can not see you <emotes, \
@@ -8904,8 +8741,8 @@ Dismiss will un-dominate mobs with you as their master. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "OLDNEWS", 
+   Level = 101, 
    Text = "&W1)  &YComments &W- Make sure to write a comment when making an action\
                against a player. \
  \
@@ -8935,8 +8772,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "OLDSCORE", 
+   Level = 0, 
    Text = "Syntax: oldscore\
 \
 Oldscore shows the score information in a different way than 'score'.\
@@ -8945,11 +8782,11 @@ Oldscore shows the score information in a different way than 'score'.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "OLIST", 
+   Level = 101, 
    Text = "Syntax: olist\
-      :	olist <first object>\
-      :	olist <first object> <last object>\
+      :\9olist <first object>\
+      :\9olist <first object> <last object>\
 \
 This command will list all of the prototype objects in your area, when used \
 with no arguments.  When used with a single argument it will list all \
@@ -8960,8 +8797,8 @@ it will list all objects including and between the two. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "OMENU", 
+   Level = 101, 
    Text = "Syntax: omenu <object name> [menu page] (defaults to 'a' if none given)\
 \
 Omenu will bring you into a menu system of editing objects.  To use omenu,\
@@ -8975,8 +8812,8 @@ See MENU for generic menu commands.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "OPEDIT", 
+   Level = 101, 
    Text = "Syntax:  opedit <object> <command> [number]  [program] [arguments]\
 Syntax:  opedit <object> add       <program> <arguments>\
 Syntax:  opedit <object> insert    <number>  <program> <arguments>\
@@ -8996,8 +8833,8 @@ See OPSTAT, TRIGGER, OPTRIGGERS, OPCOMMANDS, IFCHECKS, IFCHECKS2, VARIABLES\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "OPEN CLOSE LOCK UNLOCK PICK", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y open   <object|direction>\
 &CSyntax &W:&Y close  <object|direction>\
 &CSyntax &W:&Y lock   <object|direction>\
@@ -9016,8 +8853,8 @@ successfully, you must practice the appropriate skill.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "OPENBAY CLOSEBAY REQUEST", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YOpenbay\
  \
 &CSyntax &R&W: &YClosebay\
@@ -9036,16 +8873,16 @@ autopilot on. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "OPENTOURNEY", 
+   Level = 101, 
    Text = "Not currently functional.\
 ", 
 }
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "OPSTAT", 
+   Level = 101, 
    Text = "Syntax: opstat <object/object vnum>\
  \
 Opstat will display all of the objprograms that have been written for the\
@@ -9058,8 +8895,8 @@ See OPEDIT, TRIGGER, OPTRIGGERS, OPCOMMANDS, IFCHECKS, IFCHECKS2 VARIABLES\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'ORD MANTELL'", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Bright Jewel\
 &CInhabitants &W:&W Human, Savrip\
 &c\
@@ -9089,8 +8926,8 @@ Jabba the Hutt. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "ORDER", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y order <character> command\
 &CSyntax &W:&Y order all command\
  \
@@ -9107,8 +8944,8 @@ If your charmed creature engages in combat, that will break the charm. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "OSET", 
+   Level = 101, 
    Text = "Syntax:  oset <object>    <field> <value>\
          oset object on\
  \
@@ -9144,8 +8981,8 @@ ITEMVALUES, WEAPONTYPES, VARIABLES, OMENU and LAYERING\
 
 HelpEntry
 {
-   Level = 100, 
    Keyword = "OSET_FLAGS OSET_FLAGS OSETFLAGS OFLAGS OFLAG OBJ_FLAGS", 
+   Level = 100, 
    Text = "help oset flags\
 Usage: oset <object> flags <flag> [flag]...\
 1. glow:  Object will glow.\
@@ -9168,8 +9005,8 @@ See also, Help Oset_Flags2\
 
 HelpEntry
 {
-   Level = 100, 
    Keyword = "OSET_FLAGS2 OSET_FLAG2 OSETFLAGS2 OSETFLAG2 OFLAGS2 OFLAG2", 
+   Level = 100, 
    Text = "1. nodrop:  Once in a players inventory, the player cannot drop\
 it.\
 2. antigood:  Object cannot be wielded/worn by a player with positive\
@@ -9202,8 +9039,8 @@ smuggling illegal goods from planet to planet.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "OVERRIDE", 
+   Level = 1, 
    Text = "Syntax: override <ship> <command>\
  \
 Override is similar to REQUEST, except it has more options.\
@@ -9218,8 +9055,8 @@ stop - Stops ship\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "OWHERE MWHERE", 
+   Level = 101, 
    Text = "Syntax:  owhere <object keyword>\
 Syntax:  mwhere <mob keyword>\
  \
@@ -9233,8 +9070,8 @@ See VSEARCH\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "PARDON", 
+   Level = 101, 
    Text = "Syntax: pardon <character> killer\
 Syntax: pardon <character> thief\
 \
@@ -9244,8 +9081,8 @@ PARDON pardons a player for their crimes.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "PARRY", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y <automatic>\
 &c\
 This skill wards off incoming attacks, taking no damage from them.  Use of\
@@ -9256,8 +9093,8 @@ lightsaber to parry.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "'PASS DOOR'", 
+   Level = 0, 
    Text = "Syntax: feel 'pass door'\
 \
 This power enables the caster to pass through closed doors.\
@@ -9266,8 +9103,8 @@ This power enables the caster to pass through closed doors.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "PASSWORD", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y password <old-password> <new-password>\
  \
 PASSWORD &cchanges your character's password.  The first argument must be\
@@ -9283,8 +9120,8 @@ letters) as they are harder to guess.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "PC NPC", 
+   Level = 1, 
    Text = "PC      =  player character\
 NPC     =  non-player character\
 ", 
@@ -9292,8 +9129,8 @@ NPC     =  non-player character\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "PEACE", 
+   Level = 101, 
    Text = "Syntax: peace\
 \
 PEACE causes all characters in a room to stop fighting.\
@@ -9302,8 +9139,8 @@ PEACE causes all characters in a room to stop fighting.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "PEEK", 
+   Level = 0, 
    Text = "&CSyntax &R&W: &YAutomatic\
  \
 &cThis skill shows you a player or mob's inventory when you look at them. \
@@ -9313,8 +9150,8 @@ Use of this skill is automatic once you have practice it.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "PET PETS", 
+   Level = 0, 
    Text = "You can buy pets in the pet shop.  You may buy one more pet each time you\
 advance in level.  Your pet-buying opportunities do not accumulate; use them or\
 lost them.  This policy prevents wholesale abuse of pets.\
@@ -9323,8 +9160,8 @@ lost them.  This policy prevents wholesale abuse of pets.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'PICK LOCK'", 
+   Level = 1, 
    Text = "Syntax : Pick (direction)\
 \
 This skill enables you to pick open locked doors.\
@@ -9333,8 +9170,31 @@ This skill enables you to pick open locked doors.\
 
 HelpEntry
 {
+   Keyword = "'PICK LOCK' PICKLOCK PICK", 
    Level = 1, 
+   Text = "&CSyntax &W:&Y Pick <direction>\
+&c\
+This skill enables you to pick open locked doors.\
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'PICK SHIP LOCK' PICKSHIP PICKSHIPLOCK", 
+   Level = 1, 
+   Text = "&CSyntax &R&W: &YPick &R&W<&YShip&R&W>\
+ \
+&cA useful skill if you wish to get into someone's ship. \
+ \
+&RNote:&r You need to have &YPick Lock&r practiced at least once, in order\
+for &YPick Ship Lock&r to work.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "PILOT PILOTING", 
+   Level = 1, 
    Text = "&R&cPiloting is one of the more popular classes.  One of the more fun\
 features of the Star Wars Reality codebase is its space system, and\
 especially its space combat.  The piloting class gives you not only the\
@@ -9362,8 +9222,8 @@ Cruiser to one of the faction clan's custom ships.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "PIRATE PIRATING", 
+   Level = 0, 
    Text = "&g Pirates are allowed to raid ships belonging to other players with intent\
 of looting cargo and credits. They are allowed to disable the ship in\
 order to gain  access, but not to kill the individual. Pirates can &RNOT&g\
@@ -9374,8 +9234,8 @@ result in punishment to be determined by the Admin.  \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "PLACEVENDOR", 
+   Level = 1, 
    Text = "&CSyntax: &Yplacevendor\
 &c \
 When standing in an empty player shop, you can type this to place your\
@@ -9385,8 +9245,8 @@ vendor.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "'PLANT PASS'", 
+   Level = 0, 
    Text = "Syntax:  cast 'plant pass' <victim>\
  \
 This power allows the caster to merge with nearby foliage, and flow though\
@@ -9399,8 +9259,8 @@ caster's and the victim's location.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "PLAYERSHOPS", 
+   Level = 1, 
    Text = "&c\
 In certain rooms of the game, you can buy a shop.  Using 4 commands,\
 you can price items and collect the credits they get for any items you\
@@ -9412,8 +9272,8 @@ give them.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "POISON", 
+   Level = 0, 
    Text = "Syntax: feel poison <victim>\
 \
 This power reduces the strength of the victim by two, as well as reducing the\
@@ -9423,8 +9283,8 @@ victim's regeneration rate.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "'POISON WEAPON'", 
+   Level = 0, 
    Text = "&CSyntax &R&W: &YPoison &R&W<&YWeapon&R&W>\
 \
 &YPoison weapon&c is a skill that enables you to coat the tip of your\
@@ -9437,8 +9297,8 @@ you must have the weapon, poison, and a full canteen in your inventory.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "'POSSESS'", 
+   Level = 101, 
    Text = "Syntax:  cast 'possess' <mob>\
  \
 This power enables you to switch into a mob for a short amount of time.\
@@ -9447,8 +9307,19 @@ This power enables you to switch into a mob for a short amount of time.\
 
 HelpEntry
 {
+   Keyword = "'POST GUARD' POSTGUARD", 
    Level = 1, 
+   Text = "&CSyntax &W: &YPostGuard \
+  \
+&cThis posts a guard from your clan or organization at your location. \
+These guards will attack other clanned members beside your own. \
+", 
+}
+
+HelpEntry
+{
    Keyword = "PRACTICE", 
+   Level = 1, 
    Text = "&CSyntax &W: &YPRACTICE &R&W<&YSkill/Power/Weapon&R&W> \
  \
 &YPRACTICE&c alone, without an argument, tells you your current ability in\
@@ -9465,8 +9336,8 @@ skill, one can get it at 100% &R(Adept)&c.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "PRICEVENDOR", 
+   Level = 1, 
    Text = "&CSyntax: &Ypricevendor &w<&Yitem&w> <&Ycost&w>\
 &c \
 After giving your vendor an item, you need to price it. The item WILL NOT\
@@ -9477,8 +9348,8 @@ may not show up in the list.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "PROMPT", 
+   Level = 0, 
    Text = "Syntax: prompt <string>\
  \
 Sets your prompt to a given string.\
@@ -9525,8 +9396,8 @@ Please see HELP COLORS for a list of the color tokens.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "PROPAGANDA", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YPropaganda &R&W<&YCitizen&R&W> \
  \
 &cThis increases your clan's popular support if they control the planet or\
@@ -9537,8 +9408,18 @@ conversation. \
 
 HelpEntry
 {
-   Level = 0, 
+   Keyword = "'PROTECTION FROM DARKNESS'", 
+   Level = 1, 
+   Text = "Syntax : feel 'protection from darkness' <target>\
+\
+Protect users from the darkside for a limited period.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "PROTECTION SANCTUARY", 
+   Level = 0, 
    Text = "Syntax: feel protection\
 Syntax: feel sanctuary  <character>\
 \
@@ -9554,8 +9435,8 @@ These powers may be used simultaneously for cumulative effect.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "PROTOCOL DROID 'PROTOCOL DROID'", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Various\
 &c\
      A humanoid robot programmed in diplomacy, interpretation, and \
@@ -9569,8 +9450,8 @@ are trying to interact. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "PULL PUSH LEVERS PULLCHAINS SWITCHES BUTTONS", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y pull <trigger>\
 &CSyntax &W:&Y push <trigger> \
 &c\
@@ -9582,8 +9463,8 @@ another location, cast a power, summon a monster... you name it!\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "PUNCH", 
+   Level = 0, 
    Text = "&R&CSyntax &R&W: &YPunch\
 \
 &R&cThis skill can only be used during combat.  It allows you to attempt to\
@@ -9596,8 +9477,8 @@ punch the victim.  The skill is like kick.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "PURGE", 
+   Level = 101, 
    Text = "Syntax: purge\
 Syntax: purge <character>\
 \
@@ -9611,8 +9492,8 @@ PURGE will not get rid of PC's.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "QPSET", 
+   Level = 101, 
    Text = "This command is used for giving/taking Glory from players.  The syntax \
 is as follows:\
  \
@@ -9625,8 +9506,8 @@ integer.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "QUAFF", 
+   Level = 0, 
    Text = "Syntax:  quaff  <potion>                (to quaff potions)\
          quaff  <potion> <container>    (quaff directly from container)\
 \
@@ -9638,8 +9519,8 @@ See EAT, DRINK\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "QUARREN", 
+   Level = 0, 
    Text = "&COrigin: &cMon Calamari \
 \
 &c     Quarren is a species named for the aliens who are commonly called\
@@ -9671,8 +9552,8 @@ slavers, crime lords, smugglers, and other unsavory sorts. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "QUEST", 
+   Level = 0, 
    Text = "&CSyntax: &YQUEST &Y<&Wmessage&Y> \
  \
 &cThis is a channel, typically used when a quest is being held, to notify\
@@ -9697,8 +9578,8 @@ you can use.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "QUESTMASTER", 
+   Level = 1, 
    Text = "&YSee &PHelp Quest&R&W\
  \
 ", 
@@ -9706,8 +9587,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "QUIT", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y QUIT \
  \
 &YQUIT&c leaves the game. In an effort to provide realism in &WRise in\
@@ -9729,8 +9610,8 @@ The sleeping compartment on the &CPLUOGUS&c.&W \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "RACE RACES", 
+   Level = 1, 
    Text = "&W0.  &cHuman                &W19. &cDevaronian\
 &W1.  &cWookiee              &W20. &cGotal\
 &W2.  &cTwi'lek              &W21. &cDroid\
@@ -9756,8 +9637,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RANK", 
+   Level = 101, 
    Text = "Syntax:  rank <argument>\
  \
 Allows the character to change the text of their 'rank' on the who listing.\
@@ -9767,8 +9648,8 @@ Allows the character to change the text of their 'rank' on the who listing.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RASSIGN MASSIGN OASSIGN", 
+   Level = 101, 
    Text = "Syntax:  rassign <character> <begin vnum range> <end vnum range>\
  \
 These commands allow you to assign a range of vnums to an immortal for\
@@ -9796,8 +9677,8 @@ See CHECKVNUMS, ZONES, NEWZONES, VNUMS\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RAT", 
+   Level = 101, 
    Text = "Syntax: rat vnum1 vnum2 command [parameters]\
  \
 Rat, or 'range at' is the at command with the added parameters of two\
@@ -9811,8 +9692,8 @@ This will clear the room flags in all rooms from 100 to 110 inclusive.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RDELETE MDELETE ODELETE", 
+   Level = 101, 
    Text = "Syntax:  rdelete <vnum>\
 Syntax:  mdelete <vnum>\
 Syntax:  odelete <vnum>\
@@ -9825,8 +9706,8 @@ They are not currently functional.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "REBELRANKS", 
+   Level = 1, 
    Text = "These are the typical Rebel military ranks. \
 Yes, we stole these from Sote. \
  \
@@ -9856,8 +9737,8 @@ Yes, we stole these from Sote. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "REBOOT SHUTDOWN WIZLOCK", 
+   Level = 101, 
    Text = "Syntax: reboot <nosave>\
 Syntax: shutdown <nosave>\
 Syntax: wizlock\
@@ -9880,8 +9761,8 @@ save all of the players.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "REDIT", 
+   Level = 101, 
    Text = "Syntax: REDIT FIELD [parameter list]\
 \
 FIELD  | PARAMETERS             -- DESCRIPTION / NOTES\
@@ -9908,8 +9789,8 @@ See EXITTYPES, EXFLAGS, EXITMAKING, SECTORTYPES and ROOMFLAGS.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "REDRAW", 
+   Level = 101, 
    Text = "Syntax: redraw\
 \
 This will redraw the whole screen, and update the menu that is being worked\
@@ -9921,8 +9802,8 @@ See REFRESH.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "REFRESH", 
+   Level = 1, 
    Text = "Syntax: feel refresh <character>\
 \
 This power refreshes the movement points of a character who is out of movement\
@@ -9932,8 +9813,8 @@ points.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "REGOTO", 
+   Level = 101, 
    Text = "Syntax:  regoto\
  \
 Returns an immortal to the previous roomvnum from which that immortal\
@@ -9945,8 +9826,8 @@ See GOTO\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "REINFORCEMENTS", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YReinforcements\
  \
 &cThis skill allows you to call troops for you to command.\
@@ -9957,8 +9838,28 @@ HelpEntry
 
 HelpEntry
 {
+   Keyword = "'REMOVE MASKING'", 
    Level = 1, 
+   Text = "Syntax : feel 'remove masking' <victim>\
+\
+Makes victim visible.\
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'REMOVE TRAP'", 
+   Level = 1, 
+   Text = "Syntax : feel 'remove trap' <target>\
+\
+Remove trap.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "REMPILOT ADDPILOT", 
+   Level = 1, 
    Text = ".\
 &CSyntax : &YAddpilot (name)\
 &CSyntax : &YRempilot (name)\
@@ -9973,8 +9874,8 @@ This must be done in the cockpit of the ship\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "REPAIR", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y   repair <object>\
           repair all\
 &c \
@@ -9989,8 +9890,8 @@ once.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "REPAIRSET", 
+   Level = 101, 
    Text = "Syntax:  repairset <mobile vnum> <field> <value>\
  \
 This command allows you to set the following fields for repair shops:\
@@ -10015,8 +9916,8 @@ See MAKEREPAIR, REPAIRSTAT and REPAIRSHOPS\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "REPAIRSHIP", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YRepairship &R&W<&YShip Part&R&W> \
  \
 &cTo use this skill, you must have &Yship maintenance&c and be in the\
@@ -10027,8 +9928,8 @@ engine room of a ship.  With it, you can repair 6 areas of a damaged ship:\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "REPAIRSHOPS", 
+   Level = 101, 
    Text = "Syntax: repairshops\
 \
 Displays statistics on all the repair shops.\
@@ -10039,8 +9940,8 @@ See MAKEREPAIR, REPAIRSET and REPAIRSTAT.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "REPAIRSTAT", 
+   Level = 101, 
    Text = "Syntax: repairstat <mobile vnum>\
 \
 Shows statistics on a mobile's repair shop.\
@@ -10051,8 +9952,8 @@ See MAKEREPAIR, REPAIRSET and REPAIRSHOPS.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'REPORT' 'TIME' 'WEATHER'", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y report\
 &CSyntax &W:&Y time\
 &CSyntax &W:&Y weather\
@@ -10070,8 +9971,8 @@ to see the weather. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RESET RESETS", 
+   Level = 101, 
    Text = "Syntax: reset list   [start] [end]\
 Syntax: reset delete [number]\
 Syntax: reset add    <command> <parameters>\
@@ -10095,8 +9996,8 @@ See INSTAROOM, INSTAZONE and RESETCMDS\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RESETCMDS RESETCOMMANDS", 
+   Level = 101, 
    Text = "Syntax: reset edit   <number> <commands>\
 Syntax: reset insert <number> <commands>\
 Syntax: reset add    <commands>\
@@ -10122,8 +10023,8 @@ See RESETS, INSTAROOM and INSTAZONE\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "REST SLEEP STAND WAKE", 
+   Level = 0, 
    Text = "Syntax: rest\
 Syntax: sleep\
 Syntax: stand\
@@ -10141,8 +10042,18 @@ also WAKE other sleeping characters.\
 
 HelpEntry
 {
-   Level = 101, 
+   Keyword = "RESTORATION", 
+   Level = 1, 
+   Text = "Syntax : feel 'restoration'\
+\
+Requires two people to cast and heals one target.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "RESTORE", 
+   Level = 101, 
    Text = "Syntax:  restore <victim>\
 Syntax:  restore all\
  \
@@ -10165,8 +10076,8 @@ See RESTORETIME\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RESTORETIME", 
+   Level = 101, 
    Text = "Syntax:  restoretime\
  \
 Displays the last 'restore all' performed by you, as well as the last\
@@ -10178,8 +10089,8 @@ See RESTORE\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RESTRICT", 
+   Level = 101, 
    Text = "Syntax:  restrict <command> <level>\
 Syntax:  restrict <command> show\
 \
@@ -10197,8 +10108,8 @@ See CEDIT\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RETIRE", 
+   Level = 101, 
    Text = "Syntax:  retire <immortal>\
  \
 This command will 'retire' an active immortal and place them on the\
@@ -10218,8 +10129,8 @@ To bring an immortal out of retirement, simply 'retire immortal' again.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RETRAN", 
+   Level = 101, 
    Text = "Syntax: retran <player>\
  \
 This command will return that player or mob to the room from which\
@@ -10229,8 +10140,8 @@ you last transferred it from.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "RIP", 
+   Level = 0, 
    Text = "Syntax: rip <on/off>\
 \
 The rip command will either enable or disable rip graphics.  Rip graphics \
@@ -10240,8 +10151,8 @@ will only work provided you are using a rip compatible terminal program.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RIS RESISTANT IMMUNE SUSCEPTIBLE", 
+   Level = 101, 
    Text = "Players and mobiles may have resistance, suceptibility or immunity to\
 certain types of attack:\
 \
@@ -10254,11 +10165,11 @@ PARALYSIS\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RLIST", 
+   Level = 101, 
    Text = "Syntax: rlist\
-      :	rlist <first room>\
-      :	rlist <first room> <last room>\
+      :\9rlist <first room>\
+      :\9rlist <first room> <last room>\
 \
 This command will list all of the prototype rooms in your area, when used \
 with no arguments.  When used with a single argument it will list all \
@@ -10269,8 +10180,8 @@ it will list all rooms including and between the two. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RMENU", 
+   Level = 101, 
    Text = "Syntax: rmenu [menu letter] (defaults to 'a' if none given)\
 \
 Rmenu will bring you into a menu system of editing rooms.  To use rmenu, you\
@@ -10284,8 +10195,8 @@ See MENU for generic menu commands.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ROCHE", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Roche\
 &CInhabitants &W:&W Verpine, Barabels, Kubaz\
 &c\
@@ -10301,8 +10212,8 @@ base for Ackbar's Project Shantipole \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "RODIAN RODIANS RODIA", 
+   Level = 0, 
    Text = "&COrigin: &YRodia\
  \
 &c     Rodians are a humanoid species with multifaceted eyes, a tapirlike\
@@ -10324,8 +10235,8 @@ and wide, seeking work as mercenaries, assassins, body guards, and\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "ROLEPLAY RP", 
+   Level = 0, 
    Text = "&c\
 Now that we have a bigger player base, we are starting to enforce RP. We\
 are nowhere near as strict as some muds; you can tell each other ooc and\
@@ -10358,8 +10269,8 @@ clearly.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ROLEPLAY2", 
+   Level = 1, 
    Text = "Ok, it has come to my attention that some people have chosen to become\
 'experiements' lose from a particular clan. From now on, these backgrounds\
 will not be excepted unless they rper has recieved permission from the\
@@ -10372,8 +10283,8 @@ it avoids information problems.  Consider this a rule.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ROOMFLAGS", 
+   Level = 101, 
    Text = "FLAG NAME     |  BITVECTOR  |  DESCRIPTION\
 ----------------------------------------------------------------------\
 DARK          |          1  |  Room is always dark \
@@ -10408,8 +10319,8 @@ PROTOTYPE     | 1073741824  |  Room is a prototype, (under construction)\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ROOMTRIGGERS RPTRIGGERS", 
+   Level = 101, 
    Text = "Trigger Optnl Triggering Variable Explanation\
 ------- ----- ------------------- -----------\
 Act      {p}  <keyword / phrase>  [emotes, socials, actions, bamfs]\
@@ -10436,8 +10347,8 @@ For mobs, see also: MPSTAT, MPEDIT, TRIGGER, MPCOMMANDS, IFCHECKS, VARIABLES.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "ROSTER", 
+   Level = 1, 
    Text = "&YSyntax: Roster\
  \
 &cThis is a clan command, you must already be bestowed with the roster\
@@ -10448,8 +10359,8 @@ such as a trooper claiming he's yours.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "RP2", 
+   Level = 0, 
    Text = "What is roleplay?   Well its about time some of you asked. First, as\
 mentioned in help rp, rp is NOT discussing ooc stuff with your friends. \
 It is not talking in a room about races or stats or ships or any other\
@@ -10480,8 +10391,8 @@ something we arent. Hopefully this helps.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RPEDIT", 
+   Level = 101, 
    Text = "Syntax:  rpedit <command> [number]  [program] [arguments]\
 Syntax:  rpedit add       <program> <arguments>\
 Syntax:  rpedit insert    <number>  <program> <arguments>\
@@ -10501,8 +10412,8 @@ See RPSTAT, TRIGGER, RPTRIGGERS, RPCOMMANDS, IFCHECKS, IFCHECKS2, VARIABLES\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RPSTAT", 
+   Level = 101, 
    Text = "Syntax:  rpstat\
  \
 Rpstat will display all of the roomprograms that have been written for a \
@@ -10516,8 +10427,8 @@ See RPEDIT, TRIGGER, RPTRIGGERS, RPCOMMANDS, IFCHECKS, IFCHECKS2, VARIABLES\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "RRESET", 
+   Level = 101, 
    Text = "Syntax: rreset <list|edit|delete|add|insert|place>\
 Syntax: rreset remove <#>\
 Syntax: rreset mobile <mob#> [limit]\
@@ -10538,8 +10449,8 @@ Syntax: rreset random <last dir>\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "RYLOTH", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Ryloth\
 &CInhabitants &W:&W Twi'lek, Rycrit\
 &c\
@@ -10557,8 +10468,8 @@ orbited by five, red-colored moons. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SABOTAGE", 
+   Level = 1, 
    Text = "&c\
 A level 120 engineering skill, sabotage works exactly  \
 like repairship. Except for the fact that it damages \
@@ -10568,8 +10479,8 @@ instead of repairs, of course. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SALARY", 
+   Level = 1, 
    Text = ". Salary is given once every real time day. It is taken directly out of\
 clan funds, so dont be overgenerous!\
 ", 
@@ -10577,8 +10488,8 @@ clan funds, so dont be overgenerous!\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SAVE", 
+   Level = 1, 
    Text = "Syntax:  Save\
  \
 SAVE saves your character and its inventory; you must be at least second\
@@ -10596,8 +10507,8 @@ Some objects (such as keys) may not be saved.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SAVEAREA LOADAREA", 
+   Level = 101, 
    Text = "Syntax: savearea\
         loadarea\
 \
@@ -10612,8 +10523,8 @@ See also BESTOWAREA, AASSIGN\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SAVINGTHROWS", 
+   Level = 101, 
    Text = "Saving throws:\
   sav1 - Saving vs. poison or death\
   sav2 - Saving vs. wands\
@@ -10627,8 +10538,8 @@ See MSET or type MSET by itself.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'SCAN'", 
+   Level = 1, 
    Text = "&R&CSyntax &R&W: &YScan &R&W<&R&YDirection&R&W> \
 \
 &R&cThis skill enables you to look for people in the rooms in the direction\
@@ -10640,8 +10551,18 @@ see.  The type of area you are in is also taken into account. \
 
 HelpEntry
 {
+   Keyword = "'SCORCHING SURGE'", 
    Level = 1, 
+   Text = "Syntax : feel 'scorching surge' <victim>\
+\
+Cause great harm to victim.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "SCORE", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y score\
  \
 SCORE&c is a sheet filled with your characters statistics.  When you type\
@@ -10652,8 +10573,8 @@ others see your characters health, you can type &YREPORT&c. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "SEARCH", 
+   Level = 0, 
    Text = "&CSyntax &R&W: &YSearch\
          Search &R&W<&YContainer&R&W>\
  \
@@ -10664,8 +10585,8 @@ concealed or hidden, and will require some searching to find.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "'SECOND ATTACK' 'THIRD ATTACK' 'FORTH ATTACK' 'FIFTH ATTACK'", 
+   Level = 0, 
    Text = "&R&CSyntax &R&W: &YAutomatic\
 \
 &R&cThese skills let you attack more than once during a round of combat. \
@@ -10677,8 +10598,8 @@ have mastered &Ysecond attack&R&c, although it isn't efficient to do so. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SECTORTYPES", 
+   Level = 101, 
    Text = "INSIDE              0\
 CITY                1\
 FIELD               2\
@@ -10698,8 +10619,8 @@ UNDERGROUND        13\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SEDIT", 
+   Level = 101, 
    Text = "View, create, edit or delete socials online.\
 Sytanx:  sedit <social>\
 Syntax:  sedit <social> [field]\
@@ -10728,8 +10649,8 @@ Use sedit save to save the new social or changes to existing socials.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SEDUCE", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YSeduce &R&W<&YName&R&W>\
  \
 &cForces a mob or a player to follow you.  Seduce will not work if the mob\
@@ -10739,8 +10660,8 @@ is charmed by another player.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'SEE MASKING' SEEMASKING", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YSeeMasking\
 \
 &cThis skill allows you to see things that are masked (invisible), both\
@@ -10754,8 +10675,8 @@ so be sure to RP the matter correctly.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SELLHOME", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y sellhome\
 &c\
 &YSELLHOME&c allows you to sell your apartment (should you be inside it),\
@@ -10765,8 +10686,8 @@ and recieve half the price you purchased it for.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SELONIAN SELONIANS", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Selonia\
 &c\
      One of the three primary races in the Corellian System, the \
@@ -10803,10 +10724,10 @@ auditory anomalies caused by the burrows. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SETBOOT", 
+   Level = 101, 
    Text = "Syntax: setboot time <hour> <minute>\
- 	setboot manual <0|1>\
+ \9setboot manual <0|1>\
 \
 The setboot command is useful for planning a reboot, (to save you from \
 the trouble of all those echos :) ) and for the daily boot.  The manual\
@@ -10826,8 +10747,8 @@ and are repeated at t minus 15, 10, 5, 4, 3, 2 and 1 minute(s). \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SETCLAN", 
+   Level = 101, 
    Text = "This command is used to define clan, Order and guild files.  The\
 filename\
 field must be defined before other fields can be entered.\
@@ -10870,8 +10791,8 @@ See SHOWCLAN, MAKECLAN\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SETCOUNCIL", 
+   Level = 101, 
    Text = "Syntax:  setcouncil <council> <field> <deity|leader|number1|number2> <player>\
 Field being one of:\
  name     - name of the council\
@@ -10893,8 +10814,8 @@ See SHOWCOUNCIL, MAKECOUNCIL\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "SHIELD", 
+   Level = 0, 
    Text = "Syntax: feel shield\
 \
 These powers protect the caster by decreasing (improving) the caster's armor\
@@ -10904,8 +10825,8 @@ class.  SHIELD provides 20 points of armor.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'SHIP DOCKING' DOCK DOCKING UNDOCK UNDOCKING", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YDock &R&W<&YShip&R&W>\
 &CSyntax &R&W: &YUndock \
  \
@@ -10931,8 +10852,34 @@ SEE ALSO: &WAUTOPILOT BOARD \
 
 HelpEntry
 {
+   Keyword = "'SHIP MAINTENANCE'", 
    Level = 1, 
+   Text = "&cThis provides you with the ability to &YRepairShip&c. \
+  \
+&RAlso see&W: &PHelp RepairShip, Help Ships \
+", 
+}
+
+HelpEntry
+{
+   Keyword = "'SHIP SYSTEMS' STATUS", 
+   Level = 1, 
+   Text = "&CSyntax &W: &YStatus \
+&CSyntax &W: &YStatus <ship> \
+  \
+&cThis skill allows you to check your ship's current status.  You can also\
+see the status of other ships during spaceflight, provided they're in\
+range. You must be in either the pilot, copilot, gunner, or navigator's\
+seat.\
+  \
+&RAlso see&W: &PHelp Ships \
+", 
+}
+
+HelpEntry
+{
    Keyword = "SHIPALARM SHIPALARMS", 
+   Level = 1, 
    Text = "&cPreviously, when a ship was unsuccessfully picked or successfully\
 hijacked, all players currently connected to the game were notified.\
 Furthermore, when a ship was unsucccessfully picked, the name of the\
@@ -10951,8 +10898,8 @@ described above. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SHIPTRACK", 
+   Level = 1, 
    Text = "&cThis is a command that allows you to use the coords \
  \
  \
@@ -10973,8 +10920,8 @@ check your radar. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SHISTAVANEN SHISTA WOLFMEN", 
+   Level = 1, 
    Text = "&COrigin: &YUvena\
 &c\
      A race of wolf-like bipeds whose eyes glow red, the Shistavenen\
@@ -10991,8 +10938,18 @@ times, in an effort to explore the farthest reaches of the galaxy.\
 
 HelpEntry
 {
-   Level = 0, 
+   Keyword = "'SHOCKING GRASP'", 
+   Level = 1, 
+   Text = "Syntax : feel 'shocking grasp' <victim>\
+\
+Send small lightning bolts through victim from your hands.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "'SHOCKSHIELD'", 
+   Level = 0, 
    Text = "Syntax: feel 'shockshield'\
 \
 This power will surround you with a shield of electric energy that will\
@@ -11002,8 +10959,8 @@ return your enemies attacks with bolts of lightning!\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SHOPS", 
+   Level = 101, 
    Text = "Syntax: shops\
 \
 Displays statistics on all the shops.\
@@ -11014,8 +10971,8 @@ See MAKESHOP, SHOPSET, SHOPSTAT and SHOPVALUES\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SHOPSET", 
+   Level = 101, 
    Text = "Syntax: shopset <mobile vnum> <field> <value>\
 \
 -----------------------------------------------\
@@ -11037,8 +10994,8 @@ see MAKESHOP, SHOPSTAT, SHOPS and SHOPVALUES\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SHOPSTAT", 
+   Level = 101, 
    Text = "Syntax: shopstat <mobile vnum>\
 \
 Shows statistics on a mobile's shop.\
@@ -11049,8 +11006,8 @@ See MAKESHOP, SHOPSET, SHOPS and SHOPVALUES\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SHOPVALUES", 
+   Level = 101, 
    Text = "Syntax: shopset <mobile vnum> buy# <value>\
  \
 1  - light               21 - pen                41 - rune\
@@ -11087,8 +11044,8 @@ WITH IT))\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "SHOVE DRAG", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y  drag <character> <direction>\
 &CSyntax &W:&Y  shove <character> <direction>\
  \
@@ -11104,8 +11061,8 @@ either leave of their own choice or they shove/drag another player. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SHOWCLAN", 
+   Level = 101, 
    Text = "Syntax:  showclan <clan/order/guild name>\
 Example: showclan guild of mages, showclan Retribution\
  \
@@ -11118,8 +11075,8 @@ See SETCLAN, MAKECLAN and CLANS\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SHOWGUILD", 
+   Level = 101, 
    Text = "Syntax: showguild 'guild of <guild name>'\
  \
 Displays the statistics on a guild.\
@@ -11128,8 +11085,8 @@ Displays the statistics on a guild.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SHOWSTAT SHOWSTATISTIC", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y showstat <race>\
 &CSyntax &W:&Y showstat <profession>\
  \
@@ -11145,8 +11102,8 @@ profession, so the player can compare what is best for them.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "SIT", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y sit\
 &c\
 Sit makes your character sit down.\
@@ -11155,8 +11112,8 @@ Sit makes your character sit down.\
 
 HelpEntry
 {
-   Level = 100, 
    Keyword = "SIZE EQ_SIZE", 
+   Level = 100, 
    Text = "There are now four sizes of EQ: small_size, human_size, large_size and\
 hutt_size. Please set one of these flags for all eq .. you'll have to\
 do it online. Heres the race breakdown for who can use what: \
@@ -11170,8 +11127,8 @@ See also help Oset and help Layers.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SKILLS", 
+   Level = 1, 
    Text = "&cType &YPRACTICE&c to get a list of skills currently available to you and\
 to see to what extent you have them practiced.  Type &YSLIST&c to view a\
 list of all skills available at each level to your class. \
@@ -11180,8 +11137,8 @@ list of all skills available at each level to your class. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SKIN", 
+   Level = 1, 
    Text = ".\
 &CSyntax &W:&Y skin (corpse)\
  \
@@ -11193,8 +11150,8 @@ something to cut with.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SLAY SLA", 
+   Level = 101, 
    Text = "Syntax:  slay <victim> [immolate/shatter/demon]\
  \
 SLAY kills a character in cold blood, no saving throw.\
@@ -11211,8 +11168,8 @@ death to the mobile and may not return accurate results.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "SLEEP", 
+   Level = 0, 
    Text = "Syntax: feel sleep <victim>\
 \
 This power puts its victim to sleep.\
@@ -11221,16 +11178,16 @@ This power puts its victim to sleep.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "SLINK", 
+   Level = 0, 
    Text = "This power makes you more dexterous for its duration.\
 ", 
 }
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "SLIST", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y SLIST\
 &CSyntax &W:&Y SLIST &W<&Ylo&W> <&Yhi&W>&Y\
  \
@@ -11252,8 +11209,8 @@ available to all classes from levels &Wlo &cto &Whi&c. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SLOOKUP", 
+   Level = 101, 
    Text = "Syntax: slookup <skill-or-power>\
 Syntax: slookup all\
 \
@@ -11268,8 +11225,8 @@ SLOOKUP ALL shows this information for all skills and powers.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SMALLTALK", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YSmalltalk &R&W<&YCitizen&R&W>\
  \
 &cIncreases support for your organization on planets they control.  Actual\
@@ -11280,8 +11237,8 @@ that you do not control, lowers support.\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "SMAUG THORIC", 
+   Level = -1, 
    Text = ".           [S]imulated [M]edieval multi-[U]ser [A]dventure game\
 \
 SMAUG is an ongoing project headed up by Derek Snider (Thoric), who has\
@@ -11293,8 +11250,8 @@ taken on several assistants in expanding and improving the code.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SMAUGSPELLS", 
+   Level = 101, 
    Text = "SMAUG has a specially coded power type \"power_smaug\", which is a generic\
 power handler that uses the extra power fields to determine what the power\
 is going to achieve.\
@@ -11320,8 +11277,8 @@ value     an extra field reserved for things like the vnum used in powers\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "SMUGGLING SMUGGLER SMUGGLE", 
+   Level = 0, 
    Text = "&c &cThose that choose the smuggling profession have many abilities that\
 others do not have.  The ability to pick doors, and even ships.  These,\
 coupled with the ability to hide and sneak by others, makes the smuggler a\
@@ -11346,8 +11303,8 @@ place to another without getting caught.  \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SNIPE", 
+   Level = 1, 
    Text = "&R&CSyntax &R&W: &R&YSnipe &R&W<&R&YDirection&R&W> <&R&YTarget&R&W> \
 \
 &R&cThis skill allows you to engage enemies at long distance, using a\
@@ -11358,8 +11315,8 @@ blaster. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SOBER", 
+   Level = 101, 
    Text = "Syntax:  sober <victim>\
  \
 Removes a character's inebriation and all affects of alcohol.\
@@ -11368,8 +11325,19 @@ Removes a character's inebriation and all affects of alcohol.\
 
 HelpEntry
 {
+   Keyword = "'SPACE COMBAT 1' 'SPACE COMBAT 2' 'SPACE COMBAT 3'", 
    Level = 1, 
+   Text = "&CSyntax &R&W: &YAutomatic \
+  \
+&R&cThese skills increase the damage you do in ships. They act like\
+enhanced damage, except for ships.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "SPACE SHIP SHIPS FLIGHT SPACECRAFT", 
+   Level = 1, 
    Text = "The following are commands you can use to control spacecraft: \
 &z.\
 &COn the Ground:\
@@ -11409,8 +11377,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SPACETALK SHIPTALK SYSTEMTALK", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y Spacetalk <message>\
 &CSyntax &W:&Y Systemtalk <message>\
 &CSyntax &W:&Y Shiptalk <message>\
@@ -11429,8 +11397,8 @@ this command. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "SPEAK", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y speak\
 &CSyntax &W:&Y speak <language>\
 &CSyntax &W:&Y speak all (immortals only)\
@@ -11445,8 +11413,8 @@ have the unique ability to speak so that everyone can understand, by typing\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SPEC SPEC_PROC SPECIAL", 
+   Level = 101, 
    Text = "The syntax for a spec proc is:\
 mset <mob vnum> spec spec_<program desired>\
 mset <mob vnum> spec_2 spec_<program desired>\
@@ -11466,8 +11434,8 @@ spec_police_jail, spec_police\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'SPECIAL FORCES' SPECIALFORCES", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YSpecialForces\
  \
 &cThis allows you to call elite troops to do your bidding. Special forces\
@@ -11477,8 +11445,8 @@ are like reinforcements, but much stronger and more expensive.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'SPEEDER COMBAT'", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YAutomatic \
 \
 &R&cThis skill is the equivalent of space combat, except for speeders.  It\
@@ -11491,8 +11459,8 @@ increases damage in speeder-to-speeder combat.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SPEEDERS", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YAutomatic\
  \
 &R&cThis skill allows you to drive a speeder and other land vehicles. \
@@ -11501,8 +11469,8 @@ HelpEntry
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SPELLCOMPONENTS", 
+   Level = 101, 
    Text = "T###         check for item of type ###\
 V#####       check for item of vnum #####\
 Kword        check for item with keyword 'word'\
@@ -11531,8 +11499,8 @@ a value of 1 in the respective location for the power to succeed.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SPELLFLAGS", 
+   Level = 101, 
    Text = "water           water based (create water, ice powers)\
 earth           interracts with nature (earthquake)\
 air             involve the air or winds\
@@ -11554,8 +11522,8 @@ character       specifically affect a character (for target 'ignore')\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SPELLSAVES", 
+   Level = 101, 
    Text = "Here are the saving throws you can set for use in SMAUG powers:\
 none            victim doesn't get a saving throw\
 poison_death    save vs. poison or death\
@@ -11568,8 +11536,22 @@ power_staff     save vs. powers or staves\
 
 HelpEntry
 {
-   Level = 0, 
+   Keyword = "'SPICE REFINING' MAKESPICE", 
+   Level = 1, 
+   Text = "&CSyntax &W: &YMakespice &W<&YSpice&W> \
+  \
+&cThis skill allows you to make spice usable for consumption.  You need to\
+be in a refinery to use this.  You also need some unrefined spice for this\
+to work. \
+  \
+&RSee also&W: &PHelp Spice \
+", 
+}
+
+HelpEntry
+{
    Keyword = "SPLIT", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y SPLIT &W<&Yamount&W>\
 &Y\
 SPLIT&c splits some credits between you and all the members of your group\
@@ -11580,8 +11562,8 @@ after a kill.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SSET", 
+   Level = 101, 
    Text = "Syntax: sset <victim> <skill> <value>\
 or:     sset <victim> all     <value>\
 or:     sset <sn>     <field> <value>\
@@ -11609,8 +11591,8 @@ For the special fields used by SMAUG powers (power_smaug) see SMAUGSPELLS\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "STARSYSTEMS", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y Starsystems\
 &c\
 This command allows you to see all the KNOWN stars and planets within the\
@@ -11623,8 +11605,8 @@ calculation. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "STEALTH SNEAK VISIBLE", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YSneak\
  \
 &CSyntax &R&W: &YStealth\
@@ -11646,8 +11628,8 @@ In order to use &YSneak &cor &YStealth&c, you must practice them.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "STRENGTH STR", 
+   Level = 1, 
    Text = "&CStrength &Y(str)&C represents your character's physical power. The most\
 common concern with strength deals with how much your character can carry.\
 For each additional point of strength, you gain an additional amount of\
@@ -11668,8 +11650,8 @@ while a character with 25 &Y(max)&C can carry up to 999 kgs.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SUICIDE", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y suicide &W<&Ypassword&W>\
 &c\
 When it becomes necessary to \"get rid of the old, and start with the new\",\
@@ -11681,8 +11663,8 @@ throat. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SULLUST", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Sullust\
 &CInhabitants &W: Sullustan\
 &c\
@@ -11704,8 +11686,8 @@ of the second Death Star. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SULLUSTAN SULLUSTANS", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Sullust\
 &c\
 Small, mouse-like aliens with huge black eyes, loose jowls, and pointed\
@@ -11725,8 +11707,8 @@ must be fitted with special visors.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "SWITCH RETURN", 
+   Level = 101, 
    Text = "Syntax: switch <character>\
 Syntax: return\
 \
@@ -11739,8 +11721,8 @@ RETURN returns you to your original body.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "SWRIP", 
+   Level = 1, 
    Text = "SW: Rise in Power MUD Codebase v1.0 (c) 2001 was created by Mark Miller\
 (Darrik Vequir) with the advice and input of his staff. \
  \
@@ -11758,8 +11740,8 @@ any problems you may have as his time allows. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "TAKEDRUG DRUG DRUGS SPICE RHYLL", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y Takedrug (drug)\
 &c\
 This allows all the junkies to get their fix. \
@@ -11768,8 +11750,8 @@ This allows all the junkies to get their fix. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "TARGET", 
+   Level = 1, 
    Text = ".\
 Syntax : Target <ship name>\
  \
@@ -11781,8 +11763,8 @@ See also help Space Combat 1, help Weapon Systems.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "TARGETTYPES", 
+   Level = 101, 
    Text = ".\
 Target                Function\
 --------------------------------------------------------------------\
@@ -11796,8 +11778,8 @@ objinv                Casted onto an object in the caster's inventory\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "TATOOINE", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Tatoo\
 &CInhabitants &W:&W Jawa, Sandpeople, Human\
 &c\
@@ -11827,8 +11809,8 @@ day lasts 23 standard hours, and its year consumes 304 local days. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "TEACH", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y Syntax &W<&Yperson&W> <&Yskill&W>\
 &c\
 This command allows a player to teach another player their skill.  Of\
@@ -11840,8 +11822,8 @@ when he learns this skill.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "THINK", 
+   Level = 101, 
    Text = "Syntax:  think <message>\
  \
 Allows you to use the 'think' channel, which functions the same as all\
@@ -11854,8 +11836,8 @@ See CSET\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "THROW", 
+   Level = 1, 
    Text = "&R&CSyntax &R&W: &YThrow &R&W<&YDirection&R&W> \
 \
 &R&cA useful skill that allows you to throw an object into another room. \
@@ -11868,8 +11850,8 @@ Useful if you want to throw a grenade.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "TICK", 
+   Level = 0, 
    Text = "Many of the actions in the game are based upon interval timers, including\
 combat, most autonomous monster actions, hp/force/move regeneration, power\
 duration, weather, and area resetting.\
@@ -11889,8 +11871,8 @@ Area resets are indicated by 'squeaking noises' just prior to the reset.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "TIMECMD", 
+   Level = 101, 
    Text = "Syntax:  timecmd <command>\
 Example: timecmd mpstat <mob>\
  \
@@ -11901,8 +11883,8 @@ instance of its execution.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "TITLE", 
+   Level = 0, 
    Text = "Syntax: title <string>\
 \
 Sets your title to a given string.\
@@ -11914,8 +11896,8 @@ advance a level.  You can use TITLE to set your title to something else.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "TOGORIAN TOGORIANS", 
+   Level = 1, 
    Text = "&COrigin&W:&Y Togoria\
 &c\
      A race of bipedal feline aliens from Togoria, the Togorians have \
@@ -11940,8 +11922,8 @@ the Margrave, a position held by a male of a certain family line.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "TONGUE TONGUES", 
+   Level = 1, 
    Text = "&cThe different PC languages include Common, Wookiee, Twilek, Rodian, Hutt,\
 Mon Calamari, Shistavanen, Ewok, Ithorian, Gotal, Devaronian, Barabel,\
 Firrerreo, Bothan, Gamorrean, Togorian, Kubaz, Jawa, Adarian, Verpine,\
@@ -11962,8 +11944,8 @@ words will appear garble to you. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "TOPICS", 
+   Level = 1, 
    Text = "Additional topics you may want to look over:\
 *TICK\
 *WIZLIST\
@@ -11981,8 +11963,8 @@ To view a topic type: HELP <topic>\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "TORTURE", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YTorture &R&W<&YMob&R&W/&YPlayer&R&W> \
  \
 &cThis skill allows you to permanently remove hit points from a mob or a\
@@ -11994,8 +11976,8 @@ player. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "TRACK", 
+   Level = 0, 
    Text = "&CSyntax &R&W: &YTrack &R&W<&YName&R&W>\
  \
 &cTrack will assist you in hunting down a player or mob that is within the\
@@ -12005,8 +11987,8 @@ area, giving you their general direction.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "'TRACTOR BEAMS' TRACTOR", 
+   Level = 1, 
    Text = "&CSyntax &R&W: &YTractor &R&W<&YShip&R&W> \
 \
 &R&cThis skill allows you to use a ship's tractor beam.  You must be in the\
@@ -12025,8 +12007,8 @@ SEE ALSO: &WOPENBAY ADJUSTTRACTOR \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "TRAIN", 
+   Level = 1, 
    Text = "&CSyntax &W: &YTrain &R&W<&Ystat&R&W> \
 \
 &cTraining is the only way to permanently improve a character's starting\
@@ -12040,8 +12022,8 @@ Center, 5 west of the Cheap Hotel on Coruscant. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "TRAINER 'TRAINER SHIPS'", 
+   Level = 1, 
    Text = "These are ships designed to help you raise space combat.  You can only\
 target other trainer ships while in one, and if you get blown up, you end\
 back at the training pad.  So no death by another trainer ship.\
@@ -12050,8 +12032,8 @@ back at the training pad.  So no death by another trainer ship.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "TRANCE", 
+   Level = 1, 
    Text = "Syntax:  trance\
  \
 A character in possession of this skill may use it to briefly focus its\
@@ -12061,8 +12043,8 @@ energies toward restoring a small burst of force.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "TRANDOSHAN TRANDOSHA DOSHA", 
+   Level = 0, 
    Text = "&COrigin: &YTrandosha\
 \
 &c     These humanoid reptiles are natives to the planet Trandosha.  They\
@@ -12083,8 +12065,8 @@ leveling Kashyyyk to the Empire. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "TRANDOSHAN_STATS", 
+   Level = 0, 
    Text = "&CRace: &YTrandoshan\
 &CSpecial Abilities: &YInfrared\
 &CRestrictions: &YNone\
@@ -12107,8 +12089,8 @@ Lead.&Y      99      49       49        49      49      99      149&C \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "TRANSFER", 
+   Level = 101, 
    Text = "Syntax: transfer <character>\
 Syntax: transfer all\
 Syntax: transfer <character> <location>\
@@ -12121,8 +12103,8 @@ to your current location (default) or to a specified location.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "TRAPFLAGS", 
+   Level = 101, 
    Text = "Flags to describe a trap and what triggers it:\
 \
 ROOM    - Trap is in a room\
@@ -12149,8 +12131,8 @@ See RESET, TRAPSETTING and TRAPTYPES.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "TRAPSETTING", 
+   Level = 101, 
    Text = "Setting a trap is a little tricky.\
 \
 Parameters: <vnum> <type> <charges> <flags>\
@@ -12166,8 +12148,8 @@ See RESETS, TRAPTYPES and TRAPFLAGS.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "TRAPTYPES", 
+   Level = 101, 
    Text = "Types of traps:\
 \
  --------------------------------------------------------------------\
@@ -12188,8 +12170,8 @@ See RESET, TRAPSETTING and TRAPFLAGS.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "TRIGGER", 
+   Level = 101, 
    Text = "&c\
 A trigger is an action, phrase, or game event that causes a program\
 held within a room, mob or object, to begin playing out its commands.\
@@ -12209,8 +12191,8 @@ RPTRIGGERS, MPTRIGGERS, OPTRIGGERS\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "TRIGGERS", 
+   Level = 1, 
    Text = "Triggers are Illegal. This means nobody can idle collecting packages, and\
 hog them.\
  \
@@ -12224,8 +12206,8 @@ That is perfectly legal.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "'TRUE SIGHT'", 
+   Level = 101, 
    Text = "Syntax:  feel 'true sight'\
  \
 This power can only be cast upon yourself.  It is a combination of\
@@ -12237,8 +12219,8 @@ blinding attacks.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "TRUST", 
+   Level = 101, 
    Text = "Syntax: trust <character> <level>\
 \
 TRUST sets a character's trust to the specified level.  This is similar to\
@@ -12254,8 +12236,8 @@ A trust of 0 means to use the character's natural level again.\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "TSR D&&D AD&&D", 
+   Level = -1, 
    Text = ".               Dungeons && Dragons (tm) and TSR Hobbies Inc.\
 \
   Here we'd like to duplicate the original credits from the Basic Rules,\
@@ -12277,8 +12259,8 @@ Ward, Jean Wells, Bill Wilkerson, Donald Paterson, and Frank Mentzer.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "TWI'LEK TWI'LEKS TWILEK", 
+   Level = 0, 
    Text = "&pOrigin:&Y Ryloth\
 \
 &P     A humanoid race with twin head tentacles.  The dual tail-like\
@@ -12300,8 +12282,8 @@ who come to their world to fill their ships with Twi'lek slaves.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "TWI'LEK_STATS TWILEK_STATS", 
+   Level = 0, 
    Text = "&pRace: &YTwi'lek\
 &pSpecial Abilities:&Y None\
 &pRestrictions: &YNone\
@@ -12324,8 +12306,8 @@ Lead.&Y      88      38       38        38      38      88      138&p\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "UNFOLDAREA", 
+   Level = 101, 
    Text = "Syntax: unfoldarea <area filename>\
 \
 This command will load up an area file.\
@@ -12337,8 +12319,18 @@ NOTE: It could be quite dangerous to unfold an area that is already loaded,\
 
 HelpEntry
 {
+   Keyword = "'UNRAVEL DEFENSE'", 
    Level = 1, 
+   Text = "Syntax : feel 'unravel defense' <victim>\
+\
+Makes victim more susceptable.\
+", 
+}
+
+HelpEntry
+{
    Keyword = "UPGRADES", 
+   Level = 1, 
    Text = "&cA new system of upgrades is being implemented, due to the power\
 differences between the two most powerful clans and the rest of the\
 galaxy.\
@@ -12357,8 +12349,8 @@ anything, they will now get 5% of what they sell.  \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "UPGRADESHIP", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y upgradeship <ship name> <part to upgrade> <amount>\
  \
 &RAlso see&W:&P UPGRADES, MILITARY UPGRADES, MILITARYUPG2, CIVILIAN\
@@ -12368,8 +12360,8 @@ UPGRADES, CIVILIANUPG2 \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "USE ACTIVATE", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y Use (item)\
  \
 Obviously lets you use the item.\
@@ -12378,8 +12370,8 @@ Obviously lets you use the item.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "USEPROG", 
+   Level = 101, 
    Text = "Syntax: opedit <object> <command> [number] [use_prog] [percentage]\
  \
 The use_prog is an objtrigger that can be used in object programs.  The\
@@ -12408,8 +12400,8 @@ to accomplish this.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "USERS", 
+   Level = 101, 
    Text = "Syntax: users <host ip>\
 Syntax: users <playername>\
 \
@@ -12433,8 +12425,8 @@ descriptor number.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "VARIABLES", 
+   Level = 101, 
    Text = "This is the list of variables to be used in actiondescs for objects and in\
 mob/room/object programs.\
  \
@@ -12454,8 +12446,8 @@ See also: MPSTAT, RPSTAT, OPSTAT, MPEDIT, RPEDIT, OPEDIT, TRIGGER, MPTRIGGERS,\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "VECTOR COURSE TRAJECTORY", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y Course (x) (y) (z)\
 &c\
 This is used to adjust your course once inside a planatary\
@@ -12473,8 +12465,8 @@ space objects show these. \
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "VENTRILOQUATE", 
+   Level = 0, 
    Text = "Syntax: feel ventriloquate <speaker> <message>\
 \
 This power throws your voice, making it appear that some other object or\
@@ -12487,8 +12479,8 @@ your message.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "VERPINE VERPINES", 
+   Level = 0, 
    Text = "&COrigin&W:&Y Roche Asteroid Field \
  \
 &c     Verpine are an advanced species of bipedal insectoids.  Their thin,\
@@ -12511,8 +12503,8 @@ days of the Old Republic. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "VNUMS", 
+   Level = 101, 
    Text = "Syntax: vnums [low] [high]\
 \
 Lists the vnum range for rooms/mobs/objects in all prototype areas.\
@@ -12521,8 +12513,8 @@ Lists the vnum range for rooms/mobs/objects in all prototype areas.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "VOTING VOTE VOTES", 
+   Level = 1, 
    Text = "&CSyntax &W:&Y note vote <number> open/close/yes/no/abstain \
 &c\
 Once a note has been posted on a bulletin board, the author may open voting\
@@ -12540,8 +12532,8 @@ accordingly.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "VSEARCH", 
+   Level = 101, 
    Text = "Syntax:  vsearch <vnum of target object>\
  \
 Returns all instances of the target object presently in the game, as\
@@ -12554,8 +12546,8 @@ See OWHERE\
 
 HelpEntry
 {
-   Level = 2, 
    Keyword = "WAR WARTALK", 
+   Level = 2, 
    Text = "&CSyntax &W:&Y war <message>\
 &c\
 Wartalk is a channel created as a haven for those players who like to openly\
@@ -12573,8 +12565,8 @@ inappropriate subject matter.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "WEAKEN", 
+   Level = 0, 
    Text = "Syntax: feel weaken <victim>\
 \
 This power reduces the strength of the victim by two points.\
@@ -12583,8 +12575,21 @@ This power reduces the strength of the victim by two points.\
 
 HelpEntry
 {
-   Level = 101, 
+   Keyword = "'WEAPON SYSTEMS'", 
+   Level = 1, 
+   Text = "&CSyntax &W: &YTarget &W<&YShip&W> \
+  \
+&cThis skill allows you to make use of a ship's weapon systems, ie firing\
+and targeting with them. \
+  \
+&RAlso see&W: &PHelp Ships \
+", 
+}
+
+HelpEntry
+{
    Keyword = "WEAPONTYPES", 
+   Level = 101, 
    Text = "For items of type \"weapon\", the value3 field specifies the weapon type:\
 \
 Value3 | Type     | Weapons\
@@ -12609,8 +12614,8 @@ See OSET.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "WEARFLAGS", 
+   Level = 101, 
    Text = "These flags should be self explanitory:\
  take   finger   neck    body    head   legs\
  feet   hands    arms    shield  about  waist\
@@ -12622,8 +12627,8 @@ See OSET and RESETCMDS.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "WEARLOCS", 
+   Level = 1, 
    Text = "Here are the various locations where items may be equipped:\
 \
  ---------------------------------------------------------\
@@ -12642,8 +12647,8 @@ See RESETS and RESETCMDS.\
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "WHERE", 
+   Level = 101, 
    Text = "Syntax: where\
 Syntax: where <character>\
 \
@@ -12657,8 +12662,8 @@ within your area, including monsters.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "WHO", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y Who\
 &CSyntax &W:&Y Who Clan\
    &w(for immortals only)\
@@ -12680,8 +12685,8 @@ members of one particular race by typing &YWHO (race)&c.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "WHOIS", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y whois <player>\
 \
 The &YWHOIS&c command will tell you a bit of information about a player is\
@@ -12693,8 +12698,8 @@ online (and not who-cloaked).\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "WIMPY", 
+   Level = 0, 
    Text = "&CSyntax &W:&Y wimpy\
 &CSyntax &W:&Y wimpy <number>\
  \
@@ -12711,8 +12716,8 @@ Some monsters are wimpy.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "WISDOM WIS", 
+   Level = 1, 
    Text = "&CWisdom &Y(WIS)&C represents your character's wisdom and ability to\
 incorporate learning. \
  \
@@ -12732,8 +12737,8 @@ incorporate learning. \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "WIZHELP", 
+   Level = 101, 
    Text = "Syntax: wizhelp\
 \
 WIZHELP provides a list of all the immortal commands.\
@@ -12742,8 +12747,8 @@ WIZHELP provides a list of all the immortal commands.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "WIZLIST", 
+   Level = 0, 
    Text = "Syntax: wizlist\
 \
 Displays a hierarchical list of immortals.\
@@ -12752,8 +12757,8 @@ Displays a hierarchical list of immortals.\
 
 HelpEntry
 {
-   Level = 0, 
    Keyword = "WOOKIEE WOOKIEES", 
+   Level = 0, 
    Text = "&COrigin: &YKashyyyk\
 &C\
 &c     Wookiees are tall, fur-covered creatures widely known for being\
@@ -12773,8 +12778,8 @@ that.\
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "WROONA", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Wroona\
 &CInhabitants &W:&W Wroonian\
 &c\
@@ -12788,8 +12793,8 @@ Sector. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "WWW", 
+   Level = 1, 
    Text = ".\
 For more information on the mud check out its homepage at :\
         \
@@ -12801,8 +12806,8 @@ Or use http://swrip.net \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "YAVIN", 
+   Level = 1, 
    Text = "&CSystem &W:&Y Yavin\
 &CInhabitants &W:&W None\
 &c\
@@ -12820,8 +12825,8 @@ alive. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "YEVETHAN", 
+   Level = 1, 
    Text = "&COrigin&W:&Y N'zoth\
 &c\
 a humanoid alien race which resemble skeletons. Their facial structure\
@@ -12852,8 +12857,8 @@ after their defeat of the Empire. \
 
 HelpEntry
 {
-   Level = 1, 
    Keyword = "YEVETHAN_NAMES", 
+   Level = 1, 
    Text = "Kiv Truun \
 Nil Spaar\
 Kei <female> \
@@ -12866,8 +12871,8 @@ Vor Duull \
 
 HelpEntry
 {
-   Level = 101, 
    Keyword = "ZONES", 
+   Level = 101, 
    Text = "Syntax: zones [low] [high]\
 \
 Lists the name of the file, and room/mob/object vnum range for each\
@@ -12877,8 +12882,8 @@ non-prototype zone in the mud.\
 
 HelpEntry
 {
-   Level = -1, 
    Keyword = "_DIEMSG_", 
+   Level = -1, 
    Text = "...Everything begins to fade to black\
 \
 ...and then\

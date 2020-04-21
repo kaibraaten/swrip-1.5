@@ -1,4 +1,5 @@
 #include <cstring>
+#include <colorparser/colorparser.hpp>
 #include "descriptor.hpp"
 #include "mud.hpp"
 #include "character.hpp"
@@ -20,6 +21,7 @@ Descriptor::Descriptor(socket_t desc)
     : pImpl(std::make_unique<Impl>())
 {
     Socket = desc;
+    ParseColors = ColorParser::Smaug2Ansi;
     ConnectionState = CON_GET_NAME;
     PreviousColor = 0x07;
 }
@@ -232,7 +234,7 @@ bool Descriptor::FlushBuffer(bool fPrompt)
     /*
      * OS-dependent output.
      */
-    bool success = WriteToDescriptor(Socket, OutBuffer.str());
+    bool success = WriteToDescriptor(this, OutBuffer.str());
 
     OutBuffer.str("");
     return success;
@@ -250,7 +252,7 @@ bool Descriptor::Read()
     if (iStart >= sizeof(pImpl->InBuffer) - 10)
     {
         Log->Info("%s input overflow!", Remote.Hostname.c_str());
-        WriteToDescriptor(Socket,
+        WriteToDescriptor(this,
             "\r\n*** PUT A LID ON IT!!! ***\r\n");
         return false;
     }
@@ -319,7 +321,7 @@ void Descriptor::ReadFromBuffer()
     {
         if (k >= 254)
         {
-            WriteToDescriptor(Socket, "Line too long.\r\n");
+            WriteToDescriptor(this, "Line too long.\r\n");
 
             pImpl->InBuffer[i] = '\n';
             pImpl->InBuffer[i + 1] = '\0';
@@ -353,7 +355,7 @@ void Descriptor::ReadFromBuffer()
         {
             if (++pImpl->Repeat >= 100)
             {
-                WriteToDescriptor(Socket,
+                WriteToDescriptor(this,
                     "\r\n*** PUT A LID ON IT!!! ***\r\n");
             }
         }
