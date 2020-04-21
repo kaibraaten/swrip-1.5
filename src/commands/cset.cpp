@@ -35,7 +35,6 @@ void do_cset(Character* ch, std::string argument)
         ch->Echo("Death is permanent: %s\r\n", SysData.PermaDeath ? "Yes" : "No");
         ch->Echo("Extended race selection: %s\r\n", SysData.ExtendedRaceSelection ? "Yes" : "No");
         ch->Echo("Multiplaying allowed: %s\r\n", SysData.AllowMultiplaying ? "Yes" : "No");
-        ch->Echo("Jedi are minimum combat level 100: %s\r\n", SysData.BetterJediCombatants ? "Yes" : "No");
         return;
     }
 
@@ -90,22 +89,6 @@ void do_cset(Character* ch, std::string argument)
         SysData.AllowMultiplaying = !SysData.AllowMultiplaying;
         ch->Echo("Multiplaying %s.\r\n",
             SysData.AllowMultiplaying ? "ENABLED" : "DISABLED");
-        return;
-    }
-
-    if (!StrCmp(arg, "better_jedi_combatants"))
-    {
-        SysData.BetterJediCombatants = !SysData.BetterJediCombatants;
-
-        if (SysData.BetterJediCombatants)
-        {
-            ch->Echo("Jedi are now minimum level 100 in combat.\r\n");
-        }
-        else
-        {
-            ch->Echo("Now using legacy behavior.\r\n");
-        }
-        
         return;
     }
 

@@ -63,7 +63,7 @@ public:
     time_t LastActivity = 0;
 };
 
-#define GUILD_PRICE 100000
+constexpr auto GUILD_PRICE = 100000;
 
 void SaveClanStoreroom(Character *ch, const std::shared_ptr<Clan> &clan);
 void ShowClanMembers(const Character *ch, const std::shared_ptr<Clan> &clan,

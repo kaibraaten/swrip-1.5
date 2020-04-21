@@ -1,3 +1,4 @@
+#include <cassert>
 #include "mud.hpp"
 #include "clan.hpp"
 #include "character.hpp"
@@ -5,96 +6,97 @@
 #include "log.hpp"
 #include "repos/clanrepository.hpp"
 
-static bool IsGuildNameAcceptable( const std::string &name );
+static bool IsGuildNameAcceptable(const std::string& name);
 
-void do_makeguild( Character *ch, std::string argument )
+void do_makeguild(Character* ch, std::string argument)
 {
-  std::string faction;
-  std::shared_ptr<Clan> guild;
-  std::shared_ptr<Clan> mainClan;
-  argument = OneArgument( argument, faction );
-  
-  if ( faction.empty() || argument.empty() )
+    std::string faction;
+    std::shared_ptr<Clan> guild;
+    std::shared_ptr<Clan> mainClan;
+    argument = OneArgument(argument, faction);
+
+    if (faction.empty() || argument.empty())
     {
-      ch->Echo("Usage: startguild <imperial|rebel|independent> <guild name>\r\n" );
-      return;
+        ch->Echo("Usage: startguild <imperial|rebel|independent> <guild name>\r\n");
+        return;
     }
 
-  if( IsClanned( ch ) )
+    if (IsClanned(ch))
     {
-      ch->Echo("&RYou're already in a guild.&d\r\n" );
-      return;
+        ch->Echo("&RYou're already in a guild.&d\r\n");
+        return;
     }
 
-  if( !IsGuildNameAcceptable( argument ) )
+    if (!IsGuildNameAcceptable(argument))
     {
-      ch->Echo("&RThat name is not accepted.&d\r\n" );
-      return;
-    }
-  
-  if( !StrCmp( faction, "imperial" ) )
-    {
-      mainClan = GetClan( BADGUY_CLAN );
-    }
-  else if( !StrCmp( faction, "rebel" ))
-    {
-      mainClan = GetClan( GOODGUY_CLAN );
-    }
-  else if( !StrCmp( faction, "independent" ) )
-    {
-      mainClan = GetClan( INDEPENDENT_CLAN );
-    }
-  else
-    {
-      ch->Echo("&RChoose faction for your guild: Imperial, Rebel or Independent.&d\r\n" );
-      return;
+        ch->Echo("&RThat name is not accepted.&d\r\n");
+        return;
     }
 
-  if( !mainClan )
+    if (!StrCmp(faction, "imperial"))
     {
-      ch->Echo("&RSomething when wrong. Contact the administration.&d\r\n" );
-      Log->Bug( "%s: Main clan %s does not exist.", __FUNCTION__,
-                !StrCmp( faction, "imperial" ) ? BADGUY_CLAN
-                : !StrCmp( faction, "rebel" ) ? GOODGUY_CLAN : INDEPENDENT_CLAN );
-      return;
+        mainClan = GetClan(BADGUY_CLAN);
+    }
+    else if (!StrCmp(faction, "rebel"))
+    {
+        mainClan = GetClan(GOODGUY_CLAN);
+    }
+    else if (!StrCmp(faction, "independent"))
+    {
+        mainClan = GetClan(INDEPENDENT_CLAN);
+    }
+    else
+    {
+        ch->Echo("&RChoose faction for your guild: Imperial, Rebel or Independent.&d\r\n");
+        return;
     }
 
-  if( ch->Gold < GUILD_PRICE )
+    if (!mainClan)
     {
-      ch->Echo("&RStarting a guild costs %d credits. You don't have the funds.&d\r\n",
-               GUILD_PRICE );
-      return;
+        ch->Echo("&RSomething when wrong. Contact the administration.&d\r\n");
+        Log->Bug("%s: Main clan %s does not exist.", __FUNCTION__,
+            !StrCmp(faction, "imperial") ? BADGUY_CLAN
+            : !StrCmp(faction, "rebel") ? GOODGUY_CLAN : INDEPENDENT_CLAN);
+        return;
     }
-  else
+
+    if (ch->Gold < GUILD_PRICE)
     {
-      ch->Gold -= GUILD_PRICE;
+        ch->Echo("&RStarting a guild costs %d credits. You don't have the funds.&d\r\n",
+            GUILD_PRICE);
+        return;
     }
-  
-  guild = AllocateClan();
-  Clans->Add(guild);
+    else
+    {
+        assert(GUILD_PRICE >= 0);
+        ch->Gold -= GUILD_PRICE;
+    }
 
-  guild->Name = argument;
-  guild->Leadership.Leader = ch->Name;
-  guild->MainClanName = mainClan->Name;
-  guild->FoundationDate = current_time;
+    guild = AllocateClan();
+    Clans->Add(guild);
 
-  Clans->Add(guild);
-  AssignGuildToMainclan( guild, mainClan );
-  Clans->Save( guild );
+    guild->Name = argument;
+    guild->Leadership.Leader = ch->Name;
+    guild->MainClanName = mainClan->Name;
+    guild->FoundationDate = current_time;
 
-  ch->PCData->ClanInfo.Clan = guild;
-  ch->PCData->ClanInfo.ClanName = guild->Name;
-  UpdateClanMember( ch );
+    Clans->Add(guild);
+    AssignGuildToMainclan(guild, mainClan);
+    Clans->Save(guild);
 
-  ch->Echo("&GCongratulations, your new guild %s has been successfully created!\r\n",
-           guild->Name.c_str() );
-  ch->Echo("See HELP GUILD to get started.&d\r\n" );
+    ch->PCData->ClanInfo.Clan = guild;
+    ch->PCData->ClanInfo.ClanName = guild->Name;
+    UpdateClanMember(ch);
+
+    ch->Echo("&GCongratulations, your new guild %s has been successfully created!\r\n",
+        guild->Name.c_str());
+    ch->Echo("See HELP GUILD to get started.&d\r\n");
 }
 
-static bool IsGuildNameAcceptable( const std::string &name )
+static bool IsGuildNameAcceptable(const std::string& name)
 {
-  bool nameIsAvailable = GetClan(name) == nullptr;
+    bool nameIsAvailable = GetClan(name) == nullptr;
 
-  return nameIsAvailable
-    && StringInfix( "Jedi Order", name ) != 0;
+    return nameIsAvailable
+        && StringInfix("Jedi Order", name) != 0;
 }

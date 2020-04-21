@@ -66,7 +66,6 @@ public:
     bool PermaDeath = false;
     bool ExtendedRaceSelection = false;
     bool AllowMultiplaying = false;
-    bool BetterJediCombatants = true;
     unsigned char *MCCP_Buffer = nullptr;
 };
 

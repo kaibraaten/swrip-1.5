@@ -78,25 +78,25 @@ const std::array<const Race, MAX_RACE> RaceTable
     "Human",    /* race_name          */
     0,          /* affected           */
     {           /* stats              */
-  0,        /*   ModStr          */
-  0,        /*   ModDex          */
-  0,        /*   ModWis          */
-  0,        /*   ModInt          */
-  0,        /*   ModCon          */
-  0,        /*   ModCha          */
-  0,        /*   ModLck          */
-  0         /*   ModFrc          */
+        0,        /*   ModStr          */
+        0,        /*   ModDex          */
+        0,        /*   ModWis          */
+        0,        /*   ModInt          */
+        0,        /*   ModCon          */
+        0,        /*   ModCha          */
+        0,        /*   ModLck          */
+        0         /*   ModFrc          */
     },
     {
-  0, /* COMBAT_ABILITY */
-  0, /* PILOTING_ABILITY */
-  0, /* ENGINEERING_ABILITY */
-  0, /* HUNTING_ABILITY */
-  0, /* SMUGGLING_ABILITY */
-  0, /* DIPLOMACY_ABILITY */
-  0, /* LEADERSHIP_ABILITY */
-  0, /* FORCE_ABILITY */
-  0  /* COMMANDO_ABILITY */
+        0, /* COMBAT_ABILITY */
+        0, /* PILOTING_ABILITY */
+        0, /* ENGINEERING_ABILITY */
+        0, /* HUNTING_ABILITY */
+        0, /* SMUGGLING_ABILITY */
+        0, /* DIPLOMACY_ABILITY */
+        0, /* LEADERSHIP_ABILITY */
+        0, /* FORCE_ABILITY */
+        0  /* COMMANDO_ABILITY */
     },
     0,          /* hit                */
     0,          /* mana               */

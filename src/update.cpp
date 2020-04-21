@@ -197,12 +197,6 @@ static int GetMaxCombatLevel(const Character *ch)
     level += RaceTable[ch->Race].AbilityMod[COMBAT_ABILITY];
     level += statbonus;
 
-    if (ch->Ability.Main == FORCE_ABILITY
-        && SysData.BetterJediCombatants)
-    {
-        level = umax(level, 100);
-    }
-
     return urange(1, level, MAX_ABILITY_LEVEL);
 }
 

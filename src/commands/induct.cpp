@@ -4,94 +4,94 @@
 #include "pcdata.hpp"
 #include "repos/playerrepository.hpp"
 
-void do_induct( Character *ch, std::string argument )
+void do_induct(Character* ch, std::string argument)
 {
-  std::string arg;
-  Character *victim = NULL;
-  std::shared_ptr<Clan> clan;
+    std::string arg;
+    Character* victim = NULL;
+    std::shared_ptr<Clan> clan;
 
-  if ( IsNpc( ch ) || !IsClanned( ch ) )
+    if (IsNpc(ch) || !IsClanned(ch))
     {
-      ch->Echo("Huh?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 
-  clan = ch->PCData->ClanInfo.Clan;
+    clan = ch->PCData->ClanInfo.Clan;
 
-  if ( (ch->PCData
+    if ((ch->PCData
         && IsName("induct", ch->PCData->Bestowments))
-       || !StrCmp( ch->Name, clan->Leadership.Leader  )
-       || !StrCmp( ch->Name, clan->Leadership.Number1 )
-       || !StrCmp( ch->Name, clan->Leadership.Number2 ) )
+        || !StrCmp(ch->Name, clan->Leadership.Leader)
+        || !StrCmp(ch->Name, clan->Leadership.Number1)
+        || !StrCmp(ch->Name, clan->Leadership.Number2))
     {
-      ;
+        ;
     }
-  else
+    else
     {
-      ch->Echo("Huh?\r\n");
-      return;
-    }
-
-  argument = OneArgument( argument, arg );
-
-  if ( arg.empty() )
-    {
-      ch->Echo("Induct whom?\r\n");
-      return;
+        ch->Echo("Huh?\r\n");
+        return;
     }
 
-  if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
+    argument = OneArgument(argument, arg);
+
+    if (arg.empty())
     {
-      ch->Echo("That player is not here.\r\n");
-      return;
+        ch->Echo("Induct whom?\r\n");
+        return;
     }
 
-  if ( IsNpc(victim) )
+    if ((victim = GetCharacterAnywhere(ch, arg)) == NULL)
     {
-      ch->Echo("Not on NPCs.\r\n");
-      return;
+        ch->Echo("That player is not here.\r\n");
+        return;
     }
 
-  if ( IsClanned( victim ) )
+    if (IsNpc(victim))
     {
-      std::shared_ptr<Clan> victimClan = victim->PCData->ClanInfo.Clan;
+        ch->Echo("Not on NPCs.\r\n");
+        return;
+    }
 
-      if ( victimClan->Type == CLAN_GUILD )
+    if (IsClanned(victim))
+    {
+        std::shared_ptr<Clan> victimClan = victim->PCData->ClanInfo.Clan;
+
+        if (victimClan->Type == CLAN_GUILD)
         {
-          if ( victimClan == clan )
+            if (victimClan == clan)
             {
-              ch->Echo("This player already belongs to your guild!\r\n");
+                ch->Echo("This player already belongs to your guild!\r\n");
             }
-	  else
+            else
             {
-              ch->Echo("This player already belongs to an organization!\r\n");
+                ch->Echo("This player already belongs to an organization!\r\n");
             }
 
-          return;
+            return;
         }
-      else
+        else
         {
-          if ( victimClan == clan )
+            if (victimClan == clan)
             {
-              ch->Echo("This player already belongs to your organization!\r\n");
+                ch->Echo("This player already belongs to your organization!\r\n");
             }
-          else
+            else
             {
-              ch->Echo("This player already belongs to an organization!\r\n");
+                ch->Echo("This player already belongs to an organization!\r\n");
             }
 
-          return;
+            return;
         }
     }
 
-  victim->PCData->ClanInfo.Clan = clan;
-  victim->PCData->ClanInfo.ClanName = clan->Name;
-  UpdateClanMember( victim );
+    victim->PCData->ClanInfo.Clan = clan;
+    victim->PCData->ClanInfo.ClanName = clan->Name;
+    UpdateClanMember(victim);
 
-  Act( AT_MAGIC, "You induct $N into $t", ch, clan->Name.c_str(), victim, TO_CHAR );
-  Act( AT_MAGIC, "$n inducts $N into $t", ch, clan->Name.c_str(), victim, TO_NOTVICT );
-  Act( AT_MAGIC, "$n inducts you into $t", ch, clan->Name.c_str(), victim, TO_VICT );
-  PlayerCharacters->Save( victim );
+    Act(AT_MAGIC, "You induct $N into $t", ch, clan->Name.c_str(), victim, TO_CHAR);
+    Act(AT_MAGIC, "$n inducts $N into $t", ch, clan->Name.c_str(), victim, TO_NOTVICT);
+    Act(AT_MAGIC, "$n inducts you into $t", ch, clan->Name.c_str(), victim, TO_VICT);
+    PlayerCharacters->Save(victim);
 }
 
 

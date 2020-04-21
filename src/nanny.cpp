@@ -619,7 +619,8 @@ static void NannyReadMotd(std::shared_ptr<Descriptor> d, std::string argument)
 
         if (ch->Ability.Main == FORCE_ABILITY)
         {
-            ch->PermStats.Frc = urange(1, ch->PermStats.Frc, 20);
+            // People who pick Jedi will always have max Frc stat.
+            ch->PermStats.Frc = 20;
         }
         else
         {

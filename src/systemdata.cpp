@@ -40,7 +40,6 @@ static void PushSystemData(lua_State *L, const void *userData)
     LuaSetfieldBoolean(L, "ExtendedRaceSelection", SysData.ExtendedRaceSelection);
     LuaSetfieldBoolean(L, "PermaDeath", SysData.PermaDeath);
     LuaSetfieldBoolean(L, "AllowMultiplaying", SysData.AllowMultiplaying);
-    LuaSetfieldBoolean(L, "BetterJediCombatants", SysData.BetterJediCombatants);
 
     LuaPushFlags(L, SysData.SaveFlags, SaveFlags, "SaveFlags");
     lua_setglobal(L, "systemdata");
@@ -74,7 +73,6 @@ static int L_SystemDataEntry(lua_State *L)
     LuaGetfieldBool(L, "PermaDeath", &SysData.PermaDeath);
     LuaGetfieldBool(L, "ExtendedRaceSelection", &SysData.ExtendedRaceSelection);
     LuaGetfieldBool(L, "AllowMultiplaying", &SysData.AllowMultiplaying);
-    LuaGetfieldBool(L, "BetterJediCombatants", &SysData.BetterJediCombatants);
 
     if (FieldExists(L, "SaveFlags"))
     {
