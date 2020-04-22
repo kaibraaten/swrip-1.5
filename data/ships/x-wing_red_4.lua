@@ -1,63 +1,82 @@
 -- X-wing
--- Last saved Wednesday 22-Apr-2020 10:10:24
+-- Last saved Wednesday 22-Apr-2020 18:50:24
 
 ShipEntry
 {
-   Position = 
-   {
-      Z = 3.311444599312, 
-      Y = 4499995.8700567, 
-      X = 3999997.7865312, 
-   }, 
+   Location = 6100, 
    DockingPorts = 0, 
-   Name = "X-wing", 
-   Home = "Gamorr", 
-   LastDock = 6100, 
-   Instruments = 
-   {
-      AstroArray = 130, 
-      Comm = 150, 
-      Sensor = 150, 
-   }, 
    Pilot = "", 
+   CoPilot = "", 
    Guard = false, 
+   PersonalName = "Red 4", 
+   Home = "Gamorr", 
+   Alarm = false, 
+   Rooms = 
+   {
+      Hangar = 0, 
+      Engine = 0, 
+      Pilotseat = 32151, 
+      Cockpit = 32151, 
+      Entrance = 32151, 
+      First = 32151, 
+      Last = 32151, 
+      Coseat = 32151, 
+      Gunseat = 32151, 
+      Navseat = 32151, 
+   }, 
    Defenses = 
    {
-      Chaff = 
+      Hull = 
       {
-         Max = 25, 
-         Current = 25, 
+         Max = 1500, 
+         Current = 1500, 
       }, 
       Shield = 
       {
          Max = 150, 
          Current = 0, 
       }, 
-      Hull = 
+      Chaff = 
       {
-         Max = 1500, 
-         Current = 1500, 
+         Max = 25, 
+         Current = 25, 
       }, 
    }, 
-   PersonalName = "Red 4", 
-   Alarm = false, 
-   Location = 6100, 
-   Type = "Rebel", 
-   Description = "", 
    State = 0, 
-   Rooms = 
+   Instruments = 
    {
-      Cockpit = 32151, 
-      Entrance = 32151, 
-      Coseat = 32151, 
-      Last = 32151, 
-      First = 32151, 
-      Navseat = 32151, 
-      Gunseat = 32151, 
-      Engine = 0, 
-      Hangar = 0, 
-      Pilotseat = 32151, 
+      Sensor = 150, 
+      AstroArray = 130, 
+      Comm = 150, 
    }, 
+   Name = "X-wing", 
+   Hyperdrive = 
+   {
+      Speed = 245, 
+   }, 
+   Thrusters = 
+   {
+      Speed = 
+      {
+         Max = 150, 
+         Current = 0, 
+      }, 
+      Maneuver = 110, 
+      Energy = 
+      {
+         Max = 6000, 
+         Current = 6000, 
+      }, 
+   }, 
+   Shipyard = 203, 
+   Position = 
+   {
+      Y = 4499995.8700567, 
+      X = 3999997.7865312, 
+      Z = 3.311444599312, 
+   }, 
+   LastDock = 6100, 
+   Type = "Rebel", 
    WeaponSystems = 
    {
       TractorBeam = 
@@ -72,12 +91,6 @@ ShipEntry
       }, 
       Tube = 
       {
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         State = 0, 
          Missiles = 
          {
             Max = 8, 
@@ -88,86 +101,73 @@ ShipEntry
             Max = 4, 
             Current = 0, 
          }, 
-      }, 
-      Turrets = 
-      {
-         [1] = 
+         Rockets = 
          {
-            RoomVnum = 0, 
-            State = 0, 
+            Max = 0, 
+            Current = 0, 
          }, 
-         [2] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [3] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [4] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [5] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [6] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [7] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [8] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [9] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
-         [0] = 
-         {
-            RoomVnum = 0, 
-            State = 0, 
-         }, 
+         State = 0, 
       }, 
       Laser = 
       {
          State = 0, 
          Count = 2, 
       }, 
-   }, 
-   Hyperdrive = 
-   {
-      Speed = 245, 
-   }, 
-   Thrusters = 
-   {
-      Maneuver = 110, 
-      Energy = 
+      Turrets = 
       {
-         Max = 6000, 
-         Current = 6000, 
-      }, 
-      Speed = 
-      {
-         Max = 150, 
-         Current = 0, 
+         [1] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [2] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [3] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [4] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [5] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [6] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [7] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [8] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [9] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
+         [0] = 
+         {
+            State = 0, 
+            RoomVnum = 0, 
+         }, 
       }, 
    }, 
-   Class = "Starfighter", 
-   CoPilot = "", 
    Owner = "", 
-   Shipyard = 203, 
+   Description = "", 
+   Class = "Starfighter", 
 }
