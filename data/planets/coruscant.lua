@@ -1,11 +1,10 @@
 -- Coruscant
--- Last saved Tuesday 21-Apr-2020 17:32:16
+-- Last saved Wednesday 22-Apr-2020 09:34:04
 
 PlanetEntry
 {
    GovernedBy = "The Empire", 
-   Spaceobject = "Coruscant", 
-   Name = "Coruscant", 
+   BaseValue = 0, 
    Areas = 
    {
       [1] = "grand_towers.are", 
@@ -17,10 +16,11 @@ PlanetEntry
       [7] = "corus_jail.are", 
       [8] = "corus_pt2.are", 
    }, 
+   Spaceobject = "Coruscant", 
    Flags = 
    {
       [0] = "NoCapture", 
    }, 
    PopulationSupport = 0, 
-   BaseValue = 0, 
+   Name = "Coruscant", 
 }

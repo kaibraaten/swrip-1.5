@@ -1,41 +1,37 @@
 -- Kuat Shipyard
--- Last saved Tuesday 21-Apr-2020 18:28:02
+-- Last saved Wednesday 22-Apr-2020 10:10:24
 
 ShipEntry
 {
-   Owner = "The Empire", 
-   Type = "Mob", 
-   DockingPorts = 0, 
-   Alarm = false, 
-   CoPilot = "", 
-   Pilot = "Kai", 
-   PersonalName = "Kuat Shipyard", 
-   LastDock = 32050, 
-   Rooms = 
+   Position = 
    {
-      Last = 32099, 
-      Coseat = 32099, 
-      Entrance = 32099, 
-      Cockpit = 32099, 
-      Hangar = 32050, 
-      Gunseat = 32099, 
-      Pilotseat = 32099, 
-      Navseat = 32099, 
-      Engine = 0, 
-      First = 32050, 
+      Z = 1803, 
+      Y = 1345, 
+      X = 4215, 
    }, 
-   State = 1, 
+   DockingPorts = 0, 
+   Name = "Kuat Shipyard", 
+   Home = "Kuat", 
+   LastDock = 32050, 
+   Instruments = 
+   {
+      AstroArray = 0, 
+      Comm = 0, 
+      Sensor = 255, 
+   }, 
+   Pilot = "Kai", 
+   Guard = false, 
    Defenses = 
    {
-      Shield = 
-      {
-         Max = 10000, 
-         Current = 10000, 
-      }, 
       Chaff = 
       {
          Max = 0, 
          Current = 0, 
+      }, 
+      Shield = 
+      {
+         Max = 10000, 
+         Current = 10000, 
       }, 
       Hull = 
       {
@@ -43,24 +39,45 @@ ShipEntry
          Current = 10000, 
       }, 
    }, 
+   PersonalName = "Kuat Shipyard", 
+   Alarm = false, 
    Location = 0, 
-   Instruments = 
-   {
-      Sensor = 255, 
-      Comm = 0, 
-      AstroArray = 0, 
-   }, 
-   Guard = false, 
-   Hyperdrive = 
-   {
-      Speed = 255, 
-   }, 
+   Type = "Mob", 
    Description = "", 
-   Home = "Kuat", 
+   State = 1, 
+   Rooms = 
+   {
+      Cockpit = 32099, 
+      Entrance = 32099, 
+      Coseat = 32099, 
+      Last = 32099, 
+      First = 32050, 
+      Navseat = 32099, 
+      Gunseat = 32099, 
+      Engine = 0, 
+      Hangar = 32050, 
+      Pilotseat = 32099, 
+   }, 
    WeaponSystems = 
    {
+      TractorBeam = 
+      {
+         State = 1, 
+         Strength = 0, 
+      }, 
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 0, 
+      }, 
       Tube = 
       {
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         State = 0, 
          Missiles = 
          {
             Max = 100, 
@@ -71,88 +88,69 @@ ShipEntry
             Max = 0, 
             Current = 0, 
          }, 
-         State = 0, 
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
       }, 
-      TractorBeam = 
+      Turrets = 
       {
-         Strength = 0, 
-         State = 1, 
+         [1] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [2] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [3] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [4] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [5] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [6] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [7] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [8] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [9] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
+         [0] = 
+         {
+            RoomVnum = 0, 
+            State = 0, 
+         }, 
       }, 
       Laser = 
       {
          State = 0, 
          Count = 10, 
       }, 
-      Turrets = 
-      {
-         [1] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [2] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [3] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [4] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [5] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [6] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [7] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [8] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [9] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-         [0] = 
-         {
-            State = 0, 
-            RoomVnum = 0, 
-         }, 
-      }, 
-      IonCannon = 
-      {
-         State = 0, 
-         Count = 0, 
-      }, 
    }, 
-   Name = "Kuat Shipyard", 
-   Position = 
+   Hyperdrive = 
    {
-      Z = 1803, 
-      Y = 1345, 
-      X = 4215, 
+      Speed = 255, 
    }, 
    Thrusters = 
    {
@@ -169,5 +167,7 @@ ShipEntry
       }, 
    }, 
    Class = "Platform", 
+   CoPilot = "", 
+   Owner = "The Empire", 
    Shipyard = 32050, 
 }
