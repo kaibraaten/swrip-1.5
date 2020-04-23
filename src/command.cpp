@@ -13,37 +13,42 @@ OldRepository *CommandRepository = NULL;
 
 static bool _ExactMatch(void *cmd, const void *n)
 {
-  const Command *command = static_cast<const Command*>(cmd);
-  const char *name = static_cast<const char*>(n);
-  return StrCmp(command->Name, name) == 0;
+    const Command *command = static_cast<const Command*>(cmd);
+    const char *name = static_cast<const char*>(n);
+    return StrCmp(command->Name, name) == 0;
 }
 
 static bool _PrefixMatch(void *cmd, const void *n)
 {
-  const Command *command = static_cast<const Command*>(cmd);
-  const char *name = static_cast<const char*>(n);
-  return StringPrefix(command->Name, name) == 0;
+    const Command *command = static_cast<const Command*>(cmd);
+    const char *name = static_cast<const char*>(n);
+    return StringPrefix(command->Name, name) == 0;
+}
+
+Command::Command()
+    : UseRec(std::make_shared<timerset>())
+{
+
 }
 
 Command *GetCommand( const std::string &name )
 {
-  const List *commandList = GetEntities(CommandRepository);
-  Command *command = (Command*) FindIfInList(commandList, _ExactMatch, name.c_str());
+    const List *commandList = GetEntities(CommandRepository);
+    Command *command = (Command*) FindIfInList(commandList, _ExactMatch, name.c_str());
 
-  if(command == NULL)
+    if(command == NULL)
     {
-      command = (Command*) FindIfInList(commandList, _PrefixMatch, name.c_str());
+        command = (Command*) FindIfInList(commandList, _PrefixMatch, name.c_str());
     }
 
-  return command;
+    return command;
 }
 
-Command *AllocateCommand( void )
+Command *AllocateCommand()
 {
-  Command *command = new Command();
-  command->UseRec = new timerset();
+    Command *command = new Command();
 
-  return command;
+    return command;
 }
 
 /*
@@ -51,8 +56,7 @@ Command *AllocateCommand( void )
  */
 void FreeCommand( Command *command )
 {
-  delete command->UseRec;
-  delete command;
+    delete command;
 }
 
 /*
@@ -60,7 +64,7 @@ void FreeCommand( Command *command )
  */
 void RemoveCommand( Command *command )
 {
-  RemoveEntity(CommandRepository, command);
+    RemoveEntity(CommandRepository, command);
 }
 
 /*
@@ -68,120 +72,119 @@ void RemoveCommand( Command *command )
  */
 void AddCommand( Command *command )
 {
-  assert(!command->Name.empty());
-  assert(command->Function != NULL);
+    assert(!command->Name.empty());
+    assert(command->Function != NULL);
 
-  /* make sure the name is all lowercase */
-  for ( size_t i = 0; i < command->Name.size(); ++i )
+    /* make sure the name is all lowercase */
+    for ( size_t i = 0; i < command->Name.size(); ++i )
     {
-      command->Name[i] = CharToLowercase(command->Name[i]);
+        command->Name[i] = CharToLowercase(command->Name[i]);
     }
 
-  AddEntity(CommandRepository, command);
+    AddEntity(CommandRepository, command);
 }
 
 static void PushCommand(void *cmd, void *state)
 {
-  const Command *command = static_cast<const Command*>(cmd);
-  lua_State *L = static_cast<lua_State*>(state);
-  
-  static int idx = 0;
-  lua_pushinteger( L, ++idx );
-  lua_newtable( L );
+    const Command *command = static_cast<const Command*>(cmd);
+    lua_State *L = static_cast<lua_State*>(state);
 
-  LuaSetfieldString( L, "Name", command->Name );
-  LuaSetfieldString( L, "Function", command->FunctionName );
-  LuaSetfieldString( L, "Position", PositionName[command->Position] );
-  LuaSetfieldNumber( L, "Level", command->Level );
-  LuaSetfieldString( L, "Log", CmdLogName[command->Log] );
+    static int idx = 0;
+    lua_pushinteger( L, ++idx );
+    lua_newtable( L );
 
-  lua_settable( L, -3 );
+    LuaSetfieldString( L, "Name", command->Name );
+    LuaSetfieldString( L, "Function", command->FunctionName );
+    LuaSetfieldString( L, "Position", PositionName[command->Position] );
+    LuaSetfieldNumber( L, "Level", command->Level );
+    LuaSetfieldString( L, "Log", CmdLogName[command->Log] );
+
+    lua_settable( L, -3 );
 }
 
 static void PushCommandTable( lua_State *L, const void *dummy )
 {
-  const List *commands = GetEntities(CommandRepository);
-  lua_newtable( L );
-  ForEachInList(commands, PushCommand, L);
-  lua_setglobal( L, "commands" );
+    const List *commands = GetEntities(CommandRepository);
+    lua_newtable( L );
+    ForEachInList(commands, PushCommand, L);
+    lua_setglobal( L, "commands" );
 }
 
 void SaveCommands( void )
 {
-  SaveEntities(CommandRepository);
+    SaveEntities(CommandRepository);
 }
 
 static void _SaveCommands(const OldRepository *repo)
 {
-  LuaSaveDataFile( COMMAND_DATA_FILE, PushCommandTable, "commands", NULL );
+    LuaSaveDataFile( COMMAND_DATA_FILE, PushCommandTable, "commands", NULL );
 }
 
 static int L_CommandEntry( lua_State *L )
 {
-  std::string name;
-  LuaGetfieldString( L, "Name", &name );
+    std::string name;
+    LuaGetfieldString( L, "Name", &name );
 
-  if( name.empty() )
+    if( name.empty() )
     {
-      return 0;
+        return 0;
     }
-  
-  Command *newCommand = AllocateCommand();
-  newCommand->Name = name;
-  
-  LuaGetfieldString( L, "Function",
-                     [newCommand](const std::string &symbolName)
-                     {
-                       newCommand->Function = GetSkillFunction( symbolName );
 
-                       if( newCommand->Function != skill_notfound )
-                         {
-                           newCommand->FunctionName = symbolName;
-                         }
-                     });
-  LuaGetfieldString( L, "Position",
-                     [newCommand](const std::string &positionName)
-                     {
-                       PositionType position = GetPosition( positionName );
+    Command *newCommand = AllocateCommand();
+    newCommand->Name = name;
 
-                       if( position == (PositionType)-1 )
-                         {
-                           position = POS_DEAD;
-                         }
+    LuaGetfieldString( L, "Function",
+                       [newCommand](const std::string &symbolName)
+                       {
+                           newCommand->Function = GetSkillFunction( symbolName );
 
-                       newCommand->Position = position;
-                     });
-  LuaGetfieldInt( L, "Level", &newCommand->Level );
-  newCommand->Level = newCommand->Level > MAX_LEVEL ? MAX_LEVEL : newCommand->Level;
-  LuaGetfieldString( L, "Log",
-                     [newCommand](const std::string &logTypeName)
-                     {
-                       int logType = GetCmdLog( logTypeName );
+                           if( newCommand->Function != skill_notfound )
+                           {
+                               newCommand->FunctionName = symbolName;
+                           }
+                       });
+    LuaGetfieldString( L, "Position",
+                       [newCommand](const std::string &positionName)
+                       {
+                           PositionType position = GetPosition( positionName );
 
-                       if( logType == -1 )
-                         {
-                           logType = LOG_NORMAL;
-                         }
+                           if( position == (PositionType)-1 )
+                           {
+                               position = POS_DEAD;
+                           }
 
-                       newCommand->Log = logType;
-                     });
+                           newCommand->Position = position;
+                       });
+    LuaGetfieldInt( L, "Level", &newCommand->Level );
+    newCommand->Level = newCommand->Level > MAX_LEVEL ? MAX_LEVEL : newCommand->Level;
+    LuaGetfieldString( L, "Log",
+                       [newCommand](const std::string &logTypeName)
+                       {
+                           int logType = GetCmdLog( logTypeName );
 
-  AddCommand( newCommand );
-  return 0;
+                           if( logType == -1 )
+                           {
+                               logType = LOG_NORMAL;
+                           }
+
+                           newCommand->Log = logType;
+                       });
+
+    AddCommand( newCommand );
+    return 0;
 }
 
 void LoadCommands(void)
 {
-  LoadEntities(CommandRepository);
+    LoadEntities(CommandRepository);
 }
 
 static void _LoadCommands(OldRepository *repo)
 {
-  LuaLoadDataFile( COMMAND_DATA_FILE, L_CommandEntry, "CommandEntry" );
+    LuaLoadDataFile( COMMAND_DATA_FILE, L_CommandEntry, "CommandEntry" );
 }
 
 OldRepository *NewCommandRepository()
 {
-  return (OldRepository*) NewRepository(_LoadCommands, _SaveCommands);
+    return (OldRepository*) NewRepository(_LoadCommands, _SaveCommands);
 }
-

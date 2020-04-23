@@ -1284,8 +1284,8 @@ int CountCharactersOnObject(const Object *obj);
 /* interp.c */
 bool CheckPosition(const Character *ch, PositionType position);
 void Interpret(Character *ch, std::string argument);
-void SendTimer(timerset *vtime, Character *ch);
-void UpdateNumberOfTimesUsed(timeval *time_used, timerset *userec);
+void SendTimer(std::shared_ptr<timerset> vtime, Character *ch);
+void UpdateNumberOfTimesUsed(timeval *time_used, std::shared_ptr<timerset> userec);
 
 /* magic.c */
 int ModifySavingThrowBasedOnResistance(const Character *ch, int save_chance, int ris);

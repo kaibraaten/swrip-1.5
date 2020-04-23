@@ -73,14 +73,12 @@ class FakeSkillRepository : public SkillRepository
 public:
     FakeSkillRepository()
     {
-        _myCraftingSkill->UseRec = new timerset();
         _myCraftingSkill->Name = "makesomething";
         SkillTable[gsn_mycraftingskill] = _myCraftingSkill;
     }
 
     ~FakeSkillRepository()
     {
-        delete _myCraftingSkill->UseRec;
         SkillTable[gsn_mycraftingskill] = nullptr;
     }
 

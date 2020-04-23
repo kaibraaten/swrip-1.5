@@ -31,6 +31,12 @@ static int L_SkillEntry(lua_State *L);
 static std::shared_ptr<Skill> LoadSkillOrHerb(lua_State *L);
 static void PushHerbTable(lua_State *L, const void *userData);
 
+Skill::Skill()
+    : UseRec(std::make_shared<timerset>())
+{
+
+}
+
 /*
  * Perform a binary search on a section of the skill table
  * Each different section of the skill table is sorted alphabetically
@@ -994,7 +1000,6 @@ static std::shared_ptr<Skill> LoadSkillOrHerb(lua_State *L)
     }
 
     std::shared_ptr<Skill> skill = std::make_shared<Skill>();
-    skill->UseRec = new timerset();
     skill->Name = skillName;
 
     LuaGetfieldString(L, "Ability",

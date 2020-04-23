@@ -1,173 +1,173 @@
 -- Sorosuub System Hopper
--- Last saved Thursday 23-Apr-2020 09:23:12
+-- Last saved Thursday 23-Apr-2020 10:00:38
 
 ShipEntry
 {
+   Owner = "public", 
+   Type = "Civilian", 
+   Shipyard = 31847, 
+   Pilot = "", 
+   Guard = false, 
+   PersonalName = "6048", 
+   DockingPorts = 0, 
+   State = 0, 
+   Class = "Starfighter", 
    Instruments = 
    {
-      Sensor = 5, 
       Comm = 0, 
       AstroArray = 0, 
+      Sensor = 5, 
    }, 
-   Owner = "public", 
-   Description = "", 
+   LastDock = 31847, 
+   Name = "Sorosuub System Hopper", 
+   Home = "Tatooine", 
+   Rooms = 
+   {
+      Gunseat = 32170, 
+      Entrance = 32170, 
+      Coseat = 32170, 
+      Navseat = 32170, 
+      Engine = 0, 
+      First = 32170, 
+      Hangar = 0, 
+      Pilotseat = 32170, 
+      Cockpit = 32170, 
+      Last = 32170, 
+   }, 
    Defenses = 
    {
-      Hull = 
-      {
-         Current = 100, 
-         Max = 100, 
-      }, 
       Chaff = 
       {
-         Current = 0, 
          Max = 0, 
+         Current = 0, 
       }, 
       Shield = 
       {
-         Current = 0, 
          Max = 10, 
-      }, 
-   }, 
-   DockingPorts = 0, 
-   LastDock = 31847, 
-   State = 0, 
-   Hyperdrive = 
-   {
-      Speed = 100, 
-   }, 
-   Rooms = 
-   {
-      Last = 32170, 
-      Cockpit = 32170, 
-      Engine = 0, 
-      Hangar = 0, 
-      Coseat = 32170, 
-      Gunseat = 32170, 
-      First = 32170, 
-      Pilotseat = 32170, 
-      Navseat = 32170, 
-      Entrance = 32170, 
-   }, 
-   Class = "Starfighter", 
-   Position = 
-   {
-      X = 5000002, 
-      Z = 1, 
-      Y = -4499998, 
-   }, 
-   Thrusters = 
-   {
-      Speed = 
-      {
          Current = 0, 
-         Max = 65, 
       }, 
-      Energy = 
+      Hull = 
       {
-         Current = 2000, 
-         Max = 2000, 
+         Max = 100, 
+         Current = 100, 
       }, 
-      Maneuver = 35, 
    }, 
-   CoPilot = "", 
    WeaponSystems = 
    {
-      TractorBeam = 
-      {
-         State = 1, 
-         Strength = 0, 
-      }, 
       IonCannon = 
       {
-         State = 0, 
          Count = 0, 
-      }, 
-      Tube = 
-      {
-         Rockets = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         Missiles = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
          State = 0, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
       }, 
       Laser = 
       {
-         State = 0, 
          Count = 0, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         State = 1, 
+         Strength = 0, 
+      }, 
+      Tube = 
+      {
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         State = 0, 
+         Missiles = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
       }, 
    }, 
-   Home = "Tatooine", 
+   Hyperdrive = 
+   {
+      Speed = 100, 
+   }, 
+   Position = 
+   {
+      Z = 1, 
+      X = 5000002, 
+      Y = -4499998, 
+   }, 
+   Description = "", 
    Location = 31847, 
-   Type = "Civilian", 
-   Guard = false, 
-   Name = "Sorosuub System Hopper", 
-   Pilot = "", 
+   Thrusters = 
+   {
+      Energy = 
+      {
+         Max = 2000, 
+         Current = 2000, 
+      }, 
+      Maneuver = 35, 
+      Speed = 
+      {
+         Max = 65, 
+         Current = 0, 
+      }, 
+   }, 
+   CoPilot = "", 
    Alarm = false, 
-   Shipyard = 31847, 
-   PersonalName = "6048", 
 }

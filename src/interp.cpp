@@ -504,7 +504,7 @@ void Interpret(Character *ch, std::string argument)
     }
 }
 
-void SendTimer(timerset *vtime, Character *ch)
+void SendTimer(std::shared_ptr<timerset> vtime, Character *ch)
 {
     timeval ntime;
     int carry = 0;
@@ -523,7 +523,7 @@ void SendTimer(timerset *vtime, Character *ch)
         ntime.tv_usec, vtime->MaxTime.tv_sec, vtime->MaxTime.tv_usec);
 }
 
-void UpdateNumberOfTimesUsed(timeval *time_used, timerset *userec)
+void UpdateNumberOfTimesUsed(timeval *time_used, std::shared_ptr<timerset> userec)
 {
     userec->NumberOfTimesUsed++;
 

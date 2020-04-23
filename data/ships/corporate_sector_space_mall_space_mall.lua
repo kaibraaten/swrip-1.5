@@ -1,173 +1,173 @@
 -- Corporate Sector Space Mall
--- Last saved Thursday 23-Apr-2020 09:23:12
+-- Last saved Thursday 23-Apr-2020 10:00:38
 
 ShipEntry
 {
-   Defenses = 
-   {
-      Shield = 
-      {
-         Current = 1000, 
-         Max = 1000, 
-      }, 
-      Chaff = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
-      Hull = 
-      {
-         Current = 20000, 
-         Max = 20000, 
-      }, 
-   }, 
-   PersonalName = "Space Mall", 
-   Guard = false, 
+   Owner = "Corporate Sector", 
    Type = "Civilian", 
+   Shipyard = 45, 
+   Pilot = "", 
+   Guard = false, 
+   PersonalName = "Space Mall", 
+   DockingPorts = 0, 
+   State = 1, 
+   Class = "Capital Ship", 
    Instruments = 
    {
       Comm = 0, 
-      Sensor = 0, 
       AstroArray = 0, 
+      Sensor = 0, 
    }, 
+   LastDock = 45, 
+   Name = "Corporate Sector Space Mall", 
+   Home = "corperate", 
    Rooms = 
    {
-      Engine = 0, 
-      Last = 7350, 
-      Coseat = 7350, 
       Gunseat = 7350, 
+      Entrance = 7350, 
+      Coseat = 7350, 
+      Navseat = 7350, 
+      Engine = 0, 
+      First = 7300, 
+      Hangar = 7300, 
       Pilotseat = 7350, 
       Cockpit = 7350, 
-      First = 7300, 
-      Navseat = 7350, 
-      Entrance = 7350, 
-      Hangar = 7300, 
+      Last = 7350, 
    }, 
-   Alarm = false, 
-   Location = 0, 
-   Name = "Corporate Sector Space Mall", 
-   Hyperdrive = 
+   Defenses = 
    {
-      Speed = 255, 
-   }, 
-   State = 1, 
-   Owner = "Corporate Sector", 
-   Thrusters = 
-   {
-      Energy = 
+      Chaff = 
       {
-         Current = 20000, 
-         Max = 20000, 
-      }, 
-      Speed = 
-      {
-         Current = 0, 
          Max = 0, 
+         Current = 0, 
       }, 
-      Maneuver = 0, 
+      Shield = 
+      {
+         Max = 1000, 
+         Current = 1000, 
+      }, 
+      Hull = 
+      {
+         Max = 20000, 
+         Current = 20000, 
+      }, 
    }, 
-   Position = 
-   {
-      X = -24883, 
-      Y = -64130, 
-      Z = -66575, 
-   }, 
-   Shipyard = 45, 
-   Class = "Capital Ship", 
-   CoPilot = "", 
-   Description = "", 
-   Home = "corperate", 
    WeaponSystems = 
    {
-      Tube = 
+      IonCannon = 
       {
-         Rockets = 
-         {
-            Current = 4, 
-            Max = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Current = 2, 
-            Max = 0, 
-         }, 
-         Missiles = 
-         {
-            Current = 10, 
-            Max = 10, 
-         }, 
+         Count = 0, 
          State = 0, 
       }, 
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
+      }, 
+      Laser = 
+      {
+         Count = 10, 
+         State = 0, 
       }, 
       TractorBeam = 
       {
          State = 0, 
          Strength = 0, 
       }, 
-      IonCannon = 
+      Tube = 
       {
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 2, 
+         }, 
          State = 0, 
-         Count = 0, 
-      }, 
-      Laser = 
-      {
-         State = 0, 
-         Count = 10, 
+         Missiles = 
+         {
+            Max = 10, 
+            Current = 10, 
+         }, 
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 4, 
+         }, 
       }, 
    }, 
-   Pilot = "", 
-   LastDock = 45, 
-   DockingPorts = 0, 
+   Hyperdrive = 
+   {
+      Speed = 255, 
+   }, 
+   Position = 
+   {
+      Z = -76555, 
+      X = -26856, 
+      Y = -55142, 
+   }, 
+   Description = "", 
+   Location = 0, 
+   Thrusters = 
+   {
+      Energy = 
+      {
+         Max = 20000, 
+         Current = 20000, 
+      }, 
+      Maneuver = 0, 
+      Speed = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+   }, 
+   CoPilot = "", 
+   Alarm = false, 
 }

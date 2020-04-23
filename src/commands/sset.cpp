@@ -97,7 +97,6 @@ void do_sset(Character* ch, std::string argument)
         }
 
         std::shared_ptr<Skill> skill = std::make_shared<Skill>();
-        skill->UseRec = new timerset();
 
         if (type == SKILL_HERB)
         {

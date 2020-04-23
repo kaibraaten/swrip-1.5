@@ -18,6 +18,7 @@
 class Skill
 {
 public:
+    Skill();
     std::string Name;                   /* Name of skill                */
     SpellFun *SpellFunction = nullptr;              /* Spell pointer (for spells)   */
     CmdFun *SkillFunction = nullptr;              /* Skill pointer (for skills)   */
@@ -46,15 +47,15 @@ public:
 
     } Messages;
 
-    std::string Dice;                   /* Dice roll                    */
-    int Value = 0;                  /* Misc value                   */
-    int Saves = 0;                  /* What saving spell applies    */
-    int Difficulty = 0;             /* Difficulty of casting/learning */
-    std::list<std::shared_ptr<SmaugAffect>> Affects;                /* Spell affects, if any        */
-    std::string Teachers;               /* Skill requires a special teacher */
-    int Participants = 0;           /* # of required participants   */
-    timerset *UseRec = nullptr; /* Usage record                 */
-    int Alignment = 0;              /* for jedi powers */
+    std::string Dice;                   // Dice roll
+    int Value = 0;                  // Misc value
+    int Saves = 0;                  // What saving spell applies
+    int Difficulty = 0;             // Difficulty of casting/learning
+    std::list<std::shared_ptr<SmaugAffect>> Affects;      // Spell affects, if any
+    std::string Teachers;               // Skill requires a special teacher
+    int Participants = 0;           // # of required participants
+    std::shared_ptr<timerset> UseRec;
+    int Alignment = 0;              // for jedi powers
 };
 
 extern const std::array<const char * const, SKILLTYPE_MAX> SkillTypeName;
