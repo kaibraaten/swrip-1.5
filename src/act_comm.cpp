@@ -509,7 +509,7 @@ void ToChannel(const std::string &argument, int channel, const std::string &verb
 {
     char buf[MAX_STRING_LENGTH];
 
-    if (!Descriptors->Count() == 0 || argument.empty())
+    if (Descriptors->Count() == 0 || argument.empty())
         return;
 
     sprintf(buf, "%s: %s\r\n", verb.c_str(), argument.c_str());
