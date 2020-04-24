@@ -74,14 +74,7 @@ public:
     int LowEconomy = 0;
 };
 
-extern std::shared_ptr<Area> FirstArea;
-extern std::shared_ptr<Area> LastArea;
-extern std::shared_ptr<Area> FirstBuild;
-extern std::shared_ptr<Area> LastBuild;
-extern std::shared_ptr<Area> FirstASort;
-extern std::shared_ptr<Area> LastASort;
-extern std::shared_ptr<Area> FirstBSort;
-extern std::shared_ptr<Area> LastBSort;
+
 
 void FixAreaExits(std::shared_ptr<Area> tarea);
 void LoadAreaFile(std::shared_ptr<Area> tarea, const std::string &filename);

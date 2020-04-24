@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "area.hpp"
 #include "room.hpp"
+#include "repos/arearepository.hpp"
 
 void do_foldarea(Character *ch, std::string argument)
 {
@@ -25,7 +26,7 @@ void do_foldarea(Character *ch, std::string argument)
 
     fold_all_areas = !StrCmp(arg, "all");
 
-    for (auto tarea = FirstArea; tarea; tarea = tarea->Next)
+    for (auto tarea = Areas->FirstArea; tarea; tarea = tarea->Next)
     {
         if (!StrCmp(tarea->Filename, arg) || fold_all_areas)
         {

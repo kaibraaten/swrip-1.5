@@ -37,6 +37,7 @@
 #include "protomob.hpp"
 #include "systemdata.hpp"
 #include "exit.hpp"
+#include "repos/arearepository.hpp"
 
 bool CanModifyRoom(const Character *ch, std::shared_ptr<Room> room)
 {
@@ -795,7 +796,7 @@ void WriteAreaList()
 
     if (fpout)
     {
-        for (auto tarea = FirstArea; tarea; tarea = tarea->Next)
+        for (auto tarea = Areas->FirstArea; tarea; tarea = tarea->Next)
             fprintf(fpout, "%s\n", tarea->Filename.c_str());
 
         fprintf(fpout, "$\n");

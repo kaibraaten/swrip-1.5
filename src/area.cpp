@@ -19,18 +19,10 @@
 #include "exit.hpp"
 #include "repos/shoprepository.hpp"
 #include "repos/objectrepository.hpp"
+#include "repos/arearepository.hpp"
 
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];
-
-std::shared_ptr<Area> FirstArea;
-std::shared_ptr<Area> LastArea;
-std::shared_ptr<Area> FirstBuild;
-std::shared_ptr<Area> LastBuild;
-std::shared_ptr<Area> FirstASort;
-std::shared_ptr<Area> LastASort;
-std::shared_ptr<Area> FirstBSort;
-std::shared_ptr<Area> LastBSort;
 
 static void LoadArea(FILE *fp);
 static void LoadAuthor(std::shared_ptr<Area> tarea, FILE *fp);
@@ -55,7 +47,7 @@ void LoadAreaFile(std::shared_ptr<Area> tarea, const std::string &filename)
     char buf[MAX_STRING_LENGTH];
 
     if (fBootDb)
-        tarea = LastArea;
+        tarea = Areas->LastArea;
 
     if (!fBootDb && !tarea)
     {
@@ -91,7 +83,7 @@ void LoadAreaFile(std::shared_ptr<Area> tarea, const std::string &filename)
             if (fBootDb)
             {
                 LoadArea(fpArea);
-                tarea = LastArea;
+                tarea = Areas->LastArea;
             }
             else
             {
@@ -217,13 +209,13 @@ void SortArea(std::shared_ptr<Area> pArea, bool proto)
 
     if (proto)
     {
-        first_sort = FirstBSort;
-        last_sort = LastBSort;
+        first_sort = Areas->FirstBSort;
+        last_sort = Areas->LastBSort;
     }
     else
     {
-        first_sort = FirstASort;
-        last_sort = LastASort;
+        first_sort = Areas->FirstASort;
+        last_sort = Areas->LastASort;
     }
 
     pArea->NextSort = NULL;
@@ -271,13 +263,13 @@ void SortArea(std::shared_ptr<Area> pArea, bool proto)
 
     if (proto)
     {
-        FirstBSort = first_sort;
-        LastBSort = last_sort;
+        Areas->FirstBSort = first_sort;
+        Areas->LastBSort = last_sort;
     }
     else
     {
-        FirstASort = first_sort;
-        LastASort = last_sort;
+        Areas->FirstASort = first_sort;
+        Areas->LastASort = last_sort;
     }
 }
 
@@ -292,7 +284,7 @@ static void LoadArea(FILE *fp)
     pArea->LevelRanges.Soft.High = MAX_LEVEL;
     pArea->LevelRanges.Hard.High = MAX_LEVEL;
 
-    LINK(pArea, FirstArea, LastArea, Next, Previous);
+    LINK(pArea, Areas->FirstArea, Areas->LastArea, Next, Previous);
     top_area++;
 }
 
@@ -1421,7 +1413,7 @@ std::shared_ptr<Area> GetArea(const std::string &name)
 {
     std::shared_ptr<Area> area;
 
-    for (area = FirstArea; area; area = area->Next)
+    for (area = Areas->FirstArea; area; area = area->Next)
     {
         if (!StrCmp(area->Filename, name) || !StrCmp(area->Name, name))
         {
@@ -1437,7 +1429,7 @@ std::shared_ptr<Area> GetArea(const std::string &name)
  */
 void AreaUpdate()
 {
-    for (auto area = FirstArea; area; area = area->Next)
+    for (auto area = Areas->FirstArea; area; area = area->Next)
     {
         int reset_age = area->ResetFrequency ? area->ResetFrequency : 15;
 
@@ -1732,8 +1724,8 @@ void CloseArea(std::shared_ptr<Area> pArea)
         ereset_next = ereset->Next;
     }
 
-    UNLINK(pArea, FirstBuild, LastBuild, Next, Previous);
-    UNLINK(pArea, FirstASort, LastASort, NextSort, PreviousSort);
+    UNLINK(pArea, Areas->FirstBuild, Areas->LastBuild, Next, Previous);
+    UNLINK(pArea, Areas->FirstASort, Areas->LastASort, NextSort, PreviousSort);
 }
 
 void FreeArea(std::shared_ptr<Area> are)
@@ -1763,7 +1755,7 @@ void AssignAreaTo(Character *ch)
 
         if (tarea == nullptr)
         {
-            for (auto tmp = FirstBuild; tmp; tmp = tmp->Next)
+            for (auto tmp = Areas->FirstBuild; tmp; tmp = tmp->Next)
             {
                 if (!StrCmp(taf, tmp->Filename))
                 {
@@ -1778,7 +1770,7 @@ void AssignAreaTo(Character *ch)
             sprintf(buf, "Creating area entry for %s", ch->Name.c_str());
             Log->LogStringPlus(buf, LOG_NORMAL, ch->TopLevel);
             tarea = std::make_shared<Area>();
-            LINK(tarea, FirstBuild, LastBuild, Next, Previous);
+            LINK(tarea, Areas->FirstBuild, Areas->LastBuild, Next, Previous);
             sprintf(buf, "{PROTO} %s's area in progress", ch->Name.c_str());
             tarea->Name = buf;
             tarea->Filename = taf;

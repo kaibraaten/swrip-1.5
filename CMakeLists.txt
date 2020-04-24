@@ -580,6 +580,7 @@ src/mpcommands/mprestore.cpp
 src/mpcommands/mpslay.cpp
 src/mpcommands/mptransfer.cpp
 src/mpcommands/mpwithdraw.cpp
+src/repos/arearepository.cpp
 src/repos/badnamerepository.cpp
 src/repos/banrepository.cpp
 src/repos/boardrepository.cpp
@@ -657,8 +658,7 @@ src/spells/shockinggrasp.cpp
 src/spells/sleep.cpp
 src/spells/smaug.cpp
 src/spells/ventriloquate.cpp
-src/spells/weaken.cpp
-  )
+src/spells/weaken.cpp)
 
 if(WIN32)
   target_link_libraries(swrip utility colorparser lua WS2_32)

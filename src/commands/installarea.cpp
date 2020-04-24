@@ -4,6 +4,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "repos/playerrepository.hpp"
+#include "repos/arearepository.hpp"
 
 /*
  * A complicated to use command as it currently exists.         -Thoric
@@ -23,7 +24,7 @@ void do_installarea(Character *ch, std::string argument)
         return;
     }
 
-    for (auto tarea = FirstBuild; tarea; tarea = tarea->Next)
+    for (auto tarea = Areas->FirstBuild; tarea; tarea = tarea->Next)
     {
         if (!StrCmp(tarea->Filename, arg))
         {
@@ -37,10 +38,10 @@ void do_installarea(Character *ch, std::string argument)
             FoldArea(tarea, tarea->Filename, true);
 
             /* Remove from prototype area list */
-            UNLINK(tarea, FirstBuild, LastBuild, Next, Previous);
+            UNLINK(tarea, Areas->FirstBuild, Areas->LastBuild, Next, Previous);
 
             /* Add to real area list */
-            LINK(tarea, FirstArea, LastArea, Next, Previous);
+            LINK(tarea, Areas->FirstArea, Areas->LastArea, Next, Previous);
 
             /* Fix up author if online */
             for (Character *author : PlayerCharacters->Entities())

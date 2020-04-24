@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "character.hpp"
+#include "repos/arearepository.hpp"
 
 static void ShowArea(std::shared_ptr<Area> area, const Character *ch);
 
@@ -10,7 +11,7 @@ void do_areas(Character *ch, std::string argument)
     ch->Echo("\r\n   Author    |             Area                     | Recommended |  Enforced\r\n");
     ch->Echo("-------------+--------------------------------------+-------------+-----------\r\n");
 
-    for(auto area = FirstArea; area; area = area->Next)
+    for(auto area = Areas->FirstArea; area; area = area->Next)
     {
         ShowArea(area, ch);
     }

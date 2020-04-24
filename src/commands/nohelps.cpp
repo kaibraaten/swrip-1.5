@@ -4,6 +4,7 @@
 #include "help.hpp"
 #include "skill.hpp"
 #include "area.hpp"
+#include "repos/arearepository.hpp"
 
 static void ShowMissingHelpsForCommands(const Character *ch);
 static void ShowMissingHelpsForSkills(const Character *ch);
@@ -108,7 +109,7 @@ static void ShowMissingHelpsForAreas(const Character *ch)
 
     ch->Echo("&GAreas for which there are no help files:\r\n\r\n");
 
-    for (auto tArea = FirstArea; tArea; tArea = tArea->Next)
+    for (auto tArea = Areas->FirstArea; tArea; tArea = tArea->Next)
     {
         if (!GetHelpFile(ch, tArea->Name))
         {

@@ -4,6 +4,7 @@
 #include "pcdata.hpp"
 #include "room.hpp"
 #include "systemdata.hpp"
+#include "repos/arearepository.hpp"
 
 void do_aassign(Character *ch, std::string argument)
 {
@@ -43,7 +44,7 @@ void do_aassign(Character *ch, std::string argument)
         || (IsName(argument, ch->PCData->Bestowments)
             && GetTrustLevel(ch) >= SysData.LevelToModifyProto))
     {
-        for (auto tmp = FirstArea; tmp; tmp = tmp->Next)
+        for (auto tmp = Areas->FirstArea; tmp; tmp = tmp->Next)
         {
             if (!StrCmp(argument, tmp->Filename))
             {
@@ -55,7 +56,7 @@ void do_aassign(Character *ch, std::string argument)
 
     if (!tarea)
     {
-        for (auto tmp = FirstBuild; tmp; tmp = tmp->Next)
+        for (auto tmp = Areas->FirstBuild; tmp; tmp = tmp->Next)
         {
             if (!StrCmp(argument, tmp->Filename))
             {

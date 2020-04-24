@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "character.hpp"
+#include "repos/arearepository.hpp"
 
 /*
  * Dangerous command.  Can be used to install an area that was either:
@@ -13,16 +14,16 @@
  *
  * NOTE: Use of this command is not recommended.                -Thoric
  */
-void do_unfoldarea( Character *ch, std::string argument )
+void do_unfoldarea(Character* ch, std::string argument)
 {
-  if ( argument.empty() )
+    if (argument.empty())
     {
-      ch->Echo("Unfold what?\r\n");
-      return;
+        ch->Echo("Unfold what?\r\n");
+        return;
     }
 
-  fBootDb = true;
-  LoadAreaFile( LastArea, argument );
-  fBootDb = false;
+    fBootDb = true;
+    LoadAreaFile(Areas->LastArea, argument);
+    fBootDb = false;
 }
 

@@ -2,10 +2,11 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "room.hpp"
+#include "repos/arearepository.hpp"
 
 void do_buyhome(Character *ch, std::string argument)
 {
-    const int houseCost = 100000;
+    constexpr auto houseCost = 100000;
 
     if (IsNpc(ch) || !ch->PCData)
         return;
@@ -18,7 +19,7 @@ void do_buyhome(Character *ch, std::string argument)
 
     auto room = ch->InRoom;
 
-    for (auto pArea = FirstBSort; pArea; pArea = pArea->NextSort)
+    for (auto pArea = Areas->FirstBSort; pArea; pArea = pArea->NextSort)
     {
         if (room->Area == pArea)
         {

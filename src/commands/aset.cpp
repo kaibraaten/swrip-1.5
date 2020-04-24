@@ -4,6 +4,7 @@
 #include "area.hpp"
 #include "room.hpp"
 #include "repos/planetrepository.hpp"
+#include "repos/arearepository.hpp"
 
 void do_aset(Character *ch, std::string argument)
 {
@@ -30,7 +31,7 @@ void do_aset(Character *ch, std::string argument)
 
     found = false;
 
-    for (tarea = FirstArea; tarea; tarea = tarea->Next)
+    for (tarea = Areas->FirstArea; tarea; tarea = tarea->Next)
         if (!StrCmp(tarea->Filename, arg1))
         {
             found = true;
@@ -38,7 +39,7 @@ void do_aset(Character *ch, std::string argument)
         }
 
     if (!found)
-        for (tarea = FirstBuild; tarea; tarea = tarea->Next)
+        for (tarea = Areas->FirstBuild; tarea; tarea = tarea->Next)
             if (!StrCmp(tarea->Filename, arg1))
             {
                 found = true;

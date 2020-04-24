@@ -5,6 +5,7 @@
 #include "pcdata.hpp"
 #include "log.hpp"
 #include "room.hpp"
+#include "repos/arearepository.hpp"
 
 void do_reset(Character *ch, std::string argument)
 {
@@ -18,7 +19,7 @@ void do_reset(Character *ch, std::string argument)
 
         sprintf(fname, "%s.are", Capitalize(arg).c_str());
 
-        for (pArea = FirstBuild; pArea; pArea = pArea->Next)
+        for (pArea = Areas->FirstBuild; pArea; pArea = pArea->Next)
         {
             if (!StrCmp(fname, pArea->Filename))
             {

@@ -3,6 +3,7 @@
 #include "reset.hpp"
 #include "area.hpp"
 #include "pcdata.hpp"
+#include "repos/arearepository.hpp"
 
 void do_loadarea(Character *ch, std::string argument)
 {
@@ -25,7 +26,7 @@ void do_loadarea(Character *ch, std::string argument)
     {
         bool found = false;
 
-        for (tarea = FirstBuild; tarea; tarea = tarea->Next)
+        for (tarea = Areas->FirstBuild; tarea; tarea = tarea->Next)
         {
             if (!StrCmp(tarea->Filename, argument))
             {

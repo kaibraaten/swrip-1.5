@@ -3,6 +3,7 @@
 #include "area.hpp"
 #include "pcdata.hpp"
 #include "room.hpp"
+#include "repos/arearepository.hpp"
 
 void do_savearea(Character *ch, std::string argument)
 {
@@ -30,7 +31,7 @@ void do_savearea(Character *ch, std::string argument)
             return;
         }
 
-        for (found = false, tarea = FirstBuild; tarea; tarea = tarea->Next)
+        for (found = false, tarea = Areas->FirstBuild; tarea; tarea = tarea->Next)
         {
             if (!StrCmp(tarea->Filename, argument))
             {

@@ -55,6 +55,7 @@ namespace fs = std::filesystem;
 #include "repos/descriptorrepository.hpp"
 #include "repos/objectrepository.hpp"
 #include "repos/skillrepository.hpp"
+#include "repos/arearepository.hpp"
 #include "room.hpp"
 #include "object.hpp"
 #include "protoobject.hpp"
@@ -603,7 +604,7 @@ void BootDatabase(bool fCopyOver)
         if (strArea[0] == '$')
             break;
 
-        LoadAreaFile(LastArea, strArea);
+        LoadAreaFile(Areas->LastArea, strArea);
     }
 
     fclose(fpList);
@@ -706,7 +707,7 @@ void AddCharacter(Character *ch)
  */
 static void InitializeEconomy()
 {
-    for (auto tarea = FirstArea; tarea; tarea = tarea->Next)
+    for (auto tarea = Areas->FirstArea; tarea; tarea = tarea->Next)
     {
         std::shared_ptr<ProtoMobile> mob;
         int idx = 0, gold = 0, rng = 0;
@@ -1600,7 +1601,7 @@ static void LoadBuildList()
                     pArea->LevelRanges.Soft.High = -1;
                     pArea->LevelRanges.Hard.Low = -1;
                     pArea->LevelRanges.Hard.High = -1;
-                    LINK(pArea, FirstBuild, LastBuild, Next, Previous);
+                    LINK(pArea, Areas->FirstBuild, Areas->LastBuild, Next, Previous);
                     fprintf(stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld "
                         "Mobs: %5ld - %-5ld\n",
                         pArea->Filename.c_str(),
@@ -1632,9 +1633,9 @@ void ShowVnums(const Character *ch, vnum_t low, vnum_t high, bool proto, bool sh
     SetCharacterColor(AT_PLAIN, ch);
 
     if (proto)
-        first_sort = FirstBSort;
+        first_sort = Areas->FirstBSort;
     else
-        first_sort = FirstASort;
+        first_sort = Areas->FirstASort;
 
     for (auto pArea = first_sort; pArea; pArea = pArea->NextSort)
     {
@@ -1687,7 +1688,7 @@ void AppendFile(const Character *ch, const std::string &file, const std::string 
     }
 }
 
-void AllocateRepositories(void)
+void AllocateRepositories()
 {
     Ships = NewShipRepository();
     HelpFiles = NewHelpFileRepository();
@@ -1707,4 +1708,5 @@ void AllocateRepositories(void)
     Descriptors = NewDescriptorRepository();
     Objects = NewObjectRepository();
     Skills = NewSkillRepository();
+    Areas = NewAreaRepository();
 }

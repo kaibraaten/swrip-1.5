@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "character.hpp"
+#include "repos/arearepository.hpp"
 
 /* Check to make sure range of vnums is free - Scryn 2/27/96 */
 void do_check_vnums(Character *ch, std::string argument)
@@ -82,7 +83,7 @@ void do_check_vnums(Character *ch, std::string argument)
 
     SetCharacterColor(AT_PLAIN, ch);
 
-    for (auto pArea = FirstASort; pArea; pArea = pArea->NextSort)
+    for (auto pArea = Areas->FirstASort; pArea; pArea = pArea->NextSort)
     {
         area_conflict = false;
 
@@ -160,7 +161,7 @@ void do_check_vnums(Character *ch, std::string argument)
         }
     }
 
-    for (auto pArea = FirstBSort; pArea; pArea = pArea->NextSort)
+    for (auto pArea = Areas->FirstBSort; pArea; pArea = pArea->NextSort)
     {
         area_conflict = false;
 

@@ -8,6 +8,7 @@
 #include "descriptor.hpp"
 #include "repos/descriptorrepository.hpp"
 #include "repos/playerrepository.hpp"
+#include "repos/arearepository.hpp"
 
 static void CloseDescriptorIfHalfwayLoggedIn(const std::string &name);
 static void ExtractVictim(Character *victim);
@@ -64,7 +65,7 @@ void do_destroy(Character *ch, std::string victimName)
         char areaName[100];
         sprintf(areaName, "%s.are", Capitalize(victimName).c_str());
 
-        for (auto pArea = FirstBuild; pArea; pArea = pArea->Next)
+        for (auto pArea = Areas->FirstBuild; pArea; pArea = pArea->Next)
         {
             if (!StrCmp(pArea->Filename, areaName))
             {
