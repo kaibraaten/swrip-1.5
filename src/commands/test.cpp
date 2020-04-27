@@ -23,6 +23,7 @@
 #include "repos/planetrepository.hpp"
 #include "repos/spaceobjectrepository.hpp"
 #include "repos/shuttlerepository.hpp"
+#include "repos/arearepository.hpp"
 
 void do_test( Character *ch, std::string argument )
 {
@@ -49,6 +50,13 @@ void do_test( Character *ch, std::string argument )
     }
 #endif
 
+  if( !StrCmp( argument, "saveareas" ) )
+    {
+      ch->Echo("Saving areas...\r\n" );
+      Areas->Save();
+      return;
+    }
+  
   if( !StrCmp( argument, "saveclans" ) )
     {
       ch->Echo("Saving clans...\r\n" );

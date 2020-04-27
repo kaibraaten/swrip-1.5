@@ -11,7 +11,8 @@ public:
     virtual void Load() = 0;
     virtual void Save() const = 0;
     virtual void Save(const std::shared_ptr<Area>&) const = 0;
-
+    virtual void Save(const std::shared_ptr<Area>&, bool install) const = 0;
+    
     // All areas unordered
     std::shared_ptr<Area> FirstArea;
     std::shared_ptr<Area> LastArea;

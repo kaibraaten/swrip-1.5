@@ -517,6 +517,10 @@ std::string ConvertToLuaFilename(const std::string &name)
         }
     }
 
-    strcat(buf, ".lua");
+    if(!StringEndsWith(buf, ".lua"))
+    {
+        strcat(buf, ".lua");
+    }
+    
     return buf;
 }

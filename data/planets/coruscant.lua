@@ -1,9 +1,8 @@
 -- Coruscant
--- Last saved Thursday 23-Apr-2020 09:57:48
+-- Last saved Monday 27-Apr-2020 18:24:29
 
 PlanetEntry
 {
-   Name = "Coruscant", 
    Areas = 
    {
       [1] = "manarai_spaceport.are", 
@@ -15,12 +14,13 @@ PlanetEntry
       [7] = "grand_towers.are", 
       [8] = "grand_towers_suites.are", 
    }, 
-   GovernedBy = "The Empire", 
    PopulationSupport = 0, 
-   BaseValue = 0, 
    Flags = 
    {
       [0] = "NoCapture", 
    }, 
    Spaceobject = "Coruscant", 
+   GovernedBy = "The Empire", 
+   BaseValue = 0, 
+   Name = "Coruscant", 
 }
