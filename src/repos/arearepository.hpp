@@ -35,6 +35,6 @@ public:
 
 extern std::shared_ptr<AreaRepository> Areas;
 std::shared_ptr<AreaRepository> NewAreaRepository();
-//std::string GetClanFilename(const std::shared_ptr<Clan>& clan);
+std::string GetAreaFilename(std::shared_ptr<Area> area);
 
 #endif
