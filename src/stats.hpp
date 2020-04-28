@@ -27,4 +27,14 @@ public:
     int Frc = 0;
 };
 
+class SaveVs
+{
+public:
+    int PoisonDeath = 0;
+    int Wand = 0;
+    int ParaPetri = 0;
+    int Breath = 0;
+    int SpellStaff = 0;
+};
+
 #endif

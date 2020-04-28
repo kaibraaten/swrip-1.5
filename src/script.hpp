@@ -79,6 +79,7 @@ void LuaPushFlags(lua_State *L, const std::bitset<Flag::MAX> &flags,
 void LuaPushFlags(lua_State *L, const std::bitset<Flag::MAX> &flags,
     const char * const nameArray[], const std::string &key);
 std::bitset<Flag::MAX> LuaLoadFlags(lua_State *L, const std::string &key);
+void LuaPushLanguages(lua_State *L, unsigned long languages, const std::string &key);
 
 void LuaPushSmaugAffects(lua_State *L, const std::list<std::shared_ptr<SmaugAffect>> &affectList);
 std::list<std::shared_ptr<SmaugAffect>> LuaLoadSmaugAffects(lua_State *L);
@@ -96,6 +97,7 @@ void LuaPushMobiles(lua_State *L, const std::list<Character*> &mobiles,
 std::list<Character*> LuaLoadMobiles(lua_State *L, const std::string &key);
 void LuaPushVector3(lua_State *L, std::shared_ptr<Vector3> v, const std::string &key);
 void LuaLoadVector3(lua_State *L, std::shared_ptr<Vector3> vec, const std::string &key);
+void LuaPushSaveVs(lua_State *L, const SaveVs *saveVs, const std::string &key = "SaveVs");
 void LuaPushStats(lua_State *L, const Stats *stats, const std::string &key);
 void LuaLoadStats(lua_State *L, Stats *stats, const std::string &key);
 void LuaPushCurrentAndMax(lua_State *L, const std::string &key, int current, int max);

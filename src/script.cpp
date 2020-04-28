@@ -236,6 +236,26 @@ void LuaPushFlags(lua_State *L, unsigned long flags,
     }
 }
 
+void LuaPushLanguages(lua_State *L, unsigned long languages, const std::string &key)
+{
+    lua_pushstring(L, key.c_str());
+    lua_newtable(L);
+
+    for (size_t bit = 0; bit < LANG_MAX; ++bit)
+    {
+        unsigned int mask = 1 << bit;
+
+        if (IsBitSet(languages, mask))
+        {
+            lua_pushinteger(L, bit);
+            lua_pushstring(L, LanguageNames[bit]);
+            lua_settable(L, -3);
+        }
+    }
+
+    lua_settable(L, -3);
+}
+
 std::bitset<Flag::MAX> LuaLoadFlags(lua_State *L, const std::string &key)
 {
     std::bitset<Flag::MAX> flags;
@@ -889,6 +909,20 @@ void LuaPushMobiles(lua_State *L, const std::list<Character*> &mobiles,
     lua_settable(L, -3);
 }
 
+void LuaPushSaveVs(lua_State *L, const SaveVs *saveVs, const std::string &key)
+{
+    lua_pushstring(L, key.c_str());
+    lua_newtable(L);
+
+    LuaSetfieldNumber(L, "PoisonDeath", saveVs->PoisonDeath);
+    LuaSetfieldNumber(L, "Wand", saveVs->Wand);
+    LuaSetfieldNumber(L, "ParaPetri", saveVs->ParaPetri);
+    LuaSetfieldNumber(L, "Breath", saveVs->Breath);
+    LuaSetfieldNumber(L, "SpellStaff", saveVs->SpellStaff);
+
+    lua_settable(L, -3);
+}
+
 void LuaPushStats(lua_State *L, const Stats *stats, const std::string &key)
 {
     lua_pushstring(L, key.c_str());
@@ -948,16 +982,7 @@ static void LuaPushCharacterAbilities(lua_State *L, const Character *ch)
 
 static void LuaPushCharacterSaves(lua_State *L, const Character *ch)
 {
-    lua_pushstring(L, "SaveVs");
-    lua_newtable(L);
-
-    LuaSetfieldNumber(L, "PoisonDeath", ch->Saving.PoisonDeath);
-    LuaSetfieldNumber(L, "Wand", ch->Saving.Wand);
-    LuaSetfieldNumber(L, "ParaPetri", ch->Saving.ParaPetri);
-    LuaSetfieldNumber(L, "Breath", ch->Saving.Breath);
-    LuaSetfieldNumber(L, "SpellStaff", ch->Saving.SpellStaff);
-
-    lua_settable(L, -3);
+    LuaPushSaveVs(L, &ch->Saving, "SaveVs");
 }
 
 static void LuaPushCharacterStats(lua_State *L, const Character *ch)

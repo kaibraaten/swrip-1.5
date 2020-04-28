@@ -84,6 +84,7 @@ class timerset;
 class MPROG_ACT_LIST;
 class MPROG_DATA;
 class Stats;
+class SaveVs;
 
 /*
  * Function types.
@@ -111,6 +112,7 @@ using WearLocation = int;
 using PositionType = int;
 using SkillTargetType = int;
 using SkillType = int;
+using SexType = int;
 
 #define DECLARE_CMD_FUN( fun )    extern "C" { CmdFun    fun; } CmdFun fun##_mangled
 #define DECLARE_SPEC_FUN( fun )  extern "C" { SpecFun  fun; } SpecFun fun##_mangled

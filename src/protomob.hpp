@@ -62,15 +62,7 @@ public:
     MProg mprog;
 
     class Stats Stats;
-
-    struct
-    {
-        int PoisonDeath = 0;
-        int Wand = 0;
-        int ParaPetri = 0;
-        int Breath = 0;
-        int SpellStaff = 0;
-    } Saving;
+    SaveVs Saving;
 };
 
 #endif

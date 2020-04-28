@@ -9,6 +9,7 @@
 #include "protoobject.hpp"
 #include "room.hpp"
 #include "reset.hpp"
+#include "race.hpp"
 
 namespace fs = std::filesystem;
 
@@ -182,17 +183,39 @@ void LuaAreaRepository::PushMobile(lua_State *L, const std::shared_ptr<ProtoMobi
     LuaSetfieldNumber(L, "HitSizeDice", mob->HitSizeDice);
     LuaSetfieldNumber(L, "HitPlus", mob->HitPlus);
     lua_settable(L, -3);
-    
+
+    lua_pushstring(L, "Damage");
+    lua_newtable(L);
     LuaSetfieldNumber(L, "DamNoDice", mob->DamNoDice);
     LuaSetfieldNumber(L, "DamSizeDice", mob->DamSizeDice);
     LuaSetfieldNumber(L, "DamPlus", mob->DamPlus);
+    lua_settable(L, -3);
 
     LuaSetfieldNumber(L, "Credits", mob->Gold);
-    LuaSetfieldNumber(L, "Position", mob->Position);
-    LuaSetfieldNumber(L, "DefaultPosition", mob->DefaultPosition);
-    LuaSetfieldNumber(L, "Sex", mob->Sex);
-
+    LuaSetfieldString(L, "Position", PositionName[mob->Position]);
+    LuaSetfieldString(L, "DefaultPosition", PositionName[mob->DefaultPosition]);
+    LuaSetfieldString(L, "Sex", SexNames[mob->Sex]);
+    LuaSetfieldString(L, "Race", NpcRace[mob->Race]);
+    LuaSetfieldNumber(L, "Height", mob->Height);
+    LuaSetfieldNumber(L, "Weight", mob->Weight);
+    LuaSetfieldNumber(L, "NumberOfAttacks", mob->NumberOfAttacks);
+    LuaSetfieldNumber(L, "HitRoll", mob->HitRoll);
+    LuaSetfieldNumber(L, "DamRoll", mob->DamRoll);
+    LuaPushFlags(L, mob->AttackFlags, AttackFlags, "AttackFlags");
+    LuaPushFlags(L, mob->DefenseFlags, DefenseFlags, "DefenseFlags");
+    LuaPushFlags(L, mob->Resistant, RisFlags, "Resistant");
+    LuaPushFlags(L, mob->Immune, RisFlags, "Immune");
+    LuaPushFlags(L, mob->Susceptible, RisFlags, "Susceptible");
+    LuaPushFlags(L, mob->VipFlags, WantedFlags, "VipFlags");
+    
     LuaPushStats(L, &mob->Stats, "Stats");
+    LuaPushSaveVs(L, &mob->Saving, "SaveVs");
+
+    lua_pushstring(L, "Languages");
+    lua_newtable(L);
+    LuaPushLanguages(L, mob->Speaks, "Speaks");
+    LuaPushLanguages(L, mob->Speaking, "Speaking");
+    lua_settable(L, -3);
     
     lua_settable(L, -3);
 }

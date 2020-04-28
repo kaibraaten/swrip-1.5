@@ -1,173 +1,173 @@
 -- Sorosuub System Hopper
--- Last saved Monday 27-Apr-2020 18:47:22
+-- Last saved Tuesday 28-Apr-2020 21:17:13
 
 ShipEntry
 {
    Owner = "public", 
-   Description = "", 
-   Pilot = "pilot", 
-   DockingPorts = 0, 
-   Type = "Civilian", 
-   LastDock = 203, 
-   Class = "Starfighter", 
-   Home = "Byss ", 
-   Alarm = false, 
-   Location = 203, 
+   CoPilot = "verazo", 
    Hyperdrive = 
    {
       Speed = 100, 
    }, 
-   PersonalName = "6041", 
-   Defenses = 
-   {
-      Hull = 
-      {
-         Max = 100, 
-         Current = 100, 
-      }, 
-      Shield = 
-      {
-         Max = 10, 
-         Current = 0, 
-      }, 
-      Chaff = 
-      {
-         Max = 2, 
-         Current = 2, 
-      }, 
-   }, 
+   State = 0, 
+   Type = "Civilian", 
    WeaponSystems = 
    {
-      TractorBeam = 
-      {
-         Strength = 0, 
-         State = 1, 
-      }, 
       Turrets = 
       {
          [1] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [2] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [3] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [4] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [5] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [6] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [7] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [8] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [9] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [0] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
       }, 
       IonCannon = 
       {
-         State = 0, 
          Count = 0, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         State = 1, 
+         Strength = 0, 
       }, 
       Laser = 
       {
-         State = 0, 
          Count = 1, 
+         State = 0, 
       }, 
       Tube = 
       {
-         State = 0, 
          Missiles = 
          {
-            Max = 0, 
             Current = 0, 
+            Max = 0, 
          }, 
          Rockets = 
          {
-            Max = 0, 
             Current = 0, 
+            Max = 0, 
          }, 
          Torpedoes = 
          {
-            Max = 0, 
             Current = 0, 
+            Max = 0, 
          }, 
+         State = 0, 
       }, 
    }, 
+   Position = 
+   {
+      X = 100, 
+      Y = 150, 
+      Z = 75, 
+   }, 
+   LastDock = 203, 
    Guard = false, 
+   Home = "Byss ", 
+   Location = 203, 
+   Name = "Sorosuub System Hopper", 
+   Shipyard = 203, 
+   Alarm = false, 
+   DockingPorts = 0, 
+   Defenses = 
+   {
+      Chaff = 
+      {
+         Current = 2, 
+         Max = 2, 
+      }, 
+      Shield = 
+      {
+         Current = 0, 
+         Max = 10, 
+      }, 
+      Hull = 
+      {
+         Current = 100, 
+         Max = 100, 
+      }, 
+   }, 
+   Pilot = "pilot", 
    Thrusters = 
    {
       Maneuver = 35, 
-      Speed = 
-      {
-         Max = 65, 
-         Current = 0, 
-      }, 
       Energy = 
       {
-         Max = 3000, 
          Current = 3000, 
+         Max = 3000, 
+      }, 
+      Speed = 
+      {
+         Current = 0, 
+         Max = 65, 
       }, 
    }, 
+   Class = "Starfighter", 
    Instruments = 
    {
-      Sensor = 0, 
       Comm = 0, 
+      Sensor = 0, 
       AstroArray = 0, 
    }, 
-   CoPilot = "verazo", 
-   Position = 
-   {
-      Y = 150, 
-      X = 100, 
-      Z = 75, 
-   }, 
-   Shipyard = 203, 
-   State = 0, 
-   Name = "Sorosuub System Hopper", 
+   Description = "", 
+   PersonalName = "6041", 
    Rooms = 
    {
       Navseat = 32166, 
-      Hangar = 0, 
+      Coseat = 32166, 
       Entrance = 32166, 
-      Last = 32166, 
+      Pilotseat = 32166, 
+      Hangar = 0, 
       Engine = 0, 
       First = 32166, 
-      Pilotseat = 32166, 
-      Coseat = 32166, 
-      Gunseat = 32166, 
+      Last = 32166, 
       Cockpit = 32166, 
+      Gunseat = 32166, 
    }, 
 }

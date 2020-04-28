@@ -898,7 +898,8 @@ enum
 {
     SEX_NEUTRAL,
     SEX_MALE,
-    SEX_FEMALE
+    SEX_FEMALE,
+    MAX_SEX
 };
 
 /* TrapType */
