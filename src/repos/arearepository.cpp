@@ -191,6 +191,8 @@ void LuaAreaRepository::PushMobile(lua_State *L, const std::shared_ptr<ProtoMobi
     LuaSetfieldNumber(L, "Position", mob->Position);
     LuaSetfieldNumber(L, "DefaultPosition", mob->DefaultPosition);
     LuaSetfieldNumber(L, "Sex", mob->Sex);
+
+    LuaPushStats(L, &mob->Stats, "Stats");
     
     lua_settable(L, -3);
 }
