@@ -112,5 +112,6 @@ void LuaLoadCharacter(lua_State *L, Character *ch,
 
 #define PushCurrentAndMax( L, key, structure ) LuaPushCurrentAndMax( (L), (key), (structure.Current), (structure.Max) )
 #define LoadCurrentAndMax( L, key, structure ) LuaLoadCurrentAndMax( (L), (key), (&structure.Current), (&structure.Max) )
+void LuaPushMudProgs(lua_State *L, const MProg *mprog);
 
 #endif

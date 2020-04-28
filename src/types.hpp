@@ -83,6 +83,7 @@ class BadName;
 class timerset;
 class MPROG_ACT_LIST;
 class MPROG_DATA;
+class MProg;
 class Stats;
 class SaveVs;
 

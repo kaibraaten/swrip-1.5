@@ -216,6 +216,8 @@ void LuaAreaRepository::PushMobile(lua_State *L, const std::shared_ptr<ProtoMobi
     LuaPushLanguages(L, mob->Speaks, "Speaks");
     LuaPushLanguages(L, mob->Speaking, "Speaking");
     lua_settable(L, -3);
+
+    LuaPushMudProgs(L, &mob->mprog);
     
     lua_settable(L, -3);
 }

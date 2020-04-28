@@ -1557,3 +1557,33 @@ void LuaLoadCharacter(lua_State *L, Character *ch,
 
     loadExtra(L, ch);
 }
+
+static void LuaPushMudProg(lua_State *L, std::shared_ptr<MPROG_DATA> mprog, size_t idx)
+{
+    lua_pushinteger(L, idx);
+    lua_newtable(L);
+
+    LuaSetfieldString(L, "MudProgType", MobProgTypeToName(mprog->type));
+    LuaSetfieldString(L, "Arguments", mprog->arglist);
+    LuaSetfieldString(L, "Code", StripCarriageReturn(mprog->comlist));
+
+    lua_settable(L, -3);
+}
+
+void LuaPushMudProgs(lua_State *L, const MProg *mprog)
+{
+    if(!mprog->MudProgs().empty())
+    {
+        size_t idx = 0;
+        lua_pushstring(L, "MudProgs");
+        lua_newtable(L);
+
+
+        for(auto prog : mprog->MudProgs())
+        {
+            LuaPushMudProg(L, prog, ++idx);
+        }
+
+        lua_settable(L, -3);
+    }
+}
