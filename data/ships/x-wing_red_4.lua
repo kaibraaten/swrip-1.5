@@ -1,25 +1,96 @@
 -- X-wing
--- Last saved Wednesday 29-Apr-2020 12:48:01
+-- Last saved Wednesday 29-Apr-2020 20:07:23
 
 ShipEntry
 {
-   Hyperdrive = 
+   Thrusters = 
    {
-      Speed = 245, 
+      Energy = 
+      {
+         Max = 6000, 
+         Current = 6000, 
+      }, 
+      Speed = 
+      {
+         Max = 150, 
+         Current = 0, 
+      }, 
+      Maneuver = 110, 
    }, 
-   Type = "Rebel", 
-   Pilot = "", 
-   Owner = "", 
-   PersonalName = "Red 4", 
-   Position = 
+   Location = 6100, 
+   Shipyard = 203, 
+   Name = "X-wing", 
+   Alarm = false, 
+   Defenses = 
    {
-      X = 3999997.7865312, 
-      Y = 4499995.8700567, 
-      Z = 3.311444599312, 
+      Chaff = 
+      {
+         Max = 25, 
+         Current = 25, 
+      }, 
+      Hull = 
+      {
+         Max = 1500, 
+         Current = 1500, 
+      }, 
+      Shield = 
+      {
+         Max = 150, 
+         Current = 0, 
+      }, 
    }, 
+   Home = "Gamorr", 
+   State = 0, 
    Class = "Starfighter", 
+   Rooms = 
+   {
+      Hangar = 0, 
+      Entrance = 32151, 
+      Engine = 0, 
+      Coseat = 32151, 
+      Last = 32151, 
+      Gunseat = 32151, 
+      Cockpit = 32151, 
+      Pilotseat = 32151, 
+      Navseat = 32151, 
+      First = 32151, 
+   }, 
    WeaponSystems = 
    {
+      IonCannon = 
+      {
+         Count = 2, 
+         State = 0, 
+      }, 
+      Tube = 
+      {
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         State = 0, 
+         Missiles = 
+         {
+            Max = 8, 
+            Current = 0, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 4, 
+            Current = 0, 
+         }, 
+      }, 
+      Laser = 
+      {
+         Count = 2, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         Strength = 0, 
+         State = 0, 
+      }, 
       Turrets = 
       {
          [1] = 
@@ -73,101 +144,30 @@ ShipEntry
             RoomVnum = 0, 
          }, 
       }, 
-      Tube = 
-      {
-         State = 0, 
-         Missiles = 
-         {
-            Current = 0, 
-            Max = 8, 
-         }, 
-         Rockets = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Current = 0, 
-            Max = 4, 
-         }, 
-      }, 
-      IonCannon = 
-      {
-         Count = 2, 
-         State = 0, 
-      }, 
-      TractorBeam = 
-      {
-         Strength = 0, 
-         State = 0, 
-      }, 
-      Laser = 
-      {
-         Count = 2, 
-         State = 0, 
-      }, 
    }, 
-   Rooms = 
+   Description = "", 
+   Type = "Rebel", 
+   Pilot = "", 
+   PersonalName = "Red 4", 
+   Hyperdrive = 
    {
-      Navseat = 32151, 
-      First = 32151, 
-      Gunseat = 32151, 
-      Entrance = 32151, 
-      Last = 32151, 
-      Hangar = 0, 
-      Cockpit = 32151, 
-      Engine = 0, 
-      Pilotseat = 32151, 
-      Coseat = 32151, 
+      Speed = 245, 
    }, 
-   Shipyard = 203, 
-   Defenses = 
-   {
-      Chaff = 
-      {
-         Current = 25, 
-         Max = 25, 
-      }, 
-      Shield = 
-      {
-         Current = 0, 
-         Max = 150, 
-      }, 
-      Hull = 
-      {
-         Current = 1500, 
-         Max = 1500, 
-      }, 
-   }, 
-   State = 0, 
-   LastDock = 6100, 
-   DockingPorts = 0, 
-   Thrusters = 
-   {
-      Speed = 
-      {
-         Current = 0, 
-         Max = 150, 
-      }, 
-      Energy = 
-      {
-         Current = 6000, 
-         Max = 6000, 
-      }, 
-      Maneuver = 110, 
-   }, 
+   Owner = "", 
+   Guard = false, 
    Instruments = 
    {
+      AstroArray = 130, 
       Sensor = 150, 
       Comm = 150, 
-      AstroArray = 130, 
    }, 
-   Alarm = false, 
-   Home = "Gamorr", 
-   Guard = false, 
+   Position = 
+   {
+      X = 3999997.7865312, 
+      Y = 4499995.8700567, 
+      Z = 3.311444599312, 
+   }, 
+   LastDock = 6100, 
    CoPilot = "", 
-   Location = 6100, 
-   Description = "", 
-   Name = "X-wing", 
+   DockingPorts = 0, 
 }

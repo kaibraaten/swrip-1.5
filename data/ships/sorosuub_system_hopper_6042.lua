@@ -1,25 +1,96 @@
 -- Sorosuub System Hopper
--- Last saved Wednesday 29-Apr-2020 12:48:01
+-- Last saved Wednesday 29-Apr-2020 20:07:23
 
 ShipEntry
 {
-   Hyperdrive = 
+   Thrusters = 
    {
-      Speed = 100, 
+      Energy = 
+      {
+         Max = 3000, 
+         Current = 3000, 
+      }, 
+      Speed = 
+      {
+         Max = 65, 
+         Current = 0, 
+      }, 
+      Maneuver = 35, 
    }, 
-   Type = "Civilian", 
-   Pilot = "Fah", 
-   Owner = "public", 
-   PersonalName = "6042", 
-   Position = 
+   Location = 21100, 
+   Shipyard = 21100, 
+   Name = "Sorosuub System Hopper", 
+   Alarm = false, 
+   Defenses = 
    {
-      X = -1982, 
-      Y = -174678, 
-      Z = 23507, 
+      Chaff = 
+      {
+         Max = 2, 
+         Current = 2, 
+      }, 
+      Hull = 
+      {
+         Max = 100, 
+         Current = 100, 
+      }, 
+      Shield = 
+      {
+         Max = 10, 
+         Current = 0, 
+      }, 
    }, 
+   Home = "CoruSun", 
+   State = 0, 
    Class = "Starfighter", 
+   Rooms = 
+   {
+      Hangar = 0, 
+      Entrance = 32167, 
+      Engine = 0, 
+      Coseat = 32167, 
+      Last = 32167, 
+      Gunseat = 32167, 
+      Cockpit = 32167, 
+      Pilotseat = 32167, 
+      Navseat = 32167, 
+      First = 32167, 
+   }, 
    WeaponSystems = 
    {
+      IonCannon = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      Tube = 
+      {
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         State = 0, 
+         Missiles = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+      }, 
+      Laser = 
+      {
+         Count = 1, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         Strength = 0, 
+         State = 1, 
+      }, 
       Turrets = 
       {
          [1] = 
@@ -73,101 +144,30 @@ ShipEntry
             RoomVnum = 0, 
          }, 
       }, 
-      Tube = 
-      {
-         State = 0, 
-         Missiles = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         Rockets = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-      }, 
-      IonCannon = 
-      {
-         Count = 0, 
-         State = 0, 
-      }, 
-      TractorBeam = 
-      {
-         Strength = 0, 
-         State = 1, 
-      }, 
-      Laser = 
-      {
-         Count = 1, 
-         State = 0, 
-      }, 
    }, 
-   Rooms = 
+   Description = "", 
+   Type = "Civilian", 
+   Pilot = "Fah", 
+   PersonalName = "6042", 
+   Hyperdrive = 
    {
-      Navseat = 32167, 
-      First = 32167, 
-      Gunseat = 32167, 
-      Entrance = 32167, 
-      Last = 32167, 
-      Hangar = 0, 
-      Cockpit = 32167, 
-      Engine = 0, 
-      Pilotseat = 32167, 
-      Coseat = 32167, 
+      Speed = 100, 
    }, 
-   Shipyard = 21100, 
-   Defenses = 
-   {
-      Chaff = 
-      {
-         Current = 2, 
-         Max = 2, 
-      }, 
-      Shield = 
-      {
-         Current = 0, 
-         Max = 10, 
-      }, 
-      Hull = 
-      {
-         Current = 100, 
-         Max = 100, 
-      }, 
-   }, 
-   State = 0, 
-   LastDock = 21100, 
-   DockingPorts = 0, 
-   Thrusters = 
-   {
-      Speed = 
-      {
-         Current = 0, 
-         Max = 65, 
-      }, 
-      Energy = 
-      {
-         Current = 3000, 
-         Max = 3000, 
-      }, 
-      Maneuver = 35, 
-   }, 
+   Owner = "public", 
+   Guard = false, 
    Instruments = 
    {
+      AstroArray = 0, 
       Sensor = 0, 
       Comm = 0, 
-      AstroArray = 0, 
    }, 
-   Alarm = false, 
-   Home = "CoruSun", 
-   Guard = false, 
+   Position = 
+   {
+      X = -1982, 
+      Y = -174678, 
+      Z = 23507, 
+   }, 
+   LastDock = 21100, 
    CoPilot = "Q", 
-   Location = 21100, 
-   Description = "", 
-   Name = "Sorosuub System Hopper", 
+   DockingPorts = 0, 
 }

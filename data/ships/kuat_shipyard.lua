@@ -1,25 +1,96 @@
 -- Kuat Shipyard
--- Last saved Wednesday 29-Apr-2020 12:48:01
+-- Last saved Wednesday 29-Apr-2020 20:07:23
 
 ShipEntry
 {
-   Hyperdrive = 
+   Thrusters = 
    {
-      Speed = 255, 
+      Energy = 
+      {
+         Max = 30000, 
+         Current = 30000, 
+      }, 
+      Speed = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+      Maneuver = 0, 
    }, 
-   Type = "Mob", 
-   Pilot = "Kai", 
-   Owner = "The Empire", 
-   PersonalName = "Kuat Shipyard", 
-   Position = 
+   Location = 0, 
+   Shipyard = 32050, 
+   Name = "Kuat Shipyard", 
+   Alarm = false, 
+   Defenses = 
    {
-      X = 4215, 
-      Y = 1345, 
-      Z = 1803, 
+      Chaff = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+      Hull = 
+      {
+         Max = 10000, 
+         Current = 10000, 
+      }, 
+      Shield = 
+      {
+         Max = 10000, 
+         Current = 10000, 
+      }, 
    }, 
+   Home = "Kuat", 
+   State = 1, 
    Class = "Platform", 
+   Rooms = 
+   {
+      Hangar = 32050, 
+      Entrance = 32099, 
+      Engine = 0, 
+      Coseat = 32099, 
+      Last = 32099, 
+      Gunseat = 32099, 
+      Cockpit = 32099, 
+      Pilotseat = 32099, 
+      Navseat = 32099, 
+      First = 32050, 
+   }, 
    WeaponSystems = 
    {
+      IonCannon = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      Tube = 
+      {
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         State = 0, 
+         Missiles = 
+         {
+            Max = 100, 
+            Current = 100, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+      }, 
+      Laser = 
+      {
+         Count = 10, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         Strength = 0, 
+         State = 1, 
+      }, 
       Turrets = 
       {
          [1] = 
@@ -73,101 +144,30 @@ ShipEntry
             RoomVnum = 0, 
          }, 
       }, 
-      Tube = 
-      {
-         State = 0, 
-         Missiles = 
-         {
-            Current = 100, 
-            Max = 100, 
-         }, 
-         Rockets = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-      }, 
-      IonCannon = 
-      {
-         Count = 0, 
-         State = 0, 
-      }, 
-      TractorBeam = 
-      {
-         Strength = 0, 
-         State = 1, 
-      }, 
-      Laser = 
-      {
-         Count = 10, 
-         State = 0, 
-      }, 
    }, 
-   Rooms = 
+   Description = "", 
+   Type = "Mob", 
+   Pilot = "Kai", 
+   PersonalName = "Kuat Shipyard", 
+   Hyperdrive = 
    {
-      Navseat = 32099, 
-      First = 32050, 
-      Gunseat = 32099, 
-      Entrance = 32099, 
-      Last = 32099, 
-      Hangar = 32050, 
-      Cockpit = 32099, 
-      Engine = 0, 
-      Pilotseat = 32099, 
-      Coseat = 32099, 
+      Speed = 255, 
    }, 
-   Shipyard = 32050, 
-   Defenses = 
-   {
-      Chaff = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
-      Shield = 
-      {
-         Current = 10000, 
-         Max = 10000, 
-      }, 
-      Hull = 
-      {
-         Current = 10000, 
-         Max = 10000, 
-      }, 
-   }, 
-   State = 1, 
-   LastDock = 32050, 
-   DockingPorts = 0, 
-   Thrusters = 
-   {
-      Speed = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
-      Energy = 
-      {
-         Current = 30000, 
-         Max = 30000, 
-      }, 
-      Maneuver = 0, 
-   }, 
+   Owner = "The Empire", 
+   Guard = false, 
    Instruments = 
    {
+      AstroArray = 0, 
       Sensor = 255, 
       Comm = 0, 
-      AstroArray = 0, 
    }, 
-   Alarm = false, 
-   Home = "Kuat", 
-   Guard = false, 
+   Position = 
+   {
+      X = 4215, 
+      Y = 1345, 
+      Z = 1803, 
+   }, 
+   LastDock = 32050, 
    CoPilot = "", 
-   Location = 0, 
-   Description = "", 
-   Name = "Kuat Shipyard", 
+   DockingPorts = 0, 
 }

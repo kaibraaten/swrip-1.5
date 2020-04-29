@@ -1,25 +1,96 @@
 -- Imperator-class Star Destroyer
--- Last saved Wednesday 29-Apr-2020 12:48:01
+-- Last saved Wednesday 29-Apr-2020 20:07:23
 
 ShipEntry
 {
-   Hyperdrive = 
+   Thrusters = 
    {
-      Speed = 255, 
+      Energy = 
+      {
+         Max = 30000, 
+         Current = 30000, 
+      }, 
+      Speed = 
+      {
+         Max = 85, 
+         Current = 0, 
+      }, 
+      Maneuver = 0, 
    }, 
-   Type = "Imperial", 
-   Pilot = "", 
-   Owner = "The Empire", 
-   PersonalName = "Dark Hand", 
-   Position = 
+   Location = 0, 
+   Shipyard = 32050, 
+   Name = "Imperator-class Star Destroyer", 
+   Alarm = false, 
+   Defenses = 
    {
-      X = 1000, 
-      Y = 5001500, 
-      Z = -1000, 
+      Chaff = 
+      {
+         Max = 25, 
+         Current = 25, 
+      }, 
+      Hull = 
+      {
+         Max = 20000, 
+         Current = 20000, 
+      }, 
+      Shield = 
+      {
+         Max = 1000, 
+         Current = 1000, 
+      }, 
    }, 
+   Home = "Byss", 
+   State = 1, 
    Class = "Capital Ship", 
+   Rooms = 
+   {
+      Hangar = 600, 
+      Entrance = 600, 
+      Engine = 629, 
+      Coseat = 677, 
+      Last = 699, 
+      Gunseat = 674, 
+      Cockpit = 699, 
+      Pilotseat = 675, 
+      Navseat = 673, 
+      First = 600, 
+   }, 
    WeaponSystems = 
    {
+      IonCannon = 
+      {
+         Count = 10, 
+         State = 0, 
+      }, 
+      Tube = 
+      {
+         Rockets = 
+         {
+            Max = 10, 
+            Current = 10, 
+         }, 
+         State = 0, 
+         Missiles = 
+         {
+            Max = 50, 
+            Current = 50, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+      }, 
+      Laser = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         Strength = 150, 
+         State = 0, 
+      }, 
       Turrets = 
       {
          [1] = 
@@ -73,101 +144,30 @@ ShipEntry
             RoomVnum = 0, 
          }, 
       }, 
-      Tube = 
-      {
-         State = 0, 
-         Missiles = 
-         {
-            Current = 50, 
-            Max = 50, 
-         }, 
-         Rockets = 
-         {
-            Current = 10, 
-            Max = 10, 
-         }, 
-         Torpedoes = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-      }, 
-      IonCannon = 
-      {
-         Count = 10, 
-         State = 0, 
-      }, 
-      TractorBeam = 
-      {
-         Strength = 150, 
-         State = 0, 
-      }, 
-      Laser = 
-      {
-         Count = 0, 
-         State = 0, 
-      }, 
    }, 
-   Rooms = 
+   Description = "", 
+   Type = "Imperial", 
+   Pilot = "", 
+   PersonalName = "Dark Hand", 
+   Hyperdrive = 
    {
-      Navseat = 673, 
-      First = 600, 
-      Gunseat = 674, 
-      Entrance = 600, 
-      Last = 699, 
-      Hangar = 600, 
-      Cockpit = 699, 
-      Engine = 629, 
-      Pilotseat = 675, 
-      Coseat = 677, 
+      Speed = 255, 
    }, 
-   Shipyard = 32050, 
-   Defenses = 
-   {
-      Chaff = 
-      {
-         Current = 25, 
-         Max = 25, 
-      }, 
-      Shield = 
-      {
-         Current = 1000, 
-         Max = 1000, 
-      }, 
-      Hull = 
-      {
-         Current = 20000, 
-         Max = 20000, 
-      }, 
-   }, 
-   State = 1, 
-   LastDock = 32050, 
-   DockingPorts = 0, 
-   Thrusters = 
-   {
-      Speed = 
-      {
-         Current = 0, 
-         Max = 85, 
-      }, 
-      Energy = 
-      {
-         Current = 30000, 
-         Max = 30000, 
-      }, 
-      Maneuver = 0, 
-   }, 
+   Owner = "The Empire", 
+   Guard = true, 
    Instruments = 
    {
+      AstroArray = 200, 
       Sensor = 250, 
       Comm = 11, 
-      AstroArray = 200, 
    }, 
-   Alarm = false, 
-   Home = "Byss", 
-   Guard = true, 
+   Position = 
+   {
+      X = 1000, 
+      Y = 5001500, 
+      Z = -1000, 
+   }, 
+   LastDock = 32050, 
    CoPilot = "", 
-   Location = 0, 
-   Description = "", 
-   Name = "Imperator-class Star Destroyer", 
+   DockingPorts = 0, 
 }

@@ -1,25 +1,96 @@
 -- Corporate Sector Space Mall
--- Last saved Wednesday 29-Apr-2020 12:48:01
+-- Last saved Wednesday 29-Apr-2020 20:07:23
 
 ShipEntry
 {
-   Hyperdrive = 
+   Thrusters = 
    {
-      Speed = 255, 
+      Energy = 
+      {
+         Max = 20000, 
+         Current = 20000, 
+      }, 
+      Speed = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+      Maneuver = 0, 
    }, 
-   Type = "Civilian", 
-   Pilot = "", 
-   Owner = "Corporate Sector", 
-   PersonalName = "Space Mall", 
-   Position = 
+   Location = 0, 
+   Shipyard = 45, 
+   Name = "Corporate Sector Space Mall", 
+   Alarm = false, 
+   Defenses = 
    {
-      X = -47868, 
-      Y = -9531, 
-      Z = -100844, 
+      Chaff = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+      Hull = 
+      {
+         Max = 20000, 
+         Current = 20000, 
+      }, 
+      Shield = 
+      {
+         Max = 1000, 
+         Current = 1000, 
+      }, 
    }, 
+   Home = "corperate", 
+   State = 1, 
    Class = "Capital Ship", 
+   Rooms = 
+   {
+      Hangar = 7300, 
+      Entrance = 7350, 
+      Engine = 0, 
+      Coseat = 7350, 
+      Last = 7350, 
+      Gunseat = 7350, 
+      Cockpit = 7350, 
+      Pilotseat = 7350, 
+      Navseat = 7350, 
+      First = 7300, 
+   }, 
    WeaponSystems = 
    {
+      IonCannon = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      Tube = 
+      {
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 4, 
+         }, 
+         State = 0, 
+         Missiles = 
+         {
+            Max = 10, 
+            Current = 10, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 2, 
+         }, 
+      }, 
+      Laser = 
+      {
+         Count = 10, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         Strength = 0, 
+         State = 0, 
+      }, 
       Turrets = 
       {
          [1] = 
@@ -73,101 +144,30 @@ ShipEntry
             RoomVnum = 0, 
          }, 
       }, 
-      Tube = 
-      {
-         State = 0, 
-         Missiles = 
-         {
-            Current = 10, 
-            Max = 10, 
-         }, 
-         Rockets = 
-         {
-            Current = 4, 
-            Max = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Current = 2, 
-            Max = 0, 
-         }, 
-      }, 
-      IonCannon = 
-      {
-         Count = 0, 
-         State = 0, 
-      }, 
-      TractorBeam = 
-      {
-         Strength = 0, 
-         State = 0, 
-      }, 
-      Laser = 
-      {
-         Count = 10, 
-         State = 0, 
-      }, 
    }, 
-   Rooms = 
+   Description = "", 
+   Type = "Civilian", 
+   Pilot = "", 
+   PersonalName = "Space Mall", 
+   Hyperdrive = 
    {
-      Navseat = 7350, 
-      First = 7300, 
-      Gunseat = 7350, 
-      Entrance = 7350, 
-      Last = 7350, 
-      Hangar = 7300, 
-      Cockpit = 7350, 
-      Engine = 0, 
-      Pilotseat = 7350, 
-      Coseat = 7350, 
+      Speed = 255, 
    }, 
-   Shipyard = 45, 
-   Defenses = 
-   {
-      Chaff = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
-      Shield = 
-      {
-         Current = 1000, 
-         Max = 1000, 
-      }, 
-      Hull = 
-      {
-         Current = 20000, 
-         Max = 20000, 
-      }, 
-   }, 
-   State = 1, 
-   LastDock = 45, 
-   DockingPorts = 0, 
-   Thrusters = 
-   {
-      Speed = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
-      Energy = 
-      {
-         Current = 20000, 
-         Max = 20000, 
-      }, 
-      Maneuver = 0, 
-   }, 
+   Owner = "Corporate Sector", 
+   Guard = false, 
    Instruments = 
    {
+      AstroArray = 0, 
       Sensor = 0, 
       Comm = 0, 
-      AstroArray = 0, 
    }, 
-   Alarm = false, 
-   Home = "corperate", 
-   Guard = false, 
+   Position = 
+   {
+      X = -59599, 
+      Y = -13060, 
+      Z = -106697, 
+   }, 
+   LastDock = 45, 
    CoPilot = "", 
-   Location = 0, 
-   Description = "", 
-   Name = "Corporate Sector Space Mall", 
+   DockingPorts = 0, 
 }
