@@ -14,6 +14,7 @@
 #include "skill.hpp"
 #include "character.hpp"
 #include "exit.hpp"
+#include "shop.hpp"
 
 namespace fs = std::filesystem;
 
@@ -26,7 +27,7 @@ public:
     void Save() const override;
     void Save(const std::shared_ptr<Area>&) const override;
     void Save(const std::shared_ptr<Area>&, bool install) const override;
-    
+
 private:
     // Version 1:
     //   Resets are stored in legacy format where each entry must
@@ -35,7 +36,7 @@ private:
     static constexpr int CURRENT_FILEFORMAT_VERSION = 1;
 
     mutable int FILEFORMAT_VERSION_BEING_LOADED = CURRENT_FILEFORMAT_VERSION;
-    
+
     //static void PushMember(lua_State* L, const std::shared_ptr<ClanMember>& member, int idx);
     //static void PushMembers(lua_State* L, const
     //std::shared_ptr<Clan>& clan);
@@ -49,6 +50,9 @@ private:
     void PushObject(lua_State *L, const std::shared_ptr<ProtoObject> obj, bool install) const;
     void PushMobiles(lua_State *L, const std::shared_ptr<Area> &area, bool install) const;
     void PushMobile(lua_State *L, const std::shared_ptr<ProtoMobile> mob, bool install) const;
+    void PushShop(lua_State *L, const std::shared_ptr<ProtoMobile> keeper) const;
+    void PushRepairShop(lua_State *L, const std::shared_ptr<ProtoMobile> keeper) const;
+    void PushSpecials(lua_State *L, const std::shared_ptr<ProtoMobile> mob) const;
     void PushOvalues(lua_State *L, const std::shared_ptr<ProtoObject> obj) const;
     void PushResets(lua_State *L, const std::shared_ptr<Area> area) const;
     void PushReset(lua_State *L, const std::shared_ptr<Reset> reset, size_t idx) const;
@@ -65,10 +69,10 @@ void LuaAreaRepository::Load()
 {
     /*ForEachLuaFileInDir(CLAN_DIR, ExecuteClanFile, NULL);
 
-    for (const auto& clan : Clans)
-    {
-        AssignGuildToMainclan(clan);
-    }*/
+      for (const auto& clan : Clans)
+      {
+      AssignGuildToMainclan(clan);
+      }*/
 }
 
 void LuaAreaRepository::Save() const
@@ -92,7 +96,7 @@ struct SaveData
     std::shared_ptr<Area> area;
     bool Install = false;
 };
-    
+
 void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, bool install) const
 {
     // Make backup in case something goes wrong while saving.
@@ -108,7 +112,7 @@ void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, bool install) co
     }
 
     SaveData data(this, area, install);
-    
+
     LuaSaveDataFile(GetAreaFilename(area), PushArea, "area", &data);
 }
 
@@ -133,6 +137,7 @@ void LuaAreaRepository::PushMetaData(lua_State *L, std::shared_ptr<Area> area) c
     LuaSetfieldString(L, "Filename", filename);
     LuaSetfieldString(L, "Author", area->Author);
     LuaSetfieldString(L, "ResetMessage", area->ResetMessage);
+    LuaSetfieldNumber(L, "ResetFrequency", area->ResetFrequency);
     LuaSetfieldNumber(L, "HighEconomy", area->HighEconomy);
     LuaSetfieldNumber(L, "LowEconomy", area->LowEconomy);
     LuaPushFlags(L, area->Flags, AreaFlags, "Flags");
@@ -143,77 +148,68 @@ void LuaAreaRepository::PushArea(lua_State* L, const void* userData)
     const SaveData *data = static_cast<const SaveData*>(userData);
     const std::shared_ptr<Area> area = data->area;
     const LuaAreaRepository *repos = data->Repos;
-    
+
     lua_pushinteger(L, 0);
     lua_newtable(L);
-    
+
     repos->PushMetaData(L, area);
-    
-    // Save mobiles
     repos->PushMobiles(L, area, data->Install);
-    
-    // Save objects
     repos->PushObjects(L, area, data->Install);
-    
-    // Save rooms
     repos->PushRooms(L, area, data->Install);
-
-    // Save resets
     repos->PushResets(L, area);
-    
-    // Shops. Or save along with room?
-
-    // Save specials. Or save along with mob?
 
     lua_setglobal(L, "area");
 }
 
 void LuaAreaRepository::PushReset(lua_State *L, const std::shared_ptr<Reset> reset, size_t idx) const
 {
-    bool includeArg3 = false;
-    
-    switch (reset->Command) /* extra arg1 arg2 arg3 */
+    if(CURRENT_FILEFORMAT_VERSION == 1)
     {
-    case 'm':
-    case 'M':
-    case 'o':
-    case 'O':
-    case 'p':
-    case 'P':
-    case 'e':
-    case 'E':
-    case 'd':
-    case 'D':
-    case 't':
-    case 'T':
-        includeArg3 = true;
-        break;
-        
-    case 'g':
-    case 'G':
-    case 'r':
-    case 'R':
-        break;
+        bool includeArg3 = false;
 
-    case '*':
-    default:
-        return;
+        switch (reset->Command) /* extra arg1 arg2 arg3 */
+        {
+        case 'm':
+        case 'M':
+        case 'o':
+        case 'O':
+        case 'p':
+        case 'P':
+        case 'e':
+        case 'E':
+        case 'd':
+        case 'D':
+        case 't':
+        case 'T':
+            includeArg3 = true;
+            break;
+
+        case 'g':
+        case 'G':
+        case 'r':
+        case 'R':
+            break;
+
+        case '*':
+        default:
+            return;
+        }
+
+        lua_pushnumber(L, idx);
+        lua_newtable(L);
+
+        LuaSetfieldString(L, "Command", std::string(1, CharToUppercase(reset->Command)));
+        LuaSetfieldNumber(L, "Arg1", reset->Arg1);
+        LuaSetfieldNumber(L, "Arg2", reset->Arg2);
+        LuaSetfieldNumber(L, "MiscData", reset->MiscData);
+
+        if(includeArg3)
+        {
+            LuaSetfieldNumber(L, "Arg3", reset->Arg3);
+        }
+
+        lua_settable(L, -3);
     }
-
-    lua_pushnumber(L, idx);
-    lua_newtable(L);
-    
-    LuaSetfieldString(L, "Command", std::string(1, CharToUppercase(reset->Command)));
-    LuaSetfieldNumber(L, "Arg1", reset->Arg1);
-    LuaSetfieldNumber(L, "Arg2", reset->Arg2);
-    LuaSetfieldNumber(L, "MiscData", reset->MiscData);
-
-    if(includeArg3)
-    {
-        LuaSetfieldNumber(L, "Arg3", reset->Arg3);
-    }
-    
-    lua_settable(L, -3);
 }
 
 void LuaAreaRepository::PushResets(lua_State *L, const std::shared_ptr<Area> area) const
@@ -226,7 +222,7 @@ void LuaAreaRepository::PushResets(lua_State *L, const std::shared_ptr<Area> are
     {
         PushReset(L, reset, ++idx);
     }
-    
+
     lua_settable(L, -3);
 }
 
@@ -235,7 +231,7 @@ void LuaAreaRepository::PushExits(lua_State *L, const std::shared_ptr<Room> room
     lua_pushstring(L, "Exits");
     lua_newtable(L);
     size_t idx = 0;
-    
+
     for(auto xit : room->Exits())
     {
         if(!xit->Flags.test(Flag::Exit::Portal)) /* don't fold portals */
@@ -258,7 +254,7 @@ void LuaAreaRepository::PushExit(lua_State *L, const std::shared_ptr<Exit> xit, 
     LuaSetfieldNumber(L, "Key", xit->Key);
     LuaSetfieldNumber(L, "DestinationVnum", xit->Vnum);
     LuaSetfieldNumber(L, "Distance", xit->Distance);
-    
+
     auto flags = xit->Flags;
     flags.reset(Flag::Exit::Bashed);
     LuaPushFlags(L, flags, ExitFlags, "Flags");
@@ -284,12 +280,12 @@ void LuaAreaRepository::PushOvalues(lua_State *L, const std::shared_ptr<ProtoObj
         if (IS_VALID_SN(ovalues[3]))
             ovalues[3] = SkillTable[ovalues[3]]->Slot;
         break;
-        
+
     case ITEM_DEVICE:
         if (IS_VALID_SN(ovalues[3]))
             ovalues[3] = SkillTable[ovalues[3]]->Slot;
         break;
-        
+
     case ITEM_SALVE:
         if (IS_VALID_SN(ovalues[4]))
             ovalues[4] = SkillTable[ovalues[4]]->Slot;
@@ -297,7 +293,7 @@ void LuaAreaRepository::PushOvalues(lua_State *L, const std::shared_ptr<ProtoObj
         if (IS_VALID_SN(ovalues[5]))
             ovalues[5] = SkillTable[ovalues[5]]->Slot;
         break;
-        
+
     default:
         break;
     }
@@ -345,7 +341,7 @@ void LuaAreaRepository::PushRoom(lua_State *L, const std::shared_ptr<Room> room,
     PushExits(L, room);
     LuaPushExtraDescriptions(L, room->ExtraDescriptions());
     LuaPushMudProgs(L, &room->mprog);
-    
+
     lua_settable(L, -3);
 }
 
@@ -402,7 +398,7 @@ void LuaAreaRepository::PushObject(lua_State *L, const std::shared_ptr<ProtoObje
     LuaPushExtraDescriptions(L, obj->ExtraDescriptions());
     LuaPushProtoObjectAffects(L, obj->Affects());
     LuaPushMudProgs(L, &obj->mprog);
-    
+
     lua_settable(L, -3);
 }
 
@@ -411,7 +407,7 @@ void LuaAreaRepository::PushObjects(lua_State *L, const std::shared_ptr<Area> &a
     lua_pushstring(L, "Objects");
     lua_newtable(L);
     vnum_t vnum = INVALID_VNUM;
-    
+
     for (vnum = area->VnumRanges.Object.First; vnum <= area->VnumRanges.Object.Last; vnum++)
     {
         if(vnum != INVALID_VNUM)
@@ -439,7 +435,7 @@ void LuaAreaRepository::PushMobiles(lua_State *L, const std::shared_ptr<Area> &a
     lua_pushstring(L, "Mobiles");
     lua_newtable(L);
     vnum_t vnum = INVALID_VNUM;
-    
+
     for (vnum = area->VnumRanges.Mob.First; vnum <= area->VnumRanges.Mob.Last; vnum++)
     {
         if(vnum != INVALID_VNUM)
@@ -513,7 +509,7 @@ void LuaAreaRepository::PushMobile(lua_State *L, const std::shared_ptr<ProtoMobi
     LuaPushFlags(L, mob->Immune, RisFlags, "Immune");
     LuaPushFlags(L, mob->Susceptible, RisFlags, "Susceptible");
     LuaPushFlags(L, mob->VipFlags, WantedFlags, "VipFlags");
-    
+
     LuaPushStats(L, &mob->Stats, "Stats");
     LuaPushSaveVs(L, &mob->Saving, "SaveVs");
 
@@ -524,8 +520,113 @@ void LuaAreaRepository::PushMobile(lua_State *L, const std::shared_ptr<ProtoMobi
     lua_settable(L, -3);
 
     LuaPushMudProgs(L, &mob->mprog);
+
+    if(mob->Shop != nullptr)
+    {
+        PushShop(L, mob);
+    }
+
+    if(mob->RepairShop != nullptr)
+    {
+        PushRepairShop(L, mob);
+    }
+
+    PushSpecials(L, mob);
     
     lua_settable(L, -3);
+}
+
+template<typename T>
+static void PushBusinessHours(lua_State *L, const T &businessHours)
+{
+    lua_pushstring(L, "BusinessHours");
+    lua_newtable(L);
+
+    LuaSetfieldNumber(L, "Open", businessHours.Open);
+    LuaSetfieldNumber(L, "Close", businessHours.Close);
+
+    lua_settable(L, -3);
+}
+
+template<size_t N>
+static void PushBuyTypes(lua_State *L, const std::array<ItemTypes, N> itemTypes,
+                         const std::string &key)
+{
+    lua_pushstring(L, key.c_str());
+    lua_newtable(L);
+
+    for(size_t i = 0; i < itemTypes.size(); ++i)
+    {
+        lua_pushinteger(L, i);
+        lua_pushstring(L, ObjectTypes[itemTypes[i]]);
+        lua_settable(L, -3);
+    }
+    
+    lua_settable(L, -3);
+}
+
+void LuaAreaRepository::PushShop(lua_State *L, const std::shared_ptr<ProtoMobile> keeper) const
+{
+    lua_pushstring(L, "Shop");
+    lua_newtable(L);
+
+    auto shop = keeper->Shop;
+
+    LuaSetfieldNumber(L, "KeeperVnum", shop->Keeper);
+    LuaSetfieldNumber(L, "ProfitBuy", shop->ProfitBuy);
+    LuaSetfieldNumber(L, "ProfitSell", shop->ProfitSell);
+    PushBusinessHours(L, shop->BusinessHours);
+    PushBuyTypes<MAX_TRADE>(L, shop->BuyType, "BuyTypes");
+    LuaSetfieldString(L, "KeeperShortDescr", keeper->ShortDescr);
+    
+    lua_settable(L, -3);
+}
+
+void LuaAreaRepository::PushRepairShop(lua_State *L, const std::shared_ptr<ProtoMobile> keeper) const
+{
+    lua_pushstring(L, "RepairShop");
+    lua_newtable(L);
+
+    auto shop = keeper->RepairShop;
+
+    LuaSetfieldNumber(L, "KeeperVnum", shop->Keeper);
+    LuaSetfieldNumber(L, "ProfitFix", shop->ProfitFix);
+    LuaSetfieldNumber(L, "ShopType", shop->ShopType);
+    PushBusinessHours(L, shop->BusinessHours);
+    PushBuyTypes<MAX_FIX>(L, shop->FixType, "FixTypes");
+    LuaSetfieldString(L, "KeeperShortDescr", keeper->ShortDescr);
+
+    lua_settable(L, -3);
+}
+
+static bool HasAnySpecFuns(std::shared_ptr<ProtoMobile> mob)
+{
+    return mob->spec_fun != nullptr || mob->spec_2 != nullptr;
+}
+
+void LuaAreaRepository::PushSpecials(lua_State *L, const std::shared_ptr<ProtoMobile> mob) const
+{
+    if(HasAnySpecFuns(mob))
+    {
+        lua_pushstring(L, "SpecFuns");
+        lua_newtable(L);
+
+        if(mob->spec_fun != nullptr)
+        {
+            lua_pushinteger(L, 1);
+            lua_pushstring(L, LookupSpecial(mob->spec_fun));
+            lua_settable(L, -3);
+        }
+
+        if(mob->spec_2 != nullptr)
+        {
+            lua_pushinteger(L, 2);
+            lua_pushstring(L, LookupSpecial(mob->spec_2));
+            lua_settable(L, -3);
+        }
+
+        lua_settable(L, -3);
+    }
 }
 
 ////////////////////////////////
