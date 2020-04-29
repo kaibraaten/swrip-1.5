@@ -542,9 +542,8 @@ void FoldArea(std::shared_ptr<Area> tarea, const std::string &filename, bool ins
                 val3);
 
         fprintf(fpout, "%d %d %d\n", pObjIndex->Weight,
-            pObjIndex->Cost,
-            pObjIndex->Rent ? pObjIndex->Rent :
-            (int)(pObjIndex->Cost / 10));
+                pObjIndex->Cost,
+                0 /* Used to be rent */);
 
         for (auto ed : pObjIndex->ExtraDescriptions())
             fprintf(fpout, "E\n%s~\n%s~\n",

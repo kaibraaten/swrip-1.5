@@ -61,8 +61,8 @@ void do_ostat( Character *ch, std::string arg )
              1,           GetObjectCount( obj ),
              obj->Weight, GetObjectWeight( obj ), obj->Prototype->Layers );
 
-  ch->Echo("Cost: %d.  Rent: %d.  Timer: %d.  Level: %d.\r\n",
-             obj->Cost, obj->Prototype->Rent, obj->Timer, obj->Level );
+  ch->Echo("Cost: %d.  Timer: %d.  Level: %d.\r\n",
+             obj->Cost, obj->Timer, obj->Level );
 
   ch->Echo("In room: %ld.  In object: %s.  Carried by: %s.  Wear_loc: %d.\r\n",
            obj->InRoom == NULL ? 0 : obj->InRoom->Vnum,

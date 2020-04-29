@@ -40,7 +40,6 @@ public:
     std::array<int, MAX_OVAL> Value;
     int               Serial = 0;
     int             Layers = 0;
-    int               Rent = 0;                   /* Unused */
 
     MProg mprog;
 

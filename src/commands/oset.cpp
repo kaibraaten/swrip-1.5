@@ -163,7 +163,7 @@ void do_oset( Character *ch, std::string argument )
 
         ch->Echo("\r\n");
         ch->Echo("Field being one of:\r\n");
-        ch->Echo("  flags wear level weight cost rent timer\r\n");
+        ch->Echo("  flags wear level weight cost timer\r\n");
         ch->Echo("  name short long desc ed rmed actiondesc\r\n");
         ch->Echo("  type value0 value1 value2 value3 value4 value5\r\n");
         ch->Echo("  affect rmaffect layers\r\n");
@@ -437,19 +437,6 @@ void do_oset( Character *ch, std::string argument )
 
         if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
             obj->Prototype->Cost = value;
-
-        return;
-    }
-
-    if ( !StrCmp( arg2, "rent" ) )
-    {
-        if ( !CanModifyObject( ch, obj ) )
-            return;
-
-        if ( IsBitSet( obj->Flags, ITEM_PROTOTYPE ) )
-            obj->Prototype->Rent = value;
-        else
-            ch->Echo("Item must have prototype flag to set this value.\r\n");
 
         return;
     }

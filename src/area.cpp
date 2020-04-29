@@ -704,7 +704,7 @@ static void LoadObjects(std::shared_ptr<Area> tarea, FILE *fp)
         pObjIndex->Weight = ReadInt(fp, Log, fBootDb);
         pObjIndex->Weight = umax(1, pObjIndex->Weight);
         pObjIndex->Cost = ReadInt(fp, Log, fBootDb);
-        pObjIndex->Rent = ReadInt(fp, Log, fBootDb); /* unused */
+        ReadInt(fp, Log, fBootDb); /* Used to be rent */
 
         for (; ; )
         {
