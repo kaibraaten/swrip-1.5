@@ -10,6 +10,7 @@
 #include "room.hpp"
 #include "reset.hpp"
 #include "race.hpp"
+#include "skill.hpp"
 
 namespace fs = std::filesystem;
 
@@ -26,9 +27,12 @@ private:
     //static void PushMember(lua_State* L, const std::shared_ptr<ClanMember>& member, int idx);
     //static void PushMembers(lua_State* L, const
     //std::shared_ptr<Clan>& clan);
+    static void PushObjects(lua_State *L, const std::shared_ptr<Area> &area, bool install);
+    static void PushObject(lua_State *L, const std::shared_ptr<ProtoObject> obj, bool install);
     static void PushMobiles(lua_State *L, const std::shared_ptr<Area> &area, bool install);
     static void PushMobile(lua_State *L, const std::shared_ptr<ProtoMobile> mob, bool install);
     static void PushArea(lua_State* L, const void* userData);
+    static void PushOvalues(lua_State *L, const std::shared_ptr<ProtoObject> obj);
     //static void LoadOneMember(lua_State* L, const std::shared_ptr<Clan>& clan);
     //static void LoadMembers(lua_State* L, const std::shared_ptr<Clan>& clan);
     //static void LoadStoreroom(lua_State* L, const std::shared_ptr<Clan>& clan);
@@ -124,7 +128,8 @@ void LuaAreaRepository::PushArea(lua_State* L, const void* userData)
     PushMobiles(L, area, data->Install);
     
     // Save objects
-
+    PushObjects(L, area, data->Install);
+    
     // Save rooms
 
     // Shops. Or save along with room?
@@ -132,6 +137,92 @@ void LuaAreaRepository::PushArea(lua_State* L, const void* userData)
     // Save specials. Or save along with mob?
 
     lua_setglobal(L, "area");
+}
+
+void LuaAreaRepository::PushOvalues(lua_State *L, const std::shared_ptr<ProtoObject> obj)
+{
+    auto ovalues = obj->Value;
+
+    switch (obj->ItemType)
+    {
+    case ITEM_PILL:
+    case ITEM_POTION:
+    case ITEM_SCROLL:
+        if (IS_VALID_SN(ovalues[1]))
+            ovalues[1] = SkillTable[ovalues[1]]->Slot;
+
+        if (IS_VALID_SN(ovalues[2]))
+            ovalues[2] = SkillTable[ovalues[2]]->Slot;
+
+        if (IS_VALID_SN(ovalues[3]))
+            ovalues[3] = SkillTable[ovalues[3]]->Slot;
+        break;
+        
+    case ITEM_DEVICE:
+        if (IS_VALID_SN(ovalues[3]))
+            ovalues[3] = SkillTable[ovalues[3]]->Slot;
+        break;
+        
+    case ITEM_SALVE:
+        if (IS_VALID_SN(ovalues[4]))
+            ovalues[4] = SkillTable[ovalues[4]]->Slot;
+
+        if (IS_VALID_SN(ovalues[5]))
+            ovalues[5] = SkillTable[ovalues[5]]->Slot;
+        break;
+        
+    default:
+        break;
+    }
+
+    LuaPushOvalues(L, ovalues);
+}
+
+void LuaAreaRepository::PushObject(lua_State *L, const std::shared_ptr<ProtoObject> obj, bool install)
+{
+    if (install)
+    {
+        RemoveBit(obj->Flags, ITEM_PROTOTYPE);
+    }
+
+    lua_pushinteger(L, obj->Vnum);
+    lua_newtable(L);
+
+    LuaSetfieldNumber(L, "Vnum", obj->Vnum);
+    LuaSetfieldString(L, "Name", obj->Name);
+    LuaSetfieldString(L, "ShortDescr", obj->ShortDescr);
+    LuaSetfieldString(L, "Description", obj->Description);
+    LuaSetfieldString(L, "ActionDescription", obj->ActionDescription);
+    LuaSetfieldString(L, "ItemType", ObjectTypes[obj->ItemType]);
+    LuaSetfieldNumber(L, "Layers", obj->Layers);
+    LuaPushFlags(L, obj->Flags, ObjectFlags, "Flags");
+    LuaPushFlags(L, obj->WearFlags, WearFlags, "WearFlags");
+    PushOvalues(L, obj);
+    LuaSetfieldNumber(L, "Weight", obj->Weight);
+    LuaSetfieldNumber(L, "Cost", obj->Cost);
+    lua_settable(L, -3);
+}
+
+void LuaAreaRepository::PushObjects(lua_State *L, const std::shared_ptr<Area> &area, bool install)
+{
+    lua_pushstring(L, "Objects");
+    lua_newtable(L);
+
+    for (vnum_t vnum = area->VnumRanges.Object.First; vnum <= area->VnumRanges.Object.Last; vnum++)
+    {
+        if(vnum != INVALID_VNUM)
+        {
+            auto obj = GetProtoObject(vnum);
+
+
+            if (obj != nullptr)
+            {
+                PushObject(L, obj, install);
+            }
+        }
+    }
+
+    lua_settable(L, -3);
 }
 
 void LuaAreaRepository::PushMobiles(lua_State *L, const std::shared_ptr<Area> &area, bool install)
