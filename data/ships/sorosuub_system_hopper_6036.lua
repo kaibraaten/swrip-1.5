@@ -1,88 +1,81 @@
 -- Sorosuub System Hopper
--- Last saved Tuesday 28-Apr-2020 21:17:13
+-- Last saved Wednesday 29-Apr-2020 12:48:01
 
 ShipEntry
 {
-   Owner = "public", 
-   CoPilot = "", 
    Hyperdrive = 
    {
       Speed = 100, 
    }, 
-   State = 0, 
    Type = "Civilian", 
+   Pilot = "", 
+   Owner = "public", 
+   PersonalName = "6036", 
+   Position = 
+   {
+      X = 4504171, 
+      Y = -4010088, 
+      Z = -4689, 
+   }, 
+   Class = "Starfighter", 
    WeaponSystems = 
    {
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
-      }, 
-      IonCannon = 
-      {
-         Count = 0, 
-         State = 0, 
-      }, 
-      TractorBeam = 
-      {
-         State = 1, 
-         Strength = 0, 
-      }, 
-      Laser = 
-      {
-         Count = 0, 
-         State = 0, 
       }, 
       Tube = 
       {
+         State = 0, 
          Missiles = 
          {
             Current = 0, 
@@ -98,23 +91,37 @@ ShipEntry
             Current = 0, 
             Max = 0, 
          }, 
+      }, 
+      IonCannon = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         Strength = 0, 
+         State = 1, 
+      }, 
+      Laser = 
+      {
+         Count = 0, 
          State = 0, 
       }, 
    }, 
-   Position = 
+   Rooms = 
    {
-      X = 4504171, 
-      Y = -4010088, 
-      Z = -4689, 
+      Navseat = 32161, 
+      First = 32161, 
+      Gunseat = 32161, 
+      Entrance = 32161, 
+      Last = 32161, 
+      Hangar = 0, 
+      Cockpit = 32161, 
+      Engine = 0, 
+      Pilotseat = 32161, 
+      Coseat = 32161, 
    }, 
-   LastDock = 203, 
-   Guard = false, 
-   Home = "Asteroid 1234", 
-   Location = 203, 
-   Name = "Sorosuub System Hopper", 
    Shipyard = 203, 
-   Alarm = false, 
-   DockingPorts = 0, 
    Defenses = 
    {
       Chaff = 
@@ -133,41 +140,34 @@ ShipEntry
          Max = 100, 
       }, 
    }, 
-   Pilot = "", 
+   State = 0, 
+   LastDock = 203, 
+   DockingPorts = 0, 
    Thrusters = 
    {
-      Maneuver = 35, 
-      Energy = 
-      {
-         Current = 2000, 
-         Max = 2000, 
-      }, 
       Speed = 
       {
          Current = 0, 
          Max = 65, 
       }, 
+      Energy = 
+      {
+         Current = 2000, 
+         Max = 2000, 
+      }, 
+      Maneuver = 35, 
    }, 
-   Class = "Starfighter", 
    Instruments = 
    {
-      Comm = 0, 
       Sensor = 0, 
+      Comm = 0, 
       AstroArray = 0, 
    }, 
+   Alarm = false, 
+   Home = "Asteroid 1234", 
+   Guard = false, 
+   CoPilot = "", 
+   Location = 203, 
    Description = "", 
-   PersonalName = "6036", 
-   Rooms = 
-   {
-      Navseat = 32161, 
-      Coseat = 32161, 
-      Entrance = 32161, 
-      Pilotseat = 32161, 
-      Hangar = 0, 
-      Engine = 0, 
-      First = 32161, 
-      Last = 32161, 
-      Cockpit = 32161, 
-      Gunseat = 32161, 
-   }, 
+   Name = "Sorosuub System Hopper", 
 }

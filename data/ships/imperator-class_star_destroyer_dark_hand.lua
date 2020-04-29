@@ -1,88 +1,81 @@
 -- Imperator-class Star Destroyer
--- Last saved Tuesday 28-Apr-2020 21:17:13
+-- Last saved Wednesday 29-Apr-2020 12:48:01
 
 ShipEntry
 {
-   Owner = "The Empire", 
-   CoPilot = "", 
    Hyperdrive = 
    {
       Speed = 255, 
    }, 
-   State = 1, 
    Type = "Imperial", 
+   Pilot = "", 
+   Owner = "The Empire", 
+   PersonalName = "Dark Hand", 
+   Position = 
+   {
+      X = 1000, 
+      Y = 5001500, 
+      Z = -1000, 
+   }, 
+   Class = "Capital Ship", 
    WeaponSystems = 
    {
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
-      }, 
-      IonCannon = 
-      {
-         Count = 10, 
-         State = 0, 
-      }, 
-      TractorBeam = 
-      {
-         State = 0, 
-         Strength = 150, 
-      }, 
-      Laser = 
-      {
-         Count = 0, 
-         State = 0, 
       }, 
       Tube = 
       {
+         State = 0, 
          Missiles = 
          {
             Current = 50, 
@@ -98,23 +91,37 @@ ShipEntry
             Current = 0, 
             Max = 0, 
          }, 
+      }, 
+      IonCannon = 
+      {
+         Count = 10, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         Strength = 150, 
+         State = 0, 
+      }, 
+      Laser = 
+      {
+         Count = 0, 
          State = 0, 
       }, 
    }, 
-   Position = 
+   Rooms = 
    {
-      X = 1000, 
-      Y = 5001500, 
-      Z = -1000, 
+      Navseat = 673, 
+      First = 600, 
+      Gunseat = 674, 
+      Entrance = 600, 
+      Last = 699, 
+      Hangar = 600, 
+      Cockpit = 699, 
+      Engine = 629, 
+      Pilotseat = 675, 
+      Coseat = 677, 
    }, 
-   LastDock = 32050, 
-   Guard = true, 
-   Home = "Byss", 
-   Location = 0, 
-   Name = "Imperator-class Star Destroyer", 
    Shipyard = 32050, 
-   Alarm = false, 
-   DockingPorts = 0, 
    Defenses = 
    {
       Chaff = 
@@ -133,41 +140,34 @@ ShipEntry
          Max = 20000, 
       }, 
    }, 
-   Pilot = "", 
+   State = 1, 
+   LastDock = 32050, 
+   DockingPorts = 0, 
    Thrusters = 
    {
-      Maneuver = 0, 
-      Energy = 
-      {
-         Current = 30000, 
-         Max = 30000, 
-      }, 
       Speed = 
       {
          Current = 0, 
          Max = 85, 
       }, 
+      Energy = 
+      {
+         Current = 30000, 
+         Max = 30000, 
+      }, 
+      Maneuver = 0, 
    }, 
-   Class = "Capital Ship", 
    Instruments = 
    {
-      Comm = 11, 
       Sensor = 250, 
+      Comm = 11, 
       AstroArray = 200, 
    }, 
+   Alarm = false, 
+   Home = "Byss", 
+   Guard = true, 
+   CoPilot = "", 
+   Location = 0, 
    Description = "", 
-   PersonalName = "Dark Hand", 
-   Rooms = 
-   {
-      Navseat = 673, 
-      Coseat = 677, 
-      Entrance = 600, 
-      Pilotseat = 675, 
-      Hangar = 600, 
-      Engine = 629, 
-      First = 600, 
-      Last = 699, 
-      Cockpit = 699, 
-      Gunseat = 674, 
-   }, 
+   Name = "Imperator-class Star Destroyer", 
 }

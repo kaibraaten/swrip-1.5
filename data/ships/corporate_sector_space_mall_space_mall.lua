@@ -1,88 +1,81 @@
 -- Corporate Sector Space Mall
--- Last saved Tuesday 28-Apr-2020 21:17:13
+-- Last saved Wednesday 29-Apr-2020 12:48:01
 
 ShipEntry
 {
-   Owner = "Corporate Sector", 
-   CoPilot = "", 
    Hyperdrive = 
    {
       Speed = 255, 
    }, 
-   State = 1, 
    Type = "Civilian", 
+   Pilot = "", 
+   Owner = "Corporate Sector", 
+   PersonalName = "Space Mall", 
+   Position = 
+   {
+      X = -47868, 
+      Y = -9531, 
+      Z = -100844, 
+   }, 
+   Class = "Capital Ship", 
    WeaponSystems = 
    {
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
-      }, 
-      IonCannon = 
-      {
-         Count = 0, 
-         State = 0, 
-      }, 
-      TractorBeam = 
-      {
-         State = 0, 
-         Strength = 0, 
-      }, 
-      Laser = 
-      {
-         Count = 10, 
-         State = 0, 
       }, 
       Tube = 
       {
+         State = 0, 
          Missiles = 
          {
             Current = 10, 
@@ -98,23 +91,37 @@ ShipEntry
             Current = 2, 
             Max = 0, 
          }, 
+      }, 
+      IonCannon = 
+      {
+         Count = 0, 
+         State = 0, 
+      }, 
+      TractorBeam = 
+      {
+         Strength = 0, 
+         State = 0, 
+      }, 
+      Laser = 
+      {
+         Count = 10, 
          State = 0, 
       }, 
    }, 
-   Position = 
+   Rooms = 
    {
-      X = -69050, 
-      Y = -38405, 
-      Z = -134406, 
+      Navseat = 7350, 
+      First = 7300, 
+      Gunseat = 7350, 
+      Entrance = 7350, 
+      Last = 7350, 
+      Hangar = 7300, 
+      Cockpit = 7350, 
+      Engine = 0, 
+      Pilotseat = 7350, 
+      Coseat = 7350, 
    }, 
-   LastDock = 45, 
-   Guard = false, 
-   Home = "corperate", 
-   Location = 0, 
-   Name = "Corporate Sector Space Mall", 
    Shipyard = 45, 
-   Alarm = false, 
-   DockingPorts = 0, 
    Defenses = 
    {
       Chaff = 
@@ -133,41 +140,34 @@ ShipEntry
          Max = 20000, 
       }, 
    }, 
-   Pilot = "", 
+   State = 1, 
+   LastDock = 45, 
+   DockingPorts = 0, 
    Thrusters = 
    {
-      Maneuver = 0, 
-      Energy = 
-      {
-         Current = 20000, 
-         Max = 20000, 
-      }, 
       Speed = 
       {
          Current = 0, 
          Max = 0, 
       }, 
+      Energy = 
+      {
+         Current = 20000, 
+         Max = 20000, 
+      }, 
+      Maneuver = 0, 
    }, 
-   Class = "Capital Ship", 
    Instruments = 
    {
-      Comm = 0, 
       Sensor = 0, 
+      Comm = 0, 
       AstroArray = 0, 
    }, 
+   Alarm = false, 
+   Home = "corperate", 
+   Guard = false, 
+   CoPilot = "", 
+   Location = 0, 
    Description = "", 
-   PersonalName = "Space Mall", 
-   Rooms = 
-   {
-      Navseat = 7350, 
-      Coseat = 7350, 
-      Entrance = 7350, 
-      Pilotseat = 7350, 
-      Hangar = 7300, 
-      Engine = 0, 
-      First = 7300, 
-      Last = 7350, 
-      Cockpit = 7350, 
-      Gunseat = 7350, 
-   }, 
+   Name = "Corporate Sector Space Mall", 
 }

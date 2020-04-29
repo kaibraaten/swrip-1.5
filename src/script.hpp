@@ -87,6 +87,7 @@ void LuaPushCharacterAffects(lua_State *L, const std::list<std::shared_ptr<Affec
     const std::string &key = "Affects");
 void LuaPushObjectAffects(lua_State *L, const std::list<std::shared_ptr<Affect>> &affects,
     const std::string &key = "Affects");
+void LuaPushProtoObjectAffects(lua_State *L, const std::list<std::shared_ptr<Affect>> &affects);
 std::list<std::shared_ptr<Affect>> LuaLoadCharacterAffects(lua_State *L, const std::string &key = "Affects");
 std::list<std::shared_ptr<Affect>> LuaLoadObjectAffects(lua_State *L, const std::string &key = "Affects");
 void LuaPushObjects(lua_State *L, const std::list<Object*> &objects,

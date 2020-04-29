@@ -1,5 +1,6 @@
 #include <memory>
 #include <filesystem>
+#include <utility/algorithms.hpp>
 #include "log.hpp"
 #include "mud.hpp"
 #include "arearepository.hpp"
@@ -11,6 +12,8 @@
 #include "reset.hpp"
 #include "race.hpp"
 #include "skill.hpp"
+#include "character.hpp"
+#include "exit.hpp"
 
 namespace fs = std::filesystem;
 
@@ -27,6 +30,10 @@ private:
     //static void PushMember(lua_State* L, const std::shared_ptr<ClanMember>& member, int idx);
     //static void PushMembers(lua_State* L, const
     //std::shared_ptr<Clan>& clan);
+    static void PushExits(lua_State *L, const std::shared_ptr<Room> room);
+    static void PushExit(lua_State *L, const std::shared_ptr<Exit> xit, size_t idx);
+    static void PushRooms(lua_State *L, const std::shared_ptr<Area> &area, bool install);
+    static void PushRoom(lua_State *L, const std::shared_ptr<Room> room, bool install);
     static void PushObjects(lua_State *L, const std::shared_ptr<Area> &area, bool install);
     static void PushObject(lua_State *L, const std::shared_ptr<ProtoObject> obj, bool install);
     static void PushMobiles(lua_State *L, const std::shared_ptr<Area> &area, bool install);
@@ -131,12 +138,49 @@ void LuaAreaRepository::PushArea(lua_State* L, const void* userData)
     PushObjects(L, area, data->Install);
     
     // Save rooms
-
+    PushRooms(L, area, data->Install);
+    
     // Shops. Or save along with room?
 
     // Save specials. Or save along with mob?
 
     lua_setglobal(L, "area");
+}
+
+void LuaAreaRepository::PushExits(lua_State *L, const std::shared_ptr<Room> room)
+{
+    lua_pushstring(L, "Exits");
+    lua_newtable(L);
+    size_t idx = 0;
+    
+    for(auto xit : room->Exits())
+    {
+        if(!xit->Flags.test(Flag::Exit::Portal)) /* don't fold portals */
+        {
+            PushExit(L, xit, ++idx);
+        }
+    }
+
+    lua_settable(L, -3);
+}
+
+void LuaAreaRepository::PushExit(lua_State *L, const std::shared_ptr<Exit> xit, size_t idx)
+{
+    lua_pushinteger(L, idx);
+    lua_newtable(L);
+
+    LuaSetfieldString(L, "Direction", GetDirectionName(xit->Direction));
+    LuaSetfieldString(L, "Description", StripCarriageReturn(xit->Description));
+    LuaSetfieldString(L, "Keyword", StripCarriageReturn(xit->Keyword));
+    LuaSetfieldNumber(L, "Key", xit->Key);
+    LuaSetfieldNumber(L, "DestinationVnum", xit->Vnum);
+    LuaSetfieldNumber(L, "Distance", xit->Distance);
+    
+    auto flags = xit->Flags;
+    flags.reset(Flag::Exit::Bashed);
+    LuaPushFlags(L, flags, ExitFlags, "Flags");
+
+    lua_settable(L, -3);
 }
 
 void LuaAreaRepository::PushOvalues(lua_State *L, const std::shared_ptr<ProtoObject> obj)
@@ -178,6 +222,78 @@ void LuaAreaRepository::PushOvalues(lua_State *L, const std::shared_ptr<ProtoObj
     LuaPushOvalues(L, ovalues);
 }
 
+void LuaAreaRepository::PushRoom(lua_State *L, const std::shared_ptr<Room> room, bool install)
+{
+    if(install)
+    {
+        room->Flags.reset(Flag::Room::Prototype);
+
+        std::list<Character*> charactersToExtract = Filter(room->Characters(),
+                                                           [](auto victim)
+                                                           {
+                                                               return IsNpc(victim);
+                                                           });
+
+        for (Character *victim : charactersToExtract)
+        {
+            ExtractCharacter(victim, true);
+        }
+
+        /* purge room of (prototyped) objects */
+        std::list<Object*> objectsToExtract(room->Objects());
+
+        for (Object *obj : objectsToExtract)
+        {
+            ExtractObject(obj);
+        }
+    }
+
+    lua_pushinteger(L, room->Vnum);
+    lua_newtable(L);
+
+    LuaSetfieldNumber(L, "Vnum", room->Vnum);
+    LuaSetfieldString(L, "Name", room->Name);
+    LuaSetfieldString(L, "Description", StripCarriageReturn(room->Description));
+    LuaPushFlags(L, room->Flags, RoomFlags, "Flags");
+    LuaSetfieldString(L, "Sector", SectorNames[room->Sector][1]);
+    LuaSetfieldNumber(L, "TeleDelay", room->TeleDelay);
+    LuaSetfieldNumber(L, "TeleVnum", room->TeleVnum);
+    LuaSetfieldNumber(L, "Tunnel", room->Tunnel);
+    PushExits(L, room);
+    LuaPushExtraDescriptions(L, room->ExtraDescriptions());
+    LuaPushMudProgs(L, &room->mprog);
+    
+    lua_settable(L, -3);
+}
+
+void LuaAreaRepository::PushRooms(lua_State *L, const std::shared_ptr<Area> &area, bool install)
+{
+    lua_pushstring(L, "Rooms");
+    lua_newtable(L);
+    vnum_t vnum = INVALID_VNUM;
+
+    for (vnum = area->VnumRanges.Room.First; vnum <= area->VnumRanges.Room.Last; vnum++)
+    {
+        if(vnum != INVALID_VNUM)
+        {
+            auto room = GetRoom(vnum);
+
+
+            if (room != nullptr)
+            {
+                PushRoom(L, room, install);
+            }
+        }
+    }
+
+    lua_settable(L, -3);
+
+    if (install && vnum < area->VnumRanges.Room.Last)
+    {
+        area->VnumRanges.Room.Last = vnum - 1;
+    }
+}
+
 void LuaAreaRepository::PushObject(lua_State *L, const std::shared_ptr<ProtoObject> obj, bool install)
 {
     if (install)
@@ -200,6 +316,10 @@ void LuaAreaRepository::PushObject(lua_State *L, const std::shared_ptr<ProtoObje
     PushOvalues(L, obj);
     LuaSetfieldNumber(L, "Weight", obj->Weight);
     LuaSetfieldNumber(L, "Cost", obj->Cost);
+    LuaPushExtraDescriptions(L, obj->ExtraDescriptions());
+    LuaPushProtoObjectAffects(L, obj->Affects());
+    LuaPushMudProgs(L, &obj->mprog);
+    
     lua_settable(L, -3);
 }
 
@@ -207,8 +327,9 @@ void LuaAreaRepository::PushObjects(lua_State *L, const std::shared_ptr<Area> &a
 {
     lua_pushstring(L, "Objects");
     lua_newtable(L);
-
-    for (vnum_t vnum = area->VnumRanges.Object.First; vnum <= area->VnumRanges.Object.Last; vnum++)
+    vnum_t vnum = INVALID_VNUM;
+    
+    for (vnum = area->VnumRanges.Object.First; vnum <= area->VnumRanges.Object.Last; vnum++)
     {
         if(vnum != INVALID_VNUM)
         {
@@ -223,14 +344,20 @@ void LuaAreaRepository::PushObjects(lua_State *L, const std::shared_ptr<Area> &a
     }
 
     lua_settable(L, -3);
+
+    if (install && vnum < area->VnumRanges.Object.Last)
+    {
+        area->VnumRanges.Object.Last = vnum - 1;
+    }
 }
 
 void LuaAreaRepository::PushMobiles(lua_State *L, const std::shared_ptr<Area> &area, bool install)
 {
     lua_pushstring(L, "Mobiles");
     lua_newtable(L);
+    vnum_t vnum = INVALID_VNUM;
     
-    for (vnum_t vnum = area->VnumRanges.Mob.First; vnum <= area->VnumRanges.Mob.Last; vnum++)
+    for (vnum = area->VnumRanges.Mob.First; vnum <= area->VnumRanges.Mob.Last; vnum++)
     {
         if(vnum != INVALID_VNUM)
         {
@@ -245,6 +372,11 @@ void LuaAreaRepository::PushMobiles(lua_State *L, const std::shared_ptr<Area> &a
     }
 
     lua_settable(L, -3);
+
+    if (install && vnum < area->VnumRanges.Mob.Last)
+    {
+        area->VnumRanges.Mob.Last = vnum - 1;
+    }
 }
 
 void LuaAreaRepository::PushMobile(lua_State *L, const std::shared_ptr<ProtoMobile> mob, bool install)

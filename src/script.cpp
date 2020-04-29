@@ -471,6 +471,23 @@ static void LuaPushCharacterAffect(lua_State *L, std::shared_ptr<Affect> affect,
     lua_settable(L, -3);
 }
 
+static void LuaPushProtoObjectAffect(lua_State *L, std::shared_ptr<Affect> affect, int idx)
+{
+    lua_pushinteger(L, idx);
+    lua_newtable(L);
+
+    LuaSetfieldNumber(L, "Location", affect->Location);
+    LuaSetfieldNumber(L, "Modifier",
+        (affect->Location == APPLY_WEAPONSPELL
+            || affect->Location == APPLY_WEARSPELL
+            || affect->Location == APPLY_REMOVESPELL
+            || affect->Location == APPLY_STRIPSN)
+        && IS_VALID_SN(affect->Modifier)
+        ? SkillTable[affect->Modifier]->Slot : affect->Modifier);    
+
+    lua_settable(L, -3);
+}
+
 static void LuaPushObjectAffect(lua_State *L, std::shared_ptr<Affect> affect, int idx)
 {
     std::shared_ptr<Skill> skill = GetSkill(affect->Type);
@@ -492,12 +509,12 @@ static void LuaPushObjectAffect(lua_State *L, std::shared_ptr<Affect> affect, in
     }
 
     LuaSetfieldNumber(L, "Modifier",
-        (affect->Location == APPLY_WEAPONSPELL
-            || affect->Location == APPLY_WEARSPELL
-            || affect->Location == APPLY_REMOVESPELL
-            || affect->Location == APPLY_STRIPSN)
-        && IS_VALID_SN(affect->Modifier)
-        ? SkillTable[affect->Modifier]->Slot : affect->Modifier);
+                      (affect->Location == APPLY_WEAPONSPELL
+                       || affect->Location == APPLY_WEARSPELL
+                       || affect->Location == APPLY_REMOVESPELL
+                       || affect->Location == APPLY_STRIPSN)
+                      && IS_VALID_SN(affect->Modifier)
+                      ? SkillTable[affect->Modifier]->Slot : affect->Modifier);
 
     if (affect->Type >= 0 && affect->Type < TopSN)
     {
@@ -552,6 +569,11 @@ void LuaPushObjectAffects(lua_State *L, const std::list<std::shared_ptr<Affect>>
     const std::string &key)
 {
     LuaPushAffects(L, affects, key, LuaPushObjectAffect);
+}
+
+void LuaPushProtoObjectAffects(lua_State *L, const std::list<std::shared_ptr<Affect>> &affects)
+{
+    LuaPushAffects(L, affects, "Affects", LuaPushProtoObjectAffect);
 }
 
 void LuaPushExtraDescriptions(lua_State *L, const std::list<std::shared_ptr<ExtraDescription>> &extras)
