@@ -71,7 +71,6 @@ src/skill.cpp
 src/skills.cpp
 src/social.cpp
 src/spaceobject.cpp
-src/special.cpp
 src/systemdata.cpp
 src/tables.cpp
 src/track.cpp
@@ -697,3 +696,12 @@ add_subdirectory(libs/colorparser)
 add_subdirectory(libs/utility)
 add_subdirectory(libs/3rdparty/lua)
 add_subdirectory(test)
+
+# Generate src/tables.cpp file.
+add_custom_command(OUTPUT src/tables.cpp
+                   COMMAND python3 make_lookup_table.py src/tables.cpp
+                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+add_custom_target(tables_cpp ALL
+                  COMMAND rm src/tables.cpp
+                  DEPENDS src/tables.cpp)
+add_dependencies(mud tables_cpp)

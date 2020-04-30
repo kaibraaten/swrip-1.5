@@ -778,10 +778,10 @@ void FoldArea(std::shared_ptr<Area> tarea, const std::string &filename, bool ins
             continue;
         if (pMobIndex->spec_fun)
             fprintf(fpout, "M  %ld %s\n", pMobIndex->Vnum,
-                LookupSpecial(pMobIndex->spec_fun));
+                    LookupSpecial(pMobIndex->spec_fun).c_str());
         if (pMobIndex->spec_2)
             fprintf(fpout, "M  %ld %s\n", pMobIndex->Vnum,
-                LookupSpecial(pMobIndex->spec_2));
+                    LookupSpecial(pMobIndex->spec_2).c_str());
     }
     fprintf(fpout, "S\n\n\n");
 

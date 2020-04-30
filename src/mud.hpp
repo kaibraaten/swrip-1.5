@@ -1323,7 +1323,7 @@ void WriteCorpses(const Character *ch, std::string name);
 
 /* special.c */
 SpecFun *SpecialLookup(const std::string &name);
-const char *LookupSpecial(SpecFun *special);
+std::string LookupSpecial(SpecFun *special);
 
 /* tables.c */
 SpellFun *GetSpellFunction(const std::string &name);

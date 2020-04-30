@@ -197,8 +197,8 @@ void do_mstat( Character *ch, std::string arg )
   if ( IsNpc(victim) && ( victim->spec_fun || victim->spec_2 ) )
     {
       ch->Echo("Mobile has spec fun: %s %s\r\n",
-               LookupSpecial( victim->spec_fun ),
-               victim->spec_2 ? LookupSpecial( victim->spec_2 ) : "" );
+               LookupSpecial(victim->spec_fun).c_str(),
+               victim->spec_2 ? LookupSpecial(victim->spec_2).c_str() : "" );
     }
 
   ch->Echo("Resistant  : %s\r\n",
