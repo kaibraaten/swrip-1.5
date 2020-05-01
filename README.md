@@ -35,6 +35,7 @@ new features any time soon. It will still be about refactoring.
 * Lua 5.3 (included in libs/3rdparty directory)
 * Google Test and Google Mock (downloaded automatically)
 * cmake 3.10 or higher.
+* Python 3 (the script also works with Python 2, but the v3 interpreter is the one being used).
 
 ## Compiling
 * Type `cmake .` (only needed first time you're compiling)
