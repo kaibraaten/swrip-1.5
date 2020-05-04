@@ -291,10 +291,10 @@ static std::shared_ptr<SmaugAffect> LuaLoadOneSmaugAffect(lua_State *L)
     LuaGetfieldString(L, "Modifier", &affect->Modifier);
     LuaGetfieldInt(L, "Location", &affect->Location);
     LuaGetfieldString(L, "AffectedBy",
-        [affect](const std::string &value)
-    {
-        affect->AffectedBy = GetAffectFlag(value);
-    });
+                      [affect](const std::string &value)
+                      {
+                          affect->AffectedBy = GetAffectFlag(value);
+                      });
     return affect;
 }
 

@@ -31,9 +31,9 @@ void LuaSetfieldString(lua_State *L, const std::string &key, const std::string &
 void LuaSetfieldNumber(lua_State *L, const std::string &key, double value);
 void LuaSetfieldBoolean(lua_State *L, const std::string &key, bool value);
 
-template<typename T>
+template<typename T, typename CallableT>
 void LuaGetfield(lua_State *L, const std::string &key, T *value,
-    std::function<void(lua_State*, int, T*)> assignValue)
+                 CallableT assignValue)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
@@ -41,6 +41,49 @@ void LuaGetfield(lua_State *L, const std::string &key, T *value,
     if (!lua_isnil(L, ++idx))
     {
         assignValue(L, idx, value);
+    }
+
+    lua_pop(L, 1);
+}
+
+template<typename CallableT, typename UserdataT>
+void LuaLoadTable(lua_State *L, const std::string &key, CallableT getFields, UserdataT ud)
+{
+    int idx = lua_gettop(L);
+    lua_getfield(L, idx, key.c_str());
+
+    if (!lua_isnil(L, ++idx))
+    {
+        getFields(L, ud);
+    }
+
+    lua_pop(L, 1);
+}
+
+// CallableT must have the following signature:
+// void Callback(lua_State*, int subscript, UserdataT)
+// The subscript parameter is the subscript from the Lua
+// array in case you need it. UserdataT is whatever you want.
+// It's the same object as you provide in the third
+// parameter of LuaLoadArray().
+template<typename CallableT, typename UserdataT>
+void LuaLoadArray(lua_State *L, const std::string &key,
+                  CallableT callback,
+                  UserdataT userData)
+{
+    auto idx = lua_gettop(L);
+    lua_getfield(L, idx, key.c_str());
+
+    if (!lua_isnil(L, ++idx))
+    {
+        lua_pushnil(L);
+
+        while (lua_next(L, -2))
+        {
+            auto subscript = lua_tointeger(L, -2);
+            callback(L, subscript, userData);
+            lua_pop(L, 1);
+        }
     }
 
     lua_pop(L, 1);

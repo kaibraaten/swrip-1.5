@@ -587,10 +587,13 @@ void BootDatabase(bool fCopyOver)
     /*
      * Read in all the area files.
      */
-    FILE *fpList = nullptr;
 
     Log->Boot("Reading in area files...");
-
+#ifdef USE_NEW_AREA_FORMAT
+    Areas->Load();
+#else
+    FILE *fpList = nullptr;
+    
     if ((fpList = fopen(AREA_DIR AREA_LIST, "r")) == NULL)
     {
         ShutdownMud("Unable to open area list");
@@ -608,7 +611,8 @@ void BootDatabase(bool fCopyOver)
     }
 
     fclose(fpList);
-
+#endif
+    
     /*
      *   initialize supermob.
      *    must be done before ResetArea!

@@ -1,6 +1,7 @@
 #include <memory>
 #include <filesystem>
 #include <utility/algorithms.hpp>
+#include "systemdata.hpp"
 #include "log.hpp"
 #include "mud.hpp"
 #include "arearepository.hpp"
@@ -16,7 +17,15 @@
 #include "exit.hpp"
 #include "shop.hpp"
 
+#define DO_NOT_SAVE_AREAS
+
 namespace fs = std::filesystem;
+// Version 1:
+//   Resets are stored in legacy format where each entry must
+//   appear in a specific order, because everything is in one
+//   big list, subresets and all.
+static constexpr int CURRENT_FILEFORMAT_VERSION = 1;
+static int FILEFORMAT_VERSION_BEING_LOADED = CURRENT_FILEFORMAT_VERSION;
 
 std::shared_ptr<AreaRepository> Areas;
 
@@ -29,18 +38,6 @@ public:
     void Save(const std::shared_ptr<Area>&, bool install) const override;
 
 private:
-    // Version 1:
-    //   Resets are stored in legacy format where each entry must
-    //   appear in a specific order, because everything is in one
-    //   big list, subresets and all.
-    static constexpr int CURRENT_FILEFORMAT_VERSION = 1;
-
-    mutable int FILEFORMAT_VERSION_BEING_LOADED = CURRENT_FILEFORMAT_VERSION;
-
-    //static void PushMember(lua_State* L, const std::shared_ptr<ClanMember>& member, int idx);
-    //static void PushMembers(lua_State* L, const
-    //std::shared_ptr<Clan>& clan);
-
     void PushMetaData(lua_State*, std::shared_ptr<Area>) const;
     void PushExits(lua_State *L, const std::shared_ptr<Room> room) const;
     void PushExit(lua_State *L, const std::shared_ptr<Exit> xit, size_t idx) const;
@@ -58,21 +55,30 @@ private:
     void PushReset(lua_State *L, const std::shared_ptr<Reset> reset, size_t idx) const;
     static void PushArea(lua_State* L, const void* userData);
 
-    //static void LoadOneMember(lua_State* L, const std::shared_ptr<Clan>& clan);
-    //static void LoadMembers(lua_State* L, const std::shared_ptr<Clan>& clan);
-    //static void LoadStoreroom(lua_State* L, const std::shared_ptr<Clan>& clan);
-    //static int L_ClanEntry(lua_State* L);
-    //static void ExecuteClanFile(const std::string& filePath, void* userData);
+    static void LoadMetaData(lua_State *L, std::shared_ptr<Area> area);
+    static void LoadMobiles(lua_State *L, std::shared_ptr<Area> area);
+    static void LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mob);
+    static void LoadObjects(lua_State *L, std::shared_ptr<Area> area);
+    static void LoadObject(lua_State *L, std::shared_ptr<ProtoObject> obj);
+    static void LoadRooms(lua_State *L, std::shared_ptr<Area> area);
+    static void LoadRoom(lua_State *L, std::shared_ptr<Room> room);
+    static void LoadResets(lua_State *L, std::shared_ptr<Area> area);
+    static void LoadReset(lua_State *L, std::shared_ptr<Reset> reset);
+    static void LoadMobilesCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area);
+    static int L_AreaEntry(lua_State* L);
+    static void ExecuteAreaFile(const std::string& filePath, void* userData);
 };
 
 void LuaAreaRepository::Load()
 {
-    /*ForEachLuaFileInDir(CLAN_DIR, ExecuteClanFile, NULL);
+    ForEachLuaFileInDir(AREA_DIR, ExecuteAreaFile, NULL);
 
-      for (const auto& clan : Clans)
-      {
-      AssignGuildToMainclan(clan);
-      }*/
+    /*
+    for (const auto& area : Entities())
+    {
+        AssignGuildToMainclan(clan);
+    }
+    */
 }
 
 void LuaAreaRepository::Save() const
@@ -99,6 +105,7 @@ struct SaveData
 
 void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, bool install) const
 {
+#ifndef DO_NOT_SAVE_AREAS
     // Make backup in case something goes wrong while saving.
     try
     {
@@ -114,6 +121,9 @@ void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, bool install) co
     SaveData data(this, area, install);
 
     LuaSaveDataFile(GetAreaFilename(area), PushArea, "area", &data);
+#else
+    Log->Info("Area saving disabled (%s).", area->Name.c_str());
+#endif
 }
 
 static std::string EnsureProperFilename(std::string filename)
@@ -627,6 +637,191 @@ void LuaAreaRepository::PushSpecials(lua_State *L, const std::shared_ptr<ProtoMo
 
         lua_settable(L, -3);
     }
+}
+
+void LuaAreaRepository::LoadMetaData(lua_State *L, std::shared_ptr<Area> area)
+{
+    LuaGetfieldInt(L, "FileFormatVersion", &FILEFORMAT_VERSION_BEING_LOADED);
+    LuaGetfieldString(L, "Filename", &area->Filename);
+    LuaGetfieldString(L, "Author", &area->Author);
+    LuaGetfieldString(L, "ResetMessage", &area->ResetMessage);
+    LuaGetfieldInt(L, "ResetFrequency",
+                   [area](auto resetFrequency)
+                   {
+                       area->ResetFrequency = (short)resetFrequency;
+                   });
+    LuaGetfieldInt(L, "HighEconomy", &area->HighEconomy);
+    LuaGetfieldInt(L, "LowEconomy", &area->LowEconomy);
+
+    if(FieldExists(L, "Flags"))
+    {
+        area->Flags = LuaLoadFlags(L, "Flags");
+    }
+}
+
+static void LoadHitChance(lua_State *L, std::shared_ptr<ProtoMobile> mob)
+{
+    LuaGetfieldInt(L, "HitNoDice", &mob->HitNoDice);
+    LuaGetfieldInt(L, "HitSizeDice", &mob->HitSizeDice);
+    LuaGetfieldInt(L, "HitPlus", &mob->HitPlus);
+}
+
+static void LoadDamage(lua_State *L, std::shared_ptr<ProtoMobile> mob)
+{
+    LuaGetfieldInt(L, "DamNoDice", &mob->DamNoDice);
+    LuaGetfieldInt(L, "DamSizeDice", &mob->DamSizeDice);
+    LuaGetfieldInt(L, "DamPlus", &mob->DamPlus);
+}
+
+static void LoadLanguages(lua_State *L, std::shared_ptr<ProtoMobile> mob)
+{
+    mob->Speaks = LuaLoadFlags(L, "Speaks").to_ulong();
+    mob->Speaking = LuaLoadFlags(L, "Speaking").to_ulong();
+}
+
+static void LoadSpecFuns(lua_State *L, int subscript, std::shared_ptr<ProtoMobile> mob)
+{
+
+}
+
+void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mob)
+{
+    LuaGetfieldString(L, "Name", &mob->Name);
+    LuaGetfieldLong(L, "Vnum", &mob->Vnum);
+    LuaGetfieldString(L, "ShortDescr", &mob->ShortDescr);
+    LuaGetfieldString(L, "LongDescr", &mob->LongDescr);
+    LuaGetfieldString(L, "Description", &mob->Description);
+    LuaGetfieldInt(L, "Alignment", &mob->Alignment);
+    LuaGetfieldInt(L, "Level", &mob->Level);
+    LuaGetfieldInt(L, "ArmorClass", &mob->ArmorClass);
+    LuaGetfieldInt(L, "Credits", &mob->Gold);
+    LuaGetfieldString(L, "Position",
+                      [mob](auto positionName)
+                      {
+                          mob->Position = GetPosition(positionName);
+                      });
+    LuaGetfieldString(L, "DefaultPosition",
+                      [mob](auto positionName)
+                      {
+                          mob->DefaultPosition = GetPosition(positionName);
+                      });
+    LuaGetfieldString(L, "Sex",
+                      [mob](auto sexName)
+                      {
+                          mob->Sex = GetSex(sexName);
+                      });
+    LuaGetfieldString(L, "Race",
+                      [mob](auto raceName)
+                      {
+                          mob->Race = GetNpcRace(raceName);
+                      });
+    LuaGetfieldInt(L, "Height", &mob->Height);
+    LuaGetfieldInt(L, "Weight", &mob->Weight);
+    LuaGetfieldInt(L, "NumberOfAttacks", &mob->NumberOfAttacks);
+    LuaGetfieldInt(L, "HitRoll", &mob->HitRoll);
+    LuaGetfieldInt(L, "DamRoll", &mob->DamRoll);
+    
+    mob->Flags = LuaLoadFlags(L, "Flags").to_ulong();
+    mob->AffectedBy = LuaLoadFlags(L, "AffectedBy").to_ulong();
+    mob->AttackFlags = LuaLoadFlags(L, "AttackFlags").to_ulong();
+    mob->DefenseFlags = LuaLoadFlags(L, "DefenseFlags").to_ulong();
+    mob->Resistant = LuaLoadFlags(L, "Resistant").to_ulong();
+    mob->Immune = LuaLoadFlags(L, "Immune").to_ulong();
+    mob->Susceptible = LuaLoadFlags(L, "Susceptible").to_ulong();
+    mob->VipFlags = LuaLoadFlags(L, "VipFlags").to_ulong();
+    
+    LuaLoadTable(L, "HitChance", LoadHitChance, mob);
+    LuaLoadTable(L, "Damage", LoadDamage, mob);
+    LuaLoadTable(L, "Languages", LoadLanguages, mob);
+
+    // Load progs
+
+    // Load shop
+
+    // Load repair shop
+
+    // Load specials
+    LuaLoadArray(L, "SpecFuns", LoadSpecFuns, mob);    
+}
+
+void LuaAreaRepository::LoadMobilesCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area)
+{
+    auto mob = std::make_shared<ProtoMobile>(vnum);
+    LoadMobile(L, mob);
+
+    if (area->VnumRanges.Mob.First == INVALID_VNUM)
+    {
+        area->VnumRanges.Mob.First = vnum;
+    }
+
+    if (vnum > area->VnumRanges.Mob.Last)
+    {
+        area->VnumRanges.Mob.Last = vnum;
+    }
+
+    int iHash = vnum % MAX_KEY_HASH;
+    mob->Next = MobIndexHash[iHash];
+    MobIndexHash[iHash] = mob;
+    top_mob_index++;
+}
+
+void LuaAreaRepository::LoadMobiles(lua_State *L, std::shared_ptr<Area> area)
+{
+    LuaLoadArray(L, "Mobiles", &LuaAreaRepository::LoadMobilesCallback, area);
+}
+
+void LuaAreaRepository::LoadObjects(lua_State *L, std::shared_ptr<Area> area)
+{
+
+}
+
+void LuaAreaRepository::LoadObject(lua_State *L, std::shared_ptr<ProtoObject> obj)
+{
+
+}
+
+void LuaAreaRepository::LoadRooms(lua_State *L, std::shared_ptr<Area> area)
+{
+
+}
+
+void LuaAreaRepository::LoadRoom(lua_State *L, std::shared_ptr<Room> room)
+{
+
+}
+
+void LuaAreaRepository::LoadResets(lua_State *L, std::shared_ptr<Area> area)
+{
+
+}
+
+void LuaAreaRepository::LoadReset(lua_State *L, std::shared_ptr<Reset> reset)
+{
+
+}
+
+int LuaAreaRepository::L_AreaEntry(lua_State *L)
+{
+    auto area = std::make_shared<Area>();
+    LuaGetfieldString(L, "Filename", &area->Filename);
+    Log->Info("Loading %s", area->Filename.c_str());
+
+    LoadMetaData(L, area);
+    LoadMobiles(L, area);
+    LoadObjects(L, area);
+    LoadRooms(L, area);
+    LoadResets(L, area);
+
+    Areas->Add(area);
+    LINK(area, Areas->FirstArea, Areas->LastArea, Next, Previous);
+    top_area++;
+    
+    return 0;
+}
+
+void LuaAreaRepository::ExecuteAreaFile(const std::string &filename, void *userData)
+{
+    LuaLoadDataFile(filename, L_AreaEntry, "AreaEntry");
 }
 
 ////////////////////////////////

@@ -152,10 +152,10 @@ void LuaClanRepository::LoadOneMember(lua_State *L, const std::shared_ptr<Clan> 
     LuaGetfieldLong(L, "MemberSince", &memberSince);
     member->Since = memberSince;
     LuaGetfieldString(L, "Ability",
-        [member](const std::string &abilityName)
-    {
-        member->Ability = GetAbility(abilityName);
-    });
+                      [member](const auto &abilityName)
+                      {
+                          member->Ability = GetAbility(abilityName);
+                      });
     LuaGetfieldInt(L, "Level", &member->Level);
     LuaGetfieldInt(L, "Kills", &member->Kills);
     LuaGetfieldInt(L, "Deaths", &member->Deaths);

@@ -304,6 +304,9 @@ bool DelOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keyword
 
 void FoldArea(std::shared_ptr<Area> tarea, const std::string &filename, bool install)
 {
+#ifdef USE_NEW_AREA_FORMAT
+    Areas->Save(tarea, install);
+#else
     std::shared_ptr<Room> room;
     std::shared_ptr<ProtoMobile> pMobIndex;
     std::shared_ptr<ProtoObject> pObjIndex;
@@ -787,10 +790,12 @@ void FoldArea(std::shared_ptr<Area> tarea, const std::string &filename, bool ins
     /* END */
     fprintf(fpout, "#$\n");
     fclose(fpout);
+#endif
 }
 
 void WriteAreaList()
 {
+#ifndef USE_NEW_AREA_FORMAT
     FILE *fpout = fopen(AREA_DIR AREA_LIST, "w");
 
     if (fpout)
@@ -805,6 +810,7 @@ void WriteAreaList()
     {
         Log->Bug("%s: FATAL: cannot open area.lst for writing!\r\n", __FUNCTION__);
     }
+#endif
 }
 
 /*
