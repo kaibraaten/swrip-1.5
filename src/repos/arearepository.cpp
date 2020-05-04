@@ -122,7 +122,7 @@ void LuaAreaRepository::Save(const std::shared_ptr<Area> &area, bool install) co
 
     LuaSaveDataFile(GetAreaFilename(area), PushArea, "area", &data);
 #else
-    Log->Info("Area saving disabled (%s).", area->Name.c_str());
+    Log->Info("Area saving disabled (%s).", area->Filename.c_str());
 #endif
 }
 
@@ -681,7 +681,28 @@ static void LoadLanguages(lua_State *L, std::shared_ptr<ProtoMobile> mob)
 
 static void LoadSpecFuns(lua_State *L, int subscript, std::shared_ptr<ProtoMobile> mob)
 {
+    std::string specname = lua_tostring(L, -1);
+    auto specfun = SpecialLookup(specname);
 
+    if(specfun != nullptr)
+    {
+        if(mob->spec_fun != nullptr)
+        {
+            mob->spec_fun = specfun;
+        }
+        else if(mob->spec_2 != nullptr)
+        {
+            mob->spec_2 = specfun;
+        }
+        else
+        {
+            Log->Bug("%s: Too many specfuns in file.", __FUNCTION__);
+        }
+    }
+    else
+    {
+        Log->Bug("%s: Unknown specfun: %s", __FUNCTION__, specname.c_str());
+    }
 }
 
 void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mob)
@@ -741,7 +762,7 @@ void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mo
     // Load repair shop
 
     // Load specials
-    LuaLoadArray(L, "SpecFuns", LoadSpecFuns, mob);    
+    LuaLoadArray(L, "SpecFuns", LoadSpecFuns, mob);
 }
 
 void LuaAreaRepository::LoadMobilesCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area)
