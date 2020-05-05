@@ -1202,6 +1202,7 @@ std::string FormatDate(const time_t*);
 Character *GetCharacterInRoomMudProg(Character *ch, std::string argument);
 int GetColor(const std::string &argument);
 const char *MobProgTypeToName(int type);
+int MobProgNameToType(const std::string &name);
 
 /* skills.c */
 bool CheckParry(Character *ch, Character *victim);

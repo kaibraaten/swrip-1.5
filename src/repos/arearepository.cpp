@@ -72,13 +72,6 @@ private:
 void LuaAreaRepository::Load()
 {
     ForEachLuaFileInDir(AREA_DIR, ExecuteAreaFile, NULL);
-
-    /*
-    for (const auto& area : Entities())
-    {
-        AssignGuildToMainclan(clan);
-    }
-    */
 }
 
 void LuaAreaRepository::Save() const
@@ -673,6 +666,23 @@ static void LoadDamage(lua_State *L, std::shared_ptr<ProtoMobile> mob)
     LuaGetfieldInt(L, "DamPlus", &mob->DamPlus);
 }
 
+static void LoadMudProg(lua_State *L, int subscript, MProg *mprog)
+{
+    auto prog = std::make_shared<MPROG_DATA>();
+    LuaGetfieldString(L, "MudProgType",
+                      [prog](const auto &name)
+                      {
+                          prog->type = MobProgNameToType(name);
+                      });
+    LuaGetfieldString(L, "Arguments",
+                      [prog](const auto &args)
+                      {
+                          prog->arglist = CopyString(args);
+                      });
+    LuaGetfieldString(L, "Code", &prog->comlist);
+    mprog->Add(prog);
+}
+
 static void LoadLanguages(lua_State *L, std::shared_ptr<ProtoMobile> mob)
 {
     mob->Speaks = LuaLoadFlags(L, "Speaks").to_ulong();
@@ -756,7 +766,8 @@ void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mo
     LuaLoadTable(L, "Languages", LoadLanguages, mob);
 
     // Load progs
-
+    LuaLoadArray(L, "MudProgs", LoadMudProg, &mob->mprog);
+    
     // Load shop
 
     // Load repair shop

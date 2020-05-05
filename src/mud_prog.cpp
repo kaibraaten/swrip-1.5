@@ -32,6 +32,7 @@
  *  Full support for nested ifs is in.                                      *
  ****************************************************************************/
 
+#include <unordered_map>
 #include <cstring>
 #include <cctype>
 #include <utility/algorithms.hpp>
@@ -3379,7 +3380,7 @@ static void ObjectActAdd(Object *obj)
     obj_act_list.push_front(runner);
 }
 
-void ObjectActUpdate(void)
+void ObjectActUpdate()
 {
     while (!obj_act_list.empty())
     {
@@ -3401,103 +3402,64 @@ void ObjectActUpdate(void)
     }
 }
 
+std::unordered_map<int, const char * const> MudProgTypes =
+{
+    { ACT_PROG, "act_prog" },
+    { SPEECH_PROG, "speech_prog" },
+    { RAND_PROG, "rand_prog" },
+    { FIGHT_PROG, "fight_prog" },
+    { HITPRCNT_PROG, "hitprcnt_prog" },
+    { DEATH_PROG, "death_prog" },
+    { ENTRY_PROG, "entry_prog" },
+    { GREET_PROG, "greet_prog" },
+    { ALL_GREET_PROG, "all_greet_prog" },
+    { GIVE_PROG, "give_prog" },
+    { BRIBE_PROG, "bribe_prog" },
+    { HOUR_PROG, "hour_prog" },
+    { TIME_PROG, "time_prog" },
+    { WEAR_PROG, "wear_prog" },
+    { REMOVE_PROG, "remove_prog" },
+    { SAC_PROG, "sac_prog" },
+    { LOOK_PROG, "look_prog" },
+    { EXA_PROG, "exa_prog" },
+    { ZAP_PROG, "zap_prog" },
+    { GET_PROG, "get_prog" },
+    { DROP_PROG, "drop_prog" },
+    { REPAIR_PROG, "repair_prog" },
+    { DAMAGE_PROG, "damage_prog" },
+    { PULL_PROG, "pull_prog" },
+    { PUSH_PROG, "push_prog" },
+    { SCRIPT_PROG, "script_prog" },
+    { SLEEP_PROG, "sleep_prog" },
+    { REST_PROG, "rest_prog" },
+    { LEAVE_PROG, "leave_prog" },
+    { USE_PROG, "use_prog" },
+    { ERROR_PROG, "ERROR_PROG" }
+};
+
 const char *MobProgTypeToName(int type)
 {
-    switch (type)
+    try
     {
-    case ACT_PROG:
-        return "act_prog";
-
-    case SPEECH_PROG:
-        return "speech_prog";
-
-    case RAND_PROG:
-        return "rand_prog";
-
-    case FIGHT_PROG:
-        return "fight_prog";
-
-    case HITPRCNT_PROG:
-        return "hitprcnt_prog";
-
-    case DEATH_PROG:
-        return "death_prog";
-
-    case ENTRY_PROG:
-        return "entry_prog";
-
-    case GREET_PROG:
-        return "greet_prog";
-
-    case ALL_GREET_PROG:
-        return "all_greet_prog";
-
-    case GIVE_PROG:
-        return "give_prog";
-
-    case BRIBE_PROG:
-        return "bribe_prog";
-
-    case HOUR_PROG:
-        return "hour_prog";
-
-    case TIME_PROG:
-        return "time_prog";
-
-    case WEAR_PROG:
-        return "wear_prog";
-
-    case REMOVE_PROG:
-        return "remove_prog";
-
-    case SAC_PROG:
-        return "sac_prog";
-
-    case LOOK_PROG:
-        return "look_prog";
-
-    case EXA_PROG:
-        return "exa_prog";
-
-    case ZAP_PROG:
-        return "zap_prog";
-
-    case GET_PROG:
-        return "get_prog";
-
-    case DROP_PROG:
-        return "drop_prog";
-
-    case REPAIR_PROG:
-        return "repair_prog";
-
-    case DAMAGE_PROG:
-        return "damage_prog";
-
-    case PULL_PROG:
-        return "pull_prog";
-
-    case PUSH_PROG:
-        return "push_prog";
-
-    case SCRIPT_PROG:
-        return "script_prog";
-
-    case SLEEP_PROG:
-        return "sleep_prog";
-
-    case REST_PROG:
-        return "rest_prog";
-
-    case LEAVE_PROG:
-        return "leave_prog";
-
-    case USE_PROG:
-        return "use_prog";
-
-    default:
+        return MudProgTypes.at(type);
+    }
+    catch(const std::out_of_range &ex)
+    {
         return "ERROR_PROG";
     }
+}
+
+int MobProgNameToType(const std::string &name)
+{
+    for(auto tuple : MudProgTypes)
+    {
+        if(StrCmp(tuple.second, name) == 0)
+        {
+            return tuple.first;
+        }
+    }
+
+    return ERROR_PROG;
 }
 
 Character *GetCharacterInRoomMudProg(Character *ch, std::string argument)
