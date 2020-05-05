@@ -5,7 +5,7 @@
 #include <utility/repository.hpp>
 #include "types.hpp"
 
-#define USE_NEW_AREA_FORMAT
+//#define USE_NEW_AREA_FORMAT
 
 class AreaRepository : public Ceris::Repository<std::shared_ptr<Area>>
 {

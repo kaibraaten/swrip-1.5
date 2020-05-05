@@ -17,7 +17,7 @@
 #include "exit.hpp"
 #include "shop.hpp"
 
-#define DO_NOT_SAVE_AREAS
+//#define DO_NOT_SAVE_AREAS
 
 namespace fs = std::filesystem;
 // Version 1:
