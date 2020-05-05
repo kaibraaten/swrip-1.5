@@ -689,6 +689,42 @@ static void LoadLanguages(lua_State *L, std::shared_ptr<ProtoMobile> mob)
     mob->Speaking = LuaLoadFlags(L, "Speaking").to_ulong();
 }
 
+template<typename ShopT>
+static void LoadBusinessHours(lua_State *L, std::shared_ptr<ShopT> shop)
+{
+    LuaGetfieldShort(L, "Open", &shop->BusinessHours.Open);
+    LuaGetfieldShort(L, "Close", &shop->BusinessHours.Close);
+}
+
+template<size_t N>
+static void LoadBuyType(lua_State *L, int subscript, std::array<ItemTypes, N> &buyType)
+{
+    auto itemType = lua_tostring(L, -1);
+    buyType[subscript] = GetObjectType(itemType);
+}
+
+static void LoadShop(lua_State *L, std::shared_ptr<ProtoMobile> mob)
+{
+    mob->Shop = std::make_shared<Shop>();
+    LuaGetfieldLong(L, "KeeperVnum", &mob->Shop->Keeper);
+    LuaGetfieldShort(L, "ProfitBuy", &mob->Shop->ProfitBuy);
+    LuaGetfieldShort(L, "ProfitSell", &mob->Shop->ProfitSell);
+    LuaGetfieldString(L, "KeeperShortDescr", &mob->ShortDescr);
+    LuaLoadTable(L, "BusinessHours", LoadBusinessHours<Shop>, mob->Shop);
+    LuaLoadArray(L, "BuyTypes", LoadBuyType<MAX_TRADE>, mob->Shop->BuyType);
+}
+
+static void LoadRepairShop(lua_State *L, std::shared_ptr<ProtoMobile> mob)
+{
+    mob->RepairShop = std::make_shared<RepairShop>();
+    LuaGetfieldLong(L, "KeeperVnum", &mob->RepairShop->Keeper);
+    LuaGetfieldShort(L, "ProfitFix", &mob->RepairShop->ProfitFix);
+    LuaGetfieldShort(L, "ShopType", &mob->RepairShop->ShopType);
+    LuaGetfieldString(L, "KeeperShortDescr", &mob->ShortDescr);
+    LuaLoadTable(L, "BusinessHours", LoadBusinessHours<RepairShop>, mob->RepairShop);
+    LuaLoadArray(L, "BuyTypes", LoadBuyType<MAX_FIX>, mob->RepairShop->FixType);
+}
+
 static void LoadSpecFuns(lua_State *L, int subscript, std::shared_ptr<ProtoMobile> mob)
 {
     std::string specname = lua_tostring(L, -1);
@@ -769,9 +805,11 @@ void LuaAreaRepository::LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mo
     LuaLoadArray(L, "MudProgs", LoadMudProg, &mob->mprog);
     
     // Load shop
-
+    LuaLoadTable(L, "Shop", LoadShop, mob);
+    
     // Load repair shop
-
+    LuaLoadTable(L, "RepairShop", LoadRepairShop, mob);
+    
     // Load specials
     LuaLoadArray(L, "SpecFuns", LoadSpecFuns, mob);
 }

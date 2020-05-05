@@ -101,6 +101,11 @@ static void LuaToLong(lua_State *L, int idx, long *value)
     *value = static_cast<long>(lua_tonumber(L, idx));
 }
 
+static void LuaToShort(lua_State *L, int idx, short *value)
+{
+    *value = static_cast<short>(lua_tonumber(L, idx));
+}
+
 static void LuaToBool(lua_State *L, int idx, bool *value)
 {
     *value = lua_toboolean(L, idx);
@@ -129,6 +134,11 @@ void LuaGetfieldBool(lua_State *L, const std::string &key, bool *value)
 void LuaGetfieldLong(lua_State *L, const std::string &key, long *value)
 {
     LuaGetfield<long>(L, key, value, LuaToLong);
+}
+
+void LuaGetfieldShort(lua_State *L, const std::string &key, short *value)
+{
+    LuaGetfield<short>(L, key, value, LuaToShort);
 }
 
 void LuaGetfieldDouble(lua_State *L, const std::string &key, double *value)
@@ -1077,7 +1087,7 @@ void LuaGetfieldBool(lua_State *L, const std::string &key,
 }
 
 void LuaGetfieldInt(lua_State *L, const std::string &key,
-    std::function<void(int)> assignValue)
+                    std::function<void(int)> assignValue)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
@@ -1092,7 +1102,7 @@ void LuaGetfieldInt(lua_State *L, const std::string &key,
 }
 
 void LuaGetfieldLong(lua_State *L, const std::string &key,
-    std::function<void(long)> assignValue)
+                     std::function<void(long)> assignValue)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
@@ -1100,6 +1110,21 @@ void LuaGetfieldLong(lua_State *L, const std::string &key,
     if (!lua_isnil(L, ++idx))
     {
         long value = static_cast<long>(lua_tonumber(L, idx));
+        assignValue(value);
+    }
+
+    lua_pop(L, 1);
+}
+
+void LuaGetfieldShort(lua_State *L, const std::string &key,
+                      std::function<void(short)> assignValue)
+{
+    int idx = lua_gettop(L);
+    lua_getfield(L, idx, key.c_str());
+
+    if (!lua_isnil(L, ++idx))
+    {
+        short value = static_cast<short>(lua_tonumber(L, idx));
         assignValue(value);
     }
 
