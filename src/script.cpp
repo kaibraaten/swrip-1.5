@@ -1283,6 +1283,27 @@ static std::shared_ptr<Affect> LuaLoadCharacterAffect(lua_State *L)
     return std::make_shared<Affect>(affect);
 }
 
+static std::shared_ptr<Affect> LuaLoadProtoObjectAffect(lua_State *L)
+{
+    Affect affect;
+
+    LuaGetfieldInt(L, "Location", &affect.Location);
+    LuaGetfieldInt(L, "Modifier", &affect.Modifier);
+    affect.Type = -1;
+    affect.Duration = -1;    
+    affect.AffectedBy = 0;
+
+    if (affect.Location == APPLY_WEAPONSPELL
+        || affect.Location == APPLY_WEARSPELL
+        || affect.Location == APPLY_REMOVESPELL
+        || affect.Location == APPLY_STRIPSN)
+    {
+        affect.Modifier = SkillNumberFromSlot(affect.Modifier);
+    }
+
+    return std::make_shared<Affect>(affect);
+}
+
 static std::shared_ptr<Affect> LuaLoadObjectAffect(lua_State *L)
 {
     Affect affect;
@@ -1363,6 +1384,11 @@ std::list<std::shared_ptr<Affect>> LuaLoadCharacterAffects(lua_State *L, const s
 std::list<std::shared_ptr<Affect>> LuaLoadObjectAffects(lua_State *L, const std::string &key)
 {
     return LuaLoadAffects(L, key, LuaLoadObjectAffect);
+}
+
+std::list<std::shared_ptr<Affect>> LuaLoadProtoObjectAffects(lua_State *L, const std::string &key)
+{
+    return LuaLoadAffects(L, key, LuaLoadProtoObjectAffect);
 }
 
 static void ConvertSpellNameToOvalue(lua_State *L, const std::string &key,

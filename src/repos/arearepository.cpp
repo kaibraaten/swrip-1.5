@@ -60,11 +60,14 @@ private:
     static void LoadMobile(lua_State *L, std::shared_ptr<ProtoMobile> mob);
     static void LoadObjects(lua_State *L, std::shared_ptr<Area> area);
     static void LoadObject(lua_State *L, std::shared_ptr<ProtoObject> obj);
+    static void LoadOvalues(lua_State *L, std::shared_ptr<ProtoObject> obj);
     static void LoadRooms(lua_State *L, std::shared_ptr<Area> area);
     static void LoadRoom(lua_State *L, std::shared_ptr<Room> room);
     static void LoadResets(lua_State *L, std::shared_ptr<Area> area);
     static void LoadReset(lua_State *L, std::shared_ptr<Reset> reset);
     static void LoadMobilesCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area);
+    static void LoadObjectsCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area);
+    static void LoadRoomsCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area);
     static int L_AreaEntry(lua_State* L);
     static void ExecuteAreaFile(const std::string& filePath, void* userData);
 };
@@ -274,27 +277,27 @@ void LuaAreaRepository::PushOvalues(lua_State *L, const std::shared_ptr<ProtoObj
     case ITEM_PILL:
     case ITEM_POTION:
     case ITEM_SCROLL:
-        if (IS_VALID_SN(ovalues[1]))
-            ovalues[1] = SkillTable[ovalues[1]]->Slot;
+        if (IS_VALID_SN(ovalues[OVAL_POTION_SPELL1]))
+            ovalues[OVAL_POTION_SPELL1] = SkillTable[ovalues[OVAL_POTION_SPELL1]]->Slot;
 
-        if (IS_VALID_SN(ovalues[2]))
-            ovalues[2] = SkillTable[ovalues[2]]->Slot;
+        if (IS_VALID_SN(ovalues[OVAL_POTION_SPELL2]))
+            ovalues[OVAL_POTION_SPELL2] = SkillTable[ovalues[OVAL_POTION_SPELL2]]->Slot;
 
-        if (IS_VALID_SN(ovalues[3]))
-            ovalues[3] = SkillTable[ovalues[3]]->Slot;
+        if (IS_VALID_SN(ovalues[OVAL_POTION_SPELL3]))
+            ovalues[OVAL_POTION_SPELL3] = SkillTable[ovalues[OVAL_POTION_SPELL3]]->Slot;
         break;
 
     case ITEM_DEVICE:
-        if (IS_VALID_SN(ovalues[3]))
-            ovalues[3] = SkillTable[ovalues[3]]->Slot;
+        if (IS_VALID_SN(ovalues[OVAL_DEVICE_SPELL]))
+            ovalues[OVAL_DEVICE_SPELL] = SkillTable[ovalues[OVAL_DEVICE_SPELL]]->Slot;
         break;
 
     case ITEM_SALVE:
-        if (IS_VALID_SN(ovalues[4]))
-            ovalues[4] = SkillTable[ovalues[4]]->Slot;
+        if (IS_VALID_SN(ovalues[OVAL_SALVE_SPELL1]))
+            ovalues[OVAL_SALVE_SPELL1] = SkillTable[ovalues[OVAL_SALVE_SPELL1]]->Slot;
 
-        if (IS_VALID_SN(ovalues[5]))
-            ovalues[5] = SkillTable[ovalues[5]]->Slot;
+        if (IS_VALID_SN(ovalues[OVAL_SALVE_SPELL2]))
+            ovalues[OVAL_SALVE_SPELL2] = SkillTable[ovalues[OVAL_SALVE_SPELL2]]->Slot;
         break;
 
     default:
@@ -819,7 +822,8 @@ void LuaAreaRepository::LoadMobilesCallback(lua_State *L, vnum_t vnum, std::shar
     auto mob = std::make_shared<ProtoMobile>(vnum);
     LoadMobile(L, mob);
 
-    if (area->VnumRanges.Mob.First == INVALID_VNUM)
+    if (area->VnumRanges.Mob.First == INVALID_VNUM
+        || vnum < area->VnumRanges.Mob.First)
     {
         area->VnumRanges.Mob.First = vnum;
     }
@@ -840,24 +844,185 @@ void LuaAreaRepository::LoadMobiles(lua_State *L, std::shared_ptr<Area> area)
     LuaLoadArray(L, "Mobiles", &LuaAreaRepository::LoadMobilesCallback, area);
 }
 
+void LuaAreaRepository::LoadObjectsCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area)
+{
+    auto obj = std::make_shared<ProtoObject>(vnum);
+    LoadObject(L, obj);
+
+    if (area->VnumRanges.Object.First == INVALID_VNUM
+        || vnum < area->VnumRanges.Object.First)
+    {
+        area->VnumRanges.Object.First = vnum;
+    }
+
+    if (vnum > area->VnumRanges.Object.Last)
+    {
+        area->VnumRanges.Object.Last = vnum;
+    }
+
+    int iHash = vnum % MAX_KEY_HASH;
+    obj->Next = ObjectIndexHash[iHash];
+    ObjectIndexHash[iHash] = obj;
+    top_obj_index++;
+}
+
 void LuaAreaRepository::LoadObjects(lua_State *L, std::shared_ptr<Area> area)
 {
+    LuaLoadArray(L, "Objects", &LuaAreaRepository::LoadObjectsCallback, area);
+}
 
+void LuaAreaRepository::LoadOvalues(lua_State *L, std::shared_ptr<ProtoObject> obj)
+{
+    LuaLoadOvalues(L, obj->Value);
+
+    switch (obj->ItemType)
+    {
+    case ITEM_PILL:
+    case ITEM_POTION:
+        obj->Value[OVAL_PILL_SPELL1] = SkillNumberFromSlot(obj->Value[OVAL_PILL_SPELL1]);
+        obj->Value[OVAL_PILL_SPELL2] = SkillNumberFromSlot(obj->Value[OVAL_PILL_SPELL2]);
+        obj->Value[OVAL_PILL_SPELL3] = SkillNumberFromSlot(obj->Value[OVAL_PILL_SPELL3]);
+        break;
+
+    case ITEM_DEVICE:
+        obj->Value[OVAL_DEVICE_SPELL] = SkillNumberFromSlot(obj->Value[OVAL_DEVICE_SPELL]);
+        break;
+
+    case ITEM_SALVE:
+        obj->Value[OVAL_SALVE_SPELL1] = SkillNumberFromSlot(obj->Value[OVAL_SALVE_SPELL1]);
+        obj->Value[OVAL_SALVE_SPELL2] = SkillNumberFromSlot(obj->Value[OVAL_SALVE_SPELL2]);
+        break;
+
+    default:
+        break;
+    }
+}
+
+static void LoadExtraDescriptions(lua_State *L, std::shared_ptr<ProtoObject> obj)
+{
+    auto extraDescriptions = LuaLoadExtraDescriptions(L);
+
+    for (auto extra : extraDescriptions)
+    {
+        obj->Add(extra);
+    }
+}
+
+static void LoadObjectAffects(lua_State *L, std::shared_ptr<ProtoObject> obj)
+{
+    auto affects = LuaLoadProtoObjectAffects(L);
+
+    for(auto affect : affects)
+    {
+        obj->Add(affect);
+    }
 }
 
 void LuaAreaRepository::LoadObject(lua_State *L, std::shared_ptr<ProtoObject> obj)
 {
+    LuaGetfieldLong(L, "Vnum", &obj->Vnum);
+    LuaGetfieldString(L, "Name", &obj->Name);
+    LuaGetfieldString(L, "ShortDescr", &obj->ShortDescr);
+    LuaGetfieldString(L, "Description", &obj->Description);
+    LuaGetfieldString(L, "ActionDescription", &obj->ActionDescription);
+    LuaGetfieldString(L, "ItemType",
+                      [obj](const auto &itemType)
+                      {
+                          obj->ItemType = GetObjectType(itemType);
+                      });
+    LuaGetfieldInt(L, "Layers", &obj->Layers);
+    LuaGetfieldInt(L, "Weight", &obj->Weight);
+    LuaGetfieldInt(L, "Cost", &obj->Cost);
 
+    obj->Flags = LuaLoadFlags(L, "Flags").to_ulong();
+    obj->WearFlags = LuaLoadFlags(L, "WearFlags").to_ulong();
+
+    LoadOvalues(L, obj);
+    LuaLoadArray(L, "MudProgs", LoadMudProg, &obj->mprog);
+    LoadExtraDescriptions(L, obj);
+    LoadObjectAffects(L, obj);
+}
+
+void LuaAreaRepository::LoadRoomsCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area)
+{
+    auto room = std::make_shared<Room>();
+    room->Vnum = vnum;
+    room->Area = area;
+    LoadRoom(L, room);
+
+    if (area->VnumRanges.Room.First == INVALID_VNUM
+        || vnum < area->VnumRanges.Room.First)
+    {
+        area->VnumRanges.Room.First = vnum;
+    }
+
+    if (vnum > area->VnumRanges.Room.Last)
+    {
+        area->VnumRanges.Room.Last = vnum;
+    }
+
+    int iHash = vnum % MAX_KEY_HASH;
+    room->Next = RoomIndexHash[iHash];
+    RoomIndexHash[iHash] = room;
+    top_room++;
 }
 
 void LuaAreaRepository::LoadRooms(lua_State *L, std::shared_ptr<Area> area)
 {
+    LuaLoadArray(L, "Rooms", &LuaAreaRepository::LoadRoomsCallback, area);
+}
 
+static void LoadExtraDescriptions(lua_State *L, std::shared_ptr<Room> room)
+{
+    auto extraDescriptions = LuaLoadExtraDescriptions(L);
+
+    for (auto extra : extraDescriptions)
+    {
+        room->Add(extra);
+    }
+}
+
+static void LoadExit(lua_State *L, int subscript, std::shared_ptr<Room> room)
+{
+    std::string keyword;
+    LuaGetfieldString(L, "Keyword", &keyword);
+
+    DirectionType direction;
+    LuaGetfieldString(L, "Direction",
+                      [&direction](const auto &dirName)
+                      {
+                          direction = GetDirection(dirName);
+                      });
+    auto xit = MakeExit(room, nullptr, direction, keyword);
+
+    LuaGetfieldString(L, "Description", &xit->Description);
+    LuaGetfieldLong(L, "Key", &xit->Key);
+    LuaGetfieldLong(L, "DestinationVnum", &xit->Vnum);
+    LuaGetfieldShort(L, "Distance", &xit->Distance);
+
+    xit->Flags = LuaLoadFlags(L, "Flags");
+
+    room->Add(xit);
 }
 
 void LuaAreaRepository::LoadRoom(lua_State *L, std::shared_ptr<Room> room)
 {
+    LuaGetfieldLong(L, "Vnum", &room->Vnum);
+    LuaGetfieldString(L, "Name", &room->Name);
+    LuaGetfieldString(L, "Description", &room->Description);
+    LuaGetfieldString(L, "Sector",
+                      [room](const auto &sector)
+                      {
+                          room->Sector = GetSectorType(sector);
+                      });
+    LuaGetfieldInt(L, "TeleDelay", &room->TeleDelay);
+    LuaGetfieldLong(L, "TeleVnum", &room->TeleVnum);
+    LuaGetfieldInt(L, "Tunnel", &room->Tunnel);
 
+    room->Flags = LuaLoadFlags(L, "Flags");
+    LoadExtraDescriptions(L, room);
+    LuaLoadArray(L, "MudProgs", LoadMudProg, &room->mprog);
+    LuaLoadArray(L, "Exits", LoadExit, room);
 }
 
 void LuaAreaRepository::LoadResets(lua_State *L, std::shared_ptr<Area> area)

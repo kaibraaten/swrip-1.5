@@ -138,6 +138,8 @@ std::list<std::shared_ptr<Affect>> LuaLoadCharacterAffects(lua_State *L,
                                                            const std::string &key = "Affects");
 std::list<std::shared_ptr<Affect>> LuaLoadObjectAffects(lua_State *L,
                                                         const std::string &key = "Affects");
+std::list<std::shared_ptr<Affect>> LuaLoadProtoObjectAffects(lua_State *L,
+                                                             const std::string &key = "Affects");
 void LuaPushObjects(lua_State *L, const std::list<Object*> &objects,
                     const std::string &key = "Objects");
 std::list<Object*> LuaLoadObjects(lua_State *L, const std::string &key = "Objects");
@@ -152,6 +154,7 @@ void LuaLoadStats(lua_State *L, Stats *stats, const std::string &key);
 void LuaPushCurrentAndMax(lua_State *L, const std::string &key, int current, int max);
 void LuaLoadCurrentAndMax(lua_State *L, const std::string &key, int *current, int *max);
 void LuaPushOvalues(lua_State *L, const std::array<int, MAX_OVAL> values);
+void LuaLoadOvalues(lua_State *L, std::array<int, MAX_OVAL> &values);
 void LuaPushExtraDescriptions(lua_State *L,
                               const std::list<std::shared_ptr<ExtraDescription>> &extras);
 std::list<std::shared_ptr<ExtraDescription>> LuaLoadExtraDescriptions(lua_State *L);
