@@ -1,4 +1,5 @@
 #include <memory>
+#include <map>
 #include <filesystem>
 #include <utility/algorithms.hpp>
 #include "systemdata.hpp"
@@ -64,7 +65,8 @@ private:
     static void LoadRooms(lua_State *L, std::shared_ptr<Area> area);
     static void LoadRoom(lua_State *L, std::shared_ptr<Room> room);
     static void LoadResets(lua_State *L, std::shared_ptr<Area> area);
-    static void LoadReset(lua_State *L, std::shared_ptr<Reset> reset);
+    static void LoadReset(lua_State *L, int subscript,
+                          std::map<int, std::shared_ptr<Reset>> *resets);
     static void LoadMobilesCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area);
     static void LoadObjectsCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area);
     static void LoadRoomsCallback(lua_State *L, vnum_t vnum, std::shared_ptr<Area> area);
@@ -1027,12 +1029,52 @@ void LuaAreaRepository::LoadRoom(lua_State *L, std::shared_ptr<Room> room)
 
 void LuaAreaRepository::LoadResets(lua_State *L, std::shared_ptr<Area> area)
 {
+    // Why do we use this map to collect the data instead of adding
+    // to the area directly you may ask? It's because there's no
+    // guarantee that the array is stored in ascending order
+    // in the data file.
+    std::map<int, std::shared_ptr<Reset>> resets;
+    LuaLoadArray(L, "Resets", &LuaAreaRepository::LoadReset, &resets);
 
+
+    // Add to area here
+    for(auto tuple : resets)
+    {
+        auto reset = tuple.second;
+        
+        if(reset->Command != '*')
+        {
+            AddReset(area, reset->Command, reset->MiscData, reset->Arg1, reset->Arg2, reset->Arg3);
+        }
+    }
+
+    RenumberPutResets(area);
 }
 
-void LuaAreaRepository::LoadReset(lua_State *L, std::shared_ptr<Reset> reset)
+void LuaAreaRepository::LoadReset(lua_State *L, int subscript,
+                                  std::map<int, std::shared_ptr<Reset>> *resets)
 {
+    auto reset = std::make_shared<Reset>();
+    LuaGetfieldString(L, "Command",
+                      [reset](const std::string &cmd)
+                      {
+                          reset->Command = cmd[0];
+                      });
+    LuaGetfieldInt(L, "Arg1", &reset->Arg1);
+    LuaGetfieldInt(L, "Arg2", &reset->Arg2);
+    LuaGetfieldInt(L, "MiscData", &reset->MiscData);
 
+    if(FieldExists(L, "Arg3"))
+    {
+        LuaGetfieldInt(L, "Arg3", &reset->Arg3);
+
+        if(reset->Command == 'G' || reset->Command == 'R')
+        {
+            reset->Arg3 = 0;
+        }
+    }
+
+    resets->insert(std::make_pair(subscript, reset));
 }
 
 int LuaAreaRepository::L_AreaEntry(lua_State *L)
