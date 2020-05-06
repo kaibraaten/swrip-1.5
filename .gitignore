@@ -84,3 +84,4 @@ Testing
 /out/build/x64-Debug
 /out
 /out
+*.bak
