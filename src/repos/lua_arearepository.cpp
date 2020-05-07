@@ -6,6 +6,7 @@
 #include "log.hpp"
 #include "mud.hpp"
 #include "lua_arearepository.hpp"
+#include "shoprepository.hpp"
 #include "area.hpp"
 #include "script.hpp"
 #include "protomob.hpp"
@@ -86,7 +87,6 @@ void LuaAreaRepository::Load()
 
 void LuaAreaRepository::Save() const
 {
-    //for (const auto &area : Entities())
     for(auto area = FirstArea; area; area = area->Next)
     {
         Save(area);
@@ -830,6 +830,8 @@ static void LoadShop(lua_State *L, std::shared_ptr<ProtoMobile> mob)
     LuaGetfieldString(L, "KeeperShortDescr", &mob->ShortDescr);
     LuaLoadTable(L, "BusinessHours", LoadBusinessHours<Shop>, mob->Shop);
     LuaLoadArray(L, "BuyTypes", LoadBuyType<MAX_TRADE>, mob->Shop->BuyType);
+
+    Shops->Add(mob->Shop);
 }
 
 static void LoadRepairShop(lua_State *L, std::shared_ptr<ProtoMobile> mob)
@@ -841,6 +843,8 @@ static void LoadRepairShop(lua_State *L, std::shared_ptr<ProtoMobile> mob)
     LuaGetfieldString(L, "KeeperShortDescr", &mob->ShortDescr);
     LuaLoadTable(L, "BusinessHours", LoadBusinessHours<RepairShop>, mob->RepairShop);
     LuaLoadArray(L, "BuyTypes", LoadBuyType<MAX_FIX>, mob->RepairShop->FixType);
+
+    RepairShops->Add(mob->RepairShop);
 }
 
 static void LoadSpecFuns(lua_State *L, int subscript, std::shared_ptr<ProtoMobile> mob)

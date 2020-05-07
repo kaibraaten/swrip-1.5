@@ -31,9 +31,9 @@ void do_foldarea(Character *ch, std::string argument)
         if (!StrCmp(tarea->Filename, arg) || fold_all_areas)
         {
             if (!StrCmp(argument, "remproto"))
-                FoldArea(tarea, tarea->Filename, true);
+                Areas->Save(tarea, true);
             else
-                FoldArea(tarea, tarea->Filename, false);
+                Areas->Save(tarea, false);
 
             found = true;
         }

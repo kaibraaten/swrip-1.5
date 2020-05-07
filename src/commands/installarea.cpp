@@ -35,7 +35,7 @@ void do_installarea(Character *ch, std::string argument)
 
             /* Fold area with install flag -- auto-removes prototype flags */
             ch->Echo("Saving and installing file...\r\n");
-            FoldArea(tarea, tarea->Filename, true);
+            Areas->Save(tarea, true);
 
             /* Remove from prototype area list */
             UNLINK(tarea, Areas->FirstBuild, Areas->LastBuild, Next, Previous);

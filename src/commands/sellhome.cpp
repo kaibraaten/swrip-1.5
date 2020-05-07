@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 #include "room.hpp"
+#include "repos/arearepository.hpp"
 
 void do_sellhome(Character *ch, std::string argument)
 {
@@ -30,7 +31,7 @@ void do_sellhome(Character *ch, std::string argument)
     ch->Gold += sellHomeCreditReturn;
     room->Flags.reset(Flag::Room::PlayerHome);
     room->Flags.set(Flag::Room::EmptyHome);
-    FoldArea(room->Area, room->Area->Filename, false);
+    Areas->Save(room->Area);
     ch->PlayerHome = NULL;
     do_save(ch, "");
     ch->Echo("You sell your home. You receive %d credits.\r\n", sellHomeCreditReturn);

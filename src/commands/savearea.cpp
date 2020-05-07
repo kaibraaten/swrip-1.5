@@ -61,7 +61,7 @@ void do_savearea(Character *ch, std::string argument)
     }
 
     sprintf(filename, "%s%s", BUILD_DIR, tarea->Filename.c_str());
-    FoldArea(tarea, filename, false);
+    Areas->Save(tarea);
     ch->Echo("Done.\r\n");
 }
 

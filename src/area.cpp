@@ -1,12 +1,9 @@
-#include <cstring>
-#include <cctype>
 #include <utility/algorithms.hpp>
 #include <utility/random.hpp>
 #include "area.hpp"
 #include "mud.hpp"
 #include "shop.hpp"
 #include "reset.hpp"
-#include "skill.hpp"
 #include "character.hpp"
 #include "pcdata.hpp"
 #include "log.hpp"
@@ -14,8 +11,6 @@
 #include "object.hpp"
 #include "protoobject.hpp"
 #include "protomob.hpp"
-#include "systemdata.hpp"
-#include "race.hpp"
 #include "exit.hpp"
 #include "repos/shoprepository.hpp"
 #include "repos/objectrepository.hpp"

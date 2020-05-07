@@ -81,7 +81,6 @@ void AreaUpdate();
 void CloseArea(std::shared_ptr<Area> pArea);
 void FreeArea(std::shared_ptr<Area> are);
 void AssignAreaTo(Character *ch);
-void FoldArea(std::shared_ptr<Area> tarea, const std::string &filename, bool install);
 void CleanResets(std::shared_ptr<Area> tarea);
 
 #endif

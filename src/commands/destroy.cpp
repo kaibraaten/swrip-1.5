@@ -74,7 +74,7 @@ void do_destroy(Character *ch, std::string victimName)
 
                 if (IsBitSet(pArea->Status, AREA_LOADED))
                 {
-                    FoldArea(pArea, areaName, false);
+                    Areas->Save(pArea);
                 }
 
                 CloseArea(pArea);
