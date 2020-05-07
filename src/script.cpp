@@ -101,6 +101,11 @@ static void LuaToLong(lua_State *L, int idx, long *value)
     *value = static_cast<long>(lua_tonumber(L, idx));
 }
 
+static void LuaToShort(lua_State *L, int idx, short *value)
+{
+    *value = static_cast<short>(lua_tonumber(L, idx));
+}
+
 static void LuaToBool(lua_State *L, int idx, bool *value)
 {
     *value = lua_toboolean(L, idx);
@@ -129,6 +134,11 @@ void LuaGetfieldBool(lua_State *L, const std::string &key, bool *value)
 void LuaGetfieldLong(lua_State *L, const std::string &key, long *value)
 {
     LuaGetfield<long>(L, key, value, LuaToLong);
+}
+
+void LuaGetfieldShort(lua_State *L, const std::string &key, short *value)
+{
+    LuaGetfield<short>(L, key, value, LuaToShort);
 }
 
 void LuaGetfieldDouble(lua_State *L, const std::string &key, double *value)
@@ -236,6 +246,26 @@ void LuaPushFlags(lua_State *L, unsigned long flags,
     }
 }
 
+void LuaPushLanguages(lua_State *L, unsigned long languages, const std::string &key)
+{
+    lua_pushstring(L, key.c_str());
+    lua_newtable(L);
+
+    for (size_t bit = 0; bit < LANG_MAX; ++bit)
+    {
+        unsigned int mask = 1 << bit;
+
+        if (IsBitSet(languages, mask))
+        {
+            lua_pushinteger(L, bit);
+            lua_pushstring(L, LanguageNames[bit]);
+            lua_settable(L, -3);
+        }
+    }
+
+    lua_settable(L, -3);
+}
+
 std::bitset<Flag::MAX> LuaLoadFlags(lua_State *L, const std::string &key)
 {
     std::bitset<Flag::MAX> flags;
@@ -271,10 +301,10 @@ static std::shared_ptr<SmaugAffect> LuaLoadOneSmaugAffect(lua_State *L)
     LuaGetfieldString(L, "Modifier", &affect->Modifier);
     LuaGetfieldInt(L, "Location", &affect->Location);
     LuaGetfieldString(L, "AffectedBy",
-        [affect](const std::string &value)
-    {
-        affect->AffectedBy = GetAffectFlag(value);
-    });
+                      [affect](const std::string &value)
+                      {
+                          affect->AffectedBy = GetAffectFlag(value);
+                      });
     return affect;
 }
 
@@ -451,6 +481,23 @@ static void LuaPushCharacterAffect(lua_State *L, std::shared_ptr<Affect> affect,
     lua_settable(L, -3);
 }
 
+static void LuaPushProtoObjectAffect(lua_State *L, std::shared_ptr<Affect> affect, int idx)
+{
+    lua_pushinteger(L, idx);
+    lua_newtable(L);
+
+    LuaSetfieldNumber(L, "Location", affect->Location);
+    LuaSetfieldNumber(L, "Modifier",
+        (affect->Location == APPLY_WEAPONSPELL
+            || affect->Location == APPLY_WEARSPELL
+            || affect->Location == APPLY_REMOVESPELL
+            || affect->Location == APPLY_STRIPSN)
+        && IS_VALID_SN(affect->Modifier)
+        ? SkillTable[affect->Modifier]->Slot : affect->Modifier);    
+
+    lua_settable(L, -3);
+}
+
 static void LuaPushObjectAffect(lua_State *L, std::shared_ptr<Affect> affect, int idx)
 {
     std::shared_ptr<Skill> skill = GetSkill(affect->Type);
@@ -472,12 +519,12 @@ static void LuaPushObjectAffect(lua_State *L, std::shared_ptr<Affect> affect, in
     }
 
     LuaSetfieldNumber(L, "Modifier",
-        (affect->Location == APPLY_WEAPONSPELL
-            || affect->Location == APPLY_WEARSPELL
-            || affect->Location == APPLY_REMOVESPELL
-            || affect->Location == APPLY_STRIPSN)
-        && IS_VALID_SN(affect->Modifier)
-        ? SkillTable[affect->Modifier]->Slot : affect->Modifier);
+                      (affect->Location == APPLY_WEAPONSPELL
+                       || affect->Location == APPLY_WEARSPELL
+                       || affect->Location == APPLY_REMOVESPELL
+                       || affect->Location == APPLY_STRIPSN)
+                      && IS_VALID_SN(affect->Modifier)
+                      ? SkillTable[affect->Modifier]->Slot : affect->Modifier);
 
     if (affect->Type >= 0 && affect->Type < TopSN)
     {
@@ -532,6 +579,11 @@ void LuaPushObjectAffects(lua_State *L, const std::list<std::shared_ptr<Affect>>
     const std::string &key)
 {
     LuaPushAffects(L, affects, key, LuaPushObjectAffect);
+}
+
+void LuaPushProtoObjectAffects(lua_State *L, const std::list<std::shared_ptr<Affect>> &affects)
+{
+    LuaPushAffects(L, affects, "Affects", LuaPushProtoObjectAffect);
 }
 
 void LuaPushExtraDescriptions(lua_State *L, const std::list<std::shared_ptr<ExtraDescription>> &extras)
@@ -889,6 +941,20 @@ void LuaPushMobiles(lua_State *L, const std::list<Character*> &mobiles,
     lua_settable(L, -3);
 }
 
+void LuaPushSaveVs(lua_State *L, const SaveVs *saveVs, const std::string &key)
+{
+    lua_pushstring(L, key.c_str());
+    lua_newtable(L);
+
+    LuaSetfieldNumber(L, "PoisonDeath", saveVs->PoisonDeath);
+    LuaSetfieldNumber(L, "Wand", saveVs->Wand);
+    LuaSetfieldNumber(L, "ParaPetri", saveVs->ParaPetri);
+    LuaSetfieldNumber(L, "Breath", saveVs->Breath);
+    LuaSetfieldNumber(L, "SpellStaff", saveVs->SpellStaff);
+
+    lua_settable(L, -3);
+}
+
 void LuaPushStats(lua_State *L, const Stats *stats, const std::string &key)
 {
     lua_pushstring(L, key.c_str());
@@ -948,16 +1014,7 @@ static void LuaPushCharacterAbilities(lua_State *L, const Character *ch)
 
 static void LuaPushCharacterSaves(lua_State *L, const Character *ch)
 {
-    lua_pushstring(L, "SaveVs");
-    lua_newtable(L);
-
-    LuaSetfieldNumber(L, "PoisonDeath", ch->Saving.PoisonDeath);
-    LuaSetfieldNumber(L, "Wand", ch->Saving.Wand);
-    LuaSetfieldNumber(L, "ParaPetri", ch->Saving.ParaPetri);
-    LuaSetfieldNumber(L, "Breath", ch->Saving.Breath);
-    LuaSetfieldNumber(L, "SpellStaff", ch->Saving.SpellStaff);
-
-    lua_settable(L, -3);
+    LuaPushSaveVs(L, &ch->Saving, "SaveVs");
 }
 
 static void LuaPushCharacterStats(lua_State *L, const Character *ch)
@@ -1030,7 +1087,7 @@ void LuaGetfieldBool(lua_State *L, const std::string &key,
 }
 
 void LuaGetfieldInt(lua_State *L, const std::string &key,
-    std::function<void(int)> assignValue)
+                    std::function<void(int)> assignValue)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
@@ -1045,7 +1102,7 @@ void LuaGetfieldInt(lua_State *L, const std::string &key,
 }
 
 void LuaGetfieldLong(lua_State *L, const std::string &key,
-    std::function<void(long)> assignValue)
+                     std::function<void(long)> assignValue)
 {
     int idx = lua_gettop(L);
     lua_getfield(L, idx, key.c_str());
@@ -1053,6 +1110,21 @@ void LuaGetfieldLong(lua_State *L, const std::string &key,
     if (!lua_isnil(L, ++idx))
     {
         long value = static_cast<long>(lua_tonumber(L, idx));
+        assignValue(value);
+    }
+
+    lua_pop(L, 1);
+}
+
+void LuaGetfieldShort(lua_State *L, const std::string &key,
+                      std::function<void(short)> assignValue)
+{
+    int idx = lua_gettop(L);
+    lua_getfield(L, idx, key.c_str());
+
+    if (!lua_isnil(L, ++idx))
+    {
+        short value = static_cast<short>(lua_tonumber(L, idx));
         assignValue(value);
     }
 
@@ -1211,6 +1283,27 @@ static std::shared_ptr<Affect> LuaLoadCharacterAffect(lua_State *L)
     return std::make_shared<Affect>(affect);
 }
 
+static std::shared_ptr<Affect> LuaLoadProtoObjectAffect(lua_State *L)
+{
+    Affect affect;
+
+    LuaGetfieldInt(L, "Location", &affect.Location);
+    LuaGetfieldInt(L, "Modifier", &affect.Modifier);
+    affect.Type = -1;
+    affect.Duration = -1;    
+    affect.AffectedBy = 0;
+
+    if (affect.Location == APPLY_WEAPONSPELL
+        || affect.Location == APPLY_WEARSPELL
+        || affect.Location == APPLY_REMOVESPELL
+        || affect.Location == APPLY_STRIPSN)
+    {
+        affect.Modifier = SkillNumberFromSlot(affect.Modifier);
+    }
+
+    return std::make_shared<Affect>(affect);
+}
+
 static std::shared_ptr<Affect> LuaLoadObjectAffect(lua_State *L)
 {
     Affect affect;
@@ -1291,6 +1384,11 @@ std::list<std::shared_ptr<Affect>> LuaLoadCharacterAffects(lua_State *L, const s
 std::list<std::shared_ptr<Affect>> LuaLoadObjectAffects(lua_State *L, const std::string &key)
 {
     return LuaLoadAffects(L, key, LuaLoadObjectAffect);
+}
+
+std::list<std::shared_ptr<Affect>> LuaLoadProtoObjectAffects(lua_State *L, const std::string &key)
+{
+    return LuaLoadAffects(L, key, LuaLoadProtoObjectAffect);
 }
 
 static void ConvertSpellNameToOvalue(lua_State *L, const std::string &key,
@@ -1531,4 +1629,34 @@ void LuaLoadCharacter(lua_State *L, Character *ch,
     }
 
     loadExtra(L, ch);
+}
+
+static void LuaPushMudProg(lua_State *L, std::shared_ptr<MPROG_DATA> mprog, size_t idx)
+{
+    lua_pushinteger(L, idx);
+    lua_newtable(L);
+
+    LuaSetfieldString(L, "MudProgType", MobProgTypeToName(mprog->type));
+    LuaSetfieldString(L, "Arguments", mprog->arglist);
+    LuaSetfieldString(L, "Code", StripCarriageReturn(mprog->comlist));
+
+    lua_settable(L, -3);
+}
+
+void LuaPushMudProgs(lua_State *L, const MProg *mprog)
+{
+    if(!mprog->MudProgs().empty())
+    {
+        size_t idx = 0;
+        lua_pushstring(L, "MudProgs");
+        lua_newtable(L);
+
+
+        for(auto prog : mprog->MudProgs())
+        {
+            LuaPushMudProg(L, prog, ++idx);
+        }
+
+        lua_settable(L, -3);
+    }
 }

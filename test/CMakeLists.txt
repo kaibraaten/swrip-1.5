@@ -8,6 +8,7 @@ add_executable(mud_tests $<TARGET_OBJECTS:mud>
   src/arraydatatests.cpp
   src/craft_tests.cpp
   src/flag_tests.cpp
+  src/lua_tests.cpp
   src/main.cpp
   src/commands/follow_tests.cpp
   )

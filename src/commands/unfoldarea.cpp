@@ -16,6 +16,9 @@
  */
 void do_unfoldarea(Character* ch, std::string argument)
 {
+#pragma message("do_unfoldarea must be reimplemented")
+
+#if 0
     if (argument.empty())
     {
         ch->Echo("Unfold what?\r\n");
@@ -25,5 +28,5 @@ void do_unfoldarea(Character* ch, std::string argument)
     fBootDb = true;
     LoadAreaFile(Areas->LastArea, argument);
     fBootDb = false;
+#endif
 }
-

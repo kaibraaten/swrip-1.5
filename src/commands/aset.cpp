@@ -88,11 +88,16 @@ void do_aset(Character *ch, std::string argument)
 
     if (!StrCmp(arg2, "filename"))
     {
+        ch->Echo("Operation not supported.\r\n");
+        return;
+
+#if 0
         tarea->Filename = argument;
         WriteAreaList();
-        FoldArea(tarea, tarea->Filename, true);
+        Areas->Save(tarea, true);
         ch->Echo("Done.\r\n");
         return;
+#endif
     }
 
     if (!StrCmp(arg2, "low_economy"))

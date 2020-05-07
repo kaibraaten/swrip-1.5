@@ -54,7 +54,7 @@ void do_buyhome(Character *ch, std::string argument)
     room->Flags.reset(Flag::Room::EmptyHome);
     room->Flags.set(Flag::Room::PlayerHome);
 
-    FoldArea(room->Area, room->Area->Filename, false);
+    Areas->Save(room->Area);
 
     ch->PlayerHome = room;
     do_save(ch, "");

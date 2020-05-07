@@ -74,17 +74,13 @@ public:
     int LowEconomy = 0;
 };
 
-
-
 void FixAreaExits(std::shared_ptr<Area> tarea);
-void LoadAreaFile(std::shared_ptr<Area> tarea, const std::string &filename);
 void SortArea(std::shared_ptr<Area> pArea, bool proto);
 std::shared_ptr<Area> GetArea(const std::string &nameOrFile);
 void AreaUpdate();
 void CloseArea(std::shared_ptr<Area> pArea);
 void FreeArea(std::shared_ptr<Area> are);
 void AssignAreaTo(Character *ch);
-void FoldArea(std::shared_ptr<Area> tarea, const std::string &filename, bool install);
 void CleanResets(std::shared_ptr<Area> tarea);
 
 #endif

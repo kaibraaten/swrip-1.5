@@ -7,6 +7,11 @@
 
 void do_loadarea(Character *ch, std::string argument)
 {
+#pragma message("do_loadarea must be reimplemented")
+    // Disabled for now because it relies on LoadAreaFile()
+    // which is internal to LegacyAreaRepository. This dependency
+    // must be broken so that this function may be reimplemented.
+#if 0
     std::shared_ptr<Area> tarea;
     char filename[256];
     int  tmp = 0;
@@ -79,4 +84,5 @@ void do_loadarea(Character *ch, std::string argument)
     }
 
     ch->Echo("Done.\r\n");
+#endif
 }

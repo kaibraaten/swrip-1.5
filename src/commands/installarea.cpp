@@ -35,7 +35,7 @@ void do_installarea(Character *ch, std::string argument)
 
             /* Fold area with install flag -- auto-removes prototype flags */
             ch->Echo("Saving and installing file...\r\n");
-            FoldArea(tarea, tarea->Filename, true);
+            Areas->Save(tarea, true);
 
             /* Remove from prototype area list */
             UNLINK(tarea, Areas->FirstBuild, Areas->LastBuild, Next, Previous);
@@ -61,8 +61,6 @@ void do_installarea(Character *ch, std::string argument)
             }
 
             top_area++;
-            ch->Echo("Writing area.lst...\r\n");
-            WriteAreaList();
             ch->Echo("Resetting new area.\r\n");
             num = tarea->NumberOfPlayers;
             tarea->NumberOfPlayers = 0;

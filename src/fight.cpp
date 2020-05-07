@@ -47,6 +47,7 @@
 #include "repos/shiprepository.hpp"
 #include "repos/descriptorrepository.hpp"
 #include "repos/playerrepository.hpp"
+#include "repos/arearepository.hpp"
 
 extern Character *gch_prev;
 
@@ -2580,7 +2581,7 @@ void RawKill(Character *killer, Character *victim)
             room->Flags.reset(Flag::Room::PlayerHome);
             room->Flags.set(Flag::Room::EmptyHome);
 
-            FoldArea(room->Area, room->Area->Filename, false);
+            Areas->Save(room->Area);
         }
 
         if (victim->PCData && victim->PCData->ClanInfo.Clan)

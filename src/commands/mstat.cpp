@@ -53,15 +53,18 @@ void do_mstat( Character *ch, std::string arg )
               ctime(&victim->PCData->ReleaseDate),
               victim->PCData->HelledBy.c_str());
 
-  ch->Echo("Vnum: %ld   Sex: %s   Room: %ld   Count: %d  Killed: %d\r\n",
-             IsNpc(victim) ? victim->Prototype->Vnum : INVALID_VNUM,
-             victim->Sex == SEX_MALE ? "male"   :
-             victim->Sex == SEX_FEMALE ? "female" : "neutral",
-             victim->InRoom == NULL ? INVALID_VNUM : victim->InRoom->Vnum,
-             IsNpc(victim) ? victim->Prototype->Count : 1,
-             IsNpc(victim) ? victim->Prototype->Killed
-             : victim->PCData->MDeaths + victim->PCData->PDeaths
-             );
+  if(IsNpc(victim))
+  {
+      ch->Echo("Vnum: %ld   ", victim->Prototype->Vnum);
+  }
+  
+  ch->Echo("Sex: %s   Room: %ld   Count: %d  Killed: %d\r\n",
+           SexNames[victim->Sex],
+           victim->InRoom == NULL ? INVALID_VNUM : victim->InRoom->Vnum,
+           IsNpc(victim) ? victim->Prototype->Count : 1,
+           IsNpc(victim) ? victim->Prototype->Killed
+           : victim->PCData->MDeaths + victim->PCData->PDeaths
+      );
 
   ch->Echo("Str: %d  Int: %d  Wis: %d  Dex: %d  Con: %d  Cha: %d  Lck: %d  Frc: %d\r\n",
              GetCurrentStrength(victim),
