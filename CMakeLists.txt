@@ -588,6 +588,8 @@ src/repos/bountyrepository.cpp
 src/repos/clanrepository.cpp
 src/repos/descriptorrepository.cpp
 src/repos/helprepository.cpp
+src/repos/legacy_arearepository.cpp
+src/repos/lua_arearepository.cpp
 src/repos/objectrepository.cpp
 src/repos/planetrepository.cpp
 src/repos/playerrepository.cpp

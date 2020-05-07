@@ -589,29 +589,7 @@ void BootDatabase(bool fCopyOver)
      */
 
     Log->Boot("Reading in area files...");
-#ifdef USE_NEW_AREA_FORMAT
     Areas->Load();
-#else
-    FILE *fpList = nullptr;
-    
-    if ((fpList = fopen(AREA_DIR AREA_LIST, "r")) == NULL)
-    {
-        ShutdownMud("Unable to open area list");
-        exit(1);
-    }
-
-    for (; ; )
-    {
-        strcpy(strArea, ReadWord(fpList, Log, fBootDb));
-
-        if (strArea[0] == '$')
-            break;
-
-        LoadAreaFile(Areas->LastArea, strArea);
-    }
-
-    fclose(fpList);
-#endif
     
     /*
      *   initialize supermob.

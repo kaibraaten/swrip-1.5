@@ -1824,7 +1824,6 @@ constexpr const char *Concat(const char *a, const char *b)
  * Most output files (bug, idea, typo, shutdown) are append-only.
  */
 #define DATA_DIR        "./data/"
-#define AREA_DIR        DATA_DIR "areas/"
 #define PLAYER_DIR      DATA_DIR "players/"   /* Player files                 */
 #define BACKUP_DIR      DATA_DIR "backup/"    /* Backup Player files          */
 #define GOD_DIR         DATA_DIR "gods/"      /* God Info Dir                 */

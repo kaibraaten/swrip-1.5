@@ -302,6 +302,8 @@ bool DelOExtraProto(std::shared_ptr<ProtoObject> obj, const std::string &keyword
     return true;
 }
 
+#define AREA_DIR        DATA_DIR "areas/"
+
 void FoldArea(std::shared_ptr<Area> tarea, const std::string &filename, bool install)
 {
 #ifdef USE_NEW_AREA_FORMAT
