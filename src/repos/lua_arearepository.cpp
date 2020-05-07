@@ -670,14 +670,14 @@ void LuaAreaRepository::PushSpecials(lua_State *L, const std::shared_ptr<ProtoMo
         if(mob->spec_fun != nullptr)
         {
             lua_pushinteger(L, 1);
-            lua_pushstring(L, LookupSpecial(mob->spec_fun));
+            lua_pushstring(L, LookupSpecial(mob->spec_fun).c_str());
             lua_settable(L, -3);
         }
 
         if(mob->spec_2 != nullptr)
         {
             lua_pushinteger(L, 2);
-            lua_pushstring(L, LookupSpecial(mob->spec_2));
+            lua_pushstring(L, LookupSpecial(mob->spec_2).c_str());
             lua_settable(L, -3);
         }
 
